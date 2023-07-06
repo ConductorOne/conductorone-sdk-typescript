@@ -61,6 +61,16 @@ export type SDKProps = {
      * Allows overriding the default server URL used by the SDK
      */
     serverURL?: string;
+
+    /**
+     * Allows setting a clientID for OAuth2 authentication
+     */
+    clientID?: string;
+
+    /**
+     * Allows setting a clientSecret for OAuth2 authentication
+     */
+    clientSecret?: string;
 };
 
 export class SDKConfiguration {
@@ -126,19 +136,21 @@ export class ConductoroneSDKTypescript {
 
         const defaultClient = props?.defaultClient ?? axios.create({baseURL: serverURL});
 
-        const token = new Token(defaultClient,serverURL, "", "");
-        defaultClient
-            .interceptors
-            .request
-            .use(async (config): Promise<InternalAxiosRequestConfig<any>> => {
-                try {
-                    const bearer = await token.getToken()
-                    config.headers.Authorization = `Bearer ${bearer}`;
-                    return config
-                } catch (e) {
-                    throw new Error(`Error getting bearer token: ${e}`);
-                }
-            });
+        if (props !== undefined && props.clientID !== "" && props.clientSecret !== "") {
+            const token = new Token(defaultClient, serverURL, props.clientID, props.clientSecret);
+            defaultClient
+                .interceptors
+                .request
+                .use(async (config): Promise<InternalAxiosRequestConfig<any>> => {
+                    try {
+                        const bearer = await token.getToken()
+                        config.headers.Authorization = `Bearer ${bearer}`;
+                        return config
+                    } catch (e) {
+                        throw new Error(`Error getting bearer token: ${e}`);
+                    }
+                });
+        }
 
         this.sdkConfiguration = new SDKConfiguration({
             defaultClient: defaultClient,
