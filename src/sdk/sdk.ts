@@ -31,8 +31,8 @@ import { TaskActions } from "./taskactions";
 import { TaskSearch } from "./tasksearch";
 import { User } from "./user";
 import { UserSearch } from "./usersearch";
-import axios from "axios";
-import { AxiosInstance } from "axios";
+import axios, {AxiosInstance, InternalAxiosRequestConfig} from "axios";
+import {Token} from "sdk/token";
 
 /**
  * Contains the list of servers available to the SDK
@@ -138,20 +138,25 @@ export class ConductoroneSDKTypescript {
             defaults = serverDefaults[serverIdx];
         }
 
-        const defaultClient = props?.defaultClient ?? axios.create({ baseURL: serverURL });
-        let securityClient = defaultClient;
+        const defaultClient = props?.defaultClient ?? axios.create({baseURL: serverURL});
 
-        if (props?.security) {
-            let security: shared.Security = props.security;
-            if (!(props.security instanceof utils.SpeakeasyBase)) {
-                security = new shared.Security(props.security);
-            }
-            securityClient = utils.createSecurityClient(defaultClient, security);
-        }
+        const token = new Token(defaultClient,serverURL, "", "");
+        defaultClient
+            .interceptors
+            .request
+            .use(async (config): Promise<InternalAxiosRequestConfig<any>> => {
+                try {
+                    const bearer = await token.getToken()
+                    config.headers.Authorization = `Bearer ${bearer}`;
+                    return config
+                } catch (e) {
+                    throw new Error(`Error getting bearer token: ${e}`);
+                }
+            });
 
         this.sdkConfiguration = new SDKConfiguration({
             defaultClient: defaultClient,
-            securityClient: securityClient,
+            securityClient: defaultClient,
             serverURL: serverURL,
             serverDefaults: defaults,
         });
