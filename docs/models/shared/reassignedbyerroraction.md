@@ -1,0 +1,15 @@
+# ReassignedByErrorAction
+
+The ReassignedByErrorAction message.
+
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `description`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | The description field.                                                                        |
+| `errorCode`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | The errorCode field.                                                                          |
+| `errorUserId`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | The errorUserId field.                                                                        |
+| `erroredAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `newPolicyStepId`                                                                             | *string*                                                                                      | :heavy_minus_sign:                                                                            | The newPolicyStepId field.                                                                    |
+| `reassignedAt`                                                                                | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |

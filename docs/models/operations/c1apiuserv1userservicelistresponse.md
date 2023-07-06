@@ -1,0 +1,11 @@
+# C1ApiUserV1UserServiceListResponse
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `contentType`                                                                    | *string*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
+| `statusCode`                                                                     | *number*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
+| `rawResponse`                                                                    | [AxiosResponse>](https://axios-http.com/docs/res_schema)                         | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `userServiceListResponse`                                                        | [shared.UserServiceListResponse](../../models/shared/userservicelistresponse.md) | :heavy_minus_sign:                                                               | Successful response                                                              |
