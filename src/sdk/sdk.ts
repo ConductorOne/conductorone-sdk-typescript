@@ -150,7 +150,7 @@ export class ConductoroneSDKTypescript {
 
         const defaultClient = props?.defaultClient ?? axios.create({baseURL: serverURL});
 
-        if (props !== undefined && props.clientID !== "" && props.clientSecret !== "") {
+        if (props !== undefined && props.clientID && props.clientSecret) {
             const token = new Token(defaultClient, serverURL, props.clientID, props.clientSecret);
             defaultClient
                 .interceptors
