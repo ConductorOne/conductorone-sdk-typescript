@@ -1,0 +1,14 @@
+configVersion: 1.0.0
+generation:
+  comments:
+    disableComments: false
+    omitDescriptionIfSummaryPresent: false
+  baseServerURL: ""
+  sdkClassName: conductorone-sdk-typescript
+  singleTagPerOp: false
+  tagNamespacingDisabled: false
+typescript:
+  version: 0.0.1
+  author: ConductorOne
+  maxMethodParams: 0
+  packageName: conductorone-sdk-typescript
