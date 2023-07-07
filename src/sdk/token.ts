@@ -6,9 +6,9 @@ import {AxiosInstance} from "axios";
 const assertionType = "urn:ietf:params:oauth:client-assertion-type:jwt-bearer";
 
 export class Token {
-    private tokenUrl: string;
-    private clientID: string;
-    private clientSecret: string;
+    private readonly tokenUrl: string;
+    private readonly clientID: string;
+    private readonly clientSecret: string;
     private defaultClient: AxiosInstance;
 
     constructor(defaultClient: AxiosInstance, tokenUrl: string, clientID: string, clientSecret: string) {
@@ -19,7 +19,6 @@ export class Token {
     }
 
     async getToken(): Promise<string> {
-
         const jwksigner = await jose.JWS.createSign(
             {
                 algorithm: jose.EdDSA,
@@ -58,6 +57,9 @@ export class Token {
         });
 
         const tokenUrl = new URL('https://' + this.tokenUrl + '/auth/v1/token');
+
+        console.log(tokenUrl.toString());
+        console.log(body.toString());
 
         const resp = await this.defaultClient.post(tokenUrl.toString(), {
             body: body,
