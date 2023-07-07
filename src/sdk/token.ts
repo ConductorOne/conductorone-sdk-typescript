@@ -1,5 +1,5 @@
 import jose from 'node-jose';
-import jwt from 'jsonwebtoken';
+import jwt, {JwtPayload} from 'jsonwebtoken';
 import {URLSearchParams} from 'url';
 import {AxiosInstance} from "axios";
 
@@ -19,90 +19,56 @@ export class Token {
     }
 
     async getToken(): Promise<string> {
-        let jwksigner
-        try {
-            jwksigner = await jose.JWS.createSign(
-                {
-                    algorithm: jose.EdDSA,
-                    key: this.clientSecret,
-                },
-                {
-                    nonce: {size: 16},
-                }
-            );
-        } catch (e) {
-            console.log(`JWK: `, e);
-            throw `JWK: ${e}`;
-        }
 
-        let aud;
-        try {
-            aud = this.tokenUrl;
-            const {host} = new URL(aud);
-            if (host) {
-                aud = host;
+        const jwksigner = await jose.JWS.createSign(
+            {
+                algorithm: jose.EdDSA,
+                key: this.clientSecret,
+            },
+            {
+                nonce: {size: 16},
             }
-        } catch (e) {
-            console.log(`AUD: `, e);
-            throw `AUD: ${e}`;
+        );
+
+
+        let aud = this.tokenUrl;
+        const {host} = new URL(aud);
+        if (host) {
+            aud = host;
         }
 
-        let now, claims;
-        try {
-            now = Math.floor(Date.now() / 1000);
-            claims = {
-                iss: this.clientID,
-                sub: this.clientID,
-                aud: aud,
-                exp: now + 120,
-                iat: now,
-                nbf: now - 120,
-            };
-        } catch (e) {
-            console.log(`CLAIMS: `, e);
-            throw `CLAIMS: ${e}`;
-        }
+        const now = Math.floor(Date.now() / 1000);
+        const claims: JwtPayload = {
+            iss: this.clientID,
+            sub: this.clientID,
+            aud: aud,
+            exp: now + 120,
+            iat: now,
+            nbf: now - 120,
+        };
 
-        let token = "";
-        try {
-            token = jwt.sign(claims, jwksigner, {
-                algorithm: 'EdDSA',
-            });
-        } catch (e) {
-            console.log(`Token: `, e);
-            throw `Token: ${e}`;
-        }
+        const token = jwt.sign(claims, jwksigner, {
+            algorithm: 'EdDSA',
+        });
 
-        let body
-        try {
-            body = new URLSearchParams({
-                client_id: this.clientID,
-                grant_type: 'client_credentials',
-                client_assertion_type: assertionType,
-                client_assertion: token,
-            });
-        } catch (e) {
-            console.log(`Body: `, e);
-            throw `Body: ${e}`;
-        }
+        const body = new URLSearchParams({
+            client_id: this.clientID,
+            grant_type: 'client_credentials',
+            client_assertion_type: assertionType,
+            client_assertion: token,
+        });
 
         const tokenUrl = new URL('https://' + this.tokenUrl + '/auth/v1/token');
 
         console.log(tokenUrl.toString());
         console.log(body.toString());
 
-        let resp
-        try {
-            resp = await this.defaultClient.post(tokenUrl.toString(), {
-                body: body,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-            });
-        } catch (e) {
-            console.log(`Resp: `, e);
-            throw `Resp: ${e}`;
-        }
+        const resp = await this.defaultClient.post(tokenUrl.toString(), {
+            body: body,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        });
 
         if (resp.status !== 200) {
             throw new Error(`Failed to get token: ${resp.status}`);
