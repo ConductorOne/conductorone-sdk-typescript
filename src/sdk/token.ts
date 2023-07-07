@@ -32,7 +32,7 @@ export class Token {
             );
         } catch (e) {
             console.log(`JWK: `, e);
-            throw e;
+            throw `JWK: ${e}`;
         }
 
         let aud;
@@ -44,7 +44,7 @@ export class Token {
             }
         } catch (e) {
             console.log(`AUD: `, e);
-            throw e;
+            throw `AUD: ${e}`;
         }
 
         let now, claims;
@@ -60,7 +60,7 @@ export class Token {
             };
         } catch (e) {
             console.log(`CLAIMS: `, e);
-            throw e;
+            throw `CLAIMS: ${e}`;
         }
 
         let token = "";
@@ -70,7 +70,7 @@ export class Token {
             });
         } catch (e) {
             console.log(`Token: `, e);
-            throw e;
+            throw `Token: ${e}`;
         }
 
         let body
@@ -83,7 +83,7 @@ export class Token {
             });
         } catch (e) {
             console.log(`Body: `, e);
-            throw e;
+            throw `Body: ${e}`;
         }
 
         const tokenUrl = new URL('https://' + this.tokenUrl + '/auth/v1/token');
@@ -93,15 +93,15 @@ export class Token {
 
         let resp
         try {
-         resp = await this.defaultClient.post(tokenUrl.toString(), {
-            body: body,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-        });
+            resp = await this.defaultClient.post(tokenUrl.toString(), {
+                body: body,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            });
         } catch (e) {
             console.log(`Resp: `, e);
-            throw e;
+            throw `Resp: ${e}`;
         }
 
         if (resp.status !== 200) {
