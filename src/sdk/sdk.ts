@@ -26,7 +26,7 @@ import {TaskSearch} from "./tasksearch";
 import {User} from "./user";
 import {UserSearch} from "./usersearch";
 import axios, {AxiosInstance, InternalAxiosRequestConfig} from "axios";
-import {Token} from "sdk/token";
+import {Token} from "./token";
 
 /**
  * Contains the list of servers available to the SDK
