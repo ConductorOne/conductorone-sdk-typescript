@@ -2,6 +2,7 @@ name: Generate
 permissions:
   checks: write
   contents: write
+  pull-requests: write
   statuses: write
 "on":
   workflow_dispatch:
@@ -19,7 +20,7 @@ jobs:
       force: ${{ github.event.inputs.force }}
       languages: |
         - typescript
-      mode: direct
+      mode: pr
       openapi_docs: |
         - https://insulator.conductor.one/api/v1/openapi.yaml
       speakeasy_version: latest
