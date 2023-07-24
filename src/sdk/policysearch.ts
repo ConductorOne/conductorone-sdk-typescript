@@ -20,7 +20,8 @@ export class PolicySearch {
      * Search
      *
      * @remarks
-     * Invokes the c1.api.policy.v1.PolicySearch.Search method.
+     *  Search policies based on filters specified in the request body.
+     *
      */
     async search(
         req: shared.SearchPoliciesRequest,

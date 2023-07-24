@@ -22,8 +22,8 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appResourceType.get({
-  appId: "sint",
-  id: "0afa563e-2516-4fe4-88b7-11e5b7fd2ed0",
+  appId: "amet",
+  id: "a6699707-4ba4-4469-b6e2-141959890afa",
 }).then((res: C1ApiAppV1AppResourceTypeServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -61,7 +61,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appResourceType.list({
-  appId: "consequuntur",
+  appId: "ad",
 }).then((res: C1ApiAppV1AppResourceTypeServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response

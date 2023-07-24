@@ -32,19 +32,19 @@ sdk.connector.createDelegated({
   connectorServiceCreateDelegatedRequest: {
     connectorExpandMask: {
       paths: [
-        "libero",
-        "voluptas",
+        "atque",
       ],
     },
-    catalogId: "deserunt",
-    description: "quam",
-    displayName: "ipsum",
+    catalogId: "sit",
+    description: "fugiat",
+    displayName: "ab",
     userIds: [
-      "qui",
-      "cupiditate",
+      "dolorum",
+      "iusto",
+      "voluptate",
     ],
   },
-  appId: "maxime",
+  appId: "dolorum",
 }).then((res: C1ApiAppV1ConnectorServiceCreateDelegatedResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -83,8 +83,8 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.connector.delete({
   connectorServiceDeleteRequest: {},
-  appId: "pariatur",
-  id: "b1a8422b-b679-4d23-a271-5bf0cbb1e31b",
+  appId: "deleniti",
+  id: "9ebf737a-e420-43ce-9e6a-95d8a0d446ce",
 }).then((res: C1ApiAppV1ConnectorServiceDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -122,8 +122,8 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.connector.get({
-  appId: "quos",
-  id: "b90f3443-a110-48e0-adcf-4b921879fce9",
+  appId: "qui",
+  id: "af7a73cf-3be4-453f-870b-326b5a73429c",
 }).then((res: C1ApiAppV1ConnectorServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -161,9 +161,9 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.connector.getCredentials({
-  appId: "quis",
-  connectorId: "ipsum",
-  id: "f73ef7fb-c7ab-4d74-9d39-c0f5d2cff7c7",
+  appId: "pariatur",
+  connectorId: "soluta",
+  id: "1a8422bb-679d-4232-a715-bf0cbb1e31b8",
 }).then((res: C1ApiAppV1ConnectorServiceGetCredentialsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -201,7 +201,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.connector.list({
-  appId: "alias",
+  appId: "tempore",
 }).then((res: C1ApiAppV1ConnectorServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -240,9 +240,9 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.connector.revokeCredential({
   connectorServiceRevokeCredentialRequest: {},
-  appId: "officia",
-  connectorId: "tempora",
-  id: "5626d436-813f-416d-9f5f-ce6c556146c3",
+  appId: "cupiditate",
+  connectorId: "aperiam",
+  id: "f3443a11-08e0-4adc-b4b9-21879fce953f",
 }).then((res: C1ApiAppV1ConnectorServiceRevokeCredentialResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -281,8 +281,8 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.connector.rotateCredential({
   connectorServiceRotateCredentialRequest: {},
-  appId: "recusandae",
-  connectorId: "aspernatur",
+  appId: "voluptate",
+  connectorId: "consectetur",
 }).then((res: C1ApiAppV1ConnectorServiceRotateCredentialResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -324,40 +324,43 @@ sdk.connector.update({
   connectorServiceUpdateRequestInput: {
     connector: {
       connectorStatus: {
-        completedAt: new Date("2022-12-12T11:58:39.585Z"),
-        lastError: "a",
-        startedAt: new Date("2022-12-21T19:37:25.645Z"),
-        status: ConnectorStatusStatus.SyncStatusUnspecified,
-        updatedAt: new Date("2021-06-17T11:25:30.782Z"),
+        completedAt: new Date("2020-02-26T11:54:04.858Z"),
+        lastError: "dignissimos",
+        startedAt: new Date("2020-11-08T11:03:10.206Z"),
+        status: ConnectorStatusStatus.SyncStatusError,
+        updatedAt: new Date("2022-05-15T21:16:33.535Z"),
       },
       oAuth2AuthorizedAs: {
-        authEmail: "aliquam",
-        authorizedAt: new Date("2022-02-12T18:08:46.973Z"),
+        authEmail: "facilis",
+        authorizedAt: new Date("2021-07-04T12:52:28.765Z"),
       },
-      appId: "inventore",
-      catalogId: "non",
+      appId: "dolore",
+      catalogId: "quibusdam",
       config: {
-        "dolorum": "laborum",
+        "sequi": "natus",
+        "impedit": "aut",
+        "voluptatibus": "exercitationem",
+        "nulla": "fugit",
       },
-      description: "placeat",
-      displayName: "velit",
-      downloadUrl: "eum",
-      id: "6c8dd6b1-4429-4074-b477-8a7bd466d28c",
+      description: "porro",
+      displayName: "maiores",
+      downloadUrl: "doloribus",
+      id: "7c70a456-26d4-4368-93f1-6d9f5fce6c55",
       userIds: [
-        "ipsa",
+        "inventore",
+        "magnam",
       ],
     },
     connectorExpandMask: {
       paths: [
-        "quidem",
-        "neque",
         "quo",
+        "consectetur",
       ],
     },
-    updateMask: "illum",
+    updateMask: "recusandae",
   },
-  appId: "quo",
-  id: "a4251904-e523-4c7e-8bc7-178e4796f2a7",
+  appId: "aspernatur",
+  id: "50fb008c-42e1-441a-ac36-6c8dd6b14429",
 }).then((res: C1ApiAppV1ConnectorServiceUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -399,45 +402,43 @@ sdk.connector.updateDelegated({
   connectorServiceUpdateDelegatedRequestInput: {
     connector: {
       connectorStatus: {
-        completedAt: new Date("2022-03-20T23:14:37.473Z"),
-        lastError: "eum",
-        startedAt: new Date("2021-12-24T16:30:16.544Z"),
-        status: ConnectorStatusStatus.SyncStatusUnspecified,
-        updatedAt: new Date("2022-09-18T00:06:33.286Z"),
+        completedAt: new Date("2022-07-11T02:03:34.375Z"),
+        lastError: "magnam",
+        startedAt: new Date("2022-09-27T07:50:41.350Z"),
+        status: ConnectorStatusStatus.SyncStatusRunning,
+        updatedAt: new Date("2022-06-23T12:34:06.790Z"),
       },
       oAuth2AuthorizedAs: {
         authEmail: "fuga",
-        authorizedAt: new Date("2022-06-12T08:30:58.411Z"),
+        authorizedAt: new Date("2022-04-22T02:19:15.622Z"),
       },
-      appId: "atque",
-      catalogId: "explicabo",
+      appId: "fugiat",
+      catalogId: "ut",
       config: {
-        "nisi": "fugit",
-        "sapiente": "consequuntur",
+        "suscipit": "assumenda",
+        "eos": "praesentium",
       },
-      description: "ratione",
-      displayName: "explicabo",
-      downloadUrl: "saepe",
-      id: "9817ee17-cbe6-41e6-b7b9-5bc0ab3c20c4",
+      description: "quisquam",
+      displayName: "veritatis",
+      downloadUrl: "ipsa",
+      id: "ab3cdca4-2519-404e-923c-7e0bc7178e47",
       userIds: [
-        "consectetur",
-        "esse",
-        "blanditiis",
-        "provident",
+        "commodi",
+        "sapiente",
+        "dolores",
       ],
     },
     connectorExpandMask: {
       paths: [
-        "nulla",
-        "quas",
-        "esse",
-        "quasi",
+        "molestiae",
+        "accusantium",
+        "porro",
       ],
     },
-    updateMask: "a",
+    updateMask: "eum",
   },
-  connectorAppId: "error",
-  connectorId: "sint",
+  connectorAppId: "quas",
+  connectorId: "praesentium",
 }).then((res: C1ApiAppV1ConnectorServiceUpdateDelegatedResponse) => {
   if (res.statusCode == 200) {
     // handle response

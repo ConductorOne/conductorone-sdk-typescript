@@ -26,10 +26,10 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.policies.create({
-  description: "eius",
-  displayName: "libero",
+  description: "consequuntur",
+  displayName: "ratione",
   policySteps: {
-    "soluta": {
+    "saepe": {
       steps: [
         {
           approval: {
@@ -44,24 +44,22 @@ sdk.policies.create({
             provisionPolicy: {
               connectorProvision: {},
               delegatedProvision: {
-                appId: "aliquam",
-                entitlementId: "sapiente",
+                appId: "atque",
+                entitlementId: "et",
               },
               manualProvision: {
-                instructions: "dicta",
+                instructions: "esse",
                 userIds: [
-                  "reprehenderit",
-                  "ullam",
+                  "accusamus",
+                  "veritatis",
+                  "esse",
+                  "quod",
                 ],
               },
             },
             assigned: false,
           },
         },
-      ],
-    },
-    "nisi": {
-      steps: [
         {
           approval: {
             appGroupApproval: {},
@@ -75,24 +73,19 @@ sdk.policies.create({
             provisionPolicy: {
               connectorProvision: {},
               delegatedProvision: {
-                appId: "voluptatum",
-                entitlementId: "qui",
+                appId: "nam",
+                entitlementId: "vero",
               },
               manualProvision: {
-                instructions: "quibusdam",
+                instructions: "aliquid",
                 userIds: [
-                  "deleniti",
-                  "itaque",
+                  "saepe",
                 ],
               },
             },
             assigned: false,
           },
         },
-      ],
-    },
-    "dolorum": {
-      steps: [
         {
           approval: {
             appGroupApproval: {},
@@ -106,46 +99,15 @@ sdk.policies.create({
             provisionPolicy: {
               connectorProvision: {},
               delegatedProvision: {
-                appId: "omnis",
-                entitlementId: "tenetur",
+                appId: "vel",
+                entitlementId: "harum",
               },
               manualProvision: {
-                instructions: "quasi",
+                instructions: "molestiae",
                 userIds: [
-                  "et",
-                  "voluptate",
-                  "ipsa",
+                  "occaecati",
                   "minima",
-                ],
-              },
-            },
-            assigned: false,
-          },
-        },
-      ],
-    },
-    "veritatis": {
-      steps: [
-        {
-          approval: {
-            appGroupApproval: {},
-            appOwnerApproval: {},
-            entitlementOwnerApproval: {},
-            managerApproval: {},
-            selfApproval: {},
-            userApproval: {},
-          },
-          provision: {
-            provisionPolicy: {
-              connectorProvision: {},
-              delegatedProvision: {
-                appId: "adipisci",
-                entitlementId: "iste",
-              },
-              manualProvision: {
-                instructions: "temporibus",
-                userIds: [
-                  "rem",
+                  "distinctio",
                 ],
               },
             },
@@ -155,14 +117,8 @@ sdk.policies.create({
       ],
     },
   },
-  policyType: CreatePolicyRequestPolicyType.PolicyTypeUnspecified,
+  policyType: CreatePolicyRequestPolicyType.PolicyTypeAccessRequest,
   postActions: [
-    {
-      certifyRemediateImmediately: false,
-    },
-    {
-      certifyRemediateImmediately: false,
-    },
     {
       certifyRemediateImmediately: false,
     },
@@ -206,7 +162,7 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.policies.delete({
   deletePolicyRequest: {},
-  id: "6a184039-4c26-4071-b93f-5f0642dac7af",
+  id: "ab3c20c4-f378-49fd-871f-99dd2efd121a",
 }).then((res: C1ApiPolicyV1PoliciesDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -244,7 +200,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.policies.get({
-  id: "515cc413-aa63-4aae-8d67-864dbb675fd5",
+  id: "a6f1e674-bdb0-44f1-9756-082d68ea19f1",
 }).then((res: C1ApiPolicyV1PoliciesGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -320,10 +276,10 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.policies.update({
   updatePolicyRequestInput: {
     policy: {
-      description: "recusandae",
-      displayName: "aliquid",
+      description: "at",
+      displayName: "et",
       policySteps: {
-        "cum": {
+        "ipsa": {
           steps: [
             {
               approval: {
@@ -338,16 +294,73 @@ sdk.policies.update({
                 provisionPolicy: {
                   connectorProvision: {},
                   delegatedProvision: {
-                    appId: "in",
-                    entitlementId: "exercitationem",
+                    appId: "veritatis",
+                    entitlementId: "consectetur",
                   },
                   manualProvision: {
-                    instructions: "earum",
+                    instructions: "adipisci",
                     userIds: [
-                      "numquam",
-                      "doloribus",
-                      "suscipit",
-                      "reiciendis",
+                      "temporibus",
+                      "accusantium",
+                      "rem",
+                    ],
+                  },
+                },
+                assigned: false,
+              },
+            },
+            {
+              approval: {
+                appGroupApproval: {},
+                appOwnerApproval: {},
+                entitlementOwnerApproval: {},
+                managerApproval: {},
+                selfApproval: {},
+                userApproval: {},
+              },
+              provision: {
+                provisionPolicy: {
+                  connectorProvision: {},
+                  delegatedProvision: {
+                    appId: "aut",
+                    entitlementId: "laudantium",
+                  },
+                  manualProvision: {
+                    instructions: "eum",
+                    userIds: [
+                      "ab",
+                      "corrupti",
+                      "non",
+                    ],
+                  },
+                },
+                assigned: false,
+              },
+            },
+          ],
+        },
+        "voluptatem": {
+          steps: [
+            {
+              approval: {
+                appGroupApproval: {},
+                appOwnerApproval: {},
+                entitlementOwnerApproval: {},
+                managerApproval: {},
+                selfApproval: {},
+                userApproval: {},
+              },
+              provision: {
+                provisionPolicy: {
+                  connectorProvision: {},
+                  delegatedProvision: {
+                    appId: "occaecati",
+                    entitlementId: "numquam",
+                  },
+                  manualProvision: {
+                    instructions: "impedit",
+                    userIds: [
+                      "voluptas",
                     ],
                   },
                 },
@@ -357,14 +370,8 @@ sdk.policies.update({
           ],
         },
       },
-      policyType: PolicyPolicyType.PolicyTypeAccessRequest,
+      policyType: PolicyPolicyType.PolicyTypeUnspecified,
       postActions: [
-        {
-          certifyRemediateImmediately: false,
-        },
-        {
-          certifyRemediateImmediately: false,
-        },
         {
           certifyRemediateImmediately: false,
         },
@@ -374,9 +381,9 @@ sdk.policies.update({
       ],
       reassignTasksToDelegates: false,
     },
-    updateMask: "necessitatibus",
+    updateMask: "dicta",
   },
-  id: "41f33317-fe35-4b60-ab1e-a426555ba3c2",
+  id: "f93f5f06-42da-4c7a-b515-cc413aa63aae",
 }).then((res: C1ApiPolicyV1PoliciesUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

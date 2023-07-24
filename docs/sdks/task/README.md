@@ -25,18 +25,16 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.task.createGrantTask({
   taskExpandMask: {
     paths: [
-      "fugiat",
-      "officia",
-      "quos",
+      "laudantium",
     ],
   },
-  appEntitlementId: "placeat",
-  appId: "sit",
-  appUserId: "iusto",
-  description: "ipsa",
+  appEntitlementId: "quae",
+  appId: "dolor",
+  appUserId: "fugiat",
+  description: "ipsam",
   emergencyAccess: false,
-  grantDuration: "voluptates",
-  identityUserId: "inventore",
+  grantDuration: "consequuntur",
+  identityUserId: "ipsa",
 }).then((res: C1ApiTaskV1TaskServiceCreateGrantTaskResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -76,14 +74,16 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.task.createRevokeTask({
   taskExpandMask: {
     paths: [
-      "totam",
+      "eveniet",
+      "impedit",
+      "officiis",
     ],
   },
-  appEntitlementId: "dolore",
-  appId: "eligendi",
-  appUserId: "distinctio",
-  description: "voluptatem",
-  identityUserId: "autem",
+  appEntitlementId: "esse",
+  appId: "necessitatibus",
+  appUserId: "sed",
+  description: "veniam",
+  identityUserId: "nesciunt",
 }).then((res: C1ApiTaskV1TaskServiceCreateRevokeTaskResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -121,7 +121,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.task.get({
-  id: "72d1ad87-9eeb-4966-9b85-efbd02bae0be",
+  id: "b668451c-6c6e-4205-a16d-eab3fec9578a",
 }).then((res: C1ApiTaskV1TaskServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response

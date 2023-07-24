@@ -5,6 +5,9 @@
 import { SpeakeasyBase } from "../../../internal/utils";
 
 /**
- * The ConnectorServiceDeleteRequest message.
+ *  Empty request body
+ *
+ * @remarks
+ *
  */
 export class ConnectorServiceDeleteRequest extends SpeakeasyBase {}

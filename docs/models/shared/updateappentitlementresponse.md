@@ -1,6 +1,7 @@
 # UpdateAppEntitlementResponse
 
-The UpdateAppEntitlementResponse message.
+ The UpdateAppEntitlementResponse message contains the updated app entitlement view.
+
 
 
 ## Fields
@@ -8,4 +9,4 @@ The UpdateAppEntitlementResponse message.
 | Field                                                           | Type                                                            | Required                                                        | Description                                                     |
 | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
 | `appEntitlementView`                                            | [AppEntitlementView](../../models/shared/appentitlementview.md) | :heavy_minus_sign:                                              | The AppEntitlementView message.                                 |
-| `expanded`                                                      | Record<string, *any*>[]                                         | :heavy_minus_sign:                                              | The expanded field.                                             |
+| `expanded`                                                      | Record<string, *any*>[]                                         | :heavy_minus_sign:                                              |  List of serialized related objects<br/>                        |

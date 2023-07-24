@@ -19,7 +19,10 @@ export class C1ApiAppV1AppEntitlementsListUsersResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
-     * Successful response
+     *  The ListAppEntitlementUsersResponse message contains a list of results and a nextPageToken if applicable
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     listAppEntitlementUsersResponse?: shared.ListAppEntitlementUsersResponse;

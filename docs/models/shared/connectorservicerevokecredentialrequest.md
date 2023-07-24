@@ -1,6 +1,7 @@
 # ConnectorServiceRevokeCredentialRequest
 
-The ConnectorServiceRevokeCredentialRequest message.
+ Empty request body
+
 
 
 ## Fields

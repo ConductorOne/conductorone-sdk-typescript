@@ -11,7 +11,10 @@ import { Expose, Type } from "class-transformer";
  */
 export class UpdateAppRequestInput extends SpeakeasyBase {
     /**
-     * The App message.
+     *  The App object provides all of the details for an app, as well as some configuration.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "app" })

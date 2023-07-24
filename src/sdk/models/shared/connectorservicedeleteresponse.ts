@@ -5,6 +5,9 @@
 import { SpeakeasyBase } from "../../../internal/utils";
 
 /**
- * The ConnectorServiceDeleteResponse message.
+ *  Empty response body. Status code indicates success.
+ *
+ * @remarks
+ *
  */
 export class ConnectorServiceDeleteResponse extends SpeakeasyBase {}

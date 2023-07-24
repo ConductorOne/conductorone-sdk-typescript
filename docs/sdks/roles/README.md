@@ -23,7 +23,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.roles.get({
-  roleId: "necessitatibus",
+  roleId: "voluptatum",
 }).then((res: C1ApiIamV1RolesGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -98,24 +98,20 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.roles.update({
   updateRoleRequestInput: {
     role: {
-      displayName: "animi",
-      id: "c55a9741-d311-4352-965b-b8a720261143",
-      name: "Kellie Bogisich",
+      displayName: "omnis",
+      id: "1baa0fe1-ade0-408e-af8c-5f350d8cdb5a",
+      name: "Michele Bode II",
       permissions: [
-        "distinctio",
-        "maxime",
-        "quia",
-        "quia",
+        "consequatur",
       ],
       serviceRoles: [
-        "omnis",
-        "libero",
+        "sit",
       ],
       systemBuiltin: false,
     },
-    updateMask: "dicta",
+    updateMask: "modi",
   },
-  roleId: "id",
+  roleId: "fugit",
 }).then((res: C1ApiIamV1RolesUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

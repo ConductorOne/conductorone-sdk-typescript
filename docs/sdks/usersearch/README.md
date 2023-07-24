@@ -6,7 +6,8 @@
 
 ## search
 
-Invokes the c1.api.user.v1.UserSearch.Search method.
+ Search users based on filters specified in the request body.
+
 
 ### Example Usage
 
@@ -24,47 +25,39 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.userSearch.search({
   userExpandMask: {
     paths: [
-      "minus",
-      "esse",
+      "corporis",
+      "magnam",
     ],
   },
-  email: "Al.Price@gmail.com",
+  email: "Wiley72@hotmail.com",
   excludeIds: [
-    "repellat",
-    "velit",
+    "labore",
   ],
   ids: [
-    "provident",
-    "consectetur",
-    "eligendi",
-    "dignissimos",
+    "occaecati",
+    "voluptas",
+    "quo",
   ],
-  pageSize: 2358.34,
-  pageToken: "soluta",
-  query: "natus",
+  pageSize: 2420.99,
+  pageToken: "minus",
+  query: "fuga",
   refs: [
     {
-      id: "a3f2ceda-7e23-4f22-9741-1faf4b7544e4",
+      id: "acfbe2fd-5707-4577-9291-77deac646ecb",
     },
     {
-      id: "72e80285-7a5b-4404-a3a7-d575f1400e76",
-    },
-    {
-      id: "4ad7334e-c1b7-481b-b6a0-8088d100efad",
-    },
-    {
-      id: "a200ef04-22eb-4216-8cf9-ab8366c723ff",
+      id: "573409e3-eb1e-45a2-b12e-b07f116db995",
     },
   ],
   roleIds: [
-    "laborum",
-    "natus",
-    "accusamus",
-    "doloremque",
+    "nostrum",
+    "doloribus",
   ],
   userStatuses: [
     SearchUsersRequestUserStatuses.Disabled,
+    SearchUsersRequestUserStatuses.Enabled,
     SearchUsersRequestUserStatuses.Deleted,
+    SearchUsersRequestUserStatuses.Disabled,
   ],
 }).then((res: C1ApiUserV1UserSearchSearchResponse) => {
   if (res.statusCode == 200) {

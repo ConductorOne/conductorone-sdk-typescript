@@ -20,7 +20,8 @@ export class AppSearch {
      * Search
      *
      * @remarks
-     * Invokes the c1.api.app.v1.AppSearch.Search method.
+     *  Search apps based on filters specified in the request body.
+     *
      */
     async search(
         req: shared.SearchAppsRequest,

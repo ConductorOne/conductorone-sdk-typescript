@@ -26,13 +26,10 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.directory.create({
   directoryExpandMask: {
     paths: [
-      "possimus",
-      "quia",
-      "eveniet",
-      "asperiores",
+      "deleniti",
     ],
   },
-  appId: "facere",
+  appId: "fugit",
 }).then((res: C1ApiDirectoryV1DirectoryServiceCreateResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -71,7 +68,7 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.directory.delete({
   directoryServiceDeleteRequest: {},
-  appId: "veritatis",
+  appId: "fuga",
 }).then((res: C1ApiDirectoryV1DirectoryServiceDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -109,7 +106,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.directory.get({
-  appId: "consequuntur",
+  appId: "mollitia",
 }).then((res: C1ApiDirectoryV1DirectoryServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response

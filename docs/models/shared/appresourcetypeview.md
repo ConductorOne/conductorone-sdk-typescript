@@ -1,11 +1,12 @@
 # AppResourceTypeView
 
-The AppResourceTypeView message.
+ The AppResourceTypeView message.
+
 
 
 ## Fields
 
-| Field                                                     | Type                                                      | Required                                                  | Description                                               |
-| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
-| `appResourceType`                                         | [AppResourceType](../../models/shared/appresourcetype.md) | :heavy_minus_sign:                                        | The AppResourceType message.                              |
-| `appPath`                                                 | *string*                                                  | :heavy_minus_sign:                                        | The appPath field.                                        |
+| Field                                                                                                                      | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `appResourceType`                                                                                                          | [AppResourceType](../../models/shared/appresourcetype.md)                                                                  | :heavy_minus_sign:                                                                                                         |  The AppResourceType is referenced by an app entitlement defining its resource types. Commonly things like Group or Role.<br/> |
+| `appPath`                                                                                                                  | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         |  JSONPATH expression indicating the location of the App object in the  array<br/>                                          |

@@ -11,7 +11,10 @@ import { Expose, Type } from "class-transformer";
  */
 export class AppResourceServiceGetResponse extends SpeakeasyBase {
     /**
-     * The AppResourceView message.
+     *  The app resource view returns an app resource with paths for items in the expand mask filled in when this response is returned and a request expand mask has "*" or "app_id" or "resource_type_id".
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appResourceView" })

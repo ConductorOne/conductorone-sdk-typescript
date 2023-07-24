@@ -5,6 +5,9 @@
 import { SpeakeasyBase } from "../../../internal/utils";
 
 /**
- * The AppActionsServiceGenerateReportResponse message.
+ *  Empty response body. Status code indicates success.
+ *
+ * @remarks
+ *
  */
 export class AppActionsServiceGenerateReportResponse extends SpeakeasyBase {}

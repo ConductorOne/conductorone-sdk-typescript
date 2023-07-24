@@ -6,25 +6,37 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- * The SearchAppResourceTypesRequest message.
+ *  The SearchAppResourceTypesRequest message.
+ *
+ * @remarks
+ *
  */
 export class SearchAppResourceTypesRequest extends SpeakeasyBase {
     /**
-     * The appIds field.
+     *  A list of app IDs to restrict the search by.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appIds" })
     appIds?: string[];
 
     /**
-     * The excludeResourceTypeIds field.
+     *  A list of resource type IDs to exclude from the search.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "excludeResourceTypeIds" })
     excludeResourceTypeIds?: string[];
 
     /**
-     * The excludeResourceTypeTraitIds field.
+     *  A list of resource type trait IDs to exclude from the search.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "excludeResourceTypeTraitIds" })
@@ -45,21 +57,30 @@ export class SearchAppResourceTypesRequest extends SpeakeasyBase {
     pageToken?: string;
 
     /**
-     * The query field.
+     *  Fuzzy search the display name of resource types.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "query" })
     query?: string;
 
     /**
-     * The resourceTypeIds field.
+     *  A list of resource type IDs to restrict the search by.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "resourceTypeIds" })
     resourceTypeIds?: string[];
 
     /**
-     * The resourceTypeTraitIds field.
+     *  A list of resource type trait IDs to restrict the search by.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "resourceTypeTraitIds" })

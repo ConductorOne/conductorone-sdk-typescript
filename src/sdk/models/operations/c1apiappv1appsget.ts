@@ -16,7 +16,10 @@ export class C1ApiAppV1AppsGetResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
-     * Successful response
+     *  The GetAppResponse message contains the details of the requested app in the app field.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     getAppResponse?: shared.GetAppResponse;

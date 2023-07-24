@@ -21,7 +21,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appReport.list({
-  appId: "sint",
+  appId: "incidunt",
 }).then((res: C1ApiAppV1AppReportServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response

@@ -11,7 +11,10 @@ import { Expose, Type } from "class-transformer";
  */
 export class UserView extends SpeakeasyBase {
     /**
-     * The User message.
+     *  The User object provides all of the details for an user, as well as some configuration.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "user" })

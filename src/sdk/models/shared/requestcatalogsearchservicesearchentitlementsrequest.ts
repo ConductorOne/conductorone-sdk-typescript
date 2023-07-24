@@ -21,7 +21,10 @@ export enum RequestCatalogSearchServiceSearchEntitlementsRequestGrantedStatus {
  */
 export class RequestCatalogSearchServiceSearchEntitlementsRequest extends SpeakeasyBase {
     /**
-     * The AppEntitlementExpandMask message.
+     *  The app entitlement expand mask allows the user to get additonal information when getting responses containing app entitlement views.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expandMask" })

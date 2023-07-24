@@ -35,12 +35,24 @@ sdk.requestCatalogManagement.addAccessEntitlements({
   requestCatalogManagementServiceAddAccessEntitlementsRequest: {
     accessEntitlements: [
       {
-        appId: "cum",
-        id: "88f3a8d8-f5c0-4b2f-afb7-b194a276b269",
+        appId: "facilis",
+        id: "b675fd5e-60b3-475e-94f6-fbee41f33317",
+      },
+      {
+        appId: "a",
+        id: "e35b60eb-1ea4-4265-95ba-3c28744ed53b",
+      },
+      {
+        appId: "blanditiis",
+        id: "8f3a8d8f-5c0b-42f2-bb7b-194a276b2691",
+      },
+      {
+        appId: "suscipit",
+        id: "fe1f08f4-294e-4369-8f44-7f603e8b445e",
       },
     ],
   },
-  catalogId: "architecto",
+  catalogId: "rem",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceAddAccessEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -81,16 +93,12 @@ sdk.requestCatalogManagement.addAppEntitlements({
   requestCatalogManagementServiceAddAppEntitlementsRequest: {
     appEntitlements: [
       {
-        appId: "sapiente",
-        id: "e1f08f42-94e3-4698-b447-f603e8b445e8",
-      },
-      {
-        appId: "sit",
-        id: "ca55efd2-0e45-47e1-858b-6a89fbe3a5aa",
+        appId: "nobis",
+        id: "a55efd20-e457-4e18-98b6-a89fbe3a5aa8",
       },
     ],
   },
-  catalogId: "corrupti",
+  catalogId: "accusamus",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceAddAppEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -130,14 +138,12 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.requestCatalogManagement.create({
   requestCatalogExpandMask: {
     paths: [
-      "tempora",
       "atque",
       "fugit",
-      "ut",
     ],
   },
-  description: "fugiat",
-  displayName: "voluptatem",
+  description: "ut",
+  displayName: "fugiat",
   published: false,
   visibleToEveryone: false,
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceCreateResponse) => {
@@ -178,7 +184,7 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.requestCatalogManagement.delete({
   requestCatalogManagementServiceDeleteRequest: {},
-  id: "ab407508-8e51-4862-865e-904f3b1194b8",
+  id: "0ab40750-88e5-4186-a065-e904f3b1194b",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -216,7 +222,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.requestCatalogManagement.get({
-  id: "abf603a7-9f9d-4fe0-ab7d-a8a50ce187f8",
+  id: "8abf603a-79f9-4dfe-8ab7-da8a50ce187f",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -256,7 +262,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.requestCatalogManagement.listEntitlementsForAccess({
-  catalogId: "suscipit",
+  catalogId: "totam",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -296,7 +302,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.requestCatalogManagement.listEntitlementsPerCatalog({
-  catalogId: "quidem",
+  catalogId: "suscipit",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsPerCatalogResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -339,24 +345,20 @@ sdk.requestCatalogManagement.removeAccessEntitlements({
   requestCatalogManagementServiceRemoveAccessEntitlementsRequest: {
     accessEntitlements: [
       {
-        appId: "et",
-        id: "73d689ee-e952-46f8-9986-e881ead4f0e1",
+        appId: "maxime",
+        id: "173d689e-ee95-426f-8d98-6e881ead4f0e",
       },
       {
-        appId: "accusantium",
-        id: "12563f94-e29e-4973-a922-a57a15be3e06",
+        appId: "dicta",
+        id: "012563f9-4e29-4e97-be92-2a57a15be3e0",
       },
       {
-        appId: "ipsa",
-        id: "807e2b6e-3ab8-4845-b059-7a60ff2a54a3",
-      },
-      {
-        appId: "quae",
-        id: "e94764a3-e865-4e79-96f9-251a5a9da660",
+        appId: "iure",
+        id: "0807e2b6-e3ab-4884-9f05-97a60ff2a54a",
       },
     ],
   },
-  catalogId: "repellat",
+  catalogId: "nesciunt",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceRemoveAccessEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -399,24 +401,12 @@ sdk.requestCatalogManagement.removeAppEntitlements({
   requestCatalogManagementServiceRemoveAppEntitlementsRequest: {
     appEntitlements: [
       {
-        appId: "ullam",
-        id: "7bfaad4f-9efc-41b4-912c-1032648dc2f6",
-      },
-      {
-        appId: "dicta",
-        id: "5199ebfd-0e9f-4e6c-a32c-a3aed0117996",
-      },
-      {
-        appId: "adipisci",
-        id: "12fde047-7177-48ff-a1d0-17476360a15d",
-      },
-      {
-        appId: "expedita",
-        id: "6a660659-a1ad-4eaa-b585-1d6c645b08b6",
+        appId: "recusandae",
+        id: "94764a3e-865e-4795-af92-51a5a9da660f",
       },
     ],
   },
-  catalogId: "beatae",
+  catalogId: "doloribus",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceRemoveAppEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -461,140 +451,97 @@ sdk.requestCatalogManagement.update({
           provisionPolicy: {
             connectorProvision: {},
             delegatedProvision: {
-              appId: "omnis",
-              entitlementId: "veritatis",
+              appId: "in",
+              entitlementId: "nam",
             },
             manualProvision: {
-              instructions: "rerum",
+              instructions: "earum",
               userIds: [
-                "culpa",
-                "voluptatem",
-                "sapiente",
+                "laborum",
+                "placeat",
+                "modi",
               ],
             },
           },
-          alias: "officiis",
-          appId: "architecto",
-          appResourceId: "fuga",
-          appResourceTypeId: "pariatur",
-          certifyPolicyId: "debitis",
+          appId: "voluptatibus",
+          appResourceId: "molestias",
+          appResourceTypeId: "officiis",
+          certifyPolicyId: "sapiente",
           complianceFrameworkValueIds: [
-            "alias",
+            "vitae",
+            "rerum",
+            "tempora",
+            "quis",
           ],
-          description: "deleniti",
-          displayName: "earum",
-          durationGrant: "ex",
+          description: "inventore",
+          displayName: "fugit",
+          durationGrant: "cumque",
           durationUnset: {},
           emergencyGrantEnabled: false,
-          emergencyGrantPolicyId: "sapiente",
-          grantCount: "rem",
-          grantPolicyId: "minus",
-          id: "5f350d8c-db5a-4341-8143-010421813d52",
-          revokePolicyId: "ipsa",
-          riskLevelValueId: "quas",
-          slug: "eveniet",
-          systemBuiltin: false,
+          emergencyGrantPolicyId: "quae",
+          grantPolicyId: "perferendis",
+          revokePolicyId: "velit",
+          riskLevelValueId: "aspernatur",
+          slug: "eum",
         },
         {
           provisionPolicy: {
             connectorProvision: {},
             delegatedProvision: {
-              appId: "impedit",
-              entitlementId: "officiis",
+              appId: "eius",
+              entitlementId: "rem",
             },
             manualProvision: {
-              instructions: "esse",
+              instructions: "at",
               userIds: [
-                "sed",
-                "veniam",
-                "nesciunt",
-                "expedita",
-              ],
-            },
-          },
-          alias: "eum",
-          appId: "vel",
-          appResourceId: "voluptatum",
-          appResourceTypeId: "magnam",
-          certifyPolicyId: "exercitationem",
-          complianceFrameworkValueIds: [
-            "porro",
-          ],
-          description: "autem",
-          displayName: "nobis",
-          durationGrant: "laboriosam",
-          durationUnset: {},
-          emergencyGrantEnabled: false,
-          emergencyGrantPolicyId: "recusandae",
-          grantCount: "consequuntur",
-          grantPolicyId: "voluptatem",
-          id: "5e16deab-3fec-4957-8a64-584273a8418d",
-          revokePolicyId: "dicta",
-          riskLevelValueId: "nisi",
-          slug: "consequuntur",
-          systemBuiltin: false,
-        },
-        {
-          provisionPolicy: {
-            connectorProvision: {},
-            delegatedProvision: {
-              appId: "consectetur",
-              entitlementId: "aperiam",
-            },
-            manualProvision: {
-              instructions: "cupiditate",
-              userIds: [
-                "soluta",
-                "alias",
-                "omnis",
                 "eos",
+                "sapiente",
+                "eum",
+                "dicta",
               ],
             },
           },
-          alias: "occaecati",
-          appId: "iste",
-          appResourceId: "magni",
-          appResourceTypeId: "inventore",
-          certifyPolicyId: "fuga",
+          appId: "minima",
+          appResourceId: "beatae",
+          appResourceTypeId: "cupiditate",
+          certifyPolicyId: "provident",
           complianceFrameworkValueIds: [
-            "voluptatibus",
-            "distinctio",
-            "omnis",
-            "delectus",
+            "soluta",
+            "hic",
+            "illum",
+            "eaque",
           ],
-          description: "minima",
-          displayName: "praesentium",
-          durationGrant: "maxime",
+          description: "earum",
+          displayName: "perspiciatis",
+          durationGrant: "maiores",
           durationUnset: {},
           emergencyGrantEnabled: false,
-          emergencyGrantPolicyId: "magnam",
-          grantCount: "temporibus",
-          grantPolicyId: "quos",
-          id: "6e68e4be-0560-413f-99da-757a59ecfef6",
-          revokePolicyId: "voluptas",
-          riskLevelValueId: "debitis",
-          slug: "delectus",
-          systemBuiltin: false,
+          emergencyGrantPolicyId: "debitis",
+          grantPolicyId: "aliquid",
+          revokePolicyId: "porro",
+          riskLevelValueId: "suscipit",
+          slug: "dolorem",
         },
       ],
       appIds: [
-        "minus",
+        "cumque",
       ],
       createdByUserId: "fuga",
-      description: "laborum",
-      displayName: "consectetur",
-      id: "383c2beb-4773-473c-8d72-f64d1db1f2c4",
+      description: "ratione",
+      displayName: "animi",
+      id: "ed011799-6312-4fde-8477-1778ff61d017",
       published: false,
       visibleToEveryone: false,
     },
     requestCatalogExpandMask: {
       paths: [
-        "illo",
+        "esse",
+        "ex",
       ],
     },
-    updateMask: "accusantium",
+    updateMask: "consectetur",
   },
-  id: "661e9634-9e1c-4f9e-86e3-a437000ae6b6",
+  id: "60a15db6-a660-4659-a1ad-eaab5851d6c6",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

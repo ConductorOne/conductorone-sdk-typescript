@@ -5,6 +5,9 @@
 import { SpeakeasyBase } from "../../../internal/utils";
 
 /**
- * The ConnectorServiceRevokeCredentialRequest message.
+ *  Empty request body
+ *
+ * @remarks
+ *
  */
 export class ConnectorServiceRevokeCredentialRequest extends SpeakeasyBase {}

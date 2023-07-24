@@ -22,7 +22,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appUsageControls.get({
-  appId: "ab",
+  appId: "maxime",
 }).then((res: C1ApiAppV1AppUsageControlsServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -62,15 +62,15 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.appUsageControls.update({
   updateAppUsageControlsRequest: {
     appUsageControls: {
-      appId: "maiores",
+      appId: "deleniti",
       notify: false,
-      notifyAfterDays: 6974.29,
+      notifyAfterDays: 7038.89,
       revoke: false,
-      revokeAfterDays: 3732.91,
+      revokeAfterDays: 4479.26,
     },
-    updateMask: "voluptate",
+    updateMask: "architecto",
   },
-  appId: "autem",
+  appId: "architecto",
 }).then((res: C1ApiAppV1AppUsageControlsServiceUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

@@ -16,7 +16,10 @@ export class C1ApiAppV1AppReportActionServiceGenerateReportRequest extends Speak
 
 export class C1ApiAppV1AppReportActionServiceGenerateReportResponse extends SpeakeasyBase {
     /**
-     * Successful response
+     *  Empty response body. Status code indicates success.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     appActionsServiceGenerateReportResponse?: shared.AppActionsServiceGenerateReportResponse;

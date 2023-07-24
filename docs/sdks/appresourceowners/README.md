@@ -21,9 +21,9 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appResourceOwners.list({
-  appId: "nisi",
-  resourceId: "vel",
-  resourceTypeId: "natus",
+  appId: "dolor",
+  resourceId: "debitis",
+  resourceTypeId: "a",
 }).then((res: C1ApiAppV1AppResourceOwnersListResponse) => {
   if (res.statusCode == 200) {
     // handle response

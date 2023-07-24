@@ -5,6 +5,9 @@
 import { SpeakeasyBase } from "../../../internal/utils";
 
 /**
- * The DeleteAppRequest message.
+ *  Empty request body
+ *
+ * @remarks
+ *
  */
 export class DeleteAppRequest extends SpeakeasyBase {}

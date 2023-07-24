@@ -24,8 +24,8 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appOwners.add({
   addAppOwnerRequest: {},
-  appId: "labore",
-  userId: "delectus",
+  appId: "quasi",
+  userId: "repudiandae",
 }).then((res: C1ApiAppV1AppOwnersAddResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -63,7 +63,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appOwners.list({
-  appId: "eum",
+  appId: "sint",
 }).then((res: C1ApiAppV1AppOwnersListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -102,8 +102,8 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appOwners.remove({
   removeAppOwnerRequest: {},
-  appId: "non",
-  userId: "eligendi",
+  appId: "veritatis",
+  userId: "itaque",
 }).then((res: C1ApiAppV1AppOwnersRemoveResponse) => {
   if (res.statusCode == 200) {
     // handle response

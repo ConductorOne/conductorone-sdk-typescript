@@ -22,7 +22,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.user.get({
-  id: "0f739ae9-e057-4eb8-89e2-810331f3981d",
+  id: "ea4b5197-f924-443d-a7ce-52b895c537c6",
 }).then((res: C1ApiUserV1UserServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response

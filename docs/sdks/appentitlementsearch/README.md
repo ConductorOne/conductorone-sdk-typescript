@@ -6,7 +6,8 @@
 
 ## search
 
-Invokes the c1.api.app.v1.AppEntitlementSearchService.Search method.
+ Search app entitlements based on filters specified in the request body.
+
 
 ### Example Usage
 

@@ -20,7 +20,8 @@ export class UserSearch {
      * Search
      *
      * @remarks
-     * Invokes the c1.api.user.v1.UserSearch.Search method.
+     *  Search users based on filters specified in the request body.
+     *
      */
     async search(
         req: shared.SearchUsersRequest,

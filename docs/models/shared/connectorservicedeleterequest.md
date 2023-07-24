@@ -1,6 +1,7 @@
 # ConnectorServiceDeleteRequest
 
-The ConnectorServiceDeleteRequest message.
+ Empty request body
+
 
 
 ## Fields

@@ -11,7 +11,10 @@ import { Expose, Type } from "class-transformer";
  */
 export class AppResourceTypeServiceGetResponse extends SpeakeasyBase {
     /**
-     * The AppResourceTypeView message.
+     *  The AppResourceTypeView message.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appResourceTypeView" })

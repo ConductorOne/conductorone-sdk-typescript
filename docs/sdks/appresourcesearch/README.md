@@ -22,31 +22,35 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appResourceSearch.searchAppResourceTypes({
   appIds: [
-    "molestiae",
-    "perferendis",
-    "nihil",
+    "in",
+    "in",
+    "illum",
   ],
   excludeResourceTypeIds: [
-    "distinctio",
-    "id",
+    "rerum",
+    "dicta",
+    "magnam",
+    "cumque",
   ],
   excludeResourceTypeTraitIds: [
-    "labore",
-    "suscipit",
+    "ea",
+    "aliquid",
+    "laborum",
+    "accusamus",
   ],
-  pageSize: 6180.16,
-  pageToken: "nobis",
-  query: "eum",
+  pageSize: 2497.96,
+  pageToken: "occaecati",
+  query: "enim",
   resourceTypeIds: [
-    "aspernatur",
-    "architecto",
-    "magnam",
-    "et",
+    "delectus",
+    "quidem",
+    "provident",
+    "nam",
   ],
   resourceTypeTraitIds: [
-    "ullam",
-    "provident",
-    "quos",
+    "blanditiis",
+    "deleniti",
+    "sapiente",
   ],
 }).then((res: C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse) => {
   if (res.statusCode == 200) {
