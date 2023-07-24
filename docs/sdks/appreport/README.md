@@ -2,7 +2,7 @@
 
 ### Available Operations
 
-* [list](#list) - Invokes the c1.api.app.v1.AppReportService.List method.
+* [list](#list) - List
 
 ## list
 
@@ -13,12 +13,15 @@ Invokes the c1.api.app.v1.AppReportService.List method.
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiAppV1AppReportServiceListResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
-import { AppPopulationReportState } from "conductorone-sdk-typescript/dist/sdk/models/shared";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.appReport.list({
-  appId: "quod",
+  appId: "sint",
 }).then((res: C1ApiAppV1AppReportServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response

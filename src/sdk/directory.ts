@@ -3,6 +3,7 @@
  */
 
 import * as utils from "../internal/utils";
+import * as errors from "./models/errors";
 import * as operations from "./models/operations";
 import * as shared from "./models/shared";
 import { SDKConfiguration } from "./sdk";
@@ -16,6 +17,9 @@ export class Directory {
     }
 
     /**
+     * Create
+     *
+     * @remarks
      * Invokes the c1.api.directory.v1.DirectoryService.Create method.
      */
     async create(
@@ -42,7 +46,8 @@ export class Directory {
             }
         }
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...reqBodyHeaders, ...config?.headers };
         headers["Accept"] = "application/json";
@@ -80,6 +85,13 @@ export class Directory {
                         JSON.parse(decodedRes),
                         shared.DirectoryServiceCreateResponse
                     );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
                 }
                 break;
         }
@@ -88,6 +100,9 @@ export class Directory {
     }
 
     /**
+     * Delete
+     *
+     * @remarks
      * Invokes the c1.api.directory.v1.DirectoryService.Delete method.
      */
     async delete(
@@ -118,7 +133,8 @@ export class Directory {
             }
         }
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...reqBodyHeaders, ...config?.headers };
         headers["Accept"] = "application/json";
@@ -156,6 +172,13 @@ export class Directory {
                         JSON.parse(decodedRes),
                         shared.DirectoryServiceDeleteResponse
                     );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
                 }
                 break;
         }
@@ -164,6 +187,9 @@ export class Directory {
     }
 
     /**
+     * Get
+     *
+     * @remarks
      * Invokes the c1.api.directory.v1.DirectoryService.Get method.
      */
     async get(
@@ -180,7 +206,8 @@ export class Directory {
         );
         const url: string = utils.generateURL(baseURL, "/api/v1/directories/{app_id}", req);
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
         headers["Accept"] = "application/json";
@@ -217,6 +244,13 @@ export class Directory {
                         JSON.parse(decodedRes),
                         shared.DirectoryServiceGetResponse
                     );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
                 }
                 break;
         }
@@ -225,6 +259,9 @@ export class Directory {
     }
 
     /**
+     * List
+     *
+     * @remarks
      * Invokes the c1.api.directory.v1.DirectoryService.List method.
      */
     async list(
@@ -236,7 +273,8 @@ export class Directory {
         );
         const url: string = baseURL.replace(/\/$/, "") + "/api/v1/directories";
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
         headers["Accept"] = "application/json";
@@ -272,6 +310,13 @@ export class Directory {
                     res.directoryServiceListResponse = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.DirectoryServiceListResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
                     );
                 }
                 break;

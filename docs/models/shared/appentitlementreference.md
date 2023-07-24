@@ -1,11 +1,12 @@
 # AppEntitlementReference
 
-The AppEntitlementReference message.
+ This object references an app entitlement's ID and AppID.
+
 
 
 ## Fields
 
-| Field                       | Type                        | Required                    | Description                 |
-| --------------------------- | --------------------------- | --------------------------- | --------------------------- |
-| `appEntitlementId`          | *string*                    | :heavy_minus_sign:          | The appEntitlementId field. |
-| `appId`                     | *string*                    | :heavy_minus_sign:          | The appId field.            |
+| Field                                            | Type                                             | Required                                         | Description                                      |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| `appEntitlementId`                               | *string*                                         | :heavy_minus_sign:                               |  The ID of the Entitlement.<br/>                 |
+| `appId`                                          | *string*                                         | :heavy_minus_sign:                               |  The ID of the App this entitlement belongs to.<br/> |

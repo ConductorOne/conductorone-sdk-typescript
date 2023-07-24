@@ -11,7 +11,10 @@ import { Expose, Type } from "class-transformer";
  */
 export class UpdatePolicyResponse extends SpeakeasyBase {
     /**
-     * The Policy message.
+     *  A policy describes the behavior of the ConductorOne system when processing a task. You can describe the type, approvers, fallback behavior, and escalation processes.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "policy" })

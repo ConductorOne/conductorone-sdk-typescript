@@ -7,7 +7,10 @@ import { ProvisionPolicy } from "./provisionpolicy";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The Provision message.
+ *  The provision step references a provision policy for this step.
+ *
+ * @remarks
+ *
  */
 export class Provision extends SpeakeasyBase {
     /**
@@ -27,7 +30,10 @@ export class Provision extends SpeakeasyBase {
     provisionPolicy?: ProvisionPolicy;
 
     /**
-     * The assigned field.
+     *  A field indicating whether this step is assigned.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "assigned" })

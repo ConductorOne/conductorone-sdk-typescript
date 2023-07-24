@@ -6,9 +6,10 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- * The PolicyPostActions message.
+ *  These are actions to happen after a policy is complete.
  *
  * @remarks
+ *
  *
  * This message contains a oneof named action. Only a single field of the following list may be set at a time:
  *   - certifyRemediateImmediately

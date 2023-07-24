@@ -3,6 +3,7 @@
  */
 
 import * as utils from "../internal/utils";
+import * as errors from "./models/errors";
 import * as operations from "./models/operations";
 import * as shared from "./models/shared";
 import { SDKConfiguration } from "./sdk";
@@ -16,6 +17,9 @@ export class AppEntitlements {
     }
 
     /**
+     * Get
+     *
+     * @remarks
      * Invokes the c1.api.app.v1.AppEntitlements.Get method.
      */
     async get(
@@ -36,7 +40,8 @@ export class AppEntitlements {
             req
         );
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
         headers["Accept"] = "application/json";
@@ -72,6 +77,480 @@ export class AppEntitlements {
                     res.getAppEntitlementResponse = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.GetAppEntitlementResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * List
+     *
+     * @remarks
+     * Invokes the c1.api.app.v1.AppEntitlements.List method.
+     */
+    async list(
+        req: operations.C1ApiAppV1AppEntitlementsListRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.C1ApiAppV1AppEntitlementsListResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.C1ApiAppV1AppEntitlementsListRequest(req);
+        }
+
+        const baseURL: string = utils.templateUrl(
+            this.sdkConfiguration.serverURL,
+            this.sdkConfiguration.serverDefaults
+        );
+        const url: string = utils.generateURL(baseURL, "/api/v1/apps/{app_id}/entitlements", req);
+
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
+
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this.sdkConfiguration.language} ${this.sdkConfiguration.sdkVersion} ${this.sdkConfiguration.genVersion} ${this.sdkConfiguration.openapiDocVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "get",
+            headers: headers,
+            responseType: "arraybuffer",
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.C1ApiAppV1AppEntitlementsListResponse =
+            new operations.C1ApiAppV1AppEntitlementsListResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.listAppEntitlementsResponse = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.ListAppEntitlementsResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * List For App Resource
+     *
+     * @remarks
+     * Invokes the c1.api.app.v1.AppEntitlements.ListForAppResource method.
+     */
+    async listForAppResource(
+        req: operations.C1ApiAppV1AppEntitlementsListForAppResourceRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.C1ApiAppV1AppEntitlementsListForAppResourceResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.C1ApiAppV1AppEntitlementsListForAppResourceRequest(req);
+        }
+
+        const baseURL: string = utils.templateUrl(
+            this.sdkConfiguration.serverURL,
+            this.sdkConfiguration.serverDefaults
+        );
+        const url: string = utils.generateURL(
+            baseURL,
+            "/api/v1/apps/{app_id}/entitlements/resource_types/{app_resource_type_id}/resources/{app_resource_id}",
+            req
+        );
+
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
+
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this.sdkConfiguration.language} ${this.sdkConfiguration.sdkVersion} ${this.sdkConfiguration.genVersion} ${this.sdkConfiguration.openapiDocVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "get",
+            headers: headers,
+            responseType: "arraybuffer",
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.C1ApiAppV1AppEntitlementsListForAppResourceResponse =
+            new operations.C1ApiAppV1AppEntitlementsListForAppResourceResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.listAppEntitlementsResponse = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.ListAppEntitlementsResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * List For App User
+     *
+     * @remarks
+     * Invokes the c1.api.app.v1.AppEntitlements.ListForAppUser method.
+     */
+    async listForAppUser(
+        req: operations.C1ApiAppV1AppEntitlementsListForAppUserRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.C1ApiAppV1AppEntitlementsListForAppUserResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.C1ApiAppV1AppEntitlementsListForAppUserRequest(req);
+        }
+
+        const baseURL: string = utils.templateUrl(
+            this.sdkConfiguration.serverURL,
+            this.sdkConfiguration.serverDefaults
+        );
+        const url: string = utils.generateURL(
+            baseURL,
+            "/api/v1/apps/{app_id}/entitlements/users/{app_user_id}",
+            req
+        );
+
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
+
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this.sdkConfiguration.language} ${this.sdkConfiguration.sdkVersion} ${this.sdkConfiguration.genVersion} ${this.sdkConfiguration.openapiDocVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "get",
+            headers: headers,
+            responseType: "arraybuffer",
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.C1ApiAppV1AppEntitlementsListForAppUserResponse =
+            new operations.C1ApiAppV1AppEntitlementsListForAppUserResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.listAppEntitlementsResponse = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.ListAppEntitlementsResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * List Groups
+     *
+     * @remarks
+     * Invokes the c1.api.app.v1.AppEntitlements.ListGroups method.
+     */
+    async listGroups(
+        req: operations.C1ApiAppV1AppEntitlementsListGroupsRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.C1ApiAppV1AppEntitlementsListGroupsResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.C1ApiAppV1AppEntitlementsListGroupsRequest(req);
+        }
+
+        const baseURL: string = utils.templateUrl(
+            this.sdkConfiguration.serverURL,
+            this.sdkConfiguration.serverDefaults
+        );
+        const url: string = utils.generateURL(
+            baseURL,
+            "/api/v1/apps/{app_id}/entitlements/{app_entitlement_id}/groups",
+            req
+        );
+
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
+
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this.sdkConfiguration.language} ${this.sdkConfiguration.sdkVersion} ${this.sdkConfiguration.genVersion} ${this.sdkConfiguration.openapiDocVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "get",
+            headers: headers,
+            responseType: "arraybuffer",
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.C1ApiAppV1AppEntitlementsListGroupsResponse =
+            new operations.C1ApiAppV1AppEntitlementsListGroupsResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.listAppEntitlementGroupsResponse = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.ListAppEntitlementGroupsResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * List Users
+     *
+     * @remarks
+     * Invokes the c1.api.app.v1.AppEntitlements.ListUsers method.
+     */
+    async listUsers(
+        req: operations.C1ApiAppV1AppEntitlementsListUsersRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.C1ApiAppV1AppEntitlementsListUsersResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.C1ApiAppV1AppEntitlementsListUsersRequest(req);
+        }
+
+        const baseURL: string = utils.templateUrl(
+            this.sdkConfiguration.serverURL,
+            this.sdkConfiguration.serverDefaults
+        );
+        const url: string = utils.generateURL(
+            baseURL,
+            "/api/v1/apps/{app_id}/entitlements/{app_entitlement_id}/users",
+            req
+        );
+
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
+
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this.sdkConfiguration.language} ${this.sdkConfiguration.sdkVersion} ${this.sdkConfiguration.genVersion} ${this.sdkConfiguration.openapiDocVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "get",
+            headers: headers,
+            responseType: "arraybuffer",
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.C1ApiAppV1AppEntitlementsListUsersResponse =
+            new operations.C1ApiAppV1AppEntitlementsListUsersResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.listAppEntitlementUsersResponse = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.ListAppEntitlementUsersResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * Update
+     *
+     * @remarks
+     * Invokes the c1.api.app.v1.AppEntitlements.Update method.
+     */
+    async update(
+        req: operations.C1ApiAppV1AppEntitlementsUpdateRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.C1ApiAppV1AppEntitlementsUpdateResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.C1ApiAppV1AppEntitlementsUpdateRequest(req);
+        }
+
+        const baseURL: string = utils.templateUrl(
+            this.sdkConfiguration.serverURL,
+            this.sdkConfiguration.serverDefaults
+        );
+        const url: string = utils.generateURL(
+            baseURL,
+            "/api/v1/apps/{app_id}/entitlements/{id}",
+            req
+        );
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+                req,
+                "updateAppEntitlementRequestInput",
+                "json"
+            );
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
+        }
+
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
+
+        const headers = { ...reqBodyHeaders, ...config?.headers };
+        headers["Accept"] = "application/json";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this.sdkConfiguration.language} ${this.sdkConfiguration.sdkVersion} ${this.sdkConfiguration.genVersion} ${this.sdkConfiguration.openapiDocVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "post",
+            headers: headers,
+            responseType: "arraybuffer",
+            data: reqBody,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.C1ApiAppV1AppEntitlementsUpdateResponse =
+            new operations.C1ApiAppV1AppEntitlementsUpdateResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.updateAppEntitlementResponse = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.UpdateAppEntitlementResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
                     );
                 }
                 break;

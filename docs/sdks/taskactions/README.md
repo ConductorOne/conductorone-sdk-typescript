@@ -2,9 +2,10 @@
 
 ### Available Operations
 
-* [approve](#approve) - Invokes the c1.api.task.v1.TaskActionsService.Approve method.
-* [comment](#comment) - Invokes the c1.api.task.v1.TaskActionsService.Comment method.
-* [deny](#deny) - Invokes the c1.api.task.v1.TaskActionsService.Deny method.
+* [approve](#approve) - Approve
+* [comment](#comment) - Comment
+* [deny](#deny) - Deny
+* [escalateToEmergencyAccess](#escalatetoemergencyaccess) - Escalate To Emergency Access
 
 ## approve
 
@@ -15,36 +16,24 @@ Invokes the c1.api.task.v1.TaskActionsService.Approve method.
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiTaskV1TaskActionsServiceApproveResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
-import {
-  ApprovalInstanceState,
-  ExternalRefExternalRefSource,
-  PolicyPolicyType,
-  PolicyStepInstanceState,
-  ProvisionInstanceState,
-  TaskActions,
-  TaskProcessing,
-  TaskState,
-  TaskTypeCertifyOutcome,
-  TaskTypeGrantOutcome,
-  TaskTypeRevokeOutcome,
-} from "conductorone-sdk-typescript/dist/sdk/models/shared";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.taskActions.approve({
   taskActionsServiceApproveRequest: {
     taskExpandMask: {
       paths: [
-        "voluptas",
-        "asperiores",
-        "aperiam",
-        "ea",
+        "quibusdam",
       ],
     },
-    comment: "quaerat",
-    policyStepId: "consequuntur",
+    comment: "odio",
+    policyStepId: "praesentium",
   },
-  taskId: "repellendus",
+  taskId: "odit",
 }).then((res: C1ApiTaskV1TaskActionsServiceApproveResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -74,34 +63,23 @@ Invokes the c1.api.task.v1.TaskActionsService.Comment method.
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiTaskV1TaskActionsServiceCommentResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
-import {
-  ApprovalInstanceState,
-  ExternalRefExternalRefSource,
-  PolicyPolicyType,
-  PolicyStepInstanceState,
-  ProvisionInstanceState,
-  TaskActions,
-  TaskProcessing,
-  TaskState,
-  TaskTypeCertifyOutcome,
-  TaskTypeGrantOutcome,
-  TaskTypeRevokeOutcome,
-} from "conductorone-sdk-typescript/dist/sdk/models/shared";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.taskActions.comment({
   taskActionsServiceCommentRequest: {
     taskExpandMask: {
       paths: [
-        "maxime",
-        "dignissimos",
-        "officia",
+        "corporis",
       ],
     },
-    comment: "asperiores",
+    comment: "error",
   },
-  taskId: "nemo",
+  taskId: "earum",
 }).then((res: C1ApiTaskV1TaskActionsServiceCommentResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -131,33 +109,24 @@ Invokes the c1.api.task.v1.TaskActionsService.Deny method.
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiTaskV1TaskActionsServiceDenyResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
-import {
-  ApprovalInstanceState,
-  ExternalRefExternalRefSource,
-  PolicyPolicyType,
-  PolicyStepInstanceState,
-  ProvisionInstanceState,
-  TaskActions,
-  TaskProcessing,
-  TaskState,
-  TaskTypeCertifyOutcome,
-  TaskTypeGrantOutcome,
-  TaskTypeRevokeOutcome,
-} from "conductorone-sdk-typescript/dist/sdk/models/shared";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.taskActions.deny({
   taskActionsServiceDenyRequest: {
     taskExpandMask: {
       paths: [
-        "quaerat",
+        "recusandae",
       ],
     },
-    comment: "porro",
-    policyStepId: "quod",
+    comment: "similique",
+    policyStepId: "ut",
   },
-  taskId: "labore",
+  taskId: "quidem",
 }).then((res: C1ApiTaskV1TaskActionsServiceDenyResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -176,4 +145,52 @@ sdk.taskActions.deny({
 ### Response
 
 **Promise<[operations.C1ApiTaskV1TaskActionsServiceDenyResponse](../../models/operations/c1apitaskv1taskactionsservicedenyresponse.md)>**
+
+
+## escalateToEmergencyAccess
+
+Invokes the c1.api.task.v1.TaskActionsService.EscalateToEmergencyAccess method.
+
+### Example Usage
+
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+import { C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
+
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
+
+sdk.taskActions.escalateToEmergencyAccess({
+  taskActionsServiceEscalateToEmergencyAccessRequest: {
+    taskExpandMask: {
+      paths: [
+        "beatae",
+        "unde",
+      ],
+    },
+    comment: "molestiae",
+    policyStepId: "delectus",
+  },
+  taskId: "cupiditate",
+}).then((res: C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse) => {
+  if (res.statusCode == 200) {
+    // handle response
+  }
+});
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                            | Type                                                                                                                                                                 | Required                                                                                                                                                             | Description                                                                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                                            | [operations.C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest](../../models/operations/c1apitaskv1taskactionsserviceescalatetoemergencyaccessrequest.md) | :heavy_check_mark:                                                                                                                                                   | The request object to use for the request.                                                                                                                           |
+| `config`                                                                                                                                                             | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                                                                                         | :heavy_minus_sign:                                                                                                                                                   | Available config options for making requests.                                                                                                                        |
+
+
+### Response
+
+**Promise<[operations.C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse](../../models/operations/c1apitaskv1taskactionsserviceescalatetoemergencyaccessresponse.md)>**
 

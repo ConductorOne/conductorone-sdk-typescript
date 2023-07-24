@@ -3,6 +3,7 @@
  */
 
 import * as utils from "../internal/utils";
+import * as errors from "./models/errors";
 import * as operations from "./models/operations";
 import * as shared from "./models/shared";
 import { SDKConfiguration } from "./sdk";
@@ -16,6 +17,175 @@ export class Apps {
     }
 
     /**
+     * Create
+     *
+     * @remarks
+     * Invokes the c1.api.app.v1.Apps.Create method.
+     */
+    async create(
+        req: shared.CreateAppRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.C1ApiAppV1AppsCreateResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new shared.CreateAppRequest(req);
+        }
+
+        const baseURL: string = utils.templateUrl(
+            this.sdkConfiguration.serverURL,
+            this.sdkConfiguration.serverDefaults
+        );
+        const url: string = baseURL.replace(/\/$/, "") + "/api/v1/apps";
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req, "request", "json");
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
+        }
+
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
+
+        const headers = { ...reqBodyHeaders, ...config?.headers };
+        headers["Accept"] = "application/json";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this.sdkConfiguration.language} ${this.sdkConfiguration.sdkVersion} ${this.sdkConfiguration.genVersion} ${this.sdkConfiguration.openapiDocVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "post",
+            headers: headers,
+            responseType: "arraybuffer",
+            data: reqBody,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.C1ApiAppV1AppsCreateResponse =
+            new operations.C1ApiAppV1AppsCreateResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.createAppResponse = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.CreateAppResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * Delete
+     *
+     * @remarks
+     * Invokes the c1.api.app.v1.Apps.Delete method.
+     */
+    async delete(
+        req: operations.C1ApiAppV1AppsDeleteRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.C1ApiAppV1AppsDeleteResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.C1ApiAppV1AppsDeleteRequest(req);
+        }
+
+        const baseURL: string = utils.templateUrl(
+            this.sdkConfiguration.serverURL,
+            this.sdkConfiguration.serverDefaults
+        );
+        const url: string = utils.generateURL(baseURL, "/api/v1/apps/{id}", req);
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req, "deleteAppRequest", "json");
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
+        }
+
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
+
+        const headers = { ...reqBodyHeaders, ...config?.headers };
+        headers["Accept"] = "application/json";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this.sdkConfiguration.language} ${this.sdkConfiguration.sdkVersion} ${this.sdkConfiguration.genVersion} ${this.sdkConfiguration.openapiDocVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "delete",
+            headers: headers,
+            responseType: "arraybuffer",
+            data: reqBody,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.C1ApiAppV1AppsDeleteResponse =
+            new operations.C1ApiAppV1AppsDeleteResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.deleteAppResponse = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.DeleteAppResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * Get
+     *
+     * @remarks
      * Invokes the c1.api.app.v1.Apps.Get method.
      */
     async get(
@@ -32,7 +202,8 @@ export class Apps {
         );
         const url: string = utils.generateURL(baseURL, "/api/v1/apps/{id}", req);
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
         headers["Accept"] = "application/json";
@@ -68,6 +239,13 @@ export class Apps {
                         JSON.parse(decodedRes),
                         shared.GetAppResponse
                     );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
                 }
                 break;
         }
@@ -76,6 +254,9 @@ export class Apps {
     }
 
     /**
+     * List
+     *
+     * @remarks
      * Invokes the c1.api.app.v1.Apps.List method.
      */
     async list(config?: AxiosRequestConfig): Promise<operations.C1ApiAppV1AppsListResponse> {
@@ -85,7 +266,8 @@ export class Apps {
         );
         const url: string = baseURL.replace(/\/$/, "") + "/api/v1/apps";
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
         headers["Accept"] = "application/json";
@@ -121,6 +303,100 @@ export class Apps {
                     res.listAppsResponse = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.ListAppsResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * Update
+     *
+     * @remarks
+     * Invokes the c1.api.app.v1.Apps.Update method.
+     */
+    async update(
+        req: operations.C1ApiAppV1AppsUpdateRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.C1ApiAppV1AppsUpdateResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.C1ApiAppV1AppsUpdateRequest(req);
+        }
+
+        const baseURL: string = utils.templateUrl(
+            this.sdkConfiguration.serverURL,
+            this.sdkConfiguration.serverDefaults
+        );
+        const url: string = utils.generateURL(baseURL, "/api/v1/apps/{id}", req);
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+                req,
+                "updateAppRequestInput",
+                "json"
+            );
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
+        }
+
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
+
+        const headers = { ...reqBodyHeaders, ...config?.headers };
+        headers["Accept"] = "application/json";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this.sdkConfiguration.language} ${this.sdkConfiguration.sdkVersion} ${this.sdkConfiguration.genVersion} ${this.sdkConfiguration.openapiDocVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "post",
+            headers: headers,
+            responseType: "arraybuffer",
+            data: reqBody,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.C1ApiAppV1AppsUpdateResponse =
+            new operations.C1ApiAppV1AppsUpdateResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.updateAppResponse = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.UpdateAppResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
                     );
                 }
                 break;

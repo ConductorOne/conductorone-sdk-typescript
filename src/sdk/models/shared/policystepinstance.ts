@@ -8,7 +8,10 @@ import { ProvisionInstance } from "./provisioninstance";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The state field.
+ *  The state of the step, which is either active or done.
+ *
+ * @remarks
+ *
  */
 export enum PolicyStepInstanceState {
     PolicyStepStateUnspecified = "POLICY_STEP_STATE_UNSPECIFIED",
@@ -17,9 +20,10 @@ export enum PolicyStepInstanceState {
 }
 
 /**
- * The PolicyStepInstance message.
+ *  The policy step instance includes a reference to an instance of a policy step that tracks state and has a unique ID.
  *
  * @remarks
+ *
  *
  * This message contains a oneof named instance. Only a single field of the following list may be set at a time:
  *   - approval
@@ -28,9 +32,10 @@ export enum PolicyStepInstanceState {
  */
 export class PolicyStepInstance extends SpeakeasyBase {
     /**
-     * The ApprovalInstance message.
+     *  The approval instance object describes the way a policy step should be approved as well as its outcomes and state.
      *
      * @remarks
+     *
      *
      * This message contains a oneof named outcome. Only a single field of the following list may be set at a time:
      *   - approved
@@ -46,9 +51,10 @@ export class PolicyStepInstance extends SpeakeasyBase {
     approvalInstance?: ApprovalInstance;
 
     /**
-     * The ProvisionInstance message.
+     *  A provision instance describes the specific configuration of an executing provision policy step including actions taken and notification id.
      *
      * @remarks
+     *
      *
      * This message contains a oneof named outcome. Only a single field of the following list may be set at a time:
      *   - completed
@@ -63,14 +69,20 @@ export class PolicyStepInstance extends SpeakeasyBase {
     provisionInstance?: ProvisionInstance;
 
     /**
-     * The id field.
+     *  The ID of the PolicyStepInstance. This is required by many action submission endpoints to indicate what step you're approving.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
     id?: string;
 
     /**
-     * The state field.
+     *  The state of the step, which is either active or done.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "state" })

@@ -6,18 +6,27 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- * The DelegatedProvision message.
+ *  This provision step indicates that we should delegate provisioning to the configuration of another app entitlement. This app entitlement does not have to be one from the same app, but MUST be configured as a proxy binding leading into this entitlement.
+ *
+ * @remarks
+ *
  */
 export class DelegatedProvision extends SpeakeasyBase {
     /**
-     * The appId field.
+     *  The AppID of the entitlement to delegate provisioning to.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })
     appId?: string;
 
     /**
-     * The entitlementId field.
+     *  The ID of the entitlement we are delegating provisioning to.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "entitlementId" })

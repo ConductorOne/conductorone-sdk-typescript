@@ -3,7 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import { PolicyStep } from "./policystep";
+import { PolicyStep, PolicyStepInput } from "./policystep";
 import { Expose, Type } from "class-transformer";
 
 /**
@@ -11,10 +11,29 @@ import { Expose, Type } from "class-transformer";
  */
 export class PolicySteps extends SpeakeasyBase {
     /**
-     * The steps field.
+     *  An array of policy steps indicating the processing flow of a policy. These steps are oneOfs, and only one property may be set for each array index at a time.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata({ elemType: PolicyStep })
     @Expose({ name: "steps" })
     @Type(() => PolicyStep)
     steps?: PolicyStep[];
+}
+
+/**
+ * The PolicySteps message.
+ */
+export class PolicyStepsInput extends SpeakeasyBase {
+    /**
+     *  An array of policy steps indicating the processing flow of a policy. These steps are oneOfs, and only one property may be set for each array index at a time.
+     *
+     * @remarks
+     *
+     */
+    @SpeakeasyMetadata({ elemType: PolicyStepInput })
+    @Expose({ name: "steps" })
+    @Type(() => PolicyStepInput)
+    steps?: PolicyStepInput[];
 }

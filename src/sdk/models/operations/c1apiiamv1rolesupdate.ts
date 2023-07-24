@@ -8,7 +8,7 @@ import { AxiosResponse } from "axios";
 
 export class C1ApiIamV1RolesUpdateRequest extends SpeakeasyBase {
     @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-    updateRoleRequest?: shared.UpdateRoleRequest;
+    updateRoleRequestInput?: shared.UpdateRoleRequestInput;
 
     @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=role_id" })
     roleId: string;

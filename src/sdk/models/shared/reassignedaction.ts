@@ -6,11 +6,17 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- * The ReassignedAction message.
+ *  The ReassignedAction object describes the outcome of a policy step that has been reassigned.
+ *
+ * @remarks
+ *
  */
 export class ReassignedAction extends SpeakeasyBase {
     /**
-     * The newPolicyStepId field.
+     *  The ID of the policy step that was created as a result of this reassignment.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "newPolicyStepId" })
@@ -22,7 +28,10 @@ export class ReassignedAction extends SpeakeasyBase {
     reassignedAt?: Date;
 
     /**
-     * The userId field.
+     *  The UserID of the person who reassigned this step.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "userId" })

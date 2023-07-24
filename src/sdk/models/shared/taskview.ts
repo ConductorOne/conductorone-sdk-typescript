@@ -7,11 +7,17 @@ import { Task } from "./task";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The TaskView message.
+ *  Contains a task and JSONPATH expressions that describe where in the expanded array related objects are located. This view can be used to display a fully-detailed dashboard of task information.
+ *
+ * @remarks
+ *
  */
 export class TaskView extends SpeakeasyBase {
     /**
-     * The Task message.
+     *  A fully-fleged task object. Includes its policy, references to external apps, its type, its processing history, and more.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "task" })
@@ -19,56 +25,80 @@ export class TaskView extends SpeakeasyBase {
     task?: Task;
 
     /**
-     * The accessReviewPath field.
+     *  JSONPATH expression indicating the location of the AccessReview object in the expanded array
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "accessReviewPath" })
     accessReviewPath?: string;
 
     /**
-     * The appPath field.
+     *  JSONPATH expression indicating the location of the App object in the expanded array
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appPath" })
     appPath?: string;
 
     /**
-     * The appUserPath field.
+     *  JSONPATH expression indicating the location of the AppUser object in the expanded array
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appUserPath" })
     appUserPath?: string;
 
     /**
-     * The createdByUserPath field.
+     *  JSONPATH expression indicating the location of the object of the User that created the ticket in the expanded array
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "createdByUserPath" })
     createdByUserPath?: string;
 
     /**
-     * The entitlementsPath field.
+     *  JSONPATH expression indicating the location of the Entitlements objects in the expanded array
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "entitlementsPath" })
     entitlementsPath?: string;
 
     /**
-     * The identityUserPath field.
+     *  JSONPATH expression indicating the location of the User object of the User that this task is targeting in the expanded array. This is the user that is the identity when the target of a task is an app user.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "identityUserPath" })
     identityUserPath?: string;
 
     /**
-     * The stepApproversPath field.
+     *  JSONPATH expression indicating the location of the StepApproverUsers objects in the expanded array
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "stepApproversPath" })
     stepApproversPath?: string;
 
     /**
-     * The userPath field.
+     *  JSONPATH expression indicating the location of the User object in the expanded array. This is the user that is a direct target of the ticket without a specific relationship to a potentially non-existent app user.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "userPath" })

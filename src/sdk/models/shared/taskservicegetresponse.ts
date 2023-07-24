@@ -11,7 +11,10 @@ import { Expose, Type } from "class-transformer";
  */
 export class TaskServiceGetResponse extends SpeakeasyBase {
     /**
-     * The TaskView message.
+     *  Contains a task and JSONPATH expressions that describe where in the expanded array related objects are located. This view can be used to display a fully-detailed dashboard of task information.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "taskView" })

@@ -2,9 +2,9 @@
 
 ### Available Operations
 
-* [get](#get) - Invokes the c1.api.iam.v1.Roles.Get method.
-* [list](#list) - Invokes the c1.api.iam.v1.Roles.List method.
-* [update](#update) - Invokes the c1.api.iam.v1.Roles.Update method.
+* [get](#get) - Get
+* [list](#list) - List
+* [update](#update) - Update
 
 ## get
 
@@ -16,10 +16,14 @@ Invokes the c1.api.iam.v1.Roles.Get method.
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiIamV1RolesGetResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.roles.get({
-  roleId: "vel",
+  roleId: "necessitatibus",
 }).then((res: C1ApiIamV1RolesGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -50,7 +54,11 @@ Invokes the c1.api.iam.v1.Roles.List method.
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiIamV1RolesListResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.roles.list().then((res: C1ApiIamV1RolesListResponse) => {
   if (res.statusCode == 200) {
@@ -81,32 +89,33 @@ Invokes the c1.api.iam.v1.Roles.Update method.
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiIamV1RolesUpdateResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.roles.update({
-  updateRoleRequest: {
+  updateRoleRequestInput: {
     role: {
-      createdAt: new Date("2022-01-20T13:10:25.426Z"),
-      deletedAt: new Date("2021-11-03T10:56:47.600Z"),
-      displayName: "minima",
-      id: "bc0ab3c2-0c4f-4378-9fd8-71f99dd2efd1",
-      name: "Ann Murphy",
+      displayName: "animi",
+      id: "c55a9741-d311-4352-965b-b8a720261143",
+      name: "Kellie Bogisich",
       permissions: [
-        "quae",
-        "earum",
-        "vel",
-        "in",
+        "distinctio",
+        "maxime",
+        "quia",
+        "quia",
       ],
       serviceRoles: [
+        "omnis",
         "libero",
-        "illum",
       ],
       systemBuiltin: false,
-      updatedAt: new Date("2022-12-07T16:30:09.640Z"),
     },
-    updateMask: "aliquam",
+    updateMask: "dicta",
   },
-  roleId: "sapiente",
+  roleId: "id",
 }).then((res: C1ApiIamV1RolesUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

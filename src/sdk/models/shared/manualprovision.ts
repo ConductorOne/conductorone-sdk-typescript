@@ -6,18 +6,27 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- * The ManualProvision message.
+ *  Manual provisioning indicates that a human must intervene for the provisioning of this step.
+ *
+ * @remarks
+ *
  */
 export class ManualProvision extends SpeakeasyBase {
     /**
-     * The instructions field.
+     *  This field indicates a text body of instructions for the provisioner to indicate.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "instructions" })
     instructions?: string;
 
     /**
-     * The userIds field.
+     *  An array of users that are required to provision during this step.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "userIds" })

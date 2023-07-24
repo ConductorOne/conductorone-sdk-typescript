@@ -12,7 +12,10 @@ import { RestartAction } from "./restartaction";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The state field.
+ *  The state of the approval instance
+ *
+ * @remarks
+ *
  */
 export enum ApprovalInstanceState {
     ApprovalInstanceStateUnspecified = "APPROVAL_INSTANCE_STATE_UNSPECIFIED",
@@ -23,9 +26,10 @@ export enum ApprovalInstanceState {
 }
 
 /**
- * The ApprovalInstance message.
+ *  The approval instance object describes the way a policy step should be approved as well as its outcomes and state.
  *
  * @remarks
+ *
  *
  * This message contains a oneof named outcome. Only a single field of the following list may be set at a time:
  *   - approved
@@ -56,7 +60,10 @@ export class ApprovalInstance extends SpeakeasyBase {
     approval?: Approval;
 
     /**
-     * The ApprovedAction message.
+     *  The approved action indicates that the approvalinstance had an outcome of approved.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "approved" })
@@ -64,7 +71,10 @@ export class ApprovalInstance extends SpeakeasyBase {
     approvedAction?: ApprovedAction;
 
     /**
-     * The DeniedAction message.
+     *  The denied action indicates that the c1.api.policy.v1.ApprovalInstance had an outcome of denied.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "denied" })
@@ -72,7 +82,10 @@ export class ApprovalInstance extends SpeakeasyBase {
     deniedAction?: DeniedAction;
 
     /**
-     * The ReassignedAction message.
+     *  The ReassignedAction object describes the outcome of a policy step that has been reassigned.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "reassigned" })
@@ -80,7 +93,10 @@ export class ApprovalInstance extends SpeakeasyBase {
     reassignedAction?: ReassignedAction;
 
     /**
-     * The ReassignedByErrorAction message.
+     *  The ReassignedByErrorAction object describes the outcome of a policy step that has been reassigned because it had an error provisioning.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "reassignedByError" })
@@ -88,7 +104,10 @@ export class ApprovalInstance extends SpeakeasyBase {
     reassignedByErrorAction?: ReassignedByErrorAction;
 
     /**
-     * The RestartAction message.
+     *  The restart action describes the outcome of policy steps for when the task was restarted. This can be applied to multiple steps since restart skips all pending next steps.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "restarted" })
@@ -96,7 +115,10 @@ export class ApprovalInstance extends SpeakeasyBase {
     restartAction?: RestartAction;
 
     /**
-     * The state field.
+     *  The state of the approval instance
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "state" })

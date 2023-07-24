@@ -3,6 +3,7 @@
  */
 
 import * as utils from "../internal/utils";
+import * as errors from "./models/errors";
 import * as operations from "./models/operations";
 import * as shared from "./models/shared";
 import { SDKConfiguration } from "./sdk";
@@ -16,6 +17,9 @@ export class Roles {
     }
 
     /**
+     * Get
+     *
+     * @remarks
      * Invokes the c1.api.iam.v1.Roles.Get method.
      */
     async get(
@@ -32,7 +36,8 @@ export class Roles {
         );
         const url: string = utils.generateURL(baseURL, "/api/v1/iam/roles/{role_id}", req);
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
         headers["Accept"] = "application/json";
@@ -69,6 +74,13 @@ export class Roles {
                         JSON.parse(decodedRes),
                         shared.GetRolesResponse
                     );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
                 }
                 break;
         }
@@ -77,6 +89,9 @@ export class Roles {
     }
 
     /**
+     * List
+     *
+     * @remarks
      * Invokes the c1.api.iam.v1.Roles.List method.
      */
     async list(config?: AxiosRequestConfig): Promise<operations.C1ApiIamV1RolesListResponse> {
@@ -86,7 +101,8 @@ export class Roles {
         );
         const url: string = baseURL.replace(/\/$/, "") + "/api/v1/iam/roles";
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
         headers["Accept"] = "application/json";
@@ -123,6 +139,13 @@ export class Roles {
                         JSON.parse(decodedRes),
                         shared.ListRolesResponse
                     );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
                 }
                 break;
         }
@@ -131,6 +154,9 @@ export class Roles {
     }
 
     /**
+     * Update
+     *
+     * @remarks
      * Invokes the c1.api.iam.v1.Roles.Update method.
      */
     async update(
@@ -152,7 +178,7 @@ export class Roles {
         try {
             [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
                 req,
-                "updateRoleRequest",
+                "updateRoleRequestInput",
                 "json"
             );
         } catch (e: unknown) {
@@ -161,7 +187,8 @@ export class Roles {
             }
         }
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...reqBodyHeaders, ...config?.headers };
         headers["Accept"] = "application/json";
@@ -198,6 +225,13 @@ export class Roles {
                     res.updateRolesResponse = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.UpdateRolesResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
                     );
                 }
                 break;

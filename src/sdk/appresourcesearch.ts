@@ -3,6 +3,7 @@
  */
 
 import * as utils from "../internal/utils";
+import * as errors from "./models/errors";
 import * as operations from "./models/operations";
 import * as shared from "./models/shared";
 import { SDKConfiguration } from "./sdk";
@@ -16,6 +17,9 @@ export class AppResourceSearch {
     }
 
     /**
+     * Search App Resource Types
+     *
+     * @remarks
      * Invokes the c1.api.app.v1.AppResourceSearch.SearchAppResourceTypes method.
      */
     async searchAppResourceTypes(
@@ -42,7 +46,8 @@ export class AppResourceSearch {
             }
         }
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...reqBodyHeaders, ...config?.headers };
         headers["Accept"] = "application/json";
@@ -79,6 +84,13 @@ export class AppResourceSearch {
                     res.searchAppResourceTypesResponse = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.SearchAppResourceTypesResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
                     );
                 }
                 break;

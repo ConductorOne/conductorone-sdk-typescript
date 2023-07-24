@@ -6,25 +6,37 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- * The ReassignedByErrorAction message.
+ *  The ReassignedByErrorAction object describes the outcome of a policy step that has been reassigned because it had an error provisioning.
+ *
+ * @remarks
+ *
  */
 export class ReassignedByErrorAction extends SpeakeasyBase {
     /**
-     * The description field.
+     *  The description of the error with more details on why this was reassigned.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     * The errorCode field.
+     *  Additional information about the error, like http status codes or error messages from SDKs.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "errorCode" })
     errorCode?: string;
 
     /**
-     * The errorUserId field.
+     *  The UserID of the user who reassigned this due to an error. This will exclusively be the System's UserID.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "errorUserId" })
@@ -36,7 +48,10 @@ export class ReassignedByErrorAction extends SpeakeasyBase {
     erroredAt?: Date;
 
     /**
-     * The newPolicyStepId field.
+     *  The ID of the policy step that was created by this reassignment.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "newPolicyStepId" })

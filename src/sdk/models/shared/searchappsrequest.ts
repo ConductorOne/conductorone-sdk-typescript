@@ -17,6 +17,13 @@ export class SearchAppsRequest extends SpeakeasyBase {
     appIds?: string[];
 
     /**
+     * The displayName field.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "displayName" })
+    displayName?: string;
+
+    /**
      * The excludeAppIds field.
      */
     @SpeakeasyMetadata()

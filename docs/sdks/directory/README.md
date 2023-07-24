@@ -2,10 +2,10 @@
 
 ### Available Operations
 
-* [create](#create) - Invokes the c1.api.directory.v1.DirectoryService.Create method.
-* [delete](#delete) - Invokes the c1.api.directory.v1.DirectoryService.Delete method.
-* [get](#get) - Invokes the c1.api.directory.v1.DirectoryService.Get method.
-* [list](#list) - Invokes the c1.api.directory.v1.DirectoryService.List method.
+* [create](#create) - Create
+* [delete](#delete) - Delete
+* [get](#get) - Get
+* [list](#list) - List
 
 ## create
 
@@ -17,17 +17,22 @@ Invokes the c1.api.directory.v1.DirectoryService.Create method.
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiDirectoryV1DirectoryServiceCreateResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.directory.create({
   directoryExpandMask: {
     paths: [
-      "quibusdam",
-      "labore",
-      "modi",
+      "possimus",
+      "quia",
+      "eveniet",
+      "asperiores",
     ],
   },
-  appId: "qui",
+  appId: "facere",
 }).then((res: C1ApiDirectoryV1DirectoryServiceCreateResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -58,11 +63,15 @@ Invokes the c1.api.directory.v1.DirectoryService.Delete method.
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiDirectoryV1DirectoryServiceDeleteResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.directory.delete({
   directoryServiceDeleteRequest: {},
-  appId: "aliquid",
+  appId: "veritatis",
 }).then((res: C1ApiDirectoryV1DirectoryServiceDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -93,10 +102,14 @@ Invokes the c1.api.directory.v1.DirectoryService.Get method.
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiDirectoryV1DirectoryServiceGetResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.directory.get({
-  appId: "cupiditate",
+  appId: "consequuntur",
 }).then((res: C1ApiDirectoryV1DirectoryServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -127,7 +140,11 @@ Invokes the c1.api.directory.v1.DirectoryService.List method.
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiDirectoryV1DirectoryServiceListResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.directory.list().then((res: C1ApiDirectoryV1DirectoryServiceListResponse) => {
   if (res.statusCode == 200) {

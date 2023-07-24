@@ -11,7 +11,10 @@ import { ReassignedByErrorAction } from "./reassignedbyerroraction";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The state field.
+ *  This property indicates the current state of this step.
+ *
+ * @remarks
+ *
  */
 export enum ProvisionInstanceState {
     ProvisionInstanceStateUnspecified = "PROVISION_INSTANCE_STATE_UNSPECIFIED",
@@ -23,9 +26,10 @@ export enum ProvisionInstanceState {
 }
 
 /**
- * The ProvisionInstance message.
+ *  A provision instance describes the specific configuration of an executing provision policy step including actions taken and notification id.
  *
  * @remarks
+ *
  *
  * This message contains a oneof named outcome. Only a single field of the following list may be set at a time:
  *   - completed
@@ -60,7 +64,10 @@ export class ProvisionInstance extends SpeakeasyBase {
     erroredAction?: ErroredAction;
 
     /**
-     * The Provision message.
+     *  The provision step references a provision policy for this step.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "provision" })
@@ -68,7 +75,10 @@ export class ProvisionInstance extends SpeakeasyBase {
     provision?: Provision;
 
     /**
-     * The ReassignedByErrorAction message.
+     *  The ReassignedByErrorAction object describes the outcome of a policy step that has been reassigned because it had an error provisioning.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "reassignedByError" })
@@ -76,14 +86,20 @@ export class ProvisionInstance extends SpeakeasyBase {
     reassignedByErrorAction?: ReassignedByErrorAction;
 
     /**
-     * The notificationId field.
+     *  This indicates the notification id for this step.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "notificationId" })
     notificationId?: string;
 
     /**
-     * The state field.
+     *  This property indicates the current state of this step.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "state" })

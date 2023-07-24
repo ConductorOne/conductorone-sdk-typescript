@@ -6,7 +6,10 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- * The externalRefSource field.
+ *  The source of the external reference.
+ *
+ * @remarks
+ *
  */
 export enum ExternalRefExternalRefSource {
     Unspecified = "UNSPECIFIED",
@@ -14,25 +17,37 @@ export enum ExternalRefExternalRefSource {
 }
 
 /**
- * The ExternalRef message.
+ *  A reference to an external source. This value is unused currently, but may be brought back.
+ *
+ * @remarks
+ *
  */
 export class ExternalRef extends SpeakeasyBase {
     /**
-     * The externalRefSource field.
+     *  The source of the external reference.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "externalRefSource" })
     externalRefSource?: ExternalRefExternalRefSource;
 
     /**
-     * The name field.
+     *  The name of the external reference.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "name" })
     name?: string;
 
     /**
-     * The url field.
+     *  The URL to the external reference.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "url" })

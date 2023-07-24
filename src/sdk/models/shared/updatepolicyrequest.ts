@@ -3,20 +3,23 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import { Policy } from "./policy";
+import { PolicyInput } from "./policy";
 import { Expose, Type } from "class-transformer";
 
 /**
  * The UpdatePolicyRequest message.
  */
-export class UpdatePolicyRequest extends SpeakeasyBase {
+export class UpdatePolicyRequestInput extends SpeakeasyBase {
     /**
-     * The Policy message.
+     *  A policy describes the behavior of the ConductorOne system when processing a task. You can describe the type, approvers, fallback behavior, and escalation processes.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "policy" })
-    @Type(() => Policy)
-    policy?: Policy;
+    @Type(() => PolicyInput)
+    policy?: PolicyInput;
 
     @SpeakeasyMetadata()
     @Expose({ name: "updateMask" })

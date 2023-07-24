@@ -3,20 +3,20 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import { Role } from "./role";
+import { RoleInput } from "./role";
 import { Expose, Type } from "class-transformer";
 
 /**
  * The UpdateRoleRequest message.
  */
-export class UpdateRoleRequest extends SpeakeasyBase {
+export class UpdateRoleRequestInput extends SpeakeasyBase {
     /**
      * The Role message.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "role" })
-    @Type(() => Role)
-    role?: Role;
+    @Type(() => RoleInput)
+    role?: RoleInput;
 
     @SpeakeasyMetadata()
     @Expose({ name: "updateMask" })

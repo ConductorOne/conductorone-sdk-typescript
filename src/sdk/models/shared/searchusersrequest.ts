@@ -27,6 +27,13 @@ export class SearchUsersRequest extends SpeakeasyBase {
     userExpandMask?: UserExpandMask;
 
     /**
+     * The email field.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "email" })
+    email?: string;
+
+    /**
      * The excludeIds field.
      */
     @SpeakeasyMetadata()

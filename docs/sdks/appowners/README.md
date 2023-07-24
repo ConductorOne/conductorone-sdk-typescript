@@ -2,9 +2,9 @@
 
 ### Available Operations
 
-* [add](#add) - Invokes the c1.api.app.v1.AppOwners.Add method.
-* [list](#list) - Invokes the c1.api.app.v1.AppOwners.List method.
-* [remove](#remove) - Invokes the c1.api.app.v1.AppOwners.Remove method.
+* [add](#add) - Add
+* [list](#list) - List
+* [remove](#remove) - Remove
 
 ## add
 
@@ -16,12 +16,16 @@ Invokes the c1.api.app.v1.AppOwners.Add method.
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiAppV1AppOwnersAddResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.appOwners.add({
   addAppOwnerRequest: {},
-  appId: "at",
-  userId: "at",
+  appId: "labore",
+  userId: "delectus",
 }).then((res: C1ApiAppV1AppOwnersAddResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -51,12 +55,15 @@ Invokes the c1.api.app.v1.AppOwners.List method.
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiAppV1AppOwnersListResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
-import { UserDirectoryStatus, UserStatus } from "conductorone-sdk-typescript/dist/sdk/models/shared";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.appOwners.list({
-  appId: "maiores",
+  appId: "eum",
 }).then((res: C1ApiAppV1AppOwnersListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -87,12 +94,16 @@ Invokes the c1.api.app.v1.AppOwners.Remove method.
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiAppV1AppOwnersRemoveResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.appOwners.remove({
   removeAppOwnerRequest: {},
-  appId: "molestiae",
-  userId: "quod",
+  appId: "non",
+  userId: "eligendi",
 }).then((res: C1ApiAppV1AppOwnersRemoveResponse) => {
   if (res.statusCode == 200) {
     // handle response

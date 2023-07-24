@@ -3,6 +3,7 @@
  */
 
 import * as utils from "../internal/utils";
+import * as errors from "./models/errors";
 import * as operations from "./models/operations";
 import * as shared from "./models/shared";
 import { SDKConfiguration } from "./sdk";
@@ -16,6 +17,9 @@ export class AppOwners {
     }
 
     /**
+     * Add
+     *
+     * @remarks
      * Invokes the c1.api.app.v1.AppOwners.Add method.
      */
     async add(
@@ -50,7 +54,8 @@ export class AppOwners {
             }
         }
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...reqBodyHeaders, ...config?.headers };
         headers["Accept"] = "application/json";
@@ -88,6 +93,13 @@ export class AppOwners {
                         JSON.parse(decodedRes),
                         shared.AddAppOwnerResponse
                     );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
                 }
                 break;
         }
@@ -96,6 +108,9 @@ export class AppOwners {
     }
 
     /**
+     * List
+     *
+     * @remarks
      * Invokes the c1.api.app.v1.AppOwners.List method.
      */
     async list(
@@ -112,7 +127,8 @@ export class AppOwners {
         );
         const url: string = utils.generateURL(baseURL, "/api/v1/apps/{app_id}/owners", req);
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
         headers["Accept"] = "application/json";
@@ -149,6 +165,13 @@ export class AppOwners {
                         JSON.parse(decodedRes),
                         shared.ListAppOwnersResponse
                     );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
                 }
                 break;
         }
@@ -157,6 +180,9 @@ export class AppOwners {
     }
 
     /**
+     * Remove
+     *
+     * @remarks
      * Invokes the c1.api.app.v1.AppOwners.Remove method.
      */
     async remove(
@@ -191,7 +217,8 @@ export class AppOwners {
             }
         }
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...reqBodyHeaders, ...config?.headers };
         headers["Accept"] = "application/json";
@@ -228,6 +255,13 @@ export class AppOwners {
                     res.removeAppOwnerResponse = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.RemoveAppOwnerResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
                     );
                 }
                 break;

@@ -1,12 +1,13 @@
 # ExternalRef
 
-The ExternalRef message.
+ A reference to an external source. This value is unused currently, but may be brought back.
+
 
 
 ## Fields
 
 | Field                                                                               | Type                                                                                | Required                                                                            | Description                                                                         |
 | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `externalRefSource`                                                                 | [ExternalRefExternalRefSource](../../models/shared/externalrefexternalrefsource.md) | :heavy_minus_sign:                                                                  | The externalRefSource field.                                                        |
-| `name`                                                                              | *string*                                                                            | :heavy_minus_sign:                                                                  | The name field.                                                                     |
-| `url`                                                                               | *string*                                                                            | :heavy_minus_sign:                                                                  | The url field.                                                                      |
+| `externalRefSource`                                                                 | [ExternalRefExternalRefSource](../../models/shared/externalrefexternalrefsource.md) | :heavy_minus_sign:                                                                  |  The source of the external reference.<br/>                                         |
+| `name`                                                                              | *string*                                                                            | :heavy_minus_sign:                                                                  |  The name of the external reference.<br/>                                           |
+| `url`                                                                               | *string*                                                                            | :heavy_minus_sign:                                                                  |  The URL to the external reference.<br/>                                            |

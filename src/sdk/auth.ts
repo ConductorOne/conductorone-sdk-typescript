@@ -3,6 +3,7 @@
  */
 
 import * as utils from "../internal/utils";
+import * as errors from "./models/errors";
 import * as operations from "./models/operations";
 import * as shared from "./models/shared";
 import { SDKConfiguration } from "./sdk";
@@ -16,6 +17,9 @@ export class Auth {
     }
 
     /**
+     * Introspect
+     *
+     * @remarks
      * Invokes the c1.api.auth.v1.Auth.Introspect method.
      */
     async introspect(
@@ -27,7 +31,8 @@ export class Auth {
         );
         const url: string = baseURL.replace(/\/$/, "") + "/api/v1/auth/introspect";
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
         headers["Accept"] = "application/json";
@@ -63,6 +68,13 @@ export class Auth {
                     res.introspectResponse = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.IntrospectResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
                     );
                 }
                 break;

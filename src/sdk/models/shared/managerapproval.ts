@@ -6,32 +6,47 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- * The ManagerApproval message.
+ *  The manager approval object provides configuration options for approval when the target of the approval is the manager of the user in the task.
+ *
+ * @remarks
+ *
  */
 export class ManagerApproval extends SpeakeasyBase {
     /**
-     * The allowSelfApproval field.
+     *  Configuration to allow self approval if the target user is their own manager. This may occur if a service account has an identity user and manager specified as the same person.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "allowSelfApproval" })
     allowSelfApproval?: boolean;
 
     /**
-     * The assignedUserIds field.
+     *  The array of users determined to be the manager during processing time.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "assignedUserIds" })
     assignedUserIds?: string[];
 
     /**
-     * The fallback field.
+     *  Configuration to allow a fallback if no manager is found.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "fallback" })
     fallback?: boolean;
 
     /**
-     * The fallbackUserIds field.
+     *  Configuration to specific which users to fallback to if fallback is enabled and no manager is found.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "fallbackUserIds" })

@@ -3,6 +3,7 @@
  */
 
 import * as utils from "../internal/utils";
+import * as errors from "./models/errors";
 import * as operations from "./models/operations";
 import * as shared from "./models/shared";
 import { SDKConfiguration } from "./sdk";
@@ -16,6 +17,9 @@ export class Task {
     }
 
     /**
+     * Create Grant Task
+     *
+     * @remarks
      * Invokes the c1.api.task.v1.TaskService.CreateGrantTask method.
      */
     async createGrantTask(
@@ -42,7 +46,8 @@ export class Task {
             }
         }
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...reqBodyHeaders, ...config?.headers };
         headers["Accept"] = "application/json";
@@ -80,6 +85,13 @@ export class Task {
                         JSON.parse(decodedRes),
                         shared.TaskServiceCreateGrantResponse
                     );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
                 }
                 break;
         }
@@ -88,6 +100,9 @@ export class Task {
     }
 
     /**
+     * Create Revoke Task
+     *
+     * @remarks
      * Invokes the c1.api.task.v1.TaskService.CreateRevokeTask method.
      */
     async createRevokeTask(
@@ -114,7 +129,8 @@ export class Task {
             }
         }
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...reqBodyHeaders, ...config?.headers };
         headers["Accept"] = "application/json";
@@ -152,6 +168,13 @@ export class Task {
                         JSON.parse(decodedRes),
                         shared.TaskServiceCreateRevokeResponse
                     );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
                 }
                 break;
         }
@@ -160,6 +183,9 @@ export class Task {
     }
 
     /**
+     * Get
+     *
+     * @remarks
      * Invokes the c1.api.task.v1.TaskService.Get method.
      */
     async get(
@@ -176,7 +202,8 @@ export class Task {
         );
         const url: string = utils.generateURL(baseURL, "/api/v1/tasks/{id}", req);
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
         headers["Accept"] = "application/json";
@@ -212,6 +239,13 @@ export class Task {
                     res.taskServiceGetResponse = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.TaskServiceGetResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
                     );
                 }
                 break;

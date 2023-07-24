@@ -3,6 +3,7 @@
  */
 
 import * as utils from "../internal/utils";
+import * as errors from "./models/errors";
 import * as operations from "./models/operations";
 import * as shared from "./models/shared";
 import { SDKConfiguration } from "./sdk";
@@ -16,14 +17,17 @@ export class Policies {
     }
 
     /**
+     * Create
+     *
+     * @remarks
      * Invokes the c1.api.policy.v1.Policies.Create method.
      */
     async create(
-        req: shared.CreatePolicyRequest,
+        req: shared.CreatePolicyRequestInput,
         config?: AxiosRequestConfig
     ): Promise<operations.C1ApiPolicyV1PoliciesCreateResponse> {
         if (!(req instanceof utils.SpeakeasyBase)) {
-            req = new shared.CreatePolicyRequest(req);
+            req = new shared.CreatePolicyRequestInput(req);
         }
 
         const baseURL: string = utils.templateUrl(
@@ -42,7 +46,8 @@ export class Policies {
             }
         }
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...reqBodyHeaders, ...config?.headers };
         headers["Accept"] = "application/json";
@@ -80,6 +85,13 @@ export class Policies {
                         JSON.parse(decodedRes),
                         shared.CreatePolicyResponse
                     );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
                 }
                 break;
         }
@@ -88,6 +100,9 @@ export class Policies {
     }
 
     /**
+     * Delete
+     *
+     * @remarks
      * Invokes the c1.api.policy.v1.Policies.Delete method.
      */
     async delete(
@@ -118,7 +133,8 @@ export class Policies {
             }
         }
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...reqBodyHeaders, ...config?.headers };
         headers["Accept"] = "application/json";
@@ -156,6 +172,13 @@ export class Policies {
                         JSON.parse(decodedRes),
                         shared.DeletePolicyResponse
                     );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
                 }
                 break;
         }
@@ -164,6 +187,9 @@ export class Policies {
     }
 
     /**
+     * Get
+     *
+     * @remarks
      * Invokes the c1.api.policy.v1.Policies.Get method.
      */
     async get(
@@ -180,7 +206,8 @@ export class Policies {
         );
         const url: string = utils.generateURL(baseURL, "/api/v1/policies/{id}", req);
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
         headers["Accept"] = "application/json";
@@ -217,6 +244,13 @@ export class Policies {
                         JSON.parse(decodedRes),
                         shared.GetPolicyResponse
                     );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
                 }
                 break;
         }
@@ -225,6 +259,9 @@ export class Policies {
     }
 
     /**
+     * List
+     *
+     * @remarks
      * Invokes the c1.api.policy.v1.Policies.List method.
      */
     async list(config?: AxiosRequestConfig): Promise<operations.C1ApiPolicyV1PoliciesListResponse> {
@@ -234,7 +271,8 @@ export class Policies {
         );
         const url: string = baseURL.replace(/\/$/, "") + "/api/v1/policies";
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
         headers["Accept"] = "application/json";
@@ -271,6 +309,13 @@ export class Policies {
                         JSON.parse(decodedRes),
                         shared.ListPolicyResponse
                     );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
                 }
                 break;
         }
@@ -279,6 +324,9 @@ export class Policies {
     }
 
     /**
+     * Update
+     *
+     * @remarks
      * Invokes the c1.api.policy.v1.Policies.Update method.
      */
     async update(
@@ -300,7 +348,7 @@ export class Policies {
         try {
             [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
                 req,
-                "updatePolicyRequest",
+                "updatePolicyRequestInput",
                 "json"
             );
         } catch (e: unknown) {
@@ -309,7 +357,8 @@ export class Policies {
             }
         }
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...reqBodyHeaders, ...config?.headers };
         headers["Accept"] = "application/json";
@@ -346,6 +395,13 @@ export class Policies {
                     res.updatePolicyResponse = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.UpdatePolicyResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
                     );
                 }
                 break;

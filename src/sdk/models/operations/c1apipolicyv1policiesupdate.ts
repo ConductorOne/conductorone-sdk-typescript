@@ -8,7 +8,7 @@ import { AxiosResponse } from "axios";
 
 export class C1ApiPolicyV1PoliciesUpdateRequest extends SpeakeasyBase {
     @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-    updatePolicyRequest?: shared.UpdatePolicyRequest;
+    updatePolicyRequestInput?: shared.UpdatePolicyRequestInput;
 
     @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
     id: string;

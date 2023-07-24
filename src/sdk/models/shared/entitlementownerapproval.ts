@@ -6,11 +6,14 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- * The EntitlementOwnerApproval message.
+ *  The entitlement owner approval allows configuration of the approval step when the target approvers are the entitlement owners.
+ *
+ * @remarks
+ *
  */
 export class EntitlementOwnerApproval extends SpeakeasyBase {
     /**
-     *  Entitlement owner is based on the current entitlement's id and doesn't need to have self-contained data
+     *  Configuration to allow self approval if the target user is an entitlement owner during this step.
      *
      * @remarks
      *
@@ -20,14 +23,20 @@ export class EntitlementOwnerApproval extends SpeakeasyBase {
     allowSelfApproval?: boolean;
 
     /**
-     * The fallback field.
+     *  Configuration to allow a fallback if the entitlement owner cannot be identified.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "fallback" })
     fallback?: boolean;
 
     /**
-     * The fallbackUserIds field.
+     *  Configuration to specific which users to fallback to if fallback is enabled and the entitlement owner cannot be identified.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "fallbackUserIds" })
