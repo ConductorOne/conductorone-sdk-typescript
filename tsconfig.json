@@ -5,6 +5,7 @@
     "baseUrl": "src",
     "rootDir": "src",
     "outDir": "dist",
+    "noImplicitAny": false,
     "allowJs": true,
     "downlevelIteration": true,
     "skipLibCheck": true,
