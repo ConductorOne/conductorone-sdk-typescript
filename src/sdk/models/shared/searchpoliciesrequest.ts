@@ -19,35 +19,50 @@ export enum SearchPoliciesRequestPolicyTypes {
  */
 export class SearchPoliciesRequest extends SpeakeasyBase {
     /**
-     * The displayName field.
+     *  Search for policies with an exact match on the display name.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     * The pageSize field.
+     *  The pageSize where 0 <= pageSize <= 100.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageSize" })
     pageSize?: number;
 
     /**
-     * The pageToken field.
+     *  The pageToken field.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageToken" })
     pageToken?: string;
 
     /**
-     * The policyTypes field.
+     *  The policy type to search on. This can be POLICY_TYPE_GRANT, POLICY_TYPE_REVOKE, POLICY_TYPE_CERTIFY, POLICY_TYPE_ACCESS_REQUEST, or POLICY_TYPE_PROVISION.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "policyTypes" })
     policyTypes?: SearchPoliciesRequestPolicyTypes[];
 
     /**
-     * The query field.
+     *  Query the policies based on name.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "query" })

@@ -1,6 +1,6 @@
 configVersion: 1.0.0
 management:
-  docChecksum: 93940197c0bfdbea4a969b3e9aa32818
+  docChecksum: 8a5767d70817bb45f6bd1a45e929a232
   docVersion: 0.1.0-alpha
   speakeasyVersion: 1.64.0
   generationVersion: 2.71.0
@@ -13,7 +13,7 @@ generation:
   singleTagPerOp: false
   tagNamespacingDisabled: false
 typescript:
-  version: 1.1.0
+  version: 1.1.1
   author: ConductorOne
   maxMethodParams: 0
   packageName: conductorone-sdk-typescript
