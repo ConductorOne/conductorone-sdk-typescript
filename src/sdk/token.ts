@@ -1,5 +1,4 @@
-import jose from 'node-jose';
-import jwt, {JwtPayload} from 'jsonwebtoken';
+import * as jose from 'jose'
 import {URLSearchParams} from 'url';
 import {AxiosInstance} from "axios";
 
@@ -19,37 +18,37 @@ export class Token {
     }
 
     async getToken(): Promise<string> {
+        const [name, domain, version, secret] = this.clientSecret.split(':');
+        if (name !== "secret-token") {
+            throw new Error("not a secret token");
+        }
+        if (domain !== "conductorone.com") {
+            throw new Error("wrong domain");
+        }
+        if (version !== "v1") {
+            throw new Error("incorrect client-secret version");
+        }
+        const jsonStr = atob(secret);
+        const jwk = JSON.parse(jsonStr);
+        const alg = "EdDSA";
+        const privateKey = await jose.importJWK(jwk, alg);
 
-        const jwksigner = await jose.JWS.createSign(
-            {
-                algorithm: jose.EdDSA,
-                key: this.clientSecret,
-            },
-            {
-                nonce: {size: 16},
-            }
-        );
-
-
+        const now = Math.floor(Date.now() / 1000);
         let aud = this.tokenUrl;
         const {host} = new URL(aud);
         if (host) {
             aud = host;
         }
 
-        const now = Math.floor(Date.now() / 1000);
-        const claims: JwtPayload = {
-            iss: this.clientID,
-            sub: this.clientID,
-            aud: aud,
-            exp: now + 120,
-            iat: now,
-            nbf: now - 120,
-        };
-
-        const token = jwt.sign(claims, jwksigner, {
-            algorithm: 'EdDSA',
-        });
+        const token = await new jose.SignJWT({ 'urn:example:claim': true })
+            .setProtectedHeader({ alg })
+            .setIssuer(this.clientID)
+            .setSubject(this.clientID)
+            .setAudience(aud)
+            .setExpirationTime(now + 120)
+            .setIssuedAt(now)
+            .setNotBefore(now - 120)
+            .sign(privateKey);
 
         const body = new URLSearchParams({
             client_id: this.clientID,
@@ -79,5 +78,3 @@ export class Token {
         return "";
     }
 }
-
-
