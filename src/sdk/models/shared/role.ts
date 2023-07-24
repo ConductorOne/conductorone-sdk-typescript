@@ -8,6 +8,53 @@ import { Expose, Transform } from "class-transformer";
 /**
  * The Role message.
  */
+export class RoleInput extends SpeakeasyBase {
+    /**
+     * The displayName field.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "displayName" })
+    displayName?: string;
+
+    /**
+     * The id field.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "id" })
+    id?: string;
+
+    /**
+     * The name field.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "name" })
+    name?: string;
+
+    /**
+     * The permissions field.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "permissions" })
+    permissions?: string[];
+
+    /**
+     * The serviceRoles field.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "serviceRoles" })
+    serviceRoles?: string[];
+
+    /**
+     * The systemBuiltin field.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "systemBuiltin" })
+    systemBuiltin?: boolean;
+}
+
+/**
+ * The Role message.
+ */
 export class Role extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "createdAt" })

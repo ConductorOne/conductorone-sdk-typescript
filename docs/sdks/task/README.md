@@ -2,9 +2,9 @@
 
 ### Available Operations
 
-* [createGrantTask](#creategranttask) - Invokes the c1.api.task.v1.TaskService.CreateGrantTask method.
-* [createRevokeTask](#createrevoketask) - Invokes the c1.api.task.v1.TaskService.CreateRevokeTask method.
-* [get](#get) - Invokes the c1.api.task.v1.TaskService.Get method.
+* [createGrantTask](#creategranttask) - Create Grant Task
+* [createRevokeTask](#createrevoketask) - Create Revoke Task
+* [get](#get) - Get
 
 ## createGrantTask
 
@@ -15,35 +15,28 @@ Invokes the c1.api.task.v1.TaskService.CreateGrantTask method.
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiTaskV1TaskServiceCreateGrantTaskResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
-import {
-  ApprovalInstanceState,
-  ExternalRefExternalRefSource,
-  PolicyPolicyType,
-  PolicyStepInstanceState,
-  ProvisionInstanceState,
-  TaskActions,
-  TaskProcessing,
-  TaskState,
-  TaskTypeCertifyOutcome,
-  TaskTypeGrantOutcome,
-  TaskTypeRevokeOutcome,
-} from "conductorone-sdk-typescript/dist/sdk/models/shared";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.task.createGrantTask({
   taskExpandMask: {
     paths: [
-      "ullam",
+      "fugiat",
+      "officia",
+      "quos",
     ],
   },
-  appEntitlementId: "reprehenderit",
-  appId: "ullam",
-  appUserId: "nisi",
-  description: "aut",
+  appEntitlementId: "placeat",
+  appId: "sit",
+  appUserId: "iusto",
+  description: "ipsa",
   emergencyAccess: false,
-  grantDuration: "voluptatum",
-  identityUserId: "qui",
+  grantDuration: "voluptates",
+  identityUserId: "inventore",
 }).then((res: C1ApiTaskV1TaskServiceCreateGrantTaskResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -73,36 +66,24 @@ Invokes the c1.api.task.v1.TaskService.CreateRevokeTask method.
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiTaskV1TaskServiceCreateRevokeTaskResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
-import {
-  ApprovalInstanceState,
-  ExternalRefExternalRefSource,
-  PolicyPolicyType,
-  PolicyStepInstanceState,
-  ProvisionInstanceState,
-  TaskActions,
-  TaskProcessing,
-  TaskState,
-  TaskTypeCertifyOutcome,
-  TaskTypeGrantOutcome,
-  TaskTypeRevokeOutcome,
-} from "conductorone-sdk-typescript/dist/sdk/models/shared";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.task.createRevokeTask({
   taskExpandMask: {
     paths: [
-      "ex",
-      "deleniti",
-      "itaque",
-      "dolorum",
+      "totam",
     ],
   },
-  appEntitlementId: "architecto",
-  appId: "omnis",
-  appUserId: "tenetur",
-  description: "quasi",
-  identityUserId: "at",
+  appEntitlementId: "dolore",
+  appId: "eligendi",
+  appUserId: "distinctio",
+  description: "voluptatem",
+  identityUserId: "autem",
 }).then((res: C1ApiTaskV1TaskServiceCreateRevokeTaskResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -132,24 +113,15 @@ Invokes the c1.api.task.v1.TaskService.Get method.
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiTaskV1TaskServiceGetResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
-import {
-  ApprovalInstanceState,
-  ExternalRefExternalRefSource,
-  PolicyPolicyType,
-  PolicyStepInstanceState,
-  ProvisionInstanceState,
-  TaskActions,
-  TaskProcessing,
-  TaskState,
-  TaskTypeCertifyOutcome,
-  TaskTypeGrantOutcome,
-  TaskTypeRevokeOutcome,
-} from "conductorone-sdk-typescript/dist/sdk/models/shared";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.task.get({
-  id: "17051339-d080-486a-9840-394c26071f93",
+  id: "72d1ad87-9eeb-4966-9b85-efbd02bae0be",
 }).then((res: C1ApiTaskV1TaskServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response

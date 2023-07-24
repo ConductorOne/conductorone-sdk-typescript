@@ -2,7 +2,7 @@
 
 ### Available Operations
 
-* [searchEntitlements](#searchentitlements) - Invokes the c1.api.requestcatalog.v1.RequestCatalogSearchService.SearchEntitlements method.
+* [searchEntitlements](#searchentitlements) - Search Entitlements
 
 ## searchEntitlements
 
@@ -15,22 +15,25 @@ import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiRequestcatalogV1RequestCatalogSearchServiceSearchEntitlementsResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 import { RequestCatalogSearchServiceSearchEntitlementsRequestGrantedStatus } from "conductorone-sdk-typescript/dist/sdk/models/shared";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.requestCatalogSearch.searchEntitlements({
   appEntitlementExpandMask: {
     paths: [
-      "accusamus",
-      "veritatis",
-      "esse",
-      "quod",
+      "placeat",
+      "perspiciatis",
+      "expedita",
     ],
   },
-  entitlementAlias: "nam",
+  entitlementAlias: "deleniti",
   grantedStatus: RequestCatalogSearchServiceSearchEntitlementsRequestGrantedStatus.NotGranted,
-  pageSize: 3990.25,
-  pageToken: "quasi",
-  query: "saepe",
+  pageSize: 4555.79,
+  pageToken: "ullam",
+  query: "unde",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogSearchServiceSearchEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response

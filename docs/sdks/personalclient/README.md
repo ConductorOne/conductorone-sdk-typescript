@@ -2,7 +2,7 @@
 
 ### Available Operations
 
-* [create](#create) - Invokes the c1.api.iam.v1.PersonalClientService.Create method.
+* [create](#create) - Create
 
 ## create
 
@@ -14,18 +14,23 @@ Invokes the c1.api.iam.v1.PersonalClientService.Create method.
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiIamV1PersonalClientServiceCreateResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.personalClient.create({
   allowSourceCidr: [
-    "perferendis",
-    "magni",
-    "assumenda",
+    "similique",
   ],
-  displayName: "ipsam",
-  expires: "alias",
+  displayName: "culpa",
+  expires: "aliquid",
   scopedRoles: [
-    "dolorum",
+    "quae",
+    "earum",
+    "vel",
+    "in",
   ],
 }).then((res: C1ApiIamV1PersonalClientServiceCreateResponse) => {
   if (res.statusCode == 200) {

@@ -3,6 +3,7 @@
  */
 
 import * as utils from "../internal/utils";
+import * as errors from "./models/errors";
 import * as operations from "./models/operations";
 import * as shared from "./models/shared";
 import { SDKConfiguration } from "./sdk";
@@ -16,6 +17,9 @@ export class PersonalClient {
     }
 
     /**
+     * Create
+     *
+     * @remarks
      * Invokes the c1.api.iam.v1.PersonalClientService.Create method.
      */
     async create(
@@ -42,7 +46,8 @@ export class PersonalClient {
             }
         }
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...reqBodyHeaders, ...config?.headers };
         headers["Accept"] = "application/json";
@@ -79,6 +84,13 @@ export class PersonalClient {
                     res.personalClientServiceCreateResponse = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.PersonalClientServiceCreateResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
                     );
                 }
                 break;

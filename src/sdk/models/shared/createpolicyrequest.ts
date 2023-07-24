@@ -4,13 +4,13 @@
 
 import { objectToClass, SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { PolicyPostActions } from "./policypostactions";
-import { PolicySteps } from "./policysteps";
+import { PolicySteps, PolicyStepsInput } from "./policysteps";
 import { Expose, Transform, Type } from "class-transformer";
 
 /**
  * The policyType field.
  */
-export enum CreatePolicyRequestPolicyType {
+export enum C1ApiPolicyV1CreatePolicyRequestPolicyType {
     PolicyTypeUnspecified = "POLICY_TYPE_UNSPECIFIED",
     PolicyTypeGrant = "POLICY_TYPE_GRANT",
     PolicyTypeRevoke = "POLICY_TYPE_REVOKE",
@@ -53,6 +53,76 @@ export class CreatePolicyRequest extends SpeakeasyBase {
         { toClassOnly: true }
     )
     policySteps?: Record<string, PolicySteps>;
+
+    /**
+     * The policyType field.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "policyType" })
+    policyType?: C1ApiPolicyV1CreatePolicyRequestPolicyType;
+
+    /**
+     * The postActions field.
+     */
+    @SpeakeasyMetadata({ elemType: PolicyPostActions })
+    @Expose({ name: "postActions" })
+    @Type(() => PolicyPostActions)
+    postActions?: PolicyPostActions[];
+
+    /**
+     * The reassignTasksToDelegates field.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "reassignTasksToDelegates" })
+    reassignTasksToDelegates?: boolean;
+}
+
+/**
+ * The policyType field.
+ */
+export enum CreatePolicyRequestPolicyType {
+    PolicyTypeUnspecified = "POLICY_TYPE_UNSPECIFIED",
+    PolicyTypeGrant = "POLICY_TYPE_GRANT",
+    PolicyTypeRevoke = "POLICY_TYPE_REVOKE",
+    PolicyTypeCertify = "POLICY_TYPE_CERTIFY",
+    PolicyTypeAccessRequest = "POLICY_TYPE_ACCESS_REQUEST",
+    PolicyTypeProvision = "POLICY_TYPE_PROVISION",
+}
+
+/**
+ * The CreatePolicyRequest message.
+ */
+export class CreatePolicyRequestInput extends SpeakeasyBase {
+    /**
+     * The description field.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "description" })
+    description?: string;
+
+    /**
+     * The displayName field.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "displayName" })
+    displayName?: string;
+
+    /**
+     * The policySteps field.
+     */
+    @SpeakeasyMetadata({ elemType: PolicyStepsInput })
+    @Expose({ name: "policySteps" })
+    @Transform(
+        ({ value }) => {
+            const obj: Record<string, PolicyStepsInput> = {};
+            for (const key in value) {
+                obj[key] = objectToClass(value[key], PolicyStepsInput);
+            }
+            return obj;
+        },
+        { toClassOnly: true }
+    )
+    policySteps?: Record<string, PolicyStepsInput>;
 
     /**
      * The policyType field.

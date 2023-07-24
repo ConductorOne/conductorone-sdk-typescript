@@ -2,7 +2,7 @@
 
 ### Available Operations
 
-* [search](#search) - Invokes the c1.api.user.v1.UserSearch.Search method.
+* [search](#search) - Search
 
 ## search
 
@@ -13,48 +13,58 @@ Invokes the c1.api.user.v1.UserSearch.Search method.
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiUserV1UserSearchSearchResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
-import { SearchUsersRequestUserStatuses, UserDirectoryStatus, UserStatus } from "conductorone-sdk-typescript/dist/sdk/models/shared";
+import { SearchUsersRequestUserStatuses } from "conductorone-sdk-typescript/dist/sdk/models/shared";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.userSearch.search({
   userExpandMask: {
     paths: [
-      "dolores",
+      "minus",
+      "esse",
     ],
   },
+  email: "Al.Price@gmail.com",
   excludeIds: [
-    "laboriosam",
+    "repellat",
     "velit",
   ],
   ids: [
-    "molestias",
-    "magnam",
-    "saepe",
-    "consequuntur",
+    "provident",
+    "consectetur",
+    "eligendi",
+    "dignissimos",
   ],
-  pageSize: 5801.07,
-  pageToken: "officiis",
-  query: "perspiciatis",
+  pageSize: 2358.34,
+  pageToken: "soluta",
+  query: "natus",
   refs: [
     {
-      id: "3e922a57-a15b-4e3e-8608-07e2b6e3ab88",
+      id: "a3f2ceda-7e23-4f22-9741-1faf4b7544e4",
     },
     {
-      id: "45f0597a-60ff-42a5-8a31-e94764a3e865",
+      id: "72e80285-7a5b-4404-a3a7-d575f1400e76",
+    },
+    {
+      id: "4ad7334e-c1b7-481b-b6a0-8088d100efad",
+    },
+    {
+      id: "a200ef04-22eb-4216-8cf9-ab8366c723ff",
     },
   ],
   roleIds: [
-    "esse",
-    "provident",
-    "quis",
-    "eum",
+    "laborum",
+    "natus",
+    "accusamus",
+    "doloremque",
   ],
   userStatuses: [
     SearchUsersRequestUserStatuses.Disabled,
-    SearchUsersRequestUserStatuses.Unknown,
-    SearchUsersRequestUserStatuses.Enabled,
-    SearchUsersRequestUserStatuses.Unknown,
+    SearchUsersRequestUserStatuses.Deleted,
   ],
 }).then((res: C1ApiUserV1UserSearchSearchResponse) => {
   if (res.statusCode == 200) {

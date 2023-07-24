@@ -2,8 +2,8 @@
 
 ### Available Operations
 
-* [get](#get) - Invokes the c1.api.app.v1.AppUsageControlsService.Get method.
-* [update](#update) - Invokes the c1.api.app.v1.AppUsageControlsService.Update method.
+* [get](#get) - Get
+* [update](#update) - Update
 
 ## get
 
@@ -15,10 +15,14 @@ Invokes the c1.api.app.v1.AppUsageControlsService.Get method.
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiAppV1AppUsageControlsServiceGetResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.appUsageControls.get({
-  appId: "perferendis",
+  appId: "ab",
 }).then((res: C1ApiAppV1AppUsageControlsServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -49,20 +53,24 @@ Invokes the c1.api.app.v1.AppUsageControlsService.Update method.
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiAppV1AppUsageControlsServiceUpdateResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.appUsageControls.update({
   updateAppUsageControlsRequest: {
     appUsageControls: {
-      appId: "doloremque",
+      appId: "maiores",
       notify: false,
-      notifyAfterDays: 4417.11,
+      notifyAfterDays: 6974.29,
       revoke: false,
-      revokeAfterDays: 2828.07,
+      revokeAfterDays: 3732.91,
     },
-    updateMask: "maiores",
+    updateMask: "voluptate",
   },
-  appId: "dicta",
+  appId: "autem",
 }).then((res: C1ApiAppV1AppUsageControlsServiceUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

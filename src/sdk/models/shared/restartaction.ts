@@ -6,11 +6,17 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- * The RestartAction message.
+ *  The restart action describes the outcome of policy steps for when the task was restarted. This can be applied to multiple steps since restart skips all pending next steps.
+ *
+ * @remarks
+ *
  */
 export class RestartAction extends SpeakeasyBase {
     /**
-     * The oldPolicyStepId field.
+     *  The step ID that was restarted. Potentially multiple "history" steps will reference this ID to indicate by what step they were restarted.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "oldPolicyStepId" })
@@ -22,7 +28,10 @@ export class RestartAction extends SpeakeasyBase {
     restartedAt?: Date;
 
     /**
-     * The userId field.
+     *  The user that submitted the restart action.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "userId" })

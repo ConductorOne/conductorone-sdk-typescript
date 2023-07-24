@@ -1,0 +1,15 @@
+# CreatePolicyRequestInput
+
+The CreatePolicyRequest message.
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `description`                                                                         | *string*                                                                              | :heavy_minus_sign:                                                                    | The description field.                                                                |
+| `displayName`                                                                         | *string*                                                                              | :heavy_minus_sign:                                                                    | The displayName field.                                                                |
+| `policySteps`                                                                         | Record<string, [PolicyStepsInput](../../models/shared/policystepsinput.md)>           | :heavy_minus_sign:                                                                    | The policySteps field.                                                                |
+| `policyType`                                                                          | [CreatePolicyRequestPolicyType](../../models/shared/createpolicyrequestpolicytype.md) | :heavy_minus_sign:                                                                    | The policyType field.                                                                 |
+| `postActions`                                                                         | [PolicyPostActions](../../models/shared/policypostactions.md)[]                       | :heavy_minus_sign:                                                                    | The postActions field.                                                                |
+| `reassignTasksToDelegates`                                                            | *boolean*                                                                             | :heavy_minus_sign:                                                                    | The reassignTasksToDelegates field.                                                   |

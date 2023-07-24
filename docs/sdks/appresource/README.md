@@ -2,8 +2,8 @@
 
 ### Available Operations
 
-* [get](#get) - Invokes the c1.api.app.v1.AppResourceService.Get method.
-* [list](#list) - Invokes the c1.api.app.v1.AppResourceService.List method.
+* [get](#get) - Get
+* [list](#list) - List
 
 ## get
 
@@ -15,12 +15,16 @@ Invokes the c1.api.app.v1.AppResourceService.Get method.
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiAppV1AppResourceServiceGetResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.appResource.get({
-  appId: "totam",
-  appResourceTypeId: "porro",
-  id: "a1ba928f-c816-4742-8b73-9205929396fe",
+  appId: "provident",
+  appResourceTypeId: "necessitatibus",
+  id: "9a3efa77-dfb1-44cd-a6ae-395efb9ba88f",
 }).then((res: C1ApiAppV1AppResourceServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -51,11 +55,15 @@ Invokes the c1.api.app.v1.AppResourceService.List method.
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiAppV1AppResourceServiceListResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.appResource.list({
-  appId: "fuga",
-  appResourceTypeId: "in",
+  appId: "amet",
+  appResourceTypeId: "deserunt",
 }).then((res: C1ApiAppV1AppResourceServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response

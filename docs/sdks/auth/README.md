@@ -2,7 +2,7 @@
 
 ### Available Operations
 
-* [introspect](#introspect) - Invokes the c1.api.auth.v1.Auth.Introspect method.
+* [introspect](#introspect) - Introspect
 
 ## introspect
 
@@ -14,7 +14,11 @@ Invokes the c1.api.auth.v1.Auth.Introspect method.
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiAuthV1AuthIntrospectResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.auth.introspect().then((res: C1ApiAuthV1AuthIntrospectResponse) => {
   if (res.statusCode == 200) {

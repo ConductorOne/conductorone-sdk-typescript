@@ -2,7 +2,7 @@
 
 ### Available Operations
 
-* [searchAppResourceTypes](#searchappresourcetypes) - Invokes the c1.api.app.v1.AppResourceSearch.SearchAppResourceTypes method.
+* [searchAppResourceTypes](#searchappresourcetypes) - Search App Resource Types
 
 ## searchAppResourceTypes
 
@@ -14,33 +14,39 @@ Invokes the c1.api.app.v1.AppResourceSearch.SearchAppResourceTypes method.
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.appResourceSearch.searchAppResourceTypes({
   appIds: [
-    "quidem",
-    "architecto",
-    "ipsa",
-    "reiciendis",
+    "molestiae",
+    "perferendis",
+    "nihil",
   ],
   excludeResourceTypeIds: [
-    "mollitia",
-    "laborum",
-    "dolores",
+    "distinctio",
+    "id",
   ],
   excludeResourceTypeTraitIds: [
-    "corporis",
+    "labore",
+    "suscipit",
   ],
-  pageSize: 1289.26,
+  pageSize: 6180.16,
   pageToken: "nobis",
-  query: "enim",
+  query: "eum",
   resourceTypeIds: [
-    "nemo",
-    "minima",
-    "excepturi",
+    "aspernatur",
+    "architecto",
+    "magnam",
+    "et",
   ],
   resourceTypeTraitIds: [
-    "iure",
+    "ullam",
+    "provident",
+    "quos",
   ],
 }).then((res: C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse) => {
   if (res.statusCode == 200) {

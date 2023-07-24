@@ -5,6 +5,9 @@
 import { SpeakeasyBase } from "../../../internal/utils";
 
 /**
- * The ConnectorProvision message.
+ *  Indicates that a connector should perform the provisioning. This object has no fields.
+ *
+ * @remarks
+ *
  */
 export class ConnectorProvision extends SpeakeasyBase {}

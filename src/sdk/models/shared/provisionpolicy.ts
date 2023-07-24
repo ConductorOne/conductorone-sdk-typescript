@@ -21,7 +21,10 @@ import { Expose, Type } from "class-transformer";
  */
 export class ProvisionPolicy extends SpeakeasyBase {
     /**
-     * The ConnectorProvision message.
+     *  Indicates that a connector should perform the provisioning. This object has no fields.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "connector" })
@@ -29,7 +32,10 @@ export class ProvisionPolicy extends SpeakeasyBase {
     connectorProvision?: ConnectorProvision;
 
     /**
-     * The DelegatedProvision message.
+     *  This provision step indicates that we should delegate provisioning to the configuration of another app entitlement. This app entitlement does not have to be one from the same app, but MUST be configured as a proxy binding leading into this entitlement.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "delegated" })
@@ -37,7 +43,10 @@ export class ProvisionPolicy extends SpeakeasyBase {
     delegatedProvision?: DelegatedProvision;
 
     /**
-     * The ManualProvision message.
+     *  Manual provisioning indicates that a human must intervene for the provisioning of this step.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "manual" })

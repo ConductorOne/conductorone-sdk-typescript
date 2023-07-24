@@ -2,7 +2,7 @@
 
 ### Available Operations
 
-* [listAppUsersForIdentityWithGrant](#listappusersforidentitywithgrant) - Invokes the c1.api.app.v1.AppEntitlementUserBindingService.ListAppUsersForIdentityWithGrant method.
+* [listAppUsersForIdentityWithGrant](#listappusersforidentitywithgrant) - List App Users For Identity With Grant
 
 ## listAppUsersForIdentityWithGrant
 
@@ -16,12 +16,16 @@ import {
   C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponse,
 } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.appEntitlementUserBinding.listAppUsersForIdentityWithGrant({
-  appEntitlementId: "quibusdam",
-  appId: "unde",
-  identityUserId: "nulla",
+  appEntitlementId: "ad",
+  appId: "natus",
+  identityUserId: "sed",
 }).then((res: C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponse) => {
   if (res.statusCode == 200) {
     // handle response

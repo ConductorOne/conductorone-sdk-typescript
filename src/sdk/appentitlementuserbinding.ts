@@ -3,6 +3,7 @@
  */
 
 import * as utils from "../internal/utils";
+import * as errors from "./models/errors";
 import * as operations from "./models/operations";
 import * as shared from "./models/shared";
 import { SDKConfiguration } from "./sdk";
@@ -16,6 +17,9 @@ export class AppEntitlementUserBinding {
     }
 
     /**
+     * List App Users For Identity With Grant
+     *
+     * @remarks
      * Invokes the c1.api.app.v1.AppEntitlementUserBindingService.ListAppUsersForIdentityWithGrant method.
      */
     async listAppUsersForIdentityWithGrant(
@@ -39,7 +43,8 @@ export class AppEntitlementUserBinding {
             req
         );
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
         headers["Accept"] = "application/json";
@@ -77,6 +82,13 @@ export class AppEntitlementUserBinding {
                     res.listAppUsersForIdentityWithGrantResponse = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.ListAppUsersForIdentityWithGrantResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
                     );
                 }
                 break;

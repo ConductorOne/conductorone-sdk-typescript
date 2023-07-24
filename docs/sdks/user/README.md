@@ -2,8 +2,8 @@
 
 ### Available Operations
 
-* [get](#get) - Invokes the c1.api.user.v1.UserService.Get method.
-* [list](#list) - Invokes the c1.api.user.v1.UserService.List method.
+* [get](#get) - Get
+* [list](#list) - List
 
 ## get
 
@@ -14,12 +14,15 @@ Invokes the c1.api.user.v1.UserService.Get method.
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiUserV1UserServiceGetResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
-import { UserDirectoryStatus, UserStatus } from "conductorone-sdk-typescript/dist/sdk/models/shared";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.user.get({
-  id: "3d689eee-9526-4f8d-986e-881ead4f0e10",
+  id: "0f739ae9-e057-4eb8-89e2-810331f3981d",
 }).then((res: C1ApiUserV1UserServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -49,9 +52,12 @@ Invokes the c1.api.user.v1.UserService.List method.
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiUserV1UserServiceListResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
-import { UserDirectoryStatus, UserStatus } from "conductorone-sdk-typescript/dist/sdk/models/shared";
 
-const sdk = new ConductoroneSDKTypescript();
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
 
 sdk.user.list().then((res: C1ApiUserV1UserServiceListResponse) => {
   if (res.statusCode == 200) {

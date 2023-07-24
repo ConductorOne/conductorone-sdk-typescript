@@ -3,6 +3,7 @@
  */
 
 import * as utils from "../internal/utils";
+import * as errors from "./models/errors";
 import * as operations from "./models/operations";
 import * as shared from "./models/shared";
 import { SDKConfiguration } from "./sdk";
@@ -16,6 +17,9 @@ export class RequestCatalogSearch {
     }
 
     /**
+     * Search Entitlements
+     *
+     * @remarks
      * Invokes the c1.api.requestcatalog.v1.RequestCatalogSearchService.SearchEntitlements method.
      */
     async searchEntitlements(
@@ -43,7 +47,8 @@ export class RequestCatalogSearch {
             }
         }
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...reqBodyHeaders, ...config?.headers };
         headers["Accept"] = "application/json";
@@ -82,6 +87,13 @@ export class RequestCatalogSearch {
                     res.requestCatalogSearchServiceSearchEntitlementsResponse = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.RequestCatalogSearchServiceSearchEntitlementsResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
                     );
                 }
                 break;

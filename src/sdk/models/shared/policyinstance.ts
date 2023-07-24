@@ -9,11 +9,17 @@ import { PolicyStepInstance } from "./policystepinstance";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The PolicyInstance message.
+ *  A policy instance is an object that contains a reference to the policy it was created from, the currently executing step, the next steps, and the history of previously completed steps.
+ *
+ * @remarks
+ *
  */
 export class PolicyInstance extends SpeakeasyBase {
     /**
-     * The Policy message.
+     *  A policy describes the behavior of the ConductorOne system when processing a task. You can describe the type, approvers, fallback behavior, and escalation processes.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "policy" })
@@ -21,9 +27,10 @@ export class PolicyInstance extends SpeakeasyBase {
     policy?: Policy;
 
     /**
-     * The PolicyStepInstance message.
+     *  The policy step instance includes a reference to an instance of a policy step that tracks state and has a unique ID.
      *
      * @remarks
+     *
      *
      * This message contains a oneof named instance. Only a single field of the following list may be set at a time:
      *   - approval
@@ -36,7 +43,10 @@ export class PolicyInstance extends SpeakeasyBase {
     policyStepInstance?: PolicyStepInstance;
 
     /**
-     * The history field.
+     *  An array of steps that were previously processed by the ticket with their outcomes set, in order.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata({ elemType: PolicyStepInstance })
     @Expose({ name: "history" })
@@ -44,7 +54,10 @@ export class PolicyInstance extends SpeakeasyBase {
     history?: PolicyStepInstance[];
 
     /**
-     * The next field.
+     *  An array of steps that will be processed by the ticket, in order.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata({ elemType: PolicyStep })
     @Expose({ name: "next" })

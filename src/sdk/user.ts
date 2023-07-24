@@ -3,6 +3,7 @@
  */
 
 import * as utils from "../internal/utils";
+import * as errors from "./models/errors";
 import * as operations from "./models/operations";
 import * as shared from "./models/shared";
 import { SDKConfiguration } from "./sdk";
@@ -16,6 +17,9 @@ export class User {
     }
 
     /**
+     * Get
+     *
+     * @remarks
      * Invokes the c1.api.user.v1.UserService.Get method.
      */
     async get(
@@ -32,7 +36,8 @@ export class User {
         );
         const url: string = utils.generateURL(baseURL, "/api/v1/users/{id}", req);
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
         headers["Accept"] = "application/json";
@@ -69,6 +74,13 @@ export class User {
                         JSON.parse(decodedRes),
                         shared.UserServiceGetResponse
                     );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
                 }
                 break;
         }
@@ -77,6 +89,9 @@ export class User {
     }
 
     /**
+     * List
+     *
+     * @remarks
      * Invokes the c1.api.user.v1.UserService.List method.
      */
     async list(
@@ -88,7 +103,8 @@ export class User {
         );
         const url: string = baseURL.replace(/\/$/, "") + "/api/v1/users";
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
         headers["Accept"] = "application/json";
@@ -124,6 +140,13 @@ export class User {
                     res.userServiceListResponse = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.UserServiceListResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
                     );
                 }
                 break;

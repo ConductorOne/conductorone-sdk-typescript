@@ -3,6 +3,7 @@
  */
 
 import * as utils from "../internal/utils";
+import * as errors from "./models/errors";
 import * as operations from "./models/operations";
 import * as shared from "./models/shared";
 import { SDKConfiguration } from "./sdk";
@@ -16,6 +17,9 @@ export class AppResource {
     }
 
     /**
+     * Get
+     *
+     * @remarks
      * Invokes the c1.api.app.v1.AppResourceService.Get method.
      */
     async get(
@@ -36,7 +40,8 @@ export class AppResource {
             req
         );
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
         headers["Accept"] = "application/json";
@@ -73,6 +78,13 @@ export class AppResource {
                         JSON.parse(decodedRes),
                         shared.AppResourceServiceGetResponse
                     );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
                 }
                 break;
         }
@@ -81,6 +93,9 @@ export class AppResource {
     }
 
     /**
+     * List
+     *
+     * @remarks
      * Invokes the c1.api.app.v1.AppResourceService.List method.
      */
     async list(
@@ -101,7 +116,8 @@ export class AppResource {
             req
         );
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
         headers["Accept"] = "application/json";
@@ -137,6 +153,13 @@ export class AppResource {
                     res.appResourceServiceListResponse = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.AppResourceServiceListResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
                     );
                 }
                 break;

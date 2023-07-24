@@ -3,6 +3,7 @@
  */
 
 import * as utils from "../internal/utils";
+import * as errors from "./models/errors";
 import * as operations from "./models/operations";
 import * as shared from "./models/shared";
 import { SDKConfiguration } from "./sdk";
@@ -16,6 +17,9 @@ export class TaskActions {
     }
 
     /**
+     * Approve
+     *
+     * @remarks
      * Invokes the c1.api.task.v1.TaskActionsService.Approve method.
      */
     async approve(
@@ -50,7 +54,8 @@ export class TaskActions {
             }
         }
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...reqBodyHeaders, ...config?.headers };
         headers["Accept"] = "application/json";
@@ -88,6 +93,13 @@ export class TaskActions {
                         JSON.parse(decodedRes),
                         shared.TaskActionsServiceApproveResponse
                     );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
                 }
                 break;
         }
@@ -96,6 +108,9 @@ export class TaskActions {
     }
 
     /**
+     * Comment
+     *
+     * @remarks
      * Invokes the c1.api.task.v1.TaskActionsService.Comment method.
      */
     async comment(
@@ -130,7 +145,8 @@ export class TaskActions {
             }
         }
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...reqBodyHeaders, ...config?.headers };
         headers["Accept"] = "application/json";
@@ -168,6 +184,13 @@ export class TaskActions {
                         JSON.parse(decodedRes),
                         shared.TaskActionsServiceCommentResponse
                     );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
                 }
                 break;
         }
@@ -176,6 +199,9 @@ export class TaskActions {
     }
 
     /**
+     * Deny
+     *
+     * @remarks
      * Invokes the c1.api.task.v1.TaskActionsService.Deny method.
      */
     async deny(
@@ -206,7 +232,8 @@ export class TaskActions {
             }
         }
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...reqBodyHeaders, ...config?.headers };
         headers["Accept"] = "application/json";
@@ -243,6 +270,104 @@ export class TaskActions {
                     res.taskActionsServiceDenyResponse = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.TaskActionsServiceDenyResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * Escalate To Emergency Access
+     *
+     * @remarks
+     * Invokes the c1.api.task.v1.TaskActionsService.EscalateToEmergencyAccess method.
+     */
+    async escalateToEmergencyAccess(
+        req: operations.C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest(req);
+        }
+
+        const baseURL: string = utils.templateUrl(
+            this.sdkConfiguration.serverURL,
+            this.sdkConfiguration.serverDefaults
+        );
+        const url: string = utils.generateURL(
+            baseURL,
+            "/api/v1/tasks/{task_id}/action/escalate",
+            req
+        );
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+                req,
+                "taskActionsServiceEscalateToEmergencyAccessRequest",
+                "json"
+            );
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
+        }
+
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
+
+        const headers = { ...reqBodyHeaders, ...config?.headers };
+        headers["Accept"] = "application/json";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this.sdkConfiguration.language} ${this.sdkConfiguration.sdkVersion} ${this.sdkConfiguration.genVersion} ${this.sdkConfiguration.openapiDocVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "post",
+            headers: headers,
+            responseType: "arraybuffer",
+            data: reqBody,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse =
+            new operations.C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.taskServiceActionResponse = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.TaskServiceActionResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
                     );
                 }
                 break;

@@ -3,6 +3,7 @@
  */
 
 import * as utils from "../internal/utils";
+import * as errors from "./models/errors";
 import * as operations from "./models/operations";
 import * as shared from "./models/shared";
 import { SDKConfiguration } from "./sdk";
@@ -16,6 +17,9 @@ export class AppReportAction {
     }
 
     /**
+     * Generate Report
+     *
+     * @remarks
      * Invokes the c1.api.app.v1.AppReportActionService.GenerateReport method.
      */
     async generateReport(
@@ -46,7 +50,8 @@ export class AppReportAction {
             }
         }
 
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...reqBodyHeaders, ...config?.headers };
         headers["Accept"] = "application/json";
@@ -83,6 +88,13 @@ export class AppReportAction {
                     res.appActionsServiceGenerateReportResponse = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.AppActionsServiceGenerateReportResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
                     );
                 }
                 break;

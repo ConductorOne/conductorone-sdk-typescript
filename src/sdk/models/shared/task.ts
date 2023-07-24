@@ -24,10 +24,14 @@ export enum TaskActions {
     TaskActionTypeProvisionAppUserTargetCreated = "TASK_ACTION_TYPE_PROVISION_APP_USER_TARGET_CREATED",
     TaskActionTypeRollbackSkipped = "TASK_ACTION_TYPE_ROLLBACK_SKIPPED",
     TaskActionTypeHardReset = "TASK_ACTION_TYPE_HARD_RESET",
+    TaskActionTypeEscalateToEmergencyAccess = "TASK_ACTION_TYPE_ESCALATE_TO_EMERGENCY_ACCESS",
 }
 
 /**
- * The processing field.
+ *  The processing state of a task as defined by the `processing_enum`
+ *
+ * @remarks
+ *
  */
 export enum TaskProcessing {
     TaskProcessingTypeUnspecified = "TASK_PROCESSING_TYPE_UNSPECIFIED",
@@ -37,7 +41,7 @@ export enum TaskProcessing {
 }
 
 /**
- *  State
+ *  The current state of the task as defined by the `state_enum`
  *
  * @remarks
  *
@@ -49,11 +53,17 @@ export enum TaskState {
 }
 
 /**
- * The Task message.
+ *  A fully-fleged task object. Includes its policy, references to external apps, its type, its processing history, and more.
+ *
+ * @remarks
+ *
  */
 export class Task extends SpeakeasyBase {
     /**
-     * The PolicyInstance message.
+     *  A policy instance is an object that contains a reference to the policy it was created from, the currently executing step, the next steps, and the history of previously completed steps.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "policy" })
@@ -77,28 +87,40 @@ export class Task extends SpeakeasyBase {
     taskType?: TaskType;
 
     /**
-     * The actions field.
+     *  The actions that can be performed on the task by the current user.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "actions" })
     actions?: TaskActions[];
 
     /**
-     * The analysisId field.
+     *  The ID of the analysis object associated with this task created by an analysis workflow if the analysis feature is enabled for your tenant.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "analysisId" })
     analysisId?: string;
 
     /**
-     * The annotations field.
+     *  An array of `google.protobuf.Any` annotations with various base64-encoded data.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "annotations" })
     annotations?: Record<string, any>[];
 
     /**
-     * The commentCount field.
+     *  The count of comments.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "commentCount" })
@@ -110,7 +132,10 @@ export class Task extends SpeakeasyBase {
     createdAt?: Date;
 
     /**
-     * The createdByUserId field.
+     *  The ID of the user that is the creator of this task. This may not always match the userId field.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "createdByUserId" })
@@ -122,28 +147,40 @@ export class Task extends SpeakeasyBase {
     deletedAt?: Date;
 
     /**
-     * The description field.
+     *  The description of the task. This is also known as justification.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     * The displayName field.
+     *  The display name of the task.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     * The emergencyAccess field.
+     *  A field indicating whether this task was created using an emergency access flow, or escalated to emergency access. On task creation, it will also use the app entitlement's emergency policy when possible.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "emergencyAccess" })
     emergencyAccess?: boolean;
 
     /**
-     * The externalRefs field.
+     *  An array of external references to the task. Historically that has been items like Jira task IDs. This is currently unused, but may come back in the future for integrations.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata({ elemType: ExternalRef })
     @Expose({ name: "externalRefs" })
@@ -151,7 +188,7 @@ export class Task extends SpeakeasyBase {
     externalRefs?: ExternalRef[];
 
     /**
-     *  General Metadata
+     *  The ID of the task.
      *
      * @remarks
      *
@@ -161,21 +198,27 @@ export class Task extends SpeakeasyBase {
     id?: string;
 
     /**
-     * The numericId field.
+     *  A human-usable numeric ID of a task which can be included in place of the fully qualified task id in path parmeters (but not search queries).
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "numericId" })
     numericId?: string;
 
     /**
-     * The processing field.
+     *  The processing state of a task as defined by the `processing_enum`
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "processing" })
     processing?: TaskProcessing;
 
     /**
-     *  State
+     *  The current state of the task as defined by the `state_enum`
      *
      * @remarks
      *
@@ -185,7 +228,10 @@ export class Task extends SpeakeasyBase {
     state?: TaskState;
 
     /**
-     * The stepApproverIds field.
+     *  An array of IDs belonging to Identity Users that are allowed to review this step in a task.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "stepApproverIds" })
@@ -197,7 +243,7 @@ export class Task extends SpeakeasyBase {
     updatedAt?: Date;
 
     /**
-     *  External IDS
+     *  The ID of the user that is the target of this task. This may be empty if we're targeting a specific app user that has no known identity user.
      *
      * @remarks
      *

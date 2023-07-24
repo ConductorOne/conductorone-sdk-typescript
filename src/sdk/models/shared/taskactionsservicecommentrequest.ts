@@ -7,11 +7,14 @@ import { TaskExpandMask } from "./taskexpandmask";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The TaskActionsServiceCommentRequest message.
+ *  The TaskActionsServiceCommentRequest object lets you create a new comment on a task.
+ *
+ * @remarks
+ *
  */
 export class TaskActionsServiceCommentRequest extends SpeakeasyBase {
     /**
-     *  Make sure to update the TicketExpandMask
+     *  The task expand mask is an array of strings that specifes the related objects the requester wishes to have returned when making a request where the expand mask is part of the input. Use '*' to view all possible responses.
      *
      * @remarks
      *
@@ -22,7 +25,10 @@ export class TaskActionsServiceCommentRequest extends SpeakeasyBase {
     taskExpandMask?: TaskExpandMask;
 
     /**
-     * The comment field.
+     *  The comment to be posted to the ticket
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "comment" })
