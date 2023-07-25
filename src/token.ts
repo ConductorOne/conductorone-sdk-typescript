@@ -73,8 +73,6 @@ export class Token {
             throw new Error(`Failed to get token: ${resp.status}`);
         }
 
-        console.log(resp.data);
-
         return resp.data.access_token;
     }
 }
