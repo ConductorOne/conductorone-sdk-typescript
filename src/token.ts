@@ -33,41 +33,41 @@ export class Token {
         const alg = "EdDSA";
         const privateKey = await jose.importJWK(jwk, alg);
 
-        const now = Math.floor(Date.now() / 1000);
         let aud = this.tokenUrl;
-        const {host} = new URL(aud);
-        if (host) {
-            aud = host;
+        // Remove any port number from the audience
+        const { hostname } = new URL(aud);
+        if (hostname) {
+            aud = hostname;
         }
 
-        const token = await new jose.SignJWT({ 'urn:example:claim': true })
+        const now = Math.floor(Date.now() / 1000);
+        // TODO: add nonce
+        const token = new jose.SignJWT({})
             .setProtectedHeader({ alg })
             .setIssuer(this.clientID)
             .setSubject(this.clientID)
-            .setAudience(aud)
+            .setAudience([aud])
             .setExpirationTime(now + 120)
             .setIssuedAt(now)
-            .setNotBefore(now - 120)
-            .sign(privateKey);
-
-        const body = new URLSearchParams({
+            .setNotBefore(now - 120);
+        const tokenStr = await token.sign(privateKey);
+        const body = {
             client_id: this.clientID,
             grant_type: 'client_credentials',
             client_assertion_type: assertionType,
-            client_assertion: token,
-        });
+            client_assertion: tokenStr,
+        };
 
-        const tokenUrl = new URL('https://' + this.tokenUrl + '/auth/v1/token');
+        const tokenUrl = new URL(`${this.tokenUrl}/auth/v1/token`);
 
-        console.log(tokenUrl.toString());
-        console.log(body.toString());
-
-        const resp = await this.defaultClient.post(tokenUrl.toString(), {
-            body: body,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-        });
+        const resp = await this.defaultClient.post(
+            tokenUrl.toString(),
+            new URLSearchParams(body),
+            {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            });
 
         if (resp.status !== 200) {
             throw new Error(`Failed to get token: ${resp.status}`);
@@ -75,6 +75,6 @@ export class Token {
 
         console.log(resp.data);
 
-        return "";
+        return resp.data.access_token;
     }
 }
