@@ -1,0 +1,17 @@
+# AppInput
+
+ The App object provides all of the details for an app, as well as some configuration.
+
+
+
+## Fields
+
+| Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `certifyPolicyId`                                                                       | *string*                                                                                | :heavy_minus_sign:                                                                      |  The ID of the Certify Policy associated with this App.<br/>                            |
+| `description`                                                                           | *string*                                                                                | :heavy_minus_sign:                                                                      |  The app's description.<br/>                                                            |
+| `displayName`                                                                           | *string*                                                                                | :heavy_minus_sign:                                                                      |  The app's display name.<br/>                                                           |
+| `grantPolicyId`                                                                         | *string*                                                                                | :heavy_minus_sign:                                                                      |  The ID of the Grant Policy associated with this App.<br/>                              |
+| `iconUrl`                                                                               | *string*                                                                                | :heavy_minus_sign:                                                                      |  The URL of an icon to display for the app.<br/>                                        |
+| `monthlyCostUsd`                                                                        | *number*                                                                                | :heavy_minus_sign:                                                                      |  The cost of an app per-seat, so that total cost can be calculated by the grant count.<br/> |
+| `revokePolicyId`                                                                        | *string*                                                                                | :heavy_minus_sign:                                                                      |  The ID of the Revoke Policy associated with this App.<br/>                             |

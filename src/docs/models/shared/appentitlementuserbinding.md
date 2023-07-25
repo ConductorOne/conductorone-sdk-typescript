@@ -1,0 +1,16 @@
+# AppEntitlementUserBinding
+
+ The AppEntitlementUserBinding represents the relationship that gives an app user access to an app entitlement
+
+
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `appEntitlementId`                                                                            | *string*                                                                                      | :heavy_minus_sign:                                                                            |  The ID of the app entitlement that the app user has access to<br/>                           |
+| `appId`                                                                                       | *string*                                                                                      | :heavy_minus_sign:                                                                            |  The ID of the app associated with the app entitlement<br/>                                   |
+| `appUserId`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            |  The ID of the app user that has access to the app entitlement<br/>                           |
+| `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `deletedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `deprovisionAt`                                                                               | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
