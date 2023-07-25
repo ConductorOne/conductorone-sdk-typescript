@@ -41,9 +41,11 @@ export class Token {
         }
 
         const now = Math.floor(Date.now() / 1000);
-        // TODO: add nonce
+        const nonce = new Uint8Array(16);
+        globalThis.crypto.getRandomValues(nonce);
+
         const token = new jose.SignJWT({})
-            .setProtectedHeader({ alg })
+            .setProtectedHeader({ alg, nonce: [...nonce].map(x => x.toString(16)).join('') })
             .setIssuer(this.clientID)
             .setSubject(this.clientID)
             .setAudience([aud])
