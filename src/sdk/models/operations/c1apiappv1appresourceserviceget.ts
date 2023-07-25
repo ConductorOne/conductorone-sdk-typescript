@@ -19,7 +19,10 @@ export class C1ApiAppV1AppResourceServiceGetRequest extends SpeakeasyBase {
 
 export class C1ApiAppV1AppResourceServiceGetResponse extends SpeakeasyBase {
     /**
-     * Successful response
+     *  The app resource service get response contains the app resource view and array of expanded items indicated by the request's expand mask.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     appResourceServiceGetResponse?: shared.AppResourceServiceGetResponse;

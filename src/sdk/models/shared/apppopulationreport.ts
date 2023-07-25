@@ -6,7 +6,10 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- * The state field.
+ *  The state field tracks the state of the AppPopulationReport. This state field can be one of REPORT_STATE_PENDING, REPORT_STATE_UNSPECIFIED, REPORT_STATE_OK, REPORT_STATE_ERROR.
+ *
+ * @remarks
+ *
  */
 export enum AppPopulationReportState {
     ReportStateUnspecified = "REPORT_STATE_UNSPECIFIED",
@@ -16,11 +19,17 @@ export enum AppPopulationReportState {
 }
 
 /**
- * The AppPopulationReport message.
+ *  The AppPopulationReport is a generated report for a specific app that gives details about the app's users. These details include what groups, roles, and other entitlements the users have access to.
+ *
+ * @remarks
+ *
  */
 export class AppPopulationReport extends SpeakeasyBase {
     /**
-     * The appId field.
+     *  The appId is the Id of the app which the report is generated for.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })
@@ -32,28 +41,40 @@ export class AppPopulationReport extends SpeakeasyBase {
     createdAt?: Date;
 
     /**
-     * The downloadUrl field.
+     *  The downloadUrl is the url used for downloading the AppPopulationReport.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "downloadUrl" })
     downloadUrl?: string;
 
     /**
-     * The hashes field.
+     *  The hashes field contains the file hashes of the report.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "hashes" })
     hashes?: Record<string, string>;
 
     /**
-     * The id field.
+     *  The id field.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
     id?: string;
 
     /**
-     * The state field.
+     *  The state field tracks the state of the AppPopulationReport. This state field can be one of REPORT_STATE_PENDING, REPORT_STATE_UNSPECIFIED, REPORT_STATE_OK, REPORT_STATE_ERROR.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "state" })

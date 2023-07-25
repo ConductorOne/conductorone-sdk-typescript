@@ -15,7 +15,8 @@
 
 ## addAccessEntitlements
 
-Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.AddAccessEntitlements method.
+ Add visibility bindings (access entitlements) to a catalog.
+
 
 ### Example Usage
 
@@ -35,12 +36,16 @@ sdk.requestCatalogManagement.addAccessEntitlements({
   requestCatalogManagementServiceAddAccessEntitlementsRequest: {
     accessEntitlements: [
       {
-        appId: "cum",
-        id: "88f3a8d8-f5c0-4b2f-afb7-b194a276b269",
+        appId: "velit",
+        id: "aae8d678-64db-4b67-9fd5-e60b375ed4f6",
+      },
+      {
+        appId: "reiciendis",
+        id: "bee41f33-317f-4e35-b60e-b1ea426555ba",
       },
     ],
   },
-  catalogId: "architecto",
+  catalogId: "adipisci",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceAddAccessEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -63,7 +68,8 @@ sdk.requestCatalogManagement.addAccessEntitlements({
 
 ## addAppEntitlements
 
-Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.AddAppEntitlements method.
+ Add requestable entitlements to a catalog.
+
 
 ### Example Usage
 
@@ -81,16 +87,24 @@ sdk.requestCatalogManagement.addAppEntitlements({
   requestCatalogManagementServiceAddAppEntitlementsRequest: {
     appEntitlements: [
       {
-        appId: "sapiente",
-        id: "e1f08f42-94e3-4698-b447-f603e8b445e8",
+        appId: "dolores",
+        id: "8744ed53-b88f-43a8-98f5-c0b2f2fb7b19",
       },
       {
-        appId: "sit",
-        id: "ca55efd2-0e45-47e1-858b-6a89fbe3a5aa",
+        appId: "dolore",
+        id: "a276b269-16fe-41f0-8f42-94e3698f447f",
+      },
+      {
+        appId: "ex",
+        id: "03e8b445-e80c-4a55-afd2-0e457e1858b6",
+      },
+      {
+        appId: "dolorum",
+        id: "89fbe3a5-aa8e-4482-8d0a-b4075088e518",
       },
     ],
   },
-  catalogId: "corrupti",
+  catalogId: "ex",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceAddAppEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -113,7 +127,8 @@ sdk.requestCatalogManagement.addAppEntitlements({
 
 ## create
 
-Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.Create method.
+ Creates a new request catalog.
+
 
 ### Example Usage
 
@@ -130,14 +145,11 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.requestCatalogManagement.create({
   requestCatalogExpandMask: {
     paths: [
-      "tempora",
-      "atque",
-      "fugit",
-      "ut",
+      "sit",
     ],
   },
-  description: "fugiat",
-  displayName: "voluptatem",
+  description: "vel",
+  displayName: "nostrum",
   published: false,
   visibleToEveryone: false,
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceCreateResponse) => {
@@ -162,7 +174,8 @@ sdk.requestCatalogManagement.create({
 
 ## delete
 
-Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.Delete method.
+ Delete a catalog.
+
 
 ### Example Usage
 
@@ -178,7 +191,7 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.requestCatalogManagement.delete({
   requestCatalogManagementServiceDeleteRequest: {},
-  id: "ab407508-8e51-4862-865e-904f3b1194b8",
+  id: "e904f3b1-194b-48ab-b603-a79f9dfe0ab7",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -201,7 +214,8 @@ sdk.requestCatalogManagement.delete({
 
 ## get
 
-Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.Get method.
+ Get a catalog.
+
 
 ### Example Usage
 
@@ -216,7 +230,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.requestCatalogManagement.get({
-  id: "abf603a7-9f9d-4fe0-ab7d-a8a50ce187f8",
+  id: "da8a50ce-187f-486b-8173-d689eee9526f",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -239,7 +253,8 @@ sdk.requestCatalogManagement.get({
 
 ## listEntitlementsForAccess
 
-Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.ListEntitlementsForAccess method.
+ List visibility bindings (access entitlements) for a catalog.
+
 
 ### Example Usage
 
@@ -256,7 +271,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.requestCatalogManagement.listEntitlementsForAccess({
-  catalogId: "suscipit",
+  catalogId: "corrupti",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -279,7 +294,8 @@ sdk.requestCatalogManagement.listEntitlementsForAccess({
 
 ## listEntitlementsPerCatalog
 
-Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.ListEntitlementsPerCatalog method.
+ List entitlements in a catalog that are requestable.
+
 
 ### Example Usage
 
@@ -296,7 +312,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.requestCatalogManagement.listEntitlementsPerCatalog({
-  catalogId: "quidem",
+  catalogId: "at",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsPerCatalogResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -319,7 +335,8 @@ sdk.requestCatalogManagement.listEntitlementsPerCatalog({
 
 ## removeAccessEntitlements
 
-Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.RemoveAccessEntitlements method.
+ Remove visibility bindings (access entitlements) to a catalog.
+
 
 ### Example Usage
 
@@ -339,24 +356,20 @@ sdk.requestCatalogManagement.removeAccessEntitlements({
   requestCatalogManagementServiceRemoveAccessEntitlementsRequest: {
     accessEntitlements: [
       {
-        appId: "et",
-        id: "73d689ee-e952-46f8-9986-e881ead4f0e1",
+        appId: "blanditiis",
+        id: "6e881ead-4f0e-4101-a563-f94e29e973e9",
       },
       {
-        appId: "accusantium",
-        id: "12563f94-e29e-4973-a922-a57a15be3e06",
+        appId: "consequuntur",
+        id: "2a57a15b-e3e0-4608-87e2-b6e3ab8845f0",
       },
       {
-        appId: "ipsa",
-        id: "807e2b6e-3ab8-4845-b059-7a60ff2a54a3",
-      },
-      {
-        appId: "quae",
-        id: "e94764a3-e865-4e79-96f9-251a5a9da660",
+        appId: "corporis",
+        id: "97a60ff2-a54a-431e-9476-4a3e865e7956",
       },
     ],
   },
-  catalogId: "repellat",
+  catalogId: "reiciendis",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceRemoveAccessEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -379,7 +392,8 @@ sdk.requestCatalogManagement.removeAccessEntitlements({
 
 ## removeAppEntitlements
 
-Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.RemoveAppEntitlements method.
+ Remove requestable entitlements from a catalog.
+
 
 ### Example Usage
 
@@ -399,24 +413,20 @@ sdk.requestCatalogManagement.removeAppEntitlements({
   requestCatalogManagementServiceRemoveAppEntitlementsRequest: {
     appEntitlements: [
       {
-        appId: "ullam",
-        id: "7bfaad4f-9efc-41b4-912c-1032648dc2f6",
+        appId: "aspernatur",
+        id: "51a5a9da-660f-4f57-bfaa-d4f9efc1b451",
       },
       {
-        appId: "dicta",
-        id: "5199ebfd-0e9f-4e6c-a32c-a3aed0117996",
+        appId: "fugit",
+        id: "c1032648-dc2f-4615-999e-bfd0e9fe6c63",
       },
       {
-        appId: "adipisci",
-        id: "12fde047-7177-48ff-a1d0-17476360a15d",
-      },
-      {
-        appId: "expedita",
-        id: "6a660659-a1ad-4eaa-b585-1d6c645b08b6",
+        appId: "fugit",
+        id: "ca3aed01-1799-4631-afde-04771778ff61",
       },
     ],
   },
-  catalogId: "beatae",
+  catalogId: "fugiat",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceRemoveAppEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -439,7 +449,8 @@ sdk.requestCatalogManagement.removeAppEntitlements({
 
 ## update
 
-Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.Update method.
+ Update a catalog.
+
 
 ### Example Usage
 
@@ -461,140 +472,57 @@ sdk.requestCatalogManagement.update({
           provisionPolicy: {
             connectorProvision: {},
             delegatedProvision: {
-              appId: "omnis",
-              entitlementId: "veritatis",
+              appId: "dicta",
+              entitlementId: "odio",
             },
             manualProvision: {
-              instructions: "rerum",
+              instructions: "tempora",
               userIds: [
-                "culpa",
-                "voluptatem",
-                "sapiente",
+                "ex",
+                "consectetur",
               ],
             },
           },
-          alias: "officiis",
-          appId: "architecto",
-          appResourceId: "fuga",
-          appResourceTypeId: "pariatur",
-          certifyPolicyId: "debitis",
+          appId: "aliquid",
+          appResourceId: "ipsa",
+          appResourceTypeId: "laborum",
+          certifyPolicyId: "sunt",
           complianceFrameworkValueIds: [
-            "alias",
+            "fugiat",
+            "expedita",
           ],
-          description: "deleniti",
-          displayName: "earum",
-          durationGrant: "ex",
+          description: "aliquid",
+          displayName: "officia",
+          durationGrant: "suscipit",
           durationUnset: {},
           emergencyGrantEnabled: false,
-          emergencyGrantPolicyId: "sapiente",
-          grantCount: "rem",
-          grantPolicyId: "minus",
-          id: "5f350d8c-db5a-4341-8143-010421813d52",
-          revokePolicyId: "ipsa",
-          riskLevelValueId: "quas",
-          slug: "eveniet",
-          systemBuiltin: false,
-        },
-        {
-          provisionPolicy: {
-            connectorProvision: {},
-            delegatedProvision: {
-              appId: "impedit",
-              entitlementId: "officiis",
-            },
-            manualProvision: {
-              instructions: "esse",
-              userIds: [
-                "sed",
-                "veniam",
-                "nesciunt",
-                "expedita",
-              ],
-            },
-          },
-          alias: "eum",
-          appId: "vel",
-          appResourceId: "voluptatum",
-          appResourceTypeId: "magnam",
-          certifyPolicyId: "exercitationem",
-          complianceFrameworkValueIds: [
-            "porro",
-          ],
-          description: "autem",
-          displayName: "nobis",
-          durationGrant: "laboriosam",
-          durationUnset: {},
-          emergencyGrantEnabled: false,
-          emergencyGrantPolicyId: "recusandae",
-          grantCount: "consequuntur",
-          grantPolicyId: "voluptatem",
-          id: "5e16deab-3fec-4957-8a64-584273a8418d",
-          revokePolicyId: "dicta",
-          riskLevelValueId: "nisi",
-          slug: "consequuntur",
-          systemBuiltin: false,
-        },
-        {
-          provisionPolicy: {
-            connectorProvision: {},
-            delegatedProvision: {
-              appId: "consectetur",
-              entitlementId: "aperiam",
-            },
-            manualProvision: {
-              instructions: "cupiditate",
-              userIds: [
-                "soluta",
-                "alias",
-                "omnis",
-                "eos",
-              ],
-            },
-          },
-          alias: "occaecati",
-          appId: "iste",
-          appResourceId: "magni",
-          appResourceTypeId: "inventore",
-          certifyPolicyId: "fuga",
-          complianceFrameworkValueIds: [
-            "voluptatibus",
-            "distinctio",
-            "omnis",
-            "delectus",
-          ],
-          description: "minima",
-          displayName: "praesentium",
-          durationGrant: "maxime",
-          durationUnset: {},
-          emergencyGrantEnabled: false,
-          emergencyGrantPolicyId: "magnam",
-          grantCount: "temporibus",
-          grantPolicyId: "quos",
-          id: "6e68e4be-0560-413f-99da-757a59ecfef6",
-          revokePolicyId: "voluptas",
-          riskLevelValueId: "debitis",
-          slug: "delectus",
-          systemBuiltin: false,
+          emergencyGrantPolicyId: "aliquid",
+          grantPolicyId: "perferendis",
+          revokePolicyId: "eum",
+          riskLevelValueId: "voluptas",
+          slug: "iste",
         },
       ],
       appIds: [
-        "minus",
+        "ab",
+        "error",
+        "possimus",
       ],
-      createdByUserId: "fuga",
-      description: "laborum",
-      displayName: "consectetur",
-      id: "383c2beb-4773-473c-8d72-f64d1db1f2c4",
+      createdByUserId: "voluptates",
+      description: "mollitia",
+      displayName: "laborum",
+      id: "b5851d6c-645b-408b-a189-1baa0fe1ade0",
       published: false,
       visibleToEveryone: false,
     },
     requestCatalogExpandMask: {
       paths: [
-        "illo",
+        "deleniti",
       ],
     },
-    updateMask: "accusantium",
+    updateMask: "earum",
   },
-  id: "661e9634-9e1c-4f9e-86e3-a437000ae6b6",
+  id: "6f8c5f35-0d8c-4db5-a341-814301042181",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

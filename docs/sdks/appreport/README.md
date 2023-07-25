@@ -6,7 +6,8 @@
 
 ## list
 
-Invokes the c1.api.app.v1.AppReportService.List method.
+ Get a list of reports for the given app.
+
 
 ### Example Usage
 
@@ -21,7 +22,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appReport.list({
-  appId: "sint",
+  appId: "incidunt",
 }).then((res: C1ApiAppV1AppReportServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response

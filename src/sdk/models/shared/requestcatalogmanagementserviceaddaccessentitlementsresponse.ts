@@ -5,6 +5,9 @@
 import { SpeakeasyBase } from "../../../internal/utils";
 
 /**
- * The RequestCatalogManagementServiceAddAccessEntitlementsResponse message.
+ *  Empty response with a status code indicating success.
+ *
+ * @remarks
+ *
  */
 export class RequestCatalogManagementServiceAddAccessEntitlementsResponse extends SpeakeasyBase {}

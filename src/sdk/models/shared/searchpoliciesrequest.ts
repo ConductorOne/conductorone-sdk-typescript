@@ -15,7 +15,10 @@ export enum SearchPoliciesRequestPolicyTypes {
 }
 
 /**
- * The SearchPoliciesRequest message.
+ *  Search Policies by a few properties.
+ *
+ * @remarks
+ *
  */
 export class SearchPoliciesRequest extends SpeakeasyBase {
     /**
@@ -29,7 +32,7 @@ export class SearchPoliciesRequest extends SpeakeasyBase {
     displayName?: string;
 
     /**
-     *  The pageSize where 0 <= pageSize <= 100.
+     *  The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
      *
      * @remarks
      *
@@ -59,7 +62,7 @@ export class SearchPoliciesRequest extends SpeakeasyBase {
     policyTypes?: SearchPoliciesRequestPolicyTypes[];
 
     /**
-     *  Query the policies based on name.
+     *  Query the policies with a fuzzy search on display name and description.
      *
      * @remarks
      *

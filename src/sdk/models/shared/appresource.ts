@@ -6,18 +6,27 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- * The AppResource message.
+ *  The app resource message is a single resource that can have entitlements.
+ *
+ * @remarks
+ *
  */
 export class AppResource extends SpeakeasyBase {
     /**
-     * The appId field.
+     *  The app that this resource belongs to.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })
     appId?: string;
 
     /**
-     * The appResourceTypeId field.
+     *  The resource type that this resource is.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appResourceTypeId" })
@@ -29,7 +38,10 @@ export class AppResource extends SpeakeasyBase {
     createdAt?: Date;
 
     /**
-     * The customDescription field.
+     *  A custom description that can be set for a resource.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "customDescription" })
@@ -41,28 +53,40 @@ export class AppResource extends SpeakeasyBase {
     deletedAt?: Date;
 
     /**
-     * The description field.
+     *  The description set for the resource.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     * The displayName field.
+     *  The display name for this resource.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     * The grantCount field.
+     *  The number of grants to this resource.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "grantCount" })
     grantCount?: string;
 
     /**
-     * The id field.
+     *  The id of the resource.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })

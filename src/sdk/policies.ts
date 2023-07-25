@@ -20,7 +20,8 @@ export class Policies {
      * Create
      *
      * @remarks
-     * Invokes the c1.api.policy.v1.Policies.Create method.
+     *  Create a policy.
+     *
      */
     async create(
         req: shared.CreatePolicyRequestInput,
@@ -103,7 +104,8 @@ export class Policies {
      * Delete
      *
      * @remarks
-     * Invokes the c1.api.policy.v1.Policies.Delete method.
+     *  Delete a policy by ID.
+     *
      */
     async delete(
         req: operations.C1ApiPolicyV1PoliciesDeleteRequest,
@@ -190,7 +192,8 @@ export class Policies {
      * Get
      *
      * @remarks
-     * Invokes the c1.api.policy.v1.Policies.Get method.
+     *  Get a policy by ID.
+     *
      */
     async get(
         req: operations.C1ApiPolicyV1PoliciesGetRequest,
@@ -262,7 +265,8 @@ export class Policies {
      * List
      *
      * @remarks
-     * Invokes the c1.api.policy.v1.Policies.List method.
+     *  List policies.
+     *
      */
     async list(config?: AxiosRequestConfig): Promise<operations.C1ApiPolicyV1PoliciesListResponse> {
         const baseURL: string = utils.templateUrl(
@@ -327,7 +331,8 @@ export class Policies {
      * Update
      *
      * @remarks
-     * Invokes the c1.api.policy.v1.Policies.Update method.
+     *  Update a policy by providing a policy object and an update mask.
+     *
      */
     async update(
         req: operations.C1ApiPolicyV1PoliciesUpdateRequest,

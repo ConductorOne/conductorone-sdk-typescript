@@ -8,7 +8,8 @@
 
 ## createGrantTask
 
-Invokes the c1.api.task.v1.TaskService.CreateGrantTask method.
+ Create a grant task
+
 
 ### Example Usage
 
@@ -25,18 +26,18 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.task.createGrantTask({
   taskExpandMask: {
     paths: [
-      "fugiat",
-      "officia",
-      "quos",
+      "magnam",
+      "exercitationem",
+      "ab",
     ],
   },
-  appEntitlementId: "placeat",
-  appId: "sit",
-  appUserId: "iusto",
-  description: "ipsa",
+  appEntitlementId: "porro",
+  appId: "autem",
+  appUserId: "nobis",
+  description: "laboriosam",
   emergencyAccess: false,
-  grantDuration: "voluptates",
-  identityUserId: "inventore",
+  grantDuration: "recusandae",
+  identityUserId: "consequuntur",
 }).then((res: C1ApiTaskV1TaskServiceCreateGrantTaskResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -59,7 +60,8 @@ sdk.task.createGrantTask({
 
 ## createRevokeTask
 
-Invokes the c1.api.task.v1.TaskService.CreateRevokeTask method.
+ Create a revoke task
+
 
 ### Example Usage
 
@@ -76,14 +78,14 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.task.createRevokeTask({
   taskExpandMask: {
     paths: [
-      "totam",
+      "exercitationem",
     ],
   },
-  appEntitlementId: "dolore",
-  appId: "eligendi",
-  appUserId: "distinctio",
-  description: "voluptatem",
-  identityUserId: "autem",
+  appEntitlementId: "necessitatibus",
+  appId: "quasi",
+  appUserId: "nisi",
+  description: "at",
+  identityUserId: "vero",
 }).then((res: C1ApiTaskV1TaskServiceCreateRevokeTaskResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -106,7 +108,8 @@ sdk.task.createRevokeTask({
 
 ## get
 
-Invokes the c1.api.task.v1.TaskService.Get method.
+ Get a task by ID
+
 
 ### Example Usage
 
@@ -121,7 +124,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.task.get({
-  id: "72d1ad87-9eeb-4966-9b85-efbd02bae0be",
+  id: "ab3fec95-78a6-4458-8273-a8418d162309",
 }).then((res: C1ApiTaskV1TaskServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response

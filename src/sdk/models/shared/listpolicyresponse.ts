@@ -7,10 +7,7 @@ import { Policy } from "./policy";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The ListPolicyResponse message contains a list of results and a nextPageToken if applicable
- *
- * @remarks
- *
+ * The ListPolicyResponse message.
  */
 export class ListPolicyResponse extends SpeakeasyBase {
     /**

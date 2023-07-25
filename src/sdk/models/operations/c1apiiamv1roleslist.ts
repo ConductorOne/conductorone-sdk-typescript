@@ -11,7 +11,10 @@ export class C1ApiIamV1RolesListResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
-     * Successful response
+     *  The ListRolesResponse message contains a list of results and a nextPageToken if applicable.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     listRolesResponse?: shared.ListRolesResponse;

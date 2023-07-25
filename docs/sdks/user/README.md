@@ -7,7 +7,8 @@
 
 ## get
 
-Invokes the c1.api.user.v1.UserService.Get method.
+ Get a user by ID.
+
 
 ### Example Usage
 
@@ -22,7 +23,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.user.get({
-  id: "0f739ae9-e057-4eb8-89e2-810331f3981d",
+  id: "e139dbc2-259b-41ab-9a8c-070e1084cb06",
 }).then((res: C1ApiUserV1UserServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -45,7 +46,8 @@ sdk.user.get({
 
 ## list
 
-Invokes the c1.api.user.v1.UserService.List method.
+ List users.
+
 
 ### Example Usage
 

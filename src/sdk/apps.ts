@@ -20,7 +20,8 @@ export class Apps {
      * Create
      *
      * @remarks
-     * Invokes the c1.api.app.v1.Apps.Create method.
+     *  Create a new app.
+     *
      */
     async create(
         req: shared.CreateAppRequest,
@@ -103,7 +104,8 @@ export class Apps {
      * Delete
      *
      * @remarks
-     * Invokes the c1.api.app.v1.Apps.Delete method.
+     *  Delete an app.
+     *
      */
     async delete(
         req: operations.C1ApiAppV1AppsDeleteRequest,
@@ -186,7 +188,8 @@ export class Apps {
      * Get
      *
      * @remarks
-     * Invokes the c1.api.app.v1.Apps.Get method.
+     *  Get an app by ID.
+     *
      */
     async get(
         req: operations.C1ApiAppV1AppsGetRequest,
@@ -257,7 +260,8 @@ export class Apps {
      * List
      *
      * @remarks
-     * Invokes the c1.api.app.v1.Apps.List method.
+     *  List all apps.
+     *
      */
     async list(config?: AxiosRequestConfig): Promise<operations.C1ApiAppV1AppsListResponse> {
         const baseURL: string = utils.templateUrl(
@@ -322,7 +326,8 @@ export class Apps {
      * Update
      *
      * @remarks
-     * Invokes the c1.api.app.v1.Apps.Update method.
+     *  Update an existing app.
+     *
      */
     async update(
         req: operations.C1ApiAppV1AppsUpdateRequest,

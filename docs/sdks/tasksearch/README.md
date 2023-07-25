@@ -6,7 +6,8 @@
 
 ## search
 
-Invokes the c1.api.task.v1.TaskSearchService.Search method.
+ Search tasks based on filters specified in the request body.
+
 
 ### Example Usage
 
@@ -18,9 +19,6 @@ import {
   TaskSearchRequestEmergencyStatus,
   TaskSearchRequestSortBy,
   TaskSearchRequestTaskStates,
-  TaskTypeCertifyOutcome,
-  TaskTypeGrantOutcome,
-  TaskTypeRevokeOutcome,
 } from "conductorone-sdk-typescript/dist/sdk/models/shared";
 
 const sdk = new ConductoroneSDKTypescript({
@@ -32,193 +30,131 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.taskSearch.search({
   taskExpandMask: {
     paths: [
-      "numquam",
+      "vero",
+      "voluptatem",
+      "ipsam",
     ],
   },
   accessReviewIds: [
-    "nesciunt",
-    "at",
+    "alias",
+    "quasi",
   ],
   accountOwnerIds: [
-    "dignissimos",
-    "optio",
-    "necessitatibus",
+    "maiores",
   ],
-  actorId: "corporis",
+  actorId: "enim",
   appEntitlementIds: [
-    "expedita",
+    "nulla",
+    "deserunt",
+    "esse",
   ],
   appResourceIds: [
-    "cupiditate",
-    "minima",
-    "placeat",
+    "reprehenderit",
+    "est",
   ],
   appResourceTypeIds: [
-    "neque",
-    "in",
+    "sint",
+    "accusamus",
   ],
   appUserSubjectIds: [
-    "eum",
-    "modi",
-    "corporis",
-    "magnam",
+    "hic",
+    "necessitatibus",
+    "asperiores",
+    "ex",
   ],
   applicationIds: [
-    "maiores",
-    "tempore",
-    "aperiam",
-    "libero",
+    "debitis",
+    "delectus",
   ],
   assigneesInIds: [
-    "labore",
+    "minus",
   ],
-  createdAfter: new Date("2021-11-05T06:31:50.944Z"),
-  createdBefore: new Date("2022-03-22T14:23:17.198Z"),
-  currentStep: TaskSearchRequestCurrentStep.TaskSearchCurrentStepUnspecified,
-  emergencyStatus: TaskSearchRequestEmergencyStatus.Emergency,
+  createdAfter: new Date("2021-08-25T17:55:33.849Z"),
+  createdBefore: new Date("2022-10-03T14:46:04.624Z"),
+  currentStep: TaskSearchRequestCurrentStep.TaskSearchCurrentStepApproval,
+  emergencyStatus: TaskSearchRequestEmergencyStatus.Unspecified,
   excludeAppEntitlementIds: [
-    "nostrum",
-    "est",
-    "impedit",
+    "magni",
+    "soluta",
+    "repudiandae",
+    "nam",
   ],
   excludeIds: [
-    "tempore",
-    "vero",
-    "odit",
-    "repellat",
+    "iusto",
+    "voluptate",
   ],
   includeDeleted: false,
   myWorkUserIds: [
-    "nemo",
-    "reprehenderit",
-    "aperiam",
-    "odio",
+    "dignissimos",
   ],
   openerIds: [
-    "in",
-    "ducimus",
+    "quo",
   ],
-  pageSize: 5678.46,
-  pageToken: "dolores",
+  pageSize: 5354.68,
+  pageToken: "quibusdam",
   previouslyActedOnIds: [
-    "veritatis",
-    "ducimus",
-    "voluptate",
+    "odit",
+    "voluptatibus",
   ],
-  query: "pariatur",
+  query: "vel",
   refs: [
     {
-      id: "ac646ecb-5734-409e-beb1-e5a2b12eb07f",
+      id: "d1db1f2c-4310-4661-a963-49e1cf9e06e3",
     },
     {
-      id: "116db995-45fc-495f-a889-70e189dbb30f",
-    },
-    {
-      id: "cb33ea05-5b19-47cd-84e2-f52d82d3513b",
-    },
-    {
-      id: "b6f48b65-6bcd-4b35-bf2e-4b27537a8cd9",
+      id: "a437000a-e6b6-4bc9-b8f7-59eac55a9741",
     },
   ],
   sortBy: TaskSearchRequestSortBy.TaskSearchSortByAccountOwner,
   subjectIds: [
-    "dolor",
-    "dicta",
+    "vitae",
   ],
   taskStates: [
-    TaskSearchRequestTaskStates.TaskStateClosed,
     TaskSearchRequestTaskStates.TaskStateUnspecified,
-    TaskSearchRequestTaskStates.TaskStateOpen,
   ],
   taskTypes: [
     {
-      taskTypeCertify: {
-        accessReviewId: "fugiat",
-        accessReviewSelection: "ad",
-        appEntitlementId: "aspernatur",
-        appId: "enim",
-        appUserId: "delectus",
-        identityUserId: "iusto",
-        outcome: TaskTypeCertifyOutcome.CertifyOutcomeDecertified,
-        outcomeTime: new Date("2022-11-09T04:25:16.566Z"),
-      },
-      taskTypeGrant: {
-        appEntitlementId: "ab",
-        appId: "incidunt",
-        appUserId: "accusamus",
-        grantDuration: "saepe",
-        identityUserId: "tempore",
-        outcome: TaskTypeGrantOutcome.GrantOutcomeGranted,
-        outcomeTime: new Date("2022-01-11T22:06:57.023Z"),
-      },
+      taskTypeCertify: {},
+      taskTypeGrant: {},
       taskTypeRevoke: {
         taskRevokeSource: {
           taskRevokeSourceExpired: {
-            expiredAt: new Date("2021-09-01T16:29:21.118Z"),
+            expiredAt: new Date("2022-05-22T20:46:18.043Z"),
           },
           taskRevokeSourceNonUsage: {
-            expiresAt: new Date("2022-04-08T01:20:58.799Z"),
-            lastLogin: new Date("2020-08-19T04:51:15.983Z"),
+            expiresAt: new Date("2022-08-19T19:35:40.341Z"),
+            lastLogin: new Date("2021-07-19T20:29:58.626Z"),
           },
           taskRevokeSourceRequest: {
-            requestUserId: "sequi",
+            requestUserId: "rem",
           },
           taskRevokeSourceReview: {
-            accessReviewId: "nihil",
-            certTicketId: "deleniti",
+            accessReviewId: "dolorum",
+            certTicketId: "odio",
           },
         },
-        appEntitlementId: "illo",
-        appId: "labore",
-        appUserId: "assumenda",
-        identityUserId: "aliquam",
-        outcome: TaskTypeRevokeOutcome.RevokeOutcomeError,
-        outcomeTime: new Date("2021-12-21T01:19:26.741Z"),
       },
     },
     {
-      taskTypeCertify: {
-        accessReviewId: "repudiandae",
-        accessReviewSelection: "consequatur",
-        appEntitlementId: "maxime",
-        appId: "aspernatur",
-        appUserId: "nam",
-        identityUserId: "expedita",
-        outcome: TaskTypeCertifyOutcome.CertifyOutcomeDecertified,
-        outcomeTime: new Date("2021-02-26T17:19:48.572Z"),
-      },
-      taskTypeGrant: {
-        appEntitlementId: "rerum",
-        appId: "dignissimos",
-        appUserId: "corporis",
-        grantDuration: "vero",
-        identityUserId: "similique",
-        outcome: TaskTypeGrantOutcome.GrantOutcomeCancelled,
-        outcomeTime: new Date("2022-10-14T22:48:07.675Z"),
-      },
+      taskTypeCertify: {},
+      taskTypeGrant: {},
       taskTypeRevoke: {
         taskRevokeSource: {
           taskRevokeSourceExpired: {
-            expiredAt: new Date("2022-03-25T12:03:53.573Z"),
+            expiredAt: new Date("2022-12-31T19:13:01.264Z"),
           },
           taskRevokeSourceNonUsage: {
-            expiresAt: new Date("2022-12-27T13:22:49.195Z"),
-            lastLogin: new Date("2022-09-05T04:00:47.034Z"),
+            expiresAt: new Date("2022-07-29T17:28:50.439Z"),
+            lastLogin: new Date("2022-12-08T19:16:07.063Z"),
           },
           taskRevokeSourceRequest: {
-            requestUserId: "quae",
+            requestUserId: "modi",
           },
           taskRevokeSourceReview: {
-            accessReviewId: "amet",
-            certTicketId: "illum",
+            accessReviewId: "neque",
+            certTicketId: "exercitationem",
           },
         },
-        appEntitlementId: "praesentium",
-        appId: "quidem",
-        appUserId: "cum",
-        identityUserId: "amet",
-        outcome: TaskTypeRevokeOutcome.RevokeOutcomeUnspecified,
-        outcomeTime: new Date("2022-06-27T01:16:52.839Z"),
       },
     },
   ],
@@ -231,10 +167,10 @@ sdk.taskSearch.search({
 
 ### Parameters
 
-| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `request`                                                            | [shared.TaskSearchRequest](../../models/shared/tasksearchrequest.md) | :heavy_check_mark:                                                   | The request object to use for the request.                           |
-| `config`                                                             | [AxiosRequestConfig](https://axios-http.com/docs/req_config)         | :heavy_minus_sign:                                                   | Available config options for making requests.                        |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `request`                                                                      | [shared.TaskSearchRequestInput](../../models/shared/tasksearchrequestinput.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
+| `config`                                                                       | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                   | :heavy_minus_sign:                                                             | Available config options for making requests.                                  |
 
 
 ### Response

@@ -7,11 +7,17 @@ import { AppEntitlementExpandMask } from "./appentitlementexpandmask";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The AppEntitlementSearchServiceSearchRequest message.
+ *  Search app entitlements by a variety of filters.
+ *
+ * @remarks
+ *
  */
 export class AppEntitlementSearchServiceSearchRequest extends SpeakeasyBase {
     /**
-     * The AppEntitlementExpandMask message.
+     *  The app entitlement expand mask allows the user to get additonal information when getting responses containing app entitlement views.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expandMask" })
@@ -19,91 +25,130 @@ export class AppEntitlementSearchServiceSearchRequest extends SpeakeasyBase {
     appEntitlementExpandMask?: AppEntitlementExpandMask;
 
     /**
-     * The accessReviewId field.
+     *  Search for app entitlements that are being reviewed as part of this access review campaign.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "accessReviewId" })
     accessReviewId?: string;
 
     /**
-     * The alias field.
+     *  Search for app entitlements that have this alias (exact match).
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "alias" })
     alias?: string;
 
     /**
-     * The appIds field.
+     *  Search for app entitlements contained in any of these apps.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appIds" })
     appIds?: string[];
 
     /**
-     * The appUserIds field.
+     *  Search for app entitlements that are granted to any of these app user ids.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appUserIds" })
     appUserIds?: string[];
 
     /**
-     * The complianceFrameworkIds field.
+     *  Search for app entitlements that are part of these compliace frameworks.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "complianceFrameworkIds" })
     complianceFrameworkIds?: string[];
 
     /**
-     * The excludeAppIds field.
+     *  Exclude app entitlements from the results that are in these app IDs.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "excludeAppIds" })
     excludeAppIds?: string[];
 
     /**
-     * The excludeAppUserIds field.
+     *  Exclude app entitlements from the results that these app users have granted.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "excludeAppUserIds" })
     excludeAppUserIds?: string[];
 
     /**
-     * The onlyGetExpiring field.
+     *  Restrict results to only those who have expiring app entitlement user bindings.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "onlyGetExpiring" })
     onlyGetExpiring?: boolean;
 
     /**
-     * The pageSize field.
+     *  The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageSize" })
     pageSize?: number;
 
     /**
-     * The pageToken field.
+     *  The pageToken field.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageToken" })
     pageToken?: string;
 
     /**
-     * The query field.
+     *  Query the app entitlements with a fuzzy search on display name and description.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "query" })
     query?: string;
 
     /**
-     * The resourceTypeIds field.
+     *  Search for app entitlements that are for items on these resource types.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "resourceTypeIds" })
     resourceTypeIds?: string[];
 
     /**
-     * The riskLevelIds field.
+     *  Search for app entitlements with these risk levels.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "riskLevelIds" })

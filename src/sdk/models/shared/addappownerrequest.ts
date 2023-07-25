@@ -5,6 +5,9 @@
 import { SpeakeasyBase } from "../../../internal/utils";
 
 /**
- * The AddAppOwnerRequest message.
+ *  Empty request body. Just placeholder for the add app owner request which uses URL values for input.
+ *
+ * @remarks
+ *
  */
 export class AddAppOwnerRequest extends SpeakeasyBase {}

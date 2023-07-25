@@ -6,7 +6,8 @@
 
 ## create
 
-Invokes the c1.api.iam.v1.PersonalClientService.Create method.
+ Create creates a new PersonalClient object for the current User.
+
 
 ### Example Usage
 
@@ -22,15 +23,14 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.personalClient.create({
   allowSourceCidr: [
-    "similique",
+    "deleniti",
   ],
-  displayName: "culpa",
-  expires: "aliquid",
+  displayName: "fugit",
+  expires: "fuga",
   scopedRoles: [
-    "quae",
-    "earum",
-    "vel",
-    "in",
+    "incidunt",
+    "atque",
+    "explicabo",
   ],
 }).then((res: C1ApiIamV1PersonalClientServiceCreateResponse) => {
   if (res.statusCode == 200) {

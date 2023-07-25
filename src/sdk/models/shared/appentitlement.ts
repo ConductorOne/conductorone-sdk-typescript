@@ -9,9 +9,10 @@ import { Expose, Transform, Type } from "class-transformer";
 export class AppEntitlementDurationUnset extends SpeakeasyBase {}
 
 /**
- * The AppEntitlement message.
+ *  The app entitlement represents one permission in a downstream App (SAAS) that can be granted. For example, GitHub Read vs GitHub Write.
  *
  * @remarks
+ *
  *
  * This message contains a oneof named max_grant_duration. Only a single field of the following list may be set at a time:
  *   - durationUnset
@@ -20,9 +21,10 @@ export class AppEntitlementDurationUnset extends SpeakeasyBase {}
  */
 export class AppEntitlement extends SpeakeasyBase {
     /**
-     * The ProvisionPolicy message.
+     *  ProvisionPolicy is a oneOf that indicates how a provision step should be processed.
      *
      * @remarks
+     *
      *
      * This message contains a oneof named typ. Only a single field of the following list may be set at a time:
      *   - connector
@@ -36,42 +38,60 @@ export class AppEntitlement extends SpeakeasyBase {
     provisionPolicy?: ProvisionPolicy;
 
     /**
-     * The alias field.
+     *  The alias of the app entitlement used by Cone. Also exact-match queryable.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "alias" })
     alias?: string;
 
     /**
-     * The appId field.
+     *  The ID of the app that is associated with the app entitlement.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })
     appId?: string;
 
     /**
-     * The appResourceId field.
+     *  The ID of the app resource that is associated with the app entitlement
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appResourceId" })
     appResourceId?: string;
 
     /**
-     * The appResourceTypeId field.
+     *  The ID of the app resource type that is associated with the app entitlement
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appResourceTypeId" })
     appResourceTypeId?: string;
 
     /**
-     * The certifyPolicyId field.
+     *  The ID of the policy that will be used for certify tickets related to the app entitlement.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "certifyPolicyId" })
     certifyPolicyId?: string;
 
     /**
-     * The complianceFrameworkValueIds field.
+     *  The IDs of different compliance frameworks associated with this app entitlement ex (SOX, HIPAA, PCI, etc.)
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "complianceFrameworkValueIds" })
@@ -88,14 +108,20 @@ export class AppEntitlement extends SpeakeasyBase {
     deletedAt?: Date;
 
     /**
-     * The description field.
+     *  The description of the app entitlement.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     * The displayName field.
+     *  The display name of the app entitlement.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
@@ -111,42 +137,60 @@ export class AppEntitlement extends SpeakeasyBase {
     durationUnset?: AppEntitlementDurationUnset;
 
     /**
-     * The emergencyGrantEnabled field.
+     *  This enables tasks to be created in an emergency and use a selected emergency access policy.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "emergencyGrantEnabled" })
     emergencyGrantEnabled?: boolean;
 
     /**
-     * The emergencyGrantPolicyId field.
+     *  The ID of the policy that will be used for emergency access grant tasks.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "emergencyGrantPolicyId" })
     emergencyGrantPolicyId?: string;
 
     /**
-     * The grantCount field.
+     *  The amount of grants open for this entitlement
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "grantCount" })
     grantCount?: string;
 
     /**
-     * The grantPolicyId field.
+     *  The ID of the policy that will be used for grant tickets related to the app entitlement.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "grantPolicyId" })
     grantPolicyId?: string;
 
     /**
-     * The id field.
+     *  The unique ID for the App Entitlement.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
     id?: string;
 
     /**
-     * The revokePolicyId field.
+     *  The ID of the policy that will be used for revoke tickets related to the app entitlement
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "revokePolicyId" })
@@ -160,14 +204,20 @@ export class AppEntitlement extends SpeakeasyBase {
     riskLevelValueId?: string;
 
     /**
-     * The slug field.
+     *  The slug is displayed as an oval next to the name in the frontend of C1, it tells you what permission the entitlement grants. See https://www.conductorone.com/docs/product/manage-access/entitlements/
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "slug" })
     slug?: string;
 
     /**
-     * The systemBuiltin field.
+     *  This field indicates if this is a system builtin entitlement.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "systemBuiltin" })
@@ -180,9 +230,10 @@ export class AppEntitlement extends SpeakeasyBase {
 }
 
 /**
- * The AppEntitlement message.
+ *  The app entitlement represents one permission in a downstream App (SAAS) that can be granted. For example, GitHub Read vs GitHub Write.
  *
  * @remarks
+ *
  *
  * This message contains a oneof named max_grant_duration. Only a single field of the following list may be set at a time:
  *   - durationUnset
@@ -191,9 +242,10 @@ export class AppEntitlement extends SpeakeasyBase {
  */
 export class AppEntitlementInput extends SpeakeasyBase {
     /**
-     * The ProvisionPolicy message.
+     *  ProvisionPolicy is a oneOf that indicates how a provision step should be processed.
      *
      * @remarks
+     *
      *
      * This message contains a oneof named typ. Only a single field of the following list may be set at a time:
      *   - connector
@@ -207,56 +259,70 @@ export class AppEntitlementInput extends SpeakeasyBase {
     provisionPolicy?: ProvisionPolicy;
 
     /**
-     * The alias field.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "alias" })
-    alias?: string;
-
-    /**
-     * The appId field.
+     *  The ID of the app that is associated with the app entitlement.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })
     appId?: string;
 
     /**
-     * The appResourceId field.
+     *  The ID of the app resource that is associated with the app entitlement
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appResourceId" })
     appResourceId?: string;
 
     /**
-     * The appResourceTypeId field.
+     *  The ID of the app resource type that is associated with the app entitlement
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appResourceTypeId" })
     appResourceTypeId?: string;
 
     /**
-     * The certifyPolicyId field.
+     *  The ID of the policy that will be used for certify tickets related to the app entitlement.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "certifyPolicyId" })
     certifyPolicyId?: string;
 
     /**
-     * The complianceFrameworkValueIds field.
+     *  The IDs of different compliance frameworks associated with this app entitlement ex (SOX, HIPAA, PCI, etc.)
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "complianceFrameworkValueIds" })
     complianceFrameworkValueIds?: string[];
 
     /**
-     * The description field.
+     *  The description of the app entitlement.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     * The displayName field.
+     *  The display name of the app entitlement.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
@@ -272,42 +338,40 @@ export class AppEntitlementInput extends SpeakeasyBase {
     durationUnset?: AppEntitlementDurationUnset;
 
     /**
-     * The emergencyGrantEnabled field.
+     *  This enables tasks to be created in an emergency and use a selected emergency access policy.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "emergencyGrantEnabled" })
     emergencyGrantEnabled?: boolean;
 
     /**
-     * The emergencyGrantPolicyId field.
+     *  The ID of the policy that will be used for emergency access grant tasks.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "emergencyGrantPolicyId" })
     emergencyGrantPolicyId?: string;
 
     /**
-     * The grantCount field.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "grantCount" })
-    grantCount?: string;
-
-    /**
-     * The grantPolicyId field.
+     *  The ID of the policy that will be used for grant tickets related to the app entitlement.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "grantPolicyId" })
     grantPolicyId?: string;
 
     /**
-     * The id field.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "id" })
-    id?: string;
-
-    /**
-     * The revokePolicyId field.
+     *  The ID of the policy that will be used for revoke tickets related to the app entitlement
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "revokePolicyId" })
@@ -321,16 +385,12 @@ export class AppEntitlementInput extends SpeakeasyBase {
     riskLevelValueId?: string;
 
     /**
-     * The slug field.
+     *  The slug is displayed as an oval next to the name in the frontend of C1, it tells you what permission the entitlement grants. See https://www.conductorone.com/docs/product/manage-access/entitlements/
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "slug" })
     slug?: string;
-
-    /**
-     * The systemBuiltin field.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "systemBuiltin" })
-    systemBuiltin?: boolean;
 }

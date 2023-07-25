@@ -17,7 +17,10 @@ export class C1ApiUserV1UserServiceListResponse extends SpeakeasyBase {
     rawResponse?: AxiosResponse;
 
     /**
-     * Successful response
+     *  The UserServiceListResponse message contains a list of results and a nextPageToken if applicable.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     userServiceListResponse?: shared.UserServiceListResponse;

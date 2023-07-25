@@ -20,7 +20,8 @@ export class Roles {
      * Get
      *
      * @remarks
-     * Invokes the c1.api.iam.v1.Roles.Get method.
+     *  Get a role by id.
+     *
      */
     async get(
         req: operations.C1ApiIamV1RolesGetRequest,
@@ -92,7 +93,8 @@ export class Roles {
      * List
      *
      * @remarks
-     * Invokes the c1.api.iam.v1.Roles.List method.
+     *  List all roles for the current user.
+     *
      */
     async list(config?: AxiosRequestConfig): Promise<operations.C1ApiIamV1RolesListResponse> {
         const baseURL: string = utils.templateUrl(
@@ -157,7 +159,8 @@ export class Roles {
      * Update
      *
      * @remarks
-     * Invokes the c1.api.iam.v1.Roles.Update method.
+     *  Update a role by passing a Role object.
+     *
      */
     async update(
         req: operations.C1ApiIamV1RolesUpdateRequest,

@@ -22,9 +22,9 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appResource.get({
-  appId: "provident",
-  appResourceTypeId: "necessitatibus",
-  id: "9a3efa77-dfb1-44cd-a6ae-395efb9ba88f",
+  appId: "consequatur",
+  appResourceTypeId: "est",
+  id: "d2abd442-6980-42d5-82a9-4bb4f63c969e",
 }).then((res: C1ApiAppV1AppResourceServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -62,8 +62,8 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appResource.list({
-  appId: "amet",
-  appResourceTypeId: "deserunt",
+  appId: "sint",
+  appResourceTypeId: "officia",
 }).then((res: C1ApiAppV1AppResourceServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response

@@ -16,7 +16,11 @@ export class C1ApiAppV1AppResourceTypeServiceGetRequest extends SpeakeasyBase {
 
 export class C1ApiAppV1AppResourceTypeServiceGetResponse extends SpeakeasyBase {
     /**
-     * Successful response
+     *  The AppResourceTypeServiceGetResponse contains an expanded array containing the expanded values indicated by the expand mask
+     *
+     * @remarks
+     *  in the request and an app resource type view containing the resource type and JSONPATHs indicating which objects are where in the expand mask.
+     *
      */
     @SpeakeasyMetadata()
     appResourceTypeServiceGetResponse?: shared.AppResourceTypeServiceGetResponse;

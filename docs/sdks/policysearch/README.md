@@ -6,7 +6,8 @@
 
 ## search
 
-Invokes the c1.api.policy.v1.PolicySearch.Search method.
+ Search policies based on filters specified in the request body.
+
 
 ### Example Usage
 
@@ -22,14 +23,13 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.policySearch.search({
-  displayName: "blanditiis",
-  pageSize: 4492.92,
-  pageToken: "dolore",
+  displayName: "quod",
+  pageSize: 2883.98,
+  pageToken: "ab",
   policyTypes: [
-    SearchPoliciesRequestPolicyTypes.PolicyTypeProvision,
-    SearchPoliciesRequestPolicyTypes.PolicyTypeProvision,
+    SearchPoliciesRequestPolicyTypes.PolicyTypeAccessRequest,
   ],
-  query: "ullam",
+  query: "id",
 }).then((res: C1ApiPolicyV1PolicySearchSearchResponse) => {
   if (res.statusCode == 200) {
     // handle response

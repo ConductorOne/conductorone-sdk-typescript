@@ -20,7 +20,8 @@ export class Connector {
      * Create Delegated
      *
      * @remarks
-     * Invokes the c1.api.app.v1.ConnectorService.CreateDelegated method.
+     *  Create a connector that is pending a connector config.
+     *
      */
     async createDelegated(
         req: operations.C1ApiAppV1ConnectorServiceCreateDelegatedRequest,
@@ -107,7 +108,8 @@ export class Connector {
      * Delete
      *
      * @remarks
-     * Invokes the c1.api.app.v1.ConnectorService.Delete method.
+     *  Delete a connector.
+     *
      */
     async delete(
         req: operations.C1ApiAppV1ConnectorServiceDeleteRequest,
@@ -198,7 +200,8 @@ export class Connector {
      * Get
      *
      * @remarks
-     * Invokes the c1.api.app.v1.ConnectorService.Get method.
+     *  Get a connector.
+     *
      */
     async get(
         req: operations.C1ApiAppV1ConnectorServiceGetRequest,
@@ -274,7 +277,8 @@ export class Connector {
      * Get Credentials
      *
      * @remarks
-     * Invokes the c1.api.app.v1.ConnectorService.GetCredentials method.
+     *  Get credentials for a connector.
+     *
      */
     async getCredentials(
         req: operations.C1ApiAppV1ConnectorServiceGetCredentialsRequest,
@@ -350,7 +354,8 @@ export class Connector {
      * List
      *
      * @remarks
-     * Invokes the c1.api.app.v1.ConnectorService.List method.
+     *  List connectors for an app.
+     *
      */
     async list(
         req: operations.C1ApiAppV1ConnectorServiceListRequest,
@@ -422,7 +427,8 @@ export class Connector {
      * Revoke Credential
      *
      * @remarks
-     * Invokes the c1.api.app.v1.ConnectorService.RevokeCredential method.
+     *  Revoke credentials for a connector.
+     *
      */
     async revokeCredential(
         req: operations.C1ApiAppV1ConnectorServiceRevokeCredentialRequest,
@@ -513,7 +519,8 @@ export class Connector {
      * Rotate Credential
      *
      * @remarks
-     * Invokes the c1.api.app.v1.ConnectorService.RotateCredential method.
+     *  Rotate credentials for a connector.
+     *
      */
     async rotateCredential(
         req: operations.C1ApiAppV1ConnectorServiceRotateCredentialRequest,
@@ -604,7 +611,8 @@ export class Connector {
      * Update
      *
      * @remarks
-     * Invokes the c1.api.app.v1.ConnectorService.Update method.
+     *  Update a connector.
+     *
      */
     async update(
         req: operations.C1ApiAppV1ConnectorServiceUpdateRequest,
@@ -695,7 +703,8 @@ export class Connector {
      * Update Delegated
      *
      * @remarks
-     * Invokes the c1.api.app.v1.ConnectorService.UpdateDelegated method.
+     *  Update a delegated connector.
+     *
      */
     async updateDelegated(
         req: operations.C1ApiAppV1ConnectorServiceUpdateDelegatedRequest,

@@ -11,7 +11,10 @@ import { Expose, Type } from "class-transformer";
  */
 export class UpdateAppEntitlementResponse extends SpeakeasyBase {
     /**
-     * The AppEntitlementView message.
+     *  The app entitlement view contains the serialized app entitlement and paths to objects referenced by the app entitlement.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appEntitlementView" })
@@ -19,7 +22,10 @@ export class UpdateAppEntitlementResponse extends SpeakeasyBase {
     appEntitlementView?: AppEntitlementView;
 
     /**
-     * The expanded field.
+     *  List of related objects
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expanded" })

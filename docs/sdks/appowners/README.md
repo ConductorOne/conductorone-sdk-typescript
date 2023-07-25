@@ -8,7 +8,8 @@
 
 ## add
 
-Invokes the c1.api.app.v1.AppOwners.Add method.
+ Adds an owner to an app.
+
 
 ### Example Usage
 
@@ -24,8 +25,8 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appOwners.add({
   addAppOwnerRequest: {},
-  appId: "labore",
-  userId: "delectus",
+  appId: "quasi",
+  userId: "repudiandae",
 }).then((res: C1ApiAppV1AppOwnersAddResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -48,7 +49,8 @@ sdk.appOwners.add({
 
 ## list
 
-Invokes the c1.api.app.v1.AppOwners.List method.
+ List owners of an app.
+
 
 ### Example Usage
 
@@ -63,7 +65,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appOwners.list({
-  appId: "eum",
+  appId: "sint",
 }).then((res: C1ApiAppV1AppOwnersListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -86,7 +88,8 @@ sdk.appOwners.list({
 
 ## remove
 
-Invokes the c1.api.app.v1.AppOwners.Remove method.
+ Removes an owner from an app.
+
 
 ### Example Usage
 
@@ -102,8 +105,8 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appOwners.remove({
   removeAppOwnerRequest: {},
-  appId: "non",
-  userId: "eligendi",
+  appId: "veritatis",
+  userId: "itaque",
 }).then((res: C1ApiAppV1AppOwnersRemoveResponse) => {
   if (res.statusCode == 200) {
     // handle response

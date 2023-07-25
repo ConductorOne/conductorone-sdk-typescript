@@ -6,7 +6,8 @@
 
 ## search
 
-Invokes the c1.api.user.v1.UserSearch.Search method.
+ Search users based on filters specified in the request body.
+
 
 ### Example Usage
 
@@ -24,47 +25,44 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.userSearch.search({
   userExpandMask: {
     paths: [
-      "minus",
-      "esse",
+      "dolores",
+      "assumenda",
     ],
   },
-  email: "Al.Price@gmail.com",
+  email: "Marcella.Schumm@gmail.com",
   excludeIds: [
-    "repellat",
-    "velit",
+    "accusamus",
+    "necessitatibus",
+    "tempore",
   ],
   ids: [
-    "provident",
-    "consectetur",
-    "eligendi",
-    "dignissimos",
+    "ea",
+    "autem",
+    "ipsam",
   ],
-  pageSize: 2358.34,
-  pageToken: "soluta",
-  query: "natus",
+  pageSize: 7029.52,
+  pageToken: "laudantium",
+  query: "corporis",
   refs: [
     {
-      id: "a3f2ceda-7e23-4f22-9741-1faf4b7544e4",
+      id: "fbd02bae-0be2-4d78-a259-e3ea4b5197f9",
     },
     {
-      id: "72e80285-7a5b-4404-a3a7-d575f1400e76",
+      id: "2443da7c-e52b-4895-8537-c6454efb0b34",
     },
     {
-      id: "4ad7334e-c1b7-481b-b6a0-8088d100efad",
+      id: "896c3ca5-acfb-4e2f-9570-7577929177de",
     },
     {
-      id: "a200ef04-22eb-4216-8cf9-ab8366c723ff",
+      id: "ac646ecb-5734-409e-beb1-e5a2b12eb07f",
     },
   ],
   roleIds: [
-    "laborum",
-    "natus",
-    "accusamus",
-    "doloremque",
+    "quasi",
   ],
   userStatuses: [
-    SearchUsersRequestUserStatuses.Disabled,
     SearchUsersRequestUserStatuses.Deleted,
+    SearchUsersRequestUserStatuses.Disabled,
   ],
 }).then((res: C1ApiUserV1UserSearchSearchResponse) => {
   if (res.statusCode == 200) {

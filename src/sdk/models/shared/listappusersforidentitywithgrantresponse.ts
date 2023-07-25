@@ -11,7 +11,10 @@ import { Expose, Type } from "class-transformer";
  */
 export class ListAppUsersForIdentityWithGrantResponse extends SpeakeasyBase {
     /**
-     * The bindings field.
+     *  The list of app users that may also have grant information.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata({ elemType: AppEntitlementUserBinding })
     @Expose({ name: "bindings" })

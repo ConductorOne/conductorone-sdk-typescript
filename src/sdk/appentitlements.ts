@@ -20,7 +20,8 @@ export class AppEntitlements {
      * Get
      *
      * @remarks
-     * Invokes the c1.api.app.v1.AppEntitlements.Get method.
+     *  Get an app entitlement by ID.
+     *
      */
     async get(
         req: operations.C1ApiAppV1AppEntitlementsGetRequest,
@@ -96,7 +97,8 @@ export class AppEntitlements {
      * List
      *
      * @remarks
-     * Invokes the c1.api.app.v1.AppEntitlements.List method.
+     *  List app entitlements associated with an app.
+     *
      */
     async list(
         req: operations.C1ApiAppV1AppEntitlementsListRequest,
@@ -168,7 +170,8 @@ export class AppEntitlements {
      * List For App Resource
      *
      * @remarks
-     * Invokes the c1.api.app.v1.AppEntitlements.ListForAppResource method.
+     *  List app entitlements associated with an app resource.
+     *
      */
     async listForAppResource(
         req: operations.C1ApiAppV1AppEntitlementsListForAppResourceRequest,
@@ -244,7 +247,8 @@ export class AppEntitlements {
      * List For App User
      *
      * @remarks
-     * Invokes the c1.api.app.v1.AppEntitlements.ListForAppUser method.
+     *  List app entitlements associated with an app user.
+     *
      */
     async listForAppUser(
         req: operations.C1ApiAppV1AppEntitlementsListForAppUserRequest,
@@ -320,7 +324,8 @@ export class AppEntitlements {
      * List Groups
      *
      * @remarks
-     * Invokes the c1.api.app.v1.AppEntitlements.ListGroups method.
+     *  List app groups associated with an app entitlement.
+     *
      */
     async listGroups(
         req: operations.C1ApiAppV1AppEntitlementsListGroupsRequest,
@@ -396,7 +401,8 @@ export class AppEntitlements {
      * List Users
      *
      * @remarks
-     * Invokes the c1.api.app.v1.AppEntitlements.ListUsers method.
+     *  List the users, as AppEntitlementUsers objects, of an app entitlement.
+     *
      */
     async listUsers(
         req: operations.C1ApiAppV1AppEntitlementsListUsersRequest,
@@ -472,7 +478,8 @@ export class AppEntitlements {
      * Update
      *
      * @remarks
-     * Invokes the c1.api.app.v1.AppEntitlements.Update method.
+     *  Update an app entitlement by ID.
+     *
      */
     async update(
         req: operations.C1ApiAppV1AppEntitlementsUpdateRequest,

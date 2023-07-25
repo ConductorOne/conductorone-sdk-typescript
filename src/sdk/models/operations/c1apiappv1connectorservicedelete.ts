@@ -19,7 +19,10 @@ export class C1ApiAppV1ConnectorServiceDeleteRequest extends SpeakeasyBase {
 
 export class C1ApiAppV1ConnectorServiceDeleteResponse extends SpeakeasyBase {
     /**
-     * Successful response
+     *  Empty response body. Status code indicates success.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     connectorServiceDeleteResponse?: shared.ConnectorServiceDeleteResponse;

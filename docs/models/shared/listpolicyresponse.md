@@ -1,7 +1,6 @@
 # ListPolicyResponse
 
- The ListPolicyResponse message contains a list of results and a nextPageToken if applicable
-
+The ListPolicyResponse message.
 
 
 ## Fields

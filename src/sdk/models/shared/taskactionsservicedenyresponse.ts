@@ -7,7 +7,10 @@ import { TaskView } from "./taskview";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The TaskActionsServiceDenyResponse message.
+ *  The TaskActionsServiceDenyResponse returns a task view with paths indicating the location of expanded items in the array.
+ *
+ * @remarks
+ *
  */
 export class TaskActionsServiceDenyResponse extends SpeakeasyBase {
     /**
@@ -22,14 +25,20 @@ export class TaskActionsServiceDenyResponse extends SpeakeasyBase {
     taskView?: TaskView;
 
     /**
-     * The expanded field.
+     *  List of serialized related objects.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expanded" })
     expanded?: Record<string, any>[];
 
     /**
-     * The ticketActionId field.
+     *  The ID of the ticket (task) deny action created by this request.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "ticketActionId" })

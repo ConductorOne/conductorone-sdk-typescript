@@ -19,7 +19,10 @@ export class C1ApiAppV1AppOwnersAddRequest extends SpeakeasyBase {
 
 export class C1ApiAppV1AppOwnersAddResponse extends SpeakeasyBase {
     /**
-     * Successful response
+     *  Empty response with a status code indicating success
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     addAppOwnerResponse?: shared.AddAppOwnerResponse;

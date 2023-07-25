@@ -6,53 +6,77 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- * The CreateAppRequest message.
+ *  The CreateAppRequest message is used to create a new app.
+ *
+ * @remarks
+ *
  */
 export class CreateAppRequest extends SpeakeasyBase {
     /**
-     * The certifyPolicyId field.
+     *  Creates the app with this certify policy.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "certifyPolicyId" })
     certifyPolicyId?: string;
 
     /**
-     * The description field.
+     *  Creates the app with this description.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     * The displayName field.
+     *  Creates the app with this display name.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     * The grantPolicyId field.
+     *  Creates the app with this grant policy.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "grantPolicyId" })
     grantPolicyId?: string;
 
     /**
-     * The monthlyCostUsd field.
+     *  Creates the app with this monthly cost per seat.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "monthlyCostUsd" })
     monthlyCostUsd?: number;
 
     /**
-     * The owners field.
+     *  Creates the app with this array of owners.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "owners" })
     owners?: string[];
 
     /**
-     * The revokePolicyId field.
+     *  Creates the app with this revoke policy.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "revokePolicyId" })

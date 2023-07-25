@@ -8,7 +8,10 @@ import { PolicySteps, PolicyStepsInput } from "./policysteps";
 import { Expose, Transform, Type } from "class-transformer";
 
 /**
- * The policyType field.
+ *  The enum of the policy type.
+ *
+ * @remarks
+ *
  */
 export enum C1ApiPolicyV1CreatePolicyRequestPolicyType {
     PolicyTypeUnspecified = "POLICY_TYPE_UNSPECIFIED",
@@ -20,25 +23,37 @@ export enum C1ApiPolicyV1CreatePolicyRequestPolicyType {
 }
 
 /**
- * The CreatePolicyRequest message.
+ *  The CreatePolicyRequest message is used to create a new policy.
+ *
+ * @remarks
+ *
  */
 export class CreatePolicyRequest extends SpeakeasyBase {
     /**
-     * The description field.
+     *  The description of the new policy.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     * The displayName field.
+     *  The display name of the new policy.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     * The policySteps field.
+     *  The map of policy type to policy steps. The key is the stringified version of the enum. See other policies for examples.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata({ elemType: PolicySteps })
     @Expose({ name: "policySteps" })
@@ -55,14 +70,20 @@ export class CreatePolicyRequest extends SpeakeasyBase {
     policySteps?: Record<string, PolicySteps>;
 
     /**
-     * The policyType field.
+     *  The enum of the policy type.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "policyType" })
     policyType?: C1ApiPolicyV1CreatePolicyRequestPolicyType;
 
     /**
-     * The postActions field.
+     *  Actions to occur after a policy finishes. As of now this is only valid on a certify policy to remediate a denied certification immediately.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata({ elemType: PolicyPostActions })
     @Expose({ name: "postActions" })
@@ -70,7 +91,10 @@ export class CreatePolicyRequest extends SpeakeasyBase {
     postActions?: PolicyPostActions[];
 
     /**
-     * The reassignTasksToDelegates field.
+     *  Allows reassigning tasks to delegates.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "reassignTasksToDelegates" })
@@ -78,7 +102,10 @@ export class CreatePolicyRequest extends SpeakeasyBase {
 }
 
 /**
- * The policyType field.
+ *  The enum of the policy type.
+ *
+ * @remarks
+ *
  */
 export enum CreatePolicyRequestPolicyType {
     PolicyTypeUnspecified = "POLICY_TYPE_UNSPECIFIED",
@@ -90,25 +117,37 @@ export enum CreatePolicyRequestPolicyType {
 }
 
 /**
- * The CreatePolicyRequest message.
+ *  The CreatePolicyRequest message is used to create a new policy.
+ *
+ * @remarks
+ *
  */
 export class CreatePolicyRequestInput extends SpeakeasyBase {
     /**
-     * The description field.
+     *  The description of the new policy.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     * The displayName field.
+     *  The display name of the new policy.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     * The policySteps field.
+     *  The map of policy type to policy steps. The key is the stringified version of the enum. See other policies for examples.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata({ elemType: PolicyStepsInput })
     @Expose({ name: "policySteps" })
@@ -125,14 +164,20 @@ export class CreatePolicyRequestInput extends SpeakeasyBase {
     policySteps?: Record<string, PolicyStepsInput>;
 
     /**
-     * The policyType field.
+     *  The enum of the policy type.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "policyType" })
     policyType?: CreatePolicyRequestPolicyType;
 
     /**
-     * The postActions field.
+     *  Actions to occur after a policy finishes. As of now this is only valid on a certify policy to remediate a denied certification immediately.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata({ elemType: PolicyPostActions })
     @Expose({ name: "postActions" })
@@ -140,7 +185,10 @@ export class CreatePolicyRequestInput extends SpeakeasyBase {
     postActions?: PolicyPostActions[];
 
     /**
-     * The reassignTasksToDelegates field.
+     *  Allows reassigning tasks to delegates.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "reassignTasksToDelegates" })

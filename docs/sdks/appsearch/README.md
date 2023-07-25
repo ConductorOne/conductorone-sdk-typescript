@@ -6,7 +6,8 @@
 
 ## search
 
-Invokes the c1.api.app.v1.AppSearch.Search method.
+ Search apps based on filters specified in the request body.
+
 
 ### Example Usage
 
@@ -22,20 +23,17 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appSearch.search({
   appIds: [
-    "natus",
-    "magni",
-    "sunt",
+    "dolor",
+    "necessitatibus",
   ],
-  displayName: "quo",
+  displayName: "odit",
   excludeAppIds: [
-    "pariatur",
-    "maxime",
-    "ea",
-    "excepturi",
+    "quasi",
+    "iure",
   ],
-  pageSize: 1399.72,
-  pageToken: "ea",
-  query: "accusantium",
+  pageSize: 9840.43,
+  pageToken: "debitis",
+  query: "eius",
 }).then((res: C1ApiAppV1AppSearchSearchResponse) => {
   if (res.statusCode == 200) {
     // handle response

@@ -11,7 +11,10 @@ export class C1ApiDirectoryV1DirectoryServiceCreateResponse extends SpeakeasyBas
     contentType: string;
 
     /**
-     * Successful response
+     *  The DirectoryServiceCreateResponse message.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     directoryServiceCreateResponse?: shared.DirectoryServiceCreateResponse;

@@ -7,11 +7,17 @@ import { App } from "./app";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The SearchAppsResponse message.
+ *  The SearchAppsResponse message contains a list of results and a nextPageToken if applicable.
+ *
+ * @remarks
+ *
  */
 export class SearchAppsResponse extends SpeakeasyBase {
     /**
-     * The list field.
+     *  The list of results containing up to X results, where X is the page size defined in the request.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata({ elemType: App })
     @Expose({ name: "list" })
@@ -19,14 +25,22 @@ export class SearchAppsResponse extends SpeakeasyBase {
     list?: App[];
 
     /**
-     * The nextPageToken field.
+     *  The nextPageToken is shown for the next page if the number of results is larger than the max page size.
+     *
+     * @remarks
+     *  The server returns one page of results and the nextPageToken until all results are retreived.
+     *  To retrieve the next page, use the same request and append a pageToken field with the value of nextPageToken shown on the previous page.
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "nextPageToken" })
     nextPageToken?: string;
 
     /**
-     * The notificationToken field.
+     *  Deprecated.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "notificationToken" })

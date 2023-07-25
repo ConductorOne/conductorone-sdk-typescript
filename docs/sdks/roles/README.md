@@ -8,7 +8,8 @@
 
 ## get
 
-Invokes the c1.api.iam.v1.Roles.Get method.
+ Get a role by id.
+
 
 ### Example Usage
 
@@ -23,7 +24,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.roles.get({
-  roleId: "necessitatibus",
+  roleId: "impedit",
 }).then((res: C1ApiIamV1RolesGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -46,7 +47,8 @@ sdk.roles.get({
 
 ## list
 
-Invokes the c1.api.iam.v1.Roles.List method.
+ List all roles for the current user.
+
 
 ### Example Usage
 
@@ -81,7 +83,8 @@ sdk.roles.list().then((res: C1ApiIamV1RolesListResponse) => {
 
 ## update
 
-Invokes the c1.api.iam.v1.Roles.Update method.
+ Update a role by passing a Role object.
+
 
 ### Example Usage
 
@@ -98,24 +101,19 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.roles.update({
   updateRoleRequestInput: {
     role: {
-      displayName: "animi",
-      id: "c55a9741-d311-4352-965b-b8a720261143",
-      name: "Kellie Bogisich",
+      displayName: "officiis",
       permissions: [
-        "distinctio",
-        "maxime",
-        "quia",
-        "quia",
+        "necessitatibus",
+        "sed",
       ],
       serviceRoles: [
-        "omnis",
-        "libero",
+        "nesciunt",
+        "expedita",
       ],
-      systemBuiltin: false,
     },
-    updateMask: "dicta",
+    updateMask: "eum",
   },
-  roleId: "id",
+  roleId: "vel",
 }).then((res: C1ApiIamV1RolesUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

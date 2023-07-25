@@ -16,7 +16,10 @@ export class C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlement
     contentType: string;
 
     /**
-     * Successful response
+     * The RequestCatalogManagementServiceListEntitlementsPerCatalogResponse message contains a list of results and a nextPageToken if applicable.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     requestCatalogManagementServiceListEntitlementsPerCatalogResponse?: shared.RequestCatalogManagementServiceListEntitlementsPerCatalogResponse;

@@ -7,11 +7,17 @@ import { AppUsageControls } from "./appusagecontrols";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The GetAppUsageControlsResponse message.
+ *  The GetAppUsageControlsResponse message contains the retrieved AppUsageControls object.
+ *
+ * @remarks
+ *
  */
 export class GetAppUsageControlsResponse extends SpeakeasyBase {
     /**
-     * The AppUsageControls message.
+     *  The AppUsageControls object describes some peripheral configuration for an app.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appUsageControls" })
@@ -19,7 +25,10 @@ export class GetAppUsageControlsResponse extends SpeakeasyBase {
     appUsageControls?: AppUsageControls;
 
     /**
-     * The hasUsageData field.
+     *  HasUsageData is false if the access entitlement for this app has no usage data.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "hasUsageData" })

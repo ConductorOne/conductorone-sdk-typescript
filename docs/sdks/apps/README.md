@@ -10,7 +10,8 @@
 
 ## create
 
-Invokes the c1.api.app.v1.Apps.Create method.
+ Create a new app.
+
 
 ### Example Usage
 
@@ -25,15 +26,18 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.apps.create({
-  certifyPolicyId: "nam",
-  description: "eaque",
-  displayName: "pariatur",
-  grantPolicyId: "nemo",
-  monthlyCostUsd: 9755.22,
+  certifyPolicyId: "repudiandae",
+  description: "ullam",
+  displayName: "expedita",
+  grantPolicyId: "nihil",
+  monthlyCostUsd: 9988.48,
   owners: [
-    "fugiat",
+    "sed",
+    "saepe",
+    "pariatur",
+    "accusantium",
   ],
-  revokePolicyId: "amet",
+  revokePolicyId: "consequuntur",
 }).then((res: C1ApiAppV1AppsCreateResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -56,7 +60,8 @@ sdk.apps.create({
 
 ## delete
 
-Invokes the c1.api.app.v1.Apps.Delete method.
+ Delete an app.
+
 
 ### Example Usage
 
@@ -72,7 +77,7 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.apps.delete({
   deleteAppRequest: {},
-  id: "0c5fbb25-8705-4320-ac73-d5fe9b90c289",
+  id: "8921cddc-6926-401f-b576-b0d5f0d30c5f",
 }).then((res: C1ApiAppV1AppsDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -95,7 +100,8 @@ sdk.apps.delete({
 
 ## get
 
-Invokes the c1.api.app.v1.Apps.Get method.
+ Get an app by ID.
+
 
 ### Example Usage
 
@@ -110,7 +116,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.apps.get({
-  id: "09b3fe49-a8d9-4cbf-8863-3323f9b77f3a",
+  id: "bb258705-3202-4c73-95fe-9b90c28909b3",
 }).then((res: C1ApiAppV1AppsGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -133,7 +139,8 @@ sdk.apps.get({
 
 ## list
 
-Invokes the c1.api.app.v1.Apps.List method.
+ List all apps.
+
 
 ### Example Usage
 
@@ -168,7 +175,8 @@ sdk.apps.list().then((res: C1ApiAppV1AppsListResponse) => {
 
 ## update
 
-Invokes the c1.api.app.v1.Apps.Update method.
+ Update an existing app.
+
 
 ### Example Usage
 
@@ -185,24 +193,17 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.apps.update({
   updateAppRequestInput: {
     app: {
-      appAccountId: "numquam",
-      appAccountName: "veritatis",
-      certifyPolicyId: "ipsa",
-      description: "ipsa",
-      displayName: "iure",
-      fieldMask: "odio",
-      grantPolicyId: "quaerat",
-      iconUrl: "accusamus",
-      id: "bf69280d-1ba7-47a8-9ebf-737ae4203ce5",
-      logoUri: "saepe",
-      monthlyCostUsd: 3834.64,
-      parentAppId: "deserunt",
-      revokePolicyId: "provident",
-      userCount: "minima",
+      certifyPolicyId: "asperiores",
+      description: "earum",
+      displayName: "modi",
+      grantPolicyId: "iste",
+      iconUrl: "dolorum",
+      monthlyCostUsd: 5356.33,
+      revokePolicyId: "pariatur",
     },
-    updateMask: "repellendus",
+    updateMask: "provident",
   },
-  id: "8a0d446c-e2af-47a7-bcf3-be453f870b32",
+  id: "cbf48633-323f-49b7-bf3a-4100674ebf69",
 }).then((res: C1ApiAppV1AppsUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

@@ -20,7 +20,8 @@ export class Directory {
      * Create
      *
      * @remarks
-     * Invokes the c1.api.directory.v1.DirectoryService.Create method.
+     *  Create a directory.
+     *
      */
     async create(
         req: shared.DirectoryServiceCreateRequest,
@@ -103,7 +104,8 @@ export class Directory {
      * Delete
      *
      * @remarks
-     * Invokes the c1.api.directory.v1.DirectoryService.Delete method.
+     *  Delete a directory by app_id.
+     *
      */
     async delete(
         req: operations.C1ApiDirectoryV1DirectoryServiceDeleteRequest,
@@ -190,7 +192,8 @@ export class Directory {
      * Get
      *
      * @remarks
-     * Invokes the c1.api.directory.v1.DirectoryService.Get method.
+     *  Get a directory by app_id.
+     *
      */
     async get(
         req: operations.C1ApiDirectoryV1DirectoryServiceGetRequest,
@@ -262,7 +265,8 @@ export class Directory {
      * List
      *
      * @remarks
-     * Invokes the c1.api.directory.v1.DirectoryService.List method.
+     *  List directories.
+     *
      */
     async list(
         config?: AxiosRequestConfig

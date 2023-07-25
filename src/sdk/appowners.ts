@@ -20,7 +20,8 @@ export class AppOwners {
      * Add
      *
      * @remarks
-     * Invokes the c1.api.app.v1.AppOwners.Add method.
+     *  Adds an owner to an app.
+     *
      */
     async add(
         req: operations.C1ApiAppV1AppOwnersAddRequest,
@@ -111,7 +112,8 @@ export class AppOwners {
      * List
      *
      * @remarks
-     * Invokes the c1.api.app.v1.AppOwners.List method.
+     *  List owners of an app.
+     *
      */
     async list(
         req: operations.C1ApiAppV1AppOwnersListRequest,
@@ -183,7 +185,8 @@ export class AppOwners {
      * Remove
      *
      * @remarks
-     * Invokes the c1.api.app.v1.AppOwners.Remove method.
+     *  Removes an owner from an app.
+     *
      */
     async remove(
         req: operations.C1ApiAppV1AppOwnersRemoveRequest,

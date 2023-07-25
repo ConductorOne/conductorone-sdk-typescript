@@ -11,7 +11,10 @@ export class C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse extends S
     contentType: string;
 
     /**
-     * Successful response
+     *  The SearchAppResourceTypesResponse message contains a list of results and a nextPageToken if applicable.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     searchAppResourceTypesResponse?: shared.SearchAppResourceTypesResponse;

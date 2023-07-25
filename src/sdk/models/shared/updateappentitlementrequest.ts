@@ -8,13 +8,17 @@ import { AppEntitlementExpandMask } from "./appentitlementexpandmask";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The UpdateAppEntitlementRequest message.
+ *  The UpdateAppEntitlementRequest message contains the app entitlement and the fields to be updated.
+ *
+ * @remarks
+ *
  */
 export class UpdateAppEntitlementRequestInput extends SpeakeasyBase {
     /**
-     * The AppEntitlement message.
+     *  The app entitlement represents one permission in a downstream App (SAAS) that can be granted. For example, GitHub Read vs GitHub Write.
      *
      * @remarks
+     *
      *
      * This message contains a oneof named max_grant_duration. Only a single field of the following list may be set at a time:
      *   - durationUnset
@@ -27,7 +31,10 @@ export class UpdateAppEntitlementRequestInput extends SpeakeasyBase {
     appEntitlement?: AppEntitlementInput;
 
     /**
-     * The AppEntitlementExpandMask message.
+     *  The app entitlement expand mask allows the user to get additonal information when getting responses containing app entitlement views.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expandMask" })

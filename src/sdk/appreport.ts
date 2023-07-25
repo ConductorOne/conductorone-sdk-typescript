@@ -20,7 +20,8 @@ export class AppReport {
      * List
      *
      * @remarks
-     * Invokes the c1.api.app.v1.AppReportService.List method.
+     *  Get a list of reports for the given app.
+     *
      */
     async list(
         req: operations.C1ApiAppV1AppReportServiceListRequest,

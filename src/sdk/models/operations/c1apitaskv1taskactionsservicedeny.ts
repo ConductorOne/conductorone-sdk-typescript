@@ -25,7 +25,10 @@ export class C1ApiTaskV1TaskActionsServiceDenyResponse extends SpeakeasyBase {
     rawResponse?: AxiosResponse;
 
     /**
-     * Successful response
+     *  The TaskActionsServiceDenyResponse returns a task view with paths indicating the location of expanded items in the array.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     taskActionsServiceDenyResponse?: shared.TaskActionsServiceDenyResponse;

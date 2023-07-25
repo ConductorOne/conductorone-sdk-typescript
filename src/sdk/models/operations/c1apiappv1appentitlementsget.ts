@@ -19,7 +19,10 @@ export class C1ApiAppV1AppEntitlementsGetResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
-     * Successful response
+     *  The get app entitlement response returns an entitlement view containing paths in the expanded array for the objects expanded as indicated by the expand mask in the request.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     getAppEntitlementResponse?: shared.GetAppEntitlementResponse;

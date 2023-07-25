@@ -1,15 +1,13 @@
 # RoleInput
 
-The Role message.
+ Role is a role that can be assigned to a user in ConductorOne.
+
 
 
 ## Fields
 
-| Field                    | Type                     | Required                 | Description              |
-| ------------------------ | ------------------------ | ------------------------ | ------------------------ |
-| `displayName`            | *string*                 | :heavy_minus_sign:       | The displayName field.   |
-| `id`                     | *string*                 | :heavy_minus_sign:       | The id field.            |
-| `name`                   | *string*                 | :heavy_minus_sign:       | The name field.          |
-| `permissions`            | *string*[]               | :heavy_minus_sign:       | The permissions field.   |
-| `serviceRoles`           | *string*[]               | :heavy_minus_sign:       | The serviceRoles field.  |
-| `systemBuiltin`          | *boolean*                | :heavy_minus_sign:       | The systemBuiltin field. |
+| Field                                          | Type                                           | Required                                       | Description                                    |
+| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
+| `displayName`                                  | *string*                                       | :heavy_minus_sign:                             |  The display name of the role.<br/>            |
+| `permissions`                                  | *string*[]                                     | :heavy_minus_sign:                             |  The list of permissions this role has.<br/>   |
+| `serviceRoles`                                 | *string*[]                                     | :heavy_minus_sign:                             |  The list of serviceRoles that this role has.<br/> |

@@ -7,7 +7,10 @@ import { TaskView } from "./taskview";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The TaskServiceGetResponse message.
+ *  The TaskServiceGetResponse returns a task view which has a task including JSONPATHs to the expanded items in the expanded array.
+ *
+ * @remarks
+ *
  */
 export class TaskServiceGetResponse extends SpeakeasyBase {
     /**
@@ -22,7 +25,10 @@ export class TaskServiceGetResponse extends SpeakeasyBase {
     taskView?: TaskView;
 
     /**
-     * The expanded field.
+     *  List of serialized related objects.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expanded" })

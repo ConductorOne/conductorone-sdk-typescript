@@ -20,7 +20,8 @@ export class User {
      * Get
      *
      * @remarks
-     * Invokes the c1.api.user.v1.UserService.Get method.
+     *  Get a user by ID.
+     *
      */
     async get(
         req: operations.C1ApiUserV1UserServiceGetRequest,
@@ -92,7 +93,8 @@ export class User {
      * List
      *
      * @remarks
-     * Invokes the c1.api.user.v1.UserService.List method.
+     *  List users.
+     *
      */
     async list(
         config?: AxiosRequestConfig

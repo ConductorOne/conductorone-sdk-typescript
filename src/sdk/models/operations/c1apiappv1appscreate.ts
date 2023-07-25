@@ -11,7 +11,10 @@ export class C1ApiAppV1AppsCreateResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
-     * Successful response
+     *  Returns the new app's values.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     createAppResponse?: shared.CreateAppResponse;

@@ -1,13 +1,14 @@
 # PersonalClientServiceCreateRequest
 
-The PersonalClientServiceCreateRequest message.
+ The PersonalClientServiceCreateRequest message contains the fields for creating a new personal client.
+
 
 
 ## Fields
 
-| Field                      | Type                       | Required                   | Description                |
-| -------------------------- | -------------------------- | -------------------------- | -------------------------- |
-| `allowSourceCidr`          | *string*[]                 | :heavy_minus_sign:         | The allowSourceCidr field. |
-| `displayName`              | *string*                   | :heavy_minus_sign:         | The displayName field.     |
-| `expires`                  | *string*                   | :heavy_minus_sign:         | N/A                        |
-| `scopedRoles`              | *string*[]                 | :heavy_minus_sign:         | The scopedRoles field.     |
+| Field                                              | Type                                               | Required                                           | Description                                        |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| `allowSourceCidr`                                  | *string*[]                                         | :heavy_minus_sign:                                 |  A list of CIDRs to restrict this credential to.<br/> |
+| `displayName`                                      | *string*                                           | :heavy_minus_sign:                                 |  The display name for the new personal client.<br/> |
+| `expires`                                          | *string*                                           | :heavy_minus_sign:                                 | N/A                                                |
+| `scopedRoles`                                      | *string*[]                                         | :heavy_minus_sign:                                 |  The list of roles to restrict the credential to.<br/> |

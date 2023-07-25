@@ -20,7 +20,8 @@ export class RequestCatalogManagement {
      * Add Access Entitlements
      *
      * @remarks
-     * Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.AddAccessEntitlements method.
+     *  Add visibility bindings (access entitlements) to a catalog.
+     *
      */
     async addAccessEntitlements(
         req: operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceAddAccessEntitlementsRequest,
@@ -117,7 +118,8 @@ export class RequestCatalogManagement {
      * Add App Entitlements
      *
      * @remarks
-     * Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.AddAppEntitlements method.
+     *  Add requestable entitlements to a catalog.
+     *
      */
     async addAppEntitlements(
         req: operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceAddAppEntitlementsRequest,
@@ -214,7 +216,8 @@ export class RequestCatalogManagement {
      * Create
      *
      * @remarks
-     * Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.Create method.
+     *  Creates a new request catalog.
+     *
      */
     async create(
         req: shared.RequestCatalogManagementServiceCreateRequest,
@@ -297,7 +300,8 @@ export class RequestCatalogManagement {
      * Delete
      *
      * @remarks
-     * Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.Delete method.
+     *  Delete a catalog.
+     *
      */
     async delete(
         req: operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest,
@@ -386,7 +390,8 @@ export class RequestCatalogManagement {
      * Get
      *
      * @remarks
-     * Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.Get method.
+     *  Get a catalog.
+     *
      */
     async get(
         req: operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest,
@@ -460,7 +465,8 @@ export class RequestCatalogManagement {
      * List Entitlements For Access
      *
      * @remarks
-     * Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.ListEntitlementsForAccess method.
+     *  List visibility bindings (access entitlements) for a catalog.
+     *
      */
     async listEntitlementsForAccess(
         req: operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest,
@@ -542,7 +548,8 @@ export class RequestCatalogManagement {
      * List Entitlements Per Catalog
      *
      * @remarks
-     * Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.ListEntitlementsPerCatalog method.
+     *  List entitlements in a catalog that are requestable.
+     *
      */
     async listEntitlementsPerCatalog(
         req: operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsPerCatalogRequest,
@@ -624,7 +631,8 @@ export class RequestCatalogManagement {
      * Remove Access Entitlements
      *
      * @remarks
-     * Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.RemoveAccessEntitlements method.
+     *  Remove visibility bindings (access entitlements) to a catalog.
+     *
      */
     async removeAccessEntitlements(
         req: operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceRemoveAccessEntitlementsRequest,
@@ -721,7 +729,8 @@ export class RequestCatalogManagement {
      * Remove App Entitlements
      *
      * @remarks
-     * Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.RemoveAppEntitlements method.
+     *  Remove requestable entitlements from a catalog.
+     *
      */
     async removeAppEntitlements(
         req: operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceRemoveAppEntitlementsRequest,
@@ -818,7 +827,8 @@ export class RequestCatalogManagement {
      * Update
      *
      * @remarks
-     * Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.Update method.
+     *  Update a catalog.
+     *
      */
     async update(
         req: operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateRequest,

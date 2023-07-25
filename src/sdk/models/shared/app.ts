@@ -6,25 +6,37 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- * The App message.
+ *  The App object provides all of the details for an app, as well as some configuration.
+ *
+ * @remarks
+ *
  */
 export class App extends SpeakeasyBase {
     /**
-     * The appAccountId field.
+     *  The ID of the Account named by AccountName.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appAccountId" })
     appAccountId?: string;
 
     /**
-     * The appAccountName field.
+     *  The AccountName of the app. For example, AWS is AccountID, Github is Org Name, and Okta is Okta Subdomain.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appAccountName" })
     appAccountName?: string;
 
     /**
-     * The certifyPolicyId field.
+     *  The ID of the Certify Policy associated with this App.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "certifyPolicyId" })
@@ -41,14 +53,20 @@ export class App extends SpeakeasyBase {
     deletedAt?: Date;
 
     /**
-     * The description field.
+     *  The app's description.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     * The displayName field.
+     *  The app's display name.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
@@ -59,49 +77,70 @@ export class App extends SpeakeasyBase {
     fieldMask?: string;
 
     /**
-     * The grantPolicyId field.
+     *  The ID of the Grant Policy associated with this App.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "grantPolicyId" })
     grantPolicyId?: string;
 
     /**
-     * The iconUrl field.
+     *  The URL of an icon to display for the app.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "iconUrl" })
     iconUrl?: string;
 
     /**
-     * The id field.
+     *  The ID of the app.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
     id?: string;
 
     /**
-     * The logoUri field.
+     *  The URL of a logo to display for the app.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "logoUri" })
     logoUri?: string;
 
     /**
-     * The monthlyCostUsd field.
+     *  The cost of an app per-seat, so that total cost can be calculated by the grant count.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "monthlyCostUsd" })
     monthlyCostUsd?: number;
 
     /**
-     * The parentAppId field.
+     *  The ID of the app that created this app, if any.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "parentAppId" })
     parentAppId?: string;
 
     /**
-     * The revokePolicyId field.
+     *  The ID of the Revoke Policy associated with this App.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "revokePolicyId" })
@@ -113,7 +152,10 @@ export class App extends SpeakeasyBase {
     updatedAt?: Date;
 
     /**
-     * The userCount field.
+     *  The number of users with grants to this app.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "userCount" })
@@ -121,101 +163,79 @@ export class App extends SpeakeasyBase {
 }
 
 /**
- * The App message.
+ *  The App object provides all of the details for an app, as well as some configuration.
+ *
+ * @remarks
+ *
  */
 export class AppInput extends SpeakeasyBase {
     /**
-     * The appAccountId field.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "appAccountId" })
-    appAccountId?: string;
-
-    /**
-     * The appAccountName field.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "appAccountName" })
-    appAccountName?: string;
-
-    /**
-     * The certifyPolicyId field.
+     *  The ID of the Certify Policy associated with this App.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "certifyPolicyId" })
     certifyPolicyId?: string;
 
     /**
-     * The description field.
+     *  The app's description.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     * The displayName field.
+     *  The app's display name.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
-    @SpeakeasyMetadata()
-    @Expose({ name: "fieldMask" })
-    fieldMask?: string;
-
     /**
-     * The grantPolicyId field.
+     *  The ID of the Grant Policy associated with this App.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "grantPolicyId" })
     grantPolicyId?: string;
 
     /**
-     * The iconUrl field.
+     *  The URL of an icon to display for the app.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "iconUrl" })
     iconUrl?: string;
 
     /**
-     * The id field.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "id" })
-    id?: string;
-
-    /**
-     * The logoUri field.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "logoUri" })
-    logoUri?: string;
-
-    /**
-     * The monthlyCostUsd field.
+     *  The cost of an app per-seat, so that total cost can be calculated by the grant count.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "monthlyCostUsd" })
     monthlyCostUsd?: number;
 
     /**
-     * The parentAppId field.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "parentAppId" })
-    parentAppId?: string;
-
-    /**
-     * The revokePolicyId field.
+     *  The ID of the Revoke Policy associated with this App.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "revokePolicyId" })
     revokePolicyId?: string;
-
-    /**
-     * The userCount field.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "userCount" })
-    userCount?: string;
 }

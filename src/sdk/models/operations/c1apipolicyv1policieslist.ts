@@ -11,10 +11,7 @@ export class C1ApiPolicyV1PoliciesListResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
-     *  The ListPolicyResponse message contains a list of results and a nextPageToken if applicable
-     *
-     * @remarks
-     *
+     * Successful response
      */
     @SpeakeasyMetadata()
     listPolicyResponse?: shared.ListPolicyResponse;

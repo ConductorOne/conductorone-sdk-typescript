@@ -71,9 +71,10 @@ export class Task extends SpeakeasyBase {
     policyInstance?: PolicyInstance;
 
     /**
-     * The TaskType message.
+     *  Task Type provides configuration for the type of task: certify, grant, or revoke
      *
      * @remarks
+     *
      *
      * This message contains a oneof named task_type. Only a single field of the following list may be set at a time:
      *   - grant

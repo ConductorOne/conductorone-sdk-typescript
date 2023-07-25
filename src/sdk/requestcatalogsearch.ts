@@ -20,7 +20,8 @@ export class RequestCatalogSearch {
      * Search Entitlements
      *
      * @remarks
-     * Invokes the c1.api.requestcatalog.v1.RequestCatalogSearchService.SearchEntitlements method.
+     *  Search request catalogs based on filters specified in the request body.
+     *
      */
     async searchEntitlements(
         req: shared.RequestCatalogSearchServiceSearchEntitlementsRequest,

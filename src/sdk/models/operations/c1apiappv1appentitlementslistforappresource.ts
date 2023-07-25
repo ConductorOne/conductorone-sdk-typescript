@@ -22,7 +22,10 @@ export class C1ApiAppV1AppEntitlementsListForAppResourceResponse extends Speakea
     contentType: string;
 
     /**
-     * Successful response
+     *  The ListAppEntitlementsResponse message contains a list of results and a nextPageToken if applicable.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     listAppEntitlementsResponse?: shared.ListAppEntitlementsResponse;

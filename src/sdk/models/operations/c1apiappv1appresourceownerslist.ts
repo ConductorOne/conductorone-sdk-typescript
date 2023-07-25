@@ -22,7 +22,10 @@ export class C1ApiAppV1AppResourceOwnersListResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
-     * Successful response
+     *  The ListAppResourceOwnersResponse message contains a list of results and a nextPageToken if applicable
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     listAppResourceOwnersResponse?: shared.ListAppResourceOwnersResponse;

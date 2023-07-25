@@ -40,7 +40,10 @@ export enum ProvisionInstanceState {
  */
 export class ProvisionInstance extends SpeakeasyBase {
     /**
-     * The CancelledAction message.
+     *  The outcome of a provision instance that is cancelled.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "cancelled" })
@@ -48,7 +51,10 @@ export class ProvisionInstance extends SpeakeasyBase {
     cancelledAction?: CancelledAction;
 
     /**
-     * The CompletedAction message.
+     *  The outcome of a provision instance that has been completed succesfully.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "completed" })
@@ -56,7 +62,10 @@ export class ProvisionInstance extends SpeakeasyBase {
     completedAction?: CompletedAction;
 
     /**
-     * The ErroredAction message.
+     *  The outcome of a provision instance that has errored.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "errored" })

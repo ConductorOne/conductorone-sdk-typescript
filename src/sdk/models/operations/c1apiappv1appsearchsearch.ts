@@ -11,7 +11,10 @@ export class C1ApiAppV1AppSearchSearchResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
-     * Successful response
+     *  The SearchAppsResponse message contains a list of results and a nextPageToken if applicable.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     searchAppsResponse?: shared.SearchAppsResponse;

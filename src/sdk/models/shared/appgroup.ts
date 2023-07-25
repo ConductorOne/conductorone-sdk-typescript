@@ -6,11 +6,17 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- * The AppGroup message.
+ *  The AppGroup message.
+ *
+ * @remarks
+ *
  */
 export class AppGroup extends SpeakeasyBase {
     /**
-     * The appId field.
+     *  The app referenced by this group.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })
@@ -27,21 +33,30 @@ export class AppGroup extends SpeakeasyBase {
     deletedAt?: Date;
 
     /**
-     * The displayName field.
+     *  The display name of the group in the app.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     * The id field.
+     *  The id field.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
     id?: string;
 
     /**
-     * The notificationToken field.
+     *  Deprecated.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "notificationToken" })

@@ -12,7 +12,8 @@
 
 ## get
 
-Invokes the c1.api.app.v1.AppEntitlements.Get method.
+ Get an app entitlement by ID.
+
 
 ### Example Usage
 
@@ -51,7 +52,8 @@ sdk.appEntitlements.get({
 
 ## list
 
-Invokes the c1.api.app.v1.AppEntitlements.List method.
+ List app entitlements associated with an app.
+
 
 ### Example Usage
 
@@ -89,7 +91,8 @@ sdk.appEntitlements.list({
 
 ## listForAppResource
 
-Invokes the c1.api.app.v1.AppEntitlements.ListForAppResource method.
+ List app entitlements associated with an app resource.
+
 
 ### Example Usage
 
@@ -129,7 +132,8 @@ sdk.appEntitlements.listForAppResource({
 
 ## listForAppUser
 
-Invokes the c1.api.app.v1.AppEntitlements.ListForAppUser method.
+ List app entitlements associated with an app user.
+
 
 ### Example Usage
 
@@ -168,7 +172,8 @@ sdk.appEntitlements.listForAppUser({
 
 ## listGroups
 
-Invokes the c1.api.app.v1.AppEntitlements.ListGroups method.
+ List app groups associated with an app entitlement.
+
 
 ### Example Usage
 
@@ -207,7 +212,8 @@ sdk.appEntitlements.listGroups({
 
 ## listUsers
 
-Invokes the c1.api.app.v1.AppEntitlements.ListUsers method.
+ List the users, as AppEntitlementUsers objects, of an app entitlement.
+
 
 ### Example Usage
 
@@ -246,7 +252,8 @@ sdk.appEntitlements.listUsers({
 
 ## update
 
-Invokes the c1.api.app.v1.AppEntitlements.Update method.
+ Update an app entitlement by ID.
+
 
 ### Example Usage
 
@@ -277,12 +284,12 @@ sdk.appEntitlements.update({
           ],
         },
       },
-      alias: "quia",
-      appId: "quis",
-      appResourceId: "vitae",
-      appResourceTypeId: "laborum",
-      certifyPolicyId: "animi",
+      appId: "quia",
+      appResourceId: "quis",
+      appResourceTypeId: "vitae",
+      certifyPolicyId: "laborum",
       complianceFrameworkValueIds: [
+        "enim",
         "odit",
         "quo",
       ],
@@ -292,25 +299,23 @@ sdk.appEntitlements.update({
       durationUnset: {},
       emergencyGrantEnabled: false,
       emergencyGrantPolicyId: "id",
-      grantCount: "possimus",
-      grantPolicyId: "aut",
-      id: "19da1ffe-78f0-497b-8074-f15471b5e6e1",
-      revokePolicyId: "ipsum",
-      riskLevelValueId: "quidem",
-      slug: "molestias",
-      systemBuiltin: false,
+      grantPolicyId: "possimus",
+      revokePolicyId: "aut",
+      riskLevelValueId: "quasi",
+      slug: "error",
     },
     appEntitlementExpandMask: {
       paths: [
-        "pariatur",
-        "modi",
-        "praesentium",
+        "laborum",
+        "quasi",
+        "reiciendis",
+        "voluptatibus",
       ],
     },
-    updateMask: "rem",
+    updateMask: "vero",
   },
-  appId: "voluptates",
-  id: "1e91e450-ad2a-4bd4-8269-802d502a94bb",
+  appId: "nihil",
+  id: "8f097b00-74f1-4547-9b5e-6e13b99d488e",
 }).then((res: C1ApiAppV1AppEntitlementsUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

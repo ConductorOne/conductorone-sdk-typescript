@@ -10,7 +10,8 @@
 
 ## create
 
-Invokes the c1.api.policy.v1.Policies.Create method.
+ Create a policy.
+
 
 ### Example Usage
 
@@ -26,10 +27,10 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.policies.create({
-  description: "eius",
-  displayName: "libero",
+  description: "minima",
+  displayName: "nisi",
   policySteps: {
-    "soluta": {
+    "sapiente": {
       steps: [
         {
           approval: {
@@ -44,108 +45,15 @@ sdk.policies.create({
             provisionPolicy: {
               connectorProvision: {},
               delegatedProvision: {
-                appId: "aliquam",
-                entitlementId: "sapiente",
+                appId: "ratione",
+                entitlementId: "explicabo",
               },
               manualProvision: {
-                instructions: "dicta",
+                instructions: "saepe",
                 userIds: [
-                  "reprehenderit",
-                  "ullam",
-                ],
-              },
-            },
-            assigned: false,
-          },
-        },
-      ],
-    },
-    "nisi": {
-      steps: [
-        {
-          approval: {
-            appGroupApproval: {},
-            appOwnerApproval: {},
-            entitlementOwnerApproval: {},
-            managerApproval: {},
-            selfApproval: {},
-            userApproval: {},
-          },
-          provision: {
-            provisionPolicy: {
-              connectorProvision: {},
-              delegatedProvision: {
-                appId: "voluptatum",
-                entitlementId: "qui",
-              },
-              manualProvision: {
-                instructions: "quibusdam",
-                userIds: [
-                  "deleniti",
-                  "itaque",
-                ],
-              },
-            },
-            assigned: false,
-          },
-        },
-      ],
-    },
-    "dolorum": {
-      steps: [
-        {
-          approval: {
-            appGroupApproval: {},
-            appOwnerApproval: {},
-            entitlementOwnerApproval: {},
-            managerApproval: {},
-            selfApproval: {},
-            userApproval: {},
-          },
-          provision: {
-            provisionPolicy: {
-              connectorProvision: {},
-              delegatedProvision: {
-                appId: "omnis",
-                entitlementId: "tenetur",
-              },
-              manualProvision: {
-                instructions: "quasi",
-                userIds: [
+                  "atque",
                   "et",
-                  "voluptate",
-                  "ipsa",
-                  "minima",
-                ],
-              },
-            },
-            assigned: false,
-          },
-        },
-      ],
-    },
-    "veritatis": {
-      steps: [
-        {
-          approval: {
-            appGroupApproval: {},
-            appOwnerApproval: {},
-            entitlementOwnerApproval: {},
-            managerApproval: {},
-            selfApproval: {},
-            userApproval: {},
-          },
-          provision: {
-            provisionPolicy: {
-              connectorProvision: {},
-              delegatedProvision: {
-                appId: "adipisci",
-                entitlementId: "iste",
-              },
-              manualProvision: {
-                instructions: "temporibus",
-                userIds: [
-                  "rem",
+                  "esse",
                 ],
               },
             },
@@ -155,8 +63,11 @@ sdk.policies.create({
       ],
     },
   },
-  policyType: CreatePolicyRequestPolicyType.PolicyTypeUnspecified,
+  policyType: CreatePolicyRequestPolicyType.PolicyTypeProvision,
   postActions: [
+    {
+      certifyRemediateImmediately: false,
+    },
     {
       certifyRemediateImmediately: false,
     },
@@ -190,7 +101,8 @@ sdk.policies.create({
 
 ## delete
 
-Invokes the c1.api.policy.v1.Policies.Delete method.
+ Delete a policy by ID.
+
 
 ### Example Usage
 
@@ -206,7 +118,7 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.policies.delete({
   deletePolicyRequest: {},
-  id: "6a184039-4c26-4071-b93f-5f0642dac7af",
+  id: "17cbe61e-6b7b-495b-80ab-3c20c4f3789f",
 }).then((res: C1ApiPolicyV1PoliciesDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -229,7 +141,8 @@ sdk.policies.delete({
 
 ## get
 
-Invokes the c1.api.policy.v1.Policies.Get method.
+ Get a policy by ID.
+
 
 ### Example Usage
 
@@ -244,7 +157,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.policies.get({
-  id: "515cc413-aa63-4aae-8d67-864dbb675fd5",
+  id: "d871f99d-d2ef-4d12-9aa6-f1e674bdb04f",
 }).then((res: C1ApiPolicyV1PoliciesGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -267,7 +180,8 @@ sdk.policies.get({
 
 ## list
 
-Invokes the c1.api.policy.v1.Policies.List method.
+ List policies.
+
 
 ### Example Usage
 
@@ -302,7 +216,8 @@ sdk.policies.list().then((res: C1ApiPolicyV1PoliciesListResponse) => {
 
 ## update
 
-Invokes the c1.api.policy.v1.Policies.Update method.
+ Update a policy by providing a policy object and an update mask.
+
 
 ### Example Usage
 
@@ -320,10 +235,10 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.policies.update({
   updatePolicyRequestInput: {
     policy: {
-      description: "recusandae",
-      displayName: "aliquid",
+      description: "dicta",
+      displayName: "ullam",
       policySteps: {
-        "cum": {
+        "ullam": {
           steps: [
             {
               approval: {
@@ -338,16 +253,100 @@ sdk.policies.update({
                 provisionPolicy: {
                   connectorProvision: {},
                   delegatedProvision: {
-                    appId: "in",
-                    entitlementId: "exercitationem",
+                    appId: "aut",
+                    entitlementId: "voluptatum",
                   },
                   manualProvision: {
-                    instructions: "earum",
+                    instructions: "qui",
                     userIds: [
-                      "numquam",
-                      "doloribus",
-                      "suscipit",
-                      "reiciendis",
+                      "ex",
+                      "deleniti",
+                      "itaque",
+                      "dolorum",
+                    ],
+                  },
+                },
+                assigned: false,
+              },
+            },
+            {
+              approval: {
+                appGroupApproval: {},
+                appOwnerApproval: {},
+                entitlementOwnerApproval: {},
+                managerApproval: {},
+                selfApproval: {},
+                userApproval: {},
+              },
+              provision: {
+                provisionPolicy: {
+                  connectorProvision: {},
+                  delegatedProvision: {
+                    appId: "architecto",
+                    entitlementId: "omnis",
+                  },
+                  manualProvision: {
+                    instructions: "tenetur",
+                    userIds: [
+                      "at",
+                    ],
+                  },
+                },
+                assigned: false,
+              },
+            },
+          ],
+        },
+        "et": {
+          steps: [
+            {
+              approval: {
+                appGroupApproval: {},
+                appOwnerApproval: {},
+                entitlementOwnerApproval: {},
+                managerApproval: {},
+                selfApproval: {},
+                userApproval: {},
+              },
+              provision: {
+                provisionPolicy: {
+                  connectorProvision: {},
+                  delegatedProvision: {
+                    appId: "ipsa",
+                    entitlementId: "minima",
+                  },
+                  manualProvision: {
+                    instructions: "veritatis",
+                    userIds: [
+                      "adipisci",
+                    ],
+                  },
+                },
+                assigned: false,
+              },
+            },
+            {
+              approval: {
+                appGroupApproval: {},
+                appOwnerApproval: {},
+                entitlementOwnerApproval: {},
+                managerApproval: {},
+                selfApproval: {},
+                userApproval: {},
+              },
+              provision: {
+                provisionPolicy: {
+                  connectorProvision: {},
+                  delegatedProvision: {
+                    appId: "iste",
+                    entitlementId: "temporibus",
+                  },
+                  manualProvision: {
+                    instructions: "accusantium",
+                    userIds: [
+                      "aut",
+                      "laudantium",
+                      "eum",
                     ],
                   },
                 },
@@ -357,26 +356,17 @@ sdk.policies.update({
           ],
         },
       },
-      policyType: PolicyPolicyType.PolicyTypeAccessRequest,
+      policyType: PolicyPolicyType.PolicyTypeCertify,
       postActions: [
-        {
-          certifyRemediateImmediately: false,
-        },
-        {
-          certifyRemediateImmediately: false,
-        },
-        {
-          certifyRemediateImmediately: false,
-        },
         {
           certifyRemediateImmediately: false,
         },
       ],
       reassignTasksToDelegates: false,
     },
-    updateMask: "necessitatibus",
+    updateMask: "corrupti",
   },
-  id: "41f33317-fe35-4b60-ab1e-a426555ba3c2",
+  id: "40394c26-071f-493f-9f06-42dac7af515c",
 }).then((res: C1ApiPolicyV1PoliciesUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

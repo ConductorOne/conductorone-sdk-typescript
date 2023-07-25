@@ -5,6 +5,9 @@
 import { SpeakeasyBase } from "../../../internal/utils";
 
 /**
- * The DeleteAppResponse message.
+ *  Empty response body. Status code indicates success.
+ *
+ * @remarks
+ *
  */
 export class DeleteAppResponse extends SpeakeasyBase {}

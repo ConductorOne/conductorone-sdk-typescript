@@ -7,11 +7,18 @@ import { RequestCatalogExpandMask } from "./requestcatalogexpandmask";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The RequestCatalogManagementServiceCreateRequest message.
+ *  Create a request catalog.
+ *
+ * @remarks
+ *
  */
 export class RequestCatalogManagementServiceCreateRequest extends SpeakeasyBase {
     /**
-     * The RequestCatalogExpandMask message.
+     *  The RequestCatalogExpandMask includes the paths in the catalog view to expand in the return value of this call.
+     *
+     * @remarks
+     *  The paths are 'created_by_user_id', 'app_ids', and 'access_entitlements', and '*'.
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expandMask" })
@@ -19,28 +26,40 @@ export class RequestCatalogManagementServiceCreateRequest extends SpeakeasyBase 
     requestCatalogExpandMask?: RequestCatalogExpandMask;
 
     /**
-     * The description field.
+     *  The description of the new request catalog.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     * The displayName field.
+     *  The display name of the new request catalog.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     * The published field.
+     *  Whether or not the new catalog should be created as published.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "published" })
     published?: boolean;
 
     /**
-     * The visibleToEveryone field.
+     *  Whether or not the new catalog is visible to everyone by default.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "visibleToEveryone" })

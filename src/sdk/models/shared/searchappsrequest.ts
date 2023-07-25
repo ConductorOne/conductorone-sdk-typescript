@@ -6,46 +6,67 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- * The SearchAppsRequest message.
+ *  Search Apps by a few properties.
+ *
+ * @remarks
+ *
  */
 export class SearchAppsRequest extends SpeakeasyBase {
     /**
-     * The appIds field.
+     *  A list of app IDs to restrict the search to.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appIds" })
     appIds?: string[];
 
     /**
-     * The displayName field.
+     *  Search for apps with an exact match on the display name.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     * The excludeAppIds field.
+     *  A list of app IDs to remove from the results.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "excludeAppIds" })
     excludeAppIds?: string[];
 
     /**
-     * The pageSize field.
+     *  The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageSize" })
     pageSize?: number;
 
     /**
-     * The pageToken field.
+     *  The pageToken field.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageToken" })
     pageToken?: string;
 
     /**
-     * The query field.
+     *  Query the apps with a fuzzy search on display name and description.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "query" })

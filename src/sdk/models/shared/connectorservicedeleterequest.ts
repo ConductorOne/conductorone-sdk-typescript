@@ -5,6 +5,9 @@
 import { SpeakeasyBase } from "../../../internal/utils";
 
 /**
- * The ConnectorServiceDeleteRequest message.
+ *  ConnectorServiceDeleteRequest is a request for deleting a connector. It uses URL values for input.
+ *
+ * @remarks
+ *
  */
 export class ConnectorServiceDeleteRequest extends SpeakeasyBase {}

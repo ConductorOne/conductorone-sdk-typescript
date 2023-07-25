@@ -6,11 +6,17 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- * The AppResourceType message.
+ *  The AppResourceType is referenced by an app entitlement defining its resource types. Commonly things like Group or Role.
+ *
+ * @remarks
+ *
  */
 export class AppResourceType extends SpeakeasyBase {
     /**
-     * The appId field.
+     *  The ID of the app that is associated with the app resource type
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })
@@ -27,14 +33,20 @@ export class AppResourceType extends SpeakeasyBase {
     deletedAt?: Date;
 
     /**
-     * The displayName field.
+     *  The display name of the app resource type.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     * The id field.
+     *  The unique ID for the app resource type.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })

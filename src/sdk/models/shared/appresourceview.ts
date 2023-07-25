@@ -7,11 +7,17 @@ import { AppResource } from "./appresource";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The AppResourceView message.
+ *  The app resource view returns an app resource with paths for items in the expand mask filled in when this response is returned and a request expand mask has "*" or "app_id" or "resource_type_id".
+ *
+ * @remarks
+ *
  */
 export class AppResourceView extends SpeakeasyBase {
     /**
-     * The AppResource message.
+     *  The app resource message is a single resource that can have entitlements.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appResource" })
@@ -19,14 +25,20 @@ export class AppResourceView extends SpeakeasyBase {
     appResource?: AppResource;
 
     /**
-     * The appPath field.
+     *  JSONPATH expression indicating the location of the App object in the array
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appPath" })
     appPath?: string;
 
     /**
-     * The resourceTypePath field.
+     *  JSONPATH expression indicating the location of the Resource Type object in the array
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "resourceTypePath" })

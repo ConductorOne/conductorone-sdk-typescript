@@ -9,7 +9,8 @@
 
 ## create
 
-Invokes the c1.api.directory.v1.DirectoryService.Create method.
+ Create a directory.
+
 
 ### Example Usage
 
@@ -26,13 +27,11 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.directory.create({
   directoryExpandMask: {
     paths: [
-      "possimus",
-      "quia",
-      "eveniet",
-      "asperiores",
+      "accusantium",
+      "porro",
     ],
   },
-  appId: "facere",
+  appId: "eum",
 }).then((res: C1ApiDirectoryV1DirectoryServiceCreateResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -55,7 +54,8 @@ sdk.directory.create({
 
 ## delete
 
-Invokes the c1.api.directory.v1.DirectoryService.Delete method.
+ Delete a directory by app_id.
+
 
 ### Example Usage
 
@@ -71,7 +71,7 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.directory.delete({
   directoryServiceDeleteRequest: {},
-  appId: "veritatis",
+  appId: "quas",
 }).then((res: C1ApiDirectoryV1DirectoryServiceDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -94,7 +94,8 @@ sdk.directory.delete({
 
 ## get
 
-Invokes the c1.api.directory.v1.DirectoryService.Get method.
+ Get a directory by app_id.
+
 
 ### Example Usage
 
@@ -109,7 +110,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.directory.get({
-  appId: "consequuntur",
+  appId: "praesentium",
 }).then((res: C1ApiDirectoryV1DirectoryServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -132,7 +133,8 @@ sdk.directory.get({
 
 ## list
 
-Invokes the c1.api.directory.v1.DirectoryService.List method.
+ List directories.
+
 
 ### Example Usage
 
