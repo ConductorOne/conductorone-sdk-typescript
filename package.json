@@ -4,6 +4,7 @@
   "author": "ConductorOne",
   "scripts": {
     "gen": "speakeasy generate sdk --lang=typescript --repo https://github.com/ConductorOne/conductorone-sdk-typescript.git --installationURL https://github.com/ConductorOne/conductorone-sdk-typescript --repo-subdir ./src --schema openapi.yaml --out ./src --debug",
+    "lint": "eslint src/",
     "prepare": "tsc --build"
   },
   "dependencies": {
