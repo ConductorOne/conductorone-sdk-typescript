@@ -32,13 +32,9 @@ export class ConductoroneSDKTypescript extends ConductoroneSDKTypescript_orig {
       .interceptors
       .request
       .use(async (config): Promise<InternalAxiosRequestConfig<any>> => {
-        try {
-          const bearer = await token.getToken()
-          config.headers.Authorization = `Bearer ${bearer}`;
-          return config;
-        } catch (e) {
-          throw new Error(`Error getting bearer token: ${e}`);
-        }
+        const bearer = await token.getToken()
+        config.headers.Authorization = `Bearer ${bearer}`;
+        return config;
       });
     }
 
