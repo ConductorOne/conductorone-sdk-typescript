@@ -1,13 +1,13 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
 
-import { Token } from "./sdk/token";
+import { Token } from "./token";
 import {
   ServerList,
   ConductoroneSDKTypescript as ConductoroneSDKTypescript_orig,
-} from "./sdk";
+} from "./src/sdk";
 import type {
   SDKProps as SDKProps_orig,
-} from "./sdk";
+} from "./src/sdk";
 
 export interface SDKProps extends SDKProps_orig {
   clientID?: string;
@@ -45,4 +45,4 @@ export class ConductoroneSDKTypescript extends ConductoroneSDKTypescript_orig {
   }
 }
 
-export { SDKConfiguration, ServerList } from "./sdk";
+export { SDKConfiguration, ServerList } from "./src/sdk";

@@ -1,9 +1,0 @@
-.github/
-.gitignore
-node_modules/
-package-lock.json
-package.json
-src/index.ts
-src/sdk/token.ts
-src/sdk/sdk.ts
-tsconfig.json

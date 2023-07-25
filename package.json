@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "author": "ConductorOne",
   "scripts": {
-    "gen": "speakeasy generate sdk --lang=typescript --repo https://github.com/ConductorOne/conductorone-sdk-typescript.git --repo-subdir . --schema openapi.yaml --out . --debug",
+    "gen": "speakeasy generate sdk --lang=typescript --repo https://github.com/ConductorOne/conductorone-sdk-typescript.git --installationURL https://github.com/ConductorOne/conductorone-sdk-typescript --repo-subdir ./src --schema openapi.yaml --out ./src --debug",
     "prepare": "tsc --build"
   },
   "dependencies": {

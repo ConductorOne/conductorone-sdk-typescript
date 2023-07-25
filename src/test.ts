@@ -1,4 +1,4 @@
-import { ConductoroneSDKTypescript } from "./index";
+import { ConductoroneSDKTypescript } from "./";
 
 
 const sdk = new ConductoroneSDKTypescript({
