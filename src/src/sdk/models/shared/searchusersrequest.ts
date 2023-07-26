@@ -22,7 +22,11 @@ export enum SearchUsersRequestUserStatuses {
  */
 export class SearchUsersRequest extends SpeakeasyBase {
     /**
-     * The UserExpandMask message.
+     *  The user expand mask is used to indicate which related objects should be expanded in the response.
+     *
+     * @remarks
+     *  The supported paths are 'role_ids', 'manager_ids', 'delegated_user_id', 'directory_ids', and '*'.
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expandMask" })
@@ -60,7 +64,7 @@ export class SearchUsersRequest extends SpeakeasyBase {
     ids?: string[];
 
     /**
-     *  The pageSize where 10 <= pageSize <= 100.
+     *  The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
      *
      * @remarks
      *

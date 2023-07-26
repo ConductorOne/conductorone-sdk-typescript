@@ -20,7 +20,8 @@ export class Policies {
      * Create
      *
      * @remarks
-     * Invokes the c1.api.policy.v1.Policies.Create method.
+     *  Create a policy.
+     *
      */
     async create(
         req: shared.CreatePolicyRequestInput,
@@ -103,7 +104,8 @@ export class Policies {
      * Delete
      *
      * @remarks
-     * Invokes the c1.api.policy.v1.Policies.Delete method.
+     *  Delete a policy by ID.
+     *
      */
     async delete(
         req: operations.C1ApiPolicyV1PoliciesDeleteRequest,
@@ -190,7 +192,8 @@ export class Policies {
      * Get
      *
      * @remarks
-     * Invokes the c1.api.policy.v1.Policies.Get method.
+     *  Get a policy by ID.
+     *
      */
     async get(
         req: operations.C1ApiPolicyV1PoliciesGetRequest,
@@ -262,9 +265,17 @@ export class Policies {
      * List
      *
      * @remarks
-     * Invokes the c1.api.policy.v1.Policies.List method.
+     *  List policies.
+     *
      */
-    async list(config?: AxiosRequestConfig): Promise<operations.C1ApiPolicyV1PoliciesListResponse> {
+    async list(
+        req: operations.C1ApiPolicyV1PoliciesListRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.C1ApiPolicyV1PoliciesListResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.C1ApiPolicyV1PoliciesListRequest(req);
+        }
+
         const baseURL: string = utils.templateUrl(
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
@@ -275,6 +286,7 @@ export class Policies {
             this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
+        const queryParams: string = utils.serializeQueryParams(req);
         headers["Accept"] = "application/json";
         headers[
             "user-agent"
@@ -282,7 +294,7 @@ export class Policies {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: url + queryParams,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",
@@ -327,7 +339,8 @@ export class Policies {
      * Update
      *
      * @remarks
-     * Invokes the c1.api.policy.v1.Policies.Update method.
+     *  Update a policy by providing a policy object and an update mask.
+     *
      */
     async update(
         req: operations.C1ApiPolicyV1PoliciesUpdateRequest,

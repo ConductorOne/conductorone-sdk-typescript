@@ -15,6 +15,12 @@ export class C1ApiAppV1AppEntitlementsListForAppResourceRequest extends Speakeas
 
     @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=app_resource_type_id" })
     appResourceTypeId: string;
+
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+    pageSize?: number;
+
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_token" })
+    pageToken?: string;
 }
 
 export class C1ApiAppV1AppEntitlementsListForAppResourceResponse extends SpeakeasyBase {
@@ -22,7 +28,7 @@ export class C1ApiAppV1AppEntitlementsListForAppResourceResponse extends Speakea
     contentType: string;
 
     /**
-     *  The ListAppEntitlementsResponse message contains a list of results and a nextPageToken if applicable
+     *  The ListAppEntitlementsResponse message contains a list of results and a nextPageToken if applicable.
      *
      * @remarks
      *

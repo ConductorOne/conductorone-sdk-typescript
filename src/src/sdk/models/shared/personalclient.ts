@@ -6,18 +6,27 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- * The PersonalClient message.
+ *  The PersonalClient message contains information about a presonal client credential.
+ *
+ * @remarks
+ *
  */
 export class PersonalClient extends SpeakeasyBase {
     /**
-     * The allowSourceCidr field.
+     *  If set, only allows the CIDRs in the array to use the credential.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "allowSourceCidr" })
     allowSourceCidr?: string[];
 
     /**
-     * The clientId field.
+     *  The clientID of the credential.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "clientId" })
@@ -34,7 +43,10 @@ export class PersonalClient extends SpeakeasyBase {
     deletedAt?: Date;
 
     /**
-     * The displayName field.
+     *  The display name of the personal client credential.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
@@ -46,7 +58,10 @@ export class PersonalClient extends SpeakeasyBase {
     expiresTime?: Date;
 
     /**
-     * The id field.
+     *  The unique ID of the personal client credential.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
@@ -76,7 +91,10 @@ export class PersonalClient extends SpeakeasyBase {
     updatedAt?: Date;
 
     /**
-     * The userId field.
+     *  The ID of the user that this credential is created for.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "userId" })

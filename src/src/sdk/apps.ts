@@ -20,7 +20,8 @@ export class Apps {
      * Create
      *
      * @remarks
-     * Invokes the c1.api.app.v1.Apps.Create method.
+     *  Create a new app.
+     *
      */
     async create(
         req: shared.CreateAppRequest,
@@ -103,7 +104,8 @@ export class Apps {
      * Delete
      *
      * @remarks
-     * Invokes the c1.api.app.v1.Apps.Delete method.
+     *  Delete an app.
+     *
      */
     async delete(
         req: operations.C1ApiAppV1AppsDeleteRequest,
@@ -186,7 +188,8 @@ export class Apps {
      * Get
      *
      * @remarks
-     * Invokes the c1.api.app.v1.Apps.Get method.
+     *  Get an app by ID.
+     *
      */
     async get(
         req: operations.C1ApiAppV1AppsGetRequest,
@@ -257,9 +260,17 @@ export class Apps {
      * List
      *
      * @remarks
-     * Invokes the c1.api.app.v1.Apps.List method.
+     *  List all apps.
+     *
      */
-    async list(config?: AxiosRequestConfig): Promise<operations.C1ApiAppV1AppsListResponse> {
+    async list(
+        req: operations.C1ApiAppV1AppsListRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.C1ApiAppV1AppsListResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.C1ApiAppV1AppsListRequest(req);
+        }
+
         const baseURL: string = utils.templateUrl(
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
@@ -270,6 +281,7 @@ export class Apps {
             this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
+        const queryParams: string = utils.serializeQueryParams(req);
         headers["Accept"] = "application/json";
         headers[
             "user-agent"
@@ -277,7 +289,7 @@ export class Apps {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: url + queryParams,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",
@@ -322,7 +334,8 @@ export class Apps {
      * Update
      *
      * @remarks
-     * Invokes the c1.api.app.v1.Apps.Update method.
+     *  Update an existing app.
+     *
      */
     async update(
         req: operations.C1ApiAppV1AppsUpdateRequest,

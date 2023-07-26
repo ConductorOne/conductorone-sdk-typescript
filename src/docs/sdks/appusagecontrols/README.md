@@ -7,7 +7,8 @@
 
 ## get
 
-Invokes the c1.api.app.v1.AppUsageControlsService.Get method.
+ Get usage controls, as an AppUsageControls object which describes some peripheral configuration, for an app.
+
 
 ### Example Usage
 
@@ -22,7 +23,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appUsageControls.get({
-  appId: "maxime",
+  appId: "magni",
 }).then((res: C1ApiAppV1AppUsageControlsServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -45,7 +46,8 @@ sdk.appUsageControls.get({
 
 ## update
 
-Invokes the c1.api.app.v1.AppUsageControlsService.Update method.
+ Update usage controls for an app.
+
 
 ### Example Usage
 
@@ -62,15 +64,15 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.appUsageControls.update({
   updateAppUsageControlsRequest: {
     appUsageControls: {
-      appId: "deleniti",
+      appId: "sunt",
       notify: false,
-      notifyAfterDays: 7038.89,
+      notifyAfterDays: 7790.51,
       revoke: false,
-      revokeAfterDays: 4479.26,
+      revokeAfterDays: 8480.09,
     },
-    updateMask: "architecto",
+    updateMask: "pariatur",
   },
-  appId: "architecto",
+  appId: "maxime",
 }).then((res: C1ApiAppV1AppUsageControlsServiceUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

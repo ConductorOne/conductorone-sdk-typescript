@@ -20,7 +20,8 @@ export class AppUsageControls {
      * Get
      *
      * @remarks
-     * Invokes the c1.api.app.v1.AppUsageControlsService.Get method.
+     *  Get usage controls, as an AppUsageControls object which describes some peripheral configuration, for an app.
+     *
      */
     async get(
         req: operations.C1ApiAppV1AppUsageControlsServiceGetRequest,
@@ -92,7 +93,8 @@ export class AppUsageControls {
      * Update
      *
      * @remarks
-     * Invokes the c1.api.app.v1.AppUsageControlsService.Update method.
+     *  Update usage controls for an app.
+     *
      */
     async update(
         req: operations.C1ApiAppV1AppUsageControlsServiceUpdateRequest,

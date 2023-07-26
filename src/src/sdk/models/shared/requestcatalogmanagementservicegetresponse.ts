@@ -7,11 +7,17 @@ import { RequestCatalogView } from "./requestcatalogview";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The RequestCatalogManagementServiceGetResponse message.
+ *  The request catalog management service get response returns a request catalog view with the expanded items in the expanded array indicated by the expand mask in the request.
+ *
+ * @remarks
+ *
  */
 export class RequestCatalogManagementServiceGetResponse extends SpeakeasyBase {
     /**
-     * The RequestCatalogView message.
+     *  The request catalog view contains the serialized request catalog and paths to objects referenced by the request catalog.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "requestCatalogView" })
@@ -19,7 +25,10 @@ export class RequestCatalogManagementServiceGetResponse extends SpeakeasyBase {
     requestCatalogView?: RequestCatalogView;
 
     /**
-     * The expanded field.
+     *  List of serialized related objects.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expanded" })

@@ -1,6 +1,8 @@
 # AppResourceTypeServiceGetResponse
 
-The AppResourceTypeServiceGetResponse message.
+ The AppResourceTypeServiceGetResponse contains an expanded array containing the expanded values indicated by the expand mask
+ in the request and an app resource type view containing the resource type and JSONPATHs indicating which objects are where in the expand mask.
+
 
 
 ## Fields
@@ -8,4 +10,4 @@ The AppResourceTypeServiceGetResponse message.
 | Field                                                             | Type                                                              | Required                                                          | Description                                                       |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
 | `appResourceTypeView`                                             | [AppResourceTypeView](../../models/shared/appresourcetypeview.md) | :heavy_minus_sign:                                                |  The AppResourceTypeView message.<br/>                            |
-| `expanded`                                                        | Record<string, *any*>[]                                           | :heavy_minus_sign:                                                | The expanded field.                                               |
+| `expanded`                                                        | Record<string, *any*>[]                                           | :heavy_minus_sign:                                                |  List of serialized related objects.<br/>                         |

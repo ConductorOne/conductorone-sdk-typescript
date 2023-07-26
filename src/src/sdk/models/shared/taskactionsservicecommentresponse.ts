@@ -7,7 +7,10 @@ import { TaskView } from "./taskview";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The TaskActionsServiceCommentResponse message.
+ *  Task actions service comment response returns the task view inluding the expanded array of items that are indicated by the expand mask on the request.
+ *
+ * @remarks
+ *
  */
 export class TaskActionsServiceCommentResponse extends SpeakeasyBase {
     /**
@@ -22,7 +25,10 @@ export class TaskActionsServiceCommentResponse extends SpeakeasyBase {
     taskView?: TaskView;
 
     /**
-     * The expanded field.
+     *  List of serialized related objects.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expanded" })

@@ -7,7 +7,10 @@ import { AppUsageControls } from "./appusagecontrols";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The UpdateAppUsageControlsRequest message.
+ *  The UpdateAppUsageControlsRequest message contains the AppUsageControls object to update and the update mask.
+ *
+ * @remarks
+ *
  */
 export class UpdateAppUsageControlsRequest extends SpeakeasyBase {
     /**

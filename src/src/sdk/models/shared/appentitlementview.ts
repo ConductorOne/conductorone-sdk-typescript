@@ -7,7 +7,10 @@ import { AppEntitlement } from "./appentitlement";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The AppEntitlementView message.
+ *  The app entitlement view contains the serialized app entitlement and paths to objects referenced by the app entitlement.
+ *
+ * @remarks
+ *
  */
 export class AppEntitlementView extends SpeakeasyBase {
     /**
@@ -27,21 +30,30 @@ export class AppEntitlementView extends SpeakeasyBase {
     appEntitlement?: AppEntitlement;
 
     /**
-     * The appPath field.
+     *  JSONPATH expression indicating the location of the App object in the  array.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appPath" })
     appPath?: string;
 
     /**
-     * The appResourcePath field.
+     *  JSONPATH expression indicating the location of the App Resource Type object in the expanded array.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appResourcePath" })
     appResourcePath?: string;
 
     /**
-     * The appResourceTypePath field.
+     *  JSONPATH expression indicating the location of the App Resource object in the  array.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appResourceTypePath" })

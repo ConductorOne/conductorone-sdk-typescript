@@ -7,11 +7,17 @@ import { RequestCatalog } from "./requestcatalog";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The RequestCatalogView message.
+ *  The request catalog view contains the serialized request catalog and paths to objects referenced by the request catalog.
+ *
+ * @remarks
+ *
  */
 export class RequestCatalogView extends SpeakeasyBase {
     /**
-     * The RequestCatalog message.
+     *  The RequestCatalog is used for managing which entitlements are requestable, and who can request them.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "requestCatalog" })
@@ -19,21 +25,30 @@ export class RequestCatalogView extends SpeakeasyBase {
     requestCatalog?: RequestCatalog;
 
     /**
-     * The accessEntitlementsPath field.
+     *  JSONPATH expression indicating the location of the access entitlement objects, that the request catalog allows users to request, in the array.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "accessEntitlementsPath" })
     accessEntitlementsPath?: string;
 
     /**
-     * The appPaths field.
+     *  JSONPATH expression indicating the location of the App object in the array.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appPaths" })
     appPaths?: string;
 
     /**
-     * The createdByUserPath field.
+     *  JSONPATH expression indicating the location of the User object, that created the request catalog, in the array.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "createdByUserPath" })

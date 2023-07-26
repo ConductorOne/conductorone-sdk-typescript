@@ -13,7 +13,7 @@ import { Expose } from "class-transformer";
  */
 export class TaskExpandMask extends SpeakeasyBase {
     /**
-     *  A list of IDs associated with a task
+     *  A list of paths to expand in the response. May be any combination of "*", "access_review_id", "user_id", "created_by_user_id", "app_id", "app_user_id", "app_entitlement_ids", "step_approver_ids", and "identity_user_id".
      *
      * @remarks
      *

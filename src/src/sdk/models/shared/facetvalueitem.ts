@@ -7,11 +7,17 @@ import { FacetValue } from "./facetvalue";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The FacetValueItem message.
+ *  The FacetValueItem message.
+ *
+ * @remarks
+ *
  */
 export class FacetValueItem extends SpeakeasyBase {
     /**
-     * The values field.
+     *  An array of facet values.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata({ elemType: FacetValue })
     @Expose({ name: "values" })

@@ -7,11 +7,17 @@ import { AppEntitlement, AppEntitlementInput } from "./appentitlement";
 import { Expose, Transform, Type } from "class-transformer";
 
 /**
- * The RequestCatalog message.
+ *  The RequestCatalog is used for managing which entitlements are requestable, and who can request them.
+ *
+ * @remarks
+ *
  */
 export class RequestCatalog extends SpeakeasyBase {
     /**
-     * The accessEntitlements field.
+     *  An array of app entitlements that, if the user has, can view the contents of this catalog.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata({ elemType: AppEntitlement })
     @Expose({ name: "accessEntitlements" })
@@ -19,7 +25,10 @@ export class RequestCatalog extends SpeakeasyBase {
     accessEntitlements?: AppEntitlement[];
 
     /**
-     * The appIds field.
+     *  The Apps contained in this request catalog.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appIds" })
@@ -31,35 +40,55 @@ export class RequestCatalog extends SpeakeasyBase {
     createdAt?: Date;
 
     /**
-     * The createdByUserId field.
+     *  The id of the user this request catalog was created by.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "createdByUserId" })
     createdByUserId?: string;
 
+    @SpeakeasyMetadata()
+    @Expose({ name: "deletedAt" })
+    @Transform(({ value }) => new Date(value), { toClassOnly: true })
+    deletedAt?: Date;
+
     /**
-     * The description field.
+     *  The description of the request catalog.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     * The displayName field.
+     *  The display name of the request catalog.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     * The id field.
+     *  The id of the request catalog.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
     id?: string;
 
     /**
-     * The published field.
+     *  Whether or not this catalog is published.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "published" })
@@ -71,7 +100,10 @@ export class RequestCatalog extends SpeakeasyBase {
     updatedAt?: Date;
 
     /**
-     * The visibleToEveryone field.
+     *  If this is true, the access entitlement requirement is ignored.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "visibleToEveryone" })
@@ -79,11 +111,17 @@ export class RequestCatalog extends SpeakeasyBase {
 }
 
 /**
- * The RequestCatalog message.
+ *  The RequestCatalog is used for managing which entitlements are requestable, and who can request them.
+ *
+ * @remarks
+ *
  */
 export class RequestCatalogInput extends SpeakeasyBase {
     /**
-     * The accessEntitlements field.
+     *  An array of app entitlements that, if the user has, can view the contents of this catalog.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata({ elemType: AppEntitlementInput })
     @Expose({ name: "accessEntitlements" })
@@ -91,49 +129,70 @@ export class RequestCatalogInput extends SpeakeasyBase {
     accessEntitlements?: AppEntitlementInput[];
 
     /**
-     * The appIds field.
+     *  The Apps contained in this request catalog.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appIds" })
     appIds?: string[];
 
     /**
-     * The createdByUserId field.
+     *  The id of the user this request catalog was created by.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "createdByUserId" })
     createdByUserId?: string;
 
     /**
-     * The description field.
+     *  The description of the request catalog.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     * The displayName field.
+     *  The display name of the request catalog.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     * The id field.
+     *  The id of the request catalog.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
     id?: string;
 
     /**
-     * The published field.
+     *  Whether or not this catalog is published.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "published" })
     published?: boolean;
 
     /**
-     * The visibleToEveryone field.
+     *  If this is true, the access entitlement requirement is ignored.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "visibleToEveryone" })

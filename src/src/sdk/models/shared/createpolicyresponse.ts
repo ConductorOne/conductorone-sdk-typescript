@@ -7,7 +7,10 @@ import { Policy } from "./policy";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The CreatePolicyResponse message.
+ *  The CreatePolicyResponse message contains the created policy object.
+ *
+ * @remarks
+ *
  */
 export class CreatePolicyResponse extends SpeakeasyBase {
     /**

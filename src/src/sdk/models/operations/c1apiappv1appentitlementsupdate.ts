@@ -28,10 +28,7 @@ export class C1ApiAppV1AppEntitlementsUpdateResponse extends SpeakeasyBase {
     rawResponse?: AxiosResponse;
 
     /**
-     *  The UpdateAppEntitlementResponse message contains the updated app entitlement view.
-     *
-     * @remarks
-     *
+     * Successful response
      */
     @SpeakeasyMetadata()
     updateAppEntitlementResponse?: shared.UpdateAppEntitlementResponse;

@@ -20,7 +20,8 @@ export class PersonalClient {
      * Create
      *
      * @remarks
-     * Invokes the c1.api.iam.v1.PersonalClientService.Create method.
+     *  Create creates a new PersonalClient object for the current User.
+     *
      */
     async create(
         req: shared.PersonalClientServiceCreateRequest,

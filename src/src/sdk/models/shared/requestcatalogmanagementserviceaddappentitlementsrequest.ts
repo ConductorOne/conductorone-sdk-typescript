@@ -7,11 +7,17 @@ import { AppEntitlementRef } from "./appentitlementref";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The RequestCatalogManagementServiceAddAppEntitlementsRequest message.
+ *  The RequestCatalogManagementServiceAddAppEntitlementsRequest object is used to add app requestable app entitlements to a request catalog.
+ *
+ * @remarks
+ *
  */
 export class RequestCatalogManagementServiceAddAppEntitlementsRequest extends SpeakeasyBase {
     /**
-     * The appEntitlements field.
+     *  List of entitlements to add to the request catalog.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata({ elemType: AppEntitlementRef })
     @Expose({ name: "appEntitlements" })

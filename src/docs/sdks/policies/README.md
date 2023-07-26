@@ -10,7 +10,8 @@
 
 ## create
 
-Invokes the c1.api.policy.v1.Policies.Create method.
+ Create a policy.
+
 
 ### Example Usage
 
@@ -26,10 +27,10 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.policies.create({
-  description: "consequuntur",
-  displayName: "ratione",
+  description: "consequatur",
+  displayName: "minus",
   policySteps: {
-    "saepe": {
+    "sapiente": {
       steps: [
         {
           approval: {
@@ -44,16 +45,46 @@ sdk.policies.create({
             provisionPolicy: {
               connectorProvision: {},
               delegatedProvision: {
-                appId: "atque",
-                entitlementId: "et",
+                appId: "esse",
+                entitlementId: "blanditiis",
               },
               manualProvision: {
-                instructions: "esse",
+                instructions: "provident",
                 userIds: [
-                  "accusamus",
-                  "veritatis",
+                  "nulla",
+                  "quas",
                   "esse",
-                  "quod",
+                  "quasi",
+                ],
+              },
+            },
+            assigned: false,
+          },
+        },
+      ],
+    },
+    "a": {
+      steps: [
+        {
+          approval: {
+            appGroupApproval: {},
+            appOwnerApproval: {},
+            entitlementOwnerApproval: {},
+            managerApproval: {},
+            selfApproval: {},
+            userApproval: {},
+          },
+          provision: {
+            provisionPolicy: {
+              connectorProvision: {},
+              delegatedProvision: {
+                appId: "sint",
+                entitlementId: "pariatur",
+              },
+              manualProvision: {
+                instructions: "possimus",
+                userIds: [
+                  "eveniet",
                 ],
               },
             },
@@ -73,41 +104,42 @@ sdk.policies.create({
             provisionPolicy: {
               connectorProvision: {},
               delegatedProvision: {
-                appId: "nam",
-                entitlementId: "vero",
+                appId: "asperiores",
+                entitlementId: "facere",
+              },
+              manualProvision: {
+                instructions: "veritatis",
+                userIds: [
+                  "quasi",
+                ],
+              },
+            },
+            assigned: false,
+          },
+        },
+        {
+          approval: {
+            appGroupApproval: {},
+            appOwnerApproval: {},
+            entitlementOwnerApproval: {},
+            managerApproval: {},
+            selfApproval: {},
+            userApproval: {},
+          },
+          provision: {
+            provisionPolicy: {
+              connectorProvision: {},
+              delegatedProvision: {
+                appId: "similique",
+                entitlementId: "culpa",
               },
               manualProvision: {
                 instructions: "aliquid",
                 userIds: [
-                  "saepe",
-                ],
-              },
-            },
-            assigned: false,
-          },
-        },
-        {
-          approval: {
-            appGroupApproval: {},
-            appOwnerApproval: {},
-            entitlementOwnerApproval: {},
-            managerApproval: {},
-            selfApproval: {},
-            userApproval: {},
-          },
-          provision: {
-            provisionPolicy: {
-              connectorProvision: {},
-              delegatedProvision: {
-                appId: "vel",
-                entitlementId: "harum",
-              },
-              manualProvision: {
-                instructions: "molestiae",
-                userIds: [
-                  "occaecati",
-                  "minima",
-                  "distinctio",
+                  "quae",
+                  "earum",
+                  "vel",
+                  "in",
                 ],
               },
             },
@@ -117,8 +149,14 @@ sdk.policies.create({
       ],
     },
   },
-  policyType: CreatePolicyRequestPolicyType.PolicyTypeAccessRequest,
+  policyType: CreatePolicyRequestPolicyType.PolicyTypeGrant,
   postActions: [
+    {
+      certifyRemediateImmediately: false,
+    },
+    {
+      certifyRemediateImmediately: false,
+    },
     {
       certifyRemediateImmediately: false,
     },
@@ -146,7 +184,8 @@ sdk.policies.create({
 
 ## delete
 
-Invokes the c1.api.policy.v1.Policies.Delete method.
+ Delete a policy by ID.
+
 
 ### Example Usage
 
@@ -162,7 +201,7 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.policies.delete({
   deletePolicyRequest: {},
-  id: "ab3c20c4-f378-49fd-871f-99dd2efd121a",
+  id: "db04f157-5608-42d6-8ea1-9f1d17051339",
 }).then((res: C1ApiPolicyV1PoliciesDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -185,7 +224,8 @@ sdk.policies.delete({
 
 ## get
 
-Invokes the c1.api.policy.v1.Policies.Get method.
+ Get a policy by ID.
+
 
 ### Example Usage
 
@@ -200,7 +240,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.policies.get({
-  id: "a6f1e674-bdb0-44f1-9756-082d68ea19f1",
+  id: "d08086a1-8403-494c-a607-1f93f5f0642d",
 }).then((res: C1ApiPolicyV1PoliciesGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -223,7 +263,8 @@ sdk.policies.get({
 
 ## list
 
-Invokes the c1.api.policy.v1.Policies.List method.
+ List policies.
+
 
 ### Example Usage
 
@@ -237,7 +278,10 @@ const sdk = new ConductoroneSDKTypescript({
   },
 });
 
-sdk.policies.list().then((res: C1ApiPolicyV1PoliciesListResponse) => {
+sdk.policies.list({
+  pageSize: 6387.62,
+  pageToken: "maxime",
+}).then((res: C1ApiPolicyV1PoliciesListResponse) => {
   if (res.statusCode == 200) {
     // handle response
   }
@@ -246,9 +290,10 @@ sdk.policies.list().then((res: C1ApiPolicyV1PoliciesListResponse) => {
 
 ### Parameters
 
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `config`                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config) | :heavy_minus_sign:                                           | Available config options for making requests.                |
+| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                  | [operations.C1ApiPolicyV1PoliciesListRequest](../../models/operations/c1apipolicyv1policieslistrequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
+| `config`                                                                                                   | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                               | :heavy_minus_sign:                                                                                         | Available config options for making requests.                                                              |
 
 
 ### Response
@@ -258,7 +303,8 @@ sdk.policies.list().then((res: C1ApiPolicyV1PoliciesListResponse) => {
 
 ## update
 
-Invokes the c1.api.policy.v1.Policies.Update method.
+ Update a policy by providing a policy object and an update mask.
+
 
 ### Example Usage
 
@@ -276,10 +322,10 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.policies.update({
   updatePolicyRequestInput: {
     policy: {
-      description: "at",
-      displayName: "et",
+      description: "dignissimos",
+      displayName: "officia",
       policySteps: {
-        "ipsa": {
+        "nemo": {
           steps: [
             {
               approval: {
@@ -294,43 +340,14 @@ sdk.policies.update({
                 provisionPolicy: {
                   connectorProvision: {},
                   delegatedProvision: {
-                    appId: "veritatis",
-                    entitlementId: "consectetur",
+                    appId: "quaerat",
+                    entitlementId: "porro",
                   },
                   manualProvision: {
-                    instructions: "adipisci",
-                    userIds: [
-                      "temporibus",
-                      "accusantium",
-                      "rem",
-                    ],
-                  },
-                },
-                assigned: false,
-              },
-            },
-            {
-              approval: {
-                appGroupApproval: {},
-                appOwnerApproval: {},
-                entitlementOwnerApproval: {},
-                managerApproval: {},
-                selfApproval: {},
-                userApproval: {},
-              },
-              provision: {
-                provisionPolicy: {
-                  connectorProvision: {},
-                  delegatedProvision: {
-                    appId: "aut",
-                    entitlementId: "laudantium",
-                  },
-                  manualProvision: {
-                    instructions: "eum",
+                    instructions: "quod",
                     userIds: [
                       "ab",
-                      "corrupti",
-                      "non",
+                      "adipisci",
                     ],
                   },
                 },
@@ -339,7 +356,7 @@ sdk.policies.update({
             },
           ],
         },
-        "voluptatem": {
+        "fuga": {
           steps: [
             {
               approval: {
@@ -354,13 +371,189 @@ sdk.policies.update({
                 provisionPolicy: {
                   connectorProvision: {},
                   delegatedProvision: {
-                    appId: "occaecati",
-                    entitlementId: "numquam",
+                    appId: "suscipit",
+                    entitlementId: "velit",
                   },
                   manualProvision: {
-                    instructions: "impedit",
+                    instructions: "culpa",
                     userIds: [
-                      "voluptas",
+                      "recusandae",
+                      "totam",
+                      "fugiat",
+                    ],
+                  },
+                },
+                assigned: false,
+              },
+            },
+            {
+              approval: {
+                appGroupApproval: {},
+                appOwnerApproval: {},
+                entitlementOwnerApproval: {},
+                managerApproval: {},
+                selfApproval: {},
+                userApproval: {},
+              },
+              provision: {
+                provisionPolicy: {
+                  connectorProvision: {},
+                  delegatedProvision: {
+                    appId: "vel",
+                    entitlementId: "ducimus",
+                  },
+                  manualProvision: {
+                    instructions: "quos",
+                    userIds: [
+                      "labore",
+                      "possimus",
+                    ],
+                  },
+                },
+                assigned: false,
+              },
+            },
+            {
+              approval: {
+                appGroupApproval: {},
+                appOwnerApproval: {},
+                entitlementOwnerApproval: {},
+                managerApproval: {},
+                selfApproval: {},
+                userApproval: {},
+              },
+              provision: {
+                provisionPolicy: {
+                  connectorProvision: {},
+                  delegatedProvision: {
+                    appId: "facilis",
+                    entitlementId: "cum",
+                  },
+                  manualProvision: {
+                    instructions: "commodi",
+                    userIds: [
+                      "corporis",
+                      "reiciendis",
+                    ],
+                  },
+                },
+                assigned: false,
+              },
+            },
+          ],
+        },
+        "assumenda": {
+          steps: [
+            {
+              approval: {
+                appGroupApproval: {},
+                appOwnerApproval: {},
+                entitlementOwnerApproval: {},
+                managerApproval: {},
+                selfApproval: {},
+                userApproval: {},
+              },
+              provision: {
+                provisionPolicy: {
+                  connectorProvision: {},
+                  delegatedProvision: {
+                    appId: "recusandae",
+                    entitlementId: "aliquid",
+                  },
+                  manualProvision: {
+                    instructions: "aperiam",
+                    userIds: [
+                      "consectetur",
+                      "in",
+                      "exercitationem",
+                    ],
+                  },
+                },
+                assigned: false,
+              },
+            },
+            {
+              approval: {
+                appGroupApproval: {},
+                appOwnerApproval: {},
+                entitlementOwnerApproval: {},
+                managerApproval: {},
+                selfApproval: {},
+                userApproval: {},
+              },
+              provision: {
+                provisionPolicy: {
+                  connectorProvision: {},
+                  delegatedProvision: {
+                    appId: "earum",
+                    entitlementId: "facere",
+                  },
+                  manualProvision: {
+                    instructions: "numquam",
+                    userIds: [
+                      "suscipit",
+                      "reiciendis",
+                      "quidem",
+                      "saepe",
+                    ],
+                  },
+                },
+                assigned: false,
+              },
+            },
+          ],
+        },
+        "necessitatibus": {
+          steps: [
+            {
+              approval: {
+                appGroupApproval: {},
+                appOwnerApproval: {},
+                entitlementOwnerApproval: {},
+                managerApproval: {},
+                selfApproval: {},
+                userApproval: {},
+              },
+              provision: {
+                provisionPolicy: {
+                  connectorProvision: {},
+                  delegatedProvision: {
+                    appId: "sunt",
+                    entitlementId: "asperiores",
+                  },
+                  manualProvision: {
+                    instructions: "adipisci",
+                    userIds: [
+                      "amet",
+                    ],
+                  },
+                },
+                assigned: false,
+              },
+            },
+            {
+              approval: {
+                appGroupApproval: {},
+                appOwnerApproval: {},
+                entitlementOwnerApproval: {},
+                managerApproval: {},
+                selfApproval: {},
+                userApproval: {},
+              },
+              provision: {
+                provisionPolicy: {
+                  connectorProvision: {},
+                  delegatedProvision: {
+                    appId: "beatae",
+                    entitlementId: "dignissimos",
+                  },
+                  manualProvision: {
+                    instructions: "a",
+                    userIds: [
+                      "consectetur",
+                      "corporis",
+                      "harum",
+                      "laboriosam",
                     ],
                   },
                 },
@@ -378,12 +571,18 @@ sdk.policies.update({
         {
           certifyRemediateImmediately: false,
         },
+        {
+          certifyRemediateImmediately: false,
+        },
+        {
+          certifyRemediateImmediately: false,
+        },
       ],
       reassignTasksToDelegates: false,
     },
-    updateMask: "dicta",
+    updateMask: "libero",
   },
-  id: "f93f5f06-42da-4c7a-b515-cc413aa63aae",
+  id: "1ea42655-5ba3-4c28-b44e-d53b88f3a8d8",
 }).then((res: C1ApiPolicyV1PoliciesUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

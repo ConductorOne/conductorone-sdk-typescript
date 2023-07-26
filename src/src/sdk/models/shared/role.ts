@@ -6,54 +6,48 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- * The Role message.
+ *  Role is a role that can be assigned to a user in ConductorOne.
+ *
+ * @remarks
+ *
  */
 export class RoleInput extends SpeakeasyBase {
     /**
-     * The displayName field.
+     *  The display name of the role.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     * The id field.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "id" })
-    id?: string;
-
-    /**
-     * The name field.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "name" })
-    name?: string;
-
-    /**
-     * The permissions field.
+     *  The list of permissions this role has.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "permissions" })
     permissions?: string[];
 
     /**
-     * The serviceRoles field.
+     *  The list of serviceRoles that this role has.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "serviceRoles" })
     serviceRoles?: string[];
-
-    /**
-     * The systemBuiltin field.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "systemBuiltin" })
-    systemBuiltin?: boolean;
 }
 
 /**
- * The Role message.
+ *  Role is a role that can be assigned to a user in ConductorOne.
+ *
+ * @remarks
+ *
  */
 export class Role extends SpeakeasyBase {
     @SpeakeasyMetadata()
@@ -67,42 +61,60 @@ export class Role extends SpeakeasyBase {
     deletedAt?: Date;
 
     /**
-     * The displayName field.
+     *  The display name of the role.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     * The id field.
+     *  The id of the role.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
     id?: string;
 
     /**
-     * The name field.
+     *  The internal name of the role.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "name" })
     name?: string;
 
     /**
-     * The permissions field.
+     *  The list of permissions this role has.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "permissions" })
     permissions?: string[];
 
     /**
-     * The serviceRoles field.
+     *  The list of serviceRoles that this role has.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "serviceRoles" })
     serviceRoles?: string[];
 
     /**
-     * The systemBuiltin field.
+     *  The system builtin field. If this field is set, the role is not editable.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "systemBuiltin" })

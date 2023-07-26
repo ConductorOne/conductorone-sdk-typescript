@@ -7,7 +7,10 @@ import { AppResourceView } from "./appresourceview";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The AppResourceServiceGetResponse message.
+ *  The app resource service get response contains the app resource view and array of expanded items indicated by the request's expand mask.
+ *
+ * @remarks
+ *
  */
 export class AppResourceServiceGetResponse extends SpeakeasyBase {
     /**
@@ -22,7 +25,10 @@ export class AppResourceServiceGetResponse extends SpeakeasyBase {
     appResourceView?: AppResourceView;
 
     /**
-     * The expanded field.
+     *  List of serialized related objects.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expanded" })

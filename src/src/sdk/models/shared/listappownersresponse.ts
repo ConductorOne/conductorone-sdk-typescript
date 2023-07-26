@@ -7,10 +7,7 @@ import { User } from "./user";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The ListAppOwnersResponse message contains a list of results and a nextPageToken if applicable
- *
- * @remarks
- *
+ * The ListAppOwnersResponse message.
  */
 export class ListAppOwnersResponse extends SpeakeasyBase {
     /**

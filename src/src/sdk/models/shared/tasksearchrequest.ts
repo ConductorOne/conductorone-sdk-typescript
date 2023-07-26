@@ -5,11 +5,14 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { TaskExpandMask } from "./taskexpandmask";
 import { TaskRef } from "./taskref";
-import { TaskType } from "./tasktype";
+import { TaskTypeInput } from "./tasktype";
 import { Expose, Transform, Type } from "class-transformer";
 
 /**
- * The currentStep field.
+ *  Search tasks that have this type of step as the current step.
+ *
+ * @remarks
+ *
  */
 export enum TaskSearchRequestCurrentStep {
     TaskSearchCurrentStepUnspecified = "TASK_SEARCH_CURRENT_STEP_UNSPECIFIED",
@@ -18,7 +21,10 @@ export enum TaskSearchRequestCurrentStep {
 }
 
 /**
- * The emergencyStatus field.
+ *  Search tasks that are or are not emergency access.
+ *
+ * @remarks
+ *
  */
 export enum TaskSearchRequestEmergencyStatus {
     Unspecified = "UNSPECIFIED",
@@ -28,7 +34,10 @@ export enum TaskSearchRequestEmergencyStatus {
 }
 
 /**
- * The sortBy field.
+ *  Sort tasks in a specific order.
+ *
+ * @remarks
+ *
  */
 export enum TaskSearchRequestSortBy {
     TaskSearchSortByUnspecified = "TASK_SEARCH_SORT_BY_UNSPECIFIED",
@@ -44,9 +53,12 @@ export enum TaskSearchRequestTaskStates {
 }
 
 /**
- * The TaskSearchRequest message.
+ *  Search for tasks based on a plethora filters.
+ *
+ * @remarks
+ *
  */
-export class TaskSearchRequest extends SpeakeasyBase {
+export class TaskSearchRequestInput extends SpeakeasyBase {
     /**
      *  The task expand mask is an array of strings that specifes the related objects the requester wishes to have returned when making a request where the expand mask is part of the input. Use '*' to view all possible responses.
      *
@@ -59,49 +71,67 @@ export class TaskSearchRequest extends SpeakeasyBase {
     taskExpandMask?: TaskExpandMask;
 
     /**
-     * The accessReviewIds field.
+     *  Search tasks that belong to any of the access reviews included in this list.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "accessReviewIds" })
     accessReviewIds?: string[];
 
     /**
-     * The accountOwnerIds field.
+     *  Search tasks that have any of these account owners.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "accountOwnerIds" })
     accountOwnerIds?: string[];
 
     /**
-     * The actorId field.
+     *  Search tasks that have this actor ID.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "actorId" })
     actorId?: string;
 
     /**
-     * The appEntitlementIds field.
+     *  Search tasks that have any of these app entitlement IDs.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appEntitlementIds" })
     appEntitlementIds?: string[];
 
     /**
-     * The appResourceIds field.
+     *  Search tasks that have any of these app resource IDs.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appResourceIds" })
     appResourceIds?: string[];
 
     /**
-     * The appResourceTypeIds field.
+     *  Search tasks that have any of these app resource type IDs.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appResourceTypeIds" })
     appResourceTypeIds?: string[];
 
     /**
-     *  Find Tasks which are referncing a Set of AppUserIDs
+     *  Search tasks that have any of these app users as subjects.
      *
      * @remarks
      *
@@ -111,7 +141,10 @@ export class TaskSearchRequest extends SpeakeasyBase {
     appUserSubjectIds?: string[];
 
     /**
-     * The applicationIds field.
+     *  Search tasks that have any of these apps as targets.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "applicationIds" })
@@ -138,21 +171,30 @@ export class TaskSearchRequest extends SpeakeasyBase {
     createdBefore?: Date;
 
     /**
-     * The currentStep field.
+     *  Search tasks that have this type of step as the current step.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "currentStep" })
     currentStep?: TaskSearchRequestCurrentStep;
 
     /**
-     * The emergencyStatus field.
+     *  Search tasks that are or are not emergency access.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "emergencyStatus" })
     emergencyStatus?: TaskSearchRequestEmergencyStatus;
 
     /**
-     * The excludeAppEntitlementIds field.
+     *  Search tasks that do not have any of these app entitlement IDs.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "excludeAppEntitlementIds" })
@@ -169,14 +211,17 @@ export class TaskSearchRequest extends SpeakeasyBase {
     excludeIds?: string[];
 
     /**
-     * The includeDeleted field.
+     *  Whether or not to include deleted tasks.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "includeDeleted" })
     includeDeleted?: boolean;
 
     /**
-     *  Search tasks by a List of UserIDs which are currently assigned to OR have previously acted upon this Task
+     *  Search tasks where the user would see this task in the My Work section
      *
      * @remarks
      *
@@ -186,7 +231,7 @@ export class TaskSearchRequest extends SpeakeasyBase {
     myWorkUserIds?: string[];
 
     /**
-     *  Find a Task which was opened by UserIDs
+     *  Search tasks that were created by any of the users in this array.
      *
      * @remarks
      *
@@ -196,21 +241,27 @@ export class TaskSearchRequest extends SpeakeasyBase {
     openerIds?: string[];
 
     /**
-     * The pageSize field.
+     *  The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageSize" })
     pageSize?: number;
 
     /**
-     * The pageToken field.
+     *  The pageToken field.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageToken" })
     pageToken?: string;
 
     /**
-     *  Search tasks by a  List of UserIDs which have previously approved or otherwise acted upon this Task
+     *  Search tasks that were acted on by any of these users.
      *
      * @remarks
      *
@@ -220,14 +271,20 @@ export class TaskSearchRequest extends SpeakeasyBase {
     previouslyActedOnIds?: string[];
 
     /**
-     * The query field.
+     *  Fuzzy search tasks by display name or description. Also can search by numeric ID.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "query" })
     query?: string;
 
     /**
-     * The refs field.
+     *  Query tasks by display name, description, or numeric ID.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata({ elemType: TaskRef })
     @Expose({ name: "refs" })
@@ -235,14 +292,17 @@ export class TaskSearchRequest extends SpeakeasyBase {
     refs?: TaskRef[];
 
     /**
-     * The sortBy field.
+     *  Sort tasks in a specific order.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "sortBy" })
     sortBy?: TaskSearchRequestSortBy;
 
     /**
-     *  Find Tasks which are referncing this C1 UserID
+     *  Search tasks where these users are the subject.
      *
      * @remarks
      *
@@ -252,20 +312,23 @@ export class TaskSearchRequest extends SpeakeasyBase {
     subjectIds?: string[];
 
     /**
-     * The taskStates field.
+     *  Search tasks with this task state.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "taskStates" })
     taskStates?: TaskSearchRequestTaskStates[];
 
     /**
-     *  TODO(pquerna): why is this a MESSAGE that only CONTAINS AN ENUM?
+     *  Search tasks with this task type. This is a oneOf, and needs an object, which can be empty, to sort.
      *
      * @remarks
      *
      */
-    @SpeakeasyMetadata({ elemType: TaskType })
+    @SpeakeasyMetadata({ elemType: TaskTypeInput })
     @Expose({ name: "taskTypes" })
-    @Type(() => TaskType)
-    taskTypes?: TaskType[];
+    @Type(() => TaskTypeInput)
+    taskTypes?: TaskTypeInput[];
 }

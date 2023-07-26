@@ -19,7 +19,10 @@ export class C1ApiRequestcatalogV1RequestCatalogManagementServiceRemoveAccessEnt
     contentType: string;
 
     /**
-     * Successful response
+     *  Empty response with a status code indicating success.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     requestCatalogManagementServiceRemoveAccessEntitlementsResponse?: shared.RequestCatalogManagementServiceRemoveAccessEntitlementsResponse;

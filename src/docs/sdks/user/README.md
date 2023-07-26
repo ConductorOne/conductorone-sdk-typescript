@@ -7,7 +7,8 @@
 
 ## get
 
-Invokes the c1.api.user.v1.UserService.Get method.
+ Get a user by ID.
+
 
 ### Example Usage
 
@@ -22,7 +23,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.user.get({
-  id: "ea4b5197-f924-443d-a7ce-52b895c537c6",
+  id: "7ce52b89-5c53-47c6-854e-fb0b34896c3c",
 }).then((res: C1ApiUserV1UserServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -45,7 +46,8 @@ sdk.user.get({
 
 ## list
 
-Invokes the c1.api.user.v1.UserService.List method.
+ List users.
+
 
 ### Example Usage
 
@@ -59,7 +61,10 @@ const sdk = new ConductoroneSDKTypescript({
   },
 });
 
-sdk.user.list().then((res: C1ApiUserV1UserServiceListResponse) => {
+sdk.user.list({
+  pageSize: 6845.53,
+  pageToken: "nostrum",
+}).then((res: C1ApiUserV1UserServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response
   }
@@ -68,9 +73,10 @@ sdk.user.list().then((res: C1ApiUserV1UserServiceListResponse) => {
 
 ### Parameters
 
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `config`                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config) | :heavy_minus_sign:                                           | Available config options for making requests.                |
+| Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                    | [operations.C1ApiUserV1UserServiceListRequest](../../models/operations/c1apiuserv1userservicelistrequest.md) | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
+| `config`                                                                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                                 | :heavy_minus_sign:                                                                                           | Available config options for making requests.                                                                |
 
 
 ### Response

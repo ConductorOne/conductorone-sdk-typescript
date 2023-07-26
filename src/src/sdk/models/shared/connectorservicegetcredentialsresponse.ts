@@ -7,11 +7,17 @@ import { ConnectorCredential } from "./connectorcredential";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The ConnectorServiceGetCredentialsResponse message.
+ *  ConnectorServiceGetCredentialsResponse is the response returned by the get method.
+ *
+ * @remarks
+ *
  */
 export class ConnectorServiceGetCredentialsResponse extends SpeakeasyBase {
     /**
-     * The ConnectorCredential message.
+     *  ConnectorCredential is used by a connector to authenticate with conductor one.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "credential" })

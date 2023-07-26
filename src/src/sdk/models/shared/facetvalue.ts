@@ -6,32 +6,47 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- * The FacetValue message.
+ *  A FacetValue message contains count and value of the facet entry.
+ *
+ * @remarks
+ *
  */
 export class FacetValue extends SpeakeasyBase {
     /**
-     * The count field.
+     *  The count of the values in this facet.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "count" })
     count?: string;
 
     /**
-     * The displayName field.
+     *  The name of this facet.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     * The iconUrl field.
+     *  The icon for this facet.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "iconUrl" })
     iconUrl?: string;
 
     /**
-     * The value field.
+     *  The value of this facet.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "value" })

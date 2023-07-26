@@ -20,7 +20,8 @@ export class Task {
      * Create Grant Task
      *
      * @remarks
-     * Invokes the c1.api.task.v1.TaskService.CreateGrantTask method.
+     *  Create a grant task
+     *
      */
     async createGrantTask(
         req: shared.TaskServiceCreateGrantRequest,
@@ -103,7 +104,8 @@ export class Task {
      * Create Revoke Task
      *
      * @remarks
-     * Invokes the c1.api.task.v1.TaskService.CreateRevokeTask method.
+     *  Create a revoke task
+     *
      */
     async createRevokeTask(
         req: shared.TaskServiceCreateRevokeRequest,
@@ -186,7 +188,8 @@ export class Task {
      * Get
      *
      * @remarks
-     * Invokes the c1.api.task.v1.TaskService.Get method.
+     *  Get a task by ID
+     *
      */
     async get(
         req: operations.C1ApiTaskV1TaskServiceGetRequest,

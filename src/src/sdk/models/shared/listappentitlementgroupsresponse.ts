@@ -7,14 +7,14 @@ import { AppGroup } from "./appgroup";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The ListAppEntitlementGroupsResponse message contains a list of results and a nextPageToken if applicable
+ *  The ListAppEntitlementGroupsResponse message contains a list of results and a nextPageToken if applicable.
  *
  * @remarks
  *
  */
 export class ListAppEntitlementGroupsResponse extends SpeakeasyBase {
     /**
-     *  The list of results containing up to X results, where X is the page size defined in the request
+     *  The list of results containing up to X results, where X is the page size defined in the request.
      *
      * @remarks
      *

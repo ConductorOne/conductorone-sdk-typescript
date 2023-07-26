@@ -10,9 +10,10 @@ import { TaskRevokeSourceReview } from "./taskrevokesourcereview";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The TaskRevokeSource message.
+ *  The TaskRevokeSource message indicates the source of the revoke task is one of expired, nonUsage, request, or review.
  *
  * @remarks
+ *
  *
  * This message contains a oneof named origin. Only a single field of the following list may be set at a time:
  *   - review
@@ -23,7 +24,10 @@ import { Expose, Type } from "class-transformer";
  */
 export class TaskRevokeSource extends SpeakeasyBase {
     /**
-     * The TaskRevokeSourceExpired message.
+     *  The TaskRevokeSourceExpired message indicates that the source of the revoke task is due to a grant expiring.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expired" })
@@ -31,7 +35,10 @@ export class TaskRevokeSource extends SpeakeasyBase {
     taskRevokeSourceExpired?: TaskRevokeSourceExpired;
 
     /**
-     * The TaskRevokeSourceNonUsage message.
+     *  The TaskRevokeSourceNonUsage message indicates that the source of the revoke task is due to the grant not being used.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "nonUsage" })
@@ -39,7 +46,10 @@ export class TaskRevokeSource extends SpeakeasyBase {
     taskRevokeSourceNonUsage?: TaskRevokeSourceNonUsage;
 
     /**
-     * The TaskRevokeSourceRequest message.
+     *  The TaskRevokeSourceRequest message indicates that the source of the revoke task was a request.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "request" })
@@ -47,7 +57,10 @@ export class TaskRevokeSource extends SpeakeasyBase {
     taskRevokeSourceRequest?: TaskRevokeSourceRequest;
 
     /**
-     * The TaskRevokeSourceReview message.
+     *  The TaskRevokeSourceReview message tracks which access review was the source of the specificed revoke ticket.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "review" })

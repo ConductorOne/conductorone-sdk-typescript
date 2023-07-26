@@ -7,7 +7,10 @@ import { User } from "./user";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The UserView message.
+ *  The UserView object provides a user response object, as well as JSONPATHs to related objects provided by expanders.
+ *
+ * @remarks
+ *
  */
 export class UserView extends SpeakeasyBase {
     /**
@@ -22,28 +25,40 @@ export class UserView extends SpeakeasyBase {
     user?: User;
 
     /**
-     * The delegatedUserPath field.
+     *  JSONPATH expression indicating the location of the user objects of delegates of the current user in the expanded array.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "delegatedUserPath" })
     delegatedUserPath?: string;
 
     /**
-     * The directoriesPath field.
+     *  JSONPATH expression indicating the location of directory objects in the expanded array.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "directoriesPath" })
     directoriesPath?: string;
 
     /**
-     * The managersPath field.
+     *  JSONPATH expression indicating the location of the user objects that managed the current user in the expanded array.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "managersPath" })
     managersPath?: string;
 
     /**
-     * The rolesPath field.
+     *  JSONPATH expression indicating the location of the roles of the current user in the expanded array.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "rolesPath" })

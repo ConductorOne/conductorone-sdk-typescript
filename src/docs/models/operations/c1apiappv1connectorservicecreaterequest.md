@@ -1,0 +1,9 @@
+# C1ApiAppV1ConnectorServiceCreateRequest
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `connectorServiceCreateRequest`                                                              | [shared.ConnectorServiceCreateRequest](../../models/shared/connectorservicecreaterequest.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `appId`                                                                                      | *string*                                                                                     | :heavy_check_mark:                                                                           | N/A                                                                                          |

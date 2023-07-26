@@ -1,13 +1,14 @@
 # FacetValue
 
-The FacetValue message.
+ A FacetValue message contains count and value of the facet entry.
+
 
 
 ## Fields
 
-| Field                  | Type                   | Required               | Description            |
-| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
-| `count`                | *string*               | :heavy_minus_sign:     | The count field.       |
-| `displayName`          | *string*               | :heavy_minus_sign:     | The displayName field. |
-| `iconUrl`              | *string*               | :heavy_minus_sign:     | The iconUrl field.     |
-| `value`                | *string*               | :heavy_minus_sign:     | The value field.       |
+| Field                                    | Type                                     | Required                                 | Description                              |
+| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| `count`                                  | *string*                                 | :heavy_minus_sign:                       |  The count of the values in this facet.<br/> |
+| `displayName`                            | *string*                                 | :heavy_minus_sign:                       |  The name of this facet.<br/>            |
+| `iconUrl`                                | *string*                                 | :heavy_minus_sign:                       |  The icon for this facet.<br/>           |
+| `value`                                  | *string*                                 | :heavy_minus_sign:                       |  The value of this facet.<br/>           |

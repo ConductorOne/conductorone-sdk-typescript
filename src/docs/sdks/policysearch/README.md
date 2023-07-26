@@ -23,14 +23,13 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.policySearch.search({
-  displayName: "totam",
-  pageSize: 8539.4,
-  pageToken: "vel",
+  displayName: "hic",
+  pageSize: 3487.83,
+  pageToken: "nobis",
   policyTypes: [
-    SearchPoliciesRequestPolicyTypes.PolicyTypeCertify,
-    SearchPoliciesRequestPolicyTypes.PolicyTypeRevoke,
+    SearchPoliciesRequestPolicyTypes.PolicyTypeAccessRequest,
   ],
-  query: "labore",
+  query: "sed",
 }).then((res: C1ApiPolicyV1PolicySearchSearchResponse) => {
   if (res.statusCode == 200) {
     // handle response

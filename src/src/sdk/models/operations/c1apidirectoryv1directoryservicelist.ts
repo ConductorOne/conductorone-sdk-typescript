@@ -6,12 +6,23 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
+export class C1ApiDirectoryV1DirectoryServiceListRequest extends SpeakeasyBase {
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+    pageSize?: number;
+
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_token" })
+    pageToken?: string;
+}
+
 export class C1ApiDirectoryV1DirectoryServiceListResponse extends SpeakeasyBase {
     @SpeakeasyMetadata()
     contentType: string;
 
     /**
-     * Successful response
+     *  The DirectoryServiceListResponse message contains a list of results and a nextPageToken if applicable.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     directoryServiceListResponse?: shared.DirectoryServiceListResponse;

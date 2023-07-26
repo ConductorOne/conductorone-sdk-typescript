@@ -21,9 +21,10 @@ export class AppEntitlementDurationUnset extends SpeakeasyBase {}
  */
 export class AppEntitlement extends SpeakeasyBase {
     /**
-     * The ProvisionPolicy message.
+     *  ProvisionPolicy is a oneOf that indicates how a provision step should be processed.
      *
      * @remarks
+     *
      *
      * This message contains a oneof named typ. Only a single field of the following list may be set at a time:
      *   - connector
@@ -47,7 +48,7 @@ export class AppEntitlement extends SpeakeasyBase {
     alias?: string;
 
     /**
-     *  The ID of the app that is associated with the app entitlement
+     *  The ID of the app that is associated with the app entitlement.
      *
      * @remarks
      *
@@ -77,7 +78,7 @@ export class AppEntitlement extends SpeakeasyBase {
     appResourceTypeId?: string;
 
     /**
-     *  The ID of the policy that will be used for certify tickets related to the app entitlement
+     *  The ID of the policy that will be used for certify tickets related to the app entitlement.
      *
      * @remarks
      *
@@ -107,7 +108,7 @@ export class AppEntitlement extends SpeakeasyBase {
     deletedAt?: Date;
 
     /**
-     *  The description of the app entitlement
+     *  The description of the app entitlement.
      *
      * @remarks
      *
@@ -146,7 +147,7 @@ export class AppEntitlement extends SpeakeasyBase {
     emergencyGrantEnabled?: boolean;
 
     /**
-     *  The ID of the policy that will be used for emergency access grant tasks
+     *  The ID of the policy that will be used for emergency access grant tasks.
      *
      * @remarks
      *
@@ -166,7 +167,7 @@ export class AppEntitlement extends SpeakeasyBase {
     grantCount?: string;
 
     /**
-     *  The ID of the policy that will be used for grant tickets related to the app entitlement
+     *  The ID of the policy that will be used for grant tickets related to the app entitlement.
      *
      * @remarks
      *
@@ -241,9 +242,10 @@ export class AppEntitlement extends SpeakeasyBase {
  */
 export class AppEntitlementInput extends SpeakeasyBase {
     /**
-     * The ProvisionPolicy message.
+     *  ProvisionPolicy is a oneOf that indicates how a provision step should be processed.
      *
      * @remarks
+     *
      *
      * This message contains a oneof named typ. Only a single field of the following list may be set at a time:
      *   - connector
@@ -257,7 +259,7 @@ export class AppEntitlementInput extends SpeakeasyBase {
     provisionPolicy?: ProvisionPolicy;
 
     /**
-     *  The ID of the app that is associated with the app entitlement
+     *  The ID of the app that is associated with the app entitlement.
      *
      * @remarks
      *
@@ -287,7 +289,7 @@ export class AppEntitlementInput extends SpeakeasyBase {
     appResourceTypeId?: string;
 
     /**
-     *  The ID of the policy that will be used for certify tickets related to the app entitlement
+     *  The ID of the policy that will be used for certify tickets related to the app entitlement.
      *
      * @remarks
      *
@@ -307,7 +309,7 @@ export class AppEntitlementInput extends SpeakeasyBase {
     complianceFrameworkValueIds?: string[];
 
     /**
-     *  The description of the app entitlement
+     *  The description of the app entitlement.
      *
      * @remarks
      *
@@ -346,7 +348,7 @@ export class AppEntitlementInput extends SpeakeasyBase {
     emergencyGrantEnabled?: boolean;
 
     /**
-     *  The ID of the policy that will be used for emergency access grant tasks
+     *  The ID of the policy that will be used for emergency access grant tasks.
      *
      * @remarks
      *
@@ -356,7 +358,7 @@ export class AppEntitlementInput extends SpeakeasyBase {
     emergencyGrantPolicyId?: string;
 
     /**
-     *  The ID of the policy that will be used for grant tickets related to the app entitlement
+     *  The ID of the policy that will be used for grant tickets related to the app entitlement.
      *
      * @remarks
      *

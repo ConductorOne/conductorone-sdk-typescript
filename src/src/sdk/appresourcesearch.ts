@@ -20,7 +20,8 @@ export class AppResourceSearch {
      * Search App Resource Types
      *
      * @remarks
-     * Invokes the c1.api.app.v1.AppResourceSearch.SearchAppResourceTypes method.
+     *  Search app resources based on filters specified in the request body.
+     *
      */
     async searchAppResourceTypes(
         req: shared.SearchAppResourceTypesRequest,

@@ -11,7 +11,7 @@ import { Expose, Type } from "class-transformer";
  */
 export class SearchUsersResponse extends SpeakeasyBase {
     /**
-     *  List of serialized related objects
+     *  List of related objects
      *
      * @remarks
      *

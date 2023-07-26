@@ -7,7 +7,10 @@ import { TaskExpandMask } from "./taskexpandmask";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The TaskServiceCreateGrantRequest message.
+ *  Create a grant task.
+ *
+ * @remarks
+ *
  */
 export class TaskServiceCreateGrantRequest extends SpeakeasyBase {
     /**
@@ -22,35 +25,50 @@ export class TaskServiceCreateGrantRequest extends SpeakeasyBase {
     taskExpandMask?: TaskExpandMask;
 
     /**
-     * The appEntitlementId field.
+     *  The ID of the app entitlement to grant access to.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appEntitlementId" })
-    appEntitlementId?: string;
+    appEntitlementId: string;
 
     /**
-     * The appId field.
+     *  The ID of the app that is associated with the entitlement.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })
-    appId?: string;
+    appId: string;
 
     /**
-     * The appUserId field.
+     *  The ID of the app user to grant access for. This field and identityUserId cannot both be set for a given request.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appUserId" })
     appUserId?: string;
 
     /**
-     * The description field.
+     *  The description of the request.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     * The emergencyAccess field.
+     *  Boolean stating whether or not the task is marked as emergency access.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "emergencyAccess" })
@@ -61,7 +79,10 @@ export class TaskServiceCreateGrantRequest extends SpeakeasyBase {
     grantDuration?: string;
 
     /**
-     * The identityUserId field.
+     *  The ID of the user associated with the app user we are granting access for. This field cannot be set if appUserID is also set.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "identityUserId" })

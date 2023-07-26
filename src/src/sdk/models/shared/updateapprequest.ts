@@ -7,7 +7,10 @@ import { AppInput } from "./app";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The UpdateAppRequest message.
+ *  The UpdateAppRequest message contains the app to update and the fields to update.
+ *
+ * @remarks
+ *
  */
 export class UpdateAppRequestInput extends SpeakeasyBase {
     /**

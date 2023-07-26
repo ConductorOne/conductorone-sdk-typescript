@@ -7,7 +7,10 @@ import { AppUserStatus } from "./appuserstatus";
 import { Expose, Transform, Type } from "class-transformer";
 
 /**
- * The appUserType field.
+ *  The appplication user type. Type can be user, system or service.
+ *
+ * @remarks
+ *
  */
 export enum AppUserAppUserType {
     AppUserTypeUnspecified = "APP_USER_TYPE_UNSPECIFIED",
@@ -17,11 +20,17 @@ export enum AppUserAppUserType {
 }
 
 /**
- * The AppUser message.
+ *  Application User that represents an account in the application.
+ *
+ * @remarks
+ *
  */
 export class AppUser extends SpeakeasyBase {
     /**
-     * The AppUserStatus message.
+     *  The satus of the applicaiton user.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "status" })
@@ -29,14 +38,20 @@ export class AppUser extends SpeakeasyBase {
     appUserStatus?: AppUserStatus;
 
     /**
-     * The appId field.
+     *  The ID of the application.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })
     appId?: string;
 
     /**
-     * The appUserType field.
+     *  The appplication user type. Type can be user, system or service.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appUserType" })
@@ -53,28 +68,40 @@ export class AppUser extends SpeakeasyBase {
     deletedAt?: Date;
 
     /**
-     * The displayName field.
+     *  The display name of the application user.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     * The email field.
+     *  The email field of the application user.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "email" })
     email?: string;
 
     /**
-     * The id field.
+     *  A unique idenditfier of the application user.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
     id?: string;
 
     /**
-     * The identityUserId field.
+     *  The conductor one user ID of the account owner.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "identityUserId" })

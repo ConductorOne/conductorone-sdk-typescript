@@ -1,6 +1,6 @@
 # ConnectorServiceDeleteRequest
 
- Empty request body
+ ConnectorServiceDeleteRequest is a request for deleting a connector. It uses URL values for input.
 
 
 

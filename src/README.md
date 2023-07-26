@@ -161,6 +161,7 @@ sdk.appEntitlementSearch.search({
 
 ### [connector](docs/sdks/connector/README.md)
 
+* [create](docs/sdks/connector/README.md#create) - Create
 * [createDelegated](docs/sdks/connector/README.md#createdelegated) - Create Delegated
 * [delete](docs/sdks/connector/README.md#delete) - Delete
 * [get](docs/sdks/connector/README.md#get) - Get

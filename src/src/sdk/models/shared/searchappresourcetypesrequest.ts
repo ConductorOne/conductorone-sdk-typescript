@@ -6,7 +6,7 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- *  The SearchAppResourceTypesRequest message.
+ *  Search for app resources based on some filters.
  *
  * @remarks
  *
@@ -43,14 +43,20 @@ export class SearchAppResourceTypesRequest extends SpeakeasyBase {
     excludeResourceTypeTraitIds?: string[];
 
     /**
-     * The pageSize field.
+     *  The pageSize where 10 <= pageSize <= 100, default 25.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageSize" })
     pageSize?: number;
 
     /**
-     * The pageToken field.
+     *  The pageToken field.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageToken" })

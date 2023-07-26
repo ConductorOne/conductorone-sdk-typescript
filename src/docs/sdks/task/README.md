@@ -8,7 +8,8 @@
 
 ## createGrantTask
 
-Invokes the c1.api.task.v1.TaskService.CreateGrantTask method.
+ Create a grant task
+
 
 ### Example Usage
 
@@ -25,16 +26,16 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.task.createGrantTask({
   taskExpandMask: {
     paths: [
-      "laudantium",
+      "velit",
     ],
   },
-  appEntitlementId: "quae",
-  appId: "dolor",
-  appUserId: "fugiat",
-  description: "ipsam",
+  appEntitlementId: "atque",
+  appId: "ipsum",
+  appUserId: "impedit",
+  description: "magni",
   emergencyAccess: false,
-  grantDuration: "consequuntur",
-  identityUserId: "ipsa",
+  grantDuration: "soluta",
+  identityUserId: "repudiandae",
 }).then((res: C1ApiTaskV1TaskServiceCreateGrantTaskResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -57,7 +58,8 @@ sdk.task.createGrantTask({
 
 ## createRevokeTask
 
-Invokes the c1.api.task.v1.TaskService.CreateRevokeTask method.
+ Create a revoke task
+
 
 ### Example Usage
 
@@ -74,16 +76,16 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.task.createRevokeTask({
   taskExpandMask: {
     paths: [
-      "eveniet",
-      "impedit",
-      "officiis",
+      "dolore",
+      "iusto",
+      "voluptate",
     ],
   },
-  appEntitlementId: "esse",
-  appId: "necessitatibus",
-  appUserId: "sed",
-  description: "veniam",
-  identityUserId: "nesciunt",
+  appEntitlementId: "sequi",
+  appId: "dignissimos",
+  appUserId: "neque",
+  description: "quo",
+  identityUserId: "deleniti",
 }).then((res: C1ApiTaskV1TaskServiceCreateRevokeTaskResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -106,7 +108,8 @@ sdk.task.createRevokeTask({
 
 ## get
 
-Invokes the c1.api.task.v1.TaskService.Get method.
+ Get a task by ID
+
 
 ### Example Usage
 
@@ -121,7 +124,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.task.get({
-  id: "b668451c-6c6e-4205-a16d-eab3fec9578a",
+  id: "d72f64d1-db1f-42c4-b106-61e96349e1cf",
 }).then((res: C1ApiTaskV1TaskServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response

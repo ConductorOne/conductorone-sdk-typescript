@@ -7,10 +7,7 @@ import { AppEntitlementUserBinding } from "./appentitlementuserbinding";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  This returns a list of app users for the identity in the app. If that app user also has a grant to the entitlement from the request, data about the grant is also returned. It will always return ALL app users for this identity, but only SOME may have grant data.
- *
- * @remarks
- *
+ * The ListAppUsersForIdentityWithGrantResponse message.
  */
 export class ListAppUsersForIdentityWithGrantResponse extends SpeakeasyBase {
     /**
