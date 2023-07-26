@@ -7,11 +7,17 @@ import { DirectoryView } from "./directoryview";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The DirectoryServiceCreateResponse message.
+ *  The DirectoryServiceCreateResponse message.
+ *
+ * @remarks
+ *
  */
 export class DirectoryServiceCreateResponse extends SpeakeasyBase {
     /**
-     * The DirectoryView message.
+     *  The directory view contains a directory and an app_path which is a JSONPATH set to the location in the expand mask that the expanded app will live if requested by the expander.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "directoryView" })
@@ -19,7 +25,10 @@ export class DirectoryServiceCreateResponse extends SpeakeasyBase {
     directoryView?: DirectoryView;
 
     /**
-     * The expanded field.
+     *  List of serialized related objects.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expanded" })

@@ -1,6 +1,7 @@
 # UpdateAppUsageControlsResponse
 
-The UpdateAppUsageControlsResponse message.
+ The UpdateAppUsageControlsResponse message contains the updated AppUsageControls object.
+
 
 
 ## Fields

@@ -9,6 +9,12 @@ import { AxiosResponse } from "axios";
 export class C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsPerCatalogRequest extends SpeakeasyBase {
     @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=catalog_id" })
     catalogId: string;
+
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+    pageSize?: number;
+
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_token" })
+    pageToken?: string;
 }
 
 export class C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsPerCatalogResponse extends SpeakeasyBase {
@@ -16,7 +22,10 @@ export class C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlement
     contentType: string;
 
     /**
-     * Successful response
+     * The RequestCatalogManagementServiceListEntitlementsPerCatalogResponse message contains a list of results and a nextPageToken if applicable.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     requestCatalogManagementServiceListEntitlementsPerCatalogResponse?: shared.RequestCatalogManagementServiceListEntitlementsPerCatalogResponse;

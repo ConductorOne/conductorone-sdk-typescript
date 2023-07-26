@@ -6,11 +6,17 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- * The ConnectorExpandMask message.
+ *  The ConnectorExpandMask is used to expand related objects on a connector.
+ *
+ * @remarks
+ *
  */
 export class ConnectorExpandMask extends SpeakeasyBase {
     /**
-     * The paths field.
+     *  Paths that you want expanded in the response. Possible values are "app_id" and "*".
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "paths" })

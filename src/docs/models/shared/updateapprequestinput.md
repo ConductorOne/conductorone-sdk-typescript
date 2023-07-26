@@ -1,6 +1,7 @@
 # UpdateAppRequestInput
 
-The UpdateAppRequest message.
+ The UpdateAppRequest message contains the app to update and the fields to update.
+
 
 
 ## Fields

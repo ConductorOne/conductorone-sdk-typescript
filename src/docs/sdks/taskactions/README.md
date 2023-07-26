@@ -27,14 +27,15 @@ sdk.taskActions.approve({
   taskActionsServiceApproveRequest: {
     taskExpandMask: {
       paths: [
-        "numquam",
-        "nemo",
+        "itaque",
+        "alias",
+        "nisi",
       ],
     },
-    comment: "quos",
-    policyStepId: "eius",
+    comment: "itaque",
+    policyStepId: "velit",
   },
-  taskId: "aspernatur",
+  taskId: "laborum",
 }).then((res: C1ApiTaskV1TaskActionsServiceApproveResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -75,13 +76,13 @@ sdk.taskActions.comment({
   taskActionsServiceCommentRequest: {
     taskExpandMask: {
       paths: [
-        "nesciunt",
-        "fuga",
+        "dolor",
+        "iusto",
       ],
     },
-    comment: "laudantium",
+    comment: "sit",
   },
-  taskId: "incidunt",
+  taskId: "doloremque",
 }).then((res: C1ApiTaskV1TaskActionsServiceCommentResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -122,13 +123,13 @@ sdk.taskActions.deny({
   taskActionsServiceDenyRequest: {
     taskExpandMask: {
       paths: [
-        "rem",
+        "officia",
       ],
     },
-    comment: "fugiat",
-    policyStepId: "dicta",
+    comment: "recusandae",
+    policyStepId: "ea",
   },
-  taskId: "nisi",
+  taskId: "quidem",
 }).then((res: C1ApiTaskV1TaskActionsServiceDenyResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -169,13 +170,14 @@ sdk.taskActions.escalateToEmergencyAccess({
   taskActionsServiceEscalateToEmergencyAccessRequest: {
     taskExpandMask: {
       paths: [
-        "consectetur",
+        "facilis",
+        "placeat",
       ],
     },
-    comment: "aperiam",
-    policyStepId: "cupiditate",
+    comment: "perspiciatis",
+    policyStepId: "expedita",
   },
-  taskId: "reiciendis",
+  taskId: "deleniti",
 }).then((res: C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse) => {
   if (res.statusCode == 200) {
     // handle response

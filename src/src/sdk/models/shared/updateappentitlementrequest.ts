@@ -8,7 +8,10 @@ import { AppEntitlementExpandMask } from "./appentitlementexpandmask";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The UpdateAppEntitlementRequest message.
+ *  The UpdateAppEntitlementRequest message contains the app entitlement and the fields to be updated.
+ *
+ * @remarks
+ *
  */
 export class UpdateAppEntitlementRequestInput extends SpeakeasyBase {
     /**
@@ -28,7 +31,7 @@ export class UpdateAppEntitlementRequestInput extends SpeakeasyBase {
     appEntitlement?: AppEntitlementInput;
 
     /**
-     *  The app entitlement expand mask allows the user to get additonal information when getting responses containing app entitlement views.
+     *  The app entitlement expand mask allows the user to get additional information when getting responses containing app entitlement views.
      *
      * @remarks
      *

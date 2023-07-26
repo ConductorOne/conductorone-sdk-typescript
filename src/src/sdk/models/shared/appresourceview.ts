@@ -14,7 +14,10 @@ import { Expose, Type } from "class-transformer";
  */
 export class AppResourceView extends SpeakeasyBase {
     /**
-     * The AppResource message.
+     *  The app resource message is a single resource that can have entitlements.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appResource" })

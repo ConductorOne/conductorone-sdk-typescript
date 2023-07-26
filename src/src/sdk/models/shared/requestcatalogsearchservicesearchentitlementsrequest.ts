@@ -7,7 +7,10 @@ import { AppEntitlementExpandMask } from "./appentitlementexpandmask";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The grantedStatus field.
+ *  Search entitlements with this granted status for your signed in user.
+ *
+ * @remarks
+ *
  */
 export enum RequestCatalogSearchServiceSearchEntitlementsRequestGrantedStatus {
     Unspecified = "UNSPECIFIED",
@@ -17,11 +20,14 @@ export enum RequestCatalogSearchServiceSearchEntitlementsRequestGrantedStatus {
 }
 
 /**
- * The RequestCatalogSearchServiceSearchEntitlementsRequest message.
+ *  The RequestCatalogSearchServiceSearchEntitlementsRequest searches entitlements, but only ones that are available to you through the open catalogs.
+ *
+ * @remarks
+ *
  */
 export class RequestCatalogSearchServiceSearchEntitlementsRequest extends SpeakeasyBase {
     /**
-     *  The app entitlement expand mask allows the user to get additonal information when getting responses containing app entitlement views.
+     *  The app entitlement expand mask allows the user to get additional information when getting responses containing app entitlement views.
      *
      * @remarks
      *
@@ -32,35 +38,50 @@ export class RequestCatalogSearchServiceSearchEntitlementsRequest extends Speake
     appEntitlementExpandMask?: AppEntitlementExpandMask;
 
     /**
-     * The entitlementAlias field.
+     *  Search for entitlements with this alias (exact match).
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "entitlementAlias" })
     entitlementAlias?: string;
 
     /**
-     * The grantedStatus field.
+     *  Search entitlements with this granted status for your signed in user.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "grantedStatus" })
     grantedStatus?: RequestCatalogSearchServiceSearchEntitlementsRequestGrantedStatus;
 
     /**
-     * The pageSize field.
+     *  The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageSize" })
     pageSize?: number;
 
     /**
-     * The pageToken field.
+     *  The pageToken field.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageToken" })
     pageToken?: string;
 
     /**
-     * The query field.
+     *  Fuzzy search the display name of resource types.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "query" })

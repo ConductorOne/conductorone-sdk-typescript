@@ -7,7 +7,10 @@ import { PolicyInput } from "./policy";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The UpdatePolicyRequest message.
+ *  The UpdatePolicyRequest message contains the policy object to update and a field mask to indicate which fields to update. It uses URL value for input.
+ *
+ * @remarks
+ *
  */
 export class UpdatePolicyRequestInput extends SpeakeasyBase {
     /**

@@ -6,18 +6,27 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- * The TaskRevokeSourceReview message.
+ *  The TaskRevokeSourceReview message tracks which access review was the source of the specificed revoke ticket.
+ *
+ * @remarks
+ *
  */
 export class TaskRevokeSourceReview extends SpeakeasyBase {
     /**
-     * The accessReviewId field.
+     *  The ID of the access review associated with the revoke task.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "accessReviewId" })
     accessReviewId?: string;
 
     /**
-     * The certTicketId field.
+     *  The ID of the certify ticket that was denied and created this revoke task.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "certTicketId" })

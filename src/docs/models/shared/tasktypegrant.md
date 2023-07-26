@@ -1,16 +1,10 @@
 # TaskTypeGrant
 
-The TaskTypeGrant message.
+ The TaskTypeGrant message indicates that a task is a grant task and all related details.
+
 
 
 ## Fields
 
-| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
-| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `appEntitlementId`                                                                            | *string*                                                                                      | :heavy_minus_sign:                                                                            | The appEntitlementId field.                                                                   |
-| `appId`                                                                                       | *string*                                                                                      | :heavy_minus_sign:                                                                            | The appId field.                                                                              |
-| `appUserId`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | The appUserId field.                                                                          |
-| `grantDuration`                                                                               | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `identityUserId`                                                                              | *string*                                                                                      | :heavy_minus_sign:                                                                            | The identityUserId field.                                                                     |
-| `outcome`                                                                                     | [TaskTypeGrantOutcome](../../models/shared/tasktypegrantoutcome.md)                           | :heavy_minus_sign:                                                                            | The outcome field.                                                                            |
-| `outcomeTime`                                                                                 | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| Field       | Type        | Required    | Description |
+| ----------- | ----------- | ----------- | ----------- |

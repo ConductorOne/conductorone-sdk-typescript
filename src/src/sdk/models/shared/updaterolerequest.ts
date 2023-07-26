@@ -7,11 +7,17 @@ import { RoleInput } from "./role";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The UpdateRoleRequest message.
+ *  The UpdateRoleRequest message contains the role to update and the update mask.
+ *
+ * @remarks
+ *
  */
 export class UpdateRoleRequestInput extends SpeakeasyBase {
     /**
-     * The Role message.
+     *  Role is a role that can be assigned to a user in ConductorOne.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "role" })

@@ -12,6 +12,12 @@ export class C1ApiAppV1AppEntitlementsListUsersRequest extends SpeakeasyBase {
 
     @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=app_id" })
     appId: string;
+
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+    pageSize?: number;
+
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_token" })
+    pageToken?: string;
 }
 
 export class C1ApiAppV1AppEntitlementsListUsersResponse extends SpeakeasyBase {
@@ -19,7 +25,7 @@ export class C1ApiAppV1AppEntitlementsListUsersResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
-     *  The ListAppEntitlementUsersResponse message contains a list of results and a nextPageToken if applicable
+     *  The ListAppEntitlementUsersResponse message contains a list of results and a nextPageToken if applicable.
      *
      * @remarks
      *

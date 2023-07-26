@@ -20,7 +20,8 @@ export class AppResourceOwners {
      * List
      *
      * @remarks
-     * Invokes the c1.api.app.v1.AppResourceOwners.List method.
+     *  List all owners of an app resource.
+     *
      */
     async list(
         req: operations.C1ApiAppV1AppResourceOwnersListRequest,
@@ -44,6 +45,7 @@ export class AppResourceOwners {
             this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
+        const queryParams: string = utils.serializeQueryParams(req);
         headers["Accept"] = "application/json";
         headers[
             "user-agent"
@@ -51,7 +53,7 @@ export class AppResourceOwners {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: url + queryParams,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",

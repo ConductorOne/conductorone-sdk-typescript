@@ -10,6 +10,12 @@ export class C1ApiAppV1AppResourceOwnersListRequest extends SpeakeasyBase {
     @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=app_id" })
     appId: string;
 
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+    pageSize?: number;
+
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_token" })
+    pageToken?: string;
+
     @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=resource_id" })
     resourceId: string;
 
@@ -22,7 +28,10 @@ export class C1ApiAppV1AppResourceOwnersListResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
-     * Successful response
+     *  The ListAppResourceOwnersResponse message contains a list of results and a nextPageToken if applicable
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     listAppResourceOwnersResponse?: shared.ListAppResourceOwnersResponse;

@@ -17,10 +17,103 @@ export class Connector {
     }
 
     /**
+     * Create
+     *
+     * @remarks
+     *  Create a configured connector.
+     *
+     */
+    async create(
+        req: operations.C1ApiAppV1ConnectorServiceCreateRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.C1ApiAppV1ConnectorServiceCreateResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.C1ApiAppV1ConnectorServiceCreateRequest(req);
+        }
+
+        const baseURL: string = utils.templateUrl(
+            this.sdkConfiguration.serverURL,
+            this.sdkConfiguration.serverDefaults
+        );
+        const url: string = utils.generateURL(
+            baseURL,
+            "/api/v1/apps/{app_id}/connectors/create",
+            req
+        );
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+                req,
+                "connectorServiceCreateRequest",
+                "json"
+            );
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
+        }
+
+        const client: AxiosInstance =
+            this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
+
+        const headers = { ...reqBodyHeaders, ...config?.headers };
+        headers["Accept"] = "application/json";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this.sdkConfiguration.language} ${this.sdkConfiguration.sdkVersion} ${this.sdkConfiguration.genVersion} ${this.sdkConfiguration.openapiDocVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "post",
+            headers: headers,
+            responseType: "arraybuffer",
+            data: reqBody,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.C1ApiAppV1ConnectorServiceCreateResponse =
+            new operations.C1ApiAppV1ConnectorServiceCreateResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.connectorServiceCreateResponse = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.ConnectorServiceCreateResponse
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+        }
+
+        return res;
+    }
+
+    /**
      * Create Delegated
      *
      * @remarks
-     * Invokes the c1.api.app.v1.ConnectorService.CreateDelegated method.
+     *  Create a connector that is pending a connector config.
+     *
      */
     async createDelegated(
         req: operations.C1ApiAppV1ConnectorServiceCreateDelegatedRequest,
@@ -107,7 +200,8 @@ export class Connector {
      * Delete
      *
      * @remarks
-     * Invokes the c1.api.app.v1.ConnectorService.Delete method.
+     *  Delete a connector.
+     *
      */
     async delete(
         req: operations.C1ApiAppV1ConnectorServiceDeleteRequest,
@@ -198,7 +292,8 @@ export class Connector {
      * Get
      *
      * @remarks
-     * Invokes the c1.api.app.v1.ConnectorService.Get method.
+     *  Get a connector.
+     *
      */
     async get(
         req: operations.C1ApiAppV1ConnectorServiceGetRequest,
@@ -274,7 +369,8 @@ export class Connector {
      * Get Credentials
      *
      * @remarks
-     * Invokes the c1.api.app.v1.ConnectorService.GetCredentials method.
+     *  Get credentials for a connector.
+     *
      */
     async getCredentials(
         req: operations.C1ApiAppV1ConnectorServiceGetCredentialsRequest,
@@ -350,7 +446,8 @@ export class Connector {
      * List
      *
      * @remarks
-     * Invokes the c1.api.app.v1.ConnectorService.List method.
+     *  List connectors for an app.
+     *
      */
     async list(
         req: operations.C1ApiAppV1ConnectorServiceListRequest,
@@ -370,6 +467,7 @@ export class Connector {
             this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
+        const queryParams: string = utils.serializeQueryParams(req);
         headers["Accept"] = "application/json";
         headers[
             "user-agent"
@@ -377,7 +475,7 @@ export class Connector {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: url + queryParams,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",
@@ -422,7 +520,8 @@ export class Connector {
      * Revoke Credential
      *
      * @remarks
-     * Invokes the c1.api.app.v1.ConnectorService.RevokeCredential method.
+     *  Revoke credentials for a connector.
+     *
      */
     async revokeCredential(
         req: operations.C1ApiAppV1ConnectorServiceRevokeCredentialRequest,
@@ -513,7 +612,8 @@ export class Connector {
      * Rotate Credential
      *
      * @remarks
-     * Invokes the c1.api.app.v1.ConnectorService.RotateCredential method.
+     *  Rotate credentials for a connector.
+     *
      */
     async rotateCredential(
         req: operations.C1ApiAppV1ConnectorServiceRotateCredentialRequest,
@@ -604,7 +704,8 @@ export class Connector {
      * Update
      *
      * @remarks
-     * Invokes the c1.api.app.v1.ConnectorService.Update method.
+     *  Update a connector.
+     *
      */
     async update(
         req: operations.C1ApiAppV1ConnectorServiceUpdateRequest,
@@ -695,7 +796,8 @@ export class Connector {
      * Update Delegated
      *
      * @remarks
-     * Invokes the c1.api.app.v1.ConnectorService.UpdateDelegated method.
+     *  Update a delegated connector.
+     *
      */
     async updateDelegated(
         req: operations.C1ApiAppV1ConnectorServiceUpdateDelegatedRequest,

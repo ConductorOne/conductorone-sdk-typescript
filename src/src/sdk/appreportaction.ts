@@ -20,7 +20,8 @@ export class AppReportAction {
      * Generate Report
      *
      * @remarks
-     * Invokes the c1.api.app.v1.AppReportActionService.GenerateReport method.
+     *  Generate a report for the given app.
+     *
      */
     async generateReport(
         req: operations.C1ApiAppV1AppReportActionServiceGenerateReportRequest,

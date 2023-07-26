@@ -1,12 +1,11 @@
 # UpdateAppEntitlementResponse
 
- The UpdateAppEntitlementResponse message contains the updated app entitlement view.
-
+The UpdateAppEntitlementResponse message.
 
 
 ## Fields
 
-| Field                                                           | Type                                                            | Required                                                        | Description                                                     |
-| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
-| `appEntitlementView`                                            | [AppEntitlementView](../../models/shared/appentitlementview.md) | :heavy_minus_sign:                                              | The AppEntitlementView message.                                 |
-| `expanded`                                                      | Record<string, *any*>[]                                         | :heavy_minus_sign:                                              |  List of serialized related objects<br/>                        |
+| Field                                                                                                                      | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `appEntitlementView`                                                                                                       | [AppEntitlementView](../../models/shared/appentitlementview.md)                                                            | :heavy_minus_sign:                                                                                                         |  The app entitlement view contains the serialized app entitlement and paths to objects referenced by the app entitlement.<br/> |
+| `expanded`                                                                                                                 | Record<string, *any*>[]                                                                                                    | :heavy_minus_sign:                                                                                                         |  List of related objects<br/>                                                                                              |

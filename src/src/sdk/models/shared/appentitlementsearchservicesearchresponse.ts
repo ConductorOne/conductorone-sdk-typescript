@@ -12,7 +12,10 @@ import { Expose, Type } from "class-transformer";
  */
 export class AppEntitlementSearchServiceSearchResponse extends SpeakeasyBase {
     /**
-     * The Facets message.
+     *  Indicates one value of a facet.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "facets" })
@@ -20,7 +23,7 @@ export class AppEntitlementSearchServiceSearchResponse extends SpeakeasyBase {
     facets?: Facets;
 
     /**
-     *  List of serialized related objects.
+     *  List of related objects.
      *
      * @remarks
      *

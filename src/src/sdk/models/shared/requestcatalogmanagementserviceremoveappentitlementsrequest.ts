@@ -7,11 +7,17 @@ import { AppEntitlementRef } from "./appentitlementref";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The RequestCatalogManagementServiceRemoveAppEntitlementsRequest message.
+ *  The RequestCatalogManagementServiceRemoveAppEntitlementsRequest message is used to remove app entitlements from a request catalog.
+ *
+ * @remarks
+ *
  */
 export class RequestCatalogManagementServiceRemoveAppEntitlementsRequest extends SpeakeasyBase {
     /**
-     * The appEntitlements field.
+     *  The list of app entitlements to remove from the catalog.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata({ elemType: AppEntitlementRef })
     @Expose({ name: "appEntitlements" })

@@ -1,17 +1,10 @@
 # TaskTypeCertify
 
-The TaskTypeCertify message.
+ The TaskTypeCertify message indicates that a task is a certify task and all related details.
+
 
 
 ## Fields
 
-| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
-| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `accessReviewId`                                                                              | *string*                                                                                      | :heavy_minus_sign:                                                                            | The accessReviewId field.                                                                     |
-| `accessReviewSelection`                                                                       | *string*                                                                                      | :heavy_minus_sign:                                                                            | The accessReviewSelection field.                                                              |
-| `appEntitlementId`                                                                            | *string*                                                                                      | :heavy_minus_sign:                                                                            | The appEntitlementId field.                                                                   |
-| `appId`                                                                                       | *string*                                                                                      | :heavy_minus_sign:                                                                            | The appId field.                                                                              |
-| `appUserId`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | The appUserId field.                                                                          |
-| `identityUserId`                                                                              | *string*                                                                                      | :heavy_minus_sign:                                                                            | The identityUserId field.                                                                     |
-| `outcome`                                                                                     | [TaskTypeCertifyOutcome](../../models/shared/tasktypecertifyoutcome.md)                       | :heavy_minus_sign:                                                                            | The outcome field.                                                                            |
-| `outcomeTime`                                                                                 | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| Field       | Type        | Required    | Description |
+| ----------- | ----------- | ----------- | ----------- |

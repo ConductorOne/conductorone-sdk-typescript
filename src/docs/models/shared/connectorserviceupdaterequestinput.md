@@ -1,12 +1,13 @@
 # ConnectorServiceUpdateRequestInput
 
-The ConnectorServiceUpdateRequest message.
+ The ConnectorServiceUpdateRequest message contains the fields required to update a connector.
+
 
 
 ## Fields
 
-| Field                                                             | Type                                                              | Required                                                          | Description                                                       |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `connector`                                                       | [ConnectorInput](../../models/shared/connectorinput.md)           | :heavy_minus_sign:                                                | The Connector message.                                            |
-| `connectorExpandMask`                                             | [ConnectorExpandMask](../../models/shared/connectorexpandmask.md) | :heavy_minus_sign:                                                | The ConnectorExpandMask message.                                  |
-| `updateMask`                                                      | *string*                                                          | :heavy_minus_sign:                                                | N/A                                                               |
+| Field                                                                       | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `connector`                                                                 | [ConnectorInput](../../models/shared/connectorinput.md)                     | :heavy_minus_sign:                                                          |  A Connector is used to sync objects into Apps<br/>                         |
+| `connectorExpandMask`                                                       | [ConnectorExpandMask](../../models/shared/connectorexpandmask.md)           | :heavy_minus_sign:                                                          |  The ConnectorExpandMask is used to expand related objects on a connector.<br/> |
+| `updateMask`                                                                | *string*                                                                    | :heavy_minus_sign:                                                          | N/A                                                                         |

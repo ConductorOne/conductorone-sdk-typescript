@@ -12,7 +12,8 @@
 
 ## get
 
-Invokes the c1.api.app.v1.AppEntitlements.Get method.
+ Get an app entitlement by ID.
+
 
 ### Example Usage
 
@@ -51,7 +52,8 @@ sdk.appEntitlements.get({
 
 ## list
 
-Invokes the c1.api.app.v1.AppEntitlements.List method.
+ List app entitlements associated with an app.
+
 
 ### Example Usage
 
@@ -67,6 +69,8 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appEntitlements.list({
   appId: "doloribus",
+  pageSize: 9589.5,
+  pageToken: "architecto",
 }).then((res: C1ApiAppV1AppEntitlementsListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -89,7 +93,8 @@ sdk.appEntitlements.list({
 
 ## listForAppResource
 
-Invokes the c1.api.app.v1.AppEntitlements.ListForAppResource method.
+ List app entitlements associated with an app resource.
+
 
 ### Example Usage
 
@@ -104,9 +109,11 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appEntitlements.listForAppResource({
-  appId: "sapiente",
-  appResourceId: "architecto",
-  appResourceTypeId: "mollitia",
+  appId: "mollitia",
+  appResourceId: "dolorem",
+  appResourceTypeId: "culpa",
+  pageSize: 1613.09,
+  pageToken: "repellat",
 }).then((res: C1ApiAppV1AppEntitlementsListForAppResourceResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -129,7 +136,8 @@ sdk.appEntitlements.listForAppResource({
 
 ## listForAppUser
 
-Invokes the c1.api.app.v1.AppEntitlements.ListForAppUser method.
+ List app entitlements associated with an app user.
+
 
 ### Example Usage
 
@@ -144,8 +152,10 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appEntitlements.listForAppUser({
-  appId: "dolorem",
-  appUserId: "culpa",
+  appId: "mollitia",
+  appUserId: "occaecati",
+  pageSize: 2532.91,
+  pageToken: "commodi",
 }).then((res: C1ApiAppV1AppEntitlementsListForAppUserResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -168,7 +178,8 @@ sdk.appEntitlements.listForAppUser({
 
 ## listGroups
 
-Invokes the c1.api.app.v1.AppEntitlements.ListGroups method.
+ List app groups associated with an app entitlement.
+
 
 ### Example Usage
 
@@ -183,8 +194,10 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appEntitlements.listGroups({
-  appEntitlementId: "consequuntur",
-  appId: "repellat",
+  appEntitlementId: "quam",
+  appId: "molestiae",
+  pageSize: 2444.25,
+  pageToken: "error",
 }).then((res: C1ApiAppV1AppEntitlementsListGroupsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -207,7 +220,8 @@ sdk.appEntitlements.listGroups({
 
 ## listUsers
 
-Invokes the c1.api.app.v1.AppEntitlements.ListUsers method.
+ List the users, as AppEntitlementUsers objects, of an app entitlement.
+
 
 ### Example Usage
 
@@ -222,8 +236,10 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appEntitlements.listUsers({
-  appEntitlementId: "mollitia",
-  appId: "occaecati",
+  appEntitlementId: "quia",
+  appId: "quis",
+  pageSize: 1103.75,
+  pageToken: "laborum",
 }).then((res: C1ApiAppV1AppEntitlementsListUsersResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -246,7 +262,8 @@ sdk.appEntitlements.listUsers({
 
 ## update
 
-Invokes the c1.api.app.v1.AppEntitlements.Update method.
+ Update an app entitlement by ID.
+
 
 ### Example Usage
 
@@ -266,49 +283,49 @@ sdk.appEntitlements.update({
       provisionPolicy: {
         connectorProvision: {},
         delegatedProvision: {
-          appId: "numquam",
-          entitlementId: "commodi",
+          appId: "animi",
+          entitlementId: "enim",
         },
         manualProvision: {
-          instructions: "quam",
+          instructions: "odit",
           userIds: [
-            "velit",
-            "error",
+            "sequi",
+            "tenetur",
+            "ipsam",
+            "id",
           ],
         },
       },
-      appId: "quia",
-      appResourceId: "quis",
-      appResourceTypeId: "vitae",
-      certifyPolicyId: "laborum",
+      appId: "possimus",
+      appResourceId: "aut",
+      appResourceTypeId: "quasi",
+      certifyPolicyId: "error",
       complianceFrameworkValueIds: [
-        "enim",
-        "odit",
-        "quo",
-      ],
-      description: "sequi",
-      displayName: "tenetur",
-      durationGrant: "ipsam",
-      durationUnset: {},
-      emergencyGrantEnabled: false,
-      emergencyGrantPolicyId: "id",
-      grantPolicyId: "possimus",
-      revokePolicyId: "aut",
-      riskLevelValueId: "quasi",
-      slug: "error",
-    },
-    appEntitlementExpandMask: {
-      paths: [
         "laborum",
         "quasi",
         "reiciendis",
         "voluptatibus",
       ],
+      description: "vero",
+      displayName: "nihil",
+      durationGrant: "praesentium",
+      durationUnset: {},
+      emergencyGrantEnabled: false,
+      emergencyGrantPolicyId: "voluptatibus",
+      grantPolicyId: "ipsa",
+      revokePolicyId: "omnis",
+      riskLevelValueId: "voluptate",
+      slug: "cum",
     },
-    updateMask: "vero",
+    appEntitlementExpandMask: {
+      paths: [
+        "doloremque",
+      ],
+    },
+    updateMask: "reprehenderit",
   },
-  appId: "nihil",
-  id: "8f097b00-74f1-4547-9b5e-6e13b99d488e",
+  appId: "ut",
+  id: "f15471b5-e6e1-43b9-9d48-8e1e91e450ad",
 }).then((res: C1ApiAppV1AppEntitlementsUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

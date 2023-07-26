@@ -9,9 +9,10 @@ import { ManualProvision } from "./manualprovision";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The ProvisionPolicy message.
+ *  ProvisionPolicy is a oneOf that indicates how a provision step should be processed.
  *
  * @remarks
+ *
  *
  * This message contains a oneof named typ. Only a single field of the following list may be set at a time:
  *   - connector

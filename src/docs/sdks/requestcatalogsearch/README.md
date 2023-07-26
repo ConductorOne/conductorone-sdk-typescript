@@ -6,7 +6,8 @@
 
 ## searchEntitlements
 
-Invokes the c1.api.requestcatalog.v1.RequestCatalogSearchService.SearchEntitlements method.
+ Search request catalogs based on filters specified in the request body.
+
 
 ### Example Usage
 
@@ -24,15 +25,16 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.requestCatalogSearch.searchEntitlements({
   appEntitlementExpandMask: {
     paths: [
-      "ad",
-      "expedita",
+      "esse",
+      "nemo",
+      "reprehenderit",
     ],
   },
-  entitlementAlias: "voluptatem",
-  grantedStatus: RequestCatalogSearchServiceSearchEntitlementsRequestGrantedStatus.Granted,
-  pageSize: 7372.54,
-  pageToken: "aliquid",
-  query: "beatae",
+  entitlementAlias: "est",
+  grantedStatus: RequestCatalogSearchServiceSearchEntitlementsRequestGrantedStatus.All,
+  pageSize: 5718.44,
+  pageToken: "accusamus",
+  query: "impedit",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogSearchServiceSearchEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response

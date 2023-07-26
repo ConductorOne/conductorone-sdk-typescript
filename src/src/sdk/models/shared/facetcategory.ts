@@ -8,9 +8,10 @@ import { FacetValueItem } from "./facetvalueitem";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The FacetCategory message.
+ *  The FacetCategory indicates a grouping of facets by type. For example, facets "OnePassword" and "Okta" would group under an "Apps" category.
  *
  * @remarks
+ *
  *
  * This message contains a oneof named item. Only a single field of the following list may be set at a time:
  *   - value
@@ -19,7 +20,10 @@ import { Expose, Type } from "class-transformer";
  */
 export class FacetCategory extends SpeakeasyBase {
     /**
-     * The FacetRangeItem message.
+     *  The FacetRangeItem message.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "range" })
@@ -27,7 +31,10 @@ export class FacetCategory extends SpeakeasyBase {
     facetRangeItem?: FacetRangeItem;
 
     /**
-     * The FacetValueItem message.
+     *  The FacetValueItem message.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "value" })
@@ -35,21 +42,30 @@ export class FacetCategory extends SpeakeasyBase {
     facetValueItem?: FacetValueItem;
 
     /**
-     * The displayName field.
+     *  The display name of the category.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     * The iconUrl field.
+     *  An icon for the category.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "iconUrl" })
     iconUrl?: string;
 
     /**
-     * The param field.
+     *  The param that is being set when checking a facet in this category.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "param" })

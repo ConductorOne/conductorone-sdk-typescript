@@ -1,6 +1,7 @@
 # UpdateAppUsageControlsRequest
 
-The UpdateAppUsageControlsRequest message.
+ The UpdateAppUsageControlsRequest message contains the AppUsageControls object to update and the update mask.
+
 
 
 ## Fields

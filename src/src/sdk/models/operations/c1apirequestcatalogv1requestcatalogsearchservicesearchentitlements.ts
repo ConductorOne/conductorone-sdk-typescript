@@ -11,7 +11,10 @@ export class C1ApiRequestcatalogV1RequestCatalogSearchServiceSearchEntitlementsR
     contentType: string;
 
     /**
-     * Successful response
+     *  The RequestCatalogSearchServiceSearchEntitlementsResponse message contains a list of results and a nextPageToken if applicable.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     requestCatalogSearchServiceSearchEntitlementsResponse?: shared.RequestCatalogSearchServiceSearchEntitlementsResponse;

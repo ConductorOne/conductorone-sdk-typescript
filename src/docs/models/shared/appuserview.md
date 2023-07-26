@@ -1,13 +1,14 @@
 # AppUserView
 
-The AppUserView message.
+ The AppUserView contains an app user as well as paths for apps, identity users, and last usage in expanded arrays.
+
 
 
 ## Fields
 
-| Field                                     | Type                                      | Required                                  | Description                               |
-| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| `appUser`                                 | [AppUser](../../models/shared/appuser.md) | :heavy_minus_sign:                        | The AppUser message.                      |
-| `appPath`                                 | *string*                                  | :heavy_minus_sign:                        | The appPath field.                        |
-| `identityUserPath`                        | *string*                                  | :heavy_minus_sign:                        | The identityUserPath field.               |
-| `lastUsagePath`                           | *string*                                  | :heavy_minus_sign:                        | The lastUsagePath field.                  |
+| Field                                                                                                                      | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `appUser`                                                                                                                  | [AppUser](../../models/shared/appuser.md)                                                                                  | :heavy_minus_sign:                                                                                                         |  Application User that represents an account in the application.<br/>                                                      |
+| `appPath`                                                                                                                  | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         |  JSONPATH expression indicating where the app is expanded in expanded arrays indicated in the request.<br/>                |
+| `identityUserPath`                                                                                                         | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         |  JSONPATH expression indicating where the identity user is expanded in expanded arrays indicated in the request.<br/>      |
+| `lastUsagePath`                                                                                                            | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         |  JSONPATH expression indicating where the last usage information is expanded in expanded arrays indicated in the request.<br/> |

@@ -6,7 +6,8 @@
 
 ## generateReport
 
-Invokes the c1.api.app.v1.AppReportActionService.GenerateReport method.
+ Generate a report for the given app.
+
 
 ### Example Usage
 
@@ -22,7 +23,7 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appReportAction.generateReport({
   appActionsServiceGenerateReportRequest: {},
-  appId: "enim",
+  appId: "perferendis",
 }).then((res: C1ApiAppV1AppReportActionServiceGenerateReportResponse) => {
   if (res.statusCode == 200) {
     // handle response

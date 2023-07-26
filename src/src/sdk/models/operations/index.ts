@@ -30,6 +30,7 @@ export * from "./c1apiappv1appslist";
 export * from "./c1apiappv1appsupdate";
 export * from "./c1apiappv1appusagecontrolsserviceget";
 export * from "./c1apiappv1appusagecontrolsserviceupdate";
+export * from "./c1apiappv1connectorservicecreate";
 export * from "./c1apiappv1connectorservicecreatedelegated";
 export * from "./c1apiappv1connectorservicedelete";
 export * from "./c1apiappv1connectorserviceget";

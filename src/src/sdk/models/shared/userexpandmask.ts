@@ -6,11 +6,18 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- * The UserExpandMask message.
+ *  The user expand mask is used to indicate which related objects should be expanded in the response.
+ *
+ * @remarks
+ *  The supported paths are 'role_ids', 'manager_ids', 'delegated_user_id', 'directory_ids', and '*'.
+ *
  */
 export class UserExpandMask extends SpeakeasyBase {
     /**
-     * The paths field.
+     *  An array of paths to be expanded in the response.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "paths" })

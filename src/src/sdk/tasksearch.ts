@@ -20,14 +20,15 @@ export class TaskSearch {
      * Search
      *
      * @remarks
-     * Invokes the c1.api.task.v1.TaskSearchService.Search method.
+     *  Search tasks based on filters specified in the request body.
+     *
      */
     async search(
-        req: shared.TaskSearchRequest,
+        req: shared.TaskSearchRequestInput,
         config?: AxiosRequestConfig
     ): Promise<operations.C1ApiTaskV1TaskSearchServiceSearchResponse> {
         if (!(req instanceof utils.SpeakeasyBase)) {
-            req = new shared.TaskSearchRequest(req);
+            req = new shared.TaskSearchRequestInput(req);
         }
 
         const baseURL: string = utils.templateUrl(

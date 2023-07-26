@@ -9,7 +9,8 @@
 
 ## create
 
-Invokes the c1.api.directory.v1.DirectoryService.Create method.
+ Create a directory.
+
 
 ### Example Usage
 
@@ -26,10 +27,10 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.directory.create({
   directoryExpandMask: {
     paths: [
-      "deleniti",
+      "saepe",
     ],
   },
-  appId: "fugit",
+  appId: "vel",
 }).then((res: C1ApiDirectoryV1DirectoryServiceCreateResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -52,7 +53,8 @@ sdk.directory.create({
 
 ## delete
 
-Invokes the c1.api.directory.v1.DirectoryService.Delete method.
+ Delete a directory by app_id.
+
 
 ### Example Usage
 
@@ -68,7 +70,7 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.directory.delete({
   directoryServiceDeleteRequest: {},
-  appId: "fuga",
+  appId: "harum",
 }).then((res: C1ApiDirectoryV1DirectoryServiceDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -91,7 +93,8 @@ sdk.directory.delete({
 
 ## get
 
-Invokes the c1.api.directory.v1.DirectoryService.Get method.
+ Get a directory by app_id.
+
 
 ### Example Usage
 
@@ -106,7 +109,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.directory.get({
-  appId: "mollitia",
+  appId: "molestiae",
 }).then((res: C1ApiDirectoryV1DirectoryServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -129,7 +132,8 @@ sdk.directory.get({
 
 ## list
 
-Invokes the c1.api.directory.v1.DirectoryService.List method.
+ List directories.
+
 
 ### Example Usage
 
@@ -143,7 +147,10 @@ const sdk = new ConductoroneSDKTypescript({
   },
 });
 
-sdk.directory.list().then((res: C1ApiDirectoryV1DirectoryServiceListResponse) => {
+sdk.directory.list({
+  pageSize: 6996.22,
+  pageToken: "occaecati",
+}).then((res: C1ApiDirectoryV1DirectoryServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response
   }
@@ -152,9 +159,10 @@ sdk.directory.list().then((res: C1ApiDirectoryV1DirectoryServiceListResponse) =>
 
 ### Parameters
 
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `config`                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config) | :heavy_minus_sign:                                           | Available config options for making requests.                |
+| Parameter                                                                                                                        | Type                                                                                                                             | Required                                                                                                                         | Description                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                        | [operations.C1ApiDirectoryV1DirectoryServiceListRequest](../../models/operations/c1apidirectoryv1directoryservicelistrequest.md) | :heavy_check_mark:                                                                                                               | The request object to use for the request.                                                                                       |
+| `config`                                                                                                                         | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                                                     | :heavy_minus_sign:                                                                                                               | Available config options for making requests.                                                                                    |
 
 
 ### Response

@@ -7,18 +7,27 @@ import { FacetCategory } from "./facetcategory";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The Facets message.
+ *  Indicates one value of a facet.
+ *
+ * @remarks
+ *
  */
 export class Facets extends SpeakeasyBase {
     /**
-     * The count field.
+     *  The count of items in this facet.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "count" })
     count?: string;
 
     /**
-     * The facets field.
+     *  The facet being referenced.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata({ elemType: FacetCategory })
     @Expose({ name: "facets" })

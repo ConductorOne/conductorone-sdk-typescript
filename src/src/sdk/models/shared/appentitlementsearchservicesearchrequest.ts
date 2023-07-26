@@ -14,7 +14,7 @@ import { Expose, Type } from "class-transformer";
  */
 export class AppEntitlementSearchServiceSearchRequest extends SpeakeasyBase {
     /**
-     *  The app entitlement expand mask allows the user to get additonal information when getting responses containing app entitlement views.
+     *  The app entitlement expand mask allows the user to get additional information when getting responses containing app entitlement views.
      *
      * @remarks
      *
@@ -105,7 +105,7 @@ export class AppEntitlementSearchServiceSearchRequest extends SpeakeasyBase {
     onlyGetExpiring?: boolean;
 
     /**
-     *  The pageSize where 10 <= pageSize <= 100.
+     *  The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
      *
      * @remarks
      *

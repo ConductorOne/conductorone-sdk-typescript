@@ -16,7 +16,10 @@ export class C1ApiAppV1ConnectorServiceGetRequest extends SpeakeasyBase {
 
 export class C1ApiAppV1ConnectorServiceGetResponse extends SpeakeasyBase {
     /**
-     * Successful response
+     *  The ConnectorServiceGetResponse message contains the connectorView, and an expand mask.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     connectorServiceGetResponse?: shared.ConnectorServiceGetResponse;

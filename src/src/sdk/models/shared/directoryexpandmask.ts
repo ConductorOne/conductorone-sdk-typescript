@@ -6,11 +6,17 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- * The DirectoryExpandMask message.
+ *  The fields to be included in the directory response.
+ *
+ * @remarks
+ *
  */
 export class DirectoryExpandMask extends SpeakeasyBase {
     /**
-     * The paths field.
+     *  An array of fields to be included in the directory response.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "paths" })

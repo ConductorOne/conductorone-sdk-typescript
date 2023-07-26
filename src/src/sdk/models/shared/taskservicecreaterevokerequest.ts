@@ -7,7 +7,10 @@ import { TaskExpandMask } from "./taskexpandmask";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The TaskServiceCreateRevokeRequest message.
+ *  Create a revoke task.
+ *
+ * @remarks
+ *
  */
 export class TaskServiceCreateRevokeRequest extends SpeakeasyBase {
     /**
@@ -22,35 +25,50 @@ export class TaskServiceCreateRevokeRequest extends SpeakeasyBase {
     taskExpandMask?: TaskExpandMask;
 
     /**
-     * The appEntitlementId field.
+     *  The ID of the app entitlement to revoke access to.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appEntitlementId" })
-    appEntitlementId?: string;
+    appEntitlementId: string;
 
     /**
-     * The appId field.
+     *  The ID of the app associated with the entitlement.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })
-    appId?: string;
+    appId: string;
 
     /**
-     * The appUserId field.
+     *  The ID of the app user to revoke access from. This field and identityUserId cannot both be set for a given request.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appUserId" })
     appUserId?: string;
 
     /**
-     * The description field.
+     *  The description of the request.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     * The identityUserId field.
+     *  The ID of the user associated with the app user we are revoking access from. This field cannot be set if appUserID is also set.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "identityUserId" })

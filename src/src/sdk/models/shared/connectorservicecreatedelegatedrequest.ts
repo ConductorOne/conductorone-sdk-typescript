@@ -7,11 +7,17 @@ import { ConnectorExpandMask } from "./connectorexpandmask";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The ConnectorServiceCreateDelegatedRequest message.
+ *  The ConnectorServiceCreateDelegatedRequest message contains the fields required to create a connector.
+ *
+ * @remarks
+ *
  */
 export class ConnectorServiceCreateDelegatedRequest extends SpeakeasyBase {
     /**
-     * The ConnectorExpandMask message.
+     *  The ConnectorExpandMask is used to expand related objects on a connector.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expandMask" })
@@ -19,28 +25,40 @@ export class ConnectorServiceCreateDelegatedRequest extends SpeakeasyBase {
     connectorExpandMask?: ConnectorExpandMask;
 
     /**
-     * The catalogId field.
+     *  The catalogId describes which catalog entry this connector is an instance of. For example, every Okta connector will have the same catalogId indicating it is an Okta connector.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "catalogId" })
     catalogId?: string;
 
     /**
-     * The description field.
+     *  The description of the connector.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     * The displayName field.
+     *  The displayName of the connector.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     * The userIds field.
+     *  The userIds field is used to define the integration owners of the connector.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "userIds" })

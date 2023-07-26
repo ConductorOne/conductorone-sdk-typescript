@@ -6,11 +6,17 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- * The Directory message.
+ *  This object indicates that an app is also a directory.
+ *
+ * @remarks
+ *
  */
 export class Directory extends SpeakeasyBase {
     /**
-     * The appId field.
+     *  The ID of the app associated with the directory.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })

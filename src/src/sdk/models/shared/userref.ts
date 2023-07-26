@@ -6,11 +6,17 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- * The UserRef message.
+ *  A reference to a user.
+ *
+ * @remarks
+ *
  */
 export class UserRef extends SpeakeasyBase {
     /**
-     * The id field.
+     *  The id of the user.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })

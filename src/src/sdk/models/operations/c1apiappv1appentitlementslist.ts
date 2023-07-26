@@ -9,6 +9,12 @@ import { AxiosResponse } from "axios";
 export class C1ApiAppV1AppEntitlementsListRequest extends SpeakeasyBase {
     @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=app_id" })
     appId: string;
+
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+    pageSize?: number;
+
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_token" })
+    pageToken?: string;
 }
 
 export class C1ApiAppV1AppEntitlementsListResponse extends SpeakeasyBase {
@@ -16,7 +22,7 @@ export class C1ApiAppV1AppEntitlementsListResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
-     *  The ListAppEntitlementsResponse message contains a list of results and a nextPageToken if applicable
+     *  The ListAppEntitlementsResponse message contains a list of results and a nextPageToken if applicable.
      *
      * @remarks
      *

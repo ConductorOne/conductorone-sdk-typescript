@@ -6,39 +6,57 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- * The FacetRange message.
+ *  The FacetRange message.
+ *
+ * @remarks
+ *
  */
 export class FacetRange extends SpeakeasyBase {
     /**
-     * The count field.
+     *  The count of items in the range.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "count" })
     count?: string;
 
     /**
-     * The displayName field.
+     *  The display name of the range.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     * The from field.
+     *  The starting value of the range.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "from" })
     from?: string;
 
     /**
-     * The iconUrl field.
+     *  The icon of the range.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "iconUrl" })
     iconUrl?: string;
 
     /**
-     * The to field.
+     *  The ending value of the range.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "to" })

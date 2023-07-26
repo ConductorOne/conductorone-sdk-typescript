@@ -8,7 +8,8 @@
 
 ## get
 
-Invokes the c1.api.iam.v1.Roles.Get method.
+ Get a role by id.
+
 
 ### Example Usage
 
@@ -23,7 +24,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.roles.get({
-  roleId: "voluptatum",
+  roleId: "hic",
 }).then((res: C1ApiIamV1RolesGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -46,7 +47,8 @@ sdk.roles.get({
 
 ## list
 
-Invokes the c1.api.iam.v1.Roles.List method.
+ List all roles for the current user.
+
 
 ### Example Usage
 
@@ -60,7 +62,10 @@ const sdk = new ConductoroneSDKTypescript({
   },
 });
 
-sdk.roles.list().then((res: C1ApiIamV1RolesListResponse) => {
+sdk.roles.list({
+  pageSize: 9001.03,
+  pageToken: "asperiores",
+}).then((res: C1ApiIamV1RolesListResponse) => {
   if (res.statusCode == 200) {
     // handle response
   }
@@ -69,9 +74,10 @@ sdk.roles.list().then((res: C1ApiIamV1RolesListResponse) => {
 
 ### Parameters
 
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `config`                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config) | :heavy_minus_sign:                                           | Available config options for making requests.                |
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `request`                                                                                      | [operations.C1ApiIamV1RolesListRequest](../../models/operations/c1apiiamv1roleslistrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `config`                                                                                       | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                   | :heavy_minus_sign:                                                                             | Available config options for making requests.                                                  |
 
 
 ### Response
@@ -81,7 +87,8 @@ sdk.roles.list().then((res: C1ApiIamV1RolesListResponse) => {
 
 ## update
 
-Invokes the c1.api.iam.v1.Roles.Update method.
+ Update a role by passing a Role object.
+
 
 ### Example Usage
 
@@ -98,20 +105,18 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.roles.update({
   updateRoleRequestInput: {
     role: {
-      displayName: "omnis",
-      id: "1baa0fe1-ade0-408e-af8c-5f350d8cdb5a",
-      name: "Michele Bode II",
+      displayName: "ex",
       permissions: [
-        "consequatur",
+        "debitis",
+        "delectus",
       ],
       serviceRoles: [
-        "sit",
+        "minus",
       ],
-      systemBuiltin: false,
     },
-    updateMask: "modi",
+    updateMask: "fuga",
   },
-  roleId: "fugit",
+  roleId: "laborum",
 }).then((res: C1ApiIamV1RolesUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

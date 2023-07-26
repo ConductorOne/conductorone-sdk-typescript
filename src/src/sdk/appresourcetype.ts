@@ -20,7 +20,8 @@ export class AppResourceType {
      * Get
      *
      * @remarks
-     * Invokes the c1.api.app.v1.AppResourceTypeService.Get method.
+     *  Get an app resource type.
+     *
      */
     async get(
         req: operations.C1ApiAppV1AppResourceTypeServiceGetRequest,
@@ -96,7 +97,8 @@ export class AppResourceType {
      * List
      *
      * @remarks
-     * Invokes the c1.api.app.v1.AppResourceTypeService.List method.
+     *  List app resource types.
+     *
      */
     async list(
         req: operations.C1ApiAppV1AppResourceTypeServiceListRequest,
@@ -116,6 +118,7 @@ export class AppResourceType {
             this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
+        const queryParams: string = utils.serializeQueryParams(req);
         headers["Accept"] = "application/json";
         headers[
             "user-agent"
@@ -123,7 +126,7 @@ export class AppResourceType {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: url + queryParams,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",

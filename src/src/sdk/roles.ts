@@ -20,7 +20,8 @@ export class Roles {
      * Get
      *
      * @remarks
-     * Invokes the c1.api.iam.v1.Roles.Get method.
+     *  Get a role by id.
+     *
      */
     async get(
         req: operations.C1ApiIamV1RolesGetRequest,
@@ -92,9 +93,17 @@ export class Roles {
      * List
      *
      * @remarks
-     * Invokes the c1.api.iam.v1.Roles.List method.
+     *  List all roles for the current user.
+     *
      */
-    async list(config?: AxiosRequestConfig): Promise<operations.C1ApiIamV1RolesListResponse> {
+    async list(
+        req: operations.C1ApiIamV1RolesListRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.C1ApiIamV1RolesListResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.C1ApiIamV1RolesListRequest(req);
+        }
+
         const baseURL: string = utils.templateUrl(
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
@@ -105,6 +114,7 @@ export class Roles {
             this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
+        const queryParams: string = utils.serializeQueryParams(req);
         headers["Accept"] = "application/json";
         headers[
             "user-agent"
@@ -112,7 +122,7 @@ export class Roles {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: url + queryParams,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",
@@ -157,7 +167,8 @@ export class Roles {
      * Update
      *
      * @remarks
-     * Invokes the c1.api.iam.v1.Roles.Update method.
+     *  Update a role by passing a Role object.
+     *
      */
     async update(
         req: operations.C1ApiIamV1RolesUpdateRequest,

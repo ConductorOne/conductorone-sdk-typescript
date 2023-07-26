@@ -19,7 +19,10 @@ export class C1ApiAppV1ConnectorServiceUpdateRequest extends SpeakeasyBase {
 
 export class C1ApiAppV1ConnectorServiceUpdateResponse extends SpeakeasyBase {
     /**
-     * Successful response
+     *  ConnectorServiceUpdateResponse is the response returned by the update method.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     connectorServiceUpdateResponse?: shared.ConnectorServiceUpdateResponse;

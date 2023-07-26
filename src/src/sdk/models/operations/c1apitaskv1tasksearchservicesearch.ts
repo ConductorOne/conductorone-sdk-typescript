@@ -17,7 +17,10 @@ export class C1ApiTaskV1TaskSearchServiceSearchResponse extends SpeakeasyBase {
     rawResponse?: AxiosResponse;
 
     /**
-     * Successful response
+     *  The TaskSearchResponse message contains a list of results and a nextPageToken if applicable.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     taskSearchResponse?: shared.TaskSearchResponse;

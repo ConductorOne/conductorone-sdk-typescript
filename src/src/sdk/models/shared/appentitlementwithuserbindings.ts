@@ -15,7 +15,10 @@ import { Expose, Type } from "class-transformer";
  */
 export class AppEntitlementWithUserBindings extends SpeakeasyBase {
     /**
-     * The AppEntitlementView message.
+     *  The app entitlement view contains the serialized app entitlement and paths to objects referenced by the app entitlement.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "entitlement" })

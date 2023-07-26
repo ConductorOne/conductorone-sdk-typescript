@@ -25,7 +25,7 @@ export class TaskActionsServiceDenyRequest extends SpeakeasyBase {
     taskExpandMask?: TaskExpandMask;
 
     /**
-     *  The comment attached to the request
+     *  The comment attached to the request.
      *
      * @remarks
      *

@@ -7,11 +7,17 @@ import { Connector } from "./connector";
 import { Expose, Type } from "class-transformer";
 
 /**
- * The ConnectorView message.
+ *  The ConnectorView object provides a connector response object, as well as JSONPATHs to related objects provided by expanders.
+ *
+ * @remarks
+ *
  */
 export class ConnectorView extends SpeakeasyBase {
     /**
-     * The Connector message.
+     *  A Connector is used to sync objects into Apps
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "connector" })
@@ -19,14 +25,20 @@ export class ConnectorView extends SpeakeasyBase {
     connector?: Connector;
 
     /**
-     * The appPath field.
+     *  JSONPATH expression indicating the location of the App object in the expanded array.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appPath" })
     appPath?: string;
 
     /**
-     * The usersPath field.
+     *  JSONPATH expression indicating the location of the User object in the expanded array. This is the user that is a direct target of the ticket without a specific relationship to a potentially non-existent app user.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "usersPath" })

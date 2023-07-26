@@ -5,7 +5,7 @@
 import { SpeakeasyBase } from "../../../internal/utils";
 
 /**
- *  Empty request body
+ *  ConnectorServiceRevokeCredentialRequest is a request for revoking connector credentials. It uses URL values for input.
  *
  * @remarks
  *

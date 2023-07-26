@@ -7,14 +7,14 @@ import { AppEntitlementView } from "./appentitlementview";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The ListAppEntitlementsResponse message contains a list of results and a nextPageToken if applicable
+ *  The ListAppEntitlementsResponse message contains a list of results and a nextPageToken if applicable.
  *
  * @remarks
  *
  */
 export class ListAppEntitlementsResponse extends SpeakeasyBase {
     /**
-     *  List of serialized related objects
+     *  List of related objects
      *
      * @remarks
      *
@@ -24,7 +24,7 @@ export class ListAppEntitlementsResponse extends SpeakeasyBase {
     expanded?: Record<string, any>[];
 
     /**
-     *  The list of results containing up to X results, where X is the page size defined in the request
+     *  The list of results containing up to X results, where X is the page size defined in the request.
      *
      * @remarks
      *

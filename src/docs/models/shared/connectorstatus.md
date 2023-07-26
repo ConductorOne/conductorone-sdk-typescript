@@ -1,6 +1,7 @@
 # ConnectorStatus
 
-The ConnectorStatus message.
+ The status field on the connector is used to track the status of the connectors sync, and when syncing last started, completed, or caused the connector to update.
+
 
 
 ## Fields
@@ -8,7 +9,7 @@ The ConnectorStatus message.
 | Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `completedAt`                                                                                 | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `lastError`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | The lastError field.                                                                          |
+| `lastError`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            |  The last error encountered by the connector.<br/>                                            |
 | `startedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `status`                                                                                      | [ConnectorStatusStatus](../../models/shared/connectorstatusstatus.md)                         | :heavy_minus_sign:                                                                            | The status field.                                                                             |
+| `status`                                                                                      | [ConnectorStatusStatus](../../models/shared/connectorstatusstatus.md)                         | :heavy_minus_sign:                                                                            |  The status of the connector sync.<br/>                                                       |
 | `updatedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |

@@ -19,7 +19,10 @@ export class C1ApiPolicyV1PoliciesDeleteResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
-     * Successful response
+     *  Empty response with a status code indicating success.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     deletePolicyResponse?: shared.DeletePolicyResponse;

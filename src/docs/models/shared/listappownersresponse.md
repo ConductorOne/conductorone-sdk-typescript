@@ -1,7 +1,6 @@
 # ListAppOwnersResponse
 
- The ListAppOwnersResponse message contains a list of results and a nextPageToken if applicable
-
+The ListAppOwnersResponse message.
 
 
 ## Fields
