@@ -12,6 +12,12 @@ export class C1ApiAppV1AppResourceServiceListRequest extends SpeakeasyBase {
 
     @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=app_resource_type_id" })
     appResourceTypeId: string;
+
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+    pageSize?: number;
+
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_token" })
+    pageToken?: string;
 }
 
 export class C1ApiAppV1AppResourceServiceListResponse extends SpeakeasyBase {

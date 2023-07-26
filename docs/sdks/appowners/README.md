@@ -25,8 +25,8 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appOwners.add({
   addAppOwnerRequest: {},
-  appId: "quasi",
-  userId: "repudiandae",
+  appId: "explicabo",
+  userId: "deserunt",
 }).then((res: C1ApiAppV1AppOwnersAddResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -65,7 +65,9 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appOwners.list({
-  appId: "sint",
+  appId: "distinctio",
+  pageSize: 8413.86,
+  pageToken: "labore",
 }).then((res: C1ApiAppV1AppOwnersListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -105,8 +107,8 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appOwners.remove({
   removeAppOwnerRequest: {},
-  appId: "veritatis",
-  userId: "itaque",
+  appId: "modi",
+  userId: "qui",
 }).then((res: C1ApiAppV1AppOwnersRemoveResponse) => {
   if (res.statusCode == 200) {
     // handle response

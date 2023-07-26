@@ -23,7 +23,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.user.get({
-  id: "e139dbc2-259b-41ab-9a8c-070e1084cb06",
+  id: "7ce52b89-5c53-47c6-854e-fb0b34896c3c",
 }).then((res: C1ApiUserV1UserServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -61,7 +61,10 @@ const sdk = new ConductoroneSDKTypescript({
   },
 });
 
-sdk.user.list().then((res: C1ApiUserV1UserServiceListResponse) => {
+sdk.user.list({
+  pageSize: 6845.53,
+  pageToken: "nostrum",
+}).then((res: C1ApiUserV1UserServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response
   }
@@ -70,9 +73,10 @@ sdk.user.list().then((res: C1ApiUserV1UserServiceListResponse) => {
 
 ### Parameters
 
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `config`                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config) | :heavy_minus_sign:                                           | Available config options for making requests.                |
+| Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                    | [operations.C1ApiUserV1UserServiceListRequest](../../models/operations/c1apiuserv1userservicelistrequest.md) | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
+| `config`                                                                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                                 | :heavy_minus_sign:                                                                                           | Available config options for making requests.                                                                |
 
 
 ### Response

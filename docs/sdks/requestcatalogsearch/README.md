@@ -25,14 +25,16 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.requestCatalogSearch.searchEntitlements({
   appEntitlementExpandMask: {
     paths: [
-      "fugiat",
+      "esse",
+      "nemo",
+      "reprehenderit",
     ],
   },
-  entitlementAlias: "ipsam",
-  grantedStatus: RequestCatalogSearchServiceSearchEntitlementsRequestGrantedStatus.Unspecified,
-  pageSize: 551.07,
-  pageToken: "quas",
-  query: "eveniet",
+  entitlementAlias: "est",
+  grantedStatus: RequestCatalogSearchServiceSearchEntitlementsRequestGrantedStatus.All,
+  pageSize: 5718.44,
+  pageToken: "accusamus",
+  query: "impedit",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogSearchServiceSearchEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response

@@ -46,6 +46,7 @@ export * from "./connectorcredential";
 export * from "./connectorexpandmask";
 export * from "./connectorprovision";
 export * from "./connectorservicecreatedelegatedrequest";
+export * from "./connectorservicecreaterequest";
 export * from "./connectorservicecreateresponse";
 export * from "./connectorservicedeleterequest";
 export * from "./connectorservicedeleteresponse";

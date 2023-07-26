@@ -12,6 +12,12 @@ export class C1ApiAppV1AppEntitlementsListForAppUserRequest extends SpeakeasyBas
 
     @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=app_user_id" })
     appUserId: string;
+
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+    pageSize?: number;
+
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_token" })
+    pageToken?: string;
 }
 
 export class C1ApiAppV1AppEntitlementsListForAppUserResponse extends SpeakeasyBase {

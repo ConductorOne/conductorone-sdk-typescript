@@ -25,44 +25,34 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.userSearch.search({
   userExpandMask: {
     paths: [
-      "dolores",
-      "assumenda",
+      "impedit",
+      "delectus",
+      "tempore",
     ],
   },
-  email: "Marcella.Schumm@gmail.com",
+  email: "Bruce.Zieme44@hotmail.com",
   excludeIds: [
-    "accusamus",
-    "necessitatibus",
-    "tempore",
+    "odio",
   ],
   ids: [
-    "ea",
-    "autem",
-    "ipsam",
+    "in",
+    "ducimus",
   ],
-  pageSize: 7029.52,
-  pageToken: "laudantium",
-  query: "corporis",
+  pageSize: 5678.46,
+  pageToken: "dolores",
+  query: "error",
   refs: [
     {
-      id: "fbd02bae-0be2-4d78-a259-e3ea4b5197f9",
-    },
-    {
-      id: "2443da7c-e52b-4895-8537-c6454efb0b34",
-    },
-    {
-      id: "896c3ca5-acfb-4e2f-9570-7577929177de",
-    },
-    {
-      id: "ac646ecb-5734-409e-beb1-e5a2b12eb07f",
+      id: "77deac64-6ecb-4573-809e-3eb1e5a2b12e",
     },
   ],
   roleIds: [
-    "quasi",
+    "ipsa",
+    "ducimus",
+    "maiores",
   ],
   userStatuses: [
-    SearchUsersRequestUserStatuses.Deleted,
-    SearchUsersRequestUserStatuses.Disabled,
+    SearchUsersRequestUserStatuses.Unknown,
   ],
 }).then((res: C1ApiUserV1UserSearchSearchResponse) => {
   if (res.statusCode == 200) {

@@ -9,6 +9,12 @@ import { AxiosResponse } from "axios";
 export class C1ApiAppV1AppReportServiceListRequest extends SpeakeasyBase {
     @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=app_id" })
     appId: string;
+
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+    pageSize?: number;
+
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_token" })
+    pageToken?: string;
 }
 
 export class C1ApiAppV1AppReportServiceListResponse extends SpeakeasyBase {

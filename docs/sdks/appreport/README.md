@@ -22,7 +22,9 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appReport.list({
-  appId: "incidunt",
+  appId: "aliquid",
+  pageSize: 5865.13,
+  pageToken: "quos",
 }).then((res: C1ApiAppV1AppReportServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response

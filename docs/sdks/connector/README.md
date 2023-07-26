@@ -2,6 +2,7 @@
 
 ### Available Operations
 
+* [create](#create) - Create
 * [createDelegated](#createdelegated) - Create Delegated
 * [delete](#delete) - Delete
 * [get](#get) - Get
@@ -11,6 +12,65 @@
 * [rotateCredential](#rotatecredential) - Rotate Credential
 * [update](#update) - Update
 * [updateDelegated](#updatedelegated) - Update Delegated
+
+## create
+
+ Create a configured connector.
+
+
+### Example Usage
+
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+import { C1ApiAppV1ConnectorServiceCreateResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
+
+const sdk = new ConductoroneSDKTypescript({
+  security: {
+    oauth: "",
+  },
+});
+
+sdk.connector.create({
+  connectorServiceCreateRequest: {
+    connectorExpandMask: {
+      paths: [
+        "saepe",
+        "eius",
+        "aspernatur",
+      ],
+    },
+    catalogId: "perferendis",
+    config: {
+      "optio": "accusamus",
+    },
+    description: "ad",
+    userIds: [
+      "suscipit",
+      "deserunt",
+      "provident",
+      "minima",
+    ],
+  },
+  appId: "repellendus",
+}).then((res: C1ApiAppV1ConnectorServiceCreateResponse) => {
+  if (res.statusCode == 200) {
+    // handle response
+  }
+});
+```
+
+### Parameters
+
+| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                | [operations.C1ApiAppV1ConnectorServiceCreateRequest](../../models/operations/c1apiappv1connectorservicecreaterequest.md) | :heavy_check_mark:                                                                                                       | The request object to use for the request.                                                                               |
+| `config`                                                                                                                 | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                                             | :heavy_minus_sign:                                                                                                       | Available config options for making requests.                                                                            |
+
+
+### Response
+
+**Promise<[operations.C1ApiAppV1ConnectorServiceCreateResponse](../../models/operations/c1apiappv1connectorservicecreateresponse.md)>**
+
 
 ## createDelegated
 
@@ -33,19 +93,22 @@ sdk.connector.createDelegated({
   connectorServiceCreateDelegatedRequest: {
     connectorExpandMask: {
       paths: [
-        "atque",
+        "similique",
+        "alias",
+        "at",
       ],
     },
-    catalogId: "sit",
-    description: "fugiat",
-    displayName: "ab",
+    catalogId: "quaerat",
+    description: "tempora",
+    displayName: "vel",
     userIds: [
+      "officiis",
+      "qui",
       "dolorum",
-      "iusto",
-      "voluptate",
+      "a",
     ],
   },
-  appId: "dolorum",
+  appId: "esse",
 }).then((res: C1ApiAppV1ConnectorServiceCreateDelegatedResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -85,8 +148,8 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.connector.delete({
   connectorServiceDeleteRequest: {},
-  appId: "deleniti",
-  id: "9ebf737a-e420-43ce-9e6a-95d8a0d446ce",
+  appId: "harum",
+  id: "73cf3be4-53f8-470b-b26b-5a73429cdb1a",
 }).then((res: C1ApiAppV1ConnectorServiceDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -125,8 +188,8 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.connector.get({
-  appId: "qui",
-  id: "af7a73cf-3be4-453f-870b-326b5a73429c",
+  appId: "totam",
+  id: "422bb679-d232-4271-9bf0-cbb1e31b8b90",
 }).then((res: C1ApiAppV1ConnectorServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -165,9 +228,9 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.connector.getCredentials({
-  appId: "pariatur",
-  connectorId: "soluta",
-  id: "1a8422bb-679d-4232-a715-bf0cbb1e31b8",
+  appId: "delectus",
+  connectorId: "dolorem",
+  id: "443a1108-e0ad-4cf4-b921-879fce953f73",
 }).then((res: C1ApiAppV1ConnectorServiceGetCredentialsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -206,7 +269,9 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.connector.list({
-  appId: "tempore",
+  appId: "vero",
+  pageSize: 9493.19,
+  pageToken: "dignissimos",
 }).then((res: C1ApiAppV1ConnectorServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -246,9 +311,9 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.connector.revokeCredential({
   connectorServiceRevokeCredentialRequest: {},
-  appId: "cupiditate",
-  connectorId: "aperiam",
-  id: "f3443a11-08e0-4adc-b4b9-21879fce953f",
+  appId: "hic",
+  connectorId: "distinctio",
+  id: "c7abd74d-d39c-40f5-92cf-f7c70a45626d",
 }).then((res: C1ApiAppV1ConnectorServiceRevokeCredentialResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -288,8 +353,8 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.connector.rotateCredential({
   connectorServiceRotateCredentialRequest: {},
-  appId: "voluptate",
-  connectorId: "consectetur",
+  appId: "magnam",
+  connectorId: "ratione",
 }).then((res: C1ApiAppV1ConnectorServiceRotateCredentialResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -332,40 +397,38 @@ sdk.connector.update({
   connectorServiceUpdateRequestInput: {
     connector: {
       connectorStatus: {
-        completedAt: new Date("2020-02-26T11:54:04.858Z"),
-        lastError: "dignissimos",
-        startedAt: new Date("2020-11-08T11:03:10.206Z"),
-        status: ConnectorStatusStatus.SyncStatusError,
-        updatedAt: new Date("2022-05-15T21:16:33.535Z"),
+        completedAt: new Date("2022-06-28T08:50:44.084Z"),
+        lastError: "dicta",
+        startedAt: new Date("2022-01-08T01:04:15.076Z"),
+        status: ConnectorStatusStatus.SyncStatusUnspecified,
+        updatedAt: new Date("2022-02-20T07:12:08.273Z"),
       },
       oAuth2AuthorizedAs: {},
-      appId: "facilis",
+      appId: "excepturi",
       config: {
-        "ducimus": "dolore",
-        "quibusdam": "illum",
-        "sequi": "natus",
-        "impedit": "aut",
+        "nostrum": "sapiente",
+        "quisquam": "saepe",
+        "ea": "impedit",
+        "corporis": "veniam",
       },
-      description: "voluptatibus",
-      displayName: "exercitationem",
-      id: "d2cff7c7-0a45-4626-9436-813f16d9f5fc",
+      description: "aliquid",
+      displayName: "inventore",
+      id: "46c3e250-fb00-48c4-ae14-1aac366c8dd6",
       userIds: [
-        "ea",
-        "impedit",
-        "corporis",
-        "veniam",
+        "quasi",
+        "tempora",
+        "numquam",
       ],
     },
     connectorExpandMask: {
       paths: [
-        "inventore",
-        "magnam",
+        "provident",
       ],
     },
-    updateMask: "ea",
+    updateMask: "ipsa",
   },
-  appId: "quo",
-  id: "3e250fb0-08c4-42e1-81aa-c366c8dd6b14",
+  appId: "molestiae",
+  id: "474778a7-bd46-46d2-8c10-ab3cdca42519",
 }).then((res: C1ApiAppV1ConnectorServiceUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -408,40 +471,39 @@ sdk.connector.updateDelegated({
   connectorServiceUpdateDelegatedRequestInput: {
     connector: {
       connectorStatus: {
-        completedAt: new Date("2022-11-14T00:12:37.683Z"),
-        lastError: "provident",
-        startedAt: new Date("2022-07-11T02:03:34.375Z"),
-        status: ConnectorStatusStatus.SyncStatusRunning,
-        updatedAt: new Date("2022-09-27T07:50:41.350Z"),
+        completedAt: new Date("2022-09-23T10:04:47.931Z"),
+        lastError: "debitis",
+        startedAt: new Date("2022-11-13T06:50:40.250Z"),
+        status: ConnectorStatusStatus.SyncStatusUnspecified,
+        updatedAt: new Date("2021-08-15T10:59:14.485Z"),
       },
       oAuth2AuthorizedAs: {},
-      appId: "esse",
+      appId: "recusandae",
       config: {
-        "rem": "fuga",
-        "reprehenderit": "quidem",
+        "distinctio": "quod",
       },
-      description: "fugiat",
-      displayName: "ut",
-      id: "66d28c10-ab3c-4dca-8251-904e523c7e0b",
+      description: "dignissimos",
+      displayName: "inventore",
+      id: "78e4796f-2a70-4c68-8282-aa482562f222",
       userIds: [
-        "dignissimos",
-        "inventore",
-        "nihil",
-        "totam",
+        "occaecati",
+        "atque",
+        "et",
+        "esse",
       ],
     },
     connectorExpandMask: {
       paths: [
-        "aliquam",
-        "odio",
-        "occaecati",
-        "commodi",
+        "accusamus",
+        "veritatis",
+        "esse",
+        "quod",
       ],
     },
-    updateMask: "sapiente",
+    updateMask: "nam",
   },
-  connectorAppId: "dolores",
-  connectorId: "deserunt",
+  connectorAppId: "vero",
+  connectorId: "aliquid",
 }).then((res: C1ApiAppV1ConnectorServiceUpdateDelegatedResponse) => {
   if (res.statusCode == 200) {
     // handle response

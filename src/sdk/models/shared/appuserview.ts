@@ -14,7 +14,10 @@ import { Expose, Type } from "class-transformer";
  */
 export class AppUserView extends SpeakeasyBase {
     /**
-     * The AppUser message.
+     *  Application User that represents an account in the application.
+     *
+     * @remarks
+     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appUser" })

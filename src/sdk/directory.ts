@@ -269,8 +269,13 @@ export class Directory {
      *
      */
     async list(
+        req: operations.C1ApiDirectoryV1DirectoryServiceListRequest,
         config?: AxiosRequestConfig
     ): Promise<operations.C1ApiDirectoryV1DirectoryServiceListResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.C1ApiDirectoryV1DirectoryServiceListRequest(req);
+        }
+
         const baseURL: string = utils.templateUrl(
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
@@ -281,6 +286,7 @@ export class Directory {
             this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
+        const queryParams: string = utils.serializeQueryParams(req);
         headers["Accept"] = "application/json";
         headers[
             "user-agent"
@@ -288,7 +294,7 @@ export class Directory {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: url + queryParams,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",

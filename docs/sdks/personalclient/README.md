@@ -23,14 +23,15 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.personalClient.create({
   allowSourceCidr: [
-    "deleniti",
+    "distinctio",
+    "eligendi",
   ],
-  displayName: "fugit",
-  expires: "fuga",
+  displayName: "sit",
+  expires: "culpa",
   scopedRoles: [
-    "incidunt",
-    "atque",
-    "explicabo",
+    "adipisci",
+    "cumque",
+    "consequuntur",
   ],
 }).then((res: C1ApiIamV1PersonalClientServiceCreateResponse) => {
   if (res.statusCode == 200) {

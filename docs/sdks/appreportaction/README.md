@@ -23,7 +23,7 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appReportAction.generateReport({
   appActionsServiceGenerateReportRequest: {},
-  appId: "enim",
+  appId: "perferendis",
 }).then((res: C1ApiAppV1AppReportActionServiceGenerateReportResponse) => {
   if (res.statusCode == 200) {
     // handle response

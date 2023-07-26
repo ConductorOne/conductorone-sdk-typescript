@@ -30,86 +30,90 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.taskSearch.search({
   taskExpandMask: {
     paths: [
-      "vero",
-      "voluptatem",
-      "ipsam",
+      "voluptate",
+      "ullam",
+      "unde",
+      "necessitatibus",
     ],
   },
   accessReviewIds: [
-    "alias",
-    "quasi",
+    "impedit",
+    "ipsam",
+    "corporis",
   ],
   accountOwnerIds: [
-    "maiores",
-  ],
-  actorId: "enim",
-  appEntitlementIds: [
-    "nulla",
-    "deserunt",
+    "error",
     "esse",
+    "labore",
+  ],
+  actorId: "veritatis",
+  appEntitlementIds: [
+    "consectetur",
+    "vitae",
+    "inventore",
+    "dolorem",
   ],
   appResourceIds: [
-    "reprehenderit",
-    "est",
+    "qui",
+    "iste",
   ],
   appResourceTypeIds: [
-    "sint",
-    "accusamus",
+    "nemo",
+    "soluta",
   ],
   appUserSubjectIds: [
-    "hic",
-    "necessitatibus",
-    "asperiores",
-    "ex",
+    "rem",
+    "dolorum",
+    "odio",
   ],
   applicationIds: [
-    "debitis",
-    "delectus",
+    "alias",
   ],
   assigneesInIds: [
-    "minus",
+    "vel",
   ],
-  createdAfter: new Date("2021-08-25T17:55:33.849Z"),
-  createdBefore: new Date("2022-10-03T14:46:04.624Z"),
+  createdAfter: new Date("2022-12-08T19:16:07.063Z"),
+  createdBefore: new Date("2022-10-16T23:42:04.526Z"),
   currentStep: TaskSearchRequestCurrentStep.TaskSearchCurrentStepApproval,
-  emergencyStatus: TaskSearchRequestEmergencyStatus.Unspecified,
+  emergencyStatus: TaskSearchRequestEmergencyStatus.Emergency,
   excludeAppEntitlementIds: [
-    "magni",
-    "soluta",
-    "repudiandae",
-    "nam",
+    "ipsum",
   ],
   excludeIds: [
-    "iusto",
-    "voluptate",
+    "nulla",
+    "distinctio",
+    "maxime",
   ],
   includeDeleted: false,
   myWorkUserIds: [
-    "dignissimos",
+    "quia",
   ],
   openerIds: [
-    "quo",
+    "omnis",
+    "libero",
   ],
-  pageSize: 5354.68,
-  pageToken: "quibusdam",
+  pageSize: 1156.61,
+  pageToken: "id",
   previouslyActedOnIds: [
-    "odit",
-    "voluptatibus",
+    "fugiat",
+    "officia",
+    "quos",
   ],
-  query: "vel",
+  query: "placeat",
   refs: [
     {
-      id: "d1db1f2c-4310-4661-a963-49e1cf9e06e3",
-    },
-    {
-      id: "a437000a-e6b6-4bc9-b8f7-59eac55a9741",
+      id: "70e1084c-b067-42d1-ad87-9eeb9665b85e",
     },
   ],
   sortBy: TaskSearchRequestSortBy.TaskSearchSortByAccountOwner,
   subjectIds: [
-    "vitae",
+    "at",
+    "alias",
+    "quia",
   ],
   taskStates: [
+    TaskSearchRequestTaskStates.TaskStateClosed,
+    TaskSearchRequestTaskStates.TaskStateClosed,
     TaskSearchRequestTaskStates.TaskStateUnspecified,
   ],
   taskTypes: [
@@ -119,18 +123,18 @@ sdk.taskSearch.search({
       taskTypeRevoke: {
         taskRevokeSource: {
           taskRevokeSourceExpired: {
-            expiredAt: new Date("2022-05-22T20:46:18.043Z"),
+            expiredAt: new Date("2022-06-21T04:17:16.724Z"),
           },
           taskRevokeSourceNonUsage: {
-            expiresAt: new Date("2022-08-19T19:35:40.341Z"),
-            lastLogin: new Date("2021-07-19T20:29:58.626Z"),
+            expiresAt: new Date("2021-07-20T13:08:36.205Z"),
+            lastLogin: new Date("2022-09-20T13:39:46.907Z"),
           },
           taskRevokeSourceRequest: {
-            requestUserId: "rem",
+            requestUserId: "explicabo",
           },
           taskRevokeSourceReview: {
-            accessReviewId: "dolorum",
-            certTicketId: "odio",
+            accessReviewId: "corporis",
+            certTicketId: "error",
           },
         },
       },
@@ -141,18 +145,40 @@ sdk.taskSearch.search({
       taskTypeRevoke: {
         taskRevokeSource: {
           taskRevokeSourceExpired: {
-            expiredAt: new Date("2022-12-31T19:13:01.264Z"),
+            expiredAt: new Date("2022-04-13T22:13:24.007Z"),
           },
           taskRevokeSourceNonUsage: {
-            expiresAt: new Date("2022-07-29T17:28:50.439Z"),
-            lastLogin: new Date("2022-12-08T19:16:07.063Z"),
+            expiresAt: new Date("2021-02-09T04:42:29.895Z"),
+            lastLogin: new Date("2022-04-22T18:47:14.845Z"),
           },
           taskRevokeSourceRequest: {
-            requestUserId: "modi",
+            requestUserId: "quis",
           },
           taskRevokeSourceReview: {
-            accessReviewId: "neque",
-            certTicketId: "exercitationem",
+            accessReviewId: "beatae",
+            certTicketId: "unde",
+          },
+        },
+      },
+    },
+    {
+      taskTypeCertify: {},
+      taskTypeGrant: {},
+      taskTypeRevoke: {
+        taskRevokeSource: {
+          taskRevokeSourceExpired: {
+            expiredAt: new Date("2022-01-14T10:23:30.043Z"),
+          },
+          taskRevokeSourceNonUsage: {
+            expiresAt: new Date("2022-09-15T02:31:13.378Z"),
+            lastLogin: new Date("2022-09-29T05:24:35.816Z"),
+          },
+          taskRevokeSourceRequest: {
+            requestUserId: "nesciunt",
+          },
+          taskRevokeSourceReview: {
+            accessReviewId: "at",
+            certTicketId: "officia",
           },
         },
       },

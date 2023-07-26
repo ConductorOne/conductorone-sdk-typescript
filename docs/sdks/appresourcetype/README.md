@@ -23,8 +23,8 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appResourceType.get({
-  appId: "amet",
-  id: "a6699707-4ba4-4469-b6e2-141959890afa",
+  appId: "natus",
+  id: "b6e21419-5989-40af-a563-e2516fe4c8b7",
 }).then((res: C1ApiAppV1AppResourceTypeServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -63,7 +63,9 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appResourceType.list({
-  appId: "ad",
+  appId: "architecto",
+  pageSize: 995.69,
+  pageToken: "repudiandae",
 }).then((res: C1ApiAppV1AppResourceTypeServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response

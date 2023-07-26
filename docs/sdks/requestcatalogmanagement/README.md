@@ -36,16 +36,24 @@ sdk.requestCatalogManagement.addAccessEntitlements({
   requestCatalogManagementServiceAddAccessEntitlementsRequest: {
     accessEntitlements: [
       {
-        appId: "velit",
-        id: "aae8d678-64db-4b67-9fd5-e60b375ed4f6",
+        appId: "explicabo",
+        id: "fb7b194a-276b-4269-96fe-1f08f4294e36",
       },
       {
-        appId: "reiciendis",
-        id: "bee41f33-317f-4e35-b60e-b1ea426555ba",
+        appId: "occaecati",
+        id: "8f447f60-3e8b-4445-a80c-a55efd20e457",
+      },
+      {
+        appId: "officiis",
+        id: "1858b6a8-9fbe-43a5-aa8e-4824d0ab4075",
+      },
+      {
+        appId: "sit",
+        id: "88e51862-065e-4904-b3b1-194b8abf603a",
       },
     ],
   },
-  catalogId: "adipisci",
+  catalogId: "voluptate",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceAddAccessEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -87,24 +95,20 @@ sdk.requestCatalogManagement.addAppEntitlements({
   requestCatalogManagementServiceAddAppEntitlementsRequest: {
     appEntitlements: [
       {
-        appId: "dolores",
-        id: "8744ed53-b88f-43a8-98f5-c0b2f2fb7b19",
+        appId: "reiciendis",
+        id: "9dfe0ab7-da8a-450c-a187-f86bc173d689",
       },
       {
-        appId: "dolore",
-        id: "a276b269-16fe-41f0-8f42-94e3698f447f",
+        appId: "officiis",
+        id: "ee9526f8-d986-4e88-9ead-4f0e1012563f",
       },
       {
-        appId: "ex",
-        id: "03e8b445-e80c-4a55-afd2-0e457e1858b6",
-      },
-      {
-        appId: "dolorum",
-        id: "89fbe3a5-aa8e-4482-8d0a-b4075088e518",
+        appId: "molestias",
+        id: "4e29e973-e922-4a57-a15b-e3e060807e2b",
       },
     ],
   },
-  catalogId: "ex",
+  catalogId: "iure",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceAddAppEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -145,11 +149,14 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.requestCatalogManagement.create({
   requestCatalogExpandMask: {
     paths: [
-      "sit",
+      "ratione",
+      "laborum",
+      "distinctio",
+      "voluptatum",
     ],
   },
-  description: "vel",
-  displayName: "nostrum",
+  description: "rem",
+  displayName: "aliquam",
   published: false,
   visibleToEveryone: false,
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceCreateResponse) => {
@@ -191,7 +198,7 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.requestCatalogManagement.delete({
   requestCatalogManagementServiceDeleteRequest: {},
-  id: "e904f3b1-194b-48ab-b603-a79f9dfe0ab7",
+  id: "5f0597a6-0ff2-4a54-a31e-94764a3e865e",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -230,7 +237,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.requestCatalogManagement.get({
-  id: "da8a50ce-187f-486b-8173-d689eee9526f",
+  id: "7956f925-1a5a-49da-a60f-f57bfaad4f9e",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -271,7 +278,9 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.requestCatalogManagement.listEntitlementsForAccess({
-  catalogId: "corrupti",
+  catalogId: "sapiente",
+  pageSize: 7645.62,
+  pageToken: "vitae",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -312,7 +321,9 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.requestCatalogManagement.listEntitlementsPerCatalog({
-  catalogId: "at",
+  catalogId: "rerum",
+  pageSize: 2722.29,
+  pageToken: "quis",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsPerCatalogResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -356,20 +367,12 @@ sdk.requestCatalogManagement.removeAccessEntitlements({
   requestCatalogManagementServiceRemoveAccessEntitlementsRequest: {
     accessEntitlements: [
       {
-        appId: "blanditiis",
-        id: "6e881ead-4f0e-4101-a563-f94e29e973e9",
-      },
-      {
-        appId: "consequuntur",
-        id: "2a57a15b-e3e0-4608-87e2-b6e3ab8845f0",
-      },
-      {
-        appId: "corporis",
-        id: "97a60ff2-a54a-431e-9476-4a3e865e7956",
+        appId: "fugit",
+        id: "c1032648-dc2f-4615-999e-bfd0e9fe6c63",
       },
     ],
   },
-  catalogId: "reiciendis",
+  catalogId: "fugit",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceRemoveAccessEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -413,20 +416,24 @@ sdk.requestCatalogManagement.removeAppEntitlements({
   requestCatalogManagementServiceRemoveAppEntitlementsRequest: {
     appEntitlements: [
       {
-        appId: "aspernatur",
-        id: "51a5a9da-660f-4f57-bfaa-d4f9efc1b451",
+        appId: "fuga",
+        id: "3aed0117-9963-412f-9e04-771778ff61d0",
       },
       {
-        appId: "fugit",
-        id: "c1032648-dc2f-4615-999e-bfd0e9fe6c63",
+        appId: "dicta",
+        id: "7476360a-15db-46a6-a065-9a1adeaab585",
       },
       {
-        appId: "fugit",
-        id: "ca3aed01-1799-4631-afde-04771778ff61",
+        appId: "vitae",
+        id: "d6c645b0-8b61-4891-baa0-fe1ade008e6f",
+      },
+      {
+        appId: "rem",
+        id: "c5f350d8-cdb5-4a34-9814-3010421813d5",
       },
     ],
   },
-  catalogId: "fugiat",
+  catalogId: "consequuntur",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceRemoveAppEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -472,57 +479,63 @@ sdk.requestCatalogManagement.update({
           provisionPolicy: {
             connectorProvision: {},
             delegatedProvision: {
-              appId: "dicta",
-              entitlementId: "odio",
+              appId: "quas",
+              entitlementId: "eveniet",
             },
             manualProvision: {
-              instructions: "tempora",
+              instructions: "impedit",
               userIds: [
-                "ex",
-                "consectetur",
+                "esse",
+                "necessitatibus",
+                "sed",
+                "veniam",
               ],
             },
           },
-          appId: "aliquid",
-          appResourceId: "ipsa",
-          appResourceTypeId: "laborum",
-          certifyPolicyId: "sunt",
+          appId: "nesciunt",
+          appResourceId: "expedita",
+          appResourceTypeId: "eum",
+          certifyPolicyId: "vel",
           complianceFrameworkValueIds: [
-            "fugiat",
-            "expedita",
+            "magnam",
+            "exercitationem",
+            "ab",
           ],
-          description: "aliquid",
-          displayName: "officia",
-          durationGrant: "suscipit",
+          description: "porro",
+          displayName: "autem",
+          durationGrant: "nobis",
           durationUnset: {},
           emergencyGrantEnabled: false,
-          emergencyGrantPolicyId: "aliquid",
-          grantPolicyId: "perferendis",
-          revokePolicyId: "eum",
-          riskLevelValueId: "voluptas",
-          slug: "iste",
+          emergencyGrantPolicyId: "laboriosam",
+          grantPolicyId: "recusandae",
+          revokePolicyId: "consequuntur",
+          riskLevelValueId: "voluptatem",
+          slug: "exercitationem",
         },
       ],
       appIds: [
-        "ab",
-        "error",
-        "possimus",
+        "quasi",
+        "nisi",
+        "at",
+        "vero",
       ],
-      createdByUserId: "voluptates",
-      description: "mollitia",
-      displayName: "laborum",
-      id: "b5851d6c-645b-408b-a189-1baa0fe1ade0",
+      createdByUserId: "est",
+      description: "harum",
+      displayName: "sequi",
+      id: "fec9578a-6458-4427-ba84-18d162309fb0",
       published: false,
       visibleToEveryone: false,
     },
     requestCatalogExpandMask: {
       paths: [
-        "deleniti",
+        "eos",
+        "occaecati",
+        "iste",
       ],
     },
-    updateMask: "earum",
+    updateMask: "magni",
   },
-  id: "6f8c5f35-0d8c-4db5-a341-814301042181",
+  id: "1aefb9f5-8c4d-486e-a8e4-be056013f59d",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

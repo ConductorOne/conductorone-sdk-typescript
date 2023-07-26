@@ -26,18 +26,15 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.apps.create({
-  certifyPolicyId: "repudiandae",
-  description: "ullam",
-  displayName: "expedita",
-  grantPolicyId: "nihil",
-  monthlyCostUsd: 9988.48,
+  certifyPolicyId: "ea",
+  description: "excepturi",
+  displayName: "odit",
+  grantPolicyId: "ea",
+  monthlyCostUsd: 332.22,
   owners: [
-    "sed",
-    "saepe",
-    "pariatur",
-    "accusantium",
+    "maiores",
   ],
-  revokePolicyId: "consequuntur",
+  revokePolicyId: "quidem",
 }).then((res: C1ApiAppV1AppsCreateResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -77,7 +74,7 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.apps.delete({
   deleteAppRequest: {},
-  id: "8921cddc-6926-401f-b576-b0d5f0d30c5f",
+  id: "576b0d5f-0d30-4c5f-bb25-87053202c73d",
 }).then((res: C1ApiAppV1AppsDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -116,7 +113,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.apps.get({
-  id: "bb258705-3202-4c73-95fe-9b90c28909b3",
+  id: "5fe9b90c-2890-49b3-be49-a8d9cbf48633",
 }).then((res: C1ApiAppV1AppsGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -154,7 +151,10 @@ const sdk = new ConductoroneSDKTypescript({
   },
 });
 
-sdk.apps.list().then((res: C1ApiAppV1AppsListResponse) => {
+sdk.apps.list({
+  pageSize: 2224.43,
+  pageToken: "qui",
+}).then((res: C1ApiAppV1AppsListResponse) => {
   if (res.statusCode == 200) {
     // handle response
   }
@@ -163,9 +163,10 @@ sdk.apps.list().then((res: C1ApiAppV1AppsListResponse) => {
 
 ### Parameters
 
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `config`                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config) | :heavy_minus_sign:                                           | Available config options for making requests.                |
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `request`                                                                                    | [operations.C1ApiAppV1AppsListRequest](../../models/operations/c1apiappv1appslistrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| `config`                                                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                 | :heavy_minus_sign:                                                                           | Available config options for making requests.                                                |
 
 
 ### Response
@@ -193,17 +194,17 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.apps.update({
   updateAppRequestInput: {
     app: {
-      certifyPolicyId: "asperiores",
-      description: "earum",
-      displayName: "modi",
-      grantPolicyId: "iste",
-      iconUrl: "dolorum",
-      monthlyCostUsd: 5356.33,
-      revokePolicyId: "pariatur",
+      certifyPolicyId: "ipsum",
+      description: "hic",
+      displayName: "excepturi",
+      grantPolicyId: "cum",
+      iconUrl: "voluptate",
+      monthlyCostUsd: 4904.59,
+      revokePolicyId: "reiciendis",
     },
-    updateMask: "provident",
+    updateMask: "amet",
   },
-  id: "cbf48633-323f-49b7-bf3a-4100674ebf69",
+  id: "a4100674-ebf6-4928-8d1b-a77a89ebf737",
 }).then((res: C1ApiAppV1AppsUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

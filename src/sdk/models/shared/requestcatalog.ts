@@ -49,6 +49,11 @@ export class RequestCatalog extends SpeakeasyBase {
     @Expose({ name: "createdByUserId" })
     createdByUserId?: string;
 
+    @SpeakeasyMetadata()
+    @Expose({ name: "deletedAt" })
+    @Transform(({ value }) => new Date(value), { toClassOnly: true })
+    deletedAt?: Date;
+
     /**
      *  The description of the request catalog.
      *

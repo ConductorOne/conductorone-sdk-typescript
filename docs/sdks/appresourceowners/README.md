@@ -22,9 +22,11 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appResourceOwners.list({
-  appId: "dolor",
-  resourceId: "debitis",
-  resourceTypeId: "a",
+  appId: "accusamus",
+  pageSize: 2497.96,
+  pageToken: "occaecati",
+  resourceId: "enim",
+  resourceTypeId: "accusamus",
 }).then((res: C1ApiAppV1AppResourceOwnersListResponse) => {
   if (res.statusCode == 200) {
     // handle response

@@ -74,6 +74,7 @@ src/sdk/models/operations/c1apiappv1appsget.ts
 src/sdk/models/operations/c1apiappv1appslist.ts
 src/sdk/models/operations/c1apiappv1appsupdate.ts
 src/sdk/models/operations/c1apiauthv1authintrospect.ts
+src/sdk/models/operations/c1apiappv1connectorservicecreate.ts
 src/sdk/models/operations/c1apiappv1connectorservicecreatedelegated.ts
 src/sdk/models/operations/c1apiappv1connectorservicedelete.ts
 src/sdk/models/operations/c1apiappv1connectorserviceget.ts
@@ -191,8 +192,9 @@ src/sdk/models/shared/connectorview.ts
 src/sdk/models/shared/connector.ts
 src/sdk/models/shared/oauth2authorizedas.ts
 src/sdk/models/shared/connectorstatus.ts
-src/sdk/models/shared/connectorservicecreatedelegatedrequest.ts
+src/sdk/models/shared/connectorservicecreaterequest.ts
 src/sdk/models/shared/connectorexpandmask.ts
+src/sdk/models/shared/connectorservicecreatedelegatedrequest.ts
 src/sdk/models/shared/connectorservicedeleteresponse.ts
 src/sdk/models/shared/connectorservicedeleterequest.ts
 src/sdk/models/shared/connectorservicegetresponse.ts
@@ -404,10 +406,13 @@ docs/models/operations/c1apiappv1appsdeleterequest.md
 docs/models/operations/c1apiappv1appsdeleteresponse.md
 docs/models/operations/c1apiappv1appsgetrequest.md
 docs/models/operations/c1apiappv1appsgetresponse.md
+docs/models/operations/c1apiappv1appslistrequest.md
 docs/models/operations/c1apiappv1appslistresponse.md
 docs/models/operations/c1apiappv1appsupdaterequest.md
 docs/models/operations/c1apiappv1appsupdateresponse.md
 docs/models/operations/c1apiauthv1authintrospectresponse.md
+docs/models/operations/c1apiappv1connectorservicecreaterequest.md
+docs/models/operations/c1apiappv1connectorservicecreateresponse.md
 docs/models/operations/c1apiappv1connectorservicecreatedelegatedrequest.md
 docs/models/operations/c1apiappv1connectorservicecreatedelegatedresponse.md
 docs/models/operations/c1apiappv1connectorservicedeleterequest.md
@@ -431,6 +436,7 @@ docs/models/operations/c1apidirectoryv1directoryservicedeleterequest.md
 docs/models/operations/c1apidirectoryv1directoryservicedeleteresponse.md
 docs/models/operations/c1apidirectoryv1directoryservicegetrequest.md
 docs/models/operations/c1apidirectoryv1directoryservicegetresponse.md
+docs/models/operations/c1apidirectoryv1directoryservicelistrequest.md
 docs/models/operations/c1apidirectoryv1directoryservicelistresponse.md
 docs/models/operations/c1apiiamv1personalclientservicecreateresponse.md
 docs/models/operations/c1apipolicyv1policiescreateresponse.md
@@ -438,6 +444,7 @@ docs/models/operations/c1apipolicyv1policiesdeleterequest.md
 docs/models/operations/c1apipolicyv1policiesdeleteresponse.md
 docs/models/operations/c1apipolicyv1policiesgetrequest.md
 docs/models/operations/c1apipolicyv1policiesgetresponse.md
+docs/models/operations/c1apipolicyv1policieslistrequest.md
 docs/models/operations/c1apipolicyv1policieslistresponse.md
 docs/models/operations/c1apipolicyv1policiesupdaterequest.md
 docs/models/operations/c1apipolicyv1policiesupdateresponse.md
@@ -464,6 +471,7 @@ docs/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceupdat
 docs/models/operations/c1apirequestcatalogv1requestcatalogsearchservicesearchentitlementsresponse.md
 docs/models/operations/c1apiiamv1rolesgetrequest.md
 docs/models/operations/c1apiiamv1rolesgetresponse.md
+docs/models/operations/c1apiiamv1roleslistrequest.md
 docs/models/operations/c1apiiamv1roleslistresponse.md
 docs/models/operations/c1apiiamv1rolesupdaterequest.md
 docs/models/operations/c1apiiamv1rolesupdateresponse.md
@@ -482,6 +490,7 @@ docs/models/operations/c1apitaskv1taskactionsserviceescalatetoemergencyaccessres
 docs/models/operations/c1apitaskv1tasksearchservicesearchresponse.md
 docs/models/operations/c1apiuserv1userservicegetrequest.md
 docs/models/operations/c1apiuserv1userservicegetresponse.md
+docs/models/operations/c1apiuserv1userservicelistrequest.md
 docs/models/operations/c1apiuserv1userservicelistresponse.md
 docs/models/operations/c1apiuserv1usersearchsearchresponse.md
 docs/models/shared/appentitlementsearchservicesearchresponse.md
@@ -565,8 +574,9 @@ docs/models/shared/connector.md
 docs/models/shared/oauth2authorizedas.md
 docs/models/shared/connectorstatusstatus.md
 docs/models/shared/connectorstatus.md
-docs/models/shared/connectorservicecreatedelegatedrequest.md
+docs/models/shared/connectorservicecreaterequest.md
 docs/models/shared/connectorexpandmask.md
+docs/models/shared/connectorservicecreatedelegatedrequest.md
 docs/models/shared/connectorservicedeleteresponse.md
 docs/models/shared/connectorservicedeleterequest.md
 docs/models/shared/connectorservicegetresponse.md

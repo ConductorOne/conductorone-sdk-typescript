@@ -17,7 +17,6 @@ export class RequestCatalogManagementServiceCreateRequest extends SpeakeasyBase 
      *  The RequestCatalogExpandMask includes the paths in the catalog view to expand in the return value of this call.
      *
      * @remarks
-     *  The paths are 'created_by_user_id', 'app_ids', and 'access_entitlements', and '*'.
      *
      */
     @SpeakeasyMetadata()

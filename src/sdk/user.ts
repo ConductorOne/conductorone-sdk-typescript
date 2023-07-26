@@ -97,8 +97,13 @@ export class User {
      *
      */
     async list(
+        req: operations.C1ApiUserV1UserServiceListRequest,
         config?: AxiosRequestConfig
     ): Promise<operations.C1ApiUserV1UserServiceListResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.C1ApiUserV1UserServiceListRequest(req);
+        }
+
         const baseURL: string = utils.templateUrl(
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
@@ -109,6 +114,7 @@ export class User {
             this.sdkConfiguration.securityClient || this.sdkConfiguration.defaultClient;
 
         const headers = { ...config?.headers };
+        const queryParams: string = utils.serializeQueryParams(req);
         headers["Accept"] = "application/json";
         headers[
             "user-agent"
@@ -116,7 +122,7 @@ export class User {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: url + queryParams,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",

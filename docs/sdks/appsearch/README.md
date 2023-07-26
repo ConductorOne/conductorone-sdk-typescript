@@ -23,17 +23,19 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appSearch.search({
   appIds: [
-    "dolor",
-    "necessitatibus",
+    "expedita",
+    "nihil",
   ],
-  displayName: "odit",
+  displayName: "repellat",
   excludeAppIds: [
-    "quasi",
-    "iure",
+    "sed",
+    "saepe",
+    "pariatur",
+    "accusantium",
   ],
-  pageSize: 9840.43,
-  pageToken: "debitis",
-  query: "eius",
+  pageSize: 1624.93,
+  pageToken: "praesentium",
+  query: "natus",
 }).then((res: C1ApiAppV1AppSearchSearchResponse) => {
   if (res.statusCode == 200) {
     // handle response

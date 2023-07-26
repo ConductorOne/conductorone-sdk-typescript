@@ -6,7 +6,7 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- *  The app entitlement expand mask allows the user to get additonal information when getting responses containing app entitlement views.
+ *  The app entitlement expand mask allows the user to get additional information when getting responses containing app entitlement views.
  *
  * @remarks
  *
