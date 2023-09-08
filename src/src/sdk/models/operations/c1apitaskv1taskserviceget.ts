@@ -22,10 +22,7 @@ export class C1ApiTaskV1TaskServiceGetResponse extends SpeakeasyBase {
     rawResponse?: AxiosResponse;
 
     /**
-     *  The TaskServiceGetResponse returns a task view which has a task including JSONPATHs to the expanded items in the expanded array.
-     *
-     * @remarks
-     *
+     * The TaskServiceGetResponse returns a task view which has a task including JSONPATHs to the expanded items in the expanded array.
      */
     @SpeakeasyMetadata()
     taskServiceGetResponse?: shared.TaskServiceGetResponse;

@@ -7,17 +7,11 @@ import { ConnectorCredential } from "./connectorcredential";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  ConnectorServiceRotateCredentialResponse is the response returned by the rotate method.
- *
- * @remarks
- *
+ * ConnectorServiceRotateCredentialResponse is the response returned by the rotate method.
  */
 export class ConnectorServiceRotateCredentialResponse extends SpeakeasyBase {
     /**
-     *  ConnectorCredential is used by a connector to authenticate with conductor one.
-     *
-     * @remarks
-     *
+     * ConnectorCredential is used by a connector to authenticate with conductor one.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "credential" })
@@ -25,10 +19,7 @@ export class ConnectorServiceRotateCredentialResponse extends SpeakeasyBase {
     connectorCredential?: ConnectorCredential;
 
     /**
-     *  The new clientSecret returned after rotating the connector credential.
-     *
-     * @remarks
-     *
+     * The new clientSecret returned after rotating the connector credential.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "clientSecret" })

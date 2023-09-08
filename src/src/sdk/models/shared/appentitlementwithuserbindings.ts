@@ -8,17 +8,11 @@ import { AppEntitlementView } from "./appentitlementview";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The AppEntitlementWithUserBindings message represents an app entitlement and its associated user bindings.
- *
- * @remarks
- *
+ * The AppEntitlementWithUserBindings message represents an app entitlement and its associated user bindings.
  */
 export class AppEntitlementWithUserBindings extends SpeakeasyBase {
     /**
-     *  The app entitlement view contains the serialized app entitlement and paths to objects referenced by the app entitlement.
-     *
-     * @remarks
-     *
+     * The app entitlement view contains the serialized app entitlement and paths to objects referenced by the app entitlement.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "entitlement" })
@@ -26,10 +20,7 @@ export class AppEntitlementWithUserBindings extends SpeakeasyBase {
     appEntitlementView?: AppEntitlementView;
 
     /**
-     *  An array of AppEntitlementUserBinding objects which represent the relationships that give app users access to the specific app entitlement.
-     *
-     * @remarks
-     *
+     * An array of AppEntitlementUserBinding objects which represent the relationships that give app users access to the specific app entitlement.
      */
     @SpeakeasyMetadata({ elemType: AppEntitlementUserBinding })
     @Expose({ name: "appEntitlementUserBindings" })

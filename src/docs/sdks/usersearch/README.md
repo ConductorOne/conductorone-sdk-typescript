@@ -6,8 +6,7 @@
 
 ## search
 
- Search users based on filters specified in the request body.
-
+Search users based on filters specified in the request body.
 
 ### Example Usage
 
@@ -18,6 +17,7 @@ import { SearchUsersRequestUserStatuses } from "conductorone-sdk-typescript/dist
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -25,34 +25,29 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.userSearch.search({
   userExpandMask: {
     paths: [
-      "impedit",
-      "delectus",
-      "tempore",
+      "officia",
     ],
   },
-  email: "Bruce.Zieme44@hotmail.com",
+  email: "Green.Bahringer@yahoo.com",
   excludeIds: [
-    "odio",
+    "iste",
   ],
   ids: [
-    "in",
-    "ducimus",
+    "id",
   ],
-  pageSize: 5678.46,
-  pageToken: "dolores",
-  query: "error",
+  pageSize: 700.42,
+  pageToken: "error",
+  query: "possimus",
   refs: [
     {
-      id: "77deac64-6ecb-4573-809e-3eb1e5a2b12e",
+      id: "eaab5851-d6c6-445b-88b6-1891baa0fe1a",
     },
   ],
   roleIds: [
-    "ipsa",
-    "ducimus",
-    "maiores",
+    "pariatur",
   ],
   userStatuses: [
-    SearchUsersRequestUserStatuses.Unknown,
+    SearchUsersRequestUserStatuses.Deleted,
   ],
 }).then((res: C1ApiUserV1UserSearchSearchResponse) => {
   if (res.statusCode == 200) {

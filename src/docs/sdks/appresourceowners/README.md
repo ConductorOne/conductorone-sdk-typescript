@@ -6,8 +6,7 @@
 
 ## list
 
- List all owners of an app resource.
-
+List all owners of an app resource.
 
 ### Example Usage
 
@@ -17,16 +16,17 @@ import { C1ApiAppV1AppResourceOwnersListResponse } from "conductorone-sdk-typesc
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.appResourceOwners.list({
-  appId: "accusamus",
-  pageSize: 2497.96,
-  pageToken: "occaecati",
-  resourceId: "enim",
-  resourceTypeId: "accusamus",
+  appId: "incidunt",
+  pageSize: 3185.69,
+  pageToken: "consequatur",
+  resourceId: "est",
+  resourceTypeId: "quibusdam",
 }).then((res: C1ApiAppV1AppResourceOwnersListResponse) => {
   if (res.statusCode == 200) {
     // handle response

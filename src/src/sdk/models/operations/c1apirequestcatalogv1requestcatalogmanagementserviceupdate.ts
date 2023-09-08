@@ -19,10 +19,7 @@ export class C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateResponse 
     contentType: string;
 
     /**
-     *  The request catalog management service get response returns a request catalog view with the expanded items in the expanded array indicated by the expand mask in the request.
-     *
-     * @remarks
-     *
+     * The request catalog management service get response returns a request catalog view with the expanded items in the expanded array indicated by the expand mask in the request.
      */
     @SpeakeasyMetadata()
     requestCatalogManagementServiceGetResponse?: shared.RequestCatalogManagementServiceGetResponse;

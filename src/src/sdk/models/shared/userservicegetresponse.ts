@@ -7,17 +7,11 @@ import { UserView } from "./userview";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The UserServiceGetResponse returns a user view which has a user including JSONPATHs to the expanded items in the expanded array.
- *
- * @remarks
- *
+ * The UserServiceGetResponse returns a user view which has a user including JSONPATHs to the expanded items in the expanded array.
  */
 export class UserServiceGetResponse extends SpeakeasyBase {
     /**
-     *  The UserView object provides a user response object, as well as JSONPATHs to related objects provided by expanders.
-     *
-     * @remarks
-     *
+     * The UserView object provides a user response object, as well as JSONPATHs to related objects provided by expanders.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "userView" })
@@ -25,10 +19,7 @@ export class UserServiceGetResponse extends SpeakeasyBase {
     userView?: UserView;
 
     /**
-     *  List of serialized related objects.
-     *
-     * @remarks
-     *
+     * List of serialized related objects.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expanded" })

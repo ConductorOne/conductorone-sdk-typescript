@@ -5,9 +5,6 @@
 import { SpeakeasyBase } from "../../../internal/utils";
 
 /**
- *  Indicates that a connector should perform the provisioning. This object has no fields.
- *
- * @remarks
- *
+ * Indicates that a connector should perform the provisioning. This object has no fields.
  */
 export class ConnectorProvision extends SpeakeasyBase {}

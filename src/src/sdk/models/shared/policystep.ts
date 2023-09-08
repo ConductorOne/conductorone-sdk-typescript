@@ -38,10 +38,7 @@ export class PolicyStep extends SpeakeasyBase {
     approval?: Approval;
 
     /**
-     *  The provision step references a provision policy for this step.
-     *
-     * @remarks
-     *
+     * The provision step references a provision policy for this step.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "provision" })
@@ -80,10 +77,7 @@ export class PolicyStepInput extends SpeakeasyBase {
     approval?: ApprovalInput;
 
     /**
-     *  The provision step references a provision policy for this step.
-     *
-     * @remarks
-     *
+     * The provision step references a provision policy for this step.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "provision" })

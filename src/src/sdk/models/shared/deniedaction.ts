@@ -6,10 +6,7 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- *  The denied action indicates that the c1.api.policy.v1.ApprovalInstance had an outcome of denied.
- *
- * @remarks
- *
+ * The denied action indicates that the c1.api.policy.v1.ApprovalInstance had an outcome of denied.
  */
 export class DeniedAction extends SpeakeasyBase {
     @SpeakeasyMetadata()
@@ -18,10 +15,7 @@ export class DeniedAction extends SpeakeasyBase {
     deniedAt?: Date;
 
     /**
-     *  The UserID that denied this step.
-     *
-     * @remarks
-     *
+     * The UserID that denied this step.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "userId" })

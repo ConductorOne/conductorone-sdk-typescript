@@ -6,14 +6,12 @@
 * [list](#list) - List
 * [listForAppResource](#listforappresource) - List For App Resource
 * [listForAppUser](#listforappuser) - List For App User
-* [listGroups](#listgroups) - List Groups
 * [listUsers](#listusers) - List Users
 * [update](#update) - Update
 
 ## get
 
- Get an app entitlement by ID.
-
+Get an app entitlement by ID.
 
 ### Example Usage
 
@@ -23,13 +21,14 @@ import { C1ApiAppV1AppEntitlementsGetResponse } from "conductorone-sdk-typescrip
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.appEntitlements.get({
-  appId: "iste",
-  id: "396fea75-96eb-410f-aaa2-352c5955907a",
+  appId: "perferendis",
+  id: "5dfc2ddf-7cc7-48ca-9ba9-28fc816742cb",
 }).then((res: C1ApiAppV1AppEntitlementsGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -52,8 +51,7 @@ sdk.appEntitlements.get({
 
 ## list
 
- List app entitlements associated with an app.
-
+List app entitlements associated with an app.
 
 ### Example Usage
 
@@ -63,14 +61,15 @@ import { C1ApiAppV1AppEntitlementsListResponse } from "conductorone-sdk-typescri
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.appEntitlements.list({
-  appId: "doloribus",
-  pageSize: 9589.5,
-  pageToken: "architecto",
+  appId: "esse",
+  pageSize: 2165.5,
+  pageToken: "excepturi",
 }).then((res: C1ApiAppV1AppEntitlementsListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -93,8 +92,7 @@ sdk.appEntitlements.list({
 
 ## listForAppResource
 
- List app entitlements associated with an app resource.
-
+List app entitlements associated with an app resource.
 
 ### Example Usage
 
@@ -104,16 +102,17 @@ import { C1ApiAppV1AppEntitlementsListForAppResourceResponse } from "conductoron
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.appEntitlements.listForAppResource({
-  appId: "mollitia",
-  appResourceId: "dolorem",
-  appResourceTypeId: "culpa",
-  pageSize: 1613.09,
-  pageToken: "repellat",
+  appId: "aspernatur",
+  appResourceId: "perferendis",
+  appResourceTypeId: "ad",
+  pageSize: 6176.36,
+  pageToken: "sed",
 }).then((res: C1ApiAppV1AppEntitlementsListForAppResourceResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -136,8 +135,7 @@ sdk.appEntitlements.listForAppResource({
 
 ## listForAppUser
 
- List app entitlements associated with an app user.
-
+List app entitlements associated with an app user.
 
 ### Example Usage
 
@@ -147,15 +145,16 @@ import { C1ApiAppV1AppEntitlementsListForAppUserResponse } from "conductorone-sd
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.appEntitlements.listForAppUser({
-  appId: "mollitia",
-  appUserId: "occaecati",
-  pageSize: 2532.91,
-  pageToken: "commodi",
+  appId: "iste",
+  appUserId: "dolor",
+  pageSize: 6169.34,
+  pageToken: "laboriosam",
 }).then((res: C1ApiAppV1AppEntitlementsListForAppUserResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -176,52 +175,9 @@ sdk.appEntitlements.listForAppUser({
 **Promise<[operations.C1ApiAppV1AppEntitlementsListForAppUserResponse](../../models/operations/c1apiappv1appentitlementslistforappuserresponse.md)>**
 
 
-## listGroups
-
- List app groups associated with an app entitlement.
-
-
-### Example Usage
-
-```typescript
-import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
-import { C1ApiAppV1AppEntitlementsListGroupsResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
-
-const sdk = new ConductoroneSDKTypescript({
-  security: {
-    oauth: "",
-  },
-});
-
-sdk.appEntitlements.listGroups({
-  appEntitlementId: "quam",
-  appId: "molestiae",
-  pageSize: 2444.25,
-  pageToken: "error",
-}).then((res: C1ApiAppV1AppEntitlementsListGroupsResponse) => {
-  if (res.statusCode == 200) {
-    // handle response
-  }
-});
-```
-
-### Parameters
-
-| Parameter                                                                                                                      | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                      | [operations.C1ApiAppV1AppEntitlementsListGroupsRequest](../../models/operations/c1apiappv1appentitlementslistgroupsrequest.md) | :heavy_check_mark:                                                                                                             | The request object to use for the request.                                                                                     |
-| `config`                                                                                                                       | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                                                   | :heavy_minus_sign:                                                                                                             | Available config options for making requests.                                                                                  |
-
-
-### Response
-
-**Promise<[operations.C1ApiAppV1AppEntitlementsListGroupsResponse](../../models/operations/c1apiappv1appentitlementslistgroupsresponse.md)>**
-
-
 ## listUsers
 
- List the users, as AppEntitlementUsers objects, of an app entitlement.
-
+List the users, as AppEntitlementUsers objects, of an app entitlement.
 
 ### Example Usage
 
@@ -231,15 +187,16 @@ import { C1ApiAppV1AppEntitlementsListUsersResponse } from "conductorone-sdk-typ
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.appEntitlements.listUsers({
-  appEntitlementId: "quia",
-  appId: "quis",
-  pageSize: 1103.75,
-  pageToken: "laborum",
+  appEntitlementId: "hic",
+  appId: "saepe",
+  pageSize: 6818.2,
+  pageToken: "in",
 }).then((res: C1ApiAppV1AppEntitlementsListUsersResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -262,8 +219,7 @@ sdk.appEntitlements.listUsers({
 
 ## update
 
- Update an app entitlement by ID.
-
+Update an app entitlement by ID.
 
 ### Example Usage
 
@@ -273,6 +229,7 @@ import { C1ApiAppV1AppEntitlementsUpdateResponse } from "conductorone-sdk-typesc
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -283,49 +240,43 @@ sdk.appEntitlements.update({
       provisionPolicy: {
         connectorProvision: {},
         delegatedProvision: {
-          appId: "animi",
-          entitlementId: "enim",
+          appId: "corporis",
+          entitlementId: "iste",
         },
         manualProvision: {
-          instructions: "odit",
+          instructions: "iure",
           userIds: [
-            "sequi",
-            "tenetur",
-            "ipsam",
-            "id",
+            "saepe",
           ],
         },
       },
-      appId: "possimus",
-      appResourceId: "aut",
-      appResourceTypeId: "quasi",
-      certifyPolicyId: "error",
+      appId: "quidem",
+      appResourceId: "architecto",
+      appResourceTypeId: "ipsa",
+      certifyPolicyId: "reiciendis",
       complianceFrameworkValueIds: [
-        "laborum",
-        "quasi",
-        "reiciendis",
-        "voluptatibus",
+        "est",
       ],
-      description: "vero",
-      displayName: "nihil",
-      durationGrant: "praesentium",
+      description: "mollitia",
+      displayName: "laborum",
+      durationGrant: "dolores",
       durationUnset: {},
       emergencyGrantEnabled: false,
-      emergencyGrantPolicyId: "voluptatibus",
-      grantPolicyId: "ipsa",
-      revokePolicyId: "omnis",
-      riskLevelValueId: "voluptate",
-      slug: "cum",
+      emergencyGrantPolicyId: "dolorem",
+      grantPolicyId: "corporis",
+      revokePolicyId: "explicabo",
+      riskLevelValueId: "nobis",
+      slug: "enim",
     },
     appEntitlementExpandMask: {
       paths: [
-        "doloremque",
+        "omnis",
       ],
     },
-    updateMask: "reprehenderit",
+    updateMask: "nemo",
   },
-  appId: "ut",
-  id: "f15471b5-e6e1-43b9-9d48-8e1e91e450ad",
+  appId: "minima",
+  id: "907aff1a-3a2f-4a94-a773-9251aa52c3f5",
 }).then((res: C1ApiAppV1AppEntitlementsUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

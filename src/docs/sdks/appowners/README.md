@@ -8,8 +8,7 @@
 
 ## add
 
- Adds an owner to an app.
-
+Adds an owner to an app.
 
 ### Example Usage
 
@@ -19,14 +18,15 @@ import { C1ApiAppV1AppOwnersAddResponse } from "conductorone-sdk-typescript/dist
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.appOwners.add({
   addAppOwnerRequest: {},
-  appId: "explicabo",
-  userId: "deserunt",
+  appId: "id",
+  userId: "possimus",
 }).then((res: C1ApiAppV1AppOwnersAddResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -49,8 +49,7 @@ sdk.appOwners.add({
 
 ## list
 
- List owners of an app.
-
+List owners of an app.
 
 ### Example Usage
 
@@ -60,14 +59,15 @@ import { C1ApiAppV1AppOwnersListResponse } from "conductorone-sdk-typescript/dis
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.appOwners.list({
-  appId: "distinctio",
-  pageSize: 8413.86,
-  pageToken: "labore",
+  appId: "aut",
+  pageSize: 971.01,
+  pageToken: "error",
 }).then((res: C1ApiAppV1AppOwnersListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -90,8 +90,7 @@ sdk.appOwners.list({
 
 ## remove
 
- Removes an owner from an app.
-
+Removes an owner from an app.
 
 ### Example Usage
 
@@ -101,14 +100,15 @@ import { C1ApiAppV1AppOwnersRemoveResponse } from "conductorone-sdk-typescript/d
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.appOwners.remove({
   removeAppOwnerRequest: {},
-  appId: "modi",
-  userId: "qui",
+  appId: "temporibus",
+  userId: "laborum",
 }).then((res: C1ApiAppV1AppOwnersRemoveResponse) => {
   if (res.statusCode == 200) {
     // handle response

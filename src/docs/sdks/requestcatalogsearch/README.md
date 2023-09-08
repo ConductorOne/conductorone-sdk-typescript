@@ -6,8 +6,7 @@
 
 ## searchEntitlements
 
- Search request catalogs based on filters specified in the request body.
-
+Search request catalogs based on filters specified in the request body.
 
 ### Example Usage
 
@@ -18,6 +17,7 @@ import { RequestCatalogSearchServiceSearchEntitlementsRequestGrantedStatus } fro
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -25,16 +25,15 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.requestCatalogSearch.searchEntitlements({
   appEntitlementExpandMask: {
     paths: [
-      "esse",
-      "nemo",
-      "reprehenderit",
+      "consequuntur",
     ],
   },
-  entitlementAlias: "est",
+  appDisplayName: "fugit",
+  entitlementAlias: "id",
   grantedStatus: RequestCatalogSearchServiceSearchEntitlementsRequestGrantedStatus.All,
-  pageSize: 5718.44,
-  pageToken: "accusamus",
-  query: "impedit",
+  pageSize: 4402.64,
+  pageToken: "error",
+  query: "illo",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogSearchServiceSearchEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response

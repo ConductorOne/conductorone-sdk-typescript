@@ -7,17 +7,11 @@ import { AppUser } from "./appuser";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The AppUserView contains an app user as well as paths for apps, identity users, and last usage in expanded arrays.
- *
- * @remarks
- *
+ * The AppUserView contains an app user as well as paths for apps, identity users, and last usage in expanded arrays.
  */
 export class AppUserView extends SpeakeasyBase {
     /**
-     *  Application User that represents an account in the application.
-     *
-     * @remarks
-     *
+     * Application User that represents an account in the application.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appUser" })
@@ -25,30 +19,21 @@ export class AppUserView extends SpeakeasyBase {
     appUser?: AppUser;
 
     /**
-     *  JSONPATH expression indicating where the app is expanded in expanded arrays indicated in the request.
-     *
-     * @remarks
-     *
+     * JSONPATH expression indicating where the app is expanded in expanded arrays indicated in the request.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appPath" })
     appPath?: string;
 
     /**
-     *  JSONPATH expression indicating where the identity user is expanded in expanded arrays indicated in the request.
-     *
-     * @remarks
-     *
+     * JSONPATH expression indicating where the identity user is expanded in expanded arrays indicated in the request.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "identityUserPath" })
     identityUserPath?: string;
 
     /**
-     *  JSONPATH expression indicating where the last usage information is expanded in expanded arrays indicated in the request.
-     *
-     * @remarks
-     *
+     * JSONPATH expression indicating where the last usage information is expanded in expanded arrays indicated in the request.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "lastUsagePath" })

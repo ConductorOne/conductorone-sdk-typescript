@@ -19,6 +19,7 @@ import { C1ApiTaskV1TaskActionsServiceApproveResponse } from "conductorone-sdk-t
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -27,15 +28,13 @@ sdk.taskActions.approve({
   taskActionsServiceApproveRequest: {
     taskExpandMask: {
       paths: [
-        "itaque",
-        "alias",
-        "nisi",
+        "provident",
       ],
     },
-    comment: "itaque",
-    policyStepId: "velit",
+    comment: "quis",
+    policyStepId: "eum",
   },
-  taskId: "laborum",
+  taskId: "reiciendis",
 }).then((res: C1ApiTaskV1TaskActionsServiceApproveResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -68,6 +67,7 @@ import { C1ApiTaskV1TaskActionsServiceCommentResponse } from "conductorone-sdk-t
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -76,13 +76,12 @@ sdk.taskActions.comment({
   taskActionsServiceCommentRequest: {
     taskExpandMask: {
       paths: [
-        "dolor",
-        "iusto",
+        "provident",
       ],
     },
-    comment: "sit",
+    comment: "aspernatur",
   },
-  taskId: "doloremque",
+  taskId: "ullam",
 }).then((res: C1ApiTaskV1TaskActionsServiceCommentResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -115,6 +114,7 @@ import { C1ApiTaskV1TaskActionsServiceDenyResponse } from "conductorone-sdk-type
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -123,13 +123,13 @@ sdk.taskActions.deny({
   taskActionsServiceDenyRequest: {
     taskExpandMask: {
       paths: [
-        "officia",
+        "quasi",
       ],
     },
-    comment: "recusandae",
-    policyStepId: "ea",
+    comment: "animi",
+    policyStepId: "nostrum",
   },
-  taskId: "quidem",
+  taskId: "mollitia",
 }).then((res: C1ApiTaskV1TaskActionsServiceDenyResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -162,6 +162,7 @@ import { C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse } from "
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -170,14 +171,13 @@ sdk.taskActions.escalateToEmergencyAccess({
   taskActionsServiceEscalateToEmergencyAccessRequest: {
     taskExpandMask: {
       paths: [
-        "facilis",
-        "placeat",
+        "provident",
       ],
     },
-    comment: "perspiciatis",
-    policyStepId: "expedita",
+    comment: "possimus",
+    policyStepId: "animi",
   },
-  taskId: "deleniti",
+  taskId: "ex",
 }).then((res: C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse) => {
   if (res.statusCode == 200) {
     // handle response

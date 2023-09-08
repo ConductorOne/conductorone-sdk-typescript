@@ -7,8 +7,7 @@
 
 ## get
 
- Get an app resource type.
-
+Get an app resource type.
 
 ### Example Usage
 
@@ -18,13 +17,14 @@ import { C1ApiAppV1AppResourceTypeServiceGetResponse } from "conductorone-sdk-ty
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.appResourceType.get({
-  appId: "natus",
-  id: "b6e21419-5989-40af-a563-e2516fe4c8b7",
+  appId: "cupiditate",
+  id: "802d502a-94bb-44f6-bc96-9e9a3efa77df",
 }).then((res: C1ApiAppV1AppResourceTypeServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -47,8 +47,7 @@ sdk.appResourceType.get({
 
 ## list
 
- List app resource types.
-
+List app resource types.
 
 ### Example Usage
 
@@ -58,14 +57,15 @@ import { C1ApiAppV1AppResourceTypeServiceListResponse } from "conductorone-sdk-t
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.appResourceType.list({
-  appId: "architecto",
-  pageSize: 995.69,
-  pageToken: "repudiandae",
+  appId: "rerum",
+  pageSize: 1162.02,
+  pageToken: "magnam",
 }).then((res: C1ApiAppV1AppResourceTypeServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response

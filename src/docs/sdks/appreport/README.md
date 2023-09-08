@@ -6,8 +6,7 @@
 
 ## list
 
- Get a list of reports for the given app.
-
+Get a list of reports for the given app.
 
 ### Example Usage
 
@@ -17,14 +16,15 @@ import { C1ApiAppV1AppReportServiceListResponse } from "conductorone-sdk-typescr
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.appReport.list({
-  appId: "aliquid",
-  pageSize: 5865.13,
-  pageToken: "quos",
+  appId: "quasi",
+  pageSize: 9719.45,
+  pageToken: "voluptatibus",
 }).then((res: C1ApiAppV1AppReportServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response

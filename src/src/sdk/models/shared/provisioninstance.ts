@@ -11,10 +11,7 @@ import { ReassignedByErrorAction } from "./reassignedbyerroraction";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  This property indicates the current state of this step.
- *
- * @remarks
- *
+ * This property indicates the current state of this step.
  */
 export enum ProvisionInstanceState {
     ProvisionInstanceStateUnspecified = "PROVISION_INSTANCE_STATE_UNSPECIFIED",
@@ -26,10 +23,9 @@ export enum ProvisionInstanceState {
 }
 
 /**
- *  A provision instance describes the specific configuration of an executing provision policy step including actions taken and notification id.
+ * A provision instance describes the specific configuration of an executing provision policy step including actions taken and notification id.
  *
  * @remarks
- *
  *
  * This message contains a oneof named outcome. Only a single field of the following list may be set at a time:
  *   - completed
@@ -40,10 +36,7 @@ export enum ProvisionInstanceState {
  */
 export class ProvisionInstance extends SpeakeasyBase {
     /**
-     *  The outcome of a provision instance that is cancelled.
-     *
-     * @remarks
-     *
+     * The outcome of a provision instance that is cancelled.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "cancelled" })
@@ -51,10 +44,7 @@ export class ProvisionInstance extends SpeakeasyBase {
     cancelledAction?: CancelledAction;
 
     /**
-     *  The outcome of a provision instance that has been completed succesfully.
-     *
-     * @remarks
-     *
+     * The outcome of a provision instance that has been completed succesfully.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "completed" })
@@ -62,10 +52,7 @@ export class ProvisionInstance extends SpeakeasyBase {
     completedAction?: CompletedAction;
 
     /**
-     *  The outcome of a provision instance that has errored.
-     *
-     * @remarks
-     *
+     * The outcome of a provision instance that has errored.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "errored" })
@@ -73,10 +60,7 @@ export class ProvisionInstance extends SpeakeasyBase {
     erroredAction?: ErroredAction;
 
     /**
-     *  The provision step references a provision policy for this step.
-     *
-     * @remarks
-     *
+     * The provision step references a provision policy for this step.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "provision" })
@@ -84,10 +68,7 @@ export class ProvisionInstance extends SpeakeasyBase {
     provision?: Provision;
 
     /**
-     *  The ReassignedByErrorAction object describes the outcome of a policy step that has been reassigned because it had an error provisioning.
-     *
-     * @remarks
-     *
+     * The ReassignedByErrorAction object describes the outcome of a policy step that has been reassigned because it had an error provisioning.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "reassignedByError" })
@@ -95,20 +76,14 @@ export class ProvisionInstance extends SpeakeasyBase {
     reassignedByErrorAction?: ReassignedByErrorAction;
 
     /**
-     *  This indicates the notification id for this step.
-     *
-     * @remarks
-     *
+     * This indicates the notification id for this step.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "notificationId" })
     notificationId?: string;
 
     /**
-     *  This property indicates the current state of this step.
-     *
-     * @remarks
-     *
+     * This property indicates the current state of this step.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "state" })

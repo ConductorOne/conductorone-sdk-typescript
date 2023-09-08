@@ -6,8 +6,7 @@
 
 ## search
 
- Search apps based on filters specified in the request body.
-
+Search apps based on filters specified in the request body.
 
 ### Example Usage
 
@@ -17,25 +16,22 @@ import { C1ApiAppV1AppSearchSearchResponse } from "conductorone-sdk-typescript/d
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.appSearch.search({
   appIds: [
-    "expedita",
-    "nihil",
+    "cumque",
   ],
-  displayName: "repellat",
+  displayName: "facere",
   excludeAppIds: [
-    "sed",
-    "saepe",
-    "pariatur",
-    "accusantium",
+    "ea",
   ],
-  pageSize: 1624.93,
-  pageToken: "praesentium",
-  query: "natus",
+  pageSize: 3965.06,
+  pageToken: "laborum",
+  query: "accusamus",
 }).then((res: C1ApiAppV1AppSearchSearchResponse) => {
   if (res.statusCode == 200) {
     // handle response

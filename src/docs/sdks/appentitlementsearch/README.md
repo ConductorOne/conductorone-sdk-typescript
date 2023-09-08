@@ -6,8 +6,7 @@
 
 ## search
 
- Search app entitlements based on filters specified in the request body.
-
+Search app entitlements based on filters specified in the request body.
 
 ### Example Usage
 
@@ -17,6 +16,7 @@ import { C1ApiAppV1AppEntitlementSearchServiceSearchResponse } from "conductoron
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -24,49 +24,35 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.appEntitlementSearch.search({
   appEntitlementExpandMask: {
     paths: [
-      "sapiente",
-      "quo",
-      "odit",
-      "at",
+      "delectus",
     ],
   },
-  accessReviewId: "at",
-  alias: "maiores",
+  accessReviewId: "tempora",
+  alias: "suscipit",
   appIds: [
-    "quod",
-    "quod",
-  ],
-  appUserIds: [
-    "totam",
-    "porro",
-  ],
-  complianceFrameworkIds: [
-    "dicta",
-    "nam",
-    "officia",
-  ],
-  excludeAppIds: [
-    "fugit",
-    "deleniti",
-    "hic",
-  ],
-  excludeAppUserIds: [
-    "totam",
-    "beatae",
-    "commodi",
     "molestiae",
   ],
+  appUserIds: [
+    "minus",
+  ],
+  complianceFrameworkIds: [
+    "placeat",
+  ],
+  excludeAppIds: [
+    "voluptatum",
+  ],
+  excludeAppUserIds: [
+    "iusto",
+  ],
   onlyGetExpiring: false,
-  pageSize: 2645.55,
-  pageToken: "qui",
-  query: "impedit",
+  pageSize: 5680.45,
+  pageToken: "nisi",
+  query: "recusandae",
   resourceTypeIds: [
-    "esse",
-    "ipsum",
-    "excepturi",
+    "temporibus",
   ],
   riskLevelIds: [
-    "perferendis",
+    "ab",
   ],
 }).then((res: C1ApiAppV1AppEntitlementSearchServiceSearchResponse) => {
   if (res.statusCode == 200) {

@@ -15,8 +15,7 @@
 
 ## addAccessEntitlements
 
- Add visibility bindings (access entitlements) to a catalog.
-
+Add visibility bindings (access entitlements) to a catalog.
 
 ### Example Usage
 
@@ -28,6 +27,7 @@ import {
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -36,24 +36,12 @@ sdk.requestCatalogManagement.addAccessEntitlements({
   requestCatalogManagementServiceAddAccessEntitlementsRequest: {
     accessEntitlements: [
       {
-        appId: "explicabo",
-        id: "fb7b194a-276b-4269-96fe-1f08f4294e36",
-      },
-      {
-        appId: "occaecati",
-        id: "8f447f60-3e8b-4445-a80c-a55efd20e457",
-      },
-      {
-        appId: "officiis",
-        id: "1858b6a8-9fbe-43a5-aa8e-4824d0ab4075",
-      },
-      {
-        appId: "sit",
-        id: "88e51862-065e-4904-b3b1-194b8abf603a",
+        appId: "quos",
+        id: "64dbb675-fd5e-460b-b75e-d4f6fbee41f3",
       },
     ],
   },
-  catalogId: "voluptate",
+  catalogId: "non",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceAddAccessEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -76,8 +64,7 @@ sdk.requestCatalogManagement.addAccessEntitlements({
 
 ## addAppEntitlements
 
- Add requestable entitlements to a catalog.
-
+Add requestable entitlements to a catalog.
 
 ### Example Usage
 
@@ -87,6 +74,7 @@ import { C1ApiRequestcatalogV1RequestCatalogManagementServiceAddAppEntitlementsR
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -95,20 +83,12 @@ sdk.requestCatalogManagement.addAppEntitlements({
   requestCatalogManagementServiceAddAppEntitlementsRequest: {
     appEntitlements: [
       {
-        appId: "reiciendis",
-        id: "9dfe0ab7-da8a-450c-a187-f86bc173d689",
-      },
-      {
-        appId: "officiis",
-        id: "ee9526f8-d986-4e88-9ead-4f0e1012563f",
-      },
-      {
-        appId: "molestias",
-        id: "4e29e973-e922-4a57-a15b-e3e060807e2b",
+        appId: "amet",
+        id: "17fe35b6-0eb1-4ea4-a655-5ba3c28744ed",
       },
     ],
   },
-  catalogId: "iure",
+  catalogId: "ullam",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceAddAppEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -131,8 +111,7 @@ sdk.requestCatalogManagement.addAppEntitlements({
 
 ## create
 
- Creates a new request catalog.
-
+Creates a new request catalog.
 
 ### Example Usage
 
@@ -142,6 +121,7 @@ import { C1ApiRequestcatalogV1RequestCatalogManagementServiceCreateResponse } fr
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -149,14 +129,11 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.requestCatalogManagement.create({
   requestCatalogExpandMask: {
     paths: [
-      "ratione",
-      "laborum",
-      "distinctio",
-      "voluptatum",
+      "adipisci",
     ],
   },
-  description: "rem",
-  displayName: "aliquam",
+  description: "cum",
+  displayName: "blanditiis",
   published: false,
   visibleToEveryone: false,
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceCreateResponse) => {
@@ -181,8 +158,7 @@ sdk.requestCatalogManagement.create({
 
 ## delete
 
- Delete a catalog.
-
+Delete a catalog.
 
 ### Example Usage
 
@@ -192,13 +168,14 @@ import { C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse } fr
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.requestCatalogManagement.delete({
   requestCatalogManagementServiceDeleteRequest: {},
-  id: "5f0597a6-0ff2-4a54-a31e-94764a3e865e",
+  id: "8f3a8d8f-5c0b-42f2-bb7b-194a276b2691",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -221,8 +198,7 @@ sdk.requestCatalogManagement.delete({
 
 ## get
 
- Get a catalog.
-
+Get a catalog.
 
 ### Example Usage
 
@@ -232,12 +208,13 @@ import { C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse } from 
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.requestCatalogManagement.get({
-  id: "7956f925-1a5a-49da-a60f-f57bfaad4f9e",
+  id: "6fe1f08f-4294-4e36-98f4-47f603e8b445",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -260,8 +237,7 @@ sdk.requestCatalogManagement.get({
 
 ## listEntitlementsForAccess
 
- List visibility bindings (access entitlements) for a catalog.
-
+List visibility bindings (access entitlements) for a catalog.
 
 ### Example Usage
 
@@ -273,14 +249,15 @@ import {
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.requestCatalogManagement.listEntitlementsForAccess({
-  catalogId: "sapiente",
-  pageSize: 7645.62,
-  pageToken: "vitae",
+  catalogId: "debitis",
+  pageSize: 5249.7,
+  pageToken: "sit",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -303,8 +280,7 @@ sdk.requestCatalogManagement.listEntitlementsForAccess({
 
 ## listEntitlementsPerCatalog
 
- List entitlements in a catalog that are requestable.
-
+List entitlements in a catalog that are requestable.
 
 ### Example Usage
 
@@ -316,14 +292,15 @@ import {
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.requestCatalogManagement.listEntitlementsPerCatalog({
-  catalogId: "rerum",
-  pageSize: 2722.29,
-  pageToken: "quis",
+  catalogId: "nobis",
+  pageSize: 6256.37,
+  pageToken: "veniam",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsPerCatalogResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -346,8 +323,7 @@ sdk.requestCatalogManagement.listEntitlementsPerCatalog({
 
 ## removeAccessEntitlements
 
- Remove visibility bindings (access entitlements) to a catalog.
-
+Remove visibility bindings (access entitlements) to a catalog.
 
 ### Example Usage
 
@@ -359,6 +335,7 @@ import {
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -367,8 +344,8 @@ sdk.requestCatalogManagement.removeAccessEntitlements({
   requestCatalogManagementServiceRemoveAccessEntitlementsRequest: {
     accessEntitlements: [
       {
-        appId: "fugit",
-        id: "c1032648-dc2f-4615-999e-bfd0e9fe6c63",
+        appId: "minima",
+        id: "efd20e45-7e18-458b-aa89-fbe3a5aa8e48",
       },
     ],
   },
@@ -395,8 +372,7 @@ sdk.requestCatalogManagement.removeAccessEntitlements({
 
 ## removeAppEntitlements
 
- Remove requestable entitlements from a catalog.
-
+Remove requestable entitlements from a catalog.
 
 ### Example Usage
 
@@ -408,6 +384,7 @@ import {
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -416,24 +393,12 @@ sdk.requestCatalogManagement.removeAppEntitlements({
   requestCatalogManagementServiceRemoveAppEntitlementsRequest: {
     appEntitlements: [
       {
-        appId: "fuga",
-        id: "3aed0117-9963-412f-9e04-771778ff61d0",
-      },
-      {
-        appId: "dicta",
-        id: "7476360a-15db-46a6-a065-9a1adeaab585",
-      },
-      {
-        appId: "vitae",
-        id: "d6c645b0-8b61-4891-baa0-fe1ade008e6f",
-      },
-      {
-        appId: "rem",
-        id: "c5f350d8-cdb5-4a34-9814-3010421813d5",
+        appId: "ut",
+        id: "d0ab4075-088e-4518-a206-5e904f3b1194",
       },
     ],
   },
-  catalogId: "consequuntur",
+  catalogId: "quidem",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceRemoveAppEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -456,8 +421,7 @@ sdk.requestCatalogManagement.removeAppEntitlements({
 
 ## update
 
- Update a catalog.
-
+Update a catalog.
 
 ### Example Usage
 
@@ -467,6 +431,7 @@ import { C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateResponse } fr
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -479,63 +444,53 @@ sdk.requestCatalogManagement.update({
           provisionPolicy: {
             connectorProvision: {},
             delegatedProvision: {
-              appId: "quas",
-              entitlementId: "eveniet",
+              appId: "atque",
+              entitlementId: "laborum",
             },
             manualProvision: {
-              instructions: "impedit",
+              instructions: "nam",
               userIds: [
-                "esse",
-                "necessitatibus",
-                "sed",
-                "veniam",
+                "tenetur",
               ],
             },
           },
-          appId: "nesciunt",
-          appResourceId: "expedita",
-          appResourceTypeId: "eum",
-          certifyPolicyId: "vel",
+          appId: "laboriosam",
+          appResourceId: "alias",
+          appResourceTypeId: "amet",
+          certifyPolicyId: "deserunt",
           complianceFrameworkValueIds: [
-            "magnam",
-            "exercitationem",
-            "ab",
+            "voluptate",
           ],
-          description: "porro",
-          displayName: "autem",
-          durationGrant: "nobis",
+          description: "unde",
+          displayName: "reiciendis",
+          durationGrant: "provident",
           durationUnset: {},
           emergencyGrantEnabled: false,
-          emergencyGrantPolicyId: "laboriosam",
-          grantPolicyId: "recusandae",
-          revokePolicyId: "consequuntur",
-          riskLevelValueId: "voluptatem",
-          slug: "exercitationem",
+          emergencyGrantPolicyId: "repellendus",
+          grantPolicyId: "delectus",
+          revokePolicyId: "voluptates",
+          riskLevelValueId: "perferendis",
+          slug: "est",
         },
       ],
       appIds: [
-        "quasi",
-        "nisi",
-        "at",
-        "vero",
+        "quidem",
       ],
-      createdByUserId: "est",
-      description: "harum",
-      displayName: "sequi",
-      id: "fec9578a-6458-4427-ba84-18d162309fb0",
+      createdByUserId: "reprehenderit",
+      description: "facere",
+      displayName: "fuga",
+      id: "8a50ce18-7f86-4bc1-b3d6-89eee9526f8d",
       published: false,
       visibleToEveryone: false,
     },
     requestCatalogExpandMask: {
       paths: [
-        "eos",
-        "occaecati",
-        "iste",
+        "error",
       ],
     },
-    updateMask: "magni",
+    updateMask: "blanditiis",
   },
-  id: "1aefb9f5-8c4d-486e-a8e4-be056013f59d",
+  id: "6e881ead-4f0e-4101-a563-f94e29e973e9",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

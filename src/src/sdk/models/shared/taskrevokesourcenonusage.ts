@@ -6,10 +6,7 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- *  The TaskRevokeSourceNonUsage message indicates that the source of the revoke task is due to the grant not being used.
- *
- * @remarks
- *
+ * The TaskRevokeSourceNonUsage message indicates that the source of the revoke task is due to the grant not being used.
  */
 export class TaskRevokeSourceNonUsage extends SpeakeasyBase {
     @SpeakeasyMetadata()

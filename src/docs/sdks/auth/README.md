@@ -6,8 +6,7 @@
 
 ## introspect
 
- Introspect returns the current user's principle_id, user_id and a list of roles, permissions, and enabled features.
-
+Introspect returns the current user's principle_id, user_id and a list of roles, permissions, and enabled features.
 
 ### Example Usage
 
@@ -17,6 +16,7 @@ import { C1ApiAuthV1AuthIntrospectResponse } from "conductorone-sdk-typescript/d
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });

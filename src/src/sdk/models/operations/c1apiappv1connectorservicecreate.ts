@@ -16,10 +16,7 @@ export class C1ApiAppV1ConnectorServiceCreateRequest extends SpeakeasyBase {
 
 export class C1ApiAppV1ConnectorServiceCreateResponse extends SpeakeasyBase {
     /**
-     *  The ConnectorServiceCreateResponse is the response returned from creating a connector.
-     *
-     * @remarks
-     *
+     * The ConnectorServiceCreateResponse is the response returned from creating a connector.
      */
     @SpeakeasyMetadata()
     connectorServiceCreateResponse?: shared.ConnectorServiceCreateResponse;

@@ -6,8 +6,7 @@
 
 ## search
 
- Search tasks based on filters specified in the request body.
-
+Search tasks based on filters specified in the request body.
 
 ### Example Usage
 
@@ -23,6 +22,7 @@ import {
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -30,155 +30,93 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.taskSearch.search({
   taskExpandMask: {
     paths: [
-      "voluptate",
-      "ullam",
-      "unde",
-      "necessitatibus",
+      "aliquid",
     ],
   },
   accessReviewIds: [
-    "impedit",
-    "ipsam",
-    "corporis",
+    "accusantium",
   ],
   accountOwnerIds: [
-    "error",
-    "esse",
-    "labore",
+    "repellat",
   ],
-  actorId: "veritatis",
+  actorId: "doloribus",
   appEntitlementIds: [
-    "consectetur",
-    "vitae",
-    "inventore",
-    "dolorem",
+    "ullam",
   ],
   appResourceIds: [
-    "qui",
-    "iste",
+    "in",
   ],
   appResourceTypeIds: [
-    "nemo",
-    "soluta",
+    "nam",
   ],
   appUserSubjectIds: [
-    "rem",
-    "dolorum",
-    "odio",
+    "earum",
   ],
   applicationIds: [
-    "alias",
+    "officia",
   ],
   assigneesInIds: [
-    "vel",
+    "laborum",
   ],
-  createdAfter: new Date("2022-12-08T19:16:07.063Z"),
-  createdBefore: new Date("2022-10-16T23:42:04.526Z"),
-  currentStep: TaskSearchRequestCurrentStep.TaskSearchCurrentStepApproval,
+  createdAfter: new Date("2022-03-14T23:12:21.252Z"),
+  createdBefore: new Date("2021-04-23T08:23:19.189Z"),
+  currentStep: TaskSearchRequestCurrentStep.TaskSearchCurrentStepProvision,
   emergencyStatus: TaskSearchRequestEmergencyStatus.Emergency,
   excludeAppEntitlementIds: [
-    "ipsum",
+    "cumque",
   ],
   excludeIds: [
-    "nulla",
-    "distinctio",
-    "maxime",
+    "vitae",
   ],
   includeDeleted: false,
   myWorkUserIds: [
-    "quia",
+    "rerum",
   ],
   openerIds: [
-    "omnis",
-    "libero",
+    "tempora",
   ],
-  pageSize: 1156.61,
-  pageToken: "id",
+  pageSize: 3354.98,
+  pageToken: "inventore",
   previouslyActedOnIds: [
-    "fugiat",
-    "officia",
-    "quos",
+    "fugit",
   ],
-  query: "placeat",
+  query: "cumque",
   refs: [
     {
-      id: "70e1084c-b067-42d1-ad87-9eeb9665b85e",
+      id: "1032648d-c2f6-4151-99eb-fd0e9fe6c632",
     },
   ],
   sortBy: TaskSearchRequestSortBy.TaskSearchSortByAccountOwner,
   subjectIds: [
-    "at",
-    "alias",
-    "quia",
+    "fuga",
   ],
   taskStates: [
-    TaskSearchRequestTaskStates.TaskStateClosed,
-    TaskSearchRequestTaskStates.TaskStateClosed,
     TaskSearchRequestTaskStates.TaskStateUnspecified,
   ],
   taskTypes: [
     {
       taskTypeCertify: {},
-      taskTypeGrant: {},
-      taskTypeRevoke: {
-        taskRevokeSource: {
-          taskRevokeSourceExpired: {
-            expiredAt: new Date("2022-06-21T04:17:16.724Z"),
-          },
-          taskRevokeSourceNonUsage: {
-            expiresAt: new Date("2021-07-20T13:08:36.205Z"),
-            lastLogin: new Date("2022-09-20T13:39:46.907Z"),
-          },
-          taskRevokeSourceRequest: {
-            requestUserId: "explicabo",
-          },
-          taskRevokeSourceReview: {
-            accessReviewId: "corporis",
-            certTicketId: "error",
-          },
+      taskTypeGrant: {
+        taskGrantSource: {
+          externalUrl: "animi",
+          integrationId: "necessitatibus",
         },
       },
-    },
-    {
-      taskTypeCertify: {},
-      taskTypeGrant: {},
       taskTypeRevoke: {
         taskRevokeSource: {
           taskRevokeSourceExpired: {
-            expiredAt: new Date("2022-04-13T22:13:24.007Z"),
+            expiredAt: new Date("2022-12-22T05:17:09.936Z"),
           },
           taskRevokeSourceNonUsage: {
-            expiresAt: new Date("2021-02-09T04:42:29.895Z"),
-            lastLogin: new Date("2022-04-22T18:47:14.845Z"),
+            expiresAt: new Date("2022-11-29T01:33:31.768Z"),
+            lastLogin: new Date("2022-05-19T23:57:30.950Z"),
           },
           taskRevokeSourceRequest: {
-            requestUserId: "quis",
+            requestUserId: "occaecati",
           },
           taskRevokeSourceReview: {
-            accessReviewId: "beatae",
-            certTicketId: "unde",
-          },
-        },
-      },
-    },
-    {
-      taskTypeCertify: {},
-      taskTypeGrant: {},
-      taskTypeRevoke: {
-        taskRevokeSource: {
-          taskRevokeSourceExpired: {
-            expiredAt: new Date("2022-01-14T10:23:30.043Z"),
-          },
-          taskRevokeSourceNonUsage: {
-            expiresAt: new Date("2022-09-15T02:31:13.378Z"),
-            lastLogin: new Date("2022-09-29T05:24:35.816Z"),
-          },
-          taskRevokeSourceRequest: {
-            requestUserId: "nesciunt",
-          },
-          taskRevokeSourceReview: {
-            accessReviewId: "at",
-            certTicketId: "officia",
+            accessReviewId: "suscipit",
+            certTicketId: "adipisci",
           },
         },
       },

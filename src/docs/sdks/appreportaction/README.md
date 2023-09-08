@@ -6,8 +6,7 @@
 
 ## generateReport
 
- Generate a report for the given app.
-
+Generate a report for the given app.
 
 ### Example Usage
 
@@ -17,13 +16,14 @@ import { C1ApiAppV1AppReportActionServiceGenerateReportResponse } from "conducto
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.appReportAction.generateReport({
   appActionsServiceGenerateReportRequest: {},
-  appId: "perferendis",
+  appId: "vero",
 }).then((res: C1ApiAppV1AppReportActionServiceGenerateReportResponse) => {
   if (res.statusCode == 200) {
     // handle response

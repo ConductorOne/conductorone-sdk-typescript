@@ -5,9 +5,6 @@
 import { SpeakeasyBase } from "../../../internal/utils";
 
 /**
- *  ConnectorServiceRotateCredentialRequest is a request for rotating connector credentials. It uses URL values for input.
- *
- * @remarks
- *
+ * ConnectorServiceRotateCredentialRequest is a request for rotating connector credentials. It uses URL values for input.
  */
 export class ConnectorServiceRotateCredentialRequest extends SpeakeasyBase {}

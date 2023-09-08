@@ -22,10 +22,7 @@ export class C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlement
     contentType: string;
 
     /**
-     *  The RequestCatalogManagementServiceListEntitlementsForAccessResponse message contains a list of results and a nextPageToken if applicable.
-     *
-     * @remarks
-     *
+     * The RequestCatalogManagementServiceListEntitlementsForAccessResponse message contains a list of results and a nextPageToken if applicable.
      */
     @SpeakeasyMetadata()
     requestCatalogManagementServiceListEntitlementsForAccessResponse?: shared.RequestCatalogManagementServiceListEntitlementsForAccessResponse;

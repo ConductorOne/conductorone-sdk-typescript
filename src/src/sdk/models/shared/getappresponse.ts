@@ -7,17 +7,11 @@ import { App } from "./app";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The GetAppResponse message contains the details of the requested app in the app field.
- *
- * @remarks
- *
+ * The GetAppResponse message contains the details of the requested app in the app field.
  */
 export class GetAppResponse extends SpeakeasyBase {
     /**
-     *  The App object provides all of the details for an app, as well as some configuration.
-     *
-     * @remarks
-     *
+     * The App object provides all of the details for an app, as well as some configuration.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "app" })

@@ -19,10 +19,7 @@ export class C1ApiRequestcatalogV1RequestCatalogManagementServiceAddAppEntitleme
     contentType: string;
 
     /**
-     *  Empty response with a status code indicating success.
-     *
-     * @remarks
-     *
+     * Empty response with a status code indicating success.
      */
     @SpeakeasyMetadata()
     requestCatalogManagementServiceAddAppEntitlementsResponse?: shared.RequestCatalogManagementServiceAddAppEntitlementsResponse;

@@ -5,9 +5,6 @@
 import { SpeakeasyBase } from "../../../internal/utils";
 
 /**
- *  DirectoryServiceDeleteRequest is the request message for deleting a directory. It uses URL values for input.
- *
- * @remarks
- *
+ * DirectoryServiceDeleteRequest is the request message for deleting a directory. It uses URL values for input.
  */
 export class DirectoryServiceDeleteRequest extends SpeakeasyBase {}

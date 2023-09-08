@@ -11,10 +11,7 @@ export class C1ApiIamV1PersonalClientServiceCreateResponse extends SpeakeasyBase
     contentType: string;
 
     /**
-     *  The PersonalClientServiceCreateResponse message contains the created personal client and client secret.
-     *
-     * @remarks
-     *
+     * The PersonalClientServiceCreateResponse message contains the created personal client and client secret.
      */
     @SpeakeasyMetadata()
     personalClientServiceCreateResponse?: shared.PersonalClientServiceCreateResponse;

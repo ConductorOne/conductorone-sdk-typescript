@@ -11,20 +11,14 @@ import { Expose, Type } from "class-transformer";
  */
 export class SearchUsersResponse extends SpeakeasyBase {
     /**
-     *  List of related objects
-     *
-     * @remarks
-     *
+     * List of related objects
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expanded" })
     expanded?: Record<string, any>[];
 
     /**
-     *  The list of results containing up to X results, where X is the page size defined in the request
-     *
-     * @remarks
-     *
+     * The list of results containing up to X results, where X is the page size defined in the request
      */
     @SpeakeasyMetadata({ elemType: UserView })
     @Expose({ name: "list" })
@@ -32,22 +26,9 @@ export class SearchUsersResponse extends SpeakeasyBase {
     list?: UserView[];
 
     /**
-     *  The nextPageToken is shown for the next page if the number of results is larger than the max page size. The server returns one page of results and the nextPageToken until all results are retreived. To retrieve the next page, use the same request and append a pageToken field with the value of nextPageToken shown on the previous page.
-     *
-     * @remarks
-     *
+     * The nextPageToken is shown for the next page if the number of results is larger than the max page size. The server returns one page of results and the nextPageToken until all results are retreived. To retrieve the next page, use the same request and append a pageToken field with the value of nextPageToken shown on the previous page.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "nextPageToken" })
     nextPageToken?: string;
-
-    /**
-     *  Deprecated
-     *
-     * @remarks
-     *
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "notificationToken" })
-    notificationToken?: string;
 }

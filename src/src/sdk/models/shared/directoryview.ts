@@ -7,17 +7,11 @@ import { Directory } from "./directory";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The directory view contains a directory and an app_path which is a JSONPATH set to the location in the expand mask that the expanded app will live if requested by the expander.
- *
- * @remarks
- *
+ * The directory view contains a directory and an app_path which is a JSONPATH set to the location in the expand mask that the expanded app will live if requested by the expander.
  */
 export class DirectoryView extends SpeakeasyBase {
     /**
-     *  This object indicates that an app is also a directory.
-     *
-     * @remarks
-     *
+     * This object indicates that an app is also a directory.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "directory" })
@@ -25,10 +19,7 @@ export class DirectoryView extends SpeakeasyBase {
     directory?: Directory;
 
     /**
-     *  JSONPATH expression indicating the location of the App object in the  array.
-     *
-     * @remarks
-     *
+     * JSONPATH expression indicating the location of the App object in the  array.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appPath" })

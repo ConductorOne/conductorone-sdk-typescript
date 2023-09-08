@@ -25,10 +25,7 @@ export class C1ApiIamV1RolesUpdateResponse extends SpeakeasyBase {
     rawResponse?: AxiosResponse;
 
     /**
-     *  UpdateRolesResponse is the response message containing the updated role.
-     *
-     * @remarks
-     *
+     * UpdateRolesResponse is the response message containing the updated role.
      */
     @SpeakeasyMetadata()
     updateRolesResponse?: shared.UpdateRolesResponse;

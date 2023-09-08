@@ -6,27 +6,18 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- *  This object references an app entitlement's ID and AppID.
- *
- * @remarks
- *
+ * This object references an app entitlement's ID and AppID.
  */
 export class AppEntitlementReference extends SpeakeasyBase {
     /**
-     *  The ID of the Entitlement.
-     *
-     * @remarks
-     *
+     * The ID of the Entitlement.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appEntitlementId" })
     appEntitlementId?: string;
 
     /**
-     *  The ID of the App this entitlement belongs to.
-     *
-     * @remarks
-     *
+     * The ID of the App this entitlement belongs to.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })

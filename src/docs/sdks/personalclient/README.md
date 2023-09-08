@@ -6,8 +6,7 @@
 
 ## create
 
- Create creates a new PersonalClient object for the current User.
-
+Create creates a new PersonalClient object for the current User.
 
 ### Example Usage
 
@@ -17,21 +16,19 @@ import { C1ApiIamV1PersonalClientServiceCreateResponse } from "conductorone-sdk-
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.personalClient.create({
   allowSourceCidr: [
-    "distinctio",
-    "eligendi",
+    "incidunt",
   ],
-  displayName: "sit",
-  expires: "culpa",
+  displayName: "atque",
+  expires: "explicabo",
   scopedRoles: [
-    "adipisci",
-    "cumque",
-    "consequuntur",
+    "minima",
   ],
 }).then((res: C1ApiIamV1PersonalClientServiceCreateResponse) => {
   if (res.statusCode == 200) {

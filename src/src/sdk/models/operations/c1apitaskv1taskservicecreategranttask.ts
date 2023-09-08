@@ -17,10 +17,7 @@ export class C1ApiTaskV1TaskServiceCreateGrantTaskResponse extends SpeakeasyBase
     rawResponse?: AxiosResponse;
 
     /**
-     *  The TaskServiceCreateGrantResponse returns a task view which has a task including JSONPATHs to the expanded items in the expanded array.
-     *
-     * @remarks
-     *
+     * The TaskServiceCreateGrantResponse returns a task view which has a task including JSONPATHs to the expanded items in the expanded array.
      */
     @SpeakeasyMetadata()
     taskServiceCreateGrantResponse?: shared.TaskServiceCreateGrantResponse;

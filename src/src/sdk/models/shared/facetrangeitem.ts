@@ -7,17 +7,11 @@ import { FacetRange } from "./facetrange";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The FacetRangeItem message.
- *
- * @remarks
- *
+ * The FacetRangeItem message.
  */
 export class FacetRangeItem extends SpeakeasyBase {
     /**
-     *  An array of facet ranges.
-     *
-     * @remarks
-     *
+     * An array of facet ranges.
      */
     @SpeakeasyMetadata({ elemType: FacetRange })
     @Expose({ name: "ranges" })

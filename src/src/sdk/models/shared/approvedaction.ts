@@ -7,10 +7,7 @@ import { AppEntitlementReference } from "./appentitlementreference";
 import { Expose, Transform, Type } from "class-transformer";
 
 /**
- *  The approved action indicates that the approvalinstance had an outcome of approved.
- *
- * @remarks
- *
+ * The approved action indicates that the approvalinstance had an outcome of approved.
  */
 export class ApprovedAction extends SpeakeasyBase {
     @SpeakeasyMetadata()
@@ -19,10 +16,7 @@ export class ApprovedAction extends SpeakeasyBase {
     approvedAt?: Date;
 
     /**
-     *  The entitlements that were approved. This will only ever be a list of one entitlement.
-     *
-     * @remarks
-     *
+     * The entitlements that were approved. This will only ever be a list of one entitlement.
      */
     @SpeakeasyMetadata({ elemType: AppEntitlementReference })
     @Expose({ name: "entitlements" })
@@ -30,10 +24,7 @@ export class ApprovedAction extends SpeakeasyBase {
     entitlements?: AppEntitlementReference[];
 
     /**
-     *  The UserID that approved this step.
-     *
-     * @remarks
-     *
+     * The UserID that approved this step.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "userId" })

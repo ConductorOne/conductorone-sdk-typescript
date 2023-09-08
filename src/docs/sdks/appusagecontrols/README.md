@@ -7,8 +7,7 @@
 
 ## get
 
- Get usage controls, as an AppUsageControls object which describes some peripheral configuration, for an app.
-
+Get usage controls, as an AppUsageControls object which describes some peripheral configuration, for an app.
 
 ### Example Usage
 
@@ -18,12 +17,13 @@ import { C1ApiAppV1AppUsageControlsServiceGetResponse } from "conductorone-sdk-t
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.appUsageControls.get({
-  appId: "magni",
+  appId: "non",
 }).then((res: C1ApiAppV1AppUsageControlsServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -46,8 +46,7 @@ sdk.appUsageControls.get({
 
 ## update
 
- Update usage controls for an app.
-
+Update usage controls for an app.
 
 ### Example Usage
 
@@ -57,6 +56,7 @@ import { C1ApiAppV1AppUsageControlsServiceUpdateResponse } from "conductorone-sd
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -64,15 +64,15 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.appUsageControls.update({
   updateAppUsageControlsRequest: {
     appUsageControls: {
-      appId: "sunt",
+      appId: "occaecati",
       notify: false,
-      notifyAfterDays: 7790.51,
+      notifyAfterDays: 3132.18,
       revoke: false,
-      revokeAfterDays: 8480.09,
+      revokeAfterDays: 8817.36,
     },
-    updateMask: "pariatur",
+    updateMask: "delectus",
   },
-  appId: "maxime",
+  appId: "quidem",
 }).then((res: C1ApiAppV1AppUsageControlsServiceUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

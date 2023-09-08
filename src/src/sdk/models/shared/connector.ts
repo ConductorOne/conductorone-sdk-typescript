@@ -4,22 +4,15 @@
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { ConnectorStatus } from "./connectorstatus";
-import { OAuth2AuthorizedAs } from "./oauth2authorizedas";
-import { OAuth2AuthorizedAs1 } from "./oauth2authorizedas1";
+import { OAuth2AuthorizedAs, OAuth2AuthorizedAsInput } from "./oauth2authorizedas";
 import { Expose, Transform, Type } from "class-transformer";
 
 /**
- *  A Connector is used to sync objects into Apps
- *
- * @remarks
- *
+ * A Connector is used to sync objects into Apps
  */
 export class ConnectorInput extends SpeakeasyBase {
     /**
-     *  The status field on the connector is used to track the status of the connectors sync, and when syncing last started, completed, or caused the connector to update.
-     *
-     * @remarks
-     *
+     * The status field on the connector is used to track the status of the connectors sync, and when syncing last started, completed, or caused the connector to update.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "status" })
@@ -27,21 +20,15 @@ export class ConnectorInput extends SpeakeasyBase {
     connectorStatus?: ConnectorStatus;
 
     /**
-     *  OAuth2AuthorizedAs tracks the user that OAuthed with the connector.
-     *
-     * @remarks
-     *
+     * OAuth2AuthorizedAs tracks the user that OAuthed with the connector.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "oauthAuthorizedAs" })
-    @Type(() => OAuth2AuthorizedAs1)
-    oAuth2AuthorizedAs?: OAuth2AuthorizedAs1;
+    @Type(() => OAuth2AuthorizedAsInput)
+    oAuth2AuthorizedAs?: OAuth2AuthorizedAsInput;
 
     /**
-     *  The id of the app the connector is associated with.
-     *
-     * @remarks
-     *
+     * The id of the app the connector is associated with.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })
@@ -55,40 +42,28 @@ export class ConnectorInput extends SpeakeasyBase {
     config?: Record<string, any>;
 
     /**
-     *  The description of the connector.
-     *
-     * @remarks
-     *
+     * The description of the connector.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     *  The display name of the connector.
-     *
-     * @remarks
-     *
+     * The display name of the connector.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     *  The id of the connector.
-     *
-     * @remarks
-     *
+     * The id of the connector.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
     id?: string;
 
     /**
-     *  The userIds field is used to define the integration owners of the connector.
-     *
-     * @remarks
-     *
+     * The userIds field is used to define the integration owners of the connector.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "userIds" })
@@ -96,17 +71,11 @@ export class ConnectorInput extends SpeakeasyBase {
 }
 
 /**
- *  A Connector is used to sync objects into Apps
- *
- * @remarks
- *
+ * A Connector is used to sync objects into Apps
  */
 export class Connector extends SpeakeasyBase {
     /**
-     *  The status field on the connector is used to track the status of the connectors sync, and when syncing last started, completed, or caused the connector to update.
-     *
-     * @remarks
-     *
+     * The status field on the connector is used to track the status of the connectors sync, and when syncing last started, completed, or caused the connector to update.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "status" })
@@ -114,10 +83,7 @@ export class Connector extends SpeakeasyBase {
     connectorStatus?: ConnectorStatus;
 
     /**
-     *  OAuth2AuthorizedAs tracks the user that OAuthed with the connector.
-     *
-     * @remarks
-     *
+     * OAuth2AuthorizedAs tracks the user that OAuthed with the connector.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "oauthAuthorizedAs" })
@@ -125,20 +91,14 @@ export class Connector extends SpeakeasyBase {
     oAuth2AuthorizedAs?: OAuth2AuthorizedAs;
 
     /**
-     *  The id of the app the connector is associated with.
-     *
-     * @remarks
-     *
+     * The id of the app the connector is associated with.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })
     appId?: string;
 
     /**
-     *  The catalogId describes which catalog entry this connector is an instance of. For example, every Okta connector will have the same catalogId indicating it is an Okta connector.
-     *
-     * @remarks
-     *
+     * The catalogId describes which catalog entry this connector is an instance of. For example, every Okta connector will have the same catalogId indicating it is an Okta connector.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "catalogId" })
@@ -162,40 +122,28 @@ export class Connector extends SpeakeasyBase {
     deletedAt?: Date;
 
     /**
-     *  The description of the connector.
-     *
-     * @remarks
-     *
+     * The description of the connector.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     *  The display name of the connector.
-     *
-     * @remarks
-     *
+     * The display name of the connector.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     *  The downloadUrl for a spreadsheet if the connector was created from uploading a file.
-     *
-     * @remarks
-     *
+     * The downloadUrl for a spreadsheet if the connector was created from uploading a file.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "downloadUrl" })
     downloadUrl?: string;
 
     /**
-     *  The id of the connector.
-     *
-     * @remarks
-     *
+     * The id of the connector.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
@@ -207,10 +155,7 @@ export class Connector extends SpeakeasyBase {
     updatedAt?: Date;
 
     /**
-     *  The userIds field is used to define the integration owners of the connector.
-     *
-     * @remarks
-     *
+     * The userIds field is used to define the integration owners of the connector.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "userIds" })

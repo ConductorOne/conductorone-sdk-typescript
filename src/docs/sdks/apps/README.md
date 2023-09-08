@@ -10,8 +10,7 @@
 
 ## create
 
- Create a new app.
-
+Create a new app.
 
 ### Example Usage
 
@@ -21,20 +20,21 @@ import { C1ApiAppV1AppsCreateResponse } from "conductorone-sdk-typescript/dist/s
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.apps.create({
-  certifyPolicyId: "ea",
-  description: "excepturi",
-  displayName: "odit",
-  grantPolicyId: "ea",
-  monthlyCostUsd: 332.22,
+  certifyPolicyId: "sapiente",
+  description: "amet",
+  displayName: "deserunt",
+  grantPolicyId: "nisi",
+  monthlyCostUsd: 4238.55,
   owners: [
-    "maiores",
+    "natus",
   ],
-  revokePolicyId: "quidem",
+  revokePolicyId: "omnis",
 }).then((res: C1ApiAppV1AppsCreateResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -57,8 +57,7 @@ sdk.apps.create({
 
 ## delete
 
- Delete an app.
-
+Delete an app.
 
 ### Example Usage
 
@@ -68,13 +67,14 @@ import { C1ApiAppV1AppsDeleteResponse } from "conductorone-sdk-typescript/dist/s
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.apps.delete({
   deleteAppRequest: {},
-  id: "576b0d5f-0d30-4c5f-bb25-87053202c73d",
+  id: "7074ba44-69b6-4e21-8195-9890afa563e2",
 }).then((res: C1ApiAppV1AppsDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -97,8 +97,7 @@ sdk.apps.delete({
 
 ## get
 
- Get an app by ID.
-
+Get an app by ID.
 
 ### Example Usage
 
@@ -108,12 +107,13 @@ import { C1ApiAppV1AppsGetResponse } from "conductorone-sdk-typescript/dist/sdk/
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.apps.get({
-  id: "5fe9b90c-2890-49b3-be49-a8d9cbf48633",
+  id: "516fe4c8-b711-4e5b-bfd2-ed028921cddc",
 }).then((res: C1ApiAppV1AppsGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -136,8 +136,7 @@ sdk.apps.get({
 
 ## list
 
- List all apps.
-
+List all apps.
 
 ### Example Usage
 
@@ -147,13 +146,14 @@ import { C1ApiAppV1AppsListResponse } from "conductorone-sdk-typescript/dist/sdk
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.apps.list({
-  pageSize: 2224.43,
-  pageToken: "qui",
+  pageSize: 4113.97,
+  pageToken: "excepturi",
 }).then((res: C1ApiAppV1AppsListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -176,8 +176,7 @@ sdk.apps.list({
 
 ## update
 
- Update an existing app.
-
+Update an existing app.
 
 ### Example Usage
 
@@ -187,6 +186,7 @@ import { C1ApiAppV1AppsUpdateResponse } from "conductorone-sdk-typescript/dist/s
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -194,17 +194,17 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.apps.update({
   updateAppRequestInput: {
     app: {
-      certifyPolicyId: "ipsum",
-      description: "hic",
-      displayName: "excepturi",
-      grantPolicyId: "cum",
-      iconUrl: "voluptate",
-      monthlyCostUsd: 4904.59,
-      revokePolicyId: "reiciendis",
+      certifyPolicyId: "odit",
+      description: "ea",
+      displayName: "accusantium",
+      grantPolicyId: "ab",
+      iconUrl: "maiores",
+      monthlyCostUsd: 6974.29,
+      revokePolicyId: "ipsam",
     },
-    updateMask: "amet",
+    updateMask: "voluptate",
   },
-  id: "a4100674-ebf6-4928-8d1b-a77a89ebf737",
+  id: "6b0d5f0d-30c5-4fbb-a587-053202c73d5f",
 }).then((res: C1ApiAppV1AppsUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

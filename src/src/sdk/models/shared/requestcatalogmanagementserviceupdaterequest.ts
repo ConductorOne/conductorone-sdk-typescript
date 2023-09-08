@@ -8,17 +8,11 @@ import { RequestCatalogExpandMask } from "./requestcatalogexpandmask";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  Update a request catalog object by ID.
- *
- * @remarks
- *
+ * Update a request catalog object by ID.
  */
 export class RequestCatalogManagementServiceUpdateRequestInput extends SpeakeasyBase {
     /**
-     *  The RequestCatalog is used for managing which entitlements are requestable, and who can request them.
-     *
-     * @remarks
-     *
+     * The RequestCatalog is used for managing which entitlements are requestable, and who can request them.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "catalog" })
@@ -26,10 +20,7 @@ export class RequestCatalogManagementServiceUpdateRequestInput extends Speakeasy
     requestCatalog?: RequestCatalogInput;
 
     /**
-     *  The RequestCatalogExpandMask includes the paths in the catalog view to expand in the return value of this call.
-     *
-     * @remarks
-     *
+     * The RequestCatalogExpandMask includes the paths in the catalog view to expand in the return value of this call.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expandMask" })

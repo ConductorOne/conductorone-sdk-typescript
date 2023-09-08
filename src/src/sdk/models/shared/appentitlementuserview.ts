@@ -7,17 +7,11 @@ import { AppUserView } from "./appuserview";
 import { Expose, Transform, Type } from "class-transformer";
 
 /**
- *  The AppEntitlementUserView (aka grant view) describes the relationship between an app user and an entitlement. They have more recently been referred to as grants.
- *
- * @remarks
- *
+ * The AppEntitlementUserView (aka grant view) describes the relationship between an app user and an entitlement. They have more recently been referred to as grants.
  */
 export class AppEntitlementUserView extends SpeakeasyBase {
     /**
-     *  The AppUserView contains an app user as well as paths for apps, identity users, and last usage in expanded arrays.
-     *
-     * @remarks
-     *
+     * The AppUserView contains an app user as well as paths for apps, identity users, and last usage in expanded arrays.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appUser" })

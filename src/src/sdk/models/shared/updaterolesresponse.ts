@@ -7,17 +7,11 @@ import { Role } from "./role";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  UpdateRolesResponse is the response message containing the updated role.
- *
- * @remarks
- *
+ * UpdateRolesResponse is the response message containing the updated role.
  */
 export class UpdateRolesResponse extends SpeakeasyBase {
     /**
-     *  Role is a role that can be assigned to a user in ConductorOne.
-     *
-     * @remarks
-     *
+     * Role is a role that can be assigned to a user in ConductorOne.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "role" })

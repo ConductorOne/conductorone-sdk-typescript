@@ -7,17 +7,11 @@ import { Role } from "./role";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The GetRolesResponse message contains the retrieved role.
- *
- * @remarks
- *
+ * The GetRolesResponse message contains the retrieved role.
  */
 export class GetRolesResponse extends SpeakeasyBase {
     /**
-     *  Role is a role that can be assigned to a user in ConductorOne.
-     *
-     * @remarks
-     *
+     * Role is a role that can be assigned to a user in ConductorOne.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "role" })

@@ -15,8 +15,7 @@
 
 ## create
 
- Create a configured connector.
-
+Create a configured connector.
 
 ### Example Usage
 
@@ -26,6 +25,7 @@ import { C1ApiAppV1ConnectorServiceCreateResponse } from "conductorone-sdk-types
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -34,24 +34,19 @@ sdk.connector.create({
   connectorServiceCreateRequest: {
     connectorExpandMask: {
       paths: [
-        "saepe",
-        "eius",
-        "aspernatur",
+        "optio",
       ],
     },
-    catalogId: "perferendis",
+    catalogId: "accusamus",
     config: {
-      "optio": "accusamus",
+      "ad": "saepe",
     },
-    description: "ad",
+    description: "suscipit",
     userIds: [
-      "suscipit",
       "deserunt",
-      "provident",
-      "minima",
     ],
   },
-  appId: "repellendus",
+  appId: "provident",
 }).then((res: C1ApiAppV1ConnectorServiceCreateResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -74,8 +69,7 @@ sdk.connector.create({
 
 ## createDelegated
 
- Create a connector that is pending a connector config.
-
+Create a connector that is pending a connector config.
 
 ### Example Usage
 
@@ -85,6 +79,7 @@ import { C1ApiAppV1ConnectorServiceCreateDelegatedResponse } from "conductorone-
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -93,22 +88,17 @@ sdk.connector.createDelegated({
   connectorServiceCreateDelegatedRequest: {
     connectorExpandMask: {
       paths: [
-        "similique",
-        "alias",
-        "at",
+        "minima",
       ],
     },
-    catalogId: "quaerat",
-    description: "tempora",
-    displayName: "vel",
+    catalogId: "repellendus",
+    description: "totam",
+    displayName: "similique",
     userIds: [
-      "officiis",
-      "qui",
-      "dolorum",
-      "a",
+      "alias",
     ],
   },
-  appId: "esse",
+  appId: "at",
 }).then((res: C1ApiAppV1ConnectorServiceCreateDelegatedResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -131,8 +121,7 @@ sdk.connector.createDelegated({
 
 ## delete
 
- Delete a connector.
-
+Delete a connector.
 
 ### Example Usage
 
@@ -142,14 +131,15 @@ import { C1ApiAppV1ConnectorServiceDeleteResponse } from "conductorone-sdk-types
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.connector.delete({
   connectorServiceDeleteRequest: {},
-  appId: "harum",
-  id: "73cf3be4-53f8-470b-b26b-5a73429cdb1a",
+  appId: "quaerat",
+  id: "46ce2af7-a73c-4f3b-a453-f870b326b5a7",
 }).then((res: C1ApiAppV1ConnectorServiceDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -172,8 +162,7 @@ sdk.connector.delete({
 
 ## get
 
- Get a connector.
-
+Get a connector.
 
 ### Example Usage
 
@@ -183,13 +172,14 @@ import { C1ApiAppV1ConnectorServiceGetResponse } from "conductorone-sdk-typescri
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.connector.get({
-  appId: "totam",
-  id: "422bb679-d232-4271-9bf0-cbb1e31b8b90",
+  appId: "ipsum",
+  id: "429cdb1a-8422-4bb6-b9d2-322715bf0cbb",
 }).then((res: C1ApiAppV1ConnectorServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -212,8 +202,7 @@ sdk.connector.get({
 
 ## getCredentials
 
- Get credentials for a connector.
-
+Get credentials for a connector.
 
 ### Example Usage
 
@@ -223,14 +212,15 @@ import { C1ApiAppV1ConnectorServiceGetCredentialsResponse } from "conductorone-s
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.connector.getCredentials({
-  appId: "delectus",
-  connectorId: "dolorem",
-  id: "443a1108-e0ad-4cf4-b921-879fce953f73",
+  appId: "et",
+  connectorId: "saepe",
+  id: "31b8b90f-3443-4a11-88e0-adcf4b921879",
 }).then((res: C1ApiAppV1ConnectorServiceGetCredentialsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -253,8 +243,7 @@ sdk.connector.getCredentials({
 
 ## list
 
- List connectors for an app.
-
+List connectors for an app.
 
 ### Example Usage
 
@@ -264,14 +253,15 @@ import { C1ApiAppV1ConnectorServiceListResponse } from "conductorone-sdk-typescr
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.connector.list({
-  appId: "vero",
-  pageSize: 9493.19,
-  pageToken: "dignissimos",
+  appId: "voluptatibus",
+  pageSize: 7875.42,
+  pageToken: "vero",
 }).then((res: C1ApiAppV1ConnectorServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -294,8 +284,7 @@ sdk.connector.list({
 
 ## revokeCredential
 
- Revoke credentials for a connector.
-
+Revoke credentials for a connector.
 
 ### Example Usage
 
@@ -305,15 +294,16 @@ import { C1ApiAppV1ConnectorServiceRevokeCredentialResponse } from "conductorone
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.connector.revokeCredential({
   connectorServiceRevokeCredentialRequest: {},
-  appId: "hic",
-  connectorId: "distinctio",
-  id: "c7abd74d-d39c-40f5-92cf-f7c70a45626d",
+  appId: "omnis",
+  connectorId: "quis",
+  id: "3f73ef7f-bc7a-4bd7-8dd3-9c0f5d2cff7c",
 }).then((res: C1ApiAppV1ConnectorServiceRevokeCredentialResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -336,8 +326,7 @@ sdk.connector.revokeCredential({
 
 ## rotateCredential
 
- Rotate credentials for a connector.
-
+Rotate credentials for a connector.
 
 ### Example Usage
 
@@ -347,14 +336,15 @@ import { C1ApiAppV1ConnectorServiceRotateCredentialResponse } from "conductorone
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.connector.rotateCredential({
   connectorServiceRotateCredentialRequest: {},
-  appId: "magnam",
-  connectorId: "ratione",
+  appId: "ducimus",
+  connectorId: "alias",
 }).then((res: C1ApiAppV1ConnectorServiceRotateCredentialResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -377,8 +367,7 @@ sdk.connector.rotateCredential({
 
 ## update
 
- Update a connector.
-
+Update a connector.
 
 ### Example Usage
 
@@ -389,6 +378,7 @@ import { ConnectorStatusStatus } from "conductorone-sdk-typescript/dist/sdk/mode
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -397,38 +387,33 @@ sdk.connector.update({
   connectorServiceUpdateRequestInput: {
     connector: {
       connectorStatus: {
-        completedAt: new Date("2022-06-28T08:50:44.084Z"),
-        lastError: "dicta",
-        startedAt: new Date("2022-01-08T01:04:15.076Z"),
-        status: ConnectorStatusStatus.SyncStatusUnspecified,
-        updatedAt: new Date("2022-02-20T07:12:08.273Z"),
+        completedAt: new Date("2022-06-18T06:43:12.261Z"),
+        lastError: "ipsam",
+        startedAt: new Date("2022-11-12T00:45:12.094Z"),
+        status: ConnectorStatusStatus.SyncStatusRunning,
+        updatedAt: new Date("2022-02-08T20:43:00.221Z"),
       },
       oAuth2AuthorizedAs: {},
-      appId: "excepturi",
+      appId: "ratione",
       config: {
-        "nostrum": "sapiente",
-        "quisquam": "saepe",
-        "ea": "impedit",
-        "corporis": "veniam",
+        "ex": "laudantium",
       },
-      description: "aliquid",
-      displayName: "inventore",
-      id: "46c3e250-fb00-48c4-ae14-1aac366c8dd6",
+      description: "dicta",
+      displayName: "dolor",
+      id: "f16d9f5f-ce6c-4556-946c-3e250fb008c4",
       userIds: [
-        "quasi",
-        "tempora",
-        "numquam",
+        "fugit",
       ],
     },
     connectorExpandMask: {
       paths: [
-        "provident",
+        "accusamus",
       ],
     },
-    updateMask: "ipsa",
+    updateMask: "inventore",
   },
-  appId: "molestiae",
-  id: "474778a7-bd46-46d2-8c10-ab3cdca42519",
+  appId: "non",
+  id: "1aac366c-8dd6-4b14-8290-7474778a7bd4",
 }).then((res: C1ApiAppV1ConnectorServiceUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -451,8 +436,7 @@ sdk.connector.update({
 
 ## updateDelegated
 
- Update a delegated connector.
-
+Update a delegated connector.
 
 ### Example Usage
 
@@ -463,6 +447,7 @@ import { ConnectorStatusStatus } from "conductorone-sdk-typescript/dist/sdk/mode
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -471,39 +456,33 @@ sdk.connector.updateDelegated({
   connectorServiceUpdateDelegatedRequestInput: {
     connector: {
       connectorStatus: {
-        completedAt: new Date("2022-09-23T10:04:47.931Z"),
-        lastError: "debitis",
-        startedAt: new Date("2022-11-13T06:50:40.250Z"),
-        status: ConnectorStatusStatus.SyncStatusUnspecified,
-        updatedAt: new Date("2021-08-15T10:59:14.485Z"),
+        completedAt: new Date("2022-08-15T07:50:23.042Z"),
+        lastError: "assumenda",
+        startedAt: new Date("2022-06-29T02:09:48.123Z"),
+        status: ConnectorStatusStatus.SyncStatusError,
+        updatedAt: new Date("2022-12-11T06:00:38.230Z"),
       },
       oAuth2AuthorizedAs: {},
-      appId: "recusandae",
+      appId: "id",
       config: {
-        "distinctio": "quod",
+        "quidem": "neque",
       },
-      description: "dignissimos",
-      displayName: "inventore",
-      id: "78e4796f-2a70-4c68-8282-aa482562f222",
+      description: "quo",
+      displayName: "illum",
+      id: "ca425190-4e52-43c7-a0bc-7178e4796f2a",
       userIds: [
-        "occaecati",
-        "atque",
-        "et",
-        "esse",
+        "molestiae",
       ],
     },
     connectorExpandMask: {
       paths: [
-        "accusamus",
-        "veritatis",
-        "esse",
-        "quod",
+        "accusantium",
       ],
     },
-    updateMask: "nam",
+    updateMask: "porro",
   },
-  connectorAppId: "vero",
-  connectorId: "aliquid",
+  connectorAppId: "eum",
+  connectorId: "quas",
 }).then((res: C1ApiAppV1ConnectorServiceUpdateDelegatedResponse) => {
   if (res.statusCode == 200) {
     // handle response

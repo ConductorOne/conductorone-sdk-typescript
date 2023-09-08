@@ -25,10 +25,7 @@ export class C1ApiTaskV1TaskActionsServiceCommentResponse extends SpeakeasyBase 
     rawResponse?: AxiosResponse;
 
     /**
-     *  Task actions service comment response returns the task view inluding the expanded array of items that are indicated by the expand mask on the request.
-     *
-     * @remarks
-     *
+     * Task actions service comment response returns the task view inluding the expanded array of items that are indicated by the expand mask on the request.
      */
     @SpeakeasyMetadata()
     taskActionsServiceCommentResponse?: shared.TaskActionsServiceCommentResponse;

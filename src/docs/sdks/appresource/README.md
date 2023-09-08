@@ -17,14 +17,15 @@ import { C1ApiAppV1AppResourceServiceGetResponse } from "conductorone-sdk-typesc
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.appResource.get({
-  appId: "magni",
-  appResourceTypeId: "assumenda",
-  id: "502a94bb-4f63-4c96-9e9a-3efa77dfb14c",
+  appId: "nihil",
+  appResourceTypeId: "praesentium",
+  id: "f097b007-4f15-4471-b5e6-e13b99d488e1",
 }).then((res: C1ApiAppV1AppResourceServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -57,15 +58,16 @@ import { C1ApiAppV1AppResourceServiceListResponse } from "conductorone-sdk-types
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.appResource.list({
-  appId: "facere",
-  appResourceTypeId: "ea",
-  pageSize: 3965.06,
-  pageToken: "laborum",
+  appId: "repudiandae",
+  appResourceTypeId: "sint",
+  pageSize: 831.12,
+  pageToken: "itaque",
 }).then((res: C1ApiAppV1AppResourceServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response

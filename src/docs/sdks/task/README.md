@@ -8,8 +8,7 @@
 
 ## createGrantTask
 
- Create a grant task
-
+Create a grant task
 
 ### Example Usage
 
@@ -19,6 +18,7 @@ import { C1ApiTaskV1TaskServiceCreateGrantTaskResponse } from "conductorone-sdk-
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -26,16 +26,20 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.task.createGrantTask({
   taskExpandMask: {
     paths: [
-      "velit",
+      "totam",
     ],
   },
-  appEntitlementId: "atque",
-  appId: "ipsum",
-  appUserId: "impedit",
-  description: "magni",
+  taskGrantSource: {
+    externalUrl: "quae",
+    integrationId: "molestiae",
+  },
+  appEntitlementId: "eveniet",
+  appId: "qui",
+  appUserId: "cum",
+  description: "iure",
   emergencyAccess: false,
-  grantDuration: "soluta",
-  identityUserId: "repudiandae",
+  grantDuration: "necessitatibus",
+  identityUserId: "ratione",
 }).then((res: C1ApiTaskV1TaskServiceCreateGrantTaskResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -58,8 +62,7 @@ sdk.task.createGrantTask({
 
 ## createRevokeTask
 
- Create a revoke task
-
+Create a revoke task
 
 ### Example Usage
 
@@ -69,6 +72,7 @@ import { C1ApiTaskV1TaskServiceCreateRevokeTaskResponse } from "conductorone-sdk
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -76,16 +80,14 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.task.createRevokeTask({
   taskExpandMask: {
     paths: [
-      "dolore",
-      "iusto",
-      "voluptate",
+      "laborum",
     ],
   },
-  appEntitlementId: "sequi",
-  appId: "dignissimos",
-  appUserId: "neque",
-  description: "quo",
-  identityUserId: "deleniti",
+  appEntitlementId: "distinctio",
+  appId: "voluptatum",
+  appUserId: "rem",
+  description: "aliquam",
+  identityUserId: "ad",
 }).then((res: C1ApiTaskV1TaskServiceCreateRevokeTaskResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -108,8 +110,7 @@ sdk.task.createRevokeTask({
 
 ## get
 
- Get a task by ID
-
+Get a task by ID
 
 ### Example Usage
 
@@ -119,12 +120,13 @@ import { C1ApiTaskV1TaskServiceGetResponse } from "conductorone-sdk-typescript/d
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.task.get({
-  id: "d72f64d1-db1f-42c4-b106-61e96349e1cf",
+  id: "f0597a60-ff2a-454a-b1e9-4764a3e865e7",
 }).then((res: C1ApiTaskV1TaskServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response

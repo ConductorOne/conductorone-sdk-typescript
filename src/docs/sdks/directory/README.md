@@ -9,8 +9,7 @@
 
 ## create
 
- Create a directory.
-
+Create a directory.
 
 ### Example Usage
 
@@ -20,6 +19,7 @@ import { C1ApiDirectoryV1DirectoryServiceCreateResponse } from "conductorone-sdk
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -27,10 +27,10 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.directory.create({
   directoryExpandMask: {
     paths: [
-      "saepe",
+      "praesentium",
     ],
   },
-  appId: "vel",
+  appId: "consequuntur",
 }).then((res: C1ApiDirectoryV1DirectoryServiceCreateResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -53,8 +53,7 @@ sdk.directory.create({
 
 ## delete
 
- Delete a directory by app_id.
-
+Delete a directory by app_id.
 
 ### Example Usage
 
@@ -64,13 +63,14 @@ import { C1ApiDirectoryV1DirectoryServiceDeleteResponse } from "conductorone-sdk
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.directory.delete({
   directoryServiceDeleteRequest: {},
-  appId: "harum",
+  appId: "deleniti",
 }).then((res: C1ApiDirectoryV1DirectoryServiceDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -93,8 +93,7 @@ sdk.directory.delete({
 
 ## get
 
- Get a directory by app_id.
-
+Get a directory by app_id.
 
 ### Example Usage
 
@@ -104,12 +103,13 @@ import { C1ApiDirectoryV1DirectoryServiceGetResponse } from "conductorone-sdk-ty
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.directory.get({
-  appId: "molestiae",
+  appId: "fugit",
 }).then((res: C1ApiDirectoryV1DirectoryServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -132,8 +132,7 @@ sdk.directory.get({
 
 ## list
 
- List directories.
-
+List directories.
 
 ### Example Usage
 
@@ -143,13 +142,14 @@ import { C1ApiDirectoryV1DirectoryServiceListResponse } from "conductorone-sdk-t
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.directory.list({
-  pageSize: 6996.22,
-  pageToken: "occaecati",
+  pageSize: 6813.93,
+  pageToken: "mollitia",
 }).then((res: C1ApiDirectoryV1DirectoryServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response

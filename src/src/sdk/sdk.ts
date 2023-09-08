@@ -3,6 +3,7 @@
  */
 
 import * as utils from "../internal/utils";
+import { AppEntitlementOwners } from "./appentitlementowners";
 import { AppEntitlements } from "./appentitlements";
 import { AppEntitlementSearch } from "./appentitlementsearch";
 import { AppEntitlementUserBinding } from "./appentitlementuserbinding";
@@ -16,6 +17,9 @@ import { AppResourceType } from "./appresourcetype";
 import { Apps } from "./apps";
 import { AppSearch } from "./appsearch";
 import { AppUsageControls } from "./appusagecontrols";
+import { AppUser } from "./appuser";
+import { Attributes } from "./attributes";
+import { AttributeSearch } from "./attributesearch";
 import { Auth } from "./auth";
 import { Connector } from "./connector";
 import { Directory } from "./directory";
@@ -51,7 +55,7 @@ export type SDKProps = {
     /**
      * The security details required to authenticate the SDK
      */
-    security?: shared.Security;
+    security?: shared.Security | (() => Promise<shared.Security>);
     /**
      * Allows overriding the default axios client used by the SDK
      */
@@ -71,18 +75,22 @@ export type SDKProps = {
      * Allows overriding the default server URL used by the SDK
      */
     serverURL?: string;
+    /**
+     * Allows overriding the default retry config used by the SDK
+     */
+    retryConfig?: utils.RetryConfig;
 };
 
 export class SDKConfiguration {
     defaultClient: AxiosInstance;
-    securityClient: AxiosInstance;
+    security?: shared.Security | (() => Promise<shared.Security>);
     serverURL: string;
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "0.1.0-alpha";
     sdkVersion = "1.1.0";
-    genVersion = "2.71.0";
-
+    genVersion = "2.107.3";
+    retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);
     }
@@ -92,6 +100,7 @@ export class SDKConfiguration {
  * ConductorOne API: The ConductorOne API is a HTTP API for managing ConductorOne resources.
  */
 export class ConductoroneSDKTypescript {
+    public appEntitlementOwners: AppEntitlementOwners;
     public appEntitlementSearch: AppEntitlementSearch;
     public appEntitlementUserBinding: AppEntitlementUserBinding;
     public appEntitlements: AppEntitlements;
@@ -104,7 +113,10 @@ export class ConductoroneSDKTypescript {
     public appResourceType: AppResourceType;
     public appSearch: AppSearch;
     public appUsageControls: AppUsageControls;
+    public appUser: AppUser;
     public apps: Apps;
+    public attributeSearch: AttributeSearch;
+    public attributes: Attributes;
     public auth: Auth;
     public connector: Connector;
     public directory: Directory;
@@ -139,23 +151,15 @@ export class ConductoroneSDKTypescript {
         }
 
         const defaultClient = props?.defaultClient ?? axios.create({ baseURL: serverURL });
-        let securityClient = defaultClient;
-
-        if (props?.security) {
-            let security: shared.Security = props.security;
-            if (!(props.security instanceof utils.SpeakeasyBase)) {
-                security = new shared.Security(props.security);
-            }
-            securityClient = utils.createSecurityClient(defaultClient, security);
-        }
-
         this.sdkConfiguration = new SDKConfiguration({
             defaultClient: defaultClient,
-            securityClient: securityClient,
+            security: props?.security,
             serverURL: serverURL,
             serverDefaults: defaults,
+            retryConfig: props?.retryConfig,
         });
 
+        this.appEntitlementOwners = new AppEntitlementOwners(this.sdkConfiguration);
         this.appEntitlementSearch = new AppEntitlementSearch(this.sdkConfiguration);
         this.appEntitlementUserBinding = new AppEntitlementUserBinding(this.sdkConfiguration);
         this.appEntitlements = new AppEntitlements(this.sdkConfiguration);
@@ -168,7 +172,10 @@ export class ConductoroneSDKTypescript {
         this.appResourceType = new AppResourceType(this.sdkConfiguration);
         this.appSearch = new AppSearch(this.sdkConfiguration);
         this.appUsageControls = new AppUsageControls(this.sdkConfiguration);
+        this.appUser = new AppUser(this.sdkConfiguration);
         this.apps = new Apps(this.sdkConfiguration);
+        this.attributeSearch = new AttributeSearch(this.sdkConfiguration);
+        this.attributes = new Attributes(this.sdkConfiguration);
         this.auth = new Auth(this.sdkConfiguration);
         this.connector = new Connector(this.sdkConfiguration);
         this.directory = new Directory(this.sdkConfiguration);

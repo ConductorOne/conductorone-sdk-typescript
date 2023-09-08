@@ -5,9 +5,6 @@
 import { SpeakeasyBase } from "../../../internal/utils";
 
 /**
- *  RemoveAppOwnerRequest is the request body for removing an app owner. It uses URL values for input.
- *
- * @remarks
- *
+ * RemoveAppOwnerRequest is the request body for removing an app owner. It uses URL values for input.
  */
 export class RemoveAppOwnerRequest extends SpeakeasyBase {}

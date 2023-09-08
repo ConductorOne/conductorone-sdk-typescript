@@ -5,9 +5,6 @@
 import { SpeakeasyBase } from "../../../internal/utils";
 
 /**
- *  The DeletePolicyRequest message contains the ID of the policy to delete. It uses URL value for input.
- *
- * @remarks
- *
+ * The DeletePolicyRequest message contains the ID of the policy to delete. It uses URL value for input.
  */
 export class DeletePolicyRequest extends SpeakeasyBase {}

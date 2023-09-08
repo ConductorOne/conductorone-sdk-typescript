@@ -5,9 +5,6 @@
 import { SpeakeasyBase } from "../../../internal/utils";
 
 /**
- *  Empty response with a status code indicating success.
- *
- * @remarks
- *
+ * Empty response with a status code indicating success.
  */
 export class DirectoryServiceDeleteResponse extends SpeakeasyBase {}

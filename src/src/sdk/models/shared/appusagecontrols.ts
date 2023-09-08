@@ -6,57 +6,39 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- *  The AppUsageControls object describes some peripheral configuration for an app.
- *
- * @remarks
- *
+ * The AppUsageControls object describes some peripheral configuration for an app.
  */
 export class AppUsageControls extends SpeakeasyBase {
     /**
-     *  The app that this object belongs to.
-     *
-     * @remarks
-     *
+     * The app that this object belongs to.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })
     appId?: string;
 
     /**
-     *  Whether or not to notify some if they have access to the app, but has not used it within a configurable amount of time.
-     *
-     * @remarks
-     *
+     * Whether or not to notify some if they have access to the app, but has not used it within a configurable amount of time.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "notify" })
     notify?: boolean;
 
     /**
-     *  The duration in days after which we notify users of nonusage.
-     *
-     * @remarks
-     *
+     * The duration in days after which we notify users of nonusage.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "notifyAfterDays" })
     notifyAfterDays?: number;
 
     /**
-     *  Whether or not to revoke a grant if they have access to the app, but has not used it within a configurable amount of time.
-     *
-     * @remarks
-     *
+     * Whether or not to revoke a grant if they have access to the app, but has not used it within a configurable amount of time.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "revoke" })
     revoke?: boolean;
 
     /**
-     *  The duration in days after which we revoke users that have not used that grant.
-     *
-     * @remarks
-     *
+     * The duration in days after which we revoke users that have not used that grant.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "revokeAfterDays" })

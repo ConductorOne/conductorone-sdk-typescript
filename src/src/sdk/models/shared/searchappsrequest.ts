@@ -6,67 +6,46 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- *  Search Apps by a few properties.
- *
- * @remarks
- *
+ * Search Apps by a few properties.
  */
 export class SearchAppsRequest extends SpeakeasyBase {
     /**
-     *  A list of app IDs to restrict the search to.
-     *
-     * @remarks
-     *
+     * A list of app IDs to restrict the search to.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appIds" })
     appIds?: string[];
 
     /**
-     *  Search for apps with an exact match on the display name.
-     *
-     * @remarks
-     *
+     * Search for apps with a case insensitive match on the display name.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     *  A list of app IDs to remove from the results.
-     *
-     * @remarks
-     *
+     * A list of app IDs to remove from the results.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "excludeAppIds" })
     excludeAppIds?: string[];
 
     /**
-     *  The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
-     *
-     * @remarks
-     *
+     * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageSize" })
     pageSize?: number;
 
     /**
-     *  The pageToken field.
-     *
-     * @remarks
-     *
+     * The pageToken field.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageToken" })
     pageToken?: string;
 
     /**
-     *  Query the apps with a fuzzy search on display name and description.
-     *
-     * @remarks
-     *
+     * Query the apps with a fuzzy search on display name and description.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "query" })

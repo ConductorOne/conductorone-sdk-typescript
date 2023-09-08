@@ -10,10 +10,9 @@ import { TaskRevokeSourceReview } from "./taskrevokesourcereview";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The TaskRevokeSource message indicates the source of the revoke task is one of expired, nonUsage, request, or review.
+ * The TaskRevokeSource message indicates the source of the revoke task is one of expired, nonUsage, request, or review.
  *
  * @remarks
- *
  *
  * This message contains a oneof named origin. Only a single field of the following list may be set at a time:
  *   - review
@@ -24,10 +23,7 @@ import { Expose, Type } from "class-transformer";
  */
 export class TaskRevokeSource extends SpeakeasyBase {
     /**
-     *  The TaskRevokeSourceExpired message indicates that the source of the revoke task is due to a grant expiring.
-     *
-     * @remarks
-     *
+     * The TaskRevokeSourceExpired message indicates that the source of the revoke task is due to a grant expiring.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expired" })
@@ -35,10 +31,7 @@ export class TaskRevokeSource extends SpeakeasyBase {
     taskRevokeSourceExpired?: TaskRevokeSourceExpired;
 
     /**
-     *  The TaskRevokeSourceNonUsage message indicates that the source of the revoke task is due to the grant not being used.
-     *
-     * @remarks
-     *
+     * The TaskRevokeSourceNonUsage message indicates that the source of the revoke task is due to the grant not being used.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "nonUsage" })
@@ -46,10 +39,7 @@ export class TaskRevokeSource extends SpeakeasyBase {
     taskRevokeSourceNonUsage?: TaskRevokeSourceNonUsage;
 
     /**
-     *  The TaskRevokeSourceRequest message indicates that the source of the revoke task was a request.
-     *
-     * @remarks
-     *
+     * The TaskRevokeSourceRequest message indicates that the source of the revoke task was a request.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "request" })
@@ -57,10 +47,7 @@ export class TaskRevokeSource extends SpeakeasyBase {
     taskRevokeSourceRequest?: TaskRevokeSourceRequest;
 
     /**
-     *  The TaskRevokeSourceReview message tracks which access review was the source of the specificed revoke ticket.
-     *
-     * @remarks
-     *
+     * The TaskRevokeSourceReview message tracks which access review was the source of the specificed revoke ticket.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "review" })

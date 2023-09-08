@@ -6,8 +6,7 @@
 
 ## searchAppResourceTypes
 
- Search app resources based on filters specified in the request body.
-
+Search app resources based on filters specified in the request body.
 
 ### Example Usage
 
@@ -17,38 +16,29 @@ import { C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse } from "condu
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.appResourceSearch.searchAppResourceTypes({
   appIds: [
-    "quidem",
-    "provident",
-    "nam",
-    "id",
+    "explicabo",
   ],
   excludeResourceTypeIds: [
-    "deleniti",
-    "sapiente",
-    "amet",
+    "deserunt",
   ],
   excludeResourceTypeTraitIds: [
-    "nisi",
-    "vel",
-    "natus",
-  ],
-  pageSize: 6063.93,
-  pageToken: "molestiae",
-  query: "perferendis",
-  resourceTypeIds: [
-    "magnam",
     "distinctio",
   ],
+  pageSize: 8413.86,
+  pageToken: "labore",
+  query: "modi",
+  resourceTypeIds: [
+    "qui",
+  ],
   resourceTypeTraitIds: [
-    "labore",
-    "labore",
-    "suscipit",
+    "aliquid",
   ],
 }).then((res: C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse) => {
   if (res.statusCode == 200) {

@@ -10,8 +10,7 @@
 
 ## create
 
- Create a policy.
-
+Create a policy.
 
 ### Example Usage
 
@@ -22,13 +21,14 @@ import { CreatePolicyRequestPolicyType } from "conductorone-sdk-typescript/dist/
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.policies.create({
-  description: "consequatur",
-  displayName: "minus",
+  description: "nisi",
+  displayName: "fugit",
   policySteps: {
     "sapiente": {
       steps: [
@@ -45,103 +45,21 @@ sdk.policies.create({
             provisionPolicy: {
               connectorProvision: {},
               delegatedProvision: {
-                appId: "esse",
-                entitlementId: "blanditiis",
+                appId: "consequuntur",
+                entitlementId: "ratione",
               },
               manualProvision: {
-                instructions: "provident",
+                instructions: "explicabo",
                 userIds: [
-                  "nulla",
-                  "quas",
-                  "esse",
-                  "quasi",
+                  "saepe",
                 ],
               },
             },
-            assigned: false,
-          },
-        },
-      ],
-    },
-    "a": {
-      steps: [
-        {
-          approval: {
-            appGroupApproval: {},
-            appOwnerApproval: {},
-            entitlementOwnerApproval: {},
-            managerApproval: {},
-            selfApproval: {},
-            userApproval: {},
-          },
-          provision: {
-            provisionPolicy: {
-              connectorProvision: {},
-              delegatedProvision: {
-                appId: "sint",
-                entitlementId: "pariatur",
-              },
-              manualProvision: {
-                instructions: "possimus",
-                userIds: [
-                  "eveniet",
-                ],
-              },
-            },
-            assigned: false,
-          },
-        },
-        {
-          approval: {
-            appGroupApproval: {},
-            appOwnerApproval: {},
-            entitlementOwnerApproval: {},
-            managerApproval: {},
-            selfApproval: {},
-            userApproval: {},
-          },
-          provision: {
-            provisionPolicy: {
-              connectorProvision: {},
-              delegatedProvision: {
-                appId: "asperiores",
-                entitlementId: "facere",
-              },
-              manualProvision: {
-                instructions: "veritatis",
-                userIds: [
-                  "quasi",
-                ],
-              },
-            },
-            assigned: false,
-          },
-        },
-        {
-          approval: {
-            appGroupApproval: {},
-            appOwnerApproval: {},
-            entitlementOwnerApproval: {},
-            managerApproval: {},
-            selfApproval: {},
-            userApproval: {},
-          },
-          provision: {
-            provisionPolicy: {
-              connectorProvision: {},
-              delegatedProvision: {
-                appId: "similique",
-                entitlementId: "culpa",
-              },
-              manualProvision: {
-                instructions: "aliquid",
-                userIds: [
-                  "quae",
-                  "earum",
-                  "vel",
-                  "in",
-                ],
-              },
+            provisionTarget: {
+              appEntitlementId: "occaecati",
+              appId: "atque",
+              appUserId: "et",
+              grantDuration: "esse",
             },
             assigned: false,
           },
@@ -149,14 +67,8 @@ sdk.policies.create({
       ],
     },
   },
-  policyType: CreatePolicyRequestPolicyType.PolicyTypeGrant,
+  policyType: CreatePolicyRequestPolicyType.PolicyTypeProvision,
   postActions: [
-    {
-      certifyRemediateImmediately: false,
-    },
-    {
-      certifyRemediateImmediately: false,
-    },
     {
       certifyRemediateImmediately: false,
     },
@@ -184,8 +96,7 @@ sdk.policies.create({
 
 ## delete
 
- Delete a policy by ID.
-
+Delete a policy by ID.
 
 ### Example Usage
 
@@ -195,13 +106,14 @@ import { C1ApiPolicyV1PoliciesDeleteResponse } from "conductorone-sdk-typescript
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.policies.delete({
   deletePolicyRequest: {},
-  id: "db04f157-5608-42d6-8ea1-9f1d17051339",
+  id: "e17cbe61-e6b7-4b95-bc0a-b3c20c4f3789",
 }).then((res: C1ApiPolicyV1PoliciesDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -224,8 +136,7 @@ sdk.policies.delete({
 
 ## get
 
- Get a policy by ID.
-
+Get a policy by ID.
 
 ### Example Usage
 
@@ -235,12 +146,13 @@ import { C1ApiPolicyV1PoliciesGetResponse } from "conductorone-sdk-typescript/di
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.policies.get({
-  id: "d08086a1-8403-494c-a607-1f93f5f0642d",
+  id: "fd871f99-dd2e-4fd1-a1aa-6f1e674bdb04",
 }).then((res: C1ApiPolicyV1PoliciesGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -263,8 +175,7 @@ sdk.policies.get({
 
 ## list
 
- List policies.
-
+List policies.
 
 ### Example Usage
 
@@ -274,13 +185,14 @@ import { C1ApiPolicyV1PoliciesListResponse } from "conductorone-sdk-typescript/d
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.policies.list({
-  pageSize: 6387.62,
-  pageToken: "maxime",
+  pageSize: 9589.83,
+  pageToken: "dicta",
 }).then((res: C1ApiPolicyV1PoliciesListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -303,8 +215,7 @@ sdk.policies.list({
 
 ## update
 
- Update a policy by providing a policy object and an update mask.
-
+Update a policy by providing a policy object and an update mask.
 
 ### Example Usage
 
@@ -315,6 +226,7 @@ import { PolicyPolicyType } from "conductorone-sdk-typescript/dist/sdk/models/sh
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -322,10 +234,10 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.policies.update({
   updatePolicyRequestInput: {
     policy: {
-      description: "dignissimos",
-      displayName: "officia",
+      description: "ullam",
+      displayName: "reprehenderit",
       policySteps: {
-        "nemo": {
+        "ullam": {
           steps: [
             {
               approval: {
@@ -340,222 +252,21 @@ sdk.policies.update({
                 provisionPolicy: {
                   connectorProvision: {},
                   delegatedProvision: {
-                    appId: "quaerat",
-                    entitlementId: "porro",
+                    appId: "nisi",
+                    entitlementId: "aut",
                   },
                   manualProvision: {
-                    instructions: "quod",
+                    instructions: "voluptatum",
                     userIds: [
-                      "ab",
-                      "adipisci",
+                      "qui",
                     ],
                   },
                 },
-                assigned: false,
-              },
-            },
-          ],
-        },
-        "fuga": {
-          steps: [
-            {
-              approval: {
-                appGroupApproval: {},
-                appOwnerApproval: {},
-                entitlementOwnerApproval: {},
-                managerApproval: {},
-                selfApproval: {},
-                userApproval: {},
-              },
-              provision: {
-                provisionPolicy: {
-                  connectorProvision: {},
-                  delegatedProvision: {
-                    appId: "suscipit",
-                    entitlementId: "velit",
-                  },
-                  manualProvision: {
-                    instructions: "culpa",
-                    userIds: [
-                      "recusandae",
-                      "totam",
-                      "fugiat",
-                    ],
-                  },
-                },
-                assigned: false,
-              },
-            },
-            {
-              approval: {
-                appGroupApproval: {},
-                appOwnerApproval: {},
-                entitlementOwnerApproval: {},
-                managerApproval: {},
-                selfApproval: {},
-                userApproval: {},
-              },
-              provision: {
-                provisionPolicy: {
-                  connectorProvision: {},
-                  delegatedProvision: {
-                    appId: "vel",
-                    entitlementId: "ducimus",
-                  },
-                  manualProvision: {
-                    instructions: "quos",
-                    userIds: [
-                      "labore",
-                      "possimus",
-                    ],
-                  },
-                },
-                assigned: false,
-              },
-            },
-            {
-              approval: {
-                appGroupApproval: {},
-                appOwnerApproval: {},
-                entitlementOwnerApproval: {},
-                managerApproval: {},
-                selfApproval: {},
-                userApproval: {},
-              },
-              provision: {
-                provisionPolicy: {
-                  connectorProvision: {},
-                  delegatedProvision: {
-                    appId: "facilis",
-                    entitlementId: "cum",
-                  },
-                  manualProvision: {
-                    instructions: "commodi",
-                    userIds: [
-                      "corporis",
-                      "reiciendis",
-                    ],
-                  },
-                },
-                assigned: false,
-              },
-            },
-          ],
-        },
-        "assumenda": {
-          steps: [
-            {
-              approval: {
-                appGroupApproval: {},
-                appOwnerApproval: {},
-                entitlementOwnerApproval: {},
-                managerApproval: {},
-                selfApproval: {},
-                userApproval: {},
-              },
-              provision: {
-                provisionPolicy: {
-                  connectorProvision: {},
-                  delegatedProvision: {
-                    appId: "recusandae",
-                    entitlementId: "aliquid",
-                  },
-                  manualProvision: {
-                    instructions: "aperiam",
-                    userIds: [
-                      "consectetur",
-                      "in",
-                      "exercitationem",
-                    ],
-                  },
-                },
-                assigned: false,
-              },
-            },
-            {
-              approval: {
-                appGroupApproval: {},
-                appOwnerApproval: {},
-                entitlementOwnerApproval: {},
-                managerApproval: {},
-                selfApproval: {},
-                userApproval: {},
-              },
-              provision: {
-                provisionPolicy: {
-                  connectorProvision: {},
-                  delegatedProvision: {
-                    appId: "earum",
-                    entitlementId: "facere",
-                  },
-                  manualProvision: {
-                    instructions: "numquam",
-                    userIds: [
-                      "suscipit",
-                      "reiciendis",
-                      "quidem",
-                      "saepe",
-                    ],
-                  },
-                },
-                assigned: false,
-              },
-            },
-          ],
-        },
-        "necessitatibus": {
-          steps: [
-            {
-              approval: {
-                appGroupApproval: {},
-                appOwnerApproval: {},
-                entitlementOwnerApproval: {},
-                managerApproval: {},
-                selfApproval: {},
-                userApproval: {},
-              },
-              provision: {
-                provisionPolicy: {
-                  connectorProvision: {},
-                  delegatedProvision: {
-                    appId: "sunt",
-                    entitlementId: "asperiores",
-                  },
-                  manualProvision: {
-                    instructions: "adipisci",
-                    userIds: [
-                      "amet",
-                    ],
-                  },
-                },
-                assigned: false,
-              },
-            },
-            {
-              approval: {
-                appGroupApproval: {},
-                appOwnerApproval: {},
-                entitlementOwnerApproval: {},
-                managerApproval: {},
-                selfApproval: {},
-                userApproval: {},
-              },
-              provision: {
-                provisionPolicy: {
-                  connectorProvision: {},
-                  delegatedProvision: {
-                    appId: "beatae",
-                    entitlementId: "dignissimos",
-                  },
-                  manualProvision: {
-                    instructions: "a",
-                    userIds: [
-                      "consectetur",
-                      "corporis",
-                      "harum",
-                      "laboriosam",
-                    ],
-                  },
+                provisionTarget: {
+                  appEntitlementId: "quibusdam",
+                  appId: "ex",
+                  appUserId: "deleniti",
+                  grantDuration: "itaque",
                 },
                 assigned: false,
               },
@@ -563,26 +274,17 @@ sdk.policies.update({
           ],
         },
       },
-      policyType: PolicyPolicyType.PolicyTypeUnspecified,
+      policyType: PolicyPolicyType.PolicyTypeAccessRequest,
       postActions: [
-        {
-          certifyRemediateImmediately: false,
-        },
-        {
-          certifyRemediateImmediately: false,
-        },
-        {
-          certifyRemediateImmediately: false,
-        },
         {
           certifyRemediateImmediately: false,
         },
       ],
       reassignTasksToDelegates: false,
     },
-    updateMask: "libero",
+    updateMask: "architecto",
   },
-  id: "1ea42655-5ba3-4c28-b44e-d53b88f3a8d8",
+  id: "9f1d1705-1339-4d08-886a-1840394c2607",
 }).then((res: C1ApiPolicyV1PoliciesUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

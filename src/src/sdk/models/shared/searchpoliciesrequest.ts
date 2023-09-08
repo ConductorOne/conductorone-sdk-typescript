@@ -3,7 +3,8 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import { Expose } from "class-transformer";
+import { PolicyRef } from "./policyref";
+import { Expose, Type } from "class-transformer";
 
 export enum SearchPoliciesRequestPolicyTypes {
     PolicyTypeUnspecified = "POLICY_TYPE_UNSPECIFIED",
@@ -15,59 +16,49 @@ export enum SearchPoliciesRequestPolicyTypes {
 }
 
 /**
- *  Search Policies by a few properties.
- *
- * @remarks
- *
+ * Search Policies by a few properties.
  */
 export class SearchPoliciesRequest extends SpeakeasyBase {
     /**
-     *  Search for policies with an exact match on the display name.
-     *
-     * @remarks
-     *
+     * Search for policies with a case insensitive match on the display name.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     *  The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
-     *
-     * @remarks
-     *
+     * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageSize" })
     pageSize?: number;
 
     /**
-     *  The pageToken field.
-     *
-     * @remarks
-     *
+     * The pageToken field.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageToken" })
     pageToken?: string;
 
     /**
-     *  The policy type to search on. This can be POLICY_TYPE_GRANT, POLICY_TYPE_REVOKE, POLICY_TYPE_CERTIFY, POLICY_TYPE_ACCESS_REQUEST, or POLICY_TYPE_PROVISION.
-     *
-     * @remarks
-     *
+     * The policy type to search on. This can be POLICY_TYPE_GRANT, POLICY_TYPE_REVOKE, POLICY_TYPE_CERTIFY, POLICY_TYPE_ACCESS_REQUEST, or POLICY_TYPE_PROVISION.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "policyTypes" })
     policyTypes?: SearchPoliciesRequestPolicyTypes[];
 
     /**
-     *  Query the policies with a fuzzy search on display name and description.
-     *
-     * @remarks
-     *
+     * Query the policies with a fuzzy search on display name and description.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "query" })
     query?: string;
+
+    /**
+     * The refs field.
+     */
+    @SpeakeasyMetadata({ elemType: PolicyRef })
+    @Expose({ name: "refs" })
+    @Type(() => PolicyRef)
+    refs?: PolicyRef[];
 }

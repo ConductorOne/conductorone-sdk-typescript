@@ -3,18 +3,15 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import { AppGroupApproval } from "./appgroupapproval";
-import { AppGroupApproval1 } from "./appgroupapproval1";
-import { AppOwnerApproval } from "./appownerapproval";
-import { AppOwnerApproval1 } from "./appownerapproval1";
-import { EntitlementOwnerApproval } from "./entitlementownerapproval";
-import { EntitlementOwnerApproval1 } from "./entitlementownerapproval1";
-import { ManagerApproval } from "./managerapproval";
-import { ManagerApproval1 } from "./managerapproval1";
-import { SelfApproval } from "./selfapproval";
-import { SelfApproval1 } from "./selfapproval1";
-import { UserApproval } from "./userapproval";
-import { UserApproval1 } from "./userapproval1";
+import { AppGroupApproval, AppGroupApprovalInput } from "./appgroupapproval";
+import { AppOwnerApproval, AppOwnerApprovalInput } from "./appownerapproval";
+import {
+    EntitlementOwnerApproval,
+    EntitlementOwnerApprovalInput,
+} from "./entitlementownerapproval";
+import { ManagerApproval, ManagerApprovalInput } from "./managerapproval";
+import { SelfApproval, SelfApprovalInput } from "./selfapproval";
+import { UserApproval, UserApprovalInput } from "./userapproval";
 import { Expose, Type } from "class-transformer";
 
 /**
@@ -33,10 +30,7 @@ import { Expose, Type } from "class-transformer";
  */
 export class Approval extends SpeakeasyBase {
     /**
-     *  The AppGroupApproval object provides the configuration for setting a group as the approvers of an approval policy step.
-     *
-     * @remarks
-     *
+     * The AppGroupApproval object provides the configuration for setting a group as the approvers of an approval policy step.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "group" })
@@ -44,10 +38,7 @@ export class Approval extends SpeakeasyBase {
     appGroupApproval?: AppGroupApproval;
 
     /**
-     *  App owner approval provides the configuration for an approval step when the app owner is the target.
-     *
-     * @remarks
-     *
+     * App owner approval provides the configuration for an approval step when the app owner is the target.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appOwners" })
@@ -55,10 +46,7 @@ export class Approval extends SpeakeasyBase {
     appOwnerApproval?: AppOwnerApproval;
 
     /**
-     *  The entitlement owner approval allows configuration of the approval step when the target approvers are the entitlement owners.
-     *
-     * @remarks
-     *
+     * The entitlement owner approval allows configuration of the approval step when the target approvers are the entitlement owners.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "entitlementOwners" })
@@ -66,10 +54,7 @@ export class Approval extends SpeakeasyBase {
     entitlementOwnerApproval?: EntitlementOwnerApproval;
 
     /**
-     *  The manager approval object provides configuration options for approval when the target of the approval is the manager of the user in the task.
-     *
-     * @remarks
-     *
+     * The manager approval object provides configuration options for approval when the target of the approval is the manager of the user in the task.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "manager" })
@@ -77,10 +62,7 @@ export class Approval extends SpeakeasyBase {
     managerApproval?: ManagerApproval;
 
     /**
-     *  The self approval object describes the configuration of a policy step that needs to be approved by the target of the request.
-     *
-     * @remarks
-     *
+     * The self approval object describes the configuration of a policy step that needs to be approved by the target of the request.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "self" })
@@ -88,10 +70,7 @@ export class Approval extends SpeakeasyBase {
     selfApproval?: SelfApproval;
 
     /**
-     *  The user approval object describes the approval configuration of a policy step that needs to be approved by a specific list of users.
-     *
-     * @remarks
-     *
+     * The user approval object describes the approval configuration of a policy step that needs to be approved by a specific list of users.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "users" })
@@ -99,40 +78,28 @@ export class Approval extends SpeakeasyBase {
     userApproval?: UserApproval;
 
     /**
-     *  Configuration to allow reassignment by reviewers during this step.
-     *
-     * @remarks
-     *
+     * Configuration to allow reassignment by reviewers during this step.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "allowReassignment" })
     allowReassignment?: boolean;
 
     /**
-     *  A field indicating whether this step is assigned.
-     *
-     * @remarks
-     *
+     * A field indicating whether this step is assigned.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "assigned" })
     assigned?: boolean;
 
     /**
-     *  Configuration to require a reason when approving this step.
-     *
-     * @remarks
-     *
+     * Configuration to require a reason when approving this step.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "requireApprovalReason" })
     requireApprovalReason?: boolean;
 
     /**
-     *  Configuration to require a reason when reassigning this step.
-     *
-     * @remarks
-     *
+     * Configuration to require a reason when reassigning this step.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "requireReassignmentReason" })
@@ -155,68 +122,50 @@ export class Approval extends SpeakeasyBase {
  */
 export class ApprovalInput extends SpeakeasyBase {
     /**
-     *  The AppGroupApproval object provides the configuration for setting a group as the approvers of an approval policy step.
-     *
-     * @remarks
-     *
+     * The AppGroupApproval object provides the configuration for setting a group as the approvers of an approval policy step.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "group" })
-    @Type(() => AppGroupApproval1)
-    appGroupApproval?: AppGroupApproval1;
+    @Type(() => AppGroupApprovalInput)
+    appGroupApproval?: AppGroupApprovalInput;
 
     /**
-     *  App owner approval provides the configuration for an approval step when the app owner is the target.
-     *
-     * @remarks
-     *
+     * App owner approval provides the configuration for an approval step when the app owner is the target.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appOwners" })
-    @Type(() => AppOwnerApproval1)
-    appOwnerApproval?: AppOwnerApproval1;
+    @Type(() => AppOwnerApprovalInput)
+    appOwnerApproval?: AppOwnerApprovalInput;
 
     /**
-     *  The entitlement owner approval allows configuration of the approval step when the target approvers are the entitlement owners.
-     *
-     * @remarks
-     *
+     * The entitlement owner approval allows configuration of the approval step when the target approvers are the entitlement owners.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "entitlementOwners" })
-    @Type(() => EntitlementOwnerApproval1)
-    entitlementOwnerApproval?: EntitlementOwnerApproval1;
+    @Type(() => EntitlementOwnerApprovalInput)
+    entitlementOwnerApproval?: EntitlementOwnerApprovalInput;
 
     /**
-     *  The manager approval object provides configuration options for approval when the target of the approval is the manager of the user in the task.
-     *
-     * @remarks
-     *
+     * The manager approval object provides configuration options for approval when the target of the approval is the manager of the user in the task.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "manager" })
-    @Type(() => ManagerApproval1)
-    managerApproval?: ManagerApproval1;
+    @Type(() => ManagerApprovalInput)
+    managerApproval?: ManagerApprovalInput;
 
     /**
-     *  The self approval object describes the configuration of a policy step that needs to be approved by the target of the request.
-     *
-     * @remarks
-     *
+     * The self approval object describes the configuration of a policy step that needs to be approved by the target of the request.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "self" })
-    @Type(() => SelfApproval1)
-    selfApproval?: SelfApproval1;
+    @Type(() => SelfApprovalInput)
+    selfApproval?: SelfApprovalInput;
 
     /**
-     *  The user approval object describes the approval configuration of a policy step that needs to be approved by a specific list of users.
-     *
-     * @remarks
-     *
+     * The user approval object describes the approval configuration of a policy step that needs to be approved by a specific list of users.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "users" })
-    @Type(() => UserApproval1)
-    userApproval?: UserApproval1;
+    @Type(() => UserApprovalInput)
+    userApproval?: UserApprovalInput;
 }

@@ -8,8 +8,7 @@
 
 ## get
 
- Get a role by id.
-
+Get a role by id.
 
 ### Example Usage
 
@@ -19,12 +18,13 @@ import { C1ApiIamV1RolesGetResponse } from "conductorone-sdk-typescript/dist/sdk
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.roles.get({
-  roleId: "hic",
+  roleId: "corporis",
 }).then((res: C1ApiIamV1RolesGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -47,8 +47,7 @@ sdk.roles.get({
 
 ## list
 
- List all roles for the current user.
-
+List all roles for the current user.
 
 ### Example Usage
 
@@ -58,13 +57,14 @@ import { C1ApiIamV1RolesListResponse } from "conductorone-sdk-typescript/dist/sd
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.roles.list({
-  pageSize: 9001.03,
-  pageToken: "asperiores",
+  pageSize: 6964.63,
+  pageToken: "eveniet",
 }).then((res: C1ApiIamV1RolesListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -87,8 +87,7 @@ sdk.roles.list({
 
 ## update
 
- Update a role by passing a Role object.
-
+Update a role by passing a Role object.
 
 ### Example Usage
 
@@ -98,6 +97,7 @@ import { C1ApiIamV1RolesUpdateResponse } from "conductorone-sdk-typescript/dist/
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
@@ -105,18 +105,17 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.roles.update({
   updateRoleRequestInput: {
     role: {
-      displayName: "ex",
+      displayName: "non",
       permissions: [
-        "debitis",
-        "delectus",
+        "vero",
       ],
       serviceRoles: [
-        "minus",
+        "doloremque",
       ],
     },
-    updateMask: "fuga",
+    updateMask: "iure",
   },
-  roleId: "laborum",
+  roleId: "ipsa",
 }).then((res: C1ApiIamV1RolesUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

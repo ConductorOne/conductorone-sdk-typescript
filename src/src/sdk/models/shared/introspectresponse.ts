@@ -6,57 +6,39 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- *  IntrospectResponse contains information about the current user who is authenticated.
- *
- * @remarks
- *
+ * IntrospectResponse contains information about the current user who is authenticated.
  */
 export class IntrospectResponse extends SpeakeasyBase {
     /**
-     *  The list of feature flags enabled for the tenant the logged in user belongs to.
-     *
-     * @remarks
-     *
+     * The list of feature flags enabled for the tenant the logged in user belongs to.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "features" })
     features?: string[];
 
     /**
-     *  The list of permissions that the current logged in user has.
-     *
-     * @remarks
-     *
+     * The list of permissions that the current logged in user has.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "permissions" })
     permissions?: string[];
 
     /**
-     *  The principleID of the current logged in user.
-     *
-     * @remarks
-     *
+     * The principleID of the current logged in user.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "principleId" })
     principleId?: string;
 
     /**
-     *  The list of roles that the current logged in user has.
-     *
-     * @remarks
-     *
+     * The list of roles that the current logged in user has.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "roles" })
     roles?: string[];
 
     /**
-     *  The userID of the current logged in user.
-     *
-     * @remarks
-     *
+     * The userID of the current logged in user.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "userId" })

@@ -6,17 +6,16 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- *  OAuth2AuthorizedAs tracks the user that OAuthed with the connector.
- *
- * @remarks
- *
+ * OAuth2AuthorizedAs tracks the user that OAuthed with the connector.
+ */
+export class OAuth2AuthorizedAsInput extends SpeakeasyBase {}
+
+/**
+ * OAuth2AuthorizedAs tracks the user that OAuthed with the connector.
  */
 export class OAuth2AuthorizedAs extends SpeakeasyBase {
     /**
-     *  authEmail is the email of the user that authorized the connector using OAuth.
-     *
-     * @remarks
-     *
+     * authEmail is the email of the user that authorized the connector using OAuth.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "authEmail" })

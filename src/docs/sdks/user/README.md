@@ -7,8 +7,7 @@
 
 ## get
 
- Get a user by ID.
-
+Get a user by ID.
 
 ### Example Usage
 
@@ -18,12 +17,13 @@ import { C1ApiUserV1UserServiceGetResponse } from "conductorone-sdk-typescript/d
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.user.get({
-  id: "7ce52b89-5c53-47c6-854e-fb0b34896c3c",
+  id: "12fde047-7177-48ff-a1d0-17476360a15d",
 }).then((res: C1ApiUserV1UserServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -46,8 +46,7 @@ sdk.user.get({
 
 ## list
 
- List users.
-
+List users.
 
 ### Example Usage
 
@@ -57,13 +56,14 @@ import { C1ApiUserV1UserServiceListResponse } from "conductorone-sdk-typescript/
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.user.list({
-  pageSize: 6845.53,
-  pageToken: "nostrum",
+  pageSize: 7137.67,
+  pageToken: "aliquid",
 }).then((res: C1ApiUserV1UserServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response

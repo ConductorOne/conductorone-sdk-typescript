@@ -6,8 +6,7 @@
 
 ## search
 
- Search policies based on filters specified in the request body.
-
+Search policies based on filters specified in the request body.
 
 ### Example Usage
 
@@ -18,18 +17,24 @@ import { SearchPoliciesRequestPolicyTypes } from "conductorone-sdk-typescript/di
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
 sdk.policySearch.search({
-  displayName: "hic",
-  pageSize: 3487.83,
-  pageToken: "nobis",
+  displayName: "dicta",
+  pageSize: 9816.4,
+  pageToken: "natus",
   policyTypes: [
-    SearchPoliciesRequestPolicyTypes.PolicyTypeAccessRequest,
+    SearchPoliciesRequestPolicyTypes.PolicyTypeGrant,
   ],
-  query: "sed",
+  query: "voluptatibus",
+  refs: [
+    {
+      id: "5f0642da-c7af-4515-8c41-3aa63aae8d67",
+    },
+  ],
 }).then((res: C1ApiPolicyV1PolicySearchSearchResponse) => {
   if (res.statusCode == 200) {
     // handle response

@@ -11,10 +11,7 @@ import { Expose, Type } from "class-transformer";
  */
 export class ConnectorServiceCreateRequest extends SpeakeasyBase {
     /**
-     *  The ConnectorExpandMask is used to expand related objects on a connector.
-     *
-     * @remarks
-     *
+     * The ConnectorExpandMask is used to expand related objects on a connector.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expandMask" })
