@@ -4,3 +4,4 @@ src/index.ts
 package.json
 yarn.lock
 package-lock.json
+tsconfig.json
