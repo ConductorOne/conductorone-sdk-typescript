@@ -12,6 +12,9 @@ import type {
 export interface SDKProps extends SDKProps_orig {
   clientID?: string;
   clientSecret?: string;
+  serverURL?: string;
+  serverIdx?: number;
+  defaultClient?: any;
 }
 
 export class ConductoroneSDKTypescript extends ConductoroneSDKTypescript_orig {
