@@ -4,10 +4,10 @@ import { Token } from "./token";
 import {
   ServerList,
   ConductoroneSDKTypescript as ConductoroneSDKTypescript_orig,
-} from "./src/sdk";
+} from "./src/sdk/sdk";
 import type {
   SDKProps as SDKProps_orig,
-} from "./src/sdk";
+} from "./src/sdk/sdk";
 
 export interface SDKProps extends SDKProps_orig {
   clientID?: string;
