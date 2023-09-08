@@ -3,3 +3,4 @@ debug/
 dist/
 node_modules/
 package-lock.json
+openapi.yaml
