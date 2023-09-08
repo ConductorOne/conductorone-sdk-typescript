@@ -7,17 +7,11 @@ import { TaskView } from "./taskview";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  Task actions service comment response returns the task view inluding the expanded array of items that are indicated by the expand mask on the request.
- *
- * @remarks
- *
+ * Task actions service comment response returns the task view inluding the expanded array of items that are indicated by the expand mask on the request.
  */
 export class TaskActionsServiceCommentResponse extends SpeakeasyBase {
     /**
-     *  Contains a task and JSONPATH expressions that describe where in the expanded array related objects are located. This view can be used to display a fully-detailed dashboard of task information.
-     *
-     * @remarks
-     *
+     * Contains a task and JSONPATH expressions that describe where in the expanded array related objects are located. This view can be used to display a fully-detailed dashboard of task information.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "taskView" })
@@ -25,10 +19,7 @@ export class TaskActionsServiceCommentResponse extends SpeakeasyBase {
     taskView?: TaskView;
 
     /**
-     *  List of serialized related objects.
-     *
-     * @remarks
-     *
+     * List of serialized related objects.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expanded" })

@@ -7,18 +7,14 @@ import { AppEntitlementRef } from "./appentitlementref";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The RequestCatalogManagementServiceRemoveAccessEntitlementsRequest message is used to remove access entitlements from a request catalog.
+ * The RequestCatalogManagementServiceRemoveAccessEntitlementsRequest message is used to remove access entitlements from a request catalog.
  *
  * @remarks
  *  The access entitlements are used to determine which users can view the request catalog.
- *
  */
 export class RequestCatalogManagementServiceRemoveAccessEntitlementsRequest extends SpeakeasyBase {
     /**
-     *  The list of access entitlements to remove from the catalog.
-     *
-     * @remarks
-     *
+     * The list of access entitlements to remove from the catalog.
      */
     @SpeakeasyMetadata({ elemType: AppEntitlementRef })
     @Expose({ name: "accessEntitlements" })

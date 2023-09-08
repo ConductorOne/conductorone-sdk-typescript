@@ -6,37 +6,25 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- *  ConnectorCredential is used by a connector to authenticate with conductor one.
- *
- * @remarks
- *
+ * ConnectorCredential is used by a connector to authenticate with conductor one.
  */
 export class ConnectorCredential extends SpeakeasyBase {
     /**
-     *  The appId of the app the connector is attached to.
-     *
-     * @remarks
-     *
+     * The appId of the app the connector is attached to.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })
     appId?: string;
 
     /**
-     *  The client id of the ConnectorCredential.
-     *
-     * @remarks
-     *
+     * The client id of the ConnectorCredential.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "clientId" })
     clientId?: string;
 
     /**
-     *  The connectorId of the connector the credential is associated with.
-     *
-     * @remarks
-     *
+     * The connectorId of the connector the credential is associated with.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "connectorId" })
@@ -53,10 +41,7 @@ export class ConnectorCredential extends SpeakeasyBase {
     deletedAt?: Date;
 
     /**
-     *  The display name of the ConnectorCredential.
-     *
-     * @remarks
-     *
+     * The display name of the ConnectorCredential.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
@@ -68,10 +53,7 @@ export class ConnectorCredential extends SpeakeasyBase {
     expiresTime?: Date;
 
     /**
-     *  The id of the ConnectorCredential.
-     *
-     * @remarks
-     *
+     * The id of the ConnectorCredential.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })

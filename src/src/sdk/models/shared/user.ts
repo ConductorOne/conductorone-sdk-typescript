@@ -7,10 +7,7 @@ import { UserAttributeMappingSource } from "./userattributemappingsource";
 import { Expose, Transform, Type } from "class-transformer";
 
 /**
- *  The status of the user in the directory.
- *
- * @remarks
- *
+ * The status of the user in the directory.
  */
 export enum UserDirectoryStatus {
     Unknown = "UNKNOWN",
@@ -20,10 +17,7 @@ export enum UserDirectoryStatus {
 }
 
 /**
- *  The status of the user in the system.
- *
- * @remarks
- *
+ * The status of the user in the system.
  */
 export enum UserStatus {
     Unknown = "UNKNOWN",
@@ -33,10 +27,7 @@ export enum UserStatus {
 }
 
 /**
- *  The User object provides all of the details for an user, as well as some configuration.
- *
- * @remarks
- *
+ * The User object provides all of the details for an user, as well as some configuration.
  */
 export class User extends SpeakeasyBase {
     @SpeakeasyMetadata()
@@ -45,10 +36,7 @@ export class User extends SpeakeasyBase {
     createdAt?: Date;
 
     /**
-     *  The id of the user to whom tasks will be automatically reassigned to.
-     *
-     * @remarks
-     *
+     * The id of the user to whom tasks will be automatically reassigned to.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "delegatedUserId" })
@@ -60,20 +48,14 @@ export class User extends SpeakeasyBase {
     deletedAt?: Date;
 
     /**
-     *  The department which the user belongs to in the organization.
-     *
-     * @remarks
-     *
+     * The department which the user belongs to in the organization.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "department" })
     department?: string;
 
     /**
-     *  A list of objects mapped based on department attribute mappings configured in the system.
-     *
-     * @remarks
-     *
+     * A list of objects mapped based on department attribute mappings configured in the system.
      */
     @SpeakeasyMetadata({ elemType: UserAttributeMappingSource })
     @Expose({ name: "departmentSources" })
@@ -81,30 +63,21 @@ export class User extends SpeakeasyBase {
     departmentSources?: UserAttributeMappingSource[];
 
     /**
-     *  A list of unique ids that represent different directories.
-     *
-     * @remarks
-     *
+     * A list of unique ids that represent different directories.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "directoryIds" })
     directoryIds?: string[];
 
     /**
-     *  The status of the user in the directory.
-     *
-     * @remarks
-     *
+     * The status of the user in the directory.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "directoryStatus" })
     directoryStatus?: UserDirectoryStatus;
 
     /**
-     *  A list of objects mapped based on directoryStatus attribute mappings configured in the system.
-     *
-     * @remarks
-     *
+     * A list of objects mapped based on directoryStatus attribute mappings configured in the system.
      */
     @SpeakeasyMetadata({ elemType: UserAttributeMappingSource })
     @Expose({ name: "directoryStatusSources" })
@@ -112,40 +85,28 @@ export class User extends SpeakeasyBase {
     directoryStatusSources?: UserAttributeMappingSource[];
 
     /**
-     *  The display name of the user.
-     *
-     * @remarks
-     *
+     * The display name of the user.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     *  This is the user's email.
-     *
-     * @remarks
-     *
+     * This is the user's email.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "email" })
     email?: string;
 
     /**
-     *  The users employment status.
-     *
-     * @remarks
-     *
+     * The users employment status.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "employmentStatus" })
     employmentStatus?: string;
 
     /**
-     *  A list of objects mapped based on employmentStatus attribute mappings configured in the system.
-     *
-     * @remarks
-     *
+     * A list of objects mapped based on employmentStatus attribute mappings configured in the system.
      */
     @SpeakeasyMetadata({ elemType: UserAttributeMappingSource })
     @Expose({ name: "employmentStatusSources" })
@@ -153,20 +114,14 @@ export class User extends SpeakeasyBase {
     employmentStatusSources?: UserAttributeMappingSource[];
 
     /**
-     *  The employment type of the user.
-     *
-     * @remarks
-     *
+     * The employment type of the user.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "employmentType" })
     employmentType?: string;
 
     /**
-     *  A list of objects mapped based on employmentType attribute mappings configured in the system.
-     *
-     * @remarks
-     *
+     * A list of objects mapped based on employmentType attribute mappings configured in the system.
      */
     @SpeakeasyMetadata({ elemType: UserAttributeMappingSource })
     @Expose({ name: "employmentTypeSources" })
@@ -174,30 +129,21 @@ export class User extends SpeakeasyBase {
     employmentTypeSources?: UserAttributeMappingSource[];
 
     /**
-     *  A unique identifier of the user.
-     *
-     * @remarks
-     *
+     * A unique identifier of the user.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
     id?: string;
 
     /**
-     *  The job title of the user.
-     *
-     * @remarks
-     *
+     * The job title of the user.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "jobTitle" })
     jobTitle?: string;
 
     /**
-     *  A list of objects mapped based on jobTitle attribute mappings configured in the system.
-     *
-     * @remarks
-     *
+     * A list of objects mapped based on jobTitle attribute mappings configured in the system.
      */
     @SpeakeasyMetadata({ elemType: UserAttributeMappingSource })
     @Expose({ name: "jobTitleSources" })
@@ -205,20 +151,14 @@ export class User extends SpeakeasyBase {
     jobTitleSources?: UserAttributeMappingSource[];
 
     /**
-     *  A list of ids of the user's managers.
-     *
-     * @remarks
-     *
+     * A list of ids of the user's managers.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "managerIds" })
     managerIds?: string[];
 
     /**
-     *  A list of objects mapped based on managerId attribute mappings configured in the system.
-     *
-     * @remarks
-     *
+     * A list of objects mapped based on managerId attribute mappings configured in the system.
      */
     @SpeakeasyMetadata({ elemType: UserAttributeMappingSource })
     @Expose({ name: "managerSources" })
@@ -226,20 +166,14 @@ export class User extends SpeakeasyBase {
     managerSources?: UserAttributeMappingSource[];
 
     /**
-     *  A list of unique identifiers that maps to ConductorOne’s user roles let you assign users permissions tailored to the work they do in the software.
-     *
-     * @remarks
-     *
+     * A list of unique identifiers that maps to ConductorOne’s user roles let you assign users permissions tailored to the work they do in the software.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "roleIds" })
     roleIds?: string[];
 
     /**
-     *  The status of the user in the system.
-     *
-     * @remarks
-     *
+     * The status of the user in the system.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "status" })

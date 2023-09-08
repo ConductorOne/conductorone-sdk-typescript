@@ -4,20 +4,15 @@
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { TaskExpandMask } from "./taskexpandmask";
+import { TaskGrantSource } from "./taskgrantsource";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  Create a grant task.
- *
- * @remarks
- *
+ * Create a grant task.
  */
 export class TaskServiceCreateGrantRequest extends SpeakeasyBase {
     /**
-     *  The task expand mask is an array of strings that specifes the related objects the requester wishes to have returned when making a request where the expand mask is part of the input. Use '*' to view all possible responses.
-     *
-     * @remarks
-     *
+     * The task expand mask is an array of strings that specifes the related objects the requester wishes to have returned when making a request where the expand mask is part of the input. Use '*' to view all possible responses.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expandMask" })
@@ -25,50 +20,43 @@ export class TaskServiceCreateGrantRequest extends SpeakeasyBase {
     taskExpandMask?: TaskExpandMask;
 
     /**
-     *  The ID of the app entitlement to grant access to.
-     *
-     * @remarks
-     *
+     * The TaskGrantSource message tracks which external URL was the source of the specificed grant ticket.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "source" })
+    @Type(() => TaskGrantSource)
+    taskGrantSource?: TaskGrantSource;
+
+    /**
+     * The ID of the app entitlement to grant access to.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appEntitlementId" })
     appEntitlementId: string;
 
     /**
-     *  The ID of the app that is associated with the entitlement.
-     *
-     * @remarks
-     *
+     * The ID of the app that is associated with the entitlement.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })
     appId: string;
 
     /**
-     *  The ID of the app user to grant access for. This field and identityUserId cannot both be set for a given request.
-     *
-     * @remarks
-     *
+     * The ID of the app user to grant access for. This field and identityUserId cannot both be set for a given request.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appUserId" })
     appUserId?: string;
 
     /**
-     *  The description of the request.
-     *
-     * @remarks
-     *
+     * The description of the request.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     *  Boolean stating whether or not the task is marked as emergency access.
-     *
-     * @remarks
-     *
+     * Boolean stating whether or not the task is marked as emergency access.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "emergencyAccess" })
@@ -79,10 +67,7 @@ export class TaskServiceCreateGrantRequest extends SpeakeasyBase {
     grantDuration?: string;
 
     /**
-     *  The ID of the user associated with the app user we are granting access for. This field cannot be set if appUserID is also set.
-     *
-     * @remarks
-     *
+     * The ID of the user associated with the app user we are granting access for. This field cannot be set if appUserID is also set.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "identityUserId" })

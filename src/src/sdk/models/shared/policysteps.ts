@@ -11,10 +11,7 @@ import { Expose, Type } from "class-transformer";
  */
 export class PolicySteps extends SpeakeasyBase {
     /**
-     *  An array of policy steps indicating the processing flow of a policy. These steps are oneOfs, and only one property may be set for each array index at a time.
-     *
-     * @remarks
-     *
+     * An array of policy steps indicating the processing flow of a policy. These steps are oneOfs, and only one property may be set for each array index at a time.
      */
     @SpeakeasyMetadata({ elemType: PolicyStep })
     @Expose({ name: "steps" })
@@ -27,10 +24,7 @@ export class PolicySteps extends SpeakeasyBase {
  */
 export class PolicyStepsInput extends SpeakeasyBase {
     /**
-     *  An array of policy steps indicating the processing flow of a policy. These steps are oneOfs, and only one property may be set for each array index at a time.
-     *
-     * @remarks
-     *
+     * An array of policy steps indicating the processing flow of a policy. These steps are oneOfs, and only one property may be set for each array index at a time.
      */
     @SpeakeasyMetadata({ elemType: PolicyStepInput })
     @Expose({ name: "steps" })

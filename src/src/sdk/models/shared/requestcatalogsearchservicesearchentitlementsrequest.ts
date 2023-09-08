@@ -7,10 +7,7 @@ import { AppEntitlementExpandMask } from "./appentitlementexpandmask";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  Search entitlements with this granted status for your signed in user.
- *
- * @remarks
- *
+ * Search entitlements with this granted status for your signed in user.
  */
 export enum RequestCatalogSearchServiceSearchEntitlementsRequestGrantedStatus {
     Unspecified = "UNSPECIFIED",
@@ -20,17 +17,11 @@ export enum RequestCatalogSearchServiceSearchEntitlementsRequestGrantedStatus {
 }
 
 /**
- *  The RequestCatalogSearchServiceSearchEntitlementsRequest searches entitlements, but only ones that are available to you through the open catalogs.
- *
- * @remarks
- *
+ * The RequestCatalogSearchServiceSearchEntitlementsRequest searches entitlements, but only ones that are available to you through the open catalogs.
  */
 export class RequestCatalogSearchServiceSearchEntitlementsRequest extends SpeakeasyBase {
     /**
-     *  The app entitlement expand mask allows the user to get additional information when getting responses containing app entitlement views.
-     *
-     * @remarks
-     *
+     * The app entitlement expand mask allows the user to get additional information when getting responses containing app entitlement views.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expandMask" })
@@ -38,50 +29,42 @@ export class RequestCatalogSearchServiceSearchEntitlementsRequest extends Speake
     appEntitlementExpandMask?: AppEntitlementExpandMask;
 
     /**
-     *  Search for entitlements with this alias (exact match).
-     *
-     * @remarks
-     *
+     * Search entitlements that belong to this app name (exact match).
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "appDisplayName" })
+    appDisplayName?: string;
+
+    /**
+     * Search for entitlements with this alias (exact match).
      */
     @SpeakeasyMetadata()
     @Expose({ name: "entitlementAlias" })
     entitlementAlias?: string;
 
     /**
-     *  Search entitlements with this granted status for your signed in user.
-     *
-     * @remarks
-     *
+     * Search entitlements with this granted status for your signed in user.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "grantedStatus" })
     grantedStatus?: RequestCatalogSearchServiceSearchEntitlementsRequestGrantedStatus;
 
     /**
-     *  The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
-     *
-     * @remarks
-     *
+     * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageSize" })
     pageSize?: number;
 
     /**
-     *  The pageToken field.
-     *
-     * @remarks
-     *
+     * The pageToken field.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageToken" })
     pageToken?: string;
 
     /**
-     *  Fuzzy search the display name of resource types.
-     *
-     * @remarks
-     *
+     * Fuzzy search the display name of resource types.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "query" })

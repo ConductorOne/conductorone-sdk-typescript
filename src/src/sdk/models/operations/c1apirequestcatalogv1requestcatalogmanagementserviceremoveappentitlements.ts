@@ -19,10 +19,7 @@ export class C1ApiRequestcatalogV1RequestCatalogManagementServiceRemoveAppEntitl
     contentType: string;
 
     /**
-     *  Empty response with a status code indicating success
-     *
-     * @remarks
-     *
+     * Empty response with a status code indicating success
      */
     @SpeakeasyMetadata()
     requestCatalogManagementServiceRemoveAppEntitlementsResponse?: shared.RequestCatalogManagementServiceRemoveAppEntitlementsResponse;

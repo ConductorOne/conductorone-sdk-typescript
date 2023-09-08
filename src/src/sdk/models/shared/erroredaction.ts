@@ -6,27 +6,18 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- *  The outcome of a provision instance that has errored.
- *
- * @remarks
- *
+ * The outcome of a provision instance that has errored.
  */
 export class ErroredAction extends SpeakeasyBase {
     /**
-     *  The description of a provision instance that has errored.
-     *
-     * @remarks
-     *
+     * The description of a provision instance that has errored.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     *  The error code of a provision instance that has errored. This is only PEC-1 for now, but more will be added in the future.
-     *
-     * @remarks
-     *
+     * The error code of a provision instance that has errored. This is only PEC-1 for now, but more will be added in the future.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "errorCode" })

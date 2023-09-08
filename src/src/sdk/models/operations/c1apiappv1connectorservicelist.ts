@@ -19,10 +19,7 @@ export class C1ApiAppV1ConnectorServiceListRequest extends SpeakeasyBase {
 
 export class C1ApiAppV1ConnectorServiceListResponse extends SpeakeasyBase {
     /**
-     *  The ConnectorServiceListResponse message contains a list of results and a nextPageToken if applicable
-     *
-     * @remarks
-     *
+     * The ConnectorServiceListResponse message contains a list of results and a nextPageToken if applicable
      */
     @SpeakeasyMetadata()
     connectorServiceListResponse?: shared.ConnectorServiceListResponse;

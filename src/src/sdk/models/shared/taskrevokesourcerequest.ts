@@ -6,17 +6,11 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- *  The TaskRevokeSourceRequest message indicates that the source of the revoke task was a request.
- *
- * @remarks
- *
+ * The TaskRevokeSourceRequest message indicates that the source of the revoke task was a request.
  */
 export class TaskRevokeSourceRequest extends SpeakeasyBase {
     /**
-     *  The ID of the user who initiated the revoke request.
-     *
-     * @remarks
-     *
+     * The ID of the user who initiated the revoke request.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "requestUserId" })

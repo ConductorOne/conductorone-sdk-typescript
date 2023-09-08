@@ -22,10 +22,7 @@ export class C1ApiAppV1AppResourceServiceListRequest extends SpeakeasyBase {
 
 export class C1ApiAppV1AppResourceServiceListResponse extends SpeakeasyBase {
     /**
-     *  The AppResourceServiceListResponse message contains a list of results and a nextPageToken if applicable.
-     *
-     * @remarks
-     *
+     * The AppResourceServiceListResponse message contains a list of results and a nextPageToken if applicable.
      */
     @SpeakeasyMetadata()
     appResourceServiceListResponse?: shared.AppResourceServiceListResponse;

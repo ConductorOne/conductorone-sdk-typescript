@@ -25,10 +25,7 @@ export class C1ApiPolicyV1PoliciesUpdateResponse extends SpeakeasyBase {
     rawResponse?: AxiosResponse;
 
     /**
-     *  The UpdatePolicyResponse message contains the updated policy object.
-     *
-     * @remarks
-     *
+     * The UpdatePolicyResponse message contains the updated policy object.
      */
     @SpeakeasyMetadata()
     updatePolicyResponse?: shared.UpdatePolicyResponse;

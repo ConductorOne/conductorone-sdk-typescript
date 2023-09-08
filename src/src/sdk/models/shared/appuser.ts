@@ -3,14 +3,11 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import { AppUserStatus } from "./appuserstatus";
+import { AppUserStatus, AppUserStatusInput } from "./appuserstatus";
 import { Expose, Transform, Type } from "class-transformer";
 
 /**
- *  The appplication user type. Type can be user, system or service.
- *
- * @remarks
- *
+ * The appplication user type. Type can be user, system or service.
  */
 export enum AppUserAppUserType {
     AppUserTypeUnspecified = "APP_USER_TYPE_UNSPECIFIED",
@@ -20,17 +17,31 @@ export enum AppUserAppUserType {
 }
 
 /**
- *  Application User that represents an account in the application.
- *
- * @remarks
- *
+ * Application User that represents an account in the application.
+ */
+export class AppUserInput extends SpeakeasyBase {
+    /**
+     * The satus of the applicaiton user.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "status" })
+    @Type(() => AppUserStatusInput)
+    appUserStatus?: AppUserStatusInput;
+
+    /**
+     * The appplication user type. Type can be user, system or service.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "appUserType" })
+    appUserType?: AppUserAppUserType;
+}
+
+/**
+ * Application User that represents an account in the application.
  */
 export class AppUser extends SpeakeasyBase {
     /**
-     *  The satus of the applicaiton user.
-     *
-     * @remarks
-     *
+     * The satus of the applicaiton user.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "status" })
@@ -38,20 +49,14 @@ export class AppUser extends SpeakeasyBase {
     appUserStatus?: AppUserStatus;
 
     /**
-     *  The ID of the application.
-     *
-     * @remarks
-     *
+     * The ID of the application.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })
     appId?: string;
 
     /**
-     *  The appplication user type. Type can be user, system or service.
-     *
-     * @remarks
-     *
+     * The appplication user type. Type can be user, system or service.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appUserType" })
@@ -68,40 +73,28 @@ export class AppUser extends SpeakeasyBase {
     deletedAt?: Date;
 
     /**
-     *  The display name of the application user.
-     *
-     * @remarks
-     *
+     * The display name of the application user.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     *  The email field of the application user.
-     *
-     * @remarks
-     *
+     * The email field of the application user.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "email" })
     email?: string;
 
     /**
-     *  A unique idenditfier of the application user.
-     *
-     * @remarks
-     *
+     * A unique idenditfier of the application user.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
     id?: string;
 
     /**
-     *  The conductor one user ID of the account owner.
-     *
-     * @remarks
-     *
+     * The conductor one user ID of the account owner.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "identityUserId" })

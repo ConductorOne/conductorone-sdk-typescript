@@ -17,10 +17,7 @@ export class C1ApiTaskV1TaskServiceCreateRevokeTaskResponse extends SpeakeasyBas
     rawResponse?: AxiosResponse;
 
     /**
-     *  The TaskServiceCreateRevokeResponse returns a task view which has a task including JSONPATHs to the expanded items in the expanded array.
-     *
-     * @remarks
-     *
+     * The TaskServiceCreateRevokeResponse returns a task view which has a task including JSONPATHs to the expanded items in the expanded array.
      */
     @SpeakeasyMetadata()
     taskServiceCreateRevokeResponse?: shared.TaskServiceCreateRevokeResponse;

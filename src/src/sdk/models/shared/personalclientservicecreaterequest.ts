@@ -6,27 +6,18 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- *  The PersonalClientServiceCreateRequest message contains the fields for creating a new personal client.
- *
- * @remarks
- *
+ * The PersonalClientServiceCreateRequest message contains the fields for creating a new personal client.
  */
 export class PersonalClientServiceCreateRequest extends SpeakeasyBase {
     /**
-     *  A list of CIDRs to restrict this credential to.
-     *
-     * @remarks
-     *
+     * A list of CIDRs to restrict this credential to.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "allowSourceCidr" })
     allowSourceCidr?: string[];
 
     /**
-     *  The display name for the new personal client.
-     *
-     * @remarks
-     *
+     * The display name for the new personal client.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
@@ -37,10 +28,7 @@ export class PersonalClientServiceCreateRequest extends SpeakeasyBase {
     expires?: string;
 
     /**
-     *  The list of roles to restrict the credential to.
-     *
-     * @remarks
-     *
+     * The list of roles to restrict the credential to.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "scopedRoles" })

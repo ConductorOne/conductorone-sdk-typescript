@@ -8,12 +8,9 @@ import { PolicySteps, PolicyStepsInput } from "./policysteps";
 import { Expose, Transform, Type } from "class-transformer";
 
 /**
- *  The enum of the policy type.
- *
- * @remarks
- *
+ * The enum of the policy type.
  */
-export enum C1ApiPolicyV1CreatePolicyRequestPolicyType {
+export enum CreatePolicyRequestPolicyType {
     PolicyTypeUnspecified = "POLICY_TYPE_UNSPECIFIED",
     PolicyTypeGrant = "POLICY_TYPE_GRANT",
     PolicyTypeRevoke = "POLICY_TYPE_REVOKE",
@@ -23,37 +20,25 @@ export enum C1ApiPolicyV1CreatePolicyRequestPolicyType {
 }
 
 /**
- *  The CreatePolicyRequest message is used to create a new policy.
- *
- * @remarks
- *
+ * The CreatePolicyRequest message is used to create a new policy.
  */
 export class CreatePolicyRequest extends SpeakeasyBase {
     /**
-     *  The description of the new policy.
-     *
-     * @remarks
-     *
+     * The description of the new policy.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     *  The display name of the new policy.
-     *
-     * @remarks
-     *
+     * The display name of the new policy.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     *  The map of policy type to policy steps. The key is the stringified version of the enum. See other policies for examples.
-     *
-     * @remarks
-     *
+     * The map of policy type to policy steps. The key is the stringified version of the enum. See other policies for examples.
      */
     @SpeakeasyMetadata({ elemType: PolicySteps })
     @Expose({ name: "policySteps" })
@@ -70,20 +55,14 @@ export class CreatePolicyRequest extends SpeakeasyBase {
     policySteps?: Record<string, PolicySteps>;
 
     /**
-     *  The enum of the policy type.
-     *
-     * @remarks
-     *
+     * The enum of the policy type.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "policyType" })
-    policyType?: C1ApiPolicyV1CreatePolicyRequestPolicyType;
+    policyType?: CreatePolicyRequestPolicyType;
 
     /**
-     *  Actions to occur after a policy finishes. As of now this is only valid on a certify policy to remediate a denied certification immediately.
-     *
-     * @remarks
-     *
+     * Actions to occur after a policy finishes. As of now this is only valid on a certify policy to remediate a denied certification immediately.
      */
     @SpeakeasyMetadata({ elemType: PolicyPostActions })
     @Expose({ name: "postActions" })
@@ -91,10 +70,7 @@ export class CreatePolicyRequest extends SpeakeasyBase {
     postActions?: PolicyPostActions[];
 
     /**
-     *  Allows reassigning tasks to delegates.
-     *
-     * @remarks
-     *
+     * Allows reassigning tasks to delegates.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "reassignTasksToDelegates" })
@@ -102,52 +78,25 @@ export class CreatePolicyRequest extends SpeakeasyBase {
 }
 
 /**
- *  The enum of the policy type.
- *
- * @remarks
- *
- */
-export enum CreatePolicyRequestPolicyType {
-    PolicyTypeUnspecified = "POLICY_TYPE_UNSPECIFIED",
-    PolicyTypeGrant = "POLICY_TYPE_GRANT",
-    PolicyTypeRevoke = "POLICY_TYPE_REVOKE",
-    PolicyTypeCertify = "POLICY_TYPE_CERTIFY",
-    PolicyTypeAccessRequest = "POLICY_TYPE_ACCESS_REQUEST",
-    PolicyTypeProvision = "POLICY_TYPE_PROVISION",
-}
-
-/**
- *  The CreatePolicyRequest message is used to create a new policy.
- *
- * @remarks
- *
+ * The CreatePolicyRequest message is used to create a new policy.
  */
 export class CreatePolicyRequestInput extends SpeakeasyBase {
     /**
-     *  The description of the new policy.
-     *
-     * @remarks
-     *
+     * The description of the new policy.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     *  The display name of the new policy.
-     *
-     * @remarks
-     *
+     * The display name of the new policy.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     *  The map of policy type to policy steps. The key is the stringified version of the enum. See other policies for examples.
-     *
-     * @remarks
-     *
+     * The map of policy type to policy steps. The key is the stringified version of the enum. See other policies for examples.
      */
     @SpeakeasyMetadata({ elemType: PolicyStepsInput })
     @Expose({ name: "policySteps" })
@@ -164,20 +113,14 @@ export class CreatePolicyRequestInput extends SpeakeasyBase {
     policySteps?: Record<string, PolicyStepsInput>;
 
     /**
-     *  The enum of the policy type.
-     *
-     * @remarks
-     *
+     * The enum of the policy type.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "policyType" })
     policyType?: CreatePolicyRequestPolicyType;
 
     /**
-     *  Actions to occur after a policy finishes. As of now this is only valid on a certify policy to remediate a denied certification immediately.
-     *
-     * @remarks
-     *
+     * Actions to occur after a policy finishes. As of now this is only valid on a certify policy to remediate a denied certification immediately.
      */
     @SpeakeasyMetadata({ elemType: PolicyPostActions })
     @Expose({ name: "postActions" })
@@ -185,10 +128,7 @@ export class CreatePolicyRequestInput extends SpeakeasyBase {
     postActions?: PolicyPostActions[];
 
     /**
-     *  Allows reassigning tasks to delegates.
-     *
-     * @remarks
-     *
+     * Allows reassigning tasks to delegates.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "reassignTasksToDelegates" })

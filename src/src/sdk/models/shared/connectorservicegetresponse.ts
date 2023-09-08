@@ -7,17 +7,11 @@ import { ConnectorView } from "./connectorview";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The ConnectorServiceGetResponse message contains the connectorView, and an expand mask.
- *
- * @remarks
- *
+ * The ConnectorServiceGetResponse message contains the connectorView, and an expand mask.
  */
 export class ConnectorServiceGetResponse extends SpeakeasyBase {
     /**
-     *  The ConnectorView object provides a connector response object, as well as JSONPATHs to related objects provided by expanders.
-     *
-     * @remarks
-     *
+     * The ConnectorView object provides a connector response object, as well as JSONPATHs to related objects provided by expanders.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "connectorView" })
@@ -25,10 +19,7 @@ export class ConnectorServiceGetResponse extends SpeakeasyBase {
     connectorView?: ConnectorView;
 
     /**
-     *  The array of expanded items indicated by the request.
-     *
-     * @remarks
-     *
+     * The array of expanded items indicated by the request.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expanded" })

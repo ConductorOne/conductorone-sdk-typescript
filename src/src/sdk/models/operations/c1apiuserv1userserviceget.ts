@@ -22,10 +22,7 @@ export class C1ApiUserV1UserServiceGetResponse extends SpeakeasyBase {
     rawResponse?: AxiosResponse;
 
     /**
-     *  The UserServiceGetResponse returns a user view which has a user including JSONPATHs to the expanded items in the expanded array.
-     *
-     * @remarks
-     *
+     * The UserServiceGetResponse returns a user view which has a user including JSONPATHs to the expanded items in the expanded array.
      */
     @SpeakeasyMetadata()
     userServiceGetResponse?: shared.UserServiceGetResponse;

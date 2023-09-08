@@ -7,17 +7,11 @@ import { AppPopulationReport } from "./apppopulationreport";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The AppReportServiceListResponse message contains a list of results and a nextPageToken if applicable.
- *
- * @remarks
- *
+ * The AppReportServiceListResponse message contains a list of results and a nextPageToken if applicable.
  */
 export class AppReportServiceListResponse extends SpeakeasyBase {
     /**
-     *  The list of results containing up to X results, where X is the page size defined in the request.
-     *
-     * @remarks
-     *
+     * The list of results containing up to X results, where X is the page size defined in the request.
      */
     @SpeakeasyMetadata({ elemType: AppPopulationReport })
     @Expose({ name: "list" })
@@ -25,12 +19,11 @@ export class AppReportServiceListResponse extends SpeakeasyBase {
     list?: AppPopulationReport[];
 
     /**
-     *  The nextPageToken is shown for the next page if the number of results is larger than the max page size.
+     * The nextPageToken is shown for the next page if the number of results is larger than the max page size.
      *
      * @remarks
      *  The server returns one page of results and the nextPageToken until all results are retreived.
      *  To retrieve the next page, use the same request and append a pageToken field with the value of nextPageToken shown on the previous page.
-     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "nextPageToken" })

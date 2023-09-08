@@ -6,27 +6,18 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- *  The app resource message is a single resource that can have entitlements.
- *
- * @remarks
- *
+ * The app resource message is a single resource that can have entitlements.
  */
 export class AppResource extends SpeakeasyBase {
     /**
-     *  The app that this resource belongs to.
-     *
-     * @remarks
-     *
+     * The app that this resource belongs to.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })
     appId?: string;
 
     /**
-     *  The resource type that this resource is.
-     *
-     * @remarks
-     *
+     * The resource type that this resource is.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appResourceTypeId" })
@@ -38,10 +29,7 @@ export class AppResource extends SpeakeasyBase {
     createdAt?: Date;
 
     /**
-     *  A custom description that can be set for a resource.
-     *
-     * @remarks
-     *
+     * A custom description that can be set for a resource.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "customDescription" })
@@ -53,40 +41,28 @@ export class AppResource extends SpeakeasyBase {
     deletedAt?: Date;
 
     /**
-     *  The description set for the resource.
-     *
-     * @remarks
-     *
+     * The description set for the resource.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     *  The display name for this resource.
-     *
-     * @remarks
-     *
+     * The display name for this resource.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     *  The number of grants to this resource.
-     *
-     * @remarks
-     *
+     * The number of grants to this resource.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "grantCount" })
     grantCount?: string;
 
     /**
-     *  The id of the resource.
-     *
-     * @remarks
-     *
+     * The id of the resource.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })

@@ -19,10 +19,7 @@ export class C1ApiAppV1AppsListResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
-     *  The ListAppsResponse message contains a list of results and a nextPageToken if applicable.
-     *
-     * @remarks
-     *
+     * The ListAppsResponse message contains a list of results and a nextPageToken if applicable.
      */
     @SpeakeasyMetadata()
     listAppsResponse?: shared.ListAppsResponse;

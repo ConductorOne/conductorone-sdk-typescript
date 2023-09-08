@@ -7,17 +7,11 @@ import { AppResourceType } from "./appresourcetype";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The AppResourceTypeView message.
- *
- * @remarks
- *
+ * The AppResourceTypeView message.
  */
 export class AppResourceTypeView extends SpeakeasyBase {
     /**
-     *  The AppResourceType is referenced by an app entitlement defining its resource types. Commonly things like Group or Role.
-     *
-     * @remarks
-     *
+     * The AppResourceType is referenced by an app entitlement defining its resource types. Commonly things like Group or Role.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appResourceType" })
@@ -25,10 +19,7 @@ export class AppResourceTypeView extends SpeakeasyBase {
     appResourceType?: AppResourceType;
 
     /**
-     *  JSONPATH expression indicating the location of the App object in the  array
-     *
-     * @remarks
-     *
+     * JSONPATH expression indicating the location of the App object in the  array
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appPath" })

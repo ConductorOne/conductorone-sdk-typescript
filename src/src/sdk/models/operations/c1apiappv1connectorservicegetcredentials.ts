@@ -19,10 +19,7 @@ export class C1ApiAppV1ConnectorServiceGetCredentialsRequest extends SpeakeasyBa
 
 export class C1ApiAppV1ConnectorServiceGetCredentialsResponse extends SpeakeasyBase {
     /**
-     *  ConnectorServiceGetCredentialsResponse is the response returned by the get method.
-     *
-     * @remarks
-     *
+     * ConnectorServiceGetCredentialsResponse is the response returned by the get method.
      */
     @SpeakeasyMetadata()
     connectorServiceGetCredentialsResponse?: shared.ConnectorServiceGetCredentialsResponse;

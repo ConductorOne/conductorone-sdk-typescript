@@ -6,10 +6,12 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- *  The application user status field.
- *
- * @remarks
- *
+ * The satus of the applicaiton user.
+ */
+export class AppUserStatusInput extends SpeakeasyBase {}
+
+/**
+ * The application user status field.
  */
 export enum AppUserStatusStatus {
     StatusUnspecified = "STATUS_UNSPECIFIED",
@@ -19,27 +21,18 @@ export enum AppUserStatusStatus {
 }
 
 /**
- *  The satus of the applicaiton user.
- *
- * @remarks
- *
+ * The satus of the applicaiton user.
  */
 export class AppUserStatus extends SpeakeasyBase {
     /**
-     *  The details of applicaiton user status.
-     *
-     * @remarks
-     *
+     * The details of applicaiton user status.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "details" })
     details?: string;
 
     /**
-     *  The application user status field.
-     *
-     * @remarks
-     *
+     * The application user status field.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "status" })

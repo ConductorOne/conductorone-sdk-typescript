@@ -6,10 +6,7 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- *  The outcome of a provision instance that is cancelled.
- *
- * @remarks
- *
+ * The outcome of a provision instance that is cancelled.
  */
 export class CancelledAction extends SpeakeasyBase {
     @SpeakeasyMetadata()
@@ -18,10 +15,7 @@ export class CancelledAction extends SpeakeasyBase {
     cancelledAt?: Date;
 
     /**
-     *  The userID, usually the system, that cancells a provision instance.
-     *
-     * @remarks
-     *
+     * The userID, usually the system, that cancells a provision instance.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "cancelledByUserId" })

@@ -15,18 +15,14 @@ export enum SearchUsersRequestUserStatuses {
 }
 
 /**
- *  Search for users based on some filters.
- *
- * @remarks
- *
+ * Search for users based on some filters.
  */
 export class SearchUsersRequest extends SpeakeasyBase {
     /**
-     *  The user expand mask is used to indicate which related objects should be expanded in the response.
+     * The user expand mask is used to indicate which related objects should be expanded in the response.
      *
      * @remarks
      *  The supported paths are 'role_ids', 'manager_ids', 'delegated_user_id', 'directory_ids', and '*'.
-     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expandMask" })
@@ -34,70 +30,49 @@ export class SearchUsersRequest extends SpeakeasyBase {
     userExpandMask?: UserExpandMask;
 
     /**
-     *  Search for users based on their email (exact match).
-     *
-     * @remarks
-     *
+     * Search for users based on their email (exact match).
      */
     @SpeakeasyMetadata()
     @Expose({ name: "email" })
     email?: string;
 
     /**
-     *  An array of users IDs to exclude from the results.
-     *
-     * @remarks
-     *
+     * An array of users IDs to exclude from the results.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "excludeIds" })
     excludeIds?: string[];
 
     /**
-     *  Deprecated. Use refs array instead.
-     *
-     * @remarks
-     *
+     * Deprecated. Use refs array instead.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "ids" })
     ids?: string[];
 
     /**
-     *  The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
-     *
-     * @remarks
-     *
+     * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageSize" })
     pageSize?: number;
 
     /**
-     *  The pageToken field.
-     *
-     * @remarks
-     *
+     * The pageToken field.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "pageToken" })
     pageToken?: string;
 
     /**
-     *  Query the apps with a fuzzy search on display name and emails.
-     *
-     * @remarks
-     *
+     * Query the apps with a fuzzy search on display name and emails.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "query" })
     query?: string;
 
     /**
-     *  An array of user refs to restrict the return values to by ID.
-     *
-     * @remarks
-     *
+     * An array of user refs to restrict the return values to by ID.
      */
     @SpeakeasyMetadata({ elemType: UserRef })
     @Expose({ name: "refs" })
@@ -105,20 +80,14 @@ export class SearchUsersRequest extends SpeakeasyBase {
     refs?: UserRef[];
 
     /**
-     *  Search for users that have any of the role IDs on this list.
-     *
-     * @remarks
-     *
+     * Search for users that have any of the role IDs on this list.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "roleIds" })
     roleIds?: string[];
 
     /**
-     *  Search for users that have any of the statuses on this list. This can only be ENABLED, DISABLED, and DELETED
-     *
-     * @remarks
-     *
+     * Search for users that have any of the statuses on this list. This can only be ENABLED, DISABLED, and DELETED
      */
     @SpeakeasyMetadata()
     @Expose({ name: "userStatuses" })

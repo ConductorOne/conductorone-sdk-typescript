@@ -6,10 +6,7 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- *  The status of the connector sync.
- *
- * @remarks
- *
+ * The status of the connector sync.
  */
 export enum ConnectorStatusStatus {
     SyncStatusUnspecified = "SYNC_STATUS_UNSPECIFIED",
@@ -19,10 +16,7 @@ export enum ConnectorStatusStatus {
 }
 
 /**
- *  The status field on the connector is used to track the status of the connectors sync, and when syncing last started, completed, or caused the connector to update.
- *
- * @remarks
- *
+ * The status field on the connector is used to track the status of the connectors sync, and when syncing last started, completed, or caused the connector to update.
  */
 export class ConnectorStatus extends SpeakeasyBase {
     @SpeakeasyMetadata()
@@ -31,10 +25,7 @@ export class ConnectorStatus extends SpeakeasyBase {
     completedAt?: Date;
 
     /**
-     *  The last error encountered by the connector.
-     *
-     * @remarks
-     *
+     * The last error encountered by the connector.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "lastError" })
@@ -46,10 +37,7 @@ export class ConnectorStatus extends SpeakeasyBase {
     startedAt?: Date;
 
     /**
-     *  The status of the connector sync.
-     *
-     * @remarks
-     *
+     * The status of the connector sync.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "status" })

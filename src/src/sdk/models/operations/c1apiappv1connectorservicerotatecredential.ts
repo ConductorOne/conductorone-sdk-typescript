@@ -19,10 +19,7 @@ export class C1ApiAppV1ConnectorServiceRotateCredentialRequest extends Speakeasy
 
 export class C1ApiAppV1ConnectorServiceRotateCredentialResponse extends SpeakeasyBase {
     /**
-     *  ConnectorServiceRotateCredentialResponse is the response returned by the rotate method.
-     *
-     * @remarks
-     *
+     * ConnectorServiceRotateCredentialResponse is the response returned by the rotate method.
      */
     @SpeakeasyMetadata()
     connectorServiceRotateCredentialResponse?: shared.ConnectorServiceRotateCredentialResponse;

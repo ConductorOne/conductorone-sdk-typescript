@@ -5,9 +5,6 @@
 import { SpeakeasyBase } from "../../../internal/utils";
 
 /**
- *  Delete a request catalog by Id. It uses URL value for input.
- *
- * @remarks
- *
+ * Delete a request catalog by Id. It uses URL value for input.
  */
 export class RequestCatalogManagementServiceDeleteRequest extends SpeakeasyBase {}

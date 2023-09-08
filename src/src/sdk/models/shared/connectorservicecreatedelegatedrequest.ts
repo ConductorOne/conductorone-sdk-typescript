@@ -7,17 +7,11 @@ import { ConnectorExpandMask } from "./connectorexpandmask";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The ConnectorServiceCreateDelegatedRequest message contains the fields required to create a connector.
- *
- * @remarks
- *
+ * The ConnectorServiceCreateDelegatedRequest message contains the fields required to create a connector.
  */
 export class ConnectorServiceCreateDelegatedRequest extends SpeakeasyBase {
     /**
-     *  The ConnectorExpandMask is used to expand related objects on a connector.
-     *
-     * @remarks
-     *
+     * The ConnectorExpandMask is used to expand related objects on a connector.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expandMask" })
@@ -25,40 +19,28 @@ export class ConnectorServiceCreateDelegatedRequest extends SpeakeasyBase {
     connectorExpandMask?: ConnectorExpandMask;
 
     /**
-     *  The catalogId describes which catalog entry this connector is an instance of. For example, every Okta connector will have the same catalogId indicating it is an Okta connector.
-     *
-     * @remarks
-     *
+     * The catalogId describes which catalog entry this connector is an instance of. For example, every Okta connector will have the same catalogId indicating it is an Okta connector.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "catalogId" })
     catalogId?: string;
 
     /**
-     *  The description of the connector.
-     *
-     * @remarks
-     *
+     * The description of the connector.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     *  The displayName of the connector.
-     *
-     * @remarks
-     *
+     * The displayName of the connector.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     *  The userIds field is used to define the integration owners of the connector.
-     *
-     * @remarks
-     *
+     * The userIds field is used to define the integration owners of the connector.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "userIds" })

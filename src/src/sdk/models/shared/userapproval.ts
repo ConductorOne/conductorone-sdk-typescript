@@ -6,29 +6,25 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- *  The user approval object describes the approval configuration of a policy step that needs to be approved by a specific list of users.
- *
- * @remarks
- *
+ * The user approval object describes the approval configuration of a policy step that needs to be approved by a specific list of users.
  */
 export class UserApproval extends SpeakeasyBase {
     /**
-     *  Configuration to allow self approval of if the user is specified and also the target of the ticket.
-     *
-     * @remarks
-     *
+     * Configuration to allow self approval of if the user is specified and also the target of the ticket.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "allowSelfApproval" })
     allowSelfApproval?: boolean;
 
     /**
-     *  Array of users configured for approval.
-     *
-     * @remarks
-     *
+     * Array of users configured for approval.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "userIds" })
     userIds?: string[];
 }
+
+/**
+ * The user approval object describes the approval configuration of a policy step that needs to be approved by a specific list of users.
+ */
+export class UserApprovalInput extends SpeakeasyBase {}

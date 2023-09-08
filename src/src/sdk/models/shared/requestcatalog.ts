@@ -7,17 +7,11 @@ import { AppEntitlement, AppEntitlementInput } from "./appentitlement";
 import { Expose, Transform, Type } from "class-transformer";
 
 /**
- *  The RequestCatalog is used for managing which entitlements are requestable, and who can request them.
- *
- * @remarks
- *
+ * The RequestCatalog is used for managing which entitlements are requestable, and who can request them.
  */
 export class RequestCatalog extends SpeakeasyBase {
     /**
-     *  An array of app entitlements that, if the user has, can view the contents of this catalog.
-     *
-     * @remarks
-     *
+     * An array of app entitlements that, if the user has, can view the contents of this catalog.
      */
     @SpeakeasyMetadata({ elemType: AppEntitlement })
     @Expose({ name: "accessEntitlements" })
@@ -25,10 +19,7 @@ export class RequestCatalog extends SpeakeasyBase {
     accessEntitlements?: AppEntitlement[];
 
     /**
-     *  The Apps contained in this request catalog.
-     *
-     * @remarks
-     *
+     * The Apps contained in this request catalog.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appIds" })
@@ -40,10 +31,7 @@ export class RequestCatalog extends SpeakeasyBase {
     createdAt?: Date;
 
     /**
-     *  The id of the user this request catalog was created by.
-     *
-     * @remarks
-     *
+     * The id of the user this request catalog was created by.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "createdByUserId" })
@@ -55,40 +43,28 @@ export class RequestCatalog extends SpeakeasyBase {
     deletedAt?: Date;
 
     /**
-     *  The description of the request catalog.
-     *
-     * @remarks
-     *
+     * The description of the request catalog.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     *  The display name of the request catalog.
-     *
-     * @remarks
-     *
+     * The display name of the request catalog.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     *  The id of the request catalog.
-     *
-     * @remarks
-     *
+     * The id of the request catalog.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
     id?: string;
 
     /**
-     *  Whether or not this catalog is published.
-     *
-     * @remarks
-     *
+     * Whether or not this catalog is published.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "published" })
@@ -100,10 +76,7 @@ export class RequestCatalog extends SpeakeasyBase {
     updatedAt?: Date;
 
     /**
-     *  If this is true, the access entitlement requirement is ignored.
-     *
-     * @remarks
-     *
+     * If this is true, the access entitlement requirement is ignored.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "visibleToEveryone" })
@@ -111,17 +84,11 @@ export class RequestCatalog extends SpeakeasyBase {
 }
 
 /**
- *  The RequestCatalog is used for managing which entitlements are requestable, and who can request them.
- *
- * @remarks
- *
+ * The RequestCatalog is used for managing which entitlements are requestable, and who can request them.
  */
 export class RequestCatalogInput extends SpeakeasyBase {
     /**
-     *  An array of app entitlements that, if the user has, can view the contents of this catalog.
-     *
-     * @remarks
-     *
+     * An array of app entitlements that, if the user has, can view the contents of this catalog.
      */
     @SpeakeasyMetadata({ elemType: AppEntitlementInput })
     @Expose({ name: "accessEntitlements" })
@@ -129,70 +96,49 @@ export class RequestCatalogInput extends SpeakeasyBase {
     accessEntitlements?: AppEntitlementInput[];
 
     /**
-     *  The Apps contained in this request catalog.
-     *
-     * @remarks
-     *
+     * The Apps contained in this request catalog.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appIds" })
     appIds?: string[];
 
     /**
-     *  The id of the user this request catalog was created by.
-     *
-     * @remarks
-     *
+     * The id of the user this request catalog was created by.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "createdByUserId" })
     createdByUserId?: string;
 
     /**
-     *  The description of the request catalog.
-     *
-     * @remarks
-     *
+     * The description of the request catalog.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     *  The display name of the request catalog.
-     *
-     * @remarks
-     *
+     * The display name of the request catalog.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     *  The id of the request catalog.
-     *
-     * @remarks
-     *
+     * The id of the request catalog.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
     id?: string;
 
     /**
-     *  Whether or not this catalog is published.
-     *
-     * @remarks
-     *
+     * Whether or not this catalog is published.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "published" })
     published?: boolean;
 
     /**
-     *  If this is true, the access entitlement requirement is ignored.
-     *
-     * @remarks
-     *
+     * If this is true, the access entitlement requirement is ignored.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "visibleToEveryone" })

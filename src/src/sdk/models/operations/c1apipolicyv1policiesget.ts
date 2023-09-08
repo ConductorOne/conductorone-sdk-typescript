@@ -16,10 +16,7 @@ export class C1ApiPolicyV1PoliciesGetResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
-     *  The GetPolicyResponse message contains the policy object.
-     *
-     * @remarks
-     *
+     * The GetPolicyResponse message contains the policy object.
      */
     @SpeakeasyMetadata()
     getPolicyResponse?: shared.GetPolicyResponse;

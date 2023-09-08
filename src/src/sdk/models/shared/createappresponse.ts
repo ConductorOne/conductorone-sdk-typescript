@@ -7,17 +7,11 @@ import { App } from "./app";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  Returns the new app's values.
- *
- * @remarks
- *
+ * Returns the new app's values.
  */
 export class CreateAppResponse extends SpeakeasyBase {
     /**
-     *  The App object provides all of the details for an app, as well as some configuration.
-     *
-     * @remarks
-     *
+     * The App object provides all of the details for an app, as well as some configuration.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "app" })

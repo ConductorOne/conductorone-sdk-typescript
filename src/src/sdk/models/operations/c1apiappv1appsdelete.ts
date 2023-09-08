@@ -19,10 +19,7 @@ export class C1ApiAppV1AppsDeleteResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
-     *  Empty response body. Status code indicates success.
-     *
-     * @remarks
-     *
+     * Empty response body. Status code indicates success.
      */
     @SpeakeasyMetadata()
     deleteAppResponse?: shared.DeleteAppResponse;

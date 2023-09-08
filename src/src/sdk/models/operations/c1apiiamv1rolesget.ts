@@ -16,10 +16,7 @@ export class C1ApiIamV1RolesGetResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
-     *  The GetRolesResponse message contains the retrieved role.
-     *
-     * @remarks
-     *
+     * The GetRolesResponse message contains the retrieved role.
      */
     @SpeakeasyMetadata()
     getRolesResponse?: shared.GetRolesResponse;

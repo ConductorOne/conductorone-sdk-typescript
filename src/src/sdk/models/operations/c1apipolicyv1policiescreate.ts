@@ -11,10 +11,7 @@ export class C1ApiPolicyV1PoliciesCreateResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
-     *  The CreatePolicyResponse message contains the created policy object.
-     *
-     * @remarks
-     *
+     * The CreatePolicyResponse message contains the created policy object.
      */
     @SpeakeasyMetadata()
     createPolicyResponse?: shared.CreatePolicyResponse;

@@ -25,10 +25,7 @@ export class C1ApiAppV1AppUsageControlsServiceUpdateResponse extends SpeakeasyBa
     rawResponse?: AxiosResponse;
 
     /**
-     *  The UpdateAppUsageControlsResponse message contains the updated AppUsageControls object.
-     *
-     * @remarks
-     *
+     * The UpdateAppUsageControlsResponse message contains the updated AppUsageControls object.
      */
     @SpeakeasyMetadata()
     updateAppUsageControlsResponse?: shared.UpdateAppUsageControlsResponse;

@@ -8,17 +8,11 @@ import { ConnectorExpandMask } from "./connectorexpandmask";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The ConnectorServiceUpdateRequest message contains the fields required to update a connector.
- *
- * @remarks
- *
+ * The ConnectorServiceUpdateRequest message contains the fields required to update a connector.
  */
 export class ConnectorServiceUpdateRequestInput extends SpeakeasyBase {
     /**
-     *  A Connector is used to sync objects into Apps
-     *
-     * @remarks
-     *
+     * A Connector is used to sync objects into Apps
      */
     @SpeakeasyMetadata()
     @Expose({ name: "connector" })
@@ -26,10 +20,7 @@ export class ConnectorServiceUpdateRequestInput extends SpeakeasyBase {
     connector?: ConnectorInput;
 
     /**
-     *  The ConnectorExpandMask is used to expand related objects on a connector.
-     *
-     * @remarks
-     *
+     * The ConnectorExpandMask is used to expand related objects on a connector.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expandMask" })

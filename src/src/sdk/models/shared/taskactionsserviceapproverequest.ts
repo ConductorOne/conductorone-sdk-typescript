@@ -7,17 +7,11 @@ import { TaskExpandMask } from "./taskexpandmask";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The TaskActionsServiceApproveRequest object lets you approve a task.
- *
- * @remarks
- *
+ * The TaskActionsServiceApproveRequest object lets you approve a task.
  */
 export class TaskActionsServiceApproveRequest extends SpeakeasyBase {
     /**
-     *  The task expand mask is an array of strings that specifes the related objects the requester wishes to have returned when making a request where the expand mask is part of the input. Use '*' to view all possible responses.
-     *
-     * @remarks
-     *
+     * The task expand mask is an array of strings that specifes the related objects the requester wishes to have returned when making a request where the expand mask is part of the input. Use '*' to view all possible responses.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expandMask" })
@@ -25,20 +19,14 @@ export class TaskActionsServiceApproveRequest extends SpeakeasyBase {
     taskExpandMask?: TaskExpandMask;
 
     /**
-     *  The comment attached to the request.
-     *
-     * @remarks
-     *
+     * The comment attached to the request.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "comment" })
     comment?: string;
 
     /**
-     *  The ID of the policy step on the given task to approve.
-     *
-     * @remarks
-     *
+     * The ID of the policy step on the given task to approve.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "policyStepId" })

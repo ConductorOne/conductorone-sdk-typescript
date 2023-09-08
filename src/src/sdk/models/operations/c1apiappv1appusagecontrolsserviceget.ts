@@ -16,10 +16,7 @@ export class C1ApiAppV1AppUsageControlsServiceGetResponse extends SpeakeasyBase 
     contentType: string;
 
     /**
-     *  The GetAppUsageControlsResponse message contains the retrieved AppUsageControls object.
-     *
-     * @remarks
-     *
+     * The GetAppUsageControlsResponse message contains the retrieved AppUsageControls object.
      */
     @SpeakeasyMetadata()
     getAppUsageControlsResponse?: shared.GetAppUsageControlsResponse;

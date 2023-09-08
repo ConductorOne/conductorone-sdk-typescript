@@ -19,10 +19,7 @@ export class C1ApiDirectoryV1DirectoryServiceListResponse extends SpeakeasyBase 
     contentType: string;
 
     /**
-     *  The DirectoryServiceListResponse message contains a list of results and a nextPageToken if applicable.
-     *
-     * @remarks
-     *
+     * The DirectoryServiceListResponse message contains a list of results and a nextPageToken if applicable.
      */
     @SpeakeasyMetadata()
     directoryServiceListResponse?: shared.DirectoryServiceListResponse;

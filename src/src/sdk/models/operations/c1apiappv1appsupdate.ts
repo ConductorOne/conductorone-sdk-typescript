@@ -25,10 +25,7 @@ export class C1ApiAppV1AppsUpdateResponse extends SpeakeasyBase {
     rawResponse?: AxiosResponse;
 
     /**
-     *  Returns the updated app's new values.
-     *
-     * @remarks
-     *
+     * Returns the updated app's new values.
      */
     @SpeakeasyMetadata()
     updateAppResponse?: shared.UpdateAppResponse;

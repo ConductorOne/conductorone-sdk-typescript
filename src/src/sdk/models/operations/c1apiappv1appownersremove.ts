@@ -22,10 +22,7 @@ export class C1ApiAppV1AppOwnersRemoveResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
-     *  Empty response with a status code indicating success.
-     *
-     * @remarks
-     *
+     * Empty response with a status code indicating success.
      */
     @SpeakeasyMetadata()
     removeAppOwnerResponse?: shared.RemoveAppOwnerResponse;

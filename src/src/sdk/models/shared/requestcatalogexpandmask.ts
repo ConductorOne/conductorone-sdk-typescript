@@ -6,17 +6,11 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- *  The RequestCatalogExpandMask includes the paths in the catalog view to expand in the return value of this call.
- *
- * @remarks
- *
+ * The RequestCatalogExpandMask includes the paths in the catalog view to expand in the return value of this call.
  */
 export class RequestCatalogExpandMask extends SpeakeasyBase {
     /**
-     *  An array of paths to be expanded in the response. May be any combination of "*", "created_by_user_id", "app_ids", and "access_entitlements".
-     *
-     * @remarks
-     *
+     * An array of paths to be expanded in the response. May be any combination of "*", "created_by_user_id", "app_ids", and "access_entitlements".
      */
     @SpeakeasyMetadata()
     @Expose({ name: "paths" })

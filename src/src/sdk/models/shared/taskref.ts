@@ -6,17 +6,11 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- *  This object references a task by ID.
- *
- * @remarks
- *
+ * This object references a task by ID.
  */
 export class TaskRef extends SpeakeasyBase {
     /**
-     *  The ID of the TaskRef
-     *
-     * @remarks
-     *
+     * The ID of the referenced Task
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })

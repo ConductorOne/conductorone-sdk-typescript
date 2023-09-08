@@ -8,10 +8,7 @@ import { PolicySteps, PolicyStepsInput } from "./policysteps";
 import { Expose, Transform, Type } from "class-transformer";
 
 /**
- *  Indicates the type of this policy. Can also be used to get the value from policySteps.
- *
- * @remarks
- *
+ * Indicates the type of this policy. Can also be used to get the value from policySteps.
  */
 export enum PolicyPolicyType {
     PolicyTypeUnspecified = "POLICY_TYPE_UNSPECIFIED",
@@ -23,10 +20,7 @@ export enum PolicyPolicyType {
 }
 
 /**
- *  A policy describes the behavior of the ConductorOne system when processing a task. You can describe the type, approvers, fallback behavior, and escalation processes.
- *
- * @remarks
- *
+ * A policy describes the behavior of the ConductorOne system when processing a task. You can describe the type, approvers, fallback behavior, and escalation processes.
  */
 export class Policy extends SpeakeasyBase {
     @SpeakeasyMetadata()
@@ -40,40 +34,28 @@ export class Policy extends SpeakeasyBase {
     deletedAt?: Date;
 
     /**
-     *  The description of the Policy.
-     *
-     * @remarks
-     *
+     * The description of the Policy.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     *  The display name of the Policy.
-     *
-     * @remarks
-     *
+     * The display name of the Policy.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     *  The ID of the Policy.
-     *
-     * @remarks
-     *
+     * The ID of the Policy.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
     id?: string;
 
     /**
-     *  A map of string(policy type) to steps in a policy. This structure is leftover from a previous design, and should only ever have one key->value set.
-     *
-     * @remarks
-     *
+     * A map of string(policy type) to steps in a policy. This structure is leftover from a previous design, and should only ever have one key->value set.
      */
     @SpeakeasyMetadata({ elemType: PolicySteps })
     @Expose({ name: "policySteps" })
@@ -90,20 +72,14 @@ export class Policy extends SpeakeasyBase {
     policySteps?: Record<string, PolicySteps>;
 
     /**
-     *  Indicates the type of this policy. Can also be used to get the value from policySteps.
-     *
-     * @remarks
-     *
+     * Indicates the type of this policy. Can also be used to get the value from policySteps.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "policyType" })
     policyType?: PolicyPolicyType;
 
     /**
-     *  An array of actions (ordered) to take place after a policy completes processing.
-     *
-     * @remarks
-     *
+     * An array of actions (ordered) to take place after a policy completes processing.
      */
     @SpeakeasyMetadata({ elemType: PolicyPostActions })
     @Expose({ name: "postActions" })
@@ -111,20 +87,14 @@ export class Policy extends SpeakeasyBase {
     postActions?: PolicyPostActions[];
 
     /**
-     *  A policy configuration option that allows for reassinging tasks to delgated users. This level of delegation referrs to the individual delegates users set on their account.
-     *
-     * @remarks
-     *
+     * A policy configuration option that allows for reassinging tasks to delgated users. This level of delegation referrs to the individual delegates users set on their account.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "reassignTasksToDelegates" })
     reassignTasksToDelegates?: boolean;
 
     /**
-     *  Whether this policy is a builtin system policy. Builtin system policies cannot be edited.
-     *
-     * @remarks
-     *
+     * Whether this policy is a builtin system policy. Builtin system policies cannot be edited.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "systemBuiltin" })
@@ -137,37 +107,25 @@ export class Policy extends SpeakeasyBase {
 }
 
 /**
- *  A policy describes the behavior of the ConductorOne system when processing a task. You can describe the type, approvers, fallback behavior, and escalation processes.
- *
- * @remarks
- *
+ * A policy describes the behavior of the ConductorOne system when processing a task. You can describe the type, approvers, fallback behavior, and escalation processes.
  */
 export class PolicyInput extends SpeakeasyBase {
     /**
-     *  The description of the Policy.
-     *
-     * @remarks
-     *
+     * The description of the Policy.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "description" })
     description?: string;
 
     /**
-     *  The display name of the Policy.
-     *
-     * @remarks
-     *
+     * The display name of the Policy.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     *  A map of string(policy type) to steps in a policy. This structure is leftover from a previous design, and should only ever have one key->value set.
-     *
-     * @remarks
-     *
+     * A map of string(policy type) to steps in a policy. This structure is leftover from a previous design, and should only ever have one key->value set.
      */
     @SpeakeasyMetadata({ elemType: PolicyStepsInput })
     @Expose({ name: "policySteps" })
@@ -184,20 +142,14 @@ export class PolicyInput extends SpeakeasyBase {
     policySteps?: Record<string, PolicyStepsInput>;
 
     /**
-     *  Indicates the type of this policy. Can also be used to get the value from policySteps.
-     *
-     * @remarks
-     *
+     * Indicates the type of this policy. Can also be used to get the value from policySteps.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "policyType" })
     policyType?: PolicyPolicyType;
 
     /**
-     *  An array of actions (ordered) to take place after a policy completes processing.
-     *
-     * @remarks
-     *
+     * An array of actions (ordered) to take place after a policy completes processing.
      */
     @SpeakeasyMetadata({ elemType: PolicyPostActions })
     @Expose({ name: "postActions" })
@@ -205,10 +157,7 @@ export class PolicyInput extends SpeakeasyBase {
     postActions?: PolicyPostActions[];
 
     /**
-     *  A policy configuration option that allows for reassinging tasks to delgated users. This level of delegation referrs to the individual delegates users set on their account.
-     *
-     * @remarks
-     *
+     * A policy configuration option that allows for reassinging tasks to delgated users. This level of delegation referrs to the individual delegates users set on their account.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "reassignTasksToDelegates" })

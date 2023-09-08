@@ -7,17 +7,11 @@ import { Policy } from "./policy";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The GetPolicyResponse message contains the policy object.
- *
- * @remarks
- *
+ * The GetPolicyResponse message contains the policy object.
  */
 export class GetPolicyResponse extends SpeakeasyBase {
     /**
-     *  A policy describes the behavior of the ConductorOne system when processing a task. You can describe the type, approvers, fallback behavior, and escalation processes.
-     *
-     * @remarks
-     *
+     * A policy describes the behavior of the ConductorOne system when processing a task. You can describe the type, approvers, fallback behavior, and escalation processes.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "policy" })

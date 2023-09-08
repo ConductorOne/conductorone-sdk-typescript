@@ -9,10 +9,9 @@ import { ManualProvision } from "./manualprovision";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  ProvisionPolicy is a oneOf that indicates how a provision step should be processed.
+ * ProvisionPolicy is a oneOf that indicates how a provision step should be processed.
  *
  * @remarks
- *
  *
  * This message contains a oneof named typ. Only a single field of the following list may be set at a time:
  *   - connector
@@ -22,10 +21,7 @@ import { Expose, Type } from "class-transformer";
  */
 export class ProvisionPolicy extends SpeakeasyBase {
     /**
-     *  Indicates that a connector should perform the provisioning. This object has no fields.
-     *
-     * @remarks
-     *
+     * Indicates that a connector should perform the provisioning. This object has no fields.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "connector" })
@@ -33,10 +29,7 @@ export class ProvisionPolicy extends SpeakeasyBase {
     connectorProvision?: ConnectorProvision;
 
     /**
-     *  This provision step indicates that we should delegate provisioning to the configuration of another app entitlement. This app entitlement does not have to be one from the same app, but MUST be configured as a proxy binding leading into this entitlement.
-     *
-     * @remarks
-     *
+     * This provision step indicates that we should delegate provisioning to the configuration of another app entitlement. This app entitlement does not have to be one from the same app, but MUST be configured as a proxy binding leading into this entitlement.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "delegated" })
@@ -44,10 +37,7 @@ export class ProvisionPolicy extends SpeakeasyBase {
     delegatedProvision?: DelegatedProvision;
 
     /**
-     *  Manual provisioning indicates that a human must intervene for the provisioning of this step.
-     *
-     * @remarks
-     *
+     * Manual provisioning indicates that a human must intervene for the provisioning of this step.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "manual" })

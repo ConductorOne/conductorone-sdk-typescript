@@ -3,18 +3,15 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import { TaskTypeCertify } from "./tasktypecertify";
-import { TaskTypeCertify1 } from "./tasktypecertify1";
-import { TaskTypeGrant } from "./tasktypegrant";
-import { TaskTypeGrant1 } from "./tasktypegrant1";
+import { TaskTypeCertify, TaskTypeCertifyInput } from "./tasktypecertify";
+import { TaskTypeGrant, TaskTypeGrantInput } from "./tasktypegrant";
 import { TaskTypeRevoke, TaskTypeRevokeInput } from "./tasktyperevoke";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  Task Type provides configuration for the type of task: certify, grant, or revoke
+ * Task Type provides configuration for the type of task: certify, grant, or revoke
  *
  * @remarks
- *
  *
  * This message contains a oneof named task_type. Only a single field of the following list may be set at a time:
  *   - grant
@@ -24,32 +21,23 @@ import { Expose, Type } from "class-transformer";
  */
 export class TaskTypeInput extends SpeakeasyBase {
     /**
-     *  The TaskTypeCertify message indicates that a task is a certify task and all related details.
-     *
-     * @remarks
-     *
+     * The TaskTypeCertify message indicates that a task is a certify task and all related details.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "certify" })
-    @Type(() => TaskTypeCertify)
-    taskTypeCertify?: TaskTypeCertify;
+    @Type(() => TaskTypeCertifyInput)
+    taskTypeCertify?: TaskTypeCertifyInput;
 
     /**
-     *  The TaskTypeGrant message indicates that a task is a grant task and all related details.
-     *
-     * @remarks
-     *
+     * The TaskTypeGrant message indicates that a task is a grant task and all related details.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "grant" })
-    @Type(() => TaskTypeGrant)
-    taskTypeGrant?: TaskTypeGrant;
+    @Type(() => TaskTypeGrantInput)
+    taskTypeGrant?: TaskTypeGrantInput;
 
     /**
-     *  The TaskTypeRevoke message indicates that a task is a revoke task and all related details.
-     *
-     * @remarks
-     *
+     * The TaskTypeRevoke message indicates that a task is a revoke task and all related details.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "revoke" })
@@ -58,10 +46,9 @@ export class TaskTypeInput extends SpeakeasyBase {
 }
 
 /**
- *  Task Type provides configuration for the type of task: certify, grant, or revoke
+ * Task Type provides configuration for the type of task: certify, grant, or revoke
  *
  * @remarks
- *
  *
  * This message contains a oneof named task_type. Only a single field of the following list may be set at a time:
  *   - grant
@@ -71,32 +58,23 @@ export class TaskTypeInput extends SpeakeasyBase {
  */
 export class TaskType extends SpeakeasyBase {
     /**
-     *  The TaskTypeCertify message indicates that a task is a certify task and all related details.
-     *
-     * @remarks
-     *
+     * The TaskTypeCertify message indicates that a task is a certify task and all related details.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "certify" })
-    @Type(() => TaskTypeCertify1)
-    taskTypeCertify?: TaskTypeCertify1;
+    @Type(() => TaskTypeCertify)
+    taskTypeCertify?: TaskTypeCertify;
 
     /**
-     *  The TaskTypeGrant message indicates that a task is a grant task and all related details.
-     *
-     * @remarks
-     *
+     * The TaskTypeGrant message indicates that a task is a grant task and all related details.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "grant" })
-    @Type(() => TaskTypeGrant1)
-    taskTypeGrant?: TaskTypeGrant1;
+    @Type(() => TaskTypeGrant)
+    taskTypeGrant?: TaskTypeGrant;
 
     /**
-     *  The TaskTypeRevoke message indicates that a task is a revoke task and all related details.
-     *
-     * @remarks
-     *
+     * The TaskTypeRevoke message indicates that a task is a revoke task and all related details.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "revoke" })

@@ -7,17 +7,13 @@ import { TaskRevokeSource } from "./taskrevokesource";
 import { Expose, Transform, Type } from "class-transformer";
 
 /**
- *  The TaskTypeRevoke message indicates that a task is a revoke task and all related details.
- *
- * @remarks
- *
+ * The TaskTypeRevoke message indicates that a task is a revoke task and all related details.
  */
 export class TaskTypeRevokeInput extends SpeakeasyBase {
     /**
-     *  The TaskRevokeSource message indicates the source of the revoke task is one of expired, nonUsage, request, or review.
+     * The TaskRevokeSource message indicates the source of the revoke task is one of expired, nonUsage, request, or review.
      *
      * @remarks
-     *
      *
      * This message contains a oneof named origin. Only a single field of the following list may be set at a time:
      *   - review
@@ -33,10 +29,7 @@ export class TaskTypeRevokeInput extends SpeakeasyBase {
 }
 
 /**
- *  The outcome of the revoke.
- *
- * @remarks
- *
+ * The outcome of the revoke.
  */
 export enum TaskTypeRevokeOutcome {
     RevokeOutcomeUnspecified = "REVOKE_OUTCOME_UNSPECIFIED",
@@ -47,17 +40,13 @@ export enum TaskTypeRevokeOutcome {
 }
 
 /**
- *  The TaskTypeRevoke message indicates that a task is a revoke task and all related details.
- *
- * @remarks
- *
+ * The TaskTypeRevoke message indicates that a task is a revoke task and all related details.
  */
 export class TaskTypeRevoke extends SpeakeasyBase {
     /**
-     *  The TaskRevokeSource message indicates the source of the revoke task is one of expired, nonUsage, request, or review.
+     * The TaskRevokeSource message indicates the source of the revoke task is one of expired, nonUsage, request, or review.
      *
      * @remarks
-     *
      *
      * This message contains a oneof named origin. Only a single field of the following list may be set at a time:
      *   - review
@@ -72,50 +61,35 @@ export class TaskTypeRevoke extends SpeakeasyBase {
     taskRevokeSource?: TaskRevokeSource;
 
     /**
-     *  The ID of the app entitlement.
-     *
-     * @remarks
-     *
+     * The ID of the app entitlement.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appEntitlementId" })
     appEntitlementId?: string;
 
     /**
-     *  The ID of the app.
-     *
-     * @remarks
-     *
+     * The ID of the app.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })
     appId?: string;
 
     /**
-     *  The ID of the app user.
-     *
-     * @remarks
-     *
+     * The ID of the app user.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appUserId" })
     appUserId?: string;
 
     /**
-     *  The ID of the user.
-     *
-     * @remarks
-     *
+     * The ID of the user.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "identityUserId" })
     identityUserId?: string;
 
     /**
-     *  The outcome of the revoke.
-     *
-     * @remarks
-     *
+     * The outcome of the revoke.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "outcome" })

@@ -19,10 +19,7 @@ export class C1ApiAppV1AppReportServiceListRequest extends SpeakeasyBase {
 
 export class C1ApiAppV1AppReportServiceListResponse extends SpeakeasyBase {
     /**
-     *  The AppReportServiceListResponse message contains a list of results and a nextPageToken if applicable.
-     *
-     * @remarks
-     *
+     * The AppReportServiceListResponse message contains a list of results and a nextPageToken if applicable.
      */
     @SpeakeasyMetadata()
     appReportServiceListResponse?: shared.AppReportServiceListResponse;

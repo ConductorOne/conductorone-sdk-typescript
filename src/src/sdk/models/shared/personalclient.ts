@@ -6,27 +6,18 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- *  The PersonalClient message contains information about a presonal client credential.
- *
- * @remarks
- *
+ * The PersonalClient message contains information about a presonal client credential.
  */
 export class PersonalClient extends SpeakeasyBase {
     /**
-     *  If set, only allows the CIDRs in the array to use the credential.
-     *
-     * @remarks
-     *
+     * If set, only allows the CIDRs in the array to use the credential.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "allowSourceCidr" })
     allowSourceCidr?: string[];
 
     /**
-     *  The clientID of the credential.
-     *
-     * @remarks
-     *
+     * The clientID of the credential.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "clientId" })
@@ -43,10 +34,7 @@ export class PersonalClient extends SpeakeasyBase {
     deletedAt?: Date;
 
     /**
-     *  The display name of the personal client credential.
-     *
-     * @remarks
-     *
+     * The display name of the personal client credential.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
@@ -58,10 +46,7 @@ export class PersonalClient extends SpeakeasyBase {
     expiresTime?: Date;
 
     /**
-     *  The unique ID of the personal client credential.
-     *
-     * @remarks
-     *
+     * The unique ID of the personal client credential.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
@@ -73,13 +58,12 @@ export class PersonalClient extends SpeakeasyBase {
     lastUsedAt?: Date;
 
     /**
-     *  scoped_roles provides a list of IAM Roles
+     * scoped_roles provides a list of IAM Roles
      *
      * @remarks
      *  that this OAuth2 Client's API permissions
      *  are reduced to. The permissions granted to OAuth2 Client
      *  are AND'ed against the owning User's own permissions.
-     *
      */
     @SpeakeasyMetadata()
     @Expose({ name: "scopedRoles" })
@@ -91,10 +75,7 @@ export class PersonalClient extends SpeakeasyBase {
     updatedAt?: Date;
 
     /**
-     *  The ID of the user that this credential is created for.
-     *
-     * @remarks
-     *
+     * The ID of the user that this credential is created for.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "userId" })

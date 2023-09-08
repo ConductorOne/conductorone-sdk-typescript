@@ -6,37 +6,25 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- *  The AppEntitlementUserBinding represents the relationship that gives an app user access to an app entitlement
- *
- * @remarks
- *
+ * The AppEntitlementUserBinding represents the relationship that gives an app user access to an app entitlement
  */
 export class AppEntitlementUserBinding extends SpeakeasyBase {
     /**
-     *  The ID of the app entitlement that the app user has access to
-     *
-     * @remarks
-     *
+     * The ID of the app entitlement that the app user has access to
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appEntitlementId" })
     appEntitlementId?: string;
 
     /**
-     *  The ID of the app associated with the app entitlement
-     *
-     * @remarks
-     *
+     * The ID of the app associated with the app entitlement
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })
     appId?: string;
 
     /**
-     *  The ID of the app user that has access to the app entitlement
-     *
-     * @remarks
-     *
+     * The ID of the app user that has access to the app entitlement
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appUserId" })

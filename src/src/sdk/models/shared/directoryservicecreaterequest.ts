@@ -7,17 +7,11 @@ import { DirectoryExpandMask } from "./directoryexpandmask";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  Uplevel an app into a full directory.
- *
- * @remarks
- *
+ * Uplevel an app into a full directory.
  */
 export class DirectoryServiceCreateRequest extends SpeakeasyBase {
     /**
-     *  The fields to be included in the directory response.
-     *
-     * @remarks
-     *
+     * The fields to be included in the directory response.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expandMask" })
@@ -25,10 +19,7 @@ export class DirectoryServiceCreateRequest extends SpeakeasyBase {
     directoryExpandMask?: DirectoryExpandMask;
 
     /**
-     *  The AppID to make into a directory, providing identities and more for the C1 app.
-     *
-     * @remarks
-     *
+     * The AppID to make into a directory, providing identities and more for the C1 app.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appId" })

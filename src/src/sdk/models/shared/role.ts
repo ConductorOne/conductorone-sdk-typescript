@@ -6,37 +6,25 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- *  Role is a role that can be assigned to a user in ConductorOne.
- *
- * @remarks
- *
+ * Role is a role that can be assigned to a user in ConductorOne.
  */
 export class RoleInput extends SpeakeasyBase {
     /**
-     *  The display name of the role.
-     *
-     * @remarks
-     *
+     * The display name of the role.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     *  The list of permissions this role has.
-     *
-     * @remarks
-     *
+     * The list of permissions this role has.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "permissions" })
     permissions?: string[];
 
     /**
-     *  The list of serviceRoles that this role has.
-     *
-     * @remarks
-     *
+     * The list of serviceRoles that this role has.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "serviceRoles" })
@@ -44,10 +32,7 @@ export class RoleInput extends SpeakeasyBase {
 }
 
 /**
- *  Role is a role that can be assigned to a user in ConductorOne.
- *
- * @remarks
- *
+ * Role is a role that can be assigned to a user in ConductorOne.
  */
 export class Role extends SpeakeasyBase {
     @SpeakeasyMetadata()
@@ -61,60 +46,42 @@ export class Role extends SpeakeasyBase {
     deletedAt?: Date;
 
     /**
-     *  The display name of the role.
-     *
-     * @remarks
-     *
+     * The display name of the role.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "displayName" })
     displayName?: string;
 
     /**
-     *  The id of the role.
-     *
-     * @remarks
-     *
+     * The id of the role.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
     id?: string;
 
     /**
-     *  The internal name of the role.
-     *
-     * @remarks
-     *
+     * The internal name of the role.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "name" })
     name?: string;
 
     /**
-     *  The list of permissions this role has.
-     *
-     * @remarks
-     *
+     * The list of permissions this role has.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "permissions" })
     permissions?: string[];
 
     /**
-     *  The list of serviceRoles that this role has.
-     *
-     * @remarks
-     *
+     * The list of serviceRoles that this role has.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "serviceRoles" })
     serviceRoles?: string[];
 
     /**
-     *  The system builtin field. If this field is set, the role is not editable.
-     *
-     * @remarks
-     *
+     * The system builtin field. If this field is set, the role is not editable.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "systemBuiltin" })

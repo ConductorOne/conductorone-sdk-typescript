@@ -22,10 +22,7 @@ export class C1ApiAppV1ConnectorServiceRevokeCredentialRequest extends Speakeasy
 
 export class C1ApiAppV1ConnectorServiceRevokeCredentialResponse extends SpeakeasyBase {
     /**
-     *  Empty response body. Status code indicates success.
-     *
-     * @remarks
-     *
+     * Empty response body. Status code indicates success.
      */
     @SpeakeasyMetadata()
     connectorServiceRevokeCredentialResponse?: shared.ConnectorServiceRevokeCredentialResponse;

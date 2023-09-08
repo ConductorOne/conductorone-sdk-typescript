@@ -11,10 +11,7 @@ export class C1ApiAuthV1AuthIntrospectResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
-     *  IntrospectResponse contains information about the current user who is authenticated.
-     *
-     * @remarks
-     *
+     * IntrospectResponse contains information about the current user who is authenticated.
      */
     @SpeakeasyMetadata()
     introspectResponse?: shared.IntrospectResponse;

@@ -25,10 +25,7 @@ export class C1ApiTaskV1TaskActionsServiceApproveResponse extends SpeakeasyBase 
     rawResponse?: AxiosResponse;
 
     /**
-     *  The TaskActionsServiceApproveResponse returns a task view with paths indicating the location of expanded items in the array.
-     *
-     * @remarks
-     *
+     * The TaskActionsServiceApproveResponse returns a task view with paths indicating the location of expanded items in the array.
      */
     @SpeakeasyMetadata()
     taskActionsServiceApproveResponse?: shared.TaskActionsServiceApproveResponse;

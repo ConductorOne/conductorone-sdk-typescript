@@ -6,10 +6,7 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
 /**
- *  The TaskRevokeSourceExpired message indicates that the source of the revoke task is due to a grant expiring.
- *
- * @remarks
- *
+ * The TaskRevokeSourceExpired message indicates that the source of the revoke task is due to a grant expiring.
  */
 export class TaskRevokeSourceExpired extends SpeakeasyBase {
     @SpeakeasyMetadata()

@@ -6,19 +6,18 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- *  App owner approval provides the configuration for an approval step when the app owner is the target.
- *
- * @remarks
- *
+ * App owner approval provides the configuration for an approval step when the app owner is the target.
  */
 export class AppOwnerApproval extends SpeakeasyBase {
     /**
-     *  Configuration that allows a user to self approve if they are an app owner during this approval step.
-     *
-     * @remarks
-     *
+     * Configuration that allows a user to self approve if they are an app owner during this approval step.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "allowSelfApproval" })
     allowSelfApproval?: boolean;
 }
+
+/**
+ * App owner approval provides the configuration for an approval step when the app owner is the target.
+ */
+export class AppOwnerApprovalInput extends SpeakeasyBase {}

@@ -7,10 +7,7 @@ import { AppEntitlementReference } from "./appentitlementreference";
 import { Expose, Transform, Type } from "class-transformer";
 
 /**
- *  The outcome of a provision instance that has been completed succesfully.
- *
- * @remarks
- *
+ * The outcome of a provision instance that has been completed succesfully.
  */
 export class CompletedAction extends SpeakeasyBase {
     @SpeakeasyMetadata()
@@ -19,10 +16,7 @@ export class CompletedAction extends SpeakeasyBase {
     completedAt?: Date;
 
     /**
-     *  The list of entitlements that were provisioned. This is leftover from an older design, and is only ever going to be a single entitlement.
-     *
-     * @remarks
-     *
+     * The list of entitlements that were provisioned. This is leftover from an older design, and is only ever going to be a single entitlement.
      */
     @SpeakeasyMetadata({ elemType: AppEntitlementReference })
     @Expose({ name: "entitlements" })
@@ -30,10 +24,7 @@ export class CompletedAction extends SpeakeasyBase {
     entitlements?: AppEntitlementReference[];
 
     /**
-     *  The UserID of who completed provisioning. For connector provisioning this is the system user id, for manual provisioning this is who clicked "provision complete"
-     *
-     * @remarks
-     *
+     * The UserID of who completed provisioning. For connector provisioning this is the system user id, for manual provisioning this is who clicked "provision complete"
      */
     @SpeakeasyMetadata()
     @Expose({ name: "userId" })

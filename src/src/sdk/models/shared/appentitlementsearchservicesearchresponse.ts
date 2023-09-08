@@ -12,10 +12,7 @@ import { Expose, Type } from "class-transformer";
  */
 export class AppEntitlementSearchServiceSearchResponse extends SpeakeasyBase {
     /**
-     *  Indicates one value of a facet.
-     *
-     * @remarks
-     *
+     * Indicates one value of a facet.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "facets" })
@@ -23,20 +20,14 @@ export class AppEntitlementSearchServiceSearchResponse extends SpeakeasyBase {
     facets?: Facets;
 
     /**
-     *  List of related objects.
-     *
-     * @remarks
-     *
+     * List of related objects.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expanded" })
     expanded?: Record<string, any>[];
 
     /**
-     *  List of app entitlement view objects.
-     *
-     * @remarks
-     *
+     * List of app entitlement view objects.
      */
     @SpeakeasyMetadata({ elemType: AppEntitlementView })
     @Expose({ name: "list" })
@@ -44,10 +35,7 @@ export class AppEntitlementSearchServiceSearchResponse extends SpeakeasyBase {
     list?: AppEntitlementView[];
 
     /**
-     *  The nextPageToken is shown for the next page if the number of results is larger than the max page size. The server returns one page of results and the nextPageToken until all results are retreived. To retrieve the next page, use the same request and append a pageToken field with the value of nextPageToken shown on the previous page.
-     *
-     * @remarks
-     *
+     * The nextPageToken is shown for the next page if the number of results is larger than the max page size. The server returns one page of results and the nextPageToken until all results are retreived. To retrieve the next page, use the same request and append a pageToken field with the value of nextPageToken shown on the previous page.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "nextPageToken" })

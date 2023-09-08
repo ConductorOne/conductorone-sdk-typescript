@@ -7,18 +7,14 @@ import { AppResourceTypeView } from "./appresourcetypeview";
 import { Expose, Type } from "class-transformer";
 
 /**
- *  The AppResourceTypeServiceGetResponse contains an expanded array containing the expanded values indicated by the expand mask
+ * The AppResourceTypeServiceGetResponse contains an expanded array containing the expanded values indicated by the expand mask
  *
  * @remarks
  *  in the request and an app resource type view containing the resource type and JSONPATHs indicating which objects are where in the expand mask.
- *
  */
 export class AppResourceTypeServiceGetResponse extends SpeakeasyBase {
     /**
-     *  The AppResourceTypeView message.
-     *
-     * @remarks
-     *
+     * The AppResourceTypeView message.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "appResourceTypeView" })
@@ -26,10 +22,7 @@ export class AppResourceTypeServiceGetResponse extends SpeakeasyBase {
     appResourceTypeView?: AppResourceTypeView;
 
     /**
-     *  List of serialized related objects.
-     *
-     * @remarks
-     *
+     * List of serialized related objects.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expanded" })

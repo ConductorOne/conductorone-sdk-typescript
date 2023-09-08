@@ -25,10 +25,7 @@ export class C1ApiAppV1AppEntitlementsListForAppUserResponse extends SpeakeasyBa
     contentType: string;
 
     /**
-     *  The ListAppEntitlementsResponse message contains a list of results and a nextPageToken if applicable.
-     *
-     * @remarks
-     *
+     * The ListAppEntitlementsResponse message contains a list of results and a nextPageToken if applicable.
      */
     @SpeakeasyMetadata()
     listAppEntitlementsResponse?: shared.ListAppEntitlementsResponse;

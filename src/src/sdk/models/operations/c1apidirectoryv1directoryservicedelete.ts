@@ -19,10 +19,7 @@ export class C1ApiDirectoryV1DirectoryServiceDeleteResponse extends SpeakeasyBas
     contentType: string;
 
     /**
-     *  Empty response with a status code indicating success.
-     *
-     * @remarks
-     *
+     * Empty response with a status code indicating success.
      */
     @SpeakeasyMetadata()
     directoryServiceDeleteResponse?: shared.DirectoryServiceDeleteResponse;
