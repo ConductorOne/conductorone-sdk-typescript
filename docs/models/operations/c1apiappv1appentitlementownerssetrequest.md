@@ -1,0 +1,10 @@
+# C1ApiAppV1AppEntitlementOwnersSetRequest
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `setAppEntitlementOwnersRequest`                                                               | [shared.SetAppEntitlementOwnersRequest](../../models/shared/setappentitlementownersrequest.md) | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `appId`                                                                                        | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `entitlementId`                                                                                | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
