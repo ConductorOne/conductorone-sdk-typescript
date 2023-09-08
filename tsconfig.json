@@ -5,7 +5,6 @@
     "baseUrl": "src",
     "rootDir": "src",
     "outDir": "dist",
-    "noImplicitAny": false,
     "allowJs": true,
     "downlevelIteration": true,
     "skipLibCheck": true,
@@ -24,5 +23,5 @@
     "declaration": true,
     "types": ["reflect-metadata"]
   },
-  "include": ["src"],
+  "include": ["src"]
 }
