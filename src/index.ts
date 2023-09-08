@@ -20,7 +20,7 @@ export interface SDKProps extends SDKProps_orig {
 export class ConductoroneSDKTypescript extends ConductoroneSDKTypescript_orig {
   constructor(props?: SDKProps) {
     const serverIdx = props?.serverIdx ?? 0;
-    let serverURL = props?.serverURL || ServerList[serverIdx];
+    const serverURL = props?.serverURL || ServerList[serverIdx];
 
     const defaultClient = props?.defaultClient ?? axios.create({baseURL: serverURL});
     const tokenClient = props?.defaultClient ?? axios.create({baseURL: serverURL});
