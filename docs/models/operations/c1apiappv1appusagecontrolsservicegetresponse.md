@@ -1,0 +1,11 @@
+# C1ApiAppV1AppUsageControlsServiceGetResponse
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `contentType`                                                                            | *string*                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `getAppUsageControlsResponse`                                                            | [shared.GetAppUsageControlsResponse](../../models/shared/getappusagecontrolsresponse.md) | :heavy_minus_sign:                                                                       | The GetAppUsageControlsResponse message contains the retrieved AppUsageControls object.  |
+| `statusCode`                                                                             | *number*                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `rawResponse`                                                                            | [AxiosResponse>](https://axios-http.com/docs/res_schema)                                 | :heavy_minus_sign:                                                                       | N/A                                                                                      |
