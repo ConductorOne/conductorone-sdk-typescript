@@ -22,61 +22,22 @@ yarn add https://github.com/ConductorOne/conductorone-sdk-typescript
 
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
-import { C1ApiAppV1AppEntitlementSearchServiceSearchResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
+import { C1ApiAppV1AppEntitlementOwnersAddResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new ConductoroneSDKTypescript({
   security: {
+    bearerAuth: "",
     oauth: "",
   },
 });
 
-sdk.appEntitlementSearch.search({
-  appEntitlementExpandMask: {
-    paths: [
-      "provident",
-      "distinctio",
-      "quibusdam",
-    ],
+sdk.appEntitlementOwners.add({
+  addAppEntitlementOwnerRequest: {
+    userId: "corrupti",
   },
-  accessReviewId: "unde",
-  alias: "nulla",
-  appIds: [
-    "illum",
-    "vel",
-    "error",
-  ],
-  appUserIds: [
-    "suscipit",
-    "iure",
-    "magnam",
-  ],
-  complianceFrameworkIds: [
-    "ipsa",
-    "delectus",
-    "tempora",
-    "suscipit",
-  ],
-  excludeAppIds: [
-    "minus",
-    "placeat",
-  ],
-  excludeAppUserIds: [
-    "iusto",
-    "excepturi",
-    "nisi",
-  ],
-  onlyGetExpiring: false,
-  pageSize: 9255.97,
-  pageToken: "temporibus",
-  query: "ab",
-  resourceTypeIds: [
-    "veritatis",
-    "deserunt",
-  ],
-  riskLevelIds: [
-    "ipsam",
-  ],
-}).then((res: C1ApiAppV1AppEntitlementSearchServiceSearchResponse) => {
+  appId: "provident",
+  entitlementId: "distinctio",
+}).then((res: C1ApiAppV1AppEntitlementOwnersAddResponse) => {
   if (res.statusCode == 200) {
     // handle response
   }
@@ -87,6 +48,13 @@ sdk.appEntitlementSearch.search({
 <!-- Start SDK Available Operations -->
 ## Available Resources and Operations
 
+
+### [appEntitlementOwners](docs/sdks/appentitlementowners/README.md)
+
+* [add](docs/sdks/appentitlementowners/README.md#add) - Add
+* [list](docs/sdks/appentitlementowners/README.md#list) - List
+* [remove](docs/sdks/appentitlementowners/README.md#remove) - Remove
+* [set](docs/sdks/appentitlementowners/README.md#set) - Set
 
 ### [appEntitlementSearch](docs/sdks/appentitlementsearch/README.md)
 
@@ -102,7 +70,6 @@ sdk.appEntitlementSearch.search({
 * [list](docs/sdks/appentitlements/README.md#list) - List
 * [listForAppResource](docs/sdks/appentitlements/README.md#listforappresource) - List For App Resource
 * [listForAppUser](docs/sdks/appentitlements/README.md#listforappuser) - List For App User
-* [listGroups](docs/sdks/appentitlements/README.md#listgroups) - List Groups
 * [listUsers](docs/sdks/appentitlements/README.md#listusers) - List Users
 * [update](docs/sdks/appentitlements/README.md#update) - Update
 
@@ -147,6 +114,10 @@ sdk.appEntitlementSearch.search({
 * [get](docs/sdks/appusagecontrols/README.md#get) - Get
 * [update](docs/sdks/appusagecontrols/README.md#update) - Update
 
+### [appUser](docs/sdks/appuser/README.md)
+
+* [update](docs/sdks/appuser/README.md#update) - Update
+
 ### [apps](docs/sdks/apps/README.md)
 
 * [create](docs/sdks/apps/README.md#create) - Create
@@ -154,6 +125,18 @@ sdk.appEntitlementSearch.search({
 * [get](docs/sdks/apps/README.md#get) - Get
 * [list](docs/sdks/apps/README.md#list) - List
 * [update](docs/sdks/apps/README.md#update) - Update
+
+### [attributeSearch](docs/sdks/attributesearch/README.md)
+
+* [searchAttributeValues](docs/sdks/attributesearch/README.md#searchattributevalues) - Search Attribute Values
+
+### [attributes](docs/sdks/attributes/README.md)
+
+* [createAttributeValue](docs/sdks/attributes/README.md#createattributevalue) - Create Attribute Value
+* [deleteAttributeValue](docs/sdks/attributes/README.md#deleteattributevalue) - Delete Attribute Value
+* [getAttributeValue](docs/sdks/attributes/README.md#getattributevalue) - Get Attribute Value
+* [listAttributeTypes](docs/sdks/attributes/README.md#listattributetypes) - List Attribute Types
+* [listAttributeValues](docs/sdks/attributes/README.md#listattributevalues) - List Attribute Values
 
 ### [auth](docs/sdks/auth/README.md)
 

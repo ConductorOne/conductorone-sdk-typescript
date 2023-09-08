@@ -1,9 +1,9 @@
 configVersion: 1.0.0
 management:
-  docChecksum: 93940197c0bfdbea4a969b3e9aa32818
+  docChecksum: dfd3b73fdcb055754c0d9c51caac3807
   docVersion: 0.1.0-alpha
-  speakeasyVersion: 1.64.0
-  generationVersion: 2.71.0
+  speakeasyVersion: 1.82.2
+  generationVersion: 2.107.3
 generation:
   comments:
     disableComments: false
@@ -12,8 +12,17 @@ generation:
   sdkClassName: conductorone-sdk-typescript
   singleTagPerOp: false
   tagNamespacingDisabled: false
+features:
+  typescript:
+    core: 2.87.1
+    globalSecurity: 2.81.1
+    globalServerURLs: 2.82.0
+    groups: 2.81.1
+    includes: 2.81.1
+    inputOutputModels: 2.81.1
+    nameOverrides: 2.81.1
 typescript:
-  version: 1.1.0
+  version: 1.2.0
   author: ConductorOne
   maxMethodParams: 0
   packageName: conductorone-sdk-typescript
