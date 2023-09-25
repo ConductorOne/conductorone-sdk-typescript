@@ -15,6 +15,9 @@ export class C1ApiRequestcatalogV1RequestCatalogManagementServiceRemoveAccessEnt
 }
 
 export class C1ApiRequestcatalogV1RequestCatalogManagementServiceRemoveAccessEntitlementsResponse extends SpeakeasyBase {
+    /**
+     * HTTP response content type for this operation
+     */
     @SpeakeasyMetadata()
     contentType: string;
 
@@ -24,9 +27,15 @@ export class C1ApiRequestcatalogV1RequestCatalogManagementServiceRemoveAccessEnt
     @SpeakeasyMetadata()
     requestCatalogManagementServiceRemoveAccessEntitlementsResponse?: shared.RequestCatalogManagementServiceRemoveAccessEntitlementsResponse;
 
+    /**
+     * HTTP response status code for this operation
+     */
     @SpeakeasyMetadata()
     statusCode: number;
 
+    /**
+     * Raw HTTP response; suitable for custom response parsing
+     */
     @SpeakeasyMetadata()
     rawResponse?: AxiosResponse;
 }

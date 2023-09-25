@@ -1,4 +1,4 @@
-# appEntitlementOwners
+# AppEntitlementOwners
 
 ### Available Operations
 
@@ -26,10 +26,10 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appEntitlementOwners.add({
   addAppEntitlementOwnerRequest: {
-    userId: "quibusdam",
+    userId: "corrupti",
   },
-  appId: "unde",
-  entitlementId: "nulla",
+  appId: "illum",
+  entitlementId: "vel",
 }).then((res: C1ApiAppV1AppEntitlementOwnersAddResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -68,10 +68,10 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appEntitlementOwners.list({
-  appId: "corrupti",
-  entitlementId: "illum",
-  pageSize: 4236.55,
-  pageToken: "error",
+  appId: "error",
+  entitlementId: "deserunt",
+  pageSize: 3843.82,
+  pageToken: "iure",
 }).then((res: C1ApiAppV1AppEntitlementOwnersListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -111,9 +111,9 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appEntitlementOwners.remove({
   removeAppEntitlementOwnerRequest: {},
-  appId: "deserunt",
-  entitlementId: "suscipit",
-  userId: "iure",
+  appId: "magnam",
+  entitlementId: "debitis",
+  userId: "ipsa",
 }).then((res: C1ApiAppV1AppEntitlementOwnersRemoveResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -154,11 +154,11 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.appEntitlementOwners.set({
   setAppEntitlementOwnersRequest: {
     userIds: [
-      "magnam",
+      "delectus",
     ],
   },
-  appId: "debitis",
-  entitlementId: "ipsa",
+  appId: "tempora",
+  entitlementId: "suscipit",
 }).then((res: C1ApiAppV1AppEntitlementOwnersSetResponse) => {
   if (res.statusCode == 200) {
     // handle response

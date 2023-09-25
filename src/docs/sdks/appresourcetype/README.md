@@ -1,4 +1,4 @@
-# appResourceType
+# AppResourceType
 
 ### Available Operations
 
@@ -23,8 +23,8 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appResourceType.get({
-  appId: "cupiditate",
-  id: "802d502a-94bb-44f6-bc96-9e9a3efa77df",
+  appId: "magni",
+  id: "d502a94b-b4f6-43c9-a9e9-a3efa77dfb14",
 }).then((res: C1ApiAppV1AppResourceTypeServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -63,9 +63,9 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appResourceType.list({
-  appId: "rerum",
-  pageSize: 1162.02,
-  pageToken: "magnam",
+  appId: "cumque",
+  pageSize: 8137.98,
+  pageToken: "ea",
 }).then((res: C1ApiAppV1AppResourceTypeServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response

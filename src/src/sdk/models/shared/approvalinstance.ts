@@ -48,6 +48,7 @@ export class ApprovalInstance extends SpeakeasyBase {
      *   - group
      *   - self
      *   - entitlementOwners
+     *   - expression
      *
      */
     @SpeakeasyMetadata()

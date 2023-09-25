@@ -1,4 +1,4 @@
-# requestCatalogSearch
+# RequestCatalogSearch
 
 ### Available Operations
 
@@ -25,15 +25,16 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.requestCatalogSearch.searchEntitlements({
   appEntitlementExpandMask: {
     paths: [
-      "consequuntur",
+      "error",
     ],
   },
-  appDisplayName: "fugit",
-  entitlementAlias: "id",
-  grantedStatus: RequestCatalogSearchServiceSearchEntitlementsRequestGrantedStatus.All,
-  pageSize: 4402.64,
-  pageToken: "error",
-  query: "illo",
+  appDisplayName: "illo",
+  entitlementAlias: "corporis",
+  grantedStatus: RequestCatalogSearchServiceSearchEntitlementsRequestGrantedStatus.Granted,
+  includeDeleted: false,
+  pageSize: 9109.94,
+  pageToken: "non",
+  query: "vero",
 }).then((res: C1ApiRequestcatalogV1RequestCatalogSearchServiceSearchEntitlementsResponse) => {
   if (res.statusCode == 200) {
     // handle response

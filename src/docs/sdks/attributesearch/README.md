@@ -1,4 +1,4 @@
-# attributeSearch
+# AttributeSearch
 
 ### Available Operations
 
@@ -23,18 +23,18 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.attributeSearch.searchAttributeValues({
   attributeTypeIds: [
-    "recusandae",
+    "perspiciatis",
   ],
   excludeIds: [
-    "omnis",
+    "voluptatem",
   ],
   ids: [
-    "facilis",
+    "porro",
   ],
-  pageSize: 5966.56,
-  pageToken: "voluptatem",
-  query: "porro",
-  value: "consequuntur",
+  pageSize: 1646.94,
+  pageToken: "blanditiis",
+  query: "error",
+  value: "eaque",
 }).then((res: C1ApiAttributeV1AttributeSearchSearchAttributeValuesResponse) => {
   if (res.statusCode == 200) {
     // handle response

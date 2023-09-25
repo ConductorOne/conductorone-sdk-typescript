@@ -1,4 +1,4 @@
-# appResourceOwners
+# AppResourceOwners
 
 ### Available Operations
 
@@ -22,11 +22,11 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appResourceOwners.list({
-  appId: "incidunt",
-  pageSize: 3185.69,
-  pageToken: "consequatur",
-  resourceId: "est",
-  resourceTypeId: "quibusdam",
+  appId: "est",
+  pageSize: 8423.42,
+  pageToken: "explicabo",
+  resourceId: "deserunt",
+  resourceTypeId: "distinctio",
 }).then((res: C1ApiAppV1AppResourceOwnersListResponse) => {
   if (res.statusCode == 200) {
     // handle response

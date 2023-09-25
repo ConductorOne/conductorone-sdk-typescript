@@ -1,4 +1,4 @@
-# policies
+# Policies
 
 ### Available Operations
 
@@ -27,16 +27,18 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.policies.create({
-  description: "nisi",
-  displayName: "fugit",
+  description: "consequuntur",
+  displayName: "ratione",
   policySteps: {
-    "sapiente": {
+    "explicabo": {
       steps: [
         {
+          accept: {},
           approval: {
             appGroupApproval: {},
             appOwnerApproval: {},
             entitlementOwnerApproval: {},
+            expressionApproval: {},
             managerApproval: {},
             selfApproval: {},
             userApproval: {},
@@ -45,29 +47,30 @@ sdk.policies.create({
             provisionPolicy: {
               connectorProvision: {},
               delegatedProvision: {
-                appId: "consequuntur",
-                entitlementId: "ratione",
+                appId: "saepe",
+                entitlementId: "occaecati",
               },
               manualProvision: {
-                instructions: "explicabo",
+                instructions: "atque",
                 userIds: [
-                  "saepe",
+                  "et",
                 ],
               },
             },
             provisionTarget: {
-              appEntitlementId: "occaecati",
-              appId: "atque",
-              appUserId: "et",
-              grantDuration: "esse",
+              appEntitlementId: "esse",
+              appId: "eveniet",
+              appUserId: "accusamus",
+              grantDuration: "veritatis",
             },
             assigned: false,
           },
+          reject: {},
         },
       ],
     },
   },
-  policyType: CreatePolicyRequestPolicyType.PolicyTypeProvision,
+  policyType: CreatePolicyRequestPolicyType.PolicyTypeRevoke,
   postActions: [
     {
       certifyRemediateImmediately: false,
@@ -113,7 +116,7 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.policies.delete({
   deletePolicyRequest: {},
-  id: "e17cbe61-e6b7-4b95-bc0a-b3c20c4f3789",
+  id: "cbe61e6b-7b95-4bc0-ab3c-20c4f3789fd8",
 }).then((res: C1ApiPolicyV1PoliciesDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -152,7 +155,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.policies.get({
-  id: "fd871f99-dd2e-4fd1-a1aa-6f1e674bdb04",
+  id: "71f99dd2-efd1-421a-a6f1-e674bdb04f15",
 }).then((res: C1ApiPolicyV1PoliciesGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -191,8 +194,8 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.policies.list({
-  pageSize: 9589.83,
-  pageToken: "dicta",
+  pageSize: 4438.79,
+  pageToken: "ullam",
 }).then((res: C1ApiPolicyV1PoliciesListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -234,16 +237,18 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.policies.update({
   updatePolicyRequestInput: {
     policy: {
-      description: "ullam",
-      displayName: "reprehenderit",
+      description: "nisi",
+      displayName: "aut",
       policySteps: {
-        "ullam": {
+        "voluptatum": {
           steps: [
             {
+              accept: {},
               approval: {
                 appGroupApproval: {},
                 appOwnerApproval: {},
                 entitlementOwnerApproval: {},
+                expressionApproval: {},
                 managerApproval: {},
                 selfApproval: {},
                 userApproval: {},
@@ -252,39 +257,46 @@ sdk.policies.update({
                 provisionPolicy: {
                   connectorProvision: {},
                   delegatedProvision: {
-                    appId: "nisi",
-                    entitlementId: "aut",
+                    appId: "qui",
+                    entitlementId: "quibusdam",
                   },
                   manualProvision: {
-                    instructions: "voluptatum",
+                    instructions: "ex",
                     userIds: [
-                      "qui",
+                      "deleniti",
                     ],
                   },
                 },
                 provisionTarget: {
-                  appEntitlementId: "quibusdam",
-                  appId: "ex",
-                  appUserId: "deleniti",
-                  grantDuration: "itaque",
+                  appEntitlementId: "itaque",
+                  appId: "dolorum",
+                  appUserId: "architecto",
+                  grantDuration: "omnis",
                 },
                 assigned: false,
               },
+              reject: {},
             },
           ],
         },
       },
-      policyType: PolicyPolicyType.PolicyTypeAccessRequest,
+      policyType: PolicyPolicyType.PolicyTypeProvision,
       postActions: [
         {
           certifyRemediateImmediately: false,
         },
       ],
       reassignTasksToDelegates: false,
+      rules: [
+        {
+          condition: "quasi",
+          policyKey: "at",
+        },
+      ],
     },
-    updateMask: "architecto",
+    updateMask: "et",
   },
-  id: "9f1d1705-1339-4d08-886a-1840394c2607",
+  id: "7051339d-0808-46a1-8403-94c26071f93f",
 }).then((res: C1ApiPolicyV1PoliciesUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

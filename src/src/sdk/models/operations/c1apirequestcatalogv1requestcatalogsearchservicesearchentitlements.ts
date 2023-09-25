@@ -7,6 +7,9 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class C1ApiRequestcatalogV1RequestCatalogSearchServiceSearchEntitlementsResponse extends SpeakeasyBase {
+    /**
+     * HTTP response content type for this operation
+     */
     @SpeakeasyMetadata()
     contentType: string;
 
@@ -16,9 +19,15 @@ export class C1ApiRequestcatalogV1RequestCatalogSearchServiceSearchEntitlementsR
     @SpeakeasyMetadata()
     requestCatalogSearchServiceSearchEntitlementsResponse?: shared.RequestCatalogSearchServiceSearchEntitlementsResponse;
 
+    /**
+     * HTTP response status code for this operation
+     */
     @SpeakeasyMetadata()
     statusCode: number;
 
+    /**
+     * Raw HTTP response; suitable for custom response parsing
+     */
     @SpeakeasyMetadata()
     rawResponse?: AxiosResponse;
 }

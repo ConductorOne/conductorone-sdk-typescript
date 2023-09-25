@@ -1,4 +1,4 @@
-# personalClient
+# PersonalClient
 
 ### Available Operations
 
@@ -23,12 +23,12 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.personalClient.create({
   allowSourceCidr: [
-    "incidunt",
-  ],
-  displayName: "atque",
-  expires: "explicabo",
-  scopedRoles: [
     "minima",
+  ],
+  displayName: "nisi",
+  expires: "fugit",
+  scopedRoles: [
+    "sapiente",
   ],
 }).then((res: C1ApiIamV1PersonalClientServiceCreateResponse) => {
   if (res.statusCode == 200) {

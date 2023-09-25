@@ -1,4 +1,4 @@
-# appResource
+# AppResource
 
 ### Available Operations
 
@@ -23,9 +23,9 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appResource.get({
-  appId: "nihil",
-  appResourceTypeId: "praesentium",
-  id: "f097b007-4f15-4471-b5e6-e13b99d488e1",
+  appId: "ipsa",
+  appResourceTypeId: "omnis",
+  id: "7b0074f1-5471-4b5e-ae13-b99d488e1e91",
 }).then((res: C1ApiAppV1AppResourceServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -64,10 +64,10 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appResource.list({
-  appId: "repudiandae",
-  appResourceTypeId: "sint",
-  pageSize: 831.12,
-  pageToken: "itaque",
+  appId: "itaque",
+  appResourceTypeId: "incidunt",
+  pageSize: 3185.69,
+  pageToken: "consequatur",
 }).then((res: C1ApiAppV1AppResourceServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response

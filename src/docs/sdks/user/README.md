@@ -1,4 +1,4 @@
-# user
+# User
 
 ### Available Operations
 
@@ -23,7 +23,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.user.get({
-  id: "12fde047-7177-48ff-a1d0-17476360a15d",
+  id: "04771778-ff61-4d01-b476-360a15db6a66",
 }).then((res: C1ApiUserV1UserServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -62,8 +62,8 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.user.list({
-  pageSize: 7137.67,
-  pageToken: "aliquid",
+  pageSize: 219.73,
+  pageToken: "eum",
 }).then((res: C1ApiUserV1UserServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response

@@ -3,8 +3,10 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { AcceptInstance } from "./acceptinstance";
 import { ApprovalInstance } from "./approvalinstance";
 import { ProvisionInstance } from "./provisioninstance";
+import { RejectInstance } from "./rejectinstance";
 import { Expose, Type } from "class-transformer";
 
 /**
@@ -24,9 +26,22 @@ export enum PolicyStepInstanceState {
  * This message contains a oneof named instance. Only a single field of the following list may be set at a time:
  *   - approval
  *   - provision
+ *   - accept
+ *   - reject
  *
  */
 export class PolicyStepInstance extends SpeakeasyBase {
+    /**
+     * This policy step indicates that a ticket should have an approved outcome. This is a terminal approval state and is used to explicitly define the end of approval steps.
+     *
+     * @remarks
+     *  The instance is just a marker for it being copied into an active policy.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "accept" })
+    @Type(() => AcceptInstance)
+    acceptInstance?: AcceptInstance;
+
     /**
      * The approval instance object describes the way a policy step should be approved as well as its outcomes and state.
      *
@@ -61,6 +76,17 @@ export class PolicyStepInstance extends SpeakeasyBase {
     @Expose({ name: "provision" })
     @Type(() => ProvisionInstance)
     provisionInstance?: ProvisionInstance;
+
+    /**
+     * This policy step indicates that a ticket should have a denied outcome. This is a terminal approval state and is used to explicitly define the end of approval steps.
+     *
+     * @remarks
+     *  The instance is just a marker for it being copied into an active policy.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "reject" })
+    @Type(() => RejectInstance)
+    rejectInstance?: RejectInstance;
 
     /**
      * The ID of the PolicyStepInstance. This is required by many action submission endpoints to indicate what step you're approving.

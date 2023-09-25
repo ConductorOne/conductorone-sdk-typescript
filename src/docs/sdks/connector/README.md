@@ -1,4 +1,4 @@
-# connector
+# Connector
 
 ### Available Operations
 
@@ -34,19 +34,19 @@ sdk.connector.create({
   connectorServiceCreateRequest: {
     connectorExpandMask: {
       paths: [
-        "optio",
+        "saepe",
       ],
     },
-    catalogId: "accusamus",
+    catalogId: "suscipit",
     config: {
-      "ad": "saepe",
+      "deserunt": "provident",
     },
-    description: "suscipit",
+    description: "minima",
     userIds: [
-      "deserunt",
+      "repellendus",
     ],
   },
-  appId: "provident",
+  appId: "totam",
 }).then((res: C1ApiAppV1ConnectorServiceCreateResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -88,17 +88,17 @@ sdk.connector.createDelegated({
   connectorServiceCreateDelegatedRequest: {
     connectorExpandMask: {
       paths: [
-        "minima",
+        "similique",
       ],
     },
-    catalogId: "repellendus",
-    description: "totam",
-    displayName: "similique",
+    catalogId: "alias",
+    description: "at",
+    displayName: "quaerat",
     userIds: [
-      "alias",
+      "tempora",
     ],
   },
-  appId: "at",
+  appId: "vel",
 }).then((res: C1ApiAppV1ConnectorServiceCreateDelegatedResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -138,8 +138,8 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.connector.delete({
   connectorServiceDeleteRequest: {},
-  appId: "quaerat",
-  id: "46ce2af7-a73c-4f3b-a453-f870b326b5a7",
+  appId: "quod",
+  id: "e2af7a73-cf3b-4e45-bf87-0b326b5a7342",
 }).then((res: C1ApiAppV1ConnectorServiceDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -178,8 +178,8 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.connector.get({
-  appId: "ipsum",
-  id: "429cdb1a-8422-4bb6-b9d2-322715bf0cbb",
+  appId: "cupiditate",
+  id: "cdb1a842-2bb6-479d-a322-715bf0cbb1e3",
 }).then((res: C1ApiAppV1ConnectorServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -218,9 +218,9 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.connector.getCredentials({
-  appId: "et",
-  connectorId: "saepe",
-  id: "31b8b90f-3443-4a11-88e0-adcf4b921879",
+  appId: "veritatis",
+  connectorId: "nobis",
+  id: "8b90f344-3a11-408e-8adc-f4b921879fce",
 }).then((res: C1ApiAppV1ConnectorServiceGetCredentialsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -259,9 +259,9 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.connector.list({
-  appId: "voluptatibus",
-  pageSize: 7875.42,
-  pageToken: "vero",
+  appId: "omnis",
+  pageSize: 3381.59,
+  pageToken: "ipsum",
 }).then((res: C1ApiAppV1ConnectorServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -301,9 +301,9 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.connector.revokeCredential({
   connectorServiceRevokeCredentialRequest: {},
-  appId: "omnis",
-  connectorId: "quis",
-  id: "3f73ef7f-bc7a-4bd7-8dd3-9c0f5d2cff7c",
+  appId: "delectus",
+  connectorId: "voluptate",
+  id: "3ef7fbc7-abd7-44dd-b9c0-f5d2cff7c70a",
 }).then((res: C1ApiAppV1ConnectorServiceRevokeCredentialResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -343,8 +343,8 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.connector.rotateCredential({
   connectorServiceRotateCredentialRequest: {},
-  appId: "ducimus",
-  connectorId: "alias",
+  appId: "tempora",
+  connectorId: "ipsam",
 }).then((res: C1ApiAppV1ConnectorServiceRotateCredentialResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -387,33 +387,33 @@ sdk.connector.update({
   connectorServiceUpdateRequestInput: {
     connector: {
       connectorStatus: {
-        completedAt: new Date("2022-06-18T06:43:12.261Z"),
-        lastError: "ipsam",
-        startedAt: new Date("2022-11-12T00:45:12.094Z"),
-        status: ConnectorStatusStatus.SyncStatusRunning,
-        updatedAt: new Date("2022-02-08T20:43:00.221Z"),
+        completedAt: new Date("2022-11-12T00:45:12.094Z"),
+        lastError: "vel",
+        startedAt: new Date("2022-02-08T20:43:00.221Z"),
+        status: ConnectorStatusStatus.SyncStatusUnspecified,
+        updatedAt: new Date("2022-06-28T08:50:44.084Z"),
       },
       oAuth2AuthorizedAs: {},
-      appId: "ratione",
+      appId: "dicta",
       config: {
-        "ex": "laudantium",
+        "dolor": "maiores",
       },
-      description: "dicta",
-      displayName: "dolor",
-      id: "f16d9f5f-ce6c-4556-946c-3e250fb008c4",
+      description: "quasi",
+      displayName: "ex",
+      id: "d9f5fce6-c556-4146-83e2-50fb008c42e1",
       userIds: [
-        "fugit",
+        "non",
       ],
     },
     connectorExpandMask: {
       paths: [
-        "accusamus",
+        "et",
       ],
     },
-    updateMask: "inventore",
+    updateMask: "dolorum",
   },
-  appId: "non",
-  id: "1aac366c-8dd6-4b14-8290-7474778a7bd4",
+  appId: "laborum",
+  id: "c366c8dd-6b14-4429-8747-4778a7bd466d",
 }).then((res: C1ApiAppV1ConnectorServiceUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -456,33 +456,33 @@ sdk.connector.updateDelegated({
   connectorServiceUpdateDelegatedRequestInput: {
     connector: {
       connectorStatus: {
-        completedAt: new Date("2022-08-15T07:50:23.042Z"),
-        lastError: "assumenda",
-        startedAt: new Date("2022-06-29T02:09:48.123Z"),
-        status: ConnectorStatusStatus.SyncStatusError,
-        updatedAt: new Date("2022-12-11T06:00:38.230Z"),
+        completedAt: new Date("2022-06-29T02:09:48.123Z"),
+        lastError: "quisquam",
+        startedAt: new Date("2022-12-11T06:00:38.230Z"),
+        status: ConnectorStatusStatus.SyncStatusDone,
+        updatedAt: new Date("2022-08-03T04:27:44.236Z"),
       },
       oAuth2AuthorizedAs: {},
-      appId: "id",
+      appId: "quo",
       config: {
-        "quidem": "neque",
+        "illum": "quo",
       },
-      description: "quo",
-      displayName: "illum",
-      id: "ca425190-4e52-43c7-a0bc-7178e4796f2a",
+      description: "fuga",
+      displayName: "eius",
+      id: "251904e5-23c7-4e0b-8717-8e4796f2a70c",
       userIds: [
-        "molestiae",
+        "eum",
       ],
     },
     connectorExpandMask: {
       paths: [
-        "accusantium",
+        "quas",
       ],
     },
-    updateMask: "porro",
+    updateMask: "praesentium",
   },
-  connectorAppId: "eum",
-  connectorId: "quas",
+  connectorAppId: "consequuntur",
+  connectorId: "deleniti",
 }).then((res: C1ApiAppV1ConnectorServiceUpdateDelegatedResponse) => {
   if (res.statusCode == 200) {
     // handle response

@@ -1,4 +1,4 @@
-# appEntitlementSearch
+# AppEntitlementSearch
 
 ### Available Operations
 
@@ -24,35 +24,36 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.appEntitlementSearch.search({
   appEntitlementExpandMask: {
     paths: [
-      "delectus",
+      "molestiae",
     ],
   },
-  accessReviewId: "tempora",
-  alias: "suscipit",
+  accessReviewId: "minus",
+  alias: "placeat",
   appIds: [
-    "molestiae",
-  ],
-  appUserIds: [
-    "minus",
-  ],
-  complianceFrameworkIds: [
-    "placeat",
-  ],
-  excludeAppIds: [
     "voluptatum",
   ],
-  excludeAppUserIds: [
+  appUserIds: [
     "iusto",
   ],
+  complianceFrameworkIds: [
+    "excepturi",
+  ],
+  excludeAppIds: [
+    "nisi",
+  ],
+  excludeAppUserIds: [
+    "recusandae",
+  ],
+  includeDeleted: false,
   onlyGetExpiring: false,
-  pageSize: 5680.45,
-  pageToken: "nisi",
-  query: "recusandae",
+  pageSize: 8360.79,
+  pageToken: "ab",
+  query: "quis",
   resourceTypeIds: [
-    "temporibus",
+    "veritatis",
   ],
   riskLevelIds: [
-    "ab",
+    "deserunt",
   ],
 }).then((res: C1ApiAppV1AppEntitlementSearchServiceSearchResponse) => {
   if (res.statusCode == 200) {

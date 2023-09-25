@@ -50,6 +50,13 @@ export class RequestCatalogSearchServiceSearchEntitlementsRequest extends Speake
     grantedStatus?: RequestCatalogSearchServiceSearchEntitlementsRequestGrantedStatus;
 
     /**
+     * Include deleted entitlements
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "includeDeleted" })
+    includeDeleted?: boolean;
+
+    /**
      * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
      */
     @SpeakeasyMetadata()

@@ -1,4 +1,4 @@
-# appResourceSearch
+# AppResourceSearch
 
 ### Available Operations
 
@@ -23,22 +23,22 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appResourceSearch.searchAppResourceTypes({
   appIds: [
-    "explicabo",
+    "quibusdam",
   ],
   excludeResourceTypeIds: [
-    "deserunt",
+    "labore",
   ],
   excludeResourceTypeTraitIds: [
-    "distinctio",
+    "modi",
   ],
-  pageSize: 8413.86,
-  pageToken: "labore",
-  query: "modi",
+  pageSize: 1831.91,
+  pageToken: "aliquid",
+  query: "cupiditate",
   resourceTypeIds: [
-    "qui",
+    "quos",
   ],
   resourceTypeTraitIds: [
-    "aliquid",
+    "perferendis",
   ],
 }).then((res: C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse) => {
   if (res.statusCode == 200) {

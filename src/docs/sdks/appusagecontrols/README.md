@@ -1,4 +1,4 @@
-# appUsageControls
+# AppUsageControls
 
 ### Available Operations
 
@@ -23,7 +23,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appUsageControls.get({
-  appId: "non",
+  appId: "accusamus",
 }).then((res: C1ApiAppV1AppUsageControlsServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -64,15 +64,15 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.appUsageControls.update({
   updateAppUsageControlsRequest: {
     appUsageControls: {
-      appId: "occaecati",
+      appId: "delectus",
       notify: false,
-      notifyAfterDays: 3132.18,
+      notifyAfterDays: 6925.32,
       revoke: false,
-      revokeAfterDays: 8817.36,
+      revokeAfterDays: 5884.65,
     },
-    updateMask: "delectus",
+    updateMask: "nam",
   },
-  appId: "quidem",
+  appId: "id",
 }).then((res: C1ApiAppV1AppUsageControlsServiceUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

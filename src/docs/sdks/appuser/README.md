@@ -1,4 +1,4 @@
-# appUser
+# AppUser
 
 ### Available Operations
 
@@ -31,13 +31,13 @@ sdk.appUser.update({
     },
     appUserExpandMask: {
       paths: [
-        "nam",
+        "deleniti",
       ],
     },
-    updateMask: "id",
+    updateMask: "sapiente",
   },
-  appUserAppId: "blanditiis",
-  appUserId: "deleniti",
+  appUserAppId: "amet",
+  appUserId: "deserunt",
 }).then((res: C1ApiAppV1AppUserServiceUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

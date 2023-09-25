@@ -18,6 +18,9 @@ export class C1ApiAttributeV1AttributesListAttributeValuesRequest extends Speake
 }
 
 export class C1ApiAttributeV1AttributesListAttributeValuesResponse extends SpeakeasyBase {
+    /**
+     * HTTP response content type for this operation
+     */
     @SpeakeasyMetadata()
     contentType: string;
 
@@ -27,9 +30,15 @@ export class C1ApiAttributeV1AttributesListAttributeValuesResponse extends Speak
     @SpeakeasyMetadata()
     listAttributeValuesResponse?: shared.ListAttributeValuesResponse;
 
+    /**
+     * HTTP response status code for this operation
+     */
     @SpeakeasyMetadata()
     statusCode: number;
 
+    /**
+     * Raw HTTP response; suitable for custom response parsing
+     */
     @SpeakeasyMetadata()
     rawResponse?: AxiosResponse;
 }

@@ -1,4 +1,4 @@
-# appEntitlementUserBinding
+# AppEntitlementUserBinding
 
 ### Available Operations
 
@@ -24,9 +24,9 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appEntitlementUserBinding.listAppUsersForIdentityWithGrant({
-  appEntitlementId: "quis",
-  appId: "veritatis",
-  identityUserId: "deserunt",
+  appEntitlementId: "perferendis",
+  appId: "ipsam",
+  identityUserId: "repellendus",
 }).then((res: C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponse) => {
   if (res.statusCode == 200) {
     // handle response

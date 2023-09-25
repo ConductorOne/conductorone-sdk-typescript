@@ -1,4 +1,4 @@
-# policySearch
+# PolicySearch
 
 ### Available Operations
 
@@ -23,16 +23,16 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.policySearch.search({
-  displayName: "dicta",
-  pageSize: 9816.4,
-  pageToken: "natus",
+  displayName: "voluptas",
+  pageSize: 9903.45,
+  pageToken: "aperiam",
   policyTypes: [
-    SearchPoliciesRequestPolicyTypes.PolicyTypeGrant,
+    SearchPoliciesRequestPolicyTypes.PolicyTypeRevoke,
   ],
-  query: "voluptatibus",
+  query: "quaerat",
   refs: [
     {
-      id: "5f0642da-c7af-4515-8c41-3aa63aae8d67",
+      id: "2dac7af5-15cc-4413-aa63-aae8d67864db",
     },
   ],
 }).then((res: C1ApiPolicyV1PolicySearchSearchResponse) => {

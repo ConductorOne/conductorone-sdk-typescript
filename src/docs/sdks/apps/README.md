@@ -1,4 +1,4 @@
-# apps
+# Apps
 
 ### Available Operations
 
@@ -26,15 +26,15 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.apps.create({
-  certifyPolicyId: "sapiente",
-  description: "amet",
-  displayName: "deserunt",
-  grantPolicyId: "nisi",
-  monthlyCostUsd: 4238.55,
+  certifyPolicyId: "nisi",
+  description: "vel",
+  displayName: "natus",
+  grantPolicyId: "omnis",
+  monthlyCostUsd: 4748.67,
   owners: [
-    "natus",
+    "perferendis",
   ],
-  revokePolicyId: "omnis",
+  revokePolicyId: "nihil",
 }).then((res: C1ApiAppV1AppsCreateResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -74,7 +74,7 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.apps.delete({
   deleteAppRequest: {},
-  id: "7074ba44-69b6-4e21-8195-9890afa563e2",
+  id: "4ba4469b-6e21-4419-9989-0afa563e2516",
 }).then((res: C1ApiAppV1AppsDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -113,7 +113,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.apps.get({
-  id: "516fe4c8-b711-4e5b-bfd2-ed028921cddc",
+  id: "fe4c8b71-1e5b-47fd-aed0-28921cddc692",
 }).then((res: C1ApiAppV1AppsGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -152,8 +152,8 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.apps.list({
-  pageSize: 4113.97,
-  pageToken: "excepturi",
+  pageSize: 4071.83,
+  pageToken: "accusantium",
 }).then((res: C1ApiAppV1AppsListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -194,17 +194,17 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.apps.update({
   updateAppRequestInput: {
     app: {
-      certifyPolicyId: "odit",
-      description: "ea",
-      displayName: "accusantium",
-      grantPolicyId: "ab",
-      iconUrl: "maiores",
-      monthlyCostUsd: 6974.29,
-      revokePolicyId: "ipsam",
+      certifyPolicyId: "ab",
+      description: "maiores",
+      displayName: "quidem",
+      grantPolicyId: "ipsam",
+      iconUrl: "voluptate",
+      monthlyCostUsd: 4200.75,
+      revokePolicyId: "nam",
     },
-    updateMask: "voluptate",
+    updateMask: "eaque",
   },
-  id: "6b0d5f0d-30c5-4fbb-a587-053202c73d5f",
+  id: "d5f0d30c-5fbb-4258-b053-202c73d5fe9b",
 }).then((res: C1ApiAppV1AppsUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response
