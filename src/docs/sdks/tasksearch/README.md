@@ -1,4 +1,4 @@
-# taskSearch
+# TaskSearch
 
 ### Available Operations
 
@@ -30,65 +30,65 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.taskSearch.search({
   taskExpandMask: {
     paths: [
-      "aliquid",
+      "in",
     ],
   },
   accessReviewIds: [
-    "accusantium",
-  ],
-  accountOwnerIds: [
-    "repellat",
-  ],
-  actorId: "doloribus",
-  appEntitlementIds: [
-    "ullam",
-  ],
-  appResourceIds: [
-    "in",
-  ],
-  appResourceTypeIds: [
     "nam",
   ],
-  appUserSubjectIds: [
+  accountOwnerIds: [
     "earum",
   ],
-  applicationIds: [
-    "officia",
-  ],
-  assigneesInIds: [
+  actorId: "officia",
+  appEntitlementIds: [
     "laborum",
   ],
-  createdAfter: new Date("2022-03-14T23:12:21.252Z"),
-  createdBefore: new Date("2021-04-23T08:23:19.189Z"),
-  currentStep: TaskSearchRequestCurrentStep.TaskSearchCurrentStepProvision,
-  emergencyStatus: TaskSearchRequestEmergencyStatus.Emergency,
+  appResourceIds: [
+    "placeat",
+  ],
+  appResourceTypeIds: [
+    "modi",
+  ],
+  appUserSubjectIds: [
+    "voluptatibus",
+  ],
+  applicationIds: [
+    "molestias",
+  ],
+  assigneesInIds: [
+    "officiis",
+  ],
+  createdAfter: new Date("2020-09-15T19:18:40.244Z"),
+  createdBefore: new Date("2022-04-21T03:20:35.575Z"),
+  currentStep: TaskSearchRequestCurrentStep.TaskSearchCurrentStepUnspecified,
+  emergencyStatus: TaskSearchRequestEmergencyStatus.All,
   excludeAppEntitlementIds: [
-    "cumque",
+    "inventore",
   ],
   excludeIds: [
-    "vitae",
+    "fugit",
   ],
   includeDeleted: false,
   myWorkUserIds: [
-    "rerum",
+    "cumque",
   ],
   openerIds: [
-    "tempora",
+    "quae",
   ],
-  pageSize: 3354.98,
-  pageToken: "inventore",
+  pageSize: 216.88,
+  pageToken: "velit",
   previouslyActedOnIds: [
-    "fugit",
+    "aspernatur",
   ],
-  query: "cumque",
+  query: "eum",
   refs: [
     {
-      id: "1032648d-c2f6-4151-99eb-fd0e9fe6c632",
+      id: "48dc2f61-5199-4ebf-90e9-fe6c632ca3ae",
     },
   ],
-  sortBy: TaskSearchRequestSortBy.TaskSearchSortByAccountOwner,
+  sortBy: TaskSearchRequestSortBy.TaskSearchSortByReverseTicketId,
   subjectIds: [
-    "fuga",
+    "consequatur",
   ],
   taskStates: [
     TaskSearchRequestTaskStates.TaskStateUnspecified,
@@ -98,25 +98,25 @@ sdk.taskSearch.search({
       taskTypeCertify: {},
       taskTypeGrant: {
         taskGrantSource: {
-          externalUrl: "animi",
-          integrationId: "necessitatibus",
+          externalUrl: "et",
+          integrationId: "ducimus",
         },
       },
       taskTypeRevoke: {
         taskRevokeSource: {
           taskRevokeSourceExpired: {
-            expiredAt: new Date("2022-12-22T05:17:09.936Z"),
+            expiredAt: new Date("2021-11-02T19:26:40.219Z"),
           },
           taskRevokeSourceNonUsage: {
-            expiresAt: new Date("2022-11-29T01:33:31.768Z"),
-            lastLogin: new Date("2022-05-19T23:57:30.950Z"),
+            expiresAt: new Date("2022-10-04T19:57:36.428Z"),
+            lastLogin: new Date("2022-10-31T07:20:14.068Z"),
           },
           taskRevokeSourceRequest: {
-            requestUserId: "occaecati",
+            requestUserId: "doloribus",
           },
           taskRevokeSourceReview: {
-            accessReviewId: "suscipit",
-            certTicketId: "adipisci",
+            accessReviewId: "nulla",
+            certTicketId: "necessitatibus",
           },
         },
       },

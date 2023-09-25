@@ -1,4 +1,4 @@
-# appOwners
+# AppOwners
 
 ### Available Operations
 
@@ -25,8 +25,8 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appOwners.add({
   addAppOwnerRequest: {},
-  appId: "id",
-  userId: "possimus",
+  appId: "quasi",
+  userId: "error",
 }).then((res: C1ApiAppV1AppOwnersAddResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -65,9 +65,9 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appOwners.list({
-  appId: "aut",
-  pageSize: 971.01,
-  pageToken: "error",
+  appId: "temporibus",
+  pageSize: 6736.6,
+  pageToken: "quasi",
 }).then((res: C1ApiAppV1AppOwnersListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -107,8 +107,8 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appOwners.remove({
   removeAppOwnerRequest: {},
-  appId: "temporibus",
-  userId: "laborum",
+  appId: "reiciendis",
+  userId: "voluptatibus",
 }).then((res: C1ApiAppV1AppOwnersRemoveResponse) => {
   if (res.statusCode == 200) {
     // handle response

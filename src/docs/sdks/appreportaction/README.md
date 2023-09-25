@@ -1,4 +1,4 @@
-# appReportAction
+# AppReportAction
 
 ### Available Operations
 
@@ -23,7 +23,7 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appReportAction.generateReport({
   appActionsServiceGenerateReportRequest: {},
-  appId: "vero",
+  appId: "voluptatibus",
 }).then((res: C1ApiAppV1AppReportActionServiceGenerateReportResponse) => {
   if (res.statusCode == 200) {
     // handle response

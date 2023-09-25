@@ -1,4 +1,4 @@
-# attributes
+# Attributes
 
 ### Available Operations
 
@@ -26,8 +26,8 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.attributes.createAttributeValue({
-  attributeTypeId: "blanditiis",
-  value: "error",
+  attributeTypeId: "occaecati",
+  value: "rerum",
 }).then((res: C1ApiAttributeV1AttributesCreateAttributeValueResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -67,7 +67,7 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.attributes.deleteAttributeValue({
   deleteAttributeValueRequest: {},
-  id: "09b3fe49-a8d9-4cbf-8863-3323f9b77f3a",
+  id: "3fe49a8d-9cbf-4486-b332-3f9b77f3a410",
 }).then((res: C1ApiAttributeV1AttributesDeleteAttributeValueResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -106,7 +106,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.attributes.getAttributeValue({
-  id: "4100674e-bf69-4280-91ba-77a89ebf737a",
+  id: "0674ebf6-9280-4d1b-a77a-89ebf737ae42",
 }).then((res: C1ApiAttributeV1AttributesGetAttributeValueResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -145,8 +145,8 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.attributes.listAttributeTypes({
-  pageSize: 9064.18,
-  pageToken: "eius",
+  pageSize: 206.51,
+  pageToken: "amet",
 }).then((res: C1ApiAttributeV1AttributesListAttributeTypesResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -185,9 +185,9 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.attributes.listAttributeValues({
-  attributeTypeId: "aspernatur",
-  pageSize: 206.51,
-  pageToken: "amet",
+  attributeTypeId: "optio",
+  pageSize: 8815.86,
+  pageToken: "ad",
 }).then((res: C1ApiAttributeV1AttributesListAttributeValuesResponse) => {
   if (res.statusCode == 200) {
     // handle response

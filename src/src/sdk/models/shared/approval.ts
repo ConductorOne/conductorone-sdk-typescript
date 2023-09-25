@@ -9,6 +9,7 @@ import {
     EntitlementOwnerApproval,
     EntitlementOwnerApprovalInput,
 } from "./entitlementownerapproval";
+import { ExpressionApproval, ExpressionApprovalInput } from "./expressionapproval";
 import { ManagerApproval, ManagerApprovalInput } from "./managerapproval";
 import { SelfApproval, SelfApprovalInput } from "./selfapproval";
 import { UserApproval, UserApprovalInput } from "./userapproval";
@@ -26,6 +27,7 @@ import { Expose, Type } from "class-transformer";
  *   - group
  *   - self
  *   - entitlementOwners
+ *   - expression
  *
  */
 export class Approval extends SpeakeasyBase {
@@ -52,6 +54,14 @@ export class Approval extends SpeakeasyBase {
     @Expose({ name: "entitlementOwners" })
     @Type(() => EntitlementOwnerApproval)
     entitlementOwnerApproval?: EntitlementOwnerApproval;
+
+    /**
+     * The ExpressionApproval message.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "expression" })
+    @Type(() => ExpressionApproval)
+    expressionApproval?: ExpressionApproval;
 
     /**
      * The manager approval object provides configuration options for approval when the target of the approval is the manager of the user in the task.
@@ -118,6 +128,7 @@ export class Approval extends SpeakeasyBase {
  *   - group
  *   - self
  *   - entitlementOwners
+ *   - expression
  *
  */
 export class ApprovalInput extends SpeakeasyBase {
@@ -144,6 +155,14 @@ export class ApprovalInput extends SpeakeasyBase {
     @Expose({ name: "entitlementOwners" })
     @Type(() => EntitlementOwnerApprovalInput)
     entitlementOwnerApproval?: EntitlementOwnerApprovalInput;
+
+    /**
+     * The ExpressionApproval message.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "expression" })
+    @Type(() => ExpressionApprovalInput)
+    expressionApproval?: ExpressionApprovalInput;
 
     /**
      * The manager approval object provides configuration options for approval when the target of the approval is the manager of the user in the task.

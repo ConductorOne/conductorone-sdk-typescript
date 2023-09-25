@@ -1,4 +1,4 @@
-# task
+# Task
 
 ### Available Operations
 
@@ -26,20 +26,20 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.task.createGrantTask({
   taskExpandMask: {
     paths: [
-      "totam",
+      "cum",
     ],
   },
   taskGrantSource: {
-    externalUrl: "quae",
-    integrationId: "molestiae",
+    externalUrl: "iure",
+    integrationId: "necessitatibus",
   },
-  appEntitlementId: "eveniet",
-  appId: "qui",
-  appUserId: "cum",
-  description: "iure",
+  appEntitlementId: "ratione",
+  appId: "laborum",
+  appUserId: "distinctio",
+  description: "voluptatum",
   emergencyAccess: false,
-  grantDuration: "necessitatibus",
-  identityUserId: "ratione",
+  grantDuration: "rem",
+  identityUserId: "aliquam",
 }).then((res: C1ApiTaskV1TaskServiceCreateGrantTaskResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -80,14 +80,14 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.task.createRevokeTask({
   taskExpandMask: {
     paths: [
-      "laborum",
+      "ad",
     ],
   },
-  appEntitlementId: "distinctio",
-  appId: "voluptatum",
-  appUserId: "rem",
-  description: "aliquam",
-  identityUserId: "ad",
+  appEntitlementId: "repellat",
+  appId: "alias",
+  appUserId: "corporis",
+  description: "perspiciatis",
+  identityUserId: "nihil",
 }).then((res: C1ApiTaskV1TaskServiceCreateRevokeTaskResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -126,7 +126,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.task.get({
-  id: "f0597a60-ff2a-454a-b1e9-4764a3e865e7",
+  id: "a60ff2a5-4a31-4e94-b64a-3e865e7956f9",
 }).then((res: C1ApiTaskV1TaskServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response

@@ -1,4 +1,4 @@
-# appEntitlements
+# AppEntitlements
 
 ### Available Operations
 
@@ -27,8 +27,8 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appEntitlements.get({
-  appId: "perferendis",
-  id: "5dfc2ddf-7cc7-48ca-9ba9-28fc816742cb",
+  appId: "sapiente",
+  id: "c2ddf7cc-78ca-41ba-928f-c816742cb739",
 }).then((res: C1ApiAppV1AppEntitlementsGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -67,9 +67,9 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appEntitlements.list({
-  appId: "esse",
-  pageSize: 2165.5,
-  pageToken: "excepturi",
+  appId: "aspernatur",
+  pageSize: 187.89,
+  pageToken: "ad",
 }).then((res: C1ApiAppV1AppEntitlementsListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -108,11 +108,11 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appEntitlements.listForAppResource({
-  appId: "aspernatur",
-  appResourceId: "perferendis",
-  appResourceTypeId: "ad",
-  pageSize: 6176.36,
-  pageToken: "sed",
+  appId: "natus",
+  appResourceId: "sed",
+  appResourceTypeId: "iste",
+  pageSize: 2223.21,
+  pageToken: "natus",
 }).then((res: C1ApiAppV1AppEntitlementsListForAppResourceResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -151,10 +151,10 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appEntitlements.listForAppUser({
-  appId: "iste",
-  appUserId: "dolor",
-  pageSize: 6169.34,
-  pageToken: "laboriosam",
+  appId: "laboriosam",
+  appUserId: "hic",
+  pageSize: 9025.99,
+  pageToken: "fuga",
 }).then((res: C1ApiAppV1AppEntitlementsListForAppUserResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -193,10 +193,10 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appEntitlements.listUsers({
-  appEntitlementId: "hic",
-  appId: "saepe",
-  pageSize: 6818.2,
-  pageToken: "in",
+  appEntitlementId: "in",
+  appId: "corporis",
+  pageSize: 6130.64,
+  pageToken: "iure",
 }).then((res: C1ApiAppV1AppEntitlementsListUsersResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -240,43 +240,43 @@ sdk.appEntitlements.update({
       provisionPolicy: {
         connectorProvision: {},
         delegatedProvision: {
-          appId: "corporis",
-          entitlementId: "iste",
+          appId: "saepe",
+          entitlementId: "quidem",
         },
         manualProvision: {
-          instructions: "iure",
+          instructions: "architecto",
           userIds: [
-            "saepe",
+            "ipsa",
           ],
         },
       },
-      appId: "quidem",
-      appResourceId: "architecto",
-      appResourceTypeId: "ipsa",
-      certifyPolicyId: "reiciendis",
+      appId: "reiciendis",
+      appResourceId: "est",
+      appResourceTypeId: "mollitia",
+      certifyPolicyId: "laborum",
       complianceFrameworkValueIds: [
-        "est",
+        "dolores",
       ],
-      description: "mollitia",
-      displayName: "laborum",
-      durationGrant: "dolores",
+      description: "dolorem",
+      displayName: "corporis",
+      durationGrant: "explicabo",
       durationUnset: {},
       emergencyGrantEnabled: false,
-      emergencyGrantPolicyId: "dolorem",
-      grantPolicyId: "corporis",
-      revokePolicyId: "explicabo",
-      riskLevelValueId: "nobis",
-      slug: "enim",
+      emergencyGrantPolicyId: "nobis",
+      grantPolicyId: "enim",
+      revokePolicyId: "omnis",
+      riskLevelValueId: "nemo",
+      slug: "minima",
     },
     appEntitlementExpandMask: {
       paths: [
-        "omnis",
+        "excepturi",
       ],
     },
-    updateMask: "nemo",
+    updateMask: "accusantium",
   },
-  appId: "minima",
-  id: "907aff1a-3a2f-4a94-a773-9251aa52c3f5",
+  appId: "iure",
+  id: "aff1a3a2-fa94-4677-b925-1aa52c3f5ad0",
 }).then((res: C1ApiAppV1AppEntitlementsUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response

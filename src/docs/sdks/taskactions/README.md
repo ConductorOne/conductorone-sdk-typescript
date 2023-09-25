@@ -1,4 +1,4 @@
-# taskActions
+# TaskActions
 
 ### Available Operations
 
@@ -28,13 +28,13 @@ sdk.taskActions.approve({
   taskActionsServiceApproveRequest: {
     taskExpandMask: {
       paths: [
-        "provident",
+        "aspernatur",
       ],
     },
-    comment: "quis",
-    policyStepId: "eum",
+    comment: "ullam",
+    policyStepId: "quasi",
   },
-  taskId: "reiciendis",
+  taskId: "animi",
 }).then((res: C1ApiTaskV1TaskActionsServiceApproveResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -76,12 +76,12 @@ sdk.taskActions.comment({
   taskActionsServiceCommentRequest: {
     taskExpandMask: {
       paths: [
-        "provident",
+        "nostrum",
       ],
     },
-    comment: "aspernatur",
+    comment: "mollitia",
   },
-  taskId: "ullam",
+  taskId: "provident",
 }).then((res: C1ApiTaskV1TaskActionsServiceCommentResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -123,13 +123,13 @@ sdk.taskActions.deny({
   taskActionsServiceDenyRequest: {
     taskExpandMask: {
       paths: [
-        "quasi",
+        "possimus",
       ],
     },
     comment: "animi",
-    policyStepId: "nostrum",
+    policyStepId: "ex",
   },
-  taskId: "mollitia",
+  taskId: "aliquid",
 }).then((res: C1ApiTaskV1TaskActionsServiceDenyResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -171,13 +171,13 @@ sdk.taskActions.escalateToEmergencyAccess({
   taskActionsServiceEscalateToEmergencyAccessRequest: {
     taskExpandMask: {
       paths: [
-        "provident",
+        "accusantium",
       ],
     },
-    comment: "possimus",
-    policyStepId: "animi",
+    comment: "repellat",
+    policyStepId: "doloribus",
   },
-  taskId: "ex",
+  taskId: "ullam",
 }).then((res: C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse) => {
   if (res.statusCode == 200) {
     // handle response

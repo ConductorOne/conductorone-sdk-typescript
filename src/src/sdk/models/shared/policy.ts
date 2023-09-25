@@ -5,6 +5,7 @@
 import { objectToClass, SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { PolicyPostActions } from "./policypostactions";
 import { PolicySteps, PolicyStepsInput } from "./policysteps";
+import { Rule } from "./rule";
 import { Expose, Transform, Type } from "class-transformer";
 
 /**
@@ -94,6 +95,14 @@ export class Policy extends SpeakeasyBase {
     reassignTasksToDelegates?: boolean;
 
     /**
+     * The rules field.
+     */
+    @SpeakeasyMetadata({ elemType: Rule })
+    @Expose({ name: "rules" })
+    @Type(() => Rule)
+    rules?: Rule[];
+
+    /**
      * Whether this policy is a builtin system policy. Builtin system policies cannot be edited.
      */
     @SpeakeasyMetadata()
@@ -162,4 +171,12 @@ export class PolicyInput extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "reassignTasksToDelegates" })
     reassignTasksToDelegates?: boolean;
+
+    /**
+     * The rules field.
+     */
+    @SpeakeasyMetadata({ elemType: Rule })
+    @Expose({ name: "rules" })
+    @Type(() => Rule)
+    rules?: Rule[];
 }

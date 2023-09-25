@@ -1,4 +1,4 @@
-# appReport
+# AppReport
 
 ### Available Operations
 
@@ -22,9 +22,9 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.appReport.list({
-  appId: "quasi",
-  pageSize: 9719.45,
-  pageToken: "voluptatibus",
+  appId: "vero",
+  pageSize: 4686.51,
+  pageToken: "praesentium",
 }).then((res: C1ApiAppV1AppReportServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response

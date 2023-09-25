@@ -68,6 +68,13 @@ export class AppEntitlementSearchServiceSearchRequest extends SpeakeasyBase {
     excludeAppUserIds?: string[];
 
     /**
+     * Include deleted app entitlements, this includes app entitlements that have a deleted parent object (app, app resource, app resource type)
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "includeDeleted" })
+    includeDeleted?: boolean;
+
+    /**
      * Restrict results to only those who have expiring app entitlement user bindings.
      */
     @SpeakeasyMetadata()

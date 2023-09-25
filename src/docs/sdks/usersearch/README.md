@@ -1,4 +1,4 @@
-# userSearch
+# UserSearch
 
 ### Available Operations
 
@@ -25,29 +25,29 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.userSearch.search({
   userExpandMask: {
     paths: [
-      "officia",
+      "voluptas",
     ],
   },
-  email: "Green.Bahringer@yahoo.com",
+  email: "Maiya_Bernier@yahoo.com",
   excludeIds: [
-    "iste",
+    "voluptates",
   ],
   ids: [
-    "id",
+    "mollitia",
   ],
-  pageSize: 700.42,
-  pageToken: "error",
-  query: "possimus",
+  pageSize: 6717.94,
+  pageToken: "libero",
+  query: "ad",
   refs: [
     {
-      id: "eaab5851-d6c6-445b-88b6-1891baa0fe1a",
+      id: "851d6c64-5b08-4b61-891b-aa0fe1ade008",
     },
   ],
   roleIds: [
-    "pariatur",
+    "earum",
   ],
   userStatuses: [
-    SearchUsersRequestUserStatuses.Deleted,
+    SearchUsersRequestUserStatuses.Enabled,
   ],
 }).then((res: C1ApiUserV1UserSearchSearchResponse) => {
   if (res.statusCode == 200) {

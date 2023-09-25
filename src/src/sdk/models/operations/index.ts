@@ -70,6 +70,7 @@ export * from "./c1apirequestcatalogv1requestcatalogmanagementserviceaddappentit
 export * from "./c1apirequestcatalogv1requestcatalogmanagementservicecreate";
 export * from "./c1apirequestcatalogv1requestcatalogmanagementservicedelete";
 export * from "./c1apirequestcatalogv1requestcatalogmanagementserviceget";
+export * from "./c1apirequestcatalogv1requestcatalogmanagementservicelist";
 export * from "./c1apirequestcatalogv1requestcatalogmanagementservicelistentitlementsforaccess";
 export * from "./c1apirequestcatalogv1requestcatalogmanagementservicelistentitlementspercatalog";
 export * from "./c1apirequestcatalogv1requestcatalogmanagementserviceremoveaccessentitlements";

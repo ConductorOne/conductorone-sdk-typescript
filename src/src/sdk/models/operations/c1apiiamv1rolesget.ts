@@ -12,6 +12,9 @@ export class C1ApiIamV1RolesGetRequest extends SpeakeasyBase {
 }
 
 export class C1ApiIamV1RolesGetResponse extends SpeakeasyBase {
+    /**
+     * HTTP response content type for this operation
+     */
     @SpeakeasyMetadata()
     contentType: string;
 
@@ -21,9 +24,15 @@ export class C1ApiIamV1RolesGetResponse extends SpeakeasyBase {
     @SpeakeasyMetadata()
     getRolesResponse?: shared.GetRolesResponse;
 
+    /**
+     * HTTP response status code for this operation
+     */
     @SpeakeasyMetadata()
     statusCode: number;
 
+    /**
+     * Raw HTTP response; suitable for custom response parsing
+     */
     @SpeakeasyMetadata()
     rawResponse?: AxiosResponse;
 }

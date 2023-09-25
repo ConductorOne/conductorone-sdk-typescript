@@ -3,8 +3,10 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Accept } from "./accept";
 import { Approval, ApprovalInput } from "./approval";
 import { Provision } from "./provision";
+import { Reject } from "./reject";
 import { Expose, Type } from "class-transformer";
 
 /**
@@ -15,9 +17,19 @@ import { Expose, Type } from "class-transformer";
  * This message contains a oneof named step. Only a single field of the following list may be set at a time:
  *   - approval
  *   - provision
+ *   - accept
+ *   - reject
  *
  */
 export class PolicyStep extends SpeakeasyBase {
+    /**
+     * This policy step indicates that a ticket should have an approved outcome. This is a terminal approval state and is used to explicitly define the end of approval steps.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "accept" })
+    @Type(() => Accept)
+    accept?: Accept;
+
     /**
      * The Approval message.
      *
@@ -30,6 +42,7 @@ export class PolicyStep extends SpeakeasyBase {
      *   - group
      *   - self
      *   - entitlementOwners
+     *   - expression
      *
      */
     @SpeakeasyMetadata()
@@ -44,6 +57,14 @@ export class PolicyStep extends SpeakeasyBase {
     @Expose({ name: "provision" })
     @Type(() => Provision)
     provision?: Provision;
+
+    /**
+     * This policy step indicates that a ticket should have a denied outcome. This is a terminal approval state and is used to explicitly define the end of approval steps.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "reject" })
+    @Type(() => Reject)
+    reject?: Reject;
 }
 
 /**
@@ -54,9 +75,19 @@ export class PolicyStep extends SpeakeasyBase {
  * This message contains a oneof named step. Only a single field of the following list may be set at a time:
  *   - approval
  *   - provision
+ *   - accept
+ *   - reject
  *
  */
 export class PolicyStepInput extends SpeakeasyBase {
+    /**
+     * This policy step indicates that a ticket should have an approved outcome. This is a terminal approval state and is used to explicitly define the end of approval steps.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "accept" })
+    @Type(() => Accept)
+    accept?: Accept;
+
     /**
      * The Approval message.
      *
@@ -69,6 +100,7 @@ export class PolicyStepInput extends SpeakeasyBase {
      *   - group
      *   - self
      *   - entitlementOwners
+     *   - expression
      *
      */
     @SpeakeasyMetadata()
@@ -83,4 +115,12 @@ export class PolicyStepInput extends SpeakeasyBase {
     @Expose({ name: "provision" })
     @Type(() => Provision)
     provision?: Provision;
+
+    /**
+     * This policy step indicates that a ticket should have a denied outcome. This is a terminal approval state and is used to explicitly define the end of approval steps.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "reject" })
+    @Type(() => Reject)
+    reject?: Reject;
 }

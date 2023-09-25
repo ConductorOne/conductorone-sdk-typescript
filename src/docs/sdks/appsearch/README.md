@@ -1,4 +1,4 @@
-# appSearch
+# AppSearch
 
 ### Available Operations
 
@@ -23,15 +23,15 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appSearch.search({
   appIds: [
-    "cumque",
+    "aliquid",
   ],
-  displayName: "facere",
+  displayName: "laborum",
   excludeAppIds: [
-    "ea",
+    "accusamus",
   ],
-  pageSize: 3965.06,
-  pageToken: "laborum",
-  query: "accusamus",
+  pageSize: 2497.96,
+  pageToken: "occaecati",
+  query: "enim",
 }).then((res: C1ApiAppV1AppSearchSearchResponse) => {
   if (res.statusCode == 200) {
     // handle response

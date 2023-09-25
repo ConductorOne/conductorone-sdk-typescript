@@ -18,8 +18,6 @@ yarn add https://github.com/ConductorOne/conductorone-sdk-typescript
 
 ## SDK Example Usage
 <!-- Start SDK Example Usage -->
-
-
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 import { C1ApiAppV1AppEntitlementOwnersAddResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
@@ -33,10 +31,10 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.appEntitlementOwners.add({
   addAppEntitlementOwnerRequest: {
-    userId: "corrupti",
+    userId: "quibusdam",
   },
-  appId: "provident",
-  entitlementId: "distinctio",
+  appId: "unde",
+  entitlementId: "nulla",
 }).then((res: C1ApiAppV1AppEntitlementOwnersAddResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -49,22 +47,22 @@ sdk.appEntitlementOwners.add({
 ## Available Resources and Operations
 
 
-### [appEntitlementOwners](docs/sdks/appentitlementowners/README.md)
+### [AppEntitlementOwners](docs/sdks/appentitlementowners/README.md)
 
 * [add](docs/sdks/appentitlementowners/README.md#add) - Add
 * [list](docs/sdks/appentitlementowners/README.md#list) - List
 * [remove](docs/sdks/appentitlementowners/README.md#remove) - Remove
 * [set](docs/sdks/appentitlementowners/README.md#set) - Set
 
-### [appEntitlementSearch](docs/sdks/appentitlementsearch/README.md)
+### [AppEntitlementSearch](docs/sdks/appentitlementsearch/README.md)
 
 * [search](docs/sdks/appentitlementsearch/README.md#search) - Search
 
-### [appEntitlementUserBinding](docs/sdks/appentitlementuserbinding/README.md)
+### [AppEntitlementUserBinding](docs/sdks/appentitlementuserbinding/README.md)
 
 * [listAppUsersForIdentityWithGrant](docs/sdks/appentitlementuserbinding/README.md#listappusersforidentitywithgrant) - List App Users For Identity With Grant
 
-### [appEntitlements](docs/sdks/appentitlements/README.md)
+### [AppEntitlements](docs/sdks/appentitlements/README.md)
 
 * [get](docs/sdks/appentitlements/README.md#get) - Get
 * [list](docs/sdks/appentitlements/README.md#list) - List
@@ -73,52 +71,52 @@ sdk.appEntitlementOwners.add({
 * [listUsers](docs/sdks/appentitlements/README.md#listusers) - List Users
 * [update](docs/sdks/appentitlements/README.md#update) - Update
 
-### [appOwners](docs/sdks/appowners/README.md)
+### [AppOwners](docs/sdks/appowners/README.md)
 
 * [add](docs/sdks/appowners/README.md#add) - Add
 * [list](docs/sdks/appowners/README.md#list) - List
 * [remove](docs/sdks/appowners/README.md#remove) - Remove
 
-### [appReport](docs/sdks/appreport/README.md)
+### [AppReport](docs/sdks/appreport/README.md)
 
 * [list](docs/sdks/appreport/README.md#list) - List
 
-### [appReportAction](docs/sdks/appreportaction/README.md)
+### [AppReportAction](docs/sdks/appreportaction/README.md)
 
 * [generateReport](docs/sdks/appreportaction/README.md#generatereport) - Generate Report
 
-### [appResource](docs/sdks/appresource/README.md)
+### [AppResource](docs/sdks/appresource/README.md)
 
 * [get](docs/sdks/appresource/README.md#get) - Get
 * [list](docs/sdks/appresource/README.md#list) - List
 
-### [appResourceOwners](docs/sdks/appresourceowners/README.md)
+### [AppResourceOwners](docs/sdks/appresourceowners/README.md)
 
 * [list](docs/sdks/appresourceowners/README.md#list) - List
 
-### [appResourceSearch](docs/sdks/appresourcesearch/README.md)
+### [AppResourceSearch](docs/sdks/appresourcesearch/README.md)
 
 * [searchAppResourceTypes](docs/sdks/appresourcesearch/README.md#searchappresourcetypes) - Search App Resource Types
 
-### [appResourceType](docs/sdks/appresourcetype/README.md)
+### [AppResourceType](docs/sdks/appresourcetype/README.md)
 
 * [get](docs/sdks/appresourcetype/README.md#get) - Get
 * [list](docs/sdks/appresourcetype/README.md#list) - List
 
-### [appSearch](docs/sdks/appsearch/README.md)
+### [AppSearch](docs/sdks/appsearch/README.md)
 
 * [search](docs/sdks/appsearch/README.md#search) - Search
 
-### [appUsageControls](docs/sdks/appusagecontrols/README.md)
+### [AppUsageControls](docs/sdks/appusagecontrols/README.md)
 
 * [get](docs/sdks/appusagecontrols/README.md#get) - Get
 * [update](docs/sdks/appusagecontrols/README.md#update) - Update
 
-### [appUser](docs/sdks/appuser/README.md)
+### [AppUser](docs/sdks/appuser/README.md)
 
 * [update](docs/sdks/appuser/README.md#update) - Update
 
-### [apps](docs/sdks/apps/README.md)
+### [Apps](docs/sdks/apps/README.md)
 
 * [create](docs/sdks/apps/README.md#create) - Create
 * [delete](docs/sdks/apps/README.md#delete) - Delete
@@ -126,11 +124,11 @@ sdk.appEntitlementOwners.add({
 * [list](docs/sdks/apps/README.md#list) - List
 * [update](docs/sdks/apps/README.md#update) - Update
 
-### [attributeSearch](docs/sdks/attributesearch/README.md)
+### [AttributeSearch](docs/sdks/attributesearch/README.md)
 
 * [searchAttributeValues](docs/sdks/attributesearch/README.md#searchattributevalues) - Search Attribute Values
 
-### [attributes](docs/sdks/attributes/README.md)
+### [Attributes](docs/sdks/attributes/README.md)
 
 * [createAttributeValue](docs/sdks/attributes/README.md#createattributevalue) - Create Attribute Value
 * [deleteAttributeValue](docs/sdks/attributes/README.md#deleteattributevalue) - Delete Attribute Value
@@ -138,11 +136,11 @@ sdk.appEntitlementOwners.add({
 * [listAttributeTypes](docs/sdks/attributes/README.md#listattributetypes) - List Attribute Types
 * [listAttributeValues](docs/sdks/attributes/README.md#listattributevalues) - List Attribute Values
 
-### [auth](docs/sdks/auth/README.md)
+### [Auth](docs/sdks/auth/README.md)
 
 * [introspect](docs/sdks/auth/README.md#introspect) - Introspect
 
-### [connector](docs/sdks/connector/README.md)
+### [Connector](docs/sdks/connector/README.md)
 
 * [create](docs/sdks/connector/README.md#create) - Create
 * [createDelegated](docs/sdks/connector/README.md#createdelegated) - Create Delegated
@@ -155,18 +153,18 @@ sdk.appEntitlementOwners.add({
 * [update](docs/sdks/connector/README.md#update) - Update
 * [updateDelegated](docs/sdks/connector/README.md#updatedelegated) - Update Delegated
 
-### [directory](docs/sdks/directory/README.md)
+### [Directory](docs/sdks/directory/README.md)
 
 * [create](docs/sdks/directory/README.md#create) - Create
 * [delete](docs/sdks/directory/README.md#delete) - Delete
 * [get](docs/sdks/directory/README.md#get) - Get
 * [list](docs/sdks/directory/README.md#list) - List
 
-### [personalClient](docs/sdks/personalclient/README.md)
+### [PersonalClient](docs/sdks/personalclient/README.md)
 
 * [create](docs/sdks/personalclient/README.md#create) - Create
 
-### [policies](docs/sdks/policies/README.md)
+### [Policies](docs/sdks/policies/README.md)
 
 * [create](docs/sdks/policies/README.md#create) - Create
 * [delete](docs/sdks/policies/README.md#delete) - Delete
@@ -174,59 +172,82 @@ sdk.appEntitlementOwners.add({
 * [list](docs/sdks/policies/README.md#list) - List
 * [update](docs/sdks/policies/README.md#update) - Update
 
-### [policySearch](docs/sdks/policysearch/README.md)
+### [PolicySearch](docs/sdks/policysearch/README.md)
 
 * [search](docs/sdks/policysearch/README.md#search) - Search
 
-### [requestCatalogManagement](docs/sdks/requestcatalogmanagement/README.md)
+### [RequestCatalogManagement](docs/sdks/requestcatalogmanagement/README.md)
 
 * [addAccessEntitlements](docs/sdks/requestcatalogmanagement/README.md#addaccessentitlements) - Add Access Entitlements
 * [addAppEntitlements](docs/sdks/requestcatalogmanagement/README.md#addappentitlements) - Add App Entitlements
 * [create](docs/sdks/requestcatalogmanagement/README.md#create) - Create
 * [delete](docs/sdks/requestcatalogmanagement/README.md#delete) - Delete
 * [get](docs/sdks/requestcatalogmanagement/README.md#get) - Get
+* [list](docs/sdks/requestcatalogmanagement/README.md#list) - List
 * [listEntitlementsForAccess](docs/sdks/requestcatalogmanagement/README.md#listentitlementsforaccess) - List Entitlements For Access
 * [listEntitlementsPerCatalog](docs/sdks/requestcatalogmanagement/README.md#listentitlementspercatalog) - List Entitlements Per Catalog
 * [removeAccessEntitlements](docs/sdks/requestcatalogmanagement/README.md#removeaccessentitlements) - Remove Access Entitlements
 * [removeAppEntitlements](docs/sdks/requestcatalogmanagement/README.md#removeappentitlements) - Remove App Entitlements
 * [update](docs/sdks/requestcatalogmanagement/README.md#update) - Update
 
-### [requestCatalogSearch](docs/sdks/requestcatalogsearch/README.md)
+### [RequestCatalogSearch](docs/sdks/requestcatalogsearch/README.md)
 
 * [searchEntitlements](docs/sdks/requestcatalogsearch/README.md#searchentitlements) - Search Entitlements
 
-### [roles](docs/sdks/roles/README.md)
+### [Roles](docs/sdks/roles/README.md)
 
 * [get](docs/sdks/roles/README.md#get) - Get
 * [list](docs/sdks/roles/README.md#list) - List
 * [update](docs/sdks/roles/README.md#update) - Update
 
-### [task](docs/sdks/task/README.md)
+### [Task](docs/sdks/task/README.md)
 
 * [createGrantTask](docs/sdks/task/README.md#creategranttask) - Create Grant Task
 * [createRevokeTask](docs/sdks/task/README.md#createrevoketask) - Create Revoke Task
 * [get](docs/sdks/task/README.md#get) - Get
 
-### [taskActions](docs/sdks/taskactions/README.md)
+### [TaskActions](docs/sdks/taskactions/README.md)
 
 * [approve](docs/sdks/taskactions/README.md#approve) - Approve
 * [comment](docs/sdks/taskactions/README.md#comment) - Comment
 * [deny](docs/sdks/taskactions/README.md#deny) - Deny
 * [escalateToEmergencyAccess](docs/sdks/taskactions/README.md#escalatetoemergencyaccess) - Escalate To Emergency Access
 
-### [taskSearch](docs/sdks/tasksearch/README.md)
+### [TaskSearch](docs/sdks/tasksearch/README.md)
 
 * [search](docs/sdks/tasksearch/README.md#search) - Search
 
-### [user](docs/sdks/user/README.md)
+### [User](docs/sdks/user/README.md)
 
 * [get](docs/sdks/user/README.md#get) - Get
 * [list](docs/sdks/user/README.md#list) - List
 
-### [userSearch](docs/sdks/usersearch/README.md)
+### [UserSearch](docs/sdks/usersearch/README.md)
 
 * [search](docs/sdks/usersearch/README.md#search) - Search
 <!-- End SDK Available Operations -->
+
+
+
+<!-- Start Dev Containers -->
+
+<!-- End Dev Containers -->
+
+
+
+<!-- Start Pagination -->
+# Pagination
+
+Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
+returned response object will have a `next` method that can be called to pull down the next group of results. If the
+return value of `next` is `null`, then there are no more pages to be fetched.
+
+Here's an example of one such pagination call:
+<!-- End Pagination -->
+
+<!-- Placeholder for Future Speakeasy SDK Sections -->
+
+
 
 ### Maturity
 

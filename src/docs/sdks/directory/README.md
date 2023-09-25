@@ -1,4 +1,4 @@
-# directory
+# Directory
 
 ### Available Operations
 
@@ -27,10 +27,10 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.directory.create({
   directoryExpandMask: {
     paths: [
-      "praesentium",
+      "fugit",
     ],
   },
-  appId: "consequuntur",
+  appId: "fuga",
 }).then((res: C1ApiDirectoryV1DirectoryServiceCreateResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -70,7 +70,7 @@ const sdk = new ConductoroneSDKTypescript({
 
 sdk.directory.delete({
   directoryServiceDeleteRequest: {},
-  appId: "deleniti",
+  appId: "mollitia",
 }).then((res: C1ApiDirectoryV1DirectoryServiceDeleteResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -109,7 +109,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.directory.get({
-  appId: "fugit",
+  appId: "incidunt",
 }).then((res: C1ApiDirectoryV1DirectoryServiceGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -148,8 +148,8 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.directory.list({
-  pageSize: 6813.93,
-  pageToken: "mollitia",
+  pageSize: 5392.24,
+  pageToken: "explicabo",
 }).then((res: C1ApiDirectoryV1DirectoryServiceListResponse) => {
   if (res.statusCode == 200) {
     // handle response

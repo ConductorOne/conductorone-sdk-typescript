@@ -12,6 +12,9 @@ export class C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest exte
 }
 
 export class C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse extends SpeakeasyBase {
+    /**
+     * HTTP response content type for this operation
+     */
     @SpeakeasyMetadata()
     contentType: string;
 
@@ -21,9 +24,15 @@ export class C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse ext
     @SpeakeasyMetadata()
     requestCatalogManagementServiceGetResponse?: shared.RequestCatalogManagementServiceGetResponse;
 
+    /**
+     * HTTP response status code for this operation
+     */
     @SpeakeasyMetadata()
     statusCode: number;
 
+    /**
+     * Raw HTTP response; suitable for custom response parsing
+     */
     @SpeakeasyMetadata()
     rawResponse?: AxiosResponse;
 }

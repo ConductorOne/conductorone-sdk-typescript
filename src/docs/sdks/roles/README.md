@@ -1,4 +1,4 @@
-# roles
+# Roles
 
 ### Available Operations
 
@@ -24,7 +24,7 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.roles.get({
-  roleId: "corporis",
+  roleId: "doloremque",
 }).then((res: C1ApiIamV1RolesGetResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -63,8 +63,8 @@ const sdk = new ConductoroneSDKTypescript({
 });
 
 sdk.roles.list({
-  pageSize: 6964.63,
-  pageToken: "eveniet",
+  pageSize: 4341.56,
+  pageToken: "ipsa",
 }).then((res: C1ApiIamV1RolesListResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -105,17 +105,17 @@ const sdk = new ConductoroneSDKTypescript({
 sdk.roles.update({
   updateRoleRequestInput: {
     role: {
-      displayName: "non",
+      displayName: "totam",
       permissions: [
-        "vero",
+        "quae",
       ],
       serviceRoles: [
-        "doloremque",
+        "molestiae",
       ],
     },
-    updateMask: "iure",
+    updateMask: "eveniet",
   },
-  roleId: "ipsa",
+  roleId: "qui",
 }).then((res: C1ApiIamV1RolesUpdateResponse) => {
   if (res.statusCode == 200) {
     // handle response
