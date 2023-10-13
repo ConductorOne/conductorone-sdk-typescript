@@ -1,4 +1,5 @@
 # AppEntitlementUserBinding
+(*appEntitlementUserBinding*)
 
 ### Available Operations
 

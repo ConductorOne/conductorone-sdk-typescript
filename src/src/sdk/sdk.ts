@@ -89,7 +89,7 @@ export class SDKConfiguration {
     language = "typescript";
     openapiDocVersion = "0.1.0-alpha";
     sdkVersion = "1.1.0";
-    genVersion = "2.129.1";
+    genVersion = "2.131.1";
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);

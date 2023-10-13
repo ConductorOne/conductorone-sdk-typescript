@@ -47,22 +47,22 @@ sdk.appEntitlementOwners.add({
 ## Available Resources and Operations
 
 
-### [AppEntitlementOwners](docs/sdks/appentitlementowners/README.md)
+### [appEntitlementOwners](docs/sdks/appentitlementowners/README.md)
 
 * [add](docs/sdks/appentitlementowners/README.md#add) - Add
 * [list](docs/sdks/appentitlementowners/README.md#list) - List
 * [remove](docs/sdks/appentitlementowners/README.md#remove) - Remove
 * [set](docs/sdks/appentitlementowners/README.md#set) - Set
 
-### [AppEntitlementSearch](docs/sdks/appentitlementsearch/README.md)
+### [appEntitlementSearch](docs/sdks/appentitlementsearch/README.md)
 
 * [search](docs/sdks/appentitlementsearch/README.md#search) - Search
 
-### [AppEntitlementUserBinding](docs/sdks/appentitlementuserbinding/README.md)
+### [appEntitlementUserBinding](docs/sdks/appentitlementuserbinding/README.md)
 
 * [listAppUsersForIdentityWithGrant](docs/sdks/appentitlementuserbinding/README.md#listappusersforidentitywithgrant) - List App Users For Identity With Grant
 
-### [AppEntitlements](docs/sdks/appentitlements/README.md)
+### [appEntitlements](docs/sdks/appentitlements/README.md)
 
 * [get](docs/sdks/appentitlements/README.md#get) - Get
 * [list](docs/sdks/appentitlements/README.md#list) - List
@@ -71,52 +71,52 @@ sdk.appEntitlementOwners.add({
 * [listUsers](docs/sdks/appentitlements/README.md#listusers) - List Users
 * [update](docs/sdks/appentitlements/README.md#update) - Update
 
-### [AppOwners](docs/sdks/appowners/README.md)
+### [appOwners](docs/sdks/appowners/README.md)
 
 * [add](docs/sdks/appowners/README.md#add) - Add
 * [list](docs/sdks/appowners/README.md#list) - List
 * [remove](docs/sdks/appowners/README.md#remove) - Remove
 
-### [AppReport](docs/sdks/appreport/README.md)
+### [appReport](docs/sdks/appreport/README.md)
 
 * [list](docs/sdks/appreport/README.md#list) - List
 
-### [AppReportAction](docs/sdks/appreportaction/README.md)
+### [appReportAction](docs/sdks/appreportaction/README.md)
 
 * [generateReport](docs/sdks/appreportaction/README.md#generatereport) - Generate Report
 
-### [AppResource](docs/sdks/appresource/README.md)
+### [appResource](docs/sdks/appresource/README.md)
 
 * [get](docs/sdks/appresource/README.md#get) - Get
 * [list](docs/sdks/appresource/README.md#list) - List
 
-### [AppResourceOwners](docs/sdks/appresourceowners/README.md)
+### [appResourceOwners](docs/sdks/appresourceowners/README.md)
 
 * [list](docs/sdks/appresourceowners/README.md#list) - List
 
-### [AppResourceSearch](docs/sdks/appresourcesearch/README.md)
+### [appResourceSearch](docs/sdks/appresourcesearch/README.md)
 
 * [searchAppResourceTypes](docs/sdks/appresourcesearch/README.md#searchappresourcetypes) - Search App Resource Types
 
-### [AppResourceType](docs/sdks/appresourcetype/README.md)
+### [appResourceType](docs/sdks/appresourcetype/README.md)
 
 * [get](docs/sdks/appresourcetype/README.md#get) - Get
 * [list](docs/sdks/appresourcetype/README.md#list) - List
 
-### [AppSearch](docs/sdks/appsearch/README.md)
+### [appSearch](docs/sdks/appsearch/README.md)
 
 * [search](docs/sdks/appsearch/README.md#search) - Search
 
-### [AppUsageControls](docs/sdks/appusagecontrols/README.md)
+### [appUsageControls](docs/sdks/appusagecontrols/README.md)
 
 * [get](docs/sdks/appusagecontrols/README.md#get) - Get
 * [update](docs/sdks/appusagecontrols/README.md#update) - Update
 
-### [AppUser](docs/sdks/appuser/README.md)
+### [appUser](docs/sdks/appuser/README.md)
 
 * [update](docs/sdks/appuser/README.md#update) - Update
 
-### [Apps](docs/sdks/apps/README.md)
+### [apps](docs/sdks/apps/README.md)
 
 * [create](docs/sdks/apps/README.md#create) - Create
 * [delete](docs/sdks/apps/README.md#delete) - Delete
@@ -124,11 +124,11 @@ sdk.appEntitlementOwners.add({
 * [list](docs/sdks/apps/README.md#list) - List
 * [update](docs/sdks/apps/README.md#update) - Update
 
-### [AttributeSearch](docs/sdks/attributesearch/README.md)
+### [attributeSearch](docs/sdks/attributesearch/README.md)
 
 * [searchAttributeValues](docs/sdks/attributesearch/README.md#searchattributevalues) - Search Attribute Values
 
-### [Attributes](docs/sdks/attributes/README.md)
+### [attributes](docs/sdks/attributes/README.md)
 
 * [createAttributeValue](docs/sdks/attributes/README.md#createattributevalue) - Create Attribute Value
 * [deleteAttributeValue](docs/sdks/attributes/README.md#deleteattributevalue) - Delete Attribute Value
@@ -136,11 +136,11 @@ sdk.appEntitlementOwners.add({
 * [listAttributeTypes](docs/sdks/attributes/README.md#listattributetypes) - List Attribute Types
 * [listAttributeValues](docs/sdks/attributes/README.md#listattributevalues) - List Attribute Values
 
-### [Auth](docs/sdks/auth/README.md)
+### [auth](docs/sdks/auth/README.md)
 
 * [introspect](docs/sdks/auth/README.md#introspect) - Introspect
 
-### [Connector](docs/sdks/connector/README.md)
+### [connector](docs/sdks/connector/README.md)
 
 * [create](docs/sdks/connector/README.md#create) - Create
 * [createDelegated](docs/sdks/connector/README.md#createdelegated) - Create Delegated
@@ -153,18 +153,18 @@ sdk.appEntitlementOwners.add({
 * [update](docs/sdks/connector/README.md#update) - Update
 * [updateDelegated](docs/sdks/connector/README.md#updatedelegated) - Update Delegated
 
-### [Directory](docs/sdks/directory/README.md)
+### [directory](docs/sdks/directory/README.md)
 
 * [create](docs/sdks/directory/README.md#create) - Create
 * [delete](docs/sdks/directory/README.md#delete) - Delete
 * [get](docs/sdks/directory/README.md#get) - Get
 * [list](docs/sdks/directory/README.md#list) - List
 
-### [PersonalClient](docs/sdks/personalclient/README.md)
+### [personalClient](docs/sdks/personalclient/README.md)
 
 * [create](docs/sdks/personalclient/README.md#create) - Create
 
-### [Policies](docs/sdks/policies/README.md)
+### [policies](docs/sdks/policies/README.md)
 
 * [create](docs/sdks/policies/README.md#create) - Create
 * [delete](docs/sdks/policies/README.md#delete) - Delete
@@ -172,11 +172,11 @@ sdk.appEntitlementOwners.add({
 * [list](docs/sdks/policies/README.md#list) - List
 * [update](docs/sdks/policies/README.md#update) - Update
 
-### [PolicySearch](docs/sdks/policysearch/README.md)
+### [policySearch](docs/sdks/policysearch/README.md)
 
 * [search](docs/sdks/policysearch/README.md#search) - Search
 
-### [RequestCatalogManagement](docs/sdks/requestcatalogmanagement/README.md)
+### [requestCatalogManagement](docs/sdks/requestcatalogmanagement/README.md)
 
 * [addAccessEntitlements](docs/sdks/requestcatalogmanagement/README.md#addaccessentitlements) - Add Access Entitlements
 * [addAppEntitlements](docs/sdks/requestcatalogmanagement/README.md#addappentitlements) - Add App Entitlements
@@ -190,39 +190,39 @@ sdk.appEntitlementOwners.add({
 * [removeAppEntitlements](docs/sdks/requestcatalogmanagement/README.md#removeappentitlements) - Remove App Entitlements
 * [update](docs/sdks/requestcatalogmanagement/README.md#update) - Update
 
-### [RequestCatalogSearch](docs/sdks/requestcatalogsearch/README.md)
+### [requestCatalogSearch](docs/sdks/requestcatalogsearch/README.md)
 
 * [searchEntitlements](docs/sdks/requestcatalogsearch/README.md#searchentitlements) - Search Entitlements
 
-### [Roles](docs/sdks/roles/README.md)
+### [roles](docs/sdks/roles/README.md)
 
 * [get](docs/sdks/roles/README.md#get) - Get
 * [list](docs/sdks/roles/README.md#list) - List
 * [update](docs/sdks/roles/README.md#update) - Update
 
-### [Task](docs/sdks/task/README.md)
+### [task](docs/sdks/task/README.md)
 
 * [createGrantTask](docs/sdks/task/README.md#creategranttask) - Create Grant Task
 * [createRevokeTask](docs/sdks/task/README.md#createrevoketask) - Create Revoke Task
 * [get](docs/sdks/task/README.md#get) - Get
 
-### [TaskActions](docs/sdks/taskactions/README.md)
+### [taskActions](docs/sdks/taskactions/README.md)
 
 * [approve](docs/sdks/taskactions/README.md#approve) - Approve
 * [comment](docs/sdks/taskactions/README.md#comment) - Comment
 * [deny](docs/sdks/taskactions/README.md#deny) - Deny
 * [escalateToEmergencyAccess](docs/sdks/taskactions/README.md#escalatetoemergencyaccess) - Escalate To Emergency Access
 
-### [TaskSearch](docs/sdks/tasksearch/README.md)
+### [taskSearch](docs/sdks/tasksearch/README.md)
 
 * [search](docs/sdks/tasksearch/README.md#search) - Search
 
-### [User](docs/sdks/user/README.md)
+### [user](docs/sdks/user/README.md)
 
 * [get](docs/sdks/user/README.md#get) - Get
 * [list](docs/sdks/user/README.md#list) - List
 
-### [UserSearch](docs/sdks/usersearch/README.md)
+### [userSearch](docs/sdks/usersearch/README.md)
 
 * [search](docs/sdks/usersearch/README.md#search) - Search
 <!-- End SDK Available Operations -->
