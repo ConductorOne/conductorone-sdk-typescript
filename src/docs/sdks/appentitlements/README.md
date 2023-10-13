@@ -1,4 +1,5 @@
 # AppEntitlements
+(*appEntitlements*)
 
 ### Available Operations
 

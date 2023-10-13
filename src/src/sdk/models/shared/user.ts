@@ -165,6 +165,10 @@ export class User extends SpeakeasyBase {
     @Type(() => UserAttributeMappingSource)
     managerSources?: UserAttributeMappingSource[];
 
+    @SpeakeasyMetadata()
+    @Expose({ name: "profile" })
+    profile?: Record<string, any>;
+
     /**
      * A list of unique identifiers that maps to ConductorOne’s user roles let you assign users permissions tailored to the work they do in the software.
      */
