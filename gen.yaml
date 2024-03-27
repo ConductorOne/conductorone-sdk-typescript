@@ -26,3 +26,4 @@ typescript:
   author: ConductorOne
   maxMethodParams: 0
   packageName: conductorone-sdk-typescript
+  templateVersion: v2
