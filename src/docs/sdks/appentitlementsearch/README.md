@@ -13,65 +13,68 @@ Search app entitlements based on filters specified in the request body.
 
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
-import { C1ApiAppV1AppEntitlementSearchServiceSearchResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript({
-  security: {
-    bearerAuth: "",
-    oauth: "",
-  },
-});
+async function run() {
+  const sdk = new ConductoroneSDKTypescript({
+    security: {
+      bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+    },
+  });
 
-sdk.appEntitlementSearch.search({
-  appEntitlementExpandMask: {
-    paths: [
-      "molestiae",
+  const result = await sdk.appEntitlementSearch.search({
+    appEntitlementExpandMask: {
+      paths: [
+        "<value>",
+      ],
+    },
+    appIds: [
+      "<value>",
     ],
-  },
-  accessReviewId: "minus",
-  alias: "placeat",
-  appIds: [
-    "voluptatum",
-  ],
-  appUserIds: [
-    "iusto",
-  ],
-  complianceFrameworkIds: [
-    "excepturi",
-  ],
-  excludeAppIds: [
-    "nisi",
-  ],
-  excludeAppUserIds: [
-    "recusandae",
-  ],
-  includeDeleted: false,
-  onlyGetExpiring: false,
-  pageSize: 8360.79,
-  pageToken: "ab",
-  query: "quis",
-  resourceTypeIds: [
-    "veritatis",
-  ],
-  riskLevelIds: [
-    "deserunt",
-  ],
-}).then((res: C1ApiAppV1AppEntitlementSearchServiceSearchResponse) => {
-  if (res.statusCode == 200) {
-    // handle response
-  }
-});
+    appUserIds: [
+      "<value>",
+    ],
+    complianceFrameworkIds: [
+      "<value>",
+    ],
+    excludeAppIds: [
+      "<value>",
+    ],
+    excludeAppUserIds: [
+      "<value>",
+    ],
+    resourceIds: [
+      "<value>",
+    ],
+    resourceTypeIds: [
+      "<value>",
+    ],
+    riskLevelIds: [
+      "<value>",
+    ],
+  });
+
+  // Handle the result
+  console.log(result)
+}
+
+run();
 ```
 
 ### Parameters
 
-| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                          | [shared.AppEntitlementSearchServiceSearchRequest](../../models/shared/appentitlementsearchservicesearchrequest.md) | :heavy_check_mark:                                                                                                 | The request object to use for the request.                                                                         |
-| `config`                                                                                                           | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                                       | :heavy_minus_sign:                                                                                                 | Available config options for making requests.                                                                      |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [shared.AppEntitlementSearchServiceSearchRequest](../../sdk/models/shared/appentitlementsearchservicesearchrequest.md)                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
 
-**Promise<[operations.C1ApiAppV1AppEntitlementSearchServiceSearchResponse](../../models/operations/c1apiappv1appentitlementsearchservicesearchresponse.md)>**
+**Promise<[operations.C1ApiAppV1AppEntitlementSearchServiceSearchResponse](../../sdk/models/operations/c1apiappv1appentitlementsearchservicesearchresponse.md)>**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |

@@ -1,9 +1,0 @@
-# C1ApiAppV1AppUsageControlsServiceUpdateRequest
-
-
-## Fields
-
-| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `updateAppUsageControlsRequest`                                                              | [shared.UpdateAppUsageControlsRequest](../../models/shared/updateappusagecontrolsrequest.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          |
-| `appId`                                                                                      | *string*                                                                                     | :heavy_check_mark:                                                                           | N/A                                                                                          |

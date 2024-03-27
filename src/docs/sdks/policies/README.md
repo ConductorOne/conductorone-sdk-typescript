@@ -17,86 +17,113 @@ Create a policy.
 
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
-import { C1ApiPolicyV1PoliciesCreateResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
-import { CreatePolicyRequestPolicyType } from "conductorone-sdk-typescript/dist/sdk/models/shared";
 
-const sdk = new ConductoroneSDKTypescript({
-  security: {
-    bearerAuth: "",
-    oauth: "",
-  },
-});
+async function run() {
+  const sdk = new ConductoroneSDKTypescript({
+    security: {
+      bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+    },
+  });
 
-sdk.policies.create({
-  description: "consequuntur",
-  displayName: "ratione",
-  policySteps: {
-    "explicabo": {
-      steps: [
-        {
-          accept: {},
-          approval: {
-            appGroupApproval: {},
-            appOwnerApproval: {},
-            entitlementOwnerApproval: {},
-            expressionApproval: {},
-            managerApproval: {},
-            selfApproval: {},
-            userApproval: {},
-          },
-          provision: {
-            provisionPolicy: {
-              connectorProvision: {},
-              delegatedProvision: {
-                appId: "saepe",
-                entitlementId: "occaecati",
+  const result = await sdk.policies.create({
+    policySteps: {
+      "key": {
+        steps: [
+          {
+            accept: {},
+            approval: {
+              appGroupApproval: {
+                fallbackUserIds: [
+                  "<value>",
+                ],
               },
-              manualProvision: {
-                instructions: "atque",
+              appOwnerApproval: {},
+              entitlementOwnerApproval: {
+                fallbackUserIds: [
+                  "<value>",
+                ],
+              },
+              expressionApproval: {
+                assignedUserIds: [
+                  "<value>",
+                ],
+                expressions: [
+                  "<value>",
+                ],
+                fallbackUserIds: [
+                  "<value>",
+                ],
+              },
+              managerApproval: {
+                assignedUserIds: [
+                  "<value>",
+                ],
+                fallbackUserIds: [
+                  "<value>",
+                ],
+              },
+              selfApproval: {
+                assignedUserIds: [
+                  "<value>",
+                ],
+                fallbackUserIds: [
+                  "<value>",
+                ],
+              },
+              userApproval: {
                 userIds: [
-                  "et",
+                  "<value>",
                 ],
               },
             },
-            provisionTarget: {
-              appEntitlementId: "esse",
-              appId: "eveniet",
-              appUserId: "accusamus",
-              grantDuration: "veritatis",
+            provision: {
+              provisionPolicy: {
+                connectorProvision: {},
+                delegatedProvision: {},
+                manualProvision: {
+                  userIds: [
+                    "<value>",
+                  ],
+                },
+                webhookProvision: {},
+              },
+              provisionTarget: {},
             },
-            assigned: false,
+            reject: {},
           },
-          reject: {},
-        },
-      ],
+        ],
+      },
     },
-  },
-  policyType: CreatePolicyRequestPolicyType.PolicyTypeRevoke,
-  postActions: [
-    {
-      certifyRemediateImmediately: false,
-    },
-  ],
-  reassignTasksToDelegates: false,
-}).then((res: C1ApiPolicyV1PoliciesCreateResponse) => {
-  if (res.statusCode == 200) {
-    // handle response
-  }
-});
+    postActions: [
+      {},
+    ],
+  });
+
+  // Handle the result
+  console.log(result)
+}
+
+run();
 ```
 
 ### Parameters
 
-| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `request`                                                                          | [shared.CreatePolicyRequestInput](../../models/shared/createpolicyrequestinput.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
-| `config`                                                                           | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                       | :heavy_minus_sign:                                                                 | Available config options for making requests.                                      |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [shared.CreatePolicyRequest](../../sdk/models/shared/createpolicyrequest.md)                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
 
-**Promise<[operations.C1ApiPolicyV1PoliciesCreateResponse](../../models/operations/c1apipolicyv1policiescreateresponse.md)>**
+**Promise<[operations.C1ApiPolicyV1PoliciesCreateResponse](../../sdk/models/operations/c1apipolicyv1policiescreateresponse.md)>**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
 
 ## delete
 
@@ -106,37 +133,44 @@ Delete a policy by ID.
 
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
-import { C1ApiPolicyV1PoliciesDeleteResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript({
-  security: {
-    bearerAuth: "",
-    oauth: "",
-  },
-});
+async function run() {
+  const sdk = new ConductoroneSDKTypescript({
+    security: {
+      bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+    },
+  });
 
-sdk.policies.delete({
-  deletePolicyRequest: {},
-  id: "cbe61e6b-7b95-4bc0-ab3c-20c4f3789fd8",
-}).then((res: C1ApiPolicyV1PoliciesDeleteResponse) => {
-  if (res.statusCode == 200) {
-    // handle response
-  }
-});
+  const result = await sdk.policies.delete({
+    deletePolicyRequest: {},
+    id: "<id>",
+  });
+
+  // Handle the result
+  console.log(result)
+}
+
+run();
 ```
 
 ### Parameters
 
-| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                      | [operations.C1ApiPolicyV1PoliciesDeleteRequest](../../models/operations/c1apipolicyv1policiesdeleterequest.md) | :heavy_check_mark:                                                                                             | The request object to use for the request.                                                                     |
-| `config`                                                                                                       | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                                   | :heavy_minus_sign:                                                                                             | Available config options for making requests.                                                                  |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.C1ApiPolicyV1PoliciesDeleteRequest](../../sdk/models/operations/c1apipolicyv1policiesdeleterequest.md)                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
 
-**Promise<[operations.C1ApiPolicyV1PoliciesDeleteResponse](../../models/operations/c1apipolicyv1policiesdeleteresponse.md)>**
+**Promise<[operations.C1ApiPolicyV1PoliciesDeleteResponse](../../sdk/models/operations/c1apipolicyv1policiesdeleteresponse.md)>**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
 
 ## get
 
@@ -146,36 +180,43 @@ Get a policy by ID.
 
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
-import { C1ApiPolicyV1PoliciesGetResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript({
-  security: {
-    bearerAuth: "",
-    oauth: "",
-  },
-});
+async function run() {
+  const sdk = new ConductoroneSDKTypescript({
+    security: {
+      bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+    },
+  });
 
-sdk.policies.get({
-  id: "71f99dd2-efd1-421a-a6f1-e674bdb04f15",
-}).then((res: C1ApiPolicyV1PoliciesGetResponse) => {
-  if (res.statusCode == 200) {
-    // handle response
-  }
-});
+  const result = await sdk.policies.get({
+    id: "<id>",
+  });
+
+  // Handle the result
+  console.log(result)
+}
+
+run();
 ```
 
 ### Parameters
 
-| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                | [operations.C1ApiPolicyV1PoliciesGetRequest](../../models/operations/c1apipolicyv1policiesgetrequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
-| `config`                                                                                                 | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                             | :heavy_minus_sign:                                                                                       | Available config options for making requests.                                                            |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.C1ApiPolicyV1PoliciesGetRequest](../../sdk/models/operations/c1apipolicyv1policiesgetrequest.md)                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
 
-**Promise<[operations.C1ApiPolicyV1PoliciesGetResponse](../../models/operations/c1apipolicyv1policiesgetresponse.md)>**
+**Promise<[operations.C1ApiPolicyV1PoliciesGetResponse](../../sdk/models/operations/c1apipolicyv1policiesgetresponse.md)>**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
 
 ## list
 
@@ -185,37 +226,41 @@ List policies.
 
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
-import { C1ApiPolicyV1PoliciesListResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript({
-  security: {
-    bearerAuth: "",
-    oauth: "",
-  },
-});
+async function run() {
+  const sdk = new ConductoroneSDKTypescript({
+    security: {
+      bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+    },
+  });
 
-sdk.policies.list({
-  pageSize: 4438.79,
-  pageToken: "ullam",
-}).then((res: C1ApiPolicyV1PoliciesListResponse) => {
-  if (res.statusCode == 200) {
-    // handle response
-  }
-});
+  const result = await sdk.policies.list({});
+
+  // Handle the result
+  console.log(result)
+}
+
+run();
 ```
 
 ### Parameters
 
-| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
-| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                  | [operations.C1ApiPolicyV1PoliciesListRequest](../../models/operations/c1apipolicyv1policieslistrequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
-| `config`                                                                                                   | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                               | :heavy_minus_sign:                                                                                         | Available config options for making requests.                                                              |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.C1ApiPolicyV1PoliciesListRequest](../../sdk/models/operations/c1apipolicyv1policieslistrequest.md)                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
 
-**Promise<[operations.C1ApiPolicyV1PoliciesListResponse](../../models/operations/c1apipolicyv1policieslistresponse.md)>**
+**Promise<[operations.C1ApiPolicyV1PoliciesListResponse](../../sdk/models/operations/c1apipolicyv1policieslistresponse.md)>**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
 
 ## update
 
@@ -225,95 +270,118 @@ Update a policy by providing a policy object and an update mask.
 
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
-import { C1ApiPolicyV1PoliciesUpdateResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
-import { PolicyPolicyType } from "conductorone-sdk-typescript/dist/sdk/models/shared";
 
-const sdk = new ConductoroneSDKTypescript({
-  security: {
-    bearerAuth: "",
-    oauth: "",
-  },
-});
+async function run() {
+  const sdk = new ConductoroneSDKTypescript({
+    security: {
+      bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+    },
+  });
 
-sdk.policies.update({
-  updatePolicyRequestInput: {
-    policy: {
-      description: "nisi",
-      displayName: "aut",
-      policySteps: {
-        "voluptatum": {
-          steps: [
-            {
-              accept: {},
-              approval: {
-                appGroupApproval: {},
-                appOwnerApproval: {},
-                entitlementOwnerApproval: {},
-                expressionApproval: {},
-                managerApproval: {},
-                selfApproval: {},
-                userApproval: {},
-              },
-              provision: {
-                provisionPolicy: {
-                  connectorProvision: {},
-                  delegatedProvision: {
-                    appId: "qui",
-                    entitlementId: "quibusdam",
+  const result = await sdk.policies.update({
+    updatePolicyRequest: {
+      policy: {
+        policySteps: {
+          "key": {
+            steps: [
+              {
+                accept: {},
+                approval: {
+                  appGroupApproval: {
+                    fallbackUserIds: [
+                      "<value>",
+                    ],
                   },
-                  manualProvision: {
-                    instructions: "ex",
+                  appOwnerApproval: {},
+                  entitlementOwnerApproval: {
+                    fallbackUserIds: [
+                      "<value>",
+                    ],
+                  },
+                  expressionApproval: {
+                    assignedUserIds: [
+                      "<value>",
+                    ],
+                    expressions: [
+                      "<value>",
+                    ],
+                    fallbackUserIds: [
+                      "<value>",
+                    ],
+                  },
+                  managerApproval: {
+                    assignedUserIds: [
+                      "<value>",
+                    ],
+                    fallbackUserIds: [
+                      "<value>",
+                    ],
+                  },
+                  selfApproval: {
+                    assignedUserIds: [
+                      "<value>",
+                    ],
+                    fallbackUserIds: [
+                      "<value>",
+                    ],
+                  },
+                  userApproval: {
                     userIds: [
-                      "deleniti",
+                      "<value>",
                     ],
                   },
                 },
-                provisionTarget: {
-                  appEntitlementId: "itaque",
-                  appId: "dolorum",
-                  appUserId: "architecto",
-                  grantDuration: "omnis",
+                provision: {
+                  provisionPolicy: {
+                    connectorProvision: {},
+                    delegatedProvision: {},
+                    manualProvision: {
+                      userIds: [
+                        "<value>",
+                      ],
+                    },
+                    webhookProvision: {},
+                  },
+                  provisionTarget: {},
                 },
-                assigned: false,
+                reject: {},
               },
-              reject: {},
-            },
-          ],
+            ],
+          },
         },
+        postActions: [
+          {},
+        ],
+        rules: [
+          {},
+        ],
       },
-      policyType: PolicyPolicyType.PolicyTypeProvision,
-      postActions: [
-        {
-          certifyRemediateImmediately: false,
-        },
-      ],
-      reassignTasksToDelegates: false,
-      rules: [
-        {
-          condition: "quasi",
-          policyKey: "at",
-        },
-      ],
     },
-    updateMask: "et",
-  },
-  id: "7051339d-0808-46a1-8403-94c26071f93f",
-}).then((res: C1ApiPolicyV1PoliciesUpdateResponse) => {
-  if (res.statusCode == 200) {
-    // handle response
-  }
-});
+    id: "<id>",
+  });
+
+  // Handle the result
+  console.log(result)
+}
+
+run();
 ```
 
 ### Parameters
 
-| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                      | [operations.C1ApiPolicyV1PoliciesUpdateRequest](../../models/operations/c1apipolicyv1policiesupdaterequest.md) | :heavy_check_mark:                                                                                             | The request object to use for the request.                                                                     |
-| `config`                                                                                                       | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                                   | :heavy_minus_sign:                                                                                             | Available config options for making requests.                                                                  |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.C1ApiPolicyV1PoliciesUpdateRequest](../../sdk/models/operations/c1apipolicyv1policiesupdaterequest.md)                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
 
-**Promise<[operations.C1ApiPolicyV1PoliciesUpdateResponse](../../models/operations/c1apipolicyv1policiesupdateresponse.md)>**
+**Promise<[operations.C1ApiPolicyV1PoliciesUpdateResponse](../../sdk/models/operations/c1apipolicyv1policiesupdateresponse.md)>**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |

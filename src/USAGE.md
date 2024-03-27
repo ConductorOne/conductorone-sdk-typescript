@@ -1,27 +1,24 @@
-<!-- Start SDK Example Usage -->
-
-
+<!-- Start SDK Example Usage [usage] -->
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
-import { C1ApiAppV1AppEntitlementOwnersAddResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new ConductoroneSDKTypescript({
-  security: {
-    bearerAuth: "",
-    oauth: "",
-  },
-});
+async function run() {
+    const sdk = new ConductoroneSDKTypescript({
+        security: {
+            bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+        },
+    });
 
-sdk.appEntitlementOwners.add({
-  addAppEntitlementOwnerRequest: {
-    userId: "corrupti",
-  },
-  appId: "provident",
-  entitlementId: "distinctio",
-}).then((res: C1ApiAppV1AppEntitlementOwnersAddResponse) => {
-  if (res.statusCode == 200) {
-    // handle response
-  }
-});
+    const result = await sdk.apps.create({
+        owners: ["<value>"],
+    });
+
+    // Handle the result
+    console.log(result);
+}
+
+run();
+
 ```
-<!-- End SDK Example Usage -->
+<!-- End SDK Example Usage [usage] -->
