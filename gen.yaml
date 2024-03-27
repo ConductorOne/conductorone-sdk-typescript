@@ -1,28 +1,35 @@
-configVersion: 1.0.0
-management:
-  docChecksum: 93940197c0bfdbea4a969b3e9aa32818
-  docVersion: 0.1.0-alpha
-  speakeasyVersion: 1.64.0
-  generationVersion: 2.71.0
+configVersion: 2.0.0
 generation:
-  comments:
-    disableComments: false
-    omitDescriptionIfSummaryPresent: false
-  baseServerURL: ""
   sdkClassName: conductorone-sdk-typescript
-  singleTagPerOp: false
-  tagNamespacingDisabled: false
-features:
-  typescript:
-    core: 2.88.1
-    globalSecurity: 2.81.1
-    globalServerURLs: 2.82.0
-    groups: 2.81.1
-    includes: 2.81.1
-    inputOutputModels: 2.81.1
-    nameOverrides: 2.81.1
+  usageSnippets:
+    optionalPropertyRendering: withExample
+  fixes:
+    nameResolutionDec2023: false
+    parameterOrderingFeb2024: false
+    requestResponseComponentNamesFeb2024: false
+  auth:
+    oAuth2ClientCredentialsEnabled: false
+  baseServerURL: ""
 typescript:
-  version: 1.1.0
+  version: 2.0.1
+  additionalDependencies:
+    dependencies: {}
+    devDependencies: {}
+    peerDependencies: {}
   author: ConductorOne
+  clientServerStatusCodesAsErrors: false
+  flattenGlobalSecurity: true
+  imports:
+    option: openapi
+    paths:
+      callbacks: sdk/models/callbacks
+      errors: sdk/models/errors
+      operations: sdk/models/operations
+      shared: sdk/models/shared
+      webhooks: sdk/models/webhooks
+  inputModelSuffix: input
   maxMethodParams: 0
+  outputModelSuffix: output
   packageName: conductorone-sdk-typescript
+  responseFormat: envelope
+  templateVersion: v2

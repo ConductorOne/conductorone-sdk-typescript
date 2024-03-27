@@ -13,59 +13,60 @@ Search users based on filters specified in the request body.
 
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
-import { C1ApiUserV1UserSearchSearchResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
-import { SearchUsersRequestUserStatuses } from "conductorone-sdk-typescript/dist/sdk/models/shared";
+import { UserStatuses } from "conductorone-sdk-typescript/sdk/models/shared";
 
-const sdk = new ConductoroneSDKTypescript({
-  security: {
-    bearerAuth: "",
-    oauth: "",
-  },
-});
-
-sdk.userSearch.search({
-  userExpandMask: {
-    paths: [
-      "voluptas",
-    ],
-  },
-  email: "Maiya_Bernier@yahoo.com",
-  excludeIds: [
-    "voluptates",
-  ],
-  ids: [
-    "mollitia",
-  ],
-  pageSize: 6717.94,
-  pageToken: "libero",
-  query: "ad",
-  refs: [
-    {
-      id: "851d6c64-5b08-4b61-891b-aa0fe1ade008",
+async function run() {
+  const sdk = new ConductoroneSDKTypescript({
+    security: {
+      bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
     },
-  ],
-  roleIds: [
-    "earum",
-  ],
-  userStatuses: [
-    SearchUsersRequestUserStatuses.Enabled,
-  ],
-}).then((res: C1ApiUserV1UserSearchSearchResponse) => {
-  if (res.statusCode == 200) {
-    // handle response
-  }
-});
+  });
+
+  const result = await sdk.userSearch.search({
+    userExpandMask: {
+      paths: [
+        "<value>",
+      ],
+    },
+    excludeIds: [
+      "<value>",
+    ],
+    ids: [
+      "<value>",
+    ],
+    refs: [
+      {},
+    ],
+    roleIds: [
+      "<value>",
+    ],
+    userStatuses: [
+      UserStatuses.Enabled,
+    ],
+  });
+
+  // Handle the result
+  console.log(result)
+}
+
+run();
 ```
 
 ### Parameters
 
-| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `request`                                                              | [shared.SearchUsersRequest](../../models/shared/searchusersrequest.md) | :heavy_check_mark:                                                     | The request object to use for the request.                             |
-| `config`                                                               | [AxiosRequestConfig](https://axios-http.com/docs/req_config)           | :heavy_minus_sign:                                                     | Available config options for making requests.                          |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [shared.SearchUsersRequest](../../sdk/models/shared/searchusersrequest.md)                                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
 
-**Promise<[operations.C1ApiUserV1UserSearchSearchResponse](../../models/operations/c1apiuserv1usersearchsearchresponse.md)>**
+**Promise<[operations.C1ApiUserV1UserSearchSearchResponse](../../sdk/models/operations/c1apiuserv1usersearchsearchresponse.md)>**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |

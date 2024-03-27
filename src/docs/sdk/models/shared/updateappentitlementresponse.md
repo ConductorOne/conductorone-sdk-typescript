@@ -1,0 +1,11 @@
+# UpdateAppEntitlementResponse
+
+The UpdateAppEntitlementResponse message.
+
+
+## Fields
+
+| Field                                                                                                                    | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `appEntitlementView`                                                                                                     | [shared.AppEntitlementView](../../../sdk/models/shared/appentitlementview.md)                                            | :heavy_minus_sign:                                                                                                       | The app entitlement view contains the serialized app entitlement and paths to objects referenced by the app entitlement. |
+| `expanded`                                                                                                               | [shared.UpdateAppEntitlementResponseExpanded](../../../sdk/models/shared/updateappentitlementresponseexpanded.md)[]      | :heavy_minus_sign:                                                                                                       | List of related objects                                                                                                  |
