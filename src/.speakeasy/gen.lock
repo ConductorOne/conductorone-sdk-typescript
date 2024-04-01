@@ -3,10 +3,10 @@ id: a49f7f80-c1ea-4d35-b2c5-5d74c8174e44
 management:
   docChecksum: b6ff6fb45ac8e5c76f6df29ba7bcd6f6
   docVersion: 0.1.0-alpha
-  speakeasyVersion: 1.228.1
-  generationVersion: 2.292.0
-  releaseVersion: 2.1.0
-  configChecksum: 0b0dabd9f93644553ab8099436531b9a
+  speakeasyVersion: 1.231.1
+  generationVersion: 2.295.1
+  releaseVersion: 2.1.1
+  configChecksum: 03e40c3fcecc2f53d6c43abdab80fb5c
   repoURL: https://github.com/ConductorOne/conductorone-sdk-typescript.git
   repoSubDirectory: ./src
   installationURL: https://github.com/ConductorOne/conductorone-sdk-typescript
@@ -14,7 +14,7 @@ features:
   typescript:
     additionalProperties: 0.1.1
     core: 3.7.0
-    globalSecurity: 2.82.8
+    globalSecurity: 2.82.9
     globalServerURLs: 2.82.4
     groups: 2.81.2
     inputOutputModels: 2.82.0
