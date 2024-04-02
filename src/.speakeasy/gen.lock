@@ -3,8 +3,8 @@ id: a49f7f80-c1ea-4d35-b2c5-5d74c8174e44
 management:
   docChecksum: b6ff6fb45ac8e5c76f6df29ba7bcd6f6
   docVersion: 0.1.0-alpha
-  speakeasyVersion: 1.231.1
-  generationVersion: 2.295.1
+  speakeasyVersion: 1.233.2
+  generationVersion: 2.296.1
   releaseVersion: 2.1.1
   configChecksum: 03e40c3fcecc2f53d6c43abdab80fb5c
   repoURL: https://github.com/ConductorOne/conductorone-sdk-typescript.git
