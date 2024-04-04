@@ -13,45 +13,46 @@ Search policies based on filters specified in the request body.
 
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
-import { C1ApiPolicyV1PolicySearchSearchResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
-import { SearchPoliciesRequestPolicyTypes } from "conductorone-sdk-typescript/dist/sdk/models/shared";
+import { PolicyTypes } from "conductorone-sdk-typescript/sdk/models/shared";
 
-const sdk = new ConductoroneSDKTypescript({
-  security: {
-    bearerAuth: "",
-    oauth: "",
-  },
-});
-
-sdk.policySearch.search({
-  displayName: "voluptas",
-  pageSize: 9903.45,
-  pageToken: "aperiam",
-  policyTypes: [
-    SearchPoliciesRequestPolicyTypes.PolicyTypeRevoke,
-  ],
-  query: "quaerat",
-  refs: [
-    {
-      id: "2dac7af5-15cc-4413-aa63-aae8d67864db",
+async function run() {
+  const sdk = new ConductoroneSDKTypescript({
+    security: {
+      bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
     },
-  ],
-}).then((res: C1ApiPolicyV1PolicySearchSearchResponse) => {
-  if (res.statusCode == 200) {
-    // handle response
-  }
-});
+  });
+
+  const result = await sdk.policySearch.search({
+    policyTypes: [
+      PolicyTypes.PolicyTypeGrant,
+    ],
+    refs: [
+      {},
+    ],
+  });
+
+  // Handle the result
+  console.log(result)
+}
+
+run();
 ```
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `request`                                                                    | [shared.SearchPoliciesRequest](../../models/shared/searchpoliciesrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
-| `config`                                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                 | :heavy_minus_sign:                                                           | Available config options for making requests.                                |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [shared.SearchPoliciesRequest](../../sdk/models/shared/searchpoliciesrequest.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
 
-**Promise<[operations.C1ApiPolicyV1PolicySearchSearchResponse](../../models/operations/c1apipolicyv1policysearchsearchresponse.md)>**
+**Promise<[operations.C1ApiPolicyV1PolicySearchSearchResponse](../../sdk/models/operations/c1apipolicyv1policysearchsearchresponse.md)>**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |

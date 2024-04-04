@@ -1,0 +1,14 @@
+# AppResourceView
+
+The app resource view returns an app resource with paths for items in the expand mask filled in when this response is returned and a request expand mask has "*" or "app_id" or "resource_type_id".
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `appResource`                                                                               | [shared.AppResource](../../../sdk/models/shared/appresource.md)                             | :heavy_minus_sign:                                                                          | The app resource message is a single resource that can have entitlements.                   |
+| `appPath`                                                                                   | *string*                                                                                    | :heavy_minus_sign:                                                                          | JSONPATH expression indicating the location of the App object in the array                  |
+| `parentResourcePath`                                                                        | *string*                                                                                    | :heavy_minus_sign:                                                                          | JSONPATH expression indicating the location of the Parent Resource object in the array      |
+| `parentResourceTypePath`                                                                    | *string*                                                                                    | :heavy_minus_sign:                                                                          | JSONPATH expression indicating the location of the Parent Resource Type object in the array |
+| `resourceTypePath`                                                                          | *string*                                                                                    | :heavy_minus_sign:                                                                          | JSONPATH expression indicating the location of the Resource Type object in the array        |
