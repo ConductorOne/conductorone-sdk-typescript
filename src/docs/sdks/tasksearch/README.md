@@ -1,4 +1,5 @@
-# taskSearch
+# TaskSearch
+(*taskSearch*)
 
 ### Available Operations
 
@@ -12,132 +13,109 @@ Search tasks based on filters specified in the request body.
 
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
-import { C1ApiTaskV1TaskSearchServiceSearchResponse } from "conductorone-sdk-typescript/dist/sdk/models/operations";
-import {
-  TaskSearchRequestCurrentStep,
-  TaskSearchRequestEmergencyStatus,
-  TaskSearchRequestSortBy,
-  TaskSearchRequestTaskStates,
-} from "conductorone-sdk-typescript/dist/sdk/models/shared";
+import { TaskStates } from "conductorone-sdk-typescript/sdk/models/shared";
 
-const sdk = new ConductoroneSDKTypescript({
-  security: {
-    bearerAuth: "",
-    oauth: "",
-  },
-});
+async function run() {
+  const sdk = new ConductoroneSDKTypescript({
+    security: {
+      bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+      oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
+    },
+  });
 
-sdk.taskSearch.search({
-  taskExpandMask: {
-    paths: [
-      "aliquid",
+  const result = await sdk.taskSearch.search({
+    taskExpandMask: {
+      paths: [
+        "<value>",
+      ],
+    },
+    accessReviewIds: [
+      "<value>",
     ],
-  },
-  accessReviewIds: [
-    "accusantium",
-  ],
-  accountOwnerIds: [
-    "repellat",
-  ],
-  actorId: "doloribus",
-  appEntitlementIds: [
-    "ullam",
-  ],
-  appResourceIds: [
-    "in",
-  ],
-  appResourceTypeIds: [
-    "nam",
-  ],
-  appUserSubjectIds: [
-    "earum",
-  ],
-  applicationIds: [
-    "officia",
-  ],
-  assigneesInIds: [
-    "laborum",
-  ],
-  createdAfter: new Date("2022-03-14T23:12:21.252Z"),
-  createdBefore: new Date("2021-04-23T08:23:19.189Z"),
-  currentStep: TaskSearchRequestCurrentStep.TaskSearchCurrentStepProvision,
-  emergencyStatus: TaskSearchRequestEmergencyStatus.Emergency,
-  excludeAppEntitlementIds: [
-    "cumque",
-  ],
-  excludeIds: [
-    "vitae",
-  ],
-  includeDeleted: false,
-  myWorkUserIds: [
-    "rerum",
-  ],
-  openerIds: [
-    "tempora",
-  ],
-  pageSize: 3354.98,
-  pageToken: "inventore",
-  previouslyActedOnIds: [
-    "fugit",
-  ],
-  query: "cumque",
-  refs: [
-    {
-      id: "1032648d-c2f6-4151-99eb-fd0e9fe6c632",
-    },
-  ],
-  sortBy: TaskSearchRequestSortBy.TaskSearchSortByAccountOwner,
-  subjectIds: [
-    "fuga",
-  ],
-  taskStates: [
-    TaskSearchRequestTaskStates.TaskStateUnspecified,
-  ],
-  taskTypes: [
-    {
-      taskTypeCertify: {},
-      taskTypeGrant: {
-        taskGrantSource: {
-          externalUrl: "animi",
-          integrationId: "necessitatibus",
+    accountOwnerIds: [
+      "<value>",
+    ],
+    appEntitlementIds: [
+      "<value>",
+    ],
+    appResourceIds: [
+      "<value>",
+    ],
+    appResourceTypeIds: [
+      "<value>",
+    ],
+    appUserSubjectIds: [
+      "<value>",
+    ],
+    applicationIds: [
+      "<value>",
+    ],
+    assigneesInIds: [
+      "<value>",
+    ],
+    excludeAppEntitlementIds: [
+      "<value>",
+    ],
+    excludeIds: [
+      "<value>",
+    ],
+    myWorkUserIds: [
+      "<value>",
+    ],
+    openerIds: [
+      "<value>",
+    ],
+    previouslyActedOnIds: [
+      "<value>",
+    ],
+    refs: [
+      {},
+    ],
+    subjectIds: [
+      "<value>",
+    ],
+    taskStates: [
+      TaskStates.TaskStateUnspecified,
+    ],
+    taskTypes: [
+      {
+        taskTypeCertify: {},
+        taskTypeGrant: {
+          taskGrantSource: {},
         },
-      },
-      taskTypeRevoke: {
-        taskRevokeSource: {
-          taskRevokeSourceExpired: {
-            expiredAt: new Date("2022-12-22T05:17:09.936Z"),
-          },
-          taskRevokeSourceNonUsage: {
-            expiresAt: new Date("2022-11-29T01:33:31.768Z"),
-            lastLogin: new Date("2022-05-19T23:57:30.950Z"),
-          },
-          taskRevokeSourceRequest: {
-            requestUserId: "occaecati",
-          },
-          taskRevokeSourceReview: {
-            accessReviewId: "suscipit",
-            certTicketId: "adipisci",
+        taskTypeRevoke: {
+          taskRevokeSource: {
+            taskRevokeSourceExpired: {},
+            taskRevokeSourceNonUsage: {},
+            taskRevokeSourceRequest: {},
+            taskRevokeSourceReview: {},
           },
         },
       },
-    },
-  ],
-}).then((res: C1ApiTaskV1TaskSearchServiceSearchResponse) => {
-  if (res.statusCode == 200) {
-    // handle response
-  }
-});
+    ],
+  });
+
+  // Handle the result
+  console.log(result)
+}
+
+run();
 ```
 
 ### Parameters
 
-| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `request`                                                                      | [shared.TaskSearchRequestInput](../../models/shared/tasksearchrequestinput.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
-| `config`                                                                       | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                   | :heavy_minus_sign:                                                             | Available config options for making requests.                                  |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [shared.TaskSearchRequest](../../sdk/models/shared/tasksearchrequest.md)                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 
 
 ### Response
 
-**Promise<[operations.C1ApiTaskV1TaskSearchServiceSearchResponse](../../models/operations/c1apitaskv1tasksearchservicesearchresponse.md)>**
+**Promise<[operations.C1ApiTaskV1TaskSearchServiceSearchResponse](../../sdk/models/operations/c1apitaskv1tasksearchservicesearchresponse.md)>**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |

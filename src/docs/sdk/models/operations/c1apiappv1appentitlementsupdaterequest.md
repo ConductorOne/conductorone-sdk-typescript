@@ -1,0 +1,10 @@
+# C1ApiAppV1AppEntitlementsUpdateRequest
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `updateAppEntitlementRequest`                                                                   | [shared.UpdateAppEntitlementRequest](../../../sdk/models/shared/updateappentitlementrequest.md) | :heavy_minus_sign:                                                                              | N/A                                                                                             |
+| `appId`                                                                                         | *string*                                                                                        | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `id`                                                                                            | *string*                                                                                        | :heavy_check_mark:                                                                              | N/A                                                                                             |

@@ -1,0 +1,34 @@
+{
+  "name": "conductorone-sdk-typescript",
+  "version": "2.1.1",
+  "author": "ConductorOne",
+  "main": "./index.js",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ConductorOne/conductorone-sdk-typescript.git",
+    "directory": "./src"
+  },
+  "scripts": {
+    "lint": "eslint --max-warnings=0 src",
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "keywords": [],
+  "peerDependencies": {
+    "zod": ">= 3"
+  },
+  "devDependencies": {
+    "@types/jsonpath": "^0.2.4",
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
+    "eslint": "^8.55.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.0",
+    "typescript": "^5.3.3",
+    "zod": "^3.22.4"
+  },
+  "dependencies": {
+    
+  }
+}
