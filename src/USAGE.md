@@ -2,20 +2,18 @@
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
 async function run() {
-    const sdk = new ConductoroneSDKTypescript({
-        security: {
-            bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
-            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-        },
-    });
+  const result = await conductoroneSDKTypescript.apps.list({});
 
-    const result = await sdk.apps.create({
-        owners: ["<value>"],
-    });
-
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();

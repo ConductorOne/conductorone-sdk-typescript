@@ -1,8 +1,10 @@
 configVersion: 2.0.0
 generation:
   sdkClassName: conductorone-sdk-typescript
+  maintainOpenAPIOrder: true
   usageSnippets:
     optionalPropertyRendering: withExample
+  useClassNamesForArrayFields: true
   fixes:
     nameResolutionDec2023: false
     parameterOrderingFeb2024: false
@@ -16,8 +18,10 @@ typescript:
     dependencies: {}
     devDependencies: {}
     peerDependencies: {}
+  additionalPackageJSON: {}
   author: ConductorOne
   clientServerStatusCodesAsErrors: false
+  enumFormat: union
   flattenGlobalSecurity: true
   imports:
     option: openapi
@@ -29,7 +33,10 @@ typescript:
       webhooks: sdk/models/webhooks
   inputModelSuffix: input
   maxMethodParams: 0
+  methodArguments: require-security-and-request
+  moduleFormat: commonjs
   outputModelSuffix: output
   packageName: conductorone-sdk-typescript
   responseFormat: envelope
   templateVersion: v2
+  useIndexModules: true
