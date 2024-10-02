@@ -1,0 +1,24 @@
+# C1ApiAppV1AppEntitlementsGetResponse
+
+## Example Usage
+
+```typescript
+import { C1ApiAppV1AppEntitlementsGetResponse } from "conductorone-sdk-typescript/sdk/models/operations";
+
+let value: C1ApiAppV1AppEntitlementsGetResponse = {
+  contentType: "<value>",
+  statusCode: 201,
+  rawResponse: new Response("{\"message\": \"hello world\"}", {
+    headers: { "Content-Type": "application/json" },
+  }),
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                        | Type                                                                                                                                                                         | Required                                                                                                                                                                     | Description                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `contentType`                                                                                                                                                                | *string*                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                           | HTTP response content type for this operation                                                                                                                                |
+| `statusCode`                                                                                                                                                                 | *number*                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                           | HTTP response status code for this operation                                                                                                                                 |
+| `rawResponse`                                                                                                                                                                | [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response)                                                                                                        | :heavy_check_mark:                                                                                                                                                           | Raw HTTP response; suitable for custom response parsing                                                                                                                      |
+| `getAppEntitlementResponse`                                                                                                                                                  | [shared.GetAppEntitlementResponse](../../../sdk/models/shared/getappentitlementresponse.md)                                                                                  | :heavy_minus_sign:                                                                                                                                                           | The get app entitlement response returns an entitlement view containing paths in the expanded array for the objects expanded as indicated by the expand mask in the request. |
