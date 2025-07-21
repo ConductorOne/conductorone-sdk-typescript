@@ -1,0 +1,19 @@
+# PrimaryTriggerType
+
+The primaryTriggerType field.
+
+## Example Usage
+
+```typescript
+import { PrimaryTriggerType } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: PrimaryTriggerType = "TRIGGER_TYPE_APP_USER_CREATE";
+```
+
+## Values
+
+This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
+
+```typescript
+"TRIGGER_TYPE_UNSPECIFIED" | "TRIGGER_TYPE_USER_PROFILE_CHANGE" | "TRIGGER_TYPE_APP_USER_CREATE" | "TRIGGER_TYPE_APP_USER_UPDATE" | "TRIGGER_TYPE_UNUSED_ACCESS" | "TRIGGER_TYPE_USER_CREATED" | Unrecognized<string>
+```

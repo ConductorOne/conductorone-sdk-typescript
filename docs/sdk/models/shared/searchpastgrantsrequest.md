@@ -1,0 +1,22 @@
+# SearchPastGrantsRequest
+
+The SearchPastGrantsRequest message.
+
+## Example Usage
+
+```typescript
+import { SearchPastGrantsRequest } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: SearchPastGrantsRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                         | Type                                                                                                                          | Required                                                                                                                      | Description                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `appEntitlementRefs`                                                                                                          | [shared.AppEntitlementRef](../../../sdk/models/shared/appentitlementref.md)[]                                                 | :heavy_minus_sign:                                                                                                            | The appEntitlementRefs field.                                                                                                 |
+| `appIds`                                                                                                                      | *string*[]                                                                                                                    | :heavy_minus_sign:                                                                                                            | The appIds field.                                                                                                             |
+| `appUserRefs`                                                                                                                 | [shared.AppUserRef](../../../sdk/models/shared/appuserref.md)[]                                                               | :heavy_minus_sign:                                                                                                            | The appUserRefs field.                                                                                                        |
+| `appEntitlementUserBindingExpandHistoryMask`                                                                                  | [shared.AppEntitlementUserBindingExpandHistoryMask](../../../sdk/models/shared/appentitlementuserbindingexpandhistorymask.md) | :heavy_minus_sign:                                                                                                            | The AppEntitlementUserBindingExpandHistoryMask message.                                                                       |
+| `pageSize`                                                                                                                    | *number*                                                                                                                      | :heavy_minus_sign:                                                                                                            | The pageSize field.                                                                                                           |
+| `pageToken`                                                                                                                   | *string*                                                                                                                      | :heavy_minus_sign:                                                                                                            | The pageToken field.                                                                                                          |

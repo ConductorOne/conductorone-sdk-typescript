@@ -1,0 +1,3839 @@
+lockVersion: 2.0.0
+id: 68915040-92f7-46c0-a078-9c43c3382bb1
+management:
+  docChecksum: 6e30a8ed7afb5398548343652c5d8314
+  docVersion: 0.1.0-alpha
+  speakeasyVersion: 1.584.0
+  generationVersion: 2.660.0
+  releaseVersion: 2.1.1
+  configChecksum: d8b2da0004d170e2202f8233acacf7ad
+features:
+  typescript:
+    additionalDependencies: 0.1.0
+    additionalProperties: 0.1.1
+    core: 3.21.14
+    defaultEnabledRetries: 0.1.0
+    deprecations: 2.81.1
+    enumUnions: 0.1.0
+    envVarSecurityUsage: 0.1.2
+    globalSecurity: 2.82.13
+    globalSecurityCallbacks: 0.1.0
+    globalServerURLs: 2.82.5
+    groups: 2.81.2
+    includes: 2.81.1
+    inputOutputModels: 2.82.0
+    methodArguments: 0.1.2
+    nameOverrides: 2.81.2
+    nullables: 0.1.1
+    openEnums: 0.1.1
+    pagination: 2.83.0
+    responseFormat: 0.2.3
+    retries: 2.83.0
+    sdkHooks: 0.3.0
+    stringNumberFormats: 0.2.0
+generatedFiles:
+  - .gitattributes
+  - .npmignore
+  - FUNCTIONS.md
+  - RUNTIMES.md
+  - USAGE.md
+  - docs/lib/utils/retryconfig.md
+  - docs/sdk/models/operations/c1apiaccessconflictv1accessconflictservicecreatemonitorresponse.md
+  - docs/sdk/models/operations/c1apiaccessconflictv1accessconflictservicedeletemonitorrequest.md
+  - docs/sdk/models/operations/c1apiaccessconflictv1accessconflictservicedeletemonitorresponse.md
+  - docs/sdk/models/operations/c1apiaccessconflictv1accessconflictservicegetmonitorrequest.md
+  - docs/sdk/models/operations/c1apiaccessconflictv1accessconflictservicegetmonitorresponse.md
+  - docs/sdk/models/operations/c1apiaccessconflictv1accessconflictserviceupdatemonitorrequest.md
+  - docs/sdk/models/operations/c1apiaccessconflictv1accessconflictserviceupdatemonitorresponse.md
+  - docs/sdk/models/operations/c1apiappv1appaccessrequestsdefaultsservicecancelappaccessrequestsdefaultsrequest.md
+  - docs/sdk/models/operations/c1apiappv1appaccessrequestsdefaultsservicecancelappaccessrequestsdefaultsresponse.md
+  - docs/sdk/models/operations/c1apiappv1appaccessrequestsdefaultsservicecreateappaccessrequestsdefaultsrequest.md
+  - docs/sdk/models/operations/c1apiappv1appaccessrequestsdefaultsservicecreateappaccessrequestsdefaultsresponse.md
+  - docs/sdk/models/operations/c1apiappv1appaccessrequestsdefaultsservicegetappaccessrequestsdefaultsrequest.md
+  - docs/sdk/models/operations/c1apiappv1appaccessrequestsdefaultsservicegetappaccessrequestsdefaultsresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementownersaddrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementownersaddresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementownerslistrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementownerslistresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementownersremoverequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementownersremoveresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementownerssetrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementownerssetresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsaddautomationexclusionrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsaddautomationexclusionresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsaddmanuallymanagedmembersrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsaddmanuallymanagedmembersresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementscreateautomationrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementscreateautomationresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementscreaterequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementscreateresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsdeleteautomationrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsdeleteautomationresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsdeleterequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsdeleteresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsearchservicesearchappentitlementsforappuserrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsearchservicesearchappentitlementsforappuserresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsearchservicesearchappentitlementswithexpiredrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsearchservicesearchappentitlementswithexpiredresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsearchservicesearchgrantsresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsearchservicesearchresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsgetautomationrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsgetautomationresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsgetrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsgetresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementslistautomationexclusionsrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementslistautomationexclusionsresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementslistforappresourcerequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementslistforappresourceresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementslistforappuserrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementslistforappuserresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementslistrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementslistresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementslistusersrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementslistusersresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsproxycreaterequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsproxycreateresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsproxydeleterequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsproxydeleteresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsproxygetrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsproxygetresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsremoveautomationexclusionrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsremoveautomationexclusionresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsremoveentitlementmembershiprequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsremoveentitlementmembershipresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsupdateautomationrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsupdateautomationresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsupdaterequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementsupdateresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementuserbindingservicelistappusersforidentitywithgrantrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementuserbindingservicelistappusersforidentitywithgrantresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementuserbindingserviceremovegrantdurationrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementuserbindingserviceremovegrantdurationresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementuserbindingservicesearchgrantfeedresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementuserbindingservicesearchpastgrantsresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementuserbindingserviceupdategrantdurationrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementuserbindingserviceupdategrantdurationresponse.md
+  - docs/sdk/models/operations/c1apiappv1appownersaddrequest.md
+  - docs/sdk/models/operations/c1apiappv1appownersaddresponse.md
+  - docs/sdk/models/operations/c1apiappv1appownerslistrequest.md
+  - docs/sdk/models/operations/c1apiappv1appownerslistresponse.md
+  - docs/sdk/models/operations/c1apiappv1appownersremoverequest.md
+  - docs/sdk/models/operations/c1apiappv1appownersremoveresponse.md
+  - docs/sdk/models/operations/c1apiappv1appownerssetrequest.md
+  - docs/sdk/models/operations/c1apiappv1appownerssetresponse.md
+  - docs/sdk/models/operations/c1apiappv1appreportactionservicegeneratereportrequest.md
+  - docs/sdk/models/operations/c1apiappv1appreportactionservicegeneratereportresponse.md
+  - docs/sdk/models/operations/c1apiappv1appreportservicelistrequest.md
+  - docs/sdk/models/operations/c1apiappv1appreportservicelistresponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourceownersaddrequest.md
+  - docs/sdk/models/operations/c1apiappv1appresourceownersaddresponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourceownerslistrequest.md
+  - docs/sdk/models/operations/c1apiappv1appresourceownerslistresponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourceownersremoverequest.md
+  - docs/sdk/models/operations/c1apiappv1appresourceownersremoveresponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourcesearchsearchappresourcesresponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourcesearchsearchappresourcetypesresponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourceservicecreatemanuallymanagedappresourcerequest.md
+  - docs/sdk/models/operations/c1apiappv1appresourceservicecreatemanuallymanagedappresourceresponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourceservicedeletemanuallymanagedappresourcerequest.md
+  - docs/sdk/models/operations/c1apiappv1appresourceservicedeletemanuallymanagedappresourceresponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourceservicegetrequest.md
+  - docs/sdk/models/operations/c1apiappv1appresourceservicegetresponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourceservicelistrequest.md
+  - docs/sdk/models/operations/c1apiappv1appresourceservicelistresponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourceserviceupdaterequest.md
+  - docs/sdk/models/operations/c1apiappv1appresourceserviceupdateresponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourcetypeservicecreatemanuallymanagedresourcetyperequest.md
+  - docs/sdk/models/operations/c1apiappv1appresourcetypeservicecreatemanuallymanagedresourcetyperesponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourcetypeservicedeletemanuallymanagedresourcetyperequest.md
+  - docs/sdk/models/operations/c1apiappv1appresourcetypeservicedeletemanuallymanagedresourcetyperesponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourcetypeservicegetrequest.md
+  - docs/sdk/models/operations/c1apiappv1appresourcetypeservicegetresponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourcetypeservicelistrequest.md
+  - docs/sdk/models/operations/c1apiappv1appresourcetypeservicelistresponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourcetypeserviceupdatemanuallymanagedresourcetyperequest.md
+  - docs/sdk/models/operations/c1apiappv1appresourcetypeserviceupdatemanuallymanagedresourcetyperesponse.md
+  - docs/sdk/models/operations/c1apiappv1appscreateresponse.md
+  - docs/sdk/models/operations/c1apiappv1appsdeleterequest.md
+  - docs/sdk/models/operations/c1apiappv1appsdeleteresponse.md
+  - docs/sdk/models/operations/c1apiappv1appsearchsearchresponse.md
+  - docs/sdk/models/operations/c1apiappv1appsgetrequest.md
+  - docs/sdk/models/operations/c1apiappv1appsgetresponse.md
+  - docs/sdk/models/operations/c1apiappv1appslistrequest.md
+  - docs/sdk/models/operations/c1apiappv1appslistresponse.md
+  - docs/sdk/models/operations/c1apiappv1appsupdaterequest.md
+  - docs/sdk/models/operations/c1apiappv1appsupdateresponse.md
+  - docs/sdk/models/operations/c1apiappv1appusagecontrolsservicegetrequest.md
+  - docs/sdk/models/operations/c1apiappv1appusagecontrolsservicegetresponse.md
+  - docs/sdk/models/operations/c1apiappv1appusagecontrolsserviceupdaterequest.md
+  - docs/sdk/models/operations/c1apiappv1appusagecontrolsserviceupdateresponse.md
+  - docs/sdk/models/operations/c1apiappv1appuserservicelistappusercredentialsrequest.md
+  - docs/sdk/models/operations/c1apiappv1appuserservicelistappusercredentialsresponse.md
+  - docs/sdk/models/operations/c1apiappv1appuserservicelistappusersforuserrequest.md
+  - docs/sdk/models/operations/c1apiappv1appuserservicelistappusersforuserresponse.md
+  - docs/sdk/models/operations/c1apiappv1appuserservicelistrequest.md
+  - docs/sdk/models/operations/c1apiappv1appuserservicelistresponse.md
+  - docs/sdk/models/operations/c1apiappv1appuserservicesearchresponse.md
+  - docs/sdk/models/operations/c1apiappv1appuserserviceupdaterequest.md
+  - docs/sdk/models/operations/c1apiappv1appuserserviceupdateresponse.md
+  - docs/sdk/models/operations/c1apiappv1connectorservicecreatedelegatedrequest.md
+  - docs/sdk/models/operations/c1apiappv1connectorservicecreatedelegatedresponse.md
+  - docs/sdk/models/operations/c1apiappv1connectorservicecreaterequest.md
+  - docs/sdk/models/operations/c1apiappv1connectorservicecreateresponse.md
+  - docs/sdk/models/operations/c1apiappv1connectorservicedeleterequest.md
+  - docs/sdk/models/operations/c1apiappv1connectorservicedeleteresponse.md
+  - docs/sdk/models/operations/c1apiappv1connectorserviceforcesyncrequest.md
+  - docs/sdk/models/operations/c1apiappv1connectorserviceforcesyncresponse.md
+  - docs/sdk/models/operations/c1apiappv1connectorservicegetcredentialsrequest.md
+  - docs/sdk/models/operations/c1apiappv1connectorservicegetcredentialsresponse.md
+  - docs/sdk/models/operations/c1apiappv1connectorservicegetrequest.md
+  - docs/sdk/models/operations/c1apiappv1connectorservicegetresponse.md
+  - docs/sdk/models/operations/c1apiappv1connectorservicelistrequest.md
+  - docs/sdk/models/operations/c1apiappv1connectorservicelistresponse.md
+  - docs/sdk/models/operations/c1apiappv1connectorservicerevokecredentialrequest.md
+  - docs/sdk/models/operations/c1apiappv1connectorservicerevokecredentialresponse.md
+  - docs/sdk/models/operations/c1apiappv1connectorservicerotatecredentialrequest.md
+  - docs/sdk/models/operations/c1apiappv1connectorservicerotatecredentialresponse.md
+  - docs/sdk/models/operations/c1apiappv1connectorserviceupdatedelegatedrequest.md
+  - docs/sdk/models/operations/c1apiappv1connectorserviceupdatedelegatedresponse.md
+  - docs/sdk/models/operations/c1apiappv1connectorserviceupdaterequest.md
+  - docs/sdk/models/operations/c1apiappv1connectorserviceupdateresponse.md
+  - docs/sdk/models/operations/c1apiappv1connectorservicevalidatehttpconnectorconfigresponse.md
+  - docs/sdk/models/operations/c1apiattributev1attributescreateattributevalueresponse.md
+  - docs/sdk/models/operations/c1apiattributev1attributescreatecomplianceframeworkattributevalueresponse.md
+  - docs/sdk/models/operations/c1apiattributev1attributescreaterisklevelattributevalueresponse.md
+  - docs/sdk/models/operations/c1apiattributev1attributesdeleteattributevaluerequest.md
+  - docs/sdk/models/operations/c1apiattributev1attributesdeleteattributevalueresponse.md
+  - docs/sdk/models/operations/c1apiattributev1attributesdeletecomplianceframeworkattributevaluerequest.md
+  - docs/sdk/models/operations/c1apiattributev1attributesdeletecomplianceframeworkattributevalueresponse.md
+  - docs/sdk/models/operations/c1apiattributev1attributesdeleterisklevelattributevaluerequest.md
+  - docs/sdk/models/operations/c1apiattributev1attributesdeleterisklevelattributevalueresponse.md
+  - docs/sdk/models/operations/c1apiattributev1attributesearchsearchattributevaluesresponse.md
+  - docs/sdk/models/operations/c1apiattributev1attributesgetattributevaluerequest.md
+  - docs/sdk/models/operations/c1apiattributev1attributesgetattributevalueresponse.md
+  - docs/sdk/models/operations/c1apiattributev1attributesgetcomplianceframeworkattributevaluerequest.md
+  - docs/sdk/models/operations/c1apiattributev1attributesgetcomplianceframeworkattributevalueresponse.md
+  - docs/sdk/models/operations/c1apiattributev1attributesgetrisklevelattributevaluerequest.md
+  - docs/sdk/models/operations/c1apiattributev1attributesgetrisklevelattributevalueresponse.md
+  - docs/sdk/models/operations/c1apiattributev1attributeslistattributetypesrequest.md
+  - docs/sdk/models/operations/c1apiattributev1attributeslistattributetypesresponse.md
+  - docs/sdk/models/operations/c1apiattributev1attributeslistattributevaluesrequest.md
+  - docs/sdk/models/operations/c1apiattributev1attributeslistattributevaluesresponse.md
+  - docs/sdk/models/operations/c1apiauthv1authintrospectresponse.md
+  - docs/sdk/models/operations/c1apiautomationsv1automationexecutionactionsserviceterminateautomationrequest.md
+  - docs/sdk/models/operations/c1apiautomationsv1automationexecutionactionsserviceterminateautomationresponse.md
+  - docs/sdk/models/operations/c1apiautomationsv1automationexecutionsearchservicesearchautomationexecutionsresponse.md
+  - docs/sdk/models/operations/c1apiautomationsv1automationexecutionservicegetautomationexecutionrequest.md
+  - docs/sdk/models/operations/c1apiautomationsv1automationexecutionservicegetautomationexecutionresponse.md
+  - docs/sdk/models/operations/c1apiautomationsv1automationexecutionservicelistautomationexecutionsresponse.md
+  - docs/sdk/models/operations/c1apiautomationsv1automationsearchservicesearchautomationsresponse.md
+  - docs/sdk/models/operations/c1apiautomationsv1automationsearchservicesearchautomationtemplateversionsresponse.md
+  - docs/sdk/models/operations/c1apiautomationsv1automationservicecreateautomationresponse.md
+  - docs/sdk/models/operations/c1apiautomationsv1automationservicedeleteautomationrequest.md
+  - docs/sdk/models/operations/c1apiautomationsv1automationservicedeleteautomationresponse.md
+  - docs/sdk/models/operations/c1apiautomationsv1automationserviceexecuteautomationrequest.md
+  - docs/sdk/models/operations/c1apiautomationsv1automationserviceexecuteautomationresponse.md
+  - docs/sdk/models/operations/c1apiautomationsv1automationservicegetautomationrequest.md
+  - docs/sdk/models/operations/c1apiautomationsv1automationservicegetautomationresponse.md
+  - docs/sdk/models/operations/c1apiautomationsv1automationservicelistautomationsresponse.md
+  - docs/sdk/models/operations/c1apiautomationsv1automationserviceupdateautomationrequest.md
+  - docs/sdk/models/operations/c1apiautomationsv1automationserviceupdateautomationresponse.md
+  - docs/sdk/models/operations/c1apidirectoryv1directoryservicecreateresponse.md
+  - docs/sdk/models/operations/c1apidirectoryv1directoryservicedeleterequest.md
+  - docs/sdk/models/operations/c1apidirectoryv1directoryservicedeleteresponse.md
+  - docs/sdk/models/operations/c1apidirectoryv1directoryservicegetrequest.md
+  - docs/sdk/models/operations/c1apidirectoryv1directoryservicegetresponse.md
+  - docs/sdk/models/operations/c1apidirectoryv1directoryservicelistrequest.md
+  - docs/sdk/models/operations/c1apidirectoryv1directoryservicelistresponse.md
+  - docs/sdk/models/operations/c1apiiamv1personalclientsearchservicesearchresponse.md
+  - docs/sdk/models/operations/c1apiiamv1personalclientservicecreateresponse.md
+  - docs/sdk/models/operations/c1apiiamv1personalclientservicedeleterequest.md
+  - docs/sdk/models/operations/c1apiiamv1personalclientservicedeleteresponse.md
+  - docs/sdk/models/operations/c1apiiamv1personalclientservicegetrequest.md
+  - docs/sdk/models/operations/c1apiiamv1personalclientservicegetresponse.md
+  - docs/sdk/models/operations/c1apiiamv1personalclientservicelistresponse.md
+  - docs/sdk/models/operations/c1apiiamv1personalclientserviceupdaterequest.md
+  - docs/sdk/models/operations/c1apiiamv1personalclientserviceupdateresponse.md
+  - docs/sdk/models/operations/c1apiiamv1rolesgetrequest.md
+  - docs/sdk/models/operations/c1apiiamv1rolesgetresponse.md
+  - docs/sdk/models/operations/c1apiiamv1roleslistrequest.md
+  - docs/sdk/models/operations/c1apiiamv1roleslistresponse.md
+  - docs/sdk/models/operations/c1apiiamv1rolesupdaterequest.md
+  - docs/sdk/models/operations/c1apiiamv1rolesupdateresponse.md
+  - docs/sdk/models/operations/c1apipolicyv1accountprovisionpolicytesttestresponse.md
+  - docs/sdk/models/operations/c1apipolicyv1policiescreateresponse.md
+  - docs/sdk/models/operations/c1apipolicyv1policiesdeleterequest.md
+  - docs/sdk/models/operations/c1apipolicyv1policiesdeleteresponse.md
+  - docs/sdk/models/operations/c1apipolicyv1policiesgetrequest.md
+  - docs/sdk/models/operations/c1apipolicyv1policiesgetresponse.md
+  - docs/sdk/models/operations/c1apipolicyv1policieslistrequest.md
+  - docs/sdk/models/operations/c1apipolicyv1policieslistresponse.md
+  - docs/sdk/models/operations/c1apipolicyv1policiesupdaterequest.md
+  - docs/sdk/models/operations/c1apipolicyv1policiesupdateresponse.md
+  - docs/sdk/models/operations/c1apipolicyv1policysearchsearchresponse.md
+  - docs/sdk/models/operations/c1apipolicyv1policyvalidatevalidatecelresponse.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceaddaccessentitlementsrequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceaddaccessentitlementsresponse.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceaddappentitlementsrequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceaddappentitlementsresponse.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicecreatebundleautomationrequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicecreatebundleautomationresponse.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicecreateresponse.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicedeletebundleautomationrequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicedeletebundleautomationresponse.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicedeleterequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicedeleteresponse.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceforcerunbundleautomationrequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceforcerunbundleautomationresponse.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicegetbundleautomationrequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicegetbundleautomationresponse.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicegetrequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicegetresponse.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicelistallentitlementidsperapprequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicelistallentitlementidsperappresponse.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicelistentitlementsforaccessrequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicelistentitlementsforaccessresponse.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicelistentitlementspercatalogrequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicelistentitlementspercatalogresponse.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicelistrequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicelistresponse.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceremoveaccessentitlementsrequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceremoveaccessentitlementsresponse.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceremoveappentitlementsrequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceremoveappentitlementsresponse.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicesetbundleautomationrequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicesetbundleautomationresponse.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceupdaterequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceupdateresponse.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogsearchservicesearchentitlementsresponse.md
+  - docs/sdk/models/operations/c1apisettingsv1awsexternalidsettingsgetresponse.md
+  - docs/sdk/models/operations/c1apisettingsv1orgdomainservicelistrequest.md
+  - docs/sdk/models/operations/c1apisettingsv1orgdomainservicelistresponse.md
+  - docs/sdk/models/operations/c1apisettingsv1orgdomainserviceupdateresponse.md
+  - docs/sdk/models/operations/c1apisettingsv1sessionsettingsservicegetresponse.md
+  - docs/sdk/models/operations/c1apisettingsv1sessionsettingsservicetestsourceipresponse.md
+  - docs/sdk/models/operations/c1apisettingsv1sessionsettingsserviceupdateresponse.md
+  - docs/sdk/models/operations/c1apistepupv1stepupproviderservicecreateresponse.md
+  - docs/sdk/models/operations/c1apistepupv1stepupproviderservicedeleterequest.md
+  - docs/sdk/models/operations/c1apistepupv1stepupproviderservicedeleteresponse.md
+  - docs/sdk/models/operations/c1apistepupv1stepupproviderservicegetrequest.md
+  - docs/sdk/models/operations/c1apistepupv1stepupproviderservicegetresponse.md
+  - docs/sdk/models/operations/c1apistepupv1stepupproviderservicelistresponse.md
+  - docs/sdk/models/operations/c1apistepupv1stepupproviderservicesearchresponse.md
+  - docs/sdk/models/operations/c1apistepupv1stepupproviderservicetestrequest.md
+  - docs/sdk/models/operations/c1apistepupv1stepupproviderservicetestresponse.md
+  - docs/sdk/models/operations/c1apistepupv1stepupproviderserviceupdaterequest.md
+  - docs/sdk/models/operations/c1apistepupv1stepupproviderserviceupdateresponse.md
+  - docs/sdk/models/operations/c1apistepupv1stepupproviderserviceupdatesecretrequest.md
+  - docs/sdk/models/operations/c1apistepupv1stepupproviderserviceupdatesecretresponse.md
+  - docs/sdk/models/operations/c1apistepupv1stepuptransactionservicegetrequest.md
+  - docs/sdk/models/operations/c1apistepupv1stepuptransactionservicegetresponse.md
+  - docs/sdk/models/operations/c1apistepupv1stepuptransactionservicesearchresponse.md
+  - docs/sdk/models/operations/c1apisystemlogv1exportservicecreateresponse.md
+  - docs/sdk/models/operations/c1apisystemlogv1exportservicedeleterequest.md
+  - docs/sdk/models/operations/c1apisystemlogv1exportservicedeleteresponse.md
+  - docs/sdk/models/operations/c1apisystemlogv1exportservicegetrequest.md
+  - docs/sdk/models/operations/c1apisystemlogv1exportservicegetresponse.md
+  - docs/sdk/models/operations/c1apisystemlogv1exportservicelisteventsrequest.md
+  - docs/sdk/models/operations/c1apisystemlogv1exportservicelisteventsresponse.md
+  - docs/sdk/models/operations/c1apisystemlogv1exportservicelistrequest.md
+  - docs/sdk/models/operations/c1apisystemlogv1exportservicelistresponse.md
+  - docs/sdk/models/operations/c1apisystemlogv1exportserviceupdaterequest.md
+  - docs/sdk/models/operations/c1apisystemlogv1exportserviceupdateresponse.md
+  - docs/sdk/models/operations/c1apisystemlogv1exportssearchservicesearchresponse.md
+  - docs/sdk/models/operations/c1apisystemlogv1systemlogservicelisteventsresponse.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsserviceapproverequest.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsserviceapproveresponse.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsserviceapprovewithstepuprequest.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsserviceapprovewithstepupresponse.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsservicecloserequest.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsservicecloseresponse.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsservicecommentrequest.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsservicecommentresponse.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsservicedenyrequest.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsservicedenyresponse.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsserviceescalatetoemergencyaccessrequest.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsserviceescalatetoemergencyaccessresponse.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsservicehardresetrequest.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsservicehardresetresponse.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsserviceprocessnowrequest.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsserviceprocessnowresponse.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsservicereassignrequest.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsservicereassignresponse.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsservicerestartrequest.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsservicerestartresponse.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsserviceskipsteprequest.md
+  - docs/sdk/models/operations/c1apitaskv1taskactionsserviceskipstepresponse.md
+  - docs/sdk/models/operations/c1apitaskv1taskauditlistresponse.md
+  - docs/sdk/models/operations/c1apitaskv1tasksearchservicesearchresponse.md
+  - docs/sdk/models/operations/c1apitaskv1taskservicecreategranttaskresponse.md
+  - docs/sdk/models/operations/c1apitaskv1taskservicecreateoffboardingtaskresponse.md
+  - docs/sdk/models/operations/c1apitaskv1taskservicecreaterevoketaskresponse.md
+  - docs/sdk/models/operations/c1apitaskv1taskservicegetrequest.md
+  - docs/sdk/models/operations/c1apitaskv1taskservicegetresponse.md
+  - docs/sdk/models/operations/c1apiuserv1usersearchsearchresponse.md
+  - docs/sdk/models/operations/c1apiuserv1userservicegetrequest.md
+  - docs/sdk/models/operations/c1apiuserv1userservicegetresponse.md
+  - docs/sdk/models/operations/c1apiuserv1userservicelistrequest.md
+  - docs/sdk/models/operations/c1apiuserv1userservicelistresponse.md
+  - docs/sdk/models/operations/c1apiwebhooksv1webhookssearchsearchresponse.md
+  - docs/sdk/models/operations/c1apiwebhooksv1webhooksservicecreateresponse.md
+  - docs/sdk/models/operations/c1apiwebhooksv1webhooksservicedeleterequest.md
+  - docs/sdk/models/operations/c1apiwebhooksv1webhooksservicedeleteresponse.md
+  - docs/sdk/models/operations/c1apiwebhooksv1webhooksservicegetrequest.md
+  - docs/sdk/models/operations/c1apiwebhooksv1webhooksservicegetresponse.md
+  - docs/sdk/models/operations/c1apiwebhooksv1webhooksservicelistrequest.md
+  - docs/sdk/models/operations/c1apiwebhooksv1webhooksservicelistresponse.md
+  - docs/sdk/models/operations/c1apiwebhooksv1webhooksservicetestrequest.md
+  - docs/sdk/models/operations/c1apiwebhooksv1webhooksservicetestresponse.md
+  - docs/sdk/models/operations/c1apiwebhooksv1webhooksserviceupdaterequest.md
+  - docs/sdk/models/operations/c1apiwebhooksv1webhooksserviceupdateresponse.md
+  - docs/sdk/models/shared/accept.md
+  - docs/sdk/models/shared/acceptinstance.md
+  - docs/sdk/models/shared/accountprovision.md
+  - docs/sdk/models/shared/accounttypes.md
+  - docs/sdk/models/shared/actions.md
+  - docs/sdk/models/shared/actiontype.md
+  - docs/sdk/models/shared/addappentitlementownerrequest.md
+  - docs/sdk/models/shared/addappentitlementownerresponse.md
+  - docs/sdk/models/shared/addappownerrequest.md
+  - docs/sdk/models/shared/addappownerresponse.md
+  - docs/sdk/models/shared/addappresourceownerrequest.md
+  - docs/sdk/models/shared/addappresourceownerresponse.md
+  - docs/sdk/models/shared/addautomationexclusionrequest.md
+  - docs/sdk/models/shared/addautomationexclusionresponse.md
+  - docs/sdk/models/shared/addmanuallymanagedusersrequest.md
+  - docs/sdk/models/shared/agentapproval.md
+  - docs/sdk/models/shared/agentmode.md
+  - docs/sdk/models/shared/annotations.md
+  - docs/sdk/models/shared/app.md
+  - docs/sdk/models/shared/appaccessrequestdefaults.md
+  - docs/sdk/models/shared/appaccessrequestdefaults1.md
+  - docs/sdk/models/shared/appactionsservicegeneratereportrequest.md
+  - docs/sdk/models/shared/appactionsservicegeneratereportresponse.md
+  - docs/sdk/models/shared/appentitlement.md
+  - docs/sdk/models/shared/appentitlementautomation.md
+  - docs/sdk/models/shared/appentitlementautomationinput.md
+  - docs/sdk/models/shared/appentitlementautomationlastrunstatus.md
+  - docs/sdk/models/shared/appentitlementautomationlastrunstatusinput.md
+  - docs/sdk/models/shared/appentitlementautomationlastrunstatusstatus.md
+  - docs/sdk/models/shared/appentitlementautomationrulebasic.md
+  - docs/sdk/models/shared/appentitlementautomationrulecel.md
+  - docs/sdk/models/shared/appentitlementautomationruleentitlement.md
+  - docs/sdk/models/shared/appentitlementautomationrulenone.md
+  - docs/sdk/models/shared/appentitlementdurationunset.md
+  - docs/sdk/models/shared/appentitlementexpandmask.md
+  - docs/sdk/models/shared/appentitlementinput.md
+  - docs/sdk/models/shared/appentitlementproxy.md
+  - docs/sdk/models/shared/appentitlementproxyexpandmask.md
+  - docs/sdk/models/shared/appentitlementproxyview.md
+  - docs/sdk/models/shared/appentitlementref.md
+  - docs/sdk/models/shared/appentitlementreference.md
+  - docs/sdk/models/shared/appentitlementsearchservicesearchgrantsrequest.md
+  - docs/sdk/models/shared/appentitlementsearchservicesearchgrantsresponse.md
+  - docs/sdk/models/shared/appentitlementsearchservicesearchgrantsresponseexpanded.md
+  - docs/sdk/models/shared/appentitlementsearchservicesearchrequest.md
+  - docs/sdk/models/shared/appentitlementsearchservicesearchresponse.md
+  - docs/sdk/models/shared/appentitlementsearchservicesearchresponseexpanded.md
+  - docs/sdk/models/shared/appentitlementservicegetautomationresponse.md
+  - docs/sdk/models/shared/appentitlementserviceupdateautomationrequest.md
+  - docs/sdk/models/shared/appentitlementserviceupdateautomationresponse.md
+  - docs/sdk/models/shared/appentitlementuserbinding.md
+  - docs/sdk/models/shared/appentitlementuserbindingexpandhistorymask.md
+  - docs/sdk/models/shared/appentitlementuserbindingfeed.md
+  - docs/sdk/models/shared/appentitlementuserbindingfeedview.md
+  - docs/sdk/models/shared/appentitlementuserbindinghistory.md
+  - docs/sdk/models/shared/appentitlementuserbindinghistoryview.md
+  - docs/sdk/models/shared/appentitlementuserview.md
+  - docs/sdk/models/shared/appentitlementview.md
+  - docs/sdk/models/shared/appentitlementwithexpired.md
+  - docs/sdk/models/shared/appentitlementwithuserbinding.md
+  - docs/sdk/models/shared/appentitlementwithuserbindings.md
+  - docs/sdk/models/shared/appgroupapproval.md
+  - docs/sdk/models/shared/appinput.md
+  - docs/sdk/models/shared/appmanagedstatebindingref.md
+  - docs/sdk/models/shared/appownerapproval.md
+  - docs/sdk/models/shared/apppopulationreport.md
+  - docs/sdk/models/shared/apppopulationreportstate.md
+  - docs/sdk/models/shared/appref.md
+  - docs/sdk/models/shared/appreportservicelistresponse.md
+  - docs/sdk/models/shared/appresource.md
+  - docs/sdk/models/shared/appresourceexpandmask.md
+  - docs/sdk/models/shared/appresourceinput.md
+  - docs/sdk/models/shared/appresourceref.md
+  - docs/sdk/models/shared/appresourceservicegetresponse.md
+  - docs/sdk/models/shared/appresourceservicegetresponseexpanded.md
+  - docs/sdk/models/shared/appresourceservicelistresponse.md
+  - docs/sdk/models/shared/appresourceservicelistresponseexpanded.md
+  - docs/sdk/models/shared/appresourceserviceupdaterequest.md
+  - docs/sdk/models/shared/appresourceserviceupdateresponse.md
+  - docs/sdk/models/shared/appresourceserviceupdateresponseexpanded.md
+  - docs/sdk/models/shared/appresourcetype.md
+  - docs/sdk/models/shared/appresourcetypeinput.md
+  - docs/sdk/models/shared/appresourcetypeservicegetresponse.md
+  - docs/sdk/models/shared/appresourcetypeservicegetresponseexpanded.md
+  - docs/sdk/models/shared/appresourcetypeservicelistresponse.md
+  - docs/sdk/models/shared/appresourcetypeservicelistresponseexpanded.md
+  - docs/sdk/models/shared/appresourcetypeview.md
+  - docs/sdk/models/shared/appresourceview.md
+  - docs/sdk/models/shared/approval.md
+  - docs/sdk/models/shared/approvalinput.md
+  - docs/sdk/models/shared/approvalinstance.md
+  - docs/sdk/models/shared/approvalinstancestate.md
+  - docs/sdk/models/shared/approvedaction.md
+  - docs/sdk/models/shared/appusagecontrols.md
+  - docs/sdk/models/shared/appuser.md
+  - docs/sdk/models/shared/appusercreatedtrigger.md
+  - docs/sdk/models/shared/appusercredential.md
+  - docs/sdk/models/shared/appuserdomains.md
+  - docs/sdk/models/shared/appuserexpandmask.md
+  - docs/sdk/models/shared/appuserinput.md
+  - docs/sdk/models/shared/appuserref.md
+  - docs/sdk/models/shared/appuserservicelistcredentialsresponse.md
+  - docs/sdk/models/shared/appuserservicelistresponse.md
+  - docs/sdk/models/shared/appuserservicesearchrequest.md
+  - docs/sdk/models/shared/appuserservicesearchresponse.md
+  - docs/sdk/models/shared/appuserservicesearchresponseexpanded.md
+  - docs/sdk/models/shared/appuserserviceupdaterequest.md
+  - docs/sdk/models/shared/appuserserviceupdateresponse.md
+  - docs/sdk/models/shared/appuserserviceupdateresponseexpanded.md
+  - docs/sdk/models/shared/appusersforuserservicelistresponse.md
+  - docs/sdk/models/shared/appusersforuserservicelistresponseexpanded.md
+  - docs/sdk/models/shared/appuserstatus.md
+  - docs/sdk/models/shared/appuserstatuses.md
+  - docs/sdk/models/shared/appuserstatusinput.md
+  - docs/sdk/models/shared/appuserstatusstatus.md
+  - docs/sdk/models/shared/appusertype.md
+  - docs/sdk/models/shared/appusertypes.md
+  - docs/sdk/models/shared/appuserupdatedtrigger.md
+  - docs/sdk/models/shared/appuserview.md
+  - docs/sdk/models/shared/attributetype.md
+  - docs/sdk/models/shared/attributevalue.md
+  - docs/sdk/models/shared/automation.md
+  - docs/sdk/models/shared/automationcontext.md
+  - docs/sdk/models/shared/automationexecution.md
+  - docs/sdk/models/shared/automationexecutionexpandmask.md
+  - docs/sdk/models/shared/automationexecutionref.md
+  - docs/sdk/models/shared/automationexecutionstate.md
+  - docs/sdk/models/shared/automationexecutionview.md
+  - docs/sdk/models/shared/automationinput.md
+  - docs/sdk/models/shared/automationstep.md
+  - docs/sdk/models/shared/automationtemplateref.md
+  - docs/sdk/models/shared/automationtemplateversion.md
+  - docs/sdk/models/shared/automationtrigger.md
+  - docs/sdk/models/shared/awsexternalid.md
+  - docs/sdk/models/shared/body.md
+  - docs/sdk/models/shared/bundleautomation.md
+  - docs/sdk/models/shared/bundleautomationlastrunstate.md
+  - docs/sdk/models/shared/bundleautomationlastrunstatestatus.md
+  - docs/sdk/models/shared/bundleautomationruleentitlement.md
+  - docs/sdk/models/shared/cancelaccessrequestdefaultsrequest.md
+  - docs/sdk/models/shared/cancelledaction.md
+  - docs/sdk/models/shared/cidrrestriction.md
+  - docs/sdk/models/shared/closeaction.md
+  - docs/sdk/models/shared/completedaction.md
+  - docs/sdk/models/shared/conditionsucceeded.md
+  - docs/sdk/models/shared/conditiontimedout.md
+  - docs/sdk/models/shared/config.md
+  - docs/sdk/models/shared/conflictmonitor.md
+  - docs/sdk/models/shared/conflictmonitorcreaterequest.md
+  - docs/sdk/models/shared/conflictmonitordeleterequest.md
+  - docs/sdk/models/shared/conflictmonitordeleteresponse.md
+  - docs/sdk/models/shared/conflictmonitorupdaterequest.md
+  - docs/sdk/models/shared/connector.md
+  - docs/sdk/models/shared/connectoraction.md
+  - docs/sdk/models/shared/connectorcreateaccount.md
+  - docs/sdk/models/shared/connectorcredential.md
+  - docs/sdk/models/shared/connectorexpandmask.md
+  - docs/sdk/models/shared/connectorinput.md
+  - docs/sdk/models/shared/connectorprovision.md
+  - docs/sdk/models/shared/connectorref.md
+  - docs/sdk/models/shared/connectorservicecreatedelegatedrequest.md
+  - docs/sdk/models/shared/connectorservicecreaterequest.md
+  - docs/sdk/models/shared/connectorservicecreaterequestconfig.md
+  - docs/sdk/models/shared/connectorservicecreateresponse.md
+  - docs/sdk/models/shared/connectorservicecreateresponseexpanded.md
+  - docs/sdk/models/shared/connectorservicedeleterequest.md
+  - docs/sdk/models/shared/connectorservicedeleteresponse.md
+  - docs/sdk/models/shared/connectorservicegetcredentialsresponse.md
+  - docs/sdk/models/shared/connectorservicegetresponse.md
+  - docs/sdk/models/shared/connectorservicegetresponseexpanded.md
+  - docs/sdk/models/shared/connectorservicelistresponse.md
+  - docs/sdk/models/shared/connectorservicelistresponseexpanded.md
+  - docs/sdk/models/shared/connectorservicerevokecredentialrequest.md
+  - docs/sdk/models/shared/connectorservicerevokecredentialresponse.md
+  - docs/sdk/models/shared/connectorservicerotatecredentialrequest.md
+  - docs/sdk/models/shared/connectorservicerotatecredentialresponse.md
+  - docs/sdk/models/shared/connectorserviceupdatedelegatedrequest.md
+  - docs/sdk/models/shared/connectorserviceupdaterequest.md
+  - docs/sdk/models/shared/connectorserviceupdateresponse.md
+  - docs/sdk/models/shared/connectorserviceupdateresponseexpanded.md
+  - docs/sdk/models/shared/connectorstatus.md
+  - docs/sdk/models/shared/connectorstatusstatus.md
+  - docs/sdk/models/shared/connectorview.md
+  - docs/sdk/models/shared/createaccessreview.md
+  - docs/sdk/models/shared/createappentitlementproxyrequest.md
+  - docs/sdk/models/shared/createappentitlementproxyresponse.md
+  - docs/sdk/models/shared/createappentitlementproxyresponseexpanded.md
+  - docs/sdk/models/shared/createappentitlementrequest.md
+  - docs/sdk/models/shared/createappentitlementrequestdurationunset.md
+  - docs/sdk/models/shared/createappentitlementrequestpurpose.md
+  - docs/sdk/models/shared/createappentitlementresponse.md
+  - docs/sdk/models/shared/createappentitlementresponseexpanded.md
+  - docs/sdk/models/shared/createapprequest.md
+  - docs/sdk/models/shared/createapprequestidentitymatching.md
+  - docs/sdk/models/shared/createappresponse.md
+  - docs/sdk/models/shared/createattributevaluerequest.md
+  - docs/sdk/models/shared/createattributevalueresponse.md
+  - docs/sdk/models/shared/createautomationrequest.md
+  - docs/sdk/models/shared/createautomationrequestinput.md
+  - docs/sdk/models/shared/createautomationresponse.md
+  - docs/sdk/models/shared/createautomationresponse1.md
+  - docs/sdk/models/shared/createbundleautomationrequest.md
+  - docs/sdk/models/shared/createcomplianceframeworkattributevaluerequest.md
+  - docs/sdk/models/shared/createcomplianceframeworkattributevalueresponse.md
+  - docs/sdk/models/shared/createmanuallymanagedappresourcerequest.md
+  - docs/sdk/models/shared/createmanuallymanagedappresourceresponse.md
+  - docs/sdk/models/shared/createmanuallymanagedresourcetyperequest.md
+  - docs/sdk/models/shared/createmanuallymanagedresourcetyperesponse.md
+  - docs/sdk/models/shared/createmanuallymanagedresourcetyperesponseexpanded.md
+  - docs/sdk/models/shared/createpolicyrequest.md
+  - docs/sdk/models/shared/createpolicyrequestpolicytype.md
+  - docs/sdk/models/shared/createpolicyresponse.md
+  - docs/sdk/models/shared/createrevoketasks.md
+  - docs/sdk/models/shared/createrisklevelattributevaluerequest.md
+  - docs/sdk/models/shared/createrisklevelattributevalueresponse.md
+  - docs/sdk/models/shared/createstepupproviderrequest.md
+  - docs/sdk/models/shared/createstepupproviderresponse.md
+  - docs/sdk/models/shared/currentstate.md
+  - docs/sdk/models/shared/currentstep.md
+  - docs/sdk/models/shared/defaultbehavior.md
+  - docs/sdk/models/shared/delegatedprovision.md
+  - docs/sdk/models/shared/deleteaccount.md
+  - docs/sdk/models/shared/deleteappentitlementproxyrequest.md
+  - docs/sdk/models/shared/deleteappentitlementproxyresponse.md
+  - docs/sdk/models/shared/deleteappentitlementrequest.md
+  - docs/sdk/models/shared/deleteappentitlementresponse.md
+  - docs/sdk/models/shared/deleteapprequest.md
+  - docs/sdk/models/shared/deleteappresponse.md
+  - docs/sdk/models/shared/deleteattributevaluerequest.md
+  - docs/sdk/models/shared/deleteattributevalueresponse.md
+  - docs/sdk/models/shared/deleteautomationrequest.md
+  - docs/sdk/models/shared/deleteautomationresponse.md
+  - docs/sdk/models/shared/deletebundleautomationrequest.md
+  - docs/sdk/models/shared/deletebundleautomationresponse.md
+  - docs/sdk/models/shared/deletecomplianceframeworkattributevaluerequest.md
+  - docs/sdk/models/shared/deletecomplianceframeworkattributevalueresponse.md
+  - docs/sdk/models/shared/deletemanuallymanagedappresourcerequest.md
+  - docs/sdk/models/shared/deletemanuallymanagedappresourceresponse.md
+  - docs/sdk/models/shared/deletemanuallymanagedresourcetyperequest.md
+  - docs/sdk/models/shared/deletemanuallymanagedresourcetyperesponse.md
+  - docs/sdk/models/shared/deletepolicyrequest.md
+  - docs/sdk/models/shared/deletepolicyresponse.md
+  - docs/sdk/models/shared/deleterisklevelattributevaluerequest.md
+  - docs/sdk/models/shared/deleterisklevelattributevalueresponse.md
+  - docs/sdk/models/shared/deletestepupproviderrequest.md
+  - docs/sdk/models/shared/deletestepupproviderresponse.md
+  - docs/sdk/models/shared/deniedaction.md
+  - docs/sdk/models/shared/details.md
+  - docs/sdk/models/shared/directory.md
+  - docs/sdk/models/shared/directoryexpandmask.md
+  - docs/sdk/models/shared/directoryservicecreaterequest.md
+  - docs/sdk/models/shared/directoryservicecreateresponse.md
+  - docs/sdk/models/shared/directoryservicecreateresponseexpanded.md
+  - docs/sdk/models/shared/directoryservicedeleterequest.md
+  - docs/sdk/models/shared/directoryservicedeleteresponse.md
+  - docs/sdk/models/shared/directoryservicegetresponse.md
+  - docs/sdk/models/shared/directoryservicegetresponseexpanded.md
+  - docs/sdk/models/shared/directoryservicelistresponse.md
+  - docs/sdk/models/shared/directoryservicelistresponseexpanded.md
+  - docs/sdk/models/shared/directorystatus.md
+  - docs/sdk/models/shared/directoryview.md
+  - docs/sdk/models/shared/donotsave.md
+  - docs/sdk/models/shared/durationunset.md
+  - docs/sdk/models/shared/editormarker.md
+  - docs/sdk/models/shared/editorvalidaterequest.md
+  - docs/sdk/models/shared/editorvalidateresponse.md
+  - docs/sdk/models/shared/emailnotifications.md
+  - docs/sdk/models/shared/emergencystatus.md
+  - docs/sdk/models/shared/encrypteddata.md
+  - docs/sdk/models/shared/enrollmentbehavior.md
+  - docs/sdk/models/shared/entitlementownerapproval.md
+  - docs/sdk/models/shared/erroredaction.md
+  - docs/sdk/models/shared/escalation.md
+  - docs/sdk/models/shared/escalationinstance.md
+  - docs/sdk/models/shared/eventtype.md
+  - docs/sdk/models/shared/excludetypes.md
+  - docs/sdk/models/shared/executeautomationrequest.md
+  - docs/sdk/models/shared/executeautomationresponse.md
+  - docs/sdk/models/shared/executionstepstates.md
+  - docs/sdk/models/shared/expanded.md
+  - docs/sdk/models/shared/exporter.md
+  - docs/sdk/models/shared/exporterinput.md
+  - docs/sdk/models/shared/exporterref.md
+  - docs/sdk/models/shared/exporterstate.md
+  - docs/sdk/models/shared/exportservicecreaterequest.md
+  - docs/sdk/models/shared/exportservicecreateresponse.md
+  - docs/sdk/models/shared/exportservicedeleterequest.md
+  - docs/sdk/models/shared/exportservicedeleteresponse.md
+  - docs/sdk/models/shared/exportservicegetresponse.md
+  - docs/sdk/models/shared/exportservicelisteventsrequest.md
+  - docs/sdk/models/shared/exportservicelisteventsresponse.md
+  - docs/sdk/models/shared/exportservicelistresponse.md
+  - docs/sdk/models/shared/exportserviceupdaterequest.md
+  - docs/sdk/models/shared/exportserviceupdateresponse.md
+  - docs/sdk/models/shared/exportssearchservicesearchrequest.md
+  - docs/sdk/models/shared/exportssearchservicesearchresponse.md
+  - docs/sdk/models/shared/exporttodatasource.md
+  - docs/sdk/models/shared/expressionapproval.md
+  - docs/sdk/models/shared/expressionapprovalinput.md
+  - docs/sdk/models/shared/externalref.md
+  - docs/sdk/models/shared/externalrefsource.md
+  - docs/sdk/models/shared/externalticketprovision.md
+  - docs/sdk/models/shared/facetcategory.md
+  - docs/sdk/models/shared/facetrange.md
+  - docs/sdk/models/shared/facetrangeitem.md
+  - docs/sdk/models/shared/facets.md
+  - docs/sdk/models/shared/facetvalue.md
+  - docs/sdk/models/shared/facetvalueitem.md
+  - docs/sdk/models/shared/forcerunbundleautomationrequest.md
+  - docs/sdk/models/shared/forcerunbundleautomationresponse.md
+  - docs/sdk/models/shared/forcesyncrequest.md
+  - docs/sdk/models/shared/forcesyncresponse.md
+  - docs/sdk/models/shared/format.md
+  - docs/sdk/models/shared/getappentitlementproxyresponse.md
+  - docs/sdk/models/shared/getappentitlementproxyresponseexpanded.md
+  - docs/sdk/models/shared/getappentitlementresponse.md
+  - docs/sdk/models/shared/getappentitlementresponseexpanded.md
+  - docs/sdk/models/shared/getappresponse.md
+  - docs/sdk/models/shared/getappusagecontrolsresponse.md
+  - docs/sdk/models/shared/getattributevalueresponse.md
+  - docs/sdk/models/shared/getautomationexecutionresponse.md
+  - docs/sdk/models/shared/getautomationresponse.md
+  - docs/sdk/models/shared/getawsexternalidresponse.md
+  - docs/sdk/models/shared/getcomplianceframeworkattributevalueresponse.md
+  - docs/sdk/models/shared/getpolicyresponse.md
+  - docs/sdk/models/shared/getrisklevelattributevalueresponse.md
+  - docs/sdk/models/shared/getrolesresponse.md
+  - docs/sdk/models/shared/getsessionsettingsresponse.md
+  - docs/sdk/models/shared/getstepupproviderresponse.md
+  - docs/sdk/models/shared/getstepuptransactionresponse.md
+  - docs/sdk/models/shared/grantedstatus.md
+  - docs/sdk/models/shared/grantentitlements.md
+  - docs/sdk/models/shared/grantreason.md
+  - docs/sdk/models/shared/identitymatching.md
+  - docs/sdk/models/shared/introspectresponse.md
+  - docs/sdk/models/shared/listappentitlementownersresponse.md
+  - docs/sdk/models/shared/listappentitlementsresponse.md
+  - docs/sdk/models/shared/listappentitlementsresponseexpanded.md
+  - docs/sdk/models/shared/listappentitlementusersresponse.md
+  - docs/sdk/models/shared/listappentitlementusersresponseexpanded.md
+  - docs/sdk/models/shared/listappownersresponse.md
+  - docs/sdk/models/shared/listappresourceownersresponse.md
+  - docs/sdk/models/shared/listappsresponse.md
+  - docs/sdk/models/shared/listappusersforidentitywithgrantresponse.md
+  - docs/sdk/models/shared/listattributetypesresponse.md
+  - docs/sdk/models/shared/listattributevaluesresponse.md
+  - docs/sdk/models/shared/listautomationexclusionsresponse.md
+  - docs/sdk/models/shared/listautomationexecutionsresponse.md
+  - docs/sdk/models/shared/listautomationsresponse.md
+  - docs/sdk/models/shared/listorgdomainsresponse.md
+  - docs/sdk/models/shared/listpolicyresponse.md
+  - docs/sdk/models/shared/listrolesresponse.md
+  - docs/sdk/models/shared/liststepupprovidersresponse.md
+  - docs/sdk/models/shared/managerapproval.md
+  - docs/sdk/models/shared/managerapprovalinput.md
+  - docs/sdk/models/shared/manualautomationtrigger.md
+  - docs/sdk/models/shared/manuallymanagedusersresponse.md
+  - docs/sdk/models/shared/manualprovision.md
+  - docs/sdk/models/shared/membershiptype.md
+  - docs/sdk/models/shared/multistep.md
+  - docs/sdk/models/shared/notificationconfig.md
+  - docs/sdk/models/shared/oauth2authorizedas.md
+  - docs/sdk/models/shared/oauth2authorizedasinput.md
+  - docs/sdk/models/shared/orgdomain.md
+  - docs/sdk/models/shared/origin.md
+  - docs/sdk/models/shared/outcome.md
+  - docs/sdk/models/shared/payload.md
+  - docs/sdk/models/shared/payloadpolicyapprovalstep.md
+  - docs/sdk/models/shared/payloadpolicyapprovalstepexpanded.md
+  - docs/sdk/models/shared/payloadpolicypostaction.md
+  - docs/sdk/models/shared/payloadpolicypostactionexpanded.md
+  - docs/sdk/models/shared/payloadprovisionstep.md
+  - docs/sdk/models/shared/payloadprovisionstepexpanded.md
+  - docs/sdk/models/shared/payloadtest.md
+  - docs/sdk/models/shared/payloadworkflowstep.md
+  - docs/sdk/models/shared/personalclient.md
+  - docs/sdk/models/shared/personalclientinput.md
+  - docs/sdk/models/shared/personalclientsearchservicesearchrequest.md
+  - docs/sdk/models/shared/personalclientsearchservicesearchresponse.md
+  - docs/sdk/models/shared/personalclientservicecreaterequest.md
+  - docs/sdk/models/shared/personalclientservicecreateresponse.md
+  - docs/sdk/models/shared/personalclientservicedeleterequest.md
+  - docs/sdk/models/shared/personalclientservicedeleteresponse.md
+  - docs/sdk/models/shared/personalclientservicegetresponse.md
+  - docs/sdk/models/shared/personalclientservicelistresponse.md
+  - docs/sdk/models/shared/personalclientserviceupdaterequest.md
+  - docs/sdk/models/shared/personalclientserviceupdateresponse.md
+  - docs/sdk/models/shared/policy.md
+  - docs/sdk/models/shared/policyinput.md
+  - docs/sdk/models/shared/policyinstance.md
+  - docs/sdk/models/shared/policypostactions.md
+  - docs/sdk/models/shared/policyref.md
+  - docs/sdk/models/shared/policystep.md
+  - docs/sdk/models/shared/policystepinput.md
+  - docs/sdk/models/shared/policystepinstance.md
+  - docs/sdk/models/shared/policystepinstancestate.md
+  - docs/sdk/models/shared/policysteps.md
+  - docs/sdk/models/shared/policystepsinput.md
+  - docs/sdk/models/shared/policytype.md
+  - docs/sdk/models/shared/policytypes.md
+  - docs/sdk/models/shared/previousstate.md
+  - docs/sdk/models/shared/primarytriggertype.md
+  - docs/sdk/models/shared/processing.md
+  - docs/sdk/models/shared/providertype.md
+  - docs/sdk/models/shared/provision.md
+  - docs/sdk/models/shared/provisioninstance.md
+  - docs/sdk/models/shared/provisioninstancestate.md
+  - docs/sdk/models/shared/provisionpolicy.md
+  - docs/sdk/models/shared/provisionpolicyinput.md
+  - docs/sdk/models/shared/provisiontarget.md
+  - docs/sdk/models/shared/purpose.md
+  - docs/sdk/models/shared/reassignaction.md
+  - docs/sdk/models/shared/reassignedaction.md
+  - docs/sdk/models/shared/reassignedbyerroraction.md
+  - docs/sdk/models/shared/reassigntoapprovers.md
+  - docs/sdk/models/shared/recommendation.md
+  - docs/sdk/models/shared/referencestrength.md
+  - docs/sdk/models/shared/reject.md
+  - docs/sdk/models/shared/rejectinstance.md
+  - docs/sdk/models/shared/removeappentitlementownerrequest.md
+  - docs/sdk/models/shared/removeappentitlementownerresponse.md
+  - docs/sdk/models/shared/removeappownerrequest.md
+  - docs/sdk/models/shared/removeappownerresponse.md
+  - docs/sdk/models/shared/removeappresourceownerrequest.md
+  - docs/sdk/models/shared/removeappresourceownerresponse.md
+  - docs/sdk/models/shared/removeautomationexclusionrequest.md
+  - docs/sdk/models/shared/removeautomationexclusionresponse.md
+  - docs/sdk/models/shared/removeentitlementmembershiprequest.md
+  - docs/sdk/models/shared/removeentitlementmembershipresponse.md
+  - docs/sdk/models/shared/removefromdelegation.md
+  - docs/sdk/models/shared/removegrantdurationrequest.md
+  - docs/sdk/models/shared/removegrantdurationresponse.md
+  - docs/sdk/models/shared/replacepolicy.md
+  - docs/sdk/models/shared/requestcatalog.md
+  - docs/sdk/models/shared/requestcatalogexpandmask.md
+  - docs/sdk/models/shared/requestcataloginput.md
+  - docs/sdk/models/shared/requestcatalogmanagementserviceaddaccessentitlementsrequest.md
+  - docs/sdk/models/shared/requestcatalogmanagementserviceaddaccessentitlementsresponse.md
+  - docs/sdk/models/shared/requestcatalogmanagementserviceaddappentitlementsrequest.md
+  - docs/sdk/models/shared/requestcatalogmanagementserviceaddappentitlementsresponse.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicecreaterequest.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicecreaterequestenrollmentbehavior.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicecreaterequestunenrollmentbehavior.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicecreaterequestunenrollmententitlementbehavior.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicedeleterequest.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicedeleteresponse.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicegetresponse.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicegetresponseexpanded.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicelistallentitlementidspercatalogresponse.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicelistentitlementsforaccessresponse.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicelistentitlementsforaccessresponseexpanded.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicelistentitlementspercatalogresponse.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicelistentitlementspercatalogresponseexpanded.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicelistresponse.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicelistresponseexpanded.md
+  - docs/sdk/models/shared/requestcatalogmanagementserviceremoveaccessentitlementsrequest.md
+  - docs/sdk/models/shared/requestcatalogmanagementserviceremoveaccessentitlementsresponse.md
+  - docs/sdk/models/shared/requestcatalogmanagementserviceremoveappentitlementsrequest.md
+  - docs/sdk/models/shared/requestcatalogmanagementserviceremoveappentitlementsresponse.md
+  - docs/sdk/models/shared/requestcatalogmanagementserviceupdaterequest.md
+  - docs/sdk/models/shared/requestcatalogsearchservicesearchentitlementsrequest.md
+  - docs/sdk/models/shared/requestcatalogsearchservicesearchentitlementsresponse.md
+  - docs/sdk/models/shared/requestcatalogsearchservicesearchentitlementsresponseexpanded.md
+  - docs/sdk/models/shared/requestcatalogview.md
+  - docs/sdk/models/shared/resourceownerapproval.md
+  - docs/sdk/models/shared/resourcetype.md
+  - docs/sdk/models/shared/responsepolicyapprovalreplacepolicy.md
+  - docs/sdk/models/shared/responsepolicyapprovalstep.md
+  - docs/sdk/models/shared/responsepolicyapprovalstepapprove.md
+  - docs/sdk/models/shared/responsepolicyapprovalstepdeny.md
+  - docs/sdk/models/shared/responsepolicyapprovalstepreassign.md
+  - docs/sdk/models/shared/responsepolicypostaction.md
+  - docs/sdk/models/shared/responseprovisionstep.md
+  - docs/sdk/models/shared/responseprovisionstepcomplete.md
+  - docs/sdk/models/shared/responseprovisionsteperrored.md
+  - docs/sdk/models/shared/responsetest.md
+  - docs/sdk/models/shared/responseworkflowstep.md
+  - docs/sdk/models/shared/restartaction.md
+  - docs/sdk/models/shared/role.md
+  - docs/sdk/models/shared/roleinput.md
+  - docs/sdk/models/shared/rule.md
+  - docs/sdk/models/shared/runautomation.md
+  - docs/sdk/models/shared/rundelayed.md
+  - docs/sdk/models/shared/runimmediately.md
+  - docs/sdk/models/shared/savetovault.md
+  - docs/sdk/models/shared/searchappentitlementswithexpiredresponse.md
+  - docs/sdk/models/shared/searchappresourcesrequest.md
+  - docs/sdk/models/shared/searchappresourcesresponse.md
+  - docs/sdk/models/shared/searchappresourcesresponseexpanded.md
+  - docs/sdk/models/shared/searchappresourcetypesrequest.md
+  - docs/sdk/models/shared/searchappresourcetypesresponse.md
+  - docs/sdk/models/shared/searchappsrequest.md
+  - docs/sdk/models/shared/searchappsresponse.md
+  - docs/sdk/models/shared/searchattributevaluesrequest.md
+  - docs/sdk/models/shared/searchattributevaluesresponse.md
+  - docs/sdk/models/shared/searchautomationexecutionsrequest.md
+  - docs/sdk/models/shared/searchautomationexecutionsresponse.md
+  - docs/sdk/models/shared/searchautomationexecutionsresponseexpanded.md
+  - docs/sdk/models/shared/searchautomationsrequest.md
+  - docs/sdk/models/shared/searchautomationsresponse.md
+  - docs/sdk/models/shared/searchautomationtemplateversionsrequest.md
+  - docs/sdk/models/shared/searchautomationtemplateversionsresponse.md
+  - docs/sdk/models/shared/searchgrantfeedrequest.md
+  - docs/sdk/models/shared/searchgrantfeedresponse.md
+  - docs/sdk/models/shared/searchgrantfeedresponseexpanded.md
+  - docs/sdk/models/shared/searchpastgrantsrequest.md
+  - docs/sdk/models/shared/searchpastgrantsresponse.md
+  - docs/sdk/models/shared/searchpastgrantsresponseexpanded.md
+  - docs/sdk/models/shared/searchpoliciesrequest.md
+  - docs/sdk/models/shared/searchstepupprovidersrequest.md
+  - docs/sdk/models/shared/searchstepupprovidersresponse.md
+  - docs/sdk/models/shared/searchstepuptransactionsrequest.md
+  - docs/sdk/models/shared/searchstepuptransactionsrequeststate.md
+  - docs/sdk/models/shared/searchstepuptransactionsresponse.md
+  - docs/sdk/models/shared/searchusersrequest.md
+  - docs/sdk/models/shared/searchusersresponse.md
+  - docs/sdk/models/shared/searchusersresponseexpanded.md
+  - docs/sdk/models/shared/secrettrait.md
+  - docs/sdk/models/shared/security.md
+  - docs/sdk/models/shared/selfapproval.md
+  - docs/sdk/models/shared/selfapprovalinput.md
+  - docs/sdk/models/shared/sendemail.md
+  - docs/sdk/models/shared/sendslackmessage.md
+  - docs/sdk/models/shared/sessionsettings.md
+  - docs/sdk/models/shared/setappentitlementownersrequest.md
+  - docs/sdk/models/shared/setappentitlementownersresponse.md
+  - docs/sdk/models/shared/setappownersrequest.md
+  - docs/sdk/models/shared/setappownersresponse.md
+  - docs/sdk/models/shared/setbundleautomationrequest.md
+  - docs/sdk/models/shared/severity.md
+  - docs/sdk/models/shared/skippedaction.md
+  - docs/sdk/models/shared/slacknotifications.md
+  - docs/sdk/models/shared/sortby.md
+  - docs/sdk/models/shared/sortdirection.md
+  - docs/sdk/models/shared/source.md
+  - docs/sdk/models/shared/state.md
+  - docs/sdk/models/shared/status.md
+  - docs/sdk/models/shared/stepapprovaltypes.md
+  - docs/sdk/models/shared/stepupmicrosoftsettings.md
+  - docs/sdk/models/shared/stepupoauth2settings.md
+  - docs/sdk/models/shared/stepupprovider.md
+  - docs/sdk/models/shared/stepupproviderinput.md
+  - docs/sdk/models/shared/stepupproviderref.md
+  - docs/sdk/models/shared/stepuptransaction.md
+  - docs/sdk/models/shared/stepuptransactionstate.md
+  - docs/sdk/models/shared/systemlogservicelisteventsrequest.md
+  - docs/sdk/models/shared/systemlogservicelisteventsresponse.md
+  - docs/sdk/models/shared/targetedappusertypes.md
+  - docs/sdk/models/shared/targettask.md
+  - docs/sdk/models/shared/targettest.md
+  - docs/sdk/models/shared/targettype.md
+  - docs/sdk/models/shared/task.md
+  - docs/sdk/models/shared/taskaction.md
+  - docs/sdk/models/shared/taskaction1.md
+  - docs/sdk/models/shared/taskactionsserviceapproverequest.md
+  - docs/sdk/models/shared/taskactionsserviceapproveresponse.md
+  - docs/sdk/models/shared/taskactionsserviceapproveresponseexpanded.md
+  - docs/sdk/models/shared/taskactionsserviceapprovewithstepuprequest.md
+  - docs/sdk/models/shared/taskactionsserviceapprovewithstepupresponse.md
+  - docs/sdk/models/shared/taskactionsserviceapprovewithstepupresponseexpanded.md
+  - docs/sdk/models/shared/taskactionsservicecloserequest.md
+  - docs/sdk/models/shared/taskactionsservicecloseresponse.md
+  - docs/sdk/models/shared/taskactionsservicecloseresponseexpanded.md
+  - docs/sdk/models/shared/taskactionsservicecommentrequest.md
+  - docs/sdk/models/shared/taskactionsservicecommentresponse.md
+  - docs/sdk/models/shared/taskactionsservicecommentresponseexpanded.md
+  - docs/sdk/models/shared/taskactionsservicedenyrequest.md
+  - docs/sdk/models/shared/taskactionsservicedenyresponse.md
+  - docs/sdk/models/shared/taskactionsservicedenyresponseexpanded.md
+  - docs/sdk/models/shared/taskactionsserviceescalatetoemergencyaccessrequest.md
+  - docs/sdk/models/shared/taskactionsservicehardresetrequest.md
+  - docs/sdk/models/shared/taskactionsservicehardresetresponse.md
+  - docs/sdk/models/shared/taskactionsservicehardresetresponseexpanded.md
+  - docs/sdk/models/shared/taskactionsserviceprocessnowrequest.md
+  - docs/sdk/models/shared/taskactionsserviceprocessnowresponse.md
+  - docs/sdk/models/shared/taskactionsserviceprocessnowresponseexpanded.md
+  - docs/sdk/models/shared/taskactionsservicereassignrequest.md
+  - docs/sdk/models/shared/taskactionsservicereassignresponse.md
+  - docs/sdk/models/shared/taskactionsservicereassignresponseexpanded.md
+  - docs/sdk/models/shared/taskactionsservicerestartrequest.md
+  - docs/sdk/models/shared/taskactionsservicerestartresponse.md
+  - docs/sdk/models/shared/taskactionsservicerestartresponseexpanded.md
+  - docs/sdk/models/shared/taskactionsserviceskipsteprequest.md
+  - docs/sdk/models/shared/taskauditaccessrequestoutcome.md
+  - docs/sdk/models/shared/taskauditaccessrequestoutcomeoutcome.md
+  - docs/sdk/models/shared/taskauditactionsubmitted.md
+  - docs/sdk/models/shared/taskauditapprovalautoacceptedbypolicy.md
+  - docs/sdk/models/shared/taskauditapprovalautorejectedbypolicy.md
+  - docs/sdk/models/shared/taskauditapprovalhappenedautomatically.md
+  - docs/sdk/models/shared/taskauditapprovalinstancechange.md
+  - docs/sdk/models/shared/taskauditbulkactionerror.md
+  - docs/sdk/models/shared/taskauditcancelledresult.md
+  - docs/sdk/models/shared/taskauditcertifyoutcome.md
+  - docs/sdk/models/shared/taskauditcertifyoutcomeoutcome.md
+  - docs/sdk/models/shared/taskauditcomment.md
+  - docs/sdk/models/shared/taskauditconditionalpolicyexecutionresult.md
+  - docs/sdk/models/shared/taskauditconnectoractionresult.md
+  - docs/sdk/models/shared/taskauditerrorresult.md
+  - docs/sdk/models/shared/taskauditescalatetoemergencyaccess.md
+  - docs/sdk/models/shared/taskauditexpressionpolicysteperror.md
+  - docs/sdk/models/shared/taskauditexternalticketcreated.md
+  - docs/sdk/models/shared/taskauditexternalticketerror.md
+  - docs/sdk/models/shared/taskauditexternalticketprovisionstepresolved.md
+  - docs/sdk/models/shared/taskauditexternaltickettriggered.md
+  - docs/sdk/models/shared/taskauditfinishedconnectoractions.md
+  - docs/sdk/models/shared/taskauditgrantoutcome.md
+  - docs/sdk/models/shared/taskauditgrantoutcomeoutcome.md
+  - docs/sdk/models/shared/taskaudithardreset.md
+  - docs/sdk/models/shared/taskauditlistrequest.md
+  - docs/sdk/models/shared/taskauditlistresponse.md
+  - docs/sdk/models/shared/taskauditmetadata.md
+  - docs/sdk/models/shared/taskauditnewtask.md
+  - docs/sdk/models/shared/taskauditpolicyapprovalreassigned.md
+  - docs/sdk/models/shared/taskauditpolicychanged.md
+  - docs/sdk/models/shared/taskauditpolicyevaluationstep.md
+  - docs/sdk/models/shared/taskauditpolicyprovisionerror.md
+  - docs/sdk/models/shared/taskauditpolicyprovisionreassigned.md
+  - docs/sdk/models/shared/taskauditreassignedtodelegate.md
+  - docs/sdk/models/shared/taskauditreassignmentlisterror.md
+  - docs/sdk/models/shared/taskauditrestart.md
+  - docs/sdk/models/shared/taskauditrevokeoutcome.md
+  - docs/sdk/models/shared/taskauditrevokeoutcomeoutcome.md
+  - docs/sdk/models/shared/taskauditslaescalation.md
+  - docs/sdk/models/shared/taskauditstartedconnectoractions.md
+  - docs/sdk/models/shared/taskauditstatechange.md
+  - docs/sdk/models/shared/taskauditstepskipped.md
+  - docs/sdk/models/shared/taskauditstepupapproval.md
+  - docs/sdk/models/shared/taskauditsuccessresult.md
+  - docs/sdk/models/shared/taskauditsuccessresultannotations.md
+  - docs/sdk/models/shared/taskauditview.md
+  - docs/sdk/models/shared/taskauditvieweventtype.md
+  - docs/sdk/models/shared/taskauditviewref.md
+  - docs/sdk/models/shared/taskauditwaitforanalysisstepsuccess.md
+  - docs/sdk/models/shared/taskauditwaitforanalysissteptimedout.md
+  - docs/sdk/models/shared/taskauditwaitforanalysisstepwaiting.md
+  - docs/sdk/models/shared/taskauditwaitstepsuccess.md
+  - docs/sdk/models/shared/taskauditwaitsteptimedout.md
+  - docs/sdk/models/shared/taskauditwaitstepwaiting.md
+  - docs/sdk/models/shared/taskauditwebhookapprovalattempt.md
+  - docs/sdk/models/shared/taskauditwebhookapprovalbadresponse.md
+  - docs/sdk/models/shared/taskauditwebhookapprovalsuccess.md
+  - docs/sdk/models/shared/taskauditwebhookapprovaltriggered.md
+  - docs/sdk/models/shared/taskauditwebhookattempt.md
+  - docs/sdk/models/shared/taskauditwebhooksuccess.md
+  - docs/sdk/models/shared/taskauditwebhooktriggered.md
+  - docs/sdk/models/shared/taskexpandmask.md
+  - docs/sdk/models/shared/taskgrantsource.md
+  - docs/sdk/models/shared/taskref.md
+  - docs/sdk/models/shared/taskrevokesource.md
+  - docs/sdk/models/shared/taskrevokesourceexpired.md
+  - docs/sdk/models/shared/taskrevokesourcenonusage.md
+  - docs/sdk/models/shared/taskrevokesourcerequest.md
+  - docs/sdk/models/shared/taskrevokesourcereview.md
+  - docs/sdk/models/shared/tasksearchrequest.md
+  - docs/sdk/models/shared/tasksearchresponse.md
+  - docs/sdk/models/shared/tasksearchresponseexpanded.md
+  - docs/sdk/models/shared/taskserviceactionresponse.md
+  - docs/sdk/models/shared/taskserviceactionresponseexpanded.md
+  - docs/sdk/models/shared/taskservicecreategrantrequest.md
+  - docs/sdk/models/shared/taskservicecreategrantresponse.md
+  - docs/sdk/models/shared/taskservicecreategrantresponseexpanded.md
+  - docs/sdk/models/shared/taskservicecreateoffboardingrequest.md
+  - docs/sdk/models/shared/taskservicecreateoffboardingresponse.md
+  - docs/sdk/models/shared/taskservicecreateoffboardingresponseexpanded.md
+  - docs/sdk/models/shared/taskservicecreaterevokerequest.md
+  - docs/sdk/models/shared/taskservicecreaterevokeresponse.md
+  - docs/sdk/models/shared/taskservicecreaterevokeresponseexpanded.md
+  - docs/sdk/models/shared/taskservicegetresponse.md
+  - docs/sdk/models/shared/taskservicegetresponseexpanded.md
+  - docs/sdk/models/shared/taskstate.md
+  - docs/sdk/models/shared/taskstates.md
+  - docs/sdk/models/shared/tasktype.md
+  - docs/sdk/models/shared/tasktypecertify.md
+  - docs/sdk/models/shared/tasktypecertifyinput.md
+  - docs/sdk/models/shared/tasktypegrant.md
+  - docs/sdk/models/shared/tasktypegrantinput.md
+  - docs/sdk/models/shared/tasktypegrantoutcome.md
+  - docs/sdk/models/shared/tasktypeinput.md
+  - docs/sdk/models/shared/tasktypeoffboarding.md
+  - docs/sdk/models/shared/tasktypeoffboardinginput.md
+  - docs/sdk/models/shared/tasktypeoffboardingoutcome.md
+  - docs/sdk/models/shared/tasktyperevoke.md
+  - docs/sdk/models/shared/tasktyperevokeinput.md
+  - docs/sdk/models/shared/tasktyperevokeoutcome.md
+  - docs/sdk/models/shared/tasktypes.md
+  - docs/sdk/models/shared/taskview.md
+  - docs/sdk/models/shared/terminateautomationrequest.md
+  - docs/sdk/models/shared/terminateautomationresponse.md
+  - docs/sdk/models/shared/testaccountprovisionpolicyrequest.md
+  - docs/sdk/models/shared/testaccountprovisionpolicyresponse.md
+  - docs/sdk/models/shared/testsourceiprequest.md
+  - docs/sdk/models/shared/testsourceipresponse.md
+  - docs/sdk/models/shared/teststepupproviderrequest.md
+  - docs/sdk/models/shared/teststepupproviderresponse.md
+  - docs/sdk/models/shared/triggertypes.md
+  - docs/sdk/models/shared/type.md
+  - docs/sdk/models/shared/unconfiguredprovision.md
+  - docs/sdk/models/shared/unenrollfromallaccessprofiles.md
+  - docs/sdk/models/shared/unenrollmentbehavior.md
+  - docs/sdk/models/shared/unenrollmententitlementbehavior.md
+  - docs/sdk/models/shared/updateappentitlementrequest.md
+  - docs/sdk/models/shared/updateappentitlementresponse.md
+  - docs/sdk/models/shared/updateappentitlementresponseexpanded.md
+  - docs/sdk/models/shared/updateapprequest.md
+  - docs/sdk/models/shared/updateappresponse.md
+  - docs/sdk/models/shared/updateappusagecontrolsrequest.md
+  - docs/sdk/models/shared/updateappusagecontrolsresponse.md
+  - docs/sdk/models/shared/updateautomationrequest.md
+  - docs/sdk/models/shared/updateautomationresponse.md
+  - docs/sdk/models/shared/updategrantdurationrequest.md
+  - docs/sdk/models/shared/updategrantdurationresponse.md
+  - docs/sdk/models/shared/updatemanuallymanagedresourcetyperequest.md
+  - docs/sdk/models/shared/updatemanuallymanagedresourcetyperesponse.md
+  - docs/sdk/models/shared/updatemanuallymanagedresourcetyperesponseexpanded.md
+  - docs/sdk/models/shared/updateorgdomainrequest.md
+  - docs/sdk/models/shared/updateorgdomainresponse.md
+  - docs/sdk/models/shared/updatepolicyrequest.md
+  - docs/sdk/models/shared/updatepolicyresponse.md
+  - docs/sdk/models/shared/updaterolerequest.md
+  - docs/sdk/models/shared/updaterolesresponse.md
+  - docs/sdk/models/shared/updatesessionsettingsrequest.md
+  - docs/sdk/models/shared/updatesessionsettingsresponse.md
+  - docs/sdk/models/shared/updatestepupproviderrequest.md
+  - docs/sdk/models/shared/updatestepupproviderresponse.md
+  - docs/sdk/models/shared/updatestepupprovidersecretrequest.md
+  - docs/sdk/models/shared/updatestepupprovidersecretresponse.md
+  - docs/sdk/models/shared/updateuser.md
+  - docs/sdk/models/shared/usagebasedrevocationtrigger.md
+  - docs/sdk/models/shared/user.md
+  - docs/sdk/models/shared/userapproval.md
+  - docs/sdk/models/shared/userattributemappingsource.md
+  - docs/sdk/models/shared/usercreatedtrigger.md
+  - docs/sdk/models/shared/userexpandmask.md
+  - docs/sdk/models/shared/userprofilechangetrigger.md
+  - docs/sdk/models/shared/userproperties.md
+  - docs/sdk/models/shared/userref.md
+  - docs/sdk/models/shared/userservicegetresponse.md
+  - docs/sdk/models/shared/userservicegetresponseexpanded.md
+  - docs/sdk/models/shared/userservicelistresponse.md
+  - docs/sdk/models/shared/userservicelistresponseexpanded.md
+  - docs/sdk/models/shared/userstatus.md
+  - docs/sdk/models/shared/userstatusenum.md
+  - docs/sdk/models/shared/userstatuses.md
+  - docs/sdk/models/shared/userview.md
+  - docs/sdk/models/shared/userwithappentitlementuserbindingview.md
+  - docs/sdk/models/shared/wait.md
+  - docs/sdk/models/shared/waitcondition.md
+  - docs/sdk/models/shared/waitconditioninstance.md
+  - docs/sdk/models/shared/waitforduration.md
+  - docs/sdk/models/shared/waitinstance.md
+  - docs/sdk/models/shared/waitinstancestate.md
+  - docs/sdk/models/shared/webhook.md
+  - docs/sdk/models/shared/webhook1.md
+  - docs/sdk/models/shared/webhookapproval.md
+  - docs/sdk/models/shared/webhookinput.md
+  - docs/sdk/models/shared/webhookinstance.md
+  - docs/sdk/models/shared/webhookinstancestate.md
+  - docs/sdk/models/shared/webhookprovision.md
+  - docs/sdk/models/shared/webhookref.md
+  - docs/sdk/models/shared/webhooksource.md
+  - docs/sdk/models/shared/webhooksourceapprovalstep.md
+  - docs/sdk/models/shared/webhooksourcepolicypostaction.md
+  - docs/sdk/models/shared/webhooksourceprovisionstep.md
+  - docs/sdk/models/shared/webhooksourcetest.md
+  - docs/sdk/models/shared/webhooksourceworkflowstep.md
+  - docs/sdk/models/shared/webhookspec.md
+  - docs/sdk/models/shared/webhookssearchrequest.md
+  - docs/sdk/models/shared/webhookssearchresponse.md
+  - docs/sdk/models/shared/webhooksservicecreaterequest.md
+  - docs/sdk/models/shared/webhooksservicecreateresponse.md
+  - docs/sdk/models/shared/webhooksservicedeleterequest.md
+  - docs/sdk/models/shared/webhooksservicedeleteresponse.md
+  - docs/sdk/models/shared/webhooksservicegetresponse.md
+  - docs/sdk/models/shared/webhooksservicelistresponse.md
+  - docs/sdk/models/shared/webhooksservicetestrequest.md
+  - docs/sdk/models/shared/webhooksservicetestresponse.md
+  - docs/sdk/models/shared/webhooksserviceupdaterequest.md
+  - docs/sdk/models/shared/webhooksserviceupdateresponse.md
+  - docs/sdks/accessconflict/README.md
+  - docs/sdks/accountprovisionpolicytest/README.md
+  - docs/sdks/appaccessrequestsdefaults/README.md
+  - docs/sdks/appentitlementowners/README.md
+  - docs/sdks/appentitlements/README.md
+  - docs/sdks/appentitlementsearch/README.md
+  - docs/sdks/appentitlementsproxy/README.md
+  - docs/sdks/appentitlementuserbinding/README.md
+  - docs/sdks/appowners/README.md
+  - docs/sdks/appreport/README.md
+  - docs/sdks/appreportaction/README.md
+  - docs/sdks/appresource/README.md
+  - docs/sdks/appresourceowners/README.md
+  - docs/sdks/appresourcesearch/README.md
+  - docs/sdks/appresourcetype/README.md
+  - docs/sdks/apps/README.md
+  - docs/sdks/appsearch/README.md
+  - docs/sdks/appusagecontrols/README.md
+  - docs/sdks/appuser/README.md
+  - docs/sdks/attributes/README.md
+  - docs/sdks/attributesearch/README.md
+  - docs/sdks/auth/README.md
+  - docs/sdks/automation/README.md
+  - docs/sdks/automationexecution/README.md
+  - docs/sdks/automationexecutionactions/README.md
+  - docs/sdks/automationexecutionsearch/README.md
+  - docs/sdks/automationsearch/README.md
+  - docs/sdks/awsexternalidsettings/README.md
+  - docs/sdks/conductoronesdktypescript/README.md
+  - docs/sdks/connector/README.md
+  - docs/sdks/directory/README.md
+  - docs/sdks/export/README.md
+  - docs/sdks/exportssearch/README.md
+  - docs/sdks/orgdomain/README.md
+  - docs/sdks/personalclient/README.md
+  - docs/sdks/personalclientsearch/README.md
+  - docs/sdks/policies/README.md
+  - docs/sdks/policysearch/README.md
+  - docs/sdks/policyvalidate/README.md
+  - docs/sdks/requestcatalogmanagement/README.md
+  - docs/sdks/requestcatalogsearch/README.md
+  - docs/sdks/roles/README.md
+  - docs/sdks/sessionsettings/README.md
+  - docs/sdks/stepupprovider/README.md
+  - docs/sdks/stepuptransaction/README.md
+  - docs/sdks/systemlog/README.md
+  - docs/sdks/task/README.md
+  - docs/sdks/taskactions/README.md
+  - docs/sdks/taskaudit/README.md
+  - docs/sdks/tasksearch/README.md
+  - docs/sdks/user/README.md
+  - docs/sdks/usersearch/README.md
+  - docs/sdks/webhooks/README.md
+  - docs/sdks/webhookssearch/README.md
+  - eslint.config.mjs
+  - examples/.env.template
+  - examples/README.md
+  - examples/accessConflictCreateMonitor.example.ts
+  - jsr.json
+  - src/core.ts
+  - src/funcs/accessConflictCreateMonitor.ts
+  - src/funcs/accessConflictDeleteMonitor.ts
+  - src/funcs/accessConflictGetMonitor.ts
+  - src/funcs/accessConflictUpdateMonitor.ts
+  - src/funcs/accountProvisionPolicyTestTest.ts
+  - src/funcs/appAccessRequestsDefaultsCancelAppAccessRequestsDefaults.ts
+  - src/funcs/appAccessRequestsDefaultsCreateAppAccessRequestsDefaults.ts
+  - src/funcs/appAccessRequestsDefaultsGetAppAccessRequestsDefaults.ts
+  - src/funcs/appEntitlementOwnersAdd.ts
+  - src/funcs/appEntitlementOwnersList.ts
+  - src/funcs/appEntitlementOwnersRemove.ts
+  - src/funcs/appEntitlementOwnersSet.ts
+  - src/funcs/appEntitlementSearchSearch.ts
+  - src/funcs/appEntitlementSearchSearchAppEntitlementsForAppUser.ts
+  - src/funcs/appEntitlementSearchSearchAppEntitlementsWithExpired.ts
+  - src/funcs/appEntitlementSearchSearchGrants.ts
+  - src/funcs/appEntitlementUserBindingListAppUsersForIdentityWithGrant.ts
+  - src/funcs/appEntitlementUserBindingRemoveGrantDuration.ts
+  - src/funcs/appEntitlementUserBindingSearchGrantFeed.ts
+  - src/funcs/appEntitlementUserBindingSearchPastGrants.ts
+  - src/funcs/appEntitlementUserBindingUpdateGrantDuration.ts
+  - src/funcs/appEntitlementsAddAutomationExclusion.ts
+  - src/funcs/appEntitlementsAddManuallyManagedMembers.ts
+  - src/funcs/appEntitlementsCreate.ts
+  - src/funcs/appEntitlementsCreateAutomation.ts
+  - src/funcs/appEntitlementsDelete.ts
+  - src/funcs/appEntitlementsDeleteAutomation.ts
+  - src/funcs/appEntitlementsGet.ts
+  - src/funcs/appEntitlementsGetAutomation.ts
+  - src/funcs/appEntitlementsList.ts
+  - src/funcs/appEntitlementsListAutomationExclusions.ts
+  - src/funcs/appEntitlementsListForAppResource.ts
+  - src/funcs/appEntitlementsListForAppUser.ts
+  - src/funcs/appEntitlementsListUsers.ts
+  - src/funcs/appEntitlementsProxyCreate.ts
+  - src/funcs/appEntitlementsProxyDelete.ts
+  - src/funcs/appEntitlementsProxyGet.ts
+  - src/funcs/appEntitlementsRemoveAutomationExclusion.ts
+  - src/funcs/appEntitlementsRemoveEntitlementMembership.ts
+  - src/funcs/appEntitlementsUpdate.ts
+  - src/funcs/appEntitlementsUpdateAutomation.ts
+  - src/funcs/appOwnersAdd.ts
+  - src/funcs/appOwnersList.ts
+  - src/funcs/appOwnersRemove.ts
+  - src/funcs/appOwnersSet.ts
+  - src/funcs/appReportActionGenerateReport.ts
+  - src/funcs/appReportList.ts
+  - src/funcs/appResourceCreateManuallyManagedAppResource.ts
+  - src/funcs/appResourceDeleteManuallyManagedAppResource.ts
+  - src/funcs/appResourceGet.ts
+  - src/funcs/appResourceList.ts
+  - src/funcs/appResourceOwnersAdd.ts
+  - src/funcs/appResourceOwnersList.ts
+  - src/funcs/appResourceOwnersRemove.ts
+  - src/funcs/appResourceSearchSearchAppResourceTypes.ts
+  - src/funcs/appResourceSearchSearchAppResources.ts
+  - src/funcs/appResourceTypeCreateManuallyManagedResourceType.ts
+  - src/funcs/appResourceTypeDeleteManuallyManagedResourceType.ts
+  - src/funcs/appResourceTypeGet.ts
+  - src/funcs/appResourceTypeList.ts
+  - src/funcs/appResourceTypeUpdateManuallyManagedResourceType.ts
+  - src/funcs/appResourceUpdate.ts
+  - src/funcs/appSearchSearch.ts
+  - src/funcs/appUsageControlsGet.ts
+  - src/funcs/appUsageControlsUpdate.ts
+  - src/funcs/appUserList.ts
+  - src/funcs/appUserListAppUserCredentials.ts
+  - src/funcs/appUserListAppUsersForUser.ts
+  - src/funcs/appUserSearch.ts
+  - src/funcs/appUserUpdate.ts
+  - src/funcs/appsCreate.ts
+  - src/funcs/appsDelete.ts
+  - src/funcs/appsGet.ts
+  - src/funcs/appsList.ts
+  - src/funcs/appsUpdate.ts
+  - src/funcs/attributeSearchSearchAttributeValues.ts
+  - src/funcs/attributesCreateAttributeValue.ts
+  - src/funcs/attributesCreateComplianceFrameworkAttributeValue.ts
+  - src/funcs/attributesCreateRiskLevelAttributeValue.ts
+  - src/funcs/attributesDeleteAttributeValue.ts
+  - src/funcs/attributesDeleteComplianceFrameworkAttributeValue.ts
+  - src/funcs/attributesDeleteRiskLevelAttributeValue.ts
+  - src/funcs/attributesGetAttributeValue.ts
+  - src/funcs/attributesGetComplianceFrameworkAttributeValue.ts
+  - src/funcs/attributesGetRiskLevelAttributeValue.ts
+  - src/funcs/attributesListAttributeTypes.ts
+  - src/funcs/attributesListAttributeValues.ts
+  - src/funcs/authIntrospect.ts
+  - src/funcs/automationCreateAutomation.ts
+  - src/funcs/automationDeleteAutomation.ts
+  - src/funcs/automationExecuteAutomation.ts
+  - src/funcs/automationExecutionActionsTerminateAutomation.ts
+  - src/funcs/automationExecutionGetAutomationExecution.ts
+  - src/funcs/automationExecutionListAutomationExecutions.ts
+  - src/funcs/automationExecutionSearchSearchAutomationExecutions.ts
+  - src/funcs/automationGetAutomation.ts
+  - src/funcs/automationListAutomations.ts
+  - src/funcs/automationSearchSearchAutomationTemplateVersions.ts
+  - src/funcs/automationSearchSearchAutomations.ts
+  - src/funcs/automationUpdateAutomation.ts
+  - src/funcs/awsExternalIDSettingsGet.ts
+  - src/funcs/connectorCreate.ts
+  - src/funcs/connectorCreateDelegated.ts
+  - src/funcs/connectorDelete.ts
+  - src/funcs/connectorForceSync.ts
+  - src/funcs/connectorGet.ts
+  - src/funcs/connectorGetCredentials.ts
+  - src/funcs/connectorList.ts
+  - src/funcs/connectorRevokeCredential.ts
+  - src/funcs/connectorRotateCredential.ts
+  - src/funcs/connectorUpdate.ts
+  - src/funcs/connectorUpdateDelegated.ts
+  - src/funcs/connectorValidateHTTPConnectorConfig.ts
+  - src/funcs/directoryCreate.ts
+  - src/funcs/directoryDelete.ts
+  - src/funcs/directoryGet.ts
+  - src/funcs/directoryList.ts
+  - src/funcs/exportCreate.ts
+  - src/funcs/exportDelete.ts
+  - src/funcs/exportGet.ts
+  - src/funcs/exportList.ts
+  - src/funcs/exportListEvents.ts
+  - src/funcs/exportUpdate.ts
+  - src/funcs/exportsSearchSearch.ts
+  - src/funcs/orgDomainList.ts
+  - src/funcs/orgDomainUpdate.ts
+  - src/funcs/personalClientCreate.ts
+  - src/funcs/personalClientDelete.ts
+  - src/funcs/personalClientGet.ts
+  - src/funcs/personalClientList.ts
+  - src/funcs/personalClientSearchSearch.ts
+  - src/funcs/personalClientUpdate.ts
+  - src/funcs/policiesCreate.ts
+  - src/funcs/policiesDelete.ts
+  - src/funcs/policiesGet.ts
+  - src/funcs/policiesList.ts
+  - src/funcs/policiesUpdate.ts
+  - src/funcs/policySearchSearch.ts
+  - src/funcs/policyValidateValidateCEL.ts
+  - src/funcs/requestCatalogManagementAddAccessEntitlements.ts
+  - src/funcs/requestCatalogManagementAddAppEntitlements.ts
+  - src/funcs/requestCatalogManagementCreate.ts
+  - src/funcs/requestCatalogManagementCreateBundleAutomation.ts
+  - src/funcs/requestCatalogManagementDelete.ts
+  - src/funcs/requestCatalogManagementDeleteBundleAutomation.ts
+  - src/funcs/requestCatalogManagementForceRunBundleAutomation.ts
+  - src/funcs/requestCatalogManagementGet.ts
+  - src/funcs/requestCatalogManagementGetBundleAutomation.ts
+  - src/funcs/requestCatalogManagementList.ts
+  - src/funcs/requestCatalogManagementListAllEntitlementIdsPerApp.ts
+  - src/funcs/requestCatalogManagementListEntitlementsForAccess.ts
+  - src/funcs/requestCatalogManagementListEntitlementsPerCatalog.ts
+  - src/funcs/requestCatalogManagementRemoveAccessEntitlements.ts
+  - src/funcs/requestCatalogManagementRemoveAppEntitlements.ts
+  - src/funcs/requestCatalogManagementSetBundleAutomation.ts
+  - src/funcs/requestCatalogManagementUpdate.ts
+  - src/funcs/requestCatalogSearchSearchEntitlements.ts
+  - src/funcs/rolesGet.ts
+  - src/funcs/rolesList.ts
+  - src/funcs/rolesUpdate.ts
+  - src/funcs/sessionSettingsGet.ts
+  - src/funcs/sessionSettingsTestSourceIP.ts
+  - src/funcs/sessionSettingsUpdate.ts
+  - src/funcs/stepUpProviderCreate.ts
+  - src/funcs/stepUpProviderDelete.ts
+  - src/funcs/stepUpProviderGet.ts
+  - src/funcs/stepUpProviderList.ts
+  - src/funcs/stepUpProviderSearch.ts
+  - src/funcs/stepUpProviderTest.ts
+  - src/funcs/stepUpProviderUpdate.ts
+  - src/funcs/stepUpProviderUpdateSecret.ts
+  - src/funcs/stepUpTransactionGet.ts
+  - src/funcs/stepUpTransactionSearch.ts
+  - src/funcs/systemLogListEvents.ts
+  - src/funcs/taskActionsApprove.ts
+  - src/funcs/taskActionsApproveWithStepUp.ts
+  - src/funcs/taskActionsClose.ts
+  - src/funcs/taskActionsComment.ts
+  - src/funcs/taskActionsDeny.ts
+  - src/funcs/taskActionsEscalateToEmergencyAccess.ts
+  - src/funcs/taskActionsHardReset.ts
+  - src/funcs/taskActionsProcessNow.ts
+  - src/funcs/taskActionsReassign.ts
+  - src/funcs/taskActionsRestart.ts
+  - src/funcs/taskActionsSkipStep.ts
+  - src/funcs/taskAuditList.ts
+  - src/funcs/taskCreateGrantTask.ts
+  - src/funcs/taskCreateOffboardingTask.ts
+  - src/funcs/taskCreateRevokeTask.ts
+  - src/funcs/taskGet.ts
+  - src/funcs/taskSearchSearch.ts
+  - src/funcs/userGet.ts
+  - src/funcs/userList.ts
+  - src/funcs/userSearchSearch.ts
+  - src/funcs/webhooksCreate.ts
+  - src/funcs/webhooksDelete.ts
+  - src/funcs/webhooksGet.ts
+  - src/funcs/webhooksList.ts
+  - src/funcs/webhooksSearchSearch.ts
+  - src/funcs/webhooksTest.ts
+  - src/funcs/webhooksUpdate.ts
+  - src/hooks/hooks.ts
+  - src/hooks/index.ts
+  - src/hooks/types.ts
+  - src/lib/base64.ts
+  - src/lib/config.ts
+  - src/lib/dlv.ts
+  - src/lib/encodings.ts
+  - src/lib/files.ts
+  - src/lib/http.ts
+  - src/lib/is-plain-object.ts
+  - src/lib/logger.ts
+  - src/lib/matchers.ts
+  - src/lib/primitives.ts
+  - src/lib/retries.ts
+  - src/lib/schemas.ts
+  - src/lib/sdks.ts
+  - src/lib/security.ts
+  - src/lib/url.ts
+  - src/sdk/accessconflict.ts
+  - src/sdk/accountprovisionpolicytest.ts
+  - src/sdk/appaccessrequestsdefaults.ts
+  - src/sdk/appentitlementowners.ts
+  - src/sdk/appentitlements.ts
+  - src/sdk/appentitlementsearch.ts
+  - src/sdk/appentitlementsproxy.ts
+  - src/sdk/appentitlementuserbinding.ts
+  - src/sdk/appowners.ts
+  - src/sdk/appreport.ts
+  - src/sdk/appreportaction.ts
+  - src/sdk/appresource.ts
+  - src/sdk/appresourceowners.ts
+  - src/sdk/appresourcesearch.ts
+  - src/sdk/appresourcetype.ts
+  - src/sdk/apps.ts
+  - src/sdk/appsearch.ts
+  - src/sdk/appusagecontrols.ts
+  - src/sdk/appuser.ts
+  - src/sdk/attributes.ts
+  - src/sdk/attributesearch.ts
+  - src/sdk/auth.ts
+  - src/sdk/automation.ts
+  - src/sdk/automationexecution.ts
+  - src/sdk/automationexecutionactions.ts
+  - src/sdk/automationexecutionsearch.ts
+  - src/sdk/automationsearch.ts
+  - src/sdk/awsexternalidsettings.ts
+  - src/sdk/connector.ts
+  - src/sdk/directory.ts
+  - src/sdk/export.ts
+  - src/sdk/exportssearch.ts
+  - src/sdk/index.ts
+  - src/sdk/models/errors/conductoronesdktypescriptdefaulterror.ts
+  - src/sdk/models/errors/conductoronesdktypescripterror.ts
+  - src/sdk/models/errors/httpclienterrors.ts
+  - src/sdk/models/errors/index.ts
+  - src/sdk/models/errors/responsevalidationerror.ts
+  - src/sdk/models/errors/sdkvalidationerror.ts
+  - src/sdk/models/operations/c1apiaccessconflictv1accessconflictservicecreatemonitor.ts
+  - src/sdk/models/operations/c1apiaccessconflictv1accessconflictservicedeletemonitor.ts
+  - src/sdk/models/operations/c1apiaccessconflictv1accessconflictservicegetmonitor.ts
+  - src/sdk/models/operations/c1apiaccessconflictv1accessconflictserviceupdatemonitor.ts
+  - src/sdk/models/operations/c1apiappv1appaccessrequestsdefaultsservicecancelappaccessrequestsdefaults.ts
+  - src/sdk/models/operations/c1apiappv1appaccessrequestsdefaultsservicecreateappaccessrequestsdefaults.ts
+  - src/sdk/models/operations/c1apiappv1appaccessrequestsdefaultsservicegetappaccessrequestsdefaults.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementownersadd.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementownerslist.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementownersremove.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementownersset.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementsaddautomationexclusion.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementsaddmanuallymanagedmembers.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementscreate.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementscreateautomation.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementsdelete.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementsdeleteautomation.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementsearchservicesearch.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementsearchservicesearchappentitlementsforappuser.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementsearchservicesearchappentitlementswithexpired.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementsearchservicesearchgrants.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementsget.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementsgetautomation.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementslist.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementslistautomationexclusions.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementslistforappresource.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementslistforappuser.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementslistusers.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementsproxycreate.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementsproxydelete.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementsproxyget.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementsremoveautomationexclusion.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementsremoveentitlementmembership.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementsupdate.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementsupdateautomation.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementuserbindingservicelistappusersforidentitywithgrant.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementuserbindingserviceremovegrantduration.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementuserbindingservicesearchgrantfeed.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementuserbindingservicesearchpastgrants.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementuserbindingserviceupdategrantduration.ts
+  - src/sdk/models/operations/c1apiappv1appownersadd.ts
+  - src/sdk/models/operations/c1apiappv1appownerslist.ts
+  - src/sdk/models/operations/c1apiappv1appownersremove.ts
+  - src/sdk/models/operations/c1apiappv1appownersset.ts
+  - src/sdk/models/operations/c1apiappv1appreportactionservicegeneratereport.ts
+  - src/sdk/models/operations/c1apiappv1appreportservicelist.ts
+  - src/sdk/models/operations/c1apiappv1appresourceownersadd.ts
+  - src/sdk/models/operations/c1apiappv1appresourceownerslist.ts
+  - src/sdk/models/operations/c1apiappv1appresourceownersremove.ts
+  - src/sdk/models/operations/c1apiappv1appresourcesearchsearchappresources.ts
+  - src/sdk/models/operations/c1apiappv1appresourcesearchsearchappresourcetypes.ts
+  - src/sdk/models/operations/c1apiappv1appresourceservicecreatemanuallymanagedappresource.ts
+  - src/sdk/models/operations/c1apiappv1appresourceservicedeletemanuallymanagedappresource.ts
+  - src/sdk/models/operations/c1apiappv1appresourceserviceget.ts
+  - src/sdk/models/operations/c1apiappv1appresourceservicelist.ts
+  - src/sdk/models/operations/c1apiappv1appresourceserviceupdate.ts
+  - src/sdk/models/operations/c1apiappv1appresourcetypeservicecreatemanuallymanagedresourcetype.ts
+  - src/sdk/models/operations/c1apiappv1appresourcetypeservicedeletemanuallymanagedresourcetype.ts
+  - src/sdk/models/operations/c1apiappv1appresourcetypeserviceget.ts
+  - src/sdk/models/operations/c1apiappv1appresourcetypeservicelist.ts
+  - src/sdk/models/operations/c1apiappv1appresourcetypeserviceupdatemanuallymanagedresourcetype.ts
+  - src/sdk/models/operations/c1apiappv1appscreate.ts
+  - src/sdk/models/operations/c1apiappv1appsdelete.ts
+  - src/sdk/models/operations/c1apiappv1appsearchsearch.ts
+  - src/sdk/models/operations/c1apiappv1appsget.ts
+  - src/sdk/models/operations/c1apiappv1appslist.ts
+  - src/sdk/models/operations/c1apiappv1appsupdate.ts
+  - src/sdk/models/operations/c1apiappv1appusagecontrolsserviceget.ts
+  - src/sdk/models/operations/c1apiappv1appusagecontrolsserviceupdate.ts
+  - src/sdk/models/operations/c1apiappv1appuserservicelist.ts
+  - src/sdk/models/operations/c1apiappv1appuserservicelistappusercredentials.ts
+  - src/sdk/models/operations/c1apiappv1appuserservicelistappusersforuser.ts
+  - src/sdk/models/operations/c1apiappv1appuserservicesearch.ts
+  - src/sdk/models/operations/c1apiappv1appuserserviceupdate.ts
+  - src/sdk/models/operations/c1apiappv1connectorservicecreate.ts
+  - src/sdk/models/operations/c1apiappv1connectorservicecreatedelegated.ts
+  - src/sdk/models/operations/c1apiappv1connectorservicedelete.ts
+  - src/sdk/models/operations/c1apiappv1connectorserviceforcesync.ts
+  - src/sdk/models/operations/c1apiappv1connectorserviceget.ts
+  - src/sdk/models/operations/c1apiappv1connectorservicegetcredentials.ts
+  - src/sdk/models/operations/c1apiappv1connectorservicelist.ts
+  - src/sdk/models/operations/c1apiappv1connectorservicerevokecredential.ts
+  - src/sdk/models/operations/c1apiappv1connectorservicerotatecredential.ts
+  - src/sdk/models/operations/c1apiappv1connectorserviceupdate.ts
+  - src/sdk/models/operations/c1apiappv1connectorserviceupdatedelegated.ts
+  - src/sdk/models/operations/c1apiappv1connectorservicevalidatehttpconnectorconfig.ts
+  - src/sdk/models/operations/c1apiattributev1attributescreateattributevalue.ts
+  - src/sdk/models/operations/c1apiattributev1attributescreatecomplianceframeworkattributevalue.ts
+  - src/sdk/models/operations/c1apiattributev1attributescreaterisklevelattributevalue.ts
+  - src/sdk/models/operations/c1apiattributev1attributesdeleteattributevalue.ts
+  - src/sdk/models/operations/c1apiattributev1attributesdeletecomplianceframeworkattributevalue.ts
+  - src/sdk/models/operations/c1apiattributev1attributesdeleterisklevelattributevalue.ts
+  - src/sdk/models/operations/c1apiattributev1attributesearchsearchattributevalues.ts
+  - src/sdk/models/operations/c1apiattributev1attributesgetattributevalue.ts
+  - src/sdk/models/operations/c1apiattributev1attributesgetcomplianceframeworkattributevalue.ts
+  - src/sdk/models/operations/c1apiattributev1attributesgetrisklevelattributevalue.ts
+  - src/sdk/models/operations/c1apiattributev1attributeslistattributetypes.ts
+  - src/sdk/models/operations/c1apiattributev1attributeslistattributevalues.ts
+  - src/sdk/models/operations/c1apiauthv1authintrospect.ts
+  - src/sdk/models/operations/c1apiautomationsv1automationexecutionactionsserviceterminateautomation.ts
+  - src/sdk/models/operations/c1apiautomationsv1automationexecutionsearchservicesearchautomationexecutions.ts
+  - src/sdk/models/operations/c1apiautomationsv1automationexecutionservicegetautomationexecution.ts
+  - src/sdk/models/operations/c1apiautomationsv1automationexecutionservicelistautomationexecutions.ts
+  - src/sdk/models/operations/c1apiautomationsv1automationsearchservicesearchautomations.ts
+  - src/sdk/models/operations/c1apiautomationsv1automationsearchservicesearchautomationtemplateversions.ts
+  - src/sdk/models/operations/c1apiautomationsv1automationservicecreateautomation.ts
+  - src/sdk/models/operations/c1apiautomationsv1automationservicedeleteautomation.ts
+  - src/sdk/models/operations/c1apiautomationsv1automationserviceexecuteautomation.ts
+  - src/sdk/models/operations/c1apiautomationsv1automationservicegetautomation.ts
+  - src/sdk/models/operations/c1apiautomationsv1automationservicelistautomations.ts
+  - src/sdk/models/operations/c1apiautomationsv1automationserviceupdateautomation.ts
+  - src/sdk/models/operations/c1apidirectoryv1directoryservicecreate.ts
+  - src/sdk/models/operations/c1apidirectoryv1directoryservicedelete.ts
+  - src/sdk/models/operations/c1apidirectoryv1directoryserviceget.ts
+  - src/sdk/models/operations/c1apidirectoryv1directoryservicelist.ts
+  - src/sdk/models/operations/c1apiiamv1personalclientsearchservicesearch.ts
+  - src/sdk/models/operations/c1apiiamv1personalclientservicecreate.ts
+  - src/sdk/models/operations/c1apiiamv1personalclientservicedelete.ts
+  - src/sdk/models/operations/c1apiiamv1personalclientserviceget.ts
+  - src/sdk/models/operations/c1apiiamv1personalclientservicelist.ts
+  - src/sdk/models/operations/c1apiiamv1personalclientserviceupdate.ts
+  - src/sdk/models/operations/c1apiiamv1rolesget.ts
+  - src/sdk/models/operations/c1apiiamv1roleslist.ts
+  - src/sdk/models/operations/c1apiiamv1rolesupdate.ts
+  - src/sdk/models/operations/c1apipolicyv1accountprovisionpolicytesttest.ts
+  - src/sdk/models/operations/c1apipolicyv1policiescreate.ts
+  - src/sdk/models/operations/c1apipolicyv1policiesdelete.ts
+  - src/sdk/models/operations/c1apipolicyv1policiesget.ts
+  - src/sdk/models/operations/c1apipolicyv1policieslist.ts
+  - src/sdk/models/operations/c1apipolicyv1policiesupdate.ts
+  - src/sdk/models/operations/c1apipolicyv1policysearchsearch.ts
+  - src/sdk/models/operations/c1apipolicyv1policyvalidatevalidatecel.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceaddaccessentitlements.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceaddappentitlements.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicecreate.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicecreatebundleautomation.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicedelete.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicedeletebundleautomation.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceforcerunbundleautomation.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceget.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicegetbundleautomation.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicelist.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicelistallentitlementidsperapp.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicelistentitlementsforaccess.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicelistentitlementspercatalog.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceremoveaccessentitlements.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceremoveappentitlements.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicesetbundleautomation.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceupdate.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogsearchservicesearchentitlements.ts
+  - src/sdk/models/operations/c1apisettingsv1awsexternalidsettingsget.ts
+  - src/sdk/models/operations/c1apisettingsv1orgdomainservicelist.ts
+  - src/sdk/models/operations/c1apisettingsv1orgdomainserviceupdate.ts
+  - src/sdk/models/operations/c1apisettingsv1sessionsettingsserviceget.ts
+  - src/sdk/models/operations/c1apisettingsv1sessionsettingsservicetestsourceip.ts
+  - src/sdk/models/operations/c1apisettingsv1sessionsettingsserviceupdate.ts
+  - src/sdk/models/operations/c1apistepupv1stepupproviderservicecreate.ts
+  - src/sdk/models/operations/c1apistepupv1stepupproviderservicedelete.ts
+  - src/sdk/models/operations/c1apistepupv1stepupproviderserviceget.ts
+  - src/sdk/models/operations/c1apistepupv1stepupproviderservicelist.ts
+  - src/sdk/models/operations/c1apistepupv1stepupproviderservicesearch.ts
+  - src/sdk/models/operations/c1apistepupv1stepupproviderservicetest.ts
+  - src/sdk/models/operations/c1apistepupv1stepupproviderserviceupdate.ts
+  - src/sdk/models/operations/c1apistepupv1stepupproviderserviceupdatesecret.ts
+  - src/sdk/models/operations/c1apistepupv1stepuptransactionserviceget.ts
+  - src/sdk/models/operations/c1apistepupv1stepuptransactionservicesearch.ts
+  - src/sdk/models/operations/c1apisystemlogv1exportservicecreate.ts
+  - src/sdk/models/operations/c1apisystemlogv1exportservicedelete.ts
+  - src/sdk/models/operations/c1apisystemlogv1exportserviceget.ts
+  - src/sdk/models/operations/c1apisystemlogv1exportservicelist.ts
+  - src/sdk/models/operations/c1apisystemlogv1exportservicelistevents.ts
+  - src/sdk/models/operations/c1apisystemlogv1exportserviceupdate.ts
+  - src/sdk/models/operations/c1apisystemlogv1exportssearchservicesearch.ts
+  - src/sdk/models/operations/c1apisystemlogv1systemlogservicelistevents.ts
+  - src/sdk/models/operations/c1apitaskv1taskactionsserviceapprove.ts
+  - src/sdk/models/operations/c1apitaskv1taskactionsserviceapprovewithstepup.ts
+  - src/sdk/models/operations/c1apitaskv1taskactionsserviceclose.ts
+  - src/sdk/models/operations/c1apitaskv1taskactionsservicecomment.ts
+  - src/sdk/models/operations/c1apitaskv1taskactionsservicedeny.ts
+  - src/sdk/models/operations/c1apitaskv1taskactionsserviceescalatetoemergencyaccess.ts
+  - src/sdk/models/operations/c1apitaskv1taskactionsservicehardreset.ts
+  - src/sdk/models/operations/c1apitaskv1taskactionsserviceprocessnow.ts
+  - src/sdk/models/operations/c1apitaskv1taskactionsservicereassign.ts
+  - src/sdk/models/operations/c1apitaskv1taskactionsservicerestart.ts
+  - src/sdk/models/operations/c1apitaskv1taskactionsserviceskipstep.ts
+  - src/sdk/models/operations/c1apitaskv1taskauditlist.ts
+  - src/sdk/models/operations/c1apitaskv1tasksearchservicesearch.ts
+  - src/sdk/models/operations/c1apitaskv1taskservicecreategranttask.ts
+  - src/sdk/models/operations/c1apitaskv1taskservicecreateoffboardingtask.ts
+  - src/sdk/models/operations/c1apitaskv1taskservicecreaterevoketask.ts
+  - src/sdk/models/operations/c1apitaskv1taskserviceget.ts
+  - src/sdk/models/operations/c1apiuserv1usersearchsearch.ts
+  - src/sdk/models/operations/c1apiuserv1userserviceget.ts
+  - src/sdk/models/operations/c1apiuserv1userservicelist.ts
+  - src/sdk/models/operations/c1apiwebhooksv1webhookssearchsearch.ts
+  - src/sdk/models/operations/c1apiwebhooksv1webhooksservicecreate.ts
+  - src/sdk/models/operations/c1apiwebhooksv1webhooksservicedelete.ts
+  - src/sdk/models/operations/c1apiwebhooksv1webhooksserviceget.ts
+  - src/sdk/models/operations/c1apiwebhooksv1webhooksservicelist.ts
+  - src/sdk/models/operations/c1apiwebhooksv1webhooksservicetest.ts
+  - src/sdk/models/operations/c1apiwebhooksv1webhooksserviceupdate.ts
+  - src/sdk/models/operations/index.ts
+  - src/sdk/models/shared/accept.ts
+  - src/sdk/models/shared/acceptinstance.ts
+  - src/sdk/models/shared/accountprovision.ts
+  - src/sdk/models/shared/addappentitlementownerrequest.ts
+  - src/sdk/models/shared/addappentitlementownerresponse.ts
+  - src/sdk/models/shared/addappownerrequest.ts
+  - src/sdk/models/shared/addappownerresponse.ts
+  - src/sdk/models/shared/addappresourceownerrequest.ts
+  - src/sdk/models/shared/addappresourceownerresponse.ts
+  - src/sdk/models/shared/addautomationexclusionrequest.ts
+  - src/sdk/models/shared/addautomationexclusionresponse.ts
+  - src/sdk/models/shared/addmanuallymanagedusersrequest.ts
+  - src/sdk/models/shared/agentapproval.ts
+  - src/sdk/models/shared/app.ts
+  - src/sdk/models/shared/appaccessrequestdefaults.ts
+  - src/sdk/models/shared/appactionsservicegeneratereportrequest.ts
+  - src/sdk/models/shared/appactionsservicegeneratereportresponse.ts
+  - src/sdk/models/shared/appentitlement.ts
+  - src/sdk/models/shared/appentitlementautomation.ts
+  - src/sdk/models/shared/appentitlementautomationinput.ts
+  - src/sdk/models/shared/appentitlementautomationlastrunstatus.ts
+  - src/sdk/models/shared/appentitlementautomationlastrunstatusinput.ts
+  - src/sdk/models/shared/appentitlementautomationrulebasic.ts
+  - src/sdk/models/shared/appentitlementautomationrulecel.ts
+  - src/sdk/models/shared/appentitlementautomationruleentitlement.ts
+  - src/sdk/models/shared/appentitlementautomationrulenone.ts
+  - src/sdk/models/shared/appentitlementexpandmask.ts
+  - src/sdk/models/shared/appentitlementproxy.ts
+  - src/sdk/models/shared/appentitlementproxyexpandmask.ts
+  - src/sdk/models/shared/appentitlementproxyview.ts
+  - src/sdk/models/shared/appentitlementref.ts
+  - src/sdk/models/shared/appentitlementreference.ts
+  - src/sdk/models/shared/appentitlementsearchservicesearchgrantsrequest.ts
+  - src/sdk/models/shared/appentitlementsearchservicesearchgrantsresponse.ts
+  - src/sdk/models/shared/appentitlementsearchservicesearchrequest.ts
+  - src/sdk/models/shared/appentitlementsearchservicesearchresponse.ts
+  - src/sdk/models/shared/appentitlementservicegetautomationresponse.ts
+  - src/sdk/models/shared/appentitlementserviceupdateautomationrequest.ts
+  - src/sdk/models/shared/appentitlementserviceupdateautomationresponse.ts
+  - src/sdk/models/shared/appentitlementuserbinding.ts
+  - src/sdk/models/shared/appentitlementuserbindingexpandhistorymask.ts
+  - src/sdk/models/shared/appentitlementuserbindingfeed.ts
+  - src/sdk/models/shared/appentitlementuserbindingfeedview.ts
+  - src/sdk/models/shared/appentitlementuserbindinghistory.ts
+  - src/sdk/models/shared/appentitlementuserbindinghistoryview.ts
+  - src/sdk/models/shared/appentitlementuserview.ts
+  - src/sdk/models/shared/appentitlementview.ts
+  - src/sdk/models/shared/appentitlementwithexpired.ts
+  - src/sdk/models/shared/appentitlementwithuserbinding.ts
+  - src/sdk/models/shared/appentitlementwithuserbindings.ts
+  - src/sdk/models/shared/appgroupapproval.ts
+  - src/sdk/models/shared/appmanagedstatebindingref.ts
+  - src/sdk/models/shared/appownerapproval.ts
+  - src/sdk/models/shared/apppopulationreport.ts
+  - src/sdk/models/shared/appref.ts
+  - src/sdk/models/shared/appreportservicelistresponse.ts
+  - src/sdk/models/shared/appresource.ts
+  - src/sdk/models/shared/appresourceexpandmask.ts
+  - src/sdk/models/shared/appresourceinput.ts
+  - src/sdk/models/shared/appresourceref.ts
+  - src/sdk/models/shared/appresourceservicegetresponse.ts
+  - src/sdk/models/shared/appresourceservicelistresponse.ts
+  - src/sdk/models/shared/appresourceserviceupdaterequest.ts
+  - src/sdk/models/shared/appresourceserviceupdateresponse.ts
+  - src/sdk/models/shared/appresourcetype.ts
+  - src/sdk/models/shared/appresourcetypeinput.ts
+  - src/sdk/models/shared/appresourcetypeservicegetresponse.ts
+  - src/sdk/models/shared/appresourcetypeservicelistresponse.ts
+  - src/sdk/models/shared/appresourcetypeview.ts
+  - src/sdk/models/shared/appresourceview.ts
+  - src/sdk/models/shared/approval.ts
+  - src/sdk/models/shared/approvalinput.ts
+  - src/sdk/models/shared/approvalinstance.ts
+  - src/sdk/models/shared/approvedaction.ts
+  - src/sdk/models/shared/appusagecontrols.ts
+  - src/sdk/models/shared/appuser.ts
+  - src/sdk/models/shared/appusercreatedtrigger.ts
+  - src/sdk/models/shared/appusercredential.ts
+  - src/sdk/models/shared/appuserexpandmask.ts
+  - src/sdk/models/shared/appuserref.ts
+  - src/sdk/models/shared/appuserservicelistcredentialsresponse.ts
+  - src/sdk/models/shared/appuserservicelistresponse.ts
+  - src/sdk/models/shared/appuserservicesearchrequest.ts
+  - src/sdk/models/shared/appuserservicesearchresponse.ts
+  - src/sdk/models/shared/appuserserviceupdaterequest.ts
+  - src/sdk/models/shared/appuserserviceupdateresponse.ts
+  - src/sdk/models/shared/appusersforuserservicelistresponse.ts
+  - src/sdk/models/shared/appuserstatus.ts
+  - src/sdk/models/shared/appuserstatusinput.ts
+  - src/sdk/models/shared/appuserupdatedtrigger.ts
+  - src/sdk/models/shared/appuserview.ts
+  - src/sdk/models/shared/attributetype.ts
+  - src/sdk/models/shared/attributevalue.ts
+  - src/sdk/models/shared/automation.ts
+  - src/sdk/models/shared/automationcontext.ts
+  - src/sdk/models/shared/automationexecution.ts
+  - src/sdk/models/shared/automationexecutionexpandmask.ts
+  - src/sdk/models/shared/automationexecutionref.ts
+  - src/sdk/models/shared/automationexecutionview.ts
+  - src/sdk/models/shared/automationstep.ts
+  - src/sdk/models/shared/automationtemplateref.ts
+  - src/sdk/models/shared/automationtemplateversion.ts
+  - src/sdk/models/shared/automationtrigger.ts
+  - src/sdk/models/shared/awsexternalid.ts
+  - src/sdk/models/shared/body.ts
+  - src/sdk/models/shared/bundleautomation.ts
+  - src/sdk/models/shared/bundleautomationlastrunstate.ts
+  - src/sdk/models/shared/bundleautomationruleentitlement.ts
+  - src/sdk/models/shared/cancelaccessrequestdefaultsrequest.ts
+  - src/sdk/models/shared/cancelledaction.ts
+  - src/sdk/models/shared/cidrrestriction.ts
+  - src/sdk/models/shared/closeaction.ts
+  - src/sdk/models/shared/completedaction.ts
+  - src/sdk/models/shared/conditionsucceeded.ts
+  - src/sdk/models/shared/conditiontimedout.ts
+  - src/sdk/models/shared/conflictmonitor.ts
+  - src/sdk/models/shared/conflictmonitorcreaterequest.ts
+  - src/sdk/models/shared/conflictmonitordeleterequest.ts
+  - src/sdk/models/shared/conflictmonitordeleteresponse.ts
+  - src/sdk/models/shared/conflictmonitorupdaterequest.ts
+  - src/sdk/models/shared/connector.ts
+  - src/sdk/models/shared/connectoraction.ts
+  - src/sdk/models/shared/connectorcreateaccount.ts
+  - src/sdk/models/shared/connectorcredential.ts
+  - src/sdk/models/shared/connectorexpandmask.ts
+  - src/sdk/models/shared/connectorprovision.ts
+  - src/sdk/models/shared/connectorref.ts
+  - src/sdk/models/shared/connectorservicecreatedelegatedrequest.ts
+  - src/sdk/models/shared/connectorservicecreaterequest.ts
+  - src/sdk/models/shared/connectorservicecreateresponse.ts
+  - src/sdk/models/shared/connectorservicedeleterequest.ts
+  - src/sdk/models/shared/connectorservicedeleteresponse.ts
+  - src/sdk/models/shared/connectorservicegetcredentialsresponse.ts
+  - src/sdk/models/shared/connectorservicegetresponse.ts
+  - src/sdk/models/shared/connectorservicelistresponse.ts
+  - src/sdk/models/shared/connectorservicerevokecredentialrequest.ts
+  - src/sdk/models/shared/connectorservicerevokecredentialresponse.ts
+  - src/sdk/models/shared/connectorservicerotatecredentialrequest.ts
+  - src/sdk/models/shared/connectorservicerotatecredentialresponse.ts
+  - src/sdk/models/shared/connectorserviceupdatedelegatedrequest.ts
+  - src/sdk/models/shared/connectorserviceupdaterequest.ts
+  - src/sdk/models/shared/connectorserviceupdateresponse.ts
+  - src/sdk/models/shared/connectorstatus.ts
+  - src/sdk/models/shared/connectorview.ts
+  - src/sdk/models/shared/createaccessreview.ts
+  - src/sdk/models/shared/createappentitlementproxyrequest.ts
+  - src/sdk/models/shared/createappentitlementproxyresponse.ts
+  - src/sdk/models/shared/createappentitlementrequest.ts
+  - src/sdk/models/shared/createappentitlementresponse.ts
+  - src/sdk/models/shared/createapprequest.ts
+  - src/sdk/models/shared/createappresponse.ts
+  - src/sdk/models/shared/createattributevaluerequest.ts
+  - src/sdk/models/shared/createattributevalueresponse.ts
+  - src/sdk/models/shared/createautomationrequest.ts
+  - src/sdk/models/shared/createautomationrequestinput.ts
+  - src/sdk/models/shared/createautomationresponse.ts
+  - src/sdk/models/shared/createautomationresponse1.ts
+  - src/sdk/models/shared/createbundleautomationrequest.ts
+  - src/sdk/models/shared/createcomplianceframeworkattributevaluerequest.ts
+  - src/sdk/models/shared/createcomplianceframeworkattributevalueresponse.ts
+  - src/sdk/models/shared/createmanuallymanagedappresourcerequest.ts
+  - src/sdk/models/shared/createmanuallymanagedappresourceresponse.ts
+  - src/sdk/models/shared/createmanuallymanagedresourcetyperequest.ts
+  - src/sdk/models/shared/createmanuallymanagedresourcetyperesponse.ts
+  - src/sdk/models/shared/createpolicyrequest.ts
+  - src/sdk/models/shared/createpolicyresponse.ts
+  - src/sdk/models/shared/createrevoketasks.ts
+  - src/sdk/models/shared/createrisklevelattributevaluerequest.ts
+  - src/sdk/models/shared/createrisklevelattributevalueresponse.ts
+  - src/sdk/models/shared/createstepupproviderrequest.ts
+  - src/sdk/models/shared/createstepupproviderresponse.ts
+  - src/sdk/models/shared/defaultbehavior.ts
+  - src/sdk/models/shared/delegatedprovision.ts
+  - src/sdk/models/shared/deleteaccount.ts
+  - src/sdk/models/shared/deleteappentitlementproxyrequest.ts
+  - src/sdk/models/shared/deleteappentitlementproxyresponse.ts
+  - src/sdk/models/shared/deleteappentitlementrequest.ts
+  - src/sdk/models/shared/deleteappentitlementresponse.ts
+  - src/sdk/models/shared/deleteapprequest.ts
+  - src/sdk/models/shared/deleteappresponse.ts
+  - src/sdk/models/shared/deleteattributevaluerequest.ts
+  - src/sdk/models/shared/deleteattributevalueresponse.ts
+  - src/sdk/models/shared/deleteautomationrequest.ts
+  - src/sdk/models/shared/deleteautomationresponse.ts
+  - src/sdk/models/shared/deletebundleautomationrequest.ts
+  - src/sdk/models/shared/deletebundleautomationresponse.ts
+  - src/sdk/models/shared/deletecomplianceframeworkattributevaluerequest.ts
+  - src/sdk/models/shared/deletecomplianceframeworkattributevalueresponse.ts
+  - src/sdk/models/shared/deletemanuallymanagedappresourcerequest.ts
+  - src/sdk/models/shared/deletemanuallymanagedappresourceresponse.ts
+  - src/sdk/models/shared/deletemanuallymanagedresourcetyperequest.ts
+  - src/sdk/models/shared/deletemanuallymanagedresourcetyperesponse.ts
+  - src/sdk/models/shared/deletepolicyrequest.ts
+  - src/sdk/models/shared/deletepolicyresponse.ts
+  - src/sdk/models/shared/deleterisklevelattributevaluerequest.ts
+  - src/sdk/models/shared/deleterisklevelattributevalueresponse.ts
+  - src/sdk/models/shared/deletestepupproviderrequest.ts
+  - src/sdk/models/shared/deletestepupproviderresponse.ts
+  - src/sdk/models/shared/deniedaction.ts
+  - src/sdk/models/shared/directory.ts
+  - src/sdk/models/shared/directoryexpandmask.ts
+  - src/sdk/models/shared/directoryservicecreaterequest.ts
+  - src/sdk/models/shared/directoryservicecreateresponse.ts
+  - src/sdk/models/shared/directoryservicedeleterequest.ts
+  - src/sdk/models/shared/directoryservicedeleteresponse.ts
+  - src/sdk/models/shared/directoryservicegetresponse.ts
+  - src/sdk/models/shared/directoryservicelistresponse.ts
+  - src/sdk/models/shared/directoryview.ts
+  - src/sdk/models/shared/donotsave.ts
+  - src/sdk/models/shared/editormarker.ts
+  - src/sdk/models/shared/editorvalidaterequest.ts
+  - src/sdk/models/shared/editorvalidateresponse.ts
+  - src/sdk/models/shared/emailnotifications.ts
+  - src/sdk/models/shared/encrypteddata.ts
+  - src/sdk/models/shared/entitlementownerapproval.ts
+  - src/sdk/models/shared/erroredaction.ts
+  - src/sdk/models/shared/escalation.ts
+  - src/sdk/models/shared/escalationinstance.ts
+  - src/sdk/models/shared/executeautomationrequest.ts
+  - src/sdk/models/shared/executeautomationresponse.ts
+  - src/sdk/models/shared/exporter.ts
+  - src/sdk/models/shared/exporterinput.ts
+  - src/sdk/models/shared/exporterref.ts
+  - src/sdk/models/shared/exportservicecreaterequest.ts
+  - src/sdk/models/shared/exportservicecreateresponse.ts
+  - src/sdk/models/shared/exportservicedeleterequest.ts
+  - src/sdk/models/shared/exportservicedeleteresponse.ts
+  - src/sdk/models/shared/exportservicegetresponse.ts
+  - src/sdk/models/shared/exportservicelisteventsrequest.ts
+  - src/sdk/models/shared/exportservicelisteventsresponse.ts
+  - src/sdk/models/shared/exportservicelistresponse.ts
+  - src/sdk/models/shared/exportserviceupdaterequest.ts
+  - src/sdk/models/shared/exportserviceupdateresponse.ts
+  - src/sdk/models/shared/exportssearchservicesearchrequest.ts
+  - src/sdk/models/shared/exportssearchservicesearchresponse.ts
+  - src/sdk/models/shared/exporttodatasource.ts
+  - src/sdk/models/shared/expressionapproval.ts
+  - src/sdk/models/shared/expressionapprovalinput.ts
+  - src/sdk/models/shared/externalref.ts
+  - src/sdk/models/shared/externalticketprovision.ts
+  - src/sdk/models/shared/facetcategory.ts
+  - src/sdk/models/shared/facetrange.ts
+  - src/sdk/models/shared/facetrangeitem.ts
+  - src/sdk/models/shared/facets.ts
+  - src/sdk/models/shared/facetvalue.ts
+  - src/sdk/models/shared/facetvalueitem.ts
+  - src/sdk/models/shared/forcerunbundleautomationrequest.ts
+  - src/sdk/models/shared/forcerunbundleautomationresponse.ts
+  - src/sdk/models/shared/forcesyncrequest.ts
+  - src/sdk/models/shared/forcesyncresponse.ts
+  - src/sdk/models/shared/getappentitlementproxyresponse.ts
+  - src/sdk/models/shared/getappentitlementresponse.ts
+  - src/sdk/models/shared/getappresponse.ts
+  - src/sdk/models/shared/getappusagecontrolsresponse.ts
+  - src/sdk/models/shared/getattributevalueresponse.ts
+  - src/sdk/models/shared/getautomationexecutionresponse.ts
+  - src/sdk/models/shared/getautomationresponse.ts
+  - src/sdk/models/shared/getawsexternalidresponse.ts
+  - src/sdk/models/shared/getcomplianceframeworkattributevalueresponse.ts
+  - src/sdk/models/shared/getpolicyresponse.ts
+  - src/sdk/models/shared/getrisklevelattributevalueresponse.ts
+  - src/sdk/models/shared/getrolesresponse.ts
+  - src/sdk/models/shared/getsessionsettingsresponse.ts
+  - src/sdk/models/shared/getstepupproviderresponse.ts
+  - src/sdk/models/shared/getstepuptransactionresponse.ts
+  - src/sdk/models/shared/grantentitlements.ts
+  - src/sdk/models/shared/grantreason.ts
+  - src/sdk/models/shared/index.ts
+  - src/sdk/models/shared/introspectresponse.ts
+  - src/sdk/models/shared/listappentitlementownersresponse.ts
+  - src/sdk/models/shared/listappentitlementsresponse.ts
+  - src/sdk/models/shared/listappentitlementusersresponse.ts
+  - src/sdk/models/shared/listappownersresponse.ts
+  - src/sdk/models/shared/listappresourceownersresponse.ts
+  - src/sdk/models/shared/listappsresponse.ts
+  - src/sdk/models/shared/listappusersforidentitywithgrantresponse.ts
+  - src/sdk/models/shared/listattributetypesresponse.ts
+  - src/sdk/models/shared/listattributevaluesresponse.ts
+  - src/sdk/models/shared/listautomationexclusionsresponse.ts
+  - src/sdk/models/shared/listautomationexecutionsresponse.ts
+  - src/sdk/models/shared/listautomationsresponse.ts
+  - src/sdk/models/shared/listorgdomainsresponse.ts
+  - src/sdk/models/shared/listpolicyresponse.ts
+  - src/sdk/models/shared/listrolesresponse.ts
+  - src/sdk/models/shared/liststepupprovidersresponse.ts
+  - src/sdk/models/shared/managerapproval.ts
+  - src/sdk/models/shared/managerapprovalinput.ts
+  - src/sdk/models/shared/manualautomationtrigger.ts
+  - src/sdk/models/shared/manuallymanagedusersresponse.ts
+  - src/sdk/models/shared/manualprovision.ts
+  - src/sdk/models/shared/multistep.ts
+  - src/sdk/models/shared/notificationconfig.ts
+  - src/sdk/models/shared/oauth2authorizedas.ts
+  - src/sdk/models/shared/oauth2authorizedasinput.ts
+  - src/sdk/models/shared/orgdomain.ts
+  - src/sdk/models/shared/payloadpolicyapprovalstep.ts
+  - src/sdk/models/shared/payloadpolicypostaction.ts
+  - src/sdk/models/shared/payloadprovisionstep.ts
+  - src/sdk/models/shared/payloadtest.ts
+  - src/sdk/models/shared/payloadworkflowstep.ts
+  - src/sdk/models/shared/personalclient.ts
+  - src/sdk/models/shared/personalclientinput.ts
+  - src/sdk/models/shared/personalclientsearchservicesearchrequest.ts
+  - src/sdk/models/shared/personalclientsearchservicesearchresponse.ts
+  - src/sdk/models/shared/personalclientservicecreaterequest.ts
+  - src/sdk/models/shared/personalclientservicecreateresponse.ts
+  - src/sdk/models/shared/personalclientservicedeleterequest.ts
+  - src/sdk/models/shared/personalclientservicedeleteresponse.ts
+  - src/sdk/models/shared/personalclientservicegetresponse.ts
+  - src/sdk/models/shared/personalclientservicelistresponse.ts
+  - src/sdk/models/shared/personalclientserviceupdaterequest.ts
+  - src/sdk/models/shared/personalclientserviceupdateresponse.ts
+  - src/sdk/models/shared/policy.ts
+  - src/sdk/models/shared/policyinstance.ts
+  - src/sdk/models/shared/policypostactions.ts
+  - src/sdk/models/shared/policyref.ts
+  - src/sdk/models/shared/policystep.ts
+  - src/sdk/models/shared/policystepinput.ts
+  - src/sdk/models/shared/policystepinstance.ts
+  - src/sdk/models/shared/policysteps.ts
+  - src/sdk/models/shared/policystepsinput.ts
+  - src/sdk/models/shared/provision.ts
+  - src/sdk/models/shared/provisioninstance.ts
+  - src/sdk/models/shared/provisionpolicy.ts
+  - src/sdk/models/shared/provisionpolicyinput.ts
+  - src/sdk/models/shared/provisiontarget.ts
+  - src/sdk/models/shared/reassignaction.ts
+  - src/sdk/models/shared/reassignedaction.ts
+  - src/sdk/models/shared/reassignedbyerroraction.ts
+  - src/sdk/models/shared/reassigntoapprovers.ts
+  - src/sdk/models/shared/reject.ts
+  - src/sdk/models/shared/rejectinstance.ts
+  - src/sdk/models/shared/removeappentitlementownerrequest.ts
+  - src/sdk/models/shared/removeappentitlementownerresponse.ts
+  - src/sdk/models/shared/removeappownerrequest.ts
+  - src/sdk/models/shared/removeappownerresponse.ts
+  - src/sdk/models/shared/removeappresourceownerrequest.ts
+  - src/sdk/models/shared/removeappresourceownerresponse.ts
+  - src/sdk/models/shared/removeautomationexclusionrequest.ts
+  - src/sdk/models/shared/removeautomationexclusionresponse.ts
+  - src/sdk/models/shared/removeentitlementmembershiprequest.ts
+  - src/sdk/models/shared/removeentitlementmembershipresponse.ts
+  - src/sdk/models/shared/removefromdelegation.ts
+  - src/sdk/models/shared/removegrantdurationrequest.ts
+  - src/sdk/models/shared/removegrantdurationresponse.ts
+  - src/sdk/models/shared/replacepolicy.ts
+  - src/sdk/models/shared/requestcatalog.ts
+  - src/sdk/models/shared/requestcatalogexpandmask.ts
+  - src/sdk/models/shared/requestcatalogmanagementserviceaddaccessentitlementsrequest.ts
+  - src/sdk/models/shared/requestcatalogmanagementserviceaddaccessentitlementsresponse.ts
+  - src/sdk/models/shared/requestcatalogmanagementserviceaddappentitlementsrequest.ts
+  - src/sdk/models/shared/requestcatalogmanagementserviceaddappentitlementsresponse.ts
+  - src/sdk/models/shared/requestcatalogmanagementservicecreaterequest.ts
+  - src/sdk/models/shared/requestcatalogmanagementservicedeleterequest.ts
+  - src/sdk/models/shared/requestcatalogmanagementservicedeleteresponse.ts
+  - src/sdk/models/shared/requestcatalogmanagementservicegetresponse.ts
+  - src/sdk/models/shared/requestcatalogmanagementservicelistallentitlementidspercatalogresponse.ts
+  - src/sdk/models/shared/requestcatalogmanagementservicelistentitlementsforaccessresponse.ts
+  - src/sdk/models/shared/requestcatalogmanagementservicelistentitlementspercatalogresponse.ts
+  - src/sdk/models/shared/requestcatalogmanagementservicelistresponse.ts
+  - src/sdk/models/shared/requestcatalogmanagementserviceremoveaccessentitlementsrequest.ts
+  - src/sdk/models/shared/requestcatalogmanagementserviceremoveaccessentitlementsresponse.ts
+  - src/sdk/models/shared/requestcatalogmanagementserviceremoveappentitlementsrequest.ts
+  - src/sdk/models/shared/requestcatalogmanagementserviceremoveappentitlementsresponse.ts
+  - src/sdk/models/shared/requestcatalogmanagementserviceupdaterequest.ts
+  - src/sdk/models/shared/requestcatalogsearchservicesearchentitlementsrequest.ts
+  - src/sdk/models/shared/requestcatalogsearchservicesearchentitlementsresponse.ts
+  - src/sdk/models/shared/requestcatalogview.ts
+  - src/sdk/models/shared/resourceownerapproval.ts
+  - src/sdk/models/shared/responsepolicyapprovalreplacepolicy.ts
+  - src/sdk/models/shared/responsepolicyapprovalstep.ts
+  - src/sdk/models/shared/responsepolicyapprovalstepapprove.ts
+  - src/sdk/models/shared/responsepolicyapprovalstepdeny.ts
+  - src/sdk/models/shared/responsepolicyapprovalstepreassign.ts
+  - src/sdk/models/shared/responsepolicypostaction.ts
+  - src/sdk/models/shared/responseprovisionstep.ts
+  - src/sdk/models/shared/responseprovisionstepcomplete.ts
+  - src/sdk/models/shared/responseprovisionsteperrored.ts
+  - src/sdk/models/shared/responsetest.ts
+  - src/sdk/models/shared/responseworkflowstep.ts
+  - src/sdk/models/shared/restartaction.ts
+  - src/sdk/models/shared/role.ts
+  - src/sdk/models/shared/roleinput.ts
+  - src/sdk/models/shared/rule.ts
+  - src/sdk/models/shared/runautomation.ts
+  - src/sdk/models/shared/rundelayed.ts
+  - src/sdk/models/shared/runimmediately.ts
+  - src/sdk/models/shared/savetovault.ts
+  - src/sdk/models/shared/searchappentitlementswithexpiredresponse.ts
+  - src/sdk/models/shared/searchappresourcesrequest.ts
+  - src/sdk/models/shared/searchappresourcesresponse.ts
+  - src/sdk/models/shared/searchappresourcetypesrequest.ts
+  - src/sdk/models/shared/searchappresourcetypesresponse.ts
+  - src/sdk/models/shared/searchappsrequest.ts
+  - src/sdk/models/shared/searchappsresponse.ts
+  - src/sdk/models/shared/searchattributevaluesrequest.ts
+  - src/sdk/models/shared/searchattributevaluesresponse.ts
+  - src/sdk/models/shared/searchautomationexecutionsrequest.ts
+  - src/sdk/models/shared/searchautomationexecutionsresponse.ts
+  - src/sdk/models/shared/searchautomationsrequest.ts
+  - src/sdk/models/shared/searchautomationsresponse.ts
+  - src/sdk/models/shared/searchautomationtemplateversionsrequest.ts
+  - src/sdk/models/shared/searchautomationtemplateversionsresponse.ts
+  - src/sdk/models/shared/searchgrantfeedrequest.ts
+  - src/sdk/models/shared/searchgrantfeedresponse.ts
+  - src/sdk/models/shared/searchpastgrantsrequest.ts
+  - src/sdk/models/shared/searchpastgrantsresponse.ts
+  - src/sdk/models/shared/searchpoliciesrequest.ts
+  - src/sdk/models/shared/searchstepupprovidersrequest.ts
+  - src/sdk/models/shared/searchstepupprovidersresponse.ts
+  - src/sdk/models/shared/searchstepuptransactionsrequest.ts
+  - src/sdk/models/shared/searchstepuptransactionsresponse.ts
+  - src/sdk/models/shared/searchusersrequest.ts
+  - src/sdk/models/shared/searchusersresponse.ts
+  - src/sdk/models/shared/secrettrait.ts
+  - src/sdk/models/shared/security.ts
+  - src/sdk/models/shared/selfapproval.ts
+  - src/sdk/models/shared/selfapprovalinput.ts
+  - src/sdk/models/shared/sendemail.ts
+  - src/sdk/models/shared/sendslackmessage.ts
+  - src/sdk/models/shared/sessionsettings.ts
+  - src/sdk/models/shared/setappentitlementownersrequest.ts
+  - src/sdk/models/shared/setappentitlementownersresponse.ts
+  - src/sdk/models/shared/setappownersrequest.ts
+  - src/sdk/models/shared/setappownersresponse.ts
+  - src/sdk/models/shared/setbundleautomationrequest.ts
+  - src/sdk/models/shared/skippedaction.ts
+  - src/sdk/models/shared/slacknotifications.ts
+  - src/sdk/models/shared/status.ts
+  - src/sdk/models/shared/stepupmicrosoftsettings.ts
+  - src/sdk/models/shared/stepupoauth2settings.ts
+  - src/sdk/models/shared/stepupprovider.ts
+  - src/sdk/models/shared/stepupproviderinput.ts
+  - src/sdk/models/shared/stepupproviderref.ts
+  - src/sdk/models/shared/stepuptransaction.ts
+  - src/sdk/models/shared/systemlogservicelisteventsrequest.ts
+  - src/sdk/models/shared/systemlogservicelisteventsresponse.ts
+  - src/sdk/models/shared/targettask.ts
+  - src/sdk/models/shared/targettest.ts
+  - src/sdk/models/shared/task.ts
+  - src/sdk/models/shared/taskaction.ts
+  - src/sdk/models/shared/taskaction1.ts
+  - src/sdk/models/shared/taskactionsserviceapproverequest.ts
+  - src/sdk/models/shared/taskactionsserviceapproveresponse.ts
+  - src/sdk/models/shared/taskactionsserviceapprovewithstepuprequest.ts
+  - src/sdk/models/shared/taskactionsserviceapprovewithstepupresponse.ts
+  - src/sdk/models/shared/taskactionsservicecloserequest.ts
+  - src/sdk/models/shared/taskactionsservicecloseresponse.ts
+  - src/sdk/models/shared/taskactionsservicecommentrequest.ts
+  - src/sdk/models/shared/taskactionsservicecommentresponse.ts
+  - src/sdk/models/shared/taskactionsservicedenyrequest.ts
+  - src/sdk/models/shared/taskactionsservicedenyresponse.ts
+  - src/sdk/models/shared/taskactionsserviceescalatetoemergencyaccessrequest.ts
+  - src/sdk/models/shared/taskactionsservicehardresetrequest.ts
+  - src/sdk/models/shared/taskactionsservicehardresetresponse.ts
+  - src/sdk/models/shared/taskactionsserviceprocessnowrequest.ts
+  - src/sdk/models/shared/taskactionsserviceprocessnowresponse.ts
+  - src/sdk/models/shared/taskactionsservicereassignrequest.ts
+  - src/sdk/models/shared/taskactionsservicereassignresponse.ts
+  - src/sdk/models/shared/taskactionsservicerestartrequest.ts
+  - src/sdk/models/shared/taskactionsservicerestartresponse.ts
+  - src/sdk/models/shared/taskactionsserviceskipsteprequest.ts
+  - src/sdk/models/shared/taskauditaccessrequestoutcome.ts
+  - src/sdk/models/shared/taskauditactionsubmitted.ts
+  - src/sdk/models/shared/taskauditapprovalautoacceptedbypolicy.ts
+  - src/sdk/models/shared/taskauditapprovalautorejectedbypolicy.ts
+  - src/sdk/models/shared/taskauditapprovalhappenedautomatically.ts
+  - src/sdk/models/shared/taskauditapprovalinstancechange.ts
+  - src/sdk/models/shared/taskauditbulkactionerror.ts
+  - src/sdk/models/shared/taskauditcancelledresult.ts
+  - src/sdk/models/shared/taskauditcertifyoutcome.ts
+  - src/sdk/models/shared/taskauditcomment.ts
+  - src/sdk/models/shared/taskauditconditionalpolicyexecutionresult.ts
+  - src/sdk/models/shared/taskauditconnectoractionresult.ts
+  - src/sdk/models/shared/taskauditerrorresult.ts
+  - src/sdk/models/shared/taskauditescalatetoemergencyaccess.ts
+  - src/sdk/models/shared/taskauditexpressionpolicysteperror.ts
+  - src/sdk/models/shared/taskauditexternalticketcreated.ts
+  - src/sdk/models/shared/taskauditexternalticketerror.ts
+  - src/sdk/models/shared/taskauditexternalticketprovisionstepresolved.ts
+  - src/sdk/models/shared/taskauditexternaltickettriggered.ts
+  - src/sdk/models/shared/taskauditfinishedconnectoractions.ts
+  - src/sdk/models/shared/taskauditgrantoutcome.ts
+  - src/sdk/models/shared/taskaudithardreset.ts
+  - src/sdk/models/shared/taskauditlistrequest.ts
+  - src/sdk/models/shared/taskauditlistresponse.ts
+  - src/sdk/models/shared/taskauditmetadata.ts
+  - src/sdk/models/shared/taskauditnewtask.ts
+  - src/sdk/models/shared/taskauditpolicyapprovalreassigned.ts
+  - src/sdk/models/shared/taskauditpolicychanged.ts
+  - src/sdk/models/shared/taskauditpolicyevaluationstep.ts
+  - src/sdk/models/shared/taskauditpolicyprovisionerror.ts
+  - src/sdk/models/shared/taskauditpolicyprovisionreassigned.ts
+  - src/sdk/models/shared/taskauditreassignedtodelegate.ts
+  - src/sdk/models/shared/taskauditreassignmentlisterror.ts
+  - src/sdk/models/shared/taskauditrestart.ts
+  - src/sdk/models/shared/taskauditrevokeoutcome.ts
+  - src/sdk/models/shared/taskauditslaescalation.ts
+  - src/sdk/models/shared/taskauditstartedconnectoractions.ts
+  - src/sdk/models/shared/taskauditstatechange.ts
+  - src/sdk/models/shared/taskauditstepskipped.ts
+  - src/sdk/models/shared/taskauditstepupapproval.ts
+  - src/sdk/models/shared/taskauditsuccessresult.ts
+  - src/sdk/models/shared/taskauditview.ts
+  - src/sdk/models/shared/taskauditviewref.ts
+  - src/sdk/models/shared/taskauditwaitforanalysisstepsuccess.ts
+  - src/sdk/models/shared/taskauditwaitforanalysissteptimedout.ts
+  - src/sdk/models/shared/taskauditwaitforanalysisstepwaiting.ts
+  - src/sdk/models/shared/taskauditwaitstepsuccess.ts
+  - src/sdk/models/shared/taskauditwaitsteptimedout.ts
+  - src/sdk/models/shared/taskauditwaitstepwaiting.ts
+  - src/sdk/models/shared/taskauditwebhookapprovalattempt.ts
+  - src/sdk/models/shared/taskauditwebhookapprovalbadresponse.ts
+  - src/sdk/models/shared/taskauditwebhookapprovalsuccess.ts
+  - src/sdk/models/shared/taskauditwebhookapprovaltriggered.ts
+  - src/sdk/models/shared/taskauditwebhookattempt.ts
+  - src/sdk/models/shared/taskauditwebhooksuccess.ts
+  - src/sdk/models/shared/taskauditwebhooktriggered.ts
+  - src/sdk/models/shared/taskexpandmask.ts
+  - src/sdk/models/shared/taskgrantsource.ts
+  - src/sdk/models/shared/taskref.ts
+  - src/sdk/models/shared/taskrevokesource.ts
+  - src/sdk/models/shared/taskrevokesourceexpired.ts
+  - src/sdk/models/shared/taskrevokesourcenonusage.ts
+  - src/sdk/models/shared/taskrevokesourcerequest.ts
+  - src/sdk/models/shared/taskrevokesourcereview.ts
+  - src/sdk/models/shared/tasksearchrequest.ts
+  - src/sdk/models/shared/tasksearchresponse.ts
+  - src/sdk/models/shared/taskserviceactionresponse.ts
+  - src/sdk/models/shared/taskservicecreategrantrequest.ts
+  - src/sdk/models/shared/taskservicecreategrantresponse.ts
+  - src/sdk/models/shared/taskservicecreateoffboardingrequest.ts
+  - src/sdk/models/shared/taskservicecreateoffboardingresponse.ts
+  - src/sdk/models/shared/taskservicecreaterevokerequest.ts
+  - src/sdk/models/shared/taskservicecreaterevokeresponse.ts
+  - src/sdk/models/shared/taskservicegetresponse.ts
+  - src/sdk/models/shared/tasktype.ts
+  - src/sdk/models/shared/tasktypecertify.ts
+  - src/sdk/models/shared/tasktypecertifyinput.ts
+  - src/sdk/models/shared/tasktypegrant.ts
+  - src/sdk/models/shared/tasktypegrantinput.ts
+  - src/sdk/models/shared/tasktypeinput.ts
+  - src/sdk/models/shared/tasktypeoffboarding.ts
+  - src/sdk/models/shared/tasktypeoffboardinginput.ts
+  - src/sdk/models/shared/tasktyperevoke.ts
+  - src/sdk/models/shared/tasktyperevokeinput.ts
+  - src/sdk/models/shared/taskview.ts
+  - src/sdk/models/shared/terminateautomationrequest.ts
+  - src/sdk/models/shared/terminateautomationresponse.ts
+  - src/sdk/models/shared/testaccountprovisionpolicyrequest.ts
+  - src/sdk/models/shared/testaccountprovisionpolicyresponse.ts
+  - src/sdk/models/shared/testsourceiprequest.ts
+  - src/sdk/models/shared/testsourceipresponse.ts
+  - src/sdk/models/shared/teststepupproviderrequest.ts
+  - src/sdk/models/shared/teststepupproviderresponse.ts
+  - src/sdk/models/shared/unconfiguredprovision.ts
+  - src/sdk/models/shared/unenrollfromallaccessprofiles.ts
+  - src/sdk/models/shared/updateappentitlementrequest.ts
+  - src/sdk/models/shared/updateappentitlementresponse.ts
+  - src/sdk/models/shared/updateapprequest.ts
+  - src/sdk/models/shared/updateappresponse.ts
+  - src/sdk/models/shared/updateappusagecontrolsrequest.ts
+  - src/sdk/models/shared/updateappusagecontrolsresponse.ts
+  - src/sdk/models/shared/updateautomationrequest.ts
+  - src/sdk/models/shared/updateautomationresponse.ts
+  - src/sdk/models/shared/updategrantdurationrequest.ts
+  - src/sdk/models/shared/updategrantdurationresponse.ts
+  - src/sdk/models/shared/updatemanuallymanagedresourcetyperequest.ts
+  - src/sdk/models/shared/updatemanuallymanagedresourcetyperesponse.ts
+  - src/sdk/models/shared/updateorgdomainrequest.ts
+  - src/sdk/models/shared/updateorgdomainresponse.ts
+  - src/sdk/models/shared/updatepolicyrequest.ts
+  - src/sdk/models/shared/updatepolicyresponse.ts
+  - src/sdk/models/shared/updaterolerequest.ts
+  - src/sdk/models/shared/updaterolesresponse.ts
+  - src/sdk/models/shared/updatesessionsettingsrequest.ts
+  - src/sdk/models/shared/updatesessionsettingsresponse.ts
+  - src/sdk/models/shared/updatestepupproviderrequest.ts
+  - src/sdk/models/shared/updatestepupproviderresponse.ts
+  - src/sdk/models/shared/updatestepupprovidersecretrequest.ts
+  - src/sdk/models/shared/updatestepupprovidersecretresponse.ts
+  - src/sdk/models/shared/updateuser.ts
+  - src/sdk/models/shared/usagebasedrevocationtrigger.ts
+  - src/sdk/models/shared/user.ts
+  - src/sdk/models/shared/userapproval.ts
+  - src/sdk/models/shared/userattributemappingsource.ts
+  - src/sdk/models/shared/usercreatedtrigger.ts
+  - src/sdk/models/shared/userexpandmask.ts
+  - src/sdk/models/shared/userprofilechangetrigger.ts
+  - src/sdk/models/shared/userproperties.ts
+  - src/sdk/models/shared/userref.ts
+  - src/sdk/models/shared/userservicegetresponse.ts
+  - src/sdk/models/shared/userservicelistresponse.ts
+  - src/sdk/models/shared/userview.ts
+  - src/sdk/models/shared/userwithappentitlementuserbindingview.ts
+  - src/sdk/models/shared/wait.ts
+  - src/sdk/models/shared/waitcondition.ts
+  - src/sdk/models/shared/waitconditioninstance.ts
+  - src/sdk/models/shared/waitforduration.ts
+  - src/sdk/models/shared/waitinstance.ts
+  - src/sdk/models/shared/webhook.ts
+  - src/sdk/models/shared/webhook1.ts
+  - src/sdk/models/shared/webhookapproval.ts
+  - src/sdk/models/shared/webhookinput.ts
+  - src/sdk/models/shared/webhookinstance.ts
+  - src/sdk/models/shared/webhookprovision.ts
+  - src/sdk/models/shared/webhookref.ts
+  - src/sdk/models/shared/webhooksource.ts
+  - src/sdk/models/shared/webhooksourceapprovalstep.ts
+  - src/sdk/models/shared/webhooksourcepolicypostaction.ts
+  - src/sdk/models/shared/webhooksourceprovisionstep.ts
+  - src/sdk/models/shared/webhooksourcetest.ts
+  - src/sdk/models/shared/webhooksourceworkflowstep.ts
+  - src/sdk/models/shared/webhookspec.ts
+  - src/sdk/models/shared/webhookssearchrequest.ts
+  - src/sdk/models/shared/webhookssearchresponse.ts
+  - src/sdk/models/shared/webhooksservicecreaterequest.ts
+  - src/sdk/models/shared/webhooksservicecreateresponse.ts
+  - src/sdk/models/shared/webhooksservicedeleterequest.ts
+  - src/sdk/models/shared/webhooksservicedeleteresponse.ts
+  - src/sdk/models/shared/webhooksservicegetresponse.ts
+  - src/sdk/models/shared/webhooksservicelistresponse.ts
+  - src/sdk/models/shared/webhooksservicetestrequest.ts
+  - src/sdk/models/shared/webhooksservicetestresponse.ts
+  - src/sdk/models/shared/webhooksserviceupdaterequest.ts
+  - src/sdk/models/shared/webhooksserviceupdateresponse.ts
+  - src/sdk/orgdomain.ts
+  - src/sdk/personalclient.ts
+  - src/sdk/personalclientsearch.ts
+  - src/sdk/policies.ts
+  - src/sdk/policysearch.ts
+  - src/sdk/policyvalidate.ts
+  - src/sdk/requestcatalogmanagement.ts
+  - src/sdk/requestcatalogsearch.ts
+  - src/sdk/roles.ts
+  - src/sdk/sdk.ts
+  - src/sdk/sessionsettings.ts
+  - src/sdk/stepupprovider.ts
+  - src/sdk/stepuptransaction.ts
+  - src/sdk/systemlog.ts
+  - src/sdk/task.ts
+  - src/sdk/taskactions.ts
+  - src/sdk/taskaudit.ts
+  - src/sdk/tasksearch.ts
+  - src/sdk/types/async.ts
+  - src/sdk/types/blobs.ts
+  - src/sdk/types/constdatetime.ts
+  - src/sdk/types/enums.ts
+  - src/sdk/types/fp.ts
+  - src/sdk/types/index.ts
+  - src/sdk/types/operations.ts
+  - src/sdk/types/rfcdate.ts
+  - src/sdk/types/streams.ts
+  - src/sdk/user.ts
+  - src/sdk/usersearch.ts
+  - src/sdk/webhooks.ts
+  - src/sdk/webhookssearch.ts
+examples:
+  c1.api.accessconflict.v1.AccessConflictService.CreateMonitor:
+    speakeasy-default-c1-api-accessconflict-v1-access-conflict-service-create-monitor:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.accessconflict.v1.AccessConflictService.DeleteMonitor:
+    speakeasy-default-c1-api-accessconflict-v1-access-conflict-service-delete-monitor:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.accessconflict.v1.AccessConflictService.GetMonitor:
+    speakeasy-default-c1-api-accessconflict-v1-access-conflict-service-get-monitor:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.accessconflict.v1.AccessConflictService.UpdateMonitor:
+    speakeasy-default-c1-api-accessconflict-v1-access-conflict-service-update-monitor:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.Apps.List:
+    speakeasy-default-c1-api-app-v1-apps-list:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.Apps.Create:
+    speakeasy-default-c1-api-app-v1-apps-create:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.Apps.Delete:
+    speakeasy-default-c1-api-app-v1-apps-delete:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.Apps.Get:
+    speakeasy-default-c1-api-app-v1-apps-get:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.Apps.Update:
+    speakeasy-default-c1-api-app-v1-apps-update:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppAccessRequestsDefaultsService.GetAppAccessRequestsDefaults:
+    speakeasy-default-c1-api-app-v1-app-access-requests-defaults-service-get-app-access-requests-defaults:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppAccessRequestsDefaultsService.CreateAppAccessRequestsDefaults:
+    speakeasy-default-c1-api-app-v1-app-access-requests-defaults-service-create-app-access-requests-defaults:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppAccessRequestsDefaultsService.CancelAppAccessRequestsDefaults:
+    speakeasy-default-c1-api-app-v1-app-access-requests-defaults-service-cancel-app-access-requests-defaults:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppUserService.List:
+    speakeasy-default-c1-api-app-v1-app-user-service-list:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppUserService.ListAppUserCredentials:
+    speakeasy-default-c1-api-app-v1-app-user-service-list-app-user-credentials:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_user_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppUserService.ListAppUsersForUser:
+    speakeasy-default-c1-api-app-v1-app-user-service-list-app-users-for-user:
+      parameters:
+        path:
+          app_id: "<id>"
+          user_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppUserService.Update:
+    speakeasy-default-c1-api-app-v1-app-user-service-update:
+      parameters:
+        path:
+          app_user_app_id: "<id>"
+          app_user_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppUserService.Search:
+    speakeasy-default-c1-api-app-v1-app-user-service-search:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.ConnectorService.List:
+    speakeasy-default-c1-api-app-v1-connector-service-list:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.ConnectorService.CreateDelegated:
+    speakeasy-default-c1-api-app-v1-connector-service-create-delegated:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.ConnectorService.RotateCredential:
+    speakeasy-default-c1-api-app-v1-connector-service-rotate-credential:
+      parameters:
+        path:
+          app_id: "<id>"
+          connector_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.ConnectorService.GetCredentials:
+    speakeasy-default-c1-api-app-v1-connector-service-get-credentials:
+      parameters:
+        path:
+          app_id: "<id>"
+          connector_id: "<id>"
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.ConnectorService.RevokeCredential:
+    speakeasy-default-c1-api-app-v1-connector-service-revoke-credential:
+      parameters:
+        path:
+          app_id: "<id>"
+          connector_id: "<id>"
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.ConnectorService.ForceSync:
+    speakeasy-default-c1-api-app-v1-connector-service-force-sync:
+      parameters:
+        path:
+          app_id: "<id>"
+          connector_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.ConnectorService.Delete:
+    speakeasy-default-c1-api-app-v1-connector-service-delete:
+      parameters:
+        path:
+          app_id: "<id>"
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.ConnectorService.Get:
+    speakeasy-default-c1-api-app-v1-connector-service-get:
+      parameters:
+        path:
+          app_id: "<id>"
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.ConnectorService.Update:
+    speakeasy-default-c1-api-app-v1-connector-service-update:
+      parameters:
+        path:
+          app_id: "<id>"
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.ConnectorService.Create:
+    speakeasy-default-c1-api-app-v1-connector-service-create:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.ConnectorService.UpdateDelegated:
+    speakeasy-default-c1-api-app-v1-connector-service-update-delegated:
+      parameters:
+        path:
+          connector_app_id: "<id>"
+          connector_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.ConnectorService.ValidateHTTPConnectorConfig:
+    speakeasy-default-c1-api-app-v1-connector-service-validate-HTTP-connector-config:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlements.List:
+    speakeasy-default-c1-api-app-v1-app-entitlements-list:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlements.Create:
+    speakeasy-default-c1-api-app-v1-app-entitlements-create:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlements.AddManuallyManagedMembers:
+    speakeasy-default-c1-api-app-v1-app-entitlements-add-manually-managed-members:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlements.DeleteAutomation:
+    speakeasy-default-c1-api-app-v1-app-entitlements-delete-automation:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlements.GetAutomation:
+    speakeasy-default-c1-api-app-v1-app-entitlements-get-automation:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlements.CreateAutomation:
+    speakeasy-default-c1-api-app-v1-app-entitlements-create-automation:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlements.RemoveAutomationExclusion:
+    speakeasy-default-c1-api-app-v1-app-entitlements-remove-automation-exclusion:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlements.ListAutomationExclusions:
+    speakeasy-default-c1-api-app-v1-app-entitlements-list-automation-exclusions:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlements.AddAutomationExclusion:
+    speakeasy-default-c1-api-app-v1-app-entitlements-add-automation-exclusion:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlements.UpdateAutomation:
+    speakeasy-default-c1-api-app-v1-app-entitlements-update-automation:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlements.RemoveEntitlementMembership:
+    speakeasy-default-c1-api-app-v1-app-entitlements-remove-entitlement-membership:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlements.ListUsers:
+    speakeasy-default-c1-api-app-v1-app-entitlements-list-users:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlements.Delete:
+    speakeasy-default-c1-api-app-v1-app-entitlements-delete:
+      parameters:
+        path:
+          app_id: "<id>"
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlements.Get:
+    speakeasy-default-c1-api-app-v1-app-entitlements-get:
+      parameters:
+        path:
+          app_id: "<id>"
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlements.Update:
+    speakeasy-default-c1-api-app-v1-app-entitlements-update:
+      parameters:
+        path:
+          app_id: "<id>"
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlements.ListForAppResource:
+    speakeasy-default-c1-api-app-v1-app-entitlements-list-for-app-resource:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_resource_type_id: "<id>"
+          app_resource_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlements.ListForAppUser:
+    speakeasy-default-c1-api-app-v1-app-entitlements-list-for-app-user:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_user_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlementSearchService.SearchAppEntitlementsWithExpired:
+    speakeasy-default-c1-api-app-v1-app-entitlement-search-service-search-app-entitlements-with-expired:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlementSearchService.SearchAppEntitlementsForAppUser:
+    speakeasy-default-c1-api-app-v1-app-entitlement-search-service-search-app-entitlements-for-app-user:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_user_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlementSearchService.Search:
+    speakeasy-default-c1-api-app-v1-app-entitlement-search-service-search:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlementSearchService.SearchGrants:
+    speakeasy-default-c1-api-app-v1-app-entitlement-search-service-search-grants:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlementUserBindingService.RemoveGrantDuration:
+    speakeasy-default-c1-api-app-v1-app-entitlement-user-binding-service-remove-grant-duration:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_entitlement_id: "<id>"
+          app_user_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlementUserBindingService.UpdateGrantDuration:
+    speakeasy-default-c1-api-app-v1-app-entitlement-user-binding-service-update-grant-duration:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_entitlement_id: "<id>"
+          app_user_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlementUserBindingService.ListAppUsersForIdentityWithGrant:
+    speakeasy-default-c1-api-app-v1-app-entitlement-user-binding-service-list-app-users-for-identity-with-grant:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_entitlement_id: "<id>"
+          identity_user_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlementUserBindingService.SearchGrantFeed:
+    speakeasy-default-c1-api-app-v1-app-entitlement-user-binding-service-search-grant-feed:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlementUserBindingService.SearchPastGrants:
+    speakeasy-default-c1-api-app-v1-app-entitlement-user-binding-service-search-past-grants:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlementOwners.List:
+    speakeasy-default-c1-api-app-v1-app-entitlement-owners-list:
+      parameters:
+        path:
+          app_id: "<id>"
+          entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlementOwners.Add:
+    speakeasy-default-c1-api-app-v1-app-entitlement-owners-add:
+      parameters:
+        path:
+          app_id: "<id>"
+          entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlementOwners.Set:
+    speakeasy-default-c1-api-app-v1-app-entitlement-owners-set:
+      parameters:
+        path:
+          app_id: "<id>"
+          entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlementOwners.Remove:
+    speakeasy-default-c1-api-app-v1-app-entitlement-owners-remove:
+      parameters:
+        path:
+          app_id: "<id>"
+          entitlement_id: "<id>"
+          user_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppOwners.List:
+    speakeasy-default-c1-api-app-v1-app-owners-list:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppOwners.Set:
+    speakeasy-default-c1-api-app-v1-app-owners-set:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppOwners.Remove:
+    speakeasy-default-c1-api-app-v1-app-owners-remove:
+      parameters:
+        path:
+          app_id: "<id>"
+          user_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppOwners.Add:
+    speakeasy-default-c1-api-app-v1-app-owners-add:
+      parameters:
+        path:
+          app_id: "<id>"
+          user_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppReportService.List:
+    speakeasy-default-c1-api-app-v1-app-report-service-list:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppReportActionService.GenerateReport:
+    speakeasy-default-c1-api-app-v1-app-report-action-service-generate-report:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppResourceTypeService.List:
+    speakeasy-default-c1-api-app-v1-app-resource-type-service-list:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppResourceTypeService.CreateManuallyManagedResourceType:
+    speakeasy-default-c1-api-app-v1-app-resource-type-service-create-manually-managed-resource-type:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppResourceTypeService.DeleteManuallyManagedResourceType:
+    speakeasy-default-c1-api-app-v1-app-resource-type-service-delete-manually-managed-resource-type:
+      parameters:
+        path:
+          app_id: "<id>"
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppResourceTypeService.Get:
+    speakeasy-default-c1-api-app-v1-app-resource-type-service-get:
+      parameters:
+        path:
+          app_id: "<id>"
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppResourceTypeService.UpdateManuallyManagedResourceType:
+    speakeasy-default-c1-api-app-v1-app-resource-type-service-update-manually-managed-resource-type:
+      parameters:
+        path:
+          app_id: "<id>"
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppResourceService.List:
+    speakeasy-default-c1-api-app-v1-app-resource-service-list:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_resource_type_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppResourceService.CreateManuallyManagedAppResource:
+    speakeasy-default-c1-api-app-v1-app-resource-service-create-manually-managed-app-resource:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_resource_type_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppResourceService.DeleteManuallyManagedAppResource:
+    speakeasy-default-c1-api-app-v1-app-resource-service-delete-manually-managed-app-resource:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_resource_type_id: "<id>"
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppResourceService.Get:
+    speakeasy-default-c1-api-app-v1-app-resource-service-get:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_resource_type_id: "<id>"
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppResourceService.Update:
+    speakeasy-default-c1-api-app-v1-app-resource-service-update:
+      parameters:
+        path:
+          app_id: "<id>"
+          app_resource_type_id: "<id>"
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppResourceOwners.Remove:
+    speakeasy-default-c1-api-app-v1-app-resource-owners-remove:
+      parameters:
+        path:
+          app_id: "<id>"
+          resource_type_id: "<id>"
+          resource_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppResourceOwners.List:
+    speakeasy-default-c1-api-app-v1-app-resource-owners-list:
+      parameters:
+        path:
+          app_id: "<id>"
+          resource_type_id: "<id>"
+          resource_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppResourceOwners.Add:
+    speakeasy-default-c1-api-app-v1-app-resource-owners-add:
+      parameters:
+        path:
+          app_id: "<id>"
+          resource_type_id: "<id>"
+          resource_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppUsageControlsService.Get:
+    speakeasy-default-c1-api-app-v1-app-usage-controls-service-get:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppUsageControlsService.Update:
+    speakeasy-default-c1-api-app-v1-app-usage-controls-service-update:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlementsProxy.Delete:
+    speakeasy-default-c1-api-app-v1-app-entitlements-proxy-delete:
+      parameters:
+        path:
+          src_app_id: "<id>"
+          src_app_entitlement_id: "<id>"
+          dst_app_id: "<id>"
+          dst_app_entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlementsProxy.Get:
+    speakeasy-default-c1-api-app-v1-app-entitlements-proxy-get:
+      parameters:
+        path:
+          src_app_id: "<id>"
+          src_app_entitlement_id: "<id>"
+          dst_app_id: "<id>"
+          dst_app_entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlementsProxy.Create:
+    speakeasy-default-c1-api-app-v1-app-entitlements-proxy-create:
+      parameters:
+        path:
+          src_app_id: "<id>"
+          src_app_entitlement_id: "<id>"
+          dst_app_id: "<id>"
+          dst_app_entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.attribute.v1.Attributes.DeleteAttributeValue:
+    speakeasy-default-c1-api-attribute-v1-attributes-delete-attribute-value:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.attribute.v1.Attributes.CreateAttributeValue:
+    speakeasy-default-c1-api-attribute-v1-attributes-create-attribute-value:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.attribute.v1.Attributes.GetAttributeValue:
+    speakeasy-default-c1-api-attribute-v1-attributes-get-attribute-value:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.attribute.v1.Attributes.CreateComplianceFrameworkAttributeValue:
+    speakeasy-default-c1-api-attribute-v1-attributes-create-compliance-framework-attribute-value:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.attribute.v1.Attributes.DeleteComplianceFrameworkAttributeValue:
+    speakeasy-default-c1-api-attribute-v1-attributes-delete-compliance-framework-attribute-value:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.attribute.v1.Attributes.GetComplianceFrameworkAttributeValue:
+    speakeasy-default-c1-api-attribute-v1-attributes-get-compliance-framework-attribute-value:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.attribute.v1.Attributes.CreateRiskLevelAttributeValue:
+    speakeasy-default-c1-api-attribute-v1-attributes-create-risk-level-attribute-value:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.attribute.v1.Attributes.DeleteRiskLevelAttributeValue:
+    speakeasy-default-c1-api-attribute-v1-attributes-delete-risk-level-attribute-value:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.attribute.v1.Attributes.GetRiskLevelAttributeValue:
+    speakeasy-default-c1-api-attribute-v1-attributes-get-risk-level-attribute-value:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.attribute.v1.Attributes.ListAttributeTypes:
+    speakeasy-default-c1-api-attribute-v1-attributes-list-attribute-types:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.attribute.v1.Attributes.ListAttributeValues:
+    speakeasy-default-c1-api-attribute-v1-attributes-list-attribute-values:
+      parameters:
+        path:
+          attribute_type_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.auth.v1.Auth.Introspect:
+    speakeasy-default-c1-api-auth-v1-auth-introspect:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.automations.v1.AutomationExecutionService.ListAutomationExecutions:
+    speakeasy-default-c1-api-automations-v1-automation-execution-service-list-automation-executions:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.automations.v1.AutomationExecutionService.GetAutomationExecution:
+    speakeasy-default-c1-api-automations-v1-automation-execution-service-get-automation-execution:
+      parameters:
+        path:
+          id: "728203"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.automations.v1.AutomationExecutionActionsService.TerminateAutomation:
+    speakeasy-default-c1-api-automations-v1-automation-execution-actions-service-terminate-automation:
+      parameters:
+        path:
+          id: "839265"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.automations.v1.AutomationExecutionSearchService.SearchAutomationExecutions:
+    speakeasy-default-c1-api-automations-v1-automation-execution-search-service-search-automation-executions:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.automations.v1.AutomationSearchService.SearchAutomationTemplateVersions:
+    speakeasy-default-c1-api-automations-v1-automation-search-service-search-automation-template-versions:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.automations.v1.AutomationSearchService.SearchAutomations:
+    speakeasy-default-c1-api-automations-v1-automation-search-service-search-automations:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.automations.v1.AutomationService.ListAutomations:
+    speakeasy-default-c1-api-automations-v1-automation-service-list-automations:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.automations.v1.AutomationService.CreateAutomation:
+    speakeasy-default-c1-api-automations-v1-automation-service-create-automation:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.automations.v1.AutomationService.DeleteAutomation:
+    speakeasy-default-c1-api-automations-v1-automation-service-delete-automation:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.automations.v1.AutomationService.GetAutomation:
+    speakeasy-default-c1-api-automations-v1-automation-service-get-automation:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.automations.v1.AutomationService.UpdateAutomation:
+    speakeasy-default-c1-api-automations-v1-automation-service-update-automation:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.automations.v1.AutomationService.ExecuteAutomation:
+    speakeasy-default-c1-api-automations-v1-automation-service-execute-automation:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.List:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-list:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.Create:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-create:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.ListAllEntitlementIdsPerApp:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-list-all-entitlement-ids-per-app:
+      parameters:
+        path:
+          catalog_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.ListEntitlementsPerCatalog:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-list-entitlements-per-catalog:
+      parameters:
+        path:
+          catalog_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.RemoveAppEntitlements:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-remove-app-entitlements:
+      parameters:
+        path:
+          catalog_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.AddAppEntitlements:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-add-app-entitlements:
+      parameters:
+        path:
+          catalog_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.RemoveAccessEntitlements:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-remove-access-entitlements:
+      parameters:
+        path:
+          catalog_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.AddAccessEntitlements:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-add-access-entitlements:
+      parameters:
+        path:
+          catalog_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.ListEntitlementsForAccess:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-list-entitlements-for-access:
+      parameters:
+        path:
+          catalog_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.Delete:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-delete:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.Get:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-get:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.Update:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-update:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.DeleteBundleAutomation:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-delete-bundle-automation:
+      parameters:
+        path:
+          request_catalog_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.GetBundleAutomation:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-get-bundle-automation:
+      parameters:
+        path:
+          request_catalog_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.SetBundleAutomation:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-set-bundle-automation:
+      parameters:
+        path:
+          request_catalog_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.CreateBundleAutomation:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-create-bundle-automation:
+      parameters:
+        path:
+          request_catalog_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.ForceRunBundleAutomation:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-force-run-bundle-automation:
+      parameters:
+        path:
+          request_catalog_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.directory.v1.DirectoryService.List:
+    speakeasy-default-c1-api-directory-v1-directory-service-list:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.directory.v1.DirectoryService.Create:
+    speakeasy-default-c1-api-directory-v1-directory-service-create:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.directory.v1.DirectoryService.Delete:
+    speakeasy-default-c1-api-directory-v1-directory-service-delete:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.directory.v1.DirectoryService.Get:
+    speakeasy-default-c1-api-directory-v1-directory-service-get:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.iam.v1.PersonalClientService.List:
+    speakeasy-default-c1-api-iam-v1-personal-client-service-list:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.iam.v1.PersonalClientService.Create:
+    speakeasy-default-c1-api-iam-v1-personal-client-service-create:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.iam.v1.PersonalClientService.Delete:
+    speakeasy-default-c1-api-iam-v1-personal-client-service-delete:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.iam.v1.PersonalClientService.Get:
+    speakeasy-default-c1-api-iam-v1-personal-client-service-get:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.iam.v1.PersonalClientService.Update:
+    speakeasy-default-c1-api-iam-v1-personal-client-service-update:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.iam.v1.Roles.List:
+    speakeasy-default-c1-api-iam-v1-roles-list:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.iam.v1.Roles.Get:
+    speakeasy-default-c1-api-iam-v1-roles-get:
+      parameters:
+        path:
+          role_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.iam.v1.Roles.Update:
+    speakeasy-default-c1-api-iam-v1-roles-update:
+      parameters:
+        path:
+          role_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.policy.v1.Policies.List:
+    speakeasy-default-c1-api-policy-v1-policies-list:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.policy.v1.Policies.Create:
+    speakeasy-default-c1-api-policy-v1-policies-create:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.policy.v1.Policies.Delete:
+    speakeasy-default-c1-api-policy-v1-policies-delete:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.policy.v1.Policies.Get:
+    speakeasy-default-c1-api-policy-v1-policies-get:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.policy.v1.Policies.Update:
+    speakeasy-default-c1-api-policy-v1-policies-update:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.policy.v1.AccountProvisionPolicyTest.Test:
+    speakeasy-default-c1-api-policy-v1-account-provision-policy-test-test:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.policy.v1.PolicyValidate.ValidateCEL:
+    speakeasy-default-c1-api-policy-v1-policy-validate-validate-CEL:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppResourceSearch.SearchAppResourceTypes:
+    speakeasy-default-c1-api-app-v1-app-resource-search-search-app-resource-types:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppResourceSearch.SearchAppResources:
+    speakeasy-default-c1-api-app-v1-app-resource-search-search-app-resources:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppSearch.Search:
+    speakeasy-default-c1-api-app-v1-app-search-search:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.attribute.v1.AttributeSearch.SearchAttributeValues:
+    speakeasy-default-c1-api-attribute-v1-attribute-search-search-attribute-values:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.iam.v1.PersonalClientSearchService.Search:
+    speakeasy-default-c1-api-iam-v1-personal-client-search-service-search:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.policy.v1.PolicySearch.Search:
+    speakeasy-default-c1-api-policy-v1-policy-search-search:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogSearchService.SearchEntitlements:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-search-service-search-entitlements:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.stepup.v1.StepUpProviderService.Search:
+    speakeasy-default-c1-api-stepup-v1-step-up-provider-service-search:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.stepup.v1.StepUpProviderService.List:
+    speakeasy-default-c1-api-stepup-v1-step-up-provider-service-list:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.stepup.v1.StepUpProviderService.Create:
+    speakeasy-default-c1-api-stepup-v1-step-up-provider-service-create:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.stepup.v1.StepUpProviderService.Delete:
+    speakeasy-default-c1-api-stepup-v1-step-up-provider-service-delete:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.stepup.v1.StepUpProviderService.Get:
+    speakeasy-default-c1-api-stepup-v1-step-up-provider-service-get:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.stepup.v1.StepUpProviderService.Update:
+    speakeasy-default-c1-api-stepup-v1-step-up-provider-service-update:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.stepup.v1.StepUpProviderService.UpdateSecret:
+    speakeasy-default-c1-api-stepup-v1-step-up-provider-service-update-secret:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.stepup.v1.StepUpProviderService.Test:
+    speakeasy-default-c1-api-stepup-v1-step-up-provider-service-test:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.stepup.v1.StepUpTransactionService.Search:
+    speakeasy-default-c1-api-stepup-v1-step-up-transaction-service-search:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.stepup.v1.StepUpTransactionService.Get:
+    speakeasy-default-c1-api-stepup-v1-step-up-transaction-service-get:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.systemlog.v1.ExportsSearchService.Search:
+    speakeasy-default-c1-api-systemlog-v1-exports-search-service-search:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.task.v1.TaskSearchService.Search:
+    speakeasy-default-c1-api-task-v1-task-search-service-search:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.user.v1.UserSearch.Search:
+    speakeasy-default-c1-api-user-v1-user-search-search:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.webhooks.v1.WebhooksSearch.Search:
+    speakeasy-default-c1-api-webhooks-v1-webhooks-search-search:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.settings.v1.AWSExternalIDSettings.Get:
+    speakeasy-default-c1-api-settings-v1-AWS-external-ID-settings-get:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.settings.v1.OrgDomainService.List:
+    speakeasy-default-c1-api-settings-v1-org-domain-service-list:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.settings.v1.OrgDomainService.Update:
+    speakeasy-default-c1-api-settings-v1-org-domain-service-update:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.settings.v1.SessionSettingsService.Get:
+    speakeasy-default-c1-api-settings-v1-session-settings-service-get:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.settings.v1.SessionSettingsService.Update:
+    speakeasy-default-c1-api-settings-v1-session-settings-service-update:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.settings.v1.SessionSettingsService.TestSourceIP:
+    speakeasy-default-c1-api-settings-v1-session-settings-service-test-source-IP:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.systemlog.v1.SystemLogService.ListEvents:
+    speakeasy-default-c1-api-systemlog-v1-system-log-service-list-events:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.systemlog.v1.ExportService.List:
+    speakeasy-default-c1-api-systemlog-v1-export-service-list:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.systemlog.v1.ExportService.Create:
+    speakeasy-default-c1-api-systemlog-v1-export-service-create:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.systemlog.v1.ExportService.Delete:
+    speakeasy-default-c1-api-systemlog-v1-export-service-delete:
+      parameters:
+        path:
+          export_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.systemlog.v1.ExportService.Get:
+    speakeasy-default-c1-api-systemlog-v1-export-service-get:
+      parameters:
+        path:
+          export_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.systemlog.v1.ExportService.Update:
+    speakeasy-default-c1-api-systemlog-v1-export-service-update:
+      parameters:
+        path:
+          export_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.systemlog.v1.ExportService.ListEvents:
+    speakeasy-default-c1-api-systemlog-v1-export-service-list-events:
+      parameters:
+        path:
+          export_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.task.v1.TaskAudit.List:
+    speakeasy-default-c1-api-task-v1-task-audit-list:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.task.v1.TaskService.CreateGrantTask:
+    speakeasy-default-c1-api-task-v1-task-service-create-grant-task:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.task.v1.TaskService.CreateOffboardingTask:
+    speakeasy-default-c1-api-task-v1-task-service-create-offboarding-task:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.task.v1.TaskService.CreateRevokeTask:
+    speakeasy-default-c1-api-task-v1-task-service-create-revoke-task:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.task.v1.TaskService.Get:
+    speakeasy-default-c1-api-task-v1-task-service-get:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.task.v1.TaskActionsService.Approve:
+    speakeasy-default-c1-api-task-v1-task-actions-service-approve:
+      parameters:
+        path:
+          task_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.task.v1.TaskActionsService.ApproveWithStepUp:
+    speakeasy-default-c1-api-task-v1-task-actions-service-approve-with-step-up:
+      parameters:
+        path:
+          task_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.task.v1.TaskActionsService.Close:
+    speakeasy-default-c1-api-task-v1-task-actions-service-close:
+      parameters:
+        path:
+          task_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.task.v1.TaskActionsService.Comment:
+    speakeasy-default-c1-api-task-v1-task-actions-service-comment:
+      parameters:
+        path:
+          task_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.task.v1.TaskActionsService.Deny:
+    speakeasy-default-c1-api-task-v1-task-actions-service-deny:
+      parameters:
+        path:
+          task_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.task.v1.TaskActionsService.EscalateToEmergencyAccess:
+    speakeasy-default-c1-api-task-v1-task-actions-service-escalate-to-emergency-access:
+      parameters:
+        path:
+          task_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.task.v1.TaskActionsService.ProcessNow:
+    speakeasy-default-c1-api-task-v1-task-actions-service-process-now:
+      parameters:
+        path:
+          task_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.task.v1.TaskActionsService.Reassign:
+    speakeasy-default-c1-api-task-v1-task-actions-service-reassign:
+      parameters:
+        path:
+          task_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.task.v1.TaskActionsService.HardReset:
+    speakeasy-default-c1-api-task-v1-task-actions-service-hard-reset:
+      parameters:
+        path:
+          task_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.task.v1.TaskActionsService.Restart:
+    speakeasy-default-c1-api-task-v1-task-actions-service-restart:
+      parameters:
+        path:
+          task_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.task.v1.TaskActionsService.SkipStep:
+    speakeasy-default-c1-api-task-v1-task-actions-service-skip-step:
+      parameters:
+        path:
+          task_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.user.v1.UserService.List:
+    speakeasy-default-c1-api-user-v1-user-service-list:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.user.v1.UserService.Get:
+    speakeasy-default-c1-api-user-v1-user-service-get:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.webhooks.v1.WebhooksService.List:
+    speakeasy-default-c1-api-webhooks-v1-webhooks-service-list:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.webhooks.v1.WebhooksService.Create:
+    speakeasy-default-c1-api-webhooks-v1-webhooks-service-create:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.webhooks.v1.WebhooksService.Delete:
+    speakeasy-default-c1-api-webhooks-v1-webhooks-service-delete:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.webhooks.v1.WebhooksService.Get:
+    speakeasy-default-c1-api-webhooks-v1-webhooks-service-get:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.webhooks.v1.WebhooksService.Update:
+    speakeasy-default-c1-api-webhooks-v1-webhooks-service-update:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.webhooks.v1.WebhooksService.Test:
+    speakeasy-default-c1-api-webhooks-v1-webhooks-service-test:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+examplesVersion: 1.0.2

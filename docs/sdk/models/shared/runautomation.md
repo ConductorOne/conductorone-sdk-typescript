@@ -1,0 +1,24 @@
+# RunAutomation
+
+RunAutomation: kick off the execution of an automation template.
+
+This message contains a oneof named automation_template. Only a single field of the following list may be set at a time:
+  - automationTemplateRef
+  - automationTemplateIdCel
+
+
+## Example Usage
+
+```typescript
+import { RunAutomation } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: RunAutomation = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                       | Type                                                                                                                                                                        | Required                                                                                                                                                                    | Description                                                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `automationTemplateIdCel`                                                                                                                                                   | *string*                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                          | The automationTemplateIdCel field.<br/>This field is part of the `automation_template` oneof.<br/>See the documentation for `c1.api.automations.v1.RunAutomation` for more details. |
+| `automationTemplateRef`                                                                                                                                                     | [shared.AutomationTemplateRef](../../../sdk/models/shared/automationtemplateref.md)                                                                                         | :heavy_minus_sign:                                                                                                                                                          | The AutomationTemplateRef message.                                                                                                                                          |
+| `automationContext`                                                                                                                                                         | [shared.AutomationContext](../../../sdk/models/shared/automationcontext.md)                                                                                                 | :heavy_minus_sign:                                                                                                                                                          | The AutomationContext message.                                                                                                                                              |

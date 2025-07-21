@@ -1,0 +1,17 @@
+# TaskExpandMask
+
+The task expand mask is an array of strings that specifes the related objects the requester wishes to have returned when making a request where the expand mask is part of the input. Use '*' to view all possible responses.
+
+## Example Usage
+
+```typescript
+import { TaskExpandMask } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: TaskExpandMask = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                      | Type                                                                                                                                                                                                                                       | Required                                                                                                                                                                                                                                   | Description                                                                                                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `paths`                                                                                                                                                                                                                                    | *string*[]                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                         | A list of paths to expand in the response. May be any combination of "*", "access_review_id", "user_id", "created_by_user_id", "app_id", "app_user_id", "app_entitlement_ids", "step_approver_ids", "identity_user_id", and "insight_ids". |

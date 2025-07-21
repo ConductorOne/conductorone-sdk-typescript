@@ -1,19 +1,68 @@
 # conductorone-sdk-typescript
 
+<!-- Start Summary [summary] -->
+## Summary
+
+ConductorOne API: The ConductorOne API is a HTTP API for managing ConductorOne resources.
+<!-- End Summary [summary] -->
+
+<!-- Start Table of Contents [toc] -->
+## Table of Contents
+<!-- $toc-max-depth=2 -->
+* [conductorone-sdk-typescript](#conductorone-sdk-typescript)
+  * [SDK Installation](#sdk-installation)
+  * [SDK Example Usage](#sdk-example-usage)
+  * [Available Resources and Operations](#available-resources-and-operations)
+  * [Requirements](#requirements)
+  * [Standalone functions](#standalone-functions)
+  * [Pagination](#pagination)
+  * [Retries](#retries)
+  * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
+  * [Custom HTTP Client](#custom-http-client)
+  * [Authentication](#authentication)
+  * [Debugging](#debugging)
+
+<!-- End Table of Contents [toc] -->
+
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
+
+> [!TIP]
+> To finish publishing your SDK to npm and others you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
+
+
+The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
 
 ### NPM
 
 ```bash
-npm add https://github.com/ConductorOne/conductorone-sdk-typescript
+npm add <UNSET>
+```
+
+### PNPM
+
+```bash
+pnpm add <UNSET>
+```
+
+### Bun
+
+```bash
+bun add <UNSET>
 ```
 
 ### Yarn
 
 ```bash
-yarn add https://github.com/ConductorOne/conductorone-sdk-typescript
+yarn add <UNSET> zod
+
+# Note that Yarn does not install peer dependencies automatically. You will need
+# to install zod as shown above.
 ```
+
+> [!NOTE]
+> This package is published with CommonJS and ES Modules (ESM) support.
 <!-- End SDK Installation [installation] -->
 
 <!-- Start SDK Example Usage [usage] -->
@@ -24,20 +73,17 @@ yarn add https://github.com/ConductorOne/conductorone-sdk-typescript
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
 async function run() {
-    const sdk = new ConductoroneSDKTypescript({
-        security: {
-            bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
-            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-        },
-    });
+  const result = await conductoroneSDKTypescript.accessConflict.createMonitor();
 
-    const result = await sdk.apps.create({
-        owners: ["<value>"],
-    });
-
-    // Handle the result
-    console.log(result);
+  console.log(result);
 }
 
 run();
@@ -48,54 +94,80 @@ run();
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
 
-### [apps](docs/sdks/apps/README.md)
+<details open>
+<summary>Available methods</summary>
 
-* [create](docs/sdks/apps/README.md#create) - Create
-* [delete](docs/sdks/apps/README.md#delete) - Delete
-* [get](docs/sdks/apps/README.md#get) - Get
-* [list](docs/sdks/apps/README.md#list) - List
-* [update](docs/sdks/apps/README.md#update) - Update
+### [accessConflict](docs/sdks/accessconflict/README.md)
 
-### [connector](docs/sdks/connector/README.md)
+* [createMonitor](docs/sdks/accessconflict/README.md#createmonitor) - Create Monitor
+* [deleteMonitor](docs/sdks/accessconflict/README.md#deletemonitor) - Delete Monitor
+* [getMonitor](docs/sdks/accessconflict/README.md#getmonitor) - Get Monitor
+* [updateMonitor](docs/sdks/accessconflict/README.md#updatemonitor) - Update Monitor
 
-* [create](docs/sdks/connector/README.md#create) - Create
-* [createDelegated](docs/sdks/connector/README.md#createdelegated) - Create Delegated
-* [delete](docs/sdks/connector/README.md#delete) - Delete
-* [forceSync](docs/sdks/connector/README.md#forcesync) - Force Sync
-* [get](docs/sdks/connector/README.md#get) - Get
-* [getCredentials](docs/sdks/connector/README.md#getcredentials) - Get Credentials
-* [list](docs/sdks/connector/README.md#list) - List
-* [revokeCredential](docs/sdks/connector/README.md#revokecredential) - Revoke Credential
-* [rotateCredential](docs/sdks/connector/README.md#rotatecredential) - Rotate Credential
-* [update](docs/sdks/connector/README.md#update) - Update
-* [updateDelegated](docs/sdks/connector/README.md#updatedelegated) - Update Delegated
+### [accountProvisionPolicyTest](docs/sdks/accountprovisionpolicytest/README.md)
 
-### [appEntitlements](docs/sdks/appentitlements/README.md)
+* [test](docs/sdks/accountprovisionpolicytest/README.md#test) - Test
 
-* [get](docs/sdks/appentitlements/README.md#get) - Get
-* [list](docs/sdks/appentitlements/README.md#list) - List
-* [listForAppResource](docs/sdks/appentitlements/README.md#listforappresource) - List For App Resource
-* [listForAppUser](docs/sdks/appentitlements/README.md#listforappuser) - List For App User
-* [listUsers](docs/sdks/appentitlements/README.md#listusers) - List Users
-* [update](docs/sdks/appentitlements/README.md#update) - Update
+### [appAccessRequestsDefaults](docs/sdks/appaccessrequestsdefaults/README.md)
 
-### [appEntitlementUserBinding](docs/sdks/appentitlementuserbinding/README.md)
-
-* [listAppUsersForIdentityWithGrant](docs/sdks/appentitlementuserbinding/README.md#listappusersforidentitywithgrant) - List App Users For Identity With Grant
+* [getAppAccessRequestsDefaults](docs/sdks/appaccessrequestsdefaults/README.md#getappaccessrequestsdefaults) - Get App Access Requests Defaults
+* [createAppAccessRequestsDefaults](docs/sdks/appaccessrequestsdefaults/README.md#createappaccessrequestsdefaults) - Create App Access Requests Defaults
+* [cancelAppAccessRequestsDefaults](docs/sdks/appaccessrequestsdefaults/README.md#cancelappaccessrequestsdefaults) - Cancel App Access Requests Defaults
 
 ### [appEntitlementOwners](docs/sdks/appentitlementowners/README.md)
 
-* [add](docs/sdks/appentitlementowners/README.md#add) - Add
 * [list](docs/sdks/appentitlementowners/README.md#list) - List
-* [remove](docs/sdks/appentitlementowners/README.md#remove) - Remove
+* [add](docs/sdks/appentitlementowners/README.md#add) - Add
 * [set](docs/sdks/appentitlementowners/README.md#set) - Set
+* [remove](docs/sdks/appentitlementowners/README.md#remove) - Remove
+
+### [appEntitlements](docs/sdks/appentitlements/README.md)
+
+* [list](docs/sdks/appentitlements/README.md#list) - List
+* [create](docs/sdks/appentitlements/README.md#create) - Create
+* [addManuallyManagedMembers](docs/sdks/appentitlements/README.md#addmanuallymanagedmembers) - Add Manually Managed Members
+* [deleteAutomation](docs/sdks/appentitlements/README.md#deleteautomation) - Delete Automation
+* [getAutomation](docs/sdks/appentitlements/README.md#getautomation) - Get Automation
+* [createAutomation](docs/sdks/appentitlements/README.md#createautomation) - Create Automation
+* [removeAutomationExclusion](docs/sdks/appentitlements/README.md#removeautomationexclusion) - Remove Automation Exclusion
+* [listAutomationExclusions](docs/sdks/appentitlements/README.md#listautomationexclusions) - List Automation Exclusions
+* [addAutomationExclusion](docs/sdks/appentitlements/README.md#addautomationexclusion) - Add Automation Exclusion
+* [updateAutomation](docs/sdks/appentitlements/README.md#updateautomation) - Update Automation
+* [removeEntitlementMembership](docs/sdks/appentitlements/README.md#removeentitlementmembership) - Remove Entitlement Membership
+* [~~listUsers~~](docs/sdks/appentitlements/README.md#listusers) - List Users :warning: **Deprecated**
+* [delete](docs/sdks/appentitlements/README.md#delete) - Delete
+* [get](docs/sdks/appentitlements/README.md#get) - Get
+* [update](docs/sdks/appentitlements/README.md#update) - Update
+* [listForAppResource](docs/sdks/appentitlements/README.md#listforappresource) - List For App Resource
+* [listForAppUser](docs/sdks/appentitlements/README.md#listforappuser) - List For App User
+
+### [appEntitlementSearch](docs/sdks/appentitlementsearch/README.md)
+
+* [searchAppEntitlementsWithExpired](docs/sdks/appentitlementsearch/README.md#searchappentitlementswithexpired) - Search App Entitlements With Expired
+* [searchAppEntitlementsForAppUser](docs/sdks/appentitlementsearch/README.md#searchappentitlementsforappuser) - Search App Entitlements For App User
+* [search](docs/sdks/appentitlementsearch/README.md#search) - Search
+* [searchGrants](docs/sdks/appentitlementsearch/README.md#searchgrants) - Search Grants
+
+### [appEntitlementsProxy](docs/sdks/appentitlementsproxy/README.md)
+
+* [delete](docs/sdks/appentitlementsproxy/README.md#delete) - Delete
+* [get](docs/sdks/appentitlementsproxy/README.md#get) - Get
+* [create](docs/sdks/appentitlementsproxy/README.md#create) - Create
+
+### [appEntitlementUserBinding](docs/sdks/appentitlementuserbinding/README.md)
+
+* [removeGrantDuration](docs/sdks/appentitlementuserbinding/README.md#removegrantduration) - Remove Grant Duration
+* [updateGrantDuration](docs/sdks/appentitlementuserbinding/README.md#updategrantduration) - Update Grant Duration
+* [listAppUsersForIdentityWithGrant](docs/sdks/appentitlementuserbinding/README.md#listappusersforidentitywithgrant) - List App Users For Identity With Grant
+* [searchGrantFeed](docs/sdks/appentitlementuserbinding/README.md#searchgrantfeed) - Search Grant Feed
+* [searchPastGrants](docs/sdks/appentitlementuserbinding/README.md#searchpastgrants) - Search Past Grants
 
 ### [appOwners](docs/sdks/appowners/README.md)
 
-* [add](docs/sdks/appowners/README.md#add) - Add
 * [list](docs/sdks/appowners/README.md#list) - List
-* [remove](docs/sdks/appowners/README.md#remove) - Remove
 * [set](docs/sdks/appowners/README.md#set) - Set
+* [remove](docs/sdks/appowners/README.md#remove) - Remove
+* [add](docs/sdks/appowners/README.md#add) - Add
 
 ### [appReport](docs/sdks/appreport/README.md)
 
@@ -105,19 +177,44 @@ run();
 
 * [generateReport](docs/sdks/appreportaction/README.md#generatereport) - Generate Report
 
-### [appResourceType](docs/sdks/appresourcetype/README.md)
-
-* [get](docs/sdks/appresourcetype/README.md#get) - Get
-* [list](docs/sdks/appresourcetype/README.md#list) - List
-
 ### [appResource](docs/sdks/appresource/README.md)
 
-* [get](docs/sdks/appresource/README.md#get) - Get
 * [list](docs/sdks/appresource/README.md#list) - List
+* [createManuallyManagedAppResource](docs/sdks/appresource/README.md#createmanuallymanagedappresource) - Create Manually Managed App Resource
+* [deleteManuallyManagedAppResource](docs/sdks/appresource/README.md#deletemanuallymanagedappresource) - Delete Manually Managed App Resource
+* [get](docs/sdks/appresource/README.md#get) - Get
+* [update](docs/sdks/appresource/README.md#update) - Update
 
 ### [appResourceOwners](docs/sdks/appresourceowners/README.md)
 
+* [remove](docs/sdks/appresourceowners/README.md#remove) - Remove
 * [list](docs/sdks/appresourceowners/README.md#list) - List
+* [add](docs/sdks/appresourceowners/README.md#add) - Add
+
+### [appResourceSearch](docs/sdks/appresourcesearch/README.md)
+
+* [searchAppResourceTypes](docs/sdks/appresourcesearch/README.md#searchappresourcetypes) - Search App Resource Types
+* [searchAppResources](docs/sdks/appresourcesearch/README.md#searchappresources) - Search App Resources
+
+### [appResourceType](docs/sdks/appresourcetype/README.md)
+
+* [list](docs/sdks/appresourcetype/README.md#list) - List
+* [createManuallyManagedResourceType](docs/sdks/appresourcetype/README.md#createmanuallymanagedresourcetype) - Create Manually Managed Resource Type
+* [deleteManuallyManagedResourceType](docs/sdks/appresourcetype/README.md#deletemanuallymanagedresourcetype) - Delete Manually Managed Resource Type
+* [get](docs/sdks/appresourcetype/README.md#get) - Get
+* [updateManuallyManagedResourceType](docs/sdks/appresourcetype/README.md#updatemanuallymanagedresourcetype) - Update Manually Managed Resource Type
+
+### [apps](docs/sdks/apps/README.md)
+
+* [list](docs/sdks/apps/README.md#list) - List
+* [create](docs/sdks/apps/README.md#create) - Create
+* [delete](docs/sdks/apps/README.md#delete) - Delete
+* [get](docs/sdks/apps/README.md#get) - Get
+* [update](docs/sdks/apps/README.md#update) - Update
+
+### [appSearch](docs/sdks/appsearch/README.md)
+
+* [search](docs/sdks/appsearch/README.md#search) - Search
 
 ### [appUsageControls](docs/sdks/appusagecontrols/README.md)
 
@@ -126,126 +223,242 @@ run();
 
 ### [appUser](docs/sdks/appuser/README.md)
 
+* [list](docs/sdks/appuser/README.md#list) - List
+* [listAppUserCredentials](docs/sdks/appuser/README.md#listappusercredentials) - List App User Credentials
+* [listAppUsersForUser](docs/sdks/appuser/README.md#listappusersforuser) - List App Users For User
 * [update](docs/sdks/appuser/README.md#update) - Update
+* [search](docs/sdks/appuser/README.md#search) - Search
 
 ### [attributes](docs/sdks/attributes/README.md)
 
-* [createAttributeValue](docs/sdks/attributes/README.md#createattributevalue) - Create Attribute Value
 * [deleteAttributeValue](docs/sdks/attributes/README.md#deleteattributevalue) - Delete Attribute Value
+* [createAttributeValue](docs/sdks/attributes/README.md#createattributevalue) - Create Attribute Value
 * [getAttributeValue](docs/sdks/attributes/README.md#getattributevalue) - Get Attribute Value
+* [createComplianceFrameworkAttributeValue](docs/sdks/attributes/README.md#createcomplianceframeworkattributevalue) - Create Compliance Framework Attribute Value
+* [deleteComplianceFrameworkAttributeValue](docs/sdks/attributes/README.md#deletecomplianceframeworkattributevalue) - Delete Compliance Framework Attribute Value
+* [getComplianceFrameworkAttributeValue](docs/sdks/attributes/README.md#getcomplianceframeworkattributevalue) - Get Compliance Framework Attribute Value
+* [createRiskLevelAttributeValue](docs/sdks/attributes/README.md#createrisklevelattributevalue) - Create Risk Level Attribute Value
+* [deleteRiskLevelAttributeValue](docs/sdks/attributes/README.md#deleterisklevelattributevalue) - Delete Risk Level Attribute Value
+* [getRiskLevelAttributeValue](docs/sdks/attributes/README.md#getrisklevelattributevalue) - Get Risk Level Attribute Value
 * [listAttributeTypes](docs/sdks/attributes/README.md#listattributetypes) - List Attribute Types
 * [listAttributeValues](docs/sdks/attributes/README.md#listattributevalues) - List Attribute Values
-
-### [auth](docs/sdks/auth/README.md)
-
-* [introspect](docs/sdks/auth/README.md#introspect) - Introspect
-
-### [requestCatalogManagement](docs/sdks/requestcatalogmanagement/README.md)
-
-* [addAccessEntitlements](docs/sdks/requestcatalogmanagement/README.md#addaccessentitlements) - Add Access Entitlements
-* [addAppEntitlements](docs/sdks/requestcatalogmanagement/README.md#addappentitlements) - Add App Entitlements
-* [create](docs/sdks/requestcatalogmanagement/README.md#create) - Create
-* [delete](docs/sdks/requestcatalogmanagement/README.md#delete) - Delete
-* [get](docs/sdks/requestcatalogmanagement/README.md#get) - Get
-* [list](docs/sdks/requestcatalogmanagement/README.md#list) - List
-* [listEntitlementsForAccess](docs/sdks/requestcatalogmanagement/README.md#listentitlementsforaccess) - List Entitlements For Access
-* [listEntitlementsPerCatalog](docs/sdks/requestcatalogmanagement/README.md#listentitlementspercatalog) - List Entitlements Per Catalog
-* [removeAccessEntitlements](docs/sdks/requestcatalogmanagement/README.md#removeaccessentitlements) - Remove Access Entitlements
-* [removeAppEntitlements](docs/sdks/requestcatalogmanagement/README.md#removeappentitlements) - Remove App Entitlements
-* [update](docs/sdks/requestcatalogmanagement/README.md#update) - Update
-
-### [directory](docs/sdks/directory/README.md)
-
-* [create](docs/sdks/directory/README.md#create) - Create
-* [delete](docs/sdks/directory/README.md#delete) - Delete
-* [get](docs/sdks/directory/README.md#get) - Get
-* [list](docs/sdks/directory/README.md#list) - List
-
-### [personalClient](docs/sdks/personalclient/README.md)
-
-* [create](docs/sdks/personalclient/README.md#create) - Create
-
-### [roles](docs/sdks/roles/README.md)
-
-* [get](docs/sdks/roles/README.md#get) - Get
-* [list](docs/sdks/roles/README.md#list) - List
-* [update](docs/sdks/roles/README.md#update) - Update
-
-### [policies](docs/sdks/policies/README.md)
-
-* [create](docs/sdks/policies/README.md#create) - Create
-* [delete](docs/sdks/policies/README.md#delete) - Delete
-* [get](docs/sdks/policies/README.md#get) - Get
-* [list](docs/sdks/policies/README.md#list) - List
-* [update](docs/sdks/policies/README.md#update) - Update
-
-### [policyValidate](docs/sdks/policyvalidate/README.md)
-
-* [validateCEL](docs/sdks/policyvalidate/README.md#validatecel) - Validate Cel
-
-### [appResourceSearch](docs/sdks/appresourcesearch/README.md)
-
-* [searchAppResourceTypes](docs/sdks/appresourcesearch/README.md#searchappresourcetypes) - Search App Resource Types
-
-### [appSearch](docs/sdks/appsearch/README.md)
-
-* [search](docs/sdks/appsearch/README.md#search) - Search
 
 ### [attributeSearch](docs/sdks/attributesearch/README.md)
 
 * [searchAttributeValues](docs/sdks/attributesearch/README.md#searchattributevalues) - Search Attribute Values
 
-### [appEntitlementSearch](docs/sdks/appentitlementsearch/README.md)
+### [auth](docs/sdks/auth/README.md)
 
-* [search](docs/sdks/appentitlementsearch/README.md#search) - Search
+* [introspect](docs/sdks/auth/README.md#introspect) - Introspect
 
-### [policySearch](docs/sdks/policysearch/README.md)
+### [automation](docs/sdks/automation/README.md)
 
-* [search](docs/sdks/policysearch/README.md#search) - Search
+* [listAutomations](docs/sdks/automation/README.md#listautomations) - List Automations
+* [createAutomation](docs/sdks/automation/README.md#createautomation) - Create Automation
+* [deleteAutomation](docs/sdks/automation/README.md#deleteautomation) - Delete Automation
+* [getAutomation](docs/sdks/automation/README.md#getautomation) - Get Automation
+* [updateAutomation](docs/sdks/automation/README.md#updateautomation) - Update Automation
+* [executeAutomation](docs/sdks/automation/README.md#executeautomation) - Execute Automation
 
-### [requestCatalogSearch](docs/sdks/requestcatalogsearch/README.md)
+### [automationExecution](docs/sdks/automationexecution/README.md)
 
-* [searchEntitlements](docs/sdks/requestcatalogsearch/README.md#searchentitlements) - Search Entitlements
+* [listAutomationExecutions](docs/sdks/automationexecution/README.md#listautomationexecutions) - List Automation Executions
+* [getAutomationExecution](docs/sdks/automationexecution/README.md#getautomationexecution) - Get Automation Execution
 
-### [taskSearch](docs/sdks/tasksearch/README.md)
+### [automationExecutionActions](docs/sdks/automationexecutionactions/README.md)
 
-* [search](docs/sdks/tasksearch/README.md#search) - Search
+* [terminateAutomation](docs/sdks/automationexecutionactions/README.md#terminateautomation) - Terminate Automation
 
-### [userSearch](docs/sdks/usersearch/README.md)
+### [automationExecutionSearch](docs/sdks/automationexecutionsearch/README.md)
 
-* [search](docs/sdks/usersearch/README.md#search) - Search
+* [searchAutomationExecutions](docs/sdks/automationexecutionsearch/README.md#searchautomationexecutions) - Search Automation Executions
+
+### [automationSearch](docs/sdks/automationsearch/README.md)
+
+* [searchAutomationTemplateVersions](docs/sdks/automationsearch/README.md#searchautomationtemplateversions) - Search Automation Template Versions
+* [searchAutomations](docs/sdks/automationsearch/README.md#searchautomations) - Search Automations
 
 ### [awsExternalIDSettings](docs/sdks/awsexternalidsettings/README.md)
 
 * [get](docs/sdks/awsexternalidsettings/README.md#get) - Get
 
+
+### [connector](docs/sdks/connector/README.md)
+
+* [list](docs/sdks/connector/README.md#list) - List
+* [createDelegated](docs/sdks/connector/README.md#createdelegated) - Create Delegated
+* [rotateCredential](docs/sdks/connector/README.md#rotatecredential) - Rotate Credential
+* [getCredentials](docs/sdks/connector/README.md#getcredentials) - Get Credentials
+* [revokeCredential](docs/sdks/connector/README.md#revokecredential) - Revoke Credential
+* [forceSync](docs/sdks/connector/README.md#forcesync) - Force Sync
+* [delete](docs/sdks/connector/README.md#delete) - Delete
+* [get](docs/sdks/connector/README.md#get) - Get
+* [update](docs/sdks/connector/README.md#update) - Update
+* [create](docs/sdks/connector/README.md#create) - Create
+* [updateDelegated](docs/sdks/connector/README.md#updatedelegated) - Update Delegated
+* [validateHTTPConnectorConfig](docs/sdks/connector/README.md#validatehttpconnectorconfig) - Validate Http Connector Config
+
+### [directory](docs/sdks/directory/README.md)
+
+* [list](docs/sdks/directory/README.md#list) - List
+* [create](docs/sdks/directory/README.md#create) - Create
+* [delete](docs/sdks/directory/README.md#delete) - Delete
+* [get](docs/sdks/directory/README.md#get) - Get
+
+### [export](docs/sdks/export/README.md)
+
+* [list](docs/sdks/export/README.md#list) - List
+* [create](docs/sdks/export/README.md#create) - Create
+* [delete](docs/sdks/export/README.md#delete) - Delete
+* [get](docs/sdks/export/README.md#get) - Get
+* [update](docs/sdks/export/README.md#update) - Update
+* [listEvents](docs/sdks/export/README.md#listevents) - List Events
+
+### [exportsSearch](docs/sdks/exportssearch/README.md)
+
+* [search](docs/sdks/exportssearch/README.md#search) - Search
+
+### [orgDomain](docs/sdks/orgdomain/README.md)
+
+* [list](docs/sdks/orgdomain/README.md#list) - List
+* [update](docs/sdks/orgdomain/README.md#update) - Update
+
+### [personalClient](docs/sdks/personalclient/README.md)
+
+* [list](docs/sdks/personalclient/README.md#list) - NOTE: Only shows personal clients for the current user.
+* [create](docs/sdks/personalclient/README.md#create) - Create
+* [delete](docs/sdks/personalclient/README.md#delete) - Delete
+* [get](docs/sdks/personalclient/README.md#get) - Get
+* [update](docs/sdks/personalclient/README.md#update) - Update
+
+### [personalClientSearch](docs/sdks/personalclientsearch/README.md)
+
+* [search](docs/sdks/personalclientsearch/README.md#search) - NOTE: Searches personal clients for all users
+
+### [policies](docs/sdks/policies/README.md)
+
+* [list](docs/sdks/policies/README.md#list) - List
+* [create](docs/sdks/policies/README.md#create) - Create
+* [delete](docs/sdks/policies/README.md#delete) - Delete
+* [get](docs/sdks/policies/README.md#get) - Get
+* [update](docs/sdks/policies/README.md#update) - Update
+
+### [policySearch](docs/sdks/policysearch/README.md)
+
+* [search](docs/sdks/policysearch/README.md#search) - Search
+
+### [policyValidate](docs/sdks/policyvalidate/README.md)
+
+* [validateCEL](docs/sdks/policyvalidate/README.md#validatecel) - Validate Cel
+
+### [requestCatalogManagement](docs/sdks/requestcatalogmanagement/README.md)
+
+* [list](docs/sdks/requestcatalogmanagement/README.md#list) - List
+* [create](docs/sdks/requestcatalogmanagement/README.md#create) - Create
+* [listAllEntitlementIdsPerApp](docs/sdks/requestcatalogmanagement/README.md#listallentitlementidsperapp) - List All Entitlement Ids Per App
+* [listEntitlementsPerCatalog](docs/sdks/requestcatalogmanagement/README.md#listentitlementspercatalog) - List Entitlements Per Catalog
+* [removeAppEntitlements](docs/sdks/requestcatalogmanagement/README.md#removeappentitlements) - Remove App Entitlements
+* [addAppEntitlements](docs/sdks/requestcatalogmanagement/README.md#addappentitlements) - Add App Entitlements
+* [removeAccessEntitlements](docs/sdks/requestcatalogmanagement/README.md#removeaccessentitlements) - Remove Access Entitlements
+* [addAccessEntitlements](docs/sdks/requestcatalogmanagement/README.md#addaccessentitlements) - Add Access Entitlements
+* [listEntitlementsForAccess](docs/sdks/requestcatalogmanagement/README.md#listentitlementsforaccess) - List Entitlements For Access
+* [delete](docs/sdks/requestcatalogmanagement/README.md#delete) - Delete
+* [get](docs/sdks/requestcatalogmanagement/README.md#get) - Get
+* [update](docs/sdks/requestcatalogmanagement/README.md#update) - Update
+* [deleteBundleAutomation](docs/sdks/requestcatalogmanagement/README.md#deletebundleautomation) - Delete Bundle Automation
+* [getBundleAutomation](docs/sdks/requestcatalogmanagement/README.md#getbundleautomation) - Get Bundle Automation
+* [setBundleAutomation](docs/sdks/requestcatalogmanagement/README.md#setbundleautomation) - Set Bundle Automation
+* [createBundleAutomation](docs/sdks/requestcatalogmanagement/README.md#createbundleautomation) - Create Bundle Automation
+* [forceRunBundleAutomation](docs/sdks/requestcatalogmanagement/README.md#forcerunbundleautomation) - Force Run Bundle Automation
+
+### [requestCatalogSearch](docs/sdks/requestcatalogsearch/README.md)
+
+* [searchEntitlements](docs/sdks/requestcatalogsearch/README.md#searchentitlements) - Search Entitlements
+
+### [roles](docs/sdks/roles/README.md)
+
+* [list](docs/sdks/roles/README.md#list) - List
+* [get](docs/sdks/roles/README.md#get) - Get
+* [update](docs/sdks/roles/README.md#update) - Update
+
 ### [sessionSettings](docs/sdks/sessionsettings/README.md)
 
 * [get](docs/sdks/sessionsettings/README.md#get) - Get
 * [update](docs/sdks/sessionsettings/README.md#update) - Update
+* [testSourceIP](docs/sdks/sessionsettings/README.md#testsourceip) - Test Source Ip
+
+### [stepUpProvider](docs/sdks/stepupprovider/README.md)
+
+* [search](docs/sdks/stepupprovider/README.md#search) - Search
+* [list](docs/sdks/stepupprovider/README.md#list) - List
+* [create](docs/sdks/stepupprovider/README.md#create) - Create
+* [delete](docs/sdks/stepupprovider/README.md#delete) - Delete
+* [get](docs/sdks/stepupprovider/README.md#get) - Get
+* [update](docs/sdks/stepupprovider/README.md#update) - Update
+* [updateSecret](docs/sdks/stepupprovider/README.md#updatesecret) - Update Secret
+* [test](docs/sdks/stepupprovider/README.md#test) - Test
+
+### [stepUpTransaction](docs/sdks/stepuptransaction/README.md)
+
+* [search](docs/sdks/stepuptransaction/README.md#search) - Search
+* [get](docs/sdks/stepuptransaction/README.md#get) - Get
+
+### [systemLog](docs/sdks/systemlog/README.md)
+
+* [listEvents](docs/sdks/systemlog/README.md#listevents) - List Events
 
 ### [task](docs/sdks/task/README.md)
 
 * [createGrantTask](docs/sdks/task/README.md#creategranttask) - Create Grant Task
+* [createOffboardingTask](docs/sdks/task/README.md#createoffboardingtask) - Create Offboarding Task
 * [createRevokeTask](docs/sdks/task/README.md#createrevoketask) - Create Revoke Task
 * [get](docs/sdks/task/README.md#get) - Get
 
 ### [taskActions](docs/sdks/taskactions/README.md)
 
 * [approve](docs/sdks/taskactions/README.md#approve) - Approve
+* [approveWithStepUp](docs/sdks/taskactions/README.md#approvewithstepup) - Approve With Step Up
+* [close](docs/sdks/taskactions/README.md#close) - Close
 * [comment](docs/sdks/taskactions/README.md#comment) - Comment
 * [deny](docs/sdks/taskactions/README.md#deny) - Deny
 * [escalateToEmergencyAccess](docs/sdks/taskactions/README.md#escalatetoemergencyaccess) - Escalate To Emergency Access
+* [processNow](docs/sdks/taskactions/README.md#processnow) - Process Now
+* [reassign](docs/sdks/taskactions/README.md#reassign) - Reassign
+* [hardReset](docs/sdks/taskactions/README.md#hardreset) - Hard Reset
 * [restart](docs/sdks/taskactions/README.md#restart) - Restart
+* [skipStep](docs/sdks/taskactions/README.md#skipstep) - Skip Step
+
+### [taskAudit](docs/sdks/taskaudit/README.md)
+
+* [list](docs/sdks/taskaudit/README.md#list) - List
+
+### [taskSearch](docs/sdks/tasksearch/README.md)
+
+* [search](docs/sdks/tasksearch/README.md#search) - Search
 
 ### [user](docs/sdks/user/README.md)
 
-* [get](docs/sdks/user/README.md#get) - Get
 * [list](docs/sdks/user/README.md#list) - List
+* [get](docs/sdks/user/README.md#get) - Get
+
+### [userSearch](docs/sdks/usersearch/README.md)
+
+* [search](docs/sdks/usersearch/README.md#search) - Search
 
 ### [webhooks](docs/sdks/webhooks/README.md)
 
+* [list](docs/sdks/webhooks/README.md#list) - List
+* [create](docs/sdks/webhooks/README.md#create) - Create
+* [delete](docs/sdks/webhooks/README.md#delete) - Delete
+* [get](docs/sdks/webhooks/README.md#get) - Get
+* [update](docs/sdks/webhooks/README.md#update) - Update
 * [test](docs/sdks/webhooks/README.md#test) - Test
+
+### [webhooksSearch](docs/sdks/webhookssearch/README.md)
+
+* [search](docs/sdks/webhookssearch/README.md#search) - Search
+
+</details>
 <!-- End Available Resources and Operations [operations] -->
 
 
@@ -258,121 +471,449 @@ run();
 For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 <!-- End Requirements [requirements] -->
 
-<!-- Start Error Handling [errors] -->
-## Error Handling
+<!-- Start Standalone functions [standalone-funcs] -->
+## Standalone functions
 
-All SDK methods return a response object or throw an error. If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
+All the methods listed above are available as standalone functions. These
+functions are ideal for use in applications running in the browser, serverless
+runtimes or other environments where application bundle size is a primary
+concern. When using a bundler to build your application, all unused
+functionality will be either excluded from the final bundle or tree-shaken away.
 
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4xx-5xx         | */*             |
+To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
-Validation errors can also occur when either method arguments or data returned from the server do not match the expected format. The `SDKValidationError` that is thrown as a result will capture the raw value that failed validation in an attribute called `rawValue`. Additionally, a `pretty()` method is available on this error that can be used to log a nicely formatted string since validation errors can list many issues and the plain error string may be difficult read when debugging. 
+<details>
 
+<summary>Available standalone functions</summary>
+
+- [`accessConflictCreateMonitor`](docs/sdks/accessconflict/README.md#createmonitor) - Create Monitor
+- [`accessConflictDeleteMonitor`](docs/sdks/accessconflict/README.md#deletemonitor) - Delete Monitor
+- [`accessConflictGetMonitor`](docs/sdks/accessconflict/README.md#getmonitor) - Get Monitor
+- [`accessConflictUpdateMonitor`](docs/sdks/accessconflict/README.md#updatemonitor) - Update Monitor
+- [`accountProvisionPolicyTestTest`](docs/sdks/accountprovisionpolicytest/README.md#test) - Test
+- [`appAccessRequestsDefaultsCancelAppAccessRequestsDefaults`](docs/sdks/appaccessrequestsdefaults/README.md#cancelappaccessrequestsdefaults) - Cancel App Access Requests Defaults
+- [`appAccessRequestsDefaultsCreateAppAccessRequestsDefaults`](docs/sdks/appaccessrequestsdefaults/README.md#createappaccessrequestsdefaults) - Create App Access Requests Defaults
+- [`appAccessRequestsDefaultsGetAppAccessRequestsDefaults`](docs/sdks/appaccessrequestsdefaults/README.md#getappaccessrequestsdefaults) - Get App Access Requests Defaults
+- [`appEntitlementOwnersAdd`](docs/sdks/appentitlementowners/README.md#add) - Add
+- [`appEntitlementOwnersList`](docs/sdks/appentitlementowners/README.md#list) - List
+- [`appEntitlementOwnersRemove`](docs/sdks/appentitlementowners/README.md#remove) - Remove
+- [`appEntitlementOwnersSet`](docs/sdks/appentitlementowners/README.md#set) - Set
+- [`appEntitlementsAddAutomationExclusion`](docs/sdks/appentitlements/README.md#addautomationexclusion) - Add Automation Exclusion
+- [`appEntitlementsAddManuallyManagedMembers`](docs/sdks/appentitlements/README.md#addmanuallymanagedmembers) - Add Manually Managed Members
+- [`appEntitlementsCreate`](docs/sdks/appentitlements/README.md#create) - Create
+- [`appEntitlementsCreateAutomation`](docs/sdks/appentitlements/README.md#createautomation) - Create Automation
+- [`appEntitlementsDelete`](docs/sdks/appentitlements/README.md#delete) - Delete
+- [`appEntitlementsDeleteAutomation`](docs/sdks/appentitlements/README.md#deleteautomation) - Delete Automation
+- [`appEntitlementSearchSearch`](docs/sdks/appentitlementsearch/README.md#search) - Search
+- [`appEntitlementSearchSearchAppEntitlementsForAppUser`](docs/sdks/appentitlementsearch/README.md#searchappentitlementsforappuser) - Search App Entitlements For App User
+- [`appEntitlementSearchSearchAppEntitlementsWithExpired`](docs/sdks/appentitlementsearch/README.md#searchappentitlementswithexpired) - Search App Entitlements With Expired
+- [`appEntitlementSearchSearchGrants`](docs/sdks/appentitlementsearch/README.md#searchgrants) - Search Grants
+- [`appEntitlementsGet`](docs/sdks/appentitlements/README.md#get) - Get
+- [`appEntitlementsGetAutomation`](docs/sdks/appentitlements/README.md#getautomation) - Get Automation
+- [`appEntitlementsList`](docs/sdks/appentitlements/README.md#list) - List
+- [`appEntitlementsListAutomationExclusions`](docs/sdks/appentitlements/README.md#listautomationexclusions) - List Automation Exclusions
+- [`appEntitlementsListForAppResource`](docs/sdks/appentitlements/README.md#listforappresource) - List For App Resource
+- [`appEntitlementsListForAppUser`](docs/sdks/appentitlements/README.md#listforappuser) - List For App User
+- [`appEntitlementsProxyCreate`](docs/sdks/appentitlementsproxy/README.md#create) - Create
+- [`appEntitlementsProxyDelete`](docs/sdks/appentitlementsproxy/README.md#delete) - Delete
+- [`appEntitlementsProxyGet`](docs/sdks/appentitlementsproxy/README.md#get) - Get
+- [`appEntitlementsRemoveAutomationExclusion`](docs/sdks/appentitlements/README.md#removeautomationexclusion) - Remove Automation Exclusion
+- [`appEntitlementsRemoveEntitlementMembership`](docs/sdks/appentitlements/README.md#removeentitlementmembership) - Remove Entitlement Membership
+- [`appEntitlementsUpdate`](docs/sdks/appentitlements/README.md#update) - Update
+- [`appEntitlementsUpdateAutomation`](docs/sdks/appentitlements/README.md#updateautomation) - Update Automation
+- [`appEntitlementUserBindingListAppUsersForIdentityWithGrant`](docs/sdks/appentitlementuserbinding/README.md#listappusersforidentitywithgrant) - List App Users For Identity With Grant
+- [`appEntitlementUserBindingRemoveGrantDuration`](docs/sdks/appentitlementuserbinding/README.md#removegrantduration) - Remove Grant Duration
+- [`appEntitlementUserBindingSearchGrantFeed`](docs/sdks/appentitlementuserbinding/README.md#searchgrantfeed) - Search Grant Feed
+- [`appEntitlementUserBindingSearchPastGrants`](docs/sdks/appentitlementuserbinding/README.md#searchpastgrants) - Search Past Grants
+- [`appEntitlementUserBindingUpdateGrantDuration`](docs/sdks/appentitlementuserbinding/README.md#updategrantduration) - Update Grant Duration
+- [`appOwnersAdd`](docs/sdks/appowners/README.md#add) - Add
+- [`appOwnersList`](docs/sdks/appowners/README.md#list) - List
+- [`appOwnersRemove`](docs/sdks/appowners/README.md#remove) - Remove
+- [`appOwnersSet`](docs/sdks/appowners/README.md#set) - Set
+- [`appReportActionGenerateReport`](docs/sdks/appreportaction/README.md#generatereport) - Generate Report
+- [`appReportList`](docs/sdks/appreport/README.md#list) - List
+- [`appResourceCreateManuallyManagedAppResource`](docs/sdks/appresource/README.md#createmanuallymanagedappresource) - Create Manually Managed App Resource
+- [`appResourceDeleteManuallyManagedAppResource`](docs/sdks/appresource/README.md#deletemanuallymanagedappresource) - Delete Manually Managed App Resource
+- [`appResourceGet`](docs/sdks/appresource/README.md#get) - Get
+- [`appResourceList`](docs/sdks/appresource/README.md#list) - List
+- [`appResourceOwnersAdd`](docs/sdks/appresourceowners/README.md#add) - Add
+- [`appResourceOwnersList`](docs/sdks/appresourceowners/README.md#list) - List
+- [`appResourceOwnersRemove`](docs/sdks/appresourceowners/README.md#remove) - Remove
+- [`appResourceSearchSearchAppResources`](docs/sdks/appresourcesearch/README.md#searchappresources) - Search App Resources
+- [`appResourceSearchSearchAppResourceTypes`](docs/sdks/appresourcesearch/README.md#searchappresourcetypes) - Search App Resource Types
+- [`appResourceTypeCreateManuallyManagedResourceType`](docs/sdks/appresourcetype/README.md#createmanuallymanagedresourcetype) - Create Manually Managed Resource Type
+- [`appResourceTypeDeleteManuallyManagedResourceType`](docs/sdks/appresourcetype/README.md#deletemanuallymanagedresourcetype) - Delete Manually Managed Resource Type
+- [`appResourceTypeGet`](docs/sdks/appresourcetype/README.md#get) - Get
+- [`appResourceTypeList`](docs/sdks/appresourcetype/README.md#list) - List
+- [`appResourceTypeUpdateManuallyManagedResourceType`](docs/sdks/appresourcetype/README.md#updatemanuallymanagedresourcetype) - Update Manually Managed Resource Type
+- [`appResourceUpdate`](docs/sdks/appresource/README.md#update) - Update
+- [`appsCreate`](docs/sdks/apps/README.md#create) - Create
+- [`appsDelete`](docs/sdks/apps/README.md#delete) - Delete
+- [`appSearchSearch`](docs/sdks/appsearch/README.md#search) - Search
+- [`appsGet`](docs/sdks/apps/README.md#get) - Get
+- [`appsList`](docs/sdks/apps/README.md#list) - List
+- [`appsUpdate`](docs/sdks/apps/README.md#update) - Update
+- [`appUsageControlsGet`](docs/sdks/appusagecontrols/README.md#get) - Get
+- [`appUsageControlsUpdate`](docs/sdks/appusagecontrols/README.md#update) - Update
+- [`appUserList`](docs/sdks/appuser/README.md#list) - List
+- [`appUserListAppUserCredentials`](docs/sdks/appuser/README.md#listappusercredentials) - List App User Credentials
+- [`appUserListAppUsersForUser`](docs/sdks/appuser/README.md#listappusersforuser) - List App Users For User
+- [`appUserSearch`](docs/sdks/appuser/README.md#search) - Search
+- [`appUserUpdate`](docs/sdks/appuser/README.md#update) - Update
+- [`attributesCreateAttributeValue`](docs/sdks/attributes/README.md#createattributevalue) - Create Attribute Value
+- [`attributesCreateComplianceFrameworkAttributeValue`](docs/sdks/attributes/README.md#createcomplianceframeworkattributevalue) - Create Compliance Framework Attribute Value
+- [`attributesCreateRiskLevelAttributeValue`](docs/sdks/attributes/README.md#createrisklevelattributevalue) - Create Risk Level Attribute Value
+- [`attributesDeleteAttributeValue`](docs/sdks/attributes/README.md#deleteattributevalue) - Delete Attribute Value
+- [`attributesDeleteComplianceFrameworkAttributeValue`](docs/sdks/attributes/README.md#deletecomplianceframeworkattributevalue) - Delete Compliance Framework Attribute Value
+- [`attributesDeleteRiskLevelAttributeValue`](docs/sdks/attributes/README.md#deleterisklevelattributevalue) - Delete Risk Level Attribute Value
+- [`attributeSearchSearchAttributeValues`](docs/sdks/attributesearch/README.md#searchattributevalues) - Search Attribute Values
+- [`attributesGetAttributeValue`](docs/sdks/attributes/README.md#getattributevalue) - Get Attribute Value
+- [`attributesGetComplianceFrameworkAttributeValue`](docs/sdks/attributes/README.md#getcomplianceframeworkattributevalue) - Get Compliance Framework Attribute Value
+- [`attributesGetRiskLevelAttributeValue`](docs/sdks/attributes/README.md#getrisklevelattributevalue) - Get Risk Level Attribute Value
+- [`attributesListAttributeTypes`](docs/sdks/attributes/README.md#listattributetypes) - List Attribute Types
+- [`attributesListAttributeValues`](docs/sdks/attributes/README.md#listattributevalues) - List Attribute Values
+- [`authIntrospect`](docs/sdks/auth/README.md#introspect) - Introspect
+- [`automationCreateAutomation`](docs/sdks/automation/README.md#createautomation) - Create Automation
+- [`automationDeleteAutomation`](docs/sdks/automation/README.md#deleteautomation) - Delete Automation
+- [`automationExecuteAutomation`](docs/sdks/automation/README.md#executeautomation) - Execute Automation
+- [`automationExecutionActionsTerminateAutomation`](docs/sdks/automationexecutionactions/README.md#terminateautomation) - Terminate Automation
+- [`automationExecutionGetAutomationExecution`](docs/sdks/automationexecution/README.md#getautomationexecution) - Get Automation Execution
+- [`automationExecutionListAutomationExecutions`](docs/sdks/automationexecution/README.md#listautomationexecutions) - List Automation Executions
+- [`automationExecutionSearchSearchAutomationExecutions`](docs/sdks/automationexecutionsearch/README.md#searchautomationexecutions) - Search Automation Executions
+- [`automationGetAutomation`](docs/sdks/automation/README.md#getautomation) - Get Automation
+- [`automationListAutomations`](docs/sdks/automation/README.md#listautomations) - List Automations
+- [`automationSearchSearchAutomations`](docs/sdks/automationsearch/README.md#searchautomations) - Search Automations
+- [`automationSearchSearchAutomationTemplateVersions`](docs/sdks/automationsearch/README.md#searchautomationtemplateversions) - Search Automation Template Versions
+- [`automationUpdateAutomation`](docs/sdks/automation/README.md#updateautomation) - Update Automation
+- [`awsExternalIDSettingsGet`](docs/sdks/awsexternalidsettings/README.md#get) - Get
+- [`connectorCreate`](docs/sdks/connector/README.md#create) - Create
+- [`connectorCreateDelegated`](docs/sdks/connector/README.md#createdelegated) - Create Delegated
+- [`connectorDelete`](docs/sdks/connector/README.md#delete) - Delete
+- [`connectorForceSync`](docs/sdks/connector/README.md#forcesync) - Force Sync
+- [`connectorGet`](docs/sdks/connector/README.md#get) - Get
+- [`connectorGetCredentials`](docs/sdks/connector/README.md#getcredentials) - Get Credentials
+- [`connectorList`](docs/sdks/connector/README.md#list) - List
+- [`connectorRevokeCredential`](docs/sdks/connector/README.md#revokecredential) - Revoke Credential
+- [`connectorRotateCredential`](docs/sdks/connector/README.md#rotatecredential) - Rotate Credential
+- [`connectorUpdate`](docs/sdks/connector/README.md#update) - Update
+- [`connectorUpdateDelegated`](docs/sdks/connector/README.md#updatedelegated) - Update Delegated
+- [`connectorValidateHTTPConnectorConfig`](docs/sdks/connector/README.md#validatehttpconnectorconfig) - Validate Http Connector Config
+- [`directoryCreate`](docs/sdks/directory/README.md#create) - Create
+- [`directoryDelete`](docs/sdks/directory/README.md#delete) - Delete
+- [`directoryGet`](docs/sdks/directory/README.md#get) - Get
+- [`directoryList`](docs/sdks/directory/README.md#list) - List
+- [`exportCreate`](docs/sdks/export/README.md#create) - Create
+- [`exportDelete`](docs/sdks/export/README.md#delete) - Delete
+- [`exportGet`](docs/sdks/export/README.md#get) - Get
+- [`exportList`](docs/sdks/export/README.md#list) - List
+- [`exportListEvents`](docs/sdks/export/README.md#listevents) - List Events
+- [`exportsSearchSearch`](docs/sdks/exportssearch/README.md#search) - Search
+- [`exportUpdate`](docs/sdks/export/README.md#update) - Update
+- [`orgDomainList`](docs/sdks/orgdomain/README.md#list) - List
+- [`orgDomainUpdate`](docs/sdks/orgdomain/README.md#update) - Update
+- [`personalClientCreate`](docs/sdks/personalclient/README.md#create) - Create
+- [`personalClientDelete`](docs/sdks/personalclient/README.md#delete) - Delete
+- [`personalClientGet`](docs/sdks/personalclient/README.md#get) - Get
+- [`personalClientList`](docs/sdks/personalclient/README.md#list) - NOTE: Only shows personal clients for the current user.
+- [`personalClientSearchSearch`](docs/sdks/personalclientsearch/README.md#search) - NOTE: Searches personal clients for all users
+- [`personalClientUpdate`](docs/sdks/personalclient/README.md#update) - Update
+- [`policiesCreate`](docs/sdks/policies/README.md#create) - Create
+- [`policiesDelete`](docs/sdks/policies/README.md#delete) - Delete
+- [`policiesGet`](docs/sdks/policies/README.md#get) - Get
+- [`policiesList`](docs/sdks/policies/README.md#list) - List
+- [`policiesUpdate`](docs/sdks/policies/README.md#update) - Update
+- [`policySearchSearch`](docs/sdks/policysearch/README.md#search) - Search
+- [`policyValidateValidateCEL`](docs/sdks/policyvalidate/README.md#validatecel) - Validate Cel
+- [`requestCatalogManagementAddAccessEntitlements`](docs/sdks/requestcatalogmanagement/README.md#addaccessentitlements) - Add Access Entitlements
+- [`requestCatalogManagementAddAppEntitlements`](docs/sdks/requestcatalogmanagement/README.md#addappentitlements) - Add App Entitlements
+- [`requestCatalogManagementCreate`](docs/sdks/requestcatalogmanagement/README.md#create) - Create
+- [`requestCatalogManagementCreateBundleAutomation`](docs/sdks/requestcatalogmanagement/README.md#createbundleautomation) - Create Bundle Automation
+- [`requestCatalogManagementDelete`](docs/sdks/requestcatalogmanagement/README.md#delete) - Delete
+- [`requestCatalogManagementDeleteBundleAutomation`](docs/sdks/requestcatalogmanagement/README.md#deletebundleautomation) - Delete Bundle Automation
+- [`requestCatalogManagementForceRunBundleAutomation`](docs/sdks/requestcatalogmanagement/README.md#forcerunbundleautomation) - Force Run Bundle Automation
+- [`requestCatalogManagementGet`](docs/sdks/requestcatalogmanagement/README.md#get) - Get
+- [`requestCatalogManagementGetBundleAutomation`](docs/sdks/requestcatalogmanagement/README.md#getbundleautomation) - Get Bundle Automation
+- [`requestCatalogManagementList`](docs/sdks/requestcatalogmanagement/README.md#list) - List
+- [`requestCatalogManagementListAllEntitlementIdsPerApp`](docs/sdks/requestcatalogmanagement/README.md#listallentitlementidsperapp) - List All Entitlement Ids Per App
+- [`requestCatalogManagementListEntitlementsForAccess`](docs/sdks/requestcatalogmanagement/README.md#listentitlementsforaccess) - List Entitlements For Access
+- [`requestCatalogManagementListEntitlementsPerCatalog`](docs/sdks/requestcatalogmanagement/README.md#listentitlementspercatalog) - List Entitlements Per Catalog
+- [`requestCatalogManagementRemoveAccessEntitlements`](docs/sdks/requestcatalogmanagement/README.md#removeaccessentitlements) - Remove Access Entitlements
+- [`requestCatalogManagementRemoveAppEntitlements`](docs/sdks/requestcatalogmanagement/README.md#removeappentitlements) - Remove App Entitlements
+- [`requestCatalogManagementSetBundleAutomation`](docs/sdks/requestcatalogmanagement/README.md#setbundleautomation) - Set Bundle Automation
+- [`requestCatalogManagementUpdate`](docs/sdks/requestcatalogmanagement/README.md#update) - Update
+- [`requestCatalogSearchSearchEntitlements`](docs/sdks/requestcatalogsearch/README.md#searchentitlements) - Search Entitlements
+- [`rolesGet`](docs/sdks/roles/README.md#get) - Get
+- [`rolesList`](docs/sdks/roles/README.md#list) - List
+- [`rolesUpdate`](docs/sdks/roles/README.md#update) - Update
+- [`sessionSettingsGet`](docs/sdks/sessionsettings/README.md#get) - Get
+- [`sessionSettingsTestSourceIP`](docs/sdks/sessionsettings/README.md#testsourceip) - Test Source Ip
+- [`sessionSettingsUpdate`](docs/sdks/sessionsettings/README.md#update) - Update
+- [`stepUpProviderCreate`](docs/sdks/stepupprovider/README.md#create) - Create
+- [`stepUpProviderDelete`](docs/sdks/stepupprovider/README.md#delete) - Delete
+- [`stepUpProviderGet`](docs/sdks/stepupprovider/README.md#get) - Get
+- [`stepUpProviderList`](docs/sdks/stepupprovider/README.md#list) - List
+- [`stepUpProviderSearch`](docs/sdks/stepupprovider/README.md#search) - Search
+- [`stepUpProviderTest`](docs/sdks/stepupprovider/README.md#test) - Test
+- [`stepUpProviderUpdate`](docs/sdks/stepupprovider/README.md#update) - Update
+- [`stepUpProviderUpdateSecret`](docs/sdks/stepupprovider/README.md#updatesecret) - Update Secret
+- [`stepUpTransactionGet`](docs/sdks/stepuptransaction/README.md#get) - Get
+- [`stepUpTransactionSearch`](docs/sdks/stepuptransaction/README.md#search) - Search
+- [`systemLogListEvents`](docs/sdks/systemlog/README.md#listevents) - List Events
+- [`taskActionsApprove`](docs/sdks/taskactions/README.md#approve) - Approve
+- [`taskActionsApproveWithStepUp`](docs/sdks/taskactions/README.md#approvewithstepup) - Approve With Step Up
+- [`taskActionsClose`](docs/sdks/taskactions/README.md#close) - Close
+- [`taskActionsComment`](docs/sdks/taskactions/README.md#comment) - Comment
+- [`taskActionsDeny`](docs/sdks/taskactions/README.md#deny) - Deny
+- [`taskActionsEscalateToEmergencyAccess`](docs/sdks/taskactions/README.md#escalatetoemergencyaccess) - Escalate To Emergency Access
+- [`taskActionsHardReset`](docs/sdks/taskactions/README.md#hardreset) - Hard Reset
+- [`taskActionsProcessNow`](docs/sdks/taskactions/README.md#processnow) - Process Now
+- [`taskActionsReassign`](docs/sdks/taskactions/README.md#reassign) - Reassign
+- [`taskActionsRestart`](docs/sdks/taskactions/README.md#restart) - Restart
+- [`taskActionsSkipStep`](docs/sdks/taskactions/README.md#skipstep) - Skip Step
+- [`taskAuditList`](docs/sdks/taskaudit/README.md#list) - List
+- [`taskCreateGrantTask`](docs/sdks/task/README.md#creategranttask) - Create Grant Task
+- [`taskCreateOffboardingTask`](docs/sdks/task/README.md#createoffboardingtask) - Create Offboarding Task
+- [`taskCreateRevokeTask`](docs/sdks/task/README.md#createrevoketask) - Create Revoke Task
+- [`taskGet`](docs/sdks/task/README.md#get) - Get
+- [`taskSearchSearch`](docs/sdks/tasksearch/README.md#search) - Search
+- [`userGet`](docs/sdks/user/README.md#get) - Get
+- [`userList`](docs/sdks/user/README.md#list) - List
+- [`userSearchSearch`](docs/sdks/usersearch/README.md#search) - Search
+- [`webhooksCreate`](docs/sdks/webhooks/README.md#create) - Create
+- [`webhooksDelete`](docs/sdks/webhooks/README.md#delete) - Delete
+- [`webhooksGet`](docs/sdks/webhooks/README.md#get) - Get
+- [`webhooksList`](docs/sdks/webhooks/README.md#list) - List
+- [`webhooksSearchSearch`](docs/sdks/webhookssearch/README.md#search) - Search
+- [`webhooksTest`](docs/sdks/webhooks/README.md#test) - Test
+- [`webhooksUpdate`](docs/sdks/webhooks/README.md#update) - Update
+- ~~[`appEntitlementsListUsers`](docs/sdks/appentitlements/README.md#listusers)~~ - List Users :warning: **Deprecated**
+
+</details>
+<!-- End Standalone functions [standalone-funcs] -->
+
+<!-- Start Pagination [pagination] -->
+## Pagination
+
+Some of the endpoints in this SDK support pagination. To use pagination, you
+make your SDK calls as usual, but the returned response object will also be an
+async iterable that can be consumed using the [`for await...of`][for-await-of]
+syntax.
+
+[for-await-of]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of
+
+Here's an example of one such pagination call:
 
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
-import * as errors from "conductorone-sdk-typescript/sdk/models/errors";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
 
 async function run() {
-    const sdk = new ConductoroneSDKTypescript({
-        security: {
-            bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
-            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-        },
-    });
+  const result = await conductoroneSDKTypescript.appEntitlementSearch.search();
 
-    let result;
-    try {
-        result = await sdk.apps.create({
-            owners: ["<value>"],
-        });
-    } catch (err) {
-        switch (true) {
-            case err instanceof errors.SDKValidationError: {
-                // Validation errors can be pretty-printed
-                console.error(err.pretty());
-                // Raw value may also be inspected
-                console.error(err.rawValue);
-                return;
-            }
-            default: {
-                throw err;
-            }
-        }
-    }
-
-    // Handle the result
-    console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
 
 ```
+<!-- End Pagination [pagination] -->
+
+<!-- Start Retries [retries] -->
+## Retries
+
+Some of the endpoints in this SDK support retries.  If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API.  However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
+
+To change the default retry strategy for a single API call, simply provide a retryConfig object to the call:
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.accessConflict.createMonitor({
+    retries: {
+      strategy: "backoff",
+      backoff: {
+        initialInterval: 1,
+        maxInterval: 50,
+        exponent: 1.1,
+        maxElapsedTime: 100,
+      },
+      retryConnectionErrors: false,
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+
+```
+
+If you'd like to override the default retry strategy for all operations that support retries, you can provide a retryConfig at SDK initialization:
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  retryConfig: {
+    strategy: "backoff",
+    backoff: {
+      initialInterval: 1,
+      maxInterval: 50,
+      exponent: 1.1,
+      maxElapsedTime: 100,
+    },
+    retryConnectionErrors: false,
+  },
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.accessConflict.createMonitor();
+
+  console.log(result);
+}
+
+run();
+
+```
+<!-- End Retries [retries] -->
+
+<!-- Start Error Handling [errors] -->
+## Error Handling
+
+[`ConductoroneSDKTypescriptError`](./src/sdk/models/errors/conductoronesdktypescripterror.ts) is the base class for all HTTP error responses. It has the following properties:
+
+| Property            | Type       | Description                                            |
+| ------------------- | ---------- | ------------------------------------------------------ |
+| `error.message`     | `string`   | Error message                                          |
+| `error.statusCode`  | `number`   | HTTP response status code eg `404`                     |
+| `error.headers`     | `Headers`  | HTTP response headers                                  |
+| `error.body`        | `string`   | HTTP body. Can be empty string if no body is returned. |
+| `error.rawResponse` | `Response` | Raw HTTP response                                      |
+
+### Example
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+import * as errors from "conductorone-sdk-typescript/sdk/models/errors";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  try {
+    const result = await conductoroneSDKTypescript.accessConflict
+      .createMonitor();
+
+    console.log(result);
+  } catch (error) {
+    if (error instanceof errors.ConductoroneSDKTypescriptError) {
+      console.log(error.message);
+      console.log(error.statusCode);
+      console.log(error.body);
+      console.log(error.headers);
+    }
+  }
+}
+
+run();
+
+```
+
+### Error Classes
+**Primary error:**
+* [`ConductoroneSDKTypescriptError`](./src/sdk/models/errors/conductoronesdktypescripterror.ts): The base class for HTTP error responses.
+
+<details><summary>Less common errors (6)</summary>
+
+<br />
+
+**Network errors:**
+* [`ConnectionError`](./src/sdk/models/errors/httpclienterrors.ts): HTTP client was unable to make a request to a server.
+* [`RequestTimeoutError`](./src/sdk/models/errors/httpclienterrors.ts): HTTP request timed out due to an AbortSignal signal.
+* [`RequestAbortedError`](./src/sdk/models/errors/httpclienterrors.ts): HTTP request was aborted by the client.
+* [`InvalidRequestError`](./src/sdk/models/errors/httpclienterrors.ts): Any input used to create a request is invalid.
+* [`UnexpectedClientError`](./src/sdk/models/errors/httpclienterrors.ts): Unrecognised or unexpected error.
+
+
+**Inherit from [`ConductoroneSDKTypescriptError`](./src/sdk/models/errors/conductoronesdktypescripterror.ts)**:
+* [`ResponseValidationError`](./src/sdk/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
+
+</details>
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
 ## Server Selection
 
-### Select Server by Index
+### Server Variables
 
-You can override the default server globally by passing a server index to the `serverIdx` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
+The default server `https://{tenantDomain}.conductor.one` contains variables and is set to `https://example.conductor.one` by default. To override default values, the following parameters are available when initializing the SDK client instance:
 
-| # | Server | Variables |
-| - | ------ | --------- |
-| 0 | `https://{tenantDomain}.conductor.one` | `tenantDomain` (default is `example`) |
+| Variable       | Parameter              | Default     | Description                                       |
+| -------------- | ---------------------- | ----------- | ------------------------------------------------- |
+| `tenantDomain` | `tenantDomain: string` | `"example"` | The domain of the tenant to use for this request. |
+
+#### Example
 
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  tenantDomain: "<value>",
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
 async function run() {
-    const sdk = new ConductoroneSDKTypescript({
-        serverIdx: 0,
-        security: {
-            bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
-            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-        },
-    });
+  const result = await conductoroneSDKTypescript.accessConflict.createMonitor();
 
-    const result = await sdk.apps.create({
-        owners: ["<value>"],
-    });
-
-    // Handle the result
-    console.log(result);
+  console.log(result);
 }
 
 run();
 
 ```
 
-#### Variables
-
-Some of the server options above contain variables. If you want to set the values of those variables, the following optional parameters are available when initializing the SDK client instance:
- * `tenantDomain: string`
-
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally by passing a URL to the `serverURL` optional parameter when initializing the SDK client instance. For example:
-
+The default server can be overridden globally by passing a URL to the `serverURL: string` optional parameter when initializing the SDK client instance. For example:
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  serverURL: "https://example.conductor.one",
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
 async function run() {
-    const sdk = new ConductoroneSDKTypescript({
-        serverURL: "https://{tenantDomain}.conductor.one",
-        security: {
-            bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
-            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-        },
-    });
+  const result = await conductoroneSDKTypescript.accessConflict.createMonitor();
 
-    const result = await sdk.apps.create({
-        owners: ["<value>"],
-    });
-
-    // Handle the result
-    console.log(result);
+  console.log(result);
 }
 
 run();
@@ -410,7 +951,7 @@ const httpClient = new HTTPClient({
 
 httpClient.addHook("beforeRequest", (request) => {
   const nextRequest = new Request(request, {
-    signal: request.signal || AbortSignal.timeout(5000);
+    signal: request.signal || AbortSignal.timeout(5000)
   });
 
   nextRequest.headers.set("x-custom-header", "custom value");
@@ -436,35 +977,49 @@ const sdk = new ConductoroneSDKTypescript({ httpClient });
 
 This SDK supports the following security schemes globally:
 
-| Name         | Type         | Scheme       |
-| ------------ | ------------ | ------------ |
-| `bearerAuth` | http         | HTTP Bearer  |
-| `oauth`      | oauth2       | OAuth2 token |
+| Name         | Type   | Scheme       |
+| ------------ | ------ | ------------ |
+| `bearerAuth` | http   | HTTP Bearer  |
+| `oauth`      | oauth2 | OAuth2 token |
 
 You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
 async function run() {
-    const sdk = new ConductoroneSDKTypescript({
-        security: {
-            bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
-            oauth: "Bearer <YOUR_ACCESS_TOKEN_HERE>",
-        },
-    });
+  const result = await conductoroneSDKTypescript.accessConflict.createMonitor();
 
-    const result = await sdk.apps.create({
-        owners: ["<value>"],
-    });
-
-    // Handle the result
-    console.log(result);
+  console.log(result);
 }
 
 run();
 
 ```
 <!-- End Authentication [security] -->
+
+<!-- Start Debugging [debug] -->
+## Debugging
+
+You can setup your SDK to emit debug logs for SDK requests and responses.
+
+You can pass a logger that matches `console`'s interface as an SDK option.
+
+> [!WARNING]
+> Beware that debug logging will reveal secrets, like API tokens in headers, in log messages printed to a console or files. It's recommended to use this feature only during local development and not in production.
+
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const sdk = new ConductoroneSDKTypescript({ debugLogger: console });
+```
+<!-- End Debugging [debug] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 
