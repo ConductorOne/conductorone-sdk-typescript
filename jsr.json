@@ -2,7 +2,7 @@
 
 {
   "name": "conductorone-sdk-typescript",
-  "version": "2.2.20",
+  "version": "2.2.48",
   "exports": {
     ".": "./src/index.ts",    
     "./sdk/models/errors": "./src/sdk/models/errors/index.ts",    

@@ -4,8 +4,9 @@
   "author": "ConductorOne",
   "scripts": {
     "gen": "speakeasy generate sdk --lang=typescript --repo https://github.com/ConductorOne/conductorone-sdk-typescript.git --installationURL https://github.com/ConductorOne/conductorone-sdk-typescript --repo-subdir ./src --schema openapi.yaml --out ./src --debug",
-    "lint": "eslint src/",
+    "lint": "eslint \"src/**/*.ts\"",
     "prepare": "cd src/ && tsc --build",
+    "build": "npm run prepare",
     "test": "jest --detectOpenHandles"
   },
   "dependencies": {

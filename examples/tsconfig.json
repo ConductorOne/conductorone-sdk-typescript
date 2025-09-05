@@ -1,0 +1,20 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
+    "outDir": "../dist-examples",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "types": ["node"],
+    "noEmitOnError": false,
+    "paths": {
+      "conductorone-sdk-typescript": ["../dist/index.d.ts"],
+      "conductorone-sdk-typescript/*": ["../dist/*"]
+    }
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["**/*.example.ts"],
+}
+
+

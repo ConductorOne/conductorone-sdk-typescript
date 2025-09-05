@@ -22,7 +22,7 @@ generation:
     skipResponseBodyAssertions: false
   baseServerURL: ""
 typescript:
-  version: 2.2.20
+  version: 2.2.48
   additionalDependencies:
     dependencies: {}
     devDependencies: {}

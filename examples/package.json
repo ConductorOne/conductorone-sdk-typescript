@@ -1,0 +1,16 @@
+{
+  "name": "conductorone-sdk-typescript-examples",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:examples": "tsc -p ."
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "ts-node": "^10.9.1",
+    "@types/node": "^18.11.5",
+    "dotenv": "^17.2.1"
+  }
+}
+
+
