@@ -1,24 +1,45 @@
 configVersion: 2.0.0
 generation:
   sdkClassName: conductorone-sdk-typescript
+  maintainOpenAPIOrder: true
   usageSnippets:
     optionalPropertyRendering: withExample
+    sdkInitStyle: constructor
+  useClassNamesForArrayFields: true
   fixes:
-    nameResolutionDec2023: false
+    nameResolutionFeb2025: false
     parameterOrderingFeb2024: false
     requestResponseComponentNamesFeb2024: false
+    securityFeb2025: false
+    sharedErrorComponentsApr2025: false
   auth:
     oAuth2ClientCredentialsEnabled: false
+    oAuth2PasswordEnabled: false
+  sdkHooksConfigAccess: true
+  tests:
+    generateTests: true
+    generateNewTests: false
+    skipResponseBodyAssertions: false
   baseServerURL: ""
 typescript:
-  version: 2.1.1
+  version: 2.2.20
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
     peerDependencies: {}
+  additionalPackageJSON: {}
   author: ConductorOne
+  baseErrorName: ConductoroneSDKTypescriptError
   clientServerStatusCodesAsErrors: false
+  constFieldsAlwaysOptional: true
+  defaultErrorName: SDKError
+  enableCustomCodeRegions: false
+  enableMCPServer: true
+  enableReactQuery: false
+  enumFormat: union
   flattenGlobalSecurity: true
+  flatteningOrder: parameters-first
+  generateExamples: true
   imports:
     option: openapi
     paths:
@@ -28,8 +49,13 @@ typescript:
       shared: sdk/models/shared
       webhooks: sdk/models/webhooks
   inputModelSuffix: input
+  jsonpath: legacy
   maxMethodParams: 0
+  methodArguments: infer-optional-args
+  moduleFormat: dual
   outputModelSuffix: output
   packageName: conductorone-sdk-typescript
   responseFormat: envelope
   templateVersion: v2
+  usageSDKInitImports: []
+  useIndexModules: true

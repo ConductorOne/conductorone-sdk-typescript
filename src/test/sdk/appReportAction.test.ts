@@ -1,0 +1,16 @@
+import { sdk, authHeaders } from '../setup';
+
+describe('appReportAction', () => {
+  it('generateReport should return status 200 and valid response', async () => {
+    const appId = process.env.CONE_APP_ID as string | undefined;
+    if (!appId) {
+      console.log('skipping test because appId is not set');
+    } else {
+      const res = await sdk.appReportAction.generateReport({ appId }, {
+        headers: await authHeaders()
+      });
+      expect(res.statusCode).toBe(200);
+      expect(!!res.appActionsServiceGenerateReportResponse).toBe(true);
+    }
+  });
+});

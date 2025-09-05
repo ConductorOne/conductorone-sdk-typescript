@@ -1,0 +1,27 @@
+# AutomationExecution
+
+The AutomationExecution message.
+
+## Example Usage
+
+```typescript
+import { AutomationExecution } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: AutomationExecution = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `automationTemplateId`                                                                        | *string*                                                                                      | :heavy_minus_sign:                                                                            | The automationTemplateId field.                                                               |
+| `completedAt`                                                                                 | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `context`                                                                                     | [shared.AutomationContext](../../../sdk/models/shared/automationcontext.md)                   | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `currentVersion`                                                                              | *number*                                                                                      | :heavy_minus_sign:                                                                            | The currentVersion field.                                                                     |
+| `deletedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `duration`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `id`                                                                                          | *number*                                                                                      | :heavy_minus_sign:                                                                            | The id field.                                                                                 |
+| `isDraft`                                                                                     | *boolean*                                                                                     | :heavy_minus_sign:                                                                            | The isDraft field.                                                                            |
+| `state`                                                                                       | [shared.AutomationExecutionState](../../../sdk/models/shared/automationexecutionstate.md)     | :heavy_minus_sign:                                                                            | The state field.                                                                              |
+| `updatedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |

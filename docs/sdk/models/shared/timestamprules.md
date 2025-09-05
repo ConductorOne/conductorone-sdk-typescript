@@ -1,0 +1,26 @@
+# TimestampRules
+
+TimestampRules describe the constraints applied exclusively to the
+ `google.protobuf.Timestamp` well-known type
+
+## Example Usage
+
+```typescript
+import { TimestampRules } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: TimestampRules = {};
+```
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `const`                                                                                                        | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                  | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |
+| `gt`                                                                                                           | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                  | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |
+| `gtNow`                                                                                                        | *boolean*                                                                                                      | :heavy_minus_sign:                                                                                             | GtNow specifies that this must be greater than the current time. GtNow<br/> can only be used with the Within rule. |
+| `gte`                                                                                                          | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                  | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |
+| `lt`                                                                                                           | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                  | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |
+| `ltNow`                                                                                                        | *boolean*                                                                                                      | :heavy_minus_sign:                                                                                             | LtNow specifies that this must be less than the current time. LtNow<br/> can only be used with the Within rule. |
+| `lte`                                                                                                          | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                  | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |
+| `required`                                                                                                     | *boolean*                                                                                                      | :heavy_minus_sign:                                                                                             | Required specifies that this field must be set                                                                 |
+| `within`                                                                                                       | *string*                                                                                                       | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |

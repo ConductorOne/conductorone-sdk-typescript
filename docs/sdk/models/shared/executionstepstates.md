@@ -1,0 +1,17 @@
+# ExecutionStepStates
+
+## Example Usage
+
+```typescript
+import { ExecutionStepStates } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: ExecutionStepStates = "AUTOMATION_EXECUTION_STATE_TERMINATE";
+```
+
+## Values
+
+This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
+
+```typescript
+"AUTOMATION_EXECUTION_STATE_UNSPECIFIED" | "AUTOMATION_EXECUTION_STATE_PENDING" | "AUTOMATION_EXECUTION_STATE_CREATING" | "AUTOMATION_EXECUTION_STATE_GET_STEP" | "AUTOMATION_EXECUTION_STATE_PROCESS_STEP" | "AUTOMATION_EXECUTION_STATE_COMPLETE_STEP" | "AUTOMATION_EXECUTION_STATE_DONE" | "AUTOMATION_EXECUTION_STATE_ERROR" | "AUTOMATION_EXECUTION_STATE_TERMINATE" | "AUTOMATION_EXECUTION_STATE_WAITING" | Unrecognized<string>
+```

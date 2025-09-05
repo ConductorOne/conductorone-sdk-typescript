@@ -1,0 +1,20 @@
+# ScheduleTrigger
+
+The ScheduleTrigger message.
+
+## Example Usage
+
+```typescript
+import { ScheduleTrigger } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: ScheduleTrigger = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `advanced`                                                                                    | *boolean*                                                                                     | :heavy_minus_sign:                                                                            | The advanced field.                                                                           |
+| `cronSpec`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | The cronSpec field.                                                                           |
+| `skipIfTrueCel`                                                                               | *string*                                                                                      | :heavy_minus_sign:                                                                            | The skipIfTrueCel field.                                                                      |
+| `start`                                                                                       | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |

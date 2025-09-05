@@ -1,0 +1,20 @@
+# RequestCatalogView
+
+The request catalog view contains the serialized request catalog and paths to objects referenced by the request catalog.
+
+## Example Usage
+
+```typescript
+import { RequestCatalogView } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: RequestCatalogView = {};
+```
+
+## Fields
+
+| Field                                                                                                                                          | Type                                                                                                                                           | Required                                                                                                                                       | Description                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `accessEntitlementsPath`                                                                                                                       | *string*                                                                                                                                       | :heavy_minus_sign:                                                                                                                             | JSONPATH expression indicating the location of the access entitlement objects, that the request catalog allows users to request, in the array. |
+| `createdByUserPath`                                                                                                                            | *string*                                                                                                                                       | :heavy_minus_sign:                                                                                                                             | JSONPATH expression indicating the location of the User object, that created the request catalog, in the array.                                |
+| `memberCount`                                                                                                                                  | *number*                                                                                                                                       | :heavy_minus_sign:                                                                                                                             | Total number of the members of the catalog                                                                                                     |
+| `requestCatalog`                                                                                                                               | [shared.RequestCatalog](../../../sdk/models/shared/requestcatalog.md)                                                                          | :heavy_minus_sign:                                                                                                                             | N/A                                                                                                                                            |

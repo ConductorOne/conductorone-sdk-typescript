@@ -1,0 +1,21 @@
+# FunctionsServiceCreateFunctionRequest
+
+The FunctionsServiceCreateFunctionRequest message.
+
+## Example Usage
+
+```typescript
+import { FunctionsServiceCreateFunctionRequest } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: FunctionsServiceCreateFunctionRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                                       | Type                                                                                                                                        | Required                                                                                                                                    | Description                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `commitMessage`                                                                                                                             | *string*                                                                                                                                    | :heavy_minus_sign:                                                                                                                          | The commitMessage field.                                                                                                                    |
+| `description`                                                                                                                               | *string*                                                                                                                                    | :heavy_minus_sign:                                                                                                                          | The description field.                                                                                                                      |
+| `displayName`                                                                                                                               | *string*                                                                                                                                    | :heavy_minus_sign:                                                                                                                          | The displayName field.                                                                                                                      |
+| `functionType`                                                                                                                              | [shared.FunctionsServiceCreateFunctionRequestFunctionType](../../../sdk/models/shared/functionsservicecreatefunctionrequestfunctiontype.md) | :heavy_minus_sign:                                                                                                                          | The functionType field.                                                                                                                     |
+| `initialContent`                                                                                                                            | Record<string, *string*>                                                                                                                    | :heavy_minus_sign:                                                                                                                          | The initialContent field.                                                                                                                   |

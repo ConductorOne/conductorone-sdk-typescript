@@ -1,0 +1,36 @@
+speakeasyVersion: 1.609.0
+sources:
+    my-source:
+        sourceNamespace: my-source
+        sourceRevisionDigest: sha256:e071d42dadf65e116f960dc635f4f574156a4b5917fdbb87120530c972c5ab0c
+        sourceBlobDigest: sha256:9e490f6a9cef1938a6e1e6f8bc7068ff23874e613c1aa5aa7be8e1d6aedbe44c
+        tags:
+            - latest
+            - 0.1.0-alpha
+targets:
+    conductorone-ts:
+        source: my-source
+        sourceNamespace: my-source
+        sourceRevisionDigest: sha256:e071d42dadf65e116f960dc635f4f574156a4b5917fdbb87120530c972c5ab0c
+        sourceBlobDigest: sha256:9e490f6a9cef1938a6e1e6f8bc7068ff23874e613c1aa5aa7be8e1d6aedbe44c
+        codeSamplesNamespace: my-source-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:02aa841f0607439df0ee220717bbc349393434934d1d3c335093789585a3161d
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        my-source:
+            inputs:
+                - location: openapi.yaml
+            registry:
+                location: registry.speakeasyapi.dev/conductor-one/conductorone/my-source
+    targets:
+        conductorone-ts:
+            target: typescript
+            source: my-source
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/conductor-one/conductorone/my-source-typescript-code-samples
+                labelOverride:
+                    fixedValue: Typescript (SDK)
+                blocking: false

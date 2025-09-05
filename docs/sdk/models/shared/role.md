@@ -1,0 +1,26 @@
+# Role
+
+Role is a role that can be assigned to a user in ConductorOne.
+
+## Example Usage
+
+```typescript
+import { Role } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: Role = {};
+```
+
+## Fields
+
+| Field                                                                                               | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `createdAt`                                                                                         | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)       | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |
+| `deletedAt`                                                                                         | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)       | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |
+| `displayName`                                                                                       | *string*                                                                                            | :heavy_minus_sign:                                                                                  | The display name of the role.                                                                       |
+| `id`                                                                                                | *string*                                                                                            | :heavy_minus_sign:                                                                                  | The id of the role.                                                                                 |
+| `name`                                                                                              | *string*                                                                                            | :heavy_minus_sign:                                                                                  | The internal name of the role.                                                                      |
+| `permissions`                                                                                       | *string*[]                                                                                          | :heavy_minus_sign:                                                                                  | The list of permissions this role has.                                                              |
+| `serviceRoles`                                                                                      | *string*[]                                                                                          | :heavy_minus_sign:                                                                                  | The list of serviceRoles that this role has.                                                        |
+| `systemApiOnly`                                                                                     | *boolean*                                                                                           | :heavy_minus_sign:                                                                                  | This Role is intended for API keys usage only, and the user interface may not function as expected. |
+| `systemBuiltin`                                                                                     | *boolean*                                                                                           | :heavy_minus_sign:                                                                                  | The system builtin field. If this field is set, the role is not editable.                           |
+| `updatedAt`                                                                                         | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)       | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |

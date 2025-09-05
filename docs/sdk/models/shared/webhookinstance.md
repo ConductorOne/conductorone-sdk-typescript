@@ -1,0 +1,27 @@
+# WebhookInstance
+
+The WebhookInstance message.
+
+## Example Usage
+
+```typescript
+import { WebhookInstance } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: WebhookInstance = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `attempts`                                                                                    | *number*                                                                                      | :heavy_minus_sign:                                                                            | The attempts field.                                                                           |
+| `completedAt`                                                                                 | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `expiresAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `id`                                                                                          | *string*                                                                                      | :heavy_minus_sign:                                                                            | The id field.                                                                                 |
+| `lastAttemptedAt`                                                                             | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `source`                                                                                      | [shared.WebhookSource](../../../sdk/models/shared/webhooksource.md)                           | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `spec`                                                                                        | [shared.WebhookSpec](../../../sdk/models/shared/webhookspec.md)                               | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `state`                                                                                       | [shared.WebhookInstanceState](../../../sdk/models/shared/webhookinstancestate.md)             | :heavy_minus_sign:                                                                            | The state field.                                                                              |
+| `updatedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `webhookId`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | The webhookId field.                                                                          |
