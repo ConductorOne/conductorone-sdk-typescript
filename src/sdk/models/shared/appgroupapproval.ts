@@ -6,6 +6,12 @@ import * as z from "zod";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AppEntitlementReference,
+  AppEntitlementReference$inboundSchema,
+  AppEntitlementReference$Outbound,
+  AppEntitlementReference$outboundSchema,
+} from "./appentitlementreference.js";
 
 /**
  * The AppGroupApproval object provides the configuration for setting a group as the approvers of an approval policy step.
@@ -28,9 +34,17 @@ export type AppGroupApproval = {
    */
   fallback?: boolean | null | undefined;
   /**
+   * Configuration to specify which groups to fallback to if fallback is enabled and the group is empty.
+   */
+  fallbackGroupIds?: Array<AppEntitlementReference> | null | undefined;
+  /**
    * Configuration to specific which users to fallback to if fallback is enabled and the group is empty.
    */
   fallbackUserIds?: Array<string> | null | undefined;
+  /**
+   * Configuration to enable fallback for group fallback.
+   */
+  isGroupFallbackEnabled?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -43,7 +57,10 @@ export const AppGroupApproval$inboundSchema: z.ZodType<
   appGroupId: z.nullable(z.string()).optional(),
   appId: z.nullable(z.string()).optional(),
   fallback: z.nullable(z.boolean()).optional(),
+  fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$inboundSchema))
+    .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  isGroupFallbackEnabled: z.nullable(z.boolean()).optional(),
 });
 
 /** @internal */
@@ -52,7 +69,9 @@ export type AppGroupApproval$Outbound = {
   appGroupId?: string | null | undefined;
   appId?: string | null | undefined;
   fallback?: boolean | null | undefined;
+  fallbackGroupIds?: Array<AppEntitlementReference$Outbound> | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
+  isGroupFallbackEnabled?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -65,7 +84,10 @@ export const AppGroupApproval$outboundSchema: z.ZodType<
   appGroupId: z.nullable(z.string()).optional(),
   appId: z.nullable(z.string()).optional(),
   fallback: z.nullable(z.boolean()).optional(),
+  fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$outboundSchema))
+    .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  isGroupFallbackEnabled: z.nullable(z.boolean()).optional(),
 });
 
 /**

@@ -23,6 +23,7 @@ export const ResourceType = {
   Catalog: "CATALOG",
   Custom: "CUSTOM",
   Vault: "VAULT",
+  ProfileType: "PROFILE_TYPE",
 } as const;
 /**
  * The resourceType field.

@@ -352,6 +352,7 @@ run();
 
 * [list](docs/sdks/connector/README.md#list) - List
 * [createDelegated](docs/sdks/connector/README.md#createdelegated) - Create Delegated
+* [confirmSyncValid](docs/sdks/connector/README.md#confirmsyncvalid) - Confirm Sync Valid
 * [getCredentials](docs/sdks/connector/README.md#getcredentials) - Get Credentials
 * [revokeCredential](docs/sdks/connector/README.md#revokecredential) - Revoke Credential
 * [forceSync](docs/sdks/connector/README.md#forcesync) - Force Sync
@@ -371,6 +372,7 @@ run();
 * [create](docs/sdks/directory/README.md#create) - Create
 * [delete](docs/sdks/directory/README.md#delete) - Delete
 * [get](docs/sdks/directory/README.md#get) - Get
+* [update](docs/sdks/directory/README.md#update) - Update
 
 ### [export](docs/sdks/export/README.md)
 
@@ -529,6 +531,7 @@ run();
 
 * [list](docs/sdks/user/README.md#list) - List
 * [get](docs/sdks/user/README.md#get) - Get
+* [getUserProfileTypes](docs/sdks/user/README.md#getuserprofiletypes) - Get User Profile Types
 
 ### [userSearch](docs/sdks/usersearch/README.md)
 
@@ -670,6 +673,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`automationSearchSearchAutomationTemplateVersions`](docs/sdks/automationsearch/README.md#searchautomationtemplateversions) - Search Automation Template Versions
 - [`automationUpdateAutomation`](docs/sdks/automation/README.md#updateautomation) - Update Automation
 - [`awsExternalIDSettingsGet`](docs/sdks/awsexternalidsettings/README.md#get) - Get
+- [`connectorConfirmSyncValid`](docs/sdks/connector/README.md#confirmsyncvalid) - Confirm Sync Valid
 - [`connectorCreate`](docs/sdks/connector/README.md#create) - Create
 - [`connectorCreateDelegated`](docs/sdks/connector/README.md#createdelegated) - Create Delegated
 - [`connectorDelete`](docs/sdks/connector/README.md#delete) - Delete
@@ -688,6 +692,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`directoryDelete`](docs/sdks/directory/README.md#delete) - Delete
 - [`directoryGet`](docs/sdks/directory/README.md#get) - Get
 - [`directoryList`](docs/sdks/directory/README.md#list) - List
+- [`directoryUpdate`](docs/sdks/directory/README.md#update) - Update
 - [`exportCreate`](docs/sdks/export/README.md#create) - Create
 - [`exportDelete`](docs/sdks/export/README.md#delete) - Delete
 - [`exportGet`](docs/sdks/export/README.md#get) - Get
@@ -779,6 +784,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`taskGet`](docs/sdks/task/README.md#get) - Get
 - [`taskSearchSearch`](docs/sdks/tasksearch/README.md#search) - Search
 - [`userGet`](docs/sdks/user/README.md#get) - Get
+- [`userGetUserProfileTypes`](docs/sdks/user/README.md#getuserprofiletypes) - Get User Profile Types
 - [`userList`](docs/sdks/user/README.md#list) - List
 - [`userSearchSearch`](docs/sdks/usersearch/README.md#search) - Search
 - [`webhooksCreate`](docs/sdks/webhooks/README.md#create) - Create
@@ -1068,7 +1074,7 @@ httpClient.addHook("requestError", (error, request) => {
   console.groupEnd();
 });
 
-const sdk = new ConductoroneSDKTypescript({ httpClient });
+const sdk = new ConductoroneSDKTypescript({ httpClient: httpClient });
 ```
 <!-- End Custom HTTP Client [http-client] -->
 

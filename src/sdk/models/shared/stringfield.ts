@@ -13,6 +13,12 @@ import {
   PasswordField$outboundSchema,
 } from "./passwordfield.js";
 import {
+  SelectField,
+  SelectField$inboundSchema,
+  SelectField$Outbound,
+  SelectField$outboundSchema,
+} from "./selectfield.js";
+import {
   StringRules,
   StringRules$inboundSchema,
   StringRules$Outbound,
@@ -33,6 +39,7 @@ import {
  * This message contains a oneof named view. Only a single field of the following list may be set at a time:
  *   - textField
  *   - passwordField
+ *   - selectField
  *
  * This message contains a oneof named _rules. Only a single field of the following list may be set at a time:
  *   - rules
@@ -48,6 +55,7 @@ export type StringField = {
    */
   placeholder?: string | null | undefined;
   rules?: StringRules | null | undefined;
+  selectField?: SelectField | null | undefined;
   textField?: TextField | null | undefined;
 };
 
@@ -61,6 +69,7 @@ export const StringField$inboundSchema: z.ZodType<
   passwordField: z.nullable(PasswordField$inboundSchema).optional(),
   placeholder: z.nullable(z.string()).optional(),
   rules: z.nullable(StringRules$inboundSchema).optional(),
+  selectField: z.nullable(SelectField$inboundSchema).optional(),
   textField: z.nullable(TextField$inboundSchema).optional(),
 });
 
@@ -70,6 +79,7 @@ export type StringField$Outbound = {
   passwordField?: PasswordField$Outbound | null | undefined;
   placeholder?: string | null | undefined;
   rules?: StringRules$Outbound | null | undefined;
+  selectField?: SelectField$Outbound | null | undefined;
   textField?: TextField$Outbound | null | undefined;
 };
 
@@ -83,6 +93,7 @@ export const StringField$outboundSchema: z.ZodType<
   passwordField: z.nullable(PasswordField$outboundSchema).optional(),
   placeholder: z.nullable(z.string()).optional(),
   rules: z.nullable(StringRules$outboundSchema).optional(),
+  selectField: z.nullable(SelectField$outboundSchema).optional(),
   textField: z.nullable(TextField$outboundSchema).optional(),
 });
 

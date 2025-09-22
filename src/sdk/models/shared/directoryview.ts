@@ -18,7 +18,7 @@ import {
  */
 export type DirectoryView = {
   /**
-   * JSONPATH expression indicating the location of the App object in the  array.
+   * JSONPATH expression indicating the location of the App object in the array.
    */
   appPath?: string | null | undefined;
   directory?: Directory | null | undefined;

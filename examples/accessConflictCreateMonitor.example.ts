@@ -21,7 +21,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 });
 
 async function main() {
-  const result = await conductoroneSDKTypescript.createMonitor();
+  const result = await conductoroneSDKTypescript.accessConflict.createMonitor();
 
   console.log(result);
 }

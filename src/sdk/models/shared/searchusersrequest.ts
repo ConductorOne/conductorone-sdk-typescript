@@ -46,6 +46,10 @@ export type UserStatuses = OpenEnum<typeof UserStatuses>;
  */
 export type SearchUsersRequest = {
   /**
+   * Search for users that have any of the departments on this list.
+   */
+  departments?: Array<string> | null | undefined;
+  /**
    * Search for users based on their email (exact match).
    */
   email?: string | null | undefined;
@@ -62,6 +66,14 @@ export type SearchUsersRequest = {
    * Deprecated. Use refs array instead.
    */
   ids?: Array<string> | null | undefined;
+  /**
+   * Search for users that have any of the job titles on this list.
+   */
+  jobTitles?: Array<string> | null | undefined;
+  /**
+   * Search for users that have any of the manager IDs on this list.
+   */
+  managerIds?: Array<string> | null | undefined;
   /**
    * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
    */
@@ -158,11 +170,14 @@ export const SearchUsersRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  departments: z.nullable(z.array(z.string())).optional(),
   email: z.nullable(z.string()).optional(),
   excludeIds: z.nullable(z.array(z.string())).optional(),
   excludeTypes: z.nullable(z.array(ExcludeTypes$inboundSchema)).optional(),
   expandMask: z.nullable(UserExpandMask$inboundSchema).optional(),
   ids: z.nullable(z.array(z.string())).optional(),
+  jobTitles: z.nullable(z.array(z.string())).optional(),
+  managerIds: z.nullable(z.array(z.string())).optional(),
   pageSize: z.nullable(z.number().int()).optional(),
   pageToken: z.nullable(z.string()).optional(),
   query: z.nullable(z.string()).optional(),
@@ -173,11 +188,14 @@ export const SearchUsersRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type SearchUsersRequest$Outbound = {
+  departments?: Array<string> | null | undefined;
   email?: string | null | undefined;
   excludeIds?: Array<string> | null | undefined;
   excludeTypes?: Array<string> | null | undefined;
   expandMask?: UserExpandMask$Outbound | null | undefined;
   ids?: Array<string> | null | undefined;
+  jobTitles?: Array<string> | null | undefined;
+  managerIds?: Array<string> | null | undefined;
   pageSize?: number | null | undefined;
   pageToken?: string | null | undefined;
   query?: string | null | undefined;
@@ -192,11 +210,14 @@ export const SearchUsersRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchUsersRequest
 > = z.object({
+  departments: z.nullable(z.array(z.string())).optional(),
   email: z.nullable(z.string()).optional(),
   excludeIds: z.nullable(z.array(z.string())).optional(),
   excludeTypes: z.nullable(z.array(ExcludeTypes$outboundSchema)).optional(),
   expandMask: z.nullable(UserExpandMask$outboundSchema).optional(),
   ids: z.nullable(z.array(z.string())).optional(),
+  jobTitles: z.nullable(z.array(z.string())).optional(),
+  managerIds: z.nullable(z.array(z.string())).optional(),
   pageSize: z.nullable(z.number().int()).optional(),
   pageToken: z.nullable(z.string()).optional(),
   query: z.nullable(z.string()).optional(),

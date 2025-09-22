@@ -6,15 +6,35 @@ import * as z from "zod";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  DirectoryAccountFilterAll,
+  DirectoryAccountFilterAll$inboundSchema,
+  DirectoryAccountFilterAll$Outbound,
+  DirectoryAccountFilterAll$outboundSchema,
+} from "./directoryaccountfilterall.js";
+import {
+  DirectoryAccountFilterCel,
+  DirectoryAccountFilterCel$inboundSchema,
+  DirectoryAccountFilterCel$Outbound,
+  DirectoryAccountFilterCel$outboundSchema,
+} from "./directoryaccountfiltercel.js";
 
 /**
  * This object indicates that an app is also a directory.
+ *
+ * @remarks
+ *
+ * This message contains a oneof named account_filter. Only a single field of the following list may be set at a time:
+ *   - all
+ *   - celExpression
  */
 export type Directory = {
+  all?: DirectoryAccountFilterAll | null | undefined;
   /**
    * The ID of the app associated with the directory.
    */
   appId?: string | null | undefined;
+  celExpression?: DirectoryAccountFilterCel | null | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   updatedAt?: Date | null | undefined;
@@ -26,7 +46,9 @@ export const Directory$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  all: z.nullable(DirectoryAccountFilterAll$inboundSchema).optional(),
   appId: z.nullable(z.string()).optional(),
+  celExpression: z.nullable(DirectoryAccountFilterCel$inboundSchema).optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -40,7 +62,9 @@ export const Directory$inboundSchema: z.ZodType<
 
 /** @internal */
 export type Directory$Outbound = {
+  all?: DirectoryAccountFilterAll$Outbound | null | undefined;
   appId?: string | null | undefined;
+  celExpression?: DirectoryAccountFilterCel$Outbound | null | undefined;
   createdAt?: string | null | undefined;
   deletedAt?: string | null | undefined;
   updatedAt?: string | null | undefined;
@@ -52,7 +76,10 @@ export const Directory$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Directory
 > = z.object({
+  all: z.nullable(DirectoryAccountFilterAll$outboundSchema).optional(),
   appId: z.nullable(z.string()).optional(),
+  celExpression: z.nullable(DirectoryAccountFilterCel$outboundSchema)
+    .optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),

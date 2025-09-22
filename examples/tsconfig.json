@@ -13,8 +13,7 @@
       "conductorone-sdk-typescript/*": ["../dist/*"]
     }
   },
-  "include": ["**/*.ts"],
-  "exclude": ["**/*.example.ts"],
+  "include": ["**/*.ts"]
 }
 
 

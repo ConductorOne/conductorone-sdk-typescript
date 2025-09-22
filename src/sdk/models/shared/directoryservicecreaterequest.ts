@@ -7,6 +7,18 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  DirectoryAccountFilterAll,
+  DirectoryAccountFilterAll$inboundSchema,
+  DirectoryAccountFilterAll$Outbound,
+  DirectoryAccountFilterAll$outboundSchema,
+} from "./directoryaccountfilterall.js";
+import {
+  DirectoryAccountFilterCel,
+  DirectoryAccountFilterCel$inboundSchema,
+  DirectoryAccountFilterCel$Outbound,
+  DirectoryAccountFilterCel$outboundSchema,
+} from "./directoryaccountfiltercel.js";
+import {
   DirectoryExpandMask,
   DirectoryExpandMask$inboundSchema,
   DirectoryExpandMask$Outbound,
@@ -15,12 +27,20 @@ import {
 
 /**
  * Uplevel an app into a full directory.
+ *
+ * @remarks
+ *
+ * This message contains a oneof named account_filter. Only a single field of the following list may be set at a time:
+ *   - all
+ *   - celExpression
  */
 export type DirectoryServiceCreateRequest = {
+  all?: DirectoryAccountFilterAll | null | undefined;
   /**
    * The AppID to make into a directory, providing identities and more for the C1 app.
    */
   appId?: string | null | undefined;
+  celExpression?: DirectoryAccountFilterCel | null | undefined;
   expandMask?: DirectoryExpandMask | null | undefined;
 };
 
@@ -30,13 +50,17 @@ export const DirectoryServiceCreateRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  all: z.nullable(DirectoryAccountFilterAll$inboundSchema).optional(),
   appId: z.nullable(z.string()).optional(),
+  celExpression: z.nullable(DirectoryAccountFilterCel$inboundSchema).optional(),
   expandMask: z.nullable(DirectoryExpandMask$inboundSchema).optional(),
 });
 
 /** @internal */
 export type DirectoryServiceCreateRequest$Outbound = {
+  all?: DirectoryAccountFilterAll$Outbound | null | undefined;
   appId?: string | null | undefined;
+  celExpression?: DirectoryAccountFilterCel$Outbound | null | undefined;
   expandMask?: DirectoryExpandMask$Outbound | null | undefined;
 };
 
@@ -46,7 +70,10 @@ export const DirectoryServiceCreateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DirectoryServiceCreateRequest
 > = z.object({
+  all: z.nullable(DirectoryAccountFilterAll$outboundSchema).optional(),
   appId: z.nullable(z.string()).optional(),
+  celExpression: z.nullable(DirectoryAccountFilterCel$outboundSchema)
+    .optional(),
   expandMask: z.nullable(DirectoryExpandMask$outboundSchema).optional(),
 });
 

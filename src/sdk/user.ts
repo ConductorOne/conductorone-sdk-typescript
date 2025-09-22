@@ -3,6 +3,7 @@
  */
 
 import { userGet } from "../funcs/userGet.js";
+import { userGetUserProfileTypes } from "../funcs/userGetUserProfileTypes.js";
 import { userList } from "../funcs/userList.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "./models/operations/index.js";
@@ -37,6 +38,23 @@ export class User extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.C1ApiUserV1UserServiceGetResponse> {
     return unwrapAsync(userGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get User Profile Types
+   *
+   * @remarks
+   * Invokes the c1.api.user.v1.UserService.GetUserProfileTypes method.
+   */
+  async getUserProfileTypes(
+    request: operations.C1ApiUserV1UserServiceGetUserProfileTypesRequest,
+    options?: RequestOptions,
+  ): Promise<operations.C1ApiUserV1UserServiceGetUserProfileTypesResponse> {
+    return unwrapAsync(userGetUserProfileTypes(
       this,
       request,
       options,

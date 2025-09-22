@@ -7,7 +7,7 @@ The resourceType field.
 ```typescript
 import { ResourceType } from "conductorone-sdk-typescript/sdk/models/shared";
 
-let value: ResourceType = "GROUP";
+let value: ResourceType = "LICENSE";
 ```
 
 ## Values
@@ -15,5 +15,5 @@ let value: ResourceType = "GROUP";
 This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
-"ROLE" | "GROUP" | "LICENSE" | "PROJECT" | "CATALOG" | "CUSTOM" | "VAULT" | Unrecognized<string>
+"ROLE" | "GROUP" | "LICENSE" | "PROJECT" | "CATALOG" | "CUSTOM" | "VAULT" | "PROFILE_TYPE" | Unrecognized<string>
 ```

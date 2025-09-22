@@ -6,6 +6,7 @@ import { directoryCreate } from "../funcs/directoryCreate.js";
 import { directoryDelete } from "../funcs/directoryDelete.js";
 import { directoryGet } from "../funcs/directoryGet.js";
 import { directoryList } from "../funcs/directoryList.js";
+import { directoryUpdate } from "../funcs/directoryUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "./models/operations/index.js";
 import * as shared from "./models/shared/index.js";
@@ -76,6 +77,23 @@ export class Directory extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.C1ApiDirectoryV1DirectoryServiceGetResponse> {
     return unwrapAsync(directoryGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update
+   *
+   * @remarks
+   * Update a directory by app_id.
+   */
+  async update(
+    request: operations.C1ApiDirectoryV1DirectoryServiceUpdateRequest,
+    options?: RequestOptions,
+  ): Promise<operations.C1ApiDirectoryV1DirectoryServiceUpdateResponse> {
+    return unwrapAsync(directoryUpdate(
       this,
       request,
       options,

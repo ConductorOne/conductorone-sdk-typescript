@@ -1,22 +1,22 @@
 lockVersion: 2.0.0
 id: 59dafb44-7e9b-49d4-8e7d-679663d28f0f
 management:
-  docChecksum: 9b9d0684f263fc717708cb38618c5fc0
+  docChecksum: 38d8fcde581e0329c95fa3c4f31ac073
   docVersion: 0.1.0-alpha
-  speakeasyVersion: 1.611.0
-  generationVersion: 2.694.1
-  releaseVersion: 2.2.48
-  configChecksum: 7410da8fd0027cfbccf09e2c6556f1a8
+  speakeasyVersion: 1.622.1
+  generationVersion: 2.709.0
+  releaseVersion: 2.2.52
+  configChecksum: baa50cd97e6d03a94f9f84bd74f905a2
 features:
   typescript:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.1
-    core: 3.21.22
+    core: 3.21.23
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
-    globalSecurity: 2.82.13
+    globalSecurity: 2.82.14
     globalSecurityCallbacks: 0.1.0
     globalServerURLs: 2.82.5
     groups: 2.81.2
@@ -179,6 +179,8 @@ generatedFiles:
   - docs/sdk/models/operations/c1apiappv1appuserservicesearchresponse.md
   - docs/sdk/models/operations/c1apiappv1appuserserviceupdaterequest.md
   - docs/sdk/models/operations/c1apiappv1appuserserviceupdateresponse.md
+  - docs/sdk/models/operations/c1apiappv1connectorserviceconfirmsyncvalidrequest.md
+  - docs/sdk/models/operations/c1apiappv1connectorserviceconfirmsyncvalidresponse.md
   - docs/sdk/models/operations/c1apiappv1connectorservicecreatedelegatedrequest.md
   - docs/sdk/models/operations/c1apiappv1connectorservicecreatedelegatedresponse.md
   - docs/sdk/models/operations/c1apiappv1connectorservicecreaterequest.md
@@ -255,6 +257,8 @@ generatedFiles:
   - docs/sdk/models/operations/c1apidirectoryv1directoryservicegetresponse.md
   - docs/sdk/models/operations/c1apidirectoryv1directoryservicelistrequest.md
   - docs/sdk/models/operations/c1apidirectoryv1directoryservicelistresponse.md
+  - docs/sdk/models/operations/c1apidirectoryv1directoryserviceupdaterequest.md
+  - docs/sdk/models/operations/c1apidirectoryv1directoryserviceupdateresponse.md
   - docs/sdk/models/operations/c1apifunctionsv1functionssearchsearchresponse.md
   - docs/sdk/models/operations/c1apifunctionsv1functionsservicecommitrequest.md
   - docs/sdk/models/operations/c1apifunctionsv1functionsservicecommitresponse.md
@@ -412,6 +416,8 @@ generatedFiles:
   - docs/sdk/models/operations/c1apiuserv1usersearchsearchresponse.md
   - docs/sdk/models/operations/c1apiuserv1userservicegetrequest.md
   - docs/sdk/models/operations/c1apiuserv1userservicegetresponse.md
+  - docs/sdk/models/operations/c1apiuserv1userservicegetuserprofiletypesrequest.md
+  - docs/sdk/models/operations/c1apiuserv1userservicegetuserprofiletypesresponse.md
   - docs/sdk/models/operations/c1apiuserv1userservicelistrequest.md
   - docs/sdk/models/operations/c1apiuserv1userservicelistresponse.md
   - docs/sdk/models/operations/c1apiwebhooksv1webhookssearchsearchresponse.md
@@ -587,6 +593,8 @@ generatedFiles:
   - docs/sdk/models/shared/conditionsucceeded.md
   - docs/sdk/models/shared/conditiontimedout.md
   - docs/sdk/models/shared/config.md
+  - docs/sdk/models/shared/confirmsyncvalidrequest.md
+  - docs/sdk/models/shared/confirmsyncvalidresponse.md
   - docs/sdk/models/shared/conflictmonitor.md
   - docs/sdk/models/shared/conflictmonitorcreaterequest.md
   - docs/sdk/models/shared/conflictmonitordeleterequest.md
@@ -693,6 +701,8 @@ generatedFiles:
   - docs/sdk/models/shared/deniedaction.md
   - docs/sdk/models/shared/details.md
   - docs/sdk/models/shared/directory.md
+  - docs/sdk/models/shared/directoryaccountfilterall.md
+  - docs/sdk/models/shared/directoryaccountfiltercel.md
   - docs/sdk/models/shared/directoryexpandmask.md
   - docs/sdk/models/shared/directoryservicecreaterequest.md
   - docs/sdk/models/shared/directoryservicecreateresponse.md
@@ -703,6 +713,9 @@ generatedFiles:
   - docs/sdk/models/shared/directoryservicegetresponseexpanded.md
   - docs/sdk/models/shared/directoryservicelistresponse.md
   - docs/sdk/models/shared/directoryservicelistresponseexpanded.md
+  - docs/sdk/models/shared/directoryserviceupdaterequest.md
+  - docs/sdk/models/shared/directoryserviceupdateresponse.md
+  - docs/sdk/models/shared/directoryserviceupdateresponseexpanded.md
   - docs/sdk/models/shared/directorystatus.md
   - docs/sdk/models/shared/directoryview.md
   - docs/sdk/models/shared/disabledreasoncircuitbreaker.md
@@ -819,6 +832,7 @@ generatedFiles:
   - docs/sdk/models/shared/getsessionsettingsresponse.md
   - docs/sdk/models/shared/getstepupproviderresponse.md
   - docs/sdk/models/shared/getstepuptransactionresponse.md
+  - docs/sdk/models/shared/getuserprofiletypesresponse.md
   - docs/sdk/models/shared/grantdeletedtrigger.md
   - docs/sdk/models/shared/grantedstatus.md
   - docs/sdk/models/shared/grantentitlements.md
@@ -911,6 +925,7 @@ generatedFiles:
   - docs/sdk/models/shared/previousstate.md
   - docs/sdk/models/shared/primarytriggertype.md
   - docs/sdk/models/shared/processing.md
+  - docs/sdk/models/shared/profiletype.md
   - docs/sdk/models/shared/providertype.md
   - docs/sdk/models/shared/provision.md
   - docs/sdk/models/shared/provisioninstance.md
@@ -1037,6 +1052,8 @@ generatedFiles:
   - docs/sdk/models/shared/searchusersresponseexpanded.md
   - docs/sdk/models/shared/secrettrait.md
   - docs/sdk/models/shared/security.md
+  - docs/sdk/models/shared/selectfield.md
+  - docs/sdk/models/shared/selectoption.md
   - docs/sdk/models/shared/selfapproval.md
   - docs/sdk/models/shared/selfapprovalinput.md
   - docs/sdk/models/shared/sendemail.md
@@ -1489,6 +1506,7 @@ generatedFiles:
   - src/funcs/automationSearchSearchAutomations.ts
   - src/funcs/automationUpdateAutomation.ts
   - src/funcs/awsExternalIDSettingsGet.ts
+  - src/funcs/connectorConfirmSyncValid.ts
   - src/funcs/connectorCreate.ts
   - src/funcs/connectorCreateDelegated.ts
   - src/funcs/connectorDelete.ts
@@ -1507,6 +1525,7 @@ generatedFiles:
   - src/funcs/directoryDelete.ts
   - src/funcs/directoryGet.ts
   - src/funcs/directoryList.ts
+  - src/funcs/directoryUpdate.ts
   - src/funcs/exportCreate.ts
   - src/funcs/exportDelete.ts
   - src/funcs/exportGet.ts
@@ -1598,6 +1617,7 @@ generatedFiles:
   - src/funcs/taskGet.ts
   - src/funcs/taskSearchSearch.ts
   - src/funcs/userGet.ts
+  - src/funcs/userGetUserProfileTypes.ts
   - src/funcs/userList.ts
   - src/funcs/userSearchSearch.ts
   - src/funcs/webhooksCreate.ts
@@ -1744,6 +1764,7 @@ generatedFiles:
   - src/sdk/models/operations/c1apiappv1appuserservicelistappusersforuser.ts
   - src/sdk/models/operations/c1apiappv1appuserservicesearch.ts
   - src/sdk/models/operations/c1apiappv1appuserserviceupdate.ts
+  - src/sdk/models/operations/c1apiappv1connectorserviceconfirmsyncvalid.ts
   - src/sdk/models/operations/c1apiappv1connectorservicecreate.ts
   - src/sdk/models/operations/c1apiappv1connectorservicecreatedelegated.ts
   - src/sdk/models/operations/c1apiappv1connectorservicedelete.ts
@@ -1789,6 +1810,7 @@ generatedFiles:
   - src/sdk/models/operations/c1apidirectoryv1directoryservicedelete.ts
   - src/sdk/models/operations/c1apidirectoryv1directoryserviceget.ts
   - src/sdk/models/operations/c1apidirectoryv1directoryservicelist.ts
+  - src/sdk/models/operations/c1apidirectoryv1directoryserviceupdate.ts
   - src/sdk/models/operations/c1apifunctionsv1functionssearchsearch.ts
   - src/sdk/models/operations/c1apifunctionsv1functionsservicecommit.ts
   - src/sdk/models/operations/c1apifunctionsv1functionsservicecreatefunction.ts
@@ -1883,6 +1905,7 @@ generatedFiles:
   - src/sdk/models/operations/c1apitaskv1taskserviceget.ts
   - src/sdk/models/operations/c1apiuserv1usersearchsearch.ts
   - src/sdk/models/operations/c1apiuserv1userserviceget.ts
+  - src/sdk/models/operations/c1apiuserv1userservicegetuserprofiletypes.ts
   - src/sdk/models/operations/c1apiuserv1userservicelist.ts
   - src/sdk/models/operations/c1apiwebhooksv1webhookssearchsearch.ts
   - src/sdk/models/operations/c1apiwebhooksv1webhooksservicecreate.ts
@@ -2017,6 +2040,8 @@ generatedFiles:
   - src/sdk/models/shared/completedaction.ts
   - src/sdk/models/shared/conditionsucceeded.ts
   - src/sdk/models/shared/conditiontimedout.ts
+  - src/sdk/models/shared/confirmsyncvalidrequest.ts
+  - src/sdk/models/shared/confirmsyncvalidresponse.ts
   - src/sdk/models/shared/conflictmonitor.ts
   - src/sdk/models/shared/conflictmonitorcreaterequest.ts
   - src/sdk/models/shared/conflictmonitordeleterequest.ts
@@ -2105,6 +2130,8 @@ generatedFiles:
   - src/sdk/models/shared/deletestepupproviderresponse.ts
   - src/sdk/models/shared/deniedaction.ts
   - src/sdk/models/shared/directory.ts
+  - src/sdk/models/shared/directoryaccountfilterall.ts
+  - src/sdk/models/shared/directoryaccountfiltercel.ts
   - src/sdk/models/shared/directoryexpandmask.ts
   - src/sdk/models/shared/directoryservicecreaterequest.ts
   - src/sdk/models/shared/directoryservicecreateresponse.ts
@@ -2112,6 +2139,8 @@ generatedFiles:
   - src/sdk/models/shared/directoryservicedeleteresponse.ts
   - src/sdk/models/shared/directoryservicegetresponse.ts
   - src/sdk/models/shared/directoryservicelistresponse.ts
+  - src/sdk/models/shared/directoryserviceupdaterequest.ts
+  - src/sdk/models/shared/directoryserviceupdateresponse.ts
   - src/sdk/models/shared/directoryview.ts
   - src/sdk/models/shared/disabledreasoncircuitbreaker.ts
   - src/sdk/models/shared/donotsave.ts
@@ -2209,6 +2238,7 @@ generatedFiles:
   - src/sdk/models/shared/getsessionsettingsresponse.ts
   - src/sdk/models/shared/getstepupproviderresponse.ts
   - src/sdk/models/shared/getstepuptransactionresponse.ts
+  - src/sdk/models/shared/getuserprofiletypesresponse.ts
   - src/sdk/models/shared/grantdeletedtrigger.ts
   - src/sdk/models/shared/grantentitlements.ts
   - src/sdk/models/shared/grantfilter.ts
@@ -2281,6 +2311,7 @@ generatedFiles:
   - src/sdk/models/shared/policystepinstance.ts
   - src/sdk/models/shared/policysteps.ts
   - src/sdk/models/shared/policystepsinput.ts
+  - src/sdk/models/shared/profiletype.ts
   - src/sdk/models/shared/provision.ts
   - src/sdk/models/shared/provisioninstance.ts
   - src/sdk/models/shared/provisionpolicy.ts
@@ -2386,6 +2417,8 @@ generatedFiles:
   - src/sdk/models/shared/searchusersresponse.ts
   - src/sdk/models/shared/secrettrait.ts
   - src/sdk/models/shared/security.ts
+  - src/sdk/models/shared/selectfield.ts
+  - src/sdk/models/shared/selectoption.ts
   - src/sdk/models/shared/selfapproval.ts
   - src/sdk/models/shared/selfapprovalinput.ts
   - src/sdk/models/shared/sendemail.ts
@@ -4299,6 +4332,32 @@ examples:
       parameters:
         path:
           task_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.ConnectorService.ConfirmSyncValid:
+    speakeasy-default-c1-api-app-v1-connector-service-confirm-sync-valid:
+      parameters:
+        path:
+          app_id: "<id>"
+          connector_id: null
+          sync_lifecycle_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.directory.v1.DirectoryService.Update:
+    speakeasy-default-c1-api-directory-v1-directory-service-update:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.user.v1.UserService.GetUserProfileTypes:
+    speakeasy-default-c1-api-user-v1-user-service-get-user-profile-types:
+      parameters:
+        path:
+          user_id: "<id>"
       responses:
         "200":
           application/json: {}
