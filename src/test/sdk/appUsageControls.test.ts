@@ -1,4 +1,4 @@
-import { sdk, authHeaders } from '../setup';
+import { sdk } from '../setup';
 
 describe('appUsageControls', () => {
   it('get should return status 200 and valid response', async () => {
@@ -6,9 +6,7 @@ describe('appUsageControls', () => {
     if (!appId) {
       console.log('skipping test because appId is not set');
     } else {
-      const res = await sdk.appUsageControls.get({ appId }, {
-        headers: await authHeaders()
-      });
+      const res = await sdk.appUsageControls.get({ appId });
       expect(res.statusCode).toBe(200);
       expect(!!res.getAppUsageControlsResponse).toBe(true);
     }

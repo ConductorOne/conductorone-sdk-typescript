@@ -1,4 +1,4 @@
-import { sdk, authHeaders } from '../setup';
+import { sdk } from '../setup';
 
 describe('appEntitlements', () => {
   it('list should return status 200 and valid response', async () => {
@@ -7,9 +7,7 @@ describe('appEntitlements', () => {
       console.log('appId is not set');
       return;
     }
-    const res = await sdk.appEntitlements.list({ appId, pageSize: 1 }, {
-      headers: await authHeaders()
-    });
+    const res = await sdk.appEntitlements.list({ appId, pageSize: 1 });
     expect(res.statusCode).toBe(200);
     expect(!!res.listAppEntitlementsResponse).toBe(true);
   });

@@ -21,9 +21,4 @@ const sdk = new ConductoroneSDKTypescript({
   clientSecret: process.env.CONE_CLIENT_SECRET,
 });
 
-async function authHeaders() {
-  const token = await (sdk as any).getValidToken?.();
-  return { Authorization: `Bearer ${token}` } as Record<string, string>;
-}
-
-export { sdk, authHeaders };
+export { sdk };

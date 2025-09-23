@@ -1,4 +1,4 @@
-import { sdk, authHeaders } from '../setup';
+import { sdk } from '../setup';
 
 describe('appEntitlementUserBinding', () => {
   it('listAppUsersForIdentityWithGrant should return status 200 and valid response', async () => {
@@ -8,9 +8,7 @@ describe('appEntitlementUserBinding', () => {
     if (!appId || !appEntitlementId || !identityUserId) {
       console.log('skipping test because appId or entitlementId or identityUserId is not set');
     } else {
-      const res = await sdk.appEntitlementUserBinding.listAppUsersForIdentityWithGrant({ appId, appEntitlementId, identityUserId }, {
-        headers: await authHeaders()
-      });
+      const res = await sdk.appEntitlementUserBinding.listAppUsersForIdentityWithGrant({ appId, appEntitlementId, identityUserId });
       expect(res.statusCode).toBe(200);
       expect(!!res.listAppUsersForIdentityWithGrantResponse).toBe(true);
     }

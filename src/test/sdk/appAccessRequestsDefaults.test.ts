@@ -1,4 +1,4 @@
-import { sdk, authHeaders } from '../setup';
+import { sdk } from '../setup';
 
 describe('appAccessRequestsDefaults', () => {
   it.skip('create, get, cancel should return status 200 and valid response', async () => {
@@ -16,16 +16,12 @@ describe('appAccessRequestsDefaults', () => {
         emergencyGrantEnabled: false,
         emergencyGrantPolicyId: ''
       }
-    }, {
-      headers: await authHeaders()
     });
     expect(create.statusCode).toBe(200);
     expect(!!create.appAccessRequestDefaults).toBe(true);
 
     const get = await sdk.appAccessRequestsDefaults.getAppAccessRequestsDefaults({
       appId: appId!
-    }, {
-      headers: await authHeaders()
     });
     expect(get.statusCode).toBe(200);
     expect(!!get.appAccessRequestDefaults).toBe(true);
@@ -33,8 +29,6 @@ describe('appAccessRequestsDefaults', () => {
     const cancel = await sdk.appAccessRequestsDefaults.cancelAppAccessRequestsDefaults({
       appId: appId!,
       cancelAccessRequestDefaultsRequest: {}
-    }, {
-      headers: await authHeaders()
     });
     expect(cancel.statusCode).toBe(200);
     expect(!!cancel.appAccessRequestDefaults).toBe(true);

@@ -1,4 +1,4 @@
-import { sdk, authHeaders } from '../setup';
+import { sdk } from '../setup';
 
 describe('appEntitlementsProxy', () => {
   it('get should return status 200 and valid response', async () => {
@@ -9,9 +9,7 @@ describe('appEntitlementsProxy', () => {
     if (!srcAppId || !srcAppEntitlementId || !dstAppId || !dstAppEntitlementId) {
       console.log('skipping test because srcAppId or srcAppEntitlementId or dstAppId or dstAppEntitlementId is not set');
     } else {
-      const res = await sdk.appEntitlementsProxy.get({ srcAppId, srcAppEntitlementId, dstAppId, dstAppEntitlementId }, {
-        headers: await authHeaders()
-      });
+      const res = await sdk.appEntitlementsProxy.get({ srcAppId, srcAppEntitlementId, dstAppId, dstAppEntitlementId });
       expect(res.statusCode).toBe(200);
       expect(!!res.getAppEntitlementProxyResponse).toBe(true);
     }

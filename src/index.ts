@@ -29,10 +29,13 @@ export class ConductoroneSDKTypescript extends ConductoroneSDKTypescript_orig {
       httpClient,
       userAgent: "conductorone-sdk-typescript/1.1.0",
       ...(props?.debugLogger && { debugLogger: props.debugLogger }),
-      security: async () => ({
-        bearerAuth: getTokenFn ? await getTokenFn() : "",
-        oauth: "",
-      }),
+      security: async () => {
+        const token = getTokenFn ? await getTokenFn() : "";
+        return {
+          bearerAuth: token,
+          oauth: token,
+        };
+      },
     });
 
     if (props?.clientID && props?.clientSecret) {
@@ -53,6 +56,7 @@ export class ConductoroneSDKTypescript extends ConductoroneSDKTypescript_orig {
       };
     } catch (error) {
       console.error('Failed to get initial token:', error);
+      throw error;
     }
   }
 
@@ -69,7 +73,10 @@ export class ConductoroneSDKTypescript extends ConductoroneSDKTypescript_orig {
     if (!this.tokenCache || now >= this.tokenCache.expiresAt) {
       await this.getAndCacheToken();
     }
-    return this.tokenCache?.token || '';
+    if (!this.tokenCache?.token) {
+      throw new Error('Failed to obtain auth token');
+    }
+    return this.tokenCache.token;
   }
 }
 

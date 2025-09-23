@@ -1,4 +1,4 @@
-import { sdk, authHeaders } from '../setup';
+import { sdk } from '../setup';
 
 describe('appResourceOwners', () => {
   it('list should return status 200 and valid response', async () => {
@@ -8,9 +8,7 @@ describe('appResourceOwners', () => {
     if (!appId || !resourceTypeId || !resourceId) {
       console.log('skipping test because appId or resourceTypeId or resourceId is not set');
     } else {
-      const res = await sdk.appResourceOwners.list({ appId, resourceTypeId, resourceId }, {
-        headers: await authHeaders()
-      });
+      const res = await sdk.appResourceOwners.list({ appId, resourceTypeId, resourceId });
       expect(res.statusCode).toBe(200);
       expect(!!res.listAppResourceOwnersResponse).toBe(true);
     }

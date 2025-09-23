@@ -1,10 +1,8 @@
-import { sdk, authHeaders } from '../setup';
+import { sdk } from '../setup';
 
 describe('task', () => {
   it('get should return status 200 and valid response', async () => {
-    const res = await sdk.task.get({ id: "1" }, {
-      headers: await authHeaders()
-    });
+    const res = await sdk.task.get({ id: "1" });
     if (res.statusCode == 404) {
       console.log('task not found');
     } else {

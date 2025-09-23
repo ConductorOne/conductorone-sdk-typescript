@@ -29,7 +29,10 @@ export class Token {
         if (version !== "v1") {
             throw new Error("incorrect client-secret version");
         }
-        const jsonStr = atob(secret);
+        const atobFn = (globalThis as any).atob;
+        const jsonStr = typeof atobFn === 'function'
+            ? atobFn(secret)
+            : Buffer.from(secret, 'base64').toString('utf8');
         const jwk = JSON.parse(jsonStr);
         const alg = "EdDSA";
         const privateKey = await jose.importJWK(jwk, alg);
@@ -81,6 +84,8 @@ export class Token {
             throw new Error(`Failed to get token: ${resp.status}`);
         }
 
-        return resp.data.access_token;
+        const raw = String(resp.data?.access_token ?? "");
+        const normalized = raw.replace(/^\s*bearer\s*:*/i, "").trim();
+        return normalized;
     }
 }

@@ -1,4 +1,4 @@
-import { sdk, authHeaders } from '../setup';
+import { sdk } from '../setup';
 
 describe('appResource', () => {
   it('list should return status 200 and valid response', async () => {
@@ -8,9 +8,7 @@ describe('appResource', () => {
       console.log('appId or appResourceTypeId is not set');
       return;
     }
-    const res = await sdk.appResource.list({ appId, appResourceTypeId, pageSize: 1 }, {
-      headers: await authHeaders()
-    });
+    const res = await sdk.appResource.list({ appId, appResourceTypeId, pageSize: 1 });
     expect(res.statusCode).toBe(200);
     expect(!!res.appResourceServiceListResponse).toBe(true);
   });

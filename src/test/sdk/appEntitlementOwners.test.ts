@@ -1,4 +1,4 @@
-import { sdk, authHeaders } from '../setup';
+import { sdk } from '../setup';
 
 describe('appEntitlementOwners', () => {
   it('list should return status 200 and valid response', async () => {
@@ -12,8 +12,6 @@ describe('appEntitlementOwners', () => {
         { 
           appId,
           entitlementId
-        }, {
-        headers: await authHeaders()
       });
       expect(res.statusCode).toBe(200);
       expect(!!res.listAppEntitlementOwnersResponse).toBe(true);
