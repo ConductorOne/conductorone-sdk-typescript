@@ -1,0 +1,38 @@
+speakeasyVersion: 1.622.1
+sources:
+    my-source:
+        sourceNamespace: my-source
+        sourceRevisionDigest: sha256:14b012899347c64721112a4e9fc92bd7cfce73a23a5266670affe60a60dc3cf8
+        sourceBlobDigest: sha256:a3b2d636b9f71c409b954984c6ff3328a971aecddeec00d55ea7f8b6525e0c95
+        tags:
+            - latest
+            - 0.1.0-alpha
+targets:
+    conductorone-ts:
+        source: my-source
+        sourceNamespace: my-source
+        sourceRevisionDigest: sha256:14b012899347c64721112a4e9fc92bd7cfce73a23a5266670affe60a60dc3cf8
+        sourceBlobDigest: sha256:a3b2d636b9f71c409b954984c6ff3328a971aecddeec00d55ea7f8b6525e0c95
+        codeSamplesNamespace: my-source-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:6cf0476593d4dce6c92b2106da7a826753be6e42f918e510417c14a3125e721b
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        my-source:
+            inputs:
+                - location: https://insulator.conductor.one/api/v1/openapi.yaml
+            overlays:
+                - location: overlay.yaml
+            registry:
+                location: registry.speakeasyapi.dev/conductor-one/conductorone/my-source
+    targets:
+        conductorone-ts:
+            target: typescript
+            source: my-source
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/conductor-one/conductorone/my-source-typescript-code-samples
+                labelOverride:
+                    fixedValue: Typescript (SDK)
+                blocking: false

@@ -1,6 +1,7 @@
 import * as jose from 'jose'
 import {URLSearchParams} from 'url';
 import {AxiosInstance} from "axios";
+import * as crypto from 'crypto';
 
 const assertionType = "urn:ietf:params:oauth:client-assertion-type:jwt-bearer";
 
@@ -28,7 +29,10 @@ export class Token {
         if (version !== "v1") {
             throw new Error("incorrect client-secret version");
         }
-        const jsonStr = atob(secret);
+        const atobFn = (globalThis as any).atob;
+        const jsonStr = typeof atobFn === 'function'
+            ? atobFn(secret)
+            : Buffer.from(secret, 'base64').toString('utf8');
         const jwk = JSON.parse(jsonStr);
         const alg = "EdDSA";
         const privateKey = await jose.importJWK(jwk, alg);
@@ -42,10 +46,15 @@ export class Token {
 
         const now = Math.floor(Date.now() / 1000);
         const nonce = new Uint8Array(16);
-        globalThis.crypto.getRandomValues(nonce);
+        // Use Node.js crypto in Node.js environment, Web Crypto API in browser
+        if (typeof globalThis.crypto !== 'undefined' && globalThis.crypto.getRandomValues) {
+            globalThis.crypto.getRandomValues(nonce);
+        } else {
+            crypto.randomFillSync(nonce);
+        }
 
         const token = new jose.SignJWT({})
-            .setProtectedHeader({ alg, nonce: [...nonce].map(x => x.toString(16)).join('') })
+            .setProtectedHeader({ alg, nonce: [...nonce].map(x => x.toString(16).padStart(2, '0')).join('') })
             .setIssuer(this.clientID)
             .setSubject(this.clientID)
             .setAudience([aud])
@@ -75,6 +84,8 @@ export class Token {
             throw new Error(`Failed to get token: ${resp.status}`);
         }
 
-        return resp.data.access_token;
+        const raw = String(resp.data?.access_token ?? "");
+        const normalized = raw.replace(/^\s*bearer\s*:*/i, "").trim();
+        return normalized;
     }
 }

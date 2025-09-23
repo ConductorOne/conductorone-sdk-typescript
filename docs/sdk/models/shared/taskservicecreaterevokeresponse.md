@@ -1,0 +1,18 @@
+# TaskServiceCreateRevokeResponse
+
+The TaskServiceCreateRevokeResponse returns a task view which has a task including JSONPATHs to the expanded items in the expanded array.
+
+## Example Usage
+
+```typescript
+import { TaskServiceCreateRevokeResponse } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: TaskServiceCreateRevokeResponse = {};
+```
+
+## Fields
+
+| Field                                                                                                                     | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               |
+| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `expanded`                                                                                                                | [shared.TaskServiceCreateRevokeResponseExpanded](../../../sdk/models/shared/taskservicecreaterevokeresponseexpanded.md)[] | :heavy_minus_sign:                                                                                                        | List of serialized related objects.                                                                                       |
+| `taskView`                                                                                                                | [shared.TaskView](../../../sdk/models/shared/taskview.md)                                                                 | :heavy_minus_sign:                                                                                                        | N/A                                                                                                                       |

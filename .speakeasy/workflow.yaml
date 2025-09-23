@@ -1,9 +1,20 @@
 workflowVersion: 1.0.0
+speakeasyVersion: latest
 sources:
     my-source:
         inputs:
             - location: https://insulator.conductor.one/api/v1/openapi.yaml
+        overlays:
+            - location: overlay.yaml
+        registry:
+            location: registry.speakeasyapi.dev/conductor-one/conductorone/my-source
 targets:
     conductorone-ts:
         target: typescript
         source: my-source
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/conductor-one/conductorone/my-source-typescript-code-samples
+            labelOverride:
+                fixedValue: Typescript (SDK)
+            blocking: false

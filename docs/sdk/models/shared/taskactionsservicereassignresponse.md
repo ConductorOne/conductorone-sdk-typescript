@@ -1,0 +1,19 @@
+# TaskActionsServiceReassignResponse
+
+The TaskActionsServiceReassignResponse returns a task view with paths indicating the location of expanded items in the array.
+
+## Example Usage
+
+```typescript
+import { TaskActionsServiceReassignResponse } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: TaskActionsServiceReassignResponse = {};
+```
+
+## Fields
+
+| Field                                                                                                                           | Type                                                                                                                            | Required                                                                                                                        | Description                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `expanded`                                                                                                                      | [shared.TaskActionsServiceReassignResponseExpanded](../../../sdk/models/shared/taskactionsservicereassignresponseexpanded.md)[] | :heavy_minus_sign:                                                                                                              | List of serialized related objects.                                                                                             |
+| `taskView`                                                                                                                      | [shared.TaskView](../../../sdk/models/shared/taskview.md)                                                                       | :heavy_minus_sign:                                                                                                              | N/A                                                                                                                             |
+| `ticketActionId`                                                                                                                | *string*                                                                                                                        | :heavy_minus_sign:                                                                                                              | The ID of the ticket (task) deny action created by this request.                                                                |

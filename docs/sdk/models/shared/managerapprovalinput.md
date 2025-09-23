@@ -1,0 +1,19 @@
+# ManagerApprovalInput
+
+The manager approval object provides configuration options for approval when the target of the approval is the manager of the user in the task.
+
+## Example Usage
+
+```typescript
+import { ManagerApprovalInput } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: ManagerApprovalInput = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                            | Type                                                                                                                                                                             | Required                                                                                                                                                                         | Description                                                                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `allowSelfApproval`                                                                                                                                                              | *boolean*                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                               | Configuration to allow self approval if the target user is their own manager. This may occur if a service account has an identity user and manager specified as the same person. |
+| `fallback`                                                                                                                                                                       | *boolean*                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                               | Configuration to allow a fallback if no manager is found.                                                                                                                        |
+| `fallbackUserIds`                                                                                                                                                                | *string*[]                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                               | Configuration to specific which users to fallback to if fallback is enabled and no manager is found.                                                                             |

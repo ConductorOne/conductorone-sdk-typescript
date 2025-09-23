@@ -1,9 +1,0 @@
-# C1ApiTaskV1TaskActionsServiceCommentRequest
-
-
-## Fields
-
-| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
-| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `taskActionsServiceCommentRequest`                                                                        | [shared.TaskActionsServiceCommentRequest](../../../sdk/models/shared/taskactionsservicecommentrequest.md) | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |
-| `taskId`                                                                                                  | *string*                                                                                                  | :heavy_check_mark:                                                                                        | N/A                                                                                                       |

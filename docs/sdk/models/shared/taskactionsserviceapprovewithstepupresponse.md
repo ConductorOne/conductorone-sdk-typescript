@@ -1,0 +1,20 @@
+# TaskActionsServiceApproveWithStepUpResponse
+
+TaskActionsServiceApproveWithStepUpResponse is the response for approving a task with step-up authentication
+
+## Example Usage
+
+```typescript
+import { TaskActionsServiceApproveWithStepUpResponse } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: TaskActionsServiceApproveWithStepUpResponse = {};
+```
+
+## Fields
+
+| Field                                                                                                                                             | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `expanded`                                                                                                                                        | [shared.TaskActionsServiceApproveWithStepUpResponseExpanded](../../../sdk/models/shared/taskactionsserviceapprovewithstepupresponseexpanded.md)[] | :heavy_minus_sign:                                                                                                                                | List of serialized related objects.                                                                                                               |
+| `redirectUrl`                                                                                                                                     | *string*                                                                                                                                          | :heavy_minus_sign:                                                                                                                                | The redirect URL the client must visit to complete the step-up authentication.                                                                    |
+| `taskView`                                                                                                                                        | [shared.TaskView](../../../sdk/models/shared/taskview.md)                                                                                         | :heavy_minus_sign:                                                                                                                                | N/A                                                                                                                                               |
+| `ticketActionId`                                                                                                                                  | *string*                                                                                                                                          | :heavy_minus_sign:                                                                                                                                | The ID of the ticket (task) approve action created by this request.                                                                               |

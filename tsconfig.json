@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["es2021"],
+    "target": "ES2022",
+    "lib": ["es2022", "dom", "dom.iterable"],
     "baseUrl": "src",
     "rootDir": "src",
     "outDir": "dist",
@@ -22,7 +22,7 @@
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
     "declaration": true,
-    "types": ["reflect-metadata"]
+    "types": ["reflect-metadata", "node"]
   },
   "include": ["src"],
 }
