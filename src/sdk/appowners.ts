@@ -3,7 +3,9 @@
  */
 
 import { appOwnersAdd } from "../funcs/appOwnersAdd.js";
+import { appOwnersDelete } from "../funcs/appOwnersDelete.js";
 import { appOwnersList } from "../funcs/appOwnersList.js";
+import { appOwnersListOwnerIDs } from "../funcs/appOwnersListOwnerIDs.js";
 import { appOwnersRemove } from "../funcs/appOwnersRemove.js";
 import { appOwnersSet } from "../funcs/appOwnersSet.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -11,6 +13,40 @@ import * as operations from "./models/operations/index.js";
 import { unwrapAsync } from "./types/fp.js";
 
 export class AppOwners extends ClientSDK {
+  /**
+   * List Owner I Ds
+   *
+   * @remarks
+   * ListOwnerIDs lists owner IDs for a given app.
+   */
+  async listOwnerIDs(
+    request: operations.C1ApiAppV1AppOwnersListOwnerIDsRequest,
+    options?: RequestOptions,
+  ): Promise<operations.C1ApiAppV1AppOwnersListOwnerIDsResponse> {
+    return unwrapAsync(appOwnersListOwnerIDs(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete
+   *
+   * @remarks
+   * Delete deletes the owners from a given app.
+   */
+  async delete(
+    request: operations.C1ApiAppV1AppOwnersDeleteRequest,
+    options?: RequestOptions,
+  ): Promise<operations.C1ApiAppV1AppOwnersDeleteResponse> {
+    return unwrapAsync(appOwnersDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
   /**
    * List
    *
