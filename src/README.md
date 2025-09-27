@@ -54,28 +54,25 @@ The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https
 ### NPM
 
 ```bash
-npm add <UNSET>
+npm add https://github.com/ConductorOne/conductorone-sdk-typescript
 ```
 
 ### PNPM
 
 ```bash
-pnpm add <UNSET>
+pnpm add https://github.com/ConductorOne/conductorone-sdk-typescript
 ```
 
 ### Bun
 
 ```bash
-bun add <UNSET>
+bun add https://github.com/ConductorOne/conductorone-sdk-typescript
 ```
 
 ### Yarn
 
 ```bash
-yarn add <UNSET> zod
-
-# Note that Yarn does not install peer dependencies automatically. You will need
-# to install zod as shown above.
+yarn add https://github.com/ConductorOne/conductorone-sdk-typescript
 ```
 
 > [!NOTE]
@@ -227,6 +224,8 @@ run();
 
 ### [appOwners](docs/sdks/appowners/README.md)
 
+* [listOwnerIDs](docs/sdks/appowners/README.md#listownerids) - List Owner I Ds
+* [delete](docs/sdks/appowners/README.md#delete) - Delete
 * [list](docs/sdks/appowners/README.md#list) - List
 * [set](docs/sdks/appowners/README.md#set) - Set
 * [remove](docs/sdks/appowners/README.md#remove) - Remove
@@ -365,6 +364,10 @@ run();
 * [updateDelegated](docs/sdks/connector/README.md#updatedelegated) - Update Delegated
 * [rotateCredential](docs/sdks/connector/README.md#rotatecredential) - Rotate Credential
 * [validateHTTPConnectorConfig](docs/sdks/connector/README.md#validatehttpconnectorconfig) - Validate Http Connector Config
+
+### [connectorCatalog](docs/sdks/connectorcatalog/README.md)
+
+* [configurationSchema](docs/sdks/connectorcatalog/README.md#configurationschema) - Configuration Schema
 
 ### [directory](docs/sdks/directory/README.md)
 
@@ -612,7 +615,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`appEntitlementUserBindingSearchPastGrants`](docs/sdks/appentitlementuserbinding/README.md#searchpastgrants) - Search Past Grants
 - [`appEntitlementUserBindingUpdateGrantDuration`](docs/sdks/appentitlementuserbinding/README.md#updategrantduration) - Update Grant Duration
 - [`appOwnersAdd`](docs/sdks/appowners/README.md#add) - Add
+- [`appOwnersDelete`](docs/sdks/appowners/README.md#delete) - Delete
 - [`appOwnersList`](docs/sdks/appowners/README.md#list) - List
+- [`appOwnersListOwnerIDs`](docs/sdks/appowners/README.md#listownerids) - List Owner I Ds
 - [`appOwnersRemove`](docs/sdks/appowners/README.md#remove) - Remove
 - [`appOwnersSet`](docs/sdks/appowners/README.md#set) - Set
 - [`appReportActionGenerateReport`](docs/sdks/appreportaction/README.md#generatereport) - Generate Report
@@ -673,6 +678,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`automationSearchSearchAutomationTemplateVersions`](docs/sdks/automationsearch/README.md#searchautomationtemplateversions) - Search Automation Template Versions
 - [`automationUpdateAutomation`](docs/sdks/automation/README.md#updateautomation) - Update Automation
 - [`awsExternalIDSettingsGet`](docs/sdks/awsexternalidsettings/README.md#get) - Get
+- [`connectorCatalogConfigurationSchema`](docs/sdks/connectorcatalog/README.md#configurationschema) - Configuration Schema
 - [`connectorConfirmSyncValid`](docs/sdks/connector/README.md#confirmsyncvalid) - Confirm Sync Valid
 - [`connectorCreate`](docs/sdks/connector/README.md#create) - Create
 - [`connectorCreateDelegated`](docs/sdks/connector/README.md#createdelegated) - Create Delegated
