@@ -12,6 +12,9 @@ targets:
     conductorone-ts:
         target: typescript
         source: my-source
+        publish:
+            npm:
+                token: $npm_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/conductor-one/conductorone/my-source-typescript-code-samples
