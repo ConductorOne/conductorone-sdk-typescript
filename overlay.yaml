@@ -3076,6 +3076,12 @@ actions:
       - "null"
   - target: $["components"]["schemas"]["c1.api.app.v1.CreateManuallyManagedResourceTypeResponse"]["properties"]["expanded"]["nullable"]
     remove: true
+  - target: $["components"]["schemas"]["c1.api.app.v1.DeleteAppOwnersRequestInput"]["properties"]["userIds"]["type"]
+    update:
+      - array
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.app.v1.DeleteAppOwnersRequestInput"]["properties"]["userIds"]["nullable"]
+    remove: true
   - target: $["components"]["schemas"]["c1.api.app.v1.EditorValidateRequest"]["properties"]["text"]["type"]
     update:
       - string
@@ -3232,6 +3238,12 @@ actions:
     remove: true
   - target: $["components"]["schemas"]["c1.api.app.v1.GrantReason"]["properties"]["updatedAt"]["type"]
     remove: true
+  - target: $["components"]["schemas"]["c1.api.app.v1.ListAppEntitlementOwnerIDsResponse"]["properties"]["userIds"]["type"]
+    update:
+      - array
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.app.v1.ListAppEntitlementOwnerIDsResponse"]["properties"]["userIds"]["nullable"]
+    remove: true
   - target: $["components"]["schemas"]["c1.api.app.v1.ListAppEntitlementOwnersResponse"]["properties"]["list"]["type"]
     update:
       - array
@@ -3274,6 +3286,12 @@ actions:
     update:
       - string
       - "null"
+  - target: $["components"]["schemas"]["c1.api.app.v1.ListAppOwnerIDsResponse"]["properties"]["userIds"]["type"]
+    update:
+      - array
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.app.v1.ListAppOwnerIDsResponse"]["properties"]["userIds"]["nullable"]
+    remove: true
   - target: $["components"]["schemas"]["c1.api.app.v1.ListAppOwnersResponse"]["properties"]["list"]["type"]
     update:
       - array
@@ -4172,6 +4190,41 @@ actions:
     update:
       - string
       - "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AccountInContext"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AccountLifecycleAction"]["properties"]["accountInContext"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.automations.v1.AccountInContext'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AccountLifecycleAction"]["properties"]["accountInContext"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AccountLifecycleAction"]["properties"]["accountRef"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.automations.v1.AccountRef'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AccountLifecycleAction"]["properties"]["accountRef"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AccountLifecycleAction"]["properties"]["actionName"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AccountLifecycleAction"]["properties"]["connectorRef"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.app.v1.ConnectorRef'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AccountLifecycleAction"]["properties"]["connectorRef"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AccountLifecycleAction"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AccountRef"]["properties"]["accountIdCel"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AccountRef"]["nullable"]
+    remove: true
   - target: $["components"]["schemas"]["c1.api.automations.v1.AppUserCreatedTrigger"]["properties"]["appId"]["type"]
     update:
       - string
@@ -4434,6 +4487,13 @@ actions:
     update:
       - string
       - "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AutomationStep"]["properties"]["accountLifecycleAction"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.automations.v1.AccountLifecycleAction'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AutomationStep"]["properties"]["accountLifecycleAction"]["$ref"]
+    remove: true
   - target: $["components"]["schemas"]["c1.api.automations.v1.AutomationStep"]["properties"]["callFunction"]
     update:
       oneOf:
@@ -4867,6 +4927,16 @@ actions:
   - target: $["components"]["schemas"]["c1.api.automations.v1.CreateRevokeTasks"]["properties"]["appEntitlementRefs"]["nullable"]
     remove: true
   - target: $["components"]["schemas"]["c1.api.automations.v1.CreateRevokeTasks"]["properties"]["appEntitlementRefsCel"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.CreateRevokeTasks"]["properties"]["excludedAppEntitlementRefs"]["type"]
+    update:
+      - array
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.CreateRevokeTasks"]["properties"]["excludedAppEntitlementRefs"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.automations.v1.CreateRevokeTasks"]["properties"]["excludedAppEntitlementRefsCel"]["type"]
     update:
       - string
       - "null"
@@ -6645,6 +6715,309 @@ actions:
         - $ref: '#/components/schemas/c1.api.iam.v1.Role'
         - type: "null"
   - target: $["components"]["schemas"]["c1.api.iam.v1.UpdateRolesResponse"]["properties"]["role"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.CheckboxField"]["properties"]["checked"]["type"]
+    update:
+      - boolean
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.CheckboxField"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ConfigSchema"]["properties"]["displayName"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ConfigSchema"]["properties"]["fieldGroups"]["type"]
+    update:
+      - array
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ConfigSchema"]["properties"]["fieldGroups"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ConfigSchema"]["properties"]["fields"]["type"]
+    update:
+      - array
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ConfigSchema"]["properties"]["fields"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ConfigSchema"]["properties"]["helpUrl"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ConfigSchema"]["properties"]["iconUrl"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ConfigSchema"]["properties"]["isOauth2"]["type"]
+    update:
+      - boolean
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ConfigSchema"]["properties"]["requiresExternalConnector"]["type"]
+    update:
+      - boolean
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ConfigSchema"]["properties"]["supportsExternalResources"]["type"]
+    update:
+      - boolean
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ConnectorCatalogServiceConfigurationSchemaRequest"]["properties"]["appId"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ConnectorCatalogServiceConfigurationSchemaRequest"]["properties"]["catalogId"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ConnectorCatalogServiceConfigurationSchemaRequest"]["properties"]["connectorId"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ConnectorCatalogServiceConfigurationSchemaResponse"]["properties"]["formSchema"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.form.v1.Form'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ConnectorCatalogServiceConfigurationSchemaResponse"]["properties"]["formSchema"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ConnectorCatalogServiceConfigurationSchemaResponse"]["properties"]["schema"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.integration.connector.v1.ConfigSchema'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ConnectorCatalogServiceConfigurationSchemaResponse"]["properties"]["schema"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["additionalPlaceholder"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["checkbox"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.integration.connector.v1.CheckboxField'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["checkbox"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["dependsOnFields"]["type"]
+    update:
+      - array
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["dependsOnFields"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["displayName"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["helpUrl"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["import"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.integration.connector.v1.ImportField'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["import"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["keyValue"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.integration.connector.v1.KeyValueField'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["keyValue"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["name"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["oauth2"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.integration.connector.v1.OAuth2Field'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["oauth2"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["options"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.integration.connector.v1.OptionsField'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["options"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["placeholder"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["postCreate"]["type"]
+    update:
+      - boolean
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["random"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.integration.connector.v1.RandomStringField'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["random"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["readOnly"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.integration.connector.v1.ReadOnlyField'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["readOnly"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["secret"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.integration.connector.v1.RotatableSecretField'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["secret"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["select"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.integration.connector.v1.SelectField'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["select"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["str"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.integration.connector.v1.StringField'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["str"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["strList"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.integration.connector.v1.StringListField'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["strList"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["stringMap"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.integration.connector.v1.StringMapField'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["stringMap"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["text"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.integration.connector.v1.TextField'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.Field"]["properties"]["text"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.FieldGroup"]["properties"]["displayName"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.FieldGroup"]["properties"]["fieldNames"]["type"]
+    update:
+      - array
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.FieldGroup"]["properties"]["fieldNames"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.FieldGroup"]["properties"]["helpText"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.FieldGroup"]["properties"]["name"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ImportField"]["properties"]["allowedExtensions"]["type"]
+    update:
+      - array
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ImportField"]["properties"]["allowedExtensions"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ImportField"]["properties"]["secret"]["type"]
+    update:
+      - boolean
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ImportField"]["properties"]["valueValidator"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/validate.StringRules'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ImportField"]["properties"]["valueValidator"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ImportField"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.KeyValueField"]["properties"]["secret"]["type"]
+    update:
+      - boolean
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.KeyValueField"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.OAuth2Field"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.OptionsField"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.RandomStringField"]["properties"]["length"]["type"]
+    update:
+      - integer
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.RandomStringField"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.ReadOnlyField"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.RotatableSecretField"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.SelectField"]["properties"]["items"]["type"]
+    update:
+      - array
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.SelectField"]["properties"]["items"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.SelectField"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.SelectField.Item"]["properties"]["displayName"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.SelectField.Item"]["properties"]["value"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.StringField"]["properties"]["secret"]["type"]
+    update:
+      - boolean
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.StringField"]["properties"]["valueValidator"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/validate.StringRules'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.StringField"]["properties"]["valueValidator"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.StringField"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.StringListField"]["properties"]["valueValidator"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/validate.StringRules'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.StringListField"]["properties"]["valueValidator"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.StringListField"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.StringMapField"]["properties"]["optional"]["type"]
+    update:
+      - boolean
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.StringMapField"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.TextField"]["properties"]["secret"]["type"]
+    update:
+      - boolean
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.TextField"]["properties"]["valueValidator"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/validate.StringRules'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.TextField"]["properties"]["valueValidator"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.integration.connector.v1.TextField"]["nullable"]
     remove: true
   - target: $["components"]["schemas"]["c1.api.policy.v1.Accept"]["properties"]["acceptMessage"]["type"]
     update:
@@ -14233,12 +14606,6 @@ actions:
     remove: true
   - target: $["components"]["schemas"]["validate.UInt64Rules"]["nullable"]
     remove: true
-  - target: $["components"]["schemas"]["c1.api.app.v1.DeleteAppEntitlementOwnersRequestInput"]
-    remove: true
-  - target: $["components"]["schemas"]["c1.api.app.v1.DeleteAppEntitlementOwnersResponse"]
-    remove: true
-  - target: $["components"]["schemas"]["c1.api.app.v1.ListAppEntitlementOwnerIDsResponse"]
-    remove: true
   - target: $["paths"]["/api/v1/accessconflict/{id}"]["delete"]["parameters"][0]["schema"]["type"]
     update:
       - string
@@ -14559,6 +14926,22 @@ actions:
     update:
       - string
       - "null"
+  - target: $["paths"]["/api/v1/apps/{app_id}/entitlements/{entitlement_id}/ownerids"]["get"]["parameters"][0]["schema"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["paths"]["/api/v1/apps/{app_id}/entitlements/{entitlement_id}/ownerids"]["get"]["parameters"][1]["schema"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["paths"]["/api/v1/apps/{app_id}/entitlements/{entitlement_id}/owners"]["delete"]["parameters"][0]["schema"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["paths"]["/api/v1/apps/{app_id}/entitlements/{entitlement_id}/owners"]["delete"]["parameters"][1]["schema"]["type"]
+    update:
+      - string
+      - "null"
   - target: $["paths"]["/api/v1/apps/{app_id}/entitlements/{entitlement_id}/owners"]["get"]["parameters"][0]["schema"]["type"]
     update:
       - string
@@ -14591,8 +14974,6 @@ actions:
     update:
       - string
       - "null"
-  - target: $["paths"]["/api/v1/apps/{app_id}/entitlements/{entitlement_id}/owners"]["delete"]
-    remove: true
   - target: $["paths"]["/api/v1/apps/{app_id}/entitlements/{entitlement_id}/owners/{user_id}"]["delete"]["parameters"][0]["schema"]["type"]
     update:
       - string
@@ -14662,6 +15043,14 @@ actions:
       - integer
       - "null"
   - target: $["paths"]["/api/v1/apps/{app_id}/entitlements/users/{app_user_id}"]["get"]["parameters"][3]["schema"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["paths"]["/api/v1/apps/{app_id}/ownerids"]["get"]["parameters"][0]["schema"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["paths"]["/api/v1/apps/{app_id}/owners"]["delete"]["parameters"][0]["schema"]["type"]
     update:
       - string
       - "null"
@@ -15377,5 +15766,3 @@ actions:
     update:
       - string
       - "null"
-  - target: $["paths"]["/api/v1/apps/{app_id}/entitlements/{entitlement_id}/ownerids"]
-    remove: true
