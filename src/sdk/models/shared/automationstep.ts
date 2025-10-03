@@ -7,6 +7,12 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  AccountLifecycleAction,
+  AccountLifecycleAction$inboundSchema,
+  AccountLifecycleAction$Outbound,
+  AccountLifecycleAction$outboundSchema,
+} from "./accountlifecycleaction.js";
+import {
   CallFunction,
   CallFunction$inboundSchema,
   CallFunction$Outbound,
@@ -118,8 +124,10 @@ import {
  *   - grantEntitlements
  *   - sendSlackMessage
  *   - callFunction
+ *   - accountLifecycleAction
  */
 export type AutomationStep = {
+  accountLifecycleAction?: AccountLifecycleAction | null | undefined;
   callFunction?: CallFunction | null | undefined;
   connectorAction?: ConnectorAction | null | undefined;
   connectorCreateAccount?: ConnectorCreateAccount | null | undefined;
@@ -158,6 +166,8 @@ export const AutomationStep$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  accountLifecycleAction: z.nullable(AccountLifecycleAction$inboundSchema)
+    .optional(),
   callFunction: z.nullable(CallFunction$inboundSchema).optional(),
   connectorAction: z.nullable(ConnectorAction$inboundSchema).optional(),
   connectorCreateAccount: z.nullable(ConnectorCreateAccount$inboundSchema)
@@ -184,6 +194,7 @@ export const AutomationStep$inboundSchema: z.ZodType<
 
 /** @internal */
 export type AutomationStep$Outbound = {
+  accountLifecycleAction?: AccountLifecycleAction$Outbound | null | undefined;
   callFunction?: CallFunction$Outbound | null | undefined;
   connectorAction?: ConnectorAction$Outbound | null | undefined;
   connectorCreateAccount?: ConnectorCreateAccount$Outbound | null | undefined;
@@ -213,6 +224,8 @@ export const AutomationStep$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AutomationStep
 > = z.object({
+  accountLifecycleAction: z.nullable(AccountLifecycleAction$outboundSchema)
+    .optional(),
   callFunction: z.nullable(CallFunction$outboundSchema).optional(),
   connectorAction: z.nullable(ConnectorAction$outboundSchema).optional(),
   connectorCreateAccount: z.nullable(ConnectorCreateAccount$outboundSchema)

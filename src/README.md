@@ -45,37 +45,30 @@ ConductorOne API: The ConductorOne API is a HTTP API for managing ConductorOne r
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-> [!TIP]
-> To finish publishing your SDK to npm and others you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
-
 The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
 
 ### NPM
 
 ```bash
-npm add <UNSET>
+npm add conductorone-sdk-typescript
 ```
 
 ### PNPM
 
 ```bash
-pnpm add <UNSET>
+pnpm add conductorone-sdk-typescript
 ```
 
 ### Bun
 
 ```bash
-bun add <UNSET>
+bun add conductorone-sdk-typescript
 ```
 
 ### Yarn
 
 ```bash
-yarn add <UNSET> zod
-
-# Note that Yarn does not install peer dependencies automatically. You will need
-# to install zod as shown above.
+yarn add conductorone-sdk-typescript
 ```
 
 > [!NOTE]
@@ -179,6 +172,8 @@ run();
 
 ### [appEntitlementOwners](docs/sdks/appentitlementowners/README.md)
 
+* [listOwnerIDs](docs/sdks/appentitlementowners/README.md#listownerids) - List Owner I Ds
+* [delete](docs/sdks/appentitlementowners/README.md#delete) - Delete
 * [list](docs/sdks/appentitlementowners/README.md#list) - List
 * [add](docs/sdks/appentitlementowners/README.md#add) - Add
 * [set](docs/sdks/appentitlementowners/README.md#set) - Set
@@ -227,6 +222,8 @@ run();
 
 ### [appOwners](docs/sdks/appowners/README.md)
 
+* [listOwnerIDs](docs/sdks/appowners/README.md#listownerids) - List Owner I Ds
+* [delete](docs/sdks/appowners/README.md#delete) - Delete
 * [list](docs/sdks/appowners/README.md#list) - List
 * [set](docs/sdks/appowners/README.md#set) - Set
 * [remove](docs/sdks/appowners/README.md#remove) - Remove
@@ -365,6 +362,10 @@ run();
 * [updateDelegated](docs/sdks/connector/README.md#updatedelegated) - Update Delegated
 * [rotateCredential](docs/sdks/connector/README.md#rotatecredential) - Rotate Credential
 * [validateHTTPConnectorConfig](docs/sdks/connector/README.md#validatehttpconnectorconfig) - Validate Http Connector Config
+
+### [connectorCatalog](docs/sdks/connectorcatalog/README.md)
+
+* [configurationSchema](docs/sdks/connectorcatalog/README.md#configurationschema) - Configuration Schema
 
 ### [directory](docs/sdks/directory/README.md)
 
@@ -580,7 +581,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`appEntitlementMonitorBindingDeleteAppEntitlementMonitorBinding`](docs/sdks/appentitlementmonitorbinding/README.md#deleteappentitlementmonitorbinding) - Delete App Entitlement Monitor Binding
 - [`appEntitlementMonitorBindingGetAppEntitlementMonitorBinding`](docs/sdks/appentitlementmonitorbinding/README.md#getappentitlementmonitorbinding) - Get App Entitlement Monitor Binding
 - [`appEntitlementOwnersAdd`](docs/sdks/appentitlementowners/README.md#add) - Add
+- [`appEntitlementOwnersDelete`](docs/sdks/appentitlementowners/README.md#delete) - Delete
 - [`appEntitlementOwnersList`](docs/sdks/appentitlementowners/README.md#list) - List
+- [`appEntitlementOwnersListOwnerIDs`](docs/sdks/appentitlementowners/README.md#listownerids) - List Owner I Ds
 - [`appEntitlementOwnersRemove`](docs/sdks/appentitlementowners/README.md#remove) - Remove
 - [`appEntitlementOwnersSet`](docs/sdks/appentitlementowners/README.md#set) - Set
 - [`appEntitlementsAddAutomationExclusion`](docs/sdks/appentitlements/README.md#addautomationexclusion) - Add Automation Exclusion
@@ -612,7 +615,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`appEntitlementUserBindingSearchPastGrants`](docs/sdks/appentitlementuserbinding/README.md#searchpastgrants) - Search Past Grants
 - [`appEntitlementUserBindingUpdateGrantDuration`](docs/sdks/appentitlementuserbinding/README.md#updategrantduration) - Update Grant Duration
 - [`appOwnersAdd`](docs/sdks/appowners/README.md#add) - Add
+- [`appOwnersDelete`](docs/sdks/appowners/README.md#delete) - Delete
 - [`appOwnersList`](docs/sdks/appowners/README.md#list) - List
+- [`appOwnersListOwnerIDs`](docs/sdks/appowners/README.md#listownerids) - List Owner I Ds
 - [`appOwnersRemove`](docs/sdks/appowners/README.md#remove) - Remove
 - [`appOwnersSet`](docs/sdks/appowners/README.md#set) - Set
 - [`appReportActionGenerateReport`](docs/sdks/appreportaction/README.md#generatereport) - Generate Report
@@ -673,6 +678,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`automationSearchSearchAutomationTemplateVersions`](docs/sdks/automationsearch/README.md#searchautomationtemplateversions) - Search Automation Template Versions
 - [`automationUpdateAutomation`](docs/sdks/automation/README.md#updateautomation) - Update Automation
 - [`awsExternalIDSettingsGet`](docs/sdks/awsexternalidsettings/README.md#get) - Get
+- [`connectorCatalogConfigurationSchema`](docs/sdks/connectorcatalog/README.md#configurationschema) - Configuration Schema
 - [`connectorConfirmSyncValid`](docs/sdks/connector/README.md#confirmsyncvalid) - Confirm Sync Valid
 - [`connectorCreate`](docs/sdks/connector/README.md#create) - Create
 - [`connectorCreateDelegated`](docs/sdks/connector/README.md#createdelegated) - Create Delegated

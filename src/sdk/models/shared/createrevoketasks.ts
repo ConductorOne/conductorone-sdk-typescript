@@ -32,9 +32,15 @@ export type CreateRevokeTasks = {
    */
   appEntitlementRefsCel?: string | null | undefined;
   /**
+   * The excludedAppEntitlementRefs field.
+   */
+  excludedAppEntitlementRefs?: Array<AppEntitlementRef> | null | undefined;
+  /**
+   * The excludedAppEntitlementRefsCel field.
+   */
+  excludedAppEntitlementRefsCel?: string | null | undefined;
+  /**
    * The revokeAll field.
-   *
-   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   revokeAll?: boolean | null | undefined;
   /**
@@ -57,6 +63,10 @@ export const CreateRevokeTasks$inboundSchema: z.ZodType<
   appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
     .optional(),
   appEntitlementRefsCel: z.nullable(z.string()).optional(),
+  excludedAppEntitlementRefs: z.nullable(
+    z.array(AppEntitlementRef$inboundSchema),
+  ).optional(),
+  excludedAppEntitlementRefsCel: z.nullable(z.string()).optional(),
   revokeAll: z.nullable(z.boolean()).optional(),
   useSubjectUser: z.nullable(z.boolean()).optional(),
   userIdCel: z.nullable(z.string()).optional(),
@@ -67,6 +77,11 @@ export const CreateRevokeTasks$inboundSchema: z.ZodType<
 export type CreateRevokeTasks$Outbound = {
   appEntitlementRefs?: Array<AppEntitlementRef$Outbound> | null | undefined;
   appEntitlementRefsCel?: string | null | undefined;
+  excludedAppEntitlementRefs?:
+    | Array<AppEntitlementRef$Outbound>
+    | null
+    | undefined;
+  excludedAppEntitlementRefsCel?: string | null | undefined;
   revokeAll?: boolean | null | undefined;
   useSubjectUser?: boolean | null | undefined;
   userIdCel?: string | null | undefined;
@@ -82,6 +97,10 @@ export const CreateRevokeTasks$outboundSchema: z.ZodType<
   appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
     .optional(),
   appEntitlementRefsCel: z.nullable(z.string()).optional(),
+  excludedAppEntitlementRefs: z.nullable(
+    z.array(AppEntitlementRef$outboundSchema),
+  ).optional(),
+  excludedAppEntitlementRefsCel: z.nullable(z.string()).optional(),
   revokeAll: z.nullable(z.boolean()).optional(),
   useSubjectUser: z.nullable(z.boolean()).optional(),
   userIdCel: z.nullable(z.string()).optional(),
