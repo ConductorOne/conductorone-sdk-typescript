@@ -33,6 +33,7 @@ import { AutomationExecutionSearch } from "./automationexecutionsearch.js";
 import { AutomationSearch } from "./automationsearch.js";
 import { AWSExternalIDSettings } from "./awsexternalidsettings.js";
 import { Connector } from "./connector.js";
+import { ConnectorCatalog } from "./connectorcatalog.js";
 import { Directory } from "./directory.js";
 import { Export } from "./export.js";
 import { ExportsSearch } from "./exportssearch.js";
@@ -208,6 +209,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._requestCatalogManagement ??= new RequestCatalogManagement(
       this._options,
     ));
+  }
+
+  private _connectorCatalog?: ConnectorCatalog;
+  get connectorCatalog(): ConnectorCatalog {
+    return (this._connectorCatalog ??= new ConnectorCatalog(this._options));
   }
 
   private _directory?: Directory;

@@ -3,7 +3,9 @@
  */
 
 import { appEntitlementOwnersAdd } from "../funcs/appEntitlementOwnersAdd.js";
+import { appEntitlementOwnersDelete } from "../funcs/appEntitlementOwnersDelete.js";
 import { appEntitlementOwnersList } from "../funcs/appEntitlementOwnersList.js";
+import { appEntitlementOwnersListOwnerIDs } from "../funcs/appEntitlementOwnersListOwnerIDs.js";
 import { appEntitlementOwnersRemove } from "../funcs/appEntitlementOwnersRemove.js";
 import { appEntitlementOwnersSet } from "../funcs/appEntitlementOwnersSet.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -11,6 +13,40 @@ import * as operations from "./models/operations/index.js";
 import { unwrapAsync } from "./types/fp.js";
 
 export class AppEntitlementOwners extends ClientSDK {
+  /**
+   * List Owner I Ds
+   *
+   * @remarks
+   * ListUserIDs lists owner IDs for a given app entitlement.
+   */
+  async listOwnerIDs(
+    request: operations.C1ApiAppV1AppEntitlementOwnersListOwnerIDsRequest,
+    options?: RequestOptions,
+  ): Promise<operations.C1ApiAppV1AppEntitlementOwnersListOwnerIDsResponse> {
+    return unwrapAsync(appEntitlementOwnersListOwnerIDs(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete
+   *
+   * @remarks
+   * Delete deletes the owners from a given app entitlement.
+   */
+  async delete(
+    request: operations.C1ApiAppV1AppEntitlementOwnersDeleteRequest,
+    options?: RequestOptions,
+  ): Promise<operations.C1ApiAppV1AppEntitlementOwnersDeleteResponse> {
+    return unwrapAsync(appEntitlementOwnersDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
   /**
    * List
    *

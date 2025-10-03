@@ -7,17 +7,59 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  BoolField,
-  BoolField$inboundSchema,
-  BoolField$Outbound,
-  BoolField$outboundSchema,
-} from "./boolfield.js";
+  CheckboxField1,
+  CheckboxField1$inboundSchema,
+  CheckboxField1$Outbound,
+  CheckboxField1$outboundSchema,
+} from "./checkboxfield1.js";
 import {
-  Int64Field,
-  Int64Field$inboundSchema,
-  Int64Field$Outbound,
-  Int64Field$outboundSchema,
-} from "./int64field.js";
+  ImportField,
+  ImportField$inboundSchema,
+  ImportField$Outbound,
+  ImportField$outboundSchema,
+} from "./importfield.js";
+import {
+  KeyValueField,
+  KeyValueField$inboundSchema,
+  KeyValueField$Outbound,
+  KeyValueField$outboundSchema,
+} from "./keyvaluefield.js";
+import {
+  OAuth2Field,
+  OAuth2Field$inboundSchema,
+  OAuth2Field$Outbound,
+  OAuth2Field$outboundSchema,
+} from "./oauth2field.js";
+import {
+  OptionsField,
+  OptionsField$inboundSchema,
+  OptionsField$Outbound,
+  OptionsField$outboundSchema,
+} from "./optionsfield.js";
+import {
+  RandomStringField,
+  RandomStringField$inboundSchema,
+  RandomStringField$Outbound,
+  RandomStringField$outboundSchema,
+} from "./randomstringfield.js";
+import {
+  ReadOnlyField,
+  ReadOnlyField$inboundSchema,
+  ReadOnlyField$Outbound,
+  ReadOnlyField$outboundSchema,
+} from "./readonlyfield.js";
+import {
+  RotatableSecretField,
+  RotatableSecretField$inboundSchema,
+  RotatableSecretField$Outbound,
+  RotatableSecretField$outboundSchema,
+} from "./rotatablesecretfield.js";
+import {
+  SelectField,
+  SelectField$inboundSchema,
+  SelectField$Outbound,
+  SelectField$outboundSchema,
+} from "./selectfield.js";
 import {
   StringField,
   StringField$inboundSchema,
@@ -25,63 +67,138 @@ import {
   StringField$outboundSchema,
 } from "./stringfield.js";
 import {
-  StringSliceField,
-  StringSliceField$inboundSchema,
-  StringSliceField$Outbound,
-  StringSliceField$outboundSchema,
-} from "./stringslicefield.js";
+  StringListField,
+  StringListField$inboundSchema,
+  StringListField$Outbound,
+  StringListField$outboundSchema,
+} from "./stringlistfield.js";
+import {
+  StringMapField,
+  StringMapField$inboundSchema,
+  StringMapField$Outbound,
+  StringMapField$outboundSchema,
+} from "./stringmapfield.js";
+import {
+  TextField,
+  TextField$inboundSchema,
+  TextField$Outbound,
+  TextField$outboundSchema,
+} from "./textfield.js";
 
 /**
- * A field is a single input meant to collect a piece of data from a user
+ * The Field message.
  *
  * @remarks
  *
- * This message contains a oneof named type. Only a single field of the following list may be set at a time:
- *   - stringField
- *   - boolField
- *   - stringSliceField
- *   - int64Field
+ * This message contains a oneof named field. Only a single field of the following list may be set at a time:
+ *   - str
+ *   - select
+ *   - random
+ *   - import
+ *   - oauth2
+ *   - readOnly
+ *   - options
+ *   - checkbox
+ *   - secret
+ *   - strList
+ *   - text
+ *   - keyValue
+ *   - stringMap
  */
 export type Field = {
-  boolField?: BoolField | null | undefined;
   /**
-   * The description field.
+   * Optional. Additional placeholder text for the field
+   *
+   * @remarks
+   *  In cases where a single placeholder is not enough to describe the field
    */
-  description?: string | null | undefined;
+  additionalPlaceholder?: string | null | undefined;
+  checkbox?: CheckboxField1 | null | undefined;
   /**
-   * The displayName field.
+   * The dependsOnFields field.
+   */
+  dependsOnFields?: Array<string> | null | undefined;
+  /**
+   * Human-readable label for this Field
    */
   displayName?: string | null | undefined;
-  int64Field?: Int64Field | null | undefined;
   /**
-   * The name field.
+   * empty or https URL
+   */
+  helpUrl?: string | null | undefined;
+  import?: ImportField | null | undefined;
+  keyValue?: KeyValueField | null | undefined;
+  /**
+   * Must not start with `C1_` and match [a-zA-Z0-9_]{2,64}.  Must be unique within a connector.
    */
   name?: string | null | undefined;
-  stringField?: StringField | null | undefined;
-  stringSliceField?: StringSliceField | null | undefined;
+  oauth2?: OAuth2Field | null | undefined;
+  options?: OptionsField | null | undefined;
+  /**
+   * The placeholder field.
+   */
+  placeholder?: string | null | undefined;
+  /**
+   * The postCreate field.
+   */
+  postCreate?: boolean | null | undefined;
+  random?: RandomStringField | null | undefined;
+  readOnly?: ReadOnlyField | null | undefined;
+  secret?: RotatableSecretField | null | undefined;
+  select?: SelectField | null | undefined;
+  str?: StringField | null | undefined;
+  strList?: StringListField | null | undefined;
+  stringMap?: StringMapField | null | undefined;
+  text?: TextField | null | undefined;
 };
 
 /** @internal */
 export const Field$inboundSchema: z.ZodType<Field, z.ZodTypeDef, unknown> = z
   .object({
-    boolField: z.nullable(BoolField$inboundSchema).optional(),
-    description: z.nullable(z.string()).optional(),
+    additionalPlaceholder: z.nullable(z.string()).optional(),
+    checkbox: z.nullable(CheckboxField1$inboundSchema).optional(),
+    dependsOnFields: z.nullable(z.array(z.string())).optional(),
     displayName: z.nullable(z.string()).optional(),
-    int64Field: z.nullable(Int64Field$inboundSchema).optional(),
+    helpUrl: z.nullable(z.string()).optional(),
+    import: z.nullable(ImportField$inboundSchema).optional(),
+    keyValue: z.nullable(KeyValueField$inboundSchema).optional(),
     name: z.nullable(z.string()).optional(),
-    stringField: z.nullable(StringField$inboundSchema).optional(),
-    stringSliceField: z.nullable(StringSliceField$inboundSchema).optional(),
+    oauth2: z.nullable(OAuth2Field$inboundSchema).optional(),
+    options: z.nullable(OptionsField$inboundSchema).optional(),
+    placeholder: z.nullable(z.string()).optional(),
+    postCreate: z.nullable(z.boolean()).optional(),
+    random: z.nullable(RandomStringField$inboundSchema).optional(),
+    readOnly: z.nullable(ReadOnlyField$inboundSchema).optional(),
+    secret: z.nullable(RotatableSecretField$inboundSchema).optional(),
+    select: z.nullable(SelectField$inboundSchema).optional(),
+    str: z.nullable(StringField$inboundSchema).optional(),
+    strList: z.nullable(StringListField$inboundSchema).optional(),
+    stringMap: z.nullable(StringMapField$inboundSchema).optional(),
+    text: z.nullable(TextField$inboundSchema).optional(),
   });
 
 /** @internal */
 export type Field$Outbound = {
-  boolField?: BoolField$Outbound | null | undefined;
-  description?: string | null | undefined;
+  additionalPlaceholder?: string | null | undefined;
+  checkbox?: CheckboxField1$Outbound | null | undefined;
+  dependsOnFields?: Array<string> | null | undefined;
   displayName?: string | null | undefined;
-  int64Field?: Int64Field$Outbound | null | undefined;
+  helpUrl?: string | null | undefined;
+  import?: ImportField$Outbound | null | undefined;
+  keyValue?: KeyValueField$Outbound | null | undefined;
   name?: string | null | undefined;
-  stringField?: StringField$Outbound | null | undefined;
-  stringSliceField?: StringSliceField$Outbound | null | undefined;
+  oauth2?: OAuth2Field$Outbound | null | undefined;
+  options?: OptionsField$Outbound | null | undefined;
+  placeholder?: string | null | undefined;
+  postCreate?: boolean | null | undefined;
+  random?: RandomStringField$Outbound | null | undefined;
+  readOnly?: ReadOnlyField$Outbound | null | undefined;
+  secret?: RotatableSecretField$Outbound | null | undefined;
+  select?: SelectField$Outbound | null | undefined;
+  str?: StringField$Outbound | null | undefined;
+  strList?: StringListField$Outbound | null | undefined;
+  stringMap?: StringMapField$Outbound | null | undefined;
+  text?: TextField$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -90,13 +207,26 @@ export const Field$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Field
 > = z.object({
-  boolField: z.nullable(BoolField$outboundSchema).optional(),
-  description: z.nullable(z.string()).optional(),
+  additionalPlaceholder: z.nullable(z.string()).optional(),
+  checkbox: z.nullable(CheckboxField1$outboundSchema).optional(),
+  dependsOnFields: z.nullable(z.array(z.string())).optional(),
   displayName: z.nullable(z.string()).optional(),
-  int64Field: z.nullable(Int64Field$outboundSchema).optional(),
+  helpUrl: z.nullable(z.string()).optional(),
+  import: z.nullable(ImportField$outboundSchema).optional(),
+  keyValue: z.nullable(KeyValueField$outboundSchema).optional(),
   name: z.nullable(z.string()).optional(),
-  stringField: z.nullable(StringField$outboundSchema).optional(),
-  stringSliceField: z.nullable(StringSliceField$outboundSchema).optional(),
+  oauth2: z.nullable(OAuth2Field$outboundSchema).optional(),
+  options: z.nullable(OptionsField$outboundSchema).optional(),
+  placeholder: z.nullable(z.string()).optional(),
+  postCreate: z.nullable(z.boolean()).optional(),
+  random: z.nullable(RandomStringField$outboundSchema).optional(),
+  readOnly: z.nullable(ReadOnlyField$outboundSchema).optional(),
+  secret: z.nullable(RotatableSecretField$outboundSchema).optional(),
+  select: z.nullable(SelectField$outboundSchema).optional(),
+  str: z.nullable(StringField$outboundSchema).optional(),
+  strList: z.nullable(StringListField$outboundSchema).optional(),
+  stringMap: z.nullable(StringMapField$outboundSchema).optional(),
+  text: z.nullable(TextField$outboundSchema).optional(),
 });
 
 /**

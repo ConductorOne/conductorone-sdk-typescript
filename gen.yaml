@@ -23,7 +23,8 @@ generation:
     skipResponseBodyAssertions: false
   baseServerURL: ""
 typescript:
-  version: 1.0.0
+  version: 1.0.1
+  acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
     devDependencies: {}

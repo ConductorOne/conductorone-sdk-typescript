@@ -1,17 +1,20 @@
 lockVersion: 2.0.0
 id: 59dafb44-7e9b-49d4-8e7d-679663d28f0f
 management:
-  docChecksum: 38d8fcde581e0329c95fa3c4f31ac073
+  docChecksum: 7ccddd3c92e9954c510b40436a7734ff
   docVersion: 0.1.0-alpha
-  speakeasyVersion: 1.622.1
-  generationVersion: 2.709.0
-  releaseVersion: 1.0.0
-  configChecksum: a97e4601af157b99ff9a988d52b3e91c
+  speakeasyVersion: 1.634.0
+  generationVersion: 2.721.0
+  releaseVersion: 1.0.1
+  configChecksum: 3ec07a0a571940a20e67460888419c8e
+  repoURL: https://github.com/ConductorOne/conductorone-sdk-typescript.git
+  installationURL: https://github.com/ConductorOne/conductorone-sdk-typescript
+  published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.1
-    core: 3.21.23
+    core: 3.21.26
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     enumUnions: 0.1.0
@@ -56,6 +59,10 @@ generatedFiles:
   - docs/sdk/models/operations/c1apiappv1appaccessrequestsdefaultsservicegetappaccessrequestsdefaultsresponse.md
   - docs/sdk/models/operations/c1apiappv1appentitlementownersaddrequest.md
   - docs/sdk/models/operations/c1apiappv1appentitlementownersaddresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementownersdeleterequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementownersdeleteresponse.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementownerslistowneridsrequest.md
+  - docs/sdk/models/operations/c1apiappv1appentitlementownerslistowneridsresponse.md
   - docs/sdk/models/operations/c1apiappv1appentitlementownerslistrequest.md
   - docs/sdk/models/operations/c1apiappv1appentitlementownerslistresponse.md
   - docs/sdk/models/operations/c1apiappv1appentitlementownersremoverequest.md
@@ -118,6 +125,10 @@ generatedFiles:
   - docs/sdk/models/operations/c1apiappv1appentitlementuserbindingserviceupdategrantdurationresponse.md
   - docs/sdk/models/operations/c1apiappv1appownersaddrequest.md
   - docs/sdk/models/operations/c1apiappv1appownersaddresponse.md
+  - docs/sdk/models/operations/c1apiappv1appownersdeleterequest.md
+  - docs/sdk/models/operations/c1apiappv1appownersdeleteresponse.md
+  - docs/sdk/models/operations/c1apiappv1appownerslistowneridsrequest.md
+  - docs/sdk/models/operations/c1apiappv1appownerslistowneridsresponse.md
   - docs/sdk/models/operations/c1apiappv1appownerslistrequest.md
   - docs/sdk/models/operations/c1apiappv1appownerslistresponse.md
   - docs/sdk/models/operations/c1apiappv1appownersremoverequest.md
@@ -294,6 +305,7 @@ generatedFiles:
   - docs/sdk/models/operations/c1apiiamv1roleslistresponse.md
   - docs/sdk/models/operations/c1apiiamv1rolesupdaterequest.md
   - docs/sdk/models/operations/c1apiiamv1rolesupdateresponse.md
+  - docs/sdk/models/operations/c1apiintegrationconnectorv1connectorcatalogserviceconfigurationschemaresponse.md
   - docs/sdk/models/operations/c1apipolicyv1accountprovisionpolicytesttestresponse.md
   - docs/sdk/models/operations/c1apipolicyv1policiescreateresponse.md
   - docs/sdk/models/operations/c1apipolicyv1policiesdeleterequest.md
@@ -435,7 +447,10 @@ generatedFiles:
   - docs/sdk/models/shared/accept.md
   - docs/sdk/models/shared/acceptinstance.md
   - docs/sdk/models/shared/accountfilter.md
+  - docs/sdk/models/shared/accountincontext.md
+  - docs/sdk/models/shared/accountlifecycleaction.md
   - docs/sdk/models/shared/accountprovision.md
+  - docs/sdk/models/shared/accountref.md
   - docs/sdk/models/shared/accounttype.md
   - docs/sdk/models/shared/accounttypes.md
   - docs/sdk/models/shared/actions.md
@@ -586,6 +601,7 @@ generatedFiles:
   - docs/sdk/models/shared/cancelaccessrequestdefaultsrequest.md
   - docs/sdk/models/shared/cancelledaction.md
   - docs/sdk/models/shared/checkboxfield.md
+  - docs/sdk/models/shared/checkboxfield1.md
   - docs/sdk/models/shared/chipsfield.md
   - docs/sdk/models/shared/cidrrestriction.md
   - docs/sdk/models/shared/closeaction.md
@@ -593,6 +609,7 @@ generatedFiles:
   - docs/sdk/models/shared/conditionsucceeded.md
   - docs/sdk/models/shared/conditiontimedout.md
   - docs/sdk/models/shared/config.md
+  - docs/sdk/models/shared/configschema.md
   - docs/sdk/models/shared/confirmsyncvalidrequest.md
   - docs/sdk/models/shared/confirmsyncvalidresponse.md
   - docs/sdk/models/shared/conflictmonitor.md
@@ -602,6 +619,8 @@ generatedFiles:
   - docs/sdk/models/shared/conflictmonitorupdaterequest.md
   - docs/sdk/models/shared/connector.md
   - docs/sdk/models/shared/connectoraction.md
+  - docs/sdk/models/shared/connectorcatalogserviceconfigurationschemarequest.md
+  - docs/sdk/models/shared/connectorcatalogserviceconfigurationschemaresponse.md
   - docs/sdk/models/shared/connectorcreateaccount.md
   - docs/sdk/models/shared/connectorcredential.md
   - docs/sdk/models/shared/connectorexpandmask.md
@@ -674,10 +693,14 @@ generatedFiles:
   - docs/sdk/models/shared/deleteaccount.md
   - docs/sdk/models/shared/deleteappentitlementmonitorbindingrequest.md
   - docs/sdk/models/shared/deleteappentitlementmonitorbindingresponse.md
+  - docs/sdk/models/shared/deleteappentitlementownersrequest.md
+  - docs/sdk/models/shared/deleteappentitlementownersresponse.md
   - docs/sdk/models/shared/deleteappentitlementproxyrequest.md
   - docs/sdk/models/shared/deleteappentitlementproxyresponse.md
   - docs/sdk/models/shared/deleteappentitlementrequest.md
   - docs/sdk/models/shared/deleteappentitlementresponse.md
+  - docs/sdk/models/shared/deleteappownersrequest.md
+  - docs/sdk/models/shared/deleteappownersresponse.md
   - docs/sdk/models/shared/deleteapprequest.md
   - docs/sdk/models/shared/deleteappresponse.md
   - docs/sdk/models/shared/deleteattributevaluerequest.md
@@ -772,6 +795,8 @@ generatedFiles:
   - docs/sdk/models/shared/facetvalue.md
   - docs/sdk/models/shared/facetvalueitem.md
   - docs/sdk/models/shared/field.md
+  - docs/sdk/models/shared/fieldgroup.md
+  - docs/sdk/models/shared/fieldinput.md
   - docs/sdk/models/shared/fieldrelationship.md
   - docs/sdk/models/shared/fieldrules.md
   - docs/sdk/models/shared/fixed32rules.md
@@ -844,15 +869,19 @@ generatedFiles:
   - docs/sdk/models/shared/grantsourcefilter.md
   - docs/sdk/models/shared/granttriggerfilter.md
   - docs/sdk/models/shared/identitymatching.md
+  - docs/sdk/models/shared/importfield.md
   - docs/sdk/models/shared/int32rules.md
   - docs/sdk/models/shared/int64field.md
   - docs/sdk/models/shared/int64rules.md
   - docs/sdk/models/shared/introspectresponse.md
+  - docs/sdk/models/shared/keyvaluefield.md
+  - docs/sdk/models/shared/listappentitlementowneridsresponse.md
   - docs/sdk/models/shared/listappentitlementownersresponse.md
   - docs/sdk/models/shared/listappentitlementsresponse.md
   - docs/sdk/models/shared/listappentitlementsresponseexpanded.md
   - docs/sdk/models/shared/listappentitlementusersresponse.md
   - docs/sdk/models/shared/listappentitlementusersresponseexpanded.md
+  - docs/sdk/models/shared/listappowneridsresponse.md
   - docs/sdk/models/shared/listappownersresponse.md
   - docs/sdk/models/shared/listappresourceownersresponse.md
   - docs/sdk/models/shared/listappsresponse.md
@@ -882,6 +911,8 @@ generatedFiles:
   - docs/sdk/models/shared/numberfield.md
   - docs/sdk/models/shared/oauth2authorizedas.md
   - docs/sdk/models/shared/oauth2authorizedasinput.md
+  - docs/sdk/models/shared/oauth2field.md
+  - docs/sdk/models/shared/optionsfield.md
   - docs/sdk/models/shared/orgdomain.md
   - docs/sdk/models/shared/origin.md
   - docs/sdk/models/shared/outcome.md
@@ -934,6 +965,8 @@ generatedFiles:
   - docs/sdk/models/shared/provisionpolicyinput.md
   - docs/sdk/models/shared/provisiontarget.md
   - docs/sdk/models/shared/purpose.md
+  - docs/sdk/models/shared/randomstringfield.md
+  - docs/sdk/models/shared/readonlyfield.md
   - docs/sdk/models/shared/reassignaction.md
   - docs/sdk/models/shared/reassignedaction.md
   - docs/sdk/models/shared/reassignedbyerroraction.md
@@ -1011,6 +1044,7 @@ generatedFiles:
   - docs/sdk/models/shared/resumesyncresponse.md
   - docs/sdk/models/shared/role.md
   - docs/sdk/models/shared/roleinput.md
+  - docs/sdk/models/shared/rotatablesecretfield.md
   - docs/sdk/models/shared/rule.md
   - docs/sdk/models/shared/runautomation.md
   - docs/sdk/models/shared/rundelayed.md
@@ -1085,6 +1119,8 @@ generatedFiles:
   - docs/sdk/models/shared/stepuptransaction.md
   - docs/sdk/models/shared/stepuptransactionstate.md
   - docs/sdk/models/shared/stringfield.md
+  - docs/sdk/models/shared/stringlistfield.md
+  - docs/sdk/models/shared/stringmapfield.md
   - docs/sdk/models/shared/stringrules.md
   - docs/sdk/models/shared/stringslicefield.md
   - docs/sdk/models/shared/systemlogservicelisteventsrequest.md
@@ -1368,6 +1404,7 @@ generatedFiles:
   - docs/sdks/awsexternalidsettings/README.md
   - docs/sdks/conductoronesdktypescript/README.md
   - docs/sdks/connector/README.md
+  - docs/sdks/connectorcatalog/README.md
   - docs/sdks/directory/README.md
   - docs/sdks/export/README.md
   - docs/sdks/exportssearch/README.md
@@ -1412,7 +1449,9 @@ generatedFiles:
   - src/funcs/appEntitlementMonitorBindingDeleteAppEntitlementMonitorBinding.ts
   - src/funcs/appEntitlementMonitorBindingGetAppEntitlementMonitorBinding.ts
   - src/funcs/appEntitlementOwnersAdd.ts
+  - src/funcs/appEntitlementOwnersDelete.ts
   - src/funcs/appEntitlementOwnersList.ts
+  - src/funcs/appEntitlementOwnersListOwnerIDs.ts
   - src/funcs/appEntitlementOwnersRemove.ts
   - src/funcs/appEntitlementOwnersSet.ts
   - src/funcs/appEntitlementSearchSearch.ts
@@ -1445,7 +1484,9 @@ generatedFiles:
   - src/funcs/appEntitlementsUpdate.ts
   - src/funcs/appEntitlementsUpdateAutomation.ts
   - src/funcs/appOwnersAdd.ts
+  - src/funcs/appOwnersDelete.ts
   - src/funcs/appOwnersList.ts
+  - src/funcs/appOwnersListOwnerIDs.ts
   - src/funcs/appOwnersRemove.ts
   - src/funcs/appOwnersSet.ts
   - src/funcs/appReportActionGenerateReport.ts
@@ -1506,6 +1547,7 @@ generatedFiles:
   - src/funcs/automationSearchSearchAutomations.ts
   - src/funcs/automationUpdateAutomation.ts
   - src/funcs/awsExternalIDSettingsGet.ts
+  - src/funcs/connectorCatalogConfigurationSchema.ts
   - src/funcs/connectorConfirmSyncValid.ts
   - src/funcs/connectorCreate.ts
   - src/funcs/connectorCreateDelegated.ts
@@ -1675,6 +1717,7 @@ generatedFiles:
   - src/sdk/automationsearch.ts
   - src/sdk/awsexternalidsettings.ts
   - src/sdk/connector.ts
+  - src/sdk/connectorcatalog.ts
   - src/sdk/directory.ts
   - src/sdk/export.ts
   - src/sdk/exportssearch.ts
@@ -1698,7 +1741,9 @@ generatedFiles:
   - src/sdk/models/operations/c1apiappv1appaccessrequestsdefaultsservicecreateappaccessrequestsdefaults.ts
   - src/sdk/models/operations/c1apiappv1appaccessrequestsdefaultsservicegetappaccessrequestsdefaults.ts
   - src/sdk/models/operations/c1apiappv1appentitlementownersadd.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementownersdelete.ts
   - src/sdk/models/operations/c1apiappv1appentitlementownerslist.ts
+  - src/sdk/models/operations/c1apiappv1appentitlementownerslistownerids.ts
   - src/sdk/models/operations/c1apiappv1appentitlementownersremove.ts
   - src/sdk/models/operations/c1apiappv1appentitlementownersset.ts
   - src/sdk/models/operations/c1apiappv1appentitlementsaddautomationexclusion.ts
@@ -1731,7 +1776,9 @@ generatedFiles:
   - src/sdk/models/operations/c1apiappv1appentitlementuserbindingservicesearchpastgrants.ts
   - src/sdk/models/operations/c1apiappv1appentitlementuserbindingserviceupdategrantduration.ts
   - src/sdk/models/operations/c1apiappv1appownersadd.ts
+  - src/sdk/models/operations/c1apiappv1appownersdelete.ts
   - src/sdk/models/operations/c1apiappv1appownerslist.ts
+  - src/sdk/models/operations/c1apiappv1appownerslistownerids.ts
   - src/sdk/models/operations/c1apiappv1appownersremove.ts
   - src/sdk/models/operations/c1apiappv1appownersset.ts
   - src/sdk/models/operations/c1apiappv1appreportactionservicegeneratereport.ts
@@ -1832,6 +1879,7 @@ generatedFiles:
   - src/sdk/models/operations/c1apiiamv1rolesget.ts
   - src/sdk/models/operations/c1apiiamv1roleslist.ts
   - src/sdk/models/operations/c1apiiamv1rolesupdate.ts
+  - src/sdk/models/operations/c1apiintegrationconnectorv1connectorcatalogserviceconfigurationschema.ts
   - src/sdk/models/operations/c1apipolicyv1accountprovisionpolicytesttest.ts
   - src/sdk/models/operations/c1apipolicyv1policiescreate.ts
   - src/sdk/models/operations/c1apipolicyv1policiesdelete.ts
@@ -1918,7 +1966,10 @@ generatedFiles:
   - src/sdk/models/shared/accept.ts
   - src/sdk/models/shared/acceptinstance.ts
   - src/sdk/models/shared/accountfilter.ts
+  - src/sdk/models/shared/accountincontext.ts
+  - src/sdk/models/shared/accountlifecycleaction.ts
   - src/sdk/models/shared/accountprovision.ts
+  - src/sdk/models/shared/accountref.ts
   - src/sdk/models/shared/addappentitlementownerrequest.ts
   - src/sdk/models/shared/addappentitlementownerresponse.ts
   - src/sdk/models/shared/addappownerrequest.ts
@@ -2034,12 +2085,14 @@ generatedFiles:
   - src/sdk/models/shared/cancelaccessrequestdefaultsrequest.ts
   - src/sdk/models/shared/cancelledaction.ts
   - src/sdk/models/shared/checkboxfield.ts
+  - src/sdk/models/shared/checkboxfield1.ts
   - src/sdk/models/shared/chipsfield.ts
   - src/sdk/models/shared/cidrrestriction.ts
   - src/sdk/models/shared/closeaction.ts
   - src/sdk/models/shared/completedaction.ts
   - src/sdk/models/shared/conditionsucceeded.ts
   - src/sdk/models/shared/conditiontimedout.ts
+  - src/sdk/models/shared/configschema.ts
   - src/sdk/models/shared/confirmsyncvalidrequest.ts
   - src/sdk/models/shared/confirmsyncvalidresponse.ts
   - src/sdk/models/shared/conflictmonitor.ts
@@ -2049,6 +2102,8 @@ generatedFiles:
   - src/sdk/models/shared/conflictmonitorupdaterequest.ts
   - src/sdk/models/shared/connector.ts
   - src/sdk/models/shared/connectoraction.ts
+  - src/sdk/models/shared/connectorcatalogserviceconfigurationschemarequest.ts
+  - src/sdk/models/shared/connectorcatalogserviceconfigurationschemaresponse.ts
   - src/sdk/models/shared/connectorcreateaccount.ts
   - src/sdk/models/shared/connectorcredential.ts
   - src/sdk/models/shared/connectorexpandmask.ts
@@ -2104,10 +2159,14 @@ generatedFiles:
   - src/sdk/models/shared/deleteaccount.ts
   - src/sdk/models/shared/deleteappentitlementmonitorbindingrequest.ts
   - src/sdk/models/shared/deleteappentitlementmonitorbindingresponse.ts
+  - src/sdk/models/shared/deleteappentitlementownersrequest.ts
+  - src/sdk/models/shared/deleteappentitlementownersresponse.ts
   - src/sdk/models/shared/deleteappentitlementproxyrequest.ts
   - src/sdk/models/shared/deleteappentitlementproxyresponse.ts
   - src/sdk/models/shared/deleteappentitlementrequest.ts
   - src/sdk/models/shared/deleteappentitlementresponse.ts
+  - src/sdk/models/shared/deleteappownersrequest.ts
+  - src/sdk/models/shared/deleteappownersresponse.ts
   - src/sdk/models/shared/deleteapprequest.ts
   - src/sdk/models/shared/deleteappresponse.ts
   - src/sdk/models/shared/deleteattributevaluerequest.ts
@@ -2186,6 +2245,8 @@ generatedFiles:
   - src/sdk/models/shared/facetvalue.ts
   - src/sdk/models/shared/facetvalueitem.ts
   - src/sdk/models/shared/field.ts
+  - src/sdk/models/shared/fieldgroup.ts
+  - src/sdk/models/shared/fieldinput.ts
   - src/sdk/models/shared/fieldrelationship.ts
   - src/sdk/models/shared/fieldrules.ts
   - src/sdk/models/shared/fixed32rules.ts
@@ -2245,14 +2306,18 @@ generatedFiles:
   - src/sdk/models/shared/grantfoundtrigger.ts
   - src/sdk/models/shared/grantreason.ts
   - src/sdk/models/shared/granttriggerfilter.ts
+  - src/sdk/models/shared/importfield.ts
   - src/sdk/models/shared/index.ts
   - src/sdk/models/shared/int32rules.ts
   - src/sdk/models/shared/int64field.ts
   - src/sdk/models/shared/int64rules.ts
   - src/sdk/models/shared/introspectresponse.ts
+  - src/sdk/models/shared/keyvaluefield.ts
+  - src/sdk/models/shared/listappentitlementowneridsresponse.ts
   - src/sdk/models/shared/listappentitlementownersresponse.ts
   - src/sdk/models/shared/listappentitlementsresponse.ts
   - src/sdk/models/shared/listappentitlementusersresponse.ts
+  - src/sdk/models/shared/listappowneridsresponse.ts
   - src/sdk/models/shared/listappownersresponse.ts
   - src/sdk/models/shared/listappresourceownersresponse.ts
   - src/sdk/models/shared/listappsresponse.ts
@@ -2281,6 +2346,8 @@ generatedFiles:
   - src/sdk/models/shared/numberfield.ts
   - src/sdk/models/shared/oauth2authorizedas.ts
   - src/sdk/models/shared/oauth2authorizedasinput.ts
+  - src/sdk/models/shared/oauth2field.ts
+  - src/sdk/models/shared/optionsfield.ts
   - src/sdk/models/shared/orgdomain.ts
   - src/sdk/models/shared/passwordfield.ts
   - src/sdk/models/shared/pausesyncrequest.ts
@@ -2317,6 +2384,8 @@ generatedFiles:
   - src/sdk/models/shared/provisionpolicy.ts
   - src/sdk/models/shared/provisionpolicyinput.ts
   - src/sdk/models/shared/provisiontarget.ts
+  - src/sdk/models/shared/randomstringfield.ts
+  - src/sdk/models/shared/readonlyfield.ts
   - src/sdk/models/shared/reassignaction.ts
   - src/sdk/models/shared/reassignedaction.ts
   - src/sdk/models/shared/reassignedbyerroraction.ts
@@ -2382,6 +2451,7 @@ generatedFiles:
   - src/sdk/models/shared/resumesyncresponse.ts
   - src/sdk/models/shared/role.ts
   - src/sdk/models/shared/roleinput.ts
+  - src/sdk/models/shared/rotatablesecretfield.ts
   - src/sdk/models/shared/rule.ts
   - src/sdk/models/shared/runautomation.ts
   - src/sdk/models/shared/rundelayed.ts
@@ -2443,6 +2513,8 @@ generatedFiles:
   - src/sdk/models/shared/stepupproviderref.ts
   - src/sdk/models/shared/stepuptransaction.ts
   - src/sdk/models/shared/stringfield.ts
+  - src/sdk/models/shared/stringlistfield.ts
+  - src/sdk/models/shared/stringmapfield.ts
   - src/sdk/models/shared/stringrules.ts
   - src/sdk/models/shared/stringslicefield.ts
   - src/sdk/models/shared/systemlogservicelisteventsrequest.ts
@@ -4361,5 +4433,45 @@ examples:
       responses:
         "200":
           application/json: {}
+  c1.api.app.v1.AppEntitlementOwners.ListOwnerIDs:
+    speakeasy-default-c1-api-app-v1-app-entitlement-owners-list-owner-I-ds:
+      parameters:
+        path:
+          app_id: "<id>"
+          entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppEntitlementOwners.Delete:
+    speakeasy-default-c1-api-app-v1-app-entitlement-owners-delete:
+      parameters:
+        path:
+          app_id: "<id>"
+          entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppOwners.ListOwnerIDs:
+    speakeasy-default-c1-api-app-v1-app-owners-list-owner-I-ds:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppOwners.Delete:
+    speakeasy-default-c1-api-app-v1-app-owners-delete:
+      parameters:
+        path:
+          app_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.integration.connector.v1.ConnectorCatalogService.ConfigurationSchema:
+    speakeasy-default-c1-api-integration-connector-v1-connector-catalog-service-configuration-schema:
+      responses:
+        "200":
+          application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Typescript SDK Changes Detected:\n* `conductorone-sdk-typescript.appEntitlementOwners.listOwnerIDs()`: **Added**\n* `conductorone-sdk-typescript.appEntitlementOwners.delete()`: **Added**\n* `conductorone-sdk-typescript.appOwners.listOwnerIDs()`: **Added**\n* `conductorone-sdk-typescript.appOwners.delete()`: **Added**\n* `conductorone-sdk-typescript.connectorCatalog.configurationSchema()`: **Added**\n* `conductorone-sdk-typescript.automationSearch.searchAutomationTemplateVersions()`:  `response.list.[].automationSteps.[]` **Changed**\n* `conductorone-sdk-typescript.automationSearch.searchAutomations()`:  `response.list.[].automationSteps.[]` **Changed**\n* `conductorone-sdk-typescript.automation.listAutomations()`:  `response.list.[].automationSteps.[]` **Changed**\n* `conductorone-sdk-typescript.automation.createAutomation()`: \n  *  `request.automationSteps.[]` **Changed**\n  *  `response.automation.automationSteps.[]` **Changed**\n* `conductorone-sdk-typescript.automation.getAutomation()`:  `response.automation.automationSteps.[]` **Changed**\n* `conductorone-sdk-typescript.automation.updateAutomation()`: \n  *  `request.updateAutomationRequest.automation.automationSteps.[]` **Changed**\n  *  `response.automation.automationSteps.[]` **Changed**\n"

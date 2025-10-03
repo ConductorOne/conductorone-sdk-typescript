@@ -18,6 +18,7 @@ This message contains a oneof named kind. Only a single field of the following l
   - grantEntitlements
   - sendSlackMessage
   - callFunction
+  - accountLifecycleAction
 
 
 ## Example Usage
@@ -32,6 +33,7 @@ let value: AutomationStep = {};
 
 | Field                                                                                               | Type                                                                                                | Required                                                                                            | Description                                                                                         |
 | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `accountLifecycleAction`                                                                            | [shared.AccountLifecycleAction](../../../sdk/models/shared/accountlifecycleaction.md)               | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |
 | `callFunction`                                                                                      | [shared.CallFunction](../../../sdk/models/shared/callfunction.md)                                   | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |
 | `connectorAction`                                                                                   | [shared.ConnectorAction](../../../sdk/models/shared/connectoraction.md)                             | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |
 | `connectorCreateAccount`                                                                            | [shared.ConnectorCreateAccount](../../../sdk/models/shared/connectorcreateaccount.md)               | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |
