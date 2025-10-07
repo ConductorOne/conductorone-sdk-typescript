@@ -5207,6 +5207,10 @@ actions:
     update:
       - boolean
       - "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTrigger"]["properties"]["condition"]["type"]
+    update:
+      - string
+      - "null"
   - target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTrigger"]["properties"]["cronSpec"]["type"]
     update:
       - string
