@@ -105,7 +105,7 @@ async function $do(
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID:
       "c1.api.automations.v1.AutomationSearchService.SearchAutomationTemplateVersions",
-    oAuth2Scopes: [],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 

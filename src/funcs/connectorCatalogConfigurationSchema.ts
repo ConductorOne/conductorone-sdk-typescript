@@ -109,7 +109,7 @@ async function $do(
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID:
       "c1.api.integration.connector.v1.ConnectorCatalogService.ConfigurationSchema",
-    oAuth2Scopes: [],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 

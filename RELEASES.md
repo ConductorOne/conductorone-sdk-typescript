@@ -21,3 +21,13 @@ Based on:
 - [typescript v1.0.1] .
 ### Releases
 - [NPM v1.0.1] https://www.npmjs.com/package/conductorone-sdk-typescript/v/1.0.1 - .
+
+## 2025-10-08 00:12:55
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.636.0 (2.723.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v1.0.2] .
+### Releases
+- [NPM v1.0.2] https://www.npmjs.com/package/conductorone-sdk-typescript/v/1.0.2 - .

@@ -116,7 +116,7 @@ async function $do(
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID:
       "c1.api.app.v1.AppResourceTypeService.CreateManuallyManagedResourceType",
-    oAuth2Scopes: [],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 

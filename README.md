@@ -339,7 +339,6 @@ run();
 
 * [get](docs/sdks/awsexternalidsettings/README.md#get) - Get
 
-
 ### [connector](docs/sdks/connector/README.md)
 
 * [list](docs/sdks/connector/README.md#list) - List

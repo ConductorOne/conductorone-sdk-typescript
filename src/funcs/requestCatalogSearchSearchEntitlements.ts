@@ -109,7 +109,7 @@ async function $do(
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID:
       "c1.api.requestcatalog.v1.RequestCatalogSearchService.SearchEntitlements",
-    oAuth2Scopes: [],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 
