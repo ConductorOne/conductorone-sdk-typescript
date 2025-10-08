@@ -16,11 +16,17 @@ export type ScheduleTrigger = {
    */
   advanced?: boolean | null | undefined;
   /**
+   * The condition field.
+   */
+  condition?: string | null | undefined;
+  /**
    * The cronSpec field.
    */
   cronSpec?: string | null | undefined;
   /**
    * The skipIfTrueCel field.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   skipIfTrueCel?: string | null | undefined;
   start?: Date | null | undefined;
@@ -33,6 +39,7 @@ export const ScheduleTrigger$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   advanced: z.nullable(z.boolean()).optional(),
+  condition: z.nullable(z.string()).optional(),
   cronSpec: z.nullable(z.string()).optional(),
   skipIfTrueCel: z.nullable(z.string()).optional(),
   start: z.nullable(
@@ -43,6 +50,7 @@ export const ScheduleTrigger$inboundSchema: z.ZodType<
 /** @internal */
 export type ScheduleTrigger$Outbound = {
   advanced?: boolean | null | undefined;
+  condition?: string | null | undefined;
   cronSpec?: string | null | undefined;
   skipIfTrueCel?: string | null | undefined;
   start?: string | null | undefined;
@@ -55,6 +63,7 @@ export const ScheduleTrigger$outboundSchema: z.ZodType<
   ScheduleTrigger
 > = z.object({
   advanced: z.nullable(z.boolean()).optional(),
+  condition: z.nullable(z.string()).optional(),
   cronSpec: z.nullable(z.string()).optional(),
   skipIfTrueCel: z.nullable(z.string()).optional(),
   start: z.nullable(z.date().transform(v => v.toISOString())).optional(),

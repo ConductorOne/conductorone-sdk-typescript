@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 59dafb44-7e9b-49d4-8e7d-679663d28f0f
 management:
-  docChecksum: 7ccddd3c92e9954c510b40436a7734ff
+  docChecksum: 8d909c23e245f8d8a61ff2960f982f86
   docVersion: 0.1.0-alpha
-  speakeasyVersion: 1.634.0
-  generationVersion: 2.721.0
-  releaseVersion: 1.0.1
-  configChecksum: 3ec07a0a571940a20e67460888419c8e
+  speakeasyVersion: 1.636.0
+  generationVersion: 2.723.2
+  releaseVersion: 1.0.2
+  configChecksum: aaeb90098abb6b1feeeeef40bbc37fa8
   repoURL: https://github.com/ConductorOne/conductorone-sdk-typescript.git
   installationURL: https://github.com/ConductorOne/conductorone-sdk-typescript
   published: true
@@ -22,7 +22,7 @@ features:
     globalSecurity: 2.82.14
     globalSecurityCallbacks: 0.1.0
     globalServerURLs: 2.82.5
-    groups: 2.81.2
+    groups: 2.81.3
     includes: 2.81.1
     inputOutputModels: 2.82.0
     methodArguments: 0.1.2
@@ -1402,7 +1402,6 @@ generatedFiles:
   - docs/sdks/automationexecutionsearch/README.md
   - docs/sdks/automationsearch/README.md
   - docs/sdks/awsexternalidsettings/README.md
-  - docs/sdks/conductoronesdktypescript/README.md
   - docs/sdks/connector/README.md
   - docs/sdks/connectorcatalog/README.md
   - docs/sdks/directory/README.md
@@ -4474,4 +4473,4 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes Detected:\n* `conductorone-sdk-typescript.appEntitlementOwners.listOwnerIDs()`: **Added**\n* `conductorone-sdk-typescript.appEntitlementOwners.delete()`: **Added**\n* `conductorone-sdk-typescript.appOwners.listOwnerIDs()`: **Added**\n* `conductorone-sdk-typescript.appOwners.delete()`: **Added**\n* `conductorone-sdk-typescript.connectorCatalog.configurationSchema()`: **Added**\n* `conductorone-sdk-typescript.automationSearch.searchAutomationTemplateVersions()`:  `response.list.[].automationSteps.[]` **Changed**\n* `conductorone-sdk-typescript.automationSearch.searchAutomations()`:  `response.list.[].automationSteps.[]` **Changed**\n* `conductorone-sdk-typescript.automation.listAutomations()`:  `response.list.[].automationSteps.[]` **Changed**\n* `conductorone-sdk-typescript.automation.createAutomation()`: \n  *  `request.automationSteps.[]` **Changed**\n  *  `response.automation.automationSteps.[]` **Changed**\n* `conductorone-sdk-typescript.automation.getAutomation()`:  `response.automation.automationSteps.[]` **Changed**\n* `conductorone-sdk-typescript.automation.updateAutomation()`: \n  *  `request.updateAutomationRequest.automation.automationSteps.[]` **Changed**\n  *  `response.automation.automationSteps.[]` **Changed**\n"
+releaseNotes: "## Typescript SDK Changes Detected:\n* `conductorone-sdk-typescript.automationSearch.searchAutomationTemplateVersions()`:  `response.list.[].triggers.[].schedule.condition` **Added**\n* `conductorone-sdk-typescript.automationSearch.searchAutomations()`:  `response.list.[].draftTriggers.[].schedule.condition` **Added**\n* `conductorone-sdk-typescript.automation.listAutomations()`:  `response.list.[].draftTriggers.[].schedule.condition` **Added**\n* `conductorone-sdk-typescript.automation.createAutomation()`: \n  *  `request.draftTriggers.[].schedule.condition` **Added**\n  *  `response.automation.draftTriggers.[].schedule.condition` **Added**\n* `conductorone-sdk-typescript.automation.getAutomation()`:  `response.automation.draftTriggers.[].schedule.condition` **Added**\n* `conductorone-sdk-typescript.automation.updateAutomation()`: \n  *  `request.updateAutomationRequest.automation.draftTriggers.[].schedule.condition` **Added**\n  *  `response.automation.draftTriggers.[].schedule.condition` **Added**\n"
