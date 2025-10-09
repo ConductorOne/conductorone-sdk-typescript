@@ -242,9 +242,12 @@ run();
 
 ### [appResourceOwners](docs/sdks/appresourceowners/README.md)
 
+* [delete](docs/sdks/appresourceowners/README.md#delete) - Delete
+* [listOwnerIDs](docs/sdks/appresourceowners/README.md#listownerids) - List Owner I Ds
 * [remove](docs/sdks/appresourceowners/README.md#remove) - Remove
 * [list](docs/sdks/appresourceowners/README.md#list) - List
 * [add](docs/sdks/appresourceowners/README.md#add) - Add
+* [set](docs/sdks/appresourceowners/README.md#set) - Set
 
 ### [appResourceSearch](docs/sdks/appresourcesearch/README.md)
 
@@ -621,8 +624,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`appResourceGet`](docs/sdks/appresource/README.md#get) - Get
 - [`appResourceList`](docs/sdks/appresource/README.md#list) - List
 - [`appResourceOwnersAdd`](docs/sdks/appresourceowners/README.md#add) - Add
+- [`appResourceOwnersDelete`](docs/sdks/appresourceowners/README.md#delete) - Delete
 - [`appResourceOwnersList`](docs/sdks/appresourceowners/README.md#list) - List
+- [`appResourceOwnersListOwnerIDs`](docs/sdks/appresourceowners/README.md#listownerids) - List Owner I Ds
 - [`appResourceOwnersRemove`](docs/sdks/appresourceowners/README.md#remove) - Remove
+- [`appResourceOwnersSet`](docs/sdks/appresourceowners/README.md#set) - Set
 - [`appResourceSearchSearchAppResources`](docs/sdks/appresourcesearch/README.md#searchappresources) - Search App Resources
 - [`appResourceSearchSearchAppResourceTypes`](docs/sdks/appresourcesearch/README.md#searchappresourcetypes) - Search App Resource Types
 - [`appResourceTypeCreateManuallyManagedResourceType`](docs/sdks/appresourcetype/README.md#createmanuallymanagedresourcetype) - Create Manually Managed Resource Type

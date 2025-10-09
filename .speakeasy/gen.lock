@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 59dafb44-7e9b-49d4-8e7d-679663d28f0f
 management:
-  docChecksum: 8d909c23e245f8d8a61ff2960f982f86
+  docChecksum: 251e58e13a32f650d1f6346e292162a2
   docVersion: 0.1.0-alpha
-  speakeasyVersion: 1.636.0
-  generationVersion: 2.723.2
-  releaseVersion: 1.0.2
-  configChecksum: aaeb90098abb6b1feeeeef40bbc37fa8
+  speakeasyVersion: 1.636.2
+  generationVersion: 2.723.8
+  releaseVersion: 1.0.3
+  configChecksum: 9092745b60a47b9197e95dd9c6db5e62
   repoURL: https://github.com/ConductorOne/conductorone-sdk-typescript.git
   installationURL: https://github.com/ConductorOne/conductorone-sdk-typescript
   published: true
@@ -141,10 +141,16 @@ generatedFiles:
   - docs/sdk/models/operations/c1apiappv1appreportservicelistresponse.md
   - docs/sdk/models/operations/c1apiappv1appresourceownersaddrequest.md
   - docs/sdk/models/operations/c1apiappv1appresourceownersaddresponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourceownersdeleterequest.md
+  - docs/sdk/models/operations/c1apiappv1appresourceownersdeleteresponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourceownerslistowneridsrequest.md
+  - docs/sdk/models/operations/c1apiappv1appresourceownerslistowneridsresponse.md
   - docs/sdk/models/operations/c1apiappv1appresourceownerslistrequest.md
   - docs/sdk/models/operations/c1apiappv1appresourceownerslistresponse.md
   - docs/sdk/models/operations/c1apiappv1appresourceownersremoverequest.md
   - docs/sdk/models/operations/c1apiappv1appresourceownersremoveresponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourceownerssetrequest.md
+  - docs/sdk/models/operations/c1apiappv1appresourceownerssetresponse.md
   - docs/sdk/models/operations/c1apiappv1appresourcesearchsearchappresourcesresponse.md
   - docs/sdk/models/operations/c1apiappv1appresourcesearchsearchappresourcetypesresponse.md
   - docs/sdk/models/operations/c1apiappv1appresourceservicecreatemanuallymanagedappresourcerequest.md
@@ -702,6 +708,8 @@ generatedFiles:
   - docs/sdk/models/shared/deleteappownersrequest.md
   - docs/sdk/models/shared/deleteappownersresponse.md
   - docs/sdk/models/shared/deleteapprequest.md
+  - docs/sdk/models/shared/deleteappresourceownersrequest.md
+  - docs/sdk/models/shared/deleteappresourceownersresponse.md
   - docs/sdk/models/shared/deleteappresponse.md
   - docs/sdk/models/shared/deleteattributevaluerequest.md
   - docs/sdk/models/shared/deleteattributevalueresponse.md
@@ -883,6 +891,7 @@ generatedFiles:
   - docs/sdk/models/shared/listappentitlementusersresponseexpanded.md
   - docs/sdk/models/shared/listappowneridsresponse.md
   - docs/sdk/models/shared/listappownersresponse.md
+  - docs/sdk/models/shared/listappresourceowneridsresponse.md
   - docs/sdk/models/shared/listappresourceownersresponse.md
   - docs/sdk/models/shared/listappsresponse.md
   - docs/sdk/models/shared/listappusersforidentitywithgrantresponse.md
@@ -1097,6 +1106,8 @@ generatedFiles:
   - docs/sdk/models/shared/setappentitlementownersresponse.md
   - docs/sdk/models/shared/setappownersrequest.md
   - docs/sdk/models/shared/setappownersresponse.md
+  - docs/sdk/models/shared/setappresourceownersrequest.md
+  - docs/sdk/models/shared/setappresourceownersresponse.md
   - docs/sdk/models/shared/setbundleautomationrequest.md
   - docs/sdk/models/shared/severity.md
   - docs/sdk/models/shared/sfixed32rules.md
@@ -1495,8 +1506,11 @@ generatedFiles:
   - src/funcs/appResourceGet.ts
   - src/funcs/appResourceList.ts
   - src/funcs/appResourceOwnersAdd.ts
+  - src/funcs/appResourceOwnersDelete.ts
   - src/funcs/appResourceOwnersList.ts
+  - src/funcs/appResourceOwnersListOwnerIDs.ts
   - src/funcs/appResourceOwnersRemove.ts
+  - src/funcs/appResourceOwnersSet.ts
   - src/funcs/appResourceSearchSearchAppResourceTypes.ts
   - src/funcs/appResourceSearchSearchAppResources.ts
   - src/funcs/appResourceTypeCreateManuallyManagedResourceType.ts
@@ -1783,8 +1797,11 @@ generatedFiles:
   - src/sdk/models/operations/c1apiappv1appreportactionservicegeneratereport.ts
   - src/sdk/models/operations/c1apiappv1appreportservicelist.ts
   - src/sdk/models/operations/c1apiappv1appresourceownersadd.ts
+  - src/sdk/models/operations/c1apiappv1appresourceownersdelete.ts
   - src/sdk/models/operations/c1apiappv1appresourceownerslist.ts
+  - src/sdk/models/operations/c1apiappv1appresourceownerslistownerids.ts
   - src/sdk/models/operations/c1apiappv1appresourceownersremove.ts
+  - src/sdk/models/operations/c1apiappv1appresourceownersset.ts
   - src/sdk/models/operations/c1apiappv1appresourcesearchsearchappresources.ts
   - src/sdk/models/operations/c1apiappv1appresourcesearchsearchappresourcetypes.ts
   - src/sdk/models/operations/c1apiappv1appresourceservicecreatemanuallymanagedappresource.ts
@@ -2167,6 +2184,8 @@ generatedFiles:
   - src/sdk/models/shared/deleteappownersrequest.ts
   - src/sdk/models/shared/deleteappownersresponse.ts
   - src/sdk/models/shared/deleteapprequest.ts
+  - src/sdk/models/shared/deleteappresourceownersrequest.ts
+  - src/sdk/models/shared/deleteappresourceownersresponse.ts
   - src/sdk/models/shared/deleteappresponse.ts
   - src/sdk/models/shared/deleteattributevaluerequest.ts
   - src/sdk/models/shared/deleteattributevalueresponse.ts
@@ -2318,6 +2337,7 @@ generatedFiles:
   - src/sdk/models/shared/listappentitlementusersresponse.ts
   - src/sdk/models/shared/listappowneridsresponse.ts
   - src/sdk/models/shared/listappownersresponse.ts
+  - src/sdk/models/shared/listappresourceowneridsresponse.ts
   - src/sdk/models/shared/listappresourceownersresponse.ts
   - src/sdk/models/shared/listappsresponse.ts
   - src/sdk/models/shared/listappusersforidentitywithgrantresponse.ts
@@ -2497,6 +2517,8 @@ generatedFiles:
   - src/sdk/models/shared/setappentitlementownersresponse.ts
   - src/sdk/models/shared/setappownersrequest.ts
   - src/sdk/models/shared/setappownersresponse.ts
+  - src/sdk/models/shared/setappresourceownersrequest.ts
+  - src/sdk/models/shared/setappresourceownersresponse.ts
   - src/sdk/models/shared/setbundleautomationrequest.ts
   - src/sdk/models/shared/sfixed32rules.ts
   - src/sdk/models/shared/sfixed64rules.ts
@@ -4471,6 +4493,40 @@ examples:
       responses:
         "200":
           application/json: {}
+  c1.api.app.v1.AppResourceOwners.Delete:
+    speakeasy-default-c1-api-app-v1-app-resource-owners-delete:
+      parameters:
+        path:
+          app_id: "<id>"
+          resource_type_id: "<id>"
+          resource_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppResourceOwners.ListOwnerIDs:
+    speakeasy-default-c1-api-app-v1-app-resource-owners-list-owner-I-ds:
+      parameters:
+        path:
+          app_id: "<id>"
+          resource_type_id: "<id>"
+          resource_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppResourceOwners.Set:
+    speakeasy-default-c1-api-app-v1-app-resource-owners-set:
+      parameters:
+        path:
+          app_id: "<id>"
+          resource_type_id: "<id>"
+          resource_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes Detected:\n* `conductorone-sdk-typescript.automationSearch.searchAutomationTemplateVersions()`:  `response.list.[].triggers.[].schedule.condition` **Added**\n* `conductorone-sdk-typescript.automationSearch.searchAutomations()`:  `response.list.[].draftTriggers.[].schedule.condition` **Added**\n* `conductorone-sdk-typescript.automation.listAutomations()`:  `response.list.[].draftTriggers.[].schedule.condition` **Added**\n* `conductorone-sdk-typescript.automation.createAutomation()`: \n  *  `request.draftTriggers.[].schedule.condition` **Added**\n  *  `response.automation.draftTriggers.[].schedule.condition` **Added**\n* `conductorone-sdk-typescript.automation.getAutomation()`:  `response.automation.draftTriggers.[].schedule.condition` **Added**\n* `conductorone-sdk-typescript.automation.updateAutomation()`: \n  *  `request.updateAutomationRequest.automation.draftTriggers.[].schedule.condition` **Added**\n  *  `response.automation.draftTriggers.[].schedule.condition` **Added**\n"
+releaseNotes: |
+  ## Typescript SDK Changes Detected:
+  * `conductorone-sdk-typescript.appResourceOwners.delete()`: **Added**
+  * `conductorone-sdk-typescript.appResourceOwners.listOwnerIDs()`: **Added**
+  * `conductorone-sdk-typescript.appResourceOwners.set()`: **Added**
