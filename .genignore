@@ -1,7 +1,6 @@
 src/token.ts
 src/test.ts
 src/index.ts
-package.json
 yarn.lock
 package-lock.json
 tsconfig.json
