@@ -4,3 +4,4 @@ src/index.ts
 yarn.lock
 package-lock.json
 tsconfig.json
+eslint.config.mjs
