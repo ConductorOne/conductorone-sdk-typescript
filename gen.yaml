@@ -27,7 +27,9 @@ typescript:
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
-    devDependencies: {}
+    devDependencies: {
+      "@types/node": "^18.11.5",
+    }
     peerDependencies: {}
   additionalPackageJSON: {}
   author: ConductorOne
