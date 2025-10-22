@@ -1,65 +1,74 @@
 configVersion: 2.0.0
 generation:
-  devContainers:
-    enabled: true
-    schemaPath: .speakeasy/out.openapi.yaml
-  sdkClassName: ConductoroneSDKTypescript
+  sdkClassName: conductorone-sdk-typescript
   maintainOpenAPIOrder: true
   usageSnippets:
     optionalPropertyRendering: withExample
     sdkInitStyle: constructor
   useClassNamesForArrayFields: true
   fixes:
-    nameResolutionDec2023: true
-    nameResolutionFeb2025: true
-    parameterOrderingFeb2024: true
-    requestResponseComponentNamesFeb2024: true
-    securityFeb2025: true
-    sharedErrorComponentsApr2025: true
+    nameResolutionDec2023: false
+    parameterOrderingFeb2024: false
+    requestResponseComponentNamesFeb2024: false
+    securityFeb2025: false
+    sharedErrorComponentsApr2025: false
   auth:
-    oAuth2ClientCredentialsEnabled: true
-    oAuth2PasswordEnabled: true
+    OAuth2ClientCredentialsEnabled: false
+    oAuth2PasswordEnabled: false
+    hoistGlobalSecurity: true
   sdkHooksConfigAccess: true
   tests:
     generateTests: false
-    generateNewTests: true
+    generateNewTests: false
     skipResponseBodyAssertions: false
+  baseServerURL: ""
 typescript:
-  version: 0.0.1
+  version: 1.0.2
+  acceptHeaderEnum: true
   additionalDependencies:
-    dependencies: {}
-    devDependencies: {}
-    peerDependencies: {}
+    dependencies: 
+      axios: "^1.8.4"
+      jose: "^6.0.0"  
+    devDependencies:
+      "@types/jest": "^29.0.0"
+      "@types/node": "^18.19.0"
+      jest: "^29.0.0"
+      ts-jest: "^29.0.0"
+      dotenv: "^16.4.7" 
+      "@types/reflect-metadata": "^0.1.0"
+    peerDependencies: 
+      react: "^16.0.0"
   additionalPackageJSON: {}
-  author: Speakeasy
-  baseErrorName: ""
-  clientServerStatusCodesAsErrors: true
-  constFieldsAlwaysOptional: false
-  defaultErrorName: ""
+  author: ConductorOne
+  baseErrorName: ConductoroneSDKTypescriptError
+  clientServerStatusCodesAsErrors: false
+  constFieldsAlwaysOptional: true
+  defaultErrorName: SDKError
   enableCustomCodeRegions: false
   enableMCPServer: false
   enableReactQuery: false
   enumFormat: union
-  envVarPrefix: CONDUCTORONESDKTYPESCRIPT
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
   generateExamples: true
   imports:
     option: openapi
     paths:
-      callbacks: models/callbacks
-      errors: models/errors
-      operations: models/operations
-      shared: models
-      webhooks: models/webhooks
+      callbacks: sdk/models/callbacks
+      errors: sdk/models/errors
+      operations: sdk/models/operations
+      shared: sdk/models/shared
+      webhooks: sdk/models/webhooks
   inputModelSuffix: input
-  jsonpath: rfc9535
+  jsonpath: legacy
   maxMethodParams: 0
   methodArguments: infer-optional-args
+  modelPropertyCasing: camel
   moduleFormat: dual
   outputModelSuffix: output
   packageName: conductorone-sdk-typescript
-  responseFormat: flat
+  responseFormat: envelope
+  sseFlatResponse: false
   templateVersion: v2
   usageSDKInitImports: []
   useIndexModules: true
