@@ -14,6 +14,7 @@ This message contains a oneof named kind. Only a single field of the following l
   - webhook
   - schedule
   - form
+  - scheduleAppUser
 
 
 ## Example Usage
@@ -35,6 +36,7 @@ let value: AutomationTrigger = {};
 | `grantFound`                                                                                    | [shared.GrantFoundTrigger](../../../sdk/models/shared/grantfoundtrigger.md)                     | :heavy_minus_sign:                                                                              | N/A                                                                                             |
 | `manual`                                                                                        | [shared.ManualAutomationTrigger](../../../sdk/models/shared/manualautomationtrigger.md)         | :heavy_minus_sign:                                                                              | N/A                                                                                             |
 | `schedule`                                                                                      | [shared.ScheduleTrigger](../../../sdk/models/shared/scheduletrigger.md)                         | :heavy_minus_sign:                                                                              | N/A                                                                                             |
+| `scheduleTriggerAppUser`                                                                        | [shared.ScheduleTriggerAppUser](../../../sdk/models/shared/scheduletriggerappuser.md)           | :heavy_minus_sign:                                                                              | The ScheduleTriggerAppUser message.                                                             |
 | `usageBasedRevocation`                                                                          | [shared.UsageBasedRevocationTrigger](../../../sdk/models/shared/usagebasedrevocationtrigger.md) | :heavy_minus_sign:                                                                              | N/A                                                                                             |
 | `userCreated`                                                                                   | [shared.UserCreatedTrigger](../../../sdk/models/shared/usercreatedtrigger.md)                   | :heavy_minus_sign:                                                                              | N/A                                                                                             |
 | `userProfileChange`                                                                             | [shared.UserProfileChangeTrigger](../../../sdk/models/shared/userprofilechangetrigger.md)       | :heavy_minus_sign:                                                                              | N/A                                                                                             |
