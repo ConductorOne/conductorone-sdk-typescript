@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import * as fs from 'fs';
-import { ConductoroneSDKTypescript } from '../index'
+import { ConductoroneSDKTypescript } from '../src/index'
 
 if (fs.existsSync(".env")) {
   dotenv.config({ path: ".env" });

@@ -6,7 +6,8 @@
     "outDir": "../dist",
     "composite": true
   },
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts"],
+  "exclude": ["test/**"]
 }
 
 

@@ -1,28 +1,44 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["es2022", "dom", "dom.iterable"],
-    "baseUrl": "src",
-    "rootDir": "src",
-    "outDir": "dist",
-    "noImplicitAny": false,
+    "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
+    "target": "ES2020",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+
+    "module": "Node16",
+    "moduleResolution": "Node16",
+
     "allowJs": true,
-    "downlevelIteration": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "strictPropertyInitialization": false,
+
     "declaration": true,
-    "types": ["reflect-metadata", "node"]
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": ".",
+    
+
+    // https://github.com/tsconfig/bases/blob/a1bf7c0fa2e094b068ca3e1448ca2ece4157977e/bases/strictest.json
+    "strict": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    // Disabled for compatibility with Speakeasy-generated code
+    "exactOptionalPropertyTypes": false,
+    "useUnknownInCatchVariables": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": false,
+    // Disabled for compatibility with Speakeasy-generated code
+    "noPropertyAccessFromIndexSignature": false,
+    // Disabled for compatibility with Speakeasy-generated code
+    "noUncheckedIndexedAccess": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "isolatedModules": true,
+    "checkJs": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"],
+  "include": ["src", "test"],
+  "exclude": ["node_modules", "test/**", "**/*.test.ts", "**/*.test.tsx"]
 }

@@ -3302,6 +3302,12 @@ actions:
     update:
       - string
       - "null"
+  - target: $["components"]["schemas"]["c1.api.app.v1.ListAppResourceOwnerIDsResponse"]["properties"]["userIds"]["type"]
+    update:
+      - array
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.app.v1.ListAppResourceOwnerIDsResponse"]["properties"]["userIds"]["nullable"]
+    remove: true
   - target: $["components"]["schemas"]["c1.api.app.v1.ListAppResourceOwnersResponse"]["properties"]["list"]["type"]
     update:
       - array
@@ -3768,6 +3774,12 @@ actions:
       - array
       - "null"
   - target: $["components"]["schemas"]["c1.api.app.v1.SetAppOwnersRequestInput"]["properties"]["userIds"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.app.v1.SetAppResourceOwnersRequestInput"]["properties"]["userIds"]["type"]
+    update:
+      - array
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.app.v1.SetAppResourceOwnersRequestInput"]["properties"]["userIds"]["nullable"]
     remove: true
   - target: $["components"]["schemas"]["c1.api.app.v1.TaskAuditCancelledResult"]["nullable"]
     remove: true
@@ -4725,6 +4737,13 @@ actions:
         - type: "null"
   - target: $["components"]["schemas"]["c1.api.automations.v1.AutomationTrigger"]["properties"]["schedule"]["$ref"]
     remove: true
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AutomationTrigger"]["properties"]["scheduleAppUser"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.automations.v1.ScheduleTriggerAppUser'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AutomationTrigger"]["properties"]["scheduleAppUser"]["$ref"]
+    remove: true
   - target: $["components"]["schemas"]["c1.api.automations.v1.AutomationTrigger"]["properties"]["usageBasedRevocation"]
     update:
       oneOf:
@@ -5232,7 +5251,42 @@ actions:
     remove: true
   - target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTrigger"]["properties"]["start"]["type"]
     remove: true
+  - target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTrigger"]["properties"]["timezone"]["type"]
+    update:
+      - string
+      - "null"
   - target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTrigger"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTriggerAppUser"]["properties"]["appId"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTriggerAppUser"]["properties"]["condition"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTriggerAppUser"]["properties"]["cronSpec"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTriggerAppUser"]["properties"]["start"]
+    update:
+      oneOf:
+        - format: date-time
+          readOnly: false
+          type: string
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTriggerAppUser"]["properties"]["start"]["format"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTriggerAppUser"]["properties"]["start"]["readOnly"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTriggerAppUser"]["properties"]["start"]["type"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTriggerAppUser"]["properties"]["timezone"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTriggerAppUser"]["nullable"]
     remove: true
   - target: $["components"]["schemas"]["c1.api.automations.v1.SearchAutomationExecutionsRequest"]["properties"]["automationTemplateId"]["type"]
     update:
@@ -5923,6 +5977,13 @@ actions:
     update:
       - string
       - "null"
+  - target: $["components"]["schemas"]["c1.api.form.v1.Field"]["properties"]["fileField"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.form.v1.FileField'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.form.v1.Field"]["properties"]["fileField"]["$ref"]
+    remove: true
   - target: $["components"]["schemas"]["c1.api.form.v1.Field"]["properties"]["int64Field"]
     update:
       oneOf:
@@ -5974,6 +6035,29 @@ actions:
         - $ref: '#/components/schemas/c1.api.form.v1.RequiredTogether'
         - type: "null"
   - target: $["components"]["schemas"]["c1.api.form.v1.FieldRelationship"]["properties"]["requiredTogether"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.form.v1.FileField"]["properties"]["acceptedFileTypes"]["type"]
+    update:
+      - array
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.form.v1.FileField"]["properties"]["acceptedFileTypes"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.form.v1.FileField"]["properties"]["fileInputField"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.form.v1.FileInputField'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.form.v1.FileField"]["properties"]["fileInputField"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.form.v1.FileField"]["properties"]["maxFileSize"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.form.v1.FileField"]["properties"]["maxFileSize"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.form.v1.FileField"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.form.v1.FileInputField"]["nullable"]
     remove: true
   - target: $["components"]["schemas"]["c1.api.form.v1.Form"]["properties"]["description"]["type"]
     update:
@@ -7035,6 +7119,24 @@ actions:
       - "null"
   - target: $["components"]["schemas"]["c1.api.policy.v1.AcceptInstance"]["nullable"]
     remove: true
+  - target: $["components"]["schemas"]["c1.api.policy.v1.ActionProvision"]["properties"]["actionName"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.policy.v1.ActionProvision"]["properties"]["appId"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.policy.v1.ActionProvision"]["properties"]["connectorId"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.policy.v1.ActionProvision"]["properties"]["displayName"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.policy.v1.ActionProvision"]["nullable"]
+    remove: true
   - target: $["components"]["schemas"]["c1.api.policy.v1.AgentApproval"]["properties"]["agentFailureAction"]["type"]
     update:
       - string
@@ -8073,6 +8175,10 @@ actions:
     remove: true
   - target: $["components"]["schemas"]["c1.api.policy.v1.Provision"]["nullable"]
     remove: true
+  - target: $["components"]["schemas"]["c1.api.policy.v1.ProvisionInstance"]["properties"]["batonActionInvocationId"]["type"]
+    update:
+      - string
+      - "null"
   - target: $["components"]["schemas"]["c1.api.policy.v1.ProvisionInstance"]["properties"]["cancelled"]
     update:
       oneOf:
@@ -8140,6 +8246,13 @@ actions:
       - string
       - "null"
   - target: $["components"]["schemas"]["c1.api.policy.v1.ProvisionInstance"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.policy.v1.ProvisionPolicy"]["properties"]["action"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.policy.v1.ActionProvision'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.policy.v1.ProvisionPolicy"]["properties"]["action"]["$ref"]
     remove: true
   - target: $["components"]["schemas"]["c1.api.policy.v1.ProvisionPolicy"]["properties"]["connector"]
     update:
@@ -8760,6 +8873,163 @@ actions:
       - array
       - "null"
   - target: $["components"]["schemas"]["c1.api.profiletype.v1.ProfileType"]["properties"]["sizes"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["createdAt"]
+    update:
+      oneOf:
+        - format: date-time
+          readOnly: false
+          type: string
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["createdAt"]["format"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["createdAt"]["readOnly"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["createdAt"]["type"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["deletedAt"]
+    update:
+      oneOf:
+        - format: date-time
+          readOnly: false
+          type: string
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["deletedAt"]["format"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["deletedAt"]["readOnly"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["deletedAt"]["type"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["form"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.form.v1.Form'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["form"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["id"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["modifiedAt"]
+    update:
+      oneOf:
+        - format: date-time
+          readOnly: false
+          type: string
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["modifiedAt"]["format"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["modifiedAt"]["readOnly"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["modifiedAt"]["type"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceCreateEntitlementBindingRequest"]["properties"]["entitlementRef"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.app.v1.AppEntitlementRef'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceCreateEntitlementBindingRequest"]["properties"]["entitlementRef"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceCreateEntitlementBindingRequest"]["properties"]["requestSchemaId"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceCreateEntitlementBindingResponse"]["properties"]["entitlementRef"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.app.v1.AppEntitlementRef'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceCreateEntitlementBindingResponse"]["properties"]["entitlementRef"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceCreateEntitlementBindingResponse"]["properties"]["requestSchemaId"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceCreateRequest"]["properties"]["description"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceCreateRequest"]["properties"]["fields"]["type"]
+    update:
+      - array
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceCreateRequest"]["properties"]["fields"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceCreateRequest"]["properties"]["name"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceCreateResponse"]["properties"]["requestSchema"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.request_schema.v1.RequestSchema'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceCreateResponse"]["properties"]["requestSchema"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceFindBindingForAppEntitlementRequest"]["properties"]["entitlementRef"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.app.v1.AppEntitlementRef'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceFindBindingForAppEntitlementRequest"]["properties"]["entitlementRef"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceFindBindingForAppEntitlementResponse"]["properties"]["entitlementRef"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.app.v1.AppEntitlementRef'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceFindBindingForAppEntitlementResponse"]["properties"]["entitlementRef"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceFindBindingForAppEntitlementResponse"]["properties"]["requestSchemaId"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceGetResponse"]["properties"]["requestSchema"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.request_schema.v1.RequestSchema'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceGetResponse"]["properties"]["requestSchema"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceRemoveEntitlementBindingRequest"]["properties"]["entitlementRef"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.app.v1.AppEntitlementRef'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceRemoveEntitlementBindingRequest"]["properties"]["entitlementRef"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceRemoveEntitlementBindingRequest"]["properties"]["requestSchemaId"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceUpdateRequestInput"]["properties"]["requestSchema"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.request_schema.v1.RequestSchema'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceUpdateRequestInput"]["properties"]["requestSchema"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceUpdateRequestInput"]["properties"]["updateMask"]
+    update:
+      oneOf:
+        - readOnly: false
+          type:
+            - string
+            - "null"
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceUpdateRequestInput"]["properties"]["updateMask"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceUpdateRequestInput"]["properties"]["updateMask"]["readOnly"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceUpdateRequestInput"]["properties"]["updateMask"]["type"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceUpdateResponse"]["properties"]["requestSchema"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.request_schema.v1.RequestSchema'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchemaServiceUpdateResponse"]["properties"]["requestSchema"]["$ref"]
     remove: true
   - target: $["components"]["schemas"]["c1.api.requestcatalog.v1.AppEntitlementWithUserBindings"]["properties"]["appEntitlementUserBindings"]["type"]
     update:
@@ -10745,6 +11015,54 @@ actions:
       - "null"
   - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditAccessRequestOutcome"]["nullable"]
     remove: true
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditAccountLifecycleActionCreated"]["properties"]["batonActionDisplayName"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditAccountLifecycleActionCreated"]["properties"]["batonActionInvocationId"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditAccountLifecycleActionCreated"]["properties"]["batonActionName"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditAccountLifecycleActionCreated"]["properties"]["batonAppId"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditAccountLifecycleActionCreated"]["properties"]["batonConnectorId"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditAccountLifecycleActionCreated"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditAccountLifecycleActionFailed"]["properties"]["batonActionDisplayName"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditAccountLifecycleActionFailed"]["properties"]["batonActionInvocationId"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditAccountLifecycleActionFailed"]["properties"]["batonActionName"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditAccountLifecycleActionFailed"]["properties"]["batonAppId"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditAccountLifecycleActionFailed"]["properties"]["batonConnectorId"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditAccountLifecycleActionFailed"]["properties"]["error"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditAccountLifecycleActionFailed"]["nullable"]
+    remove: true
   - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditActionSubmitted"]["properties"]["action"]
     update:
       oneOf:
@@ -11071,6 +11389,12 @@ actions:
       - "null"
   - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditPolicyEvaluationStep"]["nullable"]
     remove: true
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditPolicyProvisionCancelled"]["properties"]["cancelReason"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditPolicyProvisionCancelled"]["nullable"]
+    remove: true
   - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditPolicyProvisionError"]["properties"]["error"]["type"]
     update:
       - string
@@ -11177,6 +11501,20 @@ actions:
         - $ref: '#/components/schemas/c1.api.task.v1.TaskAuditAccessRequestOutcome'
         - type: "null"
   - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditView"]["properties"]["accessRequestOutcome"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditView"]["properties"]["accountLifecycleActionCreated"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.task.v1.TaskAuditAccountLifecycleActionCreated'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditView"]["properties"]["accountLifecycleActionCreated"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditView"]["properties"]["accountLifecycleActionFailed"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.task.v1.TaskAuditAccountLifecycleActionFailed'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditView"]["properties"]["accountLifecycleActionFailed"]["$ref"]
     remove: true
   - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditView"]["properties"]["actionResult"]
     update:
@@ -11377,6 +11715,13 @@ actions:
         - $ref: '#/components/schemas/c1.api.task.v1.TaskAuditPolicyEvaluationStep'
         - type: "null"
   - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditView"]["properties"]["policyEvaluationStep"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditView"]["properties"]["provisionCancelled"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.task.v1.TaskAuditPolicyProvisionCancelled'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditView"]["properties"]["provisionCancelled"]["$ref"]
     remove: true
   - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditView"]["properties"]["provisionError"]
     update:
@@ -12092,6 +12437,19 @@ actions:
         - type: "null"
   - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["expandMask"]["$ref"]
     remove: true
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["includeActedAfter"]
+    update:
+      oneOf:
+        - format: date-time
+          readOnly: false
+          type: string
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["includeActedAfter"]["format"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["includeActedAfter"]["readOnly"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["includeActedAfter"]["type"]
+    remove: true
   - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["includeDeleted"]["type"]
     update:
       - boolean
@@ -12554,6 +12912,10 @@ actions:
       - string
       - "null"
   - target: $["components"]["schemas"]["c1.api.task.v1.TaskView"]["properties"]["appPath"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskView"]["properties"]["appUserLastUsagePath"]["type"]
     update:
       - string
       - "null"
@@ -15198,6 +15560,30 @@ actions:
     update:
       - string
       - "null"
+  - target: $["paths"]["/api/v1/apps/{app_id}/resource_types/{resource_type_id}/resource/{resource_id}/ownerids"]["delete"]["parameters"][0]["schema"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["paths"]["/api/v1/apps/{app_id}/resource_types/{resource_type_id}/resource/{resource_id}/ownerids"]["delete"]["parameters"][1]["schema"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["paths"]["/api/v1/apps/{app_id}/resource_types/{resource_type_id}/resource/{resource_id}/ownerids"]["delete"]["parameters"][2]["schema"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["paths"]["/api/v1/apps/{app_id}/resource_types/{resource_type_id}/resource/{resource_id}/ownerids"]["get"]["parameters"][0]["schema"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["paths"]["/api/v1/apps/{app_id}/resource_types/{resource_type_id}/resource/{resource_id}/ownerids"]["get"]["parameters"][1]["schema"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["paths"]["/api/v1/apps/{app_id}/resource_types/{resource_type_id}/resource/{resource_id}/ownerids"]["get"]["parameters"][2]["schema"]["type"]
+    update:
+      - string
+      - "null"
   - target: $["paths"]["/api/v1/apps/{app_id}/resource_types/{resource_type_id}/resource/{resource_id}/owners"]["delete"]["parameters"][0]["schema"]["type"]
     update:
       - string
@@ -15239,6 +15625,18 @@ actions:
       - string
       - "null"
   - target: $["paths"]["/api/v1/apps/{app_id}/resource_types/{resource_type_id}/resource/{resource_id}/owners"]["post"]["parameters"][2]["schema"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["paths"]["/api/v1/apps/{app_id}/resource_types/{resource_type_id}/resource/{resource_id}/owners"]["put"]["parameters"][0]["schema"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["paths"]["/api/v1/apps/{app_id}/resource_types/{resource_type_id}/resource/{resource_id}/owners"]["put"]["parameters"][1]["schema"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["paths"]["/api/v1/apps/{app_id}/resource_types/{resource_type_id}/resource/{resource_id}/owners"]["put"]["parameters"][2]["schema"]["type"]
     update:
       - string
       - "null"
@@ -15619,6 +16017,18 @@ actions:
       - string
       - "null"
   - target: $["paths"]["/api/v1/policies/{id}"]["post"]["parameters"][0]["schema"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["paths"]["/api/v1/request_schemas/{request_schema_id}"]["delete"]["parameters"][0]["schema"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["paths"]["/api/v1/request_schemas/{request_schema_id}"]["get"]["parameters"][0]["schema"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["paths"]["/api/v1/request_schemas/{request_schema_id}"]["post"]["parameters"][0]["schema"]["type"]
     update:
       - string
       - "null"

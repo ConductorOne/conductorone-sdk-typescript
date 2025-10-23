@@ -1,7 +1,6 @@
 src/token.ts
-src/test.ts
-src/index.ts
-yarn.lock
-package-lock.json
-tsconfig.json
+test/**
 eslint.config.mjs
+tsconfig.json
+src/tsconfig.json
+src/hooks/registration.ts
