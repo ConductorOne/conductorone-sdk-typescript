@@ -242,9 +242,12 @@ run();
 
 ### [appResourceOwners](docs/sdks/appresourceowners/README.md)
 
+* [delete](docs/sdks/appresourceowners/README.md#delete) - Delete
+* [listOwnerIDs](docs/sdks/appresourceowners/README.md#listownerids) - List Owner I Ds
 * [remove](docs/sdks/appresourceowners/README.md#remove) - Remove
 * [list](docs/sdks/appresourceowners/README.md#list) - List
 * [add](docs/sdks/appresourceowners/README.md#add) - Add
+* [set](docs/sdks/appresourceowners/README.md#set) - Set
 
 ### [appResourceSearch](docs/sdks/appresourcesearch/README.md)
 
@@ -459,6 +462,16 @@ run();
 
 * [searchEntitlements](docs/sdks/requestcatalogsearch/README.md#searchentitlements) - Search Entitlements
 
+### [requestSchema](docs/sdks/requestschema/README.md)
+
+* [removeEntitlementBinding](docs/sdks/requestschema/README.md#removeentitlementbinding) - Remove Entitlement Binding
+* [createEntitlementBinding](docs/sdks/requestschema/README.md#createentitlementbinding) - Create Entitlement Binding
+* [findBindingForAppEntitlement](docs/sdks/requestschema/README.md#findbindingforappentitlement) - Find Binding For App Entitlement
+* [create](docs/sdks/requestschema/README.md#create) - Create
+* [delete](docs/sdks/requestschema/README.md#delete) - Delete
+* [get](docs/sdks/requestschema/README.md#get) - Get
+* [update](docs/sdks/requestschema/README.md#update) - Update
+
 ### [roles](docs/sdks/roles/README.md)
 
 * [list](docs/sdks/roles/README.md#list) - List
@@ -621,8 +634,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`appResourceGet`](docs/sdks/appresource/README.md#get) - Get
 - [`appResourceList`](docs/sdks/appresource/README.md#list) - List
 - [`appResourceOwnersAdd`](docs/sdks/appresourceowners/README.md#add) - Add
+- [`appResourceOwnersDelete`](docs/sdks/appresourceowners/README.md#delete) - Delete
 - [`appResourceOwnersList`](docs/sdks/appresourceowners/README.md#list) - List
+- [`appResourceOwnersListOwnerIDs`](docs/sdks/appresourceowners/README.md#listownerids) - List Owner I Ds
 - [`appResourceOwnersRemove`](docs/sdks/appresourceowners/README.md#remove) - Remove
+- [`appResourceOwnersSet`](docs/sdks/appresourceowners/README.md#set) - Set
 - [`appResourceSearchSearchAppResources`](docs/sdks/appresourcesearch/README.md#searchappresources) - Search App Resources
 - [`appResourceSearchSearchAppResourceTypes`](docs/sdks/appresourcesearch/README.md#searchappresourcetypes) - Search App Resource Types
 - [`appResourceTypeCreateManuallyManagedResourceType`](docs/sdks/appresourcetype/README.md#createmanuallymanagedresourcetype) - Create Manually Managed Resource Type
@@ -747,6 +763,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`requestCatalogManagementUpdate`](docs/sdks/requestcatalogmanagement/README.md#update) - Update
 - [`requestCatalogManagementUpdateAppEntitlements`](docs/sdks/requestcatalogmanagement/README.md#updateappentitlements) - Update App Entitlements
 - [`requestCatalogSearchSearchEntitlements`](docs/sdks/requestcatalogsearch/README.md#searchentitlements) - Search Entitlements
+- [`requestSchemaCreate`](docs/sdks/requestschema/README.md#create) - Create
+- [`requestSchemaCreateEntitlementBinding`](docs/sdks/requestschema/README.md#createentitlementbinding) - Create Entitlement Binding
+- [`requestSchemaDelete`](docs/sdks/requestschema/README.md#delete) - Delete
+- [`requestSchemaFindBindingForAppEntitlement`](docs/sdks/requestschema/README.md#findbindingforappentitlement) - Find Binding For App Entitlement
+- [`requestSchemaGet`](docs/sdks/requestschema/README.md#get) - Get
+- [`requestSchemaRemoveEntitlementBinding`](docs/sdks/requestschema/README.md#removeentitlementbinding) - Remove Entitlement Binding
+- [`requestSchemaUpdate`](docs/sdks/requestschema/README.md#update) - Update
 - [`rolesGet`](docs/sdks/roles/README.md#get) - Get
 - [`rolesList`](docs/sdks/roles/README.md#list) - List
 - [`rolesUpdate`](docs/sdks/roles/README.md#update) - Update
