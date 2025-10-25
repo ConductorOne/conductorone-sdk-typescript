@@ -10,6 +10,7 @@ This message contains a oneof named typ. Only a single field of the following li
   - multiStep
   - externalTicket
   - unconfigured
+  - action
 
 
 ## Example Usage
@@ -24,6 +25,7 @@ let value: ProvisionPolicy = {};
 
 | Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             |
 | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `action`                                                                                | [shared.ActionProvision](../../../sdk/models/shared/actionprovision.md)                 | :heavy_minus_sign:                                                                      | N/A                                                                                     |
 | `connector`                                                                             | [shared.ConnectorProvision](../../../sdk/models/shared/connectorprovision.md)           | :heavy_minus_sign:                                                                      | N/A                                                                                     |
 | `delegated`                                                                             | [shared.DelegatedProvision](../../../sdk/models/shared/delegatedprovision.md)           | :heavy_minus_sign:                                                                      | N/A                                                                                     |
 | `externalTicket`                                                                        | [shared.ExternalTicketProvision](../../../sdk/models/shared/externalticketprovision.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |

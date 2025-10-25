@@ -3,13 +3,50 @@
  */
 
 import { appResourceOwnersAdd } from "../funcs/appResourceOwnersAdd.js";
+import { appResourceOwnersDelete } from "../funcs/appResourceOwnersDelete.js";
 import { appResourceOwnersList } from "../funcs/appResourceOwnersList.js";
+import { appResourceOwnersListOwnerIDs } from "../funcs/appResourceOwnersListOwnerIDs.js";
 import { appResourceOwnersRemove } from "../funcs/appResourceOwnersRemove.js";
+import { appResourceOwnersSet } from "../funcs/appResourceOwnersSet.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "./models/operations/index.js";
 import { unwrapAsync } from "./types/fp.js";
 
 export class AppResourceOwners extends ClientSDK {
+  /**
+   * Delete
+   *
+   * @remarks
+   * Delete deletes the owners from a given app resource.
+   */
+  async delete(
+    request: operations.C1ApiAppV1AppResourceOwnersDeleteRequest,
+    options?: RequestOptions,
+  ): Promise<operations.C1ApiAppV1AppResourceOwnersDeleteResponse> {
+    return unwrapAsync(appResourceOwnersDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List Owner I Ds
+   *
+   * @remarks
+   * ListOwnerIDs lists owner IDs for a given app resource.
+   */
+  async listOwnerIDs(
+    request: operations.C1ApiAppV1AppResourceOwnersListOwnerIDsRequest,
+    options?: RequestOptions,
+  ): Promise<operations.C1ApiAppV1AppResourceOwnersListOwnerIDsResponse> {
+    return unwrapAsync(appResourceOwnersListOwnerIDs(
+      this,
+      request,
+      options,
+    ));
+  }
+
   /**
    * Remove
    *
@@ -55,6 +92,23 @@ export class AppResourceOwners extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.C1ApiAppV1AppResourceOwnersAddResponse> {
     return unwrapAsync(appResourceOwnersAdd(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Set
+   *
+   * @remarks
+   * Sets the owners for a given app resource to the specified list of users.
+   */
+  async set(
+    request: operations.C1ApiAppV1AppResourceOwnersSetRequest,
+    options?: RequestOptions,
+  ): Promise<operations.C1ApiAppV1AppResourceOwnersSetResponse> {
+    return unwrapAsync(appResourceOwnersSet(
       this,
       request,
       options,
