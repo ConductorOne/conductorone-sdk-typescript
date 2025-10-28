@@ -1,9 +1,8 @@
-import axios, { InternalAxiosRequestConfig } from "axios";
-
-import { Token } from "./token";
-import { ConductoroneSDKTypescript as ConductoroneSDKTypescript_orig } from "./sdk/sdk";
-import { ServerList, SDKOptions } from "./lib/config";
-import { HTTPClient } from "./lib/http";
+import axios from "axios";
+import { Token } from "./token.js";
+import { ConductoroneSDKTypescript as ConductoroneSDKTypescript_orig } from "./sdk/sdk.js";
+import { ServerList, SDKOptions } from "./lib/config.js";
+import { HTTPClient } from "./lib/http.js";
 
 export interface SDKProps extends SDKOptions {
   clientID?: string;
@@ -80,4 +79,4 @@ export class ConductoroneSDKTypescript extends ConductoroneSDKTypescript_orig {
   }
 }
 
-export { ServerList } from "./lib/config";
+export { ServerList } from "./lib/config.js";
