@@ -1,4 +1,5 @@
 src/token.ts
+src/index.ts
 test/**
 eslint.config.mjs
 tsconfig.json
