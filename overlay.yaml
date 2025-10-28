@@ -140,6 +140,10 @@ actions:
         - type: "null"
   - target: $["components"]["schemas"]["c1.api.accessconflict.v1.ConflictMonitorCreateRequest"]["properties"]["notificationConfig"]["$ref"]
     remove: true
+  - target: $["components"]["schemas"]["c1.api.accessconflict.v1.ConflictMonitorRef"]["properties"]["id"]["type"]
+    update:
+      - string
+      - "null"
   - target: $["components"]["schemas"]["c1.api.accessconflict.v1.ConflictMonitorUpdateRequestInput"]["properties"]["description"]["type"]
     update:
       - string
@@ -4202,6 +4206,21 @@ actions:
     update:
       - string
       - "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AccessConflictTrigger"]["properties"]["allConflictMonitors"]["type"]
+    update:
+      - boolean
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AccessConflictTrigger"]["properties"]["allConflictMonitors"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AccessConflictTrigger"]["properties"]["conflictMonitorRefs"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.automations.v1.ConflictMonitorRefs'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AccessConflictTrigger"]["properties"]["conflictMonitorRefs"]["$ref"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AccessConflictTrigger"]["nullable"]
+    remove: true
   - target: $["components"]["schemas"]["c1.api.automations.v1.AccountInContext"]["nullable"]
     remove: true
   - target: $["components"]["schemas"]["c1.api.automations.v1.AccountLifecycleAction"]["properties"]["accountInContext"]
@@ -4688,6 +4707,13 @@ actions:
     update:
       - string
       - "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AutomationTrigger"]["properties"]["accessConflict"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.automations.v1.AccessConflictTrigger'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.AutomationTrigger"]["properties"]["accessConflict"]["$ref"]
+    remove: true
   - target: $["components"]["schemas"]["c1.api.automations.v1.AutomationTrigger"]["properties"]["appUserCreated"]
     update:
       oneOf:
@@ -4800,6 +4826,14 @@ actions:
   - target: $["components"]["schemas"]["c1.api.automations.v1.CloseAction"]["properties"]["userRef"]["$ref"]
     remove: true
   - target: $["components"]["schemas"]["c1.api.automations.v1.CloseAction"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.automations.v1.ConflictMonitorRefs"]["properties"]["conflictMonitorRefs"]["type"]
+    update:
+      - array
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.automations.v1.ConflictMonitorRefs"]["properties"]["conflictMonitorRefs"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.automations.v1.ConflictMonitorRefs"]["nullable"]
     remove: true
   - target: $["components"]["schemas"]["c1.api.automations.v1.ConnectorAction"]["properties"]["actionName"]["type"]
     update:
@@ -12378,6 +12412,12 @@ actions:
       - "null"
   - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["assigneesInIds"]["nullable"]
     remove: true
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["certifyOutcomes"]["type"]
+    update:
+      - array
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["certifyOutcomes"]["nullable"]
+    remove: true
   - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["createdAfter"]
     update:
       oneOf:
@@ -12437,6 +12477,12 @@ actions:
         - type: "null"
   - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["expandMask"]["$ref"]
     remove: true
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["grantOutcomes"]["type"]
+    update:
+      - array
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["grantOutcomes"]["nullable"]
+    remove: true
   - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["includeActedAfter"]
     update:
       oneOf:
@@ -12483,6 +12529,32 @@ actions:
     update:
       - string
       - "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["outcomeAfter"]
+    update:
+      oneOf:
+        - format: date-time
+          readOnly: false
+          type: string
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["outcomeAfter"]["format"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["outcomeAfter"]["readOnly"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["outcomeAfter"]["type"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["outcomeBefore"]
+    update:
+      oneOf:
+        - format: date-time
+          readOnly: false
+          type: string
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["outcomeBefore"]["format"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["outcomeBefore"]["readOnly"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["outcomeBefore"]["type"]
+    remove: true
   - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["pageSize"]["type"]
     update:
       - integer
@@ -12506,6 +12578,12 @@ actions:
       - array
       - "null"
   - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["refs"]["nullable"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["revokeOutcomes"]["type"]
+    update:
+      - array
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["revokeOutcomes"]["nullable"]
     remove: true
   - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["sortBy"]["type"]
     update:
@@ -12954,6 +13032,79 @@ actions:
     update:
       - string
       - "null"
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["createdAt"]
+    update:
+      oneOf:
+        - format: date-time
+          readOnly: false
+          type: string
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["createdAt"]["format"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["createdAt"]["readOnly"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["createdAt"]["type"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["delegatedUserId"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["deletedAt"]
+    update:
+      oneOf:
+        - format: date-time
+          readOnly: false
+          type: string
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["deletedAt"]["format"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["deletedAt"]["readOnly"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["deletedAt"]["type"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["expirationAt"]
+    update:
+      oneOf:
+        - format: date-time
+          readOnly: false
+          type: string
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["expirationAt"]["format"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["expirationAt"]["readOnly"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["expirationAt"]["type"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["startAt"]
+    update:
+      oneOf:
+        - format: date-time
+          readOnly: false
+          type: string
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["startAt"]["format"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["startAt"]["readOnly"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["startAt"]["type"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["updatedAt"]
+    update:
+      oneOf:
+        - format: date-time
+          readOnly: false
+          type: string
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["updatedAt"]["format"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["updatedAt"]["readOnly"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["updatedAt"]["type"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["userId"]["type"]
+    update:
+      - string
+      - "null"
   - target: $["components"]["schemas"]["c1.api.user.v1.GetUserProfileTypesResponse"]["properties"]["profileTypes"]["type"]
     update:
       - array
@@ -13053,6 +13204,43 @@ actions:
     update:
       - string
       - "null"
+  - target: $["components"]["schemas"]["c1.api.user.v1.SetExpiringUserDelegationBindingByAdminRequestInput"]["properties"]["delegatedUserId"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["components"]["schemas"]["c1.api.user.v1.SetExpiringUserDelegationBindingByAdminRequestInput"]["properties"]["delegationExpireAt"]
+    update:
+      oneOf:
+        - format: date-time
+          readOnly: false
+          type: string
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.user.v1.SetExpiringUserDelegationBindingByAdminRequestInput"]["properties"]["delegationExpireAt"]["format"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.SetExpiringUserDelegationBindingByAdminRequestInput"]["properties"]["delegationExpireAt"]["readOnly"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.SetExpiringUserDelegationBindingByAdminRequestInput"]["properties"]["delegationExpireAt"]["type"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.SetExpiringUserDelegationBindingByAdminRequestInput"]["properties"]["delegationStartAt"]
+    update:
+      oneOf:
+        - format: date-time
+          readOnly: false
+          type: string
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.user.v1.SetExpiringUserDelegationBindingByAdminRequestInput"]["properties"]["delegationStartAt"]["format"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.SetExpiringUserDelegationBindingByAdminRequestInput"]["properties"]["delegationStartAt"]["readOnly"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.SetExpiringUserDelegationBindingByAdminRequestInput"]["properties"]["delegationStartAt"]["type"]
+    remove: true
+  - target: $["components"]["schemas"]["c1.api.user.v1.SetExpiringUserDelegationBindingByAdminResponse"]["properties"]["item"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.user.v1.ExpiringUserDelegationBinding'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.user.v1.SetExpiringUserDelegationBindingByAdminResponse"]["properties"]["item"]["$ref"]
+    remove: true
   - target: $["components"]["schemas"]["c1.api.user.v1.User"]["properties"]["createdAt"]
     update:
       oneOf:
@@ -16153,6 +16341,10 @@ actions:
       - string
       - "null"
   - target: $["paths"]["/api/v1/users/{user_id}/profile-types"]["get"]["parameters"][0]["schema"]["type"]
+    update:
+      - string
+      - "null"
+  - target: $["paths"]["/api/v1/users/{user_id}/set-delegation-by-admin"]["post"]["parameters"][0]["schema"]["type"]
     update:
       - string
       - "null"

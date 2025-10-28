@@ -1,6 +1,11 @@
 import dotenv from 'dotenv';
 import * as fs from 'fs';
 import { ConductoroneSDKTypescript } from '../src/index'
+import { webcrypto } from 'crypto';
+
+if (!(globalThis as any).crypto) {
+  (globalThis as any).crypto = webcrypto as any;
+}
 
 if (fs.existsSync(".env")) {
   dotenv.config({ path: ".env" });
