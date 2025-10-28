@@ -5,6 +5,7 @@
 import { userGet } from "../funcs/userGet.js";
 import { userGetUserProfileTypes } from "../funcs/userGetUserProfileTypes.js";
 import { userList } from "../funcs/userList.js";
+import { userSetExpiringUserDelegationBindingByAdmin } from "../funcs/userSetExpiringUserDelegationBindingByAdmin.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "./models/operations/index.js";
 import { unwrapAsync } from "./types/fp.js";
@@ -55,6 +56,26 @@ export class User extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.C1ApiUserV1UserServiceGetUserProfileTypesResponse> {
     return unwrapAsync(userGetUserProfileTypes(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Set Expiring User Delegation Binding By Admin
+   *
+   * @remarks
+   * Invokes the c1.api.user.v1.UserService.SetExpiringUserDelegationBindingByAdmin method.
+   */
+  async setExpiringUserDelegationBindingByAdmin(
+    request:
+      operations.C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponse
+  > {
+    return unwrapAsync(userSetExpiringUserDelegationBindingByAdmin(
       this,
       request,
       options,

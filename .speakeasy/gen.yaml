@@ -7,37 +7,35 @@ generation:
     sdkInitStyle: constructor
   useClassNamesForArrayFields: true
   fixes:
-    nameResolutionDec2023: false
+    nameResolutionFeb2025: false
     parameterOrderingFeb2024: false
     requestResponseComponentNamesFeb2024: false
     securityFeb2025: false
     sharedErrorComponentsApr2025: false
   auth:
-    OAuth2ClientCredentialsEnabled: false
+    oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
     hoistGlobalSecurity: true
   sdkHooksConfigAccess: true
-  tests:
-    generateTests: false
-    generateNewTests: false
-    skipResponseBodyAssertions: false
+  schemas:
+    allOfMergeStrategy: shallowMerge
   baseServerURL: ""
 typescript:
-  version: 1.0.2
+  version: 1.1.0
   acceptHeaderEnum: true
   additionalDependencies:
-    dependencies: 
-      axios: "^1.8.4"
-      jose: "^6.0.0"  
+    dependencies:
+      axios: ^1.8.4
+      jose: ^6.0.0
     devDependencies:
-      "@types/jest": "^29.0.0"
-      "@types/node": "^18.19.0"
-      jest: "^29.0.0"
-      ts-jest: "^29.0.0"
-      dotenv: "^16.4.7" 
-      "@types/reflect-metadata": "^0.1.0"
-    peerDependencies: 
-      react: "^16.0.0"
+      '@types/jest': ^29.0.0
+      '@types/node': ^18.19.0
+      '@types/reflect-metadata': ^0.1.0
+      dotenv: ^16.4.7
+      jest: ^29.0.0
+      ts-jest: ^29.0.0
+    peerDependencies:
+      react: ^16.0.0
   additionalPackageJSON: {}
   author: ConductorOne
   baseErrorName: ConductoroneSDKTypescriptError
@@ -72,3 +70,4 @@ typescript:
   templateVersion: v2
   usageSDKInitImports: []
   useIndexModules: true
+  zodVersion: v3
