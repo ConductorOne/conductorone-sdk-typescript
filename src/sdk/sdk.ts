@@ -47,6 +47,7 @@ import { PolicySearch } from "./policysearch.js";
 import { PolicyValidate } from "./policyvalidate.js";
 import { RequestCatalogManagement } from "./requestcatalogmanagement.js";
 import { RequestCatalogSearch } from "./requestcatalogsearch.js";
+import { RequestSchema } from "./requestschema.js";
 import { Roles } from "./roles.js";
 import { SessionSettings } from "./sessionsettings.js";
 import { StepUpProvider } from "./stepupprovider.js";
@@ -251,6 +252,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _policyValidate?: PolicyValidate;
   get policyValidate(): PolicyValidate {
     return (this._policyValidate ??= new PolicyValidate(this._options));
+  }
+
+  private _requestSchema?: RequestSchema;
+  get requestSchema(): RequestSchema {
+    return (this._requestSchema ??= new RequestSchema(this._options));
   }
 
   private _appResourceSearch?: AppResourceSearch;
