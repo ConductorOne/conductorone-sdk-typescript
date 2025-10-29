@@ -1,20 +1,20 @@
 lockVersion: 2.0.0
 id: 59dafb44-7e9b-49d4-8e7d-679663d28f0f
 management:
-  docChecksum: 8d909c23e245f8d8a61ff2960f982f86
+  docChecksum: 6650d6a62e86982eccabd88d1329ecf2
   docVersion: 0.1.0-alpha
-  speakeasyVersion: 1.636.0
-  generationVersion: 2.723.2
-  releaseVersion: 1.0.2
-  configChecksum: aaeb90098abb6b1feeeeef40bbc37fa8
+  speakeasyVersion: 1.642.1
+  generationVersion: 2.731.4
+  releaseVersion: 1.1.0
+  configChecksum: 76c281dd8091c55072092be01a2a0918
   repoURL: https://github.com/ConductorOne/conductorone-sdk-typescript.git
   installationURL: https://github.com/ConductorOne/conductorone-sdk-typescript
   published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
-    additionalProperties: 0.1.1
-    core: 3.21.26
+    additionalProperties: 0.1.2
+    core: 3.24.1
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     enumUnions: 0.1.0
@@ -141,10 +141,16 @@ generatedFiles:
   - docs/sdk/models/operations/c1apiappv1appreportservicelistresponse.md
   - docs/sdk/models/operations/c1apiappv1appresourceownersaddrequest.md
   - docs/sdk/models/operations/c1apiappv1appresourceownersaddresponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourceownersdeleterequest.md
+  - docs/sdk/models/operations/c1apiappv1appresourceownersdeleteresponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourceownerslistowneridsrequest.md
+  - docs/sdk/models/operations/c1apiappv1appresourceownerslistowneridsresponse.md
   - docs/sdk/models/operations/c1apiappv1appresourceownerslistrequest.md
   - docs/sdk/models/operations/c1apiappv1appresourceownerslistresponse.md
   - docs/sdk/models/operations/c1apiappv1appresourceownersremoverequest.md
   - docs/sdk/models/operations/c1apiappv1appresourceownersremoveresponse.md
+  - docs/sdk/models/operations/c1apiappv1appresourceownerssetrequest.md
+  - docs/sdk/models/operations/c1apiappv1appresourceownerssetresponse.md
   - docs/sdk/models/operations/c1apiappv1appresourcesearchsearchappresourcesresponse.md
   - docs/sdk/models/operations/c1apiappv1appresourcesearchsearchappresourcetypesresponse.md
   - docs/sdk/models/operations/c1apiappv1appresourceservicecreatemanuallymanagedappresourcerequest.md
@@ -356,6 +362,16 @@ generatedFiles:
   - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceupdaterequest.md
   - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceupdateresponse.md
   - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogsearchservicesearchentitlementsresponse.md
+  - docs/sdk/models/operations/c1apirequestschemav1requestschemaservicecreateentitlementbindingresponse.md
+  - docs/sdk/models/operations/c1apirequestschemav1requestschemaservicecreateresponse.md
+  - docs/sdk/models/operations/c1apirequestschemav1requestschemaservicedeleterequest.md
+  - docs/sdk/models/operations/c1apirequestschemav1requestschemaservicedeleteresponse.md
+  - docs/sdk/models/operations/c1apirequestschemav1requestschemaservicefindbindingforappentitlementresponse.md
+  - docs/sdk/models/operations/c1apirequestschemav1requestschemaservicegetrequest.md
+  - docs/sdk/models/operations/c1apirequestschemav1requestschemaservicegetresponse.md
+  - docs/sdk/models/operations/c1apirequestschemav1requestschemaserviceremoveentitlementbindingresponse.md
+  - docs/sdk/models/operations/c1apirequestschemav1requestschemaserviceupdaterequest.md
+  - docs/sdk/models/operations/c1apirequestschemav1requestschemaserviceupdateresponse.md
   - docs/sdk/models/operations/c1apisettingsv1awsexternalidsettingsgetresponse.md
   - docs/sdk/models/operations/c1apisettingsv1orgdomainservicelistrequest.md
   - docs/sdk/models/operations/c1apisettingsv1orgdomainservicelistresponse.md
@@ -432,6 +448,8 @@ generatedFiles:
   - docs/sdk/models/operations/c1apiuserv1userservicegetuserprofiletypesresponse.md
   - docs/sdk/models/operations/c1apiuserv1userservicelistrequest.md
   - docs/sdk/models/operations/c1apiuserv1userservicelistresponse.md
+  - docs/sdk/models/operations/c1apiuserv1userservicesetexpiringuserdelegationbindingbyadminrequest.md
+  - docs/sdk/models/operations/c1apiuserv1userservicesetexpiringuserdelegationbindingbyadminresponse.md
   - docs/sdk/models/operations/c1apiwebhooksv1webhookssearchsearchresponse.md
   - docs/sdk/models/operations/c1apiwebhooksv1webhooksservicecreateresponse.md
   - docs/sdk/models/operations/c1apiwebhooksv1webhooksservicedeleterequest.md
@@ -446,6 +464,7 @@ generatedFiles:
   - docs/sdk/models/operations/c1apiwebhooksv1webhooksserviceupdateresponse.md
   - docs/sdk/models/shared/accept.md
   - docs/sdk/models/shared/acceptinstance.md
+  - docs/sdk/models/shared/accessconflicttrigger.md
   - docs/sdk/models/shared/accountfilter.md
   - docs/sdk/models/shared/accountincontext.md
   - docs/sdk/models/shared/accountlifecycleaction.md
@@ -453,6 +472,7 @@ generatedFiles:
   - docs/sdk/models/shared/accountref.md
   - docs/sdk/models/shared/accounttype.md
   - docs/sdk/models/shared/accounttypes.md
+  - docs/sdk/models/shared/actionprovision.md
   - docs/sdk/models/shared/actions.md
   - docs/sdk/models/shared/actiontype.md
   - docs/sdk/models/shared/addappentitlementownerrequest.md
@@ -600,6 +620,7 @@ generatedFiles:
   - docs/sdk/models/shared/callfunction.md
   - docs/sdk/models/shared/cancelaccessrequestdefaultsrequest.md
   - docs/sdk/models/shared/cancelledaction.md
+  - docs/sdk/models/shared/certifyoutcomes.md
   - docs/sdk/models/shared/checkboxfield.md
   - docs/sdk/models/shared/checkboxfield1.md
   - docs/sdk/models/shared/chipsfield.md
@@ -616,6 +637,8 @@ generatedFiles:
   - docs/sdk/models/shared/conflictmonitorcreaterequest.md
   - docs/sdk/models/shared/conflictmonitordeleterequest.md
   - docs/sdk/models/shared/conflictmonitordeleteresponse.md
+  - docs/sdk/models/shared/conflictmonitorref.md
+  - docs/sdk/models/shared/conflictmonitorrefs.md
   - docs/sdk/models/shared/conflictmonitorupdaterequest.md
   - docs/sdk/models/shared/connector.md
   - docs/sdk/models/shared/connectoraction.md
@@ -702,6 +725,8 @@ generatedFiles:
   - docs/sdk/models/shared/deleteappownersrequest.md
   - docs/sdk/models/shared/deleteappownersresponse.md
   - docs/sdk/models/shared/deleteapprequest.md
+  - docs/sdk/models/shared/deleteappresourceownersrequest.md
+  - docs/sdk/models/shared/deleteappresourceownersresponse.md
   - docs/sdk/models/shared/deleteappresponse.md
   - docs/sdk/models/shared/deleteattributevaluerequest.md
   - docs/sdk/models/shared/deleteattributevalueresponse.md
@@ -766,6 +791,7 @@ generatedFiles:
   - docs/sdk/models/shared/executeautomationresponse.md
   - docs/sdk/models/shared/executionstepstates.md
   - docs/sdk/models/shared/expanded.md
+  - docs/sdk/models/shared/expiringuserdelegationbinding.md
   - docs/sdk/models/shared/exporter.md
   - docs/sdk/models/shared/exporterinput.md
   - docs/sdk/models/shared/exporterref.md
@@ -799,6 +825,8 @@ generatedFiles:
   - docs/sdk/models/shared/fieldinput.md
   - docs/sdk/models/shared/fieldrelationship.md
   - docs/sdk/models/shared/fieldrules.md
+  - docs/sdk/models/shared/filefield.md
+  - docs/sdk/models/shared/fileinputfield.md
   - docs/sdk/models/shared/fixed32rules.md
   - docs/sdk/models/shared/fixed64rules.md
   - docs/sdk/models/shared/floatrules.md
@@ -865,6 +893,7 @@ generatedFiles:
   - docs/sdk/models/shared/grantfiltertype.md
   - docs/sdk/models/shared/grantfoundtrigger.md
   - docs/sdk/models/shared/grantjustificationtype.md
+  - docs/sdk/models/shared/grantoutcomes.md
   - docs/sdk/models/shared/grantreason.md
   - docs/sdk/models/shared/grantsourcefilter.md
   - docs/sdk/models/shared/granttriggerfilter.md
@@ -883,6 +912,7 @@ generatedFiles:
   - docs/sdk/models/shared/listappentitlementusersresponseexpanded.md
   - docs/sdk/models/shared/listappowneridsresponse.md
   - docs/sdk/models/shared/listappownersresponse.md
+  - docs/sdk/models/shared/listappresourceowneridsresponse.md
   - docs/sdk/models/shared/listappresourceownersresponse.md
   - docs/sdk/models/shared/listappsresponse.md
   - docs/sdk/models/shared/listappusersforidentitywithgrantresponse.md
@@ -1023,6 +1053,20 @@ generatedFiles:
   - docs/sdk/models/shared/requestcatalogsearchservicesearchentitlementsresponse.md
   - docs/sdk/models/shared/requestcatalogsearchservicesearchentitlementsresponseexpanded.md
   - docs/sdk/models/shared/requestcatalogview.md
+  - docs/sdk/models/shared/requestschema.md
+  - docs/sdk/models/shared/requestschemaservicecreateentitlementbindingrequest.md
+  - docs/sdk/models/shared/requestschemaservicecreateentitlementbindingresponse.md
+  - docs/sdk/models/shared/requestschemaservicecreaterequest.md
+  - docs/sdk/models/shared/requestschemaservicecreateresponse.md
+  - docs/sdk/models/shared/requestschemaservicedeleterequest.md
+  - docs/sdk/models/shared/requestschemaservicedeleteresponse.md
+  - docs/sdk/models/shared/requestschemaservicefindbindingforappentitlementrequest.md
+  - docs/sdk/models/shared/requestschemaservicefindbindingforappentitlementresponse.md
+  - docs/sdk/models/shared/requestschemaservicegetresponse.md
+  - docs/sdk/models/shared/requestschemaserviceremoveentitlementbindingrequest.md
+  - docs/sdk/models/shared/requestschemaserviceremoveentitlementbindingresponse.md
+  - docs/sdk/models/shared/requestschemaserviceupdaterequest.md
+  - docs/sdk/models/shared/requestschemaserviceupdateresponse.md
   - docs/sdk/models/shared/requiredtogether.md
   - docs/sdk/models/shared/resourceownerapproval.md
   - docs/sdk/models/shared/resourcetype.md
@@ -1042,6 +1086,7 @@ generatedFiles:
   - docs/sdk/models/shared/resumepausedbundleautomationresponse.md
   - docs/sdk/models/shared/resumesyncrequest.md
   - docs/sdk/models/shared/resumesyncresponse.md
+  - docs/sdk/models/shared/revokeoutcomes.md
   - docs/sdk/models/shared/role.md
   - docs/sdk/models/shared/roleinput.md
   - docs/sdk/models/shared/rotatablesecretfield.md
@@ -1051,6 +1096,7 @@ generatedFiles:
   - docs/sdk/models/shared/runimmediately.md
   - docs/sdk/models/shared/savetovault.md
   - docs/sdk/models/shared/scheduletrigger.md
+  - docs/sdk/models/shared/scheduletriggerappuser.md
   - docs/sdk/models/shared/searchappentitlementswithexpiredresponse.md
   - docs/sdk/models/shared/searchappresourcesrequest.md
   - docs/sdk/models/shared/searchappresourcesresponse.md
@@ -1097,7 +1143,11 @@ generatedFiles:
   - docs/sdk/models/shared/setappentitlementownersresponse.md
   - docs/sdk/models/shared/setappownersrequest.md
   - docs/sdk/models/shared/setappownersresponse.md
+  - docs/sdk/models/shared/setappresourceownersrequest.md
+  - docs/sdk/models/shared/setappresourceownersresponse.md
   - docs/sdk/models/shared/setbundleautomationrequest.md
+  - docs/sdk/models/shared/setexpiringuserdelegationbindingbyadminrequest.md
+  - docs/sdk/models/shared/setexpiringuserdelegationbindingbyadminresponse.md
   - docs/sdk/models/shared/severity.md
   - docs/sdk/models/shared/sfixed32rules.md
   - docs/sdk/models/shared/sfixed64rules.md
@@ -1165,6 +1215,8 @@ generatedFiles:
   - docs/sdk/models/shared/taskactionsserviceupdaterequestdatarequest.md
   - docs/sdk/models/shared/taskauditaccessrequestoutcome.md
   - docs/sdk/models/shared/taskauditaccessrequestoutcomeoutcome.md
+  - docs/sdk/models/shared/taskauditaccountlifecycleactioncreated.md
+  - docs/sdk/models/shared/taskauditaccountlifecycleactionfailed.md
   - docs/sdk/models/shared/taskauditactionsubmitted.md
   - docs/sdk/models/shared/taskauditapprovalautoacceptedbypolicy.md
   - docs/sdk/models/shared/taskauditapprovalautorejectedbypolicy.md
@@ -1197,6 +1249,7 @@ generatedFiles:
   - docs/sdk/models/shared/taskauditpolicyapprovalreassigned.md
   - docs/sdk/models/shared/taskauditpolicychanged.md
   - docs/sdk/models/shared/taskauditpolicyevaluationstep.md
+  - docs/sdk/models/shared/taskauditpolicyprovisioncancelled.md
   - docs/sdk/models/shared/taskauditpolicyprovisionerror.md
   - docs/sdk/models/shared/taskauditpolicyprovisionreassigned.md
   - docs/sdk/models/shared/taskauditreassignedtodelegate.md
@@ -1417,6 +1470,7 @@ generatedFiles:
   - docs/sdks/policyvalidate/README.md
   - docs/sdks/requestcatalogmanagement/README.md
   - docs/sdks/requestcatalogsearch/README.md
+  - docs/sdks/requestschema/README.md
   - docs/sdks/roles/README.md
   - docs/sdks/sessionsettings/README.md
   - docs/sdks/stepupprovider/README.md
@@ -1430,11 +1484,12 @@ generatedFiles:
   - docs/sdks/usersearch/README.md
   - docs/sdks/webhooks/README.md
   - docs/sdks/webhookssearch/README.md
-  - eslint.config.mjs
   - examples/.env.template
   - examples/README.md
   - examples/accessConflictCreateMonitor.example.ts
+  - examples/package.json
   - jsr.json
+  - package.json
   - src/core.ts
   - src/funcs/accessConflictCreateMonitor.ts
   - src/funcs/accessConflictDeleteMonitor.ts
@@ -1495,8 +1550,11 @@ generatedFiles:
   - src/funcs/appResourceGet.ts
   - src/funcs/appResourceList.ts
   - src/funcs/appResourceOwnersAdd.ts
+  - src/funcs/appResourceOwnersDelete.ts
   - src/funcs/appResourceOwnersList.ts
+  - src/funcs/appResourceOwnersListOwnerIDs.ts
   - src/funcs/appResourceOwnersRemove.ts
+  - src/funcs/appResourceOwnersSet.ts
   - src/funcs/appResourceSearchSearchAppResourceTypes.ts
   - src/funcs/appResourceSearchSearchAppResources.ts
   - src/funcs/appResourceTypeCreateManuallyManagedResourceType.ts
@@ -1621,6 +1679,13 @@ generatedFiles:
   - src/funcs/requestCatalogManagementUpdate.ts
   - src/funcs/requestCatalogManagementUpdateAppEntitlements.ts
   - src/funcs/requestCatalogSearchSearchEntitlements.ts
+  - src/funcs/requestSchemaCreate.ts
+  - src/funcs/requestSchemaCreateEntitlementBinding.ts
+  - src/funcs/requestSchemaDelete.ts
+  - src/funcs/requestSchemaFindBindingForAppEntitlement.ts
+  - src/funcs/requestSchemaGet.ts
+  - src/funcs/requestSchemaRemoveEntitlementBinding.ts
+  - src/funcs/requestSchemaUpdate.ts
   - src/funcs/rolesGet.ts
   - src/funcs/rolesList.ts
   - src/funcs/rolesUpdate.ts
@@ -1661,6 +1726,7 @@ generatedFiles:
   - src/funcs/userGetUserProfileTypes.ts
   - src/funcs/userList.ts
   - src/funcs/userSearchSearch.ts
+  - src/funcs/userSetExpiringUserDelegationBindingByAdmin.ts
   - src/funcs/webhooksCreate.ts
   - src/funcs/webhooksDelete.ts
   - src/funcs/webhooksGet.ts
@@ -1783,8 +1849,11 @@ generatedFiles:
   - src/sdk/models/operations/c1apiappv1appreportactionservicegeneratereport.ts
   - src/sdk/models/operations/c1apiappv1appreportservicelist.ts
   - src/sdk/models/operations/c1apiappv1appresourceownersadd.ts
+  - src/sdk/models/operations/c1apiappv1appresourceownersdelete.ts
   - src/sdk/models/operations/c1apiappv1appresourceownerslist.ts
+  - src/sdk/models/operations/c1apiappv1appresourceownerslistownerids.ts
   - src/sdk/models/operations/c1apiappv1appresourceownersremove.ts
+  - src/sdk/models/operations/c1apiappv1appresourceownersset.ts
   - src/sdk/models/operations/c1apiappv1appresourcesearchsearchappresources.ts
   - src/sdk/models/operations/c1apiappv1appresourcesearchsearchappresourcetypes.ts
   - src/sdk/models/operations/c1apiappv1appresourceservicecreatemanuallymanagedappresource.ts
@@ -1907,6 +1976,13 @@ generatedFiles:
   - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceupdate.ts
   - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceupdateappentitlements.ts
   - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogsearchservicesearchentitlements.ts
+  - src/sdk/models/operations/c1apirequestschemav1requestschemaservicecreate.ts
+  - src/sdk/models/operations/c1apirequestschemav1requestschemaservicecreateentitlementbinding.ts
+  - src/sdk/models/operations/c1apirequestschemav1requestschemaservicedelete.ts
+  - src/sdk/models/operations/c1apirequestschemav1requestschemaservicefindbindingforappentitlement.ts
+  - src/sdk/models/operations/c1apirequestschemav1requestschemaserviceget.ts
+  - src/sdk/models/operations/c1apirequestschemav1requestschemaserviceremoveentitlementbinding.ts
+  - src/sdk/models/operations/c1apirequestschemav1requestschemaserviceupdate.ts
   - src/sdk/models/operations/c1apisettingsv1awsexternalidsettingsget.ts
   - src/sdk/models/operations/c1apisettingsv1orgdomainservicelist.ts
   - src/sdk/models/operations/c1apisettingsv1orgdomainserviceupdate.ts
@@ -1954,6 +2030,7 @@ generatedFiles:
   - src/sdk/models/operations/c1apiuserv1userserviceget.ts
   - src/sdk/models/operations/c1apiuserv1userservicegetuserprofiletypes.ts
   - src/sdk/models/operations/c1apiuserv1userservicelist.ts
+  - src/sdk/models/operations/c1apiuserv1userservicesetexpiringuserdelegationbindingbyadmin.ts
   - src/sdk/models/operations/c1apiwebhooksv1webhookssearchsearch.ts
   - src/sdk/models/operations/c1apiwebhooksv1webhooksservicecreate.ts
   - src/sdk/models/operations/c1apiwebhooksv1webhooksservicedelete.ts
@@ -1964,11 +2041,13 @@ generatedFiles:
   - src/sdk/models/operations/index.ts
   - src/sdk/models/shared/accept.ts
   - src/sdk/models/shared/acceptinstance.ts
+  - src/sdk/models/shared/accessconflicttrigger.ts
   - src/sdk/models/shared/accountfilter.ts
   - src/sdk/models/shared/accountincontext.ts
   - src/sdk/models/shared/accountlifecycleaction.ts
   - src/sdk/models/shared/accountprovision.ts
   - src/sdk/models/shared/accountref.ts
+  - src/sdk/models/shared/actionprovision.ts
   - src/sdk/models/shared/addappentitlementownerrequest.ts
   - src/sdk/models/shared/addappentitlementownerresponse.ts
   - src/sdk/models/shared/addappownerrequest.ts
@@ -2098,6 +2177,8 @@ generatedFiles:
   - src/sdk/models/shared/conflictmonitorcreaterequest.ts
   - src/sdk/models/shared/conflictmonitordeleterequest.ts
   - src/sdk/models/shared/conflictmonitordeleteresponse.ts
+  - src/sdk/models/shared/conflictmonitorref.ts
+  - src/sdk/models/shared/conflictmonitorrefs.ts
   - src/sdk/models/shared/conflictmonitorupdaterequest.ts
   - src/sdk/models/shared/connector.ts
   - src/sdk/models/shared/connectoraction.ts
@@ -2167,6 +2248,8 @@ generatedFiles:
   - src/sdk/models/shared/deleteappownersrequest.ts
   - src/sdk/models/shared/deleteappownersresponse.ts
   - src/sdk/models/shared/deleteapprequest.ts
+  - src/sdk/models/shared/deleteappresourceownersrequest.ts
+  - src/sdk/models/shared/deleteappresourceownersresponse.ts
   - src/sdk/models/shared/deleteappresponse.ts
   - src/sdk/models/shared/deleteattributevaluerequest.ts
   - src/sdk/models/shared/deleteattributevalueresponse.ts
@@ -2217,6 +2300,7 @@ generatedFiles:
   - src/sdk/models/shared/escalationinstance.ts
   - src/sdk/models/shared/executeautomationrequest.ts
   - src/sdk/models/shared/executeautomationresponse.ts
+  - src/sdk/models/shared/expiringuserdelegationbinding.ts
   - src/sdk/models/shared/exporter.ts
   - src/sdk/models/shared/exporterinput.ts
   - src/sdk/models/shared/exporterref.ts
@@ -2248,6 +2332,8 @@ generatedFiles:
   - src/sdk/models/shared/fieldinput.ts
   - src/sdk/models/shared/fieldrelationship.ts
   - src/sdk/models/shared/fieldrules.ts
+  - src/sdk/models/shared/filefield.ts
+  - src/sdk/models/shared/fileinputfield.ts
   - src/sdk/models/shared/fixed32rules.ts
   - src/sdk/models/shared/fixed64rules.ts
   - src/sdk/models/shared/floatrules.ts
@@ -2318,6 +2404,7 @@ generatedFiles:
   - src/sdk/models/shared/listappentitlementusersresponse.ts
   - src/sdk/models/shared/listappowneridsresponse.ts
   - src/sdk/models/shared/listappownersresponse.ts
+  - src/sdk/models/shared/listappresourceowneridsresponse.ts
   - src/sdk/models/shared/listappresourceownersresponse.ts
   - src/sdk/models/shared/listappsresponse.ts
   - src/sdk/models/shared/listappusersforidentitywithgrantresponse.ts
@@ -2430,6 +2517,20 @@ generatedFiles:
   - src/sdk/models/shared/requestcatalogsearchservicesearchentitlementsrequest.ts
   - src/sdk/models/shared/requestcatalogsearchservicesearchentitlementsresponse.ts
   - src/sdk/models/shared/requestcatalogview.ts
+  - src/sdk/models/shared/requestschema.ts
+  - src/sdk/models/shared/requestschemaservicecreateentitlementbindingrequest.ts
+  - src/sdk/models/shared/requestschemaservicecreateentitlementbindingresponse.ts
+  - src/sdk/models/shared/requestschemaservicecreaterequest.ts
+  - src/sdk/models/shared/requestschemaservicecreateresponse.ts
+  - src/sdk/models/shared/requestschemaservicedeleterequest.ts
+  - src/sdk/models/shared/requestschemaservicedeleteresponse.ts
+  - src/sdk/models/shared/requestschemaservicefindbindingforappentitlementrequest.ts
+  - src/sdk/models/shared/requestschemaservicefindbindingforappentitlementresponse.ts
+  - src/sdk/models/shared/requestschemaservicegetresponse.ts
+  - src/sdk/models/shared/requestschemaserviceremoveentitlementbindingrequest.ts
+  - src/sdk/models/shared/requestschemaserviceremoveentitlementbindingresponse.ts
+  - src/sdk/models/shared/requestschemaserviceupdaterequest.ts
+  - src/sdk/models/shared/requestschemaserviceupdateresponse.ts
   - src/sdk/models/shared/requiredtogether.ts
   - src/sdk/models/shared/resourceownerapproval.ts
   - src/sdk/models/shared/responsepolicyapprovalreplacepolicy.ts
@@ -2457,6 +2558,7 @@ generatedFiles:
   - src/sdk/models/shared/runimmediately.ts
   - src/sdk/models/shared/savetovault.ts
   - src/sdk/models/shared/scheduletrigger.ts
+  - src/sdk/models/shared/scheduletriggerappuser.ts
   - src/sdk/models/shared/searchappentitlementswithexpiredresponse.ts
   - src/sdk/models/shared/searchappresourcesrequest.ts
   - src/sdk/models/shared/searchappresourcesresponse.ts
@@ -2497,7 +2599,11 @@ generatedFiles:
   - src/sdk/models/shared/setappentitlementownersresponse.ts
   - src/sdk/models/shared/setappownersrequest.ts
   - src/sdk/models/shared/setappownersresponse.ts
+  - src/sdk/models/shared/setappresourceownersrequest.ts
+  - src/sdk/models/shared/setappresourceownersresponse.ts
   - src/sdk/models/shared/setbundleautomationrequest.ts
+  - src/sdk/models/shared/setexpiringuserdelegationbindingbyadminrequest.ts
+  - src/sdk/models/shared/setexpiringuserdelegationbindingbyadminresponse.ts
   - src/sdk/models/shared/sfixed32rules.ts
   - src/sdk/models/shared/sfixed64rules.ts
   - src/sdk/models/shared/sint32rules.ts
@@ -2546,6 +2652,8 @@ generatedFiles:
   - src/sdk/models/shared/taskactionsserviceupdategrantdurationrequest.ts
   - src/sdk/models/shared/taskactionsserviceupdaterequestdatarequest.ts
   - src/sdk/models/shared/taskauditaccessrequestoutcome.ts
+  - src/sdk/models/shared/taskauditaccountlifecycleactioncreated.ts
+  - src/sdk/models/shared/taskauditaccountlifecycleactionfailed.ts
   - src/sdk/models/shared/taskauditactionsubmitted.ts
   - src/sdk/models/shared/taskauditapprovalautoacceptedbypolicy.ts
   - src/sdk/models/shared/taskauditapprovalautorejectedbypolicy.ts
@@ -2576,6 +2684,7 @@ generatedFiles:
   - src/sdk/models/shared/taskauditpolicyapprovalreassigned.ts
   - src/sdk/models/shared/taskauditpolicychanged.ts
   - src/sdk/models/shared/taskauditpolicyevaluationstep.ts
+  - src/sdk/models/shared/taskauditpolicyprovisioncancelled.ts
   - src/sdk/models/shared/taskauditpolicyprovisionerror.ts
   - src/sdk/models/shared/taskauditpolicyprovisionreassigned.ts
   - src/sdk/models/shared/taskauditreassignedtodelegate.ts
@@ -2730,6 +2839,7 @@ generatedFiles:
   - src/sdk/policyvalidate.ts
   - src/sdk/requestcatalogmanagement.ts
   - src/sdk/requestcatalogsearch.ts
+  - src/sdk/requestschema.ts
   - src/sdk/roles.ts
   - src/sdk/sdk.ts
   - src/sdk/sessionsettings.ts
@@ -4471,6 +4581,88 @@ examples:
       responses:
         "200":
           application/json: {}
+  c1.api.app.v1.AppResourceOwners.Delete:
+    speakeasy-default-c1-api-app-v1-app-resource-owners-delete:
+      parameters:
+        path:
+          app_id: "<id>"
+          resource_type_id: "<id>"
+          resource_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppResourceOwners.ListOwnerIDs:
+    speakeasy-default-c1-api-app-v1-app-resource-owners-list-owner-I-ds:
+      parameters:
+        path:
+          app_id: "<id>"
+          resource_type_id: "<id>"
+          resource_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.app.v1.AppResourceOwners.Set:
+    speakeasy-default-c1-api-app-v1-app-resource-owners-set:
+      parameters:
+        path:
+          app_id: null
+          resource_type_id: "<id>"
+          resource_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.request_schema.v1.RequestSchemaService.RemoveEntitlementBinding:
+    speakeasy-default-c1-api-request-schema-v1-request-schema-service-remove-entitlement-binding:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.request_schema.v1.RequestSchemaService.CreateEntitlementBinding:
+    speakeasy-default-c1-api-request-schema-v1-request-schema-service-create-entitlement-binding:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.request_schema.v1.RequestSchemaService.FindBindingForAppEntitlement:
+    speakeasy-default-c1-api-request-schema-v1-request-schema-service-find-binding-for-app-entitlement:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.request_schema.v1.RequestSchemaService.Create:
+    speakeasy-default-c1-api-request-schema-v1-request-schema-service-create:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.request_schema.v1.RequestSchemaService.Delete:
+    speakeasy-default-c1-api-request-schema-v1-request-schema-service-delete:
+      parameters:
+        path:
+          request_schema_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.request_schema.v1.RequestSchemaService.Get:
+    speakeasy-default-c1-api-request-schema-v1-request-schema-service-get:
+      parameters:
+        path:
+          request_schema_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.request_schema.v1.RequestSchemaService.Update:
+    speakeasy-default-c1-api-request-schema-v1-request-schema-service-update:
+      parameters:
+        path:
+          request_schema_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.user.v1.UserService.SetExpiringUserDelegationBindingByAdmin:
+    speakeasy-default-c1-api-user-v1-user-service-set-expiring-user-delegation-binding-by-admin:
+      parameters:
+        path:
+          user_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes Detected:\n* `conductorone-sdk-typescript.automationSearch.searchAutomationTemplateVersions()`:  `response.list.[].triggers.[].schedule.condition` **Added**\n* `conductorone-sdk-typescript.automationSearch.searchAutomations()`:  `response.list.[].draftTriggers.[].schedule.condition` **Added**\n* `conductorone-sdk-typescript.automation.listAutomations()`:  `response.list.[].draftTriggers.[].schedule.condition` **Added**\n* `conductorone-sdk-typescript.automation.createAutomation()`: \n  *  `request.draftTriggers.[].schedule.condition` **Added**\n  *  `response.automation.draftTriggers.[].schedule.condition` **Added**\n* `conductorone-sdk-typescript.automation.getAutomation()`:  `response.automation.draftTriggers.[].schedule.condition` **Added**\n* `conductorone-sdk-typescript.automation.updateAutomation()`: \n  *  `request.updateAutomationRequest.automation.draftTriggers.[].schedule.condition` **Added**\n  *  `response.automation.draftTriggers.[].schedule.condition` **Added**\n"
+releaseNotes: "## Typescript SDK Changes Detected:\n* `conductorone-sdk-typescript.appResourceOwners.delete()`: **Added**\n* `conductorone-sdk-typescript.appResourceOwners.listOwnerIDs()`: **Added**\n* `conductorone-sdk-typescript.appResourceOwners.set()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.removeEntitlementBinding()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.createEntitlementBinding()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.findBindingForAppEntitlement()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.create()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.delete()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.get()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.update()`: **Added**\n* `conductorone-sdk-typescript.user.setExpiringUserDelegationBindingByAdmin()`: **Added**\n* `conductorone-sdk-typescript.appEntitlements.list()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlements.create()`: \n  *  `request.createAppEntitlementRequest.provisionPolicy` **Changed**\n  *  `response.appentitlementview.appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlements.get()`:  `response.appentitlementview.appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlements.update()`: \n  *  `request.updateAppEntitlementRequest.entitlement.deprovisionerPolicy` **Changed**\n  *  `response.appentitlementview.appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlements.listForAppResource()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlements.listForAppUser()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlementSearch.searchAppEntitlementsForAppUser()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlementSearch.search()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlementSearch.searchGrants()`:  `response.list.[].entitlement.appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.automationSearch.searchAutomationTemplateVersions()`:  `response.list.[].triggers.[]` **Changed**\n* `conductorone-sdk-typescript.automationSearch.searchAutomations()`:  `response.list.[].draftTriggers.[]` **Changed**\n* `conductorone-sdk-typescript.automation.listAutomations()`:  `response.list.[].draftTriggers.[]` **Changed**\n* `conductorone-sdk-typescript.automation.createAutomation()`: \n  *  `request.draftTriggers.[]` **Changed**\n  *  `response.automation.draftTriggers.[]` **Changed**\n* `conductorone-sdk-typescript.automation.getAutomation()`:  `response.automation.draftTriggers.[]` **Changed**\n* `conductorone-sdk-typescript.automation.updateAutomation()`: \n  *  `request.updateAutomationRequest.automation.draftTriggers.[]` **Changed**\n  *  `response.automation.draftTriggers.[]` **Changed**\n* `conductorone-sdk-typescript.requestCatalogManagement.list()`:  `response.list.[].requestCatalog.accessEntitlements.[].deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.requestCatalogManagement.create()`:  `response.requestcatalogview.requestCatalog.accessEntitlements.[].deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.requestCatalogManagement.listEntitlementsPerCatalog()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.requestCatalogManagement.listEntitlementsForAccess()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.requestCatalogManagement.get()`:  `response.requestcatalogview.requestCatalog.accessEntitlements.[].deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.requestCatalogManagement.update()`: \n  *  `request.requestCatalogManagementServiceUpdateRequest.catalog.accessEntitlements.[].deprovisionerPolicy` **Changed**\n  *  `response.requestcatalogview.requestCatalog.accessEntitlements.[].deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.connectorCatalog.configurationSchema()`:  `response.formschema.fields.[].fileField` **Added**\n* `conductorone-sdk-typescript.policies.list()`:  `response.list.[].policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.policies.create()`: \n  *  `request.policySteps.{}.steps.[]` **Changed**\n  *  `response.policy.policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.policies.get()`:  `response.policy.policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.policies.update()`: \n  *  `request.updatePolicyRequest.policy.policySteps.{}.steps.[]` **Changed**\n  *  `response.policy.policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.policySearch.search()`:  `response.list.[].policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.requestCatalogSearch.searchEntitlements()`:  `response.list.[].entitlement.appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.taskSearch.search()`: \n  *  `request` **Changed**\n  *  `response.list.[]` **Changed**\n* `conductorone-sdk-typescript.taskAudit.list()`:  `response.list.[]` **Changed**\n* `conductorone-sdk-typescript.task.createGrantTask()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.task.createOffboardingTask()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.task.createRevokeTask()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.task.get()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.approve()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.approveWithStepUp()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.close()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.comment()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.deny()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.escalateToEmergencyAccess()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.processNow()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.reassign()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.hardReset()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.restart()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.skipStep()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.updateGrantDuration()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.updateRequestData()`:  `response.taskview` **Changed**\n"
