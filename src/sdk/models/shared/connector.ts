@@ -28,6 +28,12 @@ import {
   OAuth2AuthorizedAsInput$Outbound,
   OAuth2AuthorizedAsInput$outboundSchema,
 } from "./oauth2authorizedasinput.js";
+import {
+  SyncConfig,
+  SyncConfig$inboundSchema,
+  SyncConfig$Outbound,
+  SyncConfig$outboundSchema,
+} from "./syncconfig.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -89,6 +95,10 @@ export type Connector = {
    */
   profileIgnoreList?: Array<string> | null | undefined;
   status?: ConnectorStatus | null | undefined;
+  /**
+   * The SyncConfig message.
+   */
+  syncConfig?: SyncConfig | undefined;
   syncDisabledAt?: Date | null | undefined;
   /**
    * The category of the connector sync that was disabled.
@@ -150,6 +160,10 @@ export type ConnectorInput = {
    */
   profileIgnoreList?: Array<string> | null | undefined;
   status?: ConnectorStatus | null | undefined;
+  /**
+   * The SyncConfig message.
+   */
+  syncConfig?: SyncConfig | undefined;
   syncDisabledAt?: Date | null | undefined;
   /**
    * The category of the connector sync that was disabled.
@@ -256,6 +270,7 @@ export const Connector$inboundSchema: z.ZodType<
   profileAllowList: z.nullable(z.array(z.string())).optional(),
   profileIgnoreList: z.nullable(z.array(z.string())).optional(),
   status: z.nullable(ConnectorStatus$inboundSchema).optional(),
+  syncConfig: SyncConfig$inboundSchema.optional(),
   syncDisabledAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -284,6 +299,7 @@ export type Connector$Outbound = {
   profileAllowList?: Array<string> | null | undefined;
   profileIgnoreList?: Array<string> | null | undefined;
   status?: ConnectorStatus$Outbound | null | undefined;
+  syncConfig?: SyncConfig$Outbound | undefined;
   syncDisabledAt?: string | null | undefined;
   syncDisabledCategory?: string | null | undefined;
   syncDisabledReason?: string | null | undefined;
@@ -312,6 +328,7 @@ export const Connector$outboundSchema: z.ZodType<
   profileAllowList: z.nullable(z.array(z.string())).optional(),
   profileIgnoreList: z.nullable(z.array(z.string())).optional(),
   status: z.nullable(ConnectorStatus$outboundSchema).optional(),
+  syncConfig: SyncConfig$outboundSchema.optional(),
   syncDisabledAt: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
   syncDisabledCategory: z.nullable(z.string()).optional(),
@@ -372,6 +389,7 @@ export const ConnectorInput$inboundSchema: z.ZodType<
   profileAllowList: z.nullable(z.array(z.string())).optional(),
   profileIgnoreList: z.nullable(z.array(z.string())).optional(),
   status: z.nullable(ConnectorStatus$inboundSchema).optional(),
+  syncConfig: SyncConfig$inboundSchema.optional(),
   syncDisabledAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -399,6 +417,7 @@ export type ConnectorInput$Outbound = {
   profileAllowList?: Array<string> | null | undefined;
   profileIgnoreList?: Array<string> | null | undefined;
   status?: ConnectorStatus$Outbound | null | undefined;
+  syncConfig?: SyncConfig$Outbound | undefined;
   syncDisabledAt?: string | null | undefined;
   syncDisabledCategory?: string | null | undefined;
   syncDisabledReason?: string | null | undefined;
@@ -427,6 +446,7 @@ export const ConnectorInput$outboundSchema: z.ZodType<
   profileAllowList: z.nullable(z.array(z.string())).optional(),
   profileIgnoreList: z.nullable(z.array(z.string())).optional(),
   status: z.nullable(ConnectorStatus$outboundSchema).optional(),
+  syncConfig: SyncConfig$outboundSchema.optional(),
   syncDisabledAt: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
   syncDisabledCategory: z.nullable(z.string()).optional(),

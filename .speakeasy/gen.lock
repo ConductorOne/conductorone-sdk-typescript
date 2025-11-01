@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 59dafb44-7e9b-49d4-8e7d-679663d28f0f
 management:
-  docChecksum: 6650d6a62e86982eccabd88d1329ecf2
+  docChecksum: df80bcef2c333184e10f73c74a6241ef
   docVersion: 0.1.0-alpha
-  speakeasyVersion: 1.642.2
-  generationVersion: 2.731.6
-  releaseVersion: 1.1.1
-  configChecksum: 2fb8c11cc9fb30befae5904565558aa4
+  speakeasyVersion: 1.645.1
+  generationVersion: 2.735.1
+  releaseVersion: 1.2.0
+  configChecksum: 16c862057857c12cda385a78066d6424
   repoURL: https://github.com/ConductorOne/conductorone-sdk-typescript.git
   installationURL: https://github.com/ConductorOne/conductorone-sdk-typescript
   published: true
@@ -14,14 +14,14 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.2
-    core: 3.24.1
+    core: 3.24.2
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
     globalSecurity: 2.82.14
     globalSecurityCallbacks: 0.1.0
-    globalServerURLs: 2.82.5
+    globalServerURLs: 2.83.0
     groups: 2.81.3
     includes: 2.81.1
     inputOutputModels: 2.82.0
@@ -705,6 +705,7 @@ generatedFiles:
   - docs/sdk/models/shared/createpolicyrequestpolicytype.md
   - docs/sdk/models/shared/createpolicyresponse.md
   - docs/sdk/models/shared/createrevoketasks.md
+  - docs/sdk/models/shared/createrevoketasksv2.md
   - docs/sdk/models/shared/createrisklevelattributevaluerequest.md
   - docs/sdk/models/shared/createrisklevelattributevalueresponse.md
   - docs/sdk/models/shared/createstepupproviderrequest.md
@@ -778,8 +779,14 @@ generatedFiles:
   - docs/sdk/models/shared/emergencystatus.md
   - docs/sdk/models/shared/encrypteddata.md
   - docs/sdk/models/shared/enrollmentbehavior.md
+  - docs/sdk/models/shared/entitlementexclusioncriteria.md
+  - docs/sdk/models/shared/entitlementexclusionlist.md
+  - docs/sdk/models/shared/entitlementexclusionnone.md
   - docs/sdk/models/shared/entitlementfilter.md
   - docs/sdk/models/shared/entitlementgroup.md
+  - docs/sdk/models/shared/entitlementinclusionall.md
+  - docs/sdk/models/shared/entitlementinclusioncriteria.md
+  - docs/sdk/models/shared/entitlementinclusionlist.md
   - docs/sdk/models/shared/entitlementownerapproval.md
   - docs/sdk/models/shared/enumrules.md
   - docs/sdk/models/shared/erroredaction.md
@@ -1173,6 +1180,7 @@ generatedFiles:
   - docs/sdk/models/shared/stringmapfield.md
   - docs/sdk/models/shared/stringrules.md
   - docs/sdk/models/shared/stringslicefield.md
+  - docs/sdk/models/shared/syncconfig.md
   - docs/sdk/models/shared/systemlogservicelisteventsrequest.md
   - docs/sdk/models/shared/systemlogservicelisteventsresponse.md
   - docs/sdk/models/shared/targetedappusertypes.md
@@ -2230,6 +2238,7 @@ generatedFiles:
   - src/sdk/models/shared/createpolicyrequest.ts
   - src/sdk/models/shared/createpolicyresponse.ts
   - src/sdk/models/shared/createrevoketasks.ts
+  - src/sdk/models/shared/createrevoketasksv2.ts
   - src/sdk/models/shared/createrisklevelattributevaluerequest.ts
   - src/sdk/models/shared/createrisklevelattributevalueresponse.ts
   - src/sdk/models/shared/createstepupproviderrequest.ts
@@ -2292,7 +2301,13 @@ generatedFiles:
   - src/sdk/models/shared/editorvalidateresponse.ts
   - src/sdk/models/shared/emailnotifications.ts
   - src/sdk/models/shared/encrypteddata.ts
+  - src/sdk/models/shared/entitlementexclusioncriteria.ts
+  - src/sdk/models/shared/entitlementexclusionlist.ts
+  - src/sdk/models/shared/entitlementexclusionnone.ts
   - src/sdk/models/shared/entitlementfilter.ts
+  - src/sdk/models/shared/entitlementinclusionall.ts
+  - src/sdk/models/shared/entitlementinclusioncriteria.ts
+  - src/sdk/models/shared/entitlementinclusionlist.ts
   - src/sdk/models/shared/entitlementownerapproval.ts
   - src/sdk/models/shared/enumrules.ts
   - src/sdk/models/shared/erroredaction.ts
@@ -2622,6 +2637,7 @@ generatedFiles:
   - src/sdk/models/shared/stringmapfield.ts
   - src/sdk/models/shared/stringrules.ts
   - src/sdk/models/shared/stringslicefield.ts
+  - src/sdk/models/shared/syncconfig.ts
   - src/sdk/models/shared/systemlogservicelisteventsrequest.ts
   - src/sdk/models/shared/systemlogservicelisteventsresponse.ts
   - src/sdk/models/shared/targettask.ts
@@ -4665,4 +4681,4 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes Detected:\n* `conductorone-sdk-typescript.appResourceOwners.delete()`: **Added**\n* `conductorone-sdk-typescript.appResourceOwners.listOwnerIDs()`: **Added**\n* `conductorone-sdk-typescript.appResourceOwners.set()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.removeEntitlementBinding()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.createEntitlementBinding()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.findBindingForAppEntitlement()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.create()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.delete()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.get()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.update()`: **Added**\n* `conductorone-sdk-typescript.user.setExpiringUserDelegationBindingByAdmin()`: **Added**\n* `conductorone-sdk-typescript.appEntitlements.list()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlements.create()`: \n  *  `request.createAppEntitlementRequest.provisionPolicy` **Changed**\n  *  `response.appentitlementview.appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlements.get()`:  `response.appentitlementview.appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlements.update()`: \n  *  `request.updateAppEntitlementRequest.entitlement.deprovisionerPolicy` **Changed**\n  *  `response.appentitlementview.appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlements.listForAppResource()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlements.listForAppUser()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlementSearch.searchAppEntitlementsForAppUser()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlementSearch.search()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlementSearch.searchGrants()`:  `response.list.[].entitlement.appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.automationSearch.searchAutomationTemplateVersions()`:  `response.list.[].triggers.[]` **Changed**\n* `conductorone-sdk-typescript.automationSearch.searchAutomations()`:  `response.list.[].draftTriggers.[]` **Changed**\n* `conductorone-sdk-typescript.automation.listAutomations()`:  `response.list.[].draftTriggers.[]` **Changed**\n* `conductorone-sdk-typescript.automation.createAutomation()`: \n  *  `request.draftTriggers.[]` **Changed**\n  *  `response.automation.draftTriggers.[]` **Changed**\n* `conductorone-sdk-typescript.automation.getAutomation()`:  `response.automation.draftTriggers.[]` **Changed**\n* `conductorone-sdk-typescript.automation.updateAutomation()`: \n  *  `request.updateAutomationRequest.automation.draftTriggers.[]` **Changed**\n  *  `response.automation.draftTriggers.[]` **Changed**\n* `conductorone-sdk-typescript.requestCatalogManagement.list()`:  `response.list.[].requestCatalog.accessEntitlements.[].deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.requestCatalogManagement.create()`:  `response.requestcatalogview.requestCatalog.accessEntitlements.[].deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.requestCatalogManagement.listEntitlementsPerCatalog()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.requestCatalogManagement.listEntitlementsForAccess()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.requestCatalogManagement.get()`:  `response.requestcatalogview.requestCatalog.accessEntitlements.[].deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.requestCatalogManagement.update()`: \n  *  `request.requestCatalogManagementServiceUpdateRequest.catalog.accessEntitlements.[].deprovisionerPolicy` **Changed**\n  *  `response.requestcatalogview.requestCatalog.accessEntitlements.[].deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.connectorCatalog.configurationSchema()`:  `response.formschema.fields.[].fileField` **Added**\n* `conductorone-sdk-typescript.policies.list()`:  `response.list.[].policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.policies.create()`: \n  *  `request.policySteps.{}.steps.[]` **Changed**\n  *  `response.policy.policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.policies.get()`:  `response.policy.policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.policies.update()`: \n  *  `request.updatePolicyRequest.policy.policySteps.{}.steps.[]` **Changed**\n  *  `response.policy.policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.policySearch.search()`:  `response.list.[].policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.requestCatalogSearch.searchEntitlements()`:  `response.list.[].entitlement.appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.taskSearch.search()`: \n  *  `request` **Changed**\n  *  `response.list.[]` **Changed**\n* `conductorone-sdk-typescript.taskAudit.list()`:  `response.list.[]` **Changed**\n* `conductorone-sdk-typescript.task.createGrantTask()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.task.createOffboardingTask()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.task.createRevokeTask()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.task.get()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.approve()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.approveWithStepUp()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.close()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.comment()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.deny()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.escalateToEmergencyAccess()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.processNow()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.reassign()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.hardReset()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.restart()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.skipStep()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.updateGrantDuration()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.updateRequestData()`:  `response.taskview` **Changed**\n"
+releaseNotes: "## Typescript SDK Changes Detected:\n* `conductorone-sdk-typescript.connector.list()`:  `response.list.[].connector.syncConfig` **Added**\n* `conductorone-sdk-typescript.connector.createDelegated()`:  `response.connectorview.connector.syncConfig` **Added**\n* `conductorone-sdk-typescript.connector.get()`:  `response.connectorview.connector.syncConfig` **Added**\n* `conductorone-sdk-typescript.connector.update()`: \n  *  `request.connectorServiceUpdateRequest.connector.syncConfig` **Added**\n  *  `response.connectorview.connector.syncConfig` **Added**\n* `conductorone-sdk-typescript.connector.create()`:  `response.connectorview.connector.syncConfig` **Added**\n* `conductorone-sdk-typescript.connector.updateDelegated()`: \n  *  `request.connectorServiceUpdateDelegatedRequest.connector.syncConfig` **Added**\n  *  `response.connectorview.connector.syncConfig` **Added**\n* `conductorone-sdk-typescript.automationSearch.searchAutomationTemplateVersions()`:  `response.list.[].automationSteps.[].createRevokeTasksV2` **Added**\n* `conductorone-sdk-typescript.automationSearch.searchAutomations()`:  `response.list.[].automationSteps.[].createRevokeTasksV2` **Added**\n* `conductorone-sdk-typescript.automation.listAutomations()`:  `response.list.[].automationSteps.[].createRevokeTasksV2` **Added**\n* `conductorone-sdk-typescript.automation.createAutomation()`: \n  *  `request.automationSteps.[].createRevokeTasksV2` **Added**\n  *  `response.automation.automationSteps.[].createRevokeTasksV2` **Added**\n* `conductorone-sdk-typescript.automation.getAutomation()`:  `response.automation.automationSteps.[].createRevokeTasksV2` **Added**\n* `conductorone-sdk-typescript.automation.updateAutomation()`: \n  *  `request.updateAutomationRequest.automation.automationSteps.[].createRevokeTasksV2` **Added**\n  *  `response.automation.automationSteps.[].createRevokeTasksV2` **Added**\n* `conductorone-sdk-typescript.policies.list()`:  `response.list.[].policySteps.{}.steps.[].approval` **Changed**\n* `conductorone-sdk-typescript.policies.create()`: \n  *  `request.policySteps.{}.steps.[].approval` **Changed**\n  *  `response.policy.policySteps.{}.steps.[].approval` **Changed**\n* `conductorone-sdk-typescript.policies.get()`:  `response.policy.policySteps.{}.steps.[].approval` **Changed**\n* `conductorone-sdk-typescript.policies.update()`: \n  *  `request.updatePolicyRequest.policy.policySteps.{}.steps.[].approval` **Changed**\n  *  `response.policy.policySteps.{}.steps.[].approval` **Changed**\n* `conductorone-sdk-typescript.policySearch.search()`:  `response.list.[].policySteps.{}.steps.[].approval` **Changed**\n* `conductorone-sdk-typescript.taskSearch.search()`:  `response.list.[].task.policy.current.approval.approval` **Changed**\n* `conductorone-sdk-typescript.taskAudit.list()`:  `response.list.[].approvalInstanceChange.instance.approval` **Changed**\n* `conductorone-sdk-typescript.task.createGrantTask()`:  `response.taskview.task.policy.current.approval.approval` **Changed**\n* `conductorone-sdk-typescript.task.createOffboardingTask()`:  `response.taskview.task.policy.current.approval.approval` **Changed**\n* `conductorone-sdk-typescript.task.createRevokeTask()`:  `response.taskview.task.policy.current.approval.approval` **Changed**\n* `conductorone-sdk-typescript.task.get()`:  `response.taskview.task.policy.current.approval.approval` **Changed**\n* `conductorone-sdk-typescript.taskActions.approve()`:  `response.taskview.task.policy.current.approval.approval` **Changed**\n* `conductorone-sdk-typescript.taskActions.approveWithStepUp()`:  `response.taskview.task.policy.current.approval.approval` **Changed**\n* `conductorone-sdk-typescript.taskActions.close()`:  `response.taskview.task.policy.current.approval.approval` **Changed**\n* `conductorone-sdk-typescript.taskActions.comment()`:  `response.taskview.task.policy.current.approval.approval` **Changed**\n* `conductorone-sdk-typescript.taskActions.deny()`:  `response.taskview.task.policy.current.approval.approval` **Changed**\n* `conductorone-sdk-typescript.taskActions.escalateToEmergencyAccess()`:  `response.taskview.task.policy.current.approval.approval` **Changed**\n* `conductorone-sdk-typescript.taskActions.processNow()`:  `response.taskview.task.policy.current.approval.approval` **Changed**\n* `conductorone-sdk-typescript.taskActions.reassign()`:  `response.taskview.task.policy.current.approval.approval` **Changed**\n* `conductorone-sdk-typescript.taskActions.hardReset()`:  `response.taskview.task.policy.current.approval.approval` **Changed**\n* `conductorone-sdk-typescript.taskActions.restart()`:  `response.taskview.task.policy.current.approval.approval` **Changed**\n* `conductorone-sdk-typescript.taskActions.skipStep()`:  `response.taskview.task.policy.current.approval.approval` **Changed**\n* `conductorone-sdk-typescript.taskActions.updateGrantDuration()`:  `response.taskview.task.policy.current.approval.approval` **Changed**\n* `conductorone-sdk-typescript.taskActions.updateRequestData()`:  `response.taskview.task.policy.current.approval.approval` **Changed**\n"

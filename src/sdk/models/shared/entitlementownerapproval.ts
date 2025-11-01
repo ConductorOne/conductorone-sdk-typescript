@@ -23,6 +23,10 @@ export type EntitlementOwnerApproval = {
    * Configuration to specific which users to fallback to if fallback is enabled and the entitlement owner cannot be identified.
    */
   fallbackUserIds?: Array<string> | null | undefined;
+  /**
+   * Configuration to require distinct approvers across approval steps of a rule.
+   */
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -34,6 +38,7 @@ export const EntitlementOwnerApproval$inboundSchema: z.ZodType<
   allowSelfApproval: z.nullable(z.boolean()).optional(),
   fallback: z.nullable(z.boolean()).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
 
 /** @internal */
@@ -41,6 +46,7 @@ export type EntitlementOwnerApproval$Outbound = {
   allowSelfApproval?: boolean | null | undefined;
   fallback?: boolean | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -52,6 +58,7 @@ export const EntitlementOwnerApproval$outboundSchema: z.ZodType<
   allowSelfApproval: z.nullable(z.boolean()).optional(),
   fallback: z.nullable(z.boolean()).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
 
 /**

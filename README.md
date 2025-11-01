@@ -1012,7 +1012,8 @@ The default server `https://{tenantDomain}.conductor.one` contains variables and
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 
 const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
-  tenantDomain: "<value>",
+  serverIdx: 0,
+  tenantDomain: "example",
   security: {
     bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
     oauth: "<YOUR_OAUTH_HERE>",
