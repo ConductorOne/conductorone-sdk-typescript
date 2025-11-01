@@ -16,6 +16,10 @@ export type UserApproval = {
    */
   allowSelfApproval?: boolean | null | undefined;
   /**
+   * Configuration to require distinct approvers across approval steps of a rule.
+   */
+  requireDistinctApprovers?: boolean | undefined;
+  /**
    * Array of users configured for approval.
    */
   userIds?: Array<string> | null | undefined;
@@ -28,12 +32,14 @@ export const UserApproval$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   allowSelfApproval: z.nullable(z.boolean()).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 
 /** @internal */
 export type UserApproval$Outbound = {
   allowSelfApproval?: boolean | null | undefined;
+  requireDistinctApprovers?: boolean | undefined;
   userIds?: Array<string> | null | undefined;
 };
 
@@ -44,6 +50,7 @@ export const UserApproval$outboundSchema: z.ZodType<
   UserApproval
 > = z.object({
   allowSelfApproval: z.nullable(z.boolean()).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 

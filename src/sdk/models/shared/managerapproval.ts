@@ -27,6 +27,10 @@ export type ManagerApproval = {
    * Configuration to specific which users to fallback to if fallback is enabled and no manager is found.
    */
   fallbackUserIds?: Array<string> | null | undefined;
+  /**
+   * Configuration to require distinct approvers across approval steps of a rule.
+   */
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -39,6 +43,7 @@ export const ManagerApproval$inboundSchema: z.ZodType<
   assignedUserIds: z.nullable(z.array(z.string())).optional(),
   fallback: z.nullable(z.boolean()).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
 
 /** @internal */
@@ -47,6 +52,7 @@ export type ManagerApproval$Outbound = {
   assignedUserIds?: Array<string> | null | undefined;
   fallback?: boolean | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -59,6 +65,7 @@ export const ManagerApproval$outboundSchema: z.ZodType<
   assignedUserIds: z.nullable(z.array(z.string())).optional(),
   fallback: z.nullable(z.boolean()).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
 
 /**
