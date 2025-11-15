@@ -44,7 +44,6 @@ export const ScheduleTriggerAppUser$inboundSchema: z.ZodType<
   ).optional(),
   timezone: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type ScheduleTriggerAppUser$Outbound = {
   appId?: string | null | undefined;
@@ -67,19 +66,6 @@ export const ScheduleTriggerAppUser$outboundSchema: z.ZodType<
   timezone: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ScheduleTriggerAppUser$ {
-  /** @deprecated use `ScheduleTriggerAppUser$inboundSchema` instead. */
-  export const inboundSchema = ScheduleTriggerAppUser$inboundSchema;
-  /** @deprecated use `ScheduleTriggerAppUser$outboundSchema` instead. */
-  export const outboundSchema = ScheduleTriggerAppUser$outboundSchema;
-  /** @deprecated use `ScheduleTriggerAppUser$Outbound` instead. */
-  export type Outbound = ScheduleTriggerAppUser$Outbound;
-}
-
 export function scheduleTriggerAppUserToJSON(
   scheduleTriggerAppUser: ScheduleTriggerAppUser,
 ): string {
@@ -87,7 +73,6 @@ export function scheduleTriggerAppUserToJSON(
     ScheduleTriggerAppUser$outboundSchema.parse(scheduleTriggerAppUser),
   );
 }
-
 export function scheduleTriggerAppUserFromJSON(
   jsonString: string,
 ): SafeParseResult<ScheduleTriggerAppUser, SDKValidationError> {

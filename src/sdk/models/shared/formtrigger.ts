@@ -28,7 +28,6 @@ export const FormTrigger$inboundSchema: z.ZodType<
 > = z.object({
   form: z.nullable(FormInput$inboundSchema).optional(),
 });
-
 /** @internal */
 export type FormTrigger$Outbound = {
   form?: FormInput$Outbound | null | undefined;
@@ -43,23 +42,9 @@ export const FormTrigger$outboundSchema: z.ZodType<
   form: z.nullable(FormInput$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FormTrigger$ {
-  /** @deprecated use `FormTrigger$inboundSchema` instead. */
-  export const inboundSchema = FormTrigger$inboundSchema;
-  /** @deprecated use `FormTrigger$outboundSchema` instead. */
-  export const outboundSchema = FormTrigger$outboundSchema;
-  /** @deprecated use `FormTrigger$Outbound` instead. */
-  export type Outbound = FormTrigger$Outbound;
-}
-
 export function formTriggerToJSON(formTrigger: FormTrigger): string {
   return JSON.stringify(FormTrigger$outboundSchema.parse(formTrigger));
 }
-
 export function formTriggerFromJSON(
   jsonString: string,
 ): SafeParseResult<FormTrigger, SDKValidationError> {

@@ -30,7 +30,6 @@ export const CallFunction$inboundSchema: z.ZodType<
   args: z.nullable(z.record(z.string())).optional(),
   functionId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type CallFunction$Outbound = {
   args?: { [k: string]: string } | null | undefined;
@@ -47,23 +46,9 @@ export const CallFunction$outboundSchema: z.ZodType<
   functionId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CallFunction$ {
-  /** @deprecated use `CallFunction$inboundSchema` instead. */
-  export const inboundSchema = CallFunction$inboundSchema;
-  /** @deprecated use `CallFunction$outboundSchema` instead. */
-  export const outboundSchema = CallFunction$outboundSchema;
-  /** @deprecated use `CallFunction$Outbound` instead. */
-  export type Outbound = CallFunction$Outbound;
-}
-
 export function callFunctionToJSON(callFunction: CallFunction): string {
   return JSON.stringify(CallFunction$outboundSchema.parse(callFunction));
 }
-
 export function callFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<CallFunction, SDKValidationError> {

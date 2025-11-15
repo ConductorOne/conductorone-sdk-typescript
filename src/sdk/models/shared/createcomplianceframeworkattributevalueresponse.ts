@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AttributeValue,
   AttributeValue$inboundSchema,
-  AttributeValue$Outbound,
-  AttributeValue$outboundSchema,
 } from "./attributevalue.js";
 
 /**
@@ -29,48 +27,6 @@ export const CreateComplianceFrameworkAttributeValueResponse$inboundSchema:
   > = z.object({
     value: z.nullable(AttributeValue$inboundSchema).optional(),
   });
-
-/** @internal */
-export type CreateComplianceFrameworkAttributeValueResponse$Outbound = {
-  value?: AttributeValue$Outbound | null | undefined;
-};
-
-/** @internal */
-export const CreateComplianceFrameworkAttributeValueResponse$outboundSchema:
-  z.ZodType<
-    CreateComplianceFrameworkAttributeValueResponse$Outbound,
-    z.ZodTypeDef,
-    CreateComplianceFrameworkAttributeValueResponse
-  > = z.object({
-    value: z.nullable(AttributeValue$outboundSchema).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateComplianceFrameworkAttributeValueResponse$ {
-  /** @deprecated use `CreateComplianceFrameworkAttributeValueResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateComplianceFrameworkAttributeValueResponse$inboundSchema;
-  /** @deprecated use `CreateComplianceFrameworkAttributeValueResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateComplianceFrameworkAttributeValueResponse$outboundSchema;
-  /** @deprecated use `CreateComplianceFrameworkAttributeValueResponse$Outbound` instead. */
-  export type Outbound =
-    CreateComplianceFrameworkAttributeValueResponse$Outbound;
-}
-
-export function createComplianceFrameworkAttributeValueResponseToJSON(
-  createComplianceFrameworkAttributeValueResponse:
-    CreateComplianceFrameworkAttributeValueResponse,
-): string {
-  return JSON.stringify(
-    CreateComplianceFrameworkAttributeValueResponse$outboundSchema.parse(
-      createComplianceFrameworkAttributeValueResponse,
-    ),
-  );
-}
 
 export function createComplianceFrameworkAttributeValueResponseFromJSON(
   jsonString: string,

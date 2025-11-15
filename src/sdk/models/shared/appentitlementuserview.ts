@@ -9,15 +9,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$inboundSchema,
-  AppEntitlementRef$Outbound,
-  AppEntitlementRef$outboundSchema,
 } from "./appentitlementref.js";
-import {
-  AppUserView,
-  AppUserView$inboundSchema,
-  AppUserView$Outbound,
-  AppUserView$outboundSchema,
-} from "./appuserview.js";
+import { AppUserView, AppUserView$inboundSchema } from "./appuserview.js";
 
 /**
  * The AppEntitlementUserView (aka grant view) describes the relationship between an app user and an entitlement. They have more recently been referred to as grants.
@@ -47,52 +40,6 @@ export const AppEntitlementUserView$inboundSchema: z.ZodType<
   appUser: z.nullable(AppUserView$inboundSchema).optional(),
   grantSources: z.nullable(z.array(AppEntitlementRef$inboundSchema)).optional(),
 });
-
-/** @internal */
-export type AppEntitlementUserView$Outbound = {
-  appEntitlementUserBindingCreatedAt?: string | null | undefined;
-  appEntitlementUserBindingDeprovisionAt?: string | null | undefined;
-  appUser?: AppUserView$Outbound | null | undefined;
-  grantSources?: Array<AppEntitlementRef$Outbound> | null | undefined;
-};
-
-/** @internal */
-export const AppEntitlementUserView$outboundSchema: z.ZodType<
-  AppEntitlementUserView$Outbound,
-  z.ZodTypeDef,
-  AppEntitlementUserView
-> = z.object({
-  appEntitlementUserBindingCreatedAt: z.nullable(
-    z.date().transform(v => v.toISOString()),
-  ).optional(),
-  appEntitlementUserBindingDeprovisionAt: z.nullable(
-    z.date().transform(v => v.toISOString()),
-  ).optional(),
-  appUser: z.nullable(AppUserView$outboundSchema).optional(),
-  grantSources: z.nullable(z.array(AppEntitlementRef$outboundSchema))
-    .optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementUserView$ {
-  /** @deprecated use `AppEntitlementUserView$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementUserView$inboundSchema;
-  /** @deprecated use `AppEntitlementUserView$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlementUserView$outboundSchema;
-  /** @deprecated use `AppEntitlementUserView$Outbound` instead. */
-  export type Outbound = AppEntitlementUserView$Outbound;
-}
-
-export function appEntitlementUserViewToJSON(
-  appEntitlementUserView: AppEntitlementUserView,
-): string {
-  return JSON.stringify(
-    AppEntitlementUserView$outboundSchema.parse(appEntitlementUserView),
-  );
-}
 
 export function appEntitlementUserViewFromJSON(
   jsonString: string,

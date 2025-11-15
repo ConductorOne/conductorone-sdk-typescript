@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -60,32 +57,7 @@ export const AppPopulationReportState$inboundSchema: z.ZodType<
   AppPopulationReportState,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(AppPopulationReportState),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const AppPopulationReportState$outboundSchema: z.ZodType<
-  AppPopulationReportState,
-  z.ZodTypeDef,
-  AppPopulationReportState
-> = z.union([
-  z.nativeEnum(AppPopulationReportState),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppPopulationReportState$ {
-  /** @deprecated use `AppPopulationReportState$inboundSchema` instead. */
-  export const inboundSchema = AppPopulationReportState$inboundSchema;
-  /** @deprecated use `AppPopulationReportState$outboundSchema` instead. */
-  export const outboundSchema = AppPopulationReportState$outboundSchema;
-}
+> = openEnums.inboundSchema(AppPopulationReportState);
 
 /** @internal */
 export const AppPopulationReport$inboundSchema: z.ZodType<
@@ -102,51 +74,6 @@ export const AppPopulationReport$inboundSchema: z.ZodType<
   id: z.nullable(z.string()).optional(),
   state: z.nullable(AppPopulationReportState$inboundSchema).optional(),
 });
-
-/** @internal */
-export type AppPopulationReport$Outbound = {
-  appId?: string | null | undefined;
-  createdAt?: string | null | undefined;
-  downloadUrl?: string | null | undefined;
-  hashes?: { [k: string]: string } | null | undefined;
-  id?: string | null | undefined;
-  state?: string | null | undefined;
-};
-
-/** @internal */
-export const AppPopulationReport$outboundSchema: z.ZodType<
-  AppPopulationReport$Outbound,
-  z.ZodTypeDef,
-  AppPopulationReport
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  downloadUrl: z.nullable(z.string()).optional(),
-  hashes: z.nullable(z.record(z.string())).optional(),
-  id: z.nullable(z.string()).optional(),
-  state: z.nullable(AppPopulationReportState$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppPopulationReport$ {
-  /** @deprecated use `AppPopulationReport$inboundSchema` instead. */
-  export const inboundSchema = AppPopulationReport$inboundSchema;
-  /** @deprecated use `AppPopulationReport$outboundSchema` instead. */
-  export const outboundSchema = AppPopulationReport$outboundSchema;
-  /** @deprecated use `AppPopulationReport$Outbound` instead. */
-  export type Outbound = AppPopulationReport$Outbound;
-}
-
-export function appPopulationReportToJSON(
-  appPopulationReport: AppPopulationReport,
-): string {
-  return JSON.stringify(
-    AppPopulationReport$outboundSchema.parse(appPopulationReport),
-  );
-}
 
 export function appPopulationReportFromJSON(
   jsonString: string,

@@ -3,18 +3,13 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementExpandMask,
-  AppEntitlementExpandMask$inboundSchema,
   AppEntitlementExpandMask$Outbound,
   AppEntitlementExpandMask$outboundSchema,
 } from "./appentitlementexpandmask.js";
 import {
   AppEntitlementRef,
-  AppEntitlementRef$inboundSchema,
   AppEntitlementRef$Outbound,
   AppEntitlementRef$outboundSchema,
 } from "./appentitlementref.js";
@@ -59,25 +54,6 @@ export type AppEntitlementSearchServiceSearchGrantsRequest = {
 };
 
 /** @internal */
-export const AppEntitlementSearchServiceSearchGrantsRequest$inboundSchema:
-  z.ZodType<
-    AppEntitlementSearchServiceSearchGrantsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    appIds: z.nullable(z.array(z.string())).optional(),
-    appUserIds: z.nullable(z.array(z.string())).optional(),
-    entitlementRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
-      .optional(),
-    expandMask: z.nullable(AppEntitlementExpandMask$inboundSchema).optional(),
-    pageSize: z.nullable(z.number().int()).optional(),
-    pageToken: z.nullable(z.string()).optional(),
-    resourceIds: z.nullable(z.array(z.string())).optional(),
-    resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-    userId: z.nullable(z.string()).optional(),
-  });
-
-/** @internal */
 export type AppEntitlementSearchServiceSearchGrantsRequest$Outbound = {
   appIds?: Array<string> | null | undefined;
   appUserIds?: Array<string> | null | undefined;
@@ -109,22 +85,6 @@ export const AppEntitlementSearchServiceSearchGrantsRequest$outboundSchema:
     userId: z.nullable(z.string()).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementSearchServiceSearchGrantsRequest$ {
-  /** @deprecated use `AppEntitlementSearchServiceSearchGrantsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    AppEntitlementSearchServiceSearchGrantsRequest$inboundSchema;
-  /** @deprecated use `AppEntitlementSearchServiceSearchGrantsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    AppEntitlementSearchServiceSearchGrantsRequest$outboundSchema;
-  /** @deprecated use `AppEntitlementSearchServiceSearchGrantsRequest$Outbound` instead. */
-  export type Outbound =
-    AppEntitlementSearchServiceSearchGrantsRequest$Outbound;
-}
-
 export function appEntitlementSearchServiceSearchGrantsRequestToJSON(
   appEntitlementSearchServiceSearchGrantsRequest:
     AppEntitlementSearchServiceSearchGrantsRequest,
@@ -133,21 +93,5 @@ export function appEntitlementSearchServiceSearchGrantsRequestToJSON(
     AppEntitlementSearchServiceSearchGrantsRequest$outboundSchema.parse(
       appEntitlementSearchServiceSearchGrantsRequest,
     ),
-  );
-}
-
-export function appEntitlementSearchServiceSearchGrantsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  AppEntitlementSearchServiceSearchGrantsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      AppEntitlementSearchServiceSearchGrantsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'AppEntitlementSearchServiceSearchGrantsRequest' from JSON`,
   );
 }

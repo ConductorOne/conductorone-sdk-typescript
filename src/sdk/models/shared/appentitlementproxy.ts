@@ -18,6 +18,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type AppEntitlementProxy = {
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
+  disabledAt?: Date | undefined;
   /**
    * The dstAppEntitlementId field.
    */
@@ -62,6 +63,8 @@ export const AppEntitlementProxy$inboundSchema: z.ZodType<
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
+  disabledAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
   dstAppEntitlementId: z.nullable(z.string()).optional(),
   dstAppId: z.nullable(z.string()).optional(),
   implicit: z.nullable(z.boolean()).optional(),
@@ -72,57 +75,6 @@ export const AppEntitlementProxy$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
-/** @internal */
-export type AppEntitlementProxy$Outbound = {
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  dstAppEntitlementId?: string | null | undefined;
-  dstAppId?: string | null | undefined;
-  implicit?: boolean | null | undefined;
-  srcAppEntitlementId?: string | null | undefined;
-  srcAppId?: string | null | undefined;
-  systemBuiltin?: boolean | null | undefined;
-  updatedAt?: string | null | undefined;
-};
-
-/** @internal */
-export const AppEntitlementProxy$outboundSchema: z.ZodType<
-  AppEntitlementProxy$Outbound,
-  z.ZodTypeDef,
-  AppEntitlementProxy
-> = z.object({
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  dstAppEntitlementId: z.nullable(z.string()).optional(),
-  dstAppId: z.nullable(z.string()).optional(),
-  implicit: z.nullable(z.boolean()).optional(),
-  srcAppEntitlementId: z.nullable(z.string()).optional(),
-  srcAppId: z.nullable(z.string()).optional(),
-  systemBuiltin: z.nullable(z.boolean()).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementProxy$ {
-  /** @deprecated use `AppEntitlementProxy$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementProxy$inboundSchema;
-  /** @deprecated use `AppEntitlementProxy$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlementProxy$outboundSchema;
-  /** @deprecated use `AppEntitlementProxy$Outbound` instead. */
-  export type Outbound = AppEntitlementProxy$Outbound;
-}
-
-export function appEntitlementProxyToJSON(
-  appEntitlementProxy: AppEntitlementProxy,
-): string {
-  return JSON.stringify(
-    AppEntitlementProxy$outboundSchema.parse(appEntitlementProxy),
-  );
-}
 
 export function appEntitlementProxyFromJSON(
   jsonString: string,

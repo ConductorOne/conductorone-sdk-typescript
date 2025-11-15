@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Automation,
-  Automation$inboundSchema,
-  Automation$Outbound,
-  Automation$outboundSchema,
-} from "./automation.js";
+import { Automation, Automation$inboundSchema } from "./automation.js";
 
 /**
  * The SearchAutomationsResponse message.
@@ -36,43 +31,6 @@ export const SearchAutomationsResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(Automation$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type SearchAutomationsResponse$Outbound = {
-  list?: Array<Automation$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const SearchAutomationsResponse$outboundSchema: z.ZodType<
-  SearchAutomationsResponse$Outbound,
-  z.ZodTypeDef,
-  SearchAutomationsResponse
-> = z.object({
-  list: z.nullable(z.array(Automation$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchAutomationsResponse$ {
-  /** @deprecated use `SearchAutomationsResponse$inboundSchema` instead. */
-  export const inboundSchema = SearchAutomationsResponse$inboundSchema;
-  /** @deprecated use `SearchAutomationsResponse$outboundSchema` instead. */
-  export const outboundSchema = SearchAutomationsResponse$outboundSchema;
-  /** @deprecated use `SearchAutomationsResponse$Outbound` instead. */
-  export type Outbound = SearchAutomationsResponse$Outbound;
-}
-
-export function searchAutomationsResponseToJSON(
-  searchAutomationsResponse: SearchAutomationsResponse,
-): string {
-  return JSON.stringify(
-    SearchAutomationsResponse$outboundSchema.parse(searchAutomationsResponse),
-  );
-}
 
 export function searchAutomationsResponseFromJSON(
   jsonString: string,

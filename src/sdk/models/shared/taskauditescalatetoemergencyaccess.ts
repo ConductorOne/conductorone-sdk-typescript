@@ -31,46 +31,6 @@ export const TaskAuditEscalateToEmergencyAccess$inboundSchema: z.ZodType<
   oldPolicyStepId: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditEscalateToEmergencyAccess$Outbound = {
-  oldPolicyId?: string | null | undefined;
-  oldPolicyStepId?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditEscalateToEmergencyAccess$outboundSchema: z.ZodType<
-  TaskAuditEscalateToEmergencyAccess$Outbound,
-  z.ZodTypeDef,
-  TaskAuditEscalateToEmergencyAccess
-> = z.object({
-  oldPolicyId: z.nullable(z.string()).optional(),
-  oldPolicyStepId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditEscalateToEmergencyAccess$ {
-  /** @deprecated use `TaskAuditEscalateToEmergencyAccess$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditEscalateToEmergencyAccess$inboundSchema;
-  /** @deprecated use `TaskAuditEscalateToEmergencyAccess$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskAuditEscalateToEmergencyAccess$outboundSchema;
-  /** @deprecated use `TaskAuditEscalateToEmergencyAccess$Outbound` instead. */
-  export type Outbound = TaskAuditEscalateToEmergencyAccess$Outbound;
-}
-
-export function taskAuditEscalateToEmergencyAccessToJSON(
-  taskAuditEscalateToEmergencyAccess: TaskAuditEscalateToEmergencyAccess,
-): string {
-  return JSON.stringify(
-    TaskAuditEscalateToEmergencyAccess$outboundSchema.parse(
-      taskAuditEscalateToEmergencyAccess,
-    ),
-  );
-}
-
 export function taskAuditEscalateToEmergencyAccessFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditEscalateToEmergencyAccess, SDKValidationError> {

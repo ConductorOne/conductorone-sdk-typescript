@@ -47,58 +47,6 @@ export const C1ApiAppV1AppsCreateResponse$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type C1ApiAppV1AppsCreateResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  CreateAppResponse?: shared.CreateAppResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppsCreateResponse$outboundSchema: z.ZodType<
-  C1ApiAppV1AppsCreateResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiAppV1AppsCreateResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  createAppResponse: shared.CreateAppResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    createAppResponse: "CreateAppResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppsCreateResponse$ {
-  /** @deprecated use `C1ApiAppV1AppsCreateResponse$inboundSchema` instead. */
-  export const inboundSchema = C1ApiAppV1AppsCreateResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppsCreateResponse$outboundSchema` instead. */
-  export const outboundSchema = C1ApiAppV1AppsCreateResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppsCreateResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppsCreateResponse$Outbound;
-}
-
-export function c1ApiAppV1AppsCreateResponseToJSON(
-  c1ApiAppV1AppsCreateResponse: C1ApiAppV1AppsCreateResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppsCreateResponse$outboundSchema.parse(
-      c1ApiAppV1AppsCreateResponse,
-    ),
-  );
-}
-
 export function c1ApiAppV1AppsCreateResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<C1ApiAppV1AppsCreateResponse, SDKValidationError> {

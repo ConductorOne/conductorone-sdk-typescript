@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The AppRef message.
@@ -16,12 +13,6 @@ export type AppRef = {
    */
   id?: string | null | undefined;
 };
-
-/** @internal */
-export const AppRef$inboundSchema: z.ZodType<AppRef, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.nullable(z.string()).optional(),
-  });
 
 /** @internal */
 export type AppRef$Outbound = {
@@ -37,29 +28,6 @@ export const AppRef$outboundSchema: z.ZodType<
   id: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppRef$ {
-  /** @deprecated use `AppRef$inboundSchema` instead. */
-  export const inboundSchema = AppRef$inboundSchema;
-  /** @deprecated use `AppRef$outboundSchema` instead. */
-  export const outboundSchema = AppRef$outboundSchema;
-  /** @deprecated use `AppRef$Outbound` instead. */
-  export type Outbound = AppRef$Outbound;
-}
-
 export function appRefToJSON(appRef: AppRef): string {
   return JSON.stringify(AppRef$outboundSchema.parse(appRef));
-}
-
-export function appRefFromJSON(
-  jsonString: string,
-): SafeParseResult<AppRef, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AppRef$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AppRef' from JSON`,
-  );
 }

@@ -19,41 +19,6 @@ export const DeleteRiskLevelAttributeValueResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type DeleteRiskLevelAttributeValueResponse$Outbound = {};
-
-/** @internal */
-export const DeleteRiskLevelAttributeValueResponse$outboundSchema: z.ZodType<
-  DeleteRiskLevelAttributeValueResponse$Outbound,
-  z.ZodTypeDef,
-  DeleteRiskLevelAttributeValueResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteRiskLevelAttributeValueResponse$ {
-  /** @deprecated use `DeleteRiskLevelAttributeValueResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteRiskLevelAttributeValueResponse$inboundSchema;
-  /** @deprecated use `DeleteRiskLevelAttributeValueResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteRiskLevelAttributeValueResponse$outboundSchema;
-  /** @deprecated use `DeleteRiskLevelAttributeValueResponse$Outbound` instead. */
-  export type Outbound = DeleteRiskLevelAttributeValueResponse$Outbound;
-}
-
-export function deleteRiskLevelAttributeValueResponseToJSON(
-  deleteRiskLevelAttributeValueResponse: DeleteRiskLevelAttributeValueResponse,
-): string {
-  return JSON.stringify(
-    DeleteRiskLevelAttributeValueResponse$outboundSchema.parse(
-      deleteRiskLevelAttributeValueResponse,
-    ),
-  );
-}
-
 export function deleteRiskLevelAttributeValueResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<DeleteRiskLevelAttributeValueResponse, SDKValidationError> {

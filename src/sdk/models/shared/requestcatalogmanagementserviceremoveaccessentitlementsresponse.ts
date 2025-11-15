@@ -21,44 +21,6 @@ export const RequestCatalogManagementServiceRemoveAccessEntitlementsResponse$inb
     unknown
   > = z.object({});
 
-/** @internal */
-export type RequestCatalogManagementServiceRemoveAccessEntitlementsResponse$Outbound =
-  {};
-
-/** @internal */
-export const RequestCatalogManagementServiceRemoveAccessEntitlementsResponse$outboundSchema:
-  z.ZodType<
-    RequestCatalogManagementServiceRemoveAccessEntitlementsResponse$Outbound,
-    z.ZodTypeDef,
-    RequestCatalogManagementServiceRemoveAccessEntitlementsResponse
-  > = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogManagementServiceRemoveAccessEntitlementsResponse$ {
-  /** @deprecated use `RequestCatalogManagementServiceRemoveAccessEntitlementsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogManagementServiceRemoveAccessEntitlementsResponse$inboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceRemoveAccessEntitlementsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogManagementServiceRemoveAccessEntitlementsResponse$outboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceRemoveAccessEntitlementsResponse$Outbound` instead. */
-  export type Outbound =
-    RequestCatalogManagementServiceRemoveAccessEntitlementsResponse$Outbound;
-}
-
-export function requestCatalogManagementServiceRemoveAccessEntitlementsResponseToJSON(
-  requestCatalogManagementServiceRemoveAccessEntitlementsResponse:
-    RequestCatalogManagementServiceRemoveAccessEntitlementsResponse,
-): string {
-  return JSON.stringify(
-    RequestCatalogManagementServiceRemoveAccessEntitlementsResponse$outboundSchema
-      .parse(requestCatalogManagementServiceRemoveAccessEntitlementsResponse),
-  );
-}
-
 export function requestCatalogManagementServiceRemoveAccessEntitlementsResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

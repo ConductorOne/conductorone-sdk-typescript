@@ -38,22 +38,6 @@ export type C1ApiWebhooksV1WebhooksServiceDeleteResponse = {
 };
 
 /** @internal */
-export const C1ApiWebhooksV1WebhooksServiceDeleteRequest$inboundSchema:
-  z.ZodType<
-    C1ApiWebhooksV1WebhooksServiceDeleteRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.nullable(z.string()),
-    WebhooksServiceDeleteRequest: shared
-      .WebhooksServiceDeleteRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "WebhooksServiceDeleteRequest": "webhooksServiceDeleteRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiWebhooksV1WebhooksServiceDeleteRequest$Outbound = {
   id: string | null;
   WebhooksServiceDeleteRequest?:
@@ -77,21 +61,6 @@ export const C1ApiWebhooksV1WebhooksServiceDeleteRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiWebhooksV1WebhooksServiceDeleteRequest$ {
-  /** @deprecated use `C1ApiWebhooksV1WebhooksServiceDeleteRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiWebhooksV1WebhooksServiceDeleteRequest$inboundSchema;
-  /** @deprecated use `C1ApiWebhooksV1WebhooksServiceDeleteRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiWebhooksV1WebhooksServiceDeleteRequest$outboundSchema;
-  /** @deprecated use `C1ApiWebhooksV1WebhooksServiceDeleteRequest$Outbound` instead. */
-  export type Outbound = C1ApiWebhooksV1WebhooksServiceDeleteRequest$Outbound;
-}
-
 export function c1ApiWebhooksV1WebhooksServiceDeleteRequestToJSON(
   c1ApiWebhooksV1WebhooksServiceDeleteRequest:
     C1ApiWebhooksV1WebhooksServiceDeleteRequest,
@@ -100,22 +69,6 @@ export function c1ApiWebhooksV1WebhooksServiceDeleteRequestToJSON(
     C1ApiWebhooksV1WebhooksServiceDeleteRequest$outboundSchema.parse(
       c1ApiWebhooksV1WebhooksServiceDeleteRequest,
     ),
-  );
-}
-
-export function c1ApiWebhooksV1WebhooksServiceDeleteRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiWebhooksV1WebhooksServiceDeleteRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiWebhooksV1WebhooksServiceDeleteRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiWebhooksV1WebhooksServiceDeleteRequest' from JSON`,
   );
 }
 
@@ -139,65 +92,6 @@ export const C1ApiWebhooksV1WebhooksServiceDeleteResponse$inboundSchema:
       "WebhooksServiceDeleteResponse": "webhooksServiceDeleteResponse",
     });
   });
-
-/** @internal */
-export type C1ApiWebhooksV1WebhooksServiceDeleteResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  WebhooksServiceDeleteResponse?:
-    | shared.WebhooksServiceDeleteResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiWebhooksV1WebhooksServiceDeleteResponse$outboundSchema:
-  z.ZodType<
-    C1ApiWebhooksV1WebhooksServiceDeleteResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiWebhooksV1WebhooksServiceDeleteResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    webhooksServiceDeleteResponse: shared
-      .WebhooksServiceDeleteResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      webhooksServiceDeleteResponse: "WebhooksServiceDeleteResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiWebhooksV1WebhooksServiceDeleteResponse$ {
-  /** @deprecated use `C1ApiWebhooksV1WebhooksServiceDeleteResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiWebhooksV1WebhooksServiceDeleteResponse$inboundSchema;
-  /** @deprecated use `C1ApiWebhooksV1WebhooksServiceDeleteResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiWebhooksV1WebhooksServiceDeleteResponse$outboundSchema;
-  /** @deprecated use `C1ApiWebhooksV1WebhooksServiceDeleteResponse$Outbound` instead. */
-  export type Outbound = C1ApiWebhooksV1WebhooksServiceDeleteResponse$Outbound;
-}
-
-export function c1ApiWebhooksV1WebhooksServiceDeleteResponseToJSON(
-  c1ApiWebhooksV1WebhooksServiceDeleteResponse:
-    C1ApiWebhooksV1WebhooksServiceDeleteResponse,
-): string {
-  return JSON.stringify(
-    C1ApiWebhooksV1WebhooksServiceDeleteResponse$outboundSchema.parse(
-      c1ApiWebhooksV1WebhooksServiceDeleteResponse,
-    ),
-  );
-}
 
 export function c1ApiWebhooksV1WebhooksServiceDeleteResponseFromJSON(
   jsonString: string,

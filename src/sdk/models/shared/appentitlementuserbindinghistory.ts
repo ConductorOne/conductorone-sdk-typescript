@@ -44,51 +44,6 @@ export const AppEntitlementUserBindingHistory$inboundSchema: z.ZodType<
   ).optional(),
 });
 
-/** @internal */
-export type AppEntitlementUserBindingHistory$Outbound = {
-  appEntitlementId?: string | null | undefined;
-  appId?: string | null | undefined;
-  appUserId?: string | null | undefined;
-  grantedAt?: string | null | undefined;
-  revokedAt?: string | null | undefined;
-};
-
-/** @internal */
-export const AppEntitlementUserBindingHistory$outboundSchema: z.ZodType<
-  AppEntitlementUserBindingHistory$Outbound,
-  z.ZodTypeDef,
-  AppEntitlementUserBindingHistory
-> = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appUserId: z.nullable(z.string()).optional(),
-  grantedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  revokedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementUserBindingHistory$ {
-  /** @deprecated use `AppEntitlementUserBindingHistory$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementUserBindingHistory$inboundSchema;
-  /** @deprecated use `AppEntitlementUserBindingHistory$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlementUserBindingHistory$outboundSchema;
-  /** @deprecated use `AppEntitlementUserBindingHistory$Outbound` instead. */
-  export type Outbound = AppEntitlementUserBindingHistory$Outbound;
-}
-
-export function appEntitlementUserBindingHistoryToJSON(
-  appEntitlementUserBindingHistory: AppEntitlementUserBindingHistory,
-): string {
-  return JSON.stringify(
-    AppEntitlementUserBindingHistory$outboundSchema.parse(
-      appEntitlementUserBindingHistory,
-    ),
-  );
-}
-
 export function appEntitlementUserBindingHistoryFromJSON(
   jsonString: string,
 ): SafeParseResult<AppEntitlementUserBindingHistory, SDKValidationError> {

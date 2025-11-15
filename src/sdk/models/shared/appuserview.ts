@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  AppUser,
-  AppUser$inboundSchema,
-  AppUser$Outbound,
-  AppUser$outboundSchema,
-} from "./appuser.js";
+import { AppUser, AppUser$inboundSchema } from "./appuser.js";
 
 /**
  * The AppUserView contains an app user as well as paths for apps, identity users, and last usage in expanded arrays.
@@ -43,43 +38,6 @@ export const AppUserView$inboundSchema: z.ZodType<
   identityUserPath: z.nullable(z.string()).optional(),
   lastUsagePath: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type AppUserView$Outbound = {
-  appPath?: string | null | undefined;
-  appUser?: AppUser$Outbound | null | undefined;
-  identityUserPath?: string | null | undefined;
-  lastUsagePath?: string | null | undefined;
-};
-
-/** @internal */
-export const AppUserView$outboundSchema: z.ZodType<
-  AppUserView$Outbound,
-  z.ZodTypeDef,
-  AppUserView
-> = z.object({
-  appPath: z.nullable(z.string()).optional(),
-  appUser: z.nullable(AppUser$outboundSchema).optional(),
-  identityUserPath: z.nullable(z.string()).optional(),
-  lastUsagePath: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUserView$ {
-  /** @deprecated use `AppUserView$inboundSchema` instead. */
-  export const inboundSchema = AppUserView$inboundSchema;
-  /** @deprecated use `AppUserView$outboundSchema` instead. */
-  export const outboundSchema = AppUserView$outboundSchema;
-  /** @deprecated use `AppUserView$Outbound` instead. */
-  export type Outbound = AppUserView$Outbound;
-}
-
-export function appUserViewToJSON(appUserView: AppUserView): string {
-  return JSON.stringify(AppUserView$outboundSchema.parse(appUserView));
-}
 
 export function appUserViewFromJSON(
   jsonString: string,

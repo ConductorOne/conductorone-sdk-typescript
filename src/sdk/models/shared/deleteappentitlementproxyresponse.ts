@@ -19,40 +19,6 @@ export const DeleteAppEntitlementProxyResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type DeleteAppEntitlementProxyResponse$Outbound = {};
-
-/** @internal */
-export const DeleteAppEntitlementProxyResponse$outboundSchema: z.ZodType<
-  DeleteAppEntitlementProxyResponse$Outbound,
-  z.ZodTypeDef,
-  DeleteAppEntitlementProxyResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteAppEntitlementProxyResponse$ {
-  /** @deprecated use `DeleteAppEntitlementProxyResponse$inboundSchema` instead. */
-  export const inboundSchema = DeleteAppEntitlementProxyResponse$inboundSchema;
-  /** @deprecated use `DeleteAppEntitlementProxyResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteAppEntitlementProxyResponse$outboundSchema;
-  /** @deprecated use `DeleteAppEntitlementProxyResponse$Outbound` instead. */
-  export type Outbound = DeleteAppEntitlementProxyResponse$Outbound;
-}
-
-export function deleteAppEntitlementProxyResponseToJSON(
-  deleteAppEntitlementProxyResponse: DeleteAppEntitlementProxyResponse,
-): string {
-  return JSON.stringify(
-    DeleteAppEntitlementProxyResponse$outboundSchema.parse(
-      deleteAppEntitlementProxyResponse,
-    ),
-  );
-}
-
 export function deleteAppEntitlementProxyResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<DeleteAppEntitlementProxyResponse, SDKValidationError> {

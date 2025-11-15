@@ -4,25 +4,12 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  TargetTask,
-  TargetTask$inboundSchema,
-  TargetTask$Outbound,
-  TargetTask$outboundSchema,
-} from "./targettask.js";
-import {
-  TargetTest,
-  TargetTest$inboundSchema,
-  TargetTest$Outbound,
-  TargetTest$outboundSchema,
-} from "./targettest.js";
+import { TargetTask, TargetTask$inboundSchema } from "./targettask.js";
+import { TargetTest, TargetTest$inboundSchema } from "./targettest.js";
 
 /**
  * Current state of the transaction
@@ -81,32 +68,7 @@ export const StepUpTransactionState$inboundSchema: z.ZodType<
   StepUpTransactionState,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(StepUpTransactionState),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const StepUpTransactionState$outboundSchema: z.ZodType<
-  StepUpTransactionState,
-  z.ZodTypeDef,
-  StepUpTransactionState
-> = z.union([
-  z.nativeEnum(StepUpTransactionState),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StepUpTransactionState$ {
-  /** @deprecated use `StepUpTransactionState$inboundSchema` instead. */
-  export const inboundSchema = StepUpTransactionState$inboundSchema;
-  /** @deprecated use `StepUpTransactionState$outboundSchema` instead. */
-  export const outboundSchema = StepUpTransactionState$outboundSchema;
-}
+> = openEnums.inboundSchema(StepUpTransactionState);
 
 /** @internal */
 export const StepUpTransaction$inboundSchema: z.ZodType<
@@ -132,61 +94,6 @@ export const StepUpTransaction$inboundSchema: z.ZodType<
   ).optional(),
   userId: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type StepUpTransaction$Outbound = {
-  approveTask?: TargetTask$Outbound | null | undefined;
-  claims?: { [k: string]: any } | null | undefined;
-  createdAt?: string | null | undefined;
-  errorMessage?: string | null | undefined;
-  expiresAt?: string | null | undefined;
-  id?: string | null | undefined;
-  providerId?: string | null | undefined;
-  state?: string | null | undefined;
-  test?: TargetTest$Outbound | null | undefined;
-  updatedAt?: string | null | undefined;
-  userId?: string | null | undefined;
-};
-
-/** @internal */
-export const StepUpTransaction$outboundSchema: z.ZodType<
-  StepUpTransaction$Outbound,
-  z.ZodTypeDef,
-  StepUpTransaction
-> = z.object({
-  approveTask: z.nullable(TargetTask$outboundSchema).optional(),
-  claims: z.nullable(z.record(z.any())).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  errorMessage: z.nullable(z.string()).optional(),
-  expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  id: z.nullable(z.string()).optional(),
-  providerId: z.nullable(z.string()).optional(),
-  state: z.nullable(StepUpTransactionState$outboundSchema).optional(),
-  test: z.nullable(TargetTest$outboundSchema).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  userId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StepUpTransaction$ {
-  /** @deprecated use `StepUpTransaction$inboundSchema` instead. */
-  export const inboundSchema = StepUpTransaction$inboundSchema;
-  /** @deprecated use `StepUpTransaction$outboundSchema` instead. */
-  export const outboundSchema = StepUpTransaction$outboundSchema;
-  /** @deprecated use `StepUpTransaction$Outbound` instead. */
-  export type Outbound = StepUpTransaction$Outbound;
-}
-
-export function stepUpTransactionToJSON(
-  stepUpTransaction: StepUpTransaction,
-): string {
-  return JSON.stringify(
-    StepUpTransaction$outboundSchema.parse(stepUpTransaction),
-  );
-}
 
 export function stepUpTransactionFromJSON(
   jsonString: string,

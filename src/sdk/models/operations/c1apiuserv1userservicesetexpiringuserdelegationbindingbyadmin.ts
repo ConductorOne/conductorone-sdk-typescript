@@ -40,24 +40,6 @@ export type C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRespons
   };
 
 /** @internal */
-export const C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest$inboundSchema:
-  z.ZodType<
-    C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    user_id: z.nullable(z.string()),
-    SetExpiringUserDelegationBindingByAdminRequest: shared
-      .SetExpiringUserDelegationBindingByAdminRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "user_id": "userId",
-      "SetExpiringUserDelegationBindingByAdminRequest":
-        "setExpiringUserDelegationBindingByAdminRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest$Outbound =
   {
     user_id: string | null;
@@ -84,22 +66,6 @@ export const C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminReques
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest$ {
-  /** @deprecated use `C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest$inboundSchema;
-  /** @deprecated use `C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest$outboundSchema;
-  /** @deprecated use `C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest$Outbound;
-}
-
 export function c1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequestToJSON(
   c1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest:
     C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest,
@@ -109,21 +75,6 @@ export function c1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminReq
       .parse(
         c1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest,
       ),
-  );
-}
-
-export function c1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest' from JSON`,
   );
 }
 
@@ -148,70 +99,6 @@ export const C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRespon
         "setExpiringUserDelegationBindingByAdminResponse",
     });
   });
-
-/** @internal */
-export type C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    SetExpiringUserDelegationBindingByAdminResponse?:
-      | shared.SetExpiringUserDelegationBindingByAdminResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponse$outboundSchema:
-  z.ZodType<
-    C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    setExpiringUserDelegationBindingByAdminResponse: shared
-      .SetExpiringUserDelegationBindingByAdminResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      setExpiringUserDelegationBindingByAdminResponse:
-        "SetExpiringUserDelegationBindingByAdminResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponse$ {
-  /** @deprecated use `C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponse$inboundSchema;
-  /** @deprecated use `C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponse$outboundSchema;
-  /** @deprecated use `C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponse$Outbound;
-}
-
-export function c1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponseToJSON(
-  c1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponse:
-    C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponse,
-): string {
-  return JSON.stringify(
-    C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponse$outboundSchema
-      .parse(
-        c1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponse,
-      ),
-  );
-}
 
 export function c1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponseFromJSON(
   jsonString: string,

@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementProxyExpandMask,
-  AppEntitlementProxyExpandMask$inboundSchema,
   AppEntitlementProxyExpandMask$Outbound,
   AppEntitlementProxyExpandMask$outboundSchema,
 } from "./appentitlementproxyexpandmask.js";
@@ -19,16 +15,6 @@ import {
 export type CreateAppEntitlementProxyRequest = {
   expandMask?: AppEntitlementProxyExpandMask | null | undefined;
 };
-
-/** @internal */
-export const CreateAppEntitlementProxyRequest$inboundSchema: z.ZodType<
-  CreateAppEntitlementProxyRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  expandMask: z.nullable(AppEntitlementProxyExpandMask$inboundSchema)
-    .optional(),
-});
 
 /** @internal */
 export type CreateAppEntitlementProxyRequest$Outbound = {
@@ -45,19 +31,6 @@ export const CreateAppEntitlementProxyRequest$outboundSchema: z.ZodType<
     .optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAppEntitlementProxyRequest$ {
-  /** @deprecated use `CreateAppEntitlementProxyRequest$inboundSchema` instead. */
-  export const inboundSchema = CreateAppEntitlementProxyRequest$inboundSchema;
-  /** @deprecated use `CreateAppEntitlementProxyRequest$outboundSchema` instead. */
-  export const outboundSchema = CreateAppEntitlementProxyRequest$outboundSchema;
-  /** @deprecated use `CreateAppEntitlementProxyRequest$Outbound` instead. */
-  export type Outbound = CreateAppEntitlementProxyRequest$Outbound;
-}
-
 export function createAppEntitlementProxyRequestToJSON(
   createAppEntitlementProxyRequest: CreateAppEntitlementProxyRequest,
 ): string {
@@ -65,15 +38,5 @@ export function createAppEntitlementProxyRequestToJSON(
     CreateAppEntitlementProxyRequest$outboundSchema.parse(
       createAppEntitlementProxyRequest,
     ),
-  );
-}
-
-export function createAppEntitlementProxyRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAppEntitlementProxyRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateAppEntitlementProxyRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAppEntitlementProxyRequest' from JSON`,
   );
 }

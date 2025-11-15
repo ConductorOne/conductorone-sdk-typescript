@@ -5,14 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
-  collectExtraKeys as collectExtraKeys$,
-  safeParse,
-} from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
   ConnectorExpandMask,
-  ConnectorExpandMask$inboundSchema,
   ConnectorExpandMask$Outbound,
   ConnectorExpandMask$outboundSchema,
 } from "./connectorexpandmask.js";
@@ -49,23 +42,6 @@ export type ConnectorServiceCreateRequest = {
 };
 
 /** @internal */
-export const ConnectorServiceCreateRequestConfig$inboundSchema: z.ZodType<
-  ConnectorServiceCreateRequestConfig,
-  z.ZodTypeDef,
-  unknown
-> = collectExtraKeys$(
-  z.object({
-    "@type": z.string().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "@type": "atType",
-  });
-});
-
-/** @internal */
 export type ConnectorServiceCreateRequestConfig$Outbound = {
   "@type"?: string | undefined;
   [additionalProperties: string]: unknown;
@@ -89,21 +65,6 @@ export const ConnectorServiceCreateRequestConfig$outboundSchema: z.ZodType<
   };
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorServiceCreateRequestConfig$ {
-  /** @deprecated use `ConnectorServiceCreateRequestConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    ConnectorServiceCreateRequestConfig$inboundSchema;
-  /** @deprecated use `ConnectorServiceCreateRequestConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    ConnectorServiceCreateRequestConfig$outboundSchema;
-  /** @deprecated use `ConnectorServiceCreateRequestConfig$Outbound` instead. */
-  export type Outbound = ConnectorServiceCreateRequestConfig$Outbound;
-}
-
 export function connectorServiceCreateRequestConfigToJSON(
   connectorServiceCreateRequestConfig: ConnectorServiceCreateRequestConfig,
 ): string {
@@ -113,32 +74,6 @@ export function connectorServiceCreateRequestConfigToJSON(
     ),
   );
 }
-
-export function connectorServiceCreateRequestConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<ConnectorServiceCreateRequestConfig, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ConnectorServiceCreateRequestConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ConnectorServiceCreateRequestConfig' from JSON`,
-  );
-}
-
-/** @internal */
-export const ConnectorServiceCreateRequest$inboundSchema: z.ZodType<
-  ConnectorServiceCreateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  catalogId: z.nullable(z.string()).optional(),
-  config: z.nullable(
-    z.lazy(() => ConnectorServiceCreateRequestConfig$inboundSchema),
-  ).optional(),
-  description: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(ConnectorExpandMask$inboundSchema).optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type ConnectorServiceCreateRequest$Outbound = {
@@ -164,19 +99,6 @@ export const ConnectorServiceCreateRequest$outboundSchema: z.ZodType<
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorServiceCreateRequest$ {
-  /** @deprecated use `ConnectorServiceCreateRequest$inboundSchema` instead. */
-  export const inboundSchema = ConnectorServiceCreateRequest$inboundSchema;
-  /** @deprecated use `ConnectorServiceCreateRequest$outboundSchema` instead. */
-  export const outboundSchema = ConnectorServiceCreateRequest$outboundSchema;
-  /** @deprecated use `ConnectorServiceCreateRequest$Outbound` instead. */
-  export type Outbound = ConnectorServiceCreateRequest$Outbound;
-}
-
 export function connectorServiceCreateRequestToJSON(
   connectorServiceCreateRequest: ConnectorServiceCreateRequest,
 ): string {
@@ -184,15 +106,5 @@ export function connectorServiceCreateRequestToJSON(
     ConnectorServiceCreateRequest$outboundSchema.parse(
       connectorServiceCreateRequest,
     ),
-  );
-}
-
-export function connectorServiceCreateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ConnectorServiceCreateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ConnectorServiceCreateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ConnectorServiceCreateRequest' from JSON`,
   );
 }

@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskExpandMask,
-  TaskExpandMask$inboundSchema,
   TaskExpandMask$Outbound,
   TaskExpandMask$outboundSchema,
 } from "./taskexpandmask.js";
@@ -29,17 +25,6 @@ export type TaskActionsServiceSkipStepRequest = {
 };
 
 /** @internal */
-export const TaskActionsServiceSkipStepRequest$inboundSchema: z.ZodType<
-  TaskActionsServiceSkipStepRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  comment: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(TaskExpandMask$inboundSchema).optional(),
-  policyStepId: z.string(),
-});
-
-/** @internal */
 export type TaskActionsServiceSkipStepRequest$Outbound = {
   comment?: string | null | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
@@ -57,20 +42,6 @@ export const TaskActionsServiceSkipStepRequest$outboundSchema: z.ZodType<
   policyStepId: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceSkipStepRequest$ {
-  /** @deprecated use `TaskActionsServiceSkipStepRequest$inboundSchema` instead. */
-  export const inboundSchema = TaskActionsServiceSkipStepRequest$inboundSchema;
-  /** @deprecated use `TaskActionsServiceSkipStepRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceSkipStepRequest$outboundSchema;
-  /** @deprecated use `TaskActionsServiceSkipStepRequest$Outbound` instead. */
-  export type Outbound = TaskActionsServiceSkipStepRequest$Outbound;
-}
-
 export function taskActionsServiceSkipStepRequestToJSON(
   taskActionsServiceSkipStepRequest: TaskActionsServiceSkipStepRequest,
 ): string {
@@ -78,15 +49,5 @@ export function taskActionsServiceSkipStepRequestToJSON(
     TaskActionsServiceSkipStepRequest$outboundSchema.parse(
       taskActionsServiceSkipStepRequest,
     ),
-  );
-}
-
-export function taskActionsServiceSkipStepRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskActionsServiceSkipStepRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskActionsServiceSkipStepRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskActionsServiceSkipStepRequest' from JSON`,
   );
 }

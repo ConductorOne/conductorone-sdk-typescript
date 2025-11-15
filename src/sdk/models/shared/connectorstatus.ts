@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -49,32 +46,13 @@ export const ConnectorStatusStatus$inboundSchema: z.ZodType<
   ConnectorStatusStatus,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(ConnectorStatusStatus),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(ConnectorStatusStatus);
 /** @internal */
 export const ConnectorStatusStatus$outboundSchema: z.ZodType<
-  ConnectorStatusStatus,
+  string,
   z.ZodTypeDef,
   ConnectorStatusStatus
-> = z.union([
-  z.nativeEnum(ConnectorStatusStatus),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorStatusStatus$ {
-  /** @deprecated use `ConnectorStatusStatus$inboundSchema` instead. */
-  export const inboundSchema = ConnectorStatusStatus$inboundSchema;
-  /** @deprecated use `ConnectorStatusStatus$outboundSchema` instead. */
-  export const outboundSchema = ConnectorStatusStatus$outboundSchema;
-}
+> = openEnums.outboundSchema(ConnectorStatusStatus);
 
 /** @internal */
 export const ConnectorStatus$inboundSchema: z.ZodType<
@@ -94,7 +72,6 @@ export const ConnectorStatus$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
 /** @internal */
 export type ConnectorStatus$Outbound = {
   completedAt?: string | null | undefined;
@@ -117,25 +94,11 @@ export const ConnectorStatus$outboundSchema: z.ZodType<
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorStatus$ {
-  /** @deprecated use `ConnectorStatus$inboundSchema` instead. */
-  export const inboundSchema = ConnectorStatus$inboundSchema;
-  /** @deprecated use `ConnectorStatus$outboundSchema` instead. */
-  export const outboundSchema = ConnectorStatus$outboundSchema;
-  /** @deprecated use `ConnectorStatus$Outbound` instead. */
-  export type Outbound = ConnectorStatus$Outbound;
-}
-
 export function connectorStatusToJSON(
   connectorStatus: ConnectorStatus,
 ): string {
   return JSON.stringify(ConnectorStatus$outboundSchema.parse(connectorStatus));
 }
-
 export function connectorStatusFromJSON(
   jsonString: string,
 ): SafeParseResult<ConnectorStatus, SDKValidationError> {

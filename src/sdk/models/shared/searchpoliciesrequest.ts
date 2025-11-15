@@ -3,17 +3,10 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import {
   PolicyRef,
-  PolicyRef$inboundSchema,
   PolicyRef$Outbound,
   PolicyRef$outboundSchema,
 } from "./policyref.js";
@@ -67,52 +60,11 @@ export type SearchPoliciesRequest = {
 };
 
 /** @internal */
-export const PolicyTypes$inboundSchema: z.ZodType<
-  PolicyTypes,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(PolicyTypes),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
 export const PolicyTypes$outboundSchema: z.ZodType<
-  PolicyTypes,
+  string,
   z.ZodTypeDef,
   PolicyTypes
-> = z.union([
-  z.nativeEnum(PolicyTypes),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PolicyTypes$ {
-  /** @deprecated use `PolicyTypes$inboundSchema` instead. */
-  export const inboundSchema = PolicyTypes$inboundSchema;
-  /** @deprecated use `PolicyTypes$outboundSchema` instead. */
-  export const outboundSchema = PolicyTypes$outboundSchema;
-}
-
-/** @internal */
-export const SearchPoliciesRequest$inboundSchema: z.ZodType<
-  SearchPoliciesRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  displayName: z.nullable(z.string()).optional(),
-  excludePolicyIds: z.nullable(z.array(z.string())).optional(),
-  includeDeleted: z.nullable(z.boolean()).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  policyTypes: z.nullable(z.array(PolicyTypes$inboundSchema)).optional(),
-  query: z.nullable(z.string()).optional(),
-  refs: z.nullable(z.array(PolicyRef$inboundSchema)).optional(),
-});
+> = openEnums.outboundSchema(PolicyTypes);
 
 /** @internal */
 export type SearchPoliciesRequest$Outbound = {
@@ -142,33 +94,10 @@ export const SearchPoliciesRequest$outboundSchema: z.ZodType<
   refs: z.nullable(z.array(PolicyRef$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchPoliciesRequest$ {
-  /** @deprecated use `SearchPoliciesRequest$inboundSchema` instead. */
-  export const inboundSchema = SearchPoliciesRequest$inboundSchema;
-  /** @deprecated use `SearchPoliciesRequest$outboundSchema` instead. */
-  export const outboundSchema = SearchPoliciesRequest$outboundSchema;
-  /** @deprecated use `SearchPoliciesRequest$Outbound` instead. */
-  export type Outbound = SearchPoliciesRequest$Outbound;
-}
-
 export function searchPoliciesRequestToJSON(
   searchPoliciesRequest: SearchPoliciesRequest,
 ): string {
   return JSON.stringify(
     SearchPoliciesRequest$outboundSchema.parse(searchPoliciesRequest),
-  );
-}
-
-export function searchPoliciesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchPoliciesRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchPoliciesRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchPoliciesRequest' from JSON`,
   );
 }

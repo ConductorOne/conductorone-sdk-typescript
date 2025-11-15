@@ -46,49 +46,6 @@ export const IntrospectResponse$inboundSchema: z.ZodType<
   userId: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type IntrospectResponse$Outbound = {
-  features?: Array<string> | null | undefined;
-  permissions?: Array<string> | null | undefined;
-  principleId?: string | null | undefined;
-  roles?: Array<string> | null | undefined;
-  userId?: string | null | undefined;
-};
-
-/** @internal */
-export const IntrospectResponse$outboundSchema: z.ZodType<
-  IntrospectResponse$Outbound,
-  z.ZodTypeDef,
-  IntrospectResponse
-> = z.object({
-  features: z.nullable(z.array(z.string())).optional(),
-  permissions: z.nullable(z.array(z.string())).optional(),
-  principleId: z.nullable(z.string()).optional(),
-  roles: z.nullable(z.array(z.string())).optional(),
-  userId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace IntrospectResponse$ {
-  /** @deprecated use `IntrospectResponse$inboundSchema` instead. */
-  export const inboundSchema = IntrospectResponse$inboundSchema;
-  /** @deprecated use `IntrospectResponse$outboundSchema` instead. */
-  export const outboundSchema = IntrospectResponse$outboundSchema;
-  /** @deprecated use `IntrospectResponse$Outbound` instead. */
-  export type Outbound = IntrospectResponse$Outbound;
-}
-
-export function introspectResponseToJSON(
-  introspectResponse: IntrospectResponse,
-): string {
-  return JSON.stringify(
-    IntrospectResponse$outboundSchema.parse(introspectResponse),
-  );
-}
-
 export function introspectResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<IntrospectResponse, SDKValidationError> {

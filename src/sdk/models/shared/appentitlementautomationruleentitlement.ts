@@ -32,7 +32,6 @@ export const AppEntitlementAutomationRuleEntitlement$inboundSchema: z.ZodType<
   entitlementRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
     .optional(),
 });
-
 /** @internal */
 export type AppEntitlementAutomationRuleEntitlement$Outbound = {
   entitlementRefs?: Array<AppEntitlementRef$Outbound> | null | undefined;
@@ -48,21 +47,6 @@ export const AppEntitlementAutomationRuleEntitlement$outboundSchema: z.ZodType<
     .optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementAutomationRuleEntitlement$ {
-  /** @deprecated use `AppEntitlementAutomationRuleEntitlement$inboundSchema` instead. */
-  export const inboundSchema =
-    AppEntitlementAutomationRuleEntitlement$inboundSchema;
-  /** @deprecated use `AppEntitlementAutomationRuleEntitlement$outboundSchema` instead. */
-  export const outboundSchema =
-    AppEntitlementAutomationRuleEntitlement$outboundSchema;
-  /** @deprecated use `AppEntitlementAutomationRuleEntitlement$Outbound` instead. */
-  export type Outbound = AppEntitlementAutomationRuleEntitlement$Outbound;
-}
-
 export function appEntitlementAutomationRuleEntitlementToJSON(
   appEntitlementAutomationRuleEntitlement:
     AppEntitlementAutomationRuleEntitlement,
@@ -73,7 +57,6 @@ export function appEntitlementAutomationRuleEntitlementToJSON(
     ),
   );
 }
-
 export function appEntitlementAutomationRuleEntitlementFromJSON(
   jsonString: string,
 ): SafeParseResult<

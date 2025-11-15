@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The request message for setting the app entitlement owners.
@@ -16,15 +13,6 @@ export type SetAppEntitlementOwnersRequest = {
    */
   userIds?: Array<string> | null | undefined;
 };
-
-/** @internal */
-export const SetAppEntitlementOwnersRequest$inboundSchema: z.ZodType<
-  SetAppEntitlementOwnersRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type SetAppEntitlementOwnersRequest$Outbound = {
@@ -40,19 +28,6 @@ export const SetAppEntitlementOwnersRequest$outboundSchema: z.ZodType<
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SetAppEntitlementOwnersRequest$ {
-  /** @deprecated use `SetAppEntitlementOwnersRequest$inboundSchema` instead. */
-  export const inboundSchema = SetAppEntitlementOwnersRequest$inboundSchema;
-  /** @deprecated use `SetAppEntitlementOwnersRequest$outboundSchema` instead. */
-  export const outboundSchema = SetAppEntitlementOwnersRequest$outboundSchema;
-  /** @deprecated use `SetAppEntitlementOwnersRequest$Outbound` instead. */
-  export type Outbound = SetAppEntitlementOwnersRequest$Outbound;
-}
-
 export function setAppEntitlementOwnersRequestToJSON(
   setAppEntitlementOwnersRequest: SetAppEntitlementOwnersRequest,
 ): string {
@@ -60,15 +35,5 @@ export function setAppEntitlementOwnersRequestToJSON(
     SetAppEntitlementOwnersRequest$outboundSchema.parse(
       setAppEntitlementOwnersRequest,
     ),
-  );
-}
-
-export function setAppEntitlementOwnersRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<SetAppEntitlementOwnersRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SetAppEntitlementOwnersRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SetAppEntitlementOwnersRequest' from JSON`,
   );
 }

@@ -3,22 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Delete a request catalog by Id. It uses URL value for input.
  */
 export type RequestCatalogManagementServiceDeleteRequest = {};
-
-/** @internal */
-export const RequestCatalogManagementServiceDeleteRequest$inboundSchema:
-  z.ZodType<
-    RequestCatalogManagementServiceDeleteRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({});
 
 /** @internal */
 export type RequestCatalogManagementServiceDeleteRequest$Outbound = {};
@@ -31,21 +20,6 @@ export const RequestCatalogManagementServiceDeleteRequest$outboundSchema:
     RequestCatalogManagementServiceDeleteRequest
   > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogManagementServiceDeleteRequest$ {
-  /** @deprecated use `RequestCatalogManagementServiceDeleteRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogManagementServiceDeleteRequest$inboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceDeleteRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogManagementServiceDeleteRequest$outboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceDeleteRequest$Outbound` instead. */
-  export type Outbound = RequestCatalogManagementServiceDeleteRequest$Outbound;
-}
-
 export function requestCatalogManagementServiceDeleteRequestToJSON(
   requestCatalogManagementServiceDeleteRequest:
     RequestCatalogManagementServiceDeleteRequest,
@@ -54,21 +28,5 @@ export function requestCatalogManagementServiceDeleteRequestToJSON(
     RequestCatalogManagementServiceDeleteRequest$outboundSchema.parse(
       requestCatalogManagementServiceDeleteRequest,
     ),
-  );
-}
-
-export function requestCatalogManagementServiceDeleteRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  RequestCatalogManagementServiceDeleteRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      RequestCatalogManagementServiceDeleteRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'RequestCatalogManagementServiceDeleteRequest' from JSON`,
   );
 }

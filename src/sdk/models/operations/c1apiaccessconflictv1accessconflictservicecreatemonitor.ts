@@ -48,63 +48,6 @@ export const C1ApiAccessconflictV1AccessConflictServiceCreateMonitorResponse$inb
     });
   });
 
-/** @internal */
-export type C1ApiAccessconflictV1AccessConflictServiceCreateMonitorResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    ConflictMonitor?: shared.ConflictMonitor$Outbound | undefined;
-  };
-
-/** @internal */
-export const C1ApiAccessconflictV1AccessConflictServiceCreateMonitorResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAccessconflictV1AccessConflictServiceCreateMonitorResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAccessconflictV1AccessConflictServiceCreateMonitorResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    conflictMonitor: shared.ConflictMonitor$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      conflictMonitor: "ConflictMonitor",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAccessconflictV1AccessConflictServiceCreateMonitorResponse$ {
-  /** @deprecated use `C1ApiAccessconflictV1AccessConflictServiceCreateMonitorResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAccessconflictV1AccessConflictServiceCreateMonitorResponse$inboundSchema;
-  /** @deprecated use `C1ApiAccessconflictV1AccessConflictServiceCreateMonitorResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAccessconflictV1AccessConflictServiceCreateMonitorResponse$outboundSchema;
-  /** @deprecated use `C1ApiAccessconflictV1AccessConflictServiceCreateMonitorResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAccessconflictV1AccessConflictServiceCreateMonitorResponse$Outbound;
-}
-
-export function c1ApiAccessconflictV1AccessConflictServiceCreateMonitorResponseToJSON(
-  c1ApiAccessconflictV1AccessConflictServiceCreateMonitorResponse:
-    C1ApiAccessconflictV1AccessConflictServiceCreateMonitorResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAccessconflictV1AccessConflictServiceCreateMonitorResponse$outboundSchema
-      .parse(c1ApiAccessconflictV1AccessConflictServiceCreateMonitorResponse),
-  );
-}
-
 export function c1ApiAccessconflictV1AccessConflictServiceCreateMonitorResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

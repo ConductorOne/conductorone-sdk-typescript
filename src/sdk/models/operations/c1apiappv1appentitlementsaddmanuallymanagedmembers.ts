@@ -39,25 +39,6 @@ export type C1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    app_entitlement_id: z.nullable(z.string()),
-    AddManuallyManagedUsersRequest: shared
-      .AddManuallyManagedUsersRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "app_entitlement_id": "appEntitlementId",
-      "AddManuallyManagedUsersRequest": "addManuallyManagedUsersRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest$Outbound =
   {
     app_id: string | null;
@@ -86,22 +67,6 @@ export const C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest$outboundS
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest$Outbound;
-}
-
 export function c1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequestToJSON(
   c1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest:
     C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest,
@@ -109,21 +74,6 @@ export function c1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequestToJSON(
   return JSON.stringify(
     C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest$outboundSchema
       .parse(c1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest),
-  );
-}
-
-export function c1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest' from JSON`,
   );
 }
 
@@ -147,66 +97,6 @@ export const C1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse$inboundS
       "ManuallyManagedUsersResponse": "manuallyManagedUsersResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    ManuallyManagedUsersResponse?:
-      | shared.ManuallyManagedUsersResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    manuallyManagedUsersResponse: shared
-      .ManuallyManagedUsersResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      manuallyManagedUsersResponse: "ManuallyManagedUsersResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse$Outbound;
-}
-
-export function c1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponseToJSON(
-  c1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse:
-    C1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse$outboundSchema
-      .parse(c1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse),
-  );
-}
 
 export function c1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponseFromJSON(
   jsonString: string,

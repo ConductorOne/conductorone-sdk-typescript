@@ -23,6 +23,10 @@ export type ResourceOwnerApproval = {
    * Configuration to specific which users to fallback to if fallback is enabled and the resource owner cannot be identified.
    */
   fallbackUserIds?: Array<string> | null | undefined;
+  /**
+   * Configuration to require distinct approvers across approval steps of a rule.
+   */
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -34,13 +38,14 @@ export const ResourceOwnerApproval$inboundSchema: z.ZodType<
   allowSelfApproval: z.nullable(z.boolean()).optional(),
   fallback: z.nullable(z.boolean()).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
 /** @internal */
 export type ResourceOwnerApproval$Outbound = {
   allowSelfApproval?: boolean | null | undefined;
   fallback?: boolean | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -52,20 +57,8 @@ export const ResourceOwnerApproval$outboundSchema: z.ZodType<
   allowSelfApproval: z.nullable(z.boolean()).optional(),
   fallback: z.nullable(z.boolean()).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResourceOwnerApproval$ {
-  /** @deprecated use `ResourceOwnerApproval$inboundSchema` instead. */
-  export const inboundSchema = ResourceOwnerApproval$inboundSchema;
-  /** @deprecated use `ResourceOwnerApproval$outboundSchema` instead. */
-  export const outboundSchema = ResourceOwnerApproval$outboundSchema;
-  /** @deprecated use `ResourceOwnerApproval$Outbound` instead. */
-  export type Outbound = ResourceOwnerApproval$Outbound;
-}
 
 export function resourceOwnerApprovalToJSON(
   resourceOwnerApproval: ResourceOwnerApproval,
@@ -74,7 +67,6 @@ export function resourceOwnerApprovalToJSON(
     ResourceOwnerApproval$outboundSchema.parse(resourceOwnerApproval),
   );
 }
-
 export function resourceOwnerApprovalFromJSON(
   jsonString: string,
 ): SafeParseResult<ResourceOwnerApproval, SDKValidationError> {

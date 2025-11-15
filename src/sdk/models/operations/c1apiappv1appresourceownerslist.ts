@@ -39,27 +39,6 @@ export type C1ApiAppV1AppResourceOwnersListResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppResourceOwnersListRequest$inboundSchema: z.ZodType<
-  C1ApiAppV1AppResourceOwnersListRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  app_id: z.nullable(z.string()),
-  resource_type_id: z.nullable(z.string()),
-  resource_id: z.nullable(z.string()),
-  page_size: z.nullable(z.number().int()).optional(),
-  page_token: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "app_id": "appId",
-    "resource_type_id": "resourceTypeId",
-    "resource_id": "resourceId",
-    "page_size": "pageSize",
-    "page_token": "pageToken",
-  });
-});
-
-/** @internal */
 export type C1ApiAppV1AppResourceOwnersListRequest$Outbound = {
   app_id: string | null;
   resource_type_id: string | null;
@@ -89,21 +68,6 @@ export const C1ApiAppV1AppResourceOwnersListRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppResourceOwnersListRequest$ {
-  /** @deprecated use `C1ApiAppV1AppResourceOwnersListRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppResourceOwnersListRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceOwnersListRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppResourceOwnersListRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceOwnersListRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppResourceOwnersListRequest$Outbound;
-}
-
 export function c1ApiAppV1AppResourceOwnersListRequestToJSON(
   c1ApiAppV1AppResourceOwnersListRequest:
     C1ApiAppV1AppResourceOwnersListRequest,
@@ -112,17 +76,6 @@ export function c1ApiAppV1AppResourceOwnersListRequestToJSON(
     C1ApiAppV1AppResourceOwnersListRequest$outboundSchema.parse(
       c1ApiAppV1AppResourceOwnersListRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppResourceOwnersListRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<C1ApiAppV1AppResourceOwnersListRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppResourceOwnersListRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppResourceOwnersListRequest' from JSON`,
   );
 }
 
@@ -145,64 +98,6 @@ export const C1ApiAppV1AppResourceOwnersListResponse$inboundSchema: z.ZodType<
     "ListAppResourceOwnersResponse": "listAppResourceOwnersResponse",
   });
 });
-
-/** @internal */
-export type C1ApiAppV1AppResourceOwnersListResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  ListAppResourceOwnersResponse?:
-    | shared.ListAppResourceOwnersResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppResourceOwnersListResponse$outboundSchema: z.ZodType<
-  C1ApiAppV1AppResourceOwnersListResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiAppV1AppResourceOwnersListResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  listAppResourceOwnersResponse: shared
-    .ListAppResourceOwnersResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    listAppResourceOwnersResponse: "ListAppResourceOwnersResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppResourceOwnersListResponse$ {
-  /** @deprecated use `C1ApiAppV1AppResourceOwnersListResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppResourceOwnersListResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceOwnersListResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppResourceOwnersListResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceOwnersListResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppResourceOwnersListResponse$Outbound;
-}
-
-export function c1ApiAppV1AppResourceOwnersListResponseToJSON(
-  c1ApiAppV1AppResourceOwnersListResponse:
-    C1ApiAppV1AppResourceOwnersListResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppResourceOwnersListResponse$outboundSchema.parse(
-      c1ApiAppV1AppResourceOwnersListResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppResourceOwnersListResponseFromJSON(
   jsonString: string,

@@ -18,7 +18,6 @@ export const WebhookListenerAuthHMAC$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
 /** @internal */
 export type WebhookListenerAuthHMAC$Outbound = {};
 
@@ -29,19 +28,6 @@ export const WebhookListenerAuthHMAC$outboundSchema: z.ZodType<
   WebhookListenerAuthHMAC
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhookListenerAuthHMAC$ {
-  /** @deprecated use `WebhookListenerAuthHMAC$inboundSchema` instead. */
-  export const inboundSchema = WebhookListenerAuthHMAC$inboundSchema;
-  /** @deprecated use `WebhookListenerAuthHMAC$outboundSchema` instead. */
-  export const outboundSchema = WebhookListenerAuthHMAC$outboundSchema;
-  /** @deprecated use `WebhookListenerAuthHMAC$Outbound` instead. */
-  export type Outbound = WebhookListenerAuthHMAC$Outbound;
-}
-
 export function webhookListenerAuthHMACToJSON(
   webhookListenerAuthHMAC: WebhookListenerAuthHMAC,
 ): string {
@@ -49,7 +35,6 @@ export function webhookListenerAuthHMACToJSON(
     WebhookListenerAuthHMAC$outboundSchema.parse(webhookListenerAuthHMAC),
   );
 }
-
 export function webhookListenerAuthHMACFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookListenerAuthHMAC, SDKValidationError> {

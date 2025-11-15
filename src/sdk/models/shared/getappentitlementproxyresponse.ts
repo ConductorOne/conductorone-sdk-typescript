@@ -13,8 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementProxyView,
   AppEntitlementProxyView$inboundSchema,
-  AppEntitlementProxyView$Outbound,
-  AppEntitlementProxyView$outboundSchema,
 } from "./appentitlementproxyview.js";
 
 /**
@@ -56,56 +54,6 @@ export const GetAppEntitlementProxyResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type GetAppEntitlementProxyResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const GetAppEntitlementProxyResponseExpanded$outboundSchema: z.ZodType<
-  GetAppEntitlementProxyResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  GetAppEntitlementProxyResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAppEntitlementProxyResponseExpanded$ {
-  /** @deprecated use `GetAppEntitlementProxyResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    GetAppEntitlementProxyResponseExpanded$inboundSchema;
-  /** @deprecated use `GetAppEntitlementProxyResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAppEntitlementProxyResponseExpanded$outboundSchema;
-  /** @deprecated use `GetAppEntitlementProxyResponseExpanded$Outbound` instead. */
-  export type Outbound = GetAppEntitlementProxyResponseExpanded$Outbound;
-}
-
-export function getAppEntitlementProxyResponseExpandedToJSON(
-  getAppEntitlementProxyResponseExpanded:
-    GetAppEntitlementProxyResponseExpanded,
-): string {
-  return JSON.stringify(
-    GetAppEntitlementProxyResponseExpanded$outboundSchema.parse(
-      getAppEntitlementProxyResponseExpanded,
-    ),
-  );
-}
-
 export function getAppEntitlementProxyResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAppEntitlementProxyResponseExpanded, SDKValidationError> {
@@ -129,53 +77,6 @@ export const GetAppEntitlementProxyResponse$inboundSchema: z.ZodType<
     z.array(z.lazy(() => GetAppEntitlementProxyResponseExpanded$inboundSchema)),
   ).optional(),
 });
-
-/** @internal */
-export type GetAppEntitlementProxyResponse$Outbound = {
-  appProxyEntitlementView?: AppEntitlementProxyView$Outbound | null | undefined;
-  expanded?:
-    | Array<GetAppEntitlementProxyResponseExpanded$Outbound>
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const GetAppEntitlementProxyResponse$outboundSchema: z.ZodType<
-  GetAppEntitlementProxyResponse$Outbound,
-  z.ZodTypeDef,
-  GetAppEntitlementProxyResponse
-> = z.object({
-  appProxyEntitlementView: z.nullable(AppEntitlementProxyView$outboundSchema)
-    .optional(),
-  expanded: z.nullable(
-    z.array(
-      z.lazy(() => GetAppEntitlementProxyResponseExpanded$outboundSchema),
-    ),
-  ).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAppEntitlementProxyResponse$ {
-  /** @deprecated use `GetAppEntitlementProxyResponse$inboundSchema` instead. */
-  export const inboundSchema = GetAppEntitlementProxyResponse$inboundSchema;
-  /** @deprecated use `GetAppEntitlementProxyResponse$outboundSchema` instead. */
-  export const outboundSchema = GetAppEntitlementProxyResponse$outboundSchema;
-  /** @deprecated use `GetAppEntitlementProxyResponse$Outbound` instead. */
-  export type Outbound = GetAppEntitlementProxyResponse$Outbound;
-}
-
-export function getAppEntitlementProxyResponseToJSON(
-  getAppEntitlementProxyResponse: GetAppEntitlementProxyResponse,
-): string {
-  return JSON.stringify(
-    GetAppEntitlementProxyResponse$outboundSchema.parse(
-      getAppEntitlementProxyResponse,
-    ),
-  );
-}
 
 export function getAppEntitlementProxyResponseFromJSON(
   jsonString: string,

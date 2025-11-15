@@ -35,23 +35,6 @@ export type C1ApiAppV1AppOwnersRemoveResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppOwnersRemoveRequest$inboundSchema: z.ZodType<
-  C1ApiAppV1AppOwnersRemoveRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  app_id: z.nullable(z.string()),
-  user_id: z.nullable(z.string()),
-  RemoveAppOwnerRequest: shared.RemoveAppOwnerRequest$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "app_id": "appId",
-    "user_id": "userId",
-    "RemoveAppOwnerRequest": "removeAppOwnerRequest",
-  });
-});
-
-/** @internal */
 export type C1ApiAppV1AppOwnersRemoveRequest$Outbound = {
   app_id: string | null;
   user_id: string | null;
@@ -75,19 +58,6 @@ export const C1ApiAppV1AppOwnersRemoveRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppOwnersRemoveRequest$ {
-  /** @deprecated use `C1ApiAppV1AppOwnersRemoveRequest$inboundSchema` instead. */
-  export const inboundSchema = C1ApiAppV1AppOwnersRemoveRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppOwnersRemoveRequest$outboundSchema` instead. */
-  export const outboundSchema = C1ApiAppV1AppOwnersRemoveRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppOwnersRemoveRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppOwnersRemoveRequest$Outbound;
-}
-
 export function c1ApiAppV1AppOwnersRemoveRequestToJSON(
   c1ApiAppV1AppOwnersRemoveRequest: C1ApiAppV1AppOwnersRemoveRequest,
 ): string {
@@ -95,16 +65,6 @@ export function c1ApiAppV1AppOwnersRemoveRequestToJSON(
     C1ApiAppV1AppOwnersRemoveRequest$outboundSchema.parse(
       c1ApiAppV1AppOwnersRemoveRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppOwnersRemoveRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<C1ApiAppV1AppOwnersRemoveRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => C1ApiAppV1AppOwnersRemoveRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppOwnersRemoveRequest' from JSON`,
   );
 }
 
@@ -127,60 +87,6 @@ export const C1ApiAppV1AppOwnersRemoveResponse$inboundSchema: z.ZodType<
     "RemoveAppOwnerResponse": "removeAppOwnerResponse",
   });
 });
-
-/** @internal */
-export type C1ApiAppV1AppOwnersRemoveResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  RemoveAppOwnerResponse?: shared.RemoveAppOwnerResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppOwnersRemoveResponse$outboundSchema: z.ZodType<
-  C1ApiAppV1AppOwnersRemoveResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiAppV1AppOwnersRemoveResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  removeAppOwnerResponse: shared.RemoveAppOwnerResponse$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    removeAppOwnerResponse: "RemoveAppOwnerResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppOwnersRemoveResponse$ {
-  /** @deprecated use `C1ApiAppV1AppOwnersRemoveResponse$inboundSchema` instead. */
-  export const inboundSchema = C1ApiAppV1AppOwnersRemoveResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppOwnersRemoveResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppOwnersRemoveResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppOwnersRemoveResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppOwnersRemoveResponse$Outbound;
-}
-
-export function c1ApiAppV1AppOwnersRemoveResponseToJSON(
-  c1ApiAppV1AppOwnersRemoveResponse: C1ApiAppV1AppOwnersRemoveResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppOwnersRemoveResponse$outboundSchema.parse(
-      c1ApiAppV1AppOwnersRemoveResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppOwnersRemoveResponseFromJSON(
   jsonString: string,

@@ -26,43 +26,6 @@ export const TaskAuditExternalTicketError$inboundSchema: z.ZodType<
   errorMessage: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditExternalTicketError$Outbound = {
-  errorMessage?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditExternalTicketError$outboundSchema: z.ZodType<
-  TaskAuditExternalTicketError$Outbound,
-  z.ZodTypeDef,
-  TaskAuditExternalTicketError
-> = z.object({
-  errorMessage: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditExternalTicketError$ {
-  /** @deprecated use `TaskAuditExternalTicketError$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditExternalTicketError$inboundSchema;
-  /** @deprecated use `TaskAuditExternalTicketError$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditExternalTicketError$outboundSchema;
-  /** @deprecated use `TaskAuditExternalTicketError$Outbound` instead. */
-  export type Outbound = TaskAuditExternalTicketError$Outbound;
-}
-
-export function taskAuditExternalTicketErrorToJSON(
-  taskAuditExternalTicketError: TaskAuditExternalTicketError,
-): string {
-  return JSON.stringify(
-    TaskAuditExternalTicketError$outboundSchema.parse(
-      taskAuditExternalTicketError,
-    ),
-  );
-}
-
 export function taskAuditExternalTicketErrorFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditExternalTicketError, SDKValidationError> {

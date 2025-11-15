@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Empty request body
  */
 export type DeleteAppRequest = {};
-
-/** @internal */
-export const DeleteAppRequest$inboundSchema: z.ZodType<
-  DeleteAppRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type DeleteAppRequest$Outbound = {};
@@ -29,33 +19,10 @@ export const DeleteAppRequest$outboundSchema: z.ZodType<
   DeleteAppRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteAppRequest$ {
-  /** @deprecated use `DeleteAppRequest$inboundSchema` instead. */
-  export const inboundSchema = DeleteAppRequest$inboundSchema;
-  /** @deprecated use `DeleteAppRequest$outboundSchema` instead. */
-  export const outboundSchema = DeleteAppRequest$outboundSchema;
-  /** @deprecated use `DeleteAppRequest$Outbound` instead. */
-  export type Outbound = DeleteAppRequest$Outbound;
-}
-
 export function deleteAppRequestToJSON(
   deleteAppRequest: DeleteAppRequest,
 ): string {
   return JSON.stringify(
     DeleteAppRequest$outboundSchema.parse(deleteAppRequest),
-  );
-}
-
-export function deleteAppRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteAppRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteAppRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteAppRequest' from JSON`,
   );
 }

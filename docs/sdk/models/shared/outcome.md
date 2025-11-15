@@ -1,13 +1,13 @@
 # Outcome
 
-The outcome of the certification.
+The outcome field.
 
 ## Example Usage
 
 ```typescript
 import { Outcome } from "conductorone-sdk-typescript/sdk/models/shared";
 
-let value: Outcome = "CERTIFY_OUTCOME_UNSPECIFIED";
+let value: Outcome = "ACTION_OUTCOME_UNSPECIFIED";
 ```
 
 ## Values
@@ -15,5 +15,5 @@ let value: Outcome = "CERTIFY_OUTCOME_UNSPECIFIED";
 This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
-"CERTIFY_OUTCOME_UNSPECIFIED" | "CERTIFY_OUTCOME_CERTIFIED" | "CERTIFY_OUTCOME_DECERTIFIED" | "CERTIFY_OUTCOME_ERROR" | "CERTIFY_OUTCOME_CANCELLED" | "CERTIFY_OUTCOME_WAIT_TIMED_OUT" | Unrecognized<string>
+"ACTION_OUTCOME_UNSPECIFIED" | "ACTION_OUTCOME_SUCCESS" | "ACTION_OUTCOME_DENIED" | "ACTION_OUTCOME_ERROR" | "ACTION_OUTCOME_CANCELLED" | Unrecognized<string>
 ```

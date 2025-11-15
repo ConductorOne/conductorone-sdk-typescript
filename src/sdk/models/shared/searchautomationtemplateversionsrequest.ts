@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The SearchAutomationTemplateVersionsRequest message.
@@ -26,17 +23,6 @@ export type SearchAutomationTemplateVersionsRequest = {
 };
 
 /** @internal */
-export const SearchAutomationTemplateVersionsRequest$inboundSchema: z.ZodType<
-  SearchAutomationTemplateVersionsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  automationTemplateId: z.nullable(z.string()).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-});
-
-/** @internal */
 export type SearchAutomationTemplateVersionsRequest$Outbound = {
   automationTemplateId?: string | null | undefined;
   pageSize?: number | null | undefined;
@@ -54,21 +40,6 @@ export const SearchAutomationTemplateVersionsRequest$outboundSchema: z.ZodType<
   pageToken: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchAutomationTemplateVersionsRequest$ {
-  /** @deprecated use `SearchAutomationTemplateVersionsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    SearchAutomationTemplateVersionsRequest$inboundSchema;
-  /** @deprecated use `SearchAutomationTemplateVersionsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchAutomationTemplateVersionsRequest$outboundSchema;
-  /** @deprecated use `SearchAutomationTemplateVersionsRequest$Outbound` instead. */
-  export type Outbound = SearchAutomationTemplateVersionsRequest$Outbound;
-}
-
 export function searchAutomationTemplateVersionsRequestToJSON(
   searchAutomationTemplateVersionsRequest:
     SearchAutomationTemplateVersionsRequest,
@@ -77,21 +48,5 @@ export function searchAutomationTemplateVersionsRequestToJSON(
     SearchAutomationTemplateVersionsRequest$outboundSchema.parse(
       searchAutomationTemplateVersionsRequest,
     ),
-  );
-}
-
-export function searchAutomationTemplateVersionsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  SearchAutomationTemplateVersionsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      SearchAutomationTemplateVersionsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'SearchAutomationTemplateVersionsRequest' from JSON`,
   );
 }

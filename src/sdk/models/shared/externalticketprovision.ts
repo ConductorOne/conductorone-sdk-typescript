@@ -40,7 +40,6 @@ export const ExternalTicketProvision$inboundSchema: z.ZodType<
   externalTicketProvisionerConfigId: z.nullable(z.string()).optional(),
   instructions: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type ExternalTicketProvision$Outbound = {
   appId?: string | null | undefined;
@@ -61,19 +60,6 @@ export const ExternalTicketProvision$outboundSchema: z.ZodType<
   instructions: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExternalTicketProvision$ {
-  /** @deprecated use `ExternalTicketProvision$inboundSchema` instead. */
-  export const inboundSchema = ExternalTicketProvision$inboundSchema;
-  /** @deprecated use `ExternalTicketProvision$outboundSchema` instead. */
-  export const outboundSchema = ExternalTicketProvision$outboundSchema;
-  /** @deprecated use `ExternalTicketProvision$Outbound` instead. */
-  export type Outbound = ExternalTicketProvision$Outbound;
-}
-
 export function externalTicketProvisionToJSON(
   externalTicketProvision: ExternalTicketProvision,
 ): string {
@@ -81,7 +67,6 @@ export function externalTicketProvisionToJSON(
     ExternalTicketProvision$outboundSchema.parse(externalTicketProvision),
   );
 }
-
 export function externalTicketProvisionFromJSON(
   jsonString: string,
 ): SafeParseResult<ExternalTicketProvision, SDKValidationError> {

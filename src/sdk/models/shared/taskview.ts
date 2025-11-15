@@ -78,7 +78,6 @@ export const TaskView$inboundSchema: z.ZodType<
   task: z.nullable(Task$inboundSchema).optional(),
   userPath: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type TaskView$Outbound = {
   accessReviewPath?: string | null | undefined;
@@ -113,23 +112,9 @@ export const TaskView$outboundSchema: z.ZodType<
   userPath: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskView$ {
-  /** @deprecated use `TaskView$inboundSchema` instead. */
-  export const inboundSchema = TaskView$inboundSchema;
-  /** @deprecated use `TaskView$outboundSchema` instead. */
-  export const outboundSchema = TaskView$outboundSchema;
-  /** @deprecated use `TaskView$Outbound` instead. */
-  export type Outbound = TaskView$Outbound;
-}
-
 export function taskViewToJSON(taskView: TaskView): string {
   return JSON.stringify(TaskView$outboundSchema.parse(taskView));
 }
-
 export function taskViewFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskView, SDKValidationError> {

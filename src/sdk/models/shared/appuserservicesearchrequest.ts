@@ -3,23 +3,15 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import {
   AppUserExpandMask,
-  AppUserExpandMask$inboundSchema,
   AppUserExpandMask$Outbound,
   AppUserExpandMask$outboundSchema,
 } from "./appuserexpandmask.js";
 import {
   AppUserRef,
-  AppUserRef$inboundSchema,
   AppUserRef$Outbound,
   AppUserRef$outboundSchema,
 } from "./appuserref.js";
@@ -103,122 +95,25 @@ export type AppUserServiceSearchRequest = {
 };
 
 /** @internal */
-export const AppUserDomains$inboundSchema: z.ZodType<
-  AppUserDomains,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(AppUserDomains),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
 export const AppUserDomains$outboundSchema: z.ZodType<
-  AppUserDomains,
+  string,
   z.ZodTypeDef,
   AppUserDomains
-> = z.union([
-  z.nativeEnum(AppUserDomains),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUserDomains$ {
-  /** @deprecated use `AppUserDomains$inboundSchema` instead. */
-  export const inboundSchema = AppUserDomains$inboundSchema;
-  /** @deprecated use `AppUserDomains$outboundSchema` instead. */
-  export const outboundSchema = AppUserDomains$outboundSchema;
-}
-
-/** @internal */
-export const AppUserStatuses$inboundSchema: z.ZodType<
-  AppUserStatuses,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(AppUserStatuses),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
+> = openEnums.outboundSchema(AppUserDomains);
 
 /** @internal */
 export const AppUserStatuses$outboundSchema: z.ZodType<
-  AppUserStatuses,
+  string,
   z.ZodTypeDef,
   AppUserStatuses
-> = z.union([
-  z.nativeEnum(AppUserStatuses),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUserStatuses$ {
-  /** @deprecated use `AppUserStatuses$inboundSchema` instead. */
-  export const inboundSchema = AppUserStatuses$inboundSchema;
-  /** @deprecated use `AppUserStatuses$outboundSchema` instead. */
-  export const outboundSchema = AppUserStatuses$outboundSchema;
-}
-
-/** @internal */
-export const AppUserTypes$inboundSchema: z.ZodType<
-  AppUserTypes,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(AppUserTypes),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
+> = openEnums.outboundSchema(AppUserStatuses);
 
 /** @internal */
 export const AppUserTypes$outboundSchema: z.ZodType<
-  AppUserTypes,
+  string,
   z.ZodTypeDef,
   AppUserTypes
-> = z.union([
-  z.nativeEnum(AppUserTypes),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUserTypes$ {
-  /** @deprecated use `AppUserTypes$inboundSchema` instead. */
-  export const inboundSchema = AppUserTypes$inboundSchema;
-  /** @deprecated use `AppUserTypes$outboundSchema` instead. */
-  export const outboundSchema = AppUserTypes$outboundSchema;
-}
-
-/** @internal */
-export const AppUserServiceSearchRequest$inboundSchema: z.ZodType<
-  AppUserServiceSearchRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  appUserDomains: z.nullable(z.array(AppUserDomains$inboundSchema)).optional(),
-  appUserIds: z.nullable(z.array(z.string())).optional(),
-  appUserStatusDetails: z.nullable(z.array(z.string())).optional(),
-  appUserStatuses: z.nullable(z.array(AppUserStatuses$inboundSchema))
-    .optional(),
-  appUserTypes: z.nullable(z.array(AppUserTypes$inboundSchema)).optional(),
-  excludeAppUserIds: z.nullable(z.array(z.string())).optional(),
-  expandMask: z.nullable(AppUserExpandMask$inboundSchema).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
-  refs: z.nullable(z.array(AppUserRef$inboundSchema)).optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = openEnums.outboundSchema(AppUserTypes);
 
 /** @internal */
 export type AppUserServiceSearchRequest$Outbound = {
@@ -259,19 +154,6 @@ export const AppUserServiceSearchRequest$outboundSchema: z.ZodType<
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUserServiceSearchRequest$ {
-  /** @deprecated use `AppUserServiceSearchRequest$inboundSchema` instead. */
-  export const inboundSchema = AppUserServiceSearchRequest$inboundSchema;
-  /** @deprecated use `AppUserServiceSearchRequest$outboundSchema` instead. */
-  export const outboundSchema = AppUserServiceSearchRequest$outboundSchema;
-  /** @deprecated use `AppUserServiceSearchRequest$Outbound` instead. */
-  export type Outbound = AppUserServiceSearchRequest$Outbound;
-}
-
 export function appUserServiceSearchRequestToJSON(
   appUserServiceSearchRequest: AppUserServiceSearchRequest,
 ): string {
@@ -279,15 +161,5 @@ export function appUserServiceSearchRequestToJSON(
     AppUserServiceSearchRequest$outboundSchema.parse(
       appUserServiceSearchRequest,
     ),
-  );
-}
-
-export function appUserServiceSearchRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<AppUserServiceSearchRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AppUserServiceSearchRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AppUserServiceSearchRequest' from JSON`,
   );
 }

@@ -25,7 +25,6 @@ export const DeleteAccount$inboundSchema: z.ZodType<
 > = z.object({
   connectorId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type DeleteAccount$Outbound = {
   connectorId?: string | null | undefined;
@@ -40,23 +39,9 @@ export const DeleteAccount$outboundSchema: z.ZodType<
   connectorId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteAccount$ {
-  /** @deprecated use `DeleteAccount$inboundSchema` instead. */
-  export const inboundSchema = DeleteAccount$inboundSchema;
-  /** @deprecated use `DeleteAccount$outboundSchema` instead. */
-  export const outboundSchema = DeleteAccount$outboundSchema;
-  /** @deprecated use `DeleteAccount$Outbound` instead. */
-  export type Outbound = DeleteAccount$Outbound;
-}
-
 export function deleteAccountToJSON(deleteAccount: DeleteAccount): string {
   return JSON.stringify(DeleteAccount$outboundSchema.parse(deleteAccount));
 }
-
 export function deleteAccountFromJSON(
   jsonString: string,
 ): SafeParseResult<DeleteAccount, SDKValidationError> {

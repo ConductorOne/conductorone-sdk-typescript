@@ -52,7 +52,6 @@ export const PolicyInstance$inboundSchema: z.ZodType<
   next: z.nullable(z.array(PolicyStep$inboundSchema)).optional(),
   policy: z.nullable(Policy$inboundSchema).optional(),
 });
-
 /** @internal */
 export type PolicyInstance$Outbound = {
   current?: PolicyStepInstance$Outbound | null | undefined;
@@ -73,23 +72,9 @@ export const PolicyInstance$outboundSchema: z.ZodType<
   policy: z.nullable(Policy$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PolicyInstance$ {
-  /** @deprecated use `PolicyInstance$inboundSchema` instead. */
-  export const inboundSchema = PolicyInstance$inboundSchema;
-  /** @deprecated use `PolicyInstance$outboundSchema` instead. */
-  export const outboundSchema = PolicyInstance$outboundSchema;
-  /** @deprecated use `PolicyInstance$Outbound` instead. */
-  export type Outbound = PolicyInstance$Outbound;
-}
-
 export function policyInstanceToJSON(policyInstance: PolicyInstance): string {
   return JSON.stringify(PolicyInstance$outboundSchema.parse(policyInstance));
 }
-
 export function policyInstanceFromJSON(
   jsonString: string,
 ): SafeParseResult<PolicyInstance, SDKValidationError> {

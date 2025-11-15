@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  FunctionT,
-  FunctionT$inboundSchema,
-  FunctionT$Outbound,
-  FunctionT$outboundSchema,
-} from "./function.js";
+import { FunctionT, FunctionT$inboundSchema } from "./function.js";
 
 /**
  * The FunctionsSearchResponse message.
@@ -36,43 +31,6 @@ export const FunctionsSearchResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(FunctionT$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type FunctionsSearchResponse$Outbound = {
-  list?: Array<FunctionT$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const FunctionsSearchResponse$outboundSchema: z.ZodType<
-  FunctionsSearchResponse$Outbound,
-  z.ZodTypeDef,
-  FunctionsSearchResponse
-> = z.object({
-  list: z.nullable(z.array(FunctionT$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionsSearchResponse$ {
-  /** @deprecated use `FunctionsSearchResponse$inboundSchema` instead. */
-  export const inboundSchema = FunctionsSearchResponse$inboundSchema;
-  /** @deprecated use `FunctionsSearchResponse$outboundSchema` instead. */
-  export const outboundSchema = FunctionsSearchResponse$outboundSchema;
-  /** @deprecated use `FunctionsSearchResponse$Outbound` instead. */
-  export type Outbound = FunctionsSearchResponse$Outbound;
-}
-
-export function functionsSearchResponseToJSON(
-  functionsSearchResponse: FunctionsSearchResponse,
-): string {
-  return JSON.stringify(
-    FunctionsSearchResponse$outboundSchema.parse(functionsSearchResponse),
-  );
-}
 
 export function functionsSearchResponseFromJSON(
   jsonString: string,

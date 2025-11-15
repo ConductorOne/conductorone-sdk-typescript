@@ -3,30 +3,23 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementAutomationRuleBasic,
-  AppEntitlementAutomationRuleBasic$inboundSchema,
   AppEntitlementAutomationRuleBasic$Outbound,
   AppEntitlementAutomationRuleBasic$outboundSchema,
 } from "./appentitlementautomationrulebasic.js";
 import {
   AppEntitlementAutomationRuleCEL,
-  AppEntitlementAutomationRuleCEL$inboundSchema,
   AppEntitlementAutomationRuleCEL$Outbound,
   AppEntitlementAutomationRuleCEL$outboundSchema,
 } from "./appentitlementautomationrulecel.js";
 import {
   AppEntitlementAutomationRuleEntitlement,
-  AppEntitlementAutomationRuleEntitlement$inboundSchema,
   AppEntitlementAutomationRuleEntitlement$Outbound,
   AppEntitlementAutomationRuleEntitlement$outboundSchema,
 } from "./appentitlementautomationruleentitlement.js";
 import {
   AppEntitlementAutomationRuleNone,
-  AppEntitlementAutomationRuleNone$inboundSchema,
   AppEntitlementAutomationRuleNone$Outbound,
   AppEntitlementAutomationRuleNone$outboundSchema,
 } from "./appentitlementautomationrulenone.js";
@@ -57,25 +50,6 @@ export type AppEntitlementServiceUpdateAutomationRequest = {
   none?: AppEntitlementAutomationRuleNone | null | undefined;
   updateMask?: string | null | undefined;
 };
-
-/** @internal */
-export const AppEntitlementServiceUpdateAutomationRequest$inboundSchema:
-  z.ZodType<
-    AppEntitlementServiceUpdateAutomationRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    basic: z.nullable(AppEntitlementAutomationRuleBasic$inboundSchema)
-      .optional(),
-    cel: z.nullable(AppEntitlementAutomationRuleCEL$inboundSchema).optional(),
-    description: z.nullable(z.string()).optional(),
-    displayName: z.nullable(z.string()).optional(),
-    entitlements: z.nullable(
-      AppEntitlementAutomationRuleEntitlement$inboundSchema,
-    ).optional(),
-    none: z.nullable(AppEntitlementAutomationRuleNone$inboundSchema).optional(),
-    updateMask: z.nullable(z.string()).optional(),
-  });
 
 /** @internal */
 export type AppEntitlementServiceUpdateAutomationRequest$Outbound = {
@@ -111,21 +85,6 @@ export const AppEntitlementServiceUpdateAutomationRequest$outboundSchema:
     updateMask: z.nullable(z.string()).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementServiceUpdateAutomationRequest$ {
-  /** @deprecated use `AppEntitlementServiceUpdateAutomationRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    AppEntitlementServiceUpdateAutomationRequest$inboundSchema;
-  /** @deprecated use `AppEntitlementServiceUpdateAutomationRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    AppEntitlementServiceUpdateAutomationRequest$outboundSchema;
-  /** @deprecated use `AppEntitlementServiceUpdateAutomationRequest$Outbound` instead. */
-  export type Outbound = AppEntitlementServiceUpdateAutomationRequest$Outbound;
-}
-
 export function appEntitlementServiceUpdateAutomationRequestToJSON(
   appEntitlementServiceUpdateAutomationRequest:
     AppEntitlementServiceUpdateAutomationRequest,
@@ -134,21 +93,5 @@ export function appEntitlementServiceUpdateAutomationRequestToJSON(
     AppEntitlementServiceUpdateAutomationRequest$outboundSchema.parse(
       appEntitlementServiceUpdateAutomationRequest,
     ),
-  );
-}
-
-export function appEntitlementServiceUpdateAutomationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  AppEntitlementServiceUpdateAutomationRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      AppEntitlementServiceUpdateAutomationRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'AppEntitlementServiceUpdateAutomationRequest' from JSON`,
   );
 }

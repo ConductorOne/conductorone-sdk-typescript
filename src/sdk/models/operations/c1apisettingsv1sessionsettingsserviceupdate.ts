@@ -51,66 +51,6 @@ export const C1ApiSettingsV1SessionSettingsServiceUpdateResponse$inboundSchema:
     });
   });
 
-/** @internal */
-export type C1ApiSettingsV1SessionSettingsServiceUpdateResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  UpdateSessionSettingsResponse?:
-    | shared.UpdateSessionSettingsResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiSettingsV1SessionSettingsServiceUpdateResponse$outboundSchema:
-  z.ZodType<
-    C1ApiSettingsV1SessionSettingsServiceUpdateResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiSettingsV1SessionSettingsServiceUpdateResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    updateSessionSettingsResponse: shared
-      .UpdateSessionSettingsResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      updateSessionSettingsResponse: "UpdateSessionSettingsResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiSettingsV1SessionSettingsServiceUpdateResponse$ {
-  /** @deprecated use `C1ApiSettingsV1SessionSettingsServiceUpdateResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiSettingsV1SessionSettingsServiceUpdateResponse$inboundSchema;
-  /** @deprecated use `C1ApiSettingsV1SessionSettingsServiceUpdateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiSettingsV1SessionSettingsServiceUpdateResponse$outboundSchema;
-  /** @deprecated use `C1ApiSettingsV1SessionSettingsServiceUpdateResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiSettingsV1SessionSettingsServiceUpdateResponse$Outbound;
-}
-
-export function c1ApiSettingsV1SessionSettingsServiceUpdateResponseToJSON(
-  c1ApiSettingsV1SessionSettingsServiceUpdateResponse:
-    C1ApiSettingsV1SessionSettingsServiceUpdateResponse,
-): string {
-  return JSON.stringify(
-    C1ApiSettingsV1SessionSettingsServiceUpdateResponse$outboundSchema.parse(
-      c1ApiSettingsV1SessionSettingsServiceUpdateResponse,
-    ),
-  );
-}
-
 export function c1ApiSettingsV1SessionSettingsServiceUpdateResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

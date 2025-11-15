@@ -28,7 +28,6 @@ export const GrantDeletedTrigger$inboundSchema: z.ZodType<
 > = z.object({
   grantTriggerFilter: z.nullable(GrantTriggerFilter$inboundSchema).optional(),
 });
-
 /** @internal */
 export type GrantDeletedTrigger$Outbound = {
   grantTriggerFilter?: GrantTriggerFilter$Outbound | null | undefined;
@@ -43,19 +42,6 @@ export const GrantDeletedTrigger$outboundSchema: z.ZodType<
   grantTriggerFilter: z.nullable(GrantTriggerFilter$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GrantDeletedTrigger$ {
-  /** @deprecated use `GrantDeletedTrigger$inboundSchema` instead. */
-  export const inboundSchema = GrantDeletedTrigger$inboundSchema;
-  /** @deprecated use `GrantDeletedTrigger$outboundSchema` instead. */
-  export const outboundSchema = GrantDeletedTrigger$outboundSchema;
-  /** @deprecated use `GrantDeletedTrigger$Outbound` instead. */
-  export type Outbound = GrantDeletedTrigger$Outbound;
-}
-
 export function grantDeletedTriggerToJSON(
   grantDeletedTrigger: GrantDeletedTrigger,
 ): string {
@@ -63,7 +49,6 @@ export function grantDeletedTriggerToJSON(
     GrantDeletedTrigger$outboundSchema.parse(grantDeletedTrigger),
   );
 }
-
 export function grantDeletedTriggerFromJSON(
   jsonString: string,
 ): SafeParseResult<GrantDeletedTrigger, SDKValidationError> {

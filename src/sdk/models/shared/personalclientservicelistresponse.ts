@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PersonalClient,
   PersonalClient$inboundSchema,
-  PersonalClient$Outbound,
-  PersonalClient$outboundSchema,
 } from "./personalclient.js";
 
 /**
@@ -36,46 +34,6 @@ export const PersonalClientServiceListResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(PersonalClient$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type PersonalClientServiceListResponse$Outbound = {
-  list?: Array<PersonalClient$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const PersonalClientServiceListResponse$outboundSchema: z.ZodType<
-  PersonalClientServiceListResponse$Outbound,
-  z.ZodTypeDef,
-  PersonalClientServiceListResponse
-> = z.object({
-  list: z.nullable(z.array(PersonalClient$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PersonalClientServiceListResponse$ {
-  /** @deprecated use `PersonalClientServiceListResponse$inboundSchema` instead. */
-  export const inboundSchema = PersonalClientServiceListResponse$inboundSchema;
-  /** @deprecated use `PersonalClientServiceListResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PersonalClientServiceListResponse$outboundSchema;
-  /** @deprecated use `PersonalClientServiceListResponse$Outbound` instead. */
-  export type Outbound = PersonalClientServiceListResponse$Outbound;
-}
-
-export function personalClientServiceListResponseToJSON(
-  personalClientServiceListResponse: PersonalClientServiceListResponse,
-): string {
-  return JSON.stringify(
-    PersonalClientServiceListResponse$outboundSchema.parse(
-      personalClientServiceListResponse,
-    ),
-  );
-}
 
 export function personalClientServiceListResponseFromJSON(
   jsonString: string,

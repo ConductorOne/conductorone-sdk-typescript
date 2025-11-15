@@ -25,7 +25,6 @@ export const WebhookProvision$inboundSchema: z.ZodType<
 > = z.object({
   webhookId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type WebhookProvision$Outbound = {
   webhookId?: string | null | undefined;
@@ -40,19 +39,6 @@ export const WebhookProvision$outboundSchema: z.ZodType<
   webhookId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhookProvision$ {
-  /** @deprecated use `WebhookProvision$inboundSchema` instead. */
-  export const inboundSchema = WebhookProvision$inboundSchema;
-  /** @deprecated use `WebhookProvision$outboundSchema` instead. */
-  export const outboundSchema = WebhookProvision$outboundSchema;
-  /** @deprecated use `WebhookProvision$Outbound` instead. */
-  export type Outbound = WebhookProvision$Outbound;
-}
-
 export function webhookProvisionToJSON(
   webhookProvision: WebhookProvision,
 ): string {
@@ -60,7 +46,6 @@ export function webhookProvisionToJSON(
     WebhookProvision$outboundSchema.parse(webhookProvision),
   );
 }
-
 export function webhookProvisionFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookProvision, SDKValidationError> {

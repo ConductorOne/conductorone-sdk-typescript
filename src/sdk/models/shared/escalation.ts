@@ -52,7 +52,6 @@ export const Escalation$inboundSchema: z.ZodType<
   reassignToApprovers: z.nullable(ReassignToApprovers$inboundSchema).optional(),
   replacePolicy: z.nullable(ReplacePolicy$inboundSchema).optional(),
 });
-
 /** @internal */
 export type Escalation$Outbound = {
   escalationComment?: string | null | undefined;
@@ -74,23 +73,9 @@ export const Escalation$outboundSchema: z.ZodType<
   replacePolicy: z.nullable(ReplacePolicy$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Escalation$ {
-  /** @deprecated use `Escalation$inboundSchema` instead. */
-  export const inboundSchema = Escalation$inboundSchema;
-  /** @deprecated use `Escalation$outboundSchema` instead. */
-  export const outboundSchema = Escalation$outboundSchema;
-  /** @deprecated use `Escalation$Outbound` instead. */
-  export type Outbound = Escalation$Outbound;
-}
-
 export function escalationToJSON(escalation: Escalation): string {
   return JSON.stringify(Escalation$outboundSchema.parse(escalation));
 }
-
 export function escalationFromJSON(
   jsonString: string,
 ): SafeParseResult<Escalation, SDKValidationError> {

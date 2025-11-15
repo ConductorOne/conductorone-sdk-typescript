@@ -41,47 +41,6 @@ export const TaskAuditWebhookAttempt$inboundSchema: z.ZodType<
   webhookUrl: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditWebhookAttempt$Outbound = {
-  webhookId?: string | null | undefined;
-  webhookInstanceId?: string | null | undefined;
-  webhookName?: string | null | undefined;
-  webhookUrl?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditWebhookAttempt$outboundSchema: z.ZodType<
-  TaskAuditWebhookAttempt$Outbound,
-  z.ZodTypeDef,
-  TaskAuditWebhookAttempt
-> = z.object({
-  webhookId: z.nullable(z.string()).optional(),
-  webhookInstanceId: z.nullable(z.string()).optional(),
-  webhookName: z.nullable(z.string()).optional(),
-  webhookUrl: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditWebhookAttempt$ {
-  /** @deprecated use `TaskAuditWebhookAttempt$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditWebhookAttempt$inboundSchema;
-  /** @deprecated use `TaskAuditWebhookAttempt$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditWebhookAttempt$outboundSchema;
-  /** @deprecated use `TaskAuditWebhookAttempt$Outbound` instead. */
-  export type Outbound = TaskAuditWebhookAttempt$Outbound;
-}
-
-export function taskAuditWebhookAttemptToJSON(
-  taskAuditWebhookAttempt: TaskAuditWebhookAttempt,
-): string {
-  return JSON.stringify(
-    TaskAuditWebhookAttempt$outboundSchema.parse(taskAuditWebhookAttempt),
-  );
-}
-
 export function taskAuditWebhookAttemptFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditWebhookAttempt, SDKValidationError> {

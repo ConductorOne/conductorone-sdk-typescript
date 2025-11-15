@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The FunctionsServiceDeleteFunctionRequest message.
  */
 export type FunctionsServiceDeleteFunctionRequest = {};
-
-/** @internal */
-export const FunctionsServiceDeleteFunctionRequest$inboundSchema: z.ZodType<
-  FunctionsServiceDeleteFunctionRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type FunctionsServiceDeleteFunctionRequest$Outbound = {};
@@ -29,21 +19,6 @@ export const FunctionsServiceDeleteFunctionRequest$outboundSchema: z.ZodType<
   FunctionsServiceDeleteFunctionRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionsServiceDeleteFunctionRequest$ {
-  /** @deprecated use `FunctionsServiceDeleteFunctionRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    FunctionsServiceDeleteFunctionRequest$inboundSchema;
-  /** @deprecated use `FunctionsServiceDeleteFunctionRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    FunctionsServiceDeleteFunctionRequest$outboundSchema;
-  /** @deprecated use `FunctionsServiceDeleteFunctionRequest$Outbound` instead. */
-  export type Outbound = FunctionsServiceDeleteFunctionRequest$Outbound;
-}
-
 export function functionsServiceDeleteFunctionRequestToJSON(
   functionsServiceDeleteFunctionRequest: FunctionsServiceDeleteFunctionRequest,
 ): string {
@@ -51,16 +26,5 @@ export function functionsServiceDeleteFunctionRequestToJSON(
     FunctionsServiceDeleteFunctionRequest$outboundSchema.parse(
       functionsServiceDeleteFunctionRequest,
     ),
-  );
-}
-
-export function functionsServiceDeleteFunctionRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<FunctionsServiceDeleteFunctionRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      FunctionsServiceDeleteFunctionRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionsServiceDeleteFunctionRequest' from JSON`,
   );
 }

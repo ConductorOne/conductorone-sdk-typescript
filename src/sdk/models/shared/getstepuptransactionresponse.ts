@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   StepUpTransaction,
   StepUpTransaction$inboundSchema,
-  StepUpTransaction$Outbound,
-  StepUpTransaction$outboundSchema,
 } from "./stepuptransaction.js";
 
 /**
@@ -28,43 +26,6 @@ export const GetStepUpTransactionResponse$inboundSchema: z.ZodType<
 > = z.object({
   transaction: z.nullable(StepUpTransaction$inboundSchema).optional(),
 });
-
-/** @internal */
-export type GetStepUpTransactionResponse$Outbound = {
-  transaction?: StepUpTransaction$Outbound | null | undefined;
-};
-
-/** @internal */
-export const GetStepUpTransactionResponse$outboundSchema: z.ZodType<
-  GetStepUpTransactionResponse$Outbound,
-  z.ZodTypeDef,
-  GetStepUpTransactionResponse
-> = z.object({
-  transaction: z.nullable(StepUpTransaction$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetStepUpTransactionResponse$ {
-  /** @deprecated use `GetStepUpTransactionResponse$inboundSchema` instead. */
-  export const inboundSchema = GetStepUpTransactionResponse$inboundSchema;
-  /** @deprecated use `GetStepUpTransactionResponse$outboundSchema` instead. */
-  export const outboundSchema = GetStepUpTransactionResponse$outboundSchema;
-  /** @deprecated use `GetStepUpTransactionResponse$Outbound` instead. */
-  export type Outbound = GetStepUpTransactionResponse$Outbound;
-}
-
-export function getStepUpTransactionResponseToJSON(
-  getStepUpTransactionResponse: GetStepUpTransactionResponse,
-): string {
-  return JSON.stringify(
-    GetStepUpTransactionResponse$outboundSchema.parse(
-      getStepUpTransactionResponse,
-    ),
-  );
-}
 
 export function getStepUpTransactionResponseFromJSON(
   jsonString: string,

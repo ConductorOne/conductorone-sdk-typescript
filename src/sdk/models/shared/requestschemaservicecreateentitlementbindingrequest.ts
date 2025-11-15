@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementRef,
-  AppEntitlementRef$inboundSchema,
   AppEntitlementRef$Outbound,
   AppEntitlementRef$outboundSchema,
 } from "./appentitlementref.js";
@@ -23,17 +19,6 @@ export type RequestSchemaServiceCreateEntitlementBindingRequest = {
    */
   requestSchemaId?: string | null | undefined;
 };
-
-/** @internal */
-export const RequestSchemaServiceCreateEntitlementBindingRequest$inboundSchema:
-  z.ZodType<
-    RequestSchemaServiceCreateEntitlementBindingRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    entitlementRef: z.nullable(AppEntitlementRef$inboundSchema).optional(),
-    requestSchemaId: z.nullable(z.string()).optional(),
-  });
 
 /** @internal */
 export type RequestSchemaServiceCreateEntitlementBindingRequest$Outbound = {
@@ -52,22 +37,6 @@ export const RequestSchemaServiceCreateEntitlementBindingRequest$outboundSchema:
     requestSchemaId: z.nullable(z.string()).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestSchemaServiceCreateEntitlementBindingRequest$ {
-  /** @deprecated use `RequestSchemaServiceCreateEntitlementBindingRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestSchemaServiceCreateEntitlementBindingRequest$inboundSchema;
-  /** @deprecated use `RequestSchemaServiceCreateEntitlementBindingRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestSchemaServiceCreateEntitlementBindingRequest$outboundSchema;
-  /** @deprecated use `RequestSchemaServiceCreateEntitlementBindingRequest$Outbound` instead. */
-  export type Outbound =
-    RequestSchemaServiceCreateEntitlementBindingRequest$Outbound;
-}
-
 export function requestSchemaServiceCreateEntitlementBindingRequestToJSON(
   requestSchemaServiceCreateEntitlementBindingRequest:
     RequestSchemaServiceCreateEntitlementBindingRequest,
@@ -76,21 +45,5 @@ export function requestSchemaServiceCreateEntitlementBindingRequestToJSON(
     RequestSchemaServiceCreateEntitlementBindingRequest$outboundSchema.parse(
       requestSchemaServiceCreateEntitlementBindingRequest,
     ),
-  );
-}
-
-export function requestSchemaServiceCreateEntitlementBindingRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  RequestSchemaServiceCreateEntitlementBindingRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      RequestSchemaServiceCreateEntitlementBindingRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'RequestSchemaServiceCreateEntitlementBindingRequest' from JSON`,
   );
 }

@@ -3,18 +3,13 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   StepUpMicrosoftSettings,
-  StepUpMicrosoftSettings$inboundSchema,
   StepUpMicrosoftSettings$Outbound,
   StepUpMicrosoftSettings$outboundSchema,
 } from "./stepupmicrosoftsettings.js";
 import {
   StepUpOAuth2Settings,
-  StepUpOAuth2Settings$inboundSchema,
   StepUpOAuth2Settings$Outbound,
   StepUpOAuth2Settings$outboundSchema,
 } from "./stepupoauth2settings.js";
@@ -50,20 +45,6 @@ export type CreateStepUpProviderRequest = {
 };
 
 /** @internal */
-export const CreateStepUpProviderRequest$inboundSchema: z.ZodType<
-  CreateStepUpProviderRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  clientId: z.nullable(z.string()).optional(),
-  clientSecret: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  issuerUrl: z.nullable(z.string()).optional(),
-  microsoft: z.nullable(StepUpMicrosoftSettings$inboundSchema).optional(),
-  oauth2: z.nullable(StepUpOAuth2Settings$inboundSchema).optional(),
-});
-
-/** @internal */
 export type CreateStepUpProviderRequest$Outbound = {
   clientId?: string | null | undefined;
   clientSecret?: string | null | undefined;
@@ -87,19 +68,6 @@ export const CreateStepUpProviderRequest$outboundSchema: z.ZodType<
   oauth2: z.nullable(StepUpOAuth2Settings$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateStepUpProviderRequest$ {
-  /** @deprecated use `CreateStepUpProviderRequest$inboundSchema` instead. */
-  export const inboundSchema = CreateStepUpProviderRequest$inboundSchema;
-  /** @deprecated use `CreateStepUpProviderRequest$outboundSchema` instead. */
-  export const outboundSchema = CreateStepUpProviderRequest$outboundSchema;
-  /** @deprecated use `CreateStepUpProviderRequest$Outbound` instead. */
-  export type Outbound = CreateStepUpProviderRequest$Outbound;
-}
-
 export function createStepUpProviderRequestToJSON(
   createStepUpProviderRequest: CreateStepUpProviderRequest,
 ): string {
@@ -107,15 +75,5 @@ export function createStepUpProviderRequestToJSON(
     CreateStepUpProviderRequest$outboundSchema.parse(
       createStepUpProviderRequest,
     ),
-  );
-}
-
-export function createStepUpProviderRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateStepUpProviderRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateStepUpProviderRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateStepUpProviderRequest' from JSON`,
   );
 }

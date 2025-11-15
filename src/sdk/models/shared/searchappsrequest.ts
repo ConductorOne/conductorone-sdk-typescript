@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PolicyRef,
-  PolicyRef$inboundSchema,
   PolicyRef$Outbound,
   PolicyRef$outboundSchema,
 } from "./policyref.js";
@@ -52,22 +48,6 @@ export type SearchAppsRequest = {
 };
 
 /** @internal */
-export const SearchAppsRequest$inboundSchema: z.ZodType<
-  SearchAppsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appIds: z.nullable(z.array(z.string())).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  excludeAppIds: z.nullable(z.array(z.string())).optional(),
-  onlyDirectories: z.nullable(z.boolean()).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  policyRefs: z.nullable(z.array(PolicyRef$inboundSchema)).optional(),
-  query: z.nullable(z.string()).optional(),
-});
-
-/** @internal */
 export type SearchAppsRequest$Outbound = {
   appIds?: Array<string> | null | undefined;
   displayName?: string | null | undefined;
@@ -95,33 +75,10 @@ export const SearchAppsRequest$outboundSchema: z.ZodType<
   query: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchAppsRequest$ {
-  /** @deprecated use `SearchAppsRequest$inboundSchema` instead. */
-  export const inboundSchema = SearchAppsRequest$inboundSchema;
-  /** @deprecated use `SearchAppsRequest$outboundSchema` instead. */
-  export const outboundSchema = SearchAppsRequest$outboundSchema;
-  /** @deprecated use `SearchAppsRequest$Outbound` instead. */
-  export type Outbound = SearchAppsRequest$Outbound;
-}
-
 export function searchAppsRequestToJSON(
   searchAppsRequest: SearchAppsRequest,
 ): string {
   return JSON.stringify(
     SearchAppsRequest$outboundSchema.parse(searchAppsRequest),
-  );
-}
-
-export function searchAppsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchAppsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchAppsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchAppsRequest' from JSON`,
   );
 }

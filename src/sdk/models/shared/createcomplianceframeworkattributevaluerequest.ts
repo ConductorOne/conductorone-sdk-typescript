@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The CreateComplianceFrameworkAttributeValueRequest message.
@@ -16,16 +13,6 @@ export type CreateComplianceFrameworkAttributeValueRequest = {
    */
   value?: string | null | undefined;
 };
-
-/** @internal */
-export const CreateComplianceFrameworkAttributeValueRequest$inboundSchema:
-  z.ZodType<
-    CreateComplianceFrameworkAttributeValueRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    value: z.nullable(z.string()).optional(),
-  });
 
 /** @internal */
 export type CreateComplianceFrameworkAttributeValueRequest$Outbound = {
@@ -42,22 +29,6 @@ export const CreateComplianceFrameworkAttributeValueRequest$outboundSchema:
     value: z.nullable(z.string()).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateComplianceFrameworkAttributeValueRequest$ {
-  /** @deprecated use `CreateComplianceFrameworkAttributeValueRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateComplianceFrameworkAttributeValueRequest$inboundSchema;
-  /** @deprecated use `CreateComplianceFrameworkAttributeValueRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateComplianceFrameworkAttributeValueRequest$outboundSchema;
-  /** @deprecated use `CreateComplianceFrameworkAttributeValueRequest$Outbound` instead. */
-  export type Outbound =
-    CreateComplianceFrameworkAttributeValueRequest$Outbound;
-}
-
 export function createComplianceFrameworkAttributeValueRequestToJSON(
   createComplianceFrameworkAttributeValueRequest:
     CreateComplianceFrameworkAttributeValueRequest,
@@ -66,21 +37,5 @@ export function createComplianceFrameworkAttributeValueRequestToJSON(
     CreateComplianceFrameworkAttributeValueRequest$outboundSchema.parse(
       createComplianceFrameworkAttributeValueRequest,
     ),
-  );
-}
-
-export function createComplianceFrameworkAttributeValueRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateComplianceFrameworkAttributeValueRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateComplianceFrameworkAttributeValueRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateComplianceFrameworkAttributeValueRequest' from JSON`,
   );
 }

@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FunctionCommit,
   FunctionCommit$inboundSchema,
-  FunctionCommit$Outbound,
-  FunctionCommit$outboundSchema,
 } from "./functioncommit.js";
 
 /**
@@ -28,43 +26,6 @@ export const FunctionsServiceCommitResponse$inboundSchema: z.ZodType<
 > = z.object({
   commit: z.nullable(FunctionCommit$inboundSchema).optional(),
 });
-
-/** @internal */
-export type FunctionsServiceCommitResponse$Outbound = {
-  commit?: FunctionCommit$Outbound | null | undefined;
-};
-
-/** @internal */
-export const FunctionsServiceCommitResponse$outboundSchema: z.ZodType<
-  FunctionsServiceCommitResponse$Outbound,
-  z.ZodTypeDef,
-  FunctionsServiceCommitResponse
-> = z.object({
-  commit: z.nullable(FunctionCommit$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionsServiceCommitResponse$ {
-  /** @deprecated use `FunctionsServiceCommitResponse$inboundSchema` instead. */
-  export const inboundSchema = FunctionsServiceCommitResponse$inboundSchema;
-  /** @deprecated use `FunctionsServiceCommitResponse$outboundSchema` instead. */
-  export const outboundSchema = FunctionsServiceCommitResponse$outboundSchema;
-  /** @deprecated use `FunctionsServiceCommitResponse$Outbound` instead. */
-  export type Outbound = FunctionsServiceCommitResponse$Outbound;
-}
-
-export function functionsServiceCommitResponseToJSON(
-  functionsServiceCommitResponse: FunctionsServiceCommitResponse,
-): string {
-  return JSON.stringify(
-    FunctionsServiceCommitResponse$outboundSchema.parse(
-      functionsServiceCommitResponse,
-    ),
-  );
-}
 
 export function functionsServiceCommitResponseFromJSON(
   jsonString: string,

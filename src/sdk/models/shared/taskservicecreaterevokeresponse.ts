@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  TaskView,
-  TaskView$inboundSchema,
-  TaskView$Outbound,
-  TaskView$outboundSchema,
-} from "./taskview.js";
+import { TaskView, TaskView$inboundSchema } from "./taskview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -56,56 +51,6 @@ export const TaskServiceCreateRevokeResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type TaskServiceCreateRevokeResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const TaskServiceCreateRevokeResponseExpanded$outboundSchema: z.ZodType<
-  TaskServiceCreateRevokeResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  TaskServiceCreateRevokeResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskServiceCreateRevokeResponseExpanded$ {
-  /** @deprecated use `TaskServiceCreateRevokeResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskServiceCreateRevokeResponseExpanded$inboundSchema;
-  /** @deprecated use `TaskServiceCreateRevokeResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskServiceCreateRevokeResponseExpanded$outboundSchema;
-  /** @deprecated use `TaskServiceCreateRevokeResponseExpanded$Outbound` instead. */
-  export type Outbound = TaskServiceCreateRevokeResponseExpanded$Outbound;
-}
-
-export function taskServiceCreateRevokeResponseExpandedToJSON(
-  taskServiceCreateRevokeResponseExpanded:
-    TaskServiceCreateRevokeResponseExpanded,
-): string {
-  return JSON.stringify(
-    TaskServiceCreateRevokeResponseExpanded$outboundSchema.parse(
-      taskServiceCreateRevokeResponseExpanded,
-    ),
-  );
-}
-
 export function taskServiceCreateRevokeResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -135,52 +80,6 @@ export const TaskServiceCreateRevokeResponse$inboundSchema: z.ZodType<
   ).optional(),
   taskView: z.nullable(TaskView$inboundSchema).optional(),
 });
-
-/** @internal */
-export type TaskServiceCreateRevokeResponse$Outbound = {
-  expanded?:
-    | Array<TaskServiceCreateRevokeResponseExpanded$Outbound>
-    | null
-    | undefined;
-  taskView?: TaskView$Outbound | null | undefined;
-};
-
-/** @internal */
-export const TaskServiceCreateRevokeResponse$outboundSchema: z.ZodType<
-  TaskServiceCreateRevokeResponse$Outbound,
-  z.ZodTypeDef,
-  TaskServiceCreateRevokeResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(
-      z.lazy(() => TaskServiceCreateRevokeResponseExpanded$outboundSchema),
-    ),
-  ).optional(),
-  taskView: z.nullable(TaskView$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskServiceCreateRevokeResponse$ {
-  /** @deprecated use `TaskServiceCreateRevokeResponse$inboundSchema` instead. */
-  export const inboundSchema = TaskServiceCreateRevokeResponse$inboundSchema;
-  /** @deprecated use `TaskServiceCreateRevokeResponse$outboundSchema` instead. */
-  export const outboundSchema = TaskServiceCreateRevokeResponse$outboundSchema;
-  /** @deprecated use `TaskServiceCreateRevokeResponse$Outbound` instead. */
-  export type Outbound = TaskServiceCreateRevokeResponse$Outbound;
-}
-
-export function taskServiceCreateRevokeResponseToJSON(
-  taskServiceCreateRevokeResponse: TaskServiceCreateRevokeResponse,
-): string {
-  return JSON.stringify(
-    TaskServiceCreateRevokeResponse$outboundSchema.parse(
-      taskServiceCreateRevokeResponse,
-    ),
-  );
-}
 
 export function taskServiceCreateRevokeResponseFromJSON(
   jsonString: string,

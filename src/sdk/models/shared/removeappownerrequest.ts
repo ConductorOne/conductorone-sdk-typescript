@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * RemoveAppOwnerRequest is the request body for removing an app owner. It uses URL values for input.
  */
 export type RemoveAppOwnerRequest = {};
-
-/** @internal */
-export const RemoveAppOwnerRequest$inboundSchema: z.ZodType<
-  RemoveAppOwnerRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type RemoveAppOwnerRequest$Outbound = {};
@@ -29,33 +19,10 @@ export const RemoveAppOwnerRequest$outboundSchema: z.ZodType<
   RemoveAppOwnerRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RemoveAppOwnerRequest$ {
-  /** @deprecated use `RemoveAppOwnerRequest$inboundSchema` instead. */
-  export const inboundSchema = RemoveAppOwnerRequest$inboundSchema;
-  /** @deprecated use `RemoveAppOwnerRequest$outboundSchema` instead. */
-  export const outboundSchema = RemoveAppOwnerRequest$outboundSchema;
-  /** @deprecated use `RemoveAppOwnerRequest$Outbound` instead. */
-  export type Outbound = RemoveAppOwnerRequest$Outbound;
-}
-
 export function removeAppOwnerRequestToJSON(
   removeAppOwnerRequest: RemoveAppOwnerRequest,
 ): string {
   return JSON.stringify(
     RemoveAppOwnerRequest$outboundSchema.parse(removeAppOwnerRequest),
-  );
-}
-
-export function removeAppOwnerRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<RemoveAppOwnerRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RemoveAppOwnerRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RemoveAppOwnerRequest' from JSON`,
   );
 }

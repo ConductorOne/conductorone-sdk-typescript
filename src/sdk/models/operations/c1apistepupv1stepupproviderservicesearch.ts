@@ -51,66 +51,6 @@ export const C1ApiStepupV1StepUpProviderServiceSearchResponse$inboundSchema:
     });
   });
 
-/** @internal */
-export type C1ApiStepupV1StepUpProviderServiceSearchResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  SearchStepUpProvidersResponse?:
-    | shared.SearchStepUpProvidersResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiStepupV1StepUpProviderServiceSearchResponse$outboundSchema:
-  z.ZodType<
-    C1ApiStepupV1StepUpProviderServiceSearchResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiStepupV1StepUpProviderServiceSearchResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    searchStepUpProvidersResponse: shared
-      .SearchStepUpProvidersResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      searchStepUpProvidersResponse: "SearchStepUpProvidersResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiStepupV1StepUpProviderServiceSearchResponse$ {
-  /** @deprecated use `C1ApiStepupV1StepUpProviderServiceSearchResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiStepupV1StepUpProviderServiceSearchResponse$inboundSchema;
-  /** @deprecated use `C1ApiStepupV1StepUpProviderServiceSearchResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiStepupV1StepUpProviderServiceSearchResponse$outboundSchema;
-  /** @deprecated use `C1ApiStepupV1StepUpProviderServiceSearchResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiStepupV1StepUpProviderServiceSearchResponse$Outbound;
-}
-
-export function c1ApiStepupV1StepUpProviderServiceSearchResponseToJSON(
-  c1ApiStepupV1StepUpProviderServiceSearchResponse:
-    C1ApiStepupV1StepUpProviderServiceSearchResponse,
-): string {
-  return JSON.stringify(
-    C1ApiStepupV1StepUpProviderServiceSearchResponse$outboundSchema.parse(
-      c1ApiStepupV1StepUpProviderServiceSearchResponse,
-    ),
-  );
-}
-
 export function c1ApiStepupV1StepUpProviderServiceSearchResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

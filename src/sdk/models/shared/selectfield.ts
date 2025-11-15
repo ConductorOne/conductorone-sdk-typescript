@@ -31,7 +31,6 @@ export const SelectField$inboundSchema: z.ZodType<
 > = z.object({
   options: z.nullable(z.array(SelectOption$inboundSchema)).optional(),
 });
-
 /** @internal */
 export type SelectField$Outbound = {
   options?: Array<SelectOption$Outbound> | null | undefined;
@@ -46,23 +45,9 @@ export const SelectField$outboundSchema: z.ZodType<
   options: z.nullable(z.array(SelectOption$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SelectField$ {
-  /** @deprecated use `SelectField$inboundSchema` instead. */
-  export const inboundSchema = SelectField$inboundSchema;
-  /** @deprecated use `SelectField$outboundSchema` instead. */
-  export const outboundSchema = SelectField$outboundSchema;
-  /** @deprecated use `SelectField$Outbound` instead. */
-  export type Outbound = SelectField$Outbound;
-}
-
 export function selectFieldToJSON(selectField: SelectField): string {
   return JSON.stringify(SelectField$outboundSchema.parse(selectField));
 }
-
 export function selectFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<SelectField, SDKValidationError> {

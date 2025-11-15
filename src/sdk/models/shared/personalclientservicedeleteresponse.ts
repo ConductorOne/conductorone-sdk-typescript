@@ -19,41 +19,6 @@ export const PersonalClientServiceDeleteResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type PersonalClientServiceDeleteResponse$Outbound = {};
-
-/** @internal */
-export const PersonalClientServiceDeleteResponse$outboundSchema: z.ZodType<
-  PersonalClientServiceDeleteResponse$Outbound,
-  z.ZodTypeDef,
-  PersonalClientServiceDeleteResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PersonalClientServiceDeleteResponse$ {
-  /** @deprecated use `PersonalClientServiceDeleteResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PersonalClientServiceDeleteResponse$inboundSchema;
-  /** @deprecated use `PersonalClientServiceDeleteResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PersonalClientServiceDeleteResponse$outboundSchema;
-  /** @deprecated use `PersonalClientServiceDeleteResponse$Outbound` instead. */
-  export type Outbound = PersonalClientServiceDeleteResponse$Outbound;
-}
-
-export function personalClientServiceDeleteResponseToJSON(
-  personalClientServiceDeleteResponse: PersonalClientServiceDeleteResponse,
-): string {
-  return JSON.stringify(
-    PersonalClientServiceDeleteResponse$outboundSchema.parse(
-      personalClientServiceDeleteResponse,
-    ),
-  );
-}
-
 export function personalClientServiceDeleteResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<PersonalClientServiceDeleteResponse, SDKValidationError> {

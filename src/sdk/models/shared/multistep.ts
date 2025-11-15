@@ -33,7 +33,6 @@ export const MultiStep$inboundSchema: z.ZodType<
     z.array(z.lazy(() => ProvisionPolicy$inboundSchema)),
   ).optional(),
 });
-
 /** @internal */
 export type MultiStep$Outbound = {
   provisionSteps?: Array<ProvisionPolicy$Outbound> | null | undefined;
@@ -50,23 +49,9 @@ export const MultiStep$outboundSchema: z.ZodType<
   ).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace MultiStep$ {
-  /** @deprecated use `MultiStep$inboundSchema` instead. */
-  export const inboundSchema = MultiStep$inboundSchema;
-  /** @deprecated use `MultiStep$outboundSchema` instead. */
-  export const outboundSchema = MultiStep$outboundSchema;
-  /** @deprecated use `MultiStep$Outbound` instead. */
-  export type Outbound = MultiStep$Outbound;
-}
-
 export function multiStepToJSON(multiStep: MultiStep): string {
   return JSON.stringify(MultiStep$outboundSchema.parse(multiStep));
 }
-
 export function multiStepFromJSON(
   jsonString: string,
 ): SafeParseResult<MultiStep, SDKValidationError> {

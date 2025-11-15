@@ -55,7 +55,6 @@ export const PayloadProvisionStepExpanded$inboundSchema: z.ZodType<
     "@type": "atType",
   });
 });
-
 /** @internal */
 export type PayloadProvisionStepExpanded$Outbound = {
   "@type"?: string | undefined;
@@ -80,19 +79,6 @@ export const PayloadProvisionStepExpanded$outboundSchema: z.ZodType<
   };
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayloadProvisionStepExpanded$ {
-  /** @deprecated use `PayloadProvisionStepExpanded$inboundSchema` instead. */
-  export const inboundSchema = PayloadProvisionStepExpanded$inboundSchema;
-  /** @deprecated use `PayloadProvisionStepExpanded$outboundSchema` instead. */
-  export const outboundSchema = PayloadProvisionStepExpanded$outboundSchema;
-  /** @deprecated use `PayloadProvisionStepExpanded$Outbound` instead. */
-  export type Outbound = PayloadProvisionStepExpanded$Outbound;
-}
-
 export function payloadProvisionStepExpandedToJSON(
   payloadProvisionStepExpanded: PayloadProvisionStepExpanded,
 ): string {
@@ -102,7 +88,6 @@ export function payloadProvisionStepExpandedToJSON(
     ),
   );
 }
-
 export function payloadProvisionStepExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<PayloadProvisionStepExpanded, SDKValidationError> {
@@ -124,7 +109,6 @@ export const PayloadProvisionStep$inboundSchema: z.ZodType<
   ).optional(),
   taskView: z.nullable(TaskView$inboundSchema).optional(),
 });
-
 /** @internal */
 export type PayloadProvisionStep$Outbound = {
   expanded?: Array<PayloadProvisionStepExpanded$Outbound> | null | undefined;
@@ -143,19 +127,6 @@ export const PayloadProvisionStep$outboundSchema: z.ZodType<
   taskView: z.nullable(TaskView$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayloadProvisionStep$ {
-  /** @deprecated use `PayloadProvisionStep$inboundSchema` instead. */
-  export const inboundSchema = PayloadProvisionStep$inboundSchema;
-  /** @deprecated use `PayloadProvisionStep$outboundSchema` instead. */
-  export const outboundSchema = PayloadProvisionStep$outboundSchema;
-  /** @deprecated use `PayloadProvisionStep$Outbound` instead. */
-  export type Outbound = PayloadProvisionStep$Outbound;
-}
-
 export function payloadProvisionStepToJSON(
   payloadProvisionStep: PayloadProvisionStep,
 ): string {
@@ -163,7 +134,6 @@ export function payloadProvisionStepToJSON(
     PayloadProvisionStep$outboundSchema.parse(payloadProvisionStep),
   );
 }
-
 export function payloadProvisionStepFromJSON(
   jsonString: string,
 ): SafeParseResult<PayloadProvisionStep, SDKValidationError> {

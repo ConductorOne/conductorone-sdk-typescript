@@ -30,7 +30,6 @@ export const StepUpMicrosoftSettings$inboundSchema: z.ZodType<
   conditionalAccessIds: z.nullable(z.array(z.string())).optional(),
   tenant: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type StepUpMicrosoftSettings$Outbound = {
   conditionalAccessIds?: Array<string> | null | undefined;
@@ -47,19 +46,6 @@ export const StepUpMicrosoftSettings$outboundSchema: z.ZodType<
   tenant: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StepUpMicrosoftSettings$ {
-  /** @deprecated use `StepUpMicrosoftSettings$inboundSchema` instead. */
-  export const inboundSchema = StepUpMicrosoftSettings$inboundSchema;
-  /** @deprecated use `StepUpMicrosoftSettings$outboundSchema` instead. */
-  export const outboundSchema = StepUpMicrosoftSettings$outboundSchema;
-  /** @deprecated use `StepUpMicrosoftSettings$Outbound` instead. */
-  export type Outbound = StepUpMicrosoftSettings$Outbound;
-}
-
 export function stepUpMicrosoftSettingsToJSON(
   stepUpMicrosoftSettings: StepUpMicrosoftSettings,
 ): string {
@@ -67,7 +53,6 @@ export function stepUpMicrosoftSettingsToJSON(
     StepUpMicrosoftSettings$outboundSchema.parse(stepUpMicrosoftSettings),
   );
 }
-
 export function stepUpMicrosoftSettingsFromJSON(
   jsonString: string,
 ): SafeParseResult<StepUpMicrosoftSettings, SDKValidationError> {

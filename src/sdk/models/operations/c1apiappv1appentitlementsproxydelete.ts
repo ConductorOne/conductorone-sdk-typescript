@@ -41,29 +41,6 @@ export type C1ApiAppV1AppEntitlementsProxyDeleteResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppEntitlementsProxyDeleteRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementsProxyDeleteRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    src_app_id: z.nullable(z.string()),
-    src_app_entitlement_id: z.nullable(z.string()),
-    dst_app_id: z.nullable(z.string()),
-    dst_app_entitlement_id: z.nullable(z.string()),
-    DeleteAppEntitlementProxyRequest: shared
-      .DeleteAppEntitlementProxyRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "src_app_id": "srcAppId",
-      "src_app_entitlement_id": "srcAppEntitlementId",
-      "dst_app_id": "dstAppId",
-      "dst_app_entitlement_id": "dstAppEntitlementId",
-      "DeleteAppEntitlementProxyRequest": "deleteAppEntitlementProxyRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppEntitlementsProxyDeleteRequest$Outbound = {
   src_app_id: string | null;
   src_app_entitlement_id: string | null;
@@ -97,21 +74,6 @@ export const C1ApiAppV1AppEntitlementsProxyDeleteRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsProxyDeleteRequest$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsProxyDeleteRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsProxyDeleteRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsProxyDeleteRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsProxyDeleteRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsProxyDeleteRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppEntitlementsProxyDeleteRequest$Outbound;
-}
-
 export function c1ApiAppV1AppEntitlementsProxyDeleteRequestToJSON(
   c1ApiAppV1AppEntitlementsProxyDeleteRequest:
     C1ApiAppV1AppEntitlementsProxyDeleteRequest,
@@ -120,22 +82,6 @@ export function c1ApiAppV1AppEntitlementsProxyDeleteRequestToJSON(
     C1ApiAppV1AppEntitlementsProxyDeleteRequest$outboundSchema.parse(
       c1ApiAppV1AppEntitlementsProxyDeleteRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppEntitlementsProxyDeleteRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppEntitlementsProxyDeleteRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppEntitlementsProxyDeleteRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiAppV1AppEntitlementsProxyDeleteRequest' from JSON`,
   );
 }
 
@@ -159,65 +105,6 @@ export const C1ApiAppV1AppEntitlementsProxyDeleteResponse$inboundSchema:
       "DeleteAppEntitlementProxyResponse": "deleteAppEntitlementProxyResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppEntitlementsProxyDeleteResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  DeleteAppEntitlementProxyResponse?:
-    | shared.DeleteAppEntitlementProxyResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppEntitlementsProxyDeleteResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementsProxyDeleteResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppEntitlementsProxyDeleteResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    deleteAppEntitlementProxyResponse: shared
-      .DeleteAppEntitlementProxyResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      deleteAppEntitlementProxyResponse: "DeleteAppEntitlementProxyResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsProxyDeleteResponse$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsProxyDeleteResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsProxyDeleteResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsProxyDeleteResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsProxyDeleteResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsProxyDeleteResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppEntitlementsProxyDeleteResponse$Outbound;
-}
-
-export function c1ApiAppV1AppEntitlementsProxyDeleteResponseToJSON(
-  c1ApiAppV1AppEntitlementsProxyDeleteResponse:
-    C1ApiAppV1AppEntitlementsProxyDeleteResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppEntitlementsProxyDeleteResponse$outboundSchema.parse(
-      c1ApiAppV1AppEntitlementsProxyDeleteResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppEntitlementsProxyDeleteResponseFromJSON(
   jsonString: string,

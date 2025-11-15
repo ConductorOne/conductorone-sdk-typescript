@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -74,32 +71,7 @@ export const ReferenceStrength$inboundSchema: z.ZodType<
   ReferenceStrength,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(ReferenceStrength),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const ReferenceStrength$outboundSchema: z.ZodType<
-  ReferenceStrength,
-  z.ZodTypeDef,
-  ReferenceStrength
-> = z.union([
-  z.nativeEnum(ReferenceStrength),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ReferenceStrength$ {
-  /** @deprecated use `ReferenceStrength$inboundSchema` instead. */
-  export const inboundSchema = ReferenceStrength$inboundSchema;
-  /** @deprecated use `ReferenceStrength$outboundSchema` instead. */
-  export const outboundSchema = ReferenceStrength$outboundSchema;
-}
+> = openEnums.inboundSchema(ReferenceStrength);
 
 /** @internal */
 export const GrantReason$inboundSchema: z.ZodType<
@@ -126,56 +98,6 @@ export const GrantReason$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
-/** @internal */
-export type GrantReason$Outbound = {
-  appEntitlementId?: string | null | undefined;
-  appId?: string | null | undefined;
-  appUserId?: string | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  derivedIdData?: string | null | undefined;
-  derivedIdType?: string | null | undefined;
-  reasonExpiresAt?: string | null | undefined;
-  referenceStrength?: string | null | undefined;
-  updatedAt?: string | null | undefined;
-};
-
-/** @internal */
-export const GrantReason$outboundSchema: z.ZodType<
-  GrantReason$Outbound,
-  z.ZodTypeDef,
-  GrantReason
-> = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appUserId: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  derivedIdData: z.nullable(z.string()).optional(),
-  derivedIdType: z.nullable(z.string()).optional(),
-  reasonExpiresAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  referenceStrength: z.nullable(ReferenceStrength$outboundSchema).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GrantReason$ {
-  /** @deprecated use `GrantReason$inboundSchema` instead. */
-  export const inboundSchema = GrantReason$inboundSchema;
-  /** @deprecated use `GrantReason$outboundSchema` instead. */
-  export const outboundSchema = GrantReason$outboundSchema;
-  /** @deprecated use `GrantReason$Outbound` instead. */
-  export type Outbound = GrantReason$Outbound;
-}
-
-export function grantReasonToJSON(grantReason: GrantReason): string {
-  return JSON.stringify(GrantReason$outboundSchema.parse(grantReason));
-}
 
 export function grantReasonFromJSON(
   jsonString: string,

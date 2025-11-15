@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  App,
-  App$inboundSchema,
-  App$Outbound,
-  App$outboundSchema,
-} from "./app.js";
+import { App, App$inboundSchema } from "./app.js";
 
 /**
  * The ListAppsResponse message contains a list of results and a nextPageToken if applicable.
@@ -40,43 +35,6 @@ export const ListAppsResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(App$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ListAppsResponse$Outbound = {
-  list?: Array<App$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ListAppsResponse$outboundSchema: z.ZodType<
-  ListAppsResponse$Outbound,
-  z.ZodTypeDef,
-  ListAppsResponse
-> = z.object({
-  list: z.nullable(z.array(App$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAppsResponse$ {
-  /** @deprecated use `ListAppsResponse$inboundSchema` instead. */
-  export const inboundSchema = ListAppsResponse$inboundSchema;
-  /** @deprecated use `ListAppsResponse$outboundSchema` instead. */
-  export const outboundSchema = ListAppsResponse$outboundSchema;
-  /** @deprecated use `ListAppsResponse$Outbound` instead. */
-  export type Outbound = ListAppsResponse$Outbound;
-}
-
-export function listAppsResponseToJSON(
-  listAppsResponse: ListAppsResponse,
-): string {
-  return JSON.stringify(
-    ListAppsResponse$outboundSchema.parse(listAppsResponse),
-  );
-}
 
 export function listAppsResponseFromJSON(
   jsonString: string,

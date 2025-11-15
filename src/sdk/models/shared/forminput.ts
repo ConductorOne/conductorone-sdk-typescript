@@ -58,7 +58,6 @@ export const FormInput$inboundSchema: z.ZodType<
   fields: z.nullable(z.array(FieldInput$inboundSchema)).optional(),
   id: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type FormInput$Outbound = {
   description?: string | null | undefined;
@@ -82,23 +81,9 @@ export const FormInput$outboundSchema: z.ZodType<
   id: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FormInput$ {
-  /** @deprecated use `FormInput$inboundSchema` instead. */
-  export const inboundSchema = FormInput$inboundSchema;
-  /** @deprecated use `FormInput$outboundSchema` instead. */
-  export const outboundSchema = FormInput$outboundSchema;
-  /** @deprecated use `FormInput$Outbound` instead. */
-  export type Outbound = FormInput$Outbound;
-}
-
 export function formInputToJSON(formInput: FormInput): string {
   return JSON.stringify(FormInput$outboundSchema.parse(formInput));
 }
-
 export function formInputFromJSON(
   jsonString: string,
 ): SafeParseResult<FormInput, SDKValidationError> {

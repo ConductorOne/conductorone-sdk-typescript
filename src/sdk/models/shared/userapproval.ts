@@ -16,6 +16,10 @@ export type UserApproval = {
    */
   allowSelfApproval?: boolean | null | undefined;
   /**
+   * Configuration to require distinct approvers across approval steps of a rule.
+   */
+  requireDistinctApprovers?: boolean | undefined;
+  /**
    * Array of users configured for approval.
    */
   userIds?: Array<string> | null | undefined;
@@ -28,12 +32,13 @@ export const UserApproval$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   allowSelfApproval: z.nullable(z.boolean()).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
 });
-
 /** @internal */
 export type UserApproval$Outbound = {
   allowSelfApproval?: boolean | null | undefined;
+  requireDistinctApprovers?: boolean | undefined;
   userIds?: Array<string> | null | undefined;
 };
 
@@ -44,26 +49,13 @@ export const UserApproval$outboundSchema: z.ZodType<
   UserApproval
 > = z.object({
   allowSelfApproval: z.nullable(z.boolean()).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UserApproval$ {
-  /** @deprecated use `UserApproval$inboundSchema` instead. */
-  export const inboundSchema = UserApproval$inboundSchema;
-  /** @deprecated use `UserApproval$outboundSchema` instead. */
-  export const outboundSchema = UserApproval$outboundSchema;
-  /** @deprecated use `UserApproval$Outbound` instead. */
-  export type Outbound = UserApproval$Outbound;
-}
 
 export function userApprovalToJSON(userApproval: UserApproval): string {
   return JSON.stringify(UserApproval$outboundSchema.parse(userApproval));
 }
-
 export function userApprovalFromJSON(
   jsonString: string,
 ): SafeParseResult<UserApproval, SDKValidationError> {

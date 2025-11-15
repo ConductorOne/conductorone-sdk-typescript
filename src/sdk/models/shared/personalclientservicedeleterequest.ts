@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The PersonalClientServiceDeleteRequest message.
  */
 export type PersonalClientServiceDeleteRequest = {};
-
-/** @internal */
-export const PersonalClientServiceDeleteRequest$inboundSchema: z.ZodType<
-  PersonalClientServiceDeleteRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type PersonalClientServiceDeleteRequest$Outbound = {};
@@ -29,20 +19,6 @@ export const PersonalClientServiceDeleteRequest$outboundSchema: z.ZodType<
   PersonalClientServiceDeleteRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PersonalClientServiceDeleteRequest$ {
-  /** @deprecated use `PersonalClientServiceDeleteRequest$inboundSchema` instead. */
-  export const inboundSchema = PersonalClientServiceDeleteRequest$inboundSchema;
-  /** @deprecated use `PersonalClientServiceDeleteRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PersonalClientServiceDeleteRequest$outboundSchema;
-  /** @deprecated use `PersonalClientServiceDeleteRequest$Outbound` instead. */
-  export type Outbound = PersonalClientServiceDeleteRequest$Outbound;
-}
-
 export function personalClientServiceDeleteRequestToJSON(
   personalClientServiceDeleteRequest: PersonalClientServiceDeleteRequest,
 ): string {
@@ -50,16 +26,5 @@ export function personalClientServiceDeleteRequestToJSON(
     PersonalClientServiceDeleteRequest$outboundSchema.parse(
       personalClientServiceDeleteRequest,
     ),
-  );
-}
-
-export function personalClientServiceDeleteRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PersonalClientServiceDeleteRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PersonalClientServiceDeleteRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PersonalClientServiceDeleteRequest' from JSON`,
   );
 }

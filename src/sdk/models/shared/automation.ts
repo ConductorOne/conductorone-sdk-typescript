@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -186,32 +183,13 @@ export const PrimaryTriggerType$inboundSchema: z.ZodType<
   PrimaryTriggerType,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(PrimaryTriggerType),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(PrimaryTriggerType);
 /** @internal */
 export const PrimaryTriggerType$outboundSchema: z.ZodType<
-  PrimaryTriggerType,
+  string,
   z.ZodTypeDef,
   PrimaryTriggerType
-> = z.union([
-  z.nativeEnum(PrimaryTriggerType),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PrimaryTriggerType$ {
-  /** @deprecated use `PrimaryTriggerType$inboundSchema` instead. */
-  export const inboundSchema = PrimaryTriggerType$inboundSchema;
-  /** @deprecated use `PrimaryTriggerType$outboundSchema` instead. */
-  export const outboundSchema = PrimaryTriggerType$outboundSchema;
-}
+> = openEnums.outboundSchema(PrimaryTriggerType);
 
 /** @internal */
 export const Automation$inboundSchema: z.ZodType<
@@ -245,73 +223,6 @@ export const Automation$inboundSchema: z.ZodType<
   triggers: z.nullable(z.array(AutomationTrigger$inboundSchema)).optional(),
 });
 
-/** @internal */
-export type Automation$Outbound = {
-  appId?: string | null | undefined;
-  automationSteps?: Array<AutomationStep$Outbound> | null | undefined;
-  circuitBreaker?: DisabledReasonCircuitBreaker$Outbound | null | undefined;
-  context?: AutomationContext$Outbound | null | undefined;
-  createdAt?: string | null | undefined;
-  currentVersion?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  draftAutomationSteps?: Array<AutomationStep$Outbound> | null | undefined;
-  draftTriggers?: Array<AutomationTrigger$Outbound> | null | undefined;
-  enabled?: boolean | null | undefined;
-  id?: string | null | undefined;
-  isDraft?: boolean | null | undefined;
-  lastExecutedAt?: string | null | undefined;
-  primaryTriggerType?: string | null | undefined;
-  triggers?: Array<AutomationTrigger$Outbound> | null | undefined;
-};
-
-/** @internal */
-export const Automation$outboundSchema: z.ZodType<
-  Automation$Outbound,
-  z.ZodTypeDef,
-  Automation
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  automationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
-    .optional(),
-  circuitBreaker: z.nullable(DisabledReasonCircuitBreaker$outboundSchema)
-    .optional(),
-  context: z.nullable(AutomationContext$outboundSchema).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  currentVersion: z.nullable(z.number().int().transform(v => `${v}`))
-    .optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  draftAutomationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
-    .optional(),
-  draftTriggers: z.nullable(z.array(AutomationTrigger$outboundSchema))
-    .optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  id: z.nullable(z.string()).optional(),
-  isDraft: z.nullable(z.boolean()).optional(),
-  lastExecutedAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  primaryTriggerType: z.nullable(PrimaryTriggerType$outboundSchema).optional(),
-  triggers: z.nullable(z.array(AutomationTrigger$outboundSchema)).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Automation$ {
-  /** @deprecated use `Automation$inboundSchema` instead. */
-  export const inboundSchema = Automation$inboundSchema;
-  /** @deprecated use `Automation$outboundSchema` instead. */
-  export const outboundSchema = Automation$outboundSchema;
-  /** @deprecated use `Automation$Outbound` instead. */
-  export type Outbound = Automation$Outbound;
-}
-
-export function automationToJSON(automation: Automation): string {
-  return JSON.stringify(Automation$outboundSchema.parse(automation));
-}
-
 export function automationFromJSON(
   jsonString: string,
 ): SafeParseResult<Automation, SDKValidationError> {
@@ -321,37 +232,6 @@ export function automationFromJSON(
     `Failed to parse 'Automation' from JSON`,
   );
 }
-
-/** @internal */
-export const AutomationInput$inboundSchema: z.ZodType<
-  AutomationInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  automationSteps: z.nullable(z.array(AutomationStep$inboundSchema)).optional(),
-  circuitBreaker: z.nullable(DisabledReasonCircuitBreaker$inboundSchema)
-    .optional(),
-  context: z.nullable(AutomationContext$inboundSchema).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  currentVersion: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  draftAutomationSteps: z.nullable(z.array(AutomationStep$inboundSchema))
-    .optional(),
-  draftTriggers: z.nullable(z.array(AutomationTrigger$inboundSchema))
-    .optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  isDraft: z.nullable(z.boolean()).optional(),
-  lastExecutedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  primaryTriggerType: z.nullable(PrimaryTriggerType$inboundSchema).optional(),
-  triggers: z.nullable(z.array(AutomationTrigger$inboundSchema)).optional(),
-});
 
 /** @internal */
 export type AutomationInput$Outbound = {
@@ -401,31 +281,8 @@ export const AutomationInput$outboundSchema: z.ZodType<
   triggers: z.nullable(z.array(AutomationTrigger$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AutomationInput$ {
-  /** @deprecated use `AutomationInput$inboundSchema` instead. */
-  export const inboundSchema = AutomationInput$inboundSchema;
-  /** @deprecated use `AutomationInput$outboundSchema` instead. */
-  export const outboundSchema = AutomationInput$outboundSchema;
-  /** @deprecated use `AutomationInput$Outbound` instead. */
-  export type Outbound = AutomationInput$Outbound;
-}
-
 export function automationInputToJSON(
   automationInput: AutomationInput,
 ): string {
   return JSON.stringify(AutomationInput$outboundSchema.parse(automationInput));
-}
-
-export function automationInputFromJSON(
-  jsonString: string,
-): SafeParseResult<AutomationInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AutomationInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AutomationInput' from JSON`,
-  );
 }

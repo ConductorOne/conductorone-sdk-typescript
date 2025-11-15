@@ -34,7 +34,6 @@ export const RestartAction$inboundSchema: z.ZodType<
   ).optional(),
   userId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type RestartAction$Outbound = {
   oldPolicyStepId?: string | null | undefined;
@@ -53,23 +52,9 @@ export const RestartAction$outboundSchema: z.ZodType<
   userId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RestartAction$ {
-  /** @deprecated use `RestartAction$inboundSchema` instead. */
-  export const inboundSchema = RestartAction$inboundSchema;
-  /** @deprecated use `RestartAction$outboundSchema` instead. */
-  export const outboundSchema = RestartAction$outboundSchema;
-  /** @deprecated use `RestartAction$Outbound` instead. */
-  export type Outbound = RestartAction$Outbound;
-}
-
 export function restartActionToJSON(restartAction: RestartAction): string {
   return JSON.stringify(RestartAction$outboundSchema.parse(restartAction));
 }
-
 export function restartActionFromJSON(
   jsonString: string,
 ): SafeParseResult<RestartAction, SDKValidationError> {

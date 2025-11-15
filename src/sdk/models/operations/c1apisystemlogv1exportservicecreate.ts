@@ -49,65 +49,6 @@ export const C1ApiSystemlogV1ExportServiceCreateResponse$inboundSchema:
     });
   });
 
-/** @internal */
-export type C1ApiSystemlogV1ExportServiceCreateResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  ExportServiceCreateResponse?:
-    | shared.ExportServiceCreateResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiSystemlogV1ExportServiceCreateResponse$outboundSchema:
-  z.ZodType<
-    C1ApiSystemlogV1ExportServiceCreateResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiSystemlogV1ExportServiceCreateResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    exportServiceCreateResponse: shared
-      .ExportServiceCreateResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      exportServiceCreateResponse: "ExportServiceCreateResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiSystemlogV1ExportServiceCreateResponse$ {
-  /** @deprecated use `C1ApiSystemlogV1ExportServiceCreateResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiSystemlogV1ExportServiceCreateResponse$inboundSchema;
-  /** @deprecated use `C1ApiSystemlogV1ExportServiceCreateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiSystemlogV1ExportServiceCreateResponse$outboundSchema;
-  /** @deprecated use `C1ApiSystemlogV1ExportServiceCreateResponse$Outbound` instead. */
-  export type Outbound = C1ApiSystemlogV1ExportServiceCreateResponse$Outbound;
-}
-
-export function c1ApiSystemlogV1ExportServiceCreateResponseToJSON(
-  c1ApiSystemlogV1ExportServiceCreateResponse:
-    C1ApiSystemlogV1ExportServiceCreateResponse,
-): string {
-  return JSON.stringify(
-    C1ApiSystemlogV1ExportServiceCreateResponse$outboundSchema.parse(
-      c1ApiSystemlogV1ExportServiceCreateResponse,
-    ),
-  );
-}
-
 export function c1ApiSystemlogV1ExportServiceCreateResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

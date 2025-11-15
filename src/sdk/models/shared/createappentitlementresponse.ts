@@ -13,8 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementView,
   AppEntitlementView$inboundSchema,
-  AppEntitlementView$Outbound,
-  AppEntitlementView$outboundSchema,
 } from "./appentitlementview.js";
 
 /**
@@ -56,55 +54,6 @@ export const CreateAppEntitlementResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type CreateAppEntitlementResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const CreateAppEntitlementResponseExpanded$outboundSchema: z.ZodType<
-  CreateAppEntitlementResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  CreateAppEntitlementResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAppEntitlementResponseExpanded$ {
-  /** @deprecated use `CreateAppEntitlementResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAppEntitlementResponseExpanded$inboundSchema;
-  /** @deprecated use `CreateAppEntitlementResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAppEntitlementResponseExpanded$outboundSchema;
-  /** @deprecated use `CreateAppEntitlementResponseExpanded$Outbound` instead. */
-  export type Outbound = CreateAppEntitlementResponseExpanded$Outbound;
-}
-
-export function createAppEntitlementResponseExpandedToJSON(
-  createAppEntitlementResponseExpanded: CreateAppEntitlementResponseExpanded,
-): string {
-  return JSON.stringify(
-    CreateAppEntitlementResponseExpanded$outboundSchema.parse(
-      createAppEntitlementResponseExpanded,
-    ),
-  );
-}
-
 export function createAppEntitlementResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAppEntitlementResponseExpanded, SDKValidationError> {
@@ -127,50 +76,6 @@ export const CreateAppEntitlementResponse$inboundSchema: z.ZodType<
     z.array(z.lazy(() => CreateAppEntitlementResponseExpanded$inboundSchema)),
   ).optional(),
 });
-
-/** @internal */
-export type CreateAppEntitlementResponse$Outbound = {
-  appEntitlementView?: AppEntitlementView$Outbound | null | undefined;
-  expanded?:
-    | Array<CreateAppEntitlementResponseExpanded$Outbound>
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const CreateAppEntitlementResponse$outboundSchema: z.ZodType<
-  CreateAppEntitlementResponse$Outbound,
-  z.ZodTypeDef,
-  CreateAppEntitlementResponse
-> = z.object({
-  appEntitlementView: z.nullable(AppEntitlementView$outboundSchema).optional(),
-  expanded: z.nullable(
-    z.array(z.lazy(() => CreateAppEntitlementResponseExpanded$outboundSchema)),
-  ).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAppEntitlementResponse$ {
-  /** @deprecated use `CreateAppEntitlementResponse$inboundSchema` instead. */
-  export const inboundSchema = CreateAppEntitlementResponse$inboundSchema;
-  /** @deprecated use `CreateAppEntitlementResponse$outboundSchema` instead. */
-  export const outboundSchema = CreateAppEntitlementResponse$outboundSchema;
-  /** @deprecated use `CreateAppEntitlementResponse$Outbound` instead. */
-  export type Outbound = CreateAppEntitlementResponse$Outbound;
-}
-
-export function createAppEntitlementResponseToJSON(
-  createAppEntitlementResponse: CreateAppEntitlementResponse,
-): string {
-  return JSON.stringify(
-    CreateAppEntitlementResponse$outboundSchema.parse(
-      createAppEntitlementResponse,
-    ),
-  );
-}
 
 export function createAppEntitlementResponseFromJSON(
   jsonString: string,

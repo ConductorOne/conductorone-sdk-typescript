@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskExpandMask,
-  TaskExpandMask$inboundSchema,
   TaskExpandMask$Outbound,
   TaskExpandMask$outboundSchema,
 } from "./taskexpandmask.js";
@@ -33,18 +29,6 @@ export type TaskActionsServiceReassignRequest = {
 };
 
 /** @internal */
-export const TaskActionsServiceReassignRequest$inboundSchema: z.ZodType<
-  TaskActionsServiceReassignRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  comment: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(TaskExpandMask$inboundSchema).optional(),
-  newStepUserIds: z.nullable(z.array(z.string())).optional(),
-  policyStepId: z.nullable(z.string()).optional(),
-});
-
-/** @internal */
 export type TaskActionsServiceReassignRequest$Outbound = {
   comment?: string | null | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
@@ -64,20 +48,6 @@ export const TaskActionsServiceReassignRequest$outboundSchema: z.ZodType<
   policyStepId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceReassignRequest$ {
-  /** @deprecated use `TaskActionsServiceReassignRequest$inboundSchema` instead. */
-  export const inboundSchema = TaskActionsServiceReassignRequest$inboundSchema;
-  /** @deprecated use `TaskActionsServiceReassignRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceReassignRequest$outboundSchema;
-  /** @deprecated use `TaskActionsServiceReassignRequest$Outbound` instead. */
-  export type Outbound = TaskActionsServiceReassignRequest$Outbound;
-}
-
 export function taskActionsServiceReassignRequestToJSON(
   taskActionsServiceReassignRequest: TaskActionsServiceReassignRequest,
 ): string {
@@ -85,15 +55,5 @@ export function taskActionsServiceReassignRequestToJSON(
     TaskActionsServiceReassignRequest$outboundSchema.parse(
       taskActionsServiceReassignRequest,
     ),
-  );
-}
-
-export function taskActionsServiceReassignRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskActionsServiceReassignRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskActionsServiceReassignRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskActionsServiceReassignRequest' from JSON`,
   );
 }

@@ -26,37 +26,6 @@ export const CheckboxField1$inboundSchema: z.ZodType<
   checked: z.nullable(z.boolean()).optional(),
 });
 
-/** @internal */
-export type CheckboxField1$Outbound = {
-  checked?: boolean | null | undefined;
-};
-
-/** @internal */
-export const CheckboxField1$outboundSchema: z.ZodType<
-  CheckboxField1$Outbound,
-  z.ZodTypeDef,
-  CheckboxField1
-> = z.object({
-  checked: z.nullable(z.boolean()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CheckboxField1$ {
-  /** @deprecated use `CheckboxField1$inboundSchema` instead. */
-  export const inboundSchema = CheckboxField1$inboundSchema;
-  /** @deprecated use `CheckboxField1$outboundSchema` instead. */
-  export const outboundSchema = CheckboxField1$outboundSchema;
-  /** @deprecated use `CheckboxField1$Outbound` instead. */
-  export type Outbound = CheckboxField1$Outbound;
-}
-
-export function checkboxField1ToJSON(checkboxField1: CheckboxField1): string {
-  return JSON.stringify(CheckboxField1$outboundSchema.parse(checkboxField1));
-}
-
 export function checkboxField1FromJSON(
   jsonString: string,
 ): SafeParseResult<CheckboxField1, SDKValidationError> {
