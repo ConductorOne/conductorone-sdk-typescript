@@ -22,7 +22,6 @@ export const UserRef$inboundSchema: z.ZodType<UserRef, z.ZodTypeDef, unknown> =
   z.object({
     id: z.nullable(z.string()).optional(),
   });
-
 /** @internal */
 export type UserRef$Outbound = {
   id?: string | null | undefined;
@@ -37,23 +36,9 @@ export const UserRef$outboundSchema: z.ZodType<
   id: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UserRef$ {
-  /** @deprecated use `UserRef$inboundSchema` instead. */
-  export const inboundSchema = UserRef$inboundSchema;
-  /** @deprecated use `UserRef$outboundSchema` instead. */
-  export const outboundSchema = UserRef$outboundSchema;
-  /** @deprecated use `UserRef$Outbound` instead. */
-  export type Outbound = UserRef$Outbound;
-}
-
 export function userRefToJSON(userRef: UserRef): string {
   return JSON.stringify(UserRef$outboundSchema.parse(userRef));
 }
-
 export function userRefFromJSON(
   jsonString: string,
 ): SafeParseResult<UserRef, SDKValidationError> {

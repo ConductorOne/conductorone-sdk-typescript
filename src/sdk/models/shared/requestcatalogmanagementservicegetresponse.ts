@@ -13,8 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   RequestCatalogView,
   RequestCatalogView$inboundSchema,
-  RequestCatalogView$Outbound,
-  RequestCatalogView$outboundSchema,
 } from "./requestcatalogview.js";
 
 /**
@@ -60,58 +58,6 @@ export const RequestCatalogManagementServiceGetResponseExpanded$inboundSchema:
     });
   });
 
-/** @internal */
-export type RequestCatalogManagementServiceGetResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const RequestCatalogManagementServiceGetResponseExpanded$outboundSchema:
-  z.ZodType<
-    RequestCatalogManagementServiceGetResponseExpanded$Outbound,
-    z.ZodTypeDef,
-    RequestCatalogManagementServiceGetResponseExpanded
-  > = z.object({
-    atType: z.string().optional(),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        atType: "@type",
-        additionalProperties: null,
-      }),
-    };
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogManagementServiceGetResponseExpanded$ {
-  /** @deprecated use `RequestCatalogManagementServiceGetResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogManagementServiceGetResponseExpanded$inboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceGetResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogManagementServiceGetResponseExpanded$outboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceGetResponseExpanded$Outbound` instead. */
-  export type Outbound =
-    RequestCatalogManagementServiceGetResponseExpanded$Outbound;
-}
-
-export function requestCatalogManagementServiceGetResponseExpandedToJSON(
-  requestCatalogManagementServiceGetResponseExpanded:
-    RequestCatalogManagementServiceGetResponseExpanded,
-): string {
-  return JSON.stringify(
-    RequestCatalogManagementServiceGetResponseExpanded$outboundSchema.parse(
-      requestCatalogManagementServiceGetResponseExpanded,
-    ),
-  );
-}
-
 export function requestCatalogManagementServiceGetResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -140,57 +86,6 @@ export const RequestCatalogManagementServiceGetResponse$inboundSchema:
       requestCatalogView: z.nullable(RequestCatalogView$inboundSchema)
         .optional(),
     });
-
-/** @internal */
-export type RequestCatalogManagementServiceGetResponse$Outbound = {
-  expanded?:
-    | Array<RequestCatalogManagementServiceGetResponseExpanded$Outbound>
-    | null
-    | undefined;
-  requestCatalogView?: RequestCatalogView$Outbound | null | undefined;
-};
-
-/** @internal */
-export const RequestCatalogManagementServiceGetResponse$outboundSchema:
-  z.ZodType<
-    RequestCatalogManagementServiceGetResponse$Outbound,
-    z.ZodTypeDef,
-    RequestCatalogManagementServiceGetResponse
-  > = z.object({
-    expanded: z.nullable(
-      z.array(z.lazy(() =>
-        RequestCatalogManagementServiceGetResponseExpanded$outboundSchema
-      )),
-    ).optional(),
-    requestCatalogView: z.nullable(RequestCatalogView$outboundSchema)
-      .optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogManagementServiceGetResponse$ {
-  /** @deprecated use `RequestCatalogManagementServiceGetResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogManagementServiceGetResponse$inboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceGetResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogManagementServiceGetResponse$outboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceGetResponse$Outbound` instead. */
-  export type Outbound = RequestCatalogManagementServiceGetResponse$Outbound;
-}
-
-export function requestCatalogManagementServiceGetResponseToJSON(
-  requestCatalogManagementServiceGetResponse:
-    RequestCatalogManagementServiceGetResponse,
-): string {
-  return JSON.stringify(
-    RequestCatalogManagementServiceGetResponse$outboundSchema.parse(
-      requestCatalogManagementServiceGetResponse,
-    ),
-  );
-}
 
 export function requestCatalogManagementServiceGetResponseFromJSON(
   jsonString: string,

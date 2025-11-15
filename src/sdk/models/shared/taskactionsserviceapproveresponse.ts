@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  TaskView,
-  TaskView$inboundSchema,
-  TaskView$Outbound,
-  TaskView$outboundSchema,
-} from "./taskview.js";
+import { TaskView, TaskView$inboundSchema } from "./taskview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -63,57 +58,6 @@ export const TaskActionsServiceApproveResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type TaskActionsServiceApproveResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const TaskActionsServiceApproveResponseExpanded$outboundSchema:
-  z.ZodType<
-    TaskActionsServiceApproveResponseExpanded$Outbound,
-    z.ZodTypeDef,
-    TaskActionsServiceApproveResponseExpanded
-  > = z.object({
-    atType: z.string().optional(),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        atType: "@type",
-        additionalProperties: null,
-      }),
-    };
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceApproveResponseExpanded$ {
-  /** @deprecated use `TaskActionsServiceApproveResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskActionsServiceApproveResponseExpanded$inboundSchema;
-  /** @deprecated use `TaskActionsServiceApproveResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceApproveResponseExpanded$outboundSchema;
-  /** @deprecated use `TaskActionsServiceApproveResponseExpanded$Outbound` instead. */
-  export type Outbound = TaskActionsServiceApproveResponseExpanded$Outbound;
-}
-
-export function taskActionsServiceApproveResponseExpandedToJSON(
-  taskActionsServiceApproveResponseExpanded:
-    TaskActionsServiceApproveResponseExpanded,
-): string {
-  return JSON.stringify(
-    TaskActionsServiceApproveResponseExpanded$outboundSchema.parse(
-      taskActionsServiceApproveResponseExpanded,
-    ),
-  );
-}
-
 export function taskActionsServiceApproveResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -144,55 +88,6 @@ export const TaskActionsServiceApproveResponse$inboundSchema: z.ZodType<
   taskView: z.nullable(TaskView$inboundSchema).optional(),
   ticketActionId: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type TaskActionsServiceApproveResponse$Outbound = {
-  expanded?:
-    | Array<TaskActionsServiceApproveResponseExpanded$Outbound>
-    | null
-    | undefined;
-  taskView?: TaskView$Outbound | null | undefined;
-  ticketActionId?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskActionsServiceApproveResponse$outboundSchema: z.ZodType<
-  TaskActionsServiceApproveResponse$Outbound,
-  z.ZodTypeDef,
-  TaskActionsServiceApproveResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() =>
-      TaskActionsServiceApproveResponseExpanded$outboundSchema
-    )),
-  ).optional(),
-  taskView: z.nullable(TaskView$outboundSchema).optional(),
-  ticketActionId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceApproveResponse$ {
-  /** @deprecated use `TaskActionsServiceApproveResponse$inboundSchema` instead. */
-  export const inboundSchema = TaskActionsServiceApproveResponse$inboundSchema;
-  /** @deprecated use `TaskActionsServiceApproveResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceApproveResponse$outboundSchema;
-  /** @deprecated use `TaskActionsServiceApproveResponse$Outbound` instead. */
-  export type Outbound = TaskActionsServiceApproveResponse$Outbound;
-}
-
-export function taskActionsServiceApproveResponseToJSON(
-  taskActionsServiceApproveResponse: TaskActionsServiceApproveResponse,
-): string {
-  return JSON.stringify(
-    TaskActionsServiceApproveResponse$outboundSchema.parse(
-      taskActionsServiceApproveResponse,
-    ),
-  );
-}
 
 export function taskActionsServiceApproveResponseFromJSON(
   jsonString: string,

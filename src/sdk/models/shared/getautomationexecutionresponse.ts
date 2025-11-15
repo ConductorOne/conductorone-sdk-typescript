@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AutomationExecution,
   AutomationExecution$inboundSchema,
-  AutomationExecution$Outbound,
-  AutomationExecution$outboundSchema,
 } from "./automationexecution.js";
 
 /**
@@ -28,44 +26,6 @@ export const GetAutomationExecutionResponse$inboundSchema: z.ZodType<
 > = z.object({
   automationExecution: z.nullable(AutomationExecution$inboundSchema).optional(),
 });
-
-/** @internal */
-export type GetAutomationExecutionResponse$Outbound = {
-  automationExecution?: AutomationExecution$Outbound | null | undefined;
-};
-
-/** @internal */
-export const GetAutomationExecutionResponse$outboundSchema: z.ZodType<
-  GetAutomationExecutionResponse$Outbound,
-  z.ZodTypeDef,
-  GetAutomationExecutionResponse
-> = z.object({
-  automationExecution: z.nullable(AutomationExecution$outboundSchema)
-    .optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAutomationExecutionResponse$ {
-  /** @deprecated use `GetAutomationExecutionResponse$inboundSchema` instead. */
-  export const inboundSchema = GetAutomationExecutionResponse$inboundSchema;
-  /** @deprecated use `GetAutomationExecutionResponse$outboundSchema` instead. */
-  export const outboundSchema = GetAutomationExecutionResponse$outboundSchema;
-  /** @deprecated use `GetAutomationExecutionResponse$Outbound` instead. */
-  export type Outbound = GetAutomationExecutionResponse$Outbound;
-}
-
-export function getAutomationExecutionResponseToJSON(
-  getAutomationExecutionResponse: GetAutomationExecutionResponse,
-): string {
-  return JSON.stringify(
-    GetAutomationExecutionResponse$outboundSchema.parse(
-      getAutomationExecutionResponse,
-    ),
-  );
-}
 
 export function getAutomationExecutionResponseFromJSON(
   jsonString: string,

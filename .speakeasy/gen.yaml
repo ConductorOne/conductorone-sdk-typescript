@@ -19,13 +19,14 @@ generation:
   sdkHooksConfigAccess: true
   schemas:
     allOfMergeStrategy: shallowMerge
+  requestBodyFieldName: ""
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
   baseServerURL: ""
 typescript:
-  version: 1.1.1
+  version: 1.2.0
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies:
@@ -41,6 +42,8 @@ typescript:
     peerDependencies:
       react: ^16.0.0
   additionalPackageJSON: {}
+  additionalScripts: {}
+  alwaysIncludeInboundAndOutbound: false
   author: ConductorOne
   baseErrorName: ConductoroneSDKTypescriptError
   clientServerStatusCodesAsErrors: false
@@ -50,6 +53,7 @@ typescript:
   enableMCPServer: false
   enableReactQuery: false
   enumFormat: union
+  exportZodModelNamespace: false
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
   generateExamples: true
@@ -72,6 +76,7 @@ typescript:
   responseFormat: envelope
   sseFlatResponse: false
   templateVersion: v2
+  unionStrategy: left-to-right
   usageSDKInitImports: []
   useIndexModules: true
   zodVersion: v3

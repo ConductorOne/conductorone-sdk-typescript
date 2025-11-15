@@ -41,25 +41,6 @@ export type C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRes
   };
 
 /** @internal */
-export const C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    id: z.nullable(z.string()),
-    UpdateManuallyManagedResourceTypeRequest: shared
-      .UpdateManuallyManagedResourceTypeRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "UpdateManuallyManagedResourceTypeRequest":
-        "updateManuallyManagedResourceTypeRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequest$Outbound =
   {
     app_id: string | null;
@@ -88,22 +69,6 @@ export const C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRe
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequest$ {
-  /** @deprecated use `C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequest$Outbound;
-}
-
 export function c1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequestToJSON(
   c1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequest:
     C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequest,
@@ -113,21 +78,6 @@ export function c1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTyp
       .parse(
         c1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequest,
       ),
-  );
-}
-
-export function c1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequest' from JSON`,
   );
 }
 
@@ -152,69 +102,6 @@ export const C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRe
         "updateManuallyManagedResourceTypeResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    UpdateManuallyManagedResourceTypeResponse?:
-      | shared.UpdateManuallyManagedResourceTypeResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    updateManuallyManagedResourceTypeResponse: shared
-      .UpdateManuallyManagedResourceTypeResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      updateManuallyManagedResourceTypeResponse:
-        "UpdateManuallyManagedResourceTypeResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeResponse$ {
-  /** @deprecated use `C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeResponse$Outbound;
-}
-
-export function c1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeResponseToJSON(
-  c1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeResponse:
-    C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeResponse$outboundSchema
-      .parse(
-        c1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeResponse,
-      ),
-  );
-}
 
 export function c1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeResponseFromJSON(
   jsonString: string,

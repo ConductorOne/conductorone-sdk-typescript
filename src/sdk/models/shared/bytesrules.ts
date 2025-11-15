@@ -140,7 +140,6 @@ export const BytesRules$inboundSchema: z.ZodType<
   prefix: z.nullable(z.string()).optional(),
   suffix: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type BytesRules$Outbound = {
   const?: string | null | undefined;
@@ -181,23 +180,9 @@ export const BytesRules$outboundSchema: z.ZodType<
   suffix: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BytesRules$ {
-  /** @deprecated use `BytesRules$inboundSchema` instead. */
-  export const inboundSchema = BytesRules$inboundSchema;
-  /** @deprecated use `BytesRules$outboundSchema` instead. */
-  export const outboundSchema = BytesRules$outboundSchema;
-  /** @deprecated use `BytesRules$Outbound` instead. */
-  export type Outbound = BytesRules$Outbound;
-}
-
 export function bytesRulesToJSON(bytesRules: BytesRules): string {
   return JSON.stringify(BytesRules$outboundSchema.parse(bytesRules));
 }
-
 export function bytesRulesFromJSON(
   jsonString: string,
 ): SafeParseResult<BytesRules, SDKValidationError> {

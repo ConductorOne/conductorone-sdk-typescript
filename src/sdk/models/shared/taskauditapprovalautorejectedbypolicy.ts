@@ -19,41 +19,6 @@ export const TaskAuditApprovalAutoRejectedByPolicy$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type TaskAuditApprovalAutoRejectedByPolicy$Outbound = {};
-
-/** @internal */
-export const TaskAuditApprovalAutoRejectedByPolicy$outboundSchema: z.ZodType<
-  TaskAuditApprovalAutoRejectedByPolicy$Outbound,
-  z.ZodTypeDef,
-  TaskAuditApprovalAutoRejectedByPolicy
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditApprovalAutoRejectedByPolicy$ {
-  /** @deprecated use `TaskAuditApprovalAutoRejectedByPolicy$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskAuditApprovalAutoRejectedByPolicy$inboundSchema;
-  /** @deprecated use `TaskAuditApprovalAutoRejectedByPolicy$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskAuditApprovalAutoRejectedByPolicy$outboundSchema;
-  /** @deprecated use `TaskAuditApprovalAutoRejectedByPolicy$Outbound` instead. */
-  export type Outbound = TaskAuditApprovalAutoRejectedByPolicy$Outbound;
-}
-
-export function taskAuditApprovalAutoRejectedByPolicyToJSON(
-  taskAuditApprovalAutoRejectedByPolicy: TaskAuditApprovalAutoRejectedByPolicy,
-): string {
-  return JSON.stringify(
-    TaskAuditApprovalAutoRejectedByPolicy$outboundSchema.parse(
-      taskAuditApprovalAutoRejectedByPolicy,
-    ),
-  );
-}
-
 export function taskAuditApprovalAutoRejectedByPolicyFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditApprovalAutoRejectedByPolicy, SDKValidationError> {

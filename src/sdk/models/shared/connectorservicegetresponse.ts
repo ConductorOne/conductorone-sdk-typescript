@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  ConnectorView,
-  ConnectorView$inboundSchema,
-  ConnectorView$Outbound,
-  ConnectorView$outboundSchema,
-} from "./connectorview.js";
+import { ConnectorView, ConnectorView$inboundSchema } from "./connectorview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -56,55 +51,6 @@ export const ConnectorServiceGetResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type ConnectorServiceGetResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const ConnectorServiceGetResponseExpanded$outboundSchema: z.ZodType<
-  ConnectorServiceGetResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  ConnectorServiceGetResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorServiceGetResponseExpanded$ {
-  /** @deprecated use `ConnectorServiceGetResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    ConnectorServiceGetResponseExpanded$inboundSchema;
-  /** @deprecated use `ConnectorServiceGetResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    ConnectorServiceGetResponseExpanded$outboundSchema;
-  /** @deprecated use `ConnectorServiceGetResponseExpanded$Outbound` instead. */
-  export type Outbound = ConnectorServiceGetResponseExpanded$Outbound;
-}
-
-export function connectorServiceGetResponseExpandedToJSON(
-  connectorServiceGetResponseExpanded: ConnectorServiceGetResponseExpanded,
-): string {
-  return JSON.stringify(
-    ConnectorServiceGetResponseExpanded$outboundSchema.parse(
-      connectorServiceGetResponseExpanded,
-    ),
-  );
-}
-
 export function connectorServiceGetResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<ConnectorServiceGetResponseExpanded, SDKValidationError> {
@@ -127,50 +73,6 @@ export const ConnectorServiceGetResponse$inboundSchema: z.ZodType<
     z.array(z.lazy(() => ConnectorServiceGetResponseExpanded$inboundSchema)),
   ).optional(),
 });
-
-/** @internal */
-export type ConnectorServiceGetResponse$Outbound = {
-  connectorView?: ConnectorView$Outbound | null | undefined;
-  expanded?:
-    | Array<ConnectorServiceGetResponseExpanded$Outbound>
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const ConnectorServiceGetResponse$outboundSchema: z.ZodType<
-  ConnectorServiceGetResponse$Outbound,
-  z.ZodTypeDef,
-  ConnectorServiceGetResponse
-> = z.object({
-  connectorView: z.nullable(ConnectorView$outboundSchema).optional(),
-  expanded: z.nullable(
-    z.array(z.lazy(() => ConnectorServiceGetResponseExpanded$outboundSchema)),
-  ).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorServiceGetResponse$ {
-  /** @deprecated use `ConnectorServiceGetResponse$inboundSchema` instead. */
-  export const inboundSchema = ConnectorServiceGetResponse$inboundSchema;
-  /** @deprecated use `ConnectorServiceGetResponse$outboundSchema` instead. */
-  export const outboundSchema = ConnectorServiceGetResponse$outboundSchema;
-  /** @deprecated use `ConnectorServiceGetResponse$Outbound` instead. */
-  export type Outbound = ConnectorServiceGetResponse$Outbound;
-}
-
-export function connectorServiceGetResponseToJSON(
-  connectorServiceGetResponse: ConnectorServiceGetResponse,
-): string {
-  return JSON.stringify(
-    ConnectorServiceGetResponse$outboundSchema.parse(
-      connectorServiceGetResponse,
-    ),
-  );
-}
 
 export function connectorServiceGetResponseFromJSON(
   jsonString: string,

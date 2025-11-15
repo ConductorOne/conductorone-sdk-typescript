@@ -51,7 +51,6 @@ export const UnenrollFromAllAccessProfiles$inboundSchema: z.ZodType<
   userIdsCel: z.nullable(z.string()).optional(),
   userRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
 });
-
 /** @internal */
 export type UnenrollFromAllAccessProfiles$Outbound = {
   catalogIds?: Array<string> | null | undefined;
@@ -74,19 +73,6 @@ export const UnenrollFromAllAccessProfiles$outboundSchema: z.ZodType<
   userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UnenrollFromAllAccessProfiles$ {
-  /** @deprecated use `UnenrollFromAllAccessProfiles$inboundSchema` instead. */
-  export const inboundSchema = UnenrollFromAllAccessProfiles$inboundSchema;
-  /** @deprecated use `UnenrollFromAllAccessProfiles$outboundSchema` instead. */
-  export const outboundSchema = UnenrollFromAllAccessProfiles$outboundSchema;
-  /** @deprecated use `UnenrollFromAllAccessProfiles$Outbound` instead. */
-  export type Outbound = UnenrollFromAllAccessProfiles$Outbound;
-}
-
 export function unenrollFromAllAccessProfilesToJSON(
   unenrollFromAllAccessProfiles: UnenrollFromAllAccessProfiles,
 ): string {
@@ -96,7 +82,6 @@ export function unenrollFromAllAccessProfilesToJSON(
     ),
   );
 }
-
 export function unenrollFromAllAccessProfilesFromJSON(
   jsonString: string,
 ): SafeParseResult<UnenrollFromAllAccessProfiles, SDKValidationError> {

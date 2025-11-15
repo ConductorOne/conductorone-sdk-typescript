@@ -41,29 +41,6 @@ export type C1ApiAppV1AppEntitlementsProxyCreateResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppEntitlementsProxyCreateRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementsProxyCreateRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    src_app_id: z.nullable(z.string()),
-    src_app_entitlement_id: z.nullable(z.string()),
-    dst_app_id: z.nullable(z.string()),
-    dst_app_entitlement_id: z.nullable(z.string()),
-    CreateAppEntitlementProxyRequest: shared
-      .CreateAppEntitlementProxyRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "src_app_id": "srcAppId",
-      "src_app_entitlement_id": "srcAppEntitlementId",
-      "dst_app_id": "dstAppId",
-      "dst_app_entitlement_id": "dstAppEntitlementId",
-      "CreateAppEntitlementProxyRequest": "createAppEntitlementProxyRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppEntitlementsProxyCreateRequest$Outbound = {
   src_app_id: string | null;
   src_app_entitlement_id: string | null;
@@ -97,21 +74,6 @@ export const C1ApiAppV1AppEntitlementsProxyCreateRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsProxyCreateRequest$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsProxyCreateRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsProxyCreateRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsProxyCreateRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsProxyCreateRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsProxyCreateRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppEntitlementsProxyCreateRequest$Outbound;
-}
-
 export function c1ApiAppV1AppEntitlementsProxyCreateRequestToJSON(
   c1ApiAppV1AppEntitlementsProxyCreateRequest:
     C1ApiAppV1AppEntitlementsProxyCreateRequest,
@@ -120,22 +82,6 @@ export function c1ApiAppV1AppEntitlementsProxyCreateRequestToJSON(
     C1ApiAppV1AppEntitlementsProxyCreateRequest$outboundSchema.parse(
       c1ApiAppV1AppEntitlementsProxyCreateRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppEntitlementsProxyCreateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppEntitlementsProxyCreateRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppEntitlementsProxyCreateRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiAppV1AppEntitlementsProxyCreateRequest' from JSON`,
   );
 }
 
@@ -159,65 +105,6 @@ export const C1ApiAppV1AppEntitlementsProxyCreateResponse$inboundSchema:
       "CreateAppEntitlementProxyResponse": "createAppEntitlementProxyResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppEntitlementsProxyCreateResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  CreateAppEntitlementProxyResponse?:
-    | shared.CreateAppEntitlementProxyResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppEntitlementsProxyCreateResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementsProxyCreateResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppEntitlementsProxyCreateResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    createAppEntitlementProxyResponse: shared
-      .CreateAppEntitlementProxyResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      createAppEntitlementProxyResponse: "CreateAppEntitlementProxyResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsProxyCreateResponse$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsProxyCreateResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsProxyCreateResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsProxyCreateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsProxyCreateResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsProxyCreateResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppEntitlementsProxyCreateResponse$Outbound;
-}
-
-export function c1ApiAppV1AppEntitlementsProxyCreateResponseToJSON(
-  c1ApiAppV1AppEntitlementsProxyCreateResponse:
-    C1ApiAppV1AppEntitlementsProxyCreateResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppEntitlementsProxyCreateResponse$outboundSchema.parse(
-      c1ApiAppV1AppEntitlementsProxyCreateResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppEntitlementsProxyCreateResponseFromJSON(
   jsonString: string,

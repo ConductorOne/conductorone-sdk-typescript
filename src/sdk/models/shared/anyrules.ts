@@ -44,7 +44,6 @@ export const AnyRules$inboundSchema: z.ZodType<
   notIn: z.nullable(z.array(z.string())).optional(),
   required: z.nullable(z.boolean()).optional(),
 });
-
 /** @internal */
 export type AnyRules$Outbound = {
   in?: Array<string> | null | undefined;
@@ -63,23 +62,9 @@ export const AnyRules$outboundSchema: z.ZodType<
   required: z.nullable(z.boolean()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AnyRules$ {
-  /** @deprecated use `AnyRules$inboundSchema` instead. */
-  export const inboundSchema = AnyRules$inboundSchema;
-  /** @deprecated use `AnyRules$outboundSchema` instead. */
-  export const outboundSchema = AnyRules$outboundSchema;
-  /** @deprecated use `AnyRules$Outbound` instead. */
-  export type Outbound = AnyRules$Outbound;
-}
-
 export function anyRulesToJSON(anyRules: AnyRules): string {
   return JSON.stringify(AnyRules$outboundSchema.parse(anyRules));
 }
-
 export function anyRulesFromJSON(
   jsonString: string,
 ): SafeParseResult<AnyRules, SDKValidationError> {

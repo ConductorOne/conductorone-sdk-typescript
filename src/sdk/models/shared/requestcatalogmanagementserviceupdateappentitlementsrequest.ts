@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementRef,
-  AppEntitlementRef$inboundSchema,
   AppEntitlementRef$Outbound,
   AppEntitlementRef$outboundSchema,
 } from "./appentitlementref.js";
@@ -22,16 +18,6 @@ export type RequestCatalogManagementServiceUpdateAppEntitlementsRequest = {
    */
   appEntitlements: Array<AppEntitlementRef>;
 };
-
-/** @internal */
-export const RequestCatalogManagementServiceUpdateAppEntitlementsRequest$inboundSchema:
-  z.ZodType<
-    RequestCatalogManagementServiceUpdateAppEntitlementsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    appEntitlements: z.array(AppEntitlementRef$inboundSchema),
-  });
 
 /** @internal */
 export type RequestCatalogManagementServiceUpdateAppEntitlementsRequest$Outbound =
@@ -49,22 +35,6 @@ export const RequestCatalogManagementServiceUpdateAppEntitlementsRequest$outboun
     appEntitlements: z.array(AppEntitlementRef$outboundSchema),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogManagementServiceUpdateAppEntitlementsRequest$ {
-  /** @deprecated use `RequestCatalogManagementServiceUpdateAppEntitlementsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogManagementServiceUpdateAppEntitlementsRequest$inboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceUpdateAppEntitlementsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogManagementServiceUpdateAppEntitlementsRequest$outboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceUpdateAppEntitlementsRequest$Outbound` instead. */
-  export type Outbound =
-    RequestCatalogManagementServiceUpdateAppEntitlementsRequest$Outbound;
-}
-
 export function requestCatalogManagementServiceUpdateAppEntitlementsRequestToJSON(
   requestCatalogManagementServiceUpdateAppEntitlementsRequest:
     RequestCatalogManagementServiceUpdateAppEntitlementsRequest,
@@ -72,20 +42,5 @@ export function requestCatalogManagementServiceUpdateAppEntitlementsRequestToJSO
   return JSON.stringify(
     RequestCatalogManagementServiceUpdateAppEntitlementsRequest$outboundSchema
       .parse(requestCatalogManagementServiceUpdateAppEntitlementsRequest),
-  );
-}
-
-export function requestCatalogManagementServiceUpdateAppEntitlementsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  RequestCatalogManagementServiceUpdateAppEntitlementsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      RequestCatalogManagementServiceUpdateAppEntitlementsRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'RequestCatalogManagementServiceUpdateAppEntitlementsRequest' from JSON`,
   );
 }

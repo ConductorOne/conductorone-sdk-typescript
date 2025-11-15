@@ -34,20 +34,6 @@ export type C1ApiAppV1ConnectorServiceGetResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1ConnectorServiceGetRequest$inboundSchema: z.ZodType<
-  C1ApiAppV1ConnectorServiceGetRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  app_id: z.nullable(z.string()),
-  id: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "app_id": "appId",
-  });
-});
-
-/** @internal */
 export type C1ApiAppV1ConnectorServiceGetRequest$Outbound = {
   app_id: string | null;
   id: string | null;
@@ -67,21 +53,6 @@ export const C1ApiAppV1ConnectorServiceGetRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1ConnectorServiceGetRequest$ {
-  /** @deprecated use `C1ApiAppV1ConnectorServiceGetRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1ConnectorServiceGetRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceGetRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1ConnectorServiceGetRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceGetRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1ConnectorServiceGetRequest$Outbound;
-}
-
 export function c1ApiAppV1ConnectorServiceGetRequestToJSON(
   c1ApiAppV1ConnectorServiceGetRequest: C1ApiAppV1ConnectorServiceGetRequest,
 ): string {
@@ -89,17 +60,6 @@ export function c1ApiAppV1ConnectorServiceGetRequestToJSON(
     C1ApiAppV1ConnectorServiceGetRequest$outboundSchema.parse(
       c1ApiAppV1ConnectorServiceGetRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1ConnectorServiceGetRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<C1ApiAppV1ConnectorServiceGetRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1ConnectorServiceGetRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1ConnectorServiceGetRequest' from JSON`,
   );
 }
 
@@ -122,63 +82,6 @@ export const C1ApiAppV1ConnectorServiceGetResponse$inboundSchema: z.ZodType<
     "ConnectorServiceGetResponse": "connectorServiceGetResponse",
   });
 });
-
-/** @internal */
-export type C1ApiAppV1ConnectorServiceGetResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  ConnectorServiceGetResponse?:
-    | shared.ConnectorServiceGetResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1ConnectorServiceGetResponse$outboundSchema: z.ZodType<
-  C1ApiAppV1ConnectorServiceGetResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiAppV1ConnectorServiceGetResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  connectorServiceGetResponse: shared.ConnectorServiceGetResponse$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    connectorServiceGetResponse: "ConnectorServiceGetResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1ConnectorServiceGetResponse$ {
-  /** @deprecated use `C1ApiAppV1ConnectorServiceGetResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1ConnectorServiceGetResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceGetResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1ConnectorServiceGetResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceGetResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1ConnectorServiceGetResponse$Outbound;
-}
-
-export function c1ApiAppV1ConnectorServiceGetResponseToJSON(
-  c1ApiAppV1ConnectorServiceGetResponse: C1ApiAppV1ConnectorServiceGetResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1ConnectorServiceGetResponse$outboundSchema.parse(
-      c1ApiAppV1ConnectorServiceGetResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1ConnectorServiceGetResponseFromJSON(
   jsonString: string,

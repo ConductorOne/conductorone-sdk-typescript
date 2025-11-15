@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FunctionCommit,
   FunctionCommit$inboundSchema,
-  FunctionCommit$Outbound,
-  FunctionCommit$outboundSchema,
 } from "./functioncommit.js";
 
 /**
@@ -31,43 +29,6 @@ export const FunctionsServiceListTagsResponse$inboundSchema: z.ZodType<
 > = z.object({
   tags: z.nullable(z.record(FunctionCommit$inboundSchema)).optional(),
 });
-
-/** @internal */
-export type FunctionsServiceListTagsResponse$Outbound = {
-  tags?: { [k: string]: FunctionCommit$Outbound } | null | undefined;
-};
-
-/** @internal */
-export const FunctionsServiceListTagsResponse$outboundSchema: z.ZodType<
-  FunctionsServiceListTagsResponse$Outbound,
-  z.ZodTypeDef,
-  FunctionsServiceListTagsResponse
-> = z.object({
-  tags: z.nullable(z.record(FunctionCommit$outboundSchema)).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionsServiceListTagsResponse$ {
-  /** @deprecated use `FunctionsServiceListTagsResponse$inboundSchema` instead. */
-  export const inboundSchema = FunctionsServiceListTagsResponse$inboundSchema;
-  /** @deprecated use `FunctionsServiceListTagsResponse$outboundSchema` instead. */
-  export const outboundSchema = FunctionsServiceListTagsResponse$outboundSchema;
-  /** @deprecated use `FunctionsServiceListTagsResponse$Outbound` instead. */
-  export type Outbound = FunctionsServiceListTagsResponse$Outbound;
-}
-
-export function functionsServiceListTagsResponseToJSON(
-  functionsServiceListTagsResponse: FunctionsServiceListTagsResponse,
-): string {
-  return JSON.stringify(
-    FunctionsServiceListTagsResponse$outboundSchema.parse(
-      functionsServiceListTagsResponse,
-    ),
-  );
-}
 
 export function functionsServiceListTagsResponseFromJSON(
   jsonString: string,

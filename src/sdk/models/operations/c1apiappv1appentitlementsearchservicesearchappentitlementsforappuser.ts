@@ -40,26 +40,6 @@ export type C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUser
   };
 
 /** @internal */
-export const C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    app_user_id: z.nullable(z.string()),
-    page_size: z.nullable(z.number().int()).optional(),
-    page_token: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "app_user_id": "appUserId",
-      "page_size": "pageSize",
-      "page_token": "pageToken",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserRequest$Outbound =
   {
     app_id: string | null;
@@ -88,22 +68,6 @@ export const C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUse
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserRequest$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserRequest$Outbound;
-}
-
 export function c1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserRequestToJSON(
   c1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserRequest:
     C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserRequest,
@@ -113,21 +77,6 @@ export function c1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForApp
       .parse(
         c1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserRequest,
       ),
-  );
-}
-
-export function c1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserRequest' from JSON`,
   );
 }
 
@@ -151,68 +100,6 @@ export const C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUse
       "ListAppEntitlementsResponse": "listAppEntitlementsResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    ListAppEntitlementsResponse?:
-      | shared.ListAppEntitlementsResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    listAppEntitlementsResponse: shared
-      .ListAppEntitlementsResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      listAppEntitlementsResponse: "ListAppEntitlementsResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserResponse$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserResponse$Outbound;
-}
-
-export function c1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserResponseToJSON(
-  c1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserResponse:
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserResponse$outboundSchema
-      .parse(
-        c1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserResponse,
-      ),
-  );
-}
 
 export function c1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsForAppUserResponseFromJSON(
   jsonString: string,

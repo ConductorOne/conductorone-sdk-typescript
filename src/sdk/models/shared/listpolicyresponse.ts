@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Policy,
-  Policy$inboundSchema,
-  Policy$Outbound,
-  Policy$outboundSchema,
-} from "./policy.js";
+import { Policy, Policy$inboundSchema } from "./policy.js";
 
 /**
  * The ListPolicyResponse message.
@@ -36,43 +31,6 @@ export const ListPolicyResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(Policy$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ListPolicyResponse$Outbound = {
-  list?: Array<Policy$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ListPolicyResponse$outboundSchema: z.ZodType<
-  ListPolicyResponse$Outbound,
-  z.ZodTypeDef,
-  ListPolicyResponse
-> = z.object({
-  list: z.nullable(z.array(Policy$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListPolicyResponse$ {
-  /** @deprecated use `ListPolicyResponse$inboundSchema` instead. */
-  export const inboundSchema = ListPolicyResponse$inboundSchema;
-  /** @deprecated use `ListPolicyResponse$outboundSchema` instead. */
-  export const outboundSchema = ListPolicyResponse$outboundSchema;
-  /** @deprecated use `ListPolicyResponse$Outbound` instead. */
-  export type Outbound = ListPolicyResponse$Outbound;
-}
-
-export function listPolicyResponseToJSON(
-  listPolicyResponse: ListPolicyResponse,
-): string {
-  return JSON.stringify(
-    ListPolicyResponse$outboundSchema.parse(listPolicyResponse),
-  );
-}
 
 export function listPolicyResponseFromJSON(
   jsonString: string,

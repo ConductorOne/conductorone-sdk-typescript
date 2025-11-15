@@ -25,7 +25,6 @@ export const BoolRules$inboundSchema: z.ZodType<
 > = z.object({
   const: z.nullable(z.boolean()).optional(),
 });
-
 /** @internal */
 export type BoolRules$Outbound = {
   const?: boolean | null | undefined;
@@ -40,23 +39,9 @@ export const BoolRules$outboundSchema: z.ZodType<
   const: z.nullable(z.boolean()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BoolRules$ {
-  /** @deprecated use `BoolRules$inboundSchema` instead. */
-  export const inboundSchema = BoolRules$inboundSchema;
-  /** @deprecated use `BoolRules$outboundSchema` instead. */
-  export const outboundSchema = BoolRules$outboundSchema;
-  /** @deprecated use `BoolRules$Outbound` instead. */
-  export type Outbound = BoolRules$Outbound;
-}
-
 export function boolRulesToJSON(boolRules: BoolRules): string {
   return JSON.stringify(BoolRules$outboundSchema.parse(boolRules));
 }
-
 export function boolRulesFromJSON(
   jsonString: string,
 ): SafeParseResult<BoolRules, SDKValidationError> {

@@ -36,7 +36,6 @@ export const ResponsePolicyApprovalReplacePolicy$inboundSchema: z.ZodType<
   comment: z.nullable(z.string()).optional(),
   policySteps: z.nullable(z.array(PolicyStep$inboundSchema)).optional(),
 });
-
 /** @internal */
 export type ResponsePolicyApprovalReplacePolicy$Outbound = {
   comment?: string | null | undefined;
@@ -53,21 +52,6 @@ export const ResponsePolicyApprovalReplacePolicy$outboundSchema: z.ZodType<
   policySteps: z.nullable(z.array(PolicyStep$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponsePolicyApprovalReplacePolicy$ {
-  /** @deprecated use `ResponsePolicyApprovalReplacePolicy$inboundSchema` instead. */
-  export const inboundSchema =
-    ResponsePolicyApprovalReplacePolicy$inboundSchema;
-  /** @deprecated use `ResponsePolicyApprovalReplacePolicy$outboundSchema` instead. */
-  export const outboundSchema =
-    ResponsePolicyApprovalReplacePolicy$outboundSchema;
-  /** @deprecated use `ResponsePolicyApprovalReplacePolicy$Outbound` instead. */
-  export type Outbound = ResponsePolicyApprovalReplacePolicy$Outbound;
-}
-
 export function responsePolicyApprovalReplacePolicyToJSON(
   responsePolicyApprovalReplacePolicy: ResponsePolicyApprovalReplacePolicy,
 ): string {
@@ -77,7 +61,6 @@ export function responsePolicyApprovalReplacePolicyToJSON(
     ),
   );
 }
-
 export function responsePolicyApprovalReplacePolicyFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponsePolicyApprovalReplacePolicy, SDKValidationError> {

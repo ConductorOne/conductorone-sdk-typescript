@@ -50,68 +50,6 @@ export const C1ApiAutomationsV1AutomationSearchServiceSearchAutomationsResponse$
     });
   });
 
-/** @internal */
-export type C1ApiAutomationsV1AutomationSearchServiceSearchAutomationsResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    SearchAutomationsResponse?:
-      | shared.SearchAutomationsResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAutomationsV1AutomationSearchServiceSearchAutomationsResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAutomationsV1AutomationSearchServiceSearchAutomationsResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAutomationsV1AutomationSearchServiceSearchAutomationsResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    searchAutomationsResponse: shared.SearchAutomationsResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      searchAutomationsResponse: "SearchAutomationsResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAutomationsV1AutomationSearchServiceSearchAutomationsResponse$ {
-  /** @deprecated use `C1ApiAutomationsV1AutomationSearchServiceSearchAutomationsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAutomationsV1AutomationSearchServiceSearchAutomationsResponse$inboundSchema;
-  /** @deprecated use `C1ApiAutomationsV1AutomationSearchServiceSearchAutomationsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAutomationsV1AutomationSearchServiceSearchAutomationsResponse$outboundSchema;
-  /** @deprecated use `C1ApiAutomationsV1AutomationSearchServiceSearchAutomationsResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAutomationsV1AutomationSearchServiceSearchAutomationsResponse$Outbound;
-}
-
-export function c1ApiAutomationsV1AutomationSearchServiceSearchAutomationsResponseToJSON(
-  c1ApiAutomationsV1AutomationSearchServiceSearchAutomationsResponse:
-    C1ApiAutomationsV1AutomationSearchServiceSearchAutomationsResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAutomationsV1AutomationSearchServiceSearchAutomationsResponse$outboundSchema
-      .parse(
-        c1ApiAutomationsV1AutomationSearchServiceSearchAutomationsResponse,
-      ),
-  );
-}
-
 export function c1ApiAutomationsV1AutomationSearchServiceSearchAutomationsResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

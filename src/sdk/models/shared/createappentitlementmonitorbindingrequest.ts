@@ -3,14 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 /**
  * The entitlementGroup field.
@@ -52,54 +46,14 @@ export type CreateAppEntitlementMonitorBindingRequest = {
 };
 
 /** @internal */
-export const CreateAppEntitlementMonitorBindingRequestEntitlementGroup$inboundSchema:
-  z.ZodType<
-    CreateAppEntitlementMonitorBindingRequestEntitlementGroup,
-    z.ZodTypeDef,
-    unknown
-  > = z
-    .union([
-      z.nativeEnum(CreateAppEntitlementMonitorBindingRequestEntitlementGroup),
-      z.string().transform(catchUnrecognizedEnum),
-    ]);
-
-/** @internal */
 export const CreateAppEntitlementMonitorBindingRequestEntitlementGroup$outboundSchema:
   z.ZodType<
-    CreateAppEntitlementMonitorBindingRequestEntitlementGroup,
+    string,
     z.ZodTypeDef,
     CreateAppEntitlementMonitorBindingRequestEntitlementGroup
-  > = z.union([
-    z.nativeEnum(CreateAppEntitlementMonitorBindingRequestEntitlementGroup),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAppEntitlementMonitorBindingRequestEntitlementGroup$ {
-  /** @deprecated use `CreateAppEntitlementMonitorBindingRequestEntitlementGroup$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAppEntitlementMonitorBindingRequestEntitlementGroup$inboundSchema;
-  /** @deprecated use `CreateAppEntitlementMonitorBindingRequestEntitlementGroup$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAppEntitlementMonitorBindingRequestEntitlementGroup$outboundSchema;
-}
-
-/** @internal */
-export const CreateAppEntitlementMonitorBindingRequest$inboundSchema: z.ZodType<
-  CreateAppEntitlementMonitorBindingRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  entitlementGroup: z.nullable(
-    CreateAppEntitlementMonitorBindingRequestEntitlementGroup$inboundSchema,
-  ).optional(),
-  monitorId: z.nullable(z.string()).optional(),
-});
+  > = openEnums.outboundSchema(
+    CreateAppEntitlementMonitorBindingRequestEntitlementGroup,
+  );
 
 /** @internal */
 export type CreateAppEntitlementMonitorBindingRequest$Outbound = {
@@ -124,21 +78,6 @@ export const CreateAppEntitlementMonitorBindingRequest$outboundSchema:
     monitorId: z.nullable(z.string()).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAppEntitlementMonitorBindingRequest$ {
-  /** @deprecated use `CreateAppEntitlementMonitorBindingRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAppEntitlementMonitorBindingRequest$inboundSchema;
-  /** @deprecated use `CreateAppEntitlementMonitorBindingRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAppEntitlementMonitorBindingRequest$outboundSchema;
-  /** @deprecated use `CreateAppEntitlementMonitorBindingRequest$Outbound` instead. */
-  export type Outbound = CreateAppEntitlementMonitorBindingRequest$Outbound;
-}
-
 export function createAppEntitlementMonitorBindingRequestToJSON(
   createAppEntitlementMonitorBindingRequest:
     CreateAppEntitlementMonitorBindingRequest,
@@ -147,21 +86,5 @@ export function createAppEntitlementMonitorBindingRequestToJSON(
     CreateAppEntitlementMonitorBindingRequest$outboundSchema.parse(
       createAppEntitlementMonitorBindingRequest,
     ),
-  );
-}
-
-export function createAppEntitlementMonitorBindingRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateAppEntitlementMonitorBindingRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateAppEntitlementMonitorBindingRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateAppEntitlementMonitorBindingRequest' from JSON`,
   );
 }

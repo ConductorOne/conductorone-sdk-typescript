@@ -36,7 +36,6 @@ export const MessageRules$inboundSchema: z.ZodType<
   required: z.nullable(z.boolean()).optional(),
   skip: z.nullable(z.boolean()).optional(),
 });
-
 /** @internal */
 export type MessageRules$Outbound = {
   required?: boolean | null | undefined;
@@ -53,23 +52,9 @@ export const MessageRules$outboundSchema: z.ZodType<
   skip: z.nullable(z.boolean()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace MessageRules$ {
-  /** @deprecated use `MessageRules$inboundSchema` instead. */
-  export const inboundSchema = MessageRules$inboundSchema;
-  /** @deprecated use `MessageRules$outboundSchema` instead. */
-  export const outboundSchema = MessageRules$outboundSchema;
-  /** @deprecated use `MessageRules$Outbound` instead. */
-  export type Outbound = MessageRules$Outbound;
-}
-
 export function messageRulesToJSON(messageRules: MessageRules): string {
   return JSON.stringify(MessageRules$outboundSchema.parse(messageRules));
 }
-
 export function messageRulesFromJSON(
   jsonString: string,
 ): SafeParseResult<MessageRules, SDKValidationError> {

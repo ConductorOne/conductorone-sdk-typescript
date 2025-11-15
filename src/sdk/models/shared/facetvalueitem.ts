@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  FacetValue,
-  FacetValue$inboundSchema,
-  FacetValue$Outbound,
-  FacetValue$outboundSchema,
-} from "./facetvalue.js";
+import { FacetValue, FacetValue$inboundSchema } from "./facetvalue.js";
 
 /**
  * The FacetValueItem message.
@@ -31,37 +26,6 @@ export const FacetValueItem$inboundSchema: z.ZodType<
 > = z.object({
   values: z.nullable(z.array(FacetValue$inboundSchema)).optional(),
 });
-
-/** @internal */
-export type FacetValueItem$Outbound = {
-  values?: Array<FacetValue$Outbound> | null | undefined;
-};
-
-/** @internal */
-export const FacetValueItem$outboundSchema: z.ZodType<
-  FacetValueItem$Outbound,
-  z.ZodTypeDef,
-  FacetValueItem
-> = z.object({
-  values: z.nullable(z.array(FacetValue$outboundSchema)).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FacetValueItem$ {
-  /** @deprecated use `FacetValueItem$inboundSchema` instead. */
-  export const inboundSchema = FacetValueItem$inboundSchema;
-  /** @deprecated use `FacetValueItem$outboundSchema` instead. */
-  export const outboundSchema = FacetValueItem$outboundSchema;
-  /** @deprecated use `FacetValueItem$Outbound` instead. */
-  export type Outbound = FacetValueItem$Outbound;
-}
-
-export function facetValueItemToJSON(facetValueItem: FacetValueItem): string {
-  return JSON.stringify(FacetValueItem$outboundSchema.parse(facetValueItem));
-}
 
 export function facetValueItemFromJSON(
   jsonString: string,

@@ -19,39 +19,6 @@ export const DeleteStepUpProviderResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type DeleteStepUpProviderResponse$Outbound = {};
-
-/** @internal */
-export const DeleteStepUpProviderResponse$outboundSchema: z.ZodType<
-  DeleteStepUpProviderResponse$Outbound,
-  z.ZodTypeDef,
-  DeleteStepUpProviderResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteStepUpProviderResponse$ {
-  /** @deprecated use `DeleteStepUpProviderResponse$inboundSchema` instead. */
-  export const inboundSchema = DeleteStepUpProviderResponse$inboundSchema;
-  /** @deprecated use `DeleteStepUpProviderResponse$outboundSchema` instead. */
-  export const outboundSchema = DeleteStepUpProviderResponse$outboundSchema;
-  /** @deprecated use `DeleteStepUpProviderResponse$Outbound` instead. */
-  export type Outbound = DeleteStepUpProviderResponse$Outbound;
-}
-
-export function deleteStepUpProviderResponseToJSON(
-  deleteStepUpProviderResponse: DeleteStepUpProviderResponse,
-): string {
-  return JSON.stringify(
-    DeleteStepUpProviderResponse$outboundSchema.parse(
-      deleteStepUpProviderResponse,
-    ),
-  );
-}
-
 export function deleteStepUpProviderResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<DeleteStepUpProviderResponse, SDKValidationError> {

@@ -59,6 +59,7 @@ import { TaskAudit } from "./taskaudit.js";
 import { TaskSearch } from "./tasksearch.js";
 import { User } from "./user.js";
 import { UserSearch } from "./usersearch.js";
+import { Vault } from "./vault.js";
 import { Webhooks } from "./webhooks.js";
 import { WebhooksSearch } from "./webhookssearch.js";
 
@@ -373,6 +374,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _user?: User;
   get user(): User {
     return (this._user ??= new User(this._options));
+  }
+
+  private _vault?: Vault;
+  get vault(): Vault {
+    return (this._vault ??= new Vault(this._options));
   }
 
   private _webhooks?: Webhooks;

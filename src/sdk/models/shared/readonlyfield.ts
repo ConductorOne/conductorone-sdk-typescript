@@ -19,33 +19,6 @@ export const ReadOnlyField$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type ReadOnlyField$Outbound = {};
-
-/** @internal */
-export const ReadOnlyField$outboundSchema: z.ZodType<
-  ReadOnlyField$Outbound,
-  z.ZodTypeDef,
-  ReadOnlyField
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ReadOnlyField$ {
-  /** @deprecated use `ReadOnlyField$inboundSchema` instead. */
-  export const inboundSchema = ReadOnlyField$inboundSchema;
-  /** @deprecated use `ReadOnlyField$outboundSchema` instead. */
-  export const outboundSchema = ReadOnlyField$outboundSchema;
-  /** @deprecated use `ReadOnlyField$Outbound` instead. */
-  export type Outbound = ReadOnlyField$Outbound;
-}
-
-export function readOnlyFieldToJSON(readOnlyField: ReadOnlyField): string {
-  return JSON.stringify(ReadOnlyField$outboundSchema.parse(readOnlyField));
-}
-
 export function readOnlyFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<ReadOnlyField, SDKValidationError> {

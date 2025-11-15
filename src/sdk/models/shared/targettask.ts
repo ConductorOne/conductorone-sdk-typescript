@@ -31,39 +31,6 @@ export const TargetTask$inboundSchema: z.ZodType<
   taskId: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TargetTask$Outbound = {
-  policyStepId?: string | null | undefined;
-  taskId?: string | null | undefined;
-};
-
-/** @internal */
-export const TargetTask$outboundSchema: z.ZodType<
-  TargetTask$Outbound,
-  z.ZodTypeDef,
-  TargetTask
-> = z.object({
-  policyStepId: z.nullable(z.string()).optional(),
-  taskId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TargetTask$ {
-  /** @deprecated use `TargetTask$inboundSchema` instead. */
-  export const inboundSchema = TargetTask$inboundSchema;
-  /** @deprecated use `TargetTask$outboundSchema` instead. */
-  export const outboundSchema = TargetTask$outboundSchema;
-  /** @deprecated use `TargetTask$Outbound` instead. */
-  export type Outbound = TargetTask$Outbound;
-}
-
-export function targetTaskToJSON(targetTask: TargetTask): string {
-  return JSON.stringify(TargetTask$outboundSchema.parse(targetTask));
-}
-
 export function targetTaskFromJSON(
   jsonString: string,
 ): SafeParseResult<TargetTask, SDKValidationError> {

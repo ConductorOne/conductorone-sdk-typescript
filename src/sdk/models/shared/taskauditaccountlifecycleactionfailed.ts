@@ -51,55 +51,6 @@ export const TaskAuditAccountLifecycleActionFailed$inboundSchema: z.ZodType<
   error: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditAccountLifecycleActionFailed$Outbound = {
-  batonActionDisplayName?: string | null | undefined;
-  batonActionInvocationId?: string | null | undefined;
-  batonActionName?: string | null | undefined;
-  batonAppId?: string | null | undefined;
-  batonConnectorId?: string | null | undefined;
-  error?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditAccountLifecycleActionFailed$outboundSchema: z.ZodType<
-  TaskAuditAccountLifecycleActionFailed$Outbound,
-  z.ZodTypeDef,
-  TaskAuditAccountLifecycleActionFailed
-> = z.object({
-  batonActionDisplayName: z.nullable(z.string()).optional(),
-  batonActionInvocationId: z.nullable(z.string()).optional(),
-  batonActionName: z.nullable(z.string()).optional(),
-  batonAppId: z.nullable(z.string()).optional(),
-  batonConnectorId: z.nullable(z.string()).optional(),
-  error: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditAccountLifecycleActionFailed$ {
-  /** @deprecated use `TaskAuditAccountLifecycleActionFailed$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskAuditAccountLifecycleActionFailed$inboundSchema;
-  /** @deprecated use `TaskAuditAccountLifecycleActionFailed$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskAuditAccountLifecycleActionFailed$outboundSchema;
-  /** @deprecated use `TaskAuditAccountLifecycleActionFailed$Outbound` instead. */
-  export type Outbound = TaskAuditAccountLifecycleActionFailed$Outbound;
-}
-
-export function taskAuditAccountLifecycleActionFailedToJSON(
-  taskAuditAccountLifecycleActionFailed: TaskAuditAccountLifecycleActionFailed,
-): string {
-  return JSON.stringify(
-    TaskAuditAccountLifecycleActionFailed$outboundSchema.parse(
-      taskAuditAccountLifecycleActionFailed,
-    ),
-  );
-}
-
 export function taskAuditAccountLifecycleActionFailedFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditAccountLifecycleActionFailed, SDKValidationError> {

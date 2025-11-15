@@ -13,8 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AutomationExecutionView,
   AutomationExecutionView$inboundSchema,
-  AutomationExecutionView$Outbound,
-  AutomationExecutionView$outboundSchema,
 } from "./automationexecutionview.js";
 
 /**
@@ -64,57 +62,6 @@ export const SearchAutomationExecutionsResponseExpanded$inboundSchema:
       });
     });
 
-/** @internal */
-export type SearchAutomationExecutionsResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const SearchAutomationExecutionsResponseExpanded$outboundSchema:
-  z.ZodType<
-    SearchAutomationExecutionsResponseExpanded$Outbound,
-    z.ZodTypeDef,
-    SearchAutomationExecutionsResponseExpanded
-  > = z.object({
-    atType: z.string().optional(),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        atType: "@type",
-        additionalProperties: null,
-      }),
-    };
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchAutomationExecutionsResponseExpanded$ {
-  /** @deprecated use `SearchAutomationExecutionsResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    SearchAutomationExecutionsResponseExpanded$inboundSchema;
-  /** @deprecated use `SearchAutomationExecutionsResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchAutomationExecutionsResponseExpanded$outboundSchema;
-  /** @deprecated use `SearchAutomationExecutionsResponseExpanded$Outbound` instead. */
-  export type Outbound = SearchAutomationExecutionsResponseExpanded$Outbound;
-}
-
-export function searchAutomationExecutionsResponseExpandedToJSON(
-  searchAutomationExecutionsResponseExpanded:
-    SearchAutomationExecutionsResponseExpanded,
-): string {
-  return JSON.stringify(
-    SearchAutomationExecutionsResponseExpanded$outboundSchema.parse(
-      searchAutomationExecutionsResponseExpanded,
-    ),
-  );
-}
-
 export function searchAutomationExecutionsResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -145,55 +92,6 @@ export const SearchAutomationExecutionsResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(AutomationExecutionView$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type SearchAutomationExecutionsResponse$Outbound = {
-  expanded?:
-    | Array<SearchAutomationExecutionsResponseExpanded$Outbound>
-    | null
-    | undefined;
-  list?: Array<AutomationExecutionView$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const SearchAutomationExecutionsResponse$outboundSchema: z.ZodType<
-  SearchAutomationExecutionsResponse$Outbound,
-  z.ZodTypeDef,
-  SearchAutomationExecutionsResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() =>
-      SearchAutomationExecutionsResponseExpanded$outboundSchema
-    )),
-  ).optional(),
-  list: z.nullable(z.array(AutomationExecutionView$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchAutomationExecutionsResponse$ {
-  /** @deprecated use `SearchAutomationExecutionsResponse$inboundSchema` instead. */
-  export const inboundSchema = SearchAutomationExecutionsResponse$inboundSchema;
-  /** @deprecated use `SearchAutomationExecutionsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchAutomationExecutionsResponse$outboundSchema;
-  /** @deprecated use `SearchAutomationExecutionsResponse$Outbound` instead. */
-  export type Outbound = SearchAutomationExecutionsResponse$Outbound;
-}
-
-export function searchAutomationExecutionsResponseToJSON(
-  searchAutomationExecutionsResponse: SearchAutomationExecutionsResponse,
-): string {
-  return JSON.stringify(
-    SearchAutomationExecutionsResponse$outboundSchema.parse(
-      searchAutomationExecutionsResponse,
-    ),
-  );
-}
 
 export function searchAutomationExecutionsResponseFromJSON(
   jsonString: string,

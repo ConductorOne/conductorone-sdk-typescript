@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -47,32 +44,13 @@ export const ExternalRefSource$inboundSchema: z.ZodType<
   ExternalRefSource,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(ExternalRefSource),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(ExternalRefSource);
 /** @internal */
 export const ExternalRefSource$outboundSchema: z.ZodType<
-  ExternalRefSource,
+  string,
   z.ZodTypeDef,
   ExternalRefSource
-> = z.union([
-  z.nativeEnum(ExternalRefSource),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExternalRefSource$ {
-  /** @deprecated use `ExternalRefSource$inboundSchema` instead. */
-  export const inboundSchema = ExternalRefSource$inboundSchema;
-  /** @deprecated use `ExternalRefSource$outboundSchema` instead. */
-  export const outboundSchema = ExternalRefSource$outboundSchema;
-}
+> = openEnums.outboundSchema(ExternalRefSource);
 
 /** @internal */
 export const ExternalRef$inboundSchema: z.ZodType<
@@ -84,7 +62,6 @@ export const ExternalRef$inboundSchema: z.ZodType<
   name: z.nullable(z.string()).optional(),
   url: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type ExternalRef$Outbound = {
   externalRefSource?: string | null | undefined;
@@ -103,23 +80,9 @@ export const ExternalRef$outboundSchema: z.ZodType<
   url: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExternalRef$ {
-  /** @deprecated use `ExternalRef$inboundSchema` instead. */
-  export const inboundSchema = ExternalRef$inboundSchema;
-  /** @deprecated use `ExternalRef$outboundSchema` instead. */
-  export const outboundSchema = ExternalRef$outboundSchema;
-  /** @deprecated use `ExternalRef$Outbound` instead. */
-  export type Outbound = ExternalRef$Outbound;
-}
-
 export function externalRefToJSON(externalRef: ExternalRef): string {
   return JSON.stringify(ExternalRef$outboundSchema.parse(externalRef));
 }
-
 export function externalRefFromJSON(
   jsonString: string,
 ): SafeParseResult<ExternalRef, SDKValidationError> {

@@ -52,67 +52,6 @@ export const C1ApiTaskV1TaskServiceCreateOffboardingTaskResponse$inboundSchema:
     });
   });
 
-/** @internal */
-export type C1ApiTaskV1TaskServiceCreateOffboardingTaskResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  TaskServiceCreateOffboardingResponse?:
-    | shared.TaskServiceCreateOffboardingResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiTaskV1TaskServiceCreateOffboardingTaskResponse$outboundSchema:
-  z.ZodType<
-    C1ApiTaskV1TaskServiceCreateOffboardingTaskResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiTaskV1TaskServiceCreateOffboardingTaskResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    taskServiceCreateOffboardingResponse: shared
-      .TaskServiceCreateOffboardingResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      taskServiceCreateOffboardingResponse:
-        "TaskServiceCreateOffboardingResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskServiceCreateOffboardingTaskResponse$ {
-  /** @deprecated use `C1ApiTaskV1TaskServiceCreateOffboardingTaskResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskServiceCreateOffboardingTaskResponse$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskServiceCreateOffboardingTaskResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskServiceCreateOffboardingTaskResponse$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskServiceCreateOffboardingTaskResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiTaskV1TaskServiceCreateOffboardingTaskResponse$Outbound;
-}
-
-export function c1ApiTaskV1TaskServiceCreateOffboardingTaskResponseToJSON(
-  c1ApiTaskV1TaskServiceCreateOffboardingTaskResponse:
-    C1ApiTaskV1TaskServiceCreateOffboardingTaskResponse,
-): string {
-  return JSON.stringify(
-    C1ApiTaskV1TaskServiceCreateOffboardingTaskResponse$outboundSchema.parse(
-      c1ApiTaskV1TaskServiceCreateOffboardingTaskResponse,
-    ),
-  );
-}
-
 export function c1ApiTaskV1TaskServiceCreateOffboardingTaskResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

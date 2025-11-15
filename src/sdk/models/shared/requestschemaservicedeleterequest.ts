@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The RequestSchemaServiceDeleteRequest message.
  */
 export type RequestSchemaServiceDeleteRequest = {};
-
-/** @internal */
-export const RequestSchemaServiceDeleteRequest$inboundSchema: z.ZodType<
-  RequestSchemaServiceDeleteRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type RequestSchemaServiceDeleteRequest$Outbound = {};
@@ -29,20 +19,6 @@ export const RequestSchemaServiceDeleteRequest$outboundSchema: z.ZodType<
   RequestSchemaServiceDeleteRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestSchemaServiceDeleteRequest$ {
-  /** @deprecated use `RequestSchemaServiceDeleteRequest$inboundSchema` instead. */
-  export const inboundSchema = RequestSchemaServiceDeleteRequest$inboundSchema;
-  /** @deprecated use `RequestSchemaServiceDeleteRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestSchemaServiceDeleteRequest$outboundSchema;
-  /** @deprecated use `RequestSchemaServiceDeleteRequest$Outbound` instead. */
-  export type Outbound = RequestSchemaServiceDeleteRequest$Outbound;
-}
-
 export function requestSchemaServiceDeleteRequestToJSON(
   requestSchemaServiceDeleteRequest: RequestSchemaServiceDeleteRequest,
 ): string {
@@ -50,15 +26,5 @@ export function requestSchemaServiceDeleteRequestToJSON(
     RequestSchemaServiceDeleteRequest$outboundSchema.parse(
       requestSchemaServiceDeleteRequest,
     ),
-  );
-}
-
-export function requestSchemaServiceDeleteRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<RequestSchemaServiceDeleteRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RequestSchemaServiceDeleteRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RequestSchemaServiceDeleteRequest' from JSON`,
   );
 }

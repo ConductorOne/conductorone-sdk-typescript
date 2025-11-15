@@ -35,7 +35,6 @@ export const NumberField$inboundSchema: z.ZodType<
   minValue: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
   step: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
 });
-
 /** @internal */
 export type NumberField$Outbound = {
   maxValue?: string | null | undefined;
@@ -54,23 +53,9 @@ export const NumberField$outboundSchema: z.ZodType<
   step: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace NumberField$ {
-  /** @deprecated use `NumberField$inboundSchema` instead. */
-  export const inboundSchema = NumberField$inboundSchema;
-  /** @deprecated use `NumberField$outboundSchema` instead. */
-  export const outboundSchema = NumberField$outboundSchema;
-  /** @deprecated use `NumberField$Outbound` instead. */
-  export type Outbound = NumberField$Outbound;
-}
-
 export function numberFieldToJSON(numberField: NumberField): string {
   return JSON.stringify(NumberField$outboundSchema.parse(numberField));
 }
-
 export function numberFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<NumberField, SDKValidationError> {

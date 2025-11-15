@@ -54,7 +54,6 @@ export const StringSliceField$inboundSchema: z.ZodType<
   placeholder: z.nullable(z.string()).optional(),
   rules: z.nullable(RepeatedRules$inboundSchema).optional(),
 });
-
 /** @internal */
 export type StringSliceField$Outbound = {
   chipsField?: ChipsField$Outbound | null | undefined;
@@ -75,19 +74,6 @@ export const StringSliceField$outboundSchema: z.ZodType<
   rules: z.nullable(RepeatedRules$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StringSliceField$ {
-  /** @deprecated use `StringSliceField$inboundSchema` instead. */
-  export const inboundSchema = StringSliceField$inboundSchema;
-  /** @deprecated use `StringSliceField$outboundSchema` instead. */
-  export const outboundSchema = StringSliceField$outboundSchema;
-  /** @deprecated use `StringSliceField$Outbound` instead. */
-  export type Outbound = StringSliceField$Outbound;
-}
-
 export function stringSliceFieldToJSON(
   stringSliceField: StringSliceField,
 ): string {
@@ -95,7 +81,6 @@ export function stringSliceFieldToJSON(
     StringSliceField$outboundSchema.parse(stringSliceField),
   );
 }
-
 export function stringSliceFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<StringSliceField, SDKValidationError> {

@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * This object references a task by ID.
@@ -16,12 +13,6 @@ export type TaskRef = {
    */
   id?: string | null | undefined;
 };
-
-/** @internal */
-export const TaskRef$inboundSchema: z.ZodType<TaskRef, z.ZodTypeDef, unknown> =
-  z.object({
-    id: z.nullable(z.string()).optional(),
-  });
 
 /** @internal */
 export type TaskRef$Outbound = {
@@ -37,29 +28,6 @@ export const TaskRef$outboundSchema: z.ZodType<
   id: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskRef$ {
-  /** @deprecated use `TaskRef$inboundSchema` instead. */
-  export const inboundSchema = TaskRef$inboundSchema;
-  /** @deprecated use `TaskRef$outboundSchema` instead. */
-  export const outboundSchema = TaskRef$outboundSchema;
-  /** @deprecated use `TaskRef$Outbound` instead. */
-  export type Outbound = TaskRef$Outbound;
-}
-
 export function taskRefToJSON(taskRef: TaskRef): string {
   return JSON.stringify(TaskRef$outboundSchema.parse(taskRef));
-}
-
-export function taskRefFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskRef, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskRef$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskRef' from JSON`,
-  );
 }

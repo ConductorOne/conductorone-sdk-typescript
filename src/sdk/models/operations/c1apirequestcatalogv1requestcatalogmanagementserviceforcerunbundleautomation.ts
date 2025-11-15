@@ -40,23 +40,6 @@ export type C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAu
   };
 
 /** @internal */
-export const C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequest$inboundSchema:
-  z.ZodType<
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    request_catalog_id: z.nullable(z.string()),
-    ForceRunBundleAutomationRequest: shared
-      .ForceRunBundleAutomationRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "request_catalog_id": "requestCatalogId",
-      "ForceRunBundleAutomationRequest": "forceRunBundleAutomationRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequest$Outbound =
   {
     request_catalog_id: string | null;
@@ -82,22 +65,6 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleA
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequest$ {
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequest$inboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequest$outboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequest$Outbound;
-}
-
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequestToJSON(
   c1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequest:
     C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequest,
@@ -107,21 +74,6 @@ export function c1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBund
       .parse(
         c1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequest,
       ),
-  );
-}
-
-export function c1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequest' from JSON`,
   );
 }
 
@@ -145,68 +97,6 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleA
       "ForceRunBundleAutomationResponse": "forceRunBundleAutomationResponse",
     });
   });
-
-/** @internal */
-export type C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    ForceRunBundleAutomationResponse?:
-      | shared.ForceRunBundleAutomationResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationResponse$outboundSchema:
-  z.ZodType<
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    forceRunBundleAutomationResponse: shared
-      .ForceRunBundleAutomationResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      forceRunBundleAutomationResponse: "ForceRunBundleAutomationResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationResponse$ {
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationResponse$inboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationResponse$outboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationResponse$Outbound;
-}
-
-export function c1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationResponseToJSON(
-  c1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationResponse:
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationResponse,
-): string {
-  return JSON.stringify(
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationResponse$outboundSchema
-      .parse(
-        c1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationResponse,
-      ),
-  );
-}
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationResponseFromJSON(
   jsonString: string,

@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AttributeValue,
   AttributeValue$inboundSchema,
-  AttributeValue$Outbound,
-  AttributeValue$outboundSchema,
 } from "./attributevalue.js";
 
 /**
@@ -28,45 +26,6 @@ export const CreateRiskLevelAttributeValueResponse$inboundSchema: z.ZodType<
 > = z.object({
   value: z.nullable(AttributeValue$inboundSchema).optional(),
 });
-
-/** @internal */
-export type CreateRiskLevelAttributeValueResponse$Outbound = {
-  value?: AttributeValue$Outbound | null | undefined;
-};
-
-/** @internal */
-export const CreateRiskLevelAttributeValueResponse$outboundSchema: z.ZodType<
-  CreateRiskLevelAttributeValueResponse$Outbound,
-  z.ZodTypeDef,
-  CreateRiskLevelAttributeValueResponse
-> = z.object({
-  value: z.nullable(AttributeValue$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateRiskLevelAttributeValueResponse$ {
-  /** @deprecated use `CreateRiskLevelAttributeValueResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateRiskLevelAttributeValueResponse$inboundSchema;
-  /** @deprecated use `CreateRiskLevelAttributeValueResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateRiskLevelAttributeValueResponse$outboundSchema;
-  /** @deprecated use `CreateRiskLevelAttributeValueResponse$Outbound` instead. */
-  export type Outbound = CreateRiskLevelAttributeValueResponse$Outbound;
-}
-
-export function createRiskLevelAttributeValueResponseToJSON(
-  createRiskLevelAttributeValueResponse: CreateRiskLevelAttributeValueResponse,
-): string {
-  return JSON.stringify(
-    CreateRiskLevelAttributeValueResponse$outboundSchema.parse(
-      createRiskLevelAttributeValueResponse,
-    ),
-  );
-}
 
 export function createRiskLevelAttributeValueResponseFromJSON(
   jsonString: string,

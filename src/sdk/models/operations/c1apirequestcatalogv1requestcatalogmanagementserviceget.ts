@@ -35,16 +35,6 @@ export type C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse = {
 };
 
 /** @internal */
-export const C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest$inboundSchema:
-  z.ZodType<
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.nullable(z.string()),
-  });
-
-/** @internal */
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest$Outbound =
   {
     id: string | null;
@@ -60,22 +50,6 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest$outb
     id: z.nullable(z.string()),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest$ {
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest$inboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest$outboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest$Outbound;
-}
-
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequestToJSON(
   c1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest:
     C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest,
@@ -83,21 +57,6 @@ export function c1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequestTo
   return JSON.stringify(
     C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest$outboundSchema
       .parse(c1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest),
-  );
-}
-
-export function c1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequest' from JSON`,
   );
 }
 
@@ -122,67 +81,6 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse$inb
         "requestCatalogManagementServiceGetResponse",
     });
   });
-
-/** @internal */
-export type C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    RequestCatalogManagementServiceGetResponse?:
-      | shared.RequestCatalogManagementServiceGetResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse$outboundSchema:
-  z.ZodType<
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    requestCatalogManagementServiceGetResponse: shared
-      .RequestCatalogManagementServiceGetResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      requestCatalogManagementServiceGetResponse:
-        "RequestCatalogManagementServiceGetResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse$ {
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse$inboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse$outboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse$Outbound;
-}
-
-export function c1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponseToJSON(
-  c1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse:
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse,
-): string {
-  return JSON.stringify(
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse$outboundSchema
-      .parse(c1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponse),
-  );
-}
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceGetResponseFromJSON(
   jsonString: string,

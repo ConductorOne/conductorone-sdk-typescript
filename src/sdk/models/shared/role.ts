@@ -65,52 +65,6 @@ export const Role$inboundSchema: z.ZodType<Role, z.ZodTypeDef, unknown> = z
     ).optional(),
   });
 
-/** @internal */
-export type Role$Outbound = {
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  displayName?: string | null | undefined;
-  id?: string | null | undefined;
-  name?: string | null | undefined;
-  permissions?: Array<string> | null | undefined;
-  serviceRoles?: Array<string> | null | undefined;
-  systemApiOnly?: boolean | null | undefined;
-  systemBuiltin?: boolean | null | undefined;
-  updatedAt?: string | null | undefined;
-};
-
-/** @internal */
-export const Role$outboundSchema: z.ZodType<Role$Outbound, z.ZodTypeDef, Role> =
-  z.object({
-    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-    deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-    displayName: z.nullable(z.string()).optional(),
-    id: z.nullable(z.string()).optional(),
-    name: z.nullable(z.string()).optional(),
-    permissions: z.nullable(z.array(z.string())).optional(),
-    serviceRoles: z.nullable(z.array(z.string())).optional(),
-    systemApiOnly: z.nullable(z.boolean()).optional(),
-    systemBuiltin: z.nullable(z.boolean()).optional(),
-    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Role$ {
-  /** @deprecated use `Role$inboundSchema` instead. */
-  export const inboundSchema = Role$inboundSchema;
-  /** @deprecated use `Role$outboundSchema` instead. */
-  export const outboundSchema = Role$outboundSchema;
-  /** @deprecated use `Role$Outbound` instead. */
-  export type Outbound = Role$Outbound;
-}
-
-export function roleToJSON(role: Role): string {
-  return JSON.stringify(Role$outboundSchema.parse(role));
-}
-
 export function roleFromJSON(
   jsonString: string,
 ): SafeParseResult<Role, SDKValidationError> {

@@ -83,7 +83,6 @@ export const Fixed64Rules$inboundSchema: z.ZodType<
   lte: z.nullable(z.string()).optional(),
   notIn: z.nullable(z.array(z.string())).optional(),
 });
-
 /** @internal */
 export type Fixed64Rules$Outbound = {
   const?: string | null | undefined;
@@ -112,23 +111,9 @@ export const Fixed64Rules$outboundSchema: z.ZodType<
   notIn: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Fixed64Rules$ {
-  /** @deprecated use `Fixed64Rules$inboundSchema` instead. */
-  export const inboundSchema = Fixed64Rules$inboundSchema;
-  /** @deprecated use `Fixed64Rules$outboundSchema` instead. */
-  export const outboundSchema = Fixed64Rules$outboundSchema;
-  /** @deprecated use `Fixed64Rules$Outbound` instead. */
-  export type Outbound = Fixed64Rules$Outbound;
-}
-
 export function fixed64RulesToJSON(fixed64Rules: Fixed64Rules): string {
   return JSON.stringify(Fixed64Rules$outboundSchema.parse(fixed64Rules));
 }
-
 export function fixed64RulesFromJSON(
   jsonString: string,
 ): SafeParseResult<Fixed64Rules, SDKValidationError> {

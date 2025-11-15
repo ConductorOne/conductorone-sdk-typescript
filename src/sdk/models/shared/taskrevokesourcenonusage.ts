@@ -28,7 +28,6 @@ export const TaskRevokeSourceNonUsage$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
 /** @internal */
 export type TaskRevokeSourceNonUsage$Outbound = {
   expiresAt?: string | null | undefined;
@@ -45,19 +44,6 @@ export const TaskRevokeSourceNonUsage$outboundSchema: z.ZodType<
   lastLogin: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskRevokeSourceNonUsage$ {
-  /** @deprecated use `TaskRevokeSourceNonUsage$inboundSchema` instead. */
-  export const inboundSchema = TaskRevokeSourceNonUsage$inboundSchema;
-  /** @deprecated use `TaskRevokeSourceNonUsage$outboundSchema` instead. */
-  export const outboundSchema = TaskRevokeSourceNonUsage$outboundSchema;
-  /** @deprecated use `TaskRevokeSourceNonUsage$Outbound` instead. */
-  export type Outbound = TaskRevokeSourceNonUsage$Outbound;
-}
-
 export function taskRevokeSourceNonUsageToJSON(
   taskRevokeSourceNonUsage: TaskRevokeSourceNonUsage,
 ): string {
@@ -65,7 +51,6 @@ export function taskRevokeSourceNonUsageToJSON(
     TaskRevokeSourceNonUsage$outboundSchema.parse(taskRevokeSourceNonUsage),
   );
 }
-
 export function taskRevokeSourceNonUsageFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskRevokeSourceNonUsage, SDKValidationError> {

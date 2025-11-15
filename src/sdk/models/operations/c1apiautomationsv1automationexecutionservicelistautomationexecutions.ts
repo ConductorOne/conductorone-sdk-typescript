@@ -52,68 +52,6 @@ export const C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecution
     });
   });
 
-/** @internal */
-export type C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    ListAutomationExecutionsResponse?:
-      | shared.ListAutomationExecutionsResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    listAutomationExecutionsResponse: shared
-      .ListAutomationExecutionsResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      listAutomationExecutionsResponse: "ListAutomationExecutionsResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponse$ {
-  /** @deprecated use `C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponse$inboundSchema;
-  /** @deprecated use `C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponse$outboundSchema;
-  /** @deprecated use `C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponse$Outbound;
-}
-
-export function c1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponseToJSON(
-  c1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponse:
-    C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponse$outboundSchema
-      .parse(
-        c1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponse,
-      ),
-  );
-}
-
 export function c1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

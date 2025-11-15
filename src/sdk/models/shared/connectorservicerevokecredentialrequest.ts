@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * ConnectorServiceRevokeCredentialRequest is a request for revoking connector credentials. It uses URL values for input.
  */
 export type ConnectorServiceRevokeCredentialRequest = {};
-
-/** @internal */
-export const ConnectorServiceRevokeCredentialRequest$inboundSchema: z.ZodType<
-  ConnectorServiceRevokeCredentialRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type ConnectorServiceRevokeCredentialRequest$Outbound = {};
@@ -29,21 +19,6 @@ export const ConnectorServiceRevokeCredentialRequest$outboundSchema: z.ZodType<
   ConnectorServiceRevokeCredentialRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorServiceRevokeCredentialRequest$ {
-  /** @deprecated use `ConnectorServiceRevokeCredentialRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    ConnectorServiceRevokeCredentialRequest$inboundSchema;
-  /** @deprecated use `ConnectorServiceRevokeCredentialRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    ConnectorServiceRevokeCredentialRequest$outboundSchema;
-  /** @deprecated use `ConnectorServiceRevokeCredentialRequest$Outbound` instead. */
-  export type Outbound = ConnectorServiceRevokeCredentialRequest$Outbound;
-}
-
 export function connectorServiceRevokeCredentialRequestToJSON(
   connectorServiceRevokeCredentialRequest:
     ConnectorServiceRevokeCredentialRequest,
@@ -52,21 +27,5 @@ export function connectorServiceRevokeCredentialRequestToJSON(
     ConnectorServiceRevokeCredentialRequest$outboundSchema.parse(
       connectorServiceRevokeCredentialRequest,
     ),
-  );
-}
-
-export function connectorServiceRevokeCredentialRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  ConnectorServiceRevokeCredentialRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ConnectorServiceRevokeCredentialRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'ConnectorServiceRevokeCredentialRequest' from JSON`,
   );
 }

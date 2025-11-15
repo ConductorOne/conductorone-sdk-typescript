@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementRef,
-  AppEntitlementRef$inboundSchema,
   AppEntitlementRef$Outbound,
   AppEntitlementRef$outboundSchema,
 } from "./appentitlementref.js";
@@ -24,15 +20,6 @@ export type ForceRunBundleAutomationRequest = {
 };
 
 /** @internal */
-export const ForceRunBundleAutomationRequest$inboundSchema: z.ZodType<
-  ForceRunBundleAutomationRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  refs: z.nullable(z.array(AppEntitlementRef$inboundSchema)).optional(),
-});
-
-/** @internal */
 export type ForceRunBundleAutomationRequest$Outbound = {
   refs?: Array<AppEntitlementRef$Outbound> | null | undefined;
 };
@@ -46,19 +33,6 @@ export const ForceRunBundleAutomationRequest$outboundSchema: z.ZodType<
   refs: z.nullable(z.array(AppEntitlementRef$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ForceRunBundleAutomationRequest$ {
-  /** @deprecated use `ForceRunBundleAutomationRequest$inboundSchema` instead. */
-  export const inboundSchema = ForceRunBundleAutomationRequest$inboundSchema;
-  /** @deprecated use `ForceRunBundleAutomationRequest$outboundSchema` instead. */
-  export const outboundSchema = ForceRunBundleAutomationRequest$outboundSchema;
-  /** @deprecated use `ForceRunBundleAutomationRequest$Outbound` instead. */
-  export type Outbound = ForceRunBundleAutomationRequest$Outbound;
-}
-
 export function forceRunBundleAutomationRequestToJSON(
   forceRunBundleAutomationRequest: ForceRunBundleAutomationRequest,
 ): string {
@@ -66,15 +40,5 @@ export function forceRunBundleAutomationRequestToJSON(
     ForceRunBundleAutomationRequest$outboundSchema.parse(
       forceRunBundleAutomationRequest,
     ),
-  );
-}
-
-export function forceRunBundleAutomationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ForceRunBundleAutomationRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ForceRunBundleAutomationRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ForceRunBundleAutomationRequest' from JSON`,
   );
 }

@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -57,32 +54,7 @@ export const EventType$inboundSchema: z.ZodType<
   EventType,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(EventType),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const EventType$outboundSchema: z.ZodType<
-  EventType,
-  z.ZodTypeDef,
-  EventType
-> = z.union([
-  z.nativeEnum(EventType),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EventType$ {
-  /** @deprecated use `EventType$inboundSchema` instead. */
-  export const inboundSchema = EventType$inboundSchema;
-  /** @deprecated use `EventType$outboundSchema` instead. */
-  export const outboundSchema = EventType$outboundSchema;
-}
+> = openEnums.inboundSchema(EventType);
 
 /** @internal */
 export const AppEntitlementUserBindingFeed$inboundSchema: z.ZodType<
@@ -99,53 +71,6 @@ export const AppEntitlementUserBindingFeed$inboundSchema: z.ZodType<
   eventType: z.nullable(EventType$inboundSchema).optional(),
   ticketId: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type AppEntitlementUserBindingFeed$Outbound = {
-  appEntitlementId?: string | null | undefined;
-  appId?: string | null | undefined;
-  appUserId?: string | null | undefined;
-  date?: string | null | undefined;
-  eventType?: string | null | undefined;
-  ticketId?: string | null | undefined;
-};
-
-/** @internal */
-export const AppEntitlementUserBindingFeed$outboundSchema: z.ZodType<
-  AppEntitlementUserBindingFeed$Outbound,
-  z.ZodTypeDef,
-  AppEntitlementUserBindingFeed
-> = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appUserId: z.nullable(z.string()).optional(),
-  date: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  eventType: z.nullable(EventType$outboundSchema).optional(),
-  ticketId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementUserBindingFeed$ {
-  /** @deprecated use `AppEntitlementUserBindingFeed$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementUserBindingFeed$inboundSchema;
-  /** @deprecated use `AppEntitlementUserBindingFeed$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlementUserBindingFeed$outboundSchema;
-  /** @deprecated use `AppEntitlementUserBindingFeed$Outbound` instead. */
-  export type Outbound = AppEntitlementUserBindingFeed$Outbound;
-}
-
-export function appEntitlementUserBindingFeedToJSON(
-  appEntitlementUserBindingFeed: AppEntitlementUserBindingFeed,
-): string {
-  return JSON.stringify(
-    AppEntitlementUserBindingFeed$outboundSchema.parse(
-      appEntitlementUserBindingFeed,
-    ),
-  );
-}
 
 export function appEntitlementUserBindingFeedFromJSON(
   jsonString: string,

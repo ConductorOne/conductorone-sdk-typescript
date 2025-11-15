@@ -45,7 +45,6 @@ export const RequestSchema$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
 /** @internal */
 export type RequestSchema$Outbound = {
   createdAt?: string | null | undefined;
@@ -68,23 +67,9 @@ export const RequestSchema$outboundSchema: z.ZodType<
   modifiedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestSchema$ {
-  /** @deprecated use `RequestSchema$inboundSchema` instead. */
-  export const inboundSchema = RequestSchema$inboundSchema;
-  /** @deprecated use `RequestSchema$outboundSchema` instead. */
-  export const outboundSchema = RequestSchema$outboundSchema;
-  /** @deprecated use `RequestSchema$Outbound` instead. */
-  export type Outbound = RequestSchema$Outbound;
-}
-
 export function requestSchemaToJSON(requestSchema: RequestSchema): string {
   return JSON.stringify(RequestSchema$outboundSchema.parse(requestSchema));
 }
-
 export function requestSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<RequestSchema, SDKValidationError> {

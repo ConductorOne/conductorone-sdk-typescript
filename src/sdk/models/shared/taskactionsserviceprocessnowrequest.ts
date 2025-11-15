@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskExpandMask,
-  TaskExpandMask$inboundSchema,
   TaskExpandMask$Outbound,
   TaskExpandMask$outboundSchema,
 } from "./taskexpandmask.js";
@@ -19,15 +15,6 @@ import {
 export type TaskActionsServiceProcessNowRequest = {
   expandMask?: TaskExpandMask | null | undefined;
 };
-
-/** @internal */
-export const TaskActionsServiceProcessNowRequest$inboundSchema: z.ZodType<
-  TaskActionsServiceProcessNowRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  expandMask: z.nullable(TaskExpandMask$inboundSchema).optional(),
-});
 
 /** @internal */
 export type TaskActionsServiceProcessNowRequest$Outbound = {
@@ -43,21 +30,6 @@ export const TaskActionsServiceProcessNowRequest$outboundSchema: z.ZodType<
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceProcessNowRequest$ {
-  /** @deprecated use `TaskActionsServiceProcessNowRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskActionsServiceProcessNowRequest$inboundSchema;
-  /** @deprecated use `TaskActionsServiceProcessNowRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceProcessNowRequest$outboundSchema;
-  /** @deprecated use `TaskActionsServiceProcessNowRequest$Outbound` instead. */
-  export type Outbound = TaskActionsServiceProcessNowRequest$Outbound;
-}
-
 export function taskActionsServiceProcessNowRequestToJSON(
   taskActionsServiceProcessNowRequest: TaskActionsServiceProcessNowRequest,
 ): string {
@@ -65,16 +37,5 @@ export function taskActionsServiceProcessNowRequestToJSON(
     TaskActionsServiceProcessNowRequest$outboundSchema.parse(
       taskActionsServiceProcessNowRequest,
     ),
-  );
-}
-
-export function taskActionsServiceProcessNowRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskActionsServiceProcessNowRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      TaskActionsServiceProcessNowRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskActionsServiceProcessNowRequest' from JSON`,
   );
 }

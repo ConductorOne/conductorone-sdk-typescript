@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -75,96 +72,39 @@ export const GrantFilterType$inboundSchema: z.ZodType<
   GrantFilterType,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(GrantFilterType),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(GrantFilterType);
 /** @internal */
 export const GrantFilterType$outboundSchema: z.ZodType<
-  GrantFilterType,
+  string,
   z.ZodTypeDef,
   GrantFilterType
-> = z.union([
-  z.nativeEnum(GrantFilterType),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GrantFilterType$ {
-  /** @deprecated use `GrantFilterType$inboundSchema` instead. */
-  export const inboundSchema = GrantFilterType$inboundSchema;
-  /** @deprecated use `GrantFilterType$outboundSchema` instead. */
-  export const outboundSchema = GrantFilterType$outboundSchema;
-}
+> = openEnums.outboundSchema(GrantFilterType);
 
 /** @internal */
 export const GrantJustificationType$inboundSchema: z.ZodType<
   GrantJustificationType,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(GrantJustificationType),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(GrantJustificationType);
 /** @internal */
 export const GrantJustificationType$outboundSchema: z.ZodType<
-  GrantJustificationType,
+  string,
   z.ZodTypeDef,
   GrantJustificationType
-> = z.union([
-  z.nativeEnum(GrantJustificationType),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GrantJustificationType$ {
-  /** @deprecated use `GrantJustificationType$inboundSchema` instead. */
-  export const inboundSchema = GrantJustificationType$inboundSchema;
-  /** @deprecated use `GrantJustificationType$outboundSchema` instead. */
-  export const outboundSchema = GrantJustificationType$outboundSchema;
-}
+> = openEnums.outboundSchema(GrantJustificationType);
 
 /** @internal */
 export const GrantSourceFilter$inboundSchema: z.ZodType<
   GrantSourceFilter,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(GrantSourceFilter),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(GrantSourceFilter);
 /** @internal */
 export const GrantSourceFilter$outboundSchema: z.ZodType<
-  GrantSourceFilter,
+  string,
   z.ZodTypeDef,
   GrantSourceFilter
-> = z.union([
-  z.nativeEnum(GrantSourceFilter),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GrantSourceFilter$ {
-  /** @deprecated use `GrantSourceFilter$inboundSchema` instead. */
-  export const inboundSchema = GrantSourceFilter$inboundSchema;
-  /** @deprecated use `GrantSourceFilter$outboundSchema` instead. */
-  export const outboundSchema = GrantSourceFilter$outboundSchema;
-}
+> = openEnums.outboundSchema(GrantSourceFilter);
 
 /** @internal */
 export const GrantFilter$inboundSchema: z.ZodType<
@@ -177,7 +117,6 @@ export const GrantFilter$inboundSchema: z.ZodType<
     .optional(),
   grantSourceFilter: z.nullable(GrantSourceFilter$inboundSchema).optional(),
 });
-
 /** @internal */
 export type GrantFilter$Outbound = {
   grantFilterType?: string | null | undefined;
@@ -197,23 +136,9 @@ export const GrantFilter$outboundSchema: z.ZodType<
   grantSourceFilter: z.nullable(GrantSourceFilter$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GrantFilter$ {
-  /** @deprecated use `GrantFilter$inboundSchema` instead. */
-  export const inboundSchema = GrantFilter$inboundSchema;
-  /** @deprecated use `GrantFilter$outboundSchema` instead. */
-  export const outboundSchema = GrantFilter$outboundSchema;
-  /** @deprecated use `GrantFilter$Outbound` instead. */
-  export type Outbound = GrantFilter$Outbound;
-}
-
 export function grantFilterToJSON(grantFilter: GrantFilter): string {
   return JSON.stringify(GrantFilter$outboundSchema.parse(grantFilter));
 }
-
 export function grantFilterFromJSON(
   jsonString: string,
 ): SafeParseResult<GrantFilter, SDKValidationError> {

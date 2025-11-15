@@ -38,22 +38,6 @@ export type C1ApiTaskV1TaskActionsServiceCloseResponse = {
 };
 
 /** @internal */
-export const C1ApiTaskV1TaskActionsServiceCloseRequest$inboundSchema: z.ZodType<
-  C1ApiTaskV1TaskActionsServiceCloseRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  task_id: z.nullable(z.string()),
-  TaskActionsServiceCloseRequest: shared
-    .TaskActionsServiceCloseRequest$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "task_id": "taskId",
-    "TaskActionsServiceCloseRequest": "taskActionsServiceCloseRequest",
-  });
-});
-
-/** @internal */
 export type C1ApiTaskV1TaskActionsServiceCloseRequest$Outbound = {
   task_id: string | null;
   TaskActionsServiceCloseRequest?:
@@ -78,21 +62,6 @@ export const C1ApiTaskV1TaskActionsServiceCloseRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceCloseRequest$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceCloseRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceCloseRequest$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceCloseRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceCloseRequest$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceCloseRequest$Outbound` instead. */
-  export type Outbound = C1ApiTaskV1TaskActionsServiceCloseRequest$Outbound;
-}
-
 export function c1ApiTaskV1TaskActionsServiceCloseRequestToJSON(
   c1ApiTaskV1TaskActionsServiceCloseRequest:
     C1ApiTaskV1TaskActionsServiceCloseRequest,
@@ -101,22 +70,6 @@ export function c1ApiTaskV1TaskActionsServiceCloseRequestToJSON(
     C1ApiTaskV1TaskActionsServiceCloseRequest$outboundSchema.parse(
       c1ApiTaskV1TaskActionsServiceCloseRequest,
     ),
-  );
-}
-
-export function c1ApiTaskV1TaskActionsServiceCloseRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiTaskV1TaskActionsServiceCloseRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiTaskV1TaskActionsServiceCloseRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiTaskV1TaskActionsServiceCloseRequest' from JSON`,
   );
 }
 
@@ -137,65 +90,6 @@ export const C1ApiTaskV1TaskActionsServiceCloseResponse$inboundSchema:
         "TaskActionsServiceCloseResponse": "taskActionsServiceCloseResponse",
       });
     });
-
-/** @internal */
-export type C1ApiTaskV1TaskActionsServiceCloseResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  TaskActionsServiceCloseResponse?:
-    | shared.TaskActionsServiceCloseResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiTaskV1TaskActionsServiceCloseResponse$outboundSchema:
-  z.ZodType<
-    C1ApiTaskV1TaskActionsServiceCloseResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiTaskV1TaskActionsServiceCloseResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    taskActionsServiceCloseResponse: shared
-      .TaskActionsServiceCloseResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      taskActionsServiceCloseResponse: "TaskActionsServiceCloseResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceCloseResponse$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceCloseResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceCloseResponse$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceCloseResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceCloseResponse$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceCloseResponse$Outbound` instead. */
-  export type Outbound = C1ApiTaskV1TaskActionsServiceCloseResponse$Outbound;
-}
-
-export function c1ApiTaskV1TaskActionsServiceCloseResponseToJSON(
-  c1ApiTaskV1TaskActionsServiceCloseResponse:
-    C1ApiTaskV1TaskActionsServiceCloseResponse,
-): string {
-  return JSON.stringify(
-    C1ApiTaskV1TaskActionsServiceCloseResponse$outboundSchema.parse(
-      c1ApiTaskV1TaskActionsServiceCloseResponse,
-    ),
-  );
-}
 
 export function c1ApiTaskV1TaskActionsServiceCloseResponseFromJSON(
   jsonString: string,

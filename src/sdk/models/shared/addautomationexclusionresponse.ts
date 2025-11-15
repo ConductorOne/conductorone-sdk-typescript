@@ -19,39 +19,6 @@ export const AddAutomationExclusionResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type AddAutomationExclusionResponse$Outbound = {};
-
-/** @internal */
-export const AddAutomationExclusionResponse$outboundSchema: z.ZodType<
-  AddAutomationExclusionResponse$Outbound,
-  z.ZodTypeDef,
-  AddAutomationExclusionResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AddAutomationExclusionResponse$ {
-  /** @deprecated use `AddAutomationExclusionResponse$inboundSchema` instead. */
-  export const inboundSchema = AddAutomationExclusionResponse$inboundSchema;
-  /** @deprecated use `AddAutomationExclusionResponse$outboundSchema` instead. */
-  export const outboundSchema = AddAutomationExclusionResponse$outboundSchema;
-  /** @deprecated use `AddAutomationExclusionResponse$Outbound` instead. */
-  export type Outbound = AddAutomationExclusionResponse$Outbound;
-}
-
-export function addAutomationExclusionResponseToJSON(
-  addAutomationExclusionResponse: AddAutomationExclusionResponse,
-): string {
-  return JSON.stringify(
-    AddAutomationExclusionResponse$outboundSchema.parse(
-      addAutomationExclusionResponse,
-    ),
-  );
-}
-
 export function addAutomationExclusionResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<AddAutomationExclusionResponse, SDKValidationError> {

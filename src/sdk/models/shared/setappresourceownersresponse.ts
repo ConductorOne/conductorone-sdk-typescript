@@ -19,39 +19,6 @@ export const SetAppResourceOwnersResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type SetAppResourceOwnersResponse$Outbound = {};
-
-/** @internal */
-export const SetAppResourceOwnersResponse$outboundSchema: z.ZodType<
-  SetAppResourceOwnersResponse$Outbound,
-  z.ZodTypeDef,
-  SetAppResourceOwnersResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SetAppResourceOwnersResponse$ {
-  /** @deprecated use `SetAppResourceOwnersResponse$inboundSchema` instead. */
-  export const inboundSchema = SetAppResourceOwnersResponse$inboundSchema;
-  /** @deprecated use `SetAppResourceOwnersResponse$outboundSchema` instead. */
-  export const outboundSchema = SetAppResourceOwnersResponse$outboundSchema;
-  /** @deprecated use `SetAppResourceOwnersResponse$Outbound` instead. */
-  export type Outbound = SetAppResourceOwnersResponse$Outbound;
-}
-
-export function setAppResourceOwnersResponseToJSON(
-  setAppResourceOwnersResponse: SetAppResourceOwnersResponse,
-): string {
-  return JSON.stringify(
-    SetAppResourceOwnersResponse$outboundSchema.parse(
-      setAppResourceOwnersResponse,
-    ),
-  );
-}
-
 export function setAppResourceOwnersResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<SetAppResourceOwnersResponse, SDKValidationError> {

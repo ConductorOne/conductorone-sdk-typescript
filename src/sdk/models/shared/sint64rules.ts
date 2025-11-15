@@ -85,7 +85,6 @@ export const SInt64Rules$inboundSchema: z.ZodType<
   notIn: z.nullable(z.array(z.string().transform(v => parseInt(v, 10))))
     .optional(),
 });
-
 /** @internal */
 export type SInt64Rules$Outbound = {
   const?: string | null | undefined;
@@ -115,23 +114,9 @@ export const SInt64Rules$outboundSchema: z.ZodType<
     .optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SInt64Rules$ {
-  /** @deprecated use `SInt64Rules$inboundSchema` instead. */
-  export const inboundSchema = SInt64Rules$inboundSchema;
-  /** @deprecated use `SInt64Rules$outboundSchema` instead. */
-  export const outboundSchema = SInt64Rules$outboundSchema;
-  /** @deprecated use `SInt64Rules$Outbound` instead. */
-  export type Outbound = SInt64Rules$Outbound;
-}
-
 export function sInt64RulesToJSON(sInt64Rules: SInt64Rules): string {
   return JSON.stringify(SInt64Rules$outboundSchema.parse(sInt64Rules));
 }
-
 export function sInt64RulesFromJSON(
   jsonString: string,
 ): SafeParseResult<SInt64Rules, SDKValidationError> {

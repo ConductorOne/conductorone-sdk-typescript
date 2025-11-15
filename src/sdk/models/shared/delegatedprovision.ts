@@ -35,7 +35,6 @@ export const DelegatedProvision$inboundSchema: z.ZodType<
   entitlementId: z.nullable(z.string()).optional(),
   implicit: z.nullable(z.boolean()).optional(),
 });
-
 /** @internal */
 export type DelegatedProvision$Outbound = {
   appId?: string | null | undefined;
@@ -54,19 +53,6 @@ export const DelegatedProvision$outboundSchema: z.ZodType<
   implicit: z.nullable(z.boolean()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DelegatedProvision$ {
-  /** @deprecated use `DelegatedProvision$inboundSchema` instead. */
-  export const inboundSchema = DelegatedProvision$inboundSchema;
-  /** @deprecated use `DelegatedProvision$outboundSchema` instead. */
-  export const outboundSchema = DelegatedProvision$outboundSchema;
-  /** @deprecated use `DelegatedProvision$Outbound` instead. */
-  export type Outbound = DelegatedProvision$Outbound;
-}
-
 export function delegatedProvisionToJSON(
   delegatedProvision: DelegatedProvision,
 ): string {
@@ -74,7 +60,6 @@ export function delegatedProvisionToJSON(
     DelegatedProvision$outboundSchema.parse(delegatedProvision),
   );
 }
-
 export function delegatedProvisionFromJSON(
   jsonString: string,
 ): SafeParseResult<DelegatedProvision, SDKValidationError> {

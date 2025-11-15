@@ -34,21 +34,6 @@ export type C1ApiIamV1RolesUpdateResponse = {
 };
 
 /** @internal */
-export const C1ApiIamV1RolesUpdateRequest$inboundSchema: z.ZodType<
-  C1ApiIamV1RolesUpdateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role_id: z.nullable(z.string()),
-  UpdateRoleRequest: shared.UpdateRoleRequest$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "role_id": "roleId",
-    "UpdateRoleRequest": "updateRoleRequest",
-  });
-});
-
-/** @internal */
 export type C1ApiIamV1RolesUpdateRequest$Outbound = {
   role_id: string | null;
   UpdateRoleRequest?: shared.UpdateRoleRequest$Outbound | undefined;
@@ -69,19 +54,6 @@ export const C1ApiIamV1RolesUpdateRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiIamV1RolesUpdateRequest$ {
-  /** @deprecated use `C1ApiIamV1RolesUpdateRequest$inboundSchema` instead. */
-  export const inboundSchema = C1ApiIamV1RolesUpdateRequest$inboundSchema;
-  /** @deprecated use `C1ApiIamV1RolesUpdateRequest$outboundSchema` instead. */
-  export const outboundSchema = C1ApiIamV1RolesUpdateRequest$outboundSchema;
-  /** @deprecated use `C1ApiIamV1RolesUpdateRequest$Outbound` instead. */
-  export type Outbound = C1ApiIamV1RolesUpdateRequest$Outbound;
-}
-
 export function c1ApiIamV1RolesUpdateRequestToJSON(
   c1ApiIamV1RolesUpdateRequest: C1ApiIamV1RolesUpdateRequest,
 ): string {
@@ -89,16 +61,6 @@ export function c1ApiIamV1RolesUpdateRequestToJSON(
     C1ApiIamV1RolesUpdateRequest$outboundSchema.parse(
       c1ApiIamV1RolesUpdateRequest,
     ),
-  );
-}
-
-export function c1ApiIamV1RolesUpdateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<C1ApiIamV1RolesUpdateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => C1ApiIamV1RolesUpdateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiIamV1RolesUpdateRequest' from JSON`,
   );
 }
 
@@ -120,58 +82,6 @@ export const C1ApiIamV1RolesUpdateResponse$inboundSchema: z.ZodType<
     "UpdateRolesResponse": "updateRolesResponse",
   });
 });
-
-/** @internal */
-export type C1ApiIamV1RolesUpdateResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  UpdateRolesResponse?: shared.UpdateRolesResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiIamV1RolesUpdateResponse$outboundSchema: z.ZodType<
-  C1ApiIamV1RolesUpdateResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiIamV1RolesUpdateResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  updateRolesResponse: shared.UpdateRolesResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    updateRolesResponse: "UpdateRolesResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiIamV1RolesUpdateResponse$ {
-  /** @deprecated use `C1ApiIamV1RolesUpdateResponse$inboundSchema` instead. */
-  export const inboundSchema = C1ApiIamV1RolesUpdateResponse$inboundSchema;
-  /** @deprecated use `C1ApiIamV1RolesUpdateResponse$outboundSchema` instead. */
-  export const outboundSchema = C1ApiIamV1RolesUpdateResponse$outboundSchema;
-  /** @deprecated use `C1ApiIamV1RolesUpdateResponse$Outbound` instead. */
-  export type Outbound = C1ApiIamV1RolesUpdateResponse$Outbound;
-}
-
-export function c1ApiIamV1RolesUpdateResponseToJSON(
-  c1ApiIamV1RolesUpdateResponse: C1ApiIamV1RolesUpdateResponse,
-): string {
-  return JSON.stringify(
-    C1ApiIamV1RolesUpdateResponse$outboundSchema.parse(
-      c1ApiIamV1RolesUpdateResponse,
-    ),
-  );
-}
 
 export function c1ApiIamV1RolesUpdateResponseFromJSON(
   jsonString: string,

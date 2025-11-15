@@ -36,22 +36,6 @@ export type C1ApiAppV1AppEntitlementsCreateResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppEntitlementsCreateRequest$inboundSchema: z.ZodType<
-  C1ApiAppV1AppEntitlementsCreateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  app_id: z.nullable(z.string()),
-  CreateAppEntitlementRequest: shared.CreateAppEntitlementRequest$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "app_id": "appId",
-    "CreateAppEntitlementRequest": "createAppEntitlementRequest",
-  });
-});
-
-/** @internal */
 export type C1ApiAppV1AppEntitlementsCreateRequest$Outbound = {
   app_id: string | null;
   CreateAppEntitlementRequest?:
@@ -75,21 +59,6 @@ export const C1ApiAppV1AppEntitlementsCreateRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsCreateRequest$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsCreateRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsCreateRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsCreateRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsCreateRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsCreateRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppEntitlementsCreateRequest$Outbound;
-}
-
 export function c1ApiAppV1AppEntitlementsCreateRequestToJSON(
   c1ApiAppV1AppEntitlementsCreateRequest:
     C1ApiAppV1AppEntitlementsCreateRequest,
@@ -98,17 +67,6 @@ export function c1ApiAppV1AppEntitlementsCreateRequestToJSON(
     C1ApiAppV1AppEntitlementsCreateRequest$outboundSchema.parse(
       c1ApiAppV1AppEntitlementsCreateRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppEntitlementsCreateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<C1ApiAppV1AppEntitlementsCreateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppEntitlementsCreateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppEntitlementsCreateRequest' from JSON`,
   );
 }
 
@@ -131,64 +89,6 @@ export const C1ApiAppV1AppEntitlementsCreateResponse$inboundSchema: z.ZodType<
     "CreateAppEntitlementResponse": "createAppEntitlementResponse",
   });
 });
-
-/** @internal */
-export type C1ApiAppV1AppEntitlementsCreateResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  CreateAppEntitlementResponse?:
-    | shared.CreateAppEntitlementResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppEntitlementsCreateResponse$outboundSchema: z.ZodType<
-  C1ApiAppV1AppEntitlementsCreateResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiAppV1AppEntitlementsCreateResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  createAppEntitlementResponse: shared
-    .CreateAppEntitlementResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    createAppEntitlementResponse: "CreateAppEntitlementResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsCreateResponse$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsCreateResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsCreateResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsCreateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsCreateResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsCreateResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppEntitlementsCreateResponse$Outbound;
-}
-
-export function c1ApiAppV1AppEntitlementsCreateResponseToJSON(
-  c1ApiAppV1AppEntitlementsCreateResponse:
-    C1ApiAppV1AppEntitlementsCreateResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppEntitlementsCreateResponse$outboundSchema.parse(
-      c1ApiAppV1AppEntitlementsCreateResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppEntitlementsCreateResponseFromJSON(
   jsonString: string,

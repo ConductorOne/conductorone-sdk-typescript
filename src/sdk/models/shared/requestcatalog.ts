@@ -4,20 +4,14 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlement,
   AppEntitlement$inboundSchema,
-  AppEntitlement$Outbound,
-  AppEntitlement$outboundSchema,
   AppEntitlementInput,
-  AppEntitlementInput$inboundSchema,
   AppEntitlementInput$Outbound,
   AppEntitlementInput$outboundSchema,
 } from "./appentitlement.js";
@@ -191,96 +185,39 @@ export const EnrollmentBehavior$inboundSchema: z.ZodType<
   EnrollmentBehavior,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(EnrollmentBehavior),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(EnrollmentBehavior);
 /** @internal */
 export const EnrollmentBehavior$outboundSchema: z.ZodType<
-  EnrollmentBehavior,
+  string,
   z.ZodTypeDef,
   EnrollmentBehavior
-> = z.union([
-  z.nativeEnum(EnrollmentBehavior),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EnrollmentBehavior$ {
-  /** @deprecated use `EnrollmentBehavior$inboundSchema` instead. */
-  export const inboundSchema = EnrollmentBehavior$inboundSchema;
-  /** @deprecated use `EnrollmentBehavior$outboundSchema` instead. */
-  export const outboundSchema = EnrollmentBehavior$outboundSchema;
-}
+> = openEnums.outboundSchema(EnrollmentBehavior);
 
 /** @internal */
 export const UnenrollmentBehavior$inboundSchema: z.ZodType<
   UnenrollmentBehavior,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(UnenrollmentBehavior),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(UnenrollmentBehavior);
 /** @internal */
 export const UnenrollmentBehavior$outboundSchema: z.ZodType<
-  UnenrollmentBehavior,
+  string,
   z.ZodTypeDef,
   UnenrollmentBehavior
-> = z.union([
-  z.nativeEnum(UnenrollmentBehavior),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UnenrollmentBehavior$ {
-  /** @deprecated use `UnenrollmentBehavior$inboundSchema` instead. */
-  export const inboundSchema = UnenrollmentBehavior$inboundSchema;
-  /** @deprecated use `UnenrollmentBehavior$outboundSchema` instead. */
-  export const outboundSchema = UnenrollmentBehavior$outboundSchema;
-}
+> = openEnums.outboundSchema(UnenrollmentBehavior);
 
 /** @internal */
 export const UnenrollmentEntitlementBehavior$inboundSchema: z.ZodType<
   UnenrollmentEntitlementBehavior,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(UnenrollmentEntitlementBehavior),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(UnenrollmentEntitlementBehavior);
 /** @internal */
 export const UnenrollmentEntitlementBehavior$outboundSchema: z.ZodType<
-  UnenrollmentEntitlementBehavior,
+  string,
   z.ZodTypeDef,
   UnenrollmentEntitlementBehavior
-> = z.union([
-  z.nativeEnum(UnenrollmentEntitlementBehavior),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UnenrollmentEntitlementBehavior$ {
-  /** @deprecated use `UnenrollmentEntitlementBehavior$inboundSchema` instead. */
-  export const inboundSchema = UnenrollmentEntitlementBehavior$inboundSchema;
-  /** @deprecated use `UnenrollmentEntitlementBehavior$outboundSchema` instead. */
-  export const outboundSchema = UnenrollmentEntitlementBehavior$outboundSchema;
-}
+> = openEnums.outboundSchema(UnenrollmentEntitlementBehavior);
 
 /** @internal */
 export const RequestCatalog$inboundSchema: z.ZodType<
@@ -314,67 +251,6 @@ export const RequestCatalog$inboundSchema: z.ZodType<
   visibleToEveryone: z.nullable(z.boolean()).optional(),
 });
 
-/** @internal */
-export type RequestCatalog$Outbound = {
-  accessEntitlements?: Array<AppEntitlement$Outbound> | null | undefined;
-  createdAt?: string | null | undefined;
-  createdByUserId?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  enrollmentBehavior?: string | null | undefined;
-  id?: string | null | undefined;
-  published?: boolean | null | undefined;
-  requestBundle?: boolean | null | undefined;
-  unenrollmentBehavior?: string | null | undefined;
-  unenrollmentEntitlementBehavior?: string | null | undefined;
-  updatedAt?: string | null | undefined;
-  visibleToEveryone?: boolean | null | undefined;
-};
-
-/** @internal */
-export const RequestCatalog$outboundSchema: z.ZodType<
-  RequestCatalog$Outbound,
-  z.ZodTypeDef,
-  RequestCatalog
-> = z.object({
-  accessEntitlements: z.nullable(z.array(AppEntitlement$outboundSchema))
-    .optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  createdByUserId: z.nullable(z.string()).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  enrollmentBehavior: z.nullable(EnrollmentBehavior$outboundSchema).optional(),
-  id: z.nullable(z.string()).optional(),
-  published: z.nullable(z.boolean()).optional(),
-  requestBundle: z.nullable(z.boolean()).optional(),
-  unenrollmentBehavior: z.nullable(UnenrollmentBehavior$outboundSchema)
-    .optional(),
-  unenrollmentEntitlementBehavior: z.nullable(
-    UnenrollmentEntitlementBehavior$outboundSchema,
-  ).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  visibleToEveryone: z.nullable(z.boolean()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalog$ {
-  /** @deprecated use `RequestCatalog$inboundSchema` instead. */
-  export const inboundSchema = RequestCatalog$inboundSchema;
-  /** @deprecated use `RequestCatalog$outboundSchema` instead. */
-  export const outboundSchema = RequestCatalog$outboundSchema;
-  /** @deprecated use `RequestCatalog$Outbound` instead. */
-  export type Outbound = RequestCatalog$Outbound;
-}
-
-export function requestCatalogToJSON(requestCatalog: RequestCatalog): string {
-  return JSON.stringify(RequestCatalog$outboundSchema.parse(requestCatalog));
-}
-
 export function requestCatalogFromJSON(
   jsonString: string,
 ): SafeParseResult<RequestCatalog, SDKValidationError> {
@@ -384,38 +260,6 @@ export function requestCatalogFromJSON(
     `Failed to parse 'RequestCatalog' from JSON`,
   );
 }
-
-/** @internal */
-export const RequestCatalogInput$inboundSchema: z.ZodType<
-  RequestCatalogInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  accessEntitlements: z.nullable(z.array(AppEntitlementInput$inboundSchema))
-    .optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  createdByUserId: z.nullable(z.string()).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  enrollmentBehavior: z.nullable(EnrollmentBehavior$inboundSchema).optional(),
-  id: z.nullable(z.string()).optional(),
-  published: z.nullable(z.boolean()).optional(),
-  requestBundle: z.nullable(z.boolean()).optional(),
-  unenrollmentBehavior: z.nullable(UnenrollmentBehavior$inboundSchema)
-    .optional(),
-  unenrollmentEntitlementBehavior: z.nullable(
-    UnenrollmentEntitlementBehavior$inboundSchema,
-  ).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  visibleToEveryone: z.nullable(z.boolean()).optional(),
-});
 
 /** @internal */
 export type RequestCatalogInput$Outbound = {
@@ -461,33 +305,10 @@ export const RequestCatalogInput$outboundSchema: z.ZodType<
   visibleToEveryone: z.nullable(z.boolean()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogInput$ {
-  /** @deprecated use `RequestCatalogInput$inboundSchema` instead. */
-  export const inboundSchema = RequestCatalogInput$inboundSchema;
-  /** @deprecated use `RequestCatalogInput$outboundSchema` instead. */
-  export const outboundSchema = RequestCatalogInput$outboundSchema;
-  /** @deprecated use `RequestCatalogInput$Outbound` instead. */
-  export type Outbound = RequestCatalogInput$Outbound;
-}
-
 export function requestCatalogInputToJSON(
   requestCatalogInput: RequestCatalogInput,
 ): string {
   return JSON.stringify(
     RequestCatalogInput$outboundSchema.parse(requestCatalogInput),
-  );
-}
-
-export function requestCatalogInputFromJSON(
-  jsonString: string,
-): SafeParseResult<RequestCatalogInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RequestCatalogInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RequestCatalogInput' from JSON`,
   );
 }

@@ -38,7 +38,6 @@ export const SessionSettings$inboundSchema: z.ZodType<
   ssoAdminSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
   ssoUserSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
 });
-
 /** @internal */
 export type SessionSettings$Outbound = {
   connectorSource?: CIDRRestriction$Outbound | null | undefined;
@@ -63,25 +62,11 @@ export const SessionSettings$outboundSchema: z.ZodType<
   ssoUserSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SessionSettings$ {
-  /** @deprecated use `SessionSettings$inboundSchema` instead. */
-  export const inboundSchema = SessionSettings$inboundSchema;
-  /** @deprecated use `SessionSettings$outboundSchema` instead. */
-  export const outboundSchema = SessionSettings$outboundSchema;
-  /** @deprecated use `SessionSettings$Outbound` instead. */
-  export type Outbound = SessionSettings$Outbound;
-}
-
 export function sessionSettingsToJSON(
   sessionSettings: SessionSettings,
 ): string {
   return JSON.stringify(SessionSettings$outboundSchema.parse(sessionSettings));
 }
-
 export function sessionSettingsFromJSON(
   jsonString: string,
 ): SafeParseResult<SessionSettings, SDKValidationError> {

@@ -3,72 +3,58 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AgentApproval,
-  AgentApproval$inboundSchema,
   AgentApproval$Outbound,
   AgentApproval$outboundSchema,
 } from "./agentapproval.js";
 import {
   AppGroupApproval,
-  AppGroupApproval$inboundSchema,
   AppGroupApproval$Outbound,
   AppGroupApproval$outboundSchema,
 } from "./appgroupapproval.js";
 import {
   AppOwnerApproval,
-  AppOwnerApproval$inboundSchema,
   AppOwnerApproval$Outbound,
   AppOwnerApproval$outboundSchema,
 } from "./appownerapproval.js";
 import {
   EntitlementOwnerApproval,
-  EntitlementOwnerApproval$inboundSchema,
   EntitlementOwnerApproval$Outbound,
   EntitlementOwnerApproval$outboundSchema,
 } from "./entitlementownerapproval.js";
 import {
   Escalation,
-  Escalation$inboundSchema,
   Escalation$Outbound,
   Escalation$outboundSchema,
 } from "./escalation.js";
 import {
   ExpressionApprovalInput,
-  ExpressionApprovalInput$inboundSchema,
   ExpressionApprovalInput$Outbound,
   ExpressionApprovalInput$outboundSchema,
 } from "./expressionapprovalinput.js";
 import {
   ManagerApprovalInput,
-  ManagerApprovalInput$inboundSchema,
   ManagerApprovalInput$Outbound,
   ManagerApprovalInput$outboundSchema,
 } from "./managerapprovalinput.js";
 import {
   ResourceOwnerApproval,
-  ResourceOwnerApproval$inboundSchema,
   ResourceOwnerApproval$Outbound,
   ResourceOwnerApproval$outboundSchema,
 } from "./resourceownerapproval.js";
 import {
   SelfApprovalInput,
-  SelfApprovalInput$inboundSchema,
   SelfApprovalInput$Outbound,
   SelfApprovalInput$outboundSchema,
 } from "./selfapprovalinput.js";
 import {
   UserApproval,
-  UserApproval$inboundSchema,
   UserApproval$Outbound,
   UserApproval$outboundSchema,
 } from "./userapproval.js";
 import {
   WebhookApproval,
-  WebhookApproval$inboundSchema,
   WebhookApproval$Outbound,
   WebhookApproval$outboundSchema,
 } from "./webhookapproval.js";
@@ -140,34 +126,6 @@ export type ApprovalInput = {
 };
 
 /** @internal */
-export const ApprovalInput$inboundSchema: z.ZodType<
-  ApprovalInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  agent: z.nullable(AgentApproval$inboundSchema).optional(),
-  allowDelegation: z.nullable(z.boolean()).optional(),
-  allowReassignment: z.nullable(z.boolean()).optional(),
-  allowedReassignees: z.nullable(z.array(z.string())).optional(),
-  appOwners: z.nullable(AppOwnerApproval$inboundSchema).optional(),
-  entitlementOwners: z.nullable(EntitlementOwnerApproval$inboundSchema)
-    .optional(),
-  escalation: z.nullable(Escalation$inboundSchema).optional(),
-  escalationEnabled: z.nullable(z.boolean()).optional(),
-  expression: z.nullable(ExpressionApprovalInput$inboundSchema).optional(),
-  group: z.nullable(AppGroupApproval$inboundSchema).optional(),
-  manager: z.nullable(ManagerApprovalInput$inboundSchema).optional(),
-  requireApprovalReason: z.nullable(z.boolean()).optional(),
-  requireDenialReason: z.nullable(z.boolean()).optional(),
-  requireReassignmentReason: z.nullable(z.boolean()).optional(),
-  requiresStepUpProviderId: z.nullable(z.string()).optional(),
-  resourceOwners: z.nullable(ResourceOwnerApproval$inboundSchema).optional(),
-  self: z.nullable(SelfApprovalInput$inboundSchema).optional(),
-  users: z.nullable(UserApproval$inboundSchema).optional(),
-  webhook: z.nullable(WebhookApproval$inboundSchema).optional(),
-});
-
-/** @internal */
 export type ApprovalInput$Outbound = {
   agent?: AgentApproval$Outbound | null | undefined;
   allowDelegation?: boolean | null | undefined;
@@ -218,29 +176,6 @@ export const ApprovalInput$outboundSchema: z.ZodType<
   webhook: z.nullable(WebhookApproval$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ApprovalInput$ {
-  /** @deprecated use `ApprovalInput$inboundSchema` instead. */
-  export const inboundSchema = ApprovalInput$inboundSchema;
-  /** @deprecated use `ApprovalInput$outboundSchema` instead. */
-  export const outboundSchema = ApprovalInput$outboundSchema;
-  /** @deprecated use `ApprovalInput$Outbound` instead. */
-  export type Outbound = ApprovalInput$Outbound;
-}
-
 export function approvalInputToJSON(approvalInput: ApprovalInput): string {
   return JSON.stringify(ApprovalInput$outboundSchema.parse(approvalInput));
-}
-
-export function approvalInputFromJSON(
-  jsonString: string,
-): SafeParseResult<ApprovalInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ApprovalInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ApprovalInput' from JSON`,
-  );
 }

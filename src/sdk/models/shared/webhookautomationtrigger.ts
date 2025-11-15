@@ -47,7 +47,6 @@ export const WebhookAutomationTrigger$inboundSchema: z.ZodType<
   jwt: z.nullable(WebhookListenerAuthJWT$inboundSchema).optional(),
   listenerId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type WebhookAutomationTrigger$Outbound = {
   hmac?: WebhookListenerAuthHMAC$Outbound | null | undefined;
@@ -66,19 +65,6 @@ export const WebhookAutomationTrigger$outboundSchema: z.ZodType<
   listenerId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhookAutomationTrigger$ {
-  /** @deprecated use `WebhookAutomationTrigger$inboundSchema` instead. */
-  export const inboundSchema = WebhookAutomationTrigger$inboundSchema;
-  /** @deprecated use `WebhookAutomationTrigger$outboundSchema` instead. */
-  export const outboundSchema = WebhookAutomationTrigger$outboundSchema;
-  /** @deprecated use `WebhookAutomationTrigger$Outbound` instead. */
-  export type Outbound = WebhookAutomationTrigger$Outbound;
-}
-
 export function webhookAutomationTriggerToJSON(
   webhookAutomationTrigger: WebhookAutomationTrigger,
 ): string {
@@ -86,7 +72,6 @@ export function webhookAutomationTriggerToJSON(
     WebhookAutomationTrigger$outboundSchema.parse(webhookAutomationTrigger),
   );
 }
-
 export function webhookAutomationTriggerFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookAutomationTrigger, SDKValidationError> {

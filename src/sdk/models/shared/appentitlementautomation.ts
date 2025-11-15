@@ -9,32 +9,22 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementAutomationLastRunStatus,
   AppEntitlementAutomationLastRunStatus$inboundSchema,
-  AppEntitlementAutomationLastRunStatus$Outbound,
-  AppEntitlementAutomationLastRunStatus$outboundSchema,
 } from "./appentitlementautomationlastrunstatus.js";
 import {
   AppEntitlementAutomationRuleBasic,
   AppEntitlementAutomationRuleBasic$inboundSchema,
-  AppEntitlementAutomationRuleBasic$Outbound,
-  AppEntitlementAutomationRuleBasic$outboundSchema,
 } from "./appentitlementautomationrulebasic.js";
 import {
   AppEntitlementAutomationRuleCEL,
   AppEntitlementAutomationRuleCEL$inboundSchema,
-  AppEntitlementAutomationRuleCEL$Outbound,
-  AppEntitlementAutomationRuleCEL$outboundSchema,
 } from "./appentitlementautomationrulecel.js";
 import {
   AppEntitlementAutomationRuleEntitlement,
   AppEntitlementAutomationRuleEntitlement$inboundSchema,
-  AppEntitlementAutomationRuleEntitlement$Outbound,
-  AppEntitlementAutomationRuleEntitlement$outboundSchema,
 } from "./appentitlementautomationruleentitlement.js";
 import {
   AppEntitlementAutomationRuleNone,
   AppEntitlementAutomationRuleNone$inboundSchema,
-  AppEntitlementAutomationRuleNone$Outbound,
-  AppEntitlementAutomationRuleNone$outboundSchema,
 } from "./appentitlementautomationrulenone.js";
 
 /**
@@ -103,74 +93,6 @@ export const AppEntitlementAutomation$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
-/** @internal */
-export type AppEntitlementAutomation$Outbound = {
-  appEntitlementId?: string | null | undefined;
-  appId?: string | null | undefined;
-  basic?: AppEntitlementAutomationRuleBasic$Outbound | null | undefined;
-  cel?: AppEntitlementAutomationRuleCEL$Outbound | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  entitlements?:
-    | AppEntitlementAutomationRuleEntitlement$Outbound
-    | null
-    | undefined;
-  lastRunStatus?:
-    | AppEntitlementAutomationLastRunStatus$Outbound
-    | null
-    | undefined;
-  none?: AppEntitlementAutomationRuleNone$Outbound | null | undefined;
-  updatedAt?: string | null | undefined;
-};
-
-/** @internal */
-export const AppEntitlementAutomation$outboundSchema: z.ZodType<
-  AppEntitlementAutomation$Outbound,
-  z.ZodTypeDef,
-  AppEntitlementAutomation
-> = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  basic: z.nullable(AppEntitlementAutomationRuleBasic$outboundSchema)
-    .optional(),
-  cel: z.nullable(AppEntitlementAutomationRuleCEL$outboundSchema).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  entitlements: z.nullable(
-    AppEntitlementAutomationRuleEntitlement$outboundSchema,
-  ).optional(),
-  lastRunStatus: z.nullable(
-    AppEntitlementAutomationLastRunStatus$outboundSchema,
-  ).optional(),
-  none: z.nullable(AppEntitlementAutomationRuleNone$outboundSchema).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementAutomation$ {
-  /** @deprecated use `AppEntitlementAutomation$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementAutomation$inboundSchema;
-  /** @deprecated use `AppEntitlementAutomation$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlementAutomation$outboundSchema;
-  /** @deprecated use `AppEntitlementAutomation$Outbound` instead. */
-  export type Outbound = AppEntitlementAutomation$Outbound;
-}
-
-export function appEntitlementAutomationToJSON(
-  appEntitlementAutomation: AppEntitlementAutomation,
-): string {
-  return JSON.stringify(
-    AppEntitlementAutomation$outboundSchema.parse(appEntitlementAutomation),
-  );
-}
 
 export function appEntitlementAutomationFromJSON(
   jsonString: string,

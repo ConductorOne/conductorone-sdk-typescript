@@ -35,21 +35,6 @@ export type C1ApiAppV1ConnectorServicePauseSyncResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1ConnectorServicePauseSyncRequest$inboundSchema:
-  z.ZodType<C1ApiAppV1ConnectorServicePauseSyncRequest, z.ZodTypeDef, unknown> =
-    z.object({
-      app_id: z.nullable(z.string()),
-      connector_id: z.nullable(z.string()),
-      PauseSyncRequest: shared.PauseSyncRequest$inboundSchema.optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "app_id": "appId",
-        "connector_id": "connectorId",
-        "PauseSyncRequest": "pauseSyncRequest",
-      });
-    });
-
-/** @internal */
 export type C1ApiAppV1ConnectorServicePauseSyncRequest$Outbound = {
   app_id: string | null;
   connector_id: string | null;
@@ -74,21 +59,6 @@ export const C1ApiAppV1ConnectorServicePauseSyncRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1ConnectorServicePauseSyncRequest$ {
-  /** @deprecated use `C1ApiAppV1ConnectorServicePauseSyncRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1ConnectorServicePauseSyncRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServicePauseSyncRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1ConnectorServicePauseSyncRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServicePauseSyncRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1ConnectorServicePauseSyncRequest$Outbound;
-}
-
 export function c1ApiAppV1ConnectorServicePauseSyncRequestToJSON(
   c1ApiAppV1ConnectorServicePauseSyncRequest:
     C1ApiAppV1ConnectorServicePauseSyncRequest,
@@ -97,22 +67,6 @@ export function c1ApiAppV1ConnectorServicePauseSyncRequestToJSON(
     C1ApiAppV1ConnectorServicePauseSyncRequest$outboundSchema.parse(
       c1ApiAppV1ConnectorServicePauseSyncRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1ConnectorServicePauseSyncRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1ConnectorServicePauseSyncRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1ConnectorServicePauseSyncRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiAppV1ConnectorServicePauseSyncRequest' from JSON`,
   );
 }
 
@@ -135,62 +89,6 @@ export const C1ApiAppV1ConnectorServicePauseSyncResponse$inboundSchema:
       "PauseSyncResponse": "pauseSyncResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1ConnectorServicePauseSyncResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  PauseSyncResponse?: shared.PauseSyncResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1ConnectorServicePauseSyncResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1ConnectorServicePauseSyncResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1ConnectorServicePauseSyncResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    pauseSyncResponse: shared.PauseSyncResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      pauseSyncResponse: "PauseSyncResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1ConnectorServicePauseSyncResponse$ {
-  /** @deprecated use `C1ApiAppV1ConnectorServicePauseSyncResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1ConnectorServicePauseSyncResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServicePauseSyncResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1ConnectorServicePauseSyncResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServicePauseSyncResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1ConnectorServicePauseSyncResponse$Outbound;
-}
-
-export function c1ApiAppV1ConnectorServicePauseSyncResponseToJSON(
-  c1ApiAppV1ConnectorServicePauseSyncResponse:
-    C1ApiAppV1ConnectorServicePauseSyncResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1ConnectorServicePauseSyncResponse$outboundSchema.parse(
-      c1ApiAppV1ConnectorServicePauseSyncResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1ConnectorServicePauseSyncResponseFromJSON(
   jsonString: string,

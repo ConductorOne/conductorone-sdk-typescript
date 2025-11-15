@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FunctionCommit,
   FunctionCommit$inboundSchema,
-  FunctionCommit$Outbound,
-  FunctionCommit$outboundSchema,
 } from "./functioncommit.js";
 
 /**
@@ -33,46 +31,6 @@ export const FunctionsServiceGetCommitResponse$inboundSchema: z.ZodType<
   commit: z.nullable(FunctionCommit$inboundSchema).optional(),
   content: z.nullable(z.record(z.string())).optional(),
 });
-
-/** @internal */
-export type FunctionsServiceGetCommitResponse$Outbound = {
-  commit?: FunctionCommit$Outbound | null | undefined;
-  content?: { [k: string]: string } | null | undefined;
-};
-
-/** @internal */
-export const FunctionsServiceGetCommitResponse$outboundSchema: z.ZodType<
-  FunctionsServiceGetCommitResponse$Outbound,
-  z.ZodTypeDef,
-  FunctionsServiceGetCommitResponse
-> = z.object({
-  commit: z.nullable(FunctionCommit$outboundSchema).optional(),
-  content: z.nullable(z.record(z.string())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionsServiceGetCommitResponse$ {
-  /** @deprecated use `FunctionsServiceGetCommitResponse$inboundSchema` instead. */
-  export const inboundSchema = FunctionsServiceGetCommitResponse$inboundSchema;
-  /** @deprecated use `FunctionsServiceGetCommitResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    FunctionsServiceGetCommitResponse$outboundSchema;
-  /** @deprecated use `FunctionsServiceGetCommitResponse$Outbound` instead. */
-  export type Outbound = FunctionsServiceGetCommitResponse$Outbound;
-}
-
-export function functionsServiceGetCommitResponseToJSON(
-  functionsServiceGetCommitResponse: FunctionsServiceGetCommitResponse,
-): string {
-  return JSON.stringify(
-    FunctionsServiceGetCommitResponse$outboundSchema.parse(
-      functionsServiceGetCommitResponse,
-    ),
-  );
-}
 
 export function functionsServiceGetCommitResponseFromJSON(
   jsonString: string,

@@ -47,55 +47,6 @@ export const TaskAuditExternalTicketProvisionStepResolved$inboundSchema:
     externalTicketUrl: z.nullable(z.string()).optional(),
   });
 
-/** @internal */
-export type TaskAuditExternalTicketProvisionStepResolved$Outbound = {
-  appId?: string | null | undefined;
-  connectorId?: string | null | undefined;
-  externalTicketId?: string | null | undefined;
-  externalTicketProvisionerConfigId?: string | null | undefined;
-  externalTicketUrl?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditExternalTicketProvisionStepResolved$outboundSchema:
-  z.ZodType<
-    TaskAuditExternalTicketProvisionStepResolved$Outbound,
-    z.ZodTypeDef,
-    TaskAuditExternalTicketProvisionStepResolved
-  > = z.object({
-    appId: z.nullable(z.string()).optional(),
-    connectorId: z.nullable(z.string()).optional(),
-    externalTicketId: z.nullable(z.string()).optional(),
-    externalTicketProvisionerConfigId: z.nullable(z.string()).optional(),
-    externalTicketUrl: z.nullable(z.string()).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditExternalTicketProvisionStepResolved$ {
-  /** @deprecated use `TaskAuditExternalTicketProvisionStepResolved$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskAuditExternalTicketProvisionStepResolved$inboundSchema;
-  /** @deprecated use `TaskAuditExternalTicketProvisionStepResolved$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskAuditExternalTicketProvisionStepResolved$outboundSchema;
-  /** @deprecated use `TaskAuditExternalTicketProvisionStepResolved$Outbound` instead. */
-  export type Outbound = TaskAuditExternalTicketProvisionStepResolved$Outbound;
-}
-
-export function taskAuditExternalTicketProvisionStepResolvedToJSON(
-  taskAuditExternalTicketProvisionStepResolved:
-    TaskAuditExternalTicketProvisionStepResolved,
-): string {
-  return JSON.stringify(
-    TaskAuditExternalTicketProvisionStepResolved$outboundSchema.parse(
-      taskAuditExternalTicketProvisionStepResolved,
-    ),
-  );
-}
-
 export function taskAuditExternalTicketProvisionStepResolvedFromJSON(
   jsonString: string,
 ): SafeParseResult<

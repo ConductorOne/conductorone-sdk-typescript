@@ -26,41 +26,6 @@ export const TaskAuditRestart$inboundSchema: z.ZodType<
   oldPolicyStepId: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditRestart$Outbound = {
-  oldPolicyStepId?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditRestart$outboundSchema: z.ZodType<
-  TaskAuditRestart$Outbound,
-  z.ZodTypeDef,
-  TaskAuditRestart
-> = z.object({
-  oldPolicyStepId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditRestart$ {
-  /** @deprecated use `TaskAuditRestart$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditRestart$inboundSchema;
-  /** @deprecated use `TaskAuditRestart$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditRestart$outboundSchema;
-  /** @deprecated use `TaskAuditRestart$Outbound` instead. */
-  export type Outbound = TaskAuditRestart$Outbound;
-}
-
-export function taskAuditRestartToJSON(
-  taskAuditRestart: TaskAuditRestart,
-): string {
-  return JSON.stringify(
-    TaskAuditRestart$outboundSchema.parse(taskAuditRestart),
-  );
-}
-
 export function taskAuditRestartFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditRestart, SDKValidationError> {

@@ -36,7 +36,6 @@ export const NotificationConfig$inboundSchema: z.ZodType<
   emailNotifications: z.nullable(EmailNotifications$inboundSchema).optional(),
   slackNotifications: z.nullable(SlackNotifications$inboundSchema).optional(),
 });
-
 /** @internal */
 export type NotificationConfig$Outbound = {
   emailNotifications?: EmailNotifications$Outbound | null | undefined;
@@ -53,19 +52,6 @@ export const NotificationConfig$outboundSchema: z.ZodType<
   slackNotifications: z.nullable(SlackNotifications$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace NotificationConfig$ {
-  /** @deprecated use `NotificationConfig$inboundSchema` instead. */
-  export const inboundSchema = NotificationConfig$inboundSchema;
-  /** @deprecated use `NotificationConfig$outboundSchema` instead. */
-  export const outboundSchema = NotificationConfig$outboundSchema;
-  /** @deprecated use `NotificationConfig$Outbound` instead. */
-  export type Outbound = NotificationConfig$Outbound;
-}
-
 export function notificationConfigToJSON(
   notificationConfig: NotificationConfig,
 ): string {
@@ -73,7 +59,6 @@ export function notificationConfigToJSON(
     NotificationConfig$outboundSchema.parse(notificationConfig),
   );
 }
-
 export function notificationConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<NotificationConfig, SDKValidationError> {

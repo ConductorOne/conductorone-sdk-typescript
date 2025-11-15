@@ -26,41 +26,6 @@ export const TaskAuditSLAEscalation$inboundSchema: z.ZodType<
   message: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditSLAEscalation$Outbound = {
-  message?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditSLAEscalation$outboundSchema: z.ZodType<
-  TaskAuditSLAEscalation$Outbound,
-  z.ZodTypeDef,
-  TaskAuditSLAEscalation
-> = z.object({
-  message: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditSLAEscalation$ {
-  /** @deprecated use `TaskAuditSLAEscalation$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditSLAEscalation$inboundSchema;
-  /** @deprecated use `TaskAuditSLAEscalation$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditSLAEscalation$outboundSchema;
-  /** @deprecated use `TaskAuditSLAEscalation$Outbound` instead. */
-  export type Outbound = TaskAuditSLAEscalation$Outbound;
-}
-
-export function taskAuditSLAEscalationToJSON(
-  taskAuditSLAEscalation: TaskAuditSLAEscalation,
-): string {
-  return JSON.stringify(
-    TaskAuditSLAEscalation$outboundSchema.parse(taskAuditSLAEscalation),
-  );
-}
-
 export function taskAuditSLAEscalationFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditSLAEscalation, SDKValidationError> {

@@ -36,21 +36,6 @@ export type C1ApiFunctionsV1FunctionsServiceGetCommitResponse = {
 };
 
 /** @internal */
-export const C1ApiFunctionsV1FunctionsServiceGetCommitRequest$inboundSchema:
-  z.ZodType<
-    C1ApiFunctionsV1FunctionsServiceGetCommitRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    function_id: z.nullable(z.string()),
-    id: z.nullable(z.string()),
-  }).transform((v) => {
-    return remap$(v, {
-      "function_id": "functionId",
-    });
-  });
-
-/** @internal */
 export type C1ApiFunctionsV1FunctionsServiceGetCommitRequest$Outbound = {
   function_id: string | null;
   id: string | null;
@@ -71,22 +56,6 @@ export const C1ApiFunctionsV1FunctionsServiceGetCommitRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiFunctionsV1FunctionsServiceGetCommitRequest$ {
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceGetCommitRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiFunctionsV1FunctionsServiceGetCommitRequest$inboundSchema;
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceGetCommitRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiFunctionsV1FunctionsServiceGetCommitRequest$outboundSchema;
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceGetCommitRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiFunctionsV1FunctionsServiceGetCommitRequest$Outbound;
-}
-
 export function c1ApiFunctionsV1FunctionsServiceGetCommitRequestToJSON(
   c1ApiFunctionsV1FunctionsServiceGetCommitRequest:
     C1ApiFunctionsV1FunctionsServiceGetCommitRequest,
@@ -95,22 +64,6 @@ export function c1ApiFunctionsV1FunctionsServiceGetCommitRequestToJSON(
     C1ApiFunctionsV1FunctionsServiceGetCommitRequest$outboundSchema.parse(
       c1ApiFunctionsV1FunctionsServiceGetCommitRequest,
     ),
-  );
-}
-
-export function c1ApiFunctionsV1FunctionsServiceGetCommitRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiFunctionsV1FunctionsServiceGetCommitRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiFunctionsV1FunctionsServiceGetCommitRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiFunctionsV1FunctionsServiceGetCommitRequest' from JSON`,
   );
 }
 
@@ -134,66 +87,6 @@ export const C1ApiFunctionsV1FunctionsServiceGetCommitResponse$inboundSchema:
       "FunctionsServiceGetCommitResponse": "functionsServiceGetCommitResponse",
     });
   });
-
-/** @internal */
-export type C1ApiFunctionsV1FunctionsServiceGetCommitResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  FunctionsServiceGetCommitResponse?:
-    | shared.FunctionsServiceGetCommitResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiFunctionsV1FunctionsServiceGetCommitResponse$outboundSchema:
-  z.ZodType<
-    C1ApiFunctionsV1FunctionsServiceGetCommitResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiFunctionsV1FunctionsServiceGetCommitResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    functionsServiceGetCommitResponse: shared
-      .FunctionsServiceGetCommitResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      functionsServiceGetCommitResponse: "FunctionsServiceGetCommitResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiFunctionsV1FunctionsServiceGetCommitResponse$ {
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceGetCommitResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiFunctionsV1FunctionsServiceGetCommitResponse$inboundSchema;
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceGetCommitResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiFunctionsV1FunctionsServiceGetCommitResponse$outboundSchema;
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceGetCommitResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiFunctionsV1FunctionsServiceGetCommitResponse$Outbound;
-}
-
-export function c1ApiFunctionsV1FunctionsServiceGetCommitResponseToJSON(
-  c1ApiFunctionsV1FunctionsServiceGetCommitResponse:
-    C1ApiFunctionsV1FunctionsServiceGetCommitResponse,
-): string {
-  return JSON.stringify(
-    C1ApiFunctionsV1FunctionsServiceGetCommitResponse$outboundSchema.parse(
-      c1ApiFunctionsV1FunctionsServiceGetCommitResponse,
-    ),
-  );
-}
 
 export function c1ApiFunctionsV1FunctionsServiceGetCommitResponseFromJSON(
   jsonString: string,

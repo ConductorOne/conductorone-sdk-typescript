@@ -52,67 +52,6 @@ export const C1ApiAppV1AppEntitlementSearchServiceSearchResponse$inboundSchema:
     });
   });
 
-/** @internal */
-export type C1ApiAppV1AppEntitlementSearchServiceSearchResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  AppEntitlementSearchServiceSearchResponse?:
-    | shared.AppEntitlementSearchServiceSearchResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppEntitlementSearchServiceSearchResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementSearchServiceSearchResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppEntitlementSearchServiceSearchResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    appEntitlementSearchServiceSearchResponse: shared
-      .AppEntitlementSearchServiceSearchResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      appEntitlementSearchServiceSearchResponse:
-        "AppEntitlementSearchServiceSearchResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementSearchServiceSearchResponse$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementSearchServiceSearchResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementSearchServiceSearchResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementSearchServiceSearchResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementSearchServiceSearchResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementSearchServiceSearchResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementSearchServiceSearchResponse$Outbound;
-}
-
-export function c1ApiAppV1AppEntitlementSearchServiceSearchResponseToJSON(
-  c1ApiAppV1AppEntitlementSearchServiceSearchResponse:
-    C1ApiAppV1AppEntitlementSearchServiceSearchResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppEntitlementSearchServiceSearchResponse$outboundSchema.parse(
-      c1ApiAppV1AppEntitlementSearchServiceSearchResponse,
-    ),
-  );
-}
-
 export function c1ApiAppV1AppEntitlementSearchServiceSearchResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

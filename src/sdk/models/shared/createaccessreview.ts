@@ -56,7 +56,6 @@ export const CreateAccessReview$inboundSchema: z.ZodType<
   userIdsCel: z.nullable(z.string()).optional(),
   userRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
 });
-
 /** @internal */
 export type CreateAccessReview$Outbound = {
   accessReviewTemplateCel?: string | null | undefined;
@@ -81,19 +80,6 @@ export const CreateAccessReview$outboundSchema: z.ZodType<
   userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAccessReview$ {
-  /** @deprecated use `CreateAccessReview$inboundSchema` instead. */
-  export const inboundSchema = CreateAccessReview$inboundSchema;
-  /** @deprecated use `CreateAccessReview$outboundSchema` instead. */
-  export const outboundSchema = CreateAccessReview$outboundSchema;
-  /** @deprecated use `CreateAccessReview$Outbound` instead. */
-  export type Outbound = CreateAccessReview$Outbound;
-}
-
 export function createAccessReviewToJSON(
   createAccessReview: CreateAccessReview,
 ): string {
@@ -101,7 +87,6 @@ export function createAccessReviewToJSON(
     CreateAccessReview$outboundSchema.parse(createAccessReview),
   );
 }
-
 export function createAccessReviewFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAccessReview, SDKValidationError> {

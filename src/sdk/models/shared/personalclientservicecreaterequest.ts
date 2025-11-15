@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The PersonalClientServiceCreateRequest message contains the fields for creating a new personal client.
@@ -27,18 +24,6 @@ export type PersonalClientServiceCreateRequest = {
 };
 
 /** @internal */
-export const PersonalClientServiceCreateRequest$inboundSchema: z.ZodType<
-  PersonalClientServiceCreateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  allowSourceCidr: z.nullable(z.array(z.string())).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  expires: z.nullable(z.string()).optional(),
-  scopedRoles: z.nullable(z.array(z.string())).optional(),
-});
-
-/** @internal */
 export type PersonalClientServiceCreateRequest$Outbound = {
   allowSourceCidr?: Array<string> | null | undefined;
   displayName?: string | null | undefined;
@@ -58,20 +43,6 @@ export const PersonalClientServiceCreateRequest$outboundSchema: z.ZodType<
   scopedRoles: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PersonalClientServiceCreateRequest$ {
-  /** @deprecated use `PersonalClientServiceCreateRequest$inboundSchema` instead. */
-  export const inboundSchema = PersonalClientServiceCreateRequest$inboundSchema;
-  /** @deprecated use `PersonalClientServiceCreateRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PersonalClientServiceCreateRequest$outboundSchema;
-  /** @deprecated use `PersonalClientServiceCreateRequest$Outbound` instead. */
-  export type Outbound = PersonalClientServiceCreateRequest$Outbound;
-}
-
 export function personalClientServiceCreateRequestToJSON(
   personalClientServiceCreateRequest: PersonalClientServiceCreateRequest,
 ): string {
@@ -79,16 +50,5 @@ export function personalClientServiceCreateRequestToJSON(
     PersonalClientServiceCreateRequest$outboundSchema.parse(
       personalClientServiceCreateRequest,
     ),
-  );
-}
-
-export function personalClientServiceCreateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PersonalClientServiceCreateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PersonalClientServiceCreateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PersonalClientServiceCreateRequest' from JSON`,
   );
 }

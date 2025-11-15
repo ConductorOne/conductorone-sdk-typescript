@@ -31,6 +31,10 @@ export type ExpressionApproval = {
    * Configuration to specific which users to fallback to if and the expression does not return a valid list of users.
    */
   fallbackUserIds?: Array<string> | null | undefined;
+  /**
+   * Configuration to require distinct approvers across approval steps of a rule.
+   */
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -44,8 +48,8 @@ export const ExpressionApproval$inboundSchema: z.ZodType<
   expressions: z.nullable(z.array(z.string())).optional(),
   fallback: z.nullable(z.boolean()).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
 /** @internal */
 export type ExpressionApproval$Outbound = {
   allowSelfApproval?: boolean | null | undefined;
@@ -53,6 +57,7 @@ export type ExpressionApproval$Outbound = {
   expressions?: Array<string> | null | undefined;
   fallback?: boolean | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -66,20 +71,8 @@ export const ExpressionApproval$outboundSchema: z.ZodType<
   expressions: z.nullable(z.array(z.string())).optional(),
   fallback: z.nullable(z.boolean()).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExpressionApproval$ {
-  /** @deprecated use `ExpressionApproval$inboundSchema` instead. */
-  export const inboundSchema = ExpressionApproval$inboundSchema;
-  /** @deprecated use `ExpressionApproval$outboundSchema` instead. */
-  export const outboundSchema = ExpressionApproval$outboundSchema;
-  /** @deprecated use `ExpressionApproval$Outbound` instead. */
-  export type Outbound = ExpressionApproval$Outbound;
-}
 
 export function expressionApprovalToJSON(
   expressionApproval: ExpressionApproval,
@@ -88,7 +81,6 @@ export function expressionApprovalToJSON(
     ExpressionApproval$outboundSchema.parse(expressionApproval),
   );
 }
-
 export function expressionApprovalFromJSON(
   jsonString: string,
 ): SafeParseResult<ExpressionApproval, SDKValidationError> {

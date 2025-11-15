@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The StepUpProviderRef message.
@@ -16,15 +13,6 @@ export type StepUpProviderRef = {
    */
   id?: string | null | undefined;
 };
-
-/** @internal */
-export const StepUpProviderRef$inboundSchema: z.ZodType<
-  StepUpProviderRef,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type StepUpProviderRef$Outbound = {
@@ -40,33 +28,10 @@ export const StepUpProviderRef$outboundSchema: z.ZodType<
   id: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StepUpProviderRef$ {
-  /** @deprecated use `StepUpProviderRef$inboundSchema` instead. */
-  export const inboundSchema = StepUpProviderRef$inboundSchema;
-  /** @deprecated use `StepUpProviderRef$outboundSchema` instead. */
-  export const outboundSchema = StepUpProviderRef$outboundSchema;
-  /** @deprecated use `StepUpProviderRef$Outbound` instead. */
-  export type Outbound = StepUpProviderRef$Outbound;
-}
-
 export function stepUpProviderRefToJSON(
   stepUpProviderRef: StepUpProviderRef,
 ): string {
   return JSON.stringify(
     StepUpProviderRef$outboundSchema.parse(stepUpProviderRef),
-  );
-}
-
-export function stepUpProviderRefFromJSON(
-  jsonString: string,
-): SafeParseResult<StepUpProviderRef, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => StepUpProviderRef$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'StepUpProviderRef' from JSON`,
   );
 }
