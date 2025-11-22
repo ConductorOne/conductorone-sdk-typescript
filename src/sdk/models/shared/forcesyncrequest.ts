@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Signal the connector to start syncing. This puts the sync on the queue. It does not guarantee immediate sync. Long syncs still take minutes to hours.
  */
 export type ForceSyncRequest = {};
-
-/** @internal */
-export const ForceSyncRequest$inboundSchema: z.ZodType<
-  ForceSyncRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type ForceSyncRequest$Outbound = {};
@@ -29,33 +19,10 @@ export const ForceSyncRequest$outboundSchema: z.ZodType<
   ForceSyncRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ForceSyncRequest$ {
-  /** @deprecated use `ForceSyncRequest$inboundSchema` instead. */
-  export const inboundSchema = ForceSyncRequest$inboundSchema;
-  /** @deprecated use `ForceSyncRequest$outboundSchema` instead. */
-  export const outboundSchema = ForceSyncRequest$outboundSchema;
-  /** @deprecated use `ForceSyncRequest$Outbound` instead. */
-  export type Outbound = ForceSyncRequest$Outbound;
-}
-
 export function forceSyncRequestToJSON(
   forceSyncRequest: ForceSyncRequest,
 ): string {
   return JSON.stringify(
     ForceSyncRequest$outboundSchema.parse(forceSyncRequest),
-  );
-}
-
-export function forceSyncRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ForceSyncRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ForceSyncRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ForceSyncRequest' from JSON`,
   );
 }

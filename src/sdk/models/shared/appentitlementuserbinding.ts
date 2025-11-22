@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$inboundSchema,
-  AppEntitlementRef$Outbound,
-  AppEntitlementRef$outboundSchema,
 } from "./appentitlementref.js";
 
 /**
@@ -58,55 +56,6 @@ export const AppEntitlementUserBinding$inboundSchema: z.ZodType<
   ).optional(),
   grantSources: z.nullable(z.array(AppEntitlementRef$inboundSchema)).optional(),
 });
-
-/** @internal */
-export type AppEntitlementUserBinding$Outbound = {
-  appEntitlementId?: string | null | undefined;
-  appId?: string | null | undefined;
-  appUserId?: string | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  deprovisionAt?: string | null | undefined;
-  grantSources?: Array<AppEntitlementRef$Outbound> | null | undefined;
-};
-
-/** @internal */
-export const AppEntitlementUserBinding$outboundSchema: z.ZodType<
-  AppEntitlementUserBinding$Outbound,
-  z.ZodTypeDef,
-  AppEntitlementUserBinding
-> = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appUserId: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deprovisionAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  grantSources: z.nullable(z.array(AppEntitlementRef$outboundSchema))
-    .optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementUserBinding$ {
-  /** @deprecated use `AppEntitlementUserBinding$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementUserBinding$inboundSchema;
-  /** @deprecated use `AppEntitlementUserBinding$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlementUserBinding$outboundSchema;
-  /** @deprecated use `AppEntitlementUserBinding$Outbound` instead. */
-  export type Outbound = AppEntitlementUserBinding$Outbound;
-}
-
-export function appEntitlementUserBindingToJSON(
-  appEntitlementUserBinding: AppEntitlementUserBinding,
-): string {
-  return JSON.stringify(
-    AppEntitlementUserBinding$outboundSchema.parse(appEntitlementUserBinding),
-  );
-}
 
 export function appEntitlementUserBindingFromJSON(
   jsonString: string,

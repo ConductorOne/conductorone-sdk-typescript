@@ -25,6 +25,12 @@ import {
   Int64Field$outboundSchema,
 } from "./int64field.js";
 import {
+  Oauth2Field,
+  Oauth2Field$inboundSchema,
+  Oauth2Field$Outbound,
+  Oauth2Field$outboundSchema,
+} from "./oauth2field.js";
+import {
   StringField,
   StringField$inboundSchema,
   StringField$Outbound,
@@ -48,6 +54,7 @@ import {
  *   - stringSliceField
  *   - int64Field
  *   - fileField
+ *   - oauth2Field
  */
 export type FieldInput = {
   boolField?: BoolField | null | undefined;
@@ -65,6 +72,15 @@ export type FieldInput = {
    * The name field.
    */
   name?: string | null | undefined;
+  /**
+   * The Oauth2Field message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named view. Only a single field of the following list may be set at a time:
+   *   - oauth2FieldView
+   */
+  oauth2Field?: Oauth2Field | null | undefined;
   stringField?: StringField | null | undefined;
   stringSliceField?: StringSliceField | null | undefined;
 };
@@ -81,10 +97,10 @@ export const FieldInput$inboundSchema: z.ZodType<
   fileField: z.nullable(FileField$inboundSchema).optional(),
   int64Field: z.nullable(Int64Field$inboundSchema).optional(),
   name: z.nullable(z.string()).optional(),
+  oauth2Field: z.nullable(Oauth2Field$inboundSchema).optional(),
   stringField: z.nullable(StringField$inboundSchema).optional(),
   stringSliceField: z.nullable(StringSliceField$inboundSchema).optional(),
 });
-
 /** @internal */
 export type FieldInput$Outbound = {
   boolField?: BoolField$Outbound | null | undefined;
@@ -93,6 +109,7 @@ export type FieldInput$Outbound = {
   fileField?: FileField$Outbound | null | undefined;
   int64Field?: Int64Field$Outbound | null | undefined;
   name?: string | null | undefined;
+  oauth2Field?: Oauth2Field$Outbound | null | undefined;
   stringField?: StringField$Outbound | null | undefined;
   stringSliceField?: StringSliceField$Outbound | null | undefined;
 };
@@ -109,27 +126,14 @@ export const FieldInput$outboundSchema: z.ZodType<
   fileField: z.nullable(FileField$outboundSchema).optional(),
   int64Field: z.nullable(Int64Field$outboundSchema).optional(),
   name: z.nullable(z.string()).optional(),
+  oauth2Field: z.nullable(Oauth2Field$outboundSchema).optional(),
   stringField: z.nullable(StringField$outboundSchema).optional(),
   stringSliceField: z.nullable(StringSliceField$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FieldInput$ {
-  /** @deprecated use `FieldInput$inboundSchema` instead. */
-  export const inboundSchema = FieldInput$inboundSchema;
-  /** @deprecated use `FieldInput$outboundSchema` instead. */
-  export const outboundSchema = FieldInput$outboundSchema;
-  /** @deprecated use `FieldInput$Outbound` instead. */
-  export type Outbound = FieldInput$Outbound;
-}
-
 export function fieldInputToJSON(fieldInput: FieldInput): string {
   return JSON.stringify(FieldInput$outboundSchema.parse(fieldInput));
 }
-
 export function fieldInputFromJSON(
   jsonString: string,
 ): SafeParseResult<FieldInput, SDKValidationError> {

@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementWithExpired,
   AppEntitlementWithExpired$inboundSchema,
-  AppEntitlementWithExpired$Outbound,
-  AppEntitlementWithExpired$outboundSchema,
 } from "./appentitlementwithexpired.js";
 
 /**
@@ -36,49 +34,6 @@ export const SearchAppEntitlementsWithExpiredResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(AppEntitlementWithExpired$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type SearchAppEntitlementsWithExpiredResponse$Outbound = {
-  list?: Array<AppEntitlementWithExpired$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const SearchAppEntitlementsWithExpiredResponse$outboundSchema: z.ZodType<
-  SearchAppEntitlementsWithExpiredResponse$Outbound,
-  z.ZodTypeDef,
-  SearchAppEntitlementsWithExpiredResponse
-> = z.object({
-  list: z.nullable(z.array(AppEntitlementWithExpired$outboundSchema))
-    .optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchAppEntitlementsWithExpiredResponse$ {
-  /** @deprecated use `SearchAppEntitlementsWithExpiredResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    SearchAppEntitlementsWithExpiredResponse$inboundSchema;
-  /** @deprecated use `SearchAppEntitlementsWithExpiredResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchAppEntitlementsWithExpiredResponse$outboundSchema;
-  /** @deprecated use `SearchAppEntitlementsWithExpiredResponse$Outbound` instead. */
-  export type Outbound = SearchAppEntitlementsWithExpiredResponse$Outbound;
-}
-
-export function searchAppEntitlementsWithExpiredResponseToJSON(
-  searchAppEntitlementsWithExpiredResponse:
-    SearchAppEntitlementsWithExpiredResponse,
-): string {
-  return JSON.stringify(
-    SearchAppEntitlementsWithExpiredResponse$outboundSchema.parse(
-      searchAppEntitlementsWithExpiredResponse,
-    ),
-  );
-}
 
 export function searchAppEntitlementsWithExpiredResponseFromJSON(
   jsonString: string,

@@ -30,43 +30,6 @@ export const TaskAuditWaitStepUntilTime$inboundSchema: z.ZodType<
   ).optional(),
 });
 
-/** @internal */
-export type TaskAuditWaitStepUntilTime$Outbound = {
-  stepId?: string | null | undefined;
-  untilTime?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditWaitStepUntilTime$outboundSchema: z.ZodType<
-  TaskAuditWaitStepUntilTime$Outbound,
-  z.ZodTypeDef,
-  TaskAuditWaitStepUntilTime
-> = z.object({
-  stepId: z.nullable(z.string()).optional(),
-  untilTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditWaitStepUntilTime$ {
-  /** @deprecated use `TaskAuditWaitStepUntilTime$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditWaitStepUntilTime$inboundSchema;
-  /** @deprecated use `TaskAuditWaitStepUntilTime$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditWaitStepUntilTime$outboundSchema;
-  /** @deprecated use `TaskAuditWaitStepUntilTime$Outbound` instead. */
-  export type Outbound = TaskAuditWaitStepUntilTime$Outbound;
-}
-
-export function taskAuditWaitStepUntilTimeToJSON(
-  taskAuditWaitStepUntilTime: TaskAuditWaitStepUntilTime,
-): string {
-  return JSON.stringify(
-    TaskAuditWaitStepUntilTime$outboundSchema.parse(taskAuditWaitStepUntilTime),
-  );
-}
-
 export function taskAuditWaitStepUntilTimeFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditWaitStepUntilTime, SDKValidationError> {

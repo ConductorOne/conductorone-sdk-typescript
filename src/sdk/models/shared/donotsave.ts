@@ -18,7 +18,6 @@ export const DoNotSave$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
 /** @internal */
 export type DoNotSave$Outbound = {};
 
@@ -29,23 +28,9 @@ export const DoNotSave$outboundSchema: z.ZodType<
   DoNotSave
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DoNotSave$ {
-  /** @deprecated use `DoNotSave$inboundSchema` instead. */
-  export const inboundSchema = DoNotSave$inboundSchema;
-  /** @deprecated use `DoNotSave$outboundSchema` instead. */
-  export const outboundSchema = DoNotSave$outboundSchema;
-  /** @deprecated use `DoNotSave$Outbound` instead. */
-  export type Outbound = DoNotSave$Outbound;
-}
-
 export function doNotSaveToJSON(doNotSave: DoNotSave): string {
   return JSON.stringify(DoNotSave$outboundSchema.parse(doNotSave));
 }
-
 export function doNotSaveFromJSON(
   jsonString: string,
 ): SafeParseResult<DoNotSave, SDKValidationError> {

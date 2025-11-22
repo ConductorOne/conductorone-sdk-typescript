@@ -25,7 +25,6 @@ export const ReassignToApprovers$inboundSchema: z.ZodType<
 > = z.object({
   approverIds: z.nullable(z.array(z.string())).optional(),
 });
-
 /** @internal */
 export type ReassignToApprovers$Outbound = {
   approverIds?: Array<string> | null | undefined;
@@ -40,19 +39,6 @@ export const ReassignToApprovers$outboundSchema: z.ZodType<
   approverIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ReassignToApprovers$ {
-  /** @deprecated use `ReassignToApprovers$inboundSchema` instead. */
-  export const inboundSchema = ReassignToApprovers$inboundSchema;
-  /** @deprecated use `ReassignToApprovers$outboundSchema` instead. */
-  export const outboundSchema = ReassignToApprovers$outboundSchema;
-  /** @deprecated use `ReassignToApprovers$Outbound` instead. */
-  export type Outbound = ReassignToApprovers$Outbound;
-}
-
 export function reassignToApproversToJSON(
   reassignToApprovers: ReassignToApprovers,
 ): string {
@@ -60,7 +46,6 @@ export function reassignToApproversToJSON(
     ReassignToApprovers$outboundSchema.parse(reassignToApprovers),
   );
 }
-
 export function reassignToApproversFromJSON(
   jsonString: string,
 ): SafeParseResult<ReassignToApprovers, SDKValidationError> {

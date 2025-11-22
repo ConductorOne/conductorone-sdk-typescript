@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The RemoveGrantDurationRequest message.
  */
 export type RemoveGrantDurationRequest = {};
-
-/** @internal */
-export const RemoveGrantDurationRequest$inboundSchema: z.ZodType<
-  RemoveGrantDurationRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type RemoveGrantDurationRequest$Outbound = {};
@@ -29,33 +19,10 @@ export const RemoveGrantDurationRequest$outboundSchema: z.ZodType<
   RemoveGrantDurationRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RemoveGrantDurationRequest$ {
-  /** @deprecated use `RemoveGrantDurationRequest$inboundSchema` instead. */
-  export const inboundSchema = RemoveGrantDurationRequest$inboundSchema;
-  /** @deprecated use `RemoveGrantDurationRequest$outboundSchema` instead. */
-  export const outboundSchema = RemoveGrantDurationRequest$outboundSchema;
-  /** @deprecated use `RemoveGrantDurationRequest$Outbound` instead. */
-  export type Outbound = RemoveGrantDurationRequest$Outbound;
-}
-
 export function removeGrantDurationRequestToJSON(
   removeGrantDurationRequest: RemoveGrantDurationRequest,
 ): string {
   return JSON.stringify(
     RemoveGrantDurationRequest$outboundSchema.parse(removeGrantDurationRequest),
-  );
-}
-
-export function removeGrantDurationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<RemoveGrantDurationRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RemoveGrantDurationRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RemoveGrantDurationRequest' from JSON`,
   );
 }

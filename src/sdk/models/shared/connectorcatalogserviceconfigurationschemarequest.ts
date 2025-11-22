@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The ConnectorCatalogServiceConfigurationSchemaRequest message.
@@ -26,18 +23,6 @@ export type ConnectorCatalogServiceConfigurationSchemaRequest = {
 };
 
 /** @internal */
-export const ConnectorCatalogServiceConfigurationSchemaRequest$inboundSchema:
-  z.ZodType<
-    ConnectorCatalogServiceConfigurationSchemaRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    appId: z.nullable(z.string()).optional(),
-    catalogId: z.nullable(z.string()).optional(),
-    connectorId: z.nullable(z.string()).optional(),
-  });
-
-/** @internal */
 export type ConnectorCatalogServiceConfigurationSchemaRequest$Outbound = {
   appId?: string | null | undefined;
   catalogId?: string | null | undefined;
@@ -56,22 +41,6 @@ export const ConnectorCatalogServiceConfigurationSchemaRequest$outboundSchema:
     connectorId: z.nullable(z.string()).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorCatalogServiceConfigurationSchemaRequest$ {
-  /** @deprecated use `ConnectorCatalogServiceConfigurationSchemaRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    ConnectorCatalogServiceConfigurationSchemaRequest$inboundSchema;
-  /** @deprecated use `ConnectorCatalogServiceConfigurationSchemaRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    ConnectorCatalogServiceConfigurationSchemaRequest$outboundSchema;
-  /** @deprecated use `ConnectorCatalogServiceConfigurationSchemaRequest$Outbound` instead. */
-  export type Outbound =
-    ConnectorCatalogServiceConfigurationSchemaRequest$Outbound;
-}
-
 export function connectorCatalogServiceConfigurationSchemaRequestToJSON(
   connectorCatalogServiceConfigurationSchemaRequest:
     ConnectorCatalogServiceConfigurationSchemaRequest,
@@ -80,21 +49,5 @@ export function connectorCatalogServiceConfigurationSchemaRequestToJSON(
     ConnectorCatalogServiceConfigurationSchemaRequest$outboundSchema.parse(
       connectorCatalogServiceConfigurationSchemaRequest,
     ),
-  );
-}
-
-export function connectorCatalogServiceConfigurationSchemaRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  ConnectorCatalogServiceConfigurationSchemaRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ConnectorCatalogServiceConfigurationSchemaRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'ConnectorCatalogServiceConfigurationSchemaRequest' from JSON`,
   );
 }

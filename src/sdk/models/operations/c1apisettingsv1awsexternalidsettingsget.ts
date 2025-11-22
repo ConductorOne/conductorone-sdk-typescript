@@ -49,66 +49,6 @@ export const C1ApiSettingsV1AWSExternalIDSettingsGetResponse$inboundSchema:
     });
   });
 
-/** @internal */
-export type C1ApiSettingsV1AWSExternalIDSettingsGetResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  GetAWSExternalIDResponse?:
-    | shared.GetAWSExternalIDResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiSettingsV1AWSExternalIDSettingsGetResponse$outboundSchema:
-  z.ZodType<
-    C1ApiSettingsV1AWSExternalIDSettingsGetResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiSettingsV1AWSExternalIDSettingsGetResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    getAWSExternalIDResponse: shared.GetAWSExternalIDResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      getAWSExternalIDResponse: "GetAWSExternalIDResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiSettingsV1AWSExternalIDSettingsGetResponse$ {
-  /** @deprecated use `C1ApiSettingsV1AWSExternalIDSettingsGetResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiSettingsV1AWSExternalIDSettingsGetResponse$inboundSchema;
-  /** @deprecated use `C1ApiSettingsV1AWSExternalIDSettingsGetResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiSettingsV1AWSExternalIDSettingsGetResponse$outboundSchema;
-  /** @deprecated use `C1ApiSettingsV1AWSExternalIDSettingsGetResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiSettingsV1AWSExternalIDSettingsGetResponse$Outbound;
-}
-
-export function c1ApiSettingsV1AWSExternalIDSettingsGetResponseToJSON(
-  c1ApiSettingsV1AWSExternalIDSettingsGetResponse:
-    C1ApiSettingsV1AWSExternalIDSettingsGetResponse,
-): string {
-  return JSON.stringify(
-    C1ApiSettingsV1AWSExternalIDSettingsGetResponse$outboundSchema.parse(
-      c1ApiSettingsV1AWSExternalIDSettingsGetResponse,
-    ),
-  );
-}
-
 export function c1ApiSettingsV1AWSExternalIDSettingsGetResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$inboundSchema,
-  AppEntitlementRef$Outbound,
-  AppEntitlementRef$outboundSchema,
 } from "./appentitlementref.js";
 
 /**
@@ -34,50 +32,6 @@ export const RequestSchemaServiceCreateEntitlementBindingResponse$inboundSchema:
     entitlementRef: z.nullable(AppEntitlementRef$inboundSchema).optional(),
     requestSchemaId: z.nullable(z.string()).optional(),
   });
-
-/** @internal */
-export type RequestSchemaServiceCreateEntitlementBindingResponse$Outbound = {
-  entitlementRef?: AppEntitlementRef$Outbound | null | undefined;
-  requestSchemaId?: string | null | undefined;
-};
-
-/** @internal */
-export const RequestSchemaServiceCreateEntitlementBindingResponse$outboundSchema:
-  z.ZodType<
-    RequestSchemaServiceCreateEntitlementBindingResponse$Outbound,
-    z.ZodTypeDef,
-    RequestSchemaServiceCreateEntitlementBindingResponse
-  > = z.object({
-    entitlementRef: z.nullable(AppEntitlementRef$outboundSchema).optional(),
-    requestSchemaId: z.nullable(z.string()).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestSchemaServiceCreateEntitlementBindingResponse$ {
-  /** @deprecated use `RequestSchemaServiceCreateEntitlementBindingResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestSchemaServiceCreateEntitlementBindingResponse$inboundSchema;
-  /** @deprecated use `RequestSchemaServiceCreateEntitlementBindingResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestSchemaServiceCreateEntitlementBindingResponse$outboundSchema;
-  /** @deprecated use `RequestSchemaServiceCreateEntitlementBindingResponse$Outbound` instead. */
-  export type Outbound =
-    RequestSchemaServiceCreateEntitlementBindingResponse$Outbound;
-}
-
-export function requestSchemaServiceCreateEntitlementBindingResponseToJSON(
-  requestSchemaServiceCreateEntitlementBindingResponse:
-    RequestSchemaServiceCreateEntitlementBindingResponse,
-): string {
-  return JSON.stringify(
-    RequestSchemaServiceCreateEntitlementBindingResponse$outboundSchema.parse(
-      requestSchemaServiceCreateEntitlementBindingResponse,
-    ),
-  );
-}
 
 export function requestSchemaServiceCreateEntitlementBindingResponseFromJSON(
   jsonString: string,

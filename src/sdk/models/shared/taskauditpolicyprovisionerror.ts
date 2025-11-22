@@ -26,43 +26,6 @@ export const TaskAuditPolicyProvisionError$inboundSchema: z.ZodType<
   error: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditPolicyProvisionError$Outbound = {
-  error?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditPolicyProvisionError$outboundSchema: z.ZodType<
-  TaskAuditPolicyProvisionError$Outbound,
-  z.ZodTypeDef,
-  TaskAuditPolicyProvisionError
-> = z.object({
-  error: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditPolicyProvisionError$ {
-  /** @deprecated use `TaskAuditPolicyProvisionError$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditPolicyProvisionError$inboundSchema;
-  /** @deprecated use `TaskAuditPolicyProvisionError$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditPolicyProvisionError$outboundSchema;
-  /** @deprecated use `TaskAuditPolicyProvisionError$Outbound` instead. */
-  export type Outbound = TaskAuditPolicyProvisionError$Outbound;
-}
-
-export function taskAuditPolicyProvisionErrorToJSON(
-  taskAuditPolicyProvisionError: TaskAuditPolicyProvisionError,
-): string {
-  return JSON.stringify(
-    TaskAuditPolicyProvisionError$outboundSchema.parse(
-      taskAuditPolicyProvisionError,
-    ),
-  );
-}
-
 export function taskAuditPolicyProvisionErrorFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditPolicyProvisionError, SDKValidationError> {

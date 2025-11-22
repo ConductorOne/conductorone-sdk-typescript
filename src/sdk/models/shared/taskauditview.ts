@@ -4,348 +4,233 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskAuditAccessRequestOutcome,
   TaskAuditAccessRequestOutcome$inboundSchema,
-  TaskAuditAccessRequestOutcome$Outbound,
-  TaskAuditAccessRequestOutcome$outboundSchema,
 } from "./taskauditaccessrequestoutcome.js";
 import {
   TaskAuditAccountLifecycleActionCreated,
   TaskAuditAccountLifecycleActionCreated$inboundSchema,
-  TaskAuditAccountLifecycleActionCreated$Outbound,
-  TaskAuditAccountLifecycleActionCreated$outboundSchema,
 } from "./taskauditaccountlifecycleactioncreated.js";
 import {
   TaskAuditAccountLifecycleActionFailed,
   TaskAuditAccountLifecycleActionFailed$inboundSchema,
-  TaskAuditAccountLifecycleActionFailed$Outbound,
-  TaskAuditAccountLifecycleActionFailed$outboundSchema,
 } from "./taskauditaccountlifecycleactionfailed.js";
 import {
   TaskAuditActionSubmitted,
   TaskAuditActionSubmitted$inboundSchema,
-  TaskAuditActionSubmitted$Outbound,
-  TaskAuditActionSubmitted$outboundSchema,
 } from "./taskauditactionsubmitted.js";
 import {
   TaskAuditApprovalAutoAcceptedByPolicy,
   TaskAuditApprovalAutoAcceptedByPolicy$inboundSchema,
-  TaskAuditApprovalAutoAcceptedByPolicy$Outbound,
-  TaskAuditApprovalAutoAcceptedByPolicy$outboundSchema,
 } from "./taskauditapprovalautoacceptedbypolicy.js";
 import {
   TaskAuditApprovalAutoRejectedByPolicy,
   TaskAuditApprovalAutoRejectedByPolicy$inboundSchema,
-  TaskAuditApprovalAutoRejectedByPolicy$Outbound,
-  TaskAuditApprovalAutoRejectedByPolicy$outboundSchema,
 } from "./taskauditapprovalautorejectedbypolicy.js";
 import {
   TaskAuditApprovalHappenedAutomatically,
   TaskAuditApprovalHappenedAutomatically$inboundSchema,
-  TaskAuditApprovalHappenedAutomatically$Outbound,
-  TaskAuditApprovalHappenedAutomatically$outboundSchema,
 } from "./taskauditapprovalhappenedautomatically.js";
 import {
   TaskAuditApprovalInstanceChange,
   TaskAuditApprovalInstanceChange$inboundSchema,
-  TaskAuditApprovalInstanceChange$Outbound,
-  TaskAuditApprovalInstanceChange$outboundSchema,
 } from "./taskauditapprovalinstancechange.js";
 import {
   TaskAuditBulkActionError,
   TaskAuditBulkActionError$inboundSchema,
-  TaskAuditBulkActionError$Outbound,
-  TaskAuditBulkActionError$outboundSchema,
 } from "./taskauditbulkactionerror.js";
 import {
   TaskAuditCertifyOutcome,
   TaskAuditCertifyOutcome$inboundSchema,
-  TaskAuditCertifyOutcome$Outbound,
-  TaskAuditCertifyOutcome$outboundSchema,
 } from "./taskauditcertifyoutcome.js";
 import {
   TaskAuditComment,
   TaskAuditComment$inboundSchema,
-  TaskAuditComment$Outbound,
-  TaskAuditComment$outboundSchema,
 } from "./taskauditcomment.js";
 import {
   TaskAuditConditionalPolicyExecutionResult,
   TaskAuditConditionalPolicyExecutionResult$inboundSchema,
-  TaskAuditConditionalPolicyExecutionResult$Outbound,
-  TaskAuditConditionalPolicyExecutionResult$outboundSchema,
 } from "./taskauditconditionalpolicyexecutionresult.js";
 import {
   TaskAuditConnectorActionResult,
   TaskAuditConnectorActionResult$inboundSchema,
-  TaskAuditConnectorActionResult$Outbound,
-  TaskAuditConnectorActionResult$outboundSchema,
 } from "./taskauditconnectoractionresult.js";
 import {
   TaskAuditEscalateToEmergencyAccess,
   TaskAuditEscalateToEmergencyAccess$inboundSchema,
-  TaskAuditEscalateToEmergencyAccess$Outbound,
-  TaskAuditEscalateToEmergencyAccess$outboundSchema,
 } from "./taskauditescalatetoemergencyaccess.js";
 import {
   TaskAuditExpressionPolicyStepError,
   TaskAuditExpressionPolicyStepError$inboundSchema,
-  TaskAuditExpressionPolicyStepError$Outbound,
-  TaskAuditExpressionPolicyStepError$outboundSchema,
 } from "./taskauditexpressionpolicysteperror.js";
 import {
   TaskAuditExternalTicketCreated,
   TaskAuditExternalTicketCreated$inboundSchema,
-  TaskAuditExternalTicketCreated$Outbound,
-  TaskAuditExternalTicketCreated$outboundSchema,
 } from "./taskauditexternalticketcreated.js";
 import {
   TaskAuditExternalTicketError,
   TaskAuditExternalTicketError$inboundSchema,
-  TaskAuditExternalTicketError$Outbound,
-  TaskAuditExternalTicketError$outboundSchema,
 } from "./taskauditexternalticketerror.js";
 import {
   TaskAuditExternalTicketProvisionStepResolved,
   TaskAuditExternalTicketProvisionStepResolved$inboundSchema,
-  TaskAuditExternalTicketProvisionStepResolved$Outbound,
-  TaskAuditExternalTicketProvisionStepResolved$outboundSchema,
 } from "./taskauditexternalticketprovisionstepresolved.js";
 import {
   TaskAuditExternalTicketTriggered,
   TaskAuditExternalTicketTriggered$inboundSchema,
-  TaskAuditExternalTicketTriggered$Outbound,
-  TaskAuditExternalTicketTriggered$outboundSchema,
 } from "./taskauditexternaltickettriggered.js";
 import {
   TaskAuditFinishedConnectorActions,
   TaskAuditFinishedConnectorActions$inboundSchema,
-  TaskAuditFinishedConnectorActions$Outbound,
-  TaskAuditFinishedConnectorActions$outboundSchema,
 } from "./taskauditfinishedconnectoractions.js";
 import {
   TaskAuditFormInstanceChange,
   TaskAuditFormInstanceChange$inboundSchema,
-  TaskAuditFormInstanceChange$Outbound,
-  TaskAuditFormInstanceChange$outboundSchema,
 } from "./taskauditforminstancechange.js";
 import {
   TaskAuditGrantDurationUpdated,
   TaskAuditGrantDurationUpdated$inboundSchema,
-  TaskAuditGrantDurationUpdated$Outbound,
-  TaskAuditGrantDurationUpdated$outboundSchema,
 } from "./taskauditgrantdurationupdated.js";
 import {
   TaskAuditGrantOutcome,
   TaskAuditGrantOutcome$inboundSchema,
-  TaskAuditGrantOutcome$Outbound,
-  TaskAuditGrantOutcome$outboundSchema,
 } from "./taskauditgrantoutcome.js";
 import {
   TaskAuditHardReset,
   TaskAuditHardReset$inboundSchema,
-  TaskAuditHardReset$Outbound,
-  TaskAuditHardReset$outboundSchema,
 } from "./taskaudithardreset.js";
 import {
   TaskAuditMetaData,
   TaskAuditMetaData$inboundSchema,
-  TaskAuditMetaData$Outbound,
-  TaskAuditMetaData$outboundSchema,
 } from "./taskauditmetadata.js";
 import {
   TaskAuditNewTask,
   TaskAuditNewTask$inboundSchema,
-  TaskAuditNewTask$Outbound,
-  TaskAuditNewTask$outboundSchema,
 } from "./taskauditnewtask.js";
 import {
   TaskAuditPolicyApprovalReassigned,
   TaskAuditPolicyApprovalReassigned$inboundSchema,
-  TaskAuditPolicyApprovalReassigned$Outbound,
-  TaskAuditPolicyApprovalReassigned$outboundSchema,
 } from "./taskauditpolicyapprovalreassigned.js";
 import {
   TaskAuditPolicyChanged,
   TaskAuditPolicyChanged$inboundSchema,
-  TaskAuditPolicyChanged$Outbound,
-  TaskAuditPolicyChanged$outboundSchema,
 } from "./taskauditpolicychanged.js";
 import {
   TaskAuditPolicyEvaluationStep,
   TaskAuditPolicyEvaluationStep$inboundSchema,
-  TaskAuditPolicyEvaluationStep$Outbound,
-  TaskAuditPolicyEvaluationStep$outboundSchema,
 } from "./taskauditpolicyevaluationstep.js";
 import {
   TaskAuditPolicyProvisionCancelled,
   TaskAuditPolicyProvisionCancelled$inboundSchema,
-  TaskAuditPolicyProvisionCancelled$Outbound,
-  TaskAuditPolicyProvisionCancelled$outboundSchema,
 } from "./taskauditpolicyprovisioncancelled.js";
 import {
   TaskAuditPolicyProvisionError,
   TaskAuditPolicyProvisionError$inboundSchema,
-  TaskAuditPolicyProvisionError$Outbound,
-  TaskAuditPolicyProvisionError$outboundSchema,
 } from "./taskauditpolicyprovisionerror.js";
 import {
   TaskAuditPolicyProvisionReassigned,
   TaskAuditPolicyProvisionReassigned$inboundSchema,
-  TaskAuditPolicyProvisionReassigned$Outbound,
-  TaskAuditPolicyProvisionReassigned$outboundSchema,
 } from "./taskauditpolicyprovisionreassigned.js";
 import {
   TaskAuditReassignedToDelegate,
   TaskAuditReassignedToDelegate$inboundSchema,
-  TaskAuditReassignedToDelegate$Outbound,
-  TaskAuditReassignedToDelegate$outboundSchema,
 } from "./taskauditreassignedtodelegate.js";
 import {
   TaskAuditReassignmentListError,
   TaskAuditReassignmentListError$inboundSchema,
-  TaskAuditReassignmentListError$Outbound,
-  TaskAuditReassignmentListError$outboundSchema,
 } from "./taskauditreassignmentlisterror.js";
 import {
   TaskAuditRestart,
   TaskAuditRestart$inboundSchema,
-  TaskAuditRestart$Outbound,
-  TaskAuditRestart$outboundSchema,
 } from "./taskauditrestart.js";
 import {
   TaskAuditRevokeOutcome,
   TaskAuditRevokeOutcome$inboundSchema,
-  TaskAuditRevokeOutcome$Outbound,
-  TaskAuditRevokeOutcome$outboundSchema,
 } from "./taskauditrevokeoutcome.js";
 import {
   TaskAuditSLAEscalation,
   TaskAuditSLAEscalation$inboundSchema,
-  TaskAuditSLAEscalation$Outbound,
-  TaskAuditSLAEscalation$outboundSchema,
 } from "./taskauditslaescalation.js";
 import {
   TaskAuditStartedConnectorActions,
   TaskAuditStartedConnectorActions$inboundSchema,
-  TaskAuditStartedConnectorActions$Outbound,
-  TaskAuditStartedConnectorActions$outboundSchema,
 } from "./taskauditstartedconnectoractions.js";
 import {
   TaskAuditStateChange,
   TaskAuditStateChange$inboundSchema,
-  TaskAuditStateChange$Outbound,
-  TaskAuditStateChange$outboundSchema,
 } from "./taskauditstatechange.js";
 import {
   TaskAuditStepSkipped,
   TaskAuditStepSkipped$inboundSchema,
-  TaskAuditStepSkipped$Outbound,
-  TaskAuditStepSkipped$outboundSchema,
 } from "./taskauditstepskipped.js";
 import {
   TaskAuditStepUpApproval,
   TaskAuditStepUpApproval$inboundSchema,
-  TaskAuditStepUpApproval$Outbound,
-  TaskAuditStepUpApproval$outboundSchema,
 } from "./taskauditstepupapproval.js";
 import {
   TaskAuditWaitForAnalysisStepSuccess,
   TaskAuditWaitForAnalysisStepSuccess$inboundSchema,
-  TaskAuditWaitForAnalysisStepSuccess$Outbound,
-  TaskAuditWaitForAnalysisStepSuccess$outboundSchema,
 } from "./taskauditwaitforanalysisstepsuccess.js";
 import {
   TaskAuditWaitForAnalysisStepTimedOut,
   TaskAuditWaitForAnalysisStepTimedOut$inboundSchema,
-  TaskAuditWaitForAnalysisStepTimedOut$Outbound,
-  TaskAuditWaitForAnalysisStepTimedOut$outboundSchema,
 } from "./taskauditwaitforanalysissteptimedout.js";
 import {
   TaskAuditWaitForAnalysisStepWaiting,
   TaskAuditWaitForAnalysisStepWaiting$inboundSchema,
-  TaskAuditWaitForAnalysisStepWaiting$Outbound,
-  TaskAuditWaitForAnalysisStepWaiting$outboundSchema,
 } from "./taskauditwaitforanalysisstepwaiting.js";
 import {
   TaskAuditWaitStepSuccess,
   TaskAuditWaitStepSuccess$inboundSchema,
-  TaskAuditWaitStepSuccess$Outbound,
-  TaskAuditWaitStepSuccess$outboundSchema,
 } from "./taskauditwaitstepsuccess.js";
 import {
   TaskAuditWaitStepTimedOut,
   TaskAuditWaitStepTimedOut$inboundSchema,
-  TaskAuditWaitStepTimedOut$Outbound,
-  TaskAuditWaitStepTimedOut$outboundSchema,
 } from "./taskauditwaitsteptimedout.js";
 import {
   TaskAuditWaitStepUntilTime,
   TaskAuditWaitStepUntilTime$inboundSchema,
-  TaskAuditWaitStepUntilTime$Outbound,
-  TaskAuditWaitStepUntilTime$outboundSchema,
 } from "./taskauditwaitstepuntiltime.js";
 import {
   TaskAuditWaitStepWaiting,
   TaskAuditWaitStepWaiting$inboundSchema,
-  TaskAuditWaitStepWaiting$Outbound,
-  TaskAuditWaitStepWaiting$outboundSchema,
 } from "./taskauditwaitstepwaiting.js";
 import {
   TaskAuditWebhookApprovalAttempt,
   TaskAuditWebhookApprovalAttempt$inboundSchema,
-  TaskAuditWebhookApprovalAttempt$Outbound,
-  TaskAuditWebhookApprovalAttempt$outboundSchema,
 } from "./taskauditwebhookapprovalattempt.js";
 import {
   TaskAuditWebhookApprovalBadResponse,
   TaskAuditWebhookApprovalBadResponse$inboundSchema,
-  TaskAuditWebhookApprovalBadResponse$Outbound,
-  TaskAuditWebhookApprovalBadResponse$outboundSchema,
 } from "./taskauditwebhookapprovalbadresponse.js";
 import {
   TaskAuditWebhookApprovalFatalError,
   TaskAuditWebhookApprovalFatalError$inboundSchema,
-  TaskAuditWebhookApprovalFatalError$Outbound,
-  TaskAuditWebhookApprovalFatalError$outboundSchema,
 } from "./taskauditwebhookapprovalfatalerror.js";
 import {
   TaskAuditWebhookApprovalSuccess,
   TaskAuditWebhookApprovalSuccess$inboundSchema,
-  TaskAuditWebhookApprovalSuccess$Outbound,
-  TaskAuditWebhookApprovalSuccess$outboundSchema,
 } from "./taskauditwebhookapprovalsuccess.js";
 import {
   TaskAuditWebhookApprovalTriggered,
   TaskAuditWebhookApprovalTriggered$inboundSchema,
-  TaskAuditWebhookApprovalTriggered$Outbound,
-  TaskAuditWebhookApprovalTriggered$outboundSchema,
 } from "./taskauditwebhookapprovaltriggered.js";
 import {
   TaskAuditWebhookAttempt,
   TaskAuditWebhookAttempt$inboundSchema,
-  TaskAuditWebhookAttempt$Outbound,
-  TaskAuditWebhookAttempt$outboundSchema,
 } from "./taskauditwebhookattempt.js";
 import {
   TaskAuditWebhookSuccess,
   TaskAuditWebhookSuccess$inboundSchema,
-  TaskAuditWebhookSuccess$Outbound,
-  TaskAuditWebhookSuccess$outboundSchema,
 } from "./taskauditwebhooksuccess.js";
 import {
   TaskAuditWebhookTriggered,
   TaskAuditWebhookTriggered$inboundSchema,
-  TaskAuditWebhookTriggered$Outbound,
-  TaskAuditWebhookTriggered$outboundSchema,
 } from "./taskauditwebhooktriggered.js";
 
 /**
@@ -586,89 +471,18 @@ export const CurrentState$inboundSchema: z.ZodType<
   CurrentState,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(CurrentState),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const CurrentState$outboundSchema: z.ZodType<
-  CurrentState,
-  z.ZodTypeDef,
-  CurrentState
-> = z.union([
-  z.nativeEnum(CurrentState),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CurrentState$ {
-  /** @deprecated use `CurrentState$inboundSchema` instead. */
-  export const inboundSchema = CurrentState$inboundSchema;
-  /** @deprecated use `CurrentState$outboundSchema` instead. */
-  export const outboundSchema = CurrentState$outboundSchema;
-}
+> = openEnums.inboundSchema(CurrentState);
 
 /** @internal */
 export const TaskAuditViewEventType$inboundSchema: z.ZodType<
   TaskAuditViewEventType,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(TaskAuditViewEventType),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
+> = openEnums.inboundSchema(TaskAuditViewEventType);
 
 /** @internal */
-export const TaskAuditViewEventType$outboundSchema: z.ZodType<
-  TaskAuditViewEventType,
-  z.ZodTypeDef,
-  TaskAuditViewEventType
-> = z.union([
-  z.nativeEnum(TaskAuditViewEventType),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditViewEventType$ {
-  /** @deprecated use `TaskAuditViewEventType$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditViewEventType$inboundSchema;
-  /** @deprecated use `TaskAuditViewEventType$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditViewEventType$outboundSchema;
-}
-
-/** @internal */
-export const Source$inboundSchema: z.ZodType<Source, z.ZodTypeDef, unknown> = z
-  .union([
-    z.nativeEnum(Source),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const Source$outboundSchema: z.ZodType<Source, z.ZodTypeDef, Source> = z
-  .union([
-    z.nativeEnum(Source),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Source$ {
-  /** @deprecated use `Source$inboundSchema` instead. */
-  export const inboundSchema = Source$inboundSchema;
-  /** @deprecated use `Source$outboundSchema` instead. */
-  export const outboundSchema = Source$outboundSchema;
-}
+export const Source$inboundSchema: z.ZodType<Source, z.ZodTypeDef, unknown> =
+  openEnums.inboundSchema(Source);
 
 /** @internal */
 export const TaskAuditView$inboundSchema: z.ZodType<
@@ -809,322 +623,6 @@ export const TaskAuditView$inboundSchema: z.ZodType<
     .optional(),
   workflowStep: z.nullable(z.number().int()).optional(),
 });
-
-/** @internal */
-export type TaskAuditView$Outbound = {
-  accessRequestOutcome?:
-    | TaskAuditAccessRequestOutcome$Outbound
-    | null
-    | undefined;
-  accountLifecycleActionCreated?:
-    | TaskAuditAccountLifecycleActionCreated$Outbound
-    | null
-    | undefined;
-  accountLifecycleActionFailed?:
-    | TaskAuditAccountLifecycleActionFailed$Outbound
-    | null
-    | undefined;
-  actionResult?: TaskAuditConnectorActionResult$Outbound | null | undefined;
-  actionSubmitted?: TaskAuditActionSubmitted$Outbound | null | undefined;
-  approvalAutoAcceptedByPolicy?:
-    | TaskAuditApprovalAutoAcceptedByPolicy$Outbound
-    | null
-    | undefined;
-  approvalAutoRejectedByPolicy?:
-    | TaskAuditApprovalAutoRejectedByPolicy$Outbound
-    | null
-    | undefined;
-  approvalInstanceChange?:
-    | TaskAuditApprovalInstanceChange$Outbound
-    | null
-    | undefined;
-  approvalReassigned?:
-    | TaskAuditPolicyApprovalReassigned$Outbound
-    | null
-    | undefined;
-  approvedAutomatically?:
-    | TaskAuditApprovalHappenedAutomatically$Outbound
-    | null
-    | undefined;
-  bulkActionError?: TaskAuditBulkActionError$Outbound | null | undefined;
-  certifyOutcome?: TaskAuditCertifyOutcome$Outbound | null | undefined;
-  comment?: TaskAuditComment$Outbound | null | undefined;
-  conditionalPolicyExecutionResult?:
-    | TaskAuditConditionalPolicyExecutionResult$Outbound
-    | null
-    | undefined;
-  connectorActionsEnd?:
-    | TaskAuditFinishedConnectorActions$Outbound
-    | null
-    | undefined;
-  connectorActionsStart?:
-    | TaskAuditStartedConnectorActions$Outbound
-    | null
-    | undefined;
-  created?: string | null | undefined;
-  currentState?: string | null | undefined;
-  eventType?: string | null | undefined;
-  expressionPolicyStepError?:
-    | TaskAuditExpressionPolicyStepError$Outbound
-    | null
-    | undefined;
-  externalTicketCreated?:
-    | TaskAuditExternalTicketCreated$Outbound
-    | null
-    | undefined;
-  externalTicketError?:
-    | TaskAuditExternalTicketError$Outbound
-    | null
-    | undefined;
-  externalTicketProvisionStepResolved?:
-    | TaskAuditExternalTicketProvisionStepResolved$Outbound
-    | null
-    | undefined;
-  externalTicketTriggered?:
-    | TaskAuditExternalTicketTriggered$Outbound
-    | null
-    | undefined;
-  formInstanceChange?: TaskAuditFormInstanceChange$Outbound | null | undefined;
-  grantDurationUpdated?:
-    | TaskAuditGrantDurationUpdated$Outbound
-    | null
-    | undefined;
-  grantOutcome?: TaskAuditGrantOutcome$Outbound | null | undefined;
-  hardReset?: TaskAuditHardReset$Outbound | null | undefined;
-  id?: string | null | undefined;
-  metadata?: TaskAuditMetaData$Outbound | null | undefined;
-  policyChanged?: TaskAuditPolicyChanged$Outbound | null | undefined;
-  policyEvaluationStep?:
-    | TaskAuditPolicyEvaluationStep$Outbound
-    | null
-    | undefined;
-  provisionCancelled?:
-    | TaskAuditPolicyProvisionCancelled$Outbound
-    | null
-    | undefined;
-  provisionError?: TaskAuditPolicyProvisionError$Outbound | null | undefined;
-  provisionReassigned?:
-    | TaskAuditPolicyProvisionReassigned$Outbound
-    | null
-    | undefined;
-  reassignedToDelegate?:
-    | TaskAuditReassignedToDelegate$Outbound
-    | null
-    | undefined;
-  reassignmentListError?:
-    | TaskAuditReassignmentListError$Outbound
-    | null
-    | undefined;
-  revokeOutcome?: TaskAuditRevokeOutcome$Outbound | null | undefined;
-  slaEscalation?: TaskAuditSLAEscalation$Outbound | null | undefined;
-  source?: string | null | undefined;
-  stateChange?: TaskAuditStateChange$Outbound | null | undefined;
-  stepSkipped?: TaskAuditStepSkipped$Outbound | null | undefined;
-  stepUpApproval?: TaskAuditStepUpApproval$Outbound | null | undefined;
-  taskCreated?: TaskAuditNewTask$Outbound | null | undefined;
-  taskEscalated?:
-    | TaskAuditEscalateToEmergencyAccess$Outbound
-    | null
-    | undefined;
-  taskRestarted?: TaskAuditRestart$Outbound | null | undefined;
-  ticketId?: string | null | undefined;
-  userId?: string | null | undefined;
-  waitStepAnalysisSuccess?:
-    | TaskAuditWaitForAnalysisStepSuccess$Outbound
-    | null
-    | undefined;
-  waitStepAnalysisTimedOut?:
-    | TaskAuditWaitForAnalysisStepTimedOut$Outbound
-    | null
-    | undefined;
-  waitStepAnalysisWaiting?:
-    | TaskAuditWaitForAnalysisStepWaiting$Outbound
-    | null
-    | undefined;
-  waitStepSuccess?: TaskAuditWaitStepSuccess$Outbound | null | undefined;
-  waitStepTimedOut?: TaskAuditWaitStepTimedOut$Outbound | null | undefined;
-  waitStepUntilTime?: TaskAuditWaitStepUntilTime$Outbound | null | undefined;
-  waitStepWaiting?: TaskAuditWaitStepWaiting$Outbound | null | undefined;
-  webhookApprovalAttempt?:
-    | TaskAuditWebhookApprovalAttempt$Outbound
-    | null
-    | undefined;
-  webhookApprovalBadResponse?:
-    | TaskAuditWebhookApprovalBadResponse$Outbound
-    | null
-    | undefined;
-  webhookApprovalFatalError?:
-    | TaskAuditWebhookApprovalFatalError$Outbound
-    | null
-    | undefined;
-  webhookApprovalSuccess?:
-    | TaskAuditWebhookApprovalSuccess$Outbound
-    | null
-    | undefined;
-  webhookApprovalTriggered?:
-    | TaskAuditWebhookApprovalTriggered$Outbound
-    | null
-    | undefined;
-  webhookAttempt?: TaskAuditWebhookAttempt$Outbound | null | undefined;
-  webhookSuccess?: TaskAuditWebhookSuccess$Outbound | null | undefined;
-  webhookTriggered?: TaskAuditWebhookTriggered$Outbound | null | undefined;
-  workflowStep?: number | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditView$outboundSchema: z.ZodType<
-  TaskAuditView$Outbound,
-  z.ZodTypeDef,
-  TaskAuditView
-> = z.object({
-  accessRequestOutcome: z.nullable(TaskAuditAccessRequestOutcome$outboundSchema)
-    .optional(),
-  accountLifecycleActionCreated: z.nullable(
-    TaskAuditAccountLifecycleActionCreated$outboundSchema,
-  ).optional(),
-  accountLifecycleActionFailed: z.nullable(
-    TaskAuditAccountLifecycleActionFailed$outboundSchema,
-  ).optional(),
-  actionResult: z.nullable(TaskAuditConnectorActionResult$outboundSchema)
-    .optional(),
-  actionSubmitted: z.nullable(TaskAuditActionSubmitted$outboundSchema)
-    .optional(),
-  approvalAutoAcceptedByPolicy: z.nullable(
-    TaskAuditApprovalAutoAcceptedByPolicy$outboundSchema,
-  ).optional(),
-  approvalAutoRejectedByPolicy: z.nullable(
-    TaskAuditApprovalAutoRejectedByPolicy$outboundSchema,
-  ).optional(),
-  approvalInstanceChange: z.nullable(
-    TaskAuditApprovalInstanceChange$outboundSchema,
-  ).optional(),
-  approvalReassigned: z.nullable(
-    TaskAuditPolicyApprovalReassigned$outboundSchema,
-  ).optional(),
-  approvedAutomatically: z.nullable(
-    TaskAuditApprovalHappenedAutomatically$outboundSchema,
-  ).optional(),
-  bulkActionError: z.nullable(TaskAuditBulkActionError$outboundSchema)
-    .optional(),
-  certifyOutcome: z.nullable(TaskAuditCertifyOutcome$outboundSchema).optional(),
-  comment: z.nullable(TaskAuditComment$outboundSchema).optional(),
-  conditionalPolicyExecutionResult: z.nullable(
-    TaskAuditConditionalPolicyExecutionResult$outboundSchema,
-  ).optional(),
-  connectorActionsEnd: z.nullable(
-    TaskAuditFinishedConnectorActions$outboundSchema,
-  ).optional(),
-  connectorActionsStart: z.nullable(
-    TaskAuditStartedConnectorActions$outboundSchema,
-  ).optional(),
-  created: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  currentState: z.nullable(CurrentState$outboundSchema).optional(),
-  eventType: z.nullable(TaskAuditViewEventType$outboundSchema).optional(),
-  expressionPolicyStepError: z.nullable(
-    TaskAuditExpressionPolicyStepError$outboundSchema,
-  ).optional(),
-  externalTicketCreated: z.nullable(
-    TaskAuditExternalTicketCreated$outboundSchema,
-  ).optional(),
-  externalTicketError: z.nullable(TaskAuditExternalTicketError$outboundSchema)
-    .optional(),
-  externalTicketProvisionStepResolved: z.nullable(
-    TaskAuditExternalTicketProvisionStepResolved$outboundSchema,
-  ).optional(),
-  externalTicketTriggered: z.nullable(
-    TaskAuditExternalTicketTriggered$outboundSchema,
-  ).optional(),
-  formInstanceChange: z.nullable(TaskAuditFormInstanceChange$outboundSchema)
-    .optional(),
-  grantDurationUpdated: z.nullable(TaskAuditGrantDurationUpdated$outboundSchema)
-    .optional(),
-  grantOutcome: z.nullable(TaskAuditGrantOutcome$outboundSchema).optional(),
-  hardReset: z.nullable(TaskAuditHardReset$outboundSchema).optional(),
-  id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(TaskAuditMetaData$outboundSchema).optional(),
-  policyChanged: z.nullable(TaskAuditPolicyChanged$outboundSchema).optional(),
-  policyEvaluationStep: z.nullable(TaskAuditPolicyEvaluationStep$outboundSchema)
-    .optional(),
-  provisionCancelled: z.nullable(
-    TaskAuditPolicyProvisionCancelled$outboundSchema,
-  ).optional(),
-  provisionError: z.nullable(TaskAuditPolicyProvisionError$outboundSchema)
-    .optional(),
-  provisionReassigned: z.nullable(
-    TaskAuditPolicyProvisionReassigned$outboundSchema,
-  ).optional(),
-  reassignedToDelegate: z.nullable(TaskAuditReassignedToDelegate$outboundSchema)
-    .optional(),
-  reassignmentListError: z.nullable(
-    TaskAuditReassignmentListError$outboundSchema,
-  ).optional(),
-  revokeOutcome: z.nullable(TaskAuditRevokeOutcome$outboundSchema).optional(),
-  slaEscalation: z.nullable(TaskAuditSLAEscalation$outboundSchema).optional(),
-  source: z.nullable(Source$outboundSchema).optional(),
-  stateChange: z.nullable(TaskAuditStateChange$outboundSchema).optional(),
-  stepSkipped: z.nullable(TaskAuditStepSkipped$outboundSchema).optional(),
-  stepUpApproval: z.nullable(TaskAuditStepUpApproval$outboundSchema).optional(),
-  taskCreated: z.nullable(TaskAuditNewTask$outboundSchema).optional(),
-  taskEscalated: z.nullable(TaskAuditEscalateToEmergencyAccess$outboundSchema)
-    .optional(),
-  taskRestarted: z.nullable(TaskAuditRestart$outboundSchema).optional(),
-  ticketId: z.nullable(z.string()).optional(),
-  userId: z.nullable(z.string()).optional(),
-  waitStepAnalysisSuccess: z.nullable(
-    TaskAuditWaitForAnalysisStepSuccess$outboundSchema,
-  ).optional(),
-  waitStepAnalysisTimedOut: z.nullable(
-    TaskAuditWaitForAnalysisStepTimedOut$outboundSchema,
-  ).optional(),
-  waitStepAnalysisWaiting: z.nullable(
-    TaskAuditWaitForAnalysisStepWaiting$outboundSchema,
-  ).optional(),
-  waitStepSuccess: z.nullable(TaskAuditWaitStepSuccess$outboundSchema)
-    .optional(),
-  waitStepTimedOut: z.nullable(TaskAuditWaitStepTimedOut$outboundSchema)
-    .optional(),
-  waitStepUntilTime: z.nullable(TaskAuditWaitStepUntilTime$outboundSchema)
-    .optional(),
-  waitStepWaiting: z.nullable(TaskAuditWaitStepWaiting$outboundSchema)
-    .optional(),
-  webhookApprovalAttempt: z.nullable(
-    TaskAuditWebhookApprovalAttempt$outboundSchema,
-  ).optional(),
-  webhookApprovalBadResponse: z.nullable(
-    TaskAuditWebhookApprovalBadResponse$outboundSchema,
-  ).optional(),
-  webhookApprovalFatalError: z.nullable(
-    TaskAuditWebhookApprovalFatalError$outboundSchema,
-  ).optional(),
-  webhookApprovalSuccess: z.nullable(
-    TaskAuditWebhookApprovalSuccess$outboundSchema,
-  ).optional(),
-  webhookApprovalTriggered: z.nullable(
-    TaskAuditWebhookApprovalTriggered$outboundSchema,
-  ).optional(),
-  webhookAttempt: z.nullable(TaskAuditWebhookAttempt$outboundSchema).optional(),
-  webhookSuccess: z.nullable(TaskAuditWebhookSuccess$outboundSchema).optional(),
-  webhookTriggered: z.nullable(TaskAuditWebhookTriggered$outboundSchema)
-    .optional(),
-  workflowStep: z.nullable(z.number().int()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditView$ {
-  /** @deprecated use `TaskAuditView$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditView$inboundSchema;
-  /** @deprecated use `TaskAuditView$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditView$outboundSchema;
-  /** @deprecated use `TaskAuditView$Outbound` instead. */
-  export type Outbound = TaskAuditView$Outbound;
-}
-
-export function taskAuditViewToJSON(taskAuditView: TaskAuditView): string {
-  return JSON.stringify(TaskAuditView$outboundSchema.parse(taskAuditView));
-}
 
 export function taskAuditViewFromJSON(
   jsonString: string,

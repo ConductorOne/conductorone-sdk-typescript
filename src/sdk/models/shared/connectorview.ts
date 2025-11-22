@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Connector,
-  Connector$inboundSchema,
-  Connector$Outbound,
-  Connector$outboundSchema,
-} from "./connector.js";
+import { Connector, Connector$inboundSchema } from "./connector.js";
 
 /**
  * The ConnectorView object provides a connector response object, as well as JSONPATHs to related objects provided by expanders.
@@ -43,43 +38,6 @@ export const ConnectorView$inboundSchema: z.ZodType<
   connector: z.nullable(Connector$inboundSchema).optional(),
   usersPath: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ConnectorView$Outbound = {
-  appPath?: string | null | undefined;
-  capabilitiesPath?: string | null | undefined;
-  connector?: Connector$Outbound | null | undefined;
-  usersPath?: string | null | undefined;
-};
-
-/** @internal */
-export const ConnectorView$outboundSchema: z.ZodType<
-  ConnectorView$Outbound,
-  z.ZodTypeDef,
-  ConnectorView
-> = z.object({
-  appPath: z.nullable(z.string()).optional(),
-  capabilitiesPath: z.nullable(z.string()).optional(),
-  connector: z.nullable(Connector$outboundSchema).optional(),
-  usersPath: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorView$ {
-  /** @deprecated use `ConnectorView$inboundSchema` instead. */
-  export const inboundSchema = ConnectorView$inboundSchema;
-  /** @deprecated use `ConnectorView$outboundSchema` instead. */
-  export const outboundSchema = ConnectorView$outboundSchema;
-  /** @deprecated use `ConnectorView$Outbound` instead. */
-  export type Outbound = ConnectorView$Outbound;
-}
-
-export function connectorViewToJSON(connectorView: ConnectorView): string {
-  return JSON.stringify(ConnectorView$outboundSchema.parse(connectorView));
-}
 
 export function connectorViewFromJSON(
   jsonString: string,

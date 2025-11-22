@@ -38,24 +38,6 @@ export type C1ApiAppV1AppReportActionServiceGenerateReportResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppReportActionServiceGenerateReportRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppReportActionServiceGenerateReportRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    AppActionsServiceGenerateReportRequest: shared
-      .AppActionsServiceGenerateReportRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "AppActionsServiceGenerateReportRequest":
-        "appActionsServiceGenerateReportRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppReportActionServiceGenerateReportRequest$Outbound = {
   app_id: string | null;
   AppActionsServiceGenerateReportRequest?:
@@ -81,22 +63,6 @@ export const C1ApiAppV1AppReportActionServiceGenerateReportRequest$outboundSchem
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppReportActionServiceGenerateReportRequest$ {
-  /** @deprecated use `C1ApiAppV1AppReportActionServiceGenerateReportRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppReportActionServiceGenerateReportRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppReportActionServiceGenerateReportRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppReportActionServiceGenerateReportRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppReportActionServiceGenerateReportRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppReportActionServiceGenerateReportRequest$Outbound;
-}
-
 export function c1ApiAppV1AppReportActionServiceGenerateReportRequestToJSON(
   c1ApiAppV1AppReportActionServiceGenerateReportRequest:
     C1ApiAppV1AppReportActionServiceGenerateReportRequest,
@@ -105,22 +71,6 @@ export function c1ApiAppV1AppReportActionServiceGenerateReportRequestToJSON(
     C1ApiAppV1AppReportActionServiceGenerateReportRequest$outboundSchema.parse(
       c1ApiAppV1AppReportActionServiceGenerateReportRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppReportActionServiceGenerateReportRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppReportActionServiceGenerateReportRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppReportActionServiceGenerateReportRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiAppV1AppReportActionServiceGenerateReportRequest' from JSON`,
   );
 }
 
@@ -145,67 +95,6 @@ export const C1ApiAppV1AppReportActionServiceGenerateReportResponse$inboundSchem
         "appActionsServiceGenerateReportResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppReportActionServiceGenerateReportResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  AppActionsServiceGenerateReportResponse?:
-    | shared.AppActionsServiceGenerateReportResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppReportActionServiceGenerateReportResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppReportActionServiceGenerateReportResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppReportActionServiceGenerateReportResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    appActionsServiceGenerateReportResponse: shared
-      .AppActionsServiceGenerateReportResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      appActionsServiceGenerateReportResponse:
-        "AppActionsServiceGenerateReportResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppReportActionServiceGenerateReportResponse$ {
-  /** @deprecated use `C1ApiAppV1AppReportActionServiceGenerateReportResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppReportActionServiceGenerateReportResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppReportActionServiceGenerateReportResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppReportActionServiceGenerateReportResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppReportActionServiceGenerateReportResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppReportActionServiceGenerateReportResponse$Outbound;
-}
-
-export function c1ApiAppV1AppReportActionServiceGenerateReportResponseToJSON(
-  c1ApiAppV1AppReportActionServiceGenerateReportResponse:
-    C1ApiAppV1AppReportActionServiceGenerateReportResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppReportActionServiceGenerateReportResponse$outboundSchema.parse(
-      c1ApiAppV1AppReportActionServiceGenerateReportResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppReportActionServiceGenerateReportResponseFromJSON(
   jsonString: string,

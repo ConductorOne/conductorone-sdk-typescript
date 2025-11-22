@@ -96,7 +96,6 @@ export const ProvisionPolicyInput$inboundSchema: z.ZodType<
   unconfigured: z.nullable(UnconfiguredProvision$inboundSchema).optional(),
   webhook: z.nullable(WebhookProvision$inboundSchema).optional(),
 });
-
 /** @internal */
 export type ProvisionPolicyInput$Outbound = {
   action?: ActionProvision$Outbound | null | undefined;
@@ -125,19 +124,6 @@ export const ProvisionPolicyInput$outboundSchema: z.ZodType<
   webhook: z.nullable(WebhookProvision$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ProvisionPolicyInput$ {
-  /** @deprecated use `ProvisionPolicyInput$inboundSchema` instead. */
-  export const inboundSchema = ProvisionPolicyInput$inboundSchema;
-  /** @deprecated use `ProvisionPolicyInput$outboundSchema` instead. */
-  export const outboundSchema = ProvisionPolicyInput$outboundSchema;
-  /** @deprecated use `ProvisionPolicyInput$Outbound` instead. */
-  export type Outbound = ProvisionPolicyInput$Outbound;
-}
-
 export function provisionPolicyInputToJSON(
   provisionPolicyInput: ProvisionPolicyInput,
 ): string {
@@ -145,7 +131,6 @@ export function provisionPolicyInputToJSON(
     ProvisionPolicyInput$outboundSchema.parse(provisionPolicyInput),
   );
 }
-
 export function provisionPolicyInputFromJSON(
   jsonString: string,
 ): SafeParseResult<ProvisionPolicyInput, SDKValidationError> {

@@ -26,43 +26,6 @@ export const TaskAuditReassignmentListError$inboundSchema: z.ZodType<
   errorMessage: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditReassignmentListError$Outbound = {
-  errorMessage?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditReassignmentListError$outboundSchema: z.ZodType<
-  TaskAuditReassignmentListError$Outbound,
-  z.ZodTypeDef,
-  TaskAuditReassignmentListError
-> = z.object({
-  errorMessage: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditReassignmentListError$ {
-  /** @deprecated use `TaskAuditReassignmentListError$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditReassignmentListError$inboundSchema;
-  /** @deprecated use `TaskAuditReassignmentListError$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditReassignmentListError$outboundSchema;
-  /** @deprecated use `TaskAuditReassignmentListError$Outbound` instead. */
-  export type Outbound = TaskAuditReassignmentListError$Outbound;
-}
-
-export function taskAuditReassignmentListErrorToJSON(
-  taskAuditReassignmentListError: TaskAuditReassignmentListError,
-): string {
-  return JSON.stringify(
-    TaskAuditReassignmentListError$outboundSchema.parse(
-      taskAuditReassignmentListError,
-    ),
-  );
-}
-
 export function taskAuditReassignmentListErrorFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditReassignmentListError, SDKValidationError> {

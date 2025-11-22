@@ -46,55 +46,6 @@ export const TaskAuditConditionalPolicyExecutionResult$inboundSchema: z.ZodType<
   policyKey: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditConditionalPolicyExecutionResult$Outbound = {
-  condition?: string | null | undefined;
-  conditionMatched?: boolean | null | undefined;
-  defaultCondition?: boolean | null | undefined;
-  error?: string | null | undefined;
-  policyKey?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditConditionalPolicyExecutionResult$outboundSchema:
-  z.ZodType<
-    TaskAuditConditionalPolicyExecutionResult$Outbound,
-    z.ZodTypeDef,
-    TaskAuditConditionalPolicyExecutionResult
-  > = z.object({
-    condition: z.nullable(z.string()).optional(),
-    conditionMatched: z.nullable(z.boolean()).optional(),
-    defaultCondition: z.nullable(z.boolean()).optional(),
-    error: z.nullable(z.string()).optional(),
-    policyKey: z.nullable(z.string()).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditConditionalPolicyExecutionResult$ {
-  /** @deprecated use `TaskAuditConditionalPolicyExecutionResult$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskAuditConditionalPolicyExecutionResult$inboundSchema;
-  /** @deprecated use `TaskAuditConditionalPolicyExecutionResult$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskAuditConditionalPolicyExecutionResult$outboundSchema;
-  /** @deprecated use `TaskAuditConditionalPolicyExecutionResult$Outbound` instead. */
-  export type Outbound = TaskAuditConditionalPolicyExecutionResult$Outbound;
-}
-
-export function taskAuditConditionalPolicyExecutionResultToJSON(
-  taskAuditConditionalPolicyExecutionResult:
-    TaskAuditConditionalPolicyExecutionResult,
-): string {
-  return JSON.stringify(
-    TaskAuditConditionalPolicyExecutionResult$outboundSchema.parse(
-      taskAuditConditionalPolicyExecutionResult,
-    ),
-  );
-}
-
 export function taskAuditConditionalPolicyExecutionResultFromJSON(
   jsonString: string,
 ): SafeParseResult<

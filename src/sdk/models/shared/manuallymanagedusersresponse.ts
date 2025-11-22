@@ -26,43 +26,6 @@ export const ManuallyManagedUsersResponse$inboundSchema: z.ZodType<
   failedUsersErrorMap: z.nullable(z.record(z.string())).optional(),
 });
 
-/** @internal */
-export type ManuallyManagedUsersResponse$Outbound = {
-  failedUsersErrorMap?: { [k: string]: string } | null | undefined;
-};
-
-/** @internal */
-export const ManuallyManagedUsersResponse$outboundSchema: z.ZodType<
-  ManuallyManagedUsersResponse$Outbound,
-  z.ZodTypeDef,
-  ManuallyManagedUsersResponse
-> = z.object({
-  failedUsersErrorMap: z.nullable(z.record(z.string())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ManuallyManagedUsersResponse$ {
-  /** @deprecated use `ManuallyManagedUsersResponse$inboundSchema` instead. */
-  export const inboundSchema = ManuallyManagedUsersResponse$inboundSchema;
-  /** @deprecated use `ManuallyManagedUsersResponse$outboundSchema` instead. */
-  export const outboundSchema = ManuallyManagedUsersResponse$outboundSchema;
-  /** @deprecated use `ManuallyManagedUsersResponse$Outbound` instead. */
-  export type Outbound = ManuallyManagedUsersResponse$Outbound;
-}
-
-export function manuallyManagedUsersResponseToJSON(
-  manuallyManagedUsersResponse: ManuallyManagedUsersResponse,
-): string {
-  return JSON.stringify(
-    ManuallyManagedUsersResponse$outboundSchema.parse(
-      manuallyManagedUsersResponse,
-    ),
-  );
-}
-
 export function manuallyManagedUsersResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<ManuallyManagedUsersResponse, SDKValidationError> {

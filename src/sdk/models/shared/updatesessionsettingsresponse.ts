@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   SessionSettings,
   SessionSettings$inboundSchema,
-  SessionSettings$Outbound,
-  SessionSettings$outboundSchema,
 } from "./sessionsettings.js";
 
 /**
@@ -28,43 +26,6 @@ export const UpdateSessionSettingsResponse$inboundSchema: z.ZodType<
 > = z.object({
   sessionSettings: z.nullable(SessionSettings$inboundSchema).optional(),
 });
-
-/** @internal */
-export type UpdateSessionSettingsResponse$Outbound = {
-  sessionSettings?: SessionSettings$Outbound | null | undefined;
-};
-
-/** @internal */
-export const UpdateSessionSettingsResponse$outboundSchema: z.ZodType<
-  UpdateSessionSettingsResponse$Outbound,
-  z.ZodTypeDef,
-  UpdateSessionSettingsResponse
-> = z.object({
-  sessionSettings: z.nullable(SessionSettings$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateSessionSettingsResponse$ {
-  /** @deprecated use `UpdateSessionSettingsResponse$inboundSchema` instead. */
-  export const inboundSchema = UpdateSessionSettingsResponse$inboundSchema;
-  /** @deprecated use `UpdateSessionSettingsResponse$outboundSchema` instead. */
-  export const outboundSchema = UpdateSessionSettingsResponse$outboundSchema;
-  /** @deprecated use `UpdateSessionSettingsResponse$Outbound` instead. */
-  export type Outbound = UpdateSessionSettingsResponse$Outbound;
-}
-
-export function updateSessionSettingsResponseToJSON(
-  updateSessionSettingsResponse: UpdateSessionSettingsResponse,
-): string {
-  return JSON.stringify(
-    UpdateSessionSettingsResponse$outboundSchema.parse(
-      updateSessionSettingsResponse,
-    ),
-  );
-}
 
 export function updateSessionSettingsResponseFromJSON(
   jsonString: string,

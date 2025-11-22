@@ -31,46 +31,6 @@ export const TestAccountProvisionPolicyResponse$inboundSchema: z.ZodType<
   value: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TestAccountProvisionPolicyResponse$Outbound = {
-  type?: string | null | undefined;
-  value?: string | null | undefined;
-};
-
-/** @internal */
-export const TestAccountProvisionPolicyResponse$outboundSchema: z.ZodType<
-  TestAccountProvisionPolicyResponse$Outbound,
-  z.ZodTypeDef,
-  TestAccountProvisionPolicyResponse
-> = z.object({
-  type: z.nullable(z.string()).optional(),
-  value: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TestAccountProvisionPolicyResponse$ {
-  /** @deprecated use `TestAccountProvisionPolicyResponse$inboundSchema` instead. */
-  export const inboundSchema = TestAccountProvisionPolicyResponse$inboundSchema;
-  /** @deprecated use `TestAccountProvisionPolicyResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    TestAccountProvisionPolicyResponse$outboundSchema;
-  /** @deprecated use `TestAccountProvisionPolicyResponse$Outbound` instead. */
-  export type Outbound = TestAccountProvisionPolicyResponse$Outbound;
-}
-
-export function testAccountProvisionPolicyResponseToJSON(
-  testAccountProvisionPolicyResponse: TestAccountProvisionPolicyResponse,
-): string {
-  return JSON.stringify(
-    TestAccountProvisionPolicyResponse$outboundSchema.parse(
-      testAccountProvisionPolicyResponse,
-    ),
-  );
-}
-
 export function testAccountProvisionPolicyResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<TestAccountProvisionPolicyResponse, SDKValidationError> {

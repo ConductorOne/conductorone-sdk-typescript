@@ -52,67 +52,6 @@ export const C1ApiFunctionsV1FunctionsServiceListFunctionsResponse$inboundSchema
     });
   });
 
-/** @internal */
-export type C1ApiFunctionsV1FunctionsServiceListFunctionsResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  FunctionsServiceListFunctionsResponse?:
-    | shared.FunctionsServiceListFunctionsResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiFunctionsV1FunctionsServiceListFunctionsResponse$outboundSchema:
-  z.ZodType<
-    C1ApiFunctionsV1FunctionsServiceListFunctionsResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiFunctionsV1FunctionsServiceListFunctionsResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    functionsServiceListFunctionsResponse: shared
-      .FunctionsServiceListFunctionsResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      functionsServiceListFunctionsResponse:
-        "FunctionsServiceListFunctionsResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiFunctionsV1FunctionsServiceListFunctionsResponse$ {
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceListFunctionsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiFunctionsV1FunctionsServiceListFunctionsResponse$inboundSchema;
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceListFunctionsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiFunctionsV1FunctionsServiceListFunctionsResponse$outboundSchema;
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceListFunctionsResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiFunctionsV1FunctionsServiceListFunctionsResponse$Outbound;
-}
-
-export function c1ApiFunctionsV1FunctionsServiceListFunctionsResponseToJSON(
-  c1ApiFunctionsV1FunctionsServiceListFunctionsResponse:
-    C1ApiFunctionsV1FunctionsServiceListFunctionsResponse,
-): string {
-  return JSON.stringify(
-    C1ApiFunctionsV1FunctionsServiceListFunctionsResponse$outboundSchema.parse(
-      c1ApiFunctionsV1FunctionsServiceListFunctionsResponse,
-    ),
-  );
-}
-
 export function c1ApiFunctionsV1FunctionsServiceListFunctionsResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

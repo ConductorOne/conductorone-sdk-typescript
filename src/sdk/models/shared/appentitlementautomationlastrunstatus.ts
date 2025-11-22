@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -53,35 +50,7 @@ export const AppEntitlementAutomationLastRunStatusStatus$inboundSchema:
     AppEntitlementAutomationLastRunStatusStatus,
     z.ZodTypeDef,
     unknown
-  > = z
-    .union([
-      z.nativeEnum(AppEntitlementAutomationLastRunStatusStatus),
-      z.string().transform(catchUnrecognizedEnum),
-    ]);
-
-/** @internal */
-export const AppEntitlementAutomationLastRunStatusStatus$outboundSchema:
-  z.ZodType<
-    AppEntitlementAutomationLastRunStatusStatus,
-    z.ZodTypeDef,
-    AppEntitlementAutomationLastRunStatusStatus
-  > = z.union([
-    z.nativeEnum(AppEntitlementAutomationLastRunStatusStatus),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementAutomationLastRunStatusStatus$ {
-  /** @deprecated use `AppEntitlementAutomationLastRunStatusStatus$inboundSchema` instead. */
-  export const inboundSchema =
-    AppEntitlementAutomationLastRunStatusStatus$inboundSchema;
-  /** @deprecated use `AppEntitlementAutomationLastRunStatusStatus$outboundSchema` instead. */
-  export const outboundSchema =
-    AppEntitlementAutomationLastRunStatusStatus$outboundSchema;
-}
+  > = openEnums.inboundSchema(AppEntitlementAutomationLastRunStatusStatus);
 
 /** @internal */
 export const AppEntitlementAutomationLastRunStatus$inboundSchema: z.ZodType<
@@ -96,51 +65,6 @@ export const AppEntitlementAutomationLastRunStatus$inboundSchema: z.ZodType<
   status: z.nullable(AppEntitlementAutomationLastRunStatusStatus$inboundSchema)
     .optional(),
 });
-
-/** @internal */
-export type AppEntitlementAutomationLastRunStatus$Outbound = {
-  errorMessage?: string | null | undefined;
-  lastCompletedAt?: string | null | undefined;
-  status?: string | null | undefined;
-};
-
-/** @internal */
-export const AppEntitlementAutomationLastRunStatus$outboundSchema: z.ZodType<
-  AppEntitlementAutomationLastRunStatus$Outbound,
-  z.ZodTypeDef,
-  AppEntitlementAutomationLastRunStatus
-> = z.object({
-  errorMessage: z.nullable(z.string()).optional(),
-  lastCompletedAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  status: z.nullable(AppEntitlementAutomationLastRunStatusStatus$outboundSchema)
-    .optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementAutomationLastRunStatus$ {
-  /** @deprecated use `AppEntitlementAutomationLastRunStatus$inboundSchema` instead. */
-  export const inboundSchema =
-    AppEntitlementAutomationLastRunStatus$inboundSchema;
-  /** @deprecated use `AppEntitlementAutomationLastRunStatus$outboundSchema` instead. */
-  export const outboundSchema =
-    AppEntitlementAutomationLastRunStatus$outboundSchema;
-  /** @deprecated use `AppEntitlementAutomationLastRunStatus$Outbound` instead. */
-  export type Outbound = AppEntitlementAutomationLastRunStatus$Outbound;
-}
-
-export function appEntitlementAutomationLastRunStatusToJSON(
-  appEntitlementAutomationLastRunStatus: AppEntitlementAutomationLastRunStatus,
-): string {
-  return JSON.stringify(
-    AppEntitlementAutomationLastRunStatus$outboundSchema.parse(
-      appEntitlementAutomationLastRunStatus,
-    ),
-  );
-}
 
 export function appEntitlementAutomationLastRunStatusFromJSON(
   jsonString: string,

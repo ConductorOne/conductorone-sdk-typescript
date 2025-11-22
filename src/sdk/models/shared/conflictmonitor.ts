@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   NotificationConfig,
   NotificationConfig$inboundSchema,
-  NotificationConfig$Outbound,
-  NotificationConfig$outboundSchema,
 } from "./notificationconfig.js";
 
 /**
@@ -70,57 +68,6 @@ export const ConflictMonitor$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
-/** @internal */
-export type ConflictMonitor$Outbound = {
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  enabled?: boolean | null | undefined;
-  entitlementSetAId?: string | null | undefined;
-  entitlementSetBId?: string | null | undefined;
-  id?: string | null | undefined;
-  notificationConfig?: NotificationConfig$Outbound | null | undefined;
-  updatedAt?: string | null | undefined;
-};
-
-/** @internal */
-export const ConflictMonitor$outboundSchema: z.ZodType<
-  ConflictMonitor$Outbound,
-  z.ZodTypeDef,
-  ConflictMonitor
-> = z.object({
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  entitlementSetAId: z.nullable(z.string()).optional(),
-  entitlementSetBId: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  notificationConfig: z.nullable(NotificationConfig$outboundSchema).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConflictMonitor$ {
-  /** @deprecated use `ConflictMonitor$inboundSchema` instead. */
-  export const inboundSchema = ConflictMonitor$inboundSchema;
-  /** @deprecated use `ConflictMonitor$outboundSchema` instead. */
-  export const outboundSchema = ConflictMonitor$outboundSchema;
-  /** @deprecated use `ConflictMonitor$Outbound` instead. */
-  export type Outbound = ConflictMonitor$Outbound;
-}
-
-export function conflictMonitorToJSON(
-  conflictMonitor: ConflictMonitor,
-): string {
-  return JSON.stringify(ConflictMonitor$outboundSchema.parse(conflictMonitor));
-}
 
 export function conflictMonitorFromJSON(
   jsonString: string,

@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   RequestCatalog,
   RequestCatalog$inboundSchema,
-  RequestCatalog$Outbound,
-  RequestCatalog$outboundSchema,
 } from "./requestcatalog.js";
 
 /**
@@ -44,47 +42,6 @@ export const RequestCatalogView$inboundSchema: z.ZodType<
     .optional(),
   requestCatalog: z.nullable(RequestCatalog$inboundSchema).optional(),
 });
-
-/** @internal */
-export type RequestCatalogView$Outbound = {
-  accessEntitlementsPath?: string | null | undefined;
-  createdByUserPath?: string | null | undefined;
-  memberCount?: string | null | undefined;
-  requestCatalog?: RequestCatalog$Outbound | null | undefined;
-};
-
-/** @internal */
-export const RequestCatalogView$outboundSchema: z.ZodType<
-  RequestCatalogView$Outbound,
-  z.ZodTypeDef,
-  RequestCatalogView
-> = z.object({
-  accessEntitlementsPath: z.nullable(z.string()).optional(),
-  createdByUserPath: z.nullable(z.string()).optional(),
-  memberCount: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
-  requestCatalog: z.nullable(RequestCatalog$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogView$ {
-  /** @deprecated use `RequestCatalogView$inboundSchema` instead. */
-  export const inboundSchema = RequestCatalogView$inboundSchema;
-  /** @deprecated use `RequestCatalogView$outboundSchema` instead. */
-  export const outboundSchema = RequestCatalogView$outboundSchema;
-  /** @deprecated use `RequestCatalogView$Outbound` instead. */
-  export type Outbound = RequestCatalogView$Outbound;
-}
-
-export function requestCatalogViewToJSON(
-  requestCatalogView: RequestCatalogView,
-): string {
-  return JSON.stringify(
-    RequestCatalogView$outboundSchema.parse(requestCatalogView),
-  );
-}
 
 export function requestCatalogViewFromJSON(
   jsonString: string,

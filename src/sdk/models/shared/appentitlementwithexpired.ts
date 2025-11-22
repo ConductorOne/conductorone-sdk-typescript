@@ -9,27 +9,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$inboundSchema,
-  AppEntitlementRef$Outbound,
-  AppEntitlementRef$outboundSchema,
 } from "./appentitlementref.js";
-import {
-  AppUser,
-  AppUser$inboundSchema,
-  AppUser$Outbound,
-  AppUser$outboundSchema,
-} from "./appuser.js";
-import {
-  GrantReason,
-  GrantReason$inboundSchema,
-  GrantReason$Outbound,
-  GrantReason$outboundSchema,
-} from "./grantreason.js";
-import {
-  User,
-  User$inboundSchema,
-  User$Outbound,
-  User$outboundSchema,
-} from "./user.js";
+import { AppUser, AppUser$inboundSchema } from "./appuser.js";
+import { GrantReason, GrantReason$inboundSchema } from "./grantreason.js";
+import { User, User$inboundSchema } from "./user.js";
 
 /**
  * The AppEntitlementWithExpired message.
@@ -81,58 +64,6 @@ export const AppEntitlementWithExpired$inboundSchema: z.ZodType<
   grantSources: z.nullable(z.array(AppEntitlementRef$inboundSchema)).optional(),
   user: z.nullable(User$inboundSchema).optional(),
 });
-
-/** @internal */
-export type AppEntitlementWithExpired$Outbound = {
-  appEntitlementId?: string | null | undefined;
-  appId?: string | null | undefined;
-  appUser?: AppUser$Outbound | null | undefined;
-  appUserId?: string | null | undefined;
-  discovered?: string | null | undefined;
-  expired?: string | null | undefined;
-  grantReasons?: Array<GrantReason$Outbound> | null | undefined;
-  grantSources?: Array<AppEntitlementRef$Outbound> | null | undefined;
-  user?: User$Outbound | null | undefined;
-};
-
-/** @internal */
-export const AppEntitlementWithExpired$outboundSchema: z.ZodType<
-  AppEntitlementWithExpired$Outbound,
-  z.ZodTypeDef,
-  AppEntitlementWithExpired
-> = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appUser: z.nullable(AppUser$outboundSchema).optional(),
-  appUserId: z.nullable(z.string()).optional(),
-  discovered: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  expired: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  grantReasons: z.nullable(z.array(GrantReason$outboundSchema)).optional(),
-  grantSources: z.nullable(z.array(AppEntitlementRef$outboundSchema))
-    .optional(),
-  user: z.nullable(User$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementWithExpired$ {
-  /** @deprecated use `AppEntitlementWithExpired$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementWithExpired$inboundSchema;
-  /** @deprecated use `AppEntitlementWithExpired$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlementWithExpired$outboundSchema;
-  /** @deprecated use `AppEntitlementWithExpired$Outbound` instead. */
-  export type Outbound = AppEntitlementWithExpired$Outbound;
-}
-
-export function appEntitlementWithExpiredToJSON(
-  appEntitlementWithExpired: AppEntitlementWithExpired,
-): string {
-  return JSON.stringify(
-    AppEntitlementWithExpired$outboundSchema.parse(appEntitlementWithExpired),
-  );
-}
 
 export function appEntitlementWithExpiredFromJSON(
   jsonString: string,

@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -49,32 +46,13 @@ export const TaskTypeOffboardingOutcome$inboundSchema: z.ZodType<
   TaskTypeOffboardingOutcome,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(TaskTypeOffboardingOutcome),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(TaskTypeOffboardingOutcome);
 /** @internal */
 export const TaskTypeOffboardingOutcome$outboundSchema: z.ZodType<
-  TaskTypeOffboardingOutcome,
+  string,
   z.ZodTypeDef,
   TaskTypeOffboardingOutcome
-> = z.union([
-  z.nativeEnum(TaskTypeOffboardingOutcome),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskTypeOffboardingOutcome$ {
-  /** @deprecated use `TaskTypeOffboardingOutcome$inboundSchema` instead. */
-  export const inboundSchema = TaskTypeOffboardingOutcome$inboundSchema;
-  /** @deprecated use `TaskTypeOffboardingOutcome$outboundSchema` instead. */
-  export const outboundSchema = TaskTypeOffboardingOutcome$outboundSchema;
-}
+> = openEnums.outboundSchema(TaskTypeOffboardingOutcome);
 
 /** @internal */
 export const TaskTypeOffboarding$inboundSchema: z.ZodType<
@@ -88,7 +66,6 @@ export const TaskTypeOffboarding$inboundSchema: z.ZodType<
   ).optional(),
   subjectUserId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type TaskTypeOffboarding$Outbound = {
   outcome?: string | null | undefined;
@@ -107,19 +84,6 @@ export const TaskTypeOffboarding$outboundSchema: z.ZodType<
   subjectUserId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskTypeOffboarding$ {
-  /** @deprecated use `TaskTypeOffboarding$inboundSchema` instead. */
-  export const inboundSchema = TaskTypeOffboarding$inboundSchema;
-  /** @deprecated use `TaskTypeOffboarding$outboundSchema` instead. */
-  export const outboundSchema = TaskTypeOffboarding$outboundSchema;
-  /** @deprecated use `TaskTypeOffboarding$Outbound` instead. */
-  export type Outbound = TaskTypeOffboarding$Outbound;
-}
-
 export function taskTypeOffboardingToJSON(
   taskTypeOffboarding: TaskTypeOffboarding,
 ): string {
@@ -127,7 +91,6 @@ export function taskTypeOffboardingToJSON(
     TaskTypeOffboarding$outboundSchema.parse(taskTypeOffboarding),
   );
 }
-
 export function taskTypeOffboardingFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskTypeOffboarding, SDKValidationError> {

@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  StringRules,
-  StringRules$inboundSchema,
-  StringRules$Outbound,
-  StringRules$outboundSchema,
-} from "./stringrules.js";
+import { StringRules, StringRules$inboundSchema } from "./stringrules.js";
 
 /**
  * The StringListField message.
@@ -28,39 +23,6 @@ export const StringListField$inboundSchema: z.ZodType<
 > = z.object({
   valueValidator: z.nullable(StringRules$inboundSchema).optional(),
 });
-
-/** @internal */
-export type StringListField$Outbound = {
-  valueValidator?: StringRules$Outbound | null | undefined;
-};
-
-/** @internal */
-export const StringListField$outboundSchema: z.ZodType<
-  StringListField$Outbound,
-  z.ZodTypeDef,
-  StringListField
-> = z.object({
-  valueValidator: z.nullable(StringRules$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StringListField$ {
-  /** @deprecated use `StringListField$inboundSchema` instead. */
-  export const inboundSchema = StringListField$inboundSchema;
-  /** @deprecated use `StringListField$outboundSchema` instead. */
-  export const outboundSchema = StringListField$outboundSchema;
-  /** @deprecated use `StringListField$Outbound` instead. */
-  export type Outbound = StringListField$Outbound;
-}
-
-export function stringListFieldToJSON(
-  stringListField: StringListField,
-): string {
-  return JSON.stringify(StringListField$outboundSchema.parse(stringListField));
-}
 
 export function stringListFieldFromJSON(
   jsonString: string,

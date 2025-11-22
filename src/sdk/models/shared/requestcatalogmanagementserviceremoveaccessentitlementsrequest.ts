@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementRef,
-  AppEntitlementRef$inboundSchema,
   AppEntitlementRef$Outbound,
   AppEntitlementRef$outboundSchema,
 } from "./appentitlementref.js";
@@ -27,17 +23,6 @@ export type RequestCatalogManagementServiceRemoveAccessEntitlementsRequest = {
 };
 
 /** @internal */
-export const RequestCatalogManagementServiceRemoveAccessEntitlementsRequest$inboundSchema:
-  z.ZodType<
-    RequestCatalogManagementServiceRemoveAccessEntitlementsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    accessEntitlements: z.nullable(z.array(AppEntitlementRef$inboundSchema))
-      .optional(),
-  });
-
-/** @internal */
 export type RequestCatalogManagementServiceRemoveAccessEntitlementsRequest$Outbound =
   {
     accessEntitlements?: Array<AppEntitlementRef$Outbound> | null | undefined;
@@ -54,22 +39,6 @@ export const RequestCatalogManagementServiceRemoveAccessEntitlementsRequest$outb
       .optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogManagementServiceRemoveAccessEntitlementsRequest$ {
-  /** @deprecated use `RequestCatalogManagementServiceRemoveAccessEntitlementsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogManagementServiceRemoveAccessEntitlementsRequest$inboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceRemoveAccessEntitlementsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogManagementServiceRemoveAccessEntitlementsRequest$outboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceRemoveAccessEntitlementsRequest$Outbound` instead. */
-  export type Outbound =
-    RequestCatalogManagementServiceRemoveAccessEntitlementsRequest$Outbound;
-}
-
 export function requestCatalogManagementServiceRemoveAccessEntitlementsRequestToJSON(
   requestCatalogManagementServiceRemoveAccessEntitlementsRequest:
     RequestCatalogManagementServiceRemoveAccessEntitlementsRequest,
@@ -77,20 +46,5 @@ export function requestCatalogManagementServiceRemoveAccessEntitlementsRequestTo
   return JSON.stringify(
     RequestCatalogManagementServiceRemoveAccessEntitlementsRequest$outboundSchema
       .parse(requestCatalogManagementServiceRemoveAccessEntitlementsRequest),
-  );
-}
-
-export function requestCatalogManagementServiceRemoveAccessEntitlementsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  RequestCatalogManagementServiceRemoveAccessEntitlementsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      RequestCatalogManagementServiceRemoveAccessEntitlementsRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'RequestCatalogManagementServiceRemoveAccessEntitlementsRequest' from JSON`,
   );
 }

@@ -22,7 +22,6 @@ export const AutomationContext$inboundSchema: z.ZodType<
 > = z.object({
   context: z.nullable(z.record(z.any())).optional(),
 });
-
 /** @internal */
 export type AutomationContext$Outbound = {
   context?: { [k: string]: any } | null | undefined;
@@ -37,19 +36,6 @@ export const AutomationContext$outboundSchema: z.ZodType<
   context: z.nullable(z.record(z.any())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AutomationContext$ {
-  /** @deprecated use `AutomationContext$inboundSchema` instead. */
-  export const inboundSchema = AutomationContext$inboundSchema;
-  /** @deprecated use `AutomationContext$outboundSchema` instead. */
-  export const outboundSchema = AutomationContext$outboundSchema;
-  /** @deprecated use `AutomationContext$Outbound` instead. */
-  export type Outbound = AutomationContext$Outbound;
-}
-
 export function automationContextToJSON(
   automationContext: AutomationContext,
 ): string {
@@ -57,7 +43,6 @@ export function automationContextToJSON(
     AutomationContext$outboundSchema.parse(automationContext),
   );
 }
-
 export function automationContextFromJSON(
   jsonString: string,
 ): SafeParseResult<AutomationContext, SDKValidationError> {

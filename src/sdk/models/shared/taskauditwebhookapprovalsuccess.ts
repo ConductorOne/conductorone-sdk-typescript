@@ -41,49 +41,6 @@ export const TaskAuditWebhookApprovalSuccess$inboundSchema: z.ZodType<
   webhookUrl: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditWebhookApprovalSuccess$Outbound = {
-  webhookId?: string | null | undefined;
-  webhookInstanceId?: string | null | undefined;
-  webhookName?: string | null | undefined;
-  webhookUrl?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditWebhookApprovalSuccess$outboundSchema: z.ZodType<
-  TaskAuditWebhookApprovalSuccess$Outbound,
-  z.ZodTypeDef,
-  TaskAuditWebhookApprovalSuccess
-> = z.object({
-  webhookId: z.nullable(z.string()).optional(),
-  webhookInstanceId: z.nullable(z.string()).optional(),
-  webhookName: z.nullable(z.string()).optional(),
-  webhookUrl: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditWebhookApprovalSuccess$ {
-  /** @deprecated use `TaskAuditWebhookApprovalSuccess$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditWebhookApprovalSuccess$inboundSchema;
-  /** @deprecated use `TaskAuditWebhookApprovalSuccess$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditWebhookApprovalSuccess$outboundSchema;
-  /** @deprecated use `TaskAuditWebhookApprovalSuccess$Outbound` instead. */
-  export type Outbound = TaskAuditWebhookApprovalSuccess$Outbound;
-}
-
-export function taskAuditWebhookApprovalSuccessToJSON(
-  taskAuditWebhookApprovalSuccess: TaskAuditWebhookApprovalSuccess,
-): string {
-  return JSON.stringify(
-    TaskAuditWebhookApprovalSuccess$outboundSchema.parse(
-      taskAuditWebhookApprovalSuccess,
-    ),
-  );
-}
-
 export function taskAuditWebhookApprovalSuccessFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditWebhookApprovalSuccess, SDKValidationError> {

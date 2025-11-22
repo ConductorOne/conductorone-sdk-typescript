@@ -38,7 +38,6 @@ export const PayloadWorkflowStep$inboundSchema: z.ZodType<
   workflowExecutionStepId: z.nullable(z.string()).optional(),
   workflowId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type PayloadWorkflowStep$Outbound = {
   context?: { [k: string]: any } | null | undefined;
@@ -60,19 +59,6 @@ export const PayloadWorkflowStep$outboundSchema: z.ZodType<
   workflowId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayloadWorkflowStep$ {
-  /** @deprecated use `PayloadWorkflowStep$inboundSchema` instead. */
-  export const inboundSchema = PayloadWorkflowStep$inboundSchema;
-  /** @deprecated use `PayloadWorkflowStep$outboundSchema` instead. */
-  export const outboundSchema = PayloadWorkflowStep$outboundSchema;
-  /** @deprecated use `PayloadWorkflowStep$Outbound` instead. */
-  export type Outbound = PayloadWorkflowStep$Outbound;
-}
-
 export function payloadWorkflowStepToJSON(
   payloadWorkflowStep: PayloadWorkflowStep,
 ): string {
@@ -80,7 +66,6 @@ export function payloadWorkflowStepToJSON(
     PayloadWorkflowStep$outboundSchema.parse(payloadWorkflowStep),
   );
 }
-
 export function payloadWorkflowStepFromJSON(
   jsonString: string,
 ): SafeParseResult<PayloadWorkflowStep, SDKValidationError> {

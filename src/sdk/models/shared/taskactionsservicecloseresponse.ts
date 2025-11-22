@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  TaskView,
-  TaskView$inboundSchema,
-  TaskView$Outbound,
-  TaskView$outboundSchema,
-} from "./taskview.js";
+import { TaskView, TaskView$inboundSchema } from "./taskview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -60,56 +55,6 @@ export const TaskActionsServiceCloseResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type TaskActionsServiceCloseResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const TaskActionsServiceCloseResponseExpanded$outboundSchema: z.ZodType<
-  TaskActionsServiceCloseResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  TaskActionsServiceCloseResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceCloseResponseExpanded$ {
-  /** @deprecated use `TaskActionsServiceCloseResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskActionsServiceCloseResponseExpanded$inboundSchema;
-  /** @deprecated use `TaskActionsServiceCloseResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceCloseResponseExpanded$outboundSchema;
-  /** @deprecated use `TaskActionsServiceCloseResponseExpanded$Outbound` instead. */
-  export type Outbound = TaskActionsServiceCloseResponseExpanded$Outbound;
-}
-
-export function taskActionsServiceCloseResponseExpandedToJSON(
-  taskActionsServiceCloseResponseExpanded:
-    TaskActionsServiceCloseResponseExpanded,
-): string {
-  return JSON.stringify(
-    TaskActionsServiceCloseResponseExpanded$outboundSchema.parse(
-      taskActionsServiceCloseResponseExpanded,
-    ),
-  );
-}
-
 export function taskActionsServiceCloseResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -140,54 +85,6 @@ export const TaskActionsServiceCloseResponse$inboundSchema: z.ZodType<
   taskActionId: z.nullable(z.string()).optional(),
   taskView: z.nullable(TaskView$inboundSchema).optional(),
 });
-
-/** @internal */
-export type TaskActionsServiceCloseResponse$Outbound = {
-  expanded?:
-    | Array<TaskActionsServiceCloseResponseExpanded$Outbound>
-    | null
-    | undefined;
-  taskActionId?: string | null | undefined;
-  taskView?: TaskView$Outbound | null | undefined;
-};
-
-/** @internal */
-export const TaskActionsServiceCloseResponse$outboundSchema: z.ZodType<
-  TaskActionsServiceCloseResponse$Outbound,
-  z.ZodTypeDef,
-  TaskActionsServiceCloseResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(
-      z.lazy(() => TaskActionsServiceCloseResponseExpanded$outboundSchema),
-    ),
-  ).optional(),
-  taskActionId: z.nullable(z.string()).optional(),
-  taskView: z.nullable(TaskView$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceCloseResponse$ {
-  /** @deprecated use `TaskActionsServiceCloseResponse$inboundSchema` instead. */
-  export const inboundSchema = TaskActionsServiceCloseResponse$inboundSchema;
-  /** @deprecated use `TaskActionsServiceCloseResponse$outboundSchema` instead. */
-  export const outboundSchema = TaskActionsServiceCloseResponse$outboundSchema;
-  /** @deprecated use `TaskActionsServiceCloseResponse$Outbound` instead. */
-  export type Outbound = TaskActionsServiceCloseResponse$Outbound;
-}
-
-export function taskActionsServiceCloseResponseToJSON(
-  taskActionsServiceCloseResponse: TaskActionsServiceCloseResponse,
-): string {
-  return JSON.stringify(
-    TaskActionsServiceCloseResponse$outboundSchema.parse(
-      taskActionsServiceCloseResponse,
-    ),
-  );
-}
 
 export function taskActionsServiceCloseResponseFromJSON(
   jsonString: string,

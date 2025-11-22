@@ -31,46 +31,6 @@ export const SystemLogServiceListEventsResponse$inboundSchema: z.ZodType<
   nextPageToken: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type SystemLogServiceListEventsResponse$Outbound = {
-  list?: Array<{ [k: string]: any }> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const SystemLogServiceListEventsResponse$outboundSchema: z.ZodType<
-  SystemLogServiceListEventsResponse$Outbound,
-  z.ZodTypeDef,
-  SystemLogServiceListEventsResponse
-> = z.object({
-  list: z.nullable(z.array(z.record(z.any()))).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SystemLogServiceListEventsResponse$ {
-  /** @deprecated use `SystemLogServiceListEventsResponse$inboundSchema` instead. */
-  export const inboundSchema = SystemLogServiceListEventsResponse$inboundSchema;
-  /** @deprecated use `SystemLogServiceListEventsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    SystemLogServiceListEventsResponse$outboundSchema;
-  /** @deprecated use `SystemLogServiceListEventsResponse$Outbound` instead. */
-  export type Outbound = SystemLogServiceListEventsResponse$Outbound;
-}
-
-export function systemLogServiceListEventsResponseToJSON(
-  systemLogServiceListEventsResponse: SystemLogServiceListEventsResponse,
-): string {
-  return JSON.stringify(
-    SystemLogServiceListEventsResponse$outboundSchema.parse(
-      systemLogServiceListEventsResponse,
-    ),
-  );
-}
-
 export function systemLogServiceListEventsResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<SystemLogServiceListEventsResponse, SDKValidationError> {

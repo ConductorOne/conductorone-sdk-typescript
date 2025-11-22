@@ -29,7 +29,6 @@ export const CancelledAction$inboundSchema: z.ZodType<
   ).optional(),
   cancelledByUserId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type CancelledAction$Outbound = {
   cancelledAt?: string | null | undefined;
@@ -46,25 +45,11 @@ export const CancelledAction$outboundSchema: z.ZodType<
   cancelledByUserId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CancelledAction$ {
-  /** @deprecated use `CancelledAction$inboundSchema` instead. */
-  export const inboundSchema = CancelledAction$inboundSchema;
-  /** @deprecated use `CancelledAction$outboundSchema` instead. */
-  export const outboundSchema = CancelledAction$outboundSchema;
-  /** @deprecated use `CancelledAction$Outbound` instead. */
-  export type Outbound = CancelledAction$Outbound;
-}
-
 export function cancelledActionToJSON(
   cancelledAction: CancelledAction,
 ): string {
   return JSON.stringify(CancelledAction$outboundSchema.parse(cancelledAction));
 }
-
 export function cancelledActionFromJSON(
   jsonString: string,
 ): SafeParseResult<CancelledAction, SDKValidationError> {

@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The WebhookRef message.
@@ -16,15 +13,6 @@ export type WebhookRef = {
    */
   id?: string | null | undefined;
 };
-
-/** @internal */
-export const WebhookRef$inboundSchema: z.ZodType<
-  WebhookRef,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type WebhookRef$Outbound = {
@@ -40,29 +28,6 @@ export const WebhookRef$outboundSchema: z.ZodType<
   id: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhookRef$ {
-  /** @deprecated use `WebhookRef$inboundSchema` instead. */
-  export const inboundSchema = WebhookRef$inboundSchema;
-  /** @deprecated use `WebhookRef$outboundSchema` instead. */
-  export const outboundSchema = WebhookRef$outboundSchema;
-  /** @deprecated use `WebhookRef$Outbound` instead. */
-  export type Outbound = WebhookRef$Outbound;
-}
-
 export function webhookRefToJSON(webhookRef: WebhookRef): string {
   return JSON.stringify(WebhookRef$outboundSchema.parse(webhookRef));
-}
-
-export function webhookRefFromJSON(
-  jsonString: string,
-): SafeParseResult<WebhookRef, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => WebhookRef$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'WebhookRef' from JSON`,
-  );
 }

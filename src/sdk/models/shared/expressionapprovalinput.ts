@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The ExpressionApproval message.
@@ -27,19 +24,11 @@ export type ExpressionApprovalInput = {
    * Configuration to specific which users to fallback to if and the expression does not return a valid list of users.
    */
   fallbackUserIds?: Array<string> | null | undefined;
+  /**
+   * Configuration to require distinct approvers across approval steps of a rule.
+   */
+  requireDistinctApprovers?: boolean | undefined;
 };
-
-/** @internal */
-export const ExpressionApprovalInput$inboundSchema: z.ZodType<
-  ExpressionApprovalInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  allowSelfApproval: z.nullable(z.boolean()).optional(),
-  expressions: z.nullable(z.array(z.string())).optional(),
-  fallback: z.nullable(z.boolean()).optional(),
-  fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type ExpressionApprovalInput$Outbound = {
@@ -47,6 +36,7 @@ export type ExpressionApprovalInput$Outbound = {
   expressions?: Array<string> | null | undefined;
   fallback?: boolean | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -59,35 +49,13 @@ export const ExpressionApprovalInput$outboundSchema: z.ZodType<
   expressions: z.nullable(z.array(z.string())).optional(),
   fallback: z.nullable(z.boolean()).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExpressionApprovalInput$ {
-  /** @deprecated use `ExpressionApprovalInput$inboundSchema` instead. */
-  export const inboundSchema = ExpressionApprovalInput$inboundSchema;
-  /** @deprecated use `ExpressionApprovalInput$outboundSchema` instead. */
-  export const outboundSchema = ExpressionApprovalInput$outboundSchema;
-  /** @deprecated use `ExpressionApprovalInput$Outbound` instead. */
-  export type Outbound = ExpressionApprovalInput$Outbound;
-}
 
 export function expressionApprovalInputToJSON(
   expressionApprovalInput: ExpressionApprovalInput,
 ): string {
   return JSON.stringify(
     ExpressionApprovalInput$outboundSchema.parse(expressionApprovalInput),
-  );
-}
-
-export function expressionApprovalInputFromJSON(
-  jsonString: string,
-): SafeParseResult<ExpressionApprovalInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ExpressionApprovalInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ExpressionApprovalInput' from JSON`,
   );
 }

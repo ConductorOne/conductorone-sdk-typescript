@@ -18,7 +18,6 @@ export const ManualAutomationTrigger$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
 /** @internal */
 export type ManualAutomationTrigger$Outbound = {};
 
@@ -29,19 +28,6 @@ export const ManualAutomationTrigger$outboundSchema: z.ZodType<
   ManualAutomationTrigger
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ManualAutomationTrigger$ {
-  /** @deprecated use `ManualAutomationTrigger$inboundSchema` instead. */
-  export const inboundSchema = ManualAutomationTrigger$inboundSchema;
-  /** @deprecated use `ManualAutomationTrigger$outboundSchema` instead. */
-  export const outboundSchema = ManualAutomationTrigger$outboundSchema;
-  /** @deprecated use `ManualAutomationTrigger$Outbound` instead. */
-  export type Outbound = ManualAutomationTrigger$Outbound;
-}
-
 export function manualAutomationTriggerToJSON(
   manualAutomationTrigger: ManualAutomationTrigger,
 ): string {
@@ -49,7 +35,6 @@ export function manualAutomationTriggerToJSON(
     ManualAutomationTrigger$outboundSchema.parse(manualAutomationTrigger),
   );
 }
-
 export function manualAutomationTriggerFromJSON(
   jsonString: string,
 ): SafeParseResult<ManualAutomationTrigger, SDKValidationError> {

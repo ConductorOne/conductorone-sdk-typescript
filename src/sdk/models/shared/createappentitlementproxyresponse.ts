@@ -13,8 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementProxyView,
   AppEntitlementProxyView$inboundSchema,
-  AppEntitlementProxyView$Outbound,
-  AppEntitlementProxyView$outboundSchema,
 } from "./appentitlementproxyview.js";
 
 /**
@@ -59,57 +57,6 @@ export const CreateAppEntitlementProxyResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type CreateAppEntitlementProxyResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const CreateAppEntitlementProxyResponseExpanded$outboundSchema:
-  z.ZodType<
-    CreateAppEntitlementProxyResponseExpanded$Outbound,
-    z.ZodTypeDef,
-    CreateAppEntitlementProxyResponseExpanded
-  > = z.object({
-    atType: z.string().optional(),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        atType: "@type",
-        additionalProperties: null,
-      }),
-    };
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAppEntitlementProxyResponseExpanded$ {
-  /** @deprecated use `CreateAppEntitlementProxyResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAppEntitlementProxyResponseExpanded$inboundSchema;
-  /** @deprecated use `CreateAppEntitlementProxyResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAppEntitlementProxyResponseExpanded$outboundSchema;
-  /** @deprecated use `CreateAppEntitlementProxyResponseExpanded$Outbound` instead. */
-  export type Outbound = CreateAppEntitlementProxyResponseExpanded$Outbound;
-}
-
-export function createAppEntitlementProxyResponseExpandedToJSON(
-  createAppEntitlementProxyResponseExpanded:
-    CreateAppEntitlementProxyResponseExpanded,
-): string {
-  return JSON.stringify(
-    CreateAppEntitlementProxyResponseExpanded$outboundSchema.parse(
-      createAppEntitlementProxyResponseExpanded,
-    ),
-  );
-}
-
 export function createAppEntitlementProxyResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -140,54 +87,6 @@ export const CreateAppEntitlementProxyResponse$inboundSchema: z.ZodType<
     ),
   ).optional(),
 });
-
-/** @internal */
-export type CreateAppEntitlementProxyResponse$Outbound = {
-  appProxyEntitlementView?: AppEntitlementProxyView$Outbound | null | undefined;
-  expanded?:
-    | Array<CreateAppEntitlementProxyResponseExpanded$Outbound>
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const CreateAppEntitlementProxyResponse$outboundSchema: z.ZodType<
-  CreateAppEntitlementProxyResponse$Outbound,
-  z.ZodTypeDef,
-  CreateAppEntitlementProxyResponse
-> = z.object({
-  appProxyEntitlementView: z.nullable(AppEntitlementProxyView$outboundSchema)
-    .optional(),
-  expanded: z.nullable(
-    z.array(z.lazy(() =>
-      CreateAppEntitlementProxyResponseExpanded$outboundSchema
-    )),
-  ).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAppEntitlementProxyResponse$ {
-  /** @deprecated use `CreateAppEntitlementProxyResponse$inboundSchema` instead. */
-  export const inboundSchema = CreateAppEntitlementProxyResponse$inboundSchema;
-  /** @deprecated use `CreateAppEntitlementProxyResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAppEntitlementProxyResponse$outboundSchema;
-  /** @deprecated use `CreateAppEntitlementProxyResponse$Outbound` instead. */
-  export type Outbound = CreateAppEntitlementProxyResponse$Outbound;
-}
-
-export function createAppEntitlementProxyResponseToJSON(
-  createAppEntitlementProxyResponse: CreateAppEntitlementProxyResponse,
-): string {
-  return JSON.stringify(
-    CreateAppEntitlementProxyResponse$outboundSchema.parse(
-      createAppEntitlementProxyResponse,
-    ),
-  );
-}
 
 export function createAppEntitlementProxyResponseFromJSON(
   jsonString: string,

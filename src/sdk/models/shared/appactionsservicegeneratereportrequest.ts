@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Empty request body. Just placeholder for the generate app report request which uses URL values for input.
  */
 export type AppActionsServiceGenerateReportRequest = {};
-
-/** @internal */
-export const AppActionsServiceGenerateReportRequest$inboundSchema: z.ZodType<
-  AppActionsServiceGenerateReportRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type AppActionsServiceGenerateReportRequest$Outbound = {};
@@ -29,21 +19,6 @@ export const AppActionsServiceGenerateReportRequest$outboundSchema: z.ZodType<
   AppActionsServiceGenerateReportRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppActionsServiceGenerateReportRequest$ {
-  /** @deprecated use `AppActionsServiceGenerateReportRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    AppActionsServiceGenerateReportRequest$inboundSchema;
-  /** @deprecated use `AppActionsServiceGenerateReportRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    AppActionsServiceGenerateReportRequest$outboundSchema;
-  /** @deprecated use `AppActionsServiceGenerateReportRequest$Outbound` instead. */
-  export type Outbound = AppActionsServiceGenerateReportRequest$Outbound;
-}
-
 export function appActionsServiceGenerateReportRequestToJSON(
   appActionsServiceGenerateReportRequest:
     AppActionsServiceGenerateReportRequest,
@@ -52,16 +27,5 @@ export function appActionsServiceGenerateReportRequestToJSON(
     AppActionsServiceGenerateReportRequest$outboundSchema.parse(
       appActionsServiceGenerateReportRequest,
     ),
-  );
-}
-
-export function appActionsServiceGenerateReportRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<AppActionsServiceGenerateReportRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      AppActionsServiceGenerateReportRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AppActionsServiceGenerateReportRequest' from JSON`,
   );
 }

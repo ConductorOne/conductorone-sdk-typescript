@@ -83,7 +83,6 @@ export const SFixed32Rules$inboundSchema: z.ZodType<
   lte: z.nullable(z.number().int()).optional(),
   notIn: z.nullable(z.array(z.number().int())).optional(),
 });
-
 /** @internal */
 export type SFixed32Rules$Outbound = {
   const?: number | null | undefined;
@@ -112,23 +111,9 @@ export const SFixed32Rules$outboundSchema: z.ZodType<
   notIn: z.nullable(z.array(z.number().int())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SFixed32Rules$ {
-  /** @deprecated use `SFixed32Rules$inboundSchema` instead. */
-  export const inboundSchema = SFixed32Rules$inboundSchema;
-  /** @deprecated use `SFixed32Rules$outboundSchema` instead. */
-  export const outboundSchema = SFixed32Rules$outboundSchema;
-  /** @deprecated use `SFixed32Rules$Outbound` instead. */
-  export type Outbound = SFixed32Rules$Outbound;
-}
-
 export function sFixed32RulesToJSON(sFixed32Rules: SFixed32Rules): string {
   return JSON.stringify(SFixed32Rules$outboundSchema.parse(sFixed32Rules));
 }
-
 export function sFixed32RulesFromJSON(
   jsonString: string,
 ): SafeParseResult<SFixed32Rules, SDKValidationError> {

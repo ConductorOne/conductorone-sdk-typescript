@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  AppUserView,
-  AppUserView$inboundSchema,
-  AppUserView$Outbound,
-  AppUserView$outboundSchema,
-} from "./appuserview.js";
+import { AppUserView, AppUserView$inboundSchema } from "./appuserview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -56,55 +51,6 @@ export const AppUserServiceUpdateResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type AppUserServiceUpdateResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const AppUserServiceUpdateResponseExpanded$outboundSchema: z.ZodType<
-  AppUserServiceUpdateResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  AppUserServiceUpdateResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUserServiceUpdateResponseExpanded$ {
-  /** @deprecated use `AppUserServiceUpdateResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    AppUserServiceUpdateResponseExpanded$inboundSchema;
-  /** @deprecated use `AppUserServiceUpdateResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    AppUserServiceUpdateResponseExpanded$outboundSchema;
-  /** @deprecated use `AppUserServiceUpdateResponseExpanded$Outbound` instead. */
-  export type Outbound = AppUserServiceUpdateResponseExpanded$Outbound;
-}
-
-export function appUserServiceUpdateResponseExpandedToJSON(
-  appUserServiceUpdateResponseExpanded: AppUserServiceUpdateResponseExpanded,
-): string {
-  return JSON.stringify(
-    AppUserServiceUpdateResponseExpanded$outboundSchema.parse(
-      appUserServiceUpdateResponseExpanded,
-    ),
-  );
-}
-
 export function appUserServiceUpdateResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<AppUserServiceUpdateResponseExpanded, SDKValidationError> {
@@ -127,50 +73,6 @@ export const AppUserServiceUpdateResponse$inboundSchema: z.ZodType<
     z.array(z.lazy(() => AppUserServiceUpdateResponseExpanded$inboundSchema)),
   ).optional(),
 });
-
-/** @internal */
-export type AppUserServiceUpdateResponse$Outbound = {
-  appUserView?: AppUserView$Outbound | null | undefined;
-  expanded?:
-    | Array<AppUserServiceUpdateResponseExpanded$Outbound>
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const AppUserServiceUpdateResponse$outboundSchema: z.ZodType<
-  AppUserServiceUpdateResponse$Outbound,
-  z.ZodTypeDef,
-  AppUserServiceUpdateResponse
-> = z.object({
-  appUserView: z.nullable(AppUserView$outboundSchema).optional(),
-  expanded: z.nullable(
-    z.array(z.lazy(() => AppUserServiceUpdateResponseExpanded$outboundSchema)),
-  ).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUserServiceUpdateResponse$ {
-  /** @deprecated use `AppUserServiceUpdateResponse$inboundSchema` instead. */
-  export const inboundSchema = AppUserServiceUpdateResponse$inboundSchema;
-  /** @deprecated use `AppUserServiceUpdateResponse$outboundSchema` instead. */
-  export const outboundSchema = AppUserServiceUpdateResponse$outboundSchema;
-  /** @deprecated use `AppUserServiceUpdateResponse$Outbound` instead. */
-  export type Outbound = AppUserServiceUpdateResponse$Outbound;
-}
-
-export function appUserServiceUpdateResponseToJSON(
-  appUserServiceUpdateResponse: AppUserServiceUpdateResponse,
-): string {
-  return JSON.stringify(
-    AppUserServiceUpdateResponse$outboundSchema.parse(
-      appUserServiceUpdateResponse,
-    ),
-  );
-}
 
 export function appUserServiceUpdateResponseFromJSON(
   jsonString: string,

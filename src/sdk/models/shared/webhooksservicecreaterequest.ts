@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The WebhooksServiceCreateRequest message.
@@ -26,17 +23,6 @@ export type WebhooksServiceCreateRequest = {
 };
 
 /** @internal */
-export const WebhooksServiceCreateRequest$inboundSchema: z.ZodType<
-  WebhooksServiceCreateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  description: z.nullable(z.string()).optional(),
-  displayName: z.string(),
-  url: z.string(),
-});
-
-/** @internal */
 export type WebhooksServiceCreateRequest$Outbound = {
   description?: string | null | undefined;
   displayName: string;
@@ -54,19 +40,6 @@ export const WebhooksServiceCreateRequest$outboundSchema: z.ZodType<
   url: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhooksServiceCreateRequest$ {
-  /** @deprecated use `WebhooksServiceCreateRequest$inboundSchema` instead. */
-  export const inboundSchema = WebhooksServiceCreateRequest$inboundSchema;
-  /** @deprecated use `WebhooksServiceCreateRequest$outboundSchema` instead. */
-  export const outboundSchema = WebhooksServiceCreateRequest$outboundSchema;
-  /** @deprecated use `WebhooksServiceCreateRequest$Outbound` instead. */
-  export type Outbound = WebhooksServiceCreateRequest$Outbound;
-}
-
 export function webhooksServiceCreateRequestToJSON(
   webhooksServiceCreateRequest: WebhooksServiceCreateRequest,
 ): string {
@@ -74,15 +47,5 @@ export function webhooksServiceCreateRequestToJSON(
     WebhooksServiceCreateRequest$outboundSchema.parse(
       webhooksServiceCreateRequest,
     ),
-  );
-}
-
-export function webhooksServiceCreateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<WebhooksServiceCreateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => WebhooksServiceCreateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'WebhooksServiceCreateRequest' from JSON`,
   );
 }

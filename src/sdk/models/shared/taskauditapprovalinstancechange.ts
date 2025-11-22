@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ApprovalInstance,
   ApprovalInstance$inboundSchema,
-  ApprovalInstance$Outbound,
-  ApprovalInstance$outboundSchema,
 } from "./approvalinstance.js";
 
 /**
@@ -28,43 +26,6 @@ export const TaskAuditApprovalInstanceChange$inboundSchema: z.ZodType<
 > = z.object({
   instance: z.nullable(ApprovalInstance$inboundSchema).optional(),
 });
-
-/** @internal */
-export type TaskAuditApprovalInstanceChange$Outbound = {
-  instance?: ApprovalInstance$Outbound | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditApprovalInstanceChange$outboundSchema: z.ZodType<
-  TaskAuditApprovalInstanceChange$Outbound,
-  z.ZodTypeDef,
-  TaskAuditApprovalInstanceChange
-> = z.object({
-  instance: z.nullable(ApprovalInstance$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditApprovalInstanceChange$ {
-  /** @deprecated use `TaskAuditApprovalInstanceChange$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditApprovalInstanceChange$inboundSchema;
-  /** @deprecated use `TaskAuditApprovalInstanceChange$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditApprovalInstanceChange$outboundSchema;
-  /** @deprecated use `TaskAuditApprovalInstanceChange$Outbound` instead. */
-  export type Outbound = TaskAuditApprovalInstanceChange$Outbound;
-}
-
-export function taskAuditApprovalInstanceChangeToJSON(
-  taskAuditApprovalInstanceChange: TaskAuditApprovalInstanceChange,
-): string {
-  return JSON.stringify(
-    TaskAuditApprovalInstanceChange$outboundSchema.parse(
-      taskAuditApprovalInstanceChange,
-    ),
-  );
-}
 
 export function taskAuditApprovalInstanceChangeFromJSON(
   jsonString: string,

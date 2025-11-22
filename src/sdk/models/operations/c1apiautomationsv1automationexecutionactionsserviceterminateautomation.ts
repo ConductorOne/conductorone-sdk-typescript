@@ -38,22 +38,6 @@ export type C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomati
   };
 
 /** @internal */
-export const C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.nullable(z.string().transform(v => parseInt(v, 10))),
-    TerminateAutomationRequest: shared.TerminateAutomationRequest$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "TerminateAutomationRequest": "terminateAutomationRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest$Outbound =
   {
     id: string | null;
@@ -78,22 +62,6 @@ export const C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomat
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest$ {
-  /** @deprecated use `C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest$inboundSchema;
-  /** @deprecated use `C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest$outboundSchema;
-  /** @deprecated use `C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest$Outbound;
-}
-
 export function c1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequestToJSON(
   c1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest:
     C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest,
@@ -103,21 +71,6 @@ export function c1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAuto
       .parse(
         c1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest,
       ),
-  );
-}
-
-export function c1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest' from JSON`,
   );
 }
 
@@ -141,68 +94,6 @@ export const C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomat
       "TerminateAutomationResponse": "terminateAutomationResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    TerminateAutomationResponse?:
-      | shared.TerminateAutomationResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    terminateAutomationResponse: shared
-      .TerminateAutomationResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      terminateAutomationResponse: "TerminateAutomationResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationResponse$ {
-  /** @deprecated use `C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationResponse$inboundSchema;
-  /** @deprecated use `C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationResponse$outboundSchema;
-  /** @deprecated use `C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationResponse$Outbound;
-}
-
-export function c1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationResponseToJSON(
-  c1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationResponse:
-    C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationResponse$outboundSchema
-      .parse(
-        c1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationResponse,
-      ),
-  );
-}
 
 export function c1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationResponseFromJSON(
   jsonString: string,

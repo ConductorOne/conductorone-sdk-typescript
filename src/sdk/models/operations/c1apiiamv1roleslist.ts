@@ -34,21 +34,6 @@ export type C1ApiIamV1RolesListResponse = {
 };
 
 /** @internal */
-export const C1ApiIamV1RolesListRequest$inboundSchema: z.ZodType<
-  C1ApiIamV1RolesListRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  page_size: z.nullable(z.number().int()).optional(),
-  page_token: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "page_size": "pageSize",
-    "page_token": "pageToken",
-  });
-});
-
-/** @internal */
 export type C1ApiIamV1RolesListRequest$Outbound = {
   page_size?: number | null | undefined;
   page_token?: string | null | undefined;
@@ -69,34 +54,11 @@ export const C1ApiIamV1RolesListRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiIamV1RolesListRequest$ {
-  /** @deprecated use `C1ApiIamV1RolesListRequest$inboundSchema` instead. */
-  export const inboundSchema = C1ApiIamV1RolesListRequest$inboundSchema;
-  /** @deprecated use `C1ApiIamV1RolesListRequest$outboundSchema` instead. */
-  export const outboundSchema = C1ApiIamV1RolesListRequest$outboundSchema;
-  /** @deprecated use `C1ApiIamV1RolesListRequest$Outbound` instead. */
-  export type Outbound = C1ApiIamV1RolesListRequest$Outbound;
-}
-
 export function c1ApiIamV1RolesListRequestToJSON(
   c1ApiIamV1RolesListRequest: C1ApiIamV1RolesListRequest,
 ): string {
   return JSON.stringify(
     C1ApiIamV1RolesListRequest$outboundSchema.parse(c1ApiIamV1RolesListRequest),
-  );
-}
-
-export function c1ApiIamV1RolesListRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<C1ApiIamV1RolesListRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => C1ApiIamV1RolesListRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiIamV1RolesListRequest' from JSON`,
   );
 }
 
@@ -118,58 +80,6 @@ export const C1ApiIamV1RolesListResponse$inboundSchema: z.ZodType<
     "ListRolesResponse": "listRolesResponse",
   });
 });
-
-/** @internal */
-export type C1ApiIamV1RolesListResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  ListRolesResponse?: shared.ListRolesResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiIamV1RolesListResponse$outboundSchema: z.ZodType<
-  C1ApiIamV1RolesListResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiIamV1RolesListResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  listRolesResponse: shared.ListRolesResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    listRolesResponse: "ListRolesResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiIamV1RolesListResponse$ {
-  /** @deprecated use `C1ApiIamV1RolesListResponse$inboundSchema` instead. */
-  export const inboundSchema = C1ApiIamV1RolesListResponse$inboundSchema;
-  /** @deprecated use `C1ApiIamV1RolesListResponse$outboundSchema` instead. */
-  export const outboundSchema = C1ApiIamV1RolesListResponse$outboundSchema;
-  /** @deprecated use `C1ApiIamV1RolesListResponse$Outbound` instead. */
-  export type Outbound = C1ApiIamV1RolesListResponse$Outbound;
-}
-
-export function c1ApiIamV1RolesListResponseToJSON(
-  c1ApiIamV1RolesListResponse: C1ApiIamV1RolesListResponse,
-): string {
-  return JSON.stringify(
-    C1ApiIamV1RolesListResponse$outboundSchema.parse(
-      c1ApiIamV1RolesListResponse,
-    ),
-  );
-}
 
 export function c1ApiIamV1RolesListResponseFromJSON(
   jsonString: string,

@@ -19,39 +19,6 @@ export const DeleteBundleAutomationResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type DeleteBundleAutomationResponse$Outbound = {};
-
-/** @internal */
-export const DeleteBundleAutomationResponse$outboundSchema: z.ZodType<
-  DeleteBundleAutomationResponse$Outbound,
-  z.ZodTypeDef,
-  DeleteBundleAutomationResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteBundleAutomationResponse$ {
-  /** @deprecated use `DeleteBundleAutomationResponse$inboundSchema` instead. */
-  export const inboundSchema = DeleteBundleAutomationResponse$inboundSchema;
-  /** @deprecated use `DeleteBundleAutomationResponse$outboundSchema` instead. */
-  export const outboundSchema = DeleteBundleAutomationResponse$outboundSchema;
-  /** @deprecated use `DeleteBundleAutomationResponse$Outbound` instead. */
-  export type Outbound = DeleteBundleAutomationResponse$Outbound;
-}
-
-export function deleteBundleAutomationResponseToJSON(
-  deleteBundleAutomationResponse: DeleteBundleAutomationResponse,
-): string {
-  return JSON.stringify(
-    DeleteBundleAutomationResponse$outboundSchema.parse(
-      deleteBundleAutomationResponse,
-    ),
-  );
-}
-
 export function deleteBundleAutomationResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<DeleteBundleAutomationResponse, SDKValidationError> {

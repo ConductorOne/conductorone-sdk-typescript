@@ -40,7 +40,6 @@ export const ConnectorAction$inboundSchema: z.ZodType<
   argsTemplate: z.nullable(z.record(z.any())).optional(),
   connectorRef: z.nullable(ConnectorRef$inboundSchema).optional(),
 });
-
 /** @internal */
 export type ConnectorAction$Outbound = {
   actionName?: string | null | undefined;
@@ -59,25 +58,11 @@ export const ConnectorAction$outboundSchema: z.ZodType<
   connectorRef: z.nullable(ConnectorRef$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorAction$ {
-  /** @deprecated use `ConnectorAction$inboundSchema` instead. */
-  export const inboundSchema = ConnectorAction$inboundSchema;
-  /** @deprecated use `ConnectorAction$outboundSchema` instead. */
-  export const outboundSchema = ConnectorAction$outboundSchema;
-  /** @deprecated use `ConnectorAction$Outbound` instead. */
-  export type Outbound = ConnectorAction$Outbound;
-}
-
 export function connectorActionToJSON(
   connectorAction: ConnectorAction,
 ): string {
   return JSON.stringify(ConnectorAction$outboundSchema.parse(connectorAction));
 }
-
 export function connectorActionFromJSON(
   jsonString: string,
 ): SafeParseResult<ConnectorAction, SDKValidationError> {

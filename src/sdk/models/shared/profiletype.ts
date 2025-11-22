@@ -35,6 +35,10 @@ export type ProfileType = {
    * icon sizes
    */
   sizes?: Array<number> | null | undefined;
+  /**
+   * The slug field.
+   */
+  slug?: string | undefined;
 };
 
 /** @internal */
@@ -49,48 +53,8 @@ export const ProfileType$inboundSchema: z.ZodType<
   name: z.nullable(z.string()).optional(),
   priority: z.nullable(z.number().int()).optional(),
   sizes: z.nullable(z.array(z.number().int())).optional(),
+  slug: z.string().optional(),
 });
-
-/** @internal */
-export type ProfileType$Outbound = {
-  description?: string | null | undefined;
-  iconUrl?: string | null | undefined;
-  id?: string | null | undefined;
-  name?: string | null | undefined;
-  priority?: number | null | undefined;
-  sizes?: Array<number> | null | undefined;
-};
-
-/** @internal */
-export const ProfileType$outboundSchema: z.ZodType<
-  ProfileType$Outbound,
-  z.ZodTypeDef,
-  ProfileType
-> = z.object({
-  description: z.nullable(z.string()).optional(),
-  iconUrl: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
-  priority: z.nullable(z.number().int()).optional(),
-  sizes: z.nullable(z.array(z.number().int())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ProfileType$ {
-  /** @deprecated use `ProfileType$inboundSchema` instead. */
-  export const inboundSchema = ProfileType$inboundSchema;
-  /** @deprecated use `ProfileType$outboundSchema` instead. */
-  export const outboundSchema = ProfileType$outboundSchema;
-  /** @deprecated use `ProfileType$Outbound` instead. */
-  export type Outbound = ProfileType$Outbound;
-}
-
-export function profileTypeToJSON(profileType: ProfileType): string {
-  return JSON.stringify(ProfileType$outboundSchema.parse(profileType));
-}
 
 export function profileTypeFromJSON(
   jsonString: string,

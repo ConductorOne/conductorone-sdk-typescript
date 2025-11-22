@@ -83,7 +83,6 @@ export const Payload$inboundSchema: z.ZodType<Payload, z.ZodTypeDef, unknown> =
       "@type": "atType",
     });
   });
-
 /** @internal */
 export type Payload$Outbound = {
   "@type"?: string | undefined;
@@ -108,23 +107,9 @@ export const Payload$outboundSchema: z.ZodType<
   };
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Payload$ {
-  /** @deprecated use `Payload$inboundSchema` instead. */
-  export const inboundSchema = Payload$inboundSchema;
-  /** @deprecated use `Payload$outboundSchema` instead. */
-  export const outboundSchema = Payload$outboundSchema;
-  /** @deprecated use `Payload$Outbound` instead. */
-  export type Outbound = Payload$Outbound;
-}
-
 export function payloadToJSON(payload: Payload): string {
   return JSON.stringify(Payload$outboundSchema.parse(payload));
 }
-
 export function payloadFromJSON(
   jsonString: string,
 ): SafeParseResult<Payload, SDKValidationError> {
@@ -144,7 +129,6 @@ export const Body$inboundSchema: z.ZodType<Body, z.ZodTypeDef, unknown> = z
     version: z.nullable(z.string()).optional(),
     webhookId: z.nullable(z.string()).optional(),
   });
-
 /** @internal */
 export type Body$Outbound = {
   callbackUrl?: string | null | undefined;
@@ -164,23 +148,9 @@ export const Body$outboundSchema: z.ZodType<Body$Outbound, z.ZodTypeDef, Body> =
     webhookId: z.nullable(z.string()).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Body$ {
-  /** @deprecated use `Body$inboundSchema` instead. */
-  export const inboundSchema = Body$inboundSchema;
-  /** @deprecated use `Body$outboundSchema` instead. */
-  export const outboundSchema = Body$outboundSchema;
-  /** @deprecated use `Body$Outbound` instead. */
-  export type Outbound = Body$Outbound;
-}
-
 export function bodyToJSON(body: Body): string {
   return JSON.stringify(Body$outboundSchema.parse(body));
 }
-
 export function bodyFromJSON(
   jsonString: string,
 ): SafeParseResult<Body, SDKValidationError> {

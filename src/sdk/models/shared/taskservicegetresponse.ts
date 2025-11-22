@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  TaskView,
-  TaskView$inboundSchema,
-  TaskView$Outbound,
-  TaskView$outboundSchema,
-} from "./taskview.js";
+import { TaskView, TaskView$inboundSchema } from "./taskview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -56,53 +51,6 @@ export const TaskServiceGetResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type TaskServiceGetResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const TaskServiceGetResponseExpanded$outboundSchema: z.ZodType<
-  TaskServiceGetResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  TaskServiceGetResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskServiceGetResponseExpanded$ {
-  /** @deprecated use `TaskServiceGetResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema = TaskServiceGetResponseExpanded$inboundSchema;
-  /** @deprecated use `TaskServiceGetResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema = TaskServiceGetResponseExpanded$outboundSchema;
-  /** @deprecated use `TaskServiceGetResponseExpanded$Outbound` instead. */
-  export type Outbound = TaskServiceGetResponseExpanded$Outbound;
-}
-
-export function taskServiceGetResponseExpandedToJSON(
-  taskServiceGetResponseExpanded: TaskServiceGetResponseExpanded,
-): string {
-  return JSON.stringify(
-    TaskServiceGetResponseExpanded$outboundSchema.parse(
-      taskServiceGetResponseExpanded,
-    ),
-  );
-}
-
 export function taskServiceGetResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskServiceGetResponseExpanded, SDKValidationError> {
@@ -124,45 +72,6 @@ export const TaskServiceGetResponse$inboundSchema: z.ZodType<
   ).optional(),
   taskView: z.nullable(TaskView$inboundSchema).optional(),
 });
-
-/** @internal */
-export type TaskServiceGetResponse$Outbound = {
-  expanded?: Array<TaskServiceGetResponseExpanded$Outbound> | null | undefined;
-  taskView?: TaskView$Outbound | null | undefined;
-};
-
-/** @internal */
-export const TaskServiceGetResponse$outboundSchema: z.ZodType<
-  TaskServiceGetResponse$Outbound,
-  z.ZodTypeDef,
-  TaskServiceGetResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() => TaskServiceGetResponseExpanded$outboundSchema)),
-  ).optional(),
-  taskView: z.nullable(TaskView$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskServiceGetResponse$ {
-  /** @deprecated use `TaskServiceGetResponse$inboundSchema` instead. */
-  export const inboundSchema = TaskServiceGetResponse$inboundSchema;
-  /** @deprecated use `TaskServiceGetResponse$outboundSchema` instead. */
-  export const outboundSchema = TaskServiceGetResponse$outboundSchema;
-  /** @deprecated use `TaskServiceGetResponse$Outbound` instead. */
-  export type Outbound = TaskServiceGetResponse$Outbound;
-}
-
-export function taskServiceGetResponseToJSON(
-  taskServiceGetResponse: TaskServiceGetResponse,
-): string {
-  return JSON.stringify(
-    TaskServiceGetResponse$outboundSchema.parse(taskServiceGetResponse),
-  );
-}
 
 export function taskServiceGetResponseFromJSON(
   jsonString: string,

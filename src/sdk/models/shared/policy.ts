@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,7 +22,6 @@ import {
 } from "./policysteps.js";
 import {
   PolicyStepsInput,
-  PolicyStepsInput$inboundSchema,
   PolicyStepsInput$Outbound,
   PolicyStepsInput$outboundSchema,
 } from "./policystepsinput.js";
@@ -143,32 +139,13 @@ export const PolicyType$inboundSchema: z.ZodType<
   PolicyType,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(PolicyType),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(PolicyType);
 /** @internal */
 export const PolicyType$outboundSchema: z.ZodType<
-  PolicyType,
+  string,
   z.ZodTypeDef,
   PolicyType
-> = z.union([
-  z.nativeEnum(PolicyType),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PolicyType$ {
-  /** @deprecated use `PolicyType$inboundSchema` instead. */
-  export const inboundSchema = PolicyType$inboundSchema;
-  /** @deprecated use `PolicyType$outboundSchema` instead. */
-  export const outboundSchema = PolicyType$outboundSchema;
-}
+> = openEnums.outboundSchema(PolicyType);
 
 /** @internal */
 export const Policy$inboundSchema: z.ZodType<Policy, z.ZodTypeDef, unknown> = z
@@ -193,7 +170,6 @@ export const Policy$inboundSchema: z.ZodType<Policy, z.ZodTypeDef, unknown> = z
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
   });
-
 /** @internal */
 export type Policy$Outbound = {
   createdAt?: string | null | undefined;
@@ -230,23 +206,9 @@ export const Policy$outboundSchema: z.ZodType<
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Policy$ {
-  /** @deprecated use `Policy$inboundSchema` instead. */
-  export const inboundSchema = Policy$inboundSchema;
-  /** @deprecated use `Policy$outboundSchema` instead. */
-  export const outboundSchema = Policy$outboundSchema;
-  /** @deprecated use `Policy$Outbound` instead. */
-  export type Outbound = Policy$Outbound;
-}
-
 export function policyToJSON(policy: Policy): string {
   return JSON.stringify(Policy$outboundSchema.parse(policy));
 }
-
 export function policyFromJSON(
   jsonString: string,
 ): SafeParseResult<Policy, SDKValidationError> {
@@ -256,30 +218,6 @@ export function policyFromJSON(
     `Failed to parse 'Policy' from JSON`,
   );
 }
-
-/** @internal */
-export const PolicyInput$inboundSchema: z.ZodType<
-  PolicyInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  policySteps: z.nullable(z.record(PolicyStepsInput$inboundSchema)).optional(),
-  policyType: z.nullable(PolicyType$inboundSchema).optional(),
-  postActions: z.nullable(z.array(PolicyPostActions$inboundSchema)).optional(),
-  reassignTasksToDelegates: z.nullable(z.boolean()).optional(),
-  rules: z.nullable(z.array(Rule$inboundSchema)).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
 
 /** @internal */
 export type PolicyInput$Outbound = {
@@ -313,29 +251,6 @@ export const PolicyInput$outboundSchema: z.ZodType<
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PolicyInput$ {
-  /** @deprecated use `PolicyInput$inboundSchema` instead. */
-  export const inboundSchema = PolicyInput$inboundSchema;
-  /** @deprecated use `PolicyInput$outboundSchema` instead. */
-  export const outboundSchema = PolicyInput$outboundSchema;
-  /** @deprecated use `PolicyInput$Outbound` instead. */
-  export type Outbound = PolicyInput$Outbound;
-}
-
 export function policyInputToJSON(policyInput: PolicyInput): string {
   return JSON.stringify(PolicyInput$outboundSchema.parse(policyInput));
-}
-
-export function policyInputFromJSON(
-  jsonString: string,
-): SafeParseResult<PolicyInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PolicyInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PolicyInput' from JSON`,
-  );
 }

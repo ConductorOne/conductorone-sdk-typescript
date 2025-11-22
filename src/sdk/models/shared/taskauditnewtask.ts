@@ -19,37 +19,6 @@ export const TaskAuditNewTask$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type TaskAuditNewTask$Outbound = {};
-
-/** @internal */
-export const TaskAuditNewTask$outboundSchema: z.ZodType<
-  TaskAuditNewTask$Outbound,
-  z.ZodTypeDef,
-  TaskAuditNewTask
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditNewTask$ {
-  /** @deprecated use `TaskAuditNewTask$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditNewTask$inboundSchema;
-  /** @deprecated use `TaskAuditNewTask$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditNewTask$outboundSchema;
-  /** @deprecated use `TaskAuditNewTask$Outbound` instead. */
-  export type Outbound = TaskAuditNewTask$Outbound;
-}
-
-export function taskAuditNewTaskToJSON(
-  taskAuditNewTask: TaskAuditNewTask,
-): string {
-  return JSON.stringify(
-    TaskAuditNewTask$outboundSchema.parse(taskAuditNewTask),
-  );
-}
-
 export function taskAuditNewTaskFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditNewTask, SDKValidationError> {

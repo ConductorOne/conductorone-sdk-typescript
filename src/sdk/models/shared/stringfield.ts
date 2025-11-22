@@ -72,7 +72,6 @@ export const StringField$inboundSchema: z.ZodType<
   selectField: z.nullable(SelectField$inboundSchema).optional(),
   textField: z.nullable(TextField$inboundSchema).optional(),
 });
-
 /** @internal */
 export type StringField$Outbound = {
   defaultValue?: string | null | undefined;
@@ -97,23 +96,9 @@ export const StringField$outboundSchema: z.ZodType<
   textField: z.nullable(TextField$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StringField$ {
-  /** @deprecated use `StringField$inboundSchema` instead. */
-  export const inboundSchema = StringField$inboundSchema;
-  /** @deprecated use `StringField$outboundSchema` instead. */
-  export const outboundSchema = StringField$outboundSchema;
-  /** @deprecated use `StringField$Outbound` instead. */
-  export type Outbound = StringField$Outbound;
-}
-
 export function stringFieldToJSON(stringField: StringField): string {
   return JSON.stringify(StringField$outboundSchema.parse(stringField));
 }
-
 export function stringFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<StringField, SDKValidationError> {

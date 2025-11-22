@@ -34,7 +34,6 @@ export const SkippedAction$inboundSchema: z.ZodType<
   ).optional(),
   userId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type SkippedAction$Outbound = {
   newPolicyStepId?: string | null | undefined;
@@ -53,23 +52,9 @@ export const SkippedAction$outboundSchema: z.ZodType<
   userId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SkippedAction$ {
-  /** @deprecated use `SkippedAction$inboundSchema` instead. */
-  export const inboundSchema = SkippedAction$inboundSchema;
-  /** @deprecated use `SkippedAction$outboundSchema` instead. */
-  export const outboundSchema = SkippedAction$outboundSchema;
-  /** @deprecated use `SkippedAction$Outbound` instead. */
-  export type Outbound = SkippedAction$Outbound;
-}
-
 export function skippedActionToJSON(skippedAction: SkippedAction): string {
   return JSON.stringify(SkippedAction$outboundSchema.parse(skippedAction));
 }
-
 export function skippedActionFromJSON(
   jsonString: string,
 ): SafeParseResult<SkippedAction, SDKValidationError> {

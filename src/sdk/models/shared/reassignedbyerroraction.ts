@@ -48,7 +48,6 @@ export const ReassignedByErrorAction$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
 /** @internal */
 export type ReassignedByErrorAction$Outbound = {
   description?: string | null | undefined;
@@ -73,19 +72,6 @@ export const ReassignedByErrorAction$outboundSchema: z.ZodType<
   reassignedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ReassignedByErrorAction$ {
-  /** @deprecated use `ReassignedByErrorAction$inboundSchema` instead. */
-  export const inboundSchema = ReassignedByErrorAction$inboundSchema;
-  /** @deprecated use `ReassignedByErrorAction$outboundSchema` instead. */
-  export const outboundSchema = ReassignedByErrorAction$outboundSchema;
-  /** @deprecated use `ReassignedByErrorAction$Outbound` instead. */
-  export type Outbound = ReassignedByErrorAction$Outbound;
-}
-
 export function reassignedByErrorActionToJSON(
   reassignedByErrorAction: ReassignedByErrorAction,
 ): string {
@@ -93,7 +79,6 @@ export function reassignedByErrorActionToJSON(
     ReassignedByErrorAction$outboundSchema.parse(reassignedByErrorAction),
   );
 }
-
 export function reassignedByErrorActionFromJSON(
   jsonString: string,
 ): SafeParseResult<ReassignedByErrorAction, SDKValidationError> {

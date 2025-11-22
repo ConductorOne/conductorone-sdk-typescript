@@ -18,7 +18,6 @@ export const PasswordField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
 /** @internal */
 export type PasswordField$Outbound = {};
 
@@ -29,23 +28,9 @@ export const PasswordField$outboundSchema: z.ZodType<
   PasswordField
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PasswordField$ {
-  /** @deprecated use `PasswordField$inboundSchema` instead. */
-  export const inboundSchema = PasswordField$inboundSchema;
-  /** @deprecated use `PasswordField$outboundSchema` instead. */
-  export const outboundSchema = PasswordField$outboundSchema;
-  /** @deprecated use `PasswordField$Outbound` instead. */
-  export type Outbound = PasswordField$Outbound;
-}
-
 export function passwordFieldToJSON(passwordField: PasswordField): string {
   return JSON.stringify(PasswordField$outboundSchema.parse(passwordField));
 }
-
 export function passwordFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<PasswordField, SDKValidationError> {

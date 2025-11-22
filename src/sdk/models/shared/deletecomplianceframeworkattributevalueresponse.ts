@@ -20,44 +20,6 @@ export const DeleteComplianceFrameworkAttributeValueResponse$inboundSchema:
     unknown
   > = z.object({});
 
-/** @internal */
-export type DeleteComplianceFrameworkAttributeValueResponse$Outbound = {};
-
-/** @internal */
-export const DeleteComplianceFrameworkAttributeValueResponse$outboundSchema:
-  z.ZodType<
-    DeleteComplianceFrameworkAttributeValueResponse$Outbound,
-    z.ZodTypeDef,
-    DeleteComplianceFrameworkAttributeValueResponse
-  > = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteComplianceFrameworkAttributeValueResponse$ {
-  /** @deprecated use `DeleteComplianceFrameworkAttributeValueResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteComplianceFrameworkAttributeValueResponse$inboundSchema;
-  /** @deprecated use `DeleteComplianceFrameworkAttributeValueResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteComplianceFrameworkAttributeValueResponse$outboundSchema;
-  /** @deprecated use `DeleteComplianceFrameworkAttributeValueResponse$Outbound` instead. */
-  export type Outbound =
-    DeleteComplianceFrameworkAttributeValueResponse$Outbound;
-}
-
-export function deleteComplianceFrameworkAttributeValueResponseToJSON(
-  deleteComplianceFrameworkAttributeValueResponse:
-    DeleteComplianceFrameworkAttributeValueResponse,
-): string {
-  return JSON.stringify(
-    DeleteComplianceFrameworkAttributeValueResponse$outboundSchema.parse(
-      deleteComplianceFrameworkAttributeValueResponse,
-    ),
-  );
-}
-
 export function deleteComplianceFrameworkAttributeValueResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

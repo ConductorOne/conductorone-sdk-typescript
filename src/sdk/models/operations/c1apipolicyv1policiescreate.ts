@@ -47,60 +47,6 @@ export const C1ApiPolicyV1PoliciesCreateResponse$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type C1ApiPolicyV1PoliciesCreateResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  CreatePolicyResponse?: shared.CreatePolicyResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiPolicyV1PoliciesCreateResponse$outboundSchema: z.ZodType<
-  C1ApiPolicyV1PoliciesCreateResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiPolicyV1PoliciesCreateResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  createPolicyResponse: shared.CreatePolicyResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    createPolicyResponse: "CreatePolicyResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiPolicyV1PoliciesCreateResponse$ {
-  /** @deprecated use `C1ApiPolicyV1PoliciesCreateResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiPolicyV1PoliciesCreateResponse$inboundSchema;
-  /** @deprecated use `C1ApiPolicyV1PoliciesCreateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiPolicyV1PoliciesCreateResponse$outboundSchema;
-  /** @deprecated use `C1ApiPolicyV1PoliciesCreateResponse$Outbound` instead. */
-  export type Outbound = C1ApiPolicyV1PoliciesCreateResponse$Outbound;
-}
-
-export function c1ApiPolicyV1PoliciesCreateResponseToJSON(
-  c1ApiPolicyV1PoliciesCreateResponse: C1ApiPolicyV1PoliciesCreateResponse,
-): string {
-  return JSON.stringify(
-    C1ApiPolicyV1PoliciesCreateResponse$outboundSchema.parse(
-      c1ApiPolicyV1PoliciesCreateResponse,
-    ),
-  );
-}
-
 export function c1ApiPolicyV1PoliciesCreateResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<C1ApiPolicyV1PoliciesCreateResponse, SDKValidationError> {

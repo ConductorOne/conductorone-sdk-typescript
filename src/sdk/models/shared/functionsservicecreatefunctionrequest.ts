@@ -3,14 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 /**
  * The functionType field.
@@ -56,55 +50,14 @@ export type FunctionsServiceCreateFunctionRequest = {
 };
 
 /** @internal */
-export const FunctionsServiceCreateFunctionRequestFunctionType$inboundSchema:
-  z.ZodType<
-    FunctionsServiceCreateFunctionRequestFunctionType,
-    z.ZodTypeDef,
-    unknown
-  > = z
-    .union([
-      z.nativeEnum(FunctionsServiceCreateFunctionRequestFunctionType),
-      z.string().transform(catchUnrecognizedEnum),
-    ]);
-
-/** @internal */
 export const FunctionsServiceCreateFunctionRequestFunctionType$outboundSchema:
   z.ZodType<
-    FunctionsServiceCreateFunctionRequestFunctionType,
+    string,
     z.ZodTypeDef,
     FunctionsServiceCreateFunctionRequestFunctionType
-  > = z.union([
-    z.nativeEnum(FunctionsServiceCreateFunctionRequestFunctionType),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionsServiceCreateFunctionRequestFunctionType$ {
-  /** @deprecated use `FunctionsServiceCreateFunctionRequestFunctionType$inboundSchema` instead. */
-  export const inboundSchema =
-    FunctionsServiceCreateFunctionRequestFunctionType$inboundSchema;
-  /** @deprecated use `FunctionsServiceCreateFunctionRequestFunctionType$outboundSchema` instead. */
-  export const outboundSchema =
-    FunctionsServiceCreateFunctionRequestFunctionType$outboundSchema;
-}
-
-/** @internal */
-export const FunctionsServiceCreateFunctionRequest$inboundSchema: z.ZodType<
-  FunctionsServiceCreateFunctionRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  commitMessage: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  functionType: z.nullable(
-    FunctionsServiceCreateFunctionRequestFunctionType$inboundSchema,
-  ).optional(),
-  initialContent: z.nullable(z.record(z.string())).optional(),
-});
+  > = openEnums.outboundSchema(
+    FunctionsServiceCreateFunctionRequestFunctionType,
+  );
 
 /** @internal */
 export type FunctionsServiceCreateFunctionRequest$Outbound = {
@@ -130,21 +83,6 @@ export const FunctionsServiceCreateFunctionRequest$outboundSchema: z.ZodType<
   initialContent: z.nullable(z.record(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionsServiceCreateFunctionRequest$ {
-  /** @deprecated use `FunctionsServiceCreateFunctionRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    FunctionsServiceCreateFunctionRequest$inboundSchema;
-  /** @deprecated use `FunctionsServiceCreateFunctionRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    FunctionsServiceCreateFunctionRequest$outboundSchema;
-  /** @deprecated use `FunctionsServiceCreateFunctionRequest$Outbound` instead. */
-  export type Outbound = FunctionsServiceCreateFunctionRequest$Outbound;
-}
-
 export function functionsServiceCreateFunctionRequestToJSON(
   functionsServiceCreateFunctionRequest: FunctionsServiceCreateFunctionRequest,
 ): string {
@@ -152,16 +90,5 @@ export function functionsServiceCreateFunctionRequestToJSON(
     FunctionsServiceCreateFunctionRequest$outboundSchema.parse(
       functionsServiceCreateFunctionRequest,
     ),
-  );
-}
-
-export function functionsServiceCreateFunctionRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<FunctionsServiceCreateFunctionRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      FunctionsServiceCreateFunctionRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionsServiceCreateFunctionRequest' from JSON`,
   );
 }

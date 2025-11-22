@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The TaskAuditViewRef message.
@@ -16,15 +13,6 @@ export type TaskAuditViewRef = {
    */
   id?: string | null | undefined;
 };
-
-/** @internal */
-export const TaskAuditViewRef$inboundSchema: z.ZodType<
-  TaskAuditViewRef,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type TaskAuditViewRef$Outbound = {
@@ -40,33 +28,10 @@ export const TaskAuditViewRef$outboundSchema: z.ZodType<
   id: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditViewRef$ {
-  /** @deprecated use `TaskAuditViewRef$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditViewRef$inboundSchema;
-  /** @deprecated use `TaskAuditViewRef$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditViewRef$outboundSchema;
-  /** @deprecated use `TaskAuditViewRef$Outbound` instead. */
-  export type Outbound = TaskAuditViewRef$Outbound;
-}
-
 export function taskAuditViewRefToJSON(
   taskAuditViewRef: TaskAuditViewRef,
 ): string {
   return JSON.stringify(
     TaskAuditViewRef$outboundSchema.parse(taskAuditViewRef),
-  );
-}
-
-export function taskAuditViewRefFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskAuditViewRef, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskAuditViewRef$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskAuditViewRef' from JSON`,
   );
 }
