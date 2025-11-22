@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskExpandMask,
-  TaskExpandMask$inboundSchema,
   TaskExpandMask$Outbound,
   TaskExpandMask$outboundSchema,
 } from "./taskexpandmask.js";
@@ -29,17 +25,6 @@ export type TaskActionsServiceApproveRequest = {
 };
 
 /** @internal */
-export const TaskActionsServiceApproveRequest$inboundSchema: z.ZodType<
-  TaskActionsServiceApproveRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  comment: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(TaskExpandMask$inboundSchema).optional(),
-  policyStepId: z.string(),
-});
-
-/** @internal */
 export type TaskActionsServiceApproveRequest$Outbound = {
   comment?: string | null | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
@@ -57,19 +42,6 @@ export const TaskActionsServiceApproveRequest$outboundSchema: z.ZodType<
   policyStepId: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceApproveRequest$ {
-  /** @deprecated use `TaskActionsServiceApproveRequest$inboundSchema` instead. */
-  export const inboundSchema = TaskActionsServiceApproveRequest$inboundSchema;
-  /** @deprecated use `TaskActionsServiceApproveRequest$outboundSchema` instead. */
-  export const outboundSchema = TaskActionsServiceApproveRequest$outboundSchema;
-  /** @deprecated use `TaskActionsServiceApproveRequest$Outbound` instead. */
-  export type Outbound = TaskActionsServiceApproveRequest$Outbound;
-}
-
 export function taskActionsServiceApproveRequestToJSON(
   taskActionsServiceApproveRequest: TaskActionsServiceApproveRequest,
 ): string {
@@ -77,15 +49,5 @@ export function taskActionsServiceApproveRequestToJSON(
     TaskActionsServiceApproveRequest$outboundSchema.parse(
       taskActionsServiceApproveRequest,
     ),
-  );
-}
-
-export function taskActionsServiceApproveRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskActionsServiceApproveRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskActionsServiceApproveRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskActionsServiceApproveRequest' from JSON`,
   );
 }

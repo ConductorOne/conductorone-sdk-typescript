@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  FunctionT,
-  FunctionT$inboundSchema,
-  FunctionT$Outbound,
-  FunctionT$outboundSchema,
-} from "./function.js";
+import { FunctionT, FunctionT$inboundSchema } from "./function.js";
 
 /**
  * The FunctionsServiceGetFunctionResponse message.
@@ -28,45 +23,6 @@ export const FunctionsServiceGetFunctionResponse$inboundSchema: z.ZodType<
 > = z.object({
   function: z.nullable(FunctionT$inboundSchema).optional(),
 });
-
-/** @internal */
-export type FunctionsServiceGetFunctionResponse$Outbound = {
-  function?: FunctionT$Outbound | null | undefined;
-};
-
-/** @internal */
-export const FunctionsServiceGetFunctionResponse$outboundSchema: z.ZodType<
-  FunctionsServiceGetFunctionResponse$Outbound,
-  z.ZodTypeDef,
-  FunctionsServiceGetFunctionResponse
-> = z.object({
-  function: z.nullable(FunctionT$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionsServiceGetFunctionResponse$ {
-  /** @deprecated use `FunctionsServiceGetFunctionResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    FunctionsServiceGetFunctionResponse$inboundSchema;
-  /** @deprecated use `FunctionsServiceGetFunctionResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    FunctionsServiceGetFunctionResponse$outboundSchema;
-  /** @deprecated use `FunctionsServiceGetFunctionResponse$Outbound` instead. */
-  export type Outbound = FunctionsServiceGetFunctionResponse$Outbound;
-}
-
-export function functionsServiceGetFunctionResponseToJSON(
-  functionsServiceGetFunctionResponse: FunctionsServiceGetFunctionResponse,
-): string {
-  return JSON.stringify(
-    FunctionsServiceGetFunctionResponse$outboundSchema.parse(
-      functionsServiceGetFunctionResponse,
-    ),
-  );
-}
 
 export function functionsServiceGetFunctionResponseFromJSON(
   jsonString: string,

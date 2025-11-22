@@ -25,7 +25,6 @@ export const WebhookListenerAuthJWT$inboundSchema: z.ZodType<
 > = z.object({
   jwksUrl: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type WebhookListenerAuthJWT$Outbound = {
   jwksUrl?: string | null | undefined;
@@ -40,19 +39,6 @@ export const WebhookListenerAuthJWT$outboundSchema: z.ZodType<
   jwksUrl: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhookListenerAuthJWT$ {
-  /** @deprecated use `WebhookListenerAuthJWT$inboundSchema` instead. */
-  export const inboundSchema = WebhookListenerAuthJWT$inboundSchema;
-  /** @deprecated use `WebhookListenerAuthJWT$outboundSchema` instead. */
-  export const outboundSchema = WebhookListenerAuthJWT$outboundSchema;
-  /** @deprecated use `WebhookListenerAuthJWT$Outbound` instead. */
-  export type Outbound = WebhookListenerAuthJWT$Outbound;
-}
-
 export function webhookListenerAuthJWTToJSON(
   webhookListenerAuthJWT: WebhookListenerAuthJWT,
 ): string {
@@ -60,7 +46,6 @@ export function webhookListenerAuthJWTToJSON(
     WebhookListenerAuthJWT$outboundSchema.parse(webhookListenerAuthJWT),
   );
 }
-
 export function webhookListenerAuthJWTFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookListenerAuthJWT, SDKValidationError> {

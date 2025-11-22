@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  DirectoryView,
-  DirectoryView$inboundSchema,
-  DirectoryView$Outbound,
-  DirectoryView$outboundSchema,
-} from "./directoryview.js";
+import { DirectoryView, DirectoryView$inboundSchema } from "./directoryview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -67,55 +62,6 @@ export const DirectoryServiceListResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type DirectoryServiceListResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const DirectoryServiceListResponseExpanded$outboundSchema: z.ZodType<
-  DirectoryServiceListResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  DirectoryServiceListResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DirectoryServiceListResponseExpanded$ {
-  /** @deprecated use `DirectoryServiceListResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    DirectoryServiceListResponseExpanded$inboundSchema;
-  /** @deprecated use `DirectoryServiceListResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    DirectoryServiceListResponseExpanded$outboundSchema;
-  /** @deprecated use `DirectoryServiceListResponseExpanded$Outbound` instead. */
-  export type Outbound = DirectoryServiceListResponseExpanded$Outbound;
-}
-
-export function directoryServiceListResponseExpandedToJSON(
-  directoryServiceListResponseExpanded: DirectoryServiceListResponseExpanded,
-): string {
-  return JSON.stringify(
-    DirectoryServiceListResponseExpanded$outboundSchema.parse(
-      directoryServiceListResponseExpanded,
-    ),
-  );
-}
-
 export function directoryServiceListResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<DirectoryServiceListResponseExpanded, SDKValidationError> {
@@ -139,52 +85,6 @@ export const DirectoryServiceListResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(DirectoryView$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type DirectoryServiceListResponse$Outbound = {
-  expanded?:
-    | Array<DirectoryServiceListResponseExpanded$Outbound>
-    | null
-    | undefined;
-  list?: Array<DirectoryView$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const DirectoryServiceListResponse$outboundSchema: z.ZodType<
-  DirectoryServiceListResponse$Outbound,
-  z.ZodTypeDef,
-  DirectoryServiceListResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() => DirectoryServiceListResponseExpanded$outboundSchema)),
-  ).optional(),
-  list: z.nullable(z.array(DirectoryView$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DirectoryServiceListResponse$ {
-  /** @deprecated use `DirectoryServiceListResponse$inboundSchema` instead. */
-  export const inboundSchema = DirectoryServiceListResponse$inboundSchema;
-  /** @deprecated use `DirectoryServiceListResponse$outboundSchema` instead. */
-  export const outboundSchema = DirectoryServiceListResponse$outboundSchema;
-  /** @deprecated use `DirectoryServiceListResponse$Outbound` instead. */
-  export type Outbound = DirectoryServiceListResponse$Outbound;
-}
-
-export function directoryServiceListResponseToJSON(
-  directoryServiceListResponse: DirectoryServiceListResponse,
-): string {
-  return JSON.stringify(
-    DirectoryServiceListResponse$outboundSchema.parse(
-      directoryServiceListResponse,
-    ),
-  );
-}
 
 export function directoryServiceListResponseFromJSON(
   jsonString: string,

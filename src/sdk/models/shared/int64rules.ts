@@ -85,7 +85,6 @@ export const Int64Rules$inboundSchema: z.ZodType<
   notIn: z.nullable(z.array(z.string().transform(v => parseInt(v, 10))))
     .optional(),
 });
-
 /** @internal */
 export type Int64Rules$Outbound = {
   const?: string | null | undefined;
@@ -115,23 +114,9 @@ export const Int64Rules$outboundSchema: z.ZodType<
     .optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Int64Rules$ {
-  /** @deprecated use `Int64Rules$inboundSchema` instead. */
-  export const inboundSchema = Int64Rules$inboundSchema;
-  /** @deprecated use `Int64Rules$outboundSchema` instead. */
-  export const outboundSchema = Int64Rules$outboundSchema;
-  /** @deprecated use `Int64Rules$Outbound` instead. */
-  export type Outbound = Int64Rules$Outbound;
-}
-
 export function int64RulesToJSON(int64Rules: Int64Rules): string {
   return JSON.stringify(Int64Rules$outboundSchema.parse(int64Rules));
 }
-
 export function int64RulesFromJSON(
   jsonString: string,
 ): SafeParseResult<Int64Rules, SDKValidationError> {

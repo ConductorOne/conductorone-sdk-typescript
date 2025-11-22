@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -88,32 +85,7 @@ export const ActionType$inboundSchema: z.ZodType<
   ActionType,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(ActionType),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const ActionType$outboundSchema: z.ZodType<
-  ActionType,
-  z.ZodTypeDef,
-  ActionType
-> = z.union([
-  z.nativeEnum(ActionType),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ActionType$ {
-  /** @deprecated use `ActionType$inboundSchema` instead. */
-  export const inboundSchema = ActionType$inboundSchema;
-  /** @deprecated use `ActionType$outboundSchema` instead. */
-  export const outboundSchema = ActionType$outboundSchema;
-}
+> = openEnums.inboundSchema(ActionType);
 
 /** @internal */
 export const TaskAction1$inboundSchema: z.ZodType<
@@ -136,51 +108,6 @@ export const TaskAction1$inboundSchema: z.ZodType<
   ).optional(),
   userId: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type TaskAction1$Outbound = {
-  actionType?: string | null | undefined;
-  bulkActionId?: string | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  id?: string | null | undefined;
-  policyStepId?: string | null | undefined;
-  updatedAt?: string | null | undefined;
-  userId?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAction1$outboundSchema: z.ZodType<
-  TaskAction1$Outbound,
-  z.ZodTypeDef,
-  TaskAction1
-> = z.object({
-  actionType: z.nullable(ActionType$outboundSchema).optional(),
-  bulkActionId: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  id: z.nullable(z.string()).optional(),
-  policyStepId: z.nullable(z.string()).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  userId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAction1$ {
-  /** @deprecated use `TaskAction1$inboundSchema` instead. */
-  export const inboundSchema = TaskAction1$inboundSchema;
-  /** @deprecated use `TaskAction1$outboundSchema` instead. */
-  export const outboundSchema = TaskAction1$outboundSchema;
-  /** @deprecated use `TaskAction1$Outbound` instead. */
-  export type Outbound = TaskAction1$Outbound;
-}
-
-export function taskAction1ToJSON(taskAction1: TaskAction1): string {
-  return JSON.stringify(TaskAction1$outboundSchema.parse(taskAction1));
-}
 
 export function taskAction1FromJSON(
   jsonString: string,

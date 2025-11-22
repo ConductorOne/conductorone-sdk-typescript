@@ -25,7 +25,6 @@ export const WaitCondition$inboundSchema: z.ZodType<
 > = z.object({
   condition: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type WaitCondition$Outbound = {
   condition?: string | null | undefined;
@@ -40,23 +39,9 @@ export const WaitCondition$outboundSchema: z.ZodType<
   condition: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WaitCondition$ {
-  /** @deprecated use `WaitCondition$inboundSchema` instead. */
-  export const inboundSchema = WaitCondition$inboundSchema;
-  /** @deprecated use `WaitCondition$outboundSchema` instead. */
-  export const outboundSchema = WaitCondition$outboundSchema;
-  /** @deprecated use `WaitCondition$Outbound` instead. */
-  export type Outbound = WaitCondition$Outbound;
-}
-
 export function waitConditionToJSON(waitCondition: WaitCondition): string {
   return JSON.stringify(WaitCondition$outboundSchema.parse(waitCondition));
 }
-
 export function waitConditionFromJSON(
   jsonString: string,
 ): SafeParseResult<WaitCondition, SDKValidationError> {

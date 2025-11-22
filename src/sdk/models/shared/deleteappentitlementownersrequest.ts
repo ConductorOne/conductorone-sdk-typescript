@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The request message for deleting app entitlement owners.
  */
 export type DeleteAppEntitlementOwnersRequest = {};
-
-/** @internal */
-export const DeleteAppEntitlementOwnersRequest$inboundSchema: z.ZodType<
-  DeleteAppEntitlementOwnersRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type DeleteAppEntitlementOwnersRequest$Outbound = {};
@@ -29,20 +19,6 @@ export const DeleteAppEntitlementOwnersRequest$outboundSchema: z.ZodType<
   DeleteAppEntitlementOwnersRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteAppEntitlementOwnersRequest$ {
-  /** @deprecated use `DeleteAppEntitlementOwnersRequest$inboundSchema` instead. */
-  export const inboundSchema = DeleteAppEntitlementOwnersRequest$inboundSchema;
-  /** @deprecated use `DeleteAppEntitlementOwnersRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteAppEntitlementOwnersRequest$outboundSchema;
-  /** @deprecated use `DeleteAppEntitlementOwnersRequest$Outbound` instead. */
-  export type Outbound = DeleteAppEntitlementOwnersRequest$Outbound;
-}
-
 export function deleteAppEntitlementOwnersRequestToJSON(
   deleteAppEntitlementOwnersRequest: DeleteAppEntitlementOwnersRequest,
 ): string {
@@ -50,15 +26,5 @@ export function deleteAppEntitlementOwnersRequestToJSON(
     DeleteAppEntitlementOwnersRequest$outboundSchema.parse(
       deleteAppEntitlementOwnersRequest,
     ),
-  );
-}
-
-export function deleteAppEntitlementOwnersRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteAppEntitlementOwnersRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteAppEntitlementOwnersRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteAppEntitlementOwnersRequest' from JSON`,
   );
 }

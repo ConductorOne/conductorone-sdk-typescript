@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -109,32 +106,13 @@ export const ApprovalInstanceState$inboundSchema: z.ZodType<
   ApprovalInstanceState,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(ApprovalInstanceState),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(ApprovalInstanceState);
 /** @internal */
 export const ApprovalInstanceState$outboundSchema: z.ZodType<
-  ApprovalInstanceState,
+  string,
   z.ZodTypeDef,
   ApprovalInstanceState
-> = z.union([
-  z.nativeEnum(ApprovalInstanceState),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ApprovalInstanceState$ {
-  /** @deprecated use `ApprovalInstanceState$inboundSchema` instead. */
-  export const inboundSchema = ApprovalInstanceState$inboundSchema;
-  /** @deprecated use `ApprovalInstanceState$outboundSchema` instead. */
-  export const outboundSchema = ApprovalInstanceState$outboundSchema;
-}
+> = openEnums.outboundSchema(ApprovalInstanceState);
 
 /** @internal */
 export const ApprovalInstance$inboundSchema: z.ZodType<
@@ -153,7 +131,6 @@ export const ApprovalInstance$inboundSchema: z.ZodType<
   skipped: z.nullable(SkippedAction$inboundSchema).optional(),
   state: z.nullable(ApprovalInstanceState$inboundSchema).optional(),
 });
-
 /** @internal */
 export type ApprovalInstance$Outbound = {
   approval?: Approval$Outbound | null | undefined;
@@ -185,19 +162,6 @@ export const ApprovalInstance$outboundSchema: z.ZodType<
   state: z.nullable(ApprovalInstanceState$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ApprovalInstance$ {
-  /** @deprecated use `ApprovalInstance$inboundSchema` instead. */
-  export const inboundSchema = ApprovalInstance$inboundSchema;
-  /** @deprecated use `ApprovalInstance$outboundSchema` instead. */
-  export const outboundSchema = ApprovalInstance$outboundSchema;
-  /** @deprecated use `ApprovalInstance$Outbound` instead. */
-  export type Outbound = ApprovalInstance$Outbound;
-}
-
 export function approvalInstanceToJSON(
   approvalInstance: ApprovalInstance,
 ): string {
@@ -205,7 +169,6 @@ export function approvalInstanceToJSON(
     ApprovalInstance$outboundSchema.parse(approvalInstance),
   );
 }
-
 export function approvalInstanceFromJSON(
   jsonString: string,
 ): SafeParseResult<ApprovalInstance, SDKValidationError> {

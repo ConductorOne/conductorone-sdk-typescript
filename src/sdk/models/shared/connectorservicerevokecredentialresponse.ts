@@ -19,42 +19,6 @@ export const ConnectorServiceRevokeCredentialResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type ConnectorServiceRevokeCredentialResponse$Outbound = {};
-
-/** @internal */
-export const ConnectorServiceRevokeCredentialResponse$outboundSchema: z.ZodType<
-  ConnectorServiceRevokeCredentialResponse$Outbound,
-  z.ZodTypeDef,
-  ConnectorServiceRevokeCredentialResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorServiceRevokeCredentialResponse$ {
-  /** @deprecated use `ConnectorServiceRevokeCredentialResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    ConnectorServiceRevokeCredentialResponse$inboundSchema;
-  /** @deprecated use `ConnectorServiceRevokeCredentialResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    ConnectorServiceRevokeCredentialResponse$outboundSchema;
-  /** @deprecated use `ConnectorServiceRevokeCredentialResponse$Outbound` instead. */
-  export type Outbound = ConnectorServiceRevokeCredentialResponse$Outbound;
-}
-
-export function connectorServiceRevokeCredentialResponseToJSON(
-  connectorServiceRevokeCredentialResponse:
-    ConnectorServiceRevokeCredentialResponse,
-): string {
-  return JSON.stringify(
-    ConnectorServiceRevokeCredentialResponse$outboundSchema.parse(
-      connectorServiceRevokeCredentialResponse,
-    ),
-  );
-}
-
 export function connectorServiceRevokeCredentialResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

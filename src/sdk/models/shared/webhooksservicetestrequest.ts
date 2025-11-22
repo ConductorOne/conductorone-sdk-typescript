@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The WebhooksServiceTestRequest message.
  */
 export type WebhooksServiceTestRequest = {};
-
-/** @internal */
-export const WebhooksServiceTestRequest$inboundSchema: z.ZodType<
-  WebhooksServiceTestRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type WebhooksServiceTestRequest$Outbound = {};
@@ -29,33 +19,10 @@ export const WebhooksServiceTestRequest$outboundSchema: z.ZodType<
   WebhooksServiceTestRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhooksServiceTestRequest$ {
-  /** @deprecated use `WebhooksServiceTestRequest$inboundSchema` instead. */
-  export const inboundSchema = WebhooksServiceTestRequest$inboundSchema;
-  /** @deprecated use `WebhooksServiceTestRequest$outboundSchema` instead. */
-  export const outboundSchema = WebhooksServiceTestRequest$outboundSchema;
-  /** @deprecated use `WebhooksServiceTestRequest$Outbound` instead. */
-  export type Outbound = WebhooksServiceTestRequest$Outbound;
-}
-
 export function webhooksServiceTestRequestToJSON(
   webhooksServiceTestRequest: WebhooksServiceTestRequest,
 ): string {
   return JSON.stringify(
     WebhooksServiceTestRequest$outboundSchema.parse(webhooksServiceTestRequest),
-  );
-}
-
-export function webhooksServiceTestRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<WebhooksServiceTestRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => WebhooksServiceTestRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'WebhooksServiceTestRequest' from JSON`,
   );
 }

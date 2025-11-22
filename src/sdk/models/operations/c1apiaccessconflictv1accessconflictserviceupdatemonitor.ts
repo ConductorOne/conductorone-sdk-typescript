@@ -36,22 +36,6 @@ export type C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse = {
 };
 
 /** @internal */
-export const C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.nullable(z.string()),
-    ConflictMonitorUpdateRequest: shared
-      .ConflictMonitorUpdateRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ConflictMonitorUpdateRequest": "conflictMonitorUpdateRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest$Outbound =
   {
     id: string | null;
@@ -76,22 +60,6 @@ export const C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest$outb
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest$ {
-  /** @deprecated use `C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest$inboundSchema;
-  /** @deprecated use `C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest$outboundSchema;
-  /** @deprecated use `C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest$Outbound;
-}
-
 export function c1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequestToJSON(
   c1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest:
     C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest,
@@ -99,21 +67,6 @@ export function c1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequestTo
   return JSON.stringify(
     C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest$outboundSchema
       .parse(c1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest),
-  );
-}
-
-export function c1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest' from JSON`,
   );
 }
 
@@ -136,63 +89,6 @@ export const C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse$inb
       "ConflictMonitor": "conflictMonitor",
     });
   });
-
-/** @internal */
-export type C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    ConflictMonitor?: shared.ConflictMonitor$Outbound | undefined;
-  };
-
-/** @internal */
-export const C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    conflictMonitor: shared.ConflictMonitor$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      conflictMonitor: "ConflictMonitor",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse$ {
-  /** @deprecated use `C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse$inboundSchema;
-  /** @deprecated use `C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse$outboundSchema;
-  /** @deprecated use `C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse$Outbound;
-}
-
-export function c1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponseToJSON(
-  c1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse:
-    C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse$outboundSchema
-      .parse(c1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse),
-  );
-}
 
 export function c1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponseFromJSON(
   jsonString: string,

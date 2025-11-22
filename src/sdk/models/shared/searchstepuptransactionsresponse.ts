@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   StepUpTransaction,
   StepUpTransaction$inboundSchema,
-  StepUpTransaction$Outbound,
-  StepUpTransaction$outboundSchema,
 } from "./stepuptransaction.js";
 
 /**
@@ -36,45 +34,6 @@ export const SearchStepUpTransactionsResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(StepUpTransaction$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type SearchStepUpTransactionsResponse$Outbound = {
-  list?: Array<StepUpTransaction$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const SearchStepUpTransactionsResponse$outboundSchema: z.ZodType<
-  SearchStepUpTransactionsResponse$Outbound,
-  z.ZodTypeDef,
-  SearchStepUpTransactionsResponse
-> = z.object({
-  list: z.nullable(z.array(StepUpTransaction$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchStepUpTransactionsResponse$ {
-  /** @deprecated use `SearchStepUpTransactionsResponse$inboundSchema` instead. */
-  export const inboundSchema = SearchStepUpTransactionsResponse$inboundSchema;
-  /** @deprecated use `SearchStepUpTransactionsResponse$outboundSchema` instead. */
-  export const outboundSchema = SearchStepUpTransactionsResponse$outboundSchema;
-  /** @deprecated use `SearchStepUpTransactionsResponse$Outbound` instead. */
-  export type Outbound = SearchStepUpTransactionsResponse$Outbound;
-}
-
-export function searchStepUpTransactionsResponseToJSON(
-  searchStepUpTransactionsResponse: SearchStepUpTransactionsResponse,
-): string {
-  return JSON.stringify(
-    SearchStepUpTransactionsResponse$outboundSchema.parse(
-      searchStepUpTransactionsResponse,
-    ),
-  );
-}
 
 export function searchStepUpTransactionsResponseFromJSON(
   jsonString: string,

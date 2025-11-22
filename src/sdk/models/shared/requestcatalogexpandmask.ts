@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The RequestCatalogExpandMask includes the paths in the catalog view to expand in the return value of this call.
@@ -16,15 +13,6 @@ export type RequestCatalogExpandMask = {
    */
   paths?: Array<string> | null | undefined;
 };
-
-/** @internal */
-export const RequestCatalogExpandMask$inboundSchema: z.ZodType<
-  RequestCatalogExpandMask,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type RequestCatalogExpandMask$Outbound = {
@@ -40,33 +28,10 @@ export const RequestCatalogExpandMask$outboundSchema: z.ZodType<
   paths: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogExpandMask$ {
-  /** @deprecated use `RequestCatalogExpandMask$inboundSchema` instead. */
-  export const inboundSchema = RequestCatalogExpandMask$inboundSchema;
-  /** @deprecated use `RequestCatalogExpandMask$outboundSchema` instead. */
-  export const outboundSchema = RequestCatalogExpandMask$outboundSchema;
-  /** @deprecated use `RequestCatalogExpandMask$Outbound` instead. */
-  export type Outbound = RequestCatalogExpandMask$Outbound;
-}
-
 export function requestCatalogExpandMaskToJSON(
   requestCatalogExpandMask: RequestCatalogExpandMask,
 ): string {
   return JSON.stringify(
     RequestCatalogExpandMask$outboundSchema.parse(requestCatalogExpandMask),
-  );
-}
-
-export function requestCatalogExpandMaskFromJSON(
-  jsonString: string,
-): SafeParseResult<RequestCatalogExpandMask, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RequestCatalogExpandMask$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RequestCatalogExpandMask' from JSON`,
   );
 }

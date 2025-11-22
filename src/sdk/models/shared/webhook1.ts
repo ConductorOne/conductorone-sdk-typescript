@@ -52,7 +52,6 @@ export const Webhook1$inboundSchema: z.ZodType<
   ).optional(),
   url: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type Webhook1$Outbound = {
   createdAt?: string | null | undefined;
@@ -79,23 +78,9 @@ export const Webhook1$outboundSchema: z.ZodType<
   url: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Webhook1$ {
-  /** @deprecated use `Webhook1$inboundSchema` instead. */
-  export const inboundSchema = Webhook1$inboundSchema;
-  /** @deprecated use `Webhook1$outboundSchema` instead. */
-  export const outboundSchema = Webhook1$outboundSchema;
-  /** @deprecated use `Webhook1$Outbound` instead. */
-  export type Outbound = Webhook1$Outbound;
-}
-
 export function webhook1ToJSON(webhook1: Webhook1): string {
   return JSON.stringify(Webhook1$outboundSchema.parse(webhook1));
 }
-
 export function webhook1FromJSON(
   jsonString: string,
 ): SafeParseResult<Webhook1, SDKValidationError> {

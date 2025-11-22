@@ -3,22 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The DeleteComplianceFrameworkAttributeValueRequest message.
  */
 export type DeleteComplianceFrameworkAttributeValueRequest = {};
-
-/** @internal */
-export const DeleteComplianceFrameworkAttributeValueRequest$inboundSchema:
-  z.ZodType<
-    DeleteComplianceFrameworkAttributeValueRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({});
 
 /** @internal */
 export type DeleteComplianceFrameworkAttributeValueRequest$Outbound = {};
@@ -31,22 +20,6 @@ export const DeleteComplianceFrameworkAttributeValueRequest$outboundSchema:
     DeleteComplianceFrameworkAttributeValueRequest
   > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteComplianceFrameworkAttributeValueRequest$ {
-  /** @deprecated use `DeleteComplianceFrameworkAttributeValueRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteComplianceFrameworkAttributeValueRequest$inboundSchema;
-  /** @deprecated use `DeleteComplianceFrameworkAttributeValueRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteComplianceFrameworkAttributeValueRequest$outboundSchema;
-  /** @deprecated use `DeleteComplianceFrameworkAttributeValueRequest$Outbound` instead. */
-  export type Outbound =
-    DeleteComplianceFrameworkAttributeValueRequest$Outbound;
-}
-
 export function deleteComplianceFrameworkAttributeValueRequestToJSON(
   deleteComplianceFrameworkAttributeValueRequest:
     DeleteComplianceFrameworkAttributeValueRequest,
@@ -55,21 +28,5 @@ export function deleteComplianceFrameworkAttributeValueRequestToJSON(
     DeleteComplianceFrameworkAttributeValueRequest$outboundSchema.parse(
       deleteComplianceFrameworkAttributeValueRequest,
     ),
-  );
-}
-
-export function deleteComplianceFrameworkAttributeValueRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeleteComplianceFrameworkAttributeValueRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteComplianceFrameworkAttributeValueRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeleteComplianceFrameworkAttributeValueRequest' from JSON`,
   );
 }

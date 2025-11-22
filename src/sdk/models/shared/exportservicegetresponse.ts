@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Exporter,
-  Exporter$inboundSchema,
-  Exporter$Outbound,
-  Exporter$outboundSchema,
-} from "./exporter.js";
+import { Exporter, Exporter$inboundSchema } from "./exporter.js";
 
 /**
  * The ExportServiceGetResponse message contains the system log exporter object.
@@ -28,41 +23,6 @@ export const ExportServiceGetResponse$inboundSchema: z.ZodType<
 > = z.object({
   exporter: z.nullable(Exporter$inboundSchema).optional(),
 });
-
-/** @internal */
-export type ExportServiceGetResponse$Outbound = {
-  exporter?: Exporter$Outbound | null | undefined;
-};
-
-/** @internal */
-export const ExportServiceGetResponse$outboundSchema: z.ZodType<
-  ExportServiceGetResponse$Outbound,
-  z.ZodTypeDef,
-  ExportServiceGetResponse
-> = z.object({
-  exporter: z.nullable(Exporter$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExportServiceGetResponse$ {
-  /** @deprecated use `ExportServiceGetResponse$inboundSchema` instead. */
-  export const inboundSchema = ExportServiceGetResponse$inboundSchema;
-  /** @deprecated use `ExportServiceGetResponse$outboundSchema` instead. */
-  export const outboundSchema = ExportServiceGetResponse$outboundSchema;
-  /** @deprecated use `ExportServiceGetResponse$Outbound` instead. */
-  export type Outbound = ExportServiceGetResponse$Outbound;
-}
-
-export function exportServiceGetResponseToJSON(
-  exportServiceGetResponse: ExportServiceGetResponse,
-): string {
-  return JSON.stringify(
-    ExportServiceGetResponse$outboundSchema.parse(exportServiceGetResponse),
-  );
-}
 
 export function exportServiceGetResponseFromJSON(
   jsonString: string,

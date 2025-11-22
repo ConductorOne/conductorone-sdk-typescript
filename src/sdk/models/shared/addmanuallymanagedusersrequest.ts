@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The AddManuallyManagedUsersRequest message.
@@ -16,15 +13,6 @@ export type AddManuallyManagedUsersRequest = {
    */
   userIds?: Array<string> | null | undefined;
 };
-
-/** @internal */
-export const AddManuallyManagedUsersRequest$inboundSchema: z.ZodType<
-  AddManuallyManagedUsersRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type AddManuallyManagedUsersRequest$Outbound = {
@@ -40,19 +28,6 @@ export const AddManuallyManagedUsersRequest$outboundSchema: z.ZodType<
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AddManuallyManagedUsersRequest$ {
-  /** @deprecated use `AddManuallyManagedUsersRequest$inboundSchema` instead. */
-  export const inboundSchema = AddManuallyManagedUsersRequest$inboundSchema;
-  /** @deprecated use `AddManuallyManagedUsersRequest$outboundSchema` instead. */
-  export const outboundSchema = AddManuallyManagedUsersRequest$outboundSchema;
-  /** @deprecated use `AddManuallyManagedUsersRequest$Outbound` instead. */
-  export type Outbound = AddManuallyManagedUsersRequest$Outbound;
-}
-
 export function addManuallyManagedUsersRequestToJSON(
   addManuallyManagedUsersRequest: AddManuallyManagedUsersRequest,
 ): string {
@@ -60,15 +35,5 @@ export function addManuallyManagedUsersRequestToJSON(
     AddManuallyManagedUsersRequest$outboundSchema.parse(
       addManuallyManagedUsersRequest,
     ),
-  );
-}
-
-export function addManuallyManagedUsersRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<AddManuallyManagedUsersRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AddManuallyManagedUsersRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AddManuallyManagedUsersRequest' from JSON`,
   );
 }

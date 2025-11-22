@@ -47,60 +47,6 @@ export const C1ApiUserV1UserSearchSearchResponse$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type C1ApiUserV1UserSearchSearchResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  SearchUsersResponse?: shared.SearchUsersResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiUserV1UserSearchSearchResponse$outboundSchema: z.ZodType<
-  C1ApiUserV1UserSearchSearchResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiUserV1UserSearchSearchResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  searchUsersResponse: shared.SearchUsersResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    searchUsersResponse: "SearchUsersResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiUserV1UserSearchSearchResponse$ {
-  /** @deprecated use `C1ApiUserV1UserSearchSearchResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiUserV1UserSearchSearchResponse$inboundSchema;
-  /** @deprecated use `C1ApiUserV1UserSearchSearchResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiUserV1UserSearchSearchResponse$outboundSchema;
-  /** @deprecated use `C1ApiUserV1UserSearchSearchResponse$Outbound` instead. */
-  export type Outbound = C1ApiUserV1UserSearchSearchResponse$Outbound;
-}
-
-export function c1ApiUserV1UserSearchSearchResponseToJSON(
-  c1ApiUserV1UserSearchSearchResponse: C1ApiUserV1UserSearchSearchResponse,
-): string {
-  return JSON.stringify(
-    C1ApiUserV1UserSearchSearchResponse$outboundSchema.parse(
-      c1ApiUserV1UserSearchSearchResponse,
-    ),
-  );
-}
-
 export function c1ApiUserV1UserSearchSearchResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<C1ApiUserV1UserSearchSearchResponse, SDKValidationError> {

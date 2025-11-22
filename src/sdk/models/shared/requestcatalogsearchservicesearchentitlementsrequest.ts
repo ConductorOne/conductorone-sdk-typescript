@@ -3,17 +3,10 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import {
   AppEntitlementExpandMask,
-  AppEntitlementExpandMask$inboundSchema,
   AppEntitlementExpandMask$Outbound,
   AppEntitlementExpandMask$outboundSchema,
 } from "./appentitlementexpandmask.js";
@@ -68,53 +61,11 @@ export type RequestCatalogSearchServiceSearchEntitlementsRequest = {
 };
 
 /** @internal */
-export const GrantedStatus$inboundSchema: z.ZodType<
-  GrantedStatus,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(GrantedStatus),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
 export const GrantedStatus$outboundSchema: z.ZodType<
-  GrantedStatus,
+  string,
   z.ZodTypeDef,
   GrantedStatus
-> = z.union([
-  z.nativeEnum(GrantedStatus),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GrantedStatus$ {
-  /** @deprecated use `GrantedStatus$inboundSchema` instead. */
-  export const inboundSchema = GrantedStatus$inboundSchema;
-  /** @deprecated use `GrantedStatus$outboundSchema` instead. */
-  export const outboundSchema = GrantedStatus$outboundSchema;
-}
-
-/** @internal */
-export const RequestCatalogSearchServiceSearchEntitlementsRequest$inboundSchema:
-  z.ZodType<
-    RequestCatalogSearchServiceSearchEntitlementsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    appDisplayName: z.nullable(z.string()).optional(),
-    entitlementAlias: z.nullable(z.string()).optional(),
-    expandMask: z.nullable(AppEntitlementExpandMask$inboundSchema).optional(),
-    grantedStatus: z.nullable(GrantedStatus$inboundSchema).optional(),
-    includeDeleted: z.nullable(z.boolean()).optional(),
-    pageSize: z.nullable(z.number().int()).optional(),
-    pageToken: z.nullable(z.string()).optional(),
-    query: z.nullable(z.string()).optional(),
-  });
+> = openEnums.outboundSchema(GrantedStatus);
 
 /** @internal */
 export type RequestCatalogSearchServiceSearchEntitlementsRequest$Outbound = {
@@ -145,22 +96,6 @@ export const RequestCatalogSearchServiceSearchEntitlementsRequest$outboundSchema
     query: z.nullable(z.string()).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogSearchServiceSearchEntitlementsRequest$ {
-  /** @deprecated use `RequestCatalogSearchServiceSearchEntitlementsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogSearchServiceSearchEntitlementsRequest$inboundSchema;
-  /** @deprecated use `RequestCatalogSearchServiceSearchEntitlementsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogSearchServiceSearchEntitlementsRequest$outboundSchema;
-  /** @deprecated use `RequestCatalogSearchServiceSearchEntitlementsRequest$Outbound` instead. */
-  export type Outbound =
-    RequestCatalogSearchServiceSearchEntitlementsRequest$Outbound;
-}
-
 export function requestCatalogSearchServiceSearchEntitlementsRequestToJSON(
   requestCatalogSearchServiceSearchEntitlementsRequest:
     RequestCatalogSearchServiceSearchEntitlementsRequest,
@@ -169,21 +104,5 @@ export function requestCatalogSearchServiceSearchEntitlementsRequestToJSON(
     RequestCatalogSearchServiceSearchEntitlementsRequest$outboundSchema.parse(
       requestCatalogSearchServiceSearchEntitlementsRequest,
     ),
-  );
-}
-
-export function requestCatalogSearchServiceSearchEntitlementsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  RequestCatalogSearchServiceSearchEntitlementsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      RequestCatalogSearchServiceSearchEntitlementsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'RequestCatalogSearchServiceSearchEntitlementsRequest' from JSON`,
   );
 }

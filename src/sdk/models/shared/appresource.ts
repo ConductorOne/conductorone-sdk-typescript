@@ -95,7 +95,6 @@ export const AppResource$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
 /** @internal */
 export type AppResource$Outbound = {
   appId?: string | null | undefined;
@@ -136,23 +135,9 @@ export const AppResource$outboundSchema: z.ZodType<
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppResource$ {
-  /** @deprecated use `AppResource$inboundSchema` instead. */
-  export const inboundSchema = AppResource$inboundSchema;
-  /** @deprecated use `AppResource$outboundSchema` instead. */
-  export const outboundSchema = AppResource$outboundSchema;
-  /** @deprecated use `AppResource$Outbound` instead. */
-  export type Outbound = AppResource$Outbound;
-}
-
 export function appResourceToJSON(appResource: AppResource): string {
   return JSON.stringify(AppResource$outboundSchema.parse(appResource));
 }
-
 export function appResourceFromJSON(
   jsonString: string,
 ): SafeParseResult<AppResource, SDKValidationError> {

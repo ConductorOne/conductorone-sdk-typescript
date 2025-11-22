@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The WebhooksServiceDeleteRequest message.
  */
 export type WebhooksServiceDeleteRequest = {};
-
-/** @internal */
-export const WebhooksServiceDeleteRequest$inboundSchema: z.ZodType<
-  WebhooksServiceDeleteRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type WebhooksServiceDeleteRequest$Outbound = {};
@@ -29,19 +19,6 @@ export const WebhooksServiceDeleteRequest$outboundSchema: z.ZodType<
   WebhooksServiceDeleteRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhooksServiceDeleteRequest$ {
-  /** @deprecated use `WebhooksServiceDeleteRequest$inboundSchema` instead. */
-  export const inboundSchema = WebhooksServiceDeleteRequest$inboundSchema;
-  /** @deprecated use `WebhooksServiceDeleteRequest$outboundSchema` instead. */
-  export const outboundSchema = WebhooksServiceDeleteRequest$outboundSchema;
-  /** @deprecated use `WebhooksServiceDeleteRequest$Outbound` instead. */
-  export type Outbound = WebhooksServiceDeleteRequest$Outbound;
-}
-
 export function webhooksServiceDeleteRequestToJSON(
   webhooksServiceDeleteRequest: WebhooksServiceDeleteRequest,
 ): string {
@@ -49,15 +26,5 @@ export function webhooksServiceDeleteRequestToJSON(
     WebhooksServiceDeleteRequest$outboundSchema.parse(
       webhooksServiceDeleteRequest,
     ),
-  );
-}
-
-export function webhooksServiceDeleteRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<WebhooksServiceDeleteRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => WebhooksServiceDeleteRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'WebhooksServiceDeleteRequest' from JSON`,
   );
 }

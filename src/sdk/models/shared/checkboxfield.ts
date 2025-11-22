@@ -18,7 +18,6 @@ export const CheckboxField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
 /** @internal */
 export type CheckboxField$Outbound = {};
 
@@ -29,23 +28,9 @@ export const CheckboxField$outboundSchema: z.ZodType<
   CheckboxField
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CheckboxField$ {
-  /** @deprecated use `CheckboxField$inboundSchema` instead. */
-  export const inboundSchema = CheckboxField$inboundSchema;
-  /** @deprecated use `CheckboxField$outboundSchema` instead. */
-  export const outboundSchema = CheckboxField$outboundSchema;
-  /** @deprecated use `CheckboxField$Outbound` instead. */
-  export type Outbound = CheckboxField$Outbound;
-}
-
 export function checkboxFieldToJSON(checkboxField: CheckboxField): string {
   return JSON.stringify(CheckboxField$outboundSchema.parse(checkboxField));
 }
-
 export function checkboxFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<CheckboxField, SDKValidationError> {

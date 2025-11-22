@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Role,
-  Role$inboundSchema,
-  Role$Outbound,
-  Role$outboundSchema,
-} from "./role.js";
+import { Role, Role$inboundSchema } from "./role.js";
 
 /**
  * The ListRolesResponse message contains a list of results and a nextPageToken if applicable.
@@ -40,43 +35,6 @@ export const ListRolesResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(Role$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ListRolesResponse$Outbound = {
-  list?: Array<Role$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ListRolesResponse$outboundSchema: z.ZodType<
-  ListRolesResponse$Outbound,
-  z.ZodTypeDef,
-  ListRolesResponse
-> = z.object({
-  list: z.nullable(z.array(Role$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListRolesResponse$ {
-  /** @deprecated use `ListRolesResponse$inboundSchema` instead. */
-  export const inboundSchema = ListRolesResponse$inboundSchema;
-  /** @deprecated use `ListRolesResponse$outboundSchema` instead. */
-  export const outboundSchema = ListRolesResponse$outboundSchema;
-  /** @deprecated use `ListRolesResponse$Outbound` instead. */
-  export type Outbound = ListRolesResponse$Outbound;
-}
-
-export function listRolesResponseToJSON(
-  listRolesResponse: ListRolesResponse,
-): string {
-  return JSON.stringify(
-    ListRolesResponse$outboundSchema.parse(listRolesResponse),
-  );
-}
 
 export function listRolesResponseFromJSON(
   jsonString: string,

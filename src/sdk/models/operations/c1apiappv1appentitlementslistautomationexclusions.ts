@@ -36,22 +36,6 @@ export type C1ApiAppV1AppEntitlementsListAutomationExclusionsResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    app_entitlement_id: z.nullable(z.string()),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "app_entitlement_id": "appEntitlementId",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest$Outbound =
   {
     app_id: string | null;
@@ -74,22 +58,6 @@ export const C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest$outboundSc
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest$Outbound;
-}
-
 export function c1ApiAppV1AppEntitlementsListAutomationExclusionsRequestToJSON(
   c1ApiAppV1AppEntitlementsListAutomationExclusionsRequest:
     C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest,
@@ -97,21 +65,6 @@ export function c1ApiAppV1AppEntitlementsListAutomationExclusionsRequestToJSON(
   return JSON.stringify(
     C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest$outboundSchema
       .parse(c1ApiAppV1AppEntitlementsListAutomationExclusionsRequest),
-  );
-}
-
-export function c1ApiAppV1AppEntitlementsListAutomationExclusionsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest' from JSON`,
   );
 }
 
@@ -135,66 +88,6 @@ export const C1ApiAppV1AppEntitlementsListAutomationExclusionsResponse$inboundSc
       "ListAutomationExclusionsResponse": "listAutomationExclusionsResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppEntitlementsListAutomationExclusionsResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    ListAutomationExclusionsResponse?:
-      | shared.ListAutomationExclusionsResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAppV1AppEntitlementsListAutomationExclusionsResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementsListAutomationExclusionsResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppEntitlementsListAutomationExclusionsResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    listAutomationExclusionsResponse: shared
-      .ListAutomationExclusionsResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      listAutomationExclusionsResponse: "ListAutomationExclusionsResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsListAutomationExclusionsResponse$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsListAutomationExclusionsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsListAutomationExclusionsResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsListAutomationExclusionsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsListAutomationExclusionsResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsListAutomationExclusionsResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementsListAutomationExclusionsResponse$Outbound;
-}
-
-export function c1ApiAppV1AppEntitlementsListAutomationExclusionsResponseToJSON(
-  c1ApiAppV1AppEntitlementsListAutomationExclusionsResponse:
-    C1ApiAppV1AppEntitlementsListAutomationExclusionsResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppEntitlementsListAutomationExclusionsResponse$outboundSchema
-      .parse(c1ApiAppV1AppEntitlementsListAutomationExclusionsResponse),
-  );
-}
 
 export function c1ApiAppV1AppEntitlementsListAutomationExclusionsResponseFromJSON(
   jsonString: string,

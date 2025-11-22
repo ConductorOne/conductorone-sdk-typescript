@@ -38,22 +38,6 @@ export type C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorResponse = {
 };
 
 /** @internal */
-export const C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.nullable(z.string()),
-    ConflictMonitorDeleteRequest: shared
-      .ConflictMonitorDeleteRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ConflictMonitorDeleteRequest": "conflictMonitorDeleteRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequest$Outbound =
   {
     id: string | null;
@@ -78,22 +62,6 @@ export const C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequest$outb
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequest$ {
-  /** @deprecated use `C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequest$inboundSchema;
-  /** @deprecated use `C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequest$outboundSchema;
-  /** @deprecated use `C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequest$Outbound;
-}
-
 export function c1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequestToJSON(
   c1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequest:
     C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequest,
@@ -101,21 +69,6 @@ export function c1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequestTo
   return JSON.stringify(
     C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequest$outboundSchema
       .parse(c1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequest),
-  );
-}
-
-export function c1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorRequest' from JSON`,
   );
 }
 
@@ -139,66 +92,6 @@ export const C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorResponse$inb
       "ConflictMonitorDeleteResponse": "conflictMonitorDeleteResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    ConflictMonitorDeleteResponse?:
-      | shared.ConflictMonitorDeleteResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    conflictMonitorDeleteResponse: shared
-      .ConflictMonitorDeleteResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      conflictMonitorDeleteResponse: "ConflictMonitorDeleteResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorResponse$ {
-  /** @deprecated use `C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorResponse$inboundSchema;
-  /** @deprecated use `C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorResponse$outboundSchema;
-  /** @deprecated use `C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorResponse$Outbound;
-}
-
-export function c1ApiAccessconflictV1AccessConflictServiceDeleteMonitorResponseToJSON(
-  c1ApiAccessconflictV1AccessConflictServiceDeleteMonitorResponse:
-    C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAccessconflictV1AccessConflictServiceDeleteMonitorResponse$outboundSchema
-      .parse(c1ApiAccessconflictV1AccessConflictServiceDeleteMonitorResponse),
-  );
-}
 
 export function c1ApiAccessconflictV1AccessConflictServiceDeleteMonitorResponseFromJSON(
   jsonString: string,

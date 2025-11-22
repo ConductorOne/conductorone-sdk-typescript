@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  AppUserView,
-  AppUserView$inboundSchema,
-  AppUserView$Outbound,
-  AppUserView$outboundSchema,
-} from "./appuserview.js";
+import { AppUserView, AppUserView$inboundSchema } from "./appuserview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -64,57 +59,6 @@ export const AppUsersForUserServiceListResponseExpanded$inboundSchema:
       });
     });
 
-/** @internal */
-export type AppUsersForUserServiceListResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const AppUsersForUserServiceListResponseExpanded$outboundSchema:
-  z.ZodType<
-    AppUsersForUserServiceListResponseExpanded$Outbound,
-    z.ZodTypeDef,
-    AppUsersForUserServiceListResponseExpanded
-  > = z.object({
-    atType: z.string().optional(),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        atType: "@type",
-        additionalProperties: null,
-      }),
-    };
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUsersForUserServiceListResponseExpanded$ {
-  /** @deprecated use `AppUsersForUserServiceListResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    AppUsersForUserServiceListResponseExpanded$inboundSchema;
-  /** @deprecated use `AppUsersForUserServiceListResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    AppUsersForUserServiceListResponseExpanded$outboundSchema;
-  /** @deprecated use `AppUsersForUserServiceListResponseExpanded$Outbound` instead. */
-  export type Outbound = AppUsersForUserServiceListResponseExpanded$Outbound;
-}
-
-export function appUsersForUserServiceListResponseExpandedToJSON(
-  appUsersForUserServiceListResponseExpanded:
-    AppUsersForUserServiceListResponseExpanded,
-): string {
-  return JSON.stringify(
-    AppUsersForUserServiceListResponseExpanded$outboundSchema.parse(
-      appUsersForUserServiceListResponseExpanded,
-    ),
-  );
-}
-
 export function appUsersForUserServiceListResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -145,55 +89,6 @@ export const AppUsersForUserServiceListResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(AppUserView$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type AppUsersForUserServiceListResponse$Outbound = {
-  expanded?:
-    | Array<AppUsersForUserServiceListResponseExpanded$Outbound>
-    | null
-    | undefined;
-  list?: Array<AppUserView$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const AppUsersForUserServiceListResponse$outboundSchema: z.ZodType<
-  AppUsersForUserServiceListResponse$Outbound,
-  z.ZodTypeDef,
-  AppUsersForUserServiceListResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() =>
-      AppUsersForUserServiceListResponseExpanded$outboundSchema
-    )),
-  ).optional(),
-  list: z.nullable(z.array(AppUserView$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUsersForUserServiceListResponse$ {
-  /** @deprecated use `AppUsersForUserServiceListResponse$inboundSchema` instead. */
-  export const inboundSchema = AppUsersForUserServiceListResponse$inboundSchema;
-  /** @deprecated use `AppUsersForUserServiceListResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    AppUsersForUserServiceListResponse$outboundSchema;
-  /** @deprecated use `AppUsersForUserServiceListResponse$Outbound` instead. */
-  export type Outbound = AppUsersForUserServiceListResponse$Outbound;
-}
-
-export function appUsersForUserServiceListResponseToJSON(
-  appUsersForUserServiceListResponse: AppUsersForUserServiceListResponse,
-): string {
-  return JSON.stringify(
-    AppUsersForUserServiceListResponse$outboundSchema.parse(
-      appUsersForUserServiceListResponse,
-    ),
-  );
-}
 
 export function appUsersForUserServiceListResponseFromJSON(
   jsonString: string,

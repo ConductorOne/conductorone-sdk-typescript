@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The TestSourceIPRequest message.
@@ -20,16 +17,6 @@ export type TestSourceIPRequest = {
    */
   sourceIp?: string | null | undefined;
 };
-
-/** @internal */
-export const TestSourceIPRequest$inboundSchema: z.ZodType<
-  TestSourceIPRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  allowCidr: z.nullable(z.array(z.string())).optional(),
-  sourceIp: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type TestSourceIPRequest$Outbound = {
@@ -47,33 +34,10 @@ export const TestSourceIPRequest$outboundSchema: z.ZodType<
   sourceIp: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TestSourceIPRequest$ {
-  /** @deprecated use `TestSourceIPRequest$inboundSchema` instead. */
-  export const inboundSchema = TestSourceIPRequest$inboundSchema;
-  /** @deprecated use `TestSourceIPRequest$outboundSchema` instead. */
-  export const outboundSchema = TestSourceIPRequest$outboundSchema;
-  /** @deprecated use `TestSourceIPRequest$Outbound` instead. */
-  export type Outbound = TestSourceIPRequest$Outbound;
-}
-
 export function testSourceIPRequestToJSON(
   testSourceIPRequest: TestSourceIPRequest,
 ): string {
   return JSON.stringify(
     TestSourceIPRequest$outboundSchema.parse(testSourceIPRequest),
-  );
-}
-
-export function testSourceIPRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<TestSourceIPRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TestSourceIPRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TestSourceIPRequest' from JSON`,
   );
 }

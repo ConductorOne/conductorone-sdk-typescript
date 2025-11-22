@@ -51,65 +51,6 @@ export const C1ApiWebhooksV1WebhooksServiceCreateResponse$inboundSchema:
     });
   });
 
-/** @internal */
-export type C1ApiWebhooksV1WebhooksServiceCreateResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  WebhooksServiceCreateResponse?:
-    | shared.WebhooksServiceCreateResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiWebhooksV1WebhooksServiceCreateResponse$outboundSchema:
-  z.ZodType<
-    C1ApiWebhooksV1WebhooksServiceCreateResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiWebhooksV1WebhooksServiceCreateResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    webhooksServiceCreateResponse: shared
-      .WebhooksServiceCreateResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      webhooksServiceCreateResponse: "WebhooksServiceCreateResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiWebhooksV1WebhooksServiceCreateResponse$ {
-  /** @deprecated use `C1ApiWebhooksV1WebhooksServiceCreateResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiWebhooksV1WebhooksServiceCreateResponse$inboundSchema;
-  /** @deprecated use `C1ApiWebhooksV1WebhooksServiceCreateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiWebhooksV1WebhooksServiceCreateResponse$outboundSchema;
-  /** @deprecated use `C1ApiWebhooksV1WebhooksServiceCreateResponse$Outbound` instead. */
-  export type Outbound = C1ApiWebhooksV1WebhooksServiceCreateResponse$Outbound;
-}
-
-export function c1ApiWebhooksV1WebhooksServiceCreateResponseToJSON(
-  c1ApiWebhooksV1WebhooksServiceCreateResponse:
-    C1ApiWebhooksV1WebhooksServiceCreateResponse,
-): string {
-  return JSON.stringify(
-    C1ApiWebhooksV1WebhooksServiceCreateResponse$outboundSchema.parse(
-      c1ApiWebhooksV1WebhooksServiceCreateResponse,
-    ),
-  );
-}
-
 export function c1ApiWebhooksV1WebhooksServiceCreateResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

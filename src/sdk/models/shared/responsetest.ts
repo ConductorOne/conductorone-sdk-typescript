@@ -28,7 +28,6 @@ export const ResponseTest$inboundSchema: z.ZodType<
 > = z.object({
   version: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type ResponseTest$Outbound = {
   version?: string | null | undefined;
@@ -43,23 +42,9 @@ export const ResponseTest$outboundSchema: z.ZodType<
   version: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseTest$ {
-  /** @deprecated use `ResponseTest$inboundSchema` instead. */
-  export const inboundSchema = ResponseTest$inboundSchema;
-  /** @deprecated use `ResponseTest$outboundSchema` instead. */
-  export const outboundSchema = ResponseTest$outboundSchema;
-  /** @deprecated use `ResponseTest$Outbound` instead. */
-  export type Outbound = ResponseTest$Outbound;
-}
-
 export function responseTestToJSON(responseTest: ResponseTest): string {
   return JSON.stringify(ResponseTest$outboundSchema.parse(responseTest));
 }
-
 export function responseTestFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseTest, SDKValidationError> {

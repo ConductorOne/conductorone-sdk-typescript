@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -92,32 +89,13 @@ export const TargetedAppUserTypes$inboundSchema: z.ZodType<
   TargetedAppUserTypes,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(TargetedAppUserTypes),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(TargetedAppUserTypes);
 /** @internal */
 export const TargetedAppUserTypes$outboundSchema: z.ZodType<
-  TargetedAppUserTypes,
+  string,
   z.ZodTypeDef,
   TargetedAppUserTypes
-> = z.union([
-  z.nativeEnum(TargetedAppUserTypes),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TargetedAppUserTypes$ {
-  /** @deprecated use `TargetedAppUserTypes$inboundSchema` instead. */
-  export const inboundSchema = TargetedAppUserTypes$inboundSchema;
-  /** @deprecated use `TargetedAppUserTypes$outboundSchema` instead. */
-  export const outboundSchema = TargetedAppUserTypes$outboundSchema;
-}
+> = openEnums.outboundSchema(TargetedAppUserTypes);
 
 /** @internal */
 export const UsageBasedRevocationTrigger$inboundSchema: z.ZodType<
@@ -141,7 +119,6 @@ export const UsageBasedRevocationTrigger$inboundSchema: z.ZodType<
     .optional(),
   unusedForDays: z.nullable(z.number().int()).optional(),
 });
-
 /** @internal */
 export type UsageBasedRevocationTrigger$Outbound = {
   appId?: string | null | undefined;
@@ -180,19 +157,6 @@ export const UsageBasedRevocationTrigger$outboundSchema: z.ZodType<
   unusedForDays: z.nullable(z.number().int()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UsageBasedRevocationTrigger$ {
-  /** @deprecated use `UsageBasedRevocationTrigger$inboundSchema` instead. */
-  export const inboundSchema = UsageBasedRevocationTrigger$inboundSchema;
-  /** @deprecated use `UsageBasedRevocationTrigger$outboundSchema` instead. */
-  export const outboundSchema = UsageBasedRevocationTrigger$outboundSchema;
-  /** @deprecated use `UsageBasedRevocationTrigger$Outbound` instead. */
-  export type Outbound = UsageBasedRevocationTrigger$Outbound;
-}
-
 export function usageBasedRevocationTriggerToJSON(
   usageBasedRevocationTrigger: UsageBasedRevocationTrigger,
 ): string {
@@ -202,7 +166,6 @@ export function usageBasedRevocationTriggerToJSON(
     ),
   );
 }
-
 export function usageBasedRevocationTriggerFromJSON(
   jsonString: string,
 ): SafeParseResult<UsageBasedRevocationTrigger, SDKValidationError> {

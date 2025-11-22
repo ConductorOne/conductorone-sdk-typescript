@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PersonalClient,
   PersonalClient$inboundSchema,
-  PersonalClient$Outbound,
-  PersonalClient$outboundSchema,
 } from "./personalclient.js";
 
 /**
@@ -33,47 +31,6 @@ export const PersonalClientServiceCreateResponse$inboundSchema: z.ZodType<
   client: z.nullable(PersonalClient$inboundSchema).optional(),
   clientSecret: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type PersonalClientServiceCreateResponse$Outbound = {
-  client?: PersonalClient$Outbound | null | undefined;
-  clientSecret?: string | null | undefined;
-};
-
-/** @internal */
-export const PersonalClientServiceCreateResponse$outboundSchema: z.ZodType<
-  PersonalClientServiceCreateResponse$Outbound,
-  z.ZodTypeDef,
-  PersonalClientServiceCreateResponse
-> = z.object({
-  client: z.nullable(PersonalClient$outboundSchema).optional(),
-  clientSecret: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PersonalClientServiceCreateResponse$ {
-  /** @deprecated use `PersonalClientServiceCreateResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PersonalClientServiceCreateResponse$inboundSchema;
-  /** @deprecated use `PersonalClientServiceCreateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PersonalClientServiceCreateResponse$outboundSchema;
-  /** @deprecated use `PersonalClientServiceCreateResponse$Outbound` instead. */
-  export type Outbound = PersonalClientServiceCreateResponse$Outbound;
-}
-
-export function personalClientServiceCreateResponseToJSON(
-  personalClientServiceCreateResponse: PersonalClientServiceCreateResponse,
-): string {
-  return JSON.stringify(
-    PersonalClientServiceCreateResponse$outboundSchema.parse(
-      personalClientServiceCreateResponse,
-    ),
-  );
-}
 
 export function personalClientServiceCreateResponseFromJSON(
   jsonString: string,

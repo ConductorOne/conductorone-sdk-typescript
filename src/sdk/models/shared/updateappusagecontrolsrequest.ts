@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppUsageControls,
-  AppUsageControls$inboundSchema,
   AppUsageControls$Outbound,
   AppUsageControls$outboundSchema,
 } from "./appusagecontrols.js";
@@ -20,16 +16,6 @@ export type UpdateAppUsageControlsRequest = {
   appUsageControls?: AppUsageControls | null | undefined;
   updateMask?: string | null | undefined;
 };
-
-/** @internal */
-export const UpdateAppUsageControlsRequest$inboundSchema: z.ZodType<
-  UpdateAppUsageControlsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appUsageControls: z.nullable(AppUsageControls$inboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type UpdateAppUsageControlsRequest$Outbound = {
@@ -47,19 +33,6 @@ export const UpdateAppUsageControlsRequest$outboundSchema: z.ZodType<
   updateMask: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAppUsageControlsRequest$ {
-  /** @deprecated use `UpdateAppUsageControlsRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdateAppUsageControlsRequest$inboundSchema;
-  /** @deprecated use `UpdateAppUsageControlsRequest$outboundSchema` instead. */
-  export const outboundSchema = UpdateAppUsageControlsRequest$outboundSchema;
-  /** @deprecated use `UpdateAppUsageControlsRequest$Outbound` instead. */
-  export type Outbound = UpdateAppUsageControlsRequest$Outbound;
-}
-
 export function updateAppUsageControlsRequestToJSON(
   updateAppUsageControlsRequest: UpdateAppUsageControlsRequest,
 ): string {
@@ -67,15 +40,5 @@ export function updateAppUsageControlsRequestToJSON(
     UpdateAppUsageControlsRequest$outboundSchema.parse(
       updateAppUsageControlsRequest,
     ),
-  );
-}
-
-export function updateAppUsageControlsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAppUsageControlsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAppUsageControlsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAppUsageControlsRequest' from JSON`,
   );
 }

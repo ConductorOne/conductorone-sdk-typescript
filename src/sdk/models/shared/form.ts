@@ -25,7 +25,6 @@ export const Form$inboundSchema: z.ZodType<Form, z.ZodTypeDef, unknown> = z
   .object({
     form: z.nullable(FormInput$inboundSchema).optional(),
   });
-
 /** @internal */
 export type Form$Outbound = {
   form?: FormInput$Outbound | null | undefined;
@@ -37,23 +36,9 @@ export const Form$outboundSchema: z.ZodType<Form$Outbound, z.ZodTypeDef, Form> =
     form: z.nullable(FormInput$outboundSchema).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Form$ {
-  /** @deprecated use `Form$inboundSchema` instead. */
-  export const inboundSchema = Form$inboundSchema;
-  /** @deprecated use `Form$outboundSchema` instead. */
-  export const outboundSchema = Form$outboundSchema;
-  /** @deprecated use `Form$Outbound` instead. */
-  export type Outbound = Form$Outbound;
-}
-
 export function formToJSON(form: Form): string {
   return JSON.stringify(Form$outboundSchema.parse(form));
 }
-
 export function formFromJSON(
   jsonString: string,
 ): SafeParseResult<Form, SDKValidationError> {

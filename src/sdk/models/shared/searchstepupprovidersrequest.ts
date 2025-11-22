@@ -3,17 +3,10 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import {
   StepUpProviderRef,
-  StepUpProviderRef$inboundSchema,
   StepUpProviderRef$Outbound,
   StepUpProviderRef$outboundSchema,
 } from "./stepupproviderref.js";
@@ -58,49 +51,11 @@ export type SearchStepUpProvidersRequest = {
 };
 
 /** @internal */
-export const ProviderType$inboundSchema: z.ZodType<
-  ProviderType,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(ProviderType),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
 export const ProviderType$outboundSchema: z.ZodType<
-  ProviderType,
+  string,
   z.ZodTypeDef,
   ProviderType
-> = z.union([
-  z.nativeEnum(ProviderType),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ProviderType$ {
-  /** @deprecated use `ProviderType$inboundSchema` instead. */
-  export const inboundSchema = ProviderType$inboundSchema;
-  /** @deprecated use `ProviderType$outboundSchema` instead. */
-  export const outboundSchema = ProviderType$outboundSchema;
-}
-
-/** @internal */
-export const SearchStepUpProvidersRequest$inboundSchema: z.ZodType<
-  SearchStepUpProvidersRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  providerType: z.nullable(ProviderType$inboundSchema).optional(),
-  query: z.nullable(z.string()).optional(),
-  refs: z.nullable(z.array(StepUpProviderRef$inboundSchema)).optional(),
-});
+> = openEnums.outboundSchema(ProviderType);
 
 /** @internal */
 export type SearchStepUpProvidersRequest$Outbound = {
@@ -124,19 +79,6 @@ export const SearchStepUpProvidersRequest$outboundSchema: z.ZodType<
   refs: z.nullable(z.array(StepUpProviderRef$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchStepUpProvidersRequest$ {
-  /** @deprecated use `SearchStepUpProvidersRequest$inboundSchema` instead. */
-  export const inboundSchema = SearchStepUpProvidersRequest$inboundSchema;
-  /** @deprecated use `SearchStepUpProvidersRequest$outboundSchema` instead. */
-  export const outboundSchema = SearchStepUpProvidersRequest$outboundSchema;
-  /** @deprecated use `SearchStepUpProvidersRequest$Outbound` instead. */
-  export type Outbound = SearchStepUpProvidersRequest$Outbound;
-}
-
 export function searchStepUpProvidersRequestToJSON(
   searchStepUpProvidersRequest: SearchStepUpProvidersRequest,
 ): string {
@@ -144,15 +86,5 @@ export function searchStepUpProvidersRequestToJSON(
     SearchStepUpProvidersRequest$outboundSchema.parse(
       searchStepUpProvidersRequest,
     ),
-  );
-}
-
-export function searchStepUpProvidersRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchStepUpProvidersRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchStepUpProvidersRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchStepUpProvidersRequest' from JSON`,
   );
 }

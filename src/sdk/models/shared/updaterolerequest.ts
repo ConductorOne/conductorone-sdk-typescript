@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   RoleInput,
-  RoleInput$inboundSchema,
   RoleInput$Outbound,
   RoleInput$outboundSchema,
 } from "./roleinput.js";
@@ -20,16 +16,6 @@ export type UpdateRoleRequest = {
   role?: RoleInput | null | undefined;
   updateMask?: string | null | undefined;
 };
-
-/** @internal */
-export const UpdateRoleRequest$inboundSchema: z.ZodType<
-  UpdateRoleRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.nullable(RoleInput$inboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type UpdateRoleRequest$Outbound = {
@@ -47,33 +33,10 @@ export const UpdateRoleRequest$outboundSchema: z.ZodType<
   updateMask: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateRoleRequest$ {
-  /** @deprecated use `UpdateRoleRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdateRoleRequest$inboundSchema;
-  /** @deprecated use `UpdateRoleRequest$outboundSchema` instead. */
-  export const outboundSchema = UpdateRoleRequest$outboundSchema;
-  /** @deprecated use `UpdateRoleRequest$Outbound` instead. */
-  export type Outbound = UpdateRoleRequest$Outbound;
-}
-
 export function updateRoleRequestToJSON(
   updateRoleRequest: UpdateRoleRequest,
 ): string {
   return JSON.stringify(
     UpdateRoleRequest$outboundSchema.parse(updateRoleRequest),
-  );
-}
-
-export function updateRoleRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateRoleRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateRoleRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateRoleRequest' from JSON`,
   );
 }

@@ -26,44 +26,6 @@ export const TaskAuditPolicyProvisionCancelled$inboundSchema: z.ZodType<
   cancelReason: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditPolicyProvisionCancelled$Outbound = {
-  cancelReason?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditPolicyProvisionCancelled$outboundSchema: z.ZodType<
-  TaskAuditPolicyProvisionCancelled$Outbound,
-  z.ZodTypeDef,
-  TaskAuditPolicyProvisionCancelled
-> = z.object({
-  cancelReason: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditPolicyProvisionCancelled$ {
-  /** @deprecated use `TaskAuditPolicyProvisionCancelled$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditPolicyProvisionCancelled$inboundSchema;
-  /** @deprecated use `TaskAuditPolicyProvisionCancelled$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskAuditPolicyProvisionCancelled$outboundSchema;
-  /** @deprecated use `TaskAuditPolicyProvisionCancelled$Outbound` instead. */
-  export type Outbound = TaskAuditPolicyProvisionCancelled$Outbound;
-}
-
-export function taskAuditPolicyProvisionCancelledToJSON(
-  taskAuditPolicyProvisionCancelled: TaskAuditPolicyProvisionCancelled,
-): string {
-  return JSON.stringify(
-    TaskAuditPolicyProvisionCancelled$outboundSchema.parse(
-      taskAuditPolicyProvisionCancelled,
-    ),
-  );
-}
-
 export function taskAuditPolicyProvisionCancelledFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditPolicyProvisionCancelled, SDKValidationError> {

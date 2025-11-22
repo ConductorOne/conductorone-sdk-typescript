@@ -36,25 +36,6 @@ export type C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse = {
 };
 
 /** @internal */
-export const C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest$inboundSchema:
-  z.ZodType<
-    C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    task_id: z.nullable(z.string()),
-    TaskActionsServiceEscalateToEmergencyAccessRequest: shared
-      .TaskActionsServiceEscalateToEmergencyAccessRequest$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "task_id": "taskId",
-      "TaskActionsServiceEscalateToEmergencyAccessRequest":
-        "taskActionsServiceEscalateToEmergencyAccessRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest$Outbound =
   {
     task_id: string | null;
@@ -82,22 +63,6 @@ export const C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest$outbo
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest$Outbound;
-}
-
 export function c1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequestToJSON(
   c1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest:
     C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest,
@@ -105,21 +70,6 @@ export function c1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequestToJ
   return JSON.stringify(
     C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest$outboundSchema
       .parse(c1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest),
-  );
-}
-
-export function c1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest' from JSON`,
   );
 }
 
@@ -143,66 +93,6 @@ export const C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse$inbo
       "TaskServiceActionResponse": "taskServiceActionResponse",
     });
   });
-
-/** @internal */
-export type C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    TaskServiceActionResponse?:
-      | shared.TaskServiceActionResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse$outboundSchema:
-  z.ZodType<
-    C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    taskServiceActionResponse: shared.TaskServiceActionResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      taskServiceActionResponse: "TaskServiceActionResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse$Outbound;
-}
-
-export function c1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponseToJSON(
-  c1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse:
-    C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse,
-): string {
-  return JSON.stringify(
-    C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse$outboundSchema
-      .parse(c1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse),
-  );
-}
 
 export function c1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponseFromJSON(
   jsonString: string,

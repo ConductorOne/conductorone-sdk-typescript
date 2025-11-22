@@ -40,7 +40,6 @@ export const TaskGrantSource$inboundSchema: z.ZodType<
   integrationId: z.nullable(z.string()).optional(),
   requestId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type TaskGrantSource$Outbound = {
   conversationId?: string | null | undefined;
@@ -61,25 +60,11 @@ export const TaskGrantSource$outboundSchema: z.ZodType<
   requestId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskGrantSource$ {
-  /** @deprecated use `TaskGrantSource$inboundSchema` instead. */
-  export const inboundSchema = TaskGrantSource$inboundSchema;
-  /** @deprecated use `TaskGrantSource$outboundSchema` instead. */
-  export const outboundSchema = TaskGrantSource$outboundSchema;
-  /** @deprecated use `TaskGrantSource$Outbound` instead. */
-  export type Outbound = TaskGrantSource$Outbound;
-}
-
 export function taskGrantSourceToJSON(
   taskGrantSource: TaskGrantSource,
 ): string {
   return JSON.stringify(TaskGrantSource$outboundSchema.parse(taskGrantSource));
 }
-
 export function taskGrantSourceFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskGrantSource, SDKValidationError> {

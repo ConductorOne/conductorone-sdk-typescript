@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Webhook1,
-  Webhook1$inboundSchema,
-  Webhook1$Outbound,
-  Webhook1$outboundSchema,
-} from "./webhook1.js";
+import { Webhook1, Webhook1$inboundSchema } from "./webhook1.js";
 
 /**
  * The WebhooksServiceUpdateResponse message.
@@ -28,43 +23,6 @@ export const WebhooksServiceUpdateResponse$inboundSchema: z.ZodType<
 > = z.object({
   webhook: z.nullable(Webhook1$inboundSchema).optional(),
 });
-
-/** @internal */
-export type WebhooksServiceUpdateResponse$Outbound = {
-  webhook?: Webhook1$Outbound | null | undefined;
-};
-
-/** @internal */
-export const WebhooksServiceUpdateResponse$outboundSchema: z.ZodType<
-  WebhooksServiceUpdateResponse$Outbound,
-  z.ZodTypeDef,
-  WebhooksServiceUpdateResponse
-> = z.object({
-  webhook: z.nullable(Webhook1$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhooksServiceUpdateResponse$ {
-  /** @deprecated use `WebhooksServiceUpdateResponse$inboundSchema` instead. */
-  export const inboundSchema = WebhooksServiceUpdateResponse$inboundSchema;
-  /** @deprecated use `WebhooksServiceUpdateResponse$outboundSchema` instead. */
-  export const outboundSchema = WebhooksServiceUpdateResponse$outboundSchema;
-  /** @deprecated use `WebhooksServiceUpdateResponse$Outbound` instead. */
-  export type Outbound = WebhooksServiceUpdateResponse$Outbound;
-}
-
-export function webhooksServiceUpdateResponseToJSON(
-  webhooksServiceUpdateResponse: WebhooksServiceUpdateResponse,
-): string {
-  return JSON.stringify(
-    WebhooksServiceUpdateResponse$outboundSchema.parse(
-      webhooksServiceUpdateResponse,
-    ),
-  );
-}
 
 export function webhooksServiceUpdateResponseFromJSON(
   jsonString: string,

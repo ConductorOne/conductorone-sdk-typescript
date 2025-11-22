@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskExpandMask,
-  TaskExpandMask$inboundSchema,
   TaskExpandMask$Outbound,
   TaskExpandMask$outboundSchema,
 } from "./taskexpandmask.js";
@@ -29,18 +25,6 @@ export type TaskActionsServiceEscalateToEmergencyAccessRequest = {
 };
 
 /** @internal */
-export const TaskActionsServiceEscalateToEmergencyAccessRequest$inboundSchema:
-  z.ZodType<
-    TaskActionsServiceEscalateToEmergencyAccessRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    comment: z.nullable(z.string()).optional(),
-    expandMask: z.nullable(TaskExpandMask$inboundSchema).optional(),
-    policyStepId: z.nullable(z.string()).optional(),
-  });
-
-/** @internal */
 export type TaskActionsServiceEscalateToEmergencyAccessRequest$Outbound = {
   comment?: string | null | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
@@ -59,22 +43,6 @@ export const TaskActionsServiceEscalateToEmergencyAccessRequest$outboundSchema:
     policyStepId: z.nullable(z.string()).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceEscalateToEmergencyAccessRequest$ {
-  /** @deprecated use `TaskActionsServiceEscalateToEmergencyAccessRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskActionsServiceEscalateToEmergencyAccessRequest$inboundSchema;
-  /** @deprecated use `TaskActionsServiceEscalateToEmergencyAccessRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceEscalateToEmergencyAccessRequest$outboundSchema;
-  /** @deprecated use `TaskActionsServiceEscalateToEmergencyAccessRequest$Outbound` instead. */
-  export type Outbound =
-    TaskActionsServiceEscalateToEmergencyAccessRequest$Outbound;
-}
-
 export function taskActionsServiceEscalateToEmergencyAccessRequestToJSON(
   taskActionsServiceEscalateToEmergencyAccessRequest:
     TaskActionsServiceEscalateToEmergencyAccessRequest,
@@ -83,21 +51,5 @@ export function taskActionsServiceEscalateToEmergencyAccessRequestToJSON(
     TaskActionsServiceEscalateToEmergencyAccessRequest$outboundSchema.parse(
       taskActionsServiceEscalateToEmergencyAccessRequest,
     ),
-  );
-}
-
-export function taskActionsServiceEscalateToEmergencyAccessRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  TaskActionsServiceEscalateToEmergencyAccessRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      TaskActionsServiceEscalateToEmergencyAccessRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'TaskActionsServiceEscalateToEmergencyAccessRequest' from JSON`,
   );
 }

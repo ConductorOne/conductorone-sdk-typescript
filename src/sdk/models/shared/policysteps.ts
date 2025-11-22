@@ -31,7 +31,6 @@ export const PolicySteps$inboundSchema: z.ZodType<
 > = z.object({
   steps: z.nullable(z.array(PolicyStep$inboundSchema)).optional(),
 });
-
 /** @internal */
 export type PolicySteps$Outbound = {
   steps?: Array<PolicyStep$Outbound> | null | undefined;
@@ -46,23 +45,9 @@ export const PolicySteps$outboundSchema: z.ZodType<
   steps: z.nullable(z.array(PolicyStep$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PolicySteps$ {
-  /** @deprecated use `PolicySteps$inboundSchema` instead. */
-  export const inboundSchema = PolicySteps$inboundSchema;
-  /** @deprecated use `PolicySteps$outboundSchema` instead. */
-  export const outboundSchema = PolicySteps$outboundSchema;
-  /** @deprecated use `PolicySteps$Outbound` instead. */
-  export type Outbound = PolicySteps$Outbound;
-}
-
 export function policyStepsToJSON(policySteps: PolicySteps): string {
   return JSON.stringify(PolicySteps$outboundSchema.parse(policySteps));
 }
-
 export function policyStepsFromJSON(
   jsonString: string,
 ): SafeParseResult<PolicySteps, SDKValidationError> {

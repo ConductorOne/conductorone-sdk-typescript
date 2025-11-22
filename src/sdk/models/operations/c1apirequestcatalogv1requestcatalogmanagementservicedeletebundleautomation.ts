@@ -40,23 +40,6 @@ export type C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAuto
   };
 
 /** @internal */
-export const C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest$inboundSchema:
-  z.ZodType<
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    request_catalog_id: z.nullable(z.string()),
-    DeleteBundleAutomationRequest: shared
-      .DeleteBundleAutomationRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "request_catalog_id": "requestCatalogId",
-      "DeleteBundleAutomationRequest": "deleteBundleAutomationRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest$Outbound =
   {
     request_catalog_id: string | null;
@@ -82,22 +65,6 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAut
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest$ {
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest$inboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest$outboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest$Outbound;
-}
-
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequestToJSON(
   c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest:
     C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest,
@@ -107,21 +74,6 @@ export function c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundle
       .parse(
         c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest,
       ),
-  );
-}
-
-export function c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest' from JSON`,
   );
 }
 
@@ -145,68 +97,6 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAut
       "DeleteBundleAutomationResponse": "deleteBundleAutomationResponse",
     });
   });
-
-/** @internal */
-export type C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    DeleteBundleAutomationResponse?:
-      | shared.DeleteBundleAutomationResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationResponse$outboundSchema:
-  z.ZodType<
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    deleteBundleAutomationResponse: shared
-      .DeleteBundleAutomationResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      deleteBundleAutomationResponse: "DeleteBundleAutomationResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationResponse$ {
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationResponse$inboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationResponse$outboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationResponse$Outbound;
-}
-
-export function c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationResponseToJSON(
-  c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationResponse:
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationResponse,
-): string {
-  return JSON.stringify(
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationResponse$outboundSchema
-      .parse(
-        c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationResponse,
-      ),
-  );
-}
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationResponseFromJSON(
   jsonString: string,

@@ -38,24 +38,6 @@ export type C1ApiAppV1ConnectorServiceCreateDelegatedResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1ConnectorServiceCreateDelegatedRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1ConnectorServiceCreateDelegatedRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    ConnectorServiceCreateDelegatedRequest: shared
-      .ConnectorServiceCreateDelegatedRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "ConnectorServiceCreateDelegatedRequest":
-        "connectorServiceCreateDelegatedRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1ConnectorServiceCreateDelegatedRequest$Outbound = {
   app_id: string | null;
   ConnectorServiceCreateDelegatedRequest?:
@@ -81,22 +63,6 @@ export const C1ApiAppV1ConnectorServiceCreateDelegatedRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1ConnectorServiceCreateDelegatedRequest$ {
-  /** @deprecated use `C1ApiAppV1ConnectorServiceCreateDelegatedRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1ConnectorServiceCreateDelegatedRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceCreateDelegatedRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1ConnectorServiceCreateDelegatedRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceCreateDelegatedRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1ConnectorServiceCreateDelegatedRequest$Outbound;
-}
-
 export function c1ApiAppV1ConnectorServiceCreateDelegatedRequestToJSON(
   c1ApiAppV1ConnectorServiceCreateDelegatedRequest:
     C1ApiAppV1ConnectorServiceCreateDelegatedRequest,
@@ -105,22 +71,6 @@ export function c1ApiAppV1ConnectorServiceCreateDelegatedRequestToJSON(
     C1ApiAppV1ConnectorServiceCreateDelegatedRequest$outboundSchema.parse(
       c1ApiAppV1ConnectorServiceCreateDelegatedRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1ConnectorServiceCreateDelegatedRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1ConnectorServiceCreateDelegatedRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1ConnectorServiceCreateDelegatedRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiAppV1ConnectorServiceCreateDelegatedRequest' from JSON`,
   );
 }
 
@@ -144,66 +94,6 @@ export const C1ApiAppV1ConnectorServiceCreateDelegatedResponse$inboundSchema:
       "ConnectorServiceCreateResponse": "connectorServiceCreateResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1ConnectorServiceCreateDelegatedResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  ConnectorServiceCreateResponse?:
-    | shared.ConnectorServiceCreateResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1ConnectorServiceCreateDelegatedResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1ConnectorServiceCreateDelegatedResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1ConnectorServiceCreateDelegatedResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    connectorServiceCreateResponse: shared
-      .ConnectorServiceCreateResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      connectorServiceCreateResponse: "ConnectorServiceCreateResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1ConnectorServiceCreateDelegatedResponse$ {
-  /** @deprecated use `C1ApiAppV1ConnectorServiceCreateDelegatedResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1ConnectorServiceCreateDelegatedResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceCreateDelegatedResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1ConnectorServiceCreateDelegatedResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceCreateDelegatedResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1ConnectorServiceCreateDelegatedResponse$Outbound;
-}
-
-export function c1ApiAppV1ConnectorServiceCreateDelegatedResponseToJSON(
-  c1ApiAppV1ConnectorServiceCreateDelegatedResponse:
-    C1ApiAppV1ConnectorServiceCreateDelegatedResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1ConnectorServiceCreateDelegatedResponse$outboundSchema.parse(
-      c1ApiAppV1ConnectorServiceCreateDelegatedResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1ConnectorServiceCreateDelegatedResponseFromJSON(
   jsonString: string,

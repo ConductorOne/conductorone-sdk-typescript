@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The AppManagedStateBindingRef message.
@@ -26,17 +23,6 @@ export type AppManagedStateBindingRef = {
 };
 
 /** @internal */
-export const AppManagedStateBindingRef$inboundSchema: z.ZodType<
-  AppManagedStateBindingRef,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  resourceId: z.nullable(z.string()).optional(),
-  resourceTypeId: z.nullable(z.string()).optional(),
-});
-
-/** @internal */
 export type AppManagedStateBindingRef$Outbound = {
   appId?: string | null | undefined;
   resourceId?: string | null | undefined;
@@ -54,33 +40,10 @@ export const AppManagedStateBindingRef$outboundSchema: z.ZodType<
   resourceTypeId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppManagedStateBindingRef$ {
-  /** @deprecated use `AppManagedStateBindingRef$inboundSchema` instead. */
-  export const inboundSchema = AppManagedStateBindingRef$inboundSchema;
-  /** @deprecated use `AppManagedStateBindingRef$outboundSchema` instead. */
-  export const outboundSchema = AppManagedStateBindingRef$outboundSchema;
-  /** @deprecated use `AppManagedStateBindingRef$Outbound` instead. */
-  export type Outbound = AppManagedStateBindingRef$Outbound;
-}
-
 export function appManagedStateBindingRefToJSON(
   appManagedStateBindingRef: AppManagedStateBindingRef,
 ): string {
   return JSON.stringify(
     AppManagedStateBindingRef$outboundSchema.parse(appManagedStateBindingRef),
-  );
-}
-
-export function appManagedStateBindingRefFromJSON(
-  jsonString: string,
-): SafeParseResult<AppManagedStateBindingRef, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AppManagedStateBindingRef$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AppManagedStateBindingRef' from JSON`,
   );
 }

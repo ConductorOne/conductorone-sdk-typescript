@@ -25,7 +25,6 @@ export const SaveToVault$inboundSchema: z.ZodType<
 > = z.object({
   vaultIds: z.nullable(z.array(z.string())).optional(),
 });
-
 /** @internal */
 export type SaveToVault$Outbound = {
   vaultIds?: Array<string> | null | undefined;
@@ -40,23 +39,9 @@ export const SaveToVault$outboundSchema: z.ZodType<
   vaultIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SaveToVault$ {
-  /** @deprecated use `SaveToVault$inboundSchema` instead. */
-  export const inboundSchema = SaveToVault$inboundSchema;
-  /** @deprecated use `SaveToVault$outboundSchema` instead. */
-  export const outboundSchema = SaveToVault$outboundSchema;
-  /** @deprecated use `SaveToVault$Outbound` instead. */
-  export type Outbound = SaveToVault$Outbound;
-}
-
 export function saveToVaultToJSON(saveToVault: SaveToVault): string {
   return JSON.stringify(SaveToVault$outboundSchema.parse(saveToVault));
 }
-
 export function saveToVaultFromJSON(
   jsonString: string,
 ): SafeParseResult<SaveToVault, SDKValidationError> {

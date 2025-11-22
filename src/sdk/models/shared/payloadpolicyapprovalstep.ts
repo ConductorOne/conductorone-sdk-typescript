@@ -55,7 +55,6 @@ export const PayloadPolicyApprovalStepExpanded$inboundSchema: z.ZodType<
     "@type": "atType",
   });
 });
-
 /** @internal */
 export type PayloadPolicyApprovalStepExpanded$Outbound = {
   "@type"?: string | undefined;
@@ -80,20 +79,6 @@ export const PayloadPolicyApprovalStepExpanded$outboundSchema: z.ZodType<
   };
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayloadPolicyApprovalStepExpanded$ {
-  /** @deprecated use `PayloadPolicyApprovalStepExpanded$inboundSchema` instead. */
-  export const inboundSchema = PayloadPolicyApprovalStepExpanded$inboundSchema;
-  /** @deprecated use `PayloadPolicyApprovalStepExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    PayloadPolicyApprovalStepExpanded$outboundSchema;
-  /** @deprecated use `PayloadPolicyApprovalStepExpanded$Outbound` instead. */
-  export type Outbound = PayloadPolicyApprovalStepExpanded$Outbound;
-}
-
 export function payloadPolicyApprovalStepExpandedToJSON(
   payloadPolicyApprovalStepExpanded: PayloadPolicyApprovalStepExpanded,
 ): string {
@@ -103,7 +88,6 @@ export function payloadPolicyApprovalStepExpandedToJSON(
     ),
   );
 }
-
 export function payloadPolicyApprovalStepExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<PayloadPolicyApprovalStepExpanded, SDKValidationError> {
@@ -125,7 +109,6 @@ export const PayloadPolicyApprovalStep$inboundSchema: z.ZodType<
   ).optional(),
   taskView: z.nullable(TaskView$inboundSchema).optional(),
 });
-
 /** @internal */
 export type PayloadPolicyApprovalStep$Outbound = {
   expanded?:
@@ -147,19 +130,6 @@ export const PayloadPolicyApprovalStep$outboundSchema: z.ZodType<
   taskView: z.nullable(TaskView$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayloadPolicyApprovalStep$ {
-  /** @deprecated use `PayloadPolicyApprovalStep$inboundSchema` instead. */
-  export const inboundSchema = PayloadPolicyApprovalStep$inboundSchema;
-  /** @deprecated use `PayloadPolicyApprovalStep$outboundSchema` instead. */
-  export const outboundSchema = PayloadPolicyApprovalStep$outboundSchema;
-  /** @deprecated use `PayloadPolicyApprovalStep$Outbound` instead. */
-  export type Outbound = PayloadPolicyApprovalStep$Outbound;
-}
-
 export function payloadPolicyApprovalStepToJSON(
   payloadPolicyApprovalStep: PayloadPolicyApprovalStep,
 ): string {
@@ -167,7 +137,6 @@ export function payloadPolicyApprovalStepToJSON(
     PayloadPolicyApprovalStep$outboundSchema.parse(payloadPolicyApprovalStep),
   );
 }
-
 export function payloadPolicyApprovalStepFromJSON(
   jsonString: string,
 ): SafeParseResult<PayloadPolicyApprovalStep, SDKValidationError> {

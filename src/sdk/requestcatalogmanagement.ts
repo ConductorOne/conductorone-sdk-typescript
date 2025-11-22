@@ -6,11 +6,14 @@ import { requestCatalogManagementAddAccessEntitlements } from "../funcs/requestC
 import { requestCatalogManagementAddAppEntitlements } from "../funcs/requestCatalogManagementAddAppEntitlements.js";
 import { requestCatalogManagementCreate } from "../funcs/requestCatalogManagementCreate.js";
 import { requestCatalogManagementCreateBundleAutomation } from "../funcs/requestCatalogManagementCreateBundleAutomation.js";
+import { requestCatalogManagementCreateRequestableEntry } from "../funcs/requestCatalogManagementCreateRequestableEntry.js";
 import { requestCatalogManagementDelete } from "../funcs/requestCatalogManagementDelete.js";
 import { requestCatalogManagementDeleteBundleAutomation } from "../funcs/requestCatalogManagementDeleteBundleAutomation.js";
+import { requestCatalogManagementDeleteRequestableEntry } from "../funcs/requestCatalogManagementDeleteRequestableEntry.js";
 import { requestCatalogManagementForceRunBundleAutomation } from "../funcs/requestCatalogManagementForceRunBundleAutomation.js";
 import { requestCatalogManagementGet } from "../funcs/requestCatalogManagementGet.js";
 import { requestCatalogManagementGetBundleAutomation } from "../funcs/requestCatalogManagementGetBundleAutomation.js";
+import { requestCatalogManagementGetRequestableEntry } from "../funcs/requestCatalogManagementGetRequestableEntry.js";
 import { requestCatalogManagementList } from "../funcs/requestCatalogManagementList.js";
 import { requestCatalogManagementListAllEntitlementIdsPerApp } from "../funcs/requestCatalogManagementListAllEntitlementIdsPerApp.js";
 import { requestCatalogManagementListEntitlementsForAccess } from "../funcs/requestCatalogManagementListEntitlementsForAccess.js";
@@ -161,6 +164,66 @@ export class RequestCatalogManagement extends ClientSDK {
     operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceAddAppEntitlementsResponse
   > {
     return unwrapAsync(requestCatalogManagementAddAppEntitlements(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete Requestable Entry
+   *
+   * @remarks
+   * Delete a single requestable entry
+   */
+  async deleteRequestableEntry(
+    request:
+      operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequestableEntryRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequestableEntryResponse
+  > {
+    return unwrapAsync(requestCatalogManagementDeleteRequestableEntry(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get Requestable Entry
+   *
+   * @remarks
+   * Get a single requestable entry
+   */
+  async getRequestableEntry(
+    request:
+      operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequestableEntryRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequestableEntryResponse
+  > {
+    return unwrapAsync(requestCatalogManagementGetRequestableEntry(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create Requestable Entry
+   *
+   * @remarks
+   * Create a single requestable entry
+   */
+  async createRequestableEntry(
+    request:
+      operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceCreateRequestableEntryRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceCreateRequestableEntryResponse
+  > {
+    return unwrapAsync(requestCatalogManagementCreateRequestableEntry(
       this,
       request,
       options,

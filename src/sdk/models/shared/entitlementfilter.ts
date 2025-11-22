@@ -42,7 +42,6 @@ export const EntitlementFilter$inboundSchema: z.ZodType<
   appEntitlementRefsCel: z.nullable(z.string()).optional(),
   appId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type EntitlementFilter$Outbound = {
   appEntitlementRefs?: Array<AppEntitlementRef$Outbound> | null | undefined;
@@ -62,19 +61,6 @@ export const EntitlementFilter$outboundSchema: z.ZodType<
   appId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EntitlementFilter$ {
-  /** @deprecated use `EntitlementFilter$inboundSchema` instead. */
-  export const inboundSchema = EntitlementFilter$inboundSchema;
-  /** @deprecated use `EntitlementFilter$outboundSchema` instead. */
-  export const outboundSchema = EntitlementFilter$outboundSchema;
-  /** @deprecated use `EntitlementFilter$Outbound` instead. */
-  export type Outbound = EntitlementFilter$Outbound;
-}
-
 export function entitlementFilterToJSON(
   entitlementFilter: EntitlementFilter,
 ): string {
@@ -82,7 +68,6 @@ export function entitlementFilterToJSON(
     EntitlementFilter$outboundSchema.parse(entitlementFilter),
   );
 }
-
 export function entitlementFilterFromJSON(
   jsonString: string,
 ): SafeParseResult<EntitlementFilter, SDKValidationError> {

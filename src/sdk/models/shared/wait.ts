@@ -65,7 +65,6 @@ export const Wait$inboundSchema: z.ZodType<Wait, z.ZodTypeDef, unknown> = z
     timeoutDuration: z.nullable(z.string()).optional(),
     untilTime: z.nullable(WaitUntilTime$inboundSchema).optional(),
   });
-
 /** @internal */
 export type Wait$Outbound = {
   commentOnFirstWait?: string | null | undefined;
@@ -89,23 +88,9 @@ export const Wait$outboundSchema: z.ZodType<Wait$Outbound, z.ZodTypeDef, Wait> =
     untilTime: z.nullable(WaitUntilTime$outboundSchema).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Wait$ {
-  /** @deprecated use `Wait$inboundSchema` instead. */
-  export const inboundSchema = Wait$inboundSchema;
-  /** @deprecated use `Wait$outboundSchema` instead. */
-  export const outboundSchema = Wait$outboundSchema;
-  /** @deprecated use `Wait$Outbound` instead. */
-  export type Outbound = Wait$Outbound;
-}
-
 export function waitToJSON(wait: Wait): string {
   return JSON.stringify(Wait$outboundSchema.parse(wait));
 }
-
 export function waitFromJSON(
   jsonString: string,
 ): SafeParseResult<Wait, SDKValidationError> {

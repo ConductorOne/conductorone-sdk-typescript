@@ -49,66 +49,6 @@ export const C1ApiStepupV1StepUpProviderServiceListResponse$inboundSchema:
     });
   });
 
-/** @internal */
-export type C1ApiStepupV1StepUpProviderServiceListResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  ListStepUpProvidersResponse?:
-    | shared.ListStepUpProvidersResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiStepupV1StepUpProviderServiceListResponse$outboundSchema:
-  z.ZodType<
-    C1ApiStepupV1StepUpProviderServiceListResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiStepupV1StepUpProviderServiceListResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    listStepUpProvidersResponse: shared
-      .ListStepUpProvidersResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      listStepUpProvidersResponse: "ListStepUpProvidersResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiStepupV1StepUpProviderServiceListResponse$ {
-  /** @deprecated use `C1ApiStepupV1StepUpProviderServiceListResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiStepupV1StepUpProviderServiceListResponse$inboundSchema;
-  /** @deprecated use `C1ApiStepupV1StepUpProviderServiceListResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiStepupV1StepUpProviderServiceListResponse$outboundSchema;
-  /** @deprecated use `C1ApiStepupV1StepUpProviderServiceListResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiStepupV1StepUpProviderServiceListResponse$Outbound;
-}
-
-export function c1ApiStepupV1StepUpProviderServiceListResponseToJSON(
-  c1ApiStepupV1StepUpProviderServiceListResponse:
-    C1ApiStepupV1StepUpProviderServiceListResponse,
-): string {
-  return JSON.stringify(
-    C1ApiStepupV1StepUpProviderServiceListResponse$outboundSchema.parse(
-      c1ApiStepupV1StepUpProviderServiceListResponse,
-    ),
-  );
-}
-
 export function c1ApiStepupV1StepUpProviderServiceListResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

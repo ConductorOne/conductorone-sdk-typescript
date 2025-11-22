@@ -143,7 +143,6 @@ export const AutomationTrigger$inboundSchema: z.ZodType<
     .optional(),
   webhook: z.nullable(WebhookAutomationTrigger$inboundSchema).optional(),
 });
-
 /** @internal */
 export type AutomationTrigger$Outbound = {
   accessConflict?: AccessConflictTrigger$Outbound | null | undefined;
@@ -187,19 +186,6 @@ export const AutomationTrigger$outboundSchema: z.ZodType<
   webhook: z.nullable(WebhookAutomationTrigger$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AutomationTrigger$ {
-  /** @deprecated use `AutomationTrigger$inboundSchema` instead. */
-  export const inboundSchema = AutomationTrigger$inboundSchema;
-  /** @deprecated use `AutomationTrigger$outboundSchema` instead. */
-  export const outboundSchema = AutomationTrigger$outboundSchema;
-  /** @deprecated use `AutomationTrigger$Outbound` instead. */
-  export type Outbound = AutomationTrigger$Outbound;
-}
-
 export function automationTriggerToJSON(
   automationTrigger: AutomationTrigger,
 ): string {
@@ -207,7 +193,6 @@ export function automationTriggerToJSON(
     AutomationTrigger$outboundSchema.parse(automationTrigger),
   );
 }
-
 export function automationTriggerFromJSON(
   jsonString: string,
 ): SafeParseResult<AutomationTrigger, SDKValidationError> {

@@ -35,7 +35,6 @@ export const WaitUntilTime$inboundSchema: z.ZodType<
   minutes: z.nullable(z.number().int()).optional(),
   timezone: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type WaitUntilTime$Outbound = {
   hours?: number | null | undefined;
@@ -54,23 +53,9 @@ export const WaitUntilTime$outboundSchema: z.ZodType<
   timezone: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WaitUntilTime$ {
-  /** @deprecated use `WaitUntilTime$inboundSchema` instead. */
-  export const inboundSchema = WaitUntilTime$inboundSchema;
-  /** @deprecated use `WaitUntilTime$outboundSchema` instead. */
-  export const outboundSchema = WaitUntilTime$outboundSchema;
-  /** @deprecated use `WaitUntilTime$Outbound` instead. */
-  export type Outbound = WaitUntilTime$Outbound;
-}
-
 export function waitUntilTimeToJSON(waitUntilTime: WaitUntilTime): string {
   return JSON.stringify(WaitUntilTime$outboundSchema.parse(waitUntilTime));
 }
-
 export function waitUntilTimeFromJSON(
   jsonString: string,
 ): SafeParseResult<WaitUntilTime, SDKValidationError> {

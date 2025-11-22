@@ -25,7 +25,6 @@ export const DirectoryAccountFilterCel$inboundSchema: z.ZodType<
 > = z.object({
   expression: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type DirectoryAccountFilterCel$Outbound = {
   expression?: string | null | undefined;
@@ -40,19 +39,6 @@ export const DirectoryAccountFilterCel$outboundSchema: z.ZodType<
   expression: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DirectoryAccountFilterCel$ {
-  /** @deprecated use `DirectoryAccountFilterCel$inboundSchema` instead. */
-  export const inboundSchema = DirectoryAccountFilterCel$inboundSchema;
-  /** @deprecated use `DirectoryAccountFilterCel$outboundSchema` instead. */
-  export const outboundSchema = DirectoryAccountFilterCel$outboundSchema;
-  /** @deprecated use `DirectoryAccountFilterCel$Outbound` instead. */
-  export type Outbound = DirectoryAccountFilterCel$Outbound;
-}
-
 export function directoryAccountFilterCelToJSON(
   directoryAccountFilterCel: DirectoryAccountFilterCel,
 ): string {
@@ -60,7 +46,6 @@ export function directoryAccountFilterCelToJSON(
     DirectoryAccountFilterCel$outboundSchema.parse(directoryAccountFilterCel),
   );
 }
-
 export function directoryAccountFilterCelFromJSON(
   jsonString: string,
 ): SafeParseResult<DirectoryAccountFilterCel, SDKValidationError> {

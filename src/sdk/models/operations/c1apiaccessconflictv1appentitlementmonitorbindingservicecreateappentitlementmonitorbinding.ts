@@ -52,68 +52,6 @@ export const C1ApiAccessconflictV1AppEntitlementMonitorBindingServiceCreateAppEn
     });
   });
 
-/** @internal */
-export type C1ApiAccessconflictV1AppEntitlementMonitorBindingServiceCreateAppEntitlementMonitorBindingResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    AppEntitlementMonitorBinding?:
-      | shared.AppEntitlementMonitorBinding$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAccessconflictV1AppEntitlementMonitorBindingServiceCreateAppEntitlementMonitorBindingResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAccessconflictV1AppEntitlementMonitorBindingServiceCreateAppEntitlementMonitorBindingResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAccessconflictV1AppEntitlementMonitorBindingServiceCreateAppEntitlementMonitorBindingResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    appEntitlementMonitorBinding: shared
-      .AppEntitlementMonitorBinding$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      appEntitlementMonitorBinding: "AppEntitlementMonitorBinding",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAccessconflictV1AppEntitlementMonitorBindingServiceCreateAppEntitlementMonitorBindingResponse$ {
-  /** @deprecated use `C1ApiAccessconflictV1AppEntitlementMonitorBindingServiceCreateAppEntitlementMonitorBindingResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAccessconflictV1AppEntitlementMonitorBindingServiceCreateAppEntitlementMonitorBindingResponse$inboundSchema;
-  /** @deprecated use `C1ApiAccessconflictV1AppEntitlementMonitorBindingServiceCreateAppEntitlementMonitorBindingResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAccessconflictV1AppEntitlementMonitorBindingServiceCreateAppEntitlementMonitorBindingResponse$outboundSchema;
-  /** @deprecated use `C1ApiAccessconflictV1AppEntitlementMonitorBindingServiceCreateAppEntitlementMonitorBindingResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAccessconflictV1AppEntitlementMonitorBindingServiceCreateAppEntitlementMonitorBindingResponse$Outbound;
-}
-
-export function c1ApiAccessconflictV1AppEntitlementMonitorBindingServiceCreateAppEntitlementMonitorBindingResponseToJSON(
-  c1ApiAccessconflictV1AppEntitlementMonitorBindingServiceCreateAppEntitlementMonitorBindingResponse:
-    C1ApiAccessconflictV1AppEntitlementMonitorBindingServiceCreateAppEntitlementMonitorBindingResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAccessconflictV1AppEntitlementMonitorBindingServiceCreateAppEntitlementMonitorBindingResponse$outboundSchema
-      .parse(
-        c1ApiAccessconflictV1AppEntitlementMonitorBindingServiceCreateAppEntitlementMonitorBindingResponse,
-      ),
-  );
-}
-
 export function c1ApiAccessconflictV1AppEntitlementMonitorBindingServiceCreateAppEntitlementMonitorBindingResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

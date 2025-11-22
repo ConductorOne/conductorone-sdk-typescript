@@ -19,39 +19,6 @@ export const DeleteAttributeValueResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type DeleteAttributeValueResponse$Outbound = {};
-
-/** @internal */
-export const DeleteAttributeValueResponse$outboundSchema: z.ZodType<
-  DeleteAttributeValueResponse$Outbound,
-  z.ZodTypeDef,
-  DeleteAttributeValueResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteAttributeValueResponse$ {
-  /** @deprecated use `DeleteAttributeValueResponse$inboundSchema` instead. */
-  export const inboundSchema = DeleteAttributeValueResponse$inboundSchema;
-  /** @deprecated use `DeleteAttributeValueResponse$outboundSchema` instead. */
-  export const outboundSchema = DeleteAttributeValueResponse$outboundSchema;
-  /** @deprecated use `DeleteAttributeValueResponse$Outbound` instead. */
-  export type Outbound = DeleteAttributeValueResponse$Outbound;
-}
-
-export function deleteAttributeValueResponseToJSON(
-  deleteAttributeValueResponse: DeleteAttributeValueResponse,
-): string {
-  return JSON.stringify(
-    DeleteAttributeValueResponse$outboundSchema.parse(
-      deleteAttributeValueResponse,
-    ),
-  );
-}
-
 export function deleteAttributeValueResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<DeleteAttributeValueResponse, SDKValidationError> {

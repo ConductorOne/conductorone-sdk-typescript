@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskExpandMask,
-  TaskExpandMask$inboundSchema,
   TaskExpandMask$Outbound,
   TaskExpandMask$outboundSchema,
 } from "./taskexpandmask.js";
@@ -29,17 +25,6 @@ export type TaskActionsServiceDenyRequest = {
 };
 
 /** @internal */
-export const TaskActionsServiceDenyRequest$inboundSchema: z.ZodType<
-  TaskActionsServiceDenyRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  comment: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(TaskExpandMask$inboundSchema).optional(),
-  policyStepId: z.nullable(z.string()).optional(),
-});
-
-/** @internal */
 export type TaskActionsServiceDenyRequest$Outbound = {
   comment?: string | null | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
@@ -57,19 +42,6 @@ export const TaskActionsServiceDenyRequest$outboundSchema: z.ZodType<
   policyStepId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceDenyRequest$ {
-  /** @deprecated use `TaskActionsServiceDenyRequest$inboundSchema` instead. */
-  export const inboundSchema = TaskActionsServiceDenyRequest$inboundSchema;
-  /** @deprecated use `TaskActionsServiceDenyRequest$outboundSchema` instead. */
-  export const outboundSchema = TaskActionsServiceDenyRequest$outboundSchema;
-  /** @deprecated use `TaskActionsServiceDenyRequest$Outbound` instead. */
-  export type Outbound = TaskActionsServiceDenyRequest$Outbound;
-}
-
 export function taskActionsServiceDenyRequestToJSON(
   taskActionsServiceDenyRequest: TaskActionsServiceDenyRequest,
 ): string {
@@ -77,15 +49,5 @@ export function taskActionsServiceDenyRequestToJSON(
     TaskActionsServiceDenyRequest$outboundSchema.parse(
       taskActionsServiceDenyRequest,
     ),
-  );
-}
-
-export function taskActionsServiceDenyRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskActionsServiceDenyRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskActionsServiceDenyRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskActionsServiceDenyRequest' from JSON`,
   );
 }

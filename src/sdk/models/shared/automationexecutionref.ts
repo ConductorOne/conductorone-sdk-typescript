@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The AutomationExecutionRef message.
@@ -16,15 +13,6 @@ export type AutomationExecutionRef = {
    */
   id?: number | null | undefined;
 };
-
-/** @internal */
-export const AutomationExecutionRef$inboundSchema: z.ZodType<
-  AutomationExecutionRef,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
-});
 
 /** @internal */
 export type AutomationExecutionRef$Outbound = {
@@ -40,33 +28,10 @@ export const AutomationExecutionRef$outboundSchema: z.ZodType<
   id: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AutomationExecutionRef$ {
-  /** @deprecated use `AutomationExecutionRef$inboundSchema` instead. */
-  export const inboundSchema = AutomationExecutionRef$inboundSchema;
-  /** @deprecated use `AutomationExecutionRef$outboundSchema` instead. */
-  export const outboundSchema = AutomationExecutionRef$outboundSchema;
-  /** @deprecated use `AutomationExecutionRef$Outbound` instead. */
-  export type Outbound = AutomationExecutionRef$Outbound;
-}
-
 export function automationExecutionRefToJSON(
   automationExecutionRef: AutomationExecutionRef,
 ): string {
   return JSON.stringify(
     AutomationExecutionRef$outboundSchema.parse(automationExecutionRef),
-  );
-}
-
-export function automationExecutionRefFromJSON(
-  jsonString: string,
-): SafeParseResult<AutomationExecutionRef, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AutomationExecutionRef$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AutomationExecutionRef' from JSON`,
   );
 }

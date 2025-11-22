@@ -18,7 +18,6 @@ export const ChipsField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
 /** @internal */
 export type ChipsField$Outbound = {};
 
@@ -29,23 +28,9 @@ export const ChipsField$outboundSchema: z.ZodType<
   ChipsField
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChipsField$ {
-  /** @deprecated use `ChipsField$inboundSchema` instead. */
-  export const inboundSchema = ChipsField$inboundSchema;
-  /** @deprecated use `ChipsField$outboundSchema` instead. */
-  export const outboundSchema = ChipsField$outboundSchema;
-  /** @deprecated use `ChipsField$Outbound` instead. */
-  export type Outbound = ChipsField$Outbound;
-}
-
 export function chipsFieldToJSON(chipsField: ChipsField): string {
   return JSON.stringify(ChipsField$outboundSchema.parse(chipsField));
 }
-
 export function chipsFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<ChipsField, SDKValidationError> {

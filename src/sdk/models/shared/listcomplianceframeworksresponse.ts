@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AttributeValue,
   AttributeValue$inboundSchema,
-  AttributeValue$Outbound,
-  AttributeValue$outboundSchema,
 } from "./attributevalue.js";
 
 /**
@@ -36,45 +34,6 @@ export const ListComplianceFrameworksResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(AttributeValue$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ListComplianceFrameworksResponse$Outbound = {
-  list?: Array<AttributeValue$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ListComplianceFrameworksResponse$outboundSchema: z.ZodType<
-  ListComplianceFrameworksResponse$Outbound,
-  z.ZodTypeDef,
-  ListComplianceFrameworksResponse
-> = z.object({
-  list: z.nullable(z.array(AttributeValue$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListComplianceFrameworksResponse$ {
-  /** @deprecated use `ListComplianceFrameworksResponse$inboundSchema` instead. */
-  export const inboundSchema = ListComplianceFrameworksResponse$inboundSchema;
-  /** @deprecated use `ListComplianceFrameworksResponse$outboundSchema` instead. */
-  export const outboundSchema = ListComplianceFrameworksResponse$outboundSchema;
-  /** @deprecated use `ListComplianceFrameworksResponse$Outbound` instead. */
-  export type Outbound = ListComplianceFrameworksResponse$Outbound;
-}
-
-export function listComplianceFrameworksResponseToJSON(
-  listComplianceFrameworksResponse: ListComplianceFrameworksResponse,
-): string {
-  return JSON.stringify(
-    ListComplianceFrameworksResponse$outboundSchema.parse(
-      listComplianceFrameworksResponse,
-    ),
-  );
-}
 
 export function listComplianceFrameworksResponseFromJSON(
   jsonString: string,

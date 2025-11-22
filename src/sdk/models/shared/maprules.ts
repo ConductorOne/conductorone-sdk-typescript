@@ -62,7 +62,6 @@ export const MapRules$inboundSchema: z.ZodType<
   noSparse: z.nullable(z.boolean()).optional(),
   values: z.nullable(z.lazy(() => FieldRules$inboundSchema)).optional(),
 });
-
 /** @internal */
 export type MapRules$Outbound = {
   ignoreEmpty?: boolean | null | undefined;
@@ -87,23 +86,9 @@ export const MapRules$outboundSchema: z.ZodType<
   values: z.nullable(z.lazy(() => FieldRules$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace MapRules$ {
-  /** @deprecated use `MapRules$inboundSchema` instead. */
-  export const inboundSchema = MapRules$inboundSchema;
-  /** @deprecated use `MapRules$outboundSchema` instead. */
-  export const outboundSchema = MapRules$outboundSchema;
-  /** @deprecated use `MapRules$Outbound` instead. */
-  export type Outbound = MapRules$Outbound;
-}
-
 export function mapRulesToJSON(mapRules: MapRules): string {
   return JSON.stringify(MapRules$outboundSchema.parse(mapRules));
 }
-
 export function mapRulesFromJSON(
   jsonString: string,
 ): SafeParseResult<MapRules, SDKValidationError> {

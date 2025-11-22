@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  AttributeType,
-  AttributeType$inboundSchema,
-  AttributeType$Outbound,
-  AttributeType$outboundSchema,
-} from "./attributetype.js";
+import { AttributeType, AttributeType$inboundSchema } from "./attributetype.js";
 
 /**
  * ListAttributeTypesResponse is the response for listing attribute types.
@@ -40,43 +35,6 @@ export const ListAttributeTypesResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(AttributeType$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ListAttributeTypesResponse$Outbound = {
-  list?: Array<AttributeType$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ListAttributeTypesResponse$outboundSchema: z.ZodType<
-  ListAttributeTypesResponse$Outbound,
-  z.ZodTypeDef,
-  ListAttributeTypesResponse
-> = z.object({
-  list: z.nullable(z.array(AttributeType$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAttributeTypesResponse$ {
-  /** @deprecated use `ListAttributeTypesResponse$inboundSchema` instead. */
-  export const inboundSchema = ListAttributeTypesResponse$inboundSchema;
-  /** @deprecated use `ListAttributeTypesResponse$outboundSchema` instead. */
-  export const outboundSchema = ListAttributeTypesResponse$outboundSchema;
-  /** @deprecated use `ListAttributeTypesResponse$Outbound` instead. */
-  export type Outbound = ListAttributeTypesResponse$Outbound;
-}
-
-export function listAttributeTypesResponseToJSON(
-  listAttributeTypesResponse: ListAttributeTypesResponse,
-): string {
-  return JSON.stringify(
-    ListAttributeTypesResponse$outboundSchema.parse(listAttributeTypesResponse),
-  );
-}
 
 export function listAttributeTypesResponseFromJSON(
   jsonString: string,

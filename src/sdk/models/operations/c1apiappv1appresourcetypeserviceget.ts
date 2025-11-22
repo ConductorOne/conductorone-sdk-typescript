@@ -39,18 +39,6 @@ export type C1ApiAppV1AppResourceTypeServiceGetResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppResourceTypeServiceGetRequest$inboundSchema:
-  z.ZodType<C1ApiAppV1AppResourceTypeServiceGetRequest, z.ZodTypeDef, unknown> =
-    z.object({
-      app_id: z.nullable(z.string()),
-      id: z.nullable(z.string()),
-    }).transform((v) => {
-      return remap$(v, {
-        "app_id": "appId",
-      });
-    });
-
-/** @internal */
 export type C1ApiAppV1AppResourceTypeServiceGetRequest$Outbound = {
   app_id: string | null;
   id: string | null;
@@ -71,21 +59,6 @@ export const C1ApiAppV1AppResourceTypeServiceGetRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppResourceTypeServiceGetRequest$ {
-  /** @deprecated use `C1ApiAppV1AppResourceTypeServiceGetRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppResourceTypeServiceGetRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceTypeServiceGetRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppResourceTypeServiceGetRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceTypeServiceGetRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppResourceTypeServiceGetRequest$Outbound;
-}
-
 export function c1ApiAppV1AppResourceTypeServiceGetRequestToJSON(
   c1ApiAppV1AppResourceTypeServiceGetRequest:
     C1ApiAppV1AppResourceTypeServiceGetRequest,
@@ -94,22 +67,6 @@ export function c1ApiAppV1AppResourceTypeServiceGetRequestToJSON(
     C1ApiAppV1AppResourceTypeServiceGetRequest$outboundSchema.parse(
       c1ApiAppV1AppResourceTypeServiceGetRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppResourceTypeServiceGetRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppResourceTypeServiceGetRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppResourceTypeServiceGetRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiAppV1AppResourceTypeServiceGetRequest' from JSON`,
   );
 }
 
@@ -133,65 +90,6 @@ export const C1ApiAppV1AppResourceTypeServiceGetResponse$inboundSchema:
       "AppResourceTypeServiceGetResponse": "appResourceTypeServiceGetResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppResourceTypeServiceGetResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  AppResourceTypeServiceGetResponse?:
-    | shared.AppResourceTypeServiceGetResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppResourceTypeServiceGetResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppResourceTypeServiceGetResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppResourceTypeServiceGetResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    appResourceTypeServiceGetResponse: shared
-      .AppResourceTypeServiceGetResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      appResourceTypeServiceGetResponse: "AppResourceTypeServiceGetResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppResourceTypeServiceGetResponse$ {
-  /** @deprecated use `C1ApiAppV1AppResourceTypeServiceGetResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppResourceTypeServiceGetResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceTypeServiceGetResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppResourceTypeServiceGetResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceTypeServiceGetResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppResourceTypeServiceGetResponse$Outbound;
-}
-
-export function c1ApiAppV1AppResourceTypeServiceGetResponseToJSON(
-  c1ApiAppV1AppResourceTypeServiceGetResponse:
-    C1ApiAppV1AppResourceTypeServiceGetResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppResourceTypeServiceGetResponse$outboundSchema.parse(
-      c1ApiAppV1AppResourceTypeServiceGetResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppResourceTypeServiceGetResponseFromJSON(
   jsonString: string,
