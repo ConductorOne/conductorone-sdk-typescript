@@ -26,41 +26,6 @@ export const TaskAuditHardReset$inboundSchema: z.ZodType<
   oldPolicyStepId: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditHardReset$Outbound = {
-  oldPolicyStepId?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditHardReset$outboundSchema: z.ZodType<
-  TaskAuditHardReset$Outbound,
-  z.ZodTypeDef,
-  TaskAuditHardReset
-> = z.object({
-  oldPolicyStepId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditHardReset$ {
-  /** @deprecated use `TaskAuditHardReset$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditHardReset$inboundSchema;
-  /** @deprecated use `TaskAuditHardReset$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditHardReset$outboundSchema;
-  /** @deprecated use `TaskAuditHardReset$Outbound` instead. */
-  export type Outbound = TaskAuditHardReset$Outbound;
-}
-
-export function taskAuditHardResetToJSON(
-  taskAuditHardReset: TaskAuditHardReset,
-): string {
-  return JSON.stringify(
-    TaskAuditHardReset$outboundSchema.parse(taskAuditHardReset),
-  );
-}
-
 export function taskAuditHardResetFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditHardReset, SDKValidationError> {

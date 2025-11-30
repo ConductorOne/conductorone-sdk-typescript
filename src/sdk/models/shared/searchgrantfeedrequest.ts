@@ -3,36 +3,24 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementRef,
-  AppEntitlementRef$inboundSchema,
   AppEntitlementRef$Outbound,
   AppEntitlementRef$outboundSchema,
 } from "./appentitlementref.js";
 import {
   AppEntitlementUserBindingExpandHistoryMask,
-  AppEntitlementUserBindingExpandHistoryMask$inboundSchema,
   AppEntitlementUserBindingExpandHistoryMask$Outbound,
   AppEntitlementUserBindingExpandHistoryMask$outboundSchema,
 } from "./appentitlementuserbindingexpandhistorymask.js";
-import {
-  AppRef,
-  AppRef$inboundSchema,
-  AppRef$Outbound,
-  AppRef$outboundSchema,
-} from "./appref.js";
+import { AppRef, AppRef$Outbound, AppRef$outboundSchema } from "./appref.js";
 import {
   AppUserRef,
-  AppUserRef$inboundSchema,
   AppUserRef$Outbound,
   AppUserRef$outboundSchema,
 } from "./appuserref.js";
 import {
   UserRef,
-  UserRef$inboundSchema,
   UserRef$Outbound,
   UserRef$outboundSchema,
 } from "./userref.js";
@@ -71,30 +59,6 @@ export type SearchGrantFeedRequest = {
 };
 
 /** @internal */
-export const SearchGrantFeedRequest$inboundSchema: z.ZodType<
-  SearchGrantFeedRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  after: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
-    .optional(),
-  appRefs: z.nullable(z.array(AppRef$inboundSchema)).optional(),
-  appUserRefs: z.nullable(z.array(AppUserRef$inboundSchema)).optional(),
-  before: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  expandMask: z.nullable(
-    AppEntitlementUserBindingExpandHistoryMask$inboundSchema,
-  ).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  userRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
-});
-
-/** @internal */
 export type SearchGrantFeedRequest$Outbound = {
   after?: string | null | undefined;
   appEntitlementRefs?: Array<AppEntitlementRef$Outbound> | null | undefined;
@@ -130,33 +94,10 @@ export const SearchGrantFeedRequest$outboundSchema: z.ZodType<
   userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchGrantFeedRequest$ {
-  /** @deprecated use `SearchGrantFeedRequest$inboundSchema` instead. */
-  export const inboundSchema = SearchGrantFeedRequest$inboundSchema;
-  /** @deprecated use `SearchGrantFeedRequest$outboundSchema` instead. */
-  export const outboundSchema = SearchGrantFeedRequest$outboundSchema;
-  /** @deprecated use `SearchGrantFeedRequest$Outbound` instead. */
-  export type Outbound = SearchGrantFeedRequest$Outbound;
-}
-
 export function searchGrantFeedRequestToJSON(
   searchGrantFeedRequest: SearchGrantFeedRequest,
 ): string {
   return JSON.stringify(
     SearchGrantFeedRequest$outboundSchema.parse(searchGrantFeedRequest),
-  );
-}
-
-export function searchGrantFeedRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchGrantFeedRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchGrantFeedRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchGrantFeedRequest' from JSON`,
   );
 }

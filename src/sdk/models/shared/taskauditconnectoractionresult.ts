@@ -9,20 +9,14 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskAuditCancelledResult,
   TaskAuditCancelledResult$inboundSchema,
-  TaskAuditCancelledResult$Outbound,
-  TaskAuditCancelledResult$outboundSchema,
 } from "./taskauditcancelledresult.js";
 import {
   TaskAuditErrorResult,
   TaskAuditErrorResult$inboundSchema,
-  TaskAuditErrorResult$Outbound,
-  TaskAuditErrorResult$outboundSchema,
 } from "./taskauditerrorresult.js";
 import {
   TaskAuditSuccessResult,
   TaskAuditSuccessResult$inboundSchema,
-  TaskAuditSuccessResult$Outbound,
-  TaskAuditSuccessResult$outboundSchema,
 } from "./taskauditsuccessresult.js";
 
 /**
@@ -71,55 +65,6 @@ export const TaskAuditConnectorActionResult$inboundSchema: z.ZodType<
   error: z.nullable(TaskAuditErrorResult$inboundSchema).optional(),
   success: z.nullable(TaskAuditSuccessResult$inboundSchema).optional(),
 });
-
-/** @internal */
-export type TaskAuditConnectorActionResult$Outbound = {
-  appEntitlementId?: string | null | undefined;
-  appId?: string | null | undefined;
-  cancelled?: TaskAuditCancelledResult$Outbound | null | undefined;
-  connectorActionId?: string | null | undefined;
-  connectorId?: string | null | undefined;
-  error?: TaskAuditErrorResult$Outbound | null | undefined;
-  success?: TaskAuditSuccessResult$Outbound | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditConnectorActionResult$outboundSchema: z.ZodType<
-  TaskAuditConnectorActionResult$Outbound,
-  z.ZodTypeDef,
-  TaskAuditConnectorActionResult
-> = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  cancelled: z.nullable(TaskAuditCancelledResult$outboundSchema).optional(),
-  connectorActionId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
-  error: z.nullable(TaskAuditErrorResult$outboundSchema).optional(),
-  success: z.nullable(TaskAuditSuccessResult$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditConnectorActionResult$ {
-  /** @deprecated use `TaskAuditConnectorActionResult$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditConnectorActionResult$inboundSchema;
-  /** @deprecated use `TaskAuditConnectorActionResult$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditConnectorActionResult$outboundSchema;
-  /** @deprecated use `TaskAuditConnectorActionResult$Outbound` instead. */
-  export type Outbound = TaskAuditConnectorActionResult$Outbound;
-}
-
-export function taskAuditConnectorActionResultToJSON(
-  taskAuditConnectorActionResult: TaskAuditConnectorActionResult,
-): string {
-  return JSON.stringify(
-    TaskAuditConnectorActionResult$outboundSchema.parse(
-      taskAuditConnectorActionResult,
-    ),
-  );
-}
 
 export function taskAuditConnectorActionResultFromJSON(
   jsonString: string,

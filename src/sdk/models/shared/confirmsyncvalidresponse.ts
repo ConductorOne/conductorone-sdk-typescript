@@ -19,37 +19,6 @@ export const ConfirmSyncValidResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type ConfirmSyncValidResponse$Outbound = {};
-
-/** @internal */
-export const ConfirmSyncValidResponse$outboundSchema: z.ZodType<
-  ConfirmSyncValidResponse$Outbound,
-  z.ZodTypeDef,
-  ConfirmSyncValidResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConfirmSyncValidResponse$ {
-  /** @deprecated use `ConfirmSyncValidResponse$inboundSchema` instead. */
-  export const inboundSchema = ConfirmSyncValidResponse$inboundSchema;
-  /** @deprecated use `ConfirmSyncValidResponse$outboundSchema` instead. */
-  export const outboundSchema = ConfirmSyncValidResponse$outboundSchema;
-  /** @deprecated use `ConfirmSyncValidResponse$Outbound` instead. */
-  export type Outbound = ConfirmSyncValidResponse$Outbound;
-}
-
-export function confirmSyncValidResponseToJSON(
-  confirmSyncValidResponse: ConfirmSyncValidResponse,
-): string {
-  return JSON.stringify(
-    ConfirmSyncValidResponse$outboundSchema.parse(confirmSyncValidResponse),
-  );
-}
-
 export function confirmSyncValidResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<ConfirmSyncValidResponse, SDKValidationError> {

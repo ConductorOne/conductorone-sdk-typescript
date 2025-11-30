@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   StepUpProvider,
   StepUpProvider$inboundSchema,
-  StepUpProvider$Outbound,
-  StepUpProvider$outboundSchema,
 } from "./stepupprovider.js";
 
 /**
@@ -36,45 +34,6 @@ export const SearchStepUpProvidersResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(StepUpProvider$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type SearchStepUpProvidersResponse$Outbound = {
-  list?: Array<StepUpProvider$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const SearchStepUpProvidersResponse$outboundSchema: z.ZodType<
-  SearchStepUpProvidersResponse$Outbound,
-  z.ZodTypeDef,
-  SearchStepUpProvidersResponse
-> = z.object({
-  list: z.nullable(z.array(StepUpProvider$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchStepUpProvidersResponse$ {
-  /** @deprecated use `SearchStepUpProvidersResponse$inboundSchema` instead. */
-  export const inboundSchema = SearchStepUpProvidersResponse$inboundSchema;
-  /** @deprecated use `SearchStepUpProvidersResponse$outboundSchema` instead. */
-  export const outboundSchema = SearchStepUpProvidersResponse$outboundSchema;
-  /** @deprecated use `SearchStepUpProvidersResponse$Outbound` instead. */
-  export type Outbound = SearchStepUpProvidersResponse$Outbound;
-}
-
-export function searchStepUpProvidersResponseToJSON(
-  searchStepUpProvidersResponse: SearchStepUpProvidersResponse,
-): string {
-  return JSON.stringify(
-    SearchStepUpProvidersResponse$outboundSchema.parse(
-      searchStepUpProvidersResponse,
-    ),
-  );
-}
 
 export function searchStepUpProvidersResponseFromJSON(
   jsonString: string,

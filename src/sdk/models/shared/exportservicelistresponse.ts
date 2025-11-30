@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Exporter,
-  Exporter$inboundSchema,
-  Exporter$Outbound,
-  Exporter$outboundSchema,
-} from "./exporter.js";
+import { Exporter, Exporter$inboundSchema } from "./exporter.js";
 
 /**
  * The ExportServiceListResponse message.
@@ -36,43 +31,6 @@ export const ExportServiceListResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(Exporter$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ExportServiceListResponse$Outbound = {
-  list?: Array<Exporter$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ExportServiceListResponse$outboundSchema: z.ZodType<
-  ExportServiceListResponse$Outbound,
-  z.ZodTypeDef,
-  ExportServiceListResponse
-> = z.object({
-  list: z.nullable(z.array(Exporter$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExportServiceListResponse$ {
-  /** @deprecated use `ExportServiceListResponse$inboundSchema` instead. */
-  export const inboundSchema = ExportServiceListResponse$inboundSchema;
-  /** @deprecated use `ExportServiceListResponse$outboundSchema` instead. */
-  export const outboundSchema = ExportServiceListResponse$outboundSchema;
-  /** @deprecated use `ExportServiceListResponse$Outbound` instead. */
-  export type Outbound = ExportServiceListResponse$Outbound;
-}
-
-export function exportServiceListResponseToJSON(
-  exportServiceListResponse: ExportServiceListResponse,
-): string {
-  return JSON.stringify(
-    ExportServiceListResponse$outboundSchema.parse(exportServiceListResponse),
-  );
-}
 
 export function exportServiceListResponseFromJSON(
   jsonString: string,

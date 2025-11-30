@@ -49,63 +49,6 @@ export const C1ApiFunctionsV1FunctionsSearchSearchResponse$inboundSchema:
     });
   });
 
-/** @internal */
-export type C1ApiFunctionsV1FunctionsSearchSearchResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  FunctionsSearchResponse?: shared.FunctionsSearchResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiFunctionsV1FunctionsSearchSearchResponse$outboundSchema:
-  z.ZodType<
-    C1ApiFunctionsV1FunctionsSearchSearchResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiFunctionsV1FunctionsSearchSearchResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    functionsSearchResponse: shared.FunctionsSearchResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      functionsSearchResponse: "FunctionsSearchResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiFunctionsV1FunctionsSearchSearchResponse$ {
-  /** @deprecated use `C1ApiFunctionsV1FunctionsSearchSearchResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiFunctionsV1FunctionsSearchSearchResponse$inboundSchema;
-  /** @deprecated use `C1ApiFunctionsV1FunctionsSearchSearchResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiFunctionsV1FunctionsSearchSearchResponse$outboundSchema;
-  /** @deprecated use `C1ApiFunctionsV1FunctionsSearchSearchResponse$Outbound` instead. */
-  export type Outbound = C1ApiFunctionsV1FunctionsSearchSearchResponse$Outbound;
-}
-
-export function c1ApiFunctionsV1FunctionsSearchSearchResponseToJSON(
-  c1ApiFunctionsV1FunctionsSearchSearchResponse:
-    C1ApiFunctionsV1FunctionsSearchSearchResponse,
-): string {
-  return JSON.stringify(
-    C1ApiFunctionsV1FunctionsSearchSearchResponse$outboundSchema.parse(
-      c1ApiFunctionsV1FunctionsSearchSearchResponse,
-    ),
-  );
-}
-
 export function c1ApiFunctionsV1FunctionsSearchSearchResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

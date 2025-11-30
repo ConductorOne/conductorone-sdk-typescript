@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  User,
-  User$inboundSchema,
-  User$Outbound,
-  User$outboundSchema,
-} from "./user.js";
+import { User, User$inboundSchema } from "./user.js";
 
 /**
  * The ListAppResourceOwnersResponse message contains a list of results and a nextPageToken if applicable
@@ -40,45 +35,6 @@ export const ListAppResourceOwnersResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(User$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ListAppResourceOwnersResponse$Outbound = {
-  list?: Array<User$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ListAppResourceOwnersResponse$outboundSchema: z.ZodType<
-  ListAppResourceOwnersResponse$Outbound,
-  z.ZodTypeDef,
-  ListAppResourceOwnersResponse
-> = z.object({
-  list: z.nullable(z.array(User$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAppResourceOwnersResponse$ {
-  /** @deprecated use `ListAppResourceOwnersResponse$inboundSchema` instead. */
-  export const inboundSchema = ListAppResourceOwnersResponse$inboundSchema;
-  /** @deprecated use `ListAppResourceOwnersResponse$outboundSchema` instead. */
-  export const outboundSchema = ListAppResourceOwnersResponse$outboundSchema;
-  /** @deprecated use `ListAppResourceOwnersResponse$Outbound` instead. */
-  export type Outbound = ListAppResourceOwnersResponse$Outbound;
-}
-
-export function listAppResourceOwnersResponseToJSON(
-  listAppResourceOwnersResponse: ListAppResourceOwnersResponse,
-): string {
-  return JSON.stringify(
-    ListAppResourceOwnersResponse$outboundSchema.parse(
-      listAppResourceOwnersResponse,
-    ),
-  );
-}
 
 export function listAppResourceOwnersResponseFromJSON(
   jsonString: string,

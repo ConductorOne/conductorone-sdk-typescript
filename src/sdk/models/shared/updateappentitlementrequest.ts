@@ -3,18 +3,13 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementInput,
-  AppEntitlementInput$inboundSchema,
   AppEntitlementInput$Outbound,
   AppEntitlementInput$outboundSchema,
 } from "./appentitlement.js";
 import {
   AppEntitlementExpandMask,
-  AppEntitlementExpandMask$inboundSchema,
   AppEntitlementExpandMask$Outbound,
   AppEntitlementExpandMask$outboundSchema,
 } from "./appentitlementexpandmask.js";
@@ -31,18 +26,6 @@ export type UpdateAppEntitlementRequest = {
   overrideAccessRequestsDefaults?: boolean | null | undefined;
   updateMask?: string | null | undefined;
 };
-
-/** @internal */
-export const UpdateAppEntitlementRequest$inboundSchema: z.ZodType<
-  UpdateAppEntitlementRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  entitlement: z.nullable(AppEntitlementInput$inboundSchema).optional(),
-  expandMask: z.nullable(AppEntitlementExpandMask$inboundSchema).optional(),
-  overrideAccessRequestsDefaults: z.nullable(z.boolean()).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type UpdateAppEntitlementRequest$Outbound = {
@@ -64,19 +47,6 @@ export const UpdateAppEntitlementRequest$outboundSchema: z.ZodType<
   updateMask: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAppEntitlementRequest$ {
-  /** @deprecated use `UpdateAppEntitlementRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdateAppEntitlementRequest$inboundSchema;
-  /** @deprecated use `UpdateAppEntitlementRequest$outboundSchema` instead. */
-  export const outboundSchema = UpdateAppEntitlementRequest$outboundSchema;
-  /** @deprecated use `UpdateAppEntitlementRequest$Outbound` instead. */
-  export type Outbound = UpdateAppEntitlementRequest$Outbound;
-}
-
 export function updateAppEntitlementRequestToJSON(
   updateAppEntitlementRequest: UpdateAppEntitlementRequest,
 ): string {
@@ -84,15 +54,5 @@ export function updateAppEntitlementRequestToJSON(
     UpdateAppEntitlementRequest$outboundSchema.parse(
       updateAppEntitlementRequest,
     ),
-  );
-}
-
-export function updateAppEntitlementRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAppEntitlementRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAppEntitlementRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAppEntitlementRequest' from JSON`,
   );
 }

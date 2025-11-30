@@ -13,8 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppResourceView,
   AppResourceView$inboundSchema,
-  AppResourceView$Outbound,
-  AppResourceView$outboundSchema,
 } from "./appresourceview.js";
 
 /**
@@ -56,56 +54,6 @@ export const AppResourceServiceUpdateResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type AppResourceServiceUpdateResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const AppResourceServiceUpdateResponseExpanded$outboundSchema: z.ZodType<
-  AppResourceServiceUpdateResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  AppResourceServiceUpdateResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppResourceServiceUpdateResponseExpanded$ {
-  /** @deprecated use `AppResourceServiceUpdateResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    AppResourceServiceUpdateResponseExpanded$inboundSchema;
-  /** @deprecated use `AppResourceServiceUpdateResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    AppResourceServiceUpdateResponseExpanded$outboundSchema;
-  /** @deprecated use `AppResourceServiceUpdateResponseExpanded$Outbound` instead. */
-  export type Outbound = AppResourceServiceUpdateResponseExpanded$Outbound;
-}
-
-export function appResourceServiceUpdateResponseExpandedToJSON(
-  appResourceServiceUpdateResponseExpanded:
-    AppResourceServiceUpdateResponseExpanded,
-): string {
-  return JSON.stringify(
-    AppResourceServiceUpdateResponseExpanded$outboundSchema.parse(
-      appResourceServiceUpdateResponseExpanded,
-    ),
-  );
-}
-
 export function appResourceServiceUpdateResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -135,52 +83,6 @@ export const AppResourceServiceUpdateResponse$inboundSchema: z.ZodType<
     ),
   ).optional(),
 });
-
-/** @internal */
-export type AppResourceServiceUpdateResponse$Outbound = {
-  appResourceView?: AppResourceView$Outbound | null | undefined;
-  expanded?:
-    | Array<AppResourceServiceUpdateResponseExpanded$Outbound>
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const AppResourceServiceUpdateResponse$outboundSchema: z.ZodType<
-  AppResourceServiceUpdateResponse$Outbound,
-  z.ZodTypeDef,
-  AppResourceServiceUpdateResponse
-> = z.object({
-  appResourceView: z.nullable(AppResourceView$outboundSchema).optional(),
-  expanded: z.nullable(
-    z.array(
-      z.lazy(() => AppResourceServiceUpdateResponseExpanded$outboundSchema),
-    ),
-  ).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppResourceServiceUpdateResponse$ {
-  /** @deprecated use `AppResourceServiceUpdateResponse$inboundSchema` instead. */
-  export const inboundSchema = AppResourceServiceUpdateResponse$inboundSchema;
-  /** @deprecated use `AppResourceServiceUpdateResponse$outboundSchema` instead. */
-  export const outboundSchema = AppResourceServiceUpdateResponse$outboundSchema;
-  /** @deprecated use `AppResourceServiceUpdateResponse$Outbound` instead. */
-  export type Outbound = AppResourceServiceUpdateResponse$Outbound;
-}
-
-export function appResourceServiceUpdateResponseToJSON(
-  appResourceServiceUpdateResponse: AppResourceServiceUpdateResponse,
-): string {
-  return JSON.stringify(
-    AppResourceServiceUpdateResponse$outboundSchema.parse(
-      appResourceServiceUpdateResponse,
-    ),
-  );
-}
 
 export function appResourceServiceUpdateResponseFromJSON(
   jsonString: string,

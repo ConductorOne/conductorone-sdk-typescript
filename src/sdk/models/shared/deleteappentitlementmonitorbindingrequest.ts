@@ -3,14 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 /**
  * The entitlementGroup field.
@@ -48,48 +42,11 @@ export type DeleteAppEntitlementMonitorBindingRequest = {
 };
 
 /** @internal */
-export const EntitlementGroup$inboundSchema: z.ZodType<
-  EntitlementGroup,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(EntitlementGroup),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
 export const EntitlementGroup$outboundSchema: z.ZodType<
-  EntitlementGroup,
+  string,
   z.ZodTypeDef,
   EntitlementGroup
-> = z.union([
-  z.nativeEnum(EntitlementGroup),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EntitlementGroup$ {
-  /** @deprecated use `EntitlementGroup$inboundSchema` instead. */
-  export const inboundSchema = EntitlementGroup$inboundSchema;
-  /** @deprecated use `EntitlementGroup$outboundSchema` instead. */
-  export const outboundSchema = EntitlementGroup$outboundSchema;
-}
-
-/** @internal */
-export const DeleteAppEntitlementMonitorBindingRequest$inboundSchema: z.ZodType<
-  DeleteAppEntitlementMonitorBindingRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  entitlementGroup: z.nullable(EntitlementGroup$inboundSchema).optional(),
-  monitorId: z.nullable(z.string()).optional(),
-});
+> = openEnums.outboundSchema(EntitlementGroup);
 
 /** @internal */
 export type DeleteAppEntitlementMonitorBindingRequest$Outbound = {
@@ -112,21 +69,6 @@ export const DeleteAppEntitlementMonitorBindingRequest$outboundSchema:
     monitorId: z.nullable(z.string()).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteAppEntitlementMonitorBindingRequest$ {
-  /** @deprecated use `DeleteAppEntitlementMonitorBindingRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteAppEntitlementMonitorBindingRequest$inboundSchema;
-  /** @deprecated use `DeleteAppEntitlementMonitorBindingRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteAppEntitlementMonitorBindingRequest$outboundSchema;
-  /** @deprecated use `DeleteAppEntitlementMonitorBindingRequest$Outbound` instead. */
-  export type Outbound = DeleteAppEntitlementMonitorBindingRequest$Outbound;
-}
-
 export function deleteAppEntitlementMonitorBindingRequestToJSON(
   deleteAppEntitlementMonitorBindingRequest:
     DeleteAppEntitlementMonitorBindingRequest,
@@ -135,21 +77,5 @@ export function deleteAppEntitlementMonitorBindingRequestToJSON(
     DeleteAppEntitlementMonitorBindingRequest$outboundSchema.parse(
       deleteAppEntitlementMonitorBindingRequest,
     ),
-  );
-}
-
-export function deleteAppEntitlementMonitorBindingRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeleteAppEntitlementMonitorBindingRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteAppEntitlementMonitorBindingRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeleteAppEntitlementMonitorBindingRequest' from JSON`,
   );
 }

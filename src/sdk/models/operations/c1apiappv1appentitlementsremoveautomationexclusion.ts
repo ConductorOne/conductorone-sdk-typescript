@@ -39,25 +39,6 @@ export type C1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    app_entitlement_id: z.nullable(z.string()),
-    RemoveAutomationExclusionRequest: shared
-      .RemoveAutomationExclusionRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "app_entitlement_id": "appEntitlementId",
-      "RemoveAutomationExclusionRequest": "removeAutomationExclusionRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest$Outbound =
   {
     app_id: string | null;
@@ -86,22 +67,6 @@ export const C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest$outboundS
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest$Outbound;
-}
-
 export function c1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequestToJSON(
   c1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest:
     C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest,
@@ -109,21 +74,6 @@ export function c1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequestToJSON(
   return JSON.stringify(
     C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest$outboundSchema
       .parse(c1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest),
-  );
-}
-
-export function c1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest' from JSON`,
   );
 }
 
@@ -147,66 +97,6 @@ export const C1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse$inboundS
       "RemoveAutomationExclusionResponse": "removeAutomationExclusionResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    RemoveAutomationExclusionResponse?:
-      | shared.RemoveAutomationExclusionResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    removeAutomationExclusionResponse: shared
-      .RemoveAutomationExclusionResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      removeAutomationExclusionResponse: "RemoveAutomationExclusionResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse$Outbound;
-}
-
-export function c1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponseToJSON(
-  c1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse:
-    C1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse$outboundSchema
-      .parse(c1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse),
-  );
-}
 
 export function c1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponseFromJSON(
   jsonString: string,

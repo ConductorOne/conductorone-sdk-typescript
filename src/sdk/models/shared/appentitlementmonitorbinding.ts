@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -61,35 +58,7 @@ export const AppEntitlementMonitorBindingEntitlementGroup$inboundSchema:
     AppEntitlementMonitorBindingEntitlementGroup,
     z.ZodTypeDef,
     unknown
-  > = z
-    .union([
-      z.nativeEnum(AppEntitlementMonitorBindingEntitlementGroup),
-      z.string().transform(catchUnrecognizedEnum),
-    ]);
-
-/** @internal */
-export const AppEntitlementMonitorBindingEntitlementGroup$outboundSchema:
-  z.ZodType<
-    AppEntitlementMonitorBindingEntitlementGroup,
-    z.ZodTypeDef,
-    AppEntitlementMonitorBindingEntitlementGroup
-  > = z.union([
-    z.nativeEnum(AppEntitlementMonitorBindingEntitlementGroup),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementMonitorBindingEntitlementGroup$ {
-  /** @deprecated use `AppEntitlementMonitorBindingEntitlementGroup$inboundSchema` instead. */
-  export const inboundSchema =
-    AppEntitlementMonitorBindingEntitlementGroup$inboundSchema;
-  /** @deprecated use `AppEntitlementMonitorBindingEntitlementGroup$outboundSchema` instead. */
-  export const outboundSchema =
-    AppEntitlementMonitorBindingEntitlementGroup$outboundSchema;
-}
+  > = openEnums.inboundSchema(AppEntitlementMonitorBindingEntitlementGroup);
 
 /** @internal */
 export const AppEntitlementMonitorBinding$inboundSchema: z.ZodType<
@@ -113,57 +82,6 @@ export const AppEntitlementMonitorBinding$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
-/** @internal */
-export type AppEntitlementMonitorBinding$Outbound = {
-  appEntitlementId?: string | null | undefined;
-  appId?: string | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  entitlementGroup?: string | null | undefined;
-  monitorId?: string | null | undefined;
-  updatedAt?: string | null | undefined;
-};
-
-/** @internal */
-export const AppEntitlementMonitorBinding$outboundSchema: z.ZodType<
-  AppEntitlementMonitorBinding$Outbound,
-  z.ZodTypeDef,
-  AppEntitlementMonitorBinding
-> = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  entitlementGroup: z.nullable(
-    AppEntitlementMonitorBindingEntitlementGroup$outboundSchema,
-  ).optional(),
-  monitorId: z.nullable(z.string()).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementMonitorBinding$ {
-  /** @deprecated use `AppEntitlementMonitorBinding$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementMonitorBinding$inboundSchema;
-  /** @deprecated use `AppEntitlementMonitorBinding$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlementMonitorBinding$outboundSchema;
-  /** @deprecated use `AppEntitlementMonitorBinding$Outbound` instead. */
-  export type Outbound = AppEntitlementMonitorBinding$Outbound;
-}
-
-export function appEntitlementMonitorBindingToJSON(
-  appEntitlementMonitorBinding: AppEntitlementMonitorBinding,
-): string {
-  return JSON.stringify(
-    AppEntitlementMonitorBinding$outboundSchema.parse(
-      appEntitlementMonitorBinding,
-    ),
-  );
-}
 
 export function appEntitlementMonitorBindingFromJSON(
   jsonString: string,

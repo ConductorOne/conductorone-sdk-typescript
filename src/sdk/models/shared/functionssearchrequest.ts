@@ -3,14 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const FunctionTypes = {
   FunctionTypeUnspecified: "FUNCTION_TYPE_UNSPECIFIED",
@@ -41,48 +35,11 @@ export type FunctionsSearchRequest = {
 };
 
 /** @internal */
-export const FunctionTypes$inboundSchema: z.ZodType<
-  FunctionTypes,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(FunctionTypes),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
 export const FunctionTypes$outboundSchema: z.ZodType<
-  FunctionTypes,
+  string,
   z.ZodTypeDef,
   FunctionTypes
-> = z.union([
-  z.nativeEnum(FunctionTypes),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionTypes$ {
-  /** @deprecated use `FunctionTypes$inboundSchema` instead. */
-  export const inboundSchema = FunctionTypes$inboundSchema;
-  /** @deprecated use `FunctionTypes$outboundSchema` instead. */
-  export const outboundSchema = FunctionTypes$outboundSchema;
-}
-
-/** @internal */
-export const FunctionsSearchRequest$inboundSchema: z.ZodType<
-  FunctionsSearchRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  functionTypes: z.nullable(z.array(FunctionTypes$inboundSchema)).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
-});
+> = openEnums.outboundSchema(FunctionTypes);
 
 /** @internal */
 export type FunctionsSearchRequest$Outbound = {
@@ -104,33 +61,10 @@ export const FunctionsSearchRequest$outboundSchema: z.ZodType<
   query: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionsSearchRequest$ {
-  /** @deprecated use `FunctionsSearchRequest$inboundSchema` instead. */
-  export const inboundSchema = FunctionsSearchRequest$inboundSchema;
-  /** @deprecated use `FunctionsSearchRequest$outboundSchema` instead. */
-  export const outboundSchema = FunctionsSearchRequest$outboundSchema;
-  /** @deprecated use `FunctionsSearchRequest$Outbound` instead. */
-  export type Outbound = FunctionsSearchRequest$Outbound;
-}
-
 export function functionsSearchRequestToJSON(
   functionsSearchRequest: FunctionsSearchRequest,
 ): string {
   return JSON.stringify(
     FunctionsSearchRequest$outboundSchema.parse(functionsSearchRequest),
-  );
-}
-
-export function functionsSearchRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<FunctionsSearchRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FunctionsSearchRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionsSearchRequest' from JSON`,
   );
 }

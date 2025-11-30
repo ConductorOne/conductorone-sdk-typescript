@@ -54,7 +54,6 @@ export const DurationRules$inboundSchema: z.ZodType<
   notIn: z.nullable(z.array(z.string())).optional(),
   required: z.nullable(z.boolean()).optional(),
 });
-
 /** @internal */
 export type DurationRules$Outbound = {
   const?: string | null | undefined;
@@ -83,23 +82,9 @@ export const DurationRules$outboundSchema: z.ZodType<
   required: z.nullable(z.boolean()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DurationRules$ {
-  /** @deprecated use `DurationRules$inboundSchema` instead. */
-  export const inboundSchema = DurationRules$inboundSchema;
-  /** @deprecated use `DurationRules$outboundSchema` instead. */
-  export const outboundSchema = DurationRules$outboundSchema;
-  /** @deprecated use `DurationRules$Outbound` instead. */
-  export type Outbound = DurationRules$Outbound;
-}
-
 export function durationRulesToJSON(durationRules: DurationRules): string {
   return JSON.stringify(DurationRules$outboundSchema.parse(durationRules));
 }
-
 export function durationRulesFromJSON(
   jsonString: string,
 ): SafeParseResult<DurationRules, SDKValidationError> {

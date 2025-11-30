@@ -49,64 +49,6 @@ export const C1ApiPolicyV1PolicyValidateValidateCELResponse$inboundSchema:
     });
   });
 
-/** @internal */
-export type C1ApiPolicyV1PolicyValidateValidateCELResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  EditorValidateResponse?: shared.EditorValidateResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiPolicyV1PolicyValidateValidateCELResponse$outboundSchema:
-  z.ZodType<
-    C1ApiPolicyV1PolicyValidateValidateCELResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiPolicyV1PolicyValidateValidateCELResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    editorValidateResponse: shared.EditorValidateResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      editorValidateResponse: "EditorValidateResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiPolicyV1PolicyValidateValidateCELResponse$ {
-  /** @deprecated use `C1ApiPolicyV1PolicyValidateValidateCELResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiPolicyV1PolicyValidateValidateCELResponse$inboundSchema;
-  /** @deprecated use `C1ApiPolicyV1PolicyValidateValidateCELResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiPolicyV1PolicyValidateValidateCELResponse$outboundSchema;
-  /** @deprecated use `C1ApiPolicyV1PolicyValidateValidateCELResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiPolicyV1PolicyValidateValidateCELResponse$Outbound;
-}
-
-export function c1ApiPolicyV1PolicyValidateValidateCELResponseToJSON(
-  c1ApiPolicyV1PolicyValidateValidateCELResponse:
-    C1ApiPolicyV1PolicyValidateValidateCELResponse,
-): string {
-  return JSON.stringify(
-    C1ApiPolicyV1PolicyValidateValidateCELResponse$outboundSchema.parse(
-      c1ApiPolicyV1PolicyValidateValidateCELResponse,
-    ),
-  );
-}
-
 export function c1ApiPolicyV1PolicyValidateValidateCELResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

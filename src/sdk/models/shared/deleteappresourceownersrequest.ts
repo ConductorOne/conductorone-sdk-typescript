@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The request message for deleting app resource owners.
  */
 export type DeleteAppResourceOwnersRequest = {};
-
-/** @internal */
-export const DeleteAppResourceOwnersRequest$inboundSchema: z.ZodType<
-  DeleteAppResourceOwnersRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type DeleteAppResourceOwnersRequest$Outbound = {};
@@ -29,19 +19,6 @@ export const DeleteAppResourceOwnersRequest$outboundSchema: z.ZodType<
   DeleteAppResourceOwnersRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteAppResourceOwnersRequest$ {
-  /** @deprecated use `DeleteAppResourceOwnersRequest$inboundSchema` instead. */
-  export const inboundSchema = DeleteAppResourceOwnersRequest$inboundSchema;
-  /** @deprecated use `DeleteAppResourceOwnersRequest$outboundSchema` instead. */
-  export const outboundSchema = DeleteAppResourceOwnersRequest$outboundSchema;
-  /** @deprecated use `DeleteAppResourceOwnersRequest$Outbound` instead. */
-  export type Outbound = DeleteAppResourceOwnersRequest$Outbound;
-}
-
 export function deleteAppResourceOwnersRequestToJSON(
   deleteAppResourceOwnersRequest: DeleteAppResourceOwnersRequest,
 ): string {
@@ -49,15 +26,5 @@ export function deleteAppResourceOwnersRequestToJSON(
     DeleteAppResourceOwnersRequest$outboundSchema.parse(
       deleteAppResourceOwnersRequest,
     ),
-  );
-}
-
-export function deleteAppResourceOwnersRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteAppResourceOwnersRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteAppResourceOwnersRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteAppResourceOwnersRequest' from JSON`,
   );
 }

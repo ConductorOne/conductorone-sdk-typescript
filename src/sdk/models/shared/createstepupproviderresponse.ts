@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   StepUpProvider,
   StepUpProvider$inboundSchema,
-  StepUpProvider$Outbound,
-  StepUpProvider$outboundSchema,
 } from "./stepupprovider.js";
 
 /**
@@ -28,43 +26,6 @@ export const CreateStepUpProviderResponse$inboundSchema: z.ZodType<
 > = z.object({
   stepUpProvider: z.nullable(StepUpProvider$inboundSchema).optional(),
 });
-
-/** @internal */
-export type CreateStepUpProviderResponse$Outbound = {
-  stepUpProvider?: StepUpProvider$Outbound | null | undefined;
-};
-
-/** @internal */
-export const CreateStepUpProviderResponse$outboundSchema: z.ZodType<
-  CreateStepUpProviderResponse$Outbound,
-  z.ZodTypeDef,
-  CreateStepUpProviderResponse
-> = z.object({
-  stepUpProvider: z.nullable(StepUpProvider$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateStepUpProviderResponse$ {
-  /** @deprecated use `CreateStepUpProviderResponse$inboundSchema` instead. */
-  export const inboundSchema = CreateStepUpProviderResponse$inboundSchema;
-  /** @deprecated use `CreateStepUpProviderResponse$outboundSchema` instead. */
-  export const outboundSchema = CreateStepUpProviderResponse$outboundSchema;
-  /** @deprecated use `CreateStepUpProviderResponse$Outbound` instead. */
-  export type Outbound = CreateStepUpProviderResponse$Outbound;
-}
-
-export function createStepUpProviderResponseToJSON(
-  createStepUpProviderResponse: CreateStepUpProviderResponse,
-): string {
-  return JSON.stringify(
-    CreateStepUpProviderResponse$outboundSchema.parse(
-      createStepUpProviderResponse,
-    ),
-  );
-}
 
 export function createStepUpProviderResponseFromJSON(
   jsonString: string,

@@ -45,6 +45,10 @@ export type AppGroupApproval = {
    * Configuration to enable fallback for group fallback.
    */
   isGroupFallbackEnabled?: boolean | null | undefined;
+  /**
+   * Configuration to require distinct approvers across approval steps of a rule.
+   */
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -61,8 +65,8 @@ export const AppGroupApproval$inboundSchema: z.ZodType<
     .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
   isGroupFallbackEnabled: z.nullable(z.boolean()).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
 /** @internal */
 export type AppGroupApproval$Outbound = {
   allowSelfApproval?: boolean | null | undefined;
@@ -72,6 +76,7 @@ export type AppGroupApproval$Outbound = {
   fallbackGroupIds?: Array<AppEntitlementReference$Outbound> | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
   isGroupFallbackEnabled?: boolean | null | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -88,20 +93,8 @@ export const AppGroupApproval$outboundSchema: z.ZodType<
     .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
   isGroupFallbackEnabled: z.nullable(z.boolean()).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppGroupApproval$ {
-  /** @deprecated use `AppGroupApproval$inboundSchema` instead. */
-  export const inboundSchema = AppGroupApproval$inboundSchema;
-  /** @deprecated use `AppGroupApproval$outboundSchema` instead. */
-  export const outboundSchema = AppGroupApproval$outboundSchema;
-  /** @deprecated use `AppGroupApproval$Outbound` instead. */
-  export type Outbound = AppGroupApproval$Outbound;
-}
 
 export function appGroupApprovalToJSON(
   appGroupApproval: AppGroupApproval,
@@ -110,7 +103,6 @@ export function appGroupApprovalToJSON(
     AppGroupApproval$outboundSchema.parse(appGroupApproval),
   );
 }
-
 export function appGroupApprovalFromJSON(
   jsonString: string,
 ): SafeParseResult<AppGroupApproval, SDKValidationError> {

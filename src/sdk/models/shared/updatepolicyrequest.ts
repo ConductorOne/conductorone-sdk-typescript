@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PolicyInput,
-  PolicyInput$inboundSchema,
   PolicyInput$Outbound,
   PolicyInput$outboundSchema,
 } from "./policy.js";
@@ -20,16 +16,6 @@ export type UpdatePolicyRequest = {
   policy?: PolicyInput | null | undefined;
   updateMask?: string | null | undefined;
 };
-
-/** @internal */
-export const UpdatePolicyRequest$inboundSchema: z.ZodType<
-  UpdatePolicyRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  policy: z.nullable(PolicyInput$inboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type UpdatePolicyRequest$Outbound = {
@@ -47,33 +33,10 @@ export const UpdatePolicyRequest$outboundSchema: z.ZodType<
   updateMask: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePolicyRequest$ {
-  /** @deprecated use `UpdatePolicyRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdatePolicyRequest$inboundSchema;
-  /** @deprecated use `UpdatePolicyRequest$outboundSchema` instead. */
-  export const outboundSchema = UpdatePolicyRequest$outboundSchema;
-  /** @deprecated use `UpdatePolicyRequest$Outbound` instead. */
-  export type Outbound = UpdatePolicyRequest$Outbound;
-}
-
 export function updatePolicyRequestToJSON(
   updatePolicyRequest: UpdatePolicyRequest,
 ): string {
   return JSON.stringify(
     UpdatePolicyRequest$outboundSchema.parse(updatePolicyRequest),
-  );
-}
-
-export function updatePolicyRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePolicyRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePolicyRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePolicyRequest' from JSON`,
   );
 }

@@ -33,15 +33,6 @@ export type C1ApiWebhooksV1WebhooksServiceGetResponse = {
 };
 
 /** @internal */
-export const C1ApiWebhooksV1WebhooksServiceGetRequest$inboundSchema: z.ZodType<
-  C1ApiWebhooksV1WebhooksServiceGetRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.nullable(z.string()),
-});
-
-/** @internal */
 export type C1ApiWebhooksV1WebhooksServiceGetRequest$Outbound = {
   id: string | null;
 };
@@ -55,21 +46,6 @@ export const C1ApiWebhooksV1WebhooksServiceGetRequest$outboundSchema: z.ZodType<
   id: z.nullable(z.string()),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiWebhooksV1WebhooksServiceGetRequest$ {
-  /** @deprecated use `C1ApiWebhooksV1WebhooksServiceGetRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiWebhooksV1WebhooksServiceGetRequest$inboundSchema;
-  /** @deprecated use `C1ApiWebhooksV1WebhooksServiceGetRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiWebhooksV1WebhooksServiceGetRequest$outboundSchema;
-  /** @deprecated use `C1ApiWebhooksV1WebhooksServiceGetRequest$Outbound` instead. */
-  export type Outbound = C1ApiWebhooksV1WebhooksServiceGetRequest$Outbound;
-}
-
 export function c1ApiWebhooksV1WebhooksServiceGetRequestToJSON(
   c1ApiWebhooksV1WebhooksServiceGetRequest:
     C1ApiWebhooksV1WebhooksServiceGetRequest,
@@ -78,22 +54,6 @@ export function c1ApiWebhooksV1WebhooksServiceGetRequestToJSON(
     C1ApiWebhooksV1WebhooksServiceGetRequest$outboundSchema.parse(
       c1ApiWebhooksV1WebhooksServiceGetRequest,
     ),
-  );
-}
-
-export function c1ApiWebhooksV1WebhooksServiceGetRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiWebhooksV1WebhooksServiceGetRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiWebhooksV1WebhooksServiceGetRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiWebhooksV1WebhooksServiceGetRequest' from JSON`,
   );
 }
 
@@ -116,65 +76,6 @@ export const C1ApiWebhooksV1WebhooksServiceGetResponse$inboundSchema: z.ZodType<
     "WebhooksServiceGetResponse": "webhooksServiceGetResponse",
   });
 });
-
-/** @internal */
-export type C1ApiWebhooksV1WebhooksServiceGetResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  WebhooksServiceGetResponse?:
-    | shared.WebhooksServiceGetResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiWebhooksV1WebhooksServiceGetResponse$outboundSchema:
-  z.ZodType<
-    C1ApiWebhooksV1WebhooksServiceGetResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiWebhooksV1WebhooksServiceGetResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    webhooksServiceGetResponse: shared.WebhooksServiceGetResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      webhooksServiceGetResponse: "WebhooksServiceGetResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiWebhooksV1WebhooksServiceGetResponse$ {
-  /** @deprecated use `C1ApiWebhooksV1WebhooksServiceGetResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiWebhooksV1WebhooksServiceGetResponse$inboundSchema;
-  /** @deprecated use `C1ApiWebhooksV1WebhooksServiceGetResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiWebhooksV1WebhooksServiceGetResponse$outboundSchema;
-  /** @deprecated use `C1ApiWebhooksV1WebhooksServiceGetResponse$Outbound` instead. */
-  export type Outbound = C1ApiWebhooksV1WebhooksServiceGetResponse$Outbound;
-}
-
-export function c1ApiWebhooksV1WebhooksServiceGetResponseToJSON(
-  c1ApiWebhooksV1WebhooksServiceGetResponse:
-    C1ApiWebhooksV1WebhooksServiceGetResponse,
-): string {
-  return JSON.stringify(
-    C1ApiWebhooksV1WebhooksServiceGetResponse$outboundSchema.parse(
-      c1ApiWebhooksV1WebhooksServiceGetResponse,
-    ),
-  );
-}
 
 export function c1ApiWebhooksV1WebhooksServiceGetResponseFromJSON(
   jsonString: string,

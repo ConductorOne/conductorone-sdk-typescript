@@ -26,41 +26,6 @@ export const TestStepUpProviderResponse$inboundSchema: z.ZodType<
   redirectUrl: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TestStepUpProviderResponse$Outbound = {
-  redirectUrl?: string | null | undefined;
-};
-
-/** @internal */
-export const TestStepUpProviderResponse$outboundSchema: z.ZodType<
-  TestStepUpProviderResponse$Outbound,
-  z.ZodTypeDef,
-  TestStepUpProviderResponse
-> = z.object({
-  redirectUrl: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TestStepUpProviderResponse$ {
-  /** @deprecated use `TestStepUpProviderResponse$inboundSchema` instead. */
-  export const inboundSchema = TestStepUpProviderResponse$inboundSchema;
-  /** @deprecated use `TestStepUpProviderResponse$outboundSchema` instead. */
-  export const outboundSchema = TestStepUpProviderResponse$outboundSchema;
-  /** @deprecated use `TestStepUpProviderResponse$Outbound` instead. */
-  export type Outbound = TestStepUpProviderResponse$Outbound;
-}
-
-export function testStepUpProviderResponseToJSON(
-  testStepUpProviderResponse: TestStepUpProviderResponse,
-): string {
-  return JSON.stringify(
-    TestStepUpProviderResponse$outboundSchema.parse(testStepUpProviderResponse),
-  );
-}
-
 export function testStepUpProviderResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<TestStepUpProviderResponse, SDKValidationError> {

@@ -39,25 +39,6 @@ export type C1ApiAppV1AppEntitlementOwnersDeleteResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppEntitlementOwnersDeleteRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementOwnersDeleteRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    entitlement_id: z.nullable(z.string()),
-    DeleteAppEntitlementOwnersRequest: shared
-      .DeleteAppEntitlementOwnersRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "entitlement_id": "entitlementId",
-      "DeleteAppEntitlementOwnersRequest": "deleteAppEntitlementOwnersRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppEntitlementOwnersDeleteRequest$Outbound = {
   app_id: string | null;
   entitlement_id: string | null;
@@ -85,21 +66,6 @@ export const C1ApiAppV1AppEntitlementOwnersDeleteRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementOwnersDeleteRequest$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementOwnersDeleteRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementOwnersDeleteRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementOwnersDeleteRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementOwnersDeleteRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementOwnersDeleteRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppEntitlementOwnersDeleteRequest$Outbound;
-}
-
 export function c1ApiAppV1AppEntitlementOwnersDeleteRequestToJSON(
   c1ApiAppV1AppEntitlementOwnersDeleteRequest:
     C1ApiAppV1AppEntitlementOwnersDeleteRequest,
@@ -108,22 +74,6 @@ export function c1ApiAppV1AppEntitlementOwnersDeleteRequestToJSON(
     C1ApiAppV1AppEntitlementOwnersDeleteRequest$outboundSchema.parse(
       c1ApiAppV1AppEntitlementOwnersDeleteRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppEntitlementOwnersDeleteRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppEntitlementOwnersDeleteRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppEntitlementOwnersDeleteRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiAppV1AppEntitlementOwnersDeleteRequest' from JSON`,
   );
 }
 
@@ -148,65 +98,6 @@ export const C1ApiAppV1AppEntitlementOwnersDeleteResponse$inboundSchema:
         "deleteAppEntitlementOwnersResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppEntitlementOwnersDeleteResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  DeleteAppEntitlementOwnersResponse?:
-    | shared.DeleteAppEntitlementOwnersResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppEntitlementOwnersDeleteResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementOwnersDeleteResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppEntitlementOwnersDeleteResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    deleteAppEntitlementOwnersResponse: shared
-      .DeleteAppEntitlementOwnersResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      deleteAppEntitlementOwnersResponse: "DeleteAppEntitlementOwnersResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementOwnersDeleteResponse$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementOwnersDeleteResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementOwnersDeleteResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementOwnersDeleteResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementOwnersDeleteResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementOwnersDeleteResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppEntitlementOwnersDeleteResponse$Outbound;
-}
-
-export function c1ApiAppV1AppEntitlementOwnersDeleteResponseToJSON(
-  c1ApiAppV1AppEntitlementOwnersDeleteResponse:
-    C1ApiAppV1AppEntitlementOwnersDeleteResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppEntitlementOwnersDeleteResponse$outboundSchema.parse(
-      c1ApiAppV1AppEntitlementOwnersDeleteResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppEntitlementOwnersDeleteResponseFromJSON(
   jsonString: string,

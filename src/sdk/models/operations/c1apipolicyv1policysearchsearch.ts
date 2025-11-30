@@ -48,62 +48,6 @@ export const C1ApiPolicyV1PolicySearchSearchResponse$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type C1ApiPolicyV1PolicySearchSearchResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  SearchPoliciesResponse?: shared.SearchPoliciesResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiPolicyV1PolicySearchSearchResponse$outboundSchema: z.ZodType<
-  C1ApiPolicyV1PolicySearchSearchResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiPolicyV1PolicySearchSearchResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  searchPoliciesResponse: shared.SearchPoliciesResponse$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    searchPoliciesResponse: "SearchPoliciesResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiPolicyV1PolicySearchSearchResponse$ {
-  /** @deprecated use `C1ApiPolicyV1PolicySearchSearchResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiPolicyV1PolicySearchSearchResponse$inboundSchema;
-  /** @deprecated use `C1ApiPolicyV1PolicySearchSearchResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiPolicyV1PolicySearchSearchResponse$outboundSchema;
-  /** @deprecated use `C1ApiPolicyV1PolicySearchSearchResponse$Outbound` instead. */
-  export type Outbound = C1ApiPolicyV1PolicySearchSearchResponse$Outbound;
-}
-
-export function c1ApiPolicyV1PolicySearchSearchResponseToJSON(
-  c1ApiPolicyV1PolicySearchSearchResponse:
-    C1ApiPolicyV1PolicySearchSearchResponse,
-): string {
-  return JSON.stringify(
-    C1ApiPolicyV1PolicySearchSearchResponse$outboundSchema.parse(
-      c1ApiPolicyV1PolicySearchSearchResponse,
-    ),
-  );
-}
-
 export function c1ApiPolicyV1PolicySearchSearchResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

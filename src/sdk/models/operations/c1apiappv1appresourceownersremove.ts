@@ -40,26 +40,6 @@ export type C1ApiAppV1AppResourceOwnersRemoveResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppResourceOwnersRemoveRequest$inboundSchema: z.ZodType<
-  C1ApiAppV1AppResourceOwnersRemoveRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  app_id: z.nullable(z.string()),
-  resource_type_id: z.nullable(z.string()),
-  resource_id: z.nullable(z.string()),
-  RemoveAppResourceOwnerRequest: shared
-    .RemoveAppResourceOwnerRequest$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "app_id": "appId",
-    "resource_type_id": "resourceTypeId",
-    "resource_id": "resourceId",
-    "RemoveAppResourceOwnerRequest": "removeAppResourceOwnerRequest",
-  });
-});
-
-/** @internal */
 export type C1ApiAppV1AppResourceOwnersRemoveRequest$Outbound = {
   app_id: string | null;
   resource_type_id: string | null;
@@ -89,21 +69,6 @@ export const C1ApiAppV1AppResourceOwnersRemoveRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppResourceOwnersRemoveRequest$ {
-  /** @deprecated use `C1ApiAppV1AppResourceOwnersRemoveRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppResourceOwnersRemoveRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceOwnersRemoveRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppResourceOwnersRemoveRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceOwnersRemoveRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppResourceOwnersRemoveRequest$Outbound;
-}
-
 export function c1ApiAppV1AppResourceOwnersRemoveRequestToJSON(
   c1ApiAppV1AppResourceOwnersRemoveRequest:
     C1ApiAppV1AppResourceOwnersRemoveRequest,
@@ -112,22 +77,6 @@ export function c1ApiAppV1AppResourceOwnersRemoveRequestToJSON(
     C1ApiAppV1AppResourceOwnersRemoveRequest$outboundSchema.parse(
       c1ApiAppV1AppResourceOwnersRemoveRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppResourceOwnersRemoveRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppResourceOwnersRemoveRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppResourceOwnersRemoveRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiAppV1AppResourceOwnersRemoveRequest' from JSON`,
   );
 }
 
@@ -150,65 +99,6 @@ export const C1ApiAppV1AppResourceOwnersRemoveResponse$inboundSchema: z.ZodType<
     "RemoveAppResourceOwnerResponse": "removeAppResourceOwnerResponse",
   });
 });
-
-/** @internal */
-export type C1ApiAppV1AppResourceOwnersRemoveResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  RemoveAppResourceOwnerResponse?:
-    | shared.RemoveAppResourceOwnerResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppResourceOwnersRemoveResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppResourceOwnersRemoveResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppResourceOwnersRemoveResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    removeAppResourceOwnerResponse: shared
-      .RemoveAppResourceOwnerResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      removeAppResourceOwnerResponse: "RemoveAppResourceOwnerResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppResourceOwnersRemoveResponse$ {
-  /** @deprecated use `C1ApiAppV1AppResourceOwnersRemoveResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppResourceOwnersRemoveResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceOwnersRemoveResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppResourceOwnersRemoveResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceOwnersRemoveResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppResourceOwnersRemoveResponse$Outbound;
-}
-
-export function c1ApiAppV1AppResourceOwnersRemoveResponseToJSON(
-  c1ApiAppV1AppResourceOwnersRemoveResponse:
-    C1ApiAppV1AppResourceOwnersRemoveResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppResourceOwnersRemoveResponse$outboundSchema.parse(
-      c1ApiAppV1AppResourceOwnersRemoveResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppResourceOwnersRemoveResponseFromJSON(
   jsonString: string,

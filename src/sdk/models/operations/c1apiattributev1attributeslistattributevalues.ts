@@ -35,24 +35,6 @@ export type C1ApiAttributeV1AttributesListAttributeValuesResponse = {
 };
 
 /** @internal */
-export const C1ApiAttributeV1AttributesListAttributeValuesRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAttributeV1AttributesListAttributeValuesRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    attribute_type_id: z.nullable(z.string()),
-    page_size: z.nullable(z.number().int()).optional(),
-    page_token: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "attribute_type_id": "attributeTypeId",
-      "page_size": "pageSize",
-      "page_token": "pageToken",
-    });
-  });
-
-/** @internal */
 export type C1ApiAttributeV1AttributesListAttributeValuesRequest$Outbound = {
   attribute_type_id: string | null;
   page_size?: number | null | undefined;
@@ -77,22 +59,6 @@ export const C1ApiAttributeV1AttributesListAttributeValuesRequest$outboundSchema
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAttributeV1AttributesListAttributeValuesRequest$ {
-  /** @deprecated use `C1ApiAttributeV1AttributesListAttributeValuesRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAttributeV1AttributesListAttributeValuesRequest$inboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesListAttributeValuesRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAttributeV1AttributesListAttributeValuesRequest$outboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesListAttributeValuesRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAttributeV1AttributesListAttributeValuesRequest$Outbound;
-}
-
 export function c1ApiAttributeV1AttributesListAttributeValuesRequestToJSON(
   c1ApiAttributeV1AttributesListAttributeValuesRequest:
     C1ApiAttributeV1AttributesListAttributeValuesRequest,
@@ -101,22 +67,6 @@ export function c1ApiAttributeV1AttributesListAttributeValuesRequestToJSON(
     C1ApiAttributeV1AttributesListAttributeValuesRequest$outboundSchema.parse(
       c1ApiAttributeV1AttributesListAttributeValuesRequest,
     ),
-  );
-}
-
-export function c1ApiAttributeV1AttributesListAttributeValuesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAttributeV1AttributesListAttributeValuesRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAttributeV1AttributesListAttributeValuesRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiAttributeV1AttributesListAttributeValuesRequest' from JSON`,
   );
 }
 
@@ -140,66 +90,6 @@ export const C1ApiAttributeV1AttributesListAttributeValuesResponse$inboundSchema
       "ListAttributeValuesResponse": "listAttributeValuesResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAttributeV1AttributesListAttributeValuesResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  ListAttributeValuesResponse?:
-    | shared.ListAttributeValuesResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAttributeV1AttributesListAttributeValuesResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAttributeV1AttributesListAttributeValuesResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAttributeV1AttributesListAttributeValuesResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    listAttributeValuesResponse: shared
-      .ListAttributeValuesResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      listAttributeValuesResponse: "ListAttributeValuesResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAttributeV1AttributesListAttributeValuesResponse$ {
-  /** @deprecated use `C1ApiAttributeV1AttributesListAttributeValuesResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAttributeV1AttributesListAttributeValuesResponse$inboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesListAttributeValuesResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAttributeV1AttributesListAttributeValuesResponse$outboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesListAttributeValuesResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAttributeV1AttributesListAttributeValuesResponse$Outbound;
-}
-
-export function c1ApiAttributeV1AttributesListAttributeValuesResponseToJSON(
-  c1ApiAttributeV1AttributesListAttributeValuesResponse:
-    C1ApiAttributeV1AttributesListAttributeValuesResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAttributeV1AttributesListAttributeValuesResponse$outboundSchema.parse(
-      c1ApiAttributeV1AttributesListAttributeValuesResponse,
-    ),
-  );
-}
 
 export function c1ApiAttributeV1AttributesListAttributeValuesResponseFromJSON(
   jsonString: string,

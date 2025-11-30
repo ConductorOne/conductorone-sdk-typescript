@@ -4,19 +4,11 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  User,
-  User$inboundSchema,
-  User$Outbound,
-  User$outboundSchema,
-} from "./user.js";
+import { User, User$inboundSchema } from "./user.js";
 
 /**
  * The identityMatching field.
@@ -192,32 +184,13 @@ export const IdentityMatching$inboundSchema: z.ZodType<
   IdentityMatching,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(IdentityMatching),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(IdentityMatching);
 /** @internal */
 export const IdentityMatching$outboundSchema: z.ZodType<
-  IdentityMatching,
+  string,
   z.ZodTypeDef,
   IdentityMatching
-> = z.union([
-  z.nativeEnum(IdentityMatching),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace IdentityMatching$ {
-  /** @deprecated use `IdentityMatching$inboundSchema` instead. */
-  export const inboundSchema = IdentityMatching$inboundSchema;
-  /** @deprecated use `IdentityMatching$outboundSchema` instead. */
-  export const outboundSchema = IdentityMatching$outboundSchema;
-}
+> = openEnums.outboundSchema(IdentityMatching);
 
 /** @internal */
 export const App$inboundSchema: z.ZodType<App, z.ZodTypeDef, unknown> = z
@@ -256,82 +229,6 @@ export const App$inboundSchema: z.ZodType<App, z.ZodTypeDef, unknown> = z
       .optional(),
   });
 
-/** @internal */
-export type App$Outbound = {
-  appAccountId?: string | null | undefined;
-  appAccountName?: string | null | undefined;
-  appOwners?: Array<User$Outbound> | null | undefined;
-  certifyPolicyId?: string | null | undefined;
-  connectorVersion?: number | null | undefined;
-  createdAt?: string | null | undefined;
-  defaultRequestCatalogId?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  fieldMask?: string | null | undefined;
-  grantPolicyId?: string | null | undefined;
-  iconUrl?: string | null | undefined;
-  id?: string | null | undefined;
-  identityMatching?: string | null | undefined;
-  instructions?: string | null | undefined;
-  isDirectory?: boolean | null | undefined;
-  isManuallyManaged?: boolean | null | undefined;
-  logoUri?: string | null | undefined;
-  monthlyCostUsd?: number | null | undefined;
-  parentAppId?: string | null | undefined;
-  revokePolicyId?: string | null | undefined;
-  strictAccessEntitlementProvisioning?: boolean | null | undefined;
-  updatedAt?: string | null | undefined;
-  userCount?: string | null | undefined;
-};
-
-/** @internal */
-export const App$outboundSchema: z.ZodType<App$Outbound, z.ZodTypeDef, App> = z
-  .object({
-    appAccountId: z.nullable(z.string()).optional(),
-    appAccountName: z.nullable(z.string()).optional(),
-    appOwners: z.nullable(z.array(User$outboundSchema)).optional(),
-    certifyPolicyId: z.nullable(z.string()).optional(),
-    connectorVersion: z.nullable(z.number().int()).optional(),
-    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-    defaultRequestCatalogId: z.nullable(z.string()).optional(),
-    deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-    description: z.nullable(z.string()).optional(),
-    displayName: z.nullable(z.string()).optional(),
-    fieldMask: z.nullable(z.string()).optional(),
-    grantPolicyId: z.nullable(z.string()).optional(),
-    iconUrl: z.nullable(z.string()).optional(),
-    id: z.nullable(z.string()).optional(),
-    identityMatching: z.nullable(IdentityMatching$outboundSchema).optional(),
-    instructions: z.nullable(z.string()).optional(),
-    isDirectory: z.nullable(z.boolean()).optional(),
-    isManuallyManaged: z.nullable(z.boolean()).optional(),
-    logoUri: z.nullable(z.string()).optional(),
-    monthlyCostUsd: z.nullable(z.number().int()).optional(),
-    parentAppId: z.nullable(z.string()).optional(),
-    revokePolicyId: z.nullable(z.string()).optional(),
-    strictAccessEntitlementProvisioning: z.nullable(z.boolean()).optional(),
-    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-    userCount: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace App$ {
-  /** @deprecated use `App$inboundSchema` instead. */
-  export const inboundSchema = App$inboundSchema;
-  /** @deprecated use `App$outboundSchema` instead. */
-  export const outboundSchema = App$outboundSchema;
-  /** @deprecated use `App$Outbound` instead. */
-  export type Outbound = App$Outbound;
-}
-
-export function appToJSON(app: App): string {
-  return JSON.stringify(App$outboundSchema.parse(app));
-}
-
 export function appFromJSON(
   jsonString: string,
 ): SafeParseResult<App, SDKValidationError> {
@@ -341,37 +238,6 @@ export function appFromJSON(
     `Failed to parse 'App' from JSON`,
   );
 }
-
-/** @internal */
-export const AppInput$inboundSchema: z.ZodType<
-  AppInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  certifyPolicyId: z.nullable(z.string()).optional(),
-  connectorVersion: z.nullable(z.number().int()).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  defaultRequestCatalogId: z.nullable(z.string()).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  fieldMask: z.nullable(z.string()).optional(),
-  grantPolicyId: z.nullable(z.string()).optional(),
-  iconUrl: z.nullable(z.string()).optional(),
-  identityMatching: z.nullable(IdentityMatching$inboundSchema).optional(),
-  instructions: z.nullable(z.string()).optional(),
-  isManuallyManaged: z.nullable(z.boolean()).optional(),
-  monthlyCostUsd: z.nullable(z.number().int()).optional(),
-  revokePolicyId: z.nullable(z.string()).optional(),
-  strictAccessEntitlementProvisioning: z.nullable(z.boolean()).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
 
 /** @internal */
 export type AppInput$Outbound = {
@@ -419,29 +285,6 @@ export const AppInput$outboundSchema: z.ZodType<
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppInput$ {
-  /** @deprecated use `AppInput$inboundSchema` instead. */
-  export const inboundSchema = AppInput$inboundSchema;
-  /** @deprecated use `AppInput$outboundSchema` instead. */
-  export const outboundSchema = AppInput$outboundSchema;
-  /** @deprecated use `AppInput$Outbound` instead. */
-  export type Outbound = AppInput$Outbound;
-}
-
 export function appInputToJSON(appInput: AppInput): string {
   return JSON.stringify(AppInput$outboundSchema.parse(appInput));
-}
-
-export function appInputFromJSON(
-  jsonString: string,
-): SafeParseResult<AppInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AppInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AppInput' from JSON`,
-  );
 }

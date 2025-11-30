@@ -3,23 +3,15 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import {
   AppEntitlementExpandMask,
-  AppEntitlementExpandMask$inboundSchema,
   AppEntitlementExpandMask$Outbound,
   AppEntitlementExpandMask$outboundSchema,
 } from "./appentitlementexpandmask.js";
 import {
   ProvisionPolicyInput,
-  ProvisionPolicyInput$inboundSchema,
   ProvisionPolicyInput$Outbound,
   ProvisionPolicyInput$outboundSchema,
 } from "./provisionpolicyinput.js";
@@ -129,13 +121,6 @@ export type CreateAppEntitlementRequest = {
 };
 
 /** @internal */
-export const CreateAppEntitlementRequestDurationUnset$inboundSchema: z.ZodType<
-  CreateAppEntitlementRequestDurationUnset,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-
-/** @internal */
 export type CreateAppEntitlementRequestDurationUnset$Outbound = {};
 
 /** @internal */
@@ -144,21 +129,6 @@ export const CreateAppEntitlementRequestDurationUnset$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAppEntitlementRequestDurationUnset
 > = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAppEntitlementRequestDurationUnset$ {
-  /** @deprecated use `CreateAppEntitlementRequestDurationUnset$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateAppEntitlementRequestDurationUnset$inboundSchema;
-  /** @deprecated use `CreateAppEntitlementRequestDurationUnset$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAppEntitlementRequestDurationUnset$outboundSchema;
-  /** @deprecated use `CreateAppEntitlementRequestDurationUnset$Outbound` instead. */
-  export type Outbound = CreateAppEntitlementRequestDurationUnset$Outbound;
-}
 
 export function createAppEntitlementRequestDurationUnsetToJSON(
   createAppEntitlementRequestDurationUnset:
@@ -171,86 +141,12 @@ export function createAppEntitlementRequestDurationUnsetToJSON(
   );
 }
 
-export function createAppEntitlementRequestDurationUnsetFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateAppEntitlementRequestDurationUnset,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateAppEntitlementRequestDurationUnset$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateAppEntitlementRequestDurationUnset' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateAppEntitlementRequestPurpose$inboundSchema: z.ZodType<
-  CreateAppEntitlementRequestPurpose,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(CreateAppEntitlementRequestPurpose),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
 /** @internal */
 export const CreateAppEntitlementRequestPurpose$outboundSchema: z.ZodType<
-  CreateAppEntitlementRequestPurpose,
+  string,
   z.ZodTypeDef,
   CreateAppEntitlementRequestPurpose
-> = z.union([
-  z.nativeEnum(CreateAppEntitlementRequestPurpose),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAppEntitlementRequestPurpose$ {
-  /** @deprecated use `CreateAppEntitlementRequestPurpose$inboundSchema` instead. */
-  export const inboundSchema = CreateAppEntitlementRequestPurpose$inboundSchema;
-  /** @deprecated use `CreateAppEntitlementRequestPurpose$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateAppEntitlementRequestPurpose$outboundSchema;
-}
-
-/** @internal */
-export const CreateAppEntitlementRequest$inboundSchema: z.ZodType<
-  CreateAppEntitlementRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  alias: z.nullable(z.string()).optional(),
-  appEntitlementOwnerIds: z.nullable(z.array(z.string())).optional(),
-  appResourceId: z.nullable(z.string()).optional(),
-  appResourceTypeId: z.nullable(z.string()).optional(),
-  certifyPolicyId: z.nullable(z.string()).optional(),
-  complianceFrameworkValueIds: z.nullable(z.array(z.string())).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.string(),
-  durationGrant: z.nullable(z.string()).optional(),
-  durationUnset: z.nullable(
-    z.lazy(() => CreateAppEntitlementRequestDurationUnset$inboundSchema),
-  ).optional(),
-  emergencyGrantEnabled: z.nullable(z.boolean()).optional(),
-  emergencyGrantPolicyId: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(AppEntitlementExpandMask$inboundSchema).optional(),
-  grantPolicyId: z.nullable(z.string()).optional(),
-  matchBatonId: z.nullable(z.string()).optional(),
-  overrideAccessRequestsDefaults: z.nullable(z.boolean()).optional(),
-  provisionPolicy: z.nullable(ProvisionPolicyInput$inboundSchema).optional(),
-  purpose: z.nullable(CreateAppEntitlementRequestPurpose$inboundSchema)
-    .optional(),
-  revokePolicyId: z.nullable(z.string()).optional(),
-  riskLevelValueId: z.nullable(z.string()).optional(),
-  slug: z.nullable(z.string()).optional(),
-});
+> = openEnums.outboundSchema(CreateAppEntitlementRequestPurpose);
 
 /** @internal */
 export type CreateAppEntitlementRequest$Outbound = {
@@ -312,19 +208,6 @@ export const CreateAppEntitlementRequest$outboundSchema: z.ZodType<
   slug: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAppEntitlementRequest$ {
-  /** @deprecated use `CreateAppEntitlementRequest$inboundSchema` instead. */
-  export const inboundSchema = CreateAppEntitlementRequest$inboundSchema;
-  /** @deprecated use `CreateAppEntitlementRequest$outboundSchema` instead. */
-  export const outboundSchema = CreateAppEntitlementRequest$outboundSchema;
-  /** @deprecated use `CreateAppEntitlementRequest$Outbound` instead. */
-  export type Outbound = CreateAppEntitlementRequest$Outbound;
-}
-
 export function createAppEntitlementRequestToJSON(
   createAppEntitlementRequest: CreateAppEntitlementRequest,
 ): string {
@@ -332,15 +215,5 @@ export function createAppEntitlementRequestToJSON(
     CreateAppEntitlementRequest$outboundSchema.parse(
       createAppEntitlementRequest,
     ),
-  );
-}
-
-export function createAppEntitlementRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAppEntitlementRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateAppEntitlementRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAppEntitlementRequest' from JSON`,
   );
 }

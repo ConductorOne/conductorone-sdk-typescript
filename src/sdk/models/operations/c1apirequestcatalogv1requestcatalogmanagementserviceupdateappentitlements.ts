@@ -40,25 +40,6 @@ export type C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitle
   };
 
 /** @internal */
-export const C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequest$inboundSchema:
-  z.ZodType<
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    catalog_id: z.nullable(z.string()),
-    RequestCatalogManagementServiceUpdateAppEntitlementsRequest: shared
-      .RequestCatalogManagementServiceUpdateAppEntitlementsRequest$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "catalog_id": "catalogId",
-      "RequestCatalogManagementServiceUpdateAppEntitlementsRequest":
-        "requestCatalogManagementServiceUpdateAppEntitlementsRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequest$Outbound =
   {
     catalog_id: string | null;
@@ -86,22 +67,6 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitl
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequest$ {
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequest$inboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequest$outboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequest$Outbound;
-}
-
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequestToJSON(
   c1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequest:
     C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequest,
@@ -111,21 +76,6 @@ export function c1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEnt
       .parse(
         c1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequest,
       ),
-  );
-}
-
-export function c1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequest' from JSON`,
   );
 }
 
@@ -151,70 +101,6 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitl
         "requestCatalogManagementServiceUpdateAppEntitlementsResponse",
     });
   });
-
-/** @internal */
-export type C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    RequestCatalogManagementServiceUpdateAppEntitlementsResponse?:
-      | shared.RequestCatalogManagementServiceUpdateAppEntitlementsResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsResponse$outboundSchema:
-  z.ZodType<
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    requestCatalogManagementServiceUpdateAppEntitlementsResponse: shared
-      .RequestCatalogManagementServiceUpdateAppEntitlementsResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      requestCatalogManagementServiceUpdateAppEntitlementsResponse:
-        "RequestCatalogManagementServiceUpdateAppEntitlementsResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsResponse$ {
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsResponse$inboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsResponse$outboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsResponse$Outbound;
-}
-
-export function c1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsResponseToJSON(
-  c1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsResponse:
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsResponse,
-): string {
-  return JSON.stringify(
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsResponse$outboundSchema
-      .parse(
-        c1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsResponse,
-      ),
-  );
-}
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsResponseFromJSON(
   jsonString: string,

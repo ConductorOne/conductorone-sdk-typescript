@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  TaskView,
-  TaskView$inboundSchema,
-  TaskView$Outbound,
-  TaskView$outboundSchema,
-} from "./taskview.js";
+import { TaskView, TaskView$inboundSchema } from "./taskview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -59,57 +54,6 @@ export const TaskActionsServiceCommentResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type TaskActionsServiceCommentResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const TaskActionsServiceCommentResponseExpanded$outboundSchema:
-  z.ZodType<
-    TaskActionsServiceCommentResponseExpanded$Outbound,
-    z.ZodTypeDef,
-    TaskActionsServiceCommentResponseExpanded
-  > = z.object({
-    atType: z.string().optional(),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        atType: "@type",
-        additionalProperties: null,
-      }),
-    };
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceCommentResponseExpanded$ {
-  /** @deprecated use `TaskActionsServiceCommentResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskActionsServiceCommentResponseExpanded$inboundSchema;
-  /** @deprecated use `TaskActionsServiceCommentResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceCommentResponseExpanded$outboundSchema;
-  /** @deprecated use `TaskActionsServiceCommentResponseExpanded$Outbound` instead. */
-  export type Outbound = TaskActionsServiceCommentResponseExpanded$Outbound;
-}
-
-export function taskActionsServiceCommentResponseExpandedToJSON(
-  taskActionsServiceCommentResponseExpanded:
-    TaskActionsServiceCommentResponseExpanded,
-): string {
-  return JSON.stringify(
-    TaskActionsServiceCommentResponseExpanded$outboundSchema.parse(
-      taskActionsServiceCommentResponseExpanded,
-    ),
-  );
-}
-
 export function taskActionsServiceCommentResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -139,53 +83,6 @@ export const TaskActionsServiceCommentResponse$inboundSchema: z.ZodType<
   ).optional(),
   taskView: z.nullable(TaskView$inboundSchema).optional(),
 });
-
-/** @internal */
-export type TaskActionsServiceCommentResponse$Outbound = {
-  expanded?:
-    | Array<TaskActionsServiceCommentResponseExpanded$Outbound>
-    | null
-    | undefined;
-  taskView?: TaskView$Outbound | null | undefined;
-};
-
-/** @internal */
-export const TaskActionsServiceCommentResponse$outboundSchema: z.ZodType<
-  TaskActionsServiceCommentResponse$Outbound,
-  z.ZodTypeDef,
-  TaskActionsServiceCommentResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() =>
-      TaskActionsServiceCommentResponseExpanded$outboundSchema
-    )),
-  ).optional(),
-  taskView: z.nullable(TaskView$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceCommentResponse$ {
-  /** @deprecated use `TaskActionsServiceCommentResponse$inboundSchema` instead. */
-  export const inboundSchema = TaskActionsServiceCommentResponse$inboundSchema;
-  /** @deprecated use `TaskActionsServiceCommentResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceCommentResponse$outboundSchema;
-  /** @deprecated use `TaskActionsServiceCommentResponse$Outbound` instead. */
-  export type Outbound = TaskActionsServiceCommentResponse$Outbound;
-}
-
-export function taskActionsServiceCommentResponseToJSON(
-  taskActionsServiceCommentResponse: TaskActionsServiceCommentResponse,
-): string {
-  return JSON.stringify(
-    TaskActionsServiceCommentResponse$outboundSchema.parse(
-      taskActionsServiceCommentResponse,
-    ),
-  );
-}
 
 export function taskActionsServiceCommentResponseFromJSON(
   jsonString: string,

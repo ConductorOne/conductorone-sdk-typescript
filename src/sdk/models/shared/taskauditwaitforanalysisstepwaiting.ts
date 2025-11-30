@@ -26,45 +26,6 @@ export const TaskAuditWaitForAnalysisStepWaiting$inboundSchema: z.ZodType<
   stepId: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditWaitForAnalysisStepWaiting$Outbound = {
-  stepId?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditWaitForAnalysisStepWaiting$outboundSchema: z.ZodType<
-  TaskAuditWaitForAnalysisStepWaiting$Outbound,
-  z.ZodTypeDef,
-  TaskAuditWaitForAnalysisStepWaiting
-> = z.object({
-  stepId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditWaitForAnalysisStepWaiting$ {
-  /** @deprecated use `TaskAuditWaitForAnalysisStepWaiting$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskAuditWaitForAnalysisStepWaiting$inboundSchema;
-  /** @deprecated use `TaskAuditWaitForAnalysisStepWaiting$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskAuditWaitForAnalysisStepWaiting$outboundSchema;
-  /** @deprecated use `TaskAuditWaitForAnalysisStepWaiting$Outbound` instead. */
-  export type Outbound = TaskAuditWaitForAnalysisStepWaiting$Outbound;
-}
-
-export function taskAuditWaitForAnalysisStepWaitingToJSON(
-  taskAuditWaitForAnalysisStepWaiting: TaskAuditWaitForAnalysisStepWaiting,
-): string {
-  return JSON.stringify(
-    TaskAuditWaitForAnalysisStepWaiting$outboundSchema.parse(
-      taskAuditWaitForAnalysisStepWaiting,
-    ),
-  );
-}
-
 export function taskAuditWaitForAnalysisStepWaitingFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditWaitForAnalysisStepWaiting, SDKValidationError> {

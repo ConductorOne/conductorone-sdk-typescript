@@ -33,15 +33,6 @@ export type C1ApiTaskV1TaskServiceGetResponse = {
 };
 
 /** @internal */
-export const C1ApiTaskV1TaskServiceGetRequest$inboundSchema: z.ZodType<
-  C1ApiTaskV1TaskServiceGetRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.nullable(z.string()),
-});
-
-/** @internal */
 export type C1ApiTaskV1TaskServiceGetRequest$Outbound = {
   id: string | null;
 };
@@ -55,19 +46,6 @@ export const C1ApiTaskV1TaskServiceGetRequest$outboundSchema: z.ZodType<
   id: z.nullable(z.string()),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskServiceGetRequest$ {
-  /** @deprecated use `C1ApiTaskV1TaskServiceGetRequest$inboundSchema` instead. */
-  export const inboundSchema = C1ApiTaskV1TaskServiceGetRequest$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskServiceGetRequest$outboundSchema` instead. */
-  export const outboundSchema = C1ApiTaskV1TaskServiceGetRequest$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskServiceGetRequest$Outbound` instead. */
-  export type Outbound = C1ApiTaskV1TaskServiceGetRequest$Outbound;
-}
-
 export function c1ApiTaskV1TaskServiceGetRequestToJSON(
   c1ApiTaskV1TaskServiceGetRequest: C1ApiTaskV1TaskServiceGetRequest,
 ): string {
@@ -75,16 +53,6 @@ export function c1ApiTaskV1TaskServiceGetRequestToJSON(
     C1ApiTaskV1TaskServiceGetRequest$outboundSchema.parse(
       c1ApiTaskV1TaskServiceGetRequest,
     ),
-  );
-}
-
-export function c1ApiTaskV1TaskServiceGetRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<C1ApiTaskV1TaskServiceGetRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => C1ApiTaskV1TaskServiceGetRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiTaskV1TaskServiceGetRequest' from JSON`,
   );
 }
 
@@ -107,60 +75,6 @@ export const C1ApiTaskV1TaskServiceGetResponse$inboundSchema: z.ZodType<
     "TaskServiceGetResponse": "taskServiceGetResponse",
   });
 });
-
-/** @internal */
-export type C1ApiTaskV1TaskServiceGetResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  TaskServiceGetResponse?: shared.TaskServiceGetResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiTaskV1TaskServiceGetResponse$outboundSchema: z.ZodType<
-  C1ApiTaskV1TaskServiceGetResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiTaskV1TaskServiceGetResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  taskServiceGetResponse: shared.TaskServiceGetResponse$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    taskServiceGetResponse: "TaskServiceGetResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskServiceGetResponse$ {
-  /** @deprecated use `C1ApiTaskV1TaskServiceGetResponse$inboundSchema` instead. */
-  export const inboundSchema = C1ApiTaskV1TaskServiceGetResponse$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskServiceGetResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskServiceGetResponse$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskServiceGetResponse$Outbound` instead. */
-  export type Outbound = C1ApiTaskV1TaskServiceGetResponse$Outbound;
-}
-
-export function c1ApiTaskV1TaskServiceGetResponseToJSON(
-  c1ApiTaskV1TaskServiceGetResponse: C1ApiTaskV1TaskServiceGetResponse,
-): string {
-  return JSON.stringify(
-    C1ApiTaskV1TaskServiceGetResponse$outboundSchema.parse(
-      c1ApiTaskV1TaskServiceGetResponse,
-    ),
-  );
-}
 
 export function c1ApiTaskV1TaskServiceGetResponseFromJSON(
   jsonString: string,

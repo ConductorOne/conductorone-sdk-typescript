@@ -57,7 +57,6 @@ export const FieldRelationship$inboundSchema: z.ZodType<
   mutuallyExclusive: z.nullable(MutuallyExclusive$inboundSchema).optional(),
   requiredTogether: z.nullable(RequiredTogether$inboundSchema).optional(),
 });
-
 /** @internal */
 export type FieldRelationship$Outbound = {
   atLeastOne?: AtLeastOne$Outbound | null | undefined;
@@ -78,19 +77,6 @@ export const FieldRelationship$outboundSchema: z.ZodType<
   requiredTogether: z.nullable(RequiredTogether$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FieldRelationship$ {
-  /** @deprecated use `FieldRelationship$inboundSchema` instead. */
-  export const inboundSchema = FieldRelationship$inboundSchema;
-  /** @deprecated use `FieldRelationship$outboundSchema` instead. */
-  export const outboundSchema = FieldRelationship$outboundSchema;
-  /** @deprecated use `FieldRelationship$Outbound` instead. */
-  export type Outbound = FieldRelationship$Outbound;
-}
-
 export function fieldRelationshipToJSON(
   fieldRelationship: FieldRelationship,
 ): string {
@@ -98,7 +84,6 @@ export function fieldRelationshipToJSON(
     FieldRelationship$outboundSchema.parse(fieldRelationship),
   );
 }
-
 export function fieldRelationshipFromJSON(
   jsonString: string,
 ): SafeParseResult<FieldRelationship, SDKValidationError> {

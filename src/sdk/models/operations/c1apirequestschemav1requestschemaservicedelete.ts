@@ -38,23 +38,6 @@ export type C1ApiRequestSchemaV1RequestSchemaServiceDeleteResponse = {
 };
 
 /** @internal */
-export const C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest$inboundSchema:
-  z.ZodType<
-    C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    request_schema_id: z.nullable(z.string()),
-    RequestSchemaServiceDeleteRequest: shared
-      .RequestSchemaServiceDeleteRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "request_schema_id": "requestSchemaId",
-      "RequestSchemaServiceDeleteRequest": "requestSchemaServiceDeleteRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest$Outbound = {
   request_schema_id: string | null;
   RequestSchemaServiceDeleteRequest?:
@@ -79,22 +62,6 @@ export const C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest$outboundSchem
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest$ {
-  /** @deprecated use `C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest$inboundSchema;
-  /** @deprecated use `C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest$outboundSchema;
-  /** @deprecated use `C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest$Outbound;
-}
-
 export function c1ApiRequestSchemaV1RequestSchemaServiceDeleteRequestToJSON(
   c1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest:
     C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest,
@@ -103,22 +70,6 @@ export function c1ApiRequestSchemaV1RequestSchemaServiceDeleteRequestToJSON(
     C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest$outboundSchema.parse(
       c1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest,
     ),
-  );
-}
-
-export function c1ApiRequestSchemaV1RequestSchemaServiceDeleteRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest' from JSON`,
   );
 }
 
@@ -143,66 +94,6 @@ export const C1ApiRequestSchemaV1RequestSchemaServiceDeleteResponse$inboundSchem
         "requestSchemaServiceDeleteResponse",
     });
   });
-
-/** @internal */
-export type C1ApiRequestSchemaV1RequestSchemaServiceDeleteResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  RequestSchemaServiceDeleteResponse?:
-    | shared.RequestSchemaServiceDeleteResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiRequestSchemaV1RequestSchemaServiceDeleteResponse$outboundSchema:
-  z.ZodType<
-    C1ApiRequestSchemaV1RequestSchemaServiceDeleteResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiRequestSchemaV1RequestSchemaServiceDeleteResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    requestSchemaServiceDeleteResponse: shared
-      .RequestSchemaServiceDeleteResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      requestSchemaServiceDeleteResponse: "RequestSchemaServiceDeleteResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiRequestSchemaV1RequestSchemaServiceDeleteResponse$ {
-  /** @deprecated use `C1ApiRequestSchemaV1RequestSchemaServiceDeleteResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiRequestSchemaV1RequestSchemaServiceDeleteResponse$inboundSchema;
-  /** @deprecated use `C1ApiRequestSchemaV1RequestSchemaServiceDeleteResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiRequestSchemaV1RequestSchemaServiceDeleteResponse$outboundSchema;
-  /** @deprecated use `C1ApiRequestSchemaV1RequestSchemaServiceDeleteResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiRequestSchemaV1RequestSchemaServiceDeleteResponse$Outbound;
-}
-
-export function c1ApiRequestSchemaV1RequestSchemaServiceDeleteResponseToJSON(
-  c1ApiRequestSchemaV1RequestSchemaServiceDeleteResponse:
-    C1ApiRequestSchemaV1RequestSchemaServiceDeleteResponse,
-): string {
-  return JSON.stringify(
-    C1ApiRequestSchemaV1RequestSchemaServiceDeleteResponse$outboundSchema.parse(
-      c1ApiRequestSchemaV1RequestSchemaServiceDeleteResponse,
-    ),
-  );
-}
 
 export function c1ApiRequestSchemaV1RequestSchemaServiceDeleteResponseFromJSON(
   jsonString: string,

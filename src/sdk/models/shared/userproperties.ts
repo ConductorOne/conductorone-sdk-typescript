@@ -40,7 +40,6 @@ export const UserProperties$inboundSchema: z.ZodType<
   profileAttributeCel: z.nullable(z.string()).optional(),
   usernameCel: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type UserProperties$Outbound = {
   displayNameCel?: string | null | undefined;
@@ -61,23 +60,9 @@ export const UserProperties$outboundSchema: z.ZodType<
   usernameCel: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UserProperties$ {
-  /** @deprecated use `UserProperties$inboundSchema` instead. */
-  export const inboundSchema = UserProperties$inboundSchema;
-  /** @deprecated use `UserProperties$outboundSchema` instead. */
-  export const outboundSchema = UserProperties$outboundSchema;
-  /** @deprecated use `UserProperties$Outbound` instead. */
-  export type Outbound = UserProperties$Outbound;
-}
-
 export function userPropertiesToJSON(userProperties: UserProperties): string {
   return JSON.stringify(UserProperties$outboundSchema.parse(userProperties));
 }
-
 export function userPropertiesFromJSON(
   jsonString: string,
 ): SafeParseResult<UserProperties, SDKValidationError> {

@@ -25,7 +25,6 @@ export const AutomationTemplateRef$inboundSchema: z.ZodType<
 > = z.object({
   id: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type AutomationTemplateRef$Outbound = {
   id?: string | null | undefined;
@@ -40,19 +39,6 @@ export const AutomationTemplateRef$outboundSchema: z.ZodType<
   id: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AutomationTemplateRef$ {
-  /** @deprecated use `AutomationTemplateRef$inboundSchema` instead. */
-  export const inboundSchema = AutomationTemplateRef$inboundSchema;
-  /** @deprecated use `AutomationTemplateRef$outboundSchema` instead. */
-  export const outboundSchema = AutomationTemplateRef$outboundSchema;
-  /** @deprecated use `AutomationTemplateRef$Outbound` instead. */
-  export type Outbound = AutomationTemplateRef$Outbound;
-}
-
 export function automationTemplateRefToJSON(
   automationTemplateRef: AutomationTemplateRef,
 ): string {
@@ -60,7 +46,6 @@ export function automationTemplateRefToJSON(
     AutomationTemplateRef$outboundSchema.parse(automationTemplateRef),
   );
 }
-
 export function automationTemplateRefFromJSON(
   jsonString: string,
 ): SafeParseResult<AutomationTemplateRef, SDKValidationError> {

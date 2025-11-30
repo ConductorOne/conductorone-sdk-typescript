@@ -26,7 +26,6 @@ export const WaitUntilTimeInstance$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
 /** @internal */
 export type WaitUntilTimeInstance$Outbound = {
   durationIfExists?: string | null | undefined;
@@ -43,19 +42,6 @@ export const WaitUntilTimeInstance$outboundSchema: z.ZodType<
   untilTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WaitUntilTimeInstance$ {
-  /** @deprecated use `WaitUntilTimeInstance$inboundSchema` instead. */
-  export const inboundSchema = WaitUntilTimeInstance$inboundSchema;
-  /** @deprecated use `WaitUntilTimeInstance$outboundSchema` instead. */
-  export const outboundSchema = WaitUntilTimeInstance$outboundSchema;
-  /** @deprecated use `WaitUntilTimeInstance$Outbound` instead. */
-  export type Outbound = WaitUntilTimeInstance$Outbound;
-}
-
 export function waitUntilTimeInstanceToJSON(
   waitUntilTimeInstance: WaitUntilTimeInstance,
 ): string {
@@ -63,7 +49,6 @@ export function waitUntilTimeInstanceToJSON(
     WaitUntilTimeInstance$outboundSchema.parse(waitUntilTimeInstance),
   );
 }
-
 export function waitUntilTimeInstanceFromJSON(
   jsonString: string,
 ): SafeParseResult<WaitUntilTimeInstance, SDKValidationError> {

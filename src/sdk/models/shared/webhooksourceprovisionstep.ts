@@ -26,41 +26,6 @@ export const WebhookSourceProvisionStep$inboundSchema: z.ZodType<
   ticketId: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type WebhookSourceProvisionStep$Outbound = {
-  ticketId?: string | null | undefined;
-};
-
-/** @internal */
-export const WebhookSourceProvisionStep$outboundSchema: z.ZodType<
-  WebhookSourceProvisionStep$Outbound,
-  z.ZodTypeDef,
-  WebhookSourceProvisionStep
-> = z.object({
-  ticketId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhookSourceProvisionStep$ {
-  /** @deprecated use `WebhookSourceProvisionStep$inboundSchema` instead. */
-  export const inboundSchema = WebhookSourceProvisionStep$inboundSchema;
-  /** @deprecated use `WebhookSourceProvisionStep$outboundSchema` instead. */
-  export const outboundSchema = WebhookSourceProvisionStep$outboundSchema;
-  /** @deprecated use `WebhookSourceProvisionStep$Outbound` instead. */
-  export type Outbound = WebhookSourceProvisionStep$Outbound;
-}
-
-export function webhookSourceProvisionStepToJSON(
-  webhookSourceProvisionStep: WebhookSourceProvisionStep,
-): string {
-  return JSON.stringify(
-    WebhookSourceProvisionStep$outboundSchema.parse(webhookSourceProvisionStep),
-  );
-}
-
 export function webhookSourceProvisionStepFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookSourceProvisionStep, SDKValidationError> {

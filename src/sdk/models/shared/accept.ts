@@ -22,7 +22,6 @@ export const Accept$inboundSchema: z.ZodType<Accept, z.ZodTypeDef, unknown> = z
   .object({
     acceptMessage: z.nullable(z.string()).optional(),
   });
-
 /** @internal */
 export type Accept$Outbound = {
   acceptMessage?: string | null | undefined;
@@ -37,23 +36,9 @@ export const Accept$outboundSchema: z.ZodType<
   acceptMessage: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Accept$ {
-  /** @deprecated use `Accept$inboundSchema` instead. */
-  export const inboundSchema = Accept$inboundSchema;
-  /** @deprecated use `Accept$outboundSchema` instead. */
-  export const outboundSchema = Accept$outboundSchema;
-  /** @deprecated use `Accept$Outbound` instead. */
-  export type Outbound = Accept$Outbound;
-}
-
 export function acceptToJSON(accept: Accept): string {
   return JSON.stringify(Accept$outboundSchema.parse(accept));
 }
-
 export function acceptFromJSON(
   jsonString: string,
 ): SafeParseResult<Accept, SDKValidationError> {

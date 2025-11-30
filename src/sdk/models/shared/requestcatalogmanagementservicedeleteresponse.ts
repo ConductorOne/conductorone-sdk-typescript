@@ -20,43 +20,6 @@ export const RequestCatalogManagementServiceDeleteResponse$inboundSchema:
     unknown
   > = z.object({});
 
-/** @internal */
-export type RequestCatalogManagementServiceDeleteResponse$Outbound = {};
-
-/** @internal */
-export const RequestCatalogManagementServiceDeleteResponse$outboundSchema:
-  z.ZodType<
-    RequestCatalogManagementServiceDeleteResponse$Outbound,
-    z.ZodTypeDef,
-    RequestCatalogManagementServiceDeleteResponse
-  > = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogManagementServiceDeleteResponse$ {
-  /** @deprecated use `RequestCatalogManagementServiceDeleteResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogManagementServiceDeleteResponse$inboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceDeleteResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogManagementServiceDeleteResponse$outboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceDeleteResponse$Outbound` instead. */
-  export type Outbound = RequestCatalogManagementServiceDeleteResponse$Outbound;
-}
-
-export function requestCatalogManagementServiceDeleteResponseToJSON(
-  requestCatalogManagementServiceDeleteResponse:
-    RequestCatalogManagementServiceDeleteResponse,
-): string {
-  return JSON.stringify(
-    RequestCatalogManagementServiceDeleteResponse$outboundSchema.parse(
-      requestCatalogManagementServiceDeleteResponse,
-    ),
-  );
-}
-
 export function requestCatalogManagementServiceDeleteResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

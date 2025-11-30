@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The app entitlement expand mask allows the user to get additional information when getting responses containing app entitlement views.
@@ -16,15 +13,6 @@ export type AppEntitlementExpandMask = {
    */
   paths?: Array<string> | null | undefined;
 };
-
-/** @internal */
-export const AppEntitlementExpandMask$inboundSchema: z.ZodType<
-  AppEntitlementExpandMask,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type AppEntitlementExpandMask$Outbound = {
@@ -40,33 +28,10 @@ export const AppEntitlementExpandMask$outboundSchema: z.ZodType<
   paths: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementExpandMask$ {
-  /** @deprecated use `AppEntitlementExpandMask$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementExpandMask$inboundSchema;
-  /** @deprecated use `AppEntitlementExpandMask$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlementExpandMask$outboundSchema;
-  /** @deprecated use `AppEntitlementExpandMask$Outbound` instead. */
-  export type Outbound = AppEntitlementExpandMask$Outbound;
-}
-
 export function appEntitlementExpandMaskToJSON(
   appEntitlementExpandMask: AppEntitlementExpandMask,
 ): string {
   return JSON.stringify(
     AppEntitlementExpandMask$outboundSchema.parse(appEntitlementExpandMask),
-  );
-}
-
-export function appEntitlementExpandMaskFromJSON(
-  jsonString: string,
-): SafeParseResult<AppEntitlementExpandMask, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AppEntitlementExpandMask$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AppEntitlementExpandMask' from JSON`,
   );
 }

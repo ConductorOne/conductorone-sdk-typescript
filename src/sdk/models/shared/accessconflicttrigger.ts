@@ -43,7 +43,6 @@ export const AccessConflictTrigger$inboundSchema: z.ZodType<
   allConflictMonitors: z.nullable(z.boolean()).optional(),
   conflictMonitorRefs: z.nullable(ConflictMonitorRefs$inboundSchema).optional(),
 });
-
 /** @internal */
 export type AccessConflictTrigger$Outbound = {
   allConflictMonitors?: boolean | null | undefined;
@@ -61,19 +60,6 @@ export const AccessConflictTrigger$outboundSchema: z.ZodType<
     .optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AccessConflictTrigger$ {
-  /** @deprecated use `AccessConflictTrigger$inboundSchema` instead. */
-  export const inboundSchema = AccessConflictTrigger$inboundSchema;
-  /** @deprecated use `AccessConflictTrigger$outboundSchema` instead. */
-  export const outboundSchema = AccessConflictTrigger$outboundSchema;
-  /** @deprecated use `AccessConflictTrigger$Outbound` instead. */
-  export type Outbound = AccessConflictTrigger$Outbound;
-}
-
 export function accessConflictTriggerToJSON(
   accessConflictTrigger: AccessConflictTrigger,
 ): string {
@@ -81,7 +67,6 @@ export function accessConflictTriggerToJSON(
     AccessConflictTrigger$outboundSchema.parse(accessConflictTrigger),
   );
 }
-
 export function accessConflictTriggerFromJSON(
   jsonString: string,
 ): SafeParseResult<AccessConflictTrigger, SDKValidationError> {

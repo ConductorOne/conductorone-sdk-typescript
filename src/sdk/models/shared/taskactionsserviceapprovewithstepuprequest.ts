@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskExpandMask,
-  TaskExpandMask$inboundSchema,
   TaskExpandMask$Outbound,
   TaskExpandMask$outboundSchema,
 } from "./taskexpandmask.js";
@@ -37,16 +33,6 @@ export type TaskActionsServiceApproveWithStepUpRequest = {
 };
 
 /** @internal */
-export const TaskActionsServiceApproveWithStepUpRequest$inboundSchema:
-  z.ZodType<TaskActionsServiceApproveWithStepUpRequest, z.ZodTypeDef, unknown> =
-    z.object({
-      comment: z.nullable(z.string()).optional(),
-      expandMask: z.nullable(TaskExpandMask$inboundSchema).optional(),
-      policyStepId: z.string(),
-      stepUpTransactionId: z.string(),
-    });
-
-/** @internal */
 export type TaskActionsServiceApproveWithStepUpRequest$Outbound = {
   comment?: string | null | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
@@ -67,21 +53,6 @@ export const TaskActionsServiceApproveWithStepUpRequest$outboundSchema:
     stepUpTransactionId: z.string(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceApproveWithStepUpRequest$ {
-  /** @deprecated use `TaskActionsServiceApproveWithStepUpRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskActionsServiceApproveWithStepUpRequest$inboundSchema;
-  /** @deprecated use `TaskActionsServiceApproveWithStepUpRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceApproveWithStepUpRequest$outboundSchema;
-  /** @deprecated use `TaskActionsServiceApproveWithStepUpRequest$Outbound` instead. */
-  export type Outbound = TaskActionsServiceApproveWithStepUpRequest$Outbound;
-}
-
 export function taskActionsServiceApproveWithStepUpRequestToJSON(
   taskActionsServiceApproveWithStepUpRequest:
     TaskActionsServiceApproveWithStepUpRequest,
@@ -90,21 +61,5 @@ export function taskActionsServiceApproveWithStepUpRequestToJSON(
     TaskActionsServiceApproveWithStepUpRequest$outboundSchema.parse(
       taskActionsServiceApproveWithStepUpRequest,
     ),
-  );
-}
-
-export function taskActionsServiceApproveWithStepUpRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  TaskActionsServiceApproveWithStepUpRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      TaskActionsServiceApproveWithStepUpRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'TaskActionsServiceApproveWithStepUpRequest' from JSON`,
   );
 }

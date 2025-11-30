@@ -51,66 +51,6 @@ export const C1ApiAttributeV1AttributeSearchSearchAttributeValuesResponse$inboun
     });
   });
 
-/** @internal */
-export type C1ApiAttributeV1AttributeSearchSearchAttributeValuesResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    SearchAttributeValuesResponse?:
-      | shared.SearchAttributeValuesResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAttributeV1AttributeSearchSearchAttributeValuesResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAttributeV1AttributeSearchSearchAttributeValuesResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAttributeV1AttributeSearchSearchAttributeValuesResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    searchAttributeValuesResponse: shared
-      .SearchAttributeValuesResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      searchAttributeValuesResponse: "SearchAttributeValuesResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAttributeV1AttributeSearchSearchAttributeValuesResponse$ {
-  /** @deprecated use `C1ApiAttributeV1AttributeSearchSearchAttributeValuesResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAttributeV1AttributeSearchSearchAttributeValuesResponse$inboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributeSearchSearchAttributeValuesResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAttributeV1AttributeSearchSearchAttributeValuesResponse$outboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributeSearchSearchAttributeValuesResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAttributeV1AttributeSearchSearchAttributeValuesResponse$Outbound;
-}
-
-export function c1ApiAttributeV1AttributeSearchSearchAttributeValuesResponseToJSON(
-  c1ApiAttributeV1AttributeSearchSearchAttributeValuesResponse:
-    C1ApiAttributeV1AttributeSearchSearchAttributeValuesResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAttributeV1AttributeSearchSearchAttributeValuesResponse$outboundSchema
-      .parse(c1ApiAttributeV1AttributeSearchSearchAttributeValuesResponse),
-  );
-}
-
 export function c1ApiAttributeV1AttributeSearchSearchAttributeValuesResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

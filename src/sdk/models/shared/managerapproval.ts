@@ -27,6 +27,10 @@ export type ManagerApproval = {
    * Configuration to specific which users to fallback to if fallback is enabled and no manager is found.
    */
   fallbackUserIds?: Array<string> | null | undefined;
+  /**
+   * Configuration to require distinct approvers across approval steps of a rule.
+   */
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -39,14 +43,15 @@ export const ManagerApproval$inboundSchema: z.ZodType<
   assignedUserIds: z.nullable(z.array(z.string())).optional(),
   fallback: z.nullable(z.boolean()).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
 /** @internal */
 export type ManagerApproval$Outbound = {
   allowSelfApproval?: boolean | null | undefined;
   assignedUserIds?: Array<string> | null | undefined;
   fallback?: boolean | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -59,27 +64,14 @@ export const ManagerApproval$outboundSchema: z.ZodType<
   assignedUserIds: z.nullable(z.array(z.string())).optional(),
   fallback: z.nullable(z.boolean()).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ManagerApproval$ {
-  /** @deprecated use `ManagerApproval$inboundSchema` instead. */
-  export const inboundSchema = ManagerApproval$inboundSchema;
-  /** @deprecated use `ManagerApproval$outboundSchema` instead. */
-  export const outboundSchema = ManagerApproval$outboundSchema;
-  /** @deprecated use `ManagerApproval$Outbound` instead. */
-  export type Outbound = ManagerApproval$Outbound;
-}
 
 export function managerApprovalToJSON(
   managerApproval: ManagerApproval,
 ): string {
   return JSON.stringify(ManagerApproval$outboundSchema.parse(managerApproval));
 }
-
 export function managerApprovalFromJSON(
   jsonString: string,
 ): SafeParseResult<ManagerApproval, SDKValidationError> {

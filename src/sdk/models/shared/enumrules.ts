@@ -49,7 +49,6 @@ export const EnumRules$inboundSchema: z.ZodType<
   in: z.nullable(z.array(z.number().int())).optional(),
   notIn: z.nullable(z.array(z.number().int())).optional(),
 });
-
 /** @internal */
 export type EnumRules$Outbound = {
   const?: number | null | undefined;
@@ -70,23 +69,9 @@ export const EnumRules$outboundSchema: z.ZodType<
   notIn: z.nullable(z.array(z.number().int())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EnumRules$ {
-  /** @deprecated use `EnumRules$inboundSchema` instead. */
-  export const inboundSchema = EnumRules$inboundSchema;
-  /** @deprecated use `EnumRules$outboundSchema` instead. */
-  export const outboundSchema = EnumRules$outboundSchema;
-  /** @deprecated use `EnumRules$Outbound` instead. */
-  export type Outbound = EnumRules$Outbound;
-}
-
 export function enumRulesToJSON(enumRules: EnumRules): string {
   return JSON.stringify(EnumRules$outboundSchema.parse(enumRules));
 }
-
 export function enumRulesFromJSON(
   jsonString: string,
 ): SafeParseResult<EnumRules, SDKValidationError> {

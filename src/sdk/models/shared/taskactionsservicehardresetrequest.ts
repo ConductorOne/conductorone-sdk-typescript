@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskExpandMask,
-  TaskExpandMask$inboundSchema,
   TaskExpandMask$Outbound,
   TaskExpandMask$outboundSchema,
 } from "./taskexpandmask.js";
@@ -23,16 +19,6 @@ export type TaskActionsServiceHardResetRequest = {
   comment?: string | null | undefined;
   expandMask?: TaskExpandMask | null | undefined;
 };
-
-/** @internal */
-export const TaskActionsServiceHardResetRequest$inboundSchema: z.ZodType<
-  TaskActionsServiceHardResetRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  comment: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(TaskExpandMask$inboundSchema).optional(),
-});
 
 /** @internal */
 export type TaskActionsServiceHardResetRequest$Outbound = {
@@ -50,20 +36,6 @@ export const TaskActionsServiceHardResetRequest$outboundSchema: z.ZodType<
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceHardResetRequest$ {
-  /** @deprecated use `TaskActionsServiceHardResetRequest$inboundSchema` instead. */
-  export const inboundSchema = TaskActionsServiceHardResetRequest$inboundSchema;
-  /** @deprecated use `TaskActionsServiceHardResetRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceHardResetRequest$outboundSchema;
-  /** @deprecated use `TaskActionsServiceHardResetRequest$Outbound` instead. */
-  export type Outbound = TaskActionsServiceHardResetRequest$Outbound;
-}
-
 export function taskActionsServiceHardResetRequestToJSON(
   taskActionsServiceHardResetRequest: TaskActionsServiceHardResetRequest,
 ): string {
@@ -71,16 +43,5 @@ export function taskActionsServiceHardResetRequestToJSON(
     TaskActionsServiceHardResetRequest$outboundSchema.parse(
       taskActionsServiceHardResetRequest,
     ),
-  );
-}
-
-export function taskActionsServiceHardResetRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskActionsServiceHardResetRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      TaskActionsServiceHardResetRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskActionsServiceHardResetRequest' from JSON`,
   );
 }

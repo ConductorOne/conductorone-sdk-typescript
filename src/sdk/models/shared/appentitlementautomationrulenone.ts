@@ -18,7 +18,6 @@ export const AppEntitlementAutomationRuleNone$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
 /** @internal */
 export type AppEntitlementAutomationRuleNone$Outbound = {};
 
@@ -29,19 +28,6 @@ export const AppEntitlementAutomationRuleNone$outboundSchema: z.ZodType<
   AppEntitlementAutomationRuleNone
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementAutomationRuleNone$ {
-  /** @deprecated use `AppEntitlementAutomationRuleNone$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementAutomationRuleNone$inboundSchema;
-  /** @deprecated use `AppEntitlementAutomationRuleNone$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlementAutomationRuleNone$outboundSchema;
-  /** @deprecated use `AppEntitlementAutomationRuleNone$Outbound` instead. */
-  export type Outbound = AppEntitlementAutomationRuleNone$Outbound;
-}
-
 export function appEntitlementAutomationRuleNoneToJSON(
   appEntitlementAutomationRuleNone: AppEntitlementAutomationRuleNone,
 ): string {
@@ -51,7 +37,6 @@ export function appEntitlementAutomationRuleNoneToJSON(
     ),
   );
 }
-
 export function appEntitlementAutomationRuleNoneFromJSON(
   jsonString: string,
 ): SafeParseResult<AppEntitlementAutomationRuleNone, SDKValidationError> {

@@ -20,3 +20,4 @@ let value: ProfileType = {};
 | `name`                 | *string*               | :heavy_minus_sign:     | The name field.        |
 | `priority`             | *number*               | :heavy_minus_sign:     | The priority field.    |
 | `sizes`                | *number*[]             | :heavy_minus_sign:     | icon sizes             |
+| `slug`                 | *string*               | :heavy_minus_sign:     | The slug field.        |

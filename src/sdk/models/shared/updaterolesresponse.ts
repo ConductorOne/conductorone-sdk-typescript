@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Role,
-  Role$inboundSchema,
-  Role$Outbound,
-  Role$outboundSchema,
-} from "./role.js";
+import { Role, Role$inboundSchema } from "./role.js";
 
 /**
  * UpdateRolesResponse is the response message containing the updated role.
@@ -28,41 +23,6 @@ export const UpdateRolesResponse$inboundSchema: z.ZodType<
 > = z.object({
   role: z.nullable(Role$inboundSchema).optional(),
 });
-
-/** @internal */
-export type UpdateRolesResponse$Outbound = {
-  role?: Role$Outbound | null | undefined;
-};
-
-/** @internal */
-export const UpdateRolesResponse$outboundSchema: z.ZodType<
-  UpdateRolesResponse$Outbound,
-  z.ZodTypeDef,
-  UpdateRolesResponse
-> = z.object({
-  role: z.nullable(Role$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateRolesResponse$ {
-  /** @deprecated use `UpdateRolesResponse$inboundSchema` instead. */
-  export const inboundSchema = UpdateRolesResponse$inboundSchema;
-  /** @deprecated use `UpdateRolesResponse$outboundSchema` instead. */
-  export const outboundSchema = UpdateRolesResponse$outboundSchema;
-  /** @deprecated use `UpdateRolesResponse$Outbound` instead. */
-  export type Outbound = UpdateRolesResponse$Outbound;
-}
-
-export function updateRolesResponseToJSON(
-  updateRolesResponse: UpdateRolesResponse,
-): string {
-  return JSON.stringify(
-    UpdateRolesResponse$outboundSchema.parse(updateRolesResponse),
-  );
-}
 
 export function updateRolesResponseFromJSON(
   jsonString: string,

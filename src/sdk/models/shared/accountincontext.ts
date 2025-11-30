@@ -18,7 +18,6 @@ export const AccountInContext$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
 /** @internal */
 export type AccountInContext$Outbound = {};
 
@@ -29,19 +28,6 @@ export const AccountInContext$outboundSchema: z.ZodType<
   AccountInContext
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AccountInContext$ {
-  /** @deprecated use `AccountInContext$inboundSchema` instead. */
-  export const inboundSchema = AccountInContext$inboundSchema;
-  /** @deprecated use `AccountInContext$outboundSchema` instead. */
-  export const outboundSchema = AccountInContext$outboundSchema;
-  /** @deprecated use `AccountInContext$Outbound` instead. */
-  export type Outbound = AccountInContext$Outbound;
-}
-
 export function accountInContextToJSON(
   accountInContext: AccountInContext,
 ): string {
@@ -49,7 +35,6 @@ export function accountInContextToJSON(
     AccountInContext$outboundSchema.parse(accountInContext),
   );
 }
-
 export function accountInContextFromJSON(
   jsonString: string,
 ): SafeParseResult<AccountInContext, SDKValidationError> {

@@ -31,39 +31,6 @@ export const AttributeType$inboundSchema: z.ZodType<
   name: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type AttributeType$Outbound = {
-  id?: string | null | undefined;
-  name?: string | null | undefined;
-};
-
-/** @internal */
-export const AttributeType$outboundSchema: z.ZodType<
-  AttributeType$Outbound,
-  z.ZodTypeDef,
-  AttributeType
-> = z.object({
-  id: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AttributeType$ {
-  /** @deprecated use `AttributeType$inboundSchema` instead. */
-  export const inboundSchema = AttributeType$inboundSchema;
-  /** @deprecated use `AttributeType$outboundSchema` instead. */
-  export const outboundSchema = AttributeType$outboundSchema;
-  /** @deprecated use `AttributeType$Outbound` instead. */
-  export type Outbound = AttributeType$Outbound;
-}
-
-export function attributeTypeToJSON(attributeType: AttributeType): string {
-  return JSON.stringify(AttributeType$outboundSchema.parse(attributeType));
-}
-
 export function attributeTypeFromJSON(
   jsonString: string,
 ): SafeParseResult<AttributeType, SDKValidationError> {

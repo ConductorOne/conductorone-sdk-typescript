@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Search for app resources based on some filters.
@@ -54,24 +51,6 @@ export type SearchAppResourceTypesRequest = {
 };
 
 /** @internal */
-export const SearchAppResourceTypesRequest$inboundSchema: z.ZodType<
-  SearchAppResourceTypesRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appIds: z.nullable(z.array(z.string())).optional(),
-  appUserIds: z.nullable(z.array(z.string())).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  excludeResourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  excludeResourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
-  resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  resourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
-});
-
-/** @internal */
 export type SearchAppResourceTypesRequest$Outbound = {
   appIds?: Array<string> | null | undefined;
   appUserIds?: Array<string> | null | undefined;
@@ -103,19 +82,6 @@ export const SearchAppResourceTypesRequest$outboundSchema: z.ZodType<
   resourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchAppResourceTypesRequest$ {
-  /** @deprecated use `SearchAppResourceTypesRequest$inboundSchema` instead. */
-  export const inboundSchema = SearchAppResourceTypesRequest$inboundSchema;
-  /** @deprecated use `SearchAppResourceTypesRequest$outboundSchema` instead. */
-  export const outboundSchema = SearchAppResourceTypesRequest$outboundSchema;
-  /** @deprecated use `SearchAppResourceTypesRequest$Outbound` instead. */
-  export type Outbound = SearchAppResourceTypesRequest$Outbound;
-}
-
 export function searchAppResourceTypesRequestToJSON(
   searchAppResourceTypesRequest: SearchAppResourceTypesRequest,
 ): string {
@@ -123,15 +89,5 @@ export function searchAppResourceTypesRequestToJSON(
     SearchAppResourceTypesRequest$outboundSchema.parse(
       searchAppResourceTypesRequest,
     ),
-  );
-}
-
-export function searchAppResourceTypesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchAppResourceTypesRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchAppResourceTypesRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchAppResourceTypesRequest' from JSON`,
   );
 }

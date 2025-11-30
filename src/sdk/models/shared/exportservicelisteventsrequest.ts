@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The ExportServiceListEventsRequest message.
@@ -20,16 +17,6 @@ export type ExportServiceListEventsRequest = {
    */
   pageToken?: string | null | undefined;
 };
-
-/** @internal */
-export const ExportServiceListEventsRequest$inboundSchema: z.ZodType<
-  ExportServiceListEventsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type ExportServiceListEventsRequest$Outbound = {
@@ -47,19 +34,6 @@ export const ExportServiceListEventsRequest$outboundSchema: z.ZodType<
   pageToken: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExportServiceListEventsRequest$ {
-  /** @deprecated use `ExportServiceListEventsRequest$inboundSchema` instead. */
-  export const inboundSchema = ExportServiceListEventsRequest$inboundSchema;
-  /** @deprecated use `ExportServiceListEventsRequest$outboundSchema` instead. */
-  export const outboundSchema = ExportServiceListEventsRequest$outboundSchema;
-  /** @deprecated use `ExportServiceListEventsRequest$Outbound` instead. */
-  export type Outbound = ExportServiceListEventsRequest$Outbound;
-}
-
 export function exportServiceListEventsRequestToJSON(
   exportServiceListEventsRequest: ExportServiceListEventsRequest,
 ): string {
@@ -67,15 +41,5 @@ export function exportServiceListEventsRequestToJSON(
     ExportServiceListEventsRequest$outboundSchema.parse(
       exportServiceListEventsRequest,
     ),
-  );
-}
-
-export function exportServiceListEventsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ExportServiceListEventsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ExportServiceListEventsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ExportServiceListEventsRequest' from JSON`,
   );
 }

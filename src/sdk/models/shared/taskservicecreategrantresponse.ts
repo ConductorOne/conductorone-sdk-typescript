@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  TaskView,
-  TaskView$inboundSchema,
-  TaskView$Outbound,
-  TaskView$outboundSchema,
-} from "./taskview.js";
+import { TaskView, TaskView$inboundSchema } from "./taskview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -56,56 +51,6 @@ export const TaskServiceCreateGrantResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type TaskServiceCreateGrantResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const TaskServiceCreateGrantResponseExpanded$outboundSchema: z.ZodType<
-  TaskServiceCreateGrantResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  TaskServiceCreateGrantResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskServiceCreateGrantResponseExpanded$ {
-  /** @deprecated use `TaskServiceCreateGrantResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskServiceCreateGrantResponseExpanded$inboundSchema;
-  /** @deprecated use `TaskServiceCreateGrantResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskServiceCreateGrantResponseExpanded$outboundSchema;
-  /** @deprecated use `TaskServiceCreateGrantResponseExpanded$Outbound` instead. */
-  export type Outbound = TaskServiceCreateGrantResponseExpanded$Outbound;
-}
-
-export function taskServiceCreateGrantResponseExpandedToJSON(
-  taskServiceCreateGrantResponseExpanded:
-    TaskServiceCreateGrantResponseExpanded,
-): string {
-  return JSON.stringify(
-    TaskServiceCreateGrantResponseExpanded$outboundSchema.parse(
-      taskServiceCreateGrantResponseExpanded,
-    ),
-  );
-}
-
 export function taskServiceCreateGrantResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskServiceCreateGrantResponseExpanded, SDKValidationError> {
@@ -128,52 +73,6 @@ export const TaskServiceCreateGrantResponse$inboundSchema: z.ZodType<
   ).optional(),
   taskView: z.nullable(TaskView$inboundSchema).optional(),
 });
-
-/** @internal */
-export type TaskServiceCreateGrantResponse$Outbound = {
-  expanded?:
-    | Array<TaskServiceCreateGrantResponseExpanded$Outbound>
-    | null
-    | undefined;
-  taskView?: TaskView$Outbound | null | undefined;
-};
-
-/** @internal */
-export const TaskServiceCreateGrantResponse$outboundSchema: z.ZodType<
-  TaskServiceCreateGrantResponse$Outbound,
-  z.ZodTypeDef,
-  TaskServiceCreateGrantResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(
-      z.lazy(() => TaskServiceCreateGrantResponseExpanded$outboundSchema),
-    ),
-  ).optional(),
-  taskView: z.nullable(TaskView$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskServiceCreateGrantResponse$ {
-  /** @deprecated use `TaskServiceCreateGrantResponse$inboundSchema` instead. */
-  export const inboundSchema = TaskServiceCreateGrantResponse$inboundSchema;
-  /** @deprecated use `TaskServiceCreateGrantResponse$outboundSchema` instead. */
-  export const outboundSchema = TaskServiceCreateGrantResponse$outboundSchema;
-  /** @deprecated use `TaskServiceCreateGrantResponse$Outbound` instead. */
-  export type Outbound = TaskServiceCreateGrantResponse$Outbound;
-}
-
-export function taskServiceCreateGrantResponseToJSON(
-  taskServiceCreateGrantResponse: TaskServiceCreateGrantResponse,
-): string {
-  return JSON.stringify(
-    TaskServiceCreateGrantResponse$outboundSchema.parse(
-      taskServiceCreateGrantResponse,
-    ),
-  );
-}
 
 export function taskServiceCreateGrantResponseFromJSON(
   jsonString: string,

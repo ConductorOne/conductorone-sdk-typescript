@@ -26,37 +26,6 @@ export const StringMapField$inboundSchema: z.ZodType<
   optional: z.nullable(z.boolean()).optional(),
 });
 
-/** @internal */
-export type StringMapField$Outbound = {
-  optional?: boolean | null | undefined;
-};
-
-/** @internal */
-export const StringMapField$outboundSchema: z.ZodType<
-  StringMapField$Outbound,
-  z.ZodTypeDef,
-  StringMapField
-> = z.object({
-  optional: z.nullable(z.boolean()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StringMapField$ {
-  /** @deprecated use `StringMapField$inboundSchema` instead. */
-  export const inboundSchema = StringMapField$inboundSchema;
-  /** @deprecated use `StringMapField$outboundSchema` instead. */
-  export const outboundSchema = StringMapField$outboundSchema;
-  /** @deprecated use `StringMapField$Outbound` instead. */
-  export type Outbound = StringMapField$Outbound;
-}
-
-export function stringMapFieldToJSON(stringMapField: StringMapField): string {
-  return JSON.stringify(StringMapField$outboundSchema.parse(stringMapField));
-}
-
 export function stringMapFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<StringMapField, SDKValidationError> {

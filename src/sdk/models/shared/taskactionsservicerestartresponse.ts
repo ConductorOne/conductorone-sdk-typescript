@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  TaskView,
-  TaskView$inboundSchema,
-  TaskView$Outbound,
-  TaskView$outboundSchema,
-} from "./taskview.js";
+import { TaskView, TaskView$inboundSchema } from "./taskview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -63,57 +58,6 @@ export const TaskActionsServiceRestartResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type TaskActionsServiceRestartResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const TaskActionsServiceRestartResponseExpanded$outboundSchema:
-  z.ZodType<
-    TaskActionsServiceRestartResponseExpanded$Outbound,
-    z.ZodTypeDef,
-    TaskActionsServiceRestartResponseExpanded
-  > = z.object({
-    atType: z.string().optional(),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        atType: "@type",
-        additionalProperties: null,
-      }),
-    };
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceRestartResponseExpanded$ {
-  /** @deprecated use `TaskActionsServiceRestartResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskActionsServiceRestartResponseExpanded$inboundSchema;
-  /** @deprecated use `TaskActionsServiceRestartResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceRestartResponseExpanded$outboundSchema;
-  /** @deprecated use `TaskActionsServiceRestartResponseExpanded$Outbound` instead. */
-  export type Outbound = TaskActionsServiceRestartResponseExpanded$Outbound;
-}
-
-export function taskActionsServiceRestartResponseExpandedToJSON(
-  taskActionsServiceRestartResponseExpanded:
-    TaskActionsServiceRestartResponseExpanded,
-): string {
-  return JSON.stringify(
-    TaskActionsServiceRestartResponseExpanded$outboundSchema.parse(
-      taskActionsServiceRestartResponseExpanded,
-    ),
-  );
-}
-
 export function taskActionsServiceRestartResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -144,55 +88,6 @@ export const TaskActionsServiceRestartResponse$inboundSchema: z.ZodType<
   taskView: z.nullable(TaskView$inboundSchema).optional(),
   ticketActionId: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type TaskActionsServiceRestartResponse$Outbound = {
-  expanded?:
-    | Array<TaskActionsServiceRestartResponseExpanded$Outbound>
-    | null
-    | undefined;
-  taskView?: TaskView$Outbound | null | undefined;
-  ticketActionId?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskActionsServiceRestartResponse$outboundSchema: z.ZodType<
-  TaskActionsServiceRestartResponse$Outbound,
-  z.ZodTypeDef,
-  TaskActionsServiceRestartResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() =>
-      TaskActionsServiceRestartResponseExpanded$outboundSchema
-    )),
-  ).optional(),
-  taskView: z.nullable(TaskView$outboundSchema).optional(),
-  ticketActionId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceRestartResponse$ {
-  /** @deprecated use `TaskActionsServiceRestartResponse$inboundSchema` instead. */
-  export const inboundSchema = TaskActionsServiceRestartResponse$inboundSchema;
-  /** @deprecated use `TaskActionsServiceRestartResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceRestartResponse$outboundSchema;
-  /** @deprecated use `TaskActionsServiceRestartResponse$Outbound` instead. */
-  export type Outbound = TaskActionsServiceRestartResponse$Outbound;
-}
-
-export function taskActionsServiceRestartResponseToJSON(
-  taskActionsServiceRestartResponse: TaskActionsServiceRestartResponse,
-): string {
-  return JSON.stringify(
-    TaskActionsServiceRestartResponse$outboundSchema.parse(
-      taskActionsServiceRestartResponse,
-    ),
-  );
-}
 
 export function taskActionsServiceRestartResponseFromJSON(
   jsonString: string,

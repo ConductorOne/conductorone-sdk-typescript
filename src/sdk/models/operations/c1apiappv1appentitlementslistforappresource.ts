@@ -37,28 +37,6 @@ export type C1ApiAppV1AppEntitlementsListForAppResourceResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppEntitlementsListForAppResourceRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementsListForAppResourceRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    app_resource_type_id: z.nullable(z.string()),
-    app_resource_id: z.nullable(z.string()),
-    page_size: z.nullable(z.number().int()).optional(),
-    page_token: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "app_resource_type_id": "appResourceTypeId",
-      "app_resource_id": "appResourceId",
-      "page_size": "pageSize",
-      "page_token": "pageToken",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppEntitlementsListForAppResourceRequest$Outbound = {
   app_id: string | null;
   app_resource_type_id: string | null;
@@ -89,22 +67,6 @@ export const C1ApiAppV1AppEntitlementsListForAppResourceRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsListForAppResourceRequest$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsListForAppResourceRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsListForAppResourceRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsListForAppResourceRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsListForAppResourceRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsListForAppResourceRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementsListForAppResourceRequest$Outbound;
-}
-
 export function c1ApiAppV1AppEntitlementsListForAppResourceRequestToJSON(
   c1ApiAppV1AppEntitlementsListForAppResourceRequest:
     C1ApiAppV1AppEntitlementsListForAppResourceRequest,
@@ -113,22 +75,6 @@ export function c1ApiAppV1AppEntitlementsListForAppResourceRequestToJSON(
     C1ApiAppV1AppEntitlementsListForAppResourceRequest$outboundSchema.parse(
       c1ApiAppV1AppEntitlementsListForAppResourceRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppEntitlementsListForAppResourceRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppEntitlementsListForAppResourceRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppEntitlementsListForAppResourceRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiAppV1AppEntitlementsListForAppResourceRequest' from JSON`,
   );
 }
 
@@ -152,66 +98,6 @@ export const C1ApiAppV1AppEntitlementsListForAppResourceResponse$inboundSchema:
       "ListAppEntitlementsResponse": "listAppEntitlementsResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppEntitlementsListForAppResourceResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  ListAppEntitlementsResponse?:
-    | shared.ListAppEntitlementsResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppEntitlementsListForAppResourceResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementsListForAppResourceResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppEntitlementsListForAppResourceResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    listAppEntitlementsResponse: shared
-      .ListAppEntitlementsResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      listAppEntitlementsResponse: "ListAppEntitlementsResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsListForAppResourceResponse$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsListForAppResourceResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsListForAppResourceResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsListForAppResourceResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsListForAppResourceResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsListForAppResourceResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementsListForAppResourceResponse$Outbound;
-}
-
-export function c1ApiAppV1AppEntitlementsListForAppResourceResponseToJSON(
-  c1ApiAppV1AppEntitlementsListForAppResourceResponse:
-    C1ApiAppV1AppEntitlementsListForAppResourceResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppEntitlementsListForAppResourceResponse$outboundSchema.parse(
-      c1ApiAppV1AppEntitlementsListForAppResourceResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppEntitlementsListForAppResourceResponseFromJSON(
   jsonString: string,

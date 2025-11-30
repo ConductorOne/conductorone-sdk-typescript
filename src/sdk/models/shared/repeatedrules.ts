@@ -61,7 +61,6 @@ export const RepeatedRules$inboundSchema: z.ZodType<
   minItems: z.nullable(z.string()).optional(),
   unique: z.nullable(z.boolean()).optional(),
 });
-
 /** @internal */
 export type RepeatedRules$Outbound = {
   ignoreEmpty?: boolean | null | undefined;
@@ -84,23 +83,9 @@ export const RepeatedRules$outboundSchema: z.ZodType<
   unique: z.nullable(z.boolean()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RepeatedRules$ {
-  /** @deprecated use `RepeatedRules$inboundSchema` instead. */
-  export const inboundSchema = RepeatedRules$inboundSchema;
-  /** @deprecated use `RepeatedRules$outboundSchema` instead. */
-  export const outboundSchema = RepeatedRules$outboundSchema;
-  /** @deprecated use `RepeatedRules$Outbound` instead. */
-  export type Outbound = RepeatedRules$Outbound;
-}
-
 export function repeatedRulesToJSON(repeatedRules: RepeatedRules): string {
   return JSON.stringify(RepeatedRules$outboundSchema.parse(repeatedRules));
 }
-
 export function repeatedRulesFromJSON(
   jsonString: string,
 ): SafeParseResult<RepeatedRules, SDKValidationError> {

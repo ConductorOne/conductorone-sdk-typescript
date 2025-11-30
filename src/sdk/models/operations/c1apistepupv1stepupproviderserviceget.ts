@@ -33,16 +33,6 @@ export type C1ApiStepupV1StepUpProviderServiceGetResponse = {
 };
 
 /** @internal */
-export const C1ApiStepupV1StepUpProviderServiceGetRequest$inboundSchema:
-  z.ZodType<
-    C1ApiStepupV1StepUpProviderServiceGetRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.nullable(z.string()),
-  });
-
-/** @internal */
 export type C1ApiStepupV1StepUpProviderServiceGetRequest$Outbound = {
   id: string | null;
 };
@@ -57,21 +47,6 @@ export const C1ApiStepupV1StepUpProviderServiceGetRequest$outboundSchema:
     id: z.nullable(z.string()),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiStepupV1StepUpProviderServiceGetRequest$ {
-  /** @deprecated use `C1ApiStepupV1StepUpProviderServiceGetRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiStepupV1StepUpProviderServiceGetRequest$inboundSchema;
-  /** @deprecated use `C1ApiStepupV1StepUpProviderServiceGetRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiStepupV1StepUpProviderServiceGetRequest$outboundSchema;
-  /** @deprecated use `C1ApiStepupV1StepUpProviderServiceGetRequest$Outbound` instead. */
-  export type Outbound = C1ApiStepupV1StepUpProviderServiceGetRequest$Outbound;
-}
-
 export function c1ApiStepupV1StepUpProviderServiceGetRequestToJSON(
   c1ApiStepupV1StepUpProviderServiceGetRequest:
     C1ApiStepupV1StepUpProviderServiceGetRequest,
@@ -80,22 +55,6 @@ export function c1ApiStepupV1StepUpProviderServiceGetRequestToJSON(
     C1ApiStepupV1StepUpProviderServiceGetRequest$outboundSchema.parse(
       c1ApiStepupV1StepUpProviderServiceGetRequest,
     ),
-  );
-}
-
-export function c1ApiStepupV1StepUpProviderServiceGetRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiStepupV1StepUpProviderServiceGetRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiStepupV1StepUpProviderServiceGetRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiStepupV1StepUpProviderServiceGetRequest' from JSON`,
   );
 }
 
@@ -119,65 +78,6 @@ export const C1ApiStepupV1StepUpProviderServiceGetResponse$inboundSchema:
       "GetStepUpProviderResponse": "getStepUpProviderResponse",
     });
   });
-
-/** @internal */
-export type C1ApiStepupV1StepUpProviderServiceGetResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  GetStepUpProviderResponse?:
-    | shared.GetStepUpProviderResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiStepupV1StepUpProviderServiceGetResponse$outboundSchema:
-  z.ZodType<
-    C1ApiStepupV1StepUpProviderServiceGetResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiStepupV1StepUpProviderServiceGetResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    getStepUpProviderResponse: shared.GetStepUpProviderResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      getStepUpProviderResponse: "GetStepUpProviderResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiStepupV1StepUpProviderServiceGetResponse$ {
-  /** @deprecated use `C1ApiStepupV1StepUpProviderServiceGetResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiStepupV1StepUpProviderServiceGetResponse$inboundSchema;
-  /** @deprecated use `C1ApiStepupV1StepUpProviderServiceGetResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiStepupV1StepUpProviderServiceGetResponse$outboundSchema;
-  /** @deprecated use `C1ApiStepupV1StepUpProviderServiceGetResponse$Outbound` instead. */
-  export type Outbound = C1ApiStepupV1StepUpProviderServiceGetResponse$Outbound;
-}
-
-export function c1ApiStepupV1StepUpProviderServiceGetResponseToJSON(
-  c1ApiStepupV1StepUpProviderServiceGetResponse:
-    C1ApiStepupV1StepUpProviderServiceGetResponse,
-): string {
-  return JSON.stringify(
-    C1ApiStepupV1StepUpProviderServiceGetResponse$outboundSchema.parse(
-      c1ApiStepupV1StepUpProviderServiceGetResponse,
-    ),
-  );
-}
 
 export function c1ApiStepupV1StepUpProviderServiceGetResponseFromJSON(
   jsonString: string,

@@ -3,30 +3,29 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { remap as remap$ } from "../../../lib/primitives.js";
+import {
+  TaskTypeActionInput,
+  TaskTypeActionInput$Outbound,
+  TaskTypeActionInput$outboundSchema,
+} from "./tasktypeactioninput.js";
 import {
   TaskTypeCertifyInput,
-  TaskTypeCertifyInput$inboundSchema,
   TaskTypeCertifyInput$Outbound,
   TaskTypeCertifyInput$outboundSchema,
 } from "./tasktypecertifyinput.js";
 import {
   TaskTypeGrantInput,
-  TaskTypeGrantInput$inboundSchema,
   TaskTypeGrantInput$Outbound,
   TaskTypeGrantInput$outboundSchema,
 } from "./tasktypegrantinput.js";
 import {
   TaskTypeOffboardingInput,
-  TaskTypeOffboardingInput$inboundSchema,
   TaskTypeOffboardingInput$Outbound,
   TaskTypeOffboardingInput$outboundSchema,
 } from "./tasktypeoffboardinginput.js";
 import {
   TaskTypeRevokeInput,
-  TaskTypeRevokeInput$inboundSchema,
   TaskTypeRevokeInput$Outbound,
   TaskTypeRevokeInput$outboundSchema,
 } from "./tasktyperevokeinput.js";
@@ -41,8 +40,13 @@ import {
  *   - revoke
  *   - certify
  *   - offboarding
+ *   - action
  */
 export type TaskTypeInput = {
+  /**
+   * The TaskTypeAction message.
+   */
+  taskTypeAction?: TaskTypeActionInput | null | undefined;
   certify?: TaskTypeCertifyInput | null | undefined;
   grant?: TaskTypeGrantInput | null | undefined;
   offboarding?: TaskTypeOffboardingInput | null | undefined;
@@ -50,19 +54,8 @@ export type TaskTypeInput = {
 };
 
 /** @internal */
-export const TaskTypeInput$inboundSchema: z.ZodType<
-  TaskTypeInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  certify: z.nullable(TaskTypeCertifyInput$inboundSchema).optional(),
-  grant: z.nullable(TaskTypeGrantInput$inboundSchema).optional(),
-  offboarding: z.nullable(TaskTypeOffboardingInput$inboundSchema).optional(),
-  revoke: z.nullable(TaskTypeRevokeInput$inboundSchema).optional(),
-});
-
-/** @internal */
 export type TaskTypeInput$Outbound = {
+  action?: TaskTypeActionInput$Outbound | null | undefined;
   certify?: TaskTypeCertifyInput$Outbound | null | undefined;
   grant?: TaskTypeGrantInput$Outbound | null | undefined;
   offboarding?: TaskTypeOffboardingInput$Outbound | null | undefined;
@@ -75,35 +68,17 @@ export const TaskTypeInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskTypeInput
 > = z.object({
+  taskTypeAction: z.nullable(TaskTypeActionInput$outboundSchema).optional(),
   certify: z.nullable(TaskTypeCertifyInput$outboundSchema).optional(),
   grant: z.nullable(TaskTypeGrantInput$outboundSchema).optional(),
   offboarding: z.nullable(TaskTypeOffboardingInput$outboundSchema).optional(),
   revoke: z.nullable(TaskTypeRevokeInput$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    taskTypeAction: "action",
+  });
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskTypeInput$ {
-  /** @deprecated use `TaskTypeInput$inboundSchema` instead. */
-  export const inboundSchema = TaskTypeInput$inboundSchema;
-  /** @deprecated use `TaskTypeInput$outboundSchema` instead. */
-  export const outboundSchema = TaskTypeInput$outboundSchema;
-  /** @deprecated use `TaskTypeInput$Outbound` instead. */
-  export type Outbound = TaskTypeInput$Outbound;
-}
 
 export function taskTypeInputToJSON(taskTypeInput: TaskTypeInput): string {
   return JSON.stringify(TaskTypeInput$outboundSchema.parse(taskTypeInput));
-}
-
-export function taskTypeInputFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskTypeInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskTypeInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskTypeInput' from JSON`,
-  );
 }

@@ -30,7 +30,6 @@ export const EmailNotifications$inboundSchema: z.ZodType<
   enabled: z.nullable(z.boolean()).optional(),
   identityUserIds: z.nullable(z.array(z.string())).optional(),
 });
-
 /** @internal */
 export type EmailNotifications$Outbound = {
   enabled?: boolean | null | undefined;
@@ -47,19 +46,6 @@ export const EmailNotifications$outboundSchema: z.ZodType<
   identityUserIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmailNotifications$ {
-  /** @deprecated use `EmailNotifications$inboundSchema` instead. */
-  export const inboundSchema = EmailNotifications$inboundSchema;
-  /** @deprecated use `EmailNotifications$outboundSchema` instead. */
-  export const outboundSchema = EmailNotifications$outboundSchema;
-  /** @deprecated use `EmailNotifications$Outbound` instead. */
-  export type Outbound = EmailNotifications$Outbound;
-}
-
 export function emailNotificationsToJSON(
   emailNotifications: EmailNotifications,
 ): string {
@@ -67,7 +53,6 @@ export function emailNotificationsToJSON(
     EmailNotifications$outboundSchema.parse(emailNotifications),
   );
 }
-
 export function emailNotificationsFromJSON(
   jsonString: string,
 ): SafeParseResult<EmailNotifications, SDKValidationError> {

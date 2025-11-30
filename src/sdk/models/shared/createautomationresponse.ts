@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementAutomation,
   AppEntitlementAutomation$inboundSchema,
-  AppEntitlementAutomation$Outbound,
-  AppEntitlementAutomation$outboundSchema,
 } from "./appentitlementautomation.js";
 
 /**
@@ -28,41 +26,6 @@ export const CreateAutomationResponse$inboundSchema: z.ZodType<
 > = z.object({
   automation: z.nullable(AppEntitlementAutomation$inboundSchema).optional(),
 });
-
-/** @internal */
-export type CreateAutomationResponse$Outbound = {
-  automation?: AppEntitlementAutomation$Outbound | null | undefined;
-};
-
-/** @internal */
-export const CreateAutomationResponse$outboundSchema: z.ZodType<
-  CreateAutomationResponse$Outbound,
-  z.ZodTypeDef,
-  CreateAutomationResponse
-> = z.object({
-  automation: z.nullable(AppEntitlementAutomation$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAutomationResponse$ {
-  /** @deprecated use `CreateAutomationResponse$inboundSchema` instead. */
-  export const inboundSchema = CreateAutomationResponse$inboundSchema;
-  /** @deprecated use `CreateAutomationResponse$outboundSchema` instead. */
-  export const outboundSchema = CreateAutomationResponse$outboundSchema;
-  /** @deprecated use `CreateAutomationResponse$Outbound` instead. */
-  export type Outbound = CreateAutomationResponse$Outbound;
-}
-
-export function createAutomationResponseToJSON(
-  createAutomationResponse: CreateAutomationResponse,
-): string {
-  return JSON.stringify(
-    CreateAutomationResponse$outboundSchema.parse(createAutomationResponse),
-  );
-}
 
 export function createAutomationResponseFromJSON(
   jsonString: string,

@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The PersonalClient message contains information about a presonal client credential.
@@ -36,32 +33,6 @@ export type PersonalClientInput = {
 };
 
 /** @internal */
-export const PersonalClientInput$inboundSchema: z.ZodType<
-  PersonalClientInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  allowSourceCidr: z.nullable(z.array(z.string())).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  expiresTime: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  lastUsedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  scopedRoles: z.nullable(z.array(z.string())).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
-
-/** @internal */
 export type PersonalClientInput$Outbound = {
   allowSourceCidr?: Array<string> | null | undefined;
   createdAt?: string | null | undefined;
@@ -89,33 +60,10 @@ export const PersonalClientInput$outboundSchema: z.ZodType<
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PersonalClientInput$ {
-  /** @deprecated use `PersonalClientInput$inboundSchema` instead. */
-  export const inboundSchema = PersonalClientInput$inboundSchema;
-  /** @deprecated use `PersonalClientInput$outboundSchema` instead. */
-  export const outboundSchema = PersonalClientInput$outboundSchema;
-  /** @deprecated use `PersonalClientInput$Outbound` instead. */
-  export type Outbound = PersonalClientInput$Outbound;
-}
-
 export function personalClientInputToJSON(
   personalClientInput: PersonalClientInput,
 ): string {
   return JSON.stringify(
     PersonalClientInput$outboundSchema.parse(personalClientInput),
-  );
-}
-
-export function personalClientInputFromJSON(
-  jsonString: string,
-): SafeParseResult<PersonalClientInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PersonalClientInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PersonalClientInput' from JSON`,
   );
 }

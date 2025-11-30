@@ -18,7 +18,6 @@ export const FileInputField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
 /** @internal */
 export type FileInputField$Outbound = {};
 
@@ -29,23 +28,9 @@ export const FileInputField$outboundSchema: z.ZodType<
   FileInputField
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileInputField$ {
-  /** @deprecated use `FileInputField$inboundSchema` instead. */
-  export const inboundSchema = FileInputField$inboundSchema;
-  /** @deprecated use `FileInputField$outboundSchema` instead. */
-  export const outboundSchema = FileInputField$outboundSchema;
-  /** @deprecated use `FileInputField$Outbound` instead. */
-  export type Outbound = FileInputField$Outbound;
-}
-
 export function fileInputFieldToJSON(fileInputField: FileInputField): string {
   return JSON.stringify(FileInputField$outboundSchema.parse(fileInputField));
 }
-
 export function fileInputFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<FileInputField, SDKValidationError> {

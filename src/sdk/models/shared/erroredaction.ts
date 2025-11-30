@@ -34,7 +34,6 @@ export const ErroredAction$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
 /** @internal */
 export type ErroredAction$Outbound = {
   description?: string | null | undefined;
@@ -53,23 +52,9 @@ export const ErroredAction$outboundSchema: z.ZodType<
   erroredAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ErroredAction$ {
-  /** @deprecated use `ErroredAction$inboundSchema` instead. */
-  export const inboundSchema = ErroredAction$inboundSchema;
-  /** @deprecated use `ErroredAction$outboundSchema` instead. */
-  export const outboundSchema = ErroredAction$outboundSchema;
-  /** @deprecated use `ErroredAction$Outbound` instead. */
-  export type Outbound = ErroredAction$Outbound;
-}
-
 export function erroredActionToJSON(erroredAction: ErroredAction): string {
   return JSON.stringify(ErroredAction$outboundSchema.parse(erroredAction));
 }
-
 export function erroredActionFromJSON(
   jsonString: string,
 ): SafeParseResult<ErroredAction, SDKValidationError> {

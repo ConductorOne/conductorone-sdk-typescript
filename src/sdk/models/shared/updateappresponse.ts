@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  App,
-  App$inboundSchema,
-  App$Outbound,
-  App$outboundSchema,
-} from "./app.js";
+import { App, App$inboundSchema } from "./app.js";
 
 /**
  * Returns the updated app's new values.
@@ -28,41 +23,6 @@ export const UpdateAppResponse$inboundSchema: z.ZodType<
 > = z.object({
   app: z.nullable(App$inboundSchema).optional(),
 });
-
-/** @internal */
-export type UpdateAppResponse$Outbound = {
-  app?: App$Outbound | null | undefined;
-};
-
-/** @internal */
-export const UpdateAppResponse$outboundSchema: z.ZodType<
-  UpdateAppResponse$Outbound,
-  z.ZodTypeDef,
-  UpdateAppResponse
-> = z.object({
-  app: z.nullable(App$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAppResponse$ {
-  /** @deprecated use `UpdateAppResponse$inboundSchema` instead. */
-  export const inboundSchema = UpdateAppResponse$inboundSchema;
-  /** @deprecated use `UpdateAppResponse$outboundSchema` instead. */
-  export const outboundSchema = UpdateAppResponse$outboundSchema;
-  /** @deprecated use `UpdateAppResponse$Outbound` instead. */
-  export type Outbound = UpdateAppResponse$Outbound;
-}
-
-export function updateAppResponseToJSON(
-  updateAppResponse: UpdateAppResponse,
-): string {
-  return JSON.stringify(
-    UpdateAppResponse$outboundSchema.parse(updateAppResponse),
-  );
-}
 
 export function updateAppResponseFromJSON(
   jsonString: string,

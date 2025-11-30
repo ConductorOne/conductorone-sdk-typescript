@@ -18,7 +18,6 @@ export const DisabledReasonCircuitBreaker$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
 /** @internal */
 export type DisabledReasonCircuitBreaker$Outbound = {};
 
@@ -29,19 +28,6 @@ export const DisabledReasonCircuitBreaker$outboundSchema: z.ZodType<
   DisabledReasonCircuitBreaker
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DisabledReasonCircuitBreaker$ {
-  /** @deprecated use `DisabledReasonCircuitBreaker$inboundSchema` instead. */
-  export const inboundSchema = DisabledReasonCircuitBreaker$inboundSchema;
-  /** @deprecated use `DisabledReasonCircuitBreaker$outboundSchema` instead. */
-  export const outboundSchema = DisabledReasonCircuitBreaker$outboundSchema;
-  /** @deprecated use `DisabledReasonCircuitBreaker$Outbound` instead. */
-  export type Outbound = DisabledReasonCircuitBreaker$Outbound;
-}
-
 export function disabledReasonCircuitBreakerToJSON(
   disabledReasonCircuitBreaker: DisabledReasonCircuitBreaker,
 ): string {
@@ -51,7 +37,6 @@ export function disabledReasonCircuitBreakerToJSON(
     ),
   );
 }
-
 export function disabledReasonCircuitBreakerFromJSON(
   jsonString: string,
 ): SafeParseResult<DisabledReasonCircuitBreaker, SDKValidationError> {

@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The DeleteAppEntitlementProxyRequest message.
  */
 export type DeleteAppEntitlementProxyRequest = {};
-
-/** @internal */
-export const DeleteAppEntitlementProxyRequest$inboundSchema: z.ZodType<
-  DeleteAppEntitlementProxyRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type DeleteAppEntitlementProxyRequest$Outbound = {};
@@ -29,19 +19,6 @@ export const DeleteAppEntitlementProxyRequest$outboundSchema: z.ZodType<
   DeleteAppEntitlementProxyRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteAppEntitlementProxyRequest$ {
-  /** @deprecated use `DeleteAppEntitlementProxyRequest$inboundSchema` instead. */
-  export const inboundSchema = DeleteAppEntitlementProxyRequest$inboundSchema;
-  /** @deprecated use `DeleteAppEntitlementProxyRequest$outboundSchema` instead. */
-  export const outboundSchema = DeleteAppEntitlementProxyRequest$outboundSchema;
-  /** @deprecated use `DeleteAppEntitlementProxyRequest$Outbound` instead. */
-  export type Outbound = DeleteAppEntitlementProxyRequest$Outbound;
-}
-
 export function deleteAppEntitlementProxyRequestToJSON(
   deleteAppEntitlementProxyRequest: DeleteAppEntitlementProxyRequest,
 ): string {
@@ -49,15 +26,5 @@ export function deleteAppEntitlementProxyRequestToJSON(
     DeleteAppEntitlementProxyRequest$outboundSchema.parse(
       deleteAppEntitlementProxyRequest,
     ),
-  );
-}
-
-export function deleteAppEntitlementProxyRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteAppEntitlementProxyRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteAppEntitlementProxyRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteAppEntitlementProxyRequest' from JSON`,
   );
 }

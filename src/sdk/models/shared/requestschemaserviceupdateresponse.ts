@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  RequestSchema,
-  RequestSchema$inboundSchema,
-  RequestSchema$Outbound,
-  RequestSchema$outboundSchema,
-} from "./requestschema.js";
+import { RequestSchema, RequestSchema$inboundSchema } from "./requestschema.js";
 
 /**
  * The RequestSchemaServiceUpdateResponse message.
@@ -28,44 +23,6 @@ export const RequestSchemaServiceUpdateResponse$inboundSchema: z.ZodType<
 > = z.object({
   requestSchema: z.nullable(RequestSchema$inboundSchema).optional(),
 });
-
-/** @internal */
-export type RequestSchemaServiceUpdateResponse$Outbound = {
-  requestSchema?: RequestSchema$Outbound | null | undefined;
-};
-
-/** @internal */
-export const RequestSchemaServiceUpdateResponse$outboundSchema: z.ZodType<
-  RequestSchemaServiceUpdateResponse$Outbound,
-  z.ZodTypeDef,
-  RequestSchemaServiceUpdateResponse
-> = z.object({
-  requestSchema: z.nullable(RequestSchema$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestSchemaServiceUpdateResponse$ {
-  /** @deprecated use `RequestSchemaServiceUpdateResponse$inboundSchema` instead. */
-  export const inboundSchema = RequestSchemaServiceUpdateResponse$inboundSchema;
-  /** @deprecated use `RequestSchemaServiceUpdateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestSchemaServiceUpdateResponse$outboundSchema;
-  /** @deprecated use `RequestSchemaServiceUpdateResponse$Outbound` instead. */
-  export type Outbound = RequestSchemaServiceUpdateResponse$Outbound;
-}
-
-export function requestSchemaServiceUpdateResponseToJSON(
-  requestSchemaServiceUpdateResponse: RequestSchemaServiceUpdateResponse,
-): string {
-  return JSON.stringify(
-    RequestSchemaServiceUpdateResponse$outboundSchema.parse(
-      requestSchemaServiceUpdateResponse,
-    ),
-  );
-}
 
 export function requestSchemaServiceUpdateResponseFromJSON(
   jsonString: string,

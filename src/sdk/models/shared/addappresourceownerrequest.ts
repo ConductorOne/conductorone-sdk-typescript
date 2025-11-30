@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The AddAppResourceOwnerRequest message.
@@ -16,15 +13,6 @@ export type AddAppResourceOwnerRequest = {
    */
   userId?: string | null | undefined;
 };
-
-/** @internal */
-export const AddAppResourceOwnerRequest$inboundSchema: z.ZodType<
-  AddAppResourceOwnerRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  userId: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type AddAppResourceOwnerRequest$Outbound = {
@@ -40,33 +28,10 @@ export const AddAppResourceOwnerRequest$outboundSchema: z.ZodType<
   userId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AddAppResourceOwnerRequest$ {
-  /** @deprecated use `AddAppResourceOwnerRequest$inboundSchema` instead. */
-  export const inboundSchema = AddAppResourceOwnerRequest$inboundSchema;
-  /** @deprecated use `AddAppResourceOwnerRequest$outboundSchema` instead. */
-  export const outboundSchema = AddAppResourceOwnerRequest$outboundSchema;
-  /** @deprecated use `AddAppResourceOwnerRequest$Outbound` instead. */
-  export type Outbound = AddAppResourceOwnerRequest$Outbound;
-}
-
 export function addAppResourceOwnerRequestToJSON(
   addAppResourceOwnerRequest: AddAppResourceOwnerRequest,
 ): string {
   return JSON.stringify(
     AddAppResourceOwnerRequest$outboundSchema.parse(addAppResourceOwnerRequest),
-  );
-}
-
-export function addAppResourceOwnerRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<AddAppResourceOwnerRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AddAppResourceOwnerRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AddAppResourceOwnerRequest' from JSON`,
   );
 }

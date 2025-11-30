@@ -19,39 +19,6 @@ export const WebhooksServiceDeleteResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type WebhooksServiceDeleteResponse$Outbound = {};
-
-/** @internal */
-export const WebhooksServiceDeleteResponse$outboundSchema: z.ZodType<
-  WebhooksServiceDeleteResponse$Outbound,
-  z.ZodTypeDef,
-  WebhooksServiceDeleteResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhooksServiceDeleteResponse$ {
-  /** @deprecated use `WebhooksServiceDeleteResponse$inboundSchema` instead. */
-  export const inboundSchema = WebhooksServiceDeleteResponse$inboundSchema;
-  /** @deprecated use `WebhooksServiceDeleteResponse$outboundSchema` instead. */
-  export const outboundSchema = WebhooksServiceDeleteResponse$outboundSchema;
-  /** @deprecated use `WebhooksServiceDeleteResponse$Outbound` instead. */
-  export type Outbound = WebhooksServiceDeleteResponse$Outbound;
-}
-
-export function webhooksServiceDeleteResponseToJSON(
-  webhooksServiceDeleteResponse: WebhooksServiceDeleteResponse,
-): string {
-  return JSON.stringify(
-    WebhooksServiceDeleteResponse$outboundSchema.parse(
-      webhooksServiceDeleteResponse,
-    ),
-  );
-}
-
 export function webhooksServiceDeleteResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhooksServiceDeleteResponse, SDKValidationError> {

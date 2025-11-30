@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppUsageControls,
   AppUsageControls$inboundSchema,
-  AppUsageControls$Outbound,
-  AppUsageControls$outboundSchema,
 } from "./appusagecontrols.js";
 
 /**
@@ -28,43 +26,6 @@ export const UpdateAppUsageControlsResponse$inboundSchema: z.ZodType<
 > = z.object({
   appUsageControls: z.nullable(AppUsageControls$inboundSchema).optional(),
 });
-
-/** @internal */
-export type UpdateAppUsageControlsResponse$Outbound = {
-  appUsageControls?: AppUsageControls$Outbound | null | undefined;
-};
-
-/** @internal */
-export const UpdateAppUsageControlsResponse$outboundSchema: z.ZodType<
-  UpdateAppUsageControlsResponse$Outbound,
-  z.ZodTypeDef,
-  UpdateAppUsageControlsResponse
-> = z.object({
-  appUsageControls: z.nullable(AppUsageControls$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAppUsageControlsResponse$ {
-  /** @deprecated use `UpdateAppUsageControlsResponse$inboundSchema` instead. */
-  export const inboundSchema = UpdateAppUsageControlsResponse$inboundSchema;
-  /** @deprecated use `UpdateAppUsageControlsResponse$outboundSchema` instead. */
-  export const outboundSchema = UpdateAppUsageControlsResponse$outboundSchema;
-  /** @deprecated use `UpdateAppUsageControlsResponse$Outbound` instead. */
-  export type Outbound = UpdateAppUsageControlsResponse$Outbound;
-}
-
-export function updateAppUsageControlsResponseToJSON(
-  updateAppUsageControlsResponse: UpdateAppUsageControlsResponse,
-): string {
-  return JSON.stringify(
-    UpdateAppUsageControlsResponse$outboundSchema.parse(
-      updateAppUsageControlsResponse,
-    ),
-  );
-}
 
 export function updateAppUsageControlsResponseFromJSON(
   jsonString: string,

@@ -10,8 +10,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementAutomation,
   AppEntitlementAutomation$inboundSchema,
-  AppEntitlementAutomation$Outbound,
-  AppEntitlementAutomation$outboundSchema,
 } from "./appentitlementautomation.js";
 
 /**
@@ -33,56 +31,6 @@ export const AppEntitlementServiceGetAutomationResponse$inboundSchema:
         "AppEntitlementAutomation": "appEntitlementAutomation",
       });
     });
-
-/** @internal */
-export type AppEntitlementServiceGetAutomationResponse$Outbound = {
-  AppEntitlementAutomation?:
-    | AppEntitlementAutomation$Outbound
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const AppEntitlementServiceGetAutomationResponse$outboundSchema:
-  z.ZodType<
-    AppEntitlementServiceGetAutomationResponse$Outbound,
-    z.ZodTypeDef,
-    AppEntitlementServiceGetAutomationResponse
-  > = z.object({
-    appEntitlementAutomation: z.nullable(
-      AppEntitlementAutomation$outboundSchema,
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appEntitlementAutomation: "AppEntitlementAutomation",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementServiceGetAutomationResponse$ {
-  /** @deprecated use `AppEntitlementServiceGetAutomationResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    AppEntitlementServiceGetAutomationResponse$inboundSchema;
-  /** @deprecated use `AppEntitlementServiceGetAutomationResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    AppEntitlementServiceGetAutomationResponse$outboundSchema;
-  /** @deprecated use `AppEntitlementServiceGetAutomationResponse$Outbound` instead. */
-  export type Outbound = AppEntitlementServiceGetAutomationResponse$Outbound;
-}
-
-export function appEntitlementServiceGetAutomationResponseToJSON(
-  appEntitlementServiceGetAutomationResponse:
-    AppEntitlementServiceGetAutomationResponse,
-): string {
-  return JSON.stringify(
-    AppEntitlementServiceGetAutomationResponse$outboundSchema.parse(
-      appEntitlementServiceGetAutomationResponse,
-    ),
-  );
-}
 
 export function appEntitlementServiceGetAutomationResponseFromJSON(
   jsonString: string,

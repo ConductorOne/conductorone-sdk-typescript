@@ -35,23 +35,6 @@ export type C1ApiAppV1AppOwnersAddResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppOwnersAddRequest$inboundSchema: z.ZodType<
-  C1ApiAppV1AppOwnersAddRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  app_id: z.nullable(z.string()),
-  user_id: z.nullable(z.string()),
-  AddAppOwnerRequest: shared.AddAppOwnerRequest$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "app_id": "appId",
-    "user_id": "userId",
-    "AddAppOwnerRequest": "addAppOwnerRequest",
-  });
-});
-
-/** @internal */
 export type C1ApiAppV1AppOwnersAddRequest$Outbound = {
   app_id: string | null;
   user_id: string | null;
@@ -75,19 +58,6 @@ export const C1ApiAppV1AppOwnersAddRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppOwnersAddRequest$ {
-  /** @deprecated use `C1ApiAppV1AppOwnersAddRequest$inboundSchema` instead. */
-  export const inboundSchema = C1ApiAppV1AppOwnersAddRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppOwnersAddRequest$outboundSchema` instead. */
-  export const outboundSchema = C1ApiAppV1AppOwnersAddRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppOwnersAddRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppOwnersAddRequest$Outbound;
-}
-
 export function c1ApiAppV1AppOwnersAddRequestToJSON(
   c1ApiAppV1AppOwnersAddRequest: C1ApiAppV1AppOwnersAddRequest,
 ): string {
@@ -95,16 +65,6 @@ export function c1ApiAppV1AppOwnersAddRequestToJSON(
     C1ApiAppV1AppOwnersAddRequest$outboundSchema.parse(
       c1ApiAppV1AppOwnersAddRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppOwnersAddRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<C1ApiAppV1AppOwnersAddRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => C1ApiAppV1AppOwnersAddRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppOwnersAddRequest' from JSON`,
   );
 }
 
@@ -126,58 +86,6 @@ export const C1ApiAppV1AppOwnersAddResponse$inboundSchema: z.ZodType<
     "AddAppOwnerResponse": "addAppOwnerResponse",
   });
 });
-
-/** @internal */
-export type C1ApiAppV1AppOwnersAddResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  AddAppOwnerResponse?: shared.AddAppOwnerResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppOwnersAddResponse$outboundSchema: z.ZodType<
-  C1ApiAppV1AppOwnersAddResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiAppV1AppOwnersAddResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  addAppOwnerResponse: shared.AddAppOwnerResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    addAppOwnerResponse: "AddAppOwnerResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppOwnersAddResponse$ {
-  /** @deprecated use `C1ApiAppV1AppOwnersAddResponse$inboundSchema` instead. */
-  export const inboundSchema = C1ApiAppV1AppOwnersAddResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppOwnersAddResponse$outboundSchema` instead. */
-  export const outboundSchema = C1ApiAppV1AppOwnersAddResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppOwnersAddResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppOwnersAddResponse$Outbound;
-}
-
-export function c1ApiAppV1AppOwnersAddResponseToJSON(
-  c1ApiAppV1AppOwnersAddResponse: C1ApiAppV1AppOwnersAddResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppOwnersAddResponse$outboundSchema.parse(
-      c1ApiAppV1AppOwnersAddResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppOwnersAddResponseFromJSON(
   jsonString: string,

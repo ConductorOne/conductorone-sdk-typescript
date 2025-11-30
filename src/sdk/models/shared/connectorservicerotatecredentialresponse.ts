@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ConnectorCredential,
   ConnectorCredential$inboundSchema,
-  ConnectorCredential$Outbound,
-  ConnectorCredential$outboundSchema,
 } from "./connectorcredential.js";
 
 /**
@@ -28,46 +26,6 @@ export const ConnectorServiceRotateCredentialResponse$inboundSchema: z.ZodType<
 > = z.object({
   credential: z.nullable(ConnectorCredential$inboundSchema).optional(),
 });
-
-/** @internal */
-export type ConnectorServiceRotateCredentialResponse$Outbound = {
-  credential?: ConnectorCredential$Outbound | null | undefined;
-};
-
-/** @internal */
-export const ConnectorServiceRotateCredentialResponse$outboundSchema: z.ZodType<
-  ConnectorServiceRotateCredentialResponse$Outbound,
-  z.ZodTypeDef,
-  ConnectorServiceRotateCredentialResponse
-> = z.object({
-  credential: z.nullable(ConnectorCredential$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorServiceRotateCredentialResponse$ {
-  /** @deprecated use `ConnectorServiceRotateCredentialResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    ConnectorServiceRotateCredentialResponse$inboundSchema;
-  /** @deprecated use `ConnectorServiceRotateCredentialResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    ConnectorServiceRotateCredentialResponse$outboundSchema;
-  /** @deprecated use `ConnectorServiceRotateCredentialResponse$Outbound` instead. */
-  export type Outbound = ConnectorServiceRotateCredentialResponse$Outbound;
-}
-
-export function connectorServiceRotateCredentialResponseToJSON(
-  connectorServiceRotateCredentialResponse:
-    ConnectorServiceRotateCredentialResponse,
-): string {
-  return JSON.stringify(
-    ConnectorServiceRotateCredentialResponse$outboundSchema.parse(
-      connectorServiceRotateCredentialResponse,
-    ),
-  );
-}
 
 export function connectorServiceRotateCredentialResponseFromJSON(
   jsonString: string,

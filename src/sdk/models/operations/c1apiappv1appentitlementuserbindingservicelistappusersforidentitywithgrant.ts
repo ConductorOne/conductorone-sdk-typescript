@@ -39,24 +39,6 @@ export type C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWit
   };
 
 /** @internal */
-export const C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    app_entitlement_id: z.nullable(z.string()),
-    identity_user_id: z.nullable(z.string()),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "app_entitlement_id": "appEntitlementId",
-      "identity_user_id": "identityUserId",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantRequest$Outbound =
   {
     app_id: string | null;
@@ -82,22 +64,6 @@ export const C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWi
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantRequest$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantRequest$Outbound;
-}
-
 export function c1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantRequestToJSON(
   c1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantRequest:
     C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantRequest,
@@ -107,21 +73,6 @@ export function c1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentit
       .parse(
         c1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantRequest,
       ),
-  );
-}
-
-export function c1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantRequest' from JSON`,
   );
 }
 
@@ -146,69 +97,6 @@ export const C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWi
         "listAppUsersForIdentityWithGrantResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    ListAppUsersForIdentityWithGrantResponse?:
-      | shared.ListAppUsersForIdentityWithGrantResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    listAppUsersForIdentityWithGrantResponse: shared
-      .ListAppUsersForIdentityWithGrantResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      listAppUsersForIdentityWithGrantResponse:
-        "ListAppUsersForIdentityWithGrantResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponse$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponse$Outbound;
-}
-
-export function c1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponseToJSON(
-  c1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponse:
-    C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponse$outboundSchema
-      .parse(
-        c1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponse,
-      ),
-  );
-}
 
 export function c1ApiAppV1AppEntitlementUserBindingServiceListAppUsersForIdentityWithGrantResponseFromJSON(
   jsonString: string,

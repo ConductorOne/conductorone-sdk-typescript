@@ -52,66 +52,6 @@ export const C1ApiIamV1PersonalClientServiceCreateResponse$inboundSchema:
     });
   });
 
-/** @internal */
-export type C1ApiIamV1PersonalClientServiceCreateResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  PersonalClientServiceCreateResponse?:
-    | shared.PersonalClientServiceCreateResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiIamV1PersonalClientServiceCreateResponse$outboundSchema:
-  z.ZodType<
-    C1ApiIamV1PersonalClientServiceCreateResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiIamV1PersonalClientServiceCreateResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    personalClientServiceCreateResponse: shared
-      .PersonalClientServiceCreateResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      personalClientServiceCreateResponse:
-        "PersonalClientServiceCreateResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiIamV1PersonalClientServiceCreateResponse$ {
-  /** @deprecated use `C1ApiIamV1PersonalClientServiceCreateResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiIamV1PersonalClientServiceCreateResponse$inboundSchema;
-  /** @deprecated use `C1ApiIamV1PersonalClientServiceCreateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiIamV1PersonalClientServiceCreateResponse$outboundSchema;
-  /** @deprecated use `C1ApiIamV1PersonalClientServiceCreateResponse$Outbound` instead. */
-  export type Outbound = C1ApiIamV1PersonalClientServiceCreateResponse$Outbound;
-}
-
-export function c1ApiIamV1PersonalClientServiceCreateResponseToJSON(
-  c1ApiIamV1PersonalClientServiceCreateResponse:
-    C1ApiIamV1PersonalClientServiceCreateResponse,
-): string {
-  return JSON.stringify(
-    C1ApiIamV1PersonalClientServiceCreateResponse$outboundSchema.parse(
-      c1ApiIamV1PersonalClientServiceCreateResponse,
-    ),
-  );
-}
-
 export function c1ApiIamV1PersonalClientServiceCreateResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

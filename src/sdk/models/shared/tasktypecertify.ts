@@ -4,18 +4,15 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The outcome of the certification.
  */
-export const Outcome = {
+export const TaskTypeCertifyOutcome = {
   CertifyOutcomeUnspecified: "CERTIFY_OUTCOME_UNSPECIFIED",
   CertifyOutcomeCertified: "CERTIFY_OUTCOME_CERTIFIED",
   CertifyOutcomeDecertified: "CERTIFY_OUTCOME_DECERTIFIED",
@@ -26,7 +23,7 @@ export const Outcome = {
 /**
  * The outcome of the certification.
  */
-export type Outcome = OpenEnum<typeof Outcome>;
+export type TaskTypeCertifyOutcome = OpenEnum<typeof TaskTypeCertifyOutcome>;
 
 /**
  * The TaskTypeCertify message indicates that a task is a certify task and all related details.
@@ -59,35 +56,22 @@ export type TaskTypeCertify = {
   /**
    * The outcome of the certification.
    */
-  outcome?: Outcome | null | undefined;
+  outcome?: TaskTypeCertifyOutcome | null | undefined;
   outcomeTime?: Date | null | undefined;
 };
 
 /** @internal */
-export const Outcome$inboundSchema: z.ZodType<Outcome, z.ZodTypeDef, unknown> =
-  z
-    .union([
-      z.nativeEnum(Outcome),
-      z.string().transform(catchUnrecognizedEnum),
-    ]);
-
+export const TaskTypeCertifyOutcome$inboundSchema: z.ZodType<
+  TaskTypeCertifyOutcome,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(TaskTypeCertifyOutcome);
 /** @internal */
-export const Outcome$outboundSchema: z.ZodType<Outcome, z.ZodTypeDef, Outcome> =
-  z.union([
-    z.nativeEnum(Outcome),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Outcome$ {
-  /** @deprecated use `Outcome$inboundSchema` instead. */
-  export const inboundSchema = Outcome$inboundSchema;
-  /** @deprecated use `Outcome$outboundSchema` instead. */
-  export const outboundSchema = Outcome$outboundSchema;
-}
+export const TaskTypeCertifyOutcome$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  TaskTypeCertifyOutcome
+> = openEnums.outboundSchema(TaskTypeCertifyOutcome);
 
 /** @internal */
 export const TaskTypeCertify$inboundSchema: z.ZodType<
@@ -101,12 +85,11 @@ export const TaskTypeCertify$inboundSchema: z.ZodType<
   appId: z.nullable(z.string()).optional(),
   appUserId: z.nullable(z.string()).optional(),
   identityUserId: z.nullable(z.string()).optional(),
-  outcome: z.nullable(Outcome$inboundSchema).optional(),
+  outcome: z.nullable(TaskTypeCertifyOutcome$inboundSchema).optional(),
   outcomeTime: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
 /** @internal */
 export type TaskTypeCertify$Outbound = {
   accessReviewId?: string | null | undefined;
@@ -131,29 +114,15 @@ export const TaskTypeCertify$outboundSchema: z.ZodType<
   appId: z.nullable(z.string()).optional(),
   appUserId: z.nullable(z.string()).optional(),
   identityUserId: z.nullable(z.string()).optional(),
-  outcome: z.nullable(Outcome$outboundSchema).optional(),
+  outcome: z.nullable(TaskTypeCertifyOutcome$outboundSchema).optional(),
   outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskTypeCertify$ {
-  /** @deprecated use `TaskTypeCertify$inboundSchema` instead. */
-  export const inboundSchema = TaskTypeCertify$inboundSchema;
-  /** @deprecated use `TaskTypeCertify$outboundSchema` instead. */
-  export const outboundSchema = TaskTypeCertify$outboundSchema;
-  /** @deprecated use `TaskTypeCertify$Outbound` instead. */
-  export type Outbound = TaskTypeCertify$Outbound;
-}
 
 export function taskTypeCertifyToJSON(
   taskTypeCertify: TaskTypeCertify,
 ): string {
   return JSON.stringify(TaskTypeCertify$outboundSchema.parse(taskTypeCertify));
 }
-
 export function taskTypeCertifyFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskTypeCertify, SDKValidationError> {

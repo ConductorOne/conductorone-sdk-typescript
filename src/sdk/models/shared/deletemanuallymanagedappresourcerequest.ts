@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The DeleteManuallyManagedAppResourceRequest message.
  */
 export type DeleteManuallyManagedAppResourceRequest = {};
-
-/** @internal */
-export const DeleteManuallyManagedAppResourceRequest$inboundSchema: z.ZodType<
-  DeleteManuallyManagedAppResourceRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type DeleteManuallyManagedAppResourceRequest$Outbound = {};
@@ -29,21 +19,6 @@ export const DeleteManuallyManagedAppResourceRequest$outboundSchema: z.ZodType<
   DeleteManuallyManagedAppResourceRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteManuallyManagedAppResourceRequest$ {
-  /** @deprecated use `DeleteManuallyManagedAppResourceRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteManuallyManagedAppResourceRequest$inboundSchema;
-  /** @deprecated use `DeleteManuallyManagedAppResourceRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteManuallyManagedAppResourceRequest$outboundSchema;
-  /** @deprecated use `DeleteManuallyManagedAppResourceRequest$Outbound` instead. */
-  export type Outbound = DeleteManuallyManagedAppResourceRequest$Outbound;
-}
-
 export function deleteManuallyManagedAppResourceRequestToJSON(
   deleteManuallyManagedAppResourceRequest:
     DeleteManuallyManagedAppResourceRequest,
@@ -52,21 +27,5 @@ export function deleteManuallyManagedAppResourceRequestToJSON(
     DeleteManuallyManagedAppResourceRequest$outboundSchema.parse(
       deleteManuallyManagedAppResourceRequest,
     ),
-  );
-}
-
-export function deleteManuallyManagedAppResourceRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeleteManuallyManagedAppResourceRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteManuallyManagedAppResourceRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeleteManuallyManagedAppResourceRequest' from JSON`,
   );
 }

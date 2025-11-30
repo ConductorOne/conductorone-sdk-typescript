@@ -30,7 +30,6 @@ export const AppEntitlementRef$inboundSchema: z.ZodType<
   appId: z.nullable(z.string()).optional(),
   id: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type AppEntitlementRef$Outbound = {
   appId?: string | null | undefined;
@@ -47,19 +46,6 @@ export const AppEntitlementRef$outboundSchema: z.ZodType<
   id: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementRef$ {
-  /** @deprecated use `AppEntitlementRef$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementRef$inboundSchema;
-  /** @deprecated use `AppEntitlementRef$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlementRef$outboundSchema;
-  /** @deprecated use `AppEntitlementRef$Outbound` instead. */
-  export type Outbound = AppEntitlementRef$Outbound;
-}
-
 export function appEntitlementRefToJSON(
   appEntitlementRef: AppEntitlementRef,
 ): string {
@@ -67,7 +53,6 @@ export function appEntitlementRefToJSON(
     AppEntitlementRef$outboundSchema.parse(appEntitlementRef),
   );
 }
-
 export function appEntitlementRefFromJSON(
   jsonString: string,
 ): SafeParseResult<AppEntitlementRef, SDKValidationError> {

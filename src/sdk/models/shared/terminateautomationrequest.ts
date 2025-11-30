@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The TerminateAutomationRequest message.
  */
 export type TerminateAutomationRequest = {};
-
-/** @internal */
-export const TerminateAutomationRequest$inboundSchema: z.ZodType<
-  TerminateAutomationRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type TerminateAutomationRequest$Outbound = {};
@@ -29,33 +19,10 @@ export const TerminateAutomationRequest$outboundSchema: z.ZodType<
   TerminateAutomationRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TerminateAutomationRequest$ {
-  /** @deprecated use `TerminateAutomationRequest$inboundSchema` instead. */
-  export const inboundSchema = TerminateAutomationRequest$inboundSchema;
-  /** @deprecated use `TerminateAutomationRequest$outboundSchema` instead. */
-  export const outboundSchema = TerminateAutomationRequest$outboundSchema;
-  /** @deprecated use `TerminateAutomationRequest$Outbound` instead. */
-  export type Outbound = TerminateAutomationRequest$Outbound;
-}
-
 export function terminateAutomationRequestToJSON(
   terminateAutomationRequest: TerminateAutomationRequest,
 ): string {
   return JSON.stringify(
     TerminateAutomationRequest$outboundSchema.parse(terminateAutomationRequest),
-  );
-}
-
-export function terminateAutomationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<TerminateAutomationRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TerminateAutomationRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TerminateAutomationRequest' from JSON`,
   );
 }

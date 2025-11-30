@@ -30,7 +30,6 @@ export const TaskRevokeSourceReview$inboundSchema: z.ZodType<
   accessReviewId: z.nullable(z.string()).optional(),
   certTicketId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type TaskRevokeSourceReview$Outbound = {
   accessReviewId?: string | null | undefined;
@@ -47,19 +46,6 @@ export const TaskRevokeSourceReview$outboundSchema: z.ZodType<
   certTicketId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskRevokeSourceReview$ {
-  /** @deprecated use `TaskRevokeSourceReview$inboundSchema` instead. */
-  export const inboundSchema = TaskRevokeSourceReview$inboundSchema;
-  /** @deprecated use `TaskRevokeSourceReview$outboundSchema` instead. */
-  export const outboundSchema = TaskRevokeSourceReview$outboundSchema;
-  /** @deprecated use `TaskRevokeSourceReview$Outbound` instead. */
-  export type Outbound = TaskRevokeSourceReview$Outbound;
-}
-
 export function taskRevokeSourceReviewToJSON(
   taskRevokeSourceReview: TaskRevokeSourceReview,
 ): string {
@@ -67,7 +53,6 @@ export function taskRevokeSourceReviewToJSON(
     TaskRevokeSourceReview$outboundSchema.parse(taskRevokeSourceReview),
   );
 }
-
 export function taskRevokeSourceReviewFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskRevokeSourceReview, SDKValidationError> {

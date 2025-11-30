@@ -4,22 +4,16 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ProvisionPolicy,
   ProvisionPolicy$inboundSchema,
-  ProvisionPolicy$Outbound,
-  ProvisionPolicy$outboundSchema,
 } from "./provisionpolicy.js";
 import {
   ProvisionPolicyInput,
-  ProvisionPolicyInput$inboundSchema,
   ProvisionPolicyInput$Outbound,
   ProvisionPolicyInput$outboundSchema,
 } from "./provisionpolicyinput.js";
@@ -272,7 +266,6 @@ export const AppEntitlementDurationUnset$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
 /** @internal */
 export type AppEntitlementDurationUnset$Outbound = {};
 
@@ -283,19 +276,6 @@ export const AppEntitlementDurationUnset$outboundSchema: z.ZodType<
   AppEntitlementDurationUnset
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementDurationUnset$ {
-  /** @deprecated use `AppEntitlementDurationUnset$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementDurationUnset$inboundSchema;
-  /** @deprecated use `AppEntitlementDurationUnset$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlementDurationUnset$outboundSchema;
-  /** @deprecated use `AppEntitlementDurationUnset$Outbound` instead. */
-  export type Outbound = AppEntitlementDurationUnset$Outbound;
-}
-
 export function appEntitlementDurationUnsetToJSON(
   appEntitlementDurationUnset: AppEntitlementDurationUnset,
 ): string {
@@ -305,7 +285,6 @@ export function appEntitlementDurationUnsetToJSON(
     ),
   );
 }
-
 export function appEntitlementDurationUnsetFromJSON(
   jsonString: string,
 ): SafeParseResult<AppEntitlementDurationUnset, SDKValidationError> {
@@ -318,29 +297,10 @@ export function appEntitlementDurationUnsetFromJSON(
 
 /** @internal */
 export const Purpose$inboundSchema: z.ZodType<Purpose, z.ZodTypeDef, unknown> =
-  z
-    .union([
-      z.nativeEnum(Purpose),
-      z.string().transform(catchUnrecognizedEnum),
-    ]);
-
+  openEnums.inboundSchema(Purpose);
 /** @internal */
-export const Purpose$outboundSchema: z.ZodType<Purpose, z.ZodTypeDef, Purpose> =
-  z.union([
-    z.nativeEnum(Purpose),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Purpose$ {
-  /** @deprecated use `Purpose$inboundSchema` instead. */
-  export const inboundSchema = Purpose$inboundSchema;
-  /** @deprecated use `Purpose$outboundSchema` instead. */
-  export const outboundSchema = Purpose$outboundSchema;
-}
+export const Purpose$outboundSchema: z.ZodType<string, z.ZodTypeDef, Purpose> =
+  openEnums.outboundSchema(Purpose);
 
 /** @internal */
 export const AppEntitlement$inboundSchema: z.ZodType<
@@ -391,103 +351,6 @@ export const AppEntitlement$inboundSchema: z.ZodType<
   userEditedMask: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type AppEntitlement$Outbound = {
-  alias?: string | null | undefined;
-  appId?: string | null | undefined;
-  appResourceId?: string | null | undefined;
-  appResourceTypeId?: string | null | undefined;
-  certifyPolicyId?: string | null | undefined;
-  complianceFrameworkValueIds?: Array<string> | null | undefined;
-  createdAt?: string | null | undefined;
-  defaultValuesApplied?: boolean | null | undefined;
-  deletedAt?: string | null | undefined;
-  deprovisionerPolicy?: ProvisionPolicy$Outbound | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  durationGrant?: string | null | undefined;
-  durationUnset?: AppEntitlementDurationUnset$Outbound | null | undefined;
-  emergencyGrantEnabled?: boolean | null | undefined;
-  emergencyGrantPolicyId?: string | null | undefined;
-  grantCount?: string | null | undefined;
-  grantPolicyId?: string | null | undefined;
-  id?: string | null | undefined;
-  isAutomationEnabled?: boolean | null | undefined;
-  isManuallyManaged?: boolean | null | undefined;
-  matchBatonId?: string | null | undefined;
-  overrideAccessRequestsDefaults?: boolean | null | undefined;
-  provisionerPolicy?: ProvisionPolicy$Outbound | null | undefined;
-  purpose?: string | null | undefined;
-  requestSchemaId?: string | null | undefined;
-  revokePolicyId?: string | null | undefined;
-  riskLevelValueId?: string | null | undefined;
-  slug?: string | null | undefined;
-  sourceConnectorIds?: { [k: string]: string } | null | undefined;
-  systemBuiltin?: boolean | null | undefined;
-  updatedAt?: string | null | undefined;
-  userEditedMask?: string | null | undefined;
-};
-
-/** @internal */
-export const AppEntitlement$outboundSchema: z.ZodType<
-  AppEntitlement$Outbound,
-  z.ZodTypeDef,
-  AppEntitlement
-> = z.object({
-  alias: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appResourceId: z.nullable(z.string()).optional(),
-  appResourceTypeId: z.nullable(z.string()).optional(),
-  certifyPolicyId: z.nullable(z.string()).optional(),
-  complianceFrameworkValueIds: z.nullable(z.array(z.string())).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  defaultValuesApplied: z.nullable(z.boolean()).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deprovisionerPolicy: z.nullable(ProvisionPolicy$outboundSchema).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  durationGrant: z.nullable(z.string()).optional(),
-  durationUnset: z.nullable(
-    z.lazy(() => AppEntitlementDurationUnset$outboundSchema),
-  ).optional(),
-  emergencyGrantEnabled: z.nullable(z.boolean()).optional(),
-  emergencyGrantPolicyId: z.nullable(z.string()).optional(),
-  grantCount: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
-  grantPolicyId: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  isAutomationEnabled: z.nullable(z.boolean()).optional(),
-  isManuallyManaged: z.nullable(z.boolean()).optional(),
-  matchBatonId: z.nullable(z.string()).optional(),
-  overrideAccessRequestsDefaults: z.nullable(z.boolean()).optional(),
-  provisionerPolicy: z.nullable(ProvisionPolicy$outboundSchema).optional(),
-  purpose: z.nullable(Purpose$outboundSchema).optional(),
-  requestSchemaId: z.nullable(z.string()).optional(),
-  revokePolicyId: z.nullable(z.string()).optional(),
-  riskLevelValueId: z.nullable(z.string()).optional(),
-  slug: z.nullable(z.string()).optional(),
-  sourceConnectorIds: z.nullable(z.record(z.string())).optional(),
-  systemBuiltin: z.nullable(z.boolean()).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  userEditedMask: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlement$ {
-  /** @deprecated use `AppEntitlement$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlement$inboundSchema;
-  /** @deprecated use `AppEntitlement$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlement$outboundSchema;
-  /** @deprecated use `AppEntitlement$Outbound` instead. */
-  export type Outbound = AppEntitlement$Outbound;
-}
-
-export function appEntitlementToJSON(appEntitlement: AppEntitlement): string {
-  return JSON.stringify(AppEntitlement$outboundSchema.parse(appEntitlement));
-}
-
 export function appEntitlementFromJSON(
   jsonString: string,
 ): SafeParseResult<AppEntitlement, SDKValidationError> {
@@ -497,52 +360,6 @@ export function appEntitlementFromJSON(
     `Failed to parse 'AppEntitlement' from JSON`,
   );
 }
-
-/** @internal */
-export const AppEntitlementInput$inboundSchema: z.ZodType<
-  AppEntitlementInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  alias: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appResourceId: z.nullable(z.string()).optional(),
-  appResourceTypeId: z.nullable(z.string()).optional(),
-  certifyPolicyId: z.nullable(z.string()).optional(),
-  complianceFrameworkValueIds: z.nullable(z.array(z.string())).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  defaultValuesApplied: z.nullable(z.boolean()).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deprovisionerPolicy: z.nullable(ProvisionPolicyInput$inboundSchema)
-    .optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  durationGrant: z.nullable(z.string()).optional(),
-  durationUnset: z.nullable(
-    z.lazy(() => AppEntitlementDurationUnset$inboundSchema),
-  ).optional(),
-  emergencyGrantEnabled: z.nullable(z.boolean()).optional(),
-  emergencyGrantPolicyId: z.nullable(z.string()).optional(),
-  grantPolicyId: z.nullable(z.string()).optional(),
-  isManuallyManaged: z.nullable(z.boolean()).optional(),
-  matchBatonId: z.nullable(z.string()).optional(),
-  overrideAccessRequestsDefaults: z.nullable(z.boolean()).optional(),
-  provisionerPolicy: z.nullable(ProvisionPolicyInput$inboundSchema).optional(),
-  purpose: z.nullable(Purpose$inboundSchema).optional(),
-  requestSchemaId: z.nullable(z.string()).optional(),
-  revokePolicyId: z.nullable(z.string()).optional(),
-  riskLevelValueId: z.nullable(z.string()).optional(),
-  slug: z.nullable(z.string()).optional(),
-  sourceConnectorIds: z.nullable(z.record(z.string())).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  userEditedMask: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type AppEntitlementInput$Outbound = {
@@ -617,33 +434,10 @@ export const AppEntitlementInput$outboundSchema: z.ZodType<
   userEditedMask: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementInput$ {
-  /** @deprecated use `AppEntitlementInput$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementInput$inboundSchema;
-  /** @deprecated use `AppEntitlementInput$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlementInput$outboundSchema;
-  /** @deprecated use `AppEntitlementInput$Outbound` instead. */
-  export type Outbound = AppEntitlementInput$Outbound;
-}
-
 export function appEntitlementInputToJSON(
   appEntitlementInput: AppEntitlementInput,
 ): string {
   return JSON.stringify(
     AppEntitlementInput$outboundSchema.parse(appEntitlementInput),
-  );
-}
-
-export function appEntitlementInputFromJSON(
-  jsonString: string,
-): SafeParseResult<AppEntitlementInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AppEntitlementInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AppEntitlementInput' from JSON`,
   );
 }

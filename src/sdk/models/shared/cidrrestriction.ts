@@ -30,7 +30,6 @@ export const CIDRRestriction$inboundSchema: z.ZodType<
   enabled: z.nullable(z.boolean()).optional(),
   sourceCidr: z.nullable(z.array(z.string())).optional(),
 });
-
 /** @internal */
 export type CIDRRestriction$Outbound = {
   enabled?: boolean | null | undefined;
@@ -47,25 +46,11 @@ export const CIDRRestriction$outboundSchema: z.ZodType<
   sourceCidr: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CIDRRestriction$ {
-  /** @deprecated use `CIDRRestriction$inboundSchema` instead. */
-  export const inboundSchema = CIDRRestriction$inboundSchema;
-  /** @deprecated use `CIDRRestriction$outboundSchema` instead. */
-  export const outboundSchema = CIDRRestriction$outboundSchema;
-  /** @deprecated use `CIDRRestriction$Outbound` instead. */
-  export type Outbound = CIDRRestriction$Outbound;
-}
-
 export function cidrRestrictionToJSON(
   cidrRestriction: CIDRRestriction,
 ): string {
   return JSON.stringify(CIDRRestriction$outboundSchema.parse(cidrRestriction));
 }
-
 export function cidrRestrictionFromJSON(
   jsonString: string,
 ): SafeParseResult<CIDRRestriction, SDKValidationError> {

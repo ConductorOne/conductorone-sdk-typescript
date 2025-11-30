@@ -17,43 +17,6 @@ export const DeleteAppEntitlementMonitorBindingResponse$inboundSchema:
   z.ZodType<DeleteAppEntitlementMonitorBindingResponse, z.ZodTypeDef, unknown> =
     z.object({});
 
-/** @internal */
-export type DeleteAppEntitlementMonitorBindingResponse$Outbound = {};
-
-/** @internal */
-export const DeleteAppEntitlementMonitorBindingResponse$outboundSchema:
-  z.ZodType<
-    DeleteAppEntitlementMonitorBindingResponse$Outbound,
-    z.ZodTypeDef,
-    DeleteAppEntitlementMonitorBindingResponse
-  > = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteAppEntitlementMonitorBindingResponse$ {
-  /** @deprecated use `DeleteAppEntitlementMonitorBindingResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteAppEntitlementMonitorBindingResponse$inboundSchema;
-  /** @deprecated use `DeleteAppEntitlementMonitorBindingResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteAppEntitlementMonitorBindingResponse$outboundSchema;
-  /** @deprecated use `DeleteAppEntitlementMonitorBindingResponse$Outbound` instead. */
-  export type Outbound = DeleteAppEntitlementMonitorBindingResponse$Outbound;
-}
-
-export function deleteAppEntitlementMonitorBindingResponseToJSON(
-  deleteAppEntitlementMonitorBindingResponse:
-    DeleteAppEntitlementMonitorBindingResponse,
-): string {
-  return JSON.stringify(
-    DeleteAppEntitlementMonitorBindingResponse$outboundSchema.parse(
-      deleteAppEntitlementMonitorBindingResponse,
-    ),
-  );
-}
-
 export function deleteAppEntitlementMonitorBindingResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

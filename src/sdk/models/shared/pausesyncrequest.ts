@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The PauseSyncRequest message.
  */
 export type PauseSyncRequest = {};
-
-/** @internal */
-export const PauseSyncRequest$inboundSchema: z.ZodType<
-  PauseSyncRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type PauseSyncRequest$Outbound = {};
@@ -29,33 +19,10 @@ export const PauseSyncRequest$outboundSchema: z.ZodType<
   PauseSyncRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PauseSyncRequest$ {
-  /** @deprecated use `PauseSyncRequest$inboundSchema` instead. */
-  export const inboundSchema = PauseSyncRequest$inboundSchema;
-  /** @deprecated use `PauseSyncRequest$outboundSchema` instead. */
-  export const outboundSchema = PauseSyncRequest$outboundSchema;
-  /** @deprecated use `PauseSyncRequest$Outbound` instead. */
-  export type Outbound = PauseSyncRequest$Outbound;
-}
-
 export function pauseSyncRequestToJSON(
   pauseSyncRequest: PauseSyncRequest,
 ): string {
   return JSON.stringify(
     PauseSyncRequest$outboundSchema.parse(pauseSyncRequest),
-  );
-}
-
-export function pauseSyncRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PauseSyncRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PauseSyncRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PauseSyncRequest' from JSON`,
   );
 }

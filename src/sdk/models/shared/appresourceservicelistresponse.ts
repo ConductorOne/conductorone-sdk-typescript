@@ -13,8 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppResourceView,
   AppResourceView$inboundSchema,
-  AppResourceView$Outbound,
-  AppResourceView$outboundSchema,
 } from "./appresourceview.js";
 
 /**
@@ -67,56 +65,6 @@ export const AppResourceServiceListResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type AppResourceServiceListResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const AppResourceServiceListResponseExpanded$outboundSchema: z.ZodType<
-  AppResourceServiceListResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  AppResourceServiceListResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppResourceServiceListResponseExpanded$ {
-  /** @deprecated use `AppResourceServiceListResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    AppResourceServiceListResponseExpanded$inboundSchema;
-  /** @deprecated use `AppResourceServiceListResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    AppResourceServiceListResponseExpanded$outboundSchema;
-  /** @deprecated use `AppResourceServiceListResponseExpanded$Outbound` instead. */
-  export type Outbound = AppResourceServiceListResponseExpanded$Outbound;
-}
-
-export function appResourceServiceListResponseExpandedToJSON(
-  appResourceServiceListResponseExpanded:
-    AppResourceServiceListResponseExpanded,
-): string {
-  return JSON.stringify(
-    AppResourceServiceListResponseExpanded$outboundSchema.parse(
-      appResourceServiceListResponseExpanded,
-    ),
-  );
-}
-
 export function appResourceServiceListResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<AppResourceServiceListResponseExpanded, SDKValidationError> {
@@ -140,54 +88,6 @@ export const AppResourceServiceListResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(AppResourceView$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type AppResourceServiceListResponse$Outbound = {
-  expanded?:
-    | Array<AppResourceServiceListResponseExpanded$Outbound>
-    | null
-    | undefined;
-  list?: Array<AppResourceView$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const AppResourceServiceListResponse$outboundSchema: z.ZodType<
-  AppResourceServiceListResponse$Outbound,
-  z.ZodTypeDef,
-  AppResourceServiceListResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(
-      z.lazy(() => AppResourceServiceListResponseExpanded$outboundSchema),
-    ),
-  ).optional(),
-  list: z.nullable(z.array(AppResourceView$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppResourceServiceListResponse$ {
-  /** @deprecated use `AppResourceServiceListResponse$inboundSchema` instead. */
-  export const inboundSchema = AppResourceServiceListResponse$inboundSchema;
-  /** @deprecated use `AppResourceServiceListResponse$outboundSchema` instead. */
-  export const outboundSchema = AppResourceServiceListResponse$outboundSchema;
-  /** @deprecated use `AppResourceServiceListResponse$Outbound` instead. */
-  export type Outbound = AppResourceServiceListResponse$Outbound;
-}
-
-export function appResourceServiceListResponseToJSON(
-  appResourceServiceListResponse: AppResourceServiceListResponse,
-): string {
-  return JSON.stringify(
-    AppResourceServiceListResponse$outboundSchema.parse(
-      appResourceServiceListResponse,
-    ),
-  );
-}
 
 export function appResourceServiceListResponseFromJSON(
   jsonString: string,

@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The CancelAccessRequestDefaultsRequest message.
  */
 export type CancelAccessRequestDefaultsRequest = {};
-
-/** @internal */
-export const CancelAccessRequestDefaultsRequest$inboundSchema: z.ZodType<
-  CancelAccessRequestDefaultsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type CancelAccessRequestDefaultsRequest$Outbound = {};
@@ -29,20 +19,6 @@ export const CancelAccessRequestDefaultsRequest$outboundSchema: z.ZodType<
   CancelAccessRequestDefaultsRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CancelAccessRequestDefaultsRequest$ {
-  /** @deprecated use `CancelAccessRequestDefaultsRequest$inboundSchema` instead. */
-  export const inboundSchema = CancelAccessRequestDefaultsRequest$inboundSchema;
-  /** @deprecated use `CancelAccessRequestDefaultsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    CancelAccessRequestDefaultsRequest$outboundSchema;
-  /** @deprecated use `CancelAccessRequestDefaultsRequest$Outbound` instead. */
-  export type Outbound = CancelAccessRequestDefaultsRequest$Outbound;
-}
-
 export function cancelAccessRequestDefaultsRequestToJSON(
   cancelAccessRequestDefaultsRequest: CancelAccessRequestDefaultsRequest,
 ): string {
@@ -50,16 +26,5 @@ export function cancelAccessRequestDefaultsRequestToJSON(
     CancelAccessRequestDefaultsRequest$outboundSchema.parse(
       cancelAccessRequestDefaultsRequest,
     ),
-  );
-}
-
-export function cancelAccessRequestDefaultsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CancelAccessRequestDefaultsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CancelAccessRequestDefaultsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CancelAccessRequestDefaultsRequest' from JSON`,
   );
 }

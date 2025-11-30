@@ -28,7 +28,6 @@ export const DefaultBehavior$inboundSchema: z.ZodType<
 > = z.object({
   connectorId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type DefaultBehavior$Outbound = {
   connectorId?: string | null | undefined;
@@ -43,25 +42,11 @@ export const DefaultBehavior$outboundSchema: z.ZodType<
   connectorId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DefaultBehavior$ {
-  /** @deprecated use `DefaultBehavior$inboundSchema` instead. */
-  export const inboundSchema = DefaultBehavior$inboundSchema;
-  /** @deprecated use `DefaultBehavior$outboundSchema` instead. */
-  export const outboundSchema = DefaultBehavior$outboundSchema;
-  /** @deprecated use `DefaultBehavior$Outbound` instead. */
-  export type Outbound = DefaultBehavior$Outbound;
-}
-
 export function defaultBehaviorToJSON(
   defaultBehavior: DefaultBehavior,
 ): string {
   return JSON.stringify(DefaultBehavior$outboundSchema.parse(defaultBehavior));
 }
-
 export function defaultBehaviorFromJSON(
   jsonString: string,
 ): SafeParseResult<DefaultBehavior, SDKValidationError> {

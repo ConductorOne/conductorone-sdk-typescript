@@ -38,25 +38,6 @@ export type C1ApiAppV1AppEntitlementsProxyGetResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppEntitlementsProxyGetRequest$inboundSchema: z.ZodType<
-  C1ApiAppV1AppEntitlementsProxyGetRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  src_app_id: z.nullable(z.string()),
-  src_app_entitlement_id: z.nullable(z.string()),
-  dst_app_id: z.nullable(z.string()),
-  dst_app_entitlement_id: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "src_app_id": "srcAppId",
-    "src_app_entitlement_id": "srcAppEntitlementId",
-    "dst_app_id": "dstAppId",
-    "dst_app_entitlement_id": "dstAppEntitlementId",
-  });
-});
-
-/** @internal */
 export type C1ApiAppV1AppEntitlementsProxyGetRequest$Outbound = {
   src_app_id: string | null;
   src_app_entitlement_id: string | null;
@@ -83,21 +64,6 @@ export const C1ApiAppV1AppEntitlementsProxyGetRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsProxyGetRequest$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsProxyGetRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsProxyGetRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsProxyGetRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsProxyGetRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsProxyGetRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppEntitlementsProxyGetRequest$Outbound;
-}
-
 export function c1ApiAppV1AppEntitlementsProxyGetRequestToJSON(
   c1ApiAppV1AppEntitlementsProxyGetRequest:
     C1ApiAppV1AppEntitlementsProxyGetRequest,
@@ -106,22 +72,6 @@ export function c1ApiAppV1AppEntitlementsProxyGetRequestToJSON(
     C1ApiAppV1AppEntitlementsProxyGetRequest$outboundSchema.parse(
       c1ApiAppV1AppEntitlementsProxyGetRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppEntitlementsProxyGetRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppEntitlementsProxyGetRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppEntitlementsProxyGetRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiAppV1AppEntitlementsProxyGetRequest' from JSON`,
   );
 }
 
@@ -144,65 +94,6 @@ export const C1ApiAppV1AppEntitlementsProxyGetResponse$inboundSchema: z.ZodType<
     "GetAppEntitlementProxyResponse": "getAppEntitlementProxyResponse",
   });
 });
-
-/** @internal */
-export type C1ApiAppV1AppEntitlementsProxyGetResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  GetAppEntitlementProxyResponse?:
-    | shared.GetAppEntitlementProxyResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppEntitlementsProxyGetResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementsProxyGetResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppEntitlementsProxyGetResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    getAppEntitlementProxyResponse: shared
-      .GetAppEntitlementProxyResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      getAppEntitlementProxyResponse: "GetAppEntitlementProxyResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsProxyGetResponse$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsProxyGetResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsProxyGetResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsProxyGetResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsProxyGetResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsProxyGetResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppEntitlementsProxyGetResponse$Outbound;
-}
-
-export function c1ApiAppV1AppEntitlementsProxyGetResponseToJSON(
-  c1ApiAppV1AppEntitlementsProxyGetResponse:
-    C1ApiAppV1AppEntitlementsProxyGetResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppEntitlementsProxyGetResponse$outboundSchema.parse(
-      c1ApiAppV1AppEntitlementsProxyGetResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppEntitlementsProxyGetResponseFromJSON(
   jsonString: string,

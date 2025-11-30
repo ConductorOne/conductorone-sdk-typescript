@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The FunctionsServiceCreateTagRequest message.
@@ -20,16 +17,6 @@ export type FunctionsServiceCreateTagRequest = {
    */
   name?: string | null | undefined;
 };
-
-/** @internal */
-export const FunctionsServiceCreateTagRequest$inboundSchema: z.ZodType<
-  FunctionsServiceCreateTagRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  commitId: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type FunctionsServiceCreateTagRequest$Outbound = {
@@ -47,19 +34,6 @@ export const FunctionsServiceCreateTagRequest$outboundSchema: z.ZodType<
   name: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionsServiceCreateTagRequest$ {
-  /** @deprecated use `FunctionsServiceCreateTagRequest$inboundSchema` instead. */
-  export const inboundSchema = FunctionsServiceCreateTagRequest$inboundSchema;
-  /** @deprecated use `FunctionsServiceCreateTagRequest$outboundSchema` instead. */
-  export const outboundSchema = FunctionsServiceCreateTagRequest$outboundSchema;
-  /** @deprecated use `FunctionsServiceCreateTagRequest$Outbound` instead. */
-  export type Outbound = FunctionsServiceCreateTagRequest$Outbound;
-}
-
 export function functionsServiceCreateTagRequestToJSON(
   functionsServiceCreateTagRequest: FunctionsServiceCreateTagRequest,
 ): string {
@@ -67,15 +41,5 @@ export function functionsServiceCreateTagRequestToJSON(
     FunctionsServiceCreateTagRequest$outboundSchema.parse(
       functionsServiceCreateTagRequest,
     ),
-  );
-}
-
-export function functionsServiceCreateTagRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<FunctionsServiceCreateTagRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FunctionsServiceCreateTagRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionsServiceCreateTagRequest' from JSON`,
   );
 }

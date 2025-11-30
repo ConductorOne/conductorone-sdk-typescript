@@ -9,14 +9,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AutomationStep,
   AutomationStep$inboundSchema,
-  AutomationStep$Outbound,
-  AutomationStep$outboundSchema,
 } from "./automationstep.js";
 import {
   AutomationTrigger,
   AutomationTrigger$inboundSchema,
-  AutomationTrigger$Outbound,
-  AutomationTrigger$outboundSchema,
 } from "./automationtrigger.js";
 
 /**
@@ -64,54 +60,6 @@ export const AutomationTemplateVersion$inboundSchema: z.ZodType<
   ).optional(),
   version: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
 });
-
-/** @internal */
-export type AutomationTemplateVersion$Outbound = {
-  automationSteps?: Array<AutomationStep$Outbound> | null | undefined;
-  automationTemplateId?: string | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  triggers?: Array<AutomationTrigger$Outbound> | null | undefined;
-  updatedAt?: string | null | undefined;
-  version?: string | null | undefined;
-};
-
-/** @internal */
-export const AutomationTemplateVersion$outboundSchema: z.ZodType<
-  AutomationTemplateVersion$Outbound,
-  z.ZodTypeDef,
-  AutomationTemplateVersion
-> = z.object({
-  automationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
-    .optional(),
-  automationTemplateId: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  triggers: z.nullable(z.array(AutomationTrigger$outboundSchema)).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  version: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AutomationTemplateVersion$ {
-  /** @deprecated use `AutomationTemplateVersion$inboundSchema` instead. */
-  export const inboundSchema = AutomationTemplateVersion$inboundSchema;
-  /** @deprecated use `AutomationTemplateVersion$outboundSchema` instead. */
-  export const outboundSchema = AutomationTemplateVersion$outboundSchema;
-  /** @deprecated use `AutomationTemplateVersion$Outbound` instead. */
-  export type Outbound = AutomationTemplateVersion$Outbound;
-}
-
-export function automationTemplateVersionToJSON(
-  automationTemplateVersion: AutomationTemplateVersion,
-): string {
-  return JSON.stringify(
-    AutomationTemplateVersion$outboundSchema.parse(automationTemplateVersion),
-  );
-}
 
 export function automationTemplateVersionFromJSON(
   jsonString: string,

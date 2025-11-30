@@ -37,7 +37,6 @@ export const SecretTrait$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
 /** @internal */
 export type SecretTrait$Outbound = {
   identityAppUserId?: string | null | undefined;
@@ -60,23 +59,9 @@ export const SecretTrait$outboundSchema: z.ZodType<
     .optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SecretTrait$ {
-  /** @deprecated use `SecretTrait$inboundSchema` instead. */
-  export const inboundSchema = SecretTrait$inboundSchema;
-  /** @deprecated use `SecretTrait$outboundSchema` instead. */
-  export const outboundSchema = SecretTrait$outboundSchema;
-  /** @deprecated use `SecretTrait$Outbound` instead. */
-  export type Outbound = SecretTrait$Outbound;
-}
-
 export function secretTraitToJSON(secretTrait: SecretTrait): string {
   return JSON.stringify(SecretTrait$outboundSchema.parse(secretTrait));
 }
-
 export function secretTraitFromJSON(
   jsonString: string,
 ): SafeParseResult<SecretTrait, SDKValidationError> {

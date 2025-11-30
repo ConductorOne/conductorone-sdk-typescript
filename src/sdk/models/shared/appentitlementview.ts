@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlement,
   AppEntitlement$inboundSchema,
-  AppEntitlement$Outbound,
-  AppEntitlement$outboundSchema,
 } from "./appentitlement.js";
 
 /**
@@ -43,47 +41,6 @@ export const AppEntitlementView$inboundSchema: z.ZodType<
   appResourcePath: z.nullable(z.string()).optional(),
   appResourceTypePath: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type AppEntitlementView$Outbound = {
-  appEntitlement?: AppEntitlement$Outbound | null | undefined;
-  appPath?: string | null | undefined;
-  appResourcePath?: string | null | undefined;
-  appResourceTypePath?: string | null | undefined;
-};
-
-/** @internal */
-export const AppEntitlementView$outboundSchema: z.ZodType<
-  AppEntitlementView$Outbound,
-  z.ZodTypeDef,
-  AppEntitlementView
-> = z.object({
-  appEntitlement: z.nullable(AppEntitlement$outboundSchema).optional(),
-  appPath: z.nullable(z.string()).optional(),
-  appResourcePath: z.nullable(z.string()).optional(),
-  appResourceTypePath: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementView$ {
-  /** @deprecated use `AppEntitlementView$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementView$inboundSchema;
-  /** @deprecated use `AppEntitlementView$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlementView$outboundSchema;
-  /** @deprecated use `AppEntitlementView$Outbound` instead. */
-  export type Outbound = AppEntitlementView$Outbound;
-}
-
-export function appEntitlementViewToJSON(
-  appEntitlementView: AppEntitlementView,
-): string {
-  return JSON.stringify(
-    AppEntitlementView$outboundSchema.parse(appEntitlementView),
-  );
-}
 
 export function appEntitlementViewFromJSON(
   jsonString: string,

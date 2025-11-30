@@ -39,24 +39,6 @@ export type C1ApiAppV1AppEntitlementOwnersAddResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppEntitlementOwnersAddRequest$inboundSchema: z.ZodType<
-  C1ApiAppV1AppEntitlementOwnersAddRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  app_id: z.nullable(z.string()),
-  entitlement_id: z.nullable(z.string()),
-  AddAppEntitlementOwnerRequest: shared
-    .AddAppEntitlementOwnerRequest$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "app_id": "appId",
-    "entitlement_id": "entitlementId",
-    "AddAppEntitlementOwnerRequest": "addAppEntitlementOwnerRequest",
-  });
-});
-
-/** @internal */
 export type C1ApiAppV1AppEntitlementOwnersAddRequest$Outbound = {
   app_id: string | null;
   entitlement_id: string | null;
@@ -83,21 +65,6 @@ export const C1ApiAppV1AppEntitlementOwnersAddRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementOwnersAddRequest$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementOwnersAddRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementOwnersAddRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementOwnersAddRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementOwnersAddRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementOwnersAddRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppEntitlementOwnersAddRequest$Outbound;
-}
-
 export function c1ApiAppV1AppEntitlementOwnersAddRequestToJSON(
   c1ApiAppV1AppEntitlementOwnersAddRequest:
     C1ApiAppV1AppEntitlementOwnersAddRequest,
@@ -106,22 +73,6 @@ export function c1ApiAppV1AppEntitlementOwnersAddRequestToJSON(
     C1ApiAppV1AppEntitlementOwnersAddRequest$outboundSchema.parse(
       c1ApiAppV1AppEntitlementOwnersAddRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppEntitlementOwnersAddRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppEntitlementOwnersAddRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppEntitlementOwnersAddRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiAppV1AppEntitlementOwnersAddRequest' from JSON`,
   );
 }
 
@@ -144,65 +95,6 @@ export const C1ApiAppV1AppEntitlementOwnersAddResponse$inboundSchema: z.ZodType<
     "AddAppEntitlementOwnerResponse": "addAppEntitlementOwnerResponse",
   });
 });
-
-/** @internal */
-export type C1ApiAppV1AppEntitlementOwnersAddResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  AddAppEntitlementOwnerResponse?:
-    | shared.AddAppEntitlementOwnerResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppEntitlementOwnersAddResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementOwnersAddResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppEntitlementOwnersAddResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    addAppEntitlementOwnerResponse: shared
-      .AddAppEntitlementOwnerResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      addAppEntitlementOwnerResponse: "AddAppEntitlementOwnerResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementOwnersAddResponse$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementOwnersAddResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementOwnersAddResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementOwnersAddResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementOwnersAddResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementOwnersAddResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppEntitlementOwnersAddResponse$Outbound;
-}
-
-export function c1ApiAppV1AppEntitlementOwnersAddResponseToJSON(
-  c1ApiAppV1AppEntitlementOwnersAddResponse:
-    C1ApiAppV1AppEntitlementOwnersAddResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppEntitlementOwnersAddResponse$outboundSchema.parse(
-      c1ApiAppV1AppEntitlementOwnersAddResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppEntitlementOwnersAddResponseFromJSON(
   jsonString: string,

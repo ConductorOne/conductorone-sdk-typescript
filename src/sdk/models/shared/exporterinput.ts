@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ExportToDatasource,
-  ExportToDatasource$inboundSchema,
   ExportToDatasource$Outbound,
   ExportToDatasource$outboundSchema,
 } from "./exporttodatasource.js";
@@ -33,25 +29,6 @@ export type ExporterInput = {
 };
 
 /** @internal */
-export const ExporterInput$inboundSchema: z.ZodType<
-  ExporterInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  datasource: z.nullable(ExportToDatasource$inboundSchema).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
-
-/** @internal */
 export type ExporterInput$Outbound = {
   createdAt?: string | null | undefined;
   datasource?: ExportToDatasource$Outbound | null | undefined;
@@ -73,29 +50,6 @@ export const ExporterInput$outboundSchema: z.ZodType<
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExporterInput$ {
-  /** @deprecated use `ExporterInput$inboundSchema` instead. */
-  export const inboundSchema = ExporterInput$inboundSchema;
-  /** @deprecated use `ExporterInput$outboundSchema` instead. */
-  export const outboundSchema = ExporterInput$outboundSchema;
-  /** @deprecated use `ExporterInput$Outbound` instead. */
-  export type Outbound = ExporterInput$Outbound;
-}
-
 export function exporterInputToJSON(exporterInput: ExporterInput): string {
   return JSON.stringify(ExporterInput$outboundSchema.parse(exporterInput));
-}
-
-export function exporterInputFromJSON(
-  jsonString: string,
-): SafeParseResult<ExporterInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ExporterInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ExporterInput' from JSON`,
-  );
 }

@@ -3,18 +3,13 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ConnectorInput,
-  ConnectorInput$inboundSchema,
   ConnectorInput$Outbound,
   ConnectorInput$outboundSchema,
 } from "./connector.js";
 import {
   ConnectorExpandMask,
-  ConnectorExpandMask$inboundSchema,
   ConnectorExpandMask$Outbound,
   ConnectorExpandMask$outboundSchema,
 } from "./connectorexpandmask.js";
@@ -27,17 +22,6 @@ export type ConnectorServiceUpdateRequest = {
   expandMask?: ConnectorExpandMask | null | undefined;
   updateMask?: string | null | undefined;
 };
-
-/** @internal */
-export const ConnectorServiceUpdateRequest$inboundSchema: z.ZodType<
-  ConnectorServiceUpdateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  connector: z.nullable(ConnectorInput$inboundSchema).optional(),
-  expandMask: z.nullable(ConnectorExpandMask$inboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type ConnectorServiceUpdateRequest$Outbound = {
@@ -57,19 +41,6 @@ export const ConnectorServiceUpdateRequest$outboundSchema: z.ZodType<
   updateMask: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorServiceUpdateRequest$ {
-  /** @deprecated use `ConnectorServiceUpdateRequest$inboundSchema` instead. */
-  export const inboundSchema = ConnectorServiceUpdateRequest$inboundSchema;
-  /** @deprecated use `ConnectorServiceUpdateRequest$outboundSchema` instead. */
-  export const outboundSchema = ConnectorServiceUpdateRequest$outboundSchema;
-  /** @deprecated use `ConnectorServiceUpdateRequest$Outbound` instead. */
-  export type Outbound = ConnectorServiceUpdateRequest$Outbound;
-}
-
 export function connectorServiceUpdateRequestToJSON(
   connectorServiceUpdateRequest: ConnectorServiceUpdateRequest,
 ): string {
@@ -77,15 +48,5 @@ export function connectorServiceUpdateRequestToJSON(
     ConnectorServiceUpdateRequest$outboundSchema.parse(
       connectorServiceUpdateRequest,
     ),
-  );
-}
-
-export function connectorServiceUpdateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ConnectorServiceUpdateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ConnectorServiceUpdateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ConnectorServiceUpdateRequest' from JSON`,
   );
 }

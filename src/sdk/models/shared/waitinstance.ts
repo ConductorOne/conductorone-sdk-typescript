@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -102,32 +99,13 @@ export const WaitInstanceState$inboundSchema: z.ZodType<
   WaitInstanceState,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(WaitInstanceState),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(WaitInstanceState);
 /** @internal */
 export const WaitInstanceState$outboundSchema: z.ZodType<
-  WaitInstanceState,
+  string,
   z.ZodTypeDef,
   WaitInstanceState
-> = z.union([
-  z.nativeEnum(WaitInstanceState),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WaitInstanceState$ {
-  /** @deprecated use `WaitInstanceState$inboundSchema` instead. */
-  export const inboundSchema = WaitInstanceState$inboundSchema;
-  /** @deprecated use `WaitInstanceState$outboundSchema` instead. */
-  export const outboundSchema = WaitInstanceState$outboundSchema;
-}
+> = openEnums.outboundSchema(WaitInstanceState);
 
 /** @internal */
 export const WaitInstance$inboundSchema: z.ZodType<
@@ -152,7 +130,6 @@ export const WaitInstance$inboundSchema: z.ZodType<
   timeoutDuration: z.nullable(z.string()).optional(),
   untilTime: z.nullable(WaitUntilTimeInstance$inboundSchema).optional(),
 });
-
 /** @internal */
 export type WaitInstance$Outbound = {
   commentOnFirstWait?: string | null | undefined;
@@ -190,23 +167,9 @@ export const WaitInstance$outboundSchema: z.ZodType<
   untilTime: z.nullable(WaitUntilTimeInstance$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WaitInstance$ {
-  /** @deprecated use `WaitInstance$inboundSchema` instead. */
-  export const inboundSchema = WaitInstance$inboundSchema;
-  /** @deprecated use `WaitInstance$outboundSchema` instead. */
-  export const outboundSchema = WaitInstance$outboundSchema;
-  /** @deprecated use `WaitInstance$Outbound` instead. */
-  export type Outbound = WaitInstance$Outbound;
-}
-
 export function waitInstanceToJSON(waitInstance: WaitInstance): string {
   return JSON.stringify(WaitInstance$outboundSchema.parse(waitInstance));
 }
-
 export function waitInstanceFromJSON(
   jsonString: string,
 ): SafeParseResult<WaitInstance, SDKValidationError> {

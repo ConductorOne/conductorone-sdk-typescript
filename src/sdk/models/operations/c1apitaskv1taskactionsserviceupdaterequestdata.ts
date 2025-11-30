@@ -36,24 +36,6 @@ export type C1ApiTaskV1TaskActionsServiceUpdateRequestDataResponse = {
 };
 
 /** @internal */
-export const C1ApiTaskV1TaskActionsServiceUpdateRequestDataRequest$inboundSchema:
-  z.ZodType<
-    C1ApiTaskV1TaskActionsServiceUpdateRequestDataRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    task_id: z.string(),
-    TaskActionsServiceUpdateRequestDataRequest: shared
-      .TaskActionsServiceUpdateRequestDataRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "task_id": "taskId",
-      "TaskActionsServiceUpdateRequestDataRequest":
-        "taskActionsServiceUpdateRequestDataRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiTaskV1TaskActionsServiceUpdateRequestDataRequest$Outbound = {
   task_id: string;
   TaskActionsServiceUpdateRequestDataRequest?:
@@ -79,22 +61,6 @@ export const C1ApiTaskV1TaskActionsServiceUpdateRequestDataRequest$outboundSchem
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceUpdateRequestDataRequest$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceUpdateRequestDataRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceUpdateRequestDataRequest$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceUpdateRequestDataRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceUpdateRequestDataRequest$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceUpdateRequestDataRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiTaskV1TaskActionsServiceUpdateRequestDataRequest$Outbound;
-}
-
 export function c1ApiTaskV1TaskActionsServiceUpdateRequestDataRequestToJSON(
   c1ApiTaskV1TaskActionsServiceUpdateRequestDataRequest:
     C1ApiTaskV1TaskActionsServiceUpdateRequestDataRequest,
@@ -103,22 +69,6 @@ export function c1ApiTaskV1TaskActionsServiceUpdateRequestDataRequestToJSON(
     C1ApiTaskV1TaskActionsServiceUpdateRequestDataRequest$outboundSchema.parse(
       c1ApiTaskV1TaskActionsServiceUpdateRequestDataRequest,
     ),
-  );
-}
-
-export function c1ApiTaskV1TaskActionsServiceUpdateRequestDataRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiTaskV1TaskActionsServiceUpdateRequestDataRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiTaskV1TaskActionsServiceUpdateRequestDataRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiTaskV1TaskActionsServiceUpdateRequestDataRequest' from JSON`,
   );
 }
 
@@ -142,66 +92,6 @@ export const C1ApiTaskV1TaskActionsServiceUpdateRequestDataResponse$inboundSchem
       "TaskServiceActionResponse": "taskServiceActionResponse",
     });
   });
-
-/** @internal */
-export type C1ApiTaskV1TaskActionsServiceUpdateRequestDataResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  TaskServiceActionResponse?:
-    | shared.TaskServiceActionResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiTaskV1TaskActionsServiceUpdateRequestDataResponse$outboundSchema:
-  z.ZodType<
-    C1ApiTaskV1TaskActionsServiceUpdateRequestDataResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiTaskV1TaskActionsServiceUpdateRequestDataResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    taskServiceActionResponse: shared.TaskServiceActionResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      taskServiceActionResponse: "TaskServiceActionResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceUpdateRequestDataResponse$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceUpdateRequestDataResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceUpdateRequestDataResponse$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceUpdateRequestDataResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceUpdateRequestDataResponse$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceUpdateRequestDataResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiTaskV1TaskActionsServiceUpdateRequestDataResponse$Outbound;
-}
-
-export function c1ApiTaskV1TaskActionsServiceUpdateRequestDataResponseToJSON(
-  c1ApiTaskV1TaskActionsServiceUpdateRequestDataResponse:
-    C1ApiTaskV1TaskActionsServiceUpdateRequestDataResponse,
-): string {
-  return JSON.stringify(
-    C1ApiTaskV1TaskActionsServiceUpdateRequestDataResponse$outboundSchema.parse(
-      c1ApiTaskV1TaskActionsServiceUpdateRequestDataResponse,
-    ),
-  );
-}
 
 export function c1ApiTaskV1TaskActionsServiceUpdateRequestDataResponseFromJSON(
   jsonString: string,

@@ -33,15 +33,6 @@ export type C1ApiAppV1AppsGetResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppsGetRequest$inboundSchema: z.ZodType<
-  C1ApiAppV1AppsGetRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.nullable(z.string()),
-});
-
-/** @internal */
 export type C1ApiAppV1AppsGetRequest$Outbound = {
   id: string | null;
 };
@@ -55,34 +46,11 @@ export const C1ApiAppV1AppsGetRequest$outboundSchema: z.ZodType<
   id: z.nullable(z.string()),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppsGetRequest$ {
-  /** @deprecated use `C1ApiAppV1AppsGetRequest$inboundSchema` instead. */
-  export const inboundSchema = C1ApiAppV1AppsGetRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppsGetRequest$outboundSchema` instead. */
-  export const outboundSchema = C1ApiAppV1AppsGetRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppsGetRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppsGetRequest$Outbound;
-}
-
 export function c1ApiAppV1AppsGetRequestToJSON(
   c1ApiAppV1AppsGetRequest: C1ApiAppV1AppsGetRequest,
 ): string {
   return JSON.stringify(
     C1ApiAppV1AppsGetRequest$outboundSchema.parse(c1ApiAppV1AppsGetRequest),
-  );
-}
-
-export function c1ApiAppV1AppsGetRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<C1ApiAppV1AppsGetRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => C1ApiAppV1AppsGetRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppsGetRequest' from JSON`,
   );
 }
 
@@ -104,56 +72,6 @@ export const C1ApiAppV1AppsGetResponse$inboundSchema: z.ZodType<
     "GetAppResponse": "getAppResponse",
   });
 });
-
-/** @internal */
-export type C1ApiAppV1AppsGetResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  GetAppResponse?: shared.GetAppResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppsGetResponse$outboundSchema: z.ZodType<
-  C1ApiAppV1AppsGetResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiAppV1AppsGetResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  getAppResponse: shared.GetAppResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    getAppResponse: "GetAppResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppsGetResponse$ {
-  /** @deprecated use `C1ApiAppV1AppsGetResponse$inboundSchema` instead. */
-  export const inboundSchema = C1ApiAppV1AppsGetResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppsGetResponse$outboundSchema` instead. */
-  export const outboundSchema = C1ApiAppV1AppsGetResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppsGetResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppsGetResponse$Outbound;
-}
-
-export function c1ApiAppV1AppsGetResponseToJSON(
-  c1ApiAppV1AppsGetResponse: C1ApiAppV1AppsGetResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppsGetResponse$outboundSchema.parse(c1ApiAppV1AppsGetResponse),
-  );
-}
 
 export function c1ApiAppV1AppsGetResponseFromJSON(
   jsonString: string,

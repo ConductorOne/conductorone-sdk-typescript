@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The ConflictMonitorDeleteRequest message.
  */
 export type ConflictMonitorDeleteRequest = {};
-
-/** @internal */
-export const ConflictMonitorDeleteRequest$inboundSchema: z.ZodType<
-  ConflictMonitorDeleteRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type ConflictMonitorDeleteRequest$Outbound = {};
@@ -29,19 +19,6 @@ export const ConflictMonitorDeleteRequest$outboundSchema: z.ZodType<
   ConflictMonitorDeleteRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConflictMonitorDeleteRequest$ {
-  /** @deprecated use `ConflictMonitorDeleteRequest$inboundSchema` instead. */
-  export const inboundSchema = ConflictMonitorDeleteRequest$inboundSchema;
-  /** @deprecated use `ConflictMonitorDeleteRequest$outboundSchema` instead. */
-  export const outboundSchema = ConflictMonitorDeleteRequest$outboundSchema;
-  /** @deprecated use `ConflictMonitorDeleteRequest$Outbound` instead. */
-  export type Outbound = ConflictMonitorDeleteRequest$Outbound;
-}
-
 export function conflictMonitorDeleteRequestToJSON(
   conflictMonitorDeleteRequest: ConflictMonitorDeleteRequest,
 ): string {
@@ -49,15 +26,5 @@ export function conflictMonitorDeleteRequestToJSON(
     ConflictMonitorDeleteRequest$outboundSchema.parse(
       conflictMonitorDeleteRequest,
     ),
-  );
-}
-
-export function conflictMonitorDeleteRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ConflictMonitorDeleteRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ConflictMonitorDeleteRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ConflictMonitorDeleteRequest' from JSON`,
   );
 }

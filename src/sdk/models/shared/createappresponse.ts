@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  App,
-  App$inboundSchema,
-  App$Outbound,
-  App$outboundSchema,
-} from "./app.js";
+import { App, App$inboundSchema } from "./app.js";
 
 /**
  * Returns the new app's values.
@@ -28,41 +23,6 @@ export const CreateAppResponse$inboundSchema: z.ZodType<
 > = z.object({
   app: z.nullable(App$inboundSchema).optional(),
 });
-
-/** @internal */
-export type CreateAppResponse$Outbound = {
-  app?: App$Outbound | null | undefined;
-};
-
-/** @internal */
-export const CreateAppResponse$outboundSchema: z.ZodType<
-  CreateAppResponse$Outbound,
-  z.ZodTypeDef,
-  CreateAppResponse
-> = z.object({
-  app: z.nullable(App$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAppResponse$ {
-  /** @deprecated use `CreateAppResponse$inboundSchema` instead. */
-  export const inboundSchema = CreateAppResponse$inboundSchema;
-  /** @deprecated use `CreateAppResponse$outboundSchema` instead. */
-  export const outboundSchema = CreateAppResponse$outboundSchema;
-  /** @deprecated use `CreateAppResponse$Outbound` instead. */
-  export type Outbound = CreateAppResponse$Outbound;
-}
-
-export function createAppResponseToJSON(
-  createAppResponse: CreateAppResponse,
-): string {
-  return JSON.stringify(
-    CreateAppResponse$outboundSchema.parse(createAppResponse),
-  );
-}
 
 export function createAppResponseFromJSON(
   jsonString: string,

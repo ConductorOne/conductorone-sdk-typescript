@@ -352,6 +352,7 @@ run();
 * [forceSync](docs/sdks/connector/README.md#forcesync) - Force Sync
 * [pauseSync](docs/sdks/connector/README.md#pausesync) - Pause Sync
 * [resumeSync](docs/sdks/connector/README.md#resumesync) - Resume Sync
+* [getConnectorSyncDownloadURL](docs/sdks/connector/README.md#getconnectorsyncdownloadurl) - Get Connector Sync Download Url
 * [delete](docs/sdks/connector/README.md#delete) - Delete
 * [get](docs/sdks/connector/README.md#get) - Get
 * [update](docs/sdks/connector/README.md#update) - Update
@@ -390,14 +391,18 @@ run();
 * [listFunctions](docs/sdks/functions/README.md#listfunctions) - List Functions
 * [createFunction](docs/sdks/functions/README.md#createfunction) - Create Function
 * [listCommits](docs/sdks/functions/README.md#listcommits) - List Commits
-* [commit](docs/sdks/functions/README.md#commit) - Commit
-* [getCommit](docs/sdks/functions/README.md#getcommit) - Get Commit
 * [invoke](docs/sdks/functions/README.md#invoke) - Invoke
+* [getFunctionSecretEncryptionKey](docs/sdks/functions/README.md#getfunctionsecretencryptionkey) - Get Function Secret Encryption Key
 * [listTags](docs/sdks/functions/README.md#listtags) - List Tags
 * [createTag](docs/sdks/functions/README.md#createtag) - Create Tag
 * [deleteFunction](docs/sdks/functions/README.md#deletefunction) - Delete Function
 * [getFunction](docs/sdks/functions/README.md#getfunction) - Get Function
 * [updateFunction](docs/sdks/functions/README.md#updatefunction) - Update Function
+
+### [functionsInvocation](docs/sdks/functionsinvocation/README.md)
+
+* [list](docs/sdks/functionsinvocation/README.md#list) - List
+* [get](docs/sdks/functionsinvocation/README.md#get) - Get
 
 ### [functionsSearch](docs/sdks/functionssearch/README.md)
 
@@ -445,6 +450,9 @@ run();
 * [updateAppEntitlements](docs/sdks/requestcatalogmanagement/README.md#updateappentitlements) - Update App Entitlements
 * [removeAppEntitlements](docs/sdks/requestcatalogmanagement/README.md#removeappentitlements) - Remove App Entitlements
 * [addAppEntitlements](docs/sdks/requestcatalogmanagement/README.md#addappentitlements) - Add App Entitlements
+* [deleteRequestableEntry](docs/sdks/requestcatalogmanagement/README.md#deleterequestableentry) - Delete Requestable Entry
+* [getRequestableEntry](docs/sdks/requestcatalogmanagement/README.md#getrequestableentry) - Get Requestable Entry
+* [createRequestableEntry](docs/sdks/requestcatalogmanagement/README.md#createrequestableentry) - Create Requestable Entry
 * [removeAccessEntitlements](docs/sdks/requestcatalogmanagement/README.md#removeaccessentitlements) - Remove Access Entitlements
 * [addAccessEntitlements](docs/sdks/requestcatalogmanagement/README.md#addaccessentitlements) - Add Access Entitlements
 * [listEntitlementsForAccess](docs/sdks/requestcatalogmanagement/README.md#listentitlementsforaccess) - List Entitlements For Access
@@ -545,6 +553,13 @@ run();
 ### [userSearch](docs/sdks/usersearch/README.md)
 
 * [search](docs/sdks/usersearch/README.md#search) - Search
+
+### [vault](docs/sdks/vault/README.md)
+
+* [create](docs/sdks/vault/README.md#create) - Create
+* [delete](docs/sdks/vault/README.md#delete) - Delete
+* [get](docs/sdks/vault/README.md#get) - Get
+* [update](docs/sdks/vault/README.md#update) - Update
 
 ### [webhooks](docs/sdks/webhooks/README.md)
 
@@ -696,6 +711,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`connectorDelete`](docs/sdks/connector/README.md#delete) - Delete
 - [`connectorForceSync`](docs/sdks/connector/README.md#forcesync) - Force Sync
 - [`connectorGet`](docs/sdks/connector/README.md#get) - Get
+- [`connectorGetConnectorSyncDownloadURL`](docs/sdks/connector/README.md#getconnectorsyncdownloadurl) - Get Connector Sync Download Url
 - [`connectorGetCredentials`](docs/sdks/connector/README.md#getcredentials) - Get Credentials
 - [`connectorList`](docs/sdks/connector/README.md#list) - List
 - [`connectorPauseSync`](docs/sdks/connector/README.md#pausesync) - Pause Sync
@@ -717,12 +733,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`exportListEvents`](docs/sdks/export/README.md#listevents) - List Events
 - [`exportsSearchSearch`](docs/sdks/exportssearch/README.md#search) - Search
 - [`exportUpdate`](docs/sdks/export/README.md#update) - Update
-- [`functionsCommit`](docs/sdks/functions/README.md#commit) - Commit
 - [`functionsCreateFunction`](docs/sdks/functions/README.md#createfunction) - Create Function
 - [`functionsCreateTag`](docs/sdks/functions/README.md#createtag) - Create Tag
 - [`functionsDeleteFunction`](docs/sdks/functions/README.md#deletefunction) - Delete Function
-- [`functionsGetCommit`](docs/sdks/functions/README.md#getcommit) - Get Commit
 - [`functionsGetFunction`](docs/sdks/functions/README.md#getfunction) - Get Function
+- [`functionsGetFunctionSecretEncryptionKey`](docs/sdks/functions/README.md#getfunctionsecretencryptionkey) - Get Function Secret Encryption Key
+- [`functionsInvocationGet`](docs/sdks/functionsinvocation/README.md#get) - Get
+- [`functionsInvocationList`](docs/sdks/functionsinvocation/README.md#list) - List
 - [`functionsInvoke`](docs/sdks/functions/README.md#invoke) - Invoke
 - [`functionsListCommits`](docs/sdks/functions/README.md#listcommits) - List Commits
 - [`functionsListFunctions`](docs/sdks/functions/README.md#listfunctions) - List Functions
@@ -748,11 +765,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`requestCatalogManagementAddAppEntitlements`](docs/sdks/requestcatalogmanagement/README.md#addappentitlements) - Add App Entitlements
 - [`requestCatalogManagementCreate`](docs/sdks/requestcatalogmanagement/README.md#create) - Create
 - [`requestCatalogManagementCreateBundleAutomation`](docs/sdks/requestcatalogmanagement/README.md#createbundleautomation) - Create Bundle Automation
+- [`requestCatalogManagementCreateRequestableEntry`](docs/sdks/requestcatalogmanagement/README.md#createrequestableentry) - Create Requestable Entry
 - [`requestCatalogManagementDelete`](docs/sdks/requestcatalogmanagement/README.md#delete) - Delete
 - [`requestCatalogManagementDeleteBundleAutomation`](docs/sdks/requestcatalogmanagement/README.md#deletebundleautomation) - Delete Bundle Automation
+- [`requestCatalogManagementDeleteRequestableEntry`](docs/sdks/requestcatalogmanagement/README.md#deleterequestableentry) - Delete Requestable Entry
 - [`requestCatalogManagementForceRunBundleAutomation`](docs/sdks/requestcatalogmanagement/README.md#forcerunbundleautomation) - Force Run Bundle Automation
 - [`requestCatalogManagementGet`](docs/sdks/requestcatalogmanagement/README.md#get) - Get
 - [`requestCatalogManagementGetBundleAutomation`](docs/sdks/requestcatalogmanagement/README.md#getbundleautomation) - Get Bundle Automation
+- [`requestCatalogManagementGetRequestableEntry`](docs/sdks/requestcatalogmanagement/README.md#getrequestableentry) - Get Requestable Entry
 - [`requestCatalogManagementList`](docs/sdks/requestcatalogmanagement/README.md#list) - List
 - [`requestCatalogManagementListAllEntitlementIdsPerApp`](docs/sdks/requestcatalogmanagement/README.md#listallentitlementidsperapp) - List All Entitlement Ids Per App
 - [`requestCatalogManagementListEntitlementsForAccess`](docs/sdks/requestcatalogmanagement/README.md#listentitlementsforaccess) - List Entitlements For Access
@@ -812,6 +832,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`userList`](docs/sdks/user/README.md#list) - List
 - [`userSearchSearch`](docs/sdks/usersearch/README.md#search) - Search
 - [`userSetExpiringUserDelegationBindingByAdmin`](docs/sdks/user/README.md#setexpiringuserdelegationbindingbyadmin) - Set Expiring User Delegation Binding By Admin
+- [`vaultCreate`](docs/sdks/vault/README.md#create) - Create
+- [`vaultDelete`](docs/sdks/vault/README.md#delete) - Delete
+- [`vaultGet`](docs/sdks/vault/README.md#get) - Get
+- [`vaultUpdate`](docs/sdks/vault/README.md#update) - Update
 - [`webhooksCreate`](docs/sdks/webhooks/README.md#create) - Create
 - [`webhooksDelete`](docs/sdks/webhooks/README.md#delete) - Delete
 - [`webhooksGet`](docs/sdks/webhooks/README.md#get) - Get
@@ -1012,7 +1036,8 @@ The default server `https://{tenantDomain}.conductor.one` contains variables and
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 
 const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
-  tenantDomain: "<value>",
+  serverIdx: 0,
+  tenantDomain: "example",
   security: {
     bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
     oauth: "<YOUR_OAUTH_HERE>",

@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppPopulationReport,
   AppPopulationReport$inboundSchema,
-  AppPopulationReport$Outbound,
-  AppPopulationReport$outboundSchema,
 } from "./apppopulationreport.js";
 
 /**
@@ -40,45 +38,6 @@ export const AppReportServiceListResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(AppPopulationReport$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type AppReportServiceListResponse$Outbound = {
-  list?: Array<AppPopulationReport$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const AppReportServiceListResponse$outboundSchema: z.ZodType<
-  AppReportServiceListResponse$Outbound,
-  z.ZodTypeDef,
-  AppReportServiceListResponse
-> = z.object({
-  list: z.nullable(z.array(AppPopulationReport$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppReportServiceListResponse$ {
-  /** @deprecated use `AppReportServiceListResponse$inboundSchema` instead. */
-  export const inboundSchema = AppReportServiceListResponse$inboundSchema;
-  /** @deprecated use `AppReportServiceListResponse$outboundSchema` instead. */
-  export const outboundSchema = AppReportServiceListResponse$outboundSchema;
-  /** @deprecated use `AppReportServiceListResponse$Outbound` instead. */
-  export type Outbound = AppReportServiceListResponse$Outbound;
-}
-
-export function appReportServiceListResponseToJSON(
-  appReportServiceListResponse: AppReportServiceListResponse,
-): string {
-  return JSON.stringify(
-    AppReportServiceListResponse$outboundSchema.parse(
-      appReportServiceListResponse,
-    ),
-  );
-}
 
 export function appReportServiceListResponseFromJSON(
   jsonString: string,

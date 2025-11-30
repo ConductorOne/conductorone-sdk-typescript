@@ -63,7 +63,6 @@ export const ReassignAction$inboundSchema: z.ZodType<
   subjectUserRef: z.nullable(UserRef$inboundSchema).optional(),
   useSubjectUser: z.nullable(z.boolean()).optional(),
 });
-
 /** @internal */
 export type ReassignAction$Outbound = {
   assigneeUserIdCel?: string | null | undefined;
@@ -86,23 +85,9 @@ export const ReassignAction$outboundSchema: z.ZodType<
   useSubjectUser: z.nullable(z.boolean()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ReassignAction$ {
-  /** @deprecated use `ReassignAction$inboundSchema` instead. */
-  export const inboundSchema = ReassignAction$inboundSchema;
-  /** @deprecated use `ReassignAction$outboundSchema` instead. */
-  export const outboundSchema = ReassignAction$outboundSchema;
-  /** @deprecated use `ReassignAction$Outbound` instead. */
-  export type Outbound = ReassignAction$Outbound;
-}
-
 export function reassignActionToJSON(reassignAction: ReassignAction): string {
   return JSON.stringify(ReassignAction$outboundSchema.parse(reassignAction));
 }
-
 export function reassignActionFromJSON(
   jsonString: string,
 ): SafeParseResult<ReassignAction, SDKValidationError> {

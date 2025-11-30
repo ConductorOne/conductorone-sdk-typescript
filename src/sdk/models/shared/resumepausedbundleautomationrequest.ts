@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The ResumePausedBundleAutomationRequest message.
  */
 export type ResumePausedBundleAutomationRequest = {};
-
-/** @internal */
-export const ResumePausedBundleAutomationRequest$inboundSchema: z.ZodType<
-  ResumePausedBundleAutomationRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type ResumePausedBundleAutomationRequest$Outbound = {};
@@ -29,21 +19,6 @@ export const ResumePausedBundleAutomationRequest$outboundSchema: z.ZodType<
   ResumePausedBundleAutomationRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResumePausedBundleAutomationRequest$ {
-  /** @deprecated use `ResumePausedBundleAutomationRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    ResumePausedBundleAutomationRequest$inboundSchema;
-  /** @deprecated use `ResumePausedBundleAutomationRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    ResumePausedBundleAutomationRequest$outboundSchema;
-  /** @deprecated use `ResumePausedBundleAutomationRequest$Outbound` instead. */
-  export type Outbound = ResumePausedBundleAutomationRequest$Outbound;
-}
-
 export function resumePausedBundleAutomationRequestToJSON(
   resumePausedBundleAutomationRequest: ResumePausedBundleAutomationRequest,
 ): string {
@@ -51,16 +26,5 @@ export function resumePausedBundleAutomationRequestToJSON(
     ResumePausedBundleAutomationRequest$outboundSchema.parse(
       resumePausedBundleAutomationRequest,
     ),
-  );
-}
-
-export function resumePausedBundleAutomationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ResumePausedBundleAutomationRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ResumePausedBundleAutomationRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResumePausedBundleAutomationRequest' from JSON`,
   );
 }

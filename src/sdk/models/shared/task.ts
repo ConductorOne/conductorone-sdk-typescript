@@ -8,11 +8,8 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -243,29 +240,10 @@ export type Task = {
 
 /** @internal */
 export const Actions$inboundSchema: z.ZodType<Actions, z.ZodTypeDef, unknown> =
-  z
-    .union([
-      z.nativeEnum(Actions),
-      z.string().transform(catchUnrecognizedEnum),
-    ]);
-
+  openEnums.inboundSchema(Actions);
 /** @internal */
-export const Actions$outboundSchema: z.ZodType<Actions, z.ZodTypeDef, Actions> =
-  z.union([
-    z.nativeEnum(Actions),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Actions$ {
-  /** @deprecated use `Actions$inboundSchema` instead. */
-  export const inboundSchema = Actions$inboundSchema;
-  /** @deprecated use `Actions$outboundSchema` instead. */
-  export const outboundSchema = Actions$outboundSchema;
-}
+export const Actions$outboundSchema: z.ZodType<string, z.ZodTypeDef, Actions> =
+  openEnums.outboundSchema(Actions);
 
 /** @internal */
 export const Annotations$inboundSchema: z.ZodType<
@@ -283,7 +261,6 @@ export const Annotations$inboundSchema: z.ZodType<
     "@type": "atType",
   });
 });
-
 /** @internal */
 export type Annotations$Outbound = {
   "@type"?: string | undefined;
@@ -308,23 +285,9 @@ export const Annotations$outboundSchema: z.ZodType<
   };
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Annotations$ {
-  /** @deprecated use `Annotations$inboundSchema` instead. */
-  export const inboundSchema = Annotations$inboundSchema;
-  /** @deprecated use `Annotations$outboundSchema` instead. */
-  export const outboundSchema = Annotations$outboundSchema;
-  /** @deprecated use `Annotations$Outbound` instead. */
-  export type Outbound = Annotations$Outbound;
-}
-
 export function annotationsToJSON(annotations: Annotations): string {
   return JSON.stringify(Annotations$outboundSchema.parse(annotations));
 }
-
 export function annotationsFromJSON(
   jsonString: string,
 ): SafeParseResult<Annotations, SDKValidationError> {
@@ -336,125 +299,50 @@ export function annotationsFromJSON(
 }
 
 /** @internal */
-export const Origin$inboundSchema: z.ZodType<Origin, z.ZodTypeDef, unknown> = z
-  .union([
-    z.nativeEnum(Origin),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+export const Origin$inboundSchema: z.ZodType<Origin, z.ZodTypeDef, unknown> =
+  openEnums.inboundSchema(Origin);
 /** @internal */
-export const Origin$outboundSchema: z.ZodType<Origin, z.ZodTypeDef, Origin> = z
-  .union([
-    z.nativeEnum(Origin),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Origin$ {
-  /** @deprecated use `Origin$inboundSchema` instead. */
-  export const inboundSchema = Origin$inboundSchema;
-  /** @deprecated use `Origin$outboundSchema` instead. */
-  export const outboundSchema = Origin$outboundSchema;
-}
+export const Origin$outboundSchema: z.ZodType<string, z.ZodTypeDef, Origin> =
+  openEnums.outboundSchema(Origin);
 
 /** @internal */
 export const Processing$inboundSchema: z.ZodType<
   Processing,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(Processing),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(Processing);
 /** @internal */
 export const Processing$outboundSchema: z.ZodType<
-  Processing,
+  string,
   z.ZodTypeDef,
   Processing
-> = z.union([
-  z.nativeEnum(Processing),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Processing$ {
-  /** @deprecated use `Processing$inboundSchema` instead. */
-  export const inboundSchema = Processing$inboundSchema;
-  /** @deprecated use `Processing$outboundSchema` instead. */
-  export const outboundSchema = Processing$outboundSchema;
-}
+> = openEnums.outboundSchema(Processing);
 
 /** @internal */
 export const Recommendation$inboundSchema: z.ZodType<
   Recommendation,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(Recommendation),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(Recommendation);
 /** @internal */
 export const Recommendation$outboundSchema: z.ZodType<
-  Recommendation,
+  string,
   z.ZodTypeDef,
   Recommendation
-> = z.union([
-  z.nativeEnum(Recommendation),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Recommendation$ {
-  /** @deprecated use `Recommendation$inboundSchema` instead. */
-  export const inboundSchema = Recommendation$inboundSchema;
-  /** @deprecated use `Recommendation$outboundSchema` instead. */
-  export const outboundSchema = Recommendation$outboundSchema;
-}
+> = openEnums.outboundSchema(Recommendation);
 
 /** @internal */
 export const TaskState$inboundSchema: z.ZodType<
   TaskState,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(TaskState),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(TaskState);
 /** @internal */
 export const TaskState$outboundSchema: z.ZodType<
-  TaskState,
+  string,
   z.ZodTypeDef,
   TaskState
-> = z.union([
-  z.nativeEnum(TaskState),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskState$ {
-  /** @deprecated use `TaskState$inboundSchema` instead. */
-  export const inboundSchema = TaskState$inboundSchema;
-  /** @deprecated use `TaskState$outboundSchema` instead. */
-  export const outboundSchema = TaskState$outboundSchema;
-}
+> = openEnums.outboundSchema(TaskState);
 
 /** @internal */
 export const Task$inboundSchema: z.ZodType<Task, z.ZodTypeDef, unknown> = z
@@ -494,7 +382,6 @@ export const Task$inboundSchema: z.ZodType<Task, z.ZodTypeDef, unknown> = z
     ).optional(),
     userId: z.nullable(z.string()).optional(),
   });
-
 /** @internal */
 export type Task$Outbound = {
   actions?: Array<string> | null | undefined;
@@ -557,23 +444,9 @@ export const Task$outboundSchema: z.ZodType<Task$Outbound, z.ZodTypeDef, Task> =
     userId: z.nullable(z.string()).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Task$ {
-  /** @deprecated use `Task$inboundSchema` instead. */
-  export const inboundSchema = Task$inboundSchema;
-  /** @deprecated use `Task$outboundSchema` instead. */
-  export const outboundSchema = Task$outboundSchema;
-  /** @deprecated use `Task$Outbound` instead. */
-  export type Outbound = Task$Outbound;
-}
-
 export function taskToJSON(task: Task): string {
   return JSON.stringify(Task$outboundSchema.parse(task));
 }
-
 export function taskFromJSON(
   jsonString: string,
 ): SafeParseResult<Task, SDKValidationError> {

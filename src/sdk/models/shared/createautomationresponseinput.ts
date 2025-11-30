@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Automation,
-  Automation$inboundSchema,
-  Automation$Outbound,
-  Automation$outboundSchema,
-} from "./automation.js";
+import { Automation, Automation$inboundSchema } from "./automation.js";
 
 /**
  * The CreateAutomationResponse message.
@@ -33,45 +28,6 @@ export const CreateAutomationResponseInput$inboundSchema: z.ZodType<
   automation: z.nullable(Automation$inboundSchema).optional(),
   webhookHmacSecret: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type CreateAutomationResponseInput$Outbound = {
-  automation?: Automation$Outbound | null | undefined;
-  webhookHmacSecret?: string | null | undefined;
-};
-
-/** @internal */
-export const CreateAutomationResponseInput$outboundSchema: z.ZodType<
-  CreateAutomationResponseInput$Outbound,
-  z.ZodTypeDef,
-  CreateAutomationResponseInput
-> = z.object({
-  automation: z.nullable(Automation$outboundSchema).optional(),
-  webhookHmacSecret: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAutomationResponseInput$ {
-  /** @deprecated use `CreateAutomationResponseInput$inboundSchema` instead. */
-  export const inboundSchema = CreateAutomationResponseInput$inboundSchema;
-  /** @deprecated use `CreateAutomationResponseInput$outboundSchema` instead. */
-  export const outboundSchema = CreateAutomationResponseInput$outboundSchema;
-  /** @deprecated use `CreateAutomationResponseInput$Outbound` instead. */
-  export type Outbound = CreateAutomationResponseInput$Outbound;
-}
-
-export function createAutomationResponseInputToJSON(
-  createAutomationResponseInput: CreateAutomationResponseInput,
-): string {
-  return JSON.stringify(
-    CreateAutomationResponseInput$outboundSchema.parse(
-      createAutomationResponseInput,
-    ),
-  );
-}
 
 export function createAutomationResponseInputFromJSON(
   jsonString: string,

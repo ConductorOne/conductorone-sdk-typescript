@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The TaskTypeCertify message indicates that a task is a certify task and all related details.
@@ -13,17 +10,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type TaskTypeCertifyInput = {
   outcomeTime?: Date | null | undefined;
 };
-
-/** @internal */
-export const TaskTypeCertifyInput$inboundSchema: z.ZodType<
-  TaskTypeCertifyInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  outcomeTime: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
 
 /** @internal */
 export type TaskTypeCertifyInput$Outbound = {
@@ -39,33 +25,10 @@ export const TaskTypeCertifyInput$outboundSchema: z.ZodType<
   outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskTypeCertifyInput$ {
-  /** @deprecated use `TaskTypeCertifyInput$inboundSchema` instead. */
-  export const inboundSchema = TaskTypeCertifyInput$inboundSchema;
-  /** @deprecated use `TaskTypeCertifyInput$outboundSchema` instead. */
-  export const outboundSchema = TaskTypeCertifyInput$outboundSchema;
-  /** @deprecated use `TaskTypeCertifyInput$Outbound` instead. */
-  export type Outbound = TaskTypeCertifyInput$Outbound;
-}
-
 export function taskTypeCertifyInputToJSON(
   taskTypeCertifyInput: TaskTypeCertifyInput,
 ): string {
   return JSON.stringify(
     TaskTypeCertifyInput$outboundSchema.parse(taskTypeCertifyInput),
-  );
-}
-
-export function taskTypeCertifyInputFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskTypeCertifyInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskTypeCertifyInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskTypeCertifyInput' from JSON`,
   );
 }

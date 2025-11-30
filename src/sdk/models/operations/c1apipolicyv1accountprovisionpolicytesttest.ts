@@ -52,66 +52,6 @@ export const C1ApiPolicyV1AccountProvisionPolicyTestTestResponse$inboundSchema:
     });
   });
 
-/** @internal */
-export type C1ApiPolicyV1AccountProvisionPolicyTestTestResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  TestAccountProvisionPolicyResponse?:
-    | shared.TestAccountProvisionPolicyResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiPolicyV1AccountProvisionPolicyTestTestResponse$outboundSchema:
-  z.ZodType<
-    C1ApiPolicyV1AccountProvisionPolicyTestTestResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiPolicyV1AccountProvisionPolicyTestTestResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    testAccountProvisionPolicyResponse: shared
-      .TestAccountProvisionPolicyResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      testAccountProvisionPolicyResponse: "TestAccountProvisionPolicyResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiPolicyV1AccountProvisionPolicyTestTestResponse$ {
-  /** @deprecated use `C1ApiPolicyV1AccountProvisionPolicyTestTestResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiPolicyV1AccountProvisionPolicyTestTestResponse$inboundSchema;
-  /** @deprecated use `C1ApiPolicyV1AccountProvisionPolicyTestTestResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiPolicyV1AccountProvisionPolicyTestTestResponse$outboundSchema;
-  /** @deprecated use `C1ApiPolicyV1AccountProvisionPolicyTestTestResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiPolicyV1AccountProvisionPolicyTestTestResponse$Outbound;
-}
-
-export function c1ApiPolicyV1AccountProvisionPolicyTestTestResponseToJSON(
-  c1ApiPolicyV1AccountProvisionPolicyTestTestResponse:
-    C1ApiPolicyV1AccountProvisionPolicyTestTestResponse,
-): string {
-  return JSON.stringify(
-    C1ApiPolicyV1AccountProvisionPolicyTestTestResponse$outboundSchema.parse(
-      c1ApiPolicyV1AccountProvisionPolicyTestTestResponse,
-    ),
-  );
-}
-
 export function c1ApiPolicyV1AccountProvisionPolicyTestTestResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

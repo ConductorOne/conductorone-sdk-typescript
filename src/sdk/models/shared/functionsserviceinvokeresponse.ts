@@ -17,11 +17,17 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type FunctionsServiceInvokeResponse = {
   /**
+   * The invocationId field.
+   */
+  invocationId?: string | undefined;
+  /**
    * The json field.
    *
    * @remarks
    * This field is part of the `resp` oneof.
    * See the documentation for `c1.api.functions.v1.FunctionsServiceInvokeResponse` for more details.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   json?: string | null | undefined;
 };
@@ -32,45 +38,9 @@ export const FunctionsServiceInvokeResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  invocationId: z.string().optional(),
   json: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type FunctionsServiceInvokeResponse$Outbound = {
-  json?: string | null | undefined;
-};
-
-/** @internal */
-export const FunctionsServiceInvokeResponse$outboundSchema: z.ZodType<
-  FunctionsServiceInvokeResponse$Outbound,
-  z.ZodTypeDef,
-  FunctionsServiceInvokeResponse
-> = z.object({
-  json: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionsServiceInvokeResponse$ {
-  /** @deprecated use `FunctionsServiceInvokeResponse$inboundSchema` instead. */
-  export const inboundSchema = FunctionsServiceInvokeResponse$inboundSchema;
-  /** @deprecated use `FunctionsServiceInvokeResponse$outboundSchema` instead. */
-  export const outboundSchema = FunctionsServiceInvokeResponse$outboundSchema;
-  /** @deprecated use `FunctionsServiceInvokeResponse$Outbound` instead. */
-  export type Outbound = FunctionsServiceInvokeResponse$Outbound;
-}
-
-export function functionsServiceInvokeResponseToJSON(
-  functionsServiceInvokeResponse: FunctionsServiceInvokeResponse,
-): string {
-  return JSON.stringify(
-    FunctionsServiceInvokeResponse$outboundSchema.parse(
-      functionsServiceInvokeResponse,
-    ),
-  );
-}
 
 export function functionsServiceInvokeResponseFromJSON(
   jsonString: string,

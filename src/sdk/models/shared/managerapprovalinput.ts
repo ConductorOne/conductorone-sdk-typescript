@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The manager approval object provides configuration options for approval when the target of the approval is the manager of the user in the task.
@@ -23,24 +20,18 @@ export type ManagerApprovalInput = {
    * Configuration to specific which users to fallback to if fallback is enabled and no manager is found.
    */
   fallbackUserIds?: Array<string> | null | undefined;
+  /**
+   * Configuration to require distinct approvers across approval steps of a rule.
+   */
+  requireDistinctApprovers?: boolean | undefined;
 };
-
-/** @internal */
-export const ManagerApprovalInput$inboundSchema: z.ZodType<
-  ManagerApprovalInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  allowSelfApproval: z.nullable(z.boolean()).optional(),
-  fallback: z.nullable(z.boolean()).optional(),
-  fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type ManagerApprovalInput$Outbound = {
   allowSelfApproval?: boolean | null | undefined;
   fallback?: boolean | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -52,35 +43,13 @@ export const ManagerApprovalInput$outboundSchema: z.ZodType<
   allowSelfApproval: z.nullable(z.boolean()).optional(),
   fallback: z.nullable(z.boolean()).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ManagerApprovalInput$ {
-  /** @deprecated use `ManagerApprovalInput$inboundSchema` instead. */
-  export const inboundSchema = ManagerApprovalInput$inboundSchema;
-  /** @deprecated use `ManagerApprovalInput$outboundSchema` instead. */
-  export const outboundSchema = ManagerApprovalInput$outboundSchema;
-  /** @deprecated use `ManagerApprovalInput$Outbound` instead. */
-  export type Outbound = ManagerApprovalInput$Outbound;
-}
 
 export function managerApprovalInputToJSON(
   managerApprovalInput: ManagerApprovalInput,
 ): string {
   return JSON.stringify(
     ManagerApprovalInput$outboundSchema.parse(managerApprovalInput),
-  );
-}
-
-export function managerApprovalInputFromJSON(
-  jsonString: string,
-): SafeParseResult<ManagerApprovalInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ManagerApprovalInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ManagerApprovalInput' from JSON`,
   );
 }

@@ -48,47 +48,6 @@ export const AttributeValue$inboundSchema: z.ZodType<
   value: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type AttributeValue$Outbound = {
-  attributeTypeId?: string | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  id?: string | null | undefined;
-  updatedAt?: string | null | undefined;
-  value?: string | null | undefined;
-};
-
-/** @internal */
-export const AttributeValue$outboundSchema: z.ZodType<
-  AttributeValue$Outbound,
-  z.ZodTypeDef,
-  AttributeValue
-> = z.object({
-  attributeTypeId: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  id: z.nullable(z.string()).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  value: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AttributeValue$ {
-  /** @deprecated use `AttributeValue$inboundSchema` instead. */
-  export const inboundSchema = AttributeValue$inboundSchema;
-  /** @deprecated use `AttributeValue$outboundSchema` instead. */
-  export const outboundSchema = AttributeValue$outboundSchema;
-  /** @deprecated use `AttributeValue$Outbound` instead. */
-  export type Outbound = AttributeValue$Outbound;
-}
-
-export function attributeValueToJSON(attributeValue: AttributeValue): string {
-  return JSON.stringify(AttributeValue$outboundSchema.parse(attributeValue));
-}
-
 export function attributeValueFromJSON(
   jsonString: string,
 ): SafeParseResult<AttributeValue, SDKValidationError> {

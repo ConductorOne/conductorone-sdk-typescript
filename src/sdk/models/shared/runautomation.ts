@@ -52,7 +52,6 @@ export const RunAutomation$inboundSchema: z.ZodType<
     .optional(),
   context: z.nullable(AutomationContext$inboundSchema).optional(),
 });
-
 /** @internal */
 export type RunAutomation$Outbound = {
   automationTemplateIdCel?: string | null | undefined;
@@ -72,23 +71,9 @@ export const RunAutomation$outboundSchema: z.ZodType<
   context: z.nullable(AutomationContext$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RunAutomation$ {
-  /** @deprecated use `RunAutomation$inboundSchema` instead. */
-  export const inboundSchema = RunAutomation$inboundSchema;
-  /** @deprecated use `RunAutomation$outboundSchema` instead. */
-  export const outboundSchema = RunAutomation$outboundSchema;
-  /** @deprecated use `RunAutomation$Outbound` instead. */
-  export type Outbound = RunAutomation$Outbound;
-}
-
 export function runAutomationToJSON(runAutomation: RunAutomation): string {
   return JSON.stringify(RunAutomation$outboundSchema.parse(runAutomation));
 }
-
 export function runAutomationFromJSON(
   jsonString: string,
 ): SafeParseResult<RunAutomation, SDKValidationError> {

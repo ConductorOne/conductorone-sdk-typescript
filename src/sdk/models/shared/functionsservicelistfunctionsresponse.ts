@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  FunctionT,
-  FunctionT$inboundSchema,
-  FunctionT$Outbound,
-  FunctionT$outboundSchema,
-} from "./function.js";
+import { FunctionT, FunctionT$inboundSchema } from "./function.js";
 
 /**
  * The FunctionsServiceListFunctionsResponse message.
@@ -36,47 +31,6 @@ export const FunctionsServiceListFunctionsResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(FunctionT$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type FunctionsServiceListFunctionsResponse$Outbound = {
-  list?: Array<FunctionT$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const FunctionsServiceListFunctionsResponse$outboundSchema: z.ZodType<
-  FunctionsServiceListFunctionsResponse$Outbound,
-  z.ZodTypeDef,
-  FunctionsServiceListFunctionsResponse
-> = z.object({
-  list: z.nullable(z.array(FunctionT$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionsServiceListFunctionsResponse$ {
-  /** @deprecated use `FunctionsServiceListFunctionsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    FunctionsServiceListFunctionsResponse$inboundSchema;
-  /** @deprecated use `FunctionsServiceListFunctionsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    FunctionsServiceListFunctionsResponse$outboundSchema;
-  /** @deprecated use `FunctionsServiceListFunctionsResponse$Outbound` instead. */
-  export type Outbound = FunctionsServiceListFunctionsResponse$Outbound;
-}
-
-export function functionsServiceListFunctionsResponseToJSON(
-  functionsServiceListFunctionsResponse: FunctionsServiceListFunctionsResponse,
-): string {
-  return JSON.stringify(
-    FunctionsServiceListFunctionsResponse$outboundSchema.parse(
-      functionsServiceListFunctionsResponse,
-    ),
-  );
-}
 
 export function functionsServiceListFunctionsResponseFromJSON(
   jsonString: string,

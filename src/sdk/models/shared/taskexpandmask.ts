@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The task expand mask is an array of strings that specifes the related objects the requester wishes to have returned when making a request where the expand mask is part of the input. Use '*' to view all possible responses.
@@ -16,15 +13,6 @@ export type TaskExpandMask = {
    */
   paths?: Array<string> | null | undefined;
 };
-
-/** @internal */
-export const TaskExpandMask$inboundSchema: z.ZodType<
-  TaskExpandMask,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type TaskExpandMask$Outbound = {
@@ -40,29 +28,6 @@ export const TaskExpandMask$outboundSchema: z.ZodType<
   paths: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskExpandMask$ {
-  /** @deprecated use `TaskExpandMask$inboundSchema` instead. */
-  export const inboundSchema = TaskExpandMask$inboundSchema;
-  /** @deprecated use `TaskExpandMask$outboundSchema` instead. */
-  export const outboundSchema = TaskExpandMask$outboundSchema;
-  /** @deprecated use `TaskExpandMask$Outbound` instead. */
-  export type Outbound = TaskExpandMask$Outbound;
-}
-
 export function taskExpandMaskToJSON(taskExpandMask: TaskExpandMask): string {
   return JSON.stringify(TaskExpandMask$outboundSchema.parse(taskExpandMask));
-}
-
-export function taskExpandMaskFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskExpandMask, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskExpandMask$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskExpandMask' from JSON`,
-  );
 }

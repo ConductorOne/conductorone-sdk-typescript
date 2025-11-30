@@ -55,7 +55,6 @@ export const GrantEntitlements$inboundSchema: z.ZodType<
   userIdCel: z.nullable(z.string()).optional(),
   userRef: z.nullable(UserRef$inboundSchema).optional(),
 });
-
 /** @internal */
 export type GrantEntitlements$Outbound = {
   appEntitlementRefs?: Array<AppEntitlementRef$Outbound> | null | undefined;
@@ -79,19 +78,6 @@ export const GrantEntitlements$outboundSchema: z.ZodType<
   userRef: z.nullable(UserRef$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GrantEntitlements$ {
-  /** @deprecated use `GrantEntitlements$inboundSchema` instead. */
-  export const inboundSchema = GrantEntitlements$inboundSchema;
-  /** @deprecated use `GrantEntitlements$outboundSchema` instead. */
-  export const outboundSchema = GrantEntitlements$outboundSchema;
-  /** @deprecated use `GrantEntitlements$Outbound` instead. */
-  export type Outbound = GrantEntitlements$Outbound;
-}
-
 export function grantEntitlementsToJSON(
   grantEntitlements: GrantEntitlements,
 ): string {
@@ -99,7 +85,6 @@ export function grantEntitlementsToJSON(
     GrantEntitlements$outboundSchema.parse(grantEntitlements),
   );
 }
-
 export function grantEntitlementsFromJSON(
   jsonString: string,
 ): SafeParseResult<GrantEntitlements, SDKValidationError> {

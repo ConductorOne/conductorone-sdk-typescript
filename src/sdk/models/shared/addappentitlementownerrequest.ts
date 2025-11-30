@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The request message for adding an app entitlement owner.
@@ -16,15 +13,6 @@ export type AddAppEntitlementOwnerRequest = {
    */
   userId?: string | null | undefined;
 };
-
-/** @internal */
-export const AddAppEntitlementOwnerRequest$inboundSchema: z.ZodType<
-  AddAppEntitlementOwnerRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  userId: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type AddAppEntitlementOwnerRequest$Outbound = {
@@ -40,19 +28,6 @@ export const AddAppEntitlementOwnerRequest$outboundSchema: z.ZodType<
   userId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AddAppEntitlementOwnerRequest$ {
-  /** @deprecated use `AddAppEntitlementOwnerRequest$inboundSchema` instead. */
-  export const inboundSchema = AddAppEntitlementOwnerRequest$inboundSchema;
-  /** @deprecated use `AddAppEntitlementOwnerRequest$outboundSchema` instead. */
-  export const outboundSchema = AddAppEntitlementOwnerRequest$outboundSchema;
-  /** @deprecated use `AddAppEntitlementOwnerRequest$Outbound` instead. */
-  export type Outbound = AddAppEntitlementOwnerRequest$Outbound;
-}
-
 export function addAppEntitlementOwnerRequestToJSON(
   addAppEntitlementOwnerRequest: AddAppEntitlementOwnerRequest,
 ): string {
@@ -60,15 +35,5 @@ export function addAppEntitlementOwnerRequestToJSON(
     AddAppEntitlementOwnerRequest$outboundSchema.parse(
       addAppEntitlementOwnerRequest,
     ),
-  );
-}
-
-export function addAppEntitlementOwnerRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<AddAppEntitlementOwnerRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AddAppEntitlementOwnerRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AddAppEntitlementOwnerRequest' from JSON`,
   );
 }

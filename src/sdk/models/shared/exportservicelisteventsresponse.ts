@@ -31,45 +31,6 @@ export const ExportServiceListEventsResponse$inboundSchema: z.ZodType<
   nextPageToken: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type ExportServiceListEventsResponse$Outbound = {
-  list?: Array<{ [k: string]: any }> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ExportServiceListEventsResponse$outboundSchema: z.ZodType<
-  ExportServiceListEventsResponse$Outbound,
-  z.ZodTypeDef,
-  ExportServiceListEventsResponse
-> = z.object({
-  list: z.nullable(z.array(z.record(z.any()))).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExportServiceListEventsResponse$ {
-  /** @deprecated use `ExportServiceListEventsResponse$inboundSchema` instead. */
-  export const inboundSchema = ExportServiceListEventsResponse$inboundSchema;
-  /** @deprecated use `ExportServiceListEventsResponse$outboundSchema` instead. */
-  export const outboundSchema = ExportServiceListEventsResponse$outboundSchema;
-  /** @deprecated use `ExportServiceListEventsResponse$Outbound` instead. */
-  export type Outbound = ExportServiceListEventsResponse$Outbound;
-}
-
-export function exportServiceListEventsResponseToJSON(
-  exportServiceListEventsResponse: ExportServiceListEventsResponse,
-): string {
-  return JSON.stringify(
-    ExportServiceListEventsResponse$outboundSchema.parse(
-      exportServiceListEventsResponse,
-    ),
-  );
-}
-
 export function exportServiceListEventsResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<ExportServiceListEventsResponse, SDKValidationError> {

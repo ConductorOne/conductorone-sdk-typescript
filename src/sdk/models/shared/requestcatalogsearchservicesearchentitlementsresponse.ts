@@ -13,8 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementWithUserBindings,
   AppEntitlementWithUserBindings$inboundSchema,
-  AppEntitlementWithUserBindings$Outbound,
-  AppEntitlementWithUserBindings$outboundSchema,
 } from "./appentitlementwithuserbindings.js";
 
 /**
@@ -71,58 +69,6 @@ export const RequestCatalogSearchServiceSearchEntitlementsResponseExpanded$inbou
     });
   });
 
-/** @internal */
-export type RequestCatalogSearchServiceSearchEntitlementsResponseExpanded$Outbound =
-  {
-    "@type"?: string | undefined;
-    [additionalProperties: string]: unknown;
-  };
-
-/** @internal */
-export const RequestCatalogSearchServiceSearchEntitlementsResponseExpanded$outboundSchema:
-  z.ZodType<
-    RequestCatalogSearchServiceSearchEntitlementsResponseExpanded$Outbound,
-    z.ZodTypeDef,
-    RequestCatalogSearchServiceSearchEntitlementsResponseExpanded
-  > = z.object({
-    atType: z.string().optional(),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        atType: "@type",
-        additionalProperties: null,
-      }),
-    };
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogSearchServiceSearchEntitlementsResponseExpanded$ {
-  /** @deprecated use `RequestCatalogSearchServiceSearchEntitlementsResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogSearchServiceSearchEntitlementsResponseExpanded$inboundSchema;
-  /** @deprecated use `RequestCatalogSearchServiceSearchEntitlementsResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogSearchServiceSearchEntitlementsResponseExpanded$outboundSchema;
-  /** @deprecated use `RequestCatalogSearchServiceSearchEntitlementsResponseExpanded$Outbound` instead. */
-  export type Outbound =
-    RequestCatalogSearchServiceSearchEntitlementsResponseExpanded$Outbound;
-}
-
-export function requestCatalogSearchServiceSearchEntitlementsResponseExpandedToJSON(
-  requestCatalogSearchServiceSearchEntitlementsResponseExpanded:
-    RequestCatalogSearchServiceSearchEntitlementsResponseExpanded,
-): string {
-  return JSON.stringify(
-    RequestCatalogSearchServiceSearchEntitlementsResponseExpanded$outboundSchema
-      .parse(requestCatalogSearchServiceSearchEntitlementsResponseExpanded),
-  );
-}
-
 export function requestCatalogSearchServiceSearchEntitlementsResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -154,62 +100,6 @@ export const RequestCatalogSearchServiceSearchEntitlementsResponse$inboundSchema
       .optional(),
     nextPageToken: z.nullable(z.string()).optional(),
   });
-
-/** @internal */
-export type RequestCatalogSearchServiceSearchEntitlementsResponse$Outbound = {
-  expanded?:
-    | Array<
-      RequestCatalogSearchServiceSearchEntitlementsResponseExpanded$Outbound
-    >
-    | null
-    | undefined;
-  list?: Array<AppEntitlementWithUserBindings$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const RequestCatalogSearchServiceSearchEntitlementsResponse$outboundSchema:
-  z.ZodType<
-    RequestCatalogSearchServiceSearchEntitlementsResponse$Outbound,
-    z.ZodTypeDef,
-    RequestCatalogSearchServiceSearchEntitlementsResponse
-  > = z.object({
-    expanded: z.nullable(
-      z.array(z.lazy(() =>
-        RequestCatalogSearchServiceSearchEntitlementsResponseExpanded$outboundSchema
-      )),
-    ).optional(),
-    list: z.nullable(z.array(AppEntitlementWithUserBindings$outboundSchema))
-      .optional(),
-    nextPageToken: z.nullable(z.string()).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogSearchServiceSearchEntitlementsResponse$ {
-  /** @deprecated use `RequestCatalogSearchServiceSearchEntitlementsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogSearchServiceSearchEntitlementsResponse$inboundSchema;
-  /** @deprecated use `RequestCatalogSearchServiceSearchEntitlementsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogSearchServiceSearchEntitlementsResponse$outboundSchema;
-  /** @deprecated use `RequestCatalogSearchServiceSearchEntitlementsResponse$Outbound` instead. */
-  export type Outbound =
-    RequestCatalogSearchServiceSearchEntitlementsResponse$Outbound;
-}
-
-export function requestCatalogSearchServiceSearchEntitlementsResponseToJSON(
-  requestCatalogSearchServiceSearchEntitlementsResponse:
-    RequestCatalogSearchServiceSearchEntitlementsResponse,
-): string {
-  return JSON.stringify(
-    RequestCatalogSearchServiceSearchEntitlementsResponse$outboundSchema.parse(
-      requestCatalogSearchServiceSearchEntitlementsResponse,
-    ),
-  );
-}
 
 export function requestCatalogSearchServiceSearchEntitlementsResponseFromJSON(
   jsonString: string,

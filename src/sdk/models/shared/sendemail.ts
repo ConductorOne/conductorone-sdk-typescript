@@ -56,7 +56,6 @@ export const SendEmail$inboundSchema: z.ZodType<
   userIdsCel: z.nullable(z.string()).optional(),
   userRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
 });
-
 /** @internal */
 export type SendEmail$Outbound = {
   body?: string | null | undefined;
@@ -81,23 +80,9 @@ export const SendEmail$outboundSchema: z.ZodType<
   userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SendEmail$ {
-  /** @deprecated use `SendEmail$inboundSchema` instead. */
-  export const inboundSchema = SendEmail$inboundSchema;
-  /** @deprecated use `SendEmail$outboundSchema` instead. */
-  export const outboundSchema = SendEmail$outboundSchema;
-  /** @deprecated use `SendEmail$Outbound` instead. */
-  export type Outbound = SendEmail$Outbound;
-}
-
 export function sendEmailToJSON(sendEmail: SendEmail): string {
   return JSON.stringify(SendEmail$outboundSchema.parse(sendEmail));
 }
-
 export function sendEmailFromJSON(
   jsonString: string,
 ): SafeParseResult<SendEmail, SDKValidationError> {

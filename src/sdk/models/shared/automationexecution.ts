@@ -4,18 +4,13 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AutomationContext,
   AutomationContext$inboundSchema,
-  AutomationContext$Outbound,
-  AutomationContext$outboundSchema,
 } from "./automationcontext.js";
 
 /**
@@ -79,32 +74,7 @@ export const AutomationExecutionState$inboundSchema: z.ZodType<
   AutomationExecutionState,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(AutomationExecutionState),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const AutomationExecutionState$outboundSchema: z.ZodType<
-  AutomationExecutionState,
-  z.ZodTypeDef,
-  AutomationExecutionState
-> = z.union([
-  z.nativeEnum(AutomationExecutionState),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AutomationExecutionState$ {
-  /** @deprecated use `AutomationExecutionState$inboundSchema` instead. */
-  export const inboundSchema = AutomationExecutionState$inboundSchema;
-  /** @deprecated use `AutomationExecutionState$outboundSchema` instead. */
-  export const outboundSchema = AutomationExecutionState$outboundSchema;
-}
+> = openEnums.inboundSchema(AutomationExecutionState);
 
 /** @internal */
 export const AutomationExecution$inboundSchema: z.ZodType<
@@ -132,61 +102,6 @@ export const AutomationExecution$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
-/** @internal */
-export type AutomationExecution$Outbound = {
-  automationTemplateId?: string | null | undefined;
-  completedAt?: string | null | undefined;
-  context?: AutomationContext$Outbound | null | undefined;
-  createdAt?: string | null | undefined;
-  currentVersion?: number | null | undefined;
-  deletedAt?: string | null | undefined;
-  duration?: string | null | undefined;
-  id?: string | null | undefined;
-  isDraft?: boolean | null | undefined;
-  state?: string | null | undefined;
-  updatedAt?: string | null | undefined;
-};
-
-/** @internal */
-export const AutomationExecution$outboundSchema: z.ZodType<
-  AutomationExecution$Outbound,
-  z.ZodTypeDef,
-  AutomationExecution
-> = z.object({
-  automationTemplateId: z.nullable(z.string()).optional(),
-  completedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  context: z.nullable(AutomationContext$outboundSchema).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  currentVersion: z.nullable(z.number().int()).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  duration: z.nullable(z.string()).optional(),
-  id: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
-  isDraft: z.nullable(z.boolean()).optional(),
-  state: z.nullable(AutomationExecutionState$outboundSchema).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AutomationExecution$ {
-  /** @deprecated use `AutomationExecution$inboundSchema` instead. */
-  export const inboundSchema = AutomationExecution$inboundSchema;
-  /** @deprecated use `AutomationExecution$outboundSchema` instead. */
-  export const outboundSchema = AutomationExecution$outboundSchema;
-  /** @deprecated use `AutomationExecution$Outbound` instead. */
-  export type Outbound = AutomationExecution$Outbound;
-}
-
-export function automationExecutionToJSON(
-  automationExecution: AutomationExecution,
-): string {
-  return JSON.stringify(
-    AutomationExecution$outboundSchema.parse(automationExecution),
-  );
-}
 
 export function automationExecutionFromJSON(
   jsonString: string,

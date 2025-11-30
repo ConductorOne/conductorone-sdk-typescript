@@ -6,18 +6,8 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Field,
-  Field$inboundSchema,
-  Field$Outbound,
-  Field$outboundSchema,
-} from "./field.js";
-import {
-  FieldGroup,
-  FieldGroup$inboundSchema,
-  FieldGroup$Outbound,
-  FieldGroup$outboundSchema,
-} from "./fieldgroup.js";
+import { Field, Field$inboundSchema } from "./field.js";
+import { FieldGroup, FieldGroup$inboundSchema } from "./fieldgroup.js";
 
 /**
  * The ConfigSchema message.
@@ -74,51 +64,6 @@ export const ConfigSchema$inboundSchema: z.ZodType<
   requiresExternalConnector: z.nullable(z.boolean()).optional(),
   supportsExternalResources: z.nullable(z.boolean()).optional(),
 });
-
-/** @internal */
-export type ConfigSchema$Outbound = {
-  displayName?: string | null | undefined;
-  fieldGroups?: Array<FieldGroup$Outbound> | null | undefined;
-  fields?: Array<Field$Outbound> | null | undefined;
-  helpUrl?: string | null | undefined;
-  iconUrl?: string | null | undefined;
-  isOauth2?: boolean | null | undefined;
-  requiresExternalConnector?: boolean | null | undefined;
-  supportsExternalResources?: boolean | null | undefined;
-};
-
-/** @internal */
-export const ConfigSchema$outboundSchema: z.ZodType<
-  ConfigSchema$Outbound,
-  z.ZodTypeDef,
-  ConfigSchema
-> = z.object({
-  displayName: z.nullable(z.string()).optional(),
-  fieldGroups: z.nullable(z.array(FieldGroup$outboundSchema)).optional(),
-  fields: z.nullable(z.array(Field$outboundSchema)).optional(),
-  helpUrl: z.nullable(z.string()).optional(),
-  iconUrl: z.nullable(z.string()).optional(),
-  isOauth2: z.nullable(z.boolean()).optional(),
-  requiresExternalConnector: z.nullable(z.boolean()).optional(),
-  supportsExternalResources: z.nullable(z.boolean()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConfigSchema$ {
-  /** @deprecated use `ConfigSchema$inboundSchema` instead. */
-  export const inboundSchema = ConfigSchema$inboundSchema;
-  /** @deprecated use `ConfigSchema$outboundSchema` instead. */
-  export const outboundSchema = ConfigSchema$outboundSchema;
-  /** @deprecated use `ConfigSchema$Outbound` instead. */
-  export type Outbound = ConfigSchema$Outbound;
-}
-
-export function configSchemaToJSON(configSchema: ConfigSchema): string {
-  return JSON.stringify(ConfigSchema$outboundSchema.parse(configSchema));
-}
 
 export function configSchemaFromJSON(
   jsonString: string,

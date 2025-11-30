@@ -35,7 +35,6 @@ export const SelfApproval$inboundSchema: z.ZodType<
   fallback: z.nullable(z.boolean()).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
 });
-
 /** @internal */
 export type SelfApproval$Outbound = {
   assignedUserIds?: Array<string> | null | undefined;
@@ -54,23 +53,9 @@ export const SelfApproval$outboundSchema: z.ZodType<
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SelfApproval$ {
-  /** @deprecated use `SelfApproval$inboundSchema` instead. */
-  export const inboundSchema = SelfApproval$inboundSchema;
-  /** @deprecated use `SelfApproval$outboundSchema` instead. */
-  export const outboundSchema = SelfApproval$outboundSchema;
-  /** @deprecated use `SelfApproval$Outbound` instead. */
-  export type Outbound = SelfApproval$Outbound;
-}
-
 export function selfApprovalToJSON(selfApproval: SelfApproval): string {
   return JSON.stringify(SelfApproval$outboundSchema.parse(selfApproval));
 }
-
 export function selfApprovalFromJSON(
   jsonString: string,
 ): SafeParseResult<SelfApproval, SDKValidationError> {

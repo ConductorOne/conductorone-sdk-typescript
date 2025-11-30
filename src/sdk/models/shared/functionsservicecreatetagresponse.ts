@@ -19,40 +19,6 @@ export const FunctionsServiceCreateTagResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type FunctionsServiceCreateTagResponse$Outbound = {};
-
-/** @internal */
-export const FunctionsServiceCreateTagResponse$outboundSchema: z.ZodType<
-  FunctionsServiceCreateTagResponse$Outbound,
-  z.ZodTypeDef,
-  FunctionsServiceCreateTagResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionsServiceCreateTagResponse$ {
-  /** @deprecated use `FunctionsServiceCreateTagResponse$inboundSchema` instead. */
-  export const inboundSchema = FunctionsServiceCreateTagResponse$inboundSchema;
-  /** @deprecated use `FunctionsServiceCreateTagResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    FunctionsServiceCreateTagResponse$outboundSchema;
-  /** @deprecated use `FunctionsServiceCreateTagResponse$Outbound` instead. */
-  export type Outbound = FunctionsServiceCreateTagResponse$Outbound;
-}
-
-export function functionsServiceCreateTagResponseToJSON(
-  functionsServiceCreateTagResponse: FunctionsServiceCreateTagResponse,
-): string {
-  return JSON.stringify(
-    FunctionsServiceCreateTagResponse$outboundSchema.parse(
-      functionsServiceCreateTagResponse,
-    ),
-  );
-}
-
 export function functionsServiceCreateTagResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<FunctionsServiceCreateTagResponse, SDKValidationError> {

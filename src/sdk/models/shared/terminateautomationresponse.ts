@@ -19,39 +19,6 @@ export const TerminateAutomationResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type TerminateAutomationResponse$Outbound = {};
-
-/** @internal */
-export const TerminateAutomationResponse$outboundSchema: z.ZodType<
-  TerminateAutomationResponse$Outbound,
-  z.ZodTypeDef,
-  TerminateAutomationResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TerminateAutomationResponse$ {
-  /** @deprecated use `TerminateAutomationResponse$inboundSchema` instead. */
-  export const inboundSchema = TerminateAutomationResponse$inboundSchema;
-  /** @deprecated use `TerminateAutomationResponse$outboundSchema` instead. */
-  export const outboundSchema = TerminateAutomationResponse$outboundSchema;
-  /** @deprecated use `TerminateAutomationResponse$Outbound` instead. */
-  export type Outbound = TerminateAutomationResponse$Outbound;
-}
-
-export function terminateAutomationResponseToJSON(
-  terminateAutomationResponse: TerminateAutomationResponse,
-): string {
-  return JSON.stringify(
-    TerminateAutomationResponse$outboundSchema.parse(
-      terminateAutomationResponse,
-    ),
-  );
-}
-
 export function terminateAutomationResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<TerminateAutomationResponse, SDKValidationError> {

@@ -13,8 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementWithUserBinding,
   AppEntitlementWithUserBinding$inboundSchema,
-  AppEntitlementWithUserBinding$Outbound,
-  AppEntitlementWithUserBinding$outboundSchema,
 } from "./appentitlementwithuserbinding.js";
 
 /**
@@ -67,57 +65,6 @@ export const AppEntitlementSearchServiceSearchGrantsResponseExpanded$inboundSche
     });
   });
 
-/** @internal */
-export type AppEntitlementSearchServiceSearchGrantsResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const AppEntitlementSearchServiceSearchGrantsResponseExpanded$outboundSchema:
-  z.ZodType<
-    AppEntitlementSearchServiceSearchGrantsResponseExpanded$Outbound,
-    z.ZodTypeDef,
-    AppEntitlementSearchServiceSearchGrantsResponseExpanded
-  > = z.object({
-    atType: z.string().optional(),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        atType: "@type",
-        additionalProperties: null,
-      }),
-    };
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementSearchServiceSearchGrantsResponseExpanded$ {
-  /** @deprecated use `AppEntitlementSearchServiceSearchGrantsResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    AppEntitlementSearchServiceSearchGrantsResponseExpanded$inboundSchema;
-  /** @deprecated use `AppEntitlementSearchServiceSearchGrantsResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    AppEntitlementSearchServiceSearchGrantsResponseExpanded$outboundSchema;
-  /** @deprecated use `AppEntitlementSearchServiceSearchGrantsResponseExpanded$Outbound` instead. */
-  export type Outbound =
-    AppEntitlementSearchServiceSearchGrantsResponseExpanded$Outbound;
-}
-
-export function appEntitlementSearchServiceSearchGrantsResponseExpandedToJSON(
-  appEntitlementSearchServiceSearchGrantsResponseExpanded:
-    AppEntitlementSearchServiceSearchGrantsResponseExpanded,
-): string {
-  return JSON.stringify(
-    AppEntitlementSearchServiceSearchGrantsResponseExpanded$outboundSchema
-      .parse(appEntitlementSearchServiceSearchGrantsResponseExpanded),
-  );
-}
-
 export function appEntitlementSearchServiceSearchGrantsResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -149,60 +96,6 @@ export const AppEntitlementSearchServiceSearchGrantsResponse$inboundSchema:
       .optional(),
     nextPageToken: z.nullable(z.string()).optional(),
   });
-
-/** @internal */
-export type AppEntitlementSearchServiceSearchGrantsResponse$Outbound = {
-  expanded?:
-    | Array<AppEntitlementSearchServiceSearchGrantsResponseExpanded$Outbound>
-    | null
-    | undefined;
-  list?: Array<AppEntitlementWithUserBinding$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const AppEntitlementSearchServiceSearchGrantsResponse$outboundSchema:
-  z.ZodType<
-    AppEntitlementSearchServiceSearchGrantsResponse$Outbound,
-    z.ZodTypeDef,
-    AppEntitlementSearchServiceSearchGrantsResponse
-  > = z.object({
-    expanded: z.nullable(
-      z.array(z.lazy(() =>
-        AppEntitlementSearchServiceSearchGrantsResponseExpanded$outboundSchema
-      )),
-    ).optional(),
-    list: z.nullable(z.array(AppEntitlementWithUserBinding$outboundSchema))
-      .optional(),
-    nextPageToken: z.nullable(z.string()).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementSearchServiceSearchGrantsResponse$ {
-  /** @deprecated use `AppEntitlementSearchServiceSearchGrantsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    AppEntitlementSearchServiceSearchGrantsResponse$inboundSchema;
-  /** @deprecated use `AppEntitlementSearchServiceSearchGrantsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    AppEntitlementSearchServiceSearchGrantsResponse$outboundSchema;
-  /** @deprecated use `AppEntitlementSearchServiceSearchGrantsResponse$Outbound` instead. */
-  export type Outbound =
-    AppEntitlementSearchServiceSearchGrantsResponse$Outbound;
-}
-
-export function appEntitlementSearchServiceSearchGrantsResponseToJSON(
-  appEntitlementSearchServiceSearchGrantsResponse:
-    AppEntitlementSearchServiceSearchGrantsResponse,
-): string {
-  return JSON.stringify(
-    AppEntitlementSearchServiceSearchGrantsResponse$outboundSchema.parse(
-      appEntitlementSearchServiceSearchGrantsResponse,
-    ),
-  );
-}
 
 export function appEntitlementSearchServiceSearchGrantsResponseFromJSON(
   jsonString: string,
