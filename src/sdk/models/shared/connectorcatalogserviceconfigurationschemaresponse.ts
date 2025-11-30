@@ -6,18 +6,8 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  ConfigSchema,
-  ConfigSchema$inboundSchema,
-  ConfigSchema$Outbound,
-  ConfigSchema$outboundSchema,
-} from "./configschema.js";
-import {
-  FormInput,
-  FormInput$inboundSchema,
-  FormInput$Outbound,
-  FormInput$outboundSchema,
-} from "./forminput.js";
+import { ConfigSchema, ConfigSchema$inboundSchema } from "./configschema.js";
+import { FormInput, FormInput$inboundSchema } from "./forminput.js";
 
 /**
  * The ConnectorCatalogServiceConfigurationSchemaResponse message.
@@ -37,50 +27,6 @@ export const ConnectorCatalogServiceConfigurationSchemaResponse$inboundSchema:
     formSchema: z.nullable(FormInput$inboundSchema).optional(),
     schema: z.nullable(ConfigSchema$inboundSchema).optional(),
   });
-
-/** @internal */
-export type ConnectorCatalogServiceConfigurationSchemaResponse$Outbound = {
-  formSchema?: FormInput$Outbound | null | undefined;
-  schema?: ConfigSchema$Outbound | null | undefined;
-};
-
-/** @internal */
-export const ConnectorCatalogServiceConfigurationSchemaResponse$outboundSchema:
-  z.ZodType<
-    ConnectorCatalogServiceConfigurationSchemaResponse$Outbound,
-    z.ZodTypeDef,
-    ConnectorCatalogServiceConfigurationSchemaResponse
-  > = z.object({
-    formSchema: z.nullable(FormInput$outboundSchema).optional(),
-    schema: z.nullable(ConfigSchema$outboundSchema).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorCatalogServiceConfigurationSchemaResponse$ {
-  /** @deprecated use `ConnectorCatalogServiceConfigurationSchemaResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    ConnectorCatalogServiceConfigurationSchemaResponse$inboundSchema;
-  /** @deprecated use `ConnectorCatalogServiceConfigurationSchemaResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    ConnectorCatalogServiceConfigurationSchemaResponse$outboundSchema;
-  /** @deprecated use `ConnectorCatalogServiceConfigurationSchemaResponse$Outbound` instead. */
-  export type Outbound =
-    ConnectorCatalogServiceConfigurationSchemaResponse$Outbound;
-}
-
-export function connectorCatalogServiceConfigurationSchemaResponseToJSON(
-  connectorCatalogServiceConfigurationSchemaResponse:
-    ConnectorCatalogServiceConfigurationSchemaResponse,
-): string {
-  return JSON.stringify(
-    ConnectorCatalogServiceConfigurationSchemaResponse$outboundSchema.parse(
-      connectorCatalogServiceConfigurationSchemaResponse,
-    ),
-  );
-}
 
 export function connectorCatalogServiceConfigurationSchemaResponseFromJSON(
   jsonString: string,

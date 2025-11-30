@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The DeleteBundleAutomationRequest message.
  */
 export type DeleteBundleAutomationRequest = {};
-
-/** @internal */
-export const DeleteBundleAutomationRequest$inboundSchema: z.ZodType<
-  DeleteBundleAutomationRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type DeleteBundleAutomationRequest$Outbound = {};
@@ -29,19 +19,6 @@ export const DeleteBundleAutomationRequest$outboundSchema: z.ZodType<
   DeleteBundleAutomationRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteBundleAutomationRequest$ {
-  /** @deprecated use `DeleteBundleAutomationRequest$inboundSchema` instead. */
-  export const inboundSchema = DeleteBundleAutomationRequest$inboundSchema;
-  /** @deprecated use `DeleteBundleAutomationRequest$outboundSchema` instead. */
-  export const outboundSchema = DeleteBundleAutomationRequest$outboundSchema;
-  /** @deprecated use `DeleteBundleAutomationRequest$Outbound` instead. */
-  export type Outbound = DeleteBundleAutomationRequest$Outbound;
-}
-
 export function deleteBundleAutomationRequestToJSON(
   deleteBundleAutomationRequest: DeleteBundleAutomationRequest,
 ): string {
@@ -49,15 +26,5 @@ export function deleteBundleAutomationRequestToJSON(
     DeleteBundleAutomationRequest$outboundSchema.parse(
       deleteBundleAutomationRequest,
     ),
-  );
-}
-
-export function deleteBundleAutomationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteBundleAutomationRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteBundleAutomationRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteBundleAutomationRequest' from JSON`,
   );
 }

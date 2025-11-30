@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AttributeValue,
   AttributeValue$inboundSchema,
-  AttributeValue$Outbound,
-  AttributeValue$outboundSchema,
 } from "./attributevalue.js";
 
 /**
@@ -40,45 +38,6 @@ export const SearchAttributeValuesResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(AttributeValue$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type SearchAttributeValuesResponse$Outbound = {
-  list?: Array<AttributeValue$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const SearchAttributeValuesResponse$outboundSchema: z.ZodType<
-  SearchAttributeValuesResponse$Outbound,
-  z.ZodTypeDef,
-  SearchAttributeValuesResponse
-> = z.object({
-  list: z.nullable(z.array(AttributeValue$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchAttributeValuesResponse$ {
-  /** @deprecated use `SearchAttributeValuesResponse$inboundSchema` instead. */
-  export const inboundSchema = SearchAttributeValuesResponse$inboundSchema;
-  /** @deprecated use `SearchAttributeValuesResponse$outboundSchema` instead. */
-  export const outboundSchema = SearchAttributeValuesResponse$outboundSchema;
-  /** @deprecated use `SearchAttributeValuesResponse$Outbound` instead. */
-  export type Outbound = SearchAttributeValuesResponse$Outbound;
-}
-
-export function searchAttributeValuesResponseToJSON(
-  searchAttributeValuesResponse: SearchAttributeValuesResponse,
-): string {
-  return JSON.stringify(
-    SearchAttributeValuesResponse$outboundSchema.parse(
-      searchAttributeValuesResponse,
-    ),
-  );
-}
 
 export function searchAttributeValuesResponseFromJSON(
   jsonString: string,

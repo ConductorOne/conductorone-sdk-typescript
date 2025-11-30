@@ -53,68 +53,6 @@ export const C1ApiAutomationsV1AutomationExecutionSearchServiceSearchAutomationE
     });
   });
 
-/** @internal */
-export type C1ApiAutomationsV1AutomationExecutionSearchServiceSearchAutomationExecutionsResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    SearchAutomationExecutionsResponse?:
-      | shared.SearchAutomationExecutionsResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAutomationsV1AutomationExecutionSearchServiceSearchAutomationExecutionsResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAutomationsV1AutomationExecutionSearchServiceSearchAutomationExecutionsResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAutomationsV1AutomationExecutionSearchServiceSearchAutomationExecutionsResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    searchAutomationExecutionsResponse: shared
-      .SearchAutomationExecutionsResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      searchAutomationExecutionsResponse: "SearchAutomationExecutionsResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAutomationsV1AutomationExecutionSearchServiceSearchAutomationExecutionsResponse$ {
-  /** @deprecated use `C1ApiAutomationsV1AutomationExecutionSearchServiceSearchAutomationExecutionsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAutomationsV1AutomationExecutionSearchServiceSearchAutomationExecutionsResponse$inboundSchema;
-  /** @deprecated use `C1ApiAutomationsV1AutomationExecutionSearchServiceSearchAutomationExecutionsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAutomationsV1AutomationExecutionSearchServiceSearchAutomationExecutionsResponse$outboundSchema;
-  /** @deprecated use `C1ApiAutomationsV1AutomationExecutionSearchServiceSearchAutomationExecutionsResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAutomationsV1AutomationExecutionSearchServiceSearchAutomationExecutionsResponse$Outbound;
-}
-
-export function c1ApiAutomationsV1AutomationExecutionSearchServiceSearchAutomationExecutionsResponseToJSON(
-  c1ApiAutomationsV1AutomationExecutionSearchServiceSearchAutomationExecutionsResponse:
-    C1ApiAutomationsV1AutomationExecutionSearchServiceSearchAutomationExecutionsResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAutomationsV1AutomationExecutionSearchServiceSearchAutomationExecutionsResponse$outboundSchema
-      .parse(
-        c1ApiAutomationsV1AutomationExecutionSearchServiceSearchAutomationExecutionsResponse,
-      ),
-  );
-}
-
 export function c1ApiAutomationsV1AutomationExecutionSearchServiceSearchAutomationExecutionsResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

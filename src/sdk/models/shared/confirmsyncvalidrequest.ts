@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The ConfirmSyncValidRequest message.
  */
 export type ConfirmSyncValidRequest = {};
-
-/** @internal */
-export const ConfirmSyncValidRequest$inboundSchema: z.ZodType<
-  ConfirmSyncValidRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type ConfirmSyncValidRequest$Outbound = {};
@@ -29,33 +19,10 @@ export const ConfirmSyncValidRequest$outboundSchema: z.ZodType<
   ConfirmSyncValidRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConfirmSyncValidRequest$ {
-  /** @deprecated use `ConfirmSyncValidRequest$inboundSchema` instead. */
-  export const inboundSchema = ConfirmSyncValidRequest$inboundSchema;
-  /** @deprecated use `ConfirmSyncValidRequest$outboundSchema` instead. */
-  export const outboundSchema = ConfirmSyncValidRequest$outboundSchema;
-  /** @deprecated use `ConfirmSyncValidRequest$Outbound` instead. */
-  export type Outbound = ConfirmSyncValidRequest$Outbound;
-}
-
 export function confirmSyncValidRequestToJSON(
   confirmSyncValidRequest: ConfirmSyncValidRequest,
 ): string {
   return JSON.stringify(
     ConfirmSyncValidRequest$outboundSchema.parse(confirmSyncValidRequest),
-  );
-}
-
-export function confirmSyncValidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ConfirmSyncValidRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ConfirmSyncValidRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ConfirmSyncValidRequest' from JSON`,
   );
 }

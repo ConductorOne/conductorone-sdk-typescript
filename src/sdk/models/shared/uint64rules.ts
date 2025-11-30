@@ -83,7 +83,6 @@ export const UInt64Rules$inboundSchema: z.ZodType<
   lte: z.nullable(z.string()).optional(),
   notIn: z.nullable(z.array(z.string())).optional(),
 });
-
 /** @internal */
 export type UInt64Rules$Outbound = {
   const?: string | null | undefined;
@@ -112,23 +111,9 @@ export const UInt64Rules$outboundSchema: z.ZodType<
   notIn: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UInt64Rules$ {
-  /** @deprecated use `UInt64Rules$inboundSchema` instead. */
-  export const inboundSchema = UInt64Rules$inboundSchema;
-  /** @deprecated use `UInt64Rules$outboundSchema` instead. */
-  export const outboundSchema = UInt64Rules$outboundSchema;
-  /** @deprecated use `UInt64Rules$Outbound` instead. */
-  export type Outbound = UInt64Rules$Outbound;
-}
-
 export function uInt64RulesToJSON(uInt64Rules: UInt64Rules): string {
   return JSON.stringify(UInt64Rules$outboundSchema.parse(uInt64Rules));
 }
-
 export function uInt64RulesFromJSON(
   jsonString: string,
 ): SafeParseResult<UInt64Rules, SDKValidationError> {

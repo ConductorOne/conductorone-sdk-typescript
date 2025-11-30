@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  ConnectorView,
-  ConnectorView$inboundSchema,
-  ConnectorView$Outbound,
-  ConnectorView$outboundSchema,
-} from "./connectorview.js";
+import { ConnectorView, ConnectorView$inboundSchema } from "./connectorview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -63,55 +58,6 @@ export const ConnectorServiceListResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type ConnectorServiceListResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const ConnectorServiceListResponseExpanded$outboundSchema: z.ZodType<
-  ConnectorServiceListResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  ConnectorServiceListResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorServiceListResponseExpanded$ {
-  /** @deprecated use `ConnectorServiceListResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    ConnectorServiceListResponseExpanded$inboundSchema;
-  /** @deprecated use `ConnectorServiceListResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    ConnectorServiceListResponseExpanded$outboundSchema;
-  /** @deprecated use `ConnectorServiceListResponseExpanded$Outbound` instead. */
-  export type Outbound = ConnectorServiceListResponseExpanded$Outbound;
-}
-
-export function connectorServiceListResponseExpandedToJSON(
-  connectorServiceListResponseExpanded: ConnectorServiceListResponseExpanded,
-): string {
-  return JSON.stringify(
-    ConnectorServiceListResponseExpanded$outboundSchema.parse(
-      connectorServiceListResponseExpanded,
-    ),
-  );
-}
-
 export function connectorServiceListResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<ConnectorServiceListResponseExpanded, SDKValidationError> {
@@ -135,52 +81,6 @@ export const ConnectorServiceListResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(ConnectorView$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ConnectorServiceListResponse$Outbound = {
-  expanded?:
-    | Array<ConnectorServiceListResponseExpanded$Outbound>
-    | null
-    | undefined;
-  list?: Array<ConnectorView$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ConnectorServiceListResponse$outboundSchema: z.ZodType<
-  ConnectorServiceListResponse$Outbound,
-  z.ZodTypeDef,
-  ConnectorServiceListResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() => ConnectorServiceListResponseExpanded$outboundSchema)),
-  ).optional(),
-  list: z.nullable(z.array(ConnectorView$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorServiceListResponse$ {
-  /** @deprecated use `ConnectorServiceListResponse$inboundSchema` instead. */
-  export const inboundSchema = ConnectorServiceListResponse$inboundSchema;
-  /** @deprecated use `ConnectorServiceListResponse$outboundSchema` instead. */
-  export const outboundSchema = ConnectorServiceListResponse$outboundSchema;
-  /** @deprecated use `ConnectorServiceListResponse$Outbound` instead. */
-  export type Outbound = ConnectorServiceListResponse$Outbound;
-}
-
-export function connectorServiceListResponseToJSON(
-  connectorServiceListResponse: ConnectorServiceListResponse,
-): string {
-  return JSON.stringify(
-    ConnectorServiceListResponse$outboundSchema.parse(
-      connectorServiceListResponse,
-    ),
-  );
-}
 
 export function connectorServiceListResponseFromJSON(
   jsonString: string,

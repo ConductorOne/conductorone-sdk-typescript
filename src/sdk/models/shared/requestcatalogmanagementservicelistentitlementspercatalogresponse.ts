@@ -13,8 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementView,
   AppEntitlementView$inboundSchema,
-  AppEntitlementView$Outbound,
-  AppEntitlementView$outboundSchema,
 } from "./appentitlementview.js";
 
 /**
@@ -75,60 +73,6 @@ export const RequestCatalogManagementServiceListEntitlementsPerCatalogResponseEx
     });
   });
 
-/** @internal */
-export type RequestCatalogManagementServiceListEntitlementsPerCatalogResponseExpanded$Outbound =
-  {
-    "@type"?: string | undefined;
-    [additionalProperties: string]: unknown;
-  };
-
-/** @internal */
-export const RequestCatalogManagementServiceListEntitlementsPerCatalogResponseExpanded$outboundSchema:
-  z.ZodType<
-    RequestCatalogManagementServiceListEntitlementsPerCatalogResponseExpanded$Outbound,
-    z.ZodTypeDef,
-    RequestCatalogManagementServiceListEntitlementsPerCatalogResponseExpanded
-  > = z.object({
-    atType: z.string().optional(),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        atType: "@type",
-        additionalProperties: null,
-      }),
-    };
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogManagementServiceListEntitlementsPerCatalogResponseExpanded$ {
-  /** @deprecated use `RequestCatalogManagementServiceListEntitlementsPerCatalogResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogManagementServiceListEntitlementsPerCatalogResponseExpanded$inboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceListEntitlementsPerCatalogResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogManagementServiceListEntitlementsPerCatalogResponseExpanded$outboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceListEntitlementsPerCatalogResponseExpanded$Outbound` instead. */
-  export type Outbound =
-    RequestCatalogManagementServiceListEntitlementsPerCatalogResponseExpanded$Outbound;
-}
-
-export function requestCatalogManagementServiceListEntitlementsPerCatalogResponseExpandedToJSON(
-  requestCatalogManagementServiceListEntitlementsPerCatalogResponseExpanded:
-    RequestCatalogManagementServiceListEntitlementsPerCatalogResponseExpanded,
-): string {
-  return JSON.stringify(
-    RequestCatalogManagementServiceListEntitlementsPerCatalogResponseExpanded$outboundSchema
-      .parse(
-        requestCatalogManagementServiceListEntitlementsPerCatalogResponseExpanded,
-      ),
-  );
-}
-
 export function requestCatalogManagementServiceListEntitlementsPerCatalogResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -159,61 +103,6 @@ export const RequestCatalogManagementServiceListEntitlementsPerCatalogResponse$i
     list: z.nullable(z.array(AppEntitlementView$inboundSchema)).optional(),
     nextPageToken: z.nullable(z.string()).optional(),
   });
-
-/** @internal */
-export type RequestCatalogManagementServiceListEntitlementsPerCatalogResponse$Outbound =
-  {
-    expanded?:
-      | Array<
-        RequestCatalogManagementServiceListEntitlementsPerCatalogResponseExpanded$Outbound
-      >
-      | null
-      | undefined;
-    list?: Array<AppEntitlementView$Outbound> | null | undefined;
-    nextPageToken?: string | null | undefined;
-  };
-
-/** @internal */
-export const RequestCatalogManagementServiceListEntitlementsPerCatalogResponse$outboundSchema:
-  z.ZodType<
-    RequestCatalogManagementServiceListEntitlementsPerCatalogResponse$Outbound,
-    z.ZodTypeDef,
-    RequestCatalogManagementServiceListEntitlementsPerCatalogResponse
-  > = z.object({
-    expanded: z.nullable(
-      z.array(z.lazy(() =>
-        RequestCatalogManagementServiceListEntitlementsPerCatalogResponseExpanded$outboundSchema
-      )),
-    ).optional(),
-    list: z.nullable(z.array(AppEntitlementView$outboundSchema)).optional(),
-    nextPageToken: z.nullable(z.string()).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogManagementServiceListEntitlementsPerCatalogResponse$ {
-  /** @deprecated use `RequestCatalogManagementServiceListEntitlementsPerCatalogResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogManagementServiceListEntitlementsPerCatalogResponse$inboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceListEntitlementsPerCatalogResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogManagementServiceListEntitlementsPerCatalogResponse$outboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceListEntitlementsPerCatalogResponse$Outbound` instead. */
-  export type Outbound =
-    RequestCatalogManagementServiceListEntitlementsPerCatalogResponse$Outbound;
-}
-
-export function requestCatalogManagementServiceListEntitlementsPerCatalogResponseToJSON(
-  requestCatalogManagementServiceListEntitlementsPerCatalogResponse:
-    RequestCatalogManagementServiceListEntitlementsPerCatalogResponse,
-): string {
-  return JSON.stringify(
-    RequestCatalogManagementServiceListEntitlementsPerCatalogResponse$outboundSchema
-      .parse(requestCatalogManagementServiceListEntitlementsPerCatalogResponse),
-  );
-}
 
 export function requestCatalogManagementServiceListEntitlementsPerCatalogResponseFromJSON(
   jsonString: string,

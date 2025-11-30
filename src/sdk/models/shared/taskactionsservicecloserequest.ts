@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskExpandMask,
-  TaskExpandMask$inboundSchema,
   TaskExpandMask$Outbound,
   TaskExpandMask$outboundSchema,
 } from "./taskexpandmask.js";
@@ -23,16 +19,6 @@ export type TaskActionsServiceCloseRequest = {
   comment?: string | null | undefined;
   expandMask?: TaskExpandMask | null | undefined;
 };
-
-/** @internal */
-export const TaskActionsServiceCloseRequest$inboundSchema: z.ZodType<
-  TaskActionsServiceCloseRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  comment: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(TaskExpandMask$inboundSchema).optional(),
-});
 
 /** @internal */
 export type TaskActionsServiceCloseRequest$Outbound = {
@@ -50,19 +36,6 @@ export const TaskActionsServiceCloseRequest$outboundSchema: z.ZodType<
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceCloseRequest$ {
-  /** @deprecated use `TaskActionsServiceCloseRequest$inboundSchema` instead. */
-  export const inboundSchema = TaskActionsServiceCloseRequest$inboundSchema;
-  /** @deprecated use `TaskActionsServiceCloseRequest$outboundSchema` instead. */
-  export const outboundSchema = TaskActionsServiceCloseRequest$outboundSchema;
-  /** @deprecated use `TaskActionsServiceCloseRequest$Outbound` instead. */
-  export type Outbound = TaskActionsServiceCloseRequest$Outbound;
-}
-
 export function taskActionsServiceCloseRequestToJSON(
   taskActionsServiceCloseRequest: TaskActionsServiceCloseRequest,
 ): string {
@@ -70,15 +43,5 @@ export function taskActionsServiceCloseRequestToJSON(
     TaskActionsServiceCloseRequest$outboundSchema.parse(
       taskActionsServiceCloseRequest,
     ),
-  );
-}
-
-export function taskActionsServiceCloseRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskActionsServiceCloseRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskActionsServiceCloseRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskActionsServiceCloseRequest' from JSON`,
   );
 }

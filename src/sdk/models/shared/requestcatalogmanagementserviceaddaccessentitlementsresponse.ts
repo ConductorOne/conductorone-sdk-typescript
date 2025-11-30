@@ -20,44 +20,6 @@ export const RequestCatalogManagementServiceAddAccessEntitlementsResponse$inboun
     unknown
   > = z.object({});
 
-/** @internal */
-export type RequestCatalogManagementServiceAddAccessEntitlementsResponse$Outbound =
-  {};
-
-/** @internal */
-export const RequestCatalogManagementServiceAddAccessEntitlementsResponse$outboundSchema:
-  z.ZodType<
-    RequestCatalogManagementServiceAddAccessEntitlementsResponse$Outbound,
-    z.ZodTypeDef,
-    RequestCatalogManagementServiceAddAccessEntitlementsResponse
-  > = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogManagementServiceAddAccessEntitlementsResponse$ {
-  /** @deprecated use `RequestCatalogManagementServiceAddAccessEntitlementsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogManagementServiceAddAccessEntitlementsResponse$inboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceAddAccessEntitlementsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogManagementServiceAddAccessEntitlementsResponse$outboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceAddAccessEntitlementsResponse$Outbound` instead. */
-  export type Outbound =
-    RequestCatalogManagementServiceAddAccessEntitlementsResponse$Outbound;
-}
-
-export function requestCatalogManagementServiceAddAccessEntitlementsResponseToJSON(
-  requestCatalogManagementServiceAddAccessEntitlementsResponse:
-    RequestCatalogManagementServiceAddAccessEntitlementsResponse,
-): string {
-  return JSON.stringify(
-    RequestCatalogManagementServiceAddAccessEntitlementsResponse$outboundSchema
-      .parse(requestCatalogManagementServiceAddAccessEntitlementsResponse),
-  );
-}
-
 export function requestCatalogManagementServiceAddAccessEntitlementsResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

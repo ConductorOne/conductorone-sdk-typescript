@@ -40,23 +40,6 @@ export type C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse =
   };
 
 /** @internal */
-export const C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest$inboundSchema:
-  z.ZodType<
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.nullable(z.string()),
-    RequestCatalogManagementServiceDeleteRequest: shared
-      .RequestCatalogManagementServiceDeleteRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "RequestCatalogManagementServiceDeleteRequest":
-        "requestCatalogManagementServiceDeleteRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest$Outbound =
   {
     id: string | null;
@@ -82,22 +65,6 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest$o
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest$ {
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest$inboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest$outboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest$Outbound;
-}
-
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequestToJSON(
   c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest:
     C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest,
@@ -105,21 +72,6 @@ export function c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteReques
   return JSON.stringify(
     C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest$outboundSchema
       .parse(c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest),
-  );
-}
-
-export function c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest' from JSON`,
   );
 }
 
@@ -144,69 +96,6 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse$
         "requestCatalogManagementServiceDeleteResponse",
     });
   });
-
-/** @internal */
-export type C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    RequestCatalogManagementServiceDeleteResponse?:
-      | shared.RequestCatalogManagementServiceDeleteResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse$outboundSchema:
-  z.ZodType<
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    requestCatalogManagementServiceDeleteResponse: shared
-      .RequestCatalogManagementServiceDeleteResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      requestCatalogManagementServiceDeleteResponse:
-        "RequestCatalogManagementServiceDeleteResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse$ {
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse$inboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse$outboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse$Outbound;
-}
-
-export function c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponseToJSON(
-  c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse:
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse,
-): string {
-  return JSON.stringify(
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse$outboundSchema
-      .parse(
-        c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse,
-      ),
-  );
-}
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponseFromJSON(
   jsonString: string,

@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppResourceType,
   AppResourceType$inboundSchema,
-  AppResourceType$Outbound,
-  AppResourceType$outboundSchema,
 } from "./appresourcetype.js";
 
 /**
@@ -33,43 +31,6 @@ export const AppResourceTypeView$inboundSchema: z.ZodType<
   appPath: z.nullable(z.string()).optional(),
   appResourceType: z.nullable(AppResourceType$inboundSchema).optional(),
 });
-
-/** @internal */
-export type AppResourceTypeView$Outbound = {
-  appPath?: string | null | undefined;
-  appResourceType?: AppResourceType$Outbound | null | undefined;
-};
-
-/** @internal */
-export const AppResourceTypeView$outboundSchema: z.ZodType<
-  AppResourceTypeView$Outbound,
-  z.ZodTypeDef,
-  AppResourceTypeView
-> = z.object({
-  appPath: z.nullable(z.string()).optional(),
-  appResourceType: z.nullable(AppResourceType$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppResourceTypeView$ {
-  /** @deprecated use `AppResourceTypeView$inboundSchema` instead. */
-  export const inboundSchema = AppResourceTypeView$inboundSchema;
-  /** @deprecated use `AppResourceTypeView$outboundSchema` instead. */
-  export const outboundSchema = AppResourceTypeView$outboundSchema;
-  /** @deprecated use `AppResourceTypeView$Outbound` instead. */
-  export type Outbound = AppResourceTypeView$Outbound;
-}
-
-export function appResourceTypeViewToJSON(
-  appResourceTypeView: AppResourceTypeView,
-): string {
-  return JSON.stringify(
-    AppResourceTypeView$outboundSchema.parse(appResourceTypeView),
-  );
-}
 
 export function appResourceTypeViewFromJSON(
   jsonString: string,

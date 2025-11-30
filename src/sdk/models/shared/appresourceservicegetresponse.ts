@@ -13,8 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppResourceView,
   AppResourceView$inboundSchema,
-  AppResourceView$Outbound,
-  AppResourceView$outboundSchema,
 } from "./appresourceview.js";
 
 /**
@@ -56,55 +54,6 @@ export const AppResourceServiceGetResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type AppResourceServiceGetResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const AppResourceServiceGetResponseExpanded$outboundSchema: z.ZodType<
-  AppResourceServiceGetResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  AppResourceServiceGetResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppResourceServiceGetResponseExpanded$ {
-  /** @deprecated use `AppResourceServiceGetResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    AppResourceServiceGetResponseExpanded$inboundSchema;
-  /** @deprecated use `AppResourceServiceGetResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    AppResourceServiceGetResponseExpanded$outboundSchema;
-  /** @deprecated use `AppResourceServiceGetResponseExpanded$Outbound` instead. */
-  export type Outbound = AppResourceServiceGetResponseExpanded$Outbound;
-}
-
-export function appResourceServiceGetResponseExpandedToJSON(
-  appResourceServiceGetResponseExpanded: AppResourceServiceGetResponseExpanded,
-): string {
-  return JSON.stringify(
-    AppResourceServiceGetResponseExpanded$outboundSchema.parse(
-      appResourceServiceGetResponseExpanded,
-    ),
-  );
-}
-
 export function appResourceServiceGetResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<AppResourceServiceGetResponseExpanded, SDKValidationError> {
@@ -127,50 +76,6 @@ export const AppResourceServiceGetResponse$inboundSchema: z.ZodType<
     z.array(z.lazy(() => AppResourceServiceGetResponseExpanded$inboundSchema)),
   ).optional(),
 });
-
-/** @internal */
-export type AppResourceServiceGetResponse$Outbound = {
-  appResourceView?: AppResourceView$Outbound | null | undefined;
-  expanded?:
-    | Array<AppResourceServiceGetResponseExpanded$Outbound>
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const AppResourceServiceGetResponse$outboundSchema: z.ZodType<
-  AppResourceServiceGetResponse$Outbound,
-  z.ZodTypeDef,
-  AppResourceServiceGetResponse
-> = z.object({
-  appResourceView: z.nullable(AppResourceView$outboundSchema).optional(),
-  expanded: z.nullable(
-    z.array(z.lazy(() => AppResourceServiceGetResponseExpanded$outboundSchema)),
-  ).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppResourceServiceGetResponse$ {
-  /** @deprecated use `AppResourceServiceGetResponse$inboundSchema` instead. */
-  export const inboundSchema = AppResourceServiceGetResponse$inboundSchema;
-  /** @deprecated use `AppResourceServiceGetResponse$outboundSchema` instead. */
-  export const outboundSchema = AppResourceServiceGetResponse$outboundSchema;
-  /** @deprecated use `AppResourceServiceGetResponse$Outbound` instead. */
-  export type Outbound = AppResourceServiceGetResponse$Outbound;
-}
-
-export function appResourceServiceGetResponseToJSON(
-  appResourceServiceGetResponse: AppResourceServiceGetResponse,
-): string {
-  return JSON.stringify(
-    AppResourceServiceGetResponse$outboundSchema.parse(
-      appResourceServiceGetResponse,
-    ),
-  );
-}
 
 export function appResourceServiceGetResponseFromJSON(
   jsonString: string,

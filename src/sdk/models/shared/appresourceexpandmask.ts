@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The app resource expand mask lets you get information about related objects from the request.
@@ -16,15 +13,6 @@ export type AppResourceExpandMask = {
    */
   paths?: Array<string> | null | undefined;
 };
-
-/** @internal */
-export const AppResourceExpandMask$inboundSchema: z.ZodType<
-  AppResourceExpandMask,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type AppResourceExpandMask$Outbound = {
@@ -40,33 +28,10 @@ export const AppResourceExpandMask$outboundSchema: z.ZodType<
   paths: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppResourceExpandMask$ {
-  /** @deprecated use `AppResourceExpandMask$inboundSchema` instead. */
-  export const inboundSchema = AppResourceExpandMask$inboundSchema;
-  /** @deprecated use `AppResourceExpandMask$outboundSchema` instead. */
-  export const outboundSchema = AppResourceExpandMask$outboundSchema;
-  /** @deprecated use `AppResourceExpandMask$Outbound` instead. */
-  export type Outbound = AppResourceExpandMask$Outbound;
-}
-
 export function appResourceExpandMaskToJSON(
   appResourceExpandMask: AppResourceExpandMask,
 ): string {
   return JSON.stringify(
     AppResourceExpandMask$outboundSchema.parse(appResourceExpandMask),
-  );
-}
-
-export function appResourceExpandMaskFromJSON(
-  jsonString: string,
-): SafeParseResult<AppResourceExpandMask, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AppResourceExpandMask$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AppResourceExpandMask' from JSON`,
   );
 }

@@ -26,43 +26,6 @@ export const TaskAuditPolicyEvaluationStep$inboundSchema: z.ZodType<
   stepComment: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditPolicyEvaluationStep$Outbound = {
-  stepComment?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditPolicyEvaluationStep$outboundSchema: z.ZodType<
-  TaskAuditPolicyEvaluationStep$Outbound,
-  z.ZodTypeDef,
-  TaskAuditPolicyEvaluationStep
-> = z.object({
-  stepComment: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditPolicyEvaluationStep$ {
-  /** @deprecated use `TaskAuditPolicyEvaluationStep$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditPolicyEvaluationStep$inboundSchema;
-  /** @deprecated use `TaskAuditPolicyEvaluationStep$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditPolicyEvaluationStep$outboundSchema;
-  /** @deprecated use `TaskAuditPolicyEvaluationStep$Outbound` instead. */
-  export type Outbound = TaskAuditPolicyEvaluationStep$Outbound;
-}
-
-export function taskAuditPolicyEvaluationStepToJSON(
-  taskAuditPolicyEvaluationStep: TaskAuditPolicyEvaluationStep,
-): string {
-  return JSON.stringify(
-    TaskAuditPolicyEvaluationStep$outboundSchema.parse(
-      taskAuditPolicyEvaluationStep,
-    ),
-  );
-}
-
 export function taskAuditPolicyEvaluationStepFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditPolicyEvaluationStep, SDKValidationError> {

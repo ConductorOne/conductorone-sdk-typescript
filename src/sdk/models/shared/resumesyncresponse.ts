@@ -19,37 +19,6 @@ export const ResumeSyncResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type ResumeSyncResponse$Outbound = {};
-
-/** @internal */
-export const ResumeSyncResponse$outboundSchema: z.ZodType<
-  ResumeSyncResponse$Outbound,
-  z.ZodTypeDef,
-  ResumeSyncResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResumeSyncResponse$ {
-  /** @deprecated use `ResumeSyncResponse$inboundSchema` instead. */
-  export const inboundSchema = ResumeSyncResponse$inboundSchema;
-  /** @deprecated use `ResumeSyncResponse$outboundSchema` instead. */
-  export const outboundSchema = ResumeSyncResponse$outboundSchema;
-  /** @deprecated use `ResumeSyncResponse$Outbound` instead. */
-  export type Outbound = ResumeSyncResponse$Outbound;
-}
-
-export function resumeSyncResponseToJSON(
-  resumeSyncResponse: ResumeSyncResponse,
-): string {
-  return JSON.stringify(
-    ResumeSyncResponse$outboundSchema.parse(resumeSyncResponse),
-  );
-}
-
 export function resumeSyncResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<ResumeSyncResponse, SDKValidationError> {

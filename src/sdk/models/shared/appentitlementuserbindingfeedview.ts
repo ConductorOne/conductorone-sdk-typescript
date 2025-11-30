@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementUserBindingFeed,
   AppEntitlementUserBindingFeed$inboundSchema,
-  AppEntitlementUserBindingFeed$Outbound,
-  AppEntitlementUserBindingFeed$outboundSchema,
 } from "./appentitlementuserbindingfeed.js";
 
 /**
@@ -48,52 +46,6 @@ export const AppEntitlementUserBindingFeedView$inboundSchema: z.ZodType<
   feed: z.nullable(AppEntitlementUserBindingFeed$inboundSchema).optional(),
   ticketPath: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type AppEntitlementUserBindingFeedView$Outbound = {
-  appPath?: string | null | undefined;
-  appUserPath?: string | null | undefined;
-  entitlementPath?: string | null | undefined;
-  feed?: AppEntitlementUserBindingFeed$Outbound | null | undefined;
-  ticketPath?: string | null | undefined;
-};
-
-/** @internal */
-export const AppEntitlementUserBindingFeedView$outboundSchema: z.ZodType<
-  AppEntitlementUserBindingFeedView$Outbound,
-  z.ZodTypeDef,
-  AppEntitlementUserBindingFeedView
-> = z.object({
-  appPath: z.nullable(z.string()).optional(),
-  appUserPath: z.nullable(z.string()).optional(),
-  entitlementPath: z.nullable(z.string()).optional(),
-  feed: z.nullable(AppEntitlementUserBindingFeed$outboundSchema).optional(),
-  ticketPath: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementUserBindingFeedView$ {
-  /** @deprecated use `AppEntitlementUserBindingFeedView$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementUserBindingFeedView$inboundSchema;
-  /** @deprecated use `AppEntitlementUserBindingFeedView$outboundSchema` instead. */
-  export const outboundSchema =
-    AppEntitlementUserBindingFeedView$outboundSchema;
-  /** @deprecated use `AppEntitlementUserBindingFeedView$Outbound` instead. */
-  export type Outbound = AppEntitlementUserBindingFeedView$Outbound;
-}
-
-export function appEntitlementUserBindingFeedViewToJSON(
-  appEntitlementUserBindingFeedView: AppEntitlementUserBindingFeedView,
-): string {
-  return JSON.stringify(
-    AppEntitlementUserBindingFeedView$outboundSchema.parse(
-      appEntitlementUserBindingFeedView,
-    ),
-  );
-}
 
 export function appEntitlementUserBindingFeedViewFromJSON(
   jsonString: string,

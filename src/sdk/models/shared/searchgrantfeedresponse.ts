@@ -13,8 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementUserBindingFeedView,
   AppEntitlementUserBindingFeedView$inboundSchema,
-  AppEntitlementUserBindingFeedView$Outbound,
-  AppEntitlementUserBindingFeedView$outboundSchema,
 } from "./appentitlementuserbindingfeedview.js";
 
 /**
@@ -67,53 +65,6 @@ export const SearchGrantFeedResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type SearchGrantFeedResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const SearchGrantFeedResponseExpanded$outboundSchema: z.ZodType<
-  SearchGrantFeedResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  SearchGrantFeedResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchGrantFeedResponseExpanded$ {
-  /** @deprecated use `SearchGrantFeedResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema = SearchGrantFeedResponseExpanded$inboundSchema;
-  /** @deprecated use `SearchGrantFeedResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema = SearchGrantFeedResponseExpanded$outboundSchema;
-  /** @deprecated use `SearchGrantFeedResponseExpanded$Outbound` instead. */
-  export type Outbound = SearchGrantFeedResponseExpanded$Outbound;
-}
-
-export function searchGrantFeedResponseExpandedToJSON(
-  searchGrantFeedResponseExpanded: SearchGrantFeedResponseExpanded,
-): string {
-  return JSON.stringify(
-    SearchGrantFeedResponseExpanded$outboundSchema.parse(
-      searchGrantFeedResponseExpanded,
-    ),
-  );
-}
-
 export function searchGrantFeedResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchGrantFeedResponseExpanded, SDKValidationError> {
@@ -137,48 +88,6 @@ export const SearchGrantFeedResponse$inboundSchema: z.ZodType<
     .optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type SearchGrantFeedResponse$Outbound = {
-  expanded?: Array<SearchGrantFeedResponseExpanded$Outbound> | null | undefined;
-  list?: Array<AppEntitlementUserBindingFeedView$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const SearchGrantFeedResponse$outboundSchema: z.ZodType<
-  SearchGrantFeedResponse$Outbound,
-  z.ZodTypeDef,
-  SearchGrantFeedResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() => SearchGrantFeedResponseExpanded$outboundSchema)),
-  ).optional(),
-  list: z.nullable(z.array(AppEntitlementUserBindingFeedView$outboundSchema))
-    .optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchGrantFeedResponse$ {
-  /** @deprecated use `SearchGrantFeedResponse$inboundSchema` instead. */
-  export const inboundSchema = SearchGrantFeedResponse$inboundSchema;
-  /** @deprecated use `SearchGrantFeedResponse$outboundSchema` instead. */
-  export const outboundSchema = SearchGrantFeedResponse$outboundSchema;
-  /** @deprecated use `SearchGrantFeedResponse$Outbound` instead. */
-  export type Outbound = SearchGrantFeedResponse$Outbound;
-}
-
-export function searchGrantFeedResponseToJSON(
-  searchGrantFeedResponse: SearchGrantFeedResponse,
-): string {
-  return JSON.stringify(
-    SearchGrantFeedResponse$outboundSchema.parse(searchGrantFeedResponse),
-  );
-}
 
 export function searchGrantFeedResponseFromJSON(
   jsonString: string,

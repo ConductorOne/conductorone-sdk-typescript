@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The TaskTypeOffboarding message.
@@ -13,17 +10,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type TaskTypeOffboardingInput = {
   outcomeTime?: Date | null | undefined;
 };
-
-/** @internal */
-export const TaskTypeOffboardingInput$inboundSchema: z.ZodType<
-  TaskTypeOffboardingInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  outcomeTime: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
 
 /** @internal */
 export type TaskTypeOffboardingInput$Outbound = {
@@ -39,33 +25,10 @@ export const TaskTypeOffboardingInput$outboundSchema: z.ZodType<
   outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskTypeOffboardingInput$ {
-  /** @deprecated use `TaskTypeOffboardingInput$inboundSchema` instead. */
-  export const inboundSchema = TaskTypeOffboardingInput$inboundSchema;
-  /** @deprecated use `TaskTypeOffboardingInput$outboundSchema` instead. */
-  export const outboundSchema = TaskTypeOffboardingInput$outboundSchema;
-  /** @deprecated use `TaskTypeOffboardingInput$Outbound` instead. */
-  export type Outbound = TaskTypeOffboardingInput$Outbound;
-}
-
 export function taskTypeOffboardingInputToJSON(
   taskTypeOffboardingInput: TaskTypeOffboardingInput,
 ): string {
   return JSON.stringify(
     TaskTypeOffboardingInput$outboundSchema.parse(taskTypeOffboardingInput),
-  );
-}
-
-export function taskTypeOffboardingInputFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskTypeOffboardingInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskTypeOffboardingInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskTypeOffboardingInput' from JSON`,
   );
 }

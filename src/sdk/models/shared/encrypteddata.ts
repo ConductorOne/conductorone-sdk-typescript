@@ -51,47 +51,6 @@ export const EncryptedData$inboundSchema: z.ZodType<
   schema: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type EncryptedData$Outbound = {
-  description?: string | null | undefined;
-  encryptedBytes?: string | null | undefined;
-  keyId?: string | null | undefined;
-  name?: string | null | undefined;
-  provider?: string | null | undefined;
-  schema?: string | null | undefined;
-};
-
-/** @internal */
-export const EncryptedData$outboundSchema: z.ZodType<
-  EncryptedData$Outbound,
-  z.ZodTypeDef,
-  EncryptedData
-> = z.object({
-  description: z.nullable(z.string()).optional(),
-  encryptedBytes: z.nullable(z.string()).optional(),
-  keyId: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
-  provider: z.nullable(z.string()).optional(),
-  schema: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EncryptedData$ {
-  /** @deprecated use `EncryptedData$inboundSchema` instead. */
-  export const inboundSchema = EncryptedData$inboundSchema;
-  /** @deprecated use `EncryptedData$outboundSchema` instead. */
-  export const outboundSchema = EncryptedData$outboundSchema;
-  /** @deprecated use `EncryptedData$Outbound` instead. */
-  export type Outbound = EncryptedData$Outbound;
-}
-
-export function encryptedDataToJSON(encryptedData: EncryptedData): string {
-  return JSON.stringify(EncryptedData$outboundSchema.parse(encryptedData));
-}
-
 export function encryptedDataFromJSON(
   jsonString: string,
 ): SafeParseResult<EncryptedData, SDKValidationError> {

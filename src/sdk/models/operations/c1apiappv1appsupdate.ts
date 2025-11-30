@@ -34,20 +34,6 @@ export type C1ApiAppV1AppsUpdateResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppsUpdateRequest$inboundSchema: z.ZodType<
-  C1ApiAppV1AppsUpdateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.nullable(z.string()),
-  UpdateAppRequest: shared.UpdateAppRequest$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "UpdateAppRequest": "updateAppRequest",
-  });
-});
-
-/** @internal */
 export type C1ApiAppV1AppsUpdateRequest$Outbound = {
   id: string | null;
   UpdateAppRequest?: shared.UpdateAppRequest$Outbound | undefined;
@@ -67,19 +53,6 @@ export const C1ApiAppV1AppsUpdateRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppsUpdateRequest$ {
-  /** @deprecated use `C1ApiAppV1AppsUpdateRequest$inboundSchema` instead. */
-  export const inboundSchema = C1ApiAppV1AppsUpdateRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppsUpdateRequest$outboundSchema` instead. */
-  export const outboundSchema = C1ApiAppV1AppsUpdateRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppsUpdateRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppsUpdateRequest$Outbound;
-}
-
 export function c1ApiAppV1AppsUpdateRequestToJSON(
   c1ApiAppV1AppsUpdateRequest: C1ApiAppV1AppsUpdateRequest,
 ): string {
@@ -87,16 +60,6 @@ export function c1ApiAppV1AppsUpdateRequestToJSON(
     C1ApiAppV1AppsUpdateRequest$outboundSchema.parse(
       c1ApiAppV1AppsUpdateRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppsUpdateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<C1ApiAppV1AppsUpdateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => C1ApiAppV1AppsUpdateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppsUpdateRequest' from JSON`,
   );
 }
 
@@ -118,58 +81,6 @@ export const C1ApiAppV1AppsUpdateResponse$inboundSchema: z.ZodType<
     "UpdateAppResponse": "updateAppResponse",
   });
 });
-
-/** @internal */
-export type C1ApiAppV1AppsUpdateResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  UpdateAppResponse?: shared.UpdateAppResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppsUpdateResponse$outboundSchema: z.ZodType<
-  C1ApiAppV1AppsUpdateResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiAppV1AppsUpdateResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  updateAppResponse: shared.UpdateAppResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    updateAppResponse: "UpdateAppResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppsUpdateResponse$ {
-  /** @deprecated use `C1ApiAppV1AppsUpdateResponse$inboundSchema` instead. */
-  export const inboundSchema = C1ApiAppV1AppsUpdateResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppsUpdateResponse$outboundSchema` instead. */
-  export const outboundSchema = C1ApiAppV1AppsUpdateResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppsUpdateResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppsUpdateResponse$Outbound;
-}
-
-export function c1ApiAppV1AppsUpdateResponseToJSON(
-  c1ApiAppV1AppsUpdateResponse: C1ApiAppV1AppsUpdateResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppsUpdateResponse$outboundSchema.parse(
-      c1ApiAppV1AppsUpdateResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppsUpdateResponseFromJSON(
   jsonString: string,

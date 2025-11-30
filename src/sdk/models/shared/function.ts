@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -39,6 +36,10 @@ export type FunctionT = {
    */
   displayName?: string | null | undefined;
   /**
+   * The encryptedValues field.
+   */
+  encryptedValues?: { [k: string]: string } | undefined;
+  /**
    * The functionType field.
    */
   functionType?: FunctionType | null | undefined;
@@ -55,6 +56,10 @@ export type FunctionT = {
    */
   isDraft?: boolean | null | undefined;
   /**
+   * The outboundNetworkAllowlist field.
+   */
+  outboundNetworkAllowlist?: Array<string> | null | undefined;
+  /**
    * The publishedCommitId field.
    */
   publishedCommitId?: string | null | undefined;
@@ -66,32 +71,13 @@ export const FunctionType$inboundSchema: z.ZodType<
   FunctionType,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(FunctionType),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(FunctionType);
 /** @internal */
 export const FunctionType$outboundSchema: z.ZodType<
-  FunctionType,
+  string,
   z.ZodTypeDef,
   FunctionType
-> = z.union([
-  z.nativeEnum(FunctionType),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionType$ {
-  /** @deprecated use `FunctionType$inboundSchema` instead. */
-  export const inboundSchema = FunctionType$inboundSchema;
-  /** @deprecated use `FunctionType$outboundSchema` instead. */
-  export const outboundSchema = FunctionType$outboundSchema;
-}
+> = openEnums.outboundSchema(FunctionType);
 
 /** @internal */
 export const FunctionT$inboundSchema: z.ZodType<
@@ -107,26 +93,29 @@ export const FunctionT$inboundSchema: z.ZodType<
   ).optional(),
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
+  encryptedValues: z.record(z.string()).optional(),
   functionType: z.nullable(FunctionType$inboundSchema).optional(),
   head: z.nullable(z.string()).optional(),
   id: z.nullable(z.string()).optional(),
   isDraft: z.nullable(z.boolean()).optional(),
+  outboundNetworkAllowlist: z.nullable(z.array(z.string())).optional(),
   publishedCommitId: z.nullable(z.string()).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
 /** @internal */
 export type FunctionT$Outbound = {
   createdAt?: string | null | undefined;
   deletedAt?: string | null | undefined;
   description?: string | null | undefined;
   displayName?: string | null | undefined;
+  encryptedValues?: { [k: string]: string } | undefined;
   functionType?: string | null | undefined;
   head?: string | null | undefined;
   id?: string | null | undefined;
   isDraft?: boolean | null | undefined;
+  outboundNetworkAllowlist?: Array<string> | null | undefined;
   publishedCommitId?: string | null | undefined;
   updatedAt?: string | null | undefined;
 };
@@ -141,31 +130,19 @@ export const FunctionT$outboundSchema: z.ZodType<
   deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
+  encryptedValues: z.record(z.string()).optional(),
   functionType: z.nullable(FunctionType$outboundSchema).optional(),
   head: z.nullable(z.string()).optional(),
   id: z.nullable(z.string()).optional(),
   isDraft: z.nullable(z.boolean()).optional(),
+  outboundNetworkAllowlist: z.nullable(z.array(z.string())).optional(),
   publishedCommitId: z.nullable(z.string()).optional(),
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionT$ {
-  /** @deprecated use `FunctionT$inboundSchema` instead. */
-  export const inboundSchema = FunctionT$inboundSchema;
-  /** @deprecated use `FunctionT$outboundSchema` instead. */
-  export const outboundSchema = FunctionT$outboundSchema;
-  /** @deprecated use `FunctionT$Outbound` instead. */
-  export type Outbound = FunctionT$Outbound;
-}
-
 export function functionToJSON(functionT: FunctionT): string {
   return JSON.stringify(FunctionT$outboundSchema.parse(functionT));
 }
-
 export function functionFromJSON(
   jsonString: string,
 ): SafeParseResult<FunctionT, SDKValidationError> {

@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FunctionT,
-  FunctionT$inboundSchema,
   FunctionT$Outbound,
   FunctionT$outboundSchema,
 } from "./function.js";
@@ -20,16 +16,6 @@ export type FunctionsServiceUpdateFunctionRequest = {
   function?: FunctionT | null | undefined;
   updateMask?: string | null | undefined;
 };
-
-/** @internal */
-export const FunctionsServiceUpdateFunctionRequest$inboundSchema: z.ZodType<
-  FunctionsServiceUpdateFunctionRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  function: z.nullable(FunctionT$inboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type FunctionsServiceUpdateFunctionRequest$Outbound = {
@@ -47,21 +33,6 @@ export const FunctionsServiceUpdateFunctionRequest$outboundSchema: z.ZodType<
   updateMask: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionsServiceUpdateFunctionRequest$ {
-  /** @deprecated use `FunctionsServiceUpdateFunctionRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    FunctionsServiceUpdateFunctionRequest$inboundSchema;
-  /** @deprecated use `FunctionsServiceUpdateFunctionRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    FunctionsServiceUpdateFunctionRequest$outboundSchema;
-  /** @deprecated use `FunctionsServiceUpdateFunctionRequest$Outbound` instead. */
-  export type Outbound = FunctionsServiceUpdateFunctionRequest$Outbound;
-}
-
 export function functionsServiceUpdateFunctionRequestToJSON(
   functionsServiceUpdateFunctionRequest: FunctionsServiceUpdateFunctionRequest,
 ): string {
@@ -69,16 +40,5 @@ export function functionsServiceUpdateFunctionRequestToJSON(
     FunctionsServiceUpdateFunctionRequest$outboundSchema.parse(
       functionsServiceUpdateFunctionRequest,
     ),
-  );
-}
-
-export function functionsServiceUpdateFunctionRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<FunctionsServiceUpdateFunctionRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      FunctionsServiceUpdateFunctionRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionsServiceUpdateFunctionRequest' from JSON`,
   );
 }

@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  TaskView,
-  TaskView$inboundSchema,
-  TaskView$Outbound,
-  TaskView$outboundSchema,
-} from "./taskview.js";
+import { TaskView, TaskView$inboundSchema } from "./taskview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -60,57 +55,6 @@ export const TaskActionsServiceProcessNowResponseExpanded$inboundSchema:
     });
   });
 
-/** @internal */
-export type TaskActionsServiceProcessNowResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const TaskActionsServiceProcessNowResponseExpanded$outboundSchema:
-  z.ZodType<
-    TaskActionsServiceProcessNowResponseExpanded$Outbound,
-    z.ZodTypeDef,
-    TaskActionsServiceProcessNowResponseExpanded
-  > = z.object({
-    atType: z.string().optional(),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        atType: "@type",
-        additionalProperties: null,
-      }),
-    };
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceProcessNowResponseExpanded$ {
-  /** @deprecated use `TaskActionsServiceProcessNowResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskActionsServiceProcessNowResponseExpanded$inboundSchema;
-  /** @deprecated use `TaskActionsServiceProcessNowResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceProcessNowResponseExpanded$outboundSchema;
-  /** @deprecated use `TaskActionsServiceProcessNowResponseExpanded$Outbound` instead. */
-  export type Outbound = TaskActionsServiceProcessNowResponseExpanded$Outbound;
-}
-
-export function taskActionsServiceProcessNowResponseExpandedToJSON(
-  taskActionsServiceProcessNowResponseExpanded:
-    TaskActionsServiceProcessNowResponseExpanded,
-): string {
-  return JSON.stringify(
-    TaskActionsServiceProcessNowResponseExpanded$outboundSchema.parse(
-      taskActionsServiceProcessNowResponseExpanded,
-    ),
-  );
-}
-
 export function taskActionsServiceProcessNowResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -140,54 +84,6 @@ export const TaskActionsServiceProcessNowResponse$inboundSchema: z.ZodType<
   ).optional(),
   taskView: z.nullable(TaskView$inboundSchema).optional(),
 });
-
-/** @internal */
-export type TaskActionsServiceProcessNowResponse$Outbound = {
-  expanded?:
-    | Array<TaskActionsServiceProcessNowResponseExpanded$Outbound>
-    | null
-    | undefined;
-  taskView?: TaskView$Outbound | null | undefined;
-};
-
-/** @internal */
-export const TaskActionsServiceProcessNowResponse$outboundSchema: z.ZodType<
-  TaskActionsServiceProcessNowResponse$Outbound,
-  z.ZodTypeDef,
-  TaskActionsServiceProcessNowResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() =>
-      TaskActionsServiceProcessNowResponseExpanded$outboundSchema
-    )),
-  ).optional(),
-  taskView: z.nullable(TaskView$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceProcessNowResponse$ {
-  /** @deprecated use `TaskActionsServiceProcessNowResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskActionsServiceProcessNowResponse$inboundSchema;
-  /** @deprecated use `TaskActionsServiceProcessNowResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceProcessNowResponse$outboundSchema;
-  /** @deprecated use `TaskActionsServiceProcessNowResponse$Outbound` instead. */
-  export type Outbound = TaskActionsServiceProcessNowResponse$Outbound;
-}
-
-export function taskActionsServiceProcessNowResponseToJSON(
-  taskActionsServiceProcessNowResponse: TaskActionsServiceProcessNowResponse,
-): string {
-  return JSON.stringify(
-    TaskActionsServiceProcessNowResponse$outboundSchema.parse(
-      taskActionsServiceProcessNowResponse,
-    ),
-  );
-}
 
 export function taskActionsServiceProcessNowResponseFromJSON(
   jsonString: string,

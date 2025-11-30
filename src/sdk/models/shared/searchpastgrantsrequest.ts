@@ -3,24 +3,18 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementRef,
-  AppEntitlementRef$inboundSchema,
   AppEntitlementRef$Outbound,
   AppEntitlementRef$outboundSchema,
 } from "./appentitlementref.js";
 import {
   AppEntitlementUserBindingExpandHistoryMask,
-  AppEntitlementUserBindingExpandHistoryMask$inboundSchema,
   AppEntitlementUserBindingExpandHistoryMask$Outbound,
   AppEntitlementUserBindingExpandHistoryMask$outboundSchema,
 } from "./appentitlementuserbindingexpandhistorymask.js";
 import {
   AppUserRef,
-  AppUserRef$inboundSchema,
   AppUserRef$Outbound,
   AppUserRef$outboundSchema,
 } from "./appuserref.js";
@@ -53,23 +47,6 @@ export type SearchPastGrantsRequest = {
 };
 
 /** @internal */
-export const SearchPastGrantsRequest$inboundSchema: z.ZodType<
-  SearchPastGrantsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
-    .optional(),
-  appIds: z.nullable(z.array(z.string())).optional(),
-  appUserRefs: z.nullable(z.array(AppUserRef$inboundSchema)).optional(),
-  expandMask: z.nullable(
-    AppEntitlementUserBindingExpandHistoryMask$inboundSchema,
-  ).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-});
-
-/** @internal */
 export type SearchPastGrantsRequest$Outbound = {
   appEntitlementRefs?: Array<AppEntitlementRef$Outbound> | null | undefined;
   appIds?: Array<string> | null | undefined;
@@ -99,33 +76,10 @@ export const SearchPastGrantsRequest$outboundSchema: z.ZodType<
   pageToken: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchPastGrantsRequest$ {
-  /** @deprecated use `SearchPastGrantsRequest$inboundSchema` instead. */
-  export const inboundSchema = SearchPastGrantsRequest$inboundSchema;
-  /** @deprecated use `SearchPastGrantsRequest$outboundSchema` instead. */
-  export const outboundSchema = SearchPastGrantsRequest$outboundSchema;
-  /** @deprecated use `SearchPastGrantsRequest$Outbound` instead. */
-  export type Outbound = SearchPastGrantsRequest$Outbound;
-}
-
 export function searchPastGrantsRequestToJSON(
   searchPastGrantsRequest: SearchPastGrantsRequest,
 ): string {
   return JSON.stringify(
     SearchPastGrantsRequest$outboundSchema.parse(searchPastGrantsRequest),
-  );
-}
-
-export function searchPastGrantsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchPastGrantsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchPastGrantsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchPastGrantsRequest' from JSON`,
   );
 }

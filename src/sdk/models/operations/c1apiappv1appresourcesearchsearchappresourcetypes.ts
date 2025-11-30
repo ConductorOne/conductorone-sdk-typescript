@@ -51,66 +51,6 @@ export const C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse$inboundSc
     });
   });
 
-/** @internal */
-export type C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    SearchAppResourceTypesResponse?:
-      | shared.SearchAppResourceTypesResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    searchAppResourceTypesResponse: shared
-      .SearchAppResourceTypesResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      searchAppResourceTypesResponse: "SearchAppResourceTypesResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse$ {
-  /** @deprecated use `C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse$Outbound;
-}
-
-export function c1ApiAppV1AppResourceSearchSearchAppResourceTypesResponseToJSON(
-  c1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse:
-    C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse$outboundSchema
-      .parse(c1ApiAppV1AppResourceSearchSearchAppResourceTypesResponse),
-  );
-}
-
 export function c1ApiAppV1AppResourceSearchSearchAppResourceTypesResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

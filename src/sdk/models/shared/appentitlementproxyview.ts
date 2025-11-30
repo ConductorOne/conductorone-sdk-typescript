@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementProxy,
   AppEntitlementProxy$inboundSchema,
-  AppEntitlementProxy$Outbound,
-  AppEntitlementProxy$outboundSchema,
 } from "./appentitlementproxy.js";
 
 /**
@@ -48,50 +46,6 @@ export const AppEntitlementProxyView$inboundSchema: z.ZodType<
   srcAppEntitlementPath: z.nullable(z.string()).optional(),
   srcAppPath: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type AppEntitlementProxyView$Outbound = {
-  appProxyEntitlement?: AppEntitlementProxy$Outbound | null | undefined;
-  dstAppEntitlementPath?: string | null | undefined;
-  dstAppPath?: string | null | undefined;
-  srcAppEntitlementPath?: string | null | undefined;
-  srcAppPath?: string | null | undefined;
-};
-
-/** @internal */
-export const AppEntitlementProxyView$outboundSchema: z.ZodType<
-  AppEntitlementProxyView$Outbound,
-  z.ZodTypeDef,
-  AppEntitlementProxyView
-> = z.object({
-  appProxyEntitlement: z.nullable(AppEntitlementProxy$outboundSchema)
-    .optional(),
-  dstAppEntitlementPath: z.nullable(z.string()).optional(),
-  dstAppPath: z.nullable(z.string()).optional(),
-  srcAppEntitlementPath: z.nullable(z.string()).optional(),
-  srcAppPath: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementProxyView$ {
-  /** @deprecated use `AppEntitlementProxyView$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementProxyView$inboundSchema;
-  /** @deprecated use `AppEntitlementProxyView$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlementProxyView$outboundSchema;
-  /** @deprecated use `AppEntitlementProxyView$Outbound` instead. */
-  export type Outbound = AppEntitlementProxyView$Outbound;
-}
-
-export function appEntitlementProxyViewToJSON(
-  appEntitlementProxyView: AppEntitlementProxyView,
-): string {
-  return JSON.stringify(
-    AppEntitlementProxyView$outboundSchema.parse(appEntitlementProxyView),
-  );
-}
 
 export function appEntitlementProxyViewFromJSON(
   jsonString: string,

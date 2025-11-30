@@ -4,18 +4,13 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ExportToDatasource,
   ExportToDatasource$inboundSchema,
-  ExportToDatasource$Outbound,
-  ExportToDatasource$outboundSchema,
 } from "./exporttodatasource.js";
 
 /**
@@ -68,32 +63,7 @@ export const ExporterState$inboundSchema: z.ZodType<
   ExporterState,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(ExporterState),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const ExporterState$outboundSchema: z.ZodType<
-  ExporterState,
-  z.ZodTypeDef,
-  ExporterState
-> = z.union([
-  z.nativeEnum(ExporterState),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExporterState$ {
-  /** @deprecated use `ExporterState$inboundSchema` instead. */
-  export const inboundSchema = ExporterState$inboundSchema;
-  /** @deprecated use `ExporterState$outboundSchema` instead. */
-  export const outboundSchema = ExporterState$outboundSchema;
-}
+> = openEnums.inboundSchema(ExporterState);
 
 /** @internal */
 export const Exporter$inboundSchema: z.ZodType<
@@ -116,51 +86,6 @@ export const Exporter$inboundSchema: z.ZodType<
   ).optional(),
   watermarkEventId: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type Exporter$Outbound = {
-  createdAt?: string | null | undefined;
-  datasource?: ExportToDatasource$Outbound | null | undefined;
-  deletedAt?: string | null | undefined;
-  displayName?: string | null | undefined;
-  exportId?: string | null | undefined;
-  state?: string | null | undefined;
-  updatedAt?: string | null | undefined;
-  watermarkEventId?: string | null | undefined;
-};
-
-/** @internal */
-export const Exporter$outboundSchema: z.ZodType<
-  Exporter$Outbound,
-  z.ZodTypeDef,
-  Exporter
-> = z.object({
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  datasource: z.nullable(ExportToDatasource$outboundSchema).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  exportId: z.nullable(z.string()).optional(),
-  state: z.nullable(ExporterState$outboundSchema).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  watermarkEventId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Exporter$ {
-  /** @deprecated use `Exporter$inboundSchema` instead. */
-  export const inboundSchema = Exporter$inboundSchema;
-  /** @deprecated use `Exporter$outboundSchema` instead. */
-  export const outboundSchema = Exporter$outboundSchema;
-  /** @deprecated use `Exporter$Outbound` instead. */
-  export type Outbound = Exporter$Outbound;
-}
-
-export function exporterToJSON(exporter: Exporter): string {
-  return JSON.stringify(Exporter$outboundSchema.parse(exporter));
-}
 
 export function exporterFromJSON(
   jsonString: string,

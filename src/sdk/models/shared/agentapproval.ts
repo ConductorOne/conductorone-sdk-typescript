@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -79,64 +76,26 @@ export const AgentFailureAction$inboundSchema: z.ZodType<
   AgentFailureAction,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(AgentFailureAction),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(AgentFailureAction);
 /** @internal */
 export const AgentFailureAction$outboundSchema: z.ZodType<
-  AgentFailureAction,
+  string,
   z.ZodTypeDef,
   AgentFailureAction
-> = z.union([
-  z.nativeEnum(AgentFailureAction),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgentFailureAction$ {
-  /** @deprecated use `AgentFailureAction$inboundSchema` instead. */
-  export const inboundSchema = AgentFailureAction$inboundSchema;
-  /** @deprecated use `AgentFailureAction$outboundSchema` instead. */
-  export const outboundSchema = AgentFailureAction$outboundSchema;
-}
+> = openEnums.outboundSchema(AgentFailureAction);
 
 /** @internal */
 export const AgentMode$inboundSchema: z.ZodType<
   AgentMode,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(AgentMode),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(AgentMode);
 /** @internal */
 export const AgentMode$outboundSchema: z.ZodType<
-  AgentMode,
+  string,
   z.ZodTypeDef,
   AgentMode
-> = z.union([
-  z.nativeEnum(AgentMode),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgentMode$ {
-  /** @deprecated use `AgentMode$inboundSchema` instead. */
-  export const inboundSchema = AgentMode$inboundSchema;
-  /** @deprecated use `AgentMode$outboundSchema` instead. */
-  export const outboundSchema = AgentMode$outboundSchema;
-}
+> = openEnums.outboundSchema(AgentMode);
 
 /** @internal */
 export const AgentApproval$inboundSchema: z.ZodType<
@@ -151,7 +110,6 @@ export const AgentApproval$inboundSchema: z.ZodType<
   policyIds: z.nullable(z.array(z.string())).optional(),
   reassignToUserIds: z.nullable(z.array(z.string())).optional(),
 });
-
 /** @internal */
 export type AgentApproval$Outbound = {
   agentFailureAction?: string | null | undefined;
@@ -176,23 +134,9 @@ export const AgentApproval$outboundSchema: z.ZodType<
   reassignToUserIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgentApproval$ {
-  /** @deprecated use `AgentApproval$inboundSchema` instead. */
-  export const inboundSchema = AgentApproval$inboundSchema;
-  /** @deprecated use `AgentApproval$outboundSchema` instead. */
-  export const outboundSchema = AgentApproval$outboundSchema;
-  /** @deprecated use `AgentApproval$Outbound` instead. */
-  export type Outbound = AgentApproval$Outbound;
-}
-
 export function agentApprovalToJSON(agentApproval: AgentApproval): string {
   return JSON.stringify(AgentApproval$outboundSchema.parse(agentApproval));
 }
-
 export function agentApprovalFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentApproval, SDKValidationError> {

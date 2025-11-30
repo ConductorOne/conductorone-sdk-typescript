@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  TaskView,
-  TaskView$inboundSchema,
-  TaskView$Outbound,
-  TaskView$outboundSchema,
-} from "./taskview.js";
+import { TaskView, TaskView$inboundSchema } from "./taskview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -61,57 +56,6 @@ export const TaskActionsServiceReassignResponseExpanded$inboundSchema:
       });
     });
 
-/** @internal */
-export type TaskActionsServiceReassignResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const TaskActionsServiceReassignResponseExpanded$outboundSchema:
-  z.ZodType<
-    TaskActionsServiceReassignResponseExpanded$Outbound,
-    z.ZodTypeDef,
-    TaskActionsServiceReassignResponseExpanded
-  > = z.object({
-    atType: z.string().optional(),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        atType: "@type",
-        additionalProperties: null,
-      }),
-    };
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceReassignResponseExpanded$ {
-  /** @deprecated use `TaskActionsServiceReassignResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskActionsServiceReassignResponseExpanded$inboundSchema;
-  /** @deprecated use `TaskActionsServiceReassignResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceReassignResponseExpanded$outboundSchema;
-  /** @deprecated use `TaskActionsServiceReassignResponseExpanded$Outbound` instead. */
-  export type Outbound = TaskActionsServiceReassignResponseExpanded$Outbound;
-}
-
-export function taskActionsServiceReassignResponseExpandedToJSON(
-  taskActionsServiceReassignResponseExpanded:
-    TaskActionsServiceReassignResponseExpanded,
-): string {
-  return JSON.stringify(
-    TaskActionsServiceReassignResponseExpanded$outboundSchema.parse(
-      taskActionsServiceReassignResponseExpanded,
-    ),
-  );
-}
-
 export function taskActionsServiceReassignResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -142,55 +86,6 @@ export const TaskActionsServiceReassignResponse$inboundSchema: z.ZodType<
   taskView: z.nullable(TaskView$inboundSchema).optional(),
   ticketActionId: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type TaskActionsServiceReassignResponse$Outbound = {
-  expanded?:
-    | Array<TaskActionsServiceReassignResponseExpanded$Outbound>
-    | null
-    | undefined;
-  taskView?: TaskView$Outbound | null | undefined;
-  ticketActionId?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskActionsServiceReassignResponse$outboundSchema: z.ZodType<
-  TaskActionsServiceReassignResponse$Outbound,
-  z.ZodTypeDef,
-  TaskActionsServiceReassignResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() =>
-      TaskActionsServiceReassignResponseExpanded$outboundSchema
-    )),
-  ).optional(),
-  taskView: z.nullable(TaskView$outboundSchema).optional(),
-  ticketActionId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceReassignResponse$ {
-  /** @deprecated use `TaskActionsServiceReassignResponse$inboundSchema` instead. */
-  export const inboundSchema = TaskActionsServiceReassignResponse$inboundSchema;
-  /** @deprecated use `TaskActionsServiceReassignResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceReassignResponse$outboundSchema;
-  /** @deprecated use `TaskActionsServiceReassignResponse$Outbound` instead. */
-  export type Outbound = TaskActionsServiceReassignResponse$Outbound;
-}
-
-export function taskActionsServiceReassignResponseToJSON(
-  taskActionsServiceReassignResponse: TaskActionsServiceReassignResponse,
-): string {
-  return JSON.stringify(
-    TaskActionsServiceReassignResponse$outboundSchema.parse(
-      taskActionsServiceReassignResponse,
-    ),
-  );
-}
 
 export function taskActionsServiceReassignResponseFromJSON(
   jsonString: string,

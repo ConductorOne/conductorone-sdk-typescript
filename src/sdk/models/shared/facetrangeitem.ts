@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  FacetRange,
-  FacetRange$inboundSchema,
-  FacetRange$Outbound,
-  FacetRange$outboundSchema,
-} from "./facetrange.js";
+import { FacetRange, FacetRange$inboundSchema } from "./facetrange.js";
 
 /**
  * The FacetRangeItem message.
@@ -31,37 +26,6 @@ export const FacetRangeItem$inboundSchema: z.ZodType<
 > = z.object({
   ranges: z.nullable(z.array(FacetRange$inboundSchema)).optional(),
 });
-
-/** @internal */
-export type FacetRangeItem$Outbound = {
-  ranges?: Array<FacetRange$Outbound> | null | undefined;
-};
-
-/** @internal */
-export const FacetRangeItem$outboundSchema: z.ZodType<
-  FacetRangeItem$Outbound,
-  z.ZodTypeDef,
-  FacetRangeItem
-> = z.object({
-  ranges: z.nullable(z.array(FacetRange$outboundSchema)).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FacetRangeItem$ {
-  /** @deprecated use `FacetRangeItem$inboundSchema` instead. */
-  export const inboundSchema = FacetRangeItem$inboundSchema;
-  /** @deprecated use `FacetRangeItem$outboundSchema` instead. */
-  export const outboundSchema = FacetRangeItem$outboundSchema;
-  /** @deprecated use `FacetRangeItem$Outbound` instead. */
-  export type Outbound = FacetRangeItem$Outbound;
-}
-
-export function facetRangeItemToJSON(facetRangeItem: FacetRangeItem): string {
-  return JSON.stringify(FacetRangeItem$outboundSchema.parse(facetRangeItem));
-}
 
 export function facetRangeItemFromJSON(
   jsonString: string,

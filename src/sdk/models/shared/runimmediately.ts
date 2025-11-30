@@ -18,7 +18,6 @@ export const RunImmediately$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
 /** @internal */
 export type RunImmediately$Outbound = {};
 
@@ -29,23 +28,9 @@ export const RunImmediately$outboundSchema: z.ZodType<
   RunImmediately
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RunImmediately$ {
-  /** @deprecated use `RunImmediately$inboundSchema` instead. */
-  export const inboundSchema = RunImmediately$inboundSchema;
-  /** @deprecated use `RunImmediately$outboundSchema` instead. */
-  export const outboundSchema = RunImmediately$outboundSchema;
-  /** @deprecated use `RunImmediately$Outbound` instead. */
-  export type Outbound = RunImmediately$Outbound;
-}
-
 export function runImmediatelyToJSON(runImmediately: RunImmediately): string {
   return JSON.stringify(RunImmediately$outboundSchema.parse(runImmediately));
 }
-
 export function runImmediatelyFromJSON(
   jsonString: string,
 ): SafeParseResult<RunImmediately, SDKValidationError> {

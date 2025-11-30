@@ -69,47 +69,6 @@ export const Details$inboundSchema: z.ZodType<Details, z.ZodTypeDef, unknown> =
     });
   });
 
-/** @internal */
-export type Details$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const Details$outboundSchema: z.ZodType<
-  Details$Outbound,
-  z.ZodTypeDef,
-  Details
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Details$ {
-  /** @deprecated use `Details$inboundSchema` instead. */
-  export const inboundSchema = Details$inboundSchema;
-  /** @deprecated use `Details$outboundSchema` instead. */
-  export const outboundSchema = Details$outboundSchema;
-  /** @deprecated use `Details$Outbound` instead. */
-  export type Outbound = Details$Outbound;
-}
-
-export function detailsToJSON(details: Details): string {
-  return JSON.stringify(Details$outboundSchema.parse(details));
-}
-
 export function detailsFromJSON(
   jsonString: string,
 ): SafeParseResult<Details, SDKValidationError> {
@@ -128,41 +87,6 @@ export const Status$inboundSchema: z.ZodType<Status, z.ZodTypeDef, unknown> = z
       .optional(),
     message: z.nullable(z.string()).optional(),
   });
-
-/** @internal */
-export type Status$Outbound = {
-  code?: number | null | undefined;
-  details?: Array<Details$Outbound> | null | undefined;
-  message?: string | null | undefined;
-};
-
-/** @internal */
-export const Status$outboundSchema: z.ZodType<
-  Status$Outbound,
-  z.ZodTypeDef,
-  Status
-> = z.object({
-  code: z.nullable(z.number().int()).optional(),
-  details: z.nullable(z.array(z.lazy(() => Details$outboundSchema))).optional(),
-  message: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Status$ {
-  /** @deprecated use `Status$inboundSchema` instead. */
-  export const inboundSchema = Status$inboundSchema;
-  /** @deprecated use `Status$outboundSchema` instead. */
-  export const outboundSchema = Status$outboundSchema;
-  /** @deprecated use `Status$Outbound` instead. */
-  export type Outbound = Status$Outbound;
-}
-
-export function statusToJSON(status: Status): string {
-  return JSON.stringify(Status$outboundSchema.parse(status));
-}
 
 export function statusFromJSON(
   jsonString: string,

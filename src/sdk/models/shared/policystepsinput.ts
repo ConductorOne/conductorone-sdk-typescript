@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PolicyStepInput,
-  PolicyStepInput$inboundSchema,
   PolicyStepInput$Outbound,
   PolicyStepInput$outboundSchema,
 } from "./policystepinput.js";
@@ -24,15 +20,6 @@ export type PolicyStepsInput = {
 };
 
 /** @internal */
-export const PolicyStepsInput$inboundSchema: z.ZodType<
-  PolicyStepsInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  steps: z.nullable(z.array(PolicyStepInput$inboundSchema)).optional(),
-});
-
-/** @internal */
 export type PolicyStepsInput$Outbound = {
   steps?: Array<PolicyStepInput$Outbound> | null | undefined;
 };
@@ -46,33 +33,10 @@ export const PolicyStepsInput$outboundSchema: z.ZodType<
   steps: z.nullable(z.array(PolicyStepInput$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PolicyStepsInput$ {
-  /** @deprecated use `PolicyStepsInput$inboundSchema` instead. */
-  export const inboundSchema = PolicyStepsInput$inboundSchema;
-  /** @deprecated use `PolicyStepsInput$outboundSchema` instead. */
-  export const outboundSchema = PolicyStepsInput$outboundSchema;
-  /** @deprecated use `PolicyStepsInput$Outbound` instead. */
-  export type Outbound = PolicyStepsInput$Outbound;
-}
-
 export function policyStepsInputToJSON(
   policyStepsInput: PolicyStepsInput,
 ): string {
   return JSON.stringify(
     PolicyStepsInput$outboundSchema.parse(policyStepsInput),
-  );
-}
-
-export function policyStepsInputFromJSON(
-  jsonString: string,
-): SafeParseResult<PolicyStepsInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PolicyStepsInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PolicyStepsInput' from JSON`,
   );
 }

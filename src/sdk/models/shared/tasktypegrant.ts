@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -68,32 +65,13 @@ export const TaskTypeGrantOutcome$inboundSchema: z.ZodType<
   TaskTypeGrantOutcome,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(TaskTypeGrantOutcome),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(TaskTypeGrantOutcome);
 /** @internal */
 export const TaskTypeGrantOutcome$outboundSchema: z.ZodType<
-  TaskTypeGrantOutcome,
+  string,
   z.ZodTypeDef,
   TaskTypeGrantOutcome
-> = z.union([
-  z.nativeEnum(TaskTypeGrantOutcome),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskTypeGrantOutcome$ {
-  /** @deprecated use `TaskTypeGrantOutcome$inboundSchema` instead. */
-  export const inboundSchema = TaskTypeGrantOutcome$inboundSchema;
-  /** @deprecated use `TaskTypeGrantOutcome$outboundSchema` instead. */
-  export const outboundSchema = TaskTypeGrantOutcome$outboundSchema;
-}
+> = openEnums.outboundSchema(TaskTypeGrantOutcome);
 
 /** @internal */
 export const TaskTypeGrant$inboundSchema: z.ZodType<
@@ -112,7 +90,6 @@ export const TaskTypeGrant$inboundSchema: z.ZodType<
   ).optional(),
   source: z.nullable(TaskGrantSource$inboundSchema).optional(),
 });
-
 /** @internal */
 export type TaskTypeGrant$Outbound = {
   appEntitlementId?: string | null | undefined;
@@ -141,23 +118,9 @@ export const TaskTypeGrant$outboundSchema: z.ZodType<
   source: z.nullable(TaskGrantSource$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskTypeGrant$ {
-  /** @deprecated use `TaskTypeGrant$inboundSchema` instead. */
-  export const inboundSchema = TaskTypeGrant$inboundSchema;
-  /** @deprecated use `TaskTypeGrant$outboundSchema` instead. */
-  export const outboundSchema = TaskTypeGrant$outboundSchema;
-  /** @deprecated use `TaskTypeGrant$Outbound` instead. */
-  export type Outbound = TaskTypeGrant$Outbound;
-}
-
 export function taskTypeGrantToJSON(taskTypeGrant: TaskTypeGrant): string {
   return JSON.stringify(TaskTypeGrant$outboundSchema.parse(taskTypeGrant));
 }
-
 export function taskTypeGrantFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskTypeGrant, SDKValidationError> {

@@ -26,41 +26,6 @@ export const TaskAuditStepSkipped$inboundSchema: z.ZodType<
   skippedBy: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditStepSkipped$Outbound = {
-  skippedBy?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditStepSkipped$outboundSchema: z.ZodType<
-  TaskAuditStepSkipped$Outbound,
-  z.ZodTypeDef,
-  TaskAuditStepSkipped
-> = z.object({
-  skippedBy: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditStepSkipped$ {
-  /** @deprecated use `TaskAuditStepSkipped$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditStepSkipped$inboundSchema;
-  /** @deprecated use `TaskAuditStepSkipped$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditStepSkipped$outboundSchema;
-  /** @deprecated use `TaskAuditStepSkipped$Outbound` instead. */
-  export type Outbound = TaskAuditStepSkipped$Outbound;
-}
-
-export function taskAuditStepSkippedToJSON(
-  taskAuditStepSkipped: TaskAuditStepSkipped,
-): string {
-  return JSON.stringify(
-    TaskAuditStepSkipped$outboundSchema.parse(taskAuditStepSkipped),
-  );
-}
-
 export function taskAuditStepSkippedFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditStepSkipped, SDKValidationError> {

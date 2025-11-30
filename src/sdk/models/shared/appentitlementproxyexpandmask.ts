@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The AppEntitlementProxyExpandMask message.
@@ -16,15 +13,6 @@ export type AppEntitlementProxyExpandMask = {
    */
   paths?: Array<string> | null | undefined;
 };
-
-/** @internal */
-export const AppEntitlementProxyExpandMask$inboundSchema: z.ZodType<
-  AppEntitlementProxyExpandMask,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type AppEntitlementProxyExpandMask$Outbound = {
@@ -40,19 +28,6 @@ export const AppEntitlementProxyExpandMask$outboundSchema: z.ZodType<
   paths: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementProxyExpandMask$ {
-  /** @deprecated use `AppEntitlementProxyExpandMask$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementProxyExpandMask$inboundSchema;
-  /** @deprecated use `AppEntitlementProxyExpandMask$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlementProxyExpandMask$outboundSchema;
-  /** @deprecated use `AppEntitlementProxyExpandMask$Outbound` instead. */
-  export type Outbound = AppEntitlementProxyExpandMask$Outbound;
-}
-
 export function appEntitlementProxyExpandMaskToJSON(
   appEntitlementProxyExpandMask: AppEntitlementProxyExpandMask,
 ): string {
@@ -60,15 +35,5 @@ export function appEntitlementProxyExpandMaskToJSON(
     AppEntitlementProxyExpandMask$outboundSchema.parse(
       appEntitlementProxyExpandMask,
     ),
-  );
-}
-
-export function appEntitlementProxyExpandMaskFromJSON(
-  jsonString: string,
-): SafeParseResult<AppEntitlementProxyExpandMask, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AppEntitlementProxyExpandMask$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AppEntitlementProxyExpandMask' from JSON`,
   );
 }

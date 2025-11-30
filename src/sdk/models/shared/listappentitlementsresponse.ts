@@ -13,8 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementView,
   AppEntitlementView$inboundSchema,
-  AppEntitlementView$Outbound,
-  AppEntitlementView$outboundSchema,
 } from "./appentitlementview.js";
 
 /**
@@ -63,55 +61,6 @@ export const ListAppEntitlementsResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type ListAppEntitlementsResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const ListAppEntitlementsResponseExpanded$outboundSchema: z.ZodType<
-  ListAppEntitlementsResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  ListAppEntitlementsResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAppEntitlementsResponseExpanded$ {
-  /** @deprecated use `ListAppEntitlementsResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    ListAppEntitlementsResponseExpanded$inboundSchema;
-  /** @deprecated use `ListAppEntitlementsResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAppEntitlementsResponseExpanded$outboundSchema;
-  /** @deprecated use `ListAppEntitlementsResponseExpanded$Outbound` instead. */
-  export type Outbound = ListAppEntitlementsResponseExpanded$Outbound;
-}
-
-export function listAppEntitlementsResponseExpandedToJSON(
-  listAppEntitlementsResponseExpanded: ListAppEntitlementsResponseExpanded,
-): string {
-  return JSON.stringify(
-    ListAppEntitlementsResponseExpanded$outboundSchema.parse(
-      listAppEntitlementsResponseExpanded,
-    ),
-  );
-}
-
 export function listAppEntitlementsResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAppEntitlementsResponseExpanded, SDKValidationError> {
@@ -135,52 +84,6 @@ export const ListAppEntitlementsResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(AppEntitlementView$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ListAppEntitlementsResponse$Outbound = {
-  expanded?:
-    | Array<ListAppEntitlementsResponseExpanded$Outbound>
-    | null
-    | undefined;
-  list?: Array<AppEntitlementView$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ListAppEntitlementsResponse$outboundSchema: z.ZodType<
-  ListAppEntitlementsResponse$Outbound,
-  z.ZodTypeDef,
-  ListAppEntitlementsResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() => ListAppEntitlementsResponseExpanded$outboundSchema)),
-  ).optional(),
-  list: z.nullable(z.array(AppEntitlementView$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAppEntitlementsResponse$ {
-  /** @deprecated use `ListAppEntitlementsResponse$inboundSchema` instead. */
-  export const inboundSchema = ListAppEntitlementsResponse$inboundSchema;
-  /** @deprecated use `ListAppEntitlementsResponse$outboundSchema` instead. */
-  export const outboundSchema = ListAppEntitlementsResponse$outboundSchema;
-  /** @deprecated use `ListAppEntitlementsResponse$Outbound` instead. */
-  export type Outbound = ListAppEntitlementsResponse$Outbound;
-}
-
-export function listAppEntitlementsResponseToJSON(
-  listAppEntitlementsResponse: ListAppEntitlementsResponse,
-): string {
-  return JSON.stringify(
-    ListAppEntitlementsResponse$outboundSchema.parse(
-      listAppEntitlementsResponse,
-    ),
-  );
-}
 
 export function listAppEntitlementsResponseFromJSON(
   jsonString: string,

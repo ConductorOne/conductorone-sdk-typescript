@@ -46,51 +46,6 @@ export const TaskAuditExternalTicketTriggered$inboundSchema: z.ZodType<
   externalTicketProvisionerConfigName: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditExternalTicketTriggered$Outbound = {
-  appId?: string | null | undefined;
-  connectorId?: string | null | undefined;
-  externalTicketId?: string | null | undefined;
-  externalTicketProvisionerConfigId?: string | null | undefined;
-  externalTicketProvisionerConfigName?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditExternalTicketTriggered$outboundSchema: z.ZodType<
-  TaskAuditExternalTicketTriggered$Outbound,
-  z.ZodTypeDef,
-  TaskAuditExternalTicketTriggered
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
-  externalTicketId: z.nullable(z.string()).optional(),
-  externalTicketProvisionerConfigId: z.nullable(z.string()).optional(),
-  externalTicketProvisionerConfigName: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditExternalTicketTriggered$ {
-  /** @deprecated use `TaskAuditExternalTicketTriggered$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditExternalTicketTriggered$inboundSchema;
-  /** @deprecated use `TaskAuditExternalTicketTriggered$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditExternalTicketTriggered$outboundSchema;
-  /** @deprecated use `TaskAuditExternalTicketTriggered$Outbound` instead. */
-  export type Outbound = TaskAuditExternalTicketTriggered$Outbound;
-}
-
-export function taskAuditExternalTicketTriggeredToJSON(
-  taskAuditExternalTicketTriggered: TaskAuditExternalTicketTriggered,
-): string {
-  return JSON.stringify(
-    TaskAuditExternalTicketTriggered$outboundSchema.parse(
-      taskAuditExternalTicketTriggered,
-    ),
-  );
-}
-
 export function taskAuditExternalTicketTriggeredFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditExternalTicketTriggered, SDKValidationError> {

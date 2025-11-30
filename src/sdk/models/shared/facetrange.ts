@@ -46,45 +46,6 @@ export const FacetRange$inboundSchema: z.ZodType<
   to: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
 });
 
-/** @internal */
-export type FacetRange$Outbound = {
-  count?: string | null | undefined;
-  displayName?: string | null | undefined;
-  from?: string | null | undefined;
-  iconUrl?: string | null | undefined;
-  to?: string | null | undefined;
-};
-
-/** @internal */
-export const FacetRange$outboundSchema: z.ZodType<
-  FacetRange$Outbound,
-  z.ZodTypeDef,
-  FacetRange
-> = z.object({
-  count: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  from: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
-  iconUrl: z.nullable(z.string()).optional(),
-  to: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FacetRange$ {
-  /** @deprecated use `FacetRange$inboundSchema` instead. */
-  export const inboundSchema = FacetRange$inboundSchema;
-  /** @deprecated use `FacetRange$outboundSchema` instead. */
-  export const outboundSchema = FacetRange$outboundSchema;
-  /** @deprecated use `FacetRange$Outbound` instead. */
-  export type Outbound = FacetRange$Outbound;
-}
-
-export function facetRangeToJSON(facetRange: FacetRange): string {
-  return JSON.stringify(FacetRange$outboundSchema.parse(facetRange));
-}
-
 export function facetRangeFromJSON(
   jsonString: string,
 ): SafeParseResult<FacetRange, SDKValidationError> {

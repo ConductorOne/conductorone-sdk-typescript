@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -40,32 +37,7 @@ export const PreviousState$inboundSchema: z.ZodType<
   PreviousState,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(PreviousState),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const PreviousState$outboundSchema: z.ZodType<
-  PreviousState,
-  z.ZodTypeDef,
-  PreviousState
-> = z.union([
-  z.nativeEnum(PreviousState),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PreviousState$ {
-  /** @deprecated use `PreviousState$inboundSchema` instead. */
-  export const inboundSchema = PreviousState$inboundSchema;
-  /** @deprecated use `PreviousState$outboundSchema` instead. */
-  export const outboundSchema = PreviousState$outboundSchema;
-}
+> = openEnums.inboundSchema(PreviousState);
 
 /** @internal */
 export const TaskAuditStateChange$inboundSchema: z.ZodType<
@@ -75,41 +47,6 @@ export const TaskAuditStateChange$inboundSchema: z.ZodType<
 > = z.object({
   previousState: z.nullable(PreviousState$inboundSchema).optional(),
 });
-
-/** @internal */
-export type TaskAuditStateChange$Outbound = {
-  previousState?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditStateChange$outboundSchema: z.ZodType<
-  TaskAuditStateChange$Outbound,
-  z.ZodTypeDef,
-  TaskAuditStateChange
-> = z.object({
-  previousState: z.nullable(PreviousState$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditStateChange$ {
-  /** @deprecated use `TaskAuditStateChange$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditStateChange$inboundSchema;
-  /** @deprecated use `TaskAuditStateChange$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditStateChange$outboundSchema;
-  /** @deprecated use `TaskAuditStateChange$Outbound` instead. */
-  export type Outbound = TaskAuditStateChange$Outbound;
-}
-
-export function taskAuditStateChangeToJSON(
-  taskAuditStateChange: TaskAuditStateChange,
-): string {
-  return JSON.stringify(
-    TaskAuditStateChange$outboundSchema.parse(taskAuditStateChange),
-  );
-}
 
 export function taskAuditStateChangeFromJSON(
   jsonString: string,

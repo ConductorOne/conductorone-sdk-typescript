@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The SetAppResourceOwnersRequest message.
@@ -16,15 +13,6 @@ export type SetAppResourceOwnersRequest = {
    */
   userIds?: Array<string> | null | undefined;
 };
-
-/** @internal */
-export const SetAppResourceOwnersRequest$inboundSchema: z.ZodType<
-  SetAppResourceOwnersRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type SetAppResourceOwnersRequest$Outbound = {
@@ -40,19 +28,6 @@ export const SetAppResourceOwnersRequest$outboundSchema: z.ZodType<
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SetAppResourceOwnersRequest$ {
-  /** @deprecated use `SetAppResourceOwnersRequest$inboundSchema` instead. */
-  export const inboundSchema = SetAppResourceOwnersRequest$inboundSchema;
-  /** @deprecated use `SetAppResourceOwnersRequest$outboundSchema` instead. */
-  export const outboundSchema = SetAppResourceOwnersRequest$outboundSchema;
-  /** @deprecated use `SetAppResourceOwnersRequest$Outbound` instead. */
-  export type Outbound = SetAppResourceOwnersRequest$Outbound;
-}
-
 export function setAppResourceOwnersRequestToJSON(
   setAppResourceOwnersRequest: SetAppResourceOwnersRequest,
 ): string {
@@ -60,15 +35,5 @@ export function setAppResourceOwnersRequestToJSON(
     SetAppResourceOwnersRequest$outboundSchema.parse(
       setAppResourceOwnersRequest,
     ),
-  );
-}
-
-export function setAppResourceOwnersRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<SetAppResourceOwnersRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SetAppResourceOwnersRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SetAppResourceOwnersRequest' from JSON`,
   );
 }

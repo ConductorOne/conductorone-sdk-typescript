@@ -41,7 +41,6 @@ export const CompletedAction$inboundSchema: z.ZodType<
     .optional(),
   userId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type CompletedAction$Outbound = {
   completedAt?: string | null | undefined;
@@ -61,25 +60,11 @@ export const CompletedAction$outboundSchema: z.ZodType<
   userId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CompletedAction$ {
-  /** @deprecated use `CompletedAction$inboundSchema` instead. */
-  export const inboundSchema = CompletedAction$inboundSchema;
-  /** @deprecated use `CompletedAction$outboundSchema` instead. */
-  export const outboundSchema = CompletedAction$outboundSchema;
-  /** @deprecated use `CompletedAction$Outbound` instead. */
-  export type Outbound = CompletedAction$Outbound;
-}
-
 export function completedActionToJSON(
   completedAction: CompletedAction,
 ): string {
   return JSON.stringify(CompletedAction$outboundSchema.parse(completedAction));
 }
-
 export function completedActionFromJSON(
   jsonString: string,
 ): SafeParseResult<CompletedAction, SDKValidationError> {

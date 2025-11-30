@@ -38,24 +38,6 @@ export type C1ApiTaskV1TaskActionsServiceHardResetResponse = {
 };
 
 /** @internal */
-export const C1ApiTaskV1TaskActionsServiceHardResetRequest$inboundSchema:
-  z.ZodType<
-    C1ApiTaskV1TaskActionsServiceHardResetRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    task_id: z.nullable(z.string()),
-    TaskActionsServiceHardResetRequest: shared
-      .TaskActionsServiceHardResetRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "task_id": "taskId",
-      "TaskActionsServiceHardResetRequest":
-        "taskActionsServiceHardResetRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiTaskV1TaskActionsServiceHardResetRequest$Outbound = {
   task_id: string | null;
   TaskActionsServiceHardResetRequest?:
@@ -80,21 +62,6 @@ export const C1ApiTaskV1TaskActionsServiceHardResetRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceHardResetRequest$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceHardResetRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceHardResetRequest$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceHardResetRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceHardResetRequest$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceHardResetRequest$Outbound` instead. */
-  export type Outbound = C1ApiTaskV1TaskActionsServiceHardResetRequest$Outbound;
-}
-
 export function c1ApiTaskV1TaskActionsServiceHardResetRequestToJSON(
   c1ApiTaskV1TaskActionsServiceHardResetRequest:
     C1ApiTaskV1TaskActionsServiceHardResetRequest,
@@ -103,22 +70,6 @@ export function c1ApiTaskV1TaskActionsServiceHardResetRequestToJSON(
     C1ApiTaskV1TaskActionsServiceHardResetRequest$outboundSchema.parse(
       c1ApiTaskV1TaskActionsServiceHardResetRequest,
     ),
-  );
-}
-
-export function c1ApiTaskV1TaskActionsServiceHardResetRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiTaskV1TaskActionsServiceHardResetRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiTaskV1TaskActionsServiceHardResetRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiTaskV1TaskActionsServiceHardResetRequest' from JSON`,
   );
 }
 
@@ -143,67 +94,6 @@ export const C1ApiTaskV1TaskActionsServiceHardResetResponse$inboundSchema:
         "taskActionsServiceHardResetResponse",
     });
   });
-
-/** @internal */
-export type C1ApiTaskV1TaskActionsServiceHardResetResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  TaskActionsServiceHardResetResponse?:
-    | shared.TaskActionsServiceHardResetResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiTaskV1TaskActionsServiceHardResetResponse$outboundSchema:
-  z.ZodType<
-    C1ApiTaskV1TaskActionsServiceHardResetResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiTaskV1TaskActionsServiceHardResetResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    taskActionsServiceHardResetResponse: shared
-      .TaskActionsServiceHardResetResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      taskActionsServiceHardResetResponse:
-        "TaskActionsServiceHardResetResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceHardResetResponse$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceHardResetResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceHardResetResponse$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceHardResetResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceHardResetResponse$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceHardResetResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiTaskV1TaskActionsServiceHardResetResponse$Outbound;
-}
-
-export function c1ApiTaskV1TaskActionsServiceHardResetResponseToJSON(
-  c1ApiTaskV1TaskActionsServiceHardResetResponse:
-    C1ApiTaskV1TaskActionsServiceHardResetResponse,
-): string {
-  return JSON.stringify(
-    C1ApiTaskV1TaskActionsServiceHardResetResponse$outboundSchema.parse(
-      c1ApiTaskV1TaskActionsServiceHardResetResponse,
-    ),
-  );
-}
 
 export function c1ApiTaskV1TaskActionsServiceHardResetResponseFromJSON(
   jsonString: string,

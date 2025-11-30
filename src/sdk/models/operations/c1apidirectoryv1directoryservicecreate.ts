@@ -51,66 +51,6 @@ export const C1ApiDirectoryV1DirectoryServiceCreateResponse$inboundSchema:
     });
   });
 
-/** @internal */
-export type C1ApiDirectoryV1DirectoryServiceCreateResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  DirectoryServiceCreateResponse?:
-    | shared.DirectoryServiceCreateResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiDirectoryV1DirectoryServiceCreateResponse$outboundSchema:
-  z.ZodType<
-    C1ApiDirectoryV1DirectoryServiceCreateResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiDirectoryV1DirectoryServiceCreateResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    directoryServiceCreateResponse: shared
-      .DirectoryServiceCreateResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      directoryServiceCreateResponse: "DirectoryServiceCreateResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiDirectoryV1DirectoryServiceCreateResponse$ {
-  /** @deprecated use `C1ApiDirectoryV1DirectoryServiceCreateResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiDirectoryV1DirectoryServiceCreateResponse$inboundSchema;
-  /** @deprecated use `C1ApiDirectoryV1DirectoryServiceCreateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiDirectoryV1DirectoryServiceCreateResponse$outboundSchema;
-  /** @deprecated use `C1ApiDirectoryV1DirectoryServiceCreateResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiDirectoryV1DirectoryServiceCreateResponse$Outbound;
-}
-
-export function c1ApiDirectoryV1DirectoryServiceCreateResponseToJSON(
-  c1ApiDirectoryV1DirectoryServiceCreateResponse:
-    C1ApiDirectoryV1DirectoryServiceCreateResponse,
-): string {
-  return JSON.stringify(
-    C1ApiDirectoryV1DirectoryServiceCreateResponse$outboundSchema.parse(
-      c1ApiDirectoryV1DirectoryServiceCreateResponse,
-    ),
-  );
-}
-
 export function c1ApiDirectoryV1DirectoryServiceCreateResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

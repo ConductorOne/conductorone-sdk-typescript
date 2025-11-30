@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  EncryptedData,
-  EncryptedData$inboundSchema,
-  EncryptedData$Outbound,
-  EncryptedData$outboundSchema,
-} from "./encrypteddata.js";
+import { EncryptedData, EncryptedData$inboundSchema } from "./encrypteddata.js";
 
 /**
  * A credentials for the Application User that represents an account in the application.
@@ -64,55 +59,6 @@ export const AppUserCredential$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
-/** @internal */
-export type AppUserCredential$Outbound = {
-  appId?: string | null | undefined;
-  appUserId?: string | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  encryptedData?: EncryptedData$Outbound | null | undefined;
-  expiresAt?: string | null | undefined;
-  id?: string | null | undefined;
-  updatedAt?: string | null | undefined;
-};
-
-/** @internal */
-export const AppUserCredential$outboundSchema: z.ZodType<
-  AppUserCredential$Outbound,
-  z.ZodTypeDef,
-  AppUserCredential
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  appUserId: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  encryptedData: z.nullable(EncryptedData$outboundSchema).optional(),
-  expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  id: z.nullable(z.string()).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUserCredential$ {
-  /** @deprecated use `AppUserCredential$inboundSchema` instead. */
-  export const inboundSchema = AppUserCredential$inboundSchema;
-  /** @deprecated use `AppUserCredential$outboundSchema` instead. */
-  export const outboundSchema = AppUserCredential$outboundSchema;
-  /** @deprecated use `AppUserCredential$Outbound` instead. */
-  export type Outbound = AppUserCredential$Outbound;
-}
-
-export function appUserCredentialToJSON(
-  appUserCredential: AppUserCredential,
-): string {
-  return JSON.stringify(
-    AppUserCredential$outboundSchema.parse(appUserCredential),
-  );
-}
 
 export function appUserCredentialFromJSON(
   jsonString: string,

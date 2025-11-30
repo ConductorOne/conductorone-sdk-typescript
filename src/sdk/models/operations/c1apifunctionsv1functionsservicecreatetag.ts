@@ -38,23 +38,6 @@ export type C1ApiFunctionsV1FunctionsServiceCreateTagResponse = {
 };
 
 /** @internal */
-export const C1ApiFunctionsV1FunctionsServiceCreateTagRequest$inboundSchema:
-  z.ZodType<
-    C1ApiFunctionsV1FunctionsServiceCreateTagRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    function_id: z.nullable(z.string()),
-    FunctionsServiceCreateTagRequest: shared
-      .FunctionsServiceCreateTagRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "function_id": "functionId",
-      "FunctionsServiceCreateTagRequest": "functionsServiceCreateTagRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiFunctionsV1FunctionsServiceCreateTagRequest$Outbound = {
   function_id: string | null;
   FunctionsServiceCreateTagRequest?:
@@ -79,22 +62,6 @@ export const C1ApiFunctionsV1FunctionsServiceCreateTagRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiFunctionsV1FunctionsServiceCreateTagRequest$ {
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceCreateTagRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiFunctionsV1FunctionsServiceCreateTagRequest$inboundSchema;
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceCreateTagRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiFunctionsV1FunctionsServiceCreateTagRequest$outboundSchema;
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceCreateTagRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiFunctionsV1FunctionsServiceCreateTagRequest$Outbound;
-}
-
 export function c1ApiFunctionsV1FunctionsServiceCreateTagRequestToJSON(
   c1ApiFunctionsV1FunctionsServiceCreateTagRequest:
     C1ApiFunctionsV1FunctionsServiceCreateTagRequest,
@@ -103,22 +70,6 @@ export function c1ApiFunctionsV1FunctionsServiceCreateTagRequestToJSON(
     C1ApiFunctionsV1FunctionsServiceCreateTagRequest$outboundSchema.parse(
       c1ApiFunctionsV1FunctionsServiceCreateTagRequest,
     ),
-  );
-}
-
-export function c1ApiFunctionsV1FunctionsServiceCreateTagRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiFunctionsV1FunctionsServiceCreateTagRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiFunctionsV1FunctionsServiceCreateTagRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiFunctionsV1FunctionsServiceCreateTagRequest' from JSON`,
   );
 }
 
@@ -142,66 +93,6 @@ export const C1ApiFunctionsV1FunctionsServiceCreateTagResponse$inboundSchema:
       "FunctionsServiceCreateTagResponse": "functionsServiceCreateTagResponse",
     });
   });
-
-/** @internal */
-export type C1ApiFunctionsV1FunctionsServiceCreateTagResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  FunctionsServiceCreateTagResponse?:
-    | shared.FunctionsServiceCreateTagResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiFunctionsV1FunctionsServiceCreateTagResponse$outboundSchema:
-  z.ZodType<
-    C1ApiFunctionsV1FunctionsServiceCreateTagResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiFunctionsV1FunctionsServiceCreateTagResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    functionsServiceCreateTagResponse: shared
-      .FunctionsServiceCreateTagResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      functionsServiceCreateTagResponse: "FunctionsServiceCreateTagResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiFunctionsV1FunctionsServiceCreateTagResponse$ {
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceCreateTagResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiFunctionsV1FunctionsServiceCreateTagResponse$inboundSchema;
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceCreateTagResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiFunctionsV1FunctionsServiceCreateTagResponse$outboundSchema;
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceCreateTagResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiFunctionsV1FunctionsServiceCreateTagResponse$Outbound;
-}
-
-export function c1ApiFunctionsV1FunctionsServiceCreateTagResponseToJSON(
-  c1ApiFunctionsV1FunctionsServiceCreateTagResponse:
-    C1ApiFunctionsV1FunctionsServiceCreateTagResponse,
-): string {
-  return JSON.stringify(
-    C1ApiFunctionsV1FunctionsServiceCreateTagResponse$outboundSchema.parse(
-      c1ApiFunctionsV1FunctionsServiceCreateTagResponse,
-    ),
-  );
-}
 
 export function c1ApiFunctionsV1FunctionsServiceCreateTagResponseFromJSON(
   jsonString: string,

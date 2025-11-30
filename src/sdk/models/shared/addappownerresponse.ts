@@ -19,37 +19,6 @@ export const AddAppOwnerResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type AddAppOwnerResponse$Outbound = {};
-
-/** @internal */
-export const AddAppOwnerResponse$outboundSchema: z.ZodType<
-  AddAppOwnerResponse$Outbound,
-  z.ZodTypeDef,
-  AddAppOwnerResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AddAppOwnerResponse$ {
-  /** @deprecated use `AddAppOwnerResponse$inboundSchema` instead. */
-  export const inboundSchema = AddAppOwnerResponse$inboundSchema;
-  /** @deprecated use `AddAppOwnerResponse$outboundSchema` instead. */
-  export const outboundSchema = AddAppOwnerResponse$outboundSchema;
-  /** @deprecated use `AddAppOwnerResponse$Outbound` instead. */
-  export type Outbound = AddAppOwnerResponse$Outbound;
-}
-
-export function addAppOwnerResponseToJSON(
-  addAppOwnerResponse: AddAppOwnerResponse,
-): string {
-  return JSON.stringify(
-    AddAppOwnerResponse$outboundSchema.parse(addAppOwnerResponse),
-  );
-}
-
 export function addAppOwnerResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<AddAppOwnerResponse, SDKValidationError> {

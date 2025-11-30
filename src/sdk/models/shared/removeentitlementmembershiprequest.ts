@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The RemoveEntitlementMembershipRequest message.
@@ -16,15 +13,6 @@ export type RemoveEntitlementMembershipRequest = {
    */
   appUserId?: string | null | undefined;
 };
-
-/** @internal */
-export const RemoveEntitlementMembershipRequest$inboundSchema: z.ZodType<
-  RemoveEntitlementMembershipRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appUserId: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type RemoveEntitlementMembershipRequest$Outbound = {
@@ -40,20 +28,6 @@ export const RemoveEntitlementMembershipRequest$outboundSchema: z.ZodType<
   appUserId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RemoveEntitlementMembershipRequest$ {
-  /** @deprecated use `RemoveEntitlementMembershipRequest$inboundSchema` instead. */
-  export const inboundSchema = RemoveEntitlementMembershipRequest$inboundSchema;
-  /** @deprecated use `RemoveEntitlementMembershipRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    RemoveEntitlementMembershipRequest$outboundSchema;
-  /** @deprecated use `RemoveEntitlementMembershipRequest$Outbound` instead. */
-  export type Outbound = RemoveEntitlementMembershipRequest$Outbound;
-}
-
 export function removeEntitlementMembershipRequestToJSON(
   removeEntitlementMembershipRequest: RemoveEntitlementMembershipRequest,
 ): string {
@@ -61,16 +35,5 @@ export function removeEntitlementMembershipRequestToJSON(
     RemoveEntitlementMembershipRequest$outboundSchema.parse(
       removeEntitlementMembershipRequest,
     ),
-  );
-}
-
-export function removeEntitlementMembershipRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<RemoveEntitlementMembershipRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      RemoveEntitlementMembershipRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RemoveEntitlementMembershipRequest' from JSON`,
   );
 }

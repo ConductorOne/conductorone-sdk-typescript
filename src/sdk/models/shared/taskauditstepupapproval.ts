@@ -26,41 +26,6 @@ export const TaskAuditStepUpApproval$inboundSchema: z.ZodType<
   stepUpTransactionId: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditStepUpApproval$Outbound = {
-  stepUpTransactionId?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditStepUpApproval$outboundSchema: z.ZodType<
-  TaskAuditStepUpApproval$Outbound,
-  z.ZodTypeDef,
-  TaskAuditStepUpApproval
-> = z.object({
-  stepUpTransactionId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditStepUpApproval$ {
-  /** @deprecated use `TaskAuditStepUpApproval$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditStepUpApproval$inboundSchema;
-  /** @deprecated use `TaskAuditStepUpApproval$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditStepUpApproval$outboundSchema;
-  /** @deprecated use `TaskAuditStepUpApproval$Outbound` instead. */
-  export type Outbound = TaskAuditStepUpApproval$Outbound;
-}
-
-export function taskAuditStepUpApprovalToJSON(
-  taskAuditStepUpApproval: TaskAuditStepUpApproval,
-): string {
-  return JSON.stringify(
-    TaskAuditStepUpApproval$outboundSchema.parse(taskAuditStepUpApproval),
-  );
-}
-
 export function taskAuditStepUpApprovalFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditStepUpApproval, SDKValidationError> {

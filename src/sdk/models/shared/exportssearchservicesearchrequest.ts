@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ExporterRef,
-  ExporterRef$inboundSchema,
   ExporterRef$Outbound,
   ExporterRef$outboundSchema,
 } from "./exporterref.js";
@@ -40,19 +36,6 @@ export type ExportsSearchServiceSearchRequest = {
 };
 
 /** @internal */
-export const ExportsSearchServiceSearchRequest$inboundSchema: z.ZodType<
-  ExportsSearchServiceSearchRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  displayName: z.nullable(z.string()).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
-  refs: z.nullable(z.array(ExporterRef$inboundSchema)).optional(),
-});
-
-/** @internal */
 export type ExportsSearchServiceSearchRequest$Outbound = {
   displayName?: string | null | undefined;
   pageSize?: number | null | undefined;
@@ -74,20 +57,6 @@ export const ExportsSearchServiceSearchRequest$outboundSchema: z.ZodType<
   refs: z.nullable(z.array(ExporterRef$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExportsSearchServiceSearchRequest$ {
-  /** @deprecated use `ExportsSearchServiceSearchRequest$inboundSchema` instead. */
-  export const inboundSchema = ExportsSearchServiceSearchRequest$inboundSchema;
-  /** @deprecated use `ExportsSearchServiceSearchRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    ExportsSearchServiceSearchRequest$outboundSchema;
-  /** @deprecated use `ExportsSearchServiceSearchRequest$Outbound` instead. */
-  export type Outbound = ExportsSearchServiceSearchRequest$Outbound;
-}
-
 export function exportsSearchServiceSearchRequestToJSON(
   exportsSearchServiceSearchRequest: ExportsSearchServiceSearchRequest,
 ): string {
@@ -95,15 +64,5 @@ export function exportsSearchServiceSearchRequestToJSON(
     ExportsSearchServiceSearchRequest$outboundSchema.parse(
       exportsSearchServiceSearchRequest,
     ),
-  );
-}
-
-export function exportsSearchServiceSearchRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ExportsSearchServiceSearchRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ExportsSearchServiceSearchRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ExportsSearchServiceSearchRequest' from JSON`,
   );
 }

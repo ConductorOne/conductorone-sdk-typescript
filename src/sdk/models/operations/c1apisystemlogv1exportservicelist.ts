@@ -34,21 +34,6 @@ export type C1ApiSystemlogV1ExportServiceListResponse = {
 };
 
 /** @internal */
-export const C1ApiSystemlogV1ExportServiceListRequest$inboundSchema: z.ZodType<
-  C1ApiSystemlogV1ExportServiceListRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  page_size: z.nullable(z.number().int()).optional(),
-  page_token: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "page_size": "pageSize",
-    "page_token": "pageToken",
-  });
-});
-
-/** @internal */
 export type C1ApiSystemlogV1ExportServiceListRequest$Outbound = {
   page_size?: number | null | undefined;
   page_token?: string | null | undefined;
@@ -69,21 +54,6 @@ export const C1ApiSystemlogV1ExportServiceListRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiSystemlogV1ExportServiceListRequest$ {
-  /** @deprecated use `C1ApiSystemlogV1ExportServiceListRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiSystemlogV1ExportServiceListRequest$inboundSchema;
-  /** @deprecated use `C1ApiSystemlogV1ExportServiceListRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiSystemlogV1ExportServiceListRequest$outboundSchema;
-  /** @deprecated use `C1ApiSystemlogV1ExportServiceListRequest$Outbound` instead. */
-  export type Outbound = C1ApiSystemlogV1ExportServiceListRequest$Outbound;
-}
-
 export function c1ApiSystemlogV1ExportServiceListRequestToJSON(
   c1ApiSystemlogV1ExportServiceListRequest:
     C1ApiSystemlogV1ExportServiceListRequest,
@@ -92,22 +62,6 @@ export function c1ApiSystemlogV1ExportServiceListRequestToJSON(
     C1ApiSystemlogV1ExportServiceListRequest$outboundSchema.parse(
       c1ApiSystemlogV1ExportServiceListRequest,
     ),
-  );
-}
-
-export function c1ApiSystemlogV1ExportServiceListRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiSystemlogV1ExportServiceListRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiSystemlogV1ExportServiceListRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiSystemlogV1ExportServiceListRequest' from JSON`,
   );
 }
 
@@ -130,65 +84,6 @@ export const C1ApiSystemlogV1ExportServiceListResponse$inboundSchema: z.ZodType<
     "ExportServiceListResponse": "exportServiceListResponse",
   });
 });
-
-/** @internal */
-export type C1ApiSystemlogV1ExportServiceListResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  ExportServiceListResponse?:
-    | shared.ExportServiceListResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiSystemlogV1ExportServiceListResponse$outboundSchema:
-  z.ZodType<
-    C1ApiSystemlogV1ExportServiceListResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiSystemlogV1ExportServiceListResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    exportServiceListResponse: shared.ExportServiceListResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      exportServiceListResponse: "ExportServiceListResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiSystemlogV1ExportServiceListResponse$ {
-  /** @deprecated use `C1ApiSystemlogV1ExportServiceListResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiSystemlogV1ExportServiceListResponse$inboundSchema;
-  /** @deprecated use `C1ApiSystemlogV1ExportServiceListResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiSystemlogV1ExportServiceListResponse$outboundSchema;
-  /** @deprecated use `C1ApiSystemlogV1ExportServiceListResponse$Outbound` instead. */
-  export type Outbound = C1ApiSystemlogV1ExportServiceListResponse$Outbound;
-}
-
-export function c1ApiSystemlogV1ExportServiceListResponseToJSON(
-  c1ApiSystemlogV1ExportServiceListResponse:
-    C1ApiSystemlogV1ExportServiceListResponse,
-): string {
-  return JSON.stringify(
-    C1ApiSystemlogV1ExportServiceListResponse$outboundSchema.parse(
-      c1ApiSystemlogV1ExportServiceListResponse,
-    ),
-  );
-}
 
 export function c1ApiSystemlogV1ExportServiceListResponseFromJSON(
   jsonString: string,

@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -41,32 +38,13 @@ export const AccountType$inboundSchema: z.ZodType<
   AccountType,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(AccountType),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(AccountType);
 /** @internal */
 export const AccountType$outboundSchema: z.ZodType<
-  AccountType,
+  string,
   z.ZodTypeDef,
   AccountType
-> = z.union([
-  z.nativeEnum(AccountType),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AccountType$ {
-  /** @deprecated use `AccountType$inboundSchema` instead. */
-  export const inboundSchema = AccountType$inboundSchema;
-  /** @deprecated use `AccountType$outboundSchema` instead. */
-  export const outboundSchema = AccountType$outboundSchema;
-}
+> = openEnums.outboundSchema(AccountType);
 
 /** @internal */
 export const AccountFilter$inboundSchema: z.ZodType<
@@ -76,7 +54,6 @@ export const AccountFilter$inboundSchema: z.ZodType<
 > = z.object({
   accountType: z.nullable(AccountType$inboundSchema).optional(),
 });
-
 /** @internal */
 export type AccountFilter$Outbound = {
   accountType?: string | null | undefined;
@@ -91,23 +68,9 @@ export const AccountFilter$outboundSchema: z.ZodType<
   accountType: z.nullable(AccountType$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AccountFilter$ {
-  /** @deprecated use `AccountFilter$inboundSchema` instead. */
-  export const inboundSchema = AccountFilter$inboundSchema;
-  /** @deprecated use `AccountFilter$outboundSchema` instead. */
-  export const outboundSchema = AccountFilter$outboundSchema;
-  /** @deprecated use `AccountFilter$Outbound` instead. */
-  export type Outbound = AccountFilter$Outbound;
-}
-
 export function accountFilterToJSON(accountFilter: AccountFilter): string {
   return JSON.stringify(AccountFilter$outboundSchema.parse(accountFilter));
 }
-
 export function accountFilterFromJSON(
   jsonString: string,
 ): SafeParseResult<AccountFilter, SDKValidationError> {

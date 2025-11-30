@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskRevokeSource,
-  TaskRevokeSource$inboundSchema,
   TaskRevokeSource$Outbound,
   TaskRevokeSource$outboundSchema,
 } from "./taskrevokesource.js";
@@ -20,18 +16,6 @@ export type TaskTypeRevokeInput = {
   outcomeTime?: Date | null | undefined;
   source?: TaskRevokeSource | null | undefined;
 };
-
-/** @internal */
-export const TaskTypeRevokeInput$inboundSchema: z.ZodType<
-  TaskTypeRevokeInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  outcomeTime: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  source: z.nullable(TaskRevokeSource$inboundSchema).optional(),
-});
 
 /** @internal */
 export type TaskTypeRevokeInput$Outbound = {
@@ -49,33 +33,10 @@ export const TaskTypeRevokeInput$outboundSchema: z.ZodType<
   source: z.nullable(TaskRevokeSource$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskTypeRevokeInput$ {
-  /** @deprecated use `TaskTypeRevokeInput$inboundSchema` instead. */
-  export const inboundSchema = TaskTypeRevokeInput$inboundSchema;
-  /** @deprecated use `TaskTypeRevokeInput$outboundSchema` instead. */
-  export const outboundSchema = TaskTypeRevokeInput$outboundSchema;
-  /** @deprecated use `TaskTypeRevokeInput$Outbound` instead. */
-  export type Outbound = TaskTypeRevokeInput$Outbound;
-}
-
 export function taskTypeRevokeInputToJSON(
   taskTypeRevokeInput: TaskTypeRevokeInput,
 ): string {
   return JSON.stringify(
     TaskTypeRevokeInput$outboundSchema.parse(taskTypeRevokeInput),
-  );
-}
-
-export function taskTypeRevokeInputFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskTypeRevokeInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskTypeRevokeInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskTypeRevokeInput' from JSON`,
   );
 }

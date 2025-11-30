@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -67,32 +64,13 @@ export const TaskTypeRevokeOutcome$inboundSchema: z.ZodType<
   TaskTypeRevokeOutcome,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(TaskTypeRevokeOutcome),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(TaskTypeRevokeOutcome);
 /** @internal */
 export const TaskTypeRevokeOutcome$outboundSchema: z.ZodType<
-  TaskTypeRevokeOutcome,
+  string,
   z.ZodTypeDef,
   TaskTypeRevokeOutcome
-> = z.union([
-  z.nativeEnum(TaskTypeRevokeOutcome),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskTypeRevokeOutcome$ {
-  /** @deprecated use `TaskTypeRevokeOutcome$inboundSchema` instead. */
-  export const inboundSchema = TaskTypeRevokeOutcome$inboundSchema;
-  /** @deprecated use `TaskTypeRevokeOutcome$outboundSchema` instead. */
-  export const outboundSchema = TaskTypeRevokeOutcome$outboundSchema;
-}
+> = openEnums.outboundSchema(TaskTypeRevokeOutcome);
 
 /** @internal */
 export const TaskTypeRevoke$inboundSchema: z.ZodType<
@@ -110,7 +88,6 @@ export const TaskTypeRevoke$inboundSchema: z.ZodType<
   ).optional(),
   source: z.nullable(TaskRevokeSource$inboundSchema).optional(),
 });
-
 /** @internal */
 export type TaskTypeRevoke$Outbound = {
   appEntitlementId?: string | null | undefined;
@@ -137,23 +114,9 @@ export const TaskTypeRevoke$outboundSchema: z.ZodType<
   source: z.nullable(TaskRevokeSource$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskTypeRevoke$ {
-  /** @deprecated use `TaskTypeRevoke$inboundSchema` instead. */
-  export const inboundSchema = TaskTypeRevoke$inboundSchema;
-  /** @deprecated use `TaskTypeRevoke$outboundSchema` instead. */
-  export const outboundSchema = TaskTypeRevoke$outboundSchema;
-  /** @deprecated use `TaskTypeRevoke$Outbound` instead. */
-  export type Outbound = TaskTypeRevoke$Outbound;
-}
-
 export function taskTypeRevokeToJSON(taskTypeRevoke: TaskTypeRevoke): string {
   return JSON.stringify(TaskTypeRevoke$outboundSchema.parse(taskTypeRevoke));
 }
-
 export function taskTypeRevokeFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskTypeRevoke, SDKValidationError> {

@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppResourceRef,
-  AppResourceRef$inboundSchema,
   AppResourceRef$Outbound,
   AppResourceRef$outboundSchema,
 } from "./appresourceref.js";
@@ -68,26 +64,6 @@ export type SearchAppResourcesRequest = {
 };
 
 /** @internal */
-export const SearchAppResourcesRequest$inboundSchema: z.ZodType<
-  SearchAppResourcesRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  appUserIds: z.nullable(z.array(z.string())).optional(),
-  excludeDeletedResourceBindings: z.nullable(z.boolean()).optional(),
-  excludeResourceIds: z.nullable(z.array(z.string())).optional(),
-  excludeResourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
-  refs: z.nullable(z.array(AppResourceRef$inboundSchema)).optional(),
-  resourceIds: z.nullable(z.array(z.string())).optional(),
-  resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  resourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
-});
-
-/** @internal */
 export type SearchAppResourcesRequest$Outbound = {
   appId?: string | null | undefined;
   appUserIds?: Array<string> | null | undefined;
@@ -123,33 +99,10 @@ export const SearchAppResourcesRequest$outboundSchema: z.ZodType<
   resourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchAppResourcesRequest$ {
-  /** @deprecated use `SearchAppResourcesRequest$inboundSchema` instead. */
-  export const inboundSchema = SearchAppResourcesRequest$inboundSchema;
-  /** @deprecated use `SearchAppResourcesRequest$outboundSchema` instead. */
-  export const outboundSchema = SearchAppResourcesRequest$outboundSchema;
-  /** @deprecated use `SearchAppResourcesRequest$Outbound` instead. */
-  export type Outbound = SearchAppResourcesRequest$Outbound;
-}
-
 export function searchAppResourcesRequestToJSON(
   searchAppResourcesRequest: SearchAppResourcesRequest,
 ): string {
   return JSON.stringify(
     SearchAppResourcesRequest$outboundSchema.parse(searchAppResourcesRequest),
-  );
-}
-
-export function searchAppResourcesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchAppResourcesRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchAppResourcesRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchAppResourcesRequest' from JSON`,
   );
 }

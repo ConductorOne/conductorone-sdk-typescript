@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PersonalClient,
   PersonalClient$inboundSchema,
-  PersonalClient$Outbound,
-  PersonalClient$outboundSchema,
 } from "./personalclient.js";
 
 /**
@@ -36,49 +34,6 @@ export const PersonalClientSearchServiceSearchResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(PersonalClient$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type PersonalClientSearchServiceSearchResponse$Outbound = {
-  list?: Array<PersonalClient$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const PersonalClientSearchServiceSearchResponse$outboundSchema:
-  z.ZodType<
-    PersonalClientSearchServiceSearchResponse$Outbound,
-    z.ZodTypeDef,
-    PersonalClientSearchServiceSearchResponse
-  > = z.object({
-    list: z.nullable(z.array(PersonalClient$outboundSchema)).optional(),
-    nextPageToken: z.nullable(z.string()).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PersonalClientSearchServiceSearchResponse$ {
-  /** @deprecated use `PersonalClientSearchServiceSearchResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    PersonalClientSearchServiceSearchResponse$inboundSchema;
-  /** @deprecated use `PersonalClientSearchServiceSearchResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    PersonalClientSearchServiceSearchResponse$outboundSchema;
-  /** @deprecated use `PersonalClientSearchServiceSearchResponse$Outbound` instead. */
-  export type Outbound = PersonalClientSearchServiceSearchResponse$Outbound;
-}
-
-export function personalClientSearchServiceSearchResponseToJSON(
-  personalClientSearchServiceSearchResponse:
-    PersonalClientSearchServiceSearchResponse,
-): string {
-  return JSON.stringify(
-    PersonalClientSearchServiceSearchResponse$outboundSchema.parse(
-      personalClientSearchServiceSearchResponse,
-    ),
-  );
-}
 
 export function personalClientSearchServiceSearchResponseFromJSON(
   jsonString: string,

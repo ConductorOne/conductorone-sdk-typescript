@@ -34,21 +34,6 @@ export type C1ApiAppV1AppsListResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppsListRequest$inboundSchema: z.ZodType<
-  C1ApiAppV1AppsListRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  page_size: z.nullable(z.number().int()).optional(),
-  page_token: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "page_size": "pageSize",
-    "page_token": "pageToken",
-  });
-});
-
-/** @internal */
 export type C1ApiAppV1AppsListRequest$Outbound = {
   page_size?: number | null | undefined;
   page_token?: string | null | undefined;
@@ -69,34 +54,11 @@ export const C1ApiAppV1AppsListRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppsListRequest$ {
-  /** @deprecated use `C1ApiAppV1AppsListRequest$inboundSchema` instead. */
-  export const inboundSchema = C1ApiAppV1AppsListRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppsListRequest$outboundSchema` instead. */
-  export const outboundSchema = C1ApiAppV1AppsListRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppsListRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppsListRequest$Outbound;
-}
-
 export function c1ApiAppV1AppsListRequestToJSON(
   c1ApiAppV1AppsListRequest: C1ApiAppV1AppsListRequest,
 ): string {
   return JSON.stringify(
     C1ApiAppV1AppsListRequest$outboundSchema.parse(c1ApiAppV1AppsListRequest),
-  );
-}
-
-export function c1ApiAppV1AppsListRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<C1ApiAppV1AppsListRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => C1ApiAppV1AppsListRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppsListRequest' from JSON`,
   );
 }
 
@@ -118,56 +80,6 @@ export const C1ApiAppV1AppsListResponse$inboundSchema: z.ZodType<
     "ListAppsResponse": "listAppsResponse",
   });
 });
-
-/** @internal */
-export type C1ApiAppV1AppsListResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  ListAppsResponse?: shared.ListAppsResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppsListResponse$outboundSchema: z.ZodType<
-  C1ApiAppV1AppsListResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiAppV1AppsListResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  listAppsResponse: shared.ListAppsResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    listAppsResponse: "ListAppsResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppsListResponse$ {
-  /** @deprecated use `C1ApiAppV1AppsListResponse$inboundSchema` instead. */
-  export const inboundSchema = C1ApiAppV1AppsListResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppsListResponse$outboundSchema` instead. */
-  export const outboundSchema = C1ApiAppV1AppsListResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppsListResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppsListResponse$Outbound;
-}
-
-export function c1ApiAppV1AppsListResponseToJSON(
-  c1ApiAppV1AppsListResponse: C1ApiAppV1AppsListResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppsListResponse$outboundSchema.parse(c1ApiAppV1AppsListResponse),
-  );
-}
 
 export function c1ApiAppV1AppsListResponseFromJSON(
   jsonString: string,

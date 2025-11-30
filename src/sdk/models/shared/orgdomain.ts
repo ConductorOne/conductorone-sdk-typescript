@@ -43,45 +43,6 @@ export const OrgDomain$inboundSchema: z.ZodType<
   ).optional(),
 });
 
-/** @internal */
-export type OrgDomain$Outbound = {
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  domain?: string | null | undefined;
-  id?: string | null | undefined;
-  updatedAt?: string | null | undefined;
-};
-
-/** @internal */
-export const OrgDomain$outboundSchema: z.ZodType<
-  OrgDomain$Outbound,
-  z.ZodTypeDef,
-  OrgDomain
-> = z.object({
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  domain: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace OrgDomain$ {
-  /** @deprecated use `OrgDomain$inboundSchema` instead. */
-  export const inboundSchema = OrgDomain$inboundSchema;
-  /** @deprecated use `OrgDomain$outboundSchema` instead. */
-  export const outboundSchema = OrgDomain$outboundSchema;
-  /** @deprecated use `OrgDomain$Outbound` instead. */
-  export type Outbound = OrgDomain$Outbound;
-}
-
-export function orgDomainToJSON(orgDomain: OrgDomain): string {
-  return JSON.stringify(OrgDomain$outboundSchema.parse(orgDomain));
-}
-
 export function orgDomainFromJSON(
   jsonString: string,
 ): SafeParseResult<OrgDomain, SDKValidationError> {

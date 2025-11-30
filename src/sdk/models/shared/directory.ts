@@ -9,14 +9,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   DirectoryAccountFilterAll,
   DirectoryAccountFilterAll$inboundSchema,
-  DirectoryAccountFilterAll$Outbound,
-  DirectoryAccountFilterAll$outboundSchema,
 } from "./directoryaccountfilterall.js";
 import {
   DirectoryAccountFilterCel,
   DirectoryAccountFilterCel$inboundSchema,
-  DirectoryAccountFilterCel$Outbound,
-  DirectoryAccountFilterCel$outboundSchema,
 } from "./directoryaccountfiltercel.js";
 
 /**
@@ -59,48 +55,6 @@ export const Directory$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
-/** @internal */
-export type Directory$Outbound = {
-  all?: DirectoryAccountFilterAll$Outbound | null | undefined;
-  appId?: string | null | undefined;
-  celExpression?: DirectoryAccountFilterCel$Outbound | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  updatedAt?: string | null | undefined;
-};
-
-/** @internal */
-export const Directory$outboundSchema: z.ZodType<
-  Directory$Outbound,
-  z.ZodTypeDef,
-  Directory
-> = z.object({
-  all: z.nullable(DirectoryAccountFilterAll$outboundSchema).optional(),
-  appId: z.nullable(z.string()).optional(),
-  celExpression: z.nullable(DirectoryAccountFilterCel$outboundSchema)
-    .optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Directory$ {
-  /** @deprecated use `Directory$inboundSchema` instead. */
-  export const inboundSchema = Directory$inboundSchema;
-  /** @deprecated use `Directory$outboundSchema` instead. */
-  export const outboundSchema = Directory$outboundSchema;
-  /** @deprecated use `Directory$Outbound` instead. */
-  export type Outbound = Directory$Outbound;
-}
-
-export function directoryToJSON(directory: Directory): string {
-  return JSON.stringify(Directory$outboundSchema.parse(directory));
-}
 
 export function directoryFromJSON(
   jsonString: string,

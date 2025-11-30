@@ -35,7 +35,6 @@ export const PolicyPostActions$inboundSchema: z.ZodType<
 > = z.object({
   certifyRemediateImmediately: z.nullable(z.boolean()).optional(),
 });
-
 /** @internal */
 export type PolicyPostActions$Outbound = {
   certifyRemediateImmediately?: boolean | null | undefined;
@@ -50,19 +49,6 @@ export const PolicyPostActions$outboundSchema: z.ZodType<
   certifyRemediateImmediately: z.nullable(z.boolean()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PolicyPostActions$ {
-  /** @deprecated use `PolicyPostActions$inboundSchema` instead. */
-  export const inboundSchema = PolicyPostActions$inboundSchema;
-  /** @deprecated use `PolicyPostActions$outboundSchema` instead. */
-  export const outboundSchema = PolicyPostActions$outboundSchema;
-  /** @deprecated use `PolicyPostActions$Outbound` instead. */
-  export type Outbound = PolicyPostActions$Outbound;
-}
-
 export function policyPostActionsToJSON(
   policyPostActions: PolicyPostActions,
 ): string {
@@ -70,7 +56,6 @@ export function policyPostActionsToJSON(
     PolicyPostActions$outboundSchema.parse(policyPostActions),
   );
 }
-
 export function policyPostActionsFromJSON(
   jsonString: string,
 ): SafeParseResult<PolicyPostActions, SDKValidationError> {

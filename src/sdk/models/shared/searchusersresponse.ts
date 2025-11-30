@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  UserView,
-  UserView$inboundSchema,
-  UserView$Outbound,
-  UserView$outboundSchema,
-} from "./userview.js";
+import { UserView, UserView$inboundSchema } from "./userview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -63,53 +58,6 @@ export const SearchUsersResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type SearchUsersResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const SearchUsersResponseExpanded$outboundSchema: z.ZodType<
-  SearchUsersResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  SearchUsersResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchUsersResponseExpanded$ {
-  /** @deprecated use `SearchUsersResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema = SearchUsersResponseExpanded$inboundSchema;
-  /** @deprecated use `SearchUsersResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema = SearchUsersResponseExpanded$outboundSchema;
-  /** @deprecated use `SearchUsersResponseExpanded$Outbound` instead. */
-  export type Outbound = SearchUsersResponseExpanded$Outbound;
-}
-
-export function searchUsersResponseExpandedToJSON(
-  searchUsersResponseExpanded: SearchUsersResponseExpanded,
-): string {
-  return JSON.stringify(
-    SearchUsersResponseExpanded$outboundSchema.parse(
-      searchUsersResponseExpanded,
-    ),
-  );
-}
-
 export function searchUsersResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchUsersResponseExpanded, SDKValidationError> {
@@ -132,47 +80,6 @@ export const SearchUsersResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(UserView$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type SearchUsersResponse$Outbound = {
-  expanded?: Array<SearchUsersResponseExpanded$Outbound> | null | undefined;
-  list?: Array<UserView$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const SearchUsersResponse$outboundSchema: z.ZodType<
-  SearchUsersResponse$Outbound,
-  z.ZodTypeDef,
-  SearchUsersResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() => SearchUsersResponseExpanded$outboundSchema)),
-  ).optional(),
-  list: z.nullable(z.array(UserView$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchUsersResponse$ {
-  /** @deprecated use `SearchUsersResponse$inboundSchema` instead. */
-  export const inboundSchema = SearchUsersResponse$inboundSchema;
-  /** @deprecated use `SearchUsersResponse$outboundSchema` instead. */
-  export const outboundSchema = SearchUsersResponse$outboundSchema;
-  /** @deprecated use `SearchUsersResponse$Outbound` instead. */
-  export type Outbound = SearchUsersResponse$Outbound;
-}
-
-export function searchUsersResponseToJSON(
-  searchUsersResponse: SearchUsersResponse,
-): string {
-  return JSON.stringify(
-    SearchUsersResponse$outboundSchema.parse(searchUsersResponse),
-  );
-}
 
 export function searchUsersResponseFromJSON(
   jsonString: string,

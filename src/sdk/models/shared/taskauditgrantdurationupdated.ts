@@ -23,43 +23,6 @@ export const TaskAuditGrantDurationUpdated$inboundSchema: z.ZodType<
   duration: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditGrantDurationUpdated$Outbound = {
-  duration?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditGrantDurationUpdated$outboundSchema: z.ZodType<
-  TaskAuditGrantDurationUpdated$Outbound,
-  z.ZodTypeDef,
-  TaskAuditGrantDurationUpdated
-> = z.object({
-  duration: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditGrantDurationUpdated$ {
-  /** @deprecated use `TaskAuditGrantDurationUpdated$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditGrantDurationUpdated$inboundSchema;
-  /** @deprecated use `TaskAuditGrantDurationUpdated$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditGrantDurationUpdated$outboundSchema;
-  /** @deprecated use `TaskAuditGrantDurationUpdated$Outbound` instead. */
-  export type Outbound = TaskAuditGrantDurationUpdated$Outbound;
-}
-
-export function taskAuditGrantDurationUpdatedToJSON(
-  taskAuditGrantDurationUpdated: TaskAuditGrantDurationUpdated,
-): string {
-  return JSON.stringify(
-    TaskAuditGrantDurationUpdated$outboundSchema.parse(
-      taskAuditGrantDurationUpdated,
-    ),
-  );
-}
-
 export function taskAuditGrantDurationUpdatedFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditGrantDurationUpdated, SDKValidationError> {

@@ -38,23 +38,6 @@ export type C1ApiAppV1AppUsageControlsServiceUpdateResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppUsageControlsServiceUpdateRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppUsageControlsServiceUpdateRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    UpdateAppUsageControlsRequest: shared
-      .UpdateAppUsageControlsRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "UpdateAppUsageControlsRequest": "updateAppUsageControlsRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppUsageControlsServiceUpdateRequest$Outbound = {
   app_id: string | null;
   UpdateAppUsageControlsRequest?:
@@ -79,22 +62,6 @@ export const C1ApiAppV1AppUsageControlsServiceUpdateRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppUsageControlsServiceUpdateRequest$ {
-  /** @deprecated use `C1ApiAppV1AppUsageControlsServiceUpdateRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppUsageControlsServiceUpdateRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppUsageControlsServiceUpdateRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppUsageControlsServiceUpdateRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppUsageControlsServiceUpdateRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppUsageControlsServiceUpdateRequest$Outbound;
-}
-
 export function c1ApiAppV1AppUsageControlsServiceUpdateRequestToJSON(
   c1ApiAppV1AppUsageControlsServiceUpdateRequest:
     C1ApiAppV1AppUsageControlsServiceUpdateRequest,
@@ -103,22 +70,6 @@ export function c1ApiAppV1AppUsageControlsServiceUpdateRequestToJSON(
     C1ApiAppV1AppUsageControlsServiceUpdateRequest$outboundSchema.parse(
       c1ApiAppV1AppUsageControlsServiceUpdateRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppUsageControlsServiceUpdateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppUsageControlsServiceUpdateRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppUsageControlsServiceUpdateRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiAppV1AppUsageControlsServiceUpdateRequest' from JSON`,
   );
 }
 
@@ -142,66 +93,6 @@ export const C1ApiAppV1AppUsageControlsServiceUpdateResponse$inboundSchema:
       "UpdateAppUsageControlsResponse": "updateAppUsageControlsResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppUsageControlsServiceUpdateResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  UpdateAppUsageControlsResponse?:
-    | shared.UpdateAppUsageControlsResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppUsageControlsServiceUpdateResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppUsageControlsServiceUpdateResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppUsageControlsServiceUpdateResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    updateAppUsageControlsResponse: shared
-      .UpdateAppUsageControlsResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      updateAppUsageControlsResponse: "UpdateAppUsageControlsResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppUsageControlsServiceUpdateResponse$ {
-  /** @deprecated use `C1ApiAppV1AppUsageControlsServiceUpdateResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppUsageControlsServiceUpdateResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppUsageControlsServiceUpdateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppUsageControlsServiceUpdateResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppUsageControlsServiceUpdateResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppUsageControlsServiceUpdateResponse$Outbound;
-}
-
-export function c1ApiAppV1AppUsageControlsServiceUpdateResponseToJSON(
-  c1ApiAppV1AppUsageControlsServiceUpdateResponse:
-    C1ApiAppV1AppUsageControlsServiceUpdateResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppUsageControlsServiceUpdateResponse$outboundSchema.parse(
-      c1ApiAppV1AppUsageControlsServiceUpdateResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppUsageControlsServiceUpdateResponseFromJSON(
   jsonString: string,

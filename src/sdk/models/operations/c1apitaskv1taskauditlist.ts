@@ -47,58 +47,6 @@ export const C1ApiTaskV1TaskAuditListResponse$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type C1ApiTaskV1TaskAuditListResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  TaskAuditListResponse?: shared.TaskAuditListResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiTaskV1TaskAuditListResponse$outboundSchema: z.ZodType<
-  C1ApiTaskV1TaskAuditListResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiTaskV1TaskAuditListResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  taskAuditListResponse: shared.TaskAuditListResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    taskAuditListResponse: "TaskAuditListResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskAuditListResponse$ {
-  /** @deprecated use `C1ApiTaskV1TaskAuditListResponse$inboundSchema` instead. */
-  export const inboundSchema = C1ApiTaskV1TaskAuditListResponse$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskAuditListResponse$outboundSchema` instead. */
-  export const outboundSchema = C1ApiTaskV1TaskAuditListResponse$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskAuditListResponse$Outbound` instead. */
-  export type Outbound = C1ApiTaskV1TaskAuditListResponse$Outbound;
-}
-
-export function c1ApiTaskV1TaskAuditListResponseToJSON(
-  c1ApiTaskV1TaskAuditListResponse: C1ApiTaskV1TaskAuditListResponse,
-): string {
-  return JSON.stringify(
-    C1ApiTaskV1TaskAuditListResponse$outboundSchema.parse(
-      c1ApiTaskV1TaskAuditListResponse,
-    ),
-  );
-}
-
 export function c1ApiTaskV1TaskAuditListResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<C1ApiTaskV1TaskAuditListResponse, SDKValidationError> {

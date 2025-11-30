@@ -66,7 +66,6 @@ export const TimestampRules$inboundSchema: z.ZodType<
   required: z.nullable(z.boolean()).optional(),
   within: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type TimestampRules$Outbound = {
   const?: string | null | undefined;
@@ -97,23 +96,9 @@ export const TimestampRules$outboundSchema: z.ZodType<
   within: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TimestampRules$ {
-  /** @deprecated use `TimestampRules$inboundSchema` instead. */
-  export const inboundSchema = TimestampRules$inboundSchema;
-  /** @deprecated use `TimestampRules$outboundSchema` instead. */
-  export const outboundSchema = TimestampRules$outboundSchema;
-  /** @deprecated use `TimestampRules$Outbound` instead. */
-  export type Outbound = TimestampRules$Outbound;
-}
-
 export function timestampRulesToJSON(timestampRules: TimestampRules): string {
   return JSON.stringify(TimestampRules$outboundSchema.parse(timestampRules));
 }
-
 export function timestampRulesFromJSON(
   jsonString: string,
 ): SafeParseResult<TimestampRules, SDKValidationError> {

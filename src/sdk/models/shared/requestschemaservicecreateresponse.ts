@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  RequestSchema,
-  RequestSchema$inboundSchema,
-  RequestSchema$Outbound,
-  RequestSchema$outboundSchema,
-} from "./requestschema.js";
+import { RequestSchema, RequestSchema$inboundSchema } from "./requestschema.js";
 
 /**
  * The RequestSchemaServiceCreateResponse message.
@@ -28,44 +23,6 @@ export const RequestSchemaServiceCreateResponse$inboundSchema: z.ZodType<
 > = z.object({
   requestSchema: z.nullable(RequestSchema$inboundSchema).optional(),
 });
-
-/** @internal */
-export type RequestSchemaServiceCreateResponse$Outbound = {
-  requestSchema?: RequestSchema$Outbound | null | undefined;
-};
-
-/** @internal */
-export const RequestSchemaServiceCreateResponse$outboundSchema: z.ZodType<
-  RequestSchemaServiceCreateResponse$Outbound,
-  z.ZodTypeDef,
-  RequestSchemaServiceCreateResponse
-> = z.object({
-  requestSchema: z.nullable(RequestSchema$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestSchemaServiceCreateResponse$ {
-  /** @deprecated use `RequestSchemaServiceCreateResponse$inboundSchema` instead. */
-  export const inboundSchema = RequestSchemaServiceCreateResponse$inboundSchema;
-  /** @deprecated use `RequestSchemaServiceCreateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestSchemaServiceCreateResponse$outboundSchema;
-  /** @deprecated use `RequestSchemaServiceCreateResponse$Outbound` instead. */
-  export type Outbound = RequestSchemaServiceCreateResponse$Outbound;
-}
-
-export function requestSchemaServiceCreateResponseToJSON(
-  requestSchemaServiceCreateResponse: RequestSchemaServiceCreateResponse,
-): string {
-  return JSON.stringify(
-    RequestSchemaServiceCreateResponse$outboundSchema.parse(
-      requestSchemaServiceCreateResponse,
-    ),
-  );
-}
 
 export function requestSchemaServiceCreateResponseFromJSON(
   jsonString: string,

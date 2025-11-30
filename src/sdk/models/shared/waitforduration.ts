@@ -22,7 +22,6 @@ export const WaitForDuration$inboundSchema: z.ZodType<
 > = z.object({
   duration: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type WaitForDuration$Outbound = {
   duration?: string | null | undefined;
@@ -37,25 +36,11 @@ export const WaitForDuration$outboundSchema: z.ZodType<
   duration: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WaitForDuration$ {
-  /** @deprecated use `WaitForDuration$inboundSchema` instead. */
-  export const inboundSchema = WaitForDuration$inboundSchema;
-  /** @deprecated use `WaitForDuration$outboundSchema` instead. */
-  export const outboundSchema = WaitForDuration$outboundSchema;
-  /** @deprecated use `WaitForDuration$Outbound` instead. */
-  export type Outbound = WaitForDuration$Outbound;
-}
-
 export function waitForDurationToJSON(
   waitForDuration: WaitForDuration,
 ): string {
   return JSON.stringify(WaitForDuration$outboundSchema.parse(waitForDuration));
 }
-
 export function waitForDurationFromJSON(
   jsonString: string,
 ): SafeParseResult<WaitForDuration, SDKValidationError> {

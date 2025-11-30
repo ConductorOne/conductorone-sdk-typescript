@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The ExporterRef message.
@@ -16,15 +13,6 @@ export type ExporterRef = {
    */
   exportId?: string | null | undefined;
 };
-
-/** @internal */
-export const ExporterRef$inboundSchema: z.ZodType<
-  ExporterRef,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  exportId: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type ExporterRef$Outbound = {
@@ -40,29 +28,6 @@ export const ExporterRef$outboundSchema: z.ZodType<
   exportId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExporterRef$ {
-  /** @deprecated use `ExporterRef$inboundSchema` instead. */
-  export const inboundSchema = ExporterRef$inboundSchema;
-  /** @deprecated use `ExporterRef$outboundSchema` instead. */
-  export const outboundSchema = ExporterRef$outboundSchema;
-  /** @deprecated use `ExporterRef$Outbound` instead. */
-  export type Outbound = ExporterRef$Outbound;
-}
-
 export function exporterRefToJSON(exporterRef: ExporterRef): string {
   return JSON.stringify(ExporterRef$outboundSchema.parse(exporterRef));
-}
-
-export function exporterRefFromJSON(
-  jsonString: string,
-): SafeParseResult<ExporterRef, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ExporterRef$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ExporterRef' from JSON`,
-  );
 }

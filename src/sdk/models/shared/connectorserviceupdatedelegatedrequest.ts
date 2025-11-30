@@ -3,18 +3,13 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ConnectorInput,
-  ConnectorInput$inboundSchema,
   ConnectorInput$Outbound,
   ConnectorInput$outboundSchema,
 } from "./connector.js";
 import {
   ConnectorExpandMask,
-  ConnectorExpandMask$inboundSchema,
   ConnectorExpandMask$Outbound,
   ConnectorExpandMask$outboundSchema,
 } from "./connectorexpandmask.js";
@@ -27,17 +22,6 @@ export type ConnectorServiceUpdateDelegatedRequest = {
   expandMask?: ConnectorExpandMask | null | undefined;
   updateMask?: string | null | undefined;
 };
-
-/** @internal */
-export const ConnectorServiceUpdateDelegatedRequest$inboundSchema: z.ZodType<
-  ConnectorServiceUpdateDelegatedRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  connector: z.nullable(ConnectorInput$inboundSchema).optional(),
-  expandMask: z.nullable(ConnectorExpandMask$inboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type ConnectorServiceUpdateDelegatedRequest$Outbound = {
@@ -57,21 +41,6 @@ export const ConnectorServiceUpdateDelegatedRequest$outboundSchema: z.ZodType<
   updateMask: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorServiceUpdateDelegatedRequest$ {
-  /** @deprecated use `ConnectorServiceUpdateDelegatedRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    ConnectorServiceUpdateDelegatedRequest$inboundSchema;
-  /** @deprecated use `ConnectorServiceUpdateDelegatedRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    ConnectorServiceUpdateDelegatedRequest$outboundSchema;
-  /** @deprecated use `ConnectorServiceUpdateDelegatedRequest$Outbound` instead. */
-  export type Outbound = ConnectorServiceUpdateDelegatedRequest$Outbound;
-}
-
 export function connectorServiceUpdateDelegatedRequestToJSON(
   connectorServiceUpdateDelegatedRequest:
     ConnectorServiceUpdateDelegatedRequest,
@@ -80,16 +49,5 @@ export function connectorServiceUpdateDelegatedRequestToJSON(
     ConnectorServiceUpdateDelegatedRequest$outboundSchema.parse(
       connectorServiceUpdateDelegatedRequest,
     ),
-  );
-}
-
-export function connectorServiceUpdateDelegatedRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ConnectorServiceUpdateDelegatedRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ConnectorServiceUpdateDelegatedRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ConnectorServiceUpdateDelegatedRequest' from JSON`,
   );
 }

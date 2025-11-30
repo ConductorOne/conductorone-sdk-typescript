@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AutomationExecution,
   AutomationExecution$inboundSchema,
-  AutomationExecution$Outbound,
-  AutomationExecution$outboundSchema,
 } from "./automationexecution.js";
 
 /**
@@ -37,46 +35,6 @@ export const ListAutomationExecutionsResponse$inboundSchema: z.ZodType<
     .optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ListAutomationExecutionsResponse$Outbound = {
-  automationExecutions?: Array<AutomationExecution$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ListAutomationExecutionsResponse$outboundSchema: z.ZodType<
-  ListAutomationExecutionsResponse$Outbound,
-  z.ZodTypeDef,
-  ListAutomationExecutionsResponse
-> = z.object({
-  automationExecutions: z.nullable(z.array(AutomationExecution$outboundSchema))
-    .optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAutomationExecutionsResponse$ {
-  /** @deprecated use `ListAutomationExecutionsResponse$inboundSchema` instead. */
-  export const inboundSchema = ListAutomationExecutionsResponse$inboundSchema;
-  /** @deprecated use `ListAutomationExecutionsResponse$outboundSchema` instead. */
-  export const outboundSchema = ListAutomationExecutionsResponse$outboundSchema;
-  /** @deprecated use `ListAutomationExecutionsResponse$Outbound` instead. */
-  export type Outbound = ListAutomationExecutionsResponse$Outbound;
-}
-
-export function listAutomationExecutionsResponseToJSON(
-  listAutomationExecutionsResponse: ListAutomationExecutionsResponse,
-): string {
-  return JSON.stringify(
-    ListAutomationExecutionsResponse$outboundSchema.parse(
-      listAutomationExecutionsResponse,
-    ),
-  );
-}
 
 export function listAutomationExecutionsResponseFromJSON(
   jsonString: string,

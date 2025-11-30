@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FunctionCommit,
   FunctionCommit$inboundSchema,
-  FunctionCommit$Outbound,
-  FunctionCommit$outboundSchema,
 } from "./functioncommit.js";
 
 /**
@@ -36,47 +34,6 @@ export const FunctionsServiceListCommitsResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(FunctionCommit$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type FunctionsServiceListCommitsResponse$Outbound = {
-  list?: Array<FunctionCommit$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const FunctionsServiceListCommitsResponse$outboundSchema: z.ZodType<
-  FunctionsServiceListCommitsResponse$Outbound,
-  z.ZodTypeDef,
-  FunctionsServiceListCommitsResponse
-> = z.object({
-  list: z.nullable(z.array(FunctionCommit$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionsServiceListCommitsResponse$ {
-  /** @deprecated use `FunctionsServiceListCommitsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    FunctionsServiceListCommitsResponse$inboundSchema;
-  /** @deprecated use `FunctionsServiceListCommitsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    FunctionsServiceListCommitsResponse$outboundSchema;
-  /** @deprecated use `FunctionsServiceListCommitsResponse$Outbound` instead. */
-  export type Outbound = FunctionsServiceListCommitsResponse$Outbound;
-}
-
-export function functionsServiceListCommitsResponseToJSON(
-  functionsServiceListCommitsResponse: FunctionsServiceListCommitsResponse,
-): string {
-  return JSON.stringify(
-    FunctionsServiceListCommitsResponse$outboundSchema.parse(
-      functionsServiceListCommitsResponse,
-    ),
-  );
-}
 
 export function functionsServiceListCommitsResponseFromJSON(
   jsonString: string,

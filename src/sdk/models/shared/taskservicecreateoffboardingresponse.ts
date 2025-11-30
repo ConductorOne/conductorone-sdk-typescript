@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  TaskView,
-  TaskView$inboundSchema,
-  TaskView$Outbound,
-  TaskView$outboundSchema,
-} from "./taskview.js";
+import { TaskView, TaskView$inboundSchema } from "./taskview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -60,57 +55,6 @@ export const TaskServiceCreateOffboardingResponseExpanded$inboundSchema:
     });
   });
 
-/** @internal */
-export type TaskServiceCreateOffboardingResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const TaskServiceCreateOffboardingResponseExpanded$outboundSchema:
-  z.ZodType<
-    TaskServiceCreateOffboardingResponseExpanded$Outbound,
-    z.ZodTypeDef,
-    TaskServiceCreateOffboardingResponseExpanded
-  > = z.object({
-    atType: z.string().optional(),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        atType: "@type",
-        additionalProperties: null,
-      }),
-    };
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskServiceCreateOffboardingResponseExpanded$ {
-  /** @deprecated use `TaskServiceCreateOffboardingResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskServiceCreateOffboardingResponseExpanded$inboundSchema;
-  /** @deprecated use `TaskServiceCreateOffboardingResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskServiceCreateOffboardingResponseExpanded$outboundSchema;
-  /** @deprecated use `TaskServiceCreateOffboardingResponseExpanded$Outbound` instead. */
-  export type Outbound = TaskServiceCreateOffboardingResponseExpanded$Outbound;
-}
-
-export function taskServiceCreateOffboardingResponseExpandedToJSON(
-  taskServiceCreateOffboardingResponseExpanded:
-    TaskServiceCreateOffboardingResponseExpanded,
-): string {
-  return JSON.stringify(
-    TaskServiceCreateOffboardingResponseExpanded$outboundSchema.parse(
-      taskServiceCreateOffboardingResponseExpanded,
-    ),
-  );
-}
-
 export function taskServiceCreateOffboardingResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -140,54 +84,6 @@ export const TaskServiceCreateOffboardingResponse$inboundSchema: z.ZodType<
   ).optional(),
   taskView: z.nullable(TaskView$inboundSchema).optional(),
 });
-
-/** @internal */
-export type TaskServiceCreateOffboardingResponse$Outbound = {
-  expanded?:
-    | Array<TaskServiceCreateOffboardingResponseExpanded$Outbound>
-    | null
-    | undefined;
-  taskView?: TaskView$Outbound | null | undefined;
-};
-
-/** @internal */
-export const TaskServiceCreateOffboardingResponse$outboundSchema: z.ZodType<
-  TaskServiceCreateOffboardingResponse$Outbound,
-  z.ZodTypeDef,
-  TaskServiceCreateOffboardingResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() =>
-      TaskServiceCreateOffboardingResponseExpanded$outboundSchema
-    )),
-  ).optional(),
-  taskView: z.nullable(TaskView$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskServiceCreateOffboardingResponse$ {
-  /** @deprecated use `TaskServiceCreateOffboardingResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskServiceCreateOffboardingResponse$inboundSchema;
-  /** @deprecated use `TaskServiceCreateOffboardingResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskServiceCreateOffboardingResponse$outboundSchema;
-  /** @deprecated use `TaskServiceCreateOffboardingResponse$Outbound` instead. */
-  export type Outbound = TaskServiceCreateOffboardingResponse$Outbound;
-}
-
-export function taskServiceCreateOffboardingResponseToJSON(
-  taskServiceCreateOffboardingResponse: TaskServiceCreateOffboardingResponse,
-): string {
-  return JSON.stringify(
-    TaskServiceCreateOffboardingResponse$outboundSchema.parse(
-      taskServiceCreateOffboardingResponse,
-    ),
-  );
-}
 
 export function taskServiceCreateOffboardingResponseFromJSON(
   jsonString: string,

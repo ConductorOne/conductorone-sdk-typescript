@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AutomationExecution,
   AutomationExecution$inboundSchema,
-  AutomationExecution$Outbound,
-  AutomationExecution$outboundSchema,
 } from "./automationexecution.js";
 
 /**
@@ -38,46 +36,6 @@ export const AutomationExecutionView$inboundSchema: z.ZodType<
   automationExecutionTriggerPath: z.nullable(z.string()).optional(),
   automationPath: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type AutomationExecutionView$Outbound = {
-  automationExecution?: AutomationExecution$Outbound | null | undefined;
-  automationExecutionTriggerPath?: string | null | undefined;
-  automationPath?: string | null | undefined;
-};
-
-/** @internal */
-export const AutomationExecutionView$outboundSchema: z.ZodType<
-  AutomationExecutionView$Outbound,
-  z.ZodTypeDef,
-  AutomationExecutionView
-> = z.object({
-  automationExecution: z.nullable(AutomationExecution$outboundSchema)
-    .optional(),
-  automationExecutionTriggerPath: z.nullable(z.string()).optional(),
-  automationPath: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AutomationExecutionView$ {
-  /** @deprecated use `AutomationExecutionView$inboundSchema` instead. */
-  export const inboundSchema = AutomationExecutionView$inboundSchema;
-  /** @deprecated use `AutomationExecutionView$outboundSchema` instead. */
-  export const outboundSchema = AutomationExecutionView$outboundSchema;
-  /** @deprecated use `AutomationExecutionView$Outbound` instead. */
-  export type Outbound = AutomationExecutionView$Outbound;
-}
-
-export function automationExecutionViewToJSON(
-  automationExecutionView: AutomationExecutionView,
-): string {
-  return JSON.stringify(
-    AutomationExecutionView$outboundSchema.parse(automationExecutionView),
-  );
-}
 
 export function automationExecutionViewFromJSON(
   jsonString: string,

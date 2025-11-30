@@ -30,7 +30,6 @@ export const ResponsePolicyApprovalStepReassign$inboundSchema: z.ZodType<
   comment: z.nullable(z.string()).optional(),
   newStepUserIds: z.nullable(z.array(z.string())).optional(),
 });
-
 /** @internal */
 export type ResponsePolicyApprovalStepReassign$Outbound = {
   comment?: string | null | undefined;
@@ -47,20 +46,6 @@ export const ResponsePolicyApprovalStepReassign$outboundSchema: z.ZodType<
   newStepUserIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponsePolicyApprovalStepReassign$ {
-  /** @deprecated use `ResponsePolicyApprovalStepReassign$inboundSchema` instead. */
-  export const inboundSchema = ResponsePolicyApprovalStepReassign$inboundSchema;
-  /** @deprecated use `ResponsePolicyApprovalStepReassign$outboundSchema` instead. */
-  export const outboundSchema =
-    ResponsePolicyApprovalStepReassign$outboundSchema;
-  /** @deprecated use `ResponsePolicyApprovalStepReassign$Outbound` instead. */
-  export type Outbound = ResponsePolicyApprovalStepReassign$Outbound;
-}
-
 export function responsePolicyApprovalStepReassignToJSON(
   responsePolicyApprovalStepReassign: ResponsePolicyApprovalStepReassign,
 ): string {
@@ -70,7 +55,6 @@ export function responsePolicyApprovalStepReassignToJSON(
     ),
   );
 }
-
 export function responsePolicyApprovalStepReassignFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponsePolicyApprovalStepReassign, SDKValidationError> {

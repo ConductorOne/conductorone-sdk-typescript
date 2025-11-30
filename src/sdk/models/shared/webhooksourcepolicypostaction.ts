@@ -26,43 +26,6 @@ export const WebhookSourcePolicyPostAction$inboundSchema: z.ZodType<
   ticketId: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type WebhookSourcePolicyPostAction$Outbound = {
-  ticketId?: string | null | undefined;
-};
-
-/** @internal */
-export const WebhookSourcePolicyPostAction$outboundSchema: z.ZodType<
-  WebhookSourcePolicyPostAction$Outbound,
-  z.ZodTypeDef,
-  WebhookSourcePolicyPostAction
-> = z.object({
-  ticketId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhookSourcePolicyPostAction$ {
-  /** @deprecated use `WebhookSourcePolicyPostAction$inboundSchema` instead. */
-  export const inboundSchema = WebhookSourcePolicyPostAction$inboundSchema;
-  /** @deprecated use `WebhookSourcePolicyPostAction$outboundSchema` instead. */
-  export const outboundSchema = WebhookSourcePolicyPostAction$outboundSchema;
-  /** @deprecated use `WebhookSourcePolicyPostAction$Outbound` instead. */
-  export type Outbound = WebhookSourcePolicyPostAction$Outbound;
-}
-
-export function webhookSourcePolicyPostActionToJSON(
-  webhookSourcePolicyPostAction: WebhookSourcePolicyPostAction,
-): string {
-  return JSON.stringify(
-    WebhookSourcePolicyPostAction$outboundSchema.parse(
-      webhookSourcePolicyPostAction,
-    ),
-  );
-}
-
 export function webhookSourcePolicyPostActionFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookSourcePolicyPostAction, SDKValidationError> {

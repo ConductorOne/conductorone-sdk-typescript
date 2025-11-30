@@ -53,51 +53,6 @@ export const AppResourceType$inboundSchema: z.ZodType<
   ).optional(),
 });
 
-/** @internal */
-export type AppResourceType$Outbound = {
-  appId?: string | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  displayName?: string | null | undefined;
-  id?: string | null | undefined;
-  traitIds?: Array<string> | null | undefined;
-  updatedAt?: string | null | undefined;
-};
-
-/** @internal */
-export const AppResourceType$outboundSchema: z.ZodType<
-  AppResourceType$Outbound,
-  z.ZodTypeDef,
-  AppResourceType
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  traitIds: z.nullable(z.array(z.string())).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppResourceType$ {
-  /** @deprecated use `AppResourceType$inboundSchema` instead. */
-  export const inboundSchema = AppResourceType$inboundSchema;
-  /** @deprecated use `AppResourceType$outboundSchema` instead. */
-  export const outboundSchema = AppResourceType$outboundSchema;
-  /** @deprecated use `AppResourceType$Outbound` instead. */
-  export type Outbound = AppResourceType$Outbound;
-}
-
-export function appResourceTypeToJSON(
-  appResourceType: AppResourceType,
-): string {
-  return JSON.stringify(AppResourceType$outboundSchema.parse(appResourceType));
-}
-
 export function appResourceTypeFromJSON(
   jsonString: string,
 ): SafeParseResult<AppResourceType, SDKValidationError> {

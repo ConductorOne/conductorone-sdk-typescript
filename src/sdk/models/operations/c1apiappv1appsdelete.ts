@@ -34,20 +34,6 @@ export type C1ApiAppV1AppsDeleteResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppsDeleteRequest$inboundSchema: z.ZodType<
-  C1ApiAppV1AppsDeleteRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.nullable(z.string()),
-  DeleteAppRequest: shared.DeleteAppRequest$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "DeleteAppRequest": "deleteAppRequest",
-  });
-});
-
-/** @internal */
 export type C1ApiAppV1AppsDeleteRequest$Outbound = {
   id: string | null;
   DeleteAppRequest?: shared.DeleteAppRequest$Outbound | undefined;
@@ -67,19 +53,6 @@ export const C1ApiAppV1AppsDeleteRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppsDeleteRequest$ {
-  /** @deprecated use `C1ApiAppV1AppsDeleteRequest$inboundSchema` instead. */
-  export const inboundSchema = C1ApiAppV1AppsDeleteRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppsDeleteRequest$outboundSchema` instead. */
-  export const outboundSchema = C1ApiAppV1AppsDeleteRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppsDeleteRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppsDeleteRequest$Outbound;
-}
-
 export function c1ApiAppV1AppsDeleteRequestToJSON(
   c1ApiAppV1AppsDeleteRequest: C1ApiAppV1AppsDeleteRequest,
 ): string {
@@ -87,16 +60,6 @@ export function c1ApiAppV1AppsDeleteRequestToJSON(
     C1ApiAppV1AppsDeleteRequest$outboundSchema.parse(
       c1ApiAppV1AppsDeleteRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppsDeleteRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<C1ApiAppV1AppsDeleteRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => C1ApiAppV1AppsDeleteRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppsDeleteRequest' from JSON`,
   );
 }
 
@@ -118,58 +81,6 @@ export const C1ApiAppV1AppsDeleteResponse$inboundSchema: z.ZodType<
     "DeleteAppResponse": "deleteAppResponse",
   });
 });
-
-/** @internal */
-export type C1ApiAppV1AppsDeleteResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  DeleteAppResponse?: shared.DeleteAppResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppsDeleteResponse$outboundSchema: z.ZodType<
-  C1ApiAppV1AppsDeleteResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiAppV1AppsDeleteResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  deleteAppResponse: shared.DeleteAppResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    deleteAppResponse: "DeleteAppResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppsDeleteResponse$ {
-  /** @deprecated use `C1ApiAppV1AppsDeleteResponse$inboundSchema` instead. */
-  export const inboundSchema = C1ApiAppV1AppsDeleteResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppsDeleteResponse$outboundSchema` instead. */
-  export const outboundSchema = C1ApiAppV1AppsDeleteResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppsDeleteResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppsDeleteResponse$Outbound;
-}
-
-export function c1ApiAppV1AppsDeleteResponseToJSON(
-  c1ApiAppV1AppsDeleteResponse: C1ApiAppV1AppsDeleteResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppsDeleteResponse$outboundSchema.parse(
-      c1ApiAppV1AppsDeleteResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppsDeleteResponseFromJSON(
   jsonString: string,

@@ -38,23 +38,6 @@ export type C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponse = {
 };
 
 /** @internal */
-export const C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.nullable(z.string()),
-    DeleteRiskLevelAttributeValueRequest: shared
-      .DeleteRiskLevelAttributeValueRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "DeleteRiskLevelAttributeValueRequest":
-        "deleteRiskLevelAttributeValueRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest$Outbound =
   {
     id: string | null;
@@ -80,22 +63,6 @@ export const C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest$outb
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest$ {
-  /** @deprecated use `C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest$inboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest$outboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest$Outbound;
-}
-
 export function c1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequestToJSON(
   c1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest:
     C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest,
@@ -103,21 +70,6 @@ export function c1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequestTo
   return JSON.stringify(
     C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest$outboundSchema
       .parse(c1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest),
-  );
-}
-
-export function c1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest' from JSON`,
   );
 }
 
@@ -142,67 +94,6 @@ export const C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponse$inb
         "deleteRiskLevelAttributeValueResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    DeleteRiskLevelAttributeValueResponse?:
-      | shared.DeleteRiskLevelAttributeValueResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    deleteRiskLevelAttributeValueResponse: shared
-      .DeleteRiskLevelAttributeValueResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      deleteRiskLevelAttributeValueResponse:
-        "DeleteRiskLevelAttributeValueResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponse$ {
-  /** @deprecated use `C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponse$inboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponse$outboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponse$Outbound;
-}
-
-export function c1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponseToJSON(
-  c1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponse:
-    C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponse$outboundSchema
-      .parse(c1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponse),
-  );
-}
 
 export function c1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponseFromJSON(
   jsonString: string,

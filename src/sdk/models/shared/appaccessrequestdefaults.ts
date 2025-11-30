@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -132,7 +129,6 @@ export const DurationUnset$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
 /** @internal */
 export type DurationUnset$Outbound = {};
 
@@ -143,23 +139,9 @@ export const DurationUnset$outboundSchema: z.ZodType<
   DurationUnset
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DurationUnset$ {
-  /** @deprecated use `DurationUnset$inboundSchema` instead. */
-  export const inboundSchema = DurationUnset$inboundSchema;
-  /** @deprecated use `DurationUnset$outboundSchema` instead. */
-  export const outboundSchema = DurationUnset$outboundSchema;
-  /** @deprecated use `DurationUnset$Outbound` instead. */
-  export type Outbound = DurationUnset$Outbound;
-}
-
 export function durationUnsetToJSON(durationUnset: DurationUnset): string {
   return JSON.stringify(DurationUnset$outboundSchema.parse(durationUnset));
 }
-
 export function durationUnsetFromJSON(
   jsonString: string,
 ): SafeParseResult<DurationUnset, SDKValidationError> {
@@ -171,29 +153,11 @@ export function durationUnsetFromJSON(
 }
 
 /** @internal */
-export const State$inboundSchema: z.ZodType<State, z.ZodTypeDef, unknown> = z
-  .union([
-    z.nativeEnum(State),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+export const State$inboundSchema: z.ZodType<State, z.ZodTypeDef, unknown> =
+  openEnums.inboundSchema(State);
 /** @internal */
-export const State$outboundSchema: z.ZodType<State, z.ZodTypeDef, State> = z
-  .union([
-    z.nativeEnum(State),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace State$ {
-  /** @deprecated use `State$inboundSchema` instead. */
-  export const inboundSchema = State$inboundSchema;
-  /** @deprecated use `State$outboundSchema` instead. */
-  export const outboundSchema = State$outboundSchema;
-}
+export const State$outboundSchema: z.ZodType<string, z.ZodTypeDef, State> =
+  openEnums.outboundSchema(State);
 
 /** @internal */
 export const AppAccessRequestDefaults$inboundSchema: z.ZodType<
@@ -214,60 +178,6 @@ export const AppAccessRequestDefaults$inboundSchema: z.ZodType<
   state: z.nullable(State$inboundSchema).optional(),
 });
 
-/** @internal */
-export type AppAccessRequestDefaults$Outbound = {
-  appId?: string | null | undefined;
-  catalogIds?: Array<string> | null | undefined;
-  defaultsEnabled?: boolean | null | undefined;
-  durationGrant?: string | null | undefined;
-  durationUnset?: DurationUnset$Outbound | null | undefined;
-  emergencyGrantEnabled?: boolean | null | undefined;
-  emergencyGrantPolicyId?: string | null | undefined;
-  requestPolicyId?: string | null | undefined;
-  resourceTypeIds?: Array<string> | null | undefined;
-  state?: string | null | undefined;
-};
-
-/** @internal */
-export const AppAccessRequestDefaults$outboundSchema: z.ZodType<
-  AppAccessRequestDefaults$Outbound,
-  z.ZodTypeDef,
-  AppAccessRequestDefaults
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  catalogIds: z.nullable(z.array(z.string())).optional(),
-  defaultsEnabled: z.nullable(z.boolean()).optional(),
-  durationGrant: z.nullable(z.string()).optional(),
-  durationUnset: z.nullable(z.lazy(() => DurationUnset$outboundSchema))
-    .optional(),
-  emergencyGrantEnabled: z.nullable(z.boolean()).optional(),
-  emergencyGrantPolicyId: z.nullable(z.string()).optional(),
-  requestPolicyId: z.nullable(z.string()).optional(),
-  resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  state: z.nullable(State$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppAccessRequestDefaults$ {
-  /** @deprecated use `AppAccessRequestDefaults$inboundSchema` instead. */
-  export const inboundSchema = AppAccessRequestDefaults$inboundSchema;
-  /** @deprecated use `AppAccessRequestDefaults$outboundSchema` instead. */
-  export const outboundSchema = AppAccessRequestDefaults$outboundSchema;
-  /** @deprecated use `AppAccessRequestDefaults$Outbound` instead. */
-  export type Outbound = AppAccessRequestDefaults$Outbound;
-}
-
-export function appAccessRequestDefaultsToJSON(
-  appAccessRequestDefaults: AppAccessRequestDefaults,
-): string {
-  return JSON.stringify(
-    AppAccessRequestDefaults$outboundSchema.parse(appAccessRequestDefaults),
-  );
-}
-
 export function appAccessRequestDefaultsFromJSON(
   jsonString: string,
 ): SafeParseResult<AppAccessRequestDefaults, SDKValidationError> {
@@ -277,24 +187,6 @@ export function appAccessRequestDefaultsFromJSON(
     `Failed to parse 'AppAccessRequestDefaults' from JSON`,
   );
 }
-
-/** @internal */
-export const AppAccessRequestDefaults1$inboundSchema: z.ZodType<
-  AppAccessRequestDefaults1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  catalogIds: z.nullable(z.array(z.string())).optional(),
-  defaultsEnabled: z.nullable(z.boolean()).optional(),
-  durationGrant: z.nullable(z.string()).optional(),
-  durationUnset: z.nullable(z.lazy(() => DurationUnset$inboundSchema))
-    .optional(),
-  emergencyGrantEnabled: z.nullable(z.boolean()).optional(),
-  emergencyGrantPolicyId: z.nullable(z.string()).optional(),
-  requestPolicyId: z.nullable(z.string()).optional(),
-  resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  state: z.nullable(State$inboundSchema).optional(),
-});
 
 /** @internal */
 export type AppAccessRequestDefaults1$Outbound = {
@@ -327,33 +219,10 @@ export const AppAccessRequestDefaults1$outboundSchema: z.ZodType<
   state: z.nullable(State$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppAccessRequestDefaults1$ {
-  /** @deprecated use `AppAccessRequestDefaults1$inboundSchema` instead. */
-  export const inboundSchema = AppAccessRequestDefaults1$inboundSchema;
-  /** @deprecated use `AppAccessRequestDefaults1$outboundSchema` instead. */
-  export const outboundSchema = AppAccessRequestDefaults1$outboundSchema;
-  /** @deprecated use `AppAccessRequestDefaults1$Outbound` instead. */
-  export type Outbound = AppAccessRequestDefaults1$Outbound;
-}
-
 export function appAccessRequestDefaults1ToJSON(
   appAccessRequestDefaults1: AppAccessRequestDefaults1,
 ): string {
   return JSON.stringify(
     AppAccessRequestDefaults1$outboundSchema.parse(appAccessRequestDefaults1),
-  );
-}
-
-export function appAccessRequestDefaults1FromJSON(
-  jsonString: string,
-): SafeParseResult<AppAccessRequestDefaults1, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AppAccessRequestDefaults1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AppAccessRequestDefaults1' from JSON`,
   );
 }

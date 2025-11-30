@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PersonalClient,
   PersonalClient$inboundSchema,
-  PersonalClient$Outbound,
-  PersonalClient$outboundSchema,
 } from "./personalclient.js";
 
 /**
@@ -28,43 +26,6 @@ export const PersonalClientServiceGetResponse$inboundSchema: z.ZodType<
 > = z.object({
   client: z.nullable(PersonalClient$inboundSchema).optional(),
 });
-
-/** @internal */
-export type PersonalClientServiceGetResponse$Outbound = {
-  client?: PersonalClient$Outbound | null | undefined;
-};
-
-/** @internal */
-export const PersonalClientServiceGetResponse$outboundSchema: z.ZodType<
-  PersonalClientServiceGetResponse$Outbound,
-  z.ZodTypeDef,
-  PersonalClientServiceGetResponse
-> = z.object({
-  client: z.nullable(PersonalClient$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PersonalClientServiceGetResponse$ {
-  /** @deprecated use `PersonalClientServiceGetResponse$inboundSchema` instead. */
-  export const inboundSchema = PersonalClientServiceGetResponse$inboundSchema;
-  /** @deprecated use `PersonalClientServiceGetResponse$outboundSchema` instead. */
-  export const outboundSchema = PersonalClientServiceGetResponse$outboundSchema;
-  /** @deprecated use `PersonalClientServiceGetResponse$Outbound` instead. */
-  export type Outbound = PersonalClientServiceGetResponse$Outbound;
-}
-
-export function personalClientServiceGetResponseToJSON(
-  personalClientServiceGetResponse: PersonalClientServiceGetResponse,
-): string {
-  return JSON.stringify(
-    PersonalClientServiceGetResponse$outboundSchema.parse(
-      personalClientServiceGetResponse,
-    ),
-  );
-}
 
 export function personalClientServiceGetResponseFromJSON(
   jsonString: string,

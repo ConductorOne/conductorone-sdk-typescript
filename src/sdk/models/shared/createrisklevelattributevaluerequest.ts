@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The CreateRiskLevelAttributeValueRequest message.
@@ -16,15 +13,6 @@ export type CreateRiskLevelAttributeValueRequest = {
    */
   value?: string | null | undefined;
 };
-
-/** @internal */
-export const CreateRiskLevelAttributeValueRequest$inboundSchema: z.ZodType<
-  CreateRiskLevelAttributeValueRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  value: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type CreateRiskLevelAttributeValueRequest$Outbound = {
@@ -40,21 +28,6 @@ export const CreateRiskLevelAttributeValueRequest$outboundSchema: z.ZodType<
   value: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateRiskLevelAttributeValueRequest$ {
-  /** @deprecated use `CreateRiskLevelAttributeValueRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateRiskLevelAttributeValueRequest$inboundSchema;
-  /** @deprecated use `CreateRiskLevelAttributeValueRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateRiskLevelAttributeValueRequest$outboundSchema;
-  /** @deprecated use `CreateRiskLevelAttributeValueRequest$Outbound` instead. */
-  export type Outbound = CreateRiskLevelAttributeValueRequest$Outbound;
-}
-
 export function createRiskLevelAttributeValueRequestToJSON(
   createRiskLevelAttributeValueRequest: CreateRiskLevelAttributeValueRequest,
 ): string {
@@ -62,16 +35,5 @@ export function createRiskLevelAttributeValueRequestToJSON(
     CreateRiskLevelAttributeValueRequest$outboundSchema.parse(
       createRiskLevelAttributeValueRequest,
     ),
-  );
-}
-
-export function createRiskLevelAttributeValueRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateRiskLevelAttributeValueRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateRiskLevelAttributeValueRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateRiskLevelAttributeValueRequest' from JSON`,
   );
 }

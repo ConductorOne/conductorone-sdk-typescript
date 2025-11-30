@@ -33,15 +33,6 @@ export type C1ApiPolicyV1PoliciesGetResponse = {
 };
 
 /** @internal */
-export const C1ApiPolicyV1PoliciesGetRequest$inboundSchema: z.ZodType<
-  C1ApiPolicyV1PoliciesGetRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.nullable(z.string()),
-});
-
-/** @internal */
 export type C1ApiPolicyV1PoliciesGetRequest$Outbound = {
   id: string | null;
 };
@@ -55,19 +46,6 @@ export const C1ApiPolicyV1PoliciesGetRequest$outboundSchema: z.ZodType<
   id: z.nullable(z.string()),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiPolicyV1PoliciesGetRequest$ {
-  /** @deprecated use `C1ApiPolicyV1PoliciesGetRequest$inboundSchema` instead. */
-  export const inboundSchema = C1ApiPolicyV1PoliciesGetRequest$inboundSchema;
-  /** @deprecated use `C1ApiPolicyV1PoliciesGetRequest$outboundSchema` instead. */
-  export const outboundSchema = C1ApiPolicyV1PoliciesGetRequest$outboundSchema;
-  /** @deprecated use `C1ApiPolicyV1PoliciesGetRequest$Outbound` instead. */
-  export type Outbound = C1ApiPolicyV1PoliciesGetRequest$Outbound;
-}
-
 export function c1ApiPolicyV1PoliciesGetRequestToJSON(
   c1ApiPolicyV1PoliciesGetRequest: C1ApiPolicyV1PoliciesGetRequest,
 ): string {
@@ -75,16 +53,6 @@ export function c1ApiPolicyV1PoliciesGetRequestToJSON(
     C1ApiPolicyV1PoliciesGetRequest$outboundSchema.parse(
       c1ApiPolicyV1PoliciesGetRequest,
     ),
-  );
-}
-
-export function c1ApiPolicyV1PoliciesGetRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<C1ApiPolicyV1PoliciesGetRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => C1ApiPolicyV1PoliciesGetRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiPolicyV1PoliciesGetRequest' from JSON`,
   );
 }
 
@@ -106,58 +74,6 @@ export const C1ApiPolicyV1PoliciesGetResponse$inboundSchema: z.ZodType<
     "GetPolicyResponse": "getPolicyResponse",
   });
 });
-
-/** @internal */
-export type C1ApiPolicyV1PoliciesGetResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  GetPolicyResponse?: shared.GetPolicyResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiPolicyV1PoliciesGetResponse$outboundSchema: z.ZodType<
-  C1ApiPolicyV1PoliciesGetResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiPolicyV1PoliciesGetResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  getPolicyResponse: shared.GetPolicyResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    getPolicyResponse: "GetPolicyResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiPolicyV1PoliciesGetResponse$ {
-  /** @deprecated use `C1ApiPolicyV1PoliciesGetResponse$inboundSchema` instead. */
-  export const inboundSchema = C1ApiPolicyV1PoliciesGetResponse$inboundSchema;
-  /** @deprecated use `C1ApiPolicyV1PoliciesGetResponse$outboundSchema` instead. */
-  export const outboundSchema = C1ApiPolicyV1PoliciesGetResponse$outboundSchema;
-  /** @deprecated use `C1ApiPolicyV1PoliciesGetResponse$Outbound` instead. */
-  export type Outbound = C1ApiPolicyV1PoliciesGetResponse$Outbound;
-}
-
-export function c1ApiPolicyV1PoliciesGetResponseToJSON(
-  c1ApiPolicyV1PoliciesGetResponse: C1ApiPolicyV1PoliciesGetResponse,
-): string {
-  return JSON.stringify(
-    C1ApiPolicyV1PoliciesGetResponse$outboundSchema.parse(
-      c1ApiPolicyV1PoliciesGetResponse,
-    ),
-  );
-}
 
 export function c1ApiPolicyV1PoliciesGetResponseFromJSON(
   jsonString: string,

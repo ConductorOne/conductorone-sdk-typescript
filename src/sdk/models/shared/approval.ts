@@ -171,7 +171,6 @@ export const Approval$inboundSchema: z.ZodType<
   users: z.nullable(UserApproval$inboundSchema).optional(),
   webhook: z.nullable(WebhookApproval$inboundSchema).optional(),
 });
-
 /** @internal */
 export type Approval$Outbound = {
   agent?: AgentApproval$Outbound | null | undefined;
@@ -225,23 +224,9 @@ export const Approval$outboundSchema: z.ZodType<
   webhook: z.nullable(WebhookApproval$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Approval$ {
-  /** @deprecated use `Approval$inboundSchema` instead. */
-  export const inboundSchema = Approval$inboundSchema;
-  /** @deprecated use `Approval$outboundSchema` instead. */
-  export const outboundSchema = Approval$outboundSchema;
-  /** @deprecated use `Approval$Outbound` instead. */
-  export type Outbound = Approval$Outbound;
-}
-
 export function approvalToJSON(approval: Approval): string {
   return JSON.stringify(Approval$outboundSchema.parse(approval));
 }
-
 export function approvalFromJSON(
   jsonString: string,
 ): SafeParseResult<Approval, SDKValidationError> {

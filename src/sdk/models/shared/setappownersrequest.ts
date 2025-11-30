@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The request message for setting the app owners.
@@ -16,15 +13,6 @@ export type SetAppOwnersRequest = {
    */
   userIds?: Array<string> | null | undefined;
 };
-
-/** @internal */
-export const SetAppOwnersRequest$inboundSchema: z.ZodType<
-  SetAppOwnersRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type SetAppOwnersRequest$Outbound = {
@@ -40,33 +28,10 @@ export const SetAppOwnersRequest$outboundSchema: z.ZodType<
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SetAppOwnersRequest$ {
-  /** @deprecated use `SetAppOwnersRequest$inboundSchema` instead. */
-  export const inboundSchema = SetAppOwnersRequest$inboundSchema;
-  /** @deprecated use `SetAppOwnersRequest$outboundSchema` instead. */
-  export const outboundSchema = SetAppOwnersRequest$outboundSchema;
-  /** @deprecated use `SetAppOwnersRequest$Outbound` instead. */
-  export type Outbound = SetAppOwnersRequest$Outbound;
-}
-
 export function setAppOwnersRequestToJSON(
   setAppOwnersRequest: SetAppOwnersRequest,
 ): string {
   return JSON.stringify(
     SetAppOwnersRequest$outboundSchema.parse(setAppOwnersRequest),
-  );
-}
-
-export function setAppOwnersRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<SetAppOwnersRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SetAppOwnersRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SetAppOwnersRequest' from JSON`,
   );
 }

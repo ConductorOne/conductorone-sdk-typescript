@@ -3,24 +3,18 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AutomationContext,
-  AutomationContext$inboundSchema,
   AutomationContext$Outbound,
   AutomationContext$outboundSchema,
 } from "./automationcontext.js";
 import {
   AutomationStep,
-  AutomationStep$inboundSchema,
   AutomationStep$Outbound,
   AutomationStep$outboundSchema,
 } from "./automationstep.js";
 import {
   AutomationTrigger,
-  AutomationTrigger$inboundSchema,
   AutomationTrigger$Outbound,
   AutomationTrigger$outboundSchema,
 } from "./automationtrigger.js";
@@ -69,26 +63,6 @@ export type CreateAutomationRequestInput = {
 };
 
 /** @internal */
-export const CreateAutomationRequestInput$inboundSchema: z.ZodType<
-  CreateAutomationRequestInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  automationSteps: z.nullable(z.array(AutomationStep$inboundSchema)).optional(),
-  context: z.nullable(AutomationContext$inboundSchema).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  draftAutomationSteps: z.nullable(z.array(AutomationStep$inboundSchema))
-    .optional(),
-  draftTriggers: z.nullable(z.array(AutomationTrigger$inboundSchema))
-    .optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  isDraft: z.nullable(z.boolean()).optional(),
-  triggers: z.nullable(z.array(AutomationTrigger$inboundSchema)).optional(),
-});
-
-/** @internal */
 export type CreateAutomationRequestInput$Outbound = {
   appId?: string | null | undefined;
   automationSteps?: Array<AutomationStep$Outbound> | null | undefined;
@@ -123,19 +97,6 @@ export const CreateAutomationRequestInput$outboundSchema: z.ZodType<
   triggers: z.nullable(z.array(AutomationTrigger$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAutomationRequestInput$ {
-  /** @deprecated use `CreateAutomationRequestInput$inboundSchema` instead. */
-  export const inboundSchema = CreateAutomationRequestInput$inboundSchema;
-  /** @deprecated use `CreateAutomationRequestInput$outboundSchema` instead. */
-  export const outboundSchema = CreateAutomationRequestInput$outboundSchema;
-  /** @deprecated use `CreateAutomationRequestInput$Outbound` instead. */
-  export type Outbound = CreateAutomationRequestInput$Outbound;
-}
-
 export function createAutomationRequestInputToJSON(
   createAutomationRequestInput: CreateAutomationRequestInput,
 ): string {
@@ -143,15 +104,5 @@ export function createAutomationRequestInputToJSON(
     CreateAutomationRequestInput$outboundSchema.parse(
       createAutomationRequestInput,
     ),
-  );
-}
-
-export function createAutomationRequestInputFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAutomationRequestInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateAutomationRequestInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAutomationRequestInput' from JSON`,
   );
 }

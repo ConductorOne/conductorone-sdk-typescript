@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AutomationInput,
-  AutomationInput$inboundSchema,
   AutomationInput$Outbound,
   AutomationInput$outboundSchema,
 } from "./automation.js";
@@ -20,16 +16,6 @@ export type UpdateAutomationRequest = {
   automation?: AutomationInput | null | undefined;
   updateMask?: string | null | undefined;
 };
-
-/** @internal */
-export const UpdateAutomationRequest$inboundSchema: z.ZodType<
-  UpdateAutomationRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  automation: z.nullable(AutomationInput$inboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type UpdateAutomationRequest$Outbound = {
@@ -47,33 +33,10 @@ export const UpdateAutomationRequest$outboundSchema: z.ZodType<
   updateMask: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAutomationRequest$ {
-  /** @deprecated use `UpdateAutomationRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdateAutomationRequest$inboundSchema;
-  /** @deprecated use `UpdateAutomationRequest$outboundSchema` instead. */
-  export const outboundSchema = UpdateAutomationRequest$outboundSchema;
-  /** @deprecated use `UpdateAutomationRequest$Outbound` instead. */
-  export type Outbound = UpdateAutomationRequest$Outbound;
-}
-
 export function updateAutomationRequestToJSON(
   updateAutomationRequest: UpdateAutomationRequest,
 ): string {
   return JSON.stringify(
     UpdateAutomationRequest$outboundSchema.parse(updateAutomationRequest),
-  );
-}
-
-export function updateAutomationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAutomationRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAutomationRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAutomationRequest' from JSON`,
   );
 }

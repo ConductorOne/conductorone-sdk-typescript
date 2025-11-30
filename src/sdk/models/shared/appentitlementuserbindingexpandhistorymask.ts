@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The AppEntitlementUserBindingExpandHistoryMask message.
@@ -16,13 +13,6 @@ export type AppEntitlementUserBindingExpandHistoryMask = {
    */
   paths?: Array<string> | null | undefined;
 };
-
-/** @internal */
-export const AppEntitlementUserBindingExpandHistoryMask$inboundSchema:
-  z.ZodType<AppEntitlementUserBindingExpandHistoryMask, z.ZodTypeDef, unknown> =
-    z.object({
-      paths: z.nullable(z.array(z.string())).optional(),
-    });
 
 /** @internal */
 export type AppEntitlementUserBindingExpandHistoryMask$Outbound = {
@@ -39,21 +29,6 @@ export const AppEntitlementUserBindingExpandHistoryMask$outboundSchema:
     paths: z.nullable(z.array(z.string())).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementUserBindingExpandHistoryMask$ {
-  /** @deprecated use `AppEntitlementUserBindingExpandHistoryMask$inboundSchema` instead. */
-  export const inboundSchema =
-    AppEntitlementUserBindingExpandHistoryMask$inboundSchema;
-  /** @deprecated use `AppEntitlementUserBindingExpandHistoryMask$outboundSchema` instead. */
-  export const outboundSchema =
-    AppEntitlementUserBindingExpandHistoryMask$outboundSchema;
-  /** @deprecated use `AppEntitlementUserBindingExpandHistoryMask$Outbound` instead. */
-  export type Outbound = AppEntitlementUserBindingExpandHistoryMask$Outbound;
-}
-
 export function appEntitlementUserBindingExpandHistoryMaskToJSON(
   appEntitlementUserBindingExpandHistoryMask:
     AppEntitlementUserBindingExpandHistoryMask,
@@ -62,21 +37,5 @@ export function appEntitlementUserBindingExpandHistoryMaskToJSON(
     AppEntitlementUserBindingExpandHistoryMask$outboundSchema.parse(
       appEntitlementUserBindingExpandHistoryMask,
     ),
-  );
-}
-
-export function appEntitlementUserBindingExpandHistoryMaskFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  AppEntitlementUserBindingExpandHistoryMask,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      AppEntitlementUserBindingExpandHistoryMask$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'AppEntitlementUserBindingExpandHistoryMask' from JSON`,
   );
 }

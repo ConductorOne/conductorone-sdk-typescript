@@ -35,45 +35,6 @@ export const TaskAuditWaitStepSuccess$inboundSchema: z.ZodType<
   ).optional(),
 });
 
-/** @internal */
-export type TaskAuditWaitStepSuccess$Outbound = {
-  condition?: string | null | undefined;
-  stepId?: string | null | undefined;
-  succeededAt?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditWaitStepSuccess$outboundSchema: z.ZodType<
-  TaskAuditWaitStepSuccess$Outbound,
-  z.ZodTypeDef,
-  TaskAuditWaitStepSuccess
-> = z.object({
-  condition: z.nullable(z.string()).optional(),
-  stepId: z.nullable(z.string()).optional(),
-  succeededAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditWaitStepSuccess$ {
-  /** @deprecated use `TaskAuditWaitStepSuccess$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditWaitStepSuccess$inboundSchema;
-  /** @deprecated use `TaskAuditWaitStepSuccess$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditWaitStepSuccess$outboundSchema;
-  /** @deprecated use `TaskAuditWaitStepSuccess$Outbound` instead. */
-  export type Outbound = TaskAuditWaitStepSuccess$Outbound;
-}
-
-export function taskAuditWaitStepSuccessToJSON(
-  taskAuditWaitStepSuccess: TaskAuditWaitStepSuccess,
-): string {
-  return JSON.stringify(
-    TaskAuditWaitStepSuccess$outboundSchema.parse(taskAuditWaitStepSuccess),
-  );
-}
-
 export function taskAuditWaitStepSuccessFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditWaitStepSuccess, SDKValidationError> {

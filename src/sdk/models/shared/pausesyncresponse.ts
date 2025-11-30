@@ -19,37 +19,6 @@ export const PauseSyncResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type PauseSyncResponse$Outbound = {};
-
-/** @internal */
-export const PauseSyncResponse$outboundSchema: z.ZodType<
-  PauseSyncResponse$Outbound,
-  z.ZodTypeDef,
-  PauseSyncResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PauseSyncResponse$ {
-  /** @deprecated use `PauseSyncResponse$inboundSchema` instead. */
-  export const inboundSchema = PauseSyncResponse$inboundSchema;
-  /** @deprecated use `PauseSyncResponse$outboundSchema` instead. */
-  export const outboundSchema = PauseSyncResponse$outboundSchema;
-  /** @deprecated use `PauseSyncResponse$Outbound` instead. */
-  export type Outbound = PauseSyncResponse$Outbound;
-}
-
-export function pauseSyncResponseToJSON(
-  pauseSyncResponse: PauseSyncResponse,
-): string {
-  return JSON.stringify(
-    PauseSyncResponse$outboundSchema.parse(pauseSyncResponse),
-  );
-}
-
 export function pauseSyncResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<PauseSyncResponse, SDKValidationError> {

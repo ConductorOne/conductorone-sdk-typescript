@@ -51,7 +51,6 @@ export const ConnectorProvision$inboundSchema: z.ZodType<
   defaultBehavior: z.nullable(DefaultBehavior$inboundSchema).optional(),
   deleteAccount: z.nullable(DeleteAccount$inboundSchema).optional(),
 });
-
 /** @internal */
 export type ConnectorProvision$Outbound = {
   account?: AccountProvision$Outbound | null | undefined;
@@ -70,19 +69,6 @@ export const ConnectorProvision$outboundSchema: z.ZodType<
   deleteAccount: z.nullable(DeleteAccount$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorProvision$ {
-  /** @deprecated use `ConnectorProvision$inboundSchema` instead. */
-  export const inboundSchema = ConnectorProvision$inboundSchema;
-  /** @deprecated use `ConnectorProvision$outboundSchema` instead. */
-  export const outboundSchema = ConnectorProvision$outboundSchema;
-  /** @deprecated use `ConnectorProvision$Outbound` instead. */
-  export type Outbound = ConnectorProvision$Outbound;
-}
-
 export function connectorProvisionToJSON(
   connectorProvision: ConnectorProvision,
 ): string {
@@ -90,7 +76,6 @@ export function connectorProvisionToJSON(
     ConnectorProvision$outboundSchema.parse(connectorProvision),
   );
 }
-
 export function connectorProvisionFromJSON(
   jsonString: string,
 ): SafeParseResult<ConnectorProvision, SDKValidationError> {

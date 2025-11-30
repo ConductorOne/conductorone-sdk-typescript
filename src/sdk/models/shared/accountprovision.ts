@@ -54,7 +54,6 @@ export const AccountProvision$inboundSchema: z.ZodType<
   saveToVault: z.nullable(SaveToVault$inboundSchema).optional(),
   schemaId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type AccountProvision$Outbound = {
   config?: { [k: string]: any } | null | undefined;
@@ -77,19 +76,6 @@ export const AccountProvision$outboundSchema: z.ZodType<
   schemaId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AccountProvision$ {
-  /** @deprecated use `AccountProvision$inboundSchema` instead. */
-  export const inboundSchema = AccountProvision$inboundSchema;
-  /** @deprecated use `AccountProvision$outboundSchema` instead. */
-  export const outboundSchema = AccountProvision$outboundSchema;
-  /** @deprecated use `AccountProvision$Outbound` instead. */
-  export type Outbound = AccountProvision$Outbound;
-}
-
 export function accountProvisionToJSON(
   accountProvision: AccountProvision,
 ): string {
@@ -97,7 +83,6 @@ export function accountProvisionToJSON(
     AccountProvision$outboundSchema.parse(accountProvision),
   );
 }
-
 export function accountProvisionFromJSON(
   jsonString: string,
 ): SafeParseResult<AccountProvision, SDKValidationError> {

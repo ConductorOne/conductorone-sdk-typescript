@@ -51,7 +51,6 @@ export const ConnectorCreateAccount$inboundSchema: z.ZodType<
   userIdCel: z.nullable(z.string()).optional(),
   userProperties: z.nullable(UserProperties$inboundSchema).optional(),
 });
-
 /** @internal */
 export type ConnectorCreateAccount$Outbound = {
   connectorRef?: ConnectorRef$Outbound | null | undefined;
@@ -70,19 +69,6 @@ export const ConnectorCreateAccount$outboundSchema: z.ZodType<
   userProperties: z.nullable(UserProperties$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorCreateAccount$ {
-  /** @deprecated use `ConnectorCreateAccount$inboundSchema` instead. */
-  export const inboundSchema = ConnectorCreateAccount$inboundSchema;
-  /** @deprecated use `ConnectorCreateAccount$outboundSchema` instead. */
-  export const outboundSchema = ConnectorCreateAccount$outboundSchema;
-  /** @deprecated use `ConnectorCreateAccount$Outbound` instead. */
-  export type Outbound = ConnectorCreateAccount$Outbound;
-}
-
 export function connectorCreateAccountToJSON(
   connectorCreateAccount: ConnectorCreateAccount,
 ): string {
@@ -90,7 +76,6 @@ export function connectorCreateAccountToJSON(
     ConnectorCreateAccount$outboundSchema.parse(connectorCreateAccount),
   );
 }
-
 export function connectorCreateAccountFromJSON(
   jsonString: string,
 ): SafeParseResult<ConnectorCreateAccount, SDKValidationError> {

@@ -25,7 +25,6 @@ export const TextField$inboundSchema: z.ZodType<
 > = z.object({
   multiline: z.nullable(z.boolean()).optional(),
 });
-
 /** @internal */
 export type TextField$Outbound = {
   multiline?: boolean | null | undefined;
@@ -40,23 +39,9 @@ export const TextField$outboundSchema: z.ZodType<
   multiline: z.nullable(z.boolean()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TextField$ {
-  /** @deprecated use `TextField$inboundSchema` instead. */
-  export const inboundSchema = TextField$inboundSchema;
-  /** @deprecated use `TextField$outboundSchema` instead. */
-  export const outboundSchema = TextField$outboundSchema;
-  /** @deprecated use `TextField$Outbound` instead. */
-  export type Outbound = TextField$Outbound;
-}
-
 export function textFieldToJSON(textField: TextField): string {
   return JSON.stringify(TextField$outboundSchema.parse(textField));
 }
-
 export function textFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<TextField, SDKValidationError> {

@@ -26,44 +26,6 @@ export const ListAppEntitlementOwnerIDsResponse$inboundSchema: z.ZodType<
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/** @internal */
-export type ListAppEntitlementOwnerIDsResponse$Outbound = {
-  userIds?: Array<string> | null | undefined;
-};
-
-/** @internal */
-export const ListAppEntitlementOwnerIDsResponse$outboundSchema: z.ZodType<
-  ListAppEntitlementOwnerIDsResponse$Outbound,
-  z.ZodTypeDef,
-  ListAppEntitlementOwnerIDsResponse
-> = z.object({
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAppEntitlementOwnerIDsResponse$ {
-  /** @deprecated use `ListAppEntitlementOwnerIDsResponse$inboundSchema` instead. */
-  export const inboundSchema = ListAppEntitlementOwnerIDsResponse$inboundSchema;
-  /** @deprecated use `ListAppEntitlementOwnerIDsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAppEntitlementOwnerIDsResponse$outboundSchema;
-  /** @deprecated use `ListAppEntitlementOwnerIDsResponse$Outbound` instead. */
-  export type Outbound = ListAppEntitlementOwnerIDsResponse$Outbound;
-}
-
-export function listAppEntitlementOwnerIDsResponseToJSON(
-  listAppEntitlementOwnerIDsResponse: ListAppEntitlementOwnerIDsResponse,
-): string {
-  return JSON.stringify(
-    ListAppEntitlementOwnerIDsResponse$outboundSchema.parse(
-      listAppEntitlementOwnerIDsResponse,
-    ),
-  );
-}
-
 export function listAppEntitlementOwnerIDsResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAppEntitlementOwnerIDsResponse, SDKValidationError> {

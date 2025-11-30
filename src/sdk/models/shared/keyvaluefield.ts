@@ -26,37 +26,6 @@ export const KeyValueField$inboundSchema: z.ZodType<
   secret: z.nullable(z.boolean()).optional(),
 });
 
-/** @internal */
-export type KeyValueField$Outbound = {
-  secret?: boolean | null | undefined;
-};
-
-/** @internal */
-export const KeyValueField$outboundSchema: z.ZodType<
-  KeyValueField$Outbound,
-  z.ZodTypeDef,
-  KeyValueField
-> = z.object({
-  secret: z.nullable(z.boolean()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace KeyValueField$ {
-  /** @deprecated use `KeyValueField$inboundSchema` instead. */
-  export const inboundSchema = KeyValueField$inboundSchema;
-  /** @deprecated use `KeyValueField$outboundSchema` instead. */
-  export const outboundSchema = KeyValueField$outboundSchema;
-  /** @deprecated use `KeyValueField$Outbound` instead. */
-  export type Outbound = KeyValueField$Outbound;
-}
-
-export function keyValueFieldToJSON(keyValueField: KeyValueField): string {
-  return JSON.stringify(KeyValueField$outboundSchema.parse(keyValueField));
-}
-
 export function keyValueFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<KeyValueField, SDKValidationError> {

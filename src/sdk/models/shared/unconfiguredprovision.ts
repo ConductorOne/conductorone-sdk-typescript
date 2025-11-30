@@ -18,7 +18,6 @@ export const UnconfiguredProvision$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
 /** @internal */
 export type UnconfiguredProvision$Outbound = {};
 
@@ -29,19 +28,6 @@ export const UnconfiguredProvision$outboundSchema: z.ZodType<
   UnconfiguredProvision
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UnconfiguredProvision$ {
-  /** @deprecated use `UnconfiguredProvision$inboundSchema` instead. */
-  export const inboundSchema = UnconfiguredProvision$inboundSchema;
-  /** @deprecated use `UnconfiguredProvision$outboundSchema` instead. */
-  export const outboundSchema = UnconfiguredProvision$outboundSchema;
-  /** @deprecated use `UnconfiguredProvision$Outbound` instead. */
-  export type Outbound = UnconfiguredProvision$Outbound;
-}
-
 export function unconfiguredProvisionToJSON(
   unconfiguredProvision: UnconfiguredProvision,
 ): string {
@@ -49,7 +35,6 @@ export function unconfiguredProvisionToJSON(
     UnconfiguredProvision$outboundSchema.parse(unconfiguredProvision),
   );
 }
-
 export function unconfiguredProvisionFromJSON(
   jsonString: string,
 ): SafeParseResult<UnconfiguredProvision, SDKValidationError> {

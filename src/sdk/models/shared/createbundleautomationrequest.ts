@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BundleAutomationRuleEntitlement,
-  BundleAutomationRuleEntitlement$inboundSchema,
   BundleAutomationRuleEntitlement$Outbound,
   BundleAutomationRuleEntitlement$outboundSchema,
 } from "./bundleautomationruleentitlement.js";
@@ -38,19 +34,6 @@ export type CreateBundleAutomationRequest = {
 };
 
 /** @internal */
-export const CreateBundleAutomationRequest$inboundSchema: z.ZodType<
-  CreateBundleAutomationRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  createTasks: z.nullable(z.boolean()).optional(),
-  disableCircuitBreaker: z.nullable(z.boolean()).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  entitlements: z.nullable(BundleAutomationRuleEntitlement$inboundSchema)
-    .optional(),
-});
-
-/** @internal */
 export type CreateBundleAutomationRequest$Outbound = {
   createTasks?: boolean | null | undefined;
   disableCircuitBreaker?: boolean | null | undefined;
@@ -71,19 +54,6 @@ export const CreateBundleAutomationRequest$outboundSchema: z.ZodType<
     .optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateBundleAutomationRequest$ {
-  /** @deprecated use `CreateBundleAutomationRequest$inboundSchema` instead. */
-  export const inboundSchema = CreateBundleAutomationRequest$inboundSchema;
-  /** @deprecated use `CreateBundleAutomationRequest$outboundSchema` instead. */
-  export const outboundSchema = CreateBundleAutomationRequest$outboundSchema;
-  /** @deprecated use `CreateBundleAutomationRequest$Outbound` instead. */
-  export type Outbound = CreateBundleAutomationRequest$Outbound;
-}
-
 export function createBundleAutomationRequestToJSON(
   createBundleAutomationRequest: CreateBundleAutomationRequest,
 ): string {
@@ -91,15 +61,5 @@ export function createBundleAutomationRequestToJSON(
     CreateBundleAutomationRequest$outboundSchema.parse(
       createBundleAutomationRequest,
     ),
-  );
-}
-
-export function createBundleAutomationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateBundleAutomationRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateBundleAutomationRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateBundleAutomationRequest' from JSON`,
   );
 }

@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  StringRules,
-  StringRules$inboundSchema,
-  StringRules$Outbound,
-  StringRules$outboundSchema,
-} from "./stringrules.js";
+import { StringRules, StringRules$inboundSchema } from "./stringrules.js";
 
 /**
  * The ImportField message.
@@ -38,41 +33,6 @@ export const ImportField$inboundSchema: z.ZodType<
   secret: z.nullable(z.boolean()).optional(),
   valueValidator: z.nullable(StringRules$inboundSchema).optional(),
 });
-
-/** @internal */
-export type ImportField$Outbound = {
-  allowedExtensions?: Array<string> | null | undefined;
-  secret?: boolean | null | undefined;
-  valueValidator?: StringRules$Outbound | null | undefined;
-};
-
-/** @internal */
-export const ImportField$outboundSchema: z.ZodType<
-  ImportField$Outbound,
-  z.ZodTypeDef,
-  ImportField
-> = z.object({
-  allowedExtensions: z.nullable(z.array(z.string())).optional(),
-  secret: z.nullable(z.boolean()).optional(),
-  valueValidator: z.nullable(StringRules$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ImportField$ {
-  /** @deprecated use `ImportField$inboundSchema` instead. */
-  export const inboundSchema = ImportField$inboundSchema;
-  /** @deprecated use `ImportField$outboundSchema` instead. */
-  export const outboundSchema = ImportField$outboundSchema;
-  /** @deprecated use `ImportField$Outbound` instead. */
-  export type Outbound = ImportField$Outbound;
-}
-
-export function importFieldToJSON(importField: ImportField): string {
-  return JSON.stringify(ImportField$outboundSchema.parse(importField));
-}
 
 export function importFieldFromJSON(
   jsonString: string,

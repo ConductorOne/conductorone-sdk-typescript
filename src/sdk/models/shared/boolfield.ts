@@ -49,7 +49,6 @@ export const BoolField$inboundSchema: z.ZodType<
   defaultValue: z.nullable(z.boolean()).optional(),
   rules: z.nullable(BoolRules$inboundSchema).optional(),
 });
-
 /** @internal */
 export type BoolField$Outbound = {
   checkboxField?: CheckboxField$Outbound | null | undefined;
@@ -68,23 +67,9 @@ export const BoolField$outboundSchema: z.ZodType<
   rules: z.nullable(BoolRules$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BoolField$ {
-  /** @deprecated use `BoolField$inboundSchema` instead. */
-  export const inboundSchema = BoolField$inboundSchema;
-  /** @deprecated use `BoolField$outboundSchema` instead. */
-  export const outboundSchema = BoolField$outboundSchema;
-  /** @deprecated use `BoolField$Outbound` instead. */
-  export type Outbound = BoolField$Outbound;
-}
-
 export function boolFieldToJSON(boolField: BoolField): string {
   return JSON.stringify(BoolField$outboundSchema.parse(boolField));
 }
-
 export function boolFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<BoolField, SDKValidationError> {

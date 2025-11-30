@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskExpandMask,
-  TaskExpandMask$inboundSchema,
   TaskExpandMask$Outbound,
   TaskExpandMask$outboundSchema,
 } from "./taskexpandmask.js";
@@ -20,17 +16,6 @@ export type TaskActionsServiceUpdateGrantDurationRequest = {
   duration: string;
   expandMask?: TaskExpandMask | null | undefined;
 };
-
-/** @internal */
-export const TaskActionsServiceUpdateGrantDurationRequest$inboundSchema:
-  z.ZodType<
-    TaskActionsServiceUpdateGrantDurationRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    duration: z.string(),
-    expandMask: z.nullable(TaskExpandMask$inboundSchema).optional(),
-  });
 
 /** @internal */
 export type TaskActionsServiceUpdateGrantDurationRequest$Outbound = {
@@ -49,21 +34,6 @@ export const TaskActionsServiceUpdateGrantDurationRequest$outboundSchema:
     expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceUpdateGrantDurationRequest$ {
-  /** @deprecated use `TaskActionsServiceUpdateGrantDurationRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskActionsServiceUpdateGrantDurationRequest$inboundSchema;
-  /** @deprecated use `TaskActionsServiceUpdateGrantDurationRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceUpdateGrantDurationRequest$outboundSchema;
-  /** @deprecated use `TaskActionsServiceUpdateGrantDurationRequest$Outbound` instead. */
-  export type Outbound = TaskActionsServiceUpdateGrantDurationRequest$Outbound;
-}
-
 export function taskActionsServiceUpdateGrantDurationRequestToJSON(
   taskActionsServiceUpdateGrantDurationRequest:
     TaskActionsServiceUpdateGrantDurationRequest,
@@ -72,21 +42,5 @@ export function taskActionsServiceUpdateGrantDurationRequestToJSON(
     TaskActionsServiceUpdateGrantDurationRequest$outboundSchema.parse(
       taskActionsServiceUpdateGrantDurationRequest,
     ),
-  );
-}
-
-export function taskActionsServiceUpdateGrantDurationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  TaskActionsServiceUpdateGrantDurationRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      TaskActionsServiceUpdateGrantDurationRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'TaskActionsServiceUpdateGrantDurationRequest' from JSON`,
   );
 }

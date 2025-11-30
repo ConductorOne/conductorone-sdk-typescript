@@ -28,7 +28,6 @@ export const ResponsePolicyPostAction$inboundSchema: z.ZodType<
 > = z.object({
   version: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type ResponsePolicyPostAction$Outbound = {
   version?: string | null | undefined;
@@ -43,19 +42,6 @@ export const ResponsePolicyPostAction$outboundSchema: z.ZodType<
   version: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponsePolicyPostAction$ {
-  /** @deprecated use `ResponsePolicyPostAction$inboundSchema` instead. */
-  export const inboundSchema = ResponsePolicyPostAction$inboundSchema;
-  /** @deprecated use `ResponsePolicyPostAction$outboundSchema` instead. */
-  export const outboundSchema = ResponsePolicyPostAction$outboundSchema;
-  /** @deprecated use `ResponsePolicyPostAction$Outbound` instead. */
-  export type Outbound = ResponsePolicyPostAction$Outbound;
-}
-
 export function responsePolicyPostActionToJSON(
   responsePolicyPostAction: ResponsePolicyPostAction,
 ): string {
@@ -63,7 +49,6 @@ export function responsePolicyPostActionToJSON(
     ResponsePolicyPostAction$outboundSchema.parse(responsePolicyPostAction),
   );
 }
-
 export function responsePolicyPostActionFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponsePolicyPostAction, SDKValidationError> {

@@ -32,44 +32,6 @@ export const WebhookSourceWorkflowStep$inboundSchema: z.ZodType<
   workflowStepId: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type WebhookSourceWorkflowStep$Outbound = {
-  workflowExecutionId?: string | null | undefined;
-  workflowStepId?: string | null | undefined;
-};
-
-/** @internal */
-export const WebhookSourceWorkflowStep$outboundSchema: z.ZodType<
-  WebhookSourceWorkflowStep$Outbound,
-  z.ZodTypeDef,
-  WebhookSourceWorkflowStep
-> = z.object({
-  workflowExecutionId: z.nullable(z.number().int().transform(v => `${v}`))
-    .optional(),
-  workflowStepId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhookSourceWorkflowStep$ {
-  /** @deprecated use `WebhookSourceWorkflowStep$inboundSchema` instead. */
-  export const inboundSchema = WebhookSourceWorkflowStep$inboundSchema;
-  /** @deprecated use `WebhookSourceWorkflowStep$outboundSchema` instead. */
-  export const outboundSchema = WebhookSourceWorkflowStep$outboundSchema;
-  /** @deprecated use `WebhookSourceWorkflowStep$Outbound` instead. */
-  export type Outbound = WebhookSourceWorkflowStep$Outbound;
-}
-
-export function webhookSourceWorkflowStepToJSON(
-  webhookSourceWorkflowStep: WebhookSourceWorkflowStep,
-): string {
-  return JSON.stringify(
-    WebhookSourceWorkflowStep$outboundSchema.parse(webhookSourceWorkflowStep),
-  );
-}
-
 export function webhookSourceWorkflowStepFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookSourceWorkflowStep, SDKValidationError> {

@@ -6,17 +6,10 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  FunctionT,
-  FunctionT$inboundSchema,
-  FunctionT$Outbound,
-  FunctionT$outboundSchema,
-} from "./function.js";
+import { FunctionT, FunctionT$inboundSchema } from "./function.js";
 import {
   FunctionCommit,
   FunctionCommit$inboundSchema,
-  FunctionCommit$Outbound,
-  FunctionCommit$outboundSchema,
 } from "./functioncommit.js";
 
 /**
@@ -36,48 +29,6 @@ export const FunctionsServiceCreateFunctionResponse$inboundSchema: z.ZodType<
   commit: z.nullable(FunctionCommit$inboundSchema).optional(),
   function: z.nullable(FunctionT$inboundSchema).optional(),
 });
-
-/** @internal */
-export type FunctionsServiceCreateFunctionResponse$Outbound = {
-  commit?: FunctionCommit$Outbound | null | undefined;
-  function?: FunctionT$Outbound | null | undefined;
-};
-
-/** @internal */
-export const FunctionsServiceCreateFunctionResponse$outboundSchema: z.ZodType<
-  FunctionsServiceCreateFunctionResponse$Outbound,
-  z.ZodTypeDef,
-  FunctionsServiceCreateFunctionResponse
-> = z.object({
-  commit: z.nullable(FunctionCommit$outboundSchema).optional(),
-  function: z.nullable(FunctionT$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionsServiceCreateFunctionResponse$ {
-  /** @deprecated use `FunctionsServiceCreateFunctionResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    FunctionsServiceCreateFunctionResponse$inboundSchema;
-  /** @deprecated use `FunctionsServiceCreateFunctionResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    FunctionsServiceCreateFunctionResponse$outboundSchema;
-  /** @deprecated use `FunctionsServiceCreateFunctionResponse$Outbound` instead. */
-  export type Outbound = FunctionsServiceCreateFunctionResponse$Outbound;
-}
-
-export function functionsServiceCreateFunctionResponseToJSON(
-  functionsServiceCreateFunctionResponse:
-    FunctionsServiceCreateFunctionResponse,
-): string {
-  return JSON.stringify(
-    FunctionsServiceCreateFunctionResponse$outboundSchema.parse(
-      functionsServiceCreateFunctionResponse,
-    ),
-  );
-}
 
 export function functionsServiceCreateFunctionResponseFromJSON(
   jsonString: string,

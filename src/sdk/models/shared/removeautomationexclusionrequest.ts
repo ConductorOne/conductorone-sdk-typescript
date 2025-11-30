@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The RemoveAutomationExclusionRequest message.
@@ -16,15 +13,6 @@ export type RemoveAutomationExclusionRequest = {
    */
   userIds?: Array<string> | null | undefined;
 };
-
-/** @internal */
-export const RemoveAutomationExclusionRequest$inboundSchema: z.ZodType<
-  RemoveAutomationExclusionRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type RemoveAutomationExclusionRequest$Outbound = {
@@ -40,19 +28,6 @@ export const RemoveAutomationExclusionRequest$outboundSchema: z.ZodType<
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RemoveAutomationExclusionRequest$ {
-  /** @deprecated use `RemoveAutomationExclusionRequest$inboundSchema` instead. */
-  export const inboundSchema = RemoveAutomationExclusionRequest$inboundSchema;
-  /** @deprecated use `RemoveAutomationExclusionRequest$outboundSchema` instead. */
-  export const outboundSchema = RemoveAutomationExclusionRequest$outboundSchema;
-  /** @deprecated use `RemoveAutomationExclusionRequest$Outbound` instead. */
-  export type Outbound = RemoveAutomationExclusionRequest$Outbound;
-}
-
 export function removeAutomationExclusionRequestToJSON(
   removeAutomationExclusionRequest: RemoveAutomationExclusionRequest,
 ): string {
@@ -60,15 +35,5 @@ export function removeAutomationExclusionRequestToJSON(
     RemoveAutomationExclusionRequest$outboundSchema.parse(
       removeAutomationExclusionRequest,
     ),
-  );
-}
-
-export function removeAutomationExclusionRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<RemoveAutomationExclusionRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RemoveAutomationExclusionRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RemoveAutomationExclusionRequest' from JSON`,
   );
 }

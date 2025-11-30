@@ -7,6 +7,7 @@ This message contains a oneof named task_type. Only a single field of the follow
   - revoke
   - certify
   - offboarding
+  - action
 
 
 ## Example Usage
@@ -21,6 +22,7 @@ let value: TaskType = {};
 
 | Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `taskTypeAction`                                                                | [shared.TaskTypeAction](../../../sdk/models/shared/tasktypeaction.md)           | :heavy_minus_sign:                                                              | The TaskTypeAction message.                                                     |
 | `certify`                                                                       | [shared.TaskTypeCertify](../../../sdk/models/shared/tasktypecertify.md)         | :heavy_minus_sign:                                                              | N/A                                                                             |
 | `grant`                                                                         | [shared.TaskTypeGrant](../../../sdk/models/shared/tasktypegrant.md)             | :heavy_minus_sign:                                                              | N/A                                                                             |
 | `offboarding`                                                                   | [shared.TaskTypeOffboarding](../../../sdk/models/shared/tasktypeoffboarding.md) | :heavy_minus_sign:                                                              | N/A                                                                             |

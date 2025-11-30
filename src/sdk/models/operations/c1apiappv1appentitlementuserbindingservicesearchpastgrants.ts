@@ -50,68 +50,6 @@ export const C1ApiAppV1AppEntitlementUserBindingServiceSearchPastGrantsResponse$
     });
   });
 
-/** @internal */
-export type C1ApiAppV1AppEntitlementUserBindingServiceSearchPastGrantsResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    SearchPastGrantsResponse?:
-      | shared.SearchPastGrantsResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAppV1AppEntitlementUserBindingServiceSearchPastGrantsResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementUserBindingServiceSearchPastGrantsResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppEntitlementUserBindingServiceSearchPastGrantsResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    searchPastGrantsResponse: shared.SearchPastGrantsResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      searchPastGrantsResponse: "SearchPastGrantsResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementUserBindingServiceSearchPastGrantsResponse$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementUserBindingServiceSearchPastGrantsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementUserBindingServiceSearchPastGrantsResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementUserBindingServiceSearchPastGrantsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementUserBindingServiceSearchPastGrantsResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementUserBindingServiceSearchPastGrantsResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementUserBindingServiceSearchPastGrantsResponse$Outbound;
-}
-
-export function c1ApiAppV1AppEntitlementUserBindingServiceSearchPastGrantsResponseToJSON(
-  c1ApiAppV1AppEntitlementUserBindingServiceSearchPastGrantsResponse:
-    C1ApiAppV1AppEntitlementUserBindingServiceSearchPastGrantsResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppEntitlementUserBindingServiceSearchPastGrantsResponse$outboundSchema
-      .parse(
-        c1ApiAppV1AppEntitlementUserBindingServiceSearchPastGrantsResponse,
-      ),
-  );
-}
-
 export function c1ApiAppV1AppEntitlementUserBindingServiceSearchPastGrantsResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

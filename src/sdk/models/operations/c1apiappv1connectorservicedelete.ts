@@ -39,23 +39,6 @@ export type C1ApiAppV1ConnectorServiceDeleteResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1ConnectorServiceDeleteRequest$inboundSchema: z.ZodType<
-  C1ApiAppV1ConnectorServiceDeleteRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  app_id: z.nullable(z.string()),
-  id: z.nullable(z.string()),
-  ConnectorServiceDeleteRequest: shared
-    .ConnectorServiceDeleteRequest$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "app_id": "appId",
-    "ConnectorServiceDeleteRequest": "connectorServiceDeleteRequest",
-  });
-});
-
-/** @internal */
 export type C1ApiAppV1ConnectorServiceDeleteRequest$Outbound = {
   app_id: string | null;
   id: string | null;
@@ -81,21 +64,6 @@ export const C1ApiAppV1ConnectorServiceDeleteRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1ConnectorServiceDeleteRequest$ {
-  /** @deprecated use `C1ApiAppV1ConnectorServiceDeleteRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1ConnectorServiceDeleteRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceDeleteRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1ConnectorServiceDeleteRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceDeleteRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1ConnectorServiceDeleteRequest$Outbound;
-}
-
 export function c1ApiAppV1ConnectorServiceDeleteRequestToJSON(
   c1ApiAppV1ConnectorServiceDeleteRequest:
     C1ApiAppV1ConnectorServiceDeleteRequest,
@@ -104,22 +72,6 @@ export function c1ApiAppV1ConnectorServiceDeleteRequestToJSON(
     C1ApiAppV1ConnectorServiceDeleteRequest$outboundSchema.parse(
       c1ApiAppV1ConnectorServiceDeleteRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1ConnectorServiceDeleteRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1ConnectorServiceDeleteRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1ConnectorServiceDeleteRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiAppV1ConnectorServiceDeleteRequest' from JSON`,
   );
 }
 
@@ -142,64 +94,6 @@ export const C1ApiAppV1ConnectorServiceDeleteResponse$inboundSchema: z.ZodType<
     "ConnectorServiceDeleteResponse": "connectorServiceDeleteResponse",
   });
 });
-
-/** @internal */
-export type C1ApiAppV1ConnectorServiceDeleteResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  ConnectorServiceDeleteResponse?:
-    | shared.ConnectorServiceDeleteResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1ConnectorServiceDeleteResponse$outboundSchema: z.ZodType<
-  C1ApiAppV1ConnectorServiceDeleteResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiAppV1ConnectorServiceDeleteResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  connectorServiceDeleteResponse: shared
-    .ConnectorServiceDeleteResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    connectorServiceDeleteResponse: "ConnectorServiceDeleteResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1ConnectorServiceDeleteResponse$ {
-  /** @deprecated use `C1ApiAppV1ConnectorServiceDeleteResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1ConnectorServiceDeleteResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceDeleteResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1ConnectorServiceDeleteResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceDeleteResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1ConnectorServiceDeleteResponse$Outbound;
-}
-
-export function c1ApiAppV1ConnectorServiceDeleteResponseToJSON(
-  c1ApiAppV1ConnectorServiceDeleteResponse:
-    C1ApiAppV1ConnectorServiceDeleteResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1ConnectorServiceDeleteResponse$outboundSchema.parse(
-      c1ApiAppV1ConnectorServiceDeleteResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1ConnectorServiceDeleteResponseFromJSON(
   jsonString: string,

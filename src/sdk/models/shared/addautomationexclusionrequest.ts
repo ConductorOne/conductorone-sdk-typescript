@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The AddAutomationExclusionRequest message.
@@ -16,15 +13,6 @@ export type AddAutomationExclusionRequest = {
    */
   userIds?: Array<string> | null | undefined;
 };
-
-/** @internal */
-export const AddAutomationExclusionRequest$inboundSchema: z.ZodType<
-  AddAutomationExclusionRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type AddAutomationExclusionRequest$Outbound = {
@@ -40,19 +28,6 @@ export const AddAutomationExclusionRequest$outboundSchema: z.ZodType<
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AddAutomationExclusionRequest$ {
-  /** @deprecated use `AddAutomationExclusionRequest$inboundSchema` instead. */
-  export const inboundSchema = AddAutomationExclusionRequest$inboundSchema;
-  /** @deprecated use `AddAutomationExclusionRequest$outboundSchema` instead. */
-  export const outboundSchema = AddAutomationExclusionRequest$outboundSchema;
-  /** @deprecated use `AddAutomationExclusionRequest$Outbound` instead. */
-  export type Outbound = AddAutomationExclusionRequest$Outbound;
-}
-
 export function addAutomationExclusionRequestToJSON(
   addAutomationExclusionRequest: AddAutomationExclusionRequest,
 ): string {
@@ -60,15 +35,5 @@ export function addAutomationExclusionRequestToJSON(
     AddAutomationExclusionRequest$outboundSchema.parse(
       addAutomationExclusionRequest,
     ),
-  );
-}
-
-export function addAutomationExclusionRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<AddAutomationExclusionRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AddAutomationExclusionRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AddAutomationExclusionRequest' from JSON`,
   );
 }

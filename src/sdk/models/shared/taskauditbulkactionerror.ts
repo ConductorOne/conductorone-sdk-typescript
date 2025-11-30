@@ -26,41 +26,6 @@ export const TaskAuditBulkActionError$inboundSchema: z.ZodType<
   error: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditBulkActionError$Outbound = {
-  error?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditBulkActionError$outboundSchema: z.ZodType<
-  TaskAuditBulkActionError$Outbound,
-  z.ZodTypeDef,
-  TaskAuditBulkActionError
-> = z.object({
-  error: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditBulkActionError$ {
-  /** @deprecated use `TaskAuditBulkActionError$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditBulkActionError$inboundSchema;
-  /** @deprecated use `TaskAuditBulkActionError$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditBulkActionError$outboundSchema;
-  /** @deprecated use `TaskAuditBulkActionError$Outbound` instead. */
-  export type Outbound = TaskAuditBulkActionError$Outbound;
-}
-
-export function taskAuditBulkActionErrorToJSON(
-  taskAuditBulkActionError: TaskAuditBulkActionError,
-): string {
-  return JSON.stringify(
-    TaskAuditBulkActionError$outboundSchema.parse(taskAuditBulkActionError),
-  );
-}
-
 export function taskAuditBulkActionErrorFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditBulkActionError, SDKValidationError> {

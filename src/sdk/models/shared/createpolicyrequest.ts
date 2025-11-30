@@ -3,32 +3,19 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import {
   PolicyPostActions,
-  PolicyPostActions$inboundSchema,
   PolicyPostActions$Outbound,
   PolicyPostActions$outboundSchema,
 } from "./policypostactions.js";
 import {
   PolicyStepsInput,
-  PolicyStepsInput$inboundSchema,
   PolicyStepsInput$Outbound,
   PolicyStepsInput$outboundSchema,
 } from "./policystepsinput.js";
-import {
-  Rule,
-  Rule$inboundSchema,
-  Rule$Outbound,
-  Rule$outboundSchema,
-} from "./rule.js";
+import { Rule, Rule$Outbound, Rule$outboundSchema } from "./rule.js";
 
 /**
  * The enum of the policy type.
@@ -85,52 +72,11 @@ export type CreatePolicyRequest = {
 };
 
 /** @internal */
-export const CreatePolicyRequestPolicyType$inboundSchema: z.ZodType<
-  CreatePolicyRequestPolicyType,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(CreatePolicyRequestPolicyType),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
 export const CreatePolicyRequestPolicyType$outboundSchema: z.ZodType<
-  CreatePolicyRequestPolicyType,
+  string,
   z.ZodTypeDef,
   CreatePolicyRequestPolicyType
-> = z.union([
-  z.nativeEnum(CreatePolicyRequestPolicyType),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreatePolicyRequestPolicyType$ {
-  /** @deprecated use `CreatePolicyRequestPolicyType$inboundSchema` instead. */
-  export const inboundSchema = CreatePolicyRequestPolicyType$inboundSchema;
-  /** @deprecated use `CreatePolicyRequestPolicyType$outboundSchema` instead. */
-  export const outboundSchema = CreatePolicyRequestPolicyType$outboundSchema;
-}
-
-/** @internal */
-export const CreatePolicyRequest$inboundSchema: z.ZodType<
-  CreatePolicyRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  description: z.nullable(z.string()).optional(),
-  displayName: z.string(),
-  policySteps: z.nullable(z.record(PolicyStepsInput$inboundSchema)).optional(),
-  policyType: z.nullable(CreatePolicyRequestPolicyType$inboundSchema)
-    .optional(),
-  postActions: z.nullable(z.array(PolicyPostActions$inboundSchema)).optional(),
-  reassignTasksToDelegates: z.nullable(z.boolean()).optional(),
-  rules: z.nullable(z.array(Rule$inboundSchema)).optional(),
-});
+> = openEnums.outboundSchema(CreatePolicyRequestPolicyType);
 
 /** @internal */
 export type CreatePolicyRequest$Outbound = {
@@ -159,33 +105,10 @@ export const CreatePolicyRequest$outboundSchema: z.ZodType<
   rules: z.nullable(z.array(Rule$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreatePolicyRequest$ {
-  /** @deprecated use `CreatePolicyRequest$inboundSchema` instead. */
-  export const inboundSchema = CreatePolicyRequest$inboundSchema;
-  /** @deprecated use `CreatePolicyRequest$outboundSchema` instead. */
-  export const outboundSchema = CreatePolicyRequest$outboundSchema;
-  /** @deprecated use `CreatePolicyRequest$Outbound` instead. */
-  export type Outbound = CreatePolicyRequest$Outbound;
-}
-
 export function createPolicyRequestToJSON(
   createPolicyRequest: CreatePolicyRequest,
 ): string {
   return JSON.stringify(
     CreatePolicyRequest$outboundSchema.parse(createPolicyRequest),
-  );
-}
-
-export function createPolicyRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePolicyRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePolicyRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePolicyRequest' from JSON`,
   );
 }

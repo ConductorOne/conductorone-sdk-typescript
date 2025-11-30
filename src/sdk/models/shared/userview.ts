@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  User,
-  User$inboundSchema,
-  User$Outbound,
-  User$outboundSchema,
-} from "./user.js";
+import { User, User$inboundSchema } from "./user.js";
 
 /**
  * The UserView object provides a user response object, as well as JSONPATHs to related objects provided by expanders.
@@ -48,45 +43,6 @@ export const UserView$inboundSchema: z.ZodType<
   rolesPath: z.nullable(z.string()).optional(),
   user: z.nullable(User$inboundSchema).optional(),
 });
-
-/** @internal */
-export type UserView$Outbound = {
-  delegatedUserPath?: string | null | undefined;
-  directoriesPath?: string | null | undefined;
-  managersPath?: string | null | undefined;
-  rolesPath?: string | null | undefined;
-  user?: User$Outbound | null | undefined;
-};
-
-/** @internal */
-export const UserView$outboundSchema: z.ZodType<
-  UserView$Outbound,
-  z.ZodTypeDef,
-  UserView
-> = z.object({
-  delegatedUserPath: z.nullable(z.string()).optional(),
-  directoriesPath: z.nullable(z.string()).optional(),
-  managersPath: z.nullable(z.string()).optional(),
-  rolesPath: z.nullable(z.string()).optional(),
-  user: z.nullable(User$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UserView$ {
-  /** @deprecated use `UserView$inboundSchema` instead. */
-  export const inboundSchema = UserView$inboundSchema;
-  /** @deprecated use `UserView$outboundSchema` instead. */
-  export const outboundSchema = UserView$outboundSchema;
-  /** @deprecated use `UserView$Outbound` instead. */
-  export type Outbound = UserView$Outbound;
-}
-
-export function userViewToJSON(userView: UserView): string {
-  return JSON.stringify(UserView$outboundSchema.parse(userView));
-}
 
 export function userViewFromJSON(
   jsonString: string,

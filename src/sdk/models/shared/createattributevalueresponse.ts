@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AttributeValue,
   AttributeValue$inboundSchema,
-  AttributeValue$Outbound,
-  AttributeValue$outboundSchema,
 } from "./attributevalue.js";
 
 /**
@@ -28,43 +26,6 @@ export const CreateAttributeValueResponse$inboundSchema: z.ZodType<
 > = z.object({
   value: z.nullable(AttributeValue$inboundSchema).optional(),
 });
-
-/** @internal */
-export type CreateAttributeValueResponse$Outbound = {
-  value?: AttributeValue$Outbound | null | undefined;
-};
-
-/** @internal */
-export const CreateAttributeValueResponse$outboundSchema: z.ZodType<
-  CreateAttributeValueResponse$Outbound,
-  z.ZodTypeDef,
-  CreateAttributeValueResponse
-> = z.object({
-  value: z.nullable(AttributeValue$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAttributeValueResponse$ {
-  /** @deprecated use `CreateAttributeValueResponse$inboundSchema` instead. */
-  export const inboundSchema = CreateAttributeValueResponse$inboundSchema;
-  /** @deprecated use `CreateAttributeValueResponse$outboundSchema` instead. */
-  export const outboundSchema = CreateAttributeValueResponse$outboundSchema;
-  /** @deprecated use `CreateAttributeValueResponse$Outbound` instead. */
-  export type Outbound = CreateAttributeValueResponse$Outbound;
-}
-
-export function createAttributeValueResponseToJSON(
-  createAttributeValueResponse: CreateAttributeValueResponse,
-): string {
-  return JSON.stringify(
-    CreateAttributeValueResponse$outboundSchema.parse(
-      createAttributeValueResponse,
-    ),
-  );
-}
 
 export function createAttributeValueResponseFromJSON(
   jsonString: string,

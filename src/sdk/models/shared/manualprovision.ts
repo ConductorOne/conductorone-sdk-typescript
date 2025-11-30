@@ -30,7 +30,6 @@ export const ManualProvision$inboundSchema: z.ZodType<
   instructions: z.nullable(z.string()).optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
 });
-
 /** @internal */
 export type ManualProvision$Outbound = {
   instructions?: string | null | undefined;
@@ -47,25 +46,11 @@ export const ManualProvision$outboundSchema: z.ZodType<
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ManualProvision$ {
-  /** @deprecated use `ManualProvision$inboundSchema` instead. */
-  export const inboundSchema = ManualProvision$inboundSchema;
-  /** @deprecated use `ManualProvision$outboundSchema` instead. */
-  export const outboundSchema = ManualProvision$outboundSchema;
-  /** @deprecated use `ManualProvision$Outbound` instead. */
-  export type Outbound = ManualProvision$Outbound;
-}
-
 export function manualProvisionToJSON(
   manualProvision: ManualProvision,
 ): string {
   return JSON.stringify(ManualProvision$outboundSchema.parse(manualProvision));
 }
-
 export function manualProvisionFromJSON(
   jsonString: string,
 ): SafeParseResult<ManualProvision, SDKValidationError> {

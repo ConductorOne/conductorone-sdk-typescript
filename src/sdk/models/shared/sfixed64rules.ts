@@ -85,7 +85,6 @@ export const SFixed64Rules$inboundSchema: z.ZodType<
   notIn: z.nullable(z.array(z.string().transform(v => parseInt(v, 10))))
     .optional(),
 });
-
 /** @internal */
 export type SFixed64Rules$Outbound = {
   const?: string | null | undefined;
@@ -115,23 +114,9 @@ export const SFixed64Rules$outboundSchema: z.ZodType<
     .optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SFixed64Rules$ {
-  /** @deprecated use `SFixed64Rules$inboundSchema` instead. */
-  export const inboundSchema = SFixed64Rules$inboundSchema;
-  /** @deprecated use `SFixed64Rules$outboundSchema` instead. */
-  export const outboundSchema = SFixed64Rules$outboundSchema;
-  /** @deprecated use `SFixed64Rules$Outbound` instead. */
-  export type Outbound = SFixed64Rules$Outbound;
-}
-
 export function sFixed64RulesToJSON(sFixed64Rules: SFixed64Rules): string {
   return JSON.stringify(SFixed64Rules$outboundSchema.parse(sFixed64Rules));
 }
-
 export function sFixed64RulesFromJSON(
   jsonString: string,
 ): SafeParseResult<SFixed64Rules, SDKValidationError> {

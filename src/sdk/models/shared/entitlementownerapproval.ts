@@ -23,6 +23,10 @@ export type EntitlementOwnerApproval = {
    * Configuration to specific which users to fallback to if fallback is enabled and the entitlement owner cannot be identified.
    */
   fallbackUserIds?: Array<string> | null | undefined;
+  /**
+   * Configuration to require distinct approvers across approval steps of a rule.
+   */
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -34,13 +38,14 @@ export const EntitlementOwnerApproval$inboundSchema: z.ZodType<
   allowSelfApproval: z.nullable(z.boolean()).optional(),
   fallback: z.nullable(z.boolean()).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
 /** @internal */
 export type EntitlementOwnerApproval$Outbound = {
   allowSelfApproval?: boolean | null | undefined;
   fallback?: boolean | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -52,20 +57,8 @@ export const EntitlementOwnerApproval$outboundSchema: z.ZodType<
   allowSelfApproval: z.nullable(z.boolean()).optional(),
   fallback: z.nullable(z.boolean()).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EntitlementOwnerApproval$ {
-  /** @deprecated use `EntitlementOwnerApproval$inboundSchema` instead. */
-  export const inboundSchema = EntitlementOwnerApproval$inboundSchema;
-  /** @deprecated use `EntitlementOwnerApproval$outboundSchema` instead. */
-  export const outboundSchema = EntitlementOwnerApproval$outboundSchema;
-  /** @deprecated use `EntitlementOwnerApproval$Outbound` instead. */
-  export type Outbound = EntitlementOwnerApproval$Outbound;
-}
 
 export function entitlementOwnerApprovalToJSON(
   entitlementOwnerApproval: EntitlementOwnerApproval,
@@ -74,7 +67,6 @@ export function entitlementOwnerApprovalToJSON(
     EntitlementOwnerApproval$outboundSchema.parse(entitlementOwnerApproval),
   );
 }
-
 export function entitlementOwnerApprovalFromJSON(
   jsonString: string,
 ): SafeParseResult<EntitlementOwnerApproval, SDKValidationError> {

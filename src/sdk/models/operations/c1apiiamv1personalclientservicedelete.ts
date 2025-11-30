@@ -38,23 +38,6 @@ export type C1ApiIamV1PersonalClientServiceDeleteResponse = {
 };
 
 /** @internal */
-export const C1ApiIamV1PersonalClientServiceDeleteRequest$inboundSchema:
-  z.ZodType<
-    C1ApiIamV1PersonalClientServiceDeleteRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.nullable(z.string()),
-    PersonalClientServiceDeleteRequest: shared
-      .PersonalClientServiceDeleteRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "PersonalClientServiceDeleteRequest":
-        "personalClientServiceDeleteRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiIamV1PersonalClientServiceDeleteRequest$Outbound = {
   id: string | null;
   PersonalClientServiceDeleteRequest?:
@@ -78,21 +61,6 @@ export const C1ApiIamV1PersonalClientServiceDeleteRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiIamV1PersonalClientServiceDeleteRequest$ {
-  /** @deprecated use `C1ApiIamV1PersonalClientServiceDeleteRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiIamV1PersonalClientServiceDeleteRequest$inboundSchema;
-  /** @deprecated use `C1ApiIamV1PersonalClientServiceDeleteRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiIamV1PersonalClientServiceDeleteRequest$outboundSchema;
-  /** @deprecated use `C1ApiIamV1PersonalClientServiceDeleteRequest$Outbound` instead. */
-  export type Outbound = C1ApiIamV1PersonalClientServiceDeleteRequest$Outbound;
-}
-
 export function c1ApiIamV1PersonalClientServiceDeleteRequestToJSON(
   c1ApiIamV1PersonalClientServiceDeleteRequest:
     C1ApiIamV1PersonalClientServiceDeleteRequest,
@@ -101,22 +69,6 @@ export function c1ApiIamV1PersonalClientServiceDeleteRequestToJSON(
     C1ApiIamV1PersonalClientServiceDeleteRequest$outboundSchema.parse(
       c1ApiIamV1PersonalClientServiceDeleteRequest,
     ),
-  );
-}
-
-export function c1ApiIamV1PersonalClientServiceDeleteRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiIamV1PersonalClientServiceDeleteRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiIamV1PersonalClientServiceDeleteRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiIamV1PersonalClientServiceDeleteRequest' from JSON`,
   );
 }
 
@@ -141,66 +93,6 @@ export const C1ApiIamV1PersonalClientServiceDeleteResponse$inboundSchema:
         "personalClientServiceDeleteResponse",
     });
   });
-
-/** @internal */
-export type C1ApiIamV1PersonalClientServiceDeleteResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  PersonalClientServiceDeleteResponse?:
-    | shared.PersonalClientServiceDeleteResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiIamV1PersonalClientServiceDeleteResponse$outboundSchema:
-  z.ZodType<
-    C1ApiIamV1PersonalClientServiceDeleteResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiIamV1PersonalClientServiceDeleteResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    personalClientServiceDeleteResponse: shared
-      .PersonalClientServiceDeleteResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      personalClientServiceDeleteResponse:
-        "PersonalClientServiceDeleteResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiIamV1PersonalClientServiceDeleteResponse$ {
-  /** @deprecated use `C1ApiIamV1PersonalClientServiceDeleteResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiIamV1PersonalClientServiceDeleteResponse$inboundSchema;
-  /** @deprecated use `C1ApiIamV1PersonalClientServiceDeleteResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiIamV1PersonalClientServiceDeleteResponse$outboundSchema;
-  /** @deprecated use `C1ApiIamV1PersonalClientServiceDeleteResponse$Outbound` instead. */
-  export type Outbound = C1ApiIamV1PersonalClientServiceDeleteResponse$Outbound;
-}
-
-export function c1ApiIamV1PersonalClientServiceDeleteResponseToJSON(
-  c1ApiIamV1PersonalClientServiceDeleteResponse:
-    C1ApiIamV1PersonalClientServiceDeleteResponse,
-): string {
-  return JSON.stringify(
-    C1ApiIamV1PersonalClientServiceDeleteResponse$outboundSchema.parse(
-      c1ApiIamV1PersonalClientServiceDeleteResponse,
-    ),
-  );
-}
 
 export function c1ApiIamV1PersonalClientServiceDeleteResponseFromJSON(
   jsonString: string,

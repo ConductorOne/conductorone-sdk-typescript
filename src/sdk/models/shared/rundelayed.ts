@@ -25,7 +25,6 @@ export const RunDelayed$inboundSchema: z.ZodType<
 > = z.object({
   coldStartDelayDays: z.number().int(),
 });
-
 /** @internal */
 export type RunDelayed$Outbound = {
   coldStartDelayDays: number;
@@ -40,23 +39,9 @@ export const RunDelayed$outboundSchema: z.ZodType<
   coldStartDelayDays: z.number().int(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RunDelayed$ {
-  /** @deprecated use `RunDelayed$inboundSchema` instead. */
-  export const inboundSchema = RunDelayed$inboundSchema;
-  /** @deprecated use `RunDelayed$outboundSchema` instead. */
-  export const outboundSchema = RunDelayed$outboundSchema;
-  /** @deprecated use `RunDelayed$Outbound` instead. */
-  export type Outbound = RunDelayed$Outbound;
-}
-
 export function runDelayedToJSON(runDelayed: RunDelayed): string {
   return JSON.stringify(RunDelayed$outboundSchema.parse(runDelayed));
 }
-
 export function runDelayedFromJSON(
   jsonString: string,
 ): SafeParseResult<RunDelayed, SDKValidationError> {

@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   UserWithAppEntitlementUserBindingView,
   UserWithAppEntitlementUserBindingView$inboundSchema,
-  UserWithAppEntitlementUserBindingView$Outbound,
-  UserWithAppEntitlementUserBindingView$outboundSchema,
 } from "./userwithappentitlementuserbindingview.js";
 
 /**
@@ -37,50 +35,6 @@ export const ListAutomationExclusionsResponse$inboundSchema: z.ZodType<
     .optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ListAutomationExclusionsResponse$Outbound = {
-  list?:
-    | Array<UserWithAppEntitlementUserBindingView$Outbound>
-    | null
-    | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ListAutomationExclusionsResponse$outboundSchema: z.ZodType<
-  ListAutomationExclusionsResponse$Outbound,
-  z.ZodTypeDef,
-  ListAutomationExclusionsResponse
-> = z.object({
-  list: z.nullable(
-    z.array(UserWithAppEntitlementUserBindingView$outboundSchema),
-  ).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAutomationExclusionsResponse$ {
-  /** @deprecated use `ListAutomationExclusionsResponse$inboundSchema` instead. */
-  export const inboundSchema = ListAutomationExclusionsResponse$inboundSchema;
-  /** @deprecated use `ListAutomationExclusionsResponse$outboundSchema` instead. */
-  export const outboundSchema = ListAutomationExclusionsResponse$outboundSchema;
-  /** @deprecated use `ListAutomationExclusionsResponse$Outbound` instead. */
-  export type Outbound = ListAutomationExclusionsResponse$Outbound;
-}
-
-export function listAutomationExclusionsResponseToJSON(
-  listAutomationExclusionsResponse: ListAutomationExclusionsResponse,
-): string {
-  return JSON.stringify(
-    ListAutomationExclusionsResponse$outboundSchema.parse(
-      listAutomationExclusionsResponse,
-    ),
-  );
-}
 
 export function listAutomationExclusionsResponseFromJSON(
   jsonString: string,

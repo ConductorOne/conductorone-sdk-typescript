@@ -26,37 +26,6 @@ export const WebhookSpec$inboundSchema: z.ZodType<
   destination: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type WebhookSpec$Outbound = {
-  destination?: string | null | undefined;
-};
-
-/** @internal */
-export const WebhookSpec$outboundSchema: z.ZodType<
-  WebhookSpec$Outbound,
-  z.ZodTypeDef,
-  WebhookSpec
-> = z.object({
-  destination: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhookSpec$ {
-  /** @deprecated use `WebhookSpec$inboundSchema` instead. */
-  export const inboundSchema = WebhookSpec$inboundSchema;
-  /** @deprecated use `WebhookSpec$outboundSchema` instead. */
-  export const outboundSchema = WebhookSpec$outboundSchema;
-  /** @deprecated use `WebhookSpec$Outbound` instead. */
-  export type Outbound = WebhookSpec$Outbound;
-}
-
-export function webhookSpecToJSON(webhookSpec: WebhookSpec): string {
-  return JSON.stringify(WebhookSpec$outboundSchema.parse(webhookSpec));
-}
-
 export function webhookSpecFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookSpec, SDKValidationError> {

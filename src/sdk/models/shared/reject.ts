@@ -22,7 +22,6 @@ export const Reject$inboundSchema: z.ZodType<Reject, z.ZodTypeDef, unknown> = z
   .object({
     rejectMessage: z.nullable(z.string()).optional(),
   });
-
 /** @internal */
 export type Reject$Outbound = {
   rejectMessage?: string | null | undefined;
@@ -37,23 +36,9 @@ export const Reject$outboundSchema: z.ZodType<
   rejectMessage: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Reject$ {
-  /** @deprecated use `Reject$inboundSchema` instead. */
-  export const inboundSchema = Reject$inboundSchema;
-  /** @deprecated use `Reject$outboundSchema` instead. */
-  export const outboundSchema = Reject$outboundSchema;
-  /** @deprecated use `Reject$Outbound` instead. */
-  export type Outbound = Reject$Outbound;
-}
-
 export function rejectToJSON(reject: Reject): string {
   return JSON.stringify(Reject$outboundSchema.parse(reject));
 }
-
 export function rejectFromJSON(
   jsonString: string,
 ): SafeParseResult<Reject, SDKValidationError> {

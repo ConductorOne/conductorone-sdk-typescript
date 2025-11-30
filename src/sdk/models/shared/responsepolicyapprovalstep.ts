@@ -71,7 +71,6 @@ export const ResponsePolicyApprovalStep$inboundSchema: z.ZodType<
     .optional(),
   version: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type ResponsePolicyApprovalStep$Outbound = {
   approve?: ResponsePolicyApprovalStepApprove$Outbound | null | undefined;
@@ -100,19 +99,6 @@ export const ResponsePolicyApprovalStep$outboundSchema: z.ZodType<
   version: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponsePolicyApprovalStep$ {
-  /** @deprecated use `ResponsePolicyApprovalStep$inboundSchema` instead. */
-  export const inboundSchema = ResponsePolicyApprovalStep$inboundSchema;
-  /** @deprecated use `ResponsePolicyApprovalStep$outboundSchema` instead. */
-  export const outboundSchema = ResponsePolicyApprovalStep$outboundSchema;
-  /** @deprecated use `ResponsePolicyApprovalStep$Outbound` instead. */
-  export type Outbound = ResponsePolicyApprovalStep$Outbound;
-}
-
 export function responsePolicyApprovalStepToJSON(
   responsePolicyApprovalStep: ResponsePolicyApprovalStep,
 ): string {
@@ -120,7 +106,6 @@ export function responsePolicyApprovalStepToJSON(
     ResponsePolicyApprovalStep$outboundSchema.parse(responsePolicyApprovalStep),
   );
 }
-
 export function responsePolicyApprovalStepFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponsePolicyApprovalStep, SDKValidationError> {

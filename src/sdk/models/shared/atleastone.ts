@@ -18,7 +18,6 @@ export const AtLeastOne$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
 /** @internal */
 export type AtLeastOne$Outbound = {};
 
@@ -29,23 +28,9 @@ export const AtLeastOne$outboundSchema: z.ZodType<
   AtLeastOne
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AtLeastOne$ {
-  /** @deprecated use `AtLeastOne$inboundSchema` instead. */
-  export const inboundSchema = AtLeastOne$inboundSchema;
-  /** @deprecated use `AtLeastOne$outboundSchema` instead. */
-  export const outboundSchema = AtLeastOne$outboundSchema;
-  /** @deprecated use `AtLeastOne$Outbound` instead. */
-  export type Outbound = AtLeastOne$Outbound;
-}
-
 export function atLeastOneToJSON(atLeastOne: AtLeastOne): string {
   return JSON.stringify(AtLeastOne$outboundSchema.parse(atLeastOne));
 }
-
 export function atLeastOneFromJSON(
   jsonString: string,
 ): SafeParseResult<AtLeastOne, SDKValidationError> {

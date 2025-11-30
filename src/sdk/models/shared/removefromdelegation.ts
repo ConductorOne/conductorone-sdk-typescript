@@ -55,7 +55,6 @@ export const RemoveFromDelegation$inboundSchema: z.ZodType<
   userIdCel: z.nullable(z.string()).optional(),
   userRef: z.nullable(UserRef$inboundSchema).optional(),
 });
-
 /** @internal */
 export type RemoveFromDelegation$Outbound = {
   replacementUserIdCel?: string | null | undefined;
@@ -78,19 +77,6 @@ export const RemoveFromDelegation$outboundSchema: z.ZodType<
   userRef: z.nullable(UserRef$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RemoveFromDelegation$ {
-  /** @deprecated use `RemoveFromDelegation$inboundSchema` instead. */
-  export const inboundSchema = RemoveFromDelegation$inboundSchema;
-  /** @deprecated use `RemoveFromDelegation$outboundSchema` instead. */
-  export const outboundSchema = RemoveFromDelegation$outboundSchema;
-  /** @deprecated use `RemoveFromDelegation$Outbound` instead. */
-  export type Outbound = RemoveFromDelegation$Outbound;
-}
-
 export function removeFromDelegationToJSON(
   removeFromDelegation: RemoveFromDelegation,
 ): string {
@@ -98,7 +84,6 @@ export function removeFromDelegationToJSON(
     RemoveFromDelegation$outboundSchema.parse(removeFromDelegation),
   );
 }
-
 export function removeFromDelegationFromJSON(
   jsonString: string,
 ): SafeParseResult<RemoveFromDelegation, SDKValidationError> {

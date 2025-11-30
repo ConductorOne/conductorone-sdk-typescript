@@ -38,26 +38,6 @@ export type C1ApiAppV1AppUserServiceListAppUsersForUserResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppUserServiceListAppUsersForUserRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppUserServiceListAppUsersForUserRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    user_id: z.nullable(z.string()),
-    page_size: z.nullable(z.number().int()).optional(),
-    page_token: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "user_id": "userId",
-      "page_size": "pageSize",
-      "page_token": "pageToken",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppUserServiceListAppUsersForUserRequest$Outbound = {
   app_id: string | null;
   user_id: string | null;
@@ -85,22 +65,6 @@ export const C1ApiAppV1AppUserServiceListAppUsersForUserRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppUserServiceListAppUsersForUserRequest$ {
-  /** @deprecated use `C1ApiAppV1AppUserServiceListAppUsersForUserRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppUserServiceListAppUsersForUserRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppUserServiceListAppUsersForUserRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppUserServiceListAppUsersForUserRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppUserServiceListAppUsersForUserRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppUserServiceListAppUsersForUserRequest$Outbound;
-}
-
 export function c1ApiAppV1AppUserServiceListAppUsersForUserRequestToJSON(
   c1ApiAppV1AppUserServiceListAppUsersForUserRequest:
     C1ApiAppV1AppUserServiceListAppUsersForUserRequest,
@@ -109,22 +73,6 @@ export function c1ApiAppV1AppUserServiceListAppUsersForUserRequestToJSON(
     C1ApiAppV1AppUserServiceListAppUsersForUserRequest$outboundSchema.parse(
       c1ApiAppV1AppUserServiceListAppUsersForUserRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppUserServiceListAppUsersForUserRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppUserServiceListAppUsersForUserRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppUserServiceListAppUsersForUserRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiAppV1AppUserServiceListAppUsersForUserRequest' from JSON`,
   );
 }
 
@@ -149,66 +97,6 @@ export const C1ApiAppV1AppUserServiceListAppUsersForUserResponse$inboundSchema:
         "appUsersForUserServiceListResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppUserServiceListAppUsersForUserResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  AppUsersForUserServiceListResponse?:
-    | shared.AppUsersForUserServiceListResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppUserServiceListAppUsersForUserResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppUserServiceListAppUsersForUserResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppUserServiceListAppUsersForUserResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    appUsersForUserServiceListResponse: shared
-      .AppUsersForUserServiceListResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      appUsersForUserServiceListResponse: "AppUsersForUserServiceListResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppUserServiceListAppUsersForUserResponse$ {
-  /** @deprecated use `C1ApiAppV1AppUserServiceListAppUsersForUserResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppUserServiceListAppUsersForUserResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppUserServiceListAppUsersForUserResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppUserServiceListAppUsersForUserResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppUserServiceListAppUsersForUserResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppUserServiceListAppUsersForUserResponse$Outbound;
-}
-
-export function c1ApiAppV1AppUserServiceListAppUsersForUserResponseToJSON(
-  c1ApiAppV1AppUserServiceListAppUsersForUserResponse:
-    C1ApiAppV1AppUserServiceListAppUsersForUserResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppUserServiceListAppUsersForUserResponse$outboundSchema.parse(
-      c1ApiAppV1AppUserServiceListAppUsersForUserResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppUserServiceListAppUsersForUserResponseFromJSON(
   jsonString: string,

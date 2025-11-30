@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -62,32 +59,7 @@ export const Severity$inboundSchema: z.ZodType<
   Severity,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(Severity),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const Severity$outboundSchema: z.ZodType<
-  Severity,
-  z.ZodTypeDef,
-  Severity
-> = z.union([
-  z.nativeEnum(Severity),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Severity$ {
-  /** @deprecated use `Severity$inboundSchema` instead. */
-  export const inboundSchema = Severity$inboundSchema;
-  /** @deprecated use `Severity$outboundSchema` instead. */
-  export const outboundSchema = Severity$outboundSchema;
-}
+> = openEnums.inboundSchema(Severity);
 
 /** @internal */
 export const EditorMarker$inboundSchema: z.ZodType<
@@ -102,47 +74,6 @@ export const EditorMarker$inboundSchema: z.ZodType<
   startColumn: z.nullable(z.number().int()).optional(),
   startLineNumber: z.nullable(z.number().int()).optional(),
 });
-
-/** @internal */
-export type EditorMarker$Outbound = {
-  endColumn?: number | null | undefined;
-  endLineNumber?: number | null | undefined;
-  message?: string | null | undefined;
-  severity?: string | null | undefined;
-  startColumn?: number | null | undefined;
-  startLineNumber?: number | null | undefined;
-};
-
-/** @internal */
-export const EditorMarker$outboundSchema: z.ZodType<
-  EditorMarker$Outbound,
-  z.ZodTypeDef,
-  EditorMarker
-> = z.object({
-  endColumn: z.nullable(z.number().int()).optional(),
-  endLineNumber: z.nullable(z.number().int()).optional(),
-  message: z.nullable(z.string()).optional(),
-  severity: z.nullable(Severity$outboundSchema).optional(),
-  startColumn: z.nullable(z.number().int()).optional(),
-  startLineNumber: z.nullable(z.number().int()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EditorMarker$ {
-  /** @deprecated use `EditorMarker$inboundSchema` instead. */
-  export const inboundSchema = EditorMarker$inboundSchema;
-  /** @deprecated use `EditorMarker$outboundSchema` instead. */
-  export const outboundSchema = EditorMarker$outboundSchema;
-  /** @deprecated use `EditorMarker$Outbound` instead. */
-  export type Outbound = EditorMarker$Outbound;
-}
-
-export function editorMarkerToJSON(editorMarker: EditorMarker): string {
-  return JSON.stringify(EditorMarker$outboundSchema.parse(editorMarker));
-}
 
 export function editorMarkerFromJSON(
   jsonString: string,

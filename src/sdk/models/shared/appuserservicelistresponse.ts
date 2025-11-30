@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  AppUserView,
-  AppUserView$inboundSchema,
-  AppUserView$Outbound,
-  AppUserView$outboundSchema,
-} from "./appuserview.js";
+import { AppUserView, AppUserView$inboundSchema } from "./appuserview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -63,47 +58,6 @@ export const Expanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type Expanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const Expanded$outboundSchema: z.ZodType<
-  Expanded$Outbound,
-  z.ZodTypeDef,
-  Expanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Expanded$ {
-  /** @deprecated use `Expanded$inboundSchema` instead. */
-  export const inboundSchema = Expanded$inboundSchema;
-  /** @deprecated use `Expanded$outboundSchema` instead. */
-  export const outboundSchema = Expanded$outboundSchema;
-  /** @deprecated use `Expanded$Outbound` instead. */
-  export type Outbound = Expanded$Outbound;
-}
-
-export function expandedToJSON(expanded: Expanded): string {
-  return JSON.stringify(Expanded$outboundSchema.parse(expanded));
-}
-
 export function expandedFromJSON(
   jsonString: string,
 ): SafeParseResult<Expanded, SDKValidationError> {
@@ -125,46 +79,6 @@ export const AppUserServiceListResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(AppUserView$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type AppUserServiceListResponse$Outbound = {
-  expanded?: Array<Expanded$Outbound> | null | undefined;
-  list?: Array<AppUserView$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const AppUserServiceListResponse$outboundSchema: z.ZodType<
-  AppUserServiceListResponse$Outbound,
-  z.ZodTypeDef,
-  AppUserServiceListResponse
-> = z.object({
-  expanded: z.nullable(z.array(z.lazy(() => Expanded$outboundSchema)))
-    .optional(),
-  list: z.nullable(z.array(AppUserView$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUserServiceListResponse$ {
-  /** @deprecated use `AppUserServiceListResponse$inboundSchema` instead. */
-  export const inboundSchema = AppUserServiceListResponse$inboundSchema;
-  /** @deprecated use `AppUserServiceListResponse$outboundSchema` instead. */
-  export const outboundSchema = AppUserServiceListResponse$outboundSchema;
-  /** @deprecated use `AppUserServiceListResponse$Outbound` instead. */
-  export type Outbound = AppUserServiceListResponse$Outbound;
-}
-
-export function appUserServiceListResponseToJSON(
-  appUserServiceListResponse: AppUserServiceListResponse,
-): string {
-  return JSON.stringify(
-    AppUserServiceListResponse$outboundSchema.parse(appUserServiceListResponse),
-  );
-}
 
 export function appUserServiceListResponseFromJSON(
   jsonString: string,

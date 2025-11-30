@@ -3,18 +3,13 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskExpandMask,
-  TaskExpandMask$inboundSchema,
   TaskExpandMask$Outbound,
   TaskExpandMask$outboundSchema,
 } from "./taskexpandmask.js";
 import {
   TaskGrantSource,
-  TaskGrantSource$inboundSchema,
   TaskGrantSource$Outbound,
   TaskGrantSource$outboundSchema,
 } from "./taskgrantsource.js";
@@ -54,24 +49,6 @@ export type TaskServiceCreateGrantRequest = {
 };
 
 /** @internal */
-export const TaskServiceCreateGrantRequest$inboundSchema: z.ZodType<
-  TaskServiceCreateGrantRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appEntitlementId: z.string(),
-  appId: z.string(),
-  appUserId: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  emergencyAccess: z.nullable(z.boolean()).optional(),
-  expandMask: z.nullable(TaskExpandMask$inboundSchema).optional(),
-  grantDuration: z.nullable(z.string()).optional(),
-  identityUserId: z.nullable(z.string()).optional(),
-  requestData: z.nullable(z.record(z.any())).optional(),
-  source: z.nullable(TaskGrantSource$inboundSchema).optional(),
-});
-
-/** @internal */
 export type TaskServiceCreateGrantRequest$Outbound = {
   appEntitlementId: string;
   appId: string;
@@ -103,19 +80,6 @@ export const TaskServiceCreateGrantRequest$outboundSchema: z.ZodType<
   source: z.nullable(TaskGrantSource$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskServiceCreateGrantRequest$ {
-  /** @deprecated use `TaskServiceCreateGrantRequest$inboundSchema` instead. */
-  export const inboundSchema = TaskServiceCreateGrantRequest$inboundSchema;
-  /** @deprecated use `TaskServiceCreateGrantRequest$outboundSchema` instead. */
-  export const outboundSchema = TaskServiceCreateGrantRequest$outboundSchema;
-  /** @deprecated use `TaskServiceCreateGrantRequest$Outbound` instead. */
-  export type Outbound = TaskServiceCreateGrantRequest$Outbound;
-}
-
 export function taskServiceCreateGrantRequestToJSON(
   taskServiceCreateGrantRequest: TaskServiceCreateGrantRequest,
 ): string {
@@ -123,15 +87,5 @@ export function taskServiceCreateGrantRequestToJSON(
     TaskServiceCreateGrantRequest$outboundSchema.parse(
       taskServiceCreateGrantRequest,
     ),
-  );
-}
-
-export function taskServiceCreateGrantRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskServiceCreateGrantRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskServiceCreateGrantRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskServiceCreateGrantRequest' from JSON`,
   );
 }

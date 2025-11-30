@@ -30,7 +30,6 @@ export const ConnectorRef$inboundSchema: z.ZodType<
   appId: z.nullable(z.string()).optional(),
   id: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type ConnectorRef$Outbound = {
   appId?: string | null | undefined;
@@ -47,23 +46,9 @@ export const ConnectorRef$outboundSchema: z.ZodType<
   id: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorRef$ {
-  /** @deprecated use `ConnectorRef$inboundSchema` instead. */
-  export const inboundSchema = ConnectorRef$inboundSchema;
-  /** @deprecated use `ConnectorRef$outboundSchema` instead. */
-  export const outboundSchema = ConnectorRef$outboundSchema;
-  /** @deprecated use `ConnectorRef$Outbound` instead. */
-  export type Outbound = ConnectorRef$Outbound;
-}
-
 export function connectorRefToJSON(connectorRef: ConnectorRef): string {
   return JSON.stringify(ConnectorRef$outboundSchema.parse(connectorRef));
 }
-
 export function connectorRefFromJSON(
   jsonString: string,
 ): SafeParseResult<ConnectorRef, SDKValidationError> {

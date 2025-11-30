@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 59dafb44-7e9b-49d4-8e7d-679663d28f0f
 management:
-  docChecksum: 6650d6a62e86982eccabd88d1329ecf2
+  docChecksum: df9d44d7e672898a34a4ccd2d10661d2
   docVersion: 0.1.0-alpha
-  speakeasyVersion: 1.642.2
-  generationVersion: 2.731.6
-  releaseVersion: 1.1.1
-  configChecksum: 2fb8c11cc9fb30befae5904565558aa4
+  speakeasyVersion: 1.665.0
+  generationVersion: 2.767.2
+  releaseVersion: 1.2.0
+  configChecksum: 49e1ea90df209c442afddaf0eabaf793
   repoURL: https://github.com/ConductorOne/conductorone-sdk-typescript.git
   installationURL: https://github.com/ConductorOne/conductorone-sdk-typescript
   published: true
@@ -14,14 +14,14 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.2
-    core: 3.24.1
+    core: 3.26.13
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
     globalSecurity: 2.82.14
     globalSecurityCallbacks: 0.1.0
-    globalServerURLs: 2.82.5
+    globalServerURLs: 2.83.0
     groups: 2.81.3
     includes: 2.81.1
     inputOutputModels: 2.82.0
@@ -32,7 +32,7 @@ features:
     pagination: 2.83.0
     responseFormat: 0.2.3
     retries: 2.83.0
-    sdkHooks: 0.3.0
+    sdkHooks: 0.4.0
     stringNumberFormats: 0.2.0
 generatedFiles:
   - .gitattributes
@@ -206,6 +206,8 @@ generatedFiles:
   - docs/sdk/models/operations/c1apiappv1connectorservicedeleteresponse.md
   - docs/sdk/models/operations/c1apiappv1connectorserviceforcesyncrequest.md
   - docs/sdk/models/operations/c1apiappv1connectorserviceforcesyncresponse.md
+  - docs/sdk/models/operations/c1apiappv1connectorservicegetconnectorsyncdownloadurlrequest.md
+  - docs/sdk/models/operations/c1apiappv1connectorservicegetconnectorsyncdownloadurlresponse.md
   - docs/sdk/models/operations/c1apiappv1connectorservicegetcredentialsrequest.md
   - docs/sdk/models/operations/c1apiappv1connectorservicegetcredentialsresponse.md
   - docs/sdk/models/operations/c1apiappv1connectorservicegetrequest.md
@@ -276,18 +278,20 @@ generatedFiles:
   - docs/sdk/models/operations/c1apidirectoryv1directoryservicelistresponse.md
   - docs/sdk/models/operations/c1apidirectoryv1directoryserviceupdaterequest.md
   - docs/sdk/models/operations/c1apidirectoryv1directoryserviceupdateresponse.md
+  - docs/sdk/models/operations/c1apifunctionsv1functionsinvocationservicegetrequest.md
+  - docs/sdk/models/operations/c1apifunctionsv1functionsinvocationservicegetresponse.md
+  - docs/sdk/models/operations/c1apifunctionsv1functionsinvocationservicelistrequest.md
+  - docs/sdk/models/operations/c1apifunctionsv1functionsinvocationservicelistresponse.md
   - docs/sdk/models/operations/c1apifunctionsv1functionssearchsearchresponse.md
-  - docs/sdk/models/operations/c1apifunctionsv1functionsservicecommitrequest.md
-  - docs/sdk/models/operations/c1apifunctionsv1functionsservicecommitresponse.md
   - docs/sdk/models/operations/c1apifunctionsv1functionsservicecreatefunctionresponse.md
   - docs/sdk/models/operations/c1apifunctionsv1functionsservicecreatetagrequest.md
   - docs/sdk/models/operations/c1apifunctionsv1functionsservicecreatetagresponse.md
   - docs/sdk/models/operations/c1apifunctionsv1functionsservicedeletefunctionrequest.md
   - docs/sdk/models/operations/c1apifunctionsv1functionsservicedeletefunctionresponse.md
-  - docs/sdk/models/operations/c1apifunctionsv1functionsservicegetcommitrequest.md
-  - docs/sdk/models/operations/c1apifunctionsv1functionsservicegetcommitresponse.md
   - docs/sdk/models/operations/c1apifunctionsv1functionsservicegetfunctionrequest.md
   - docs/sdk/models/operations/c1apifunctionsv1functionsservicegetfunctionresponse.md
+  - docs/sdk/models/operations/c1apifunctionsv1functionsservicegetfunctionsecretencryptionkeyrequest.md
+  - docs/sdk/models/operations/c1apifunctionsv1functionsservicegetfunctionsecretencryptionkeyresponse.md
   - docs/sdk/models/operations/c1apifunctionsv1functionsserviceinvokerequest.md
   - docs/sdk/models/operations/c1apifunctionsv1functionsserviceinvokeresponse.md
   - docs/sdk/models/operations/c1apifunctionsv1functionsservicelistcommitsrequest.md
@@ -330,16 +334,22 @@ generatedFiles:
   - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceaddappentitlementsresponse.md
   - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicecreatebundleautomationrequest.md
   - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicecreatebundleautomationresponse.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicecreaterequestableentryrequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicecreaterequestableentryresponse.md
   - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicecreateresponse.md
   - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicedeletebundleautomationrequest.md
   - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicedeletebundleautomationresponse.md
   - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicedeleterequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicedeleterequestableentryrequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicedeleterequestableentryresponse.md
   - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicedeleteresponse.md
   - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceforcerunbundleautomationrequest.md
   - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceforcerunbundleautomationresponse.md
   - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicegetbundleautomationrequest.md
   - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicegetbundleautomationresponse.md
   - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicegetrequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicegetrequestableentryrequest.md
+  - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicegetrequestableentryresponse.md
   - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicegetresponse.md
   - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicelistallentitlementidsperapprequest.md
   - docs/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicelistallentitlementidsperappresponse.md
@@ -450,6 +460,13 @@ generatedFiles:
   - docs/sdk/models/operations/c1apiuserv1userservicelistresponse.md
   - docs/sdk/models/operations/c1apiuserv1userservicesetexpiringuserdelegationbindingbyadminrequest.md
   - docs/sdk/models/operations/c1apiuserv1userservicesetexpiringuserdelegationbindingbyadminresponse.md
+  - docs/sdk/models/operations/c1apivaultv1vaultservicecreateresponse.md
+  - docs/sdk/models/operations/c1apivaultv1vaultservicedeleterequest.md
+  - docs/sdk/models/operations/c1apivaultv1vaultservicedeleteresponse.md
+  - docs/sdk/models/operations/c1apivaultv1vaultservicegetrequest.md
+  - docs/sdk/models/operations/c1apivaultv1vaultservicegetresponse.md
+  - docs/sdk/models/operations/c1apivaultv1vaultserviceupdaterequest.md
+  - docs/sdk/models/operations/c1apivaultv1vaultserviceupdateresponse.md
   - docs/sdk/models/operations/c1apiwebhooksv1webhookssearchsearchresponse.md
   - docs/sdk/models/operations/c1apiwebhooksv1webhooksservicecreateresponse.md
   - docs/sdk/models/operations/c1apiwebhooksv1webhooksservicedeleterequest.md
@@ -472,8 +489,17 @@ generatedFiles:
   - docs/sdk/models/shared/accountref.md
   - docs/sdk/models/shared/accounttype.md
   - docs/sdk/models/shared/accounttypes.md
+  - docs/sdk/models/shared/action.md
+  - docs/sdk/models/shared/actioninstance.md
+  - docs/sdk/models/shared/actioninstancestate.md
+  - docs/sdk/models/shared/actionoutcomecancelled.md
+  - docs/sdk/models/shared/actionoutcomedenied.md
+  - docs/sdk/models/shared/actionoutcomeerror.md
+  - docs/sdk/models/shared/actionoutcomesuccess.md
   - docs/sdk/models/shared/actionprovision.md
   - docs/sdk/models/shared/actions.md
+  - docs/sdk/models/shared/actiontargetautomation.md
+  - docs/sdk/models/shared/actiontargetautomationinstance.md
   - docs/sdk/models/shared/actiontype.md
   - docs/sdk/models/shared/addappentitlementownerrequest.md
   - docs/sdk/models/shared/addappentitlementownerresponse.md
@@ -705,6 +731,7 @@ generatedFiles:
   - docs/sdk/models/shared/createpolicyrequestpolicytype.md
   - docs/sdk/models/shared/createpolicyresponse.md
   - docs/sdk/models/shared/createrevoketasks.md
+  - docs/sdk/models/shared/createrevoketasksv2.md
   - docs/sdk/models/shared/createrisklevelattributevaluerequest.md
   - docs/sdk/models/shared/createrisklevelattributevalueresponse.md
   - docs/sdk/models/shared/createstepupproviderrequest.md
@@ -778,8 +805,16 @@ generatedFiles:
   - docs/sdk/models/shared/emergencystatus.md
   - docs/sdk/models/shared/encrypteddata.md
   - docs/sdk/models/shared/enrollmentbehavior.md
+  - docs/sdk/models/shared/entitlementexclusioncriteria.md
+  - docs/sdk/models/shared/entitlementexclusionlist.md
+  - docs/sdk/models/shared/entitlementexclusionlistcel.md
+  - docs/sdk/models/shared/entitlementexclusionnone.md
   - docs/sdk/models/shared/entitlementfilter.md
   - docs/sdk/models/shared/entitlementgroup.md
+  - docs/sdk/models/shared/entitlementinclusionall.md
+  - docs/sdk/models/shared/entitlementinclusioncriteria.md
+  - docs/sdk/models/shared/entitlementinclusionlist.md
+  - docs/sdk/models/shared/entitlementinclusionlistcel.md
   - docs/sdk/models/shared/entitlementownerapproval.md
   - docs/sdk/models/shared/enumrules.md
   - docs/sdk/models/shared/erroredaction.md
@@ -843,10 +878,12 @@ generatedFiles:
   - docs/sdk/models/shared/forminstancestate.md
   - docs/sdk/models/shared/formtrigger.md
   - docs/sdk/models/shared/functioncommit.md
+  - docs/sdk/models/shared/functioninvocation.md
+  - docs/sdk/models/shared/functioninvocationstatus.md
+  - docs/sdk/models/shared/functionsinvocationservicegetresponse.md
+  - docs/sdk/models/shared/functionsinvocationservicelistresponse.md
   - docs/sdk/models/shared/functionssearchrequest.md
   - docs/sdk/models/shared/functionssearchresponse.md
-  - docs/sdk/models/shared/functionsservicecommitrequest.md
-  - docs/sdk/models/shared/functionsservicecommitresponse.md
   - docs/sdk/models/shared/functionsservicecreatefunctionrequest.md
   - docs/sdk/models/shared/functionsservicecreatefunctionrequestfunctiontype.md
   - docs/sdk/models/shared/functionsservicecreatefunctionresponse.md
@@ -854,8 +891,8 @@ generatedFiles:
   - docs/sdk/models/shared/functionsservicecreatetagresponse.md
   - docs/sdk/models/shared/functionsservicedeletefunctionrequest.md
   - docs/sdk/models/shared/functionsservicedeletefunctionresponse.md
-  - docs/sdk/models/shared/functionsservicegetcommitresponse.md
   - docs/sdk/models/shared/functionsservicegetfunctionresponse.md
+  - docs/sdk/models/shared/functionsservicegetfunctionsecretencryptionkeyresponse.md
   - docs/sdk/models/shared/functionsserviceinvokerequest.md
   - docs/sdk/models/shared/functionsserviceinvokeresponse.md
   - docs/sdk/models/shared/functionsservicelistcommitsresponse.md
@@ -876,9 +913,11 @@ generatedFiles:
   - docs/sdk/models/shared/getappusagecontrolsresponse.md
   - docs/sdk/models/shared/getattributevalueresponse.md
   - docs/sdk/models/shared/getautomationexecutionresponse.md
+  - docs/sdk/models/shared/getautomationexecutionresponseexpanded.md
   - docs/sdk/models/shared/getautomationresponse.md
   - docs/sdk/models/shared/getawsexternalidresponse.md
   - docs/sdk/models/shared/getcomplianceframeworkattributevalueresponse.md
+  - docs/sdk/models/shared/getconnectorsyncdownloadurlresponse.md
   - docs/sdk/models/shared/getpolicyresponse.md
   - docs/sdk/models/shared/getrisklevelattributevalueresponse.md
   - docs/sdk/models/shared/getrolesresponse.md
@@ -897,6 +936,7 @@ generatedFiles:
   - docs/sdk/models/shared/grantreason.md
   - docs/sdk/models/shared/grantsourcefilter.md
   - docs/sdk/models/shared/granttriggerfilter.md
+  - docs/sdk/models/shared/groupauthzvault.md
   - docs/sdk/models/shared/identitymatching.md
   - docs/sdk/models/shared/importfield.md
   - docs/sdk/models/shared/int32rules.md
@@ -927,6 +967,7 @@ generatedFiles:
   - docs/sdk/models/shared/listrisklevelsresponse.md
   - docs/sdk/models/shared/listrolesresponse.md
   - docs/sdk/models/shared/liststepupprovidersresponse.md
+  - docs/sdk/models/shared/magicvault.md
   - docs/sdk/models/shared/managerapproval.md
   - docs/sdk/models/shared/managerapprovalinput.md
   - docs/sdk/models/shared/manualautomationtrigger.md
@@ -942,6 +983,8 @@ generatedFiles:
   - docs/sdk/models/shared/oauth2authorizedas.md
   - docs/sdk/models/shared/oauth2authorizedasinput.md
   - docs/sdk/models/shared/oauth2field.md
+  - docs/sdk/models/shared/oauth2field1.md
+  - docs/sdk/models/shared/oauth2fieldview.md
   - docs/sdk/models/shared/optionsfield.md
   - docs/sdk/models/shared/orgdomain.md
   - docs/sdk/models/shared/origin.md
@@ -1020,6 +1063,7 @@ generatedFiles:
   - docs/sdk/models/shared/removegrantdurationresponse.md
   - docs/sdk/models/shared/repeatedrules.md
   - docs/sdk/models/shared/replacepolicy.md
+  - docs/sdk/models/shared/requestableentry.md
   - docs/sdk/models/shared/requestcatalog.md
   - docs/sdk/models/shared/requestcatalogexpandmask.md
   - docs/sdk/models/shared/requestcataloginput.md
@@ -1028,11 +1072,16 @@ generatedFiles:
   - docs/sdk/models/shared/requestcatalogmanagementserviceaddappentitlementsrequest.md
   - docs/sdk/models/shared/requestcatalogmanagementserviceaddappentitlementsresponse.md
   - docs/sdk/models/shared/requestcatalogmanagementservicecreaterequest.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicecreaterequestableentryrequest.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicecreaterequestableentryresponse.md
   - docs/sdk/models/shared/requestcatalogmanagementservicecreaterequestenrollmentbehavior.md
   - docs/sdk/models/shared/requestcatalogmanagementservicecreaterequestunenrollmentbehavior.md
   - docs/sdk/models/shared/requestcatalogmanagementservicecreaterequestunenrollmententitlementbehavior.md
   - docs/sdk/models/shared/requestcatalogmanagementservicedeleterequest.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicedeleterequestableentryrequest.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicedeleterequestableentryresponse.md
   - docs/sdk/models/shared/requestcatalogmanagementservicedeleteresponse.md
+  - docs/sdk/models/shared/requestcatalogmanagementservicegetrequestableentryresponse.md
   - docs/sdk/models/shared/requestcatalogmanagementservicegetresponse.md
   - docs/sdk/models/shared/requestcatalogmanagementservicegetresponseexpanded.md
   - docs/sdk/models/shared/requestcatalogmanagementservicelistallentitlementidspercatalogresponse.md
@@ -1173,6 +1222,7 @@ generatedFiles:
   - docs/sdk/models/shared/stringmapfield.md
   - docs/sdk/models/shared/stringrules.md
   - docs/sdk/models/shared/stringslicefield.md
+  - docs/sdk/models/shared/syncconfig.md
   - docs/sdk/models/shared/systemlogservicelisteventsrequest.md
   - docs/sdk/models/shared/systemlogservicelisteventsresponse.md
   - docs/sdk/models/shared/targetedappusertypes.md
@@ -1309,8 +1359,11 @@ generatedFiles:
   - docs/sdk/models/shared/taskstate.md
   - docs/sdk/models/shared/taskstates.md
   - docs/sdk/models/shared/tasktype.md
+  - docs/sdk/models/shared/tasktypeaction.md
+  - docs/sdk/models/shared/tasktypeactioninput.md
   - docs/sdk/models/shared/tasktypecertify.md
   - docs/sdk/models/shared/tasktypecertifyinput.md
+  - docs/sdk/models/shared/tasktypecertifyoutcome.md
   - docs/sdk/models/shared/tasktypegrant.md
   - docs/sdk/models/shared/tasktypegrantinput.md
   - docs/sdk/models/shared/tasktypegrantoutcome.md
@@ -1387,6 +1440,15 @@ generatedFiles:
   - docs/sdk/models/shared/userstatuses.md
   - docs/sdk/models/shared/userview.md
   - docs/sdk/models/shared/userwithappentitlementuserbindingview.md
+  - docs/sdk/models/shared/vault.md
+  - docs/sdk/models/shared/vaultinput.md
+  - docs/sdk/models/shared/vaultservicecreaterequest.md
+  - docs/sdk/models/shared/vaultservicecreateresponse.md
+  - docs/sdk/models/shared/vaultservicedeleterequest.md
+  - docs/sdk/models/shared/vaultservicedeleteresponse.md
+  - docs/sdk/models/shared/vaultservicegetresponse.md
+  - docs/sdk/models/shared/vaultserviceupdaterequest.md
+  - docs/sdk/models/shared/vaultserviceupdateresponse.md
   - docs/sdk/models/shared/wait.md
   - docs/sdk/models/shared/waitcondition.md
   - docs/sdk/models/shared/waitconditioninstance.md
@@ -1461,6 +1523,7 @@ generatedFiles:
   - docs/sdks/export/README.md
   - docs/sdks/exportssearch/README.md
   - docs/sdks/functions/README.md
+  - docs/sdks/functionsinvocation/README.md
   - docs/sdks/functionssearch/README.md
   - docs/sdks/orgdomain/README.md
   - docs/sdks/personalclient/README.md
@@ -1482,6 +1545,7 @@ generatedFiles:
   - docs/sdks/tasksearch/README.md
   - docs/sdks/user/README.md
   - docs/sdks/usersearch/README.md
+  - docs/sdks/vault/README.md
   - docs/sdks/webhooks/README.md
   - docs/sdks/webhookssearch/README.md
   - examples/.env.template
@@ -1611,6 +1675,7 @@ generatedFiles:
   - src/funcs/connectorDelete.ts
   - src/funcs/connectorForceSync.ts
   - src/funcs/connectorGet.ts
+  - src/funcs/connectorGetConnectorSyncDownloadURL.ts
   - src/funcs/connectorGetCredentials.ts
   - src/funcs/connectorList.ts
   - src/funcs/connectorPauseSync.ts
@@ -1632,12 +1697,13 @@ generatedFiles:
   - src/funcs/exportListEvents.ts
   - src/funcs/exportUpdate.ts
   - src/funcs/exportsSearchSearch.ts
-  - src/funcs/functionsCommit.ts
   - src/funcs/functionsCreateFunction.ts
   - src/funcs/functionsCreateTag.ts
   - src/funcs/functionsDeleteFunction.ts
-  - src/funcs/functionsGetCommit.ts
   - src/funcs/functionsGetFunction.ts
+  - src/funcs/functionsGetFunctionSecretEncryptionKey.ts
+  - src/funcs/functionsInvocationGet.ts
+  - src/funcs/functionsInvocationList.ts
   - src/funcs/functionsInvoke.ts
   - src/funcs/functionsListCommits.ts
   - src/funcs/functionsListFunctions.ts
@@ -1663,11 +1729,14 @@ generatedFiles:
   - src/funcs/requestCatalogManagementAddAppEntitlements.ts
   - src/funcs/requestCatalogManagementCreate.ts
   - src/funcs/requestCatalogManagementCreateBundleAutomation.ts
+  - src/funcs/requestCatalogManagementCreateRequestableEntry.ts
   - src/funcs/requestCatalogManagementDelete.ts
   - src/funcs/requestCatalogManagementDeleteBundleAutomation.ts
+  - src/funcs/requestCatalogManagementDeleteRequestableEntry.ts
   - src/funcs/requestCatalogManagementForceRunBundleAutomation.ts
   - src/funcs/requestCatalogManagementGet.ts
   - src/funcs/requestCatalogManagementGetBundleAutomation.ts
+  - src/funcs/requestCatalogManagementGetRequestableEntry.ts
   - src/funcs/requestCatalogManagementList.ts
   - src/funcs/requestCatalogManagementListAllEntitlementIdsPerApp.ts
   - src/funcs/requestCatalogManagementListEntitlementsForAccess.ts
@@ -1727,6 +1796,10 @@ generatedFiles:
   - src/funcs/userList.ts
   - src/funcs/userSearchSearch.ts
   - src/funcs/userSetExpiringUserDelegationBindingByAdmin.ts
+  - src/funcs/vaultCreate.ts
+  - src/funcs/vaultDelete.ts
+  - src/funcs/vaultGet.ts
+  - src/funcs/vaultUpdate.ts
   - src/funcs/webhooksCreate.ts
   - src/funcs/webhooksDelete.ts
   - src/funcs/webhooksGet.ts
@@ -1787,6 +1860,7 @@ generatedFiles:
   - src/sdk/export.ts
   - src/sdk/exportssearch.ts
   - src/sdk/functions.ts
+  - src/sdk/functionsinvocation.ts
   - src/sdk/functionssearch.ts
   - src/sdk/index.ts
   - src/sdk/models/errors/conductoronesdktypescripterror.ts
@@ -1885,6 +1959,7 @@ generatedFiles:
   - src/sdk/models/operations/c1apiappv1connectorservicedelete.ts
   - src/sdk/models/operations/c1apiappv1connectorserviceforcesync.ts
   - src/sdk/models/operations/c1apiappv1connectorserviceget.ts
+  - src/sdk/models/operations/c1apiappv1connectorservicegetconnectorsyncdownloadurl.ts
   - src/sdk/models/operations/c1apiappv1connectorservicegetcredentials.ts
   - src/sdk/models/operations/c1apiappv1connectorservicelist.ts
   - src/sdk/models/operations/c1apiappv1connectorservicepausesync.ts
@@ -1926,13 +2001,14 @@ generatedFiles:
   - src/sdk/models/operations/c1apidirectoryv1directoryserviceget.ts
   - src/sdk/models/operations/c1apidirectoryv1directoryservicelist.ts
   - src/sdk/models/operations/c1apidirectoryv1directoryserviceupdate.ts
+  - src/sdk/models/operations/c1apifunctionsv1functionsinvocationserviceget.ts
+  - src/sdk/models/operations/c1apifunctionsv1functionsinvocationservicelist.ts
   - src/sdk/models/operations/c1apifunctionsv1functionssearchsearch.ts
-  - src/sdk/models/operations/c1apifunctionsv1functionsservicecommit.ts
   - src/sdk/models/operations/c1apifunctionsv1functionsservicecreatefunction.ts
   - src/sdk/models/operations/c1apifunctionsv1functionsservicecreatetag.ts
   - src/sdk/models/operations/c1apifunctionsv1functionsservicedeletefunction.ts
-  - src/sdk/models/operations/c1apifunctionsv1functionsservicegetcommit.ts
   - src/sdk/models/operations/c1apifunctionsv1functionsservicegetfunction.ts
+  - src/sdk/models/operations/c1apifunctionsv1functionsservicegetfunctionsecretencryptionkey.ts
   - src/sdk/models/operations/c1apifunctionsv1functionsserviceinvoke.ts
   - src/sdk/models/operations/c1apifunctionsv1functionsservicelistcommits.ts
   - src/sdk/models/operations/c1apifunctionsv1functionsservicelistfunctions.ts
@@ -1960,11 +2036,14 @@ generatedFiles:
   - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceaddappentitlements.ts
   - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicecreate.ts
   - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicecreatebundleautomation.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicecreaterequestableentry.ts
   - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicedelete.ts
   - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicedeletebundleautomation.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicedeleterequestableentry.ts
   - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceforcerunbundleautomation.ts
   - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceget.ts
   - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicegetbundleautomation.ts
+  - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicegetrequestableentry.ts
   - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicelist.ts
   - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicelistallentitlementidsperapp.ts
   - src/sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicelistentitlementsforaccess.ts
@@ -2031,6 +2110,10 @@ generatedFiles:
   - src/sdk/models/operations/c1apiuserv1userservicegetuserprofiletypes.ts
   - src/sdk/models/operations/c1apiuserv1userservicelist.ts
   - src/sdk/models/operations/c1apiuserv1userservicesetexpiringuserdelegationbindingbyadmin.ts
+  - src/sdk/models/operations/c1apivaultv1vaultservicecreate.ts
+  - src/sdk/models/operations/c1apivaultv1vaultservicedelete.ts
+  - src/sdk/models/operations/c1apivaultv1vaultserviceget.ts
+  - src/sdk/models/operations/c1apivaultv1vaultserviceupdate.ts
   - src/sdk/models/operations/c1apiwebhooksv1webhookssearchsearch.ts
   - src/sdk/models/operations/c1apiwebhooksv1webhooksservicecreate.ts
   - src/sdk/models/operations/c1apiwebhooksv1webhooksservicedelete.ts
@@ -2047,7 +2130,15 @@ generatedFiles:
   - src/sdk/models/shared/accountlifecycleaction.ts
   - src/sdk/models/shared/accountprovision.ts
   - src/sdk/models/shared/accountref.ts
+  - src/sdk/models/shared/action.ts
+  - src/sdk/models/shared/actioninstance.ts
+  - src/sdk/models/shared/actionoutcomecancelled.ts
+  - src/sdk/models/shared/actionoutcomedenied.ts
+  - src/sdk/models/shared/actionoutcomeerror.ts
+  - src/sdk/models/shared/actionoutcomesuccess.ts
   - src/sdk/models/shared/actionprovision.ts
+  - src/sdk/models/shared/actiontargetautomation.ts
+  - src/sdk/models/shared/actiontargetautomationinstance.ts
   - src/sdk/models/shared/addappentitlementownerrequest.ts
   - src/sdk/models/shared/addappentitlementownerresponse.ts
   - src/sdk/models/shared/addappownerrequest.ts
@@ -2230,6 +2321,7 @@ generatedFiles:
   - src/sdk/models/shared/createpolicyrequest.ts
   - src/sdk/models/shared/createpolicyresponse.ts
   - src/sdk/models/shared/createrevoketasks.ts
+  - src/sdk/models/shared/createrevoketasksv2.ts
   - src/sdk/models/shared/createrisklevelattributevaluerequest.ts
   - src/sdk/models/shared/createrisklevelattributevalueresponse.ts
   - src/sdk/models/shared/createstepupproviderrequest.ts
@@ -2292,7 +2384,15 @@ generatedFiles:
   - src/sdk/models/shared/editorvalidateresponse.ts
   - src/sdk/models/shared/emailnotifications.ts
   - src/sdk/models/shared/encrypteddata.ts
+  - src/sdk/models/shared/entitlementexclusioncriteria.ts
+  - src/sdk/models/shared/entitlementexclusionlist.ts
+  - src/sdk/models/shared/entitlementexclusionlistcel.ts
+  - src/sdk/models/shared/entitlementexclusionnone.ts
   - src/sdk/models/shared/entitlementfilter.ts
+  - src/sdk/models/shared/entitlementinclusionall.ts
+  - src/sdk/models/shared/entitlementinclusioncriteria.ts
+  - src/sdk/models/shared/entitlementinclusionlist.ts
+  - src/sdk/models/shared/entitlementinclusionlistcel.ts
   - src/sdk/models/shared/entitlementownerapproval.ts
   - src/sdk/models/shared/enumrules.ts
   - src/sdk/models/shared/erroredaction.ts
@@ -2349,18 +2449,19 @@ generatedFiles:
   - src/sdk/models/shared/formtrigger.ts
   - src/sdk/models/shared/function.ts
   - src/sdk/models/shared/functioncommit.ts
+  - src/sdk/models/shared/functioninvocation.ts
+  - src/sdk/models/shared/functionsinvocationservicegetresponse.ts
+  - src/sdk/models/shared/functionsinvocationservicelistresponse.ts
   - src/sdk/models/shared/functionssearchrequest.ts
   - src/sdk/models/shared/functionssearchresponse.ts
-  - src/sdk/models/shared/functionsservicecommitrequest.ts
-  - src/sdk/models/shared/functionsservicecommitresponse.ts
   - src/sdk/models/shared/functionsservicecreatefunctionrequest.ts
   - src/sdk/models/shared/functionsservicecreatefunctionresponse.ts
   - src/sdk/models/shared/functionsservicecreatetagrequest.ts
   - src/sdk/models/shared/functionsservicecreatetagresponse.ts
   - src/sdk/models/shared/functionsservicedeletefunctionrequest.ts
   - src/sdk/models/shared/functionsservicedeletefunctionresponse.ts
-  - src/sdk/models/shared/functionsservicegetcommitresponse.ts
   - src/sdk/models/shared/functionsservicegetfunctionresponse.ts
+  - src/sdk/models/shared/functionsservicegetfunctionsecretencryptionkeyresponse.ts
   - src/sdk/models/shared/functionsserviceinvokerequest.ts
   - src/sdk/models/shared/functionsserviceinvokeresponse.ts
   - src/sdk/models/shared/functionsservicelistcommitsresponse.ts
@@ -2378,6 +2479,7 @@ generatedFiles:
   - src/sdk/models/shared/getautomationresponse.ts
   - src/sdk/models/shared/getawsexternalidresponse.ts
   - src/sdk/models/shared/getcomplianceframeworkattributevalueresponse.ts
+  - src/sdk/models/shared/getconnectorsyncdownloadurlresponse.ts
   - src/sdk/models/shared/getpolicyresponse.ts
   - src/sdk/models/shared/getrisklevelattributevalueresponse.ts
   - src/sdk/models/shared/getrolesresponse.ts
@@ -2391,6 +2493,7 @@ generatedFiles:
   - src/sdk/models/shared/grantfoundtrigger.ts
   - src/sdk/models/shared/grantreason.ts
   - src/sdk/models/shared/granttriggerfilter.ts
+  - src/sdk/models/shared/groupauthzvault.ts
   - src/sdk/models/shared/importfield.ts
   - src/sdk/models/shared/index.ts
   - src/sdk/models/shared/int32rules.ts
@@ -2419,6 +2522,7 @@ generatedFiles:
   - src/sdk/models/shared/listrisklevelsresponse.ts
   - src/sdk/models/shared/listrolesresponse.ts
   - src/sdk/models/shared/liststepupprovidersresponse.ts
+  - src/sdk/models/shared/magicvault.ts
   - src/sdk/models/shared/managerapproval.ts
   - src/sdk/models/shared/managerapprovalinput.ts
   - src/sdk/models/shared/manualautomationtrigger.ts
@@ -2433,6 +2537,8 @@ generatedFiles:
   - src/sdk/models/shared/oauth2authorizedas.ts
   - src/sdk/models/shared/oauth2authorizedasinput.ts
   - src/sdk/models/shared/oauth2field.ts
+  - src/sdk/models/shared/oauth2field1.ts
+  - src/sdk/models/shared/oauth2fieldview.ts
   - src/sdk/models/shared/optionsfield.ts
   - src/sdk/models/shared/orgdomain.ts
   - src/sdk/models/shared/passwordfield.ts
@@ -2493,6 +2599,7 @@ generatedFiles:
   - src/sdk/models/shared/removegrantdurationresponse.ts
   - src/sdk/models/shared/repeatedrules.ts
   - src/sdk/models/shared/replacepolicy.ts
+  - src/sdk/models/shared/requestableentry.ts
   - src/sdk/models/shared/requestcatalog.ts
   - src/sdk/models/shared/requestcatalogexpandmask.ts
   - src/sdk/models/shared/requestcatalogmanagementserviceaddaccessentitlementsrequest.ts
@@ -2500,8 +2607,13 @@ generatedFiles:
   - src/sdk/models/shared/requestcatalogmanagementserviceaddappentitlementsrequest.ts
   - src/sdk/models/shared/requestcatalogmanagementserviceaddappentitlementsresponse.ts
   - src/sdk/models/shared/requestcatalogmanagementservicecreaterequest.ts
+  - src/sdk/models/shared/requestcatalogmanagementservicecreaterequestableentryrequest.ts
+  - src/sdk/models/shared/requestcatalogmanagementservicecreaterequestableentryresponse.ts
   - src/sdk/models/shared/requestcatalogmanagementservicedeleterequest.ts
+  - src/sdk/models/shared/requestcatalogmanagementservicedeleterequestableentryrequest.ts
+  - src/sdk/models/shared/requestcatalogmanagementservicedeleterequestableentryresponse.ts
   - src/sdk/models/shared/requestcatalogmanagementservicedeleteresponse.ts
+  - src/sdk/models/shared/requestcatalogmanagementservicegetrequestableentryresponse.ts
   - src/sdk/models/shared/requestcatalogmanagementservicegetresponse.ts
   - src/sdk/models/shared/requestcatalogmanagementservicelistallentitlementidspercatalogresponse.ts
   - src/sdk/models/shared/requestcatalogmanagementservicelistentitlementsforaccessresponse.ts
@@ -2622,6 +2734,7 @@ generatedFiles:
   - src/sdk/models/shared/stringmapfield.ts
   - src/sdk/models/shared/stringrules.ts
   - src/sdk/models/shared/stringslicefield.ts
+  - src/sdk/models/shared/syncconfig.ts
   - src/sdk/models/shared/systemlogservicelisteventsrequest.ts
   - src/sdk/models/shared/systemlogservicelisteventsresponse.ts
   - src/sdk/models/shared/targettask.ts
@@ -2733,6 +2846,8 @@ generatedFiles:
   - src/sdk/models/shared/taskservicecreaterevokeresponse.ts
   - src/sdk/models/shared/taskservicegetresponse.ts
   - src/sdk/models/shared/tasktype.ts
+  - src/sdk/models/shared/tasktypeaction.ts
+  - src/sdk/models/shared/tasktypeactioninput.ts
   - src/sdk/models/shared/tasktypecertify.ts
   - src/sdk/models/shared/tasktypecertifyinput.ts
   - src/sdk/models/shared/tasktypegrant.ts
@@ -2795,6 +2910,15 @@ generatedFiles:
   - src/sdk/models/shared/userservicelistresponse.ts
   - src/sdk/models/shared/userview.ts
   - src/sdk/models/shared/userwithappentitlementuserbindingview.ts
+  - src/sdk/models/shared/vault.ts
+  - src/sdk/models/shared/vaultinput.ts
+  - src/sdk/models/shared/vaultservicecreaterequest.ts
+  - src/sdk/models/shared/vaultservicecreateresponse.ts
+  - src/sdk/models/shared/vaultservicedeleterequest.ts
+  - src/sdk/models/shared/vaultservicedeleteresponse.ts
+  - src/sdk/models/shared/vaultservicegetresponse.ts
+  - src/sdk/models/shared/vaultserviceupdaterequest.ts
+  - src/sdk/models/shared/vaultserviceupdateresponse.ts
   - src/sdk/models/shared/wait.ts
   - src/sdk/models/shared/waitcondition.ts
   - src/sdk/models/shared/waitconditioninstance.ts
@@ -2859,8 +2983,10 @@ generatedFiles:
   - src/sdk/types/operations.ts
   - src/sdk/types/rfcdate.ts
   - src/sdk/types/streams.ts
+  - src/sdk/types/unrecognized.ts
   - src/sdk/user.ts
   - src/sdk/usersearch.ts
+  - src/sdk/vault.ts
   - src/sdk/webhooks.ts
   - src/sdk/webhookssearch.ts
 examples:
@@ -4663,6 +4789,100 @@ examples:
       responses:
         "200":
           application/json: {}
+  c1.api.app.v1.ConnectorService.GetConnectorSyncDownloadURL:
+    speakeasy-default-c1-api-app-v1-connector-service-get-connector-sync-download-URL:
+      parameters:
+        path:
+          app_id: "<id>"
+          connector_id: "<id>"
+          sync_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.DeleteRequestableEntry:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-delete-requestable-entry:
+      parameters:
+        path:
+          catalog_id: "<id>"
+          app_id: "<id>"
+          entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.GetRequestableEntry:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-get-requestable-entry:
+      parameters:
+        path:
+          catalog_id: "<id>"
+          app_id: "<id>"
+          entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.requestcatalog.v1.RequestCatalogManagementService.CreateRequestableEntry:
+    speakeasy-default-c1-api-requestcatalog-v1-request-catalog-management-service-create-requestable-entry:
+      parameters:
+        path:
+          catalog_id: "<id>"
+          app_id: "<id>"
+          entitlement_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.functions.v1.FunctionsService.GetFunctionSecretEncryptionKey:
+    speakeasy-default-c1-api-functions-v1-functions-service-get-function-secret-encryption-key:
+      parameters:
+        path:
+          function_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.functions.v1.FunctionsInvocationService.List:
+    speakeasy-default-c1-api-functions-v1-functions-invocation-service-list:
+      parameters:
+        path:
+          function_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.functions.v1.FunctionsInvocationService.Get:
+    speakeasy-default-c1-api-functions-v1-functions-invocation-service-get:
+      parameters:
+        path:
+          function_id: "<id>"
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.vault.v1.VaultService.Create:
+    speakeasy-default-c1-api-vault-v1-vault-service-create:
+      responses:
+        "200":
+          application/json: {}
+  c1.api.vault.v1.VaultService.Delete:
+    speakeasy-default-c1-api-vault-v1-vault-service-delete:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.vault.v1.VaultService.Get:
+    speakeasy-default-c1-api-vault-v1-vault-service-get:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+  c1.api.vault.v1.VaultService.Update:
+    speakeasy-default-c1-api-vault-v1-vault-service-update:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes Detected:\n* `conductorone-sdk-typescript.appResourceOwners.delete()`: **Added**\n* `conductorone-sdk-typescript.appResourceOwners.listOwnerIDs()`: **Added**\n* `conductorone-sdk-typescript.appResourceOwners.set()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.removeEntitlementBinding()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.createEntitlementBinding()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.findBindingForAppEntitlement()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.create()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.delete()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.get()`: **Added**\n* `conductorone-sdk-typescript.requestSchema.update()`: **Added**\n* `conductorone-sdk-typescript.user.setExpiringUserDelegationBindingByAdmin()`: **Added**\n* `conductorone-sdk-typescript.appEntitlements.list()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlements.create()`: \n  *  `request.createAppEntitlementRequest.provisionPolicy` **Changed**\n  *  `response.appentitlementview.appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlements.get()`:  `response.appentitlementview.appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlements.update()`: \n  *  `request.updateAppEntitlementRequest.entitlement.deprovisionerPolicy` **Changed**\n  *  `response.appentitlementview.appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlements.listForAppResource()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlements.listForAppUser()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlementSearch.searchAppEntitlementsForAppUser()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlementSearch.search()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.appEntitlementSearch.searchGrants()`:  `response.list.[].entitlement.appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.automationSearch.searchAutomationTemplateVersions()`:  `response.list.[].triggers.[]` **Changed**\n* `conductorone-sdk-typescript.automationSearch.searchAutomations()`:  `response.list.[].draftTriggers.[]` **Changed**\n* `conductorone-sdk-typescript.automation.listAutomations()`:  `response.list.[].draftTriggers.[]` **Changed**\n* `conductorone-sdk-typescript.automation.createAutomation()`: \n  *  `request.draftTriggers.[]` **Changed**\n  *  `response.automation.draftTriggers.[]` **Changed**\n* `conductorone-sdk-typescript.automation.getAutomation()`:  `response.automation.draftTriggers.[]` **Changed**\n* `conductorone-sdk-typescript.automation.updateAutomation()`: \n  *  `request.updateAutomationRequest.automation.draftTriggers.[]` **Changed**\n  *  `response.automation.draftTriggers.[]` **Changed**\n* `conductorone-sdk-typescript.requestCatalogManagement.list()`:  `response.list.[].requestCatalog.accessEntitlements.[].deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.requestCatalogManagement.create()`:  `response.requestcatalogview.requestCatalog.accessEntitlements.[].deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.requestCatalogManagement.listEntitlementsPerCatalog()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.requestCatalogManagement.listEntitlementsForAccess()`:  `response.list.[].appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.requestCatalogManagement.get()`:  `response.requestcatalogview.requestCatalog.accessEntitlements.[].deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.requestCatalogManagement.update()`: \n  *  `request.requestCatalogManagementServiceUpdateRequest.catalog.accessEntitlements.[].deprovisionerPolicy` **Changed**\n  *  `response.requestcatalogview.requestCatalog.accessEntitlements.[].deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.connectorCatalog.configurationSchema()`:  `response.formschema.fields.[].fileField` **Added**\n* `conductorone-sdk-typescript.policies.list()`:  `response.list.[].policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.policies.create()`: \n  *  `request.policySteps.{}.steps.[]` **Changed**\n  *  `response.policy.policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.policies.get()`:  `response.policy.policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.policies.update()`: \n  *  `request.updatePolicyRequest.policy.policySteps.{}.steps.[]` **Changed**\n  *  `response.policy.policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.policySearch.search()`:  `response.list.[].policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.requestCatalogSearch.searchEntitlements()`:  `response.list.[].entitlement.appEntitlement.deprovisionerPolicy.action` **Added**\n* `conductorone-sdk-typescript.taskSearch.search()`: \n  *  `request` **Changed**\n  *  `response.list.[]` **Changed**\n* `conductorone-sdk-typescript.taskAudit.list()`:  `response.list.[]` **Changed**\n* `conductorone-sdk-typescript.task.createGrantTask()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.task.createOffboardingTask()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.task.createRevokeTask()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.task.get()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.approve()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.approveWithStepUp()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.close()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.comment()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.deny()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.escalateToEmergencyAccess()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.processNow()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.reassign()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.hardReset()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.restart()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.skipStep()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.updateGrantDuration()`:  `response.taskview` **Changed**\n* `conductorone-sdk-typescript.taskActions.updateRequestData()`:  `response.taskview` **Changed**\n"
+releaseNotes: "## Typescript SDK Changes:\n* `conductorone-sdk-typescript.connectorCatalog.configurationSchema()`:  `response` **Changed** **Breaking** :warning:\n* `conductorone-sdk-typescript.connector.getConnectorSyncDownloadUrl()`: **Added**\n* `conductorone-sdk-typescript.requestCatalogManagement.deleteRequestableEntry()`: **Added**\n* `conductorone-sdk-typescript.requestCatalogManagement.getRequestableEntry()`: **Added**\n* `conductorone-sdk-typescript.requestCatalogManagement.createRequestableEntry()`: **Added**\n* `conductorone-sdk-typescript.functions.getFunctionSecretEncryptionKey()`: **Added**\n* `conductorone-sdk-typescript.functionsInvocation.list()`: **Added**\n* `conductorone-sdk-typescript.functionsInvocation.get()`: **Added**\n* `conductorone-sdk-typescript.vault.create()`: **Added**\n* `conductorone-sdk-typescript.vault.delete()`: **Added**\n* `conductorone-sdk-typescript.vault.get()`: **Added**\n* `conductorone-sdk-typescript.vault.update()`: **Added**\n* `conductorone-sdk-typescript.functions.commit()`: **Deleted** **Breaking** :warning:\n* `conductorone-sdk-typescript.functions.getCommit()`: **Deleted** **Breaking** :warning:\n* `conductorone-sdk-typescript.connector.list()`:  `response.list.[].connector.syncConfig` **Added**\n* `conductorone-sdk-typescript.connector.createDelegated()`:  `response.connectorview.connector.syncConfig` **Added**\n* `conductorone-sdk-typescript.connector.get()`:  `response.connectorview.connector.syncConfig` **Added**\n* `conductorone-sdk-typescript.connector.update()`: \n  *  `request.connectorServiceUpdateRequest.connector.syncConfig` **Added**\n  *  `response.connectorview.connector.syncConfig` **Added**\n* `conductorone-sdk-typescript.connector.create()`:  `response.connectorview.connector.syncConfig` **Added**\n* `conductorone-sdk-typescript.connector.updateDelegated()`: \n  *  `request.connectorServiceUpdateDelegatedRequest.connector.syncConfig` **Added**\n  *  `response.connectorview.connector.syncConfig` **Added**\n* `conductorone-sdk-typescript.appEntitlementsProxy.get()`:  `response.appproxyentitlementview.appProxyEntitlement.disabledAt` **Added**\n* `conductorone-sdk-typescript.appEntitlementsProxy.create()`:  `response.appproxyentitlementview.appProxyEntitlement.disabledAt` **Added**\n* `conductorone-sdk-typescript.automationExecution.getAutomationExecution()`:  `response` **Changed**\n* `conductorone-sdk-typescript.automationSearch.searchAutomationTemplateVersions()`:  `response.list.[]` **Changed**\n* `conductorone-sdk-typescript.automationSearch.searchAutomations()`:  `response.list.[]` **Changed**\n* `conductorone-sdk-typescript.automation.listAutomations()`:  `response.list.[]` **Changed**\n* `conductorone-sdk-typescript.automation.createAutomation()`: \n  *  `request` **Changed**\n  *  `response.automation` **Changed**\n* `conductorone-sdk-typescript.automation.getAutomation()`:  `response.automation` **Changed**\n* `conductorone-sdk-typescript.automation.updateAutomation()`: \n  *  `request.updateAutomationRequest.automation` **Changed**\n  *  `response.automation` **Changed**\n* `conductorone-sdk-typescript.functions.listFunctions()`:  `response.list.[]` **Changed**\n* `conductorone-sdk-typescript.functions.createFunction()`:  `response.function` **Changed**\n* `conductorone-sdk-typescript.functions.invoke()`:  `response.invocationid` **Added**\n* `conductorone-sdk-typescript.functions.getFunction()`:  `response.function` **Changed**\n* `conductorone-sdk-typescript.functions.updateFunction()`: \n  *  `request.function` **Changed**\n  *  `response.function` **Changed**\n* `conductorone-sdk-typescript.policies.list()`:  `response.list.[].policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.policies.create()`: \n  *  `request.policySteps.{}.steps.[]` **Changed**\n  *  `response.policy.policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.policies.get()`:  `response.policy.policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.policies.update()`: \n  *  `request.updatePolicyRequest.policy.policySteps.{}.steps.[]` **Changed**\n  *  `response.policy.policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.requestSchema.create()`: \n  *  `request.fields.[].oauth2Field` **Added**\n  *  `response.requestschema.form` **Changed**\n* `conductorone-sdk-typescript.requestSchema.get()`:  `response.requestschema.form` **Changed**\n* `conductorone-sdk-typescript.requestSchema.update()`: \n  *  `request.requestSchemaServiceUpdateRequest.requestSchema.form` **Changed**\n  *  `response.requestschema.form` **Changed**\n* `conductorone-sdk-typescript.functionsSearch.search()`:  `response.list.[]` **Changed**\n* `conductorone-sdk-typescript.policySearch.search()`:  `response.list.[].policySteps.{}.steps.[]` **Changed**\n* `conductorone-sdk-typescript.taskSearch.search()`: \n  *  `request.taskTypes.[].taskTypeAction` **Added**\n  *  `response.list.[].task` **Changed**\n* `conductorone-sdk-typescript.taskAudit.list()`:  `response.list.[].approvalInstanceChange.instance.approval` **Changed**\n* `conductorone-sdk-typescript.task.createGrantTask()`:  `response.taskview.task` **Changed**\n* `conductorone-sdk-typescript.task.createOffboardingTask()`:  `response.taskview.task` **Changed**\n* `conductorone-sdk-typescript.task.createRevokeTask()`:  `response.taskview.task` **Changed**\n* `conductorone-sdk-typescript.task.get()`:  `response.taskview.task` **Changed**\n* `conductorone-sdk-typescript.taskActions.approve()`:  `response.taskview.task` **Changed**\n* `conductorone-sdk-typescript.taskActions.approveWithStepUp()`:  `response.taskview.task` **Changed**\n* `conductorone-sdk-typescript.taskActions.close()`:  `response.taskview.task` **Changed**\n* `conductorone-sdk-typescript.taskActions.comment()`:  `response.taskview.task` **Changed**\n* `conductorone-sdk-typescript.taskActions.deny()`:  `response.taskview.task` **Changed**\n* `conductorone-sdk-typescript.taskActions.escalateToEmergencyAccess()`:  `response.taskview.task` **Changed**\n* `conductorone-sdk-typescript.taskActions.processNow()`:  `response.taskview.task` **Changed**\n* `conductorone-sdk-typescript.taskActions.reassign()`:  `response.taskview.task` **Changed**\n* `conductorone-sdk-typescript.taskActions.hardReset()`:  `response.taskview.task` **Changed**\n* `conductorone-sdk-typescript.taskActions.restart()`:  `response.taskview.task` **Changed**\n* `conductorone-sdk-typescript.taskActions.skipStep()`:  `response.taskview.task` **Changed**\n* `conductorone-sdk-typescript.taskActions.updateGrantDuration()`:  `response.taskview.task` **Changed**\n* `conductorone-sdk-typescript.taskActions.updateRequestData()`:  `response.taskview.task` **Changed**\n* `conductorone-sdk-typescript.user.getUserProfileTypes()`:  `response.profiletypes.[].slug` **Added**\n"

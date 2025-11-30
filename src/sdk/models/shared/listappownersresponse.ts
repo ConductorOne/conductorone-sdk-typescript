@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  User,
-  User$inboundSchema,
-  User$Outbound,
-  User$outboundSchema,
-} from "./user.js";
+import { User, User$inboundSchema } from "./user.js";
 
 /**
  * The ListAppOwnersResponse message.
@@ -36,43 +31,6 @@ export const ListAppOwnersResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(User$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ListAppOwnersResponse$Outbound = {
-  list?: Array<User$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ListAppOwnersResponse$outboundSchema: z.ZodType<
-  ListAppOwnersResponse$Outbound,
-  z.ZodTypeDef,
-  ListAppOwnersResponse
-> = z.object({
-  list: z.nullable(z.array(User$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAppOwnersResponse$ {
-  /** @deprecated use `ListAppOwnersResponse$inboundSchema` instead. */
-  export const inboundSchema = ListAppOwnersResponse$inboundSchema;
-  /** @deprecated use `ListAppOwnersResponse$outboundSchema` instead. */
-  export const outboundSchema = ListAppOwnersResponse$outboundSchema;
-  /** @deprecated use `ListAppOwnersResponse$Outbound` instead. */
-  export type Outbound = ListAppOwnersResponse$Outbound;
-}
-
-export function listAppOwnersResponseToJSON(
-  listAppOwnersResponse: ListAppOwnersResponse,
-): string {
-  return JSON.stringify(
-    ListAppOwnersResponse$outboundSchema.parse(listAppOwnersResponse),
-  );
-}
 
 export function listAppOwnersResponseFromJSON(
   jsonString: string,

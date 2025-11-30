@@ -49,54 +49,6 @@ export const TaskAuditSuccessResultAnnotations$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type TaskAuditSuccessResultAnnotations$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const TaskAuditSuccessResultAnnotations$outboundSchema: z.ZodType<
-  TaskAuditSuccessResultAnnotations$Outbound,
-  z.ZodTypeDef,
-  TaskAuditSuccessResultAnnotations
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditSuccessResultAnnotations$ {
-  /** @deprecated use `TaskAuditSuccessResultAnnotations$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditSuccessResultAnnotations$inboundSchema;
-  /** @deprecated use `TaskAuditSuccessResultAnnotations$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskAuditSuccessResultAnnotations$outboundSchema;
-  /** @deprecated use `TaskAuditSuccessResultAnnotations$Outbound` instead. */
-  export type Outbound = TaskAuditSuccessResultAnnotations$Outbound;
-}
-
-export function taskAuditSuccessResultAnnotationsToJSON(
-  taskAuditSuccessResultAnnotations: TaskAuditSuccessResultAnnotations,
-): string {
-  return JSON.stringify(
-    TaskAuditSuccessResultAnnotations$outboundSchema.parse(
-      taskAuditSuccessResultAnnotations,
-    ),
-  );
-}
-
 export function taskAuditSuccessResultAnnotationsFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditSuccessResultAnnotations, SDKValidationError> {
@@ -117,46 +69,6 @@ export const TaskAuditSuccessResult$inboundSchema: z.ZodType<
     z.array(z.lazy(() => TaskAuditSuccessResultAnnotations$inboundSchema)),
   ).optional(),
 });
-
-/** @internal */
-export type TaskAuditSuccessResult$Outbound = {
-  annotations?:
-    | Array<TaskAuditSuccessResultAnnotations$Outbound>
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const TaskAuditSuccessResult$outboundSchema: z.ZodType<
-  TaskAuditSuccessResult$Outbound,
-  z.ZodTypeDef,
-  TaskAuditSuccessResult
-> = z.object({
-  annotations: z.nullable(
-    z.array(z.lazy(() => TaskAuditSuccessResultAnnotations$outboundSchema)),
-  ).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditSuccessResult$ {
-  /** @deprecated use `TaskAuditSuccessResult$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditSuccessResult$inboundSchema;
-  /** @deprecated use `TaskAuditSuccessResult$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditSuccessResult$outboundSchema;
-  /** @deprecated use `TaskAuditSuccessResult$Outbound` instead. */
-  export type Outbound = TaskAuditSuccessResult$Outbound;
-}
-
-export function taskAuditSuccessResultToJSON(
-  taskAuditSuccessResult: TaskAuditSuccessResult,
-): string {
-  return JSON.stringify(
-    TaskAuditSuccessResult$outboundSchema.parse(taskAuditSuccessResult),
-  );
-}
 
 export function taskAuditSuccessResultFromJSON(
   jsonString: string,

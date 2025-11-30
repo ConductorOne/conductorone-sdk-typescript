@@ -35,20 +35,6 @@ export type C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaul
   };
 
 /** @internal */
-export const C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequest$Outbound =
   {
     app_id: string | null;
@@ -68,22 +54,6 @@ export const C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefau
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequest$ {
-  /** @deprecated use `C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequest$Outbound;
-}
-
 export function c1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequestToJSON(
   c1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequest:
     C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequest,
@@ -93,21 +63,6 @@ export function c1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDe
       .parse(
         c1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequest,
       ),
-  );
-}
-
-export function c1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequest' from JSON`,
   );
 }
 
@@ -131,68 +86,6 @@ export const C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefau
       "AppAccessRequestDefaults": "appAccessRequestDefaults",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    AppAccessRequestDefaults?:
-      | shared.AppAccessRequestDefaults$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    appAccessRequestDefaults: shared.AppAccessRequestDefaults$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      appAccessRequestDefaults: "AppAccessRequestDefaults",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsResponse$ {
-  /** @deprecated use `C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsResponse$Outbound;
-}
-
-export function c1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsResponseToJSON(
-  c1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsResponse:
-    C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsResponse$outboundSchema
-      .parse(
-        c1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsResponse,
-      ),
-  );
-}
 
 export function c1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsResponseFromJSON(
   jsonString: string,

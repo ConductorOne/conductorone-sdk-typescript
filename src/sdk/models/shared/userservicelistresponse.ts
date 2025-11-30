@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  UserView,
-  UserView$inboundSchema,
-  UserView$Outbound,
-  UserView$outboundSchema,
-} from "./userview.js";
+import { UserView, UserView$inboundSchema } from "./userview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -67,53 +62,6 @@ export const UserServiceListResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type UserServiceListResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const UserServiceListResponseExpanded$outboundSchema: z.ZodType<
-  UserServiceListResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  UserServiceListResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UserServiceListResponseExpanded$ {
-  /** @deprecated use `UserServiceListResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema = UserServiceListResponseExpanded$inboundSchema;
-  /** @deprecated use `UserServiceListResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema = UserServiceListResponseExpanded$outboundSchema;
-  /** @deprecated use `UserServiceListResponseExpanded$Outbound` instead. */
-  export type Outbound = UserServiceListResponseExpanded$Outbound;
-}
-
-export function userServiceListResponseExpandedToJSON(
-  userServiceListResponseExpanded: UserServiceListResponseExpanded,
-): string {
-  return JSON.stringify(
-    UserServiceListResponseExpanded$outboundSchema.parse(
-      userServiceListResponseExpanded,
-    ),
-  );
-}
-
 export function userServiceListResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<UserServiceListResponseExpanded, SDKValidationError> {
@@ -136,47 +84,6 @@ export const UserServiceListResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(UserView$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type UserServiceListResponse$Outbound = {
-  expanded?: Array<UserServiceListResponseExpanded$Outbound> | null | undefined;
-  list?: Array<UserView$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const UserServiceListResponse$outboundSchema: z.ZodType<
-  UserServiceListResponse$Outbound,
-  z.ZodTypeDef,
-  UserServiceListResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() => UserServiceListResponseExpanded$outboundSchema)),
-  ).optional(),
-  list: z.nullable(z.array(UserView$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UserServiceListResponse$ {
-  /** @deprecated use `UserServiceListResponse$inboundSchema` instead. */
-  export const inboundSchema = UserServiceListResponse$inboundSchema;
-  /** @deprecated use `UserServiceListResponse$outboundSchema` instead. */
-  export const outboundSchema = UserServiceListResponse$outboundSchema;
-  /** @deprecated use `UserServiceListResponse$Outbound` instead. */
-  export type Outbound = UserServiceListResponse$Outbound;
-}
-
-export function userServiceListResponseToJSON(
-  userServiceListResponse: UserServiceListResponse,
-): string {
-  return JSON.stringify(
-    UserServiceListResponse$outboundSchema.parse(userServiceListResponse),
-  );
-}
 
 export function userServiceListResponseFromJSON(
   jsonString: string,

@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  TaskView,
-  TaskView$inboundSchema,
-  TaskView$Outbound,
-  TaskView$outboundSchema,
-} from "./taskview.js";
+import { TaskView, TaskView$inboundSchema } from "./taskview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -67,51 +62,6 @@ export const TaskSearchResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type TaskSearchResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const TaskSearchResponseExpanded$outboundSchema: z.ZodType<
-  TaskSearchResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  TaskSearchResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskSearchResponseExpanded$ {
-  /** @deprecated use `TaskSearchResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema = TaskSearchResponseExpanded$inboundSchema;
-  /** @deprecated use `TaskSearchResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema = TaskSearchResponseExpanded$outboundSchema;
-  /** @deprecated use `TaskSearchResponseExpanded$Outbound` instead. */
-  export type Outbound = TaskSearchResponseExpanded$Outbound;
-}
-
-export function taskSearchResponseExpandedToJSON(
-  taskSearchResponseExpanded: TaskSearchResponseExpanded,
-): string {
-  return JSON.stringify(
-    TaskSearchResponseExpanded$outboundSchema.parse(taskSearchResponseExpanded),
-  );
-}
-
 export function taskSearchResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskSearchResponseExpanded, SDKValidationError> {
@@ -134,47 +84,6 @@ export const TaskSearchResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(TaskView$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type TaskSearchResponse$Outbound = {
-  expanded?: Array<TaskSearchResponseExpanded$Outbound> | null | undefined;
-  list?: Array<TaskView$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskSearchResponse$outboundSchema: z.ZodType<
-  TaskSearchResponse$Outbound,
-  z.ZodTypeDef,
-  TaskSearchResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() => TaskSearchResponseExpanded$outboundSchema)),
-  ).optional(),
-  list: z.nullable(z.array(TaskView$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskSearchResponse$ {
-  /** @deprecated use `TaskSearchResponse$inboundSchema` instead. */
-  export const inboundSchema = TaskSearchResponse$inboundSchema;
-  /** @deprecated use `TaskSearchResponse$outboundSchema` instead. */
-  export const outboundSchema = TaskSearchResponse$outboundSchema;
-  /** @deprecated use `TaskSearchResponse$Outbound` instead. */
-  export type Outbound = TaskSearchResponse$Outbound;
-}
-
-export function taskSearchResponseToJSON(
-  taskSearchResponse: TaskSearchResponse,
-): string {
-  return JSON.stringify(
-    TaskSearchResponse$outboundSchema.parse(taskSearchResponse),
-  );
-}
 
 export function taskSearchResponseFromJSON(
   jsonString: string,

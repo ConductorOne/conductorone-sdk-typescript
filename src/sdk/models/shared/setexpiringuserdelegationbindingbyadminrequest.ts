@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The SetExpiringUserDelegationBindingByAdminRequest message.
@@ -18,22 +15,6 @@ export type SetExpiringUserDelegationBindingByAdminRequest = {
   delegationExpireAt?: Date | null | undefined;
   delegationStartAt?: Date | null | undefined;
 };
-
-/** @internal */
-export const SetExpiringUserDelegationBindingByAdminRequest$inboundSchema:
-  z.ZodType<
-    SetExpiringUserDelegationBindingByAdminRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    delegatedUserId: z.nullable(z.string()).optional(),
-    delegationExpireAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    delegationStartAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-  });
 
 /** @internal */
 export type SetExpiringUserDelegationBindingByAdminRequest$Outbound = {
@@ -56,22 +37,6 @@ export const SetExpiringUserDelegationBindingByAdminRequest$outboundSchema:
       .optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SetExpiringUserDelegationBindingByAdminRequest$ {
-  /** @deprecated use `SetExpiringUserDelegationBindingByAdminRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    SetExpiringUserDelegationBindingByAdminRequest$inboundSchema;
-  /** @deprecated use `SetExpiringUserDelegationBindingByAdminRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    SetExpiringUserDelegationBindingByAdminRequest$outboundSchema;
-  /** @deprecated use `SetExpiringUserDelegationBindingByAdminRequest$Outbound` instead. */
-  export type Outbound =
-    SetExpiringUserDelegationBindingByAdminRequest$Outbound;
-}
-
 export function setExpiringUserDelegationBindingByAdminRequestToJSON(
   setExpiringUserDelegationBindingByAdminRequest:
     SetExpiringUserDelegationBindingByAdminRequest,
@@ -80,21 +45,5 @@ export function setExpiringUserDelegationBindingByAdminRequestToJSON(
     SetExpiringUserDelegationBindingByAdminRequest$outboundSchema.parse(
       setExpiringUserDelegationBindingByAdminRequest,
     ),
-  );
-}
-
-export function setExpiringUserDelegationBindingByAdminRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  SetExpiringUserDelegationBindingByAdminRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      SetExpiringUserDelegationBindingByAdminRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'SetExpiringUserDelegationBindingByAdminRequest' from JSON`,
   );
 }

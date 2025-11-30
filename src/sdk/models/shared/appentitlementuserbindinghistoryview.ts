@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementUserBindingHistory,
   AppEntitlementUserBindingHistory$inboundSchema,
-  AppEntitlementUserBindingHistory$Outbound,
-  AppEntitlementUserBindingHistory$outboundSchema,
 } from "./appentitlementuserbindinghistory.js";
 
 /**
@@ -44,52 +42,6 @@ export const AppEntitlementUserBindingHistoryView$inboundSchema: z.ZodType<
   history: z.nullable(AppEntitlementUserBindingHistory$inboundSchema)
     .optional(),
 });
-
-/** @internal */
-export type AppEntitlementUserBindingHistoryView$Outbound = {
-  appPath?: string | null | undefined;
-  appUserPath?: string | null | undefined;
-  entitlementPath?: string | null | undefined;
-  history?: AppEntitlementUserBindingHistory$Outbound | null | undefined;
-};
-
-/** @internal */
-export const AppEntitlementUserBindingHistoryView$outboundSchema: z.ZodType<
-  AppEntitlementUserBindingHistoryView$Outbound,
-  z.ZodTypeDef,
-  AppEntitlementUserBindingHistoryView
-> = z.object({
-  appPath: z.nullable(z.string()).optional(),
-  appUserPath: z.nullable(z.string()).optional(),
-  entitlementPath: z.nullable(z.string()).optional(),
-  history: z.nullable(AppEntitlementUserBindingHistory$outboundSchema)
-    .optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementUserBindingHistoryView$ {
-  /** @deprecated use `AppEntitlementUserBindingHistoryView$inboundSchema` instead. */
-  export const inboundSchema =
-    AppEntitlementUserBindingHistoryView$inboundSchema;
-  /** @deprecated use `AppEntitlementUserBindingHistoryView$outboundSchema` instead. */
-  export const outboundSchema =
-    AppEntitlementUserBindingHistoryView$outboundSchema;
-  /** @deprecated use `AppEntitlementUserBindingHistoryView$Outbound` instead. */
-  export type Outbound = AppEntitlementUserBindingHistoryView$Outbound;
-}
-
-export function appEntitlementUserBindingHistoryViewToJSON(
-  appEntitlementUserBindingHistoryView: AppEntitlementUserBindingHistoryView,
-): string {
-  return JSON.stringify(
-    AppEntitlementUserBindingHistoryView$outboundSchema.parse(
-      appEntitlementUserBindingHistoryView,
-    ),
-  );
-}
 
 export function appEntitlementUserBindingHistoryViewFromJSON(
   jsonString: string,
