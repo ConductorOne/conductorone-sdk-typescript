@@ -13,6 +13,12 @@ import {
   PasswordField$outboundSchema,
 } from "./passwordfield.js";
 import {
+  PickerField,
+  PickerField$inboundSchema,
+  PickerField$Outbound,
+  PickerField$outboundSchema,
+} from "./pickerfield.js";
+import {
   SelectField,
   SelectField$inboundSchema,
   SelectField$Outbound,
@@ -40,6 +46,7 @@ import {
  *   - textField
  *   - passwordField
  *   - selectField
+ *   - pickerField
  *
  * This message contains a oneof named _rules. Only a single field of the following list may be set at a time:
  *   - rules
@@ -50,6 +57,16 @@ export type StringField = {
    */
   defaultValue?: string | null | undefined;
   passwordField?: PasswordField | null | undefined;
+  /**
+   * The PickerField message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named type. Only a single field of the following list may be set at a time:
+   *   - appUserPicker
+   *   - resourcePicker
+   */
+  pickerField?: PickerField | null | undefined;
   /**
    * The placeholder field.
    */
@@ -67,6 +84,7 @@ export const StringField$inboundSchema: z.ZodType<
 > = z.object({
   defaultValue: z.nullable(z.string()).optional(),
   passwordField: z.nullable(PasswordField$inboundSchema).optional(),
+  pickerField: z.nullable(PickerField$inboundSchema).optional(),
   placeholder: z.nullable(z.string()).optional(),
   rules: z.nullable(StringRules$inboundSchema).optional(),
   selectField: z.nullable(SelectField$inboundSchema).optional(),
@@ -77,6 +95,7 @@ export const StringField$inboundSchema: z.ZodType<
 export type StringField$Outbound = {
   defaultValue?: string | null | undefined;
   passwordField?: PasswordField$Outbound | null | undefined;
+  pickerField?: PickerField$Outbound | null | undefined;
   placeholder?: string | null | undefined;
   rules?: StringRules$Outbound | null | undefined;
   selectField?: SelectField$Outbound | null | undefined;
@@ -91,6 +110,7 @@ export const StringField$outboundSchema: z.ZodType<
 > = z.object({
   defaultValue: z.nullable(z.string()).optional(),
   passwordField: z.nullable(PasswordField$outboundSchema).optional(),
+  pickerField: z.nullable(PickerField$outboundSchema).optional(),
   placeholder: z.nullable(z.string()).optional(),
   rules: z.nullable(StringRules$outboundSchema).optional(),
   selectField: z.nullable(SelectField$outboundSchema).optional(),

@@ -15,7 +15,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The outcome of the certification.
  */
-export const Outcome = {
+export const TaskTypeCertifyOutcome = {
   CertifyOutcomeUnspecified: "CERTIFY_OUTCOME_UNSPECIFIED",
   CertifyOutcomeCertified: "CERTIFY_OUTCOME_CERTIFIED",
   CertifyOutcomeDecertified: "CERTIFY_OUTCOME_DECERTIFIED",
@@ -26,7 +26,7 @@ export const Outcome = {
 /**
  * The outcome of the certification.
  */
-export type Outcome = OpenEnum<typeof Outcome>;
+export type TaskTypeCertifyOutcome = OpenEnum<typeof TaskTypeCertifyOutcome>;
 
 /**
  * The TaskTypeCertify message indicates that a task is a certify task and all related details.
@@ -59,34 +59,40 @@ export type TaskTypeCertify = {
   /**
    * The outcome of the certification.
    */
-  outcome?: Outcome | null | undefined;
+  outcome?: TaskTypeCertifyOutcome | null | undefined;
   outcomeTime?: Date | null | undefined;
 };
 
 /** @internal */
-export const Outcome$inboundSchema: z.ZodType<Outcome, z.ZodTypeDef, unknown> =
-  z
-    .union([
-      z.nativeEnum(Outcome),
-      z.string().transform(catchUnrecognizedEnum),
-    ]);
+export const TaskTypeCertifyOutcome$inboundSchema: z.ZodType<
+  TaskTypeCertifyOutcome,
+  z.ZodTypeDef,
+  unknown
+> = z
+  .union([
+    z.nativeEnum(TaskTypeCertifyOutcome),
+    z.string().transform(catchUnrecognizedEnum),
+  ]);
 
 /** @internal */
-export const Outcome$outboundSchema: z.ZodType<Outcome, z.ZodTypeDef, Outcome> =
-  z.union([
-    z.nativeEnum(Outcome),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
+export const TaskTypeCertifyOutcome$outboundSchema: z.ZodType<
+  TaskTypeCertifyOutcome,
+  z.ZodTypeDef,
+  TaskTypeCertifyOutcome
+> = z.union([
+  z.nativeEnum(TaskTypeCertifyOutcome),
+  z.string().and(z.custom<Unrecognized<string>>()),
+]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Outcome$ {
-  /** @deprecated use `Outcome$inboundSchema` instead. */
-  export const inboundSchema = Outcome$inboundSchema;
-  /** @deprecated use `Outcome$outboundSchema` instead. */
-  export const outboundSchema = Outcome$outboundSchema;
+export namespace TaskTypeCertifyOutcome$ {
+  /** @deprecated use `TaskTypeCertifyOutcome$inboundSchema` instead. */
+  export const inboundSchema = TaskTypeCertifyOutcome$inboundSchema;
+  /** @deprecated use `TaskTypeCertifyOutcome$outboundSchema` instead. */
+  export const outboundSchema = TaskTypeCertifyOutcome$outboundSchema;
 }
 
 /** @internal */
@@ -101,7 +107,7 @@ export const TaskTypeCertify$inboundSchema: z.ZodType<
   appId: z.nullable(z.string()).optional(),
   appUserId: z.nullable(z.string()).optional(),
   identityUserId: z.nullable(z.string()).optional(),
-  outcome: z.nullable(Outcome$inboundSchema).optional(),
+  outcome: z.nullable(TaskTypeCertifyOutcome$inboundSchema).optional(),
   outcomeTime: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -131,7 +137,7 @@ export const TaskTypeCertify$outboundSchema: z.ZodType<
   appId: z.nullable(z.string()).optional(),
   appUserId: z.nullable(z.string()).optional(),
   identityUserId: z.nullable(z.string()).optional(),
-  outcome: z.nullable(Outcome$outboundSchema).optional(),
+  outcome: z.nullable(TaskTypeCertifyOutcome$outboundSchema).optional(),
   outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 

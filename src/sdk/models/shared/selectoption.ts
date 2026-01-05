@@ -12,6 +12,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type SelectOption = {
   /**
+   * Used for type BUTTONS
+   */
+  description?: string | undefined;
+  /**
    * The displayName field.
    */
   displayName?: string | null | undefined;
@@ -27,12 +31,14 @@ export const SelectOption$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  description: z.string().optional(),
   displayName: z.nullable(z.string()).optional(),
   value: z.nullable(z.string()).optional(),
 });
 
 /** @internal */
 export type SelectOption$Outbound = {
+  description?: string | undefined;
   displayName?: string | null | undefined;
   value?: string | null | undefined;
 };
@@ -43,6 +49,7 @@ export const SelectOption$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SelectOption
 > = z.object({
+  description: z.string().optional(),
   displayName: z.nullable(z.string()).optional(),
   value: z.nullable(z.string()).optional(),
 });

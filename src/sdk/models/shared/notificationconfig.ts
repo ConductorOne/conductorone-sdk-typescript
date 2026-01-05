@@ -6,25 +6,19 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  EmailNotifications,
-  EmailNotifications$inboundSchema,
-  EmailNotifications$Outbound,
-  EmailNotifications$outboundSchema,
-} from "./emailnotifications.js";
-import {
-  SlackNotifications,
-  SlackNotifications$inboundSchema,
-  SlackNotifications$Outbound,
-  SlackNotifications$outboundSchema,
-} from "./slacknotifications.js";
 
 /**
  * The NotificationConfig message.
  */
 export type NotificationConfig = {
-  emailNotifications?: EmailNotifications | null | undefined;
-  slackNotifications?: SlackNotifications | null | undefined;
+  /**
+   * The sendClose field.
+   */
+  sendClose?: boolean | undefined;
+  /**
+   * The sendReminders field.
+   */
+  sendReminders?: boolean | undefined;
 };
 
 /** @internal */
@@ -33,14 +27,14 @@ export const NotificationConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  emailNotifications: z.nullable(EmailNotifications$inboundSchema).optional(),
-  slackNotifications: z.nullable(SlackNotifications$inboundSchema).optional(),
+  sendClose: z.boolean().optional(),
+  sendReminders: z.boolean().optional(),
 });
 
 /** @internal */
 export type NotificationConfig$Outbound = {
-  emailNotifications?: EmailNotifications$Outbound | null | undefined;
-  slackNotifications?: SlackNotifications$Outbound | null | undefined;
+  sendClose?: boolean | undefined;
+  sendReminders?: boolean | undefined;
 };
 
 /** @internal */
@@ -49,8 +43,8 @@ export const NotificationConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   NotificationConfig
 > = z.object({
-  emailNotifications: z.nullable(EmailNotifications$outboundSchema).optional(),
-  slackNotifications: z.nullable(SlackNotifications$outboundSchema).optional(),
+  sendClose: z.boolean().optional(),
+  sendReminders: z.boolean().optional(),
 });
 
 /**

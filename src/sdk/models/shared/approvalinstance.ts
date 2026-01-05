@@ -92,6 +92,7 @@ export type ApprovalInstanceState = OpenEnum<typeof ApprovalInstanceState>;
 export type ApprovalInstance = {
   approval?: Approval | null | undefined;
   approved?: ApprovedAction | null | undefined;
+  assignedAt?: Date | undefined;
   denied?: DeniedAction | null | undefined;
   escalationInstance?: EscalationInstance | null | undefined;
   reassigned?: ReassignedAction | null | undefined;
@@ -144,6 +145,8 @@ export const ApprovalInstance$inboundSchema: z.ZodType<
 > = z.object({
   approval: z.nullable(Approval$inboundSchema).optional(),
   approved: z.nullable(ApprovedAction$inboundSchema).optional(),
+  assignedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
   denied: z.nullable(DeniedAction$inboundSchema).optional(),
   escalationInstance: z.nullable(EscalationInstance$inboundSchema).optional(),
   reassigned: z.nullable(ReassignedAction$inboundSchema).optional(),
@@ -158,6 +161,7 @@ export const ApprovalInstance$inboundSchema: z.ZodType<
 export type ApprovalInstance$Outbound = {
   approval?: Approval$Outbound | null | undefined;
   approved?: ApprovedAction$Outbound | null | undefined;
+  assignedAt?: string | undefined;
   denied?: DeniedAction$Outbound | null | undefined;
   escalationInstance?: EscalationInstance$Outbound | null | undefined;
   reassigned?: ReassignedAction$Outbound | null | undefined;
@@ -175,6 +179,7 @@ export const ApprovalInstance$outboundSchema: z.ZodType<
 > = z.object({
   approval: z.nullable(Approval$outboundSchema).optional(),
   approved: z.nullable(ApprovedAction$outboundSchema).optional(),
+  assignedAt: z.date().transform(v => v.toISOString()).optional(),
   denied: z.nullable(DeniedAction$outboundSchema).optional(),
   escalationInstance: z.nullable(EscalationInstance$outboundSchema).optional(),
   reassigned: z.nullable(ReassignedAction$outboundSchema).optional(),

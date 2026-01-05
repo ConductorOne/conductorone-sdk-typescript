@@ -7,11 +7,11 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  NotificationConfig,
-  NotificationConfig$inboundSchema,
-  NotificationConfig$Outbound,
-  NotificationConfig$outboundSchema,
-} from "./notificationconfig.js";
+  NotificationConfig1,
+  NotificationConfig1$inboundSchema,
+  NotificationConfig1$Outbound,
+  NotificationConfig1$outboundSchema,
+} from "./notificationconfig1.js";
 
 /**
  * The ConflictMonitor message.
@@ -43,7 +43,7 @@ export type ConflictMonitor = {
    * The id field.
    */
   id?: string | null | undefined;
-  notificationConfig?: NotificationConfig | null | undefined;
+  notificationConfig?: NotificationConfig1 | null | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -65,7 +65,7 @@ export const ConflictMonitor$inboundSchema: z.ZodType<
   entitlementSetAId: z.nullable(z.string()).optional(),
   entitlementSetBId: z.nullable(z.string()).optional(),
   id: z.nullable(z.string()).optional(),
-  notificationConfig: z.nullable(NotificationConfig$inboundSchema).optional(),
+  notificationConfig: z.nullable(NotificationConfig1$inboundSchema).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -81,7 +81,7 @@ export type ConflictMonitor$Outbound = {
   entitlementSetAId?: string | null | undefined;
   entitlementSetBId?: string | null | undefined;
   id?: string | null | undefined;
-  notificationConfig?: NotificationConfig$Outbound | null | undefined;
+  notificationConfig?: NotificationConfig1$Outbound | null | undefined;
   updatedAt?: string | null | undefined;
 };
 
@@ -99,7 +99,7 @@ export const ConflictMonitor$outboundSchema: z.ZodType<
   entitlementSetAId: z.nullable(z.string()).optional(),
   entitlementSetBId: z.nullable(z.string()).optional(),
   id: z.nullable(z.string()).optional(),
-  notificationConfig: z.nullable(NotificationConfig$outboundSchema).optional(),
+  notificationConfig: z.nullable(NotificationConfig1$outboundSchema).optional(),
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 

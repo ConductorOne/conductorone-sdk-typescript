@@ -25,11 +25,11 @@ import {
   KeyValueField$outboundSchema,
 } from "./keyvaluefield.js";
 import {
-  OAuth2Field,
-  OAuth2Field$inboundSchema,
-  OAuth2Field$Outbound,
-  OAuth2Field$outboundSchema,
-} from "./oauth2field.js";
+  OAuth2Field1,
+  OAuth2Field1$inboundSchema,
+  OAuth2Field1$Outbound,
+  OAuth2Field1$outboundSchema,
+} from "./oauth2field1.js";
 import {
   OptionsField,
   OptionsField$inboundSchema,
@@ -132,7 +132,7 @@ export type Field = {
    * Must not start with `C1_` and match [a-zA-Z0-9_]{2,64}.  Must be unique within a connector.
    */
   name?: string | null | undefined;
-  oauth2?: OAuth2Field | null | undefined;
+  oauth2?: OAuth2Field1 | null | undefined;
   options?: OptionsField | null | undefined;
   /**
    * The placeholder field.
@@ -163,7 +163,7 @@ export const Field$inboundSchema: z.ZodType<Field, z.ZodTypeDef, unknown> = z
     import: z.nullable(ImportField$inboundSchema).optional(),
     keyValue: z.nullable(KeyValueField$inboundSchema).optional(),
     name: z.nullable(z.string()).optional(),
-    oauth2: z.nullable(OAuth2Field$inboundSchema).optional(),
+    oauth2: z.nullable(OAuth2Field1$inboundSchema).optional(),
     options: z.nullable(OptionsField$inboundSchema).optional(),
     placeholder: z.nullable(z.string()).optional(),
     postCreate: z.nullable(z.boolean()).optional(),
@@ -187,7 +187,7 @@ export type Field$Outbound = {
   import?: ImportField$Outbound | null | undefined;
   keyValue?: KeyValueField$Outbound | null | undefined;
   name?: string | null | undefined;
-  oauth2?: OAuth2Field$Outbound | null | undefined;
+  oauth2?: OAuth2Field1$Outbound | null | undefined;
   options?: OptionsField$Outbound | null | undefined;
   placeholder?: string | null | undefined;
   postCreate?: boolean | null | undefined;
@@ -215,7 +215,7 @@ export const Field$outboundSchema: z.ZodType<
   import: z.nullable(ImportField$outboundSchema).optional(),
   keyValue: z.nullable(KeyValueField$outboundSchema).optional(),
   name: z.nullable(z.string()).optional(),
-  oauth2: z.nullable(OAuth2Field$outboundSchema).optional(),
+  oauth2: z.nullable(OAuth2Field1$outboundSchema).optional(),
   options: z.nullable(OptionsField$outboundSchema).optional(),
   placeholder: z.nullable(z.string()).optional(),
   postCreate: z.nullable(z.boolean()).optional(),

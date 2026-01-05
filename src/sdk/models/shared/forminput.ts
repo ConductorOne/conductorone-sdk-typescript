@@ -7,6 +7,12 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  FieldGroup,
+  FieldGroup$inboundSchema,
+  FieldGroup$Outbound,
+  FieldGroup$outboundSchema,
+} from "./fieldgroup.js";
+import {
   FieldInput,
   FieldInput$inboundSchema,
   FieldInput$Outbound,
@@ -32,6 +38,10 @@ export type FormInput = {
    */
   displayName?: string | null | undefined;
   /**
+   * The fieldGroups field.
+   */
+  fieldGroups?: Array<FieldGroup> | null | undefined;
+  /**
    * The fieldRelationships field.
    */
   fieldRelationships?: Array<FieldRelationship> | null | undefined;
@@ -53,6 +63,7 @@ export const FormInput$inboundSchema: z.ZodType<
 > = z.object({
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
+  fieldGroups: z.nullable(z.array(FieldGroup$inboundSchema)).optional(),
   fieldRelationships: z.nullable(z.array(FieldRelationship$inboundSchema))
     .optional(),
   fields: z.nullable(z.array(FieldInput$inboundSchema)).optional(),
@@ -63,6 +74,7 @@ export const FormInput$inboundSchema: z.ZodType<
 export type FormInput$Outbound = {
   description?: string | null | undefined;
   displayName?: string | null | undefined;
+  fieldGroups?: Array<FieldGroup$Outbound> | null | undefined;
   fieldRelationships?: Array<FieldRelationship$Outbound> | null | undefined;
   fields?: Array<FieldInput$Outbound> | null | undefined;
   id?: string | null | undefined;
@@ -76,6 +88,7 @@ export const FormInput$outboundSchema: z.ZodType<
 > = z.object({
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
+  fieldGroups: z.nullable(z.array(FieldGroup$outboundSchema)).optional(),
   fieldRelationships: z.nullable(z.array(FieldRelationship$outboundSchema))
     .optional(),
   fields: z.nullable(z.array(FieldInput$outboundSchema)).optional(),

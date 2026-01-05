@@ -16,6 +16,10 @@ export type ProfileType = {
    */
   description?: string | null | undefined;
   /**
+   * Whether to display this profile type to users in profile page. Defaults to false if not set
+   */
+  displayToUser?: boolean | undefined;
+  /**
    * The iconUrl field.
    */
   iconUrl?: string | null | undefined;
@@ -35,6 +39,10 @@ export type ProfileType = {
    * icon sizes
    */
   sizes?: Array<number> | null | undefined;
+  /**
+   * Add this field to allow users to reference profile type in cel expressions
+   */
+  slug?: string | undefined;
 };
 
 /** @internal */
@@ -44,21 +52,25 @@ export const ProfileType$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   description: z.nullable(z.string()).optional(),
+  displayToUser: z.boolean().optional(),
   iconUrl: z.nullable(z.string()).optional(),
   id: z.nullable(z.string()).optional(),
   name: z.nullable(z.string()).optional(),
   priority: z.nullable(z.number().int()).optional(),
   sizes: z.nullable(z.array(z.number().int())).optional(),
+  slug: z.string().optional(),
 });
 
 /** @internal */
 export type ProfileType$Outbound = {
   description?: string | null | undefined;
+  displayToUser?: boolean | undefined;
   iconUrl?: string | null | undefined;
   id?: string | null | undefined;
   name?: string | null | undefined;
   priority?: number | null | undefined;
   sizes?: Array<number> | null | undefined;
+  slug?: string | undefined;
 };
 
 /** @internal */
@@ -68,11 +80,13 @@ export const ProfileType$outboundSchema: z.ZodType<
   ProfileType
 > = z.object({
   description: z.nullable(z.string()).optional(),
+  displayToUser: z.boolean().optional(),
   iconUrl: z.nullable(z.string()).optional(),
   id: z.nullable(z.string()).optional(),
   name: z.nullable(z.string()).optional(),
   priority: z.nullable(z.number().int()).optional(),
   sizes: z.nullable(z.array(z.number().int())).optional(),
+  slug: z.string().optional(),
 });
 
 /**

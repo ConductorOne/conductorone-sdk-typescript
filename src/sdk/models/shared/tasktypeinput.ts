@@ -3,9 +3,16 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  TaskTypeActionInput,
+  TaskTypeActionInput$inboundSchema,
+  TaskTypeActionInput$Outbound,
+  TaskTypeActionInput$outboundSchema,
+} from "./tasktypeactioninput.js";
 import {
   TaskTypeCertifyInput,
   TaskTypeCertifyInput$inboundSchema,
@@ -41,8 +48,13 @@ import {
  *   - revoke
  *   - certify
  *   - offboarding
+ *   - action
  */
 export type TaskTypeInput = {
+  /**
+   * The TaskTypeAction message.
+   */
+  taskTypeAction?: TaskTypeActionInput | null | undefined;
   certify?: TaskTypeCertifyInput | null | undefined;
   grant?: TaskTypeGrantInput | null | undefined;
   offboarding?: TaskTypeOffboardingInput | null | undefined;
@@ -55,14 +67,20 @@ export const TaskTypeInput$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  action: z.nullable(TaskTypeActionInput$inboundSchema).optional(),
   certify: z.nullable(TaskTypeCertifyInput$inboundSchema).optional(),
   grant: z.nullable(TaskTypeGrantInput$inboundSchema).optional(),
   offboarding: z.nullable(TaskTypeOffboardingInput$inboundSchema).optional(),
   revoke: z.nullable(TaskTypeRevokeInput$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "action": "taskTypeAction",
+  });
 });
 
 /** @internal */
 export type TaskTypeInput$Outbound = {
+  action?: TaskTypeActionInput$Outbound | null | undefined;
   certify?: TaskTypeCertifyInput$Outbound | null | undefined;
   grant?: TaskTypeGrantInput$Outbound | null | undefined;
   offboarding?: TaskTypeOffboardingInput$Outbound | null | undefined;
@@ -75,10 +93,15 @@ export const TaskTypeInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskTypeInput
 > = z.object({
+  taskTypeAction: z.nullable(TaskTypeActionInput$outboundSchema).optional(),
   certify: z.nullable(TaskTypeCertifyInput$outboundSchema).optional(),
   grant: z.nullable(TaskTypeGrantInput$outboundSchema).optional(),
   offboarding: z.nullable(TaskTypeOffboardingInput$outboundSchema).optional(),
   revoke: z.nullable(TaskTypeRevokeInput$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    taskTypeAction: "action",
+  });
 });
 
 /**

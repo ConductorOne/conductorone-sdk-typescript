@@ -4,6 +4,11 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
+import {
+  catchUnrecognizedEnum,
+  OpenEnum,
+  Unrecognized,
+} from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -14,6 +19,20 @@ import {
 } from "./selectoption.js";
 
 /**
+ * The type field.
+ */
+export const SelectFieldType = {
+  SelectTypeUnspecified: "SELECT_TYPE_UNSPECIFIED",
+  SelectTypeDropdown: "SELECT_TYPE_DROPDOWN",
+  SelectTypeRadio: "SELECT_TYPE_RADIO",
+  SelectTypeButtons: "SELECT_TYPE_BUTTONS",
+} as const;
+/**
+ * The type field.
+ */
+export type SelectFieldType = OpenEnum<typeof SelectFieldType>;
+
+/**
  * The SelectField message.
  */
 export type SelectField = {
@@ -21,7 +40,43 @@ export type SelectField = {
    * The options field.
    */
   options?: Array<SelectOption> | null | undefined;
+  /**
+   * The type field.
+   */
+  type?: SelectFieldType | undefined;
 };
+
+/** @internal */
+export const SelectFieldType$inboundSchema: z.ZodType<
+  SelectFieldType,
+  z.ZodTypeDef,
+  unknown
+> = z
+  .union([
+    z.nativeEnum(SelectFieldType),
+    z.string().transform(catchUnrecognizedEnum),
+  ]);
+
+/** @internal */
+export const SelectFieldType$outboundSchema: z.ZodType<
+  SelectFieldType,
+  z.ZodTypeDef,
+  SelectFieldType
+> = z.union([
+  z.nativeEnum(SelectFieldType),
+  z.string().and(z.custom<Unrecognized<string>>()),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SelectFieldType$ {
+  /** @deprecated use `SelectFieldType$inboundSchema` instead. */
+  export const inboundSchema = SelectFieldType$inboundSchema;
+  /** @deprecated use `SelectFieldType$outboundSchema` instead. */
+  export const outboundSchema = SelectFieldType$outboundSchema;
+}
 
 /** @internal */
 export const SelectField$inboundSchema: z.ZodType<
@@ -30,11 +85,13 @@ export const SelectField$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   options: z.nullable(z.array(SelectOption$inboundSchema)).optional(),
+  type: SelectFieldType$inboundSchema.optional(),
 });
 
 /** @internal */
 export type SelectField$Outbound = {
   options?: Array<SelectOption$Outbound> | null | undefined;
+  type?: string | undefined;
 };
 
 /** @internal */
@@ -44,6 +101,7 @@ export const SelectField$outboundSchema: z.ZodType<
   SelectField
 > = z.object({
   options: z.nullable(z.array(SelectOption$outboundSchema)).optional(),
+  type: SelectFieldType$outboundSchema.optional(),
 });
 
 /**

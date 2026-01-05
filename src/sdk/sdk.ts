@@ -4,6 +4,8 @@
 
 import { ClientSDK } from "../lib/sdks.js";
 import { AccessConflict } from "./accessconflict.js";
+import { AccessReview } from "./accessreview.js";
+import { AccessReviewTemplate } from "./accessreviewtemplate.js";
 import { AccountProvisionPolicyTest } from "./accountprovisionpolicytest.js";
 import { AppAccessRequestsDefaults } from "./appaccessrequestsdefaults.js";
 import { AppEntitlementMonitorBinding } from "./appentitlementmonitorbinding.js";
@@ -38,6 +40,7 @@ import { Directory } from "./directory.js";
 import { Export } from "./export.js";
 import { ExportsSearch } from "./exportssearch.js";
 import { Functions } from "./functions.js";
+import { FunctionsInvocation } from "./functionsinvocation.js";
 import { FunctionsSearch } from "./functionssearch.js";
 import { OrgDomain } from "./orgdomain.js";
 import { PersonalClient } from "./personalclient.js";
@@ -59,10 +62,23 @@ import { TaskAudit } from "./taskaudit.js";
 import { TaskSearch } from "./tasksearch.js";
 import { User } from "./user.js";
 import { UserSearch } from "./usersearch.js";
+import { Vault } from "./vault.js";
 import { Webhooks } from "./webhooks.js";
 import { WebhooksSearch } from "./webhookssearch.js";
 
 export class ConductoroneSDKTypescript extends ClientSDK {
+  private _accessReview?: AccessReview;
+  get accessReview(): AccessReview {
+    return (this._accessReview ??= new AccessReview(this._options));
+  }
+
+  private _accessReviewTemplate?: AccessReviewTemplate;
+  get accessReviewTemplate(): AccessReviewTemplate {
+    return (this._accessReviewTemplate ??= new AccessReviewTemplate(
+      this._options,
+    ));
+  }
+
   private _accessConflict?: AccessConflict;
   get accessConflict(): AccessConflict {
     return (this._accessConflict ??= new AccessConflict(this._options));
@@ -227,6 +243,13 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._functions ??= new Functions(this._options));
   }
 
+  private _functionsInvocation?: FunctionsInvocation;
+  get functionsInvocation(): FunctionsInvocation {
+    return (this._functionsInvocation ??= new FunctionsInvocation(
+      this._options,
+    ));
+  }
+
   private _personalClient?: PersonalClient;
   get personalClient(): PersonalClient {
     return (this._personalClient ??= new PersonalClient(this._options));
@@ -373,6 +396,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _user?: User;
   get user(): User {
     return (this._user ??= new User(this._options));
+  }
+
+  private _vault?: Vault;
+  get vault(): Vault {
+    return (this._vault ??= new Vault(this._options));
   }
 
   private _webhooks?: Webhooks;

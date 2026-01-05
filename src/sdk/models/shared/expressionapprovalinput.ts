@@ -27,6 +27,10 @@ export type ExpressionApprovalInput = {
    * Configuration to specific which users to fallback to if and the expression does not return a valid list of users.
    */
   fallbackUserIds?: Array<string> | null | undefined;
+  /**
+   * Configuration to require distinct approvers across approval steps of a rule.
+   */
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -39,6 +43,7 @@ export const ExpressionApprovalInput$inboundSchema: z.ZodType<
   expressions: z.nullable(z.array(z.string())).optional(),
   fallback: z.nullable(z.boolean()).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
 
 /** @internal */
@@ -47,6 +52,7 @@ export type ExpressionApprovalInput$Outbound = {
   expressions?: Array<string> | null | undefined;
   fallback?: boolean | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -59,6 +65,7 @@ export const ExpressionApprovalInput$outboundSchema: z.ZodType<
   expressions: z.nullable(z.array(z.string())).optional(),
   fallback: z.nullable(z.boolean()).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
 
 /**

@@ -8,9 +8,8 @@
 * [listFunctions](#listfunctions) - List Functions
 * [createFunction](#createfunction) - Create Function
 * [listCommits](#listcommits) - List Commits
-* [commit](#commit) - Commit
-* [getCommit](#getcommit) - Get Commit
 * [invoke](#invoke) - Invoke
+* [getFunctionSecretEncryptionKey](#getfunctionsecretencryptionkey) - Get Function Secret Encryption Key
 * [listTags](#listtags) - List Tags
 * [createTag](#createtag) - Create Tag
 * [deleteFunction](#deletefunction) - Delete Function
@@ -245,166 +244,6 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4XX, 5XX        | \*/\*           |
 
-## commit
-
-Commit saves a new version of the function code
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="c1.api.functions.v1.FunctionsService.Commit" method="post" path="/api/v1/functions/{function_id}/commits" -->
-```typescript
-import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
-
-const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
-  security: {
-    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
-    oauth: "<YOUR_OAUTH_HERE>",
-  },
-});
-
-async function run() {
-  const result = await conductoroneSDKTypescript.functions.commit({
-    functionId: "<id>",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
-import { functionsCommit } from "conductorone-sdk-typescript/funcs/functionsCommit.js";
-
-// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
-  security: {
-    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
-    oauth: "<YOUR_OAUTH_HERE>",
-  },
-});
-
-async function run() {
-  const res = await functionsCommit(conductoroneSDKTypescript, {
-    functionId: "<id>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("functionsCommit failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.C1ApiFunctionsV1FunctionsServiceCommitRequest](../../sdk/models/operations/c1apifunctionsv1functionsservicecommitrequest.md)                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.C1ApiFunctionsV1FunctionsServiceCommitResponse](../../sdk/models/operations/c1apifunctionsv1functionsservicecommitresponse.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
-
-## getCommit
-
-GetCommit retrieves the commit and its code content for a specific version
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="c1.api.functions.v1.FunctionsService.GetCommit" method="get" path="/api/v1/functions/{function_id}/commits/{id}" -->
-```typescript
-import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
-
-const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
-  security: {
-    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
-    oauth: "<YOUR_OAUTH_HERE>",
-  },
-});
-
-async function run() {
-  const result = await conductoroneSDKTypescript.functions.getCommit({
-    functionId: "<id>",
-    id: "<id>",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
-import { functionsGetCommit } from "conductorone-sdk-typescript/funcs/functionsGetCommit.js";
-
-// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
-  security: {
-    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
-    oauth: "<YOUR_OAUTH_HERE>",
-  },
-});
-
-async function run() {
-  const res = await functionsGetCommit(conductoroneSDKTypescript, {
-    functionId: "<id>",
-    id: "<id>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("functionsGetCommit failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.C1ApiFunctionsV1FunctionsServiceGetCommitRequest](../../sdk/models/operations/c1apifunctionsv1functionsservicegetcommitrequest.md)                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.C1ApiFunctionsV1FunctionsServiceGetCommitResponse](../../sdk/models/operations/c1apifunctionsv1functionsservicegetcommitresponse.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
-
 ## invoke
 
 Invokes the c1.api.functions.v1.FunctionsService.Invoke method.
@@ -477,6 +316,85 @@ run();
 ### Response
 
 **Promise\<[operations.C1ApiFunctionsV1FunctionsServiceInvokeResponse](../../sdk/models/operations/c1apifunctionsv1functionsserviceinvokeresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## getFunctionSecretEncryptionKey
+
+GetFunctionSecretEncryptionKey retrieves or generates the public key for encrypting function secrets
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.functions.v1.FunctionsService.GetFunctionSecretEncryptionKey" method="get" path="/api/v1/functions/{function_id}/secret-encryption-key" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.functions.getFunctionSecretEncryptionKey({
+    functionId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { functionsGetFunctionSecretEncryptionKey } from "conductorone-sdk-typescript/funcs/functionsGetFunctionSecretEncryptionKey.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await functionsGetFunctionSecretEncryptionKey(conductoroneSDKTypescript, {
+    functionId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("functionsGetFunctionSecretEncryptionKey failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                | Type                                                                                                                                                                                     | Required                                                                                                                                                                                 | Description                                                                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                                                                | [operations.C1ApiFunctionsV1FunctionsServiceGetFunctionSecretEncryptionKeyRequest](../../sdk/models/operations/c1apifunctionsv1functionsservicegetfunctionsecretencryptionkeyrequest.md) | :heavy_check_mark:                                                                                                                                                                       | The request object to use for the request.                                                                                                                                               |
+| `options`                                                                                                                                                                                | RequestOptions                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                       | Used to set various options for making HTTP requests.                                                                                                                                    |
+| `options.fetchOptions`                                                                                                                                                                   | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                  | :heavy_minus_sign:                                                                                                                                                                       | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.           |
+| `options.retries`                                                                                                                                                                        | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                       | Enables retrying HTTP requests under certain failure conditions.                                                                                                                         |
+
+### Response
+
+**Promise\<[operations.C1ApiFunctionsV1FunctionsServiceGetFunctionSecretEncryptionKeyResponse](../../sdk/models/operations/c1apifunctionsv1functionsservicegetfunctionsecretencryptionkeyresponse.md)\>**
 
 ### Errors
 

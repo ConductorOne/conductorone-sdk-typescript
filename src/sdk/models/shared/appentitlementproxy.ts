@@ -18,6 +18,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type AppEntitlementProxy = {
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
+  disabledAt?: Date | undefined;
   /**
    * The dstAppEntitlementId field.
    */
@@ -62,6 +63,8 @@ export const AppEntitlementProxy$inboundSchema: z.ZodType<
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
+  disabledAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
   dstAppEntitlementId: z.nullable(z.string()).optional(),
   dstAppId: z.nullable(z.string()).optional(),
   implicit: z.nullable(z.boolean()).optional(),
@@ -77,6 +80,7 @@ export const AppEntitlementProxy$inboundSchema: z.ZodType<
 export type AppEntitlementProxy$Outbound = {
   createdAt?: string | null | undefined;
   deletedAt?: string | null | undefined;
+  disabledAt?: string | undefined;
   dstAppEntitlementId?: string | null | undefined;
   dstAppId?: string | null | undefined;
   implicit?: boolean | null | undefined;
@@ -94,6 +98,7 @@ export const AppEntitlementProxy$outboundSchema: z.ZodType<
 > = z.object({
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  disabledAt: z.date().transform(v => v.toISOString()).optional(),
   dstAppEntitlementId: z.nullable(z.string()).optional(),
   dstAppId: z.nullable(z.string()).optional(),
   implicit: z.nullable(z.boolean()).optional(),

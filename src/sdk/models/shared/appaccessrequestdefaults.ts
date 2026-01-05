@@ -17,7 +17,7 @@ export type DurationUnset = {};
 /**
  * The last applied state of the app access request defaults.
  */
-export const State = {
+export const AppAccessRequestDefaultsState = {
   AppAccessRequestDefaultsLastApplyStateUnspecified:
     "APP_ACCESS_REQUEST_DEFAULTS_LAST_APPLY_STATE_UNSPECIFIED",
   AppAccessRequestDefaultsLastApplyStateRunning:
@@ -36,7 +36,9 @@ export const State = {
 /**
  * The last applied state of the app access request defaults.
  */
-export type State = OpenEnum<typeof State>;
+export type AppAccessRequestDefaultsState = OpenEnum<
+  typeof AppAccessRequestDefaultsState
+>;
 
 /**
  * The AppAccessRequestDefaults message.
@@ -81,7 +83,7 @@ export type AppAccessRequestDefaults = {
   /**
    * The last applied state of the app access request defaults.
    */
-  state?: State | null | undefined;
+  state?: AppAccessRequestDefaultsState | null | undefined;
 };
 
 /**
@@ -123,7 +125,7 @@ export type AppAccessRequestDefaults1 = {
   /**
    * The last applied state of the app access request defaults.
    */
-  state?: State | null | undefined;
+  state?: AppAccessRequestDefaultsState | null | undefined;
 };
 
 /** @internal */
@@ -171,28 +173,35 @@ export function durationUnsetFromJSON(
 }
 
 /** @internal */
-export const State$inboundSchema: z.ZodType<State, z.ZodTypeDef, unknown> = z
+export const AppAccessRequestDefaultsState$inboundSchema: z.ZodType<
+  AppAccessRequestDefaultsState,
+  z.ZodTypeDef,
+  unknown
+> = z
   .union([
-    z.nativeEnum(State),
+    z.nativeEnum(AppAccessRequestDefaultsState),
     z.string().transform(catchUnrecognizedEnum),
   ]);
 
 /** @internal */
-export const State$outboundSchema: z.ZodType<State, z.ZodTypeDef, State> = z
-  .union([
-    z.nativeEnum(State),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
+export const AppAccessRequestDefaultsState$outboundSchema: z.ZodType<
+  AppAccessRequestDefaultsState,
+  z.ZodTypeDef,
+  AppAccessRequestDefaultsState
+> = z.union([
+  z.nativeEnum(AppAccessRequestDefaultsState),
+  z.string().and(z.custom<Unrecognized<string>>()),
+]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace State$ {
-  /** @deprecated use `State$inboundSchema` instead. */
-  export const inboundSchema = State$inboundSchema;
-  /** @deprecated use `State$outboundSchema` instead. */
-  export const outboundSchema = State$outboundSchema;
+export namespace AppAccessRequestDefaultsState$ {
+  /** @deprecated use `AppAccessRequestDefaultsState$inboundSchema` instead. */
+  export const inboundSchema = AppAccessRequestDefaultsState$inboundSchema;
+  /** @deprecated use `AppAccessRequestDefaultsState$outboundSchema` instead. */
+  export const outboundSchema = AppAccessRequestDefaultsState$outboundSchema;
 }
 
 /** @internal */
@@ -211,7 +220,7 @@ export const AppAccessRequestDefaults$inboundSchema: z.ZodType<
   emergencyGrantPolicyId: z.nullable(z.string()).optional(),
   requestPolicyId: z.nullable(z.string()).optional(),
   resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  state: z.nullable(State$inboundSchema).optional(),
+  state: z.nullable(AppAccessRequestDefaultsState$inboundSchema).optional(),
 });
 
 /** @internal */
@@ -244,7 +253,7 @@ export const AppAccessRequestDefaults$outboundSchema: z.ZodType<
   emergencyGrantPolicyId: z.nullable(z.string()).optional(),
   requestPolicyId: z.nullable(z.string()).optional(),
   resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  state: z.nullable(State$outboundSchema).optional(),
+  state: z.nullable(AppAccessRequestDefaultsState$outboundSchema).optional(),
 });
 
 /**
@@ -293,7 +302,7 @@ export const AppAccessRequestDefaults1$inboundSchema: z.ZodType<
   emergencyGrantPolicyId: z.nullable(z.string()).optional(),
   requestPolicyId: z.nullable(z.string()).optional(),
   resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  state: z.nullable(State$inboundSchema).optional(),
+  state: z.nullable(AppAccessRequestDefaultsState$inboundSchema).optional(),
 });
 
 /** @internal */
@@ -324,7 +333,7 @@ export const AppAccessRequestDefaults1$outboundSchema: z.ZodType<
   emergencyGrantPolicyId: z.nullable(z.string()).optional(),
   requestPolicyId: z.nullable(z.string()).optional(),
   resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  state: z.nullable(State$outboundSchema).optional(),
+  state: z.nullable(AppAccessRequestDefaultsState$outboundSchema).optional(),
 });
 
 /**

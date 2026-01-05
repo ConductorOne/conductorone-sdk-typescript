@@ -10,7 +10,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 });
 
 async function run() {
-  const result = await conductoroneSDKTypescript.accessConflict.createMonitor();
+  const result = await conductoroneSDKTypescript.accessReview.create();
 
   console.log(result);
 }

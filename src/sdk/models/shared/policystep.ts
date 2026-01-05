@@ -13,6 +13,12 @@ import {
   Accept$outboundSchema,
 } from "./accept.js";
 import {
+  Action,
+  Action$inboundSchema,
+  Action$Outbound,
+  Action$outboundSchema,
+} from "./action.js";
+import {
   Approval,
   Approval$inboundSchema,
   Approval$Outbound,
@@ -55,9 +61,19 @@ import {
  *   - reject
  *   - wait
  *   - form
+ *   - action
  */
 export type PolicyStep = {
   accept?: Accept | null | undefined;
+  /**
+   * The Action message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named target. Only a single field of the following list may be set at a time:
+   *   - automation
+   */
+  action?: Action | null | undefined;
   approval?: Approval | null | undefined;
   form?: Form | null | undefined;
   provision?: Provision | null | undefined;
@@ -72,6 +88,7 @@ export const PolicyStep$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   accept: z.nullable(Accept$inboundSchema).optional(),
+  action: z.nullable(Action$inboundSchema).optional(),
   approval: z.nullable(Approval$inboundSchema).optional(),
   form: z.nullable(Form$inboundSchema).optional(),
   provision: z.nullable(Provision$inboundSchema).optional(),
@@ -82,6 +99,7 @@ export const PolicyStep$inboundSchema: z.ZodType<
 /** @internal */
 export type PolicyStep$Outbound = {
   accept?: Accept$Outbound | null | undefined;
+  action?: Action$Outbound | null | undefined;
   approval?: Approval$Outbound | null | undefined;
   form?: Form$Outbound | null | undefined;
   provision?: Provision$Outbound | null | undefined;
@@ -96,6 +114,7 @@ export const PolicyStep$outboundSchema: z.ZodType<
   PolicyStep
 > = z.object({
   accept: z.nullable(Accept$outboundSchema).optional(),
+  action: z.nullable(Action$outboundSchema).optional(),
   approval: z.nullable(Approval$outboundSchema).optional(),
   form: z.nullable(Form$outboundSchema).optional(),
   provision: z.nullable(Provision$outboundSchema).optional(),

@@ -7,11 +7,11 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  NotificationConfig,
-  NotificationConfig$inboundSchema,
-  NotificationConfig$Outbound,
-  NotificationConfig$outboundSchema,
-} from "./notificationconfig.js";
+  NotificationConfig1,
+  NotificationConfig1$inboundSchema,
+  NotificationConfig1$Outbound,
+  NotificationConfig1$outboundSchema,
+} from "./notificationconfig1.js";
 
 /**
  * The ConflictMonitorCreateRequest message.
@@ -25,7 +25,7 @@ export type ConflictMonitorCreateRequest = {
    * The displayName field.
    */
   displayName: string;
-  notificationConfig?: NotificationConfig | null | undefined;
+  notificationConfig?: NotificationConfig1 | null | undefined;
 };
 
 /** @internal */
@@ -36,14 +36,14 @@ export const ConflictMonitorCreateRequest$inboundSchema: z.ZodType<
 > = z.object({
   description: z.nullable(z.string()).optional(),
   displayName: z.string(),
-  notificationConfig: z.nullable(NotificationConfig$inboundSchema).optional(),
+  notificationConfig: z.nullable(NotificationConfig1$inboundSchema).optional(),
 });
 
 /** @internal */
 export type ConflictMonitorCreateRequest$Outbound = {
   description?: string | null | undefined;
   displayName: string;
-  notificationConfig?: NotificationConfig$Outbound | null | undefined;
+  notificationConfig?: NotificationConfig1$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -54,7 +54,7 @@ export const ConflictMonitorCreateRequest$outboundSchema: z.ZodType<
 > = z.object({
   description: z.nullable(z.string()).optional(),
   displayName: z.string(),
-  notificationConfig: z.nullable(NotificationConfig$outboundSchema).optional(),
+  notificationConfig: z.nullable(NotificationConfig1$outboundSchema).optional(),
 });
 
 /**

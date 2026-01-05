@@ -4,6 +4,11 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
+import {
+  catchUnrecognizedEnum,
+  OpenEnum,
+  Unrecognized,
+} from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -12,6 +17,19 @@ import {
   FormInput$Outbound,
   FormInput$outboundSchema,
 } from "./forminput.js";
+
+/**
+ * The justificationVisibility field.
+ */
+export const JustificationVisibility = {
+  JustificationVisibilityUnspecified: "JUSTIFICATION_VISIBILITY_UNSPECIFIED",
+  JustificationVisibilityShow: "JUSTIFICATION_VISIBILITY_SHOW",
+  JustificationVisibilityHide: "JUSTIFICATION_VISIBILITY_HIDE",
+} as const;
+/**
+ * The justificationVisibility field.
+ */
+export type JustificationVisibility = OpenEnum<typeof JustificationVisibility>;
 
 /**
  * The RequestSchema message.
@@ -24,8 +42,44 @@ export type RequestSchema = {
    * The id field.
    */
   id?: string | null | undefined;
+  /**
+   * The justificationVisibility field.
+   */
+  justificationVisibility?: JustificationVisibility | undefined;
   modifiedAt?: Date | null | undefined;
 };
+
+/** @internal */
+export const JustificationVisibility$inboundSchema: z.ZodType<
+  JustificationVisibility,
+  z.ZodTypeDef,
+  unknown
+> = z
+  .union([
+    z.nativeEnum(JustificationVisibility),
+    z.string().transform(catchUnrecognizedEnum),
+  ]);
+
+/** @internal */
+export const JustificationVisibility$outboundSchema: z.ZodType<
+  JustificationVisibility,
+  z.ZodTypeDef,
+  JustificationVisibility
+> = z.union([
+  z.nativeEnum(JustificationVisibility),
+  z.string().and(z.custom<Unrecognized<string>>()),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace JustificationVisibility$ {
+  /** @deprecated use `JustificationVisibility$inboundSchema` instead. */
+  export const inboundSchema = JustificationVisibility$inboundSchema;
+  /** @deprecated use `JustificationVisibility$outboundSchema` instead. */
+  export const outboundSchema = JustificationVisibility$outboundSchema;
+}
 
 /** @internal */
 export const RequestSchema$inboundSchema: z.ZodType<
@@ -41,6 +95,7 @@ export const RequestSchema$inboundSchema: z.ZodType<
   ).optional(),
   form: z.nullable(FormInput$inboundSchema).optional(),
   id: z.nullable(z.string()).optional(),
+  justificationVisibility: JustificationVisibility$inboundSchema.optional(),
   modifiedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -52,6 +107,7 @@ export type RequestSchema$Outbound = {
   deletedAt?: string | null | undefined;
   form?: FormInput$Outbound | null | undefined;
   id?: string | null | undefined;
+  justificationVisibility?: string | undefined;
   modifiedAt?: string | null | undefined;
 };
 
@@ -65,6 +121,7 @@ export const RequestSchema$outboundSchema: z.ZodType<
   deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   form: z.nullable(FormInput$outboundSchema).optional(),
   id: z.nullable(z.string()).optional(),
+  justificationVisibility: JustificationVisibility$outboundSchema.optional(),
   modifiedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 

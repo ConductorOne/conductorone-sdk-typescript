@@ -35,7 +35,7 @@ export type DirectoryStatus = OpenEnum<typeof DirectoryStatus>;
 /**
  * The status of the user in the system.
  */
-export const UserStatus = {
+export const UserSchemasStatus = {
   Unknown: "UNKNOWN",
   Enabled: "ENABLED",
   Disabled: "DISABLED",
@@ -44,7 +44,7 @@ export const UserStatus = {
 /**
  * The status of the user in the system.
  */
-export type UserStatus = OpenEnum<typeof UserStatus>;
+export type UserSchemasStatus = OpenEnum<typeof UserSchemasStatus>;
 
 /**
  * The type of the user.
@@ -162,7 +162,7 @@ export type User = {
   /**
    * The status of the user in the system.
    */
-  status?: UserStatus | null | undefined;
+  status?: UserSchemasStatus | null | undefined;
   /**
    * The type of the user.
    */
@@ -215,23 +215,23 @@ export namespace DirectoryStatus$ {
 }
 
 /** @internal */
-export const UserStatus$inboundSchema: z.ZodType<
-  UserStatus,
+export const UserSchemasStatus$inboundSchema: z.ZodType<
+  UserSchemasStatus,
   z.ZodTypeDef,
   unknown
 > = z
   .union([
-    z.nativeEnum(UserStatus),
+    z.nativeEnum(UserSchemasStatus),
     z.string().transform(catchUnrecognizedEnum),
   ]);
 
 /** @internal */
-export const UserStatus$outboundSchema: z.ZodType<
-  UserStatus,
+export const UserSchemasStatus$outboundSchema: z.ZodType<
+  UserSchemasStatus,
   z.ZodTypeDef,
-  UserStatus
+  UserSchemasStatus
 > = z.union([
-  z.nativeEnum(UserStatus),
+  z.nativeEnum(UserSchemasStatus),
   z.string().and(z.custom<Unrecognized<string>>()),
 ]);
 
@@ -239,11 +239,11 @@ export const UserStatus$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UserStatus$ {
-  /** @deprecated use `UserStatus$inboundSchema` instead. */
-  export const inboundSchema = UserStatus$inboundSchema;
-  /** @deprecated use `UserStatus$outboundSchema` instead. */
-  export const outboundSchema = UserStatus$outboundSchema;
+export namespace UserSchemasStatus$ {
+  /** @deprecated use `UserSchemasStatus$inboundSchema` instead. */
+  export const inboundSchema = UserSchemasStatus$inboundSchema;
+  /** @deprecated use `UserSchemasStatus$outboundSchema` instead. */
+  export const outboundSchema = UserSchemasStatus$outboundSchema;
 }
 
 /** @internal */
@@ -319,7 +319,7 @@ export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> = z
     ).optional(),
     profile: z.nullable(z.record(z.any())).optional(),
     roleIds: z.nullable(z.array(z.string())).optional(),
-    status: z.nullable(UserStatus$inboundSchema).optional(),
+    status: z.nullable(UserSchemasStatus$inboundSchema).optional(),
     type: z.nullable(Type$inboundSchema).optional(),
     updatedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -433,7 +433,7 @@ export const User$outboundSchema: z.ZodType<User$Outbound, z.ZodTypeDef, User> =
     ).optional(),
     profile: z.nullable(z.record(z.any())).optional(),
     roleIds: z.nullable(z.array(z.string())).optional(),
-    status: z.nullable(UserStatus$outboundSchema).optional(),
+    status: z.nullable(UserSchemasStatus$outboundSchema).optional(),
     type: z.nullable(Type$outboundSchema).optional(),
     updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
     username: z.nullable(z.string()).optional(),

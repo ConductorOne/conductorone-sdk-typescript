@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import {
   catchUnrecognizedEnum,
@@ -17,6 +18,12 @@ import {
   AcceptInstance$Outbound,
   AcceptInstance$outboundSchema,
 } from "./acceptinstance.js";
+import {
+  ActionInstance,
+  ActionInstance$inboundSchema,
+  ActionInstance$Outbound,
+  ActionInstance$outboundSchema,
+} from "./actioninstance.js";
 import {
   ApprovalInstance,
   ApprovalInstance$inboundSchema,
@@ -73,9 +80,25 @@ export type PolicyStepInstanceState = OpenEnum<typeof PolicyStepInstanceState>;
  *   - reject
  *   - wait
  *   - form
+ *   - action
  */
 export type PolicyStepInstance = {
   accept?: AcceptInstance | null | undefined;
+  /**
+   * The ActionInstance message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named target_instance. Only a single field of the following list may be set at a time:
+   *   - automation
+   *
+   * This message contains a oneof named outcome. Only a single field of the following list may be set at a time:
+   *   - success
+   *   - denied
+   *   - error
+   *   - cancelled
+   */
+  actionInstance?: ActionInstance | null | undefined;
   approval?: ApprovalInstance | null | undefined;
   form?: FormInstance | null | undefined;
   /**
@@ -134,6 +157,7 @@ export const PolicyStepInstance$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   accept: z.nullable(AcceptInstance$inboundSchema).optional(),
+  action: z.nullable(ActionInstance$inboundSchema).optional(),
   approval: z.nullable(ApprovalInstance$inboundSchema).optional(),
   form: z.nullable(FormInstance$inboundSchema).optional(),
   id: z.nullable(z.string()).optional(),
@@ -142,11 +166,16 @@ export const PolicyStepInstance$inboundSchema: z.ZodType<
   reject: z.nullable(RejectInstance$inboundSchema).optional(),
   state: z.nullable(PolicyStepInstanceState$inboundSchema).optional(),
   wait: z.nullable(WaitInstance$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "action": "actionInstance",
+  });
 });
 
 /** @internal */
 export type PolicyStepInstance$Outbound = {
   accept?: AcceptInstance$Outbound | null | undefined;
+  action?: ActionInstance$Outbound | null | undefined;
   approval?: ApprovalInstance$Outbound | null | undefined;
   form?: FormInstance$Outbound | null | undefined;
   id?: string | null | undefined;
@@ -164,6 +193,7 @@ export const PolicyStepInstance$outboundSchema: z.ZodType<
   PolicyStepInstance
 > = z.object({
   accept: z.nullable(AcceptInstance$outboundSchema).optional(),
+  actionInstance: z.nullable(ActionInstance$outboundSchema).optional(),
   approval: z.nullable(ApprovalInstance$outboundSchema).optional(),
   form: z.nullable(FormInstance$outboundSchema).optional(),
   id: z.nullable(z.string()).optional(),
@@ -172,6 +202,10 @@ export const PolicyStepInstance$outboundSchema: z.ZodType<
   reject: z.nullable(RejectInstance$outboundSchema).optional(),
   state: z.nullable(PolicyStepInstanceState$outboundSchema).optional(),
   wait: z.nullable(WaitInstance$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    actionInstance: "action",
+  });
 });
 
 /**

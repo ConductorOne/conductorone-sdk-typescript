@@ -3,7 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { remap as remap$ } from "../../../lib/primitives.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -12,13 +16,116 @@ import {
   AutomationExecution$Outbound,
   AutomationExecution$outboundSchema,
 } from "./automationexecution.js";
+import {
+  AutomationExecutionView,
+  AutomationExecutionView$inboundSchema,
+  AutomationExecutionView$Outbound,
+  AutomationExecutionView$outboundSchema,
+} from "./automationexecutionview.js";
+
+/**
+ * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+ */
+export type GetAutomationExecutionResponseExpanded = {
+  /**
+   * The type of the serialized message.
+   */
+  atType?: string | undefined;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
 
 /**
  * The GetAutomationExecutionResponse message.
  */
 export type GetAutomationExecutionResponse = {
   automationExecution?: AutomationExecution | null | undefined;
+  /**
+   * The expanded field.
+   */
+  expanded?: Array<GetAutomationExecutionResponseExpanded> | null | undefined;
+  /**
+   * The AutomationExecutionView message.
+   */
+  automationExecutionView?: AutomationExecutionView | undefined;
 };
+
+/** @internal */
+export const GetAutomationExecutionResponseExpanded$inboundSchema: z.ZodType<
+  GetAutomationExecutionResponseExpanded,
+  z.ZodTypeDef,
+  unknown
+> = collectExtraKeys$(
+  z.object({
+    "@type": z.string().optional(),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+).transform((v) => {
+  return remap$(v, {
+    "@type": "atType",
+  });
+});
+
+/** @internal */
+export type GetAutomationExecutionResponseExpanded$Outbound = {
+  "@type"?: string | undefined;
+  [additionalProperties: string]: unknown;
+};
+
+/** @internal */
+export const GetAutomationExecutionResponseExpanded$outboundSchema: z.ZodType<
+  GetAutomationExecutionResponseExpanded$Outbound,
+  z.ZodTypeDef,
+  GetAutomationExecutionResponseExpanded
+> = z.object({
+  atType: z.string().optional(),
+  additionalProperties: z.record(z.any()).optional(),
+}).transform((v) => {
+  return {
+    ...v.additionalProperties,
+    ...remap$(v, {
+      atType: "@type",
+      additionalProperties: null,
+    }),
+  };
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAutomationExecutionResponseExpanded$ {
+  /** @deprecated use `GetAutomationExecutionResponseExpanded$inboundSchema` instead. */
+  export const inboundSchema =
+    GetAutomationExecutionResponseExpanded$inboundSchema;
+  /** @deprecated use `GetAutomationExecutionResponseExpanded$outboundSchema` instead. */
+  export const outboundSchema =
+    GetAutomationExecutionResponseExpanded$outboundSchema;
+  /** @deprecated use `GetAutomationExecutionResponseExpanded$Outbound` instead. */
+  export type Outbound = GetAutomationExecutionResponseExpanded$Outbound;
+}
+
+export function getAutomationExecutionResponseExpandedToJSON(
+  getAutomationExecutionResponseExpanded:
+    GetAutomationExecutionResponseExpanded,
+): string {
+  return JSON.stringify(
+    GetAutomationExecutionResponseExpanded$outboundSchema.parse(
+      getAutomationExecutionResponseExpanded,
+    ),
+  );
+}
+
+export function getAutomationExecutionResponseExpandedFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAutomationExecutionResponseExpanded, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetAutomationExecutionResponseExpanded$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAutomationExecutionResponseExpanded' from JSON`,
+  );
+}
 
 /** @internal */
 export const GetAutomationExecutionResponse$inboundSchema: z.ZodType<
@@ -27,11 +134,24 @@ export const GetAutomationExecutionResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   automationExecution: z.nullable(AutomationExecution$inboundSchema).optional(),
+  expanded: z.nullable(
+    z.array(z.lazy(() => GetAutomationExecutionResponseExpanded$inboundSchema)),
+  ).optional(),
+  view: AutomationExecutionView$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "view": "automationExecutionView",
+  });
 });
 
 /** @internal */
 export type GetAutomationExecutionResponse$Outbound = {
   automationExecution?: AutomationExecution$Outbound | null | undefined;
+  expanded?:
+    | Array<GetAutomationExecutionResponseExpanded$Outbound>
+    | null
+    | undefined;
+  view?: AutomationExecutionView$Outbound | undefined;
 };
 
 /** @internal */
@@ -42,6 +162,16 @@ export const GetAutomationExecutionResponse$outboundSchema: z.ZodType<
 > = z.object({
   automationExecution: z.nullable(AutomationExecution$outboundSchema)
     .optional(),
+  expanded: z.nullable(
+    z.array(
+      z.lazy(() => GetAutomationExecutionResponseExpanded$outboundSchema),
+    ),
+  ).optional(),
+  automationExecutionView: AutomationExecutionView$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    automationExecutionView: "view",
+  });
 });
 
 /**

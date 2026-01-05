@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
-import { accessConflictCreateMonitor } from "conductorone-sdk-typescript/funcs/accessConflictCreateMonitor.js";
+import { accessReviewCreate } from "conductorone-sdk-typescript/funcs/accessReviewCreate.js";
 
 // Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -32,12 +32,12 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 });
 
 async function run() {
-  const res = await accessConflictCreateMonitor(conductoroneSDKTypescript);
+  const res = await accessReviewCreate(conductoroneSDKTypescript);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("accessConflictCreateMonitor failed:", res.error);
+    console.log("accessReviewCreate failed:", res.error);
   }
 }
 

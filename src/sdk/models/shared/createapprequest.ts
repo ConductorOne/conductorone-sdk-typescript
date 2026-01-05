@@ -52,6 +52,10 @@ export type CreateAppRequest = {
    */
   identityMatching?: CreateAppRequestIdentityMatching | null | undefined;
   /**
+   * Instructions shown to users in the access request form when requesting access for this app.
+   */
+  instructions?: string | undefined;
+  /**
    * Creates the app with this monthly cost per seat.
    */
   monthlyCostUsd?: number | null | undefined;
@@ -113,6 +117,7 @@ export const CreateAppRequest$inboundSchema: z.ZodType<
   grantPolicyId: z.nullable(z.string()).optional(),
   identityMatching: z.nullable(CreateAppRequestIdentityMatching$inboundSchema)
     .optional(),
+  instructions: z.string().optional(),
   monthlyCostUsd: z.nullable(z.number().int()).optional(),
   owners: z.nullable(z.array(z.string())).optional(),
   revokePolicyId: z.nullable(z.string()).optional(),
@@ -126,6 +131,7 @@ export type CreateAppRequest$Outbound = {
   displayName: string;
   grantPolicyId?: string | null | undefined;
   identityMatching?: string | null | undefined;
+  instructions?: string | undefined;
   monthlyCostUsd?: number | null | undefined;
   owners?: Array<string> | null | undefined;
   revokePolicyId?: string | null | undefined;
@@ -144,6 +150,7 @@ export const CreateAppRequest$outboundSchema: z.ZodType<
   grantPolicyId: z.nullable(z.string()).optional(),
   identityMatching: z.nullable(CreateAppRequestIdentityMatching$outboundSchema)
     .optional(),
+  instructions: z.string().optional(),
   monthlyCostUsd: z.nullable(z.number().int()).optional(),
   owners: z.nullable(z.array(z.string())).optional(),
   revokePolicyId: z.nullable(z.string()).optional(),

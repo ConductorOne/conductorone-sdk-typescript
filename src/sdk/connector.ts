@@ -8,6 +8,7 @@ import { connectorCreateDelegated } from "../funcs/connectorCreateDelegated.js";
 import { connectorDelete } from "../funcs/connectorDelete.js";
 import { connectorForceSync } from "../funcs/connectorForceSync.js";
 import { connectorGet } from "../funcs/connectorGet.js";
+import { connectorGetConnectorSyncDownloadURL } from "../funcs/connectorGetConnectorSyncDownloadURL.js";
 import { connectorGetCredentials } from "../funcs/connectorGetCredentials.js";
 import { connectorList } from "../funcs/connectorList.js";
 import { connectorPauseSync } from "../funcs/connectorPauseSync.js";
@@ -153,6 +154,26 @@ export class Connector extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.C1ApiAppV1ConnectorServiceResumeSyncResponse> {
     return unwrapAsync(connectorResumeSync(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get Connector Sync Download Url
+   *
+   * @remarks
+   * GetConnectorSyncDownloadURL generates a short-lived download URL for a completed connector sync artifact.
+   */
+  async getConnectorSyncDownloadURL(
+    request:
+      operations.C1ApiAppV1ConnectorServiceGetConnectorSyncDownloadURLRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiAppV1ConnectorServiceGetConnectorSyncDownloadURLResponse
+  > {
+    return unwrapAsync(connectorGetConnectorSyncDownloadURL(
       this,
       request,
       options,

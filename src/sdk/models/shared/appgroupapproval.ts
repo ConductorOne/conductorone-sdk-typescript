@@ -45,6 +45,10 @@ export type AppGroupApproval = {
    * Configuration to enable fallback for group fallback.
    */
   isGroupFallbackEnabled?: boolean | null | undefined;
+  /**
+   * Configuration to require distinct approvers across approval steps of a rule.
+   */
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -61,6 +65,7 @@ export const AppGroupApproval$inboundSchema: z.ZodType<
     .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
   isGroupFallbackEnabled: z.nullable(z.boolean()).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
 
 /** @internal */
@@ -72,6 +77,7 @@ export type AppGroupApproval$Outbound = {
   fallbackGroupIds?: Array<AppEntitlementReference$Outbound> | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
   isGroupFallbackEnabled?: boolean | null | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -88,6 +94,7 @@ export const AppGroupApproval$outboundSchema: z.ZodType<
     .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
   isGroupFallbackEnabled: z.nullable(z.boolean()).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
 
 /**

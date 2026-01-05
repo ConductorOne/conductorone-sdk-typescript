@@ -17,11 +17,17 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type FunctionsServiceInvokeResponse = {
   /**
+   * The invocationId field.
+   */
+  invocationId?: string | undefined;
+  /**
    * The json field.
    *
    * @remarks
    * This field is part of the `resp` oneof.
    * See the documentation for `c1.api.functions.v1.FunctionsServiceInvokeResponse` for more details.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   json?: string | null | undefined;
 };
@@ -32,11 +38,13 @@ export const FunctionsServiceInvokeResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  invocationId: z.string().optional(),
   json: z.nullable(z.string()).optional(),
 });
 
 /** @internal */
 export type FunctionsServiceInvokeResponse$Outbound = {
+  invocationId?: string | undefined;
   json?: string | null | undefined;
 };
 
@@ -46,6 +54,7 @@ export const FunctionsServiceInvokeResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FunctionsServiceInvokeResponse
 > = z.object({
+  invocationId: z.string().optional(),
   json: z.nullable(z.string()).optional(),
 });
 

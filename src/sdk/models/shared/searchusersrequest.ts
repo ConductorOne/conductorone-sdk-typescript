@@ -33,13 +33,15 @@ export const ExcludeTypes = {
 } as const;
 export type ExcludeTypes = OpenEnum<typeof ExcludeTypes>;
 
-export const UserStatuses = {
+export const SearchUsersRequestUserStatuses = {
   Unknown: "UNKNOWN",
   Enabled: "ENABLED",
   Disabled: "DISABLED",
   Deleted: "DELETED",
 } as const;
-export type UserStatuses = OpenEnum<typeof UserStatuses>;
+export type SearchUsersRequestUserStatuses = OpenEnum<
+  typeof SearchUsersRequestUserStatuses
+>;
 
 /**
  * Search for users based on some filters.
@@ -97,7 +99,7 @@ export type SearchUsersRequest = {
   /**
    * Search for users that have any of the statuses on this list. This can only be ENABLED, DISABLED, and DELETED
    */
-  userStatuses?: Array<UserStatuses> | null | undefined;
+  userStatuses?: Array<SearchUsersRequestUserStatuses> | null | undefined;
 };
 
 /** @internal */
@@ -133,23 +135,23 @@ export namespace ExcludeTypes$ {
 }
 
 /** @internal */
-export const UserStatuses$inboundSchema: z.ZodType<
-  UserStatuses,
+export const SearchUsersRequestUserStatuses$inboundSchema: z.ZodType<
+  SearchUsersRequestUserStatuses,
   z.ZodTypeDef,
   unknown
 > = z
   .union([
-    z.nativeEnum(UserStatuses),
+    z.nativeEnum(SearchUsersRequestUserStatuses),
     z.string().transform(catchUnrecognizedEnum),
   ]);
 
 /** @internal */
-export const UserStatuses$outboundSchema: z.ZodType<
-  UserStatuses,
+export const SearchUsersRequestUserStatuses$outboundSchema: z.ZodType<
+  SearchUsersRequestUserStatuses,
   z.ZodTypeDef,
-  UserStatuses
+  SearchUsersRequestUserStatuses
 > = z.union([
-  z.nativeEnum(UserStatuses),
+  z.nativeEnum(SearchUsersRequestUserStatuses),
   z.string().and(z.custom<Unrecognized<string>>()),
 ]);
 
@@ -157,11 +159,11 @@ export const UserStatuses$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UserStatuses$ {
-  /** @deprecated use `UserStatuses$inboundSchema` instead. */
-  export const inboundSchema = UserStatuses$inboundSchema;
-  /** @deprecated use `UserStatuses$outboundSchema` instead. */
-  export const outboundSchema = UserStatuses$outboundSchema;
+export namespace SearchUsersRequestUserStatuses$ {
+  /** @deprecated use `SearchUsersRequestUserStatuses$inboundSchema` instead. */
+  export const inboundSchema = SearchUsersRequestUserStatuses$inboundSchema;
+  /** @deprecated use `SearchUsersRequestUserStatuses$outboundSchema` instead. */
+  export const outboundSchema = SearchUsersRequestUserStatuses$outboundSchema;
 }
 
 /** @internal */
@@ -183,7 +185,9 @@ export const SearchUsersRequest$inboundSchema: z.ZodType<
   query: z.nullable(z.string()).optional(),
   refs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
   roleIds: z.nullable(z.array(z.string())).optional(),
-  userStatuses: z.nullable(z.array(UserStatuses$inboundSchema)).optional(),
+  userStatuses: z.nullable(
+    z.array(SearchUsersRequestUserStatuses$inboundSchema),
+  ).optional(),
 });
 
 /** @internal */
@@ -223,7 +227,9 @@ export const SearchUsersRequest$outboundSchema: z.ZodType<
   query: z.nullable(z.string()).optional(),
   refs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
   roleIds: z.nullable(z.array(z.string())).optional(),
-  userStatuses: z.nullable(z.array(UserStatuses$outboundSchema)).optional(),
+  userStatuses: z.nullable(
+    z.array(SearchUsersRequestUserStatuses$outboundSchema),
+  ).optional(),
 });
 
 /**

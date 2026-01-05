@@ -43,6 +43,24 @@ import {
   CreateRevokeTasks$outboundSchema,
 } from "./createrevoketasks.js";
 import {
+  CreateRevokeTasksV2,
+  CreateRevokeTasksV2$inboundSchema,
+  CreateRevokeTasksV2$Outbound,
+  CreateRevokeTasksV2$outboundSchema,
+} from "./createrevoketasksv2.js";
+import {
+  EvaluateExpressions,
+  EvaluateExpressions$inboundSchema,
+  EvaluateExpressions$Outbound,
+  EvaluateExpressions$outboundSchema,
+} from "./evaluateexpressions.js";
+import {
+  GeneratePassword,
+  GeneratePassword$inboundSchema,
+  GeneratePassword$Outbound,
+  GeneratePassword$outboundSchema,
+} from "./generatepassword.js";
+import {
   GrantEntitlements,
   GrantEntitlements$inboundSchema,
   GrantEntitlements$Outbound,
@@ -113,6 +131,7 @@ import {
  *   - waitForDuration
  *   - unenrollFromAllAccessProfiles
  *   - createRevokeTasks
+ *   - createRevokeTasksV2
  *   - sendEmail
  *   - removeFromDelegation
  *   - runAutomation
@@ -125,6 +144,8 @@ import {
  *   - sendSlackMessage
  *   - callFunction
  *   - accountLifecycleAction
+ *   - generatePassword
+ *   - evaluateExpressions
  */
 export type AutomationStep = {
   accountLifecycleAction?: AccountLifecycleAction | null | undefined;
@@ -133,6 +154,37 @@ export type AutomationStep = {
   connectorCreateAccount?: ConnectorCreateAccount | null | undefined;
   createAccessReview?: CreateAccessReview | null | undefined;
   createRevokeTasks?: CreateRevokeTasks | null | undefined;
+  /**
+   * The CreateRevokeTasksV2 message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named user. Only a single field of the following list may be set at a time:
+   *   - userIdCel
+   *   - userRef
+   *   - useSubjectUser
+   *
+   * This message contains a oneof named inclusion. Only a single field of the following list may be set at a time:
+   *   - inclusionList
+   *   - inclusionAll
+   *   - inclusionCriteria
+   *   - inclusionListCel
+   *
+   * This message contains a oneof named exclusion. Only a single field of the following list may be set at a time:
+   *   - exclusionNone
+   *   - exclusionList
+   *   - exclusionCriteria
+   *   - exclusionListCel
+   */
+  createRevokeTasksV2?: CreateRevokeTasksV2 | null | undefined;
+  /**
+   * The EvaluateExpressions message.
+   */
+  evaluateExpressions?: EvaluateExpressions | null | undefined;
+  /**
+   * The GeneratePassword message.
+   */
+  generatePassword?: GeneratePassword | null | undefined;
   grantEntitlements?: GrantEntitlements | null | undefined;
   removeFromDelegation?: RemoveFromDelegation | null | undefined;
   runAutomation?: RunAutomation | null | undefined;
@@ -174,6 +226,9 @@ export const AutomationStep$inboundSchema: z.ZodType<
     .optional(),
   createAccessReview: z.nullable(CreateAccessReview$inboundSchema).optional(),
   createRevokeTasks: z.nullable(CreateRevokeTasks$inboundSchema).optional(),
+  createRevokeTasksV2: z.nullable(CreateRevokeTasksV2$inboundSchema).optional(),
+  evaluateExpressions: z.nullable(EvaluateExpressions$inboundSchema).optional(),
+  generatePassword: z.nullable(GeneratePassword$inboundSchema).optional(),
   grantEntitlements: z.nullable(GrantEntitlements$inboundSchema).optional(),
   removeFromDelegation: z.nullable(RemoveFromDelegation$inboundSchema)
     .optional(),
@@ -200,6 +255,9 @@ export type AutomationStep$Outbound = {
   connectorCreateAccount?: ConnectorCreateAccount$Outbound | null | undefined;
   createAccessReview?: CreateAccessReview$Outbound | null | undefined;
   createRevokeTasks?: CreateRevokeTasks$Outbound | null | undefined;
+  createRevokeTasksV2?: CreateRevokeTasksV2$Outbound | null | undefined;
+  evaluateExpressions?: EvaluateExpressions$Outbound | null | undefined;
+  generatePassword?: GeneratePassword$Outbound | null | undefined;
   grantEntitlements?: GrantEntitlements$Outbound | null | undefined;
   removeFromDelegation?: RemoveFromDelegation$Outbound | null | undefined;
   runAutomation?: RunAutomation$Outbound | null | undefined;
@@ -232,6 +290,11 @@ export const AutomationStep$outboundSchema: z.ZodType<
     .optional(),
   createAccessReview: z.nullable(CreateAccessReview$outboundSchema).optional(),
   createRevokeTasks: z.nullable(CreateRevokeTasks$outboundSchema).optional(),
+  createRevokeTasksV2: z.nullable(CreateRevokeTasksV2$outboundSchema)
+    .optional(),
+  evaluateExpressions: z.nullable(EvaluateExpressions$outboundSchema)
+    .optional(),
+  generatePassword: z.nullable(GeneratePassword$outboundSchema).optional(),
   grantEntitlements: z.nullable(GrantEntitlements$outboundSchema).optional(),
   removeFromDelegation: z.nullable(RemoveFromDelegation$outboundSchema)
     .optional(),

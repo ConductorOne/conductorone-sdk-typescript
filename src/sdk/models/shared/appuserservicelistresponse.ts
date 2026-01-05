@@ -20,7 +20,7 @@ import {
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
  */
-export type Expanded = {
+export type AppUserServiceListResponseExpanded = {
   /**
    * The type of the serialized message.
    */
@@ -35,7 +35,7 @@ export type AppUserServiceListResponse = {
   /**
    * The expanded field.
    */
-  expanded?: Array<Expanded> | null | undefined;
+  expanded?: Array<AppUserServiceListResponseExpanded> | null | undefined;
   /**
    * The list field.
    */
@@ -47,8 +47,8 @@ export type AppUserServiceListResponse = {
 };
 
 /** @internal */
-export const Expanded$inboundSchema: z.ZodType<
-  Expanded,
+export const AppUserServiceListResponseExpanded$inboundSchema: z.ZodType<
+  AppUserServiceListResponseExpanded,
   z.ZodTypeDef,
   unknown
 > = collectExtraKeys$(
@@ -64,16 +64,16 @@ export const Expanded$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type Expanded$Outbound = {
+export type AppUserServiceListResponseExpanded$Outbound = {
   "@type"?: string | undefined;
   [additionalProperties: string]: unknown;
 };
 
 /** @internal */
-export const Expanded$outboundSchema: z.ZodType<
-  Expanded$Outbound,
+export const AppUserServiceListResponseExpanded$outboundSchema: z.ZodType<
+  AppUserServiceListResponseExpanded$Outbound,
   z.ZodTypeDef,
-  Expanded
+  AppUserServiceListResponseExpanded
 > = z.object({
   atType: z.string().optional(),
   additionalProperties: z.record(z.any()).optional(),
@@ -91,26 +91,34 @@ export const Expanded$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Expanded$ {
-  /** @deprecated use `Expanded$inboundSchema` instead. */
-  export const inboundSchema = Expanded$inboundSchema;
-  /** @deprecated use `Expanded$outboundSchema` instead. */
-  export const outboundSchema = Expanded$outboundSchema;
-  /** @deprecated use `Expanded$Outbound` instead. */
-  export type Outbound = Expanded$Outbound;
+export namespace AppUserServiceListResponseExpanded$ {
+  /** @deprecated use `AppUserServiceListResponseExpanded$inboundSchema` instead. */
+  export const inboundSchema = AppUserServiceListResponseExpanded$inboundSchema;
+  /** @deprecated use `AppUserServiceListResponseExpanded$outboundSchema` instead. */
+  export const outboundSchema =
+    AppUserServiceListResponseExpanded$outboundSchema;
+  /** @deprecated use `AppUserServiceListResponseExpanded$Outbound` instead. */
+  export type Outbound = AppUserServiceListResponseExpanded$Outbound;
 }
 
-export function expandedToJSON(expanded: Expanded): string {
-  return JSON.stringify(Expanded$outboundSchema.parse(expanded));
+export function appUserServiceListResponseExpandedToJSON(
+  appUserServiceListResponseExpanded: AppUserServiceListResponseExpanded,
+): string {
+  return JSON.stringify(
+    AppUserServiceListResponseExpanded$outboundSchema.parse(
+      appUserServiceListResponseExpanded,
+    ),
+  );
 }
 
-export function expandedFromJSON(
+export function appUserServiceListResponseExpandedFromJSON(
   jsonString: string,
-): SafeParseResult<Expanded, SDKValidationError> {
+): SafeParseResult<AppUserServiceListResponseExpanded, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Expanded$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Expanded' from JSON`,
+    (x) =>
+      AppUserServiceListResponseExpanded$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AppUserServiceListResponseExpanded' from JSON`,
   );
 }
 
@@ -120,15 +128,19 @@ export const AppUserServiceListResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  expanded: z.nullable(z.array(z.lazy(() => Expanded$inboundSchema)))
-    .optional(),
+  expanded: z.nullable(
+    z.array(z.lazy(() => AppUserServiceListResponseExpanded$inboundSchema)),
+  ).optional(),
   list: z.nullable(z.array(AppUserView$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
 
 /** @internal */
 export type AppUserServiceListResponse$Outbound = {
-  expanded?: Array<Expanded$Outbound> | null | undefined;
+  expanded?:
+    | Array<AppUserServiceListResponseExpanded$Outbound>
+    | null
+    | undefined;
   list?: Array<AppUserView$Outbound> | null | undefined;
   nextPageToken?: string | null | undefined;
 };
@@ -139,8 +151,9 @@ export const AppUserServiceListResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppUserServiceListResponse
 > = z.object({
-  expanded: z.nullable(z.array(z.lazy(() => Expanded$outboundSchema)))
-    .optional(),
+  expanded: z.nullable(
+    z.array(z.lazy(() => AppUserServiceListResponseExpanded$outboundSchema)),
+  ).optional(),
   list: z.nullable(z.array(AppUserView$outboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });

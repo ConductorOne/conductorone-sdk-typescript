@@ -92,7 +92,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 });
 
 async function run() {
-  const result = await conductoroneSDKTypescript.accessConflict.createMonitor();
+  const result = await conductoroneSDKTypescript.accessReview.create();
 
   console.log(result);
 }
@@ -126,7 +126,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 });
 
 async function run() {
-  const result = await conductoroneSDKTypescript.accessConflict.createMonitor();
+  const result = await conductoroneSDKTypescript.accessReview.create();
 
   console.log(result);
 }
@@ -148,6 +148,21 @@ run();
 * [deleteMonitor](docs/sdks/accessconflict/README.md#deletemonitor) - Delete Monitor
 * [getMonitor](docs/sdks/accessconflict/README.md#getmonitor) - Get Monitor
 * [updateMonitor](docs/sdks/accessconflict/README.md#updatemonitor) - Update Monitor
+
+### [accessReview](docs/sdks/accessreview/README.md)
+
+* [create](docs/sdks/accessreview/README.md#create) - Create
+* [delete](docs/sdks/accessreview/README.md#delete) - Delete
+* [get](docs/sdks/accessreview/README.md#get) - Get
+* [update](docs/sdks/accessreview/README.md#update) - Update
+* [list](docs/sdks/accessreview/README.md#list) - List
+
+### [accessReviewTemplate](docs/sdks/accessreviewtemplate/README.md)
+
+* [create](docs/sdks/accessreviewtemplate/README.md#create) - Create
+* [delete](docs/sdks/accessreviewtemplate/README.md#delete) - Delete
+* [get](docs/sdks/accessreviewtemplate/README.md#get) - Get
+* [update](docs/sdks/accessreviewtemplate/README.md#update) - Update
 
 ### [accountProvisionPolicyTest](docs/sdks/accountprovisionpolicytest/README.md)
 
@@ -352,6 +367,7 @@ run();
 * [forceSync](docs/sdks/connector/README.md#forcesync) - Force Sync
 * [pauseSync](docs/sdks/connector/README.md#pausesync) - Pause Sync
 * [resumeSync](docs/sdks/connector/README.md#resumesync) - Resume Sync
+* [getConnectorSyncDownloadURL](docs/sdks/connector/README.md#getconnectorsyncdownloadurl) - Get Connector Sync Download Url
 * [delete](docs/sdks/connector/README.md#delete) - Delete
 * [get](docs/sdks/connector/README.md#get) - Get
 * [update](docs/sdks/connector/README.md#update) - Update
@@ -390,14 +406,18 @@ run();
 * [listFunctions](docs/sdks/functions/README.md#listfunctions) - List Functions
 * [createFunction](docs/sdks/functions/README.md#createfunction) - Create Function
 * [listCommits](docs/sdks/functions/README.md#listcommits) - List Commits
-* [commit](docs/sdks/functions/README.md#commit) - Commit
-* [getCommit](docs/sdks/functions/README.md#getcommit) - Get Commit
 * [invoke](docs/sdks/functions/README.md#invoke) - Invoke
+* [getFunctionSecretEncryptionKey](docs/sdks/functions/README.md#getfunctionsecretencryptionkey) - Get Function Secret Encryption Key
 * [listTags](docs/sdks/functions/README.md#listtags) - List Tags
 * [createTag](docs/sdks/functions/README.md#createtag) - Create Tag
 * [deleteFunction](docs/sdks/functions/README.md#deletefunction) - Delete Function
 * [getFunction](docs/sdks/functions/README.md#getfunction) - Get Function
 * [updateFunction](docs/sdks/functions/README.md#updatefunction) - Update Function
+
+### [functionsInvocation](docs/sdks/functionsinvocation/README.md)
+
+* [list](docs/sdks/functionsinvocation/README.md#list) - List
+* [get](docs/sdks/functionsinvocation/README.md#get) - Get
 
 ### [functionsSearch](docs/sdks/functionssearch/README.md)
 
@@ -445,6 +465,9 @@ run();
 * [updateAppEntitlements](docs/sdks/requestcatalogmanagement/README.md#updateappentitlements) - Update App Entitlements
 * [removeAppEntitlements](docs/sdks/requestcatalogmanagement/README.md#removeappentitlements) - Remove App Entitlements
 * [addAppEntitlements](docs/sdks/requestcatalogmanagement/README.md#addappentitlements) - Add App Entitlements
+* [deleteRequestableEntry](docs/sdks/requestcatalogmanagement/README.md#deleterequestableentry) - Delete Requestable Entry
+* [getRequestableEntry](docs/sdks/requestcatalogmanagement/README.md#getrequestableentry) - Get Requestable Entry
+* [createRequestableEntry](docs/sdks/requestcatalogmanagement/README.md#createrequestableentry) - Create Requestable Entry
 * [removeAccessEntitlements](docs/sdks/requestcatalogmanagement/README.md#removeaccessentitlements) - Remove Access Entitlements
 * [addAccessEntitlements](docs/sdks/requestcatalogmanagement/README.md#addaccessentitlements) - Add Access Entitlements
 * [listEntitlementsForAccess](docs/sdks/requestcatalogmanagement/README.md#listentitlementsforaccess) - List Entitlements For Access
@@ -546,6 +569,13 @@ run();
 
 * [search](docs/sdks/usersearch/README.md#search) - Search
 
+### [vault](docs/sdks/vault/README.md)
+
+* [create](docs/sdks/vault/README.md#create) - Create
+* [delete](docs/sdks/vault/README.md#delete) - Delete
+* [get](docs/sdks/vault/README.md#get) - Get
+* [update](docs/sdks/vault/README.md#update) - Update
+
 ### [webhooks](docs/sdks/webhooks/README.md)
 
 * [list](docs/sdks/webhooks/README.md#list) - List
@@ -581,6 +611,15 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`accessConflictDeleteMonitor`](docs/sdks/accessconflict/README.md#deletemonitor) - Delete Monitor
 - [`accessConflictGetMonitor`](docs/sdks/accessconflict/README.md#getmonitor) - Get Monitor
 - [`accessConflictUpdateMonitor`](docs/sdks/accessconflict/README.md#updatemonitor) - Update Monitor
+- [`accessReviewCreate`](docs/sdks/accessreview/README.md#create) - Create
+- [`accessReviewDelete`](docs/sdks/accessreview/README.md#delete) - Delete
+- [`accessReviewGet`](docs/sdks/accessreview/README.md#get) - Get
+- [`accessReviewList`](docs/sdks/accessreview/README.md#list) - List
+- [`accessReviewTemplateCreate`](docs/sdks/accessreviewtemplate/README.md#create) - Create
+- [`accessReviewTemplateDelete`](docs/sdks/accessreviewtemplate/README.md#delete) - Delete
+- [`accessReviewTemplateGet`](docs/sdks/accessreviewtemplate/README.md#get) - Get
+- [`accessReviewTemplateUpdate`](docs/sdks/accessreviewtemplate/README.md#update) - Update
+- [`accessReviewUpdate`](docs/sdks/accessreview/README.md#update) - Update
 - [`accountProvisionPolicyTestTest`](docs/sdks/accountprovisionpolicytest/README.md#test) - Test
 - [`appAccessRequestsDefaultsCancelAppAccessRequestsDefaults`](docs/sdks/appaccessrequestsdefaults/README.md#cancelappaccessrequestsdefaults) - Cancel App Access Requests Defaults
 - [`appAccessRequestsDefaultsCreateAppAccessRequestsDefaults`](docs/sdks/appaccessrequestsdefaults/README.md#createappaccessrequestsdefaults) - Create App Access Requests Defaults
@@ -696,6 +735,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`connectorDelete`](docs/sdks/connector/README.md#delete) - Delete
 - [`connectorForceSync`](docs/sdks/connector/README.md#forcesync) - Force Sync
 - [`connectorGet`](docs/sdks/connector/README.md#get) - Get
+- [`connectorGetConnectorSyncDownloadURL`](docs/sdks/connector/README.md#getconnectorsyncdownloadurl) - Get Connector Sync Download Url
 - [`connectorGetCredentials`](docs/sdks/connector/README.md#getcredentials) - Get Credentials
 - [`connectorList`](docs/sdks/connector/README.md#list) - List
 - [`connectorPauseSync`](docs/sdks/connector/README.md#pausesync) - Pause Sync
@@ -717,12 +757,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`exportListEvents`](docs/sdks/export/README.md#listevents) - List Events
 - [`exportsSearchSearch`](docs/sdks/exportssearch/README.md#search) - Search
 - [`exportUpdate`](docs/sdks/export/README.md#update) - Update
-- [`functionsCommit`](docs/sdks/functions/README.md#commit) - Commit
 - [`functionsCreateFunction`](docs/sdks/functions/README.md#createfunction) - Create Function
 - [`functionsCreateTag`](docs/sdks/functions/README.md#createtag) - Create Tag
 - [`functionsDeleteFunction`](docs/sdks/functions/README.md#deletefunction) - Delete Function
-- [`functionsGetCommit`](docs/sdks/functions/README.md#getcommit) - Get Commit
 - [`functionsGetFunction`](docs/sdks/functions/README.md#getfunction) - Get Function
+- [`functionsGetFunctionSecretEncryptionKey`](docs/sdks/functions/README.md#getfunctionsecretencryptionkey) - Get Function Secret Encryption Key
+- [`functionsInvocationGet`](docs/sdks/functionsinvocation/README.md#get) - Get
+- [`functionsInvocationList`](docs/sdks/functionsinvocation/README.md#list) - List
 - [`functionsInvoke`](docs/sdks/functions/README.md#invoke) - Invoke
 - [`functionsListCommits`](docs/sdks/functions/README.md#listcommits) - List Commits
 - [`functionsListFunctions`](docs/sdks/functions/README.md#listfunctions) - List Functions
@@ -748,11 +789,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`requestCatalogManagementAddAppEntitlements`](docs/sdks/requestcatalogmanagement/README.md#addappentitlements) - Add App Entitlements
 - [`requestCatalogManagementCreate`](docs/sdks/requestcatalogmanagement/README.md#create) - Create
 - [`requestCatalogManagementCreateBundleAutomation`](docs/sdks/requestcatalogmanagement/README.md#createbundleautomation) - Create Bundle Automation
+- [`requestCatalogManagementCreateRequestableEntry`](docs/sdks/requestcatalogmanagement/README.md#createrequestableentry) - Create Requestable Entry
 - [`requestCatalogManagementDelete`](docs/sdks/requestcatalogmanagement/README.md#delete) - Delete
 - [`requestCatalogManagementDeleteBundleAutomation`](docs/sdks/requestcatalogmanagement/README.md#deletebundleautomation) - Delete Bundle Automation
+- [`requestCatalogManagementDeleteRequestableEntry`](docs/sdks/requestcatalogmanagement/README.md#deleterequestableentry) - Delete Requestable Entry
 - [`requestCatalogManagementForceRunBundleAutomation`](docs/sdks/requestcatalogmanagement/README.md#forcerunbundleautomation) - Force Run Bundle Automation
 - [`requestCatalogManagementGet`](docs/sdks/requestcatalogmanagement/README.md#get) - Get
 - [`requestCatalogManagementGetBundleAutomation`](docs/sdks/requestcatalogmanagement/README.md#getbundleautomation) - Get Bundle Automation
+- [`requestCatalogManagementGetRequestableEntry`](docs/sdks/requestcatalogmanagement/README.md#getrequestableentry) - Get Requestable Entry
 - [`requestCatalogManagementList`](docs/sdks/requestcatalogmanagement/README.md#list) - List
 - [`requestCatalogManagementListAllEntitlementIdsPerApp`](docs/sdks/requestcatalogmanagement/README.md#listallentitlementidsperapp) - List All Entitlement Ids Per App
 - [`requestCatalogManagementListEntitlementsForAccess`](docs/sdks/requestcatalogmanagement/README.md#listentitlementsforaccess) - List Entitlements For Access
@@ -812,6 +856,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`userList`](docs/sdks/user/README.md#list) - List
 - [`userSearchSearch`](docs/sdks/usersearch/README.md#search) - Search
 - [`userSetExpiringUserDelegationBindingByAdmin`](docs/sdks/user/README.md#setexpiringuserdelegationbindingbyadmin) - Set Expiring User Delegation Binding By Admin
+- [`vaultCreate`](docs/sdks/vault/README.md#create) - Create
+- [`vaultDelete`](docs/sdks/vault/README.md#delete) - Delete
+- [`vaultGet`](docs/sdks/vault/README.md#get) - Get
+- [`vaultUpdate`](docs/sdks/vault/README.md#update) - Update
 - [`webhooksCreate`](docs/sdks/webhooks/README.md#create) - Create
 - [`webhooksDelete`](docs/sdks/webhooks/README.md#delete) - Delete
 - [`webhooksGet`](docs/sdks/webhooks/README.md#get) - Get
@@ -876,7 +924,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 });
 
 async function run() {
-  const result = await conductoroneSDKTypescript.accessConflict.createMonitor({
+  const result = await conductoroneSDKTypescript.accessReview.create({
     retries: {
       strategy: "backoff",
       backoff: {
@@ -918,7 +966,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 });
 
 async function run() {
-  const result = await conductoroneSDKTypescript.accessConflict.createMonitor();
+  const result = await conductoroneSDKTypescript.accessReview.create();
 
   console.log(result);
 }
@@ -955,8 +1003,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 
 async function run() {
   try {
-    const result = await conductoroneSDKTypescript.accessConflict
-      .createMonitor();
+    const result = await conductoroneSDKTypescript.accessReview.create();
 
     console.log(result);
   } catch (error) {
@@ -1020,7 +1067,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 });
 
 async function run() {
-  const result = await conductoroneSDKTypescript.accessConflict.createMonitor();
+  const result = await conductoroneSDKTypescript.accessReview.create();
 
   console.log(result);
 }
@@ -1044,7 +1091,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 });
 
 async function run() {
-  const result = await conductoroneSDKTypescript.accessConflict.createMonitor();
+  const result = await conductoroneSDKTypescript.accessReview.create();
 
   console.log(result);
 }

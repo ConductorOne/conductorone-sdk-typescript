@@ -31,21 +31,25 @@ export const AppUserDomains = {
 } as const;
 export type AppUserDomains = OpenEnum<typeof AppUserDomains>;
 
-export const AppUserStatuses = {
+export const AppUserServiceSearchRequestAppUserStatuses = {
   StatusUnspecified: "STATUS_UNSPECIFIED",
   StatusEnabled: "STATUS_ENABLED",
   StatusDisabled: "STATUS_DISABLED",
   StatusDeleted: "STATUS_DELETED",
 } as const;
-export type AppUserStatuses = OpenEnum<typeof AppUserStatuses>;
+export type AppUserServiceSearchRequestAppUserStatuses = OpenEnum<
+  typeof AppUserServiceSearchRequestAppUserStatuses
+>;
 
-export const AppUserTypes = {
+export const AppUserServiceSearchRequestAppUserTypes = {
   AppUserTypeUnspecified: "APP_USER_TYPE_UNSPECIFIED",
   AppUserTypeUser: "APP_USER_TYPE_USER",
   AppUserTypeServiceAccount: "APP_USER_TYPE_SERVICE_ACCOUNT",
   AppUserTypeSystemAccount: "APP_USER_TYPE_SYSTEM_ACCOUNT",
 } as const;
-export type AppUserTypes = OpenEnum<typeof AppUserTypes>;
+export type AppUserServiceSearchRequestAppUserTypes = OpenEnum<
+  typeof AppUserServiceSearchRequestAppUserTypes
+>;
 
 /**
  * Search App users based on filters specified in the request body
@@ -70,11 +74,17 @@ export type AppUserServiceSearchRequest = {
   /**
    * A list of app user statuses to restrict the search to.
    */
-  appUserStatuses?: Array<AppUserStatuses> | null | undefined;
+  appUserStatuses?:
+    | Array<AppUserServiceSearchRequestAppUserStatuses>
+    | null
+    | undefined;
   /**
    * A list of app user types to restrict the search to.
    */
-  appUserTypes?: Array<AppUserTypes> | null | undefined;
+  appUserTypes?:
+    | Array<AppUserServiceSearchRequestAppUserTypes>
+    | null
+    | undefined;
   /**
    * A list of app user IDs to remove from the results.
    */
@@ -135,55 +145,56 @@ export namespace AppUserDomains$ {
 }
 
 /** @internal */
-export const AppUserStatuses$inboundSchema: z.ZodType<
-  AppUserStatuses,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(AppUserStatuses),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
+export const AppUserServiceSearchRequestAppUserStatuses$inboundSchema:
+  z.ZodType<AppUserServiceSearchRequestAppUserStatuses, z.ZodTypeDef, unknown> =
+    z
+      .union([
+        z.nativeEnum(AppUserServiceSearchRequestAppUserStatuses),
+        z.string().transform(catchUnrecognizedEnum),
+      ]);
 
 /** @internal */
-export const AppUserStatuses$outboundSchema: z.ZodType<
-  AppUserStatuses,
-  z.ZodTypeDef,
-  AppUserStatuses
-> = z.union([
-  z.nativeEnum(AppUserStatuses),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
+export const AppUserServiceSearchRequestAppUserStatuses$outboundSchema:
+  z.ZodType<
+    AppUserServiceSearchRequestAppUserStatuses,
+    z.ZodTypeDef,
+    AppUserServiceSearchRequestAppUserStatuses
+  > = z.union([
+    z.nativeEnum(AppUserServiceSearchRequestAppUserStatuses),
+    z.string().and(z.custom<Unrecognized<string>>()),
+  ]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace AppUserStatuses$ {
-  /** @deprecated use `AppUserStatuses$inboundSchema` instead. */
-  export const inboundSchema = AppUserStatuses$inboundSchema;
-  /** @deprecated use `AppUserStatuses$outboundSchema` instead. */
-  export const outboundSchema = AppUserStatuses$outboundSchema;
+export namespace AppUserServiceSearchRequestAppUserStatuses$ {
+  /** @deprecated use `AppUserServiceSearchRequestAppUserStatuses$inboundSchema` instead. */
+  export const inboundSchema =
+    AppUserServiceSearchRequestAppUserStatuses$inboundSchema;
+  /** @deprecated use `AppUserServiceSearchRequestAppUserStatuses$outboundSchema` instead. */
+  export const outboundSchema =
+    AppUserServiceSearchRequestAppUserStatuses$outboundSchema;
 }
 
 /** @internal */
-export const AppUserTypes$inboundSchema: z.ZodType<
-  AppUserTypes,
+export const AppUserServiceSearchRequestAppUserTypes$inboundSchema: z.ZodType<
+  AppUserServiceSearchRequestAppUserTypes,
   z.ZodTypeDef,
   unknown
 > = z
   .union([
-    z.nativeEnum(AppUserTypes),
+    z.nativeEnum(AppUserServiceSearchRequestAppUserTypes),
     z.string().transform(catchUnrecognizedEnum),
   ]);
 
 /** @internal */
-export const AppUserTypes$outboundSchema: z.ZodType<
-  AppUserTypes,
+export const AppUserServiceSearchRequestAppUserTypes$outboundSchema: z.ZodType<
+  AppUserServiceSearchRequestAppUserTypes,
   z.ZodTypeDef,
-  AppUserTypes
+  AppUserServiceSearchRequestAppUserTypes
 > = z.union([
-  z.nativeEnum(AppUserTypes),
+  z.nativeEnum(AppUserServiceSearchRequestAppUserTypes),
   z.string().and(z.custom<Unrecognized<string>>()),
 ]);
 
@@ -191,11 +202,13 @@ export const AppUserTypes$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace AppUserTypes$ {
-  /** @deprecated use `AppUserTypes$inboundSchema` instead. */
-  export const inboundSchema = AppUserTypes$inboundSchema;
-  /** @deprecated use `AppUserTypes$outboundSchema` instead. */
-  export const outboundSchema = AppUserTypes$outboundSchema;
+export namespace AppUserServiceSearchRequestAppUserTypes$ {
+  /** @deprecated use `AppUserServiceSearchRequestAppUserTypes$inboundSchema` instead. */
+  export const inboundSchema =
+    AppUserServiceSearchRequestAppUserTypes$inboundSchema;
+  /** @deprecated use `AppUserServiceSearchRequestAppUserTypes$outboundSchema` instead. */
+  export const outboundSchema =
+    AppUserServiceSearchRequestAppUserTypes$outboundSchema;
 }
 
 /** @internal */
@@ -208,9 +221,12 @@ export const AppUserServiceSearchRequest$inboundSchema: z.ZodType<
   appUserDomains: z.nullable(z.array(AppUserDomains$inboundSchema)).optional(),
   appUserIds: z.nullable(z.array(z.string())).optional(),
   appUserStatusDetails: z.nullable(z.array(z.string())).optional(),
-  appUserStatuses: z.nullable(z.array(AppUserStatuses$inboundSchema))
-    .optional(),
-  appUserTypes: z.nullable(z.array(AppUserTypes$inboundSchema)).optional(),
+  appUserStatuses: z.nullable(
+    z.array(AppUserServiceSearchRequestAppUserStatuses$inboundSchema),
+  ).optional(),
+  appUserTypes: z.nullable(
+    z.array(AppUserServiceSearchRequestAppUserTypes$inboundSchema),
+  ).optional(),
   excludeAppUserIds: z.nullable(z.array(z.string())).optional(),
   expandMask: z.nullable(AppUserExpandMask$inboundSchema).optional(),
   pageSize: z.nullable(z.number().int()).optional(),
@@ -247,9 +263,12 @@ export const AppUserServiceSearchRequest$outboundSchema: z.ZodType<
   appUserDomains: z.nullable(z.array(AppUserDomains$outboundSchema)).optional(),
   appUserIds: z.nullable(z.array(z.string())).optional(),
   appUserStatusDetails: z.nullable(z.array(z.string())).optional(),
-  appUserStatuses: z.nullable(z.array(AppUserStatuses$outboundSchema))
-    .optional(),
-  appUserTypes: z.nullable(z.array(AppUserTypes$outboundSchema)).optional(),
+  appUserStatuses: z.nullable(
+    z.array(AppUserServiceSearchRequestAppUserStatuses$outboundSchema),
+  ).optional(),
+  appUserTypes: z.nullable(
+    z.array(AppUserServiceSearchRequestAppUserTypes$outboundSchema),
+  ).optional(),
   excludeAppUserIds: z.nullable(z.array(z.string())).optional(),
   expandMask: z.nullable(AppUserExpandMask$outboundSchema).optional(),
   pageSize: z.nullable(z.number().int()).optional(),

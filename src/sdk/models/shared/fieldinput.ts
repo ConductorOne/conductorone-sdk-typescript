@@ -3,9 +3,16 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AdminProviderConfig,
+  AdminProviderConfig$inboundSchema,
+  AdminProviderConfig$Outbound,
+  AdminProviderConfig$outboundSchema,
+} from "./adminproviderconfig.js";
 import {
   BoolField,
   BoolField$inboundSchema,
@@ -25,6 +32,18 @@ import {
   Int64Field$outboundSchema,
 } from "./int64field.js";
 import {
+  Oauth2Field,
+  Oauth2Field$inboundSchema,
+  Oauth2Field$Outbound,
+  Oauth2Field$outboundSchema,
+} from "./oauth2field.js";
+import {
+  SharedProviderConfig,
+  SharedProviderConfig$inboundSchema,
+  SharedProviderConfig$Outbound,
+  SharedProviderConfig$outboundSchema,
+} from "./sharedproviderconfig.js";
+import {
   StringField,
   StringField$inboundSchema,
   StringField$Outbound,
@@ -36,6 +55,12 @@ import {
   StringSliceField$Outbound,
   StringSliceField$outboundSchema,
 } from "./stringslicefield.js";
+import {
+  UserProviderConfig,
+  UserProviderConfig$inboundSchema,
+  UserProviderConfig$Outbound,
+  UserProviderConfig$outboundSchema,
+} from "./userproviderconfig.js";
 
 /**
  * A field is a single input meant to collect a piece of data from a user
@@ -48,8 +73,18 @@ import {
  *   - stringSliceField
  *   - int64Field
  *   - fileField
+ *   - oauth2Field
+ *
+ * This message contains a oneof named provider_config. Only a single field of the following list may be set at a time:
+ *   - userConfig
+ *   - adminConfig
+ *   - sharedConfig
  */
 export type FieldInput = {
+  /**
+   * The AdminProviderConfig message.
+   */
+  adminProviderConfig?: AdminProviderConfig | null | undefined;
   boolField?: BoolField | null | undefined;
   /**
    * The description field.
@@ -65,8 +100,25 @@ export type FieldInput = {
    * The name field.
    */
   name?: string | null | undefined;
+  /**
+   * The Oauth2Field message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named view. Only a single field of the following list may be set at a time:
+   *   - oauth2FieldView
+   */
+  oauth2Field?: Oauth2Field | null | undefined;
+  /**
+   * The SharedProviderConfig message.
+   */
+  sharedProviderConfig?: SharedProviderConfig | null | undefined;
   stringField?: StringField | null | undefined;
   stringSliceField?: StringSliceField | null | undefined;
+  /**
+   * The UserProviderConfig message.
+   */
+  userProviderConfig?: UserProviderConfig | null | undefined;
 };
 
 /** @internal */
@@ -75,26 +127,40 @@ export const FieldInput$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  adminConfig: z.nullable(AdminProviderConfig$inboundSchema).optional(),
   boolField: z.nullable(BoolField$inboundSchema).optional(),
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
   fileField: z.nullable(FileField$inboundSchema).optional(),
   int64Field: z.nullable(Int64Field$inboundSchema).optional(),
   name: z.nullable(z.string()).optional(),
+  oauth2Field: z.nullable(Oauth2Field$inboundSchema).optional(),
+  sharedConfig: z.nullable(SharedProviderConfig$inboundSchema).optional(),
   stringField: z.nullable(StringField$inboundSchema).optional(),
   stringSliceField: z.nullable(StringSliceField$inboundSchema).optional(),
+  userConfig: z.nullable(UserProviderConfig$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "adminConfig": "adminProviderConfig",
+    "sharedConfig": "sharedProviderConfig",
+    "userConfig": "userProviderConfig",
+  });
 });
 
 /** @internal */
 export type FieldInput$Outbound = {
+  adminConfig?: AdminProviderConfig$Outbound | null | undefined;
   boolField?: BoolField$Outbound | null | undefined;
   description?: string | null | undefined;
   displayName?: string | null | undefined;
   fileField?: FileField$Outbound | null | undefined;
   int64Field?: Int64Field$Outbound | null | undefined;
   name?: string | null | undefined;
+  oauth2Field?: Oauth2Field$Outbound | null | undefined;
+  sharedConfig?: SharedProviderConfig$Outbound | null | undefined;
   stringField?: StringField$Outbound | null | undefined;
   stringSliceField?: StringSliceField$Outbound | null | undefined;
+  userConfig?: UserProviderConfig$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -103,14 +169,26 @@ export const FieldInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FieldInput
 > = z.object({
+  adminProviderConfig: z.nullable(AdminProviderConfig$outboundSchema)
+    .optional(),
   boolField: z.nullable(BoolField$outboundSchema).optional(),
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
   fileField: z.nullable(FileField$outboundSchema).optional(),
   int64Field: z.nullable(Int64Field$outboundSchema).optional(),
   name: z.nullable(z.string()).optional(),
+  oauth2Field: z.nullable(Oauth2Field$outboundSchema).optional(),
+  sharedProviderConfig: z.nullable(SharedProviderConfig$outboundSchema)
+    .optional(),
   stringField: z.nullable(StringField$outboundSchema).optional(),
   stringSliceField: z.nullable(StringSliceField$outboundSchema).optional(),
+  userProviderConfig: z.nullable(UserProviderConfig$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    adminProviderConfig: "adminConfig",
+    sharedProviderConfig: "sharedConfig",
+    userProviderConfig: "userConfig",
+  });
 });
 
 /**

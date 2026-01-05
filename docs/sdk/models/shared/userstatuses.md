@@ -5,7 +5,7 @@
 ```typescript
 import { UserStatuses } from "conductorone-sdk-typescript/sdk/models/shared";
 
-let value: UserStatuses = "DISABLED";
+let value: UserStatuses = "USER_DISABLED";
 ```
 
 ## Values
@@ -13,5 +13,5 @@ let value: UserStatuses = "DISABLED";
 This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
-"UNKNOWN" | "ENABLED" | "DISABLED" | "DELETED" | Unrecognized<string>
+"USER_UNKNOWN" | "USER_ENABLED" | "USER_DISABLED" | "USER_DELETED" | Unrecognized<string>
 ```

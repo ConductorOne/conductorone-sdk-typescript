@@ -1,0 +1,18 @@
+# AccessReviewTemplateServiceUpdateRequest
+
+The AccessReviewTemplateServiceUpdateRequest message.
+
+## Example Usage
+
+```typescript
+import { AccessReviewTemplateServiceUpdateRequest } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: AccessReviewTemplateServiceUpdateRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                           | Type                                                                                                                                                                            | Required                                                                                                                                                                        | Description                                                                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `accessReviewTemplate`                                                                                                                                                          | [shared.AccessReviewTemplateInput](../../../sdk/models/shared/accessreviewtemplateinput.md)                                                                                     | :heavy_minus_sign:                                                                                                                                                              | The AccessReviewTemplate message.<br/><br/>This message contains a oneof named slack_channel_details. Only a single field of the following list may be set at a time:<br/>  - slackChannel<br/> |
+| `updateMask`                                                                                                                                                                    | *string*                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                              | N/A                                                                                                                                                                             |

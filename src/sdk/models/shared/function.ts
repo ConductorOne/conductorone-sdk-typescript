@@ -39,6 +39,10 @@ export type FunctionT = {
    */
   displayName?: string | null | undefined;
   /**
+   * The encryptedValues field.
+   */
+  encryptedValues?: { [k: string]: string } | undefined;
+  /**
    * The functionType field.
    */
   functionType?: FunctionType | null | undefined;
@@ -55,9 +59,24 @@ export type FunctionT = {
    */
   isDraft?: boolean | null | undefined;
   /**
+   * The outboundNetworkAllowlist field.
+   */
+  outboundNetworkAllowlist?: Array<string> | null | undefined;
+  /**
    * The publishedCommitId field.
    */
   publishedCommitId?: string | null | undefined;
+  /**
+   * Scoped role IDs define the permissions granted to this function when calling
+   *
+   * @remarks
+   *  ConductorOne APIs. These are role IDs (not service roles) that get resolved
+   *  to their service roles at authentication time.
+   *
+   *  Currently only the "Read-Only Administrator" role (system:viewer) is supported.
+   *  The role ID can be obtained from the roles API.
+   */
+  scopedRoleIds?: Array<string> | null | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -107,11 +126,14 @@ export const FunctionT$inboundSchema: z.ZodType<
   ).optional(),
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
+  encryptedValues: z.record(z.string()).optional(),
   functionType: z.nullable(FunctionType$inboundSchema).optional(),
   head: z.nullable(z.string()).optional(),
   id: z.nullable(z.string()).optional(),
   isDraft: z.nullable(z.boolean()).optional(),
+  outboundNetworkAllowlist: z.nullable(z.array(z.string())).optional(),
   publishedCommitId: z.nullable(z.string()).optional(),
+  scopedRoleIds: z.nullable(z.array(z.string())).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -123,11 +145,14 @@ export type FunctionT$Outbound = {
   deletedAt?: string | null | undefined;
   description?: string | null | undefined;
   displayName?: string | null | undefined;
+  encryptedValues?: { [k: string]: string } | undefined;
   functionType?: string | null | undefined;
   head?: string | null | undefined;
   id?: string | null | undefined;
   isDraft?: boolean | null | undefined;
+  outboundNetworkAllowlist?: Array<string> | null | undefined;
   publishedCommitId?: string | null | undefined;
+  scopedRoleIds?: Array<string> | null | undefined;
   updatedAt?: string | null | undefined;
 };
 
@@ -141,11 +166,14 @@ export const FunctionT$outboundSchema: z.ZodType<
   deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
+  encryptedValues: z.record(z.string()).optional(),
   functionType: z.nullable(FunctionType$outboundSchema).optional(),
   head: z.nullable(z.string()).optional(),
   id: z.nullable(z.string()).optional(),
   isDraft: z.nullable(z.boolean()).optional(),
+  outboundNetworkAllowlist: z.nullable(z.array(z.string())).optional(),
   publishedCommitId: z.nullable(z.string()).optional(),
+  scopedRoleIds: z.nullable(z.array(z.string())).optional(),
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 

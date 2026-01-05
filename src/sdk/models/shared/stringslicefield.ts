@@ -13,6 +13,12 @@ import {
   ChipsField$outboundSchema,
 } from "./chipsfield.js";
 import {
+  PickerField,
+  PickerField$inboundSchema,
+  PickerField$Outbound,
+  PickerField$outboundSchema,
+} from "./pickerfield.js";
+import {
   RepeatedRules,
   RepeatedRules$inboundSchema,
   RepeatedRules$Outbound,
@@ -26,6 +32,7 @@ import {
  *
  * This message contains a oneof named view. Only a single field of the following list may be set at a time:
  *   - chipsField
+ *   - pickerField
  *
  * This message contains a oneof named _rules. Only a single field of the following list may be set at a time:
  *   - rules
@@ -36,6 +43,16 @@ export type StringSliceField = {
    * The defaultValues field.
    */
   defaultValues?: Array<string> | null | undefined;
+  /**
+   * The PickerField message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named type. Only a single field of the following list may be set at a time:
+   *   - appUserPicker
+   *   - resourcePicker
+   */
+  pickerField?: PickerField | null | undefined;
   /**
    * The placeholder field.
    */
@@ -51,6 +68,7 @@ export const StringSliceField$inboundSchema: z.ZodType<
 > = z.object({
   chipsField: z.nullable(ChipsField$inboundSchema).optional(),
   defaultValues: z.nullable(z.array(z.string())).optional(),
+  pickerField: z.nullable(PickerField$inboundSchema).optional(),
   placeholder: z.nullable(z.string()).optional(),
   rules: z.nullable(RepeatedRules$inboundSchema).optional(),
 });
@@ -59,6 +77,7 @@ export const StringSliceField$inboundSchema: z.ZodType<
 export type StringSliceField$Outbound = {
   chipsField?: ChipsField$Outbound | null | undefined;
   defaultValues?: Array<string> | null | undefined;
+  pickerField?: PickerField$Outbound | null | undefined;
   placeholder?: string | null | undefined;
   rules?: RepeatedRules$Outbound | null | undefined;
 };
@@ -71,6 +90,7 @@ export const StringSliceField$outboundSchema: z.ZodType<
 > = z.object({
   chipsField: z.nullable(ChipsField$outboundSchema).optional(),
   defaultValues: z.nullable(z.array(z.string())).optional(),
+  pickerField: z.nullable(PickerField$outboundSchema).optional(),
   placeholder: z.nullable(z.string()).optional(),
   rules: z.nullable(RepeatedRules$outboundSchema).optional(),
 });

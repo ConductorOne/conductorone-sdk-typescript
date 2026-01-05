@@ -30,13 +30,15 @@ import {
   TaskTypeInput$outboundSchema,
 } from "./tasktypeinput.js";
 
-export const AccountTypes = {
+export const TaskSearchRequestAccountTypes = {
   AppUserTypeUnspecified: "APP_USER_TYPE_UNSPECIFIED",
   AppUserTypeUser: "APP_USER_TYPE_USER",
   AppUserTypeServiceAccount: "APP_USER_TYPE_SERVICE_ACCOUNT",
   AppUserTypeSystemAccount: "APP_USER_TYPE_SYSTEM_ACCOUNT",
 } as const;
-export type AccountTypes = OpenEnum<typeof AccountTypes>;
+export type TaskSearchRequestAccountTypes = OpenEnum<
+  typeof TaskSearchRequestAccountTypes
+>;
 
 export const CertifyOutcomes = {
   CertifyOutcomeUnspecified: "CERTIFY_OUTCOME_UNSPECIFIED",
@@ -152,7 +154,7 @@ export type TaskSearchRequest = {
   /**
    * The accountTypes field.
    */
-  accountTypes?: Array<AccountTypes> | null | undefined;
+  accountTypes?: Array<TaskSearchRequestAccountTypes> | null | undefined;
   /**
    * Search tasks that have this actor ID.
    */
@@ -287,23 +289,23 @@ export type TaskSearchRequest = {
 };
 
 /** @internal */
-export const AccountTypes$inboundSchema: z.ZodType<
-  AccountTypes,
+export const TaskSearchRequestAccountTypes$inboundSchema: z.ZodType<
+  TaskSearchRequestAccountTypes,
   z.ZodTypeDef,
   unknown
 > = z
   .union([
-    z.nativeEnum(AccountTypes),
+    z.nativeEnum(TaskSearchRequestAccountTypes),
     z.string().transform(catchUnrecognizedEnum),
   ]);
 
 /** @internal */
-export const AccountTypes$outboundSchema: z.ZodType<
-  AccountTypes,
+export const TaskSearchRequestAccountTypes$outboundSchema: z.ZodType<
+  TaskSearchRequestAccountTypes,
   z.ZodTypeDef,
-  AccountTypes
+  TaskSearchRequestAccountTypes
 > = z.union([
-  z.nativeEnum(AccountTypes),
+  z.nativeEnum(TaskSearchRequestAccountTypes),
   z.string().and(z.custom<Unrecognized<string>>()),
 ]);
 
@@ -311,11 +313,11 @@ export const AccountTypes$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace AccountTypes$ {
-  /** @deprecated use `AccountTypes$inboundSchema` instead. */
-  export const inboundSchema = AccountTypes$inboundSchema;
-  /** @deprecated use `AccountTypes$outboundSchema` instead. */
-  export const outboundSchema = AccountTypes$outboundSchema;
+export namespace TaskSearchRequestAccountTypes$ {
+  /** @deprecated use `TaskSearchRequestAccountTypes$inboundSchema` instead. */
+  export const inboundSchema = TaskSearchRequestAccountTypes$inboundSchema;
+  /** @deprecated use `TaskSearchRequestAccountTypes$outboundSchema` instead. */
+  export const outboundSchema = TaskSearchRequestAccountTypes$outboundSchema;
 }
 
 /** @internal */
@@ -575,7 +577,8 @@ export const TaskSearchRequest$inboundSchema: z.ZodType<
 > = z.object({
   accessReviewIds: z.nullable(z.array(z.string())).optional(),
   accountOwnerIds: z.nullable(z.array(z.string())).optional(),
-  accountTypes: z.nullable(z.array(AccountTypes$inboundSchema)).optional(),
+  accountTypes: z.nullable(z.array(TaskSearchRequestAccountTypes$inboundSchema))
+    .optional(),
   actorId: z.nullable(z.string()).optional(),
   appEntitlementIds: z.nullable(z.array(z.string())).optional(),
   appResourceIds: z.nullable(z.array(z.string())).optional(),
@@ -681,7 +684,9 @@ export const TaskSearchRequest$outboundSchema: z.ZodType<
 > = z.object({
   accessReviewIds: z.nullable(z.array(z.string())).optional(),
   accountOwnerIds: z.nullable(z.array(z.string())).optional(),
-  accountTypes: z.nullable(z.array(AccountTypes$outboundSchema)).optional(),
+  accountTypes: z.nullable(
+    z.array(TaskSearchRequestAccountTypes$outboundSchema),
+  ).optional(),
   actorId: z.nullable(z.string()).optional(),
   appEntitlementIds: z.nullable(z.array(z.string())).optional(),
   appResourceIds: z.nullable(z.array(z.string())).optional(),

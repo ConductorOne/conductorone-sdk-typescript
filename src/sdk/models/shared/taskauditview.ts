@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import {
   catchUnrecognizedEnum,
@@ -29,6 +30,24 @@ import {
   TaskAuditAccountLifecycleActionFailed$Outbound,
   TaskAuditAccountLifecycleActionFailed$outboundSchema,
 } from "./taskauditaccountlifecycleactionfailed.js";
+import {
+  TaskAuditActionInstanceCreated,
+  TaskAuditActionInstanceCreated$inboundSchema,
+  TaskAuditActionInstanceCreated$Outbound,
+  TaskAuditActionInstanceCreated$outboundSchema,
+} from "./taskauditactioninstancecreated.js";
+import {
+  TaskAuditActionInstanceFailed,
+  TaskAuditActionInstanceFailed$inboundSchema,
+  TaskAuditActionInstanceFailed$Outbound,
+  TaskAuditActionInstanceFailed$outboundSchema,
+} from "./taskauditactioninstancefailed.js";
+import {
+  TaskAuditActionInstanceSucceeded,
+  TaskAuditActionInstanceSucceeded$inboundSchema,
+  TaskAuditActionInstanceSucceeded$Outbound,
+  TaskAuditActionInstanceSucceeded$outboundSchema,
+} from "./taskauditactioninstancesucceeded.js";
 import {
   TaskAuditActionSubmitted,
   TaskAuditActionSubmitted$inboundSchema,
@@ -450,6 +469,9 @@ export type Source = OpenEnum<typeof Source>;
  *   - accountLifecycleActionCreated
  *   - accountLifecycleActionFailed
  *   - provisionCancelled
+ *   - actionInstanceCreated
+ *   - actionInstanceSucceeded
+ *   - actionInstanceFailed
  */
 export type TaskAuditView = {
   accessRequestOutcome?: TaskAuditAccessRequestOutcome | null | undefined;
@@ -459,6 +481,27 @@ export type TaskAuditView = {
     | undefined;
   accountLifecycleActionFailed?:
     | TaskAuditAccountLifecycleActionFailed
+    | null
+    | undefined;
+  /**
+   * The TaskAuditActionInstanceCreated message.
+   */
+  taskAuditActionInstanceCreated?:
+    | TaskAuditActionInstanceCreated
+    | null
+    | undefined;
+  /**
+   * The TaskAuditActionInstanceFailed message.
+   */
+  taskAuditActionInstanceFailed?:
+    | TaskAuditActionInstanceFailed
+    | null
+    | undefined;
+  /**
+   * The TaskAuditActionInstanceSucceeded message.
+   */
+  taskAuditActionInstanceSucceeded?:
+    | TaskAuditActionInstanceSucceeded
     | null
     | undefined;
   actionResult?: TaskAuditConnectorActionResult | null | undefined;
@@ -684,6 +727,14 @@ export const TaskAuditView$inboundSchema: z.ZodType<
   accountLifecycleActionFailed: z.nullable(
     TaskAuditAccountLifecycleActionFailed$inboundSchema,
   ).optional(),
+  actionInstanceCreated: z.nullable(
+    TaskAuditActionInstanceCreated$inboundSchema,
+  ).optional(),
+  actionInstanceFailed: z.nullable(TaskAuditActionInstanceFailed$inboundSchema)
+    .optional(),
+  actionInstanceSucceeded: z.nullable(
+    TaskAuditActionInstanceSucceeded$inboundSchema,
+  ).optional(),
   actionResult: z.nullable(TaskAuditConnectorActionResult$inboundSchema)
     .optional(),
   actionSubmitted: z.nullable(TaskAuditActionSubmitted$inboundSchema)
@@ -808,6 +859,12 @@ export const TaskAuditView$inboundSchema: z.ZodType<
   webhookTriggered: z.nullable(TaskAuditWebhookTriggered$inboundSchema)
     .optional(),
   workflowStep: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "actionInstanceCreated": "taskAuditActionInstanceCreated",
+    "actionInstanceFailed": "taskAuditActionInstanceFailed",
+    "actionInstanceSucceeded": "taskAuditActionInstanceSucceeded",
+  });
 });
 
 /** @internal */
@@ -822,6 +879,18 @@ export type TaskAuditView$Outbound = {
     | undefined;
   accountLifecycleActionFailed?:
     | TaskAuditAccountLifecycleActionFailed$Outbound
+    | null
+    | undefined;
+  actionInstanceCreated?:
+    | TaskAuditActionInstanceCreated$Outbound
+    | null
+    | undefined;
+  actionInstanceFailed?:
+    | TaskAuditActionInstanceFailed$Outbound
+    | null
+    | undefined;
+  actionInstanceSucceeded?:
+    | TaskAuditActionInstanceSucceeded$Outbound
     | null
     | undefined;
   actionResult?: TaskAuditConnectorActionResult$Outbound | null | undefined;
@@ -985,6 +1054,15 @@ export const TaskAuditView$outboundSchema: z.ZodType<
   accountLifecycleActionFailed: z.nullable(
     TaskAuditAccountLifecycleActionFailed$outboundSchema,
   ).optional(),
+  taskAuditActionInstanceCreated: z.nullable(
+    TaskAuditActionInstanceCreated$outboundSchema,
+  ).optional(),
+  taskAuditActionInstanceFailed: z.nullable(
+    TaskAuditActionInstanceFailed$outboundSchema,
+  ).optional(),
+  taskAuditActionInstanceSucceeded: z.nullable(
+    TaskAuditActionInstanceSucceeded$outboundSchema,
+  ).optional(),
   actionResult: z.nullable(TaskAuditConnectorActionResult$outboundSchema)
     .optional(),
   actionSubmitted: z.nullable(TaskAuditActionSubmitted$outboundSchema)
@@ -1107,6 +1185,12 @@ export const TaskAuditView$outboundSchema: z.ZodType<
   webhookTriggered: z.nullable(TaskAuditWebhookTriggered$outboundSchema)
     .optional(),
   workflowStep: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    taskAuditActionInstanceCreated: "actionInstanceCreated",
+    taskAuditActionInstanceFailed: "actionInstanceFailed",
+    taskAuditActionInstanceSucceeded: "actionInstanceSucceeded",
+  });
 });
 
 /**
