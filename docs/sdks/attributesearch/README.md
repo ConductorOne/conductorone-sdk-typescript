@@ -1,5 +1,4 @@
 # AttributeSearch
-(*attributeSearch*)
 
 ## Overview
 

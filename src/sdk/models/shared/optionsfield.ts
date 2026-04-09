@@ -19,33 +19,6 @@ export const OptionsField$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type OptionsField$Outbound = {};
-
-/** @internal */
-export const OptionsField$outboundSchema: z.ZodType<
-  OptionsField$Outbound,
-  z.ZodTypeDef,
-  OptionsField
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace OptionsField$ {
-  /** @deprecated use `OptionsField$inboundSchema` instead. */
-  export const inboundSchema = OptionsField$inboundSchema;
-  /** @deprecated use `OptionsField$outboundSchema` instead. */
-  export const outboundSchema = OptionsField$outboundSchema;
-  /** @deprecated use `OptionsField$Outbound` instead. */
-  export type Outbound = OptionsField$Outbound;
-}
-
-export function optionsFieldToJSON(optionsField: OptionsField): string {
-  return JSON.stringify(OptionsField$outboundSchema.parse(optionsField));
-}
-
 export function optionsFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<OptionsField, SDKValidationError> {

@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The DeleteRiskLevelAttributeValueRequest message.
  */
 export type DeleteRiskLevelAttributeValueRequest = {};
-
-/** @internal */
-export const DeleteRiskLevelAttributeValueRequest$inboundSchema: z.ZodType<
-  DeleteRiskLevelAttributeValueRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type DeleteRiskLevelAttributeValueRequest$Outbound = {};
@@ -29,21 +19,6 @@ export const DeleteRiskLevelAttributeValueRequest$outboundSchema: z.ZodType<
   DeleteRiskLevelAttributeValueRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteRiskLevelAttributeValueRequest$ {
-  /** @deprecated use `DeleteRiskLevelAttributeValueRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteRiskLevelAttributeValueRequest$inboundSchema;
-  /** @deprecated use `DeleteRiskLevelAttributeValueRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteRiskLevelAttributeValueRequest$outboundSchema;
-  /** @deprecated use `DeleteRiskLevelAttributeValueRequest$Outbound` instead. */
-  export type Outbound = DeleteRiskLevelAttributeValueRequest$Outbound;
-}
-
 export function deleteRiskLevelAttributeValueRequestToJSON(
   deleteRiskLevelAttributeValueRequest: DeleteRiskLevelAttributeValueRequest,
 ): string {
@@ -51,16 +26,5 @@ export function deleteRiskLevelAttributeValueRequestToJSON(
     DeleteRiskLevelAttributeValueRequest$outboundSchema.parse(
       deleteRiskLevelAttributeValueRequest,
     ),
-  );
-}
-
-export function deleteRiskLevelAttributeValueRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteRiskLevelAttributeValueRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeleteRiskLevelAttributeValueRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteRiskLevelAttributeValueRequest' from JSON`,
   );
 }

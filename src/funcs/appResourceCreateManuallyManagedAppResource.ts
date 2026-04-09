@@ -105,7 +105,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/api/v1/apps/{app_id}/resource_types/{app_resource_type_id}/resources",
   )(pathParams);

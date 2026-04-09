@@ -1,5 +1,4 @@
 # AppEntitlements
-(*appEntitlements*)
 
 ## Overview
 

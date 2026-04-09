@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  RequestSchema,
-  RequestSchema$inboundSchema,
-  RequestSchema$Outbound,
-  RequestSchema$outboundSchema,
-} from "./requestschema.js";
+import { RequestSchema, RequestSchema$inboundSchema } from "./requestschema.js";
 
 /**
  * The RequestSchemaServiceGetResponse message.
@@ -28,43 +23,6 @@ export const RequestSchemaServiceGetResponse$inboundSchema: z.ZodType<
 > = z.object({
   requestSchema: z.nullable(RequestSchema$inboundSchema).optional(),
 });
-
-/** @internal */
-export type RequestSchemaServiceGetResponse$Outbound = {
-  requestSchema?: RequestSchema$Outbound | null | undefined;
-};
-
-/** @internal */
-export const RequestSchemaServiceGetResponse$outboundSchema: z.ZodType<
-  RequestSchemaServiceGetResponse$Outbound,
-  z.ZodTypeDef,
-  RequestSchemaServiceGetResponse
-> = z.object({
-  requestSchema: z.nullable(RequestSchema$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestSchemaServiceGetResponse$ {
-  /** @deprecated use `RequestSchemaServiceGetResponse$inboundSchema` instead. */
-  export const inboundSchema = RequestSchemaServiceGetResponse$inboundSchema;
-  /** @deprecated use `RequestSchemaServiceGetResponse$outboundSchema` instead. */
-  export const outboundSchema = RequestSchemaServiceGetResponse$outboundSchema;
-  /** @deprecated use `RequestSchemaServiceGetResponse$Outbound` instead. */
-  export type Outbound = RequestSchemaServiceGetResponse$Outbound;
-}
-
-export function requestSchemaServiceGetResponseToJSON(
-  requestSchemaServiceGetResponse: RequestSchemaServiceGetResponse,
-): string {
-  return JSON.stringify(
-    RequestSchemaServiceGetResponse$outboundSchema.parse(
-      requestSchemaServiceGetResponse,
-    ),
-  );
-}
 
 export function requestSchemaServiceGetResponseFromJSON(
   jsonString: string,

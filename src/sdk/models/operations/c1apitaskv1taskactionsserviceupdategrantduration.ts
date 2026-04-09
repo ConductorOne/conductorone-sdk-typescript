@@ -36,24 +36,6 @@ export type C1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponse = {
 };
 
 /** @internal */
-export const C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest$inboundSchema:
-  z.ZodType<
-    C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    task_id: z.string(),
-    TaskActionsServiceUpdateGrantDurationRequest: shared
-      .TaskActionsServiceUpdateGrantDurationRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "task_id": "taskId",
-      "TaskActionsServiceUpdateGrantDurationRequest":
-        "taskActionsServiceUpdateGrantDurationRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest$Outbound = {
   task_id: string;
   TaskActionsServiceUpdateGrantDurationRequest?:
@@ -79,22 +61,6 @@ export const C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest$outboundSch
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest$Outbound;
-}
-
 export function c1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequestToJSON(
   c1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest:
     C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest,
@@ -102,21 +68,6 @@ export function c1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequestToJSON(
   return JSON.stringify(
     C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest$outboundSchema
       .parse(c1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest),
-  );
-}
-
-export function c1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest' from JSON`,
   );
 }
 
@@ -140,66 +91,6 @@ export const C1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponse$inboundSch
       "TaskServiceActionResponse": "taskServiceActionResponse",
     });
   });
-
-/** @internal */
-export type C1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    TaskServiceActionResponse?:
-      | shared.TaskServiceActionResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponse$outboundSchema:
-  z.ZodType<
-    C1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    taskServiceActionResponse: shared.TaskServiceActionResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      taskServiceActionResponse: "TaskServiceActionResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponse$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponse$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponse$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponse$Outbound;
-}
-
-export function c1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponseToJSON(
-  c1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponse:
-    C1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponse,
-): string {
-  return JSON.stringify(
-    C1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponse$outboundSchema
-      .parse(c1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponse),
-  );
-}
 
 export function c1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponseFromJSON(
   jsonString: string,

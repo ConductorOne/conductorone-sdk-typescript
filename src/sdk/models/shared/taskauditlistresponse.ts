@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  TaskAuditView,
-  TaskAuditView$inboundSchema,
-  TaskAuditView$Outbound,
-  TaskAuditView$outboundSchema,
-} from "./taskauditview.js";
+import { TaskAuditView, TaskAuditView$inboundSchema } from "./taskauditview.js";
 
 /**
  * The TaskAuditListResponse message.
@@ -36,43 +31,6 @@ export const TaskAuditListResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(TaskAuditView$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type TaskAuditListResponse$Outbound = {
-  list?: Array<TaskAuditView$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditListResponse$outboundSchema: z.ZodType<
-  TaskAuditListResponse$Outbound,
-  z.ZodTypeDef,
-  TaskAuditListResponse
-> = z.object({
-  list: z.nullable(z.array(TaskAuditView$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditListResponse$ {
-  /** @deprecated use `TaskAuditListResponse$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditListResponse$inboundSchema;
-  /** @deprecated use `TaskAuditListResponse$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditListResponse$outboundSchema;
-  /** @deprecated use `TaskAuditListResponse$Outbound` instead. */
-  export type Outbound = TaskAuditListResponse$Outbound;
-}
-
-export function taskAuditListResponseToJSON(
-  taskAuditListResponse: TaskAuditListResponse,
-): string {
-  return JSON.stringify(
-    TaskAuditListResponse$outboundSchema.parse(taskAuditListResponse),
-  );
-}
 
 export function taskAuditListResponseFromJSON(
   jsonString: string,

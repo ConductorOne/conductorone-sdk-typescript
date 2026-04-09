@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Webhook1,
-  Webhook1$inboundSchema,
-  Webhook1$Outbound,
-  Webhook1$outboundSchema,
-} from "./webhook1.js";
+import { Webhook1, Webhook1$inboundSchema } from "./webhook1.js";
 
 /**
  * The WebhooksServiceGetResponse message.
@@ -28,41 +23,6 @@ export const WebhooksServiceGetResponse$inboundSchema: z.ZodType<
 > = z.object({
   webhook: z.nullable(Webhook1$inboundSchema).optional(),
 });
-
-/** @internal */
-export type WebhooksServiceGetResponse$Outbound = {
-  webhook?: Webhook1$Outbound | null | undefined;
-};
-
-/** @internal */
-export const WebhooksServiceGetResponse$outboundSchema: z.ZodType<
-  WebhooksServiceGetResponse$Outbound,
-  z.ZodTypeDef,
-  WebhooksServiceGetResponse
-> = z.object({
-  webhook: z.nullable(Webhook1$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhooksServiceGetResponse$ {
-  /** @deprecated use `WebhooksServiceGetResponse$inboundSchema` instead. */
-  export const inboundSchema = WebhooksServiceGetResponse$inboundSchema;
-  /** @deprecated use `WebhooksServiceGetResponse$outboundSchema` instead. */
-  export const outboundSchema = WebhooksServiceGetResponse$outboundSchema;
-  /** @deprecated use `WebhooksServiceGetResponse$Outbound` instead. */
-  export type Outbound = WebhooksServiceGetResponse$Outbound;
-}
-
-export function webhooksServiceGetResponseToJSON(
-  webhooksServiceGetResponse: WebhooksServiceGetResponse,
-): string {
-  return JSON.stringify(
-    WebhooksServiceGetResponse$outboundSchema.parse(webhooksServiceGetResponse),
-  );
-}
 
 export function webhooksServiceGetResponseFromJSON(
   jsonString: string,

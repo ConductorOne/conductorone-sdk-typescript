@@ -4,25 +4,12 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  WebhookSource,
-  WebhookSource$inboundSchema,
-  WebhookSource$Outbound,
-  WebhookSource$outboundSchema,
-} from "./webhooksource.js";
-import {
-  WebhookSpec,
-  WebhookSpec$inboundSchema,
-  WebhookSpec$Outbound,
-  WebhookSpec$outboundSchema,
-} from "./webhookspec.js";
+import { WebhookSource, WebhookSource$inboundSchema } from "./webhooksource.js";
+import { WebhookSpec, WebhookSpec$inboundSchema } from "./webhookspec.js";
 
 /**
  * The state field.
@@ -76,32 +63,7 @@ export const WebhookInstanceState$inboundSchema: z.ZodType<
   WebhookInstanceState,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(WebhookInstanceState),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const WebhookInstanceState$outboundSchema: z.ZodType<
-  WebhookInstanceState,
-  z.ZodTypeDef,
-  WebhookInstanceState
-> = z.union([
-  z.nativeEnum(WebhookInstanceState),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhookInstanceState$ {
-  /** @deprecated use `WebhookInstanceState$inboundSchema` instead. */
-  export const inboundSchema = WebhookInstanceState$inboundSchema;
-  /** @deprecated use `WebhookInstanceState$outboundSchema` instead. */
-  export const outboundSchema = WebhookInstanceState$outboundSchema;
-}
+> = openEnums.inboundSchema(WebhookInstanceState);
 
 /** @internal */
 export const WebhookInstance$inboundSchema: z.ZodType<
@@ -131,60 +93,6 @@ export const WebhookInstance$inboundSchema: z.ZodType<
   ).optional(),
   webhookId: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type WebhookInstance$Outbound = {
-  attempts?: number | null | undefined;
-  completedAt?: string | null | undefined;
-  createdAt?: string | null | undefined;
-  expiresAt?: string | null | undefined;
-  id?: string | null | undefined;
-  lastAttemptedAt?: string | null | undefined;
-  source?: WebhookSource$Outbound | null | undefined;
-  spec?: WebhookSpec$Outbound | null | undefined;
-  state?: string | null | undefined;
-  updatedAt?: string | null | undefined;
-  webhookId?: string | null | undefined;
-};
-
-/** @internal */
-export const WebhookInstance$outboundSchema: z.ZodType<
-  WebhookInstance$Outbound,
-  z.ZodTypeDef,
-  WebhookInstance
-> = z.object({
-  attempts: z.nullable(z.number().int()).optional(),
-  completedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  id: z.nullable(z.string()).optional(),
-  lastAttemptedAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  source: z.nullable(WebhookSource$outboundSchema).optional(),
-  spec: z.nullable(WebhookSpec$outboundSchema).optional(),
-  state: z.nullable(WebhookInstanceState$outboundSchema).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  webhookId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhookInstance$ {
-  /** @deprecated use `WebhookInstance$inboundSchema` instead. */
-  export const inboundSchema = WebhookInstance$inboundSchema;
-  /** @deprecated use `WebhookInstance$outboundSchema` instead. */
-  export const outboundSchema = WebhookInstance$outboundSchema;
-  /** @deprecated use `WebhookInstance$Outbound` instead. */
-  export type Outbound = WebhookInstance$Outbound;
-}
-
-export function webhookInstanceToJSON(
-  webhookInstance: WebhookInstance,
-): string {
-  return JSON.stringify(WebhookInstance$outboundSchema.parse(webhookInstance));
-}
 
 export function webhookInstanceFromJSON(
   jsonString: string,

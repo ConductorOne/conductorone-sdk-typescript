@@ -1,5 +1,4 @@
 # AutomationSearch
-(*automationSearch*)
 
 ## Overview
 
@@ -14,7 +13,7 @@ Invokes the c1.api.automations.v1.AutomationSearchService.SearchAutomationTempla
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="c1.api.automations.v1.AutomationSearchService.SearchAutomationTemplateVersions" method="post" path="/api/v1/automation_versions/search" -->
+<!-- UsageSnippet language="typescript" operationID="c1.api.automations.v1.AutomationSearchService.SearchAutomationTemplateVersions" method="post" path="/api/v1/search/automation_versions" -->
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 
@@ -89,7 +88,7 @@ Invokes the c1.api.automations.v1.AutomationSearchService.SearchAutomations meth
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="c1.api.automations.v1.AutomationSearchService.SearchAutomations" method="post" path="/api/v1/automations/search" -->
+<!-- UsageSnippet language="typescript" operationID="c1.api.automations.v1.AutomationSearchService.SearchAutomations" method="post" path="/api/v1/search/automations" -->
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 

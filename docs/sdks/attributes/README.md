@@ -1,5 +1,4 @@
 # Attributes
-(*attributes*)
 
 ## Overview
 

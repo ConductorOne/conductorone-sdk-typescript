@@ -1,5 +1,4 @@
 # AppEntitlementSearch
-(*appEntitlementSearch*)
 
 ## Overview
 

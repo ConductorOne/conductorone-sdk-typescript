@@ -3,18 +3,13 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppUserInput,
-  AppUserInput$inboundSchema,
   AppUserInput$Outbound,
   AppUserInput$outboundSchema,
 } from "./appuser.js";
 import {
   AppUserExpandMask,
-  AppUserExpandMask$inboundSchema,
   AppUserExpandMask$Outbound,
   AppUserExpandMask$outboundSchema,
 } from "./appuserexpandmask.js";
@@ -27,17 +22,6 @@ export type AppUserServiceUpdateRequest = {
   expandMask?: AppUserExpandMask | null | undefined;
   updateMask?: string | null | undefined;
 };
-
-/** @internal */
-export const AppUserServiceUpdateRequest$inboundSchema: z.ZodType<
-  AppUserServiceUpdateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appUser: z.nullable(AppUserInput$inboundSchema).optional(),
-  expandMask: z.nullable(AppUserExpandMask$inboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type AppUserServiceUpdateRequest$Outbound = {
@@ -57,19 +41,6 @@ export const AppUserServiceUpdateRequest$outboundSchema: z.ZodType<
   updateMask: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUserServiceUpdateRequest$ {
-  /** @deprecated use `AppUserServiceUpdateRequest$inboundSchema` instead. */
-  export const inboundSchema = AppUserServiceUpdateRequest$inboundSchema;
-  /** @deprecated use `AppUserServiceUpdateRequest$outboundSchema` instead. */
-  export const outboundSchema = AppUserServiceUpdateRequest$outboundSchema;
-  /** @deprecated use `AppUserServiceUpdateRequest$Outbound` instead. */
-  export type Outbound = AppUserServiceUpdateRequest$Outbound;
-}
-
 export function appUserServiceUpdateRequestToJSON(
   appUserServiceUpdateRequest: AppUserServiceUpdateRequest,
 ): string {
@@ -77,15 +48,5 @@ export function appUserServiceUpdateRequestToJSON(
     AppUserServiceUpdateRequest$outboundSchema.parse(
       appUserServiceUpdateRequest,
     ),
-  );
-}
-
-export function appUserServiceUpdateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<AppUserServiceUpdateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AppUserServiceUpdateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AppUserServiceUpdateRequest' from JSON`,
   );
 }

@@ -4,6 +4,7 @@ The BundleAutomation message.
 
 This message contains a oneof named conditions. Only a single field of the following list may be set at a time:
   - entitlements
+  - cel
 
 
 ## Example Usage
@@ -18,6 +19,7 @@ let value: BundleAutomation = {};
 
 | Field                                                                                                   | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
 | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `bundleAutomationRuleCEL`                                                                               | [shared.BundleAutomationRuleCEL](../../../sdk/models/shared/bundleautomationrulecel.md)                 | :heavy_minus_sign:                                                                                      | The BundleAutomationRuleCEL message.                                                                    |
 | `circuitBreaker`                                                                                        | [shared.BundleAutomationCircuitBreaker](../../../sdk/models/shared/bundleautomationcircuitbreaker.md)   | :heavy_minus_sign:                                                                                      | N/A                                                                                                     |
 | `createTasks`                                                                                           | *boolean*                                                                                               | :heavy_minus_sign:                                                                                      | The createTasks field.                                                                                  |
 | `createdAt`                                                                                             | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)           | :heavy_minus_sign:                                                                                      | N/A                                                                                                     |

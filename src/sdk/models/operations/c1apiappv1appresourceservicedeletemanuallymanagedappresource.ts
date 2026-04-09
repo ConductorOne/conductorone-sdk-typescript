@@ -42,27 +42,6 @@ export type C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponse
   };
 
 /** @internal */
-export const C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    app_resource_type_id: z.nullable(z.string()),
-    id: z.nullable(z.string()),
-    DeleteManuallyManagedAppResourceRequest: shared
-      .DeleteManuallyManagedAppResourceRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "app_resource_type_id": "appResourceTypeId",
-      "DeleteManuallyManagedAppResourceRequest":
-        "deleteManuallyManagedAppResourceRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest$Outbound =
   {
     app_id: string | null;
@@ -94,22 +73,6 @@ export const C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest$ {
-  /** @deprecated use `C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest$Outbound;
-}
-
 export function c1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequestToJSON(
   c1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest:
     C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest,
@@ -119,21 +82,6 @@ export function c1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequ
       .parse(
         c1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest,
       ),
-  );
-}
-
-export function c1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest' from JSON`,
   );
 }
 
@@ -158,69 +106,6 @@ export const C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRespons
         "deleteManuallyManagedAppResourceResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    DeleteManuallyManagedAppResourceResponse?:
-      | shared.DeleteManuallyManagedAppResourceResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    deleteManuallyManagedAppResourceResponse: shared
-      .DeleteManuallyManagedAppResourceResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      deleteManuallyManagedAppResourceResponse:
-        "DeleteManuallyManagedAppResourceResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponse$ {
-  /** @deprecated use `C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponse$Outbound;
-}
-
-export function c1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponseToJSON(
-  c1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponse:
-    C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponse$outboundSchema
-      .parse(
-        c1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponse,
-      ),
-  );
-}
 
 export function c1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponseFromJSON(
   jsonString: string,

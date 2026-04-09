@@ -3,40 +3,33 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import {
   TaskExpandMask,
-  TaskExpandMask$inboundSchema,
   TaskExpandMask$Outbound,
   TaskExpandMask$outboundSchema,
 } from "./taskexpandmask.js";
 import {
   TaskRef,
-  TaskRef$inboundSchema,
   TaskRef$Outbound,
   TaskRef$outboundSchema,
 } from "./taskref.js";
 import {
   TaskTypeInput,
-  TaskTypeInput$inboundSchema,
   TaskTypeInput$Outbound,
   TaskTypeInput$outboundSchema,
 } from "./tasktypeinput.js";
 
-export const AccountTypes = {
+export const TaskSearchRequestAccountTypes = {
   AppUserTypeUnspecified: "APP_USER_TYPE_UNSPECIFIED",
   AppUserTypeUser: "APP_USER_TYPE_USER",
   AppUserTypeServiceAccount: "APP_USER_TYPE_SERVICE_ACCOUNT",
   AppUserTypeSystemAccount: "APP_USER_TYPE_SYSTEM_ACCOUNT",
 } as const;
-export type AccountTypes = OpenEnum<typeof AccountTypes>;
+export type TaskSearchRequestAccountTypes = OpenEnum<
+  typeof TaskSearchRequestAccountTypes
+>;
 
 export const CertifyOutcomes = {
   CertifyOutcomeUnspecified: "CERTIFY_OUTCOME_UNSPECIFIED",
@@ -85,6 +78,25 @@ export const GrantOutcomes = {
 } as const;
 export type GrantOutcomes = OpenEnum<typeof GrantOutcomes>;
 
+/**
+ * Filter tasks by pending action status. Only applies when exactly one access_review_id is specified.
+ *
+ * @remarks
+ *  Requires the REVIEWS_PENDING_ACTIONS feature flag to be enabled.
+ */
+export const PendingActionFilter = {
+  PendingActionFilterUnspecified: "PENDING_ACTION_FILTER_UNSPECIFIED",
+  PendingActionFilterWithPending: "PENDING_ACTION_FILTER_WITH_PENDING",
+  PendingActionFilterWithoutPending: "PENDING_ACTION_FILTER_WITHOUT_PENDING",
+} as const;
+/**
+ * Filter tasks by pending action status. Only applies when exactly one access_review_id is specified.
+ *
+ * @remarks
+ *  Requires the REVIEWS_PENDING_ACTIONS feature flag to be enabled.
+ */
+export type PendingActionFilter = OpenEnum<typeof PendingActionFilter>;
+
 export const RevokeOutcomes = {
   RevokeOutcomeUnspecified: "REVOKE_OUTCOME_UNSPECIFIED",
   RevokeOutcomeRevoked: "REVOKE_OUTCOME_REVOKED",
@@ -98,7 +110,7 @@ export type RevokeOutcomes = OpenEnum<typeof RevokeOutcomes>;
 /**
  * Sort tasks in a specific order.
  */
-export const SortBy = {
+export const TaskSearchRequestSortBy = {
   TaskSearchSortByUnspecified: "TASK_SEARCH_SORT_BY_UNSPECIFIED",
   TaskSearchSortByAccount: "TASK_SEARCH_SORT_BY_ACCOUNT",
   TaskSearchSortByResource: "TASK_SEARCH_SORT_BY_RESOURCE",
@@ -113,7 +125,7 @@ export const SortBy = {
 /**
  * Sort tasks in a specific order.
  */
-export type SortBy = OpenEnum<typeof SortBy>;
+export type TaskSearchRequestSortBy = OpenEnum<typeof TaskSearchRequestSortBy>;
 
 export const StepApprovalTypes = {
   StepApprovalTypeUnspecified: "STEP_APPROVAL_TYPE_UNSPECIFIED",
@@ -152,7 +164,7 @@ export type TaskSearchRequest = {
   /**
    * The accountTypes field.
    */
-  accountTypes?: Array<AccountTypes> | null | undefined;
+  accountTypes?: Array<TaskSearchRequestAccountTypes> | null | undefined;
   /**
    * Search tasks that have this actor ID.
    */
@@ -208,6 +220,10 @@ export type TaskSearchRequest = {
    */
   excludeAppResourceTypeIds?: Array<string> | null | undefined;
   /**
+   * Search tasks that do NOT have any of these apps as targets.
+   */
+  excludeApplicationIds?: Array<string> | null | undefined;
+  /**
    * Exclude Specific TaskIDs from this serach result.
    */
   excludeIds?: Array<string> | null | undefined;
@@ -245,11 +261,18 @@ export type TaskSearchRequest = {
    */
   pageToken?: string | null | undefined;
   /**
+   * Filter tasks by pending action status. Only applies when exactly one access_review_id is specified.
+   *
+   * @remarks
+   *  Requires the REVIEWS_PENDING_ACTIONS feature flag to be enabled.
+   */
+  pendingActionFilter?: PendingActionFilter | undefined;
+  /**
    * Search tasks that were acted on by any of these users.
    */
   previouslyActedOnIds?: Array<string> | null | undefined;
   /**
-   * Fuzzy search tasks by display name or description. Also can search by numeric ID.
+   * Fuzzy search tasks by display name, description, or ID.
    */
   query?: string | null | undefined;
   /**
@@ -257,13 +280,21 @@ export type TaskSearchRequest = {
    */
   refs?: Array<TaskRef> | null | undefined;
   /**
+   * Filter tasks where the current approval step requires an approval reason.
+   */
+  requireApprovalReason?: boolean | undefined;
+  /**
+   * Filter tasks where the current approval step requires a denial reason.
+   */
+  requireDenialReason?: boolean | undefined;
+  /**
    * Search tasks by revoke outcome
    */
   revokeOutcomes?: Array<RevokeOutcomes> | null | undefined;
   /**
    * Sort tasks in a specific order.
    */
-  sortBy?: SortBy | null | undefined;
+  sortBy?: TaskSearchRequestSortBy | null | undefined;
   /**
    * Search tasks that have a current policy step of this type
    */
@@ -287,346 +318,74 @@ export type TaskSearchRequest = {
 };
 
 /** @internal */
-export const AccountTypes$inboundSchema: z.ZodType<
-  AccountTypes,
+export const TaskSearchRequestAccountTypes$outboundSchema: z.ZodType<
+  string,
   z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(AccountTypes),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const AccountTypes$outboundSchema: z.ZodType<
-  AccountTypes,
-  z.ZodTypeDef,
-  AccountTypes
-> = z.union([
-  z.nativeEnum(AccountTypes),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AccountTypes$ {
-  /** @deprecated use `AccountTypes$inboundSchema` instead. */
-  export const inboundSchema = AccountTypes$inboundSchema;
-  /** @deprecated use `AccountTypes$outboundSchema` instead. */
-  export const outboundSchema = AccountTypes$outboundSchema;
-}
-
-/** @internal */
-export const CertifyOutcomes$inboundSchema: z.ZodType<
-  CertifyOutcomes,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(CertifyOutcomes),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
+  TaskSearchRequestAccountTypes
+> = openEnums.outboundSchema(TaskSearchRequestAccountTypes);
 
 /** @internal */
 export const CertifyOutcomes$outboundSchema: z.ZodType<
-  CertifyOutcomes,
+  string,
   z.ZodTypeDef,
   CertifyOutcomes
-> = z.union([
-  z.nativeEnum(CertifyOutcomes),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CertifyOutcomes$ {
-  /** @deprecated use `CertifyOutcomes$inboundSchema` instead. */
-  export const inboundSchema = CertifyOutcomes$inboundSchema;
-  /** @deprecated use `CertifyOutcomes$outboundSchema` instead. */
-  export const outboundSchema = CertifyOutcomes$outboundSchema;
-}
-
-/** @internal */
-export const CurrentStep$inboundSchema: z.ZodType<
-  CurrentStep,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(CurrentStep),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
+> = openEnums.outboundSchema(CertifyOutcomes);
 
 /** @internal */
 export const CurrentStep$outboundSchema: z.ZodType<
-  CurrentStep,
+  string,
   z.ZodTypeDef,
   CurrentStep
-> = z.union([
-  z.nativeEnum(CurrentStep),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CurrentStep$ {
-  /** @deprecated use `CurrentStep$inboundSchema` instead. */
-  export const inboundSchema = CurrentStep$inboundSchema;
-  /** @deprecated use `CurrentStep$outboundSchema` instead. */
-  export const outboundSchema = CurrentStep$outboundSchema;
-}
-
-/** @internal */
-export const EmergencyStatus$inboundSchema: z.ZodType<
-  EmergencyStatus,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(EmergencyStatus),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
+> = openEnums.outboundSchema(CurrentStep);
 
 /** @internal */
 export const EmergencyStatus$outboundSchema: z.ZodType<
-  EmergencyStatus,
+  string,
   z.ZodTypeDef,
   EmergencyStatus
-> = z.union([
-  z.nativeEnum(EmergencyStatus),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EmergencyStatus$ {
-  /** @deprecated use `EmergencyStatus$inboundSchema` instead. */
-  export const inboundSchema = EmergencyStatus$inboundSchema;
-  /** @deprecated use `EmergencyStatus$outboundSchema` instead. */
-  export const outboundSchema = EmergencyStatus$outboundSchema;
-}
-
-/** @internal */
-export const GrantOutcomes$inboundSchema: z.ZodType<
-  GrantOutcomes,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(GrantOutcomes),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
+> = openEnums.outboundSchema(EmergencyStatus);
 
 /** @internal */
 export const GrantOutcomes$outboundSchema: z.ZodType<
-  GrantOutcomes,
+  string,
   z.ZodTypeDef,
   GrantOutcomes
-> = z.union([
-  z.nativeEnum(GrantOutcomes),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GrantOutcomes$ {
-  /** @deprecated use `GrantOutcomes$inboundSchema` instead. */
-  export const inboundSchema = GrantOutcomes$inboundSchema;
-  /** @deprecated use `GrantOutcomes$outboundSchema` instead. */
-  export const outboundSchema = GrantOutcomes$outboundSchema;
-}
+> = openEnums.outboundSchema(GrantOutcomes);
 
 /** @internal */
-export const RevokeOutcomes$inboundSchema: z.ZodType<
-  RevokeOutcomes,
+export const PendingActionFilter$outboundSchema: z.ZodType<
+  string,
   z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(RevokeOutcomes),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
+  PendingActionFilter
+> = openEnums.outboundSchema(PendingActionFilter);
 
 /** @internal */
 export const RevokeOutcomes$outboundSchema: z.ZodType<
-  RevokeOutcomes,
+  string,
   z.ZodTypeDef,
   RevokeOutcomes
-> = z.union([
-  z.nativeEnum(RevokeOutcomes),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RevokeOutcomes$ {
-  /** @deprecated use `RevokeOutcomes$inboundSchema` instead. */
-  export const inboundSchema = RevokeOutcomes$inboundSchema;
-  /** @deprecated use `RevokeOutcomes$outboundSchema` instead. */
-  export const outboundSchema = RevokeOutcomes$outboundSchema;
-}
+> = openEnums.outboundSchema(RevokeOutcomes);
 
 /** @internal */
-export const SortBy$inboundSchema: z.ZodType<SortBy, z.ZodTypeDef, unknown> = z
-  .union([
-    z.nativeEnum(SortBy),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const SortBy$outboundSchema: z.ZodType<SortBy, z.ZodTypeDef, SortBy> = z
-  .union([
-    z.nativeEnum(SortBy),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SortBy$ {
-  /** @deprecated use `SortBy$inboundSchema` instead. */
-  export const inboundSchema = SortBy$inboundSchema;
-  /** @deprecated use `SortBy$outboundSchema` instead. */
-  export const outboundSchema = SortBy$outboundSchema;
-}
-
-/** @internal */
-export const StepApprovalTypes$inboundSchema: z.ZodType<
-  StepApprovalTypes,
+export const TaskSearchRequestSortBy$outboundSchema: z.ZodType<
+  string,
   z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(StepApprovalTypes),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
+  TaskSearchRequestSortBy
+> = openEnums.outboundSchema(TaskSearchRequestSortBy);
 
 /** @internal */
 export const StepApprovalTypes$outboundSchema: z.ZodType<
-  StepApprovalTypes,
+  string,
   z.ZodTypeDef,
   StepApprovalTypes
-> = z.union([
-  z.nativeEnum(StepApprovalTypes),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StepApprovalTypes$ {
-  /** @deprecated use `StepApprovalTypes$inboundSchema` instead. */
-  export const inboundSchema = StepApprovalTypes$inboundSchema;
-  /** @deprecated use `StepApprovalTypes$outboundSchema` instead. */
-  export const outboundSchema = StepApprovalTypes$outboundSchema;
-}
-
-/** @internal */
-export const TaskStates$inboundSchema: z.ZodType<
-  TaskStates,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(TaskStates),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
+> = openEnums.outboundSchema(StepApprovalTypes);
 
 /** @internal */
 export const TaskStates$outboundSchema: z.ZodType<
-  TaskStates,
+  string,
   z.ZodTypeDef,
   TaskStates
-> = z.union([
-  z.nativeEnum(TaskStates),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskStates$ {
-  /** @deprecated use `TaskStates$inboundSchema` instead. */
-  export const inboundSchema = TaskStates$inboundSchema;
-  /** @deprecated use `TaskStates$outboundSchema` instead. */
-  export const outboundSchema = TaskStates$outboundSchema;
-}
-
-/** @internal */
-export const TaskSearchRequest$inboundSchema: z.ZodType<
-  TaskSearchRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  accessReviewIds: z.nullable(z.array(z.string())).optional(),
-  accountOwnerIds: z.nullable(z.array(z.string())).optional(),
-  accountTypes: z.nullable(z.array(AccountTypes$inboundSchema)).optional(),
-  actorId: z.nullable(z.string()).optional(),
-  appEntitlementIds: z.nullable(z.array(z.string())).optional(),
-  appResourceIds: z.nullable(z.array(z.string())).optional(),
-  appResourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  appUserSubjectIds: z.nullable(z.array(z.string())).optional(),
-  applicationIds: z.nullable(z.array(z.string())).optional(),
-  assignedOrStepApproverUserId: z.nullable(z.string()).optional(),
-  assigneesInIds: z.nullable(z.array(z.string())).optional(),
-  certifyOutcomes: z.nullable(z.array(CertifyOutcomes$inboundSchema))
-    .optional(),
-  createdAfter: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  createdBefore: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  currentStep: z.nullable(CurrentStep$inboundSchema).optional(),
-  emergencyStatus: z.nullable(EmergencyStatus$inboundSchema).optional(),
-  excludeAppEntitlementIds: z.nullable(z.array(z.string())).optional(),
-  excludeAppResourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  excludeIds: z.nullable(z.array(z.string())).optional(),
-  expandMask: z.nullable(TaskExpandMask$inboundSchema).optional(),
-  grantOutcomes: z.nullable(z.array(GrantOutcomes$inboundSchema)).optional(),
-  includeActedAfter: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  includeDeleted: z.nullable(z.boolean()).optional(),
-  myWorkUserIds: z.nullable(z.array(z.string())).optional(),
-  olderThanDuration: z.nullable(z.string()).optional(),
-  openerIds: z.nullable(z.array(z.string())).optional(),
-  openerOrSubjectUserId: z.nullable(z.string()).optional(),
-  outcomeAfter: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  outcomeBefore: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  previouslyActedOnIds: z.nullable(z.array(z.string())).optional(),
-  query: z.nullable(z.string()).optional(),
-  refs: z.nullable(z.array(TaskRef$inboundSchema)).optional(),
-  revokeOutcomes: z.nullable(z.array(RevokeOutcomes$inboundSchema)).optional(),
-  sortBy: z.nullable(SortBy$inboundSchema).optional(),
-  stepApprovalTypes: z.nullable(z.array(StepApprovalTypes$inboundSchema))
-    .optional(),
-  subjectIds: z.nullable(z.array(z.string())).optional(),
-  taskStates: z.nullable(z.array(TaskStates$inboundSchema)).optional(),
-  taskTypes: z.nullable(z.array(TaskTypeInput$inboundSchema)).optional(),
-  userEmploymentStatuses: z.nullable(z.array(z.string())).optional(),
-});
+> = openEnums.outboundSchema(TaskStates);
 
 /** @internal */
 export type TaskSearchRequest$Outbound = {
@@ -648,6 +407,7 @@ export type TaskSearchRequest$Outbound = {
   emergencyStatus?: string | null | undefined;
   excludeAppEntitlementIds?: Array<string> | null | undefined;
   excludeAppResourceTypeIds?: Array<string> | null | undefined;
+  excludeApplicationIds?: Array<string> | null | undefined;
   excludeIds?: Array<string> | null | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
   grantOutcomes?: Array<string> | null | undefined;
@@ -661,9 +421,12 @@ export type TaskSearchRequest$Outbound = {
   outcomeBefore?: string | null | undefined;
   pageSize?: number | null | undefined;
   pageToken?: string | null | undefined;
+  pendingActionFilter?: string | undefined;
   previouslyActedOnIds?: Array<string> | null | undefined;
   query?: string | null | undefined;
   refs?: Array<TaskRef$Outbound> | null | undefined;
+  requireApprovalReason?: boolean | undefined;
+  requireDenialReason?: boolean | undefined;
   revokeOutcomes?: Array<string> | null | undefined;
   sortBy?: string | null | undefined;
   stepApprovalTypes?: Array<string> | null | undefined;
@@ -681,7 +444,9 @@ export const TaskSearchRequest$outboundSchema: z.ZodType<
 > = z.object({
   accessReviewIds: z.nullable(z.array(z.string())).optional(),
   accountOwnerIds: z.nullable(z.array(z.string())).optional(),
-  accountTypes: z.nullable(z.array(AccountTypes$outboundSchema)).optional(),
+  accountTypes: z.nullable(
+    z.array(TaskSearchRequestAccountTypes$outboundSchema),
+  ).optional(),
   actorId: z.nullable(z.string()).optional(),
   appEntitlementIds: z.nullable(z.array(z.string())).optional(),
   appResourceIds: z.nullable(z.array(z.string())).optional(),
@@ -699,6 +464,7 @@ export const TaskSearchRequest$outboundSchema: z.ZodType<
   emergencyStatus: z.nullable(EmergencyStatus$outboundSchema).optional(),
   excludeAppEntitlementIds: z.nullable(z.array(z.string())).optional(),
   excludeAppResourceTypeIds: z.nullable(z.array(z.string())).optional(),
+  excludeApplicationIds: z.nullable(z.array(z.string())).optional(),
   excludeIds: z.nullable(z.array(z.string())).optional(),
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
   grantOutcomes: z.nullable(z.array(GrantOutcomes$outboundSchema)).optional(),
@@ -714,11 +480,14 @@ export const TaskSearchRequest$outboundSchema: z.ZodType<
     .optional(),
   pageSize: z.nullable(z.number().int()).optional(),
   pageToken: z.nullable(z.string()).optional(),
+  pendingActionFilter: PendingActionFilter$outboundSchema.optional(),
   previouslyActedOnIds: z.nullable(z.array(z.string())).optional(),
   query: z.nullable(z.string()).optional(),
   refs: z.nullable(z.array(TaskRef$outboundSchema)).optional(),
+  requireApprovalReason: z.boolean().optional(),
+  requireDenialReason: z.boolean().optional(),
   revokeOutcomes: z.nullable(z.array(RevokeOutcomes$outboundSchema)).optional(),
-  sortBy: z.nullable(SortBy$outboundSchema).optional(),
+  sortBy: z.nullable(TaskSearchRequestSortBy$outboundSchema).optional(),
   stepApprovalTypes: z.nullable(z.array(StepApprovalTypes$outboundSchema))
     .optional(),
   subjectIds: z.nullable(z.array(z.string())).optional(),
@@ -727,33 +496,10 @@ export const TaskSearchRequest$outboundSchema: z.ZodType<
   userEmploymentStatuses: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskSearchRequest$ {
-  /** @deprecated use `TaskSearchRequest$inboundSchema` instead. */
-  export const inboundSchema = TaskSearchRequest$inboundSchema;
-  /** @deprecated use `TaskSearchRequest$outboundSchema` instead. */
-  export const outboundSchema = TaskSearchRequest$outboundSchema;
-  /** @deprecated use `TaskSearchRequest$Outbound` instead. */
-  export type Outbound = TaskSearchRequest$Outbound;
-}
-
 export function taskSearchRequestToJSON(
   taskSearchRequest: TaskSearchRequest,
 ): string {
   return JSON.stringify(
     TaskSearchRequest$outboundSchema.parse(taskSearchRequest),
-  );
-}
-
-export function taskSearchRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskSearchRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskSearchRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskSearchRequest' from JSON`,
   );
 }

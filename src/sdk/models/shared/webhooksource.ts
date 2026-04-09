@@ -9,32 +9,22 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   WebhookSourceApprovalStep,
   WebhookSourceApprovalStep$inboundSchema,
-  WebhookSourceApprovalStep$Outbound,
-  WebhookSourceApprovalStep$outboundSchema,
 } from "./webhooksourceapprovalstep.js";
 import {
   WebhookSourcePolicyPostAction,
   WebhookSourcePolicyPostAction$inboundSchema,
-  WebhookSourcePolicyPostAction$Outbound,
-  WebhookSourcePolicyPostAction$outboundSchema,
 } from "./webhooksourcepolicypostaction.js";
 import {
   WebhookSourceProvisionStep,
   WebhookSourceProvisionStep$inboundSchema,
-  WebhookSourceProvisionStep$Outbound,
-  WebhookSourceProvisionStep$outboundSchema,
 } from "./webhooksourceprovisionstep.js";
 import {
   WebhookSourceTest,
   WebhookSourceTest$inboundSchema,
-  WebhookSourceTest$Outbound,
-  WebhookSourceTest$outboundSchema,
 } from "./webhooksourcetest.js";
 import {
   WebhookSourceWorkflowStep,
   WebhookSourceWorkflowStep$inboundSchema,
-  WebhookSourceWorkflowStep$Outbound,
-  WebhookSourceWorkflowStep$outboundSchema,
 } from "./webhooksourceworkflowstep.js";
 
 /**
@@ -71,47 +61,6 @@ export const WebhookSource$inboundSchema: z.ZodType<
   test: z.nullable(WebhookSourceTest$inboundSchema).optional(),
   workflowStep: z.nullable(WebhookSourceWorkflowStep$inboundSchema).optional(),
 });
-
-/** @internal */
-export type WebhookSource$Outbound = {
-  approvalStep?: WebhookSourceApprovalStep$Outbound | null | undefined;
-  policyPostAction?: WebhookSourcePolicyPostAction$Outbound | null | undefined;
-  provisionStep?: WebhookSourceProvisionStep$Outbound | null | undefined;
-  test?: WebhookSourceTest$Outbound | null | undefined;
-  workflowStep?: WebhookSourceWorkflowStep$Outbound | null | undefined;
-};
-
-/** @internal */
-export const WebhookSource$outboundSchema: z.ZodType<
-  WebhookSource$Outbound,
-  z.ZodTypeDef,
-  WebhookSource
-> = z.object({
-  approvalStep: z.nullable(WebhookSourceApprovalStep$outboundSchema).optional(),
-  policyPostAction: z.nullable(WebhookSourcePolicyPostAction$outboundSchema)
-    .optional(),
-  provisionStep: z.nullable(WebhookSourceProvisionStep$outboundSchema)
-    .optional(),
-  test: z.nullable(WebhookSourceTest$outboundSchema).optional(),
-  workflowStep: z.nullable(WebhookSourceWorkflowStep$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhookSource$ {
-  /** @deprecated use `WebhookSource$inboundSchema` instead. */
-  export const inboundSchema = WebhookSource$inboundSchema;
-  /** @deprecated use `WebhookSource$outboundSchema` instead. */
-  export const outboundSchema = WebhookSource$outboundSchema;
-  /** @deprecated use `WebhookSource$Outbound` instead. */
-  export type Outbound = WebhookSource$Outbound;
-}
-
-export function webhookSourceToJSON(webhookSource: WebhookSource): string {
-  return JSON.stringify(WebhookSource$outboundSchema.parse(webhookSource));
-}
 
 export function webhookSourceFromJSON(
   jsonString: string,

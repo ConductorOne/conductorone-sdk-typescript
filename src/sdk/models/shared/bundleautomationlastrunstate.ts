@@ -3,14 +3,16 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  BundleAutomationCelEvaluationState,
+  BundleAutomationCelEvaluationState$inboundSchema,
+} from "./bundleautomationcelevaluationstate.js";
 
 /**
  * The status field.
@@ -37,6 +39,12 @@ export type BundleAutomationLastRunStateStatus = OpenEnum<
  */
 export type BundleAutomationLastRunState = {
   /**
+   * The BundleAutomationCelEvaluationState message.
+   */
+  bundleAutomationCelEvaluationState?:
+    | BundleAutomationCelEvaluationState
+    | undefined;
+  /**
    * The errorMessage field.
    */
   errorMessage?: string | null | undefined;
@@ -52,33 +60,7 @@ export const BundleAutomationLastRunStateStatus$inboundSchema: z.ZodType<
   BundleAutomationLastRunStateStatus,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(BundleAutomationLastRunStateStatus),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const BundleAutomationLastRunStateStatus$outboundSchema: z.ZodType<
-  BundleAutomationLastRunStateStatus,
-  z.ZodTypeDef,
-  BundleAutomationLastRunStateStatus
-> = z.union([
-  z.nativeEnum(BundleAutomationLastRunStateStatus),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BundleAutomationLastRunStateStatus$ {
-  /** @deprecated use `BundleAutomationLastRunStateStatus$inboundSchema` instead. */
-  export const inboundSchema = BundleAutomationLastRunStateStatus$inboundSchema;
-  /** @deprecated use `BundleAutomationLastRunStateStatus$outboundSchema` instead. */
-  export const outboundSchema =
-    BundleAutomationLastRunStateStatus$outboundSchema;
-}
+> = openEnums.inboundSchema(BundleAutomationLastRunStateStatus);
 
 /** @internal */
 export const BundleAutomationLastRunState$inboundSchema: z.ZodType<
@@ -86,55 +68,18 @@ export const BundleAutomationLastRunState$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  celEvaluation: BundleAutomationCelEvaluationState$inboundSchema.optional(),
   errorMessage: z.nullable(z.string()).optional(),
   lastRunAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   status: z.nullable(BundleAutomationLastRunStateStatus$inboundSchema)
     .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "celEvaluation": "bundleAutomationCelEvaluationState",
+  });
 });
-
-/** @internal */
-export type BundleAutomationLastRunState$Outbound = {
-  errorMessage?: string | null | undefined;
-  lastRunAt?: string | null | undefined;
-  status?: string | null | undefined;
-};
-
-/** @internal */
-export const BundleAutomationLastRunState$outboundSchema: z.ZodType<
-  BundleAutomationLastRunState$Outbound,
-  z.ZodTypeDef,
-  BundleAutomationLastRunState
-> = z.object({
-  errorMessage: z.nullable(z.string()).optional(),
-  lastRunAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  status: z.nullable(BundleAutomationLastRunStateStatus$outboundSchema)
-    .optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BundleAutomationLastRunState$ {
-  /** @deprecated use `BundleAutomationLastRunState$inboundSchema` instead. */
-  export const inboundSchema = BundleAutomationLastRunState$inboundSchema;
-  /** @deprecated use `BundleAutomationLastRunState$outboundSchema` instead. */
-  export const outboundSchema = BundleAutomationLastRunState$outboundSchema;
-  /** @deprecated use `BundleAutomationLastRunState$Outbound` instead. */
-  export type Outbound = BundleAutomationLastRunState$Outbound;
-}
-
-export function bundleAutomationLastRunStateToJSON(
-  bundleAutomationLastRunState: BundleAutomationLastRunState,
-): string {
-  return JSON.stringify(
-    BundleAutomationLastRunState$outboundSchema.parse(
-      bundleAutomationLastRunState,
-    ),
-  );
-}
 
 export function bundleAutomationLastRunStateFromJSON(
   jsonString: string,

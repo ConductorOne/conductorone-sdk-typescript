@@ -8,6 +8,7 @@ import { connectorCreateDelegated } from "../funcs/connectorCreateDelegated.js";
 import { connectorDelete } from "../funcs/connectorDelete.js";
 import { connectorForceSync } from "../funcs/connectorForceSync.js";
 import { connectorGet } from "../funcs/connectorGet.js";
+import { connectorGetConnectorSyncDownloadURL } from "../funcs/connectorGetConnectorSyncDownloadURL.js";
 import { connectorGetCredentials } from "../funcs/connectorGetCredentials.js";
 import { connectorList } from "../funcs/connectorList.js";
 import { connectorPauseSync } from "../funcs/connectorPauseSync.js";
@@ -15,6 +16,7 @@ import { connectorResumeSync } from "../funcs/connectorResumeSync.js";
 import { connectorRevokeCredential } from "../funcs/connectorRevokeCredential.js";
 import { connectorRotateCredential } from "../funcs/connectorRotateCredential.js";
 import { connectorUpdate } from "../funcs/connectorUpdate.js";
+import { connectorUpdateConnectorSchedule } from "../funcs/connectorUpdateConnectorSchedule.js";
 import { connectorUpdateDelegated } from "../funcs/connectorUpdateDelegated.js";
 import { connectorValidateHTTPConnectorConfig } from "../funcs/connectorValidateHTTPConnectorConfig.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -153,6 +155,46 @@ export class Connector extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.C1ApiAppV1ConnectorServiceResumeSyncResponse> {
     return unwrapAsync(connectorResumeSync(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update Connector Schedule
+   *
+   * @remarks
+   * Invokes the c1.api.app.v1.ConnectorService.UpdateConnectorSchedule method.
+   */
+  async updateConnectorSchedule(
+    request:
+      operations.C1ApiAppV1ConnectorServiceUpdateConnectorScheduleRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiAppV1ConnectorServiceUpdateConnectorScheduleResponse
+  > {
+    return unwrapAsync(connectorUpdateConnectorSchedule(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get Connector Sync Download Url
+   *
+   * @remarks
+   * GetConnectorSyncDownloadURL generates a short-lived download URL for a completed connector sync artifact.
+   */
+  async getConnectorSyncDownloadURL(
+    request:
+      operations.C1ApiAppV1ConnectorServiceGetConnectorSyncDownloadURLRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiAppV1ConnectorServiceGetConnectorSyncDownloadURLResponse
+  > {
+    return unwrapAsync(connectorGetConnectorSyncDownloadURL(
       this,
       request,
       options,

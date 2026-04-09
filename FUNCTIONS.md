@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
-import { accessConflictCreateMonitor } from "conductorone-sdk-typescript/funcs/accessConflictCreateMonitor.js";
+import { a2UIListSurfaces } from "conductorone-sdk-typescript/funcs/a2UIListSurfaces.js";
 
 // Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -32,12 +32,14 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 });
 
 async function run() {
-  const res = await accessConflictCreateMonitor(conductoroneSDKTypescript);
+  const res = await a2UIListSurfaces(conductoroneSDKTypescript, {
+    conversationId: "<id>",
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("accessConflictCreateMonitor failed:", res.error);
+    console.log("a2UIListSurfaces failed:", res.error);
   }
 }
 

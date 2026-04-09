@@ -83,7 +83,6 @@ export const Fixed32Rules$inboundSchema: z.ZodType<
   lte: z.nullable(z.number().int()).optional(),
   notIn: z.nullable(z.array(z.number().int())).optional(),
 });
-
 /** @internal */
 export type Fixed32Rules$Outbound = {
   const?: number | null | undefined;
@@ -112,23 +111,9 @@ export const Fixed32Rules$outboundSchema: z.ZodType<
   notIn: z.nullable(z.array(z.number().int())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Fixed32Rules$ {
-  /** @deprecated use `Fixed32Rules$inboundSchema` instead. */
-  export const inboundSchema = Fixed32Rules$inboundSchema;
-  /** @deprecated use `Fixed32Rules$outboundSchema` instead. */
-  export const outboundSchema = Fixed32Rules$outboundSchema;
-  /** @deprecated use `Fixed32Rules$Outbound` instead. */
-  export type Outbound = Fixed32Rules$Outbound;
-}
-
 export function fixed32RulesToJSON(fixed32Rules: Fixed32Rules): string {
   return JSON.stringify(Fixed32Rules$outboundSchema.parse(fixed32Rules));
 }
-
 export function fixed32RulesFromJSON(
   jsonString: string,
 ): SafeParseResult<Fixed32Rules, SDKValidationError> {

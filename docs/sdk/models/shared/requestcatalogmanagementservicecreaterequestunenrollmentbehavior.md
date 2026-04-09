@@ -9,11 +9,11 @@ import { RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior } from
 
 let value: RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior =
   "REQUEST_CATALOG_UNENROLLMENT_BEHAVIOR_REVOKE_UNJUSTIFIED";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "REQUEST_CATALOG_UNENROLLMENT_BEHAVIOR_UNSPECIFIED" | "REQUEST_CATALOG_UNENROLLMENT_BEHAVIOR_LEAVE_ACCESS_AS_IS" | "REQUEST_CATALOG_UNENROLLMENT_BEHAVIOR_REVOKE_ALL" | "REQUEST_CATALOG_UNENROLLMENT_BEHAVIOR_REVOKE_UNJUSTIFIED" | Unrecognized<string>

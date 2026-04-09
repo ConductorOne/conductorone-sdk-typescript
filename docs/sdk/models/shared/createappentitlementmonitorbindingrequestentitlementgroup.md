@@ -9,11 +9,11 @@ import { CreateAppEntitlementMonitorBindingRequestEntitlementGroup } from "condu
 
 let value: CreateAppEntitlementMonitorBindingRequestEntitlementGroup =
   "ENTITLEMENT_GROUP_B";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "ENTITLEMENT_GROUP_UNSPECIFIED" | "ENTITLEMENT_GROUP_A" | "ENTITLEMENT_GROUP_B" | Unrecognized<string>

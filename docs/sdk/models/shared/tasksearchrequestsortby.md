@@ -1,0 +1,19 @@
+# TaskSearchRequestSortBy
+
+Sort tasks in a specific order.
+
+## Example Usage
+
+```typescript
+import { TaskSearchRequestSortBy } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: TaskSearchRequestSortBy = "TASK_SEARCH_SORT_BY_CREATED_AT";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
+```
+
+## Values
+
+```typescript
+"TASK_SEARCH_SORT_BY_UNSPECIFIED" | "TASK_SEARCH_SORT_BY_ACCOUNT" | "TASK_SEARCH_SORT_BY_RESOURCE" | "TASK_SEARCH_SORT_BY_ACCOUNT_OWNER" | "TASK_SEARCH_SORT_BY_REVERSE_TICKET_ID" | "TASK_SEARCH_SORT_BY_TICKET_ID" | "TASK_SEARCH_SORT_BY_CREATED_AT" | "TASK_SEARCH_SORT_BY_REVERSE_CREATED_AT" | "TASK_SEARCH_SORT_BY_APP_RESOURCE_ID_AND_APP_ENTITLEMENT" | Unrecognized<string>
+```

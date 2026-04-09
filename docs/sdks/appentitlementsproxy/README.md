@@ -1,5 +1,4 @@
 # AppEntitlementsProxy
-(*appEntitlementsProxy*)
 
 ## Overview
 

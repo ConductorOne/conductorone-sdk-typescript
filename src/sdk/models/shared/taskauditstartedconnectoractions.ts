@@ -26,43 +26,6 @@ export const TaskAuditStartedConnectorActions$inboundSchema: z.ZodType<
   policyStepId: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditStartedConnectorActions$Outbound = {
-  policyStepId?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditStartedConnectorActions$outboundSchema: z.ZodType<
-  TaskAuditStartedConnectorActions$Outbound,
-  z.ZodTypeDef,
-  TaskAuditStartedConnectorActions
-> = z.object({
-  policyStepId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditStartedConnectorActions$ {
-  /** @deprecated use `TaskAuditStartedConnectorActions$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditStartedConnectorActions$inboundSchema;
-  /** @deprecated use `TaskAuditStartedConnectorActions$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditStartedConnectorActions$outboundSchema;
-  /** @deprecated use `TaskAuditStartedConnectorActions$Outbound` instead. */
-  export type Outbound = TaskAuditStartedConnectorActions$Outbound;
-}
-
-export function taskAuditStartedConnectorActionsToJSON(
-  taskAuditStartedConnectorActions: TaskAuditStartedConnectorActions,
-): string {
-  return JSON.stringify(
-    TaskAuditStartedConnectorActions$outboundSchema.parse(
-      taskAuditStartedConnectorActions,
-    ),
-  );
-}
-
 export function taskAuditStartedConnectorActionsFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditStartedConnectorActions, SDKValidationError> {

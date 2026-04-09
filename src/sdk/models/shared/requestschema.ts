@@ -4,6 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -12,6 +14,21 @@ import {
   FormInput$Outbound,
   FormInput$outboundSchema,
 } from "./forminput.js";
+
+/**
+ * The justificationVisibility field.
+ */
+export const RequestSchemaJustificationVisibility = {
+  JustificationVisibilityUnspecified: "JUSTIFICATION_VISIBILITY_UNSPECIFIED",
+  JustificationVisibilityShow: "JUSTIFICATION_VISIBILITY_SHOW",
+  JustificationVisibilityHide: "JUSTIFICATION_VISIBILITY_HIDE",
+} as const;
+/**
+ * The justificationVisibility field.
+ */
+export type RequestSchemaJustificationVisibility = OpenEnum<
+  typeof RequestSchemaJustificationVisibility
+>;
 
 /**
  * The RequestSchema message.
@@ -24,8 +41,25 @@ export type RequestSchema = {
    * The id field.
    */
   id?: string | null | undefined;
+  /**
+   * The justificationVisibility field.
+   */
+  justificationVisibility?: RequestSchemaJustificationVisibility | undefined;
   modifiedAt?: Date | null | undefined;
 };
+
+/** @internal */
+export const RequestSchemaJustificationVisibility$inboundSchema: z.ZodType<
+  RequestSchemaJustificationVisibility,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(RequestSchemaJustificationVisibility);
+/** @internal */
+export const RequestSchemaJustificationVisibility$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  RequestSchemaJustificationVisibility
+> = openEnums.outboundSchema(RequestSchemaJustificationVisibility);
 
 /** @internal */
 export const RequestSchema$inboundSchema: z.ZodType<
@@ -41,17 +75,19 @@ export const RequestSchema$inboundSchema: z.ZodType<
   ).optional(),
   form: z.nullable(FormInput$inboundSchema).optional(),
   id: z.nullable(z.string()).optional(),
+  justificationVisibility: RequestSchemaJustificationVisibility$inboundSchema
+    .optional(),
   modifiedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
 /** @internal */
 export type RequestSchema$Outbound = {
   createdAt?: string | null | undefined;
   deletedAt?: string | null | undefined;
   form?: FormInput$Outbound | null | undefined;
   id?: string | null | undefined;
+  justificationVisibility?: string | undefined;
   modifiedAt?: string | null | undefined;
 };
 
@@ -65,26 +101,14 @@ export const RequestSchema$outboundSchema: z.ZodType<
   deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   form: z.nullable(FormInput$outboundSchema).optional(),
   id: z.nullable(z.string()).optional(),
+  justificationVisibility: RequestSchemaJustificationVisibility$outboundSchema
+    .optional(),
   modifiedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestSchema$ {
-  /** @deprecated use `RequestSchema$inboundSchema` instead. */
-  export const inboundSchema = RequestSchema$inboundSchema;
-  /** @deprecated use `RequestSchema$outboundSchema` instead. */
-  export const outboundSchema = RequestSchema$outboundSchema;
-  /** @deprecated use `RequestSchema$Outbound` instead. */
-  export type Outbound = RequestSchema$Outbound;
-}
 
 export function requestSchemaToJSON(requestSchema: RequestSchema): string {
   return JSON.stringify(RequestSchema$outboundSchema.parse(requestSchema));
 }
-
 export function requestSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<RequestSchema, SDKValidationError> {

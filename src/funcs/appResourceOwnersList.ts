@@ -103,7 +103,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/api/v1/apps/{app_id}/resource_types/{resource_type_id}/resource/{resource_id}/owners",
   )(pathParams);

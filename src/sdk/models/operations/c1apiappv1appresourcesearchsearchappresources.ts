@@ -49,66 +49,6 @@ export const C1ApiAppV1AppResourceSearchSearchAppResourcesResponse$inboundSchema
     });
   });
 
-/** @internal */
-export type C1ApiAppV1AppResourceSearchSearchAppResourcesResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  SearchAppResourcesResponse?:
-    | shared.SearchAppResourcesResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppResourceSearchSearchAppResourcesResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppResourceSearchSearchAppResourcesResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppResourceSearchSearchAppResourcesResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    searchAppResourcesResponse: shared.SearchAppResourcesResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      searchAppResourcesResponse: "SearchAppResourcesResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppResourceSearchSearchAppResourcesResponse$ {
-  /** @deprecated use `C1ApiAppV1AppResourceSearchSearchAppResourcesResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppResourceSearchSearchAppResourcesResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceSearchSearchAppResourcesResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppResourceSearchSearchAppResourcesResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppResourceSearchSearchAppResourcesResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppResourceSearchSearchAppResourcesResponse$Outbound;
-}
-
-export function c1ApiAppV1AppResourceSearchSearchAppResourcesResponseToJSON(
-  c1ApiAppV1AppResourceSearchSearchAppResourcesResponse:
-    C1ApiAppV1AppResourceSearchSearchAppResourcesResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppResourceSearchSearchAppResourcesResponse$outboundSchema.parse(
-      c1ApiAppV1AppResourceSearchSearchAppResourcesResponse,
-    ),
-  );
-}
-
 export function c1ApiAppV1AppResourceSearchSearchAppResourcesResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

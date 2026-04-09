@@ -3,12 +3,14 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { remap as remap$ } from "../../../lib/primitives.js";
+import {
+  BundleAutomationRuleCEL,
+  BundleAutomationRuleCEL$Outbound,
+  BundleAutomationRuleCEL$outboundSchema,
+} from "./bundleautomationrulecel.js";
 import {
   BundleAutomationRuleEntitlement,
-  BundleAutomationRuleEntitlement$inboundSchema,
   BundleAutomationRuleEntitlement$Outbound,
   BundleAutomationRuleEntitlement$outboundSchema,
 } from "./bundleautomationruleentitlement.js";
@@ -20,8 +22,13 @@ import {
  *
  * This message contains a oneof named conditions. Only a single field of the following list may be set at a time:
  *   - entitlements
+ *   - cel
  */
 export type CreateBundleAutomationRequest = {
+  /**
+   * The BundleAutomationRuleCEL message.
+   */
+  bundleAutomationRuleCEL?: BundleAutomationRuleCEL | null | undefined;
   /**
    * The createTasks field.
    */
@@ -38,20 +45,8 @@ export type CreateBundleAutomationRequest = {
 };
 
 /** @internal */
-export const CreateBundleAutomationRequest$inboundSchema: z.ZodType<
-  CreateBundleAutomationRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  createTasks: z.nullable(z.boolean()).optional(),
-  disableCircuitBreaker: z.nullable(z.boolean()).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  entitlements: z.nullable(BundleAutomationRuleEntitlement$inboundSchema)
-    .optional(),
-});
-
-/** @internal */
 export type CreateBundleAutomationRequest$Outbound = {
+  cel?: BundleAutomationRuleCEL$Outbound | null | undefined;
   createTasks?: boolean | null | undefined;
   disableCircuitBreaker?: boolean | null | undefined;
   enabled?: boolean | null | undefined;
@@ -64,25 +59,18 @@ export const CreateBundleAutomationRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateBundleAutomationRequest
 > = z.object({
+  bundleAutomationRuleCEL: z.nullable(BundleAutomationRuleCEL$outboundSchema)
+    .optional(),
   createTasks: z.nullable(z.boolean()).optional(),
   disableCircuitBreaker: z.nullable(z.boolean()).optional(),
   enabled: z.nullable(z.boolean()).optional(),
   entitlements: z.nullable(BundleAutomationRuleEntitlement$outboundSchema)
     .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    bundleAutomationRuleCEL: "cel",
+  });
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateBundleAutomationRequest$ {
-  /** @deprecated use `CreateBundleAutomationRequest$inboundSchema` instead. */
-  export const inboundSchema = CreateBundleAutomationRequest$inboundSchema;
-  /** @deprecated use `CreateBundleAutomationRequest$outboundSchema` instead. */
-  export const outboundSchema = CreateBundleAutomationRequest$outboundSchema;
-  /** @deprecated use `CreateBundleAutomationRequest$Outbound` instead. */
-  export type Outbound = CreateBundleAutomationRequest$Outbound;
-}
 
 export function createBundleAutomationRequestToJSON(
   createBundleAutomationRequest: CreateBundleAutomationRequest,
@@ -91,15 +79,5 @@ export function createBundleAutomationRequestToJSON(
     CreateBundleAutomationRequest$outboundSchema.parse(
       createBundleAutomationRequest,
     ),
-  );
-}
-
-export function createBundleAutomationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateBundleAutomationRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateBundleAutomationRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateBundleAutomationRequest' from JSON`,
   );
 }

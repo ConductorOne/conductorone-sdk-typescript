@@ -1,5 +1,4 @@
 # AccountProvisionPolicyTest
-(*accountProvisionPolicyTest*)
 
 ## Overview
 

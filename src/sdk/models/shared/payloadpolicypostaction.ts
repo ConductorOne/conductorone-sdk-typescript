@@ -55,7 +55,6 @@ export const PayloadPolicyPostActionExpanded$inboundSchema: z.ZodType<
     "@type": "atType",
   });
 });
-
 /** @internal */
 export type PayloadPolicyPostActionExpanded$Outbound = {
   "@type"?: string | undefined;
@@ -80,19 +79,6 @@ export const PayloadPolicyPostActionExpanded$outboundSchema: z.ZodType<
   };
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayloadPolicyPostActionExpanded$ {
-  /** @deprecated use `PayloadPolicyPostActionExpanded$inboundSchema` instead. */
-  export const inboundSchema = PayloadPolicyPostActionExpanded$inboundSchema;
-  /** @deprecated use `PayloadPolicyPostActionExpanded$outboundSchema` instead. */
-  export const outboundSchema = PayloadPolicyPostActionExpanded$outboundSchema;
-  /** @deprecated use `PayloadPolicyPostActionExpanded$Outbound` instead. */
-  export type Outbound = PayloadPolicyPostActionExpanded$Outbound;
-}
-
 export function payloadPolicyPostActionExpandedToJSON(
   payloadPolicyPostActionExpanded: PayloadPolicyPostActionExpanded,
 ): string {
@@ -102,7 +88,6 @@ export function payloadPolicyPostActionExpandedToJSON(
     ),
   );
 }
-
 export function payloadPolicyPostActionExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<PayloadPolicyPostActionExpanded, SDKValidationError> {
@@ -124,7 +109,6 @@ export const PayloadPolicyPostAction$inboundSchema: z.ZodType<
   ).optional(),
   taskView: z.nullable(TaskView$inboundSchema).optional(),
 });
-
 /** @internal */
 export type PayloadPolicyPostAction$Outbound = {
   expanded?: Array<PayloadPolicyPostActionExpanded$Outbound> | null | undefined;
@@ -143,19 +127,6 @@ export const PayloadPolicyPostAction$outboundSchema: z.ZodType<
   taskView: z.nullable(TaskView$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayloadPolicyPostAction$ {
-  /** @deprecated use `PayloadPolicyPostAction$inboundSchema` instead. */
-  export const inboundSchema = PayloadPolicyPostAction$inboundSchema;
-  /** @deprecated use `PayloadPolicyPostAction$outboundSchema` instead. */
-  export const outboundSchema = PayloadPolicyPostAction$outboundSchema;
-  /** @deprecated use `PayloadPolicyPostAction$Outbound` instead. */
-  export type Outbound = PayloadPolicyPostAction$Outbound;
-}
-
 export function payloadPolicyPostActionToJSON(
   payloadPolicyPostAction: PayloadPolicyPostAction,
 ): string {
@@ -163,7 +134,6 @@ export function payloadPolicyPostActionToJSON(
     PayloadPolicyPostAction$outboundSchema.parse(payloadPolicyPostAction),
   );
 }
-
 export function payloadPolicyPostActionFromJSON(
   jsonString: string,
 ): SafeParseResult<PayloadPolicyPostAction, SDKValidationError> {

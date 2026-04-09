@@ -1,5 +1,4 @@
 # SessionSettings
-(*sessionSettings*)
 
 ## Overview
 

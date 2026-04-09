@@ -3,29 +3,20 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import {
   AppEntitlementExpandMask,
-  AppEntitlementExpandMask$inboundSchema,
   AppEntitlementExpandMask$Outbound,
   AppEntitlementExpandMask$outboundSchema,
 } from "./appentitlementexpandmask.js";
 import {
   AppEntitlementRef,
-  AppEntitlementRef$inboundSchema,
   AppEntitlementRef$Outbound,
   AppEntitlementRef$outboundSchema,
 } from "./appentitlementref.js";
 import {
   PolicyRef,
-  PolicyRef$inboundSchema,
   PolicyRef$Outbound,
   PolicyRef$outboundSchema,
 } from "./policyref.js";
@@ -149,71 +140,11 @@ export type AppEntitlementSearchServiceSearchRequest = {
 };
 
 /** @internal */
-export const MembershipType$inboundSchema: z.ZodType<
-  MembershipType,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(MembershipType),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
 export const MembershipType$outboundSchema: z.ZodType<
-  MembershipType,
+  string,
   z.ZodTypeDef,
   MembershipType
-> = z.union([
-  z.nativeEnum(MembershipType),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace MembershipType$ {
-  /** @deprecated use `MembershipType$inboundSchema` instead. */
-  export const inboundSchema = MembershipType$inboundSchema;
-  /** @deprecated use `MembershipType$outboundSchema` instead. */
-  export const outboundSchema = MembershipType$outboundSchema;
-}
-
-/** @internal */
-export const AppEntitlementSearchServiceSearchRequest$inboundSchema: z.ZodType<
-  AppEntitlementSearchServiceSearchRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  accessReviewId: z.nullable(z.string()).optional(),
-  alias: z.nullable(z.string()).optional(),
-  appIds: z.nullable(z.array(z.string())).optional(),
-  appUserIds: z.nullable(z.array(z.string())).optional(),
-  complianceFrameworkIds: z.nullable(z.array(z.string())).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  excludeAppIds: z.nullable(z.array(z.string())).optional(),
-  excludeAppUserIds: z.nullable(z.array(z.string())).optional(),
-  excludeImmutable: z.nullable(z.boolean()).optional(),
-  excludeResourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  excludedEntitlementRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
-    .optional(),
-  expandMask: z.nullable(AppEntitlementExpandMask$inboundSchema).optional(),
-  includeDeleted: z.nullable(z.boolean()).optional(),
-  isAutomated: z.nullable(z.boolean()).optional(),
-  membershipType: z.nullable(z.array(MembershipType$inboundSchema)).optional(),
-  onlyGetExpiring: z.nullable(z.boolean()).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  policyRefs: z.nullable(z.array(PolicyRef$inboundSchema)).optional(),
-  query: z.nullable(z.string()).optional(),
-  refs: z.nullable(z.array(AppEntitlementRef$inboundSchema)).optional(),
-  resourceIds: z.nullable(z.array(z.string())).optional(),
-  resourceTraitIds: z.nullable(z.array(z.string())).optional(),
-  resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  riskLevelIds: z.nullable(z.array(z.string())).optional(),
-  sourceConnectorId: z.nullable(z.string()).optional(),
-});
+> = openEnums.outboundSchema(MembershipType);
 
 /** @internal */
 export type AppEntitlementSearchServiceSearchRequest$Outbound = {
@@ -283,21 +214,6 @@ export const AppEntitlementSearchServiceSearchRequest$outboundSchema: z.ZodType<
   sourceConnectorId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementSearchServiceSearchRequest$ {
-  /** @deprecated use `AppEntitlementSearchServiceSearchRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    AppEntitlementSearchServiceSearchRequest$inboundSchema;
-  /** @deprecated use `AppEntitlementSearchServiceSearchRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    AppEntitlementSearchServiceSearchRequest$outboundSchema;
-  /** @deprecated use `AppEntitlementSearchServiceSearchRequest$Outbound` instead. */
-  export type Outbound = AppEntitlementSearchServiceSearchRequest$Outbound;
-}
-
 export function appEntitlementSearchServiceSearchRequestToJSON(
   appEntitlementSearchServiceSearchRequest:
     AppEntitlementSearchServiceSearchRequest,
@@ -306,21 +222,5 @@ export function appEntitlementSearchServiceSearchRequestToJSON(
     AppEntitlementSearchServiceSearchRequest$outboundSchema.parse(
       appEntitlementSearchServiceSearchRequest,
     ),
-  );
-}
-
-export function appEntitlementSearchServiceSearchRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  AppEntitlementSearchServiceSearchRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      AppEntitlementSearchServiceSearchRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'AppEntitlementSearchServiceSearchRequest' from JSON`,
   );
 }

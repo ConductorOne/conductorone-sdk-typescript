@@ -13,8 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppResourceType,
   AppResourceType$inboundSchema,
-  AppResourceType$Outbound,
-  AppResourceType$outboundSchema,
 } from "./appresourcetype.js";
 
 /**
@@ -60,58 +58,6 @@ export const CreateManuallyManagedResourceTypeResponseExpanded$inboundSchema:
     });
   });
 
-/** @internal */
-export type CreateManuallyManagedResourceTypeResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const CreateManuallyManagedResourceTypeResponseExpanded$outboundSchema:
-  z.ZodType<
-    CreateManuallyManagedResourceTypeResponseExpanded$Outbound,
-    z.ZodTypeDef,
-    CreateManuallyManagedResourceTypeResponseExpanded
-  > = z.object({
-    atType: z.string().optional(),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        atType: "@type",
-        additionalProperties: null,
-      }),
-    };
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateManuallyManagedResourceTypeResponseExpanded$ {
-  /** @deprecated use `CreateManuallyManagedResourceTypeResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateManuallyManagedResourceTypeResponseExpanded$inboundSchema;
-  /** @deprecated use `CreateManuallyManagedResourceTypeResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateManuallyManagedResourceTypeResponseExpanded$outboundSchema;
-  /** @deprecated use `CreateManuallyManagedResourceTypeResponseExpanded$Outbound` instead. */
-  export type Outbound =
-    CreateManuallyManagedResourceTypeResponseExpanded$Outbound;
-}
-
-export function createManuallyManagedResourceTypeResponseExpandedToJSON(
-  createManuallyManagedResourceTypeResponseExpanded:
-    CreateManuallyManagedResourceTypeResponseExpanded,
-): string {
-  return JSON.stringify(
-    CreateManuallyManagedResourceTypeResponseExpanded$outboundSchema.parse(
-      createManuallyManagedResourceTypeResponseExpanded,
-    ),
-  );
-}
-
 export function createManuallyManagedResourceTypeResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -141,56 +87,6 @@ export const CreateManuallyManagedResourceTypeResponse$inboundSchema: z.ZodType<
     )),
   ).optional(),
 });
-
-/** @internal */
-export type CreateManuallyManagedResourceTypeResponse$Outbound = {
-  appResourceType?: AppResourceType$Outbound | null | undefined;
-  expanded?:
-    | Array<CreateManuallyManagedResourceTypeResponseExpanded$Outbound>
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const CreateManuallyManagedResourceTypeResponse$outboundSchema:
-  z.ZodType<
-    CreateManuallyManagedResourceTypeResponse$Outbound,
-    z.ZodTypeDef,
-    CreateManuallyManagedResourceTypeResponse
-  > = z.object({
-    appResourceType: z.nullable(AppResourceType$outboundSchema).optional(),
-    expanded: z.nullable(
-      z.array(z.lazy(() =>
-        CreateManuallyManagedResourceTypeResponseExpanded$outboundSchema
-      )),
-    ).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateManuallyManagedResourceTypeResponse$ {
-  /** @deprecated use `CreateManuallyManagedResourceTypeResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateManuallyManagedResourceTypeResponse$inboundSchema;
-  /** @deprecated use `CreateManuallyManagedResourceTypeResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateManuallyManagedResourceTypeResponse$outboundSchema;
-  /** @deprecated use `CreateManuallyManagedResourceTypeResponse$Outbound` instead. */
-  export type Outbound = CreateManuallyManagedResourceTypeResponse$Outbound;
-}
-
-export function createManuallyManagedResourceTypeResponseToJSON(
-  createManuallyManagedResourceTypeResponse:
-    CreateManuallyManagedResourceTypeResponse,
-): string {
-  return JSON.stringify(
-    CreateManuallyManagedResourceTypeResponse$outboundSchema.parse(
-      createManuallyManagedResourceTypeResponse,
-    ),
-  );
-}
 
 export function createManuallyManagedResourceTypeResponseFromJSON(
   jsonString: string,

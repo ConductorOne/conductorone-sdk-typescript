@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   RequestSchema,
-  RequestSchema$inboundSchema,
   RequestSchema$Outbound,
   RequestSchema$outboundSchema,
 } from "./requestschema.js";
@@ -20,16 +16,6 @@ export type RequestSchemaServiceUpdateRequest = {
   requestSchema?: RequestSchema | null | undefined;
   updateMask?: string | null | undefined;
 };
-
-/** @internal */
-export const RequestSchemaServiceUpdateRequest$inboundSchema: z.ZodType<
-  RequestSchemaServiceUpdateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  requestSchema: z.nullable(RequestSchema$inboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type RequestSchemaServiceUpdateRequest$Outbound = {
@@ -47,20 +33,6 @@ export const RequestSchemaServiceUpdateRequest$outboundSchema: z.ZodType<
   updateMask: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestSchemaServiceUpdateRequest$ {
-  /** @deprecated use `RequestSchemaServiceUpdateRequest$inboundSchema` instead. */
-  export const inboundSchema = RequestSchemaServiceUpdateRequest$inboundSchema;
-  /** @deprecated use `RequestSchemaServiceUpdateRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestSchemaServiceUpdateRequest$outboundSchema;
-  /** @deprecated use `RequestSchemaServiceUpdateRequest$Outbound` instead. */
-  export type Outbound = RequestSchemaServiceUpdateRequest$Outbound;
-}
-
 export function requestSchemaServiceUpdateRequestToJSON(
   requestSchemaServiceUpdateRequest: RequestSchemaServiceUpdateRequest,
 ): string {
@@ -68,15 +40,5 @@ export function requestSchemaServiceUpdateRequestToJSON(
     RequestSchemaServiceUpdateRequest$outboundSchema.parse(
       requestSchemaServiceUpdateRequest,
     ),
-  );
-}
-
-export function requestSchemaServiceUpdateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<RequestSchemaServiceUpdateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RequestSchemaServiceUpdateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RequestSchemaServiceUpdateRequest' from JSON`,
   );
 }

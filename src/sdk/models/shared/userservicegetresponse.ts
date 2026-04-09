@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  UserView,
-  UserView$inboundSchema,
-  UserView$Outbound,
-  UserView$outboundSchema,
-} from "./userview.js";
+import { UserView, UserView$inboundSchema } from "./userview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -56,53 +51,6 @@ export const UserServiceGetResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type UserServiceGetResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const UserServiceGetResponseExpanded$outboundSchema: z.ZodType<
-  UserServiceGetResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  UserServiceGetResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UserServiceGetResponseExpanded$ {
-  /** @deprecated use `UserServiceGetResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema = UserServiceGetResponseExpanded$inboundSchema;
-  /** @deprecated use `UserServiceGetResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema = UserServiceGetResponseExpanded$outboundSchema;
-  /** @deprecated use `UserServiceGetResponseExpanded$Outbound` instead. */
-  export type Outbound = UserServiceGetResponseExpanded$Outbound;
-}
-
-export function userServiceGetResponseExpandedToJSON(
-  userServiceGetResponseExpanded: UserServiceGetResponseExpanded,
-): string {
-  return JSON.stringify(
-    UserServiceGetResponseExpanded$outboundSchema.parse(
-      userServiceGetResponseExpanded,
-    ),
-  );
-}
-
 export function userServiceGetResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<UserServiceGetResponseExpanded, SDKValidationError> {
@@ -124,45 +72,6 @@ export const UserServiceGetResponse$inboundSchema: z.ZodType<
   ).optional(),
   userView: z.nullable(UserView$inboundSchema).optional(),
 });
-
-/** @internal */
-export type UserServiceGetResponse$Outbound = {
-  expanded?: Array<UserServiceGetResponseExpanded$Outbound> | null | undefined;
-  userView?: UserView$Outbound | null | undefined;
-};
-
-/** @internal */
-export const UserServiceGetResponse$outboundSchema: z.ZodType<
-  UserServiceGetResponse$Outbound,
-  z.ZodTypeDef,
-  UserServiceGetResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() => UserServiceGetResponseExpanded$outboundSchema)),
-  ).optional(),
-  userView: z.nullable(UserView$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UserServiceGetResponse$ {
-  /** @deprecated use `UserServiceGetResponse$inboundSchema` instead. */
-  export const inboundSchema = UserServiceGetResponse$inboundSchema;
-  /** @deprecated use `UserServiceGetResponse$outboundSchema` instead. */
-  export const outboundSchema = UserServiceGetResponse$outboundSchema;
-  /** @deprecated use `UserServiceGetResponse$Outbound` instead. */
-  export type Outbound = UserServiceGetResponse$Outbound;
-}
-
-export function userServiceGetResponseToJSON(
-  userServiceGetResponse: UserServiceGetResponse,
-): string {
-  return JSON.stringify(
-    UserServiceGetResponse$outboundSchema.parse(userServiceGetResponse),
-  );
-}
 
 export function userServiceGetResponseFromJSON(
   jsonString: string,

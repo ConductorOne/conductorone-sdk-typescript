@@ -27,41 +27,6 @@ export const ExecuteAutomationResponse$inboundSchema: z.ZodType<
     .optional(),
 });
 
-/** @internal */
-export type ExecuteAutomationResponse$Outbound = {
-  executionId?: string | null | undefined;
-};
-
-/** @internal */
-export const ExecuteAutomationResponse$outboundSchema: z.ZodType<
-  ExecuteAutomationResponse$Outbound,
-  z.ZodTypeDef,
-  ExecuteAutomationResponse
-> = z.object({
-  executionId: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExecuteAutomationResponse$ {
-  /** @deprecated use `ExecuteAutomationResponse$inboundSchema` instead. */
-  export const inboundSchema = ExecuteAutomationResponse$inboundSchema;
-  /** @deprecated use `ExecuteAutomationResponse$outboundSchema` instead. */
-  export const outboundSchema = ExecuteAutomationResponse$outboundSchema;
-  /** @deprecated use `ExecuteAutomationResponse$Outbound` instead. */
-  export type Outbound = ExecuteAutomationResponse$Outbound;
-}
-
-export function executeAutomationResponseToJSON(
-  executeAutomationResponse: ExecuteAutomationResponse,
-): string {
-  return JSON.stringify(
-    ExecuteAutomationResponse$outboundSchema.parse(executeAutomationResponse),
-  );
-}
-
 export function executeAutomationResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<ExecuteAutomationResponse, SDKValidationError> {

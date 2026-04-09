@@ -13,8 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementUserBindingHistoryView,
   AppEntitlementUserBindingHistoryView$inboundSchema,
-  AppEntitlementUserBindingHistoryView$Outbound,
-  AppEntitlementUserBindingHistoryView$outboundSchema,
 } from "./appentitlementuserbindinghistoryview.js";
 
 /**
@@ -67,53 +65,6 @@ export const SearchPastGrantsResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type SearchPastGrantsResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const SearchPastGrantsResponseExpanded$outboundSchema: z.ZodType<
-  SearchPastGrantsResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  SearchPastGrantsResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchPastGrantsResponseExpanded$ {
-  /** @deprecated use `SearchPastGrantsResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema = SearchPastGrantsResponseExpanded$inboundSchema;
-  /** @deprecated use `SearchPastGrantsResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema = SearchPastGrantsResponseExpanded$outboundSchema;
-  /** @deprecated use `SearchPastGrantsResponseExpanded$Outbound` instead. */
-  export type Outbound = SearchPastGrantsResponseExpanded$Outbound;
-}
-
-export function searchPastGrantsResponseExpandedToJSON(
-  searchPastGrantsResponseExpanded: SearchPastGrantsResponseExpanded,
-): string {
-  return JSON.stringify(
-    SearchPastGrantsResponseExpanded$outboundSchema.parse(
-      searchPastGrantsResponseExpanded,
-    ),
-  );
-}
-
 export function searchPastGrantsResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchPastGrantsResponseExpanded, SDKValidationError> {
@@ -137,54 +88,6 @@ export const SearchPastGrantsResponse$inboundSchema: z.ZodType<
     .optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type SearchPastGrantsResponse$Outbound = {
-  expanded?:
-    | Array<SearchPastGrantsResponseExpanded$Outbound>
-    | null
-    | undefined;
-  list?:
-    | Array<AppEntitlementUserBindingHistoryView$Outbound>
-    | null
-    | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const SearchPastGrantsResponse$outboundSchema: z.ZodType<
-  SearchPastGrantsResponse$Outbound,
-  z.ZodTypeDef,
-  SearchPastGrantsResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() => SearchPastGrantsResponseExpanded$outboundSchema)),
-  ).optional(),
-  list: z.nullable(z.array(AppEntitlementUserBindingHistoryView$outboundSchema))
-    .optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchPastGrantsResponse$ {
-  /** @deprecated use `SearchPastGrantsResponse$inboundSchema` instead. */
-  export const inboundSchema = SearchPastGrantsResponse$inboundSchema;
-  /** @deprecated use `SearchPastGrantsResponse$outboundSchema` instead. */
-  export const outboundSchema = SearchPastGrantsResponse$outboundSchema;
-  /** @deprecated use `SearchPastGrantsResponse$Outbound` instead. */
-  export type Outbound = SearchPastGrantsResponse$Outbound;
-}
-
-export function searchPastGrantsResponseToJSON(
-  searchPastGrantsResponse: SearchPastGrantsResponse,
-): string {
-  return JSON.stringify(
-    SearchPastGrantsResponse$outboundSchema.parse(searchPastGrantsResponse),
-  );
-}
 
 export function searchPastGrantsResponseFromJSON(
   jsonString: string,

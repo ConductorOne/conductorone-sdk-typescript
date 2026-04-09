@@ -98,7 +98,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/api/v1/tasks/{task_id}/action/approve-with-step-up",
   )(pathParams);

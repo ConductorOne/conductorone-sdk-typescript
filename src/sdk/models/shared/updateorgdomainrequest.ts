@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The UpdateOrgDomainRequest message.
@@ -16,15 +13,6 @@ export type UpdateOrgDomainRequest = {
    */
   newDomains?: Array<string> | null | undefined;
 };
-
-/** @internal */
-export const UpdateOrgDomainRequest$inboundSchema: z.ZodType<
-  UpdateOrgDomainRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  newDomains: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type UpdateOrgDomainRequest$Outbound = {
@@ -40,33 +28,10 @@ export const UpdateOrgDomainRequest$outboundSchema: z.ZodType<
   newDomains: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateOrgDomainRequest$ {
-  /** @deprecated use `UpdateOrgDomainRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdateOrgDomainRequest$inboundSchema;
-  /** @deprecated use `UpdateOrgDomainRequest$outboundSchema` instead. */
-  export const outboundSchema = UpdateOrgDomainRequest$outboundSchema;
-  /** @deprecated use `UpdateOrgDomainRequest$Outbound` instead. */
-  export type Outbound = UpdateOrgDomainRequest$Outbound;
-}
-
 export function updateOrgDomainRequestToJSON(
   updateOrgDomainRequest: UpdateOrgDomainRequest,
 ): string {
   return JSON.stringify(
     UpdateOrgDomainRequest$outboundSchema.parse(updateOrgDomainRequest),
-  );
-}
-
-export function updateOrgDomainRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateOrgDomainRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateOrgDomainRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateOrgDomainRequest' from JSON`,
   );
 }

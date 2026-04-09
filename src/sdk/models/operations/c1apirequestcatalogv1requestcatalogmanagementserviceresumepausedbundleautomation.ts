@@ -40,24 +40,6 @@ export type C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBund
   };
 
 /** @internal */
-export const C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest$inboundSchema:
-  z.ZodType<
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    request_catalog_id: z.nullable(z.string()),
-    ResumePausedBundleAutomationRequest: shared
-      .ResumePausedBundleAutomationRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "request_catalog_id": "requestCatalogId",
-      "ResumePausedBundleAutomationRequest":
-        "resumePausedBundleAutomationRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest$Outbound =
   {
     request_catalog_id: string | null;
@@ -84,22 +66,6 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBun
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest$ {
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest$inboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest$outboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest$Outbound;
-}
-
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequestToJSON(
   c1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest:
     C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest,
@@ -109,21 +75,6 @@ export function c1ApiRequestcatalogV1RequestCatalogManagementServiceResumePaused
       .parse(
         c1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest,
       ),
-  );
-}
-
-export function c1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest' from JSON`,
   );
 }
 
@@ -148,69 +99,6 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBun
         "resumePausedBundleAutomationResponse",
     });
   });
-
-/** @internal */
-export type C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    ResumePausedBundleAutomationResponse?:
-      | shared.ResumePausedBundleAutomationResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationResponse$outboundSchema:
-  z.ZodType<
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    resumePausedBundleAutomationResponse: shared
-      .ResumePausedBundleAutomationResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      resumePausedBundleAutomationResponse:
-        "ResumePausedBundleAutomationResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationResponse$ {
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationResponse$inboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationResponse$outboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationResponse$Outbound;
-}
-
-export function c1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationResponseToJSON(
-  c1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationResponse:
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationResponse,
-): string {
-  return JSON.stringify(
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationResponse$outboundSchema
-      .parse(
-        c1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationResponse,
-      ),
-  );
-}
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationResponseFromJSON(
   jsonString: string,

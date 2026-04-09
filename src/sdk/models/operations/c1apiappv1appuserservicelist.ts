@@ -35,23 +35,6 @@ export type C1ApiAppV1AppUserServiceListResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppUserServiceListRequest$inboundSchema: z.ZodType<
-  C1ApiAppV1AppUserServiceListRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  app_id: z.nullable(z.string()),
-  page_size: z.nullable(z.number().int()).optional(),
-  page_token: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "app_id": "appId",
-    "page_size": "pageSize",
-    "page_token": "pageToken",
-  });
-});
-
-/** @internal */
 export type C1ApiAppV1AppUserServiceListRequest$Outbound = {
   app_id: string | null;
   page_size?: number | null | undefined;
@@ -75,21 +58,6 @@ export const C1ApiAppV1AppUserServiceListRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppUserServiceListRequest$ {
-  /** @deprecated use `C1ApiAppV1AppUserServiceListRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppUserServiceListRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppUserServiceListRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppUserServiceListRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppUserServiceListRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppUserServiceListRequest$Outbound;
-}
-
 export function c1ApiAppV1AppUserServiceListRequestToJSON(
   c1ApiAppV1AppUserServiceListRequest: C1ApiAppV1AppUserServiceListRequest,
 ): string {
@@ -97,17 +65,6 @@ export function c1ApiAppV1AppUserServiceListRequestToJSON(
     C1ApiAppV1AppUserServiceListRequest$outboundSchema.parse(
       c1ApiAppV1AppUserServiceListRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppUserServiceListRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<C1ApiAppV1AppUserServiceListRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppUserServiceListRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppUserServiceListRequest' from JSON`,
   );
 }
 
@@ -130,63 +87,6 @@ export const C1ApiAppV1AppUserServiceListResponse$inboundSchema: z.ZodType<
     "AppUserServiceListResponse": "appUserServiceListResponse",
   });
 });
-
-/** @internal */
-export type C1ApiAppV1AppUserServiceListResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  AppUserServiceListResponse?:
-    | shared.AppUserServiceListResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppUserServiceListResponse$outboundSchema: z.ZodType<
-  C1ApiAppV1AppUserServiceListResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiAppV1AppUserServiceListResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  appUserServiceListResponse: shared.AppUserServiceListResponse$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    appUserServiceListResponse: "AppUserServiceListResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppUserServiceListResponse$ {
-  /** @deprecated use `C1ApiAppV1AppUserServiceListResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppUserServiceListResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppUserServiceListResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppUserServiceListResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppUserServiceListResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppUserServiceListResponse$Outbound;
-}
-
-export function c1ApiAppV1AppUserServiceListResponseToJSON(
-  c1ApiAppV1AppUserServiceListResponse: C1ApiAppV1AppUserServiceListResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppUserServiceListResponse$outboundSchema.parse(
-      c1ApiAppV1AppUserServiceListResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppUserServiceListResponseFromJSON(
   jsonString: string,

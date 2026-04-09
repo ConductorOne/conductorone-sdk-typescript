@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  EditorMarker,
-  EditorMarker$inboundSchema,
-  EditorMarker$Outbound,
-  EditorMarker$outboundSchema,
-} from "./editormarker.js";
+import { EditorMarker, EditorMarker$inboundSchema } from "./editormarker.js";
 
 /**
  * The EditorValidateResponse message.
@@ -31,41 +26,6 @@ export const EditorValidateResponse$inboundSchema: z.ZodType<
 > = z.object({
   markers: z.nullable(z.array(EditorMarker$inboundSchema)).optional(),
 });
-
-/** @internal */
-export type EditorValidateResponse$Outbound = {
-  markers?: Array<EditorMarker$Outbound> | null | undefined;
-};
-
-/** @internal */
-export const EditorValidateResponse$outboundSchema: z.ZodType<
-  EditorValidateResponse$Outbound,
-  z.ZodTypeDef,
-  EditorValidateResponse
-> = z.object({
-  markers: z.nullable(z.array(EditorMarker$outboundSchema)).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EditorValidateResponse$ {
-  /** @deprecated use `EditorValidateResponse$inboundSchema` instead. */
-  export const inboundSchema = EditorValidateResponse$inboundSchema;
-  /** @deprecated use `EditorValidateResponse$outboundSchema` instead. */
-  export const outboundSchema = EditorValidateResponse$outboundSchema;
-  /** @deprecated use `EditorValidateResponse$Outbound` instead. */
-  export type Outbound = EditorValidateResponse$Outbound;
-}
-
-export function editorValidateResponseToJSON(
-  editorValidateResponse: EditorValidateResponse,
-): string {
-  return JSON.stringify(
-    EditorValidateResponse$outboundSchema.parse(editorValidateResponse),
-  );
-}
 
 export function editorValidateResponseFromJSON(
   jsonString: string,

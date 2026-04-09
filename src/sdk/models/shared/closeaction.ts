@@ -48,7 +48,6 @@ export const CloseAction$inboundSchema: z.ZodType<
   userIdCel: z.nullable(z.string()).optional(),
   userRef: z.nullable(UserRef$inboundSchema).optional(),
 });
-
 /** @internal */
 export type CloseAction$Outbound = {
   useSubjectUser?: boolean | null | undefined;
@@ -67,23 +66,9 @@ export const CloseAction$outboundSchema: z.ZodType<
   userRef: z.nullable(UserRef$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CloseAction$ {
-  /** @deprecated use `CloseAction$inboundSchema` instead. */
-  export const inboundSchema = CloseAction$inboundSchema;
-  /** @deprecated use `CloseAction$outboundSchema` instead. */
-  export const outboundSchema = CloseAction$outboundSchema;
-  /** @deprecated use `CloseAction$Outbound` instead. */
-  export type Outbound = CloseAction$Outbound;
-}
-
 export function closeActionToJSON(closeAction: CloseAction): string {
   return JSON.stringify(CloseAction$outboundSchema.parse(closeAction));
 }
-
 export function closeActionFromJSON(
   jsonString: string,
 ): SafeParseResult<CloseAction, SDKValidationError> {

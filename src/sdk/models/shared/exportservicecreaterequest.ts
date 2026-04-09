@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ExportToDatasource,
-  ExportToDatasource$inboundSchema,
   ExportToDatasource$Outbound,
   ExportToDatasource$outboundSchema,
 } from "./exporttodatasource.js";
@@ -30,16 +26,6 @@ export type ExportServiceCreateRequest = {
 };
 
 /** @internal */
-export const ExportServiceCreateRequest$inboundSchema: z.ZodType<
-  ExportServiceCreateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  datasource: z.nullable(ExportToDatasource$inboundSchema).optional(),
-  displayName: z.nullable(z.string()).optional(),
-});
-
-/** @internal */
 export type ExportServiceCreateRequest$Outbound = {
   datasource?: ExportToDatasource$Outbound | null | undefined;
   displayName?: string | null | undefined;
@@ -55,33 +41,10 @@ export const ExportServiceCreateRequest$outboundSchema: z.ZodType<
   displayName: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExportServiceCreateRequest$ {
-  /** @deprecated use `ExportServiceCreateRequest$inboundSchema` instead. */
-  export const inboundSchema = ExportServiceCreateRequest$inboundSchema;
-  /** @deprecated use `ExportServiceCreateRequest$outboundSchema` instead. */
-  export const outboundSchema = ExportServiceCreateRequest$outboundSchema;
-  /** @deprecated use `ExportServiceCreateRequest$Outbound` instead. */
-  export type Outbound = ExportServiceCreateRequest$Outbound;
-}
-
 export function exportServiceCreateRequestToJSON(
   exportServiceCreateRequest: ExportServiceCreateRequest,
 ): string {
   return JSON.stringify(
     ExportServiceCreateRequest$outboundSchema.parse(exportServiceCreateRequest),
-  );
-}
-
-export function exportServiceCreateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ExportServiceCreateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ExportServiceCreateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ExportServiceCreateRequest' from JSON`,
   );
 }

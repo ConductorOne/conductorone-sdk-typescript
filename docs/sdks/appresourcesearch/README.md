@@ -1,5 +1,4 @@
 # AppResourceSearch
-(*appResourceSearch*)
 
 ## Overview
 

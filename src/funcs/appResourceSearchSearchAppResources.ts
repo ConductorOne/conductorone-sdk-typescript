@@ -217,7 +217,7 @@ async function $do(
       appResourceSearchSearchAppResources(
         client,
         {
-          ...request,
+          ...request!,
           pageToken: nextCursor,
         },
         options,

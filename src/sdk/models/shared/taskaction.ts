@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -72,64 +69,26 @@ export const TaskTypes$inboundSchema: z.ZodType<
   TaskTypes,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(TaskTypes),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(TaskTypes);
 /** @internal */
 export const TaskTypes$outboundSchema: z.ZodType<
-  TaskTypes,
+  string,
   z.ZodTypeDef,
   TaskTypes
-> = z.union([
-  z.nativeEnum(TaskTypes),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskTypes$ {
-  /** @deprecated use `TaskTypes$inboundSchema` instead. */
-  export const inboundSchema = TaskTypes$inboundSchema;
-  /** @deprecated use `TaskTypes$outboundSchema` instead. */
-  export const outboundSchema = TaskTypes$outboundSchema;
-}
+> = openEnums.outboundSchema(TaskTypes);
 
 /** @internal */
 export const TaskUserRelation$inboundSchema: z.ZodType<
   TaskUserRelation,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(TaskUserRelation),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(TaskUserRelation);
 /** @internal */
 export const TaskUserRelation$outboundSchema: z.ZodType<
-  TaskUserRelation,
+  string,
   z.ZodTypeDef,
   TaskUserRelation
-> = z.union([
-  z.nativeEnum(TaskUserRelation),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskUserRelation$ {
-  /** @deprecated use `TaskUserRelation$inboundSchema` instead. */
-  export const inboundSchema = TaskUserRelation$inboundSchema;
-  /** @deprecated use `TaskUserRelation$outboundSchema` instead. */
-  export const outboundSchema = TaskUserRelation$outboundSchema;
-}
+> = openEnums.outboundSchema(TaskUserRelation);
 
 /** @internal */
 export const TaskAction$inboundSchema: z.ZodType<
@@ -142,7 +101,6 @@ export const TaskAction$inboundSchema: z.ZodType<
   taskTypes: z.nullable(z.array(TaskTypes$inboundSchema)).optional(),
   taskUserRelation: z.nullable(TaskUserRelation$inboundSchema).optional(),
 });
-
 /** @internal */
 export type TaskAction$Outbound = {
   close?: CloseAction$Outbound | null | undefined;
@@ -163,23 +121,9 @@ export const TaskAction$outboundSchema: z.ZodType<
   taskUserRelation: z.nullable(TaskUserRelation$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAction$ {
-  /** @deprecated use `TaskAction$inboundSchema` instead. */
-  export const inboundSchema = TaskAction$inboundSchema;
-  /** @deprecated use `TaskAction$outboundSchema` instead. */
-  export const outboundSchema = TaskAction$outboundSchema;
-  /** @deprecated use `TaskAction$Outbound` instead. */
-  export type Outbound = TaskAction$Outbound;
-}
-
 export function taskActionToJSON(taskAction: TaskAction): string {
   return JSON.stringify(TaskAction$outboundSchema.parse(taskAction));
 }
-
 export function taskActionFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAction, SDKValidationError> {

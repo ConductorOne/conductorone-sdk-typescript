@@ -13,6 +13,12 @@ import {
   AtLeastOne$outboundSchema,
 } from "./atleastone.js";
 import {
+  DependentOn,
+  DependentOn$inboundSchema,
+  DependentOn$Outbound,
+  DependentOn$outboundSchema,
+} from "./dependenton.js";
+import {
   MutuallyExclusive,
   MutuallyExclusive$inboundSchema,
   MutuallyExclusive$Outbound,
@@ -35,9 +41,17 @@ import {
  *   - requiredTogether
  *   - atLeastOne
  *   - mutuallyExclusive
+ *   - dependentOn
  */
 export type FieldRelationship = {
   atLeastOne?: AtLeastOne | null | undefined;
+  /**
+   * DependentOn means the fields in field_names are only valid if all fields
+   *
+   * @remarks
+   *  in dependency_field_names are also present
+   */
+  dependentOn?: DependentOn | null | undefined;
   /**
    * The names of the fields that share this relationship
    */
@@ -53,14 +67,15 @@ export const FieldRelationship$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   atLeastOne: z.nullable(AtLeastOne$inboundSchema).optional(),
+  dependentOn: z.nullable(DependentOn$inboundSchema).optional(),
   fieldNames: z.nullable(z.array(z.string())).optional(),
   mutuallyExclusive: z.nullable(MutuallyExclusive$inboundSchema).optional(),
   requiredTogether: z.nullable(RequiredTogether$inboundSchema).optional(),
 });
-
 /** @internal */
 export type FieldRelationship$Outbound = {
   atLeastOne?: AtLeastOne$Outbound | null | undefined;
+  dependentOn?: DependentOn$Outbound | null | undefined;
   fieldNames?: Array<string> | null | undefined;
   mutuallyExclusive?: MutuallyExclusive$Outbound | null | undefined;
   requiredTogether?: RequiredTogether$Outbound | null | undefined;
@@ -73,23 +88,11 @@ export const FieldRelationship$outboundSchema: z.ZodType<
   FieldRelationship
 > = z.object({
   atLeastOne: z.nullable(AtLeastOne$outboundSchema).optional(),
+  dependentOn: z.nullable(DependentOn$outboundSchema).optional(),
   fieldNames: z.nullable(z.array(z.string())).optional(),
   mutuallyExclusive: z.nullable(MutuallyExclusive$outboundSchema).optional(),
   requiredTogether: z.nullable(RequiredTogether$outboundSchema).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FieldRelationship$ {
-  /** @deprecated use `FieldRelationship$inboundSchema` instead. */
-  export const inboundSchema = FieldRelationship$inboundSchema;
-  /** @deprecated use `FieldRelationship$outboundSchema` instead. */
-  export const outboundSchema = FieldRelationship$outboundSchema;
-  /** @deprecated use `FieldRelationship$Outbound` instead. */
-  export type Outbound = FieldRelationship$Outbound;
-}
 
 export function fieldRelationshipToJSON(
   fieldRelationship: FieldRelationship,
@@ -98,7 +101,6 @@ export function fieldRelationshipToJSON(
     FieldRelationship$outboundSchema.parse(fieldRelationship),
   );
 }
-
 export function fieldRelationshipFromJSON(
   jsonString: string,
 ): SafeParseResult<FieldRelationship, SDKValidationError> {

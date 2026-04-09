@@ -71,61 +71,6 @@ export const ConnectorCredential$inboundSchema: z.ZodType<
   ).optional(),
 });
 
-/** @internal */
-export type ConnectorCredential$Outbound = {
-  appId?: string | null | undefined;
-  clientId?: string | null | undefined;
-  clientSecret?: string | null | undefined;
-  connectorId?: string | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  displayName?: string | null | undefined;
-  expiresTime?: string | null | undefined;
-  id?: string | null | undefined;
-  lastUsedAt?: string | null | undefined;
-  updatedAt?: string | null | undefined;
-};
-
-/** @internal */
-export const ConnectorCredential$outboundSchema: z.ZodType<
-  ConnectorCredential$Outbound,
-  z.ZodTypeDef,
-  ConnectorCredential
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  clientId: z.nullable(z.string()).optional(),
-  clientSecret: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  expiresTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  id: z.nullable(z.string()).optional(),
-  lastUsedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorCredential$ {
-  /** @deprecated use `ConnectorCredential$inboundSchema` instead. */
-  export const inboundSchema = ConnectorCredential$inboundSchema;
-  /** @deprecated use `ConnectorCredential$outboundSchema` instead. */
-  export const outboundSchema = ConnectorCredential$outboundSchema;
-  /** @deprecated use `ConnectorCredential$Outbound` instead. */
-  export type Outbound = ConnectorCredential$Outbound;
-}
-
-export function connectorCredentialToJSON(
-  connectorCredential: ConnectorCredential,
-): string {
-  return JSON.stringify(
-    ConnectorCredential$outboundSchema.parse(connectorCredential),
-  );
-}
-
 export function connectorCredentialFromJSON(
   jsonString: string,
 ): SafeParseResult<ConnectorCredential, SDKValidationError> {

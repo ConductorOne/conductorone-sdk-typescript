@@ -34,20 +34,6 @@ export type C1ApiPolicyV1PoliciesDeleteResponse = {
 };
 
 /** @internal */
-export const C1ApiPolicyV1PoliciesDeleteRequest$inboundSchema: z.ZodType<
-  C1ApiPolicyV1PoliciesDeleteRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.nullable(z.string()),
-  DeletePolicyRequest: shared.DeletePolicyRequest$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "DeletePolicyRequest": "deletePolicyRequest",
-  });
-});
-
-/** @internal */
 export type C1ApiPolicyV1PoliciesDeleteRequest$Outbound = {
   id: string | null;
   DeletePolicyRequest?: shared.DeletePolicyRequest$Outbound | undefined;
@@ -67,20 +53,6 @@ export const C1ApiPolicyV1PoliciesDeleteRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiPolicyV1PoliciesDeleteRequest$ {
-  /** @deprecated use `C1ApiPolicyV1PoliciesDeleteRequest$inboundSchema` instead. */
-  export const inboundSchema = C1ApiPolicyV1PoliciesDeleteRequest$inboundSchema;
-  /** @deprecated use `C1ApiPolicyV1PoliciesDeleteRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiPolicyV1PoliciesDeleteRequest$outboundSchema;
-  /** @deprecated use `C1ApiPolicyV1PoliciesDeleteRequest$Outbound` instead. */
-  export type Outbound = C1ApiPolicyV1PoliciesDeleteRequest$Outbound;
-}
-
 export function c1ApiPolicyV1PoliciesDeleteRequestToJSON(
   c1ApiPolicyV1PoliciesDeleteRequest: C1ApiPolicyV1PoliciesDeleteRequest,
 ): string {
@@ -88,17 +60,6 @@ export function c1ApiPolicyV1PoliciesDeleteRequestToJSON(
     C1ApiPolicyV1PoliciesDeleteRequest$outboundSchema.parse(
       c1ApiPolicyV1PoliciesDeleteRequest,
     ),
-  );
-}
-
-export function c1ApiPolicyV1PoliciesDeleteRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<C1ApiPolicyV1PoliciesDeleteRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiPolicyV1PoliciesDeleteRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiPolicyV1PoliciesDeleteRequest' from JSON`,
   );
 }
 
@@ -120,60 +81,6 @@ export const C1ApiPolicyV1PoliciesDeleteResponse$inboundSchema: z.ZodType<
     "DeletePolicyResponse": "deletePolicyResponse",
   });
 });
-
-/** @internal */
-export type C1ApiPolicyV1PoliciesDeleteResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  DeletePolicyResponse?: shared.DeletePolicyResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiPolicyV1PoliciesDeleteResponse$outboundSchema: z.ZodType<
-  C1ApiPolicyV1PoliciesDeleteResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiPolicyV1PoliciesDeleteResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  deletePolicyResponse: shared.DeletePolicyResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    deletePolicyResponse: "DeletePolicyResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiPolicyV1PoliciesDeleteResponse$ {
-  /** @deprecated use `C1ApiPolicyV1PoliciesDeleteResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiPolicyV1PoliciesDeleteResponse$inboundSchema;
-  /** @deprecated use `C1ApiPolicyV1PoliciesDeleteResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiPolicyV1PoliciesDeleteResponse$outboundSchema;
-  /** @deprecated use `C1ApiPolicyV1PoliciesDeleteResponse$Outbound` instead. */
-  export type Outbound = C1ApiPolicyV1PoliciesDeleteResponse$Outbound;
-}
-
-export function c1ApiPolicyV1PoliciesDeleteResponseToJSON(
-  c1ApiPolicyV1PoliciesDeleteResponse: C1ApiPolicyV1PoliciesDeleteResponse,
-): string {
-  return JSON.stringify(
-    C1ApiPolicyV1PoliciesDeleteResponse$outboundSchema.parse(
-      c1ApiPolicyV1PoliciesDeleteResponse,
-    ),
-  );
-}
 
 export function c1ApiPolicyV1PoliciesDeleteResponseFromJSON(
   jsonString: string,

@@ -38,22 +38,6 @@ export type C1ApiTaskV1TaskActionsServiceDenyResponse = {
 };
 
 /** @internal */
-export const C1ApiTaskV1TaskActionsServiceDenyRequest$inboundSchema: z.ZodType<
-  C1ApiTaskV1TaskActionsServiceDenyRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  task_id: z.nullable(z.string()),
-  TaskActionsServiceDenyRequest: shared
-    .TaskActionsServiceDenyRequest$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "task_id": "taskId",
-    "TaskActionsServiceDenyRequest": "taskActionsServiceDenyRequest",
-  });
-});
-
-/** @internal */
 export type C1ApiTaskV1TaskActionsServiceDenyRequest$Outbound = {
   task_id: string | null;
   TaskActionsServiceDenyRequest?:
@@ -77,21 +61,6 @@ export const C1ApiTaskV1TaskActionsServiceDenyRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceDenyRequest$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceDenyRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceDenyRequest$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceDenyRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceDenyRequest$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceDenyRequest$Outbound` instead. */
-  export type Outbound = C1ApiTaskV1TaskActionsServiceDenyRequest$Outbound;
-}
-
 export function c1ApiTaskV1TaskActionsServiceDenyRequestToJSON(
   c1ApiTaskV1TaskActionsServiceDenyRequest:
     C1ApiTaskV1TaskActionsServiceDenyRequest,
@@ -100,22 +69,6 @@ export function c1ApiTaskV1TaskActionsServiceDenyRequestToJSON(
     C1ApiTaskV1TaskActionsServiceDenyRequest$outboundSchema.parse(
       c1ApiTaskV1TaskActionsServiceDenyRequest,
     ),
-  );
-}
-
-export function c1ApiTaskV1TaskActionsServiceDenyRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiTaskV1TaskActionsServiceDenyRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiTaskV1TaskActionsServiceDenyRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiTaskV1TaskActionsServiceDenyRequest' from JSON`,
   );
 }
 
@@ -138,65 +91,6 @@ export const C1ApiTaskV1TaskActionsServiceDenyResponse$inboundSchema: z.ZodType<
     "TaskActionsServiceDenyResponse": "taskActionsServiceDenyResponse",
   });
 });
-
-/** @internal */
-export type C1ApiTaskV1TaskActionsServiceDenyResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  TaskActionsServiceDenyResponse?:
-    | shared.TaskActionsServiceDenyResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiTaskV1TaskActionsServiceDenyResponse$outboundSchema:
-  z.ZodType<
-    C1ApiTaskV1TaskActionsServiceDenyResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiTaskV1TaskActionsServiceDenyResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    taskActionsServiceDenyResponse: shared
-      .TaskActionsServiceDenyResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      taskActionsServiceDenyResponse: "TaskActionsServiceDenyResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceDenyResponse$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceDenyResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceDenyResponse$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceDenyResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceDenyResponse$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceDenyResponse$Outbound` instead. */
-  export type Outbound = C1ApiTaskV1TaskActionsServiceDenyResponse$Outbound;
-}
-
-export function c1ApiTaskV1TaskActionsServiceDenyResponseToJSON(
-  c1ApiTaskV1TaskActionsServiceDenyResponse:
-    C1ApiTaskV1TaskActionsServiceDenyResponse,
-): string {
-  return JSON.stringify(
-    C1ApiTaskV1TaskActionsServiceDenyResponse$outboundSchema.parse(
-      c1ApiTaskV1TaskActionsServiceDenyResponse,
-    ),
-  );
-}
 
 export function c1ApiTaskV1TaskActionsServiceDenyResponseFromJSON(
   jsonString: string,

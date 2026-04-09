@@ -94,7 +94,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/api/v1/apps/{app_id}/owners")(pathParams);
 
   const headers = new Headers(compactMap({

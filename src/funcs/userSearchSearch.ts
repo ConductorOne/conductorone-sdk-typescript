@@ -213,7 +213,7 @@ async function $do(
       userSearchSearch(
         client,
         {
-          ...request,
+          ...request!,
           pageToken: nextCursor,
         },
         options,

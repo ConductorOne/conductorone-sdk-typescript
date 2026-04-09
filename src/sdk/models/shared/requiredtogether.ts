@@ -18,7 +18,6 @@ export const RequiredTogether$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
 /** @internal */
 export type RequiredTogether$Outbound = {};
 
@@ -29,19 +28,6 @@ export const RequiredTogether$outboundSchema: z.ZodType<
   RequiredTogether
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequiredTogether$ {
-  /** @deprecated use `RequiredTogether$inboundSchema` instead. */
-  export const inboundSchema = RequiredTogether$inboundSchema;
-  /** @deprecated use `RequiredTogether$outboundSchema` instead. */
-  export const outboundSchema = RequiredTogether$outboundSchema;
-  /** @deprecated use `RequiredTogether$Outbound` instead. */
-  export type Outbound = RequiredTogether$Outbound;
-}
-
 export function requiredTogetherToJSON(
   requiredTogether: RequiredTogether,
 ): string {
@@ -49,7 +35,6 @@ export function requiredTogetherToJSON(
     RequiredTogether$outboundSchema.parse(requiredTogether),
   );
 }
-
 export function requiredTogetherFromJSON(
   jsonString: string,
 ): SafeParseResult<RequiredTogether, SDKValidationError> {

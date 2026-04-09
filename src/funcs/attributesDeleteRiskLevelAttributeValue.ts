@@ -100,7 +100,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/api/v1/attributes/risk_levels/{id}")(pathParams);
 
   const headers = new Headers(compactMap({

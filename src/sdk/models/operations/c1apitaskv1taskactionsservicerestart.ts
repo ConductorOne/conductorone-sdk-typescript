@@ -38,23 +38,6 @@ export type C1ApiTaskV1TaskActionsServiceRestartResponse = {
 };
 
 /** @internal */
-export const C1ApiTaskV1TaskActionsServiceRestartRequest$inboundSchema:
-  z.ZodType<
-    C1ApiTaskV1TaskActionsServiceRestartRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    task_id: z.nullable(z.string()),
-    TaskActionsServiceRestartRequest: shared
-      .TaskActionsServiceRestartRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "task_id": "taskId",
-      "TaskActionsServiceRestartRequest": "taskActionsServiceRestartRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiTaskV1TaskActionsServiceRestartRequest$Outbound = {
   task_id: string | null;
   TaskActionsServiceRestartRequest?:
@@ -79,21 +62,6 @@ export const C1ApiTaskV1TaskActionsServiceRestartRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceRestartRequest$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceRestartRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceRestartRequest$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceRestartRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceRestartRequest$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceRestartRequest$Outbound` instead. */
-  export type Outbound = C1ApiTaskV1TaskActionsServiceRestartRequest$Outbound;
-}
-
 export function c1ApiTaskV1TaskActionsServiceRestartRequestToJSON(
   c1ApiTaskV1TaskActionsServiceRestartRequest:
     C1ApiTaskV1TaskActionsServiceRestartRequest,
@@ -102,22 +70,6 @@ export function c1ApiTaskV1TaskActionsServiceRestartRequestToJSON(
     C1ApiTaskV1TaskActionsServiceRestartRequest$outboundSchema.parse(
       c1ApiTaskV1TaskActionsServiceRestartRequest,
     ),
-  );
-}
-
-export function c1ApiTaskV1TaskActionsServiceRestartRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiTaskV1TaskActionsServiceRestartRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiTaskV1TaskActionsServiceRestartRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiTaskV1TaskActionsServiceRestartRequest' from JSON`,
   );
 }
 
@@ -141,65 +93,6 @@ export const C1ApiTaskV1TaskActionsServiceRestartResponse$inboundSchema:
       "TaskActionsServiceRestartResponse": "taskActionsServiceRestartResponse",
     });
   });
-
-/** @internal */
-export type C1ApiTaskV1TaskActionsServiceRestartResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  TaskActionsServiceRestartResponse?:
-    | shared.TaskActionsServiceRestartResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiTaskV1TaskActionsServiceRestartResponse$outboundSchema:
-  z.ZodType<
-    C1ApiTaskV1TaskActionsServiceRestartResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiTaskV1TaskActionsServiceRestartResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    taskActionsServiceRestartResponse: shared
-      .TaskActionsServiceRestartResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      taskActionsServiceRestartResponse: "TaskActionsServiceRestartResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceRestartResponse$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceRestartResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceRestartResponse$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceRestartResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceRestartResponse$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceRestartResponse$Outbound` instead. */
-  export type Outbound = C1ApiTaskV1TaskActionsServiceRestartResponse$Outbound;
-}
-
-export function c1ApiTaskV1TaskActionsServiceRestartResponseToJSON(
-  c1ApiTaskV1TaskActionsServiceRestartResponse:
-    C1ApiTaskV1TaskActionsServiceRestartResponse,
-): string {
-  return JSON.stringify(
-    C1ApiTaskV1TaskActionsServiceRestartResponse$outboundSchema.parse(
-      c1ApiTaskV1TaskActionsServiceRestartResponse,
-    ),
-  );
-}
 
 export function c1ApiTaskV1TaskActionsServiceRestartResponseFromJSON(
   jsonString: string,

@@ -1,5 +1,4 @@
 # AppSearch
-(*appSearch*)
 
 ## Overview
 

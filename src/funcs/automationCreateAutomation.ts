@@ -33,7 +33,7 @@ import { Result } from "../sdk/types/fp.js";
  */
 export function automationCreateAutomation(
   client: ConductoroneSDKTypescriptCore,
-  request?: shared.CreateAutomationRequestInput | undefined,
+  request?: shared.CreateAutomationRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -57,7 +57,7 @@ export function automationCreateAutomation(
 
 async function $do(
   client: ConductoroneSDKTypescriptCore,
-  request?: shared.CreateAutomationRequestInput | undefined,
+  request?: shared.CreateAutomationRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -78,9 +78,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      shared.CreateAutomationRequestInput$outboundSchema.optional().parse(
-        value,
-      ),
+      shared.CreateAutomationRequest$outboundSchema.optional().parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {

@@ -1,5 +1,4 @@
 # TaskActions
-(*taskActions*)
 
 ## Overview
 

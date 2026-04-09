@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  FacetCategory,
-  FacetCategory$inboundSchema,
-  FacetCategory$Outbound,
-  FacetCategory$outboundSchema,
-} from "./facetcategory.js";
+import { FacetCategory, FacetCategory$inboundSchema } from "./facetcategory.js";
 
 /**
  * Indicates one value of a facet.
@@ -33,39 +28,6 @@ export const Facets$inboundSchema: z.ZodType<Facets, z.ZodTypeDef, unknown> = z
     count: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
     facets: z.nullable(z.array(FacetCategory$inboundSchema)).optional(),
   });
-
-/** @internal */
-export type Facets$Outbound = {
-  count?: string | null | undefined;
-  facets?: Array<FacetCategory$Outbound> | null | undefined;
-};
-
-/** @internal */
-export const Facets$outboundSchema: z.ZodType<
-  Facets$Outbound,
-  z.ZodTypeDef,
-  Facets
-> = z.object({
-  count: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
-  facets: z.nullable(z.array(FacetCategory$outboundSchema)).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Facets$ {
-  /** @deprecated use `Facets$inboundSchema` instead. */
-  export const inboundSchema = Facets$inboundSchema;
-  /** @deprecated use `Facets$outboundSchema` instead. */
-  export const outboundSchema = Facets$outboundSchema;
-  /** @deprecated use `Facets$Outbound` instead. */
-  export type Outbound = Facets$Outbound;
-}
-
-export function facetsToJSON(facets: Facets): string {
-  return JSON.stringify(Facets$outboundSchema.parse(facets));
-}
 
 export function facetsFromJSON(
   jsonString: string,

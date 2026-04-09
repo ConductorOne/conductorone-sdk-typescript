@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -45,32 +42,7 @@ export const AppUserStatusStatus$inboundSchema: z.ZodType<
   AppUserStatusStatus,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(AppUserStatusStatus),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const AppUserStatusStatus$outboundSchema: z.ZodType<
-  AppUserStatusStatus,
-  z.ZodTypeDef,
-  AppUserStatusStatus
-> = z.union([
-  z.nativeEnum(AppUserStatusStatus),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUserStatusStatus$ {
-  /** @deprecated use `AppUserStatusStatus$inboundSchema` instead. */
-  export const inboundSchema = AppUserStatusStatus$inboundSchema;
-  /** @deprecated use `AppUserStatusStatus$outboundSchema` instead. */
-  export const outboundSchema = AppUserStatusStatus$outboundSchema;
-}
+> = openEnums.inboundSchema(AppUserStatusStatus);
 
 /** @internal */
 export const AppUserStatus$inboundSchema: z.ZodType<
@@ -81,39 +53,6 @@ export const AppUserStatus$inboundSchema: z.ZodType<
   details: z.nullable(z.string()).optional(),
   status: z.nullable(AppUserStatusStatus$inboundSchema).optional(),
 });
-
-/** @internal */
-export type AppUserStatus$Outbound = {
-  details?: string | null | undefined;
-  status?: string | null | undefined;
-};
-
-/** @internal */
-export const AppUserStatus$outboundSchema: z.ZodType<
-  AppUserStatus$Outbound,
-  z.ZodTypeDef,
-  AppUserStatus
-> = z.object({
-  details: z.nullable(z.string()).optional(),
-  status: z.nullable(AppUserStatusStatus$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUserStatus$ {
-  /** @deprecated use `AppUserStatus$inboundSchema` instead. */
-  export const inboundSchema = AppUserStatus$inboundSchema;
-  /** @deprecated use `AppUserStatus$outboundSchema` instead. */
-  export const outboundSchema = AppUserStatus$outboundSchema;
-  /** @deprecated use `AppUserStatus$Outbound` instead. */
-  export type Outbound = AppUserStatus$Outbound;
-}
-
-export function appUserStatusToJSON(appUserStatus: AppUserStatus): string {
-  return JSON.stringify(AppUserStatus$outboundSchema.parse(appUserStatus));
-}
 
 export function appUserStatusFromJSON(
   jsonString: string,

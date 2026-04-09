@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementRef,
-  AppEntitlementRef$inboundSchema,
   AppEntitlementRef$Outbound,
   AppEntitlementRef$outboundSchema,
 } from "./appentitlementref.js";
@@ -19,16 +15,6 @@ import {
 export type RequestSchemaServiceFindBindingForAppEntitlementRequest = {
   entitlementRef?: AppEntitlementRef | null | undefined;
 };
-
-/** @internal */
-export const RequestSchemaServiceFindBindingForAppEntitlementRequest$inboundSchema:
-  z.ZodType<
-    RequestSchemaServiceFindBindingForAppEntitlementRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    entitlementRef: z.nullable(AppEntitlementRef$inboundSchema).optional(),
-  });
 
 /** @internal */
 export type RequestSchemaServiceFindBindingForAppEntitlementRequest$Outbound = {
@@ -45,22 +31,6 @@ export const RequestSchemaServiceFindBindingForAppEntitlementRequest$outboundSch
     entitlementRef: z.nullable(AppEntitlementRef$outboundSchema).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestSchemaServiceFindBindingForAppEntitlementRequest$ {
-  /** @deprecated use `RequestSchemaServiceFindBindingForAppEntitlementRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestSchemaServiceFindBindingForAppEntitlementRequest$inboundSchema;
-  /** @deprecated use `RequestSchemaServiceFindBindingForAppEntitlementRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestSchemaServiceFindBindingForAppEntitlementRequest$outboundSchema;
-  /** @deprecated use `RequestSchemaServiceFindBindingForAppEntitlementRequest$Outbound` instead. */
-  export type Outbound =
-    RequestSchemaServiceFindBindingForAppEntitlementRequest$Outbound;
-}
-
 export function requestSchemaServiceFindBindingForAppEntitlementRequestToJSON(
   requestSchemaServiceFindBindingForAppEntitlementRequest:
     RequestSchemaServiceFindBindingForAppEntitlementRequest,
@@ -68,20 +38,5 @@ export function requestSchemaServiceFindBindingForAppEntitlementRequestToJSON(
   return JSON.stringify(
     RequestSchemaServiceFindBindingForAppEntitlementRequest$outboundSchema
       .parse(requestSchemaServiceFindBindingForAppEntitlementRequest),
-  );
-}
-
-export function requestSchemaServiceFindBindingForAppEntitlementRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  RequestSchemaServiceFindBindingForAppEntitlementRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      RequestSchemaServiceFindBindingForAppEntitlementRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'RequestSchemaServiceFindBindingForAppEntitlementRequest' from JSON`,
   );
 }

@@ -1,5 +1,4 @@
 # WebhooksSearch
-(*webhooksSearch*)
 
 ## Overview
 

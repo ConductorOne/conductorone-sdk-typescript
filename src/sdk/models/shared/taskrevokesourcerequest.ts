@@ -25,7 +25,6 @@ export const TaskRevokeSourceRequest$inboundSchema: z.ZodType<
 > = z.object({
   requestUserId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type TaskRevokeSourceRequest$Outbound = {
   requestUserId?: string | null | undefined;
@@ -40,19 +39,6 @@ export const TaskRevokeSourceRequest$outboundSchema: z.ZodType<
   requestUserId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskRevokeSourceRequest$ {
-  /** @deprecated use `TaskRevokeSourceRequest$inboundSchema` instead. */
-  export const inboundSchema = TaskRevokeSourceRequest$inboundSchema;
-  /** @deprecated use `TaskRevokeSourceRequest$outboundSchema` instead. */
-  export const outboundSchema = TaskRevokeSourceRequest$outboundSchema;
-  /** @deprecated use `TaskRevokeSourceRequest$Outbound` instead. */
-  export type Outbound = TaskRevokeSourceRequest$Outbound;
-}
-
 export function taskRevokeSourceRequestToJSON(
   taskRevokeSourceRequest: TaskRevokeSourceRequest,
 ): string {
@@ -60,7 +46,6 @@ export function taskRevokeSourceRequestToJSON(
     TaskRevokeSourceRequest$outboundSchema.parse(taskRevokeSourceRequest),
   );
 }
-
 export function taskRevokeSourceRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskRevokeSourceRequest, SDKValidationError> {

@@ -25,7 +25,6 @@ export const WebhookApproval$inboundSchema: z.ZodType<
 > = z.object({
   webhookId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type WebhookApproval$Outbound = {
   webhookId?: string | null | undefined;
@@ -40,25 +39,11 @@ export const WebhookApproval$outboundSchema: z.ZodType<
   webhookId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhookApproval$ {
-  /** @deprecated use `WebhookApproval$inboundSchema` instead. */
-  export const inboundSchema = WebhookApproval$inboundSchema;
-  /** @deprecated use `WebhookApproval$outboundSchema` instead. */
-  export const outboundSchema = WebhookApproval$outboundSchema;
-  /** @deprecated use `WebhookApproval$Outbound` instead. */
-  export type Outbound = WebhookApproval$Outbound;
-}
-
 export function webhookApprovalToJSON(
   webhookApproval: WebhookApproval,
 ): string {
   return JSON.stringify(WebhookApproval$outboundSchema.parse(webhookApproval));
 }
-
 export function webhookApprovalFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookApproval, SDKValidationError> {

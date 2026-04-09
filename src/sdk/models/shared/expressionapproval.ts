@@ -6,6 +6,12 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AppEntitlementReference,
+  AppEntitlementReference$inboundSchema,
+  AppEntitlementReference$Outbound,
+  AppEntitlementReference$outboundSchema,
+} from "./appentitlementreference.js";
 
 /**
  * The ExpressionApproval message.
@@ -28,9 +34,21 @@ export type ExpressionApproval = {
    */
   fallback?: boolean | null | undefined;
   /**
+   * Configuration to specify which groups to fallback to if fallback is enabled and the expression does not return a valid list of users.
+   */
+  fallbackGroupIds?: Array<AppEntitlementReference> | null | undefined;
+  /**
    * Configuration to specific which users to fallback to if and the expression does not return a valid list of users.
    */
   fallbackUserIds?: Array<string> | null | undefined;
+  /**
+   * Configuration to enable fallback for group fallback.
+   */
+  isGroupFallbackEnabled?: boolean | undefined;
+  /**
+   * Configuration to require distinct approvers across approval steps of a rule.
+   */
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -43,16 +61,22 @@ export const ExpressionApproval$inboundSchema: z.ZodType<
   assignedUserIds: z.nullable(z.array(z.string())).optional(),
   expressions: z.nullable(z.array(z.string())).optional(),
   fallback: z.nullable(z.boolean()).optional(),
+  fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$inboundSchema))
+    .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  isGroupFallbackEnabled: z.boolean().optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
 /** @internal */
 export type ExpressionApproval$Outbound = {
   allowSelfApproval?: boolean | null | undefined;
   assignedUserIds?: Array<string> | null | undefined;
   expressions?: Array<string> | null | undefined;
   fallback?: boolean | null | undefined;
+  fallbackGroupIds?: Array<AppEntitlementReference$Outbound> | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
+  isGroupFallbackEnabled?: boolean | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -65,21 +89,12 @@ export const ExpressionApproval$outboundSchema: z.ZodType<
   assignedUserIds: z.nullable(z.array(z.string())).optional(),
   expressions: z.nullable(z.array(z.string())).optional(),
   fallback: z.nullable(z.boolean()).optional(),
+  fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$outboundSchema))
+    .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  isGroupFallbackEnabled: z.boolean().optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExpressionApproval$ {
-  /** @deprecated use `ExpressionApproval$inboundSchema` instead. */
-  export const inboundSchema = ExpressionApproval$inboundSchema;
-  /** @deprecated use `ExpressionApproval$outboundSchema` instead. */
-  export const outboundSchema = ExpressionApproval$outboundSchema;
-  /** @deprecated use `ExpressionApproval$Outbound` instead. */
-  export type Outbound = ExpressionApproval$Outbound;
-}
 
 export function expressionApprovalToJSON(
   expressionApproval: ExpressionApproval,
@@ -88,7 +103,6 @@ export function expressionApprovalToJSON(
     ExpressionApproval$outboundSchema.parse(expressionApproval),
   );
 }
-
 export function expressionApprovalFromJSON(
   jsonString: string,
 ): SafeParseResult<ExpressionApproval, SDKValidationError> {

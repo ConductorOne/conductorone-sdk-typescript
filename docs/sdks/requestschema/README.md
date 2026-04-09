@@ -1,5 +1,4 @@
 # RequestSchema
-(*requestSchema*)
 
 ## Overview
 

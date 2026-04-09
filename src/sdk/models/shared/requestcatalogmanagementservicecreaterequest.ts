@@ -3,17 +3,10 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import {
   RequestCatalogExpandMask,
-  RequestCatalogExpandMask$inboundSchema,
   RequestCatalogExpandMask$Outbound,
   RequestCatalogExpandMask$outboundSchema,
 } from "./requestcatalogexpandmask.js";
@@ -100,6 +93,10 @@ export type RequestCatalogManagementServiceCreateRequest = {
     | undefined;
   expandMask?: RequestCatalogExpandMask | null | undefined;
   /**
+   * The ID of the grant policy for access requests in this catalog.
+   */
+  grantPolicyId?: string | undefined;
+  /**
    * Whether or not the new catalog should be created as published.
    */
   published?: boolean | null | undefined;
@@ -128,148 +125,34 @@ export type RequestCatalogManagementServiceCreateRequest = {
 };
 
 /** @internal */
-export const RequestCatalogManagementServiceCreateRequestEnrollmentBehavior$inboundSchema:
-  z.ZodType<
-    RequestCatalogManagementServiceCreateRequestEnrollmentBehavior,
-    z.ZodTypeDef,
-    unknown
-  > = z
-    .union([
-      z.nativeEnum(
-        RequestCatalogManagementServiceCreateRequestEnrollmentBehavior,
-      ),
-      z.string().transform(catchUnrecognizedEnum),
-    ]);
-
-/** @internal */
 export const RequestCatalogManagementServiceCreateRequestEnrollmentBehavior$outboundSchema:
   z.ZodType<
-    RequestCatalogManagementServiceCreateRequestEnrollmentBehavior,
+    string,
     z.ZodTypeDef,
     RequestCatalogManagementServiceCreateRequestEnrollmentBehavior
-  > = z.union([
-    z.nativeEnum(
-      RequestCatalogManagementServiceCreateRequestEnrollmentBehavior,
-    ),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogManagementServiceCreateRequestEnrollmentBehavior$ {
-  /** @deprecated use `RequestCatalogManagementServiceCreateRequestEnrollmentBehavior$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogManagementServiceCreateRequestEnrollmentBehavior$inboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceCreateRequestEnrollmentBehavior$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogManagementServiceCreateRequestEnrollmentBehavior$outboundSchema;
-}
-
-/** @internal */
-export const RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior$inboundSchema:
-  z.ZodType<
-    RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior,
-    z.ZodTypeDef,
-    unknown
-  > = z
-    .union([
-      z.nativeEnum(
-        RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior,
-      ),
-      z.string().transform(catchUnrecognizedEnum),
-    ]);
+  > = openEnums.outboundSchema(
+    RequestCatalogManagementServiceCreateRequestEnrollmentBehavior,
+  );
 
 /** @internal */
 export const RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior$outboundSchema:
   z.ZodType<
-    RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior,
+    string,
     z.ZodTypeDef,
     RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior
-  > = z.union([
-    z.nativeEnum(
-      RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior,
-    ),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior$ {
-  /** @deprecated use `RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior$inboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior$outboundSchema;
-}
-
-/** @internal */
-export const RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior$inboundSchema:
-  z.ZodType<
-    RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior,
-    z.ZodTypeDef,
-    unknown
-  > = z
-    .union([
-      z.nativeEnum(
-        RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior,
-      ),
-      z.string().transform(catchUnrecognizedEnum),
-    ]);
+  > = openEnums.outboundSchema(
+    RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior,
+  );
 
 /** @internal */
 export const RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior$outboundSchema:
   z.ZodType<
-    RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior,
+    string,
     z.ZodTypeDef,
     RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior
-  > = z.union([
-    z.nativeEnum(
-      RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior,
-    ),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior$ {
-  /** @deprecated use `RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior$inboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior$outboundSchema;
-}
-
-/** @internal */
-export const RequestCatalogManagementServiceCreateRequest$inboundSchema:
-  z.ZodType<
-    RequestCatalogManagementServiceCreateRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    description: z.nullable(z.string()).optional(),
-    displayName: z.string(),
-    enrollmentBehavior: z.nullable(
-      RequestCatalogManagementServiceCreateRequestEnrollmentBehavior$inboundSchema,
-    ).optional(),
-    expandMask: z.nullable(RequestCatalogExpandMask$inboundSchema).optional(),
-    published: z.nullable(z.boolean()).optional(),
-    requestBundle: z.nullable(z.boolean()).optional(),
-    unenrollmentBehavior: z.nullable(
-      RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior$inboundSchema,
-    ).optional(),
-    unenrollmentEntitlementBehavior: z.nullable(
-      RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior$inboundSchema,
-    ).optional(),
-    visibleToEveryone: z.nullable(z.boolean()).optional(),
-  });
+  > = openEnums.outboundSchema(
+    RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior,
+  );
 
 /** @internal */
 export type RequestCatalogManagementServiceCreateRequest$Outbound = {
@@ -277,6 +160,7 @@ export type RequestCatalogManagementServiceCreateRequest$Outbound = {
   displayName: string;
   enrollmentBehavior?: string | null | undefined;
   expandMask?: RequestCatalogExpandMask$Outbound | null | undefined;
+  grantPolicyId?: string | undefined;
   published?: boolean | null | undefined;
   requestBundle?: boolean | null | undefined;
   unenrollmentBehavior?: string | null | undefined;
@@ -297,6 +181,7 @@ export const RequestCatalogManagementServiceCreateRequest$outboundSchema:
       RequestCatalogManagementServiceCreateRequestEnrollmentBehavior$outboundSchema,
     ).optional(),
     expandMask: z.nullable(RequestCatalogExpandMask$outboundSchema).optional(),
+    grantPolicyId: z.string().optional(),
     published: z.nullable(z.boolean()).optional(),
     requestBundle: z.nullable(z.boolean()).optional(),
     unenrollmentBehavior: z.nullable(
@@ -308,21 +193,6 @@ export const RequestCatalogManagementServiceCreateRequest$outboundSchema:
     visibleToEveryone: z.nullable(z.boolean()).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogManagementServiceCreateRequest$ {
-  /** @deprecated use `RequestCatalogManagementServiceCreateRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogManagementServiceCreateRequest$inboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceCreateRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogManagementServiceCreateRequest$outboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceCreateRequest$Outbound` instead. */
-  export type Outbound = RequestCatalogManagementServiceCreateRequest$Outbound;
-}
-
 export function requestCatalogManagementServiceCreateRequestToJSON(
   requestCatalogManagementServiceCreateRequest:
     RequestCatalogManagementServiceCreateRequest,
@@ -331,21 +201,5 @@ export function requestCatalogManagementServiceCreateRequestToJSON(
     RequestCatalogManagementServiceCreateRequest$outboundSchema.parse(
       requestCatalogManagementServiceCreateRequest,
     ),
-  );
-}
-
-export function requestCatalogManagementServiceCreateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  RequestCatalogManagementServiceCreateRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      RequestCatalogManagementServiceCreateRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'RequestCatalogManagementServiceCreateRequest' from JSON`,
   );
 }

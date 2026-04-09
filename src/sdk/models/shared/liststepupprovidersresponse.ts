@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   StepUpProvider,
   StepUpProvider$inboundSchema,
-  StepUpProvider$Outbound,
-  StepUpProvider$outboundSchema,
 } from "./stepupprovider.js";
 
 /**
@@ -36,45 +34,6 @@ export const ListStepUpProvidersResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(StepUpProvider$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ListStepUpProvidersResponse$Outbound = {
-  list?: Array<StepUpProvider$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ListStepUpProvidersResponse$outboundSchema: z.ZodType<
-  ListStepUpProvidersResponse$Outbound,
-  z.ZodTypeDef,
-  ListStepUpProvidersResponse
-> = z.object({
-  list: z.nullable(z.array(StepUpProvider$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListStepUpProvidersResponse$ {
-  /** @deprecated use `ListStepUpProvidersResponse$inboundSchema` instead. */
-  export const inboundSchema = ListStepUpProvidersResponse$inboundSchema;
-  /** @deprecated use `ListStepUpProvidersResponse$outboundSchema` instead. */
-  export const outboundSchema = ListStepUpProvidersResponse$outboundSchema;
-  /** @deprecated use `ListStepUpProvidersResponse$Outbound` instead. */
-  export type Outbound = ListStepUpProvidersResponse$Outbound;
-}
-
-export function listStepUpProvidersResponseToJSON(
-  listStepUpProvidersResponse: ListStepUpProvidersResponse,
-): string {
-  return JSON.stringify(
-    ListStepUpProvidersResponse$outboundSchema.parse(
-      listStepUpProvidersResponse,
-    ),
-  );
-}
 
 export function listStepUpProvidersResponseFromJSON(
   jsonString: string,

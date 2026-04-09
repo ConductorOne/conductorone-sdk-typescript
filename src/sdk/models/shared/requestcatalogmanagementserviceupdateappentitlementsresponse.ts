@@ -20,44 +20,6 @@ export const RequestCatalogManagementServiceUpdateAppEntitlementsResponse$inboun
     unknown
   > = z.object({});
 
-/** @internal */
-export type RequestCatalogManagementServiceUpdateAppEntitlementsResponse$Outbound =
-  {};
-
-/** @internal */
-export const RequestCatalogManagementServiceUpdateAppEntitlementsResponse$outboundSchema:
-  z.ZodType<
-    RequestCatalogManagementServiceUpdateAppEntitlementsResponse$Outbound,
-    z.ZodTypeDef,
-    RequestCatalogManagementServiceUpdateAppEntitlementsResponse
-  > = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogManagementServiceUpdateAppEntitlementsResponse$ {
-  /** @deprecated use `RequestCatalogManagementServiceUpdateAppEntitlementsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogManagementServiceUpdateAppEntitlementsResponse$inboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceUpdateAppEntitlementsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogManagementServiceUpdateAppEntitlementsResponse$outboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceUpdateAppEntitlementsResponse$Outbound` instead. */
-  export type Outbound =
-    RequestCatalogManagementServiceUpdateAppEntitlementsResponse$Outbound;
-}
-
-export function requestCatalogManagementServiceUpdateAppEntitlementsResponseToJSON(
-  requestCatalogManagementServiceUpdateAppEntitlementsResponse:
-    RequestCatalogManagementServiceUpdateAppEntitlementsResponse,
-): string {
-  return JSON.stringify(
-    RequestCatalogManagementServiceUpdateAppEntitlementsResponse$outboundSchema
-      .parse(requestCatalogManagementServiceUpdateAppEntitlementsResponse),
-  );
-}
-
 export function requestCatalogManagementServiceUpdateAppEntitlementsResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

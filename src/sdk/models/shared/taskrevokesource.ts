@@ -60,7 +60,6 @@ export const TaskRevokeSource$inboundSchema: z.ZodType<
   request: z.nullable(TaskRevokeSourceRequest$inboundSchema).optional(),
   review: z.nullable(TaskRevokeSourceReview$inboundSchema).optional(),
 });
-
 /** @internal */
 export type TaskRevokeSource$Outbound = {
   expired?: TaskRevokeSourceExpired$Outbound | null | undefined;
@@ -81,19 +80,6 @@ export const TaskRevokeSource$outboundSchema: z.ZodType<
   review: z.nullable(TaskRevokeSourceReview$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskRevokeSource$ {
-  /** @deprecated use `TaskRevokeSource$inboundSchema` instead. */
-  export const inboundSchema = TaskRevokeSource$inboundSchema;
-  /** @deprecated use `TaskRevokeSource$outboundSchema` instead. */
-  export const outboundSchema = TaskRevokeSource$outboundSchema;
-  /** @deprecated use `TaskRevokeSource$Outbound` instead. */
-  export type Outbound = TaskRevokeSource$Outbound;
-}
-
 export function taskRevokeSourceToJSON(
   taskRevokeSource: TaskRevokeSource,
 ): string {
@@ -101,7 +87,6 @@ export function taskRevokeSourceToJSON(
     TaskRevokeSource$outboundSchema.parse(taskRevokeSource),
   );
 }
-
 export function taskRevokeSourceFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskRevokeSource, SDKValidationError> {

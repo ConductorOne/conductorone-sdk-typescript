@@ -36,22 +36,6 @@ export type C1ApiAttributeV1AttributesListComplianceFrameworksResponse = {
 };
 
 /** @internal */
-export const C1ApiAttributeV1AttributesListComplianceFrameworksRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAttributeV1AttributesListComplianceFrameworksRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    page_size: z.nullable(z.number().int()).optional(),
-    page_token: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "page_size": "pageSize",
-      "page_token": "pageToken",
-    });
-  });
-
-/** @internal */
 export type C1ApiAttributeV1AttributesListComplianceFrameworksRequest$Outbound =
   {
     page_size?: number | null | undefined;
@@ -74,22 +58,6 @@ export const C1ApiAttributeV1AttributesListComplianceFrameworksRequest$outboundS
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAttributeV1AttributesListComplianceFrameworksRequest$ {
-  /** @deprecated use `C1ApiAttributeV1AttributesListComplianceFrameworksRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAttributeV1AttributesListComplianceFrameworksRequest$inboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesListComplianceFrameworksRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAttributeV1AttributesListComplianceFrameworksRequest$outboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesListComplianceFrameworksRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAttributeV1AttributesListComplianceFrameworksRequest$Outbound;
-}
-
 export function c1ApiAttributeV1AttributesListComplianceFrameworksRequestToJSON(
   c1ApiAttributeV1AttributesListComplianceFrameworksRequest:
     C1ApiAttributeV1AttributesListComplianceFrameworksRequest,
@@ -97,21 +65,6 @@ export function c1ApiAttributeV1AttributesListComplianceFrameworksRequestToJSON(
   return JSON.stringify(
     C1ApiAttributeV1AttributesListComplianceFrameworksRequest$outboundSchema
       .parse(c1ApiAttributeV1AttributesListComplianceFrameworksRequest),
-  );
-}
-
-export function c1ApiAttributeV1AttributesListComplianceFrameworksRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAttributeV1AttributesListComplianceFrameworksRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAttributeV1AttributesListComplianceFrameworksRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAttributeV1AttributesListComplianceFrameworksRequest' from JSON`,
   );
 }
 
@@ -135,66 +88,6 @@ export const C1ApiAttributeV1AttributesListComplianceFrameworksResponse$inboundS
       "ListComplianceFrameworksResponse": "listComplianceFrameworksResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAttributeV1AttributesListComplianceFrameworksResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    ListComplianceFrameworksResponse?:
-      | shared.ListComplianceFrameworksResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAttributeV1AttributesListComplianceFrameworksResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAttributeV1AttributesListComplianceFrameworksResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAttributeV1AttributesListComplianceFrameworksResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    listComplianceFrameworksResponse: shared
-      .ListComplianceFrameworksResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      listComplianceFrameworksResponse: "ListComplianceFrameworksResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAttributeV1AttributesListComplianceFrameworksResponse$ {
-  /** @deprecated use `C1ApiAttributeV1AttributesListComplianceFrameworksResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAttributeV1AttributesListComplianceFrameworksResponse$inboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesListComplianceFrameworksResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAttributeV1AttributesListComplianceFrameworksResponse$outboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesListComplianceFrameworksResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAttributeV1AttributesListComplianceFrameworksResponse$Outbound;
-}
-
-export function c1ApiAttributeV1AttributesListComplianceFrameworksResponseToJSON(
-  c1ApiAttributeV1AttributesListComplianceFrameworksResponse:
-    C1ApiAttributeV1AttributesListComplianceFrameworksResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAttributeV1AttributesListComplianceFrameworksResponse$outboundSchema
-      .parse(c1ApiAttributeV1AttributesListComplianceFrameworksResponse),
-  );
-}
 
 export function c1ApiAttributeV1AttributesListComplianceFrameworksResponseFromJSON(
   jsonString: string,

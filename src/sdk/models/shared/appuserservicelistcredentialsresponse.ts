@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppUserCredential,
   AppUserCredential$inboundSchema,
-  AppUserCredential$Outbound,
-  AppUserCredential$outboundSchema,
 } from "./appusercredential.js";
 
 /**
@@ -36,47 +34,6 @@ export const AppUserServiceListCredentialsResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(AppUserCredential$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type AppUserServiceListCredentialsResponse$Outbound = {
-  list?: Array<AppUserCredential$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const AppUserServiceListCredentialsResponse$outboundSchema: z.ZodType<
-  AppUserServiceListCredentialsResponse$Outbound,
-  z.ZodTypeDef,
-  AppUserServiceListCredentialsResponse
-> = z.object({
-  list: z.nullable(z.array(AppUserCredential$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUserServiceListCredentialsResponse$ {
-  /** @deprecated use `AppUserServiceListCredentialsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    AppUserServiceListCredentialsResponse$inboundSchema;
-  /** @deprecated use `AppUserServiceListCredentialsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    AppUserServiceListCredentialsResponse$outboundSchema;
-  /** @deprecated use `AppUserServiceListCredentialsResponse$Outbound` instead. */
-  export type Outbound = AppUserServiceListCredentialsResponse$Outbound;
-}
-
-export function appUserServiceListCredentialsResponseToJSON(
-  appUserServiceListCredentialsResponse: AppUserServiceListCredentialsResponse,
-): string {
-  return JSON.stringify(
-    AppUserServiceListCredentialsResponse$outboundSchema.parse(
-      appUserServiceListCredentialsResponse,
-    ),
-  );
-}
 
 export function appUserServiceListCredentialsResponseFromJSON(
   jsonString: string,

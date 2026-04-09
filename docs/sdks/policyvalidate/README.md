@@ -1,5 +1,4 @@
 # PolicyValidate
-(*policyValidate*)
 
 ## Overview
 

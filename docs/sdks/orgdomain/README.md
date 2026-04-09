@@ -1,5 +1,4 @@
 # OrgDomain
-(*orgDomain*)
 
 ## Overview
 

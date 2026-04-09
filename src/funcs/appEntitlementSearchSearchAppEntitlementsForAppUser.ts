@@ -100,7 +100,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/api/v1/search/apps/{app_id}/entitlements/users/{app_user_id}",
   )(pathParams);

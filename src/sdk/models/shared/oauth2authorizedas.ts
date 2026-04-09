@@ -30,43 +30,6 @@ export const OAuth2AuthorizedAs$inboundSchema: z.ZodType<
   ).optional(),
 });
 
-/** @internal */
-export type OAuth2AuthorizedAs$Outbound = {
-  authEmail?: string | null | undefined;
-  authorizedAt?: string | null | undefined;
-};
-
-/** @internal */
-export const OAuth2AuthorizedAs$outboundSchema: z.ZodType<
-  OAuth2AuthorizedAs$Outbound,
-  z.ZodTypeDef,
-  OAuth2AuthorizedAs
-> = z.object({
-  authEmail: z.nullable(z.string()).optional(),
-  authorizedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace OAuth2AuthorizedAs$ {
-  /** @deprecated use `OAuth2AuthorizedAs$inboundSchema` instead. */
-  export const inboundSchema = OAuth2AuthorizedAs$inboundSchema;
-  /** @deprecated use `OAuth2AuthorizedAs$outboundSchema` instead. */
-  export const outboundSchema = OAuth2AuthorizedAs$outboundSchema;
-  /** @deprecated use `OAuth2AuthorizedAs$Outbound` instead. */
-  export type Outbound = OAuth2AuthorizedAs$Outbound;
-}
-
-export function oAuth2AuthorizedAsToJSON(
-  oAuth2AuthorizedAs: OAuth2AuthorizedAs,
-): string {
-  return JSON.stringify(
-    OAuth2AuthorizedAs$outboundSchema.parse(oAuth2AuthorizedAs),
-  );
-}
-
 export function oAuth2AuthorizedAsFromJSON(
   jsonString: string,
 ): SafeParseResult<OAuth2AuthorizedAs, SDKValidationError> {

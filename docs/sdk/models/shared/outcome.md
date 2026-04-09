@@ -1,19 +1,19 @@
 # Outcome
 
-The outcome of the certification.
+The outcome field.
 
 ## Example Usage
 
 ```typescript
 import { Outcome } from "conductorone-sdk-typescript/sdk/models/shared";
 
-let value: Outcome = "CERTIFY_OUTCOME_UNSPECIFIED";
+let value: Outcome = "SSF_EVENT_OUTCOME_UNSPECIFIED";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
-
 ```typescript
-"CERTIFY_OUTCOME_UNSPECIFIED" | "CERTIFY_OUTCOME_CERTIFIED" | "CERTIFY_OUTCOME_DECERTIFIED" | "CERTIFY_OUTCOME_ERROR" | "CERTIFY_OUTCOME_CANCELLED" | "CERTIFY_OUTCOME_WAIT_TIMED_OUT" | Unrecognized<string>
+"SSF_EVENT_OUTCOME_UNSPECIFIED" | "SSF_EVENT_OUTCOME_SESSIONS_REVOKED" | "SSF_EVENT_OUTCOME_LOGGED" | "SSF_EVENT_OUTCOME_PRINCIPAL_NOT_FOUND" | "SSF_EVENT_OUTCOME_VERIFIED" | "SSF_EVENT_OUTCOME_STREAM_STATUS_UPDATED" | "SSF_EVENT_OUTCOME_UNRECOGNIZED" | "SSF_EVENT_OUTCOME_ERROR" | Unrecognized<string>
 ```

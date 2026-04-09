@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementUserBinding,
   AppEntitlementUserBinding$inboundSchema,
-  AppEntitlementUserBinding$Outbound,
-  AppEntitlementUserBinding$outboundSchema,
 } from "./appentitlementuserbinding.js";
 
 /**
@@ -28,43 +26,6 @@ export const RemoveGrantDurationResponse$inboundSchema: z.ZodType<
 > = z.object({
   binding: z.nullable(AppEntitlementUserBinding$inboundSchema).optional(),
 });
-
-/** @internal */
-export type RemoveGrantDurationResponse$Outbound = {
-  binding?: AppEntitlementUserBinding$Outbound | null | undefined;
-};
-
-/** @internal */
-export const RemoveGrantDurationResponse$outboundSchema: z.ZodType<
-  RemoveGrantDurationResponse$Outbound,
-  z.ZodTypeDef,
-  RemoveGrantDurationResponse
-> = z.object({
-  binding: z.nullable(AppEntitlementUserBinding$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RemoveGrantDurationResponse$ {
-  /** @deprecated use `RemoveGrantDurationResponse$inboundSchema` instead. */
-  export const inboundSchema = RemoveGrantDurationResponse$inboundSchema;
-  /** @deprecated use `RemoveGrantDurationResponse$outboundSchema` instead. */
-  export const outboundSchema = RemoveGrantDurationResponse$outboundSchema;
-  /** @deprecated use `RemoveGrantDurationResponse$Outbound` instead. */
-  export type Outbound = RemoveGrantDurationResponse$Outbound;
-}
-
-export function removeGrantDurationResponseToJSON(
-  removeGrantDurationResponse: RemoveGrantDurationResponse,
-): string {
-  return JSON.stringify(
-    RemoveGrantDurationResponse$outboundSchema.parse(
-      removeGrantDurationResponse,
-    ),
-  );
-}
 
 export function removeGrantDurationResponseFromJSON(
   jsonString: string,

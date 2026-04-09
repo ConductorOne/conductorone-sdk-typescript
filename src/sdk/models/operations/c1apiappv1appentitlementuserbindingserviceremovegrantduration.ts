@@ -40,27 +40,6 @@ export type C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRespons
   };
 
 /** @internal */
-export const C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    app_entitlement_id: z.nullable(z.string()),
-    app_user_id: z.nullable(z.string()),
-    RemoveGrantDurationRequest: shared.RemoveGrantDurationRequest$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "app_entitlement_id": "appEntitlementId",
-      "app_user_id": "appUserId",
-      "RemoveGrantDurationRequest": "removeGrantDurationRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRequest$Outbound =
   {
     app_id: string | null;
@@ -92,22 +71,6 @@ export const C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationReques
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRequest$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRequest$Outbound;
-}
-
 export function c1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRequestToJSON(
   c1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRequest:
     C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRequest,
@@ -117,21 +80,6 @@ export function c1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationReq
       .parse(
         c1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRequest,
       ),
-  );
-}
-
-export function c1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRequest' from JSON`,
   );
 }
 
@@ -155,68 +103,6 @@ export const C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationRespon
       "RemoveGrantDurationResponse": "removeGrantDurationResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    RemoveGrantDurationResponse?:
-      | shared.RemoveGrantDurationResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    removeGrantDurationResponse: shared
-      .RemoveGrantDurationResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      removeGrantDurationResponse: "RemoveGrantDurationResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationResponse$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationResponse$Outbound;
-}
-
-export function c1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationResponseToJSON(
-  c1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationResponse:
-    C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationResponse$outboundSchema
-      .parse(
-        c1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationResponse,
-      ),
-  );
-}
 
 export function c1ApiAppV1AppEntitlementUserBindingServiceRemoveGrantDurationResponseFromJSON(
   jsonString: string,

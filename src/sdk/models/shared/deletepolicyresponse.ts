@@ -19,37 +19,6 @@ export const DeletePolicyResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type DeletePolicyResponse$Outbound = {};
-
-/** @internal */
-export const DeletePolicyResponse$outboundSchema: z.ZodType<
-  DeletePolicyResponse$Outbound,
-  z.ZodTypeDef,
-  DeletePolicyResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeletePolicyResponse$ {
-  /** @deprecated use `DeletePolicyResponse$inboundSchema` instead. */
-  export const inboundSchema = DeletePolicyResponse$inboundSchema;
-  /** @deprecated use `DeletePolicyResponse$outboundSchema` instead. */
-  export const outboundSchema = DeletePolicyResponse$outboundSchema;
-  /** @deprecated use `DeletePolicyResponse$Outbound` instead. */
-  export type Outbound = DeletePolicyResponse$Outbound;
-}
-
-export function deletePolicyResponseToJSON(
-  deletePolicyResponse: DeletePolicyResponse,
-): string {
-  return JSON.stringify(
-    DeletePolicyResponse$outboundSchema.parse(deletePolicyResponse),
-  );
-}
-
 export function deletePolicyResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<DeletePolicyResponse, SDKValidationError> {

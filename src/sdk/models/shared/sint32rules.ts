@@ -83,7 +83,6 @@ export const SInt32Rules$inboundSchema: z.ZodType<
   lte: z.nullable(z.number().int()).optional(),
   notIn: z.nullable(z.array(z.number().int())).optional(),
 });
-
 /** @internal */
 export type SInt32Rules$Outbound = {
   const?: number | null | undefined;
@@ -112,23 +111,9 @@ export const SInt32Rules$outboundSchema: z.ZodType<
   notIn: z.nullable(z.array(z.number().int())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SInt32Rules$ {
-  /** @deprecated use `SInt32Rules$inboundSchema` instead. */
-  export const inboundSchema = SInt32Rules$inboundSchema;
-  /** @deprecated use `SInt32Rules$outboundSchema` instead. */
-  export const outboundSchema = SInt32Rules$outboundSchema;
-  /** @deprecated use `SInt32Rules$Outbound` instead. */
-  export type Outbound = SInt32Rules$Outbound;
-}
-
 export function sInt32RulesToJSON(sInt32Rules: SInt32Rules): string {
   return JSON.stringify(SInt32Rules$outboundSchema.parse(sInt32Rules));
 }
-
 export function sInt32RulesFromJSON(
   jsonString: string,
 ): SafeParseResult<SInt32Rules, SDKValidationError> {

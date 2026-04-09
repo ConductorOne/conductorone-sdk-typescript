@@ -36,27 +36,6 @@ export type C1ApiAppV1ConnectorServiceConfirmSyncValidResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1ConnectorServiceConfirmSyncValidRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1ConnectorServiceConfirmSyncValidRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    connector_id: z.nullable(z.string()),
-    sync_lifecycle_id: z.nullable(z.string()),
-    ConfirmSyncValidRequest: shared.ConfirmSyncValidRequest$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "connector_id": "connectorId",
-      "sync_lifecycle_id": "syncLifecycleId",
-      "ConfirmSyncValidRequest": "confirmSyncValidRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1ConnectorServiceConfirmSyncValidRequest$Outbound = {
   app_id: string | null;
   connector_id: string | null;
@@ -85,22 +64,6 @@ export const C1ApiAppV1ConnectorServiceConfirmSyncValidRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1ConnectorServiceConfirmSyncValidRequest$ {
-  /** @deprecated use `C1ApiAppV1ConnectorServiceConfirmSyncValidRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1ConnectorServiceConfirmSyncValidRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceConfirmSyncValidRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1ConnectorServiceConfirmSyncValidRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceConfirmSyncValidRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1ConnectorServiceConfirmSyncValidRequest$Outbound;
-}
-
 export function c1ApiAppV1ConnectorServiceConfirmSyncValidRequestToJSON(
   c1ApiAppV1ConnectorServiceConfirmSyncValidRequest:
     C1ApiAppV1ConnectorServiceConfirmSyncValidRequest,
@@ -109,22 +72,6 @@ export function c1ApiAppV1ConnectorServiceConfirmSyncValidRequestToJSON(
     C1ApiAppV1ConnectorServiceConfirmSyncValidRequest$outboundSchema.parse(
       c1ApiAppV1ConnectorServiceConfirmSyncValidRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1ConnectorServiceConfirmSyncValidRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1ConnectorServiceConfirmSyncValidRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1ConnectorServiceConfirmSyncValidRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiAppV1ConnectorServiceConfirmSyncValidRequest' from JSON`,
   );
 }
 
@@ -148,66 +95,6 @@ export const C1ApiAppV1ConnectorServiceConfirmSyncValidResponse$inboundSchema:
       "ConfirmSyncValidResponse": "confirmSyncValidResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1ConnectorServiceConfirmSyncValidResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  ConfirmSyncValidResponse?:
-    | shared.ConfirmSyncValidResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1ConnectorServiceConfirmSyncValidResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1ConnectorServiceConfirmSyncValidResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1ConnectorServiceConfirmSyncValidResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    confirmSyncValidResponse: shared.ConfirmSyncValidResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      confirmSyncValidResponse: "ConfirmSyncValidResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1ConnectorServiceConfirmSyncValidResponse$ {
-  /** @deprecated use `C1ApiAppV1ConnectorServiceConfirmSyncValidResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1ConnectorServiceConfirmSyncValidResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceConfirmSyncValidResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1ConnectorServiceConfirmSyncValidResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceConfirmSyncValidResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1ConnectorServiceConfirmSyncValidResponse$Outbound;
-}
-
-export function c1ApiAppV1ConnectorServiceConfirmSyncValidResponseToJSON(
-  c1ApiAppV1ConnectorServiceConfirmSyncValidResponse:
-    C1ApiAppV1ConnectorServiceConfirmSyncValidResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1ConnectorServiceConfirmSyncValidResponse$outboundSchema.parse(
-      c1ApiAppV1ConnectorServiceConfirmSyncValidResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1ConnectorServiceConfirmSyncValidResponseFromJSON(
   jsonString: string,

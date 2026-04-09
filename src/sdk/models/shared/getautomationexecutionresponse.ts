@@ -3,22 +3,75 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { remap as remap$ } from "../../../lib/primitives.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AutomationExecution,
   AutomationExecution$inboundSchema,
-  AutomationExecution$Outbound,
-  AutomationExecution$outboundSchema,
 } from "./automationexecution.js";
+import {
+  AutomationExecutionView,
+  AutomationExecutionView$inboundSchema,
+} from "./automationexecutionview.js";
+
+/**
+ * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+ */
+export type GetAutomationExecutionResponseExpanded = {
+  /**
+   * The type of the serialized message.
+   */
+  atType?: string | undefined;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
 
 /**
  * The GetAutomationExecutionResponse message.
  */
 export type GetAutomationExecutionResponse = {
   automationExecution?: AutomationExecution | null | undefined;
+  /**
+   * The expanded field.
+   */
+  expanded?: Array<GetAutomationExecutionResponseExpanded> | null | undefined;
+  /**
+   * The AutomationExecutionView message.
+   */
+  automationExecutionView?: AutomationExecutionView | undefined;
 };
+
+/** @internal */
+export const GetAutomationExecutionResponseExpanded$inboundSchema: z.ZodType<
+  GetAutomationExecutionResponseExpanded,
+  z.ZodTypeDef,
+  unknown
+> = collectExtraKeys$(
+  z.object({
+    "@type": z.string().optional(),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+).transform((v) => {
+  return remap$(v, {
+    "@type": "atType",
+  });
+});
+
+export function getAutomationExecutionResponseExpandedFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAutomationExecutionResponseExpanded, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetAutomationExecutionResponseExpanded$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAutomationExecutionResponseExpanded' from JSON`,
+  );
+}
 
 /** @internal */
 export const GetAutomationExecutionResponse$inboundSchema: z.ZodType<
@@ -27,45 +80,15 @@ export const GetAutomationExecutionResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   automationExecution: z.nullable(AutomationExecution$inboundSchema).optional(),
+  expanded: z.nullable(
+    z.array(z.lazy(() => GetAutomationExecutionResponseExpanded$inboundSchema)),
+  ).optional(),
+  view: AutomationExecutionView$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "view": "automationExecutionView",
+  });
 });
-
-/** @internal */
-export type GetAutomationExecutionResponse$Outbound = {
-  automationExecution?: AutomationExecution$Outbound | null | undefined;
-};
-
-/** @internal */
-export const GetAutomationExecutionResponse$outboundSchema: z.ZodType<
-  GetAutomationExecutionResponse$Outbound,
-  z.ZodTypeDef,
-  GetAutomationExecutionResponse
-> = z.object({
-  automationExecution: z.nullable(AutomationExecution$outboundSchema)
-    .optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAutomationExecutionResponse$ {
-  /** @deprecated use `GetAutomationExecutionResponse$inboundSchema` instead. */
-  export const inboundSchema = GetAutomationExecutionResponse$inboundSchema;
-  /** @deprecated use `GetAutomationExecutionResponse$outboundSchema` instead. */
-  export const outboundSchema = GetAutomationExecutionResponse$outboundSchema;
-  /** @deprecated use `GetAutomationExecutionResponse$Outbound` instead. */
-  export type Outbound = GetAutomationExecutionResponse$Outbound;
-}
-
-export function getAutomationExecutionResponseToJSON(
-  getAutomationExecutionResponse: GetAutomationExecutionResponse,
-): string {
-  return JSON.stringify(
-    GetAutomationExecutionResponse$outboundSchema.parse(
-      getAutomationExecutionResponse,
-    ),
-  );
-}
 
 export function getAutomationExecutionResponseFromJSON(
   jsonString: string,

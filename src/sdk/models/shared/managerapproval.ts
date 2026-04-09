@@ -6,6 +6,12 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AppEntitlementReference,
+  AppEntitlementReference$inboundSchema,
+  AppEntitlementReference$Outbound,
+  AppEntitlementReference$outboundSchema,
+} from "./appentitlementreference.js";
 
 /**
  * The manager approval object provides configuration options for approval when the target of the approval is the manager of the user in the task.
@@ -24,9 +30,21 @@ export type ManagerApproval = {
    */
   fallback?: boolean | null | undefined;
   /**
+   * Configuration to specify which groups to fallback to if fallback is enabled and no manager is found.
+   */
+  fallbackGroupIds?: Array<AppEntitlementReference> | null | undefined;
+  /**
    * Configuration to specific which users to fallback to if fallback is enabled and no manager is found.
    */
   fallbackUserIds?: Array<string> | null | undefined;
+  /**
+   * Configuration to enable fallback for group fallback.
+   */
+  isGroupFallbackEnabled?: boolean | undefined;
+  /**
+   * Configuration to require distinct approvers across approval steps of a rule.
+   */
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -38,15 +56,21 @@ export const ManagerApproval$inboundSchema: z.ZodType<
   allowSelfApproval: z.nullable(z.boolean()).optional(),
   assignedUserIds: z.nullable(z.array(z.string())).optional(),
   fallback: z.nullable(z.boolean()).optional(),
+  fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$inboundSchema))
+    .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  isGroupFallbackEnabled: z.boolean().optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
 /** @internal */
 export type ManagerApproval$Outbound = {
   allowSelfApproval?: boolean | null | undefined;
   assignedUserIds?: Array<string> | null | undefined;
   fallback?: boolean | null | undefined;
+  fallbackGroupIds?: Array<AppEntitlementReference$Outbound> | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
+  isGroupFallbackEnabled?: boolean | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -58,28 +82,18 @@ export const ManagerApproval$outboundSchema: z.ZodType<
   allowSelfApproval: z.nullable(z.boolean()).optional(),
   assignedUserIds: z.nullable(z.array(z.string())).optional(),
   fallback: z.nullable(z.boolean()).optional(),
+  fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$outboundSchema))
+    .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  isGroupFallbackEnabled: z.boolean().optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ManagerApproval$ {
-  /** @deprecated use `ManagerApproval$inboundSchema` instead. */
-  export const inboundSchema = ManagerApproval$inboundSchema;
-  /** @deprecated use `ManagerApproval$outboundSchema` instead. */
-  export const outboundSchema = ManagerApproval$outboundSchema;
-  /** @deprecated use `ManagerApproval$Outbound` instead. */
-  export type Outbound = ManagerApproval$Outbound;
-}
 
 export function managerApprovalToJSON(
   managerApproval: ManagerApproval,
 ): string {
   return JSON.stringify(ManagerApproval$outboundSchema.parse(managerApproval));
 }
-
 export function managerApprovalFromJSON(
   jsonString: string,
 ): SafeParseResult<ManagerApproval, SDKValidationError> {

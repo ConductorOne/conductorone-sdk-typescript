@@ -96,7 +96,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/api/v1/catalogs/{catalog_id}/visibility_entitlements",
   )(pathParams);

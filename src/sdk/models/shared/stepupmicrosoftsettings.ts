@@ -4,22 +4,54 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * StepUpMicrosoftSettings represents a Microsoft Entra Provider using Conditional Access Policies to enforce step-up authentication.
+ * Validation approach. See MicrosoftValidationMode for details on each mode.
+ */
+export const ValidationMode = {
+  MicrosoftValidationModeUnspecified: "MICROSOFT_VALIDATION_MODE_UNSPECIFIED",
+  MicrosoftValidationModeAcrs: "MICROSOFT_VALIDATION_MODE_ACRS",
+  MicrosoftValidationModeOidc: "MICROSOFT_VALIDATION_MODE_OIDC",
+} as const;
+/**
+ * Validation approach. See MicrosoftValidationMode for details on each mode.
+ */
+export type ValidationMode = OpenEnum<typeof ValidationMode>;
+
+/**
+ * StepUpMicrosoftSettings configures a Microsoft Entra step-up provider using Conditional Access.
  */
 export type StepUpMicrosoftSettings = {
   /**
-   * The conditionalAccessIds field.
+   * Authentication context IDs (C1-C99). Required for ACRS mode; ignored for OIDC mode.
    */
   conditionalAccessIds?: Array<string> | null | undefined;
   /**
-   * The tenant field.
+   * Microsoft Entra tenant ID (GUID or domain). Used for response validation.
    */
   tenant?: string | null | undefined;
+  /**
+   * Validation approach. See MicrosoftValidationMode for details on each mode.
+   */
+  validationMode?: ValidationMode | undefined;
 };
+
+/** @internal */
+export const ValidationMode$inboundSchema: z.ZodType<
+  ValidationMode,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ValidationMode);
+/** @internal */
+export const ValidationMode$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  ValidationMode
+> = openEnums.outboundSchema(ValidationMode);
 
 /** @internal */
 export const StepUpMicrosoftSettings$inboundSchema: z.ZodType<
@@ -29,12 +61,13 @@ export const StepUpMicrosoftSettings$inboundSchema: z.ZodType<
 > = z.object({
   conditionalAccessIds: z.nullable(z.array(z.string())).optional(),
   tenant: z.nullable(z.string()).optional(),
+  validationMode: ValidationMode$inboundSchema.optional(),
 });
-
 /** @internal */
 export type StepUpMicrosoftSettings$Outbound = {
   conditionalAccessIds?: Array<string> | null | undefined;
   tenant?: string | null | undefined;
+  validationMode?: string | undefined;
 };
 
 /** @internal */
@@ -45,20 +78,8 @@ export const StepUpMicrosoftSettings$outboundSchema: z.ZodType<
 > = z.object({
   conditionalAccessIds: z.nullable(z.array(z.string())).optional(),
   tenant: z.nullable(z.string()).optional(),
+  validationMode: ValidationMode$outboundSchema.optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StepUpMicrosoftSettings$ {
-  /** @deprecated use `StepUpMicrosoftSettings$inboundSchema` instead. */
-  export const inboundSchema = StepUpMicrosoftSettings$inboundSchema;
-  /** @deprecated use `StepUpMicrosoftSettings$outboundSchema` instead. */
-  export const outboundSchema = StepUpMicrosoftSettings$outboundSchema;
-  /** @deprecated use `StepUpMicrosoftSettings$Outbound` instead. */
-  export type Outbound = StepUpMicrosoftSettings$Outbound;
-}
 
 export function stepUpMicrosoftSettingsToJSON(
   stepUpMicrosoftSettings: StepUpMicrosoftSettings,
@@ -67,7 +88,6 @@ export function stepUpMicrosoftSettingsToJSON(
     StepUpMicrosoftSettings$outboundSchema.parse(stepUpMicrosoftSettings),
   );
 }
-
 export function stepUpMicrosoftSettingsFromJSON(
   jsonString: string,
 ): SafeParseResult<StepUpMicrosoftSettings, SDKValidationError> {

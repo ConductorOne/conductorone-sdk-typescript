@@ -51,7 +51,6 @@ export const ScheduleTrigger$inboundSchema: z.ZodType<
   ).optional(),
   timezone: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type ScheduleTrigger$Outbound = {
   advanced?: boolean | null | undefined;
@@ -76,25 +75,11 @@ export const ScheduleTrigger$outboundSchema: z.ZodType<
   timezone: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ScheduleTrigger$ {
-  /** @deprecated use `ScheduleTrigger$inboundSchema` instead. */
-  export const inboundSchema = ScheduleTrigger$inboundSchema;
-  /** @deprecated use `ScheduleTrigger$outboundSchema` instead. */
-  export const outboundSchema = ScheduleTrigger$outboundSchema;
-  /** @deprecated use `ScheduleTrigger$Outbound` instead. */
-  export type Outbound = ScheduleTrigger$Outbound;
-}
-
 export function scheduleTriggerToJSON(
   scheduleTrigger: ScheduleTrigger,
 ): string {
   return JSON.stringify(ScheduleTrigger$outboundSchema.parse(scheduleTrigger));
 }
-
 export function scheduleTriggerFromJSON(
   jsonString: string,
 ): SafeParseResult<ScheduleTrigger, SDKValidationError> {

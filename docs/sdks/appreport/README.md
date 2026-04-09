@@ -1,5 +1,4 @@
 # AppReport
-(*appReport*)
 
 ## Overview
 

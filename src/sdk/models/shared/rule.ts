@@ -27,7 +27,6 @@ export const Rule$inboundSchema: z.ZodType<Rule, z.ZodTypeDef, unknown> = z
     condition: z.nullable(z.string()).optional(),
     policyKey: z.nullable(z.string()).optional(),
   });
-
 /** @internal */
 export type Rule$Outbound = {
   condition?: string | null | undefined;
@@ -41,23 +40,9 @@ export const Rule$outboundSchema: z.ZodType<Rule$Outbound, z.ZodTypeDef, Rule> =
     policyKey: z.nullable(z.string()).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Rule$ {
-  /** @deprecated use `Rule$inboundSchema` instead. */
-  export const inboundSchema = Rule$inboundSchema;
-  /** @deprecated use `Rule$outboundSchema` instead. */
-  export const outboundSchema = Rule$outboundSchema;
-  /** @deprecated use `Rule$Outbound` instead. */
-  export type Outbound = Rule$Outbound;
-}
-
 export function ruleToJSON(rule: Rule): string {
   return JSON.stringify(Rule$outboundSchema.parse(rule));
 }
-
 export function ruleFromJSON(
   jsonString: string,
 ): SafeParseResult<Rule, SDKValidationError> {

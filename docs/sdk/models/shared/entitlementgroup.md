@@ -8,11 +8,11 @@ The entitlementGroup field.
 import { EntitlementGroup } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: EntitlementGroup = "ENTITLEMENT_GROUP_A";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "ENTITLEMENT_GROUP_UNSPECIFIED" | "ENTITLEMENT_GROUP_A" | "ENTITLEMENT_GROUP_B" | Unrecognized<string>

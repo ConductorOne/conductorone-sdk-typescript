@@ -3,15 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  NotificationConfig,
-  NotificationConfig$inboundSchema,
-  NotificationConfig$Outbound,
-  NotificationConfig$outboundSchema,
-} from "./notificationconfig.js";
+  NotificationConfig1,
+  NotificationConfig1$Outbound,
+  NotificationConfig1$outboundSchema,
+} from "./notificationconfig1.js";
 
 /**
  * The ConflictMonitorUpdateRequest message.
@@ -25,25 +21,14 @@ export type ConflictMonitorUpdateRequest = {
    * The displayName field.
    */
   displayName?: string | null | undefined;
-  notificationConfig?: NotificationConfig | null | undefined;
+  notificationConfig?: NotificationConfig1 | null | undefined;
 };
-
-/** @internal */
-export const ConflictMonitorUpdateRequest$inboundSchema: z.ZodType<
-  ConflictMonitorUpdateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  notificationConfig: z.nullable(NotificationConfig$inboundSchema).optional(),
-});
 
 /** @internal */
 export type ConflictMonitorUpdateRequest$Outbound = {
   description?: string | null | undefined;
   displayName?: string | null | undefined;
-  notificationConfig?: NotificationConfig$Outbound | null | undefined;
+  notificationConfig?: NotificationConfig1$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -54,21 +39,8 @@ export const ConflictMonitorUpdateRequest$outboundSchema: z.ZodType<
 > = z.object({
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
-  notificationConfig: z.nullable(NotificationConfig$outboundSchema).optional(),
+  notificationConfig: z.nullable(NotificationConfig1$outboundSchema).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConflictMonitorUpdateRequest$ {
-  /** @deprecated use `ConflictMonitorUpdateRequest$inboundSchema` instead. */
-  export const inboundSchema = ConflictMonitorUpdateRequest$inboundSchema;
-  /** @deprecated use `ConflictMonitorUpdateRequest$outboundSchema` instead. */
-  export const outboundSchema = ConflictMonitorUpdateRequest$outboundSchema;
-  /** @deprecated use `ConflictMonitorUpdateRequest$Outbound` instead. */
-  export type Outbound = ConflictMonitorUpdateRequest$Outbound;
-}
 
 export function conflictMonitorUpdateRequestToJSON(
   conflictMonitorUpdateRequest: ConflictMonitorUpdateRequest,
@@ -77,15 +49,5 @@ export function conflictMonitorUpdateRequestToJSON(
     ConflictMonitorUpdateRequest$outboundSchema.parse(
       conflictMonitorUpdateRequest,
     ),
-  );
-}
-
-export function conflictMonitorUpdateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ConflictMonitorUpdateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ConflictMonitorUpdateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ConflictMonitorUpdateRequest' from JSON`,
   );
 }

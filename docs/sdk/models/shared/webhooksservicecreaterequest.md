@@ -17,6 +17,7 @@ let value: WebhooksServiceCreateRequest = {
 
 | Field                  | Type                   | Required               | Description            |
 | ---------------------- | ---------------------- | ---------------------- | ---------------------- |
+| `callbackTimeout`      | *string*               | :heavy_minus_sign:     | N/A                    |
 | `description`          | *string*               | :heavy_minus_sign:     | The description field. |
 | `displayName`          | *string*               | :heavy_check_mark:     | The displayName field. |
 | `url`                  | *string*               | :heavy_check_mark:     | The url field.         |

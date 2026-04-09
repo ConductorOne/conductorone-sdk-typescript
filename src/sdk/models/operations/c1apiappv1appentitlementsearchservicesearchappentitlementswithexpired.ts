@@ -40,26 +40,6 @@ export type C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpire
   };
 
 /** @internal */
-export const C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    app_entitlement_id: z.nullable(z.string()),
-    page_size: z.nullable(z.number().int()).optional(),
-    page_token: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "app_entitlement_id": "appEntitlementId",
-      "page_size": "pageSize",
-      "page_token": "pageToken",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequest$Outbound =
   {
     app_id: string | null;
@@ -88,22 +68,6 @@ export const C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpir
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequest$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequest$Outbound;
-}
-
 export function c1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequestToJSON(
   c1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequest:
     C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequest,
@@ -113,21 +77,6 @@ export function c1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithEx
       .parse(
         c1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequest,
       ),
-  );
-}
-
-export function c1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequest' from JSON`,
   );
 }
 
@@ -152,69 +101,6 @@ export const C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpir
         "searchAppEntitlementsWithExpiredResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    SearchAppEntitlementsWithExpiredResponse?:
-      | shared.SearchAppEntitlementsWithExpiredResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    searchAppEntitlementsWithExpiredResponse: shared
-      .SearchAppEntitlementsWithExpiredResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      searchAppEntitlementsWithExpiredResponse:
-        "SearchAppEntitlementsWithExpiredResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredResponse$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredResponse$Outbound;
-}
-
-export function c1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredResponseToJSON(
-  c1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredResponse:
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredResponse$outboundSchema
-      .parse(
-        c1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredResponse,
-      ),
-  );
-}
 
 export function c1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredResponseFromJSON(
   jsonString: string,

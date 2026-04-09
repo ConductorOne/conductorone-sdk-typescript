@@ -7,6 +7,8 @@ This message contains a oneof named task_type. Only a single field of the follow
   - revoke
   - certify
   - offboarding
+  - action
+  - finding
 
 
 ## Example Usage
@@ -21,7 +23,9 @@ let value: TaskTypeInput = {};
 
 | Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               |
 | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `taskTypeAction`                                                                          | [shared.TaskTypeActionInput](../../../sdk/models/shared/tasktypeactioninput.md)           | :heavy_minus_sign:                                                                        | The TaskTypeAction message.                                                               |
 | `certify`                                                                                 | [shared.TaskTypeCertifyInput](../../../sdk/models/shared/tasktypecertifyinput.md)         | :heavy_minus_sign:                                                                        | N/A                                                                                       |
+| `taskTypeFinding`                                                                         | [shared.TaskTypeFindingInput](../../../sdk/models/shared/tasktypefindinginput.md)         | :heavy_minus_sign:                                                                        | The TaskTypeFinding message.                                                              |
 | `grant`                                                                                   | [shared.TaskTypeGrantInput](../../../sdk/models/shared/tasktypegrantinput.md)             | :heavy_minus_sign:                                                                        | N/A                                                                                       |
 | `offboarding`                                                                             | [shared.TaskTypeOffboardingInput](../../../sdk/models/shared/tasktypeoffboardinginput.md) | :heavy_minus_sign:                                                                        | N/A                                                                                       |
 | `revoke`                                                                                  | [shared.TaskTypeRevokeInput](../../../sdk/models/shared/tasktyperevokeinput.md)           | :heavy_minus_sign:                                                                        | N/A                                                                                       |

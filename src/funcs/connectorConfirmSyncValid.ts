@@ -106,7 +106,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/api/v1/apps/{app_id}/connectors/{connector_id}/confirm_sync_valid/{sync_lifecycle_id}",
   )(pathParams);

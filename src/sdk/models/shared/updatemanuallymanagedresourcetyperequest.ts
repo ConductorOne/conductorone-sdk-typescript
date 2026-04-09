@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppResourceTypeInput,
-  AppResourceTypeInput$inboundSchema,
   AppResourceTypeInput$Outbound,
   AppResourceTypeInput$outboundSchema,
 } from "./appresourcetypeinput.js";
@@ -20,16 +16,6 @@ export type UpdateManuallyManagedResourceTypeRequest = {
   appResourceType?: AppResourceTypeInput | null | undefined;
   updateMask?: string | null | undefined;
 };
-
-/** @internal */
-export const UpdateManuallyManagedResourceTypeRequest$inboundSchema: z.ZodType<
-  UpdateManuallyManagedResourceTypeRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appResourceType: z.nullable(AppResourceTypeInput$inboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type UpdateManuallyManagedResourceTypeRequest$Outbound = {
@@ -47,21 +33,6 @@ export const UpdateManuallyManagedResourceTypeRequest$outboundSchema: z.ZodType<
   updateMask: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateManuallyManagedResourceTypeRequest$ {
-  /** @deprecated use `UpdateManuallyManagedResourceTypeRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateManuallyManagedResourceTypeRequest$inboundSchema;
-  /** @deprecated use `UpdateManuallyManagedResourceTypeRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateManuallyManagedResourceTypeRequest$outboundSchema;
-  /** @deprecated use `UpdateManuallyManagedResourceTypeRequest$Outbound` instead. */
-  export type Outbound = UpdateManuallyManagedResourceTypeRequest$Outbound;
-}
-
 export function updateManuallyManagedResourceTypeRequestToJSON(
   updateManuallyManagedResourceTypeRequest:
     UpdateManuallyManagedResourceTypeRequest,
@@ -70,21 +41,5 @@ export function updateManuallyManagedResourceTypeRequestToJSON(
     UpdateManuallyManagedResourceTypeRequest$outboundSchema.parse(
       updateManuallyManagedResourceTypeRequest,
     ),
-  );
-}
-
-export function updateManuallyManagedResourceTypeRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdateManuallyManagedResourceTypeRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateManuallyManagedResourceTypeRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdateManuallyManagedResourceTypeRequest' from JSON`,
   );
 }

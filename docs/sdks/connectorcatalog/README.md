@@ -1,5 +1,4 @@
 # ConnectorCatalog
-(*connectorCatalog*)
 
 ## Overview
 

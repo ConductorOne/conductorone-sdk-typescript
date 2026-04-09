@@ -9,11 +9,11 @@ import { AppEntitlementMonitorBindingEntitlementGroup } from "conductorone-sdk-t
 
 let value: AppEntitlementMonitorBindingEntitlementGroup =
   "ENTITLEMENT_GROUP_UNSPECIFIED";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "ENTITLEMENT_GROUP_UNSPECIFIED" | "ENTITLEMENT_GROUP_A" | "ENTITLEMENT_GROUP_B" | Unrecognized<string>

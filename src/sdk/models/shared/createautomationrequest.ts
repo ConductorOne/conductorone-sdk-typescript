@@ -3,36 +3,77 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  AppEntitlementAutomationInput,
-  AppEntitlementAutomationInput$inboundSchema,
-  AppEntitlementAutomationInput$Outbound,
-  AppEntitlementAutomationInput$outboundSchema,
-} from "./appentitlementautomationinput.js";
+  AutomationContext,
+  AutomationContext$Outbound,
+  AutomationContext$outboundSchema,
+} from "./automationcontext.js";
+import {
+  AutomationStep,
+  AutomationStep$Outbound,
+  AutomationStep$outboundSchema,
+} from "./automationstep.js";
+import {
+  AutomationTrigger,
+  AutomationTrigger$Outbound,
+  AutomationTrigger$outboundSchema,
+} from "./automationtrigger.js";
 
 /**
  * The CreateAutomationRequest message.
  */
 export type CreateAutomationRequest = {
-  automation?: AppEntitlementAutomationInput | null | undefined;
+  /**
+   * the app id this workflow_template belongs to
+   */
+  appId?: string | null | undefined;
+  /**
+   * The automationSteps field.
+   */
+  automationSteps?: Array<AutomationStep> | null | undefined;
+  context?: AutomationContext | null | undefined;
+  /**
+   * The description field.
+   */
+  description?: string | null | undefined;
+  /**
+   * The displayName field.
+   */
+  displayName?: string | null | undefined;
+  /**
+   * The draftAutomationSteps field.
+   */
+  draftAutomationSteps?: Array<AutomationStep> | null | undefined;
+  /**
+   * The draftTriggers field.
+   */
+  draftTriggers?: Array<AutomationTrigger> | null | undefined;
+  /**
+   * The enabled field.
+   */
+  enabled?: boolean | null | undefined;
+  /**
+   * The isDraft field.
+   */
+  isDraft?: boolean | null | undefined;
+  /**
+   * The triggers field.
+   */
+  triggers?: Array<AutomationTrigger> | null | undefined;
 };
 
 /** @internal */
-export const CreateAutomationRequest$inboundSchema: z.ZodType<
-  CreateAutomationRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  automation: z.nullable(AppEntitlementAutomationInput$inboundSchema)
-    .optional(),
-});
-
-/** @internal */
 export type CreateAutomationRequest$Outbound = {
-  automation?: AppEntitlementAutomationInput$Outbound | null | undefined;
+  appId?: string | null | undefined;
+  automationSteps?: Array<AutomationStep$Outbound> | null | undefined;
+  context?: AutomationContext$Outbound | null | undefined;
+  description?: string | null | undefined;
+  displayName?: string | null | undefined;
+  draftAutomationSteps?: Array<AutomationStep$Outbound> | null | undefined;
+  draftTriggers?: Array<AutomationTrigger$Outbound> | null | undefined;
+  enabled?: boolean | null | undefined;
+  isDraft?: boolean | null | undefined;
+  triggers?: Array<AutomationTrigger$Outbound> | null | undefined;
 };
 
 /** @internal */
@@ -41,37 +82,25 @@ export const CreateAutomationRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAutomationRequest
 > = z.object({
-  automation: z.nullable(AppEntitlementAutomationInput$outboundSchema)
+  appId: z.nullable(z.string()).optional(),
+  automationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
     .optional(),
+  context: z.nullable(AutomationContext$outboundSchema).optional(),
+  description: z.nullable(z.string()).optional(),
+  displayName: z.nullable(z.string()).optional(),
+  draftAutomationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
+    .optional(),
+  draftTriggers: z.nullable(z.array(AutomationTrigger$outboundSchema))
+    .optional(),
+  enabled: z.nullable(z.boolean()).optional(),
+  isDraft: z.nullable(z.boolean()).optional(),
+  triggers: z.nullable(z.array(AutomationTrigger$outboundSchema)).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAutomationRequest$ {
-  /** @deprecated use `CreateAutomationRequest$inboundSchema` instead. */
-  export const inboundSchema = CreateAutomationRequest$inboundSchema;
-  /** @deprecated use `CreateAutomationRequest$outboundSchema` instead. */
-  export const outboundSchema = CreateAutomationRequest$outboundSchema;
-  /** @deprecated use `CreateAutomationRequest$Outbound` instead. */
-  export type Outbound = CreateAutomationRequest$Outbound;
-}
 
 export function createAutomationRequestToJSON(
   createAutomationRequest: CreateAutomationRequest,
 ): string {
   return JSON.stringify(
     CreateAutomationRequest$outboundSchema.parse(createAutomationRequest),
-  );
-}
-
-export function createAutomationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAutomationRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateAutomationRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAutomationRequest' from JSON`,
   );
 }

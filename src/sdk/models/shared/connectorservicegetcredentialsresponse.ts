@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ConnectorCredential,
   ConnectorCredential$inboundSchema,
-  ConnectorCredential$Outbound,
-  ConnectorCredential$outboundSchema,
 } from "./connectorcredential.js";
 
 /**
@@ -28,46 +26,6 @@ export const ConnectorServiceGetCredentialsResponse$inboundSchema: z.ZodType<
 > = z.object({
   credential: z.nullable(ConnectorCredential$inboundSchema).optional(),
 });
-
-/** @internal */
-export type ConnectorServiceGetCredentialsResponse$Outbound = {
-  credential?: ConnectorCredential$Outbound | null | undefined;
-};
-
-/** @internal */
-export const ConnectorServiceGetCredentialsResponse$outboundSchema: z.ZodType<
-  ConnectorServiceGetCredentialsResponse$Outbound,
-  z.ZodTypeDef,
-  ConnectorServiceGetCredentialsResponse
-> = z.object({
-  credential: z.nullable(ConnectorCredential$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorServiceGetCredentialsResponse$ {
-  /** @deprecated use `ConnectorServiceGetCredentialsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    ConnectorServiceGetCredentialsResponse$inboundSchema;
-  /** @deprecated use `ConnectorServiceGetCredentialsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    ConnectorServiceGetCredentialsResponse$outboundSchema;
-  /** @deprecated use `ConnectorServiceGetCredentialsResponse$Outbound` instead. */
-  export type Outbound = ConnectorServiceGetCredentialsResponse$Outbound;
-}
-
-export function connectorServiceGetCredentialsResponseToJSON(
-  connectorServiceGetCredentialsResponse:
-    ConnectorServiceGetCredentialsResponse,
-): string {
-  return JSON.stringify(
-    ConnectorServiceGetCredentialsResponse$outboundSchema.parse(
-      connectorServiceGetCredentialsResponse,
-    ),
-  );
-}
 
 export function connectorServiceGetCredentialsResponseFromJSON(
   jsonString: string,

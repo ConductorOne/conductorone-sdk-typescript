@@ -3,15 +3,52 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  AppEntitlementRef,
-  AppEntitlementRef$inboundSchema,
-  AppEntitlementRef$Outbound,
-  AppEntitlementRef$outboundSchema,
-} from "./appentitlementref.js";
+  GrantEntitlementExclusionCriteria,
+  GrantEntitlementExclusionCriteria$inboundSchema,
+  GrantEntitlementExclusionCriteria$Outbound,
+  GrantEntitlementExclusionCriteria$outboundSchema,
+} from "./grantentitlementexclusioncriteria.js";
+import {
+  GrantEntitlementExclusionList,
+  GrantEntitlementExclusionList$inboundSchema,
+  GrantEntitlementExclusionList$Outbound,
+  GrantEntitlementExclusionList$outboundSchema,
+} from "./grantentitlementexclusionlist.js";
+import {
+  GrantEntitlementExclusionListCel,
+  GrantEntitlementExclusionListCel$inboundSchema,
+  GrantEntitlementExclusionListCel$Outbound,
+  GrantEntitlementExclusionListCel$outboundSchema,
+} from "./grantentitlementexclusionlistcel.js";
+import {
+  GrantEntitlementExclusionNone,
+  GrantEntitlementExclusionNone$inboundSchema,
+  GrantEntitlementExclusionNone$Outbound,
+  GrantEntitlementExclusionNone$outboundSchema,
+} from "./grantentitlementexclusionnone.js";
+import {
+  GrantEntitlementInclusionCriteria,
+  GrantEntitlementInclusionCriteria$inboundSchema,
+  GrantEntitlementInclusionCriteria$Outbound,
+  GrantEntitlementInclusionCriteria$outboundSchema,
+} from "./grantentitlementinclusioncriteria.js";
+import {
+  GrantEntitlementInclusionList,
+  GrantEntitlementInclusionList$inboundSchema,
+  GrantEntitlementInclusionList$Outbound,
+  GrantEntitlementInclusionList$outboundSchema,
+} from "./grantentitlementinclusionlist.js";
+import {
+  GrantEntitlementInclusionListCel,
+  GrantEntitlementInclusionListCel$inboundSchema,
+  GrantEntitlementInclusionListCel$Outbound,
+  GrantEntitlementInclusionListCel$outboundSchema,
+} from "./grantentitlementinclusionlistcel.js";
 import {
   UserRef,
   UserRef$inboundSchema,
@@ -21,16 +58,70 @@ import {
 
 /**
  * The GrantEntitlements message.
+ *
+ * @remarks
+ *
+ * This message contains a oneof named inclusion. Only a single field of the following list may be set at a time:
+ *   - inclusionList
+ *   - inclusionCriteria
+ *   - inclusionListCel
+ *
+ * This message contains a oneof named exclusion. Only a single field of the following list may be set at a time:
+ *   - exclusionNone
+ *   - exclusionList
+ *   - exclusionCriteria
+ *   - exclusionListCel
  */
 export type GrantEntitlements = {
   /**
-   * The appEntitlementRefs field.
+   * The GrantEntitlementExclusionCriteria message.
    */
-  appEntitlementRefs?: Array<AppEntitlementRef> | null | undefined;
+  grantEntitlementExclusionCriteria?:
+    | GrantEntitlementExclusionCriteria
+    | null
+    | undefined;
   /**
-   * The appEntitlementRefsCel field.
+   * The GrantEntitlementExclusionList message.
    */
-  appEntitlementRefsCel?: string | null | undefined;
+  grantEntitlementExclusionList?:
+    | GrantEntitlementExclusionList
+    | null
+    | undefined;
+  /**
+   * The GrantEntitlementExclusionListCel message.
+   */
+  grantEntitlementExclusionListCel?:
+    | GrantEntitlementExclusionListCel
+    | null
+    | undefined;
+  /**
+   * The GrantEntitlementExclusionNone message.
+   */
+  grantEntitlementExclusionNone?:
+    | GrantEntitlementExclusionNone
+    | null
+    | undefined;
+  /**
+   * The GrantEntitlementInclusionCriteria message.
+   */
+  grantEntitlementInclusionCriteria?:
+    | GrantEntitlementInclusionCriteria
+    | null
+    | undefined;
+  /**
+   * The GrantEntitlementInclusionList message.
+   */
+  grantEntitlementInclusionList?:
+    | GrantEntitlementInclusionList
+    | null
+    | undefined;
+  /**
+   * The GrantEntitlementInclusionListCel message.
+   */
+  grantEntitlementInclusionListCel?:
+    | GrantEntitlementInclusionListCel
+    | null
+    | undefined;
   /**
    * If true, the step will use the subject user of the automation as the subject.
    */
@@ -48,18 +139,55 @@ export const GrantEntitlements$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
+  exclusionCriteria: z.nullable(GrantEntitlementExclusionCriteria$inboundSchema)
     .optional(),
-  appEntitlementRefsCel: z.nullable(z.string()).optional(),
+  exclusionList: z.nullable(GrantEntitlementExclusionList$inboundSchema)
+    .optional(),
+  exclusionListCel: z.nullable(GrantEntitlementExclusionListCel$inboundSchema)
+    .optional(),
+  exclusionNone: z.nullable(GrantEntitlementExclusionNone$inboundSchema)
+    .optional(),
+  inclusionCriteria: z.nullable(GrantEntitlementInclusionCriteria$inboundSchema)
+    .optional(),
+  inclusionList: z.nullable(GrantEntitlementInclusionList$inboundSchema)
+    .optional(),
+  inclusionListCel: z.nullable(GrantEntitlementInclusionListCel$inboundSchema)
+    .optional(),
   useSubjectUser: z.nullable(z.boolean()).optional(),
   userIdCel: z.nullable(z.string()).optional(),
   userRef: z.nullable(UserRef$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "exclusionCriteria": "grantEntitlementExclusionCriteria",
+    "exclusionList": "grantEntitlementExclusionList",
+    "exclusionListCel": "grantEntitlementExclusionListCel",
+    "exclusionNone": "grantEntitlementExclusionNone",
+    "inclusionCriteria": "grantEntitlementInclusionCriteria",
+    "inclusionList": "grantEntitlementInclusionList",
+    "inclusionListCel": "grantEntitlementInclusionListCel",
+  });
 });
-
 /** @internal */
 export type GrantEntitlements$Outbound = {
-  appEntitlementRefs?: Array<AppEntitlementRef$Outbound> | null | undefined;
-  appEntitlementRefsCel?: string | null | undefined;
+  exclusionCriteria?:
+    | GrantEntitlementExclusionCriteria$Outbound
+    | null
+    | undefined;
+  exclusionList?: GrantEntitlementExclusionList$Outbound | null | undefined;
+  exclusionListCel?:
+    | GrantEntitlementExclusionListCel$Outbound
+    | null
+    | undefined;
+  exclusionNone?: GrantEntitlementExclusionNone$Outbound | null | undefined;
+  inclusionCriteria?:
+    | GrantEntitlementInclusionCriteria$Outbound
+    | null
+    | undefined;
+  inclusionList?: GrantEntitlementInclusionList$Outbound | null | undefined;
+  inclusionListCel?:
+    | GrantEntitlementInclusionListCel$Outbound
+    | null
+    | undefined;
   useSubjectUser?: boolean | null | undefined;
   userIdCel?: string | null | undefined;
   userRef?: UserRef$Outbound | null | undefined;
@@ -71,26 +199,41 @@ export const GrantEntitlements$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GrantEntitlements
 > = z.object({
-  appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
-    .optional(),
-  appEntitlementRefsCel: z.nullable(z.string()).optional(),
+  grantEntitlementExclusionCriteria: z.nullable(
+    GrantEntitlementExclusionCriteria$outboundSchema,
+  ).optional(),
+  grantEntitlementExclusionList: z.nullable(
+    GrantEntitlementExclusionList$outboundSchema,
+  ).optional(),
+  grantEntitlementExclusionListCel: z.nullable(
+    GrantEntitlementExclusionListCel$outboundSchema,
+  ).optional(),
+  grantEntitlementExclusionNone: z.nullable(
+    GrantEntitlementExclusionNone$outboundSchema,
+  ).optional(),
+  grantEntitlementInclusionCriteria: z.nullable(
+    GrantEntitlementInclusionCriteria$outboundSchema,
+  ).optional(),
+  grantEntitlementInclusionList: z.nullable(
+    GrantEntitlementInclusionList$outboundSchema,
+  ).optional(),
+  grantEntitlementInclusionListCel: z.nullable(
+    GrantEntitlementInclusionListCel$outboundSchema,
+  ).optional(),
   useSubjectUser: z.nullable(z.boolean()).optional(),
   userIdCel: z.nullable(z.string()).optional(),
   userRef: z.nullable(UserRef$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    grantEntitlementExclusionCriteria: "exclusionCriteria",
+    grantEntitlementExclusionList: "exclusionList",
+    grantEntitlementExclusionListCel: "exclusionListCel",
+    grantEntitlementExclusionNone: "exclusionNone",
+    grantEntitlementInclusionCriteria: "inclusionCriteria",
+    grantEntitlementInclusionList: "inclusionList",
+    grantEntitlementInclusionListCel: "inclusionListCel",
+  });
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GrantEntitlements$ {
-  /** @deprecated use `GrantEntitlements$inboundSchema` instead. */
-  export const inboundSchema = GrantEntitlements$inboundSchema;
-  /** @deprecated use `GrantEntitlements$outboundSchema` instead. */
-  export const outboundSchema = GrantEntitlements$outboundSchema;
-  /** @deprecated use `GrantEntitlements$Outbound` instead. */
-  export type Outbound = GrantEntitlements$Outbound;
-}
 
 export function grantEntitlementsToJSON(
   grantEntitlements: GrantEntitlements,
@@ -99,7 +242,6 @@ export function grantEntitlementsToJSON(
     GrantEntitlements$outboundSchema.parse(grantEntitlements),
   );
 }
-
 export function grantEntitlementsFromJSON(
   jsonString: string,
 ): SafeParseResult<GrantEntitlements, SDKValidationError> {

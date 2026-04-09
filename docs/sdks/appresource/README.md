@@ -1,5 +1,4 @@
 # AppResource
-(*appResource*)
 
 ## Overview
 

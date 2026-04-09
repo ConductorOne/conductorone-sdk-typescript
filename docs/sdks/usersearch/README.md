@@ -1,5 +1,4 @@
 # UserSearch
-(*userSearch*)
 
 ## Overview
 

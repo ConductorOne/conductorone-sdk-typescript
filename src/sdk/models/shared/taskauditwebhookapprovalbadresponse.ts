@@ -46,53 +46,6 @@ export const TaskAuditWebhookApprovalBadResponse$inboundSchema: z.ZodType<
   webhookUrl: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditWebhookApprovalBadResponse$Outbound = {
-  error?: string | null | undefined;
-  webhookId?: string | null | undefined;
-  webhookInstanceId?: string | null | undefined;
-  webhookName?: string | null | undefined;
-  webhookUrl?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditWebhookApprovalBadResponse$outboundSchema: z.ZodType<
-  TaskAuditWebhookApprovalBadResponse$Outbound,
-  z.ZodTypeDef,
-  TaskAuditWebhookApprovalBadResponse
-> = z.object({
-  error: z.nullable(z.string()).optional(),
-  webhookId: z.nullable(z.string()).optional(),
-  webhookInstanceId: z.nullable(z.string()).optional(),
-  webhookName: z.nullable(z.string()).optional(),
-  webhookUrl: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditWebhookApprovalBadResponse$ {
-  /** @deprecated use `TaskAuditWebhookApprovalBadResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskAuditWebhookApprovalBadResponse$inboundSchema;
-  /** @deprecated use `TaskAuditWebhookApprovalBadResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskAuditWebhookApprovalBadResponse$outboundSchema;
-  /** @deprecated use `TaskAuditWebhookApprovalBadResponse$Outbound` instead. */
-  export type Outbound = TaskAuditWebhookApprovalBadResponse$Outbound;
-}
-
-export function taskAuditWebhookApprovalBadResponseToJSON(
-  taskAuditWebhookApprovalBadResponse: TaskAuditWebhookApprovalBadResponse,
-): string {
-  return JSON.stringify(
-    TaskAuditWebhookApprovalBadResponse$outboundSchema.parse(
-      taskAuditWebhookApprovalBadResponse,
-    ),
-  );
-}
-
 export function taskAuditWebhookApprovalBadResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditWebhookApprovalBadResponse, SDKValidationError> {

@@ -14,4 +14,5 @@ let value: ManuallyManagedUsersResponse = {};
 
 | Field                          | Type                           | Required                       | Description                    |
 | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
+| `bulkActionId`                 | *string*                       | :heavy_minus_sign:             | The bulkActionId field.        |
 | `failedUsersErrorMap`          | Record<string, *string*>       | :heavy_minus_sign:             | The failedUsersErrorMap field. |

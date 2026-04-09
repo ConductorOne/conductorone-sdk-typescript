@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  TaskView,
-  TaskView$inboundSchema,
-  TaskView$Outbound,
-  TaskView$outboundSchema,
-} from "./taskview.js";
+import { TaskView, TaskView$inboundSchema } from "./taskview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -68,58 +63,6 @@ export const TaskActionsServiceApproveWithStepUpResponseExpanded$inboundSchema:
     });
   });
 
-/** @internal */
-export type TaskActionsServiceApproveWithStepUpResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const TaskActionsServiceApproveWithStepUpResponseExpanded$outboundSchema:
-  z.ZodType<
-    TaskActionsServiceApproveWithStepUpResponseExpanded$Outbound,
-    z.ZodTypeDef,
-    TaskActionsServiceApproveWithStepUpResponseExpanded
-  > = z.object({
-    atType: z.string().optional(),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        atType: "@type",
-        additionalProperties: null,
-      }),
-    };
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceApproveWithStepUpResponseExpanded$ {
-  /** @deprecated use `TaskActionsServiceApproveWithStepUpResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskActionsServiceApproveWithStepUpResponseExpanded$inboundSchema;
-  /** @deprecated use `TaskActionsServiceApproveWithStepUpResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceApproveWithStepUpResponseExpanded$outboundSchema;
-  /** @deprecated use `TaskActionsServiceApproveWithStepUpResponseExpanded$Outbound` instead. */
-  export type Outbound =
-    TaskActionsServiceApproveWithStepUpResponseExpanded$Outbound;
-}
-
-export function taskActionsServiceApproveWithStepUpResponseExpandedToJSON(
-  taskActionsServiceApproveWithStepUpResponseExpanded:
-    TaskActionsServiceApproveWithStepUpResponseExpanded,
-): string {
-  return JSON.stringify(
-    TaskActionsServiceApproveWithStepUpResponseExpanded$outboundSchema.parse(
-      taskActionsServiceApproveWithStepUpResponseExpanded,
-    ),
-  );
-}
-
 export function taskActionsServiceApproveWithStepUpResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -152,60 +95,6 @@ export const TaskActionsServiceApproveWithStepUpResponse$inboundSchema:
     taskView: z.nullable(TaskView$inboundSchema).optional(),
     ticketActionId: z.nullable(z.string()).optional(),
   });
-
-/** @internal */
-export type TaskActionsServiceApproveWithStepUpResponse$Outbound = {
-  expanded?:
-    | Array<TaskActionsServiceApproveWithStepUpResponseExpanded$Outbound>
-    | null
-    | undefined;
-  redirectUrl?: string | null | undefined;
-  taskView?: TaskView$Outbound | null | undefined;
-  ticketActionId?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskActionsServiceApproveWithStepUpResponse$outboundSchema:
-  z.ZodType<
-    TaskActionsServiceApproveWithStepUpResponse$Outbound,
-    z.ZodTypeDef,
-    TaskActionsServiceApproveWithStepUpResponse
-  > = z.object({
-    expanded: z.nullable(
-      z.array(z.lazy(() =>
-        TaskActionsServiceApproveWithStepUpResponseExpanded$outboundSchema
-      )),
-    ).optional(),
-    redirectUrl: z.nullable(z.string()).optional(),
-    taskView: z.nullable(TaskView$outboundSchema).optional(),
-    ticketActionId: z.nullable(z.string()).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceApproveWithStepUpResponse$ {
-  /** @deprecated use `TaskActionsServiceApproveWithStepUpResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskActionsServiceApproveWithStepUpResponse$inboundSchema;
-  /** @deprecated use `TaskActionsServiceApproveWithStepUpResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceApproveWithStepUpResponse$outboundSchema;
-  /** @deprecated use `TaskActionsServiceApproveWithStepUpResponse$Outbound` instead. */
-  export type Outbound = TaskActionsServiceApproveWithStepUpResponse$Outbound;
-}
-
-export function taskActionsServiceApproveWithStepUpResponseToJSON(
-  taskActionsServiceApproveWithStepUpResponse:
-    TaskActionsServiceApproveWithStepUpResponse,
-): string {
-  return JSON.stringify(
-    TaskActionsServiceApproveWithStepUpResponse$outboundSchema.parse(
-      taskActionsServiceApproveWithStepUpResponse,
-    ),
-  );
-}
 
 export function taskActionsServiceApproveWithStepUpResponseFromJSON(
   jsonString: string,

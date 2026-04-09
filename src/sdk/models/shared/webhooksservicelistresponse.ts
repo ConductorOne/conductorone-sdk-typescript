@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Webhook1,
-  Webhook1$inboundSchema,
-  Webhook1$Outbound,
-  Webhook1$outboundSchema,
-} from "./webhook1.js";
+import { Webhook1, Webhook1$inboundSchema } from "./webhook1.js";
 
 /**
  * The WebhooksServiceListResponse message.
@@ -36,45 +31,6 @@ export const WebhooksServiceListResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(Webhook1$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type WebhooksServiceListResponse$Outbound = {
-  list?: Array<Webhook1$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const WebhooksServiceListResponse$outboundSchema: z.ZodType<
-  WebhooksServiceListResponse$Outbound,
-  z.ZodTypeDef,
-  WebhooksServiceListResponse
-> = z.object({
-  list: z.nullable(z.array(Webhook1$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhooksServiceListResponse$ {
-  /** @deprecated use `WebhooksServiceListResponse$inboundSchema` instead. */
-  export const inboundSchema = WebhooksServiceListResponse$inboundSchema;
-  /** @deprecated use `WebhooksServiceListResponse$outboundSchema` instead. */
-  export const outboundSchema = WebhooksServiceListResponse$outboundSchema;
-  /** @deprecated use `WebhooksServiceListResponse$Outbound` instead. */
-  export type Outbound = WebhooksServiceListResponse$Outbound;
-}
-
-export function webhooksServiceListResponseToJSON(
-  webhooksServiceListResponse: WebhooksServiceListResponse,
-): string {
-  return JSON.stringify(
-    WebhooksServiceListResponse$outboundSchema.parse(
-      webhooksServiceListResponse,
-    ),
-  );
-}
 
 export function webhooksServiceListResponseFromJSON(
   jsonString: string,

@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The AppResourceType is referenced by an app entitlement defining its resource types. Commonly things like Group or Role.
@@ -23,25 +20,6 @@ export type AppResourceTypeInput = {
   traitIds?: Array<string> | null | undefined;
   updatedAt?: Date | null | undefined;
 };
-
-/** @internal */
-export const AppResourceTypeInput$inboundSchema: z.ZodType<
-  AppResourceTypeInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  traitIds: z.nullable(z.array(z.string())).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
 
 /** @internal */
 export type AppResourceTypeInput$Outbound = {
@@ -65,33 +43,10 @@ export const AppResourceTypeInput$outboundSchema: z.ZodType<
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppResourceTypeInput$ {
-  /** @deprecated use `AppResourceTypeInput$inboundSchema` instead. */
-  export const inboundSchema = AppResourceTypeInput$inboundSchema;
-  /** @deprecated use `AppResourceTypeInput$outboundSchema` instead. */
-  export const outboundSchema = AppResourceTypeInput$outboundSchema;
-  /** @deprecated use `AppResourceTypeInput$Outbound` instead. */
-  export type Outbound = AppResourceTypeInput$Outbound;
-}
-
 export function appResourceTypeInputToJSON(
   appResourceTypeInput: AppResourceTypeInput,
 ): string {
   return JSON.stringify(
     AppResourceTypeInput$outboundSchema.parse(appResourceTypeInput),
-  );
-}
-
-export function appResourceTypeInputFromJSON(
-  jsonString: string,
-): SafeParseResult<AppResourceTypeInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AppResourceTypeInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AppResourceTypeInput' from JSON`,
   );
 }

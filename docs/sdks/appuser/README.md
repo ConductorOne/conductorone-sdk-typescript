@@ -1,5 +1,4 @@
 # AppUser
-(*appUser*)
 
 ## Overview
 

@@ -3,14 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 /**
  * Define the app user identity matching strategy for this app.
@@ -19,6 +13,7 @@ export const CreateAppRequestIdentityMatching = {
   AppUserIdentityMatchingUnspecified: "APP_USER_IDENTITY_MATCHING_UNSPECIFIED",
   AppUserIdentityMatchingStrict: "APP_USER_IDENTITY_MATCHING_STRICT",
   AppUserIdentityMatchingDisplayName: "APP_USER_IDENTITY_MATCHING_DISPLAY_NAME",
+  AppUserIdentityMatchingCustom: "APP_USER_IDENTITY_MATCHING_CUSTOM",
 } as const;
 /**
  * Define the app user identity matching strategy for this app.
@@ -52,6 +47,10 @@ export type CreateAppRequest = {
    */
   identityMatching?: CreateAppRequestIdentityMatching | null | undefined;
   /**
+   * Instructions shown to users in the access request form when requesting access for this app.
+   */
+  instructions?: string | undefined;
+  /**
    * Creates the app with this monthly cost per seat.
    */
   monthlyCostUsd?: number | null | undefined;
@@ -70,54 +69,11 @@ export type CreateAppRequest = {
 };
 
 /** @internal */
-export const CreateAppRequestIdentityMatching$inboundSchema: z.ZodType<
-  CreateAppRequestIdentityMatching,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(CreateAppRequestIdentityMatching),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
 export const CreateAppRequestIdentityMatching$outboundSchema: z.ZodType<
-  CreateAppRequestIdentityMatching,
+  string,
   z.ZodTypeDef,
   CreateAppRequestIdentityMatching
-> = z.union([
-  z.nativeEnum(CreateAppRequestIdentityMatching),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAppRequestIdentityMatching$ {
-  /** @deprecated use `CreateAppRequestIdentityMatching$inboundSchema` instead. */
-  export const inboundSchema = CreateAppRequestIdentityMatching$inboundSchema;
-  /** @deprecated use `CreateAppRequestIdentityMatching$outboundSchema` instead. */
-  export const outboundSchema = CreateAppRequestIdentityMatching$outboundSchema;
-}
-
-/** @internal */
-export const CreateAppRequest$inboundSchema: z.ZodType<
-  CreateAppRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  certifyPolicyId: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.string(),
-  grantPolicyId: z.nullable(z.string()).optional(),
-  identityMatching: z.nullable(CreateAppRequestIdentityMatching$inboundSchema)
-    .optional(),
-  monthlyCostUsd: z.nullable(z.number().int()).optional(),
-  owners: z.nullable(z.array(z.string())).optional(),
-  revokePolicyId: z.nullable(z.string()).optional(),
-  strictAccessEntitlementProvisioning: z.nullable(z.boolean()).optional(),
-});
+> = openEnums.outboundSchema(CreateAppRequestIdentityMatching);
 
 /** @internal */
 export type CreateAppRequest$Outbound = {
@@ -126,6 +82,7 @@ export type CreateAppRequest$Outbound = {
   displayName: string;
   grantPolicyId?: string | null | undefined;
   identityMatching?: string | null | undefined;
+  instructions?: string | undefined;
   monthlyCostUsd?: number | null | undefined;
   owners?: Array<string> | null | undefined;
   revokePolicyId?: string | null | undefined;
@@ -144,39 +101,17 @@ export const CreateAppRequest$outboundSchema: z.ZodType<
   grantPolicyId: z.nullable(z.string()).optional(),
   identityMatching: z.nullable(CreateAppRequestIdentityMatching$outboundSchema)
     .optional(),
+  instructions: z.string().optional(),
   monthlyCostUsd: z.nullable(z.number().int()).optional(),
   owners: z.nullable(z.array(z.string())).optional(),
   revokePolicyId: z.nullable(z.string()).optional(),
   strictAccessEntitlementProvisioning: z.nullable(z.boolean()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAppRequest$ {
-  /** @deprecated use `CreateAppRequest$inboundSchema` instead. */
-  export const inboundSchema = CreateAppRequest$inboundSchema;
-  /** @deprecated use `CreateAppRequest$outboundSchema` instead. */
-  export const outboundSchema = CreateAppRequest$outboundSchema;
-  /** @deprecated use `CreateAppRequest$Outbound` instead. */
-  export type Outbound = CreateAppRequest$Outbound;
-}
-
 export function createAppRequestToJSON(
   createAppRequest: CreateAppRequest,
 ): string {
   return JSON.stringify(
     CreateAppRequest$outboundSchema.parse(createAppRequest),
-  );
-}
-
-export function createAppRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAppRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateAppRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAppRequest' from JSON`,
   );
 }

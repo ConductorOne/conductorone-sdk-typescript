@@ -93,7 +93,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/api/v1/users/{user_id}/profile-types")(pathParams);
 
   const headers = new Headers(compactMap({

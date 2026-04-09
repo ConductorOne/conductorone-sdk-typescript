@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -92,6 +89,7 @@ export type ApprovalInstanceState = OpenEnum<typeof ApprovalInstanceState>;
 export type ApprovalInstance = {
   approval?: Approval | null | undefined;
   approved?: ApprovedAction | null | undefined;
+  assignedAt?: Date | undefined;
   denied?: DeniedAction | null | undefined;
   escalationInstance?: EscalationInstance | null | undefined;
   reassigned?: ReassignedAction | null | undefined;
@@ -109,32 +107,13 @@ export const ApprovalInstanceState$inboundSchema: z.ZodType<
   ApprovalInstanceState,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(ApprovalInstanceState),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(ApprovalInstanceState);
 /** @internal */
 export const ApprovalInstanceState$outboundSchema: z.ZodType<
-  ApprovalInstanceState,
+  string,
   z.ZodTypeDef,
   ApprovalInstanceState
-> = z.union([
-  z.nativeEnum(ApprovalInstanceState),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ApprovalInstanceState$ {
-  /** @deprecated use `ApprovalInstanceState$inboundSchema` instead. */
-  export const inboundSchema = ApprovalInstanceState$inboundSchema;
-  /** @deprecated use `ApprovalInstanceState$outboundSchema` instead. */
-  export const outboundSchema = ApprovalInstanceState$outboundSchema;
-}
+> = openEnums.outboundSchema(ApprovalInstanceState);
 
 /** @internal */
 export const ApprovalInstance$inboundSchema: z.ZodType<
@@ -144,6 +123,8 @@ export const ApprovalInstance$inboundSchema: z.ZodType<
 > = z.object({
   approval: z.nullable(Approval$inboundSchema).optional(),
   approved: z.nullable(ApprovedAction$inboundSchema).optional(),
+  assignedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
   denied: z.nullable(DeniedAction$inboundSchema).optional(),
   escalationInstance: z.nullable(EscalationInstance$inboundSchema).optional(),
   reassigned: z.nullable(ReassignedAction$inboundSchema).optional(),
@@ -153,11 +134,11 @@ export const ApprovalInstance$inboundSchema: z.ZodType<
   skipped: z.nullable(SkippedAction$inboundSchema).optional(),
   state: z.nullable(ApprovalInstanceState$inboundSchema).optional(),
 });
-
 /** @internal */
 export type ApprovalInstance$Outbound = {
   approval?: Approval$Outbound | null | undefined;
   approved?: ApprovedAction$Outbound | null | undefined;
+  assignedAt?: string | undefined;
   denied?: DeniedAction$Outbound | null | undefined;
   escalationInstance?: EscalationInstance$Outbound | null | undefined;
   reassigned?: ReassignedAction$Outbound | null | undefined;
@@ -175,6 +156,7 @@ export const ApprovalInstance$outboundSchema: z.ZodType<
 > = z.object({
   approval: z.nullable(Approval$outboundSchema).optional(),
   approved: z.nullable(ApprovedAction$outboundSchema).optional(),
+  assignedAt: z.date().transform(v => v.toISOString()).optional(),
   denied: z.nullable(DeniedAction$outboundSchema).optional(),
   escalationInstance: z.nullable(EscalationInstance$outboundSchema).optional(),
   reassigned: z.nullable(ReassignedAction$outboundSchema).optional(),
@@ -185,19 +167,6 @@ export const ApprovalInstance$outboundSchema: z.ZodType<
   state: z.nullable(ApprovalInstanceState$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ApprovalInstance$ {
-  /** @deprecated use `ApprovalInstance$inboundSchema` instead. */
-  export const inboundSchema = ApprovalInstance$inboundSchema;
-  /** @deprecated use `ApprovalInstance$outboundSchema` instead. */
-  export const outboundSchema = ApprovalInstance$outboundSchema;
-  /** @deprecated use `ApprovalInstance$Outbound` instead. */
-  export type Outbound = ApprovalInstance$Outbound;
-}
-
 export function approvalInstanceToJSON(
   approvalInstance: ApprovalInstance,
 ): string {
@@ -205,7 +174,6 @@ export function approvalInstanceToJSON(
     ApprovalInstance$outboundSchema.parse(approvalInstance),
   );
 }
-
 export function approvalInstanceFromJSON(
   jsonString: string,
 ): SafeParseResult<ApprovalInstance, SDKValidationError> {

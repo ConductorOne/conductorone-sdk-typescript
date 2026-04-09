@@ -103,7 +103,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/api/v1/apps/{app_id}/entitlements/{app_entitlement_id}/remove-membership",
   )(pathParams);

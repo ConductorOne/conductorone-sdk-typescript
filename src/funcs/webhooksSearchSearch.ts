@@ -216,7 +216,7 @@ async function $do(
       webhooksSearchSearch(
         client,
         {
-          ...request,
+          ...request!,
           pageToken: nextCursor,
         },
         options,

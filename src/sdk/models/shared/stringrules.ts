@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -264,32 +261,13 @@ export const WellKnownRegex$inboundSchema: z.ZodType<
   WellKnownRegex,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(WellKnownRegex),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(WellKnownRegex);
 /** @internal */
 export const WellKnownRegex$outboundSchema: z.ZodType<
-  WellKnownRegex,
+  string,
   z.ZodTypeDef,
   WellKnownRegex
-> = z.union([
-  z.nativeEnum(WellKnownRegex),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WellKnownRegex$ {
-  /** @deprecated use `WellKnownRegex$inboundSchema` instead. */
-  export const inboundSchema = WellKnownRegex$inboundSchema;
-  /** @deprecated use `WellKnownRegex$outboundSchema` instead. */
-  export const outboundSchema = WellKnownRegex$outboundSchema;
-}
+> = openEnums.outboundSchema(WellKnownRegex);
 
 /** @internal */
 export const StringRules$inboundSchema: z.ZodType<
@@ -324,7 +302,6 @@ export const StringRules$inboundSchema: z.ZodType<
   uuid: z.nullable(z.boolean()).optional(),
   wellKnownRegex: z.nullable(WellKnownRegex$inboundSchema).optional(),
 });
-
 /** @internal */
 export type StringRules$Outbound = {
   address?: boolean | null | undefined;
@@ -389,23 +366,9 @@ export const StringRules$outboundSchema: z.ZodType<
   wellKnownRegex: z.nullable(WellKnownRegex$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StringRules$ {
-  /** @deprecated use `StringRules$inboundSchema` instead. */
-  export const inboundSchema = StringRules$inboundSchema;
-  /** @deprecated use `StringRules$outboundSchema` instead. */
-  export const outboundSchema = StringRules$outboundSchema;
-  /** @deprecated use `StringRules$Outbound` instead. */
-  export type Outbound = StringRules$Outbound;
-}
-
 export function stringRulesToJSON(stringRules: StringRules): string {
   return JSON.stringify(StringRules$outboundSchema.parse(stringRules));
 }
-
 export function stringRulesFromJSON(
   jsonString: string,
 ): SafeParseResult<StringRules, SDKValidationError> {

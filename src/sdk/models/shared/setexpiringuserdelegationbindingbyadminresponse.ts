@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ExpiringUserDelegationBinding,
   ExpiringUserDelegationBinding$inboundSchema,
-  ExpiringUserDelegationBinding$Outbound,
-  ExpiringUserDelegationBinding$outboundSchema,
 } from "./expiringuserdelegationbinding.js";
 
 /**
@@ -29,48 +27,6 @@ export const SetExpiringUserDelegationBindingByAdminResponse$inboundSchema:
   > = z.object({
     item: z.nullable(ExpiringUserDelegationBinding$inboundSchema).optional(),
   });
-
-/** @internal */
-export type SetExpiringUserDelegationBindingByAdminResponse$Outbound = {
-  item?: ExpiringUserDelegationBinding$Outbound | null | undefined;
-};
-
-/** @internal */
-export const SetExpiringUserDelegationBindingByAdminResponse$outboundSchema:
-  z.ZodType<
-    SetExpiringUserDelegationBindingByAdminResponse$Outbound,
-    z.ZodTypeDef,
-    SetExpiringUserDelegationBindingByAdminResponse
-  > = z.object({
-    item: z.nullable(ExpiringUserDelegationBinding$outboundSchema).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SetExpiringUserDelegationBindingByAdminResponse$ {
-  /** @deprecated use `SetExpiringUserDelegationBindingByAdminResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    SetExpiringUserDelegationBindingByAdminResponse$inboundSchema;
-  /** @deprecated use `SetExpiringUserDelegationBindingByAdminResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    SetExpiringUserDelegationBindingByAdminResponse$outboundSchema;
-  /** @deprecated use `SetExpiringUserDelegationBindingByAdminResponse$Outbound` instead. */
-  export type Outbound =
-    SetExpiringUserDelegationBindingByAdminResponse$Outbound;
-}
-
-export function setExpiringUserDelegationBindingByAdminResponseToJSON(
-  setExpiringUserDelegationBindingByAdminResponse:
-    SetExpiringUserDelegationBindingByAdminResponse,
-): string {
-  return JSON.stringify(
-    SetExpiringUserDelegationBindingByAdminResponse$outboundSchema.parse(
-      setExpiringUserDelegationBindingByAdminResponse,
-    ),
-  );
-}
 
 export function setExpiringUserDelegationBindingByAdminResponseFromJSON(
   jsonString: string,

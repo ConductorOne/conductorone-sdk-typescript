@@ -25,7 +25,7 @@ export type C1ApiAutomationsV1AutomationServiceCreateAutomationResponse = {
   /**
    * Successful response
    */
-  createAutomationResponse?: shared.CreateAutomationResponseInput | undefined;
+  createAutomationResponse?: shared.CreateAutomationResponse1 | undefined;
 };
 
 /** @internal */
@@ -38,7 +38,7 @@ export const C1ApiAutomationsV1AutomationServiceCreateAutomationResponse$inbound
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    CreateAutomationResponse: shared.CreateAutomationResponseInput$inboundSchema
+    CreateAutomationResponse: shared.CreateAutomationResponse1$inboundSchema
       .optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -48,66 +48,6 @@ export const C1ApiAutomationsV1AutomationServiceCreateAutomationResponse$inbound
       "CreateAutomationResponse": "createAutomationResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAutomationsV1AutomationServiceCreateAutomationResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    CreateAutomationResponse?:
-      | shared.CreateAutomationResponseInput$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAutomationsV1AutomationServiceCreateAutomationResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAutomationsV1AutomationServiceCreateAutomationResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAutomationsV1AutomationServiceCreateAutomationResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    createAutomationResponse: shared
-      .CreateAutomationResponseInput$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      createAutomationResponse: "CreateAutomationResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAutomationsV1AutomationServiceCreateAutomationResponse$ {
-  /** @deprecated use `C1ApiAutomationsV1AutomationServiceCreateAutomationResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAutomationsV1AutomationServiceCreateAutomationResponse$inboundSchema;
-  /** @deprecated use `C1ApiAutomationsV1AutomationServiceCreateAutomationResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAutomationsV1AutomationServiceCreateAutomationResponse$outboundSchema;
-  /** @deprecated use `C1ApiAutomationsV1AutomationServiceCreateAutomationResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAutomationsV1AutomationServiceCreateAutomationResponse$Outbound;
-}
-
-export function c1ApiAutomationsV1AutomationServiceCreateAutomationResponseToJSON(
-  c1ApiAutomationsV1AutomationServiceCreateAutomationResponse:
-    C1ApiAutomationsV1AutomationServiceCreateAutomationResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAutomationsV1AutomationServiceCreateAutomationResponse$outboundSchema
-      .parse(c1ApiAutomationsV1AutomationServiceCreateAutomationResponse),
-  );
-}
 
 export function c1ApiAutomationsV1AutomationServiceCreateAutomationResponseFromJSON(
   jsonString: string,

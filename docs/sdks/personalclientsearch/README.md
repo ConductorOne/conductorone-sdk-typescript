@@ -1,5 +1,4 @@
 # PersonalClientSearch
-(*personalClientSearch*)
 
 ## Overview
 

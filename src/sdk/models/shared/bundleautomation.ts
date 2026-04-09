@@ -3,26 +3,25 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BundleAutomationCircuitBreaker,
   BundleAutomationCircuitBreaker$inboundSchema,
-  BundleAutomationCircuitBreaker$Outbound,
-  BundleAutomationCircuitBreaker$outboundSchema,
 } from "./bundleautomationcircuitbreaker.js";
 import {
   BundleAutomationLastRunState,
   BundleAutomationLastRunState$inboundSchema,
-  BundleAutomationLastRunState$Outbound,
-  BundleAutomationLastRunState$outboundSchema,
 } from "./bundleautomationlastrunstate.js";
+import {
+  BundleAutomationRuleCEL,
+  BundleAutomationRuleCEL$inboundSchema,
+} from "./bundleautomationrulecel.js";
 import {
   BundleAutomationRuleEntitlement,
   BundleAutomationRuleEntitlement$inboundSchema,
-  BundleAutomationRuleEntitlement$Outbound,
-  BundleAutomationRuleEntitlement$outboundSchema,
 } from "./bundleautomationruleentitlement.js";
 
 /**
@@ -32,8 +31,13 @@ import {
  *
  * This message contains a oneof named conditions. Only a single field of the following list may be set at a time:
  *   - entitlements
+ *   - cel
  */
 export type BundleAutomation = {
+  /**
+   * The BundleAutomationRuleCEL message.
+   */
+  bundleAutomationRuleCEL?: BundleAutomationRuleCEL | null | undefined;
   circuitBreaker?: BundleAutomationCircuitBreaker | null | undefined;
   /**
    * The createTasks field.
@@ -68,6 +72,7 @@ export const BundleAutomation$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  cel: z.nullable(BundleAutomationRuleCEL$inboundSchema).optional(),
   circuitBreaker: z.nullable(BundleAutomationCircuitBreaker$inboundSchema)
     .optional(),
   createTasks: z.nullable(z.boolean()).optional(),
@@ -87,64 +92,11 @@ export const BundleAutomation$inboundSchema: z.ZodType<
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "cel": "bundleAutomationRuleCEL",
+  });
 });
-
-/** @internal */
-export type BundleAutomation$Outbound = {
-  circuitBreaker?: BundleAutomationCircuitBreaker$Outbound | null | undefined;
-  createTasks?: boolean | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  disableCircuitBreaker?: boolean | null | undefined;
-  enabled?: boolean | null | undefined;
-  entitlements?: BundleAutomationRuleEntitlement$Outbound | null | undefined;
-  requestCatalogId?: string | null | undefined;
-  state?: BundleAutomationLastRunState$Outbound | null | undefined;
-  tenantId?: string | null | undefined;
-  updatedAt?: string | null | undefined;
-};
-
-/** @internal */
-export const BundleAutomation$outboundSchema: z.ZodType<
-  BundleAutomation$Outbound,
-  z.ZodTypeDef,
-  BundleAutomation
-> = z.object({
-  circuitBreaker: z.nullable(BundleAutomationCircuitBreaker$outboundSchema)
-    .optional(),
-  createTasks: z.nullable(z.boolean()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  disableCircuitBreaker: z.nullable(z.boolean()).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  entitlements: z.nullable(BundleAutomationRuleEntitlement$outboundSchema)
-    .optional(),
-  requestCatalogId: z.nullable(z.string()).optional(),
-  state: z.nullable(BundleAutomationLastRunState$outboundSchema).optional(),
-  tenantId: z.nullable(z.string()).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BundleAutomation$ {
-  /** @deprecated use `BundleAutomation$inboundSchema` instead. */
-  export const inboundSchema = BundleAutomation$inboundSchema;
-  /** @deprecated use `BundleAutomation$outboundSchema` instead. */
-  export const outboundSchema = BundleAutomation$outboundSchema;
-  /** @deprecated use `BundleAutomation$Outbound` instead. */
-  export type Outbound = BundleAutomation$Outbound;
-}
-
-export function bundleAutomationToJSON(
-  bundleAutomation: BundleAutomation,
-): string {
-  return JSON.stringify(
-    BundleAutomation$outboundSchema.parse(bundleAutomation),
-  );
-}
 
 export function bundleAutomationFromJSON(
   jsonString: string,

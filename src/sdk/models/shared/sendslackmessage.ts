@@ -49,7 +49,6 @@ export const SendSlackMessage$inboundSchema: z.ZodType<
   channelName: z.nullable(z.string()).optional(),
   channelNameCel: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type SendSlackMessage$Outbound = {
   body?: string | null | undefined;
@@ -68,19 +67,6 @@ export const SendSlackMessage$outboundSchema: z.ZodType<
   channelNameCel: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SendSlackMessage$ {
-  /** @deprecated use `SendSlackMessage$inboundSchema` instead. */
-  export const inboundSchema = SendSlackMessage$inboundSchema;
-  /** @deprecated use `SendSlackMessage$outboundSchema` instead. */
-  export const outboundSchema = SendSlackMessage$outboundSchema;
-  /** @deprecated use `SendSlackMessage$Outbound` instead. */
-  export type Outbound = SendSlackMessage$Outbound;
-}
-
 export function sendSlackMessageToJSON(
   sendSlackMessage: SendSlackMessage,
 ): string {
@@ -88,7 +74,6 @@ export function sendSlackMessageToJSON(
     SendSlackMessage$outboundSchema.parse(sendSlackMessage),
   );
 }
-
 export function sendSlackMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<SendSlackMessage, SDKValidationError> {

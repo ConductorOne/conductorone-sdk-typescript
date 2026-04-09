@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskExpandMask,
-  TaskExpandMask$inboundSchema,
   TaskExpandMask$Outbound,
   TaskExpandMask$outboundSchema,
 } from "./taskexpandmask.js";
@@ -20,14 +16,6 @@ export type TaskActionsServiceUpdateRequestDataRequest = {
   data?: { [k: string]: any } | null | undefined;
   expandMask?: TaskExpandMask | null | undefined;
 };
-
-/** @internal */
-export const TaskActionsServiceUpdateRequestDataRequest$inboundSchema:
-  z.ZodType<TaskActionsServiceUpdateRequestDataRequest, z.ZodTypeDef, unknown> =
-    z.object({
-      data: z.nullable(z.record(z.any())).optional(),
-      expandMask: z.nullable(TaskExpandMask$inboundSchema).optional(),
-    });
 
 /** @internal */
 export type TaskActionsServiceUpdateRequestDataRequest$Outbound = {
@@ -46,21 +34,6 @@ export const TaskActionsServiceUpdateRequestDataRequest$outboundSchema:
     expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceUpdateRequestDataRequest$ {
-  /** @deprecated use `TaskActionsServiceUpdateRequestDataRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskActionsServiceUpdateRequestDataRequest$inboundSchema;
-  /** @deprecated use `TaskActionsServiceUpdateRequestDataRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceUpdateRequestDataRequest$outboundSchema;
-  /** @deprecated use `TaskActionsServiceUpdateRequestDataRequest$Outbound` instead. */
-  export type Outbound = TaskActionsServiceUpdateRequestDataRequest$Outbound;
-}
-
 export function taskActionsServiceUpdateRequestDataRequestToJSON(
   taskActionsServiceUpdateRequestDataRequest:
     TaskActionsServiceUpdateRequestDataRequest,
@@ -69,21 +42,5 @@ export function taskActionsServiceUpdateRequestDataRequestToJSON(
     TaskActionsServiceUpdateRequestDataRequest$outboundSchema.parse(
       taskActionsServiceUpdateRequestDataRequest,
     ),
-  );
-}
-
-export function taskActionsServiceUpdateRequestDataRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  TaskActionsServiceUpdateRequestDataRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      TaskActionsServiceUpdateRequestDataRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'TaskActionsServiceUpdateRequestDataRequest' from JSON`,
   );
 }

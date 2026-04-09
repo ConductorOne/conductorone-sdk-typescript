@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -90,32 +87,13 @@ export const UserStatusEnum$inboundSchema: z.ZodType<
   UserStatusEnum,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(UserStatusEnum),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(UserStatusEnum);
 /** @internal */
 export const UserStatusEnum$outboundSchema: z.ZodType<
-  UserStatusEnum,
+  string,
   z.ZodTypeDef,
   UserStatusEnum
-> = z.union([
-  z.nativeEnum(UserStatusEnum),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UserStatusEnum$ {
-  /** @deprecated use `UserStatusEnum$inboundSchema` instead. */
-  export const inboundSchema = UserStatusEnum$inboundSchema;
-  /** @deprecated use `UserStatusEnum$outboundSchema` instead. */
-  export const outboundSchema = UserStatusEnum$outboundSchema;
-}
+> = openEnums.outboundSchema(UserStatusEnum);
 
 /** @internal */
 export const UpdateUser$inboundSchema: z.ZodType<
@@ -129,7 +107,6 @@ export const UpdateUser$inboundSchema: z.ZodType<
   userStatusCel: z.nullable(z.string()).optional(),
   userStatusEnum: z.nullable(UserStatusEnum$inboundSchema).optional(),
 });
-
 /** @internal */
 export type UpdateUser$Outbound = {
   useSubjectUser?: boolean | null | undefined;
@@ -152,23 +129,9 @@ export const UpdateUser$outboundSchema: z.ZodType<
   userStatusEnum: z.nullable(UserStatusEnum$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateUser$ {
-  /** @deprecated use `UpdateUser$inboundSchema` instead. */
-  export const inboundSchema = UpdateUser$inboundSchema;
-  /** @deprecated use `UpdateUser$outboundSchema` instead. */
-  export const outboundSchema = UpdateUser$outboundSchema;
-  /** @deprecated use `UpdateUser$Outbound` instead. */
-  export type Outbound = UpdateUser$Outbound;
-}
-
 export function updateUserToJSON(updateUser: UpdateUser): string {
   return JSON.stringify(UpdateUser$outboundSchema.parse(updateUser));
 }
-
 export function updateUserFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateUser, SDKValidationError> {

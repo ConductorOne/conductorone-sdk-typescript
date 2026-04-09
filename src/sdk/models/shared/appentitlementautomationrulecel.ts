@@ -25,7 +25,6 @@ export const AppEntitlementAutomationRuleCEL$inboundSchema: z.ZodType<
 > = z.object({
   expression: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type AppEntitlementAutomationRuleCEL$Outbound = {
   expression?: string | null | undefined;
@@ -40,19 +39,6 @@ export const AppEntitlementAutomationRuleCEL$outboundSchema: z.ZodType<
   expression: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementAutomationRuleCEL$ {
-  /** @deprecated use `AppEntitlementAutomationRuleCEL$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementAutomationRuleCEL$inboundSchema;
-  /** @deprecated use `AppEntitlementAutomationRuleCEL$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlementAutomationRuleCEL$outboundSchema;
-  /** @deprecated use `AppEntitlementAutomationRuleCEL$Outbound` instead. */
-  export type Outbound = AppEntitlementAutomationRuleCEL$Outbound;
-}
-
 export function appEntitlementAutomationRuleCELToJSON(
   appEntitlementAutomationRuleCEL: AppEntitlementAutomationRuleCEL,
 ): string {
@@ -62,7 +48,6 @@ export function appEntitlementAutomationRuleCELToJSON(
     ),
   );
 }
-
 export function appEntitlementAutomationRuleCELFromJSON(
   jsonString: string,
 ): SafeParseResult<AppEntitlementAutomationRuleCEL, SDKValidationError> {

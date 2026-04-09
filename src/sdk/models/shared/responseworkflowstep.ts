@@ -30,7 +30,6 @@ export const ResponseWorkflowStep$inboundSchema: z.ZodType<
   context: z.nullable(z.record(z.any())).optional(),
   version: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type ResponseWorkflowStep$Outbound = {
   context?: { [k: string]: any } | null | undefined;
@@ -47,19 +46,6 @@ export const ResponseWorkflowStep$outboundSchema: z.ZodType<
   version: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseWorkflowStep$ {
-  /** @deprecated use `ResponseWorkflowStep$inboundSchema` instead. */
-  export const inboundSchema = ResponseWorkflowStep$inboundSchema;
-  /** @deprecated use `ResponseWorkflowStep$outboundSchema` instead. */
-  export const outboundSchema = ResponseWorkflowStep$outboundSchema;
-  /** @deprecated use `ResponseWorkflowStep$Outbound` instead. */
-  export type Outbound = ResponseWorkflowStep$Outbound;
-}
-
 export function responseWorkflowStepToJSON(
   responseWorkflowStep: ResponseWorkflowStep,
 ): string {
@@ -67,7 +53,6 @@ export function responseWorkflowStepToJSON(
     ResponseWorkflowStep$outboundSchema.parse(responseWorkflowStep),
   );
 }
-
 export function responseWorkflowStepFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseWorkflowStep, SDKValidationError> {

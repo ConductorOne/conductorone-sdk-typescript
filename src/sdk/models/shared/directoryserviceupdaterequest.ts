@@ -3,27 +3,27 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   DirectoryAccountFilterAll,
-  DirectoryAccountFilterAll$inboundSchema,
   DirectoryAccountFilterAll$Outbound,
   DirectoryAccountFilterAll$outboundSchema,
 } from "./directoryaccountfilterall.js";
 import {
   DirectoryAccountFilterCel,
-  DirectoryAccountFilterCel$inboundSchema,
   DirectoryAccountFilterCel$Outbound,
   DirectoryAccountFilterCel$outboundSchema,
 } from "./directoryaccountfiltercel.js";
 import {
   DirectoryExpandMask,
-  DirectoryExpandMask$inboundSchema,
   DirectoryExpandMask$Outbound,
   DirectoryExpandMask$outboundSchema,
 } from "./directoryexpandmask.js";
+import {
+  DirectoryMergeConfig,
+  DirectoryMergeConfig$Outbound,
+  DirectoryMergeConfig$outboundSchema,
+} from "./directorymergeconfig.js";
 
 /**
  * Update a directory by app_id.
@@ -38,24 +38,18 @@ export type DirectoryServiceUpdateRequest = {
   all?: DirectoryAccountFilterAll | null | undefined;
   celExpression?: DirectoryAccountFilterCel | null | undefined;
   expandMask?: DirectoryExpandMask | null | undefined;
+  /**
+   * DirectoryMergeConfig configures how AppUsers from this directory are matched to C1 Users.
+   */
+  directoryMergeConfig?: DirectoryMergeConfig | undefined;
 };
-
-/** @internal */
-export const DirectoryServiceUpdateRequest$inboundSchema: z.ZodType<
-  DirectoryServiceUpdateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  all: z.nullable(DirectoryAccountFilterAll$inboundSchema).optional(),
-  celExpression: z.nullable(DirectoryAccountFilterCel$inboundSchema).optional(),
-  expandMask: z.nullable(DirectoryExpandMask$inboundSchema).optional(),
-});
 
 /** @internal */
 export type DirectoryServiceUpdateRequest$Outbound = {
   all?: DirectoryAccountFilterAll$Outbound | null | undefined;
   celExpression?: DirectoryAccountFilterCel$Outbound | null | undefined;
   expandMask?: DirectoryExpandMask$Outbound | null | undefined;
+  mergeConfig?: DirectoryMergeConfig$Outbound | undefined;
 };
 
 /** @internal */
@@ -68,20 +62,12 @@ export const DirectoryServiceUpdateRequest$outboundSchema: z.ZodType<
   celExpression: z.nullable(DirectoryAccountFilterCel$outboundSchema)
     .optional(),
   expandMask: z.nullable(DirectoryExpandMask$outboundSchema).optional(),
+  directoryMergeConfig: DirectoryMergeConfig$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    directoryMergeConfig: "mergeConfig",
+  });
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DirectoryServiceUpdateRequest$ {
-  /** @deprecated use `DirectoryServiceUpdateRequest$inboundSchema` instead. */
-  export const inboundSchema = DirectoryServiceUpdateRequest$inboundSchema;
-  /** @deprecated use `DirectoryServiceUpdateRequest$outboundSchema` instead. */
-  export const outboundSchema = DirectoryServiceUpdateRequest$outboundSchema;
-  /** @deprecated use `DirectoryServiceUpdateRequest$Outbound` instead. */
-  export type Outbound = DirectoryServiceUpdateRequest$Outbound;
-}
 
 export function directoryServiceUpdateRequestToJSON(
   directoryServiceUpdateRequest: DirectoryServiceUpdateRequest,
@@ -90,15 +76,5 @@ export function directoryServiceUpdateRequestToJSON(
     DirectoryServiceUpdateRequest$outboundSchema.parse(
       directoryServiceUpdateRequest,
     ),
-  );
-}
-
-export function directoryServiceUpdateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DirectoryServiceUpdateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DirectoryServiceUpdateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DirectoryServiceUpdateRequest' from JSON`,
   );
 }

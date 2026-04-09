@@ -11,6 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * The Webhook message.
  */
 export type Webhook1 = {
+  callbackTimeout?: string | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
@@ -38,6 +39,7 @@ export const Webhook1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  callbackTimeout: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -52,9 +54,9 @@ export const Webhook1$inboundSchema: z.ZodType<
   ).optional(),
   url: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type Webhook1$Outbound = {
+  callbackTimeout?: string | undefined;
   createdAt?: string | null | undefined;
   deletedAt?: string | null | undefined;
   description?: string | null | undefined;
@@ -70,6 +72,7 @@ export const Webhook1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Webhook1
 > = z.object({
+  callbackTimeout: z.string().optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   description: z.nullable(z.string()).optional(),
@@ -79,23 +82,9 @@ export const Webhook1$outboundSchema: z.ZodType<
   url: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Webhook1$ {
-  /** @deprecated use `Webhook1$inboundSchema` instead. */
-  export const inboundSchema = Webhook1$inboundSchema;
-  /** @deprecated use `Webhook1$outboundSchema` instead. */
-  export const outboundSchema = Webhook1$outboundSchema;
-  /** @deprecated use `Webhook1$Outbound` instead. */
-  export type Outbound = Webhook1$Outbound;
-}
-
 export function webhook1ToJSON(webhook1: Webhook1): string {
   return JSON.stringify(Webhook1$outboundSchema.parse(webhook1));
 }
-
 export function webhook1FromJSON(
   jsonString: string,
 ): SafeParseResult<Webhook1, SDKValidationError> {

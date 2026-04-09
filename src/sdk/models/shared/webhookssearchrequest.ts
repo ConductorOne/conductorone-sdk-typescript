@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   WebhookRef,
-  WebhookRef$inboundSchema,
   WebhookRef$Outbound,
   WebhookRef$outboundSchema,
 } from "./webhookref.js";
@@ -36,18 +32,6 @@ export type WebhooksSearchRequest = {
 };
 
 /** @internal */
-export const WebhooksSearchRequest$inboundSchema: z.ZodType<
-  WebhooksSearchRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
-  refs: z.nullable(z.array(WebhookRef$inboundSchema)).optional(),
-});
-
-/** @internal */
 export type WebhooksSearchRequest$Outbound = {
   pageSize?: number | null | undefined;
   pageToken?: string | null | undefined;
@@ -67,33 +51,10 @@ export const WebhooksSearchRequest$outboundSchema: z.ZodType<
   refs: z.nullable(z.array(WebhookRef$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhooksSearchRequest$ {
-  /** @deprecated use `WebhooksSearchRequest$inboundSchema` instead. */
-  export const inboundSchema = WebhooksSearchRequest$inboundSchema;
-  /** @deprecated use `WebhooksSearchRequest$outboundSchema` instead. */
-  export const outboundSchema = WebhooksSearchRequest$outboundSchema;
-  /** @deprecated use `WebhooksSearchRequest$Outbound` instead. */
-  export type Outbound = WebhooksSearchRequest$Outbound;
-}
-
 export function webhooksSearchRequestToJSON(
   webhooksSearchRequest: WebhooksSearchRequest,
 ): string {
   return JSON.stringify(
     WebhooksSearchRequest$outboundSchema.parse(webhooksSearchRequest),
-  );
-}
-
-export function webhooksSearchRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<WebhooksSearchRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => WebhooksSearchRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'WebhooksSearchRequest' from JSON`,
   );
 }

@@ -34,6 +34,10 @@ export type TaskView = {
    */
   appUserPath?: string | null | undefined;
   /**
+   * JSONPATH expression indicating the location of the ApproverUsers objects in the expanded array. These are the users who have approved or denied this task.
+   */
+  approversPath?: string | undefined;
+  /**
    * JSONPATH expression indicating the location of the object of the User that created the ticket in the expanded array
    */
   createdByUserPath?: string | null | undefined;
@@ -49,6 +53,10 @@ export type TaskView = {
    * JSONPATH expression indicating the location of the Insights objects in the expanded array
    */
   insightsPath?: string | null | undefined;
+  /**
+   * JSONPATH expression indicating the location of the EntitlementScopeBindingList object in the expanded array.
+   */
+  resourceBindingsPath?: string | undefined;
   /**
    * JSONPATH expression indicating the location of the StepApproverUsers objects in the expanded array
    */
@@ -70,25 +78,28 @@ export const TaskView$inboundSchema: z.ZodType<
   appPath: z.nullable(z.string()).optional(),
   appUserLastUsagePath: z.nullable(z.string()).optional(),
   appUserPath: z.nullable(z.string()).optional(),
+  approversPath: z.string().optional(),
   createdByUserPath: z.nullable(z.string()).optional(),
   entitlementsPath: z.nullable(z.string()).optional(),
   identityUserPath: z.nullable(z.string()).optional(),
   insightsPath: z.nullable(z.string()).optional(),
+  resourceBindingsPath: z.string().optional(),
   stepApproversPath: z.nullable(z.string()).optional(),
   task: z.nullable(Task$inboundSchema).optional(),
   userPath: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type TaskView$Outbound = {
   accessReviewPath?: string | null | undefined;
   appPath?: string | null | undefined;
   appUserLastUsagePath?: string | null | undefined;
   appUserPath?: string | null | undefined;
+  approversPath?: string | undefined;
   createdByUserPath?: string | null | undefined;
   entitlementsPath?: string | null | undefined;
   identityUserPath?: string | null | undefined;
   insightsPath?: string | null | undefined;
+  resourceBindingsPath?: string | undefined;
   stepApproversPath?: string | null | undefined;
   task?: Task$Outbound | null | undefined;
   userPath?: string | null | undefined;
@@ -104,32 +115,20 @@ export const TaskView$outboundSchema: z.ZodType<
   appPath: z.nullable(z.string()).optional(),
   appUserLastUsagePath: z.nullable(z.string()).optional(),
   appUserPath: z.nullable(z.string()).optional(),
+  approversPath: z.string().optional(),
   createdByUserPath: z.nullable(z.string()).optional(),
   entitlementsPath: z.nullable(z.string()).optional(),
   identityUserPath: z.nullable(z.string()).optional(),
   insightsPath: z.nullable(z.string()).optional(),
+  resourceBindingsPath: z.string().optional(),
   stepApproversPath: z.nullable(z.string()).optional(),
   task: z.nullable(Task$outboundSchema).optional(),
   userPath: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskView$ {
-  /** @deprecated use `TaskView$inboundSchema` instead. */
-  export const inboundSchema = TaskView$inboundSchema;
-  /** @deprecated use `TaskView$outboundSchema` instead. */
-  export const outboundSchema = TaskView$outboundSchema;
-  /** @deprecated use `TaskView$Outbound` instead. */
-  export type Outbound = TaskView$Outbound;
-}
-
 export function taskViewToJSON(taskView: TaskView): string {
   return JSON.stringify(TaskView$outboundSchema.parse(taskView));
 }
-
 export function taskViewFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskView, SDKValidationError> {

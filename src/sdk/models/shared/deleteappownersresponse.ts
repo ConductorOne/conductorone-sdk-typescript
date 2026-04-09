@@ -19,37 +19,6 @@ export const DeleteAppOwnersResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type DeleteAppOwnersResponse$Outbound = {};
-
-/** @internal */
-export const DeleteAppOwnersResponse$outboundSchema: z.ZodType<
-  DeleteAppOwnersResponse$Outbound,
-  z.ZodTypeDef,
-  DeleteAppOwnersResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteAppOwnersResponse$ {
-  /** @deprecated use `DeleteAppOwnersResponse$inboundSchema` instead. */
-  export const inboundSchema = DeleteAppOwnersResponse$inboundSchema;
-  /** @deprecated use `DeleteAppOwnersResponse$outboundSchema` instead. */
-  export const outboundSchema = DeleteAppOwnersResponse$outboundSchema;
-  /** @deprecated use `DeleteAppOwnersResponse$Outbound` instead. */
-  export type Outbound = DeleteAppOwnersResponse$Outbound;
-}
-
-export function deleteAppOwnersResponseToJSON(
-  deleteAppOwnersResponse: DeleteAppOwnersResponse,
-): string {
-  return JSON.stringify(
-    DeleteAppOwnersResponse$outboundSchema.parse(deleteAppOwnersResponse),
-  );
-}
-
 export function deleteAppOwnersResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<DeleteAppOwnersResponse, SDKValidationError> {

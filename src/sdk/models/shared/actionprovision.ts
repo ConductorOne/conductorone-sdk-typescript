@@ -40,7 +40,6 @@ export const ActionProvision$inboundSchema: z.ZodType<
   connectorId: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type ActionProvision$Outbound = {
   actionName?: string | null | undefined;
@@ -61,25 +60,11 @@ export const ActionProvision$outboundSchema: z.ZodType<
   displayName: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ActionProvision$ {
-  /** @deprecated use `ActionProvision$inboundSchema` instead. */
-  export const inboundSchema = ActionProvision$inboundSchema;
-  /** @deprecated use `ActionProvision$outboundSchema` instead. */
-  export const outboundSchema = ActionProvision$outboundSchema;
-  /** @deprecated use `ActionProvision$Outbound` instead. */
-  export type Outbound = ActionProvision$Outbound;
-}
-
 export function actionProvisionToJSON(
   actionProvision: ActionProvision,
 ): string {
   return JSON.stringify(ActionProvision$outboundSchema.parse(actionProvision));
 }
-
 export function actionProvisionFromJSON(
   jsonString: string,
 ): SafeParseResult<ActionProvision, SDKValidationError> {

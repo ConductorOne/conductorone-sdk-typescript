@@ -94,7 +94,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/api/v1/systemlog/exports/{export_id}")(pathParams);
 
   const headers = new Headers(compactMap({

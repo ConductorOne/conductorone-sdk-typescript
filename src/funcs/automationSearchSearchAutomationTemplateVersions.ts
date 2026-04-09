@@ -90,7 +90,7 @@ async function $do(
     ? null
     : encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/api/v1/automation_versions/search")();
+  const path = pathToFunc("/api/v1/search/automation_versions")();
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",

@@ -3,14 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 /**
  * Filter by transaction state
@@ -78,92 +72,18 @@ export type SearchStepUpTransactionsRequest = {
 };
 
 /** @internal */
-export const SearchStepUpTransactionsRequestState$inboundSchema: z.ZodType<
-  SearchStepUpTransactionsRequestState,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(SearchStepUpTransactionsRequestState),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
 export const SearchStepUpTransactionsRequestState$outboundSchema: z.ZodType<
-  SearchStepUpTransactionsRequestState,
+  string,
   z.ZodTypeDef,
   SearchStepUpTransactionsRequestState
-> = z.union([
-  z.nativeEnum(SearchStepUpTransactionsRequestState),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchStepUpTransactionsRequestState$ {
-  /** @deprecated use `SearchStepUpTransactionsRequestState$inboundSchema` instead. */
-  export const inboundSchema =
-    SearchStepUpTransactionsRequestState$inboundSchema;
-  /** @deprecated use `SearchStepUpTransactionsRequestState$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchStepUpTransactionsRequestState$outboundSchema;
-}
-
-/** @internal */
-export const TargetType$inboundSchema: z.ZodType<
-  TargetType,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(TargetType),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
+> = openEnums.outboundSchema(SearchStepUpTransactionsRequestState);
 
 /** @internal */
 export const TargetType$outboundSchema: z.ZodType<
-  TargetType,
+  string,
   z.ZodTypeDef,
   TargetType
-> = z.union([
-  z.nativeEnum(TargetType),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TargetType$ {
-  /** @deprecated use `TargetType$inboundSchema` instead. */
-  export const inboundSchema = TargetType$inboundSchema;
-  /** @deprecated use `TargetType$outboundSchema` instead. */
-  export const outboundSchema = TargetType$outboundSchema;
-}
-
-/** @internal */
-export const SearchStepUpTransactionsRequest$inboundSchema: z.ZodType<
-  SearchStepUpTransactionsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  createdAfter: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  createdBefore: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  providerId: z.nullable(z.string()).optional(),
-  state: z.nullable(SearchStepUpTransactionsRequestState$inboundSchema)
-    .optional(),
-  targetType: z.nullable(TargetType$inboundSchema).optional(),
-  taskId: z.nullable(z.string()).optional(),
-  userId: z.nullable(z.string()).optional(),
-});
+> = openEnums.outboundSchema(TargetType);
 
 /** @internal */
 export type SearchStepUpTransactionsRequest$Outbound = {
@@ -197,19 +117,6 @@ export const SearchStepUpTransactionsRequest$outboundSchema: z.ZodType<
   userId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchStepUpTransactionsRequest$ {
-  /** @deprecated use `SearchStepUpTransactionsRequest$inboundSchema` instead. */
-  export const inboundSchema = SearchStepUpTransactionsRequest$inboundSchema;
-  /** @deprecated use `SearchStepUpTransactionsRequest$outboundSchema` instead. */
-  export const outboundSchema = SearchStepUpTransactionsRequest$outboundSchema;
-  /** @deprecated use `SearchStepUpTransactionsRequest$Outbound` instead. */
-  export type Outbound = SearchStepUpTransactionsRequest$Outbound;
-}
-
 export function searchStepUpTransactionsRequestToJSON(
   searchStepUpTransactionsRequest: SearchStepUpTransactionsRequest,
 ): string {
@@ -217,15 +124,5 @@ export function searchStepUpTransactionsRequestToJSON(
     SearchStepUpTransactionsRequest$outboundSchema.parse(
       searchStepUpTransactionsRequest,
     ),
-  );
-}
-
-export function searchStepUpTransactionsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchStepUpTransactionsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchStepUpTransactionsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchStepUpTransactionsRequest' from JSON`,
   );
 }

@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  ProfileType,
-  ProfileType$inboundSchema,
-  ProfileType$Outbound,
-  ProfileType$outboundSchema,
-} from "./profiletype.js";
+import { ProfileType, ProfileType$inboundSchema } from "./profiletype.js";
 
 /**
  * The GetUserProfileTypesResponse message.
@@ -31,43 +26,6 @@ export const GetUserProfileTypesResponse$inboundSchema: z.ZodType<
 > = z.object({
   profileTypes: z.nullable(z.array(ProfileType$inboundSchema)).optional(),
 });
-
-/** @internal */
-export type GetUserProfileTypesResponse$Outbound = {
-  profileTypes?: Array<ProfileType$Outbound> | null | undefined;
-};
-
-/** @internal */
-export const GetUserProfileTypesResponse$outboundSchema: z.ZodType<
-  GetUserProfileTypesResponse$Outbound,
-  z.ZodTypeDef,
-  GetUserProfileTypesResponse
-> = z.object({
-  profileTypes: z.nullable(z.array(ProfileType$outboundSchema)).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetUserProfileTypesResponse$ {
-  /** @deprecated use `GetUserProfileTypesResponse$inboundSchema` instead. */
-  export const inboundSchema = GetUserProfileTypesResponse$inboundSchema;
-  /** @deprecated use `GetUserProfileTypesResponse$outboundSchema` instead. */
-  export const outboundSchema = GetUserProfileTypesResponse$outboundSchema;
-  /** @deprecated use `GetUserProfileTypesResponse$Outbound` instead. */
-  export type Outbound = GetUserProfileTypesResponse$Outbound;
-}
-
-export function getUserProfileTypesResponseToJSON(
-  getUserProfileTypesResponse: GetUserProfileTypesResponse,
-): string {
-  return JSON.stringify(
-    GetUserProfileTypesResponse$outboundSchema.parse(
-      getUserProfileTypesResponse,
-    ),
-  );
-}
 
 export function getUserProfileTypesResponseFromJSON(
   jsonString: string,

@@ -9,11 +9,11 @@ GrantReasonReferenceStrength is used to indicate the strength of the reference t
 import { ReferenceStrength } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: ReferenceStrength = "GRANT_REASON_REFERENCE_STRENGTH_UNSPECIFIED";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "GRANT_REASON_REFERENCE_STRENGTH_UNSPECIFIED" | "GRANT_REASON_REFERENCE_STRENGTH_WEAK" | "GRANT_REASON_REFERENCE_STRENGTH_STRONG" | Unrecognized<string>

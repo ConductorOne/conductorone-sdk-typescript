@@ -97,7 +97,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc("/api/v1/request_schemas/{request_schema_id}")(
     pathParams,
   );

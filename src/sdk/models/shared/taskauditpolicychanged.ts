@@ -31,43 +31,6 @@ export const TaskAuditPolicyChanged$inboundSchema: z.ZodType<
   oldPolicyId: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditPolicyChanged$Outbound = {
-  newPolicyId?: string | null | undefined;
-  oldPolicyId?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditPolicyChanged$outboundSchema: z.ZodType<
-  TaskAuditPolicyChanged$Outbound,
-  z.ZodTypeDef,
-  TaskAuditPolicyChanged
-> = z.object({
-  newPolicyId: z.nullable(z.string()).optional(),
-  oldPolicyId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditPolicyChanged$ {
-  /** @deprecated use `TaskAuditPolicyChanged$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditPolicyChanged$inboundSchema;
-  /** @deprecated use `TaskAuditPolicyChanged$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditPolicyChanged$outboundSchema;
-  /** @deprecated use `TaskAuditPolicyChanged$Outbound` instead. */
-  export type Outbound = TaskAuditPolicyChanged$Outbound;
-}
-
-export function taskAuditPolicyChangedToJSON(
-  taskAuditPolicyChanged: TaskAuditPolicyChanged,
-): string {
-  return JSON.stringify(
-    TaskAuditPolicyChanged$outboundSchema.parse(taskAuditPolicyChanged),
-  );
-}
-
 export function taskAuditPolicyChangedFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditPolicyChanged, SDKValidationError> {

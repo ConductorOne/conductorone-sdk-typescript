@@ -3,18 +3,34 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  StringMapRules,
+  StringMapRules$inboundSchema,
+  StringMapRules$Outbound,
+  StringMapRules$outboundSchema,
+} from "./stringmaprules.js";
 
 /**
  * The StringMapField message.
+ *
+ * @remarks
+ *
+ * This message contains a oneof named _rules. Only a single field of the following list may be set at a time:
+ *   - rules
  */
 export type StringMapField = {
   /**
-   * The optional field.
+   * The defaultValue field.
    */
-  optional?: boolean | null | undefined;
+  defaultValue?: { [k: string]: string } | undefined;
+  /**
+   * The StringMapRules message.
+   */
+  stringMapRules?: StringMapRules | null | undefined;
 };
 
 /** @internal */
@@ -23,12 +39,17 @@ export const StringMapField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  optional: z.nullable(z.boolean()).optional(),
+  defaultValue: z.record(z.string()).optional(),
+  rules: z.nullable(StringMapRules$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "rules": "stringMapRules",
+  });
 });
-
 /** @internal */
 export type StringMapField$Outbound = {
-  optional?: boolean | null | undefined;
+  defaultValue?: { [k: string]: string } | undefined;
+  rules?: StringMapRules$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -37,26 +58,17 @@ export const StringMapField$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   StringMapField
 > = z.object({
-  optional: z.nullable(z.boolean()).optional(),
+  defaultValue: z.record(z.string()).optional(),
+  stringMapRules: z.nullable(StringMapRules$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    stringMapRules: "rules",
+  });
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StringMapField$ {
-  /** @deprecated use `StringMapField$inboundSchema` instead. */
-  export const inboundSchema = StringMapField$inboundSchema;
-  /** @deprecated use `StringMapField$outboundSchema` instead. */
-  export const outboundSchema = StringMapField$outboundSchema;
-  /** @deprecated use `StringMapField$Outbound` instead. */
-  export type Outbound = StringMapField$Outbound;
-}
 
 export function stringMapFieldToJSON(stringMapField: StringMapField): string {
   return JSON.stringify(StringMapField$outboundSchema.parse(stringMapField));
 }
-
 export function stringMapFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<StringMapField, SDKValidationError> {

@@ -1,5 +1,4 @@
 # AWSExternalIDSettings
-(*awsExternalIDSettings*)
 
 ## Overview
 

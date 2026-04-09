@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskExpandMask,
-  TaskExpandMask$inboundSchema,
   TaskExpandMask$Outbound,
   TaskExpandMask$outboundSchema,
 } from "./taskexpandmask.js";
@@ -29,17 +25,6 @@ export type TaskActionsServiceRestartRequest = {
 };
 
 /** @internal */
-export const TaskActionsServiceRestartRequest$inboundSchema: z.ZodType<
-  TaskActionsServiceRestartRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  comment: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(TaskExpandMask$inboundSchema).optional(),
-  policyStepId: z.nullable(z.string()).optional(),
-});
-
-/** @internal */
 export type TaskActionsServiceRestartRequest$Outbound = {
   comment?: string | null | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
@@ -57,19 +42,6 @@ export const TaskActionsServiceRestartRequest$outboundSchema: z.ZodType<
   policyStepId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceRestartRequest$ {
-  /** @deprecated use `TaskActionsServiceRestartRequest$inboundSchema` instead. */
-  export const inboundSchema = TaskActionsServiceRestartRequest$inboundSchema;
-  /** @deprecated use `TaskActionsServiceRestartRequest$outboundSchema` instead. */
-  export const outboundSchema = TaskActionsServiceRestartRequest$outboundSchema;
-  /** @deprecated use `TaskActionsServiceRestartRequest$Outbound` instead. */
-  export type Outbound = TaskActionsServiceRestartRequest$Outbound;
-}
-
 export function taskActionsServiceRestartRequestToJSON(
   taskActionsServiceRestartRequest: TaskActionsServiceRestartRequest,
 ): string {
@@ -77,15 +49,5 @@ export function taskActionsServiceRestartRequestToJSON(
     TaskActionsServiceRestartRequest$outboundSchema.parse(
       taskActionsServiceRestartRequest,
     ),
-  );
-}
-
-export function taskActionsServiceRestartRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskActionsServiceRestartRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskActionsServiceRestartRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskActionsServiceRestartRequest' from JSON`,
   );
 }

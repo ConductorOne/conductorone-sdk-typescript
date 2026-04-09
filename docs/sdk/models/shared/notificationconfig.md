@@ -12,7 +12,8 @@ let value: NotificationConfig = {};
 
 ## Fields
 
-| Field                                                                         | Type                                                                          | Required                                                                      | Description                                                                   |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `emailNotifications`                                                          | [shared.EmailNotifications](../../../sdk/models/shared/emailnotifications.md) | :heavy_minus_sign:                                                            | N/A                                                                           |
-| `slackNotifications`                                                          | [shared.SlackNotifications](../../../sdk/models/shared/slacknotifications.md) | :heavy_minus_sign:                                                            | N/A                                                                           |
+| Field                    | Type                     | Required                 | Description              |
+| ------------------------ | ------------------------ | ------------------------ | ------------------------ |
+| `sendClose`              | *boolean*                | :heavy_minus_sign:       | The sendClose field.     |
+| `sendKickoff`            | *boolean*                | :heavy_minus_sign:       | The sendKickoff field.   |
+| `sendReminders`          | *boolean*                | :heavy_minus_sign:       | The sendReminders field. |

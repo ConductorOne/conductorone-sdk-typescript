@@ -26,41 +26,6 @@ export const RandomStringField$inboundSchema: z.ZodType<
   length: z.nullable(z.number().int()).optional(),
 });
 
-/** @internal */
-export type RandomStringField$Outbound = {
-  length?: number | null | undefined;
-};
-
-/** @internal */
-export const RandomStringField$outboundSchema: z.ZodType<
-  RandomStringField$Outbound,
-  z.ZodTypeDef,
-  RandomStringField
-> = z.object({
-  length: z.nullable(z.number().int()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RandomStringField$ {
-  /** @deprecated use `RandomStringField$inboundSchema` instead. */
-  export const inboundSchema = RandomStringField$inboundSchema;
-  /** @deprecated use `RandomStringField$outboundSchema` instead. */
-  export const outboundSchema = RandomStringField$outboundSchema;
-  /** @deprecated use `RandomStringField$Outbound` instead. */
-  export type Outbound = RandomStringField$Outbound;
-}
-
-export function randomStringFieldToJSON(
-  randomStringField: RandomStringField,
-): string {
-  return JSON.stringify(
-    RandomStringField$outboundSchema.parse(randomStringField),
-  );
-}
-
 export function randomStringFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<RandomStringField, SDKValidationError> {

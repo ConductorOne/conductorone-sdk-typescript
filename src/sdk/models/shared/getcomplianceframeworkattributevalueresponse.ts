@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AttributeValue,
   AttributeValue$inboundSchema,
-  AttributeValue$Outbound,
-  AttributeValue$outboundSchema,
 } from "./attributevalue.js";
 
 /**
@@ -29,47 +27,6 @@ export const GetComplianceFrameworkAttributeValueResponse$inboundSchema:
   > = z.object({
     value: z.nullable(AttributeValue$inboundSchema).optional(),
   });
-
-/** @internal */
-export type GetComplianceFrameworkAttributeValueResponse$Outbound = {
-  value?: AttributeValue$Outbound | null | undefined;
-};
-
-/** @internal */
-export const GetComplianceFrameworkAttributeValueResponse$outboundSchema:
-  z.ZodType<
-    GetComplianceFrameworkAttributeValueResponse$Outbound,
-    z.ZodTypeDef,
-    GetComplianceFrameworkAttributeValueResponse
-  > = z.object({
-    value: z.nullable(AttributeValue$outboundSchema).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetComplianceFrameworkAttributeValueResponse$ {
-  /** @deprecated use `GetComplianceFrameworkAttributeValueResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetComplianceFrameworkAttributeValueResponse$inboundSchema;
-  /** @deprecated use `GetComplianceFrameworkAttributeValueResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetComplianceFrameworkAttributeValueResponse$outboundSchema;
-  /** @deprecated use `GetComplianceFrameworkAttributeValueResponse$Outbound` instead. */
-  export type Outbound = GetComplianceFrameworkAttributeValueResponse$Outbound;
-}
-
-export function getComplianceFrameworkAttributeValueResponseToJSON(
-  getComplianceFrameworkAttributeValueResponse:
-    GetComplianceFrameworkAttributeValueResponse,
-): string {
-  return JSON.stringify(
-    GetComplianceFrameworkAttributeValueResponse$outboundSchema.parse(
-      getComplianceFrameworkAttributeValueResponse,
-    ),
-  );
-}
 
 export function getComplianceFrameworkAttributeValueResponseFromJSON(
   jsonString: string,

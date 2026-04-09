@@ -31,6 +31,13 @@ import {
 export type ConnectorCreateAccount = {
   connectorRef?: ConnectorRef | null | undefined;
   /**
+   * CEL expression referencing a GeneratePassword step output (e.g. "genStep.password").
+   *
+   * @remarks
+   *  When set, the resolved password is encrypted for the connector and sent as CredentialOptions.EncryptedPassword.
+   */
+  passwordCel?: string | undefined;
+  /**
    * The userIdCel field.
    *
    * @remarks
@@ -48,13 +55,14 @@ export const ConnectorCreateAccount$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   connectorRef: z.nullable(ConnectorRef$inboundSchema).optional(),
+  passwordCel: z.string().optional(),
   userIdCel: z.nullable(z.string()).optional(),
   userProperties: z.nullable(UserProperties$inboundSchema).optional(),
 });
-
 /** @internal */
 export type ConnectorCreateAccount$Outbound = {
   connectorRef?: ConnectorRef$Outbound | null | undefined;
+  passwordCel?: string | undefined;
   userIdCel?: string | null | undefined;
   userProperties?: UserProperties$Outbound | null | undefined;
 };
@@ -66,22 +74,10 @@ export const ConnectorCreateAccount$outboundSchema: z.ZodType<
   ConnectorCreateAccount
 > = z.object({
   connectorRef: z.nullable(ConnectorRef$outboundSchema).optional(),
+  passwordCel: z.string().optional(),
   userIdCel: z.nullable(z.string()).optional(),
   userProperties: z.nullable(UserProperties$outboundSchema).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorCreateAccount$ {
-  /** @deprecated use `ConnectorCreateAccount$inboundSchema` instead. */
-  export const inboundSchema = ConnectorCreateAccount$inboundSchema;
-  /** @deprecated use `ConnectorCreateAccount$outboundSchema` instead. */
-  export const outboundSchema = ConnectorCreateAccount$outboundSchema;
-  /** @deprecated use `ConnectorCreateAccount$Outbound` instead. */
-  export type Outbound = ConnectorCreateAccount$Outbound;
-}
 
 export function connectorCreateAccountToJSON(
   connectorCreateAccount: ConnectorCreateAccount,
@@ -90,7 +86,6 @@ export function connectorCreateAccountToJSON(
     ConnectorCreateAccount$outboundSchema.parse(connectorCreateAccount),
   );
 }
-
 export function connectorCreateAccountFromJSON(
   jsonString: string,
 ): SafeParseResult<ConnectorCreateAccount, SDKValidationError> {

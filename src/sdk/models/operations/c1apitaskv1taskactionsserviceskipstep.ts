@@ -36,23 +36,6 @@ export type C1ApiTaskV1TaskActionsServiceSkipStepResponse = {
 };
 
 /** @internal */
-export const C1ApiTaskV1TaskActionsServiceSkipStepRequest$inboundSchema:
-  z.ZodType<
-    C1ApiTaskV1TaskActionsServiceSkipStepRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    task_id: z.string(),
-    TaskActionsServiceSkipStepRequest: shared
-      .TaskActionsServiceSkipStepRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "task_id": "taskId",
-      "TaskActionsServiceSkipStepRequest": "taskActionsServiceSkipStepRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiTaskV1TaskActionsServiceSkipStepRequest$Outbound = {
   task_id: string;
   TaskActionsServiceSkipStepRequest?:
@@ -77,21 +60,6 @@ export const C1ApiTaskV1TaskActionsServiceSkipStepRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceSkipStepRequest$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceSkipStepRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceSkipStepRequest$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceSkipStepRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceSkipStepRequest$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceSkipStepRequest$Outbound` instead. */
-  export type Outbound = C1ApiTaskV1TaskActionsServiceSkipStepRequest$Outbound;
-}
-
 export function c1ApiTaskV1TaskActionsServiceSkipStepRequestToJSON(
   c1ApiTaskV1TaskActionsServiceSkipStepRequest:
     C1ApiTaskV1TaskActionsServiceSkipStepRequest,
@@ -100,22 +68,6 @@ export function c1ApiTaskV1TaskActionsServiceSkipStepRequestToJSON(
     C1ApiTaskV1TaskActionsServiceSkipStepRequest$outboundSchema.parse(
       c1ApiTaskV1TaskActionsServiceSkipStepRequest,
     ),
-  );
-}
-
-export function c1ApiTaskV1TaskActionsServiceSkipStepRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiTaskV1TaskActionsServiceSkipStepRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiTaskV1TaskActionsServiceSkipStepRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiTaskV1TaskActionsServiceSkipStepRequest' from JSON`,
   );
 }
 
@@ -139,65 +91,6 @@ export const C1ApiTaskV1TaskActionsServiceSkipStepResponse$inboundSchema:
       "TaskServiceActionResponse": "taskServiceActionResponse",
     });
   });
-
-/** @internal */
-export type C1ApiTaskV1TaskActionsServiceSkipStepResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  TaskServiceActionResponse?:
-    | shared.TaskServiceActionResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiTaskV1TaskActionsServiceSkipStepResponse$outboundSchema:
-  z.ZodType<
-    C1ApiTaskV1TaskActionsServiceSkipStepResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiTaskV1TaskActionsServiceSkipStepResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    taskServiceActionResponse: shared.TaskServiceActionResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      taskServiceActionResponse: "TaskServiceActionResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceSkipStepResponse$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceSkipStepResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceSkipStepResponse$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceSkipStepResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceSkipStepResponse$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceSkipStepResponse$Outbound` instead. */
-  export type Outbound = C1ApiTaskV1TaskActionsServiceSkipStepResponse$Outbound;
-}
-
-export function c1ApiTaskV1TaskActionsServiceSkipStepResponseToJSON(
-  c1ApiTaskV1TaskActionsServiceSkipStepResponse:
-    C1ApiTaskV1TaskActionsServiceSkipStepResponse,
-): string {
-  return JSON.stringify(
-    C1ApiTaskV1TaskActionsServiceSkipStepResponse$outboundSchema.parse(
-      c1ApiTaskV1TaskActionsServiceSkipStepResponse,
-    ),
-  );
-}
 
 export function c1ApiTaskV1TaskActionsServiceSkipStepResponseFromJSON(
   jsonString: string,

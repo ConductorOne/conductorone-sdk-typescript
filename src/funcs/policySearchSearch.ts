@@ -216,7 +216,7 @@ async function $do(
       policySearchSearch(
         client,
         {
-          ...request,
+          ...request!,
           pageToken: nextCursor,
         },
         options,

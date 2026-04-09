@@ -13,6 +13,12 @@ import {
   PasswordField$outboundSchema,
 } from "./passwordfield.js";
 import {
+  PickerField,
+  PickerField$inboundSchema,
+  PickerField$Outbound,
+  PickerField$outboundSchema,
+} from "./pickerfield.js";
+import {
   SelectField,
   SelectField$inboundSchema,
   SelectField$Outbound,
@@ -40,6 +46,7 @@ import {
  *   - textField
  *   - passwordField
  *   - selectField
+ *   - pickerField
  *
  * This message contains a oneof named _rules. Only a single field of the following list may be set at a time:
  *   - rules
@@ -50,6 +57,17 @@ export type StringField = {
    */
   defaultValue?: string | null | undefined;
   passwordField?: PasswordField | null | undefined;
+  /**
+   * The PickerField message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named type. Only a single field of the following list may be set at a time:
+   *   - appUserPicker
+   *   - resourcePicker
+   *   - c1UserPicker
+   */
+  pickerField?: PickerField | null | undefined;
   /**
    * The placeholder field.
    */
@@ -67,16 +85,17 @@ export const StringField$inboundSchema: z.ZodType<
 > = z.object({
   defaultValue: z.nullable(z.string()).optional(),
   passwordField: z.nullable(PasswordField$inboundSchema).optional(),
+  pickerField: z.nullable(PickerField$inboundSchema).optional(),
   placeholder: z.nullable(z.string()).optional(),
   rules: z.nullable(StringRules$inboundSchema).optional(),
   selectField: z.nullable(SelectField$inboundSchema).optional(),
   textField: z.nullable(TextField$inboundSchema).optional(),
 });
-
 /** @internal */
 export type StringField$Outbound = {
   defaultValue?: string | null | undefined;
   passwordField?: PasswordField$Outbound | null | undefined;
+  pickerField?: PickerField$Outbound | null | undefined;
   placeholder?: string | null | undefined;
   rules?: StringRules$Outbound | null | undefined;
   selectField?: SelectField$Outbound | null | undefined;
@@ -91,29 +110,16 @@ export const StringField$outboundSchema: z.ZodType<
 > = z.object({
   defaultValue: z.nullable(z.string()).optional(),
   passwordField: z.nullable(PasswordField$outboundSchema).optional(),
+  pickerField: z.nullable(PickerField$outboundSchema).optional(),
   placeholder: z.nullable(z.string()).optional(),
   rules: z.nullable(StringRules$outboundSchema).optional(),
   selectField: z.nullable(SelectField$outboundSchema).optional(),
   textField: z.nullable(TextField$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StringField$ {
-  /** @deprecated use `StringField$inboundSchema` instead. */
-  export const inboundSchema = StringField$inboundSchema;
-  /** @deprecated use `StringField$outboundSchema` instead. */
-  export const outboundSchema = StringField$outboundSchema;
-  /** @deprecated use `StringField$Outbound` instead. */
-  export type Outbound = StringField$Outbound;
-}
-
 export function stringFieldToJSON(stringField: StringField): string {
   return JSON.stringify(StringField$outboundSchema.parse(stringField));
 }
-
 export function stringFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<StringField, SDKValidationError> {

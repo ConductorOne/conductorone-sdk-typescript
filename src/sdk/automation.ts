@@ -38,7 +38,7 @@ export class Automation extends ClientSDK {
    * Invokes the c1.api.automations.v1.AutomationService.CreateAutomation method.
    */
   async createAutomation(
-    request?: shared.CreateAutomationRequestInput | undefined,
+    request?: shared.CreateAutomationRequest | undefined,
     options?: RequestOptions,
   ): Promise<
     operations.C1ApiAutomationsV1AutomationServiceCreateAutomationResponse

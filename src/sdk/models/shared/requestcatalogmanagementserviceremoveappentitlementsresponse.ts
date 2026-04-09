@@ -20,44 +20,6 @@ export const RequestCatalogManagementServiceRemoveAppEntitlementsResponse$inboun
     unknown
   > = z.object({});
 
-/** @internal */
-export type RequestCatalogManagementServiceRemoveAppEntitlementsResponse$Outbound =
-  {};
-
-/** @internal */
-export const RequestCatalogManagementServiceRemoveAppEntitlementsResponse$outboundSchema:
-  z.ZodType<
-    RequestCatalogManagementServiceRemoveAppEntitlementsResponse$Outbound,
-    z.ZodTypeDef,
-    RequestCatalogManagementServiceRemoveAppEntitlementsResponse
-  > = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogManagementServiceRemoveAppEntitlementsResponse$ {
-  /** @deprecated use `RequestCatalogManagementServiceRemoveAppEntitlementsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogManagementServiceRemoveAppEntitlementsResponse$inboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceRemoveAppEntitlementsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogManagementServiceRemoveAppEntitlementsResponse$outboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceRemoveAppEntitlementsResponse$Outbound` instead. */
-  export type Outbound =
-    RequestCatalogManagementServiceRemoveAppEntitlementsResponse$Outbound;
-}
-
-export function requestCatalogManagementServiceRemoveAppEntitlementsResponseToJSON(
-  requestCatalogManagementServiceRemoveAppEntitlementsResponse:
-    RequestCatalogManagementServiceRemoveAppEntitlementsResponse,
-): string {
-  return JSON.stringify(
-    RequestCatalogManagementServiceRemoveAppEntitlementsResponse$outboundSchema
-      .parse(requestCatalogManagementServiceRemoveAppEntitlementsResponse),
-  );
-}
-
 export function requestCatalogManagementServiceRemoveAppEntitlementsResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

@@ -45,7 +45,6 @@ export const AppUsageControls$inboundSchema: z.ZodType<
   revoke: z.nullable(z.boolean()).optional(),
   revokeAfterDays: z.nullable(z.number().int()).optional(),
 });
-
 /** @internal */
 export type AppUsageControls$Outbound = {
   appId?: string | null | undefined;
@@ -68,19 +67,6 @@ export const AppUsageControls$outboundSchema: z.ZodType<
   revokeAfterDays: z.nullable(z.number().int()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUsageControls$ {
-  /** @deprecated use `AppUsageControls$inboundSchema` instead. */
-  export const inboundSchema = AppUsageControls$inboundSchema;
-  /** @deprecated use `AppUsageControls$outboundSchema` instead. */
-  export const outboundSchema = AppUsageControls$outboundSchema;
-  /** @deprecated use `AppUsageControls$Outbound` instead. */
-  export type Outbound = AppUsageControls$Outbound;
-}
-
 export function appUsageControlsToJSON(
   appUsageControls: AppUsageControls,
 ): string {
@@ -88,7 +74,6 @@ export function appUsageControlsToJSON(
     AppUsageControls$outboundSchema.parse(appUsageControls),
   );
 }
-
 export function appUsageControlsFromJSON(
   jsonString: string,
 ): SafeParseResult<AppUsageControls, SDKValidationError> {

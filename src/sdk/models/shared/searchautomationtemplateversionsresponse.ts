@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AutomationTemplateVersion,
   AutomationTemplateVersion$inboundSchema,
-  AutomationTemplateVersion$Outbound,
-  AutomationTemplateVersion$outboundSchema,
 } from "./automationtemplateversion.js";
 
 /**
@@ -36,49 +34,6 @@ export const SearchAutomationTemplateVersionsResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(AutomationTemplateVersion$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type SearchAutomationTemplateVersionsResponse$Outbound = {
-  list?: Array<AutomationTemplateVersion$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const SearchAutomationTemplateVersionsResponse$outboundSchema: z.ZodType<
-  SearchAutomationTemplateVersionsResponse$Outbound,
-  z.ZodTypeDef,
-  SearchAutomationTemplateVersionsResponse
-> = z.object({
-  list: z.nullable(z.array(AutomationTemplateVersion$outboundSchema))
-    .optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchAutomationTemplateVersionsResponse$ {
-  /** @deprecated use `SearchAutomationTemplateVersionsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    SearchAutomationTemplateVersionsResponse$inboundSchema;
-  /** @deprecated use `SearchAutomationTemplateVersionsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchAutomationTemplateVersionsResponse$outboundSchema;
-  /** @deprecated use `SearchAutomationTemplateVersionsResponse$Outbound` instead. */
-  export type Outbound = SearchAutomationTemplateVersionsResponse$Outbound;
-}
-
-export function searchAutomationTemplateVersionsResponseToJSON(
-  searchAutomationTemplateVersionsResponse:
-    SearchAutomationTemplateVersionsResponse,
-): string {
-  return JSON.stringify(
-    SearchAutomationTemplateVersionsResponse$outboundSchema.parse(
-      searchAutomationTemplateVersionsResponse,
-    ),
-  );
-}
 
 export function searchAutomationTemplateVersionsResponseFromJSON(
   jsonString: string,

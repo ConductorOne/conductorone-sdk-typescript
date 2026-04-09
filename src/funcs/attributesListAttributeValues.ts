@@ -95,7 +95,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/api/v1/attributes/types/{attribute_type_id}/values",
   )(pathParams);

@@ -17,17 +17,26 @@ import {
   ConnectorStatus$outboundSchema,
 } from "./connectorstatus.js";
 import {
+  ConnectorSyncCronSchedule,
+  ConnectorSyncCronSchedule$inboundSchema,
+  ConnectorSyncCronSchedule$Outbound,
+  ConnectorSyncCronSchedule$outboundSchema,
+} from "./connectorsynccronschedule.js";
+import {
   OAuth2AuthorizedAs,
   OAuth2AuthorizedAs$inboundSchema,
-  OAuth2AuthorizedAs$Outbound,
-  OAuth2AuthorizedAs$outboundSchema,
 } from "./oauth2authorizedas.js";
 import {
   OAuth2AuthorizedAsInput,
-  OAuth2AuthorizedAsInput$inboundSchema,
   OAuth2AuthorizedAsInput$Outbound,
   OAuth2AuthorizedAsInput$outboundSchema,
 } from "./oauth2authorizedasinput.js";
+import {
+  SyncConfig,
+  SyncConfig$inboundSchema,
+  SyncConfig$Outbound,
+  SyncConfig$outboundSchema,
+} from "./syncconfig.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -57,6 +66,15 @@ export type Connector = {
    */
   catalogId?: string | null | undefined;
   config?: Config | null | undefined;
+  configUpdatedAt?: Date | undefined;
+  /**
+   * The connectorApiVersion field.
+   */
+  connectorApiVersion?: number | undefined;
+  /**
+   * The ConnectorSyncCronSchedule message.
+   */
+  connectorSyncCronSchedule?: ConnectorSyncCronSchedule | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
@@ -89,6 +107,10 @@ export type Connector = {
    */
   profileIgnoreList?: Array<string> | null | undefined;
   status?: ConnectorStatus | null | undefined;
+  /**
+   * The SyncConfig message.
+   */
+  syncConfig?: SyncConfig | undefined;
   syncDisabledAt?: Date | null | undefined;
   /**
    * The category of the connector sync that was disabled.
@@ -122,6 +144,10 @@ export type ConnectorInput = {
    */
   catalogId?: string | null | undefined;
   config?: Config | null | undefined;
+  /**
+   * The ConnectorSyncCronSchedule message.
+   */
+  connectorSyncCronSchedule?: ConnectorSyncCronSchedule | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
@@ -150,6 +176,10 @@ export type ConnectorInput = {
    */
   profileIgnoreList?: Array<string> | null | undefined;
   status?: ConnectorStatus | null | undefined;
+  /**
+   * The SyncConfig message.
+   */
+  syncConfig?: SyncConfig | undefined;
   syncDisabledAt?: Date | null | undefined;
   /**
    * The category of the connector sync that was disabled.
@@ -179,7 +209,6 @@ export const Config$inboundSchema: z.ZodType<Config, z.ZodTypeDef, unknown> =
       "@type": "atType",
     });
   });
-
 /** @internal */
 export type Config$Outbound = {
   "@type"?: string | undefined;
@@ -204,23 +233,9 @@ export const Config$outboundSchema: z.ZodType<
   };
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Config$ {
-  /** @deprecated use `Config$inboundSchema` instead. */
-  export const inboundSchema = Config$inboundSchema;
-  /** @deprecated use `Config$outboundSchema` instead. */
-  export const outboundSchema = Config$outboundSchema;
-  /** @deprecated use `Config$Outbound` instead. */
-  export type Outbound = Config$Outbound;
-}
-
 export function configToJSON(config: Config): string {
   return JSON.stringify(Config$outboundSchema.parse(config));
 }
-
 export function configFromJSON(
   jsonString: string,
 ): SafeParseResult<Config, SDKValidationError> {
@@ -241,6 +256,11 @@ export const Connector$inboundSchema: z.ZodType<
   canResumeSync: z.nullable(z.boolean()).optional(),
   catalogId: z.nullable(z.string()).optional(),
   config: z.nullable(z.lazy(() => Config$inboundSchema)).optional(),
+  configUpdatedAt: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
+  ).optional(),
+  connectorApiVersion: z.number().int().optional(),
+  connectorSyncCronSchedule: ConnectorSyncCronSchedule$inboundSchema.optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -256,6 +276,7 @@ export const Connector$inboundSchema: z.ZodType<
   profileAllowList: z.nullable(z.array(z.string())).optional(),
   profileIgnoreList: z.nullable(z.array(z.string())).optional(),
   status: z.nullable(ConnectorStatus$inboundSchema).optional(),
+  syncConfig: SyncConfig$inboundSchema.optional(),
   syncDisabledAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -266,76 +287,6 @@ export const Connector$inboundSchema: z.ZodType<
   ).optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
 });
-
-/** @internal */
-export type Connector$Outbound = {
-  appId?: string | null | undefined;
-  canResumeSync?: boolean | null | undefined;
-  catalogId?: string | null | undefined;
-  config?: Config$Outbound | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  description?: string | null | undefined;
-  disableCheckBadSync?: boolean | null | undefined;
-  displayName?: string | null | undefined;
-  downloadUrl?: string | null | undefined;
-  id?: string | null | undefined;
-  oauthAuthorizedAs?: OAuth2AuthorizedAs$Outbound | null | undefined;
-  profileAllowList?: Array<string> | null | undefined;
-  profileIgnoreList?: Array<string> | null | undefined;
-  status?: ConnectorStatus$Outbound | null | undefined;
-  syncDisabledAt?: string | null | undefined;
-  syncDisabledCategory?: string | null | undefined;
-  syncDisabledReason?: string | null | undefined;
-  updatedAt?: string | null | undefined;
-  userIds?: Array<string> | null | undefined;
-};
-
-/** @internal */
-export const Connector$outboundSchema: z.ZodType<
-  Connector$Outbound,
-  z.ZodTypeDef,
-  Connector
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  canResumeSync: z.nullable(z.boolean()).optional(),
-  catalogId: z.nullable(z.string()).optional(),
-  config: z.nullable(z.lazy(() => Config$outboundSchema)).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.nullable(z.string()).optional(),
-  disableCheckBadSync: z.nullable(z.boolean()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  downloadUrl: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  oauthAuthorizedAs: z.nullable(OAuth2AuthorizedAs$outboundSchema).optional(),
-  profileAllowList: z.nullable(z.array(z.string())).optional(),
-  profileIgnoreList: z.nullable(z.array(z.string())).optional(),
-  status: z.nullable(ConnectorStatus$outboundSchema).optional(),
-  syncDisabledAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  syncDisabledCategory: z.nullable(z.string()).optional(),
-  syncDisabledReason: z.nullable(z.string()).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Connector$ {
-  /** @deprecated use `Connector$inboundSchema` instead. */
-  export const inboundSchema = Connector$inboundSchema;
-  /** @deprecated use `Connector$outboundSchema` instead. */
-  export const outboundSchema = Connector$outboundSchema;
-  /** @deprecated use `Connector$Outbound` instead. */
-  export type Outbound = Connector$Outbound;
-}
-
-export function connectorToJSON(connector: Connector): string {
-  return JSON.stringify(Connector$outboundSchema.parse(connector));
-}
 
 export function connectorFromJSON(
   jsonString: string,
@@ -348,47 +299,12 @@ export function connectorFromJSON(
 }
 
 /** @internal */
-export const ConnectorInput$inboundSchema: z.ZodType<
-  ConnectorInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  canResumeSync: z.nullable(z.boolean()).optional(),
-  catalogId: z.nullable(z.string()).optional(),
-  config: z.nullable(z.lazy(() => Config$inboundSchema)).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.nullable(z.string()).optional(),
-  disableCheckBadSync: z.nullable(z.boolean()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  oauthAuthorizedAs: z.nullable(OAuth2AuthorizedAsInput$inboundSchema)
-    .optional(),
-  profileAllowList: z.nullable(z.array(z.string())).optional(),
-  profileIgnoreList: z.nullable(z.array(z.string())).optional(),
-  status: z.nullable(ConnectorStatus$inboundSchema).optional(),
-  syncDisabledAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  syncDisabledCategory: z.nullable(z.string()).optional(),
-  syncDisabledReason: z.nullable(z.string()).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
-
-/** @internal */
 export type ConnectorInput$Outbound = {
   appId?: string | null | undefined;
   canResumeSync?: boolean | null | undefined;
   catalogId?: string | null | undefined;
   config?: Config$Outbound | null | undefined;
+  connectorSyncCronSchedule?: ConnectorSyncCronSchedule$Outbound | undefined;
   createdAt?: string | null | undefined;
   deletedAt?: string | null | undefined;
   description?: string | null | undefined;
@@ -399,6 +315,7 @@ export type ConnectorInput$Outbound = {
   profileAllowList?: Array<string> | null | undefined;
   profileIgnoreList?: Array<string> | null | undefined;
   status?: ConnectorStatus$Outbound | null | undefined;
+  syncConfig?: SyncConfig$Outbound | undefined;
   syncDisabledAt?: string | null | undefined;
   syncDisabledCategory?: string | null | undefined;
   syncDisabledReason?: string | null | undefined;
@@ -416,6 +333,8 @@ export const ConnectorInput$outboundSchema: z.ZodType<
   canResumeSync: z.nullable(z.boolean()).optional(),
   catalogId: z.nullable(z.string()).optional(),
   config: z.nullable(z.lazy(() => Config$outboundSchema)).optional(),
+  connectorSyncCronSchedule: ConnectorSyncCronSchedule$outboundSchema
+    .optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   description: z.nullable(z.string()).optional(),
@@ -427,6 +346,7 @@ export const ConnectorInput$outboundSchema: z.ZodType<
   profileAllowList: z.nullable(z.array(z.string())).optional(),
   profileIgnoreList: z.nullable(z.array(z.string())).optional(),
   status: z.nullable(ConnectorStatus$outboundSchema).optional(),
+  syncConfig: SyncConfig$outboundSchema.optional(),
   syncDisabledAt: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
   syncDisabledCategory: z.nullable(z.string()).optional(),
@@ -435,29 +355,6 @@ export const ConnectorInput$outboundSchema: z.ZodType<
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorInput$ {
-  /** @deprecated use `ConnectorInput$inboundSchema` instead. */
-  export const inboundSchema = ConnectorInput$inboundSchema;
-  /** @deprecated use `ConnectorInput$outboundSchema` instead. */
-  export const outboundSchema = ConnectorInput$outboundSchema;
-  /** @deprecated use `ConnectorInput$Outbound` instead. */
-  export type Outbound = ConnectorInput$Outbound;
-}
-
 export function connectorInputToJSON(connectorInput: ConnectorInput): string {
   return JSON.stringify(ConnectorInput$outboundSchema.parse(connectorInput));
-}
-
-export function connectorInputFromJSON(
-  jsonString: string,
-): SafeParseResult<ConnectorInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ConnectorInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ConnectorInput' from JSON`,
-  );
 }

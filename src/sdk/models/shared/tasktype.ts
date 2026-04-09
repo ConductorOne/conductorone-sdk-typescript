@@ -3,15 +3,28 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  TaskTypeAction,
+  TaskTypeAction$inboundSchema,
+  TaskTypeAction$Outbound,
+  TaskTypeAction$outboundSchema,
+} from "./tasktypeaction.js";
 import {
   TaskTypeCertify,
   TaskTypeCertify$inboundSchema,
   TaskTypeCertify$Outbound,
   TaskTypeCertify$outboundSchema,
 } from "./tasktypecertify.js";
+import {
+  TaskTypeFinding,
+  TaskTypeFinding$inboundSchema,
+  TaskTypeFinding$Outbound,
+  TaskTypeFinding$outboundSchema,
+} from "./tasktypefinding.js";
 import {
   TaskTypeGrant,
   TaskTypeGrant$inboundSchema,
@@ -41,9 +54,19 @@ import {
  *   - revoke
  *   - certify
  *   - offboarding
+ *   - action
+ *   - finding
  */
 export type TaskType = {
+  /**
+   * The TaskTypeAction message.
+   */
+  taskTypeAction?: TaskTypeAction | null | undefined;
   certify?: TaskTypeCertify | null | undefined;
+  /**
+   * The TaskTypeFinding message.
+   */
+  taskTypeFinding?: TaskTypeFinding | null | undefined;
   grant?: TaskTypeGrant | null | undefined;
   offboarding?: TaskTypeOffboarding | null | undefined;
   revoke?: TaskTypeRevoke | null | undefined;
@@ -55,15 +78,23 @@ export const TaskType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  action: z.nullable(TaskTypeAction$inboundSchema).optional(),
   certify: z.nullable(TaskTypeCertify$inboundSchema).optional(),
+  finding: z.nullable(TaskTypeFinding$inboundSchema).optional(),
   grant: z.nullable(TaskTypeGrant$inboundSchema).optional(),
   offboarding: z.nullable(TaskTypeOffboarding$inboundSchema).optional(),
   revoke: z.nullable(TaskTypeRevoke$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "action": "taskTypeAction",
+    "finding": "taskTypeFinding",
+  });
 });
-
 /** @internal */
 export type TaskType$Outbound = {
+  action?: TaskTypeAction$Outbound | null | undefined;
   certify?: TaskTypeCertify$Outbound | null | undefined;
+  finding?: TaskTypeFinding$Outbound | null | undefined;
   grant?: TaskTypeGrant$Outbound | null | undefined;
   offboarding?: TaskTypeOffboarding$Outbound | null | undefined;
   revoke?: TaskTypeRevoke$Outbound | null | undefined;
@@ -75,29 +106,22 @@ export const TaskType$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskType
 > = z.object({
+  taskTypeAction: z.nullable(TaskTypeAction$outboundSchema).optional(),
   certify: z.nullable(TaskTypeCertify$outboundSchema).optional(),
+  taskTypeFinding: z.nullable(TaskTypeFinding$outboundSchema).optional(),
   grant: z.nullable(TaskTypeGrant$outboundSchema).optional(),
   offboarding: z.nullable(TaskTypeOffboarding$outboundSchema).optional(),
   revoke: z.nullable(TaskTypeRevoke$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    taskTypeAction: "action",
+    taskTypeFinding: "finding",
+  });
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskType$ {
-  /** @deprecated use `TaskType$inboundSchema` instead. */
-  export const inboundSchema = TaskType$inboundSchema;
-  /** @deprecated use `TaskType$outboundSchema` instead. */
-  export const outboundSchema = TaskType$outboundSchema;
-  /** @deprecated use `TaskType$Outbound` instead. */
-  export type Outbound = TaskType$Outbound;
-}
 
 export function taskTypeToJSON(taskType: TaskType): string {
   return JSON.stringify(TaskType$outboundSchema.parse(taskType));
 }
-
 export function taskTypeFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskType, SDKValidationError> {

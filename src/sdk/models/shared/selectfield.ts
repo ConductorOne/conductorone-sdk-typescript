@@ -4,6 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -14,6 +16,20 @@ import {
 } from "./selectoption.js";
 
 /**
+ * The type field.
+ */
+export const SelectFieldType = {
+  SelectTypeUnspecified: "SELECT_TYPE_UNSPECIFIED",
+  SelectTypeDropdown: "SELECT_TYPE_DROPDOWN",
+  SelectTypeRadio: "SELECT_TYPE_RADIO",
+  SelectTypeButtons: "SELECT_TYPE_BUTTONS",
+} as const;
+/**
+ * The type field.
+ */
+export type SelectFieldType = OpenEnum<typeof SelectFieldType>;
+
+/**
  * The SelectField message.
  */
 export type SelectField = {
@@ -21,7 +37,24 @@ export type SelectField = {
    * The options field.
    */
   options?: Array<SelectOption> | null | undefined;
+  /**
+   * The type field.
+   */
+  type?: SelectFieldType | undefined;
 };
+
+/** @internal */
+export const SelectFieldType$inboundSchema: z.ZodType<
+  SelectFieldType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(SelectFieldType);
+/** @internal */
+export const SelectFieldType$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  SelectFieldType
+> = openEnums.outboundSchema(SelectFieldType);
 
 /** @internal */
 export const SelectField$inboundSchema: z.ZodType<
@@ -30,11 +63,12 @@ export const SelectField$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   options: z.nullable(z.array(SelectOption$inboundSchema)).optional(),
+  type: SelectFieldType$inboundSchema.optional(),
 });
-
 /** @internal */
 export type SelectField$Outbound = {
   options?: Array<SelectOption$Outbound> | null | undefined;
+  type?: string | undefined;
 };
 
 /** @internal */
@@ -44,25 +78,12 @@ export const SelectField$outboundSchema: z.ZodType<
   SelectField
 > = z.object({
   options: z.nullable(z.array(SelectOption$outboundSchema)).optional(),
+  type: SelectFieldType$outboundSchema.optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SelectField$ {
-  /** @deprecated use `SelectField$inboundSchema` instead. */
-  export const inboundSchema = SelectField$inboundSchema;
-  /** @deprecated use `SelectField$outboundSchema` instead. */
-  export const outboundSchema = SelectField$outboundSchema;
-  /** @deprecated use `SelectField$Outbound` instead. */
-  export type Outbound = SelectField$Outbound;
-}
 
 export function selectFieldToJSON(selectField: SelectField): string {
   return JSON.stringify(SelectField$outboundSchema.parse(selectField));
 }
-
 export function selectFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<SelectField, SDKValidationError> {

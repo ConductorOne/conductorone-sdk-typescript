@@ -7,6 +7,12 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  CancelTicket,
+  CancelTicket$inboundSchema,
+  CancelTicket$Outbound,
+  CancelTicket$outboundSchema,
+} from "./cancelticket.js";
+import {
   ReassignToApprovers,
   ReassignToApprovers$inboundSchema,
   ReassignToApprovers$Outbound,
@@ -18,6 +24,12 @@ import {
   ReplacePolicy$Outbound,
   ReplacePolicy$outboundSchema,
 } from "./replacepolicy.js";
+import {
+  SkipStep,
+  SkipStep$inboundSchema,
+  SkipStep$Outbound,
+  SkipStep$outboundSchema,
+} from "./skipstep.js";
 
 /**
  * The EscalationInstance message.
@@ -27,6 +39,8 @@ import {
  * This message contains a oneof named escalation_policy. Only a single field of the following list may be set at a time:
  *   - replacePolicy
  *   - reassignToApprovers
+ *   - cancelTicket
+ *   - skipStep
  */
 export type EscalationInstance = {
   /**
@@ -34,12 +48,20 @@ export type EscalationInstance = {
    */
   alreadyEscalated?: boolean | null | undefined;
   /**
+   * The CancelTicket message.
+   */
+  cancelTicket?: CancelTicket | null | undefined;
+  /**
    * The escalationComment field.
    */
   escalationComment?: string | null | undefined;
   expiresAt?: Date | null | undefined;
   reassignToApprovers?: ReassignToApprovers | null | undefined;
   replacePolicy?: ReplacePolicy | null | undefined;
+  /**
+   * The SkipStep message.
+   */
+  skipStep?: SkipStep | null | undefined;
 };
 
 /** @internal */
@@ -49,21 +71,24 @@ export const EscalationInstance$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   alreadyEscalated: z.nullable(z.boolean()).optional(),
+  cancelTicket: z.nullable(CancelTicket$inboundSchema).optional(),
   escalationComment: z.nullable(z.string()).optional(),
   expiresAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   reassignToApprovers: z.nullable(ReassignToApprovers$inboundSchema).optional(),
   replacePolicy: z.nullable(ReplacePolicy$inboundSchema).optional(),
+  skipStep: z.nullable(SkipStep$inboundSchema).optional(),
 });
-
 /** @internal */
 export type EscalationInstance$Outbound = {
   alreadyEscalated?: boolean | null | undefined;
+  cancelTicket?: CancelTicket$Outbound | null | undefined;
   escalationComment?: string | null | undefined;
   expiresAt?: string | null | undefined;
   reassignToApprovers?: ReassignToApprovers$Outbound | null | undefined;
   replacePolicy?: ReplacePolicy$Outbound | null | undefined;
+  skipStep?: SkipStep$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -73,25 +98,14 @@ export const EscalationInstance$outboundSchema: z.ZodType<
   EscalationInstance
 > = z.object({
   alreadyEscalated: z.nullable(z.boolean()).optional(),
+  cancelTicket: z.nullable(CancelTicket$outboundSchema).optional(),
   escalationComment: z.nullable(z.string()).optional(),
   expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   reassignToApprovers: z.nullable(ReassignToApprovers$outboundSchema)
     .optional(),
   replacePolicy: z.nullable(ReplacePolicy$outboundSchema).optional(),
+  skipStep: z.nullable(SkipStep$outboundSchema).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EscalationInstance$ {
-  /** @deprecated use `EscalationInstance$inboundSchema` instead. */
-  export const inboundSchema = EscalationInstance$inboundSchema;
-  /** @deprecated use `EscalationInstance$outboundSchema` instead. */
-  export const outboundSchema = EscalationInstance$outboundSchema;
-  /** @deprecated use `EscalationInstance$Outbound` instead. */
-  export type Outbound = EscalationInstance$Outbound;
-}
 
 export function escalationInstanceToJSON(
   escalationInstance: EscalationInstance,
@@ -100,7 +114,6 @@ export function escalationInstanceToJSON(
     EscalationInstance$outboundSchema.parse(escalationInstance),
   );
 }
-
 export function escalationInstanceFromJSON(
   jsonString: string,
 ): SafeParseResult<EscalationInstance, SDKValidationError> {

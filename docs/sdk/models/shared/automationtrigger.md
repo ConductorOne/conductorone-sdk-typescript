@@ -3,7 +3,6 @@
 Automation Triggers
 
 This message contains a oneof named kind. Only a single field of the following list may be set at a time:
-  - manual
   - userProfileChange
   - appUserCreated
   - appUserUpdated
@@ -13,7 +12,6 @@ This message contains a oneof named kind. Only a single field of the following l
   - grantDeleted
   - webhook
   - schedule
-  - form
   - scheduleAppUser
   - accessConflict
 
@@ -33,10 +31,8 @@ let value: AutomationTrigger = {};
 | `accessConflict`                                                                                | [shared.AccessConflictTrigger](../../../sdk/models/shared/accessconflicttrigger.md)             | :heavy_minus_sign:                                                                              | N/A                                                                                             |
 | `appUserCreated`                                                                                | [shared.AppUserCreatedTrigger](../../../sdk/models/shared/appusercreatedtrigger.md)             | :heavy_minus_sign:                                                                              | N/A                                                                                             |
 | `appUserUpdated`                                                                                | [shared.AppUserUpdatedTrigger](../../../sdk/models/shared/appuserupdatedtrigger.md)             | :heavy_minus_sign:                                                                              | N/A                                                                                             |
-| `form`                                                                                          | [shared.FormTrigger](../../../sdk/models/shared/formtrigger.md)                                 | :heavy_minus_sign:                                                                              | N/A                                                                                             |
 | `grantDeleted`                                                                                  | [shared.GrantDeletedTrigger](../../../sdk/models/shared/grantdeletedtrigger.md)                 | :heavy_minus_sign:                                                                              | N/A                                                                                             |
 | `grantFound`                                                                                    | [shared.GrantFoundTrigger](../../../sdk/models/shared/grantfoundtrigger.md)                     | :heavy_minus_sign:                                                                              | N/A                                                                                             |
-| `manual`                                                                                        | [shared.ManualAutomationTrigger](../../../sdk/models/shared/manualautomationtrigger.md)         | :heavy_minus_sign:                                                                              | N/A                                                                                             |
 | `schedule`                                                                                      | [shared.ScheduleTrigger](../../../sdk/models/shared/scheduletrigger.md)                         | :heavy_minus_sign:                                                                              | N/A                                                                                             |
 | `scheduleAppUser`                                                                               | [shared.ScheduleTriggerAppUser](../../../sdk/models/shared/scheduletriggerappuser.md)           | :heavy_minus_sign:                                                                              | N/A                                                                                             |
 | `usageBasedRevocation`                                                                          | [shared.UsageBasedRevocationTrigger](../../../sdk/models/shared/usagebasedrevocationtrigger.md) | :heavy_minus_sign:                                                                              | N/A                                                                                             |

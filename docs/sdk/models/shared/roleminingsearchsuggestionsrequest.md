@@ -1,0 +1,22 @@
+# RoleMiningSearchSuggestionsRequest
+
+The RoleMiningSearchSuggestionsRequest message.
+
+## Example Usage
+
+```typescript
+import { RoleMiningSearchSuggestionsRequest } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: RoleMiningSearchSuggestionsRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                       | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `cohortTypes`                                                                                                               | *string*[]                                                                                                                  | :heavy_minus_sign:                                                                                                          | Filter by cohort type (e.g. "department", "job_title", "manager").                                                          |
+| `matchTypes`                                                                                                                | [shared.MatchTypes](../../../sdk/models/shared/matchtypes.md)[]                                                             | :heavy_minus_sign:                                                                                                          | Filter by match type against existing access profiles.                                                                      |
+| `pageSize`                                                                                                                  | *number*                                                                                                                    | :heavy_minus_sign:                                                                                                          | The pageSize field.                                                                                                         |
+| `pageToken`                                                                                                                 | *string*                                                                                                                    | :heavy_minus_sign:                                                                                                          | The pageToken field.                                                                                                        |
+| `query`                                                                                                                     | *string*                                                                                                                    | :heavy_minus_sign:                                                                                                          | Text search — matches against suggested_name, description, and cohort filter values.                                        |
+| `states`                                                                                                                    | [shared.RoleMiningSearchSuggestionsRequestStates](../../../sdk/models/shared/roleminingsearchsuggestionsrequeststates.md)[] | :heavy_minus_sign:                                                                                                          | Filter by suggestion state.                                                                                                 |

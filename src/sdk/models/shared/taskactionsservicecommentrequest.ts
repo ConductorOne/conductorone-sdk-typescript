@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskExpandMask,
-  TaskExpandMask$inboundSchema,
   TaskExpandMask$Outbound,
   TaskExpandMask$outboundSchema,
 } from "./taskexpandmask.js";
@@ -23,16 +19,6 @@ export type TaskActionsServiceCommentRequest = {
   comment?: string | null | undefined;
   expandMask?: TaskExpandMask | null | undefined;
 };
-
-/** @internal */
-export const TaskActionsServiceCommentRequest$inboundSchema: z.ZodType<
-  TaskActionsServiceCommentRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  comment: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(TaskExpandMask$inboundSchema).optional(),
-});
 
 /** @internal */
 export type TaskActionsServiceCommentRequest$Outbound = {
@@ -50,19 +36,6 @@ export const TaskActionsServiceCommentRequest$outboundSchema: z.ZodType<
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceCommentRequest$ {
-  /** @deprecated use `TaskActionsServiceCommentRequest$inboundSchema` instead. */
-  export const inboundSchema = TaskActionsServiceCommentRequest$inboundSchema;
-  /** @deprecated use `TaskActionsServiceCommentRequest$outboundSchema` instead. */
-  export const outboundSchema = TaskActionsServiceCommentRequest$outboundSchema;
-  /** @deprecated use `TaskActionsServiceCommentRequest$Outbound` instead. */
-  export type Outbound = TaskActionsServiceCommentRequest$Outbound;
-}
-
 export function taskActionsServiceCommentRequestToJSON(
   taskActionsServiceCommentRequest: TaskActionsServiceCommentRequest,
 ): string {
@@ -70,15 +43,5 @@ export function taskActionsServiceCommentRequestToJSON(
     TaskActionsServiceCommentRequest$outboundSchema.parse(
       taskActionsServiceCommentRequest,
     ),
-  );
-}
-
-export function taskActionsServiceCommentRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskActionsServiceCommentRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskActionsServiceCommentRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskActionsServiceCommentRequest' from JSON`,
   );
 }

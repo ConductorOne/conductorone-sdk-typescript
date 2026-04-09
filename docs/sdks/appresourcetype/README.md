@@ -1,5 +1,4 @@
 # AppResourceType
-(*appResourceType*)
 
 ## Overview
 

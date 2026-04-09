@@ -1,5 +1,4 @@
 # AccessConflict
-(*accessConflict*)
 
 ## Overview
 

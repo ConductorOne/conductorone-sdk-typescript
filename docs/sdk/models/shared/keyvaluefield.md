@@ -12,6 +12,7 @@ let value: KeyValueField = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `secret`           | *boolean*          | :heavy_minus_sign: | The secret field.  |
+| Field                                                  | Type                                                   | Required                                               | Description                                            |
+| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
+| `secret`                                               | *boolean*                                              | :heavy_minus_sign:                                     | The secret field.                                      |
+| `supportsFileUpload`                                   | *boolean*                                              | :heavy_minus_sign:                                     | When true, UI allows file uploads per key-value entry. |

@@ -1,5 +1,4 @@
 # AppAccessRequestsDefaults
-(*appAccessRequestsDefaults*)
 
 ## Overview
 

@@ -72,7 +72,6 @@ export const CreateRevokeTasks$inboundSchema: z.ZodType<
   userIdCel: z.nullable(z.string()).optional(),
   userRef: z.nullable(UserRef$inboundSchema).optional(),
 });
-
 /** @internal */
 export type CreateRevokeTasks$Outbound = {
   appEntitlementRefs?: Array<AppEntitlementRef$Outbound> | null | undefined;
@@ -107,19 +106,6 @@ export const CreateRevokeTasks$outboundSchema: z.ZodType<
   userRef: z.nullable(UserRef$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateRevokeTasks$ {
-  /** @deprecated use `CreateRevokeTasks$inboundSchema` instead. */
-  export const inboundSchema = CreateRevokeTasks$inboundSchema;
-  /** @deprecated use `CreateRevokeTasks$outboundSchema` instead. */
-  export const outboundSchema = CreateRevokeTasks$outboundSchema;
-  /** @deprecated use `CreateRevokeTasks$Outbound` instead. */
-  export type Outbound = CreateRevokeTasks$Outbound;
-}
-
 export function createRevokeTasksToJSON(
   createRevokeTasks: CreateRevokeTasks,
 ): string {
@@ -127,7 +113,6 @@ export function createRevokeTasksToJSON(
     CreateRevokeTasks$outboundSchema.parse(createRevokeTasks),
   );
 }
-
 export function createRevokeTasksFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateRevokeTasks, SDKValidationError> {

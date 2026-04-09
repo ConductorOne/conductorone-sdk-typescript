@@ -46,7 +46,6 @@ export const ApprovedAction$inboundSchema: z.ZodType<
   stepUpTransactionId: z.nullable(z.string()).optional(),
   userId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type ApprovedAction$Outbound = {
   approvedAt?: string | null | undefined;
@@ -68,23 +67,9 @@ export const ApprovedAction$outboundSchema: z.ZodType<
   userId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ApprovedAction$ {
-  /** @deprecated use `ApprovedAction$inboundSchema` instead. */
-  export const inboundSchema = ApprovedAction$inboundSchema;
-  /** @deprecated use `ApprovedAction$outboundSchema` instead. */
-  export const outboundSchema = ApprovedAction$outboundSchema;
-  /** @deprecated use `ApprovedAction$Outbound` instead. */
-  export type Outbound = ApprovedAction$Outbound;
-}
-
 export function approvedActionToJSON(approvedAction: ApprovedAction): string {
   return JSON.stringify(ApprovedAction$outboundSchema.parse(approvedAction));
 }
-
 export function approvedActionFromJSON(
   jsonString: string,
 ): SafeParseResult<ApprovedAction, SDKValidationError> {

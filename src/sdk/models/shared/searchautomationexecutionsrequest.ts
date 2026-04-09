@@ -3,23 +3,15 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import {
   AutomationExecutionExpandMask,
-  AutomationExecutionExpandMask$inboundSchema,
   AutomationExecutionExpandMask$Outbound,
   AutomationExecutionExpandMask$outboundSchema,
 } from "./automationexecutionexpandmask.js";
 import {
   AutomationExecutionRef,
-  AutomationExecutionRef$inboundSchema,
   AutomationExecutionRef$Outbound,
   AutomationExecutionRef$outboundSchema,
 } from "./automationexecutionref.js";
@@ -76,55 +68,11 @@ export type SearchAutomationExecutionsRequest = {
 };
 
 /** @internal */
-export const ExecutionStepStates$inboundSchema: z.ZodType<
-  ExecutionStepStates,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(ExecutionStepStates),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
 export const ExecutionStepStates$outboundSchema: z.ZodType<
-  ExecutionStepStates,
+  string,
   z.ZodTypeDef,
   ExecutionStepStates
-> = z.union([
-  z.nativeEnum(ExecutionStepStates),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExecutionStepStates$ {
-  /** @deprecated use `ExecutionStepStates$inboundSchema` instead. */
-  export const inboundSchema = ExecutionStepStates$inboundSchema;
-  /** @deprecated use `ExecutionStepStates$outboundSchema` instead. */
-  export const outboundSchema = ExecutionStepStates$outboundSchema;
-}
-
-/** @internal */
-export const SearchAutomationExecutionsRequest$inboundSchema: z.ZodType<
-  SearchAutomationExecutionsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  automationTemplateId: z.nullable(z.string()).optional(),
-  executionId: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
-  executionStepStates: z.nullable(z.array(ExecutionStepStates$inboundSchema))
-    .optional(),
-  expandMask: z.nullable(AutomationExecutionExpandMask$inboundSchema)
-    .optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
-  refs: z.nullable(z.array(AutomationExecutionRef$inboundSchema)).optional(),
-});
+> = openEnums.outboundSchema(ExecutionStepStates);
 
 /** @internal */
 export type SearchAutomationExecutionsRequest$Outbound = {
@@ -156,20 +104,6 @@ export const SearchAutomationExecutionsRequest$outboundSchema: z.ZodType<
   refs: z.nullable(z.array(AutomationExecutionRef$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchAutomationExecutionsRequest$ {
-  /** @deprecated use `SearchAutomationExecutionsRequest$inboundSchema` instead. */
-  export const inboundSchema = SearchAutomationExecutionsRequest$inboundSchema;
-  /** @deprecated use `SearchAutomationExecutionsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchAutomationExecutionsRequest$outboundSchema;
-  /** @deprecated use `SearchAutomationExecutionsRequest$Outbound` instead. */
-  export type Outbound = SearchAutomationExecutionsRequest$Outbound;
-}
-
 export function searchAutomationExecutionsRequestToJSON(
   searchAutomationExecutionsRequest: SearchAutomationExecutionsRequest,
 ): string {
@@ -177,15 +111,5 @@ export function searchAutomationExecutionsRequestToJSON(
     SearchAutomationExecutionsRequest$outboundSchema.parse(
       searchAutomationExecutionsRequest,
     ),
-  );
-}
-
-export function searchAutomationExecutionsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchAutomationExecutionsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchAutomationExecutionsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchAutomationExecutionsRequest' from JSON`,
   );
 }

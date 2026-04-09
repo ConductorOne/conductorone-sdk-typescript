@@ -19,39 +19,6 @@ export const ConnectorServiceDeleteResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type ConnectorServiceDeleteResponse$Outbound = {};
-
-/** @internal */
-export const ConnectorServiceDeleteResponse$outboundSchema: z.ZodType<
-  ConnectorServiceDeleteResponse$Outbound,
-  z.ZodTypeDef,
-  ConnectorServiceDeleteResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorServiceDeleteResponse$ {
-  /** @deprecated use `ConnectorServiceDeleteResponse$inboundSchema` instead. */
-  export const inboundSchema = ConnectorServiceDeleteResponse$inboundSchema;
-  /** @deprecated use `ConnectorServiceDeleteResponse$outboundSchema` instead. */
-  export const outboundSchema = ConnectorServiceDeleteResponse$outboundSchema;
-  /** @deprecated use `ConnectorServiceDeleteResponse$Outbound` instead. */
-  export type Outbound = ConnectorServiceDeleteResponse$Outbound;
-}
-
-export function connectorServiceDeleteResponseToJSON(
-  connectorServiceDeleteResponse: ConnectorServiceDeleteResponse,
-): string {
-  return JSON.stringify(
-    ConnectorServiceDeleteResponse$outboundSchema.parse(
-      connectorServiceDeleteResponse,
-    ),
-  );
-}
-
 export function connectorServiceDeleteResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<ConnectorServiceDeleteResponse, SDKValidationError> {

@@ -13,8 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppResourceTypeView,
   AppResourceTypeView$inboundSchema,
-  AppResourceTypeView$Outbound,
-  AppResourceTypeView$outboundSchema,
 } from "./appresourcetypeview.js";
 
 /**
@@ -62,57 +60,6 @@ export const AppResourceTypeServiceGetResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type AppResourceTypeServiceGetResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const AppResourceTypeServiceGetResponseExpanded$outboundSchema:
-  z.ZodType<
-    AppResourceTypeServiceGetResponseExpanded$Outbound,
-    z.ZodTypeDef,
-    AppResourceTypeServiceGetResponseExpanded
-  > = z.object({
-    atType: z.string().optional(),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        atType: "@type",
-        additionalProperties: null,
-      }),
-    };
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppResourceTypeServiceGetResponseExpanded$ {
-  /** @deprecated use `AppResourceTypeServiceGetResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    AppResourceTypeServiceGetResponseExpanded$inboundSchema;
-  /** @deprecated use `AppResourceTypeServiceGetResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    AppResourceTypeServiceGetResponseExpanded$outboundSchema;
-  /** @deprecated use `AppResourceTypeServiceGetResponseExpanded$Outbound` instead. */
-  export type Outbound = AppResourceTypeServiceGetResponseExpanded$Outbound;
-}
-
-export function appResourceTypeServiceGetResponseExpandedToJSON(
-  appResourceTypeServiceGetResponseExpanded:
-    AppResourceTypeServiceGetResponseExpanded,
-): string {
-  return JSON.stringify(
-    AppResourceTypeServiceGetResponseExpanded$outboundSchema.parse(
-      appResourceTypeServiceGetResponseExpanded,
-    ),
-  );
-}
-
 export function appResourceTypeServiceGetResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -142,54 +89,6 @@ export const AppResourceTypeServiceGetResponse$inboundSchema: z.ZodType<
     ),
   ).optional(),
 });
-
-/** @internal */
-export type AppResourceTypeServiceGetResponse$Outbound = {
-  appResourceTypeView?: AppResourceTypeView$Outbound | null | undefined;
-  expanded?:
-    | Array<AppResourceTypeServiceGetResponseExpanded$Outbound>
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const AppResourceTypeServiceGetResponse$outboundSchema: z.ZodType<
-  AppResourceTypeServiceGetResponse$Outbound,
-  z.ZodTypeDef,
-  AppResourceTypeServiceGetResponse
-> = z.object({
-  appResourceTypeView: z.nullable(AppResourceTypeView$outboundSchema)
-    .optional(),
-  expanded: z.nullable(
-    z.array(z.lazy(() =>
-      AppResourceTypeServiceGetResponseExpanded$outboundSchema
-    )),
-  ).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppResourceTypeServiceGetResponse$ {
-  /** @deprecated use `AppResourceTypeServiceGetResponse$inboundSchema` instead. */
-  export const inboundSchema = AppResourceTypeServiceGetResponse$inboundSchema;
-  /** @deprecated use `AppResourceTypeServiceGetResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    AppResourceTypeServiceGetResponse$outboundSchema;
-  /** @deprecated use `AppResourceTypeServiceGetResponse$Outbound` instead. */
-  export type Outbound = AppResourceTypeServiceGetResponse$Outbound;
-}
-
-export function appResourceTypeServiceGetResponseToJSON(
-  appResourceTypeServiceGetResponse: AppResourceTypeServiceGetResponse,
-): string {
-  return JSON.stringify(
-    AppResourceTypeServiceGetResponse$outboundSchema.parse(
-      appResourceTypeServiceGetResponse,
-    ),
-  );
-}
 
 export function appResourceTypeServiceGetResponseFromJSON(
   jsonString: string,

@@ -3,9 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AppEntitlementReference,
+  AppEntitlementReference$Outbound,
+  AppEntitlementReference$outboundSchema,
+} from "./appentitlementreference.js";
 
 /**
  * The ExpressionApproval message.
@@ -24,29 +26,32 @@ export type ExpressionApprovalInput = {
    */
   fallback?: boolean | null | undefined;
   /**
+   * Configuration to specify which groups to fallback to if fallback is enabled and the expression does not return a valid list of users.
+   */
+  fallbackGroupIds?: Array<AppEntitlementReference> | null | undefined;
+  /**
    * Configuration to specific which users to fallback to if and the expression does not return a valid list of users.
    */
   fallbackUserIds?: Array<string> | null | undefined;
+  /**
+   * Configuration to enable fallback for group fallback.
+   */
+  isGroupFallbackEnabled?: boolean | undefined;
+  /**
+   * Configuration to require distinct approvers across approval steps of a rule.
+   */
+  requireDistinctApprovers?: boolean | undefined;
 };
-
-/** @internal */
-export const ExpressionApprovalInput$inboundSchema: z.ZodType<
-  ExpressionApprovalInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  allowSelfApproval: z.nullable(z.boolean()).optional(),
-  expressions: z.nullable(z.array(z.string())).optional(),
-  fallback: z.nullable(z.boolean()).optional(),
-  fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type ExpressionApprovalInput$Outbound = {
   allowSelfApproval?: boolean | null | undefined;
   expressions?: Array<string> | null | undefined;
   fallback?: boolean | null | undefined;
+  fallbackGroupIds?: Array<AppEntitlementReference$Outbound> | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
+  isGroupFallbackEnabled?: boolean | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -58,36 +63,17 @@ export const ExpressionApprovalInput$outboundSchema: z.ZodType<
   allowSelfApproval: z.nullable(z.boolean()).optional(),
   expressions: z.nullable(z.array(z.string())).optional(),
   fallback: z.nullable(z.boolean()).optional(),
+  fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$outboundSchema))
+    .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  isGroupFallbackEnabled: z.boolean().optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExpressionApprovalInput$ {
-  /** @deprecated use `ExpressionApprovalInput$inboundSchema` instead. */
-  export const inboundSchema = ExpressionApprovalInput$inboundSchema;
-  /** @deprecated use `ExpressionApprovalInput$outboundSchema` instead. */
-  export const outboundSchema = ExpressionApprovalInput$outboundSchema;
-  /** @deprecated use `ExpressionApprovalInput$Outbound` instead. */
-  export type Outbound = ExpressionApprovalInput$Outbound;
-}
 
 export function expressionApprovalInputToJSON(
   expressionApprovalInput: ExpressionApprovalInput,
 ): string {
   return JSON.stringify(
     ExpressionApprovalInput$outboundSchema.parse(expressionApprovalInput),
-  );
-}
-
-export function expressionApprovalInputFromJSON(
-  jsonString: string,
-): SafeParseResult<ExpressionApprovalInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ExpressionApprovalInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ExpressionApprovalInput' from JSON`,
   );
 }

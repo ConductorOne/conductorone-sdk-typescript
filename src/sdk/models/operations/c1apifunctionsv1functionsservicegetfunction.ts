@@ -35,16 +35,6 @@ export type C1ApiFunctionsV1FunctionsServiceGetFunctionResponse = {
 };
 
 /** @internal */
-export const C1ApiFunctionsV1FunctionsServiceGetFunctionRequest$inboundSchema:
-  z.ZodType<
-    C1ApiFunctionsV1FunctionsServiceGetFunctionRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.nullable(z.string()),
-  });
-
-/** @internal */
 export type C1ApiFunctionsV1FunctionsServiceGetFunctionRequest$Outbound = {
   id: string | null;
 };
@@ -59,22 +49,6 @@ export const C1ApiFunctionsV1FunctionsServiceGetFunctionRequest$outboundSchema:
     id: z.nullable(z.string()),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiFunctionsV1FunctionsServiceGetFunctionRequest$ {
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceGetFunctionRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiFunctionsV1FunctionsServiceGetFunctionRequest$inboundSchema;
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceGetFunctionRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiFunctionsV1FunctionsServiceGetFunctionRequest$outboundSchema;
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceGetFunctionRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiFunctionsV1FunctionsServiceGetFunctionRequest$Outbound;
-}
-
 export function c1ApiFunctionsV1FunctionsServiceGetFunctionRequestToJSON(
   c1ApiFunctionsV1FunctionsServiceGetFunctionRequest:
     C1ApiFunctionsV1FunctionsServiceGetFunctionRequest,
@@ -83,22 +57,6 @@ export function c1ApiFunctionsV1FunctionsServiceGetFunctionRequestToJSON(
     C1ApiFunctionsV1FunctionsServiceGetFunctionRequest$outboundSchema.parse(
       c1ApiFunctionsV1FunctionsServiceGetFunctionRequest,
     ),
-  );
-}
-
-export function c1ApiFunctionsV1FunctionsServiceGetFunctionRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiFunctionsV1FunctionsServiceGetFunctionRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiFunctionsV1FunctionsServiceGetFunctionRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiFunctionsV1FunctionsServiceGetFunctionRequest' from JSON`,
   );
 }
 
@@ -123,67 +81,6 @@ export const C1ApiFunctionsV1FunctionsServiceGetFunctionResponse$inboundSchema:
         "functionsServiceGetFunctionResponse",
     });
   });
-
-/** @internal */
-export type C1ApiFunctionsV1FunctionsServiceGetFunctionResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  FunctionsServiceGetFunctionResponse?:
-    | shared.FunctionsServiceGetFunctionResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiFunctionsV1FunctionsServiceGetFunctionResponse$outboundSchema:
-  z.ZodType<
-    C1ApiFunctionsV1FunctionsServiceGetFunctionResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiFunctionsV1FunctionsServiceGetFunctionResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    functionsServiceGetFunctionResponse: shared
-      .FunctionsServiceGetFunctionResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      functionsServiceGetFunctionResponse:
-        "FunctionsServiceGetFunctionResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiFunctionsV1FunctionsServiceGetFunctionResponse$ {
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceGetFunctionResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiFunctionsV1FunctionsServiceGetFunctionResponse$inboundSchema;
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceGetFunctionResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiFunctionsV1FunctionsServiceGetFunctionResponse$outboundSchema;
-  /** @deprecated use `C1ApiFunctionsV1FunctionsServiceGetFunctionResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiFunctionsV1FunctionsServiceGetFunctionResponse$Outbound;
-}
-
-export function c1ApiFunctionsV1FunctionsServiceGetFunctionResponseToJSON(
-  c1ApiFunctionsV1FunctionsServiceGetFunctionResponse:
-    C1ApiFunctionsV1FunctionsServiceGetFunctionResponse,
-): string {
-  return JSON.stringify(
-    C1ApiFunctionsV1FunctionsServiceGetFunctionResponse$outboundSchema.parse(
-      c1ApiFunctionsV1FunctionsServiceGetFunctionResponse,
-    ),
-  );
-}
 
 export function c1ApiFunctionsV1FunctionsServiceGetFunctionResponseFromJSON(
   jsonString: string,

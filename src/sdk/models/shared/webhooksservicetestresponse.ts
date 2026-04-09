@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   WebhookInstance,
   WebhookInstance$inboundSchema,
-  WebhookInstance$Outbound,
-  WebhookInstance$outboundSchema,
 } from "./webhookinstance.js";
 
 /**
@@ -28,43 +26,6 @@ export const WebhooksServiceTestResponse$inboundSchema: z.ZodType<
 > = z.object({
   webhook: z.nullable(WebhookInstance$inboundSchema).optional(),
 });
-
-/** @internal */
-export type WebhooksServiceTestResponse$Outbound = {
-  webhook?: WebhookInstance$Outbound | null | undefined;
-};
-
-/** @internal */
-export const WebhooksServiceTestResponse$outboundSchema: z.ZodType<
-  WebhooksServiceTestResponse$Outbound,
-  z.ZodTypeDef,
-  WebhooksServiceTestResponse
-> = z.object({
-  webhook: z.nullable(WebhookInstance$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhooksServiceTestResponse$ {
-  /** @deprecated use `WebhooksServiceTestResponse$inboundSchema` instead. */
-  export const inboundSchema = WebhooksServiceTestResponse$inboundSchema;
-  /** @deprecated use `WebhooksServiceTestResponse$outboundSchema` instead. */
-  export const outboundSchema = WebhooksServiceTestResponse$outboundSchema;
-  /** @deprecated use `WebhooksServiceTestResponse$Outbound` instead. */
-  export type Outbound = WebhooksServiceTestResponse$Outbound;
-}
-
-export function webhooksServiceTestResponseToJSON(
-  webhooksServiceTestResponse: WebhooksServiceTestResponse,
-): string {
-  return JSON.stringify(
-    WebhooksServiceTestResponse$outboundSchema.parse(
-      webhooksServiceTestResponse,
-    ),
-  );
-}
 
 export function webhooksServiceTestResponseFromJSON(
   jsonString: string,

@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   Webhook1,
-  Webhook1$inboundSchema,
   Webhook1$Outbound,
   Webhook1$outboundSchema,
 } from "./webhook1.js";
@@ -20,16 +16,6 @@ export type WebhooksServiceUpdateRequest = {
   updateMask?: string | null | undefined;
   webhook?: Webhook1 | null | undefined;
 };
-
-/** @internal */
-export const WebhooksServiceUpdateRequest$inboundSchema: z.ZodType<
-  WebhooksServiceUpdateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  updateMask: z.nullable(z.string()).optional(),
-  webhook: z.nullable(Webhook1$inboundSchema).optional(),
-});
 
 /** @internal */
 export type WebhooksServiceUpdateRequest$Outbound = {
@@ -47,19 +33,6 @@ export const WebhooksServiceUpdateRequest$outboundSchema: z.ZodType<
   webhook: z.nullable(Webhook1$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhooksServiceUpdateRequest$ {
-  /** @deprecated use `WebhooksServiceUpdateRequest$inboundSchema` instead. */
-  export const inboundSchema = WebhooksServiceUpdateRequest$inboundSchema;
-  /** @deprecated use `WebhooksServiceUpdateRequest$outboundSchema` instead. */
-  export const outboundSchema = WebhooksServiceUpdateRequest$outboundSchema;
-  /** @deprecated use `WebhooksServiceUpdateRequest$Outbound` instead. */
-  export type Outbound = WebhooksServiceUpdateRequest$Outbound;
-}
-
 export function webhooksServiceUpdateRequestToJSON(
   webhooksServiceUpdateRequest: WebhooksServiceUpdateRequest,
 ): string {
@@ -67,15 +40,5 @@ export function webhooksServiceUpdateRequestToJSON(
     WebhooksServiceUpdateRequest$outboundSchema.parse(
       webhooksServiceUpdateRequest,
     ),
-  );
-}
-
-export function webhooksServiceUpdateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<WebhooksServiceUpdateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => WebhooksServiceUpdateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'WebhooksServiceUpdateRequest' from JSON`,
   );
 }

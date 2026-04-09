@@ -34,20 +34,6 @@ export type C1ApiSystemlogV1ExportServiceDeleteResponse = {
 };
 
 /** @internal */
-export const C1ApiSystemlogV1ExportServiceDeleteRequest$inboundSchema:
-  z.ZodType<C1ApiSystemlogV1ExportServiceDeleteRequest, z.ZodTypeDef, unknown> =
-    z.object({
-      export_id: z.nullable(z.string()),
-      ExportServiceDeleteRequest: shared
-        .ExportServiceDeleteRequest$inboundSchema.optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "export_id": "exportId",
-        "ExportServiceDeleteRequest": "exportServiceDeleteRequest",
-      });
-    });
-
-/** @internal */
 export type C1ApiSystemlogV1ExportServiceDeleteRequest$Outbound = {
   export_id: string | null;
   ExportServiceDeleteRequest?:
@@ -72,21 +58,6 @@ export const C1ApiSystemlogV1ExportServiceDeleteRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiSystemlogV1ExportServiceDeleteRequest$ {
-  /** @deprecated use `C1ApiSystemlogV1ExportServiceDeleteRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiSystemlogV1ExportServiceDeleteRequest$inboundSchema;
-  /** @deprecated use `C1ApiSystemlogV1ExportServiceDeleteRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiSystemlogV1ExportServiceDeleteRequest$outboundSchema;
-  /** @deprecated use `C1ApiSystemlogV1ExportServiceDeleteRequest$Outbound` instead. */
-  export type Outbound = C1ApiSystemlogV1ExportServiceDeleteRequest$Outbound;
-}
-
 export function c1ApiSystemlogV1ExportServiceDeleteRequestToJSON(
   c1ApiSystemlogV1ExportServiceDeleteRequest:
     C1ApiSystemlogV1ExportServiceDeleteRequest,
@@ -95,22 +66,6 @@ export function c1ApiSystemlogV1ExportServiceDeleteRequestToJSON(
     C1ApiSystemlogV1ExportServiceDeleteRequest$outboundSchema.parse(
       c1ApiSystemlogV1ExportServiceDeleteRequest,
     ),
-  );
-}
-
-export function c1ApiSystemlogV1ExportServiceDeleteRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiSystemlogV1ExportServiceDeleteRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiSystemlogV1ExportServiceDeleteRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiSystemlogV1ExportServiceDeleteRequest' from JSON`,
   );
 }
 
@@ -134,65 +89,6 @@ export const C1ApiSystemlogV1ExportServiceDeleteResponse$inboundSchema:
       "ExportServiceDeleteResponse": "exportServiceDeleteResponse",
     });
   });
-
-/** @internal */
-export type C1ApiSystemlogV1ExportServiceDeleteResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  ExportServiceDeleteResponse?:
-    | shared.ExportServiceDeleteResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiSystemlogV1ExportServiceDeleteResponse$outboundSchema:
-  z.ZodType<
-    C1ApiSystemlogV1ExportServiceDeleteResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiSystemlogV1ExportServiceDeleteResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    exportServiceDeleteResponse: shared
-      .ExportServiceDeleteResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      exportServiceDeleteResponse: "ExportServiceDeleteResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiSystemlogV1ExportServiceDeleteResponse$ {
-  /** @deprecated use `C1ApiSystemlogV1ExportServiceDeleteResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiSystemlogV1ExportServiceDeleteResponse$inboundSchema;
-  /** @deprecated use `C1ApiSystemlogV1ExportServiceDeleteResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiSystemlogV1ExportServiceDeleteResponse$outboundSchema;
-  /** @deprecated use `C1ApiSystemlogV1ExportServiceDeleteResponse$Outbound` instead. */
-  export type Outbound = C1ApiSystemlogV1ExportServiceDeleteResponse$Outbound;
-}
-
-export function c1ApiSystemlogV1ExportServiceDeleteResponseToJSON(
-  c1ApiSystemlogV1ExportServiceDeleteResponse:
-    C1ApiSystemlogV1ExportServiceDeleteResponse,
-): string {
-  return JSON.stringify(
-    C1ApiSystemlogV1ExportServiceDeleteResponse$outboundSchema.parse(
-      c1ApiSystemlogV1ExportServiceDeleteResponse,
-    ),
-  );
-}
 
 export function c1ApiSystemlogV1ExportServiceDeleteResponseFromJSON(
   jsonString: string,

@@ -3,15 +3,36 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
+import {
+  FieldGroup,
+  FieldGroup$Outbound,
+  FieldGroup$outboundSchema,
+} from "./fieldgroup.js";
 import {
   FieldInput,
-  FieldInput$inboundSchema,
   FieldInput$Outbound,
   FieldInput$outboundSchema,
 } from "./fieldinput.js";
+import {
+  FieldRelationship,
+  FieldRelationship$Outbound,
+  FieldRelationship$outboundSchema,
+} from "./fieldrelationship.js";
+
+/**
+ * The justificationVisibility field.
+ */
+export const JustificationVisibility = {
+  JustificationVisibilityUnspecified: "JUSTIFICATION_VISIBILITY_UNSPECIFIED",
+  JustificationVisibilityShow: "JUSTIFICATION_VISIBILITY_SHOW",
+  JustificationVisibilityHide: "JUSTIFICATION_VISIBILITY_HIDE",
+} as const;
+/**
+ * The justificationVisibility field.
+ */
+export type JustificationVisibility = OpenEnum<typeof JustificationVisibility>;
 
 /**
  * The RequestSchemaServiceCreateRequest message.
@@ -22,9 +43,21 @@ export type RequestSchemaServiceCreateRequest = {
    */
   description?: string | null | undefined;
   /**
+   * The fieldGroups field.
+   */
+  fieldGroups?: Array<FieldGroup> | null | undefined;
+  /**
+   * The fieldRelationships field.
+   */
+  fieldRelationships?: Array<FieldRelationship> | null | undefined;
+  /**
    * The fields field.
    */
   fields?: Array<FieldInput> | null | undefined;
+  /**
+   * The justificationVisibility field.
+   */
+  justificationVisibility?: JustificationVisibility | undefined;
   /**
    * The name field.
    */
@@ -32,20 +65,19 @@ export type RequestSchemaServiceCreateRequest = {
 };
 
 /** @internal */
-export const RequestSchemaServiceCreateRequest$inboundSchema: z.ZodType<
-  RequestSchemaServiceCreateRequest,
+export const JustificationVisibility$outboundSchema: z.ZodType<
+  string,
   z.ZodTypeDef,
-  unknown
-> = z.object({
-  description: z.nullable(z.string()).optional(),
-  fields: z.nullable(z.array(FieldInput$inboundSchema)).optional(),
-  name: z.nullable(z.string()).optional(),
-});
+  JustificationVisibility
+> = openEnums.outboundSchema(JustificationVisibility);
 
 /** @internal */
 export type RequestSchemaServiceCreateRequest$Outbound = {
   description?: string | null | undefined;
+  fieldGroups?: Array<FieldGroup$Outbound> | null | undefined;
+  fieldRelationships?: Array<FieldRelationship$Outbound> | null | undefined;
   fields?: Array<FieldInput$Outbound> | null | undefined;
+  justificationVisibility?: string | undefined;
   name?: string | null | undefined;
 };
 
@@ -56,23 +88,13 @@ export const RequestSchemaServiceCreateRequest$outboundSchema: z.ZodType<
   RequestSchemaServiceCreateRequest
 > = z.object({
   description: z.nullable(z.string()).optional(),
+  fieldGroups: z.nullable(z.array(FieldGroup$outboundSchema)).optional(),
+  fieldRelationships: z.nullable(z.array(FieldRelationship$outboundSchema))
+    .optional(),
   fields: z.nullable(z.array(FieldInput$outboundSchema)).optional(),
+  justificationVisibility: JustificationVisibility$outboundSchema.optional(),
   name: z.nullable(z.string()).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestSchemaServiceCreateRequest$ {
-  /** @deprecated use `RequestSchemaServiceCreateRequest$inboundSchema` instead. */
-  export const inboundSchema = RequestSchemaServiceCreateRequest$inboundSchema;
-  /** @deprecated use `RequestSchemaServiceCreateRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestSchemaServiceCreateRequest$outboundSchema;
-  /** @deprecated use `RequestSchemaServiceCreateRequest$Outbound` instead. */
-  export type Outbound = RequestSchemaServiceCreateRequest$Outbound;
-}
 
 export function requestSchemaServiceCreateRequestToJSON(
   requestSchemaServiceCreateRequest: RequestSchemaServiceCreateRequest,
@@ -81,15 +103,5 @@ export function requestSchemaServiceCreateRequestToJSON(
     RequestSchemaServiceCreateRequest$outboundSchema.parse(
       requestSchemaServiceCreateRequest,
     ),
-  );
-}
-
-export function requestSchemaServiceCreateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<RequestSchemaServiceCreateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RequestSchemaServiceCreateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RequestSchemaServiceCreateRequest' from JSON`,
   );
 }

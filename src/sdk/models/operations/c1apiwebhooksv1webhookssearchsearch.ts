@@ -49,63 +49,6 @@ export const C1ApiWebhooksV1WebhooksSearchSearchResponse$inboundSchema:
     });
   });
 
-/** @internal */
-export type C1ApiWebhooksV1WebhooksSearchSearchResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  WebhooksSearchResponse?: shared.WebhooksSearchResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiWebhooksV1WebhooksSearchSearchResponse$outboundSchema:
-  z.ZodType<
-    C1ApiWebhooksV1WebhooksSearchSearchResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiWebhooksV1WebhooksSearchSearchResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    webhooksSearchResponse: shared.WebhooksSearchResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      webhooksSearchResponse: "WebhooksSearchResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiWebhooksV1WebhooksSearchSearchResponse$ {
-  /** @deprecated use `C1ApiWebhooksV1WebhooksSearchSearchResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiWebhooksV1WebhooksSearchSearchResponse$inboundSchema;
-  /** @deprecated use `C1ApiWebhooksV1WebhooksSearchSearchResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiWebhooksV1WebhooksSearchSearchResponse$outboundSchema;
-  /** @deprecated use `C1ApiWebhooksV1WebhooksSearchSearchResponse$Outbound` instead. */
-  export type Outbound = C1ApiWebhooksV1WebhooksSearchSearchResponse$Outbound;
-}
-
-export function c1ApiWebhooksV1WebhooksSearchSearchResponseToJSON(
-  c1ApiWebhooksV1WebhooksSearchSearchResponse:
-    C1ApiWebhooksV1WebhooksSearchSearchResponse,
-): string {
-  return JSON.stringify(
-    C1ApiWebhooksV1WebhooksSearchSearchResponse$outboundSchema.parse(
-      c1ApiWebhooksV1WebhooksSearchSearchResponse,
-    ),
-  );
-}
-
 export function c1ApiWebhooksV1WebhooksSearchSearchResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

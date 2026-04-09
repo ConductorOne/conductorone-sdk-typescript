@@ -1,0 +1,27 @@
+# AccessReviewSetupEntitlement
+
+The AccessReviewSetupEntitlement message.
+
+## Example Usage
+
+```typescript
+import { AccessReviewSetupEntitlement } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: AccessReviewSetupEntitlement = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `accessReviewId`                                                                              | *string*                                                                                      | :heavy_minus_sign:                                                                            | The accessReviewId field.                                                                     |
+| `appEntitlementId`                                                                            | *string*                                                                                      | :heavy_minus_sign:                                                                            | The appEntitlementId field.                                                                   |
+| `appId`                                                                                       | *string*                                                                                      | :heavy_minus_sign:                                                                            | The appId field.                                                                              |
+| `appResourceId`                                                                               | *string*                                                                                      | :heavy_minus_sign:                                                                            | The appResourceId field.                                                                      |
+| `appResourceTypeId`                                                                           | *string*                                                                                      | :heavy_minus_sign:                                                                            | The appResourceTypeId field.                                                                  |
+| `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `customPolicyId`                                                                              | *string*                                                                                      | :heavy_minus_sign:                                                                            | The customPolicyId field.                                                                     |
+| `deletedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `policyId`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | The policyId field.                                                                           |
+| `tenantId`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | The tenantId field.                                                                           |
+| `updatedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |

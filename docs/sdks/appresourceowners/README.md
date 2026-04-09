@@ -1,5 +1,4 @@
 # AppResourceOwners
-(*appResourceOwners*)
 
 ## Overview
 

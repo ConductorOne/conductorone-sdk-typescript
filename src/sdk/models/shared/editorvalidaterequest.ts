@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The EditorValidateRequest message.
@@ -16,15 +13,6 @@ export type EditorValidateRequest = {
    */
   text?: string | null | undefined;
 };
-
-/** @internal */
-export const EditorValidateRequest$inboundSchema: z.ZodType<
-  EditorValidateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  text: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type EditorValidateRequest$Outbound = {
@@ -40,33 +28,10 @@ export const EditorValidateRequest$outboundSchema: z.ZodType<
   text: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EditorValidateRequest$ {
-  /** @deprecated use `EditorValidateRequest$inboundSchema` instead. */
-  export const inboundSchema = EditorValidateRequest$inboundSchema;
-  /** @deprecated use `EditorValidateRequest$outboundSchema` instead. */
-  export const outboundSchema = EditorValidateRequest$outboundSchema;
-  /** @deprecated use `EditorValidateRequest$Outbound` instead. */
-  export type Outbound = EditorValidateRequest$Outbound;
-}
-
 export function editorValidateRequestToJSON(
   editorValidateRequest: EditorValidateRequest,
 ): string {
   return JSON.stringify(
     EditorValidateRequest$outboundSchema.parse(editorValidateRequest),
-  );
-}
-
-export function editorValidateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<EditorValidateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => EditorValidateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'EditorValidateRequest' from JSON`,
   );
 }

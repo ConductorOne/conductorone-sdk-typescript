@@ -4,6 +4,7 @@ The SetBundleAutomationRequest message.
 
 This message contains a oneof named conditions. Only a single field of the following list may be set at a time:
   - entitlements
+  - cel
 
 
 ## Example Usage
@@ -18,6 +19,7 @@ let value: SetBundleAutomationRequest = {};
 
 | Field                                                                                                   | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
 | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `bundleAutomationRuleCEL`                                                                               | [shared.BundleAutomationRuleCEL](../../../sdk/models/shared/bundleautomationrulecel.md)                 | :heavy_minus_sign:                                                                                      | The BundleAutomationRuleCEL message.                                                                    |
 | `createTasks`                                                                                           | *boolean*                                                                                               | :heavy_minus_sign:                                                                                      | The createTasks field.                                                                                  |
 | `disableCircuitBreaker`                                                                                 | *boolean*                                                                                               | :heavy_minus_sign:                                                                                      | The disableCircuitBreaker field.                                                                        |
 | `enabled`                                                                                               | *boolean*                                                                                               | :heavy_minus_sign:                                                                                      | The enabled field.                                                                                      |

@@ -3,27 +3,27 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   DirectoryAccountFilterAll,
-  DirectoryAccountFilterAll$inboundSchema,
   DirectoryAccountFilterAll$Outbound,
   DirectoryAccountFilterAll$outboundSchema,
 } from "./directoryaccountfilterall.js";
 import {
   DirectoryAccountFilterCel,
-  DirectoryAccountFilterCel$inboundSchema,
   DirectoryAccountFilterCel$Outbound,
   DirectoryAccountFilterCel$outboundSchema,
 } from "./directoryaccountfiltercel.js";
 import {
   DirectoryExpandMask,
-  DirectoryExpandMask$inboundSchema,
   DirectoryExpandMask$Outbound,
   DirectoryExpandMask$outboundSchema,
 } from "./directoryexpandmask.js";
+import {
+  DirectoryMergeConfig,
+  DirectoryMergeConfig$Outbound,
+  DirectoryMergeConfig$outboundSchema,
+} from "./directorymergeconfig.js";
 
 /**
  * Uplevel an app into a full directory.
@@ -42,19 +42,11 @@ export type DirectoryServiceCreateRequest = {
   appId?: string | null | undefined;
   celExpression?: DirectoryAccountFilterCel | null | undefined;
   expandMask?: DirectoryExpandMask | null | undefined;
+  /**
+   * DirectoryMergeConfig configures how AppUsers from this directory are matched to C1 Users.
+   */
+  directoryMergeConfig?: DirectoryMergeConfig | undefined;
 };
-
-/** @internal */
-export const DirectoryServiceCreateRequest$inboundSchema: z.ZodType<
-  DirectoryServiceCreateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  all: z.nullable(DirectoryAccountFilterAll$inboundSchema).optional(),
-  appId: z.nullable(z.string()).optional(),
-  celExpression: z.nullable(DirectoryAccountFilterCel$inboundSchema).optional(),
-  expandMask: z.nullable(DirectoryExpandMask$inboundSchema).optional(),
-});
 
 /** @internal */
 export type DirectoryServiceCreateRequest$Outbound = {
@@ -62,6 +54,7 @@ export type DirectoryServiceCreateRequest$Outbound = {
   appId?: string | null | undefined;
   celExpression?: DirectoryAccountFilterCel$Outbound | null | undefined;
   expandMask?: DirectoryExpandMask$Outbound | null | undefined;
+  mergeConfig?: DirectoryMergeConfig$Outbound | undefined;
 };
 
 /** @internal */
@@ -75,20 +68,12 @@ export const DirectoryServiceCreateRequest$outboundSchema: z.ZodType<
   celExpression: z.nullable(DirectoryAccountFilterCel$outboundSchema)
     .optional(),
   expandMask: z.nullable(DirectoryExpandMask$outboundSchema).optional(),
+  directoryMergeConfig: DirectoryMergeConfig$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    directoryMergeConfig: "mergeConfig",
+  });
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DirectoryServiceCreateRequest$ {
-  /** @deprecated use `DirectoryServiceCreateRequest$inboundSchema` instead. */
-  export const inboundSchema = DirectoryServiceCreateRequest$inboundSchema;
-  /** @deprecated use `DirectoryServiceCreateRequest$outboundSchema` instead. */
-  export const outboundSchema = DirectoryServiceCreateRequest$outboundSchema;
-  /** @deprecated use `DirectoryServiceCreateRequest$Outbound` instead. */
-  export type Outbound = DirectoryServiceCreateRequest$Outbound;
-}
 
 export function directoryServiceCreateRequestToJSON(
   directoryServiceCreateRequest: DirectoryServiceCreateRequest,
@@ -97,15 +82,5 @@ export function directoryServiceCreateRequestToJSON(
     DirectoryServiceCreateRequest$outboundSchema.parse(
       directoryServiceCreateRequest,
     ),
-  );
-}
-
-export function directoryServiceCreateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DirectoryServiceCreateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DirectoryServiceCreateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DirectoryServiceCreateRequest' from JSON`,
   );
 }

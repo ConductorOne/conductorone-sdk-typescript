@@ -19,42 +19,6 @@ export const TaskAuditApprovalHappenedAutomatically$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type TaskAuditApprovalHappenedAutomatically$Outbound = {};
-
-/** @internal */
-export const TaskAuditApprovalHappenedAutomatically$outboundSchema: z.ZodType<
-  TaskAuditApprovalHappenedAutomatically$Outbound,
-  z.ZodTypeDef,
-  TaskAuditApprovalHappenedAutomatically
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditApprovalHappenedAutomatically$ {
-  /** @deprecated use `TaskAuditApprovalHappenedAutomatically$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskAuditApprovalHappenedAutomatically$inboundSchema;
-  /** @deprecated use `TaskAuditApprovalHappenedAutomatically$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskAuditApprovalHappenedAutomatically$outboundSchema;
-  /** @deprecated use `TaskAuditApprovalHappenedAutomatically$Outbound` instead. */
-  export type Outbound = TaskAuditApprovalHappenedAutomatically$Outbound;
-}
-
-export function taskAuditApprovalHappenedAutomaticallyToJSON(
-  taskAuditApprovalHappenedAutomatically:
-    TaskAuditApprovalHappenedAutomatically,
-): string {
-  return JSON.stringify(
-    TaskAuditApprovalHappenedAutomatically$outboundSchema.parse(
-      taskAuditApprovalHappenedAutomatically,
-    ),
-  );
-}
-
 export function taskAuditApprovalHappenedAutomaticallyFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditApprovalHappenedAutomatically, SDKValidationError> {

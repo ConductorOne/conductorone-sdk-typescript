@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FormInput,
-  FormInput$inboundSchema,
   FormInput$Outbound,
   FormInput$outboundSchema,
 } from "./forminput.js";
@@ -19,15 +15,6 @@ import {
 export type FormInput1 = {
   form?: FormInput | null | undefined;
 };
-
-/** @internal */
-export const FormInput1$inboundSchema: z.ZodType<
-  FormInput1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  form: z.nullable(FormInput$inboundSchema).optional(),
-});
 
 /** @internal */
 export type FormInput1$Outbound = {
@@ -43,29 +30,6 @@ export const FormInput1$outboundSchema: z.ZodType<
   form: z.nullable(FormInput$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FormInput1$ {
-  /** @deprecated use `FormInput1$inboundSchema` instead. */
-  export const inboundSchema = FormInput1$inboundSchema;
-  /** @deprecated use `FormInput1$outboundSchema` instead. */
-  export const outboundSchema = FormInput1$outboundSchema;
-  /** @deprecated use `FormInput1$Outbound` instead. */
-  export type Outbound = FormInput1$Outbound;
-}
-
 export function formInput1ToJSON(formInput1: FormInput1): string {
   return JSON.stringify(FormInput1$outboundSchema.parse(formInput1));
-}
-
-export function formInput1FromJSON(
-  jsonString: string,
-): SafeParseResult<FormInput1, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FormInput1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FormInput1' from JSON`,
-  );
 }

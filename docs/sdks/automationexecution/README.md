@@ -1,5 +1,4 @@
 # AutomationExecution
-(*automationExecution*)
 
 ## Overview
 

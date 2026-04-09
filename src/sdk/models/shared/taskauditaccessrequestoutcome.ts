@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -44,34 +41,7 @@ export const TaskAuditAccessRequestOutcomeOutcome$inboundSchema: z.ZodType<
   TaskAuditAccessRequestOutcomeOutcome,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(TaskAuditAccessRequestOutcomeOutcome),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const TaskAuditAccessRequestOutcomeOutcome$outboundSchema: z.ZodType<
-  TaskAuditAccessRequestOutcomeOutcome,
-  z.ZodTypeDef,
-  TaskAuditAccessRequestOutcomeOutcome
-> = z.union([
-  z.nativeEnum(TaskAuditAccessRequestOutcomeOutcome),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditAccessRequestOutcomeOutcome$ {
-  /** @deprecated use `TaskAuditAccessRequestOutcomeOutcome$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskAuditAccessRequestOutcomeOutcome$inboundSchema;
-  /** @deprecated use `TaskAuditAccessRequestOutcomeOutcome$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskAuditAccessRequestOutcomeOutcome$outboundSchema;
-}
+> = openEnums.inboundSchema(TaskAuditAccessRequestOutcomeOutcome);
 
 /** @internal */
 export const TaskAuditAccessRequestOutcome$inboundSchema: z.ZodType<
@@ -82,44 +52,6 @@ export const TaskAuditAccessRequestOutcome$inboundSchema: z.ZodType<
   outcome: z.nullable(TaskAuditAccessRequestOutcomeOutcome$inboundSchema)
     .optional(),
 });
-
-/** @internal */
-export type TaskAuditAccessRequestOutcome$Outbound = {
-  outcome?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditAccessRequestOutcome$outboundSchema: z.ZodType<
-  TaskAuditAccessRequestOutcome$Outbound,
-  z.ZodTypeDef,
-  TaskAuditAccessRequestOutcome
-> = z.object({
-  outcome: z.nullable(TaskAuditAccessRequestOutcomeOutcome$outboundSchema)
-    .optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditAccessRequestOutcome$ {
-  /** @deprecated use `TaskAuditAccessRequestOutcome$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditAccessRequestOutcome$inboundSchema;
-  /** @deprecated use `TaskAuditAccessRequestOutcome$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditAccessRequestOutcome$outboundSchema;
-  /** @deprecated use `TaskAuditAccessRequestOutcome$Outbound` instead. */
-  export type Outbound = TaskAuditAccessRequestOutcome$Outbound;
-}
-
-export function taskAuditAccessRequestOutcomeToJSON(
-  taskAuditAccessRequestOutcome: TaskAuditAccessRequestOutcome,
-): string {
-  return JSON.stringify(
-    TaskAuditAccessRequestOutcome$outboundSchema.parse(
-      taskAuditAccessRequestOutcome,
-    ),
-  );
-}
 
 export function taskAuditAccessRequestOutcomeFromJSON(
   jsonString: string,

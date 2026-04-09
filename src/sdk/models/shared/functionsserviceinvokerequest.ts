@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The FunctionsServiceInvokeRequest message.
@@ -28,22 +25,17 @@ export type FunctionsServiceInvokeRequest = {
    * See the documentation for `c1.api.functions.v1.FunctionsServiceInvokeRequest` for more details.
    */
   json?: string | null | undefined;
+  /**
+   * Optional VFS volume ID to attach to this invocation. If empty, VFS operations will error.
+   */
+  vfsId?: string | undefined;
 };
-
-/** @internal */
-export const FunctionsServiceInvokeRequest$inboundSchema: z.ZodType<
-  FunctionsServiceInvokeRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  commitId: z.nullable(z.string()).optional(),
-  json: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type FunctionsServiceInvokeRequest$Outbound = {
   commitId?: string | null | undefined;
   json?: string | null | undefined;
+  vfsId?: string | undefined;
 };
 
 /** @internal */
@@ -54,20 +46,8 @@ export const FunctionsServiceInvokeRequest$outboundSchema: z.ZodType<
 > = z.object({
   commitId: z.nullable(z.string()).optional(),
   json: z.nullable(z.string()).optional(),
+  vfsId: z.string().optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionsServiceInvokeRequest$ {
-  /** @deprecated use `FunctionsServiceInvokeRequest$inboundSchema` instead. */
-  export const inboundSchema = FunctionsServiceInvokeRequest$inboundSchema;
-  /** @deprecated use `FunctionsServiceInvokeRequest$outboundSchema` instead. */
-  export const outboundSchema = FunctionsServiceInvokeRequest$outboundSchema;
-  /** @deprecated use `FunctionsServiceInvokeRequest$Outbound` instead. */
-  export type Outbound = FunctionsServiceInvokeRequest$Outbound;
-}
 
 export function functionsServiceInvokeRequestToJSON(
   functionsServiceInvokeRequest: FunctionsServiceInvokeRequest,
@@ -76,15 +56,5 @@ export function functionsServiceInvokeRequestToJSON(
     FunctionsServiceInvokeRequest$outboundSchema.parse(
       functionsServiceInvokeRequest,
     ),
-  );
-}
-
-export function functionsServiceInvokeRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<FunctionsServiceInvokeRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FunctionsServiceInvokeRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionsServiceInvokeRequest' from JSON`,
   );
 }

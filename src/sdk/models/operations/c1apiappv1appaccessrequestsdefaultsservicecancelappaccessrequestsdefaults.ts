@@ -38,24 +38,6 @@ export type C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDef
   };
 
 /** @internal */
-export const C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    CancelAccessRequestDefaultsRequest: shared
-      .CancelAccessRequestDefaultsRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "CancelAccessRequestDefaultsRequest":
-        "cancelAccessRequestDefaultsRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequest$Outbound =
   {
     app_id: string | null;
@@ -81,22 +63,6 @@ export const C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDe
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequest$ {
-  /** @deprecated use `C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequest$Outbound;
-}
-
 export function c1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequestToJSON(
   c1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequest:
     C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequest,
@@ -106,21 +72,6 @@ export function c1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequest
       .parse(
         c1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequest,
       ),
-  );
-}
-
-export function c1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequest' from JSON`,
   );
 }
 
@@ -144,68 +95,6 @@ export const C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDe
       "AppAccessRequestDefaults": "appAccessRequestDefaults",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    AppAccessRequestDefaults?:
-      | shared.AppAccessRequestDefaults$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    appAccessRequestDefaults: shared.AppAccessRequestDefaults$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      appAccessRequestDefaults: "AppAccessRequestDefaults",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsResponse$ {
-  /** @deprecated use `C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsResponse$Outbound;
-}
-
-export function c1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsResponseToJSON(
-  c1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsResponse:
-    C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsResponse$outboundSchema
-      .parse(
-        c1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsResponse,
-      ),
-  );
-}
 
 export function c1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsResponseFromJSON(
   jsonString: string,

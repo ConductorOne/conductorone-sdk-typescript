@@ -100,7 +100,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/api/v1/catalogs/{catalog_id}/requestable_entries")(
     pathParams,
   );

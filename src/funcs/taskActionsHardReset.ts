@@ -95,7 +95,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/api/v1/tasks/{task_id}/action/reset")(pathParams);
 
   const headers = new Headers(compactMap({

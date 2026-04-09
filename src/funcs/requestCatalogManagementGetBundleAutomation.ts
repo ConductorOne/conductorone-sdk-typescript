@@ -97,7 +97,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/api/v1/catalogs/{request_catalog_id}/bundle_automation",
   )(pathParams);

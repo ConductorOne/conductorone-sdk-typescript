@@ -3,20 +3,44 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  ProvisionerAssignment,
+  ProvisionerAssignment$inboundSchema,
+  ProvisionerAssignment$Outbound,
+  ProvisionerAssignment$outboundSchema,
+} from "./provisionerassignment.js";
 
 /**
  * Manual provisioning indicates that a human must intervene for the provisioning of this step.
  */
 export type ManualProvision = {
   /**
+   * ProvisionerAssignment defines how a provisioner is dynamically assigned.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named typ. Only a single field of the following list may be set at a time:
+   *   - users
+   *   - appOwners
+   *   - group
+   *   - manager
+   *   - expression
+   *   - entitlementOwners
+   */
+  provisionerAssignment?: ProvisionerAssignment | undefined;
+  /**
    * This field indicates a text body of instructions for the provisioner to indicate.
    */
   instructions?: string | null | undefined;
   /**
    * An array of users that are required to provision during this step.
+   *
+   * @remarks
+   *  Deprecated: Use assignee field instead for dynamic provisioner assignment.
    */
   userIds?: Array<string> | null | undefined;
 };
@@ -27,12 +51,17 @@ export const ManualProvision$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  assignee: ProvisionerAssignment$inboundSchema.optional(),
   instructions: z.nullable(z.string()).optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "assignee": "provisionerAssignment",
+  });
 });
-
 /** @internal */
 export type ManualProvision$Outbound = {
+  assignee?: ProvisionerAssignment$Outbound | undefined;
   instructions?: string | null | undefined;
   userIds?: Array<string> | null | undefined;
 };
@@ -43,29 +72,20 @@ export const ManualProvision$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ManualProvision
 > = z.object({
+  provisionerAssignment: ProvisionerAssignment$outboundSchema.optional(),
   instructions: z.nullable(z.string()).optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    provisionerAssignment: "assignee",
+  });
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ManualProvision$ {
-  /** @deprecated use `ManualProvision$inboundSchema` instead. */
-  export const inboundSchema = ManualProvision$inboundSchema;
-  /** @deprecated use `ManualProvision$outboundSchema` instead. */
-  export const outboundSchema = ManualProvision$outboundSchema;
-  /** @deprecated use `ManualProvision$Outbound` instead. */
-  export type Outbound = ManualProvision$Outbound;
-}
 
 export function manualProvisionToJSON(
   manualProvision: ManualProvision,
 ): string {
   return JSON.stringify(ManualProvision$outboundSchema.parse(manualProvision));
 }
-
 export function manualProvisionFromJSON(
   jsonString: string,
 ): SafeParseResult<ManualProvision, SDKValidationError> {

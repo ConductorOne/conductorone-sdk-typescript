@@ -218,7 +218,7 @@ async function $do(
       appEntitlementSearchSearch(
         client,
         {
-          ...request,
+          ...request!,
           pageToken: nextCursor,
         },
         options,

@@ -51,7 +51,6 @@ export const FileField$inboundSchema: z.ZodType<
   maxFileSize: z.nullable(z.string().transform(v => parseInt(v, 10)))
     .optional(),
 });
-
 /** @internal */
 export type FileField$Outbound = {
   acceptedFileTypes?: Array<string> | null | undefined;
@@ -70,23 +69,9 @@ export const FileField$outboundSchema: z.ZodType<
   maxFileSize: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileField$ {
-  /** @deprecated use `FileField$inboundSchema` instead. */
-  export const inboundSchema = FileField$inboundSchema;
-  /** @deprecated use `FileField$outboundSchema` instead. */
-  export const outboundSchema = FileField$outboundSchema;
-  /** @deprecated use `FileField$Outbound` instead. */
-  export type Outbound = FileField$Outbound;
-}
-
 export function fileFieldToJSON(fileField: FileField): string {
   return JSON.stringify(FileField$outboundSchema.parse(fileField));
 }
-
 export function fileFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<FileField, SDKValidationError> {

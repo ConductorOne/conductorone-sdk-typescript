@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -84,32 +81,13 @@ export const FormInstanceState$inboundSchema: z.ZodType<
   FormInstanceState,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(FormInstanceState),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(FormInstanceState);
 /** @internal */
 export const FormInstanceState$outboundSchema: z.ZodType<
-  FormInstanceState,
+  string,
   z.ZodTypeDef,
   FormInstanceState
-> = z.union([
-  z.nativeEnum(FormInstanceState),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FormInstanceState$ {
-  /** @deprecated use `FormInstanceState$inboundSchema` instead. */
-  export const inboundSchema = FormInstanceState$inboundSchema;
-  /** @deprecated use `FormInstanceState$outboundSchema` instead. */
-  export const outboundSchema = FormInstanceState$outboundSchema;
-}
+> = openEnums.outboundSchema(FormInstanceState);
 
 /** @internal */
 export const FormInstance$inboundSchema: z.ZodType<
@@ -125,7 +103,6 @@ export const FormInstance$inboundSchema: z.ZodType<
   skipped: z.nullable(SkippedAction$inboundSchema).optional(),
   state: z.nullable(FormInstanceState$inboundSchema).optional(),
 });
-
 /** @internal */
 export type FormInstance$Outbound = {
   completed?: FormCompletedAction$Outbound | null | undefined;
@@ -152,23 +129,9 @@ export const FormInstance$outboundSchema: z.ZodType<
   state: z.nullable(FormInstanceState$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FormInstance$ {
-  /** @deprecated use `FormInstance$inboundSchema` instead. */
-  export const inboundSchema = FormInstance$inboundSchema;
-  /** @deprecated use `FormInstance$outboundSchema` instead. */
-  export const outboundSchema = FormInstance$outboundSchema;
-  /** @deprecated use `FormInstance$Outbound` instead. */
-  export type Outbound = FormInstance$Outbound;
-}
-
 export function formInstanceToJSON(formInstance: FormInstance): string {
   return JSON.stringify(FormInstance$outboundSchema.parse(formInstance));
 }
-
 export function formInstanceFromJSON(
   jsonString: string,
 ): SafeParseResult<FormInstance, SDKValidationError> {

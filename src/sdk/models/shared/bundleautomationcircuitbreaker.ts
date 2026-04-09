@@ -4,19 +4,11 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  UserRef,
-  UserRef$inboundSchema,
-  UserRef$Outbound,
-  UserRef$outboundSchema,
-} from "./userref.js";
+import { UserRef, UserRef$inboundSchema } from "./userref.js";
 
 /**
  * The state field.
@@ -54,34 +46,7 @@ export const BundleAutomationCircuitBreakerState$inboundSchema: z.ZodType<
   BundleAutomationCircuitBreakerState,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(BundleAutomationCircuitBreakerState),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const BundleAutomationCircuitBreakerState$outboundSchema: z.ZodType<
-  BundleAutomationCircuitBreakerState,
-  z.ZodTypeDef,
-  BundleAutomationCircuitBreakerState
-> = z.union([
-  z.nativeEnum(BundleAutomationCircuitBreakerState),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BundleAutomationCircuitBreakerState$ {
-  /** @deprecated use `BundleAutomationCircuitBreakerState$inboundSchema` instead. */
-  export const inboundSchema =
-    BundleAutomationCircuitBreakerState$inboundSchema;
-  /** @deprecated use `BundleAutomationCircuitBreakerState$outboundSchema` instead. */
-  export const outboundSchema =
-    BundleAutomationCircuitBreakerState$outboundSchema;
-}
+> = openEnums.inboundSchema(BundleAutomationCircuitBreakerState);
 
 /** @internal */
 export const BundleAutomationCircuitBreaker$inboundSchema: z.ZodType<
@@ -99,52 +64,6 @@ export const BundleAutomationCircuitBreaker$inboundSchema: z.ZodType<
   ).optional(),
   userRef: z.nullable(UserRef$inboundSchema).optional(),
 });
-
-/** @internal */
-export type BundleAutomationCircuitBreaker$Outbound = {
-  removedMembersThresholdPercentage?: string | null | undefined;
-  state?: string | null | undefined;
-  updatedAt?: string | null | undefined;
-  userRef?: UserRef$Outbound | null | undefined;
-};
-
-/** @internal */
-export const BundleAutomationCircuitBreaker$outboundSchema: z.ZodType<
-  BundleAutomationCircuitBreaker$Outbound,
-  z.ZodTypeDef,
-  BundleAutomationCircuitBreaker
-> = z.object({
-  removedMembersThresholdPercentage: z.nullable(
-    z.number().int().transform(v => `${v}`),
-  ).optional(),
-  state: z.nullable(BundleAutomationCircuitBreakerState$outboundSchema)
-    .optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  userRef: z.nullable(UserRef$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BundleAutomationCircuitBreaker$ {
-  /** @deprecated use `BundleAutomationCircuitBreaker$inboundSchema` instead. */
-  export const inboundSchema = BundleAutomationCircuitBreaker$inboundSchema;
-  /** @deprecated use `BundleAutomationCircuitBreaker$outboundSchema` instead. */
-  export const outboundSchema = BundleAutomationCircuitBreaker$outboundSchema;
-  /** @deprecated use `BundleAutomationCircuitBreaker$Outbound` instead. */
-  export type Outbound = BundleAutomationCircuitBreaker$Outbound;
-}
-
-export function bundleAutomationCircuitBreakerToJSON(
-  bundleAutomationCircuitBreaker: BundleAutomationCircuitBreaker,
-): string {
-  return JSON.stringify(
-    BundleAutomationCircuitBreaker$outboundSchema.parse(
-      bundleAutomationCircuitBreaker,
-    ),
-  );
-}
 
 export function bundleAutomationCircuitBreakerFromJSON(
   jsonString: string,

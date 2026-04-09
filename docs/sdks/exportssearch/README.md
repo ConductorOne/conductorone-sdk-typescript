@@ -1,5 +1,4 @@
 # ExportsSearch
-(*exportsSearch*)
 
 ## Overview
 

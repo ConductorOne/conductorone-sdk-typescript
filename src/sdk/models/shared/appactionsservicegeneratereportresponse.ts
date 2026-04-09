@@ -19,42 +19,6 @@ export const AppActionsServiceGenerateReportResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type AppActionsServiceGenerateReportResponse$Outbound = {};
-
-/** @internal */
-export const AppActionsServiceGenerateReportResponse$outboundSchema: z.ZodType<
-  AppActionsServiceGenerateReportResponse$Outbound,
-  z.ZodTypeDef,
-  AppActionsServiceGenerateReportResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppActionsServiceGenerateReportResponse$ {
-  /** @deprecated use `AppActionsServiceGenerateReportResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    AppActionsServiceGenerateReportResponse$inboundSchema;
-  /** @deprecated use `AppActionsServiceGenerateReportResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    AppActionsServiceGenerateReportResponse$outboundSchema;
-  /** @deprecated use `AppActionsServiceGenerateReportResponse$Outbound` instead. */
-  export type Outbound = AppActionsServiceGenerateReportResponse$Outbound;
-}
-
-export function appActionsServiceGenerateReportResponseToJSON(
-  appActionsServiceGenerateReportResponse:
-    AppActionsServiceGenerateReportResponse,
-): string {
-  return JSON.stringify(
-    AppActionsServiceGenerateReportResponse$outboundSchema.parse(
-      appActionsServiceGenerateReportResponse,
-    ),
-  );
-}
-
 export function appActionsServiceGenerateReportResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

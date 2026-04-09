@@ -6,6 +6,12 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AppEntitlementReference,
+  AppEntitlementReference$inboundSchema,
+  AppEntitlementReference$Outbound,
+  AppEntitlementReference$outboundSchema,
+} from "./appentitlementreference.js";
 
 /**
  * The entitlement owner approval allows configuration of the approval step when the target approvers are the entitlement owners.
@@ -20,9 +26,21 @@ export type EntitlementOwnerApproval = {
    */
   fallback?: boolean | null | undefined;
   /**
+   * Configuration to specify which groups to fallback to if fallback is enabled and the entitlement owner cannot be identified.
+   */
+  fallbackGroupIds?: Array<AppEntitlementReference> | null | undefined;
+  /**
    * Configuration to specific which users to fallback to if fallback is enabled and the entitlement owner cannot be identified.
    */
   fallbackUserIds?: Array<string> | null | undefined;
+  /**
+   * Configuration to enable fallback for group fallback.
+   */
+  isGroupFallbackEnabled?: boolean | undefined;
+  /**
+   * Configuration to require distinct approvers across approval steps of a rule.
+   */
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -33,14 +51,20 @@ export const EntitlementOwnerApproval$inboundSchema: z.ZodType<
 > = z.object({
   allowSelfApproval: z.nullable(z.boolean()).optional(),
   fallback: z.nullable(z.boolean()).optional(),
+  fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$inboundSchema))
+    .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  isGroupFallbackEnabled: z.boolean().optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
 /** @internal */
 export type EntitlementOwnerApproval$Outbound = {
   allowSelfApproval?: boolean | null | undefined;
   fallback?: boolean | null | undefined;
+  fallbackGroupIds?: Array<AppEntitlementReference$Outbound> | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
+  isGroupFallbackEnabled?: boolean | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -51,21 +75,12 @@ export const EntitlementOwnerApproval$outboundSchema: z.ZodType<
 > = z.object({
   allowSelfApproval: z.nullable(z.boolean()).optional(),
   fallback: z.nullable(z.boolean()).optional(),
+  fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$outboundSchema))
+    .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  isGroupFallbackEnabled: z.boolean().optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EntitlementOwnerApproval$ {
-  /** @deprecated use `EntitlementOwnerApproval$inboundSchema` instead. */
-  export const inboundSchema = EntitlementOwnerApproval$inboundSchema;
-  /** @deprecated use `EntitlementOwnerApproval$outboundSchema` instead. */
-  export const outboundSchema = EntitlementOwnerApproval$outboundSchema;
-  /** @deprecated use `EntitlementOwnerApproval$Outbound` instead. */
-  export type Outbound = EntitlementOwnerApproval$Outbound;
-}
 
 export function entitlementOwnerApprovalToJSON(
   entitlementOwnerApproval: EntitlementOwnerApproval,
@@ -74,7 +89,6 @@ export function entitlementOwnerApprovalToJSON(
     EntitlementOwnerApproval$outboundSchema.parse(entitlementOwnerApproval),
   );
 }
-
 export function entitlementOwnerApprovalFromJSON(
   jsonString: string,
 ): SafeParseResult<EntitlementOwnerApproval, SDKValidationError> {

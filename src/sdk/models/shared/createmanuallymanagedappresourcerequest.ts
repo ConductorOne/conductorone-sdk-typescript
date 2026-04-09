@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The CreateManuallyManagedAppResourceRequest message.
@@ -30,18 +27,6 @@ export type CreateManuallyManagedAppResourceRequest = {
 };
 
 /** @internal */
-export const CreateManuallyManagedAppResourceRequest$inboundSchema: z.ZodType<
-  CreateManuallyManagedAppResourceRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  description: z.nullable(z.string()).optional(),
-  displayName: z.string(),
-  matchBatonId: z.nullable(z.string()).optional(),
-  resourceOwnerUserIds: z.nullable(z.array(z.string())).optional(),
-});
-
-/** @internal */
 export type CreateManuallyManagedAppResourceRequest$Outbound = {
   description?: string | null | undefined;
   displayName: string;
@@ -61,21 +46,6 @@ export const CreateManuallyManagedAppResourceRequest$outboundSchema: z.ZodType<
   resourceOwnerUserIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateManuallyManagedAppResourceRequest$ {
-  /** @deprecated use `CreateManuallyManagedAppResourceRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateManuallyManagedAppResourceRequest$inboundSchema;
-  /** @deprecated use `CreateManuallyManagedAppResourceRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateManuallyManagedAppResourceRequest$outboundSchema;
-  /** @deprecated use `CreateManuallyManagedAppResourceRequest$Outbound` instead. */
-  export type Outbound = CreateManuallyManagedAppResourceRequest$Outbound;
-}
-
 export function createManuallyManagedAppResourceRequestToJSON(
   createManuallyManagedAppResourceRequest:
     CreateManuallyManagedAppResourceRequest,
@@ -84,21 +54,5 @@ export function createManuallyManagedAppResourceRequestToJSON(
     CreateManuallyManagedAppResourceRequest$outboundSchema.parse(
       createManuallyManagedAppResourceRequest,
     ),
-  );
-}
-
-export function createManuallyManagedAppResourceRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateManuallyManagedAppResourceRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateManuallyManagedAppResourceRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateManuallyManagedAppResourceRequest' from JSON`,
   );
 }

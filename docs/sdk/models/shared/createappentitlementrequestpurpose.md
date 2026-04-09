@@ -9,12 +9,12 @@ import { CreateAppEntitlementRequestPurpose } from "conductorone-sdk-typescript/
 
 let value: CreateAppEntitlementRequestPurpose =
   "APP_ENTITLEMENT_PURPOSE_VALUE_PERMISSION";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
-
 ```typescript
-"APP_ENTITLEMENT_PURPOSE_VALUE_UNSPECIFIED" | "APP_ENTITLEMENT_PURPOSE_VALUE_ASSIGNMENT" | "APP_ENTITLEMENT_PURPOSE_VALUE_PERMISSION" | Unrecognized<string>
+"APP_ENTITLEMENT_PURPOSE_VALUE_UNSPECIFIED" | "APP_ENTITLEMENT_PURPOSE_VALUE_ASSIGNMENT" | "APP_ENTITLEMENT_PURPOSE_VALUE_PERMISSION" | "APP_ENTITLEMENT_PURPOSE_VALUE_OWNERSHIP" | Unrecognized<string>
 ```

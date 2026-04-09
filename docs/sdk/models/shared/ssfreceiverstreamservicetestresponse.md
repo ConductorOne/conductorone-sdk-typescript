@@ -1,0 +1,26 @@
+# SSFReceiverStreamServiceTestResponse
+
+The SSFReceiverStreamServiceTestResponse message.
+
+## Example Usage
+
+```typescript
+import { SSFReceiverStreamServiceTestResponse } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: SSFReceiverStreamServiceTestResponse = {};
+```
+
+## Fields
+
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `activeRefreshTokenCount`                                                                             | *number*                                                                                              | :heavy_minus_sign:                                                                                    | The activeRefreshTokenCount field.                                                                    |
+| `activeSessionCount`                                                                                  | *number*                                                                                              | :heavy_minus_sign:                                                                                    | The activeSessionCount field.                                                                         |
+| `configuredSessionRevokedAction`                                                                      | [shared.ConfiguredSessionRevokedAction](../../../sdk/models/shared/configuredsessionrevokedaction.md) | :heavy_minus_sign:                                                                                    | Step 3: Action preview.                                                                               |
+| `identityLinkFound`                                                                                   | *boolean*                                                                                             | :heavy_minus_sign:                                                                                    | Step 2: Identity mapping.                                                                             |
+| `jwksError`                                                                                           | *string*                                                                                              | :heavy_minus_sign:                                                                                    | The jwksError field.                                                                                  |
+| `jwksKeyCount`                                                                                        | *number*                                                                                              | :heavy_minus_sign:                                                                                    | The jwksKeyCount field.                                                                               |
+| `jwksReachable`                                                                                       | *boolean*                                                                                             | :heavy_minus_sign:                                                                                    | Step 1: JWKS reachability.                                                                            |
+| `matchedUserId`                                                                                       | *string*                                                                                              | :heavy_minus_sign:                                                                                    | The matchedUserId field.                                                                              |
+| `ready`                                                                                               | *boolean*                                                                                             | :heavy_minus_sign:                                                                                    | Overall readiness.                                                                                    |
+| `upstreamSubject`                                                                                     | *string*                                                                                              | :heavy_minus_sign:                                                                                    | The upstreamSubject field.                                                                            |

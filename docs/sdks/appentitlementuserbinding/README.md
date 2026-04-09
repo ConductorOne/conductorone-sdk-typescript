@@ -1,5 +1,4 @@
 # AppEntitlementUserBinding
-(*appEntitlementUserBinding*)
 
 ## Overview
 

@@ -1,5 +1,4 @@
 # AppEntitlementMonitorBinding
-(*appEntitlementMonitorBinding*)
 
 ## Overview
 

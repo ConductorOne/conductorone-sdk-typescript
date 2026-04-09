@@ -24,7 +24,6 @@ export const ConditionTimedOut$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
 /** @internal */
 export type ConditionTimedOut$Outbound = {
   timedOutAt?: string | null | undefined;
@@ -39,19 +38,6 @@ export const ConditionTimedOut$outboundSchema: z.ZodType<
   timedOutAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConditionTimedOut$ {
-  /** @deprecated use `ConditionTimedOut$inboundSchema` instead. */
-  export const inboundSchema = ConditionTimedOut$inboundSchema;
-  /** @deprecated use `ConditionTimedOut$outboundSchema` instead. */
-  export const outboundSchema = ConditionTimedOut$outboundSchema;
-  /** @deprecated use `ConditionTimedOut$Outbound` instead. */
-  export type Outbound = ConditionTimedOut$Outbound;
-}
-
 export function conditionTimedOutToJSON(
   conditionTimedOut: ConditionTimedOut,
 ): string {
@@ -59,7 +45,6 @@ export function conditionTimedOutToJSON(
     ConditionTimedOut$outboundSchema.parse(conditionTimedOut),
   );
 }
-
 export function conditionTimedOutFromJSON(
   jsonString: string,
 ): SafeParseResult<ConditionTimedOut, SDKValidationError> {

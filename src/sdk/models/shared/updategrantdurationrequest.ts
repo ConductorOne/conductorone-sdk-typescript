@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The UpdateGrantDurationRequest message.
@@ -13,17 +10,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type UpdateGrantDurationRequest = {
   newDeprovisionAt?: Date | null | undefined;
 };
-
-/** @internal */
-export const UpdateGrantDurationRequest$inboundSchema: z.ZodType<
-  UpdateGrantDurationRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  newDeprovisionAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
 
 /** @internal */
 export type UpdateGrantDurationRequest$Outbound = {
@@ -40,33 +26,10 @@ export const UpdateGrantDurationRequest$outboundSchema: z.ZodType<
     .optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateGrantDurationRequest$ {
-  /** @deprecated use `UpdateGrantDurationRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdateGrantDurationRequest$inboundSchema;
-  /** @deprecated use `UpdateGrantDurationRequest$outboundSchema` instead. */
-  export const outboundSchema = UpdateGrantDurationRequest$outboundSchema;
-  /** @deprecated use `UpdateGrantDurationRequest$Outbound` instead. */
-  export type Outbound = UpdateGrantDurationRequest$Outbound;
-}
-
 export function updateGrantDurationRequestToJSON(
   updateGrantDurationRequest: UpdateGrantDurationRequest,
 ): string {
   return JSON.stringify(
     UpdateGrantDurationRequest$outboundSchema.parse(updateGrantDurationRequest),
-  );
-}
-
-export function updateGrantDurationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateGrantDurationRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateGrantDurationRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateGrantDurationRequest' from JSON`,
   );
 }
