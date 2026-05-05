@@ -3,6 +3,7 @@
  */
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
@@ -26,7 +27,7 @@ import { Result } from "../sdk/types/fp.js";
  * Get
  *
  * @remarks
- * Invokes the c1.api.settings.v1.SessionSettingsService.Get method.
+ * Get retrieves the current session security settings for the tenant.
  */
 export function sessionSettingsGet(
   client: ConductoroneSDKTypescriptCore,
@@ -109,7 +110,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The ExportServiceListEventsResponse message.
+ * ExportServiceListEventsResponse is the response containing audit events for an export.
  */
 export type ExportServiceListEventsResponse = {
   /**
@@ -16,7 +16,7 @@ export type ExportServiceListEventsResponse = {
    */
   list?: Array<{ [k: string]: any }> | null | undefined;
   /**
-   * The nextPageToken field.
+   * The token to retrieve the next page of results, or empty if there are no more results.
    */
   nextPageToken?: string | null | undefined;
 };
@@ -30,45 +30,6 @@ export const ExportServiceListEventsResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(z.record(z.any()))).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ExportServiceListEventsResponse$Outbound = {
-  list?: Array<{ [k: string]: any }> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ExportServiceListEventsResponse$outboundSchema: z.ZodType<
-  ExportServiceListEventsResponse$Outbound,
-  z.ZodTypeDef,
-  ExportServiceListEventsResponse
-> = z.object({
-  list: z.nullable(z.array(z.record(z.any()))).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExportServiceListEventsResponse$ {
-  /** @deprecated use `ExportServiceListEventsResponse$inboundSchema` instead. */
-  export const inboundSchema = ExportServiceListEventsResponse$inboundSchema;
-  /** @deprecated use `ExportServiceListEventsResponse$outboundSchema` instead. */
-  export const outboundSchema = ExportServiceListEventsResponse$outboundSchema;
-  /** @deprecated use `ExportServiceListEventsResponse$Outbound` instead. */
-  export type Outbound = ExportServiceListEventsResponse$Outbound;
-}
-
-export function exportServiceListEventsResponseToJSON(
-  exportServiceListEventsResponse: ExportServiceListEventsResponse,
-): string {
-  return JSON.stringify(
-    ExportServiceListEventsResponse$outboundSchema.parse(
-      exportServiceListEventsResponse,
-    ),
-  );
-}
 
 export function exportServiceListEventsResponseFromJSON(
   jsonString: string,

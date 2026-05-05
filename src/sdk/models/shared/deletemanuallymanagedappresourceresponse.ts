@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The DeleteManuallyManagedAppResourceResponse message.
+ * The empty response message for deleting a manually managed app resource.
  */
 export type DeleteManuallyManagedAppResourceResponse = {};
 
@@ -18,42 +18,6 @@ export const DeleteManuallyManagedAppResourceResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
-/** @internal */
-export type DeleteManuallyManagedAppResourceResponse$Outbound = {};
-
-/** @internal */
-export const DeleteManuallyManagedAppResourceResponse$outboundSchema: z.ZodType<
-  DeleteManuallyManagedAppResourceResponse$Outbound,
-  z.ZodTypeDef,
-  DeleteManuallyManagedAppResourceResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteManuallyManagedAppResourceResponse$ {
-  /** @deprecated use `DeleteManuallyManagedAppResourceResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    DeleteManuallyManagedAppResourceResponse$inboundSchema;
-  /** @deprecated use `DeleteManuallyManagedAppResourceResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    DeleteManuallyManagedAppResourceResponse$outboundSchema;
-  /** @deprecated use `DeleteManuallyManagedAppResourceResponse$Outbound` instead. */
-  export type Outbound = DeleteManuallyManagedAppResourceResponse$Outbound;
-}
-
-export function deleteManuallyManagedAppResourceResponseToJSON(
-  deleteManuallyManagedAppResourceResponse:
-    DeleteManuallyManagedAppResourceResponse,
-): string {
-  return JSON.stringify(
-    DeleteManuallyManagedAppResourceResponse$outboundSchema.parse(
-      deleteManuallyManagedAppResourceResponse,
-    ),
-  );
-}
 
 export function deleteManuallyManagedAppResourceResponseFromJSON(
   jsonString: string,

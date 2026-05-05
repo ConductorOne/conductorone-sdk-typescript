@@ -51,53 +51,6 @@ export const TaskAuditExternalTicketCreated$inboundSchema: z.ZodType<
   externalTicketUrl: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditExternalTicketCreated$Outbound = {
-  appId?: string | null | undefined;
-  connectorId?: string | null | undefined;
-  externalTicketId?: string | null | undefined;
-  externalTicketProvisionerConfigId?: string | null | undefined;
-  externalTicketProvisionerConfigName?: string | null | undefined;
-  externalTicketUrl?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditExternalTicketCreated$outboundSchema: z.ZodType<
-  TaskAuditExternalTicketCreated$Outbound,
-  z.ZodTypeDef,
-  TaskAuditExternalTicketCreated
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
-  externalTicketId: z.nullable(z.string()).optional(),
-  externalTicketProvisionerConfigId: z.nullable(z.string()).optional(),
-  externalTicketProvisionerConfigName: z.nullable(z.string()).optional(),
-  externalTicketUrl: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditExternalTicketCreated$ {
-  /** @deprecated use `TaskAuditExternalTicketCreated$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditExternalTicketCreated$inboundSchema;
-  /** @deprecated use `TaskAuditExternalTicketCreated$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditExternalTicketCreated$outboundSchema;
-  /** @deprecated use `TaskAuditExternalTicketCreated$Outbound` instead. */
-  export type Outbound = TaskAuditExternalTicketCreated$Outbound;
-}
-
-export function taskAuditExternalTicketCreatedToJSON(
-  taskAuditExternalTicketCreated: TaskAuditExternalTicketCreated,
-): string {
-  return JSON.stringify(
-    TaskAuditExternalTicketCreated$outboundSchema.parse(
-      taskAuditExternalTicketCreated,
-    ),
-  );
-}
-
 export function taskAuditExternalTicketCreatedFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditExternalTicketCreated, SDKValidationError> {

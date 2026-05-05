@@ -1,5 +1,4 @@
 # Task
-(*task*)
 
 ## Overview
 
@@ -87,7 +86,7 @@ run();
 
 ## createOffboardingTask
 
-Invokes the c1.api.task.v1.TaskService.CreateOffboardingTask method.
+Create an offboarding task to remove a user's access across applications.
 
 ### Example Usage
 

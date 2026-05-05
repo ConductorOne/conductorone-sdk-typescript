@@ -1,5 +1,4 @@
 # PolicySearch
-(*policySearch*)
 
 ## Overview
 

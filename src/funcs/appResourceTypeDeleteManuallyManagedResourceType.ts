@@ -4,6 +4,7 @@
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -28,7 +29,7 @@ import { Result } from "../sdk/types/fp.js";
  * Delete Manually Managed Resource Type
  *
  * @remarks
- * Invokes the c1.api.app.v1.AppResourceTypeService.DeleteManuallyManagedResourceType method.
+ * Delete a manually managed resource type and all its associated resources from an app.
  */
 export function appResourceTypeDeleteManuallyManagedResourceType(
   client: ConductoroneSDKTypescriptCore,
@@ -104,7 +105,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/api/v1/apps/{app_id}/resource_types/{id}")(
     pathParams,
   );
@@ -150,7 +150,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

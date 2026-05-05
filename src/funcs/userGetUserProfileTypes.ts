@@ -4,6 +4,7 @@
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
 import { encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -28,7 +29,7 @@ import { Result } from "../sdk/types/fp.js";
  * Get User Profile Types
  *
  * @remarks
- * Invokes the c1.api.user.v1.UserService.GetUserProfileTypes method.
+ * Retrieve the profile types associated with a user across their connected apps.
  */
 export function userGetUserProfileTypes(
   client: ConductoroneSDKTypescriptCore,
@@ -93,7 +94,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/api/v1/users/{user_id}/profile-types")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -135,7 +135,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

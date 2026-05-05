@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Search Attributes by a few properties.
@@ -42,21 +39,6 @@ export type SearchAttributeValuesRequest = {
 };
 
 /** @internal */
-export const SearchAttributeValuesRequest$inboundSchema: z.ZodType<
-  SearchAttributeValuesRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  attributeTypeIds: z.nullable(z.array(z.string())).optional(),
-  excludeIds: z.nullable(z.array(z.string())).optional(),
-  ids: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
-  value: z.nullable(z.string()).optional(),
-});
-
-/** @internal */
 export type SearchAttributeValuesRequest$Outbound = {
   attributeTypeIds?: Array<string> | null | undefined;
   excludeIds?: Array<string> | null | undefined;
@@ -82,19 +64,6 @@ export const SearchAttributeValuesRequest$outboundSchema: z.ZodType<
   value: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchAttributeValuesRequest$ {
-  /** @deprecated use `SearchAttributeValuesRequest$inboundSchema` instead. */
-  export const inboundSchema = SearchAttributeValuesRequest$inboundSchema;
-  /** @deprecated use `SearchAttributeValuesRequest$outboundSchema` instead. */
-  export const outboundSchema = SearchAttributeValuesRequest$outboundSchema;
-  /** @deprecated use `SearchAttributeValuesRequest$Outbound` instead. */
-  export type Outbound = SearchAttributeValuesRequest$Outbound;
-}
-
 export function searchAttributeValuesRequestToJSON(
   searchAttributeValuesRequest: SearchAttributeValuesRequest,
 ): string {
@@ -102,15 +71,5 @@ export function searchAttributeValuesRequestToJSON(
     SearchAttributeValuesRequest$outboundSchema.parse(
       searchAttributeValuesRequest,
     ),
-  );
-}
-
-export function searchAttributeValuesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchAttributeValuesRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchAttributeValuesRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchAttributeValuesRequest' from JSON`,
   );
 }

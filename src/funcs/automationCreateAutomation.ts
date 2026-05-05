@@ -4,6 +4,7 @@
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
 import { encodeJSON } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -29,11 +30,11 @@ import { Result } from "../sdk/types/fp.js";
  * Create Automation
  *
  * @remarks
- * Invokes the c1.api.automations.v1.AutomationService.CreateAutomation method.
+ * Create a new automation with the specified steps, triggers, and configuration.
  */
 export function automationCreateAutomation(
   client: ConductoroneSDKTypescriptCore,
-  request?: shared.CreateAutomationRequestInput | undefined,
+  request?: shared.AutomationsCreateAutomationRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -57,7 +58,7 @@ export function automationCreateAutomation(
 
 async function $do(
   client: ConductoroneSDKTypescriptCore,
-  request?: shared.CreateAutomationRequestInput | undefined,
+  request?: shared.AutomationsCreateAutomationRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -78,7 +79,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      shared.CreateAutomationRequestInput$outboundSchema.optional().parse(
+      shared.AutomationsCreateAutomationRequest$outboundSchema.optional().parse(
         value,
       ),
     "Input validation failed",
@@ -133,7 +134,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -165,7 +167,7 @@ async function $do(
       200,
       operations
         .C1ApiAutomationsV1AutomationServiceCreateAutomationResponse$inboundSchema,
-      { key: "CreateAutomationResponse" },
+      { key: "AutomationsCreateAutomationResponse" },
     ),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

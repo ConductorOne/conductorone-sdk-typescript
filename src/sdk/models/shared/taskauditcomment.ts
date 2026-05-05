@@ -35,45 +35,6 @@ export const TaskAuditComment$inboundSchema: z.ZodType<
   updatedBy: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type TaskAuditComment$Outbound = {
-  comment?: string | null | undefined;
-  updatedAt?: string | null | undefined;
-  updatedBy?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditComment$outboundSchema: z.ZodType<
-  TaskAuditComment$Outbound,
-  z.ZodTypeDef,
-  TaskAuditComment
-> = z.object({
-  comment: z.nullable(z.string()).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  updatedBy: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditComment$ {
-  /** @deprecated use `TaskAuditComment$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditComment$inboundSchema;
-  /** @deprecated use `TaskAuditComment$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditComment$outboundSchema;
-  /** @deprecated use `TaskAuditComment$Outbound` instead. */
-  export type Outbound = TaskAuditComment$Outbound;
-}
-
-export function taskAuditCommentToJSON(
-  taskAuditComment: TaskAuditComment,
-): string {
-  return JSON.stringify(
-    TaskAuditComment$outboundSchema.parse(taskAuditComment),
-  );
-}
-
 export function taskAuditCommentFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditComment, SDKValidationError> {

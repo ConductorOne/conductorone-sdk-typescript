@@ -8,15 +8,26 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The Rule message.
+ * A conditional routing rule that maps a CEL expression to a step sequence.
+ *
+ * @remarks
+ *  Rules are evaluated top-to-bottom; the first matching rule's policy_key
+ *  selects the step sequence from the policy's policy_steps map. If no rule
+ *  matches, the baseline entry is used.
  */
 export type Rule = {
   /**
-   * The condition field.
+   * A CEL expression that is evaluated against the request context. If it
+   *
+   * @remarks
+   *  returns true, the step sequence identified by policy_key is used.
    */
   condition?: string | null | undefined;
   /**
-   * This is a reference to a list of policy steps from `policy_steps`
+   * A key into the policy's policy_steps map identifying which step sequence
+   *
+   * @remarks
+   *  to execute when this rule's condition matches.
    */
   policyKey?: string | null | undefined;
 };
@@ -27,7 +38,6 @@ export const Rule$inboundSchema: z.ZodType<Rule, z.ZodTypeDef, unknown> = z
     condition: z.nullable(z.string()).optional(),
     policyKey: z.nullable(z.string()).optional(),
   });
-
 /** @internal */
 export type Rule$Outbound = {
   condition?: string | null | undefined;
@@ -41,23 +51,9 @@ export const Rule$outboundSchema: z.ZodType<Rule$Outbound, z.ZodTypeDef, Rule> =
     policyKey: z.nullable(z.string()).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Rule$ {
-  /** @deprecated use `Rule$inboundSchema` instead. */
-  export const inboundSchema = Rule$inboundSchema;
-  /** @deprecated use `Rule$outboundSchema` instead. */
-  export const outboundSchema = Rule$outboundSchema;
-  /** @deprecated use `Rule$Outbound` instead. */
-  export type Outbound = Rule$Outbound;
-}
-
 export function ruleToJSON(rule: Rule): string {
   return JSON.stringify(Rule$outboundSchema.parse(rule));
 }
-
 export function ruleFromJSON(
   jsonString: string,
 ): SafeParseResult<Rule, SDKValidationError> {

@@ -3,21 +3,32 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import {
   AppEntitlementExpandMask,
-  AppEntitlementExpandMask$inboundSchema,
   AppEntitlementExpandMask$Outbound,
   AppEntitlementExpandMask$outboundSchema,
 } from "./appentitlementexpandmask.js";
 import {
   AppEntitlementRef,
-  AppEntitlementRef$inboundSchema,
   AppEntitlementRef$Outbound,
   AppEntitlementRef$outboundSchema,
 } from "./appentitlementref.js";
+
+export const AppEntitlementSearchServiceSearchGrantsRequestPurpose = {
+  AppEntitlementPurposeValueUnspecified:
+    "APP_ENTITLEMENT_PURPOSE_VALUE_UNSPECIFIED",
+  AppEntitlementPurposeValueAssignment:
+    "APP_ENTITLEMENT_PURPOSE_VALUE_ASSIGNMENT",
+  AppEntitlementPurposeValuePermission:
+    "APP_ENTITLEMENT_PURPOSE_VALUE_PERMISSION",
+  AppEntitlementPurposeValueOwnership:
+    "APP_ENTITLEMENT_PURPOSE_VALUE_OWNERSHIP",
+} as const;
+export type AppEntitlementSearchServiceSearchGrantsRequestPurpose = OpenEnum<
+  typeof AppEntitlementSearchServiceSearchGrantsRequestPurpose
+>;
 
 /**
  * The AppEntitlementSearchServiceSearchGrantsRequest message.
@@ -35,6 +46,10 @@ export type AppEntitlementSearchServiceSearchGrantsRequest = {
    * Search for grants of an entitlement
    */
   entitlementRefs?: Array<AppEntitlementRef> | null | undefined;
+  /**
+   * Filter for entitlements whose slug is in this list (e.g. "enrollment" for access profiles)
+   */
+  entitlementSlugs?: Array<string> | null | undefined;
   expandMask?: AppEntitlementExpandMask | null | undefined;
   /**
    * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
@@ -44,6 +59,13 @@ export type AppEntitlementSearchServiceSearchGrantsRequest = {
    * The pageToken field.
    */
   pageToken?: string | null | undefined;
+  /**
+   * Filter for entitlements with these purposes (e.g., ASSIGNMENT for membership entitlements)
+   */
+  purpose?:
+    | Array<AppEntitlementSearchServiceSearchGrantsRequestPurpose>
+    | null
+    | undefined;
   /**
    * Search for grants within a resource.
    */
@@ -59,32 +81,25 @@ export type AppEntitlementSearchServiceSearchGrantsRequest = {
 };
 
 /** @internal */
-export const AppEntitlementSearchServiceSearchGrantsRequest$inboundSchema:
+export const AppEntitlementSearchServiceSearchGrantsRequestPurpose$outboundSchema:
   z.ZodType<
-    AppEntitlementSearchServiceSearchGrantsRequest,
+    string,
     z.ZodTypeDef,
-    unknown
-  > = z.object({
-    appIds: z.nullable(z.array(z.string())).optional(),
-    appUserIds: z.nullable(z.array(z.string())).optional(),
-    entitlementRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
-      .optional(),
-    expandMask: z.nullable(AppEntitlementExpandMask$inboundSchema).optional(),
-    pageSize: z.nullable(z.number().int()).optional(),
-    pageToken: z.nullable(z.string()).optional(),
-    resourceIds: z.nullable(z.array(z.string())).optional(),
-    resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-    userId: z.nullable(z.string()).optional(),
-  });
+    AppEntitlementSearchServiceSearchGrantsRequestPurpose
+  > = openEnums.outboundSchema(
+    AppEntitlementSearchServiceSearchGrantsRequestPurpose,
+  );
 
 /** @internal */
 export type AppEntitlementSearchServiceSearchGrantsRequest$Outbound = {
   appIds?: Array<string> | null | undefined;
   appUserIds?: Array<string> | null | undefined;
   entitlementRefs?: Array<AppEntitlementRef$Outbound> | null | undefined;
+  entitlementSlugs?: Array<string> | null | undefined;
   expandMask?: AppEntitlementExpandMask$Outbound | null | undefined;
   pageSize?: number | null | undefined;
   pageToken?: string | null | undefined;
+  purpose?: Array<string> | null | undefined;
   resourceIds?: Array<string> | null | undefined;
   resourceTypeIds?: Array<string> | null | undefined;
   userId?: string | null | undefined;
@@ -101,29 +116,19 @@ export const AppEntitlementSearchServiceSearchGrantsRequest$outboundSchema:
     appUserIds: z.nullable(z.array(z.string())).optional(),
     entitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
       .optional(),
+    entitlementSlugs: z.nullable(z.array(z.string())).optional(),
     expandMask: z.nullable(AppEntitlementExpandMask$outboundSchema).optional(),
     pageSize: z.nullable(z.number().int()).optional(),
     pageToken: z.nullable(z.string()).optional(),
+    purpose: z.nullable(
+      z.array(
+        AppEntitlementSearchServiceSearchGrantsRequestPurpose$outboundSchema,
+      ),
+    ).optional(),
     resourceIds: z.nullable(z.array(z.string())).optional(),
     resourceTypeIds: z.nullable(z.array(z.string())).optional(),
     userId: z.nullable(z.string()).optional(),
   });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementSearchServiceSearchGrantsRequest$ {
-  /** @deprecated use `AppEntitlementSearchServiceSearchGrantsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    AppEntitlementSearchServiceSearchGrantsRequest$inboundSchema;
-  /** @deprecated use `AppEntitlementSearchServiceSearchGrantsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    AppEntitlementSearchServiceSearchGrantsRequest$outboundSchema;
-  /** @deprecated use `AppEntitlementSearchServiceSearchGrantsRequest$Outbound` instead. */
-  export type Outbound =
-    AppEntitlementSearchServiceSearchGrantsRequest$Outbound;
-}
 
 export function appEntitlementSearchServiceSearchGrantsRequestToJSON(
   appEntitlementSearchServiceSearchGrantsRequest:
@@ -133,21 +138,5 @@ export function appEntitlementSearchServiceSearchGrantsRequestToJSON(
     AppEntitlementSearchServiceSearchGrantsRequest$outboundSchema.parse(
       appEntitlementSearchServiceSearchGrantsRequest,
     ),
-  );
-}
-
-export function appEntitlementSearchServiceSearchGrantsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  AppEntitlementSearchServiceSearchGrantsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      AppEntitlementSearchServiceSearchGrantsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'AppEntitlementSearchServiceSearchGrantsRequest' from JSON`,
   );
 }

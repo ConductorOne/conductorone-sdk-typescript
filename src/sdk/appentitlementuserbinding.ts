@@ -17,7 +17,7 @@ export class AppEntitlementUserBinding extends ClientSDK {
    * Remove Grant Duration
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppEntitlementUserBindingService.RemoveGrantDuration method.
+   * Remove the expiration time from a grant, converting it to an indefinite (standing) grant.
    */
   async removeGrantDuration(
     request:
@@ -37,7 +37,7 @@ export class AppEntitlementUserBinding extends ClientSDK {
    * Update Grant Duration
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppEntitlementUserBindingService.UpdateGrantDuration method.
+   * Update the expiration time of an existing grant, changing when automatic revocation will occur.
    */
   async updateGrantDuration(
     request:
@@ -79,7 +79,7 @@ export class AppEntitlementUserBinding extends ClientSDK {
    * Search Grant Feed
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppEntitlementUserBindingService.SearchGrantFeed method.
+   * Search a chronological feed of grant and revoke events, filtered by app user, entitlement, or time range.
    */
   async searchGrantFeed(
     request?: shared.SearchGrantFeedRequest | undefined,
@@ -98,7 +98,7 @@ export class AppEntitlementUserBinding extends ClientSDK {
    * Search Past Grants
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppEntitlementUserBindingService.SearchPastGrants method.
+   * Search historical grants that have been revoked, filtered by app user or entitlement.
    */
   async searchPastGrants(
     request?: shared.SearchPastGrantsRequest | undefined,

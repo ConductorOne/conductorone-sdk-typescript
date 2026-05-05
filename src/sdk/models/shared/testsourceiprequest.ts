@@ -3,33 +3,26 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The TestSourceIPRequest message.
  */
 export type TestSourceIPRequest = {
   /**
-   * The allowCidr field.
+   * The CIDR allowlist rules to test against. If empty, uses the tenant's current allowlist.
+   *
+   * @remarks
+   *  Accepts IPv4 (e.g. 10.0.0.0/24) or IPv6 (e.g. 2001:db8::/32) CIDRs.
    */
   allowCidr?: Array<string> | null | undefined;
   /**
-   * if unset, uses the source IP of the request
+   * if unset, uses the source IP of the request.
+   *
+   * @remarks
+   *  Accepts IPv4 (e.g. 10.0.0.5) or IPv6 (e.g. 2001:db8::1) addresses, optionally with a CIDR prefix.
    */
   sourceIp?: string | null | undefined;
 };
-
-/** @internal */
-export const TestSourceIPRequest$inboundSchema: z.ZodType<
-  TestSourceIPRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  allowCidr: z.nullable(z.array(z.string())).optional(),
-  sourceIp: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type TestSourceIPRequest$Outbound = {
@@ -47,33 +40,10 @@ export const TestSourceIPRequest$outboundSchema: z.ZodType<
   sourceIp: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TestSourceIPRequest$ {
-  /** @deprecated use `TestSourceIPRequest$inboundSchema` instead. */
-  export const inboundSchema = TestSourceIPRequest$inboundSchema;
-  /** @deprecated use `TestSourceIPRequest$outboundSchema` instead. */
-  export const outboundSchema = TestSourceIPRequest$outboundSchema;
-  /** @deprecated use `TestSourceIPRequest$Outbound` instead. */
-  export type Outbound = TestSourceIPRequest$Outbound;
-}
-
 export function testSourceIPRequestToJSON(
   testSourceIPRequest: TestSourceIPRequest,
 ): string {
   return JSON.stringify(
     TestSourceIPRequest$outboundSchema.parse(testSourceIPRequest),
-  );
-}
-
-export function testSourceIPRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<TestSourceIPRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TestSourceIPRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TestSourceIPRequest' from JSON`,
   );
 }

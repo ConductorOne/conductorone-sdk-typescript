@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * OAuth2AuthorizedAs tracks the user that OAuthed with the connector.
@@ -13,17 +10,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type OAuth2AuthorizedAsInput = {
   authorizedAt?: Date | null | undefined;
 };
-
-/** @internal */
-export const OAuth2AuthorizedAsInput$inboundSchema: z.ZodType<
-  OAuth2AuthorizedAsInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  authorizedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
 
 /** @internal */
 export type OAuth2AuthorizedAsInput$Outbound = {
@@ -39,33 +25,10 @@ export const OAuth2AuthorizedAsInput$outboundSchema: z.ZodType<
   authorizedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace OAuth2AuthorizedAsInput$ {
-  /** @deprecated use `OAuth2AuthorizedAsInput$inboundSchema` instead. */
-  export const inboundSchema = OAuth2AuthorizedAsInput$inboundSchema;
-  /** @deprecated use `OAuth2AuthorizedAsInput$outboundSchema` instead. */
-  export const outboundSchema = OAuth2AuthorizedAsInput$outboundSchema;
-  /** @deprecated use `OAuth2AuthorizedAsInput$Outbound` instead. */
-  export type Outbound = OAuth2AuthorizedAsInput$Outbound;
-}
-
 export function oAuth2AuthorizedAsInputToJSON(
   oAuth2AuthorizedAsInput: OAuth2AuthorizedAsInput,
 ): string {
   return JSON.stringify(
     OAuth2AuthorizedAsInput$outboundSchema.parse(oAuth2AuthorizedAsInput),
-  );
-}
-
-export function oAuth2AuthorizedAsInputFromJSON(
-  jsonString: string,
-): SafeParseResult<OAuth2AuthorizedAsInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => OAuth2AuthorizedAsInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OAuth2AuthorizedAsInput' from JSON`,
   );
 }

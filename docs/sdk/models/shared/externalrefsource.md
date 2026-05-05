@@ -8,11 +8,11 @@ The source of the external reference.
 import { ExternalRefSource } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: ExternalRefSource = "UNSPECIFIED";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "UNSPECIFIED" | "JIRA" | Unrecognized<string>

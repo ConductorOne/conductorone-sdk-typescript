@@ -3,89 +3,69 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppResourceRef,
-  AppResourceRef$inboundSchema,
   AppResourceRef$Outbound,
   AppResourceRef$outboundSchema,
 } from "./appresourceref.js";
 
 /**
- * The SearchAppResourcesRequest message.
+ * Search app resources based on filters specified in the request body.
  */
 export type SearchAppResourcesRequest = {
   /**
-   * The appId field.
+   * The app ID to restrict the search to.
    */
   appId?: string | null | undefined;
   /**
-   * The appUserIds field.
+   * A list of app user IDs to restrict the search by.
    */
   appUserIds?: Array<string> | null | undefined;
   /**
-   * The excludeDeletedResourceBindings field.
+   * If true, exclude resources whose bindings have been deleted.
    */
   excludeDeletedResourceBindings?: boolean | null | undefined;
   /**
-   * The excludeResourceIds field.
+   * A list of resource IDs to exclude from the search results.
    */
   excludeResourceIds?: Array<string> | null | undefined;
   /**
-   * The excludeResourceTypeTraitIds field.
+   * A list of resource type trait IDs to exclude from the search.
    */
   excludeResourceTypeTraitIds?: Array<string> | null | undefined;
   /**
-   * The pageSize field.
+   * A list of C1 user IDs to filter resources by ownership.
+   */
+  ownerUserIds?: Array<string> | null | undefined;
+  /**
+   * The maximum number of results to return per page.
    */
   pageSize?: number | null | undefined;
   /**
-   * The pageToken field.
+   * The token for fetching the next page of results.
    */
   pageToken?: string | null | undefined;
   /**
-   * The query field.
+   * Fuzzy search the display name of resources.
    */
   query?: string | null | undefined;
   /**
-   * The refs field.
+   * A list of specific app resource references to restrict the search to.
    */
   refs?: Array<AppResourceRef> | null | undefined;
   /**
-   * The resourceIds field.
+   * A list of resource IDs to restrict the search to.
    */
   resourceIds?: Array<string> | null | undefined;
   /**
-   * The resourceTypeIds field.
+   * A list of resource type IDs to restrict the search by.
    */
   resourceTypeIds?: Array<string> | null | undefined;
   /**
-   * The resourceTypeTraitIds field.
+   * A list of resource type trait IDs to restrict the search by.
    */
   resourceTypeTraitIds?: Array<string> | null | undefined;
 };
-
-/** @internal */
-export const SearchAppResourcesRequest$inboundSchema: z.ZodType<
-  SearchAppResourcesRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  appUserIds: z.nullable(z.array(z.string())).optional(),
-  excludeDeletedResourceBindings: z.nullable(z.boolean()).optional(),
-  excludeResourceIds: z.nullable(z.array(z.string())).optional(),
-  excludeResourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
-  refs: z.nullable(z.array(AppResourceRef$inboundSchema)).optional(),
-  resourceIds: z.nullable(z.array(z.string())).optional(),
-  resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  resourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type SearchAppResourcesRequest$Outbound = {
@@ -94,6 +74,7 @@ export type SearchAppResourcesRequest$Outbound = {
   excludeDeletedResourceBindings?: boolean | null | undefined;
   excludeResourceIds?: Array<string> | null | undefined;
   excludeResourceTypeTraitIds?: Array<string> | null | undefined;
+  ownerUserIds?: Array<string> | null | undefined;
   pageSize?: number | null | undefined;
   pageToken?: string | null | undefined;
   query?: string | null | undefined;
@@ -114,6 +95,7 @@ export const SearchAppResourcesRequest$outboundSchema: z.ZodType<
   excludeDeletedResourceBindings: z.nullable(z.boolean()).optional(),
   excludeResourceIds: z.nullable(z.array(z.string())).optional(),
   excludeResourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
+  ownerUserIds: z.nullable(z.array(z.string())).optional(),
   pageSize: z.nullable(z.number().int()).optional(),
   pageToken: z.nullable(z.string()).optional(),
   query: z.nullable(z.string()).optional(),
@@ -123,33 +105,10 @@ export const SearchAppResourcesRequest$outboundSchema: z.ZodType<
   resourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchAppResourcesRequest$ {
-  /** @deprecated use `SearchAppResourcesRequest$inboundSchema` instead. */
-  export const inboundSchema = SearchAppResourcesRequest$inboundSchema;
-  /** @deprecated use `SearchAppResourcesRequest$outboundSchema` instead. */
-  export const outboundSchema = SearchAppResourcesRequest$outboundSchema;
-  /** @deprecated use `SearchAppResourcesRequest$Outbound` instead. */
-  export type Outbound = SearchAppResourcesRequest$Outbound;
-}
-
 export function searchAppResourcesRequestToJSON(
   searchAppResourcesRequest: SearchAppResourcesRequest,
 ): string {
   return JSON.stringify(
     SearchAppResourcesRequest$outboundSchema.parse(searchAppResourcesRequest),
-  );
-}
-
-export function searchAppResourcesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchAppResourcesRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchAppResourcesRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchAppResourcesRequest' from JSON`,
   );
 }

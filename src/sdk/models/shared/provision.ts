@@ -41,7 +41,6 @@ export const Provision$inboundSchema: z.ZodType<
   provisionPolicy: z.nullable(ProvisionPolicyInput$inboundSchema).optional(),
   provisionTarget: z.nullable(ProvisionTarget$inboundSchema).optional(),
 });
-
 /** @internal */
 export type Provision$Outbound = {
   assigned?: boolean | null | undefined;
@@ -60,23 +59,9 @@ export const Provision$outboundSchema: z.ZodType<
   provisionTarget: z.nullable(ProvisionTarget$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Provision$ {
-  /** @deprecated use `Provision$inboundSchema` instead. */
-  export const inboundSchema = Provision$inboundSchema;
-  /** @deprecated use `Provision$outboundSchema` instead. */
-  export const outboundSchema = Provision$outboundSchema;
-  /** @deprecated use `Provision$Outbound` instead. */
-  export type Outbound = Provision$Outbound;
-}
-
 export function provisionToJSON(provision: Provision): string {
   return JSON.stringify(Provision$outboundSchema.parse(provision));
 }
-
 export function provisionFromJSON(
   jsonString: string,
 ): SafeParseResult<Provision, SDKValidationError> {

@@ -12,7 +12,7 @@ export class AutomationExecutionActions extends ClientSDK {
    * Terminate Automation
    *
    * @remarks
-   * Invokes the c1.api.automations.v1.AutomationExecutionActionsService.TerminateAutomation method.
+   * Terminate a running automation execution asynchronously, stopping it and marking it as terminated.
    */
   async terminateAutomation(
     request:

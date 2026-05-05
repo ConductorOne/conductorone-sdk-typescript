@@ -8,43 +8,34 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The AppEntitlementProxy message.
- *
- * @remarks
- *
- * This message contains a oneof named _implicit. Only a single field of the following list may be set at a time:
- *   - implicit
+ * An entitlement proxy binding that defines a hierarchical relationship between two entitlements.
  */
 export type AppEntitlementProxy = {
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
+  disabledAt?: Date | undefined;
   /**
-   * The dstAppEntitlementId field.
+   * The ID of the destination (child) entitlement.
    */
   dstAppEntitlementId?: string | null | undefined;
   /**
-   * The dstAppId field.
+   * The ID of the app that owns the destination entitlement.
    */
   dstAppId?: string | null | undefined;
   /**
-   * If true, the binding doesn't not exist yet and is from the list of the entitlements from the parent app.
-   *
-   * @remarks
-   *  typically the IdP that handles provisioning for the app instead of C1s connector.
-   * This field is part of the `_implicit` oneof.
-   * See the documentation for `c1.api.app.v1.AppEntitlementProxy` for more details.
+   * If true, the binding does not exist yet and is inferred from the entitlements of the parent app.
    */
   implicit?: boolean | null | undefined;
   /**
-   * The srcAppEntitlementId field.
+   * The ID of the source (parent) entitlement.
    */
   srcAppEntitlementId?: string | null | undefined;
   /**
-   * The srcAppId field.
+   * The ID of the app that owns the source entitlement.
    */
   srcAppId?: string | null | undefined;
   /**
-   * The systemBuiltin field.
+   * If true, this binding was created by the system and cannot be removed by the user.
    */
   systemBuiltin?: boolean | null | undefined;
   updatedAt?: Date | null | undefined;
@@ -62,6 +53,8 @@ export const AppEntitlementProxy$inboundSchema: z.ZodType<
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
+  disabledAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
   dstAppEntitlementId: z.nullable(z.string()).optional(),
   dstAppId: z.nullable(z.string()).optional(),
   implicit: z.nullable(z.boolean()).optional(),
@@ -72,57 +65,6 @@ export const AppEntitlementProxy$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
-/** @internal */
-export type AppEntitlementProxy$Outbound = {
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  dstAppEntitlementId?: string | null | undefined;
-  dstAppId?: string | null | undefined;
-  implicit?: boolean | null | undefined;
-  srcAppEntitlementId?: string | null | undefined;
-  srcAppId?: string | null | undefined;
-  systemBuiltin?: boolean | null | undefined;
-  updatedAt?: string | null | undefined;
-};
-
-/** @internal */
-export const AppEntitlementProxy$outboundSchema: z.ZodType<
-  AppEntitlementProxy$Outbound,
-  z.ZodTypeDef,
-  AppEntitlementProxy
-> = z.object({
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  dstAppEntitlementId: z.nullable(z.string()).optional(),
-  dstAppId: z.nullable(z.string()).optional(),
-  implicit: z.nullable(z.boolean()).optional(),
-  srcAppEntitlementId: z.nullable(z.string()).optional(),
-  srcAppId: z.nullable(z.string()).optional(),
-  systemBuiltin: z.nullable(z.boolean()).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementProxy$ {
-  /** @deprecated use `AppEntitlementProxy$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementProxy$inboundSchema;
-  /** @deprecated use `AppEntitlementProxy$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlementProxy$outboundSchema;
-  /** @deprecated use `AppEntitlementProxy$Outbound` instead. */
-  export type Outbound = AppEntitlementProxy$Outbound;
-}
-
-export function appEntitlementProxyToJSON(
-  appEntitlementProxy: AppEntitlementProxy,
-): string {
-  return JSON.stringify(
-    AppEntitlementProxy$outboundSchema.parse(appEntitlementProxy),
-  );
-}
 
 export function appEntitlementProxyFromJSON(
   jsonString: string,

@@ -13,7 +13,7 @@ export class ConnectorCatalog extends ClientSDK {
    * Configuration Schema
    *
    * @remarks
-   * Invokes the c1.api.integration.connector.v1.ConnectorCatalogService.ConfigurationSchema method.
+   * Return the configuration schema describing the fields required to set up a connector of the specified type.
    */
   async configurationSchema(
     request?:

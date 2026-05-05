@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppUsageControls,
   AppUsageControls$inboundSchema,
-  AppUsageControls$Outbound,
-  AppUsageControls$outboundSchema,
 } from "./appusagecontrols.js";
 
 /**
@@ -33,45 +31,6 @@ export const GetAppUsageControlsResponse$inboundSchema: z.ZodType<
   appUsageControls: z.nullable(AppUsageControls$inboundSchema).optional(),
   hasUsageData: z.nullable(z.boolean()).optional(),
 });
-
-/** @internal */
-export type GetAppUsageControlsResponse$Outbound = {
-  appUsageControls?: AppUsageControls$Outbound | null | undefined;
-  hasUsageData?: boolean | null | undefined;
-};
-
-/** @internal */
-export const GetAppUsageControlsResponse$outboundSchema: z.ZodType<
-  GetAppUsageControlsResponse$Outbound,
-  z.ZodTypeDef,
-  GetAppUsageControlsResponse
-> = z.object({
-  appUsageControls: z.nullable(AppUsageControls$outboundSchema).optional(),
-  hasUsageData: z.nullable(z.boolean()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAppUsageControlsResponse$ {
-  /** @deprecated use `GetAppUsageControlsResponse$inboundSchema` instead. */
-  export const inboundSchema = GetAppUsageControlsResponse$inboundSchema;
-  /** @deprecated use `GetAppUsageControlsResponse$outboundSchema` instead. */
-  export const outboundSchema = GetAppUsageControlsResponse$outboundSchema;
-  /** @deprecated use `GetAppUsageControlsResponse$Outbound` instead. */
-  export type Outbound = GetAppUsageControlsResponse$Outbound;
-}
-
-export function getAppUsageControlsResponseToJSON(
-  getAppUsageControlsResponse: GetAppUsageControlsResponse,
-): string {
-  return JSON.stringify(
-    GetAppUsageControlsResponse$outboundSchema.parse(
-      getAppUsageControlsResponse,
-    ),
-  );
-}
 
 export function getAppUsageControlsResponseFromJSON(
   jsonString: string,

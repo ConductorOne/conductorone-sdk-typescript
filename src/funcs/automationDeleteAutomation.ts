@@ -4,6 +4,7 @@
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -28,7 +29,7 @@ import { Result } from "../sdk/types/fp.js";
  * Delete Automation
  *
  * @remarks
- * Invokes the c1.api.automations.v1.AutomationService.DeleteAutomation method.
+ * Delete an automation by its unique identifier, removing it and its associated triggers.
  */
 export function automationDeleteAutomation(
   client: ConductoroneSDKTypescriptCore,
@@ -88,7 +89,7 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.DeleteAutomationRequest, {
+  const body = encodeJSON("body", payload.AutomationsDeleteAutomationRequest, {
     explode: true,
   });
 
@@ -98,7 +99,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/api/v1/automations/{id}")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -141,7 +141,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -173,7 +174,7 @@ async function $do(
       200,
       operations
         .C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse$inboundSchema,
-      { key: "DeleteAutomationResponse" },
+      { key: "AutomationsDeleteAutomationResponse" },
     ),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

@@ -14,5 +14,6 @@ let value: SelectOption = {};
 
 | Field                  | Type                   | Required               | Description            |
 | ---------------------- | ---------------------- | ---------------------- | ---------------------- |
+| `description`          | *string*               | :heavy_minus_sign:     | Used for type BUTTONS  |
 | `displayName`          | *string*               | :heavy_minus_sign:     | The displayName field. |
 | `value`                | *string*               | :heavy_minus_sign:     | The value field.       |

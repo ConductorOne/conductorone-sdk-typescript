@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The ForceSyncResponse message.
+ * Empty response body. Status code indicates success.
  */
 export type ForceSyncResponse = {};
 
@@ -18,37 +18,6 @@ export const ForceSyncResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
-/** @internal */
-export type ForceSyncResponse$Outbound = {};
-
-/** @internal */
-export const ForceSyncResponse$outboundSchema: z.ZodType<
-  ForceSyncResponse$Outbound,
-  z.ZodTypeDef,
-  ForceSyncResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ForceSyncResponse$ {
-  /** @deprecated use `ForceSyncResponse$inboundSchema` instead. */
-  export const inboundSchema = ForceSyncResponse$inboundSchema;
-  /** @deprecated use `ForceSyncResponse$outboundSchema` instead. */
-  export const outboundSchema = ForceSyncResponse$outboundSchema;
-  /** @deprecated use `ForceSyncResponse$Outbound` instead. */
-  export type Outbound = ForceSyncResponse$Outbound;
-}
-
-export function forceSyncResponseToJSON(
-  forceSyncResponse: ForceSyncResponse,
-): string {
-  return JSON.stringify(
-    ForceSyncResponse$outboundSchema.parse(forceSyncResponse),
-  );
-}
 
 export function forceSyncResponseFromJSON(
   jsonString: string,

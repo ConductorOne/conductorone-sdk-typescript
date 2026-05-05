@@ -39,24 +39,6 @@ export type C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlements
   };
 
 /** @internal */
-export const C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest$inboundSchema:
-  z.ZodType<
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    catalog_id: z.nullable(z.string()),
-    page_size: z.nullable(z.number().int()).optional(),
-    page_token: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "catalog_id": "catalogId",
-      "page_size": "pageSize",
-      "page_token": "pageToken",
-    });
-  });
-
-/** @internal */
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest$Outbound =
   {
     catalog_id: string | null;
@@ -82,22 +64,6 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlement
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest$ {
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest$inboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest$outboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest$Outbound;
-}
-
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequestToJSON(
   c1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest:
     C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest,
@@ -107,21 +73,6 @@ export function c1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlem
       .parse(
         c1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest,
       ),
-  );
-}
-
-export function c1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest' from JSON`,
   );
 }
 
@@ -147,70 +98,6 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlement
         "requestCatalogManagementServiceListEntitlementsForAccessResponse",
     });
   });
-
-/** @internal */
-export type C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    RequestCatalogManagementServiceListEntitlementsForAccessResponse?:
-      | shared.RequestCatalogManagementServiceListEntitlementsForAccessResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse$outboundSchema:
-  z.ZodType<
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    requestCatalogManagementServiceListEntitlementsForAccessResponse: shared
-      .RequestCatalogManagementServiceListEntitlementsForAccessResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      requestCatalogManagementServiceListEntitlementsForAccessResponse:
-        "RequestCatalogManagementServiceListEntitlementsForAccessResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse$ {
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse$inboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse$outboundSchema;
-  /** @deprecated use `C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse$Outbound;
-}
-
-export function c1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponseToJSON(
-  c1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse:
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse,
-): string {
-  return JSON.stringify(
-    C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse$outboundSchema
-      .parse(
-        c1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse,
-      ),
-  );
-}
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponseFromJSON(
   jsonString: string,

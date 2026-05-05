@@ -25,7 +25,6 @@ export const AccountRef$inboundSchema: z.ZodType<
 > = z.object({
   accountIdCel: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type AccountRef$Outbound = {
   accountIdCel?: string | null | undefined;
@@ -40,23 +39,9 @@ export const AccountRef$outboundSchema: z.ZodType<
   accountIdCel: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AccountRef$ {
-  /** @deprecated use `AccountRef$inboundSchema` instead. */
-  export const inboundSchema = AccountRef$inboundSchema;
-  /** @deprecated use `AccountRef$outboundSchema` instead. */
-  export const outboundSchema = AccountRef$outboundSchema;
-  /** @deprecated use `AccountRef$Outbound` instead. */
-  export type Outbound = AccountRef$Outbound;
-}
-
 export function accountRefToJSON(accountRef: AccountRef): string {
   return JSON.stringify(AccountRef$outboundSchema.parse(accountRef));
 }
-
 export function accountRefFromJSON(
   jsonString: string,
 ): SafeParseResult<AccountRef, SDKValidationError> {

@@ -51,7 +51,7 @@ export class AppResourceOwners extends ClientSDK {
    * Remove
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppResourceOwners.Remove method.
+   * Remove a user from the owners of an app resource.
    */
   async remove(
     request: operations.C1ApiAppV1AppResourceOwnersRemoveRequest,
@@ -85,7 +85,7 @@ export class AppResourceOwners extends ClientSDK {
    * Add
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppResourceOwners.Add method.
+   * Add a user as an owner of an app resource.
    */
   async add(
     request: operations.C1ApiAppV1AppResourceOwnersAddRequest,

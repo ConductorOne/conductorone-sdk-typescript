@@ -1,5 +1,4 @@
 # AppEntitlementsProxy
-(*appEntitlementsProxy*)
 
 ## Overview
 
@@ -11,7 +10,7 @@
 
 ## delete
 
-Invokes the c1.api.app.v1.AppEntitlementsProxy.Delete method.
+Delete a proxy binding between a source and destination entitlement.
 
 ### Example Usage
 
@@ -96,7 +95,7 @@ run();
 
 ## get
 
-Invokes the c1.api.app.v1.AppEntitlementsProxy.Get method.
+Retrieve a specific proxy binding between a source and destination entitlement.
 
 ### Example Usage
 
@@ -181,7 +180,7 @@ run();
 
 ## create
 
-Invokes the c1.api.app.v1.AppEntitlementsProxy.Create method.
+Create a proxy binding between a source and destination entitlement, establishing a hierarchical relationship.
 
 ### Example Usage
 

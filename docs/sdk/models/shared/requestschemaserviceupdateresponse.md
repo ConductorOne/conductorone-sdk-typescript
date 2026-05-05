@@ -1,6 +1,6 @@
 # RequestSchemaServiceUpdateResponse
 
-The RequestSchemaServiceUpdateResponse message.
+The response message for updating a request schema.
 
 ## Example Usage
 

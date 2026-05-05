@@ -14,4 +14,4 @@ let value: UpdateOrgDomainResponse = {};
 
 | Field                                                         | Type                                                          | Required                                                      | Description                                                   |
 | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
-| `list`                                                        | [shared.OrgDomain](../../../sdk/models/shared/orgdomain.md)[] | :heavy_minus_sign:                                            | The list field.                                               |
+| `list`                                                        | [shared.OrgDomain](../../../sdk/models/shared/orgdomain.md)[] | :heavy_minus_sign:                                            | The resulting list of verified domains after the update.      |

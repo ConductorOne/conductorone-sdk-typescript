@@ -50,66 +50,6 @@ export const C1ApiAppV1AppEntitlementUserBindingServiceSearchGrantFeedResponse$i
     });
   });
 
-/** @internal */
-export type C1ApiAppV1AppEntitlementUserBindingServiceSearchGrantFeedResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    SearchGrantFeedResponse?:
-      | shared.SearchGrantFeedResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAppV1AppEntitlementUserBindingServiceSearchGrantFeedResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementUserBindingServiceSearchGrantFeedResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppEntitlementUserBindingServiceSearchGrantFeedResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    searchGrantFeedResponse: shared.SearchGrantFeedResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      searchGrantFeedResponse: "SearchGrantFeedResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementUserBindingServiceSearchGrantFeedResponse$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementUserBindingServiceSearchGrantFeedResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementUserBindingServiceSearchGrantFeedResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementUserBindingServiceSearchGrantFeedResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementUserBindingServiceSearchGrantFeedResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementUserBindingServiceSearchGrantFeedResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementUserBindingServiceSearchGrantFeedResponse$Outbound;
-}
-
-export function c1ApiAppV1AppEntitlementUserBindingServiceSearchGrantFeedResponseToJSON(
-  c1ApiAppV1AppEntitlementUserBindingServiceSearchGrantFeedResponse:
-    C1ApiAppV1AppEntitlementUserBindingServiceSearchGrantFeedResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppEntitlementUserBindingServiceSearchGrantFeedResponse$outboundSchema
-      .parse(c1ApiAppV1AppEntitlementUserBindingServiceSearchGrantFeedResponse),
-  );
-}
-
 export function c1ApiAppV1AppEntitlementUserBindingServiceSearchGrantFeedResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

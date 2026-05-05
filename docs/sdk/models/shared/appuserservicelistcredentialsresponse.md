@@ -1,6 +1,6 @@
 # AppUserServiceListCredentialsResponse
 
-The AppUserServiceListCredentialsResponse message.
+The response message for listing credentials of an app user.
 
 ## Example Usage
 
@@ -14,5 +14,5 @@ let value: AppUserServiceListCredentialsResponse = {};
 
 | Field                                                                         | Type                                                                          | Required                                                                      | Description                                                                   |
 | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `list`                                                                        | [shared.AppUserCredential](../../../sdk/models/shared/appusercredential.md)[] | :heavy_minus_sign:                                                            | The list field.                                                               |
-| `nextPageToken`                                                               | *string*                                                                      | :heavy_minus_sign:                                                            | The nextPageToken field.                                                      |
+| `list`                                                                        | [shared.AppUserCredential](../../../sdk/models/shared/appusercredential.md)[] | :heavy_minus_sign:                                                            | The list of credential results.                                               |
+| `nextPageToken`                                                               | *string*                                                                      | :heavy_minus_sign:                                                            | The token for fetching the next page of results.                              |

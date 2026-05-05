@@ -1,5 +1,4 @@
 # AutomationSearch
-(*automationSearch*)
 
 ## Overview
 
@@ -10,11 +9,11 @@
 
 ## searchAutomationTemplateVersions
 
-Invokes the c1.api.automations.v1.AutomationSearchService.SearchAutomationTemplateVersions method.
+Search for versioned snapshots of an automation template's steps and triggers.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="c1.api.automations.v1.AutomationSearchService.SearchAutomationTemplateVersions" method="post" path="/api/v1/automation_versions/search" -->
+<!-- UsageSnippet language="typescript" operationID="c1.api.automations.v1.AutomationSearchService.SearchAutomationTemplateVersions" method="post" path="/api/v1/search/automation_versions" -->
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 
@@ -85,11 +84,11 @@ run();
 
 ## searchAutomations
 
-Invokes the c1.api.automations.v1.AutomationSearchService.SearchAutomations method.
+Search for automations matching the provided filters, including query text, template refs, app, and trigger types.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="c1.api.automations.v1.AutomationSearchService.SearchAutomations" method="post" path="/api/v1/automations/search" -->
+<!-- UsageSnippet language="typescript" operationID="c1.api.automations.v1.AutomationSearchService.SearchAutomations" method="post" path="/api/v1/search/automations" -->
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 

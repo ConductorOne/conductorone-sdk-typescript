@@ -1,6 +1,6 @@
 # RequestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponse
 
-The RequestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponse message.
+The response message containing all requestable entitlement references in the catalog.
 
 ## Example Usage
 
@@ -15,4 +15,4 @@ let value:
 
 | Field                                                                         | Type                                                                          | Required                                                                      | Description                                                                   |
 | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `refs`                                                                        | [shared.AppEntitlementRef](../../../sdk/models/shared/appentitlementref.md)[] | :heavy_minus_sign:                                                            | The refs field.                                                               |
+| `refs`                                                                        | [shared.AppEntitlementRef](../../../sdk/models/shared/appentitlementref.md)[] | :heavy_minus_sign:                                                            | The complete list of app entitlement references in this catalog.              |

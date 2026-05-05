@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The ResumePausedBundleAutomationResponse message.
+ * The response message for resuming a paused bundle automation.
  */
 export type ResumePausedBundleAutomationResponse = {};
 
@@ -18,41 +18,6 @@ export const ResumePausedBundleAutomationResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
-/** @internal */
-export type ResumePausedBundleAutomationResponse$Outbound = {};
-
-/** @internal */
-export const ResumePausedBundleAutomationResponse$outboundSchema: z.ZodType<
-  ResumePausedBundleAutomationResponse$Outbound,
-  z.ZodTypeDef,
-  ResumePausedBundleAutomationResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResumePausedBundleAutomationResponse$ {
-  /** @deprecated use `ResumePausedBundleAutomationResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    ResumePausedBundleAutomationResponse$inboundSchema;
-  /** @deprecated use `ResumePausedBundleAutomationResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    ResumePausedBundleAutomationResponse$outboundSchema;
-  /** @deprecated use `ResumePausedBundleAutomationResponse$Outbound` instead. */
-  export type Outbound = ResumePausedBundleAutomationResponse$Outbound;
-}
-
-export function resumePausedBundleAutomationResponseToJSON(
-  resumePausedBundleAutomationResponse: ResumePausedBundleAutomationResponse,
-): string {
-  return JSON.stringify(
-    ResumePausedBundleAutomationResponse$outboundSchema.parse(
-      resumePausedBundleAutomationResponse,
-    ),
-  );
-}
 
 export function resumePausedBundleAutomationResponseFromJSON(
   jsonString: string,

@@ -3,26 +3,39 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import {
   UserExpandMask,
-  UserExpandMask$inboundSchema,
   UserExpandMask$Outbound,
   UserExpandMask$outboundSchema,
 } from "./userexpandmask.js";
 import {
   UserRef,
-  UserRef$inboundSchema,
   UserRef$Outbound,
   UserRef$outboundSchema,
 } from "./userref.js";
+
+/**
+ * Filter for users based on their delegate status.
+ */
+export const DelegateStatus = {
+  DelegateStatusUnspecified: "DELEGATE_STATUS_UNSPECIFIED",
+  DelegateStatusHasDelegate: "DELEGATE_STATUS_HAS_DELEGATE",
+  DelegateStatusNoDelegate: "DELEGATE_STATUS_NO_DELEGATE",
+} as const;
+/**
+ * Filter for users based on their delegate status.
+ */
+export type DelegateStatus = OpenEnum<typeof DelegateStatus>;
+
+export const ExcludeOrigins = {
+  UserOriginUnspecified: "USER_ORIGIN_UNSPECIFIED",
+  UserOriginDirectory: "USER_ORIGIN_DIRECTORY",
+  UserOriginLocal: "USER_ORIGIN_LOCAL",
+  UserOriginSystem: "USER_ORIGIN_SYSTEM",
+} as const;
+export type ExcludeOrigins = OpenEnum<typeof ExcludeOrigins>;
 
 export const ExcludeTypes = {
   UserTypeUnspecified: "USER_TYPE_UNSPECIFIED",
@@ -33,18 +46,36 @@ export const ExcludeTypes = {
 } as const;
 export type ExcludeTypes = OpenEnum<typeof ExcludeTypes>;
 
-export const UserStatuses = {
+export const Origins = {
+  UserOriginUnspecified: "USER_ORIGIN_UNSPECIFIED",
+  UserOriginDirectory: "USER_ORIGIN_DIRECTORY",
+  UserOriginLocal: "USER_ORIGIN_LOCAL",
+  UserOriginSystem: "USER_ORIGIN_SYSTEM",
+} as const;
+export type Origins = OpenEnum<typeof Origins>;
+
+export const SearchUsersRequestUserStatuses = {
   Unknown: "UNKNOWN",
   Enabled: "ENABLED",
   Disabled: "DISABLED",
   Deleted: "DELETED",
 } as const;
-export type UserStatuses = OpenEnum<typeof UserStatuses>;
+export type SearchUsersRequestUserStatuses = OpenEnum<
+  typeof SearchUsersRequestUserStatuses
+>;
 
 /**
  * Search for users based on some filters.
  */
 export type SearchUsersRequest = {
+  /**
+   * Filter for users based on their delegate status.
+   */
+  delegateStatus?: DelegateStatus | undefined;
+  /**
+   * Filter for users that have any of the delegated user IDs on this list.
+   */
+  delegatedUserIds?: Array<string> | null | undefined;
   /**
    * Search for users that have any of the departments on this list.
    */
@@ -58,6 +89,10 @@ export type SearchUsersRequest = {
    */
   excludeIds?: Array<string> | null | undefined;
   /**
+   * Filter to exclude users with these origins.
+   */
+  excludeOrigins?: Array<ExcludeOrigins> | null | undefined;
+  /**
    * An array of types to exclude from the results.
    */
   excludeTypes?: Array<ExcludeTypes> | null | undefined;
@@ -67,6 +102,10 @@ export type SearchUsersRequest = {
    */
   ids?: Array<string> | null | undefined;
   /**
+   * Filter for users who are delegates of at least one other user.
+   */
+  isDelegate?: boolean | undefined;
+  /**
    * Search for users that have any of the job titles on this list.
    */
   jobTitles?: Array<string> | null | undefined;
@@ -74,6 +113,10 @@ export type SearchUsersRequest = {
    * Search for users that have any of the manager IDs on this list.
    */
   managerIds?: Array<string> | null | undefined;
+  /**
+   * Filter to include only users with these origins.
+   */
+  origins?: Array<Origins> | null | undefined;
   /**
    * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
    */
@@ -97,105 +140,56 @@ export type SearchUsersRequest = {
   /**
    * Search for users that have any of the statuses on this list. This can only be ENABLED, DISABLED, and DELETED
    */
-  userStatuses?: Array<UserStatuses> | null | undefined;
+  userStatuses?: Array<SearchUsersRequestUserStatuses> | null | undefined;
 };
 
 /** @internal */
-export const ExcludeTypes$inboundSchema: z.ZodType<
-  ExcludeTypes,
+export const DelegateStatus$outboundSchema: z.ZodType<
+  string,
   z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(ExcludeTypes),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
+  DelegateStatus
+> = openEnums.outboundSchema(DelegateStatus);
+
+/** @internal */
+export const ExcludeOrigins$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  ExcludeOrigins
+> = openEnums.outboundSchema(ExcludeOrigins);
 
 /** @internal */
 export const ExcludeTypes$outboundSchema: z.ZodType<
-  ExcludeTypes,
+  string,
   z.ZodTypeDef,
   ExcludeTypes
-> = z.union([
-  z.nativeEnum(ExcludeTypes),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExcludeTypes$ {
-  /** @deprecated use `ExcludeTypes$inboundSchema` instead. */
-  export const inboundSchema = ExcludeTypes$inboundSchema;
-  /** @deprecated use `ExcludeTypes$outboundSchema` instead. */
-  export const outboundSchema = ExcludeTypes$outboundSchema;
-}
+> = openEnums.outboundSchema(ExcludeTypes);
 
 /** @internal */
-export const UserStatuses$inboundSchema: z.ZodType<
-  UserStatuses,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(UserStatuses),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
+export const Origins$outboundSchema: z.ZodType<string, z.ZodTypeDef, Origins> =
+  openEnums.outboundSchema(Origins);
 
 /** @internal */
-export const UserStatuses$outboundSchema: z.ZodType<
-  UserStatuses,
+export const SearchUsersRequestUserStatuses$outboundSchema: z.ZodType<
+  string,
   z.ZodTypeDef,
-  UserStatuses
-> = z.union([
-  z.nativeEnum(UserStatuses),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UserStatuses$ {
-  /** @deprecated use `UserStatuses$inboundSchema` instead. */
-  export const inboundSchema = UserStatuses$inboundSchema;
-  /** @deprecated use `UserStatuses$outboundSchema` instead. */
-  export const outboundSchema = UserStatuses$outboundSchema;
-}
-
-/** @internal */
-export const SearchUsersRequest$inboundSchema: z.ZodType<
-  SearchUsersRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  departments: z.nullable(z.array(z.string())).optional(),
-  email: z.nullable(z.string()).optional(),
-  excludeIds: z.nullable(z.array(z.string())).optional(),
-  excludeTypes: z.nullable(z.array(ExcludeTypes$inboundSchema)).optional(),
-  expandMask: z.nullable(UserExpandMask$inboundSchema).optional(),
-  ids: z.nullable(z.array(z.string())).optional(),
-  jobTitles: z.nullable(z.array(z.string())).optional(),
-  managerIds: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
-  refs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
-  roleIds: z.nullable(z.array(z.string())).optional(),
-  userStatuses: z.nullable(z.array(UserStatuses$inboundSchema)).optional(),
-});
+  SearchUsersRequestUserStatuses
+> = openEnums.outboundSchema(SearchUsersRequestUserStatuses);
 
 /** @internal */
 export type SearchUsersRequest$Outbound = {
+  delegateStatus?: string | undefined;
+  delegatedUserIds?: Array<string> | null | undefined;
   departments?: Array<string> | null | undefined;
   email?: string | null | undefined;
   excludeIds?: Array<string> | null | undefined;
+  excludeOrigins?: Array<string> | null | undefined;
   excludeTypes?: Array<string> | null | undefined;
   expandMask?: UserExpandMask$Outbound | null | undefined;
   ids?: Array<string> | null | undefined;
+  isDelegate?: boolean | undefined;
   jobTitles?: Array<string> | null | undefined;
   managerIds?: Array<string> | null | undefined;
+  origins?: Array<string> | null | undefined;
   pageSize?: number | null | undefined;
   pageToken?: string | null | undefined;
   query?: string | null | undefined;
@@ -210,49 +204,33 @@ export const SearchUsersRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchUsersRequest
 > = z.object({
+  delegateStatus: DelegateStatus$outboundSchema.optional(),
+  delegatedUserIds: z.nullable(z.array(z.string())).optional(),
   departments: z.nullable(z.array(z.string())).optional(),
   email: z.nullable(z.string()).optional(),
   excludeIds: z.nullable(z.array(z.string())).optional(),
+  excludeOrigins: z.nullable(z.array(ExcludeOrigins$outboundSchema)).optional(),
   excludeTypes: z.nullable(z.array(ExcludeTypes$outboundSchema)).optional(),
   expandMask: z.nullable(UserExpandMask$outboundSchema).optional(),
   ids: z.nullable(z.array(z.string())).optional(),
+  isDelegate: z.boolean().optional(),
   jobTitles: z.nullable(z.array(z.string())).optional(),
   managerIds: z.nullable(z.array(z.string())).optional(),
+  origins: z.nullable(z.array(Origins$outboundSchema)).optional(),
   pageSize: z.nullable(z.number().int()).optional(),
   pageToken: z.nullable(z.string()).optional(),
   query: z.nullable(z.string()).optional(),
   refs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
   roleIds: z.nullable(z.array(z.string())).optional(),
-  userStatuses: z.nullable(z.array(UserStatuses$outboundSchema)).optional(),
+  userStatuses: z.nullable(
+    z.array(SearchUsersRequestUserStatuses$outboundSchema),
+  ).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchUsersRequest$ {
-  /** @deprecated use `SearchUsersRequest$inboundSchema` instead. */
-  export const inboundSchema = SearchUsersRequest$inboundSchema;
-  /** @deprecated use `SearchUsersRequest$outboundSchema` instead. */
-  export const outboundSchema = SearchUsersRequest$outboundSchema;
-  /** @deprecated use `SearchUsersRequest$Outbound` instead. */
-  export type Outbound = SearchUsersRequest$Outbound;
-}
 
 export function searchUsersRequestToJSON(
   searchUsersRequest: SearchUsersRequest,
 ): string {
   return JSON.stringify(
     SearchUsersRequest$outboundSchema.parse(searchUsersRequest),
-  );
-}
-
-export function searchUsersRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchUsersRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchUsersRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchUsersRequest' from JSON`,
   );
 }

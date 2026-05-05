@@ -14,7 +14,7 @@ export class OrgDomain extends ClientSDK {
    * List
    *
    * @remarks
-   * Invokes the c1.api.settings.v1.OrgDomainService.List method.
+   * List returns all verified domains configured for the tenant.
    */
   async list(
     request?: operations.C1ApiSettingsV1OrgDomainServiceListRequest | undefined,
@@ -31,7 +31,7 @@ export class OrgDomain extends ClientSDK {
    * Update
    *
    * @remarks
-   * Invokes the c1.api.settings.v1.OrgDomainService.Update method.
+   * Update replaces the tenant's set of verified domains with the provided list.
    */
   async update(
     request?: shared.UpdateOrgDomainRequest | undefined,

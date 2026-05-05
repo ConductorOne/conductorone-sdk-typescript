@@ -47,59 +47,6 @@ export const C1ApiAppV1AppSearchSearchResponse$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type C1ApiAppV1AppSearchSearchResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  SearchAppsResponse?: shared.SearchAppsResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppSearchSearchResponse$outboundSchema: z.ZodType<
-  C1ApiAppV1AppSearchSearchResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiAppV1AppSearchSearchResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  searchAppsResponse: shared.SearchAppsResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    searchAppsResponse: "SearchAppsResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppSearchSearchResponse$ {
-  /** @deprecated use `C1ApiAppV1AppSearchSearchResponse$inboundSchema` instead. */
-  export const inboundSchema = C1ApiAppV1AppSearchSearchResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppSearchSearchResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppSearchSearchResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppSearchSearchResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppSearchSearchResponse$Outbound;
-}
-
-export function c1ApiAppV1AppSearchSearchResponseToJSON(
-  c1ApiAppV1AppSearchSearchResponse: C1ApiAppV1AppSearchSearchResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppSearchSearchResponse$outboundSchema.parse(
-      c1ApiAppV1AppSearchSearchResponse,
-    ),
-  );
-}
-
 export function c1ApiAppV1AppSearchSearchResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<C1ApiAppV1AppSearchSearchResponse, SDKValidationError> {

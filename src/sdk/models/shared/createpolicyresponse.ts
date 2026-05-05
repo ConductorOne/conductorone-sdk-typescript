@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Policy,
-  Policy$inboundSchema,
-  Policy$Outbound,
-  Policy$outboundSchema,
-} from "./policy.js";
+import { Policy, Policy$inboundSchema } from "./policy.js";
 
 /**
  * The CreatePolicyResponse message contains the created policy object.
@@ -28,41 +23,6 @@ export const CreatePolicyResponse$inboundSchema: z.ZodType<
 > = z.object({
   policy: z.nullable(Policy$inboundSchema).optional(),
 });
-
-/** @internal */
-export type CreatePolicyResponse$Outbound = {
-  policy?: Policy$Outbound | null | undefined;
-};
-
-/** @internal */
-export const CreatePolicyResponse$outboundSchema: z.ZodType<
-  CreatePolicyResponse$Outbound,
-  z.ZodTypeDef,
-  CreatePolicyResponse
-> = z.object({
-  policy: z.nullable(Policy$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreatePolicyResponse$ {
-  /** @deprecated use `CreatePolicyResponse$inboundSchema` instead. */
-  export const inboundSchema = CreatePolicyResponse$inboundSchema;
-  /** @deprecated use `CreatePolicyResponse$outboundSchema` instead. */
-  export const outboundSchema = CreatePolicyResponse$outboundSchema;
-  /** @deprecated use `CreatePolicyResponse$Outbound` instead. */
-  export type Outbound = CreatePolicyResponse$Outbound;
-}
-
-export function createPolicyResponseToJSON(
-  createPolicyResponse: CreatePolicyResponse,
-): string {
-  return JSON.stringify(
-    CreatePolicyResponse$outboundSchema.parse(createPolicyResponse),
-  );
-}
 
 export function createPolicyResponseFromJSON(
   jsonString: string,

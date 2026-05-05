@@ -22,6 +22,25 @@ export type SendEmail = {
    */
   body?: string | null | undefined;
   /**
+   * Deprecated: use email_cel instead. Static email field shipped behind FF 541 (SKU_MANUAL)
+   *
+   * @remarks
+   *  with zero tenant enablement. CEL subsumes static: '"ops@example.com"' is valid CEL.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  email?: string | undefined;
+  /**
+   * CEL expression resolving to one or more email addresses (string or list<string>).
+   *
+   * @remarks
+   *  Evaluated against the workflow execution context (trigger + completed steps).
+   *  Static emails work too: '"ops@example.com"' is valid CEL.
+   *  Supports list<string> for multiple recipients: '["a@x.com", "b@x.com"]'.
+   *  Requires the tenant to have a TenantEmailProvider configured.
+   */
+  emailCel?: string | undefined;
+  /**
    * The subject field.
    */
   subject?: string | null | undefined;
@@ -50,16 +69,19 @@ export const SendEmail$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   body: z.nullable(z.string()).optional(),
+  email: z.string().optional(),
+  emailCel: z.string().optional(),
   subject: z.nullable(z.string()).optional(),
   title: z.nullable(z.string()).optional(),
   useSubjectUser: z.nullable(z.boolean()).optional(),
   userIdsCel: z.nullable(z.string()).optional(),
   userRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
 });
-
 /** @internal */
 export type SendEmail$Outbound = {
   body?: string | null | undefined;
+  email?: string | undefined;
+  emailCel?: string | undefined;
   subject?: string | null | undefined;
   title?: string | null | undefined;
   useSubjectUser?: boolean | null | undefined;
@@ -74,6 +96,8 @@ export const SendEmail$outboundSchema: z.ZodType<
   SendEmail
 > = z.object({
   body: z.nullable(z.string()).optional(),
+  email: z.string().optional(),
+  emailCel: z.string().optional(),
   subject: z.nullable(z.string()).optional(),
   title: z.nullable(z.string()).optional(),
   useSubjectUser: z.nullable(z.boolean()).optional(),
@@ -81,23 +105,9 @@ export const SendEmail$outboundSchema: z.ZodType<
   userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SendEmail$ {
-  /** @deprecated use `SendEmail$inboundSchema` instead. */
-  export const inboundSchema = SendEmail$inboundSchema;
-  /** @deprecated use `SendEmail$outboundSchema` instead. */
-  export const outboundSchema = SendEmail$outboundSchema;
-  /** @deprecated use `SendEmail$Outbound` instead. */
-  export type Outbound = SendEmail$Outbound;
-}
-
 export function sendEmailToJSON(sendEmail: SendEmail): string {
   return JSON.stringify(SendEmail$outboundSchema.parse(sendEmail));
 }
-
 export function sendEmailFromJSON(
   jsonString: string,
 ): SafeParseResult<SendEmail, SDKValidationError> {

@@ -4,43 +4,87 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The DisabledReasonCircuitBreaker message.
+ * Snapshot of the period at trip time.
  */
-export type DisabledReasonCircuitBreaker = {};
+export const Period = {
+  CircuitBreakerPeriodUnspecified: "CIRCUIT_BREAKER_PERIOD_UNSPECIFIED",
+  CircuitBreakerPeriodHour: "CIRCUIT_BREAKER_PERIOD_HOUR",
+  CircuitBreakerPeriodDay: "CIRCUIT_BREAKER_PERIOD_DAY",
+  CircuitBreakerPeriodWeek: "CIRCUIT_BREAKER_PERIOD_WEEK",
+  CircuitBreakerPeriodMonth: "CIRCUIT_BREAKER_PERIOD_MONTH",
+} as const;
+/**
+ * Snapshot of the period at trip time.
+ */
+export type Period = OpenEnum<typeof Period>;
+
+/**
+ * DisabledReasonCircuitBreaker carries the trip context when an automation
+ *
+ * @remarks
+ *  has been auto-disabled by its rate cap. Returned on the parent Automation
+ *  when read; not directly settable.
+ */
+export type DisabledReasonCircuitBreaker = {
+  /**
+   * Observed execution count in the period at trip time.
+   */
+  observedCount?: number | undefined;
+  /**
+   * Snapshot of the period at trip time.
+   */
+  period?: Period | undefined;
+  /**
+   * Snapshot of the threshold at trip time.
+   */
+  threshold?: number | undefined;
+  trippedAt?: Date | undefined;
+};
+
+/** @internal */
+export const Period$inboundSchema: z.ZodType<Period, z.ZodTypeDef, unknown> =
+  openEnums.inboundSchema(Period);
+/** @internal */
+export const Period$outboundSchema: z.ZodType<string, z.ZodTypeDef, Period> =
+  openEnums.outboundSchema(Period);
 
 /** @internal */
 export const DisabledReasonCircuitBreaker$inboundSchema: z.ZodType<
   DisabledReasonCircuitBreaker,
   z.ZodTypeDef,
   unknown
-> = z.object({});
-
+> = z.object({
+  observedCount: z.number().int().optional(),
+  period: Period$inboundSchema.optional(),
+  threshold: z.number().int().optional(),
+  trippedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
+});
 /** @internal */
-export type DisabledReasonCircuitBreaker$Outbound = {};
+export type DisabledReasonCircuitBreaker$Outbound = {
+  observedCount?: number | undefined;
+  period?: string | undefined;
+  threshold?: number | undefined;
+  trippedAt?: string | undefined;
+};
 
 /** @internal */
 export const DisabledReasonCircuitBreaker$outboundSchema: z.ZodType<
   DisabledReasonCircuitBreaker$Outbound,
   z.ZodTypeDef,
   DisabledReasonCircuitBreaker
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DisabledReasonCircuitBreaker$ {
-  /** @deprecated use `DisabledReasonCircuitBreaker$inboundSchema` instead. */
-  export const inboundSchema = DisabledReasonCircuitBreaker$inboundSchema;
-  /** @deprecated use `DisabledReasonCircuitBreaker$outboundSchema` instead. */
-  export const outboundSchema = DisabledReasonCircuitBreaker$outboundSchema;
-  /** @deprecated use `DisabledReasonCircuitBreaker$Outbound` instead. */
-  export type Outbound = DisabledReasonCircuitBreaker$Outbound;
-}
+> = z.object({
+  observedCount: z.number().int().optional(),
+  period: Period$outboundSchema.optional(),
+  threshold: z.number().int().optional(),
+  trippedAt: z.date().transform(v => v.toISOString()).optional(),
+});
 
 export function disabledReasonCircuitBreakerToJSON(
   disabledReasonCircuitBreaker: DisabledReasonCircuitBreaker,
@@ -51,7 +95,6 @@ export function disabledReasonCircuitBreakerToJSON(
     ),
   );
 }
-
 export function disabledReasonCircuitBreakerFromJSON(
   jsonString: string,
 ): SafeParseResult<DisabledReasonCircuitBreaker, SDKValidationError> {

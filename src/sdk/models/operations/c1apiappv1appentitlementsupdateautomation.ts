@@ -39,26 +39,6 @@ export type C1ApiAppV1AppEntitlementsUpdateAutomationResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppEntitlementsUpdateAutomationRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementsUpdateAutomationRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    app_entitlement_id: z.nullable(z.string()),
-    AppEntitlementServiceUpdateAutomationRequest: shared
-      .AppEntitlementServiceUpdateAutomationRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "app_entitlement_id": "appEntitlementId",
-      "AppEntitlementServiceUpdateAutomationRequest":
-        "appEntitlementServiceUpdateAutomationRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppEntitlementsUpdateAutomationRequest$Outbound = {
   app_id: string | null;
   app_entitlement_id: string | null;
@@ -87,22 +67,6 @@ export const C1ApiAppV1AppEntitlementsUpdateAutomationRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsUpdateAutomationRequest$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsUpdateAutomationRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsUpdateAutomationRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsUpdateAutomationRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsUpdateAutomationRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsUpdateAutomationRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementsUpdateAutomationRequest$Outbound;
-}
-
 export function c1ApiAppV1AppEntitlementsUpdateAutomationRequestToJSON(
   c1ApiAppV1AppEntitlementsUpdateAutomationRequest:
     C1ApiAppV1AppEntitlementsUpdateAutomationRequest,
@@ -111,22 +75,6 @@ export function c1ApiAppV1AppEntitlementsUpdateAutomationRequestToJSON(
     C1ApiAppV1AppEntitlementsUpdateAutomationRequest$outboundSchema.parse(
       c1ApiAppV1AppEntitlementsUpdateAutomationRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppEntitlementsUpdateAutomationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppEntitlementsUpdateAutomationRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppEntitlementsUpdateAutomationRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiAppV1AppEntitlementsUpdateAutomationRequest' from JSON`,
   );
 }
 
@@ -151,67 +99,6 @@ export const C1ApiAppV1AppEntitlementsUpdateAutomationResponse$inboundSchema:
         "appEntitlementServiceUpdateAutomationResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppEntitlementsUpdateAutomationResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  AppEntitlementServiceUpdateAutomationResponse?:
-    | shared.AppEntitlementServiceUpdateAutomationResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppEntitlementsUpdateAutomationResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementsUpdateAutomationResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppEntitlementsUpdateAutomationResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    appEntitlementServiceUpdateAutomationResponse: shared
-      .AppEntitlementServiceUpdateAutomationResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      appEntitlementServiceUpdateAutomationResponse:
-        "AppEntitlementServiceUpdateAutomationResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsUpdateAutomationResponse$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsUpdateAutomationResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsUpdateAutomationResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsUpdateAutomationResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsUpdateAutomationResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsUpdateAutomationResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementsUpdateAutomationResponse$Outbound;
-}
-
-export function c1ApiAppV1AppEntitlementsUpdateAutomationResponseToJSON(
-  c1ApiAppV1AppEntitlementsUpdateAutomationResponse:
-    C1ApiAppV1AppEntitlementsUpdateAutomationResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppEntitlementsUpdateAutomationResponse$outboundSchema.parse(
-      c1ApiAppV1AppEntitlementsUpdateAutomationResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppEntitlementsUpdateAutomationResponseFromJSON(
   jsonString: string,

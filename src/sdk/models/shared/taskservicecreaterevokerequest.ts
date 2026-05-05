@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskExpandMask,
-  TaskExpandMask$inboundSchema,
   TaskExpandMask$Outbound,
   TaskExpandMask$outboundSchema,
 } from "./taskexpandmask.js";
@@ -41,20 +37,6 @@ export type TaskServiceCreateRevokeRequest = {
 };
 
 /** @internal */
-export const TaskServiceCreateRevokeRequest$inboundSchema: z.ZodType<
-  TaskServiceCreateRevokeRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appEntitlementId: z.string(),
-  appId: z.string(),
-  appUserId: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(TaskExpandMask$inboundSchema).optional(),
-  identityUserId: z.nullable(z.string()).optional(),
-});
-
-/** @internal */
 export type TaskServiceCreateRevokeRequest$Outbound = {
   appEntitlementId: string;
   appId: string;
@@ -78,19 +60,6 @@ export const TaskServiceCreateRevokeRequest$outboundSchema: z.ZodType<
   identityUserId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskServiceCreateRevokeRequest$ {
-  /** @deprecated use `TaskServiceCreateRevokeRequest$inboundSchema` instead. */
-  export const inboundSchema = TaskServiceCreateRevokeRequest$inboundSchema;
-  /** @deprecated use `TaskServiceCreateRevokeRequest$outboundSchema` instead. */
-  export const outboundSchema = TaskServiceCreateRevokeRequest$outboundSchema;
-  /** @deprecated use `TaskServiceCreateRevokeRequest$Outbound` instead. */
-  export type Outbound = TaskServiceCreateRevokeRequest$Outbound;
-}
-
 export function taskServiceCreateRevokeRequestToJSON(
   taskServiceCreateRevokeRequest: TaskServiceCreateRevokeRequest,
 ): string {
@@ -98,15 +67,5 @@ export function taskServiceCreateRevokeRequestToJSON(
     TaskServiceCreateRevokeRequest$outboundSchema.parse(
       taskServiceCreateRevokeRequest,
     ),
-  );
-}
-
-export function taskServiceCreateRevokeRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskServiceCreateRevokeRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskServiceCreateRevokeRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskServiceCreateRevokeRequest' from JSON`,
   );
 }

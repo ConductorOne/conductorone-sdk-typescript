@@ -17,7 +17,7 @@ export class PersonalClient extends ClientSDK {
    * NOTE: Only shows personal clients for the current user.
    *
    * @remarks
-   * Invokes the c1.api.iam.v1.PersonalClientService.List method.
+   * List returns all personal client credentials owned by the calling user.
    */
   async list(
     options?: RequestOptions,
@@ -49,7 +49,7 @@ export class PersonalClient extends ClientSDK {
    * Delete
    *
    * @remarks
-   * Invokes the c1.api.iam.v1.PersonalClientService.Delete method.
+   * Delete a personal client credential, revoking it and preventing further API access.
    */
   async delete(
     request: operations.C1ApiIamV1PersonalClientServiceDeleteRequest,
@@ -66,7 +66,7 @@ export class PersonalClient extends ClientSDK {
    * Get
    *
    * @remarks
-   * Invokes the c1.api.iam.v1.PersonalClientService.Get method.
+   * Get retrieves a single personal client credential by its ID.
    */
   async get(
     request: operations.C1ApiIamV1PersonalClientServiceGetRequest,
@@ -83,7 +83,7 @@ export class PersonalClient extends ClientSDK {
    * Update
    *
    * @remarks
-   * Invokes the c1.api.iam.v1.PersonalClientService.Update method.
+   * Update modifies an existing personal client credential. Use the update mask to specify which fields to change.
    */
   async update(
     request: operations.C1ApiIamV1PersonalClientServiceUpdateRequest,

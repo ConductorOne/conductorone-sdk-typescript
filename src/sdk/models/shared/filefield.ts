@@ -20,9 +20,6 @@ import {
  *
  * This message contains a oneof named view. Only a single field of the following list may be set at a time:
  *   - fileInputField
- *
- * This message contains a oneof named _max_file_size. Only a single field of the following list may be set at a time:
- *   - maxFileSize
  */
 export type FileField = {
   /**
@@ -32,10 +29,6 @@ export type FileField = {
   fileInputField?: FileInputField | null | undefined;
   /**
    * The maxFileSize field.
-   *
-   * @remarks
-   * This field is part of the `_max_file_size` oneof.
-   * See the documentation for `c1.api.form.v1.FileField` for more details.
    */
   maxFileSize?: number | null | undefined;
 };
@@ -51,7 +44,6 @@ export const FileField$inboundSchema: z.ZodType<
   maxFileSize: z.nullable(z.string().transform(v => parseInt(v, 10)))
     .optional(),
 });
-
 /** @internal */
 export type FileField$Outbound = {
   acceptedFileTypes?: Array<string> | null | undefined;
@@ -70,23 +62,9 @@ export const FileField$outboundSchema: z.ZodType<
   maxFileSize: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileField$ {
-  /** @deprecated use `FileField$inboundSchema` instead. */
-  export const inboundSchema = FileField$inboundSchema;
-  /** @deprecated use `FileField$outboundSchema` instead. */
-  export const outboundSchema = FileField$outboundSchema;
-  /** @deprecated use `FileField$Outbound` instead. */
-  export type Outbound = FileField$Outbound;
-}
-
 export function fileFieldToJSON(fileField: FileField): string {
   return JSON.stringify(FileField$outboundSchema.parse(fileField));
 }
-
 export function fileFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<FileField, SDKValidationError> {

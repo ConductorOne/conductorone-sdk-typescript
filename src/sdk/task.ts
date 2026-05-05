@@ -33,7 +33,7 @@ export class Task extends ClientSDK {
    * Create Offboarding Task
    *
    * @remarks
-   * Invokes the c1.api.task.v1.TaskService.CreateOffboardingTask method.
+   * Create an offboarding task to remove a user's access across applications.
    */
   async createOffboardingTask(
     request?: shared.TaskServiceCreateOffboardingRequest | undefined,

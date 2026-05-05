@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AttributeValue,
   AttributeValue$inboundSchema,
-  AttributeValue$Outbound,
-  AttributeValue$outboundSchema,
 } from "./attributevalue.js";
 
 /**
@@ -40,45 +38,6 @@ export const ListAttributeValuesResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(AttributeValue$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ListAttributeValuesResponse$Outbound = {
-  list?: Array<AttributeValue$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ListAttributeValuesResponse$outboundSchema: z.ZodType<
-  ListAttributeValuesResponse$Outbound,
-  z.ZodTypeDef,
-  ListAttributeValuesResponse
-> = z.object({
-  list: z.nullable(z.array(AttributeValue$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAttributeValuesResponse$ {
-  /** @deprecated use `ListAttributeValuesResponse$inboundSchema` instead. */
-  export const inboundSchema = ListAttributeValuesResponse$inboundSchema;
-  /** @deprecated use `ListAttributeValuesResponse$outboundSchema` instead. */
-  export const outboundSchema = ListAttributeValuesResponse$outboundSchema;
-  /** @deprecated use `ListAttributeValuesResponse$Outbound` instead. */
-  export type Outbound = ListAttributeValuesResponse$Outbound;
-}
-
-export function listAttributeValuesResponseToJSON(
-  listAttributeValuesResponse: ListAttributeValuesResponse,
-): string {
-  return JSON.stringify(
-    ListAttributeValuesResponse$outboundSchema.parse(
-      listAttributeValuesResponse,
-    ),
-  );
-}
 
 export function listAttributeValuesResponseFromJSON(
   jsonString: string,

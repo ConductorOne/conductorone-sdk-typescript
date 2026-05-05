@@ -4,6 +4,7 @@
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -28,7 +29,7 @@ import { Result } from "../sdk/types/fp.js";
  * Set Expiring User Delegation Binding By Admin
  *
  * @remarks
- * Invokes the c1.api.user.v1.UserService.SetExpiringUserDelegationBindingByAdmin method.
+ * Set or update an expiring delegation binding for a user, allowing an admin to designate a temporary delegate.
  */
 export function userSetExpiringUserDelegationBindingByAdmin(
   client: ConductoroneSDKTypescriptCore,
@@ -100,7 +101,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/api/v1/users/{user_id}/set-delegation-by-admin")(
     pathParams,
   );
@@ -146,7 +146,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

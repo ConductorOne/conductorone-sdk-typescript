@@ -29,7 +29,6 @@ export const DeniedAction$inboundSchema: z.ZodType<
   ).optional(),
   userId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type DeniedAction$Outbound = {
   deniedAt?: string | null | undefined;
@@ -46,23 +45,9 @@ export const DeniedAction$outboundSchema: z.ZodType<
   userId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeniedAction$ {
-  /** @deprecated use `DeniedAction$inboundSchema` instead. */
-  export const inboundSchema = DeniedAction$inboundSchema;
-  /** @deprecated use `DeniedAction$outboundSchema` instead. */
-  export const outboundSchema = DeniedAction$outboundSchema;
-  /** @deprecated use `DeniedAction$Outbound` instead. */
-  export type Outbound = DeniedAction$Outbound;
-}
-
 export function deniedActionToJSON(deniedAction: DeniedAction): string {
   return JSON.stringify(DeniedAction$outboundSchema.parse(deniedAction));
 }
-
 export function deniedActionFromJSON(
   jsonString: string,
 ): SafeParseResult<DeniedAction, SDKValidationError> {

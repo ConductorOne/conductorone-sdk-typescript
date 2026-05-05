@@ -37,7 +37,6 @@ export const ProvisionTarget$inboundSchema: z.ZodType<
   appUserId: z.nullable(z.string()).optional(),
   grantDuration: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type ProvisionTarget$Outbound = {
   appEntitlementId?: string | null | undefined;
@@ -58,25 +57,11 @@ export const ProvisionTarget$outboundSchema: z.ZodType<
   grantDuration: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ProvisionTarget$ {
-  /** @deprecated use `ProvisionTarget$inboundSchema` instead. */
-  export const inboundSchema = ProvisionTarget$inboundSchema;
-  /** @deprecated use `ProvisionTarget$outboundSchema` instead. */
-  export const outboundSchema = ProvisionTarget$outboundSchema;
-  /** @deprecated use `ProvisionTarget$Outbound` instead. */
-  export type Outbound = ProvisionTarget$Outbound;
-}
-
 export function provisionTargetToJSON(
   provisionTarget: ProvisionTarget,
 ): string {
   return JSON.stringify(ProvisionTarget$outboundSchema.parse(provisionTarget));
 }
-
 export function provisionTargetFromJSON(
   jsonString: string,
 ): SafeParseResult<ProvisionTarget, SDKValidationError> {

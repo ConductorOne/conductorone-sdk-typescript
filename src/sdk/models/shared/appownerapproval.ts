@@ -15,6 +15,10 @@ export type AppOwnerApproval = {
    * Configuration that allows a user to self approve if they are an app owner during this approval step.
    */
   allowSelfApproval?: boolean | null | undefined;
+  /**
+   * Configuration to require distinct approvers across approval steps of a rule.
+   */
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -24,11 +28,12 @@ export const AppOwnerApproval$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   allowSelfApproval: z.nullable(z.boolean()).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
 /** @internal */
 export type AppOwnerApproval$Outbound = {
   allowSelfApproval?: boolean | null | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -38,20 +43,8 @@ export const AppOwnerApproval$outboundSchema: z.ZodType<
   AppOwnerApproval
 > = z.object({
   allowSelfApproval: z.nullable(z.boolean()).optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppOwnerApproval$ {
-  /** @deprecated use `AppOwnerApproval$inboundSchema` instead. */
-  export const inboundSchema = AppOwnerApproval$inboundSchema;
-  /** @deprecated use `AppOwnerApproval$outboundSchema` instead. */
-  export const outboundSchema = AppOwnerApproval$outboundSchema;
-  /** @deprecated use `AppOwnerApproval$Outbound` instead. */
-  export type Outbound = AppOwnerApproval$Outbound;
-}
 
 export function appOwnerApprovalToJSON(
   appOwnerApproval: AppOwnerApproval,
@@ -60,7 +53,6 @@ export function appOwnerApprovalToJSON(
     AppOwnerApproval$outboundSchema.parse(appOwnerApproval),
   );
 }
-
 export function appOwnerApprovalFromJSON(
   jsonString: string,
 ): SafeParseResult<AppOwnerApproval, SDKValidationError> {

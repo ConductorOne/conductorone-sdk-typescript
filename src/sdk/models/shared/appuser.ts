@@ -4,22 +4,13 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  AppUserStatus,
-  AppUserStatus$inboundSchema,
-  AppUserStatus$Outbound,
-  AppUserStatus$outboundSchema,
-} from "./appuserstatus.js";
+import { AppUserStatus, AppUserStatus$inboundSchema } from "./appuserstatus.js";
 import {
   AppUserStatusInput,
-  AppUserStatusInput$inboundSchema,
   AppUserStatusInput$Outbound,
   AppUserStatusInput$outboundSchema,
 } from "./appuserstatusinput.js";
@@ -113,32 +104,13 @@ export const AppUserType$inboundSchema: z.ZodType<
   AppUserType,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(AppUserType),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(AppUserType);
 /** @internal */
 export const AppUserType$outboundSchema: z.ZodType<
-  AppUserType,
+  string,
   z.ZodTypeDef,
   AppUserType
-> = z.union([
-  z.nativeEnum(AppUserType),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUserType$ {
-  /** @deprecated use `AppUserType$inboundSchema` instead. */
-  export const inboundSchema = AppUserType$inboundSchema;
-  /** @deprecated use `AppUserType$outboundSchema` instead. */
-  export const outboundSchema = AppUserType$outboundSchema;
-}
+> = openEnums.outboundSchema(AppUserType);
 
 /** @internal */
 export const AppUser$inboundSchema: z.ZodType<AppUser, z.ZodTypeDef, unknown> =
@@ -167,67 +139,6 @@ export const AppUser$inboundSchema: z.ZodType<AppUser, z.ZodTypeDef, unknown> =
     usernames: z.nullable(z.array(z.string())).optional(),
   });
 
-/** @internal */
-export type AppUser$Outbound = {
-  appId?: string | null | undefined;
-  appUserType?: string | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  displayName?: string | null | undefined;
-  email?: string | null | undefined;
-  emails?: Array<string> | null | undefined;
-  employeeIds?: Array<string> | null | undefined;
-  id?: string | null | undefined;
-  identityUserId?: string | null | undefined;
-  isExternal?: boolean | null | undefined;
-  profile?: { [k: string]: any } | null | undefined;
-  status?: AppUserStatus$Outbound | null | undefined;
-  updatedAt?: string | null | undefined;
-  username?: string | null | undefined;
-  usernames?: Array<string> | null | undefined;
-};
-
-/** @internal */
-export const AppUser$outboundSchema: z.ZodType<
-  AppUser$Outbound,
-  z.ZodTypeDef,
-  AppUser
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  appUserType: z.nullable(AppUserType$outboundSchema).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  email: z.nullable(z.string()).optional(),
-  emails: z.nullable(z.array(z.string())).optional(),
-  employeeIds: z.nullable(z.array(z.string())).optional(),
-  id: z.nullable(z.string()).optional(),
-  identityUserId: z.nullable(z.string()).optional(),
-  isExternal: z.nullable(z.boolean()).optional(),
-  profile: z.nullable(z.record(z.any())).optional(),
-  status: z.nullable(AppUserStatus$outboundSchema).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  username: z.nullable(z.string()).optional(),
-  usernames: z.nullable(z.array(z.string())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUser$ {
-  /** @deprecated use `AppUser$inboundSchema` instead. */
-  export const inboundSchema = AppUser$inboundSchema;
-  /** @deprecated use `AppUser$outboundSchema` instead. */
-  export const outboundSchema = AppUser$outboundSchema;
-  /** @deprecated use `AppUser$Outbound` instead. */
-  export type Outbound = AppUser$Outbound;
-}
-
-export function appUserToJSON(appUser: AppUser): string {
-  return JSON.stringify(AppUser$outboundSchema.parse(appUser));
-}
-
 export function appUserFromJSON(
   jsonString: string,
 ): SafeParseResult<AppUser, SDKValidationError> {
@@ -237,26 +148,6 @@ export function appUserFromJSON(
     `Failed to parse 'AppUser' from JSON`,
   );
 }
-
-/** @internal */
-export const AppUserInput$inboundSchema: z.ZodType<
-  AppUserInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appUserType: z.nullable(AppUserType$inboundSchema).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  profile: z.nullable(z.record(z.any())).optional(),
-  status: z.nullable(AppUserStatusInput$inboundSchema).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
 
 /** @internal */
 export type AppUserInput$Outbound = {
@@ -282,29 +173,6 @@ export const AppUserInput$outboundSchema: z.ZodType<
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUserInput$ {
-  /** @deprecated use `AppUserInput$inboundSchema` instead. */
-  export const inboundSchema = AppUserInput$inboundSchema;
-  /** @deprecated use `AppUserInput$outboundSchema` instead. */
-  export const outboundSchema = AppUserInput$outboundSchema;
-  /** @deprecated use `AppUserInput$Outbound` instead. */
-  export type Outbound = AppUserInput$Outbound;
-}
-
 export function appUserInputToJSON(appUserInput: AppUserInput): string {
   return JSON.stringify(AppUserInput$outboundSchema.parse(appUserInput));
-}
-
-export function appUserInputFromJSON(
-  jsonString: string,
-): SafeParseResult<AppUserInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AppUserInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AppUserInput' from JSON`,
-  );
 }

@@ -1,6 +1,6 @@
 # RequestSchemaServiceFindBindingForAppEntitlementResponse
 
-The RequestSchemaServiceFindBindingForAppEntitlementResponse message.
+The response message containing the binding for the specified app entitlement.
 
 ## Example Usage
 
@@ -12,7 +12,7 @@ let value: RequestSchemaServiceFindBindingForAppEntitlementResponse = {};
 
 ## Fields
 
-| Field                                                                       | Type                                                                        | Required                                                                    | Description                                                                 |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `entitlementRef`                                                            | [shared.AppEntitlementRef](../../../sdk/models/shared/appentitlementref.md) | :heavy_minus_sign:                                                          | N/A                                                                         |
-| `requestSchemaId`                                                           | *string*                                                                    | :heavy_minus_sign:                                                          | The requestSchemaId field.                                                  |
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `entitlementRef`                                                               | [shared.AppEntitlementRef](../../../sdk/models/shared/appentitlementref.md)    | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `requestSchemaId`                                                              | *string*                                                                       | :heavy_minus_sign:                                                             | The unique identifier of the request schema bound to this entitlement, if any. |

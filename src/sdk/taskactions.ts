@@ -24,7 +24,7 @@ export class TaskActions extends ClientSDK {
    * Approve
    *
    * @remarks
-   * Invokes the c1.api.task.v1.TaskActionsService.Approve method.
+   * Approve the specified policy step on a task.
    */
   async approve(
     request: operations.C1ApiTaskV1TaskActionsServiceApproveRequest,
@@ -41,7 +41,7 @@ export class TaskActions extends ClientSDK {
    * Approve With Step Up
    *
    * @remarks
-   * Invokes the c1.api.task.v1.TaskActionsService.ApproveWithStepUp method.
+   * Approve a task that requires step-up authentication. If a verified step-up transaction ID is provided, the approval is processed immediately. Otherwise, a redirect URL is returned for the caller to complete authentication first.
    */
   async approveWithStepUp(
     request: operations.C1ApiTaskV1TaskActionsServiceApproveWithStepUpRequest,
@@ -60,7 +60,7 @@ export class TaskActions extends ClientSDK {
    * Close
    *
    * @remarks
-   * Invokes the c1.api.task.v1.TaskActionsService.Close method.
+   * Close a task, ending its workflow.
    */
   async close(
     request: operations.C1ApiTaskV1TaskActionsServiceCloseRequest,
@@ -77,7 +77,7 @@ export class TaskActions extends ClientSDK {
    * Comment
    *
    * @remarks
-   * Invokes the c1.api.task.v1.TaskActionsService.Comment method.
+   * Post a comment on a task without changing its state.
    */
   async comment(
     request: operations.C1ApiTaskV1TaskActionsServiceCommentRequest,
@@ -94,7 +94,7 @@ export class TaskActions extends ClientSDK {
    * Deny
    *
    * @remarks
-   * Invokes the c1.api.task.v1.TaskActionsService.Deny method.
+   * Deny the specified policy step on a task. In multi-step policies, this may route to fallback steps rather than finalizing the task outcome.
    */
   async deny(
     request: operations.C1ApiTaskV1TaskActionsServiceDenyRequest,
@@ -111,7 +111,7 @@ export class TaskActions extends ClientSDK {
    * Escalate To Emergency Access
    *
    * @remarks
-   * Invokes the c1.api.task.v1.TaskActionsService.EscalateToEmergencyAccess method.
+   * Escalate a grant task to use the emergency access policy, bypassing the normal approval flow. Only valid for grant tasks.
    */
   async escalateToEmergencyAccess(
     request:
@@ -131,7 +131,7 @@ export class TaskActions extends ClientSDK {
    * Process Now
    *
    * @remarks
-   * Invokes the c1.api.task.v1.TaskActionsService.ProcessNow method.
+   * Trigger immediate processing of a task, bypassing any scheduled wait. For tasks linked to an external system, this also attempts to sync the external state.
    */
   async processNow(
     request: operations.C1ApiTaskV1TaskActionsServiceProcessNowRequest,
@@ -148,7 +148,7 @@ export class TaskActions extends ClientSDK {
    * Reassign
    *
    * @remarks
-   * Invokes the c1.api.task.v1.TaskActionsService.Reassign method.
+   * Reassign a task's current policy step to a different set of users. The target step must be an approval, provision, or form step.
    */
   async reassign(
     request: operations.C1ApiTaskV1TaskActionsServiceReassignRequest,
@@ -165,7 +165,7 @@ export class TaskActions extends ClientSDK {
    * Hard Reset
    *
    * @remarks
-   * Invokes the c1.api.task.v1.TaskActionsService.HardReset method.
+   * Reset a task and recalculate its policy from scratch. Unlike Restart, this re-evaluates which policy applies to the task.
    */
   async hardReset(
     request: operations.C1ApiTaskV1TaskActionsServiceHardResetRequest,
@@ -182,7 +182,7 @@ export class TaskActions extends ClientSDK {
    * Restart
    *
    * @remarks
-   * Invokes the c1.api.task.v1.TaskActionsService.Restart method.
+   * Restart a task, returning it to the beginning of its current policy workflow.
    */
   async restart(
     request: operations.C1ApiTaskV1TaskActionsServiceRestartRequest,
@@ -199,7 +199,7 @@ export class TaskActions extends ClientSDK {
    * Skip Step
    *
    * @remarks
-   * Invokes the c1.api.task.v1.TaskActionsService.SkipStep method.
+   * Skip a specific policy step in a task, advancing the task to the next step in the workflow.
    */
   async skipStep(
     request: operations.C1ApiTaskV1TaskActionsServiceSkipStepRequest,
@@ -216,7 +216,7 @@ export class TaskActions extends ClientSDK {
    * Update Grant Duration
    *
    * @remarks
-   * Invokes the c1.api.task.v1.TaskActionsService.UpdateGrantDuration method.
+   * Update the grant duration for a task. Only applies to grant tasks with a single entitlement that are not in a provision step. The new duration must not exceed the entitlement's maximum allowed provision time.
    */
   async updateGrantDuration(
     request: operations.C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest,
@@ -235,7 +235,7 @@ export class TaskActions extends ClientSDK {
    * Update Request Data
    *
    * @remarks
-   * Invokes the c1.api.task.v1.TaskActionsService.UpdateRequestData method.
+   * Update the request data on a task that is currently in a form step. The submitted data is validated against the form schema before being applied.
    */
   async updateRequestData(
     request: operations.C1ApiTaskV1TaskActionsServiceUpdateRequestDataRequest,

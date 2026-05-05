@@ -40,23 +40,6 @@ export type C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRes
   };
 
 /** @internal */
-export const C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.nullable(z.string()),
-    DeleteComplianceFrameworkAttributeValueRequest: shared
-      .DeleteComplianceFrameworkAttributeValueRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "DeleteComplianceFrameworkAttributeValueRequest":
-        "deleteComplianceFrameworkAttributeValueRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest$Outbound =
   {
     id: string | null;
@@ -82,22 +65,6 @@ export const C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRe
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest$ {
-  /** @deprecated use `C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest$inboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest$outboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest$Outbound;
-}
-
 export function c1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequestToJSON(
   c1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest:
     C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest,
@@ -107,21 +74,6 @@ export function c1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValu
       .parse(
         c1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest,
       ),
-  );
-}
-
-export function c1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest' from JSON`,
   );
 }
 
@@ -146,70 +98,6 @@ export const C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRe
         "deleteComplianceFrameworkAttributeValueResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    DeleteComplianceFrameworkAttributeValueResponse?:
-      | shared.DeleteComplianceFrameworkAttributeValueResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    deleteComplianceFrameworkAttributeValueResponse: shared
-      .DeleteComplianceFrameworkAttributeValueResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      deleteComplianceFrameworkAttributeValueResponse:
-        "DeleteComplianceFrameworkAttributeValueResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueResponse$ {
-  /** @deprecated use `C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueResponse$inboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueResponse$outboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueResponse$Outbound;
-}
-
-export function c1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueResponseToJSON(
-  c1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueResponse:
-    C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueResponse$outboundSchema
-      .parse(
-        c1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueResponse,
-      ),
-  );
-}
 
 export function c1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueResponseFromJSON(
   jsonString: string,

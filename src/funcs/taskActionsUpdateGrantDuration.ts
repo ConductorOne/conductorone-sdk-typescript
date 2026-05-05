@@ -4,6 +4,7 @@
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -28,7 +29,7 @@ import { Result } from "../sdk/types/fp.js";
  * Update Grant Duration
  *
  * @remarks
- * Invokes the c1.api.task.v1.TaskActionsService.UpdateGrantDuration method.
+ * Update the grant duration for a task. Only applies to grant tasks with a single entitlement that are not in a provision step. The new duration must not exceed the entitlement's maximum allowed provision time.
  */
 export function taskActionsUpdateGrantDuration(
   client: ConductoroneSDKTypescriptCore,
@@ -98,7 +99,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/api/v1/tasks/{task_id}/action/update-grant-duration",
   )(pathParams);
@@ -143,7 +143,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

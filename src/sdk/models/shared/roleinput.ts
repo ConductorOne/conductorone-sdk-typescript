@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Role is a role that can be assigned to a user in ConductorOne.
@@ -27,26 +24,6 @@ export type RoleInput = {
   serviceRoles?: Array<string> | null | undefined;
   updatedAt?: Date | null | undefined;
 };
-
-/** @internal */
-export const RoleInput$inboundSchema: z.ZodType<
-  RoleInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  permissions: z.nullable(z.array(z.string())).optional(),
-  serviceRoles: z.nullable(z.array(z.string())).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
 
 /** @internal */
 export type RoleInput$Outbound = {
@@ -72,29 +49,6 @@ export const RoleInput$outboundSchema: z.ZodType<
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RoleInput$ {
-  /** @deprecated use `RoleInput$inboundSchema` instead. */
-  export const inboundSchema = RoleInput$inboundSchema;
-  /** @deprecated use `RoleInput$outboundSchema` instead. */
-  export const outboundSchema = RoleInput$outboundSchema;
-  /** @deprecated use `RoleInput$Outbound` instead. */
-  export type Outbound = RoleInput$Outbound;
-}
-
 export function roleInputToJSON(roleInput: RoleInput): string {
   return JSON.stringify(RoleInput$outboundSchema.parse(roleInput));
-}
-
-export function roleInputFromJSON(
-  jsonString: string,
-): SafeParseResult<RoleInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RoleInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RoleInput' from JSON`,
-  );
 }

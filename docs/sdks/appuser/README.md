@@ -1,5 +1,4 @@
 # AppUser
-(*appUser*)
 
 ## Overview
 
@@ -13,7 +12,7 @@
 
 ## list
 
-Invokes the c1.api.app.v1.AppUserService.List method.
+List app user accounts within a specific app, with pagination support.
 
 ### Example Usage
 
@@ -92,7 +91,7 @@ run();
 
 ## listAppUserCredentials
 
-Invokes the c1.api.app.v1.AppUserService.ListAppUserCredentials method.
+List credentials associated with a specific app user account.
 
 ### Example Usage
 
@@ -173,7 +172,7 @@ run();
 
 ## listAppUsersForUser
 
-Invokes the c1.api.app.v1.AppUserService.ListAppUsersForUser method.
+List app user accounts within a specific app that are correlated to a given C1 user.
 
 ### Example Usage
 

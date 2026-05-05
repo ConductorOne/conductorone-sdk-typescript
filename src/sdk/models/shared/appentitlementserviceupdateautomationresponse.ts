@@ -10,8 +10,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementAutomation,
   AppEntitlementAutomation$inboundSchema,
-  AppEntitlementAutomation$Outbound,
-  AppEntitlementAutomation$outboundSchema,
 } from "./appentitlementautomation.js";
 
 /**
@@ -35,56 +33,6 @@ export const AppEntitlementServiceUpdateAutomationResponse$inboundSchema:
       "AppEntitlementAutomation": "appEntitlementAutomation",
     });
   });
-
-/** @internal */
-export type AppEntitlementServiceUpdateAutomationResponse$Outbound = {
-  AppEntitlementAutomation?:
-    | AppEntitlementAutomation$Outbound
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const AppEntitlementServiceUpdateAutomationResponse$outboundSchema:
-  z.ZodType<
-    AppEntitlementServiceUpdateAutomationResponse$Outbound,
-    z.ZodTypeDef,
-    AppEntitlementServiceUpdateAutomationResponse
-  > = z.object({
-    appEntitlementAutomation: z.nullable(
-      AppEntitlementAutomation$outboundSchema,
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appEntitlementAutomation: "AppEntitlementAutomation",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementServiceUpdateAutomationResponse$ {
-  /** @deprecated use `AppEntitlementServiceUpdateAutomationResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    AppEntitlementServiceUpdateAutomationResponse$inboundSchema;
-  /** @deprecated use `AppEntitlementServiceUpdateAutomationResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    AppEntitlementServiceUpdateAutomationResponse$outboundSchema;
-  /** @deprecated use `AppEntitlementServiceUpdateAutomationResponse$Outbound` instead. */
-  export type Outbound = AppEntitlementServiceUpdateAutomationResponse$Outbound;
-}
-
-export function appEntitlementServiceUpdateAutomationResponseToJSON(
-  appEntitlementServiceUpdateAutomationResponse:
-    AppEntitlementServiceUpdateAutomationResponse,
-): string {
-  return JSON.stringify(
-    AppEntitlementServiceUpdateAutomationResponse$outboundSchema.parse(
-      appEntitlementServiceUpdateAutomationResponse,
-    ),
-  );
-}
 
 export function appEntitlementServiceUpdateAutomationResponseFromJSON(
   jsonString: string,

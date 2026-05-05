@@ -3,9 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AppEntitlementReference,
+  AppEntitlementReference$Outbound,
+  AppEntitlementReference$outboundSchema,
+} from "./appentitlementreference.js";
 
 /**
  * The self approval object describes the configuration of a policy step that needs to be approved by the target of the request.
@@ -16,25 +18,25 @@ export type SelfApprovalInput = {
    */
   fallback?: boolean | null | undefined;
   /**
+   * Configuration to specify which groups to fallback to if fallback is enabled and the identity user of the target app user cannot be determined.
+   */
+  fallbackGroupIds?: Array<AppEntitlementReference> | null | undefined;
+  /**
    * Configuration to specific which users to fallback to if fallback is enabled and the identity user of the target app user cannot be determined.
    */
   fallbackUserIds?: Array<string> | null | undefined;
+  /**
+   * Configuration to enable fallback for group fallback.
+   */
+  isGroupFallbackEnabled?: boolean | undefined;
 };
-
-/** @internal */
-export const SelfApprovalInput$inboundSchema: z.ZodType<
-  SelfApprovalInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  fallback: z.nullable(z.boolean()).optional(),
-  fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type SelfApprovalInput$Outbound = {
   fallback?: boolean | null | undefined;
+  fallbackGroupIds?: Array<AppEntitlementReference$Outbound> | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
+  isGroupFallbackEnabled?: boolean | undefined;
 };
 
 /** @internal */
@@ -44,36 +46,16 @@ export const SelfApprovalInput$outboundSchema: z.ZodType<
   SelfApprovalInput
 > = z.object({
   fallback: z.nullable(z.boolean()).optional(),
+  fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$outboundSchema))
+    .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  isGroupFallbackEnabled: z.boolean().optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SelfApprovalInput$ {
-  /** @deprecated use `SelfApprovalInput$inboundSchema` instead. */
-  export const inboundSchema = SelfApprovalInput$inboundSchema;
-  /** @deprecated use `SelfApprovalInput$outboundSchema` instead. */
-  export const outboundSchema = SelfApprovalInput$outboundSchema;
-  /** @deprecated use `SelfApprovalInput$Outbound` instead. */
-  export type Outbound = SelfApprovalInput$Outbound;
-}
 
 export function selfApprovalInputToJSON(
   selfApprovalInput: SelfApprovalInput,
 ): string {
   return JSON.stringify(
     SelfApprovalInput$outboundSchema.parse(selfApprovalInput),
-  );
-}
-
-export function selfApprovalInputFromJSON(
-  jsonString: string,
-): SafeParseResult<SelfApprovalInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SelfApprovalInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SelfApprovalInput' from JSON`,
   );
 }

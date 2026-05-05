@@ -34,7 +34,6 @@ export const ReassignedAction$inboundSchema: z.ZodType<
   ).optional(),
   userId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type ReassignedAction$Outbound = {
   newPolicyStepId?: string | null | undefined;
@@ -53,19 +52,6 @@ export const ReassignedAction$outboundSchema: z.ZodType<
   userId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ReassignedAction$ {
-  /** @deprecated use `ReassignedAction$inboundSchema` instead. */
-  export const inboundSchema = ReassignedAction$inboundSchema;
-  /** @deprecated use `ReassignedAction$outboundSchema` instead. */
-  export const outboundSchema = ReassignedAction$outboundSchema;
-  /** @deprecated use `ReassignedAction$Outbound` instead. */
-  export type Outbound = ReassignedAction$Outbound;
-}
-
 export function reassignedActionToJSON(
   reassignedAction: ReassignedAction,
 ): string {
@@ -73,7 +59,6 @@ export function reassignedActionToJSON(
     ReassignedAction$outboundSchema.parse(reassignedAction),
   );
 }
-
 export function reassignedActionFromJSON(
   jsonString: string,
 ): SafeParseResult<ReassignedAction, SDKValidationError> {

@@ -12,6 +12,6 @@ let value: UpdateStepUpProviderSecretRequest = {};
 
 ## Fields
 
-| Field                   | Type                    | Required                | Description             |
-| ----------------------- | ----------------------- | ----------------------- | ----------------------- |
-| `clientSecret`          | *string*                | :heavy_minus_sign:      | The clientSecret field. |
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `clientSecret`                                                         | *string*                                                               | :heavy_minus_sign:                                                     | The new OAuth2 client secret. Write-only; never returned in responses. |

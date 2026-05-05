@@ -12,8 +12,8 @@ let value: SearchAutomationTemplateVersionsRequest = {};
 
 ## Fields
 
-| Field                           | Type                            | Required                        | Description                     |
-| ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
-| `automationTemplateId`          | *string*                        | :heavy_minus_sign:              | The automationTemplateId field. |
-| `pageSize`                      | *number*                        | :heavy_minus_sign:              | The pageSize field.             |
-| `pageToken`                     | *string*                        | :heavy_minus_sign:              | The pageToken field.            |
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `automationTemplateId`                                                     | *string*                                                                   | :heavy_minus_sign:                                                         | The automation template whose version history to search.                   |
+| `pageSize`                                                                 | *number*                                                                   | :heavy_minus_sign:                                                         | Maximum number of results to return per page.                              |
+| `pageToken`                                                                | *string*                                                                   | :heavy_minus_sign:                                                         | Pagination token from a previous SearchAutomationTemplateVersionsResponse. |

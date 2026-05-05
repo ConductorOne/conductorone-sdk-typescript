@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * DirectoryServiceDeleteRequest is the request message for deleting a directory. It uses URL values for input.
  */
 export type DirectoryServiceDeleteRequest = {};
-
-/** @internal */
-export const DirectoryServiceDeleteRequest$inboundSchema: z.ZodType<
-  DirectoryServiceDeleteRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type DirectoryServiceDeleteRequest$Outbound = {};
@@ -29,19 +19,6 @@ export const DirectoryServiceDeleteRequest$outboundSchema: z.ZodType<
   DirectoryServiceDeleteRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DirectoryServiceDeleteRequest$ {
-  /** @deprecated use `DirectoryServiceDeleteRequest$inboundSchema` instead. */
-  export const inboundSchema = DirectoryServiceDeleteRequest$inboundSchema;
-  /** @deprecated use `DirectoryServiceDeleteRequest$outboundSchema` instead. */
-  export const outboundSchema = DirectoryServiceDeleteRequest$outboundSchema;
-  /** @deprecated use `DirectoryServiceDeleteRequest$Outbound` instead. */
-  export type Outbound = DirectoryServiceDeleteRequest$Outbound;
-}
-
 export function directoryServiceDeleteRequestToJSON(
   directoryServiceDeleteRequest: DirectoryServiceDeleteRequest,
 ): string {
@@ -49,15 +26,5 @@ export function directoryServiceDeleteRequestToJSON(
     DirectoryServiceDeleteRequest$outboundSchema.parse(
       directoryServiceDeleteRequest,
     ),
-  );
-}
-
-export function directoryServiceDeleteRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DirectoryServiceDeleteRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DirectoryServiceDeleteRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DirectoryServiceDeleteRequest' from JSON`,
   );
 }

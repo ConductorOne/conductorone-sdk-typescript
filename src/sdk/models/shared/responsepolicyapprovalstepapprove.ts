@@ -25,7 +25,6 @@ export const ResponsePolicyApprovalStepApprove$inboundSchema: z.ZodType<
 > = z.object({
   comment: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type ResponsePolicyApprovalStepApprove$Outbound = {
   comment?: string | null | undefined;
@@ -40,20 +39,6 @@ export const ResponsePolicyApprovalStepApprove$outboundSchema: z.ZodType<
   comment: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponsePolicyApprovalStepApprove$ {
-  /** @deprecated use `ResponsePolicyApprovalStepApprove$inboundSchema` instead. */
-  export const inboundSchema = ResponsePolicyApprovalStepApprove$inboundSchema;
-  /** @deprecated use `ResponsePolicyApprovalStepApprove$outboundSchema` instead. */
-  export const outboundSchema =
-    ResponsePolicyApprovalStepApprove$outboundSchema;
-  /** @deprecated use `ResponsePolicyApprovalStepApprove$Outbound` instead. */
-  export type Outbound = ResponsePolicyApprovalStepApprove$Outbound;
-}
-
 export function responsePolicyApprovalStepApproveToJSON(
   responsePolicyApprovalStepApprove: ResponsePolicyApprovalStepApprove,
 ): string {
@@ -63,7 +48,6 @@ export function responsePolicyApprovalStepApproveToJSON(
     ),
   );
 }
-
 export function responsePolicyApprovalStepApproveFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponsePolicyApprovalStepApprove, SDKValidationError> {

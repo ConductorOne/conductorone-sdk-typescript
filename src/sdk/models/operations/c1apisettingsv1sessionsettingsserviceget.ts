@@ -49,66 +49,6 @@ export const C1ApiSettingsV1SessionSettingsServiceGetResponse$inboundSchema:
     });
   });
 
-/** @internal */
-export type C1ApiSettingsV1SessionSettingsServiceGetResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  GetSessionSettingsResponse?:
-    | shared.GetSessionSettingsResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiSettingsV1SessionSettingsServiceGetResponse$outboundSchema:
-  z.ZodType<
-    C1ApiSettingsV1SessionSettingsServiceGetResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiSettingsV1SessionSettingsServiceGetResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    getSessionSettingsResponse: shared.GetSessionSettingsResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      getSessionSettingsResponse: "GetSessionSettingsResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiSettingsV1SessionSettingsServiceGetResponse$ {
-  /** @deprecated use `C1ApiSettingsV1SessionSettingsServiceGetResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiSettingsV1SessionSettingsServiceGetResponse$inboundSchema;
-  /** @deprecated use `C1ApiSettingsV1SessionSettingsServiceGetResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiSettingsV1SessionSettingsServiceGetResponse$outboundSchema;
-  /** @deprecated use `C1ApiSettingsV1SessionSettingsServiceGetResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiSettingsV1SessionSettingsServiceGetResponse$Outbound;
-}
-
-export function c1ApiSettingsV1SessionSettingsServiceGetResponseToJSON(
-  c1ApiSettingsV1SessionSettingsServiceGetResponse:
-    C1ApiSettingsV1SessionSettingsServiceGetResponse,
-): string {
-  return JSON.stringify(
-    C1ApiSettingsV1SessionSettingsServiceGetResponse$outboundSchema.parse(
-      c1ApiSettingsV1SessionSettingsServiceGetResponse,
-    ),
-  );
-}
-
 export function c1ApiSettingsV1SessionSettingsServiceGetResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

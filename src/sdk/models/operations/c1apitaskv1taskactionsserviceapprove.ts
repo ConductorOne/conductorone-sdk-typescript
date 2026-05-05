@@ -38,23 +38,6 @@ export type C1ApiTaskV1TaskActionsServiceApproveResponse = {
 };
 
 /** @internal */
-export const C1ApiTaskV1TaskActionsServiceApproveRequest$inboundSchema:
-  z.ZodType<
-    C1ApiTaskV1TaskActionsServiceApproveRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    task_id: z.string(),
-    TaskActionsServiceApproveRequest: shared
-      .TaskActionsServiceApproveRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "task_id": "taskId",
-      "TaskActionsServiceApproveRequest": "taskActionsServiceApproveRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiTaskV1TaskActionsServiceApproveRequest$Outbound = {
   task_id: string;
   TaskActionsServiceApproveRequest?:
@@ -79,21 +62,6 @@ export const C1ApiTaskV1TaskActionsServiceApproveRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceApproveRequest$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceApproveRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceApproveRequest$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceApproveRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceApproveRequest$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceApproveRequest$Outbound` instead. */
-  export type Outbound = C1ApiTaskV1TaskActionsServiceApproveRequest$Outbound;
-}
-
 export function c1ApiTaskV1TaskActionsServiceApproveRequestToJSON(
   c1ApiTaskV1TaskActionsServiceApproveRequest:
     C1ApiTaskV1TaskActionsServiceApproveRequest,
@@ -102,22 +70,6 @@ export function c1ApiTaskV1TaskActionsServiceApproveRequestToJSON(
     C1ApiTaskV1TaskActionsServiceApproveRequest$outboundSchema.parse(
       c1ApiTaskV1TaskActionsServiceApproveRequest,
     ),
-  );
-}
-
-export function c1ApiTaskV1TaskActionsServiceApproveRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiTaskV1TaskActionsServiceApproveRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiTaskV1TaskActionsServiceApproveRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiTaskV1TaskActionsServiceApproveRequest' from JSON`,
   );
 }
 
@@ -141,65 +93,6 @@ export const C1ApiTaskV1TaskActionsServiceApproveResponse$inboundSchema:
       "TaskActionsServiceApproveResponse": "taskActionsServiceApproveResponse",
     });
   });
-
-/** @internal */
-export type C1ApiTaskV1TaskActionsServiceApproveResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  TaskActionsServiceApproveResponse?:
-    | shared.TaskActionsServiceApproveResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiTaskV1TaskActionsServiceApproveResponse$outboundSchema:
-  z.ZodType<
-    C1ApiTaskV1TaskActionsServiceApproveResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiTaskV1TaskActionsServiceApproveResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    taskActionsServiceApproveResponse: shared
-      .TaskActionsServiceApproveResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      taskActionsServiceApproveResponse: "TaskActionsServiceApproveResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceApproveResponse$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceApproveResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceApproveResponse$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceApproveResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceApproveResponse$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceApproveResponse$Outbound` instead. */
-  export type Outbound = C1ApiTaskV1TaskActionsServiceApproveResponse$Outbound;
-}
-
-export function c1ApiTaskV1TaskActionsServiceApproveResponseToJSON(
-  c1ApiTaskV1TaskActionsServiceApproveResponse:
-    C1ApiTaskV1TaskActionsServiceApproveResponse,
-): string {
-  return JSON.stringify(
-    C1ApiTaskV1TaskActionsServiceApproveResponse$outboundSchema.parse(
-      c1ApiTaskV1TaskActionsServiceApproveResponse,
-    ),
-  );
-}
 
 export function c1ApiTaskV1TaskActionsServiceApproveResponseFromJSON(
   jsonString: string,

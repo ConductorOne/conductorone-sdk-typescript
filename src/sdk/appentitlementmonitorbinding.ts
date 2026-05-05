@@ -15,7 +15,7 @@ export class AppEntitlementMonitorBinding extends ClientSDK {
    * Delete App Entitlement Monitor Binding
    *
    * @remarks
-   * Invokes the c1.api.accessconflict.v1.AppEntitlementMonitorBindingService.DeleteAppEntitlementMonitorBinding method.
+   * Remove an app entitlement from a conflict monitor's entitlement set.
    */
   async deleteAppEntitlementMonitorBinding(
     request?: shared.DeleteAppEntitlementMonitorBindingRequest | undefined,
@@ -36,7 +36,7 @@ export class AppEntitlementMonitorBinding extends ClientSDK {
    * Create App Entitlement Monitor Binding
    *
    * @remarks
-   * Invokes the c1.api.accessconflict.v1.AppEntitlementMonitorBindingService.CreateAppEntitlementMonitorBinding method.
+   * Bind an app entitlement to one side (A or B) of a conflict monitor.
    */
   async createAppEntitlementMonitorBinding(
     request?: shared.CreateAppEntitlementMonitorBindingRequest | undefined,
@@ -57,7 +57,7 @@ export class AppEntitlementMonitorBinding extends ClientSDK {
    * Get App Entitlement Monitor Binding
    *
    * @remarks
-   * Invokes the c1.api.accessconflict.v1.AppEntitlementMonitorBindingService.GetAppEntitlementMonitorBinding method.
+   * Retrieve a single binding that associates an app entitlement with one side of a conflict monitor.
    */
   async getAppEntitlementMonitorBinding(
     request?: shared.GetAppEntitlementMonitorBindingRequest | undefined,

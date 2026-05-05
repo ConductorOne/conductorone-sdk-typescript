@@ -1,5 +1,4 @@
 # Attributes
-(*attributes*)
 
 ## Overview
 
@@ -254,7 +253,7 @@ run();
 
 ## listComplianceFrameworks
 
-Invokes the c1.api.attribute.v1.Attributes.ListComplianceFrameworks method.
+List all compliance framework attribute values (e.g., SOC 2, HIPAA) with pagination.
 
 ### Example Usage
 
@@ -562,7 +561,7 @@ run();
 
 ## listRiskLevels
 
-Invokes the c1.api.attribute.v1.Attributes.ListRiskLevels method.
+List all risk level attribute values with pagination.
 
 ### Example Usage
 

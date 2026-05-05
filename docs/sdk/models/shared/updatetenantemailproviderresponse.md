@@ -1,0 +1,17 @@
+# UpdateTenantEmailProviderResponse
+
+The UpdateTenantEmailProviderResponse message.
+
+## Example Usage
+
+```typescript
+import { UpdateTenantEmailProviderResponse } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: UpdateTenantEmailProviderResponse = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                                                      | Type                                                                                                                                                                                                                                                                       | Required                                                                                                                                                                                                                                                                   | Description                                                                                                                                                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tenantEmailProvider`                                                                                                                                                                                                                                                      | [shared.TenantEmailProvider](../../../sdk/models/shared/tenantemailprovider.md)                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                                                         | TenantEmailProvider is the API representation of the tenant's email provider.<br/><br/>This message contains a oneof named provider. Only a single field of the following list may be set at a time:<br/>  - c1Builtin<br/>  - awsSes<br/>  - sendgrid<br/>  - microsoftGraph<br/>  - googleWorkspace<br/> |

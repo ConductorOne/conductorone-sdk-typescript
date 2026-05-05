@@ -3,28 +3,16 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The UpdateStepUpProviderSecretRequest message.
  */
 export type UpdateStepUpProviderSecretRequest = {
   /**
-   * The clientSecret field.
+   * The new OAuth2 client secret. Write-only; never returned in responses.
    */
   clientSecret?: string | null | undefined;
 };
-
-/** @internal */
-export const UpdateStepUpProviderSecretRequest$inboundSchema: z.ZodType<
-  UpdateStepUpProviderSecretRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  clientSecret: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type UpdateStepUpProviderSecretRequest$Outbound = {
@@ -40,20 +28,6 @@ export const UpdateStepUpProviderSecretRequest$outboundSchema: z.ZodType<
   clientSecret: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateStepUpProviderSecretRequest$ {
-  /** @deprecated use `UpdateStepUpProviderSecretRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdateStepUpProviderSecretRequest$inboundSchema;
-  /** @deprecated use `UpdateStepUpProviderSecretRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateStepUpProviderSecretRequest$outboundSchema;
-  /** @deprecated use `UpdateStepUpProviderSecretRequest$Outbound` instead. */
-  export type Outbound = UpdateStepUpProviderSecretRequest$Outbound;
-}
-
 export function updateStepUpProviderSecretRequestToJSON(
   updateStepUpProviderSecretRequest: UpdateStepUpProviderSecretRequest,
 ): string {
@@ -61,15 +35,5 @@ export function updateStepUpProviderSecretRequestToJSON(
     UpdateStepUpProviderSecretRequest$outboundSchema.parse(
       updateStepUpProviderSecretRequest,
     ),
-  );
-}
-
-export function updateStepUpProviderSecretRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateStepUpProviderSecretRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateStepUpProviderSecretRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateStepUpProviderSecretRequest' from JSON`,
   );
 }

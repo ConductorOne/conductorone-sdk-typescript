@@ -3,18 +3,18 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AppEntitlementRef,
+  AppEntitlementRef$Outbound,
+  AppEntitlementRef$outboundSchema,
+} from "./appentitlementref.js";
 import {
   AppManagedStateBindingRef,
-  AppManagedStateBindingRef$inboundSchema,
   AppManagedStateBindingRef$Outbound,
   AppManagedStateBindingRef$outboundSchema,
 } from "./appmanagedstatebindingref.js";
 import {
   ConnectorExpandMask,
-  ConnectorExpandMask$inboundSchema,
   ConnectorExpandMask$Outbound,
   ConnectorExpandMask$outboundSchema,
 } from "./connectorexpandmask.js";
@@ -23,6 +23,10 @@ import {
  * The ConnectorServiceCreateDelegatedRequest message contains the fields required to create a connector.
  */
 export type ConnectorServiceCreateDelegatedRequest = {
+  /**
+   * Sets entitlement owners on the app.
+   */
+  appEntitlementOwnerRefs?: Array<AppEntitlementRef> | null | undefined;
   appManagedStateBindingRef?: AppManagedStateBindingRef | null | undefined;
   /**
    * The catalogId describes which catalog entry this connector is an instance of. For example, every Okta connector will have the same catalogId indicating it is an Okta connector.
@@ -44,22 +48,11 @@ export type ConnectorServiceCreateDelegatedRequest = {
 };
 
 /** @internal */
-export const ConnectorServiceCreateDelegatedRequest$inboundSchema: z.ZodType<
-  ConnectorServiceCreateDelegatedRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appManagedStateBindingRef: z.nullable(AppManagedStateBindingRef$inboundSchema)
-    .optional(),
-  catalogId: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(ConnectorExpandMask$inboundSchema).optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
-
-/** @internal */
 export type ConnectorServiceCreateDelegatedRequest$Outbound = {
+  appEntitlementOwnerRefs?:
+    | Array<AppEntitlementRef$Outbound>
+    | null
+    | undefined;
   appManagedStateBindingRef?:
     | AppManagedStateBindingRef$Outbound
     | null
@@ -77,6 +70,8 @@ export const ConnectorServiceCreateDelegatedRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ConnectorServiceCreateDelegatedRequest
 > = z.object({
+  appEntitlementOwnerRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
+    .optional(),
   appManagedStateBindingRef: z.nullable(
     AppManagedStateBindingRef$outboundSchema,
   ).optional(),
@@ -87,21 +82,6 @@ export const ConnectorServiceCreateDelegatedRequest$outboundSchema: z.ZodType<
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorServiceCreateDelegatedRequest$ {
-  /** @deprecated use `ConnectorServiceCreateDelegatedRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    ConnectorServiceCreateDelegatedRequest$inboundSchema;
-  /** @deprecated use `ConnectorServiceCreateDelegatedRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    ConnectorServiceCreateDelegatedRequest$outboundSchema;
-  /** @deprecated use `ConnectorServiceCreateDelegatedRequest$Outbound` instead. */
-  export type Outbound = ConnectorServiceCreateDelegatedRequest$Outbound;
-}
-
 export function connectorServiceCreateDelegatedRequestToJSON(
   connectorServiceCreateDelegatedRequest:
     ConnectorServiceCreateDelegatedRequest,
@@ -110,16 +90,5 @@ export function connectorServiceCreateDelegatedRequestToJSON(
     ConnectorServiceCreateDelegatedRequest$outboundSchema.parse(
       connectorServiceCreateDelegatedRequest,
     ),
-  );
-}
-
-export function connectorServiceCreateDelegatedRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ConnectorServiceCreateDelegatedRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ConnectorServiceCreateDelegatedRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ConnectorServiceCreateDelegatedRequest' from JSON`,
   );
 }

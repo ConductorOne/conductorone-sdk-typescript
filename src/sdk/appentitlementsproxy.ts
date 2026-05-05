@@ -14,7 +14,7 @@ export class AppEntitlementsProxy extends ClientSDK {
    * Delete
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppEntitlementsProxy.Delete method.
+   * Delete a proxy binding between a source and destination entitlement.
    */
   async delete(
     request: operations.C1ApiAppV1AppEntitlementsProxyDeleteRequest,
@@ -31,7 +31,7 @@ export class AppEntitlementsProxy extends ClientSDK {
    * Get
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppEntitlementsProxy.Get method.
+   * Retrieve a specific proxy binding between a source and destination entitlement.
    */
   async get(
     request: operations.C1ApiAppV1AppEntitlementsProxyGetRequest,
@@ -48,7 +48,7 @@ export class AppEntitlementsProxy extends ClientSDK {
    * Create
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppEntitlementsProxy.Create method.
+   * Create a proxy binding between a source and destination entitlement, establishing a hierarchical relationship.
    */
   async create(
     request: operations.C1ApiAppV1AppEntitlementsProxyCreateRequest,

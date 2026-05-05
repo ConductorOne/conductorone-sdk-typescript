@@ -34,19 +34,6 @@ export type C1ApiSettingsV1OrgDomainServiceListResponse = {
 };
 
 /** @internal */
-export const C1ApiSettingsV1OrgDomainServiceListRequest$inboundSchema:
-  z.ZodType<C1ApiSettingsV1OrgDomainServiceListRequest, z.ZodTypeDef, unknown> =
-    z.object({
-      page_size: z.nullable(z.number().int()).optional(),
-      page_token: z.nullable(z.string()).optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "page_size": "pageSize",
-        "page_token": "pageToken",
-      });
-    });
-
-/** @internal */
 export type C1ApiSettingsV1OrgDomainServiceListRequest$Outbound = {
   page_size?: number | null | undefined;
   page_token?: string | null | undefined;
@@ -68,21 +55,6 @@ export const C1ApiSettingsV1OrgDomainServiceListRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiSettingsV1OrgDomainServiceListRequest$ {
-  /** @deprecated use `C1ApiSettingsV1OrgDomainServiceListRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiSettingsV1OrgDomainServiceListRequest$inboundSchema;
-  /** @deprecated use `C1ApiSettingsV1OrgDomainServiceListRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiSettingsV1OrgDomainServiceListRequest$outboundSchema;
-  /** @deprecated use `C1ApiSettingsV1OrgDomainServiceListRequest$Outbound` instead. */
-  export type Outbound = C1ApiSettingsV1OrgDomainServiceListRequest$Outbound;
-}
-
 export function c1ApiSettingsV1OrgDomainServiceListRequestToJSON(
   c1ApiSettingsV1OrgDomainServiceListRequest:
     C1ApiSettingsV1OrgDomainServiceListRequest,
@@ -91,22 +63,6 @@ export function c1ApiSettingsV1OrgDomainServiceListRequestToJSON(
     C1ApiSettingsV1OrgDomainServiceListRequest$outboundSchema.parse(
       c1ApiSettingsV1OrgDomainServiceListRequest,
     ),
-  );
-}
-
-export function c1ApiSettingsV1OrgDomainServiceListRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiSettingsV1OrgDomainServiceListRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiSettingsV1OrgDomainServiceListRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiSettingsV1OrgDomainServiceListRequest' from JSON`,
   );
 }
 
@@ -130,63 +86,6 @@ export const C1ApiSettingsV1OrgDomainServiceListResponse$inboundSchema:
       "ListOrgDomainsResponse": "listOrgDomainsResponse",
     });
   });
-
-/** @internal */
-export type C1ApiSettingsV1OrgDomainServiceListResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  ListOrgDomainsResponse?: shared.ListOrgDomainsResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiSettingsV1OrgDomainServiceListResponse$outboundSchema:
-  z.ZodType<
-    C1ApiSettingsV1OrgDomainServiceListResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiSettingsV1OrgDomainServiceListResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    listOrgDomainsResponse: shared.ListOrgDomainsResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      listOrgDomainsResponse: "ListOrgDomainsResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiSettingsV1OrgDomainServiceListResponse$ {
-  /** @deprecated use `C1ApiSettingsV1OrgDomainServiceListResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiSettingsV1OrgDomainServiceListResponse$inboundSchema;
-  /** @deprecated use `C1ApiSettingsV1OrgDomainServiceListResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiSettingsV1OrgDomainServiceListResponse$outboundSchema;
-  /** @deprecated use `C1ApiSettingsV1OrgDomainServiceListResponse$Outbound` instead. */
-  export type Outbound = C1ApiSettingsV1OrgDomainServiceListResponse$Outbound;
-}
-
-export function c1ApiSettingsV1OrgDomainServiceListResponseToJSON(
-  c1ApiSettingsV1OrgDomainServiceListResponse:
-    C1ApiSettingsV1OrgDomainServiceListResponse,
-): string {
-  return JSON.stringify(
-    C1ApiSettingsV1OrgDomainServiceListResponse$outboundSchema.parse(
-      c1ApiSettingsV1OrgDomainServiceListResponse,
-    ),
-  );
-}
 
 export function c1ApiSettingsV1OrgDomainServiceListResponseFromJSON(
   jsonString: string,

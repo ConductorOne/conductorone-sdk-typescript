@@ -8,11 +8,8 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -22,17 +19,23 @@ import {
   ExternalRef$outboundSchema,
 } from "./externalref.js";
 import {
-  FormInput,
-  FormInput$inboundSchema,
-  FormInput$Outbound,
-  FormInput$outboundSchema,
-} from "./forminput.js";
-import {
   PolicyInstance,
   PolicyInstance$inboundSchema,
   PolicyInstance$Outbound,
   PolicyInstance$outboundSchema,
 } from "./policyinstance.js";
+import {
+  RequestSchemaForm,
+  RequestSchemaForm$inboundSchema,
+  RequestSchemaForm$Outbound,
+  RequestSchemaForm$outboundSchema,
+} from "./requestschemaform.js";
+import {
+  TaskRevocationTarget,
+  TaskRevocationTarget$inboundSchema,
+  TaskRevocationTarget$Outbound,
+  TaskRevocationTarget$outboundSchema,
+} from "./taskrevocationtarget.js";
 import {
   TaskType,
   TaskType$inboundSchema,
@@ -90,7 +93,7 @@ export type Annotations = {
 /**
  * The origin field.
  */
-export const Origin = {
+export const TaskOrigin = {
   TaskOriginUnspecified: "TASK_ORIGIN_UNSPECIFIED",
   TaskOriginProfileMembershipAutomation:
     "TASK_ORIGIN_PROFILE_MEMBERSHIP_AUTOMATION",
@@ -105,11 +108,12 @@ export const Origin = {
   TaskOriginProfileMembership: "TASK_ORIGIN_PROFILE_MEMBERSHIP",
   TaskOriginAutomation: "TASK_ORIGIN_AUTOMATION",
   TaskOriginAccessReview: "TASK_ORIGIN_ACCESS_REVIEW",
+  TaskOriginCascadeDelete: "TASK_ORIGIN_CASCADE_DELETE",
 } as const;
 /**
  * The origin field.
  */
-export type Origin = OpenEnum<typeof Origin>;
+export type TaskOrigin = OpenEnum<typeof TaskOrigin>;
 
 /**
  * The processing state of a task as defined by the `processing_enum`
@@ -169,6 +173,10 @@ export type Task = {
    */
   annotations?: Array<Annotations> | null | undefined;
   /**
+   * An array of IDs belonging to Identity Users that have approved or denied any step in this task.
+   */
+  approverIds?: Array<string> | null | undefined;
+  /**
    * The count of comments.
    */
   commentCount?: number | null | undefined;
@@ -195,7 +203,7 @@ export type Task = {
    * An array of external references to the task. Historically that has been items like Jira task IDs. This is currently unused, but may come back in the future for integrations.
    */
   externalRefs?: Array<ExternalRef> | null | undefined;
-  form?: FormInput | null | undefined;
+  form?: RequestSchemaForm | null | undefined;
   /**
    * The ID of the task.
    */
@@ -211,7 +219,7 @@ export type Task = {
   /**
    * The origin field.
    */
-  origin?: Origin | null | undefined;
+  origin?: TaskOrigin | null | undefined;
   policy?: PolicyInstance | null | undefined;
   /**
    * The policy generation id refers to the current policy's generation ID. This is changed when the policy is changed on a task.
@@ -225,6 +233,13 @@ export type Task = {
    * The recommendation field.
    */
   recommendation?: Recommendation | null | undefined;
+  /**
+   * Ancestor entitlements that will also be revoked when this revoke task is approved.
+   *
+   * @remarks
+   *  Populated at ticket creation time for inherited grant revocations.
+   */
+  revocationTargets?: Array<TaskRevocationTarget> | null | undefined;
   /**
    * The current state of the task as defined by the `state_enum`
    */
@@ -243,29 +258,10 @@ export type Task = {
 
 /** @internal */
 export const Actions$inboundSchema: z.ZodType<Actions, z.ZodTypeDef, unknown> =
-  z
-    .union([
-      z.nativeEnum(Actions),
-      z.string().transform(catchUnrecognizedEnum),
-    ]);
-
+  openEnums.inboundSchema(Actions);
 /** @internal */
-export const Actions$outboundSchema: z.ZodType<Actions, z.ZodTypeDef, Actions> =
-  z.union([
-    z.nativeEnum(Actions),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Actions$ {
-  /** @deprecated use `Actions$inboundSchema` instead. */
-  export const inboundSchema = Actions$inboundSchema;
-  /** @deprecated use `Actions$outboundSchema` instead. */
-  export const outboundSchema = Actions$outboundSchema;
-}
+export const Actions$outboundSchema: z.ZodType<string, z.ZodTypeDef, Actions> =
+  openEnums.outboundSchema(Actions);
 
 /** @internal */
 export const Annotations$inboundSchema: z.ZodType<
@@ -283,7 +279,6 @@ export const Annotations$inboundSchema: z.ZodType<
     "@type": "atType",
   });
 });
-
 /** @internal */
 export type Annotations$Outbound = {
   "@type"?: string | undefined;
@@ -308,23 +303,9 @@ export const Annotations$outboundSchema: z.ZodType<
   };
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Annotations$ {
-  /** @deprecated use `Annotations$inboundSchema` instead. */
-  export const inboundSchema = Annotations$inboundSchema;
-  /** @deprecated use `Annotations$outboundSchema` instead. */
-  export const outboundSchema = Annotations$outboundSchema;
-  /** @deprecated use `Annotations$Outbound` instead. */
-  export type Outbound = Annotations$Outbound;
-}
-
 export function annotationsToJSON(annotations: Annotations): string {
   return JSON.stringify(Annotations$outboundSchema.parse(annotations));
 }
-
 export function annotationsFromJSON(
   jsonString: string,
 ): SafeParseResult<Annotations, SDKValidationError> {
@@ -336,125 +317,56 @@ export function annotationsFromJSON(
 }
 
 /** @internal */
-export const Origin$inboundSchema: z.ZodType<Origin, z.ZodTypeDef, unknown> = z
-  .union([
-    z.nativeEnum(Origin),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+export const TaskOrigin$inboundSchema: z.ZodType<
+  TaskOrigin,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(TaskOrigin);
 /** @internal */
-export const Origin$outboundSchema: z.ZodType<Origin, z.ZodTypeDef, Origin> = z
-  .union([
-    z.nativeEnum(Origin),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Origin$ {
-  /** @deprecated use `Origin$inboundSchema` instead. */
-  export const inboundSchema = Origin$inboundSchema;
-  /** @deprecated use `Origin$outboundSchema` instead. */
-  export const outboundSchema = Origin$outboundSchema;
-}
+export const TaskOrigin$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  TaskOrigin
+> = openEnums.outboundSchema(TaskOrigin);
 
 /** @internal */
 export const Processing$inboundSchema: z.ZodType<
   Processing,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(Processing),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(Processing);
 /** @internal */
 export const Processing$outboundSchema: z.ZodType<
-  Processing,
+  string,
   z.ZodTypeDef,
   Processing
-> = z.union([
-  z.nativeEnum(Processing),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Processing$ {
-  /** @deprecated use `Processing$inboundSchema` instead. */
-  export const inboundSchema = Processing$inboundSchema;
-  /** @deprecated use `Processing$outboundSchema` instead. */
-  export const outboundSchema = Processing$outboundSchema;
-}
+> = openEnums.outboundSchema(Processing);
 
 /** @internal */
 export const Recommendation$inboundSchema: z.ZodType<
   Recommendation,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(Recommendation),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(Recommendation);
 /** @internal */
 export const Recommendation$outboundSchema: z.ZodType<
-  Recommendation,
+  string,
   z.ZodTypeDef,
   Recommendation
-> = z.union([
-  z.nativeEnum(Recommendation),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Recommendation$ {
-  /** @deprecated use `Recommendation$inboundSchema` instead. */
-  export const inboundSchema = Recommendation$inboundSchema;
-  /** @deprecated use `Recommendation$outboundSchema` instead. */
-  export const outboundSchema = Recommendation$outboundSchema;
-}
+> = openEnums.outboundSchema(Recommendation);
 
 /** @internal */
 export const TaskState$inboundSchema: z.ZodType<
   TaskState,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(TaskState),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(TaskState);
 /** @internal */
 export const TaskState$outboundSchema: z.ZodType<
-  TaskState,
+  string,
   z.ZodTypeDef,
   TaskState
-> = z.union([
-  z.nativeEnum(TaskState),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskState$ {
-  /** @deprecated use `TaskState$inboundSchema` instead. */
-  export const inboundSchema = TaskState$inboundSchema;
-  /** @deprecated use `TaskState$outboundSchema` instead. */
-  export const outboundSchema = TaskState$outboundSchema;
-}
+> = openEnums.outboundSchema(TaskState);
 
 /** @internal */
 export const Task$inboundSchema: z.ZodType<Task, z.ZodTypeDef, unknown> = z
@@ -463,6 +375,7 @@ export const Task$inboundSchema: z.ZodType<Task, z.ZodTypeDef, unknown> = z
     analysisId: z.nullable(z.string()).optional(),
     annotations: z.nullable(z.array(z.lazy(() => Annotations$inboundSchema)))
       .optional(),
+    approverIds: z.nullable(z.array(z.string())).optional(),
     commentCount: z.nullable(z.number().int()).optional(),
     createdAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -476,16 +389,18 @@ export const Task$inboundSchema: z.ZodType<Task, z.ZodTypeDef, unknown> = z
     displayName: z.nullable(z.string()).optional(),
     emergencyAccess: z.nullable(z.boolean()).optional(),
     externalRefs: z.nullable(z.array(ExternalRef$inboundSchema)).optional(),
-    form: z.nullable(FormInput$inboundSchema).optional(),
+    form: z.nullable(RequestSchemaForm$inboundSchema).optional(),
     id: z.nullable(z.string()).optional(),
     insightIds: z.nullable(z.array(z.string())).optional(),
     numericId: z.nullable(z.string().transform(v => parseInt(v, 10)))
       .optional(),
-    origin: z.nullable(Origin$inboundSchema).optional(),
+    origin: z.nullable(TaskOrigin$inboundSchema).optional(),
     policy: z.nullable(PolicyInstance$inboundSchema).optional(),
     policyGenerationId: z.nullable(z.string()).optional(),
     processing: z.nullable(Processing$inboundSchema).optional(),
     recommendation: z.nullable(Recommendation$inboundSchema).optional(),
+    revocationTargets: z.nullable(z.array(TaskRevocationTarget$inboundSchema))
+      .optional(),
     state: z.nullable(TaskState$inboundSchema).optional(),
     stepApproverIds: z.nullable(z.array(z.string())).optional(),
     type: z.nullable(TaskType$inboundSchema).optional(),
@@ -494,12 +409,12 @@ export const Task$inboundSchema: z.ZodType<Task, z.ZodTypeDef, unknown> = z
     ).optional(),
     userId: z.nullable(z.string()).optional(),
   });
-
 /** @internal */
 export type Task$Outbound = {
   actions?: Array<string> | null | undefined;
   analysisId?: string | null | undefined;
   annotations?: Array<Annotations$Outbound> | null | undefined;
+  approverIds?: Array<string> | null | undefined;
   commentCount?: number | null | undefined;
   createdAt?: string | null | undefined;
   createdByUserId?: string | null | undefined;
@@ -509,7 +424,7 @@ export type Task$Outbound = {
   displayName?: string | null | undefined;
   emergencyAccess?: boolean | null | undefined;
   externalRefs?: Array<ExternalRef$Outbound> | null | undefined;
-  form?: FormInput$Outbound | null | undefined;
+  form?: RequestSchemaForm$Outbound | null | undefined;
   id?: string | null | undefined;
   insightIds?: Array<string> | null | undefined;
   numericId?: string | null | undefined;
@@ -518,6 +433,7 @@ export type Task$Outbound = {
   policyGenerationId?: string | null | undefined;
   processing?: string | null | undefined;
   recommendation?: string | null | undefined;
+  revocationTargets?: Array<TaskRevocationTarget$Outbound> | null | undefined;
   state?: string | null | undefined;
   stepApproverIds?: Array<string> | null | undefined;
   type?: TaskType$Outbound | null | undefined;
@@ -532,6 +448,7 @@ export const Task$outboundSchema: z.ZodType<Task$Outbound, z.ZodTypeDef, Task> =
     analysisId: z.nullable(z.string()).optional(),
     annotations: z.nullable(z.array(z.lazy(() => Annotations$outboundSchema)))
       .optional(),
+    approverIds: z.nullable(z.array(z.string())).optional(),
     commentCount: z.nullable(z.number().int()).optional(),
     createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
     createdByUserId: z.nullable(z.string()).optional(),
@@ -541,15 +458,17 @@ export const Task$outboundSchema: z.ZodType<Task$Outbound, z.ZodTypeDef, Task> =
     displayName: z.nullable(z.string()).optional(),
     emergencyAccess: z.nullable(z.boolean()).optional(),
     externalRefs: z.nullable(z.array(ExternalRef$outboundSchema)).optional(),
-    form: z.nullable(FormInput$outboundSchema).optional(),
+    form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
     id: z.nullable(z.string()).optional(),
     insightIds: z.nullable(z.array(z.string())).optional(),
     numericId: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
-    origin: z.nullable(Origin$outboundSchema).optional(),
+    origin: z.nullable(TaskOrigin$outboundSchema).optional(),
     policy: z.nullable(PolicyInstance$outboundSchema).optional(),
     policyGenerationId: z.nullable(z.string()).optional(),
     processing: z.nullable(Processing$outboundSchema).optional(),
     recommendation: z.nullable(Recommendation$outboundSchema).optional(),
+    revocationTargets: z.nullable(z.array(TaskRevocationTarget$outboundSchema))
+      .optional(),
     state: z.nullable(TaskState$outboundSchema).optional(),
     stepApproverIds: z.nullable(z.array(z.string())).optional(),
     type: z.nullable(TaskType$outboundSchema).optional(),
@@ -557,23 +476,9 @@ export const Task$outboundSchema: z.ZodType<Task$Outbound, z.ZodTypeDef, Task> =
     userId: z.nullable(z.string()).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Task$ {
-  /** @deprecated use `Task$inboundSchema` instead. */
-  export const inboundSchema = Task$inboundSchema;
-  /** @deprecated use `Task$outboundSchema` instead. */
-  export const outboundSchema = Task$outboundSchema;
-  /** @deprecated use `Task$Outbound` instead. */
-  export type Outbound = Task$Outbound;
-}
-
 export function taskToJSON(task: Task): string {
   return JSON.stringify(Task$outboundSchema.parse(task));
 }
-
 export function taskFromJSON(
   jsonString: string,
 ): SafeParseResult<Task, SDKValidationError> {

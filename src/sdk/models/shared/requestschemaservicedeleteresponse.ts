@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The RequestSchemaServiceDeleteResponse message.
+ * The response message for deleting a request schema.
  */
 export type RequestSchemaServiceDeleteResponse = {};
 
@@ -18,40 +18,6 @@ export const RequestSchemaServiceDeleteResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
-/** @internal */
-export type RequestSchemaServiceDeleteResponse$Outbound = {};
-
-/** @internal */
-export const RequestSchemaServiceDeleteResponse$outboundSchema: z.ZodType<
-  RequestSchemaServiceDeleteResponse$Outbound,
-  z.ZodTypeDef,
-  RequestSchemaServiceDeleteResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestSchemaServiceDeleteResponse$ {
-  /** @deprecated use `RequestSchemaServiceDeleteResponse$inboundSchema` instead. */
-  export const inboundSchema = RequestSchemaServiceDeleteResponse$inboundSchema;
-  /** @deprecated use `RequestSchemaServiceDeleteResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestSchemaServiceDeleteResponse$outboundSchema;
-  /** @deprecated use `RequestSchemaServiceDeleteResponse$Outbound` instead. */
-  export type Outbound = RequestSchemaServiceDeleteResponse$Outbound;
-}
-
-export function requestSchemaServiceDeleteResponseToJSON(
-  requestSchemaServiceDeleteResponse: RequestSchemaServiceDeleteResponse,
-): string {
-  return JSON.stringify(
-    RequestSchemaServiceDeleteResponse$outboundSchema.parse(
-      requestSchemaServiceDeleteResponse,
-    ),
-  );
-}
 
 export function requestSchemaServiceDeleteResponseFromJSON(
   jsonString: string,

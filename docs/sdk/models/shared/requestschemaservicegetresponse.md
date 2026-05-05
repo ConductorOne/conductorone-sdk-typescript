@@ -1,6 +1,6 @@
 # RequestSchemaServiceGetResponse
 
-The RequestSchemaServiceGetResponse message.
+The response message for retrieving a request schema.
 
 ## Example Usage
 

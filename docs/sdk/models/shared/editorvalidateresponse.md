@@ -1,6 +1,6 @@
 # EditorValidateResponse
 
-The EditorValidateResponse message.
+The EditorValidateResponse message contains validation results.
 
 ## Example Usage
 
@@ -14,4 +14,4 @@ let value: EditorValidateResponse = {};
 
 | Field                                                               | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `markers`                                                           | [shared.EditorMarker](../../../sdk/models/shared/editormarker.md)[] | :heavy_minus_sign:                                                  | The markers field.                                                  |
+| `markers`                                                           | [shared.EditorMarker](../../../sdk/models/shared/editormarker.md)[] | :heavy_minus_sign:                                                  | The list of diagnostic markers found during validation.             |

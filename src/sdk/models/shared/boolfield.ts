@@ -18,6 +18,12 @@ import {
   CheckboxField$Outbound,
   CheckboxField$outboundSchema,
 } from "./checkboxfield.js";
+import {
+  ToggleField,
+  ToggleField$inboundSchema,
+  ToggleField$Outbound,
+  ToggleField$outboundSchema,
+} from "./togglefield.js";
 
 /**
  * The BoolField message.
@@ -26,9 +32,7 @@ import {
  *
  * This message contains a oneof named view. Only a single field of the following list may be set at a time:
  *   - checkboxField
- *
- * This message contains a oneof named _rules. Only a single field of the following list may be set at a time:
- *   - rules
+ *   - toggleField
  */
 export type BoolField = {
   checkboxField?: CheckboxField | null | undefined;
@@ -37,6 +41,10 @@ export type BoolField = {
    */
   defaultValue?: boolean | null | undefined;
   rules?: BoolRules | null | undefined;
+  /**
+   * The ToggleField message.
+   */
+  toggleField?: ToggleField | null | undefined;
 };
 
 /** @internal */
@@ -48,13 +56,14 @@ export const BoolField$inboundSchema: z.ZodType<
   checkboxField: z.nullable(CheckboxField$inboundSchema).optional(),
   defaultValue: z.nullable(z.boolean()).optional(),
   rules: z.nullable(BoolRules$inboundSchema).optional(),
+  toggleField: z.nullable(ToggleField$inboundSchema).optional(),
 });
-
 /** @internal */
 export type BoolField$Outbound = {
   checkboxField?: CheckboxField$Outbound | null | undefined;
   defaultValue?: boolean | null | undefined;
   rules?: BoolRules$Outbound | null | undefined;
+  toggleField?: ToggleField$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -66,25 +75,12 @@ export const BoolField$outboundSchema: z.ZodType<
   checkboxField: z.nullable(CheckboxField$outboundSchema).optional(),
   defaultValue: z.nullable(z.boolean()).optional(),
   rules: z.nullable(BoolRules$outboundSchema).optional(),
+  toggleField: z.nullable(ToggleField$outboundSchema).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BoolField$ {
-  /** @deprecated use `BoolField$inboundSchema` instead. */
-  export const inboundSchema = BoolField$inboundSchema;
-  /** @deprecated use `BoolField$outboundSchema` instead. */
-  export const outboundSchema = BoolField$outboundSchema;
-  /** @deprecated use `BoolField$Outbound` instead. */
-  export type Outbound = BoolField$Outbound;
-}
 
 export function boolFieldToJSON(boolField: BoolField): string {
   return JSON.stringify(BoolField$outboundSchema.parse(boolField));
 }
-
 export function boolFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<BoolField, SDKValidationError> {

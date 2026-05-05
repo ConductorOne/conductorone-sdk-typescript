@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  User,
-  User$inboundSchema,
-  User$Outbound,
-  User$outboundSchema,
-} from "./user.js";
+import { User, User$inboundSchema } from "./user.js";
 
 /**
  * The TaskAuditPolicyApprovalReassigned message.
@@ -46,50 +41,6 @@ export const TaskAuditPolicyApprovalReassigned$inboundSchema: z.ZodType<
   oldPolicyStepId: z.nullable(z.string()).optional(),
   users: z.nullable(z.array(User$inboundSchema)).optional(),
 });
-
-/** @internal */
-export type TaskAuditPolicyApprovalReassigned$Outbound = {
-  newPolicyStepId?: string | null | undefined;
-  newUsers?: Array<string> | null | undefined;
-  oldPolicyStepId?: string | null | undefined;
-  users?: Array<User$Outbound> | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditPolicyApprovalReassigned$outboundSchema: z.ZodType<
-  TaskAuditPolicyApprovalReassigned$Outbound,
-  z.ZodTypeDef,
-  TaskAuditPolicyApprovalReassigned
-> = z.object({
-  newPolicyStepId: z.nullable(z.string()).optional(),
-  newUsers: z.nullable(z.array(z.string())).optional(),
-  oldPolicyStepId: z.nullable(z.string()).optional(),
-  users: z.nullable(z.array(User$outboundSchema)).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditPolicyApprovalReassigned$ {
-  /** @deprecated use `TaskAuditPolicyApprovalReassigned$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditPolicyApprovalReassigned$inboundSchema;
-  /** @deprecated use `TaskAuditPolicyApprovalReassigned$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskAuditPolicyApprovalReassigned$outboundSchema;
-  /** @deprecated use `TaskAuditPolicyApprovalReassigned$Outbound` instead. */
-  export type Outbound = TaskAuditPolicyApprovalReassigned$Outbound;
-}
-
-export function taskAuditPolicyApprovalReassignedToJSON(
-  taskAuditPolicyApprovalReassigned: TaskAuditPolicyApprovalReassigned,
-): string {
-  return JSON.stringify(
-    TaskAuditPolicyApprovalReassigned$outboundSchema.parse(
-      taskAuditPolicyApprovalReassigned,
-    ),
-  );
-}
 
 export function taskAuditPolicyApprovalReassignedFromJSON(
   jsonString: string,

@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  User,
-  User$inboundSchema,
-  User$Outbound,
-  User$outboundSchema,
-} from "./user.js";
+import { User, User$inboundSchema } from "./user.js";
 
 /**
  * The TaskAuditMetaData message.
@@ -28,41 +23,6 @@ export const TaskAuditMetaData$inboundSchema: z.ZodType<
 > = z.object({
   user: z.nullable(User$inboundSchema).optional(),
 });
-
-/** @internal */
-export type TaskAuditMetaData$Outbound = {
-  user?: User$Outbound | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditMetaData$outboundSchema: z.ZodType<
-  TaskAuditMetaData$Outbound,
-  z.ZodTypeDef,
-  TaskAuditMetaData
-> = z.object({
-  user: z.nullable(User$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditMetaData$ {
-  /** @deprecated use `TaskAuditMetaData$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditMetaData$inboundSchema;
-  /** @deprecated use `TaskAuditMetaData$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditMetaData$outboundSchema;
-  /** @deprecated use `TaskAuditMetaData$Outbound` instead. */
-  export type Outbound = TaskAuditMetaData$Outbound;
-}
-
-export function taskAuditMetaDataToJSON(
-  taskAuditMetaData: TaskAuditMetaData,
-): string {
-  return JSON.stringify(
-    TaskAuditMetaData$outboundSchema.parse(taskAuditMetaData),
-  );
-}
 
 export function taskAuditMetaDataFromJSON(
   jsonString: string,

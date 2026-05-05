@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  TaskView,
-  TaskView$inboundSchema,
-  TaskView$Outbound,
-  TaskView$outboundSchema,
-} from "./taskview.js";
+import { TaskView, TaskView$inboundSchema } from "./taskview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -38,7 +33,7 @@ export type TaskActionsServiceDenyResponse = {
   expanded?: Array<TaskActionsServiceDenyResponseExpanded> | null | undefined;
   taskView?: TaskView | null | undefined;
   /**
-   * The ID of the ticket (task) deny action created by this request.
+   * The ID of the task deny action created by this request.
    */
   ticketActionId?: string | null | undefined;
 };
@@ -59,56 +54,6 @@ export const TaskActionsServiceDenyResponseExpanded$inboundSchema: z.ZodType<
     "@type": "atType",
   });
 });
-
-/** @internal */
-export type TaskActionsServiceDenyResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const TaskActionsServiceDenyResponseExpanded$outboundSchema: z.ZodType<
-  TaskActionsServiceDenyResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  TaskActionsServiceDenyResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceDenyResponseExpanded$ {
-  /** @deprecated use `TaskActionsServiceDenyResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskActionsServiceDenyResponseExpanded$inboundSchema;
-  /** @deprecated use `TaskActionsServiceDenyResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceDenyResponseExpanded$outboundSchema;
-  /** @deprecated use `TaskActionsServiceDenyResponseExpanded$Outbound` instead. */
-  export type Outbound = TaskActionsServiceDenyResponseExpanded$Outbound;
-}
-
-export function taskActionsServiceDenyResponseExpandedToJSON(
-  taskActionsServiceDenyResponseExpanded:
-    TaskActionsServiceDenyResponseExpanded,
-): string {
-  return JSON.stringify(
-    TaskActionsServiceDenyResponseExpanded$outboundSchema.parse(
-      taskActionsServiceDenyResponseExpanded,
-    ),
-  );
-}
 
 export function taskActionsServiceDenyResponseExpandedFromJSON(
   jsonString: string,
@@ -133,54 +78,6 @@ export const TaskActionsServiceDenyResponse$inboundSchema: z.ZodType<
   taskView: z.nullable(TaskView$inboundSchema).optional(),
   ticketActionId: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type TaskActionsServiceDenyResponse$Outbound = {
-  expanded?:
-    | Array<TaskActionsServiceDenyResponseExpanded$Outbound>
-    | null
-    | undefined;
-  taskView?: TaskView$Outbound | null | undefined;
-  ticketActionId?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskActionsServiceDenyResponse$outboundSchema: z.ZodType<
-  TaskActionsServiceDenyResponse$Outbound,
-  z.ZodTypeDef,
-  TaskActionsServiceDenyResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(
-      z.lazy(() => TaskActionsServiceDenyResponseExpanded$outboundSchema),
-    ),
-  ).optional(),
-  taskView: z.nullable(TaskView$outboundSchema).optional(),
-  ticketActionId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceDenyResponse$ {
-  /** @deprecated use `TaskActionsServiceDenyResponse$inboundSchema` instead. */
-  export const inboundSchema = TaskActionsServiceDenyResponse$inboundSchema;
-  /** @deprecated use `TaskActionsServiceDenyResponse$outboundSchema` instead. */
-  export const outboundSchema = TaskActionsServiceDenyResponse$outboundSchema;
-  /** @deprecated use `TaskActionsServiceDenyResponse$Outbound` instead. */
-  export type Outbound = TaskActionsServiceDenyResponse$Outbound;
-}
-
-export function taskActionsServiceDenyResponseToJSON(
-  taskActionsServiceDenyResponse: TaskActionsServiceDenyResponse,
-): string {
-  return JSON.stringify(
-    TaskActionsServiceDenyResponse$outboundSchema.parse(
-      taskActionsServiceDenyResponse,
-    ),
-  );
-}
 
 export function taskActionsServiceDenyResponseFromJSON(
   jsonString: string,

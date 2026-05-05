@@ -1,5 +1,4 @@
 # ExportsSearch
-(*exportsSearch*)
 
 ## Overview
 
@@ -9,7 +8,7 @@
 
 ## search
 
-Invokes the c1.api.systemlog.v1.ExportsSearchService.Search method.
+Search for system log exports matching the specified filters.
 
 ### Example Usage
 

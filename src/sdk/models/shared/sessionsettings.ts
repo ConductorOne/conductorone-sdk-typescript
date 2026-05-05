@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -14,10 +17,49 @@ import {
 } from "./cidrrestriction.js";
 
 /**
- * The SessionSettings message.
+ * Policy for metadata document client_id URLs.
+ */
+export const ClientIdMetadataDocumentPolicy = {
+  ClientIdMetadataDocumentPolicyUnspecified:
+    "CLIENT_ID_METADATA_DOCUMENT_POLICY_UNSPECIFIED",
+  ClientIdMetadataDocumentPolicyAllowAll:
+    "CLIENT_ID_METADATA_DOCUMENT_POLICY_ALLOW_ALL",
+  ClientIdMetadataDocumentPolicyRequestable:
+    "CLIENT_ID_METADATA_DOCUMENT_POLICY_REQUESTABLE",
+  ClientIdMetadataDocumentPolicyAllowlistOnly:
+    "CLIENT_ID_METADATA_DOCUMENT_POLICY_ALLOWLIST_ONLY",
+} as const;
+/**
+ * Policy for metadata document client_id URLs.
+ */
+export type ClientIdMetadataDocumentPolicy = OpenEnum<
+  typeof ClientIdMetadataDocumentPolicy
+>;
+
+/**
+ * SessionSettings configures session security for the tenant, including timeouts and per-role IP restrictions.
  */
 export type SessionSettings = {
+  /**
+   * Policy ID for REQUESTABLE mode approval routing.
+   */
+  clientIdApprovalRequestPolicyId?: string | undefined;
+  /**
+   * Policy for metadata document client_id URLs.
+   */
+  clientIdMetadataDocumentPolicy?: ClientIdMetadataDocumentPolicy | undefined;
   connectorSource?: CIDRRestriction | null | undefined;
+  /**
+   * CIDRRestriction defines an IP-based access restriction with an enable toggle and a list of allowed CIDRs.
+   */
+  cidrRestriction?: CIDRRestriction | undefined;
+  /**
+   * Enable external client registration (OAuth 2.0 DCR) for MCP clients
+   *
+   * @remarks
+   *  like Claude Desktop, Cursor, and other AI assistants.
+   */
+  externalClientsEnabled?: boolean | undefined;
   maxSessionLength?: string | null | undefined;
   pccAdminSource?: CIDRRestriction | null | undefined;
   pccUserSource?: CIDRRestriction | null | undefined;
@@ -26,22 +68,47 @@ export type SessionSettings = {
 };
 
 /** @internal */
+export const ClientIdMetadataDocumentPolicy$inboundSchema: z.ZodType<
+  ClientIdMetadataDocumentPolicy,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ClientIdMetadataDocumentPolicy);
+/** @internal */
+export const ClientIdMetadataDocumentPolicy$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  ClientIdMetadataDocumentPolicy
+> = openEnums.outboundSchema(ClientIdMetadataDocumentPolicy);
+
+/** @internal */
 export const SessionSettings$inboundSchema: z.ZodType<
   SessionSettings,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  clientIdApprovalRequestPolicyId: z.string().optional(),
+  clientIdMetadataDocumentPolicy: ClientIdMetadataDocumentPolicy$inboundSchema
+    .optional(),
   connectorSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
+  externalClientSource: CIDRRestriction$inboundSchema.optional(),
+  externalClientsEnabled: z.boolean().optional(),
   maxSessionLength: z.nullable(z.string()).optional(),
   pccAdminSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
   pccUserSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
   ssoAdminSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
   ssoUserSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "externalClientSource": "cidrRestriction",
+  });
 });
-
 /** @internal */
 export type SessionSettings$Outbound = {
+  clientIdApprovalRequestPolicyId?: string | undefined;
+  clientIdMetadataDocumentPolicy?: string | undefined;
   connectorSource?: CIDRRestriction$Outbound | null | undefined;
+  externalClientSource?: CIDRRestriction$Outbound | undefined;
+  externalClientsEnabled?: boolean | undefined;
   maxSessionLength?: string | null | undefined;
   pccAdminSource?: CIDRRestriction$Outbound | null | undefined;
   pccUserSource?: CIDRRestriction$Outbound | null | undefined;
@@ -55,33 +122,28 @@ export const SessionSettings$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SessionSettings
 > = z.object({
+  clientIdApprovalRequestPolicyId: z.string().optional(),
+  clientIdMetadataDocumentPolicy: ClientIdMetadataDocumentPolicy$outboundSchema
+    .optional(),
   connectorSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
+  cidrRestriction: CIDRRestriction$outboundSchema.optional(),
+  externalClientsEnabled: z.boolean().optional(),
   maxSessionLength: z.nullable(z.string()).optional(),
   pccAdminSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
   pccUserSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
   ssoAdminSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
   ssoUserSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    cidrRestriction: "externalClientSource",
+  });
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SessionSettings$ {
-  /** @deprecated use `SessionSettings$inboundSchema` instead. */
-  export const inboundSchema = SessionSettings$inboundSchema;
-  /** @deprecated use `SessionSettings$outboundSchema` instead. */
-  export const outboundSchema = SessionSettings$outboundSchema;
-  /** @deprecated use `SessionSettings$Outbound` instead. */
-  export type Outbound = SessionSettings$Outbound;
-}
 
 export function sessionSettingsToJSON(
   sessionSettings: SessionSettings,
 ): string {
   return JSON.stringify(SessionSettings$outboundSchema.parse(sessionSettings));
 }
-
 export function sessionSettingsFromJSON(
   jsonString: string,
 ): SafeParseResult<SessionSettings, SDKValidationError> {

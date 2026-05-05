@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Policy,
-  Policy$inboundSchema,
-  Policy$Outbound,
-  Policy$outboundSchema,
-} from "./policy.js";
+import { Policy, Policy$inboundSchema } from "./policy.js";
 
 /**
  * The SearchPoliciesResponse message.
@@ -36,43 +31,6 @@ export const SearchPoliciesResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(Policy$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type SearchPoliciesResponse$Outbound = {
-  list?: Array<Policy$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const SearchPoliciesResponse$outboundSchema: z.ZodType<
-  SearchPoliciesResponse$Outbound,
-  z.ZodTypeDef,
-  SearchPoliciesResponse
-> = z.object({
-  list: z.nullable(z.array(Policy$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchPoliciesResponse$ {
-  /** @deprecated use `SearchPoliciesResponse$inboundSchema` instead. */
-  export const inboundSchema = SearchPoliciesResponse$inboundSchema;
-  /** @deprecated use `SearchPoliciesResponse$outboundSchema` instead. */
-  export const outboundSchema = SearchPoliciesResponse$outboundSchema;
-  /** @deprecated use `SearchPoliciesResponse$Outbound` instead. */
-  export type Outbound = SearchPoliciesResponse$Outbound;
-}
-
-export function searchPoliciesResponseToJSON(
-  searchPoliciesResponse: SearchPoliciesResponse,
-): string {
-  return JSON.stringify(
-    SearchPoliciesResponse$outboundSchema.parse(searchPoliciesResponse),
-  );
-}
 
 export function searchPoliciesResponseFromJSON(
   jsonString: string,

@@ -24,6 +24,10 @@ export type TaskGrantSource = {
    */
   integrationId?: string | null | undefined;
   /**
+   * Whether the grant task is an extension task.
+   */
+  isExtension?: boolean | undefined;
+  /**
    * the request id for the grant ticket if the source is external
    */
   requestId?: string | null | undefined;
@@ -38,14 +42,15 @@ export const TaskGrantSource$inboundSchema: z.ZodType<
   conversationId: z.nullable(z.string()).optional(),
   externalUrl: z.nullable(z.string()).optional(),
   integrationId: z.nullable(z.string()).optional(),
+  isExtension: z.boolean().optional(),
   requestId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type TaskGrantSource$Outbound = {
   conversationId?: string | null | undefined;
   externalUrl?: string | null | undefined;
   integrationId?: string | null | undefined;
+  isExtension?: boolean | undefined;
   requestId?: string | null | undefined;
 };
 
@@ -58,28 +63,15 @@ export const TaskGrantSource$outboundSchema: z.ZodType<
   conversationId: z.nullable(z.string()).optional(),
   externalUrl: z.nullable(z.string()).optional(),
   integrationId: z.nullable(z.string()).optional(),
+  isExtension: z.boolean().optional(),
   requestId: z.nullable(z.string()).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskGrantSource$ {
-  /** @deprecated use `TaskGrantSource$inboundSchema` instead. */
-  export const inboundSchema = TaskGrantSource$inboundSchema;
-  /** @deprecated use `TaskGrantSource$outboundSchema` instead. */
-  export const outboundSchema = TaskGrantSource$outboundSchema;
-  /** @deprecated use `TaskGrantSource$Outbound` instead. */
-  export type Outbound = TaskGrantSource$Outbound;
-}
 
 export function taskGrantSourceToJSON(
   taskGrantSource: TaskGrantSource,
 ): string {
   return JSON.stringify(TaskGrantSource$outboundSchema.parse(taskGrantSource));
 }
-
 export function taskGrantSourceFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskGrantSource, SDKValidationError> {

@@ -24,7 +24,6 @@ export const ConditionSucceeded$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
 /** @internal */
 export type ConditionSucceeded$Outbound = {
   succeededAt?: string | null | undefined;
@@ -39,19 +38,6 @@ export const ConditionSucceeded$outboundSchema: z.ZodType<
   succeededAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConditionSucceeded$ {
-  /** @deprecated use `ConditionSucceeded$inboundSchema` instead. */
-  export const inboundSchema = ConditionSucceeded$inboundSchema;
-  /** @deprecated use `ConditionSucceeded$outboundSchema` instead. */
-  export const outboundSchema = ConditionSucceeded$outboundSchema;
-  /** @deprecated use `ConditionSucceeded$Outbound` instead. */
-  export type Outbound = ConditionSucceeded$Outbound;
-}
-
 export function conditionSucceededToJSON(
   conditionSucceeded: ConditionSucceeded,
 ): string {
@@ -59,7 +45,6 @@ export function conditionSucceededToJSON(
     ConditionSucceeded$outboundSchema.parse(conditionSucceeded),
   );
 }
-
 export function conditionSucceededFromJSON(
   jsonString: string,
 ): SafeParseResult<ConditionSucceeded, SDKValidationError> {

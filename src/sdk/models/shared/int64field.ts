@@ -26,20 +26,10 @@ import {
  *
  * This message contains a oneof named view. Only a single field of the following list may be set at a time:
  *   - numberField
- *
- * This message contains a oneof named _default_value. Only a single field of the following list may be set at a time:
- *   - defaultValue
- *
- * This message contains a oneof named _rules. Only a single field of the following list may be set at a time:
- *   - rules
  */
 export type Int64Field = {
   /**
    * The defaultValue field.
-   *
-   * @remarks
-   * This field is part of the `_default_value` oneof.
-   * See the documentation for `c1.api.form.v1.Int64Field` for more details.
    */
   defaultValue?: number | null | undefined;
   numberField?: NumberField | null | undefined;
@@ -62,7 +52,6 @@ export const Int64Field$inboundSchema: z.ZodType<
   placeholder: z.nullable(z.string()).optional(),
   rules: z.nullable(Int64Rules$inboundSchema).optional(),
 });
-
 /** @internal */
 export type Int64Field$Outbound = {
   defaultValue?: string | null | undefined;
@@ -83,23 +72,9 @@ export const Int64Field$outboundSchema: z.ZodType<
   rules: z.nullable(Int64Rules$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Int64Field$ {
-  /** @deprecated use `Int64Field$inboundSchema` instead. */
-  export const inboundSchema = Int64Field$inboundSchema;
-  /** @deprecated use `Int64Field$outboundSchema` instead. */
-  export const outboundSchema = Int64Field$outboundSchema;
-  /** @deprecated use `Int64Field$Outbound` instead. */
-  export type Outbound = Int64Field$Outbound;
-}
-
 export function int64FieldToJSON(int64Field: Int64Field): string {
   return JSON.stringify(Int64Field$outboundSchema.parse(int64Field));
 }
-
 export function int64FieldFromJSON(
   jsonString: string,
 ): SafeParseResult<Int64Field, SDKValidationError> {

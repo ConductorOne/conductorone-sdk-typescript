@@ -37,7 +37,7 @@ export class StepUpProvider extends ClientSDK {
    * List
    *
    * @remarks
-   * Invokes the c1.api.stepup.v1.StepUpProviderService.List method.
+   * List returns all step-up authentication providers configured for the tenant.
    */
   async list(
     options?: RequestOptions,
@@ -52,7 +52,7 @@ export class StepUpProvider extends ClientSDK {
    * Create
    *
    * @remarks
-   * Invokes the c1.api.stepup.v1.StepUpProviderService.Create method.
+   * Create registers a new step-up authentication provider for the tenant.
    */
   async create(
     request?: shared.CreateStepUpProviderRequest | undefined,
@@ -69,7 +69,7 @@ export class StepUpProvider extends ClientSDK {
    * Delete
    *
    * @remarks
-   * Invokes the c1.api.stepup.v1.StepUpProviderService.Delete method.
+   * Delete removes a step-up authentication provider from the tenant.
    */
   async delete(
     request: operations.C1ApiStepupV1StepUpProviderServiceDeleteRequest,
@@ -86,7 +86,7 @@ export class StepUpProvider extends ClientSDK {
    * Get
    *
    * @remarks
-   * Invokes the c1.api.stepup.v1.StepUpProviderService.Get method.
+   * Get retrieves a single step-up authentication provider by its ID.
    */
   async get(
     request: operations.C1ApiStepupV1StepUpProviderServiceGetRequest,
@@ -103,7 +103,7 @@ export class StepUpProvider extends ClientSDK {
    * Update
    *
    * @remarks
-   * Invokes the c1.api.stepup.v1.StepUpProviderService.Update method.
+   * Update modifies an existing step-up authentication provider's configuration. Use the update mask to specify which fields to change.
    */
   async update(
     request: operations.C1ApiStepupV1StepUpProviderServiceUpdateRequest,
@@ -120,7 +120,7 @@ export class StepUpProvider extends ClientSDK {
    * Update Secret
    *
    * @remarks
-   * Invokes the c1.api.stepup.v1.StepUpProviderService.UpdateSecret method.
+   * UpdateSecret rotates the client secret for a step-up authentication provider without modifying other settings.
    */
   async updateSecret(
     request: operations.C1ApiStepupV1StepUpProviderServiceUpdateSecretRequest,
@@ -139,7 +139,7 @@ export class StepUpProvider extends ClientSDK {
    * Test
    *
    * @remarks
-   * Invokes the c1.api.stepup.v1.StepUpProviderService.Test method.
+   * Test initiates a test authentication flow against a step-up provider and returns a redirect URL for the caller to complete verification.
    */
   async test(
     request: operations.C1ApiStepupV1StepUpProviderServiceTestRequest,

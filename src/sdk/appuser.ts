@@ -17,7 +17,7 @@ export class AppUser extends ClientSDK {
    * List
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppUserService.List method.
+   * List app user accounts within a specific app, with pagination support.
    */
   async list(
     request: operations.C1ApiAppV1AppUserServiceListRequest,
@@ -34,7 +34,7 @@ export class AppUser extends ClientSDK {
    * List App User Credentials
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppUserService.ListAppUserCredentials method.
+   * List credentials associated with a specific app user account.
    */
   async listAppUserCredentials(
     request: operations.C1ApiAppV1AppUserServiceListAppUserCredentialsRequest,
@@ -53,7 +53,7 @@ export class AppUser extends ClientSDK {
    * List App Users For User
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppUserService.ListAppUsersForUser method.
+   * List app user accounts within a specific app that are correlated to a given C1 user.
    */
   async listAppUsersForUser(
     request: operations.C1ApiAppV1AppUserServiceListAppUsersForUserRequest,

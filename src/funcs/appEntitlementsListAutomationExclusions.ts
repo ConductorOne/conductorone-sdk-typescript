@@ -4,6 +4,7 @@
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
 import { encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -28,7 +29,7 @@ import { Result } from "../sdk/types/fp.js";
  * List Automation Exclusions
  *
  * @remarks
- * Invokes the c1.api.app.v1.AppEntitlements.ListAutomationExclusions method.
+ * List users who are excluded from the automation rule for an app entitlement.
  */
 export function appEntitlementsListAutomationExclusions(
   client: ConductoroneSDKTypescriptCore,
@@ -99,7 +100,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/api/v1/apps/{app_id}/entitlements/{app_entitlement_id}/automation/exclusions",
   )(pathParams);
@@ -143,7 +143,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

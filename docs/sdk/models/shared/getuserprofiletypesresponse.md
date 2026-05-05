@@ -1,6 +1,6 @@
 # GetUserProfileTypesResponse
 
-The GetUserProfileTypesResponse message.
+GetUserProfileTypesResponse is the response containing the profile types for a user.
 
 ## Example Usage
 
@@ -12,6 +12,6 @@ let value: GetUserProfileTypesResponse = {};
 
 ## Fields
 
-| Field                                                             | Type                                                              | Required                                                          | Description                                                       |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `profileTypes`                                                    | [shared.ProfileType](../../../sdk/models/shared/profiletype.md)[] | :heavy_minus_sign:                                                | The profileTypes field.                                           |
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `profileTypes`                                                                  | [shared.ProfileType](../../../sdk/models/shared/profiletype.md)[]               | :heavy_minus_sign:                                                              | The list of profile types associated with the user across their connected apps. |

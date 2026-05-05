@@ -35,16 +35,6 @@ export type C1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponse = {
 };
 
 /** @internal */
-export const C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.nullable(z.string()),
-  });
-
-/** @internal */
 export type C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest$Outbound =
   {
     id: string | null;
@@ -60,22 +50,6 @@ export const C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest$outboun
     id: z.nullable(z.string()),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest$ {
-  /** @deprecated use `C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest$inboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest$outboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest$Outbound;
-}
-
 export function c1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequestToJSON(
   c1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest:
     C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest,
@@ -83,21 +57,6 @@ export function c1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequestToJSO
   return JSON.stringify(
     C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest$outboundSchema
       .parse(c1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest),
-  );
-}
-
-export function c1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest' from JSON`,
   );
 }
 
@@ -122,66 +81,6 @@ export const C1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponse$inboun
         "getRiskLevelAttributeValueResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    GetRiskLevelAttributeValueResponse?:
-      | shared.GetRiskLevelAttributeValueResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    getRiskLevelAttributeValueResponse: shared
-      .GetRiskLevelAttributeValueResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      getRiskLevelAttributeValueResponse: "GetRiskLevelAttributeValueResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponse$ {
-  /** @deprecated use `C1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponse$inboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponse$outboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponse$Outbound;
-}
-
-export function c1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponseToJSON(
-  c1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponse:
-    C1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponse$outboundSchema
-      .parse(c1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponse),
-  );
-}
 
 export function c1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponseFromJSON(
   jsonString: string,

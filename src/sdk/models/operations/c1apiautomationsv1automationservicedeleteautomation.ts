@@ -11,7 +11,9 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest = {
   id: string | null;
-  deleteAutomationRequest?: shared.DeleteAutomationRequest | undefined;
+  automationsDeleteAutomationRequest?:
+    | shared.AutomationsDeleteAutomationRequest
+    | undefined;
 };
 
 export type C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse = {
@@ -30,31 +32,17 @@ export type C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse = {
   /**
    * Successful response
    */
-  deleteAutomationResponse?: shared.DeleteAutomationResponse | undefined;
+  automationsDeleteAutomationResponse?:
+    | shared.AutomationsDeleteAutomationResponse
+    | undefined;
 };
-
-/** @internal */
-export const C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.nullable(z.string()),
-    DeleteAutomationRequest: shared.DeleteAutomationRequest$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "DeleteAutomationRequest": "deleteAutomationRequest",
-    });
-  });
 
 /** @internal */
 export type C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest$Outbound =
   {
     id: string | null;
-    DeleteAutomationRequest?:
-      | shared.DeleteAutomationRequest$Outbound
+    AutomationsDeleteAutomationRequest?:
+      | shared.AutomationsDeleteAutomationRequest$Outbound
       | undefined;
   };
 
@@ -66,29 +54,13 @@ export const C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest$outbound
     C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest
   > = z.object({
     id: z.nullable(z.string()),
-    deleteAutomationRequest: shared.DeleteAutomationRequest$outboundSchema
-      .optional(),
+    automationsDeleteAutomationRequest: shared
+      .AutomationsDeleteAutomationRequest$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
-      deleteAutomationRequest: "DeleteAutomationRequest",
+      automationsDeleteAutomationRequest: "AutomationsDeleteAutomationRequest",
     });
   });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest$ {
-  /** @deprecated use `C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest$inboundSchema;
-  /** @deprecated use `C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest$outboundSchema;
-  /** @deprecated use `C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest$Outbound;
-}
 
 export function c1ApiAutomationsV1AutomationServiceDeleteAutomationRequestToJSON(
   c1ApiAutomationsV1AutomationServiceDeleteAutomationRequest:
@@ -97,21 +69,6 @@ export function c1ApiAutomationsV1AutomationServiceDeleteAutomationRequestToJSON
   return JSON.stringify(
     C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest$outboundSchema
       .parse(c1ApiAutomationsV1AutomationServiceDeleteAutomationRequest),
-  );
-}
-
-export function c1ApiAutomationsV1AutomationServiceDeleteAutomationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest' from JSON`,
   );
 }
 
@@ -125,76 +82,17 @@ export const C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse$inbound
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    DeleteAutomationResponse: shared.DeleteAutomationResponse$inboundSchema
-      .optional(),
+    AutomationsDeleteAutomationResponse: shared
+      .AutomationsDeleteAutomationResponse$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
       "StatusCode": "statusCode",
       "RawResponse": "rawResponse",
-      "DeleteAutomationResponse": "deleteAutomationResponse",
+      "AutomationsDeleteAutomationResponse":
+        "automationsDeleteAutomationResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    DeleteAutomationResponse?:
-      | shared.DeleteAutomationResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    deleteAutomationResponse: shared.DeleteAutomationResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      deleteAutomationResponse: "DeleteAutomationResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse$ {
-  /** @deprecated use `C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse$inboundSchema;
-  /** @deprecated use `C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse$outboundSchema;
-  /** @deprecated use `C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse$Outbound;
-}
-
-export function c1ApiAutomationsV1AutomationServiceDeleteAutomationResponseToJSON(
-  c1ApiAutomationsV1AutomationServiceDeleteAutomationResponse:
-    C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse$outboundSchema
-      .parse(c1ApiAutomationsV1AutomationServiceDeleteAutomationResponse),
-  );
-}
 
 export function c1ApiAutomationsV1AutomationServiceDeleteAutomationResponseFromJSON(
   jsonString: string,

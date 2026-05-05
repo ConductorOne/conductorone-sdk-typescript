@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The fields to be included in the directory response.
@@ -16,15 +13,6 @@ export type DirectoryExpandMask = {
    */
   paths?: Array<string> | null | undefined;
 };
-
-/** @internal */
-export const DirectoryExpandMask$inboundSchema: z.ZodType<
-  DirectoryExpandMask,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type DirectoryExpandMask$Outbound = {
@@ -40,33 +28,10 @@ export const DirectoryExpandMask$outboundSchema: z.ZodType<
   paths: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DirectoryExpandMask$ {
-  /** @deprecated use `DirectoryExpandMask$inboundSchema` instead. */
-  export const inboundSchema = DirectoryExpandMask$inboundSchema;
-  /** @deprecated use `DirectoryExpandMask$outboundSchema` instead. */
-  export const outboundSchema = DirectoryExpandMask$outboundSchema;
-  /** @deprecated use `DirectoryExpandMask$Outbound` instead. */
-  export type Outbound = DirectoryExpandMask$Outbound;
-}
-
 export function directoryExpandMaskToJSON(
   directoryExpandMask: DirectoryExpandMask,
 ): string {
   return JSON.stringify(
     DirectoryExpandMask$outboundSchema.parse(directoryExpandMask),
-  );
-}
-
-export function directoryExpandMaskFromJSON(
-  jsonString: string,
-): SafeParseResult<DirectoryExpandMask, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DirectoryExpandMask$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DirectoryExpandMask' from JSON`,
   );
 }

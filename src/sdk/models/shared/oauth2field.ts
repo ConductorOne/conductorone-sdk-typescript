@@ -6,52 +6,59 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  Oauth2FieldView,
+  Oauth2FieldView$inboundSchema,
+  Oauth2FieldView$Outbound,
+  Oauth2FieldView$outboundSchema,
+} from "./oauth2fieldview.js";
 
 /**
- * The OAuth2Field message.
+ * The Oauth2Field message.
+ *
+ * @remarks
+ *
+ * This message contains a oneof named view. Only a single field of the following list may be set at a time:
+ *   - oauth2FieldView
  */
-export type OAuth2Field = {};
+export type Oauth2Field = {
+  /**
+   * The Oauth2FieldView message.
+   */
+  oauth2FieldView?: Oauth2FieldView | null | undefined;
+};
 
 /** @internal */
-export const OAuth2Field$inboundSchema: z.ZodType<
-  OAuth2Field,
+export const Oauth2Field$inboundSchema: z.ZodType<
+  Oauth2Field,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = z.object({
+  oauth2FieldView: z.nullable(Oauth2FieldView$inboundSchema).optional(),
+});
+/** @internal */
+export type Oauth2Field$Outbound = {
+  oauth2FieldView?: Oauth2FieldView$Outbound | null | undefined;
+};
 
 /** @internal */
-export type OAuth2Field$Outbound = {};
-
-/** @internal */
-export const OAuth2Field$outboundSchema: z.ZodType<
-  OAuth2Field$Outbound,
+export const Oauth2Field$outboundSchema: z.ZodType<
+  Oauth2Field$Outbound,
   z.ZodTypeDef,
-  OAuth2Field
-> = z.object({});
+  Oauth2Field
+> = z.object({
+  oauth2FieldView: z.nullable(Oauth2FieldView$outboundSchema).optional(),
+});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace OAuth2Field$ {
-  /** @deprecated use `OAuth2Field$inboundSchema` instead. */
-  export const inboundSchema = OAuth2Field$inboundSchema;
-  /** @deprecated use `OAuth2Field$outboundSchema` instead. */
-  export const outboundSchema = OAuth2Field$outboundSchema;
-  /** @deprecated use `OAuth2Field$Outbound` instead. */
-  export type Outbound = OAuth2Field$Outbound;
+export function oauth2FieldToJSON(oauth2Field: Oauth2Field): string {
+  return JSON.stringify(Oauth2Field$outboundSchema.parse(oauth2Field));
 }
-
-export function oAuth2FieldToJSON(oAuth2Field: OAuth2Field): string {
-  return JSON.stringify(OAuth2Field$outboundSchema.parse(oAuth2Field));
-}
-
-export function oAuth2FieldFromJSON(
+export function oauth2FieldFromJSON(
   jsonString: string,
-): SafeParseResult<OAuth2Field, SDKValidationError> {
+): SafeParseResult<Oauth2Field, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => OAuth2Field$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OAuth2Field' from JSON`,
+    (x) => Oauth2Field$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Oauth2Field' from JSON`,
   );
 }

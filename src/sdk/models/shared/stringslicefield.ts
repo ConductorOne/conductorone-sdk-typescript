@@ -13,6 +13,12 @@ import {
   ChipsField$outboundSchema,
 } from "./chipsfield.js";
 import {
+  PickerField,
+  PickerField$inboundSchema,
+  PickerField$Outbound,
+  PickerField$outboundSchema,
+} from "./pickerfield.js";
+import {
   RepeatedRules,
   RepeatedRules$inboundSchema,
   RepeatedRules$Outbound,
@@ -26,9 +32,7 @@ import {
  *
  * This message contains a oneof named view. Only a single field of the following list may be set at a time:
  *   - chipsField
- *
- * This message contains a oneof named _rules. Only a single field of the following list may be set at a time:
- *   - rules
+ *   - pickerField
  */
 export type StringSliceField = {
   chipsField?: ChipsField | null | undefined;
@@ -36,6 +40,17 @@ export type StringSliceField = {
    * The defaultValues field.
    */
   defaultValues?: Array<string> | null | undefined;
+  /**
+   * The PickerField message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named type. Only a single field of the following list may be set at a time:
+   *   - appUserPicker
+   *   - resourcePicker
+   *   - c1UserPicker
+   */
+  pickerField?: PickerField | null | undefined;
   /**
    * The placeholder field.
    */
@@ -51,14 +66,15 @@ export const StringSliceField$inboundSchema: z.ZodType<
 > = z.object({
   chipsField: z.nullable(ChipsField$inboundSchema).optional(),
   defaultValues: z.nullable(z.array(z.string())).optional(),
+  pickerField: z.nullable(PickerField$inboundSchema).optional(),
   placeholder: z.nullable(z.string()).optional(),
   rules: z.nullable(RepeatedRules$inboundSchema).optional(),
 });
-
 /** @internal */
 export type StringSliceField$Outbound = {
   chipsField?: ChipsField$Outbound | null | undefined;
   defaultValues?: Array<string> | null | undefined;
+  pickerField?: PickerField$Outbound | null | undefined;
   placeholder?: string | null | undefined;
   rules?: RepeatedRules$Outbound | null | undefined;
 };
@@ -71,22 +87,10 @@ export const StringSliceField$outboundSchema: z.ZodType<
 > = z.object({
   chipsField: z.nullable(ChipsField$outboundSchema).optional(),
   defaultValues: z.nullable(z.array(z.string())).optional(),
+  pickerField: z.nullable(PickerField$outboundSchema).optional(),
   placeholder: z.nullable(z.string()).optional(),
   rules: z.nullable(RepeatedRules$outboundSchema).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StringSliceField$ {
-  /** @deprecated use `StringSliceField$inboundSchema` instead. */
-  export const inboundSchema = StringSliceField$inboundSchema;
-  /** @deprecated use `StringSliceField$outboundSchema` instead. */
-  export const outboundSchema = StringSliceField$outboundSchema;
-  /** @deprecated use `StringSliceField$Outbound` instead. */
-  export type Outbound = StringSliceField$Outbound;
-}
 
 export function stringSliceFieldToJSON(
   stringSliceField: StringSliceField,
@@ -95,7 +99,6 @@ export function stringSliceFieldToJSON(
     StringSliceField$outboundSchema.parse(stringSliceField),
   );
 }
-
 export function stringSliceFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<StringSliceField, SDKValidationError> {

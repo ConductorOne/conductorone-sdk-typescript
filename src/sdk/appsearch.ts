@@ -3,10 +3,12 @@
  */
 
 import { appSearchSearch } from "../funcs/appSearchSearch.js";
+import { appSearchSearchUserOwnership } from "../funcs/appSearchSearchUserOwnership.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import { PageIterator, unwrapResultIterator } from "../sdk/types/operations.js";
 import * as operations from "./models/operations/index.js";
 import * as shared from "./models/shared/index.js";
+import { unwrapAsync } from "./types/fp.js";
 
 export class AppSearch extends ClientSDK {
   /**
@@ -25,6 +27,23 @@ export class AppSearch extends ClientSDK {
     >
   > {
     return unwrapResultIterator(appSearchSearch(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Search User Ownership
+   *
+   * @remarks
+   * Search all ownership assignments for a given user across apps, resources, and entitlements.
+   */
+  async searchUserOwnership(
+    request?: shared.SearchUserOwnershipRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.C1ApiAppV1AppSearchSearchUserOwnershipResponse> {
+    return unwrapAsync(appSearchSearchUserOwnership(
       this,
       request,
       options,

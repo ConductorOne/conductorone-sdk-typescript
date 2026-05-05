@@ -38,24 +38,6 @@ export type C1ApiTaskV1TaskActionsServiceApproveWithStepUpResponse = {
 };
 
 /** @internal */
-export const C1ApiTaskV1TaskActionsServiceApproveWithStepUpRequest$inboundSchema:
-  z.ZodType<
-    C1ApiTaskV1TaskActionsServiceApproveWithStepUpRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    task_id: z.string(),
-    TaskActionsServiceApproveWithStepUpRequest: shared
-      .TaskActionsServiceApproveWithStepUpRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "task_id": "taskId",
-      "TaskActionsServiceApproveWithStepUpRequest":
-        "taskActionsServiceApproveWithStepUpRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiTaskV1TaskActionsServiceApproveWithStepUpRequest$Outbound = {
   task_id: string;
   TaskActionsServiceApproveWithStepUpRequest?:
@@ -81,22 +63,6 @@ export const C1ApiTaskV1TaskActionsServiceApproveWithStepUpRequest$outboundSchem
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceApproveWithStepUpRequest$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceApproveWithStepUpRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceApproveWithStepUpRequest$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceApproveWithStepUpRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceApproveWithStepUpRequest$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceApproveWithStepUpRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiTaskV1TaskActionsServiceApproveWithStepUpRequest$Outbound;
-}
-
 export function c1ApiTaskV1TaskActionsServiceApproveWithStepUpRequestToJSON(
   c1ApiTaskV1TaskActionsServiceApproveWithStepUpRequest:
     C1ApiTaskV1TaskActionsServiceApproveWithStepUpRequest,
@@ -105,22 +71,6 @@ export function c1ApiTaskV1TaskActionsServiceApproveWithStepUpRequestToJSON(
     C1ApiTaskV1TaskActionsServiceApproveWithStepUpRequest$outboundSchema.parse(
       c1ApiTaskV1TaskActionsServiceApproveWithStepUpRequest,
     ),
-  );
-}
-
-export function c1ApiTaskV1TaskActionsServiceApproveWithStepUpRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiTaskV1TaskActionsServiceApproveWithStepUpRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiTaskV1TaskActionsServiceApproveWithStepUpRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiTaskV1TaskActionsServiceApproveWithStepUpRequest' from JSON`,
   );
 }
 
@@ -145,67 +95,6 @@ export const C1ApiTaskV1TaskActionsServiceApproveWithStepUpResponse$inboundSchem
         "taskActionsServiceApproveWithStepUpResponse",
     });
   });
-
-/** @internal */
-export type C1ApiTaskV1TaskActionsServiceApproveWithStepUpResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  TaskActionsServiceApproveWithStepUpResponse?:
-    | shared.TaskActionsServiceApproveWithStepUpResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiTaskV1TaskActionsServiceApproveWithStepUpResponse$outboundSchema:
-  z.ZodType<
-    C1ApiTaskV1TaskActionsServiceApproveWithStepUpResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiTaskV1TaskActionsServiceApproveWithStepUpResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    taskActionsServiceApproveWithStepUpResponse: shared
-      .TaskActionsServiceApproveWithStepUpResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      taskActionsServiceApproveWithStepUpResponse:
-        "TaskActionsServiceApproveWithStepUpResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiTaskV1TaskActionsServiceApproveWithStepUpResponse$ {
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceApproveWithStepUpResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiTaskV1TaskActionsServiceApproveWithStepUpResponse$inboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceApproveWithStepUpResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiTaskV1TaskActionsServiceApproveWithStepUpResponse$outboundSchema;
-  /** @deprecated use `C1ApiTaskV1TaskActionsServiceApproveWithStepUpResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiTaskV1TaskActionsServiceApproveWithStepUpResponse$Outbound;
-}
-
-export function c1ApiTaskV1TaskActionsServiceApproveWithStepUpResponseToJSON(
-  c1ApiTaskV1TaskActionsServiceApproveWithStepUpResponse:
-    C1ApiTaskV1TaskActionsServiceApproveWithStepUpResponse,
-): string {
-  return JSON.stringify(
-    C1ApiTaskV1TaskActionsServiceApproveWithStepUpResponse$outboundSchema.parse(
-      c1ApiTaskV1TaskActionsServiceApproveWithStepUpResponse,
-    ),
-  );
-}
 
 export function c1ApiTaskV1TaskActionsServiceApproveWithStepUpResponseFromJSON(
   jsonString: string,

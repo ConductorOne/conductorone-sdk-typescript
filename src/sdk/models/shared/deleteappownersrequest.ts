@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The request message for deleting app owners.
@@ -16,15 +13,6 @@ export type DeleteAppOwnersRequest = {
    */
   userIds?: Array<string> | null | undefined;
 };
-
-/** @internal */
-export const DeleteAppOwnersRequest$inboundSchema: z.ZodType<
-  DeleteAppOwnersRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type DeleteAppOwnersRequest$Outbound = {
@@ -40,33 +28,10 @@ export const DeleteAppOwnersRequest$outboundSchema: z.ZodType<
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteAppOwnersRequest$ {
-  /** @deprecated use `DeleteAppOwnersRequest$inboundSchema` instead. */
-  export const inboundSchema = DeleteAppOwnersRequest$inboundSchema;
-  /** @deprecated use `DeleteAppOwnersRequest$outboundSchema` instead. */
-  export const outboundSchema = DeleteAppOwnersRequest$outboundSchema;
-  /** @deprecated use `DeleteAppOwnersRequest$Outbound` instead. */
-  export type Outbound = DeleteAppOwnersRequest$Outbound;
-}
-
 export function deleteAppOwnersRequestToJSON(
   deleteAppOwnersRequest: DeleteAppOwnersRequest,
 ): string {
   return JSON.stringify(
     DeleteAppOwnersRequest$outboundSchema.parse(deleteAppOwnersRequest),
-  );
-}
-
-export function deleteAppOwnersRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteAppOwnersRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteAppOwnersRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteAppOwnersRequest' from JSON`,
   );
 }

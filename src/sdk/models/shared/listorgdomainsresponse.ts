@@ -6,23 +6,18 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  OrgDomain,
-  OrgDomain$inboundSchema,
-  OrgDomain$Outbound,
-  OrgDomain$outboundSchema,
-} from "./orgdomain.js";
+import { OrgDomain, OrgDomain$inboundSchema } from "./orgdomain.js";
 
 /**
  * The ListOrgDomainsResponse message.
  */
 export type ListOrgDomainsResponse = {
   /**
-   * The list field.
+   * The list of verified domains.
    */
   list?: Array<OrgDomain> | null | undefined;
   /**
-   * The nextPageToken field.
+   * A token to retrieve the next page of results, or empty if there are no more results.
    */
   nextPageToken?: string | null | undefined;
 };
@@ -36,43 +31,6 @@ export const ListOrgDomainsResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(OrgDomain$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ListOrgDomainsResponse$Outbound = {
-  list?: Array<OrgDomain$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ListOrgDomainsResponse$outboundSchema: z.ZodType<
-  ListOrgDomainsResponse$Outbound,
-  z.ZodTypeDef,
-  ListOrgDomainsResponse
-> = z.object({
-  list: z.nullable(z.array(OrgDomain$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListOrgDomainsResponse$ {
-  /** @deprecated use `ListOrgDomainsResponse$inboundSchema` instead. */
-  export const inboundSchema = ListOrgDomainsResponse$inboundSchema;
-  /** @deprecated use `ListOrgDomainsResponse$outboundSchema` instead. */
-  export const outboundSchema = ListOrgDomainsResponse$outboundSchema;
-  /** @deprecated use `ListOrgDomainsResponse$Outbound` instead. */
-  export type Outbound = ListOrgDomainsResponse$Outbound;
-}
-
-export function listOrgDomainsResponseToJSON(
-  listOrgDomainsResponse: ListOrgDomainsResponse,
-): string {
-  return JSON.stringify(
-    ListOrgDomainsResponse$outboundSchema.parse(listOrgDomainsResponse),
-  );
-}
 
 export function listOrgDomainsResponseFromJSON(
   jsonString: string,

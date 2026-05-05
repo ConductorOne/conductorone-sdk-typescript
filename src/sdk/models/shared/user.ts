@@ -4,18 +4,13 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   UserAttributeMappingSource,
   UserAttributeMappingSource$inboundSchema,
-  UserAttributeMappingSource$Outbound,
-  UserAttributeMappingSource$outboundSchema,
 } from "./userattributemappingsource.js";
 
 /**
@@ -33,9 +28,23 @@ export const DirectoryStatus = {
 export type DirectoryStatus = OpenEnum<typeof DirectoryStatus>;
 
 /**
+ * The origin of the user, describing who owns the user's lifecycle.
+ */
+export const Origin = {
+  UserOriginUnspecified: "USER_ORIGIN_UNSPECIFIED",
+  UserOriginDirectory: "USER_ORIGIN_DIRECTORY",
+  UserOriginLocal: "USER_ORIGIN_LOCAL",
+  UserOriginSystem: "USER_ORIGIN_SYSTEM",
+} as const;
+/**
+ * The origin of the user, describing who owns the user's lifecycle.
+ */
+export type Origin = OpenEnum<typeof Origin>;
+
+/**
  * The status of the user in the system.
  */
-export const UserStatus = {
+export const UserSchemasStatus = {
   Unknown: "UNKNOWN",
   Enabled: "ENABLED",
   Disabled: "DISABLED",
@@ -44,7 +53,7 @@ export const UserStatus = {
 /**
  * The status of the user in the system.
  */
-export type UserStatus = OpenEnum<typeof UserStatus>;
+export type UserSchemasStatus = OpenEnum<typeof UserSchemasStatus>;
 
 /**
  * The type of the user.
@@ -154,6 +163,10 @@ export type User = {
    * A list of objects mapped based on managerId attribute mappings configured in the system.
    */
   managerSources?: Array<UserAttributeMappingSource> | null | undefined;
+  /**
+   * The origin of the user, describing who owns the user's lifecycle.
+   */
+  origin?: Origin | undefined;
   profile?: { [k: string]: any } | null | undefined;
   /**
    * A list of unique identifiers that maps to ConductorOne's user roles let you assign users permissions tailored to the work they do in the software.
@@ -162,7 +175,7 @@ export type User = {
   /**
    * The status of the user in the system.
    */
-  status?: UserStatus | null | undefined;
+  status?: UserSchemasStatus | null | undefined;
   /**
    * The type of the user.
    */
@@ -182,95 +195,55 @@ export type User = {
   usernames?: Array<string> | null | undefined;
 };
 
+/**
+ * The User object provides all of the details for an user, as well as some configuration.
+ */
+export type UserInput = {
+  createdAt?: Date | null | undefined;
+  /**
+   * The id of the user to whom tasks will be automatically reassigned to.
+   */
+  delegatedUserId?: string | null | undefined;
+  deletedAt?: Date | null | undefined;
+  profile?: { [k: string]: any } | null | undefined;
+  /**
+   * A list of unique identifiers that maps to ConductorOne's user roles let you assign users permissions tailored to the work they do in the software.
+   */
+  roleIds?: Array<string> | null | undefined;
+  /**
+   * The status of the user in the system.
+   */
+  status?: UserSchemasStatus | null | undefined;
+  updatedAt?: Date | null | undefined;
+};
+
 /** @internal */
 export const DirectoryStatus$inboundSchema: z.ZodType<
   DirectoryStatus,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(DirectoryStatus),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
+> = openEnums.inboundSchema(DirectoryStatus);
 
 /** @internal */
-export const DirectoryStatus$outboundSchema: z.ZodType<
-  DirectoryStatus,
-  z.ZodTypeDef,
-  DirectoryStatus
-> = z.union([
-  z.nativeEnum(DirectoryStatus),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DirectoryStatus$ {
-  /** @deprecated use `DirectoryStatus$inboundSchema` instead. */
-  export const inboundSchema = DirectoryStatus$inboundSchema;
-  /** @deprecated use `DirectoryStatus$outboundSchema` instead. */
-  export const outboundSchema = DirectoryStatus$outboundSchema;
-}
+export const Origin$inboundSchema: z.ZodType<Origin, z.ZodTypeDef, unknown> =
+  openEnums.inboundSchema(Origin);
 
 /** @internal */
-export const UserStatus$inboundSchema: z.ZodType<
-  UserStatus,
+export const UserSchemasStatus$inboundSchema: z.ZodType<
+  UserSchemasStatus,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(UserStatus),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(UserSchemasStatus);
 /** @internal */
-export const UserStatus$outboundSchema: z.ZodType<
-  UserStatus,
+export const UserSchemasStatus$outboundSchema: z.ZodType<
+  string,
   z.ZodTypeDef,
-  UserStatus
-> = z.union([
-  z.nativeEnum(UserStatus),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UserStatus$ {
-  /** @deprecated use `UserStatus$inboundSchema` instead. */
-  export const inboundSchema = UserStatus$inboundSchema;
-  /** @deprecated use `UserStatus$outboundSchema` instead. */
-  export const outboundSchema = UserStatus$outboundSchema;
-}
+  UserSchemasStatus
+> = openEnums.outboundSchema(UserSchemasStatus);
 
 /** @internal */
-export const Type$inboundSchema: z.ZodType<Type, z.ZodTypeDef, unknown> = z
-  .union([
-    z.nativeEnum(Type),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const Type$outboundSchema: z.ZodType<Type, z.ZodTypeDef, Type> = z.union(
-  [
-    z.nativeEnum(Type),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ],
-);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Type$ {
-  /** @deprecated use `Type$inboundSchema` instead. */
-  export const inboundSchema = Type$inboundSchema;
-  /** @deprecated use `Type$outboundSchema` instead. */
-  export const outboundSchema = Type$outboundSchema;
-}
+export const Type$inboundSchema: z.ZodType<Type, z.ZodTypeDef, unknown> =
+  openEnums.inboundSchema(Type);
 
 /** @internal */
 export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> = z
@@ -317,9 +290,10 @@ export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> = z
     managerSources: z.nullable(
       z.array(UserAttributeMappingSource$inboundSchema),
     ).optional(),
+    origin: Origin$inboundSchema.optional(),
     profile: z.nullable(z.record(z.any())).optional(),
     roleIds: z.nullable(z.array(z.string())).optional(),
-    status: z.nullable(UserStatus$inboundSchema).optional(),
+    status: z.nullable(UserSchemasStatus$inboundSchema).optional(),
     type: z.nullable(Type$inboundSchema).optional(),
     updatedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -331,135 +305,6 @@ export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> = z
     usernames: z.nullable(z.array(z.string())).optional(),
   });
 
-/** @internal */
-export type User$Outbound = {
-  createdAt?: string | null | undefined;
-  delegatedUserId?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  department?: string | null | undefined;
-  departmentSources?:
-    | Array<UserAttributeMappingSource$Outbound>
-    | null
-    | undefined;
-  directoryIds?: Array<string> | null | undefined;
-  directoryStatus?: string | null | undefined;
-  directoryStatusSources?:
-    | Array<UserAttributeMappingSource$Outbound>
-    | null
-    | undefined;
-  displayName?: string | null | undefined;
-  email?: string | null | undefined;
-  emailSources?: Array<UserAttributeMappingSource$Outbound> | null | undefined;
-  emails?: Array<string> | null | undefined;
-  employeeIdSources?:
-    | Array<UserAttributeMappingSource$Outbound>
-    | null
-    | undefined;
-  employeeIds?: Array<string> | null | undefined;
-  employmentStatus?: string | null | undefined;
-  employmentStatusSources?:
-    | Array<UserAttributeMappingSource$Outbound>
-    | null
-    | undefined;
-  employmentType?: string | null | undefined;
-  employmentTypeSources?:
-    | Array<UserAttributeMappingSource$Outbound>
-    | null
-    | undefined;
-  id?: string | null | undefined;
-  jobTitle?: string | null | undefined;
-  jobTitleSources?:
-    | Array<UserAttributeMappingSource$Outbound>
-    | null
-    | undefined;
-  managerIds?: Array<string> | null | undefined;
-  managerSources?:
-    | Array<UserAttributeMappingSource$Outbound>
-    | null
-    | undefined;
-  profile?: { [k: string]: any } | null | undefined;
-  roleIds?: Array<string> | null | undefined;
-  status?: string | null | undefined;
-  type?: string | null | undefined;
-  updatedAt?: string | null | undefined;
-  username?: string | null | undefined;
-  usernameSources?:
-    | Array<UserAttributeMappingSource$Outbound>
-    | null
-    | undefined;
-  usernames?: Array<string> | null | undefined;
-};
-
-/** @internal */
-export const User$outboundSchema: z.ZodType<User$Outbound, z.ZodTypeDef, User> =
-  z.object({
-    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-    delegatedUserId: z.nullable(z.string()).optional(),
-    deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-    department: z.nullable(z.string()).optional(),
-    departmentSources: z.nullable(
-      z.array(UserAttributeMappingSource$outboundSchema),
-    ).optional(),
-    directoryIds: z.nullable(z.array(z.string())).optional(),
-    directoryStatus: z.nullable(DirectoryStatus$outboundSchema).optional(),
-    directoryStatusSources: z.nullable(
-      z.array(UserAttributeMappingSource$outboundSchema),
-    ).optional(),
-    displayName: z.nullable(z.string()).optional(),
-    email: z.nullable(z.string()).optional(),
-    emailSources: z.nullable(z.array(UserAttributeMappingSource$outboundSchema))
-      .optional(),
-    emails: z.nullable(z.array(z.string())).optional(),
-    employeeIdSources: z.nullable(
-      z.array(UserAttributeMappingSource$outboundSchema),
-    ).optional(),
-    employeeIds: z.nullable(z.array(z.string())).optional(),
-    employmentStatus: z.nullable(z.string()).optional(),
-    employmentStatusSources: z.nullable(
-      z.array(UserAttributeMappingSource$outboundSchema),
-    ).optional(),
-    employmentType: z.nullable(z.string()).optional(),
-    employmentTypeSources: z.nullable(
-      z.array(UserAttributeMappingSource$outboundSchema),
-    ).optional(),
-    id: z.nullable(z.string()).optional(),
-    jobTitle: z.nullable(z.string()).optional(),
-    jobTitleSources: z.nullable(
-      z.array(UserAttributeMappingSource$outboundSchema),
-    ).optional(),
-    managerIds: z.nullable(z.array(z.string())).optional(),
-    managerSources: z.nullable(
-      z.array(UserAttributeMappingSource$outboundSchema),
-    ).optional(),
-    profile: z.nullable(z.record(z.any())).optional(),
-    roleIds: z.nullable(z.array(z.string())).optional(),
-    status: z.nullable(UserStatus$outboundSchema).optional(),
-    type: z.nullable(Type$outboundSchema).optional(),
-    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-    username: z.nullable(z.string()).optional(),
-    usernameSources: z.nullable(
-      z.array(UserAttributeMappingSource$outboundSchema),
-    ).optional(),
-    usernames: z.nullable(z.array(z.string())).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace User$ {
-  /** @deprecated use `User$inboundSchema` instead. */
-  export const inboundSchema = User$inboundSchema;
-  /** @deprecated use `User$outboundSchema` instead. */
-  export const outboundSchema = User$outboundSchema;
-  /** @deprecated use `User$Outbound` instead. */
-  export type Outbound = User$Outbound;
-}
-
-export function userToJSON(user: User): string {
-  return JSON.stringify(User$outboundSchema.parse(user));
-}
-
 export function userFromJSON(
   jsonString: string,
 ): SafeParseResult<User, SDKValidationError> {
@@ -468,4 +313,34 @@ export function userFromJSON(
     (x) => User$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'User' from JSON`,
   );
+}
+
+/** @internal */
+export type UserInput$Outbound = {
+  createdAt?: string | null | undefined;
+  delegatedUserId?: string | null | undefined;
+  deletedAt?: string | null | undefined;
+  profile?: { [k: string]: any } | null | undefined;
+  roleIds?: Array<string> | null | undefined;
+  status?: string | null | undefined;
+  updatedAt?: string | null | undefined;
+};
+
+/** @internal */
+export const UserInput$outboundSchema: z.ZodType<
+  UserInput$Outbound,
+  z.ZodTypeDef,
+  UserInput
+> = z.object({
+  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  delegatedUserId: z.nullable(z.string()).optional(),
+  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  profile: z.nullable(z.record(z.any())).optional(),
+  roleIds: z.nullable(z.array(z.string())).optional(),
+  status: z.nullable(UserSchemasStatus$outboundSchema).optional(),
+  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+});
+
+export function userInputToJSON(userInput: UserInput): string {
+  return JSON.stringify(UserInput$outboundSchema.parse(userInput));
 }

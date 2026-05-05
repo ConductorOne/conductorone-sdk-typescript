@@ -33,7 +33,7 @@ export class AppResourceType extends ClientSDK {
    * Create Manually Managed Resource Type
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppResourceTypeService.CreateManuallyManagedResourceType method.
+   * Create a manually managed resource type that classifies resources within an app.
    */
   async createManuallyManagedResourceType(
     request:
@@ -53,7 +53,7 @@ export class AppResourceType extends ClientSDK {
    * Delete Manually Managed Resource Type
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppResourceTypeService.DeleteManuallyManagedResourceType method.
+   * Delete a manually managed resource type and all its associated resources from an app.
    */
   async deleteManuallyManagedResourceType(
     request:
@@ -90,7 +90,7 @@ export class AppResourceType extends ClientSDK {
    * Update Manually Managed Resource Type
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppResourceTypeService.UpdateManuallyManagedResourceType method.
+   * Update a manually managed resource type's fields. Only the fields specified in the update mask are modified.
    */
   async updateManuallyManagedResourceType(
     request:

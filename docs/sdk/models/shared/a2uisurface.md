@@ -1,0 +1,28 @@
+# A2UISurface
+
+A2UISurface represents a rendered UI surface within a conversation.
+
+## Example Usage
+
+```typescript
+import { A2UISurface } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: A2UISurface = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `catalogId`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | The catalogId field.                                                                          |
+| `components`                                                                                  | [shared.A2UIComponent](../../../sdk/models/shared/a2uicomponent.md)[]                         | :heavy_minus_sign:                                                                            | The components field.                                                                         |
+| `conversationId`                                                                              | *string*                                                                                      | :heavy_minus_sign:                                                                            | The conversationId field.                                                                     |
+| `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `dataModelJson`                                                                               | *string*                                                                                      | :heavy_minus_sign:                                                                            | The dataModelJson field.                                                                      |
+| `deletedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `schemaVersion`                                                                               | *number*                                                                                      | :heavy_minus_sign:                                                                            | The schemaVersion field.                                                                      |
+| `sendDataModel`                                                                               | *boolean*                                                                                     | :heavy_minus_sign:                                                                            | The sendDataModel field.                                                                      |
+| `state`                                                                                       | [shared.State](../../../sdk/models/shared/state.md)                                           | :heavy_minus_sign:                                                                            | The state field.                                                                              |
+| `surfaceId`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | The surfaceId field.                                                                          |
+| `tenantId`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | The tenantId field.                                                                           |
+| `updatedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |

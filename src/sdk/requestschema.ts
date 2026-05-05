@@ -19,7 +19,7 @@ export class RequestSchema extends ClientSDK {
    * Remove Entitlement Binding
    *
    * @remarks
-   * Invokes the c1.api.request_schema.v1.RequestSchemaService.RemoveEntitlementBinding method.
+   * Remove the link between a request schema and a single app entitlement.
    */
   async removeEntitlementBinding(
     request?:
@@ -40,7 +40,7 @@ export class RequestSchema extends ClientSDK {
    * Create Entitlement Binding
    *
    * @remarks
-   * Invokes the c1.api.request_schema.v1.RequestSchemaService.CreateEntitlementBinding method.
+   * Link a request schema to a single app entitlement so the form is shown when requesting that entitlement.
    */
   async createEntitlementBinding(
     request?:
@@ -61,7 +61,7 @@ export class RequestSchema extends ClientSDK {
    * Find Binding For App Entitlement
    *
    * @remarks
-   * Invokes the c1.api.request_schema.v1.RequestSchemaService.FindBindingForAppEntitlement method.
+   * Look up which request schema is bound to a given app entitlement.
    */
   async findBindingForAppEntitlement(
     request?:
@@ -82,7 +82,7 @@ export class RequestSchema extends ClientSDK {
    * Create
    *
    * @remarks
-   * Invokes the c1.api.request_schema.v1.RequestSchemaService.Create method.
+   * Create a new request schema that defines a form template for access requests.
    */
   async create(
     request?: shared.RequestSchemaServiceCreateRequest | undefined,
@@ -101,7 +101,7 @@ export class RequestSchema extends ClientSDK {
    * Delete
    *
    * @remarks
-   * Invokes the c1.api.request_schema.v1.RequestSchemaService.Delete method.
+   * Delete a request schema by ID. Associated entitlement bindings are also deleted.
    */
   async delete(
     request: operations.C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest,
@@ -120,7 +120,7 @@ export class RequestSchema extends ClientSDK {
    * Get
    *
    * @remarks
-   * Invokes the c1.api.request_schema.v1.RequestSchemaService.Get method.
+   * Retrieve a single request schema by ID.
    */
   async get(
     request: operations.C1ApiRequestSchemaV1RequestSchemaServiceGetRequest,
@@ -137,7 +137,7 @@ export class RequestSchema extends ClientSDK {
    * Update
    *
    * @remarks
-   * Invokes the c1.api.request_schema.v1.RequestSchemaService.Update method.
+   * Update an existing request schema's form definition or settings.
    */
   async update(
     request: operations.C1ApiRequestSchemaV1RequestSchemaServiceUpdateRequest,

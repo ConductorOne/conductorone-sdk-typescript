@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The AppEntitlementAutomationLastRunStatus message.
@@ -13,15 +10,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type AppEntitlementAutomationLastRunStatusInput = {
   lastCompletedAt?: Date | null | undefined;
 };
-
-/** @internal */
-export const AppEntitlementAutomationLastRunStatusInput$inboundSchema:
-  z.ZodType<AppEntitlementAutomationLastRunStatusInput, z.ZodTypeDef, unknown> =
-    z.object({
-      lastCompletedAt: z.nullable(
-        z.string().datetime({ offset: true }).transform(v => new Date(v)),
-      ).optional(),
-    });
 
 /** @internal */
 export type AppEntitlementAutomationLastRunStatusInput$Outbound = {
@@ -39,21 +27,6 @@ export const AppEntitlementAutomationLastRunStatusInput$outboundSchema:
       .optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementAutomationLastRunStatusInput$ {
-  /** @deprecated use `AppEntitlementAutomationLastRunStatusInput$inboundSchema` instead. */
-  export const inboundSchema =
-    AppEntitlementAutomationLastRunStatusInput$inboundSchema;
-  /** @deprecated use `AppEntitlementAutomationLastRunStatusInput$outboundSchema` instead. */
-  export const outboundSchema =
-    AppEntitlementAutomationLastRunStatusInput$outboundSchema;
-  /** @deprecated use `AppEntitlementAutomationLastRunStatusInput$Outbound` instead. */
-  export type Outbound = AppEntitlementAutomationLastRunStatusInput$Outbound;
-}
-
 export function appEntitlementAutomationLastRunStatusInputToJSON(
   appEntitlementAutomationLastRunStatusInput:
     AppEntitlementAutomationLastRunStatusInput,
@@ -62,21 +35,5 @@ export function appEntitlementAutomationLastRunStatusInputToJSON(
     AppEntitlementAutomationLastRunStatusInput$outboundSchema.parse(
       appEntitlementAutomationLastRunStatusInput,
     ),
-  );
-}
-
-export function appEntitlementAutomationLastRunStatusInputFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  AppEntitlementAutomationLastRunStatusInput,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      AppEntitlementAutomationLastRunStatusInput$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'AppEntitlementAutomationLastRunStatusInput' from JSON`,
   );
 }

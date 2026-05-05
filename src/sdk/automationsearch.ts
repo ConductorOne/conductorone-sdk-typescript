@@ -14,7 +14,7 @@ export class AutomationSearch extends ClientSDK {
    * Search Automation Template Versions
    *
    * @remarks
-   * Invokes the c1.api.automations.v1.AutomationSearchService.SearchAutomationTemplateVersions method.
+   * Search for versioned snapshots of an automation template's steps and triggers.
    */
   async searchAutomationTemplateVersions(
     request?: shared.SearchAutomationTemplateVersionsRequest | undefined,
@@ -33,7 +33,7 @@ export class AutomationSearch extends ClientSDK {
    * Search Automations
    *
    * @remarks
-   * Invokes the c1.api.automations.v1.AutomationSearchService.SearchAutomations method.
+   * Search for automations matching the provided filters, including query text, template refs, app, and trigger types.
    */
   async searchAutomations(
     request?: shared.SearchAutomationsRequest | undefined,

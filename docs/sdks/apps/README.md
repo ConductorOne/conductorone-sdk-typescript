@@ -1,5 +1,4 @@
 # Apps
-(*apps*)
 
 ## Overview
 

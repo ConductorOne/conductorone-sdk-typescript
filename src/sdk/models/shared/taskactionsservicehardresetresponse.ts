@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  TaskView,
-  TaskView$inboundSchema,
-  TaskView$Outbound,
-  TaskView$outboundSchema,
-} from "./taskview.js";
+import { TaskView, TaskView$inboundSchema } from "./taskview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -29,11 +24,11 @@ export type TaskActionsServiceHardResetResponseExpanded = {
 };
 
 /**
- * The TaskActionsServiceHardResetResponse message.
+ * The TaskActionsServiceHardResetResponse returns the updated task after a hard reset.
  */
 export type TaskActionsServiceHardResetResponse = {
   /**
-   * The expanded field.
+   * List of serialized related objects.
    */
   expanded?:
     | Array<TaskActionsServiceHardResetResponseExpanded>
@@ -41,7 +36,7 @@ export type TaskActionsServiceHardResetResponse = {
     | undefined;
   taskView?: TaskView | null | undefined;
   /**
-   * The ticketActionId field.
+   * The ID of the task reset action created by this request.
    */
   ticketActionId?: string | null | undefined;
 };
@@ -63,57 +58,6 @@ export const TaskActionsServiceHardResetResponseExpanded$inboundSchema:
       "@type": "atType",
     });
   });
-
-/** @internal */
-export type TaskActionsServiceHardResetResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const TaskActionsServiceHardResetResponseExpanded$outboundSchema:
-  z.ZodType<
-    TaskActionsServiceHardResetResponseExpanded$Outbound,
-    z.ZodTypeDef,
-    TaskActionsServiceHardResetResponseExpanded
-  > = z.object({
-    atType: z.string().optional(),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        atType: "@type",
-        additionalProperties: null,
-      }),
-    };
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceHardResetResponseExpanded$ {
-  /** @deprecated use `TaskActionsServiceHardResetResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskActionsServiceHardResetResponseExpanded$inboundSchema;
-  /** @deprecated use `TaskActionsServiceHardResetResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceHardResetResponseExpanded$outboundSchema;
-  /** @deprecated use `TaskActionsServiceHardResetResponseExpanded$Outbound` instead. */
-  export type Outbound = TaskActionsServiceHardResetResponseExpanded$Outbound;
-}
-
-export function taskActionsServiceHardResetResponseExpandedToJSON(
-  taskActionsServiceHardResetResponseExpanded:
-    TaskActionsServiceHardResetResponseExpanded,
-): string {
-  return JSON.stringify(
-    TaskActionsServiceHardResetResponseExpanded$outboundSchema.parse(
-      taskActionsServiceHardResetResponseExpanded,
-    ),
-  );
-}
 
 export function taskActionsServiceHardResetResponseExpandedFromJSON(
   jsonString: string,
@@ -145,56 +89,6 @@ export const TaskActionsServiceHardResetResponse$inboundSchema: z.ZodType<
   taskView: z.nullable(TaskView$inboundSchema).optional(),
   ticketActionId: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type TaskActionsServiceHardResetResponse$Outbound = {
-  expanded?:
-    | Array<TaskActionsServiceHardResetResponseExpanded$Outbound>
-    | null
-    | undefined;
-  taskView?: TaskView$Outbound | null | undefined;
-  ticketActionId?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskActionsServiceHardResetResponse$outboundSchema: z.ZodType<
-  TaskActionsServiceHardResetResponse$Outbound,
-  z.ZodTypeDef,
-  TaskActionsServiceHardResetResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() =>
-      TaskActionsServiceHardResetResponseExpanded$outboundSchema
-    )),
-  ).optional(),
-  taskView: z.nullable(TaskView$outboundSchema).optional(),
-  ticketActionId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceHardResetResponse$ {
-  /** @deprecated use `TaskActionsServiceHardResetResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    TaskActionsServiceHardResetResponse$inboundSchema;
-  /** @deprecated use `TaskActionsServiceHardResetResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceHardResetResponse$outboundSchema;
-  /** @deprecated use `TaskActionsServiceHardResetResponse$Outbound` instead. */
-  export type Outbound = TaskActionsServiceHardResetResponse$Outbound;
-}
-
-export function taskActionsServiceHardResetResponseToJSON(
-  taskActionsServiceHardResetResponse: TaskActionsServiceHardResetResponse,
-): string {
-  return JSON.stringify(
-    TaskActionsServiceHardResetResponse$outboundSchema.parse(
-      taskActionsServiceHardResetResponse,
-    ),
-  );
-}
 
 export function taskActionsServiceHardResetResponseFromJSON(
   jsonString: string,

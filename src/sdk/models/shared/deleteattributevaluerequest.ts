@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The DeleteAttributeValueRequest message.
  */
 export type DeleteAttributeValueRequest = {};
-
-/** @internal */
-export const DeleteAttributeValueRequest$inboundSchema: z.ZodType<
-  DeleteAttributeValueRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type DeleteAttributeValueRequest$Outbound = {};
@@ -29,19 +19,6 @@ export const DeleteAttributeValueRequest$outboundSchema: z.ZodType<
   DeleteAttributeValueRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteAttributeValueRequest$ {
-  /** @deprecated use `DeleteAttributeValueRequest$inboundSchema` instead. */
-  export const inboundSchema = DeleteAttributeValueRequest$inboundSchema;
-  /** @deprecated use `DeleteAttributeValueRequest$outboundSchema` instead. */
-  export const outboundSchema = DeleteAttributeValueRequest$outboundSchema;
-  /** @deprecated use `DeleteAttributeValueRequest$Outbound` instead. */
-  export type Outbound = DeleteAttributeValueRequest$Outbound;
-}
-
 export function deleteAttributeValueRequestToJSON(
   deleteAttributeValueRequest: DeleteAttributeValueRequest,
 ): string {
@@ -49,15 +26,5 @@ export function deleteAttributeValueRequestToJSON(
     DeleteAttributeValueRequest$outboundSchema.parse(
       deleteAttributeValueRequest,
     ),
-  );
-}
-
-export function deleteAttributeValueRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteAttributeValueRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteAttributeValueRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteAttributeValueRequest' from JSON`,
   );
 }

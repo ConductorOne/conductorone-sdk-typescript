@@ -3,36 +3,28 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementAutomationLastRunStatusInput,
-  AppEntitlementAutomationLastRunStatusInput$inboundSchema,
   AppEntitlementAutomationLastRunStatusInput$Outbound,
   AppEntitlementAutomationLastRunStatusInput$outboundSchema,
 } from "./appentitlementautomationlastrunstatusinput.js";
 import {
   AppEntitlementAutomationRuleBasic,
-  AppEntitlementAutomationRuleBasic$inboundSchema,
   AppEntitlementAutomationRuleBasic$Outbound,
   AppEntitlementAutomationRuleBasic$outboundSchema,
 } from "./appentitlementautomationrulebasic.js";
 import {
   AppEntitlementAutomationRuleCEL,
-  AppEntitlementAutomationRuleCEL$inboundSchema,
   AppEntitlementAutomationRuleCEL$Outbound,
   AppEntitlementAutomationRuleCEL$outboundSchema,
 } from "./appentitlementautomationrulecel.js";
 import {
   AppEntitlementAutomationRuleEntitlement,
-  AppEntitlementAutomationRuleEntitlement$inboundSchema,
   AppEntitlementAutomationRuleEntitlement$Outbound,
   AppEntitlementAutomationRuleEntitlement$outboundSchema,
 } from "./appentitlementautomationruleentitlement.js";
 import {
   AppEntitlementAutomationRuleNone,
-  AppEntitlementAutomationRuleNone$inboundSchema,
   AppEntitlementAutomationRuleNone$Outbound,
   AppEntitlementAutomationRuleNone$outboundSchema,
 } from "./appentitlementautomationrulenone.js";
@@ -66,34 +58,6 @@ export type AppEntitlementAutomationInput = {
   none?: AppEntitlementAutomationRuleNone | null | undefined;
   updatedAt?: Date | null | undefined;
 };
-
-/** @internal */
-export const AppEntitlementAutomationInput$inboundSchema: z.ZodType<
-  AppEntitlementAutomationInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  basic: z.nullable(AppEntitlementAutomationRuleBasic$inboundSchema).optional(),
-  cel: z.nullable(AppEntitlementAutomationRuleCEL$inboundSchema).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  entitlements: z.nullable(
-    AppEntitlementAutomationRuleEntitlement$inboundSchema,
-  ).optional(),
-  lastRunStatus: z.nullable(
-    AppEntitlementAutomationLastRunStatusInput$inboundSchema,
-  ).optional(),
-  none: z.nullable(AppEntitlementAutomationRuleNone$inboundSchema).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
 
 /** @internal */
 export type AppEntitlementAutomationInput$Outbound = {
@@ -138,19 +102,6 @@ export const AppEntitlementAutomationInput$outboundSchema: z.ZodType<
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppEntitlementAutomationInput$ {
-  /** @deprecated use `AppEntitlementAutomationInput$inboundSchema` instead. */
-  export const inboundSchema = AppEntitlementAutomationInput$inboundSchema;
-  /** @deprecated use `AppEntitlementAutomationInput$outboundSchema` instead. */
-  export const outboundSchema = AppEntitlementAutomationInput$outboundSchema;
-  /** @deprecated use `AppEntitlementAutomationInput$Outbound` instead. */
-  export type Outbound = AppEntitlementAutomationInput$Outbound;
-}
-
 export function appEntitlementAutomationInputToJSON(
   appEntitlementAutomationInput: AppEntitlementAutomationInput,
 ): string {
@@ -158,15 +109,5 @@ export function appEntitlementAutomationInputToJSON(
     AppEntitlementAutomationInput$outboundSchema.parse(
       appEntitlementAutomationInput,
     ),
-  );
-}
-
-export function appEntitlementAutomationInputFromJSON(
-  jsonString: string,
-): SafeParseResult<AppEntitlementAutomationInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AppEntitlementAutomationInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AppEntitlementAutomationInput' from JSON`,
   );
 }

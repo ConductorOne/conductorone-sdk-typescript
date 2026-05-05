@@ -3,18 +3,13 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   StepUpMicrosoftSettings,
-  StepUpMicrosoftSettings$inboundSchema,
   StepUpMicrosoftSettings$Outbound,
   StepUpMicrosoftSettings$outboundSchema,
 } from "./stepupmicrosoftsettings.js";
 import {
   StepUpOAuth2Settings,
-  StepUpOAuth2Settings$inboundSchema,
   StepUpOAuth2Settings$Outbound,
   StepUpOAuth2Settings$outboundSchema,
 } from "./stepupoauth2settings.js";
@@ -30,38 +25,24 @@ import {
  */
 export type CreateStepUpProviderRequest = {
   /**
-   * The clientId field.
+   * The OAuth2 client ID used to authenticate with the step-up provider.
    */
   clientId?: string | null | undefined;
   /**
-   * The clientSecret field.
+   * The OAuth2 client secret. Write-only; never returned in responses.
    */
   clientSecret?: string | null | undefined;
   /**
-   * The displayName field.
+   * The human-readable name for the new step-up provider.
    */
   displayName?: string | null | undefined;
   /**
-   * The issuerUrl field.
+   * The OIDC issuer URL for the step-up provider.
    */
   issuerUrl?: string | null | undefined;
   microsoft?: StepUpMicrosoftSettings | null | undefined;
   oauth2?: StepUpOAuth2Settings | null | undefined;
 };
-
-/** @internal */
-export const CreateStepUpProviderRequest$inboundSchema: z.ZodType<
-  CreateStepUpProviderRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  clientId: z.nullable(z.string()).optional(),
-  clientSecret: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  issuerUrl: z.nullable(z.string()).optional(),
-  microsoft: z.nullable(StepUpMicrosoftSettings$inboundSchema).optional(),
-  oauth2: z.nullable(StepUpOAuth2Settings$inboundSchema).optional(),
-});
 
 /** @internal */
 export type CreateStepUpProviderRequest$Outbound = {
@@ -87,19 +68,6 @@ export const CreateStepUpProviderRequest$outboundSchema: z.ZodType<
   oauth2: z.nullable(StepUpOAuth2Settings$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateStepUpProviderRequest$ {
-  /** @deprecated use `CreateStepUpProviderRequest$inboundSchema` instead. */
-  export const inboundSchema = CreateStepUpProviderRequest$inboundSchema;
-  /** @deprecated use `CreateStepUpProviderRequest$outboundSchema` instead. */
-  export const outboundSchema = CreateStepUpProviderRequest$outboundSchema;
-  /** @deprecated use `CreateStepUpProviderRequest$Outbound` instead. */
-  export type Outbound = CreateStepUpProviderRequest$Outbound;
-}
-
 export function createStepUpProviderRequestToJSON(
   createStepUpProviderRequest: CreateStepUpProviderRequest,
 ): string {
@@ -107,15 +75,5 @@ export function createStepUpProviderRequestToJSON(
     CreateStepUpProviderRequest$outboundSchema.parse(
       createStepUpProviderRequest,
     ),
-  );
-}
-
-export function createStepUpProviderRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateStepUpProviderRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateStepUpProviderRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateStepUpProviderRequest' from JSON`,
   );
 }

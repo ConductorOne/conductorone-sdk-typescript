@@ -1,5 +1,4 @@
 # User
-(*user*)
 
 ## Overview
 
@@ -166,7 +165,7 @@ run();
 
 ## getUserProfileTypes
 
-Invokes the c1.api.user.v1.UserService.GetUserProfileTypes method.
+Retrieve the profile types associated with a user across their connected apps.
 
 ### Example Usage
 
@@ -245,7 +244,7 @@ run();
 
 ## setExpiringUserDelegationBindingByAdmin
 
-Invokes the c1.api.user.v1.UserService.SetExpiringUserDelegationBindingByAdmin method.
+Set or update an expiring delegation binding for a user, allowing an admin to designate a temporary delegate.
 
 ### Example Usage
 

@@ -35,7 +35,6 @@ export const StepUpOAuth2Settings$inboundSchema: z.ZodType<
 > = z.object({
   acrValues: z.nullable(z.array(z.string())).optional(),
 });
-
 /** @internal */
 export type StepUpOAuth2Settings$Outbound = {
   acrValues?: Array<string> | null | undefined;
@@ -50,19 +49,6 @@ export const StepUpOAuth2Settings$outboundSchema: z.ZodType<
   acrValues: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StepUpOAuth2Settings$ {
-  /** @deprecated use `StepUpOAuth2Settings$inboundSchema` instead. */
-  export const inboundSchema = StepUpOAuth2Settings$inboundSchema;
-  /** @deprecated use `StepUpOAuth2Settings$outboundSchema` instead. */
-  export const outboundSchema = StepUpOAuth2Settings$outboundSchema;
-  /** @deprecated use `StepUpOAuth2Settings$Outbound` instead. */
-  export type Outbound = StepUpOAuth2Settings$Outbound;
-}
-
 export function stepUpOAuth2SettingsToJSON(
   stepUpOAuth2Settings: StepUpOAuth2Settings,
 ): string {
@@ -70,7 +56,6 @@ export function stepUpOAuth2SettingsToJSON(
     StepUpOAuth2Settings$outboundSchema.parse(stepUpOAuth2Settings),
   );
 }
-
 export function stepUpOAuth2SettingsFromJSON(
   jsonString: string,
 ): SafeParseResult<StepUpOAuth2Settings, SDKValidationError> {

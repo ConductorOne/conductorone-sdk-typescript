@@ -23,7 +23,7 @@ export type C1ApiSystemlogV1ExportsSearchServiceSearchResponse = {
    */
   rawResponse: Response;
   /**
-   * Successful response
+   * ExportsSearchServiceSearchResponse is the response for searching system log exports.
    */
   exportsSearchServiceSearchResponse?:
     | shared.ExportsSearchServiceSearchResponse
@@ -51,66 +51,6 @@ export const C1ApiSystemlogV1ExportsSearchServiceSearchResponse$inboundSchema:
         "exportsSearchServiceSearchResponse",
     });
   });
-
-/** @internal */
-export type C1ApiSystemlogV1ExportsSearchServiceSearchResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  ExportsSearchServiceSearchResponse?:
-    | shared.ExportsSearchServiceSearchResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiSystemlogV1ExportsSearchServiceSearchResponse$outboundSchema:
-  z.ZodType<
-    C1ApiSystemlogV1ExportsSearchServiceSearchResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiSystemlogV1ExportsSearchServiceSearchResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    exportsSearchServiceSearchResponse: shared
-      .ExportsSearchServiceSearchResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      exportsSearchServiceSearchResponse: "ExportsSearchServiceSearchResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiSystemlogV1ExportsSearchServiceSearchResponse$ {
-  /** @deprecated use `C1ApiSystemlogV1ExportsSearchServiceSearchResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiSystemlogV1ExportsSearchServiceSearchResponse$inboundSchema;
-  /** @deprecated use `C1ApiSystemlogV1ExportsSearchServiceSearchResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiSystemlogV1ExportsSearchServiceSearchResponse$outboundSchema;
-  /** @deprecated use `C1ApiSystemlogV1ExportsSearchServiceSearchResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiSystemlogV1ExportsSearchServiceSearchResponse$Outbound;
-}
-
-export function c1ApiSystemlogV1ExportsSearchServiceSearchResponseToJSON(
-  c1ApiSystemlogV1ExportsSearchServiceSearchResponse:
-    C1ApiSystemlogV1ExportsSearchServiceSearchResponse,
-): string {
-  return JSON.stringify(
-    C1ApiSystemlogV1ExportsSearchServiceSearchResponse$outboundSchema.parse(
-      c1ApiSystemlogV1ExportsSearchServiceSearchResponse,
-    ),
-  );
-}
 
 export function c1ApiSystemlogV1ExportsSearchServiceSearchResponseFromJSON(
   jsonString: string,

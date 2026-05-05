@@ -1,6 +1,6 @@
 # NotificationConfig
 
-The NotificationConfig message.
+Controls which email notifications are sent during the access review lifecycle.
 
 ## Example Usage
 
@@ -14,5 +14,6 @@ let value: NotificationConfig = {};
 
 | Field                                                                         | Type                                                                          | Required                                                                      | Description                                                                   |
 | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `emailNotifications`                                                          | [shared.EmailNotifications](../../../sdk/models/shared/emailnotifications.md) | :heavy_minus_sign:                                                            | N/A                                                                           |
-| `slackNotifications`                                                          | [shared.SlackNotifications](../../../sdk/models/shared/slacknotifications.md) | :heavy_minus_sign:                                                            | N/A                                                                           |
+| `sendClose`                                                                   | *boolean*                                                                     | :heavy_minus_sign:                                                            | Whether to send a notification when the campaign is closed.                   |
+| `sendKickoff`                                                                 | *boolean*                                                                     | :heavy_minus_sign:                                                            | Whether to send a notification when the campaign is started.                  |
+| `sendReminders`                                                               | *boolean*                                                                     | :heavy_minus_sign:                                                            | Whether to send periodic reminder emails to reviewers with outstanding tasks. |

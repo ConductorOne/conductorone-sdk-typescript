@@ -4,6 +4,7 @@
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -28,7 +29,7 @@ import { Result } from "../sdk/types/fp.js";
  * Confirm Sync Valid
  *
  * @remarks
- * Invokes the c1.api.app.v1.ConnectorService.ConfirmSyncValid method.
+ * Confirm that a sync which errored due to a data drop is valid, overriding the error and triggering a new sync. Only applicable when the sync status is ERRORED_NO_DATA.
  */
 export function connectorConfirmSyncValid(
   client: ConductoroneSDKTypescriptCore,
@@ -106,7 +107,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/api/v1/apps/{app_id}/connectors/{connector_id}/confirm_sync_valid/{sync_lifecycle_id}",
   )(pathParams);
@@ -151,7 +151,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

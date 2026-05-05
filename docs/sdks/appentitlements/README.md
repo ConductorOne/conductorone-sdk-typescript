@@ -1,5 +1,4 @@
 # AppEntitlements
-(*appEntitlements*)
 
 ## Overview
 
@@ -104,7 +103,7 @@ run();
 
 ## create
 
-Invokes the c1.api.app.v1.AppEntitlements.Create method.
+Create a new app entitlement for an app. This is used to define a custom permission, group, or role within the app.
 
 ### Example Usage
 
@@ -183,7 +182,7 @@ run();
 
 ## addManuallyManagedMembers
 
-Invokes the c1.api.app.v1.AppEntitlements.AddManuallyManagedMembers method.
+Add users as manually managed members of an app entitlement. These memberships are tracked directly by ConductorOne rather than synced from the app.
 
 ### Example Usage
 
@@ -264,7 +263,7 @@ run();
 
 ## deleteAutomation
 
-Invokes the c1.api.app.v1.AppEntitlements.DeleteAutomation method.
+Delete the automation rule for an app entitlement.
 
 ### Example Usage
 
@@ -345,7 +344,7 @@ run();
 
 ## getAutomation
 
-Invokes the c1.api.app.v1.AppEntitlements.GetAutomation method.
+Get the automation rule for an app entitlement.
 
 ### Example Usage
 
@@ -426,7 +425,7 @@ run();
 
 ## createAutomation
 
-Invokes the c1.api.app.v1.AppEntitlements.CreateAutomation method.
+Create an automation rule for an app entitlement. Automations automatically provision or revoke access based on defined conditions.
 
 ### Example Usage
 
@@ -507,7 +506,7 @@ run();
 
 ## removeAutomationExclusion
 
-Invokes the c1.api.app.v1.AppEntitlements.RemoveAutomationExclusion method.
+Remove users from the automation exclusion list for an app entitlement.
 
 ### Example Usage
 
@@ -588,7 +587,7 @@ run();
 
 ## listAutomationExclusions
 
-Invokes the c1.api.app.v1.AppEntitlements.ListAutomationExclusions method.
+List users who are excluded from the automation rule for an app entitlement.
 
 ### Example Usage
 
@@ -669,7 +668,7 @@ run();
 
 ## addAutomationExclusion
 
-Invokes the c1.api.app.v1.AppEntitlements.AddAutomationExclusion method.
+Add users to the automation exclusion list for an app entitlement. Excluded users are not affected by the automation rule.
 
 ### Example Usage
 
@@ -750,7 +749,7 @@ run();
 
 ## updateAutomation
 
-Invokes the c1.api.app.v1.AppEntitlements.UpdateAutomation method.
+Update the automation rule for an app entitlement, including its display name, description, and conditions.
 
 ### Example Usage
 
@@ -831,7 +830,7 @@ run();
 
 ## removeEntitlementMembership
 
-Invokes the c1.api.app.v1.AppEntitlements.RemoveEntitlementMembership method.
+Remove a user from a ConductorOne-managed entitlement (catalog, group, or profile type). For access profiles, this creates a revoke task to deprovision access.
 
 ### Example Usage
 
@@ -995,7 +994,7 @@ run();
 
 ## delete
 
-Invokes the c1.api.app.v1.AppEntitlements.Delete method.
+Delete an app entitlement by ID.
 
 ### Example Usage
 

@@ -4,6 +4,7 @@
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
 import { encodeJSON } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -29,7 +30,7 @@ import { Result } from "../sdk/types/fp.js";
  * Search Automation Template Versions
  *
  * @remarks
- * Invokes the c1.api.automations.v1.AutomationSearchService.SearchAutomationTemplateVersions method.
+ * Search for versioned snapshots of an automation template's steps and triggers.
  */
 export function automationSearchSearchAutomationTemplateVersions(
   client: ConductoroneSDKTypescriptCore,
@@ -90,7 +91,7 @@ async function $do(
     ? null
     : encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/api/v1/automation_versions/search")();
+  const path = pathToFunc("/api/v1/search/automation_versions")();
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -133,7 +134,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

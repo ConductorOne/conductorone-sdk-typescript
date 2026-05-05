@@ -1,6 +1,6 @@
 # EditorValidateRequest
 
-The EditorValidateRequest message.
+The EditorValidateRequest message contains the configuration text to validate.
 
 ## Example Usage
 
@@ -12,6 +12,6 @@ let value: EditorValidateRequest = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `text`             | *string*           | :heavy_minus_sign: | The text field.    |
+| Field                               | Type                                | Required                            | Description                         |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| `text`                              | *string*                            | :heavy_minus_sign:                  | The configuration text to validate. |

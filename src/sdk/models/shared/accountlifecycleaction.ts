@@ -55,7 +55,6 @@ export const AccountLifecycleAction$inboundSchema: z.ZodType<
   actionName: z.nullable(z.string()).optional(),
   connectorRef: z.nullable(ConnectorRef$inboundSchema).optional(),
 });
-
 /** @internal */
 export type AccountLifecycleAction$Outbound = {
   accountInContext?: AccountInContext$Outbound | null | undefined;
@@ -76,19 +75,6 @@ export const AccountLifecycleAction$outboundSchema: z.ZodType<
   connectorRef: z.nullable(ConnectorRef$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AccountLifecycleAction$ {
-  /** @deprecated use `AccountLifecycleAction$inboundSchema` instead. */
-  export const inboundSchema = AccountLifecycleAction$inboundSchema;
-  /** @deprecated use `AccountLifecycleAction$outboundSchema` instead. */
-  export const outboundSchema = AccountLifecycleAction$outboundSchema;
-  /** @deprecated use `AccountLifecycleAction$Outbound` instead. */
-  export type Outbound = AccountLifecycleAction$Outbound;
-}
-
 export function accountLifecycleActionToJSON(
   accountLifecycleAction: AccountLifecycleAction,
 ): string {
@@ -96,7 +82,6 @@ export function accountLifecycleActionToJSON(
     AccountLifecycleAction$outboundSchema.parse(accountLifecycleAction),
   );
 }
-
 export function accountLifecycleActionFromJSON(
   jsonString: string,
 ): SafeParseResult<AccountLifecycleAction, SDKValidationError> {

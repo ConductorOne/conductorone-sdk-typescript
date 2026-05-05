@@ -39,26 +39,6 @@ export type C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    app_entitlement_id: z.nullable(z.string()),
-    RemoveEntitlementMembershipRequest: shared
-      .RemoveEntitlementMembershipRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "app_entitlement_id": "appEntitlementId",
-      "RemoveEntitlementMembershipRequest":
-        "removeEntitlementMembershipRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest$Outbound =
   {
     app_id: string | null;
@@ -87,22 +67,6 @@ export const C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest$outboun
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest$Outbound;
-}
-
 export function c1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequestToJSON(
   c1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest:
     C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest,
@@ -110,21 +74,6 @@ export function c1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequestToJSO
   return JSON.stringify(
     C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest$outboundSchema
       .parse(c1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest),
-  );
-}
-
-export function c1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest' from JSON`,
   );
 }
 
@@ -149,67 +98,6 @@ export const C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse$inboun
         "removeEntitlementMembershipResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    RemoveEntitlementMembershipResponse?:
-      | shared.RemoveEntitlementMembershipResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    removeEntitlementMembershipResponse: shared
-      .RemoveEntitlementMembershipResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      removeEntitlementMembershipResponse:
-        "RemoveEntitlementMembershipResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse$ {
-  /** @deprecated use `C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse$Outbound;
-}
-
-export function c1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponseToJSON(
-  c1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse:
-    C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse$outboundSchema
-      .parse(c1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse),
-  );
-}
 
 export function c1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponseFromJSON(
   jsonString: string,

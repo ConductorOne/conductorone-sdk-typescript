@@ -6,23 +6,18 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Status,
-  Status$inboundSchema,
-  Status$Outbound,
-  Status$outboundSchema,
-} from "./status.js";
+import { Status, Status$inboundSchema } from "./status.js";
 
 /**
  * The TestSourceIPResponse message.
  */
 export type TestSourceIPResponse = {
   /**
-   * The allowed field.
+   * Whether the tested IP address is allowed by the CIDR rules.
    */
   allowed?: boolean | null | undefined;
   /**
-   * The checkedIp field.
+   * The IP address that was checked, either from the request or inferred from the caller.
    */
   checkedIp?: string | null | undefined;
   details?: Status | null | undefined;
@@ -38,45 +33,6 @@ export const TestSourceIPResponse$inboundSchema: z.ZodType<
   checkedIp: z.nullable(z.string()).optional(),
   details: z.nullable(Status$inboundSchema).optional(),
 });
-
-/** @internal */
-export type TestSourceIPResponse$Outbound = {
-  allowed?: boolean | null | undefined;
-  checkedIp?: string | null | undefined;
-  details?: Status$Outbound | null | undefined;
-};
-
-/** @internal */
-export const TestSourceIPResponse$outboundSchema: z.ZodType<
-  TestSourceIPResponse$Outbound,
-  z.ZodTypeDef,
-  TestSourceIPResponse
-> = z.object({
-  allowed: z.nullable(z.boolean()).optional(),
-  checkedIp: z.nullable(z.string()).optional(),
-  details: z.nullable(Status$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TestSourceIPResponse$ {
-  /** @deprecated use `TestSourceIPResponse$inboundSchema` instead. */
-  export const inboundSchema = TestSourceIPResponse$inboundSchema;
-  /** @deprecated use `TestSourceIPResponse$outboundSchema` instead. */
-  export const outboundSchema = TestSourceIPResponse$outboundSchema;
-  /** @deprecated use `TestSourceIPResponse$Outbound` instead. */
-  export type Outbound = TestSourceIPResponse$Outbound;
-}
-
-export function testSourceIPResponseToJSON(
-  testSourceIPResponse: TestSourceIPResponse,
-): string {
-  return JSON.stringify(
-    TestSourceIPResponse$outboundSchema.parse(testSourceIPResponse),
-  );
-}
 
 export function testSourceIPResponseFromJSON(
   jsonString: string,

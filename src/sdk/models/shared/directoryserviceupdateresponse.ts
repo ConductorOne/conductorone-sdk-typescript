@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  DirectoryView,
-  DirectoryView$inboundSchema,
-  DirectoryView$Outbound,
-  DirectoryView$outboundSchema,
-} from "./directoryview.js";
+import { DirectoryView, DirectoryView$inboundSchema } from "./directoryview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -56,56 +51,6 @@ export const DirectoryServiceUpdateResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type DirectoryServiceUpdateResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const DirectoryServiceUpdateResponseExpanded$outboundSchema: z.ZodType<
-  DirectoryServiceUpdateResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  DirectoryServiceUpdateResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DirectoryServiceUpdateResponseExpanded$ {
-  /** @deprecated use `DirectoryServiceUpdateResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    DirectoryServiceUpdateResponseExpanded$inboundSchema;
-  /** @deprecated use `DirectoryServiceUpdateResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    DirectoryServiceUpdateResponseExpanded$outboundSchema;
-  /** @deprecated use `DirectoryServiceUpdateResponseExpanded$Outbound` instead. */
-  export type Outbound = DirectoryServiceUpdateResponseExpanded$Outbound;
-}
-
-export function directoryServiceUpdateResponseExpandedToJSON(
-  directoryServiceUpdateResponseExpanded:
-    DirectoryServiceUpdateResponseExpanded,
-): string {
-  return JSON.stringify(
-    DirectoryServiceUpdateResponseExpanded$outboundSchema.parse(
-      directoryServiceUpdateResponseExpanded,
-    ),
-  );
-}
-
 export function directoryServiceUpdateResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<DirectoryServiceUpdateResponseExpanded, SDKValidationError> {
@@ -128,52 +73,6 @@ export const DirectoryServiceUpdateResponse$inboundSchema: z.ZodType<
     z.array(z.lazy(() => DirectoryServiceUpdateResponseExpanded$inboundSchema)),
   ).optional(),
 });
-
-/** @internal */
-export type DirectoryServiceUpdateResponse$Outbound = {
-  directoryView?: DirectoryView$Outbound | null | undefined;
-  expanded?:
-    | Array<DirectoryServiceUpdateResponseExpanded$Outbound>
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const DirectoryServiceUpdateResponse$outboundSchema: z.ZodType<
-  DirectoryServiceUpdateResponse$Outbound,
-  z.ZodTypeDef,
-  DirectoryServiceUpdateResponse
-> = z.object({
-  directoryView: z.nullable(DirectoryView$outboundSchema).optional(),
-  expanded: z.nullable(
-    z.array(
-      z.lazy(() => DirectoryServiceUpdateResponseExpanded$outboundSchema),
-    ),
-  ).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DirectoryServiceUpdateResponse$ {
-  /** @deprecated use `DirectoryServiceUpdateResponse$inboundSchema` instead. */
-  export const inboundSchema = DirectoryServiceUpdateResponse$inboundSchema;
-  /** @deprecated use `DirectoryServiceUpdateResponse$outboundSchema` instead. */
-  export const outboundSchema = DirectoryServiceUpdateResponse$outboundSchema;
-  /** @deprecated use `DirectoryServiceUpdateResponse$Outbound` instead. */
-  export type Outbound = DirectoryServiceUpdateResponse$Outbound;
-}
-
-export function directoryServiceUpdateResponseToJSON(
-  directoryServiceUpdateResponse: DirectoryServiceUpdateResponse,
-): string {
-  return JSON.stringify(
-    DirectoryServiceUpdateResponse$outboundSchema.parse(
-      directoryServiceUpdateResponse,
-    ),
-  );
-}
 
 export function directoryServiceUpdateResponseFromJSON(
   jsonString: string,

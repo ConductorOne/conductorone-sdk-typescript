@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * ConnectorServiceDeleteRequest is a request for deleting a connector. It uses URL values for input.
  */
 export type ConnectorServiceDeleteRequest = {};
-
-/** @internal */
-export const ConnectorServiceDeleteRequest$inboundSchema: z.ZodType<
-  ConnectorServiceDeleteRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type ConnectorServiceDeleteRequest$Outbound = {};
@@ -29,19 +19,6 @@ export const ConnectorServiceDeleteRequest$outboundSchema: z.ZodType<
   ConnectorServiceDeleteRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorServiceDeleteRequest$ {
-  /** @deprecated use `ConnectorServiceDeleteRequest$inboundSchema` instead. */
-  export const inboundSchema = ConnectorServiceDeleteRequest$inboundSchema;
-  /** @deprecated use `ConnectorServiceDeleteRequest$outboundSchema` instead. */
-  export const outboundSchema = ConnectorServiceDeleteRequest$outboundSchema;
-  /** @deprecated use `ConnectorServiceDeleteRequest$Outbound` instead. */
-  export type Outbound = ConnectorServiceDeleteRequest$Outbound;
-}
-
 export function connectorServiceDeleteRequestToJSON(
   connectorServiceDeleteRequest: ConnectorServiceDeleteRequest,
 ): string {
@@ -49,15 +26,5 @@ export function connectorServiceDeleteRequestToJSON(
     ConnectorServiceDeleteRequest$outboundSchema.parse(
       connectorServiceDeleteRequest,
     ),
-  );
-}
-
-export function connectorServiceDeleteRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ConnectorServiceDeleteRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ConnectorServiceDeleteRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ConnectorServiceDeleteRequest' from JSON`,
   );
 }

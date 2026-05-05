@@ -25,7 +25,6 @@ export const ResponsePolicyApprovalStepDeny$inboundSchema: z.ZodType<
 > = z.object({
   comment: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type ResponsePolicyApprovalStepDeny$Outbound = {
   comment?: string | null | undefined;
@@ -40,19 +39,6 @@ export const ResponsePolicyApprovalStepDeny$outboundSchema: z.ZodType<
   comment: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponsePolicyApprovalStepDeny$ {
-  /** @deprecated use `ResponsePolicyApprovalStepDeny$inboundSchema` instead. */
-  export const inboundSchema = ResponsePolicyApprovalStepDeny$inboundSchema;
-  /** @deprecated use `ResponsePolicyApprovalStepDeny$outboundSchema` instead. */
-  export const outboundSchema = ResponsePolicyApprovalStepDeny$outboundSchema;
-  /** @deprecated use `ResponsePolicyApprovalStepDeny$Outbound` instead. */
-  export type Outbound = ResponsePolicyApprovalStepDeny$Outbound;
-}
-
 export function responsePolicyApprovalStepDenyToJSON(
   responsePolicyApprovalStepDeny: ResponsePolicyApprovalStepDeny,
 ): string {
@@ -62,7 +48,6 @@ export function responsePolicyApprovalStepDenyToJSON(
     ),
   );
 }
-
 export function responsePolicyApprovalStepDenyFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponsePolicyApprovalStepDeny, SDKValidationError> {

@@ -14,11 +14,14 @@ import {
 } from "./policystep.js";
 
 /**
- * The PolicySteps message.
+ * A named sequence of steps that execute in order within a policy.
  */
 export type PolicySteps = {
   /**
-   * An array of policy steps indicating the processing flow of a policy. These steps are oneOfs, and only one property may be set for each array index at a time.
+   * Ordered array of steps. Each step is a oneof -- exactly one step type is
+   *
+   * @remarks
+   *  set per entry. Steps execute sequentially.
    */
   steps?: Array<PolicyStep> | null | undefined;
 };
@@ -31,7 +34,6 @@ export const PolicySteps$inboundSchema: z.ZodType<
 > = z.object({
   steps: z.nullable(z.array(PolicyStep$inboundSchema)).optional(),
 });
-
 /** @internal */
 export type PolicySteps$Outbound = {
   steps?: Array<PolicyStep$Outbound> | null | undefined;
@@ -46,23 +48,9 @@ export const PolicySteps$outboundSchema: z.ZodType<
   steps: z.nullable(z.array(PolicyStep$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PolicySteps$ {
-  /** @deprecated use `PolicySteps$inboundSchema` instead. */
-  export const inboundSchema = PolicySteps$inboundSchema;
-  /** @deprecated use `PolicySteps$outboundSchema` instead. */
-  export const outboundSchema = PolicySteps$outboundSchema;
-  /** @deprecated use `PolicySteps$Outbound` instead. */
-  export type Outbound = PolicySteps$Outbound;
-}
-
 export function policyStepsToJSON(policySteps: PolicySteps): string {
   return JSON.stringify(PolicySteps$outboundSchema.parse(policySteps));
 }
-
 export function policyStepsFromJSON(
   jsonString: string,
 ): SafeParseResult<PolicySteps, SDKValidationError> {

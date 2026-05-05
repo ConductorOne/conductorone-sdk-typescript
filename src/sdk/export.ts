@@ -52,7 +52,7 @@ export class Export extends ClientSDK {
    * Delete
    *
    * @remarks
-   * Delete a policy by ID.
+   * Delete a system log export by ID.
    */
   async delete(
     request: operations.C1ApiSystemlogV1ExportServiceDeleteRequest,
@@ -86,7 +86,7 @@ export class Export extends ClientSDK {
    * Update
    *
    * @remarks
-   * Update a system log export by providing a policy object and an update mask.
+   * Update a system log export by providing an export object and an update mask.
    */
   async update(
     request: operations.C1ApiSystemlogV1ExportServiceUpdateRequest,
@@ -103,7 +103,7 @@ export class Export extends ClientSDK {
    * List Events
    *
    * @remarks
-   * Invokes the c1.api.systemlog.v1.ExportService.ListEvents method.
+   * List audit events belonging to a specific system log export.
    */
   async listEvents(
     request: operations.C1ApiSystemlogV1ExportServiceListEventsRequest,

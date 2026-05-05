@@ -35,45 +35,6 @@ export const TaskAuditWaitStepTimedOut$inboundSchema: z.ZodType<
   ).optional(),
 });
 
-/** @internal */
-export type TaskAuditWaitStepTimedOut$Outbound = {
-  condition?: string | null | undefined;
-  stepId?: string | null | undefined;
-  timedOutAt?: string | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditWaitStepTimedOut$outboundSchema: z.ZodType<
-  TaskAuditWaitStepTimedOut$Outbound,
-  z.ZodTypeDef,
-  TaskAuditWaitStepTimedOut
-> = z.object({
-  condition: z.nullable(z.string()).optional(),
-  stepId: z.nullable(z.string()).optional(),
-  timedOutAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditWaitStepTimedOut$ {
-  /** @deprecated use `TaskAuditWaitStepTimedOut$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditWaitStepTimedOut$inboundSchema;
-  /** @deprecated use `TaskAuditWaitStepTimedOut$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditWaitStepTimedOut$outboundSchema;
-  /** @deprecated use `TaskAuditWaitStepTimedOut$Outbound` instead. */
-  export type Outbound = TaskAuditWaitStepTimedOut$Outbound;
-}
-
-export function taskAuditWaitStepTimedOutToJSON(
-  taskAuditWaitStepTimedOut: TaskAuditWaitStepTimedOut,
-): string {
-  return JSON.stringify(
-    TaskAuditWaitStepTimedOut$outboundSchema.parse(taskAuditWaitStepTimedOut),
-  );
-}
-
 export function taskAuditWaitStepTimedOutFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditWaitStepTimedOut, SDKValidationError> {

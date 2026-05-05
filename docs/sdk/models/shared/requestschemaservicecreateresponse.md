@@ -1,6 +1,6 @@
 # RequestSchemaServiceCreateResponse
 
-The RequestSchemaServiceCreateResponse message.
+The response message for creating a request schema.
 
 ## Example Usage
 

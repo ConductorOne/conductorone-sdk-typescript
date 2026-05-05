@@ -1,6 +1,6 @@
 # AppResourceServiceUpdateResponse
 
-The AppResourceServiceUpdateResponse message.
+The response message for updating an app resource.
 
 ## Example Usage
 
@@ -15,4 +15,4 @@ let value: AppResourceServiceUpdateResponse = {};
 | Field                                                                                                                       | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 |
 | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | `appResourceView`                                                                                                           | [shared.AppResourceView](../../../sdk/models/shared/appresourceview.md)                                                     | :heavy_minus_sign:                                                                                                          | N/A                                                                                                                         |
-| `expanded`                                                                                                                  | [shared.AppResourceServiceUpdateResponseExpanded](../../../sdk/models/shared/appresourceserviceupdateresponseexpanded.md)[] | :heavy_minus_sign:                                                                                                          | The expanded field.                                                                                                         |
+| `expanded`                                                                                                                  | [shared.AppResourceServiceUpdateResponseExpanded](../../../sdk/models/shared/appresourceserviceupdateresponseexpanded.md)[] | :heavy_minus_sign:                                                                                                          | List of serialized related objects.                                                                                         |

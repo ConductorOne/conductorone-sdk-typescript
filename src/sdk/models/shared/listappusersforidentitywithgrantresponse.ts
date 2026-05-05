@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementUserBinding,
   AppEntitlementUserBinding$inboundSchema,
-  AppEntitlementUserBinding$Outbound,
-  AppEntitlementUserBinding$outboundSchema,
 } from "./appentitlementuserbinding.js";
 
 /**
@@ -35,47 +33,6 @@ export const ListAppUsersForIdentityWithGrantResponse$inboundSchema: z.ZodType<
   bindings: z.nullable(z.array(AppEntitlementUserBinding$inboundSchema))
     .optional(),
 });
-
-/** @internal */
-export type ListAppUsersForIdentityWithGrantResponse$Outbound = {
-  bindings?: Array<AppEntitlementUserBinding$Outbound> | null | undefined;
-};
-
-/** @internal */
-export const ListAppUsersForIdentityWithGrantResponse$outboundSchema: z.ZodType<
-  ListAppUsersForIdentityWithGrantResponse$Outbound,
-  z.ZodTypeDef,
-  ListAppUsersForIdentityWithGrantResponse
-> = z.object({
-  bindings: z.nullable(z.array(AppEntitlementUserBinding$outboundSchema))
-    .optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAppUsersForIdentityWithGrantResponse$ {
-  /** @deprecated use `ListAppUsersForIdentityWithGrantResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    ListAppUsersForIdentityWithGrantResponse$inboundSchema;
-  /** @deprecated use `ListAppUsersForIdentityWithGrantResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAppUsersForIdentityWithGrantResponse$outboundSchema;
-  /** @deprecated use `ListAppUsersForIdentityWithGrantResponse$Outbound` instead. */
-  export type Outbound = ListAppUsersForIdentityWithGrantResponse$Outbound;
-}
-
-export function listAppUsersForIdentityWithGrantResponseToJSON(
-  listAppUsersForIdentityWithGrantResponse:
-    ListAppUsersForIdentityWithGrantResponse,
-): string {
-  return JSON.stringify(
-    ListAppUsersForIdentityWithGrantResponse$outboundSchema.parse(
-      listAppUsersForIdentityWithGrantResponse,
-    ),
-  );
-}
 
 export function listAppUsersForIdentityWithGrantResponseFromJSON(
   jsonString: string,

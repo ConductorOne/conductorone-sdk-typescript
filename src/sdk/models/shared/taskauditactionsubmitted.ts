@@ -7,17 +7,15 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  TaskAction1,
-  TaskAction1$inboundSchema,
-  TaskAction1$Outbound,
-  TaskAction1$outboundSchema,
-} from "./taskaction1.js";
+  SubmittedTaskAction,
+  SubmittedTaskAction$inboundSchema,
+} from "./submittedtaskaction.js";
 
 /**
  * The TaskAuditActionSubmitted message.
  */
 export type TaskAuditActionSubmitted = {
-  action?: TaskAction1 | null | undefined;
+  action?: SubmittedTaskAction | null | undefined;
 };
 
 /** @internal */
@@ -26,43 +24,8 @@ export const TaskAuditActionSubmitted$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  action: z.nullable(TaskAction1$inboundSchema).optional(),
+  action: z.nullable(SubmittedTaskAction$inboundSchema).optional(),
 });
-
-/** @internal */
-export type TaskAuditActionSubmitted$Outbound = {
-  action?: TaskAction1$Outbound | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditActionSubmitted$outboundSchema: z.ZodType<
-  TaskAuditActionSubmitted$Outbound,
-  z.ZodTypeDef,
-  TaskAuditActionSubmitted
-> = z.object({
-  action: z.nullable(TaskAction1$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditActionSubmitted$ {
-  /** @deprecated use `TaskAuditActionSubmitted$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditActionSubmitted$inboundSchema;
-  /** @deprecated use `TaskAuditActionSubmitted$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditActionSubmitted$outboundSchema;
-  /** @deprecated use `TaskAuditActionSubmitted$Outbound` instead. */
-  export type Outbound = TaskAuditActionSubmitted$Outbound;
-}
-
-export function taskAuditActionSubmittedToJSON(
-  taskAuditActionSubmitted: TaskAuditActionSubmitted,
-): string {
-  return JSON.stringify(
-    TaskAuditActionSubmitted$outboundSchema.parse(taskAuditActionSubmitted),
-  );
-}
 
 export function taskAuditActionSubmittedFromJSON(
   jsonString: string,

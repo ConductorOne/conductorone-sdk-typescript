@@ -3,35 +3,22 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import {
   PolicyPostActions,
-  PolicyPostActions$inboundSchema,
   PolicyPostActions$Outbound,
   PolicyPostActions$outboundSchema,
 } from "./policypostactions.js";
 import {
   PolicyStepsInput,
-  PolicyStepsInput$inboundSchema,
   PolicyStepsInput$Outbound,
   PolicyStepsInput$outboundSchema,
 } from "./policystepsinput.js";
-import {
-  Rule,
-  Rule$inboundSchema,
-  Rule$Outbound,
-  Rule$outboundSchema,
-} from "./rule.js";
+import { Rule, Rule$Outbound, Rule$outboundSchema } from "./rule.js";
 
 /**
- * The enum of the policy type.
+ * The type of policy to create (grant, revoke, or certify).
  */
 export const CreatePolicyRequestPolicyType = {
   PolicyTypeUnspecified: "POLICY_TYPE_UNSPECIFIED",
@@ -42,7 +29,7 @@ export const CreatePolicyRequestPolicyType = {
   PolicyTypeProvision: "POLICY_TYPE_PROVISION",
 } as const;
 /**
- * The enum of the policy type.
+ * The type of policy to create (grant, revoke, or certify).
  */
 export type CreatePolicyRequestPolicyType = OpenEnum<
   typeof CreatePolicyRequestPolicyType
@@ -61,76 +48,39 @@ export type CreatePolicyRequest = {
    */
   displayName: string;
   /**
-   * The map of policy type to policy steps. The key is the stringified version of the enum. See other policies for examples.
+   * Step sequences for this policy. The map must include a baseline entry keyed
+   *
+   * @remarks
+   *  by the lowercased policy type (e.g., "grant"). Additional entries with
+   *  opaque keys can be added for conditional routing via the rules array.
    */
   policySteps?: { [k: string]: PolicyStepsInput } | null | undefined;
   /**
-   * The enum of the policy type.
+   * The type of policy to create (grant, revoke, or certify).
    */
   policyType?: CreatePolicyRequestPolicyType | null | undefined;
   /**
-   * Actions to occur after a policy finishes. As of now this is only valid on a certify policy to remediate a denied certification immediately.
+   * Ordered actions to execute after the policy completes processing.
    */
   postActions?: Array<PolicyPostActions> | null | undefined;
   /**
-   * Deprecated. Use setting in policy step instead
+   * This field is no longer used. Configure delegate reassignment in the policy step instead.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   reassignTasksToDelegates?: boolean | null | undefined;
   /**
-   * The rules field.
+   * Conditional routing rules. See the Policy message for details on evaluation order.
    */
   rules?: Array<Rule> | null | undefined;
 };
 
 /** @internal */
-export const CreatePolicyRequestPolicyType$inboundSchema: z.ZodType<
-  CreatePolicyRequestPolicyType,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(CreatePolicyRequestPolicyType),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
 export const CreatePolicyRequestPolicyType$outboundSchema: z.ZodType<
-  CreatePolicyRequestPolicyType,
+  string,
   z.ZodTypeDef,
   CreatePolicyRequestPolicyType
-> = z.union([
-  z.nativeEnum(CreatePolicyRequestPolicyType),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreatePolicyRequestPolicyType$ {
-  /** @deprecated use `CreatePolicyRequestPolicyType$inboundSchema` instead. */
-  export const inboundSchema = CreatePolicyRequestPolicyType$inboundSchema;
-  /** @deprecated use `CreatePolicyRequestPolicyType$outboundSchema` instead. */
-  export const outboundSchema = CreatePolicyRequestPolicyType$outboundSchema;
-}
-
-/** @internal */
-export const CreatePolicyRequest$inboundSchema: z.ZodType<
-  CreatePolicyRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  description: z.nullable(z.string()).optional(),
-  displayName: z.string(),
-  policySteps: z.nullable(z.record(PolicyStepsInput$inboundSchema)).optional(),
-  policyType: z.nullable(CreatePolicyRequestPolicyType$inboundSchema)
-    .optional(),
-  postActions: z.nullable(z.array(PolicyPostActions$inboundSchema)).optional(),
-  reassignTasksToDelegates: z.nullable(z.boolean()).optional(),
-  rules: z.nullable(z.array(Rule$inboundSchema)).optional(),
-});
+> = openEnums.outboundSchema(CreatePolicyRequestPolicyType);
 
 /** @internal */
 export type CreatePolicyRequest$Outbound = {
@@ -159,33 +109,10 @@ export const CreatePolicyRequest$outboundSchema: z.ZodType<
   rules: z.nullable(z.array(Rule$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreatePolicyRequest$ {
-  /** @deprecated use `CreatePolicyRequest$inboundSchema` instead. */
-  export const inboundSchema = CreatePolicyRequest$inboundSchema;
-  /** @deprecated use `CreatePolicyRequest$outboundSchema` instead. */
-  export const outboundSchema = CreatePolicyRequest$outboundSchema;
-  /** @deprecated use `CreatePolicyRequest$Outbound` instead. */
-  export type Outbound = CreatePolicyRequest$Outbound;
-}
-
 export function createPolicyRequestToJSON(
   createPolicyRequest: CreatePolicyRequest,
 ): string {
   return JSON.stringify(
     CreatePolicyRequest$outboundSchema.parse(createPolicyRequest),
-  );
-}
-
-export function createPolicyRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePolicyRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePolicyRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePolicyRequest' from JSON`,
   );
 }

@@ -12,6 +12,6 @@ let value: ExecuteAutomationResponse = {};
 
 ## Fields
 
-| Field                  | Type                   | Required               | Description            |
-| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
-| `executionId`          | *number*               | :heavy_minus_sign:     | The executionId field. |
+| Field                                                 | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `executionId`                                         | *number*                                              | :heavy_minus_sign:                                    | The unique identifier of the newly created execution. |

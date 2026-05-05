@@ -6,6 +6,7 @@ This message contains a oneof named result. Only a single field of the following
   - success
   - error
   - cancelled
+  - pending
 
 
 ## Example Usage
@@ -26,4 +27,5 @@ let value: TaskAuditConnectorActionResult = {};
 | `connectorActionId`                                                                       | *string*                                                                                  | :heavy_minus_sign:                                                                        | The connectorActionId field.                                                              |
 | `connectorId`                                                                             | *string*                                                                                  | :heavy_minus_sign:                                                                        | The connectorId field.                                                                    |
 | `error`                                                                                   | [shared.TaskAuditErrorResult](../../../sdk/models/shared/taskauditerrorresult.md)         | :heavy_minus_sign:                                                                        | N/A                                                                                       |
+| `taskAuditPendingResult`                                                                  | [shared.TaskAuditPendingResult](../../../sdk/models/shared/taskauditpendingresult.md)     | :heavy_minus_sign:                                                                        | The TaskAuditPendingResult message.                                                       |
 | `success`                                                                                 | [shared.TaskAuditSuccessResult](../../../sdk/models/shared/taskauditsuccessresult.md)     | :heavy_minus_sign:                                                                        | N/A                                                                                       |

@@ -1,0 +1,18 @@
+# LocalDirectoryConfigServiceUpdateRequest
+
+The LocalDirectoryConfigServiceUpdateRequest message.
+
+## Example Usage
+
+```typescript
+import { LocalDirectoryConfigServiceUpdateRequest } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: LocalDirectoryConfigServiceUpdateRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                            | Type                                                                                                                                                                                             | Required                                                                                                                                                                                         | Description                                                                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `localDirectoryConfig`                                                                                                                                                                           | [shared.LocalDirectoryConfigInput](../../../sdk/models/shared/localdirectoryconfiginput.md)                                                                                                      | :heavy_minus_sign:                                                                                                                                                                               | LocalDirectoryConfig is the public representation of a C1-managed local<br/> directory configuration. The underlying directory infrastructure is provided<br/> by the linked App (identified by app_id). |
+| `updateMask`                                                                                                                                                                                     | *string*                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                               | N/A                                                                                                                                                                                              |

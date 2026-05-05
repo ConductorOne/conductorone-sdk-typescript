@@ -19,39 +19,6 @@ export const DirectoryServiceDeleteResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type DirectoryServiceDeleteResponse$Outbound = {};
-
-/** @internal */
-export const DirectoryServiceDeleteResponse$outboundSchema: z.ZodType<
-  DirectoryServiceDeleteResponse$Outbound,
-  z.ZodTypeDef,
-  DirectoryServiceDeleteResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DirectoryServiceDeleteResponse$ {
-  /** @deprecated use `DirectoryServiceDeleteResponse$inboundSchema` instead. */
-  export const inboundSchema = DirectoryServiceDeleteResponse$inboundSchema;
-  /** @deprecated use `DirectoryServiceDeleteResponse$outboundSchema` instead. */
-  export const outboundSchema = DirectoryServiceDeleteResponse$outboundSchema;
-  /** @deprecated use `DirectoryServiceDeleteResponse$Outbound` instead. */
-  export type Outbound = DirectoryServiceDeleteResponse$Outbound;
-}
-
-export function directoryServiceDeleteResponseToJSON(
-  directoryServiceDeleteResponse: DirectoryServiceDeleteResponse,
-): string {
-  return JSON.stringify(
-    DirectoryServiceDeleteResponse$outboundSchema.parse(
-      directoryServiceDeleteResponse,
-    ),
-  );
-}
-
 export function directoryServiceDeleteResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<DirectoryServiceDeleteResponse, SDKValidationError> {

@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The RequestSchemaServiceRemoveEntitlementBindingResponse message.
+ * The response message for removing a single entitlement binding.
  */
 export type RequestSchemaServiceRemoveEntitlementBindingResponse = {};
 
@@ -19,44 +19,6 @@ export const RequestSchemaServiceRemoveEntitlementBindingResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({});
-
-/** @internal */
-export type RequestSchemaServiceRemoveEntitlementBindingResponse$Outbound = {};
-
-/** @internal */
-export const RequestSchemaServiceRemoveEntitlementBindingResponse$outboundSchema:
-  z.ZodType<
-    RequestSchemaServiceRemoveEntitlementBindingResponse$Outbound,
-    z.ZodTypeDef,
-    RequestSchemaServiceRemoveEntitlementBindingResponse
-  > = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestSchemaServiceRemoveEntitlementBindingResponse$ {
-  /** @deprecated use `RequestSchemaServiceRemoveEntitlementBindingResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestSchemaServiceRemoveEntitlementBindingResponse$inboundSchema;
-  /** @deprecated use `RequestSchemaServiceRemoveEntitlementBindingResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestSchemaServiceRemoveEntitlementBindingResponse$outboundSchema;
-  /** @deprecated use `RequestSchemaServiceRemoveEntitlementBindingResponse$Outbound` instead. */
-  export type Outbound =
-    RequestSchemaServiceRemoveEntitlementBindingResponse$Outbound;
-}
-
-export function requestSchemaServiceRemoveEntitlementBindingResponseToJSON(
-  requestSchemaServiceRemoveEntitlementBindingResponse:
-    RequestSchemaServiceRemoveEntitlementBindingResponse,
-): string {
-  return JSON.stringify(
-    RequestSchemaServiceRemoveEntitlementBindingResponse$outboundSchema.parse(
-      requestSchemaServiceRemoveEntitlementBindingResponse,
-    ),
-  );
-}
 
 export function requestSchemaServiceRemoveEntitlementBindingResponseFromJSON(
   jsonString: string,

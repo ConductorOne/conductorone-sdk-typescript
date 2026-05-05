@@ -1,0 +1,17 @@
+# OrgNotificationSettings
+
+OrgNotificationSettings contains organization-wide notification channel configurations and default preferences.
+
+## Example Usage
+
+```typescript
+import { OrgNotificationSettings } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: OrgNotificationSettings = {};
+```
+
+## Fields
+
+| Field                                                                       | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `channelSettings`                                                           | [shared.ChannelSettings](../../../sdk/models/shared/channelsettings.md)     | :heavy_minus_sign:                                                          | ChannelSettings groups notification preferences for all supported channels. |

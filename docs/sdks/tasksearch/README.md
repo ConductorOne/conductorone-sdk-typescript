@@ -1,5 +1,4 @@
 # TaskSearch
-(*taskSearch*)
 
 ## Overview
 

@@ -38,23 +38,6 @@ export type C1ApiDirectoryV1DirectoryServiceDeleteResponse = {
 };
 
 /** @internal */
-export const C1ApiDirectoryV1DirectoryServiceDeleteRequest$inboundSchema:
-  z.ZodType<
-    C1ApiDirectoryV1DirectoryServiceDeleteRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    DirectoryServiceDeleteRequest: shared
-      .DirectoryServiceDeleteRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "DirectoryServiceDeleteRequest": "directoryServiceDeleteRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiDirectoryV1DirectoryServiceDeleteRequest$Outbound = {
   app_id: string | null;
   DirectoryServiceDeleteRequest?:
@@ -79,21 +62,6 @@ export const C1ApiDirectoryV1DirectoryServiceDeleteRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiDirectoryV1DirectoryServiceDeleteRequest$ {
-  /** @deprecated use `C1ApiDirectoryV1DirectoryServiceDeleteRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiDirectoryV1DirectoryServiceDeleteRequest$inboundSchema;
-  /** @deprecated use `C1ApiDirectoryV1DirectoryServiceDeleteRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiDirectoryV1DirectoryServiceDeleteRequest$outboundSchema;
-  /** @deprecated use `C1ApiDirectoryV1DirectoryServiceDeleteRequest$Outbound` instead. */
-  export type Outbound = C1ApiDirectoryV1DirectoryServiceDeleteRequest$Outbound;
-}
-
 export function c1ApiDirectoryV1DirectoryServiceDeleteRequestToJSON(
   c1ApiDirectoryV1DirectoryServiceDeleteRequest:
     C1ApiDirectoryV1DirectoryServiceDeleteRequest,
@@ -102,22 +70,6 @@ export function c1ApiDirectoryV1DirectoryServiceDeleteRequestToJSON(
     C1ApiDirectoryV1DirectoryServiceDeleteRequest$outboundSchema.parse(
       c1ApiDirectoryV1DirectoryServiceDeleteRequest,
     ),
-  );
-}
-
-export function c1ApiDirectoryV1DirectoryServiceDeleteRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiDirectoryV1DirectoryServiceDeleteRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiDirectoryV1DirectoryServiceDeleteRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiDirectoryV1DirectoryServiceDeleteRequest' from JSON`,
   );
 }
 
@@ -141,66 +93,6 @@ export const C1ApiDirectoryV1DirectoryServiceDeleteResponse$inboundSchema:
       "DirectoryServiceDeleteResponse": "directoryServiceDeleteResponse",
     });
   });
-
-/** @internal */
-export type C1ApiDirectoryV1DirectoryServiceDeleteResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  DirectoryServiceDeleteResponse?:
-    | shared.DirectoryServiceDeleteResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiDirectoryV1DirectoryServiceDeleteResponse$outboundSchema:
-  z.ZodType<
-    C1ApiDirectoryV1DirectoryServiceDeleteResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiDirectoryV1DirectoryServiceDeleteResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    directoryServiceDeleteResponse: shared
-      .DirectoryServiceDeleteResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      directoryServiceDeleteResponse: "DirectoryServiceDeleteResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiDirectoryV1DirectoryServiceDeleteResponse$ {
-  /** @deprecated use `C1ApiDirectoryV1DirectoryServiceDeleteResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiDirectoryV1DirectoryServiceDeleteResponse$inboundSchema;
-  /** @deprecated use `C1ApiDirectoryV1DirectoryServiceDeleteResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiDirectoryV1DirectoryServiceDeleteResponse$outboundSchema;
-  /** @deprecated use `C1ApiDirectoryV1DirectoryServiceDeleteResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiDirectoryV1DirectoryServiceDeleteResponse$Outbound;
-}
-
-export function c1ApiDirectoryV1DirectoryServiceDeleteResponseToJSON(
-  c1ApiDirectoryV1DirectoryServiceDeleteResponse:
-    C1ApiDirectoryV1DirectoryServiceDeleteResponse,
-): string {
-  return JSON.stringify(
-    C1ApiDirectoryV1DirectoryServiceDeleteResponse$outboundSchema.parse(
-      c1ApiDirectoryV1DirectoryServiceDeleteResponse,
-    ),
-  );
-}
 
 export function c1ApiDirectoryV1DirectoryServiceDeleteResponseFromJSON(
   jsonString: string,

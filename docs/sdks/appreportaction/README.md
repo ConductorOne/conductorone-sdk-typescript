@@ -1,5 +1,4 @@
 # AppReportAction
-(*appReportAction*)
 
 ## Overview
 

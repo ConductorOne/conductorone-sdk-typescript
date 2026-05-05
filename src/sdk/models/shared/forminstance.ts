@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -18,17 +15,17 @@ import {
   FormCompletedAction$outboundSchema,
 } from "./formcompletedaction.js";
 import {
-  FormInput,
-  FormInput$inboundSchema,
-  FormInput$Outbound,
-  FormInput$outboundSchema,
-} from "./forminput.js";
-import {
   ReassignedAction,
   ReassignedAction$inboundSchema,
   ReassignedAction$Outbound,
   ReassignedAction$outboundSchema,
 } from "./reassignedaction.js";
+import {
+  RequestSchemaForm,
+  RequestSchemaForm$inboundSchema,
+  RequestSchemaForm$Outbound,
+  RequestSchemaForm$outboundSchema,
+} from "./requestschemaform.js";
 import {
   RestartAction,
   RestartAction$inboundSchema,
@@ -69,7 +66,7 @@ export type FormInstanceState = OpenEnum<typeof FormInstanceState>;
 export type FormInstance = {
   completed?: FormCompletedAction | null | undefined;
   data?: { [k: string]: any } | null | undefined;
-  form?: FormInput | null | undefined;
+  form?: RequestSchemaForm | null | undefined;
   reassigned?: ReassignedAction | null | undefined;
   restarted?: RestartAction | null | undefined;
   skipped?: SkippedAction | null | undefined;
@@ -84,32 +81,13 @@ export const FormInstanceState$inboundSchema: z.ZodType<
   FormInstanceState,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(FormInstanceState),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(FormInstanceState);
 /** @internal */
 export const FormInstanceState$outboundSchema: z.ZodType<
-  FormInstanceState,
+  string,
   z.ZodTypeDef,
   FormInstanceState
-> = z.union([
-  z.nativeEnum(FormInstanceState),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FormInstanceState$ {
-  /** @deprecated use `FormInstanceState$inboundSchema` instead. */
-  export const inboundSchema = FormInstanceState$inboundSchema;
-  /** @deprecated use `FormInstanceState$outboundSchema` instead. */
-  export const outboundSchema = FormInstanceState$outboundSchema;
-}
+> = openEnums.outboundSchema(FormInstanceState);
 
 /** @internal */
 export const FormInstance$inboundSchema: z.ZodType<
@@ -119,18 +97,17 @@ export const FormInstance$inboundSchema: z.ZodType<
 > = z.object({
   completed: z.nullable(FormCompletedAction$inboundSchema).optional(),
   data: z.nullable(z.record(z.any())).optional(),
-  form: z.nullable(FormInput$inboundSchema).optional(),
+  form: z.nullable(RequestSchemaForm$inboundSchema).optional(),
   reassigned: z.nullable(ReassignedAction$inboundSchema).optional(),
   restarted: z.nullable(RestartAction$inboundSchema).optional(),
   skipped: z.nullable(SkippedAction$inboundSchema).optional(),
   state: z.nullable(FormInstanceState$inboundSchema).optional(),
 });
-
 /** @internal */
 export type FormInstance$Outbound = {
   completed?: FormCompletedAction$Outbound | null | undefined;
   data?: { [k: string]: any } | null | undefined;
-  form?: FormInput$Outbound | null | undefined;
+  form?: RequestSchemaForm$Outbound | null | undefined;
   reassigned?: ReassignedAction$Outbound | null | undefined;
   restarted?: RestartAction$Outbound | null | undefined;
   skipped?: SkippedAction$Outbound | null | undefined;
@@ -145,30 +122,16 @@ export const FormInstance$outboundSchema: z.ZodType<
 > = z.object({
   completed: z.nullable(FormCompletedAction$outboundSchema).optional(),
   data: z.nullable(z.record(z.any())).optional(),
-  form: z.nullable(FormInput$outboundSchema).optional(),
+  form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
   reassigned: z.nullable(ReassignedAction$outboundSchema).optional(),
   restarted: z.nullable(RestartAction$outboundSchema).optional(),
   skipped: z.nullable(SkippedAction$outboundSchema).optional(),
   state: z.nullable(FormInstanceState$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FormInstance$ {
-  /** @deprecated use `FormInstance$inboundSchema` instead. */
-  export const inboundSchema = FormInstance$inboundSchema;
-  /** @deprecated use `FormInstance$outboundSchema` instead. */
-  export const outboundSchema = FormInstance$outboundSchema;
-  /** @deprecated use `FormInstance$Outbound` instead. */
-  export type Outbound = FormInstance$Outbound;
-}
-
 export function formInstanceToJSON(formInstance: FormInstance): string {
   return JSON.stringify(FormInstance$outboundSchema.parse(formInstance));
 }
-
 export function formInstanceFromJSON(
   jsonString: string,
 ): SafeParseResult<FormInstance, SDKValidationError> {

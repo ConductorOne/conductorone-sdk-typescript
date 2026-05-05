@@ -38,22 +38,6 @@ export type C1ApiStepupV1StepUpProviderServiceUpdateSecretResponse = {
 };
 
 /** @internal */
-export const C1ApiStepupV1StepUpProviderServiceUpdateSecretRequest$inboundSchema:
-  z.ZodType<
-    C1ApiStepupV1StepUpProviderServiceUpdateSecretRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.nullable(z.string()),
-    UpdateStepUpProviderSecretRequest: shared
-      .UpdateStepUpProviderSecretRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "UpdateStepUpProviderSecretRequest": "updateStepUpProviderSecretRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiStepupV1StepUpProviderServiceUpdateSecretRequest$Outbound = {
   id: string | null;
   UpdateStepUpProviderSecretRequest?:
@@ -77,22 +61,6 @@ export const C1ApiStepupV1StepUpProviderServiceUpdateSecretRequest$outboundSchem
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiStepupV1StepUpProviderServiceUpdateSecretRequest$ {
-  /** @deprecated use `C1ApiStepupV1StepUpProviderServiceUpdateSecretRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiStepupV1StepUpProviderServiceUpdateSecretRequest$inboundSchema;
-  /** @deprecated use `C1ApiStepupV1StepUpProviderServiceUpdateSecretRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiStepupV1StepUpProviderServiceUpdateSecretRequest$outboundSchema;
-  /** @deprecated use `C1ApiStepupV1StepUpProviderServiceUpdateSecretRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiStepupV1StepUpProviderServiceUpdateSecretRequest$Outbound;
-}
-
 export function c1ApiStepupV1StepUpProviderServiceUpdateSecretRequestToJSON(
   c1ApiStepupV1StepUpProviderServiceUpdateSecretRequest:
     C1ApiStepupV1StepUpProviderServiceUpdateSecretRequest,
@@ -101,22 +69,6 @@ export function c1ApiStepupV1StepUpProviderServiceUpdateSecretRequestToJSON(
     C1ApiStepupV1StepUpProviderServiceUpdateSecretRequest$outboundSchema.parse(
       c1ApiStepupV1StepUpProviderServiceUpdateSecretRequest,
     ),
-  );
-}
-
-export function c1ApiStepupV1StepUpProviderServiceUpdateSecretRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiStepupV1StepUpProviderServiceUpdateSecretRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiStepupV1StepUpProviderServiceUpdateSecretRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiStepupV1StepUpProviderServiceUpdateSecretRequest' from JSON`,
   );
 }
 
@@ -141,66 +93,6 @@ export const C1ApiStepupV1StepUpProviderServiceUpdateSecretResponse$inboundSchem
         "updateStepUpProviderSecretResponse",
     });
   });
-
-/** @internal */
-export type C1ApiStepupV1StepUpProviderServiceUpdateSecretResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  UpdateStepUpProviderSecretResponse?:
-    | shared.UpdateStepUpProviderSecretResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiStepupV1StepUpProviderServiceUpdateSecretResponse$outboundSchema:
-  z.ZodType<
-    C1ApiStepupV1StepUpProviderServiceUpdateSecretResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiStepupV1StepUpProviderServiceUpdateSecretResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    updateStepUpProviderSecretResponse: shared
-      .UpdateStepUpProviderSecretResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      updateStepUpProviderSecretResponse: "UpdateStepUpProviderSecretResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiStepupV1StepUpProviderServiceUpdateSecretResponse$ {
-  /** @deprecated use `C1ApiStepupV1StepUpProviderServiceUpdateSecretResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiStepupV1StepUpProviderServiceUpdateSecretResponse$inboundSchema;
-  /** @deprecated use `C1ApiStepupV1StepUpProviderServiceUpdateSecretResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiStepupV1StepUpProviderServiceUpdateSecretResponse$outboundSchema;
-  /** @deprecated use `C1ApiStepupV1StepUpProviderServiceUpdateSecretResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiStepupV1StepUpProviderServiceUpdateSecretResponse$Outbound;
-}
-
-export function c1ApiStepupV1StepUpProviderServiceUpdateSecretResponseToJSON(
-  c1ApiStepupV1StepUpProviderServiceUpdateSecretResponse:
-    C1ApiStepupV1StepUpProviderServiceUpdateSecretResponse,
-): string {
-  return JSON.stringify(
-    C1ApiStepupV1StepUpProviderServiceUpdateSecretResponse$outboundSchema.parse(
-      c1ApiStepupV1StepUpProviderServiceUpdateSecretResponse,
-    ),
-  );
-}
 
 export function c1ApiStepupV1StepUpProviderServiceUpdateSecretResponseFromJSON(
   jsonString: string,

@@ -16,7 +16,7 @@ export class PolicyValidate extends ClientSDK {
    * Validate policies
    */
   async validateCEL(
-    request?: shared.EditorValidateRequest | undefined,
+    request?: shared.PolicyEditorValidateRequest | undefined,
     options?: RequestOptions,
   ): Promise<operations.C1ApiPolicyV1PolicyValidateValidateCELResponse> {
     return unwrapAsync(policyValidateValidateCEL(

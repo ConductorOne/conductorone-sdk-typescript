@@ -3,14 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 /**
  * The sortDirection field.
@@ -47,57 +41,18 @@ export type SystemLogServiceListEventsRequest = {
    */
   sortDirection?: SortDirection | null | undefined;
   until?: Date | null | undefined;
+  /**
+   * The untilEventUid field.
+   */
+  untilEventUid?: string | undefined;
 };
 
 /** @internal */
-export const SortDirection$inboundSchema: z.ZodType<
-  SortDirection,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(SortDirection),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
 export const SortDirection$outboundSchema: z.ZodType<
-  SortDirection,
+  string,
   z.ZodTypeDef,
   SortDirection
-> = z.union([
-  z.nativeEnum(SortDirection),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SortDirection$ {
-  /** @deprecated use `SortDirection$inboundSchema` instead. */
-  export const inboundSchema = SortDirection$inboundSchema;
-  /** @deprecated use `SortDirection$outboundSchema` instead. */
-  export const outboundSchema = SortDirection$outboundSchema;
-}
-
-/** @internal */
-export const SystemLogServiceListEventsRequest$inboundSchema: z.ZodType<
-  SystemLogServiceListEventsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  since: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  sinceEventUid: z.nullable(z.string()).optional(),
-  sortDirection: z.nullable(SortDirection$inboundSchema).optional(),
-  until: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = openEnums.outboundSchema(SortDirection);
 
 /** @internal */
 export type SystemLogServiceListEventsRequest$Outbound = {
@@ -107,6 +62,7 @@ export type SystemLogServiceListEventsRequest$Outbound = {
   sinceEventUid?: string | null | undefined;
   sortDirection?: string | null | undefined;
   until?: string | null | undefined;
+  untilEventUid?: string | undefined;
 };
 
 /** @internal */
@@ -121,21 +77,8 @@ export const SystemLogServiceListEventsRequest$outboundSchema: z.ZodType<
   sinceEventUid: z.nullable(z.string()).optional(),
   sortDirection: z.nullable(SortDirection$outboundSchema).optional(),
   until: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  untilEventUid: z.string().optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SystemLogServiceListEventsRequest$ {
-  /** @deprecated use `SystemLogServiceListEventsRequest$inboundSchema` instead. */
-  export const inboundSchema = SystemLogServiceListEventsRequest$inboundSchema;
-  /** @deprecated use `SystemLogServiceListEventsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    SystemLogServiceListEventsRequest$outboundSchema;
-  /** @deprecated use `SystemLogServiceListEventsRequest$Outbound` instead. */
-  export type Outbound = SystemLogServiceListEventsRequest$Outbound;
-}
 
 export function systemLogServiceListEventsRequestToJSON(
   systemLogServiceListEventsRequest: SystemLogServiceListEventsRequest,
@@ -144,15 +87,5 @@ export function systemLogServiceListEventsRequestToJSON(
     SystemLogServiceListEventsRequest$outboundSchema.parse(
       systemLogServiceListEventsRequest,
     ),
-  );
-}
-
-export function systemLogServiceListEventsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<SystemLogServiceListEventsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SystemLogServiceListEventsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SystemLogServiceListEventsRequest' from JSON`,
   );
 }

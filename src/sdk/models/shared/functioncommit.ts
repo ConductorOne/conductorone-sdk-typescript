@@ -45,45 +45,6 @@ export const FunctionCommit$inboundSchema: z.ZodType<
   message: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type FunctionCommit$Outbound = {
-  author?: string | null | undefined;
-  createdAt?: string | null | undefined;
-  functionId?: string | null | undefined;
-  id?: string | null | undefined;
-  message?: string | null | undefined;
-};
-
-/** @internal */
-export const FunctionCommit$outboundSchema: z.ZodType<
-  FunctionCommit$Outbound,
-  z.ZodTypeDef,
-  FunctionCommit
-> = z.object({
-  author: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  functionId: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  message: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FunctionCommit$ {
-  /** @deprecated use `FunctionCommit$inboundSchema` instead. */
-  export const inboundSchema = FunctionCommit$inboundSchema;
-  /** @deprecated use `FunctionCommit$outboundSchema` instead. */
-  export const outboundSchema = FunctionCommit$outboundSchema;
-  /** @deprecated use `FunctionCommit$Outbound` instead. */
-  export type Outbound = FunctionCommit$Outbound;
-}
-
-export function functionCommitToJSON(functionCommit: FunctionCommit): string {
-  return JSON.stringify(FunctionCommit$outboundSchema.parse(functionCommit));
-}
-
 export function functionCommitFromJSON(
   jsonString: string,
 ): SafeParseResult<FunctionCommit, SDKValidationError> {

@@ -19,37 +19,6 @@ export const RotatableSecretField$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type RotatableSecretField$Outbound = {};
-
-/** @internal */
-export const RotatableSecretField$outboundSchema: z.ZodType<
-  RotatableSecretField$Outbound,
-  z.ZodTypeDef,
-  RotatableSecretField
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RotatableSecretField$ {
-  /** @deprecated use `RotatableSecretField$inboundSchema` instead. */
-  export const inboundSchema = RotatableSecretField$inboundSchema;
-  /** @deprecated use `RotatableSecretField$outboundSchema` instead. */
-  export const outboundSchema = RotatableSecretField$outboundSchema;
-  /** @deprecated use `RotatableSecretField$Outbound` instead. */
-  export type Outbound = RotatableSecretField$Outbound;
-}
-
-export function rotatableSecretFieldToJSON(
-  rotatableSecretField: RotatableSecretField,
-): string {
-  return JSON.stringify(
-    RotatableSecretField$outboundSchema.parse(rotatableSecretField),
-  );
-}
-
 export function rotatableSecretFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<RotatableSecretField, SDKValidationError> {

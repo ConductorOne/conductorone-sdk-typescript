@@ -1,0 +1,22 @@
+# ExternalClientSearchServiceSearchRequest
+
+The ExternalClientSearchServiceSearchRequest message.
+
+## Example Usage
+
+```typescript
+import { ExternalClientSearchServiceSearchRequest } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: ExternalClientSearchServiceSearchRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                       | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `clientIdUrls`                                                                                                              | *string*[]                                                                                                                  | :heavy_minus_sign:                                                                                                          | Exact-match filter on client_id values (e.g., CIMD URLs).<br/> Returns only grants whose client_id matches one of these values. |
+| `pageSize`                                                                                                                  | *number*                                                                                                                    | :heavy_minus_sign:                                                                                                          | The pageSize field.                                                                                                         |
+| `pageToken`                                                                                                                 | *string*                                                                                                                    | :heavy_minus_sign:                                                                                                          | The pageToken field.                                                                                                        |
+| `query`                                                                                                                     | *string*                                                                                                                    | :heavy_minus_sign:                                                                                                          | Free-text search on client_name and user display name                                                                       |
+| `users`                                                                                                                     | [shared.UserRef](../../../sdk/models/shared/userref.md)[]                                                                   | :heavy_minus_sign:                                                                                                          | Filter by specific user IDs                                                                                                 |
+| `wellKnownClients`                                                                                                          | [shared.WellKnownClients](../../../sdk/models/shared/wellknownclients.md)[]                                                 | :heavy_minus_sign:                                                                                                          | Filter by well-known client type (e.g., CLAUDE_CODE, CURSOR, etc.)                                                          |

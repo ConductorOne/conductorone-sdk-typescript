@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The AppUserExpandMask message contains a list of paths to expand in the response.
@@ -16,15 +13,6 @@ export type AppUserExpandMask = {
    */
   paths?: Array<string> | null | undefined;
 };
-
-/** @internal */
-export const AppUserExpandMask$inboundSchema: z.ZodType<
-  AppUserExpandMask,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type AppUserExpandMask$Outbound = {
@@ -40,33 +28,10 @@ export const AppUserExpandMask$outboundSchema: z.ZodType<
   paths: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUserExpandMask$ {
-  /** @deprecated use `AppUserExpandMask$inboundSchema` instead. */
-  export const inboundSchema = AppUserExpandMask$inboundSchema;
-  /** @deprecated use `AppUserExpandMask$outboundSchema` instead. */
-  export const outboundSchema = AppUserExpandMask$outboundSchema;
-  /** @deprecated use `AppUserExpandMask$Outbound` instead. */
-  export type Outbound = AppUserExpandMask$Outbound;
-}
-
 export function appUserExpandMaskToJSON(
   appUserExpandMask: AppUserExpandMask,
 ): string {
   return JSON.stringify(
     AppUserExpandMask$outboundSchema.parse(appUserExpandMask),
-  );
-}
-
-export function appUserExpandMaskFromJSON(
-  jsonString: string,
-): SafeParseResult<AppUserExpandMask, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AppUserExpandMask$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AppUserExpandMask' from JSON`,
   );
 }

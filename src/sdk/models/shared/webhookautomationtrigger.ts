@@ -3,9 +3,16 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  WebhookListenerAuthCapabilityURL,
+  WebhookListenerAuthCapabilityURL$inboundSchema,
+  WebhookListenerAuthCapabilityURL$Outbound,
+  WebhookListenerAuthCapabilityURL$outboundSchema,
+} from "./webhooklistenerauthcapabilityurl.js";
 import {
   WebhookListenerAuthHMAC,
   WebhookListenerAuthHMAC$inboundSchema,
@@ -27,8 +34,21 @@ import {
  * This message contains a oneof named auth_config. Only a single field of the following list may be set at a time:
  *   - jwt
  *   - hmac
+ *   - capabilityUrl
  */
 export type WebhookAutomationTrigger = {
+  /**
+   * Capability URL authentication: the URL itself contains an unguessable token that acts
+   *
+   * @remarks
+   *  as the credential. This is simpler to integrate but less secure than JWT or HMAC because
+   *  the token can leak via server logs, referrer headers, and URL sharing.
+   *  See https://www.w3.org/TR/capability-urls/ for background.
+   */
+  webhookListenerAuthCapabilityURL?:
+    | WebhookListenerAuthCapabilityURL
+    | null
+    | undefined;
   hmac?: WebhookListenerAuthHMAC | null | undefined;
   jwt?: WebhookListenerAuthJWT | null | undefined;
   /**
@@ -43,13 +63,19 @@ export const WebhookAutomationTrigger$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  capabilityUrl: z.nullable(WebhookListenerAuthCapabilityURL$inboundSchema)
+    .optional(),
   hmac: z.nullable(WebhookListenerAuthHMAC$inboundSchema).optional(),
   jwt: z.nullable(WebhookListenerAuthJWT$inboundSchema).optional(),
   listenerId: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "capabilityUrl": "webhookListenerAuthCapabilityURL",
+  });
 });
-
 /** @internal */
 export type WebhookAutomationTrigger$Outbound = {
+  capabilityUrl?: WebhookListenerAuthCapabilityURL$Outbound | null | undefined;
   hmac?: WebhookListenerAuthHMAC$Outbound | null | undefined;
   jwt?: WebhookListenerAuthJWT$Outbound | null | undefined;
   listenerId?: string | null | undefined;
@@ -61,23 +87,17 @@ export const WebhookAutomationTrigger$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WebhookAutomationTrigger
 > = z.object({
+  webhookListenerAuthCapabilityURL: z.nullable(
+    WebhookListenerAuthCapabilityURL$outboundSchema,
+  ).optional(),
   hmac: z.nullable(WebhookListenerAuthHMAC$outboundSchema).optional(),
   jwt: z.nullable(WebhookListenerAuthJWT$outboundSchema).optional(),
   listenerId: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    webhookListenerAuthCapabilityURL: "capabilityUrl",
+  });
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhookAutomationTrigger$ {
-  /** @deprecated use `WebhookAutomationTrigger$inboundSchema` instead. */
-  export const inboundSchema = WebhookAutomationTrigger$inboundSchema;
-  /** @deprecated use `WebhookAutomationTrigger$outboundSchema` instead. */
-  export const outboundSchema = WebhookAutomationTrigger$outboundSchema;
-  /** @deprecated use `WebhookAutomationTrigger$Outbound` instead. */
-  export type Outbound = WebhookAutomationTrigger$Outbound;
-}
 
 export function webhookAutomationTriggerToJSON(
   webhookAutomationTrigger: WebhookAutomationTrigger,
@@ -86,7 +106,6 @@ export function webhookAutomationTriggerToJSON(
     WebhookAutomationTrigger$outboundSchema.parse(webhookAutomationTrigger),
   );
 }
-
 export function webhookAutomationTriggerFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookAutomationTrigger, SDKValidationError> {

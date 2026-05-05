@@ -24,7 +24,6 @@ export const TaskRevokeSourceExpired$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
 /** @internal */
 export type TaskRevokeSourceExpired$Outbound = {
   expiredAt?: string | null | undefined;
@@ -39,19 +38,6 @@ export const TaskRevokeSourceExpired$outboundSchema: z.ZodType<
   expiredAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskRevokeSourceExpired$ {
-  /** @deprecated use `TaskRevokeSourceExpired$inboundSchema` instead. */
-  export const inboundSchema = TaskRevokeSourceExpired$inboundSchema;
-  /** @deprecated use `TaskRevokeSourceExpired$outboundSchema` instead. */
-  export const outboundSchema = TaskRevokeSourceExpired$outboundSchema;
-  /** @deprecated use `TaskRevokeSourceExpired$Outbound` instead. */
-  export type Outbound = TaskRevokeSourceExpired$Outbound;
-}
-
 export function taskRevokeSourceExpiredToJSON(
   taskRevokeSourceExpired: TaskRevokeSourceExpired,
 ): string {
@@ -59,7 +45,6 @@ export function taskRevokeSourceExpiredToJSON(
     TaskRevokeSourceExpired$outboundSchema.parse(taskRevokeSourceExpired),
   );
 }
-
 export function taskRevokeSourceExpiredFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskRevokeSourceExpired, SDKValidationError> {

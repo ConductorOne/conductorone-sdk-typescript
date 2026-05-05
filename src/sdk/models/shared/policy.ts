@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,7 +22,6 @@ import {
 } from "./policysteps.js";
 import {
   PolicyStepsInput,
-  PolicyStepsInput$inboundSchema,
   PolicyStepsInput$Outbound,
   PolicyStepsInput$outboundSchema,
 } from "./policystepsinput.js";
@@ -37,7 +33,10 @@ import {
 } from "./rule.js";
 
 /**
- * Indicates the type of this policy. Can also be used to get the value from policySteps.
+ * The type of this policy (grant, revoke, or certify). The lowercased type
+ *
+ * @remarks
+ *  name (e.g., "grant") is also the key for the baseline entry in policy_steps.
  */
 export const PolicyType = {
   PolicyTypeUnspecified: "POLICY_TYPE_UNSPECIFIED",
@@ -48,12 +47,20 @@ export const PolicyType = {
   PolicyTypeProvision: "POLICY_TYPE_PROVISION",
 } as const;
 /**
- * Indicates the type of this policy. Can also be used to get the value from policySteps.
+ * The type of this policy (grant, revoke, or certify). The lowercased type
+ *
+ * @remarks
+ *  name (e.g., "grant") is also the key for the baseline entry in policy_steps.
  */
 export type PolicyType = OpenEnum<typeof PolicyType>;
 
 /**
- * A policy describes the behavior of the ConductorOne system when processing a task. You can describe the type, approvers, fallback behavior, and escalation processes.
+ * A policy defines a workflow (sequence of steps) that runs when processing
+ *
+ * @remarks
+ *  access requests, reviews, or revocations. Policies support conditional
+ *  routing: different conditions can trigger different step sequences, with a
+ *  baseline fallback.
  */
 export type Policy = {
   createdAt?: Date | null | undefined;
@@ -71,25 +78,38 @@ export type Policy = {
    */
   id?: string | null | undefined;
   /**
-   * A map of string(policy type) to steps in a policy. This structure is leftover from a previous design, and should only ever have one key->value set.
+   * A map from string keys to step sequences. One entry is always the baseline,
+   *
+   * @remarks
+   *  keyed by the lowercased policy_type (e.g., "grant", "revoke", "certify").
+   *  Additional entries have opaque keys (UUIDs) and are referenced by the rules
+   *  array for conditional routing. If no conditional rules are configured, only
+   *  the baseline entry exists.
    */
   policySteps?: { [k: string]: PolicySteps } | null | undefined;
   /**
-   * Indicates the type of this policy. Can also be used to get the value from policySteps.
+   * The type of this policy (grant, revoke, or certify). The lowercased type
+   *
+   * @remarks
+   *  name (e.g., "grant") is also the key for the baseline entry in policy_steps.
    */
   policyType?: PolicyType | null | undefined;
   /**
-   * An array of actions (ordered) to take place after a policy completes processing.
+   * Ordered actions to execute after the policy completes processing.
    */
   postActions?: Array<PolicyPostActions> | null | undefined;
   /**
-   * Deprecated. Use setting in policy step instead
+   * This field is no longer used. Configure delegate reassignment in the policy step instead.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   reassignTasksToDelegates?: boolean | null | undefined;
   /**
-   * The rules field.
+   * Ordered conditional routing rules. Evaluated top-to-bottom; the first
+   *
+   * @remarks
+   *  matching rule selects a step sequence from policy_steps. If no rule matches
+   *  (or if this array is empty), the baseline entry in policy_steps is used.
    */
   rules?: Array<Rule> | null | undefined;
   /**
@@ -100,7 +120,12 @@ export type Policy = {
 };
 
 /**
- * A policy describes the behavior of the ConductorOne system when processing a task. You can describe the type, approvers, fallback behavior, and escalation processes.
+ * A policy defines a workflow (sequence of steps) that runs when processing
+ *
+ * @remarks
+ *  access requests, reviews, or revocations. Policies support conditional
+ *  routing: different conditions can trigger different step sequences, with a
+ *  baseline fallback.
  */
 export type PolicyInput = {
   createdAt?: Date | null | undefined;
@@ -114,25 +139,38 @@ export type PolicyInput = {
    */
   displayName?: string | null | undefined;
   /**
-   * A map of string(policy type) to steps in a policy. This structure is leftover from a previous design, and should only ever have one key->value set.
+   * A map from string keys to step sequences. One entry is always the baseline,
+   *
+   * @remarks
+   *  keyed by the lowercased policy_type (e.g., "grant", "revoke", "certify").
+   *  Additional entries have opaque keys (UUIDs) and are referenced by the rules
+   *  array for conditional routing. If no conditional rules are configured, only
+   *  the baseline entry exists.
    */
   policySteps?: { [k: string]: PolicyStepsInput } | null | undefined;
   /**
-   * Indicates the type of this policy. Can also be used to get the value from policySteps.
+   * The type of this policy (grant, revoke, or certify). The lowercased type
+   *
+   * @remarks
+   *  name (e.g., "grant") is also the key for the baseline entry in policy_steps.
    */
   policyType?: PolicyType | null | undefined;
   /**
-   * An array of actions (ordered) to take place after a policy completes processing.
+   * Ordered actions to execute after the policy completes processing.
    */
   postActions?: Array<PolicyPostActions> | null | undefined;
   /**
-   * Deprecated. Use setting in policy step instead
+   * This field is no longer used. Configure delegate reassignment in the policy step instead.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   reassignTasksToDelegates?: boolean | null | undefined;
   /**
-   * The rules field.
+   * Ordered conditional routing rules. Evaluated top-to-bottom; the first
+   *
+   * @remarks
+   *  matching rule selects a step sequence from policy_steps. If no rule matches
+   *  (or if this array is empty), the baseline entry in policy_steps is used.
    */
   rules?: Array<Rule> | null | undefined;
   updatedAt?: Date | null | undefined;
@@ -143,32 +181,13 @@ export const PolicyType$inboundSchema: z.ZodType<
   PolicyType,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(PolicyType),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(PolicyType);
 /** @internal */
 export const PolicyType$outboundSchema: z.ZodType<
-  PolicyType,
+  string,
   z.ZodTypeDef,
   PolicyType
-> = z.union([
-  z.nativeEnum(PolicyType),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PolicyType$ {
-  /** @deprecated use `PolicyType$inboundSchema` instead. */
-  export const inboundSchema = PolicyType$inboundSchema;
-  /** @deprecated use `PolicyType$outboundSchema` instead. */
-  export const outboundSchema = PolicyType$outboundSchema;
-}
+> = openEnums.outboundSchema(PolicyType);
 
 /** @internal */
 export const Policy$inboundSchema: z.ZodType<Policy, z.ZodTypeDef, unknown> = z
@@ -193,7 +212,6 @@ export const Policy$inboundSchema: z.ZodType<Policy, z.ZodTypeDef, unknown> = z
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
   });
-
 /** @internal */
 export type Policy$Outbound = {
   createdAt?: string | null | undefined;
@@ -230,23 +248,9 @@ export const Policy$outboundSchema: z.ZodType<
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Policy$ {
-  /** @deprecated use `Policy$inboundSchema` instead. */
-  export const inboundSchema = Policy$inboundSchema;
-  /** @deprecated use `Policy$outboundSchema` instead. */
-  export const outboundSchema = Policy$outboundSchema;
-  /** @deprecated use `Policy$Outbound` instead. */
-  export type Outbound = Policy$Outbound;
-}
-
 export function policyToJSON(policy: Policy): string {
   return JSON.stringify(Policy$outboundSchema.parse(policy));
 }
-
 export function policyFromJSON(
   jsonString: string,
 ): SafeParseResult<Policy, SDKValidationError> {
@@ -256,30 +260,6 @@ export function policyFromJSON(
     `Failed to parse 'Policy' from JSON`,
   );
 }
-
-/** @internal */
-export const PolicyInput$inboundSchema: z.ZodType<
-  PolicyInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  policySteps: z.nullable(z.record(PolicyStepsInput$inboundSchema)).optional(),
-  policyType: z.nullable(PolicyType$inboundSchema).optional(),
-  postActions: z.nullable(z.array(PolicyPostActions$inboundSchema)).optional(),
-  reassignTasksToDelegates: z.nullable(z.boolean()).optional(),
-  rules: z.nullable(z.array(Rule$inboundSchema)).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
 
 /** @internal */
 export type PolicyInput$Outbound = {
@@ -313,29 +293,6 @@ export const PolicyInput$outboundSchema: z.ZodType<
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PolicyInput$ {
-  /** @deprecated use `PolicyInput$inboundSchema` instead. */
-  export const inboundSchema = PolicyInput$inboundSchema;
-  /** @deprecated use `PolicyInput$outboundSchema` instead. */
-  export const outboundSchema = PolicyInput$outboundSchema;
-  /** @deprecated use `PolicyInput$Outbound` instead. */
-  export type Outbound = PolicyInput$Outbound;
-}
-
 export function policyInputToJSON(policyInput: PolicyInput): string {
   return JSON.stringify(PolicyInput$outboundSchema.parse(policyInput));
-}
-
-export function policyInputFromJSON(
-  jsonString: string,
-): SafeParseResult<PolicyInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PolicyInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PolicyInput' from JSON`,
-  );
 }

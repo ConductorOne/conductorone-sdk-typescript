@@ -3,28 +3,16 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The RemoveAppResourceOwnerRequest message.
+ * The request message for removing an owner from an app resource.
  */
 export type RemoveAppResourceOwnerRequest = {
   /**
-   * The userId field.
+   * The C1 user ID to remove as an owner.
    */
   userId?: string | null | undefined;
 };
-
-/** @internal */
-export const RemoveAppResourceOwnerRequest$inboundSchema: z.ZodType<
-  RemoveAppResourceOwnerRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  userId: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type RemoveAppResourceOwnerRequest$Outbound = {
@@ -40,19 +28,6 @@ export const RemoveAppResourceOwnerRequest$outboundSchema: z.ZodType<
   userId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RemoveAppResourceOwnerRequest$ {
-  /** @deprecated use `RemoveAppResourceOwnerRequest$inboundSchema` instead. */
-  export const inboundSchema = RemoveAppResourceOwnerRequest$inboundSchema;
-  /** @deprecated use `RemoveAppResourceOwnerRequest$outboundSchema` instead. */
-  export const outboundSchema = RemoveAppResourceOwnerRequest$outboundSchema;
-  /** @deprecated use `RemoveAppResourceOwnerRequest$Outbound` instead. */
-  export type Outbound = RemoveAppResourceOwnerRequest$Outbound;
-}
-
 export function removeAppResourceOwnerRequestToJSON(
   removeAppResourceOwnerRequest: RemoveAppResourceOwnerRequest,
 ): string {
@@ -60,15 +35,5 @@ export function removeAppResourceOwnerRequestToJSON(
     RemoveAppResourceOwnerRequest$outboundSchema.parse(
       removeAppResourceOwnerRequest,
     ),
-  );
-}
-
-export function removeAppResourceOwnerRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<RemoveAppResourceOwnerRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RemoveAppResourceOwnerRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RemoveAppResourceOwnerRequest' from JSON`,
   );
 }

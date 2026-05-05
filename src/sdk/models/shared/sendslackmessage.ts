@@ -6,11 +6,20 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  UserRef,
+  UserRef$inboundSchema,
+  UserRef$Outbound,
+  UserRef$outboundSchema,
+} from "./userref.js";
 
 /**
- * The SendSlackMessage message.
+ * SendSlackMessage posts to a channel or DMs one or more users. Delivery mode is
  *
  * @remarks
+ *  inferred from which fields are populated: DM if any user field is set
+ *  (use_subject_user, user_ids_cel, user_refs), otherwise channel. Priority for DM
+ *  recipient resolution: use_subject_user > user_ids_cel > user_refs.
  *
  * This message contains a oneof named channel. Only a single field of the following list may be set at a time:
  *   - channelName
@@ -37,6 +46,18 @@ export type SendSlackMessage = {
    * See the documentation for `c1.api.automations.v1.SendSlackMessage` for more details.
    */
   channelNameCel?: string | null | undefined;
+  /**
+   * The useSubjectUser field.
+   */
+  useSubjectUser?: boolean | undefined;
+  /**
+   * The userIdsCel field.
+   */
+  userIdsCel?: string | undefined;
+  /**
+   * The userRefs field.
+   */
+  userRefs?: Array<UserRef> | null | undefined;
 };
 
 /** @internal */
@@ -48,13 +69,18 @@ export const SendSlackMessage$inboundSchema: z.ZodType<
   body: z.nullable(z.string()).optional(),
   channelName: z.nullable(z.string()).optional(),
   channelNameCel: z.nullable(z.string()).optional(),
+  useSubjectUser: z.boolean().optional(),
+  userIdsCel: z.string().optional(),
+  userRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
 });
-
 /** @internal */
 export type SendSlackMessage$Outbound = {
   body?: string | null | undefined;
   channelName?: string | null | undefined;
   channelNameCel?: string | null | undefined;
+  useSubjectUser?: boolean | undefined;
+  userIdsCel?: string | undefined;
+  userRefs?: Array<UserRef$Outbound> | null | undefined;
 };
 
 /** @internal */
@@ -66,20 +92,10 @@ export const SendSlackMessage$outboundSchema: z.ZodType<
   body: z.nullable(z.string()).optional(),
   channelName: z.nullable(z.string()).optional(),
   channelNameCel: z.nullable(z.string()).optional(),
+  useSubjectUser: z.boolean().optional(),
+  userIdsCel: z.string().optional(),
+  userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SendSlackMessage$ {
-  /** @deprecated use `SendSlackMessage$inboundSchema` instead. */
-  export const inboundSchema = SendSlackMessage$inboundSchema;
-  /** @deprecated use `SendSlackMessage$outboundSchema` instead. */
-  export const outboundSchema = SendSlackMessage$outboundSchema;
-  /** @deprecated use `SendSlackMessage$Outbound` instead. */
-  export type Outbound = SendSlackMessage$Outbound;
-}
 
 export function sendSlackMessageToJSON(
   sendSlackMessage: SendSlackMessage,
@@ -88,7 +104,6 @@ export function sendSlackMessageToJSON(
     SendSlackMessage$outboundSchema.parse(sendSlackMessage),
   );
 }
-
 export function sendSlackMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<SendSlackMessage, SDKValidationError> {

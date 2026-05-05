@@ -1,0 +1,31 @@
+# UpdateFindingStateRequest
+
+The UpdateFindingStateRequest message.
+
+This message contains a oneof named action. Only a single field of the following list may be set at a time:
+  - snooze
+  - suppress
+  - acceptRisk
+  - unsuppress
+  - resolve
+  - reopen
+
+
+## Example Usage
+
+```typescript
+import { UpdateFindingStateRequest } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: UpdateFindingStateRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                        | Type                                                                                                                                                                         | Required                                                                                                                                                                     | Description                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `acceptRiskAction`                                                                                                                                                           | [shared.AcceptRiskAction](../../../sdk/models/shared/acceptriskaction.md)                                                                                                    | :heavy_minus_sign:                                                                                                                                                           | AcceptRiskAction parameters for UpdateFindingState.                                                                                                                          |
+| `reopenAction`                                                                                                                                                               | [shared.ReopenAction](../../../sdk/models/shared/reopenaction.md)                                                                                                            | :heavy_minus_sign:                                                                                                                                                           | ReopenAction parameters for UpdateFindingState.                                                                                                                              |
+| `resolveAction`                                                                                                                                                              | [shared.ResolveAction](../../../sdk/models/shared/resolveaction.md)                                                                                                          | :heavy_minus_sign:                                                                                                                                                           | ResolveAction parameters for UpdateFindingState (manual resolve).                                                                                                            |
+| `snoozeAction`                                                                                                                                                               | [shared.SnoozeAction](../../../sdk/models/shared/snoozeaction.md)                                                                                                            | :heavy_minus_sign:                                                                                                                                                           | SnoozeAction parameters for UpdateFindingState.                                                                                                                              |
+| `suppressStateAction`                                                                                                                                                        | [shared.SuppressStateAction](../../../sdk/models/shared/suppressstateaction.md)                                                                                              | :heavy_minus_sign:                                                                                                                                                           | SuppressStateAction parameters for UpdateFindingState.                                                                                                                       |
+| ~~`unsuppressAction`~~                                                                                                                                                       | [shared.UnsuppressAction](../../../sdk/models/shared/unsuppressaction.md)                                                                                                    | :heavy_minus_sign:                                                                                                                                                           | : warning: ** DEPRECATED **: This will be removed in a future release, please migrate away from it as soon as possible.<br/><br/>UnsuppressAction parameters for UpdateFindingState. |

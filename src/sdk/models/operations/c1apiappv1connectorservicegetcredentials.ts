@@ -37,23 +37,6 @@ export type C1ApiAppV1ConnectorServiceGetCredentialsResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1ConnectorServiceGetCredentialsRequest$inboundSchema:
-  z.ZodType<
-    C1ApiAppV1ConnectorServiceGetCredentialsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    connector_id: z.nullable(z.string()),
-    id: z.nullable(z.string()),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "connector_id": "connectorId",
-    });
-  });
-
-/** @internal */
 export type C1ApiAppV1ConnectorServiceGetCredentialsRequest$Outbound = {
   app_id: string | null;
   connector_id: string | null;
@@ -77,22 +60,6 @@ export const C1ApiAppV1ConnectorServiceGetCredentialsRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1ConnectorServiceGetCredentialsRequest$ {
-  /** @deprecated use `C1ApiAppV1ConnectorServiceGetCredentialsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1ConnectorServiceGetCredentialsRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceGetCredentialsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1ConnectorServiceGetCredentialsRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceGetCredentialsRequest$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1ConnectorServiceGetCredentialsRequest$Outbound;
-}
-
 export function c1ApiAppV1ConnectorServiceGetCredentialsRequestToJSON(
   c1ApiAppV1ConnectorServiceGetCredentialsRequest:
     C1ApiAppV1ConnectorServiceGetCredentialsRequest,
@@ -101,22 +68,6 @@ export function c1ApiAppV1ConnectorServiceGetCredentialsRequestToJSON(
     C1ApiAppV1ConnectorServiceGetCredentialsRequest$outboundSchema.parse(
       c1ApiAppV1ConnectorServiceGetCredentialsRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1ConnectorServiceGetCredentialsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1ConnectorServiceGetCredentialsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1ConnectorServiceGetCredentialsRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiAppV1ConnectorServiceGetCredentialsRequest' from JSON`,
   );
 }
 
@@ -141,67 +92,6 @@ export const C1ApiAppV1ConnectorServiceGetCredentialsResponse$inboundSchema:
         "connectorServiceGetCredentialsResponse",
     });
   });
-
-/** @internal */
-export type C1ApiAppV1ConnectorServiceGetCredentialsResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  ConnectorServiceGetCredentialsResponse?:
-    | shared.ConnectorServiceGetCredentialsResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1ConnectorServiceGetCredentialsResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1ConnectorServiceGetCredentialsResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1ConnectorServiceGetCredentialsResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    connectorServiceGetCredentialsResponse: shared
-      .ConnectorServiceGetCredentialsResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      connectorServiceGetCredentialsResponse:
-        "ConnectorServiceGetCredentialsResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1ConnectorServiceGetCredentialsResponse$ {
-  /** @deprecated use `C1ApiAppV1ConnectorServiceGetCredentialsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1ConnectorServiceGetCredentialsResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceGetCredentialsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1ConnectorServiceGetCredentialsResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceGetCredentialsResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1ConnectorServiceGetCredentialsResponse$Outbound;
-}
-
-export function c1ApiAppV1ConnectorServiceGetCredentialsResponseToJSON(
-  c1ApiAppV1ConnectorServiceGetCredentialsResponse:
-    C1ApiAppV1ConnectorServiceGetCredentialsResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1ConnectorServiceGetCredentialsResponse$outboundSchema.parse(
-      c1ApiAppV1ConnectorServiceGetCredentialsResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1ConnectorServiceGetCredentialsResponseFromJSON(
   jsonString: string,

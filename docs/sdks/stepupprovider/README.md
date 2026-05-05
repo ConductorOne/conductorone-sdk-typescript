@@ -1,5 +1,4 @@
 # StepUpProvider
-(*stepUpProvider*)
 
 ## Overview
 
@@ -91,7 +90,7 @@ run();
 
 ## list
 
-Invokes the c1.api.stepup.v1.StepUpProviderService.List method.
+List returns all step-up authentication providers configured for the tenant.
 
 ### Example Usage
 
@@ -165,7 +164,7 @@ run();
 
 ## create
 
-Invokes the c1.api.stepup.v1.StepUpProviderService.Create method.
+Create registers a new step-up authentication provider for the tenant.
 
 ### Example Usage
 
@@ -240,7 +239,7 @@ run();
 
 ## delete
 
-Invokes the c1.api.stepup.v1.StepUpProviderService.Delete method.
+Delete removes a step-up authentication provider from the tenant.
 
 ### Example Usage
 
@@ -319,7 +318,7 @@ run();
 
 ## get
 
-Invokes the c1.api.stepup.v1.StepUpProviderService.Get method.
+Get retrieves a single step-up authentication provider by its ID.
 
 ### Example Usage
 
@@ -398,7 +397,7 @@ run();
 
 ## update
 
-Invokes the c1.api.stepup.v1.StepUpProviderService.Update method.
+Update modifies an existing step-up authentication provider's configuration. Use the update mask to specify which fields to change.
 
 ### Example Usage
 
@@ -477,7 +476,7 @@ run();
 
 ## updateSecret
 
-Invokes the c1.api.stepup.v1.StepUpProviderService.UpdateSecret method.
+UpdateSecret rotates the client secret for a step-up authentication provider without modifying other settings.
 
 ### Example Usage
 
@@ -556,7 +555,7 @@ run();
 
 ## test
 
-Invokes the c1.api.stepup.v1.StepUpProviderService.Test method.
+Test initiates a test authentication flow against a step-up provider and returns a redirect URL for the caller to complete verification.
 
 ### Example Usage
 

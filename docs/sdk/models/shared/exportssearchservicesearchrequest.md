@@ -1,6 +1,6 @@
 # ExportsSearchServiceSearchRequest
 
-The ExportsSearchServiceSearchRequest message.
+ExportsSearchServiceSearchRequest is the request for searching system log exports.
 
 ## Example Usage
 

@@ -36,7 +36,7 @@ export class AppResourceSearch extends ClientSDK {
    * Search App Resources
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppResourceSearch.SearchAppResources method.
+   * Search app resources based on filters specified in the request body.
    */
   async searchAppResources(
     request?: shared.SearchAppResourcesRequest | undefined,

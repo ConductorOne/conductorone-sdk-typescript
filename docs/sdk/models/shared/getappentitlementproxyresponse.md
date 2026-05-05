@@ -1,6 +1,6 @@
 # GetAppEntitlementProxyResponse
 
-The GetAppEntitlementProxyResponse message.
+The response message for getting a specific entitlement proxy binding.
 
 ## Example Usage
 
@@ -15,4 +15,4 @@ let value: GetAppEntitlementProxyResponse = {};
 | Field                                                                                                                   | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
 | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | `appProxyEntitlementView`                                                                                               | [shared.AppEntitlementProxyView](../../../sdk/models/shared/appentitlementproxyview.md)                                 | :heavy_minus_sign:                                                                                                      | N/A                                                                                                                     |
-| `expanded`                                                                                                              | [shared.GetAppEntitlementProxyResponseExpanded](../../../sdk/models/shared/getappentitlementproxyresponseexpanded.md)[] | :heavy_minus_sign:                                                                                                      | The expanded field.                                                                                                     |
+| `expanded`                                                                                                              | [shared.GetAppEntitlementProxyResponseExpanded](../../../sdk/models/shared/getappentitlementproxyresponseexpanded.md)[] | :heavy_minus_sign:                                                                                                      | List of serialized related objects.                                                                                     |

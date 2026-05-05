@@ -3,17 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 /**
- * The resourceType field.
+ * The category of the resource type (e.g., ROLE, GROUP, LICENSE).
  */
 export const ResourceType = {
   Role: "ROLE",
@@ -26,65 +20,30 @@ export const ResourceType = {
   ProfileType: "PROFILE_TYPE",
 } as const;
 /**
- * The resourceType field.
+ * The category of the resource type (e.g., ROLE, GROUP, LICENSE).
  */
 export type ResourceType = OpenEnum<typeof ResourceType>;
 
 /**
- * The CreateManuallyManagedResourceTypeRequest message.
+ * The request message for creating a manually managed resource type.
  */
 export type CreateManuallyManagedResourceTypeRequest = {
   /**
-   * The displayName field.
+   * The display name for the new resource type.
    */
   displayName: string;
   /**
-   * The resourceType field.
+   * The category of the resource type (e.g., ROLE, GROUP, LICENSE).
    */
   resourceType: ResourceType;
 };
 
 /** @internal */
-export const ResourceType$inboundSchema: z.ZodType<
-  ResourceType,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(ResourceType),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
 export const ResourceType$outboundSchema: z.ZodType<
-  ResourceType,
+  string,
   z.ZodTypeDef,
   ResourceType
-> = z.union([
-  z.nativeEnum(ResourceType),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResourceType$ {
-  /** @deprecated use `ResourceType$inboundSchema` instead. */
-  export const inboundSchema = ResourceType$inboundSchema;
-  /** @deprecated use `ResourceType$outboundSchema` instead. */
-  export const outboundSchema = ResourceType$outboundSchema;
-}
-
-/** @internal */
-export const CreateManuallyManagedResourceTypeRequest$inboundSchema: z.ZodType<
-  CreateManuallyManagedResourceTypeRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  displayName: z.string(),
-  resourceType: ResourceType$inboundSchema,
-});
+> = openEnums.outboundSchema(ResourceType);
 
 /** @internal */
 export type CreateManuallyManagedResourceTypeRequest$Outbound = {
@@ -102,21 +61,6 @@ export const CreateManuallyManagedResourceTypeRequest$outboundSchema: z.ZodType<
   resourceType: ResourceType$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateManuallyManagedResourceTypeRequest$ {
-  /** @deprecated use `CreateManuallyManagedResourceTypeRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateManuallyManagedResourceTypeRequest$inboundSchema;
-  /** @deprecated use `CreateManuallyManagedResourceTypeRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateManuallyManagedResourceTypeRequest$outboundSchema;
-  /** @deprecated use `CreateManuallyManagedResourceTypeRequest$Outbound` instead. */
-  export type Outbound = CreateManuallyManagedResourceTypeRequest$Outbound;
-}
-
 export function createManuallyManagedResourceTypeRequestToJSON(
   createManuallyManagedResourceTypeRequest:
     CreateManuallyManagedResourceTypeRequest,
@@ -125,21 +69,5 @@ export function createManuallyManagedResourceTypeRequestToJSON(
     CreateManuallyManagedResourceTypeRequest$outboundSchema.parse(
       createManuallyManagedResourceTypeRequest,
     ),
-  );
-}
-
-export function createManuallyManagedResourceTypeRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateManuallyManagedResourceTypeRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateManuallyManagedResourceTypeRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateManuallyManagedResourceTypeRequest' from JSON`,
   );
 }

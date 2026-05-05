@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskAuditViewRef,
-  TaskAuditViewRef$inboundSchema,
   TaskAuditViewRef$Outbound,
   TaskAuditViewRef$outboundSchema,
 } from "./taskauditviewref.js";
@@ -18,34 +14,22 @@ import {
  */
 export type TaskAuditListRequest = {
   /**
-   * The pageSize field.
+   * The maximum number of audit events to return per page.
    */
   pageSize?: number | null | undefined;
   /**
-   * The pageToken field.
+   * A pagination token from a previous response to retrieve the next page.
    */
   pageToken?: string | null | undefined;
   /**
-   * The refs field.
+   * References to specific audit events to retrieve. If provided, only these events are returned.
    */
   refs?: Array<TaskAuditViewRef> | null | undefined;
   /**
-   * The taskId field.
+   * The ID of the task to list audit events for.
    */
   taskId?: string | null | undefined;
 };
-
-/** @internal */
-export const TaskAuditListRequest$inboundSchema: z.ZodType<
-  TaskAuditListRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  refs: z.nullable(z.array(TaskAuditViewRef$inboundSchema)).optional(),
-  taskId: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type TaskAuditListRequest$Outbound = {
@@ -67,33 +51,10 @@ export const TaskAuditListRequest$outboundSchema: z.ZodType<
   taskId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditListRequest$ {
-  /** @deprecated use `TaskAuditListRequest$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditListRequest$inboundSchema;
-  /** @deprecated use `TaskAuditListRequest$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditListRequest$outboundSchema;
-  /** @deprecated use `TaskAuditListRequest$Outbound` instead. */
-  export type Outbound = TaskAuditListRequest$Outbound;
-}
-
 export function taskAuditListRequestToJSON(
   taskAuditListRequest: TaskAuditListRequest,
 ): string {
   return JSON.stringify(
     TaskAuditListRequest$outboundSchema.parse(taskAuditListRequest),
-  );
-}
-
-export function taskAuditListRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskAuditListRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskAuditListRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskAuditListRequest' from JSON`,
   );
 }

@@ -38,22 +38,6 @@ export type C1ApiAppV1ConnectorServiceCreateResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1ConnectorServiceCreateRequest$inboundSchema: z.ZodType<
-  C1ApiAppV1ConnectorServiceCreateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  app_id: z.nullable(z.string()),
-  ConnectorServiceCreateRequest: shared
-    .ConnectorServiceCreateRequest$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "app_id": "appId",
-    "ConnectorServiceCreateRequest": "connectorServiceCreateRequest",
-  });
-});
-
-/** @internal */
 export type C1ApiAppV1ConnectorServiceCreateRequest$Outbound = {
   app_id: string | null;
   ConnectorServiceCreateRequest?:
@@ -77,21 +61,6 @@ export const C1ApiAppV1ConnectorServiceCreateRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1ConnectorServiceCreateRequest$ {
-  /** @deprecated use `C1ApiAppV1ConnectorServiceCreateRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1ConnectorServiceCreateRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceCreateRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1ConnectorServiceCreateRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceCreateRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1ConnectorServiceCreateRequest$Outbound;
-}
-
 export function c1ApiAppV1ConnectorServiceCreateRequestToJSON(
   c1ApiAppV1ConnectorServiceCreateRequest:
     C1ApiAppV1ConnectorServiceCreateRequest,
@@ -100,22 +69,6 @@ export function c1ApiAppV1ConnectorServiceCreateRequestToJSON(
     C1ApiAppV1ConnectorServiceCreateRequest$outboundSchema.parse(
       c1ApiAppV1ConnectorServiceCreateRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1ConnectorServiceCreateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiAppV1ConnectorServiceCreateRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1ConnectorServiceCreateRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiAppV1ConnectorServiceCreateRequest' from JSON`,
   );
 }
 
@@ -138,64 +91,6 @@ export const C1ApiAppV1ConnectorServiceCreateResponse$inboundSchema: z.ZodType<
     "ConnectorServiceCreateResponse": "connectorServiceCreateResponse",
   });
 });
-
-/** @internal */
-export type C1ApiAppV1ConnectorServiceCreateResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  ConnectorServiceCreateResponse?:
-    | shared.ConnectorServiceCreateResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1ConnectorServiceCreateResponse$outboundSchema: z.ZodType<
-  C1ApiAppV1ConnectorServiceCreateResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiAppV1ConnectorServiceCreateResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  connectorServiceCreateResponse: shared
-    .ConnectorServiceCreateResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    connectorServiceCreateResponse: "ConnectorServiceCreateResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1ConnectorServiceCreateResponse$ {
-  /** @deprecated use `C1ApiAppV1ConnectorServiceCreateResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1ConnectorServiceCreateResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceCreateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1ConnectorServiceCreateResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceCreateResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1ConnectorServiceCreateResponse$Outbound;
-}
-
-export function c1ApiAppV1ConnectorServiceCreateResponseToJSON(
-  c1ApiAppV1ConnectorServiceCreateResponse:
-    C1ApiAppV1ConnectorServiceCreateResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1ConnectorServiceCreateResponse$outboundSchema.parse(
-      c1ApiAppV1ConnectorServiceCreateResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1ConnectorServiceCreateResponseFromJSON(
   jsonString: string,
