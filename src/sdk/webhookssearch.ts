@@ -13,7 +13,7 @@ export class WebhooksSearch extends ClientSDK {
    * Search
    *
    * @remarks
-   * Invokes the c1.api.webhooks.v1.WebhooksSearch.Search method.
+   * Search for webhook subscriptions by query string or specific webhook references.
    */
   async search(
     request?: shared.WebhooksSearchRequest | undefined,

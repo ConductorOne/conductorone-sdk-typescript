@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The ConflictMonitorDeleteResponse message.
+ * The response message for deleting a conflict monitor.
  */
 export type ConflictMonitorDeleteResponse = {};
 
@@ -18,39 +18,6 @@ export const ConflictMonitorDeleteResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
-/** @internal */
-export type ConflictMonitorDeleteResponse$Outbound = {};
-
-/** @internal */
-export const ConflictMonitorDeleteResponse$outboundSchema: z.ZodType<
-  ConflictMonitorDeleteResponse$Outbound,
-  z.ZodTypeDef,
-  ConflictMonitorDeleteResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConflictMonitorDeleteResponse$ {
-  /** @deprecated use `ConflictMonitorDeleteResponse$inboundSchema` instead. */
-  export const inboundSchema = ConflictMonitorDeleteResponse$inboundSchema;
-  /** @deprecated use `ConflictMonitorDeleteResponse$outboundSchema` instead. */
-  export const outboundSchema = ConflictMonitorDeleteResponse$outboundSchema;
-  /** @deprecated use `ConflictMonitorDeleteResponse$Outbound` instead. */
-  export type Outbound = ConflictMonitorDeleteResponse$Outbound;
-}
-
-export function conflictMonitorDeleteResponseToJSON(
-  conflictMonitorDeleteResponse: ConflictMonitorDeleteResponse,
-): string {
-  return JSON.stringify(
-    ConflictMonitorDeleteResponse$outboundSchema.parse(
-      conflictMonitorDeleteResponse,
-    ),
-  );
-}
 
 export function conflictMonitorDeleteResponseFromJSON(
   jsonString: string,

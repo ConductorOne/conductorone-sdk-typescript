@@ -3,45 +3,29 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  AppResource,
-  AppResource$inboundSchema,
-  AppResource$Outbound,
-  AppResource$outboundSchema,
-} from "./appresource.js";
 import {
   AppResourceExpandMask,
-  AppResourceExpandMask$inboundSchema,
   AppResourceExpandMask$Outbound,
   AppResourceExpandMask$outboundSchema,
 } from "./appresourceexpandmask.js";
+import {
+  AppResourceInput,
+  AppResourceInput$Outbound,
+  AppResourceInput$outboundSchema,
+} from "./appresourceinput.js";
 
 /**
- * The AppResourceServiceUpdateRequest message.
+ * The request message for updating an app resource.
  */
 export type AppResourceServiceUpdateRequest = {
-  appResource?: AppResource | null | undefined;
+  appResource?: AppResourceInput | null | undefined;
   expandMask?: AppResourceExpandMask | null | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
-export const AppResourceServiceUpdateRequest$inboundSchema: z.ZodType<
-  AppResourceServiceUpdateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appResource: z.nullable(AppResource$inboundSchema).optional(),
-  expandMask: z.nullable(AppResourceExpandMask$inboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
-
-/** @internal */
 export type AppResourceServiceUpdateRequest$Outbound = {
-  appResource?: AppResource$Outbound | null | undefined;
+  appResource?: AppResourceInput$Outbound | null | undefined;
   expandMask?: AppResourceExpandMask$Outbound | null | undefined;
   updateMask?: string | null | undefined;
 };
@@ -52,23 +36,10 @@ export const AppResourceServiceUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppResourceServiceUpdateRequest
 > = z.object({
-  appResource: z.nullable(AppResource$outboundSchema).optional(),
+  appResource: z.nullable(AppResourceInput$outboundSchema).optional(),
   expandMask: z.nullable(AppResourceExpandMask$outboundSchema).optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppResourceServiceUpdateRequest$ {
-  /** @deprecated use `AppResourceServiceUpdateRequest$inboundSchema` instead. */
-  export const inboundSchema = AppResourceServiceUpdateRequest$inboundSchema;
-  /** @deprecated use `AppResourceServiceUpdateRequest$outboundSchema` instead. */
-  export const outboundSchema = AppResourceServiceUpdateRequest$outboundSchema;
-  /** @deprecated use `AppResourceServiceUpdateRequest$Outbound` instead. */
-  export type Outbound = AppResourceServiceUpdateRequest$Outbound;
-}
 
 export function appResourceServiceUpdateRequestToJSON(
   appResourceServiceUpdateRequest: AppResourceServiceUpdateRequest,
@@ -77,15 +48,5 @@ export function appResourceServiceUpdateRequestToJSON(
     AppResourceServiceUpdateRequest$outboundSchema.parse(
       appResourceServiceUpdateRequest,
     ),
-  );
-}
-
-export function appResourceServiceUpdateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<AppResourceServiceUpdateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AppResourceServiceUpdateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AppResourceServiceUpdateRequest' from JSON`,
   );
 }

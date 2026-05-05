@@ -34,20 +34,6 @@ export type C1ApiPolicyV1PoliciesUpdateResponse = {
 };
 
 /** @internal */
-export const C1ApiPolicyV1PoliciesUpdateRequest$inboundSchema: z.ZodType<
-  C1ApiPolicyV1PoliciesUpdateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.nullable(z.string()),
-  UpdatePolicyRequest: shared.UpdatePolicyRequest$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "UpdatePolicyRequest": "updatePolicyRequest",
-  });
-});
-
-/** @internal */
 export type C1ApiPolicyV1PoliciesUpdateRequest$Outbound = {
   id: string | null;
   UpdatePolicyRequest?: shared.UpdatePolicyRequest$Outbound | undefined;
@@ -67,20 +53,6 @@ export const C1ApiPolicyV1PoliciesUpdateRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiPolicyV1PoliciesUpdateRequest$ {
-  /** @deprecated use `C1ApiPolicyV1PoliciesUpdateRequest$inboundSchema` instead. */
-  export const inboundSchema = C1ApiPolicyV1PoliciesUpdateRequest$inboundSchema;
-  /** @deprecated use `C1ApiPolicyV1PoliciesUpdateRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiPolicyV1PoliciesUpdateRequest$outboundSchema;
-  /** @deprecated use `C1ApiPolicyV1PoliciesUpdateRequest$Outbound` instead. */
-  export type Outbound = C1ApiPolicyV1PoliciesUpdateRequest$Outbound;
-}
-
 export function c1ApiPolicyV1PoliciesUpdateRequestToJSON(
   c1ApiPolicyV1PoliciesUpdateRequest: C1ApiPolicyV1PoliciesUpdateRequest,
 ): string {
@@ -88,17 +60,6 @@ export function c1ApiPolicyV1PoliciesUpdateRequestToJSON(
     C1ApiPolicyV1PoliciesUpdateRequest$outboundSchema.parse(
       c1ApiPolicyV1PoliciesUpdateRequest,
     ),
-  );
-}
-
-export function c1ApiPolicyV1PoliciesUpdateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<C1ApiPolicyV1PoliciesUpdateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiPolicyV1PoliciesUpdateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiPolicyV1PoliciesUpdateRequest' from JSON`,
   );
 }
 
@@ -120,60 +81,6 @@ export const C1ApiPolicyV1PoliciesUpdateResponse$inboundSchema: z.ZodType<
     "UpdatePolicyResponse": "updatePolicyResponse",
   });
 });
-
-/** @internal */
-export type C1ApiPolicyV1PoliciesUpdateResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  UpdatePolicyResponse?: shared.UpdatePolicyResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiPolicyV1PoliciesUpdateResponse$outboundSchema: z.ZodType<
-  C1ApiPolicyV1PoliciesUpdateResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiPolicyV1PoliciesUpdateResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  updatePolicyResponse: shared.UpdatePolicyResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    updatePolicyResponse: "UpdatePolicyResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiPolicyV1PoliciesUpdateResponse$ {
-  /** @deprecated use `C1ApiPolicyV1PoliciesUpdateResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiPolicyV1PoliciesUpdateResponse$inboundSchema;
-  /** @deprecated use `C1ApiPolicyV1PoliciesUpdateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiPolicyV1PoliciesUpdateResponse$outboundSchema;
-  /** @deprecated use `C1ApiPolicyV1PoliciesUpdateResponse$Outbound` instead. */
-  export type Outbound = C1ApiPolicyV1PoliciesUpdateResponse$Outbound;
-}
-
-export function c1ApiPolicyV1PoliciesUpdateResponseToJSON(
-  c1ApiPolicyV1PoliciesUpdateResponse: C1ApiPolicyV1PoliciesUpdateResponse,
-): string {
-  return JSON.stringify(
-    C1ApiPolicyV1PoliciesUpdateResponse$outboundSchema.parse(
-      c1ApiPolicyV1PoliciesUpdateResponse,
-    ),
-  );
-}
 
 export function c1ApiPolicyV1PoliciesUpdateResponseFromJSON(
   jsonString: string,

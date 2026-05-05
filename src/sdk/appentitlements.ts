@@ -45,7 +45,7 @@ export class AppEntitlements extends ClientSDK {
    * Create
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppEntitlements.Create method.
+   * Create a new app entitlement for an app. This is used to define a custom permission, group, or role within the app.
    */
   async create(
     request: operations.C1ApiAppV1AppEntitlementsCreateRequest,
@@ -62,7 +62,7 @@ export class AppEntitlements extends ClientSDK {
    * Add Manually Managed Members
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppEntitlements.AddManuallyManagedMembers method.
+   * Add users as manually managed members of an app entitlement. These memberships are tracked directly by ConductorOne rather than synced from the app.
    */
   async addManuallyManagedMembers(
     request:
@@ -82,7 +82,7 @@ export class AppEntitlements extends ClientSDK {
    * Delete Automation
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppEntitlements.DeleteAutomation method.
+   * Delete the automation rule for an app entitlement.
    */
   async deleteAutomation(
     request: operations.C1ApiAppV1AppEntitlementsDeleteAutomationRequest,
@@ -99,7 +99,7 @@ export class AppEntitlements extends ClientSDK {
    * Get Automation
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppEntitlements.GetAutomation method.
+   * Get the automation rule for an app entitlement.
    */
   async getAutomation(
     request: operations.C1ApiAppV1AppEntitlementsGetAutomationRequest,
@@ -116,7 +116,7 @@ export class AppEntitlements extends ClientSDK {
    * Create Automation
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppEntitlements.CreateAutomation method.
+   * Create an automation rule for an app entitlement. Automations automatically provision or revoke access based on defined conditions.
    */
   async createAutomation(
     request: operations.C1ApiAppV1AppEntitlementsCreateAutomationRequest,
@@ -133,7 +133,7 @@ export class AppEntitlements extends ClientSDK {
    * Remove Automation Exclusion
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppEntitlements.RemoveAutomationExclusion method.
+   * Remove users from the automation exclusion list for an app entitlement.
    */
   async removeAutomationExclusion(
     request:
@@ -153,7 +153,7 @@ export class AppEntitlements extends ClientSDK {
    * List Automation Exclusions
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppEntitlements.ListAutomationExclusions method.
+   * List users who are excluded from the automation rule for an app entitlement.
    */
   async listAutomationExclusions(
     request:
@@ -173,7 +173,7 @@ export class AppEntitlements extends ClientSDK {
    * Add Automation Exclusion
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppEntitlements.AddAutomationExclusion method.
+   * Add users to the automation exclusion list for an app entitlement. Excluded users are not affected by the automation rule.
    */
   async addAutomationExclusion(
     request: operations.C1ApiAppV1AppEntitlementsAddAutomationExclusionRequest,
@@ -192,7 +192,7 @@ export class AppEntitlements extends ClientSDK {
    * Update Automation
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppEntitlements.UpdateAutomation method.
+   * Update the automation rule for an app entitlement, including its display name, description, and conditions.
    */
   async updateAutomation(
     request: operations.C1ApiAppV1AppEntitlementsUpdateAutomationRequest,
@@ -209,7 +209,7 @@ export class AppEntitlements extends ClientSDK {
    * Remove Entitlement Membership
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppEntitlements.RemoveEntitlementMembership method.
+   * Remove a user from a ConductorOne-managed entitlement (catalog, group, or profile type). For access profiles, this creates a revoke task to deprovision access.
    */
   async removeEntitlementMembership(
     request:
@@ -248,7 +248,7 @@ export class AppEntitlements extends ClientSDK {
    * Delete
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppEntitlements.Delete method.
+   * Delete an app entitlement by ID.
    */
   async delete(
     request: operations.C1ApiAppV1AppEntitlementsDeleteRequest,

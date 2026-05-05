@@ -43,6 +43,24 @@ import {
   CreateRevokeTasks$outboundSchema,
 } from "./createrevoketasks.js";
 import {
+  CreateRevokeTasksV2,
+  CreateRevokeTasksV2$inboundSchema,
+  CreateRevokeTasksV2$Outbound,
+  CreateRevokeTasksV2$outboundSchema,
+} from "./createrevoketasksv2.js";
+import {
+  EvaluateExpressions,
+  EvaluateExpressions$inboundSchema,
+  EvaluateExpressions$Outbound,
+  EvaluateExpressions$outboundSchema,
+} from "./evaluateexpressions.js";
+import {
+  GeneratePassword,
+  GeneratePassword$inboundSchema,
+  GeneratePassword$Outbound,
+  GeneratePassword$outboundSchema,
+} from "./generatepassword.js";
+import {
   GrantEntitlements,
   GrantEntitlements$inboundSchema,
   GrantEntitlements$Outbound,
@@ -72,6 +90,18 @@ import {
   SendSlackMessage$Outbound,
   SendSlackMessage$outboundSchema,
 } from "./sendslackmessage.js";
+import {
+  SetCredential,
+  SetCredential$inboundSchema,
+  SetCredential$Outbound,
+  SetCredential$outboundSchema,
+} from "./setcredential.js";
+import {
+  StoreCredential,
+  StoreCredential$inboundSchema,
+  StoreCredential$Outbound,
+  StoreCredential$outboundSchema,
+} from "./storecredential.js";
 import {
   TaskAction,
   TaskAction$inboundSchema,
@@ -113,6 +143,7 @@ import {
  *   - waitForDuration
  *   - unenrollFromAllAccessProfiles
  *   - createRevokeTasks
+ *   - createRevokeTasksV2
  *   - sendEmail
  *   - removeFromDelegation
  *   - runAutomation
@@ -125,6 +156,10 @@ import {
  *   - sendSlackMessage
  *   - callFunction
  *   - accountLifecycleAction
+ *   - generatePassword
+ *   - evaluateExpressions
+ *   - setCredential
+ *   - storeCredential
  */
 export type AutomationStep = {
   accountLifecycleAction?: AccountLifecycleAction | null | undefined;
@@ -133,11 +168,52 @@ export type AutomationStep = {
   connectorCreateAccount?: ConnectorCreateAccount | null | undefined;
   createAccessReview?: CreateAccessReview | null | undefined;
   createRevokeTasks?: CreateRevokeTasks | null | undefined;
+  /**
+   * The CreateRevokeTasksV2 message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named user. Only a single field of the following list may be set at a time:
+   *   - userIdCel
+   *   - userRef
+   *   - useSubjectUser
+   *
+   * This message contains a oneof named inclusion. Only a single field of the following list may be set at a time:
+   *   - inclusionList
+   *   - inclusionAll
+   *   - inclusionCriteria
+   *   - inclusionListCel
+   *
+   * This message contains a oneof named exclusion. Only a single field of the following list may be set at a time:
+   *   - exclusionNone
+   *   - exclusionList
+   *   - exclusionCriteria
+   *   - exclusionListCel
+   */
+  createRevokeTasksV2?: CreateRevokeTasksV2 | null | undefined;
+  /**
+   * The EvaluateExpressions message.
+   */
+  evaluateExpressions?: EvaluateExpressions | null | undefined;
+  /**
+   * The GeneratePassword message.
+   */
+  generatePassword?: GeneratePassword | null | undefined;
   grantEntitlements?: GrantEntitlements | null | undefined;
   removeFromDelegation?: RemoveFromDelegation | null | undefined;
   runAutomation?: RunAutomation | null | undefined;
   sendEmail?: SendEmail | null | undefined;
   sendSlackMessage?: SendSlackMessage | null | undefined;
+  /**
+   * SetCredential submits a RotateCredentials baton task to the target connector,
+   *
+   * @remarks
+   *  re-encrypting the given password CEL expression with the connector's public JWK.
+   *
+   * This message contains a oneof named connector_identifier. Only a single field of the following list may be set at a time:
+   *   - connectorRef
+   */
+  setCredential?: SetCredential | null | undefined;
   /**
    * The skipIfTrueCel field.
    */
@@ -150,6 +226,13 @@ export type AutomationStep = {
    * The stepName field.
    */
   stepName?: string | null | undefined;
+  /**
+   * StoreCredential stores a credential from GeneratePassword in a vault.
+   *
+   * @remarks
+   *  Supports Paper Vault (SSO/email) and App Vault (entitlement-bound).
+   */
+  storeCredential?: StoreCredential | null | undefined;
   taskAction?: TaskAction | null | undefined;
   unenrollFromAllAccessProfiles?:
     | UnenrollFromAllAccessProfiles
@@ -174,15 +257,20 @@ export const AutomationStep$inboundSchema: z.ZodType<
     .optional(),
   createAccessReview: z.nullable(CreateAccessReview$inboundSchema).optional(),
   createRevokeTasks: z.nullable(CreateRevokeTasks$inboundSchema).optional(),
+  createRevokeTasksV2: z.nullable(CreateRevokeTasksV2$inboundSchema).optional(),
+  evaluateExpressions: z.nullable(EvaluateExpressions$inboundSchema).optional(),
+  generatePassword: z.nullable(GeneratePassword$inboundSchema).optional(),
   grantEntitlements: z.nullable(GrantEntitlements$inboundSchema).optional(),
   removeFromDelegation: z.nullable(RemoveFromDelegation$inboundSchema)
     .optional(),
   runAutomation: z.nullable(RunAutomation$inboundSchema).optional(),
   sendEmail: z.nullable(SendEmail$inboundSchema).optional(),
   sendSlackMessage: z.nullable(SendSlackMessage$inboundSchema).optional(),
+  setCredential: z.nullable(SetCredential$inboundSchema).optional(),
   skipIfTrueCel: z.nullable(z.string()).optional(),
   stepDisplayName: z.nullable(z.string()).optional(),
   stepName: z.nullable(z.string()).optional(),
+  storeCredential: z.nullable(StoreCredential$inboundSchema).optional(),
   taskAction: z.nullable(TaskAction$inboundSchema).optional(),
   unenrollFromAllAccessProfiles: z.nullable(
     UnenrollFromAllAccessProfiles$inboundSchema,
@@ -191,7 +279,6 @@ export const AutomationStep$inboundSchema: z.ZodType<
   waitForDuration: z.nullable(WaitForDuration$inboundSchema).optional(),
   webhook: z.nullable(Webhook$inboundSchema).optional(),
 });
-
 /** @internal */
 export type AutomationStep$Outbound = {
   accountLifecycleAction?: AccountLifecycleAction$Outbound | null | undefined;
@@ -200,14 +287,19 @@ export type AutomationStep$Outbound = {
   connectorCreateAccount?: ConnectorCreateAccount$Outbound | null | undefined;
   createAccessReview?: CreateAccessReview$Outbound | null | undefined;
   createRevokeTasks?: CreateRevokeTasks$Outbound | null | undefined;
+  createRevokeTasksV2?: CreateRevokeTasksV2$Outbound | null | undefined;
+  evaluateExpressions?: EvaluateExpressions$Outbound | null | undefined;
+  generatePassword?: GeneratePassword$Outbound | null | undefined;
   grantEntitlements?: GrantEntitlements$Outbound | null | undefined;
   removeFromDelegation?: RemoveFromDelegation$Outbound | null | undefined;
   runAutomation?: RunAutomation$Outbound | null | undefined;
   sendEmail?: SendEmail$Outbound | null | undefined;
   sendSlackMessage?: SendSlackMessage$Outbound | null | undefined;
+  setCredential?: SetCredential$Outbound | null | undefined;
   skipIfTrueCel?: string | null | undefined;
   stepDisplayName?: string | null | undefined;
   stepName?: string | null | undefined;
+  storeCredential?: StoreCredential$Outbound | null | undefined;
   taskAction?: TaskAction$Outbound | null | undefined;
   unenrollFromAllAccessProfiles?:
     | UnenrollFromAllAccessProfiles$Outbound
@@ -232,15 +324,22 @@ export const AutomationStep$outboundSchema: z.ZodType<
     .optional(),
   createAccessReview: z.nullable(CreateAccessReview$outboundSchema).optional(),
   createRevokeTasks: z.nullable(CreateRevokeTasks$outboundSchema).optional(),
+  createRevokeTasksV2: z.nullable(CreateRevokeTasksV2$outboundSchema)
+    .optional(),
+  evaluateExpressions: z.nullable(EvaluateExpressions$outboundSchema)
+    .optional(),
+  generatePassword: z.nullable(GeneratePassword$outboundSchema).optional(),
   grantEntitlements: z.nullable(GrantEntitlements$outboundSchema).optional(),
   removeFromDelegation: z.nullable(RemoveFromDelegation$outboundSchema)
     .optional(),
   runAutomation: z.nullable(RunAutomation$outboundSchema).optional(),
   sendEmail: z.nullable(SendEmail$outboundSchema).optional(),
   sendSlackMessage: z.nullable(SendSlackMessage$outboundSchema).optional(),
+  setCredential: z.nullable(SetCredential$outboundSchema).optional(),
   skipIfTrueCel: z.nullable(z.string()).optional(),
   stepDisplayName: z.nullable(z.string()).optional(),
   stepName: z.nullable(z.string()).optional(),
+  storeCredential: z.nullable(StoreCredential$outboundSchema).optional(),
   taskAction: z.nullable(TaskAction$outboundSchema).optional(),
   unenrollFromAllAccessProfiles: z.nullable(
     UnenrollFromAllAccessProfiles$outboundSchema,
@@ -250,23 +349,9 @@ export const AutomationStep$outboundSchema: z.ZodType<
   webhook: z.nullable(Webhook$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AutomationStep$ {
-  /** @deprecated use `AutomationStep$inboundSchema` instead. */
-  export const inboundSchema = AutomationStep$inboundSchema;
-  /** @deprecated use `AutomationStep$outboundSchema` instead. */
-  export const outboundSchema = AutomationStep$outboundSchema;
-  /** @deprecated use `AutomationStep$Outbound` instead. */
-  export type Outbound = AutomationStep$Outbound;
-}
-
 export function automationStepToJSON(automationStep: AutomationStep): string {
   return JSON.stringify(AutomationStep$outboundSchema.parse(automationStep));
 }
-
 export function automationStepFromJSON(
   jsonString: string,
 ): SafeParseResult<AutomationStep, SDKValidationError> {

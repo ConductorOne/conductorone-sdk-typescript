@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   SessionSettings,
-  SessionSettings$inboundSchema,
   SessionSettings$Outbound,
   SessionSettings$outboundSchema,
 } from "./sessionsettings.js";
@@ -20,16 +16,6 @@ export type UpdateSessionSettingsRequest = {
   sessionSettings?: SessionSettings | null | undefined;
   updateMask?: string | null | undefined;
 };
-
-/** @internal */
-export const UpdateSessionSettingsRequest$inboundSchema: z.ZodType<
-  UpdateSessionSettingsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  sessionSettings: z.nullable(SessionSettings$inboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type UpdateSessionSettingsRequest$Outbound = {
@@ -47,19 +33,6 @@ export const UpdateSessionSettingsRequest$outboundSchema: z.ZodType<
   updateMask: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateSessionSettingsRequest$ {
-  /** @deprecated use `UpdateSessionSettingsRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdateSessionSettingsRequest$inboundSchema;
-  /** @deprecated use `UpdateSessionSettingsRequest$outboundSchema` instead. */
-  export const outboundSchema = UpdateSessionSettingsRequest$outboundSchema;
-  /** @deprecated use `UpdateSessionSettingsRequest$Outbound` instead. */
-  export type Outbound = UpdateSessionSettingsRequest$Outbound;
-}
-
 export function updateSessionSettingsRequestToJSON(
   updateSessionSettingsRequest: UpdateSessionSettingsRequest,
 ): string {
@@ -67,15 +40,5 @@ export function updateSessionSettingsRequestToJSON(
     UpdateSessionSettingsRequest$outboundSchema.parse(
       updateSessionSettingsRequest,
     ),
-  );
-}
-
-export function updateSessionSettingsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateSessionSettingsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateSessionSettingsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateSessionSettingsRequest' from JSON`,
   );
 }

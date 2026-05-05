@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The ConnectorExpandMask is used to expand related objects on a connector.
@@ -16,15 +13,6 @@ export type ConnectorExpandMask = {
    */
   paths?: Array<string> | null | undefined;
 };
-
-/** @internal */
-export const ConnectorExpandMask$inboundSchema: z.ZodType<
-  ConnectorExpandMask,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type ConnectorExpandMask$Outbound = {
@@ -40,33 +28,10 @@ export const ConnectorExpandMask$outboundSchema: z.ZodType<
   paths: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorExpandMask$ {
-  /** @deprecated use `ConnectorExpandMask$inboundSchema` instead. */
-  export const inboundSchema = ConnectorExpandMask$inboundSchema;
-  /** @deprecated use `ConnectorExpandMask$outboundSchema` instead. */
-  export const outboundSchema = ConnectorExpandMask$outboundSchema;
-  /** @deprecated use `ConnectorExpandMask$Outbound` instead. */
-  export type Outbound = ConnectorExpandMask$Outbound;
-}
-
 export function connectorExpandMaskToJSON(
   connectorExpandMask: ConnectorExpandMask,
 ): string {
   return JSON.stringify(
     ConnectorExpandMask$outboundSchema.parse(connectorExpandMask),
-  );
-}
-
-export function connectorExpandMaskFromJSON(
-  jsonString: string,
-): SafeParseResult<ConnectorExpandMask, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ConnectorExpandMask$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ConnectorExpandMask' from JSON`,
   );
 }

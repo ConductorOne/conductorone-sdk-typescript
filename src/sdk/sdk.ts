@@ -3,16 +3,23 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
+import { A2Ui } from "./a2ui.js";
 import { AccessConflict } from "./accessconflict.js";
+import { AccessReview } from "./accessreview.js";
+import { AccessReviewSetupEntitlement } from "./accessreviewsetupentitlement.js";
+import { AccessReviewTemplate } from "./accessreviewtemplate.js";
+import { AccessReviewTemplateSetupEntitlement } from "./accessreviewtemplatesetupentitlement.js";
 import { AccountProvisionPolicyTest } from "./accountprovisionpolicytest.js";
 import { AppAccessRequestsDefaults } from "./appaccessrequestsdefaults.js";
 import { AppEntitlementMonitorBinding } from "./appentitlementmonitorbinding.js";
 import { AppEntitlementOwners } from "./appentitlementowners.js";
+import { AppEntitlementOwnersV2 } from "./appentitlementownersv2.js";
 import { AppEntitlements } from "./appentitlements.js";
 import { AppEntitlementSearch } from "./appentitlementsearch.js";
 import { AppEntitlementsProxy } from "./appentitlementsproxy.js";
 import { AppEntitlementUserBinding } from "./appentitlementuserbinding.js";
 import { AppOwners } from "./appowners.js";
+import { AppOwnersV2 } from "./appownersv2.js";
 import { AppReport } from "./appreport.js";
 import { AppReportAction } from "./appreportaction.js";
 import { AppResource } from "./appresource.js";
@@ -34,22 +41,44 @@ import { AutomationSearch } from "./automationsearch.js";
 import { AWSExternalIDSettings } from "./awsexternalidsettings.js";
 import { Connector } from "./connector.js";
 import { ConnectorCatalog } from "./connectorcatalog.js";
+import { ConnectorOwnersV2 } from "./connectorownersv2.js";
+import { Contacts } from "./contacts.js";
 import { Directory } from "./directory.js";
 import { Export } from "./export.js";
 import { ExportsSearch } from "./exportssearch.js";
+import { ExternalClientSearch } from "./externalclientsearch.js";
+import { Finding } from "./finding.js";
+import { FindingRoutingRule } from "./findingroutingrule.js";
+import { FindingSearch } from "./findingsearch.js";
 import { Functions } from "./functions.js";
+import { FunctionsInvocation } from "./functionsinvocation.js";
+import { FunctionsInvocationSearch } from "./functionsinvocationsearch.js";
 import { FunctionsSearch } from "./functionssearch.js";
+import { Hooks } from "./hooks.js";
+import { HooksSearch } from "./hookssearch.js";
+import { LocalDirectoryConfig } from "./localdirectoryconfig.js";
+import { LocalUserInvitation } from "./localuserinvitation.js";
+import { OnboardingSettings } from "./onboardingsettings.js";
 import { OrgDomain } from "./orgdomain.js";
+import { OrgNotificationSettings } from "./orgnotificationsettings.js";
+import { PaperSecret } from "./papersecret.js";
+import { PaperSecretAdmin } from "./papersecretadmin.js";
 import { PersonalClient } from "./personalclient.js";
 import { PersonalClientSearch } from "./personalclientsearch.js";
 import { Policies } from "./policies.js";
 import { PolicySearch } from "./policysearch.js";
 import { PolicyValidate } from "./policyvalidate.js";
+import { Principal } from "./principal.js";
 import { RequestCatalogManagement } from "./requestcatalogmanagement.js";
 import { RequestCatalogSearch } from "./requestcatalogsearch.js";
 import { RequestSchema } from "./requestschema.js";
+import { RoleMiningManagement } from "./roleminingmanagement.js";
+import { RoleMiningManagementSearch } from "./roleminingmanagementsearch.js";
 import { Roles } from "./roles.js";
 import { SessionSettings } from "./sessionsettings.js";
+import { SSFReceiverEvent } from "./ssfreceiverevent.js";
+import { SSFReceiverEventSearch } from "./ssfreceivereventsearch.js";
+import { SSFReceiverStream } from "./ssfreceiverstream.js";
 import { StepUpProvider } from "./stepupprovider.js";
 import { StepUpTransaction } from "./stepuptransaction.js";
 import { SystemLog } from "./systemlog.js";
@@ -57,12 +86,47 @@ import { Task } from "./task.js";
 import { TaskActions } from "./taskactions.js";
 import { TaskAudit } from "./taskaudit.js";
 import { TaskSearch } from "./tasksearch.js";
+import { TenantAuthConfig } from "./tenantauthconfig.js";
+import { TenantEmailProvider } from "./tenantemailprovider.js";
 import { User } from "./user.js";
+import { UserNotificationSettings } from "./usernotificationsettings.js";
 import { UserSearch } from "./usersearch.js";
+import { Vault } from "./vault.js";
 import { Webhooks } from "./webhooks.js";
 import { WebhooksSearch } from "./webhookssearch.js";
+import { WorkloadFederation } from "./workloadfederation.js";
 
 export class ConductoroneSDKTypescript extends ClientSDK {
+  private _a2Ui?: A2Ui;
+  get a2Ui(): A2Ui {
+    return (this._a2Ui ??= new A2Ui(this._options));
+  }
+
+  private _accessReview?: AccessReview;
+  get accessReview(): AccessReview {
+    return (this._accessReview ??= new AccessReview(this._options));
+  }
+
+  private _accessReviewSetupEntitlement?: AccessReviewSetupEntitlement;
+  get accessReviewSetupEntitlement(): AccessReviewSetupEntitlement {
+    return (this._accessReviewSetupEntitlement ??=
+      new AccessReviewSetupEntitlement(this._options));
+  }
+
+  private _accessReviewTemplate?: AccessReviewTemplate;
+  get accessReviewTemplate(): AccessReviewTemplate {
+    return (this._accessReviewTemplate ??= new AccessReviewTemplate(
+      this._options,
+    ));
+  }
+
+  private _accessReviewTemplateSetupEntitlement?:
+    AccessReviewTemplateSetupEntitlement;
+  get accessReviewTemplateSetupEntitlement(): AccessReviewTemplateSetupEntitlement {
+    return (this._accessReviewTemplateSetupEntitlement ??=
+      new AccessReviewTemplateSetupEntitlement(this._options));
+  }
+
   private _accessConflict?: AccessConflict;
   get accessConflict(): AccessConflict {
     return (this._accessConflict ??= new AccessConflict(this._options));
@@ -169,6 +233,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._attributes ??= new Attributes(this._options));
   }
 
+  private _tenantAuthConfig?: TenantAuthConfig;
+  get tenantAuthConfig(): TenantAuthConfig {
+    return (this._tenantAuthConfig ??= new TenantAuthConfig(this._options));
+  }
+
   private _auth?: Auth;
   get auth(): Auth {
     return (this._auth ??= new Auth(this._options));
@@ -186,18 +255,6 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._automationExecutionActions ??= new AutomationExecutionActions(
       this._options,
     ));
-  }
-
-  private _automationExecutionSearch?: AutomationExecutionSearch;
-  get automationExecutionSearch(): AutomationExecutionSearch {
-    return (this._automationExecutionSearch ??= new AutomationExecutionSearch(
-      this._options,
-    ));
-  }
-
-  private _automationSearch?: AutomationSearch;
-  get automationSearch(): AutomationSearch {
-    return (this._automationSearch ??= new AutomationSearch(this._options));
   }
 
   private _automation?: Automation;
@@ -222,9 +279,43 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._directory ??= new Directory(this._options));
   }
 
+  private _finding?: Finding;
+  get finding(): Finding {
+    return (this._finding ??= new Finding(this._options));
+  }
+
+  private _findingRoutingRule?: FindingRoutingRule;
+  get findingRoutingRule(): FindingRoutingRule {
+    return (this._findingRoutingRule ??= new FindingRoutingRule(this._options));
+  }
+
+  private _findingSearch?: FindingSearch;
+  get findingSearch(): FindingSearch {
+    return (this._findingSearch ??= new FindingSearch(this._options));
+  }
+
   private _functions?: Functions;
   get functions(): Functions {
     return (this._functions ??= new Functions(this._options));
+  }
+
+  private _functionsInvocation?: FunctionsInvocation;
+  get functionsInvocation(): FunctionsInvocation {
+    return (this._functionsInvocation ??= new FunctionsInvocation(
+      this._options,
+    ));
+  }
+
+  private _functionsInvocationSearch?: FunctionsInvocationSearch;
+  get functionsInvocationSearch(): FunctionsInvocationSearch {
+    return (this._functionsInvocationSearch ??= new FunctionsInvocationSearch(
+      this._options,
+    ));
+  }
+
+  private _hooks?: Hooks;
+  get hooks(): Hooks {
+    return (this._hooks ??= new Hooks(this._options));
   }
 
   private _personalClient?: PersonalClient;
@@ -235,6 +326,20 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _roles?: Roles;
   get roles(): Roles {
     return (this._roles ??= new Roles(this._options));
+  }
+
+  private _localDirectoryConfig?: LocalDirectoryConfig;
+  get localDirectoryConfig(): LocalDirectoryConfig {
+    return (this._localDirectoryConfig ??= new LocalDirectoryConfig(
+      this._options,
+    ));
+  }
+
+  private _localUserInvitation?: LocalUserInvitation;
+  get localUserInvitation(): LocalUserInvitation {
+    return (this._localUserInvitation ??= new LocalUserInvitation(
+      this._options,
+    ));
   }
 
   private _policies?: Policies;
@@ -259,6 +364,20 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._requestSchema ??= new RequestSchema(this._options));
   }
 
+  private _roleMiningManagement?: RoleMiningManagement;
+  get roleMiningManagement(): RoleMiningManagement {
+    return (this._roleMiningManagement ??= new RoleMiningManagement(
+      this._options,
+    ));
+  }
+
+  private _automationExecutionSearch?: AutomationExecutionSearch;
+  get automationExecutionSearch(): AutomationExecutionSearch {
+    return (this._automationExecutionSearch ??= new AutomationExecutionSearch(
+      this._options,
+    ));
+  }
+
   private _appResourceSearch?: AppResourceSearch;
   get appResourceSearch(): AppResourceSearch {
     return (this._appResourceSearch ??= new AppResourceSearch(this._options));
@@ -274,9 +393,26 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._attributeSearch ??= new AttributeSearch(this._options));
   }
 
+  private _automationSearch?: AutomationSearch;
+  get automationSearch(): AutomationSearch {
+    return (this._automationSearch ??= new AutomationSearch(this._options));
+  }
+
   private _functionsSearch?: FunctionsSearch;
   get functionsSearch(): FunctionsSearch {
     return (this._functionsSearch ??= new FunctionsSearch(this._options));
+  }
+
+  private _hooksSearch?: HooksSearch;
+  get hooksSearch(): HooksSearch {
+    return (this._hooksSearch ??= new HooksSearch(this._options));
+  }
+
+  private _externalClientSearch?: ExternalClientSearch;
+  get externalClientSearch(): ExternalClientSearch {
+    return (this._externalClientSearch ??= new ExternalClientSearch(
+      this._options,
+    ));
   }
 
   private _personalClientSearch?: PersonalClientSearch;
@@ -294,6 +430,30 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _requestCatalogSearch?: RequestCatalogSearch;
   get requestCatalogSearch(): RequestCatalogSearch {
     return (this._requestCatalogSearch ??= new RequestCatalogSearch(
+      this._options,
+    ));
+  }
+
+  private _roleMiningManagementSearch?: RoleMiningManagementSearch;
+  get roleMiningManagementSearch(): RoleMiningManagementSearch {
+    return (this._roleMiningManagementSearch ??= new RoleMiningManagementSearch(
+      this._options,
+    ));
+  }
+
+  private _paperSecretAdmin?: PaperSecretAdmin;
+  get paperSecretAdmin(): PaperSecretAdmin {
+    return (this._paperSecretAdmin ??= new PaperSecretAdmin(this._options));
+  }
+
+  private _paperSecret?: PaperSecret;
+  get paperSecret(): PaperSecret {
+    return (this._paperSecret ??= new PaperSecret(this._options));
+  }
+
+  private _ssfReceiverEventSearch?: SSFReceiverEventSearch;
+  get ssfReceiverEventSearch(): SSFReceiverEventSearch {
+    return (this._ssfReceiverEventSearch ??= new SSFReceiverEventSearch(
       this._options,
     ));
   }
@@ -328,6 +488,16 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._webhooksSearch ??= new WebhooksSearch(this._options));
   }
 
+  private _workloadFederation?: WorkloadFederation;
+  get workloadFederation(): WorkloadFederation {
+    return (this._workloadFederation ??= new WorkloadFederation(this._options));
+  }
+
+  private _principal?: Principal;
+  get principal(): Principal {
+    return (this._principal ??= new Principal(this._options));
+  }
+
   private _awsExternalIDSettings?: AWSExternalIDSettings;
   get awsExternalIDSettings(): AWSExternalIDSettings {
     return (this._awsExternalIDSettings ??= new AWSExternalIDSettings(
@@ -335,14 +505,55 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     ));
   }
 
+  private _contacts?: Contacts;
+  get contacts(): Contacts {
+    return (this._contacts ??= new Contacts(this._options));
+  }
+
   private _orgDomain?: OrgDomain;
   get orgDomain(): OrgDomain {
     return (this._orgDomain ??= new OrgDomain(this._options));
   }
 
+  private _tenantEmailProvider?: TenantEmailProvider;
+  get tenantEmailProvider(): TenantEmailProvider {
+    return (this._tenantEmailProvider ??= new TenantEmailProvider(
+      this._options,
+    ));
+  }
+
+  private _orgNotificationSettings?: OrgNotificationSettings;
+  get orgNotificationSettings(): OrgNotificationSettings {
+    return (this._orgNotificationSettings ??= new OrgNotificationSettings(
+      this._options,
+    ));
+  }
+
+  private _userNotificationSettings?: UserNotificationSettings;
+  get userNotificationSettings(): UserNotificationSettings {
+    return (this._userNotificationSettings ??= new UserNotificationSettings(
+      this._options,
+    ));
+  }
+
+  private _onboardingSettings?: OnboardingSettings;
+  get onboardingSettings(): OnboardingSettings {
+    return (this._onboardingSettings ??= new OnboardingSettings(this._options));
+  }
+
   private _sessionSettings?: SessionSettings;
   get sessionSettings(): SessionSettings {
     return (this._sessionSettings ??= new SessionSettings(this._options));
+  }
+
+  private _ssfReceiverStream?: SSFReceiverStream;
+  get ssfReceiverStream(): SSFReceiverStream {
+    return (this._ssfReceiverStream ??= new SSFReceiverStream(this._options));
+  }
+
+  private _ssfReceiverEvent?: SSFReceiverEvent;
+  get ssfReceiverEvent(): SSFReceiverEvent {
+    return (this._ssfReceiverEvent ??= new SSFReceiverEvent(this._options));
   }
 
   private _systemLog?: SystemLog;
@@ -375,8 +586,30 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._user ??= new User(this._options));
   }
 
+  private _vault?: Vault;
+  get vault(): Vault {
+    return (this._vault ??= new Vault(this._options));
+  }
+
   private _webhooks?: Webhooks;
   get webhooks(): Webhooks {
     return (this._webhooks ??= new Webhooks(this._options));
+  }
+
+  private _connectorOwnersV2?: ConnectorOwnersV2;
+  get connectorOwnersV2(): ConnectorOwnersV2 {
+    return (this._connectorOwnersV2 ??= new ConnectorOwnersV2(this._options));
+  }
+
+  private _appEntitlementOwnersV2?: AppEntitlementOwnersV2;
+  get appEntitlementOwnersV2(): AppEntitlementOwnersV2 {
+    return (this._appEntitlementOwnersV2 ??= new AppEntitlementOwnersV2(
+      this._options,
+    ));
+  }
+
+  private _appOwnersV2?: AppOwnersV2;
+  get appOwnersV2(): AppOwnersV2 {
+    return (this._appOwnersV2 ??= new AppOwnersV2(this._options));
   }
 }

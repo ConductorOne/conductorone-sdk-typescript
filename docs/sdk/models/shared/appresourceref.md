@@ -1,6 +1,6 @@
 # AppResourceRef
 
-The AppResourceRef message.
+A reference to a specific app resource by its composite key.
 
 ## Example Usage
 
@@ -12,8 +12,8 @@ let value: AppResourceRef = {};
 
 ## Fields
 
-| Field                        | Type                         | Required                     | Description                  |
-| ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- |
-| `appId`                      | *string*                     | :heavy_minus_sign:           | The appId field.             |
-| `appResourceTypeId`          | *string*                     | :heavy_minus_sign:           | The appResourceTypeId field. |
-| `id`                         | *string*                     | :heavy_minus_sign:           | The id field.                |
+| Field                                                      | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `appId`                                                    | *string*                                                   | :heavy_minus_sign:                                         | The ID of the app that owns the resource.                  |
+| `appResourceTypeId`                                        | *string*                                                   | :heavy_minus_sign:                                         | The ID of the resource type that classifies this resource. |
+| `id`                                                       | *string*                                                   | :heavy_minus_sign:                                         | The unique ID of the app resource.                         |

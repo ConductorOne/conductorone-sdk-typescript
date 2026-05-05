@@ -18,7 +18,6 @@ export const MutuallyExclusive$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
 /** @internal */
 export type MutuallyExclusive$Outbound = {};
 
@@ -29,19 +28,6 @@ export const MutuallyExclusive$outboundSchema: z.ZodType<
   MutuallyExclusive
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace MutuallyExclusive$ {
-  /** @deprecated use `MutuallyExclusive$inboundSchema` instead. */
-  export const inboundSchema = MutuallyExclusive$inboundSchema;
-  /** @deprecated use `MutuallyExclusive$outboundSchema` instead. */
-  export const outboundSchema = MutuallyExclusive$outboundSchema;
-  /** @deprecated use `MutuallyExclusive$Outbound` instead. */
-  export type Outbound = MutuallyExclusive$Outbound;
-}
-
 export function mutuallyExclusiveToJSON(
   mutuallyExclusive: MutuallyExclusive,
 ): string {
@@ -49,7 +35,6 @@ export function mutuallyExclusiveToJSON(
     MutuallyExclusive$outboundSchema.parse(mutuallyExclusive),
   );
 }
-
 export function mutuallyExclusiveFromJSON(
   jsonString: string,
 ): SafeParseResult<MutuallyExclusive, SDKValidationError> {

@@ -1,6 +1,6 @@
 # DeleteAppEntitlementMonitorBindingRequest
 
-The DeleteAppEntitlementMonitorBindingRequest message.
+The request message for deleting an app entitlement monitor binding.
 
 ## Example Usage
 
@@ -14,7 +14,7 @@ let value: DeleteAppEntitlementMonitorBindingRequest = {};
 
 | Field                                                                     | Type                                                                      | Required                                                                  | Description                                                               |
 | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `appEntitlementId`                                                        | *string*                                                                  | :heavy_minus_sign:                                                        | The appEntitlementId field.                                               |
-| `appId`                                                                   | *string*                                                                  | :heavy_minus_sign:                                                        | The appId field.                                                          |
-| `entitlementGroup`                                                        | [shared.EntitlementGroup](../../../sdk/models/shared/entitlementgroup.md) | :heavy_minus_sign:                                                        | The entitlementGroup field.                                               |
-| `monitorId`                                                               | *string*                                                                  | :heavy_minus_sign:                                                        | The monitorId field.                                                      |
+| `appEntitlementId`                                                        | *string*                                                                  | :heavy_minus_sign:                                                        | The unique identifier of the app entitlement to unbind.                   |
+| `appId`                                                                   | *string*                                                                  | :heavy_minus_sign:                                                        | The unique identifier of the application containing the entitlement.      |
+| `entitlementGroup`                                                        | [shared.EntitlementGroup](../../../sdk/models/shared/entitlementgroup.md) | :heavy_minus_sign:                                                        | Which side of the conflict monitor (A or B) the binding belongs to.       |
+| `monitorId`                                                               | *string*                                                                  | :heavy_minus_sign:                                                        | The unique identifier of the conflict monitor.                            |

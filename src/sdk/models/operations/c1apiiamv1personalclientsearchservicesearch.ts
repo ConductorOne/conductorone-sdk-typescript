@@ -52,67 +52,6 @@ export const C1ApiIamV1PersonalClientSearchServiceSearchResponse$inboundSchema:
     });
   });
 
-/** @internal */
-export type C1ApiIamV1PersonalClientSearchServiceSearchResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  PersonalClientSearchServiceSearchResponse?:
-    | shared.PersonalClientSearchServiceSearchResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiIamV1PersonalClientSearchServiceSearchResponse$outboundSchema:
-  z.ZodType<
-    C1ApiIamV1PersonalClientSearchServiceSearchResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiIamV1PersonalClientSearchServiceSearchResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    personalClientSearchServiceSearchResponse: shared
-      .PersonalClientSearchServiceSearchResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      personalClientSearchServiceSearchResponse:
-        "PersonalClientSearchServiceSearchResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiIamV1PersonalClientSearchServiceSearchResponse$ {
-  /** @deprecated use `C1ApiIamV1PersonalClientSearchServiceSearchResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiIamV1PersonalClientSearchServiceSearchResponse$inboundSchema;
-  /** @deprecated use `C1ApiIamV1PersonalClientSearchServiceSearchResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiIamV1PersonalClientSearchServiceSearchResponse$outboundSchema;
-  /** @deprecated use `C1ApiIamV1PersonalClientSearchServiceSearchResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiIamV1PersonalClientSearchServiceSearchResponse$Outbound;
-}
-
-export function c1ApiIamV1PersonalClientSearchServiceSearchResponseToJSON(
-  c1ApiIamV1PersonalClientSearchServiceSearchResponse:
-    C1ApiIamV1PersonalClientSearchServiceSearchResponse,
-): string {
-  return JSON.stringify(
-    C1ApiIamV1PersonalClientSearchServiceSearchResponse$outboundSchema.parse(
-      c1ApiIamV1PersonalClientSearchServiceSearchResponse,
-    ),
-  );
-}
-
 export function c1ApiIamV1PersonalClientSearchServiceSearchResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

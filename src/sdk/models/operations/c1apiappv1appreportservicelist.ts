@@ -37,23 +37,6 @@ export type C1ApiAppV1AppReportServiceListResponse = {
 };
 
 /** @internal */
-export const C1ApiAppV1AppReportServiceListRequest$inboundSchema: z.ZodType<
-  C1ApiAppV1AppReportServiceListRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  app_id: z.nullable(z.string()),
-  page_size: z.nullable(z.number().int()).optional(),
-  page_token: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "app_id": "appId",
-    "page_size": "pageSize",
-    "page_token": "pageToken",
-  });
-});
-
-/** @internal */
 export type C1ApiAppV1AppReportServiceListRequest$Outbound = {
   app_id: string | null;
   page_size?: number | null | undefined;
@@ -77,21 +60,6 @@ export const C1ApiAppV1AppReportServiceListRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppReportServiceListRequest$ {
-  /** @deprecated use `C1ApiAppV1AppReportServiceListRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppReportServiceListRequest$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppReportServiceListRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppReportServiceListRequest$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppReportServiceListRequest$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppReportServiceListRequest$Outbound;
-}
-
 export function c1ApiAppV1AppReportServiceListRequestToJSON(
   c1ApiAppV1AppReportServiceListRequest: C1ApiAppV1AppReportServiceListRequest,
 ): string {
@@ -99,17 +67,6 @@ export function c1ApiAppV1AppReportServiceListRequestToJSON(
     C1ApiAppV1AppReportServiceListRequest$outboundSchema.parse(
       c1ApiAppV1AppReportServiceListRequest,
     ),
-  );
-}
-
-export function c1ApiAppV1AppReportServiceListRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<C1ApiAppV1AppReportServiceListRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiAppV1AppReportServiceListRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'C1ApiAppV1AppReportServiceListRequest' from JSON`,
   );
 }
 
@@ -132,64 +89,6 @@ export const C1ApiAppV1AppReportServiceListResponse$inboundSchema: z.ZodType<
     "AppReportServiceListResponse": "appReportServiceListResponse",
   });
 });
-
-/** @internal */
-export type C1ApiAppV1AppReportServiceListResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  AppReportServiceListResponse?:
-    | shared.AppReportServiceListResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppReportServiceListResponse$outboundSchema: z.ZodType<
-  C1ApiAppV1AppReportServiceListResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiAppV1AppReportServiceListResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  appReportServiceListResponse: shared
-    .AppReportServiceListResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    appReportServiceListResponse: "AppReportServiceListResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppReportServiceListResponse$ {
-  /** @deprecated use `C1ApiAppV1AppReportServiceListResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppReportServiceListResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppReportServiceListResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppReportServiceListResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppReportServiceListResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppReportServiceListResponse$Outbound;
-}
-
-export function c1ApiAppV1AppReportServiceListResponseToJSON(
-  c1ApiAppV1AppReportServiceListResponse:
-    C1ApiAppV1AppReportServiceListResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppReportServiceListResponse$outboundSchema.parse(
-      c1ApiAppV1AppReportServiceListResponse,
-    ),
-  );
-}
 
 export function c1ApiAppV1AppReportServiceListResponseFromJSON(
   jsonString: string,

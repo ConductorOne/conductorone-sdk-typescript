@@ -1,6 +1,6 @@
 # RequestSchemaServiceCreateEntitlementBindingResponse
 
-The RequestSchemaServiceCreateEntitlementBindingResponse message.
+The response message for creating a single entitlement binding.
 
 ## Example Usage
 
@@ -15,4 +15,4 @@ let value: RequestSchemaServiceCreateEntitlementBindingResponse = {};
 | Field                                                                       | Type                                                                        | Required                                                                    | Description                                                                 |
 | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | `entitlementRef`                                                            | [shared.AppEntitlementRef](../../../sdk/models/shared/appentitlementref.md) | :heavy_minus_sign:                                                          | N/A                                                                         |
-| `requestSchemaId`                                                           | *string*                                                                    | :heavy_minus_sign:                                                          | The requestSchemaId field.                                                  |
+| `requestSchemaId`                                                           | *string*                                                                    | :heavy_minus_sign:                                                          | The unique identifier of the request schema the entitlement was bound to.   |

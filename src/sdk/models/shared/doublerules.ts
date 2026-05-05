@@ -83,7 +83,6 @@ export const DoubleRules$inboundSchema: z.ZodType<
   lte: z.nullable(z.number()).optional(),
   notIn: z.nullable(z.array(z.number())).optional(),
 });
-
 /** @internal */
 export type DoubleRules$Outbound = {
   const?: number | null | undefined;
@@ -112,23 +111,9 @@ export const DoubleRules$outboundSchema: z.ZodType<
   notIn: z.nullable(z.array(z.number())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DoubleRules$ {
-  /** @deprecated use `DoubleRules$inboundSchema` instead. */
-  export const inboundSchema = DoubleRules$inboundSchema;
-  /** @deprecated use `DoubleRules$outboundSchema` instead. */
-  export const outboundSchema = DoubleRules$outboundSchema;
-  /** @deprecated use `DoubleRules$Outbound` instead. */
-  export type Outbound = DoubleRules$Outbound;
-}
-
 export function doubleRulesToJSON(doubleRules: DoubleRules): string {
   return JSON.stringify(DoubleRules$outboundSchema.parse(doubleRules));
 }
-
 export function doubleRulesFromJSON(
   jsonString: string,
 ): SafeParseResult<DoubleRules, SDKValidationError> {

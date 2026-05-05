@@ -12,6 +12,6 @@ let value: AddManuallyManagedUsersRequest = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `userIds`          | *string*[]         | :heavy_minus_sign: | The userIds field. |
+| Field                                                | Type                                                 | Required                                             | Description                                          |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| `userIds`                                            | *string*[]                                           | :heavy_minus_sign:                                   | The IDs of users to add as manually managed members. |

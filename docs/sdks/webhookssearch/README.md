@@ -1,5 +1,4 @@
 # WebhooksSearch
-(*webhooksSearch*)
 
 ## Overview
 
@@ -9,7 +8,7 @@
 
 ## search
 
-Invokes the c1.api.webhooks.v1.WebhooksSearch.Search method.
+Search for webhook subscriptions by query string or specific webhook references.
 
 ### Example Usage
 

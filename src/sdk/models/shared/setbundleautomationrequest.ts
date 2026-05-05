@@ -3,55 +3,50 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { remap as remap$ } from "../../../lib/primitives.js";
+import {
+  BundleAutomationRuleCEL,
+  BundleAutomationRuleCEL$Outbound,
+  BundleAutomationRuleCEL$outboundSchema,
+} from "./bundleautomationrulecel.js";
 import {
   BundleAutomationRuleEntitlement,
-  BundleAutomationRuleEntitlement$inboundSchema,
   BundleAutomationRuleEntitlement$Outbound,
   BundleAutomationRuleEntitlement$outboundSchema,
 } from "./bundleautomationruleentitlement.js";
 
 /**
- * The SetBundleAutomationRequest message.
+ * The request message for creating or updating a bundle automation rule on a catalog.
  *
  * @remarks
  *
  * This message contains a oneof named conditions. Only a single field of the following list may be set at a time:
  *   - entitlements
+ *   - cel
  */
 export type SetBundleAutomationRequest = {
   /**
-   * The createTasks field.
+   * The BundleAutomationRuleCEL message.
+   */
+  bundleAutomationRuleCEL?: BundleAutomationRuleCEL | null | undefined;
+  /**
+   * Whether to create access request tasks for matched users instead of granting directly.
    */
   createTasks?: boolean | null | undefined;
   /**
-   * The disableCircuitBreaker field.
+   * Whether to disable the circuit breaker that pauses the automation when excessive membership changes are detected.
    */
   disableCircuitBreaker?: boolean | null | undefined;
   /**
-   * The enabled field.
+   * Whether the automation should actively run on its schedule.
    */
   enabled?: boolean | null | undefined;
   entitlements?: BundleAutomationRuleEntitlement | null | undefined;
 };
 
 /** @internal */
-export const SetBundleAutomationRequest$inboundSchema: z.ZodType<
-  SetBundleAutomationRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  createTasks: z.nullable(z.boolean()).optional(),
-  disableCircuitBreaker: z.nullable(z.boolean()).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  entitlements: z.nullable(BundleAutomationRuleEntitlement$inboundSchema)
-    .optional(),
-});
-
-/** @internal */
 export type SetBundleAutomationRequest$Outbound = {
+  cel?: BundleAutomationRuleCEL$Outbound | null | undefined;
   createTasks?: boolean | null | undefined;
   disableCircuitBreaker?: boolean | null | undefined;
   enabled?: boolean | null | undefined;
@@ -64,40 +59,23 @@ export const SetBundleAutomationRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SetBundleAutomationRequest
 > = z.object({
+  bundleAutomationRuleCEL: z.nullable(BundleAutomationRuleCEL$outboundSchema)
+    .optional(),
   createTasks: z.nullable(z.boolean()).optional(),
   disableCircuitBreaker: z.nullable(z.boolean()).optional(),
   enabled: z.nullable(z.boolean()).optional(),
   entitlements: z.nullable(BundleAutomationRuleEntitlement$outboundSchema)
     .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    bundleAutomationRuleCEL: "cel",
+  });
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SetBundleAutomationRequest$ {
-  /** @deprecated use `SetBundleAutomationRequest$inboundSchema` instead. */
-  export const inboundSchema = SetBundleAutomationRequest$inboundSchema;
-  /** @deprecated use `SetBundleAutomationRequest$outboundSchema` instead. */
-  export const outboundSchema = SetBundleAutomationRequest$outboundSchema;
-  /** @deprecated use `SetBundleAutomationRequest$Outbound` instead. */
-  export type Outbound = SetBundleAutomationRequest$Outbound;
-}
 
 export function setBundleAutomationRequestToJSON(
   setBundleAutomationRequest: SetBundleAutomationRequest,
 ): string {
   return JSON.stringify(
     SetBundleAutomationRequest$outboundSchema.parse(setBundleAutomationRequest),
-  );
-}
-
-export function setBundleAutomationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<SetBundleAutomationRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SetBundleAutomationRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SetBundleAutomationRequest' from JSON`,
   );
 }

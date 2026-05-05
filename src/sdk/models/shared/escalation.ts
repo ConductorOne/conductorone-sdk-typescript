@@ -7,6 +7,12 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  CancelTicket,
+  CancelTicket$inboundSchema,
+  CancelTicket$Outbound,
+  CancelTicket$outboundSchema,
+} from "./cancelticket.js";
+import {
   ReassignToApprovers,
   ReassignToApprovers$inboundSchema,
   ReassignToApprovers$Outbound,
@@ -18,6 +24,12 @@ import {
   ReplacePolicy$Outbound,
   ReplacePolicy$outboundSchema,
 } from "./replacepolicy.js";
+import {
+  SkipStep,
+  SkipStep$inboundSchema,
+  SkipStep$Outbound,
+  SkipStep$outboundSchema,
+} from "./skipstep.js";
 
 /**
  * The Escalation message.
@@ -27,8 +39,14 @@ import {
  * This message contains a oneof named escalation_policy. Only a single field of the following list may be set at a time:
  *   - replacePolicy
  *   - reassignToApprovers
+ *   - cancelTicket
+ *   - skipStep
  */
 export type Escalation = {
+  /**
+   * The CancelTicket message.
+   */
+  cancelTicket?: CancelTicket | null | undefined;
   /**
    * The escalationComment field.
    */
@@ -39,6 +57,10 @@ export type Escalation = {
   expiration?: number | null | undefined;
   reassignToApprovers?: ReassignToApprovers | null | undefined;
   replacePolicy?: ReplacePolicy | null | undefined;
+  /**
+   * The SkipStep message.
+   */
+  skipStep?: SkipStep | null | undefined;
 };
 
 /** @internal */
@@ -47,18 +69,21 @@ export const Escalation$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  cancelTicket: z.nullable(CancelTicket$inboundSchema).optional(),
   escalationComment: z.nullable(z.string()).optional(),
   expiration: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
   reassignToApprovers: z.nullable(ReassignToApprovers$inboundSchema).optional(),
   replacePolicy: z.nullable(ReplacePolicy$inboundSchema).optional(),
+  skipStep: z.nullable(SkipStep$inboundSchema).optional(),
 });
-
 /** @internal */
 export type Escalation$Outbound = {
+  cancelTicket?: CancelTicket$Outbound | null | undefined;
   escalationComment?: string | null | undefined;
   expiration?: string | null | undefined;
   reassignToApprovers?: ReassignToApprovers$Outbound | null | undefined;
   replacePolicy?: ReplacePolicy$Outbound | null | undefined;
+  skipStep?: SkipStep$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -67,30 +92,18 @@ export const Escalation$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Escalation
 > = z.object({
+  cancelTicket: z.nullable(CancelTicket$outboundSchema).optional(),
   escalationComment: z.nullable(z.string()).optional(),
   expiration: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
   reassignToApprovers: z.nullable(ReassignToApprovers$outboundSchema)
     .optional(),
   replacePolicy: z.nullable(ReplacePolicy$outboundSchema).optional(),
+  skipStep: z.nullable(SkipStep$outboundSchema).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Escalation$ {
-  /** @deprecated use `Escalation$inboundSchema` instead. */
-  export const inboundSchema = Escalation$inboundSchema;
-  /** @deprecated use `Escalation$outboundSchema` instead. */
-  export const outboundSchema = Escalation$outboundSchema;
-  /** @deprecated use `Escalation$Outbound` instead. */
-  export type Outbound = Escalation$Outbound;
-}
 
 export function escalationToJSON(escalation: Escalation): string {
   return JSON.stringify(Escalation$outboundSchema.parse(escalation));
 }
-
 export function escalationFromJSON(
   jsonString: string,
 ): SafeParseResult<Escalation, SDKValidationError> {

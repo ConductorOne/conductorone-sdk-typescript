@@ -35,7 +35,6 @@ export const SlackNotifications$inboundSchema: z.ZodType<
   channelName: z.nullable(z.string()).optional(),
   enabled: z.nullable(z.boolean()).optional(),
 });
-
 /** @internal */
 export type SlackNotifications$Outbound = {
   channelId?: string | null | undefined;
@@ -54,19 +53,6 @@ export const SlackNotifications$outboundSchema: z.ZodType<
   enabled: z.nullable(z.boolean()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SlackNotifications$ {
-  /** @deprecated use `SlackNotifications$inboundSchema` instead. */
-  export const inboundSchema = SlackNotifications$inboundSchema;
-  /** @deprecated use `SlackNotifications$outboundSchema` instead. */
-  export const outboundSchema = SlackNotifications$outboundSchema;
-  /** @deprecated use `SlackNotifications$Outbound` instead. */
-  export type Outbound = SlackNotifications$Outbound;
-}
-
 export function slackNotificationsToJSON(
   slackNotifications: SlackNotifications,
 ): string {
@@ -74,7 +60,6 @@ export function slackNotificationsToJSON(
     SlackNotifications$outboundSchema.parse(slackNotifications),
   );
 }
-
 export function slackNotificationsFromJSON(
   jsonString: string,
 ): SafeParseResult<SlackNotifications, SDKValidationError> {

@@ -52,67 +52,6 @@ export const C1ApiAttributeV1AttributesCreateRiskLevelAttributeValueResponse$inb
     });
   });
 
-/** @internal */
-export type C1ApiAttributeV1AttributesCreateRiskLevelAttributeValueResponse$Outbound =
-  {
-    ContentType: string;
-    StatusCode: number;
-    RawResponse: never;
-    CreateRiskLevelAttributeValueResponse?:
-      | shared.CreateRiskLevelAttributeValueResponse$Outbound
-      | undefined;
-  };
-
-/** @internal */
-export const C1ApiAttributeV1AttributesCreateRiskLevelAttributeValueResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAttributeV1AttributesCreateRiskLevelAttributeValueResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAttributeV1AttributesCreateRiskLevelAttributeValueResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    createRiskLevelAttributeValueResponse: shared
-      .CreateRiskLevelAttributeValueResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      createRiskLevelAttributeValueResponse:
-        "CreateRiskLevelAttributeValueResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAttributeV1AttributesCreateRiskLevelAttributeValueResponse$ {
-  /** @deprecated use `C1ApiAttributeV1AttributesCreateRiskLevelAttributeValueResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAttributeV1AttributesCreateRiskLevelAttributeValueResponse$inboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesCreateRiskLevelAttributeValueResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAttributeV1AttributesCreateRiskLevelAttributeValueResponse$outboundSchema;
-  /** @deprecated use `C1ApiAttributeV1AttributesCreateRiskLevelAttributeValueResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAttributeV1AttributesCreateRiskLevelAttributeValueResponse$Outbound;
-}
-
-export function c1ApiAttributeV1AttributesCreateRiskLevelAttributeValueResponseToJSON(
-  c1ApiAttributeV1AttributesCreateRiskLevelAttributeValueResponse:
-    C1ApiAttributeV1AttributesCreateRiskLevelAttributeValueResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAttributeV1AttributesCreateRiskLevelAttributeValueResponse$outboundSchema
-      .parse(c1ApiAttributeV1AttributesCreateRiskLevelAttributeValueResponse),
-  );
-}
-
 export function c1ApiAttributeV1AttributesCreateRiskLevelAttributeValueResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

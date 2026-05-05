@@ -4,6 +4,7 @@
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
 import { encodeJSON } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -29,7 +30,7 @@ import { Result } from "../sdk/types/fp.js";
  * Search Automation Executions
  *
  * @remarks
- * Invokes the c1.api.automations.v1.AutomationExecutionSearchService.SearchAutomationExecutions method.
+ * Search for automation executions with optional filters for automation_template_id, state, and query.
  */
 export function automationExecutionSearchSearchAutomationExecutions(
   client: ConductoroneSDKTypescriptCore,
@@ -91,7 +92,7 @@ async function $do(
     ? null
     : encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/api/v1/automation_executions/search")();
+  const path = pathToFunc("/api/v1/search/automation_executions")();
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -134,7 +135,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

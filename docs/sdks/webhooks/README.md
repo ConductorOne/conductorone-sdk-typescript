@@ -1,5 +1,4 @@
 # Webhooks
-(*webhooks*)
 
 ## Overview
 
@@ -14,7 +13,7 @@
 
 ## list
 
-Invokes the c1.api.webhooks.v1.WebhooksService.List method.
+List all webhook subscriptions in the tenant, with pagination.
 
 ### Example Usage
 
@@ -89,7 +88,7 @@ run();
 
 ## create
 
-Invokes the c1.api.webhooks.v1.WebhooksService.Create method.
+Create a new webhook subscription to receive event notifications at the specified URL.
 
 ### Example Usage
 
@@ -164,7 +163,7 @@ run();
 
 ## delete
 
-Invokes the c1.api.webhooks.v1.WebhooksService.Delete method.
+Delete a webhook subscription, stopping all future event deliveries to its URL.
 
 ### Example Usage
 
@@ -243,7 +242,7 @@ run();
 
 ## get
 
-Invokes the c1.api.webhooks.v1.WebhooksService.Get method.
+Retrieve a single webhook by its ID.
 
 ### Example Usage
 
@@ -322,7 +321,7 @@ run();
 
 ## update
 
-Invokes the c1.api.webhooks.v1.WebhooksService.Update method.
+Update an existing webhook subscription's properties, such as its URL or display name.
 
 ### Example Usage
 
@@ -401,7 +400,7 @@ run();
 
 ## test
 
-Invokes the c1.api.webhooks.v1.WebhooksService.Test method.
+Send a sample event to the webhook URL to verify that the endpoint is reachable and responding correctly.
 
 ### Example Usage
 

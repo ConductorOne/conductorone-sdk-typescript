@@ -8,15 +8,18 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The CIDRRestriction message.
+ * CIDRRestriction defines an IP-based access restriction with an enable toggle and a list of allowed CIDRs.
  */
 export type CIDRRestriction = {
   /**
-   * The enabled field.
+   * Whether this CIDR restriction is enforced.
    */
   enabled?: boolean | null | undefined;
   /**
-   * The sourceCidr field.
+   * The list of CIDR ranges that are allowed when the restriction is enabled.
+   *
+   * @remarks
+   *  Accepts IPv4 (e.g. 10.0.0.0/24) or IPv6 (e.g. 2001:db8::/32) CIDRs.
    */
   sourceCidr?: Array<string> | null | undefined;
 };
@@ -30,7 +33,6 @@ export const CIDRRestriction$inboundSchema: z.ZodType<
   enabled: z.nullable(z.boolean()).optional(),
   sourceCidr: z.nullable(z.array(z.string())).optional(),
 });
-
 /** @internal */
 export type CIDRRestriction$Outbound = {
   enabled?: boolean | null | undefined;
@@ -47,25 +49,11 @@ export const CIDRRestriction$outboundSchema: z.ZodType<
   sourceCidr: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CIDRRestriction$ {
-  /** @deprecated use `CIDRRestriction$inboundSchema` instead. */
-  export const inboundSchema = CIDRRestriction$inboundSchema;
-  /** @deprecated use `CIDRRestriction$outboundSchema` instead. */
-  export const outboundSchema = CIDRRestriction$outboundSchema;
-  /** @deprecated use `CIDRRestriction$Outbound` instead. */
-  export type Outbound = CIDRRestriction$Outbound;
-}
-
 export function cidrRestrictionToJSON(
   cidrRestriction: CIDRRestriction,
 ): string {
   return JSON.stringify(CIDRRestriction$outboundSchema.parse(cidrRestriction));
 }
-
 export function cidrRestrictionFromJSON(
   jsonString: string,
 ): SafeParseResult<CIDRRestriction, SDKValidationError> {

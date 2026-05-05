@@ -12,6 +12,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type FieldGroup = {
   /**
+   * The default field.
+   */
+  default?: boolean | undefined;
+  /**
    * Nice name this group (e.g. renders as a Tab label)
    */
   displayName?: string | null | undefined;
@@ -35,48 +39,12 @@ export const FieldGroup$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  default: z.boolean().optional(),
   displayName: z.nullable(z.string()).optional(),
   fieldNames: z.nullable(z.array(z.string())).optional(),
   helpText: z.nullable(z.string()).optional(),
   name: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type FieldGroup$Outbound = {
-  displayName?: string | null | undefined;
-  fieldNames?: Array<string> | null | undefined;
-  helpText?: string | null | undefined;
-  name?: string | null | undefined;
-};
-
-/** @internal */
-export const FieldGroup$outboundSchema: z.ZodType<
-  FieldGroup$Outbound,
-  z.ZodTypeDef,
-  FieldGroup
-> = z.object({
-  displayName: z.nullable(z.string()).optional(),
-  fieldNames: z.nullable(z.array(z.string())).optional(),
-  helpText: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FieldGroup$ {
-  /** @deprecated use `FieldGroup$inboundSchema` instead. */
-  export const inboundSchema = FieldGroup$inboundSchema;
-  /** @deprecated use `FieldGroup$outboundSchema` instead. */
-  export const outboundSchema = FieldGroup$outboundSchema;
-  /** @deprecated use `FieldGroup$Outbound` instead. */
-  export type Outbound = FieldGroup$Outbound;
-}
-
-export function fieldGroupToJSON(fieldGroup: FieldGroup): string {
-  return JSON.stringify(FieldGroup$outboundSchema.parse(fieldGroup));
-}
 
 export function fieldGroupFromJSON(
   jsonString: string,

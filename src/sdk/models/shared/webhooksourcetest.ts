@@ -19,37 +19,6 @@ export const WebhookSourceTest$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type WebhookSourceTest$Outbound = {};
-
-/** @internal */
-export const WebhookSourceTest$outboundSchema: z.ZodType<
-  WebhookSourceTest$Outbound,
-  z.ZodTypeDef,
-  WebhookSourceTest
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhookSourceTest$ {
-  /** @deprecated use `WebhookSourceTest$inboundSchema` instead. */
-  export const inboundSchema = WebhookSourceTest$inboundSchema;
-  /** @deprecated use `WebhookSourceTest$outboundSchema` instead. */
-  export const outboundSchema = WebhookSourceTest$outboundSchema;
-  /** @deprecated use `WebhookSourceTest$Outbound` instead. */
-  export type Outbound = WebhookSourceTest$Outbound;
-}
-
-export function webhookSourceTestToJSON(
-  webhookSourceTest: WebhookSourceTest,
-): string {
-  return JSON.stringify(
-    WebhookSourceTest$outboundSchema.parse(webhookSourceTest),
-  );
-}
-
 export function webhookSourceTestFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookSourceTest, SDKValidationError> {

@@ -1,5 +1,4 @@
 # SessionSettings
-(*sessionSettings*)
 
 ## Overview
 
@@ -11,7 +10,7 @@
 
 ## get
 
-Invokes the c1.api.settings.v1.SessionSettingsService.Get method.
+Get retrieves the current session security settings for the tenant.
 
 ### Example Usage
 
@@ -85,7 +84,7 @@ run();
 
 ## update
 
-Invokes the c1.api.settings.v1.SessionSettingsService.Update method.
+Update modifies the session security settings for the tenant, such as session length and IP allowlists.
 
 ### Example Usage
 
@@ -160,7 +159,7 @@ run();
 
 ## testSourceIP
 
-Invokes the c1.api.settings.v1.SessionSettingsService.TestSourceIP method.
+TestSourceIP checks whether a given IP address would be allowed by the specified CIDR allowlist rules.
 
 ### Example Usage
 

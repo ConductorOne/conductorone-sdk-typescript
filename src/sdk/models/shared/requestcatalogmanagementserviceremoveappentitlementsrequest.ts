@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementRef,
-  AppEntitlementRef$inboundSchema,
   AppEntitlementRef$Outbound,
   AppEntitlementRef$outboundSchema,
 } from "./appentitlementref.js";
@@ -22,17 +18,6 @@ export type RequestCatalogManagementServiceRemoveAppEntitlementsRequest = {
    */
   appEntitlements?: Array<AppEntitlementRef> | null | undefined;
 };
-
-/** @internal */
-export const RequestCatalogManagementServiceRemoveAppEntitlementsRequest$inboundSchema:
-  z.ZodType<
-    RequestCatalogManagementServiceRemoveAppEntitlementsRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    appEntitlements: z.nullable(z.array(AppEntitlementRef$inboundSchema))
-      .optional(),
-  });
 
 /** @internal */
 export type RequestCatalogManagementServiceRemoveAppEntitlementsRequest$Outbound =
@@ -51,22 +36,6 @@ export const RequestCatalogManagementServiceRemoveAppEntitlementsRequest$outboun
       .optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogManagementServiceRemoveAppEntitlementsRequest$ {
-  /** @deprecated use `RequestCatalogManagementServiceRemoveAppEntitlementsRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogManagementServiceRemoveAppEntitlementsRequest$inboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceRemoveAppEntitlementsRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogManagementServiceRemoveAppEntitlementsRequest$outboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceRemoveAppEntitlementsRequest$Outbound` instead. */
-  export type Outbound =
-    RequestCatalogManagementServiceRemoveAppEntitlementsRequest$Outbound;
-}
-
 export function requestCatalogManagementServiceRemoveAppEntitlementsRequestToJSON(
   requestCatalogManagementServiceRemoveAppEntitlementsRequest:
     RequestCatalogManagementServiceRemoveAppEntitlementsRequest,
@@ -74,20 +43,5 @@ export function requestCatalogManagementServiceRemoveAppEntitlementsRequestToJSO
   return JSON.stringify(
     RequestCatalogManagementServiceRemoveAppEntitlementsRequest$outboundSchema
       .parse(requestCatalogManagementServiceRemoveAppEntitlementsRequest),
-  );
-}
-
-export function requestCatalogManagementServiceRemoveAppEntitlementsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  RequestCatalogManagementServiceRemoveAppEntitlementsRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      RequestCatalogManagementServiceRemoveAppEntitlementsRequest$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'RequestCatalogManagementServiceRemoveAppEntitlementsRequest' from JSON`,
   );
 }

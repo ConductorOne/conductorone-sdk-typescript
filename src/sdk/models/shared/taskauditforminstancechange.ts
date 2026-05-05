@@ -26,43 +26,6 @@ export const TaskAuditFormInstanceChange$inboundSchema: z.ZodType<
   isValid: z.nullable(z.boolean()).optional(),
 });
 
-/** @internal */
-export type TaskAuditFormInstanceChange$Outbound = {
-  isValid?: boolean | null | undefined;
-};
-
-/** @internal */
-export const TaskAuditFormInstanceChange$outboundSchema: z.ZodType<
-  TaskAuditFormInstanceChange$Outbound,
-  z.ZodTypeDef,
-  TaskAuditFormInstanceChange
-> = z.object({
-  isValid: z.nullable(z.boolean()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskAuditFormInstanceChange$ {
-  /** @deprecated use `TaskAuditFormInstanceChange$inboundSchema` instead. */
-  export const inboundSchema = TaskAuditFormInstanceChange$inboundSchema;
-  /** @deprecated use `TaskAuditFormInstanceChange$outboundSchema` instead. */
-  export const outboundSchema = TaskAuditFormInstanceChange$outboundSchema;
-  /** @deprecated use `TaskAuditFormInstanceChange$Outbound` instead. */
-  export type Outbound = TaskAuditFormInstanceChange$Outbound;
-}
-
-export function taskAuditFormInstanceChangeToJSON(
-  taskAuditFormInstanceChange: TaskAuditFormInstanceChange,
-): string {
-  return JSON.stringify(
-    TaskAuditFormInstanceChange$outboundSchema.parse(
-      taskAuditFormInstanceChange,
-    ),
-  );
-}
-
 export function taskAuditFormInstanceChangeFromJSON(
   jsonString: string,
 ): SafeParseResult<TaskAuditFormInstanceChange, SDKValidationError> {

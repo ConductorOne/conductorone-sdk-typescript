@@ -1,6 +1,6 @@
 # ExportsSearchServiceSearchResponse
 
-The ExportsSearchServiceSearchResponse message.
+ExportsSearchServiceSearchResponse is the response for searching system log exports.
 
 ## Example Usage
 
@@ -12,7 +12,7 @@ let value: ExportsSearchServiceSearchResponse = {};
 
 ## Fields
 
-| Field                                                       | Type                                                        | Required                                                    | Description                                                 |
-| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `list`                                                      | [shared.Exporter](../../../sdk/models/shared/exporter.md)[] | :heavy_minus_sign:                                          | The list field.                                             |
-| `nextPageToken`                                             | *string*                                                    | :heavy_minus_sign:                                          | The nextPageToken field.                                    |
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `list`                                                                                 | [shared.Exporter](../../../sdk/models/shared/exporter.md)[]                            | :heavy_minus_sign:                                                                     | The list of system log exports matching the search criteria.                           |
+| `nextPageToken`                                                                        | *string*                                                                               | :heavy_minus_sign:                                                                     | The token to retrieve the next page of results, or empty if there are no more results. |

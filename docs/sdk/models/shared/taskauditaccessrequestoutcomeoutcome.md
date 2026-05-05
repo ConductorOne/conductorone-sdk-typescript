@@ -9,11 +9,11 @@ import { TaskAuditAccessRequestOutcomeOutcome } from "conductorone-sdk-typescrip
 
 let value: TaskAuditAccessRequestOutcomeOutcome =
   "ACCESS_REQUEST_OUTCOME_UNSPECIFIED";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "ACCESS_REQUEST_OUTCOME_UNSPECIFIED" | "ACCESS_REQUEST_OUTCOME_APPROVED" | "ACCESS_REQUEST_OUTCOME_DENIED" | "ACCESS_REQUEST_OUTCOME_ERROR" | "ACCESS_REQUEST_OUTCOME_CANCELLED" | Unrecognized<string>

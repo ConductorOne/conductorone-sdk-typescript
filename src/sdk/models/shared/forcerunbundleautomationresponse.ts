@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The ForceRunBundleAutomationResponse message.
+ * The response message for triggering a bundle automation run.
  */
 export type ForceRunBundleAutomationResponse = {};
 
@@ -18,39 +18,6 @@ export const ForceRunBundleAutomationResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
-/** @internal */
-export type ForceRunBundleAutomationResponse$Outbound = {};
-
-/** @internal */
-export const ForceRunBundleAutomationResponse$outboundSchema: z.ZodType<
-  ForceRunBundleAutomationResponse$Outbound,
-  z.ZodTypeDef,
-  ForceRunBundleAutomationResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ForceRunBundleAutomationResponse$ {
-  /** @deprecated use `ForceRunBundleAutomationResponse$inboundSchema` instead. */
-  export const inboundSchema = ForceRunBundleAutomationResponse$inboundSchema;
-  /** @deprecated use `ForceRunBundleAutomationResponse$outboundSchema` instead. */
-  export const outboundSchema = ForceRunBundleAutomationResponse$outboundSchema;
-  /** @deprecated use `ForceRunBundleAutomationResponse$Outbound` instead. */
-  export type Outbound = ForceRunBundleAutomationResponse$Outbound;
-}
-
-export function forceRunBundleAutomationResponseToJSON(
-  forceRunBundleAutomationResponse: ForceRunBundleAutomationResponse,
-): string {
-  return JSON.stringify(
-    ForceRunBundleAutomationResponse$outboundSchema.parse(
-      forceRunBundleAutomationResponse,
-    ),
-  );
-}
 
 export function forceRunBundleAutomationResponseFromJSON(
   jsonString: string,

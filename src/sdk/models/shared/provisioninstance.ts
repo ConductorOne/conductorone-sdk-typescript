@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -131,32 +128,13 @@ export const ProvisionInstanceState$inboundSchema: z.ZodType<
   ProvisionInstanceState,
   z.ZodTypeDef,
   unknown
-> = z
-  .union([
-    z.nativeEnum(ProvisionInstanceState),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+> = openEnums.inboundSchema(ProvisionInstanceState);
 /** @internal */
 export const ProvisionInstanceState$outboundSchema: z.ZodType<
-  ProvisionInstanceState,
+  string,
   z.ZodTypeDef,
   ProvisionInstanceState
-> = z.union([
-  z.nativeEnum(ProvisionInstanceState),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ProvisionInstanceState$ {
-  /** @deprecated use `ProvisionInstanceState$inboundSchema` instead. */
-  export const inboundSchema = ProvisionInstanceState$inboundSchema;
-  /** @deprecated use `ProvisionInstanceState$outboundSchema` instead. */
-  export const outboundSchema = ProvisionInstanceState$outboundSchema;
-}
+> = openEnums.outboundSchema(ProvisionInstanceState);
 
 /** @internal */
 export const ProvisionInstance$inboundSchema: z.ZodType<
@@ -179,7 +157,6 @@ export const ProvisionInstance$inboundSchema: z.ZodType<
   webhookId: z.nullable(z.string()).optional(),
   webhookInstanceId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type ProvisionInstance$Outbound = {
   batonActionInvocationId?: string | null | undefined;
@@ -219,19 +196,6 @@ export const ProvisionInstance$outboundSchema: z.ZodType<
   webhookInstanceId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ProvisionInstance$ {
-  /** @deprecated use `ProvisionInstance$inboundSchema` instead. */
-  export const inboundSchema = ProvisionInstance$inboundSchema;
-  /** @deprecated use `ProvisionInstance$outboundSchema` instead. */
-  export const outboundSchema = ProvisionInstance$outboundSchema;
-  /** @deprecated use `ProvisionInstance$Outbound` instead. */
-  export type Outbound = ProvisionInstance$Outbound;
-}
-
 export function provisionInstanceToJSON(
   provisionInstance: ProvisionInstance,
 ): string {
@@ -239,7 +203,6 @@ export function provisionInstanceToJSON(
     ProvisionInstance$outboundSchema.parse(provisionInstance),
   );
 }
-
 export function provisionInstanceFromJSON(
   jsonString: string,
 ): SafeParseResult<ProvisionInstance, SDKValidationError> {

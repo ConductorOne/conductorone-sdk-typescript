@@ -49,63 +49,6 @@ export const C1ApiSettingsV1OrgDomainServiceUpdateResponse$inboundSchema:
     });
   });
 
-/** @internal */
-export type C1ApiSettingsV1OrgDomainServiceUpdateResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  UpdateOrgDomainResponse?: shared.UpdateOrgDomainResponse$Outbound | undefined;
-};
-
-/** @internal */
-export const C1ApiSettingsV1OrgDomainServiceUpdateResponse$outboundSchema:
-  z.ZodType<
-    C1ApiSettingsV1OrgDomainServiceUpdateResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiSettingsV1OrgDomainServiceUpdateResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    updateOrgDomainResponse: shared.UpdateOrgDomainResponse$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      updateOrgDomainResponse: "UpdateOrgDomainResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiSettingsV1OrgDomainServiceUpdateResponse$ {
-  /** @deprecated use `C1ApiSettingsV1OrgDomainServiceUpdateResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiSettingsV1OrgDomainServiceUpdateResponse$inboundSchema;
-  /** @deprecated use `C1ApiSettingsV1OrgDomainServiceUpdateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiSettingsV1OrgDomainServiceUpdateResponse$outboundSchema;
-  /** @deprecated use `C1ApiSettingsV1OrgDomainServiceUpdateResponse$Outbound` instead. */
-  export type Outbound = C1ApiSettingsV1OrgDomainServiceUpdateResponse$Outbound;
-}
-
-export function c1ApiSettingsV1OrgDomainServiceUpdateResponseToJSON(
-  c1ApiSettingsV1OrgDomainServiceUpdateResponse:
-    C1ApiSettingsV1OrgDomainServiceUpdateResponse,
-): string {
-  return JSON.stringify(
-    C1ApiSettingsV1OrgDomainServiceUpdateResponse$outboundSchema.parse(
-      c1ApiSettingsV1OrgDomainServiceUpdateResponse,
-    ),
-  );
-}
-
 export function c1ApiSettingsV1OrgDomainServiceUpdateResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

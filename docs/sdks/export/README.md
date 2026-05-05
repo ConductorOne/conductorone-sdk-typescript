@@ -1,5 +1,4 @@
 # Export
-(*export*)
 
 ## Overview
 
@@ -164,7 +163,7 @@ run();
 
 ## delete
 
-Delete a policy by ID.
+Delete a system log export by ID.
 
 ### Example Usage
 
@@ -322,7 +321,7 @@ run();
 
 ## update
 
-Update a system log export by providing a policy object and an update mask.
+Update a system log export by providing an export object and an update mask.
 
 ### Example Usage
 
@@ -401,7 +400,7 @@ run();
 
 ## listEvents
 
-Invokes the c1.api.systemlog.v1.ExportService.ListEvents method.
+List audit events belonging to a specific system log export.
 
 ### Example Usage
 

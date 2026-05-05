@@ -1,5 +1,4 @@
 # AutomationExecutionActions
-(*automationExecutionActions*)
 
 ## Overview
 
@@ -9,7 +8,7 @@
 
 ## terminateAutomation
 
-Invokes the c1.api.automations.v1.AutomationExecutionActionsService.TerminateAutomation method.
+Terminate a running automation execution asynchronously, stopping it and marking it as terminated.
 
 ### Example Usage
 

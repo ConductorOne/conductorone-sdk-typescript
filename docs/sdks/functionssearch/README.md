@@ -1,5 +1,4 @@
 # FunctionsSearch
-(*functionsSearch*)
 
 ## Overview
 

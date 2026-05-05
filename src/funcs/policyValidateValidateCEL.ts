@@ -4,6 +4,7 @@
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
 import { encodeJSON } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -33,7 +34,7 @@ import { Result } from "../sdk/types/fp.js";
  */
 export function policyValidateValidateCEL(
   client: ConductoroneSDKTypescriptCore,
-  request?: shared.EditorValidateRequest | undefined,
+  request?: shared.PolicyEditorValidateRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -57,7 +58,7 @@ export function policyValidateValidateCEL(
 
 async function $do(
   client: ConductoroneSDKTypescriptCore,
-  request?: shared.EditorValidateRequest | undefined,
+  request?: shared.PolicyEditorValidateRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -78,7 +79,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      shared.EditorValidateRequest$outboundSchema.optional().parse(value),
+      shared.PolicyEditorValidateRequest$outboundSchema.optional().parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -131,7 +132,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -162,7 +164,7 @@ async function $do(
     M.json(
       200,
       operations.C1ApiPolicyV1PolicyValidateValidateCELResponse$inboundSchema,
-      { key: "EditorValidateResponse" },
+      { key: "PolicyEditorValidateResponse" },
     ),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

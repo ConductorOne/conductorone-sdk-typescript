@@ -12,6 +12,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type SelectOption = {
   /**
+   * Used for type BUTTONS
+   */
+  description?: string | undefined;
+  /**
    * The displayName field.
    */
   displayName?: string | null | undefined;
@@ -27,12 +31,13 @@ export const SelectOption$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  description: z.string().optional(),
   displayName: z.nullable(z.string()).optional(),
   value: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type SelectOption$Outbound = {
+  description?: string | undefined;
   displayName?: string | null | undefined;
   value?: string | null | undefined;
 };
@@ -43,27 +48,14 @@ export const SelectOption$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SelectOption
 > = z.object({
+  description: z.string().optional(),
   displayName: z.nullable(z.string()).optional(),
   value: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SelectOption$ {
-  /** @deprecated use `SelectOption$inboundSchema` instead. */
-  export const inboundSchema = SelectOption$inboundSchema;
-  /** @deprecated use `SelectOption$outboundSchema` instead. */
-  export const outboundSchema = SelectOption$outboundSchema;
-  /** @deprecated use `SelectOption$Outbound` instead. */
-  export type Outbound = SelectOption$Outbound;
-}
-
 export function selectOptionToJSON(selectOption: SelectOption): string {
   return JSON.stringify(SelectOption$outboundSchema.parse(selectOption));
 }
-
 export function selectOptionFromJSON(
   jsonString: string,
 ): SafeParseResult<SelectOption, SDKValidationError> {

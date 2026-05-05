@@ -26,41 +26,6 @@ export const WebhookSourceApprovalStep$inboundSchema: z.ZodType<
   ticketId: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type WebhookSourceApprovalStep$Outbound = {
-  ticketId?: string | null | undefined;
-};
-
-/** @internal */
-export const WebhookSourceApprovalStep$outboundSchema: z.ZodType<
-  WebhookSourceApprovalStep$Outbound,
-  z.ZodTypeDef,
-  WebhookSourceApprovalStep
-> = z.object({
-  ticketId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhookSourceApprovalStep$ {
-  /** @deprecated use `WebhookSourceApprovalStep$inboundSchema` instead. */
-  export const inboundSchema = WebhookSourceApprovalStep$inboundSchema;
-  /** @deprecated use `WebhookSourceApprovalStep$outboundSchema` instead. */
-  export const outboundSchema = WebhookSourceApprovalStep$outboundSchema;
-  /** @deprecated use `WebhookSourceApprovalStep$Outbound` instead. */
-  export type Outbound = WebhookSourceApprovalStep$Outbound;
-}
-
-export function webhookSourceApprovalStepToJSON(
-  webhookSourceApprovalStep: WebhookSourceApprovalStep,
-): string {
-  return JSON.stringify(
-    WebhookSourceApprovalStep$outboundSchema.parse(webhookSourceApprovalStep),
-  );
-}
-
 export function webhookSourceApprovalStepFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookSourceApprovalStep, SDKValidationError> {

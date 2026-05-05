@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -13,11 +14,29 @@ import {
   AccountFilter$outboundSchema,
 } from "./accountfilter.js";
 import {
-  EntitlementFilter,
-  EntitlementFilter$inboundSchema,
-  EntitlementFilter$Outbound,
-  EntitlementFilter$outboundSchema,
-} from "./entitlementfilter.js";
+  EntitlementInclusionAll,
+  EntitlementInclusionAll$inboundSchema,
+  EntitlementInclusionAll$Outbound,
+  EntitlementInclusionAll$outboundSchema,
+} from "./entitlementinclusionall.js";
+import {
+  EntitlementInclusionCriteria,
+  EntitlementInclusionCriteria$inboundSchema,
+  EntitlementInclusionCriteria$Outbound,
+  EntitlementInclusionCriteria$outboundSchema,
+} from "./entitlementinclusioncriteria.js";
+import {
+  EntitlementInclusionList,
+  EntitlementInclusionList$inboundSchema,
+  EntitlementInclusionList$Outbound,
+  EntitlementInclusionList$outboundSchema,
+} from "./entitlementinclusionlist.js";
+import {
+  EntitlementInclusionListCel,
+  EntitlementInclusionListCel$inboundSchema,
+  EntitlementInclusionListCel$Outbound,
+  EntitlementInclusionListCel$outboundSchema,
+} from "./entitlementinclusionlistcel.js";
 import {
   GrantFilter,
   GrantFilter$inboundSchema,
@@ -27,11 +46,37 @@ import {
 
 /**
  * The GrantTriggerFilter message.
+ *
+ * @remarks
+ *
+ * This message contains a oneof named entitlement_inclusion. Only a single field of the following list may be set at a time:
+ *   - inclusionList
+ *   - inclusionAll
+ *   - inclusionCriteria
+ *   - inclusionListCel
  */
 export type GrantTriggerFilter = {
   accountFilter?: AccountFilter | null | undefined;
-  entitlementFilter?: EntitlementFilter | null | undefined;
   grantFilter?: GrantFilter | null | undefined;
+  /**
+   * The EntitlementInclusionAll message.
+   */
+  entitlementInclusionAll?: EntitlementInclusionAll | null | undefined;
+  /**
+   * The EntitlementInclusionCriteria message.
+   */
+  entitlementInclusionCriteria?:
+    | EntitlementInclusionCriteria
+    | null
+    | undefined;
+  /**
+   * The EntitlementInclusionList message.
+   */
+  entitlementInclusionList?: EntitlementInclusionList | null | undefined;
+  /**
+   * The EntitlementInclusionListCel message.
+   */
+  entitlementInclusionListCel?: EntitlementInclusionListCel | null | undefined;
 };
 
 /** @internal */
@@ -41,15 +86,29 @@ export const GrantTriggerFilter$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   accountFilter: z.nullable(AccountFilter$inboundSchema).optional(),
-  entitlementFilter: z.nullable(EntitlementFilter$inboundSchema).optional(),
   grantFilter: z.nullable(GrantFilter$inboundSchema).optional(),
+  inclusionAll: z.nullable(EntitlementInclusionAll$inboundSchema).optional(),
+  inclusionCriteria: z.nullable(EntitlementInclusionCriteria$inboundSchema)
+    .optional(),
+  inclusionList: z.nullable(EntitlementInclusionList$inboundSchema).optional(),
+  inclusionListCel: z.nullable(EntitlementInclusionListCel$inboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "inclusionAll": "entitlementInclusionAll",
+    "inclusionCriteria": "entitlementInclusionCriteria",
+    "inclusionList": "entitlementInclusionList",
+    "inclusionListCel": "entitlementInclusionListCel",
+  });
 });
-
 /** @internal */
 export type GrantTriggerFilter$Outbound = {
   accountFilter?: AccountFilter$Outbound | null | undefined;
-  entitlementFilter?: EntitlementFilter$Outbound | null | undefined;
   grantFilter?: GrantFilter$Outbound | null | undefined;
+  inclusionAll?: EntitlementInclusionAll$Outbound | null | undefined;
+  inclusionCriteria?: EntitlementInclusionCriteria$Outbound | null | undefined;
+  inclusionList?: EntitlementInclusionList$Outbound | null | undefined;
+  inclusionListCel?: EntitlementInclusionListCel$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -59,22 +118,25 @@ export const GrantTriggerFilter$outboundSchema: z.ZodType<
   GrantTriggerFilter
 > = z.object({
   accountFilter: z.nullable(AccountFilter$outboundSchema).optional(),
-  entitlementFilter: z.nullable(EntitlementFilter$outboundSchema).optional(),
   grantFilter: z.nullable(GrantFilter$outboundSchema).optional(),
+  entitlementInclusionAll: z.nullable(EntitlementInclusionAll$outboundSchema)
+    .optional(),
+  entitlementInclusionCriteria: z.nullable(
+    EntitlementInclusionCriteria$outboundSchema,
+  ).optional(),
+  entitlementInclusionList: z.nullable(EntitlementInclusionList$outboundSchema)
+    .optional(),
+  entitlementInclusionListCel: z.nullable(
+    EntitlementInclusionListCel$outboundSchema,
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    entitlementInclusionAll: "inclusionAll",
+    entitlementInclusionCriteria: "inclusionCriteria",
+    entitlementInclusionList: "inclusionList",
+    entitlementInclusionListCel: "inclusionListCel",
+  });
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GrantTriggerFilter$ {
-  /** @deprecated use `GrantTriggerFilter$inboundSchema` instead. */
-  export const inboundSchema = GrantTriggerFilter$inboundSchema;
-  /** @deprecated use `GrantTriggerFilter$outboundSchema` instead. */
-  export const outboundSchema = GrantTriggerFilter$outboundSchema;
-  /** @deprecated use `GrantTriggerFilter$Outbound` instead. */
-  export type Outbound = GrantTriggerFilter$Outbound;
-}
 
 export function grantTriggerFilterToJSON(
   grantTriggerFilter: GrantTriggerFilter,
@@ -83,7 +145,6 @@ export function grantTriggerFilterToJSON(
     GrantTriggerFilter$outboundSchema.parse(grantTriggerFilter),
   );
 }
-
 export function grantTriggerFilterFromJSON(
   jsonString: string,
 ): SafeParseResult<GrantTriggerFilter, SDKValidationError> {

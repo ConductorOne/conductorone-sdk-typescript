@@ -1,19 +1,19 @@
 # State
 
-The last applied state of the app access request defaults.
+The state field.
 
 ## Example Usage
 
 ```typescript
 import { State } from "conductorone-sdk-typescript/sdk/models/shared";
 
-let value: State = "APP_ACCESS_REQUEST_DEFAULTS_LAST_APPLY_STATE_UNSPECIFIED";
+let value: State = "SURFACE_LIFECYCLE_STATE_UNSPECIFIED";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
-
 ```typescript
-"APP_ACCESS_REQUEST_DEFAULTS_LAST_APPLY_STATE_UNSPECIFIED" | "APP_ACCESS_REQUEST_DEFAULTS_LAST_APPLY_STATE_RUNNING" | "APP_ACCESS_REQUEST_DEFAULTS_LAST_APPLY_STATE_SUCCESS" | "APP_ACCESS_REQUEST_DEFAULTS_LAST_APPLY_STATE_FAILED" | "APP_ACCESS_REQUEST_DEFAULTS_LAST_APPLY_STATE_CANCELING" | "APP_ACCESS_REQUEST_DEFAULTS_LAST_APPLY_STATE_CANCEL_SUCCESS" | "APP_ACCESS_REQUEST_DEFAULTS_LAST_APPLY_STATE_CANCEL_ERROR" | Unrecognized<string>
+"SURFACE_LIFECYCLE_STATE_UNSPECIFIED" | "SURFACE_LIFECYCLE_STATE_ACTIVE" | "SURFACE_LIFECYCLE_STATE_COMPLETE" | "SURFACE_LIFECYCLE_STATE_DELETED" | Unrecognized<string>
 ```

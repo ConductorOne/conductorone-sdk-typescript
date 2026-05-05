@@ -4,6 +4,7 @@
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -28,7 +29,7 @@ import { Result } from "../sdk/types/fp.js";
  * Create Manually Managed App Resource
  *
  * @remarks
- * Invokes the c1.api.app.v1.AppResourceService.CreateManuallyManagedAppResource method.
+ * Create a manually managed app resource tracked directly by ConductorOne under an existing resource type.
  */
 export function appResourceCreateManuallyManagedAppResource(
   client: ConductoroneSDKTypescriptCore,
@@ -105,7 +106,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/api/v1/apps/{app_id}/resource_types/{app_resource_type_id}/resources",
   )(pathParams);
@@ -151,7 +151,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

@@ -1,6 +1,6 @@
 # ConflictMonitorCreateRequest
 
-The ConflictMonitorCreateRequest message.
+The request message for creating a new conflict monitor.
 
 ## Example Usage
 
@@ -14,8 +14,8 @@ let value: ConflictMonitorCreateRequest = {
 
 ## Fields
 
-| Field                                                                         | Type                                                                          | Required                                                                      | Description                                                                   |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `description`                                                                 | *string*                                                                      | :heavy_minus_sign:                                                            | The description field.                                                        |
-| `displayName`                                                                 | *string*                                                                      | :heavy_check_mark:                                                            | The displayName field.                                                        |
-| `notificationConfig`                                                          | [shared.NotificationConfig](../../../sdk/models/shared/notificationconfig.md) | :heavy_minus_sign:                                                            | N/A                                                                           |
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `description`                                                                                             | *string*                                                                                                  | :heavy_minus_sign:                                                                                        | An optional description explaining the purpose of this Separation of Duty rule.                           |
+| `displayName`                                                                                             | *string*                                                                                                  | :heavy_check_mark:                                                                                        | The human-readable name for the conflict monitor.                                                         |
+| `notificationConfig`                                                                                      | [shared.AccessConflictNotificationConfig](../../../sdk/models/shared/accessconflictnotificationconfig.md) | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |

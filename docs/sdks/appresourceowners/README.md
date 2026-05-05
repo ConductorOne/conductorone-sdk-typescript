@@ -1,5 +1,4 @@
 # AppResourceOwners
-(*appResourceOwners*)
 
 ## Overview
 
@@ -180,7 +179,7 @@ run();
 
 ## remove
 
-Invokes the c1.api.app.v1.AppResourceOwners.Remove method.
+Remove a user from the owners of an app resource.
 
 ### Example Usage
 
@@ -346,7 +345,7 @@ run();
 
 ## add
 
-Invokes the c1.api.app.v1.AppResourceOwners.Add method.
+Add a user as an owner of an app resource.
 
 ### Example Usage
 

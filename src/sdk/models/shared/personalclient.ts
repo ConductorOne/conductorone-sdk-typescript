@@ -13,6 +13,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type PersonalClient = {
   /**
    * If set, only allows the CIDRs in the array to use the credential.
+   *
+   * @remarks
+   *  Accepts IPv4 (e.g. 10.0.0.0/24) or IPv6 (e.g. 2001:db8::/32) CIDRs.
    */
   allowSourceCidr?: Array<string> | null | undefined;
   /**
@@ -75,57 +78,6 @@ export const PersonalClient$inboundSchema: z.ZodType<
   ).optional(),
   userId: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type PersonalClient$Outbound = {
-  allowSourceCidr?: Array<string> | null | undefined;
-  clientId?: string | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  displayName?: string | null | undefined;
-  expiresTime?: string | null | undefined;
-  id?: string | null | undefined;
-  lastUsedAt?: string | null | undefined;
-  scopedRoles?: Array<string> | null | undefined;
-  updatedAt?: string | null | undefined;
-  userId?: string | null | undefined;
-};
-
-/** @internal */
-export const PersonalClient$outboundSchema: z.ZodType<
-  PersonalClient$Outbound,
-  z.ZodTypeDef,
-  PersonalClient
-> = z.object({
-  allowSourceCidr: z.nullable(z.array(z.string())).optional(),
-  clientId: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  expiresTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  id: z.nullable(z.string()).optional(),
-  lastUsedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  scopedRoles: z.nullable(z.array(z.string())).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  userId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PersonalClient$ {
-  /** @deprecated use `PersonalClient$inboundSchema` instead. */
-  export const inboundSchema = PersonalClient$inboundSchema;
-  /** @deprecated use `PersonalClient$outboundSchema` instead. */
-  export const outboundSchema = PersonalClient$outboundSchema;
-  /** @deprecated use `PersonalClient$Outbound` instead. */
-  export type Outbound = PersonalClient$Outbound;
-}
-
-export function personalClientToJSON(personalClient: PersonalClient): string {
-  return JSON.stringify(PersonalClient$outboundSchema.parse(personalClient));
-}
 
 export function personalClientFromJSON(
   jsonString: string,

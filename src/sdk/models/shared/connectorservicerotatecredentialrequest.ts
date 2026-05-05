@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * ConnectorServiceRotateCredentialRequest is a request for rotating connector credentials. It uses URL values for input.
@@ -20,16 +17,6 @@ export type ConnectorServiceRotateCredentialRequest = {
    */
   connectorId?: string | null | undefined;
 };
-
-/** @internal */
-export const ConnectorServiceRotateCredentialRequest$inboundSchema: z.ZodType<
-  ConnectorServiceRotateCredentialRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type ConnectorServiceRotateCredentialRequest$Outbound = {
@@ -47,21 +34,6 @@ export const ConnectorServiceRotateCredentialRequest$outboundSchema: z.ZodType<
   connectorId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConnectorServiceRotateCredentialRequest$ {
-  /** @deprecated use `ConnectorServiceRotateCredentialRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    ConnectorServiceRotateCredentialRequest$inboundSchema;
-  /** @deprecated use `ConnectorServiceRotateCredentialRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    ConnectorServiceRotateCredentialRequest$outboundSchema;
-  /** @deprecated use `ConnectorServiceRotateCredentialRequest$Outbound` instead. */
-  export type Outbound = ConnectorServiceRotateCredentialRequest$Outbound;
-}
-
 export function connectorServiceRotateCredentialRequestToJSON(
   connectorServiceRotateCredentialRequest:
     ConnectorServiceRotateCredentialRequest,
@@ -70,21 +42,5 @@ export function connectorServiceRotateCredentialRequestToJSON(
     ConnectorServiceRotateCredentialRequest$outboundSchema.parse(
       connectorServiceRotateCredentialRequest,
     ),
-  );
-}
-
-export function connectorServiceRotateCredentialRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  ConnectorServiceRotateCredentialRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ConnectorServiceRotateCredentialRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'ConnectorServiceRotateCredentialRequest' from JSON`,
   );
 }

@@ -9,12 +9,12 @@ import { BundleAutomationCircuitBreakerState } from "conductorone-sdk-typescript
 
 let value: BundleAutomationCircuitBreakerState =
   "CIRCUIT_BREAKER_STATE_UNSPECIFIED";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
-
 ```typescript
-"CIRCUIT_BREAKER_STATE_UNSPECIFIED" | "CIRCUIT_BREAKER_STATE_TRIGGERED" | "CIRCUIT_BREAKER_STATE_BYPASS" | Unrecognized<string>
+"CIRCUIT_BREAKER_STATE_UNSPECIFIED" | "CIRCUIT_BREAKER_STATE_TRIGGERED" | "CIRCUIT_BREAKER_STATE_BYPASS" | "CIRCUIT_BREAKER_STATE_SUPPORT_DISABLED" | Unrecognized<string>
 ```

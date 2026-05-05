@@ -4,6 +4,7 @@
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -28,7 +29,7 @@ import { Result } from "../sdk/types/fp.js";
  * Process Now
  *
  * @remarks
- * Invokes the c1.api.task.v1.TaskActionsService.ProcessNow method.
+ * Trigger immediate processing of a task, bypassing any scheduled wait. For tasks linked to an external system, this also attempts to sync the external state.
  */
 export function taskActionsProcessNow(
   client: ConductoroneSDKTypescriptCore,
@@ -95,7 +96,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/api/v1/tasks/{task_id}/action/process")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -138,7 +138,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

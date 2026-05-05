@@ -19,33 +19,6 @@ export const TargetTest$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type TargetTest$Outbound = {};
-
-/** @internal */
-export const TargetTest$outboundSchema: z.ZodType<
-  TargetTest$Outbound,
-  z.ZodTypeDef,
-  TargetTest
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TargetTest$ {
-  /** @deprecated use `TargetTest$inboundSchema` instead. */
-  export const inboundSchema = TargetTest$inboundSchema;
-  /** @deprecated use `TargetTest$outboundSchema` instead. */
-  export const outboundSchema = TargetTest$outboundSchema;
-  /** @deprecated use `TargetTest$Outbound` instead. */
-  export type Outbound = TargetTest$Outbound;
-}
-
-export function targetTestToJSON(targetTest: TargetTest): string {
-  return JSON.stringify(TargetTest$outboundSchema.parse(targetTest));
-}
-
 export function targetTestFromJSON(
   jsonString: string,
 ): SafeParseResult<TargetTest, SDKValidationError> {

@@ -9,20 +9,18 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AttributeValue,
   AttributeValue$inboundSchema,
-  AttributeValue$Outbound,
-  AttributeValue$outboundSchema,
 } from "./attributevalue.js";
 
 /**
- * The ListRiskLevelsResponse message.
+ * ListRiskLevelsResponse is the response for listing risk level attribute values.
  */
 export type ListRiskLevelsResponse = {
   /**
-   * The list field.
+   * The list of risk level attribute values.
    */
   list?: Array<AttributeValue> | null | undefined;
   /**
-   * The nextPageToken field.
+   * The token to retrieve the next page of results, or empty if there are no more results.
    */
   nextPageToken?: string | null | undefined;
 };
@@ -36,43 +34,6 @@ export const ListRiskLevelsResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(AttributeValue$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ListRiskLevelsResponse$Outbound = {
-  list?: Array<AttributeValue$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ListRiskLevelsResponse$outboundSchema: z.ZodType<
-  ListRiskLevelsResponse$Outbound,
-  z.ZodTypeDef,
-  ListRiskLevelsResponse
-> = z.object({
-  list: z.nullable(z.array(AttributeValue$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListRiskLevelsResponse$ {
-  /** @deprecated use `ListRiskLevelsResponse$inboundSchema` instead. */
-  export const inboundSchema = ListRiskLevelsResponse$inboundSchema;
-  /** @deprecated use `ListRiskLevelsResponse$outboundSchema` instead. */
-  export const outboundSchema = ListRiskLevelsResponse$outboundSchema;
-  /** @deprecated use `ListRiskLevelsResponse$Outbound` instead. */
-  export type Outbound = ListRiskLevelsResponse$Outbound;
-}
-
-export function listRiskLevelsResponseToJSON(
-  listRiskLevelsResponse: ListRiskLevelsResponse,
-): string {
-  return JSON.stringify(
-    ListRiskLevelsResponse$outboundSchema.parse(listRiskLevelsResponse),
-  );
-}
 
 export function listRiskLevelsResponseFromJSON(
   jsonString: string,

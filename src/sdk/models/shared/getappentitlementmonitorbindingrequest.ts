@@ -3,17 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 /**
- * The entitlementGroup field.
+ * Which side of the conflict monitor (A or B) this binding belongs to.
  */
 export const GetAppEntitlementMonitorBindingRequestEntitlementGroup = {
   EntitlementGroupUnspecified: "ENTITLEMENT_GROUP_UNSPECIFIED",
@@ -21,86 +15,46 @@ export const GetAppEntitlementMonitorBindingRequestEntitlementGroup = {
   EntitlementGroupB: "ENTITLEMENT_GROUP_B",
 } as const;
 /**
- * The entitlementGroup field.
+ * Which side of the conflict monitor (A or B) this binding belongs to.
  */
 export type GetAppEntitlementMonitorBindingRequestEntitlementGroup = OpenEnum<
   typeof GetAppEntitlementMonitorBindingRequestEntitlementGroup
 >;
 
 /**
- * The GetAppEntitlementMonitorBindingRequest message.
+ * The request message for retrieving a single app entitlement monitor binding.
  */
 export type GetAppEntitlementMonitorBindingRequest = {
   /**
-   * The appEntitlementId field.
+   * The unique identifier of the app entitlement bound to the monitor.
    */
   appEntitlementId?: string | null | undefined;
   /**
-   * The appId field.
+   * The unique identifier of the application containing the entitlement.
    */
   appId?: string | null | undefined;
   /**
-   * The entitlementGroup field.
+   * Which side of the conflict monitor (A or B) this binding belongs to.
    */
   entitlementGroup?:
     | GetAppEntitlementMonitorBindingRequestEntitlementGroup
     | null
     | undefined;
   /**
-   * The monitorId field.
+   * The unique identifier of the conflict monitor.
    */
   monitorId?: string | null | undefined;
 };
 
 /** @internal */
-export const GetAppEntitlementMonitorBindingRequestEntitlementGroup$inboundSchema:
-  z.ZodType<
-    GetAppEntitlementMonitorBindingRequestEntitlementGroup,
-    z.ZodTypeDef,
-    unknown
-  > = z
-    .union([
-      z.nativeEnum(GetAppEntitlementMonitorBindingRequestEntitlementGroup),
-      z.string().transform(catchUnrecognizedEnum),
-    ]);
-
-/** @internal */
 export const GetAppEntitlementMonitorBindingRequestEntitlementGroup$outboundSchema:
   z.ZodType<
-    GetAppEntitlementMonitorBindingRequestEntitlementGroup,
+    string,
     z.ZodTypeDef,
     GetAppEntitlementMonitorBindingRequestEntitlementGroup
-  > = z.union([
-    z.nativeEnum(GetAppEntitlementMonitorBindingRequestEntitlementGroup),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAppEntitlementMonitorBindingRequestEntitlementGroup$ {
-  /** @deprecated use `GetAppEntitlementMonitorBindingRequestEntitlementGroup$inboundSchema` instead. */
-  export const inboundSchema =
-    GetAppEntitlementMonitorBindingRequestEntitlementGroup$inboundSchema;
-  /** @deprecated use `GetAppEntitlementMonitorBindingRequestEntitlementGroup$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAppEntitlementMonitorBindingRequestEntitlementGroup$outboundSchema;
-}
-
-/** @internal */
-export const GetAppEntitlementMonitorBindingRequest$inboundSchema: z.ZodType<
-  GetAppEntitlementMonitorBindingRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  entitlementGroup: z.nullable(
-    GetAppEntitlementMonitorBindingRequestEntitlementGroup$inboundSchema,
-  ).optional(),
-  monitorId: z.nullable(z.string()).optional(),
-});
+  > = openEnums.outboundSchema(
+    GetAppEntitlementMonitorBindingRequestEntitlementGroup,
+  );
 
 /** @internal */
 export type GetAppEntitlementMonitorBindingRequest$Outbound = {
@@ -124,21 +78,6 @@ export const GetAppEntitlementMonitorBindingRequest$outboundSchema: z.ZodType<
   monitorId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAppEntitlementMonitorBindingRequest$ {
-  /** @deprecated use `GetAppEntitlementMonitorBindingRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    GetAppEntitlementMonitorBindingRequest$inboundSchema;
-  /** @deprecated use `GetAppEntitlementMonitorBindingRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAppEntitlementMonitorBindingRequest$outboundSchema;
-  /** @deprecated use `GetAppEntitlementMonitorBindingRequest$Outbound` instead. */
-  export type Outbound = GetAppEntitlementMonitorBindingRequest$Outbound;
-}
-
 export function getAppEntitlementMonitorBindingRequestToJSON(
   getAppEntitlementMonitorBindingRequest:
     GetAppEntitlementMonitorBindingRequest,
@@ -147,16 +86,5 @@ export function getAppEntitlementMonitorBindingRequestToJSON(
     GetAppEntitlementMonitorBindingRequest$outboundSchema.parse(
       getAppEntitlementMonitorBindingRequest,
     ),
-  );
-}
-
-export function getAppEntitlementMonitorBindingRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetAppEntitlementMonitorBindingRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetAppEntitlementMonitorBindingRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAppEntitlementMonitorBindingRequest' from JSON`,
   );
 }

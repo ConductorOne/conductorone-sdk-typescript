@@ -32,7 +32,6 @@ export const ConflictMonitorRefs$inboundSchema: z.ZodType<
   conflictMonitorRefs: z.nullable(z.array(ConflictMonitorRef$inboundSchema))
     .optional(),
 });
-
 /** @internal */
 export type ConflictMonitorRefs$Outbound = {
   conflictMonitorRefs?: Array<ConflictMonitorRef$Outbound> | null | undefined;
@@ -48,19 +47,6 @@ export const ConflictMonitorRefs$outboundSchema: z.ZodType<
     .optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConflictMonitorRefs$ {
-  /** @deprecated use `ConflictMonitorRefs$inboundSchema` instead. */
-  export const inboundSchema = ConflictMonitorRefs$inboundSchema;
-  /** @deprecated use `ConflictMonitorRefs$outboundSchema` instead. */
-  export const outboundSchema = ConflictMonitorRefs$outboundSchema;
-  /** @deprecated use `ConflictMonitorRefs$Outbound` instead. */
-  export type Outbound = ConflictMonitorRefs$Outbound;
-}
-
 export function conflictMonitorRefsToJSON(
   conflictMonitorRefs: ConflictMonitorRefs,
 ): string {
@@ -68,7 +54,6 @@ export function conflictMonitorRefsToJSON(
     ConflictMonitorRefs$outboundSchema.parse(conflictMonitorRefs),
   );
 }
-
 export function conflictMonitorRefsFromJSON(
   jsonString: string,
 ): SafeParseResult<ConflictMonitorRefs, SDKValidationError> {

@@ -9,17 +9,15 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$inboundSchema,
-  AppEntitlementRef$Outbound,
-  AppEntitlementRef$outboundSchema,
 } from "./appentitlementref.js";
 
 /**
- * The RequestSchemaServiceFindBindingForAppEntitlementResponse message.
+ * The response message containing the binding for the specified app entitlement.
  */
 export type RequestSchemaServiceFindBindingForAppEntitlementResponse = {
   entitlementRef?: AppEntitlementRef | null | undefined;
   /**
-   * The requestSchemaId field.
+   * The unique identifier of the request schema bound to this entitlement, if any.
    */
   requestSchemaId?: string | null | undefined;
 };
@@ -34,50 +32,6 @@ export const RequestSchemaServiceFindBindingForAppEntitlementResponse$inboundSch
     entitlementRef: z.nullable(AppEntitlementRef$inboundSchema).optional(),
     requestSchemaId: z.nullable(z.string()).optional(),
   });
-
-/** @internal */
-export type RequestSchemaServiceFindBindingForAppEntitlementResponse$Outbound =
-  {
-    entitlementRef?: AppEntitlementRef$Outbound | null | undefined;
-    requestSchemaId?: string | null | undefined;
-  };
-
-/** @internal */
-export const RequestSchemaServiceFindBindingForAppEntitlementResponse$outboundSchema:
-  z.ZodType<
-    RequestSchemaServiceFindBindingForAppEntitlementResponse$Outbound,
-    z.ZodTypeDef,
-    RequestSchemaServiceFindBindingForAppEntitlementResponse
-  > = z.object({
-    entitlementRef: z.nullable(AppEntitlementRef$outboundSchema).optional(),
-    requestSchemaId: z.nullable(z.string()).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestSchemaServiceFindBindingForAppEntitlementResponse$ {
-  /** @deprecated use `RequestSchemaServiceFindBindingForAppEntitlementResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestSchemaServiceFindBindingForAppEntitlementResponse$inboundSchema;
-  /** @deprecated use `RequestSchemaServiceFindBindingForAppEntitlementResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestSchemaServiceFindBindingForAppEntitlementResponse$outboundSchema;
-  /** @deprecated use `RequestSchemaServiceFindBindingForAppEntitlementResponse$Outbound` instead. */
-  export type Outbound =
-    RequestSchemaServiceFindBindingForAppEntitlementResponse$Outbound;
-}
-
-export function requestSchemaServiceFindBindingForAppEntitlementResponseToJSON(
-  requestSchemaServiceFindBindingForAppEntitlementResponse:
-    RequestSchemaServiceFindBindingForAppEntitlementResponse,
-): string {
-  return JSON.stringify(
-    RequestSchemaServiceFindBindingForAppEntitlementResponse$outboundSchema
-      .parse(requestSchemaServiceFindBindingForAppEntitlementResponse),
-  );
-}
 
 export function requestSchemaServiceFindBindingForAppEntitlementResponseFromJSON(
   jsonString: string,

@@ -12,6 +12,7 @@ let value: TextField = {};
 
 ## Fields
 
-| Field                | Type                 | Required             | Description          |
-| -------------------- | -------------------- | -------------------- | -------------------- |
-| `multiline`          | *boolean*            | :heavy_minus_sign:   | The multiline field. |
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `multiline`                                                                        | *boolean*                                                                          | :heavy_minus_sign:                                                                 | The multiline field.                                                               |
+| `suffix`                                                                           | *string*                                                                           | :heavy_minus_sign:                                                                 | Static text displayed as an end adornment (e.g. ".example.com" for domain fields). |

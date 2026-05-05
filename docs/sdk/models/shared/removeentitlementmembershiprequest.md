@@ -12,6 +12,6 @@ let value: RemoveEntitlementMembershipRequest = {};
 
 ## Fields
 
-| Field                | Type                 | Required             | Description          |
-| -------------------- | -------------------- | -------------------- | -------------------- |
-| `appUserId`          | *string*             | :heavy_minus_sign:   | The appUserId field. |
+| Field                                              | Type                                               | Required                                           | Description                                        |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| `appUserId`                                        | *string*                                           | :heavy_minus_sign:                                 | The ID of the app user whose membership to remove. |

@@ -4,6 +4,7 @@
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
 import { encodeJSON } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -31,7 +32,7 @@ import { Result } from "../sdk/types/fp.js";
  * @remarks
  * ListEvents pulls Events from the ConductorOne system.
  *
- *  This endpoint should be used to synchorize the
+ *  This endpoint should be used to synchronize the
  *  system log events to external systems.
  */
 export function systemLogListEvents(
@@ -136,7 +137,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

@@ -13,8 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppResourceView,
   AppResourceView$inboundSchema,
-  AppResourceView$Outbound,
-  AppResourceView$outboundSchema,
 } from "./appresourceview.js";
 
 /**
@@ -29,19 +27,19 @@ export type SearchAppResourcesResponseExpanded = {
 };
 
 /**
- * The SearchAppResourcesResponse message.
+ * The SearchAppResourcesResponse message contains a list of results and a nextPageToken if applicable.
  */
 export type SearchAppResourcesResponse = {
   /**
-   * The expanded field.
+   * List of serialized related objects.
    */
   expanded?: Array<SearchAppResourcesResponseExpanded> | null | undefined;
   /**
-   * The list field.
+   * The list of app resource results.
    */
   list?: Array<AppResourceView> | null | undefined;
   /**
-   * The nextPageToken field.
+   * The token for fetching the next page of results.
    */
   nextPageToken?: string | null | undefined;
 };
@@ -62,54 +60,6 @@ export const SearchAppResourcesResponseExpanded$inboundSchema: z.ZodType<
     "@type": "atType",
   });
 });
-
-/** @internal */
-export type SearchAppResourcesResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const SearchAppResourcesResponseExpanded$outboundSchema: z.ZodType<
-  SearchAppResourcesResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  SearchAppResourcesResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchAppResourcesResponseExpanded$ {
-  /** @deprecated use `SearchAppResourcesResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema = SearchAppResourcesResponseExpanded$inboundSchema;
-  /** @deprecated use `SearchAppResourcesResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchAppResourcesResponseExpanded$outboundSchema;
-  /** @deprecated use `SearchAppResourcesResponseExpanded$Outbound` instead. */
-  export type Outbound = SearchAppResourcesResponseExpanded$Outbound;
-}
-
-export function searchAppResourcesResponseExpandedToJSON(
-  searchAppResourcesResponseExpanded: SearchAppResourcesResponseExpanded,
-): string {
-  return JSON.stringify(
-    SearchAppResourcesResponseExpanded$outboundSchema.parse(
-      searchAppResourcesResponseExpanded,
-    ),
-  );
-}
 
 export function searchAppResourcesResponseExpandedFromJSON(
   jsonString: string,
@@ -134,50 +84,6 @@ export const SearchAppResourcesResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(AppResourceView$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type SearchAppResourcesResponse$Outbound = {
-  expanded?:
-    | Array<SearchAppResourcesResponseExpanded$Outbound>
-    | null
-    | undefined;
-  list?: Array<AppResourceView$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const SearchAppResourcesResponse$outboundSchema: z.ZodType<
-  SearchAppResourcesResponse$Outbound,
-  z.ZodTypeDef,
-  SearchAppResourcesResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() => SearchAppResourcesResponseExpanded$outboundSchema)),
-  ).optional(),
-  list: z.nullable(z.array(AppResourceView$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchAppResourcesResponse$ {
-  /** @deprecated use `SearchAppResourcesResponse$inboundSchema` instead. */
-  export const inboundSchema = SearchAppResourcesResponse$inboundSchema;
-  /** @deprecated use `SearchAppResourcesResponse$outboundSchema` instead. */
-  export const outboundSchema = SearchAppResourcesResponse$outboundSchema;
-  /** @deprecated use `SearchAppResourcesResponse$Outbound` instead. */
-  export type Outbound = SearchAppResourcesResponse$Outbound;
-}
-
-export function searchAppResourcesResponseToJSON(
-  searchAppResourcesResponse: SearchAppResourcesResponse,
-): string {
-  return JSON.stringify(
-    SearchAppResourcesResponse$outboundSchema.parse(searchAppResourcesResponse),
-  );
-}
 
 export function searchAppResourcesResponseFromJSON(
   jsonString: string,

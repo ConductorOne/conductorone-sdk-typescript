@@ -1,6 +1,6 @@
 # OrgDomain
 
-The OrgDomain message.
+OrgDomain represents a verified email domain associated with the tenant.
 
 ## Example Usage
 
@@ -16,6 +16,6 @@ let value: OrgDomain = {};
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `deletedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `domain`                                                                                      | *string*                                                                                      | :heavy_minus_sign:                                                                            | The domain field.                                                                             |
-| `id`                                                                                          | *string*                                                                                      | :heavy_minus_sign:                                                                            | The id field.                                                                                 |
+| `domain`                                                                                      | *string*                                                                                      | :heavy_minus_sign:                                                                            | The verified domain name (e.g., "example.com").                                               |
+| `id`                                                                                          | *string*                                                                                      | :heavy_minus_sign:                                                                            | The unique identifier of the domain record.                                                   |
 | `updatedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |

@@ -1,5 +1,4 @@
 # AppEntitlementOwners
-(*appEntitlementOwners*)
 
 ## Overview
 

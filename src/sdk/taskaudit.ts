@@ -13,7 +13,7 @@ export class TaskAudit extends ClientSDK {
    * List
    *
    * @remarks
-   * Invokes the c1.api.task.v1.TaskAudit.List method.
+   * List audit trail events for a task.
    */
   async list(
     request?: shared.TaskAuditListRequest | undefined,

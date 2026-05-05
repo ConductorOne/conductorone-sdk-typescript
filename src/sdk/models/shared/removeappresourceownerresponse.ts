@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The RemoveAppResourceOwnerResponse message.
+ * The empty response message for removing an owner from an app resource.
  */
 export type RemoveAppResourceOwnerResponse = {};
 
@@ -18,39 +18,6 @@ export const RemoveAppResourceOwnerResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
-/** @internal */
-export type RemoveAppResourceOwnerResponse$Outbound = {};
-
-/** @internal */
-export const RemoveAppResourceOwnerResponse$outboundSchema: z.ZodType<
-  RemoveAppResourceOwnerResponse$Outbound,
-  z.ZodTypeDef,
-  RemoveAppResourceOwnerResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RemoveAppResourceOwnerResponse$ {
-  /** @deprecated use `RemoveAppResourceOwnerResponse$inboundSchema` instead. */
-  export const inboundSchema = RemoveAppResourceOwnerResponse$inboundSchema;
-  /** @deprecated use `RemoveAppResourceOwnerResponse$outboundSchema` instead. */
-  export const outboundSchema = RemoveAppResourceOwnerResponse$outboundSchema;
-  /** @deprecated use `RemoveAppResourceOwnerResponse$Outbound` instead. */
-  export type Outbound = RemoveAppResourceOwnerResponse$Outbound;
-}
-
-export function removeAppResourceOwnerResponseToJSON(
-  removeAppResourceOwnerResponse: RemoveAppResourceOwnerResponse,
-): string {
-  return JSON.stringify(
-    RemoveAppResourceOwnerResponse$outboundSchema.parse(
-      removeAppResourceOwnerResponse,
-    ),
-  );
-}
 
 export function removeAppResourceOwnerResponseFromJSON(
   jsonString: string,

@@ -1,0 +1,17 @@
+# TenantAuthConfigServiceGetResponse
+
+The TenantAuthConfigServiceGetResponse message.
+
+## Example Usage
+
+```typescript
+import { TenantAuthConfigServiceGetResponse } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: TenantAuthConfigServiceGetResponse = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                               | Required                                                                                                                                                                                                                                           | Description                                                                                                                                                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tenantAuthConfig`                                                                                                                                                                                                                                 | [shared.TenantAuthConfig](../../../sdk/models/shared/tenantauthconfig.md)                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                 | The TenantAuthConfig message.<br/><br/>This message contains a oneof named provider_config. Only a single field of the following list may be set at a time:<br/>  - google<br/>  - microsoft<br/>  - okta<br/>  - onelogin<br/>  - jumpcloud<br/>  - pingone<br/>  - oidc<br/>  - c1Local<br/> |

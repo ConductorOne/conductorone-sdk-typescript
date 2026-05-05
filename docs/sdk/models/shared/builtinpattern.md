@@ -1,0 +1,30 @@
+# BuiltInPattern
+
+BuiltInPattern references a ConductorOne-maintained DLP pattern.
+ The specific pattern and its configuration are encoded as a oneof.
+
+This message contains a oneof named config. Only a single field of the following list may be set at a time:
+  - piiRedaction
+  - creditCardBlocking
+  - queryScopeLimit
+  - writeAuthorization
+  - sensitiveFileGuard
+
+
+## Example Usage
+
+```typescript
+import { BuiltInPattern } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: BuiltInPattern = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                           | Type                                                                                                                                                                                            | Required                                                                                                                                                                                        | Description                                                                                                                                                                                     |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `creditCardBlockingConfig`                                                                                                                                                                      | [shared.CreditCardBlockingConfig](../../../sdk/models/shared/creditcardblockingconfig.md)                                                                                                       | :heavy_minus_sign:                                                                                                                                                                              | CreditCardBlockingConfig denies any tool call whose output contains a<br/> Luhn-valid credit card number. No configuration fields today; the<br/> presence of the oneof arm is the whole configuration. |
+| `piiRedactionConfig`                                                                                                                                                                            | [shared.PIIRedactionConfig](../../../sdk/models/shared/piiredactionconfig.md)                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                              | PIIRedactionConfig configures post-tool-use redaction of sensitive fields.                                                                                                                      |
+| `queryScopeLimitConfig`                                                                                                                                                                         | [shared.QueryScopeLimitConfig](../../../sdk/models/shared/queryscopelimitconfig.md)                                                                                                             | :heavy_minus_sign:                                                                                                                                                                              | QueryScopeLimitConfig caps numeric fields (e.g. limit, page_size) in tool<br/> input so callers cannot request unbounded data.                                                                  |
+| `sensitiveFileGuardConfig`                                                                                                                                                                      | [shared.SensitiveFileGuardConfig](../../../sdk/models/shared/sensitivefileguardconfig.md)                                                                                                       | :heavy_minus_sign:                                                                                                                                                                              | SensitiveFileGuardConfig blocks tool calls that reference sensitive file<br/> paths or directories.                                                                                             |
+| `writeAuthorizationConfig`                                                                                                                                                                      | [shared.WriteAuthorizationConfig](../../../sdk/models/shared/writeauthorizationconfig.md)                                                                                                       | :heavy_minus_sign:                                                                                                                                                                              | WriteAuthorizationConfig blocks tool calls whose ToolClassification is in<br/> blocked_classifications, optionally permitting them within business hours.                                       |

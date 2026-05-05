@@ -51,55 +51,6 @@ export const ExpiringUserDelegationBinding$inboundSchema: z.ZodType<
   userId: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type ExpiringUserDelegationBinding$Outbound = {
-  createdAt?: string | null | undefined;
-  delegatedUserId?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  expirationAt?: string | null | undefined;
-  startAt?: string | null | undefined;
-  updatedAt?: string | null | undefined;
-  userId?: string | null | undefined;
-};
-
-/** @internal */
-export const ExpiringUserDelegationBinding$outboundSchema: z.ZodType<
-  ExpiringUserDelegationBinding$Outbound,
-  z.ZodTypeDef,
-  ExpiringUserDelegationBinding
-> = z.object({
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  delegatedUserId: z.nullable(z.string()).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  expirationAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  startAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  userId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExpiringUserDelegationBinding$ {
-  /** @deprecated use `ExpiringUserDelegationBinding$inboundSchema` instead. */
-  export const inboundSchema = ExpiringUserDelegationBinding$inboundSchema;
-  /** @deprecated use `ExpiringUserDelegationBinding$outboundSchema` instead. */
-  export const outboundSchema = ExpiringUserDelegationBinding$outboundSchema;
-  /** @deprecated use `ExpiringUserDelegationBinding$Outbound` instead. */
-  export type Outbound = ExpiringUserDelegationBinding$Outbound;
-}
-
-export function expiringUserDelegationBindingToJSON(
-  expiringUserDelegationBinding: ExpiringUserDelegationBinding,
-): string {
-  return JSON.stringify(
-    ExpiringUserDelegationBinding$outboundSchema.parse(
-      expiringUserDelegationBinding,
-    ),
-  );
-}
-
 export function expiringUserDelegationBindingFromJSON(
   jsonString: string,
 ): SafeParseResult<ExpiringUserDelegationBinding, SDKValidationError> {

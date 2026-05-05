@@ -49,7 +49,6 @@ export const AppUserCreatedTrigger$inboundSchema: z.ZodType<
   appIdCel: z.nullable(z.string()).optional(),
   condition: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type AppUserCreatedTrigger$Outbound = {
   appId?: string | null | undefined;
@@ -68,19 +67,6 @@ export const AppUserCreatedTrigger$outboundSchema: z.ZodType<
   condition: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUserCreatedTrigger$ {
-  /** @deprecated use `AppUserCreatedTrigger$inboundSchema` instead. */
-  export const inboundSchema = AppUserCreatedTrigger$inboundSchema;
-  /** @deprecated use `AppUserCreatedTrigger$outboundSchema` instead. */
-  export const outboundSchema = AppUserCreatedTrigger$outboundSchema;
-  /** @deprecated use `AppUserCreatedTrigger$Outbound` instead. */
-  export type Outbound = AppUserCreatedTrigger$Outbound;
-}
-
 export function appUserCreatedTriggerToJSON(
   appUserCreatedTrigger: AppUserCreatedTrigger,
 ): string {
@@ -88,7 +74,6 @@ export function appUserCreatedTriggerToJSON(
     AppUserCreatedTrigger$outboundSchema.parse(appUserCreatedTrigger),
   );
 }
-
 export function appUserCreatedTriggerFromJSON(
   jsonString: string,
 ): SafeParseResult<AppUserCreatedTrigger, SDKValidationError> {

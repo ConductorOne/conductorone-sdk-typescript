@@ -12,7 +12,7 @@ let value: WebhooksServiceUpdateRequest = {};
 
 ## Fields
 
-| Field                                                     | Type                                                      | Required                                                  | Description                                               |
-| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
-| `updateMask`                                              | *string*                                                  | :heavy_minus_sign:                                        | N/A                                                       |
-| `webhook`                                                 | [shared.Webhook1](../../../sdk/models/shared/webhook1.md) | :heavy_minus_sign:                                        | N/A                                                       |
+| Field                                                                   | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `updateMask`                                                            | *string*                                                                | :heavy_minus_sign:                                                      | N/A                                                                     |
+| `webhook`                                                               | [shared.WebhookEndpoint](../../../sdk/models/shared/webhookendpoint.md) | :heavy_minus_sign:                                                      | N/A                                                                     |

@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   UserRef,
-  UserRef$inboundSchema,
   UserRef$Outbound,
   UserRef$outboundSchema,
 } from "./userref.js";
@@ -18,34 +14,22 @@ import {
  */
 export type PersonalClientSearchServiceSearchRequest = {
   /**
-   * The pageSize field.
+   * The maximum number of results to return per page.
    */
   pageSize?: number | null | undefined;
   /**
-   * The pageToken field.
+   * A pagination token returned from a previous Search call.
    */
   pageToken?: string | null | undefined;
   /**
-   * The query field.
+   * A text query to filter personal clients by display name.
    */
   query?: string | null | undefined;
   /**
-   * The users field.
+   * Filter results to personal clients owned by the specified users.
    */
   users?: Array<UserRef> | null | undefined;
 };
-
-/** @internal */
-export const PersonalClientSearchServiceSearchRequest$inboundSchema: z.ZodType<
-  PersonalClientSearchServiceSearchRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
-  users: z.nullable(z.array(UserRef$inboundSchema)).optional(),
-});
 
 /** @internal */
 export type PersonalClientSearchServiceSearchRequest$Outbound = {
@@ -67,21 +51,6 @@ export const PersonalClientSearchServiceSearchRequest$outboundSchema: z.ZodType<
   users: z.nullable(z.array(UserRef$outboundSchema)).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PersonalClientSearchServiceSearchRequest$ {
-  /** @deprecated use `PersonalClientSearchServiceSearchRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    PersonalClientSearchServiceSearchRequest$inboundSchema;
-  /** @deprecated use `PersonalClientSearchServiceSearchRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PersonalClientSearchServiceSearchRequest$outboundSchema;
-  /** @deprecated use `PersonalClientSearchServiceSearchRequest$Outbound` instead. */
-  export type Outbound = PersonalClientSearchServiceSearchRequest$Outbound;
-}
-
 export function personalClientSearchServiceSearchRequestToJSON(
   personalClientSearchServiceSearchRequest:
     PersonalClientSearchServiceSearchRequest,
@@ -90,21 +59,5 @@ export function personalClientSearchServiceSearchRequestToJSON(
     PersonalClientSearchServiceSearchRequest$outboundSchema.parse(
       personalClientSearchServiceSearchRequest,
     ),
-  );
-}
-
-export function personalClientSearchServiceSearchRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  PersonalClientSearchServiceSearchRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PersonalClientSearchServiceSearchRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'PersonalClientSearchServiceSearchRequest' from JSON`,
   );
 }

@@ -1,5 +1,4 @@
 # AppAccessRequestsDefaults
-(*appAccessRequestsDefaults*)
 
 ## Overview
 
@@ -11,7 +10,7 @@
 
 ## getAppAccessRequestsDefaults
 
-Invokes the c1.api.app.v1.AppAccessRequestsDefaultsService.GetAppAccessRequestsDefaults method.
+Retrieve the current access request default settings for an app.
 
 ### Example Usage
 
@@ -90,7 +89,7 @@ run();
 
 ## createAppAccessRequestsDefaults
 
-Invokes the c1.api.app.v1.AppAccessRequestsDefaultsService.CreateAppAccessRequestsDefaults method.
+Create or replace the access request default settings for an app.
 
 ### Example Usage
 
@@ -169,7 +168,7 @@ run();
 
 ## cancelAppAccessRequestsDefaults
 
-Invokes the c1.api.app.v1.AppAccessRequestsDefaultsService.CancelAppAccessRequestsDefaults method.
+Cancel an in-progress apply operation for the app's access request defaults.
 
 ### Example Usage
 

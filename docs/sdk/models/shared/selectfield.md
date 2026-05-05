@@ -12,6 +12,7 @@ let value: SelectField = {};
 
 ## Fields
 
-| Field                                                               | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `options`                                                           | [shared.SelectOption](../../../sdk/models/shared/selectoption.md)[] | :heavy_minus_sign:                                                  | The options field.                                                  |
+| Field                                                                   | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `options`                                                               | [shared.SelectOption](../../../sdk/models/shared/selectoption.md)[]     | :heavy_minus_sign:                                                      | The options field.                                                      |
+| `type`                                                                  | [shared.SelectFieldType](../../../sdk/models/shared/selectfieldtype.md) | :heavy_minus_sign:                                                      | The type field.                                                         |

@@ -9,14 +9,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FacetRangeItem,
   FacetRangeItem$inboundSchema,
-  FacetRangeItem$Outbound,
-  FacetRangeItem$outboundSchema,
 } from "./facetrangeitem.js";
 import {
   FacetValueItem,
   FacetValueItem$inboundSchema,
-  FacetValueItem$Outbound,
-  FacetValueItem$outboundSchema,
 } from "./facetvalueitem.js";
 
 /**
@@ -57,45 +53,6 @@ export const FacetCategory$inboundSchema: z.ZodType<
   range: z.nullable(FacetRangeItem$inboundSchema).optional(),
   value: z.nullable(FacetValueItem$inboundSchema).optional(),
 });
-
-/** @internal */
-export type FacetCategory$Outbound = {
-  displayName?: string | null | undefined;
-  iconUrl?: string | null | undefined;
-  param?: string | null | undefined;
-  range?: FacetRangeItem$Outbound | null | undefined;
-  value?: FacetValueItem$Outbound | null | undefined;
-};
-
-/** @internal */
-export const FacetCategory$outboundSchema: z.ZodType<
-  FacetCategory$Outbound,
-  z.ZodTypeDef,
-  FacetCategory
-> = z.object({
-  displayName: z.nullable(z.string()).optional(),
-  iconUrl: z.nullable(z.string()).optional(),
-  param: z.nullable(z.string()).optional(),
-  range: z.nullable(FacetRangeItem$outboundSchema).optional(),
-  value: z.nullable(FacetValueItem$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FacetCategory$ {
-  /** @deprecated use `FacetCategory$inboundSchema` instead. */
-  export const inboundSchema = FacetCategory$inboundSchema;
-  /** @deprecated use `FacetCategory$outboundSchema` instead. */
-  export const outboundSchema = FacetCategory$outboundSchema;
-  /** @deprecated use `FacetCategory$Outbound` instead. */
-  export type Outbound = FacetCategory$Outbound;
-}
-
-export function facetCategoryToJSON(facetCategory: FacetCategory): string {
-  return JSON.stringify(FacetCategory$outboundSchema.parse(facetCategory));
-}
 
 export function facetCategoryFromJSON(
   jsonString: string,

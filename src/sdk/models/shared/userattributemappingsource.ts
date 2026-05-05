@@ -46,49 +46,6 @@ export const UserAttributeMappingSource$inboundSchema: z.ZodType<
   value: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type UserAttributeMappingSource$Outbound = {
-  appId?: string | null | undefined;
-  appUserId?: string | null | undefined;
-  appUserProfileAttributeKey?: string | null | undefined;
-  userAttributeMappingId?: string | null | undefined;
-  value?: string | null | undefined;
-};
-
-/** @internal */
-export const UserAttributeMappingSource$outboundSchema: z.ZodType<
-  UserAttributeMappingSource$Outbound,
-  z.ZodTypeDef,
-  UserAttributeMappingSource
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  appUserId: z.nullable(z.string()).optional(),
-  appUserProfileAttributeKey: z.nullable(z.string()).optional(),
-  userAttributeMappingId: z.nullable(z.string()).optional(),
-  value: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UserAttributeMappingSource$ {
-  /** @deprecated use `UserAttributeMappingSource$inboundSchema` instead. */
-  export const inboundSchema = UserAttributeMappingSource$inboundSchema;
-  /** @deprecated use `UserAttributeMappingSource$outboundSchema` instead. */
-  export const outboundSchema = UserAttributeMappingSource$outboundSchema;
-  /** @deprecated use `UserAttributeMappingSource$Outbound` instead. */
-  export type Outbound = UserAttributeMappingSource$Outbound;
-}
-
-export function userAttributeMappingSourceToJSON(
-  userAttributeMappingSource: UserAttributeMappingSource,
-): string {
-  return JSON.stringify(
-    UserAttributeMappingSource$outboundSchema.parse(userAttributeMappingSource),
-  );
-}
-
 export function userAttributeMappingSourceFromJSON(
   jsonString: string,
 ): SafeParseResult<UserAttributeMappingSource, SDKValidationError> {

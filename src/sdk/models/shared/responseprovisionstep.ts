@@ -50,7 +50,6 @@ export const ResponseProvisionStep$inboundSchema: z.ZodType<
   errored: z.nullable(ResponseProvisionStepErrored$inboundSchema).optional(),
   version: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type ResponseProvisionStep$Outbound = {
   complete?: ResponseProvisionStepComplete$Outbound | null | undefined;
@@ -69,19 +68,6 @@ export const ResponseProvisionStep$outboundSchema: z.ZodType<
   version: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseProvisionStep$ {
-  /** @deprecated use `ResponseProvisionStep$inboundSchema` instead. */
-  export const inboundSchema = ResponseProvisionStep$inboundSchema;
-  /** @deprecated use `ResponseProvisionStep$outboundSchema` instead. */
-  export const outboundSchema = ResponseProvisionStep$outboundSchema;
-  /** @deprecated use `ResponseProvisionStep$Outbound` instead. */
-  export type Outbound = ResponseProvisionStep$Outbound;
-}
-
 export function responseProvisionStepToJSON(
   responseProvisionStep: ResponseProvisionStep,
 ): string {
@@ -89,7 +75,6 @@ export function responseProvisionStepToJSON(
     ResponseProvisionStep$outboundSchema.parse(responseProvisionStep),
   );
 }
-
 export function responseProvisionStepFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseProvisionStep, SDKValidationError> {

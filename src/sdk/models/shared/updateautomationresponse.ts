@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Automation,
-  Automation$inboundSchema,
-  Automation$Outbound,
-  Automation$outboundSchema,
-} from "./automation.js";
+import { Automation, Automation$inboundSchema } from "./automation.js";
 
 /**
  * The UpdateAutomationResponse message.
@@ -19,7 +14,18 @@ import {
 export type UpdateAutomationResponse = {
   automation?: Automation | null | undefined;
   /**
-   * If we create a new trigger with an HMAC secret we return the HMAC on this field
+   * One-time absolute webhook URL for capability URL authentication, shown once when the trigger is saved.
+   *
+   * @remarks
+   *  Contains the full URL including the embedded token (e.g. https://tenant.conductorone.com/api/v1/webhooks/incoming/{id}/t/{token}).
+   *  Populated only when the webhook trigger uses capability URL authentication.
+   */
+  webhookCapabilityUrl?: string | undefined;
+  /**
+   * One-time HMAC shared secret, shown once when the trigger is saved.
+   *
+   * @remarks
+   *  Populated only when the webhook trigger uses HMAC authentication.
    */
   webhookHmacSecret?: string | null | undefined;
 };
@@ -31,45 +37,9 @@ export const UpdateAutomationResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   automation: z.nullable(Automation$inboundSchema).optional(),
+  webhookCapabilityUrl: z.string().optional(),
   webhookHmacSecret: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type UpdateAutomationResponse$Outbound = {
-  automation?: Automation$Outbound | null | undefined;
-  webhookHmacSecret?: string | null | undefined;
-};
-
-/** @internal */
-export const UpdateAutomationResponse$outboundSchema: z.ZodType<
-  UpdateAutomationResponse$Outbound,
-  z.ZodTypeDef,
-  UpdateAutomationResponse
-> = z.object({
-  automation: z.nullable(Automation$outboundSchema).optional(),
-  webhookHmacSecret: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAutomationResponse$ {
-  /** @deprecated use `UpdateAutomationResponse$inboundSchema` instead. */
-  export const inboundSchema = UpdateAutomationResponse$inboundSchema;
-  /** @deprecated use `UpdateAutomationResponse$outboundSchema` instead. */
-  export const outboundSchema = UpdateAutomationResponse$outboundSchema;
-  /** @deprecated use `UpdateAutomationResponse$Outbound` instead. */
-  export type Outbound = UpdateAutomationResponse$Outbound;
-}
-
-export function updateAutomationResponseToJSON(
-  updateAutomationResponse: UpdateAutomationResponse,
-): string {
-  return JSON.stringify(
-    UpdateAutomationResponse$outboundSchema.parse(updateAutomationResponse),
-  );
-}
 
 export function updateAutomationResponseFromJSON(
   jsonString: string,

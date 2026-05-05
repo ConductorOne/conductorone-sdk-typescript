@@ -4,11 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -44,29 +41,11 @@ export type ExportToDatasource = {
 };
 
 /** @internal */
-export const Format$inboundSchema: z.ZodType<Format, z.ZodTypeDef, unknown> = z
-  .union([
-    z.nativeEnum(Format),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
+export const Format$inboundSchema: z.ZodType<Format, z.ZodTypeDef, unknown> =
+  openEnums.inboundSchema(Format);
 /** @internal */
-export const Format$outboundSchema: z.ZodType<Format, z.ZodTypeDef, Format> = z
-  .union([
-    z.nativeEnum(Format),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Format$ {
-  /** @deprecated use `Format$inboundSchema` instead. */
-  export const inboundSchema = Format$inboundSchema;
-  /** @deprecated use `Format$outboundSchema` instead. */
-  export const outboundSchema = Format$outboundSchema;
-}
+export const Format$outboundSchema: z.ZodType<string, z.ZodTypeDef, Format> =
+  openEnums.outboundSchema(Format);
 
 /** @internal */
 export const ExportToDatasource$inboundSchema: z.ZodType<
@@ -78,7 +57,6 @@ export const ExportToDatasource$inboundSchema: z.ZodType<
   format: z.nullable(Format$inboundSchema).optional(),
   prefix: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type ExportToDatasource$Outbound = {
   datasourceId?: string | null | undefined;
@@ -97,19 +75,6 @@ export const ExportToDatasource$outboundSchema: z.ZodType<
   prefix: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExportToDatasource$ {
-  /** @deprecated use `ExportToDatasource$inboundSchema` instead. */
-  export const inboundSchema = ExportToDatasource$inboundSchema;
-  /** @deprecated use `ExportToDatasource$outboundSchema` instead. */
-  export const outboundSchema = ExportToDatasource$outboundSchema;
-  /** @deprecated use `ExportToDatasource$Outbound` instead. */
-  export type Outbound = ExportToDatasource$Outbound;
-}
-
 export function exportToDatasourceToJSON(
   exportToDatasource: ExportToDatasource,
 ): string {
@@ -117,7 +82,6 @@ export function exportToDatasourceToJSON(
     ExportToDatasource$outboundSchema.parse(exportToDatasource),
   );
 }
-
 export function exportToDatasourceFromJSON(
   jsonString: string,
 ): SafeParseResult<ExportToDatasource, SDKValidationError> {

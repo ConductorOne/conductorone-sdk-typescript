@@ -8,6 +8,7 @@ import { connectorCreateDelegated } from "../funcs/connectorCreateDelegated.js";
 import { connectorDelete } from "../funcs/connectorDelete.js";
 import { connectorForceSync } from "../funcs/connectorForceSync.js";
 import { connectorGet } from "../funcs/connectorGet.js";
+import { connectorGetConnectorSyncDownloadURL } from "../funcs/connectorGetConnectorSyncDownloadURL.js";
 import { connectorGetCredentials } from "../funcs/connectorGetCredentials.js";
 import { connectorList } from "../funcs/connectorList.js";
 import { connectorPauseSync } from "../funcs/connectorPauseSync.js";
@@ -15,6 +16,7 @@ import { connectorResumeSync } from "../funcs/connectorResumeSync.js";
 import { connectorRevokeCredential } from "../funcs/connectorRevokeCredential.js";
 import { connectorRotateCredential } from "../funcs/connectorRotateCredential.js";
 import { connectorUpdate } from "../funcs/connectorUpdate.js";
+import { connectorUpdateConnectorSchedule } from "../funcs/connectorUpdateConnectorSchedule.js";
 import { connectorUpdateDelegated } from "../funcs/connectorUpdateDelegated.js";
 import { connectorValidateHTTPConnectorConfig } from "../funcs/connectorValidateHTTPConnectorConfig.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -61,7 +63,7 @@ export class Connector extends ClientSDK {
    * Confirm Sync Valid
    *
    * @remarks
-   * Invokes the c1.api.app.v1.ConnectorService.ConfirmSyncValid method.
+   * Confirm that a sync which errored due to a data drop is valid, overriding the error and triggering a new sync. Only applicable when the sync status is ERRORED_NO_DATA.
    */
   async confirmSyncValid(
     request: operations.C1ApiAppV1ConnectorServiceConfirmSyncValidRequest,
@@ -112,7 +114,7 @@ export class Connector extends ClientSDK {
    * Force Sync
    *
    * @remarks
-   * Invokes the c1.api.app.v1.ConnectorService.ForceSync method.
+   * Trigger an immediate sync for a connector. The sync is queued and may not start instantly.
    */
   async forceSync(
     request: operations.C1ApiAppV1ConnectorServiceForceSyncRequest,
@@ -129,7 +131,7 @@ export class Connector extends ClientSDK {
    * Pause Sync
    *
    * @remarks
-   * Invokes the c1.api.app.v1.ConnectorService.PauseSync method.
+   * Pause syncing and provisioning for a connector. No new syncs or grant/revoke operations will run until the connector is resumed.
    */
   async pauseSync(
     request: operations.C1ApiAppV1ConnectorServicePauseSyncRequest,
@@ -146,13 +148,53 @@ export class Connector extends ClientSDK {
    * Resume Sync
    *
    * @remarks
-   * Invokes the c1.api.app.v1.ConnectorService.ResumeSync method.
+   * Resume syncing and provisioning for a connector that was previously paused. Clears the paused state and triggers a new sync.
    */
   async resumeSync(
     request: operations.C1ApiAppV1ConnectorServiceResumeSyncRequest,
     options?: RequestOptions,
   ): Promise<operations.C1ApiAppV1ConnectorServiceResumeSyncResponse> {
     return unwrapAsync(connectorResumeSync(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update Connector Schedule
+   *
+   * @remarks
+   * Update the sync schedule for a connector.
+   */
+  async updateConnectorSchedule(
+    request:
+      operations.C1ApiAppV1ConnectorServiceUpdateConnectorScheduleRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiAppV1ConnectorServiceUpdateConnectorScheduleResponse
+  > {
+    return unwrapAsync(connectorUpdateConnectorSchedule(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get Connector Sync Download Url
+   *
+   * @remarks
+   * GetConnectorSyncDownloadURL generates a short-lived download URL for a completed connector sync artifact.
+   */
+  async getConnectorSyncDownloadURL(
+    request:
+      operations.C1ApiAppV1ConnectorServiceGetConnectorSyncDownloadURLRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiAppV1ConnectorServiceGetConnectorSyncDownloadURLResponse
+  > {
+    return unwrapAsync(connectorGetConnectorSyncDownloadURL(
       this,
       request,
       options,
@@ -265,7 +307,7 @@ export class Connector extends ClientSDK {
    * Validate Http Connector Config
    *
    * @remarks
-   * Invokes the c1.api.app.v1.ConnectorService.ValidateHTTPConnectorConfig method.
+   * Validate an HTTP connector configuration and return any diagnostics or errors found.
    */
   async validateHTTPConnectorConfig(
     request?: shared.EditorValidateRequest | undefined,

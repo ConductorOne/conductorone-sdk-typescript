@@ -1,6 +1,6 @@
 # CreateManuallyManagedResourceTypeRequest
 
-The CreateManuallyManagedResourceTypeRequest message.
+The request message for creating a manually managed resource type.
 
 ## Example Usage
 
@@ -17,5 +17,5 @@ let value: CreateManuallyManagedResourceTypeRequest = {
 
 | Field                                                             | Type                                                              | Required                                                          | Description                                                       |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `displayName`                                                     | *string*                                                          | :heavy_check_mark:                                                | The displayName field.                                            |
-| `resourceType`                                                    | [shared.ResourceType](../../../sdk/models/shared/resourcetype.md) | :heavy_check_mark:                                                | The resourceType field.                                           |
+| `displayName`                                                     | *string*                                                          | :heavy_check_mark:                                                | The display name for the new resource type.                       |
+| `resourceType`                                                    | [shared.ResourceType](../../../sdk/models/shared/resourcetype.md) | :heavy_check_mark:                                                | The category of the resource type (e.g., ROLE, GROUP, LICENSE).   |

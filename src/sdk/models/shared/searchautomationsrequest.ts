@@ -3,20 +3,58 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import {
   AutomationTemplateRef,
-  AutomationTemplateRef$inboundSchema,
   AutomationTemplateRef$Outbound,
   AutomationTemplateRef$outboundSchema,
 } from "./automationtemplateref.js";
+
+/**
+ * Direction to sort in. Unspecified falls back to ASC when sort_field is set;
+ *
+ * @remarks
+ *  when sort_field is also unspecified, the server default order (created_at
+ *  DESC) applies.
+ */
+export const Direction = {
+  SortDirectionUnspecified: "SORT_DIRECTION_UNSPECIFIED",
+  SortDirectionAsc: "SORT_DIRECTION_ASC",
+  SortDirectionDesc: "SORT_DIRECTION_DESC",
+} as const;
+/**
+ * Direction to sort in. Unspecified falls back to ASC when sort_field is set;
+ *
+ * @remarks
+ *  when sort_field is also unspecified, the server default order (created_at
+ *  DESC) applies.
+ */
+export type Direction = OpenEnum<typeof Direction>;
+
+/**
+ * Column to sort by. Unspecified (0) means sort by created_at desc (server default).
+ */
+export const SortField = {
+  AutomationSortFieldUnspecified: "AUTOMATION_SORT_FIELD_UNSPECIFIED",
+  AutomationSortFieldDisplayName: "AUTOMATION_SORT_FIELD_DISPLAY_NAME",
+  AutomationSortFieldCreatedAt: "AUTOMATION_SORT_FIELD_CREATED_AT",
+  AutomationSortFieldLastExecutedAt: "AUTOMATION_SORT_FIELD_LAST_EXECUTED_AT",
+  AutomationSortFieldEnabled: "AUTOMATION_SORT_FIELD_ENABLED",
+  AutomationSortFieldPrimaryTriggerType:
+    "AUTOMATION_SORT_FIELD_PRIMARY_TRIGGER_TYPE",
+} as const;
+/**
+ * Column to sort by. Unspecified (0) means sort by created_at desc (server default).
+ */
+export type SortField = OpenEnum<typeof SortField>;
+
+export const Statuses = {
+  AutomationStatusFilterUnspecified: "AUTOMATION_STATUS_FILTER_UNSPECIFIED",
+  AutomationStatusFilterOn: "AUTOMATION_STATUS_FILTER_ON",
+  AutomationStatusFilterOff: "AUTOMATION_STATUS_FILTER_OFF",
+} as const;
+export type Statuses = OpenEnum<typeof Statuses>;
 
 export const TriggerTypes = {
   TriggerTypeUnspecified: "TRIGGER_TYPE_UNSPECIFIED",
@@ -32,6 +70,7 @@ export const TriggerTypes = {
   TriggerTypeForm: "TRIGGER_TYPE_FORM",
   TriggerTypeScheduleAppUser: "TRIGGER_TYPE_SCHEDULE_APP_USER",
   TriggerTypeAccessConflict: "TRIGGER_TYPE_ACCESS_CONFLICT",
+  TriggerTypeScheduleNoUser: "TRIGGER_TYPE_SCHEDULE_NO_USER",
 } as const;
 export type TriggerTypes = OpenEnum<typeof TriggerTypes>;
 
@@ -40,84 +79,105 @@ export type TriggerTypes = OpenEnum<typeof TriggerTypes>;
  */
 export type SearchAutomationsRequest = {
   /**
-   * The appId field.
+   * Filter results to automations belonging to this application.
    */
   appId?: string | null | undefined;
   /**
-   * The pageSize field.
+   * Filter results to automations belonging to any of the specified apps.
+   *
+   * @remarks
+   *  Supersedes the singular `app_id` field when non-empty; when empty, the
+   *  server falls back to `app_id` for backward compatibility.
+   */
+  appIds?: Array<string> | null | undefined;
+  /**
+   * Direction to sort in. Unspecified falls back to ASC when sort_field is set;
+   *
+   * @remarks
+   *  when sort_field is also unspecified, the server default order (created_at
+   *  DESC) applies.
+   */
+  direction?: Direction | undefined;
+  /**
+   * Tri-state draft filter. Unset = include both drafts and published;
+   *
+   * @remarks
+   *  `true` = drafts only; `false` = published only.
+   */
+  isDraft?: boolean | null | undefined;
+  /**
+   * Maximum number of results to return per page.
    */
   pageSize?: number | null | undefined;
   /**
-   * The pageToken field.
+   * Pagination token from a previous SearchAutomationsResponse.
    */
   pageToken?: string | null | undefined;
   /**
-   * The query field.
+   * Free-text search query to filter automations by name or description.
    */
   query?: string | null | undefined;
   /**
-   * The refs field.
+   * Restrict results to automations matching these template references.
    */
   refs?: Array<AutomationTemplateRef> | null | undefined;
   /**
-   * The triggerTypes field.
+   * Column to sort by. Unspecified (0) means sort by created_at desc (server default).
+   */
+  sortField?: SortField | undefined;
+  /**
+   * Filter results by automation status. Empty or containing both ON and OFF
+   *
+   * @remarks
+   *  applies no status filter.
+   */
+  statuses?: Array<Statuses> | null | undefined;
+  /**
+   * Filter results to automations with any of the specified trigger types.
    */
   triggerTypes?: Array<TriggerTypes> | null | undefined;
 };
 
 /** @internal */
-export const TriggerTypes$inboundSchema: z.ZodType<
-  TriggerTypes,
+export const Direction$outboundSchema: z.ZodType<
+  string,
   z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(TriggerTypes),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
+  Direction
+> = openEnums.outboundSchema(Direction);
+
+/** @internal */
+export const SortField$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  SortField
+> = openEnums.outboundSchema(SortField);
+
+/** @internal */
+export const Statuses$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  Statuses
+> = openEnums.outboundSchema(Statuses);
 
 /** @internal */
 export const TriggerTypes$outboundSchema: z.ZodType<
-  TriggerTypes,
+  string,
   z.ZodTypeDef,
   TriggerTypes
-> = z.union([
-  z.nativeEnum(TriggerTypes),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TriggerTypes$ {
-  /** @deprecated use `TriggerTypes$inboundSchema` instead. */
-  export const inboundSchema = TriggerTypes$inboundSchema;
-  /** @deprecated use `TriggerTypes$outboundSchema` instead. */
-  export const outboundSchema = TriggerTypes$outboundSchema;
-}
-
-/** @internal */
-export const SearchAutomationsRequest$inboundSchema: z.ZodType<
-  SearchAutomationsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
-  refs: z.nullable(z.array(AutomationTemplateRef$inboundSchema)).optional(),
-  triggerTypes: z.nullable(z.array(TriggerTypes$inboundSchema)).optional(),
-});
+> = openEnums.outboundSchema(TriggerTypes);
 
 /** @internal */
 export type SearchAutomationsRequest$Outbound = {
   appId?: string | null | undefined;
+  appIds?: Array<string> | null | undefined;
+  direction?: string | undefined;
+  isDraft?: boolean | null | undefined;
   pageSize?: number | null | undefined;
   pageToken?: string | null | undefined;
   query?: string | null | undefined;
   refs?: Array<AutomationTemplateRef$Outbound> | null | undefined;
+  sortField?: string | undefined;
+  statuses?: Array<string> | null | undefined;
   triggerTypes?: Array<string> | null | undefined;
 };
 
@@ -128,40 +188,22 @@ export const SearchAutomationsRequest$outboundSchema: z.ZodType<
   SearchAutomationsRequest
 > = z.object({
   appId: z.nullable(z.string()).optional(),
+  appIds: z.nullable(z.array(z.string())).optional(),
+  direction: Direction$outboundSchema.optional(),
+  isDraft: z.nullable(z.boolean()).optional(),
   pageSize: z.nullable(z.number().int()).optional(),
   pageToken: z.nullable(z.string()).optional(),
   query: z.nullable(z.string()).optional(),
   refs: z.nullable(z.array(AutomationTemplateRef$outboundSchema)).optional(),
+  sortField: SortField$outboundSchema.optional(),
+  statuses: z.nullable(z.array(Statuses$outboundSchema)).optional(),
   triggerTypes: z.nullable(z.array(TriggerTypes$outboundSchema)).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchAutomationsRequest$ {
-  /** @deprecated use `SearchAutomationsRequest$inboundSchema` instead. */
-  export const inboundSchema = SearchAutomationsRequest$inboundSchema;
-  /** @deprecated use `SearchAutomationsRequest$outboundSchema` instead. */
-  export const outboundSchema = SearchAutomationsRequest$outboundSchema;
-  /** @deprecated use `SearchAutomationsRequest$Outbound` instead. */
-  export type Outbound = SearchAutomationsRequest$Outbound;
-}
 
 export function searchAutomationsRequestToJSON(
   searchAutomationsRequest: SearchAutomationsRequest,
 ): string {
   return JSON.stringify(
     SearchAutomationsRequest$outboundSchema.parse(searchAutomationsRequest),
-  );
-}
-
-export function searchAutomationsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchAutomationsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchAutomationsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchAutomationsRequest' from JSON`,
   );
 }

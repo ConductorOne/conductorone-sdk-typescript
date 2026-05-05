@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The AddAppResourceOwnerResponse message.
+ * The empty response message for adding an owner to an app resource.
  */
 export type AddAppResourceOwnerResponse = {};
 
@@ -18,39 +18,6 @@ export const AddAppResourceOwnerResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
-/** @internal */
-export type AddAppResourceOwnerResponse$Outbound = {};
-
-/** @internal */
-export const AddAppResourceOwnerResponse$outboundSchema: z.ZodType<
-  AddAppResourceOwnerResponse$Outbound,
-  z.ZodTypeDef,
-  AddAppResourceOwnerResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AddAppResourceOwnerResponse$ {
-  /** @deprecated use `AddAppResourceOwnerResponse$inboundSchema` instead. */
-  export const inboundSchema = AddAppResourceOwnerResponse$inboundSchema;
-  /** @deprecated use `AddAppResourceOwnerResponse$outboundSchema` instead. */
-  export const outboundSchema = AddAppResourceOwnerResponse$outboundSchema;
-  /** @deprecated use `AddAppResourceOwnerResponse$Outbound` instead. */
-  export type Outbound = AddAppResourceOwnerResponse$Outbound;
-}
-
-export function addAppResourceOwnerResponseToJSON(
-  addAppResourceOwnerResponse: AddAppResourceOwnerResponse,
-): string {
-  return JSON.stringify(
-    AddAppResourceOwnerResponse$outboundSchema.parse(
-      addAppResourceOwnerResponse,
-    ),
-  );
-}
 
 export function addAppResourceOwnerResponseFromJSON(
   jsonString: string,

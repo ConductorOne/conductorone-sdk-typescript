@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  User,
-  User$inboundSchema,
-  User$Outbound,
-  User$outboundSchema,
-} from "./user.js";
+import { User, User$inboundSchema } from "./user.js";
 
 /**
  * The response message for listing app entitlement owners.
@@ -40,45 +35,6 @@ export const ListAppEntitlementOwnersResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(User$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ListAppEntitlementOwnersResponse$Outbound = {
-  list?: Array<User$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ListAppEntitlementOwnersResponse$outboundSchema: z.ZodType<
-  ListAppEntitlementOwnersResponse$Outbound,
-  z.ZodTypeDef,
-  ListAppEntitlementOwnersResponse
-> = z.object({
-  list: z.nullable(z.array(User$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAppEntitlementOwnersResponse$ {
-  /** @deprecated use `ListAppEntitlementOwnersResponse$inboundSchema` instead. */
-  export const inboundSchema = ListAppEntitlementOwnersResponse$inboundSchema;
-  /** @deprecated use `ListAppEntitlementOwnersResponse$outboundSchema` instead. */
-  export const outboundSchema = ListAppEntitlementOwnersResponse$outboundSchema;
-  /** @deprecated use `ListAppEntitlementOwnersResponse$Outbound` instead. */
-  export type Outbound = ListAppEntitlementOwnersResponse$Outbound;
-}
-
-export function listAppEntitlementOwnersResponseToJSON(
-  listAppEntitlementOwnersResponse: ListAppEntitlementOwnersResponse,
-): string {
-  return JSON.stringify(
-    ListAppEntitlementOwnersResponse$outboundSchema.parse(
-      listAppEntitlementOwnersResponse,
-    ),
-  );
-}
 
 export function listAppEntitlementOwnersResponseFromJSON(
   jsonString: string,

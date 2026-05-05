@@ -38,23 +38,6 @@ export type C1ApiDirectoryV1DirectoryServiceUpdateResponse = {
 };
 
 /** @internal */
-export const C1ApiDirectoryV1DirectoryServiceUpdateRequest$inboundSchema:
-  z.ZodType<
-    C1ApiDirectoryV1DirectoryServiceUpdateRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    app_id: z.nullable(z.string()),
-    DirectoryServiceUpdateRequest: shared
-      .DirectoryServiceUpdateRequest$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "DirectoryServiceUpdateRequest": "directoryServiceUpdateRequest",
-    });
-  });
-
-/** @internal */
 export type C1ApiDirectoryV1DirectoryServiceUpdateRequest$Outbound = {
   app_id: string | null;
   DirectoryServiceUpdateRequest?:
@@ -79,21 +62,6 @@ export const C1ApiDirectoryV1DirectoryServiceUpdateRequest$outboundSchema:
     });
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiDirectoryV1DirectoryServiceUpdateRequest$ {
-  /** @deprecated use `C1ApiDirectoryV1DirectoryServiceUpdateRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiDirectoryV1DirectoryServiceUpdateRequest$inboundSchema;
-  /** @deprecated use `C1ApiDirectoryV1DirectoryServiceUpdateRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiDirectoryV1DirectoryServiceUpdateRequest$outboundSchema;
-  /** @deprecated use `C1ApiDirectoryV1DirectoryServiceUpdateRequest$Outbound` instead. */
-  export type Outbound = C1ApiDirectoryV1DirectoryServiceUpdateRequest$Outbound;
-}
-
 export function c1ApiDirectoryV1DirectoryServiceUpdateRequestToJSON(
   c1ApiDirectoryV1DirectoryServiceUpdateRequest:
     C1ApiDirectoryV1DirectoryServiceUpdateRequest,
@@ -102,22 +70,6 @@ export function c1ApiDirectoryV1DirectoryServiceUpdateRequestToJSON(
     C1ApiDirectoryV1DirectoryServiceUpdateRequest$outboundSchema.parse(
       c1ApiDirectoryV1DirectoryServiceUpdateRequest,
     ),
-  );
-}
-
-export function c1ApiDirectoryV1DirectoryServiceUpdateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  C1ApiDirectoryV1DirectoryServiceUpdateRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      C1ApiDirectoryV1DirectoryServiceUpdateRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'C1ApiDirectoryV1DirectoryServiceUpdateRequest' from JSON`,
   );
 }
 
@@ -141,66 +93,6 @@ export const C1ApiDirectoryV1DirectoryServiceUpdateResponse$inboundSchema:
       "DirectoryServiceUpdateResponse": "directoryServiceUpdateResponse",
     });
   });
-
-/** @internal */
-export type C1ApiDirectoryV1DirectoryServiceUpdateResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  DirectoryServiceUpdateResponse?:
-    | shared.DirectoryServiceUpdateResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiDirectoryV1DirectoryServiceUpdateResponse$outboundSchema:
-  z.ZodType<
-    C1ApiDirectoryV1DirectoryServiceUpdateResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiDirectoryV1DirectoryServiceUpdateResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    directoryServiceUpdateResponse: shared
-      .DirectoryServiceUpdateResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      directoryServiceUpdateResponse: "DirectoryServiceUpdateResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiDirectoryV1DirectoryServiceUpdateResponse$ {
-  /** @deprecated use `C1ApiDirectoryV1DirectoryServiceUpdateResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiDirectoryV1DirectoryServiceUpdateResponse$inboundSchema;
-  /** @deprecated use `C1ApiDirectoryV1DirectoryServiceUpdateResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiDirectoryV1DirectoryServiceUpdateResponse$outboundSchema;
-  /** @deprecated use `C1ApiDirectoryV1DirectoryServiceUpdateResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiDirectoryV1DirectoryServiceUpdateResponse$Outbound;
-}
-
-export function c1ApiDirectoryV1DirectoryServiceUpdateResponseToJSON(
-  c1ApiDirectoryV1DirectoryServiceUpdateResponse:
-    C1ApiDirectoryV1DirectoryServiceUpdateResponse,
-): string {
-  return JSON.stringify(
-    C1ApiDirectoryV1DirectoryServiceUpdateResponse$outboundSchema.parse(
-      c1ApiDirectoryV1DirectoryServiceUpdateResponse,
-    ),
-  );
-}
 
 export function c1ApiDirectoryV1DirectoryServiceUpdateResponseFromJSON(
   jsonString: string,

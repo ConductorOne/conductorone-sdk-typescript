@@ -1,6 +1,6 @@
 # ForceRunBundleAutomationRequest
 
-The ForceRunBundleAutomationRequest message.
+The request message for triggering an immediate bundle automation run.
 
 ## Example Usage
 
@@ -14,4 +14,4 @@ let value: ForceRunBundleAutomationRequest = {};
 
 | Field                                                                         | Type                                                                          | Required                                                                      | Description                                                                   |
 | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `refs`                                                                        | [shared.AppEntitlementRef](../../../sdk/models/shared/appentitlementref.md)[] | :heavy_minus_sign:                                                            | The refs field.                                                               |
+| `refs`                                                                        | [shared.AppEntitlementRef](../../../sdk/models/shared/appentitlementref.md)[] | :heavy_minus_sign:                                                            | Optional entitlement references to scope the run to specific entitlements.    |

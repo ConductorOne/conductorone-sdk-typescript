@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   StepUpProviderInput,
-  StepUpProviderInput$inboundSchema,
   StepUpProviderInput$Outbound,
   StepUpProviderInput$outboundSchema,
 } from "./stepupproviderinput.js";
@@ -20,16 +16,6 @@ export type UpdateStepUpProviderRequest = {
   stepUpProvider?: StepUpProviderInput | null | undefined;
   updateMask?: string | null | undefined;
 };
-
-/** @internal */
-export const UpdateStepUpProviderRequest$inboundSchema: z.ZodType<
-  UpdateStepUpProviderRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  stepUpProvider: z.nullable(StepUpProviderInput$inboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type UpdateStepUpProviderRequest$Outbound = {
@@ -47,19 +33,6 @@ export const UpdateStepUpProviderRequest$outboundSchema: z.ZodType<
   updateMask: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateStepUpProviderRequest$ {
-  /** @deprecated use `UpdateStepUpProviderRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdateStepUpProviderRequest$inboundSchema;
-  /** @deprecated use `UpdateStepUpProviderRequest$outboundSchema` instead. */
-  export const outboundSchema = UpdateStepUpProviderRequest$outboundSchema;
-  /** @deprecated use `UpdateStepUpProviderRequest$Outbound` instead. */
-  export type Outbound = UpdateStepUpProviderRequest$Outbound;
-}
-
 export function updateStepUpProviderRequestToJSON(
   updateStepUpProviderRequest: UpdateStepUpProviderRequest,
 ): string {
@@ -67,15 +40,5 @@ export function updateStepUpProviderRequestToJSON(
     UpdateStepUpProviderRequest$outboundSchema.parse(
       updateStepUpProviderRequest,
     ),
-  );
-}
-
-export function updateStepUpProviderRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateStepUpProviderRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateStepUpProviderRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateStepUpProviderRequest' from JSON`,
   );
 }

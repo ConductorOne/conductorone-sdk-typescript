@@ -1,6 +1,6 @@
 {
   "name": "conductorone-sdk-typescript",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "author": "ConductorOne",
   "type": "module",
   "tshy": {
@@ -32,16 +32,16 @@
     "react": "^16.0.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.19.0",
+    "@eslint/js": "^9.26.0",
     "@types/jest": "^29.0.0",
     "@types/node": "^18.19.0",
     "@types/reflect-metadata": "^0.1.0",
     "dotenv": "^16.4.7",
-    "eslint": "^9.19.0",
+    "eslint": "^9.26.0",
     "globals": "^15.14.0",
     "jest": "^29.0.0",
     "ts-jest": "^29.0.0",
-    "tshy": "^2.0.0",
+    "tshy": "^3.3.2",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.26.0"
   },

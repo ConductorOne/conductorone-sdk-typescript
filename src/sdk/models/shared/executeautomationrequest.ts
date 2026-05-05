@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AutomationContext,
-  AutomationContext$inboundSchema,
   AutomationContext$Outbound,
   AutomationContext$outboundSchema,
 } from "./automationcontext.js";
@@ -19,15 +15,6 @@ import {
 export type ExecuteAutomationRequest = {
   context?: AutomationContext | null | undefined;
 };
-
-/** @internal */
-export const ExecuteAutomationRequest$inboundSchema: z.ZodType<
-  ExecuteAutomationRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  context: z.nullable(AutomationContext$inboundSchema).optional(),
-});
 
 /** @internal */
 export type ExecuteAutomationRequest$Outbound = {
@@ -43,33 +30,10 @@ export const ExecuteAutomationRequest$outboundSchema: z.ZodType<
   context: z.nullable(AutomationContext$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExecuteAutomationRequest$ {
-  /** @deprecated use `ExecuteAutomationRequest$inboundSchema` instead. */
-  export const inboundSchema = ExecuteAutomationRequest$inboundSchema;
-  /** @deprecated use `ExecuteAutomationRequest$outboundSchema` instead. */
-  export const outboundSchema = ExecuteAutomationRequest$outboundSchema;
-  /** @deprecated use `ExecuteAutomationRequest$Outbound` instead. */
-  export type Outbound = ExecuteAutomationRequest$Outbound;
-}
-
 export function executeAutomationRequestToJSON(
   executeAutomationRequest: ExecuteAutomationRequest,
 ): string {
   return JSON.stringify(
     ExecuteAutomationRequest$outboundSchema.parse(executeAutomationRequest),
-  );
-}
-
-export function executeAutomationRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ExecuteAutomationRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ExecuteAutomationRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ExecuteAutomationRequest' from JSON`,
   );
 }

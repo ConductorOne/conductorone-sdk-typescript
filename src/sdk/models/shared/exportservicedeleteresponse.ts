@@ -19,39 +19,6 @@ export const ExportServiceDeleteResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({});
 
-/** @internal */
-export type ExportServiceDeleteResponse$Outbound = {};
-
-/** @internal */
-export const ExportServiceDeleteResponse$outboundSchema: z.ZodType<
-  ExportServiceDeleteResponse$Outbound,
-  z.ZodTypeDef,
-  ExportServiceDeleteResponse
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExportServiceDeleteResponse$ {
-  /** @deprecated use `ExportServiceDeleteResponse$inboundSchema` instead. */
-  export const inboundSchema = ExportServiceDeleteResponse$inboundSchema;
-  /** @deprecated use `ExportServiceDeleteResponse$outboundSchema` instead. */
-  export const outboundSchema = ExportServiceDeleteResponse$outboundSchema;
-  /** @deprecated use `ExportServiceDeleteResponse$Outbound` instead. */
-  export type Outbound = ExportServiceDeleteResponse$Outbound;
-}
-
-export function exportServiceDeleteResponseToJSON(
-  exportServiceDeleteResponse: ExportServiceDeleteResponse,
-): string {
-  return JSON.stringify(
-    ExportServiceDeleteResponse$outboundSchema.parse(
-      exportServiceDeleteResponse,
-    ),
-  );
-}
-
 export function exportServiceDeleteResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<ExportServiceDeleteResponse, SDKValidationError> {

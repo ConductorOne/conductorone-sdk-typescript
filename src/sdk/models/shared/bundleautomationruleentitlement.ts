@@ -32,7 +32,6 @@ export const BundleAutomationRuleEntitlement$inboundSchema: z.ZodType<
   entitlementRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
     .optional(),
 });
-
 /** @internal */
 export type BundleAutomationRuleEntitlement$Outbound = {
   entitlementRefs?: Array<AppEntitlementRef$Outbound> | null | undefined;
@@ -48,19 +47,6 @@ export const BundleAutomationRuleEntitlement$outboundSchema: z.ZodType<
     .optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BundleAutomationRuleEntitlement$ {
-  /** @deprecated use `BundleAutomationRuleEntitlement$inboundSchema` instead. */
-  export const inboundSchema = BundleAutomationRuleEntitlement$inboundSchema;
-  /** @deprecated use `BundleAutomationRuleEntitlement$outboundSchema` instead. */
-  export const outboundSchema = BundleAutomationRuleEntitlement$outboundSchema;
-  /** @deprecated use `BundleAutomationRuleEntitlement$Outbound` instead. */
-  export type Outbound = BundleAutomationRuleEntitlement$Outbound;
-}
-
 export function bundleAutomationRuleEntitlementToJSON(
   bundleAutomationRuleEntitlement: BundleAutomationRuleEntitlement,
 ): string {
@@ -70,7 +56,6 @@ export function bundleAutomationRuleEntitlementToJSON(
     ),
   );
 }
-
 export function bundleAutomationRuleEntitlementFromJSON(
   jsonString: string,
 ): SafeParseResult<BundleAutomationRuleEntitlement, SDKValidationError> {

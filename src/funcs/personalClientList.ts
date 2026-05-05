@@ -3,6 +3,7 @@
  */
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
@@ -26,7 +27,7 @@ import { Result } from "../sdk/types/fp.js";
  * NOTE: Only shows personal clients for the current user.
  *
  * @remarks
- * Invokes the c1.api.iam.v1.PersonalClientService.List method.
+ * List returns all personal client credentials owned by the calling user.
  */
 export function personalClientList(
   client: ConductoroneSDKTypescriptCore,
@@ -109,7 +110,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

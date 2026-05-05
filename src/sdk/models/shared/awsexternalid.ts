@@ -8,11 +8,11 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The AWSExternalID message.
+ * AWSExternalID contains the tenant's external ID for AWS IAM role trust policies.
  */
 export type AWSExternalID = {
   /**
-   * The externalId field.
+   * The external ID value to include in the AWS IAM role trust policy condition.
    */
   externalId?: string | null | undefined;
 };
@@ -25,37 +25,6 @@ export const AWSExternalID$inboundSchema: z.ZodType<
 > = z.object({
   externalId: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type AWSExternalID$Outbound = {
-  externalId?: string | null | undefined;
-};
-
-/** @internal */
-export const AWSExternalID$outboundSchema: z.ZodType<
-  AWSExternalID$Outbound,
-  z.ZodTypeDef,
-  AWSExternalID
-> = z.object({
-  externalId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AWSExternalID$ {
-  /** @deprecated use `AWSExternalID$inboundSchema` instead. */
-  export const inboundSchema = AWSExternalID$inboundSchema;
-  /** @deprecated use `AWSExternalID$outboundSchema` instead. */
-  export const outboundSchema = AWSExternalID$outboundSchema;
-  /** @deprecated use `AWSExternalID$Outbound` instead. */
-  export type Outbound = AWSExternalID$Outbound;
-}
-
-export function awsExternalIDToJSON(awsExternalID: AWSExternalID): string {
-  return JSON.stringify(AWSExternalID$outboundSchema.parse(awsExternalID));
-}
 
 export function awsExternalIDFromJSON(
   jsonString: string,

@@ -25,7 +25,6 @@ export const ReplacePolicy$inboundSchema: z.ZodType<
 > = z.object({
   policyId: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type ReplacePolicy$Outbound = {
   policyId?: string | null | undefined;
@@ -40,23 +39,9 @@ export const ReplacePolicy$outboundSchema: z.ZodType<
   policyId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ReplacePolicy$ {
-  /** @deprecated use `ReplacePolicy$inboundSchema` instead. */
-  export const inboundSchema = ReplacePolicy$inboundSchema;
-  /** @deprecated use `ReplacePolicy$outboundSchema` instead. */
-  export const outboundSchema = ReplacePolicy$outboundSchema;
-  /** @deprecated use `ReplacePolicy$Outbound` instead. */
-  export type Outbound = ReplacePolicy$Outbound;
-}
-
 export function replacePolicyToJSON(replacePolicy: ReplacePolicy): string {
   return JSON.stringify(ReplacePolicy$outboundSchema.parse(replacePolicy));
 }
-
 export function replacePolicyFromJSON(
   jsonString: string,
 ): SafeParseResult<ReplacePolicy, SDKValidationError> {

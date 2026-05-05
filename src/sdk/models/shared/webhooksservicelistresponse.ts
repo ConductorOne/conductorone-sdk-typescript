@@ -7,22 +7,20 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  Webhook1,
-  Webhook1$inboundSchema,
-  Webhook1$Outbound,
-  Webhook1$outboundSchema,
-} from "./webhook1.js";
+  WebhookEndpoint,
+  WebhookEndpoint$inboundSchema,
+} from "./webhookendpoint.js";
 
 /**
  * The WebhooksServiceListResponse message.
  */
 export type WebhooksServiceListResponse = {
   /**
-   * The list field.
+   * The list of webhooks for the current page.
    */
-  list?: Array<Webhook1> | null | undefined;
+  list?: Array<WebhookEndpoint> | null | undefined;
   /**
-   * The nextPageToken field.
+   * A token to retrieve the next page of results, or empty if there are no more results.
    */
   nextPageToken?: string | null | undefined;
 };
@@ -33,48 +31,9 @@ export const WebhooksServiceListResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  list: z.nullable(z.array(Webhook1$inboundSchema)).optional(),
+  list: z.nullable(z.array(WebhookEndpoint$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type WebhooksServiceListResponse$Outbound = {
-  list?: Array<Webhook1$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const WebhooksServiceListResponse$outboundSchema: z.ZodType<
-  WebhooksServiceListResponse$Outbound,
-  z.ZodTypeDef,
-  WebhooksServiceListResponse
-> = z.object({
-  list: z.nullable(z.array(Webhook1$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhooksServiceListResponse$ {
-  /** @deprecated use `WebhooksServiceListResponse$inboundSchema` instead. */
-  export const inboundSchema = WebhooksServiceListResponse$inboundSchema;
-  /** @deprecated use `WebhooksServiceListResponse$outboundSchema` instead. */
-  export const outboundSchema = WebhooksServiceListResponse$outboundSchema;
-  /** @deprecated use `WebhooksServiceListResponse$Outbound` instead. */
-  export type Outbound = WebhooksServiceListResponse$Outbound;
-}
-
-export function webhooksServiceListResponseToJSON(
-  webhooksServiceListResponse: WebhooksServiceListResponse,
-): string {
-  return JSON.stringify(
-    WebhooksServiceListResponse$outboundSchema.parse(
-      webhooksServiceListResponse,
-    ),
-  );
-}
 
 export function webhooksServiceListResponseFromJSON(
   jsonString: string,

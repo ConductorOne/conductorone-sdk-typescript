@@ -4,6 +4,7 @@
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
 import { encodeJSON } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -29,7 +30,7 @@ import { Result } from "../sdk/types/fp.js";
  * Search Grants
  *
  * @remarks
- * Invokes the c1.api.app.v1.AppEntitlementSearchService.SearchGrants method.
+ * Search grants (user-to-entitlement bindings) across apps, with filters for app, user, resource type, and entitlement.
  */
 export function appEntitlementSearchSearchGrants(
   client: ConductoroneSDKTypescriptCore,
@@ -132,7 +133,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

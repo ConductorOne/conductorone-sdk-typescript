@@ -4,28 +4,62 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  FormInput,
-  FormInput$inboundSchema,
-  FormInput$Outbound,
-  FormInput$outboundSchema,
-} from "./forminput.js";
+  RequestSchemaForm,
+  RequestSchemaForm$inboundSchema,
+  RequestSchemaForm$Outbound,
+  RequestSchemaForm$outboundSchema,
+} from "./requestschemaform.js";
 
 /**
- * The RequestSchema message.
+ * Controls whether the justification field is shown or hidden on the request form.
+ */
+export const RequestSchemaJustificationVisibility = {
+  JustificationVisibilityUnspecified: "JUSTIFICATION_VISIBILITY_UNSPECIFIED",
+  JustificationVisibilityShow: "JUSTIFICATION_VISIBILITY_SHOW",
+  JustificationVisibilityHide: "JUSTIFICATION_VISIBILITY_HIDE",
+} as const;
+/**
+ * Controls whether the justification field is shown or hidden on the request form.
+ */
+export type RequestSchemaJustificationVisibility = OpenEnum<
+  typeof RequestSchemaJustificationVisibility
+>;
+
+/**
+ * A request schema defines a form template that users fill out when requesting access.
  */
 export type RequestSchema = {
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
-  form?: FormInput | null | undefined;
+  form?: RequestSchemaForm | null | undefined;
   /**
-   * The id field.
+   * The unique identifier of this request schema.
    */
   id?: string | null | undefined;
+  /**
+   * Controls whether the justification field is shown or hidden on the request form.
+   */
+  justificationVisibility?: RequestSchemaJustificationVisibility | undefined;
   modifiedAt?: Date | null | undefined;
 };
+
+/** @internal */
+export const RequestSchemaJustificationVisibility$inboundSchema: z.ZodType<
+  RequestSchemaJustificationVisibility,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(RequestSchemaJustificationVisibility);
+/** @internal */
+export const RequestSchemaJustificationVisibility$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  RequestSchemaJustificationVisibility
+> = openEnums.outboundSchema(RequestSchemaJustificationVisibility);
 
 /** @internal */
 export const RequestSchema$inboundSchema: z.ZodType<
@@ -39,19 +73,21 @@ export const RequestSchema$inboundSchema: z.ZodType<
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  form: z.nullable(FormInput$inboundSchema).optional(),
+  form: z.nullable(RequestSchemaForm$inboundSchema).optional(),
   id: z.nullable(z.string()).optional(),
+  justificationVisibility: RequestSchemaJustificationVisibility$inboundSchema
+    .optional(),
   modifiedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
 /** @internal */
 export type RequestSchema$Outbound = {
   createdAt?: string | null | undefined;
   deletedAt?: string | null | undefined;
-  form?: FormInput$Outbound | null | undefined;
+  form?: RequestSchemaForm$Outbound | null | undefined;
   id?: string | null | undefined;
+  justificationVisibility?: string | undefined;
   modifiedAt?: string | null | undefined;
 };
 
@@ -63,28 +99,16 @@ export const RequestSchema$outboundSchema: z.ZodType<
 > = z.object({
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  form: z.nullable(FormInput$outboundSchema).optional(),
+  form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
   id: z.nullable(z.string()).optional(),
+  justificationVisibility: RequestSchemaJustificationVisibility$outboundSchema
+    .optional(),
   modifiedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestSchema$ {
-  /** @deprecated use `RequestSchema$inboundSchema` instead. */
-  export const inboundSchema = RequestSchema$inboundSchema;
-  /** @deprecated use `RequestSchema$outboundSchema` instead. */
-  export const outboundSchema = RequestSchema$outboundSchema;
-  /** @deprecated use `RequestSchema$Outbound` instead. */
-  export type Outbound = RequestSchema$Outbound;
-}
 
 export function requestSchemaToJSON(requestSchema: RequestSchema): string {
   return JSON.stringify(RequestSchema$outboundSchema.parse(requestSchema));
 }
-
 export function requestSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<RequestSchema, SDKValidationError> {

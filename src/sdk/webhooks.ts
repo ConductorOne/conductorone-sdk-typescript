@@ -18,7 +18,7 @@ export class Webhooks extends ClientSDK {
    * List
    *
    * @remarks
-   * Invokes the c1.api.webhooks.v1.WebhooksService.List method.
+   * List all webhook subscriptions in the tenant, with pagination.
    */
   async list(
     request?: operations.C1ApiWebhooksV1WebhooksServiceListRequest | undefined,
@@ -35,7 +35,7 @@ export class Webhooks extends ClientSDK {
    * Create
    *
    * @remarks
-   * Invokes the c1.api.webhooks.v1.WebhooksService.Create method.
+   * Create a new webhook subscription to receive event notifications at the specified URL.
    */
   async create(
     request?: shared.WebhooksServiceCreateRequest | undefined,
@@ -52,7 +52,7 @@ export class Webhooks extends ClientSDK {
    * Delete
    *
    * @remarks
-   * Invokes the c1.api.webhooks.v1.WebhooksService.Delete method.
+   * Delete a webhook subscription, stopping all future event deliveries to its URL.
    */
   async delete(
     request: operations.C1ApiWebhooksV1WebhooksServiceDeleteRequest,
@@ -69,7 +69,7 @@ export class Webhooks extends ClientSDK {
    * Get
    *
    * @remarks
-   * Invokes the c1.api.webhooks.v1.WebhooksService.Get method.
+   * Retrieve a single webhook by its ID.
    */
   async get(
     request: operations.C1ApiWebhooksV1WebhooksServiceGetRequest,
@@ -86,7 +86,7 @@ export class Webhooks extends ClientSDK {
    * Update
    *
    * @remarks
-   * Invokes the c1.api.webhooks.v1.WebhooksService.Update method.
+   * Update an existing webhook subscription's properties, such as its URL or display name.
    */
   async update(
     request: operations.C1ApiWebhooksV1WebhooksServiceUpdateRequest,
@@ -103,7 +103,7 @@ export class Webhooks extends ClientSDK {
    * Test
    *
    * @remarks
-   * Invokes the c1.api.webhooks.v1.WebhooksService.Test method.
+   * Send a sample event to the webhook URL to verify that the endpoint is reachable and responding correctly.
    */
   async test(
     request: operations.C1ApiWebhooksV1WebhooksServiceTestRequest,

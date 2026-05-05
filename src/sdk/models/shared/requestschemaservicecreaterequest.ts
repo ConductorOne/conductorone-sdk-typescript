@@ -3,49 +3,81 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import {
-  FieldInput,
-  FieldInput$inboundSchema,
-  FieldInput$Outbound,
-  FieldInput$outboundSchema,
-} from "./fieldinput.js";
+  FieldRelationship,
+  FieldRelationship$Outbound,
+  FieldRelationship$outboundSchema,
+} from "./fieldrelationship.js";
+import {
+  FormField,
+  FormField$Outbound,
+  FormField$outboundSchema,
+} from "./formfield.js";
+import {
+  FormFieldGroup,
+  FormFieldGroup$Outbound,
+  FormFieldGroup$outboundSchema,
+} from "./formfieldgroup.js";
 
 /**
- * The RequestSchemaServiceCreateRequest message.
+ * Controls whether the justification field is shown or hidden on the request form.
+ */
+export const JustificationVisibility = {
+  JustificationVisibilityUnspecified: "JUSTIFICATION_VISIBILITY_UNSPECIFIED",
+  JustificationVisibilityShow: "JUSTIFICATION_VISIBILITY_SHOW",
+  JustificationVisibilityHide: "JUSTIFICATION_VISIBILITY_HIDE",
+} as const;
+/**
+ * Controls whether the justification field is shown or hidden on the request form.
+ */
+export type JustificationVisibility = OpenEnum<typeof JustificationVisibility>;
+
+/**
+ * The request message for creating a new request schema.
  */
 export type RequestSchemaServiceCreateRequest = {
   /**
-   * The description field.
+   * An optional description of the request schema's purpose.
    */
   description?: string | null | undefined;
   /**
-   * The fields field.
+   * Logical groupings of fields for display purposes.
    */
-  fields?: Array<FieldInput> | null | undefined;
+  fieldGroups?: Array<FormFieldGroup> | null | undefined;
   /**
-   * The name field.
+   * Dependencies between fields that control conditional visibility or validation.
+   */
+  fieldRelationships?: Array<FieldRelationship> | null | undefined;
+  /**
+   * The form fields that users must fill out when requesting access.
+   */
+  fields?: Array<FormField> | null | undefined;
+  /**
+   * Controls whether the justification field is shown or hidden on the request form.
+   */
+  justificationVisibility?: JustificationVisibility | undefined;
+  /**
+   * The human-readable name for the request schema.
    */
   name?: string | null | undefined;
 };
 
 /** @internal */
-export const RequestSchemaServiceCreateRequest$inboundSchema: z.ZodType<
-  RequestSchemaServiceCreateRequest,
+export const JustificationVisibility$outboundSchema: z.ZodType<
+  string,
   z.ZodTypeDef,
-  unknown
-> = z.object({
-  description: z.nullable(z.string()).optional(),
-  fields: z.nullable(z.array(FieldInput$inboundSchema)).optional(),
-  name: z.nullable(z.string()).optional(),
-});
+  JustificationVisibility
+> = openEnums.outboundSchema(JustificationVisibility);
 
 /** @internal */
 export type RequestSchemaServiceCreateRequest$Outbound = {
   description?: string | null | undefined;
-  fields?: Array<FieldInput$Outbound> | null | undefined;
+  fieldGroups?: Array<FormFieldGroup$Outbound> | null | undefined;
+  fieldRelationships?: Array<FieldRelationship$Outbound> | null | undefined;
+  fields?: Array<FormField$Outbound> | null | undefined;
+  justificationVisibility?: string | undefined;
   name?: string | null | undefined;
 };
 
@@ -56,23 +88,13 @@ export const RequestSchemaServiceCreateRequest$outboundSchema: z.ZodType<
   RequestSchemaServiceCreateRequest
 > = z.object({
   description: z.nullable(z.string()).optional(),
-  fields: z.nullable(z.array(FieldInput$outboundSchema)).optional(),
+  fieldGroups: z.nullable(z.array(FormFieldGroup$outboundSchema)).optional(),
+  fieldRelationships: z.nullable(z.array(FieldRelationship$outboundSchema))
+    .optional(),
+  fields: z.nullable(z.array(FormField$outboundSchema)).optional(),
+  justificationVisibility: JustificationVisibility$outboundSchema.optional(),
   name: z.nullable(z.string()).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestSchemaServiceCreateRequest$ {
-  /** @deprecated use `RequestSchemaServiceCreateRequest$inboundSchema` instead. */
-  export const inboundSchema = RequestSchemaServiceCreateRequest$inboundSchema;
-  /** @deprecated use `RequestSchemaServiceCreateRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestSchemaServiceCreateRequest$outboundSchema;
-  /** @deprecated use `RequestSchemaServiceCreateRequest$Outbound` instead. */
-  export type Outbound = RequestSchemaServiceCreateRequest$Outbound;
-}
 
 export function requestSchemaServiceCreateRequestToJSON(
   requestSchemaServiceCreateRequest: RequestSchemaServiceCreateRequest,
@@ -81,15 +103,5 @@ export function requestSchemaServiceCreateRequestToJSON(
     RequestSchemaServiceCreateRequest$outboundSchema.parse(
       requestSchemaServiceCreateRequest,
     ),
-  );
-}
-
-export function requestSchemaServiceCreateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<RequestSchemaServiceCreateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RequestSchemaServiceCreateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RequestSchemaServiceCreateRequest' from JSON`,
   );
 }

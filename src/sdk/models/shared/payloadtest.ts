@@ -18,7 +18,6 @@ export const PayloadTest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-
 /** @internal */
 export type PayloadTest$Outbound = {};
 
@@ -29,23 +28,9 @@ export const PayloadTest$outboundSchema: z.ZodType<
   PayloadTest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PayloadTest$ {
-  /** @deprecated use `PayloadTest$inboundSchema` instead. */
-  export const inboundSchema = PayloadTest$inboundSchema;
-  /** @deprecated use `PayloadTest$outboundSchema` instead. */
-  export const outboundSchema = PayloadTest$outboundSchema;
-  /** @deprecated use `PayloadTest$Outbound` instead. */
-  export type Outbound = PayloadTest$Outbound;
-}
-
 export function payloadTestToJSON(payloadTest: PayloadTest): string {
   return JSON.stringify(PayloadTest$outboundSchema.parse(payloadTest));
 }
-
 export function payloadTestFromJSON(
   jsonString: string,
 ): SafeParseResult<PayloadTest, SDKValidationError> {

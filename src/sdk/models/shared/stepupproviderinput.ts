@@ -3,24 +3,19 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   StepUpMicrosoftSettings,
-  StepUpMicrosoftSettings$inboundSchema,
   StepUpMicrosoftSettings$Outbound,
   StepUpMicrosoftSettings$outboundSchema,
 } from "./stepupmicrosoftsettings.js";
 import {
   StepUpOAuth2Settings,
-  StepUpOAuth2Settings$inboundSchema,
   StepUpOAuth2Settings$Outbound,
   StepUpOAuth2Settings$outboundSchema,
 } from "./stepupoauth2settings.js";
 
 /**
- * The StepUpProvider message.
+ * StepUpProvider represents a configured step-up authentication integration (e.g., Duo, custom OIDC).
  *
  * @remarks
  *
@@ -30,20 +25,20 @@ import {
  */
 export type StepUpProviderInput = {
   /**
-   * The clientId field.
+   * The OAuth2 client ID used to authenticate with the step-up provider.
    */
   clientId?: string | null | undefined;
   createdAt?: Date | null | undefined;
   /**
-   * The displayName field.
+   * The human-readable name of the step-up provider.
    */
   displayName?: string | null | undefined;
   /**
-   * The enabled field.
+   * Whether the step-up provider is active and available for use.
    */
   enabled?: boolean | null | undefined;
   /**
-   * The issuerUrl field.
+   * The OIDC issuer URL for the step-up provider.
    */
   issuerUrl?: string | null | undefined;
   lastTestedAt?: Date | null | undefined;
@@ -51,29 +46,6 @@ export type StepUpProviderInput = {
   oauth2?: StepUpOAuth2Settings | null | undefined;
   updatedAt?: Date | null | undefined;
 };
-
-/** @internal */
-export const StepUpProviderInput$inboundSchema: z.ZodType<
-  StepUpProviderInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  clientId: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  issuerUrl: z.nullable(z.string()).optional(),
-  lastTestedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  microsoft: z.nullable(StepUpMicrosoftSettings$inboundSchema).optional(),
-  oauth2: z.nullable(StepUpOAuth2Settings$inboundSchema).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
 
 /** @internal */
 export type StepUpProviderInput$Outbound = {
@@ -105,33 +77,10 @@ export const StepUpProviderInput$outboundSchema: z.ZodType<
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StepUpProviderInput$ {
-  /** @deprecated use `StepUpProviderInput$inboundSchema` instead. */
-  export const inboundSchema = StepUpProviderInput$inboundSchema;
-  /** @deprecated use `StepUpProviderInput$outboundSchema` instead. */
-  export const outboundSchema = StepUpProviderInput$outboundSchema;
-  /** @deprecated use `StepUpProviderInput$Outbound` instead. */
-  export type Outbound = StepUpProviderInput$Outbound;
-}
-
 export function stepUpProviderInputToJSON(
   stepUpProviderInput: StepUpProviderInput,
 ): string {
   return JSON.stringify(
     StepUpProviderInput$outboundSchema.parse(stepUpProviderInput),
-  );
-}
-
-export function stepUpProviderInputFromJSON(
-  jsonString: string,
-): SafeParseResult<StepUpProviderInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => StepUpProviderInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'StepUpProviderInput' from JSON`,
   );
 }

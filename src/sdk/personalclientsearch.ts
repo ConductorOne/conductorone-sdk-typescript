@@ -13,7 +13,7 @@ export class PersonalClientSearch extends ClientSDK {
    * NOTE: Searches personal clients for all users
    *
    * @remarks
-   * Invokes the c1.api.iam.v1.PersonalClientSearchService.Search method.
+   * Search finds personal client credentials across all users, with optional filtering by query text or user.
    */
   async search(
     request?: shared.PersonalClientSearchServiceSearchRequest | undefined,

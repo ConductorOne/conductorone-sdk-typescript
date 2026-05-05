@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The CreateAttributeValueRequest message.
@@ -20,16 +17,6 @@ export type CreateAttributeValueRequest = {
    */
   value?: string | null | undefined;
 };
-
-/** @internal */
-export const CreateAttributeValueRequest$inboundSchema: z.ZodType<
-  CreateAttributeValueRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  attributeTypeId: z.nullable(z.string()).optional(),
-  value: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type CreateAttributeValueRequest$Outbound = {
@@ -47,19 +34,6 @@ export const CreateAttributeValueRequest$outboundSchema: z.ZodType<
   value: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateAttributeValueRequest$ {
-  /** @deprecated use `CreateAttributeValueRequest$inboundSchema` instead. */
-  export const inboundSchema = CreateAttributeValueRequest$inboundSchema;
-  /** @deprecated use `CreateAttributeValueRequest$outboundSchema` instead. */
-  export const outboundSchema = CreateAttributeValueRequest$outboundSchema;
-  /** @deprecated use `CreateAttributeValueRequest$Outbound` instead. */
-  export type Outbound = CreateAttributeValueRequest$Outbound;
-}
-
 export function createAttributeValueRequestToJSON(
   createAttributeValueRequest: CreateAttributeValueRequest,
 ): string {
@@ -67,15 +41,5 @@ export function createAttributeValueRequestToJSON(
     CreateAttributeValueRequest$outboundSchema.parse(
       createAttributeValueRequest,
     ),
-  );
-}
-
-export function createAttributeValueRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAttributeValueRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateAttributeValueRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAttributeValueRequest' from JSON`,
   );
 }

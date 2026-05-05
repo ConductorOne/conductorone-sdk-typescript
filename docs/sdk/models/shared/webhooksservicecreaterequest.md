@@ -15,8 +15,9 @@ let value: WebhooksServiceCreateRequest = {
 
 ## Fields
 
-| Field                  | Type                   | Required               | Description            |
-| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
-| `description`          | *string*               | :heavy_minus_sign:     | The description field. |
-| `displayName`          | *string*               | :heavy_check_mark:     | The displayName field. |
-| `url`                  | *string*               | :heavy_check_mark:     | The url field.         |
+| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `callbackTimeout`                                                        | *string*                                                                 | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `description`                                                            | *string*                                                                 | :heavy_minus_sign:                                                       | An optional description of the webhook's purpose.                        |
+| `displayName`                                                            | *string*                                                                 | :heavy_check_mark:                                                       | The human-readable name for the new webhook.                             |
+| `url`                                                                    | *string*                                                                 | :heavy_check_mark:                                                       | The destination URL that will receive event notification HTTP callbacks. |

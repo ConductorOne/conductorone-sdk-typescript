@@ -1,5 +1,4 @@
 # AppOwners
-(*appOwners*)
 
 ## Overview
 

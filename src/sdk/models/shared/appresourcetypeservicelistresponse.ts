@@ -13,8 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppResourceTypeView,
   AppResourceTypeView$inboundSchema,
-  AppResourceTypeView$Outbound,
-  AppResourceTypeView$outboundSchema,
 } from "./appresourcetypeview.js";
 
 /**
@@ -68,57 +66,6 @@ export const AppResourceTypeServiceListResponseExpanded$inboundSchema:
       });
     });
 
-/** @internal */
-export type AppResourceTypeServiceListResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const AppResourceTypeServiceListResponseExpanded$outboundSchema:
-  z.ZodType<
-    AppResourceTypeServiceListResponseExpanded$Outbound,
-    z.ZodTypeDef,
-    AppResourceTypeServiceListResponseExpanded
-  > = z.object({
-    atType: z.string().optional(),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        atType: "@type",
-        additionalProperties: null,
-      }),
-    };
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppResourceTypeServiceListResponseExpanded$ {
-  /** @deprecated use `AppResourceTypeServiceListResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    AppResourceTypeServiceListResponseExpanded$inboundSchema;
-  /** @deprecated use `AppResourceTypeServiceListResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    AppResourceTypeServiceListResponseExpanded$outboundSchema;
-  /** @deprecated use `AppResourceTypeServiceListResponseExpanded$Outbound` instead. */
-  export type Outbound = AppResourceTypeServiceListResponseExpanded$Outbound;
-}
-
-export function appResourceTypeServiceListResponseExpandedToJSON(
-  appResourceTypeServiceListResponseExpanded:
-    AppResourceTypeServiceListResponseExpanded,
-): string {
-  return JSON.stringify(
-    AppResourceTypeServiceListResponseExpanded$outboundSchema.parse(
-      appResourceTypeServiceListResponseExpanded,
-    ),
-  );
-}
-
 export function appResourceTypeServiceListResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -149,55 +96,6 @@ export const AppResourceTypeServiceListResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(AppResourceTypeView$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type AppResourceTypeServiceListResponse$Outbound = {
-  expanded?:
-    | Array<AppResourceTypeServiceListResponseExpanded$Outbound>
-    | null
-    | undefined;
-  list?: Array<AppResourceTypeView$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const AppResourceTypeServiceListResponse$outboundSchema: z.ZodType<
-  AppResourceTypeServiceListResponse$Outbound,
-  z.ZodTypeDef,
-  AppResourceTypeServiceListResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() =>
-      AppResourceTypeServiceListResponseExpanded$outboundSchema
-    )),
-  ).optional(),
-  list: z.nullable(z.array(AppResourceTypeView$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppResourceTypeServiceListResponse$ {
-  /** @deprecated use `AppResourceTypeServiceListResponse$inboundSchema` instead. */
-  export const inboundSchema = AppResourceTypeServiceListResponse$inboundSchema;
-  /** @deprecated use `AppResourceTypeServiceListResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    AppResourceTypeServiceListResponse$outboundSchema;
-  /** @deprecated use `AppResourceTypeServiceListResponse$Outbound` instead. */
-  export type Outbound = AppResourceTypeServiceListResponse$Outbound;
-}
-
-export function appResourceTypeServiceListResponseToJSON(
-  appResourceTypeServiceListResponse: AppResourceTypeServiceListResponse,
-): string {
-  return JSON.stringify(
-    AppResourceTypeServiceListResponse$outboundSchema.parse(
-      appResourceTypeServiceListResponse,
-    ),
-  );
-}
 
 export function appResourceTypeServiceListResponseFromJSON(
   jsonString: string,

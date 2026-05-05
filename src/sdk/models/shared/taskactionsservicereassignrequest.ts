@@ -3,46 +3,30 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskExpandMask,
-  TaskExpandMask$inboundSchema,
   TaskExpandMask$Outbound,
   TaskExpandMask$outboundSchema,
 } from "./taskexpandmask.js";
 
 /**
- * The TaskActionsServiceReassignRequest message.
+ * The TaskActionsServiceReassignRequest object lets you reassign a task's current policy step to different users.
  */
 export type TaskActionsServiceReassignRequest = {
   /**
-   * The comment field.
+   * An optional comment attached to the reassignment.
    */
   comment?: string | null | undefined;
   expandMask?: TaskExpandMask | null | undefined;
   /**
-   * The newStepUserIds field.
+   * The IDs of the users to reassign the current policy step to. Must be from the allowed reassignees list.
    */
   newStepUserIds?: Array<string> | null | undefined;
   /**
-   * The policyStepId field.
+   * The ID of the current policy step to reassign. Must match the task's active step.
    */
   policyStepId?: string | null | undefined;
 };
-
-/** @internal */
-export const TaskActionsServiceReassignRequest$inboundSchema: z.ZodType<
-  TaskActionsServiceReassignRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  comment: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(TaskExpandMask$inboundSchema).optional(),
-  newStepUserIds: z.nullable(z.array(z.string())).optional(),
-  policyStepId: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type TaskActionsServiceReassignRequest$Outbound = {
@@ -64,20 +48,6 @@ export const TaskActionsServiceReassignRequest$outboundSchema: z.ZodType<
   policyStepId: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskActionsServiceReassignRequest$ {
-  /** @deprecated use `TaskActionsServiceReassignRequest$inboundSchema` instead. */
-  export const inboundSchema = TaskActionsServiceReassignRequest$inboundSchema;
-  /** @deprecated use `TaskActionsServiceReassignRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    TaskActionsServiceReassignRequest$outboundSchema;
-  /** @deprecated use `TaskActionsServiceReassignRequest$Outbound` instead. */
-  export type Outbound = TaskActionsServiceReassignRequest$Outbound;
-}
-
 export function taskActionsServiceReassignRequestToJSON(
   taskActionsServiceReassignRequest: TaskActionsServiceReassignRequest,
 ): string {
@@ -85,15 +55,5 @@ export function taskActionsServiceReassignRequestToJSON(
     TaskActionsServiceReassignRequest$outboundSchema.parse(
       taskActionsServiceReassignRequest,
     ),
-  );
-}
-
-export function taskActionsServiceReassignRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskActionsServiceReassignRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskActionsServiceReassignRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskActionsServiceReassignRequest' from JSON`,
   );
 }

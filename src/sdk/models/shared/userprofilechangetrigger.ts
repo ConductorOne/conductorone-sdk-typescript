@@ -25,7 +25,6 @@ export const UserProfileChangeTrigger$inboundSchema: z.ZodType<
 > = z.object({
   condition: z.nullable(z.string()).optional(),
 });
-
 /** @internal */
 export type UserProfileChangeTrigger$Outbound = {
   condition?: string | null | undefined;
@@ -40,19 +39,6 @@ export const UserProfileChangeTrigger$outboundSchema: z.ZodType<
   condition: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UserProfileChangeTrigger$ {
-  /** @deprecated use `UserProfileChangeTrigger$inboundSchema` instead. */
-  export const inboundSchema = UserProfileChangeTrigger$inboundSchema;
-  /** @deprecated use `UserProfileChangeTrigger$outboundSchema` instead. */
-  export const outboundSchema = UserProfileChangeTrigger$outboundSchema;
-  /** @deprecated use `UserProfileChangeTrigger$Outbound` instead. */
-  export type Outbound = UserProfileChangeTrigger$Outbound;
-}
-
 export function userProfileChangeTriggerToJSON(
   userProfileChangeTrigger: UserProfileChangeTrigger,
 ): string {
@@ -60,7 +46,6 @@ export function userProfileChangeTriggerToJSON(
     UserProfileChangeTrigger$outboundSchema.parse(userProfileChangeTrigger),
   );
 }
-
 export function userProfileChangeTriggerFromJSON(
   jsonString: string,
 ): SafeParseResult<UserProfileChangeTrigger, SDKValidationError> {

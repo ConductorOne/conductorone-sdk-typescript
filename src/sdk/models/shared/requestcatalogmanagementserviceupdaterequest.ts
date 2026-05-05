@@ -3,18 +3,13 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   RequestCatalogInput,
-  RequestCatalogInput$inboundSchema,
   RequestCatalogInput$Outbound,
   RequestCatalogInput$outboundSchema,
 } from "./requestcatalog.js";
 import {
   RequestCatalogExpandMask,
-  RequestCatalogExpandMask$inboundSchema,
   RequestCatalogExpandMask$Outbound,
   RequestCatalogExpandMask$outboundSchema,
 } from "./requestcatalogexpandmask.js";
@@ -27,18 +22,6 @@ export type RequestCatalogManagementServiceUpdateRequest = {
   expandMask?: RequestCatalogExpandMask | null | undefined;
   updateMask?: string | null | undefined;
 };
-
-/** @internal */
-export const RequestCatalogManagementServiceUpdateRequest$inboundSchema:
-  z.ZodType<
-    RequestCatalogManagementServiceUpdateRequest,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    catalog: z.nullable(RequestCatalogInput$inboundSchema).optional(),
-    expandMask: z.nullable(RequestCatalogExpandMask$inboundSchema).optional(),
-    updateMask: z.nullable(z.string()).optional(),
-  });
 
 /** @internal */
 export type RequestCatalogManagementServiceUpdateRequest$Outbound = {
@@ -59,21 +42,6 @@ export const RequestCatalogManagementServiceUpdateRequest$outboundSchema:
     updateMask: z.nullable(z.string()).optional(),
   });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogManagementServiceUpdateRequest$ {
-  /** @deprecated use `RequestCatalogManagementServiceUpdateRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogManagementServiceUpdateRequest$inboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceUpdateRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogManagementServiceUpdateRequest$outboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceUpdateRequest$Outbound` instead. */
-  export type Outbound = RequestCatalogManagementServiceUpdateRequest$Outbound;
-}
-
 export function requestCatalogManagementServiceUpdateRequestToJSON(
   requestCatalogManagementServiceUpdateRequest:
     RequestCatalogManagementServiceUpdateRequest,
@@ -82,21 +50,5 @@ export function requestCatalogManagementServiceUpdateRequestToJSON(
     RequestCatalogManagementServiceUpdateRequest$outboundSchema.parse(
       requestCatalogManagementServiceUpdateRequest,
     ),
-  );
-}
-
-export function requestCatalogManagementServiceUpdateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  RequestCatalogManagementServiceUpdateRequest,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      RequestCatalogManagementServiceUpdateRequest$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'RequestCatalogManagementServiceUpdateRequest' from JSON`,
   );
 }

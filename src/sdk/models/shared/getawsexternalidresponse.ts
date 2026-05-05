@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  AWSExternalID,
-  AWSExternalID$inboundSchema,
-  AWSExternalID$Outbound,
-  AWSExternalID$outboundSchema,
-} from "./awsexternalid.js";
+import { AWSExternalID, AWSExternalID$inboundSchema } from "./awsexternalid.js";
 
 /**
  * The GetAWSExternalIDResponse message.
@@ -28,41 +23,6 @@ export const GetAWSExternalIDResponse$inboundSchema: z.ZodType<
 > = z.object({
   awsExternalId: z.nullable(AWSExternalID$inboundSchema).optional(),
 });
-
-/** @internal */
-export type GetAWSExternalIDResponse$Outbound = {
-  awsExternalId?: AWSExternalID$Outbound | null | undefined;
-};
-
-/** @internal */
-export const GetAWSExternalIDResponse$outboundSchema: z.ZodType<
-  GetAWSExternalIDResponse$Outbound,
-  z.ZodTypeDef,
-  GetAWSExternalIDResponse
-> = z.object({
-  awsExternalId: z.nullable(AWSExternalID$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAWSExternalIDResponse$ {
-  /** @deprecated use `GetAWSExternalIDResponse$inboundSchema` instead. */
-  export const inboundSchema = GetAWSExternalIDResponse$inboundSchema;
-  /** @deprecated use `GetAWSExternalIDResponse$outboundSchema` instead. */
-  export const outboundSchema = GetAWSExternalIDResponse$outboundSchema;
-  /** @deprecated use `GetAWSExternalIDResponse$Outbound` instead. */
-  export type Outbound = GetAWSExternalIDResponse$Outbound;
-}
-
-export function getAWSExternalIDResponseToJSON(
-  getAWSExternalIDResponse: GetAWSExternalIDResponse,
-): string {
-  return JSON.stringify(
-    GetAWSExternalIDResponse$outboundSchema.parse(getAWSExternalIDResponse),
-  );
-}
 
 export function getAWSExternalIDResponseFromJSON(
   jsonString: string,

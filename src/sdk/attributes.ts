@@ -80,7 +80,7 @@ export class Attributes extends ClientSDK {
    * List Compliance Frameworks
    *
    * @remarks
-   * Invokes the c1.api.attribute.v1.Attributes.ListComplianceFrameworks method.
+   * List all compliance framework attribute values (e.g., SOC 2, HIPAA) with pagination.
    */
   async listComplianceFrameworks(
     request?:
@@ -160,7 +160,7 @@ export class Attributes extends ClientSDK {
    * List Risk Levels
    *
    * @remarks
-   * Invokes the c1.api.attribute.v1.Attributes.ListRiskLevels method.
+   * List all risk level attribute values with pagination.
    */
   async listRiskLevels(
     request?:

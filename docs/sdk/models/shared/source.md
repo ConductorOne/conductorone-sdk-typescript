@@ -8,11 +8,11 @@ The source field.
 import { Source } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: Source = "SOURCE_UNSPECIFIED";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "SOURCE_UNSPECIFIED" | "SOURCE_C1" | "SOURCE_JIRA" | "SOURCE_SLACK" | "SOURCE_COPILOT_AGENTS" | Unrecognized<string>

@@ -222,7 +222,6 @@ export const FieldRules$inboundSchema: z.ZodType<
   uint32: z.nullable(UInt32Rules$inboundSchema).optional(),
   uint64: z.nullable(UInt64Rules$inboundSchema).optional(),
 });
-
 /** @internal */
 export type FieldRules$Outbound = {
   any?: AnyRules$Outbound | null | undefined;
@@ -279,23 +278,9 @@ export const FieldRules$outboundSchema: z.ZodType<
   uint64: z.nullable(UInt64Rules$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FieldRules$ {
-  /** @deprecated use `FieldRules$inboundSchema` instead. */
-  export const inboundSchema = FieldRules$inboundSchema;
-  /** @deprecated use `FieldRules$outboundSchema` instead. */
-  export const outboundSchema = FieldRules$outboundSchema;
-  /** @deprecated use `FieldRules$Outbound` instead. */
-  export type Outbound = FieldRules$Outbound;
-}
-
 export function fieldRulesToJSON(fieldRules: FieldRules): string {
   return JSON.stringify(FieldRules$outboundSchema.parse(fieldRules));
 }
-
 export function fieldRulesFromJSON(
   jsonString: string,
 ): SafeParseResult<FieldRules, SDKValidationError> {

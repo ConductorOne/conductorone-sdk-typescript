@@ -9,17 +9,15 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$inboundSchema,
-  AppEntitlementRef$Outbound,
-  AppEntitlementRef$outboundSchema,
 } from "./appentitlementref.js";
 
 /**
- * The RequestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponse message.
+ * The response message containing all requestable entitlement references in the catalog.
  */
 export type RequestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponse =
   {
     /**
-     * The refs field.
+     * The complete list of app entitlement references in this catalog.
      */
     refs?: Array<AppEntitlementRef> | null | undefined;
   };
@@ -33,50 +31,6 @@ export const RequestCatalogManagementServiceListAllEntitlementIdsPerCatalogRespo
   > = z.object({
     refs: z.nullable(z.array(AppEntitlementRef$inboundSchema)).optional(),
   });
-
-/** @internal */
-export type RequestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponse$Outbound =
-  {
-    refs?: Array<AppEntitlementRef$Outbound> | null | undefined;
-  };
-
-/** @internal */
-export const RequestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponse$outboundSchema:
-  z.ZodType<
-    RequestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponse$Outbound,
-    z.ZodTypeDef,
-    RequestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponse
-  > = z.object({
-    refs: z.nullable(z.array(AppEntitlementRef$outboundSchema)).optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponse$ {
-  /** @deprecated use `RequestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    RequestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponse$inboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    RequestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponse$outboundSchema;
-  /** @deprecated use `RequestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponse$Outbound` instead. */
-  export type Outbound =
-    RequestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponse$Outbound;
-}
-
-export function requestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponseToJSON(
-  requestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponse:
-    RequestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponse,
-): string {
-  return JSON.stringify(
-    RequestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponse$outboundSchema
-      .parse(
-        requestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponse,
-      ),
-  );
-}
 
 export function requestCatalogManagementServiceListAllEntitlementIdsPerCatalogResponseFromJSON(
   jsonString: string,

@@ -16,7 +16,7 @@ export class AccessConflict extends ClientSDK {
    * Create Monitor
    *
    * @remarks
-   * Invokes the c1.api.accessconflict.v1.AccessConflictService.CreateMonitor method.
+   * Create a new conflict monitor for defining a Separation of Duty rule. Entitlement sets are bound separately via AppEntitlementMonitorBindingService.
    */
   async createMonitor(
     request?: shared.ConflictMonitorCreateRequest | undefined,
@@ -35,7 +35,7 @@ export class AccessConflict extends ClientSDK {
    * Delete Monitor
    *
    * @remarks
-   * Invokes the c1.api.accessconflict.v1.AccessConflictService.DeleteMonitor method.
+   * Delete a conflict monitor and its associated entitlement set bindings.
    */
   async deleteMonitor(
     request:
@@ -55,7 +55,7 @@ export class AccessConflict extends ClientSDK {
    * Get Monitor
    *
    * @remarks
-   * Invokes the c1.api.accessconflict.v1.AccessConflictService.GetMonitor method.
+   * Retrieve a single conflict monitor by ID.
    */
   async getMonitor(
     request:
@@ -75,7 +75,7 @@ export class AccessConflict extends ClientSDK {
    * Update Monitor
    *
    * @remarks
-   * Invokes the c1.api.accessconflict.v1.AccessConflictService.UpdateMonitor method.
+   * Update the display name, description, or notification settings of a conflict monitor.
    */
   async updateMonitor(
     request:

@@ -12,7 +12,7 @@ let value: FunctionsServiceUpdateFunctionRequest = {};
 
 ## Fields
 
-| Field                                                       | Type                                                        | Required                                                    | Description                                                 |
-| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `function`                                                  | [shared.FunctionT](../../../sdk/models/shared/functiont.md) | :heavy_minus_sign:                                          | N/A                                                         |
-| `updateMask`                                                | *string*                                                    | :heavy_minus_sign:                                          | N/A                                                         |
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `function`                                                          | [shared.FunctionInput](../../../sdk/models/shared/functioninput.md) | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `updateMask`                                                        | *string*                                                            | :heavy_minus_sign:                                                  | N/A                                                                 |

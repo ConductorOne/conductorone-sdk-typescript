@@ -4,6 +4,7 @@
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -28,7 +29,7 @@ import { Result } from "../sdk/types/fp.js";
  * Delete
  *
  * @remarks
- * Invokes the c1.api.iam.v1.PersonalClientService.Delete method.
+ * Delete a personal client credential, revoking it and preventing further API access.
  */
 export function personalClientDelete(
   client: ConductoroneSDKTypescriptCore,
@@ -95,7 +96,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/api/v1/iam/personal_clients/{id}")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -138,7 +138,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

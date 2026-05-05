@@ -7,17 +7,15 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  Webhook1,
-  Webhook1$inboundSchema,
-  Webhook1$Outbound,
-  Webhook1$outboundSchema,
-} from "./webhook1.js";
+  WebhookEndpoint,
+  WebhookEndpoint$inboundSchema,
+} from "./webhookendpoint.js";
 
 /**
  * The WebhooksServiceCreateResponse message.
  */
 export type WebhooksServiceCreateResponse = {
-  webhook?: Webhook1 | null | undefined;
+  webhook?: WebhookEndpoint | null | undefined;
 };
 
 /** @internal */
@@ -26,45 +24,8 @@ export const WebhooksServiceCreateResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  webhook: z.nullable(Webhook1$inboundSchema).optional(),
+  webhook: z.nullable(WebhookEndpoint$inboundSchema).optional(),
 });
-
-/** @internal */
-export type WebhooksServiceCreateResponse$Outbound = {
-  webhook?: Webhook1$Outbound | null | undefined;
-};
-
-/** @internal */
-export const WebhooksServiceCreateResponse$outboundSchema: z.ZodType<
-  WebhooksServiceCreateResponse$Outbound,
-  z.ZodTypeDef,
-  WebhooksServiceCreateResponse
-> = z.object({
-  webhook: z.nullable(Webhook1$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhooksServiceCreateResponse$ {
-  /** @deprecated use `WebhooksServiceCreateResponse$inboundSchema` instead. */
-  export const inboundSchema = WebhooksServiceCreateResponse$inboundSchema;
-  /** @deprecated use `WebhooksServiceCreateResponse$outboundSchema` instead. */
-  export const outboundSchema = WebhooksServiceCreateResponse$outboundSchema;
-  /** @deprecated use `WebhooksServiceCreateResponse$Outbound` instead. */
-  export type Outbound = WebhooksServiceCreateResponse$Outbound;
-}
-
-export function webhooksServiceCreateResponseToJSON(
-  webhooksServiceCreateResponse: WebhooksServiceCreateResponse,
-): string {
-  return JSON.stringify(
-    WebhooksServiceCreateResponse$outboundSchema.parse(
-      webhooksServiceCreateResponse,
-    ),
-  );
-}
 
 export function webhooksServiceCreateResponseFromJSON(
   jsonString: string,

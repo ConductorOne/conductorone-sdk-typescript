@@ -1,5 +1,4 @@
 # ConnectorCatalog
-(*connectorCatalog*)
 
 ## Overview
 
@@ -9,7 +8,7 @@
 
 ## configurationSchema
 
-Invokes the c1.api.integration.connector.v1.ConnectorCatalogService.ConfigurationSchema method.
+Return the configuration schema describing the fields required to set up a connector of the specified type.
 
 ### Example Usage
 

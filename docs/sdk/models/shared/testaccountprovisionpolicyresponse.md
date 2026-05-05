@@ -1,6 +1,6 @@
 # TestAccountProvisionPolicyResponse
 
-The TestAccountProvisionPolicyResponse message.
+TestAccountProvisionPolicyResponse is the response for testing an account provision policy.
 
 ## Example Usage
 
@@ -12,7 +12,7 @@ let value: TestAccountProvisionPolicyResponse = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `type`             | *string*           | :heavy_minus_sign: | The type field.    |
-| `value`            | *string*           | :heavy_minus_sign: | The value field.   |
+| Field                                                       | Type                                                        | Required                                                    | Description                                                 |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `type`                                                      | *string*                                                    | :heavy_minus_sign:                                          | The data type of the computed result value.                 |
+| `value`                                                     | *string*                                                    | :heavy_minus_sign:                                          | The computed result value of the CEL expression evaluation. |

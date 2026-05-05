@@ -1,6 +1,6 @@
 # RequestSchemaServiceUpdateRequest
 
-The RequestSchemaServiceUpdateRequest message.
+The request message for updating an existing request schema.
 
 ## Example Usage
 

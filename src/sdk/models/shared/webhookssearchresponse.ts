@@ -7,22 +7,20 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  Webhook1,
-  Webhook1$inboundSchema,
-  Webhook1$Outbound,
-  Webhook1$outboundSchema,
-} from "./webhook1.js";
+  WebhookEndpoint,
+  WebhookEndpoint$inboundSchema,
+} from "./webhookendpoint.js";
 
 /**
  * The WebhooksSearchResponse message.
  */
 export type WebhooksSearchResponse = {
   /**
-   * The list field.
+   * The list of webhooks matching the search criteria.
    */
-  list?: Array<Webhook1> | null | undefined;
+  list?: Array<WebhookEndpoint> | null | undefined;
   /**
-   * The nextPageToken field.
+   * A token to retrieve the next page of results, or empty if there are no more results.
    */
   nextPageToken?: string | null | undefined;
 };
@@ -33,46 +31,9 @@ export const WebhooksSearchResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  list: z.nullable(z.array(Webhook1$inboundSchema)).optional(),
+  list: z.nullable(z.array(WebhookEndpoint$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type WebhooksSearchResponse$Outbound = {
-  list?: Array<Webhook1$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const WebhooksSearchResponse$outboundSchema: z.ZodType<
-  WebhooksSearchResponse$Outbound,
-  z.ZodTypeDef,
-  WebhooksSearchResponse
-> = z.object({
-  list: z.nullable(z.array(Webhook1$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace WebhooksSearchResponse$ {
-  /** @deprecated use `WebhooksSearchResponse$inboundSchema` instead. */
-  export const inboundSchema = WebhooksSearchResponse$inboundSchema;
-  /** @deprecated use `WebhooksSearchResponse$outboundSchema` instead. */
-  export const outboundSchema = WebhooksSearchResponse$outboundSchema;
-  /** @deprecated use `WebhooksSearchResponse$Outbound` instead. */
-  export type Outbound = WebhooksSearchResponse$Outbound;
-}
-
-export function webhooksSearchResponseToJSON(
-  webhooksSearchResponse: WebhooksSearchResponse,
-): string {
-  return JSON.stringify(
-    WebhooksSearchResponse$outboundSchema.parse(webhooksSearchResponse),
-  );
-}
 
 export function webhooksSearchResponseFromJSON(
   jsonString: string,

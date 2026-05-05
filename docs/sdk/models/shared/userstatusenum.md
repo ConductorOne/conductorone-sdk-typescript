@@ -10,11 +10,11 @@ See the documentation for `c1.api.automations.v1.UpdateUser` for more details.
 import { UserStatusEnum } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: UserStatusEnum = "DELETED";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "UNKNOWN" | "ENABLED" | "DISABLED" | "DELETED" | Unrecognized<string>

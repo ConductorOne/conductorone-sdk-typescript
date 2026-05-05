@@ -16,7 +16,7 @@ export class AppResource extends ClientSDK {
    * List
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppResourceService.List method.
+   * List app resources for a given app and optionally filter by resource type.
    */
   async list(
     request: operations.C1ApiAppV1AppResourceServiceListRequest,
@@ -33,7 +33,7 @@ export class AppResource extends ClientSDK {
    * Create Manually Managed App Resource
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppResourceService.CreateManuallyManagedAppResource method.
+   * Create a manually managed app resource tracked directly by ConductorOne under an existing resource type.
    */
   async createManuallyManagedAppResource(
     request:
@@ -53,7 +53,7 @@ export class AppResource extends ClientSDK {
    * Delete Manually Managed App Resource
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppResourceService.DeleteManuallyManagedAppResource method.
+   * Delete a manually managed app resource and its associated entitlements from an app.
    */
   async deleteManuallyManagedAppResource(
     request:
@@ -73,7 +73,7 @@ export class AppResource extends ClientSDK {
    * Get
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppResourceService.Get method.
+   * Retrieve a single app resource by its app, resource type, and resource ID.
    */
   async get(
     request: operations.C1ApiAppV1AppResourceServiceGetRequest,
@@ -90,7 +90,7 @@ export class AppResource extends ClientSDK {
    * Update
    *
    * @remarks
-   * Invokes the c1.api.app.v1.AppResourceService.Update method.
+   * Update an app resource's fields. Only the fields specified in the update mask are modified.
    */
   async update(
     request: operations.C1ApiAppV1AppResourceServiceUpdateRequest,

@@ -1,19 +1,19 @@
 # SortBy
 
-Sort tasks in a specific order.
+Sort order
 
 ## Example Usage
 
 ```typescript
 import { SortBy } from "conductorone-sdk-typescript/sdk/models/shared";
 
-let value: SortBy = "TASK_SEARCH_SORT_BY_APP_RESOURCE_ID_AND_APP_ENTITLEMENT";
+let value: SortBy = "SEARCH_SORT_BY_NAME_ASC";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
-
 ```typescript
-"TASK_SEARCH_SORT_BY_UNSPECIFIED" | "TASK_SEARCH_SORT_BY_ACCOUNT" | "TASK_SEARCH_SORT_BY_RESOURCE" | "TASK_SEARCH_SORT_BY_ACCOUNT_OWNER" | "TASK_SEARCH_SORT_BY_REVERSE_TICKET_ID" | "TASK_SEARCH_SORT_BY_TICKET_ID" | "TASK_SEARCH_SORT_BY_CREATED_AT" | "TASK_SEARCH_SORT_BY_REVERSE_CREATED_AT" | "TASK_SEARCH_SORT_BY_APP_RESOURCE_ID_AND_APP_ENTITLEMENT" | Unrecognized<string>
+"SEARCH_SORT_BY_UNSPECIFIED" | "SEARCH_SORT_BY_CREATED_DESC" | "SEARCH_SORT_BY_CREATED_ASC" | "SEARCH_SORT_BY_EXPIRES_ASC" | "SEARCH_SORT_BY_NAME_ASC" | Unrecognized<string>
 ```

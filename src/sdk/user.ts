@@ -49,7 +49,7 @@ export class User extends ClientSDK {
    * Get User Profile Types
    *
    * @remarks
-   * Invokes the c1.api.user.v1.UserService.GetUserProfileTypes method.
+   * Retrieve the profile types associated with a user across their connected apps.
    */
   async getUserProfileTypes(
     request: operations.C1ApiUserV1UserServiceGetUserProfileTypesRequest,
@@ -66,7 +66,7 @@ export class User extends ClientSDK {
    * Set Expiring User Delegation Binding By Admin
    *
    * @remarks
-   * Invokes the c1.api.user.v1.UserService.SetExpiringUserDelegationBindingByAdmin method.
+   * Set or update an expiring delegation binding for a user, allowing an admin to designate a temporary delegate.
    */
   async setExpiringUserDelegationBindingByAdmin(
     request:

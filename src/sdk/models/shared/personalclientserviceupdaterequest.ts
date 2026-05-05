@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PersonalClientInput,
-  PersonalClientInput$inboundSchema,
   PersonalClientInput$Outbound,
   PersonalClientInput$outboundSchema,
 } from "./personalclientinput.js";
@@ -20,16 +16,6 @@ export type PersonalClientServiceUpdateRequest = {
   client?: PersonalClientInput | null | undefined;
   updateMask?: string | null | undefined;
 };
-
-/** @internal */
-export const PersonalClientServiceUpdateRequest$inboundSchema: z.ZodType<
-  PersonalClientServiceUpdateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  client: z.nullable(PersonalClientInput$inboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type PersonalClientServiceUpdateRequest$Outbound = {
@@ -47,20 +33,6 @@ export const PersonalClientServiceUpdateRequest$outboundSchema: z.ZodType<
   updateMask: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PersonalClientServiceUpdateRequest$ {
-  /** @deprecated use `PersonalClientServiceUpdateRequest$inboundSchema` instead. */
-  export const inboundSchema = PersonalClientServiceUpdateRequest$inboundSchema;
-  /** @deprecated use `PersonalClientServiceUpdateRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    PersonalClientServiceUpdateRequest$outboundSchema;
-  /** @deprecated use `PersonalClientServiceUpdateRequest$Outbound` instead. */
-  export type Outbound = PersonalClientServiceUpdateRequest$Outbound;
-}
-
 export function personalClientServiceUpdateRequestToJSON(
   personalClientServiceUpdateRequest: PersonalClientServiceUpdateRequest,
 ): string {
@@ -68,16 +40,5 @@ export function personalClientServiceUpdateRequestToJSON(
     PersonalClientServiceUpdateRequest$outboundSchema.parse(
       personalClientServiceUpdateRequest,
     ),
-  );
-}
-
-export function personalClientServiceUpdateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<PersonalClientServiceUpdateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PersonalClientServiceUpdateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PersonalClientServiceUpdateRequest' from JSON`,
   );
 }

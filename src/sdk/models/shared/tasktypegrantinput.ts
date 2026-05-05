@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TaskGrantSource,
-  TaskGrantSource$inboundSchema,
   TaskGrantSource$Outbound,
   TaskGrantSource$outboundSchema,
 } from "./taskgrantsource.js";
@@ -21,19 +17,6 @@ export type TaskTypeGrantInput = {
   outcomeTime?: Date | null | undefined;
   source?: TaskGrantSource | null | undefined;
 };
-
-/** @internal */
-export const TaskTypeGrantInput$inboundSchema: z.ZodType<
-  TaskTypeGrantInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  grantDuration: z.nullable(z.string()).optional(),
-  outcomeTime: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  source: z.nullable(TaskGrantSource$inboundSchema).optional(),
-});
 
 /** @internal */
 export type TaskTypeGrantInput$Outbound = {
@@ -53,33 +36,10 @@ export const TaskTypeGrantInput$outboundSchema: z.ZodType<
   source: z.nullable(TaskGrantSource$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TaskTypeGrantInput$ {
-  /** @deprecated use `TaskTypeGrantInput$inboundSchema` instead. */
-  export const inboundSchema = TaskTypeGrantInput$inboundSchema;
-  /** @deprecated use `TaskTypeGrantInput$outboundSchema` instead. */
-  export const outboundSchema = TaskTypeGrantInput$outboundSchema;
-  /** @deprecated use `TaskTypeGrantInput$Outbound` instead. */
-  export type Outbound = TaskTypeGrantInput$Outbound;
-}
-
 export function taskTypeGrantInputToJSON(
   taskTypeGrantInput: TaskTypeGrantInput,
 ): string {
   return JSON.stringify(
     TaskTypeGrantInput$outboundSchema.parse(taskTypeGrantInput),
-  );
-}
-
-export function taskTypeGrantInputFromJSON(
-  jsonString: string,
-): SafeParseResult<TaskTypeGrantInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TaskTypeGrantInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskTypeGrantInput' from JSON`,
   );
 }

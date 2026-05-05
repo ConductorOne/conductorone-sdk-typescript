@@ -4,6 +4,7 @@
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -28,7 +29,7 @@ import { Result } from "../sdk/types/fp.js";
  * Deny
  *
  * @remarks
- * Invokes the c1.api.task.v1.TaskActionsService.Deny method.
+ * Deny the specified policy step on a task. In multi-step policies, this may route to fallback steps rather than finalizing the task outcome.
  */
 export function taskActionsDeny(
   client: ConductoroneSDKTypescriptCore,
@@ -96,7 +97,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/api/v1/tasks/{task_id}/action/deny")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -139,7 +139,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

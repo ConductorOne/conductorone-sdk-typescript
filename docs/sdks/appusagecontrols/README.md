@@ -1,5 +1,4 @@
 # AppUsageControls
-(*appUsageControls*)
 
 ## Overview
 

@@ -7,53 +7,38 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  FormInput,
-  FormInput$inboundSchema,
-  FormInput$Outbound,
-  FormInput$outboundSchema,
-} from "./forminput.js";
+  RequestSchemaForm,
+  RequestSchemaForm$inboundSchema,
+  RequestSchemaForm$Outbound,
+  RequestSchemaForm$outboundSchema,
+} from "./requestschemaform.js";
 
 /**
  * The Form message.
  */
 export type Form = {
-  form?: FormInput | null | undefined;
+  form?: RequestSchemaForm | null | undefined;
 };
 
 /** @internal */
 export const Form$inboundSchema: z.ZodType<Form, z.ZodTypeDef, unknown> = z
   .object({
-    form: z.nullable(FormInput$inboundSchema).optional(),
+    form: z.nullable(RequestSchemaForm$inboundSchema).optional(),
   });
-
 /** @internal */
 export type Form$Outbound = {
-  form?: FormInput$Outbound | null | undefined;
+  form?: RequestSchemaForm$Outbound | null | undefined;
 };
 
 /** @internal */
 export const Form$outboundSchema: z.ZodType<Form$Outbound, z.ZodTypeDef, Form> =
   z.object({
-    form: z.nullable(FormInput$outboundSchema).optional(),
+    form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
   });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Form$ {
-  /** @deprecated use `Form$inboundSchema` instead. */
-  export const inboundSchema = Form$inboundSchema;
-  /** @deprecated use `Form$outboundSchema` instead. */
-  export const outboundSchema = Form$outboundSchema;
-  /** @deprecated use `Form$Outbound` instead. */
-  export type Outbound = Form$Outbound;
-}
 
 export function formToJSON(form: Form): string {
   return JSON.stringify(Form$outboundSchema.parse(form));
 }
-
 export function formFromJSON(
   jsonString: string,
 ): SafeParseResult<Form, SDKValidationError> {

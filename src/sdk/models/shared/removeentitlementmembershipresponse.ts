@@ -29,45 +29,6 @@ export const RemoveEntitlementMembershipResponse$inboundSchema: z.ZodType<
   revokeTaskId: z.nullable(z.string()).optional(),
 });
 
-/** @internal */
-export type RemoveEntitlementMembershipResponse$Outbound = {
-  revokeTaskId?: string | null | undefined;
-};
-
-/** @internal */
-export const RemoveEntitlementMembershipResponse$outboundSchema: z.ZodType<
-  RemoveEntitlementMembershipResponse$Outbound,
-  z.ZodTypeDef,
-  RemoveEntitlementMembershipResponse
-> = z.object({
-  revokeTaskId: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RemoveEntitlementMembershipResponse$ {
-  /** @deprecated use `RemoveEntitlementMembershipResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    RemoveEntitlementMembershipResponse$inboundSchema;
-  /** @deprecated use `RemoveEntitlementMembershipResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    RemoveEntitlementMembershipResponse$outboundSchema;
-  /** @deprecated use `RemoveEntitlementMembershipResponse$Outbound` instead. */
-  export type Outbound = RemoveEntitlementMembershipResponse$Outbound;
-}
-
-export function removeEntitlementMembershipResponseToJSON(
-  removeEntitlementMembershipResponse: RemoveEntitlementMembershipResponse,
-): string {
-  return JSON.stringify(
-    RemoveEntitlementMembershipResponse$outboundSchema.parse(
-      removeEntitlementMembershipResponse,
-    ),
-  );
-}
-
 export function removeEntitlementMembershipResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<RemoveEntitlementMembershipResponse, SDKValidationError> {

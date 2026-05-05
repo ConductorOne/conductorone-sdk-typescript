@@ -1,0 +1,25 @@
+# WorkloadFederationServiceTestTokenResponse
+
+The WorkloadFederationServiceTestTokenResponse message.
+
+## Example Usage
+
+```typescript
+import { WorkloadFederationServiceTestTokenResponse } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: WorkloadFederationServiceTestTokenResponse = {};
+```
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `testTokenStepResult`                                                                                | [shared.TestTokenStepResult](../../../sdk/models/shared/testtokenstepresult.md)                      | :heavy_minus_sign:                                                                                   | TestTokenStepResult represents the result of a single validation step.                               |
+| `testTokenStepResult1`                                                                               | [shared.TestTokenStepResult](../../../sdk/models/shared/testtokenstepresult.md)                      | :heavy_minus_sign:                                                                                   | TestTokenStepResult represents the result of a single validation step.                               |
+| `testTokenStepResult2`                                                                               | [shared.TestTokenStepResult](../../../sdk/models/shared/testtokenstepresult.md)                      | :heavy_minus_sign:                                                                                   | TestTokenStepResult represents the result of a single validation step.                               |
+| `decodedClaimsJson`                                                                                  | *string*                                                                                             | :heavy_minus_sign:                                                                                   | The decoded JWT claims (best-effort, even if signature fails).<br/> Returned as JSON string for display. |
+| `testTokenStepResult3`                                                                               | [shared.TestTokenStepResult](../../../sdk/models/shared/testtokenstepresult.md)                      | :heavy_minus_sign:                                                                                   | TestTokenStepResult represents the result of a single validation step.                               |
+| `testTokenStepResult4`                                                                               | [shared.TestTokenStepResult](../../../sdk/models/shared/testtokenstepresult.md)                      | :heavy_minus_sign:                                                                                   | TestTokenStepResult represents the result of a single validation step.                               |
+| `overallResult`                                                                                      | *boolean*                                                                                            | :heavy_minus_sign:                                                                                   | Overall result: true only if ALL steps passed.                                                       |
+| `testTokenStepResult5`                                                                               | [shared.TestTokenStepResult](../../../sdk/models/shared/testtokenstepresult.md)                      | :heavy_minus_sign:                                                                                   | TestTokenStepResult represents the result of a single validation step.                               |
+| `testTokenStepResult6`                                                                               | [shared.TestTokenStepResult](../../../sdk/models/shared/testtokenstepresult.md)                      | :heavy_minus_sign:                                                                                   | TestTokenStepResult represents the result of a single validation step.                               |

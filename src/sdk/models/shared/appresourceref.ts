@@ -3,38 +3,24 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The AppResourceRef message.
+ * A reference to a specific app resource by its composite key.
  */
 export type AppResourceRef = {
   /**
-   * The appId field.
+   * The ID of the app that owns the resource.
    */
   appId?: string | null | undefined;
   /**
-   * The appResourceTypeId field.
+   * The ID of the resource type that classifies this resource.
    */
   appResourceTypeId?: string | null | undefined;
   /**
-   * The id field.
+   * The unique ID of the app resource.
    */
   id?: string | null | undefined;
 };
-
-/** @internal */
-export const AppResourceRef$inboundSchema: z.ZodType<
-  AppResourceRef,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  appResourceTypeId: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-});
 
 /** @internal */
 export type AppResourceRef$Outbound = {
@@ -54,29 +40,6 @@ export const AppResourceRef$outboundSchema: z.ZodType<
   id: z.nullable(z.string()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppResourceRef$ {
-  /** @deprecated use `AppResourceRef$inboundSchema` instead. */
-  export const inboundSchema = AppResourceRef$inboundSchema;
-  /** @deprecated use `AppResourceRef$outboundSchema` instead. */
-  export const outboundSchema = AppResourceRef$outboundSchema;
-  /** @deprecated use `AppResourceRef$Outbound` instead. */
-  export type Outbound = AppResourceRef$Outbound;
-}
-
 export function appResourceRefToJSON(appResourceRef: AppResourceRef): string {
   return JSON.stringify(AppResourceRef$outboundSchema.parse(appResourceRef));
-}
-
-export function appResourceRefFromJSON(
-  jsonString: string,
-): SafeParseResult<AppResourceRef, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AppResourceRef$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AppResourceRef' from JSON`,
-  );
 }

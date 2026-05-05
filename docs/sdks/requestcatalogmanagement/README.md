@@ -1,5 +1,4 @@
 # RequestCatalogManagement
-(*requestCatalogManagement*)
 
 ## Overview
 
@@ -12,6 +11,9 @@
 * [updateAppEntitlements](#updateappentitlements) - Update App Entitlements
 * [removeAppEntitlements](#removeappentitlements) - Remove App Entitlements
 * [addAppEntitlements](#addappentitlements) - Add App Entitlements
+* [deleteRequestableEntry](#deleterequestableentry) - Delete Requestable Entry
+* [getRequestableEntry](#getrequestableentry) - Get Requestable Entry
+* [createRequestableEntry](#createrequestableentry) - Create Requestable Entry
 * [removeAccessEntitlements](#removeaccessentitlements) - Remove Access Entitlements
 * [addAccessEntitlements](#addaccessentitlements) - Add Access Entitlements
 * [listEntitlementsForAccess](#listentitlementsforaccess) - List Entitlements For Access
@@ -177,7 +179,7 @@ run();
 
 ## listAllEntitlementIdsPerApp
 
-Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.ListAllEntitlementIdsPerApp method.
+List all requestable entitlement IDs in a catalog without pagination.
 
 ### Example Usage
 
@@ -335,7 +337,7 @@ run();
 
 ## updateAppEntitlements
 
-Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.UpdateAppEntitlements method.
+Replace the full set of requestable entitlements in a catalog with the provided list.
 
 ### Example Usage
 
@@ -570,9 +572,258 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4XX, 5XX        | \*/\*           |
 
+## deleteRequestableEntry
+
+Delete a single requestable entry
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.requestcatalog.v1.RequestCatalogManagementService.DeleteRequestableEntry" method="delete" path="/api/v1/catalogs/{catalog_id}/requestable_entries/{app_id}/{entitlement_id}" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.requestCatalogManagement.deleteRequestableEntry({
+    catalogId: "<id>",
+    appId: "<id>",
+    entitlementId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { requestCatalogManagementDeleteRequestableEntry } from "conductorone-sdk-typescript/funcs/requestCatalogManagementDeleteRequestableEntry.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await requestCatalogManagementDeleteRequestableEntry(conductoroneSDKTypescript, {
+    catalogId: "<id>",
+    appId: "<id>",
+    entitlementId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("requestCatalogManagementDeleteRequestableEntry failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                        | Type                                                                                                                                                                                                             | Required                                                                                                                                                                                                         | Description                                                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                                                                                        | [operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequestableEntryRequest](../../sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicedeleterequestableentryrequest.md) | :heavy_check_mark:                                                                                                                                                                                               | The request object to use for the request.                                                                                                                                                                       |
+| `options`                                                                                                                                                                                                        | RequestOptions                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                               | Used to set various options for making HTTP requests.                                                                                                                                                            |
+| `options.fetchOptions`                                                                                                                                                                                           | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                               | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                                   |
+| `options.retries`                                                                                                                                                                                                | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                               | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                                 |
+
+### Response
+
+**Promise\<[operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequestableEntryResponse](../../sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicedeleterequestableentryresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## getRequestableEntry
+
+Get a single requestable entry
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.requestcatalog.v1.RequestCatalogManagementService.GetRequestableEntry" method="get" path="/api/v1/catalogs/{catalog_id}/requestable_entries/{app_id}/{entitlement_id}" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.requestCatalogManagement.getRequestableEntry({
+    catalogId: "<id>",
+    appId: "<id>",
+    entitlementId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { requestCatalogManagementGetRequestableEntry } from "conductorone-sdk-typescript/funcs/requestCatalogManagementGetRequestableEntry.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await requestCatalogManagementGetRequestableEntry(conductoroneSDKTypescript, {
+    catalogId: "<id>",
+    appId: "<id>",
+    entitlementId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("requestCatalogManagementGetRequestableEntry failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                  | Type                                                                                                                                                                                                       | Required                                                                                                                                                                                                   | Description                                                                                                                                                                                                |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                                                                                  | [operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequestableEntryRequest](../../sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicegetrequestableentryrequest.md) | :heavy_check_mark:                                                                                                                                                                                         | The request object to use for the request.                                                                                                                                                                 |
+| `options`                                                                                                                                                                                                  | RequestOptions                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                         | Used to set various options for making HTTP requests.                                                                                                                                                      |
+| `options.fetchOptions`                                                                                                                                                                                     | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                         | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                             |
+| `options.retries`                                                                                                                                                                                          | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                         | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                           |
+
+### Response
+
+**Promise\<[operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequestableEntryResponse](../../sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicegetrequestableentryresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## createRequestableEntry
+
+Create a single requestable entry
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.requestcatalog.v1.RequestCatalogManagementService.CreateRequestableEntry" method="put" path="/api/v1/catalogs/{catalog_id}/requestable_entries/{app_id}/{entitlement_id}" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.requestCatalogManagement.createRequestableEntry({
+    catalogId: "<id>",
+    appId: "<id>",
+    entitlementId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { requestCatalogManagementCreateRequestableEntry } from "conductorone-sdk-typescript/funcs/requestCatalogManagementCreateRequestableEntry.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await requestCatalogManagementCreateRequestableEntry(conductoroneSDKTypescript, {
+    catalogId: "<id>",
+    appId: "<id>",
+    entitlementId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("requestCatalogManagementCreateRequestableEntry failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                        | Type                                                                                                                                                                                                             | Required                                                                                                                                                                                                         | Description                                                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                                                                                        | [operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceCreateRequestableEntryRequest](../../sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicecreaterequestableentryrequest.md) | :heavy_check_mark:                                                                                                                                                                                               | The request object to use for the request.                                                                                                                                                                       |
+| `options`                                                                                                                                                                                                        | RequestOptions                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                               | Used to set various options for making HTTP requests.                                                                                                                                                            |
+| `options.fetchOptions`                                                                                                                                                                                           | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                               | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                                   |
+| `options.retries`                                                                                                                                                                                                | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                               | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                                 |
+
+### Response
+
+**Promise\<[operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceCreateRequestableEntryResponse](../../sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicecreaterequestableentryresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
 ## removeAccessEntitlements
 
-Remove visibility bindings (access entitlements) to a catalog.
+Remove visibility bindings (access entitlements) from a catalog.
 
 ### Example Usage
 
@@ -1046,7 +1297,7 @@ run();
 
 ## deleteBundleAutomation
 
-Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.DeleteBundleAutomation method.
+Delete the bundle automation rule for a catalog, stopping automatic membership syncing.
 
 ### Example Usage
 
@@ -1204,7 +1455,7 @@ run();
 
 ## setBundleAutomation
 
-Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.SetBundleAutomation method.
+Create or update the bundle automation rule for a catalog that automatically syncs catalog membership.
 
 ### Example Usage
 
@@ -1283,7 +1534,7 @@ run();
 
 ## createBundleAutomation
 
-Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.CreateBundleAutomation method.
+Create a new bundle automation rule for a catalog that automatically syncs catalog membership from a query.
 
 ### Example Usage
 
@@ -1362,7 +1613,7 @@ run();
 
 ## resumePausedBundleAutomation
 
-Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.ResumePausedBundleAutomation method.
+Resume a bundle automation that was paused by the circuit breaker after detecting excessive membership changes.
 
 ### Example Usage
 
@@ -1441,7 +1692,7 @@ run();
 
 ## forceRunBundleAutomation
 
-Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.ForceRunBundleAutomation method.
+Trigger an immediate execution of a catalog's bundle automation, bypassing the normal schedule.
 
 ### Example Usage
 

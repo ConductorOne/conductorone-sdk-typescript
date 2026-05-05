@@ -6,23 +6,18 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Exporter,
-  Exporter$inboundSchema,
-  Exporter$Outbound,
-  Exporter$outboundSchema,
-} from "./exporter.js";
+import { Exporter, Exporter$inboundSchema } from "./exporter.js";
 
 /**
- * The ExportsSearchServiceSearchResponse message.
+ * ExportsSearchServiceSearchResponse is the response for searching system log exports.
  */
 export type ExportsSearchServiceSearchResponse = {
   /**
-   * The list field.
+   * The list of system log exports matching the search criteria.
    */
   list?: Array<Exporter> | null | undefined;
   /**
-   * The nextPageToken field.
+   * The token to retrieve the next page of results, or empty if there are no more results.
    */
   nextPageToken?: string | null | undefined;
 };
@@ -36,46 +31,6 @@ export const ExportsSearchServiceSearchResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(Exporter$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type ExportsSearchServiceSearchResponse$Outbound = {
-  list?: Array<Exporter$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const ExportsSearchServiceSearchResponse$outboundSchema: z.ZodType<
-  ExportsSearchServiceSearchResponse$Outbound,
-  z.ZodTypeDef,
-  ExportsSearchServiceSearchResponse
-> = z.object({
-  list: z.nullable(z.array(Exporter$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ExportsSearchServiceSearchResponse$ {
-  /** @deprecated use `ExportsSearchServiceSearchResponse$inboundSchema` instead. */
-  export const inboundSchema = ExportsSearchServiceSearchResponse$inboundSchema;
-  /** @deprecated use `ExportsSearchServiceSearchResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    ExportsSearchServiceSearchResponse$outboundSchema;
-  /** @deprecated use `ExportsSearchServiceSearchResponse$Outbound` instead. */
-  export type Outbound = ExportsSearchServiceSearchResponse$Outbound;
-}
-
-export function exportsSearchServiceSearchResponseToJSON(
-  exportsSearchServiceSearchResponse: ExportsSearchServiceSearchResponse,
-): string {
-  return JSON.stringify(
-    ExportsSearchServiceSearchResponse$outboundSchema.parse(
-      exportsSearchServiceSearchResponse,
-    ),
-  );
-}
 
 export function exportsSearchServiceSearchResponseFromJSON(
   jsonString: string,

@@ -3,21 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The DeleteAppEntitlementRequest message.
  */
 export type DeleteAppEntitlementRequest = {};
-
-/** @internal */
-export const DeleteAppEntitlementRequest$inboundSchema: z.ZodType<
-  DeleteAppEntitlementRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 
 /** @internal */
 export type DeleteAppEntitlementRequest$Outbound = {};
@@ -29,19 +19,6 @@ export const DeleteAppEntitlementRequest$outboundSchema: z.ZodType<
   DeleteAppEntitlementRequest
 > = z.object({});
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeleteAppEntitlementRequest$ {
-  /** @deprecated use `DeleteAppEntitlementRequest$inboundSchema` instead. */
-  export const inboundSchema = DeleteAppEntitlementRequest$inboundSchema;
-  /** @deprecated use `DeleteAppEntitlementRequest$outboundSchema` instead. */
-  export const outboundSchema = DeleteAppEntitlementRequest$outboundSchema;
-  /** @deprecated use `DeleteAppEntitlementRequest$Outbound` instead. */
-  export type Outbound = DeleteAppEntitlementRequest$Outbound;
-}
-
 export function deleteAppEntitlementRequestToJSON(
   deleteAppEntitlementRequest: DeleteAppEntitlementRequest,
 ): string {
@@ -49,15 +26,5 @@ export function deleteAppEntitlementRequestToJSON(
     DeleteAppEntitlementRequest$outboundSchema.parse(
       deleteAppEntitlementRequest,
     ),
-  );
-}
-
-export function deleteAppEntitlementRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteAppEntitlementRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteAppEntitlementRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteAppEntitlementRequest' from JSON`,
   );
 }

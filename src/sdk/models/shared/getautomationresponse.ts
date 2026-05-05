@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Automation,
-  Automation$inboundSchema,
-  Automation$Outbound,
-  Automation$outboundSchema,
-} from "./automation.js";
+import { Automation, Automation$inboundSchema } from "./automation.js";
 
 /**
  * The GetAutomationResponse message.
@@ -28,41 +23,6 @@ export const GetAutomationResponse$inboundSchema: z.ZodType<
 > = z.object({
   automation: z.nullable(Automation$inboundSchema).optional(),
 });
-
-/** @internal */
-export type GetAutomationResponse$Outbound = {
-  automation?: Automation$Outbound | null | undefined;
-};
-
-/** @internal */
-export const GetAutomationResponse$outboundSchema: z.ZodType<
-  GetAutomationResponse$Outbound,
-  z.ZodTypeDef,
-  GetAutomationResponse
-> = z.object({
-  automation: z.nullable(Automation$outboundSchema).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAutomationResponse$ {
-  /** @deprecated use `GetAutomationResponse$inboundSchema` instead. */
-  export const inboundSchema = GetAutomationResponse$inboundSchema;
-  /** @deprecated use `GetAutomationResponse$outboundSchema` instead. */
-  export const outboundSchema = GetAutomationResponse$outboundSchema;
-  /** @deprecated use `GetAutomationResponse$Outbound` instead. */
-  export type Outbound = GetAutomationResponse$Outbound;
-}
-
-export function getAutomationResponseToJSON(
-  getAutomationResponse: GetAutomationResponse,
-): string {
-  return JSON.stringify(
-    GetAutomationResponse$outboundSchema.parse(getAutomationResponse),
-  );
-}
 
 export function getAutomationResponseFromJSON(
   jsonString: string,

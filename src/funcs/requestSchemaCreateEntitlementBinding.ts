@@ -4,6 +4,7 @@
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
 import { encodeJSON } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -29,7 +30,7 @@ import { Result } from "../sdk/types/fp.js";
  * Create Entitlement Binding
  *
  * @remarks
- * Invokes the c1.api.request_schema.v1.RequestSchemaService.CreateEntitlementBinding method.
+ * Link a request schema to a single app entitlement so the form is shown when requesting that entitlement.
  */
 export function requestSchemaCreateEntitlementBinding(
   client: ConductoroneSDKTypescriptCore,
@@ -137,7 +138,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, []),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

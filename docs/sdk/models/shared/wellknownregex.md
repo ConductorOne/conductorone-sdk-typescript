@@ -10,11 +10,11 @@ See the documentation for `validate.StringRules` for more details.
 import { WellKnownRegex } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: WellKnownRegex = "HTTP_HEADER_VALUE";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "UNKNOWN" | "HTTP_HEADER_NAME" | "HTTP_HEADER_VALUE" | Unrecognized<string>

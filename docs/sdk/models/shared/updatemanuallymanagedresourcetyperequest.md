@@ -1,6 +1,6 @@
 # UpdateManuallyManagedResourceTypeRequest
 
-The UpdateManuallyManagedResourceTypeRequest message.
+The request message for updating a manually managed resource type.
 
 ## Example Usage
 

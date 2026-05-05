@@ -52,67 +52,6 @@ export const C1ApiAppV1ConnectorServiceRotateCredentialResponse$inboundSchema:
     });
   });
 
-/** @internal */
-export type C1ApiAppV1ConnectorServiceRotateCredentialResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  ConnectorServiceRotateCredentialResponse?:
-    | shared.ConnectorServiceRotateCredentialResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1ConnectorServiceRotateCredentialResponse$outboundSchema:
-  z.ZodType<
-    C1ApiAppV1ConnectorServiceRotateCredentialResponse$Outbound,
-    z.ZodTypeDef,
-    C1ApiAppV1ConnectorServiceRotateCredentialResponse
-  > = z.object({
-    contentType: z.string(),
-    statusCode: z.number().int(),
-    rawResponse: z.instanceof(Response).transform(() => {
-      throw new Error("Response cannot be serialized");
-    }),
-    connectorServiceRotateCredentialResponse: shared
-      .ConnectorServiceRotateCredentialResponse$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      contentType: "ContentType",
-      statusCode: "StatusCode",
-      rawResponse: "RawResponse",
-      connectorServiceRotateCredentialResponse:
-        "ConnectorServiceRotateCredentialResponse",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1ConnectorServiceRotateCredentialResponse$ {
-  /** @deprecated use `C1ApiAppV1ConnectorServiceRotateCredentialResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1ConnectorServiceRotateCredentialResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceRotateCredentialResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1ConnectorServiceRotateCredentialResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1ConnectorServiceRotateCredentialResponse$Outbound` instead. */
-  export type Outbound =
-    C1ApiAppV1ConnectorServiceRotateCredentialResponse$Outbound;
-}
-
-export function c1ApiAppV1ConnectorServiceRotateCredentialResponseToJSON(
-  c1ApiAppV1ConnectorServiceRotateCredentialResponse:
-    C1ApiAppV1ConnectorServiceRotateCredentialResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1ConnectorServiceRotateCredentialResponse$outboundSchema.parse(
-      c1ApiAppV1ConnectorServiceRotateCredentialResponse,
-    ),
-  );
-}
-
 export function c1ApiAppV1ConnectorServiceRotateCredentialResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<

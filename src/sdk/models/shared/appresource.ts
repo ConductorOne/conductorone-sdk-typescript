@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  SecretTrait,
-  SecretTrait$inboundSchema,
-  SecretTrait$Outbound,
-  SecretTrait$outboundSchema,
-} from "./secrettrait.js";
+import { SecretTrait, SecretTrait$inboundSchema } from "./secrettrait.js";
 
 /**
  * The app resource message is a single resource that can have entitlements.
@@ -22,6 +17,13 @@ import {
  *   - secretTrait
  */
 export type AppResource = {
+  /**
+   * The access config ID for this resource. May be empty.
+   *
+   * @remarks
+   *  Must be one of the builtin access config IDs or empty.
+   */
+  accessConfigId?: string | undefined;
   /**
    * The app that this resource belongs to.
    */
@@ -45,6 +47,13 @@ export type AppResource = {
    */
   displayName?: string | null | undefined;
   /**
+   * The upstream product's native external ID for this resource (e.g. an Okta group ID).
+   *
+   * @remarks
+   *  Populated from the connector's external ID during sync.
+   */
+  externalId?: string | undefined;
+  /**
    * The number of grants to this resource.
    */
   grantCount?: number | null | undefined;
@@ -64,6 +73,7 @@ export type AppResource = {
    * The parent resource type id, if this resource is a child of another resource.
    */
   parentAppResourceTypeId?: string | null | undefined;
+  profile?: { [k: string]: any } | undefined;
   secretTrait?: SecretTrait | null | undefined;
   updatedAt?: Date | null | undefined;
 };
@@ -74,6 +84,7 @@ export const AppResource$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  accessConfigId: z.string().optional(),
   appId: z.nullable(z.string()).optional(),
   appResourceTypeId: z.nullable(z.string()).optional(),
   createdAt: z.nullable(
@@ -85,73 +96,18 @@ export const AppResource$inboundSchema: z.ZodType<
   ).optional(),
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
+  externalId: z.string().optional(),
   grantCount: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
   id: z.nullable(z.string()).optional(),
   matchBatonId: z.nullable(z.string()).optional(),
   parentAppResourceId: z.nullable(z.string()).optional(),
   parentAppResourceTypeId: z.nullable(z.string()).optional(),
+  profile: z.record(z.any()).optional(),
   secretTrait: z.nullable(SecretTrait$inboundSchema).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-
-/** @internal */
-export type AppResource$Outbound = {
-  appId?: string | null | undefined;
-  appResourceTypeId?: string | null | undefined;
-  createdAt?: string | null | undefined;
-  customDescription?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  grantCount?: string | null | undefined;
-  id?: string | null | undefined;
-  matchBatonId?: string | null | undefined;
-  parentAppResourceId?: string | null | undefined;
-  parentAppResourceTypeId?: string | null | undefined;
-  secretTrait?: SecretTrait$Outbound | null | undefined;
-  updatedAt?: string | null | undefined;
-};
-
-/** @internal */
-export const AppResource$outboundSchema: z.ZodType<
-  AppResource$Outbound,
-  z.ZodTypeDef,
-  AppResource
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  appResourceTypeId: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  customDescription: z.nullable(z.string()).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  grantCount: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
-  id: z.nullable(z.string()).optional(),
-  matchBatonId: z.nullable(z.string()).optional(),
-  parentAppResourceId: z.nullable(z.string()).optional(),
-  parentAppResourceTypeId: z.nullable(z.string()).optional(),
-  secretTrait: z.nullable(SecretTrait$outboundSchema).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppResource$ {
-  /** @deprecated use `AppResource$inboundSchema` instead. */
-  export const inboundSchema = AppResource$inboundSchema;
-  /** @deprecated use `AppResource$outboundSchema` instead. */
-  export const outboundSchema = AppResource$outboundSchema;
-  /** @deprecated use `AppResource$Outbound` instead. */
-  export type Outbound = AppResource$Outbound;
-}
-
-export function appResourceToJSON(appResource: AppResource): string {
-  return JSON.stringify(AppResource$outboundSchema.parse(appResource));
-}
 
 export function appResourceFromJSON(
   jsonString: string,

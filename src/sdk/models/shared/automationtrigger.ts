@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -25,12 +26,6 @@ import {
   AppUserUpdatedTrigger$outboundSchema,
 } from "./appuserupdatedtrigger.js";
 import {
-  FormTrigger,
-  FormTrigger$inboundSchema,
-  FormTrigger$Outbound,
-  FormTrigger$outboundSchema,
-} from "./formtrigger.js";
-import {
   GrantDeletedTrigger,
   GrantDeletedTrigger$inboundSchema,
   GrantDeletedTrigger$Outbound,
@@ -43,12 +38,6 @@ import {
   GrantFoundTrigger$outboundSchema,
 } from "./grantfoundtrigger.js";
 import {
-  ManualAutomationTrigger,
-  ManualAutomationTrigger$inboundSchema,
-  ManualAutomationTrigger$Outbound,
-  ManualAutomationTrigger$outboundSchema,
-} from "./manualautomationtrigger.js";
-import {
   ScheduleTrigger,
   ScheduleTrigger$inboundSchema,
   ScheduleTrigger$Outbound,
@@ -60,6 +49,12 @@ import {
   ScheduleTriggerAppUser$Outbound,
   ScheduleTriggerAppUser$outboundSchema,
 } from "./scheduletriggerappuser.js";
+import {
+  ScheduleTriggerNoUser,
+  ScheduleTriggerNoUser$inboundSchema,
+  ScheduleTriggerNoUser$Outbound,
+  ScheduleTriggerNoUser$outboundSchema,
+} from "./scheduletriggernouser.js";
 import {
   UsageBasedRevocationTrigger,
   UsageBasedRevocationTrigger$inboundSchema,
@@ -91,7 +86,6 @@ import {
  * @remarks
  *
  * This message contains a oneof named kind. Only a single field of the following list may be set at a time:
- *   - manual
  *   - userProfileChange
  *   - appUserCreated
  *   - appUserUpdated
@@ -101,20 +95,25 @@ import {
  *   - grantDeleted
  *   - webhook
  *   - schedule
- *   - form
  *   - scheduleAppUser
  *   - accessConflict
+ *   - scheduleNoUser
  */
 export type AutomationTrigger = {
   accessConflict?: AccessConflictTrigger | null | undefined;
   appUserCreated?: AppUserCreatedTrigger | null | undefined;
   appUserUpdated?: AppUserUpdatedTrigger | null | undefined;
-  form?: FormTrigger | null | undefined;
   grantDeleted?: GrantDeletedTrigger | null | undefined;
   grantFound?: GrantFoundTrigger | null | undefined;
-  manual?: ManualAutomationTrigger | null | undefined;
   schedule?: ScheduleTrigger | null | undefined;
   scheduleAppUser?: ScheduleTriggerAppUser | null | undefined;
+  /**
+   * ScheduleTriggerNoUser fires on a cron schedule with no subject user (e.g. reports, syncs, orchestration).
+   *
+   * @remarks
+   *  Minimum cron interval is enforced at 1 hour in validation.
+   */
+  scheduleTriggerNoUser?: ScheduleTriggerNoUser | null | undefined;
   usageBasedRevocation?: UsageBasedRevocationTrigger | null | undefined;
   userCreated?: UserCreatedTrigger | null | undefined;
   userProfileChange?: UserProfileChangeTrigger | null | undefined;
@@ -130,31 +129,32 @@ export const AutomationTrigger$inboundSchema: z.ZodType<
   accessConflict: z.nullable(AccessConflictTrigger$inboundSchema).optional(),
   appUserCreated: z.nullable(AppUserCreatedTrigger$inboundSchema).optional(),
   appUserUpdated: z.nullable(AppUserUpdatedTrigger$inboundSchema).optional(),
-  form: z.nullable(FormTrigger$inboundSchema).optional(),
   grantDeleted: z.nullable(GrantDeletedTrigger$inboundSchema).optional(),
   grantFound: z.nullable(GrantFoundTrigger$inboundSchema).optional(),
-  manual: z.nullable(ManualAutomationTrigger$inboundSchema).optional(),
   schedule: z.nullable(ScheduleTrigger$inboundSchema).optional(),
   scheduleAppUser: z.nullable(ScheduleTriggerAppUser$inboundSchema).optional(),
+  scheduleNoUser: z.nullable(ScheduleTriggerNoUser$inboundSchema).optional(),
   usageBasedRevocation: z.nullable(UsageBasedRevocationTrigger$inboundSchema)
     .optional(),
   userCreated: z.nullable(UserCreatedTrigger$inboundSchema).optional(),
   userProfileChange: z.nullable(UserProfileChangeTrigger$inboundSchema)
     .optional(),
   webhook: z.nullable(WebhookAutomationTrigger$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "scheduleNoUser": "scheduleTriggerNoUser",
+  });
 });
-
 /** @internal */
 export type AutomationTrigger$Outbound = {
   accessConflict?: AccessConflictTrigger$Outbound | null | undefined;
   appUserCreated?: AppUserCreatedTrigger$Outbound | null | undefined;
   appUserUpdated?: AppUserUpdatedTrigger$Outbound | null | undefined;
-  form?: FormTrigger$Outbound | null | undefined;
   grantDeleted?: GrantDeletedTrigger$Outbound | null | undefined;
   grantFound?: GrantFoundTrigger$Outbound | null | undefined;
-  manual?: ManualAutomationTrigger$Outbound | null | undefined;
   schedule?: ScheduleTrigger$Outbound | null | undefined;
   scheduleAppUser?: ScheduleTriggerAppUser$Outbound | null | undefined;
+  scheduleNoUser?: ScheduleTriggerNoUser$Outbound | null | undefined;
   usageBasedRevocation?:
     | UsageBasedRevocationTrigger$Outbound
     | null
@@ -173,32 +173,23 @@ export const AutomationTrigger$outboundSchema: z.ZodType<
   accessConflict: z.nullable(AccessConflictTrigger$outboundSchema).optional(),
   appUserCreated: z.nullable(AppUserCreatedTrigger$outboundSchema).optional(),
   appUserUpdated: z.nullable(AppUserUpdatedTrigger$outboundSchema).optional(),
-  form: z.nullable(FormTrigger$outboundSchema).optional(),
   grantDeleted: z.nullable(GrantDeletedTrigger$outboundSchema).optional(),
   grantFound: z.nullable(GrantFoundTrigger$outboundSchema).optional(),
-  manual: z.nullable(ManualAutomationTrigger$outboundSchema).optional(),
   schedule: z.nullable(ScheduleTrigger$outboundSchema).optional(),
   scheduleAppUser: z.nullable(ScheduleTriggerAppUser$outboundSchema).optional(),
+  scheduleTriggerNoUser: z.nullable(ScheduleTriggerNoUser$outboundSchema)
+    .optional(),
   usageBasedRevocation: z.nullable(UsageBasedRevocationTrigger$outboundSchema)
     .optional(),
   userCreated: z.nullable(UserCreatedTrigger$outboundSchema).optional(),
   userProfileChange: z.nullable(UserProfileChangeTrigger$outboundSchema)
     .optional(),
   webhook: z.nullable(WebhookAutomationTrigger$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    scheduleTriggerNoUser: "scheduleNoUser",
+  });
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AutomationTrigger$ {
-  /** @deprecated use `AutomationTrigger$inboundSchema` instead. */
-  export const inboundSchema = AutomationTrigger$inboundSchema;
-  /** @deprecated use `AutomationTrigger$outboundSchema` instead. */
-  export const outboundSchema = AutomationTrigger$outboundSchema;
-  /** @deprecated use `AutomationTrigger$Outbound` instead. */
-  export type Outbound = AutomationTrigger$Outbound;
-}
 
 export function automationTriggerToJSON(
   automationTrigger: AutomationTrigger,
@@ -207,7 +198,6 @@ export function automationTriggerToJSON(
     AutomationTrigger$outboundSchema.parse(automationTrigger),
   );
 }
-
 export function automationTriggerFromJSON(
   jsonString: string,
 ): SafeParseResult<AutomationTrigger, SDKValidationError> {

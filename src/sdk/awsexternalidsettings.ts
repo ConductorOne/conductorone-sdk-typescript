@@ -12,7 +12,7 @@ export class AWSExternalIDSettings extends ClientSDK {
    * Get
    *
    * @remarks
-   * Invokes the c1.api.settings.v1.AWSExternalIDSettings.Get method.
+   * Get retrieves the AWS external ID for the tenant, used in IAM role trust policies for AWS connectors.
    */
   async get(
     options?: RequestOptions,

@@ -50,64 +50,6 @@ export const C1ApiAppV1AppUserServiceSearchResponse$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type C1ApiAppV1AppUserServiceSearchResponse$Outbound = {
-  ContentType: string;
-  StatusCode: number;
-  RawResponse: never;
-  AppUserServiceSearchResponse?:
-    | shared.AppUserServiceSearchResponse$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const C1ApiAppV1AppUserServiceSearchResponse$outboundSchema: z.ZodType<
-  C1ApiAppV1AppUserServiceSearchResponse$Outbound,
-  z.ZodTypeDef,
-  C1ApiAppV1AppUserServiceSearchResponse
-> = z.object({
-  contentType: z.string(),
-  statusCode: z.number().int(),
-  rawResponse: z.instanceof(Response).transform(() => {
-    throw new Error("Response cannot be serialized");
-  }),
-  appUserServiceSearchResponse: shared
-    .AppUserServiceSearchResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "ContentType",
-    statusCode: "StatusCode",
-    rawResponse: "RawResponse",
-    appUserServiceSearchResponse: "AppUserServiceSearchResponse",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace C1ApiAppV1AppUserServiceSearchResponse$ {
-  /** @deprecated use `C1ApiAppV1AppUserServiceSearchResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    C1ApiAppV1AppUserServiceSearchResponse$inboundSchema;
-  /** @deprecated use `C1ApiAppV1AppUserServiceSearchResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    C1ApiAppV1AppUserServiceSearchResponse$outboundSchema;
-  /** @deprecated use `C1ApiAppV1AppUserServiceSearchResponse$Outbound` instead. */
-  export type Outbound = C1ApiAppV1AppUserServiceSearchResponse$Outbound;
-}
-
-export function c1ApiAppV1AppUserServiceSearchResponseToJSON(
-  c1ApiAppV1AppUserServiceSearchResponse:
-    C1ApiAppV1AppUserServiceSearchResponse,
-): string {
-  return JSON.stringify(
-    C1ApiAppV1AppUserServiceSearchResponse$outboundSchema.parse(
-      c1ApiAppV1AppUserServiceSearchResponse,
-    ),
-  );
-}
-
 export function c1ApiAppV1AppUserServiceSearchResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<C1ApiAppV1AppUserServiceSearchResponse, SDKValidationError> {

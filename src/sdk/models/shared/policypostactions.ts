@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * These are actions to happen after a policy is complete.
+ * Actions to execute after a policy finishes processing.
  *
  * @remarks
  *
@@ -17,10 +17,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type PolicyPostActions = {
   /**
-   * ONLY valid when used in a CERTIFY Ticket Type:
+   * Only valid on certify policies. When true, any revocations resulting from
    *
    * @remarks
-   *  Causes any deprovision or change in a grant to be applied when Certify Ticket is closed.
+   *  the certification are applied immediately when the campaign task closes.
    * This field is part of the `action` oneof.
    * See the documentation for `c1.api.policy.v1.PolicyPostActions` for more details.
    */
@@ -35,7 +35,6 @@ export const PolicyPostActions$inboundSchema: z.ZodType<
 > = z.object({
   certifyRemediateImmediately: z.nullable(z.boolean()).optional(),
 });
-
 /** @internal */
 export type PolicyPostActions$Outbound = {
   certifyRemediateImmediately?: boolean | null | undefined;
@@ -50,19 +49,6 @@ export const PolicyPostActions$outboundSchema: z.ZodType<
   certifyRemediateImmediately: z.nullable(z.boolean()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PolicyPostActions$ {
-  /** @deprecated use `PolicyPostActions$inboundSchema` instead. */
-  export const inboundSchema = PolicyPostActions$inboundSchema;
-  /** @deprecated use `PolicyPostActions$outboundSchema` instead. */
-  export const outboundSchema = PolicyPostActions$outboundSchema;
-  /** @deprecated use `PolicyPostActions$Outbound` instead. */
-  export type Outbound = PolicyPostActions$Outbound;
-}
-
 export function policyPostActionsToJSON(
   policyPostActions: PolicyPostActions,
 ): string {
@@ -70,7 +56,6 @@ export function policyPostActionsToJSON(
     PolicyPostActions$outboundSchema.parse(policyPostActions),
   );
 }
-
 export function policyPostActionsFromJSON(
   jsonString: string,
 ): SafeParseResult<PolicyPostActions, SDKValidationError> {

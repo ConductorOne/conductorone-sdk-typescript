@@ -1,6 +1,6 @@
 # ExportServiceListEventsRequest
 
-The ExportServiceListEventsRequest message.
+ExportServiceListEventsRequest is the request for listing audit events within a specific export.
 
 ## Example Usage
 

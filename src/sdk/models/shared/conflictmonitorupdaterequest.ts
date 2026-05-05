@@ -3,47 +3,35 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  NotificationConfig,
-  NotificationConfig$inboundSchema,
-  NotificationConfig$Outbound,
-  NotificationConfig$outboundSchema,
-} from "./notificationconfig.js";
+  AccessConflictNotificationConfig,
+  AccessConflictNotificationConfig$Outbound,
+  AccessConflictNotificationConfig$outboundSchema,
+} from "./accessconflictnotificationconfig.js";
 
 /**
- * The ConflictMonitorUpdateRequest message.
+ * The request message for updating an existing conflict monitor.
  */
 export type ConflictMonitorUpdateRequest = {
   /**
-   * The description field.
+   * The updated description for the conflict monitor.
    */
   description?: string | null | undefined;
   /**
-   * The displayName field.
+   * The updated human-readable name for the conflict monitor.
    */
   displayName?: string | null | undefined;
-  notificationConfig?: NotificationConfig | null | undefined;
+  notificationConfig?: AccessConflictNotificationConfig | null | undefined;
 };
-
-/** @internal */
-export const ConflictMonitorUpdateRequest$inboundSchema: z.ZodType<
-  ConflictMonitorUpdateRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  notificationConfig: z.nullable(NotificationConfig$inboundSchema).optional(),
-});
 
 /** @internal */
 export type ConflictMonitorUpdateRequest$Outbound = {
   description?: string | null | undefined;
   displayName?: string | null | undefined;
-  notificationConfig?: NotificationConfig$Outbound | null | undefined;
+  notificationConfig?:
+    | AccessConflictNotificationConfig$Outbound
+    | null
+    | undefined;
 };
 
 /** @internal */
@@ -54,21 +42,10 @@ export const ConflictMonitorUpdateRequest$outboundSchema: z.ZodType<
 > = z.object({
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
-  notificationConfig: z.nullable(NotificationConfig$outboundSchema).optional(),
+  notificationConfig: z.nullable(
+    AccessConflictNotificationConfig$outboundSchema,
+  ).optional(),
 });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ConflictMonitorUpdateRequest$ {
-  /** @deprecated use `ConflictMonitorUpdateRequest$inboundSchema` instead. */
-  export const inboundSchema = ConflictMonitorUpdateRequest$inboundSchema;
-  /** @deprecated use `ConflictMonitorUpdateRequest$outboundSchema` instead. */
-  export const outboundSchema = ConflictMonitorUpdateRequest$outboundSchema;
-  /** @deprecated use `ConflictMonitorUpdateRequest$Outbound` instead. */
-  export type Outbound = ConflictMonitorUpdateRequest$Outbound;
-}
 
 export function conflictMonitorUpdateRequestToJSON(
   conflictMonitorUpdateRequest: ConflictMonitorUpdateRequest,
@@ -77,15 +54,5 @@ export function conflictMonitorUpdateRequestToJSON(
     ConflictMonitorUpdateRequest$outboundSchema.parse(
       conflictMonitorUpdateRequest,
     ),
-  );
-}
-
-export function conflictMonitorUpdateRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ConflictMonitorUpdateRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ConflictMonitorUpdateRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ConflictMonitorUpdateRequest' from JSON`,
   );
 }

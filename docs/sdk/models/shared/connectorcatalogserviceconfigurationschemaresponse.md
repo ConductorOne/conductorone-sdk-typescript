@@ -1,6 +1,6 @@
 # ConnectorCatalogServiceConfigurationSchemaResponse
 
-The ConnectorCatalogServiceConfigurationSchemaResponse message.
+ConnectorCatalogServiceConfigurationSchemaResponse is the response containing the connector's configuration schema.
 
 ## Example Usage
 
@@ -12,7 +12,7 @@ let value: ConnectorCatalogServiceConfigurationSchemaResponse = {};
 
 ## Fields
 
-| Field                                                             | Type                                                              | Required                                                          | Description                                                       |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `formSchema`                                                      | [shared.FormInput](../../../sdk/models/shared/forminput.md)       | :heavy_minus_sign:                                                | N/A                                                               |
-| `schema`                                                          | [shared.ConfigSchema](../../../sdk/models/shared/configschema.md) | :heavy_minus_sign:                                                | N/A                                                               |
+| Field                                                                       | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `formSchema`                                                                | [shared.RequestSchemaForm](../../../sdk/models/shared/requestschemaform.md) | :heavy_minus_sign:                                                          | N/A                                                                         |
+| `schema`                                                                    | [shared.ConfigSchema](../../../sdk/models/shared/configschema.md)           | :heavy_minus_sign:                                                          | N/A                                                                         |

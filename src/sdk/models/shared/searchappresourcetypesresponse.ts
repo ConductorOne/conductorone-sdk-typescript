@@ -9,8 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppResourceType,
   AppResourceType$inboundSchema,
-  AppResourceType$Outbound,
-  AppResourceType$outboundSchema,
 } from "./appresourcetype.js";
 
 /**
@@ -40,45 +38,6 @@ export const SearchAppResourceTypesResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(AppResourceType$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type SearchAppResourceTypesResponse$Outbound = {
-  list?: Array<AppResourceType$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const SearchAppResourceTypesResponse$outboundSchema: z.ZodType<
-  SearchAppResourceTypesResponse$Outbound,
-  z.ZodTypeDef,
-  SearchAppResourceTypesResponse
-> = z.object({
-  list: z.nullable(z.array(AppResourceType$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchAppResourceTypesResponse$ {
-  /** @deprecated use `SearchAppResourceTypesResponse$inboundSchema` instead. */
-  export const inboundSchema = SearchAppResourceTypesResponse$inboundSchema;
-  /** @deprecated use `SearchAppResourceTypesResponse$outboundSchema` instead. */
-  export const outboundSchema = SearchAppResourceTypesResponse$outboundSchema;
-  /** @deprecated use `SearchAppResourceTypesResponse$Outbound` instead. */
-  export type Outbound = SearchAppResourceTypesResponse$Outbound;
-}
-
-export function searchAppResourceTypesResponseToJSON(
-  searchAppResourceTypesResponse: SearchAppResourceTypesResponse,
-): string {
-  return JSON.stringify(
-    SearchAppResourceTypesResponse$outboundSchema.parse(
-      searchAppResourceTypesResponse,
-    ),
-  );
-}
 
 export function searchAppResourceTypesResponseFromJSON(
   jsonString: string,

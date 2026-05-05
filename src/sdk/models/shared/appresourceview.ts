@@ -3,15 +3,15 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  AppResource,
-  AppResource$inboundSchema,
-  AppResource$Outbound,
-  AppResource$outboundSchema,
-} from "./appresource.js";
+  ActorObjectPermissions,
+  ActorObjectPermissions$inboundSchema,
+} from "./actorobjectpermissions.js";
+import { AppResource, AppResource$inboundSchema } from "./appresource.js";
 
 /**
  * The app resource view returns an app resource with paths for items in the expand mask filled in when this response is returned and a request expand mask has "*" or "app_id" or "resource_type_id".
@@ -22,6 +22,10 @@ export type AppResourceView = {
    */
   appPath?: string | null | undefined;
   appResource?: AppResource | null | undefined;
+  /**
+   * The ActorObjectPermissions message.
+   */
+  actorObjectPermissions?: ActorObjectPermissions | undefined;
   /**
    * JSONPATH expression indicating the location of the Parent Resource object in the array
    */
@@ -44,51 +48,15 @@ export const AppResourceView$inboundSchema: z.ZodType<
 > = z.object({
   appPath: z.nullable(z.string()).optional(),
   appResource: z.nullable(AppResource$inboundSchema).optional(),
+  objectPermissions: ActorObjectPermissions$inboundSchema.optional(),
   parentResourcePath: z.nullable(z.string()).optional(),
   parentResourceTypePath: z.nullable(z.string()).optional(),
   resourceTypePath: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "objectPermissions": "actorObjectPermissions",
+  });
 });
-
-/** @internal */
-export type AppResourceView$Outbound = {
-  appPath?: string | null | undefined;
-  appResource?: AppResource$Outbound | null | undefined;
-  parentResourcePath?: string | null | undefined;
-  parentResourceTypePath?: string | null | undefined;
-  resourceTypePath?: string | null | undefined;
-};
-
-/** @internal */
-export const AppResourceView$outboundSchema: z.ZodType<
-  AppResourceView$Outbound,
-  z.ZodTypeDef,
-  AppResourceView
-> = z.object({
-  appPath: z.nullable(z.string()).optional(),
-  appResource: z.nullable(AppResource$outboundSchema).optional(),
-  parentResourcePath: z.nullable(z.string()).optional(),
-  parentResourceTypePath: z.nullable(z.string()).optional(),
-  resourceTypePath: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppResourceView$ {
-  /** @deprecated use `AppResourceView$inboundSchema` instead. */
-  export const inboundSchema = AppResourceView$inboundSchema;
-  /** @deprecated use `AppResourceView$outboundSchema` instead. */
-  export const outboundSchema = AppResourceView$outboundSchema;
-  /** @deprecated use `AppResourceView$Outbound` instead. */
-  export type Outbound = AppResourceView$Outbound;
-}
-
-export function appResourceViewToJSON(
-  appResourceView: AppResourceView,
-): string {
-  return JSON.stringify(AppResourceView$outboundSchema.parse(appResourceView));
-}
 
 export function appResourceViewFromJSON(
   jsonString: string,

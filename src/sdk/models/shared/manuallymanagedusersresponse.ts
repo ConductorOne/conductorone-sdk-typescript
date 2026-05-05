@@ -12,7 +12,11 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type ManuallyManagedUsersResponse = {
   /**
-   * The failedUsersErrorMap field.
+   * The ID of the bulk action created to process the membership additions.
+   */
+  bulkActionId?: string | undefined;
+  /**
+   * A map of user IDs to error messages for users that could not be added.
    */
   failedUsersErrorMap?: { [k: string]: string } | null | undefined;
 };
@@ -23,45 +27,9 @@ export const ManuallyManagedUsersResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  bulkActionId: z.string().optional(),
   failedUsersErrorMap: z.nullable(z.record(z.string())).optional(),
 });
-
-/** @internal */
-export type ManuallyManagedUsersResponse$Outbound = {
-  failedUsersErrorMap?: { [k: string]: string } | null | undefined;
-};
-
-/** @internal */
-export const ManuallyManagedUsersResponse$outboundSchema: z.ZodType<
-  ManuallyManagedUsersResponse$Outbound,
-  z.ZodTypeDef,
-  ManuallyManagedUsersResponse
-> = z.object({
-  failedUsersErrorMap: z.nullable(z.record(z.string())).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ManuallyManagedUsersResponse$ {
-  /** @deprecated use `ManuallyManagedUsersResponse$inboundSchema` instead. */
-  export const inboundSchema = ManuallyManagedUsersResponse$inboundSchema;
-  /** @deprecated use `ManuallyManagedUsersResponse$outboundSchema` instead. */
-  export const outboundSchema = ManuallyManagedUsersResponse$outboundSchema;
-  /** @deprecated use `ManuallyManagedUsersResponse$Outbound` instead. */
-  export type Outbound = ManuallyManagedUsersResponse$Outbound;
-}
-
-export function manuallyManagedUsersResponseToJSON(
-  manuallyManagedUsersResponse: ManuallyManagedUsersResponse,
-): string {
-  return JSON.stringify(
-    ManuallyManagedUsersResponse$outboundSchema.parse(
-      manuallyManagedUsersResponse,
-    ),
-  );
-}
 
 export function manuallyManagedUsersResponseFromJSON(
   jsonString: string,

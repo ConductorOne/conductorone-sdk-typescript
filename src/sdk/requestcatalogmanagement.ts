@@ -6,11 +6,14 @@ import { requestCatalogManagementAddAccessEntitlements } from "../funcs/requestC
 import { requestCatalogManagementAddAppEntitlements } from "../funcs/requestCatalogManagementAddAppEntitlements.js";
 import { requestCatalogManagementCreate } from "../funcs/requestCatalogManagementCreate.js";
 import { requestCatalogManagementCreateBundleAutomation } from "../funcs/requestCatalogManagementCreateBundleAutomation.js";
+import { requestCatalogManagementCreateRequestableEntry } from "../funcs/requestCatalogManagementCreateRequestableEntry.js";
 import { requestCatalogManagementDelete } from "../funcs/requestCatalogManagementDelete.js";
 import { requestCatalogManagementDeleteBundleAutomation } from "../funcs/requestCatalogManagementDeleteBundleAutomation.js";
+import { requestCatalogManagementDeleteRequestableEntry } from "../funcs/requestCatalogManagementDeleteRequestableEntry.js";
 import { requestCatalogManagementForceRunBundleAutomation } from "../funcs/requestCatalogManagementForceRunBundleAutomation.js";
 import { requestCatalogManagementGet } from "../funcs/requestCatalogManagementGet.js";
 import { requestCatalogManagementGetBundleAutomation } from "../funcs/requestCatalogManagementGetBundleAutomation.js";
+import { requestCatalogManagementGetRequestableEntry } from "../funcs/requestCatalogManagementGetRequestableEntry.js";
 import { requestCatalogManagementList } from "../funcs/requestCatalogManagementList.js";
 import { requestCatalogManagementListAllEntitlementIdsPerApp } from "../funcs/requestCatalogManagementListAllEntitlementIdsPerApp.js";
 import { requestCatalogManagementListEntitlementsForAccess } from "../funcs/requestCatalogManagementListEntitlementsForAccess.js";
@@ -71,7 +74,7 @@ export class RequestCatalogManagement extends ClientSDK {
    * List All Entitlement Ids Per App
    *
    * @remarks
-   * Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.ListAllEntitlementIdsPerApp method.
+   * List all requestable entitlement IDs in a catalog without pagination.
    */
   async listAllEntitlementIdsPerApp(
     request:
@@ -111,7 +114,7 @@ export class RequestCatalogManagement extends ClientSDK {
    * Update App Entitlements
    *
    * @remarks
-   * Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.UpdateAppEntitlements method.
+   * Replace the full set of requestable entitlements in a catalog with the provided list.
    */
   async updateAppEntitlements(
     request:
@@ -168,10 +171,70 @@ export class RequestCatalogManagement extends ClientSDK {
   }
 
   /**
+   * Delete Requestable Entry
+   *
+   * @remarks
+   * Delete a single requestable entry
+   */
+  async deleteRequestableEntry(
+    request:
+      operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequestableEntryRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequestableEntryResponse
+  > {
+    return unwrapAsync(requestCatalogManagementDeleteRequestableEntry(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get Requestable Entry
+   *
+   * @remarks
+   * Get a single requestable entry
+   */
+  async getRequestableEntry(
+    request:
+      operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequestableEntryRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequestableEntryResponse
+  > {
+    return unwrapAsync(requestCatalogManagementGetRequestableEntry(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create Requestable Entry
+   *
+   * @remarks
+   * Create a single requestable entry
+   */
+  async createRequestableEntry(
+    request:
+      operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceCreateRequestableEntryRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceCreateRequestableEntryResponse
+  > {
+    return unwrapAsync(requestCatalogManagementCreateRequestableEntry(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Remove Access Entitlements
    *
    * @remarks
-   * Remove visibility bindings (access entitlements) to a catalog.
+   * Remove visibility bindings (access entitlements) from a catalog.
    */
   async removeAccessEntitlements(
     request:
@@ -291,7 +354,7 @@ export class RequestCatalogManagement extends ClientSDK {
    * Delete Bundle Automation
    *
    * @remarks
-   * Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.DeleteBundleAutomation method.
+   * Delete the bundle automation rule for a catalog, stopping automatic membership syncing.
    */
   async deleteBundleAutomation(
     request:
@@ -331,7 +394,7 @@ export class RequestCatalogManagement extends ClientSDK {
    * Set Bundle Automation
    *
    * @remarks
-   * Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.SetBundleAutomation method.
+   * Create or update the bundle automation rule for a catalog that automatically syncs catalog membership.
    */
   async setBundleAutomation(
     request:
@@ -351,7 +414,7 @@ export class RequestCatalogManagement extends ClientSDK {
    * Create Bundle Automation
    *
    * @remarks
-   * Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.CreateBundleAutomation method.
+   * Create a new bundle automation rule for a catalog that automatically syncs catalog membership from a query.
    */
   async createBundleAutomation(
     request:
@@ -371,7 +434,7 @@ export class RequestCatalogManagement extends ClientSDK {
    * Resume Paused Bundle Automation
    *
    * @remarks
-   * Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.ResumePausedBundleAutomation method.
+   * Resume a bundle automation that was paused by the circuit breaker after detecting excessive membership changes.
    */
   async resumePausedBundleAutomation(
     request:
@@ -391,7 +454,7 @@ export class RequestCatalogManagement extends ClientSDK {
    * Force Run Bundle Automation
    *
    * @remarks
-   * Invokes the c1.api.requestcatalog.v1.RequestCatalogManagementService.ForceRunBundleAutomation method.
+   * Trigger an immediate execution of a catalog's bundle automation, bypassing the normal schedule.
    */
   async forceRunBundleAutomation(
     request:

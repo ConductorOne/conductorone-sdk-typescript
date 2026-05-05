@@ -10,12 +10,7 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  AppUserView,
-  AppUserView$inboundSchema,
-  AppUserView$Outbound,
-  AppUserView$outboundSchema,
-} from "./appuserview.js";
+import { AppUserView, AppUserView$inboundSchema } from "./appuserview.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -67,55 +62,6 @@ export const AppUserServiceSearchResponseExpanded$inboundSchema: z.ZodType<
   });
 });
 
-/** @internal */
-export type AppUserServiceSearchResponseExpanded$Outbound = {
-  "@type"?: string | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const AppUserServiceSearchResponseExpanded$outboundSchema: z.ZodType<
-  AppUserServiceSearchResponseExpanded$Outbound,
-  z.ZodTypeDef,
-  AppUserServiceSearchResponseExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUserServiceSearchResponseExpanded$ {
-  /** @deprecated use `AppUserServiceSearchResponseExpanded$inboundSchema` instead. */
-  export const inboundSchema =
-    AppUserServiceSearchResponseExpanded$inboundSchema;
-  /** @deprecated use `AppUserServiceSearchResponseExpanded$outboundSchema` instead. */
-  export const outboundSchema =
-    AppUserServiceSearchResponseExpanded$outboundSchema;
-  /** @deprecated use `AppUserServiceSearchResponseExpanded$Outbound` instead. */
-  export type Outbound = AppUserServiceSearchResponseExpanded$Outbound;
-}
-
-export function appUserServiceSearchResponseExpandedToJSON(
-  appUserServiceSearchResponseExpanded: AppUserServiceSearchResponseExpanded,
-): string {
-  return JSON.stringify(
-    AppUserServiceSearchResponseExpanded$outboundSchema.parse(
-      appUserServiceSearchResponseExpanded,
-    ),
-  );
-}
-
 export function appUserServiceSearchResponseExpandedFromJSON(
   jsonString: string,
 ): SafeParseResult<AppUserServiceSearchResponseExpanded, SDKValidationError> {
@@ -139,52 +85,6 @@ export const AppUserServiceSearchResponse$inboundSchema: z.ZodType<
   list: z.nullable(z.array(AppUserView$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });
-
-/** @internal */
-export type AppUserServiceSearchResponse$Outbound = {
-  expanded?:
-    | Array<AppUserServiceSearchResponseExpanded$Outbound>
-    | null
-    | undefined;
-  list?: Array<AppUserView$Outbound> | null | undefined;
-  nextPageToken?: string | null | undefined;
-};
-
-/** @internal */
-export const AppUserServiceSearchResponse$outboundSchema: z.ZodType<
-  AppUserServiceSearchResponse$Outbound,
-  z.ZodTypeDef,
-  AppUserServiceSearchResponse
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() => AppUserServiceSearchResponseExpanded$outboundSchema)),
-  ).optional(),
-  list: z.nullable(z.array(AppUserView$outboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AppUserServiceSearchResponse$ {
-  /** @deprecated use `AppUserServiceSearchResponse$inboundSchema` instead. */
-  export const inboundSchema = AppUserServiceSearchResponse$inboundSchema;
-  /** @deprecated use `AppUserServiceSearchResponse$outboundSchema` instead. */
-  export const outboundSchema = AppUserServiceSearchResponse$outboundSchema;
-  /** @deprecated use `AppUserServiceSearchResponse$Outbound` instead. */
-  export type Outbound = AppUserServiceSearchResponse$Outbound;
-}
-
-export function appUserServiceSearchResponseToJSON(
-  appUserServiceSearchResponse: AppUserServiceSearchResponse,
-): string {
-  return JSON.stringify(
-    AppUserServiceSearchResponse$outboundSchema.parse(
-      appUserServiceSearchResponse,
-    ),
-  );
-}
 
 export function appUserServiceSearchResponseFromJSON(
   jsonString: string,

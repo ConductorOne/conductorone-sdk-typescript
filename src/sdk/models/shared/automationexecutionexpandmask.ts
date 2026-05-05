@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The AutomationExecutionExpandMask message.
@@ -16,15 +13,6 @@ export type AutomationExecutionExpandMask = {
    */
   paths?: Array<string> | null | undefined;
 };
-
-/** @internal */
-export const AutomationExecutionExpandMask$inboundSchema: z.ZodType<
-  AutomationExecutionExpandMask,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
 
 /** @internal */
 export type AutomationExecutionExpandMask$Outbound = {
@@ -40,19 +28,6 @@ export const AutomationExecutionExpandMask$outboundSchema: z.ZodType<
   paths: z.nullable(z.array(z.string())).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AutomationExecutionExpandMask$ {
-  /** @deprecated use `AutomationExecutionExpandMask$inboundSchema` instead. */
-  export const inboundSchema = AutomationExecutionExpandMask$inboundSchema;
-  /** @deprecated use `AutomationExecutionExpandMask$outboundSchema` instead. */
-  export const outboundSchema = AutomationExecutionExpandMask$outboundSchema;
-  /** @deprecated use `AutomationExecutionExpandMask$Outbound` instead. */
-  export type Outbound = AutomationExecutionExpandMask$Outbound;
-}
-
 export function automationExecutionExpandMaskToJSON(
   automationExecutionExpandMask: AutomationExecutionExpandMask,
 ): string {
@@ -60,15 +35,5 @@ export function automationExecutionExpandMaskToJSON(
     AutomationExecutionExpandMask$outboundSchema.parse(
       automationExecutionExpandMask,
     ),
-  );
-}
-
-export function automationExecutionExpandMaskFromJSON(
-  jsonString: string,
-): SafeParseResult<AutomationExecutionExpandMask, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AutomationExecutionExpandMask$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AutomationExecutionExpandMask' from JSON`,
   );
 }

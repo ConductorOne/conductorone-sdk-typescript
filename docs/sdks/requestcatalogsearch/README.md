@@ -1,5 +1,4 @@
 # RequestCatalogSearch
-(*requestCatalogSearch*)
 
 ## Overview
 
