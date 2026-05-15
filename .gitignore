@@ -19,6 +19,11 @@
 /.eslintcache
 /.tshy
 /.tshy-*
+
+# Yarn 4 (Berry) — Corepack provides the binary via packageManager field,
+# so we don't commit .yarn/releases. Ignore all caches.
+.yarn/*
+.pnp.*
 /__tests__
 .DS_Store
 **/.speakeasy/temp/
