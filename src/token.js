@@ -6,12 +6,12 @@ export class Token {
     tokenUrl;
     clientID;
     clientSecret;
-    defaultClient;
-    constructor(defaultClient, tokenUrl, clientID, clientSecret) {
+    httpClient;
+    constructor(httpClient, tokenUrl, clientID, clientSecret) {
         this.tokenUrl = tokenUrl;
         this.clientID = clientID;
         this.clientSecret = clientSecret;
-        this.defaultClient = defaultClient;
+        this.httpClient = httpClient;
     }
     async getToken() {
         const [name, domain, version, secret] = this.clientSecret.split(':');
@@ -59,14 +59,20 @@ export class Token {
             client_assertion: tokenStr,
         };
         const tokenUrl = new URL(`${this.tokenUrl}/auth/v1/token`);
-        const resp = await this.defaultClient.post(tokenUrl.toString(), new URLSearchParams(body), {
+        const req = new Request(tokenUrl.toString(), {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
+            body: new URLSearchParams(body).toString(),
         });
+        const resp = await this.httpClient.request(req);
         if (resp.status !== 200) {
             throw new Error(`Failed to get token: ${resp.status}`);
         }
-        return resp.data.access_token;
+        const data = await resp.json();
+        const raw = String(data?.access_token ?? "");
+        const normalized = raw.replace(/^\s*bearer\s*:*/i, "").trim();
+        return normalized;
     }
 }
