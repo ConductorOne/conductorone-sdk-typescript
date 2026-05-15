@@ -1,9 +1,9 @@
-import { AxiosInstance } from "axios";
+import { HTTPClient } from "./lib/http";
 export declare class Token {
     private readonly tokenUrl;
     private readonly clientID;
     private readonly clientSecret;
-    private defaultClient;
-    constructor(defaultClient: AxiosInstance, tokenUrl: string, clientID: string, clientSecret: string);
+    private httpClient;
+    constructor(httpClient: HTTPClient, tokenUrl: string, clientID: string, clientSecret: string);
     getToken(): Promise<string>;
 }

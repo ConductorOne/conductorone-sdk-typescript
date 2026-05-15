@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Token } from "./token.js";
 import { ConductoroneSDKTypescript as ConductoroneSDKTypescript_orig } from "./sdk/sdk.js";
 import { ServerList, SDKOptions } from "./lib/config.js";
@@ -7,12 +6,12 @@ import { HTTPClient } from "./lib/http.js";
 export interface SDKProps extends SDKOptions {
   clientID?: string;
   clientSecret?: string;
-  defaultClient?: any;
+  defaultClient?: HTTPClient;
 }
 
 export class ConductoroneSDKTypescript extends ConductoroneSDKTypescript_orig {
   private tokenCache: { token: string; expiresAt: number } | null = null;
-  private tokenClient: any;
+  private tokenClient: HTTPClient;
   private token: Token | null = null;
 
   constructor(props?: SDKProps) {
@@ -37,8 +36,9 @@ export class ConductoroneSDKTypescript extends ConductoroneSDKTypescript_orig {
       },
     });
 
+    this.tokenClient = httpClient;
+
     if (props?.clientID && props?.clientSecret) {
-      this.tokenClient = props?.defaultClient ?? axios.create({ baseURL: serverURL });
       this.token = new Token(this.tokenClient, serverURL, props.clientID, props.clientSecret);
       getTokenFn = this.getValidToken.bind(this);
     }

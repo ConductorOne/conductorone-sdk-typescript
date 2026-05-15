@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Token } from "./token";
 import { ConductoroneSDKTypescript as ConductoroneSDKTypescript_orig } from "./sdk/sdk";
 import { ServerList } from "./lib/config";
@@ -17,13 +16,16 @@ export class ConductoroneSDKTypescript extends ConductoroneSDKTypescript_orig {
             httpClient,
             userAgent: "conductorone-sdk-typescript/1.1.0",
             ...(props?.debugLogger && { debugLogger: props.debugLogger }),
-            security: async () => ({
-                bearerAuth: getTokenFn ? await getTokenFn() : "",
-                oauth: "",
-            }),
+            security: async () => {
+                const token = getTokenFn ? await getTokenFn() : "";
+                return {
+                    bearerAuth: token,
+                    oauth: token,
+                };
+            },
         });
+        this.tokenClient = httpClient;
         if (props?.clientID && props?.clientSecret) {
-            this.tokenClient = props?.defaultClient ?? axios.create({ baseURL: serverURL });
             this.token = new Token(this.tokenClient, serverURL, props.clientID, props.clientSecret);
             getTokenFn = this.getValidToken.bind(this);
         }
@@ -40,6 +42,7 @@ export class ConductoroneSDKTypescript extends ConductoroneSDKTypescript_orig {
         }
         catch (error) {
             console.error('Failed to get initial token:', error);
+            throw error;
         }
     }
     getCurrentToken() {
@@ -54,7 +57,10 @@ export class ConductoroneSDKTypescript extends ConductoroneSDKTypescript_orig {
         if (!this.tokenCache || now >= this.tokenCache.expiresAt) {
             await this.getAndCacheToken();
         }
-        return this.tokenCache?.token || '';
+        if (!this.tokenCache?.token) {
+            throw new Error('Failed to obtain auth token');
+        }
+        return this.tokenCache.token;
     }
 }
 export { ServerList } from "./lib/config";

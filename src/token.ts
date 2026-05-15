@@ -1,7 +1,7 @@
 import * as jose from 'jose'
 import {URLSearchParams} from 'url';
-import {AxiosInstance} from "axios";
 import * as crypto from 'crypto';
+import { HTTPClient } from './lib/http.js';
 
 const assertionType = "urn:ietf:params:oauth:client-assertion-type:jwt-bearer";
 
@@ -9,13 +9,13 @@ export class Token {
     private readonly tokenUrl: string;
     private readonly clientID: string;
     private readonly clientSecret: string;
-    private defaultClient: AxiosInstance;
+    private httpClient: HTTPClient;
 
-    constructor(defaultClient: AxiosInstance, tokenUrl: string, clientID: string, clientSecret: string) {
+    constructor(httpClient: HTTPClient, tokenUrl: string, clientID: string, clientSecret: string) {
         this.tokenUrl = tokenUrl;
         this.clientID = clientID;
         this.clientSecret = clientSecret;
-        this.defaultClient = defaultClient;
+        this.httpClient = httpClient;
     }
 
     async getToken(): Promise<string> {
@@ -71,20 +71,22 @@ export class Token {
 
         const tokenUrl = new URL(`${this.tokenUrl}/auth/v1/token`);
 
-        const resp = await this.defaultClient.post(
-            tokenUrl.toString(),
-            new URLSearchParams(body),
-            {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-            });
+        const req = new Request(tokenUrl.toString(), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams(body).toString(),
+        });
+
+        const resp = await this.httpClient.request(req);
 
         if (resp.status !== 200) {
             throw new Error(`Failed to get token: ${resp.status}`);
         }
 
-        const raw = String(resp.data?.access_token ?? "");
+        const data = await resp.json() as { access_token?: unknown };
+        const raw = String(data?.access_token ?? "");
         const normalized = raw.replace(/^\s*bearer\s*:*/i, "").trim();
         return normalized;
     }
