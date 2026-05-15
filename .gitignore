@@ -21,8 +21,12 @@
 /.tshy-*
 
 # Yarn 4 (Berry) — Corepack provides the binary via packageManager field,
-# so we don't commit .yarn/releases. Ignore all caches.
-.yarn/*
+# so we don't commit .yarn/releases. Ignore caches but allow patches/plugins/sdks
+# to be committed if they're ever added.
+.yarn/cache
+.yarn/install-state.gz
+.yarn/build-state.yml
+.yarn/unplugged
 .pnp.*
 /__tests__
 .DS_Store
