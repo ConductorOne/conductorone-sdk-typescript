@@ -63,6 +63,19 @@ export type PolicyType = OpenEnum<typeof PolicyType>;
  *  baseline fallback.
  */
 export type Policy = {
+  /**
+   * Key/value metadata. Up to 16 entries; keys 1-128 chars; values 0-256
+   *
+   * @remarks
+   *  chars; URL-safe ASCII. Keys starting with `c1/` are reserved.
+   *
+   *  Updates have PATCH semantics: keys absent from the request are
+   *  preserved; an empty value deletes the key.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
@@ -128,6 +141,19 @@ export type Policy = {
  *  baseline fallback.
  */
 export type PolicyInput = {
+  /**
+   * Key/value metadata. Up to 16 entries; keys 1-128 chars; values 0-256
+   *
+   * @remarks
+   *  chars; URL-safe ASCII. Keys starting with `c1/` are reserved.
+   *
+   *  Updates have PATCH semantics: keys absent from the request are
+   *  preserved; an empty value deletes the key.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
@@ -192,6 +218,7 @@ export const PolicyType$outboundSchema: z.ZodType<
 /** @internal */
 export const Policy$inboundSchema: z.ZodType<Policy, z.ZodTypeDef, unknown> = z
   .object({
+    annotations: z.record(z.string()).optional(),
     createdAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
@@ -214,6 +241,7 @@ export const Policy$inboundSchema: z.ZodType<Policy, z.ZodTypeDef, unknown> = z
   });
 /** @internal */
 export type Policy$Outbound = {
+  annotations?: { [k: string]: string } | undefined;
   createdAt?: string | null | undefined;
   deletedAt?: string | null | undefined;
   description?: string | null | undefined;
@@ -234,6 +262,7 @@ export const Policy$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Policy
 > = z.object({
+  annotations: z.record(z.string()).optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   description: z.nullable(z.string()).optional(),
@@ -263,6 +292,7 @@ export function policyFromJSON(
 
 /** @internal */
 export type PolicyInput$Outbound = {
+  annotations?: { [k: string]: string } | undefined;
   createdAt?: string | null | undefined;
   deletedAt?: string | null | undefined;
   description?: string | null | undefined;
@@ -281,6 +311,7 @@ export const PolicyInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PolicyInput
 > = z.object({
+  annotations: z.record(z.string()).optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   description: z.nullable(z.string()).optional(),

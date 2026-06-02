@@ -82,6 +82,19 @@ export type PrimaryTriggerType = OpenEnum<typeof PrimaryTriggerType>;
  */
 export type Automation = {
   /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  URL-safe ASCII; total serialized ≤ 4096 bytes. Keys matching ^c1/
+   *  are reserved.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * the app id this workflow_template belongs to
    */
   appId?: string | null | undefined;
@@ -156,6 +169,19 @@ export type Automation = {
  *   - circuitBreaker
  */
 export type AutomationInput = {
+  /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  URL-safe ASCII; total serialized ≤ 4096 bytes. Keys matching ^c1/
+   *  are reserved.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
   /**
    * the app id this workflow_template belongs to
    */
@@ -250,6 +276,7 @@ export const Automation$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  annotations: z.record(z.string()).optional(),
   appId: z.nullable(z.string()).optional(),
   automationSteps: z.nullable(z.array(AutomationStep$inboundSchema)).optional(),
   circuitBreaker: z.nullable(DisabledReasonCircuitBreaker$inboundSchema)
@@ -290,6 +317,7 @@ export function automationFromJSON(
 
 /** @internal */
 export type AutomationInput$Outbound = {
+  annotations?: { [k: string]: string } | undefined;
   appId?: string | null | undefined;
   automationSteps?: Array<AutomationStep$Outbound> | null | undefined;
   circuitBreaker?: DisabledReasonCircuitBreaker$Outbound | null | undefined;
@@ -315,6 +343,7 @@ export const AutomationInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AutomationInput
 > = z.object({
+  annotations: z.record(z.string()).optional(),
   appId: z.nullable(z.string()).optional(),
   automationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
     .optional(),

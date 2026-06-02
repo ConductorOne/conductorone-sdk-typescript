@@ -24,6 +24,7 @@ import { AppReport } from "./appreport.js";
 import { AppReportAction } from "./appreportaction.js";
 import { AppResource } from "./appresource.js";
 import { AppResourceOwners } from "./appresourceowners.js";
+import { AppResourceOwnersV2 } from "./appresourceownersv2.js";
 import { AppResourceSearch } from "./appresourcesearch.js";
 import { AppResourceType } from "./appresourcetype.js";
 import { Apps } from "./apps.js";
@@ -43,11 +44,14 @@ import { Connector } from "./connector.js";
 import { ConnectorCatalog } from "./connectorcatalog.js";
 import { ConnectorOwnersV2 } from "./connectorownersv2.js";
 import { Contacts } from "./contacts.js";
+import { Decoy } from "./decoy.js";
+import { DecoySearch } from "./decoysearch.js";
 import { Directory } from "./directory.js";
 import { Export } from "./export.js";
 import { ExportsSearch } from "./exportssearch.js";
 import { ExternalClientSearch } from "./externalclientsearch.js";
 import { Finding } from "./finding.js";
+import { FindingAudit } from "./findingaudit.js";
 import { FindingRoutingRule } from "./findingroutingrule.js";
 import { FindingSearch } from "./findingsearch.js";
 import { Functions } from "./functions.js";
@@ -58,6 +62,9 @@ import { Hooks } from "./hooks.js";
 import { HooksSearch } from "./hookssearch.js";
 import { LocalDirectoryConfig } from "./localdirectoryconfig.js";
 import { LocalUserInvitation } from "./localuserinvitation.js";
+import { MCPAccessProfile } from "./mcpaccessprofile.js";
+import { MCPAccessProfileToolBinding } from "./mcpaccessprofiletoolbinding.js";
+import { MCPTool } from "./mcptool.js";
 import { OnboardingSettings } from "./onboardingsettings.js";
 import { OrgDomain } from "./orgdomain.js";
 import { OrgNotificationSettings } from "./orgnotificationsettings.js";
@@ -72,6 +79,7 @@ import { Principal } from "./principal.js";
 import { RequestCatalogManagement } from "./requestcatalogmanagement.js";
 import { RequestCatalogSearch } from "./requestcatalogsearch.js";
 import { RequestSchema } from "./requestschema.js";
+import { RequestSettings } from "./requestsettings.js";
 import { RoleMiningManagement } from "./roleminingmanagement.js";
 import { RoleMiningManagementSearch } from "./roleminingmanagementsearch.js";
 import { Roles } from "./roles.js";
@@ -88,7 +96,9 @@ import { TaskAudit } from "./taskaudit.js";
 import { TaskSearch } from "./tasksearch.js";
 import { TenantAuthConfig } from "./tenantauthconfig.js";
 import { TenantEmailProvider } from "./tenantemailprovider.js";
+import { TerraformExport } from "./terraformexport.js";
 import { User } from "./user.js";
+import { UserDeveloperPreferences } from "./userdeveloperpreferences.js";
 import { UserNotificationSettings } from "./usernotificationsettings.js";
 import { UserSearch } from "./usersearch.js";
 import { Vault } from "./vault.js";
@@ -158,6 +168,22 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _connector?: Connector;
   get connector(): Connector {
     return (this._connector ??= new Connector(this._options));
+  }
+
+  private _mcpTool?: MCPTool;
+  get mcpTool(): MCPTool {
+    return (this._mcpTool ??= new MCPTool(this._options));
+  }
+
+  private _mcpAccessProfile?: MCPAccessProfile;
+  get mcpAccessProfile(): MCPAccessProfile {
+    return (this._mcpAccessProfile ??= new MCPAccessProfile(this._options));
+  }
+
+  private _mcpAccessProfileToolBinding?: MCPAccessProfileToolBinding;
+  get mcpAccessProfileToolBinding(): MCPAccessProfileToolBinding {
+    return (this._mcpAccessProfileToolBinding ??=
+      new MCPAccessProfileToolBinding(this._options));
   }
 
   private _appEntitlements?: AppEntitlements;
@@ -272,6 +298,16 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _connectorCatalog?: ConnectorCatalog;
   get connectorCatalog(): ConnectorCatalog {
     return (this._connectorCatalog ??= new ConnectorCatalog(this._options));
+  }
+
+  private _decoy?: Decoy;
+  get decoy(): Decoy {
+    return (this._decoy ??= new Decoy(this._options));
+  }
+
+  private _decoySearch?: DecoySearch;
+  get decoySearch(): DecoySearch {
+    return (this._decoySearch ??= new DecoySearch(this._options));
   }
 
   private _directory?: Directory;
@@ -398,6 +434,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._automationSearch ??= new AutomationSearch(this._options));
   }
 
+  private _findingAudit?: FindingAudit;
+  get findingAudit(): FindingAudit {
+    return (this._findingAudit ??= new FindingAudit(this._options));
+  }
+
   private _functionsSearch?: FunctionsSearch;
   get functionsSearch(): FunctionsSearch {
     return (this._functionsSearch ??= new FunctionsSearch(this._options));
@@ -510,6 +551,13 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._contacts ??= new Contacts(this._options));
   }
 
+  private _userDeveloperPreferences?: UserDeveloperPreferences;
+  get userDeveloperPreferences(): UserDeveloperPreferences {
+    return (this._userDeveloperPreferences ??= new UserDeveloperPreferences(
+      this._options,
+    ));
+  }
+
   private _orgDomain?: OrgDomain;
   get orgDomain(): OrgDomain {
     return (this._orgDomain ??= new OrgDomain(this._options));
@@ -539,6 +587,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _onboardingSettings?: OnboardingSettings;
   get onboardingSettings(): OnboardingSettings {
     return (this._onboardingSettings ??= new OnboardingSettings(this._options));
+  }
+
+  private _requestSettings?: RequestSettings;
+  get requestSettings(): RequestSettings {
+    return (this._requestSettings ??= new RequestSettings(this._options));
   }
 
   private _sessionSettings?: SessionSettings;
@@ -581,6 +634,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._taskActions ??= new TaskActions(this._options));
   }
 
+  private _terraformExport?: TerraformExport;
+  get terraformExport(): TerraformExport {
+    return (this._terraformExport ??= new TerraformExport(this._options));
+  }
+
   private _user?: User;
   get user(): User {
     return (this._user ??= new User(this._options));
@@ -611,5 +669,12 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _appOwnersV2?: AppOwnersV2;
   get appOwnersV2(): AppOwnersV2 {
     return (this._appOwnersV2 ??= new AppOwnersV2(this._options));
+  }
+
+  private _appResourceOwnersV2?: AppResourceOwnersV2;
+  get appResourceOwnersV2(): AppResourceOwnersV2 {
+    return (this._appResourceOwnersV2 ??= new AppResourceOwnersV2(
+      this._options,
+    ));
   }
 }

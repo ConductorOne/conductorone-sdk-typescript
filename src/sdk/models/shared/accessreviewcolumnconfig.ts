@@ -43,6 +43,8 @@ export const Columns = {
     "ACCESS_REVIEW_TASK_COLUMN_RESOURCE_PARENT",
   AccessReviewTaskColumnResourceChildren:
     "ACCESS_REVIEW_TASK_COLUMN_RESOURCE_CHILDREN",
+  AccessReviewTaskColumnAppUserUsername:
+    "ACCESS_REVIEW_TASK_COLUMN_APP_USER_USERNAME",
 } as const;
 export type Columns = OpenEnum<typeof Columns>;
 

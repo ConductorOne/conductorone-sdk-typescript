@@ -9,6 +9,19 @@ import * as z from "zod/v3";
  */
 export type CreateManuallyManagedAppResourceRequest = {
   /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  matching URL-safe ASCII; total serialized ≤4096 bytes. Keys starting
+   *  with `c1/` are reserved for server-managed use and rejected on write.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * An optional description for the new resource.
    */
   description?: string | null | undefined;
@@ -28,6 +41,7 @@ export type CreateManuallyManagedAppResourceRequest = {
 
 /** @internal */
 export type CreateManuallyManagedAppResourceRequest$Outbound = {
+  annotations?: { [k: string]: string } | undefined;
   description?: string | null | undefined;
   displayName: string;
   matchBatonId?: string | null | undefined;
@@ -40,6 +54,7 @@ export const CreateManuallyManagedAppResourceRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateManuallyManagedAppResourceRequest
 > = z.object({
+  annotations: z.record(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   displayName: z.string(),
   matchBatonId: z.nullable(z.string()).optional(),

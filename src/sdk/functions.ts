@@ -41,7 +41,14 @@ export class Functions extends ClientSDK {
    * Create Function
    *
    * @remarks
-   * CreateFunction registers a new serverless function and creates its initial code commit.
+   * CreateFunction registers a new serverless function and creates its
+   *  initial code commit. Functions run as TypeScript modules in a sandboxed
+   *  runtime; see initial_content for the entry-file signature and SDK import.
+   *
+   *  The new function is unpublished. To make the commit the default
+   *  runnable version (and have the function appear as runnable in the
+   *  Functions UI), call UpdateFunction with function.published_commit_id
+   *  set and update_mask=["published_commit_id"].
    */
   async createFunction(
     request?: shared.FunctionsServiceCreateFunctionRequest | undefined,
@@ -258,7 +265,9 @@ export class Functions extends ClientSDK {
    * Update Function
    *
    * @remarks
-   * Update updates an existing function's metadata
+   * Update an existing function's metadata. Also the publish path: set
+   *  function.published_commit_id and include "published_commit_id" in
+   *  update_mask to make a commit the default runnable version.
    */
   async updateFunction(
     request?: shared.FunctionsServiceUpdateFunctionRequest | undefined,

@@ -37,7 +37,14 @@ export class Automation extends ClientSDK {
    * Create Automation
    *
    * @remarks
-   * Create a new automation with the specified steps, triggers, and configuration.
+   * Create a new automation with the specified steps, triggers, and
+   *  configuration. See get_authoring_guide for the AutomationStep contract
+   *  (step kinds, evaluate_expressions shape, CEL identifier scope).
+   *
+   *  At create time, draft_automation_steps and draft_triggers default to
+   *  their published counterparts when omitted — callers writing a single
+   *  working version don't need to populate both. The draft/publish
+   *  distinction matters only on subsequent edits.
    */
   async createAutomation(
     request?: shared.AutomationsCreateAutomationRequest | undefined,

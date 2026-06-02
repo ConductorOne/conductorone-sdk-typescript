@@ -86,7 +86,7 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.CreateEntitlementOwnerRequest, {
+  const body = encodeJSON("body", payload.CreateAppEntitlementOwnerRequest, {
     explode: true,
   });
 
@@ -187,7 +187,7 @@ async function $do(
       200,
       operations
         .C1ApiAppV2AppOwnersCreateEntitlementOwnerResponse$inboundSchema,
-      { key: "CreateEntitlementOwnerResponse" },
+      { key: "CreateAppEntitlementOwnerResponse" },
     ),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

@@ -53,6 +53,19 @@ export type AppEntitlement = {
    */
   alias?: string | null | undefined;
   /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  URL-safe ASCII; total serialized ≤ 4096 bytes. Keys matching ^c1/
+   *  are reserved.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * The ID of the app that is associated with the app entitlement.
    */
   appId?: string | null | undefined;
@@ -179,6 +192,19 @@ export type AppEntitlementInput = {
    * The alias of the app entitlement used by Cone. Also exact-match queryable.
    */
   alias?: string | null | undefined;
+  /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  URL-safe ASCII; total serialized ≤ 4096 bytes. Keys matching ^c1/
+   *  are reserved.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
   /**
    * The ID of the app that is associated with the app entitlement.
    */
@@ -318,6 +344,7 @@ export const AppEntitlement$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   alias: z.nullable(z.string()).optional(),
+  annotations: z.record(z.string()).optional(),
   appId: z.nullable(z.string()).optional(),
   appResourceId: z.nullable(z.string()).optional(),
   appResourceTypeId: z.nullable(z.string()).optional(),
@@ -374,6 +401,7 @@ export function appEntitlementFromJSON(
 /** @internal */
 export type AppEntitlementInput$Outbound = {
   alias?: string | null | undefined;
+  annotations?: { [k: string]: string } | undefined;
   appId?: string | null | undefined;
   appResourceId?: string | null | undefined;
   appResourceTypeId?: string | null | undefined;
@@ -411,6 +439,7 @@ export const AppEntitlementInput$outboundSchema: z.ZodType<
   AppEntitlementInput
 > = z.object({
   alias: z.nullable(z.string()).optional(),
+  annotations: z.record(z.string()).optional(),
   appId: z.nullable(z.string()).optional(),
   appResourceId: z.nullable(z.string()).optional(),
   appResourceTypeId: z.nullable(z.string()).optional(),

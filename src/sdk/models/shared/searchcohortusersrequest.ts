@@ -4,6 +4,11 @@
 
 import * as z from "zod/v3";
 import {
+  EntitlementRef,
+  EntitlementRef$Outbound,
+  EntitlementRef$outboundSchema,
+} from "./entitlementref.js";
+import {
   ProfileFilter,
   ProfileFilter$Outbound,
   ProfileFilter$outboundSchema,
@@ -25,6 +30,10 @@ export type SearchCohortUsersRequest = {
    * Additional profile filters to narrow the cohort user search.
    */
   profileFilters?: Array<ProfileFilter> | null | undefined;
+  /**
+   * Optional list of entitlements to compute per-user coverage for.
+   */
+  selectedEntitlements?: Array<EntitlementRef> | null | undefined;
 };
 
 /** @internal */
@@ -32,6 +41,7 @@ export type SearchCohortUsersRequest$Outbound = {
   pageSize?: number | undefined;
   pageToken?: string | undefined;
   profileFilters?: Array<ProfileFilter$Outbound> | null | undefined;
+  selectedEntitlements?: Array<EntitlementRef$Outbound> | null | undefined;
 };
 
 /** @internal */
@@ -43,6 +53,8 @@ export const SearchCohortUsersRequest$outboundSchema: z.ZodType<
   pageSize: z.number().int().optional(),
   pageToken: z.string().optional(),
   profileFilters: z.nullable(z.array(ProfileFilter$outboundSchema)).optional(),
+  selectedEntitlements: z.nullable(z.array(EntitlementRef$outboundSchema))
+    .optional(),
 });
 
 export function searchCohortUsersRequestToJSON(

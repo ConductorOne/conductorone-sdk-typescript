@@ -32,6 +32,19 @@ export type CreateAppRequestIdentityMatching = OpenEnum<
  */
 export type CreateAppRequest = {
   /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  matching URL-safe ASCII; total serialized ≤4096 bytes. Keys starting
+   *  with `c1/` are reserved for server-managed use and rejected on write.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * Sets entitlement owners on the app.
    */
   appEntitlementOwnerRefs?: Array<AppEntitlementRef> | null | undefined;
@@ -86,6 +99,7 @@ export const CreateAppRequestIdentityMatching$outboundSchema: z.ZodType<
 
 /** @internal */
 export type CreateAppRequest$Outbound = {
+  annotations?: { [k: string]: string } | undefined;
   appEntitlementOwnerRefs?:
     | Array<AppEntitlementRef$Outbound>
     | null
@@ -108,6 +122,7 @@ export const CreateAppRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAppRequest
 > = z.object({
+  annotations: z.record(z.string()).optional(),
   appEntitlementOwnerRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
     .optional(),
   certifyPolicyId: z.nullable(z.string()).optional(),

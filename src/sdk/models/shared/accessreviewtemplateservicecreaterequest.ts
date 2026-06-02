@@ -27,6 +27,11 @@ import {
   RecurrenceRule$outboundSchema,
 } from "./recurrencerule.js";
 import {
+  ReviewerAttributeConfig,
+  ReviewerAttributeConfig$Outbound,
+  ReviewerAttributeConfig$outboundSchema,
+} from "./reviewerattributeconfig.js";
+import {
   ReviewSignatureConfig,
   ReviewSignatureConfig$Outbound,
   ReviewSignatureConfig$outboundSchema,
@@ -109,6 +114,19 @@ export type AccessReviewTemplateServiceCreateRequest = {
     | AccessReviewTemplateServiceCreateRequestAccuracyIssueAction
     | undefined;
   /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  matching URL-safe ASCII; total serialized ≤4096 bytes. Keys starting
+   *  with `c1/` are reserved for server-managed use and rejected on write.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * The autoCloseCampaign field.
    */
   autoCloseCampaign?: boolean | undefined;
@@ -176,6 +194,13 @@ export type AccessReviewTemplateServiceCreateRequest = {
    * The reviewInstructions field.
    */
   reviewInstructions?: string | undefined;
+  /**
+   * Allowlist of AppUser.profile keys visible to reviewers, scoped per app.
+   *
+   * @remarks
+   *  Empty = reviewers see no profile attributes in the AppUser tooltip.
+   */
+  reviewerAttributeConfig?: ReviewerAttributeConfig | undefined;
   /**
    * The AccessReviewScopeV2 message.
    *
@@ -268,6 +293,7 @@ export const AccessReviewTemplateServiceCreateRequestScopeType$outboundSchema:
 export type AccessReviewTemplateServiceCreateRequest$Outbound = {
   accessReviewDuration?: string | undefined;
   accuracyIssueAction?: string | undefined;
+  annotations?: { [k: string]: string } | undefined;
   autoCloseCampaign?: boolean | undefined;
   autoCloseDecision?: string | undefined;
   autoGenerateReport?: boolean | undefined;
@@ -283,6 +309,7 @@ export type AccessReviewTemplateServiceCreateRequest$Outbound = {
   policyId?: string | undefined;
   recurrenceRule?: RecurrenceRule$Outbound | undefined;
   reviewInstructions?: string | undefined;
+  reviewerAttributeConfig?: ReviewerAttributeConfig$Outbound | undefined;
   scope?: AccessReviewScopeV2$Outbound | undefined;
   scopeType?: string | undefined;
   signatureConfig?: ReviewSignatureConfig$Outbound | undefined;
@@ -299,6 +326,7 @@ export const AccessReviewTemplateServiceCreateRequest$outboundSchema: z.ZodType<
   accuracyIssueAction:
     AccessReviewTemplateServiceCreateRequestAccuracyIssueAction$outboundSchema
       .optional(),
+  annotations: z.record(z.string()).optional(),
   autoCloseCampaign: z.boolean().optional(),
   autoCloseDecision:
     AccessReviewTemplateServiceCreateRequestAutoCloseDecision$outboundSchema
@@ -318,6 +346,7 @@ export const AccessReviewTemplateServiceCreateRequest$outboundSchema: z.ZodType<
   policyId: z.string().optional(),
   recurrenceRule: RecurrenceRule$outboundSchema.optional(),
   reviewInstructions: z.string().optional(),
+  reviewerAttributeConfig: ReviewerAttributeConfig$outboundSchema.optional(),
   accessReviewScopeV2: AccessReviewScopeV2$outboundSchema.optional(),
   scopeType: AccessReviewTemplateServiceCreateRequestScopeType$outboundSchema
     .optional(),

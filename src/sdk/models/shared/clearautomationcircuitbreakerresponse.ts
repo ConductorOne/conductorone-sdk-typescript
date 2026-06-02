@@ -10,14 +10,25 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The ClearAutomationCircuitBreakerResponse message.
  */
-export type ClearAutomationCircuitBreakerResponse = {};
+export type ClearAutomationCircuitBreakerResponse = {
+  /**
+   * The bulk action ID if a bulk action was created to resolve paused
+   *
+   * @remarks
+   *  executions. Empty when decision is UNSPECIFIED or there were no
+   *  paused executions.
+   */
+  bulkActionId?: string | undefined;
+};
 
 /** @internal */
 export const ClearAutomationCircuitBreakerResponse$inboundSchema: z.ZodType<
   ClearAutomationCircuitBreakerResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = z.object({
+  bulkActionId: z.string().optional(),
+});
 
 export function clearAutomationCircuitBreakerResponseFromJSON(
   jsonString: string,

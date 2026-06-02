@@ -7,7 +7,10 @@ import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
 /**
- * The type of function to create, controlling its execution environment and capabilities.
+ * The type of function to create. Use FUNCTION_TYPE_ANY for user functions —
+ *
+ * @remarks
+ *  that is the type the Functions UI lists. Do not use any other value.
  */
 export const FunctionsServiceCreateFunctionRequestFunctionType = {
   FunctionTypeUnspecified: "FUNCTION_TYPE_UNSPECIFIED",
@@ -15,7 +18,10 @@ export const FunctionsServiceCreateFunctionRequestFunctionType = {
   FunctionTypeCodeMode: "FUNCTION_TYPE_CODE_MODE",
 } as const;
 /**
- * The type of function to create, controlling its execution environment and capabilities.
+ * The type of function to create. Use FUNCTION_TYPE_ANY for user functions —
+ *
+ * @remarks
+ *  that is the type the Functions UI lists. Do not use any other value.
  */
 export type FunctionsServiceCreateFunctionRequestFunctionType = OpenEnum<
   typeof FunctionsServiceCreateFunctionRequestFunctionType
@@ -38,14 +44,31 @@ export type FunctionsServiceCreateFunctionRequest = {
    */
   displayName?: string | null | undefined;
   /**
-   * The type of function to create, controlling its execution environment and capabilities.
+   * The type of function to create. Use FUNCTION_TYPE_ANY for user functions —
+   *
+   * @remarks
+   *  that is the type the Functions UI lists. Do not use any other value.
    */
   functionType?:
     | FunctionsServiceCreateFunctionRequestFunctionType
     | null
     | undefined;
   /**
-   * Map of filename to file content for the initial code commit.
+   * File map for the initial code commit. Keys are file paths in the
+   *
+   * @remarks
+   *  function root (e.g. "main.ts", "main.test.ts"); values are file
+   *  contents as bytes.
+   *
+   *  Runtime: TypeScript. The entry file MUST be "main.ts" exporting a
+   *  default async handler:
+   *
+   *    import { JSONObject } from "@c1/functions-sdk";
+   *    export default async function main(input: JSONObject): Promise<JSONObject> {
+   *      return { ok: true, echo: input };
+   *    }
+   *
+   *  The handler MUST return a JSON object — not a primitive, array, or null.
    */
   initialContent?: { [k: string]: string } | null | undefined;
 };

@@ -31,7 +31,7 @@ export type C1ApiAppV2AppOwnersGetUserOwnerResponse = {
   /**
    * GetUserOwnerResponse is the response for getting a user ownership source.
    */
-  getUserOwnerResponse?: shared.GetUserOwnerResponse | undefined;
+  getAppUserOwnerResponse?: shared.GetAppUserOwnerResponse | undefined;
 };
 
 /** @internal */
@@ -78,13 +78,14 @@ export const C1ApiAppV2AppOwnersGetUserOwnerResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  GetUserOwnerResponse: shared.GetUserOwnerResponse$inboundSchema.optional(),
+  GetAppUserOwnerResponse: shared.GetAppUserOwnerResponse$inboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
     "StatusCode": "statusCode",
     "RawResponse": "rawResponse",
-    "GetUserOwnerResponse": "getUserOwnerResponse",
+    "GetAppUserOwnerResponse": "getAppUserOwnerResponse",
   });
 });
 

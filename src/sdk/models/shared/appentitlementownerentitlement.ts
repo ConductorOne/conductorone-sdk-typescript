@@ -25,7 +25,15 @@ export type AppEntitlementOwnerEntitlement = {
    *   - durationGrant
    */
   appEntitlement?: AppEntitlement | undefined;
+  /**
+   * The appId field.
+   */
+  appId?: string | undefined;
   createdAt?: Date | undefined;
+  /**
+   * The entitlementId field.
+   */
+  entitlementId?: string | undefined;
   /**
    * The roleSlug field.
    */
@@ -39,8 +47,10 @@ export const AppEntitlementOwnerEntitlement$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   appEntitlement: AppEntitlement$inboundSchema.optional(),
+  appId: z.string().optional(),
   createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
+  entitlementId: z.string().optional(),
   roleSlug: z.string().optional(),
 });
 

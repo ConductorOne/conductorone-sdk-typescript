@@ -87,7 +87,7 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.CreateUserOwnerRequest, {
+  const body = encodeJSON("body", payload.CreateAppUserOwnerRequest, {
     explode: true,
   });
 
@@ -181,7 +181,7 @@ async function $do(
     M.json(
       200,
       operations.C1ApiAppV2AppOwnersCreateUserOwnerResponse$inboundSchema,
-      { key: "CreateUserOwnerResponse" },
+      { key: "CreateAppUserOwnerResponse" },
     ),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

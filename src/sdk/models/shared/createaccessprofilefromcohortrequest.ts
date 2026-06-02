@@ -19,6 +19,13 @@ import {
  */
 export type CreateAccessProfileFromCohortRequest = {
   /**
+   * Optional CEL expression for dynamic membership. When non-empty, used
+   *
+   * @remarks
+   *  instead of auto-generating from profile_filters.
+   */
+  celExpression?: string | undefined;
+  /**
    * If true, the automation will create JIT tasks for access changes.
    *
    * @remarks
@@ -53,6 +60,7 @@ export type CreateAccessProfileFromCohortRequest = {
 
 /** @internal */
 export type CreateAccessProfileFromCohortRequest$Outbound = {
+  celExpression?: string | undefined;
   createTasks?: boolean | undefined;
   description?: string | undefined;
   displayName?: string | undefined;
@@ -68,6 +76,7 @@ export const CreateAccessProfileFromCohortRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAccessProfileFromCohortRequest
 > = z.object({
+  celExpression: z.string().optional(),
   createTasks: z.boolean().optional(),
   description: z.string().optional(),
   displayName: z.string().optional(),

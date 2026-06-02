@@ -6,6 +6,10 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  CohortUserWithCoverage,
+  CohortUserWithCoverage$inboundSchema,
+} from "./cohortuserwithcoverage.js";
 import { User, User$inboundSchema } from "./user.js";
 
 /**
@@ -20,6 +24,10 @@ export type SearchCohortUsersResponse = {
    * Token to retrieve the next page of results, empty if no more results.
    */
   nextPageToken?: string | undefined;
+  /**
+   * Per-user coverage counts, populated when selected_entitlements is non-empty.
+   */
+  usersWithCoverage?: Array<CohortUserWithCoverage> | null | undefined;
 };
 
 /** @internal */
@@ -30,6 +38,8 @@ export const SearchCohortUsersResponse$inboundSchema: z.ZodType<
 > = z.object({
   list: z.nullable(z.array(User$inboundSchema)).optional(),
   nextPageToken: z.string().optional(),
+  usersWithCoverage: z.nullable(z.array(CohortUserWithCoverage$inboundSchema))
+    .optional(),
 });
 
 export function searchCohortUsersResponseFromJSON(

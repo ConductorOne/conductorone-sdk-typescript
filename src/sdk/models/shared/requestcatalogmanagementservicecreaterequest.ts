@@ -77,6 +77,19 @@ export type RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementB
  */
 export type RequestCatalogManagementServiceCreateRequest = {
   /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  matching URL-safe ASCII; total serialized ≤4096 bytes. Keys starting
+   *  with `c1/` are reserved for server-managed use and rejected on write.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * The description of the new request catalog.
    */
   description?: string | null | undefined;
@@ -92,10 +105,6 @@ export type RequestCatalogManagementServiceCreateRequest = {
     | null
     | undefined;
   expandMask?: RequestCatalogExpandMask | null | undefined;
-  /**
-   * The ID of the grant policy for access requests in this catalog.
-   */
-  grantPolicyId?: string | undefined;
   /**
    * Whether or not the new catalog should be created as published.
    */
@@ -156,11 +165,11 @@ export const RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlement
 
 /** @internal */
 export type RequestCatalogManagementServiceCreateRequest$Outbound = {
+  annotations?: { [k: string]: string } | undefined;
   description?: string | null | undefined;
   displayName: string;
   enrollmentBehavior?: string | null | undefined;
   expandMask?: RequestCatalogExpandMask$Outbound | null | undefined;
-  grantPolicyId?: string | undefined;
   published?: boolean | null | undefined;
   requestBundle?: boolean | null | undefined;
   unenrollmentBehavior?: string | null | undefined;
@@ -175,13 +184,13 @@ export const RequestCatalogManagementServiceCreateRequest$outboundSchema:
     z.ZodTypeDef,
     RequestCatalogManagementServiceCreateRequest
   > = z.object({
+    annotations: z.record(z.string()).optional(),
     description: z.nullable(z.string()).optional(),
     displayName: z.string(),
     enrollmentBehavior: z.nullable(
       RequestCatalogManagementServiceCreateRequestEnrollmentBehavior$outboundSchema,
     ).optional(),
     expandMask: z.nullable(RequestCatalogExpandMask$outboundSchema).optional(),
-    grantPolicyId: z.string().optional(),
     published: z.nullable(z.boolean()).optional(),
     requestBundle: z.nullable(z.boolean()).optional(),
     unenrollmentBehavior: z.nullable(
