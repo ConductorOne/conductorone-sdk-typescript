@@ -55,6 +55,10 @@ export type WorkloadFederationServiceTestTokenResponse = {
    * TestTokenStepResult represents the result of a single validation step.
    */
   testTokenStepResult6?: TestTokenStepResult | undefined;
+  /**
+   * TestTokenStepResult represents the result of a single validation step.
+   */
+  testTokenStepResult7?: TestTokenStepResult | undefined;
 };
 
 /** @internal */
@@ -69,6 +73,7 @@ export const WorkloadFederationServiceTestTokenResponse$inboundSchema:
       jwtDecode: TestTokenStepResult$inboundSchema.optional(),
       overallResult: z.boolean().optional(),
       signatureValidation: TestTokenStepResult$inboundSchema.optional(),
+      subjectValidation: TestTokenStepResult$inboundSchema.optional(),
       tokenFreshness: TestTokenStepResult$inboundSchema.optional(),
     }).transform((v) => {
       return remap$(v, {
@@ -78,7 +83,8 @@ export const WorkloadFederationServiceTestTokenResponse$inboundSchema:
         "issuerMatch": "testTokenStepResult3",
         "jwtDecode": "testTokenStepResult4",
         "signatureValidation": "testTokenStepResult5",
-        "tokenFreshness": "testTokenStepResult6",
+        "subjectValidation": "testTokenStepResult6",
+        "tokenFreshness": "testTokenStepResult7",
       });
     });
 

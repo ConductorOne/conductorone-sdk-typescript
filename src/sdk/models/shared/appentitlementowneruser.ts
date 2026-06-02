@@ -12,7 +12,15 @@ import { User, User$inboundSchema } from "./user.js";
  * AppEntitlementOwnerUser represents a user ownership source for an app entitlement.
  */
 export type AppEntitlementOwnerUser = {
+  /**
+   * The appId field.
+   */
+  appId?: string | undefined;
   createdAt?: Date | undefined;
+  /**
+   * The entitlementId field.
+   */
+  entitlementId?: string | undefined;
   /**
    * The roleSlug field.
    */
@@ -29,8 +37,10 @@ export const AppEntitlementOwnerUser$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  appId: z.string().optional(),
   createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
+  entitlementId: z.string().optional(),
   roleSlug: z.string().optional(),
   user: User$inboundSchema.optional(),
 });

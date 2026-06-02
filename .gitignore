@@ -19,7 +19,6 @@
 /.eslintcache
 /.tshy
 /.tshy-*
-
 # Yarn 4 (Berry) — Corepack provides the binary via packageManager field,
 # so we don't commit .yarn/releases. Ignore caches but allow patches/plugins/sdks
 # to be committed if they're ever added.

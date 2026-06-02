@@ -12,7 +12,12 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type CallFunction = {
   /**
-   * The args field.
+   * Arg name → CEL expression. Each value is evaluated against the
+   *
+   * @remarks
+   *  workflow execution context (subject + completed step outputs) and the
+   *  resolved values are passed to the function as JSON. Plain literals
+   *  must be quoted as CEL strings (e.g. "'static-value'").
    */
   args?: { [k: string]: string } | null | undefined;
   /**

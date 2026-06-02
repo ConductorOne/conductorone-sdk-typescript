@@ -62,6 +62,19 @@ export type App = {
    */
   accessModel?: AccessModel | undefined;
   /**
+   * Key/value metadata. Up to 16 entries; keys 1-128 chars; values 0-256
+   *
+   * @remarks
+   *  chars; URL-safe ASCII. Keys starting with `c1/` are reserved.
+   *
+   *  Updates have PATCH semantics: keys absent from the request are
+   *  preserved; an empty value deletes the key.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * The ID of the Account named by AccountName.
    */
   appAccountId?: string | null | undefined;
@@ -171,6 +184,19 @@ export type AppInput = {
    */
   accessModel?: AccessModel | undefined;
   /**
+   * Key/value metadata. Up to 16 entries; keys 1-128 chars; values 0-256
+   *
+   * @remarks
+   *  chars; URL-safe ASCII. Keys starting with `c1/` are reserved.
+   *
+   *  Updates have PATCH semantics: keys absent from the request are
+   *  preserved; an empty value deletes the key.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * AppUserMapper configures custom account mapping for uplift.
    */
   appUserMapper?: AppUserMapper | undefined;
@@ -266,6 +292,7 @@ export const IdentityMatching$outboundSchema: z.ZodType<
 export const App$inboundSchema: z.ZodType<App, z.ZodTypeDef, unknown> = z
   .object({
     accessModel: AccessModel$inboundSchema.optional(),
+    annotations: z.record(z.string()).optional(),
     appAccountId: z.nullable(z.string()).optional(),
     appAccountName: z.nullable(z.string()).optional(),
     appOwners: z.nullable(z.array(User$inboundSchema)).optional(),
@@ -315,6 +342,7 @@ export function appFromJSON(
 /** @internal */
 export type AppInput$Outbound = {
   accessModel?: string | undefined;
+  annotations?: { [k: string]: string } | undefined;
   appUserMapper?: AppUserMapper$Outbound | undefined;
   certifyPolicyId?: string | null | undefined;
   connectorVersion?: number | null | undefined;
@@ -343,6 +371,7 @@ export const AppInput$outboundSchema: z.ZodType<
   AppInput
 > = z.object({
   accessModel: AccessModel$outboundSchema.optional(),
+  annotations: z.record(z.string()).optional(),
   appUserMapper: AppUserMapper$outboundSchema.optional(),
   certifyPolicyId: z.nullable(z.string()).optional(),
   connectorVersion: z.nullable(z.number().int()).optional(),

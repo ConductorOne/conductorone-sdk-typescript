@@ -7,6 +7,7 @@ import { roleMiningManagementGetCustomAnalysisResult } from "../funcs/roleMining
 import { roleMiningManagementGetLatestRun } from "../funcs/roleMiningManagementGetLatestRun.js";
 import { roleMiningManagementGetRoleMiningConfig } from "../funcs/roleMiningManagementGetRoleMiningConfig.js";
 import { roleMiningManagementGetSuggestion } from "../funcs/roleMiningManagementGetSuggestion.js";
+import { roleMiningManagementListCustomAnalysisResults } from "../funcs/roleMiningManagementListCustomAnalysisResults.js";
 import { roleMiningManagementListRuns } from "../funcs/roleMiningManagementListRuns.js";
 import { roleMiningManagementListSuggestions } from "../funcs/roleMiningManagementListSuggestions.js";
 import { roleMiningManagementSearchCohortUsers } from "../funcs/roleMiningManagementSearchCohortUsers.js";
@@ -73,6 +74,23 @@ export class RoleMiningManagement extends ClientSDK {
     return unwrapAsync(roleMiningManagementUpdateRoleMiningConfig(
       this,
       request,
+      options,
+    ));
+  }
+
+  /**
+   * List Custom Analysis Results
+   *
+   * @remarks
+   * List recent custom analysis results in reverse chronological order.
+   */
+  async listCustomAnalysisResults(
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiRoleMiningManagementV1RoleMiningManagementServiceListCustomAnalysisResultsResponse
+  > {
+    return unwrapAsync(roleMiningManagementListCustomAnalysisResults(
+      this,
       options,
     ));
   }

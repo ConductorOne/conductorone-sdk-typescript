@@ -32,8 +32,8 @@ export type C1ApiAppV2AppOwnersSearchEntitlementOwnersResponse = {
   /**
    * SearchEntitlementOwnersResponse is the response for searching entitlement ownership sources.
    */
-  searchEntitlementOwnersResponse?:
-    | shared.SearchEntitlementOwnersResponse
+  searchAppEntitlementOwnersResponse?:
+    | shared.SearchAppEntitlementOwnersResponse
     | undefined;
 };
 
@@ -86,14 +86,15 @@ export const C1ApiAppV2AppOwnersSearchEntitlementOwnersResponse$inboundSchema:
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    SearchEntitlementOwnersResponse: shared
-      .SearchEntitlementOwnersResponse$inboundSchema.optional(),
+    SearchAppEntitlementOwnersResponse: shared
+      .SearchAppEntitlementOwnersResponse$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
       "StatusCode": "statusCode",
       "RawResponse": "rawResponse",
-      "SearchEntitlementOwnersResponse": "searchEntitlementOwnersResponse",
+      "SearchAppEntitlementOwnersResponse":
+        "searchAppEntitlementOwnersResponse",
     });
   });
 

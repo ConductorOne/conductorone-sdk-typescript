@@ -6,6 +6,7 @@ import { appEntitlementSearchSearch } from "../funcs/appEntitlementSearchSearch.
 import { appEntitlementSearchSearchAppEntitlementsForAppUser } from "../funcs/appEntitlementSearchSearchAppEntitlementsForAppUser.js";
 import { appEntitlementSearchSearchAppEntitlementsWithExpired } from "../funcs/appEntitlementSearchSearchAppEntitlementsWithExpired.js";
 import { appEntitlementSearchSearchGrants } from "../funcs/appEntitlementSearchSearchGrants.js";
+import { appEntitlementSearchSearchGraph } from "../funcs/appEntitlementSearchSearchGraph.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import { PageIterator, unwrapResultIterator } from "../sdk/types/operations.js";
 import * as operations from "./models/operations/index.js";
@@ -88,6 +89,26 @@ export class AppEntitlementSearch extends ClientSDK {
     operations.C1ApiAppV1AppEntitlementSearchServiceSearchGrantsResponse
   > {
     return unwrapAsync(appEntitlementSearchSearchGrants(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Search Graph
+   *
+   * @remarks
+   * SearchGraph performs a server-side BFS traversal and returns a bounded, filtered subgraph.
+   *  Exactly one of user_id, app_id, or resource_id must be set.
+   */
+  async searchGraph(
+    request?: shared.AppEntitlementSearchServiceSearchGraphRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiAppV1AppEntitlementSearchServiceSearchGraphResponse
+  > {
+    return unwrapAsync(appEntitlementSearchSearchGraph(
       this,
       request,
       options,

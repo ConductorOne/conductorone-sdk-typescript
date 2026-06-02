@@ -20,10 +20,12 @@ export type UpdateFindingStateResponse = {
    * This message contains a oneof named finding_type. Only a single field of the following list may be set at a time:
    *   - similarUsernameMatch
    *   - serviceAccountMisclassification
+   *   - decoyCredentialUsed
    *
    * This message contains a oneof named target. Only a single field of the following list may be set at a time:
    *   - identityUserTarget
    *   - appUserTarget
+   *   - decoyTarget
    *
    * This message contains a oneof named evidence. Only a single field of the following list may be set at a time:
    *   - similarUsernameMatchEvidence

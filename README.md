@@ -216,7 +216,13 @@ run();
 
 * [set](docs/sdks/appentitlementownersv2/README.md#set) - Set
 * [searchEntitlementOwners](docs/sdks/appentitlementownersv2/README.md#searchentitlementowners) - Search Entitlement Owners
+* [deleteEntitlementOwner](docs/sdks/appentitlementownersv2/README.md#deleteentitlementowner) - Delete Entitlement Owner
+* [getEntitlementOwner](docs/sdks/appentitlementownersv2/README.md#getentitlementowner) - Get Entitlement Owner
+* [createEntitlementOwner](docs/sdks/appentitlementownersv2/README.md#createentitlementowner) - Create Entitlement Owner
 * [searchUserOwners](docs/sdks/appentitlementownersv2/README.md#searchuserowners) - Search User Owners
+* [deleteUserOwner](docs/sdks/appentitlementownersv2/README.md#deleteuserowner) - Delete User Owner
+* [getUserOwner](docs/sdks/appentitlementownersv2/README.md#getuserowner) - Get User Owner
+* [createUserOwner](docs/sdks/appentitlementownersv2/README.md#createuserowner) - Create User Owner
 
 ### [AppEntitlements](docs/sdks/appentitlements/README.md)
 
@@ -244,6 +250,7 @@ run();
 * [searchAppEntitlementsForAppUser](docs/sdks/appentitlementsearch/README.md#searchappentitlementsforappuser) - Search App Entitlements For App User
 * [search](docs/sdks/appentitlementsearch/README.md#search) - Search
 * [searchGrants](docs/sdks/appentitlementsearch/README.md#searchgrants) - Search Grants
+* [searchGraph](docs/sdks/appentitlementsearch/README.md#searchgraph) - Search Graph
 
 ### [AppEntitlementsProxy](docs/sdks/appentitlementsproxy/README.md)
 
@@ -304,6 +311,16 @@ run();
 * [list](docs/sdks/appresourceowners/README.md#list) - List
 * [add](docs/sdks/appresourceowners/README.md#add) - Add
 * [set](docs/sdks/appresourceowners/README.md#set) - Set
+
+### [AppResourceOwnersV2](docs/sdks/appresourceownersv2/README.md)
+
+* [set](docs/sdks/appresourceownersv2/README.md#set) - Set
+* [searchEntitlementOwners](docs/sdks/appresourceownersv2/README.md#searchentitlementowners) - Search Entitlement Owners
+* [deleteEntitlementOwner](docs/sdks/appresourceownersv2/README.md#deleteentitlementowner) - Delete Entitlement Owner
+* [createEntitlementOwner](docs/sdks/appresourceownersv2/README.md#createentitlementowner) - Create Entitlement Owner
+* [searchUserOwners](docs/sdks/appresourceownersv2/README.md#searchuserowners) - Search User Owners
+* [deleteUserOwner](docs/sdks/appresourceownersv2/README.md#deleteuserowner) - Delete User Owner
+* [createUserOwner](docs/sdks/appresourceownersv2/README.md#createuserowner) - Create User Owner
 
 ### [AppResourceSearch](docs/sdks/appresourcesearch/README.md)
 
@@ -429,11 +446,32 @@ run();
 ### [ConnectorOwnersV2](docs/sdks/connectorownersv2/README.md)
 
 * [set](docs/sdks/connectorownersv2/README.md#set) - Set
+* [searchEntitlementOwners](docs/sdks/connectorownersv2/README.md#searchentitlementowners) - Search Entitlement Owners
+* [deleteEntitlementOwner](docs/sdks/connectorownersv2/README.md#deleteentitlementowner) - Delete Entitlement Owner
+* [getEntitlementOwner](docs/sdks/connectorownersv2/README.md#getentitlementowner) - Get Entitlement Owner
+* [createEntitlementOwner](docs/sdks/connectorownersv2/README.md#createentitlementowner) - Create Entitlement Owner
+* [searchUserOwners](docs/sdks/connectorownersv2/README.md#searchuserowners) - Search User Owners
+* [deleteUserOwner](docs/sdks/connectorownersv2/README.md#deleteuserowner) - Delete User Owner
+* [getUserOwner](docs/sdks/connectorownersv2/README.md#getuserowner) - Get User Owner
+* [createUserOwner](docs/sdks/connectorownersv2/README.md#createuserowner) - Create User Owner
 
 ### [Contacts](docs/sdks/contacts/README.md)
 
 * [getContacts](docs/sdks/contacts/README.md#getcontacts) - Get Contacts
 * [updateContacts](docs/sdks/contacts/README.md#updatecontacts) - Update Contacts
+
+### [Decoy](docs/sdks/decoy/README.md)
+
+* [list](docs/sdks/decoy/README.md#list) - List
+* [create](docs/sdks/decoy/README.md#create) - Create
+* [delete](docs/sdks/decoy/README.md#delete) - Delete
+* [get](docs/sdks/decoy/README.md#get) - Get
+* [update](docs/sdks/decoy/README.md#update) - Update
+* [rotate](docs/sdks/decoy/README.md#rotate) - Rotate
+
+### [DecoySearch](docs/sdks/decoysearch/README.md)
+
+* [search](docs/sdks/decoysearch/README.md#search) - Search
 
 ### [Directory](docs/sdks/directory/README.md)
 
@@ -467,6 +505,10 @@ run();
 * [getFinding](docs/sdks/finding/README.md#getfinding) - Get Finding
 * [bulkUpdateFindingState](docs/sdks/finding/README.md#bulkupdatefindingstate) - Bulk Update Finding State
 * [bulkCreateFindingTasks](docs/sdks/finding/README.md#bulkcreatefindingtasks) - Bulk Create Finding Tasks
+
+### [FindingAudit](docs/sdks/findingaudit/README.md)
+
+* [search](docs/sdks/findingaudit/README.md#search) - Search
 
 ### [FindingRoutingRule](docs/sdks/findingroutingrule/README.md)
 
@@ -536,6 +578,34 @@ run();
 * [get](docs/sdks/localuserinvitation/README.md#get) - Get
 * [revoke](docs/sdks/localuserinvitation/README.md#revoke) - Revoke
 * [search](docs/sdks/localuserinvitation/README.md#search) - Search
+
+### [MCPAccessProfile](docs/sdks/mcpaccessprofile/README.md)
+
+* [list](docs/sdks/mcpaccessprofile/README.md#list) - List
+* [create](docs/sdks/mcpaccessprofile/README.md#create) - Create
+* [delete](docs/sdks/mcpaccessprofile/README.md#delete) - Delete
+* [get](docs/sdks/mcpaccessprofile/README.md#get) - Get
+* [update](docs/sdks/mcpaccessprofile/README.md#update) - Update
+* [getByAppEntitlementId](docs/sdks/mcpaccessprofile/README.md#getbyappentitlementid) - Get By App Entitlement Id
+* [listRequestableConnectors](docs/sdks/mcpaccessprofile/README.md#listrequestableconnectors) - List Requestable Connectors
+
+### [MCPAccessProfileToolBinding](docs/sdks/mcpaccessprofiletoolbinding/README.md)
+
+* [list](docs/sdks/mcpaccessprofiletoolbinding/README.md#list) - List
+* [createBindings](docs/sdks/mcpaccessprofiletoolbinding/README.md#createbindings) - Create Bindings
+* [deleteBindings](docs/sdks/mcpaccessprofiletoolbinding/README.md#deletebindings) - Delete Bindings
+* [listToolsByProfileHistory](docs/sdks/mcpaccessprofiletoolbinding/README.md#listtoolsbyprofilehistory) - List Tools By Profile History
+* [listProfilesByToolHistory](docs/sdks/mcpaccessprofiletoolbinding/README.md#listprofilesbytoolhistory) - List Profiles By Tool History
+* [getAccessProfilesForTools](docs/sdks/mcpaccessprofiletoolbinding/README.md#getaccessprofilesfortools) - Get Access Profiles For Tools
+
+### [MCPTool](docs/sdks/mcptool/README.md)
+
+* [list](docs/sdks/mcptool/README.md#list) - List
+* [delete](docs/sdks/mcptool/README.md#delete) - Delete
+* [get](docs/sdks/mcptool/README.md#get) - Get
+* [update](docs/sdks/mcptool/README.md#update) - Update
+* [listHistory](docs/sdks/mcptool/README.md#listhistory) - List History
+* [search](docs/sdks/mcptool/README.md#search) - Search
 
 ### [OnboardingSettings](docs/sdks/onboardingsettings/README.md)
 
@@ -654,11 +724,17 @@ run();
 * [get](docs/sdks/requestschema/README.md#get) - Get
 * [update](docs/sdks/requestschema/README.md#update) - Update
 
+### [RequestSettings](docs/sdks/requestsettings/README.md)
+
+* [get](docs/sdks/requestsettings/README.md#get) - Get
+* [update](docs/sdks/requestsettings/README.md#update) - Update
+
 ### [RoleMiningManagement](docs/sdks/roleminingmanagement/README.md)
 
 * [createAccessProfileFromCohort](docs/sdks/roleminingmanagement/README.md#createaccessprofilefromcohort) - Create Access Profile From Cohort
 * [getRoleMiningConfig](docs/sdks/roleminingmanagement/README.md#getroleminingconfig) - Get Role Mining Config
 * [updateRoleMiningConfig](docs/sdks/roleminingmanagement/README.md#updateroleminingconfig) - Update Role Mining Config
+* [listCustomAnalysisResults](docs/sdks/roleminingmanagement/README.md#listcustomanalysisresults) - List Custom Analysis Results
 * [getCustomAnalysisResult](docs/sdks/roleminingmanagement/README.md#getcustomanalysisresult) - Get Custom Analysis Result
 * [triggerCustomAnalysis](docs/sdks/roleminingmanagement/README.md#triggercustomanalysis) - Trigger Custom Analysis
 * [listRuns](docs/sdks/roleminingmanagement/README.md#listruns) - List Runs
@@ -770,12 +846,22 @@ run();
 * [searchAuditEvents](docs/sdks/tenantemailprovider/README.md#searchauditevents) - Search Audit Events
 * [test](docs/sdks/tenantemailprovider/README.md#test) - Test
 
+### [TerraformExport](docs/sdks/terraformexport/README.md)
+
+* [getSchema](docs/sdks/terraformexport/README.md#getschema) - Get Schema
+
 ### [User](docs/sdks/user/README.md)
 
 * [list](docs/sdks/user/README.md#list) - List
 * [get](docs/sdks/user/README.md#get) - Get
 * [getUserProfileTypes](docs/sdks/user/README.md#getuserprofiletypes) - Get User Profile Types
 * [setExpiringUserDelegationBindingByAdmin](docs/sdks/user/README.md#setexpiringuserdelegationbindingbyadmin) - Set Expiring User Delegation Binding By Admin
+* [introspect](docs/sdks/user/README.md#introspect) - Introspect
+
+### [UserDeveloperPreferences](docs/sdks/userdeveloperpreferences/README.md)
+
+* [get](docs/sdks/userdeveloperpreferences/README.md#get) - Get
+* [update](docs/sdks/userdeveloperpreferences/README.md#update) - Update
 
 ### [UserNotificationSettings](docs/sdks/usernotificationsettings/README.md)
 
@@ -876,6 +962,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`appEntitlementOwnersListOwnerIDs`](docs/sdks/appentitlementowners/README.md#listownerids) - List Owner I Ds
 - [`appEntitlementOwnersRemove`](docs/sdks/appentitlementowners/README.md#remove) - Remove
 - [`appEntitlementOwnersSet`](docs/sdks/appentitlementowners/README.md#set) - Set
+- [`appEntitlementOwnersV2CreateEntitlementOwner`](docs/sdks/appentitlementownersv2/README.md#createentitlementowner) - Create Entitlement Owner
+- [`appEntitlementOwnersV2CreateUserOwner`](docs/sdks/appentitlementownersv2/README.md#createuserowner) - Create User Owner
+- [`appEntitlementOwnersV2DeleteEntitlementOwner`](docs/sdks/appentitlementownersv2/README.md#deleteentitlementowner) - Delete Entitlement Owner
+- [`appEntitlementOwnersV2DeleteUserOwner`](docs/sdks/appentitlementownersv2/README.md#deleteuserowner) - Delete User Owner
+- [`appEntitlementOwnersV2GetEntitlementOwner`](docs/sdks/appentitlementownersv2/README.md#getentitlementowner) - Get Entitlement Owner
+- [`appEntitlementOwnersV2GetUserOwner`](docs/sdks/appentitlementownersv2/README.md#getuserowner) - Get User Owner
 - [`appEntitlementOwnersV2SearchEntitlementOwners`](docs/sdks/appentitlementownersv2/README.md#searchentitlementowners) - Search Entitlement Owners
 - [`appEntitlementOwnersV2SearchUserOwners`](docs/sdks/appentitlementownersv2/README.md#searchuserowners) - Search User Owners
 - [`appEntitlementOwnersV2Set`](docs/sdks/appentitlementownersv2/README.md#set) - Set
@@ -889,6 +981,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`appEntitlementSearchSearchAppEntitlementsForAppUser`](docs/sdks/appentitlementsearch/README.md#searchappentitlementsforappuser) - Search App Entitlements For App User
 - [`appEntitlementSearchSearchAppEntitlementsWithExpired`](docs/sdks/appentitlementsearch/README.md#searchappentitlementswithexpired) - Search App Entitlements With Expired
 - [`appEntitlementSearchSearchGrants`](docs/sdks/appentitlementsearch/README.md#searchgrants) - Search Grants
+- [`appEntitlementSearchSearchGraph`](docs/sdks/appentitlementsearch/README.md#searchgraph) - Search Graph
 - [`appEntitlementsGet`](docs/sdks/appentitlements/README.md#get) - Get
 - [`appEntitlementsGetAutomation`](docs/sdks/appentitlements/README.md#getautomation) - Get Automation
 - [`appEntitlementsList`](docs/sdks/appentitlements/README.md#list) - List
@@ -934,6 +1027,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`appResourceOwnersListOwnerIDs`](docs/sdks/appresourceowners/README.md#listownerids) - List Owner I Ds
 - [`appResourceOwnersRemove`](docs/sdks/appresourceowners/README.md#remove) - Remove
 - [`appResourceOwnersSet`](docs/sdks/appresourceowners/README.md#set) - Set
+- [`appResourceOwnersV2CreateEntitlementOwner`](docs/sdks/appresourceownersv2/README.md#createentitlementowner) - Create Entitlement Owner
+- [`appResourceOwnersV2CreateUserOwner`](docs/sdks/appresourceownersv2/README.md#createuserowner) - Create User Owner
+- [`appResourceOwnersV2DeleteEntitlementOwner`](docs/sdks/appresourceownersv2/README.md#deleteentitlementowner) - Delete Entitlement Owner
+- [`appResourceOwnersV2DeleteUserOwner`](docs/sdks/appresourceownersv2/README.md#deleteuserowner) - Delete User Owner
+- [`appResourceOwnersV2SearchEntitlementOwners`](docs/sdks/appresourceownersv2/README.md#searchentitlementowners) - Search Entitlement Owners
+- [`appResourceOwnersV2SearchUserOwners`](docs/sdks/appresourceownersv2/README.md#searchuserowners) - Search User Owners
+- [`appResourceOwnersV2Set`](docs/sdks/appresourceownersv2/README.md#set) - Set
 - [`appResourceSearchSearchAppResources`](docs/sdks/appresourcesearch/README.md#searchappresources) - Search App Resources
 - [`appResourceSearchSearchAppResourceTypes`](docs/sdks/appresourcesearch/README.md#searchappresourcetypes) - Search App Resource Types
 - [`appResourceTypeCreateManuallyManagedResourceType`](docs/sdks/appresourcetype/README.md#createmanuallymanagedresourcetype) - Create Manually Managed Resource Type
@@ -997,6 +1097,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`connectorGetConnectorSyncDownloadURL`](docs/sdks/connector/README.md#getconnectorsyncdownloadurl) - Get Connector Sync Download Url
 - [`connectorGetCredentials`](docs/sdks/connector/README.md#getcredentials) - Get Credentials
 - [`connectorList`](docs/sdks/connector/README.md#list) - List
+- [`connectorOwnersV2CreateEntitlementOwner`](docs/sdks/connectorownersv2/README.md#createentitlementowner) - Create Entitlement Owner
+- [`connectorOwnersV2CreateUserOwner`](docs/sdks/connectorownersv2/README.md#createuserowner) - Create User Owner
+- [`connectorOwnersV2DeleteEntitlementOwner`](docs/sdks/connectorownersv2/README.md#deleteentitlementowner) - Delete Entitlement Owner
+- [`connectorOwnersV2DeleteUserOwner`](docs/sdks/connectorownersv2/README.md#deleteuserowner) - Delete User Owner
+- [`connectorOwnersV2GetEntitlementOwner`](docs/sdks/connectorownersv2/README.md#getentitlementowner) - Get Entitlement Owner
+- [`connectorOwnersV2GetUserOwner`](docs/sdks/connectorownersv2/README.md#getuserowner) - Get User Owner
+- [`connectorOwnersV2SearchEntitlementOwners`](docs/sdks/connectorownersv2/README.md#searchentitlementowners) - Search Entitlement Owners
+- [`connectorOwnersV2SearchUserOwners`](docs/sdks/connectorownersv2/README.md#searchuserowners) - Search User Owners
 - [`connectorOwnersV2Set`](docs/sdks/connectorownersv2/README.md#set) - Set
 - [`connectorPauseSync`](docs/sdks/connector/README.md#pausesync) - Pause Sync
 - [`connectorResumeSync`](docs/sdks/connector/README.md#resumesync) - Resume Sync
@@ -1008,6 +1116,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`connectorValidateHTTPConnectorConfig`](docs/sdks/connector/README.md#validatehttpconnectorconfig) - Validate Http Connector Config
 - [`contactsGetContacts`](docs/sdks/contacts/README.md#getcontacts) - Get Contacts
 - [`contactsUpdateContacts`](docs/sdks/contacts/README.md#updatecontacts) - Update Contacts
+- [`decoyCreate`](docs/sdks/decoy/README.md#create) - Create
+- [`decoyDelete`](docs/sdks/decoy/README.md#delete) - Delete
+- [`decoyGet`](docs/sdks/decoy/README.md#get) - Get
+- [`decoyList`](docs/sdks/decoy/README.md#list) - List
+- [`decoyRotate`](docs/sdks/decoy/README.md#rotate) - Rotate
+- [`decoySearchSearch`](docs/sdks/decoysearch/README.md#search) - Search
+- [`decoyUpdate`](docs/sdks/decoy/README.md#update) - Update
 - [`directoryCreate`](docs/sdks/directory/README.md#create) - Create
 - [`directoryDelete`](docs/sdks/directory/README.md#delete) - Delete
 - [`directoryGet`](docs/sdks/directory/README.md#get) - Get
@@ -1021,6 +1136,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`exportsSearchSearch`](docs/sdks/exportssearch/README.md#search) - Search
 - [`exportUpdate`](docs/sdks/export/README.md#update) - Update
 - [`externalClientSearchSearch`](docs/sdks/externalclientsearch/README.md#search) - NOTE: Searches external client grants for all users
+- [`findingAuditSearch`](docs/sdks/findingaudit/README.md#search) - Search
 - [`findingBulkCreateFindingTasks`](docs/sdks/finding/README.md#bulkcreatefindingtasks) - Bulk Create Finding Tasks
 - [`findingBulkUpdateFindingState`](docs/sdks/finding/README.md#bulkupdatefindingstate) - Bulk Update Finding State
 - [`findingCreateFindingTask`](docs/sdks/finding/README.md#createfindingtask) - Create Finding Task
@@ -1065,6 +1181,25 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`localUserInvitationGet`](docs/sdks/localuserinvitation/README.md#get) - Get
 - [`localUserInvitationRevoke`](docs/sdks/localuserinvitation/README.md#revoke) - Revoke
 - [`localUserInvitationSearch`](docs/sdks/localuserinvitation/README.md#search) - Search
+- [`mcpAccessProfileCreate`](docs/sdks/mcpaccessprofile/README.md#create) - Create
+- [`mcpAccessProfileDelete`](docs/sdks/mcpaccessprofile/README.md#delete) - Delete
+- [`mcpAccessProfileGet`](docs/sdks/mcpaccessprofile/README.md#get) - Get
+- [`mcpAccessProfileGetByAppEntitlementId`](docs/sdks/mcpaccessprofile/README.md#getbyappentitlementid) - Get By App Entitlement Id
+- [`mcpAccessProfileList`](docs/sdks/mcpaccessprofile/README.md#list) - List
+- [`mcpAccessProfileListRequestableConnectors`](docs/sdks/mcpaccessprofile/README.md#listrequestableconnectors) - List Requestable Connectors
+- [`mcpAccessProfileToolBindingCreateBindings`](docs/sdks/mcpaccessprofiletoolbinding/README.md#createbindings) - Create Bindings
+- [`mcpAccessProfileToolBindingDeleteBindings`](docs/sdks/mcpaccessprofiletoolbinding/README.md#deletebindings) - Delete Bindings
+- [`mcpAccessProfileToolBindingGetAccessProfilesForTools`](docs/sdks/mcpaccessprofiletoolbinding/README.md#getaccessprofilesfortools) - Get Access Profiles For Tools
+- [`mcpAccessProfileToolBindingList`](docs/sdks/mcpaccessprofiletoolbinding/README.md#list) - List
+- [`mcpAccessProfileToolBindingListProfilesByToolHistory`](docs/sdks/mcpaccessprofiletoolbinding/README.md#listprofilesbytoolhistory) - List Profiles By Tool History
+- [`mcpAccessProfileToolBindingListToolsByProfileHistory`](docs/sdks/mcpaccessprofiletoolbinding/README.md#listtoolsbyprofilehistory) - List Tools By Profile History
+- [`mcpAccessProfileUpdate`](docs/sdks/mcpaccessprofile/README.md#update) - Update
+- [`mcpToolDelete`](docs/sdks/mcptool/README.md#delete) - Delete
+- [`mcpToolGet`](docs/sdks/mcptool/README.md#get) - Get
+- [`mcpToolList`](docs/sdks/mcptool/README.md#list) - List
+- [`mcpToolListHistory`](docs/sdks/mcptool/README.md#listhistory) - List History
+- [`mcpToolSearch`](docs/sdks/mcptool/README.md#search) - Search
+- [`mcpToolUpdate`](docs/sdks/mcptool/README.md#update) - Update
 - [`onboardingSettingsGet`](docs/sdks/onboardingsettings/README.md#get) - Get
 - [`onboardingSettingsUpdate`](docs/sdks/onboardingsettings/README.md#update) - Update
 - [`orgDomainList`](docs/sdks/orgdomain/README.md#list) - List
@@ -1140,11 +1275,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`requestSchemaGet`](docs/sdks/requestschema/README.md#get) - Get
 - [`requestSchemaRemoveEntitlementBinding`](docs/sdks/requestschema/README.md#removeentitlementbinding) - Remove Entitlement Binding
 - [`requestSchemaUpdate`](docs/sdks/requestschema/README.md#update) - Update
+- [`requestSettingsGet`](docs/sdks/requestsettings/README.md#get) - Get
+- [`requestSettingsUpdate`](docs/sdks/requestsettings/README.md#update) - Update
 - [`roleMiningManagementCreateAccessProfileFromCohort`](docs/sdks/roleminingmanagement/README.md#createaccessprofilefromcohort) - Create Access Profile From Cohort
 - [`roleMiningManagementGetCustomAnalysisResult`](docs/sdks/roleminingmanagement/README.md#getcustomanalysisresult) - Get Custom Analysis Result
 - [`roleMiningManagementGetLatestRun`](docs/sdks/roleminingmanagement/README.md#getlatestrun) - Get Latest Run
 - [`roleMiningManagementGetRoleMiningConfig`](docs/sdks/roleminingmanagement/README.md#getroleminingconfig) - Get Role Mining Config
 - [`roleMiningManagementGetSuggestion`](docs/sdks/roleminingmanagement/README.md#getsuggestion) - Get Suggestion
+- [`roleMiningManagementListCustomAnalysisResults`](docs/sdks/roleminingmanagement/README.md#listcustomanalysisresults) - List Custom Analysis Results
 - [`roleMiningManagementListRuns`](docs/sdks/roleminingmanagement/README.md#listruns) - List Runs
 - [`roleMiningManagementListSuggestions`](docs/sdks/roleminingmanagement/README.md#listsuggestions) - List Suggestions
 - [`roleMiningManagementSearchCohortUsers`](docs/sdks/roleminingmanagement/README.md#searchcohortusers) - Search Cohort Users
@@ -1208,8 +1346,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`tenantEmailProviderSearchAuditEvents`](docs/sdks/tenantemailprovider/README.md#searchauditevents) - Search Audit Events
 - [`tenantEmailProviderTest`](docs/sdks/tenantemailprovider/README.md#test) - Test
 - [`tenantEmailProviderUpdate`](docs/sdks/tenantemailprovider/README.md#update) - Update
+- [`terraformExportGetSchema`](docs/sdks/terraformexport/README.md#getschema) - Get Schema
+- [`userDeveloperPreferencesGet`](docs/sdks/userdeveloperpreferences/README.md#get) - Get
+- [`userDeveloperPreferencesUpdate`](docs/sdks/userdeveloperpreferences/README.md#update) - Update
 - [`userGet`](docs/sdks/user/README.md#get) - Get
 - [`userGetUserProfileTypes`](docs/sdks/user/README.md#getuserprofiletypes) - Get User Profile Types
+- [`userIntrospect`](docs/sdks/user/README.md#introspect) - Introspect
 - [`userList`](docs/sdks/user/README.md#list) - List
 - [`userNotificationSettingsGet`](docs/sdks/usernotificationsettings/README.md#get) - Get
 - [`userNotificationSettingsUpdate`](docs/sdks/usernotificationsettings/README.md#update) - Update

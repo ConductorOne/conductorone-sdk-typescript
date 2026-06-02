@@ -32,6 +32,12 @@ import {
   EntitlementExclusionNone$outboundSchema,
 } from "./entitlementexclusionnone.js";
 import {
+  EntitlementInclusionAccessOnly,
+  EntitlementInclusionAccessOnly$inboundSchema,
+  EntitlementInclusionAccessOnly$Outbound,
+  EntitlementInclusionAccessOnly$outboundSchema,
+} from "./entitlementinclusionaccessonly.js";
+import {
   EntitlementInclusionAll,
   EntitlementInclusionAll$inboundSchema,
   EntitlementInclusionAll$Outbound,
@@ -77,6 +83,7 @@ import {
  *   - inclusionAll
  *   - inclusionCriteria
  *   - inclusionListCel
+ *   - inclusionAccessOnly
  *
  * This message contains a oneof named exclusion. Only a single field of the following list may be set at a time:
  *   - exclusionNone
@@ -104,6 +111,18 @@ export type CreateRevokeTasksV2 = {
    * The EntitlementExclusionNone message.
    */
   entitlementExclusionNone?: EntitlementExclusionNone | null | undefined;
+  /**
+   * EntitlementInclusionAccessOnly resolves to the system-managed access
+   *
+   * @remarks
+   *  entitlement on every app the subject user has an AppUser on. Use this to
+   *  deprovision app accounts without fanning out to every group, role, or
+   *  permission inside each app — produces at most one revoke ticket per app.
+   */
+  entitlementInclusionAccessOnly?:
+    | EntitlementInclusionAccessOnly
+    | null
+    | undefined;
   /**
    * The EntitlementInclusionAll message.
    */
@@ -157,6 +176,8 @@ export const CreateRevokeTasksV2$inboundSchema: z.ZodType<
   exclusionListCel: z.nullable(EntitlementExclusionListCel$inboundSchema)
     .optional(),
   exclusionNone: z.nullable(EntitlementExclusionNone$inboundSchema).optional(),
+  inclusionAccessOnly: z.nullable(EntitlementInclusionAccessOnly$inboundSchema)
+    .optional(),
   inclusionAll: z.nullable(EntitlementInclusionAll$inboundSchema).optional(),
   inclusionCriteria: z.nullable(EntitlementInclusionCriteria$inboundSchema)
     .optional(),
@@ -172,6 +193,7 @@ export const CreateRevokeTasksV2$inboundSchema: z.ZodType<
     "exclusionList": "entitlementExclusionList",
     "exclusionListCel": "entitlementExclusionListCel",
     "exclusionNone": "entitlementExclusionNone",
+    "inclusionAccessOnly": "entitlementInclusionAccessOnly",
     "inclusionAll": "entitlementInclusionAll",
     "inclusionCriteria": "entitlementInclusionCriteria",
     "inclusionList": "entitlementInclusionList",
@@ -184,6 +206,10 @@ export type CreateRevokeTasksV2$Outbound = {
   exclusionList?: EntitlementExclusionList$Outbound | null | undefined;
   exclusionListCel?: EntitlementExclusionListCel$Outbound | null | undefined;
   exclusionNone?: EntitlementExclusionNone$Outbound | null | undefined;
+  inclusionAccessOnly?:
+    | EntitlementInclusionAccessOnly$Outbound
+    | null
+    | undefined;
   inclusionAll?: EntitlementInclusionAll$Outbound | null | undefined;
   inclusionCriteria?: EntitlementInclusionCriteria$Outbound | null | undefined;
   inclusionList?: EntitlementInclusionList$Outbound | null | undefined;
@@ -209,6 +235,9 @@ export const CreateRevokeTasksV2$outboundSchema: z.ZodType<
   ).optional(),
   entitlementExclusionNone: z.nullable(EntitlementExclusionNone$outboundSchema)
     .optional(),
+  entitlementInclusionAccessOnly: z.nullable(
+    EntitlementInclusionAccessOnly$outboundSchema,
+  ).optional(),
   entitlementInclusionAll: z.nullable(EntitlementInclusionAll$outboundSchema)
     .optional(),
   entitlementInclusionCriteria: z.nullable(
@@ -228,6 +257,7 @@ export const CreateRevokeTasksV2$outboundSchema: z.ZodType<
     entitlementExclusionList: "exclusionList",
     entitlementExclusionListCel: "exclusionListCel",
     entitlementExclusionNone: "exclusionNone",
+    entitlementInclusionAccessOnly: "inclusionAccessOnly",
     entitlementInclusionAll: "inclusionAll",
     entitlementInclusionCriteria: "inclusionCriteria",
     entitlementInclusionList: "inclusionList",

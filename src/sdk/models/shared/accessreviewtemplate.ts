@@ -40,6 +40,12 @@ import {
   RecurrenceRule$outboundSchema,
 } from "./recurrencerule.js";
 import {
+  ReviewerAttributeConfig,
+  ReviewerAttributeConfig$inboundSchema,
+  ReviewerAttributeConfig$Outbound,
+  ReviewerAttributeConfig$outboundSchema,
+} from "./reviewerattributeconfig.js";
+import {
   ReviewSignatureConfig,
   ReviewSignatureConfig$inboundSchema,
   ReviewSignatureConfig$Outbound,
@@ -135,6 +141,19 @@ export type AccessReviewTemplate = {
    */
   accuracyIssueAction?: AccessReviewTemplateAccuracyIssueAction | undefined;
   /**
+   * Key/value metadata. Up to 16 entries; keys 1-128 chars; values 0-256
+   *
+   * @remarks
+   *  chars; URL-safe ASCII. Keys starting with `c1/` are reserved.
+   *
+   *  Updates have PATCH semantics: keys absent from the request are
+   *  preserved; an empty value deletes the key.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * Auto-close configuration
    *
    * @remarks
@@ -218,6 +237,13 @@ export type AccessReviewTemplate = {
    */
   reviewInstructions?: string | undefined;
   /**
+   * Allowlist of AppUser.profile keys visible to reviewers, scoped per app.
+   *
+   * @remarks
+   *  Empty = reviewers see no profile attributes in the AppUser tooltip.
+   */
+  reviewerAttributeConfig?: ReviewerAttributeConfig | undefined;
+  /**
    * The AccessReviewScopeV2 message.
    *
    * @remarks
@@ -285,6 +311,19 @@ export type AccessReviewTemplateInput = {
    * The accuracyIssueAction field.
    */
   accuracyIssueAction?: AccessReviewTemplateAccuracyIssueAction | undefined;
+  /**
+   * Key/value metadata. Up to 16 entries; keys 1-128 chars; values 0-256
+   *
+   * @remarks
+   *  chars; URL-safe ASCII. Keys starting with `c1/` are reserved.
+   *
+   *  Updates have PATCH semantics: keys absent from the request are
+   *  preserved; an empty value deletes the key.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
   /**
    * Auto-close configuration
    *
@@ -366,6 +405,13 @@ export type AccessReviewTemplateInput = {
    * The reviewInstructions field.
    */
   reviewInstructions?: string | undefined;
+  /**
+   * Allowlist of AppUser.profile keys visible to reviewers, scoped per app.
+   *
+   * @remarks
+   *  Empty = reviewers see no profile attributes in the AppUser tooltip.
+   */
+  reviewerAttributeConfig?: ReviewerAttributeConfig | undefined;
   /**
    * The AccessReviewScopeV2 message.
    *
@@ -479,6 +525,7 @@ export const AccessReviewTemplate$inboundSchema: z.ZodType<
   accessReviewDuration: z.string().optional(),
   accuracyIssueAction: AccessReviewTemplateAccuracyIssueAction$inboundSchema
     .optional(),
+  annotations: z.record(z.string()).optional(),
   autoCloseCampaign: z.boolean().optional(),
   autoCloseDecision: AccessReviewTemplateAutoCloseDecision$inboundSchema
     .optional(),
@@ -504,6 +551,7 @@ export const AccessReviewTemplate$inboundSchema: z.ZodType<
   policyId: z.string().optional(),
   recurrenceRule: RecurrenceRule$inboundSchema.optional(),
   reviewInstructions: z.string().optional(),
+  reviewerAttributeConfig: ReviewerAttributeConfig$inboundSchema.optional(),
   scope: AccessReviewScopeV2$inboundSchema.optional(),
   scopeType: AccessReviewTemplateScopeType$inboundSchema.optional(),
   signatureConfig: ReviewSignatureConfig$inboundSchema.optional(),
@@ -534,6 +582,7 @@ export function accessReviewTemplateFromJSON(
 export type AccessReviewTemplateInput$Outbound = {
   accessReviewDuration?: string | undefined;
   accuracyIssueAction?: string | undefined;
+  annotations?: { [k: string]: string } | undefined;
   autoCloseCampaign?: boolean | undefined;
   autoCloseDecision?: string | undefined;
   autoGenerateReport?: boolean | undefined;
@@ -552,6 +601,7 @@ export type AccessReviewTemplateInput$Outbound = {
   policyId?: string | undefined;
   recurrenceRule?: RecurrenceRule$Outbound | undefined;
   reviewInstructions?: string | undefined;
+  reviewerAttributeConfig?: ReviewerAttributeConfig$Outbound | undefined;
   scope?: AccessReviewScopeV2$Outbound | undefined;
   scopeType?: string | undefined;
   signatureConfig?: ReviewSignatureConfig$Outbound | undefined;
@@ -568,6 +618,7 @@ export const AccessReviewTemplateInput$outboundSchema: z.ZodType<
   accessReviewDuration: z.string().optional(),
   accuracyIssueAction: AccessReviewTemplateAccuracyIssueAction$outboundSchema
     .optional(),
+  annotations: z.record(z.string()).optional(),
   autoCloseCampaign: z.boolean().optional(),
   autoCloseDecision: AccessReviewTemplateAutoCloseDecision$outboundSchema
     .optional(),
@@ -588,6 +639,7 @@ export const AccessReviewTemplateInput$outboundSchema: z.ZodType<
   policyId: z.string().optional(),
   recurrenceRule: RecurrenceRule$outboundSchema.optional(),
   reviewInstructions: z.string().optional(),
+  reviewerAttributeConfig: ReviewerAttributeConfig$outboundSchema.optional(),
   accessReviewScopeV2: AccessReviewScopeV2$outboundSchema.optional(),
   scopeType: AccessReviewTemplateScopeType$outboundSchema.optional(),
   reviewSignatureConfig: ReviewSignatureConfig$outboundSchema.optional(),

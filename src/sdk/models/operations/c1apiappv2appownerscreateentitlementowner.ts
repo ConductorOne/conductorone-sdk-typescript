@@ -14,8 +14,8 @@ export type C1ApiAppV2AppOwnersCreateEntitlementOwnerRequest = {
   roleSlug: string;
   appEntitlementRefAppId: string;
   appEntitlementRefId: string;
-  createEntitlementOwnerRequest?:
-    | shared.CreateEntitlementOwnerRequest
+  createAppEntitlementOwnerRequest?:
+    | shared.CreateAppEntitlementOwnerRequest
     | undefined;
 };
 
@@ -35,8 +35,8 @@ export type C1ApiAppV2AppOwnersCreateEntitlementOwnerResponse = {
   /**
    * CreateEntitlementOwnerResponse is the response for creating an entitlement ownership source.
    */
-  createEntitlementOwnerResponse?:
-    | shared.CreateEntitlementOwnerResponse
+  createAppEntitlementOwnerResponse?:
+    | shared.CreateAppEntitlementOwnerResponse
     | undefined;
 };
 
@@ -46,8 +46,8 @@ export type C1ApiAppV2AppOwnersCreateEntitlementOwnerRequest$Outbound = {
   role_slug: string;
   app_entitlement_ref_app_id: string;
   app_entitlement_ref_id: string;
-  CreateEntitlementOwnerRequest?:
-    | shared.CreateEntitlementOwnerRequest$Outbound
+  CreateAppEntitlementOwnerRequest?:
+    | shared.CreateAppEntitlementOwnerRequest$Outbound
     | undefined;
 };
 
@@ -62,15 +62,15 @@ export const C1ApiAppV2AppOwnersCreateEntitlementOwnerRequest$outboundSchema:
     roleSlug: z.string(),
     appEntitlementRefAppId: z.string(),
     appEntitlementRefId: z.string(),
-    createEntitlementOwnerRequest: shared
-      .CreateEntitlementOwnerRequest$outboundSchema.optional(),
+    createAppEntitlementOwnerRequest: shared
+      .CreateAppEntitlementOwnerRequest$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       appId: "app_id",
       roleSlug: "role_slug",
       appEntitlementRefAppId: "app_entitlement_ref_app_id",
       appEntitlementRefId: "app_entitlement_ref_id",
-      createEntitlementOwnerRequest: "CreateEntitlementOwnerRequest",
+      createAppEntitlementOwnerRequest: "CreateAppEntitlementOwnerRequest",
     });
   });
 
@@ -95,14 +95,14 @@ export const C1ApiAppV2AppOwnersCreateEntitlementOwnerResponse$inboundSchema:
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    CreateEntitlementOwnerResponse: shared
-      .CreateEntitlementOwnerResponse$inboundSchema.optional(),
+    CreateAppEntitlementOwnerResponse: shared
+      .CreateAppEntitlementOwnerResponse$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
       "StatusCode": "statusCode",
       "RawResponse": "rawResponse",
-      "CreateEntitlementOwnerResponse": "createEntitlementOwnerResponse",
+      "CreateAppEntitlementOwnerResponse": "createAppEntitlementOwnerResponse",
     });
   });
 

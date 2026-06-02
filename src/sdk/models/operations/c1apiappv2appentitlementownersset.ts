@@ -12,8 +12,8 @@ import * as shared from "../shared/index.js";
 export type C1ApiAppV2AppEntitlementOwnersSetRequest = {
   appId: string;
   entitlementId: string;
-  setAppEntitlementOwnersV2Request?:
-    | shared.SetAppEntitlementOwnersV2Request
+  setAppEntitlementOwnersRequestV2?:
+    | shared.SetAppEntitlementOwnersRequestV2
     | undefined;
 };
 
@@ -31,10 +31,10 @@ export type C1ApiAppV2AppEntitlementOwnersSetResponse = {
    */
   rawResponse: Response;
   /**
-   * SetAppEntitlementOwnersV2Response is the empty response for setting app entitlement owners.
+   * SetAppEntitlementOwnersResponse is the empty response for setting app entitlement owners.
    */
-  setAppEntitlementOwnersV2Response?:
-    | shared.SetAppEntitlementOwnersV2Response
+  setAppEntitlementOwnersResponseV2?:
+    | shared.SetAppEntitlementOwnersResponseV2
     | undefined;
 };
 
@@ -42,8 +42,8 @@ export type C1ApiAppV2AppEntitlementOwnersSetResponse = {
 export type C1ApiAppV2AppEntitlementOwnersSetRequest$Outbound = {
   app_id: string;
   entitlement_id: string;
-  SetAppEntitlementOwnersV2Request?:
-    | shared.SetAppEntitlementOwnersV2Request$Outbound
+  SetAppEntitlementOwnersRequestV2?:
+    | shared.SetAppEntitlementOwnersRequestV2$Outbound
     | undefined;
 };
 
@@ -55,13 +55,13 @@ export const C1ApiAppV2AppEntitlementOwnersSetRequest$outboundSchema: z.ZodType<
 > = z.object({
   appId: z.string(),
   entitlementId: z.string(),
-  setAppEntitlementOwnersV2Request: shared
-    .SetAppEntitlementOwnersV2Request$outboundSchema.optional(),
+  setAppEntitlementOwnersRequestV2: shared
+    .SetAppEntitlementOwnersRequestV2$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     appId: "app_id",
     entitlementId: "entitlement_id",
-    setAppEntitlementOwnersV2Request: "SetAppEntitlementOwnersV2Request",
+    setAppEntitlementOwnersRequestV2: "SetAppEntitlementOwnersRequestV2",
   });
 });
 
@@ -85,14 +85,14 @@ export const C1ApiAppV2AppEntitlementOwnersSetResponse$inboundSchema: z.ZodType<
   ContentType: z.string(),
   StatusCode: z.number().int(),
   RawResponse: z.instanceof(Response),
-  SetAppEntitlementOwnersV2Response: shared
-    .SetAppEntitlementOwnersV2Response$inboundSchema.optional(),
+  SetAppEntitlementOwnersResponseV2: shared
+    .SetAppEntitlementOwnersResponseV2$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "ContentType": "contentType",
     "StatusCode": "statusCode",
     "RawResponse": "rawResponse",
-    "SetAppEntitlementOwnersV2Response": "setAppEntitlementOwnersV2Response",
+    "SetAppEntitlementOwnersResponseV2": "setAppEntitlementOwnersResponseV2",
   });
 });
 

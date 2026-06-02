@@ -30,7 +30,7 @@ generation:
     skipResponseBodyAssertions: false
   baseServerURL: ""
 typescript:
-  version: 1.2.2
+  version: 1.3.0
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies:
@@ -88,6 +88,7 @@ typescript:
   packageName: conductorone-sdk-typescript
   preApplyUnionDiscriminators: true
   preserveModelFieldNames: false
+  privateIdentifierPrefix: '#'
   responseFormat: envelope
   sseFlatResponse: false
   templateVersion: v2

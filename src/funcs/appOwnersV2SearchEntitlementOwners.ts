@@ -179,7 +179,7 @@ async function $do(
       200,
       operations
         .C1ApiAppV2AppOwnersSearchEntitlementOwnersResponse$inboundSchema,
-      { key: "SearchEntitlementOwnersResponse" },
+      { key: "SearchAppEntitlementOwnersResponse" },
     ),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

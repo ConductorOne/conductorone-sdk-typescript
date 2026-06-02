@@ -87,7 +87,7 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.DeleteUserOwnerRequest, {
+  const body = encodeJSON("body", payload.DeleteAppUserOwnerRequest, {
     explode: true,
   });
 
@@ -181,7 +181,7 @@ async function $do(
     M.json(
       200,
       operations.C1ApiAppV2AppOwnersDeleteUserOwnerResponse$inboundSchema,
-      { key: "DeleteUserOwnerResponse" },
+      { key: "DeleteAppUserOwnerResponse" },
     ),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

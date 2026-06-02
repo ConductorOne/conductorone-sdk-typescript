@@ -3,21 +3,70 @@
  */
 
 import * as z from "zod/v3";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
+
+/**
+ * What to do with paused executions. UNSPECIFIED means clear the breaker
+ *
+ * @remarks
+ *  only (backward-compatible default). RUN or CANCEL creates a bulk action
+ *  to resolve them asynchronously.
+ */
+export const Decision = {
+  PausedExecutionDecisionUnspecified: "PAUSED_EXECUTION_DECISION_UNSPECIFIED",
+  PausedExecutionDecisionRun: "PAUSED_EXECUTION_DECISION_RUN",
+  PausedExecutionDecisionCancel: "PAUSED_EXECUTION_DECISION_CANCEL",
+} as const;
+/**
+ * What to do with paused executions. UNSPECIFIED means clear the breaker
+ *
+ * @remarks
+ *  only (backward-compatible default). RUN or CANCEL creates a bulk action
+ *  to resolve them asynchronously.
+ */
+export type Decision = OpenEnum<typeof Decision>;
 
 /**
  * The ClearAutomationCircuitBreakerRequest message.
  */
-export type ClearAutomationCircuitBreakerRequest = {};
+export type ClearAutomationCircuitBreakerRequest = {
+  /**
+   * What to do with paused executions. UNSPECIFIED means clear the breaker
+   *
+   * @remarks
+   *  only (backward-compatible default). RUN or CANCEL creates a bulk action
+   *  to resolve them asynchronously.
+   */
+  decision?: Decision | undefined;
+  /**
+   * Admin-supplied reason when decision is CANCEL. Up to 1024 bytes.
+   */
+  reason?: string | undefined;
+};
 
 /** @internal */
-export type ClearAutomationCircuitBreakerRequest$Outbound = {};
+export const Decision$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  Decision
+> = openEnums.outboundSchema(Decision);
+
+/** @internal */
+export type ClearAutomationCircuitBreakerRequest$Outbound = {
+  decision?: string | undefined;
+  reason?: string | undefined;
+};
 
 /** @internal */
 export const ClearAutomationCircuitBreakerRequest$outboundSchema: z.ZodType<
   ClearAutomationCircuitBreakerRequest$Outbound,
   z.ZodTypeDef,
   ClearAutomationCircuitBreakerRequest
-> = z.object({});
+> = z.object({
+  decision: Decision$outboundSchema.optional(),
+  reason: z.string().optional(),
+});
 
 export function clearAutomationCircuitBreakerRequestToJSON(
   clearAutomationCircuitBreakerRequest: ClearAutomationCircuitBreakerRequest,
