@@ -277,6 +277,13 @@ actions:
       - "null"
   - target: $["components"]["schemas"]["c1.api.app.v1.App"]["properties"]["appOwners"]["nullable"]
     remove: true
+  - target: $["components"]["schemas"]["c1.api.app.v1.App"]["properties"]["appUserMapper"]
+    update:
+      oneOf:
+        - $ref: '#/components/schemas/c1.api.app.v1.AppUserMapper'
+        - type: "null"
+  - target: $["components"]["schemas"]["c1.api.app.v1.App"]["properties"]["appUserMapper"]["$ref"]
+    remove: true
   - target: $["components"]["schemas"]["c1.api.app.v1.App"]["properties"]["certifyPolicyId"]["type"]
     update:
       - string

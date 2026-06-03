@@ -76,7 +76,7 @@ export type App = {
   /**
    * AppUserMapper configures custom account mapping for uplift.
    */
-  appUserMapper?: AppUserMapper | undefined;
+  appUserMapper?: AppUserMapper | null | undefined;
   /**
    * The ID of the Certify Policy associated with this App.
    */
@@ -173,7 +173,7 @@ export type AppInput = {
   /**
    * AppUserMapper configures custom account mapping for uplift.
    */
-  appUserMapper?: AppUserMapper | undefined;
+  appUserMapper?: AppUserMapper | null | undefined;
   /**
    * The ID of the Certify Policy associated with this App.
    */
@@ -269,7 +269,7 @@ export const App$inboundSchema: z.ZodType<App, z.ZodTypeDef, unknown> = z
     appAccountId: z.nullable(z.string()).optional(),
     appAccountName: z.nullable(z.string()).optional(),
     appOwners: z.nullable(z.array(User$inboundSchema)).optional(),
-    appUserMapper: AppUserMapper$inboundSchema.optional(),
+    appUserMapper: z.nullable(AppUserMapper$inboundSchema).optional(),
     certifyPolicyId: z.nullable(z.string()).optional(),
     connectorVersion: z.nullable(z.number().int()).optional(),
     createdAt: z.nullable(
@@ -315,7 +315,7 @@ export function appFromJSON(
 /** @internal */
 export type AppInput$Outbound = {
   accessModel?: string | undefined;
-  appUserMapper?: AppUserMapper$Outbound | undefined;
+  appUserMapper?: AppUserMapper$Outbound | null | undefined;
   certifyPolicyId?: string | null | undefined;
   connectorVersion?: number | null | undefined;
   createdAt?: string | null | undefined;
@@ -343,7 +343,7 @@ export const AppInput$outboundSchema: z.ZodType<
   AppInput
 > = z.object({
   accessModel: AccessModel$outboundSchema.optional(),
-  appUserMapper: AppUserMapper$outboundSchema.optional(),
+  appUserMapper: z.nullable(AppUserMapper$outboundSchema).optional(),
   certifyPolicyId: z.nullable(z.string()).optional(),
   connectorVersion: z.nullable(z.number().int()).optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
