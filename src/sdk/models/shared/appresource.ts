@@ -25,6 +25,24 @@ export type AppResource = {
    */
   accessConfigId?: string | undefined;
   /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  URL-safe ASCII; total serialized ≤ 4096 bytes. Keys matching ^c1/
+   *  are reserved.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   *
+   *  Most AppResources are connector-synced; user-supplied annotations on
+   *  a synced resource will be overwritten by the next sync. The
+   *  annotations bag is most useful on user-created groups (the
+   *  `conductorone_app_resource` TF resource).
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * The app that this resource belongs to.
    */
   appId?: string | null | undefined;
@@ -85,6 +103,7 @@ export const AppResource$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   accessConfigId: z.string().optional(),
+  annotations: z.record(z.string()).optional(),
   appId: z.nullable(z.string()).optional(),
   appResourceTypeId: z.nullable(z.string()).optional(),
   createdAt: z.nullable(

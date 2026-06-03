@@ -43,6 +43,10 @@ export type CohortEntitlement = {
    * The grantedCount field.
    */
   grantedCount?: number | undefined;
+  /**
+   * The riskLevelValueId field.
+   */
+  riskLevelValueId?: string | undefined;
 };
 
 /** @internal */
@@ -59,6 +63,7 @@ export const CohortEntitlement$inboundSchema: z.ZodType<
   entitlementDisplayName: z.string().optional(),
   entitlementId: z.string().optional(),
   grantedCount: z.number().int().optional(),
+  riskLevelValueId: z.string().optional(),
 });
 /** @internal */
 export type CohortEntitlement$Outbound = {
@@ -70,6 +75,7 @@ export type CohortEntitlement$Outbound = {
   entitlementDisplayName?: string | undefined;
   entitlementId?: string | undefined;
   grantedCount?: number | undefined;
+  riskLevelValueId?: string | undefined;
 };
 
 /** @internal */
@@ -86,6 +92,7 @@ export const CohortEntitlement$outboundSchema: z.ZodType<
   entitlementDisplayName: z.string().optional(),
   entitlementId: z.string().optional(),
   grantedCount: z.number().int().optional(),
+  riskLevelValueId: z.string().optional(),
 });
 
 export function cohortEntitlementToJSON(

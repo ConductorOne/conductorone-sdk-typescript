@@ -41,7 +41,21 @@ export type SetBundleAutomationRequest = {
    * Whether the automation should actively run on its schedule.
    */
   enabled?: boolean | null | undefined;
+  /**
+   * When true, the circuit breaker is evaluated even on profiles below the
+   *
+   * @remarks
+   *  tenant min-members floor. Defaults to false.
+   */
+  enforceOnSmallProfiles?: boolean | undefined;
   entitlements?: BundleAutomationRuleEntitlement | null | undefined;
+  /**
+   * Per-automation override for the removed-members percent that trips the
+   *
+   * @remarks
+   *  circuit breaker (1-100). 0 / unset means inherit the tenant default.
+   */
+  removedMembersThresholdPercent?: number | undefined;
 };
 
 /** @internal */
@@ -50,7 +64,9 @@ export type SetBundleAutomationRequest$Outbound = {
   createTasks?: boolean | null | undefined;
   disableCircuitBreaker?: boolean | null | undefined;
   enabled?: boolean | null | undefined;
+  enforceOnSmallProfiles?: boolean | undefined;
   entitlements?: BundleAutomationRuleEntitlement$Outbound | null | undefined;
+  removedMembersThresholdPercent?: string | undefined;
 };
 
 /** @internal */
@@ -64,7 +80,10 @@ export const SetBundleAutomationRequest$outboundSchema: z.ZodType<
   createTasks: z.nullable(z.boolean()).optional(),
   disableCircuitBreaker: z.nullable(z.boolean()).optional(),
   enabled: z.nullable(z.boolean()).optional(),
+  enforceOnSmallProfiles: z.boolean().optional(),
   entitlements: z.nullable(BundleAutomationRuleEntitlement$outboundSchema)
+    .optional(),
+  removedMembersThresholdPercent: z.number().int().transform(v => `${v}`)
     .optional(),
 }).transform((v) => {
   return remap$(v, {

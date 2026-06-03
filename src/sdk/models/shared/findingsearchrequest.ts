@@ -6,6 +6,15 @@ import * as z from "zod/v3";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
+export const FindingTypes = {
+  FindingTypeUnspecified: "FINDING_TYPE_UNSPECIFIED",
+  FindingTypeSimilarUsernameMatch: "FINDING_TYPE_SIMILAR_USERNAME_MATCH",
+  FindingTypeServiceAccountMisclassification:
+    "FINDING_TYPE_SERVICE_ACCOUNT_MISCLASSIFICATION",
+  FindingTypeDecoyCredentialUsed: "FINDING_TYPE_DECOY_CREDENTIAL_USED",
+} as const;
+export type FindingTypes = OpenEnum<typeof FindingTypes>;
+
 export const Severities = {
   FindingSeverityUnspecified: "FINDING_SEVERITY_UNSPECIFIED",
   FindingSeverityInfo: "FINDING_SEVERITY_INFO",
@@ -43,9 +52,16 @@ export type FindingSearchRequest = {
    */
   appUserIds?: Array<string> | null | undefined;
   /**
-   * Filter by finding type discriminators (OR within field).
+   * Filter by decoy IDs (OR within field). Matches findings whose
+   *
+   * @remarks
+   *  target.decoy_target.decoy_id is in this list.
    */
-  findingTypes?: Array<string> | null | undefined;
+  decoyIds?: Array<string> | null | undefined;
+  /**
+   * Filter by finding type (OR within field).
+   */
+  findingTypes?: Array<FindingTypes> | null | undefined;
   /**
    * Maximum number of findings to return per page.
    */
@@ -69,6 +85,13 @@ export type FindingSearchRequest = {
 };
 
 /** @internal */
+export const FindingTypes$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  FindingTypes
+> = openEnums.outboundSchema(FindingTypes);
+
+/** @internal */
 export const Severities$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
@@ -83,6 +106,7 @@ export const States$outboundSchema: z.ZodType<string, z.ZodTypeDef, States> =
 export type FindingSearchRequest$Outbound = {
   appIds?: Array<string> | null | undefined;
   appUserIds?: Array<string> | null | undefined;
+  decoyIds?: Array<string> | null | undefined;
   findingTypes?: Array<string> | null | undefined;
   pageSize?: number | undefined;
   pageToken?: string | undefined;
@@ -99,7 +123,8 @@ export const FindingSearchRequest$outboundSchema: z.ZodType<
 > = z.object({
   appIds: z.nullable(z.array(z.string())).optional(),
   appUserIds: z.nullable(z.array(z.string())).optional(),
-  findingTypes: z.nullable(z.array(z.string())).optional(),
+  decoyIds: z.nullable(z.array(z.string())).optional(),
+  findingTypes: z.nullable(z.array(FindingTypes$outboundSchema)).optional(),
   pageSize: z.number().int().optional(),
   pageToken: z.string().optional(),
   query: z.string().optional(),

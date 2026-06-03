@@ -11,6 +11,11 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { AppUserTarget, AppUserTarget$inboundSchema } from "./appusertarget.js";
 import {
+  DecoyCredentialUsedType,
+  DecoyCredentialUsedType$inboundSchema,
+} from "./decoycredentialusedtype.js";
+import { DecoyTarget, DecoyTarget$inboundSchema } from "./decoytarget.js";
+import {
   FindingOwnerRef,
   FindingOwnerRef$inboundSchema,
 } from "./findingownerref.js";
@@ -80,10 +85,12 @@ export type FindingState = OpenEnum<typeof FindingState>;
  * This message contains a oneof named finding_type. Only a single field of the following list may be set at a time:
  *   - similarUsernameMatch
  *   - serviceAccountMisclassification
+ *   - decoyCredentialUsed
  *
  * This message contains a oneof named target. Only a single field of the following list may be set at a time:
  *   - identityUserTarget
  *   - appUserTarget
+ *   - decoyTarget
  *
  * This message contains a oneof named evidence. Only a single field of the following list may be set at a time:
  *   - similarUsernameMatchEvidence
@@ -127,6 +134,22 @@ export type Finding = {
    * The customTags field.
    */
   customTags?: { [k: string]: string } | undefined;
+  /**
+   * DecoyCredentialUsedType: a planted decoy credential authenticated
+   *
+   * @remarks
+   *  successfully.
+   */
+  decoyCredentialUsedType?: DecoyCredentialUsedType | null | undefined;
+  /**
+   * DecoyTarget points at the planted decoy that produced this finding.
+   *
+   * @remarks
+   *  Populated for findings whose subject is the decoy artifact itself
+   *  (e.g. decoy_credential_used), giving the UI and routing rules a
+   *  uniform handle to the decoy alongside the finding_type payload.
+   */
+  decoyTarget?: DecoyTarget | null | undefined;
   /**
    * The fingerprint field.
    */
@@ -240,6 +263,9 @@ export const Finding$inboundSchema: z.ZodType<Finding, z.ZodTypeDef, unknown> =
     createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
       .optional(),
     customTags: z.record(z.string()).optional(),
+    decoyCredentialUsed: z.nullable(DecoyCredentialUsedType$inboundSchema)
+      .optional(),
+    decoyTarget: z.nullable(DecoyTarget$inboundSchema).optional(),
     fingerprint: z.string().optional(),
     firstObservedAt: z.string().datetime({ offset: true }).transform(v =>
       new Date(v)
@@ -286,6 +312,7 @@ export const Finding$inboundSchema: z.ZodType<Finding, z.ZodTypeDef, unknown> =
     return remap$(v, {
       "assignedOwner": "findingOwnerRef",
       "computedOwner": "findingOwnerRef1",
+      "decoyCredentialUsed": "decoyCredentialUsedType",
       "riskScore": "findingRiskScore",
       "serviceAccountMisclassification": "serviceAccountMisclassificationType",
       "similarUsernameMatch": "similarUsernameMatchType",

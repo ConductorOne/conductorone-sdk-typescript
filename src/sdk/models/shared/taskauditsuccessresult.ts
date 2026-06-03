@@ -10,6 +10,10 @@ import {
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  ConnectorActionEffect,
+  ConnectorActionEffect$inboundSchema,
+} from "./connectoractioneffect.js";
 
 /**
  * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
@@ -30,6 +34,10 @@ export type TaskAuditSuccessResult = {
    * The annotations field.
    */
   annotations?: Array<TaskAuditSuccessResultAnnotations> | null | undefined;
+  /**
+   * The effects field.
+   */
+  effects?: Array<ConnectorActionEffect> | null | undefined;
   /**
    * Optional human-readable note about the successful action. Rendered in
    *
@@ -78,6 +86,7 @@ export const TaskAuditSuccessResult$inboundSchema: z.ZodType<
   annotations: z.nullable(
     z.array(z.lazy(() => TaskAuditSuccessResultAnnotations$inboundSchema)),
   ).optional(),
+  effects: z.nullable(z.array(ConnectorActionEffect$inboundSchema)).optional(),
   successReason: z.string().optional(),
 });
 

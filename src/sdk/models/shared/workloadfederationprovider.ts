@@ -3,11 +3,17 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { OIDCSettings, OIDCSettings$inboundSchema } from "./oidcsettings.js";
+import {
+  SPIFFESettings,
+  SPIFFESettings$inboundSchema,
+} from "./spiffesettings.js";
 
 /**
  * Well-known provider type. Drives UX (wizard presets, docs, icons).
@@ -26,6 +32,7 @@ export const WellKnownProvider = {
     "WELL_KNOWN_WORKLOAD_PROVIDER_HCP_TERRAFORM",
   WellKnownWorkloadProviderAwsIamOutbound:
     "WELL_KNOWN_WORKLOAD_PROVIDER_AWS_IAM_OUTBOUND",
+  WellKnownWorkloadProviderSpiffe: "WELL_KNOWN_WORKLOAD_PROVIDER_SPIFFE",
 } as const;
 /**
  * Well-known provider type. Drives UX (wizard presets, docs, icons).
@@ -36,7 +43,22 @@ export const WellKnownProvider = {
 export type WellKnownProvider = OpenEnum<typeof WellKnownProvider>;
 
 /**
- * WorkloadFederationProvider represents a tenant-level OIDC issuer registration.
+ * WorkloadFederationProvider represents a tenant-level workload identity
+ *
+ * @remarks
+ *  issuer registration. Two issuer schemes are supported:
+ *
+ *    - https://...   classic OIDC issuer; `settings.oidc` MUST be set.
+ *    - spiffe://...  SPIFFE trust-domain URI; `settings.spiffe` MUST be set.
+ *
+ *  The (well_known_provider, issuer_url scheme, settings oneof) tuple is a
+ *  tri-invariant: SPIFFE wkp ⟺ spiffe:// issuer ⟺ settings.spiffe set; any
+ *  other wkp ⟺ https:// issuer ⟺ settings.oidc set. Issuer URLs are unique
+ *  within tenant.
+ *
+ * This message contains a oneof named settings. Only a single field of the following list may be set at a time:
+ *   - oidc
+ *   - spiffe
  */
 export type WorkloadFederationProvider = {
   createdAt?: Date | undefined;
@@ -57,9 +79,28 @@ export type WorkloadFederationProvider = {
    */
   id?: string | undefined;
   /**
-   * The OIDC issuer URL. Immutable after creation.
+   * Canonical issuer URL. https:// for OIDC providers, spiffe:// for SPIFFE
+   *
+   * @remarks
+   *  trust domains. Unique within tenant. Immutable after creation.
    */
   issuerUrl?: string | undefined;
+  /**
+   * OIDCSettings is the kind-specific configuration block for classic OIDC
+   *
+   * @remarks
+   *  providers (GitHub Actions, GitLab CI, HCP Terraform, AWS IAM Outbound,
+   *  any CUSTOM provider). Empty for now; future fields like custom_jwks_url,
+   *  audience overrides, and required_claims land here.
+   */
+  oidcSettings?: OIDCSettings | null | undefined;
+  /**
+   * SPIFFESettings is the kind-specific configuration block for SPIFFE
+   *
+   * @remarks
+   *  trust-domain providers (issuer_url = spiffe://<trust-domain>).
+   */
+  spiffeSettings?: SPIFFESettings | null | undefined;
   updatedAt?: Date | undefined;
   /**
    * Well-known provider type. Drives UX (wizard presets, docs, icons).
@@ -90,9 +131,16 @@ export const WorkloadFederationProvider$inboundSchema: z.ZodType<
   displayName: z.string().optional(),
   id: z.string().optional(),
   issuerUrl: z.string().optional(),
+  oidc: z.nullable(OIDCSettings$inboundSchema).optional(),
+  spiffe: z.nullable(SPIFFESettings$inboundSchema).optional(),
   updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   wellKnownProvider: WellKnownProvider$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "oidc": "oidcSettings",
+    "spiffe": "spiffeSettings",
+  });
 });
 
 export function workloadFederationProviderFromJSON(

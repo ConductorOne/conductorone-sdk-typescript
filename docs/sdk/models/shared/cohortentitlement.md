@@ -22,3 +22,4 @@ let value: CohortEntitlement = {};
 | `entitlementDisplayName`              | *string*                              | :heavy_minus_sign:                    | The entitlementDisplayName field.     |
 | `entitlementId`                       | *string*                              | :heavy_minus_sign:                    | The entitlementId field.              |
 | `grantedCount`                        | *number*                              | :heavy_minus_sign:                    | The grantedCount field.               |
+| `riskLevelValueId`                    | *string*                              | :heavy_minus_sign:                    | The riskLevelValueId field.           |

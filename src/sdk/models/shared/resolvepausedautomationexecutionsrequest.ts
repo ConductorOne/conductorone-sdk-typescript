@@ -9,7 +9,7 @@ import { OpenEnum } from "../../types/enums.js";
 /**
  * Whether to run or cancel the paused executions.
  */
-export const Decision = {
+export const ResolvePausedAutomationExecutionsRequestDecision = {
   PausedExecutionDecisionUnspecified: "PAUSED_EXECUTION_DECISION_UNSPECIFIED",
   PausedExecutionDecisionRun: "PAUSED_EXECUTION_DECISION_RUN",
   PausedExecutionDecisionCancel: "PAUSED_EXECUTION_DECISION_CANCEL",
@@ -17,7 +17,9 @@ export const Decision = {
 /**
  * Whether to run or cancel the paused executions.
  */
-export type Decision = OpenEnum<typeof Decision>;
+export type ResolvePausedAutomationExecutionsRequestDecision = OpenEnum<
+  typeof ResolvePausedAutomationExecutionsRequestDecision
+>;
 
 /**
  * The ResolvePausedAutomationExecutionsRequest message.
@@ -26,7 +28,7 @@ export type ResolvePausedAutomationExecutionsRequest = {
   /**
    * Whether to run or cancel the paused executions.
    */
-  decision?: Decision | undefined;
+  decision?: ResolvePausedAutomationExecutionsRequestDecision | undefined;
   /**
    * Optional human-readable reason for the resolution decision. Stored on
    *
@@ -39,11 +41,14 @@ export type ResolvePausedAutomationExecutionsRequest = {
 };
 
 /** @internal */
-export const Decision$outboundSchema: z.ZodType<
-  string,
-  z.ZodTypeDef,
-  Decision
-> = openEnums.outboundSchema(Decision);
+export const ResolvePausedAutomationExecutionsRequestDecision$outboundSchema:
+  z.ZodType<
+    string,
+    z.ZodTypeDef,
+    ResolvePausedAutomationExecutionsRequestDecision
+  > = openEnums.outboundSchema(
+    ResolvePausedAutomationExecutionsRequestDecision,
+  );
 
 /** @internal */
 export type ResolvePausedAutomationExecutionsRequest$Outbound = {
@@ -57,7 +62,8 @@ export const ResolvePausedAutomationExecutionsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResolvePausedAutomationExecutionsRequest
 > = z.object({
-  decision: Decision$outboundSchema.optional(),
+  decision: ResolvePausedAutomationExecutionsRequestDecision$outboundSchema
+    .optional(),
   reason: z.string().optional(),
 });
 

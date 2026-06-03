@@ -117,6 +117,10 @@ export type FormField = {
    */
   oauth2Field?: Oauth2Field | null | undefined;
   /**
+   * When true, this field is displayed to the user but cannot be edited.
+   */
+  readOnly?: boolean | undefined;
+  /**
    * The required field.
    */
   required?: boolean | undefined;
@@ -150,6 +154,7 @@ export const FormField$inboundSchema: z.ZodType<
   int64Field: z.nullable(Int64Field$inboundSchema).optional(),
   name: z.nullable(z.string()).optional(),
   oauth2Field: z.nullable(Oauth2Field$inboundSchema).optional(),
+  readOnly: z.boolean().optional(),
   required: z.boolean().optional(),
   sharedConfig: z.nullable(SharedProviderConfig$inboundSchema).optional(),
   stringField: z.nullable(FormStringField$inboundSchema).optional(),
@@ -174,6 +179,7 @@ export type FormField$Outbound = {
   int64Field?: Int64Field$Outbound | null | undefined;
   name?: string | null | undefined;
   oauth2Field?: Oauth2Field$Outbound | null | undefined;
+  readOnly?: boolean | undefined;
   required?: boolean | undefined;
   sharedConfig?: SharedProviderConfig$Outbound | null | undefined;
   stringField?: FormStringField$Outbound | null | undefined;
@@ -197,6 +203,7 @@ export const FormField$outboundSchema: z.ZodType<
   int64Field: z.nullable(Int64Field$outboundSchema).optional(),
   name: z.nullable(z.string()).optional(),
   oauth2Field: z.nullable(Oauth2Field$outboundSchema).optional(),
+  readOnly: z.boolean().optional(),
   required: z.boolean().optional(),
   sharedProviderConfig: z.nullable(SharedProviderConfig$outboundSchema)
     .optional(),

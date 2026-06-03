@@ -30,7 +30,9 @@ import { Result } from "../sdk/types/fp.js";
  * Update Function
  *
  * @remarks
- * Update updates an existing function's metadata
+ * Update an existing function's metadata. Also the publish path: set
+ *  function.published_commit_id and include "published_commit_id" in
+ *  update_mask to make a commit the default runnable version.
  */
 export function functionsUpdateFunction(
   client: ConductoroneSDKTypescriptCore,

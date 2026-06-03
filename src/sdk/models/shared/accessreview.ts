@@ -70,6 +70,12 @@ import {
   NotificationConfig$outboundSchema,
 } from "./notificationconfig.js";
 import {
+  ReviewerAttributeConfig,
+  ReviewerAttributeConfig$inboundSchema,
+  ReviewerAttributeConfig$Outbound,
+  ReviewerAttributeConfig$outboundSchema,
+} from "./reviewerattributeconfig.js";
+import {
   ReviewSignatureConfig,
   ReviewSignatureConfig$inboundSchema,
   ReviewSignatureConfig$Outbound,
@@ -310,6 +316,13 @@ export type AccessReview = {
    * Optional instructions displayed to reviewers when completing their review tasks.
    */
   reviewInstructions?: string | undefined;
+  /**
+   * Allowlist of AppUser.profile keys visible to reviewers, scoped per app.
+   *
+   * @remarks
+   *  Empty = reviewers see no profile attributes in the AppUser tooltip.
+   */
+  reviewerAttributeConfig?: ReviewerAttributeConfig | undefined;
   scheduledStartDate?: Date | undefined;
   /**
    * The AccessReviewScope message.
@@ -497,6 +510,13 @@ export type AccessReviewInput = {
    * Optional instructions displayed to reviewers when completing their review tasks.
    */
   reviewInstructions?: string | undefined;
+  /**
+   * Allowlist of AppUser.profile keys visible to reviewers, scoped per app.
+   *
+   * @remarks
+   *  Empty = reviewers see no profile attributes in the AppUser tooltip.
+   */
+  reviewerAttributeConfig?: ReviewerAttributeConfig | undefined;
   scheduledStartDate?: Date | undefined;
   /**
    * The AccessReviewScope message.
@@ -680,6 +700,7 @@ export const AccessReview$inboundSchema: z.ZodType<
   notificationConfig: NotificationConfig$inboundSchema.optional(),
   policyId: z.string().optional(),
   reviewInstructions: z.string().optional(),
+  reviewerAttributeConfig: ReviewerAttributeConfig$inboundSchema.optional(),
   scheduledStartDate: z.string().datetime({ offset: true }).transform(v =>
     new Date(v)
   ).optional(),
@@ -750,6 +771,7 @@ export type AccessReviewInput$Outbound = {
   notificationConfig?: NotificationConfig$Outbound | undefined;
   policyId?: string | undefined;
   reviewInstructions?: string | undefined;
+  reviewerAttributeConfig?: ReviewerAttributeConfig$Outbound | undefined;
   scheduledStartDate?: string | undefined;
   scope?: AccessReviewScope$Outbound | undefined;
   scopeType?: string | undefined;
@@ -798,6 +820,7 @@ export const AccessReviewInput$outboundSchema: z.ZodType<
   notificationConfig: NotificationConfig$outboundSchema.optional(),
   policyId: z.string().optional(),
   reviewInstructions: z.string().optional(),
+  reviewerAttributeConfig: ReviewerAttributeConfig$outboundSchema.optional(),
   scheduledStartDate: z.date().transform(v => v.toISOString()).optional(),
   accessReviewScope: AccessReviewScope$outboundSchema.optional(),
   scopeType: AccessReviewScopeType$outboundSchema.optional(),

@@ -53,7 +53,21 @@ export type BundleAutomation = {
    * The enabled field.
    */
   enabled?: boolean | null | undefined;
+  /**
+   * When true, the circuit breaker is evaluated even on profiles below the
+   *
+   * @remarks
+   *  tenant min-members floor.
+   */
+  enforceOnSmallProfiles?: boolean | undefined;
   entitlements?: BundleAutomationRuleEntitlement | null | undefined;
+  /**
+   * Per-automation override for the removed-members percent that trips the
+   *
+   * @remarks
+   *  circuit breaker (1-100). 0 / unset means the tenant default applies.
+   */
+  removedMembersThresholdPercent?: number | undefined;
   /**
    * The requestCatalogId field.
    */
@@ -84,7 +98,10 @@ export const BundleAutomation$inboundSchema: z.ZodType<
   ).optional(),
   disableCircuitBreaker: z.nullable(z.boolean()).optional(),
   enabled: z.nullable(z.boolean()).optional(),
+  enforceOnSmallProfiles: z.boolean().optional(),
   entitlements: z.nullable(BundleAutomationRuleEntitlement$inboundSchema)
+    .optional(),
+  removedMembersThresholdPercent: z.string().transform(v => parseInt(v, 10))
     .optional(),
   requestCatalogId: z.nullable(z.string()).optional(),
   state: z.nullable(BundleAutomationLastRunState$inboundSchema).optional(),

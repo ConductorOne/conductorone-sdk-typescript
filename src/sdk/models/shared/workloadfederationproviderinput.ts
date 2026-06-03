@@ -3,9 +3,35 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
+import {
+  OIDCSettings,
+  OIDCSettings$Outbound,
+  OIDCSettings$outboundSchema,
+} from "./oidcsettings.js";
+import {
+  SPIFFESettings,
+  SPIFFESettings$Outbound,
+  SPIFFESettings$outboundSchema,
+} from "./spiffesettings.js";
 
 /**
- * WorkloadFederationProvider represents a tenant-level OIDC issuer registration.
+ * WorkloadFederationProvider represents a tenant-level workload identity
+ *
+ * @remarks
+ *  issuer registration. Two issuer schemes are supported:
+ *
+ *    - https://...   classic OIDC issuer; `settings.oidc` MUST be set.
+ *    - spiffe://...  SPIFFE trust-domain URI; `settings.spiffe` MUST be set.
+ *
+ *  The (well_known_provider, issuer_url scheme, settings oneof) tuple is a
+ *  tri-invariant: SPIFFE wkp ⟺ spiffe:// issuer ⟺ settings.spiffe set; any
+ *  other wkp ⟺ https:// issuer ⟺ settings.oidc set. Issuer URLs are unique
+ *  within tenant.
+ *
+ * This message contains a oneof named settings. Only a single field of the following list may be set at a time:
+ *   - oidc
+ *   - spiffe
  */
 export type WorkloadFederationProviderInput = {
   /**
@@ -20,6 +46,22 @@ export type WorkloadFederationProviderInput = {
    * The display name of the provider.
    */
   displayName?: string | undefined;
+  /**
+   * OIDCSettings is the kind-specific configuration block for classic OIDC
+   *
+   * @remarks
+   *  providers (GitHub Actions, GitLab CI, HCP Terraform, AWS IAM Outbound,
+   *  any CUSTOM provider). Empty for now; future fields like custom_jwks_url,
+   *  audience overrides, and required_claims land here.
+   */
+  oidcSettings?: OIDCSettings | null | undefined;
+  /**
+   * SPIFFESettings is the kind-specific configuration block for SPIFFE
+   *
+   * @remarks
+   *  trust-domain providers (issuer_url = spiffe://<trust-domain>).
+   */
+  spiffeSettings?: SPIFFESettings | null | undefined;
 };
 
 /** @internal */
@@ -27,6 +69,8 @@ export type WorkloadFederationProviderInput$Outbound = {
   description?: string | undefined;
   disabled?: boolean | undefined;
   displayName?: string | undefined;
+  oidc?: OIDCSettings$Outbound | null | undefined;
+  spiffe?: SPIFFESettings$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -38,6 +82,13 @@ export const WorkloadFederationProviderInput$outboundSchema: z.ZodType<
   description: z.string().optional(),
   disabled: z.boolean().optional(),
   displayName: z.string().optional(),
+  oidcSettings: z.nullable(OIDCSettings$outboundSchema).optional(),
+  spiffeSettings: z.nullable(SPIFFESettings$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    oidcSettings: "oidc",
+    spiffeSettings: "spiffe",
+  });
 });
 
 export function workloadFederationProviderInputToJSON(

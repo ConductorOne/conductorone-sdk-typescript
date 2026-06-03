@@ -3,14 +3,27 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
+import {
+  OIDCSettings,
+  OIDCSettings$Outbound,
+  OIDCSettings$outboundSchema,
+} from "./oidcsettings.js";
+import {
+  SPIFFESettings,
+  SPIFFESettings$Outbound,
+  SPIFFESettings$outboundSchema,
+} from "./spiffesettings.js";
 
 /**
  * Well-known provider type. Required -- UNSPECIFIED is rejected.
  *
  * @remarks
  *  When set to a named source, the backend validates issuer_url consistency.
+ *  SPIFFE wkp requires `settings.spiffe`; all other wkp values require
+ *  `settings.oidc`.
  */
 export const WorkloadFederationServiceCreateProviderRequestWellKnownProvider = {
   WellKnownWorkloadProviderUnspecified:
@@ -23,12 +36,15 @@ export const WorkloadFederationServiceCreateProviderRequestWellKnownProvider = {
     "WELL_KNOWN_WORKLOAD_PROVIDER_HCP_TERRAFORM",
   WellKnownWorkloadProviderAwsIamOutbound:
     "WELL_KNOWN_WORKLOAD_PROVIDER_AWS_IAM_OUTBOUND",
+  WellKnownWorkloadProviderSpiffe: "WELL_KNOWN_WORKLOAD_PROVIDER_SPIFFE",
 } as const;
 /**
  * Well-known provider type. Required -- UNSPECIFIED is rejected.
  *
  * @remarks
  *  When set to a named source, the backend validates issuer_url consistency.
+ *  SPIFFE wkp requires `settings.spiffe`; all other wkp values require
+ *  `settings.oidc`.
  */
 export type WorkloadFederationServiceCreateProviderRequestWellKnownProvider =
   OpenEnum<
@@ -37,6 +53,12 @@ export type WorkloadFederationServiceCreateProviderRequestWellKnownProvider =
 
 /**
  * The WorkloadFederationServiceCreateProviderRequest message.
+ *
+ * @remarks
+ *
+ * This message contains a oneof named settings. Only a single field of the following list may be set at a time:
+ *   - oidc
+ *   - spiffe
  */
 export type WorkloadFederationServiceCreateProviderRequest = {
   /**
@@ -48,17 +70,37 @@ export type WorkloadFederationServiceCreateProviderRequest = {
    */
   displayName?: string | undefined;
   /**
-   * The OIDC issuer URL. Will be validated via OIDC discovery.
+   * The issuer URL. For OIDC providers, this is an HTTPS URL validated via
    *
    * @remarks
-   *  Normalized on write: lowercase host, no trailing slash, HTTPS only.
+   *  OIDC discovery. For SPIFFE providers, this is the SPIFFE trust-domain URI
+   *  (e.g., spiffe://prod.example.com). Normalized on write: lowercase
+   *  scheme/host, no trailing slash. Unique within tenant.
    */
   issuerUrl?: string | undefined;
+  /**
+   * OIDCSettings is the kind-specific configuration block for classic OIDC
+   *
+   * @remarks
+   *  providers (GitHub Actions, GitLab CI, HCP Terraform, AWS IAM Outbound,
+   *  any CUSTOM provider). Empty for now; future fields like custom_jwks_url,
+   *  audience overrides, and required_claims land here.
+   */
+  oidcSettings?: OIDCSettings | null | undefined;
+  /**
+   * SPIFFESettings is the kind-specific configuration block for SPIFFE
+   *
+   * @remarks
+   *  trust-domain providers (issuer_url = spiffe://<trust-domain>).
+   */
+  spiffeSettings?: SPIFFESettings | null | undefined;
   /**
    * Well-known provider type. Required -- UNSPECIFIED is rejected.
    *
    * @remarks
    *  When set to a named source, the backend validates issuer_url consistency.
+   *  SPIFFE wkp requires `settings.spiffe`; all other wkp values require
+   *  `settings.oidc`.
    */
   wellKnownProvider?:
     | WorkloadFederationServiceCreateProviderRequestWellKnownProvider
@@ -80,6 +122,8 @@ export type WorkloadFederationServiceCreateProviderRequest$Outbound = {
   description?: string | undefined;
   displayName?: string | undefined;
   issuerUrl?: string | undefined;
+  oidc?: OIDCSettings$Outbound | null | undefined;
+  spiffe?: SPIFFESettings$Outbound | null | undefined;
   wellKnownProvider?: string | undefined;
 };
 
@@ -93,9 +137,16 @@ export const WorkloadFederationServiceCreateProviderRequest$outboundSchema:
     description: z.string().optional(),
     displayName: z.string().optional(),
     issuerUrl: z.string().optional(),
+    oidcSettings: z.nullable(OIDCSettings$outboundSchema).optional(),
+    spiffeSettings: z.nullable(SPIFFESettings$outboundSchema).optional(),
     wellKnownProvider:
       WorkloadFederationServiceCreateProviderRequestWellKnownProvider$outboundSchema
         .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      oidcSettings: "oidc",
+      spiffeSettings: "spiffe",
+    });
   });
 
 export function workloadFederationServiceCreateProviderRequestToJSON(

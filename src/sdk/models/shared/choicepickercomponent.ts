@@ -19,6 +19,15 @@ export type ChoicePickerComponent = {
    */
   choices?: Array<Choice> | null | undefined;
   /**
+   * When true, the label slot is omitted entirely (no label text, no
+   *
+   * @remarks
+   *  "(optional)" suffix, no reserved space). Use when the picker sits under
+   *  or beside another control that already names the field — e.g. stacked
+   *  under a check_box in a per-attribute mapping row.
+   */
+  hideLabel?: boolean | undefined;
+  /**
    * DynamicString can be a literal value, a JSON pointer path, or a function call.
    *
    * @remarks
@@ -57,6 +66,7 @@ export const ChoicePickerComponent$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   choices: z.nullable(z.array(Choice$inboundSchema)).optional(),
+  hideLabel: z.boolean().optional(),
   label: DynamicString$inboundSchema.optional(),
   multiSelect: z.boolean().optional(),
   required: z.boolean().optional(),
