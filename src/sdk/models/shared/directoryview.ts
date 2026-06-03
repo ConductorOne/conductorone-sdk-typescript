@@ -16,7 +16,16 @@ export type DirectoryView = {
    * JSONPATH expression indicating the location of the App object in the array.
    */
   appPath?: string | null | undefined;
-  directory?: Directory | null | undefined;
+  /**
+   * This object indicates that an app is also a directory.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named account_filter. Only a single field of the following list may be set at a time:
+   *   - all
+   *   - celExpression
+   */
+  directory?: Directory | undefined;
 };
 
 /** @internal */
@@ -26,7 +35,7 @@ export const DirectoryView$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   appPath: z.nullable(z.string()).optional(),
-  directory: z.nullable(Directory$inboundSchema).optional(),
+  directory: Directory$inboundSchema.optional(),
 });
 
 export function directoryViewFromJSON(

@@ -38,7 +38,7 @@ export type GetOnboardingSettingsResponse = {
   /**
    * The identifier of the onboarding conversation thread, if one is in progress.
    */
-  conversationId?: string | undefined;
+  conversationId?: string | null | undefined;
   /**
    * The intents field.
    */
@@ -50,7 +50,7 @@ export type GetOnboardingSettingsResponse = {
   /**
    * The current status of the tenant onboarding process.
    */
-  status?: GetOnboardingSettingsResponseStatus | undefined;
+  status?: GetOnboardingSettingsResponseStatus | null | undefined;
 };
 
 /** @internal */
@@ -66,10 +66,11 @@ export const GetOnboardingSettingsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  conversationId: z.string().optional(),
+  conversationId: z.nullable(z.string()).optional(),
   intents: z.nullable(z.array(z.string())).optional(),
   orgContext: OnboardingOrgContext$inboundSchema.optional(),
-  status: GetOnboardingSettingsResponseStatus$inboundSchema.optional(),
+  status: z.nullable(GetOnboardingSettingsResponseStatus$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "orgContext": "onboardingOrgContext",

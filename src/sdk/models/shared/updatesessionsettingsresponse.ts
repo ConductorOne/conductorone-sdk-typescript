@@ -15,7 +15,10 @@ import {
  * The UpdateSessionSettingsResponse message.
  */
 export type UpdateSessionSettingsResponse = {
-  sessionSettings?: SessionSettings | null | undefined;
+  /**
+   * SessionSettings configures session security for the tenant, including timeouts and per-role IP restrictions.
+   */
+  sessionSettings?: SessionSettings | undefined;
 };
 
 /** @internal */
@@ -24,7 +27,7 @@ export const UpdateSessionSettingsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  sessionSettings: z.nullable(SessionSettings$inboundSchema).optional(),
+  sessionSettings: SessionSettings$inboundSchema.optional(),
 });
 
 export function updateSessionSettingsResponseFromJSON(

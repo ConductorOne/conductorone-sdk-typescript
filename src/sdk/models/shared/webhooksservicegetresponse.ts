@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,7 +16,10 @@ import {
  * The WebhooksServiceGetResponse message.
  */
 export type WebhooksServiceGetResponse = {
-  webhook?: WebhookEndpoint | null | undefined;
+  /**
+   * The Webhook message.
+   */
+  webhookEndpoint?: WebhookEndpoint | undefined;
 };
 
 /** @internal */
@@ -24,7 +28,11 @@ export const WebhooksServiceGetResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  webhook: z.nullable(WebhookEndpoint$inboundSchema).optional(),
+  webhook: WebhookEndpoint$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "webhook": "webhookEndpoint",
+  });
 });
 
 export function webhooksServiceGetResponseFromJSON(

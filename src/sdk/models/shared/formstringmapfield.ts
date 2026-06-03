@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,10 +21,7 @@ export type FormStringMapField = {
    * The defaultValue field.
    */
   defaultValue?: { [k: string]: string } | undefined;
-  /**
-   * The StringMapRules message.
-   */
-  stringMapRules?: StringMapRules | null | undefined;
+  rules?: StringMapRules | null | undefined;
 };
 
 /** @internal */
@@ -36,10 +32,6 @@ export const FormStringMapField$inboundSchema: z.ZodType<
 > = z.object({
   defaultValue: z.record(z.string()).optional(),
   rules: z.nullable(StringMapRules$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "rules": "stringMapRules",
-  });
 });
 /** @internal */
 export type FormStringMapField$Outbound = {
@@ -54,11 +46,7 @@ export const FormStringMapField$outboundSchema: z.ZodType<
   FormStringMapField
 > = z.object({
   defaultValue: z.record(z.string()).optional(),
-  stringMapRules: z.nullable(StringMapRules$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    stringMapRules: "rules",
-  });
+  rules: z.nullable(StringMapRules$outboundSchema).optional(),
 });
 
 export function formStringMapFieldToJSON(

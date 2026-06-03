@@ -8,7 +8,7 @@ The request message for creating a new conflict monitor.
 import { ConflictMonitorCreateRequest } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: ConflictMonitorCreateRequest = {
-  displayName: "Christelle.Blanda73",
+  displayName: "Caterina_Cremin",
 };
 ```
 
@@ -18,4 +18,4 @@ let value: ConflictMonitorCreateRequest = {
 | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | `description`                                                                                             | *string*                                                                                                  | :heavy_minus_sign:                                                                                        | An optional description explaining the purpose of this Separation of Duty rule.                           |
 | `displayName`                                                                                             | *string*                                                                                                  | :heavy_check_mark:                                                                                        | The human-readable name for the conflict monitor.                                                         |
-| `notificationConfig`                                                                                      | [shared.AccessConflictNotificationConfig](../../../sdk/models/shared/accessconflictnotificationconfig.md) | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |
+| `accessConflictNotificationConfig`                                                                        | [shared.AccessConflictNotificationConfig](../../../sdk/models/shared/accessconflictnotificationconfig.md) | :heavy_minus_sign:                                                                                        | The NotificationConfig message.                                                                           |

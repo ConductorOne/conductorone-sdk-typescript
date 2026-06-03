@@ -51,7 +51,10 @@ export type CreateRevokeTasks = {
    * The userIdCel field.
    */
   userIdCel?: string | null | undefined;
-  userRef?: UserRef | null | undefined;
+  /**
+   * A reference to a user.
+   */
+  userRef?: UserRef | undefined;
 };
 
 /** @internal */
@@ -70,7 +73,7 @@ export const CreateRevokeTasks$inboundSchema: z.ZodType<
   revokeAll: z.nullable(z.boolean()).optional(),
   useSubjectUser: z.nullable(z.boolean()).optional(),
   userIdCel: z.nullable(z.string()).optional(),
-  userRef: z.nullable(UserRef$inboundSchema).optional(),
+  userRef: UserRef$inboundSchema.optional(),
 });
 /** @internal */
 export type CreateRevokeTasks$Outbound = {
@@ -84,7 +87,7 @@ export type CreateRevokeTasks$Outbound = {
   revokeAll?: boolean | null | undefined;
   useSubjectUser?: boolean | null | undefined;
   userIdCel?: string | null | undefined;
-  userRef?: UserRef$Outbound | null | undefined;
+  userRef?: UserRef$Outbound | undefined;
 };
 
 /** @internal */
@@ -103,7 +106,7 @@ export const CreateRevokeTasks$outboundSchema: z.ZodType<
   revokeAll: z.nullable(z.boolean()).optional(),
   useSubjectUser: z.nullable(z.boolean()).optional(),
   userIdCel: z.nullable(z.string()).optional(),
-  userRef: z.nullable(UserRef$outboundSchema).optional(),
+  userRef: UserRef$outboundSchema.optional(),
 });
 
 export function createRevokeTasksToJSON(

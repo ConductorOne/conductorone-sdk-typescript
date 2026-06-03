@@ -17,7 +17,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  *   - webhookIdCel
  */
 export type Webhook = {
-  payload?: { [k: string]: any } | null | undefined;
+  payload?: { [k: string]: any } | undefined;
   /**
    * The webhookId field.
    *
@@ -39,13 +39,13 @@ export type Webhook = {
 /** @internal */
 export const Webhook$inboundSchema: z.ZodType<Webhook, z.ZodTypeDef, unknown> =
   z.object({
-    payload: z.nullable(z.record(z.any())).optional(),
+    payload: z.record(z.any()).optional(),
     webhookId: z.nullable(z.string()).optional(),
     webhookIdCel: z.nullable(z.string()).optional(),
   });
 /** @internal */
 export type Webhook$Outbound = {
-  payload?: { [k: string]: any } | null | undefined;
+  payload?: { [k: string]: any } | undefined;
   webhookId?: string | null | undefined;
   webhookIdCel?: string | null | undefined;
 };
@@ -56,7 +56,7 @@ export const Webhook$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Webhook
 > = z.object({
-  payload: z.nullable(z.record(z.any())).optional(),
+  payload: z.record(z.any()).optional(),
   webhookId: z.nullable(z.string()).optional(),
   webhookIdCel: z.nullable(z.string()).optional(),
 });

@@ -13,13 +13,16 @@ import {
  * The request message for updating a manually managed resource type.
  */
 export type UpdateManuallyManagedResourceTypeRequest = {
-  appResourceType?: AppResourceTypeInput | null | undefined;
+  /**
+   * The AppResourceType is referenced by an app entitlement defining its resource types. Commonly things like Group or Role.
+   */
+  appResourceType?: AppResourceTypeInput | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type UpdateManuallyManagedResourceTypeRequest$Outbound = {
-  appResourceType?: AppResourceTypeInput$Outbound | null | undefined;
+  appResourceType?: AppResourceTypeInput$Outbound | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -29,7 +32,7 @@ export const UpdateManuallyManagedResourceTypeRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateManuallyManagedResourceTypeRequest
 > = z.object({
-  appResourceType: z.nullable(AppResourceTypeInput$outboundSchema).optional(),
+  appResourceType: AppResourceTypeInput$outboundSchema.optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 

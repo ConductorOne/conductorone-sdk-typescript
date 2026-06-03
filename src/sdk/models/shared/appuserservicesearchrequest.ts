@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -81,7 +82,10 @@ export type AppUserServiceSearchRequest = {
    * A list of app user IDs to remove from the results.
    */
   excludeAppUserIds?: Array<string> | null | undefined;
-  expandMask?: AppUserExpandMask | null | undefined;
+  /**
+   * The AppUserExpandMask message contains a list of paths to expand in the response.
+   */
+  appUserExpandMask?: AppUserExpandMask | undefined;
   /**
    * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
    */
@@ -132,7 +136,7 @@ export type AppUserServiceSearchRequest$Outbound = {
   appUserStatuses?: Array<string> | null | undefined;
   appUserTypes?: Array<string> | null | undefined;
   excludeAppUserIds?: Array<string> | null | undefined;
-  expandMask?: AppUserExpandMask$Outbound | null | undefined;
+  expandMask?: AppUserExpandMask$Outbound | undefined;
   pageSize?: number | null | undefined;
   pageToken?: string | null | undefined;
   query?: string | null | undefined;
@@ -157,12 +161,16 @@ export const AppUserServiceSearchRequest$outboundSchema: z.ZodType<
     z.array(AppUserServiceSearchRequestAppUserTypes$outboundSchema),
   ).optional(),
   excludeAppUserIds: z.nullable(z.array(z.string())).optional(),
-  expandMask: z.nullable(AppUserExpandMask$outboundSchema).optional(),
+  appUserExpandMask: AppUserExpandMask$outboundSchema.optional(),
   pageSize: z.nullable(z.number().int()).optional(),
   pageToken: z.nullable(z.string()).optional(),
   query: z.nullable(z.string()).optional(),
   refs: z.nullable(z.array(AppUserRef$outboundSchema)).optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    appUserExpandMask: "expandMask",
+  });
 });
 
 export function appUserServiceSearchRequestToJSON(

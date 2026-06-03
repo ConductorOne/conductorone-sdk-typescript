@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -12,7 +13,10 @@ import { AWSExternalID, AWSExternalID$inboundSchema } from "./awsexternalid.js";
  * The GetAWSExternalIDResponse message.
  */
 export type GetAWSExternalIDResponse = {
-  awsExternalId?: AWSExternalID | null | undefined;
+  /**
+   * AWSExternalID contains the tenant's external ID for AWS IAM role trust policies.
+   */
+  awsExternalID?: AWSExternalID | undefined;
 };
 
 /** @internal */
@@ -21,7 +25,11 @@ export const GetAWSExternalIDResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  awsExternalId: z.nullable(AWSExternalID$inboundSchema).optional(),
+  awsExternalId: AWSExternalID$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "awsExternalId": "awsExternalID",
+  });
 });
 
 export function getAWSExternalIDResponseFromJSON(

@@ -15,22 +15,22 @@ export type PaperSecretServiceSearchAuditEventsRequest = {
   /**
    * Maximum number of results per page (0 uses server default, max 100).
    */
-  pageSize?: number | undefined;
+  pageSize?: number | null | undefined;
   /**
    * Pagination token from a previous response's next_page_token.
    */
-  pageToken?: string | undefined;
+  pageToken?: string | null | undefined;
   /**
    * Required. The vault ID of the secret whose audit events to retrieve.
    */
-  vaultId?: string | undefined;
+  vaultId?: string | null | undefined;
 };
 
 /** @internal */
 export type PaperSecretServiceSearchAuditEventsRequest$Outbound = {
-  pageSize?: number | undefined;
-  pageToken?: string | undefined;
-  vaultId?: string | undefined;
+  pageSize?: number | null | undefined;
+  pageToken?: string | null | undefined;
+  vaultId?: string | null | undefined;
 };
 
 /** @internal */
@@ -40,9 +40,9 @@ export const PaperSecretServiceSearchAuditEventsRequest$outboundSchema:
     z.ZodTypeDef,
     PaperSecretServiceSearchAuditEventsRequest
   > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    vaultId: z.string().optional(),
+    pageSize: z.nullable(z.number().int()).optional(),
+    pageToken: z.nullable(z.string()).optional(),
+    vaultId: z.nullable(z.string()).optional(),
   });
 
 export function paperSecretServiceSearchAuditEventsRequestToJSON(

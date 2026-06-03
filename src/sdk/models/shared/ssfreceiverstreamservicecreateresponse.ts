@@ -18,7 +18,7 @@ export type SSFReceiverStreamServiceCreateResponse = {
   /**
    * Push auth token returned in plaintext ONLY on create.
    */
-  pushAuthTokenPlaintext?: string | undefined;
+  pushAuthTokenPlaintext?: string | null | undefined;
   /**
    * SSFReceiverStream is the public API representation.
    *
@@ -38,7 +38,7 @@ export const SSFReceiverStreamServiceCreateResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  pushAuthTokenPlaintext: z.string().optional(),
+  pushAuthTokenPlaintext: z.nullable(z.string()).optional(),
   ssfReceiverStream: SSFReceiverStream$inboundSchema.optional(),
 });
 

@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppUsageControlsServiceUpdateRequest = {
-  appId: string | null;
+  appId: string;
   updateAppUsageControlsRequest?:
     | shared.UpdateAppUsageControlsRequest
     | undefined;
@@ -39,7 +39,7 @@ export type C1ApiAppV1AppUsageControlsServiceUpdateResponse = {
 
 /** @internal */
 export type C1ApiAppV1AppUsageControlsServiceUpdateRequest$Outbound = {
-  app_id: string | null;
+  app_id: string;
   UpdateAppUsageControlsRequest?:
     | shared.UpdateAppUsageControlsRequest$Outbound
     | undefined;
@@ -52,7 +52,7 @@ export const C1ApiAppV1AppUsageControlsServiceUpdateRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiAppV1AppUsageControlsServiceUpdateRequest
   > = z.object({
-    appId: z.nullable(z.string()),
+    appId: z.string(),
     updateAppUsageControlsRequest: shared
       .UpdateAppUsageControlsRequest$outboundSchema.optional(),
   }).transform((v) => {

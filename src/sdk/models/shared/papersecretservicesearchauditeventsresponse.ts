@@ -24,7 +24,7 @@ export type PaperSecretServiceSearchAuditEventsResponse = {
   /**
    * Token to retrieve the next page of results. Empty when no more pages exist.
    */
-  nextPageToken?: string | undefined;
+  nextPageToken?: string | null | undefined;
 };
 
 /** @internal */
@@ -35,7 +35,7 @@ export const PaperSecretServiceSearchAuditEventsResponse$inboundSchema:
     unknown
   > = z.object({
     list: z.nullable(z.array(z.record(z.any()))).optional(),
-    nextPageToken: z.string().optional(),
+    nextPageToken: z.nullable(z.string()).optional(),
   });
 
 export function paperSecretServiceSearchAuditEventsResponseFromJSON(

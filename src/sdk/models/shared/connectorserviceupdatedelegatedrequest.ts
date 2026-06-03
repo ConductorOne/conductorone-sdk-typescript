@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   ConnectorInput,
   ConnectorInput$Outbound,
@@ -18,15 +19,21 @@ import {
  * The ConnectorServiceUpdateDelegatedRequest message contains the fields required to update a connector.
  */
 export type ConnectorServiceUpdateDelegatedRequest = {
-  connector?: ConnectorInput | null | undefined;
-  expandMask?: ConnectorExpandMask | null | undefined;
+  /**
+   * A Connector is used to sync objects into Apps
+   */
+  connector?: ConnectorInput | undefined;
+  /**
+   * The ConnectorExpandMask is used to expand related objects on a connector.
+   */
+  connectorExpandMask?: ConnectorExpandMask | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type ConnectorServiceUpdateDelegatedRequest$Outbound = {
-  connector?: ConnectorInput$Outbound | null | undefined;
-  expandMask?: ConnectorExpandMask$Outbound | null | undefined;
+  connector?: ConnectorInput$Outbound | undefined;
+  expandMask?: ConnectorExpandMask$Outbound | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -36,9 +43,13 @@ export const ConnectorServiceUpdateDelegatedRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ConnectorServiceUpdateDelegatedRequest
 > = z.object({
-  connector: z.nullable(ConnectorInput$outboundSchema).optional(),
-  expandMask: z.nullable(ConnectorExpandMask$outboundSchema).optional(),
+  connector: ConnectorInput$outboundSchema.optional(),
+  connectorExpandMask: ConnectorExpandMask$outboundSchema.optional(),
   updateMask: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    connectorExpandMask: "expandMask",
+  });
 });
 
 export function connectorServiceUpdateDelegatedRequestToJSON(

@@ -21,7 +21,15 @@ export type AppResourceView = {
    * JSONPATH expression indicating the location of the App object in the array
    */
   appPath?: string | null | undefined;
-  appResource?: AppResource | null | undefined;
+  /**
+   * The app resource message is a single resource that can have entitlements.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named metadata. Only a single field of the following list may be set at a time:
+   *   - secretTrait
+   */
+  appResource?: AppResource | undefined;
   /**
    * The ActorObjectPermissions message.
    */
@@ -47,7 +55,7 @@ export const AppResourceView$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   appPath: z.nullable(z.string()).optional(),
-  appResource: z.nullable(AppResource$inboundSchema).optional(),
+  appResource: AppResource$inboundSchema.optional(),
   objectPermissions: ActorObjectPermissions$inboundSchema.optional(),
   parentResourcePath: z.nullable(z.string()).optional(),
   parentResourceTypePath: z.nullable(z.string()).optional(),

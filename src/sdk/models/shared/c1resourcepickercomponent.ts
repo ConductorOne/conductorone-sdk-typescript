@@ -27,11 +27,11 @@ export type C1ResourcePickerComponent = {
   /**
    * The multiSelect field.
    */
-  multiSelect?: boolean | undefined;
+  multiSelect?: boolean | null | undefined;
   /**
    * The resourceType field.
    */
-  resourceType?: string | undefined;
+  resourceType?: string | null | undefined;
   /**
    * DynamicString can be a literal value, a JSON pointer path, or a function call.
    *
@@ -52,8 +52,8 @@ export const C1ResourcePickerComponent$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   label: DynamicString$inboundSchema.optional(),
-  multiSelect: z.boolean().optional(),
-  resourceType: z.string().optional(),
+  multiSelect: z.nullable(z.boolean()).optional(),
+  resourceType: z.nullable(z.string()).optional(),
   value: DynamicString$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

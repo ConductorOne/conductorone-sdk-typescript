@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,7 +16,10 @@ import {
  * The AppEntitlementProxyView message.
  */
 export type AppEntitlementProxyView = {
-  appProxyEntitlement?: AppEntitlementProxy | null | undefined;
+  /**
+   * An entitlement proxy binding that defines a hierarchical relationship between two entitlements.
+   */
+  appEntitlementProxy?: AppEntitlementProxy | undefined;
   /**
    * The dstAppEntitlementPath field.
    */
@@ -40,11 +44,15 @@ export const AppEntitlementProxyView$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appProxyEntitlement: z.nullable(AppEntitlementProxy$inboundSchema).optional(),
+  appProxyEntitlement: AppEntitlementProxy$inboundSchema.optional(),
   dstAppEntitlementPath: z.nullable(z.string()).optional(),
   dstAppPath: z.nullable(z.string()).optional(),
   srcAppEntitlementPath: z.nullable(z.string()).optional(),
   srcAppPath: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "appProxyEntitlement": "appEntitlementProxy",
+  });
 });
 
 export function appEntitlementProxyViewFromJSON(

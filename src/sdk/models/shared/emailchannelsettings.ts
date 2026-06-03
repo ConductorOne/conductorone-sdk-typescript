@@ -99,7 +99,7 @@ export type EmailChannelSettings = {
   /**
    * The enabled field.
    */
-  enabled?: boolean | undefined;
+  enabled?: boolean | null | undefined;
   /**
    * The ExpiringAccessPreference message.
    */
@@ -130,7 +130,7 @@ export const EmailChannelSettings$inboundSchema: z.ZodType<
   completion: CompletionPreference$inboundSchema.optional(),
   connectorIssues: ConnectorIssuesPreference$inboundSchema.optional(),
   digest: DigestPreference$inboundSchema.optional(),
-  enabled: z.boolean().optional(),
+  enabled: z.nullable(z.boolean()).optional(),
   expiringAccess: ExpiringAccessPreference$inboundSchema.optional(),
   provisioningRequest: ProvisioningRequestPreference$inboundSchema.optional(),
   reviews: ReviewsPreference$inboundSchema.optional(),
@@ -157,7 +157,7 @@ export type EmailChannelSettings$Outbound = {
   completion?: CompletionPreference$Outbound | undefined;
   connectorIssues?: ConnectorIssuesPreference$Outbound | undefined;
   digest?: DigestPreference$Outbound | undefined;
-  enabled?: boolean | undefined;
+  enabled?: boolean | null | undefined;
   expiringAccess?: ExpiringAccessPreference$Outbound | undefined;
   provisioningRequest?: ProvisioningRequestPreference$Outbound | undefined;
   reviews?: ReviewsPreference$Outbound | undefined;
@@ -179,7 +179,7 @@ export const EmailChannelSettings$outboundSchema: z.ZodType<
   connectorIssuesPreference: ConnectorIssuesPreference$outboundSchema
     .optional(),
   digestPreference: DigestPreference$outboundSchema.optional(),
-  enabled: z.boolean().optional(),
+  enabled: z.nullable(z.boolean()).optional(),
   expiringAccessPreference: ExpiringAccessPreference$outboundSchema.optional(),
   provisioningRequestPreference: ProvisioningRequestPreference$outboundSchema
     .optional(),

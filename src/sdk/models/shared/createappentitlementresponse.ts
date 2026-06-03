@@ -30,7 +30,10 @@ export type CreateAppEntitlementResponseExpanded = {
  * The CreateAppEntitlementResponse message.
  */
 export type CreateAppEntitlementResponse = {
-  appEntitlementView?: AppEntitlementView | null | undefined;
+  /**
+   * The app entitlement view contains the serialized app entitlement and paths to objects referenced by the app entitlement.
+   */
+  appEntitlementView?: AppEntitlementView | undefined;
   /**
    * The expanded field.
    */
@@ -71,7 +74,7 @@ export const CreateAppEntitlementResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appEntitlementView: z.nullable(AppEntitlementView$inboundSchema).optional(),
+  appEntitlementView: AppEntitlementView$inboundSchema.optional(),
   expanded: z.nullable(
     z.array(z.lazy(() => CreateAppEntitlementResponseExpanded$inboundSchema)),
   ).optional(),

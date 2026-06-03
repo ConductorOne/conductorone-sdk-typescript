@@ -42,14 +42,17 @@ export type PaperSecretServiceSetTextContentRequest = {
    *  encrypted payload. Maximum 64KB after encryption — for larger content, create
    *  a FILE secret and use the upload_url instead.
    */
-  encryptedContent?: string | undefined;
+  encryptedContent?: string | null | undefined;
   /**
    * Input format hint for the viewer UI when the secret is decrypted.
    *
    * @remarks
    *  Does not affect encryption — this is metadata only.
    */
-  inputFormat?: PaperSecretServiceSetTextContentRequestInputFormat | undefined;
+  inputFormat?:
+    | PaperSecretServiceSetTextContentRequestInputFormat
+    | null
+    | undefined;
 };
 
 /** @internal */
@@ -64,8 +67,8 @@ export const PaperSecretServiceSetTextContentRequestInputFormat$outboundSchema:
 
 /** @internal */
 export type PaperSecretServiceSetTextContentRequest$Outbound = {
-  encryptedContent?: string | undefined;
-  inputFormat?: string | undefined;
+  encryptedContent?: string | null | undefined;
+  inputFormat?: string | null | undefined;
 };
 
 /** @internal */
@@ -74,9 +77,10 @@ export const PaperSecretServiceSetTextContentRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PaperSecretServiceSetTextContentRequest
 > = z.object({
-  encryptedContent: z.string().optional(),
-  inputFormat: PaperSecretServiceSetTextContentRequestInputFormat$outboundSchema
-    .optional(),
+  encryptedContent: z.nullable(z.string()).optional(),
+  inputFormat: z.nullable(
+    PaperSecretServiceSetTextContentRequestInputFormat$outboundSchema,
+  ).optional(),
 });
 
 export function paperSecretServiceSetTextContentRequestToJSON(

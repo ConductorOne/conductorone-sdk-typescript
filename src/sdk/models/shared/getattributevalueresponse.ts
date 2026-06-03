@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,7 +16,10 @@ import {
  * GetAttributeValueResponse is the response for getting an attribute value by id.
  */
 export type GetAttributeValueResponse = {
-  value?: AttributeValue | null | undefined;
+  /**
+   * AttributeValue is the value of an attribute of a defined type.
+   */
+  attributeValue?: AttributeValue | undefined;
 };
 
 /** @internal */
@@ -24,7 +28,11 @@ export const GetAttributeValueResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  value: z.nullable(AttributeValue$inboundSchema).optional(),
+  value: AttributeValue$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "value": "attributeValue",
+  });
 });
 
 export function getAttributeValueResponseFromJSON(

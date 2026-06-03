@@ -11,10 +11,10 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequest =
   {
-    appId: string | null;
-    appEntitlementId: string | null;
-    pageSize?: number | null | undefined;
-    pageToken?: string | null | undefined;
+    appId: string;
+    appEntitlementId: string;
+    pageSize?: number | undefined;
+    pageToken?: string | undefined;
   };
 
 export type C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredResponse =
@@ -42,10 +42,10 @@ export type C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpire
 /** @internal */
 export type C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequest$Outbound =
   {
-    app_id: string | null;
-    app_entitlement_id: string | null;
-    page_size?: number | null | undefined;
-    page_token?: string | null | undefined;
+    app_id: string;
+    app_entitlement_id: string;
+    page_size?: number | undefined;
+    page_token?: string | undefined;
   };
 
 /** @internal */
@@ -55,10 +55,10 @@ export const C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpir
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementSearchServiceSearchAppEntitlementsWithExpiredRequest
   > = z.object({
-    appId: z.nullable(z.string()),
-    appEntitlementId: z.nullable(z.string()),
-    pageSize: z.nullable(z.number().int()).optional(),
-    pageToken: z.nullable(z.string()).optional(),
+    appId: z.string(),
+    appEntitlementId: z.string(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       appId: "app_id",

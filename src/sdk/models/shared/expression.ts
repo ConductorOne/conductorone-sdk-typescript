@@ -14,15 +14,15 @@ export type Expression = {
   /**
    * The expressionCel field.
    */
-  expressionCel?: string | undefined;
+  expressionCel?: string | null | undefined;
   /**
    * The isSecret field.
    */
-  isSecret?: boolean | undefined;
+  isSecret?: boolean | null | undefined;
   /**
    * The key field.
    */
-  key?: string | undefined;
+  key?: string | null | undefined;
 };
 
 /** @internal */
@@ -31,15 +31,15 @@ export const Expression$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  expressionCel: z.string().optional(),
-  isSecret: z.boolean().optional(),
-  key: z.string().optional(),
+  expressionCel: z.nullable(z.string()).optional(),
+  isSecret: z.nullable(z.boolean()).optional(),
+  key: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type Expression$Outbound = {
-  expressionCel?: string | undefined;
-  isSecret?: boolean | undefined;
-  key?: string | undefined;
+  expressionCel?: string | null | undefined;
+  isSecret?: boolean | null | undefined;
+  key?: string | null | undefined;
 };
 
 /** @internal */
@@ -48,9 +48,9 @@ export const Expression$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Expression
 > = z.object({
-  expressionCel: z.string().optional(),
-  isSecret: z.boolean().optional(),
-  key: z.string().optional(),
+  expressionCel: z.nullable(z.string()).optional(),
+  isSecret: z.nullable(z.boolean()).optional(),
+  key: z.nullable(z.string()).optional(),
 });
 
 export function expressionToJSON(expression: Expression): string {

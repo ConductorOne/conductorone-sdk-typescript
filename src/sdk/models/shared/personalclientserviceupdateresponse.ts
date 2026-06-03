@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,7 +16,10 @@ import {
  * The PersonalClientServiceUpdateResponse message.
  */
 export type PersonalClientServiceUpdateResponse = {
-  client?: PersonalClient | null | undefined;
+  /**
+   * The PersonalClient message contains information about a presonal client credential.
+   */
+  personalClient?: PersonalClient | undefined;
 };
 
 /** @internal */
@@ -24,7 +28,11 @@ export const PersonalClientServiceUpdateResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  client: z.nullable(PersonalClient$inboundSchema).optional(),
+  client: PersonalClient$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "client": "personalClient",
+  });
 });
 
 export function personalClientServiceUpdateResponseFromJSON(

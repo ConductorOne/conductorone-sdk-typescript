@@ -13,13 +13,16 @@ import {
  * The FunctionsServiceUpdateFunctionRequest message.
  */
 export type FunctionsServiceUpdateFunctionRequest = {
-  function?: FunctionInput | null | undefined;
+  /**
+   * Function represents a customer-provided code extension in the API
+   */
+  function?: FunctionInput | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type FunctionsServiceUpdateFunctionRequest$Outbound = {
-  function?: FunctionInput$Outbound | null | undefined;
+  function?: FunctionInput$Outbound | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -29,7 +32,7 @@ export const FunctionsServiceUpdateFunctionRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FunctionsServiceUpdateFunctionRequest
 > = z.object({
-  function: z.nullable(FunctionInput$outboundSchema).optional(),
+  function: FunctionInput$outboundSchema.optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 

@@ -6,7 +6,7 @@
 import { C1ApiWebhooksV1WebhooksServiceTestRequest } from "conductorone-sdk-typescript/sdk/models/operations";
 
 let value: C1ApiWebhooksV1WebhooksServiceTestRequest = {
-  id: null,
+  id: "<id>",
 };
 ```
 

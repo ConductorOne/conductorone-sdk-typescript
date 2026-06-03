@@ -11,32 +11,32 @@ export type LocalDirectoryConfigServiceCreateRequest = {
   /**
    * The allowSelfRegistration field.
    */
-  allowSelfRegistration?: boolean | undefined;
+  allowSelfRegistration?: boolean | null | undefined;
   /**
    * FK to the existing App that will back this local directory.
    */
-  appId: string;
+  appId: string | null;
   /**
    * The defaultProfileTypeId field.
    */
-  defaultProfileTypeId?: string | undefined;
+  defaultProfileTypeId?: string | null | undefined;
   /**
    * The displayName field.
    */
-  displayName: string;
-  invitationTtl?: string | undefined;
+  displayName: string | null;
+  invitationTtl?: string | null | undefined;
   /**
    * Whether this should be the default local directory for the tenant.
    */
-  isDefault?: boolean | undefined;
+  isDefault?: boolean | null | undefined;
   /**
    * The onboardingFlowId field.
    */
-  onboardingFlowId?: string | undefined;
+  onboardingFlowId?: string | null | undefined;
   /**
    * Optional FK to a ThirdPartyOrganization.
    */
-  organizationId?: string | undefined;
+  organizationId?: string | null | undefined;
   /**
    * The selfRegistrationDomains field.
    */
@@ -45,14 +45,14 @@ export type LocalDirectoryConfigServiceCreateRequest = {
 
 /** @internal */
 export type LocalDirectoryConfigServiceCreateRequest$Outbound = {
-  allowSelfRegistration?: boolean | undefined;
-  appId: string;
-  defaultProfileTypeId?: string | undefined;
-  displayName: string;
-  invitationTtl?: string | undefined;
-  isDefault?: boolean | undefined;
-  onboardingFlowId?: string | undefined;
-  organizationId?: string | undefined;
+  allowSelfRegistration?: boolean | null | undefined;
+  appId: string | null;
+  defaultProfileTypeId?: string | null | undefined;
+  displayName: string | null;
+  invitationTtl?: string | null | undefined;
+  isDefault?: boolean | null | undefined;
+  onboardingFlowId?: string | null | undefined;
+  organizationId?: string | null | undefined;
   selfRegistrationDomains?: Array<string> | null | undefined;
 };
 
@@ -62,14 +62,14 @@ export const LocalDirectoryConfigServiceCreateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   LocalDirectoryConfigServiceCreateRequest
 > = z.object({
-  allowSelfRegistration: z.boolean().optional(),
-  appId: z.string(),
-  defaultProfileTypeId: z.string().optional(),
-  displayName: z.string(),
-  invitationTtl: z.string().optional(),
-  isDefault: z.boolean().optional(),
-  onboardingFlowId: z.string().optional(),
-  organizationId: z.string().optional(),
+  allowSelfRegistration: z.nullable(z.boolean()).optional(),
+  appId: z.nullable(z.string()),
+  defaultProfileTypeId: z.nullable(z.string()).optional(),
+  displayName: z.nullable(z.string()),
+  invitationTtl: z.nullable(z.string()).optional(),
+  isDefault: z.nullable(z.boolean()).optional(),
+  onboardingFlowId: z.nullable(z.string()).optional(),
+  organizationId: z.nullable(z.string()).optional(),
   selfRegistrationDomains: z.nullable(z.array(z.string())).optional(),
 });
 

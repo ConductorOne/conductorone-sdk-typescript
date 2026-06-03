@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$Outbound,
@@ -13,12 +14,15 @@ import {
  * The request message for finding which request schema is bound to a given app entitlement.
  */
 export type RequestSchemaServiceFindBindingForAppEntitlementRequest = {
-  entitlementRef?: AppEntitlementRef | null | undefined;
+  /**
+   * The AppEntitlementRef message.
+   */
+  appEntitlementRef?: AppEntitlementRef | undefined;
 };
 
 /** @internal */
 export type RequestSchemaServiceFindBindingForAppEntitlementRequest$Outbound = {
-  entitlementRef?: AppEntitlementRef$Outbound | null | undefined;
+  entitlementRef?: AppEntitlementRef$Outbound | undefined;
 };
 
 /** @internal */
@@ -28,7 +32,11 @@ export const RequestSchemaServiceFindBindingForAppEntitlementRequest$outboundSch
     z.ZodTypeDef,
     RequestSchemaServiceFindBindingForAppEntitlementRequest
   > = z.object({
-    entitlementRef: z.nullable(AppEntitlementRef$outboundSchema).optional(),
+    appEntitlementRef: AppEntitlementRef$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      appEntitlementRef: "entitlementRef",
+    });
   });
 
 export function requestSchemaServiceFindBindingForAppEntitlementRequestToJSON(

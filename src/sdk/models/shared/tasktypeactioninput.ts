@@ -34,13 +34,6 @@ export type TaskTypeActionInput = {
    *   - connectorActionRef
    */
   taskActionInstance?: TaskActionInstanceInput | undefined;
-  /**
-   * Scope-role variant of TaskTypeAction.target_object. The UI uses the
-   *
-   * @remarks
-   *  embedded identifiers to build links and title strings without a separate
-   *  Action fetch.
-   */
   scopeRole?: ScopeRoleInput | null | undefined;
 };
 

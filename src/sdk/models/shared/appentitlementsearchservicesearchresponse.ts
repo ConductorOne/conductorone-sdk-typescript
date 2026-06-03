@@ -38,7 +38,10 @@ export type AppEntitlementSearchServiceSearchResponse = {
     | Array<AppEntitlementSearchServiceSearchResponseExpanded>
     | null
     | undefined;
-  facets?: Facets | null | undefined;
+  /**
+   * Indicates one value of a facet.
+   */
+  facets?: Facets | undefined;
   /**
    * List of app entitlement view objects.
    */
@@ -94,7 +97,7 @@ export const AppEntitlementSearchServiceSearchResponse$inboundSchema: z.ZodType<
       AppEntitlementSearchServiceSearchResponseExpanded$inboundSchema
     )),
   ).optional(),
-  facets: z.nullable(Facets$inboundSchema).optional(),
+  facets: Facets$inboundSchema.optional(),
   list: z.nullable(z.array(AppEntitlementView$inboundSchema)).optional(),
   nextPageToken: z.nullable(z.string()).optional(),
 });

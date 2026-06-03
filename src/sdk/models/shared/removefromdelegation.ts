@@ -40,7 +40,10 @@ export type RemoveFromDelegation = {
    * The userIdCel field.
    */
   userIdCel?: string | null | undefined;
-  userRef?: UserRef | null | undefined;
+  /**
+   * A reference to a user.
+   */
+  userRef?: UserRef | undefined;
 };
 
 /** @internal */
@@ -53,7 +56,7 @@ export const RemoveFromDelegation$inboundSchema: z.ZodType<
   replacementUserRef: z.nullable(UserRef$inboundSchema).optional(),
   useSubjectUser: z.nullable(z.boolean()).optional(),
   userIdCel: z.nullable(z.string()).optional(),
-  userRef: z.nullable(UserRef$inboundSchema).optional(),
+  userRef: UserRef$inboundSchema.optional(),
 });
 /** @internal */
 export type RemoveFromDelegation$Outbound = {
@@ -61,7 +64,7 @@ export type RemoveFromDelegation$Outbound = {
   replacementUserRef?: UserRef$Outbound | null | undefined;
   useSubjectUser?: boolean | null | undefined;
   userIdCel?: string | null | undefined;
-  userRef?: UserRef$Outbound | null | undefined;
+  userRef?: UserRef$Outbound | undefined;
 };
 
 /** @internal */
@@ -74,7 +77,7 @@ export const RemoveFromDelegation$outboundSchema: z.ZodType<
   replacementUserRef: z.nullable(UserRef$outboundSchema).optional(),
   useSubjectUser: z.nullable(z.boolean()).optional(),
   userIdCel: z.nullable(z.string()).optional(),
-  userRef: z.nullable(UserRef$outboundSchema).optional(),
+  userRef: UserRef$outboundSchema.optional(),
 });
 
 export function removeFromDelegationToJSON(

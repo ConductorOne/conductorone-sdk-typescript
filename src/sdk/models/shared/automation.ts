@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -82,6 +83,19 @@ export type PrimaryTriggerType = OpenEnum<typeof PrimaryTriggerType>;
  */
 export type Automation = {
   /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  URL-safe ASCII; total serialized ≤ 4096 bytes. Keys matching ^c1/
+   *  are reserved.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * the app id this workflow_template belongs to
    */
   appId?: string | null | undefined;
@@ -97,12 +111,15 @@ export type Automation = {
    *  than circuit_breaker_max times in the trailing circuit_breaker_period.
    *  0 = circuit breaker off (default).
    */
-  circuitBreakerMax?: number | undefined;
+  circuitBreakerMax?: number | null | undefined;
   /**
    * The circuitBreakerPeriod field.
    */
-  circuitBreakerPeriod?: CircuitBreakerPeriod | undefined;
-  context?: AutomationContext | null | undefined;
+  circuitBreakerPeriod?: CircuitBreakerPeriod | null | undefined;
+  /**
+   * The AutomationContext message.
+   */
+  automationContext?: AutomationContext | undefined;
   createdAt?: Date | null | undefined;
   /**
    * The currentVersion field.
@@ -157,6 +174,19 @@ export type Automation = {
  */
 export type AutomationInput = {
   /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  URL-safe ASCII; total serialized ≤ 4096 bytes. Keys matching ^c1/
+   *  are reserved.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * the app id this workflow_template belongs to
    */
   appId?: string | null | undefined;
@@ -172,12 +202,15 @@ export type AutomationInput = {
    *  than circuit_breaker_max times in the trailing circuit_breaker_period.
    *  0 = circuit breaker off (default).
    */
-  circuitBreakerMax?: number | undefined;
+  circuitBreakerMax?: number | null | undefined;
   /**
    * The circuitBreakerPeriod field.
    */
-  circuitBreakerPeriod?: CircuitBreakerPeriod | undefined;
-  context?: AutomationContext | null | undefined;
+  circuitBreakerPeriod?: CircuitBreakerPeriod | null | undefined;
+  /**
+   * The AutomationContext message.
+   */
+  automationContext?: AutomationContext | undefined;
   createdAt?: Date | null | undefined;
   /**
    * The currentVersion field.
@@ -250,13 +283,15 @@ export const Automation$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  annotations: z.record(z.string()).optional(),
   appId: z.nullable(z.string()).optional(),
   automationSteps: z.nullable(z.array(AutomationStep$inboundSchema)).optional(),
   circuitBreaker: z.nullable(DisabledReasonCircuitBreaker$inboundSchema)
     .optional(),
-  circuitBreakerMax: z.number().int().optional(),
-  circuitBreakerPeriod: CircuitBreakerPeriod$inboundSchema.optional(),
-  context: z.nullable(AutomationContext$inboundSchema).optional(),
+  circuitBreakerMax: z.nullable(z.number().int()).optional(),
+  circuitBreakerPeriod: z.nullable(CircuitBreakerPeriod$inboundSchema)
+    .optional(),
+  context: AutomationContext$inboundSchema.optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -276,6 +311,10 @@ export const Automation$inboundSchema: z.ZodType<
   ).optional(),
   primaryTriggerType: z.nullable(PrimaryTriggerType$inboundSchema).optional(),
   triggers: z.nullable(z.array(AutomationTrigger$inboundSchema)).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "context": "automationContext",
+  });
 });
 
 export function automationFromJSON(
@@ -290,12 +329,13 @@ export function automationFromJSON(
 
 /** @internal */
 export type AutomationInput$Outbound = {
+  annotations?: { [k: string]: string } | undefined;
   appId?: string | null | undefined;
   automationSteps?: Array<AutomationStep$Outbound> | null | undefined;
   circuitBreaker?: DisabledReasonCircuitBreaker$Outbound | null | undefined;
-  circuitBreakerMax?: number | undefined;
-  circuitBreakerPeriod?: string | undefined;
-  context?: AutomationContext$Outbound | null | undefined;
+  circuitBreakerMax?: number | null | undefined;
+  circuitBreakerPeriod?: string | null | undefined;
+  context?: AutomationContext$Outbound | undefined;
   createdAt?: string | null | undefined;
   currentVersion?: string | null | undefined;
   description?: string | null | undefined;
@@ -315,14 +355,16 @@ export const AutomationInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AutomationInput
 > = z.object({
+  annotations: z.record(z.string()).optional(),
   appId: z.nullable(z.string()).optional(),
   automationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
     .optional(),
   circuitBreaker: z.nullable(DisabledReasonCircuitBreaker$outboundSchema)
     .optional(),
-  circuitBreakerMax: z.number().int().optional(),
-  circuitBreakerPeriod: CircuitBreakerPeriod$outboundSchema.optional(),
-  context: z.nullable(AutomationContext$outboundSchema).optional(),
+  circuitBreakerMax: z.nullable(z.number().int()).optional(),
+  circuitBreakerPeriod: z.nullable(CircuitBreakerPeriod$outboundSchema)
+    .optional(),
+  automationContext: AutomationContext$outboundSchema.optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   currentVersion: z.nullable(z.number().int().transform(v => `${v}`))
     .optional(),
@@ -338,6 +380,10 @@ export const AutomationInput$outboundSchema: z.ZodType<
     .optional(),
   primaryTriggerType: z.nullable(PrimaryTriggerType$outboundSchema).optional(),
   triggers: z.nullable(z.array(AutomationTrigger$outboundSchema)).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    automationContext: "context",
+  });
 });
 
 export function automationInputToJSON(

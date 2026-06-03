@@ -14,7 +14,7 @@ export type SuppressRoutingAction = {
   /**
    * The reason field.
    */
-  reason?: string | undefined;
+  reason?: string | null | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const SuppressRoutingAction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  reason: z.string().optional(),
+  reason: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type SuppressRoutingAction$Outbound = {
-  reason?: string | undefined;
+  reason?: string | null | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const SuppressRoutingAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SuppressRoutingAction
 > = z.object({
-  reason: z.string().optional(),
+  reason: z.nullable(z.string()).optional(),
 });
 
 export function suppressRoutingActionToJSON(

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   RequestCatalogInput,
   RequestCatalogInput$Outbound,
@@ -18,15 +19,21 @@ import {
  * Update a request catalog object by ID.
  */
 export type RequestCatalogManagementServiceUpdateRequest = {
-  catalog?: RequestCatalogInput | null | undefined;
-  expandMask?: RequestCatalogExpandMask | null | undefined;
+  /**
+   * The RequestCatalog is used for managing which entitlements are requestable, and who can request them.
+   */
+  requestCatalog?: RequestCatalogInput | undefined;
+  /**
+   * The RequestCatalogExpandMask includes the paths in the catalog view to expand in the return value of this call.
+   */
+  requestCatalogExpandMask?: RequestCatalogExpandMask | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type RequestCatalogManagementServiceUpdateRequest$Outbound = {
-  catalog?: RequestCatalogInput$Outbound | null | undefined;
-  expandMask?: RequestCatalogExpandMask$Outbound | null | undefined;
+  catalog?: RequestCatalogInput$Outbound | undefined;
+  expandMask?: RequestCatalogExpandMask$Outbound | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -37,9 +44,15 @@ export const RequestCatalogManagementServiceUpdateRequest$outboundSchema:
     z.ZodTypeDef,
     RequestCatalogManagementServiceUpdateRequest
   > = z.object({
-    catalog: z.nullable(RequestCatalogInput$outboundSchema).optional(),
-    expandMask: z.nullable(RequestCatalogExpandMask$outboundSchema).optional(),
+    requestCatalog: RequestCatalogInput$outboundSchema.optional(),
+    requestCatalogExpandMask: RequestCatalogExpandMask$outboundSchema
+      .optional(),
     updateMask: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requestCatalog: "catalog",
+      requestCatalogExpandMask: "expandMask",
+    });
   });
 
 export function requestCatalogManagementServiceUpdateRequestToJSON(

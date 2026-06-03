@@ -42,15 +42,15 @@ export type ExternalClientSearchServiceSearchRequest = {
   /**
    * The pageSize field.
    */
-  pageSize?: number | undefined;
+  pageSize?: number | null | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | undefined;
+  pageToken?: string | null | undefined;
   /**
    * Free-text search on client_name and user display name
    */
-  query?: string | undefined;
+  query?: string | null | undefined;
   /**
    * Filter by specific user IDs
    */
@@ -71,9 +71,9 @@ export const WellKnownClients$outboundSchema: z.ZodType<
 /** @internal */
 export type ExternalClientSearchServiceSearchRequest$Outbound = {
   clientIdUrls?: Array<string> | null | undefined;
-  pageSize?: number | undefined;
-  pageToken?: string | undefined;
-  query?: string | undefined;
+  pageSize?: number | null | undefined;
+  pageToken?: string | null | undefined;
+  query?: string | null | undefined;
   users?: Array<UserRef$Outbound> | null | undefined;
   wellKnownClients?: Array<string> | null | undefined;
 };
@@ -85,9 +85,9 @@ export const ExternalClientSearchServiceSearchRequest$outboundSchema: z.ZodType<
   ExternalClientSearchServiceSearchRequest
 > = z.object({
   clientIdUrls: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
+  pageSize: z.nullable(z.number().int()).optional(),
+  pageToken: z.nullable(z.string()).optional(),
+  query: z.nullable(z.string()).optional(),
   users: z.nullable(z.array(UserRef$outboundSchema)).optional(),
   wellKnownClients: z.nullable(z.array(WellKnownClients$outboundSchema))
     .optional(),

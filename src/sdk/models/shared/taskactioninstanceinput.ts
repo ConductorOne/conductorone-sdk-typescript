@@ -19,13 +19,6 @@ import {
  *   - connectorActionRef
  */
 export type TaskActionInstanceInput = {
-  /**
-   * ConnectorActionRef describes dispatch through a connector's built-in
-   *
-   * @remarks
-   *  GrantManagerService Grant / Revoke RPC — i.e. the default connector
-   *  operation, used for synthesized tickets like scope-role requests.
-   */
   connectorActionRef?: ConnectorActionRefInput | null | undefined;
 };
 

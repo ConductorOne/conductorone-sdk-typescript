@@ -37,7 +37,10 @@ import {
 export type DirectoryServiceUpdateRequest = {
   all?: DirectoryAccountFilterAll | null | undefined;
   celExpression?: DirectoryAccountFilterCel | null | undefined;
-  expandMask?: DirectoryExpandMask | null | undefined;
+  /**
+   * The fields to be included in the directory response.
+   */
+  directoryExpandMask?: DirectoryExpandMask | undefined;
   /**
    * DirectoryMergeConfig configures how AppUsers from this directory are matched to C1 Users.
    */
@@ -48,7 +51,7 @@ export type DirectoryServiceUpdateRequest = {
 export type DirectoryServiceUpdateRequest$Outbound = {
   all?: DirectoryAccountFilterAll$Outbound | null | undefined;
   celExpression?: DirectoryAccountFilterCel$Outbound | null | undefined;
-  expandMask?: DirectoryExpandMask$Outbound | null | undefined;
+  expandMask?: DirectoryExpandMask$Outbound | undefined;
   mergeConfig?: DirectoryMergeConfig$Outbound | undefined;
 };
 
@@ -61,10 +64,11 @@ export const DirectoryServiceUpdateRequest$outboundSchema: z.ZodType<
   all: z.nullable(DirectoryAccountFilterAll$outboundSchema).optional(),
   celExpression: z.nullable(DirectoryAccountFilterCel$outboundSchema)
     .optional(),
-  expandMask: z.nullable(DirectoryExpandMask$outboundSchema).optional(),
+  directoryExpandMask: DirectoryExpandMask$outboundSchema.optional(),
   directoryMergeConfig: DirectoryMergeConfig$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
+    directoryExpandMask: "expandMask",
     directoryMergeConfig: "mergeConfig",
   });
 });

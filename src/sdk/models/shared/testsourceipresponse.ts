@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -20,7 +21,18 @@ export type TestSourceIPResponse = {
    * The IP address that was checked, either from the request or inferred from the caller.
    */
   checkedIp?: string | null | undefined;
-  details?: Status | null | undefined;
+  /**
+   * The `Status` type defines a logical error model that is suitable for
+   *
+   * @remarks
+   *  different programming environments, including REST APIs and RPC APIs. It is
+   *  used by [gRPC](https://github.com/grpc). Each `Status` message contains
+   *  three pieces of data: error code, error message, and error details.
+   *
+   *  You can find out more about this error model and how to work with it in the
+   *  [API Design Guide](https://cloud.google.com/apis/design/errors).
+   */
+  status?: Status | undefined;
 };
 
 /** @internal */
@@ -31,7 +43,11 @@ export const TestSourceIPResponse$inboundSchema: z.ZodType<
 > = z.object({
   allowed: z.nullable(z.boolean()).optional(),
   checkedIp: z.nullable(z.string()).optional(),
-  details: z.nullable(Status$inboundSchema).optional(),
+  details: Status$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "details": "status",
+  });
 });
 
 export function testSourceIPResponseFromJSON(

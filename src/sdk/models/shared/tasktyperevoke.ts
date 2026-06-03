@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -56,7 +57,18 @@ export type TaskTypeRevoke = {
    */
   outcome?: TaskTypeRevokeOutcome | null | undefined;
   outcomeTime?: Date | null | undefined;
-  source?: TaskRevokeSource | null | undefined;
+  /**
+   * The TaskRevokeSource message indicates the source of the revoke task is one of expired, nonUsage, request, or review.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named origin. Only a single field of the following list may be set at a time:
+   *   - review
+   *   - request
+   *   - expired
+   *   - nonUsage
+   */
+  taskRevokeSource?: TaskRevokeSource | undefined;
 };
 
 /** @internal */
@@ -86,7 +98,11 @@ export const TaskTypeRevoke$inboundSchema: z.ZodType<
   outcomeTime: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  source: z.nullable(TaskRevokeSource$inboundSchema).optional(),
+  source: TaskRevokeSource$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "source": "taskRevokeSource",
+  });
 });
 /** @internal */
 export type TaskTypeRevoke$Outbound = {
@@ -96,7 +112,7 @@ export type TaskTypeRevoke$Outbound = {
   identityUserId?: string | null | undefined;
   outcome?: string | null | undefined;
   outcomeTime?: string | null | undefined;
-  source?: TaskRevokeSource$Outbound | null | undefined;
+  source?: TaskRevokeSource$Outbound | undefined;
 };
 
 /** @internal */
@@ -111,7 +127,11 @@ export const TaskTypeRevoke$outboundSchema: z.ZodType<
   identityUserId: z.nullable(z.string()).optional(),
   outcome: z.nullable(TaskTypeRevokeOutcome$outboundSchema).optional(),
   outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  source: z.nullable(TaskRevokeSource$outboundSchema).optional(),
+  taskRevokeSource: TaskRevokeSource$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    taskRevokeSource: "source",
+  });
 });
 
 export function taskTypeRevokeToJSON(taskTypeRevoke: TaskTypeRevoke): string {

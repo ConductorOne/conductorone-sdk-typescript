@@ -15,7 +15,10 @@ import {
  * The AutomationExecutionView message.
  */
 export type AutomationExecutionView = {
-  automationExecution?: AutomationExecution | null | undefined;
+  /**
+   * The AutomationExecution message.
+   */
+  automationExecution?: AutomationExecution | undefined;
   /**
    * The automationExecutionTriggerPath field.
    */
@@ -32,7 +35,7 @@ export const AutomationExecutionView$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  automationExecution: z.nullable(AutomationExecution$inboundSchema).optional(),
+  automationExecution: AutomationExecution$inboundSchema.optional(),
   automationExecutionTriggerPath: z.nullable(z.string()).optional(),
   automationPath: z.nullable(z.string()).optional(),
 });

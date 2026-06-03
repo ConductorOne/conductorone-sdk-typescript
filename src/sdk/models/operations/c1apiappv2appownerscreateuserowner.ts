@@ -13,7 +13,7 @@ export type C1ApiAppV2AppOwnersCreateUserOwnerRequest = {
   appId: string;
   roleSlug: string;
   userRefId: string;
-  createUserOwnerRequest?: shared.CreateUserOwnerRequest | undefined;
+  createAppUserOwnerRequest?: shared.CreateAppUserOwnerRequest | undefined;
 };
 
 export type C1ApiAppV2AppOwnersCreateUserOwnerResponse = {
@@ -32,7 +32,7 @@ export type C1ApiAppV2AppOwnersCreateUserOwnerResponse = {
   /**
    * CreateUserOwnerResponse is the response for creating a user ownership source.
    */
-  createUserOwnerResponse?: shared.CreateUserOwnerResponse | undefined;
+  createAppUserOwnerResponse?: shared.CreateAppUserOwnerResponse | undefined;
 };
 
 /** @internal */
@@ -40,7 +40,9 @@ export type C1ApiAppV2AppOwnersCreateUserOwnerRequest$Outbound = {
   app_id: string;
   role_slug: string;
   user_ref_id: string;
-  CreateUserOwnerRequest?: shared.CreateUserOwnerRequest$Outbound | undefined;
+  CreateAppUserOwnerRequest?:
+    | shared.CreateAppUserOwnerRequest$Outbound
+    | undefined;
 };
 
 /** @internal */
@@ -53,14 +55,14 @@ export const C1ApiAppV2AppOwnersCreateUserOwnerRequest$outboundSchema:
     appId: z.string(),
     roleSlug: z.string(),
     userRefId: z.string(),
-    createUserOwnerRequest: shared.CreateUserOwnerRequest$outboundSchema
+    createAppUserOwnerRequest: shared.CreateAppUserOwnerRequest$outboundSchema
       .optional(),
   }).transform((v) => {
     return remap$(v, {
       appId: "app_id",
       roleSlug: "role_slug",
       userRefId: "user_ref_id",
-      createUserOwnerRequest: "CreateUserOwnerRequest",
+      createAppUserOwnerRequest: "CreateAppUserOwnerRequest",
     });
   });
 
@@ -82,14 +84,14 @@ export const C1ApiAppV2AppOwnersCreateUserOwnerResponse$inboundSchema:
       ContentType: z.string(),
       StatusCode: z.number().int(),
       RawResponse: z.instanceof(Response),
-      CreateUserOwnerResponse: shared.CreateUserOwnerResponse$inboundSchema
-        .optional(),
+      CreateAppUserOwnerResponse: shared
+        .CreateAppUserOwnerResponse$inboundSchema.optional(),
     }).transform((v) => {
       return remap$(v, {
         "ContentType": "contentType",
         "StatusCode": "statusCode",
         "RawResponse": "rawResponse",
-        "CreateUserOwnerResponse": "createUserOwnerResponse",
+        "CreateAppUserOwnerResponse": "createAppUserOwnerResponse",
       });
     });
 

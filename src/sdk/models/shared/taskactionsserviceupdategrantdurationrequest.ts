@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   TaskExpandMask,
   TaskExpandMask$Outbound,
@@ -13,14 +14,17 @@ import {
  * The TaskActionsServiceUpdateGrantDurationRequest object lets you change the grant duration on a grant task.
  */
 export type TaskActionsServiceUpdateGrantDurationRequest = {
-  duration: string;
-  expandMask?: TaskExpandMask | null | undefined;
+  duration: string | null;
+  /**
+   * The task expand mask is an array of strings that specifes the related objects the requester wishes to have returned when making a request where the expand mask is part of the input. Use '*' to view all possible responses.
+   */
+  taskExpandMask?: TaskExpandMask | undefined;
 };
 
 /** @internal */
 export type TaskActionsServiceUpdateGrantDurationRequest$Outbound = {
-  duration: string;
-  expandMask?: TaskExpandMask$Outbound | null | undefined;
+  duration: string | null;
+  expandMask?: TaskExpandMask$Outbound | undefined;
 };
 
 /** @internal */
@@ -30,8 +34,12 @@ export const TaskActionsServiceUpdateGrantDurationRequest$outboundSchema:
     z.ZodTypeDef,
     TaskActionsServiceUpdateGrantDurationRequest
   > = z.object({
-    duration: z.string(),
-    expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
+    duration: z.nullable(z.string()),
+    taskExpandMask: TaskExpandMask$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      taskExpandMask: "expandMask",
+    });
   });
 
 export function taskActionsServiceUpdateGrantDurationRequestToJSON(

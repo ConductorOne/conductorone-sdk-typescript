@@ -23,15 +23,15 @@ export type AccessReviewSetupEntitlementView = {
   /**
    * The appPath field.
    */
-  appPath?: string | undefined;
+  appPath?: string | null | undefined;
   /**
    * The entitlementPath field.
    */
-  entitlementPath?: string | undefined;
+  entitlementPath?: string | null | undefined;
   /**
    * The policyPath field.
    */
-  policyPath?: string | undefined;
+  policyPath?: string | null | undefined;
 };
 
 /** @internal */
@@ -42,9 +42,9 @@ export const AccessReviewSetupEntitlementView$inboundSchema: z.ZodType<
 > = z.object({
   accessReviewEntitlement: AccessReviewSetupEntitlement$inboundSchema
     .optional(),
-  appPath: z.string().optional(),
-  entitlementPath: z.string().optional(),
-  policyPath: z.string().optional(),
+  appPath: z.nullable(z.string()).optional(),
+  entitlementPath: z.nullable(z.string()).optional(),
+  policyPath: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "accessReviewEntitlement": "accessReviewSetupEntitlement",

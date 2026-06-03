@@ -11,6 +11,11 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { AppUserTarget, AppUserTarget$inboundSchema } from "./appusertarget.js";
 import {
+  DecoyCredentialUsedType,
+  DecoyCredentialUsedType$inboundSchema,
+} from "./decoycredentialusedtype.js";
+import { DecoyTarget, DecoyTarget$inboundSchema } from "./decoytarget.js";
+import {
   FindingOwnerRef,
   FindingOwnerRef$inboundSchema,
 } from "./findingownerref.js";
@@ -80,10 +85,12 @@ export type FindingState = OpenEnum<typeof FindingState>;
  * This message contains a oneof named finding_type. Only a single field of the following list may be set at a time:
  *   - similarUsernameMatch
  *   - serviceAccountMisclassification
+ *   - decoyCredentialUsed
  *
  * This message contains a oneof named target. Only a single field of the following list may be set at a time:
  *   - identityUserTarget
  *   - appUserTarget
+ *   - decoyTarget
  *
  * This message contains a oneof named evidence. Only a single field of the following list may be set at a time:
  *   - similarUsernameMatchEvidence
@@ -93,10 +100,7 @@ export type Finding = {
   /**
    * The appId field.
    */
-  appId?: string | undefined;
-  /**
-   * The AppUserTarget message.
-   */
+  appId?: string | null | undefined;
   appUserTarget?: AppUserTarget | null | undefined;
   /**
    * The FindingOwnerRef message.
@@ -122,53 +126,46 @@ export type Finding = {
    *   - userSetId
    */
   findingOwnerRef1?: FindingOwnerRef | undefined;
-  createdAt?: Date | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * The customTags field.
    */
   customTags?: { [k: string]: string } | undefined;
+  decoyCredentialUsed?: DecoyCredentialUsedType | null | undefined;
+  decoyTarget?: DecoyTarget | null | undefined;
   /**
    * The fingerprint field.
    */
-  fingerprint?: string | undefined;
-  firstObservedAt?: Date | undefined;
+  fingerprint?: string | null | undefined;
+  firstObservedAt?: Date | null | undefined;
   /**
    * The id field.
    */
-  id?: string | undefined;
-  /**
-   * The IdentityUserTarget message.
-   */
+  id?: string | null | undefined;
   identityUserTarget?: IdentityUserTarget | null | undefined;
-  lastObservedAt?: Date | undefined;
+  lastObservedAt?: Date | null | undefined;
   /**
    * The recurrenceCount field.
    */
-  recurrenceCount?: number | undefined;
+  recurrenceCount?: number | null | undefined;
   /**
    * The remediationDescription field.
    */
-  remediationDescription?: string | undefined;
-  resolvedAt?: Date | undefined;
-  riskAcceptanceExpiresAt?: Date | undefined;
+  remediationDescription?: string | null | undefined;
+  resolvedAt?: Date | null | undefined;
+  riskAcceptanceExpiresAt?: Date | null | undefined;
   /**
    * The riskAcceptanceJustification field.
    */
-  riskAcceptanceJustification?: string | undefined;
+  riskAcceptanceJustification?: string | null | undefined;
   /**
    * The FindingRiskScore message.
    */
   findingRiskScore?: FindingRiskScore | undefined;
-  /**
-   * The ServiceAccountMisclassificationType message.
-   */
-  serviceAccountMisclassificationType?:
+  serviceAccountMisclassification?:
     | ServiceAccountMisclassificationType
     | null
     | undefined;
-  /**
-   * The ServiceAccountMisclassificationEvidence message.
-   */
   serviceAccountMisclassificationEvidence?:
     | ServiceAccountMisclassificationEvidence
     | null
@@ -176,14 +173,8 @@ export type Finding = {
   /**
    * The severity field.
    */
-  severity?: FindingSeverity | undefined;
-  /**
-   * The SimilarUsernameMatchType message.
-   */
-  similarUsernameMatchType?: SimilarUsernameMatchType | null | undefined;
-  /**
-   * The SimilarUsernameMatchEvidence message.
-   */
+  severity?: FindingSeverity | null | undefined;
+  similarUsernameMatch?: SimilarUsernameMatchType | null | undefined;
   similarUsernameMatchEvidence?:
     | SimilarUsernameMatchEvidence
     | null
@@ -191,29 +182,29 @@ export type Finding = {
   /**
    * The snoozeReason field.
    */
-  snoozeReason?: string | undefined;
-  snoozeUntil?: Date | undefined;
+  snoozeReason?: string | null | undefined;
+  snoozeUntil?: Date | null | undefined;
   /**
    * The sourceDetectorId field.
    */
-  sourceDetectorId?: string | undefined;
+  sourceDetectorId?: string | null | undefined;
   /**
    * The state field.
    */
-  state?: FindingState | undefined;
+  state?: FindingState | null | undefined;
   /**
    * The stateUpdatedById field.
    */
-  stateUpdatedById?: string | undefined;
+  stateUpdatedById?: string | null | undefined;
   /**
    * The suppressReason field.
    */
-  suppressReason?: string | undefined;
+  suppressReason?: string | null | undefined;
   /**
    * The taskId field.
    */
-  taskId?: string | undefined;
-  updatedAt?: Date | undefined;
+  taskId?: string | null | undefined;
+  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
@@ -233,31 +224,35 @@ export const FindingState$inboundSchema: z.ZodType<
 /** @internal */
 export const Finding$inboundSchema: z.ZodType<Finding, z.ZodTypeDef, unknown> =
   z.object({
-    appId: z.string().optional(),
+    appId: z.nullable(z.string()).optional(),
     appUserTarget: z.nullable(AppUserTarget$inboundSchema).optional(),
     assignedOwner: FindingOwnerRef$inboundSchema.optional(),
     computedOwner: FindingOwnerRef$inboundSchema.optional(),
-    createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-      .optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
     customTags: z.record(z.string()).optional(),
-    fingerprint: z.string().optional(),
-    firstObservedAt: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
+    decoyCredentialUsed: z.nullable(DecoyCredentialUsedType$inboundSchema)
+      .optional(),
+    decoyTarget: z.nullable(DecoyTarget$inboundSchema).optional(),
+    fingerprint: z.nullable(z.string()).optional(),
+    firstObservedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    id: z.string().optional(),
+    id: z.nullable(z.string()).optional(),
     identityUserTarget: z.nullable(IdentityUserTarget$inboundSchema).optional(),
-    lastObservedAt: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
+    lastObservedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    recurrenceCount: z.number().int().optional(),
-    remediationDescription: z.string().optional(),
-    resolvedAt: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
+    recurrenceCount: z.nullable(z.number().int()).optional(),
+    remediationDescription: z.nullable(z.string()).optional(),
+    resolvedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    riskAcceptanceExpiresAt: z.string().datetime({ offset: true }).transform(
-      v => new Date(v)
+    riskAcceptanceExpiresAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    riskAcceptanceJustification: z.string().optional(),
+    riskAcceptanceJustification: z.nullable(z.string()).optional(),
     riskScore: FindingRiskScore$inboundSchema.optional(),
     serviceAccountMisclassification: z.nullable(
       ServiceAccountMisclassificationType$inboundSchema,
@@ -265,30 +260,29 @@ export const Finding$inboundSchema: z.ZodType<Finding, z.ZodTypeDef, unknown> =
     serviceAccountMisclassificationEvidence: z.nullable(
       ServiceAccountMisclassificationEvidence$inboundSchema,
     ).optional(),
-    severity: FindingSeverity$inboundSchema.optional(),
+    severity: z.nullable(FindingSeverity$inboundSchema).optional(),
     similarUsernameMatch: z.nullable(SimilarUsernameMatchType$inboundSchema)
       .optional(),
     similarUsernameMatchEvidence: z.nullable(
       SimilarUsernameMatchEvidence$inboundSchema,
     ).optional(),
-    snoozeReason: z.string().optional(),
-    snoozeUntil: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
+    snoozeReason: z.nullable(z.string()).optional(),
+    snoozeUntil: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    sourceDetectorId: z.string().optional(),
-    state: FindingState$inboundSchema.optional(),
-    stateUpdatedById: z.string().optional(),
-    suppressReason: z.string().optional(),
-    taskId: z.string().optional(),
-    updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-      .optional(),
+    sourceDetectorId: z.nullable(z.string()).optional(),
+    state: z.nullable(FindingState$inboundSchema).optional(),
+    stateUpdatedById: z.nullable(z.string()).optional(),
+    suppressReason: z.nullable(z.string()).optional(),
+    taskId: z.nullable(z.string()).optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       "assignedOwner": "findingOwnerRef",
       "computedOwner": "findingOwnerRef1",
       "riskScore": "findingRiskScore",
-      "serviceAccountMisclassification": "serviceAccountMisclassificationType",
-      "similarUsernameMatch": "similarUsernameMatchType",
     });
   });
 

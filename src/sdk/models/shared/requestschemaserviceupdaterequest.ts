@@ -13,13 +13,16 @@ import {
  * The request message for updating an existing request schema.
  */
 export type RequestSchemaServiceUpdateRequest = {
-  requestSchema?: RequestSchema | null | undefined;
+  /**
+   * A request schema defines a form template that users fill out when requesting access.
+   */
+  requestSchema?: RequestSchema | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type RequestSchemaServiceUpdateRequest$Outbound = {
-  requestSchema?: RequestSchema$Outbound | null | undefined;
+  requestSchema?: RequestSchema$Outbound | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -29,7 +32,7 @@ export const RequestSchemaServiceUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RequestSchemaServiceUpdateRequest
 > = z.object({
-  requestSchema: z.nullable(RequestSchema$outboundSchema).optional(),
+  requestSchema: RequestSchema$outboundSchema.optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 

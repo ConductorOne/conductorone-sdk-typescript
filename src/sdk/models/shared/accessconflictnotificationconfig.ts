@@ -23,8 +23,14 @@ import {
  * The NotificationConfig message.
  */
 export type AccessConflictNotificationConfig = {
-  emailNotifications?: EmailNotifications | null | undefined;
-  slackNotifications?: SlackNotifications | null | undefined;
+  /**
+   * The EmailNotifications message.
+   */
+  emailNotifications?: EmailNotifications | undefined;
+  /**
+   * The SlackNotifications message.
+   */
+  slackNotifications?: SlackNotifications | undefined;
 };
 
 /** @internal */
@@ -33,13 +39,13 @@ export const AccessConflictNotificationConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  emailNotifications: z.nullable(EmailNotifications$inboundSchema).optional(),
-  slackNotifications: z.nullable(SlackNotifications$inboundSchema).optional(),
+  emailNotifications: EmailNotifications$inboundSchema.optional(),
+  slackNotifications: SlackNotifications$inboundSchema.optional(),
 });
 /** @internal */
 export type AccessConflictNotificationConfig$Outbound = {
-  emailNotifications?: EmailNotifications$Outbound | null | undefined;
-  slackNotifications?: SlackNotifications$Outbound | null | undefined;
+  emailNotifications?: EmailNotifications$Outbound | undefined;
+  slackNotifications?: SlackNotifications$Outbound | undefined;
 };
 
 /** @internal */
@@ -48,8 +54,8 @@ export const AccessConflictNotificationConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AccessConflictNotificationConfig
 > = z.object({
-  emailNotifications: z.nullable(EmailNotifications$outboundSchema).optional(),
-  slackNotifications: z.nullable(SlackNotifications$outboundSchema).optional(),
+  emailNotifications: EmailNotifications$outboundSchema.optional(),
+  slackNotifications: SlackNotifications$outboundSchema.optional(),
 });
 
 export function accessConflictNotificationConfigToJSON(

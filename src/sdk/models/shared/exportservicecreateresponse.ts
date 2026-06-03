@@ -12,7 +12,15 @@ import { Exporter, Exporter$inboundSchema } from "./exporter.js";
  * The ExportServiceCreateResponse message.
  */
 export type ExportServiceCreateResponse = {
-  exporter?: Exporter | null | undefined;
+  /**
+   * The Exporter message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named export_to. Only a single field of the following list may be set at a time:
+   *   - datasource
+   */
+  exporter?: Exporter | undefined;
 };
 
 /** @internal */
@@ -21,7 +29,7 @@ export const ExportServiceCreateResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  exporter: z.nullable(Exporter$inboundSchema).optional(),
+  exporter: Exporter$inboundSchema.optional(),
 });
 
 export function exportServiceCreateResponseFromJSON(

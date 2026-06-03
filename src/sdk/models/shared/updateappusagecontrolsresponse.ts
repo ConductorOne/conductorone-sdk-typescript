@@ -15,7 +15,10 @@ import {
  * The UpdateAppUsageControlsResponse message contains the updated AppUsageControls object.
  */
 export type UpdateAppUsageControlsResponse = {
-  appUsageControls?: AppUsageControls | null | undefined;
+  /**
+   * The AppUsageControls object describes some peripheral configuration for an app.
+   */
+  appUsageControls?: AppUsageControls | undefined;
 };
 
 /** @internal */
@@ -24,7 +27,7 @@ export const UpdateAppUsageControlsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appUsageControls: z.nullable(AppUsageControls$inboundSchema).optional(),
+  appUsageControls: AppUsageControls$inboundSchema.optional(),
 });
 
 export function updateAppUsageControlsResponseFromJSON(

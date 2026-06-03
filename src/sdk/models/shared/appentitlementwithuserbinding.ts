@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -19,8 +20,14 @@ import {
  * The AppEntitlementWithUserBinding message.
  */
 export type AppEntitlementWithUserBinding = {
-  appEntitlementUserBinding?: AppEntitlementUserView | null | undefined;
-  entitlement?: AppEntitlementView | null | undefined;
+  /**
+   * The AppEntitlementUserView (aka grant view) describes the relationship between an app user and an entitlement. They have more recently been referred to as grants.
+   */
+  appEntitlementUserView?: AppEntitlementUserView | undefined;
+  /**
+   * The app entitlement view contains the serialized app entitlement and paths to objects referenced by the app entitlement.
+   */
+  appEntitlementView?: AppEntitlementView | undefined;
 };
 
 /** @internal */
@@ -29,9 +36,13 @@ export const AppEntitlementWithUserBinding$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appEntitlementUserBinding: z.nullable(AppEntitlementUserView$inboundSchema)
-    .optional(),
-  entitlement: z.nullable(AppEntitlementView$inboundSchema).optional(),
+  appEntitlementUserBinding: AppEntitlementUserView$inboundSchema.optional(),
+  entitlement: AppEntitlementView$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "appEntitlementUserBinding": "appEntitlementUserView",
+    "entitlement": "appEntitlementView",
+  });
 });
 
 export function appEntitlementWithUserBindingFromJSON(

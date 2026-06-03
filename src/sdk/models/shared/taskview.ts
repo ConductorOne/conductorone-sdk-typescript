@@ -36,7 +36,7 @@ export type TaskView = {
   /**
    * JSONPATH expression indicating the location of the ApproverUsers objects in the expanded array. These are the users who have approved or denied this task.
    */
-  approversPath?: string | undefined;
+  approversPath?: string | null | undefined;
   /**
    * JSONPATH expression indicating the location of the object of the User that created the ticket in the expanded array
    */
@@ -56,20 +56,23 @@ export type TaskView = {
   /**
    * JSONPATH expression indicating the location of the EntitlementScopeBindingList object in the expanded array.
    */
-  resourceBindingsPath?: string | undefined;
+  resourceBindingsPath?: string | null | undefined;
   /**
    * JSONPATH expression indicating the location of the role AppResource for a scope-role action task in the expanded array.
    */
-  roleResourcePath?: string | undefined;
+  roleResourcePath?: string | null | undefined;
   /**
    * JSONPATH expression indicating the location of the scope AppResource for a scope-role action task in the expanded array.
    */
-  scopeResourcePath?: string | undefined;
+  scopeResourcePath?: string | null | undefined;
   /**
    * JSONPATH expression indicating the location of the StepApproverUsers objects in the expanded array
    */
   stepApproversPath?: string | null | undefined;
-  task?: Task | null | undefined;
+  /**
+   * A fully-fleged task object. Includes its policy, references to external apps, its type, its processing history, and more.
+   */
+  task?: Task | undefined;
   /**
    * JSONPATH expression indicating the location of the User object in the expanded array. This is the user that is a direct target of the ticket without a specific relationship to a potentially non-existent app user.
    */
@@ -86,16 +89,16 @@ export const TaskView$inboundSchema: z.ZodType<
   appPath: z.nullable(z.string()).optional(),
   appUserLastUsagePath: z.nullable(z.string()).optional(),
   appUserPath: z.nullable(z.string()).optional(),
-  approversPath: z.string().optional(),
+  approversPath: z.nullable(z.string()).optional(),
   createdByUserPath: z.nullable(z.string()).optional(),
   entitlementsPath: z.nullable(z.string()).optional(),
   identityUserPath: z.nullable(z.string()).optional(),
   insightsPath: z.nullable(z.string()).optional(),
-  resourceBindingsPath: z.string().optional(),
-  roleResourcePath: z.string().optional(),
-  scopeResourcePath: z.string().optional(),
+  resourceBindingsPath: z.nullable(z.string()).optional(),
+  roleResourcePath: z.nullable(z.string()).optional(),
+  scopeResourcePath: z.nullable(z.string()).optional(),
   stepApproversPath: z.nullable(z.string()).optional(),
-  task: z.nullable(Task$inboundSchema).optional(),
+  task: Task$inboundSchema.optional(),
   userPath: z.nullable(z.string()).optional(),
 });
 /** @internal */
@@ -104,16 +107,16 @@ export type TaskView$Outbound = {
   appPath?: string | null | undefined;
   appUserLastUsagePath?: string | null | undefined;
   appUserPath?: string | null | undefined;
-  approversPath?: string | undefined;
+  approversPath?: string | null | undefined;
   createdByUserPath?: string | null | undefined;
   entitlementsPath?: string | null | undefined;
   identityUserPath?: string | null | undefined;
   insightsPath?: string | null | undefined;
-  resourceBindingsPath?: string | undefined;
-  roleResourcePath?: string | undefined;
-  scopeResourcePath?: string | undefined;
+  resourceBindingsPath?: string | null | undefined;
+  roleResourcePath?: string | null | undefined;
+  scopeResourcePath?: string | null | undefined;
   stepApproversPath?: string | null | undefined;
-  task?: Task$Outbound | null | undefined;
+  task?: Task$Outbound | undefined;
   userPath?: string | null | undefined;
 };
 
@@ -127,16 +130,16 @@ export const TaskView$outboundSchema: z.ZodType<
   appPath: z.nullable(z.string()).optional(),
   appUserLastUsagePath: z.nullable(z.string()).optional(),
   appUserPath: z.nullable(z.string()).optional(),
-  approversPath: z.string().optional(),
+  approversPath: z.nullable(z.string()).optional(),
   createdByUserPath: z.nullable(z.string()).optional(),
   entitlementsPath: z.nullable(z.string()).optional(),
   identityUserPath: z.nullable(z.string()).optional(),
   insightsPath: z.nullable(z.string()).optional(),
-  resourceBindingsPath: z.string().optional(),
-  roleResourcePath: z.string().optional(),
-  scopeResourcePath: z.string().optional(),
+  resourceBindingsPath: z.nullable(z.string()).optional(),
+  roleResourcePath: z.nullable(z.string()).optional(),
+  scopeResourcePath: z.nullable(z.string()).optional(),
   stepApproversPath: z.nullable(z.string()).optional(),
-  task: z.nullable(Task$outboundSchema).optional(),
+  task: Task$outboundSchema.optional(),
   userPath: z.nullable(z.string()).optional(),
 });
 

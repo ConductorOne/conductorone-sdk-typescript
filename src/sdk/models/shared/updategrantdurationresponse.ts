@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,7 +16,10 @@ import {
  * The response message for updating the duration of a grant.
  */
 export type UpdateGrantDurationResponse = {
-  binding?: AppEntitlementUserBinding | null | undefined;
+  /**
+   * The AppEntitlementUserBinding represents the relationship that gives an app user access to an app entitlement
+   */
+  appEntitlementUserBinding?: AppEntitlementUserBinding | undefined;
 };
 
 /** @internal */
@@ -24,7 +28,11 @@ export const UpdateGrantDurationResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  binding: z.nullable(AppEntitlementUserBinding$inboundSchema).optional(),
+  binding: AppEntitlementUserBinding$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "binding": "appEntitlementUserBinding",
+  });
 });
 
 export function updateGrantDurationResponseFromJSON(

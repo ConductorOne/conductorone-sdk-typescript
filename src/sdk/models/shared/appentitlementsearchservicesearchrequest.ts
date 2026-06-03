@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -80,7 +81,10 @@ export type AppEntitlementSearchServiceSearchRequest = {
    * Exclude these specific entitlements from results.
    */
   excludedEntitlementRefs?: Array<AppEntitlementRef> | null | undefined;
-  expandMask?: AppEntitlementExpandMask | null | undefined;
+  /**
+   * The app entitlement expand mask allows the user to get additional information when getting responses containing app entitlement views.
+   */
+  appEntitlementExpandMask?: AppEntitlementExpandMask | undefined;
   /**
    * Include deleted app entitlements, this includes app entitlements that have a deleted parent object (app, app resource, app resource type)
    */
@@ -117,6 +121,10 @@ export type AppEntitlementSearchServiceSearchRequest = {
    * Filter results to only these specific entitlements.
    */
   refs?: Array<AppEntitlementRef> | null | undefined;
+  /**
+   * Search for app entitlements that are bound to any of these request schemas.
+   */
+  requestSchemaIds?: Array<string> | null | undefined;
   /**
    * Search for app entitlements that belongs to these resources.
    */
@@ -162,7 +170,7 @@ export type AppEntitlementSearchServiceSearchRequest$Outbound = {
     | Array<AppEntitlementRef$Outbound>
     | null
     | undefined;
-  expandMask?: AppEntitlementExpandMask$Outbound | null | undefined;
+  expandMask?: AppEntitlementExpandMask$Outbound | undefined;
   includeDeleted?: boolean | null | undefined;
   isAutomated?: boolean | null | undefined;
   membershipType?: Array<string> | null | undefined;
@@ -172,6 +180,7 @@ export type AppEntitlementSearchServiceSearchRequest$Outbound = {
   policyRefs?: Array<PolicyRef$Outbound> | null | undefined;
   query?: string | null | undefined;
   refs?: Array<AppEntitlementRef$Outbound> | null | undefined;
+  requestSchemaIds?: Array<string> | null | undefined;
   resourceIds?: Array<string> | null | undefined;
   resourceTraitIds?: Array<string> | null | undefined;
   resourceTypeIds?: Array<string> | null | undefined;
@@ -197,7 +206,7 @@ export const AppEntitlementSearchServiceSearchRequest$outboundSchema: z.ZodType<
   excludeResourceTypeIds: z.nullable(z.array(z.string())).optional(),
   excludedEntitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
     .optional(),
-  expandMask: z.nullable(AppEntitlementExpandMask$outboundSchema).optional(),
+  appEntitlementExpandMask: AppEntitlementExpandMask$outboundSchema.optional(),
   includeDeleted: z.nullable(z.boolean()).optional(),
   isAutomated: z.nullable(z.boolean()).optional(),
   membershipType: z.nullable(z.array(MembershipType$outboundSchema)).optional(),
@@ -207,11 +216,16 @@ export const AppEntitlementSearchServiceSearchRequest$outboundSchema: z.ZodType<
   policyRefs: z.nullable(z.array(PolicyRef$outboundSchema)).optional(),
   query: z.nullable(z.string()).optional(),
   refs: z.nullable(z.array(AppEntitlementRef$outboundSchema)).optional(),
+  requestSchemaIds: z.nullable(z.array(z.string())).optional(),
   resourceIds: z.nullable(z.array(z.string())).optional(),
   resourceTraitIds: z.nullable(z.array(z.string())).optional(),
   resourceTypeIds: z.nullable(z.array(z.string())).optional(),
   riskLevelIds: z.nullable(z.array(z.string())).optional(),
   sourceConnectorId: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    appEntitlementExpandMask: "expandMask",
+  });
 });
 
 export function appEntitlementSearchServiceSearchRequestToJSON(

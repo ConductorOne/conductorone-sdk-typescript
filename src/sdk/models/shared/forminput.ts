@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   RequestSchemaForm,
   RequestSchemaForm$Outbound,
@@ -13,12 +14,15 @@ import {
  * The Form message.
  */
 export type FormInput = {
-  form?: RequestSchemaForm | null | undefined;
+  /**
+   * A form is a collection of fields to be filled out by a user
+   */
+  requestSchemaForm?: RequestSchemaForm | undefined;
 };
 
 /** @internal */
 export type FormInput$Outbound = {
-  form?: RequestSchemaForm$Outbound | null | undefined;
+  form?: RequestSchemaForm$Outbound | undefined;
 };
 
 /** @internal */
@@ -27,7 +31,11 @@ export const FormInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FormInput
 > = z.object({
-  form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
+  requestSchemaForm: RequestSchemaForm$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requestSchemaForm: "form",
+  });
 });
 
 export function formInputToJSON(formInput: FormInput): string {

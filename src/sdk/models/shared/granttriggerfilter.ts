@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -56,27 +55,18 @@ import {
  *   - inclusionListCel
  */
 export type GrantTriggerFilter = {
-  accountFilter?: AccountFilter | null | undefined;
-  grantFilter?: GrantFilter | null | undefined;
   /**
-   * The EntitlementInclusionAll message.
+   * The AccountFilter message.
    */
-  entitlementInclusionAll?: EntitlementInclusionAll | null | undefined;
+  accountFilter?: AccountFilter | undefined;
   /**
-   * The EntitlementInclusionCriteria message.
+   * The GrantFilter message.
    */
-  entitlementInclusionCriteria?:
-    | EntitlementInclusionCriteria
-    | null
-    | undefined;
-  /**
-   * The EntitlementInclusionList message.
-   */
-  entitlementInclusionList?: EntitlementInclusionList | null | undefined;
-  /**
-   * The EntitlementInclusionListCel message.
-   */
-  entitlementInclusionListCel?: EntitlementInclusionListCel | null | undefined;
+  grantFilter?: GrantFilter | undefined;
+  inclusionAll?: EntitlementInclusionAll | null | undefined;
+  inclusionCriteria?: EntitlementInclusionCriteria | null | undefined;
+  inclusionList?: EntitlementInclusionList | null | undefined;
+  inclusionListCel?: EntitlementInclusionListCel | null | undefined;
 };
 
 /** @internal */
@@ -85,26 +75,19 @@ export const GrantTriggerFilter$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accountFilter: z.nullable(AccountFilter$inboundSchema).optional(),
-  grantFilter: z.nullable(GrantFilter$inboundSchema).optional(),
+  accountFilter: AccountFilter$inboundSchema.optional(),
+  grantFilter: GrantFilter$inboundSchema.optional(),
   inclusionAll: z.nullable(EntitlementInclusionAll$inboundSchema).optional(),
   inclusionCriteria: z.nullable(EntitlementInclusionCriteria$inboundSchema)
     .optional(),
   inclusionList: z.nullable(EntitlementInclusionList$inboundSchema).optional(),
   inclusionListCel: z.nullable(EntitlementInclusionListCel$inboundSchema)
     .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "inclusionAll": "entitlementInclusionAll",
-    "inclusionCriteria": "entitlementInclusionCriteria",
-    "inclusionList": "entitlementInclusionList",
-    "inclusionListCel": "entitlementInclusionListCel",
-  });
 });
 /** @internal */
 export type GrantTriggerFilter$Outbound = {
-  accountFilter?: AccountFilter$Outbound | null | undefined;
-  grantFilter?: GrantFilter$Outbound | null | undefined;
+  accountFilter?: AccountFilter$Outbound | undefined;
+  grantFilter?: GrantFilter$Outbound | undefined;
   inclusionAll?: EntitlementInclusionAll$Outbound | null | undefined;
   inclusionCriteria?: EntitlementInclusionCriteria$Outbound | null | undefined;
   inclusionList?: EntitlementInclusionList$Outbound | null | undefined;
@@ -117,25 +100,14 @@ export const GrantTriggerFilter$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GrantTriggerFilter
 > = z.object({
-  accountFilter: z.nullable(AccountFilter$outboundSchema).optional(),
-  grantFilter: z.nullable(GrantFilter$outboundSchema).optional(),
-  entitlementInclusionAll: z.nullable(EntitlementInclusionAll$outboundSchema)
+  accountFilter: AccountFilter$outboundSchema.optional(),
+  grantFilter: GrantFilter$outboundSchema.optional(),
+  inclusionAll: z.nullable(EntitlementInclusionAll$outboundSchema).optional(),
+  inclusionCriteria: z.nullable(EntitlementInclusionCriteria$outboundSchema)
     .optional(),
-  entitlementInclusionCriteria: z.nullable(
-    EntitlementInclusionCriteria$outboundSchema,
-  ).optional(),
-  entitlementInclusionList: z.nullable(EntitlementInclusionList$outboundSchema)
+  inclusionList: z.nullable(EntitlementInclusionList$outboundSchema).optional(),
+  inclusionListCel: z.nullable(EntitlementInclusionListCel$outboundSchema)
     .optional(),
-  entitlementInclusionListCel: z.nullable(
-    EntitlementInclusionListCel$outboundSchema,
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    entitlementInclusionAll: "inclusionAll",
-    entitlementInclusionCriteria: "inclusionCriteria",
-    entitlementInclusionList: "inclusionList",
-    entitlementInclusionListCel: "inclusionListCel",
-  });
 });
 
 export function grantTriggerFilterToJSON(

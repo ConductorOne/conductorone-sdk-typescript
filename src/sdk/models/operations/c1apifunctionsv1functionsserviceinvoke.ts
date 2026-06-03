@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiFunctionsV1FunctionsServiceInvokeRequest = {
-  functionId: string | null;
+  functionId: string;
   functionsServiceInvokeRequest?:
     | shared.FunctionsServiceInvokeRequest
     | undefined;
@@ -39,7 +39,7 @@ export type C1ApiFunctionsV1FunctionsServiceInvokeResponse = {
 
 /** @internal */
 export type C1ApiFunctionsV1FunctionsServiceInvokeRequest$Outbound = {
-  function_id: string | null;
+  function_id: string;
   FunctionsServiceInvokeRequest?:
     | shared.FunctionsServiceInvokeRequest$Outbound
     | undefined;
@@ -52,7 +52,7 @@ export const C1ApiFunctionsV1FunctionsServiceInvokeRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiFunctionsV1FunctionsServiceInvokeRequest
   > = z.object({
-    functionId: z.nullable(z.string()),
+    functionId: z.string(),
     functionsServiceInvokeRequest: shared
       .FunctionsServiceInvokeRequest$outboundSchema.optional(),
   }).transform((v) => {

@@ -12,7 +12,15 @@ import { Automation, Automation$inboundSchema } from "./automation.js";
  * The CreateAutomationResponse message.
  */
 export type AutomationsCreateAutomationResponse = {
-  automation?: Automation | null | undefined;
+  /**
+   * The Automation message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named disabled_reason. Only a single field of the following list may be set at a time:
+   *   - circuitBreaker
+   */
+  automation?: Automation | undefined;
   /**
    * One-time absolute webhook URL for capability URL authentication, shown once at creation time.
    *
@@ -20,7 +28,7 @@ export type AutomationsCreateAutomationResponse = {
    *  Contains the full URL including the embedded token (e.g. https://tenant.conductorone.com/api/v1/webhooks/incoming/{id}/t/{token}).
    *  Populated only when the webhook trigger uses capability URL authentication.
    */
-  webhookCapabilityUrl?: string | undefined;
+  webhookCapabilityUrl?: string | null | undefined;
   /**
    * One-time HMAC shared secret, shown once at creation time.
    *
@@ -36,8 +44,8 @@ export const AutomationsCreateAutomationResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  automation: z.nullable(Automation$inboundSchema).optional(),
-  webhookCapabilityUrl: z.string().optional(),
+  automation: Automation$inboundSchema.optional(),
+  webhookCapabilityUrl: z.nullable(z.string()).optional(),
   webhookHmacSecret: z.nullable(z.string()).optional(),
 });
 

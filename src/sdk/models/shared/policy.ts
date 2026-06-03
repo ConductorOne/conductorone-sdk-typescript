@@ -63,6 +63,19 @@ export type PolicyType = OpenEnum<typeof PolicyType>;
  *  baseline fallback.
  */
 export type Policy = {
+  /**
+   * Key/value metadata. Up to 16 entries; keys 1-128 chars; values 0-256
+   *
+   * @remarks
+   *  chars; URL-safe ASCII. Keys starting with `c1/` are reserved.
+   *
+   *  Updates have PATCH semantics: keys absent from the request are
+   *  preserved; an empty value deletes the key.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
@@ -86,7 +99,7 @@ export type Policy = {
    *  array for conditional routing. If no conditional rules are configured, only
    *  the baseline entry exists.
    */
-  policySteps?: { [k: string]: PolicySteps } | null | undefined;
+  policySteps?: { [k: string]: PolicySteps } | undefined;
   /**
    * The type of this policy (grant, revoke, or certify). The lowercased type
    *
@@ -128,8 +141,19 @@ export type Policy = {
  *  baseline fallback.
  */
 export type PolicyInput = {
-  createdAt?: Date | null | undefined;
-  deletedAt?: Date | null | undefined;
+  /**
+   * Key/value metadata. Up to 16 entries; keys 1-128 chars; values 0-256
+   *
+   * @remarks
+   *  chars; URL-safe ASCII. Keys starting with `c1/` are reserved.
+   *
+   *  Updates have PATCH semantics: keys absent from the request are
+   *  preserved; an empty value deletes the key.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
   /**
    * The description of the Policy.
    */
@@ -147,7 +171,7 @@ export type PolicyInput = {
    *  array for conditional routing. If no conditional rules are configured, only
    *  the baseline entry exists.
    */
-  policySteps?: { [k: string]: PolicyStepsInput } | null | undefined;
+  policySteps?: { [k: string]: PolicyStepsInput } | undefined;
   /**
    * The type of this policy (grant, revoke, or certify). The lowercased type
    *
@@ -173,7 +197,6 @@ export type PolicyInput = {
    *  (or if this array is empty), the baseline entry in policy_steps is used.
    */
   rules?: Array<Rule> | null | undefined;
-  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
@@ -192,6 +215,7 @@ export const PolicyType$outboundSchema: z.ZodType<
 /** @internal */
 export const Policy$inboundSchema: z.ZodType<Policy, z.ZodTypeDef, unknown> = z
   .object({
+    annotations: z.record(z.string()).optional(),
     createdAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
@@ -201,7 +225,7 @@ export const Policy$inboundSchema: z.ZodType<Policy, z.ZodTypeDef, unknown> = z
     description: z.nullable(z.string()).optional(),
     displayName: z.nullable(z.string()).optional(),
     id: z.nullable(z.string()).optional(),
-    policySteps: z.nullable(z.record(PolicySteps$inboundSchema)).optional(),
+    policySteps: z.record(PolicySteps$inboundSchema).optional(),
     policyType: z.nullable(PolicyType$inboundSchema).optional(),
     postActions: z.nullable(z.array(PolicyPostActions$inboundSchema))
       .optional(),
@@ -214,12 +238,13 @@ export const Policy$inboundSchema: z.ZodType<Policy, z.ZodTypeDef, unknown> = z
   });
 /** @internal */
 export type Policy$Outbound = {
+  annotations?: { [k: string]: string } | undefined;
   createdAt?: string | null | undefined;
   deletedAt?: string | null | undefined;
   description?: string | null | undefined;
   displayName?: string | null | undefined;
   id?: string | null | undefined;
-  policySteps?: { [k: string]: PolicySteps$Outbound } | null | undefined;
+  policySteps?: { [k: string]: PolicySteps$Outbound } | undefined;
   policyType?: string | null | undefined;
   postActions?: Array<PolicyPostActions$Outbound> | null | undefined;
   reassignTasksToDelegates?: boolean | null | undefined;
@@ -234,12 +259,13 @@ export const Policy$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Policy
 > = z.object({
+  annotations: z.record(z.string()).optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
   id: z.nullable(z.string()).optional(),
-  policySteps: z.nullable(z.record(PolicySteps$outboundSchema)).optional(),
+  policySteps: z.record(PolicySteps$outboundSchema).optional(),
   policyType: z.nullable(PolicyType$outboundSchema).optional(),
   postActions: z.nullable(z.array(PolicyPostActions$outboundSchema)).optional(),
   reassignTasksToDelegates: z.nullable(z.boolean()).optional(),
@@ -263,16 +289,14 @@ export function policyFromJSON(
 
 /** @internal */
 export type PolicyInput$Outbound = {
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
+  annotations?: { [k: string]: string } | undefined;
   description?: string | null | undefined;
   displayName?: string | null | undefined;
-  policySteps?: { [k: string]: PolicyStepsInput$Outbound } | null | undefined;
+  policySteps?: { [k: string]: PolicyStepsInput$Outbound } | undefined;
   policyType?: string | null | undefined;
   postActions?: Array<PolicyPostActions$Outbound> | null | undefined;
   reassignTasksToDelegates?: boolean | null | undefined;
   rules?: Array<Rule$Outbound> | null | undefined;
-  updatedAt?: string | null | undefined;
 };
 
 /** @internal */
@@ -281,16 +305,14 @@ export const PolicyInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PolicyInput
 > = z.object({
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  annotations: z.record(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
-  policySteps: z.nullable(z.record(PolicyStepsInput$outboundSchema)).optional(),
+  policySteps: z.record(PolicyStepsInput$outboundSchema).optional(),
   policyType: z.nullable(PolicyType$outboundSchema).optional(),
   postActions: z.nullable(z.array(PolicyPostActions$outboundSchema)).optional(),
   reassignTasksToDelegates: z.nullable(z.boolean()).optional(),
   rules: z.nullable(z.array(Rule$outboundSchema)).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function policyInputToJSON(policyInput: PolicyInput): string {

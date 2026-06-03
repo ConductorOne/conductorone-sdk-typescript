@@ -25,6 +25,8 @@ export const ExecutionStates = {
   AutomationExecutionStateError: "AUTOMATION_EXECUTION_STATE_ERROR",
   AutomationExecutionStateTerminate: "AUTOMATION_EXECUTION_STATE_TERMINATE",
   AutomationExecutionStateWaiting: "AUTOMATION_EXECUTION_STATE_WAITING",
+  AutomationExecutionStatePausedByCircuitBreaker:
+    "AUTOMATION_EXECUTION_STATE_PAUSED_BY_CIRCUIT_BREAKER",
 } as const;
 export type ExecutionStates = OpenEnum<typeof ExecutionStates>;
 
@@ -51,11 +53,11 @@ export type SearchAllAutomationExecutionsRequest = {
   /**
    * Maximum number of results to return per page.
    */
-  pageSize?: number | undefined;
+  pageSize?: number | null | undefined;
   /**
    * Pagination token from a previous SearchAllAutomationExecutionsResponse.
    */
-  pageToken?: string | undefined;
+  pageToken?: string | null | undefined;
   /**
    * Filter to executions where one or more C1 users are subjects.
    */
@@ -75,8 +77,8 @@ export type SearchAllAutomationExecutionsRequest$Outbound = {
   automationTemplateIds?: Array<string> | null | undefined;
   executionStates?: Array<string> | null | undefined;
   expandMask?: AutomationExecutionExpandMask$Outbound | undefined;
-  pageSize?: number | undefined;
-  pageToken?: string | undefined;
+  pageSize?: number | null | undefined;
+  pageToken?: string | null | undefined;
   subjectUserIds?: Array<string> | null | undefined;
 };
 
@@ -92,8 +94,8 @@ export const SearchAllAutomationExecutionsRequest$outboundSchema: z.ZodType<
     .optional(),
   automationExecutionExpandMask: AutomationExecutionExpandMask$outboundSchema
     .optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
+  pageSize: z.nullable(z.number().int()).optional(),
+  pageToken: z.nullable(z.string()).optional(),
   subjectUserIds: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {

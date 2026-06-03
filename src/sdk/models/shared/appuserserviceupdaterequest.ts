@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   AppUserInput,
   AppUserInput$Outbound,
@@ -18,15 +19,21 @@ import {
  * The AppUserServiceUpdateRequest message contains the app user and the fields to be updated.
  */
 export type AppUserServiceUpdateRequest = {
-  appUser?: AppUserInput | null | undefined;
-  expandMask?: AppUserExpandMask | null | undefined;
+  /**
+   * Application User that represents an account in the application.
+   */
+  appUser?: AppUserInput | undefined;
+  /**
+   * The AppUserExpandMask message contains a list of paths to expand in the response.
+   */
+  appUserExpandMask?: AppUserExpandMask | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type AppUserServiceUpdateRequest$Outbound = {
-  appUser?: AppUserInput$Outbound | null | undefined;
-  expandMask?: AppUserExpandMask$Outbound | null | undefined;
+  appUser?: AppUserInput$Outbound | undefined;
+  expandMask?: AppUserExpandMask$Outbound | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -36,9 +43,13 @@ export const AppUserServiceUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppUserServiceUpdateRequest
 > = z.object({
-  appUser: z.nullable(AppUserInput$outboundSchema).optional(),
-  expandMask: z.nullable(AppUserExpandMask$outboundSchema).optional(),
+  appUser: AppUserInput$outboundSchema.optional(),
+  appUserExpandMask: AppUserExpandMask$outboundSchema.optional(),
   updateMask: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    appUserExpandMask: "expandMask",
+  });
 });
 
 export function appUserServiceUpdateRequestToJSON(

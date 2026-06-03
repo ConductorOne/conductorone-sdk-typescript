@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -65,8 +66,11 @@ export type FormInstanceState = OpenEnum<typeof FormInstanceState>;
  */
 export type FormInstance = {
   completed?: FormCompletedAction | null | undefined;
-  data?: { [k: string]: any } | null | undefined;
-  form?: RequestSchemaForm | null | undefined;
+  data?: { [k: string]: any } | undefined;
+  /**
+   * A form is a collection of fields to be filled out by a user
+   */
+  requestSchemaForm?: RequestSchemaForm | undefined;
   reassigned?: ReassignedAction | null | undefined;
   restarted?: RestartAction | null | undefined;
   skipped?: SkippedAction | null | undefined;
@@ -96,18 +100,22 @@ export const FormInstance$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   completed: z.nullable(FormCompletedAction$inboundSchema).optional(),
-  data: z.nullable(z.record(z.any())).optional(),
-  form: z.nullable(RequestSchemaForm$inboundSchema).optional(),
+  data: z.record(z.any()).optional(),
+  form: RequestSchemaForm$inboundSchema.optional(),
   reassigned: z.nullable(ReassignedAction$inboundSchema).optional(),
   restarted: z.nullable(RestartAction$inboundSchema).optional(),
   skipped: z.nullable(SkippedAction$inboundSchema).optional(),
   state: z.nullable(FormInstanceState$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "form": "requestSchemaForm",
+  });
 });
 /** @internal */
 export type FormInstance$Outbound = {
   completed?: FormCompletedAction$Outbound | null | undefined;
-  data?: { [k: string]: any } | null | undefined;
-  form?: RequestSchemaForm$Outbound | null | undefined;
+  data?: { [k: string]: any } | undefined;
+  form?: RequestSchemaForm$Outbound | undefined;
   reassigned?: ReassignedAction$Outbound | null | undefined;
   restarted?: RestartAction$Outbound | null | undefined;
   skipped?: SkippedAction$Outbound | null | undefined;
@@ -121,12 +129,16 @@ export const FormInstance$outboundSchema: z.ZodType<
   FormInstance
 > = z.object({
   completed: z.nullable(FormCompletedAction$outboundSchema).optional(),
-  data: z.nullable(z.record(z.any())).optional(),
-  form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
+  data: z.record(z.any()).optional(),
+  requestSchemaForm: RequestSchemaForm$outboundSchema.optional(),
   reassigned: z.nullable(ReassignedAction$outboundSchema).optional(),
   restarted: z.nullable(RestartAction$outboundSchema).optional(),
   skipped: z.nullable(SkippedAction$outboundSchema).optional(),
   state: z.nullable(FormInstanceState$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requestSchemaForm: "form",
+  });
 });
 
 export function formInstanceToJSON(formInstance: FormInstance): string {

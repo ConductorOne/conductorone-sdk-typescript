@@ -15,7 +15,16 @@ import {
  * The UpdateStepUpProviderSecretResponse message.
  */
 export type UpdateStepUpProviderSecretResponse = {
-  stepUpProvider?: StepUpProvider | null | undefined;
+  /**
+   * StepUpProvider represents a configured step-up authentication integration (e.g., Duo, custom OIDC).
+   *
+   * @remarks
+   *
+   * This message contains a oneof named settings. Only a single field of the following list may be set at a time:
+   *   - oauth2
+   *   - microsoft
+   */
+  stepUpProvider?: StepUpProvider | undefined;
 };
 
 /** @internal */
@@ -24,7 +33,7 @@ export const UpdateStepUpProviderSecretResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  stepUpProvider: z.nullable(StepUpProvider$inboundSchema).optional(),
+  stepUpProvider: StepUpProvider$inboundSchema.optional(),
 });
 
 export function updateStepUpProviderSecretResponseFromJSON(

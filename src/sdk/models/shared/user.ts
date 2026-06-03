@@ -166,8 +166,8 @@ export type User = {
   /**
    * The origin of the user, describing who owns the user's lifecycle.
    */
-  origin?: Origin | undefined;
-  profile?: { [k: string]: any } | null | undefined;
+  origin?: Origin | null | undefined;
+  profile?: { [k: string]: any } | undefined;
   /**
    * A list of unique identifiers that maps to ConductorOne's user roles let you assign users permissions tailored to the work they do in the software.
    */
@@ -199,13 +199,10 @@ export type User = {
  * The User object provides all of the details for an user, as well as some configuration.
  */
 export type UserInput = {
-  createdAt?: Date | null | undefined;
   /**
    * The id of the user to whom tasks will be automatically reassigned to.
    */
   delegatedUserId?: string | null | undefined;
-  deletedAt?: Date | null | undefined;
-  profile?: { [k: string]: any } | null | undefined;
   /**
    * A list of unique identifiers that maps to ConductorOne's user roles let you assign users permissions tailored to the work they do in the software.
    */
@@ -214,7 +211,6 @@ export type UserInput = {
    * The status of the user in the system.
    */
   status?: UserSchemasStatus | null | undefined;
-  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
@@ -290,8 +286,8 @@ export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> = z
     managerSources: z.nullable(
       z.array(UserAttributeMappingSource$inboundSchema),
     ).optional(),
-    origin: Origin$inboundSchema.optional(),
-    profile: z.nullable(z.record(z.any())).optional(),
+    origin: z.nullable(Origin$inboundSchema).optional(),
+    profile: z.record(z.any()).optional(),
     roleIds: z.nullable(z.array(z.string())).optional(),
     status: z.nullable(UserSchemasStatus$inboundSchema).optional(),
     type: z.nullable(Type$inboundSchema).optional(),
@@ -317,13 +313,9 @@ export function userFromJSON(
 
 /** @internal */
 export type UserInput$Outbound = {
-  createdAt?: string | null | undefined;
   delegatedUserId?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  profile?: { [k: string]: any } | null | undefined;
   roleIds?: Array<string> | null | undefined;
   status?: string | null | undefined;
-  updatedAt?: string | null | undefined;
 };
 
 /** @internal */
@@ -332,13 +324,9 @@ export const UserInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UserInput
 > = z.object({
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   delegatedUserId: z.nullable(z.string()).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  profile: z.nullable(z.record(z.any())).optional(),
   roleIds: z.nullable(z.array(z.string())).optional(),
   status: z.nullable(UserSchemasStatus$outboundSchema).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function userInputToJSON(userInput: UserInput): string {

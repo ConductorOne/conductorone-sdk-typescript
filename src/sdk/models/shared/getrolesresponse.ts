@@ -12,7 +12,10 @@ import { Role, Role$inboundSchema } from "./role.js";
  * The GetRolesResponse message contains the retrieved role.
  */
 export type GetRolesResponse = {
-  role?: Role | null | undefined;
+  /**
+   * Role is a role that can be assigned to a user in ConductorOne.
+   */
+  role?: Role | undefined;
 };
 
 /** @internal */
@@ -21,7 +24,7 @@ export const GetRolesResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  role: z.nullable(Role$inboundSchema).optional(),
+  role: Role$inboundSchema.optional(),
 });
 
 export function getRolesResponseFromJSON(

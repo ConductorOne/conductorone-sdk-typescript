@@ -41,7 +41,10 @@ export type DirectoryServiceCreateRequest = {
    */
   appId?: string | null | undefined;
   celExpression?: DirectoryAccountFilterCel | null | undefined;
-  expandMask?: DirectoryExpandMask | null | undefined;
+  /**
+   * The fields to be included in the directory response.
+   */
+  directoryExpandMask?: DirectoryExpandMask | undefined;
   /**
    * DirectoryMergeConfig configures how AppUsers from this directory are matched to C1 Users.
    */
@@ -53,7 +56,7 @@ export type DirectoryServiceCreateRequest$Outbound = {
   all?: DirectoryAccountFilterAll$Outbound | null | undefined;
   appId?: string | null | undefined;
   celExpression?: DirectoryAccountFilterCel$Outbound | null | undefined;
-  expandMask?: DirectoryExpandMask$Outbound | null | undefined;
+  expandMask?: DirectoryExpandMask$Outbound | undefined;
   mergeConfig?: DirectoryMergeConfig$Outbound | undefined;
 };
 
@@ -67,10 +70,11 @@ export const DirectoryServiceCreateRequest$outboundSchema: z.ZodType<
   appId: z.nullable(z.string()).optional(),
   celExpression: z.nullable(DirectoryAccountFilterCel$outboundSchema)
     .optional(),
-  expandMask: z.nullable(DirectoryExpandMask$outboundSchema).optional(),
+  directoryExpandMask: DirectoryExpandMask$outboundSchema.optional(),
   directoryMergeConfig: DirectoryMergeConfig$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
+    directoryExpandMask: "expandMask",
     directoryMergeConfig: "mergeConfig",
   });
 });

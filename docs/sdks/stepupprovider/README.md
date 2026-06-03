@@ -256,7 +256,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 
 async function run() {
   const result = await conductoroneSDKTypescript.stepUpProvider.delete({
-    id: null,
+    id: "<id>",
   });
 
   console.log(result);
@@ -284,7 +284,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 
 async function run() {
   const res = await stepUpProviderDelete(conductoroneSDKTypescript, {
-    id: null,
+    id: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;

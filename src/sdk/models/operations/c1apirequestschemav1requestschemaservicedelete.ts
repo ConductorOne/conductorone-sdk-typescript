@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest = {
-  requestSchemaId: string | null;
+  requestSchemaId: string;
   requestSchemaServiceDeleteRequest?:
     | shared.RequestSchemaServiceDeleteRequest
     | undefined;
@@ -39,7 +39,7 @@ export type C1ApiRequestSchemaV1RequestSchemaServiceDeleteResponse = {
 
 /** @internal */
 export type C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest$Outbound = {
-  request_schema_id: string | null;
+  request_schema_id: string;
   RequestSchemaServiceDeleteRequest?:
     | shared.RequestSchemaServiceDeleteRequest$Outbound
     | undefined;
@@ -52,7 +52,7 @@ export const C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest$outboundSchem
     z.ZodTypeDef,
     C1ApiRequestSchemaV1RequestSchemaServiceDeleteRequest
   > = z.object({
-    requestSchemaId: z.nullable(z.string()),
+    requestSchemaId: z.string(),
     requestSchemaServiceDeleteRequest: shared
       .RequestSchemaServiceDeleteRequest$outboundSchema.optional(),
   }).transform((v) => {

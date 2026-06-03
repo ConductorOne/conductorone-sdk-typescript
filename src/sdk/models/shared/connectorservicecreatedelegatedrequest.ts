@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$Outbound,
@@ -27,7 +28,10 @@ export type ConnectorServiceCreateDelegatedRequest = {
    * Sets entitlement owners on the app.
    */
   appEntitlementOwnerRefs?: Array<AppEntitlementRef> | null | undefined;
-  appManagedStateBindingRef?: AppManagedStateBindingRef | null | undefined;
+  /**
+   * The AppManagedStateBindingRef message.
+   */
+  appManagedStateBindingRef?: AppManagedStateBindingRef | undefined;
   /**
    * The catalogId describes which catalog entry this connector is an instance of. For example, every Okta connector will have the same catalogId indicating it is an Okta connector.
    */
@@ -40,7 +44,10 @@ export type ConnectorServiceCreateDelegatedRequest = {
    * The displayName of the connector.
    */
   displayName?: string | null | undefined;
-  expandMask?: ConnectorExpandMask | null | undefined;
+  /**
+   * The ConnectorExpandMask is used to expand related objects on a connector.
+   */
+  connectorExpandMask?: ConnectorExpandMask | undefined;
   /**
    * The userIds field is used to define the integration owners of the connector.
    */
@@ -53,14 +60,11 @@ export type ConnectorServiceCreateDelegatedRequest$Outbound = {
     | Array<AppEntitlementRef$Outbound>
     | null
     | undefined;
-  appManagedStateBindingRef?:
-    | AppManagedStateBindingRef$Outbound
-    | null
-    | undefined;
+  appManagedStateBindingRef?: AppManagedStateBindingRef$Outbound | undefined;
   catalogId?: string | null | undefined;
   description?: string | null | undefined;
   displayName?: string | null | undefined;
-  expandMask?: ConnectorExpandMask$Outbound | null | undefined;
+  expandMask?: ConnectorExpandMask$Outbound | undefined;
   userIds?: Array<string> | null | undefined;
 };
 
@@ -72,14 +76,17 @@ export const ConnectorServiceCreateDelegatedRequest$outboundSchema: z.ZodType<
 > = z.object({
   appEntitlementOwnerRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
     .optional(),
-  appManagedStateBindingRef: z.nullable(
-    AppManagedStateBindingRef$outboundSchema,
-  ).optional(),
+  appManagedStateBindingRef: AppManagedStateBindingRef$outboundSchema
+    .optional(),
   catalogId: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(ConnectorExpandMask$outboundSchema).optional(),
+  connectorExpandMask: ConnectorExpandMask$outboundSchema.optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    connectorExpandMask: "expandMask",
+  });
 });
 
 export function connectorServiceCreateDelegatedRequestToJSON(

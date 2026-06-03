@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -50,7 +51,10 @@ export type AppEntitlementSearchServiceSearchGrantsRequest = {
    * Filter for entitlements whose slug is in this list (e.g. "enrollment" for access profiles)
    */
   entitlementSlugs?: Array<string> | null | undefined;
-  expandMask?: AppEntitlementExpandMask | null | undefined;
+  /**
+   * The app entitlement expand mask allows the user to get additional information when getting responses containing app entitlement views.
+   */
+  appEntitlementExpandMask?: AppEntitlementExpandMask | undefined;
   /**
    * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
    */
@@ -96,7 +100,7 @@ export type AppEntitlementSearchServiceSearchGrantsRequest$Outbound = {
   appUserIds?: Array<string> | null | undefined;
   entitlementRefs?: Array<AppEntitlementRef$Outbound> | null | undefined;
   entitlementSlugs?: Array<string> | null | undefined;
-  expandMask?: AppEntitlementExpandMask$Outbound | null | undefined;
+  expandMask?: AppEntitlementExpandMask$Outbound | undefined;
   pageSize?: number | null | undefined;
   pageToken?: string | null | undefined;
   purpose?: Array<string> | null | undefined;
@@ -117,7 +121,8 @@ export const AppEntitlementSearchServiceSearchGrantsRequest$outboundSchema:
     entitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
       .optional(),
     entitlementSlugs: z.nullable(z.array(z.string())).optional(),
-    expandMask: z.nullable(AppEntitlementExpandMask$outboundSchema).optional(),
+    appEntitlementExpandMask: AppEntitlementExpandMask$outboundSchema
+      .optional(),
     pageSize: z.nullable(z.number().int()).optional(),
     pageToken: z.nullable(z.string()).optional(),
     purpose: z.nullable(
@@ -128,6 +133,10 @@ export const AppEntitlementSearchServiceSearchGrantsRequest$outboundSchema:
     resourceIds: z.nullable(z.array(z.string())).optional(),
     resourceTypeIds: z.nullable(z.array(z.string())).optional(),
     userId: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      appEntitlementExpandMask: "expandMask",
+    });
   });
 
 export function appEntitlementSearchServiceSearchGrantsRequestToJSON(

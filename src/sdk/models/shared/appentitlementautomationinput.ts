@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   AppEntitlementAutomationLastRunStatusInput,
   AppEntitlementAutomationLastRunStatusInput$Outbound,
@@ -43,8 +44,6 @@ import {
 export type AppEntitlementAutomationInput = {
   basic?: AppEntitlementAutomationRuleBasic | null | undefined;
   cel?: AppEntitlementAutomationRuleCEL | null | undefined;
-  createdAt?: Date | null | undefined;
-  deletedAt?: Date | null | undefined;
   /**
    * The description of the app entitlement.
    */
@@ -54,17 +53,19 @@ export type AppEntitlementAutomationInput = {
    */
   displayName?: string | null | undefined;
   entitlements?: AppEntitlementAutomationRuleEntitlement | null | undefined;
-  lastRunStatus?: AppEntitlementAutomationLastRunStatusInput | null | undefined;
+  /**
+   * The AppEntitlementAutomationLastRunStatus message.
+   */
+  appEntitlementAutomationLastRunStatus?:
+    | AppEntitlementAutomationLastRunStatusInput
+    | undefined;
   none?: AppEntitlementAutomationRuleNone | null | undefined;
-  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
 export type AppEntitlementAutomationInput$Outbound = {
   basic?: AppEntitlementAutomationRuleBasic$Outbound | null | undefined;
   cel?: AppEntitlementAutomationRuleCEL$Outbound | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
   description?: string | null | undefined;
   displayName?: string | null | undefined;
   entitlements?:
@@ -73,10 +74,8 @@ export type AppEntitlementAutomationInput$Outbound = {
     | undefined;
   lastRunStatus?:
     | AppEntitlementAutomationLastRunStatusInput$Outbound
-    | null
     | undefined;
   none?: AppEntitlementAutomationRuleNone$Outbound | null | undefined;
-  updatedAt?: string | null | undefined;
 };
 
 /** @internal */
@@ -88,18 +87,18 @@ export const AppEntitlementAutomationInput$outboundSchema: z.ZodType<
   basic: z.nullable(AppEntitlementAutomationRuleBasic$outboundSchema)
     .optional(),
   cel: z.nullable(AppEntitlementAutomationRuleCEL$outboundSchema).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
   entitlements: z.nullable(
     AppEntitlementAutomationRuleEntitlement$outboundSchema,
   ).optional(),
-  lastRunStatus: z.nullable(
-    AppEntitlementAutomationLastRunStatusInput$outboundSchema,
-  ).optional(),
+  appEntitlementAutomationLastRunStatus:
+    AppEntitlementAutomationLastRunStatusInput$outboundSchema.optional(),
   none: z.nullable(AppEntitlementAutomationRuleNone$outboundSchema).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    appEntitlementAutomationLastRunStatus: "lastRunStatus",
+  });
 });
 
 export function appEntitlementAutomationInputToJSON(

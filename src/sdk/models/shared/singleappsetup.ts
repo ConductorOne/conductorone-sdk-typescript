@@ -14,7 +14,7 @@ export type SingleAppSetup = {
   /**
    * The appId field.
    */
-  appId?: string | undefined;
+  appId?: string | null | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const SingleAppSetup$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.string().optional(),
+  appId: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type SingleAppSetup$Outbound = {
-  appId?: string | undefined;
+  appId?: string | null | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const SingleAppSetup$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SingleAppSetup
 > = z.object({
-  appId: z.string().optional(),
+  appId: z.nullable(z.string()).optional(),
 });
 
 export function singleAppSetupToJSON(singleAppSetup: SingleAppSetup): string {

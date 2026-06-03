@@ -18,23 +18,17 @@ import {
  *   - datasource
  */
 export type ExporterInput = {
-  createdAt?: Date | null | undefined;
   datasource?: ExportToDatasource | null | undefined;
-  deletedAt?: Date | null | undefined;
   /**
    * The displayName field.
    */
   displayName?: string | null | undefined;
-  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
 export type ExporterInput$Outbound = {
-  createdAt?: string | null | undefined;
   datasource?: ExportToDatasource$Outbound | null | undefined;
-  deletedAt?: string | null | undefined;
   displayName?: string | null | undefined;
-  updatedAt?: string | null | undefined;
 };
 
 /** @internal */
@@ -43,11 +37,8 @@ export const ExporterInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ExporterInput
 > = z.object({
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   datasource: z.nullable(ExportToDatasource$outboundSchema).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   displayName: z.nullable(z.string()).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function exporterInputToJSON(exporterInput: ExporterInput): string {

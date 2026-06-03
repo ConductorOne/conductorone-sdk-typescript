@@ -99,7 +99,7 @@ export type SlackChannelSettings = {
   /**
    * The enabled field.
    */
-  enabled?: boolean | undefined;
+  enabled?: boolean | null | undefined;
   /**
    * The ExpiringAccessPreference message.
    */
@@ -107,7 +107,7 @@ export type SlackChannelSettings = {
   /**
    * The isConfigured field.
    */
-  isConfigured?: boolean | undefined;
+  isConfigured?: boolean | null | undefined;
   /**
    * The ProvisioningRequestPreference message.
    */
@@ -134,9 +134,9 @@ export const SlackChannelSettings$inboundSchema: z.ZodType<
   completion: CompletionPreference$inboundSchema.optional(),
   connectorIssues: ConnectorIssuesPreference$inboundSchema.optional(),
   digest: DigestPreference$inboundSchema.optional(),
-  enabled: z.boolean().optional(),
+  enabled: z.nullable(z.boolean()).optional(),
   expiringAccess: ExpiringAccessPreference$inboundSchema.optional(),
-  isConfigured: z.boolean().optional(),
+  isConfigured: z.nullable(z.boolean()).optional(),
   provisioningRequest: ProvisioningRequestPreference$inboundSchema.optional(),
   reviews: ReviewsPreference$inboundSchema.optional(),
   taskReminders: TaskRemindersPreference$inboundSchema.optional(),
@@ -162,9 +162,9 @@ export type SlackChannelSettings$Outbound = {
   completion?: CompletionPreference$Outbound | undefined;
   connectorIssues?: ConnectorIssuesPreference$Outbound | undefined;
   digest?: DigestPreference$Outbound | undefined;
-  enabled?: boolean | undefined;
+  enabled?: boolean | null | undefined;
   expiringAccess?: ExpiringAccessPreference$Outbound | undefined;
-  isConfigured?: boolean | undefined;
+  isConfigured?: boolean | null | undefined;
   provisioningRequest?: ProvisioningRequestPreference$Outbound | undefined;
   reviews?: ReviewsPreference$Outbound | undefined;
   taskReminders?: TaskRemindersPreference$Outbound | undefined;
@@ -185,9 +185,9 @@ export const SlackChannelSettings$outboundSchema: z.ZodType<
   connectorIssuesPreference: ConnectorIssuesPreference$outboundSchema
     .optional(),
   digestPreference: DigestPreference$outboundSchema.optional(),
-  enabled: z.boolean().optional(),
+  enabled: z.nullable(z.boolean()).optional(),
   expiringAccessPreference: ExpiringAccessPreference$outboundSchema.optional(),
-  isConfigured: z.boolean().optional(),
+  isConfigured: z.nullable(z.boolean()).optional(),
   provisioningRequestPreference: ProvisioningRequestPreference$outboundSchema
     .optional(),
   reviewsPreference: ReviewsPreference$outboundSchema.optional(),

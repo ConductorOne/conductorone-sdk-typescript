@@ -18,7 +18,7 @@ export type SearchEmailAuditEventsResponse = {
   /**
    * Token for next page. Empty when no more pages.
    */
-  nextPageToken?: string | undefined;
+  nextPageToken?: string | null | undefined;
 };
 
 /** @internal */
@@ -28,7 +28,7 @@ export const SearchEmailAuditEventsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   list: z.nullable(z.array(z.record(z.any()))).optional(),
-  nextPageToken: z.string().optional(),
+  nextPageToken: z.nullable(z.string()).optional(),
 });
 
 export function searchEmailAuditEventsResponseFromJSON(

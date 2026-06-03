@@ -11,7 +11,7 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppResourceTypeServiceCreateManuallyManagedResourceTypeRequest =
   {
-    appId: string | null;
+    appId: string;
     createManuallyManagedResourceTypeRequest?:
       | shared.CreateManuallyManagedResourceTypeRequest
       | undefined;
@@ -42,7 +42,7 @@ export type C1ApiAppV1AppResourceTypeServiceCreateManuallyManagedResourceTypeRes
 /** @internal */
 export type C1ApiAppV1AppResourceTypeServiceCreateManuallyManagedResourceTypeRequest$Outbound =
   {
-    app_id: string | null;
+    app_id: string;
     CreateManuallyManagedResourceTypeRequest?:
       | shared.CreateManuallyManagedResourceTypeRequest$Outbound
       | undefined;
@@ -55,7 +55,7 @@ export const C1ApiAppV1AppResourceTypeServiceCreateManuallyManagedResourceTypeRe
     z.ZodTypeDef,
     C1ApiAppV1AppResourceTypeServiceCreateManuallyManagedResourceTypeRequest
   > = z.object({
-    appId: z.nullable(z.string()),
+    appId: z.string(),
     createManuallyManagedResourceTypeRequest: shared
       .CreateManuallyManagedResourceTypeRequest$outboundSchema.optional(),
   }).transform((v) => {

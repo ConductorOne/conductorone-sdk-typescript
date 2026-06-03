@@ -9,13 +9,16 @@ import { AppInput, AppInput$Outbound, AppInput$outboundSchema } from "./app.js";
  * The UpdateAppRequest message contains the app to update and the fields to update.
  */
 export type UpdateAppRequest = {
-  app?: AppInput | null | undefined;
+  /**
+   * The App object provides all of the details for an app, as well as some configuration.
+   */
+  app?: AppInput | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type UpdateAppRequest$Outbound = {
-  app?: AppInput$Outbound | null | undefined;
+  app?: AppInput$Outbound | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -25,7 +28,7 @@ export const UpdateAppRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateAppRequest
 > = z.object({
-  app: z.nullable(AppInput$outboundSchema).optional(),
+  app: AppInput$outboundSchema.optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 

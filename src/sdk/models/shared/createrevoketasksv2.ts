@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -31,6 +30,12 @@ import {
   EntitlementExclusionNone$Outbound,
   EntitlementExclusionNone$outboundSchema,
 } from "./entitlementexclusionnone.js";
+import {
+  EntitlementInclusionAccessOnly,
+  EntitlementInclusionAccessOnly$inboundSchema,
+  EntitlementInclusionAccessOnly$Outbound,
+  EntitlementInclusionAccessOnly$outboundSchema,
+} from "./entitlementinclusionaccessonly.js";
 import {
   EntitlementInclusionAll,
   EntitlementInclusionAll$inboundSchema,
@@ -77,6 +82,7 @@ import {
  *   - inclusionAll
  *   - inclusionCriteria
  *   - inclusionListCel
+ *   - inclusionAccessOnly
  *
  * This message contains a oneof named exclusion. Only a single field of the following list may be set at a time:
  *   - exclusionNone
@@ -85,44 +91,15 @@ import {
  *   - exclusionListCel
  */
 export type CreateRevokeTasksV2 = {
-  /**
-   * The EntitlementExclusionCriteria message.
-   */
-  entitlementExclusionCriteria?:
-    | EntitlementExclusionCriteria
-    | null
-    | undefined;
-  /**
-   * The EntitlementExclusionList message.
-   */
-  entitlementExclusionList?: EntitlementExclusionList | null | undefined;
-  /**
-   * The EntitlementExclusionListCel message.
-   */
-  entitlementExclusionListCel?: EntitlementExclusionListCel | null | undefined;
-  /**
-   * The EntitlementExclusionNone message.
-   */
-  entitlementExclusionNone?: EntitlementExclusionNone | null | undefined;
-  /**
-   * The EntitlementInclusionAll message.
-   */
-  entitlementInclusionAll?: EntitlementInclusionAll | null | undefined;
-  /**
-   * The EntitlementInclusionCriteria message.
-   */
-  entitlementInclusionCriteria?:
-    | EntitlementInclusionCriteria
-    | null
-    | undefined;
-  /**
-   * The EntitlementInclusionList message.
-   */
-  entitlementInclusionList?: EntitlementInclusionList | null | undefined;
-  /**
-   * The EntitlementInclusionListCel message.
-   */
-  entitlementInclusionListCel?: EntitlementInclusionListCel | null | undefined;
+  exclusionCriteria?: EntitlementExclusionCriteria | null | undefined;
+  exclusionList?: EntitlementExclusionList | null | undefined;
+  exclusionListCel?: EntitlementExclusionListCel | null | undefined;
+  exclusionNone?: EntitlementExclusionNone | null | undefined;
+  inclusionAccessOnly?: EntitlementInclusionAccessOnly | null | undefined;
+  inclusionAll?: EntitlementInclusionAll | null | undefined;
+  inclusionCriteria?: EntitlementInclusionCriteria | null | undefined;
+  inclusionList?: EntitlementInclusionList | null | undefined;
+  inclusionListCel?: EntitlementInclusionListCel | null | undefined;
   /**
    * The useSubjectUser field.
    *
@@ -139,10 +116,7 @@ export type CreateRevokeTasksV2 = {
    * See the documentation for `c1.api.automations.v1.CreateRevokeTasksV2` for more details.
    */
   userIdCel?: string | null | undefined;
-  /**
-   * A reference to a user.
-   */
-  userRef?: UserRef | undefined;
+  userRef?: UserRef | null | undefined;
 };
 
 /** @internal */
@@ -157,6 +131,8 @@ export const CreateRevokeTasksV2$inboundSchema: z.ZodType<
   exclusionListCel: z.nullable(EntitlementExclusionListCel$inboundSchema)
     .optional(),
   exclusionNone: z.nullable(EntitlementExclusionNone$inboundSchema).optional(),
+  inclusionAccessOnly: z.nullable(EntitlementInclusionAccessOnly$inboundSchema)
+    .optional(),
   inclusionAll: z.nullable(EntitlementInclusionAll$inboundSchema).optional(),
   inclusionCriteria: z.nullable(EntitlementInclusionCriteria$inboundSchema)
     .optional(),
@@ -165,18 +141,7 @@ export const CreateRevokeTasksV2$inboundSchema: z.ZodType<
     .optional(),
   useSubjectUser: z.nullable(z.boolean()).optional(),
   userIdCel: z.nullable(z.string()).optional(),
-  userRef: UserRef$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "exclusionCriteria": "entitlementExclusionCriteria",
-    "exclusionList": "entitlementExclusionList",
-    "exclusionListCel": "entitlementExclusionListCel",
-    "exclusionNone": "entitlementExclusionNone",
-    "inclusionAll": "entitlementInclusionAll",
-    "inclusionCriteria": "entitlementInclusionCriteria",
-    "inclusionList": "entitlementInclusionList",
-    "inclusionListCel": "entitlementInclusionListCel",
-  });
+  userRef: z.nullable(UserRef$inboundSchema).optional(),
 });
 /** @internal */
 export type CreateRevokeTasksV2$Outbound = {
@@ -184,13 +149,17 @@ export type CreateRevokeTasksV2$Outbound = {
   exclusionList?: EntitlementExclusionList$Outbound | null | undefined;
   exclusionListCel?: EntitlementExclusionListCel$Outbound | null | undefined;
   exclusionNone?: EntitlementExclusionNone$Outbound | null | undefined;
+  inclusionAccessOnly?:
+    | EntitlementInclusionAccessOnly$Outbound
+    | null
+    | undefined;
   inclusionAll?: EntitlementInclusionAll$Outbound | null | undefined;
   inclusionCriteria?: EntitlementInclusionCriteria$Outbound | null | undefined;
   inclusionList?: EntitlementInclusionList$Outbound | null | undefined;
   inclusionListCel?: EntitlementInclusionListCel$Outbound | null | undefined;
   useSubjectUser?: boolean | null | undefined;
   userIdCel?: string | null | undefined;
-  userRef?: UserRef$Outbound | undefined;
+  userRef?: UserRef$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -199,40 +168,23 @@ export const CreateRevokeTasksV2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateRevokeTasksV2
 > = z.object({
-  entitlementExclusionCriteria: z.nullable(
-    EntitlementExclusionCriteria$outboundSchema,
-  ).optional(),
-  entitlementExclusionList: z.nullable(EntitlementExclusionList$outboundSchema)
+  exclusionCriteria: z.nullable(EntitlementExclusionCriteria$outboundSchema)
     .optional(),
-  entitlementExclusionListCel: z.nullable(
-    EntitlementExclusionListCel$outboundSchema,
-  ).optional(),
-  entitlementExclusionNone: z.nullable(EntitlementExclusionNone$outboundSchema)
+  exclusionList: z.nullable(EntitlementExclusionList$outboundSchema).optional(),
+  exclusionListCel: z.nullable(EntitlementExclusionListCel$outboundSchema)
     .optional(),
-  entitlementInclusionAll: z.nullable(EntitlementInclusionAll$outboundSchema)
+  exclusionNone: z.nullable(EntitlementExclusionNone$outboundSchema).optional(),
+  inclusionAccessOnly: z.nullable(EntitlementInclusionAccessOnly$outboundSchema)
     .optional(),
-  entitlementInclusionCriteria: z.nullable(
-    EntitlementInclusionCriteria$outboundSchema,
-  ).optional(),
-  entitlementInclusionList: z.nullable(EntitlementInclusionList$outboundSchema)
+  inclusionAll: z.nullable(EntitlementInclusionAll$outboundSchema).optional(),
+  inclusionCriteria: z.nullable(EntitlementInclusionCriteria$outboundSchema)
     .optional(),
-  entitlementInclusionListCel: z.nullable(
-    EntitlementInclusionListCel$outboundSchema,
-  ).optional(),
+  inclusionList: z.nullable(EntitlementInclusionList$outboundSchema).optional(),
+  inclusionListCel: z.nullable(EntitlementInclusionListCel$outboundSchema)
+    .optional(),
   useSubjectUser: z.nullable(z.boolean()).optional(),
   userIdCel: z.nullable(z.string()).optional(),
-  userRef: UserRef$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    entitlementExclusionCriteria: "exclusionCriteria",
-    entitlementExclusionList: "exclusionList",
-    entitlementExclusionListCel: "exclusionListCel",
-    entitlementExclusionNone: "exclusionNone",
-    entitlementInclusionAll: "inclusionAll",
-    entitlementInclusionCriteria: "inclusionCriteria",
-    entitlementInclusionList: "inclusionList",
-    entitlementInclusionListCel: "inclusionListCel",
-  });
+  userRef: z.nullable(UserRef$outboundSchema).optional(),
 });
 
 export function createRevokeTasksV2ToJSON(

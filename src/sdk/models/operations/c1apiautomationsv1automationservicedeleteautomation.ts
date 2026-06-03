@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest = {
-  id: string | null;
+  id: string;
   automationsDeleteAutomationRequest?:
     | shared.AutomationsDeleteAutomationRequest
     | undefined;
@@ -40,7 +40,7 @@ export type C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse = {
 /** @internal */
 export type C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest$Outbound =
   {
-    id: string | null;
+    id: string;
     AutomationsDeleteAutomationRequest?:
       | shared.AutomationsDeleteAutomationRequest$Outbound
       | undefined;
@@ -53,7 +53,7 @@ export const C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest$outbound
     z.ZodTypeDef,
     C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest
   > = z.object({
-    id: z.nullable(z.string()),
+    id: z.string(),
     automationsDeleteAutomationRequest: shared
       .AutomationsDeleteAutomationRequest$outboundSchema.optional(),
   }).transform((v) => {

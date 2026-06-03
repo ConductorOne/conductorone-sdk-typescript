@@ -26,7 +26,7 @@ export type TaskGrantSource = {
   /**
    * Whether the grant task is an extension task.
    */
-  isExtension?: boolean | undefined;
+  isExtension?: boolean | null | undefined;
   /**
    * the request id for the grant ticket if the source is external
    */
@@ -42,7 +42,7 @@ export const TaskGrantSource$inboundSchema: z.ZodType<
   conversationId: z.nullable(z.string()).optional(),
   externalUrl: z.nullable(z.string()).optional(),
   integrationId: z.nullable(z.string()).optional(),
-  isExtension: z.boolean().optional(),
+  isExtension: z.nullable(z.boolean()).optional(),
   requestId: z.nullable(z.string()).optional(),
 });
 /** @internal */
@@ -50,7 +50,7 @@ export type TaskGrantSource$Outbound = {
   conversationId?: string | null | undefined;
   externalUrl?: string | null | undefined;
   integrationId?: string | null | undefined;
-  isExtension?: boolean | undefined;
+  isExtension?: boolean | null | undefined;
   requestId?: string | null | undefined;
 };
 
@@ -63,7 +63,7 @@ export const TaskGrantSource$outboundSchema: z.ZodType<
   conversationId: z.nullable(z.string()).optional(),
   externalUrl: z.nullable(z.string()).optional(),
   integrationId: z.nullable(z.string()).optional(),
-  isExtension: z.boolean().optional(),
+  isExtension: z.nullable(z.boolean()).optional(),
   requestId: z.nullable(z.string()).optional(),
 });
 

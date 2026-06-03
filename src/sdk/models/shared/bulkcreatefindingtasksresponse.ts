@@ -14,7 +14,7 @@ export type BulkCreateFindingTasksResponse = {
   /**
    * The ID of the asynchronous bulk action, which can be used to track progress.
    */
-  bulkActionId?: string | undefined;
+  bulkActionId?: string | null | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const BulkCreateFindingTasksResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  bulkActionId: z.string().optional(),
+  bulkActionId: z.nullable(z.string()).optional(),
 });
 
 export function bulkCreateFindingTasksResponseFromJSON(

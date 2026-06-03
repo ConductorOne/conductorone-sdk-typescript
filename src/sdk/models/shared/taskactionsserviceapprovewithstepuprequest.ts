@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   TaskExpandMask,
   TaskExpandMask$Outbound,
@@ -17,11 +18,14 @@ export type TaskActionsServiceApproveWithStepUpRequest = {
    * The comment attached to the request.
    */
   comment?: string | null | undefined;
-  expandMask?: TaskExpandMask | null | undefined;
+  /**
+   * The task expand mask is an array of strings that specifes the related objects the requester wishes to have returned when making a request where the expand mask is part of the input. Use '*' to view all possible responses.
+   */
+  taskExpandMask?: TaskExpandMask | undefined;
   /**
    * The ID of the policy step on the given task to approve.
    */
-  policyStepId: string;
+  policyStepId: string | null;
   /**
    * The step-up transaction ID that was verified.
    *
@@ -29,15 +33,15 @@ export type TaskActionsServiceApproveWithStepUpRequest = {
    *  If unset, the response will include a redirect URL to
    *  complete the step-up authentication.
    */
-  stepUpTransactionId: string;
+  stepUpTransactionId: string | null;
 };
 
 /** @internal */
 export type TaskActionsServiceApproveWithStepUpRequest$Outbound = {
   comment?: string | null | undefined;
-  expandMask?: TaskExpandMask$Outbound | null | undefined;
-  policyStepId: string;
-  stepUpTransactionId: string;
+  expandMask?: TaskExpandMask$Outbound | undefined;
+  policyStepId: string | null;
+  stepUpTransactionId: string | null;
 };
 
 /** @internal */
@@ -48,9 +52,13 @@ export const TaskActionsServiceApproveWithStepUpRequest$outboundSchema:
     TaskActionsServiceApproveWithStepUpRequest
   > = z.object({
     comment: z.nullable(z.string()).optional(),
-    expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-    policyStepId: z.string(),
-    stepUpTransactionId: z.string(),
+    taskExpandMask: TaskExpandMask$outboundSchema.optional(),
+    policyStepId: z.nullable(z.string()),
+    stepUpTransactionId: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      taskExpandMask: "expandMask",
+    });
   });
 
 export function taskActionsServiceApproveWithStepUpRequestToJSON(

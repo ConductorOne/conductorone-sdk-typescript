@@ -12,7 +12,15 @@ import { Automation, Automation$inboundSchema } from "./automation.js";
  * The GetAutomationResponse message.
  */
 export type GetAutomationResponse = {
-  automation?: Automation | null | undefined;
+  /**
+   * The Automation message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named disabled_reason. Only a single field of the following list may be set at a time:
+   *   - circuitBreaker
+   */
+  automation?: Automation | undefined;
 };
 
 /** @internal */
@@ -21,7 +29,7 @@ export const GetAutomationResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  automation: z.nullable(Automation$inboundSchema).optional(),
+  automation: Automation$inboundSchema.optional(),
 });
 
 export function getAutomationResponseFromJSON(

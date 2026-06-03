@@ -10,8 +10,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1ConnectorServiceUpdateDelegatedRequest = {
-  connectorAppId: string | null;
-  connectorId: string | null;
+  connectorAppId: string;
+  connectorId: string;
   connectorServiceUpdateDelegatedRequest?:
     | shared.ConnectorServiceUpdateDelegatedRequest
     | undefined;
@@ -40,8 +40,8 @@ export type C1ApiAppV1ConnectorServiceUpdateDelegatedResponse = {
 
 /** @internal */
 export type C1ApiAppV1ConnectorServiceUpdateDelegatedRequest$Outbound = {
-  connector_app_id: string | null;
-  connector_id: string | null;
+  connector_app_id: string;
+  connector_id: string;
   ConnectorServiceUpdateDelegatedRequest?:
     | shared.ConnectorServiceUpdateDelegatedRequest$Outbound
     | undefined;
@@ -54,8 +54,8 @@ export const C1ApiAppV1ConnectorServiceUpdateDelegatedRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiAppV1ConnectorServiceUpdateDelegatedRequest
   > = z.object({
-    connectorAppId: z.nullable(z.string()),
-    connectorId: z.nullable(z.string()),
+    connectorAppId: z.string(),
+    connectorId: z.string(),
     connectorServiceUpdateDelegatedRequest: shared
       .ConnectorServiceUpdateDelegatedRequest$outboundSchema.optional(),
   }).transform((v) => {

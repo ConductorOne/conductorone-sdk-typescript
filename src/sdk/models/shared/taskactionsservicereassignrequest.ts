@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   TaskExpandMask,
   TaskExpandMask$Outbound,
@@ -17,7 +18,10 @@ export type TaskActionsServiceReassignRequest = {
    * An optional comment attached to the reassignment.
    */
   comment?: string | null | undefined;
-  expandMask?: TaskExpandMask | null | undefined;
+  /**
+   * The task expand mask is an array of strings that specifes the related objects the requester wishes to have returned when making a request where the expand mask is part of the input. Use '*' to view all possible responses.
+   */
+  taskExpandMask?: TaskExpandMask | undefined;
   /**
    * The IDs of the users to reassign the current policy step to. Must be from the allowed reassignees list.
    */
@@ -31,7 +35,7 @@ export type TaskActionsServiceReassignRequest = {
 /** @internal */
 export type TaskActionsServiceReassignRequest$Outbound = {
   comment?: string | null | undefined;
-  expandMask?: TaskExpandMask$Outbound | null | undefined;
+  expandMask?: TaskExpandMask$Outbound | undefined;
   newStepUserIds?: Array<string> | null | undefined;
   policyStepId?: string | null | undefined;
 };
@@ -43,9 +47,13 @@ export const TaskActionsServiceReassignRequest$outboundSchema: z.ZodType<
   TaskActionsServiceReassignRequest
 > = z.object({
   comment: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
+  taskExpandMask: TaskExpandMask$outboundSchema.optional(),
   newStepUserIds: z.nullable(z.array(z.string())).optional(),
   policyStepId: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    taskExpandMask: "expandMask",
+  });
 });
 
 export function taskActionsServiceReassignRequestToJSON(

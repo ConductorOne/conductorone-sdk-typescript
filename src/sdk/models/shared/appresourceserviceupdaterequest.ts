@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   AppResourceExpandMask,
   AppResourceExpandMask$Outbound,
@@ -18,15 +19,26 @@ import {
  * The request message for updating an app resource.
  */
 export type AppResourceServiceUpdateRequest = {
-  appResource?: AppResourceInput | null | undefined;
-  expandMask?: AppResourceExpandMask | null | undefined;
+  /**
+   * The app resource message is a single resource that can have entitlements.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named metadata. Only a single field of the following list may be set at a time:
+   *   - secretTrait
+   */
+  appResource?: AppResourceInput | undefined;
+  /**
+   * The app resource expand mask lets you get information about related objects from the request.
+   */
+  appResourceExpandMask?: AppResourceExpandMask | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type AppResourceServiceUpdateRequest$Outbound = {
-  appResource?: AppResourceInput$Outbound | null | undefined;
-  expandMask?: AppResourceExpandMask$Outbound | null | undefined;
+  appResource?: AppResourceInput$Outbound | undefined;
+  expandMask?: AppResourceExpandMask$Outbound | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -36,9 +48,13 @@ export const AppResourceServiceUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppResourceServiceUpdateRequest
 > = z.object({
-  appResource: z.nullable(AppResourceInput$outboundSchema).optional(),
-  expandMask: z.nullable(AppResourceExpandMask$outboundSchema).optional(),
+  appResource: AppResourceInput$outboundSchema.optional(),
+  appResourceExpandMask: AppResourceExpandMask$outboundSchema.optional(),
   updateMask: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    appResourceExpandMask: "expandMask",
+  });
 });
 
 export function appResourceServiceUpdateRequestToJSON(

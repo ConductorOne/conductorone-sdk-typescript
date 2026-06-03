@@ -185,7 +185,7 @@ export type Task = {
    * The ID of the user that is the creator of this task. This may not always match the userId field.
    */
   createdByUserId?: string | null | undefined;
-  data?: { [k: string]: any } | null | undefined;
+  data?: { [k: string]: any } | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * The description of the task. This is also known as justification.
@@ -203,7 +203,10 @@ export type Task = {
    * An array of external references to the task. Historically that has been items like Jira task IDs. This is currently unused, but may come back in the future for integrations.
    */
   externalRefs?: Array<ExternalRef> | null | undefined;
-  form?: RequestSchemaForm | null | undefined;
+  /**
+   * A form is a collection of fields to be filled out by a user
+   */
+  requestSchemaForm?: RequestSchemaForm | undefined;
   /**
    * The ID of the task.
    */
@@ -220,7 +223,10 @@ export type Task = {
    * The origin field.
    */
   origin?: TaskOrigin | null | undefined;
-  policy?: PolicyInstance | null | undefined;
+  /**
+   * A policy instance is an object that contains a reference to the policy it was created from, the currently executing step, the next steps, and the history of previously completed steps.
+   */
+  policyInstance?: PolicyInstance | undefined;
   /**
    * The policy generation id refers to the current policy's generation ID. This is changed when the policy is changed on a task.
    */
@@ -248,7 +254,20 @@ export type Task = {
    * An array of IDs belonging to Identity Users that are allowed to review this step in a task.
    */
   stepApproverIds?: Array<string> | null | undefined;
-  type?: TaskType | null | undefined;
+  /**
+   * Task Type provides configuration for the type of task: certify, grant, or revoke
+   *
+   * @remarks
+   *
+   * This message contains a oneof named task_type. Only a single field of the following list may be set at a time:
+   *   - grant
+   *   - revoke
+   *   - certify
+   *   - offboarding
+   *   - action
+   *   - finding
+   */
+  taskType?: TaskType | undefined;
   updatedAt?: Date | null | undefined;
   /**
    * The ID of the user that is the target of this task. This may be empty if we're targeting a specific app user that has no known identity user.
@@ -381,7 +400,7 @@ export const Task$inboundSchema: z.ZodType<Task, z.ZodTypeDef, unknown> = z
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
     createdByUserId: z.nullable(z.string()).optional(),
-    data: z.nullable(z.record(z.any())).optional(),
+    data: z.record(z.any()).optional(),
     deletedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
@@ -389,13 +408,13 @@ export const Task$inboundSchema: z.ZodType<Task, z.ZodTypeDef, unknown> = z
     displayName: z.nullable(z.string()).optional(),
     emergencyAccess: z.nullable(z.boolean()).optional(),
     externalRefs: z.nullable(z.array(ExternalRef$inboundSchema)).optional(),
-    form: z.nullable(RequestSchemaForm$inboundSchema).optional(),
+    form: RequestSchemaForm$inboundSchema.optional(),
     id: z.nullable(z.string()).optional(),
     insightIds: z.nullable(z.array(z.string())).optional(),
     numericId: z.nullable(z.string().transform(v => parseInt(v, 10)))
       .optional(),
     origin: z.nullable(TaskOrigin$inboundSchema).optional(),
-    policy: z.nullable(PolicyInstance$inboundSchema).optional(),
+    policy: PolicyInstance$inboundSchema.optional(),
     policyGenerationId: z.nullable(z.string()).optional(),
     processing: z.nullable(Processing$inboundSchema).optional(),
     recommendation: z.nullable(Recommendation$inboundSchema).optional(),
@@ -403,11 +422,17 @@ export const Task$inboundSchema: z.ZodType<Task, z.ZodTypeDef, unknown> = z
       .optional(),
     state: z.nullable(TaskState$inboundSchema).optional(),
     stepApproverIds: z.nullable(z.array(z.string())).optional(),
-    type: z.nullable(TaskType$inboundSchema).optional(),
+    type: TaskType$inboundSchema.optional(),
     updatedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
     userId: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "form": "requestSchemaForm",
+      "policy": "policyInstance",
+      "type": "taskType",
+    });
   });
 /** @internal */
 export type Task$Outbound = {
@@ -418,25 +443,25 @@ export type Task$Outbound = {
   commentCount?: number | null | undefined;
   createdAt?: string | null | undefined;
   createdByUserId?: string | null | undefined;
-  data?: { [k: string]: any } | null | undefined;
+  data?: { [k: string]: any } | undefined;
   deletedAt?: string | null | undefined;
   description?: string | null | undefined;
   displayName?: string | null | undefined;
   emergencyAccess?: boolean | null | undefined;
   externalRefs?: Array<ExternalRef$Outbound> | null | undefined;
-  form?: RequestSchemaForm$Outbound | null | undefined;
+  form?: RequestSchemaForm$Outbound | undefined;
   id?: string | null | undefined;
   insightIds?: Array<string> | null | undefined;
   numericId?: string | null | undefined;
   origin?: string | null | undefined;
-  policy?: PolicyInstance$Outbound | null | undefined;
+  policy?: PolicyInstance$Outbound | undefined;
   policyGenerationId?: string | null | undefined;
   processing?: string | null | undefined;
   recommendation?: string | null | undefined;
   revocationTargets?: Array<TaskRevocationTarget$Outbound> | null | undefined;
   state?: string | null | undefined;
   stepApproverIds?: Array<string> | null | undefined;
-  type?: TaskType$Outbound | null | undefined;
+  type?: TaskType$Outbound | undefined;
   updatedAt?: string | null | undefined;
   userId?: string | null | undefined;
 };
@@ -452,18 +477,18 @@ export const Task$outboundSchema: z.ZodType<Task$Outbound, z.ZodTypeDef, Task> =
     commentCount: z.nullable(z.number().int()).optional(),
     createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
     createdByUserId: z.nullable(z.string()).optional(),
-    data: z.nullable(z.record(z.any())).optional(),
+    data: z.record(z.any()).optional(),
     deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
     description: z.nullable(z.string()).optional(),
     displayName: z.nullable(z.string()).optional(),
     emergencyAccess: z.nullable(z.boolean()).optional(),
     externalRefs: z.nullable(z.array(ExternalRef$outboundSchema)).optional(),
-    form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
+    requestSchemaForm: RequestSchemaForm$outboundSchema.optional(),
     id: z.nullable(z.string()).optional(),
     insightIds: z.nullable(z.array(z.string())).optional(),
     numericId: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
     origin: z.nullable(TaskOrigin$outboundSchema).optional(),
-    policy: z.nullable(PolicyInstance$outboundSchema).optional(),
+    policyInstance: PolicyInstance$outboundSchema.optional(),
     policyGenerationId: z.nullable(z.string()).optional(),
     processing: z.nullable(Processing$outboundSchema).optional(),
     recommendation: z.nullable(Recommendation$outboundSchema).optional(),
@@ -471,9 +496,15 @@ export const Task$outboundSchema: z.ZodType<Task$Outbound, z.ZodTypeDef, Task> =
       .optional(),
     state: z.nullable(TaskState$outboundSchema).optional(),
     stepApproverIds: z.nullable(z.array(z.string())).optional(),
-    type: z.nullable(TaskType$outboundSchema).optional(),
+    taskType: TaskType$outboundSchema.optional(),
     updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
     userId: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requestSchemaForm: "form",
+      policyInstance: "policy",
+      taskType: "type",
+    });
   });
 
 export function taskToJSON(task: Task): string {

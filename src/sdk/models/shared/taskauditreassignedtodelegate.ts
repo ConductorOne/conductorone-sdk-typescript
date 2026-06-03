@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -12,12 +13,18 @@ import { User, User$inboundSchema } from "./user.js";
  * The TaskAuditReassignedToDelegate message.
  */
 export type TaskAuditReassignedToDelegate = {
-  delegatedAssigneeUser?: User | null | undefined;
+  /**
+   * The User object provides all of the details for an user, as well as some configuration.
+   */
+  user?: User | undefined;
   /**
    * The delegatedAssigneeUserId field.
    */
   delegatedAssigneeUserId?: string | null | undefined;
-  originalAssigneeUser?: User | null | undefined;
+  /**
+   * The User object provides all of the details for an user, as well as some configuration.
+   */
+  user1?: User | undefined;
   /**
    * The originalAssigneeUserId field.
    */
@@ -30,10 +37,15 @@ export const TaskAuditReassignedToDelegate$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  delegatedAssigneeUser: z.nullable(User$inboundSchema).optional(),
+  delegatedAssigneeUser: User$inboundSchema.optional(),
   delegatedAssigneeUserId: z.nullable(z.string()).optional(),
-  originalAssigneeUser: z.nullable(User$inboundSchema).optional(),
+  originalAssigneeUser: User$inboundSchema.optional(),
   originalAssigneeUserId: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "delegatedAssigneeUser": "user",
+    "originalAssigneeUser": "user1",
+  });
 });
 
 export function taskAuditReassignedToDelegateFromJSON(

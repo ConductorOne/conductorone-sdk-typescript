@@ -22,7 +22,7 @@ export type RoleMiningSearchSuggestionsResponse = {
   /**
    * Token to retrieve the next page of results, empty if no more results.
    */
-  nextPageToken?: string | undefined;
+  nextPageToken?: string | null | undefined;
 };
 
 /** @internal */
@@ -33,7 +33,7 @@ export const RoleMiningSearchSuggestionsResponse$inboundSchema: z.ZodType<
 > = z.object({
   list: z.nullable(z.array(RoleMiningManagementSuggestion$inboundSchema))
     .optional(),
-  nextPageToken: z.string().optional(),
+  nextPageToken: z.nullable(z.string()).optional(),
 });
 
 export function roleMiningSearchSuggestionsResponseFromJSON(

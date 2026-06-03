@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,7 +16,18 @@ import {
  * The CreateAutomationResponse message.
  */
 export type CreateAutomationResponse = {
-  automation?: AppEntitlementAutomation | null | undefined;
+  /**
+   * The AppEntitlementAutomation message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named conditions. Only a single field of the following list may be set at a time:
+   *   - none
+   *   - entitlements
+   *   - cel
+   *   - basic
+   */
+  appEntitlementAutomation?: AppEntitlementAutomation | undefined;
 };
 
 /** @internal */
@@ -24,7 +36,11 @@ export const CreateAutomationResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  automation: z.nullable(AppEntitlementAutomation$inboundSchema).optional(),
+  automation: AppEntitlementAutomation$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "automation": "appEntitlementAutomation",
+  });
 });
 
 export function createAutomationResponseFromJSON(

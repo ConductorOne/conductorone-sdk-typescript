@@ -27,8 +27,26 @@ export type Provision = {
    * A field indicating whether this step is assigned.
    */
   assigned?: boolean | null | undefined;
-  provisionPolicy?: ProvisionPolicyInput | null | undefined;
-  provisionTarget?: ProvisionTarget | null | undefined;
+  /**
+   * ProvisionPolicy is a oneOf that indicates how a provision step should be processed.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named typ. Only a single field of the following list may be set at a time:
+   *   - connector
+   *   - manual
+   *   - delegated
+   *   - webhook
+   *   - multiStep
+   *   - externalTicket
+   *   - unconfigured
+   *   - action
+   */
+  provisionPolicy?: ProvisionPolicyInput | undefined;
+  /**
+   * ProvisionTarget indicates the specific app, app entitlement, and if known, the app user and grant duration of this provision step
+   */
+  provisionTarget?: ProvisionTarget | undefined;
 };
 
 /** @internal */
@@ -38,14 +56,14 @@ export const Provision$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   assigned: z.nullable(z.boolean()).optional(),
-  provisionPolicy: z.nullable(ProvisionPolicyInput$inboundSchema).optional(),
-  provisionTarget: z.nullable(ProvisionTarget$inboundSchema).optional(),
+  provisionPolicy: ProvisionPolicyInput$inboundSchema.optional(),
+  provisionTarget: ProvisionTarget$inboundSchema.optional(),
 });
 /** @internal */
 export type Provision$Outbound = {
   assigned?: boolean | null | undefined;
-  provisionPolicy?: ProvisionPolicyInput$Outbound | null | undefined;
-  provisionTarget?: ProvisionTarget$Outbound | null | undefined;
+  provisionPolicy?: ProvisionPolicyInput$Outbound | undefined;
+  provisionTarget?: ProvisionTarget$Outbound | undefined;
 };
 
 /** @internal */
@@ -55,8 +73,8 @@ export const Provision$outboundSchema: z.ZodType<
   Provision
 > = z.object({
   assigned: z.nullable(z.boolean()).optional(),
-  provisionPolicy: z.nullable(ProvisionPolicyInput$outboundSchema).optional(),
-  provisionTarget: z.nullable(ProvisionTarget$outboundSchema).optional(),
+  provisionPolicy: ProvisionPolicyInput$outboundSchema.optional(),
+  provisionTarget: ProvisionTarget$outboundSchema.optional(),
 });
 
 export function provisionToJSON(provision: Provision): string {

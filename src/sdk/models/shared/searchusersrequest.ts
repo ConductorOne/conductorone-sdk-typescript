@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -71,7 +72,7 @@ export type SearchUsersRequest = {
   /**
    * Filter for users based on their delegate status.
    */
-  delegateStatus?: DelegateStatus | undefined;
+  delegateStatus?: DelegateStatus | null | undefined;
   /**
    * Filter for users that have any of the delegated user IDs on this list.
    */
@@ -96,7 +97,13 @@ export type SearchUsersRequest = {
    * An array of types to exclude from the results.
    */
   excludeTypes?: Array<ExcludeTypes> | null | undefined;
-  expandMask?: UserExpandMask | null | undefined;
+  /**
+   * The user expand mask is used to indicate which related objects should be expanded in the response.
+   *
+   * @remarks
+   *  The supported paths are 'role_ids', 'manager_ids', 'delegated_user_id', 'directory_ids', and '*'.
+   */
+  userExpandMask?: UserExpandMask | undefined;
   /**
    * Deprecated. Use refs array instead.
    */
@@ -104,7 +111,7 @@ export type SearchUsersRequest = {
   /**
    * Filter for users who are delegates of at least one other user.
    */
-  isDelegate?: boolean | undefined;
+  isDelegate?: boolean | null | undefined;
   /**
    * Search for users that have any of the job titles on this list.
    */
@@ -177,16 +184,16 @@ export const SearchUsersRequestUserStatuses$outboundSchema: z.ZodType<
 
 /** @internal */
 export type SearchUsersRequest$Outbound = {
-  delegateStatus?: string | undefined;
+  delegateStatus?: string | null | undefined;
   delegatedUserIds?: Array<string> | null | undefined;
   departments?: Array<string> | null | undefined;
   email?: string | null | undefined;
   excludeIds?: Array<string> | null | undefined;
   excludeOrigins?: Array<string> | null | undefined;
   excludeTypes?: Array<string> | null | undefined;
-  expandMask?: UserExpandMask$Outbound | null | undefined;
+  expandMask?: UserExpandMask$Outbound | undefined;
   ids?: Array<string> | null | undefined;
-  isDelegate?: boolean | undefined;
+  isDelegate?: boolean | null | undefined;
   jobTitles?: Array<string> | null | undefined;
   managerIds?: Array<string> | null | undefined;
   origins?: Array<string> | null | undefined;
@@ -204,16 +211,16 @@ export const SearchUsersRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchUsersRequest
 > = z.object({
-  delegateStatus: DelegateStatus$outboundSchema.optional(),
+  delegateStatus: z.nullable(DelegateStatus$outboundSchema).optional(),
   delegatedUserIds: z.nullable(z.array(z.string())).optional(),
   departments: z.nullable(z.array(z.string())).optional(),
   email: z.nullable(z.string()).optional(),
   excludeIds: z.nullable(z.array(z.string())).optional(),
   excludeOrigins: z.nullable(z.array(ExcludeOrigins$outboundSchema)).optional(),
   excludeTypes: z.nullable(z.array(ExcludeTypes$outboundSchema)).optional(),
-  expandMask: z.nullable(UserExpandMask$outboundSchema).optional(),
+  userExpandMask: UserExpandMask$outboundSchema.optional(),
   ids: z.nullable(z.array(z.string())).optional(),
-  isDelegate: z.boolean().optional(),
+  isDelegate: z.nullable(z.boolean()).optional(),
   jobTitles: z.nullable(z.array(z.string())).optional(),
   managerIds: z.nullable(z.array(z.string())).optional(),
   origins: z.nullable(z.array(Origins$outboundSchema)).optional(),
@@ -225,6 +232,10 @@ export const SearchUsersRequest$outboundSchema: z.ZodType<
   userStatuses: z.nullable(
     z.array(SearchUsersRequestUserStatuses$outboundSchema),
   ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    userExpandMask: "expandMask",
+  });
 });
 
 export function searchUsersRequestToJSON(

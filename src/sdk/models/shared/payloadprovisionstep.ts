@@ -36,7 +36,10 @@ export type PayloadProvisionStep = {
    * List of serialized related objects.
    */
   expanded?: Array<PayloadProvisionStepExpanded> | null | undefined;
-  taskView?: TaskView | null | undefined;
+  /**
+   * Contains a task and JSONPATH expressions that describe where in the expanded array related objects are located. This view can be used to display a fully-detailed dashboard of task information.
+   */
+  taskView?: TaskView | undefined;
 };
 
 /** @internal */
@@ -107,12 +110,12 @@ export const PayloadProvisionStep$inboundSchema: z.ZodType<
   expanded: z.nullable(
     z.array(z.lazy(() => PayloadProvisionStepExpanded$inboundSchema)),
   ).optional(),
-  taskView: z.nullable(TaskView$inboundSchema).optional(),
+  taskView: TaskView$inboundSchema.optional(),
 });
 /** @internal */
 export type PayloadProvisionStep$Outbound = {
   expanded?: Array<PayloadProvisionStepExpanded$Outbound> | null | undefined;
-  taskView?: TaskView$Outbound | null | undefined;
+  taskView?: TaskView$Outbound | undefined;
 };
 
 /** @internal */
@@ -124,7 +127,7 @@ export const PayloadProvisionStep$outboundSchema: z.ZodType<
   expanded: z.nullable(
     z.array(z.lazy(() => PayloadProvisionStepExpanded$outboundSchema)),
   ).optional(),
-  taskView: z.nullable(TaskView$outboundSchema).optional(),
+  taskView: TaskView$outboundSchema.optional(),
 });
 
 export function payloadProvisionStepToJSON(

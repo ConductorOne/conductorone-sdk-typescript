@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   AppEntitlementInput,
   AppEntitlementInput$Outbound,
@@ -18,8 +19,20 @@ import {
  * The UpdateAppEntitlementRequest message contains the app entitlement and the fields to be updated.
  */
 export type UpdateAppEntitlementRequest = {
-  entitlement?: AppEntitlementInput | null | undefined;
-  expandMask?: AppEntitlementExpandMask | null | undefined;
+  /**
+   * The app entitlement represents one permission in a downstream App (SAAS) that can be granted. For example, GitHub Read vs GitHub Write.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named max_grant_duration. Only a single field of the following list may be set at a time:
+   *   - durationUnset
+   *   - durationGrant
+   */
+  appEntitlement?: AppEntitlementInput | undefined;
+  /**
+   * The app entitlement expand mask allows the user to get additional information when getting responses containing app entitlement views.
+   */
+  appEntitlementExpandMask?: AppEntitlementExpandMask | undefined;
   /**
    * Flag to indicate that access request defaults, if any are applied to these entitlements, should be overridden.
    */
@@ -29,8 +42,8 @@ export type UpdateAppEntitlementRequest = {
 
 /** @internal */
 export type UpdateAppEntitlementRequest$Outbound = {
-  entitlement?: AppEntitlementInput$Outbound | null | undefined;
-  expandMask?: AppEntitlementExpandMask$Outbound | null | undefined;
+  entitlement?: AppEntitlementInput$Outbound | undefined;
+  expandMask?: AppEntitlementExpandMask$Outbound | undefined;
   overrideAccessRequestsDefaults?: boolean | null | undefined;
   updateMask?: string | null | undefined;
 };
@@ -41,10 +54,15 @@ export const UpdateAppEntitlementRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateAppEntitlementRequest
 > = z.object({
-  entitlement: z.nullable(AppEntitlementInput$outboundSchema).optional(),
-  expandMask: z.nullable(AppEntitlementExpandMask$outboundSchema).optional(),
+  appEntitlement: AppEntitlementInput$outboundSchema.optional(),
+  appEntitlementExpandMask: AppEntitlementExpandMask$outboundSchema.optional(),
   overrideAccessRequestsDefaults: z.nullable(z.boolean()).optional(),
   updateMask: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    appEntitlement: "entitlement",
+    appEntitlementExpandMask: "expandMask",
+  });
 });
 
 export function updateAppEntitlementRequestToJSON(

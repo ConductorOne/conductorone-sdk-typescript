@@ -14,7 +14,7 @@ export type ServiceAccountMisclassificationEvidence = {
   /**
    * The detectionReason field.
    */
-  detectionReason?: string | undefined;
+  detectionReason?: string | null | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const ServiceAccountMisclassificationEvidence$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  detectionReason: z.string().optional(),
+  detectionReason: z.nullable(z.string()).optional(),
 });
 
 export function serviceAccountMisclassificationEvidenceFromJSON(

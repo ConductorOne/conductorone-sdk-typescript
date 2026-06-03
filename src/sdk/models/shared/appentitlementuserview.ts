@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -18,7 +19,10 @@ import { AppUserView, AppUserView$inboundSchema } from "./appuserview.js";
 export type AppEntitlementUserView = {
   appEntitlementUserBindingCreatedAt?: Date | null | undefined;
   appEntitlementUserBindingDeprovisionAt?: Date | null | undefined;
-  appUser?: AppUserView | null | undefined;
+  /**
+   * The AppUserView contains an app user as well as paths for apps, identity users, and last usage in expanded arrays.
+   */
+  appUserView?: AppUserView | undefined;
   /**
    * List of sources for the grant, ie. groups, roles, etc.
    */
@@ -26,7 +30,7 @@ export type AppEntitlementUserView = {
   /**
    * The originating ticket ID for the grant (e.g. from a request ticket).
    */
-  originatingTicketId?: string | undefined;
+  originatingTicketId?: string | null | undefined;
 };
 
 /** @internal */
@@ -41,9 +45,13 @@ export const AppEntitlementUserView$inboundSchema: z.ZodType<
   appEntitlementUserBindingDeprovisionAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  appUser: z.nullable(AppUserView$inboundSchema).optional(),
+  appUser: AppUserView$inboundSchema.optional(),
   grantSources: z.nullable(z.array(AppEntitlementRef$inboundSchema)).optional(),
-  originatingTicketId: z.string().optional(),
+  originatingTicketId: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "appUser": "appUserView",
+  });
 });
 
 export function appEntitlementUserViewFromJSON(

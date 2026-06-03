@@ -14,11 +14,11 @@ export type AppUserTarget = {
   /**
    * The appId field.
    */
-  appId?: string | undefined;
+  appId?: string | null | undefined;
   /**
    * The appUserId field.
    */
-  appUserId?: string | undefined;
+  appUserId?: string | null | undefined;
 };
 
 /** @internal */
@@ -27,8 +27,8 @@ export const AppUserTarget$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.string().optional(),
-  appUserId: z.string().optional(),
+  appId: z.nullable(z.string()).optional(),
+  appUserId: z.nullable(z.string()).optional(),
 });
 
 export function appUserTargetFromJSON(

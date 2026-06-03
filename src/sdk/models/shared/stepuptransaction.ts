@@ -36,7 +36,7 @@ export type StepUpTransactionState = OpenEnum<typeof StepUpTransactionState>;
  */
 export type StepUpTransaction = {
   approveTask?: TargetTask | null | undefined;
-  claims?: { [k: string]: any } | null | undefined;
+  claims?: { [k: string]: any } | undefined;
   createdAt?: Date | null | undefined;
   /**
    * Error message if the transaction failed
@@ -77,7 +77,7 @@ export const StepUpTransaction$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   approveTask: z.nullable(TargetTask$inboundSchema).optional(),
-  claims: z.nullable(z.record(z.any())).optional(),
+  claims: z.record(z.any()).optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

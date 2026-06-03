@@ -6,7 +6,7 @@
 import { C1ApiAutomationsV1AutomationServiceExecuteAutomationRequest } from "conductorone-sdk-typescript/sdk/models/operations";
 
 let value: C1ApiAutomationsV1AutomationServiceExecuteAutomationRequest = {
-  id: null,
+  id: "<id>",
 };
 ```
 

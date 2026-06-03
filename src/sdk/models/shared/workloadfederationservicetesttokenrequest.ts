@@ -15,17 +15,17 @@ export type WorkloadFederationServiceTestTokenRequest = {
    *  If empty, uses the request's source IP.
    *  Accepts IPv4 (e.g. 10.0.0.5) or IPv6 (e.g. 2001:db8::1) addresses, optionally with a CIDR prefix.
    */
-  sourceIp?: string | undefined;
+  sourceIp?: string | null | undefined;
   /**
    * The raw JWT to validate (the subject_token from a CI job).
    */
-  subjectToken?: string | undefined;
+  subjectToken?: string | null | undefined;
 };
 
 /** @internal */
 export type WorkloadFederationServiceTestTokenRequest$Outbound = {
-  sourceIp?: string | undefined;
-  subjectToken?: string | undefined;
+  sourceIp?: string | null | undefined;
+  subjectToken?: string | null | undefined;
 };
 
 /** @internal */
@@ -35,8 +35,8 @@ export const WorkloadFederationServiceTestTokenRequest$outboundSchema:
     z.ZodTypeDef,
     WorkloadFederationServiceTestTokenRequest
   > = z.object({
-    sourceIp: z.string().optional(),
-    subjectToken: z.string().optional(),
+    sourceIp: z.nullable(z.string()).optional(),
+    subjectToken: z.nullable(z.string()).optional(),
   });
 
 export function workloadFederationServiceTestTokenRequestToJSON(

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   AccessConflictNotificationConfig,
   AccessConflictNotificationConfig$Outbound,
@@ -21,17 +22,19 @@ export type ConflictMonitorUpdateRequest = {
    * The updated human-readable name for the conflict monitor.
    */
   displayName?: string | null | undefined;
-  notificationConfig?: AccessConflictNotificationConfig | null | undefined;
+  /**
+   * The NotificationConfig message.
+   */
+  accessConflictNotificationConfig?:
+    | AccessConflictNotificationConfig
+    | undefined;
 };
 
 /** @internal */
 export type ConflictMonitorUpdateRequest$Outbound = {
   description?: string | null | undefined;
   displayName?: string | null | undefined;
-  notificationConfig?:
-    | AccessConflictNotificationConfig$Outbound
-    | null
-    | undefined;
+  notificationConfig?: AccessConflictNotificationConfig$Outbound | undefined;
 };
 
 /** @internal */
@@ -42,9 +45,12 @@ export const ConflictMonitorUpdateRequest$outboundSchema: z.ZodType<
 > = z.object({
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
-  notificationConfig: z.nullable(
-    AccessConflictNotificationConfig$outboundSchema,
-  ).optional(),
+  accessConflictNotificationConfig:
+    AccessConflictNotificationConfig$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    accessConflictNotificationConfig: "notificationConfig",
+  });
 });
 
 export function conflictMonitorUpdateRequestToJSON(

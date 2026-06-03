@@ -31,11 +31,11 @@ export type CreateManuallyManagedResourceTypeRequest = {
   /**
    * The display name for the new resource type.
    */
-  displayName: string;
+  displayName: string | null;
   /**
    * The category of the resource type (e.g., ROLE, GROUP, LICENSE).
    */
-  resourceType: ResourceType;
+  resourceType: ResourceType | null;
 };
 
 /** @internal */
@@ -47,8 +47,8 @@ export const ResourceType$outboundSchema: z.ZodType<
 
 /** @internal */
 export type CreateManuallyManagedResourceTypeRequest$Outbound = {
-  displayName: string;
-  resourceType: string;
+  displayName: string | null;
+  resourceType: string | null;
 };
 
 /** @internal */
@@ -57,8 +57,8 @@ export const CreateManuallyManagedResourceTypeRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateManuallyManagedResourceTypeRequest
 > = z.object({
-  displayName: z.string(),
-  resourceType: ResourceType$outboundSchema,
+  displayName: z.nullable(z.string()),
+  resourceType: z.nullable(ResourceType$outboundSchema),
 });
 
 export function createManuallyManagedResourceTypeRequestToJSON(

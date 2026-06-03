@@ -21,15 +21,15 @@ export type C1ConnectorSyncDetailComponent = {
   /**
    * The appId field.
    */
-  appId?: string | undefined;
+  appId?: string | null | undefined;
   /**
    * The connectorId field.
    */
-  connectorId?: string | undefined;
+  connectorId?: string | null | undefined;
   /**
    * The title field.
    */
-  title?: string | undefined;
+  title?: string | null | undefined;
 };
 
 /** @internal */
@@ -38,9 +38,9 @@ export const C1ConnectorSyncDetailComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.string().optional(),
-  connectorId: z.string().optional(),
-  title: z.string().optional(),
+  appId: z.nullable(z.string()).optional(),
+  connectorId: z.nullable(z.string()).optional(),
+  title: z.nullable(z.string()).optional(),
 });
 
 export function c1ConnectorSyncDetailComponentFromJSON(

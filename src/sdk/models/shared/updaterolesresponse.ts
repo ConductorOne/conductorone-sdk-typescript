@@ -12,7 +12,10 @@ import { Role, Role$inboundSchema } from "./role.js";
  * UpdateRolesResponse is the response message containing the updated role.
  */
 export type UpdateRolesResponse = {
-  role?: Role | null | undefined;
+  /**
+   * Role is a role that can be assigned to a user in ConductorOne.
+   */
+  role?: Role | undefined;
 };
 
 /** @internal */
@@ -21,7 +24,7 @@ export const UpdateRolesResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  role: z.nullable(Role$inboundSchema).optional(),
+  role: Role$inboundSchema.optional(),
 });
 
 export function updateRolesResponseFromJSON(

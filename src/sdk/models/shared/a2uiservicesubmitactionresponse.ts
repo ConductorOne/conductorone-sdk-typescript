@@ -14,11 +14,11 @@ export type A2UIServiceSubmitActionResponse = {
   /**
    * The accepted field.
    */
-  accepted?: boolean | undefined;
+  accepted?: boolean | null | undefined;
   /**
    * The errorMessage field.
    */
-  errorMessage?: string | undefined;
+  errorMessage?: string | null | undefined;
 };
 
 /** @internal */
@@ -27,8 +27,8 @@ export const A2UIServiceSubmitActionResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accepted: z.boolean().optional(),
-  errorMessage: z.string().optional(),
+  accepted: z.nullable(z.boolean()).optional(),
+  errorMessage: z.nullable(z.string()).optional(),
 });
 
 export function a2UIServiceSubmitActionResponseFromJSON(

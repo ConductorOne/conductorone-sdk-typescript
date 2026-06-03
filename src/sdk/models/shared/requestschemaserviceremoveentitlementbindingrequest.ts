@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$Outbound,
@@ -13,7 +14,10 @@ import {
  * The request message for removing a single entitlement binding from a request schema.
  */
 export type RequestSchemaServiceRemoveEntitlementBindingRequest = {
-  entitlementRef?: AppEntitlementRef | null | undefined;
+  /**
+   * The AppEntitlementRef message.
+   */
+  appEntitlementRef?: AppEntitlementRef | undefined;
   /**
    * The unique identifier of the request schema to remove the binding from.
    */
@@ -22,7 +26,7 @@ export type RequestSchemaServiceRemoveEntitlementBindingRequest = {
 
 /** @internal */
 export type RequestSchemaServiceRemoveEntitlementBindingRequest$Outbound = {
-  entitlementRef?: AppEntitlementRef$Outbound | null | undefined;
+  entitlementRef?: AppEntitlementRef$Outbound | undefined;
   requestSchemaId?: string | null | undefined;
 };
 
@@ -33,8 +37,12 @@ export const RequestSchemaServiceRemoveEntitlementBindingRequest$outboundSchema:
     z.ZodTypeDef,
     RequestSchemaServiceRemoveEntitlementBindingRequest
   > = z.object({
-    entitlementRef: z.nullable(AppEntitlementRef$outboundSchema).optional(),
+    appEntitlementRef: AppEntitlementRef$outboundSchema.optional(),
     requestSchemaId: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      appEntitlementRef: "entitlementRef",
+    });
   });
 
 export function requestSchemaServiceRemoveEntitlementBindingRequestToJSON(

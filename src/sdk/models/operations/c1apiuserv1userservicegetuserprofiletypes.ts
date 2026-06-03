@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiUserV1UserServiceGetUserProfileTypesRequest = {
-  userId: string | null;
+  userId: string;
 };
 
 export type C1ApiUserV1UserServiceGetUserProfileTypesResponse = {
@@ -34,7 +34,7 @@ export type C1ApiUserV1UserServiceGetUserProfileTypesResponse = {
 
 /** @internal */
 export type C1ApiUserV1UserServiceGetUserProfileTypesRequest$Outbound = {
-  user_id: string | null;
+  user_id: string;
 };
 
 /** @internal */
@@ -44,7 +44,7 @@ export const C1ApiUserV1UserServiceGetUserProfileTypesRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiUserV1UserServiceGetUserProfileTypesRequest
   > = z.object({
-    userId: z.nullable(z.string()),
+    userId: z.string(),
   }).transform((v) => {
     return remap$(v, {
       userId: "user_id",

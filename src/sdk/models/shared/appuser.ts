@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -71,8 +72,11 @@ export type AppUser = {
    * The isExternal field.
    */
   isExternal?: boolean | null | undefined;
-  profile?: { [k: string]: any } | null | undefined;
-  status?: AppUserStatus | null | undefined;
+  profile?: { [k: string]: any } | undefined;
+  /**
+   * The satus of the applicaiton user.
+   */
+  appUserStatus?: AppUserStatus | undefined;
   updatedAt?: Date | null | undefined;
   /**
    * The username field of the application user.
@@ -92,11 +96,10 @@ export type AppUserInput = {
    * The appplication user type. Type can be user, system or service.
    */
   appUserType?: AppUserType | null | undefined;
-  createdAt?: Date | null | undefined;
-  deletedAt?: Date | null | undefined;
-  profile?: { [k: string]: any } | null | undefined;
-  status?: AppUserStatusInput | null | undefined;
-  updatedAt?: Date | null | undefined;
+  /**
+   * The satus of the applicaiton user.
+   */
+  appUserStatus?: AppUserStatusInput | undefined;
 };
 
 /** @internal */
@@ -130,13 +133,17 @@ export const AppUser$inboundSchema: z.ZodType<AppUser, z.ZodTypeDef, unknown> =
     id: z.nullable(z.string()).optional(),
     identityUserId: z.nullable(z.string()).optional(),
     isExternal: z.nullable(z.boolean()).optional(),
-    profile: z.nullable(z.record(z.any())).optional(),
-    status: z.nullable(AppUserStatus$inboundSchema).optional(),
+    profile: z.record(z.any()).optional(),
+    status: AppUserStatus$inboundSchema.optional(),
     updatedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
     username: z.nullable(z.string()).optional(),
     usernames: z.nullable(z.array(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "status": "appUserStatus",
+    });
   });
 
 export function appUserFromJSON(
@@ -152,11 +159,7 @@ export function appUserFromJSON(
 /** @internal */
 export type AppUserInput$Outbound = {
   appUserType?: string | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  profile?: { [k: string]: any } | null | undefined;
-  status?: AppUserStatusInput$Outbound | null | undefined;
-  updatedAt?: string | null | undefined;
+  status?: AppUserStatusInput$Outbound | undefined;
 };
 
 /** @internal */
@@ -166,11 +169,11 @@ export const AppUserInput$outboundSchema: z.ZodType<
   AppUserInput
 > = z.object({
   appUserType: z.nullable(AppUserType$outboundSchema).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  profile: z.nullable(z.record(z.any())).optional(),
-  status: z.nullable(AppUserStatusInput$outboundSchema).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  appUserStatus: AppUserStatusInput$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    appUserStatus: "status",
+  });
 });
 
 export function appUserInputToJSON(appUserInput: AppUserInput): string {

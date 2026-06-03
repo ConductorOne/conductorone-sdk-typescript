@@ -57,7 +57,7 @@ export type RequestSchemaServiceCreateRequest = {
   /**
    * Controls whether the justification field is shown or hidden on the request form.
    */
-  justificationVisibility?: JustificationVisibility | undefined;
+  justificationVisibility?: JustificationVisibility | null | undefined;
   /**
    * The human-readable name for the request schema.
    */
@@ -77,7 +77,7 @@ export type RequestSchemaServiceCreateRequest$Outbound = {
   fieldGroups?: Array<FormFieldGroup$Outbound> | null | undefined;
   fieldRelationships?: Array<FieldRelationship$Outbound> | null | undefined;
   fields?: Array<FormField$Outbound> | null | undefined;
-  justificationVisibility?: string | undefined;
+  justificationVisibility?: string | null | undefined;
   name?: string | null | undefined;
 };
 
@@ -92,7 +92,8 @@ export const RequestSchemaServiceCreateRequest$outboundSchema: z.ZodType<
   fieldRelationships: z.nullable(z.array(FieldRelationship$outboundSchema))
     .optional(),
   fields: z.nullable(z.array(FormField$outboundSchema)).optional(),
-  justificationVisibility: JustificationVisibility$outboundSchema.optional(),
+  justificationVisibility: z.nullable(JustificationVisibility$outboundSchema)
+    .optional(),
   name: z.nullable(z.string()).optional(),
 });
 

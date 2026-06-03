@@ -44,11 +44,11 @@ export type ServiceAccountMisclassificationType = {
   /**
    * The currentAccountType field.
    */
-  currentAccountType?: CurrentAccountType | undefined;
+  currentAccountType?: CurrentAccountType | null | undefined;
   /**
    * The detectedAccountType field.
    */
-  detectedAccountType?: DetectedAccountType | undefined;
+  detectedAccountType?: DetectedAccountType | null | undefined;
 };
 
 /** @internal */
@@ -71,8 +71,8 @@ export const ServiceAccountMisclassificationType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  currentAccountType: CurrentAccountType$inboundSchema.optional(),
-  detectedAccountType: DetectedAccountType$inboundSchema.optional(),
+  currentAccountType: z.nullable(CurrentAccountType$inboundSchema).optional(),
+  detectedAccountType: z.nullable(DetectedAccountType$inboundSchema).optional(),
 });
 
 export function serviceAccountMisclassificationTypeFromJSON(

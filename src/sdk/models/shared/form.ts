@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -17,23 +18,34 @@ import {
  * The Form message.
  */
 export type Form = {
-  form?: RequestSchemaForm | null | undefined;
+  /**
+   * A form is a collection of fields to be filled out by a user
+   */
+  requestSchemaForm?: RequestSchemaForm | undefined;
 };
 
 /** @internal */
 export const Form$inboundSchema: z.ZodType<Form, z.ZodTypeDef, unknown> = z
   .object({
-    form: z.nullable(RequestSchemaForm$inboundSchema).optional(),
+    form: RequestSchemaForm$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "form": "requestSchemaForm",
+    });
   });
 /** @internal */
 export type Form$Outbound = {
-  form?: RequestSchemaForm$Outbound | null | undefined;
+  form?: RequestSchemaForm$Outbound | undefined;
 };
 
 /** @internal */
 export const Form$outboundSchema: z.ZodType<Form$Outbound, z.ZodTypeDef, Form> =
   z.object({
-    form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
+    requestSchemaForm: RequestSchemaForm$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requestSchemaForm: "form",
+    });
   });
 
 export function formToJSON(form: Form): string {

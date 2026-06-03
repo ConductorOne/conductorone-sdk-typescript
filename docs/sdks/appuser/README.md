@@ -108,7 +108,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 
 async function run() {
   const result = await conductoroneSDKTypescript.appUser.listAppUserCredentials({
-    appId: null,
+    appId: "<id>",
     appUserId: "<id>",
   });
 
@@ -137,7 +137,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 
 async function run() {
   const res = await appUserListAppUserCredentials(conductoroneSDKTypescript, {
-    appId: null,
+    appId: "<id>",
     appUserId: "<id>",
   });
   if (res.ok) {
@@ -272,7 +272,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 async function run() {
   const result = await conductoroneSDKTypescript.appUser.update({
     appUserAppId: "<id>",
-    appUserId: null,
+    appUserId: "<id>",
   });
 
   console.log(result);
@@ -301,7 +301,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 async function run() {
   const res = await appUserUpdate(conductoroneSDKTypescript, {
     appUserAppId: "<id>",
-    appUserId: null,
+    appUserId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;

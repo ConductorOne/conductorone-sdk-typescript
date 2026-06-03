@@ -41,7 +41,7 @@ export type AppPopulationReport = {
   /**
    * The hashes field contains the file hashes of the report.
    */
-  hashes?: { [k: string]: string } | null | undefined;
+  hashes?: { [k: string]: string } | undefined;
   /**
    * The id field.
    */
@@ -70,7 +70,7 @@ export const AppPopulationReport$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   downloadUrl: z.nullable(z.string()).optional(),
-  hashes: z.nullable(z.record(z.string())).optional(),
+  hashes: z.record(z.string()).optional(),
   id: z.nullable(z.string()).optional(),
   state: z.nullable(AppPopulationReportState$inboundSchema).optional(),
 });

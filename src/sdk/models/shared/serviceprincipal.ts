@@ -12,16 +12,16 @@ import { User, User$inboundSchema } from "./user.js";
  * ServicePrincipal represents a tenant-managed non-human identity.
  */
 export type ServicePrincipal = {
-  createdAt?: Date | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * The display name of the service principal.
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
   /**
    * The unique user ID of the service principal.
    */
-  id?: string | undefined;
-  updatedAt?: Date | undefined;
+  id?: string | null | undefined;
+  updatedAt?: Date | null | undefined;
   /**
    * The User object provides all of the details for an user, as well as some configuration.
    */
@@ -34,12 +34,14 @@ export const ServicePrincipal$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  displayName: z.nullable(z.string()).optional(),
+  id: z.nullable(z.string()).optional(),
+  updatedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
   user: User$inboundSchema.optional(),
 });
 

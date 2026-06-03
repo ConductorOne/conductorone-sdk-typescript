@@ -18,11 +18,11 @@ export type AttributeFacet = {
   /**
    * The attribute field.
    */
-  attribute?: string | undefined;
+  attribute?: string | null | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
   /**
    * The values field.
    */
@@ -35,8 +35,8 @@ export const AttributeFacet$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  attribute: z.string().optional(),
-  displayName: z.string().optional(),
+  attribute: z.nullable(z.string()).optional(),
+  displayName: z.nullable(z.string()).optional(),
   values: z.nullable(z.array(RoleMiningAttributeValue$inboundSchema))
     .optional(),
 });

@@ -18,36 +18,36 @@ export type LocalDirectoryConfig = {
   /**
    * Whether unauthenticated users may self-register in this directory.
    */
-  allowSelfRegistration?: boolean | undefined;
+  allowSelfRegistration?: boolean | null | undefined;
   /**
    * app_id is the identifier for this config and its linked App. Read-only after creation.
    */
-  appId?: string | undefined;
-  createdAt?: Date | undefined;
+  appId?: string | null | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * Optional FK to a ProfileType applied to new users created via this directory.
    */
-  defaultProfileTypeId?: string | undefined;
+  defaultProfileTypeId?: string | null | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | undefined;
-  invitationTtl?: string | undefined;
+  displayName?: string | null | undefined;
+  invitationTtl?: string | null | undefined;
   /**
    * Whether this is the default local directory for the tenant.
    *
    * @remarks
    *  At most one config per tenant may be the default.
    */
-  isDefault?: boolean | undefined;
+  isDefault?: boolean | null | undefined;
   /**
    * Optional FK to an onboarding flow applied by default when inviting users.
    */
-  onboardingFlowId?: string | undefined;
+  onboardingFlowId?: string | null | undefined;
   /**
    * Optional FK to a ThirdPartyOrganization. Empty means standalone (no vendor linkage).
    */
-  organizationId?: string | undefined;
+  organizationId?: string | null | undefined;
   /**
    * Email domain allowlist for self-registration. Empty allows any domain when
    *
@@ -55,7 +55,7 @@ export type LocalDirectoryConfig = {
    *  allow_self_registration is true.
    */
   selfRegistrationDomains?: Array<string> | null | undefined;
-  updatedAt?: Date | undefined;
+  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
@@ -64,19 +64,21 @@ export const LocalDirectoryConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  allowSelfRegistration: z.boolean().optional(),
-  appId: z.string().optional(),
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  defaultProfileTypeId: z.string().optional(),
-  displayName: z.string().optional(),
-  invitationTtl: z.string().optional(),
-  isDefault: z.boolean().optional(),
-  onboardingFlowId: z.string().optional(),
-  organizationId: z.string().optional(),
+  allowSelfRegistration: z.nullable(z.boolean()).optional(),
+  appId: z.nullable(z.string()).optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  defaultProfileTypeId: z.nullable(z.string()).optional(),
+  displayName: z.nullable(z.string()).optional(),
+  invitationTtl: z.nullable(z.string()).optional(),
+  isDefault: z.nullable(z.boolean()).optional(),
+  onboardingFlowId: z.nullable(z.string()).optional(),
+  organizationId: z.nullable(z.string()).optional(),
   selfRegistrationDomains: z.nullable(z.array(z.string())).optional(),
-  updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  updatedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 });
 
 export function localDirectoryConfigFromJSON(

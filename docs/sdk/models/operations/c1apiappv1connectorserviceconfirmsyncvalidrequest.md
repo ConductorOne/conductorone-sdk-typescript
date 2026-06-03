@@ -6,7 +6,7 @@
 import { C1ApiAppV1ConnectorServiceConfirmSyncValidRequest } from "conductorone-sdk-typescript/sdk/models/operations";
 
 let value: C1ApiAppV1ConnectorServiceConfirmSyncValidRequest = {
-  appId: null,
+  appId: "<id>",
   connectorId: "<id>",
   syncLifecycleId: "<id>",
 };

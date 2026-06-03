@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   TaskGrantSource,
   TaskGrantSource$Outbound,
@@ -13,16 +14,15 @@ import {
  * The TaskTypeGrant message indicates that a task is a grant task and all related details.
  */
 export type TaskTypeGrantInput = {
-  grantDuration?: string | null | undefined;
-  outcomeTime?: Date | null | undefined;
-  source?: TaskGrantSource | null | undefined;
+  /**
+   * The TaskGrantSource message tracks which external URL was the source of the specificed grant ticket.
+   */
+  taskGrantSource?: TaskGrantSource | undefined;
 };
 
 /** @internal */
 export type TaskTypeGrantInput$Outbound = {
-  grantDuration?: string | null | undefined;
-  outcomeTime?: string | null | undefined;
-  source?: TaskGrantSource$Outbound | null | undefined;
+  source?: TaskGrantSource$Outbound | undefined;
 };
 
 /** @internal */
@@ -31,9 +31,11 @@ export const TaskTypeGrantInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskTypeGrantInput
 > = z.object({
-  grantDuration: z.nullable(z.string()).optional(),
-  outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  source: z.nullable(TaskGrantSource$outboundSchema).optional(),
+  taskGrantSource: TaskGrantSource$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    taskGrantSource: "source",
+  });
 });
 
 export function taskTypeGrantInputToJSON(

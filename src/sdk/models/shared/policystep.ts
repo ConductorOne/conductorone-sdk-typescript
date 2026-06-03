@@ -65,16 +65,6 @@ import {
  */
 export type PolicyStep = {
   accept?: Accept | null | undefined;
-  /**
-   * The Action message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named target. Only a single field of the following list may be set at a time:
-   *   - automation
-   *   - batonResourceAction
-   *   - clientIdApproval
-   */
   action?: Action | null | undefined;
   approval?: Approval | null | undefined;
   form?: Form | null | undefined;

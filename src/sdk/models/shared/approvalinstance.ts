@@ -87,11 +87,39 @@ export type ApprovalInstanceState = OpenEnum<typeof ApprovalInstanceState>;
  *   - skipped
  */
 export type ApprovalInstance = {
-  approval?: Approval | null | undefined;
+  /**
+   * The Approval message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named typ. Only a single field of the following list may be set at a time:
+   *   - users
+   *   - manager
+   *   - appOwners
+   *   - group
+   *   - self
+   *   - entitlementOwners
+   *   - expression
+   *   - webhook
+   *   - resourceOwners
+   *   - agent
+   */
+  approval?: Approval | undefined;
   approved?: ApprovedAction | null | undefined;
-  assignedAt?: Date | undefined;
+  assignedAt?: Date | null | undefined;
   denied?: DeniedAction | null | undefined;
-  escalationInstance?: EscalationInstance | null | undefined;
+  /**
+   * The EscalationInstance message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named escalation_policy. Only a single field of the following list may be set at a time:
+   *   - replacePolicy
+   *   - reassignToApprovers
+   *   - cancelTicket
+   *   - skipStep
+   */
+  escalationInstance?: EscalationInstance | undefined;
   reassigned?: ReassignedAction | null | undefined;
   reassignedByError?: ReassignedByErrorAction | null | undefined;
   restarted?: RestartAction | null | undefined;
@@ -121,12 +149,13 @@ export const ApprovalInstance$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  approval: z.nullable(Approval$inboundSchema).optional(),
+  approval: Approval$inboundSchema.optional(),
   approved: z.nullable(ApprovedAction$inboundSchema).optional(),
-  assignedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  assignedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
   denied: z.nullable(DeniedAction$inboundSchema).optional(),
-  escalationInstance: z.nullable(EscalationInstance$inboundSchema).optional(),
+  escalationInstance: EscalationInstance$inboundSchema.optional(),
   reassigned: z.nullable(ReassignedAction$inboundSchema).optional(),
   reassignedByError: z.nullable(ReassignedByErrorAction$inboundSchema)
     .optional(),
@@ -136,11 +165,11 @@ export const ApprovalInstance$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ApprovalInstance$Outbound = {
-  approval?: Approval$Outbound | null | undefined;
+  approval?: Approval$Outbound | undefined;
   approved?: ApprovedAction$Outbound | null | undefined;
-  assignedAt?: string | undefined;
+  assignedAt?: string | null | undefined;
   denied?: DeniedAction$Outbound | null | undefined;
-  escalationInstance?: EscalationInstance$Outbound | null | undefined;
+  escalationInstance?: EscalationInstance$Outbound | undefined;
   reassigned?: ReassignedAction$Outbound | null | undefined;
   reassignedByError?: ReassignedByErrorAction$Outbound | null | undefined;
   restarted?: RestartAction$Outbound | null | undefined;
@@ -154,11 +183,11 @@ export const ApprovalInstance$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ApprovalInstance
 > = z.object({
-  approval: z.nullable(Approval$outboundSchema).optional(),
+  approval: Approval$outboundSchema.optional(),
   approved: z.nullable(ApprovedAction$outboundSchema).optional(),
-  assignedAt: z.date().transform(v => v.toISOString()).optional(),
+  assignedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   denied: z.nullable(DeniedAction$outboundSchema).optional(),
-  escalationInstance: z.nullable(EscalationInstance$outboundSchema).optional(),
+  escalationInstance: EscalationInstance$outboundSchema.optional(),
   reassigned: z.nullable(ReassignedAction$outboundSchema).optional(),
   reassignedByError: z.nullable(ReassignedByErrorAction$outboundSchema)
     .optional(),

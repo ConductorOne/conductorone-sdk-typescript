@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$Outbound,
@@ -35,7 +36,12 @@ export type SearchPastGrantsRequest = {
    * A list of app user references to restrict the search to.
    */
   appUserRefs?: Array<AppUserRef> | null | undefined;
-  expandMask?: AppEntitlementUserBindingExpandHistoryMask | null | undefined;
+  /**
+   * The AppEntitlementUserBindingExpandHistoryMask message.
+   */
+  appEntitlementUserBindingExpandHistoryMask?:
+    | AppEntitlementUserBindingExpandHistoryMask
+    | undefined;
   /**
    * The maximum number of results to return per page.
    */
@@ -51,10 +57,7 @@ export type SearchPastGrantsRequest$Outbound = {
   appEntitlementRefs?: Array<AppEntitlementRef$Outbound> | null | undefined;
   appIds?: Array<string> | null | undefined;
   appUserRefs?: Array<AppUserRef$Outbound> | null | undefined;
-  expandMask?:
-    | AppEntitlementUserBindingExpandHistoryMask$Outbound
-    | null
-    | undefined;
+  expandMask?: AppEntitlementUserBindingExpandHistoryMask$Outbound | undefined;
   pageSize?: number | null | undefined;
   pageToken?: string | null | undefined;
 };
@@ -69,11 +72,14 @@ export const SearchPastGrantsRequest$outboundSchema: z.ZodType<
     .optional(),
   appIds: z.nullable(z.array(z.string())).optional(),
   appUserRefs: z.nullable(z.array(AppUserRef$outboundSchema)).optional(),
-  expandMask: z.nullable(
-    AppEntitlementUserBindingExpandHistoryMask$outboundSchema,
-  ).optional(),
+  appEntitlementUserBindingExpandHistoryMask:
+    AppEntitlementUserBindingExpandHistoryMask$outboundSchema.optional(),
   pageSize: z.nullable(z.number().int()).optional(),
   pageToken: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    appEntitlementUserBindingExpandHistoryMask: "expandMask",
+  });
 });
 
 export function searchPastGrantsRequestToJSON(

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,7 +16,10 @@ import {
  * The PersonalClientServiceCreateResponse message contains the created personal client and client secret.
  */
 export type PersonalClientServiceCreateResponse = {
-  client?: PersonalClient | null | undefined;
+  /**
+   * The PersonalClient message contains information about a presonal client credential.
+   */
+  personalClient?: PersonalClient | undefined;
   /**
    * The client secret that corresponds to the personal client. Make sure to save this, because it cannot be returned or queried again.
    */
@@ -28,8 +32,12 @@ export const PersonalClientServiceCreateResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  client: z.nullable(PersonalClient$inboundSchema).optional(),
+  client: PersonalClient$inboundSchema.optional(),
   clientSecret: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "client": "personalClient",
+  });
 });
 
 export function personalClientServiceCreateResponseFromJSON(

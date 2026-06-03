@@ -14,15 +14,15 @@ export type WorkloadFederationServiceTestCELResponse = {
   /**
    * Error message if compilation or evaluation failed.
    */
-  error?: string | undefined;
+  error?: string | null | undefined;
   /**
    * The expression that was evaluated (echo back).
    */
-  expression?: string | undefined;
+  expression?: string | null | undefined;
   /**
    * Whether the expression matched (returned true).
    */
-  matched?: boolean | undefined;
+  matched?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -31,9 +31,9 @@ export const WorkloadFederationServiceTestCELResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  error: z.string().optional(),
-  expression: z.string().optional(),
-  matched: z.boolean().optional(),
+  error: z.nullable(z.string()).optional(),
+  expression: z.nullable(z.string()).optional(),
+  matched: z.nullable(z.boolean()).optional(),
 });
 
 export function workloadFederationServiceTestCELResponseFromJSON(

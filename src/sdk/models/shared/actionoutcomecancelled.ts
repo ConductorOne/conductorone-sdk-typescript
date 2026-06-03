@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * The ActionOutcomeCancelled message.
  */
 export type ActionOutcomeCancelled = {
-  outcomeTime?: Date | undefined;
+  outcomeTime?: Date | null | undefined;
 };
 
 /** @internal */
@@ -20,12 +20,13 @@ export const ActionOutcomeCancelled$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  outcomeTime: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  outcomeTime: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 });
 /** @internal */
 export type ActionOutcomeCancelled$Outbound = {
-  outcomeTime?: string | undefined;
+  outcomeTime?: string | null | undefined;
 };
 
 /** @internal */
@@ -34,7 +35,7 @@ export const ActionOutcomeCancelled$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ActionOutcomeCancelled
 > = z.object({
-  outcomeTime: z.date().transform(v => v.toISOString()).optional(),
+  outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function actionOutcomeCancelledToJSON(

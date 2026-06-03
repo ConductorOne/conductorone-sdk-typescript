@@ -32,7 +32,7 @@ export type TaskAuditActionInstanceSucceeded = {
    *   - error
    *   - cancelled
    */
-  actionInstance?: ActionInstance | null | undefined;
+  actionInstance?: ActionInstance | undefined;
 };
 
 /** @internal */
@@ -41,7 +41,7 @@ export const TaskAuditActionInstanceSucceeded$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  instance: z.nullable(ActionInstance$inboundSchema).optional(),
+  instance: ActionInstance$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "instance": "actionInstance",

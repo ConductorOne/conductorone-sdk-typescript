@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -27,7 +28,10 @@ export type AppEntitlementUserBindingFeedView = {
    * The entitlementPath field.
    */
   entitlementPath?: string | null | undefined;
-  feed?: AppEntitlementUserBindingFeed | null | undefined;
+  /**
+   * The AppEntitlementUserBindingFeed message.
+   */
+  appEntitlementUserBindingFeed?: AppEntitlementUserBindingFeed | undefined;
   /**
    * The ticketPath field.
    */
@@ -43,8 +47,12 @@ export const AppEntitlementUserBindingFeedView$inboundSchema: z.ZodType<
   appPath: z.nullable(z.string()).optional(),
   appUserPath: z.nullable(z.string()).optional(),
   entitlementPath: z.nullable(z.string()).optional(),
-  feed: z.nullable(AppEntitlementUserBindingFeed$inboundSchema).optional(),
+  feed: AppEntitlementUserBindingFeed$inboundSchema.optional(),
   ticketPath: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "feed": "appEntitlementUserBindingFeed",
+  });
 });
 
 export function appEntitlementUserBindingFeedViewFromJSON(

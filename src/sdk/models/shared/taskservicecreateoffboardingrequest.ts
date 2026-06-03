@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   TaskExpandMask,
   TaskExpandMask$Outbound,
@@ -17,7 +18,10 @@ export type TaskServiceCreateOffboardingRequest = {
    * The description of the offboarding request.
    */
   description?: string | null | undefined;
-  expandMask?: TaskExpandMask | null | undefined;
+  /**
+   * The task expand mask is an array of strings that specifes the related objects the requester wishes to have returned when making a request where the expand mask is part of the input. Use '*' to view all possible responses.
+   */
+  taskExpandMask?: TaskExpandMask | undefined;
   /**
    * The ID of the user to offboard.
    */
@@ -27,7 +31,7 @@ export type TaskServiceCreateOffboardingRequest = {
 /** @internal */
 export type TaskServiceCreateOffboardingRequest$Outbound = {
   description?: string | null | undefined;
-  expandMask?: TaskExpandMask$Outbound | null | undefined;
+  expandMask?: TaskExpandMask$Outbound | undefined;
   subjectUserId?: string | null | undefined;
 };
 
@@ -38,8 +42,12 @@ export const TaskServiceCreateOffboardingRequest$outboundSchema: z.ZodType<
   TaskServiceCreateOffboardingRequest
 > = z.object({
   description: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
+  taskExpandMask: TaskExpandMask$outboundSchema.optional(),
   subjectUserId: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    taskExpandMask: "expandMask",
+  });
 });
 
 export function taskServiceCreateOffboardingRequestToJSON(

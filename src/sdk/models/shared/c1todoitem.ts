@@ -28,7 +28,7 @@ export type C1TodoItem = {
   /**
    * The id field.
    */
-  id?: string | undefined;
+  id?: string | null | undefined;
   /**
    * DynamicString can be a literal value, a JSON pointer path, or a function call.
    *
@@ -43,15 +43,15 @@ export type C1TodoItem = {
   /**
    * The section field.
    */
-  section?: string | undefined;
+  section?: string | null | undefined;
   /**
    * The status field.
    */
-  status?: string | undefined;
+  status?: string | null | undefined;
   /**
    * ServerEvent triggers a server-side action.
    */
-  serverEvent?: ServerEvent | null | undefined;
+  serverEvent?: ServerEvent | undefined;
   /**
    * DynamicString can be a literal value, a JSON pointer path, or a function call.
    *
@@ -72,11 +72,11 @@ export const C1TodoItem$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   description: DynamicString$inboundSchema.optional(),
-  id: z.string().optional(),
+  id: z.nullable(z.string()).optional(),
   label: DynamicString$inboundSchema.optional(),
-  section: z.string().optional(),
-  status: z.string().optional(),
-  trailingAction: z.nullable(ServerEvent$inboundSchema).optional(),
+  section: z.nullable(z.string()).optional(),
+  status: z.nullable(z.string()).optional(),
+  trailingAction: ServerEvent$inboundSchema.optional(),
   trailingActionLabel: DynamicString$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

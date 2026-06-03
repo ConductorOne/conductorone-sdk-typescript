@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,7 +27,10 @@ export type AppEntitlementWithUserBindings = {
     | Array<AppEntitlementUserBinding>
     | null
     | undefined;
-  entitlement?: AppEntitlementView | null | undefined;
+  /**
+   * The app entitlement view contains the serialized app entitlement and paths to objects referenced by the app entitlement.
+   */
+  appEntitlementView?: AppEntitlementView | undefined;
 };
 
 /** @internal */
@@ -38,7 +42,11 @@ export const AppEntitlementWithUserBindings$inboundSchema: z.ZodType<
   appEntitlementUserBindings: z.nullable(
     z.array(AppEntitlementUserBinding$inboundSchema),
   ).optional(),
-  entitlement: z.nullable(AppEntitlementView$inboundSchema).optional(),
+  entitlement: AppEntitlementView$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "entitlement": "appEntitlementView",
+  });
 });
 
 export function appEntitlementWithUserBindingsFromJSON(

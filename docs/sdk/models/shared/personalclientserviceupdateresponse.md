@@ -12,6 +12,6 @@ let value: PersonalClientServiceUpdateResponse = {};
 
 ## Fields
 
-| Field                                                                 | Type                                                                  | Required                                                              | Description                                                           |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `client`                                                              | [shared.PersonalClient](../../../sdk/models/shared/personalclient.md) | :heavy_minus_sign:                                                    | N/A                                                                   |
+| Field                                                                               | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `personalClient`                                                                    | [shared.PersonalClient](../../../sdk/models/shared/personalclient.md)               | :heavy_minus_sign:                                                                  | The PersonalClient message contains information about a presonal client credential. |

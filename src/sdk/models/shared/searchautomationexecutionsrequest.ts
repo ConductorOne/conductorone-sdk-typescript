@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -29,6 +30,8 @@ export const ExecutionStepStates = {
   AutomationExecutionStateError: "AUTOMATION_EXECUTION_STATE_ERROR",
   AutomationExecutionStateTerminate: "AUTOMATION_EXECUTION_STATE_TERMINATE",
   AutomationExecutionStateWaiting: "AUTOMATION_EXECUTION_STATE_WAITING",
+  AutomationExecutionStatePausedByCircuitBreaker:
+    "AUTOMATION_EXECUTION_STATE_PAUSED_BY_CIRCUIT_BREAKER",
 } as const;
 export type ExecutionStepStates = OpenEnum<typeof ExecutionStepStates>;
 
@@ -48,7 +51,10 @@ export type SearchAutomationExecutionsRequest = {
    * Filter results to executions in any of the specified states.
    */
   executionStepStates?: Array<ExecutionStepStates> | null | undefined;
-  expandMask?: AutomationExecutionExpandMask | null | undefined;
+  /**
+   * The AutomationExecutionExpandMask message.
+   */
+  automationExecutionExpandMask?: AutomationExecutionExpandMask | undefined;
   /**
    * Maximum number of results to return per page.
    */
@@ -79,7 +85,7 @@ export type SearchAutomationExecutionsRequest$Outbound = {
   automationTemplateId?: string | null | undefined;
   executionId?: string | null | undefined;
   executionStepStates?: Array<string> | null | undefined;
-  expandMask?: AutomationExecutionExpandMask$Outbound | null | undefined;
+  expandMask?: AutomationExecutionExpandMask$Outbound | undefined;
   pageSize?: number | null | undefined;
   pageToken?: string | null | undefined;
   query?: string | null | undefined;
@@ -96,12 +102,16 @@ export const SearchAutomationExecutionsRequest$outboundSchema: z.ZodType<
   executionId: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
   executionStepStates: z.nullable(z.array(ExecutionStepStates$outboundSchema))
     .optional(),
-  expandMask: z.nullable(AutomationExecutionExpandMask$outboundSchema)
+  automationExecutionExpandMask: AutomationExecutionExpandMask$outboundSchema
     .optional(),
   pageSize: z.nullable(z.number().int()).optional(),
   pageToken: z.nullable(z.string()).optional(),
   query: z.nullable(z.string()).optional(),
   refs: z.nullable(z.array(AutomationExecutionRef$outboundSchema)).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    automationExecutionExpandMask: "expandMask",
+  });
 });
 
 export function searchAutomationExecutionsRequestToJSON(

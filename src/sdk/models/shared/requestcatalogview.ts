@@ -27,7 +27,10 @@ export type RequestCatalogView = {
    * Total number of the members of the catalog
    */
   memberCount?: number | null | undefined;
-  requestCatalog?: RequestCatalog | null | undefined;
+  /**
+   * The RequestCatalog is used for managing which entitlements are requestable, and who can request them.
+   */
+  requestCatalog?: RequestCatalog | undefined;
 };
 
 /** @internal */
@@ -40,7 +43,7 @@ export const RequestCatalogView$inboundSchema: z.ZodType<
   createdByUserPath: z.nullable(z.string()).optional(),
   memberCount: z.nullable(z.string().transform(v => parseInt(v, 10)))
     .optional(),
-  requestCatalog: z.nullable(RequestCatalog$inboundSchema).optional(),
+  requestCatalog: RequestCatalog$inboundSchema.optional(),
 });
 
 export function requestCatalogViewFromJSON(

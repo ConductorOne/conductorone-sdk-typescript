@@ -10,9 +10,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1ConnectorServiceRevokeCredentialRequest = {
-  appId: string | null;
-  connectorId: string | null;
-  id: string | null;
+  appId: string;
+  connectorId: string;
+  id: string;
   connectorServiceRevokeCredentialRequest?:
     | shared.ConnectorServiceRevokeCredentialRequest
     | undefined;
@@ -41,9 +41,9 @@ export type C1ApiAppV1ConnectorServiceRevokeCredentialResponse = {
 
 /** @internal */
 export type C1ApiAppV1ConnectorServiceRevokeCredentialRequest$Outbound = {
-  app_id: string | null;
-  connector_id: string | null;
-  id: string | null;
+  app_id: string;
+  connector_id: string;
+  id: string;
   ConnectorServiceRevokeCredentialRequest?:
     | shared.ConnectorServiceRevokeCredentialRequest$Outbound
     | undefined;
@@ -56,9 +56,9 @@ export const C1ApiAppV1ConnectorServiceRevokeCredentialRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiAppV1ConnectorServiceRevokeCredentialRequest
   > = z.object({
-    appId: z.nullable(z.string()),
-    connectorId: z.nullable(z.string()),
-    id: z.nullable(z.string()),
+    appId: z.string(),
+    connectorId: z.string(),
+    id: z.string(),
     connectorServiceRevokeCredentialRequest: shared
       .ConnectorServiceRevokeCredentialRequest$outboundSchema.optional(),
   }).transform((v) => {

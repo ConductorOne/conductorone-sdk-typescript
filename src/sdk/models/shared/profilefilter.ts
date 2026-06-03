@@ -17,7 +17,7 @@ export type ProfileFilter = {
   /**
    * The attribute field.
    */
-  attribute?: string | undefined;
+  attribute?: string | null | undefined;
   /**
    * The values field.
    */
@@ -30,12 +30,12 @@ export const ProfileFilter$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  attribute: z.string().optional(),
+  attribute: z.nullable(z.string()).optional(),
   values: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
 export type ProfileFilter$Outbound = {
-  attribute?: string | undefined;
+  attribute?: string | null | undefined;
   values?: Array<string> | null | undefined;
 };
 
@@ -45,7 +45,7 @@ export const ProfileFilter$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ProfileFilter
 > = z.object({
-  attribute: z.string().optional(),
+  attribute: z.nullable(z.string()).optional(),
   values: z.nullable(z.array(z.string())).optional(),
 });
 

@@ -27,7 +27,7 @@ export type Choice = {
   /**
    * The id field.
    */
-  id?: string | undefined;
+  id?: string | null | undefined;
   /**
    * DynamicString can be a literal value, a JSON pointer path, or a function call.
    *
@@ -45,7 +45,7 @@ export type Choice = {
 export const Choice$inboundSchema: z.ZodType<Choice, z.ZodTypeDef, unknown> = z
   .object({
     description: DynamicString$inboundSchema.optional(),
-    id: z.string().optional(),
+    id: z.nullable(z.string()).optional(),
     label: DynamicString$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {

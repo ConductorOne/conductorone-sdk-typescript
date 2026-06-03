@@ -21,7 +21,7 @@ export type PaperSecretAdminServiceSearchAuditEventsResponse = {
   /**
    * The nextPageToken field.
    */
-  nextPageToken?: string | undefined;
+  nextPageToken?: string | null | undefined;
 };
 
 /** @internal */
@@ -32,7 +32,7 @@ export const PaperSecretAdminServiceSearchAuditEventsResponse$inboundSchema:
     unknown
   > = z.object({
     list: z.nullable(z.array(z.record(z.any()))).optional(),
-    nextPageToken: z.string().optional(),
+    nextPageToken: z.nullable(z.string()).optional(),
   });
 
 export function paperSecretAdminServiceSearchAuditEventsResponseFromJSON(

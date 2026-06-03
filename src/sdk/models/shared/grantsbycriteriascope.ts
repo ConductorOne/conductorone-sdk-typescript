@@ -63,21 +63,18 @@ export type GrantsByCriteriaScope = {
    * The GrantAccessProfileFilter message.
    */
   grantAccessProfileFilter?: GrantAccessProfileFilter | undefined;
-  daysSinceAdded?: string | undefined;
-  daysSinceLastUsed?: string | undefined;
-  daysSinceReviewed?: string | undefined;
-  /**
-   * The GrantsAddedBetween message.
-   */
+  daysSinceAdded?: string | null | undefined;
+  daysSinceLastUsed?: string | null | undefined;
+  daysSinceReviewed?: string | null | undefined;
   grantsAddedBetween?: GrantsAddedBetween | null | undefined;
   /**
    * The sourceFilter field.
    */
-  sourceFilter?: SourceFilter | undefined;
+  sourceFilter?: SourceFilter | null | undefined;
   /**
    * The typeFilter field.
    */
-  typeFilter?: TypeFilter | undefined;
+  typeFilter?: TypeFilter | null | undefined;
 };
 
 /** @internal */
@@ -113,12 +110,12 @@ export const GrantsByCriteriaScope$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   accessProfileFilter: GrantAccessProfileFilter$inboundSchema.optional(),
-  daysSinceAdded: z.string().optional(),
-  daysSinceLastUsed: z.string().optional(),
-  daysSinceReviewed: z.string().optional(),
+  daysSinceAdded: z.nullable(z.string()).optional(),
+  daysSinceLastUsed: z.nullable(z.string()).optional(),
+  daysSinceReviewed: z.nullable(z.string()).optional(),
   grantsAddedBetween: z.nullable(GrantsAddedBetween$inboundSchema).optional(),
-  sourceFilter: SourceFilter$inboundSchema.optional(),
-  typeFilter: TypeFilter$inboundSchema.optional(),
+  sourceFilter: z.nullable(SourceFilter$inboundSchema).optional(),
+  typeFilter: z.nullable(TypeFilter$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "accessProfileFilter": "grantAccessProfileFilter",
@@ -127,12 +124,12 @@ export const GrantsByCriteriaScope$inboundSchema: z.ZodType<
 /** @internal */
 export type GrantsByCriteriaScope$Outbound = {
   accessProfileFilter?: GrantAccessProfileFilter$Outbound | undefined;
-  daysSinceAdded?: string | undefined;
-  daysSinceLastUsed?: string | undefined;
-  daysSinceReviewed?: string | undefined;
+  daysSinceAdded?: string | null | undefined;
+  daysSinceLastUsed?: string | null | undefined;
+  daysSinceReviewed?: string | null | undefined;
   grantsAddedBetween?: GrantsAddedBetween$Outbound | null | undefined;
-  sourceFilter?: string | undefined;
-  typeFilter?: string | undefined;
+  sourceFilter?: string | null | undefined;
+  typeFilter?: string | null | undefined;
 };
 
 /** @internal */
@@ -142,12 +139,12 @@ export const GrantsByCriteriaScope$outboundSchema: z.ZodType<
   GrantsByCriteriaScope
 > = z.object({
   grantAccessProfileFilter: GrantAccessProfileFilter$outboundSchema.optional(),
-  daysSinceAdded: z.string().optional(),
-  daysSinceLastUsed: z.string().optional(),
-  daysSinceReviewed: z.string().optional(),
+  daysSinceAdded: z.nullable(z.string()).optional(),
+  daysSinceLastUsed: z.nullable(z.string()).optional(),
+  daysSinceReviewed: z.nullable(z.string()).optional(),
   grantsAddedBetween: z.nullable(GrantsAddedBetween$outboundSchema).optional(),
-  sourceFilter: SourceFilter$outboundSchema.optional(),
-  typeFilter: TypeFilter$outboundSchema.optional(),
+  sourceFilter: z.nullable(SourceFilter$outboundSchema).optional(),
+  typeFilter: z.nullable(TypeFilter$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     grantAccessProfileFilter: "accessProfileFilter",

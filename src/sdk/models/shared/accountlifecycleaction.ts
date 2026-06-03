@@ -41,7 +41,10 @@ export type AccountLifecycleAction = {
    * The actionName field.
    */
   actionName?: string | null | undefined;
-  connectorRef?: ConnectorRef | null | undefined;
+  /**
+   * The ConnectorRef message.
+   */
+  connectorRef?: ConnectorRef | undefined;
 };
 
 /** @internal */
@@ -53,14 +56,14 @@ export const AccountLifecycleAction$inboundSchema: z.ZodType<
   accountInContext: z.nullable(AccountInContext$inboundSchema).optional(),
   accountRef: z.nullable(AccountRef$inboundSchema).optional(),
   actionName: z.nullable(z.string()).optional(),
-  connectorRef: z.nullable(ConnectorRef$inboundSchema).optional(),
+  connectorRef: ConnectorRef$inboundSchema.optional(),
 });
 /** @internal */
 export type AccountLifecycleAction$Outbound = {
   accountInContext?: AccountInContext$Outbound | null | undefined;
   accountRef?: AccountRef$Outbound | null | undefined;
   actionName?: string | null | undefined;
-  connectorRef?: ConnectorRef$Outbound | null | undefined;
+  connectorRef?: ConnectorRef$Outbound | undefined;
 };
 
 /** @internal */
@@ -72,7 +75,7 @@ export const AccountLifecycleAction$outboundSchema: z.ZodType<
   accountInContext: z.nullable(AccountInContext$outboundSchema).optional(),
   accountRef: z.nullable(AccountRef$outboundSchema).optional(),
   actionName: z.nullable(z.string()).optional(),
-  connectorRef: z.nullable(ConnectorRef$outboundSchema).optional(),
+  connectorRef: ConnectorRef$outboundSchema.optional(),
 });
 
 export function accountLifecycleActionToJSON(

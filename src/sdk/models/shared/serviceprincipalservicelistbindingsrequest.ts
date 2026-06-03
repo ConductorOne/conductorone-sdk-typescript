@@ -17,11 +17,11 @@ export type ServicePrincipalServiceListBindingsRequest = {
   /**
    * The pageSize field.
    */
-  pageSize?: number | undefined;
+  pageSize?: number | null | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | undefined;
+  pageToken?: string | null | undefined;
   /**
    * ServicePrincipalBindingSubject identifies the entity that is bound to a
    *
@@ -37,8 +37,8 @@ export type ServicePrincipalServiceListBindingsRequest = {
 
 /** @internal */
 export type ServicePrincipalServiceListBindingsRequest$Outbound = {
-  pageSize?: number | undefined;
-  pageToken?: string | undefined;
+  pageSize?: number | null | undefined;
+  pageToken?: string | null | undefined;
   subject?: ServicePrincipalBindingSubject$Outbound | undefined;
 };
 
@@ -49,8 +49,8 @@ export const ServicePrincipalServiceListBindingsRequest$outboundSchema:
     z.ZodTypeDef,
     ServicePrincipalServiceListBindingsRequest
   > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
+    pageSize: z.nullable(z.number().int()).optional(),
+    pageToken: z.nullable(z.string()).optional(),
     servicePrincipalBindingSubject:
       ServicePrincipalBindingSubject$outboundSchema.optional(),
   }).transform((v) => {

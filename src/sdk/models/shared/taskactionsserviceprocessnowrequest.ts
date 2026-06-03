@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   TaskExpandMask,
   TaskExpandMask$Outbound,
@@ -13,12 +14,15 @@ import {
  * The TaskActionsServiceProcessNowRequest object lets you trigger processing of a task immediately.
  */
 export type TaskActionsServiceProcessNowRequest = {
-  expandMask?: TaskExpandMask | null | undefined;
+  /**
+   * The task expand mask is an array of strings that specifes the related objects the requester wishes to have returned when making a request where the expand mask is part of the input. Use '*' to view all possible responses.
+   */
+  taskExpandMask?: TaskExpandMask | undefined;
 };
 
 /** @internal */
 export type TaskActionsServiceProcessNowRequest$Outbound = {
-  expandMask?: TaskExpandMask$Outbound | null | undefined;
+  expandMask?: TaskExpandMask$Outbound | undefined;
 };
 
 /** @internal */
@@ -27,7 +31,11 @@ export const TaskActionsServiceProcessNowRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskActionsServiceProcessNowRequest
 > = z.object({
-  expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
+  taskExpandMask: TaskExpandMask$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    taskExpandMask: "expandMask",
+  });
 });
 
 export function taskActionsServiceProcessNowRequestToJSON(

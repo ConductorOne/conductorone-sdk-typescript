@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -77,13 +78,26 @@ export type RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementB
  */
 export type RequestCatalogManagementServiceCreateRequest = {
   /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  matching URL-safe ASCII; total serialized ≤4096 bytes. Keys starting
+   *  with `c1/` are reserved for server-managed use and rejected on write.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * The description of the new request catalog.
    */
   description?: string | null | undefined;
   /**
    * The display name of the new request catalog.
    */
-  displayName: string;
+  displayName: string | null;
   /**
    * Defines how to handle the request policies of the entitlements in the catalog during enrollment.
    */
@@ -91,11 +105,10 @@ export type RequestCatalogManagementServiceCreateRequest = {
     | RequestCatalogManagementServiceCreateRequestEnrollmentBehavior
     | null
     | undefined;
-  expandMask?: RequestCatalogExpandMask | null | undefined;
   /**
-   * The ID of the grant policy for access requests in this catalog.
+   * The RequestCatalogExpandMask includes the paths in the catalog view to expand in the return value of this call.
    */
-  grantPolicyId?: string | undefined;
+  requestCatalogExpandMask?: RequestCatalogExpandMask | undefined;
   /**
    * Whether or not the new catalog should be created as published.
    */
@@ -156,11 +169,11 @@ export const RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlement
 
 /** @internal */
 export type RequestCatalogManagementServiceCreateRequest$Outbound = {
+  annotations?: { [k: string]: string } | undefined;
   description?: string | null | undefined;
-  displayName: string;
+  displayName: string | null;
   enrollmentBehavior?: string | null | undefined;
-  expandMask?: RequestCatalogExpandMask$Outbound | null | undefined;
-  grantPolicyId?: string | undefined;
+  expandMask?: RequestCatalogExpandMask$Outbound | undefined;
   published?: boolean | null | undefined;
   requestBundle?: boolean | null | undefined;
   unenrollmentBehavior?: string | null | undefined;
@@ -175,13 +188,14 @@ export const RequestCatalogManagementServiceCreateRequest$outboundSchema:
     z.ZodTypeDef,
     RequestCatalogManagementServiceCreateRequest
   > = z.object({
+    annotations: z.record(z.string()).optional(),
     description: z.nullable(z.string()).optional(),
-    displayName: z.string(),
+    displayName: z.nullable(z.string()),
     enrollmentBehavior: z.nullable(
       RequestCatalogManagementServiceCreateRequestEnrollmentBehavior$outboundSchema,
     ).optional(),
-    expandMask: z.nullable(RequestCatalogExpandMask$outboundSchema).optional(),
-    grantPolicyId: z.string().optional(),
+    requestCatalogExpandMask: RequestCatalogExpandMask$outboundSchema
+      .optional(),
     published: z.nullable(z.boolean()).optional(),
     requestBundle: z.nullable(z.boolean()).optional(),
     unenrollmentBehavior: z.nullable(
@@ -191,6 +205,10 @@ export const RequestCatalogManagementServiceCreateRequest$outboundSchema:
       RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior$outboundSchema,
     ).optional(),
     visibleToEveryone: z.nullable(z.boolean()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requestCatalogExpandMask: "expandMask",
+    });
   });
 
 export function requestCatalogManagementServiceCreateRequestToJSON(

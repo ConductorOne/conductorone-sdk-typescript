@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,7 +16,20 @@ import {
  * The TaskAuditApprovalInstanceChange message.
  */
 export type TaskAuditApprovalInstanceChange = {
-  instance?: ApprovalInstance | null | undefined;
+  /**
+   * The approval instance object describes the way a policy step should be approved as well as its outcomes and state.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named outcome. Only a single field of the following list may be set at a time:
+   *   - approved
+   *   - denied
+   *   - reassigned
+   *   - restarted
+   *   - reassignedByError
+   *   - skipped
+   */
+  approvalInstance?: ApprovalInstance | undefined;
 };
 
 /** @internal */
@@ -24,7 +38,11 @@ export const TaskAuditApprovalInstanceChange$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  instance: z.nullable(ApprovalInstance$inboundSchema).optional(),
+  instance: ApprovalInstance$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "instance": "approvalInstance",
+  });
 });
 
 export function taskAuditApprovalInstanceChangeFromJSON(

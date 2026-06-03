@@ -47,48 +47,32 @@ export type HooksServiceCreateRequestEvent = OpenEnum<
  *   - builtinPattern
  */
 export type HooksServiceCreateRequest = {
-  /**
-   * BuiltInPattern references a ConductorOne-maintained DLP pattern.
-   *
-   * @remarks
-   *  The specific pattern and its configuration are encoded as a oneof.
-   *
-   * This message contains a oneof named config. Only a single field of the following list may be set at a time:
-   *   - piiRedaction
-   *   - creditCardBlocking
-   *   - queryScopeLimit
-   *   - writeAuthorization
-   *   - sensitiveFileGuard
-   */
-  builtInPattern?: BuiltInPattern | null | undefined;
+  builtinPattern?: BuiltInPattern | null | undefined;
   /**
    * The description field.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * The displayName field.
    */
-  displayName: string;
+  displayName: string | null;
   /**
    * The enabled field.
    */
-  enabled?: boolean | undefined;
+  enabled?: boolean | null | undefined;
   /**
    * The event field.
    */
-  event?: HooksServiceCreateRequestEvent | undefined;
+  event?: HooksServiceCreateRequestEvent | null | undefined;
   /**
    * HookFilter determines which tool calls a hook applies to.
    */
   hookFilter?: HookFilter | undefined;
-  /**
-   * HookFunctionRef identifies a customer-authored function to invoke.
-   */
-  hookFunctionRef?: HookFunctionRef | null | undefined;
+  function?: HookFunctionRef | null | undefined;
   /**
    * The priority field.
    */
-  priority?: number | undefined;
+  priority?: number | null | undefined;
 };
 
 /** @internal */
@@ -101,13 +85,13 @@ export const HooksServiceCreateRequestEvent$outboundSchema: z.ZodType<
 /** @internal */
 export type HooksServiceCreateRequest$Outbound = {
   builtinPattern?: BuiltInPattern$Outbound | null | undefined;
-  description?: string | undefined;
-  displayName: string;
-  enabled?: boolean | undefined;
-  event?: string | undefined;
+  description?: string | null | undefined;
+  displayName: string | null;
+  enabled?: boolean | null | undefined;
+  event?: string | null | undefined;
   filter?: HookFilter$Outbound | undefined;
   function?: HookFunctionRef$Outbound | null | undefined;
-  priority?: number | undefined;
+  priority?: number | null | undefined;
 };
 
 /** @internal */
@@ -116,19 +100,17 @@ export const HooksServiceCreateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   HooksServiceCreateRequest
 > = z.object({
-  builtInPattern: z.nullable(BuiltInPattern$outboundSchema).optional(),
-  description: z.string().optional(),
-  displayName: z.string(),
-  enabled: z.boolean().optional(),
-  event: HooksServiceCreateRequestEvent$outboundSchema.optional(),
+  builtinPattern: z.nullable(BuiltInPattern$outboundSchema).optional(),
+  description: z.nullable(z.string()).optional(),
+  displayName: z.nullable(z.string()),
+  enabled: z.nullable(z.boolean()).optional(),
+  event: z.nullable(HooksServiceCreateRequestEvent$outboundSchema).optional(),
   hookFilter: HookFilter$outboundSchema.optional(),
-  hookFunctionRef: z.nullable(HookFunctionRef$outboundSchema).optional(),
-  priority: z.number().int().optional(),
+  function: z.nullable(HookFunctionRef$outboundSchema).optional(),
+  priority: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
-    builtInPattern: "builtinPattern",
     hookFilter: "filter",
-    hookFunctionRef: "function",
   });
 });
 

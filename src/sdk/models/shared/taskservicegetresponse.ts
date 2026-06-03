@@ -31,7 +31,10 @@ export type TaskServiceGetResponse = {
    * List of serialized related objects.
    */
   expanded?: Array<TaskServiceGetResponseExpanded> | null | undefined;
-  taskView?: TaskView | null | undefined;
+  /**
+   * Contains a task and JSONPATH expressions that describe where in the expanded array related objects are located. This view can be used to display a fully-detailed dashboard of task information.
+   */
+  taskView?: TaskView | undefined;
 };
 
 /** @internal */
@@ -70,7 +73,7 @@ export const TaskServiceGetResponse$inboundSchema: z.ZodType<
   expanded: z.nullable(
     z.array(z.lazy(() => TaskServiceGetResponseExpanded$inboundSchema)),
   ).optional(),
-  taskView: z.nullable(TaskView$inboundSchema).optional(),
+  taskView: TaskView$inboundSchema.optional(),
 });
 
 export function taskServiceGetResponseFromJSON(

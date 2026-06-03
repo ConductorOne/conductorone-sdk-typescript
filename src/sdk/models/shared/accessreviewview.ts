@@ -31,7 +31,7 @@ export type AccessReviewView = {
   /**
    * The createdByUserPath field.
    */
-  createdByUserPath?: string | undefined;
+  createdByUserPath?: string | null | undefined;
   /**
    * The ActorObjectPermissions message.
    */
@@ -39,7 +39,7 @@ export type AccessReviewView = {
   /**
    * The policyPath field.
    */
-  policyPath?: string | undefined;
+  policyPath?: string | null | undefined;
 };
 
 /** @internal */
@@ -49,9 +49,9 @@ export const AccessReviewView$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   accessReview: AccessReview$inboundSchema.optional(),
-  createdByUserPath: z.string().optional(),
+  createdByUserPath: z.nullable(z.string()).optional(),
   objectPermissions: ActorObjectPermissions$inboundSchema.optional(),
-  policyPath: z.string().optional(),
+  policyPath: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "objectPermissions": "actorObjectPermissions",

@@ -30,7 +30,10 @@ export type CreateAppEntitlementProxyResponseExpanded = {
  * The response message for creating an entitlement proxy binding.
  */
 export type CreateAppEntitlementProxyResponse = {
-  appProxyEntitlementView?: AppEntitlementProxyView | null | undefined;
+  /**
+   * The AppEntitlementProxyView message.
+   */
+  appEntitlementProxyView?: AppEntitlementProxyView | undefined;
   /**
    * List of serialized related objects.
    */
@@ -79,13 +82,16 @@ export const CreateAppEntitlementProxyResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appProxyEntitlementView: z.nullable(AppEntitlementProxyView$inboundSchema)
-    .optional(),
+  appProxyEntitlementView: AppEntitlementProxyView$inboundSchema.optional(),
   expanded: z.nullable(
     z.array(
       z.lazy(() => CreateAppEntitlementProxyResponseExpanded$inboundSchema),
     ),
   ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "appProxyEntitlementView": "appEntitlementProxyView",
+  });
 });
 
 export function createAppEntitlementProxyResponseFromJSON(

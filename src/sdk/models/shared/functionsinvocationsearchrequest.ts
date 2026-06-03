@@ -14,17 +14,17 @@ export type FunctionsInvocationSearchRequest = {
   /**
    * The number of results to return per page.
    */
-  pageSize?: number | undefined;
+  pageSize?: number | null | undefined;
   /**
    * The pagination token for fetching the next page.
    */
-  pageToken?: string | undefined;
+  pageToken?: string | null | undefined;
 };
 
 /** @internal */
 export type FunctionsInvocationSearchRequest$Outbound = {
-  pageSize?: number | undefined;
-  pageToken?: string | undefined;
+  pageSize?: number | null | undefined;
+  pageToken?: string | null | undefined;
 };
 
 /** @internal */
@@ -33,8 +33,8 @@ export const FunctionsInvocationSearchRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FunctionsInvocationSearchRequest
 > = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
+  pageSize: z.nullable(z.number().int()).optional(),
+  pageToken: z.nullable(z.string()).optional(),
 });
 
 export function functionsInvocationSearchRequestToJSON(

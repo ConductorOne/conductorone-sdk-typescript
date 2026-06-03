@@ -49,12 +49,14 @@ export const SortField = {
  */
 export type SortField = OpenEnum<typeof SortField>;
 
-export const Statuses = {
+export const SearchAutomationsRequestStatuses = {
   AutomationStatusFilterUnspecified: "AUTOMATION_STATUS_FILTER_UNSPECIFIED",
   AutomationStatusFilterOn: "AUTOMATION_STATUS_FILTER_ON",
   AutomationStatusFilterOff: "AUTOMATION_STATUS_FILTER_OFF",
 } as const;
-export type Statuses = OpenEnum<typeof Statuses>;
+export type SearchAutomationsRequestStatuses = OpenEnum<
+  typeof SearchAutomationsRequestStatuses
+>;
 
 export const TriggerTypes = {
   TriggerTypeUnspecified: "TRIGGER_TYPE_UNSPECIFIED",
@@ -97,7 +99,7 @@ export type SearchAutomationsRequest = {
    *  when sort_field is also unspecified, the server default order (created_at
    *  DESC) applies.
    */
-  direction?: Direction | undefined;
+  direction?: Direction | null | undefined;
   /**
    * Tri-state draft filter. Unset = include both drafts and published;
    *
@@ -124,14 +126,14 @@ export type SearchAutomationsRequest = {
   /**
    * Column to sort by. Unspecified (0) means sort by created_at desc (server default).
    */
-  sortField?: SortField | undefined;
+  sortField?: SortField | null | undefined;
   /**
    * Filter results by automation status. Empty or containing both ON and OFF
    *
    * @remarks
    *  applies no status filter.
    */
-  statuses?: Array<Statuses> | null | undefined;
+  statuses?: Array<SearchAutomationsRequestStatuses> | null | undefined;
   /**
    * Filter results to automations with any of the specified trigger types.
    */
@@ -153,11 +155,11 @@ export const SortField$outboundSchema: z.ZodType<
 > = openEnums.outboundSchema(SortField);
 
 /** @internal */
-export const Statuses$outboundSchema: z.ZodType<
+export const SearchAutomationsRequestStatuses$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
-  Statuses
-> = openEnums.outboundSchema(Statuses);
+  SearchAutomationsRequestStatuses
+> = openEnums.outboundSchema(SearchAutomationsRequestStatuses);
 
 /** @internal */
 export const TriggerTypes$outboundSchema: z.ZodType<
@@ -170,13 +172,13 @@ export const TriggerTypes$outboundSchema: z.ZodType<
 export type SearchAutomationsRequest$Outbound = {
   appId?: string | null | undefined;
   appIds?: Array<string> | null | undefined;
-  direction?: string | undefined;
+  direction?: string | null | undefined;
   isDraft?: boolean | null | undefined;
   pageSize?: number | null | undefined;
   pageToken?: string | null | undefined;
   query?: string | null | undefined;
   refs?: Array<AutomationTemplateRef$Outbound> | null | undefined;
-  sortField?: string | undefined;
+  sortField?: string | null | undefined;
   statuses?: Array<string> | null | undefined;
   triggerTypes?: Array<string> | null | undefined;
 };
@@ -189,14 +191,15 @@ export const SearchAutomationsRequest$outboundSchema: z.ZodType<
 > = z.object({
   appId: z.nullable(z.string()).optional(),
   appIds: z.nullable(z.array(z.string())).optional(),
-  direction: Direction$outboundSchema.optional(),
+  direction: z.nullable(Direction$outboundSchema).optional(),
   isDraft: z.nullable(z.boolean()).optional(),
   pageSize: z.nullable(z.number().int()).optional(),
   pageToken: z.nullable(z.string()).optional(),
   query: z.nullable(z.string()).optional(),
   refs: z.nullable(z.array(AutomationTemplateRef$outboundSchema)).optional(),
-  sortField: SortField$outboundSchema.optional(),
-  statuses: z.nullable(z.array(Statuses$outboundSchema)).optional(),
+  sortField: z.nullable(SortField$outboundSchema).optional(),
+  statuses: z.nullable(z.array(SearchAutomationsRequestStatuses$outboundSchema))
+    .optional(),
   triggerTypes: z.nullable(z.array(TriggerTypes$outboundSchema)).optional(),
 });
 

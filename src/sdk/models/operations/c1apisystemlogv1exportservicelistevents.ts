@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiSystemlogV1ExportServiceListEventsRequest = {
-  exportId: string | null;
+  exportId: string;
   exportServiceListEventsRequest?:
     | shared.ExportServiceListEventsRequest
     | undefined;
@@ -39,7 +39,7 @@ export type C1ApiSystemlogV1ExportServiceListEventsResponse = {
 
 /** @internal */
 export type C1ApiSystemlogV1ExportServiceListEventsRequest$Outbound = {
-  export_id: string | null;
+  export_id: string;
   ExportServiceListEventsRequest?:
     | shared.ExportServiceListEventsRequest$Outbound
     | undefined;
@@ -52,7 +52,7 @@ export const C1ApiSystemlogV1ExportServiceListEventsRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiSystemlogV1ExportServiceListEventsRequest
   > = z.object({
-    exportId: z.nullable(z.string()),
+    exportId: z.string(),
     exportServiceListEventsRequest: shared
       .ExportServiceListEventsRequest$outboundSchema.optional(),
   }).transform((v) => {

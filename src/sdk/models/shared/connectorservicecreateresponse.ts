@@ -27,7 +27,10 @@ export type ConnectorServiceCreateResponseExpanded = {
  * The ConnectorServiceCreateResponse is the response returned from creating a connector.
  */
 export type ConnectorServiceCreateResponse = {
-  connectorView?: ConnectorView | null | undefined;
+  /**
+   * The ConnectorView object provides a connector response object, as well as JSONPATHs to related objects provided by expanders.
+   */
+  connectorView?: ConnectorView | undefined;
   /**
    * The array of expanded items indicated by the request.
    */
@@ -68,7 +71,7 @@ export const ConnectorServiceCreateResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  connectorView: z.nullable(ConnectorView$inboundSchema).optional(),
+  connectorView: ConnectorView$inboundSchema.optional(),
   expanded: z.nullable(
     z.array(z.lazy(() => ConnectorServiceCreateResponseExpanded$inboundSchema)),
   ).optional(),

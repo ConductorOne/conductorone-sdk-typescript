@@ -11,7 +11,7 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequest =
   {
-    appId: string | null;
+    appId: string;
     cancelAccessRequestDefaultsRequest?:
       | shared.CancelAccessRequestDefaultsRequest
       | undefined;
@@ -40,7 +40,7 @@ export type C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDef
 /** @internal */
 export type C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequest$Outbound =
   {
-    app_id: string | null;
+    app_id: string;
     CancelAccessRequestDefaultsRequest?:
       | shared.CancelAccessRequestDefaultsRequest$Outbound
       | undefined;
@@ -53,7 +53,7 @@ export const C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDe
     z.ZodTypeDef,
     C1ApiAppV1AppAccessRequestsDefaultsServiceCancelAppAccessRequestsDefaultsRequest
   > = z.object({
-    appId: z.nullable(z.string()),
+    appId: z.string(),
     cancelAccessRequestDefaultsRequest: shared
       .CancelAccessRequestDefaultsRequest$outboundSchema.optional(),
   }).transform((v) => {

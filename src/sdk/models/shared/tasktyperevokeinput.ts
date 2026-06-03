@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   TaskRevokeSource,
   TaskRevokeSource$Outbound,
@@ -13,14 +14,23 @@ import {
  * The TaskTypeRevoke message indicates that a task is a revoke task and all related details.
  */
 export type TaskTypeRevokeInput = {
-  outcomeTime?: Date | null | undefined;
-  source?: TaskRevokeSource | null | undefined;
+  /**
+   * The TaskRevokeSource message indicates the source of the revoke task is one of expired, nonUsage, request, or review.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named origin. Only a single field of the following list may be set at a time:
+   *   - review
+   *   - request
+   *   - expired
+   *   - nonUsage
+   */
+  taskRevokeSource?: TaskRevokeSource | undefined;
 };
 
 /** @internal */
 export type TaskTypeRevokeInput$Outbound = {
-  outcomeTime?: string | null | undefined;
-  source?: TaskRevokeSource$Outbound | null | undefined;
+  source?: TaskRevokeSource$Outbound | undefined;
 };
 
 /** @internal */
@@ -29,8 +39,11 @@ export const TaskTypeRevokeInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskTypeRevokeInput
 > = z.object({
-  outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  source: z.nullable(TaskRevokeSource$outboundSchema).optional(),
+  taskRevokeSource: TaskRevokeSource$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    taskRevokeSource: "source",
+  });
 });
 
 export function taskTypeRevokeInputToJSON(

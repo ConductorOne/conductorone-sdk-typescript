@@ -11,14 +11,14 @@ export type BulkSnoozeAction = {
   /**
    * The reason field.
    */
-  reason?: string | undefined;
-  snoozeUntil?: Date | undefined;
+  reason?: string | null | undefined;
+  snoozeUntil?: Date | null | undefined;
 };
 
 /** @internal */
 export type BulkSnoozeAction$Outbound = {
-  reason?: string | undefined;
-  snoozeUntil?: string | undefined;
+  reason?: string | null | undefined;
+  snoozeUntil?: string | null | undefined;
 };
 
 /** @internal */
@@ -27,8 +27,8 @@ export const BulkSnoozeAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BulkSnoozeAction
 > = z.object({
-  reason: z.string().optional(),
-  snoozeUntil: z.date().transform(v => v.toISOString()).optional(),
+  reason: z.nullable(z.string()).optional(),
+  snoozeUntil: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function bulkSnoozeActionToJSON(

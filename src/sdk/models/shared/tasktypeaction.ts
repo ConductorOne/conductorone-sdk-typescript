@@ -73,7 +73,7 @@ export type TaskTypeAction = {
    *  action tickets (e.g. scope-role grants) — those carry dispatch
    *  configuration on action_instance and target_object instead.
    */
-  actionId?: string | undefined;
+  actionId?: string | null | undefined;
   /**
    * ActionInstance is the API mirror of the internal immutable snapshot of an
    *
@@ -92,20 +92,13 @@ export type TaskTypeAction = {
    *  synthesized tickets that have no Action row at all. UI reads this to
    *  render the task title without an Action fetch.
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
   formValues?: { [k: string]: any } | undefined;
   /**
    * The outcome field.
    */
-  outcome?: TaskTypeActionOutcome | undefined;
-  outcomeTime?: Date | undefined;
-  /**
-   * Scope-role variant of TaskTypeAction.target_object. The UI uses the
-   *
-   * @remarks
-   *  embedded identifiers to build links and title strings without a separate
-   *  Action fetch.
-   */
+  outcome?: TaskTypeActionOutcome | null | undefined;
+  outcomeTime?: Date | null | undefined;
   scopeRole?: ScopeRole | null | undefined;
   /**
    * Flavor of action the ticket represents — mirrors the snapshot's
@@ -113,7 +106,7 @@ export type TaskTypeAction = {
    * @remarks
    *  target_ref variant.
    */
-  type?: TaskTypeActionType | undefined;
+  type?: TaskTypeActionType | null | undefined;
 };
 
 /** @internal */
@@ -148,15 +141,16 @@ export const TaskTypeAction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  actionId: z.string().optional(),
+  actionId: z.nullable(z.string()).optional(),
   actionInstance: TaskActionInstance$inboundSchema.optional(),
-  displayName: z.string().optional(),
+  displayName: z.nullable(z.string()).optional(),
   formValues: z.record(z.any()).optional(),
-  outcome: TaskTypeActionOutcome$inboundSchema.optional(),
-  outcomeTime: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  outcome: z.nullable(TaskTypeActionOutcome$inboundSchema).optional(),
+  outcomeTime: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
   scopeRole: z.nullable(ScopeRole$inboundSchema).optional(),
-  type: TaskTypeActionType$inboundSchema.optional(),
+  type: z.nullable(TaskTypeActionType$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "actionInstance": "taskActionInstance",
@@ -164,14 +158,14 @@ export const TaskTypeAction$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type TaskTypeAction$Outbound = {
-  actionId?: string | undefined;
+  actionId?: string | null | undefined;
   actionInstance?: TaskActionInstance$Outbound | undefined;
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
   formValues?: { [k: string]: any } | undefined;
-  outcome?: string | undefined;
-  outcomeTime?: string | undefined;
+  outcome?: string | null | undefined;
+  outcomeTime?: string | null | undefined;
   scopeRole?: ScopeRole$Outbound | null | undefined;
-  type?: string | undefined;
+  type?: string | null | undefined;
 };
 
 /** @internal */
@@ -180,14 +174,14 @@ export const TaskTypeAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskTypeAction
 > = z.object({
-  actionId: z.string().optional(),
+  actionId: z.nullable(z.string()).optional(),
   taskActionInstance: TaskActionInstance$outboundSchema.optional(),
-  displayName: z.string().optional(),
+  displayName: z.nullable(z.string()).optional(),
   formValues: z.record(z.any()).optional(),
-  outcome: TaskTypeActionOutcome$outboundSchema.optional(),
-  outcomeTime: z.date().transform(v => v.toISOString()).optional(),
+  outcome: z.nullable(TaskTypeActionOutcome$outboundSchema).optional(),
+  outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   scopeRole: z.nullable(ScopeRole$outboundSchema).optional(),
-  type: TaskTypeActionType$outboundSchema.optional(),
+  type: z.nullable(TaskTypeActionType$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     taskActionInstance: "actionInstance",

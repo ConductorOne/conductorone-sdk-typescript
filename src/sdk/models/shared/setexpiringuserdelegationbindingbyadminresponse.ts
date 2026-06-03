@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,7 +16,10 @@ import {
  * SetExpiringUserDelegationBindingByAdminResponse is the response containing the created or updated delegation binding.
  */
 export type SetExpiringUserDelegationBindingByAdminResponse = {
-  item?: ExpiringUserDelegationBinding | null | undefined;
+  /**
+   * The ExpiringUserDelegationBinding message.
+   */
+  expiringUserDelegationBinding?: ExpiringUserDelegationBinding | undefined;
 };
 
 /** @internal */
@@ -25,7 +29,11 @@ export const SetExpiringUserDelegationBindingByAdminResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    item: z.nullable(ExpiringUserDelegationBinding$inboundSchema).optional(),
+    item: ExpiringUserDelegationBinding$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "item": "expiringUserDelegationBinding",
+    });
   });
 
 export function setExpiringUserDelegationBindingByAdminResponseFromJSON(

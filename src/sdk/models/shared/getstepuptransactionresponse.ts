@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,7 +16,16 @@ import {
  * Response message containing the requested step-up transaction
  */
 export type GetStepUpTransactionResponse = {
-  transaction?: StepUpTransaction | null | undefined;
+  /**
+   * StepUpTransaction represents a record of a step-up authentication attempt
+   *
+   * @remarks
+   *
+   * This message contains a oneof named target. Only a single field of the following list may be set at a time:
+   *   - approveTask
+   *   - test
+   */
+  stepUpTransaction?: StepUpTransaction | undefined;
 };
 
 /** @internal */
@@ -24,7 +34,11 @@ export const GetStepUpTransactionResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  transaction: z.nullable(StepUpTransaction$inboundSchema).optional(),
+  transaction: StepUpTransaction$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "transaction": "stepUpTransaction",
+  });
 });
 
 export function getStepUpTransactionResponseFromJSON(

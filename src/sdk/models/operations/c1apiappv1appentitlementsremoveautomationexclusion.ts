@@ -10,8 +10,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest = {
-  appId: string | null;
-  appEntitlementId: string | null;
+  appId: string;
+  appEntitlementId: string;
   removeAutomationExclusionRequest?:
     | shared.RemoveAutomationExclusionRequest
     | undefined;
@@ -41,8 +41,8 @@ export type C1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse = {
 /** @internal */
 export type C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest$Outbound =
   {
-    app_id: string | null;
-    app_entitlement_id: string | null;
+    app_id: string;
+    app_entitlement_id: string;
     RemoveAutomationExclusionRequest?:
       | shared.RemoveAutomationExclusionRequest$Outbound
       | undefined;
@@ -55,8 +55,8 @@ export const C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest$outboundS
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest
   > = z.object({
-    appId: z.nullable(z.string()),
-    appEntitlementId: z.nullable(z.string()),
+    appId: z.string(),
+    appEntitlementId: z.string(),
     removeAutomationExclusionRequest: shared
       .RemoveAutomationExclusionRequest$outboundSchema.optional(),
   }).transform((v) => {

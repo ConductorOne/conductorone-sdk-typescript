@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -181,7 +182,13 @@ export type FieldRules = {
   int32?: Int32Rules | null | undefined;
   int64?: Int64Rules | null | undefined;
   map?: MapRules | null | undefined;
-  message?: MessageRules | null | undefined;
+  /**
+   * MessageRules describe the constraints applied to embedded message values.
+   *
+   * @remarks
+   *  For message-type fields, validation is performed recursively.
+   */
+  messageRules?: MessageRules | undefined;
   repeated?: RepeatedRules | null | undefined;
   sfixed32?: SFixed32Rules | null | undefined;
   sfixed64?: SFixed64Rules | null | undefined;
@@ -211,7 +218,7 @@ export const FieldRules$inboundSchema: z.ZodType<
   int32: z.nullable(Int32Rules$inboundSchema).optional(),
   int64: z.nullable(Int64Rules$inboundSchema).optional(),
   map: z.nullable(z.lazy(() => MapRules$inboundSchema)).optional(),
-  message: z.nullable(MessageRules$inboundSchema).optional(),
+  message: MessageRules$inboundSchema.optional(),
   repeated: z.nullable(z.lazy(() => RepeatedRules$inboundSchema)).optional(),
   sfixed32: z.nullable(SFixed32Rules$inboundSchema).optional(),
   sfixed64: z.nullable(SFixed64Rules$inboundSchema).optional(),
@@ -221,6 +228,10 @@ export const FieldRules$inboundSchema: z.ZodType<
   timestamp: z.nullable(TimestampRules$inboundSchema).optional(),
   uint32: z.nullable(UInt32Rules$inboundSchema).optional(),
   uint64: z.nullable(UInt64Rules$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "message": "messageRules",
+  });
 });
 /** @internal */
 export type FieldRules$Outbound = {
@@ -236,7 +247,7 @@ export type FieldRules$Outbound = {
   int32?: Int32Rules$Outbound | null | undefined;
   int64?: Int64Rules$Outbound | null | undefined;
   map?: MapRules$Outbound | null | undefined;
-  message?: MessageRules$Outbound | null | undefined;
+  message?: MessageRules$Outbound | undefined;
   repeated?: RepeatedRules$Outbound | null | undefined;
   sfixed32?: SFixed32Rules$Outbound | null | undefined;
   sfixed64?: SFixed64Rules$Outbound | null | undefined;
@@ -266,7 +277,7 @@ export const FieldRules$outboundSchema: z.ZodType<
   int32: z.nullable(Int32Rules$outboundSchema).optional(),
   int64: z.nullable(Int64Rules$outboundSchema).optional(),
   map: z.nullable(z.lazy(() => MapRules$outboundSchema)).optional(),
-  message: z.nullable(MessageRules$outboundSchema).optional(),
+  messageRules: MessageRules$outboundSchema.optional(),
   repeated: z.nullable(z.lazy(() => RepeatedRules$outboundSchema)).optional(),
   sfixed32: z.nullable(SFixed32Rules$outboundSchema).optional(),
   sfixed64: z.nullable(SFixed64Rules$outboundSchema).optional(),
@@ -276,6 +287,10 @@ export const FieldRules$outboundSchema: z.ZodType<
   timestamp: z.nullable(TimestampRules$outboundSchema).optional(),
   uint32: z.nullable(UInt32Rules$outboundSchema).optional(),
   uint64: z.nullable(UInt64Rules$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    messageRules: "message",
+  });
 });
 
 export function fieldRulesToJSON(fieldRules: FieldRules): string {

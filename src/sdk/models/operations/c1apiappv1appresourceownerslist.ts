@@ -10,11 +10,11 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppResourceOwnersListRequest = {
-  appId: string | null;
-  resourceTypeId: string | null;
-  resourceId: string | null;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  appId: string;
+  resourceTypeId: string;
+  resourceId: string;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
 };
 
 export type C1ApiAppV1AppResourceOwnersListResponse = {
@@ -40,11 +40,11 @@ export type C1ApiAppV1AppResourceOwnersListResponse = {
 
 /** @internal */
 export type C1ApiAppV1AppResourceOwnersListRequest$Outbound = {
-  app_id: string | null;
-  resource_type_id: string | null;
-  resource_id: string | null;
-  page_size?: number | null | undefined;
-  page_token?: string | null | undefined;
+  app_id: string;
+  resource_type_id: string;
+  resource_id: string;
+  page_size?: number | undefined;
+  page_token?: string | undefined;
 };
 
 /** @internal */
@@ -53,11 +53,11 @@ export const C1ApiAppV1AppResourceOwnersListRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiAppV1AppResourceOwnersListRequest
 > = z.object({
-  appId: z.nullable(z.string()),
-  resourceTypeId: z.nullable(z.string()),
-  resourceId: z.nullable(z.string()),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
+  appId: z.string(),
+  resourceTypeId: z.string(),
+  resourceId: z.string(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     appId: "app_id",

@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest = {
-  id: string | null;
+  id: string;
   deleteRiskLevelAttributeValueRequest?:
     | shared.DeleteRiskLevelAttributeValueRequest
     | undefined;
@@ -40,7 +40,7 @@ export type C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueResponse = {
 /** @internal */
 export type C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest$Outbound =
   {
-    id: string | null;
+    id: string;
     DeleteRiskLevelAttributeValueRequest?:
       | shared.DeleteRiskLevelAttributeValueRequest$Outbound
       | undefined;
@@ -53,7 +53,7 @@ export const C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest$outb
     z.ZodTypeDef,
     C1ApiAttributeV1AttributesDeleteRiskLevelAttributeValueRequest
   > = z.object({
-    id: z.nullable(z.string()),
+    id: z.string(),
     deleteRiskLevelAttributeValueRequest: shared
       .DeleteRiskLevelAttributeValueRequest$outboundSchema.optional(),
   }).transform((v) => {

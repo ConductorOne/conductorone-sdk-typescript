@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,7 +16,10 @@ import {
  * The response message for creating a single entitlement binding.
  */
 export type RequestSchemaServiceCreateEntitlementBindingResponse = {
-  entitlementRef?: AppEntitlementRef | null | undefined;
+  /**
+   * The AppEntitlementRef message.
+   */
+  appEntitlementRef?: AppEntitlementRef | undefined;
   /**
    * The unique identifier of the request schema the entitlement was bound to.
    */
@@ -29,8 +33,12 @@ export const RequestSchemaServiceCreateEntitlementBindingResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    entitlementRef: z.nullable(AppEntitlementRef$inboundSchema).optional(),
+    entitlementRef: AppEntitlementRef$inboundSchema.optional(),
     requestSchemaId: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "entitlementRef": "appEntitlementRef",
+    });
   });
 
 export function requestSchemaServiceCreateEntitlementBindingResponseFromJSON(

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,7 +16,10 @@ import {
  * ConnectorServiceRotateCredentialResponse is the response returned by the rotate method.
  */
 export type ConnectorServiceRotateCredentialResponse = {
-  credential?: ConnectorCredential | null | undefined;
+  /**
+   * ConnectorCredential is used by a connector to authenticate with conductor one.
+   */
+  connectorCredential?: ConnectorCredential | undefined;
 };
 
 /** @internal */
@@ -24,7 +28,11 @@ export const ConnectorServiceRotateCredentialResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  credential: z.nullable(ConnectorCredential$inboundSchema).optional(),
+  credential: ConnectorCredential$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "credential": "connectorCredential",
+  });
 });
 
 export function connectorServiceRotateCredentialResponseFromJSON(

@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -48,13 +47,7 @@ export type EscalationInstance = {
    * The alreadyEscalated field.
    */
   alreadyEscalated?: boolean | null | undefined;
-  /**
-   * The CancelTicket message.
-   */
-  escalationInstanceCancelTicket?:
-    | EscalationInstanceCancelTicket
-    | null
-    | undefined;
+  cancelTicket?: EscalationInstanceCancelTicket | null | undefined;
   /**
    * The escalationComment field.
    */
@@ -65,10 +58,7 @@ export type EscalationInstance = {
     | null
     | undefined;
   replacePolicy?: EscalationInstanceReplacePolicy | null | undefined;
-  /**
-   * The SkipStep message.
-   */
-  escalationInstanceSkipStep?: EscalationInstanceSkipStep | null | undefined;
+  skipStep?: EscalationInstanceSkipStep | null | undefined;
 };
 
 /** @internal */
@@ -90,11 +80,6 @@ export const EscalationInstance$inboundSchema: z.ZodType<
   replacePolicy: z.nullable(EscalationInstanceReplacePolicy$inboundSchema)
     .optional(),
   skipStep: z.nullable(EscalationInstanceSkipStep$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cancelTicket": "escalationInstanceCancelTicket",
-    "skipStep": "escalationInstanceSkipStep",
-  });
 });
 /** @internal */
 export type EscalationInstance$Outbound = {
@@ -117,9 +102,8 @@ export const EscalationInstance$outboundSchema: z.ZodType<
   EscalationInstance
 > = z.object({
   alreadyEscalated: z.nullable(z.boolean()).optional(),
-  escalationInstanceCancelTicket: z.nullable(
-    EscalationInstanceCancelTicket$outboundSchema,
-  ).optional(),
+  cancelTicket: z.nullable(EscalationInstanceCancelTicket$outboundSchema)
+    .optional(),
   escalationComment: z.nullable(z.string()).optional(),
   expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   reassignToApprovers: z.nullable(
@@ -127,14 +111,7 @@ export const EscalationInstance$outboundSchema: z.ZodType<
   ).optional(),
   replacePolicy: z.nullable(EscalationInstanceReplacePolicy$outboundSchema)
     .optional(),
-  escalationInstanceSkipStep: z.nullable(
-    EscalationInstanceSkipStep$outboundSchema,
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    escalationInstanceCancelTicket: "cancelTicket",
-    escalationInstanceSkipStep: "skipStep",
-  });
+  skipStep: z.nullable(EscalationInstanceSkipStep$outboundSchema).optional(),
 });
 
 export function escalationInstanceToJSON(

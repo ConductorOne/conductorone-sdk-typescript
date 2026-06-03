@@ -15,7 +15,10 @@ import {
  * The GetAppUsageControlsResponse message contains the retrieved AppUsageControls object.
  */
 export type GetAppUsageControlsResponse = {
-  appUsageControls?: AppUsageControls | null | undefined;
+  /**
+   * The AppUsageControls object describes some peripheral configuration for an app.
+   */
+  appUsageControls?: AppUsageControls | undefined;
   /**
    * HasUsageData is false if the access entitlement for this app has no usage data.
    */
@@ -28,7 +31,7 @@ export const GetAppUsageControlsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appUsageControls: z.nullable(AppUsageControls$inboundSchema).optional(),
+  appUsageControls: AppUsageControls$inboundSchema.optional(),
   hasUsageData: z.nullable(z.boolean()).optional(),
 });
 

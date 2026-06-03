@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -27,7 +28,12 @@ export type AppEntitlementUserBindingHistoryView = {
    * The entitlementPath field.
    */
   entitlementPath?: string | null | undefined;
-  history?: AppEntitlementUserBindingHistory | null | undefined;
+  /**
+   * The AppEntitlementUserBindingHistory message.
+   */
+  appEntitlementUserBindingHistory?:
+    | AppEntitlementUserBindingHistory
+    | undefined;
 };
 
 /** @internal */
@@ -39,8 +45,11 @@ export const AppEntitlementUserBindingHistoryView$inboundSchema: z.ZodType<
   appPath: z.nullable(z.string()).optional(),
   appUserPath: z.nullable(z.string()).optional(),
   entitlementPath: z.nullable(z.string()).optional(),
-  history: z.nullable(AppEntitlementUserBindingHistory$inboundSchema)
-    .optional(),
+  history: AppEntitlementUserBindingHistory$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "history": "appEntitlementUserBindingHistory",
+  });
 });
 
 export function appEntitlementUserBindingHistoryViewFromJSON(

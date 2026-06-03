@@ -17,7 +17,18 @@ import {
  * The GrantFoundTrigger message.
  */
 export type GrantFoundTrigger = {
-  grantTriggerFilter?: GrantTriggerFilter | null | undefined;
+  /**
+   * The GrantTriggerFilter message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named entitlement_inclusion. Only a single field of the following list may be set at a time:
+   *   - inclusionList
+   *   - inclusionAll
+   *   - inclusionCriteria
+   *   - inclusionListCel
+   */
+  grantTriggerFilter?: GrantTriggerFilter | undefined;
 };
 
 /** @internal */
@@ -26,11 +37,11 @@ export const GrantFoundTrigger$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  grantTriggerFilter: z.nullable(GrantTriggerFilter$inboundSchema).optional(),
+  grantTriggerFilter: GrantTriggerFilter$inboundSchema.optional(),
 });
 /** @internal */
 export type GrantFoundTrigger$Outbound = {
-  grantTriggerFilter?: GrantTriggerFilter$Outbound | null | undefined;
+  grantTriggerFilter?: GrantTriggerFilter$Outbound | undefined;
 };
 
 /** @internal */
@@ -39,7 +50,7 @@ export const GrantFoundTrigger$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GrantFoundTrigger
 > = z.object({
-  grantTriggerFilter: z.nullable(GrantTriggerFilter$outboundSchema).optional(),
+  grantTriggerFilter: GrantTriggerFilter$outboundSchema.optional(),
 });
 
 export function grantFoundTriggerToJSON(

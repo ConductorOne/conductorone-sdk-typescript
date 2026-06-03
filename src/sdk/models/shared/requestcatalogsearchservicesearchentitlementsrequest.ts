@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -37,7 +38,10 @@ export type RequestCatalogSearchServiceSearchEntitlementsRequest = {
    * Search for entitlements with this alias (exact match).
    */
   entitlementAlias?: string | null | undefined;
-  expandMask?: AppEntitlementExpandMask | null | undefined;
+  /**
+   * The app entitlement expand mask allows the user to get additional information when getting responses containing app entitlement views.
+   */
+  appEntitlementExpandMask?: AppEntitlementExpandMask | undefined;
   /**
    * Search entitlements with this granted status for your signed in user.
    */
@@ -71,7 +75,7 @@ export const GrantedStatus$outboundSchema: z.ZodType<
 export type RequestCatalogSearchServiceSearchEntitlementsRequest$Outbound = {
   appDisplayName?: string | null | undefined;
   entitlementAlias?: string | null | undefined;
-  expandMask?: AppEntitlementExpandMask$Outbound | null | undefined;
+  expandMask?: AppEntitlementExpandMask$Outbound | undefined;
   grantedStatus?: string | null | undefined;
   includeDeleted?: boolean | null | undefined;
   pageSize?: number | null | undefined;
@@ -88,12 +92,17 @@ export const RequestCatalogSearchServiceSearchEntitlementsRequest$outboundSchema
   > = z.object({
     appDisplayName: z.nullable(z.string()).optional(),
     entitlementAlias: z.nullable(z.string()).optional(),
-    expandMask: z.nullable(AppEntitlementExpandMask$outboundSchema).optional(),
+    appEntitlementExpandMask: AppEntitlementExpandMask$outboundSchema
+      .optional(),
     grantedStatus: z.nullable(GrantedStatus$outboundSchema).optional(),
     includeDeleted: z.nullable(z.boolean()).optional(),
     pageSize: z.nullable(z.number().int()).optional(),
     pageToken: z.nullable(z.string()).optional(),
     query: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      appEntitlementExpandMask: "expandMask",
+    });
   });
 
 export function requestCatalogSearchServiceSearchEntitlementsRequestToJSON(

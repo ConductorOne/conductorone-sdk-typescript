@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   TaskExpandMask,
   TaskExpandMask$Outbound,
@@ -21,11 +22,11 @@ export type TaskServiceCreateGrantRequest = {
   /**
    * The ID of the app entitlement to grant access to.
    */
-  appEntitlementId: string;
+  appEntitlementId: string | null;
   /**
    * The ID of the app that is associated with the entitlement.
    */
-  appId: string;
+  appId: string | null;
   /**
    * The ID of the app user to grant access for. This field and identityUserId cannot both be set for a given request.
    */
@@ -38,28 +39,34 @@ export type TaskServiceCreateGrantRequest = {
    * Boolean stating whether or not the task is marked as emergency access.
    */
   emergencyAccess?: boolean | null | undefined;
-  expandMask?: TaskExpandMask | null | undefined;
+  /**
+   * The task expand mask is an array of strings that specifes the related objects the requester wishes to have returned when making a request where the expand mask is part of the input. Use '*' to view all possible responses.
+   */
+  taskExpandMask?: TaskExpandMask | undefined;
   grantDuration?: string | null | undefined;
   /**
    * The ID of the user associated with the app user we are granting access for. This field cannot be set if appUserID is also set.
    */
   identityUserId?: string | null | undefined;
-  requestData?: { [k: string]: any } | null | undefined;
-  source?: TaskGrantSource | null | undefined;
+  requestData?: { [k: string]: any } | undefined;
+  /**
+   * The TaskGrantSource message tracks which external URL was the source of the specificed grant ticket.
+   */
+  taskGrantSource?: TaskGrantSource | undefined;
 };
 
 /** @internal */
 export type TaskServiceCreateGrantRequest$Outbound = {
-  appEntitlementId: string;
-  appId: string;
+  appEntitlementId: string | null;
+  appId: string | null;
   appUserId?: string | null | undefined;
   description?: string | null | undefined;
   emergencyAccess?: boolean | null | undefined;
-  expandMask?: TaskExpandMask$Outbound | null | undefined;
+  expandMask?: TaskExpandMask$Outbound | undefined;
   grantDuration?: string | null | undefined;
   identityUserId?: string | null | undefined;
-  requestData?: { [k: string]: any } | null | undefined;
-  source?: TaskGrantSource$Outbound | null | undefined;
+  requestData?: { [k: string]: any } | undefined;
+  source?: TaskGrantSource$Outbound | undefined;
 };
 
 /** @internal */
@@ -68,16 +75,21 @@ export const TaskServiceCreateGrantRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskServiceCreateGrantRequest
 > = z.object({
-  appEntitlementId: z.string(),
-  appId: z.string(),
+  appEntitlementId: z.nullable(z.string()),
+  appId: z.nullable(z.string()),
   appUserId: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   emergencyAccess: z.nullable(z.boolean()).optional(),
-  expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
+  taskExpandMask: TaskExpandMask$outboundSchema.optional(),
   grantDuration: z.nullable(z.string()).optional(),
   identityUserId: z.nullable(z.string()).optional(),
-  requestData: z.nullable(z.record(z.any())).optional(),
-  source: z.nullable(TaskGrantSource$outboundSchema).optional(),
+  requestData: z.record(z.any()).optional(),
+  taskGrantSource: TaskGrantSource$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    taskExpandMask: "expandMask",
+    taskGrantSource: "source",
+  });
 });
 
 export function taskServiceCreateGrantRequestToJSON(

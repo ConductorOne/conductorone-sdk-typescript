@@ -41,7 +41,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 
 async function run() {
   const result = await conductoroneSDKTypescript.appEntitlements.list({
-    appId: null,
+    appId: "<id>",
   });
 
   console.log(result);
@@ -69,7 +69,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 
 async function run() {
   const res = await appEntitlementsList(conductoroneSDKTypescript, {
-    appId: null,
+    appId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -361,7 +361,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 
 async function run() {
   const result = await conductoroneSDKTypescript.appEntitlements.getAutomation({
-    appId: null,
+    appId: "<id>",
     appEntitlementId: "<id>",
   });
 
@@ -390,7 +390,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 
 async function run() {
   const res = await appEntitlementsGetAutomation(conductoroneSDKTypescript, {
-    appId: null,
+    appId: "<id>",
     appEntitlementId: "<id>",
   });
   if (res.ok) {
@@ -604,7 +604,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 
 async function run() {
   const result = await conductoroneSDKTypescript.appEntitlements.listAutomationExclusions({
-    appId: null,
+    appId: "<id>",
     appEntitlementId: "<id>",
   });
 
@@ -633,7 +633,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 
 async function run() {
   const res = await appEntitlementsListAutomationExclusions(conductoroneSDKTypescript, {
-    appId: null,
+    appId: "<id>",
     appEntitlementId: "<id>",
   });
   if (res.ok) {
@@ -686,7 +686,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 async function run() {
   const result = await conductoroneSDKTypescript.appEntitlements.addAutomationExclusion({
     appId: "<id>",
-    appEntitlementId: null,
+    appEntitlementId: "<id>",
   });
 
   console.log(result);
@@ -715,7 +715,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 async function run() {
   const res = await appEntitlementsAddAutomationExclusion(conductoroneSDKTypescript, {
     appId: "<id>",
-    appEntitlementId: null,
+    appEntitlementId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1011,7 +1011,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 
 async function run() {
   const result = await conductoroneSDKTypescript.appEntitlements.delete({
-    appId: null,
+    appId: "<id>",
     id: "<id>",
   });
 
@@ -1040,7 +1040,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 
 async function run() {
   const res = await appEntitlementsDelete(conductoroneSDKTypescript, {
-    appId: null,
+    appId: "<id>",
     id: "<id>",
   });
   if (res.ok) {
@@ -1337,7 +1337,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 
 async function run() {
   const result = await conductoroneSDKTypescript.appEntitlements.listForAppUser({
-    appId: null,
+    appId: "<id>",
     appUserId: "<id>",
   });
 
@@ -1366,7 +1366,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 
 async function run() {
   const res = await appEntitlementsListForAppUser(conductoroneSDKTypescript, {
-    appId: null,
+    appId: "<id>",
     appUserId: "<id>",
   });
   if (res.ok) {

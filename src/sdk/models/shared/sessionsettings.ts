@@ -43,28 +43,46 @@ export type SessionSettings = {
   /**
    * Policy ID for REQUESTABLE mode approval routing.
    */
-  clientIdApprovalRequestPolicyId?: string | undefined;
+  clientIdApprovalRequestPolicyId?: string | null | undefined;
   /**
    * Policy for metadata document client_id URLs.
    */
-  clientIdMetadataDocumentPolicy?: ClientIdMetadataDocumentPolicy | undefined;
-  connectorSource?: CIDRRestriction | null | undefined;
+  clientIdMetadataDocumentPolicy?:
+    | ClientIdMetadataDocumentPolicy
+    | null
+    | undefined;
   /**
    * CIDRRestriction defines an IP-based access restriction with an enable toggle and a list of allowed CIDRs.
    */
   cidrRestriction?: CIDRRestriction | undefined;
+  /**
+   * CIDRRestriction defines an IP-based access restriction with an enable toggle and a list of allowed CIDRs.
+   */
+  cidrRestriction1?: CIDRRestriction | undefined;
   /**
    * Enable external client registration (OAuth 2.0 DCR) for MCP clients
    *
    * @remarks
    *  like Claude Desktop, Cursor, and other AI assistants.
    */
-  externalClientsEnabled?: boolean | undefined;
+  externalClientsEnabled?: boolean | null | undefined;
   maxSessionLength?: string | null | undefined;
-  pccAdminSource?: CIDRRestriction | null | undefined;
-  pccUserSource?: CIDRRestriction | null | undefined;
-  ssoAdminSource?: CIDRRestriction | null | undefined;
-  ssoUserSource?: CIDRRestriction | null | undefined;
+  /**
+   * CIDRRestriction defines an IP-based access restriction with an enable toggle and a list of allowed CIDRs.
+   */
+  cidrRestriction2?: CIDRRestriction | undefined;
+  /**
+   * CIDRRestriction defines an IP-based access restriction with an enable toggle and a list of allowed CIDRs.
+   */
+  cidrRestriction3?: CIDRRestriction | undefined;
+  /**
+   * CIDRRestriction defines an IP-based access restriction with an enable toggle and a list of allowed CIDRs.
+   */
+  cidrRestriction4?: CIDRRestriction | undefined;
+  /**
+   * CIDRRestriction defines an IP-based access restriction with an enable toggle and a list of allowed CIDRs.
+   */
+  cidrRestriction5?: CIDRRestriction | undefined;
 };
 
 /** @internal */
@@ -86,34 +104,40 @@ export const SessionSettings$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  clientIdApprovalRequestPolicyId: z.string().optional(),
-  clientIdMetadataDocumentPolicy: ClientIdMetadataDocumentPolicy$inboundSchema
-    .optional(),
-  connectorSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
+  clientIdApprovalRequestPolicyId: z.nullable(z.string()).optional(),
+  clientIdMetadataDocumentPolicy: z.nullable(
+    ClientIdMetadataDocumentPolicy$inboundSchema,
+  ).optional(),
+  connectorSource: CIDRRestriction$inboundSchema.optional(),
   externalClientSource: CIDRRestriction$inboundSchema.optional(),
-  externalClientsEnabled: z.boolean().optional(),
+  externalClientsEnabled: z.nullable(z.boolean()).optional(),
   maxSessionLength: z.nullable(z.string()).optional(),
-  pccAdminSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
-  pccUserSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
-  ssoAdminSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
-  ssoUserSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
+  pccAdminSource: CIDRRestriction$inboundSchema.optional(),
+  pccUserSource: CIDRRestriction$inboundSchema.optional(),
+  ssoAdminSource: CIDRRestriction$inboundSchema.optional(),
+  ssoUserSource: CIDRRestriction$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    "externalClientSource": "cidrRestriction",
+    "connectorSource": "cidrRestriction",
+    "externalClientSource": "cidrRestriction1",
+    "pccAdminSource": "cidrRestriction2",
+    "pccUserSource": "cidrRestriction3",
+    "ssoAdminSource": "cidrRestriction4",
+    "ssoUserSource": "cidrRestriction5",
   });
 });
 /** @internal */
 export type SessionSettings$Outbound = {
-  clientIdApprovalRequestPolicyId?: string | undefined;
-  clientIdMetadataDocumentPolicy?: string | undefined;
-  connectorSource?: CIDRRestriction$Outbound | null | undefined;
+  clientIdApprovalRequestPolicyId?: string | null | undefined;
+  clientIdMetadataDocumentPolicy?: string | null | undefined;
+  connectorSource?: CIDRRestriction$Outbound | undefined;
   externalClientSource?: CIDRRestriction$Outbound | undefined;
-  externalClientsEnabled?: boolean | undefined;
+  externalClientsEnabled?: boolean | null | undefined;
   maxSessionLength?: string | null | undefined;
-  pccAdminSource?: CIDRRestriction$Outbound | null | undefined;
-  pccUserSource?: CIDRRestriction$Outbound | null | undefined;
-  ssoAdminSource?: CIDRRestriction$Outbound | null | undefined;
-  ssoUserSource?: CIDRRestriction$Outbound | null | undefined;
+  pccAdminSource?: CIDRRestriction$Outbound | undefined;
+  pccUserSource?: CIDRRestriction$Outbound | undefined;
+  ssoAdminSource?: CIDRRestriction$Outbound | undefined;
+  ssoUserSource?: CIDRRestriction$Outbound | undefined;
 };
 
 /** @internal */
@@ -122,20 +146,26 @@ export const SessionSettings$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SessionSettings
 > = z.object({
-  clientIdApprovalRequestPolicyId: z.string().optional(),
-  clientIdMetadataDocumentPolicy: ClientIdMetadataDocumentPolicy$outboundSchema
-    .optional(),
-  connectorSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
+  clientIdApprovalRequestPolicyId: z.nullable(z.string()).optional(),
+  clientIdMetadataDocumentPolicy: z.nullable(
+    ClientIdMetadataDocumentPolicy$outboundSchema,
+  ).optional(),
   cidrRestriction: CIDRRestriction$outboundSchema.optional(),
-  externalClientsEnabled: z.boolean().optional(),
+  cidrRestriction1: CIDRRestriction$outboundSchema.optional(),
+  externalClientsEnabled: z.nullable(z.boolean()).optional(),
   maxSessionLength: z.nullable(z.string()).optional(),
-  pccAdminSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
-  pccUserSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
-  ssoAdminSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
-  ssoUserSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
+  cidrRestriction2: CIDRRestriction$outboundSchema.optional(),
+  cidrRestriction3: CIDRRestriction$outboundSchema.optional(),
+  cidrRestriction4: CIDRRestriction$outboundSchema.optional(),
+  cidrRestriction5: CIDRRestriction$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    cidrRestriction: "externalClientSource",
+    cidrRestriction: "connectorSource",
+    cidrRestriction1: "externalClientSource",
+    cidrRestriction2: "pccAdminSource",
+    cidrRestriction3: "pccUserSource",
+    cidrRestriction4: "ssoAdminSource",
+    cidrRestriction5: "ssoUserSource",
   });
 });
 

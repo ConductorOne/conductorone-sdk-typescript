@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -88,10 +87,7 @@ import {
  *   - sharedConfig
  */
 export type FormField = {
-  /**
-   * The AdminProviderConfig message.
-   */
-  adminProviderConfig?: AdminProviderConfig | null | undefined;
+  adminConfig?: AdminProviderConfig | null | undefined;
   boolField?: BoolField | null | undefined;
   /**
    * The description field.
@@ -107,33 +103,20 @@ export type FormField = {
    * The name field.
    */
   name?: string | null | undefined;
-  /**
-   * The Oauth2Field message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named view. Only a single field of the following list may be set at a time:
-   *   - oauth2FieldView
-   */
   oauth2Field?: Oauth2Field | null | undefined;
+  /**
+   * When true, this field is displayed to the user but cannot be edited.
+   */
+  readOnly?: boolean | null | undefined;
   /**
    * The required field.
    */
-  required?: boolean | undefined;
-  /**
-   * The SharedProviderConfig message.
-   */
-  sharedProviderConfig?: SharedProviderConfig | null | undefined;
+  required?: boolean | null | undefined;
+  sharedConfig?: SharedProviderConfig | null | undefined;
   stringField?: FormStringField | null | undefined;
-  /**
-   * The StringMapField message.
-   */
-  formStringMapField?: FormStringMapField | null | undefined;
+  stringMapField?: FormStringMapField | null | undefined;
   stringSliceField?: StringSliceField | null | undefined;
-  /**
-   * The UserProviderConfig message.
-   */
-  userProviderConfig?: UserProviderConfig | null | undefined;
+  userConfig?: UserProviderConfig | null | undefined;
 };
 
 /** @internal */
@@ -150,19 +133,13 @@ export const FormField$inboundSchema: z.ZodType<
   int64Field: z.nullable(Int64Field$inboundSchema).optional(),
   name: z.nullable(z.string()).optional(),
   oauth2Field: z.nullable(Oauth2Field$inboundSchema).optional(),
-  required: z.boolean().optional(),
+  readOnly: z.nullable(z.boolean()).optional(),
+  required: z.nullable(z.boolean()).optional(),
   sharedConfig: z.nullable(SharedProviderConfig$inboundSchema).optional(),
   stringField: z.nullable(FormStringField$inboundSchema).optional(),
   stringMapField: z.nullable(FormStringMapField$inboundSchema).optional(),
   stringSliceField: z.nullable(StringSliceField$inboundSchema).optional(),
   userConfig: z.nullable(UserProviderConfig$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "adminConfig": "adminProviderConfig",
-    "sharedConfig": "sharedProviderConfig",
-    "stringMapField": "formStringMapField",
-    "userConfig": "userProviderConfig",
-  });
 });
 /** @internal */
 export type FormField$Outbound = {
@@ -174,7 +151,8 @@ export type FormField$Outbound = {
   int64Field?: Int64Field$Outbound | null | undefined;
   name?: string | null | undefined;
   oauth2Field?: Oauth2Field$Outbound | null | undefined;
-  required?: boolean | undefined;
+  readOnly?: boolean | null | undefined;
+  required?: boolean | null | undefined;
   sharedConfig?: SharedProviderConfig$Outbound | null | undefined;
   stringField?: FormStringField$Outbound | null | undefined;
   stringMapField?: FormStringMapField$Outbound | null | undefined;
@@ -188,8 +166,7 @@ export const FormField$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FormField
 > = z.object({
-  adminProviderConfig: z.nullable(AdminProviderConfig$outboundSchema)
-    .optional(),
+  adminConfig: z.nullable(AdminProviderConfig$outboundSchema).optional(),
   boolField: z.nullable(BoolField$outboundSchema).optional(),
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
@@ -197,20 +174,13 @@ export const FormField$outboundSchema: z.ZodType<
   int64Field: z.nullable(Int64Field$outboundSchema).optional(),
   name: z.nullable(z.string()).optional(),
   oauth2Field: z.nullable(Oauth2Field$outboundSchema).optional(),
-  required: z.boolean().optional(),
-  sharedProviderConfig: z.nullable(SharedProviderConfig$outboundSchema)
-    .optional(),
+  readOnly: z.nullable(z.boolean()).optional(),
+  required: z.nullable(z.boolean()).optional(),
+  sharedConfig: z.nullable(SharedProviderConfig$outboundSchema).optional(),
   stringField: z.nullable(FormStringField$outboundSchema).optional(),
-  formStringMapField: z.nullable(FormStringMapField$outboundSchema).optional(),
+  stringMapField: z.nullable(FormStringMapField$outboundSchema).optional(),
   stringSliceField: z.nullable(StringSliceField$outboundSchema).optional(),
-  userProviderConfig: z.nullable(UserProviderConfig$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    adminProviderConfig: "adminConfig",
-    sharedProviderConfig: "sharedConfig",
-    formStringMapField: "stringMapField",
-    userProviderConfig: "userConfig",
-  });
+  userConfig: z.nullable(UserProviderConfig$outboundSchema).optional(),
 });
 
 export function formFieldToJSON(formField: FormField): string {

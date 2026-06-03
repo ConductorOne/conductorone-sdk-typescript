@@ -20,7 +20,16 @@ import {
  * The app entitlement view contains the serialized app entitlement and paths to objects referenced by the app entitlement.
  */
 export type AppEntitlementView = {
-  appEntitlement?: AppEntitlement | null | undefined;
+  /**
+   * The app entitlement represents one permission in a downstream App (SAAS) that can be granted. For example, GitHub Read vs GitHub Write.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named max_grant_duration. Only a single field of the following list may be set at a time:
+   *   - durationUnset
+   *   - durationGrant
+   */
+  appEntitlement?: AppEntitlement | undefined;
   /**
    * JSONPATH expression indicating the location of the App object in the  array.
    */
@@ -45,7 +54,7 @@ export const AppEntitlementView$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appEntitlement: z.nullable(AppEntitlement$inboundSchema).optional(),
+  appEntitlement: AppEntitlement$inboundSchema.optional(),
   appPath: z.nullable(z.string()).optional(),
   appResourcePath: z.nullable(z.string()).optional(),
   appResourceTypePath: z.nullable(z.string()).optional(),

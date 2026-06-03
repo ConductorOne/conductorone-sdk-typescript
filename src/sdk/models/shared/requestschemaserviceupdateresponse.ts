@@ -12,7 +12,10 @@ import { RequestSchema, RequestSchema$inboundSchema } from "./requestschema.js";
  * The response message for updating a request schema.
  */
 export type RequestSchemaServiceUpdateResponse = {
-  requestSchema?: RequestSchema | null | undefined;
+  /**
+   * A request schema defines a form template that users fill out when requesting access.
+   */
+  requestSchema?: RequestSchema | undefined;
 };
 
 /** @internal */
@@ -21,7 +24,7 @@ export const RequestSchemaServiceUpdateResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  requestSchema: z.nullable(RequestSchema$inboundSchema).optional(),
+  requestSchema: RequestSchema$inboundSchema.optional(),
 });
 
 export function requestSchemaServiceUpdateResponseFromJSON(

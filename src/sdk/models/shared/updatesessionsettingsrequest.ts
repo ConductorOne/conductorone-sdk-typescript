@@ -13,13 +13,16 @@ import {
  * The UpdateSessionSettingsRequest message.
  */
 export type UpdateSessionSettingsRequest = {
-  sessionSettings?: SessionSettings | null | undefined;
+  /**
+   * SessionSettings configures session security for the tenant, including timeouts and per-role IP restrictions.
+   */
+  sessionSettings?: SessionSettings | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type UpdateSessionSettingsRequest$Outbound = {
-  sessionSettings?: SessionSettings$Outbound | null | undefined;
+  sessionSettings?: SessionSettings$Outbound | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -29,7 +32,7 @@ export const UpdateSessionSettingsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateSessionSettingsRequest
 > = z.object({
-  sessionSettings: z.nullable(SessionSettings$outboundSchema).optional(),
+  sessionSettings: SessionSettings$outboundSchema.optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 

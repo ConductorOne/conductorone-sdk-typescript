@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -24,7 +25,36 @@ export type MapRules = {
    *  evaluated only if the field is not empty
    */
   ignoreEmpty?: boolean | null | undefined;
-  keys?: FieldRules | null | undefined;
+  /**
+   * FieldRules encapsulates the rules for each type of field. Depending on the
+   *
+   * @remarks
+   *  field, the correct set should be used to ensure proper validations.
+   *
+   * This message contains a oneof named type. Only a single field of the following list may be set at a time:
+   *   - float
+   *   - double
+   *   - int32
+   *   - int64
+   *   - uint32
+   *   - uint64
+   *   - sint32
+   *   - sint64
+   *   - fixed32
+   *   - fixed64
+   *   - sfixed32
+   *   - sfixed64
+   *   - bool
+   *   - string
+   *   - bytes
+   *   - enum
+   *   - repeated
+   *   - map
+   *   - any
+   *   - duration
+   *   - timestamp
+   */
+  fieldRules?: FieldRules | undefined;
   /**
    * MaxPairs specifies that this field must have the specified number of
    *
@@ -46,7 +76,36 @@ export type MapRules = {
    *  applies to map's with message value types.
    */
   noSparse?: boolean | null | undefined;
-  values?: FieldRules | null | undefined;
+  /**
+   * FieldRules encapsulates the rules for each type of field. Depending on the
+   *
+   * @remarks
+   *  field, the correct set should be used to ensure proper validations.
+   *
+   * This message contains a oneof named type. Only a single field of the following list may be set at a time:
+   *   - float
+   *   - double
+   *   - int32
+   *   - int64
+   *   - uint32
+   *   - uint64
+   *   - sint32
+   *   - sint64
+   *   - fixed32
+   *   - fixed64
+   *   - sfixed32
+   *   - sfixed64
+   *   - bool
+   *   - string
+   *   - bytes
+   *   - enum
+   *   - repeated
+   *   - map
+   *   - any
+   *   - duration
+   *   - timestamp
+   */
+  fieldRules1?: FieldRules | undefined;
 };
 
 /** @internal */
@@ -56,20 +115,25 @@ export const MapRules$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   ignoreEmpty: z.nullable(z.boolean()).optional(),
-  keys: z.nullable(z.lazy(() => FieldRules$inboundSchema)).optional(),
+  keys: z.lazy(() => FieldRules$inboundSchema).optional(),
   maxPairs: z.nullable(z.string()).optional(),
   minPairs: z.nullable(z.string()).optional(),
   noSparse: z.nullable(z.boolean()).optional(),
-  values: z.nullable(z.lazy(() => FieldRules$inboundSchema)).optional(),
+  values: z.lazy(() => FieldRules$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "keys": "fieldRules",
+    "values": "fieldRules1",
+  });
 });
 /** @internal */
 export type MapRules$Outbound = {
   ignoreEmpty?: boolean | null | undefined;
-  keys?: FieldRules$Outbound | null | undefined;
+  keys?: FieldRules$Outbound | undefined;
   maxPairs?: string | null | undefined;
   minPairs?: string | null | undefined;
   noSparse?: boolean | null | undefined;
-  values?: FieldRules$Outbound | null | undefined;
+  values?: FieldRules$Outbound | undefined;
 };
 
 /** @internal */
@@ -79,11 +143,16 @@ export const MapRules$outboundSchema: z.ZodType<
   MapRules
 > = z.object({
   ignoreEmpty: z.nullable(z.boolean()).optional(),
-  keys: z.nullable(z.lazy(() => FieldRules$outboundSchema)).optional(),
+  fieldRules: z.lazy(() => FieldRules$outboundSchema).optional(),
   maxPairs: z.nullable(z.string()).optional(),
   minPairs: z.nullable(z.string()).optional(),
   noSparse: z.nullable(z.boolean()).optional(),
-  values: z.nullable(z.lazy(() => FieldRules$outboundSchema)).optional(),
+  fieldRules1: z.lazy(() => FieldRules$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fieldRules: "keys",
+    fieldRules1: "values",
+  });
 });
 
 export function mapRulesToJSON(mapRules: MapRules): string {

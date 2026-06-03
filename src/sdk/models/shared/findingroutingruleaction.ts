@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -37,18 +36,9 @@ import {
  *   - notify
  */
 export type FindingRoutingRuleAction = {
-  /**
-   * The CreateTaskAction message.
-   */
-  createTaskAction?: CreateTaskAction | null | undefined;
-  /**
-   * The NotifyAction message.
-   */
-  notifyAction?: NotifyAction | null | undefined;
-  /**
-   * The SuppressRoutingAction message.
-   */
-  suppressRoutingAction?: SuppressRoutingAction | null | undefined;
+  createTask?: CreateTaskAction | null | undefined;
+  notify?: NotifyAction | null | undefined;
+  suppress?: SuppressRoutingAction | null | undefined;
 };
 
 /** @internal */
@@ -60,12 +50,6 @@ export const FindingRoutingRuleAction$inboundSchema: z.ZodType<
   createTask: z.nullable(CreateTaskAction$inboundSchema).optional(),
   notify: z.nullable(NotifyAction$inboundSchema).optional(),
   suppress: z.nullable(SuppressRoutingAction$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "createTask": "createTaskAction",
-    "notify": "notifyAction",
-    "suppress": "suppressRoutingAction",
-  });
 });
 /** @internal */
 export type FindingRoutingRuleAction$Outbound = {
@@ -80,16 +64,9 @@ export const FindingRoutingRuleAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FindingRoutingRuleAction
 > = z.object({
-  createTaskAction: z.nullable(CreateTaskAction$outboundSchema).optional(),
-  notifyAction: z.nullable(NotifyAction$outboundSchema).optional(),
-  suppressRoutingAction: z.nullable(SuppressRoutingAction$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    createTaskAction: "createTask",
-    notifyAction: "notify",
-    suppressRoutingAction: "suppress",
-  });
+  createTask: z.nullable(CreateTaskAction$outboundSchema).optional(),
+  notify: z.nullable(NotifyAction$outboundSchema).optional(),
+  suppress: z.nullable(SuppressRoutingAction$outboundSchema).optional(),
 });
 
 export function findingRoutingRuleActionToJSON(

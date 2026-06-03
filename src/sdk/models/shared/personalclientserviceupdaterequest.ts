@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   PersonalClientInput,
   PersonalClientInput$Outbound,
@@ -13,13 +14,16 @@ import {
  * The PersonalClientServiceUpdateRequest message.
  */
 export type PersonalClientServiceUpdateRequest = {
-  client?: PersonalClientInput | null | undefined;
+  /**
+   * The PersonalClient message contains information about a presonal client credential.
+   */
+  personalClient?: PersonalClientInput | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type PersonalClientServiceUpdateRequest$Outbound = {
-  client?: PersonalClientInput$Outbound | null | undefined;
+  client?: PersonalClientInput$Outbound | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -29,8 +33,12 @@ export const PersonalClientServiceUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PersonalClientServiceUpdateRequest
 > = z.object({
-  client: z.nullable(PersonalClientInput$outboundSchema).optional(),
+  personalClient: PersonalClientInput$outboundSchema.optional(),
   updateMask: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    personalClient: "client",
+  });
 });
 
 export function personalClientServiceUpdateRequestToJSON(

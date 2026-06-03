@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -57,7 +58,10 @@ export type TaskTypeGrant = {
    */
   outcome?: TaskTypeGrantOutcome | null | undefined;
   outcomeTime?: Date | null | undefined;
-  source?: TaskGrantSource | null | undefined;
+  /**
+   * The TaskGrantSource message tracks which external URL was the source of the specificed grant ticket.
+   */
+  taskGrantSource?: TaskGrantSource | undefined;
 };
 
 /** @internal */
@@ -88,7 +92,11 @@ export const TaskTypeGrant$inboundSchema: z.ZodType<
   outcomeTime: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  source: z.nullable(TaskGrantSource$inboundSchema).optional(),
+  source: TaskGrantSource$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "source": "taskGrantSource",
+  });
 });
 /** @internal */
 export type TaskTypeGrant$Outbound = {
@@ -99,7 +107,7 @@ export type TaskTypeGrant$Outbound = {
   identityUserId?: string | null | undefined;
   outcome?: string | null | undefined;
   outcomeTime?: string | null | undefined;
-  source?: TaskGrantSource$Outbound | null | undefined;
+  source?: TaskGrantSource$Outbound | undefined;
 };
 
 /** @internal */
@@ -115,7 +123,11 @@ export const TaskTypeGrant$outboundSchema: z.ZodType<
   identityUserId: z.nullable(z.string()).optional(),
   outcome: z.nullable(TaskTypeGrantOutcome$outboundSchema).optional(),
   outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  source: z.nullable(TaskGrantSource$outboundSchema).optional(),
+  taskGrantSource: TaskGrantSource$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    taskGrantSource: "source",
+  });
 });
 
 export function taskTypeGrantToJSON(taskTypeGrant: TaskTypeGrant): string {

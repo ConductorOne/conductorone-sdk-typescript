@@ -26,7 +26,10 @@ export type AppEntitlementWithExpired = {
    * The ID of the app that contains the entitlement.
    */
   appId?: string | null | undefined;
-  appUser?: AppUser | null | undefined;
+  /**
+   * Application User that represents an account in the application.
+   */
+  appUser?: AppUser | undefined;
   /**
    * The ID of the app user who holds the grant.
    */
@@ -41,7 +44,10 @@ export type AppEntitlementWithExpired = {
    * Entitlements that are the source of this grant (e.g., a group membership that implies a role).
    */
   grantSources?: Array<AppEntitlementRef> | null | undefined;
-  user?: User | null | undefined;
+  /**
+   * The User object provides all of the details for an user, as well as some configuration.
+   */
+  user?: User | undefined;
 };
 
 /** @internal */
@@ -52,7 +58,7 @@ export const AppEntitlementWithExpired$inboundSchema: z.ZodType<
 > = z.object({
   appEntitlementId: z.nullable(z.string()).optional(),
   appId: z.nullable(z.string()).optional(),
-  appUser: z.nullable(AppUser$inboundSchema).optional(),
+  appUser: AppUser$inboundSchema.optional(),
   appUserId: z.nullable(z.string()).optional(),
   discovered: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -62,7 +68,7 @@ export const AppEntitlementWithExpired$inboundSchema: z.ZodType<
   ).optional(),
   grantReasons: z.nullable(z.array(GrantReason$inboundSchema)).optional(),
   grantSources: z.nullable(z.array(AppEntitlementRef$inboundSchema)).optional(),
-  user: z.nullable(User$inboundSchema).optional(),
+  user: User$inboundSchema.optional(),
 });
 
 export function appEntitlementWithExpiredFromJSON(

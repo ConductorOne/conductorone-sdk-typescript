@@ -19,24 +19,31 @@ import {
  */
 export type CreateAccessProfileFromCohortRequest = {
   /**
+   * Optional CEL expression for dynamic membership. When non-empty, used
+   *
+   * @remarks
+   *  instead of auto-generating from profile_filters.
+   */
+  celExpression?: string | null | undefined;
+  /**
    * If true, the automation will create JIT tasks for access changes.
    *
    * @remarks
    *  If false, users are synced to membership without creating tasks.
    */
-  createTasks?: boolean | undefined;
+  createTasks?: boolean | null | undefined;
   /**
    * Description for the access profile.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * Display name for the access profile.
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
   /**
    * If true, enable the dynamic membership automation immediately.
    */
-  enableAutomation?: boolean | undefined;
+  enableAutomation?: boolean | null | undefined;
   /**
    * Entitlements to add to the access profile.
    */
@@ -48,18 +55,19 @@ export type CreateAccessProfileFromCohortRequest = {
   /**
    * Optional suggestion ID to mark as accepted after creating the profile.
    */
-  suggestionId?: string | undefined;
+  suggestionId?: string | null | undefined;
 };
 
 /** @internal */
 export type CreateAccessProfileFromCohortRequest$Outbound = {
-  createTasks?: boolean | undefined;
-  description?: string | undefined;
-  displayName?: string | undefined;
-  enableAutomation?: boolean | undefined;
+  celExpression?: string | null | undefined;
+  createTasks?: boolean | null | undefined;
+  description?: string | null | undefined;
+  displayName?: string | null | undefined;
+  enableAutomation?: boolean | null | undefined;
   entitlements?: Array<CohortEntitlement$Outbound> | null | undefined;
   profileFilters?: Array<ProfileFilter$Outbound> | null | undefined;
-  suggestionId?: string | undefined;
+  suggestionId?: string | null | undefined;
 };
 
 /** @internal */
@@ -68,14 +76,15 @@ export const CreateAccessProfileFromCohortRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAccessProfileFromCohortRequest
 > = z.object({
-  createTasks: z.boolean().optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enableAutomation: z.boolean().optional(),
+  celExpression: z.nullable(z.string()).optional(),
+  createTasks: z.nullable(z.boolean()).optional(),
+  description: z.nullable(z.string()).optional(),
+  displayName: z.nullable(z.string()).optional(),
+  enableAutomation: z.nullable(z.boolean()).optional(),
   entitlements: z.nullable(z.array(CohortEntitlement$outboundSchema))
     .optional(),
   profileFilters: z.nullable(z.array(ProfileFilter$outboundSchema)).optional(),
-  suggestionId: z.string().optional(),
+  suggestionId: z.nullable(z.string()).optional(),
 });
 
 export function createAccessProfileFromCohortRequestToJSON(

@@ -29,12 +29,18 @@ export type ConnectorServiceCreateRequest = {
    * The catalogId field.
    */
   catalogId?: string | null | undefined;
-  config?: ConnectorServiceCreateRequestConfig | null | undefined;
+  /**
+   * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+   */
+  config?: ConnectorServiceCreateRequestConfig | undefined;
   /**
    * The description field.
    */
   description?: string | null | undefined;
-  expandMask?: ConnectorExpandMask | null | undefined;
+  /**
+   * The ConnectorExpandMask is used to expand related objects on a connector.
+   */
+  connectorExpandMask?: ConnectorExpandMask | undefined;
   /**
    * The userIds field.
    */
@@ -78,9 +84,9 @@ export function connectorServiceCreateRequestConfigToJSON(
 /** @internal */
 export type ConnectorServiceCreateRequest$Outbound = {
   catalogId?: string | null | undefined;
-  config?: ConnectorServiceCreateRequestConfig$Outbound | null | undefined;
+  config?: ConnectorServiceCreateRequestConfig$Outbound | undefined;
   description?: string | null | undefined;
-  expandMask?: ConnectorExpandMask$Outbound | null | undefined;
+  expandMask?: ConnectorExpandMask$Outbound | undefined;
   userIds?: Array<string> | null | undefined;
 };
 
@@ -91,12 +97,15 @@ export const ConnectorServiceCreateRequest$outboundSchema: z.ZodType<
   ConnectorServiceCreateRequest
 > = z.object({
   catalogId: z.nullable(z.string()).optional(),
-  config: z.nullable(
-    z.lazy(() => ConnectorServiceCreateRequestConfig$outboundSchema),
-  ).optional(),
+  config: z.lazy(() => ConnectorServiceCreateRequestConfig$outboundSchema)
+    .optional(),
   description: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(ConnectorExpandMask$outboundSchema).optional(),
+  connectorExpandMask: ConnectorExpandMask$outboundSchema.optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    connectorExpandMask: "expandMask",
+  });
 });
 
 export function connectorServiceCreateRequestToJSON(

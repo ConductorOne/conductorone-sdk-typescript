@@ -273,7 +273,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 
 async function run() {
   const result = await conductoroneSDKTypescript.appEntitlementOwners.add({
-    appId: null,
+    appId: "<id>",
     entitlementId: "<id>",
   });
 
@@ -302,7 +302,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 
 async function run() {
   const res = await appEntitlementOwnersAdd(conductoroneSDKTypescript, {
-    appId: null,
+    appId: "<id>",
     entitlementId: "<id>",
   });
   if (res.ok) {

@@ -14,8 +14,8 @@ export type C1ApiAppV2AppOwnersDeleteEntitlementOwnerRequest = {
   roleSlug: string;
   appEntitlementRefAppId: string;
   appEntitlementRefId: string;
-  deleteEntitlementOwnerRequest?:
-    | shared.DeleteEntitlementOwnerRequest
+  deleteAppEntitlementOwnerRequest?:
+    | shared.DeleteAppEntitlementOwnerRequest
     | undefined;
 };
 
@@ -35,8 +35,8 @@ export type C1ApiAppV2AppOwnersDeleteEntitlementOwnerResponse = {
   /**
    * DeleteEntitlementOwnerResponse is the empty response for deleting an entitlement ownership source.
    */
-  deleteEntitlementOwnerResponse?:
-    | shared.DeleteEntitlementOwnerResponse
+  deleteAppEntitlementOwnerResponse?:
+    | shared.DeleteAppEntitlementOwnerResponse
     | undefined;
 };
 
@@ -46,8 +46,8 @@ export type C1ApiAppV2AppOwnersDeleteEntitlementOwnerRequest$Outbound = {
   role_slug: string;
   app_entitlement_ref_app_id: string;
   app_entitlement_ref_id: string;
-  DeleteEntitlementOwnerRequest?:
-    | shared.DeleteEntitlementOwnerRequest$Outbound
+  DeleteAppEntitlementOwnerRequest?:
+    | shared.DeleteAppEntitlementOwnerRequest$Outbound
     | undefined;
 };
 
@@ -62,15 +62,15 @@ export const C1ApiAppV2AppOwnersDeleteEntitlementOwnerRequest$outboundSchema:
     roleSlug: z.string(),
     appEntitlementRefAppId: z.string(),
     appEntitlementRefId: z.string(),
-    deleteEntitlementOwnerRequest: shared
-      .DeleteEntitlementOwnerRequest$outboundSchema.optional(),
+    deleteAppEntitlementOwnerRequest: shared
+      .DeleteAppEntitlementOwnerRequest$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       appId: "app_id",
       roleSlug: "role_slug",
       appEntitlementRefAppId: "app_entitlement_ref_app_id",
       appEntitlementRefId: "app_entitlement_ref_id",
-      deleteEntitlementOwnerRequest: "DeleteEntitlementOwnerRequest",
+      deleteAppEntitlementOwnerRequest: "DeleteAppEntitlementOwnerRequest",
     });
   });
 
@@ -95,14 +95,14 @@ export const C1ApiAppV2AppOwnersDeleteEntitlementOwnerResponse$inboundSchema:
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    DeleteEntitlementOwnerResponse: shared
-      .DeleteEntitlementOwnerResponse$inboundSchema.optional(),
+    DeleteAppEntitlementOwnerResponse: shared
+      .DeleteAppEntitlementOwnerResponse$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
       "StatusCode": "statusCode",
       "RawResponse": "rawResponse",
-      "DeleteEntitlementOwnerResponse": "deleteEntitlementOwnerResponse",
+      "DeleteAppEntitlementOwnerResponse": "deleteAppEntitlementOwnerResponse",
     });
   });
 

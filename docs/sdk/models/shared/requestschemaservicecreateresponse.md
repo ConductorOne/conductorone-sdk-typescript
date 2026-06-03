@@ -12,6 +12,6 @@ let value: RequestSchemaServiceCreateResponse = {};
 
 ## Fields
 
-| Field                                                               | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `requestSchema`                                                     | [shared.RequestSchema](../../../sdk/models/shared/requestschema.md) | :heavy_minus_sign:                                                  | N/A                                                                 |
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `requestSchema`                                                                      | [shared.RequestSchema](../../../sdk/models/shared/requestschema.md)                  | :heavy_minus_sign:                                                                   | A request schema defines a form template that users fill out when requesting access. |

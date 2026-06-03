@@ -24,7 +24,10 @@ export type UserWithAppEntitlementUserBindingView = {
    * The ID of the app user associated with this binding.
    */
   appUserId?: string | null | undefined;
-  user?: User | null | undefined;
+  /**
+   * The User object provides all of the details for an user, as well as some configuration.
+   */
+  user?: User | undefined;
 };
 
 /** @internal */
@@ -36,7 +39,7 @@ export const UserWithAppEntitlementUserBindingView$inboundSchema: z.ZodType<
   appEntitlementId: z.nullable(z.string()).optional(),
   appId: z.nullable(z.string()).optional(),
   appUserId: z.nullable(z.string()).optional(),
-  user: z.nullable(User$inboundSchema).optional(),
+  user: User$inboundSchema.optional(),
 });
 
 export function userWithAppEntitlementUserBindingViewFromJSON(

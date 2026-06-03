@@ -14,35 +14,39 @@ export type CohortEntitlement = {
   /**
    * The appDisplayName field.
    */
-  appDisplayName?: string | undefined;
+  appDisplayName?: string | null | undefined;
   /**
    * The appId field.
    */
-  appId?: string | undefined;
+  appId?: string | null | undefined;
   /**
    * The appResourceDisplayName field.
    */
-  appResourceDisplayName?: string | undefined;
+  appResourceDisplayName?: string | null | undefined;
   /**
    * The appResourceTypeDisplayName field.
    */
-  appResourceTypeDisplayName?: string | undefined;
+  appResourceTypeDisplayName?: string | null | undefined;
   /**
    * The coverage field.
    */
-  coverage?: number | undefined;
+  coverage?: number | null | undefined;
   /**
    * The entitlementDisplayName field.
    */
-  entitlementDisplayName?: string | undefined;
+  entitlementDisplayName?: string | null | undefined;
   /**
    * The entitlementId field.
    */
-  entitlementId?: string | undefined;
+  entitlementId?: string | null | undefined;
   /**
    * The grantedCount field.
    */
-  grantedCount?: number | undefined;
+  grantedCount?: number | null | undefined;
+  /**
+   * The riskLevelValueId field.
+   */
+  riskLevelValueId?: string | null | undefined;
 };
 
 /** @internal */
@@ -51,25 +55,27 @@ export const CohortEntitlement$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appDisplayName: z.string().optional(),
-  appId: z.string().optional(),
-  appResourceDisplayName: z.string().optional(),
-  appResourceTypeDisplayName: z.string().optional(),
-  coverage: z.number().optional(),
-  entitlementDisplayName: z.string().optional(),
-  entitlementId: z.string().optional(),
-  grantedCount: z.number().int().optional(),
+  appDisplayName: z.nullable(z.string()).optional(),
+  appId: z.nullable(z.string()).optional(),
+  appResourceDisplayName: z.nullable(z.string()).optional(),
+  appResourceTypeDisplayName: z.nullable(z.string()).optional(),
+  coverage: z.nullable(z.number()).optional(),
+  entitlementDisplayName: z.nullable(z.string()).optional(),
+  entitlementId: z.nullable(z.string()).optional(),
+  grantedCount: z.nullable(z.number().int()).optional(),
+  riskLevelValueId: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type CohortEntitlement$Outbound = {
-  appDisplayName?: string | undefined;
-  appId?: string | undefined;
-  appResourceDisplayName?: string | undefined;
-  appResourceTypeDisplayName?: string | undefined;
-  coverage?: number | undefined;
-  entitlementDisplayName?: string | undefined;
-  entitlementId?: string | undefined;
-  grantedCount?: number | undefined;
+  appDisplayName?: string | null | undefined;
+  appId?: string | null | undefined;
+  appResourceDisplayName?: string | null | undefined;
+  appResourceTypeDisplayName?: string | null | undefined;
+  coverage?: number | null | undefined;
+  entitlementDisplayName?: string | null | undefined;
+  entitlementId?: string | null | undefined;
+  grantedCount?: number | null | undefined;
+  riskLevelValueId?: string | null | undefined;
 };
 
 /** @internal */
@@ -78,14 +84,15 @@ export const CohortEntitlement$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CohortEntitlement
 > = z.object({
-  appDisplayName: z.string().optional(),
-  appId: z.string().optional(),
-  appResourceDisplayName: z.string().optional(),
-  appResourceTypeDisplayName: z.string().optional(),
-  coverage: z.number().optional(),
-  entitlementDisplayName: z.string().optional(),
-  entitlementId: z.string().optional(),
-  grantedCount: z.number().int().optional(),
+  appDisplayName: z.nullable(z.string()).optional(),
+  appId: z.nullable(z.string()).optional(),
+  appResourceDisplayName: z.nullable(z.string()).optional(),
+  appResourceTypeDisplayName: z.nullable(z.string()).optional(),
+  coverage: z.nullable(z.number()).optional(),
+  entitlementDisplayName: z.nullable(z.string()).optional(),
+  entitlementId: z.nullable(z.string()).optional(),
+  grantedCount: z.nullable(z.number().int()).optional(),
+  riskLevelValueId: z.nullable(z.string()).optional(),
 });
 
 export function cohortEntitlementToJSON(

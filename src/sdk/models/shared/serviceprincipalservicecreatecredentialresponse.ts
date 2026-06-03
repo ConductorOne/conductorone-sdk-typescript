@@ -19,7 +19,7 @@ export type ServicePrincipalServiceCreateCredentialResponse = {
   /**
    * The client secret. Shown exactly once at creation -- cannot be retrieved again.
    */
-  clientSecret?: string | undefined;
+  clientSecret?: string | null | undefined;
   /**
    * ServicePrincipalCredential represents a client credential for a service principal.
    */
@@ -33,7 +33,7 @@ export const ServicePrincipalServiceCreateCredentialResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    clientSecret: z.string().optional(),
+    clientSecret: z.nullable(z.string()).optional(),
     credential: ServicePrincipalCredential$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {

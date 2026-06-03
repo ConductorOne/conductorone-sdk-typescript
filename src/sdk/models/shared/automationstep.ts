@@ -168,51 +168,14 @@ export type AutomationStep = {
   connectorCreateAccount?: ConnectorCreateAccount | null | undefined;
   createAccessReview?: CreateAccessReview | null | undefined;
   createRevokeTasks?: CreateRevokeTasks | null | undefined;
-  /**
-   * The CreateRevokeTasksV2 message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named user. Only a single field of the following list may be set at a time:
-   *   - userIdCel
-   *   - userRef
-   *   - useSubjectUser
-   *
-   * This message contains a oneof named inclusion. Only a single field of the following list may be set at a time:
-   *   - inclusionList
-   *   - inclusionAll
-   *   - inclusionCriteria
-   *   - inclusionListCel
-   *
-   * This message contains a oneof named exclusion. Only a single field of the following list may be set at a time:
-   *   - exclusionNone
-   *   - exclusionList
-   *   - exclusionCriteria
-   *   - exclusionListCel
-   */
   createRevokeTasksV2?: CreateRevokeTasksV2 | null | undefined;
-  /**
-   * The EvaluateExpressions message.
-   */
   evaluateExpressions?: EvaluateExpressions | null | undefined;
-  /**
-   * The GeneratePassword message.
-   */
   generatePassword?: GeneratePassword | null | undefined;
   grantEntitlements?: GrantEntitlements | null | undefined;
   removeFromDelegation?: RemoveFromDelegation | null | undefined;
   runAutomation?: RunAutomation | null | undefined;
   sendEmail?: SendEmail | null | undefined;
   sendSlackMessage?: SendSlackMessage | null | undefined;
-  /**
-   * SetCredential submits a RotateCredentials baton task to the target connector,
-   *
-   * @remarks
-   *  re-encrypting the given password CEL expression with the connector's public JWK.
-   *
-   * This message contains a oneof named connector_identifier. Only a single field of the following list may be set at a time:
-   *   - connectorRef
-   */
   setCredential?: SetCredential | null | undefined;
   /**
    * The skipIfTrueCel field.
@@ -226,12 +189,6 @@ export type AutomationStep = {
    * The stepName field.
    */
   stepName?: string | null | undefined;
-  /**
-   * StoreCredential stores a credential from GeneratePassword in a vault.
-   *
-   * @remarks
-   *  Supports Paper Vault (SSO/email) and App Vault (entitlement-bound).
-   */
   storeCredential?: StoreCredential | null | undefined;
   taskAction?: TaskAction | null | undefined;
   unenrollFromAllAccessProfiles?:

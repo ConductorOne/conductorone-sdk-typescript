@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -128,159 +127,38 @@ import {
  *   - c1ConnectorSyncDetail
  */
 export type A2UIComponent = {
-  /**
-   * ButtonComponent triggers actions.
-   */
-  buttonComponent?: ButtonComponent | null | undefined;
-  /**
-   * C1CodeBlockComponent displays code with syntax highlighting.
-   */
-  c1CodeBlockComponent?: C1CodeBlockComponent | null | undefined;
-  /**
-   * C1ConnectorConfigFormComponent renders the shared admin connector-settings form inside an
-   *
-   * @remarks
-   *  A2UI surface. The frontend resolves the catalog, connector, and config schema itself from
-   *  the ids below, keeping the configuration field values out of the agent's data model — the
-   *  agent never receives API keys, passwords, or other secrets entered by the user.
-   */
-  c1ConnectorConfigFormComponent?:
-    | C1ConnectorConfigFormComponent
-    | null
-    | undefined;
-  /**
-   * C1ConnectorSyncDetailComponent renders the same live card as
-   *
-   * @remarks
-   *  C1ConnectorSyncProgressComponent but pre-expanded with the phase checklist,
-   *  live count tiles, and "What's happening" explainer visible from the first
-   *  paint. Intended for message-body placement — emit one after each
-   *  `submit_app_config` so the transcript carries a clear "this is what just
-   *  happened" receipt for the connector the user just connected.
-   */
-  c1ConnectorSyncDetailComponent?:
-    | C1ConnectorSyncDetailComponent
-    | null
-    | undefined;
-  /**
-   * C1ConnectorSyncProgressComponent renders a live connector sync status card.
-   *
-   * @remarks
-   *  Subscribes to WebSocket updates for real-time sync lifecycle status.
-   */
-  c1ConnectorSyncProgressComponent?:
-    | C1ConnectorSyncProgressComponent
-    | null
-    | undefined;
-  /**
-   * C1DurationPickerComponent is the access-request duration picker (presets + custom with number/unit).
-   *
-   * @remarks
-   *  Value is duration in seconds bound to the given path.
-   */
-  c1DurationPickerComponent?: C1DurationPickerComponent | null | undefined;
-  /**
-   * C1MSTeamsNotificationsComponent renders a self-contained Microsoft Teams integration card.
-   *
-   * @remarks
-   *  Fetches status and consent URLs via frontend API calls.
-   */
-  c1MSTeamsNotificationsComponent?:
-    | C1MSTeamsNotificationsComponent
-    | null
-    | undefined;
-  /**
-   * C1OnboardingPlanComponent renders a personalized onboarding plan with categorized steps.
-   *
-   * @remarks
-   *  The agent dynamically populates categories and steps based on user intent and context.
-   */
-  c1OnboardingPlanComponent?: C1OnboardingPlanComponent | null | undefined;
-  /**
-   * C1OnboardingWelcomeComponent renders the onboarding welcome screen with org context and intent collection.
-   *
-   * @remarks
-   *  Backend pre-populates recommended_catalog_id / recommended_display_name from detected IDP.
-   *  Frontend detects auth backend via introspect for contextual UI text.
-   */
-  c1OnboardingWelcomeComponent?:
-    | C1OnboardingWelcomeComponent
-    | null
-    | undefined;
-  /**
-   * C1ResourcePickerComponent allows selecting C1 resources.
-   */
-  c1ResourcePickerComponent?: C1ResourcePickerComponent | null | undefined;
-  /**
-   * C1SlackNotificationsComponent renders a self-contained Slack integration card.
-   *
-   * @remarks
-   *  Fetches status and OAuth URLs via frontend API calls.
-   */
-  c1SlackNotificationsComponent?:
-    | C1SlackNotificationsComponent
-    | null
-    | undefined;
-  /**
-   * C1StatusIndicatorComponent shows agent progress status.
-   */
-  c1StatusIndicatorComponent?: C1StatusIndicatorComponent | null | undefined;
-  /**
-   * C1TodoListComponent renders a phase/step checklist with progress tracking.
-   */
-  c1TodoListComponent?: C1TodoListComponent | null | undefined;
-  /**
-   * CardComponent is a container with styling.
-   */
-  cardComponent?: CardComponent | null | undefined;
-  /**
-   * CheckBoxComponent is a boolean checkbox.
-   */
-  checkBoxComponent?: CheckBoxComponent | null | undefined;
-  /**
-   * ChoicePickerComponent allows selection from predefined choices.
-   */
-  choicePickerComponent?: ChoicePickerComponent | null | undefined;
-  /**
-   * ColumnComponent arranges children vertically.
-   */
-  columnComponent?: ColumnComponent | null | undefined;
-  /**
-   * DateTimeInputComponent for date/time selection.
-   */
-  dateTimeInputComponent?: DateTimeInputComponent | null | undefined;
-  /**
-   * DividerComponent is a visual separator.
-   */
-  dividerComponent?: DividerComponent | null | undefined;
+  button?: ButtonComponent | null | undefined;
+  c1CodeBlock?: C1CodeBlockComponent | null | undefined;
+  c1ConnectorConfigForm?: C1ConnectorConfigFormComponent | null | undefined;
+  c1ConnectorSyncDetail?: C1ConnectorSyncDetailComponent | null | undefined;
+  c1ConnectorSyncProgress?: C1ConnectorSyncProgressComponent | null | undefined;
+  c1DurationPicker?: C1DurationPickerComponent | null | undefined;
+  c1MsTeamsNotifications?: C1MSTeamsNotificationsComponent | null | undefined;
+  c1OnboardingPlan?: C1OnboardingPlanComponent | null | undefined;
+  c1OnboardingWelcome?: C1OnboardingWelcomeComponent | null | undefined;
+  c1ResourcePicker?: C1ResourcePickerComponent | null | undefined;
+  c1SlackNotifications?: C1SlackNotificationsComponent | null | undefined;
+  c1StatusIndicator?: C1StatusIndicatorComponent | null | undefined;
+  c1TodoList?: C1TodoListComponent | null | undefined;
+  card?: CardComponent | null | undefined;
+  checkBox?: CheckBoxComponent | null | undefined;
+  choicePicker?: ChoicePickerComponent | null | undefined;
+  column?: ColumnComponent | null | undefined;
+  dateTimeInput?: DateTimeInputComponent | null | undefined;
+  divider?: DividerComponent | null | undefined;
   /**
    * The id field.
    */
-  id?: string | undefined;
-  /**
-   * ProgressBarComponent shows a read-only progress bar (label, value %, min/max).
-   */
-  progressBarComponent?: ProgressBarComponent | null | undefined;
-  /**
-   * RowComponent arranges children horizontally.
-   */
-  rowComponent?: RowComponent | null | undefined;
-  /**
-   * SliderComponent is an interactive numeric range input (e.g. for forms).
-   */
-  sliderComponent?: SliderComponent | null | undefined;
-  /**
-   * TextComponent displays text content.
-   */
-  textComponent?: TextComponent | null | undefined;
-  /**
-   * TextFieldComponent is a text input field.
-   */
-  textFieldComponent?: TextFieldComponent | null | undefined;
+  id?: string | null | undefined;
+  progressBar?: ProgressBarComponent | null | undefined;
+  row?: RowComponent | null | undefined;
+  slider?: SliderComponent | null | undefined;
+  text?: TextComponent | null | undefined;
+  textField?: TextFieldComponent | null | undefined;
   /**
    * The weight field.
    */
-  weight?: number | undefined;
+  weight?: number | null | undefined;
 };
 
 /** @internal */
@@ -322,40 +200,13 @@ export const A2UIComponent$inboundSchema: z.ZodType<
   column: z.nullable(ColumnComponent$inboundSchema).optional(),
   dateTimeInput: z.nullable(DateTimeInputComponent$inboundSchema).optional(),
   divider: z.nullable(DividerComponent$inboundSchema).optional(),
-  id: z.string().optional(),
+  id: z.nullable(z.string()).optional(),
   progressBar: z.nullable(ProgressBarComponent$inboundSchema).optional(),
   row: z.nullable(RowComponent$inboundSchema).optional(),
   slider: z.nullable(SliderComponent$inboundSchema).optional(),
   text: z.nullable(TextComponent$inboundSchema).optional(),
   textField: z.nullable(TextFieldComponent$inboundSchema).optional(),
-  weight: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "button": "buttonComponent",
-    "c1CodeBlock": "c1CodeBlockComponent",
-    "c1ConnectorConfigForm": "c1ConnectorConfigFormComponent",
-    "c1ConnectorSyncDetail": "c1ConnectorSyncDetailComponent",
-    "c1ConnectorSyncProgress": "c1ConnectorSyncProgressComponent",
-    "c1DurationPicker": "c1DurationPickerComponent",
-    "c1MsTeamsNotifications": "c1MSTeamsNotificationsComponent",
-    "c1OnboardingPlan": "c1OnboardingPlanComponent",
-    "c1OnboardingWelcome": "c1OnboardingWelcomeComponent",
-    "c1ResourcePicker": "c1ResourcePickerComponent",
-    "c1SlackNotifications": "c1SlackNotificationsComponent",
-    "c1StatusIndicator": "c1StatusIndicatorComponent",
-    "c1TodoList": "c1TodoListComponent",
-    "card": "cardComponent",
-    "checkBox": "checkBoxComponent",
-    "choicePicker": "choicePickerComponent",
-    "column": "columnComponent",
-    "dateTimeInput": "dateTimeInputComponent",
-    "divider": "dividerComponent",
-    "progressBar": "progressBarComponent",
-    "row": "rowComponent",
-    "slider": "sliderComponent",
-    "text": "textComponent",
-    "textField": "textFieldComponent",
-  });
+  weight: z.nullable(z.number().int()).optional(),
 });
 
 export function a2UIComponentFromJSON(

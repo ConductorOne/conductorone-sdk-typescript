@@ -92,7 +92,18 @@ export type ApprovalInput = {
   allowedReassignees?: Array<string> | null | undefined;
   appOwners?: AppOwnerApproval | null | undefined;
   entitlementOwners?: EntitlementOwnerApproval | null | undefined;
-  escalation?: Escalation | null | undefined;
+  /**
+   * The Escalation message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named escalation_policy. Only a single field of the following list may be set at a time:
+   *   - replacePolicy
+   *   - reassignToApprovers
+   *   - cancelTicket
+   *   - skipStep
+   */
+  escalation?: Escalation | undefined;
   /**
    * Whether escalation is enabled for this step.
    */
@@ -133,7 +144,7 @@ export type ApprovalInput$Outbound = {
   allowedReassignees?: Array<string> | null | undefined;
   appOwners?: AppOwnerApproval$Outbound | null | undefined;
   entitlementOwners?: EntitlementOwnerApproval$Outbound | null | undefined;
-  escalation?: Escalation$Outbound | null | undefined;
+  escalation?: Escalation$Outbound | undefined;
   escalationEnabled?: boolean | null | undefined;
   expression?: ExpressionApprovalInput$Outbound | null | undefined;
   group?: AppGroupApproval$Outbound | null | undefined;
@@ -161,7 +172,7 @@ export const ApprovalInput$outboundSchema: z.ZodType<
   appOwners: z.nullable(AppOwnerApproval$outboundSchema).optional(),
   entitlementOwners: z.nullable(EntitlementOwnerApproval$outboundSchema)
     .optional(),
-  escalation: z.nullable(Escalation$outboundSchema).optional(),
+  escalation: Escalation$outboundSchema.optional(),
   escalationEnabled: z.nullable(z.boolean()).optional(),
   expression: z.nullable(ExpressionApprovalInput$outboundSchema).optional(),
   group: z.nullable(AppGroupApproval$outboundSchema).optional(),

@@ -14,7 +14,7 @@ export type CreateTaskAction = {
   /**
    * The policyId field.
    */
-  policyId?: string | undefined;
+  policyId?: string | null | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const CreateTaskAction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  policyId: z.string().optional(),
+  policyId: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type CreateTaskAction$Outbound = {
-  policyId?: string | undefined;
+  policyId?: string | null | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const CreateTaskAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateTaskAction
 > = z.object({
-  policyId: z.string().optional(),
+  policyId: z.nullable(z.string()).optional(),
 });
 
 export function createTaskActionToJSON(

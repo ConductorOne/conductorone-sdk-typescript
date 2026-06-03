@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   TaskExpandMask,
   TaskExpandMask$Outbound,
@@ -16,11 +17,11 @@ export type TaskServiceCreateRevokeRequest = {
   /**
    * The ID of the app entitlement to revoke access to.
    */
-  appEntitlementId: string;
+  appEntitlementId: string | null;
   /**
    * The ID of the app associated with the entitlement.
    */
-  appId: string;
+  appId: string | null;
   /**
    * The ID of the app user to revoke access from. This field and identityUserId cannot both be set for a given request.
    */
@@ -29,7 +30,10 @@ export type TaskServiceCreateRevokeRequest = {
    * The description of the request.
    */
   description?: string | null | undefined;
-  expandMask?: TaskExpandMask | null | undefined;
+  /**
+   * The task expand mask is an array of strings that specifes the related objects the requester wishes to have returned when making a request where the expand mask is part of the input. Use '*' to view all possible responses.
+   */
+  taskExpandMask?: TaskExpandMask | undefined;
   /**
    * The ID of the user associated with the app user we are revoking access from. This field cannot be set if appUserID is also set.
    */
@@ -38,11 +42,11 @@ export type TaskServiceCreateRevokeRequest = {
 
 /** @internal */
 export type TaskServiceCreateRevokeRequest$Outbound = {
-  appEntitlementId: string;
-  appId: string;
+  appEntitlementId: string | null;
+  appId: string | null;
   appUserId?: string | null | undefined;
   description?: string | null | undefined;
-  expandMask?: TaskExpandMask$Outbound | null | undefined;
+  expandMask?: TaskExpandMask$Outbound | undefined;
   identityUserId?: string | null | undefined;
 };
 
@@ -52,12 +56,16 @@ export const TaskServiceCreateRevokeRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskServiceCreateRevokeRequest
 > = z.object({
-  appEntitlementId: z.string(),
-  appId: z.string(),
+  appEntitlementId: z.nullable(z.string()),
+  appId: z.nullable(z.string()),
   appUserId: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
+  taskExpandMask: TaskExpandMask$outboundSchema.optional(),
   identityUserId: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    taskExpandMask: "expandMask",
+  });
 });
 
 export function taskServiceCreateRevokeRequestToJSON(

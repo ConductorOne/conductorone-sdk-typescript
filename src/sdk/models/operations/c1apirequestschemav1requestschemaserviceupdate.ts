@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiRequestSchemaV1RequestSchemaServiceUpdateRequest = {
-  requestSchemaId: string | null;
+  requestSchemaId: string;
   requestSchemaServiceUpdateRequest?:
     | shared.RequestSchemaServiceUpdateRequest
     | undefined;
@@ -39,7 +39,7 @@ export type C1ApiRequestSchemaV1RequestSchemaServiceUpdateResponse = {
 
 /** @internal */
 export type C1ApiRequestSchemaV1RequestSchemaServiceUpdateRequest$Outbound = {
-  request_schema_id: string | null;
+  request_schema_id: string;
   RequestSchemaServiceUpdateRequest?:
     | shared.RequestSchemaServiceUpdateRequest$Outbound
     | undefined;
@@ -52,7 +52,7 @@ export const C1ApiRequestSchemaV1RequestSchemaServiceUpdateRequest$outboundSchem
     z.ZodTypeDef,
     C1ApiRequestSchemaV1RequestSchemaServiceUpdateRequest
   > = z.object({
-    requestSchemaId: z.nullable(z.string()),
+    requestSchemaId: z.string(),
     requestSchemaServiceUpdateRequest: shared
       .RequestSchemaServiceUpdateRequest$outboundSchema.optional(),
   }).transform((v) => {

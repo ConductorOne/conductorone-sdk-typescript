@@ -11,12 +11,12 @@ export type ServicePrincipalServiceCreateRequest = {
   /**
    * The display name for the new service principal.
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
 };
 
 /** @internal */
 export type ServicePrincipalServiceCreateRequest$Outbound = {
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const ServicePrincipalServiceCreateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ServicePrincipalServiceCreateRequest
 > = z.object({
-  displayName: z.string().optional(),
+  displayName: z.nullable(z.string()).optional(),
 });
 
 export function servicePrincipalServiceCreateRequestToJSON(

@@ -39,7 +39,10 @@ export type BundleAutomationCircuitBreaker = {
    */
   state?: BundleAutomationCircuitBreakerState | null | undefined;
   updatedAt?: Date | null | undefined;
-  userRef?: UserRef | null | undefined;
+  /**
+   * A reference to a user.
+   */
+  userRef?: UserRef | undefined;
 };
 
 /** @internal */
@@ -63,7 +66,7 @@ export const BundleAutomationCircuitBreaker$inboundSchema: z.ZodType<
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  userRef: z.nullable(UserRef$inboundSchema).optional(),
+  userRef: UserRef$inboundSchema.optional(),
 });
 
 export function bundleAutomationCircuitBreakerFromJSON(

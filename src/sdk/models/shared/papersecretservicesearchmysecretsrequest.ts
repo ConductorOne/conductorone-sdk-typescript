@@ -75,27 +75,33 @@ export type PaperSecretServiceSearchMySecretsRequest = {
   /**
    * The pageSize field.
    */
-  pageSize?: number | undefined;
+  pageSize?: number | null | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | undefined;
+  pageToken?: string | null | undefined;
   /**
    * Fuzzy search by display name
    */
-  query?: string | undefined;
+  query?: string | null | undefined;
   /**
    * Filter by secret type (optional)
    */
-  secretType?: PaperSecretServiceSearchMySecretsRequestSecretType | undefined;
+  secretType?:
+    | PaperSecretServiceSearchMySecretsRequestSecretType
+    | null
+    | undefined;
   /**
    * Filter by sharing mode (optional)
    */
-  sharingMode?: PaperSecretServiceSearchMySecretsRequestSharingMode | undefined;
+  sharingMode?:
+    | PaperSecretServiceSearchMySecretsRequestSharingMode
+    | null
+    | undefined;
   /**
    * Sort order
    */
-  sortBy?: PaperSecretServiceSearchMySecretsRequestSortBy | undefined;
+  sortBy?: PaperSecretServiceSearchMySecretsRequestSortBy | null | undefined;
   /**
    * Filter by status (optional)
    */
@@ -145,12 +151,12 @@ export const PaperSecretServiceSearchMySecretsRequestStatuses$outboundSchema:
 
 /** @internal */
 export type PaperSecretServiceSearchMySecretsRequest$Outbound = {
-  pageSize?: number | undefined;
-  pageToken?: string | undefined;
-  query?: string | undefined;
-  secretType?: string | undefined;
-  sharingMode?: string | undefined;
-  sortBy?: string | undefined;
+  pageSize?: number | null | undefined;
+  pageToken?: string | null | undefined;
+  query?: string | null | undefined;
+  secretType?: string | null | undefined;
+  sharingMode?: string | null | undefined;
+  sortBy?: string | null | undefined;
   statuses?: Array<string> | null | undefined;
 };
 
@@ -160,16 +166,18 @@ export const PaperSecretServiceSearchMySecretsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PaperSecretServiceSearchMySecretsRequest
 > = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  secretType: PaperSecretServiceSearchMySecretsRequestSecretType$outboundSchema
-    .optional(),
-  sharingMode:
-    PaperSecretServiceSearchMySecretsRequestSharingMode$outboundSchema
-      .optional(),
-  sortBy: PaperSecretServiceSearchMySecretsRequestSortBy$outboundSchema
-    .optional(),
+  pageSize: z.nullable(z.number().int()).optional(),
+  pageToken: z.nullable(z.string()).optional(),
+  query: z.nullable(z.string()).optional(),
+  secretType: z.nullable(
+    PaperSecretServiceSearchMySecretsRequestSecretType$outboundSchema,
+  ).optional(),
+  sharingMode: z.nullable(
+    PaperSecretServiceSearchMySecretsRequestSharingMode$outboundSchema,
+  ).optional(),
+  sortBy: z.nullable(
+    PaperSecretServiceSearchMySecretsRequestSortBy$outboundSchema,
+  ).optional(),
   statuses: z.nullable(
     z.array(PaperSecretServiceSearchMySecretsRequestStatuses$outboundSchema),
   ).optional(),

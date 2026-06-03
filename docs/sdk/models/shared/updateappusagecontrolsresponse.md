@@ -12,6 +12,6 @@ let value: UpdateAppUsageControlsResponse = {};
 
 ## Fields
 
-| Field                                                                     | Type                                                                      | Required                                                                  | Description                                                               |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `appUsageControls`                                                        | [shared.AppUsageControls](../../../sdk/models/shared/appusagecontrols.md) | :heavy_minus_sign:                                                        | N/A                                                                       |
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `appUsageControls`                                                              | [shared.AppUsageControls](../../../sdk/models/shared/appusagecontrols.md)       | :heavy_minus_sign:                                                              | The AppUsageControls object describes some peripheral configuration for an app. |

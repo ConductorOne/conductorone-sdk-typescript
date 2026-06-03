@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -60,14 +61,19 @@ export type AppEntitlementAutomation = {
    */
   displayName?: string | null | undefined;
   entitlements?: AppEntitlementAutomationRuleEntitlement | null | undefined;
-  lastRunStatus?: AppEntitlementAutomationLastRunStatus | null | undefined;
+  /**
+   * The AppEntitlementAutomationLastRunStatus message.
+   */
+  appEntitlementAutomationLastRunStatus?:
+    | AppEntitlementAutomationLastRunStatus
+    | undefined;
   /**
    * When set, this automation is managed by an access profile's bundle automation.
    *
    * @remarks
    *  Read-only. Not settable via this API.
    */
-  managedByRequestCatalogId?: string | undefined;
+  managedByRequestCatalogId?: string | null | undefined;
   none?: AppEntitlementAutomationRuleNone | null | undefined;
   updatedAt?: Date | null | undefined;
 };
@@ -93,13 +99,16 @@ export const AppEntitlementAutomation$inboundSchema: z.ZodType<
   entitlements: z.nullable(
     AppEntitlementAutomationRuleEntitlement$inboundSchema,
   ).optional(),
-  lastRunStatus: z.nullable(AppEntitlementAutomationLastRunStatus$inboundSchema)
-    .optional(),
-  managedByRequestCatalogId: z.string().optional(),
+  lastRunStatus: AppEntitlementAutomationLastRunStatus$inboundSchema.optional(),
+  managedByRequestCatalogId: z.nullable(z.string()).optional(),
   none: z.nullable(AppEntitlementAutomationRuleNone$inboundSchema).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "lastRunStatus": "appEntitlementAutomationLastRunStatus",
+  });
 });
 
 export function appEntitlementAutomationFromJSON(

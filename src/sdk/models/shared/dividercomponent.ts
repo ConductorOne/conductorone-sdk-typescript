@@ -14,7 +14,7 @@ export type DividerComponent = {
   /**
    * The orientation field.
    */
-  orientation?: string | undefined;
+  orientation?: string | null | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const DividerComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  orientation: z.string().optional(),
+  orientation: z.nullable(z.string()).optional(),
 });
 
 export function dividerComponentFromJSON(

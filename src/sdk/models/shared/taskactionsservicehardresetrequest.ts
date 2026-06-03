@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   TaskExpandMask,
   TaskExpandMask$Outbound,
@@ -17,13 +18,16 @@ export type TaskActionsServiceHardResetRequest = {
    * The comment attached to the request.
    */
   comment?: string | null | undefined;
-  expandMask?: TaskExpandMask | null | undefined;
+  /**
+   * The task expand mask is an array of strings that specifes the related objects the requester wishes to have returned when making a request where the expand mask is part of the input. Use '*' to view all possible responses.
+   */
+  taskExpandMask?: TaskExpandMask | undefined;
 };
 
 /** @internal */
 export type TaskActionsServiceHardResetRequest$Outbound = {
   comment?: string | null | undefined;
-  expandMask?: TaskExpandMask$Outbound | null | undefined;
+  expandMask?: TaskExpandMask$Outbound | undefined;
 };
 
 /** @internal */
@@ -33,7 +37,11 @@ export const TaskActionsServiceHardResetRequest$outboundSchema: z.ZodType<
   TaskActionsServiceHardResetRequest
 > = z.object({
   comment: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
+  taskExpandMask: TaskExpandMask$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    taskExpandMask: "expandMask",
+  });
 });
 
 export function taskActionsServiceHardResetRequestToJSON(

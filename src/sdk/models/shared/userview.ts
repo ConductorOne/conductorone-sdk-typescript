@@ -28,7 +28,10 @@ export type UserView = {
    * JSONPATH expression indicating the location of the roles of the current user in the expanded array.
    */
   rolesPath?: string | null | undefined;
-  user?: User | null | undefined;
+  /**
+   * The User object provides all of the details for an user, as well as some configuration.
+   */
+  user?: User | undefined;
 };
 
 /** @internal */
@@ -41,7 +44,7 @@ export const UserView$inboundSchema: z.ZodType<
   directoriesPath: z.nullable(z.string()).optional(),
   managersPath: z.nullable(z.string()).optional(),
   rolesPath: z.nullable(z.string()).optional(),
-  user: z.nullable(User$inboundSchema).optional(),
+  user: User$inboundSchema.optional(),
 });
 
 export function userViewFromJSON(

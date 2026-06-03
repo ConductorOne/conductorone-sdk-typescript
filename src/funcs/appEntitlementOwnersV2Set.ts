@@ -87,7 +87,7 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.SetAppEntitlementOwnersV2Request, {
+  const body = encodeJSON("body", payload.SetAppEntitlementOwnersRequestV2, {
     explode: true,
   });
 
@@ -177,7 +177,7 @@ async function $do(
     M.json(
       200,
       operations.C1ApiAppV2AppEntitlementOwnersSetResponse$inboundSchema,
-      { key: "SetAppEntitlementOwnersV2Response" },
+      { key: "SetAppEntitlementOwnersResponseV2" },
     ),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

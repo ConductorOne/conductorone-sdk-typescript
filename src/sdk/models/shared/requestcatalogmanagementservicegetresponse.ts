@@ -37,7 +37,10 @@ export type RequestCatalogManagementServiceGetResponse = {
     | Array<RequestCatalogManagementServiceGetResponseExpanded>
     | null
     | undefined;
-  requestCatalogView?: RequestCatalogView | null | undefined;
+  /**
+   * The request catalog view contains the serialized request catalog and paths to objects referenced by the request catalog.
+   */
+  requestCatalogView?: RequestCatalogView | undefined;
 };
 
 /** @internal */
@@ -83,8 +86,7 @@ export const RequestCatalogManagementServiceGetResponse$inboundSchema:
           RequestCatalogManagementServiceGetResponseExpanded$inboundSchema
         )),
       ).optional(),
-      requestCatalogView: z.nullable(RequestCatalogView$inboundSchema)
-        .optional(),
+      requestCatalogView: RequestCatalogView$inboundSchema.optional(),
     });
 
 export function requestCatalogManagementServiceGetResponseFromJSON(

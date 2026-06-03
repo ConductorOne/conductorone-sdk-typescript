@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiRequestSchemaV1RequestSchemaServiceGetRequest = {
-  requestSchemaId: string | null;
+  requestSchemaId: string;
 };
 
 export type C1ApiRequestSchemaV1RequestSchemaServiceGetResponse = {
@@ -36,7 +36,7 @@ export type C1ApiRequestSchemaV1RequestSchemaServiceGetResponse = {
 
 /** @internal */
 export type C1ApiRequestSchemaV1RequestSchemaServiceGetRequest$Outbound = {
-  request_schema_id: string | null;
+  request_schema_id: string;
 };
 
 /** @internal */
@@ -46,7 +46,7 @@ export const C1ApiRequestSchemaV1RequestSchemaServiceGetRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiRequestSchemaV1RequestSchemaServiceGetRequest
   > = z.object({
-    requestSchemaId: z.nullable(z.string()),
+    requestSchemaId: z.string(),
   }).transform((v) => {
     return remap$(v, {
       requestSchemaId: "request_schema_id",

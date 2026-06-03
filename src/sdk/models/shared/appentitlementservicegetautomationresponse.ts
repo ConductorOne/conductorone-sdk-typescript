@@ -16,16 +16,26 @@ import {
  * The AppEntitlementServiceGetAutomationResponse message.
  */
 export type AppEntitlementServiceGetAutomationResponse = {
-  appEntitlementAutomation?: AppEntitlementAutomation | null | undefined;
+  /**
+   * The AppEntitlementAutomation message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named conditions. Only a single field of the following list may be set at a time:
+   *   - none
+   *   - entitlements
+   *   - cel
+   *   - basic
+   */
+  appEntitlementAutomation?: AppEntitlementAutomation | undefined;
 };
 
 /** @internal */
 export const AppEntitlementServiceGetAutomationResponse$inboundSchema:
   z.ZodType<AppEntitlementServiceGetAutomationResponse, z.ZodTypeDef, unknown> =
     z.object({
-      AppEntitlementAutomation: z.nullable(
-        AppEntitlementAutomation$inboundSchema,
-      ).optional(),
+      AppEntitlementAutomation: AppEntitlementAutomation$inboundSchema
+        .optional(),
     }).transform((v) => {
       return remap$(v, {
         "AppEntitlementAutomation": "appEntitlementAutomation",

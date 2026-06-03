@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   TaskExpandMask,
   TaskExpandMask$Outbound,
@@ -13,14 +14,17 @@ import {
  * The TaskActionsServiceUpdateRequestDataRequest object lets you submit form data for a task that is in a form policy step.
  */
 export type TaskActionsServiceUpdateRequestDataRequest = {
-  data?: { [k: string]: any } | null | undefined;
-  expandMask?: TaskExpandMask | null | undefined;
+  data?: { [k: string]: any } | undefined;
+  /**
+   * The task expand mask is an array of strings that specifes the related objects the requester wishes to have returned when making a request where the expand mask is part of the input. Use '*' to view all possible responses.
+   */
+  taskExpandMask?: TaskExpandMask | undefined;
 };
 
 /** @internal */
 export type TaskActionsServiceUpdateRequestDataRequest$Outbound = {
-  data?: { [k: string]: any } | null | undefined;
-  expandMask?: TaskExpandMask$Outbound | null | undefined;
+  data?: { [k: string]: any } | undefined;
+  expandMask?: TaskExpandMask$Outbound | undefined;
 };
 
 /** @internal */
@@ -30,8 +34,12 @@ export const TaskActionsServiceUpdateRequestDataRequest$outboundSchema:
     z.ZodTypeDef,
     TaskActionsServiceUpdateRequestDataRequest
   > = z.object({
-    data: z.nullable(z.record(z.any())).optional(),
-    expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
+    data: z.record(z.any()).optional(),
+    taskExpandMask: TaskExpandMask$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      taskExpandMask: "expandMask",
+    });
   });
 
 export function taskActionsServiceUpdateRequestDataRequestToJSON(

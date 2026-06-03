@@ -16,15 +16,15 @@ export type HooksSearchRequest = {
   /**
    * The pageSize field.
    */
-  pageSize?: number | undefined;
+  pageSize?: number | null | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | undefined;
+  pageToken?: string | null | undefined;
   /**
    * The query field.
    */
-  query?: string | undefined;
+  query?: string | null | undefined;
   /**
    * The refs field.
    */
@@ -33,9 +33,9 @@ export type HooksSearchRequest = {
 
 /** @internal */
 export type HooksSearchRequest$Outbound = {
-  pageSize?: number | undefined;
-  pageToken?: string | undefined;
-  query?: string | undefined;
+  pageSize?: number | null | undefined;
+  pageToken?: string | null | undefined;
+  query?: string | null | undefined;
   refs?: Array<HookRef$Outbound> | null | undefined;
 };
 
@@ -45,9 +45,9 @@ export const HooksSearchRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   HooksSearchRequest
 > = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
+  pageSize: z.nullable(z.number().int()).optional(),
+  pageToken: z.nullable(z.string()).optional(),
+  query: z.nullable(z.string()).optional(),
   refs: z.nullable(z.array(HookRef$outboundSchema)).optional(),
 });
 

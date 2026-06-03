@@ -21,19 +21,19 @@ export type WorkloadFederationTrustInput = {
    * @remarks
    *  Example: claims.sub.startsWith("repo:acme/infra:") && claims.environment == "production"
    */
-  conditionExpression?: string | undefined;
+  conditionExpression?: string | null | undefined;
   /**
    * A description of what this trust policy matches.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * Whether the trust is disabled.
    */
-  disabled?: boolean | undefined;
+  disabled?: boolean | null | undefined;
   /**
    * The display name of the trust.
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
   /**
    * JWT claim names from the subject token to copy into the issued C1 token.
    *
@@ -52,10 +52,10 @@ export type WorkloadFederationTrustInput = {
 /** @internal */
 export type WorkloadFederationTrustInput$Outbound = {
   allowSourceCidrs?: Array<string> | null | undefined;
-  conditionExpression?: string | undefined;
-  description?: string | undefined;
-  disabled?: boolean | undefined;
-  displayName?: string | undefined;
+  conditionExpression?: string | null | undefined;
+  description?: string | null | undefined;
+  disabled?: boolean | null | undefined;
+  displayName?: string | null | undefined;
   passthroughClaims?: Array<string> | null | undefined;
   scopedRoleIds?: Array<string> | null | undefined;
 };
@@ -67,10 +67,10 @@ export const WorkloadFederationTrustInput$outboundSchema: z.ZodType<
   WorkloadFederationTrustInput
 > = z.object({
   allowSourceCidrs: z.nullable(z.array(z.string())).optional(),
-  conditionExpression: z.string().optional(),
-  description: z.string().optional(),
-  disabled: z.boolean().optional(),
-  displayName: z.string().optional(),
+  conditionExpression: z.nullable(z.string()).optional(),
+  description: z.nullable(z.string()).optional(),
+  disabled: z.nullable(z.boolean()).optional(),
+  displayName: z.nullable(z.string()).optional(),
   passthroughClaims: z.nullable(z.array(z.string())).optional(),
   scopedRoleIds: z.nullable(z.array(z.string())).optional(),
 });

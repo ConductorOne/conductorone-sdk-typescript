@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiFunctionsV1FunctionsServiceCreateTagRequest = {
-  functionId: string | null;
+  functionId: string;
   functionsServiceCreateTagRequest?:
     | shared.FunctionsServiceCreateTagRequest
     | undefined;
@@ -39,7 +39,7 @@ export type C1ApiFunctionsV1FunctionsServiceCreateTagResponse = {
 
 /** @internal */
 export type C1ApiFunctionsV1FunctionsServiceCreateTagRequest$Outbound = {
-  function_id: string | null;
+  function_id: string;
   FunctionsServiceCreateTagRequest?:
     | shared.FunctionsServiceCreateTagRequest$Outbound
     | undefined;
@@ -52,7 +52,7 @@ export const C1ApiFunctionsV1FunctionsServiceCreateTagRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiFunctionsV1FunctionsServiceCreateTagRequest
   > = z.object({
-    functionId: z.nullable(z.string()),
+    functionId: z.string(),
     functionsServiceCreateTagRequest: shared
       .FunctionsServiceCreateTagRequest$outboundSchema.optional(),
   }).transform((v) => {

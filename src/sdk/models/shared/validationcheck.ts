@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,18 +21,9 @@ import { OrCheck, OrCheck$inboundSchema } from "./orcheck.js";
  *   - or
  */
 export type ValidationCheck = {
-  /**
-   * AndCheck requires all checks to pass.
-   */
-  andCheck?: AndCheck | null | undefined;
-  /**
-   * FunctionCall represents a client-side function invocation.
-   */
-  functionCall?: FunctionCall | null | undefined;
-  /**
-   * OrCheck requires at least one check to pass.
-   */
-  orCheck?: OrCheck | null | undefined;
+  and?: AndCheck | null | undefined;
+  call?: FunctionCall | null | undefined;
+  or?: OrCheck | null | undefined;
 };
 
 /** @internal */
@@ -45,12 +35,6 @@ export const ValidationCheck$inboundSchema: z.ZodType<
   and: z.nullable(z.lazy(() => AndCheck$inboundSchema)).optional(),
   call: z.nullable(FunctionCall$inboundSchema).optional(),
   or: z.nullable(z.lazy(() => OrCheck$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "and": "andCheck",
-    "call": "functionCall",
-    "or": "orCheck",
-  });
 });
 
 export function validationCheckFromJSON(

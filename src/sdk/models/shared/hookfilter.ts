@@ -18,7 +18,7 @@ export type HookFilter = {
    *  Available variable: ctx.tool_name (string).
    *  Must evaluate to bool. Empty matches all tools.
    */
-  celExpression?: string | undefined;
+  celExpression?: string | null | undefined;
 };
 
 /** @internal */
@@ -27,11 +27,11 @@ export const HookFilter$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  celExpression: z.string().optional(),
+  celExpression: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type HookFilter$Outbound = {
-  celExpression?: string | undefined;
+  celExpression?: string | null | undefined;
 };
 
 /** @internal */
@@ -40,7 +40,7 @@ export const HookFilter$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   HookFilter
 > = z.object({
-  celExpression: z.string().optional(),
+  celExpression: z.nullable(z.string()).optional(),
 });
 
 export function hookFilterToJSON(hookFilter: HookFilter): string {

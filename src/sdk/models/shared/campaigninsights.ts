@@ -14,7 +14,7 @@ export type CampaignInsights = {
   /**
    * The markdown field.
    */
-  markdown?: string | undefined;
+  markdown?: string | null | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const CampaignInsights$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  markdown: z.string().optional(),
+  markdown: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type CampaignInsights$Outbound = {
-  markdown?: string | undefined;
+  markdown?: string | null | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const CampaignInsights$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CampaignInsights
 > = z.object({
-  markdown: z.string().optional(),
+  markdown: z.nullable(z.string()).optional(),
 });
 
 export function campaignInsightsToJSON(

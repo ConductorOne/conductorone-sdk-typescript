@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   AppEntitlementAutomationInput,
   AppEntitlementAutomationInput$Outbound,
@@ -13,12 +14,23 @@ import {
  * The CreateAutomationRequest message.
  */
 export type CreateAutomationRequest = {
-  automation?: AppEntitlementAutomationInput | null | undefined;
+  /**
+   * The AppEntitlementAutomation message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named conditions. Only a single field of the following list may be set at a time:
+   *   - none
+   *   - entitlements
+   *   - cel
+   *   - basic
+   */
+  appEntitlementAutomation?: AppEntitlementAutomationInput | undefined;
 };
 
 /** @internal */
 export type CreateAutomationRequest$Outbound = {
-  automation?: AppEntitlementAutomationInput$Outbound | null | undefined;
+  automation?: AppEntitlementAutomationInput$Outbound | undefined;
 };
 
 /** @internal */
@@ -27,8 +39,12 @@ export const CreateAutomationRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAutomationRequest
 > = z.object({
-  automation: z.nullable(AppEntitlementAutomationInput$outboundSchema)
+  appEntitlementAutomation: AppEntitlementAutomationInput$outboundSchema
     .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    appEntitlementAutomation: "automation",
+  });
 });
 
 export function createAutomationRequestToJSON(

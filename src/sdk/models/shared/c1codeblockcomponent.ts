@@ -27,7 +27,7 @@ export type C1CodeBlockComponent = {
   /**
    * The copyable field.
    */
-  copyable?: boolean | undefined;
+  copyable?: boolean | null | undefined;
   /**
    * DynamicString can be a literal value, a JSON pointer path, or a function call.
    *
@@ -59,7 +59,7 @@ export const C1CodeBlockComponent$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   code: DynamicString$inboundSchema.optional(),
-  copyable: z.boolean().optional(),
+  copyable: z.nullable(z.boolean()).optional(),
   language: DynamicString$inboundSchema.optional(),
   title: DynamicString$inboundSchema.optional(),
 }).transform((v) => {

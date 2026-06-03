@@ -13,13 +13,16 @@ import {
  * The UpdateAppUsageControlsRequest message contains the AppUsageControls object to update and the update mask.
  */
 export type UpdateAppUsageControlsRequest = {
-  appUsageControls?: AppUsageControls | null | undefined;
+  /**
+   * The AppUsageControls object describes some peripheral configuration for an app.
+   */
+  appUsageControls?: AppUsageControls | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type UpdateAppUsageControlsRequest$Outbound = {
-  appUsageControls?: AppUsageControls$Outbound | null | undefined;
+  appUsageControls?: AppUsageControls$Outbound | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -29,7 +32,7 @@ export const UpdateAppUsageControlsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateAppUsageControlsRequest
 > = z.object({
-  appUsageControls: z.nullable(AppUsageControls$outboundSchema).optional(),
+  appUsageControls: AppUsageControls$outboundSchema.optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 

@@ -28,12 +28,12 @@ export type AppOwnerEntitlement = {
   /**
    * The appId field.
    */
-  appId?: string | undefined;
-  createdAt?: Date | undefined;
+  appId?: string | null | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * The roleSlug field.
    */
-  roleSlug?: string | undefined;
+  roleSlug?: string | null | undefined;
 };
 
 /** @internal */
@@ -43,10 +43,11 @@ export const AppOwnerEntitlement$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   appEntitlement: AppEntitlement$inboundSchema.optional(),
-  appId: z.string().optional(),
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  roleSlug: z.string().optional(),
+  appId: z.nullable(z.string()).optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  roleSlug: z.nullable(z.string()).optional(),
 });
 
 export function appOwnerEntitlementFromJSON(

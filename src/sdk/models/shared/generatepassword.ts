@@ -23,7 +23,7 @@ export type GeneratePassword = {
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  passwordPolicyId?: string | undefined;
+  passwordPolicyId?: string | null | undefined;
   /**
    * GeneratePasswordPolicy defines inline password generation rules.
    *
@@ -43,7 +43,7 @@ export const GeneratePassword$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  passwordPolicyId: z.string().optional(),
+  passwordPolicyId: z.nullable(z.string()).optional(),
   policy: GeneratePasswordPolicy$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -52,7 +52,7 @@ export const GeneratePassword$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type GeneratePassword$Outbound = {
-  passwordPolicyId?: string | undefined;
+  passwordPolicyId?: string | null | undefined;
   policy?: GeneratePasswordPolicy$Outbound | undefined;
 };
 
@@ -62,7 +62,7 @@ export const GeneratePassword$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GeneratePassword
 > = z.object({
-  passwordPolicyId: z.string().optional(),
+  passwordPolicyId: z.nullable(z.string()).optional(),
   generatePasswordPolicy: GeneratePasswordPolicy$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

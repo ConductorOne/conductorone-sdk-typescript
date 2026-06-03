@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -38,7 +39,10 @@ export type RunAutomation = {
    */
   automationTemplateIdCel?: string | null | undefined;
   automationTemplateRef?: AutomationTemplateRef | null | undefined;
-  context?: AutomationContext | null | undefined;
+  /**
+   * The AutomationContext message.
+   */
+  automationContext?: AutomationContext | undefined;
 };
 
 /** @internal */
@@ -50,13 +54,17 @@ export const RunAutomation$inboundSchema: z.ZodType<
   automationTemplateIdCel: z.nullable(z.string()).optional(),
   automationTemplateRef: z.nullable(AutomationTemplateRef$inboundSchema)
     .optional(),
-  context: z.nullable(AutomationContext$inboundSchema).optional(),
+  context: AutomationContext$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "context": "automationContext",
+  });
 });
 /** @internal */
 export type RunAutomation$Outbound = {
   automationTemplateIdCel?: string | null | undefined;
   automationTemplateRef?: AutomationTemplateRef$Outbound | null | undefined;
-  context?: AutomationContext$Outbound | null | undefined;
+  context?: AutomationContext$Outbound | undefined;
 };
 
 /** @internal */
@@ -68,7 +76,11 @@ export const RunAutomation$outboundSchema: z.ZodType<
   automationTemplateIdCel: z.nullable(z.string()).optional(),
   automationTemplateRef: z.nullable(AutomationTemplateRef$outboundSchema)
     .optional(),
-  context: z.nullable(AutomationContext$outboundSchema).optional(),
+  automationContext: AutomationContext$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    automationContext: "context",
+  });
 });
 
 export function runAutomationToJSON(runAutomation: RunAutomation): string {

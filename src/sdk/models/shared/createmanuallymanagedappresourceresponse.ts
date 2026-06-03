@@ -12,7 +12,15 @@ import { AppResource, AppResource$inboundSchema } from "./appresource.js";
  * The response message for creating a manually managed app resource.
  */
 export type CreateManuallyManagedAppResourceResponse = {
-  appResource?: AppResource | null | undefined;
+  /**
+   * The app resource message is a single resource that can have entitlements.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named metadata. Only a single field of the following list may be set at a time:
+   *   - secretTrait
+   */
+  appResource?: AppResource | undefined;
 };
 
 /** @internal */
@@ -21,7 +29,7 @@ export const CreateManuallyManagedAppResourceResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appResource: z.nullable(AppResource$inboundSchema).optional(),
+  appResource: AppResource$inboundSchema.optional(),
 });
 
 export function createManuallyManagedAppResourceResponseFromJSON(

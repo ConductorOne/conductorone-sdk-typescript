@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -52,39 +51,11 @@ import {
  *   - sensitiveFileGuard
  */
 export type BuiltInPattern = {
-  /**
-   * CreditCardBlockingConfig denies any tool call whose output contains a
-   *
-   * @remarks
-   *  Luhn-valid credit card number. No configuration fields today; the
-   *  presence of the oneof arm is the whole configuration.
-   */
-  creditCardBlockingConfig?: CreditCardBlockingConfig | null | undefined;
-  /**
-   * PIIRedactionConfig configures post-tool-use redaction of sensitive fields.
-   */
-  piiRedactionConfig?: PIIRedactionConfig | null | undefined;
-  /**
-   * QueryScopeLimitConfig caps numeric fields (e.g. limit, page_size) in tool
-   *
-   * @remarks
-   *  input so callers cannot request unbounded data.
-   */
-  queryScopeLimitConfig?: QueryScopeLimitConfig | null | undefined;
-  /**
-   * SensitiveFileGuardConfig blocks tool calls that reference sensitive file
-   *
-   * @remarks
-   *  paths or directories.
-   */
-  sensitiveFileGuardConfig?: SensitiveFileGuardConfig | null | undefined;
-  /**
-   * WriteAuthorizationConfig blocks tool calls whose ToolClassification is in
-   *
-   * @remarks
-   *  blocked_classifications, optionally permitting them within business hours.
-   */
-  writeAuthorizationConfig?: WriteAuthorizationConfig | null | undefined;
+  creditCardBlocking?: CreditCardBlockingConfig | null | undefined;
+  piiRedaction?: PIIRedactionConfig | null | undefined;
+  queryScopeLimit?: QueryScopeLimitConfig | null | undefined;
+  sensitiveFileGuard?: SensitiveFileGuardConfig | null | undefined;
+  writeAuthorization?: WriteAuthorizationConfig | null | undefined;
 };
 
 /** @internal */
@@ -101,14 +72,6 @@ export const BuiltInPattern$inboundSchema: z.ZodType<
     .optional(),
   writeAuthorization: z.nullable(WriteAuthorizationConfig$inboundSchema)
     .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "creditCardBlocking": "creditCardBlockingConfig",
-    "piiRedaction": "piiRedactionConfig",
-    "queryScopeLimit": "queryScopeLimitConfig",
-    "sensitiveFileGuard": "sensitiveFileGuardConfig",
-    "writeAuthorization": "writeAuthorizationConfig",
-  });
 });
 /** @internal */
 export type BuiltInPattern$Outbound = {
@@ -125,23 +88,14 @@ export const BuiltInPattern$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BuiltInPattern
 > = z.object({
-  creditCardBlockingConfig: z.nullable(CreditCardBlockingConfig$outboundSchema)
+  creditCardBlocking: z.nullable(CreditCardBlockingConfig$outboundSchema)
     .optional(),
-  piiRedactionConfig: z.nullable(PIIRedactionConfig$outboundSchema).optional(),
-  queryScopeLimitConfig: z.nullable(QueryScopeLimitConfig$outboundSchema)
+  piiRedaction: z.nullable(PIIRedactionConfig$outboundSchema).optional(),
+  queryScopeLimit: z.nullable(QueryScopeLimitConfig$outboundSchema).optional(),
+  sensitiveFileGuard: z.nullable(SensitiveFileGuardConfig$outboundSchema)
     .optional(),
-  sensitiveFileGuardConfig: z.nullable(SensitiveFileGuardConfig$outboundSchema)
+  writeAuthorization: z.nullable(WriteAuthorizationConfig$outboundSchema)
     .optional(),
-  writeAuthorizationConfig: z.nullable(WriteAuthorizationConfig$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    creditCardBlockingConfig: "creditCardBlocking",
-    piiRedactionConfig: "piiRedaction",
-    queryScopeLimitConfig: "queryScopeLimit",
-    sensitiveFileGuardConfig: "sensitiveFileGuard",
-    writeAuthorizationConfig: "writeAuthorization",
-  });
 });
 
 export function builtInPatternToJSON(builtInPattern: BuiltInPattern): string {

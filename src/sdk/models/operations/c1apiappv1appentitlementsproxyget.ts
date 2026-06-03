@@ -10,10 +10,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppEntitlementsProxyGetRequest = {
-  srcAppId: string | null;
-  srcAppEntitlementId: string | null;
-  dstAppId: string | null;
-  dstAppEntitlementId: string | null;
+  srcAppId: string;
+  srcAppEntitlementId: string;
+  dstAppId: string;
+  dstAppEntitlementId: string;
 };
 
 export type C1ApiAppV1AppEntitlementsProxyGetResponse = {
@@ -39,10 +39,10 @@ export type C1ApiAppV1AppEntitlementsProxyGetResponse = {
 
 /** @internal */
 export type C1ApiAppV1AppEntitlementsProxyGetRequest$Outbound = {
-  src_app_id: string | null;
-  src_app_entitlement_id: string | null;
-  dst_app_id: string | null;
-  dst_app_entitlement_id: string | null;
+  src_app_id: string;
+  src_app_entitlement_id: string;
+  dst_app_id: string;
+  dst_app_entitlement_id: string;
 };
 
 /** @internal */
@@ -51,10 +51,10 @@ export const C1ApiAppV1AppEntitlementsProxyGetRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiAppV1AppEntitlementsProxyGetRequest
 > = z.object({
-  srcAppId: z.nullable(z.string()),
-  srcAppEntitlementId: z.nullable(z.string()),
-  dstAppId: z.nullable(z.string()),
-  dstAppEntitlementId: z.nullable(z.string()),
+  srcAppId: z.string(),
+  srcAppEntitlementId: z.string(),
+  dstAppId: z.string(),
+  dstAppEntitlementId: z.string(),
 }).transform((v) => {
   return remap$(v, {
     srcAppId: "src_app_id",

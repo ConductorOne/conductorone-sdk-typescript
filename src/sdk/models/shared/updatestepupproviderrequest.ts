@@ -13,13 +13,22 @@ import {
  * The UpdateStepUpProviderRequest message.
  */
 export type UpdateStepUpProviderRequest = {
-  stepUpProvider?: StepUpProviderInput | null | undefined;
+  /**
+   * StepUpProvider represents a configured step-up authentication integration (e.g., Duo, custom OIDC).
+   *
+   * @remarks
+   *
+   * This message contains a oneof named settings. Only a single field of the following list may be set at a time:
+   *   - oauth2
+   *   - microsoft
+   */
+  stepUpProvider?: StepUpProviderInput | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type UpdateStepUpProviderRequest$Outbound = {
-  stepUpProvider?: StepUpProviderInput$Outbound | null | undefined;
+  stepUpProvider?: StepUpProviderInput$Outbound | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -29,7 +38,7 @@ export const UpdateStepUpProviderRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateStepUpProviderRequest
 > = z.object({
-  stepUpProvider: z.nullable(StepUpProviderInput$outboundSchema).optional(),
+  stepUpProvider: StepUpProviderInput$outboundSchema.optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 

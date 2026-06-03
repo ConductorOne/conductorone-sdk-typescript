@@ -40,7 +40,7 @@ export type SelectField = {
   /**
    * The type field.
    */
-  type?: SelectFieldType | undefined;
+  type?: SelectFieldType | null | undefined;
 };
 
 /** @internal */
@@ -63,12 +63,12 @@ export const SelectField$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   options: z.nullable(z.array(SelectOption$inboundSchema)).optional(),
-  type: SelectFieldType$inboundSchema.optional(),
+  type: z.nullable(SelectFieldType$inboundSchema).optional(),
 });
 /** @internal */
 export type SelectField$Outbound = {
   options?: Array<SelectOption$Outbound> | null | undefined;
-  type?: string | undefined;
+  type?: string | null | undefined;
 };
 
 /** @internal */
@@ -78,7 +78,7 @@ export const SelectField$outboundSchema: z.ZodType<
   SelectField
 > = z.object({
   options: z.nullable(z.array(SelectOption$outboundSchema)).optional(),
-  type: SelectFieldType$outboundSchema.optional(),
+  type: z.nullable(SelectFieldType$outboundSchema).optional(),
 });
 
 export function selectFieldToJSON(selectField: SelectField): string {

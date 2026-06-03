@@ -8,8 +8,6 @@ import * as z from "zod/v3";
  * The AppResourceType is referenced by an app entitlement defining its resource types. Commonly things like Group or Role.
  */
 export type AppResourceTypeInput = {
-  createdAt?: Date | null | undefined;
-  deletedAt?: Date | null | undefined;
   /**
    * The display name of the app resource type.
    */
@@ -18,16 +16,12 @@ export type AppResourceTypeInput = {
    * Associated trait ids
    */
   traitIds?: Array<string> | null | undefined;
-  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
 export type AppResourceTypeInput$Outbound = {
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
   displayName?: string | null | undefined;
   traitIds?: Array<string> | null | undefined;
-  updatedAt?: string | null | undefined;
 };
 
 /** @internal */
@@ -36,11 +30,8 @@ export const AppResourceTypeInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppResourceTypeInput
 > = z.object({
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   displayName: z.nullable(z.string()).optional(),
   traitIds: z.nullable(z.array(z.string())).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function appResourceTypeInputToJSON(

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$Outbound,
@@ -43,7 +44,12 @@ export type SearchGrantFeedRequest = {
    */
   appUserRefs?: Array<AppUserRef> | null | undefined;
   before?: Date | null | undefined;
-  expandMask?: AppEntitlementUserBindingExpandHistoryMask | null | undefined;
+  /**
+   * The AppEntitlementUserBindingExpandHistoryMask message.
+   */
+  appEntitlementUserBindingExpandHistoryMask?:
+    | AppEntitlementUserBindingExpandHistoryMask
+    | undefined;
   /**
    * The pageSize where 10 <= pageSize <= 100, default 25.
    */
@@ -65,10 +71,7 @@ export type SearchGrantFeedRequest$Outbound = {
   appRefs?: Array<AppRef$Outbound> | null | undefined;
   appUserRefs?: Array<AppUserRef$Outbound> | null | undefined;
   before?: string | null | undefined;
-  expandMask?:
-    | AppEntitlementUserBindingExpandHistoryMask$Outbound
-    | null
-    | undefined;
+  expandMask?: AppEntitlementUserBindingExpandHistoryMask$Outbound | undefined;
   pageSize?: number | null | undefined;
   pageToken?: string | null | undefined;
   userRefs?: Array<UserRef$Outbound> | null | undefined;
@@ -86,12 +89,15 @@ export const SearchGrantFeedRequest$outboundSchema: z.ZodType<
   appRefs: z.nullable(z.array(AppRef$outboundSchema)).optional(),
   appUserRefs: z.nullable(z.array(AppUserRef$outboundSchema)).optional(),
   before: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  expandMask: z.nullable(
-    AppEntitlementUserBindingExpandHistoryMask$outboundSchema,
-  ).optional(),
+  appEntitlementUserBindingExpandHistoryMask:
+    AppEntitlementUserBindingExpandHistoryMask$outboundSchema.optional(),
   pageSize: z.nullable(z.number().int()).optional(),
   pageToken: z.nullable(z.string()).optional(),
   userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    appEntitlementUserBindingExpandHistoryMask: "expandMask",
+  });
 });
 
 export function searchGrantFeedRequestToJSON(

@@ -32,7 +32,9 @@ export type C1ApiAppV2AppOwnersGetEntitlementOwnerResponse = {
   /**
    * GetEntitlementOwnerResponse is the response for getting an entitlement ownership source.
    */
-  getEntitlementOwnerResponse?: shared.GetEntitlementOwnerResponse | undefined;
+  getAppEntitlementOwnerResponse?:
+    | shared.GetAppEntitlementOwnerResponse
+    | undefined;
 };
 
 /** @internal */
@@ -84,14 +86,14 @@ export const C1ApiAppV2AppOwnersGetEntitlementOwnerResponse$inboundSchema:
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    GetEntitlementOwnerResponse: shared
-      .GetEntitlementOwnerResponse$inboundSchema.optional(),
+    GetAppEntitlementOwnerResponse: shared
+      .GetAppEntitlementOwnerResponse$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
       "StatusCode": "statusCode",
       "RawResponse": "rawResponse",
-      "GetEntitlementOwnerResponse": "getEntitlementOwnerResponse",
+      "GetAppEntitlementOwnerResponse": "getAppEntitlementOwnerResponse",
     });
   });
 

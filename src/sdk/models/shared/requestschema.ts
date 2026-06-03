@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -36,7 +37,10 @@ export type RequestSchemaJustificationVisibility = OpenEnum<
 export type RequestSchema = {
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
-  form?: RequestSchemaForm | null | undefined;
+  /**
+   * A form is a collection of fields to be filled out by a user
+   */
+  requestSchemaForm?: RequestSchemaForm | undefined;
   /**
    * The unique identifier of this request schema.
    */
@@ -44,7 +48,10 @@ export type RequestSchema = {
   /**
    * Controls whether the justification field is shown or hidden on the request form.
    */
-  justificationVisibility?: RequestSchemaJustificationVisibility | undefined;
+  justificationVisibility?:
+    | RequestSchemaJustificationVisibility
+    | null
+    | undefined;
   modifiedAt?: Date | null | undefined;
 };
 
@@ -73,21 +80,26 @@ export const RequestSchema$inboundSchema: z.ZodType<
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  form: z.nullable(RequestSchemaForm$inboundSchema).optional(),
+  form: RequestSchemaForm$inboundSchema.optional(),
   id: z.nullable(z.string()).optional(),
-  justificationVisibility: RequestSchemaJustificationVisibility$inboundSchema
-    .optional(),
+  justificationVisibility: z.nullable(
+    RequestSchemaJustificationVisibility$inboundSchema,
+  ).optional(),
   modifiedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "form": "requestSchemaForm",
+  });
 });
 /** @internal */
 export type RequestSchema$Outbound = {
   createdAt?: string | null | undefined;
   deletedAt?: string | null | undefined;
-  form?: RequestSchemaForm$Outbound | null | undefined;
+  form?: RequestSchemaForm$Outbound | undefined;
   id?: string | null | undefined;
-  justificationVisibility?: string | undefined;
+  justificationVisibility?: string | null | undefined;
   modifiedAt?: string | null | undefined;
 };
 
@@ -99,11 +111,16 @@ export const RequestSchema$outboundSchema: z.ZodType<
 > = z.object({
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
+  requestSchemaForm: RequestSchemaForm$outboundSchema.optional(),
   id: z.nullable(z.string()).optional(),
-  justificationVisibility: RequestSchemaJustificationVisibility$outboundSchema
-    .optional(),
+  justificationVisibility: z.nullable(
+    RequestSchemaJustificationVisibility$outboundSchema,
+  ).optional(),
   modifiedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requestSchemaForm: "form",
+  });
 });
 
 export function requestSchemaToJSON(requestSchema: RequestSchema): string {

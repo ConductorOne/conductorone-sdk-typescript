@@ -36,7 +36,7 @@ export type TextFieldComponent = {
   /**
    * The checks field.
    */
-  checks?: Array<FunctionCall | null> | null | undefined;
+  checks?: Array<FunctionCall> | null | undefined;
   /**
    * DynamicString can be a literal value, a JSON pointer path, or a function call.
    *
@@ -73,7 +73,7 @@ export type TextFieldComponent = {
   /**
    * The variant field.
    */
-  variant?: TextFieldComponentVariant | undefined;
+  variant?: TextFieldComponentVariant | null | undefined;
 };
 
 /** @internal */
@@ -89,12 +89,11 @@ export const TextFieldComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  checks: z.nullable(z.array(z.nullable(FunctionCall$inboundSchema)))
-    .optional(),
+  checks: z.nullable(z.array(FunctionCall$inboundSchema)).optional(),
   label: DynamicString$inboundSchema.optional(),
   placeholder: DynamicString$inboundSchema.optional(),
   value: DynamicString$inboundSchema.optional(),
-  variant: TextFieldComponentVariant$inboundSchema.optional(),
+  variant: z.nullable(TextFieldComponentVariant$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "label": "dynamicString",

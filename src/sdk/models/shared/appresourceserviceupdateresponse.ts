@@ -30,7 +30,10 @@ export type AppResourceServiceUpdateResponseExpanded = {
  * The response message for updating an app resource.
  */
 export type AppResourceServiceUpdateResponse = {
-  appResourceView?: AppResourceView | null | undefined;
+  /**
+   * The app resource view returns an app resource with paths for items in the expand mask filled in when this response is returned and a request expand mask has "*" or "app_id" or "resource_type_id".
+   */
+  appResourceView?: AppResourceView | undefined;
   /**
    * List of serialized related objects.
    */
@@ -76,7 +79,7 @@ export const AppResourceServiceUpdateResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appResourceView: z.nullable(AppResourceView$inboundSchema).optional(),
+  appResourceView: AppResourceView$inboundSchema.optional(),
   expanded: z.nullable(
     z.array(
       z.lazy(() => AppResourceServiceUpdateResponseExpanded$inboundSchema),

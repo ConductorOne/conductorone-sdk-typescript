@@ -12,6 +12,6 @@ let value: GetAWSExternalIDResponse = {};
 
 ## Fields
 
-| Field                                                               | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `awsExternalId`                                                     | [shared.AWSExternalID](../../../sdk/models/shared/awsexternalid.md) | :heavy_minus_sign:                                                  | N/A                                                                 |
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `awsExternalID`                                                                  | [shared.AWSExternalID](../../../sdk/models/shared/awsexternalid.md)              | :heavy_minus_sign:                                                               | AWSExternalID contains the tenant's external ID for AWS IAM role trust policies. |

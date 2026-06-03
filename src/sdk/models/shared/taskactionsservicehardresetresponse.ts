@@ -34,7 +34,10 @@ export type TaskActionsServiceHardResetResponse = {
     | Array<TaskActionsServiceHardResetResponseExpanded>
     | null
     | undefined;
-  taskView?: TaskView | null | undefined;
+  /**
+   * Contains a task and JSONPATH expressions that describe where in the expanded array related objects are located. This view can be used to display a fully-detailed dashboard of task information.
+   */
+  taskView?: TaskView | undefined;
   /**
    * The ID of the task reset action created by this request.
    */
@@ -86,7 +89,7 @@ export const TaskActionsServiceHardResetResponse$inboundSchema: z.ZodType<
       TaskActionsServiceHardResetResponseExpanded$inboundSchema
     )),
   ).optional(),
-  taskView: z.nullable(TaskView$inboundSchema).optional(),
+  taskView: TaskView$inboundSchema.optional(),
   ticketActionId: z.nullable(z.string()).optional(),
 });
 

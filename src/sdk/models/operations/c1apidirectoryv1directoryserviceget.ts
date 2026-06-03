@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiDirectoryV1DirectoryServiceGetRequest = {
-  appId: string | null;
+  appId: string;
 };
 
 export type C1ApiDirectoryV1DirectoryServiceGetResponse = {
@@ -37,7 +37,7 @@ export type C1ApiDirectoryV1DirectoryServiceGetResponse = {
 
 /** @internal */
 export type C1ApiDirectoryV1DirectoryServiceGetRequest$Outbound = {
-  app_id: string | null;
+  app_id: string;
 };
 
 /** @internal */
@@ -47,7 +47,7 @@ export const C1ApiDirectoryV1DirectoryServiceGetRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiDirectoryV1DirectoryServiceGetRequest
   > = z.object({
-    appId: z.nullable(z.string()),
+    appId: z.string(),
   }).transform((v) => {
     return remap$(v, {
       appId: "app_id",

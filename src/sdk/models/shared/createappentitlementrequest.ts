@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -53,6 +54,19 @@ export type CreateAppEntitlementRequest = {
    */
   alias?: string | null | undefined;
   /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  matching URL-safe ASCII; total serialized ≤4096 bytes. Keys starting
+   *  with `c1/` are reserved for server-managed use and rejected on write.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * The IDs of users to set as owners of this entitlement.
    */
   appEntitlementOwnerIds?: Array<string> | null | undefined;
@@ -79,7 +93,7 @@ export type CreateAppEntitlementRequest = {
   /**
    * The display name of the new entitlement.
    */
-  displayName: string;
+  displayName: string | null;
   durationGrant?: string | null | undefined;
   durationUnset?: CreateAppEntitlementRequestDurationUnset | null | undefined;
   /**
@@ -90,7 +104,10 @@ export type CreateAppEntitlementRequest = {
    * The ID of the policy to use for emergency grant tasks. Required if emergency_grant_enabled is true.
    */
   emergencyGrantPolicyId?: string | null | undefined;
-  expandMask?: AppEntitlementExpandMask | null | undefined;
+  /**
+   * The app entitlement expand mask allows the user to get additional information when getting responses containing app entitlement views.
+   */
+  appEntitlementExpandMask?: AppEntitlementExpandMask | undefined;
   /**
    * The ID of the policy to use for grant request tasks.
    */
@@ -103,7 +120,22 @@ export type CreateAppEntitlementRequest = {
    * Whether to override the app-level access request defaults for this entitlement.
    */
   overrideAccessRequestsDefaults?: boolean | null | undefined;
-  provisionPolicy?: ProvisionPolicyInput | null | undefined;
+  /**
+   * ProvisionPolicy is a oneOf that indicates how a provision step should be processed.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named typ. Only a single field of the following list may be set at a time:
+   *   - connector
+   *   - manual
+   *   - delegated
+   *   - webhook
+   *   - multiStep
+   *   - externalTicket
+   *   - unconfigured
+   *   - action
+   */
+  provisionPolicy?: ProvisionPolicyInput | undefined;
   /**
    * The purpose of the entitlement (e.g., assignment, permission, ownership).
    */
@@ -153,13 +185,14 @@ export const CreateAppEntitlementRequestPurpose$outboundSchema: z.ZodType<
 /** @internal */
 export type CreateAppEntitlementRequest$Outbound = {
   alias?: string | null | undefined;
+  annotations?: { [k: string]: string } | undefined;
   appEntitlementOwnerIds?: Array<string> | null | undefined;
   appResourceId?: string | null | undefined;
   appResourceTypeId?: string | null | undefined;
   certifyPolicyId?: string | null | undefined;
   complianceFrameworkValueIds?: Array<string> | null | undefined;
   description?: string | null | undefined;
-  displayName: string;
+  displayName: string | null;
   durationGrant?: string | null | undefined;
   durationUnset?:
     | CreateAppEntitlementRequestDurationUnset$Outbound
@@ -167,11 +200,11 @@ export type CreateAppEntitlementRequest$Outbound = {
     | undefined;
   emergencyGrantEnabled?: boolean | null | undefined;
   emergencyGrantPolicyId?: string | null | undefined;
-  expandMask?: AppEntitlementExpandMask$Outbound | null | undefined;
+  expandMask?: AppEntitlementExpandMask$Outbound | undefined;
   grantPolicyId?: string | null | undefined;
   matchBatonId?: string | null | undefined;
   overrideAccessRequestsDefaults?: boolean | null | undefined;
-  provisionPolicy?: ProvisionPolicyInput$Outbound | null | undefined;
+  provisionPolicy?: ProvisionPolicyInput$Outbound | undefined;
   purpose?: string | null | undefined;
   revokePolicyId?: string | null | undefined;
   riskLevelValueId?: string | null | undefined;
@@ -185,29 +218,34 @@ export const CreateAppEntitlementRequest$outboundSchema: z.ZodType<
   CreateAppEntitlementRequest
 > = z.object({
   alias: z.nullable(z.string()).optional(),
+  annotations: z.record(z.string()).optional(),
   appEntitlementOwnerIds: z.nullable(z.array(z.string())).optional(),
   appResourceId: z.nullable(z.string()).optional(),
   appResourceTypeId: z.nullable(z.string()).optional(),
   certifyPolicyId: z.nullable(z.string()).optional(),
   complianceFrameworkValueIds: z.nullable(z.array(z.string())).optional(),
   description: z.nullable(z.string()).optional(),
-  displayName: z.string(),
+  displayName: z.nullable(z.string()),
   durationGrant: z.nullable(z.string()).optional(),
   durationUnset: z.nullable(
     z.lazy(() => CreateAppEntitlementRequestDurationUnset$outboundSchema),
   ).optional(),
   emergencyGrantEnabled: z.nullable(z.boolean()).optional(),
   emergencyGrantPolicyId: z.nullable(z.string()).optional(),
-  expandMask: z.nullable(AppEntitlementExpandMask$outboundSchema).optional(),
+  appEntitlementExpandMask: AppEntitlementExpandMask$outboundSchema.optional(),
   grantPolicyId: z.nullable(z.string()).optional(),
   matchBatonId: z.nullable(z.string()).optional(),
   overrideAccessRequestsDefaults: z.nullable(z.boolean()).optional(),
-  provisionPolicy: z.nullable(ProvisionPolicyInput$outboundSchema).optional(),
+  provisionPolicy: ProvisionPolicyInput$outboundSchema.optional(),
   purpose: z.nullable(CreateAppEntitlementRequestPurpose$outboundSchema)
     .optional(),
   revokePolicyId: z.nullable(z.string()).optional(),
   riskLevelValueId: z.nullable(z.string()).optional(),
   slug: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    appEntitlementExpandMask: "expandMask",
+  });
 });
 
 export function createAppEntitlementRequestToJSON(

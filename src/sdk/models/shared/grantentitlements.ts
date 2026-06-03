@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -73,55 +72,13 @@ import {
  *   - exclusionListCel
  */
 export type GrantEntitlements = {
-  /**
-   * The GrantEntitlementExclusionCriteria message.
-   */
-  grantEntitlementExclusionCriteria?:
-    | GrantEntitlementExclusionCriteria
-    | null
-    | undefined;
-  /**
-   * The GrantEntitlementExclusionList message.
-   */
-  grantEntitlementExclusionList?:
-    | GrantEntitlementExclusionList
-    | null
-    | undefined;
-  /**
-   * The GrantEntitlementExclusionListCel message.
-   */
-  grantEntitlementExclusionListCel?:
-    | GrantEntitlementExclusionListCel
-    | null
-    | undefined;
-  /**
-   * The GrantEntitlementExclusionNone message.
-   */
-  grantEntitlementExclusionNone?:
-    | GrantEntitlementExclusionNone
-    | null
-    | undefined;
-  /**
-   * The GrantEntitlementInclusionCriteria message.
-   */
-  grantEntitlementInclusionCriteria?:
-    | GrantEntitlementInclusionCriteria
-    | null
-    | undefined;
-  /**
-   * The GrantEntitlementInclusionList message.
-   */
-  grantEntitlementInclusionList?:
-    | GrantEntitlementInclusionList
-    | null
-    | undefined;
-  /**
-   * The GrantEntitlementInclusionListCel message.
-   */
-  grantEntitlementInclusionListCel?:
-    | GrantEntitlementInclusionListCel
-    | null
-    | undefined;
+  exclusionCriteria?: GrantEntitlementExclusionCriteria | null | undefined;
+  exclusionList?: GrantEntitlementExclusionList | null | undefined;
+  exclusionListCel?: GrantEntitlementExclusionListCel | null | undefined;
+  exclusionNone?: GrantEntitlementExclusionNone | null | undefined;
+  inclusionCriteria?: GrantEntitlementInclusionCriteria | null | undefined;
+  inclusionList?: GrantEntitlementInclusionList | null | undefined;
+  inclusionListCel?: GrantEntitlementInclusionListCel | null | undefined;
   /**
    * If true, the step will use the subject user of the automation as the subject.
    */
@@ -130,7 +87,10 @@ export type GrantEntitlements = {
    * The userIdCel field.
    */
   userIdCel?: string | null | undefined;
-  userRef?: UserRef | null | undefined;
+  /**
+   * A reference to a user.
+   */
+  userRef?: UserRef | undefined;
 };
 
 /** @internal */
@@ -155,17 +115,7 @@ export const GrantEntitlements$inboundSchema: z.ZodType<
     .optional(),
   useSubjectUser: z.nullable(z.boolean()).optional(),
   userIdCel: z.nullable(z.string()).optional(),
-  userRef: z.nullable(UserRef$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "exclusionCriteria": "grantEntitlementExclusionCriteria",
-    "exclusionList": "grantEntitlementExclusionList",
-    "exclusionListCel": "grantEntitlementExclusionListCel",
-    "exclusionNone": "grantEntitlementExclusionNone",
-    "inclusionCriteria": "grantEntitlementInclusionCriteria",
-    "inclusionList": "grantEntitlementInclusionList",
-    "inclusionListCel": "grantEntitlementInclusionListCel",
-  });
+  userRef: UserRef$inboundSchema.optional(),
 });
 /** @internal */
 export type GrantEntitlements$Outbound = {
@@ -190,7 +140,7 @@ export type GrantEntitlements$Outbound = {
     | undefined;
   useSubjectUser?: boolean | null | undefined;
   userIdCel?: string | null | undefined;
-  userRef?: UserRef$Outbound | null | undefined;
+  userRef?: UserRef$Outbound | undefined;
 };
 
 /** @internal */
@@ -199,40 +149,25 @@ export const GrantEntitlements$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GrantEntitlements
 > = z.object({
-  grantEntitlementExclusionCriteria: z.nullable(
+  exclusionCriteria: z.nullable(
     GrantEntitlementExclusionCriteria$outboundSchema,
   ).optional(),
-  grantEntitlementExclusionList: z.nullable(
-    GrantEntitlementExclusionList$outboundSchema,
-  ).optional(),
-  grantEntitlementExclusionListCel: z.nullable(
-    GrantEntitlementExclusionListCel$outboundSchema,
-  ).optional(),
-  grantEntitlementExclusionNone: z.nullable(
-    GrantEntitlementExclusionNone$outboundSchema,
-  ).optional(),
-  grantEntitlementInclusionCriteria: z.nullable(
+  exclusionList: z.nullable(GrantEntitlementExclusionList$outboundSchema)
+    .optional(),
+  exclusionListCel: z.nullable(GrantEntitlementExclusionListCel$outboundSchema)
+    .optional(),
+  exclusionNone: z.nullable(GrantEntitlementExclusionNone$outboundSchema)
+    .optional(),
+  inclusionCriteria: z.nullable(
     GrantEntitlementInclusionCriteria$outboundSchema,
   ).optional(),
-  grantEntitlementInclusionList: z.nullable(
-    GrantEntitlementInclusionList$outboundSchema,
-  ).optional(),
-  grantEntitlementInclusionListCel: z.nullable(
-    GrantEntitlementInclusionListCel$outboundSchema,
-  ).optional(),
+  inclusionList: z.nullable(GrantEntitlementInclusionList$outboundSchema)
+    .optional(),
+  inclusionListCel: z.nullable(GrantEntitlementInclusionListCel$outboundSchema)
+    .optional(),
   useSubjectUser: z.nullable(z.boolean()).optional(),
   userIdCel: z.nullable(z.string()).optional(),
-  userRef: z.nullable(UserRef$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    grantEntitlementExclusionCriteria: "exclusionCriteria",
-    grantEntitlementExclusionList: "exclusionList",
-    grantEntitlementExclusionListCel: "exclusionListCel",
-    grantEntitlementExclusionNone: "exclusionNone",
-    grantEntitlementInclusionCriteria: "inclusionCriteria",
-    grantEntitlementInclusionList: "inclusionList",
-    grantEntitlementInclusionListCel: "inclusionListCel",
-  });
+  userRef: UserRef$outboundSchema.optional(),
 });
 
 export function grantEntitlementsToJSON(

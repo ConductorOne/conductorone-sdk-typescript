@@ -36,7 +36,10 @@ export type PayloadPolicyApprovalStep = {
    * List of serialized related objects.
    */
   expanded?: Array<PayloadPolicyApprovalStepExpanded> | null | undefined;
-  taskView?: TaskView | null | undefined;
+  /**
+   * Contains a task and JSONPATH expressions that describe where in the expanded array related objects are located. This view can be used to display a fully-detailed dashboard of task information.
+   */
+  taskView?: TaskView | undefined;
 };
 
 /** @internal */
@@ -107,7 +110,7 @@ export const PayloadPolicyApprovalStep$inboundSchema: z.ZodType<
   expanded: z.nullable(
     z.array(z.lazy(() => PayloadPolicyApprovalStepExpanded$inboundSchema)),
   ).optional(),
-  taskView: z.nullable(TaskView$inboundSchema).optional(),
+  taskView: TaskView$inboundSchema.optional(),
 });
 /** @internal */
 export type PayloadPolicyApprovalStep$Outbound = {
@@ -115,7 +118,7 @@ export type PayloadPolicyApprovalStep$Outbound = {
     | Array<PayloadPolicyApprovalStepExpanded$Outbound>
     | null
     | undefined;
-  taskView?: TaskView$Outbound | null | undefined;
+  taskView?: TaskView$Outbound | undefined;
 };
 
 /** @internal */
@@ -127,7 +130,7 @@ export const PayloadPolicyApprovalStep$outboundSchema: z.ZodType<
   expanded: z.nullable(
     z.array(z.lazy(() => PayloadPolicyApprovalStepExpanded$outboundSchema)),
   ).optional(),
-  taskView: z.nullable(TaskView$outboundSchema).optional(),
+  taskView: TaskView$outboundSchema.optional(),
 });
 
 export function payloadPolicyApprovalStepToJSON(

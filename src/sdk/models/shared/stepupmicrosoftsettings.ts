@@ -37,7 +37,7 @@ export type StepUpMicrosoftSettings = {
   /**
    * Validation approach. See MicrosoftValidationMode for details on each mode.
    */
-  validationMode?: ValidationMode | undefined;
+  validationMode?: ValidationMode | null | undefined;
 };
 
 /** @internal */
@@ -61,13 +61,13 @@ export const StepUpMicrosoftSettings$inboundSchema: z.ZodType<
 > = z.object({
   conditionalAccessIds: z.nullable(z.array(z.string())).optional(),
   tenant: z.nullable(z.string()).optional(),
-  validationMode: ValidationMode$inboundSchema.optional(),
+  validationMode: z.nullable(ValidationMode$inboundSchema).optional(),
 });
 /** @internal */
 export type StepUpMicrosoftSettings$Outbound = {
   conditionalAccessIds?: Array<string> | null | undefined;
   tenant?: string | null | undefined;
-  validationMode?: string | undefined;
+  validationMode?: string | null | undefined;
 };
 
 /** @internal */
@@ -78,7 +78,7 @@ export const StepUpMicrosoftSettings$outboundSchema: z.ZodType<
 > = z.object({
   conditionalAccessIds: z.nullable(z.array(z.string())).optional(),
   tenant: z.nullable(z.string()).optional(),
-  validationMode: ValidationMode$outboundSchema.optional(),
+  validationMode: z.nullable(ValidationMode$outboundSchema).optional(),
 });
 
 export function stepUpMicrosoftSettingsToJSON(

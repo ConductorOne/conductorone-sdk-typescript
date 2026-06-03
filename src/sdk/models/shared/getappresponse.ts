@@ -12,7 +12,10 @@ import { App, App$inboundSchema } from "./app.js";
  * The GetAppResponse message contains the details of the requested app in the app field.
  */
 export type GetAppResponse = {
-  app?: App | null | undefined;
+  /**
+   * The App object provides all of the details for an app, as well as some configuration.
+   */
+  app?: App | undefined;
 };
 
 /** @internal */
@@ -21,7 +24,7 @@ export const GetAppResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  app: z.nullable(App$inboundSchema).optional(),
+  app: App$inboundSchema.optional(),
 });
 
 export function getAppResponseFromJSON(

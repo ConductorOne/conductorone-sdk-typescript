@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -227,7 +228,10 @@ export type TaskSearchRequest = {
    * Exclude Specific TaskIDs from this serach result.
    */
   excludeIds?: Array<string> | null | undefined;
-  expandMask?: TaskExpandMask | null | undefined;
+  /**
+   * The task expand mask is an array of strings that specifes the related objects the requester wishes to have returned when making a request where the expand mask is part of the input. Use '*' to view all possible responses.
+   */
+  taskExpandMask?: TaskExpandMask | undefined;
   /**
    * Search tasks by grant outcome
    */
@@ -266,7 +270,7 @@ export type TaskSearchRequest = {
    * @remarks
    *  Requires the REVIEWS_PENDING_ACTIONS feature flag to be enabled.
    */
-  pendingActionFilter?: PendingActionFilter | undefined;
+  pendingActionFilter?: PendingActionFilter | null | undefined;
   /**
    * Search tasks that were acted on by any of these users.
    */
@@ -282,11 +286,11 @@ export type TaskSearchRequest = {
   /**
    * Filter tasks where the current approval step requires an approval reason.
    */
-  requireApprovalReason?: boolean | undefined;
+  requireApprovalReason?: boolean | null | undefined;
   /**
    * Filter tasks where the current approval step requires a denial reason.
    */
-  requireDenialReason?: boolean | undefined;
+  requireDenialReason?: boolean | null | undefined;
   /**
    * Search tasks by revoke outcome
    */
@@ -409,7 +413,7 @@ export type TaskSearchRequest$Outbound = {
   excludeAppResourceTypeIds?: Array<string> | null | undefined;
   excludeApplicationIds?: Array<string> | null | undefined;
   excludeIds?: Array<string> | null | undefined;
-  expandMask?: TaskExpandMask$Outbound | null | undefined;
+  expandMask?: TaskExpandMask$Outbound | undefined;
   grantOutcomes?: Array<string> | null | undefined;
   includeActedAfter?: string | null | undefined;
   includeDeleted?: boolean | null | undefined;
@@ -421,12 +425,12 @@ export type TaskSearchRequest$Outbound = {
   outcomeBefore?: string | null | undefined;
   pageSize?: number | null | undefined;
   pageToken?: string | null | undefined;
-  pendingActionFilter?: string | undefined;
+  pendingActionFilter?: string | null | undefined;
   previouslyActedOnIds?: Array<string> | null | undefined;
   query?: string | null | undefined;
   refs?: Array<TaskRef$Outbound> | null | undefined;
-  requireApprovalReason?: boolean | undefined;
-  requireDenialReason?: boolean | undefined;
+  requireApprovalReason?: boolean | null | undefined;
+  requireDenialReason?: boolean | null | undefined;
   revokeOutcomes?: Array<string> | null | undefined;
   sortBy?: string | null | undefined;
   stepApprovalTypes?: Array<string> | null | undefined;
@@ -466,7 +470,7 @@ export const TaskSearchRequest$outboundSchema: z.ZodType<
   excludeAppResourceTypeIds: z.nullable(z.array(z.string())).optional(),
   excludeApplicationIds: z.nullable(z.array(z.string())).optional(),
   excludeIds: z.nullable(z.array(z.string())).optional(),
-  expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
+  taskExpandMask: TaskExpandMask$outboundSchema.optional(),
   grantOutcomes: z.nullable(z.array(GrantOutcomes$outboundSchema)).optional(),
   includeActedAfter: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
@@ -480,12 +484,13 @@ export const TaskSearchRequest$outboundSchema: z.ZodType<
     .optional(),
   pageSize: z.nullable(z.number().int()).optional(),
   pageToken: z.nullable(z.string()).optional(),
-  pendingActionFilter: PendingActionFilter$outboundSchema.optional(),
+  pendingActionFilter: z.nullable(PendingActionFilter$outboundSchema)
+    .optional(),
   previouslyActedOnIds: z.nullable(z.array(z.string())).optional(),
   query: z.nullable(z.string()).optional(),
   refs: z.nullable(z.array(TaskRef$outboundSchema)).optional(),
-  requireApprovalReason: z.boolean().optional(),
-  requireDenialReason: z.boolean().optional(),
+  requireApprovalReason: z.nullable(z.boolean()).optional(),
+  requireDenialReason: z.nullable(z.boolean()).optional(),
   revokeOutcomes: z.nullable(z.array(RevokeOutcomes$outboundSchema)).optional(),
   sortBy: z.nullable(TaskSearchRequestSortBy$outboundSchema).optional(),
   stepApprovalTypes: z.nullable(z.array(StepApprovalTypes$outboundSchema))
@@ -494,6 +499,10 @@ export const TaskSearchRequest$outboundSchema: z.ZodType<
   taskStates: z.nullable(z.array(TaskStates$outboundSchema)).optional(),
   taskTypes: z.nullable(z.array(TaskTypeInput$outboundSchema)).optional(),
   userEmploymentStatuses: z.nullable(z.array(z.string())).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    taskExpandMask: "expandMask",
+  });
 });
 
 export function taskSearchRequestToJSON(

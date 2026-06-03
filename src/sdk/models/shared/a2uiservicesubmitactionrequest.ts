@@ -11,8 +11,8 @@ export type A2UIServiceSubmitActionRequest = {
   /**
    * The actionName field.
    */
-  actionName?: string | undefined;
-  clientTimestamp?: Date | undefined;
+  actionName?: string | null | undefined;
+  clientTimestamp?: Date | null | undefined;
   /**
    * The context field.
    */
@@ -20,25 +20,25 @@ export type A2UIServiceSubmitActionRequest = {
   /**
    * The conversationId field.
    */
-  conversationId?: string | undefined;
+  conversationId?: string | null | undefined;
   /**
    * The dataModelJson field.
    */
-  dataModelJson?: string | undefined;
+  dataModelJson?: string | null | undefined;
   /**
    * The sourceComponentId field.
    */
-  sourceComponentId?: string | undefined;
+  sourceComponentId?: string | null | undefined;
 };
 
 /** @internal */
 export type A2UIServiceSubmitActionRequest$Outbound = {
-  actionName?: string | undefined;
-  clientTimestamp?: string | undefined;
+  actionName?: string | null | undefined;
+  clientTimestamp?: string | null | undefined;
   context?: { [k: string]: string } | undefined;
-  conversationId?: string | undefined;
-  dataModelJson?: string | undefined;
-  sourceComponentId?: string | undefined;
+  conversationId?: string | null | undefined;
+  dataModelJson?: string | null | undefined;
+  sourceComponentId?: string | null | undefined;
 };
 
 /** @internal */
@@ -47,12 +47,13 @@ export const A2UIServiceSubmitActionRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   A2UIServiceSubmitActionRequest
 > = z.object({
-  actionName: z.string().optional(),
-  clientTimestamp: z.date().transform(v => v.toISOString()).optional(),
+  actionName: z.nullable(z.string()).optional(),
+  clientTimestamp: z.nullable(z.date().transform(v => v.toISOString()))
+    .optional(),
   context: z.record(z.string()).optional(),
-  conversationId: z.string().optional(),
-  dataModelJson: z.string().optional(),
-  sourceComponentId: z.string().optional(),
+  conversationId: z.nullable(z.string()).optional(),
+  dataModelJson: z.nullable(z.string()).optional(),
+  sourceComponentId: z.nullable(z.string()).optional(),
 });
 
 export function a2UIServiceSubmitActionRequestToJSON(

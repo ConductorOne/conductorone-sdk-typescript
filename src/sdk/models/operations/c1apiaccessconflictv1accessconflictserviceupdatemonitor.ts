@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest = {
-  id: string | null;
+  id: string;
   conflictMonitorUpdateRequest?:
     | shared.ConflictMonitorUpdateRequest
     | undefined;
@@ -41,7 +41,7 @@ export type C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse = {
 /** @internal */
 export type C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest$Outbound =
   {
-    id: string | null;
+    id: string;
     ConflictMonitorUpdateRequest?:
       | shared.ConflictMonitorUpdateRequest$Outbound
       | undefined;
@@ -54,7 +54,7 @@ export const C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest$outb
     z.ZodTypeDef,
     C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest
   > = z.object({
-    id: z.nullable(z.string()),
+    id: z.string(),
     conflictMonitorUpdateRequest: shared
       .ConflictMonitorUpdateRequest$outboundSchema.optional(),
   }).transform((v) => {

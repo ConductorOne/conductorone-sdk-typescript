@@ -11,17 +11,17 @@ export type ConnectorScheduleCron = {
   /**
    * The cron expression defining the sync schedule.
    */
-  cronSpec?: string | undefined;
+  cronSpec?: string | null | undefined;
   /**
    * The IANA timezone name for the cron schedule (e.g., "America/Los_Angeles").
    */
-  timezone?: string | undefined;
+  timezone?: string | null | undefined;
 };
 
 /** @internal */
 export type ConnectorScheduleCron$Outbound = {
-  cronSpec?: string | undefined;
-  timezone?: string | undefined;
+  cronSpec?: string | null | undefined;
+  timezone?: string | null | undefined;
 };
 
 /** @internal */
@@ -30,8 +30,8 @@ export const ConnectorScheduleCron$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ConnectorScheduleCron
 > = z.object({
-  cronSpec: z.string().optional(),
-  timezone: z.string().optional(),
+  cronSpec: z.nullable(z.string()).optional(),
+  timezone: z.nullable(z.string()).optional(),
 });
 
 export function connectorScheduleCronToJSON(

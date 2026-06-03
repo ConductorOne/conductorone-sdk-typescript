@@ -17,7 +17,7 @@ export type ColumnComponent = {
   /**
    * The alignment field.
    */
-  alignment?: string | undefined;
+  alignment?: string | null | undefined;
   /**
    * ChildList contains references to child component IDs.
    */
@@ -25,7 +25,7 @@ export type ColumnComponent = {
   /**
    * The distribution field.
    */
-  distribution?: string | undefined;
+  distribution?: string | null | undefined;
   /**
    * DynamicNumber can be a literal value, a JSON pointer path, or a function call.
    *
@@ -45,9 +45,9 @@ export const ColumnComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  alignment: z.string().optional(),
+  alignment: z.nullable(z.string()).optional(),
   children: ChildList$inboundSchema.optional(),
-  distribution: z.string().optional(),
+  distribution: z.nullable(z.string()).optional(),
   gap: DynamicNumber$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

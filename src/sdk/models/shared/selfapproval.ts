@@ -36,7 +36,7 @@ export type SelfApproval = {
   /**
    * Configuration to enable fallback for group fallback.
    */
-  isGroupFallbackEnabled?: boolean | undefined;
+  isGroupFallbackEnabled?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -50,7 +50,7 @@ export const SelfApproval$inboundSchema: z.ZodType<
   fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$inboundSchema))
     .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-  isGroupFallbackEnabled: z.boolean().optional(),
+  isGroupFallbackEnabled: z.nullable(z.boolean()).optional(),
 });
 /** @internal */
 export type SelfApproval$Outbound = {
@@ -58,7 +58,7 @@ export type SelfApproval$Outbound = {
   fallback?: boolean | null | undefined;
   fallbackGroupIds?: Array<AppEntitlementReference$Outbound> | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
-  isGroupFallbackEnabled?: boolean | undefined;
+  isGroupFallbackEnabled?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -72,7 +72,7 @@ export const SelfApproval$outboundSchema: z.ZodType<
   fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$outboundSchema))
     .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-  isGroupFallbackEnabled: z.boolean().optional(),
+  isGroupFallbackEnabled: z.nullable(z.boolean()).optional(),
 });
 
 export function selfApprovalToJSON(selfApproval: SelfApproval): string {

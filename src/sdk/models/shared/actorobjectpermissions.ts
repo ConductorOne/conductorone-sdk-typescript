@@ -14,11 +14,11 @@ export type ActorObjectPermissions = {
   /**
    * The delete field.
    */
-  delete?: boolean | undefined;
+  delete?: boolean | null | undefined;
   /**
    * The edit field.
    */
-  edit?: boolean | undefined;
+  edit?: boolean | null | undefined;
   /**
    * The extra field.
    */
@@ -26,7 +26,7 @@ export type ActorObjectPermissions = {
   /**
    * The read field.
    */
-  read?: boolean | undefined;
+  read?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -35,10 +35,10 @@ export const ActorObjectPermissions$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  delete: z.boolean().optional(),
-  edit: z.boolean().optional(),
+  delete: z.nullable(z.boolean()).optional(),
+  edit: z.nullable(z.boolean()).optional(),
   extra: z.record(z.boolean()).optional(),
-  read: z.boolean().optional(),
+  read: z.nullable(z.boolean()).optional(),
 });
 
 export function actorObjectPermissionsFromJSON(

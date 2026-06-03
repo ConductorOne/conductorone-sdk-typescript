@@ -29,7 +29,7 @@ import { Result } from "../sdk/types/fp.js";
  * Search User Owners
  *
  * @remarks
- * SearchUserOwners searches for users who are owners of this app entitlement.
+ * SearchUserOwners searches for user ownership sources of this app entitlement.
  */
 export function appEntitlementOwnersV2SearchUserOwners(
   client: ConductoroneSDKTypescriptCore,

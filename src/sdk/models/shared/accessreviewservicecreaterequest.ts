@@ -43,19 +43,19 @@ export type ScopeType = OpenEnum<typeof ScopeType>;
  * The AccessReviewServiceCreateRequest message.
  */
 export type AccessReviewServiceCreateRequest = {
-  completionDate?: Date | undefined;
+  completionDate?: Date | null | undefined;
   /**
    * An optional description providing context about the campaign.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * The display name for the new campaign.
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
   /**
    * The ID of an existing campaign to copy scope and entitlement configuration from. Optional.
    */
-  duplicateFrom?: string | undefined;
+  duplicateFrom?: string | null | undefined;
   /**
    * The AccessReviewExpandMask message.
    */
@@ -71,11 +71,11 @@ export type AccessReviewServiceCreateRequest = {
   /**
    * The ID of the review policy that governs task assignment and resolution.
    */
-  policyId?: string | undefined;
+  policyId?: string | null | undefined;
   /**
    * The type of scoping method for the campaign (e.g., by entitlements, by access conflicts, or by resource).
    */
-  scopeType?: ScopeType | undefined;
+  scopeType?: ScopeType | null | undefined;
   /**
    * The AccessReviewScopeV2 message.
    *
@@ -121,15 +121,15 @@ export const ScopeType$outboundSchema: z.ZodType<
 
 /** @internal */
 export type AccessReviewServiceCreateRequest$Outbound = {
-  completionDate?: string | undefined;
-  description?: string | undefined;
-  displayName?: string | undefined;
-  duplicateFrom?: string | undefined;
+  completionDate?: string | null | undefined;
+  description?: string | null | undefined;
+  displayName?: string | null | undefined;
+  duplicateFrom?: string | null | undefined;
   expandMask?: AccessReviewExpandMask$Outbound | undefined;
   notificationConfig?: NotificationConfig$Outbound | undefined;
   ownerIds?: Array<string> | null | undefined;
-  policyId?: string | undefined;
-  scopeType?: string | undefined;
+  policyId?: string | null | undefined;
+  scopeType?: string | null | undefined;
   scopeV2?: AccessReviewScopeV2$Outbound | undefined;
 };
 
@@ -139,15 +139,16 @@ export const AccessReviewServiceCreateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AccessReviewServiceCreateRequest
 > = z.object({
-  completionDate: z.date().transform(v => v.toISOString()).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  duplicateFrom: z.string().optional(),
+  completionDate: z.nullable(z.date().transform(v => v.toISOString()))
+    .optional(),
+  description: z.nullable(z.string()).optional(),
+  displayName: z.nullable(z.string()).optional(),
+  duplicateFrom: z.nullable(z.string()).optional(),
   accessReviewExpandMask: AccessReviewExpandMask$outboundSchema.optional(),
   notificationConfig: NotificationConfig$outboundSchema.optional(),
   ownerIds: z.nullable(z.array(z.string())).optional(),
-  policyId: z.string().optional(),
-  scopeType: ScopeType$outboundSchema.optional(),
+  policyId: z.nullable(z.string()).optional(),
+  scopeType: z.nullable(ScopeType$outboundSchema).optional(),
   accessReviewScopeV2: AccessReviewScopeV2$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

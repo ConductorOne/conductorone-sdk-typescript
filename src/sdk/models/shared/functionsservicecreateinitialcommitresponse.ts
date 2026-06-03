@@ -14,7 +14,7 @@ export type FunctionsServiceCreateInitialCommitResponse = {
   /**
    * The commitId field.
    */
-  commitId?: string | undefined;
+  commitId?: string | null | undefined;
   /**
    * The uploadUrls field.
    */
@@ -28,7 +28,7 @@ export const FunctionsServiceCreateInitialCommitResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    commitId: z.string().optional(),
+    commitId: z.nullable(z.string()).optional(),
     uploadUrls: z.record(z.string()).optional(),
   });
 

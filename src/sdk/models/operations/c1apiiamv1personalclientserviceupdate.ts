@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiIamV1PersonalClientServiceUpdateRequest = {
-  id: string | null;
+  id: string;
   personalClientServiceUpdateRequest?:
     | shared.PersonalClientServiceUpdateRequest
     | undefined;
@@ -39,7 +39,7 @@ export type C1ApiIamV1PersonalClientServiceUpdateResponse = {
 
 /** @internal */
 export type C1ApiIamV1PersonalClientServiceUpdateRequest$Outbound = {
-  id: string | null;
+  id: string;
   PersonalClientServiceUpdateRequest?:
     | shared.PersonalClientServiceUpdateRequest$Outbound
     | undefined;
@@ -52,7 +52,7 @@ export const C1ApiIamV1PersonalClientServiceUpdateRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiIamV1PersonalClientServiceUpdateRequest
   > = z.object({
-    id: z.nullable(z.string()),
+    id: z.string(),
     personalClientServiceUpdateRequest: shared
       .PersonalClientServiceUpdateRequest$outboundSchema.optional(),
   }).transform((v) => {

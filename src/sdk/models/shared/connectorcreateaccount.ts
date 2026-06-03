@@ -29,14 +29,17 @@ import {
  *   - userProperties
  */
 export type ConnectorCreateAccount = {
-  connectorRef?: ConnectorRef | null | undefined;
+  /**
+   * The ConnectorRef message.
+   */
+  connectorRef?: ConnectorRef | undefined;
   /**
    * CEL expression referencing a GeneratePassword step output (e.g. "genStep.password").
    *
    * @remarks
    *  When set, the resolved password is encrypted for the connector and sent as CredentialOptions.EncryptedPassword.
    */
-  passwordCel?: string | undefined;
+  passwordCel?: string | null | undefined;
   /**
    * The userIdCel field.
    *
@@ -54,15 +57,15 @@ export const ConnectorCreateAccount$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  connectorRef: z.nullable(ConnectorRef$inboundSchema).optional(),
-  passwordCel: z.string().optional(),
+  connectorRef: ConnectorRef$inboundSchema.optional(),
+  passwordCel: z.nullable(z.string()).optional(),
   userIdCel: z.nullable(z.string()).optional(),
   userProperties: z.nullable(UserProperties$inboundSchema).optional(),
 });
 /** @internal */
 export type ConnectorCreateAccount$Outbound = {
-  connectorRef?: ConnectorRef$Outbound | null | undefined;
-  passwordCel?: string | undefined;
+  connectorRef?: ConnectorRef$Outbound | undefined;
+  passwordCel?: string | null | undefined;
   userIdCel?: string | null | undefined;
   userProperties?: UserProperties$Outbound | null | undefined;
 };
@@ -73,8 +76,8 @@ export const ConnectorCreateAccount$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ConnectorCreateAccount
 > = z.object({
-  connectorRef: z.nullable(ConnectorRef$outboundSchema).optional(),
-  passwordCel: z.string().optional(),
+  connectorRef: ConnectorRef$outboundSchema.optional(),
+  passwordCel: z.nullable(z.string()).optional(),
   userIdCel: z.nullable(z.string()).optional(),
   userProperties: z.nullable(UserProperties$outboundSchema).optional(),
 });

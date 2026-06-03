@@ -31,7 +31,10 @@ export type UserServiceGetResponse = {
    * List of serialized related objects.
    */
   expanded?: Array<UserServiceGetResponseExpanded> | null | undefined;
-  userView?: UserView | null | undefined;
+  /**
+   * The UserView object provides a user response object, as well as JSONPATHs to related objects provided by expanders.
+   */
+  userView?: UserView | undefined;
 };
 
 /** @internal */
@@ -70,7 +73,7 @@ export const UserServiceGetResponse$inboundSchema: z.ZodType<
   expanded: z.nullable(
     z.array(z.lazy(() => UserServiceGetResponseExpanded$inboundSchema)),
   ).optional(),
-  userView: z.nullable(UserView$inboundSchema).optional(),
+  userView: UserView$inboundSchema.optional(),
 });
 
 export function userServiceGetResponseFromJSON(

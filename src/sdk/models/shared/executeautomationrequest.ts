@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   AutomationContext,
   AutomationContext$Outbound,
@@ -13,12 +14,15 @@ import {
  * The ExecuteAutomationRequest message.
  */
 export type ExecuteAutomationRequest = {
-  context?: AutomationContext | null | undefined;
+  /**
+   * The AutomationContext message.
+   */
+  automationContext?: AutomationContext | undefined;
 };
 
 /** @internal */
 export type ExecuteAutomationRequest$Outbound = {
-  context?: AutomationContext$Outbound | null | undefined;
+  context?: AutomationContext$Outbound | undefined;
 };
 
 /** @internal */
@@ -27,7 +31,11 @@ export const ExecuteAutomationRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ExecuteAutomationRequest
 > = z.object({
-  context: z.nullable(AutomationContext$outboundSchema).optional(),
+  automationContext: AutomationContext$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    automationContext: "context",
+  });
 });
 
 export function executeAutomationRequestToJSON(

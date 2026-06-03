@@ -32,7 +32,7 @@ export type DateTimeInputComponent = {
   /**
    * The inputType field.
    */
-  inputType?: InputType | undefined;
+  inputType?: InputType | null | undefined;
   /**
    * DynamicString can be a literal value, a JSON pointer path, or a function call.
    *
@@ -92,7 +92,7 @@ export const DateTimeInputComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  inputType: InputType$inboundSchema.optional(),
+  inputType: z.nullable(InputType$inboundSchema).optional(),
   label: DynamicString$inboundSchema.optional(),
   max: DynamicString$inboundSchema.optional(),
   min: DynamicString$inboundSchema.optional(),

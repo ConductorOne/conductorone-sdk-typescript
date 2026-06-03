@@ -14,11 +14,11 @@ export type AppResourceFilter = {
   /**
    * The appId field.
    */
-  appId?: string | undefined;
+  appId?: string | null | undefined;
   /**
    * The resourceTypeId field.
    */
-  resourceTypeId?: string | undefined;
+  resourceTypeId?: string | null | undefined;
 };
 
 /** @internal */
@@ -27,13 +27,13 @@ export const AppResourceFilter$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.string().optional(),
-  resourceTypeId: z.string().optional(),
+  appId: z.nullable(z.string()).optional(),
+  resourceTypeId: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type AppResourceFilter$Outbound = {
-  appId?: string | undefined;
-  resourceTypeId?: string | undefined;
+  appId?: string | null | undefined;
+  resourceTypeId?: string | null | undefined;
 };
 
 /** @internal */
@@ -42,8 +42,8 @@ export const AppResourceFilter$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppResourceFilter
 > = z.object({
-  appId: z.string().optional(),
-  resourceTypeId: z.string().optional(),
+  appId: z.nullable(z.string()).optional(),
+  resourceTypeId: z.nullable(z.string()).optional(),
 });
 
 export function appResourceFilterToJSON(

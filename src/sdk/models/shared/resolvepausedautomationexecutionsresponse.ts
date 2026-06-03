@@ -12,26 +12,27 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type ResolvePausedAutomationExecutionsResponse = {
   /**
-   * The number of paused executions that were attempted but failed to
+   * The bulk action ID created to resolve the paused executions. Track
    *
    * @remarks
-   *  resolve (e.g., a transient Dynamo error during the per-execution
-   *  mutate). Per-execution failures do not abort the run — the loop
-   *  continues, the failures are recorded on the audit row, and the
-   *  affected executions remain in PAUSED_BY_CIRCUIT_BREAKER state so a
-   *  subsequent call can retry them. Always 0 in the happy path.
+   *  progress via the BulkAction API.
    */
-  erroredCount?: number | undefined;
+  bulkActionId?: string | null | undefined;
   /**
-   * The number of paused executions successfully resolved by this call
+   * Deprecated: see paused_count.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  erroredCount?: number | null | undefined;
+  /**
+   * Deprecated: previously returned inline resolution counts. Now returns
    *
    * @remarks
-   *  (transitioned to PENDING for RUN, TERMINATE for CANCEL). Paused
-   *  executions are processed inline, paginated server-side. For very large
-   *  paused sets (10K+) this RPC may take seconds to minutes; callers should
-   *  treat the request as long-running.
+   *  the bulk action ID for async tracking.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  pausedCount?: number | undefined;
+  pausedCount?: number | null | undefined;
 };
 
 /** @internal */
@@ -40,8 +41,9 @@ export const ResolvePausedAutomationExecutionsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  erroredCount: z.number().int().optional(),
-  pausedCount: z.number().int().optional(),
+  bulkActionId: z.nullable(z.string()).optional(),
+  erroredCount: z.nullable(z.number().int()).optional(),
+  pausedCount: z.nullable(z.number().int()).optional(),
 });
 
 export function resolvePausedAutomationExecutionsResponseFromJSON(

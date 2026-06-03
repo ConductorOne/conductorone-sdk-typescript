@@ -12,7 +12,7 @@ let value: UpdateRoleRequest = {};
 
 ## Fields
 
-| Field                                                       | Type                                                        | Required                                                    | Description                                                 |
-| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `role`                                                      | [shared.RoleInput](../../../sdk/models/shared/roleinput.md) | :heavy_minus_sign:                                          | N/A                                                         |
-| `updateMask`                                                | *string*                                                    | :heavy_minus_sign:                                          | N/A                                                         |
+| Field                                                          | Type                                                           | Required                                                       | Description                                                    |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| `role`                                                         | [shared.RoleInput](../../../sdk/models/shared/roleinput.md)    | :heavy_minus_sign:                                             | Role is a role that can be assigned to a user in ConductorOne. |
+| `updateMask`                                                   | *string*                                                       | :heavy_minus_sign:                                             | N/A                                                            |

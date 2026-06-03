@@ -21,7 +21,7 @@ export type QueryScopeLimitConfig = {
   /**
    * The maxLimit field.
    */
-  maxLimit?: number | undefined;
+  maxLimit?: number | null | undefined;
 };
 
 /** @internal */
@@ -31,12 +31,12 @@ export const QueryScopeLimitConfig$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   fields: z.nullable(z.array(z.string())).optional(),
-  maxLimit: z.number().int().optional(),
+  maxLimit: z.nullable(z.number().int()).optional(),
 });
 /** @internal */
 export type QueryScopeLimitConfig$Outbound = {
   fields?: Array<string> | null | undefined;
-  maxLimit?: number | undefined;
+  maxLimit?: number | null | undefined;
 };
 
 /** @internal */
@@ -46,7 +46,7 @@ export const QueryScopeLimitConfig$outboundSchema: z.ZodType<
   QueryScopeLimitConfig
 > = z.object({
   fields: z.nullable(z.array(z.string())).optional(),
-  maxLimit: z.number().int().optional(),
+  maxLimit: z.nullable(z.number().int()).optional(),
 });
 
 export function queryScopeLimitConfigToJSON(

@@ -13,13 +13,16 @@ import {
  * The UpdateRoleRequest message contains the role to update and the update mask.
  */
 export type UpdateRoleRequest = {
-  role?: RoleInput | null | undefined;
+  /**
+   * Role is a role that can be assigned to a user in ConductorOne.
+   */
+  role?: RoleInput | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type UpdateRoleRequest$Outbound = {
-  role?: RoleInput$Outbound | null | undefined;
+  role?: RoleInput$Outbound | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -29,7 +32,7 @@ export const UpdateRoleRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateRoleRequest
 > = z.object({
-  role: z.nullable(RoleInput$outboundSchema).optional(),
+  role: RoleInput$outboundSchema.optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 

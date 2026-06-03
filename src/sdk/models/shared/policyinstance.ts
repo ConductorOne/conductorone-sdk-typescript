@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -29,7 +30,21 @@ import {
  * A policy instance is an object that contains a reference to the policy it was created from, the currently executing step, the next steps, and the history of previously completed steps.
  */
 export type PolicyInstance = {
-  current?: PolicyStepInstance | null | undefined;
+  /**
+   * The policy step instance includes a reference to an instance of a policy step that tracks state and has a unique ID.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named instance. Only a single field of the following list may be set at a time:
+   *   - approval
+   *   - provision
+   *   - accept
+   *   - reject
+   *   - wait
+   *   - form
+   *   - action
+   */
+  policyStepInstance?: PolicyStepInstance | undefined;
   /**
    * An array of steps that were previously processed by the ticket with their outcomes set, in order.
    */
@@ -38,7 +53,15 @@ export type PolicyInstance = {
    * An array of steps that will be processed by the ticket, in order.
    */
   next?: Array<PolicyStep> | null | undefined;
-  policy?: Policy | null | undefined;
+  /**
+   * A policy defines a workflow (sequence of steps) that runs when processing
+   *
+   * @remarks
+   *  access requests, reviews, or revocations. Policies support conditional
+   *  routing: different conditions can trigger different step sequences, with a
+   *  baseline fallback.
+   */
+  policy?: Policy | undefined;
 };
 
 /** @internal */
@@ -47,17 +70,21 @@ export const PolicyInstance$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  current: z.nullable(PolicyStepInstance$inboundSchema).optional(),
+  current: PolicyStepInstance$inboundSchema.optional(),
   history: z.nullable(z.array(PolicyStepInstance$inboundSchema)).optional(),
   next: z.nullable(z.array(PolicyStep$inboundSchema)).optional(),
-  policy: z.nullable(Policy$inboundSchema).optional(),
+  policy: Policy$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "current": "policyStepInstance",
+  });
 });
 /** @internal */
 export type PolicyInstance$Outbound = {
-  current?: PolicyStepInstance$Outbound | null | undefined;
+  current?: PolicyStepInstance$Outbound | undefined;
   history?: Array<PolicyStepInstance$Outbound> | null | undefined;
   next?: Array<PolicyStep$Outbound> | null | undefined;
-  policy?: Policy$Outbound | null | undefined;
+  policy?: Policy$Outbound | undefined;
 };
 
 /** @internal */
@@ -66,10 +93,14 @@ export const PolicyInstance$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PolicyInstance
 > = z.object({
-  current: z.nullable(PolicyStepInstance$outboundSchema).optional(),
+  policyStepInstance: PolicyStepInstance$outboundSchema.optional(),
   history: z.nullable(z.array(PolicyStepInstance$outboundSchema)).optional(),
   next: z.nullable(z.array(PolicyStep$outboundSchema)).optional(),
-  policy: z.nullable(Policy$outboundSchema).optional(),
+  policy: Policy$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    policyStepInstance: "current",
+  });
 });
 
 export function policyInstanceToJSON(policyInstance: PolicyInstance): string {

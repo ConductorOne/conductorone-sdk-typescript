@@ -74,7 +74,7 @@ export type ButtonComponent = {
   /**
    * The variant field.
    */
-  variant?: Variant | undefined;
+  variant?: Variant | null | undefined;
 };
 
 /** @internal */
@@ -91,7 +91,7 @@ export const ButtonComponent$inboundSchema: z.ZodType<
   checks: z.nullable(z.array(ValidationCheck$inboundSchema)).optional(),
   disabled: DynamicBool$inboundSchema.optional(),
   label: DynamicString$inboundSchema.optional(),
-  variant: Variant$inboundSchema.optional(),
+  variant: z.nullable(Variant$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "action": "a2UIAction",

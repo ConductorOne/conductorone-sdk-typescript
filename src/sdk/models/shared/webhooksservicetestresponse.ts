@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,7 +16,10 @@ import {
  * The WebhooksServiceTestResponse message.
  */
 export type WebhooksServiceTestResponse = {
-  webhook?: WebhookInstance | null | undefined;
+  /**
+   * The WebhookInstance message.
+   */
+  webhookInstance?: WebhookInstance | undefined;
 };
 
 /** @internal */
@@ -24,7 +28,11 @@ export const WebhooksServiceTestResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  webhook: z.nullable(WebhookInstance$inboundSchema).optional(),
+  webhook: WebhookInstance$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "webhook": "webhookInstance",
+  });
 });
 
 export function webhooksServiceTestResponseFromJSON(

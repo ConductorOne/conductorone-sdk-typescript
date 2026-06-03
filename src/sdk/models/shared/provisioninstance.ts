@@ -106,7 +106,10 @@ export type ProvisionInstance = {
    * This indicates the notification id for this step.
    */
   notificationId?: string | null | undefined;
-  provision?: Provision | null | undefined;
+  /**
+   * The provision step references a provision policy for this step.
+   */
+  provision?: Provision | undefined;
   reassignedByError?: ReassignedByErrorAction | null | undefined;
   skipped?: SkippedAction | null | undefined;
   /**
@@ -149,7 +152,7 @@ export const ProvisionInstance$inboundSchema: z.ZodType<
   externalTicketId: z.nullable(z.string()).optional(),
   externalTicketProvisionerConfigId: z.nullable(z.string()).optional(),
   notificationId: z.nullable(z.string()).optional(),
-  provision: z.nullable(Provision$inboundSchema).optional(),
+  provision: Provision$inboundSchema.optional(),
   reassignedByError: z.nullable(ReassignedByErrorAction$inboundSchema)
     .optional(),
   skipped: z.nullable(SkippedAction$inboundSchema).optional(),
@@ -166,7 +169,7 @@ export type ProvisionInstance$Outbound = {
   externalTicketId?: string | null | undefined;
   externalTicketProvisionerConfigId?: string | null | undefined;
   notificationId?: string | null | undefined;
-  provision?: Provision$Outbound | null | undefined;
+  provision?: Provision$Outbound | undefined;
   reassignedByError?: ReassignedByErrorAction$Outbound | null | undefined;
   skipped?: SkippedAction$Outbound | null | undefined;
   state?: string | null | undefined;
@@ -187,7 +190,7 @@ export const ProvisionInstance$outboundSchema: z.ZodType<
   externalTicketId: z.nullable(z.string()).optional(),
   externalTicketProvisionerConfigId: z.nullable(z.string()).optional(),
   notificationId: z.nullable(z.string()).optional(),
-  provision: z.nullable(Provision$outboundSchema).optional(),
+  provision: Provision$outboundSchema.optional(),
   reassignedByError: z.nullable(ReassignedByErrorAction$outboundSchema)
     .optional(),
   skipped: z.nullable(SkippedAction$outboundSchema).optional(),

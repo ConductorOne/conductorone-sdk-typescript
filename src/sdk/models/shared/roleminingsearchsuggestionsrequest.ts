@@ -39,15 +39,15 @@ export type RoleMiningSearchSuggestionsRequest = {
   /**
    * Maximum number of suggestions to return per page.
    */
-  pageSize?: number | undefined;
+  pageSize?: number | null | undefined;
   /**
    * Pagination token from a previous response.
    */
-  pageToken?: string | undefined;
+  pageToken?: string | null | undefined;
   /**
    * Text search — matches against suggested_name, description, and cohort filter values.
    */
-  query?: string | undefined;
+  query?: string | null | undefined;
   /**
    * Filter by suggestion state.
    */
@@ -72,9 +72,9 @@ export const RoleMiningSearchSuggestionsRequestStates$outboundSchema: z.ZodType<
 export type RoleMiningSearchSuggestionsRequest$Outbound = {
   cohortTypes?: Array<string> | null | undefined;
   matchTypes?: Array<string> | null | undefined;
-  pageSize?: number | undefined;
-  pageToken?: string | undefined;
-  query?: string | undefined;
+  pageSize?: number | null | undefined;
+  pageToken?: string | null | undefined;
+  query?: string | null | undefined;
   states?: Array<string> | null | undefined;
 };
 
@@ -86,9 +86,9 @@ export const RoleMiningSearchSuggestionsRequest$outboundSchema: z.ZodType<
 > = z.object({
   cohortTypes: z.nullable(z.array(z.string())).optional(),
   matchTypes: z.nullable(z.array(MatchTypes$outboundSchema)).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
+  pageSize: z.nullable(z.number().int()).optional(),
+  pageToken: z.nullable(z.string()).optional(),
+  query: z.nullable(z.string()).optional(),
   states: z.nullable(
     z.array(RoleMiningSearchSuggestionsRequestStates$outboundSchema),
   ).optional(),

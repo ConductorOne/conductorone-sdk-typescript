@@ -9,7 +9,9 @@ The RequestCatalogManagementServiceAddAccessEntitlementsRequest message is used 
 import { RequestCatalogManagementServiceAddAccessEntitlementsRequest } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: RequestCatalogManagementServiceAddAccessEntitlementsRequest = {
-  accessEntitlements: [],
+  accessEntitlements: [
+    {},
+  ],
 };
 ```
 

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -12,7 +13,24 @@ import { StringRules, StringRules$inboundSchema } from "./stringrules.js";
  * The StringListField message.
  */
 export type StringListField = {
-  valueValidator?: StringRules | null | undefined;
+  /**
+   * StringRules describe the constraints applied to `string` values
+   *
+   * @remarks
+   *
+   * This message contains a oneof named well_known. Only a single field of the following list may be set at a time:
+   *   - email
+   *   - hostname
+   *   - ip
+   *   - ipv4
+   *   - ipv6
+   *   - uri
+   *   - uriRef
+   *   - address
+   *   - uuid
+   *   - wellKnownRegex
+   */
+  stringRules?: StringRules | undefined;
 };
 
 /** @internal */
@@ -21,7 +39,11 @@ export const StringListField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  valueValidator: z.nullable(StringRules$inboundSchema).optional(),
+  valueValidator: StringRules$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "valueValidator": "stringRules",
+  });
 });
 
 export function stringListFieldFromJSON(

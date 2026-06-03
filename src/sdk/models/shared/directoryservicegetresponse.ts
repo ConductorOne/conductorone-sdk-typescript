@@ -30,7 +30,10 @@ export type DirectoryServiceGetResponseExpanded = {
  *  location in the expanded array that items are expanded as indicated by the expand mask in the request.
  */
 export type DirectoryServiceGetResponse = {
-  directoryView?: DirectoryView | null | undefined;
+  /**
+   * The directory view contains a directory and an app_path which is a JSONPATH set to the location in the expand mask that the expanded app will live if requested by the expander.
+   */
+  directoryView?: DirectoryView | undefined;
   /**
    * List of serialized related objects.
    */
@@ -71,7 +74,7 @@ export const DirectoryServiceGetResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  directoryView: z.nullable(DirectoryView$inboundSchema).optional(),
+  directoryView: DirectoryView$inboundSchema.optional(),
   expanded: z.nullable(
     z.array(z.lazy(() => DirectoryServiceGetResponseExpanded$inboundSchema)),
   ).optional(),

@@ -12,7 +12,10 @@ import { User, User$inboundSchema } from "./user.js";
  * The TaskAuditMetaData message.
  */
 export type TaskAuditMetaData = {
-  user?: User | null | undefined;
+  /**
+   * The User object provides all of the details for an user, as well as some configuration.
+   */
+  user?: User | undefined;
 };
 
 /** @internal */
@@ -21,7 +24,7 @@ export const TaskAuditMetaData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  user: z.nullable(User$inboundSchema).optional(),
+  user: User$inboundSchema.optional(),
 });
 
 export function taskAuditMetaDataFromJSON(

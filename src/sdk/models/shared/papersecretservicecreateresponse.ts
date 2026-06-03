@@ -21,7 +21,7 @@ export type PaperSecretServiceCreateResponse = {
    *  before calling SetTextContent or uploading to upload_url.
    *  See: https://age-encryption.org
    */
-  ageRecipient?: string | undefined;
+  ageRecipient?: string | null | undefined;
   /**
    * PaperSecret is the API view of a secret (combines Vault + PaperVault fields).
    *
@@ -38,11 +38,11 @@ export type PaperSecretServiceCreateResponse = {
    *  the Age header "age-encryption.org/v1\n". Maximum file size: 1GB.
    *  Empty for TEXT secrets.
    */
-  uploadUrl?: string | undefined;
+  uploadUrl?: string | null | undefined;
   /**
    * Vault ID - primary identifier for this secret.
    */
-  vaultId?: string | undefined;
+  vaultId?: string | null | undefined;
 };
 
 /** @internal */
@@ -51,10 +51,10 @@ export const PaperSecretServiceCreateResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ageRecipient: z.string().optional(),
+  ageRecipient: z.nullable(z.string()).optional(),
   secret: PaperSecret$inboundSchema.optional(),
-  uploadUrl: z.string().optional(),
-  vaultId: z.string().optional(),
+  uploadUrl: z.nullable(z.string()).optional(),
+  vaultId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "secret": "paperSecret",

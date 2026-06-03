@@ -33,7 +33,10 @@ export type AppResourceTypeServiceGetResponseExpanded = {
  *  in the request and an app resource type view containing the resource type and JSONPATHs indicating which objects are where in the expand mask.
  */
 export type AppResourceTypeServiceGetResponse = {
-  appResourceTypeView?: AppResourceTypeView | null | undefined;
+  /**
+   * The AppResourceTypeView message.
+   */
+  appResourceTypeView?: AppResourceTypeView | undefined;
   /**
    * List of serialized related objects.
    */
@@ -82,7 +85,7 @@ export const AppResourceTypeServiceGetResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appResourceTypeView: z.nullable(AppResourceTypeView$inboundSchema).optional(),
+  appResourceTypeView: AppResourceTypeView$inboundSchema.optional(),
   expanded: z.nullable(
     z.array(
       z.lazy(() => AppResourceTypeServiceGetResponseExpanded$inboundSchema),

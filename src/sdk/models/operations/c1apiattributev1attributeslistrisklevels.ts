@@ -10,8 +10,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAttributeV1AttributesListRiskLevelsRequest = {
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
 };
 
 export type C1ApiAttributeV1AttributesListRiskLevelsResponse = {
@@ -35,8 +35,8 @@ export type C1ApiAttributeV1AttributesListRiskLevelsResponse = {
 
 /** @internal */
 export type C1ApiAttributeV1AttributesListRiskLevelsRequest$Outbound = {
-  page_size?: number | null | undefined;
-  page_token?: string | null | undefined;
+  page_size?: number | undefined;
+  page_token?: string | undefined;
 };
 
 /** @internal */
@@ -46,8 +46,8 @@ export const C1ApiAttributeV1AttributesListRiskLevelsRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiAttributeV1AttributesListRiskLevelsRequest
   > = z.object({
-    pageSize: z.nullable(z.number().int()).optional(),
-    pageToken: z.nullable(z.string()).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       pageSize: "page_size",

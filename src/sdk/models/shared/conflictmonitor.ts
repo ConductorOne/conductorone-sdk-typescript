@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -44,7 +45,12 @@ export type ConflictMonitor = {
    * The unique identifier of this conflict monitor.
    */
   id?: string | null | undefined;
-  notificationConfig?: AccessConflictNotificationConfig | null | undefined;
+  /**
+   * The NotificationConfig message.
+   */
+  accessConflictNotificationConfig?:
+    | AccessConflictNotificationConfig
+    | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -66,11 +72,14 @@ export const ConflictMonitor$inboundSchema: z.ZodType<
   entitlementSetAId: z.nullable(z.string()).optional(),
   entitlementSetBId: z.nullable(z.string()).optional(),
   id: z.nullable(z.string()).optional(),
-  notificationConfig: z.nullable(AccessConflictNotificationConfig$inboundSchema)
-    .optional(),
+  notificationConfig: AccessConflictNotificationConfig$inboundSchema.optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "notificationConfig": "accessConflictNotificationConfig",
+  });
 });
 
 export function conflictMonitorFromJSON(

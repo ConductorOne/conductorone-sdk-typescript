@@ -30,7 +30,10 @@ export type GetAppEntitlementResponseExpanded = {
  * The get app entitlement response returns an entitlement view containing paths in the expanded array for the objects expanded as indicated by the expand mask in the request.
  */
 export type GetAppEntitlementResponse = {
-  appEntitlementView?: AppEntitlementView | null | undefined;
+  /**
+   * The app entitlement view contains the serialized app entitlement and paths to objects referenced by the app entitlement.
+   */
+  appEntitlementView?: AppEntitlementView | undefined;
   /**
    * List of serialized related objects.
    */
@@ -70,7 +73,7 @@ export const GetAppEntitlementResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appEntitlementView: z.nullable(AppEntitlementView$inboundSchema).optional(),
+  appEntitlementView: AppEntitlementView$inboundSchema.optional(),
   expanded: z.nullable(
     z.array(z.lazy(() => GetAppEntitlementResponseExpanded$inboundSchema)),
   ).optional(),

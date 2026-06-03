@@ -74,7 +74,7 @@ export type AccessReviewInclusionScope = {
   /**
    * The noAccountOwners field.
    */
-  noAccountOwners?: boolean | undefined;
+  noAccountOwners?: boolean | null | undefined;
   /**
    * The userIds field.
    */
@@ -138,7 +138,7 @@ export const AccessReviewInclusionScope$inboundSchema: z.ZodType<
   multiUserProfileAttributes: z.record(
     IncludedUserAttributeValues$inboundSchema,
   ).optional(),
-  noAccountOwners: z.boolean().optional(),
+  noAccountOwners: z.nullable(z.boolean()).optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
   userStatuses: z.nullable(z.array(UserStatuses$inboundSchema)).optional(),
 });
@@ -150,7 +150,7 @@ export type AccessReviewInclusionScope$Outbound = {
   multiUserProfileAttributes?: {
     [k: string]: IncludedUserAttributeValues$Outbound;
   } | undefined;
-  noAccountOwners?: boolean | undefined;
+  noAccountOwners?: boolean | null | undefined;
   userIds?: Array<string> | null | undefined;
   userStatuses?: Array<string> | null | undefined;
 };
@@ -171,7 +171,7 @@ export const AccessReviewInclusionScope$outboundSchema: z.ZodType<
   multiUserProfileAttributes: z.record(
     IncludedUserAttributeValues$outboundSchema,
   ).optional(),
-  noAccountOwners: z.boolean().optional(),
+  noAccountOwners: z.nullable(z.boolean()).optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
   userStatuses: z.nullable(z.array(UserStatuses$outboundSchema)).optional(),
 });

@@ -13,13 +13,21 @@ import {
  * The UpdateAutomationRequest message.
  */
 export type UpdateAutomationRequest = {
-  automation?: AutomationInput | null | undefined;
+  /**
+   * The Automation message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named disabled_reason. Only a single field of the following list may be set at a time:
+   *   - circuitBreaker
+   */
+  automation?: AutomationInput | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type UpdateAutomationRequest$Outbound = {
-  automation?: AutomationInput$Outbound | null | undefined;
+  automation?: AutomationInput$Outbound | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -29,7 +37,7 @@ export const UpdateAutomationRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateAutomationRequest
 > = z.object({
-  automation: z.nullable(AutomationInput$outboundSchema).optional(),
+  automation: AutomationInput$outboundSchema.optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 

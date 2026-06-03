@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,8 +17,14 @@ import {
  * ConnectorCatalogServiceConfigurationSchemaResponse is the response containing the connector's configuration schema.
  */
 export type ConnectorCatalogServiceConfigurationSchemaResponse = {
-  formSchema?: RequestSchemaForm | null | undefined;
-  schema?: ConfigSchema | null | undefined;
+  /**
+   * A form is a collection of fields to be filled out by a user
+   */
+  requestSchemaForm?: RequestSchemaForm | undefined;
+  /**
+   * The ConfigSchema message.
+   */
+  configSchema?: ConfigSchema | undefined;
 };
 
 /** @internal */
@@ -27,8 +34,13 @@ export const ConnectorCatalogServiceConfigurationSchemaResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    formSchema: z.nullable(RequestSchemaForm$inboundSchema).optional(),
-    schema: z.nullable(ConfigSchema$inboundSchema).optional(),
+    formSchema: RequestSchemaForm$inboundSchema.optional(),
+    schema: ConfigSchema$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "formSchema": "requestSchemaForm",
+      "schema": "configSchema",
+    });
   });
 
 export function connectorCatalogServiceConfigurationSchemaResponseFromJSON(

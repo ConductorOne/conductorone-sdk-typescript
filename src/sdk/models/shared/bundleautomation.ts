@@ -34,11 +34,11 @@ import {
  *   - cel
  */
 export type BundleAutomation = {
+  cel?: BundleAutomationRuleCEL | null | undefined;
   /**
-   * The BundleAutomationRuleCEL message.
+   * The BundleAutomationCircuitBreaker message.
    */
-  bundleAutomationRuleCEL?: BundleAutomationRuleCEL | null | undefined;
-  circuitBreaker?: BundleAutomationCircuitBreaker | null | undefined;
+  bundleAutomationCircuitBreaker?: BundleAutomationCircuitBreaker | undefined;
   /**
    * The createTasks field.
    */
@@ -53,12 +53,29 @@ export type BundleAutomation = {
    * The enabled field.
    */
   enabled?: boolean | null | undefined;
+  /**
+   * When true, the circuit breaker is evaluated even on profiles below the
+   *
+   * @remarks
+   *  tenant min-members floor.
+   */
+  enforceOnSmallProfiles?: boolean | null | undefined;
   entitlements?: BundleAutomationRuleEntitlement | null | undefined;
+  /**
+   * Per-automation override for the removed-members percent that trips the
+   *
+   * @remarks
+   *  circuit breaker (1-100). 0 / unset means the tenant default applies.
+   */
+  removedMembersThresholdPercent?: number | null | undefined;
   /**
    * The requestCatalogId field.
    */
   requestCatalogId?: string | null | undefined;
-  state?: BundleAutomationLastRunState | null | undefined;
+  /**
+   * The BundleAutomationLastRunState message.
+   */
+  bundleAutomationLastRunState?: BundleAutomationLastRunState | undefined;
   /**
    * The tenantId field.
    */
@@ -73,8 +90,7 @@ export const BundleAutomation$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   cel: z.nullable(BundleAutomationRuleCEL$inboundSchema).optional(),
-  circuitBreaker: z.nullable(BundleAutomationCircuitBreaker$inboundSchema)
-    .optional(),
+  circuitBreaker: BundleAutomationCircuitBreaker$inboundSchema.optional(),
   createTasks: z.nullable(z.boolean()).optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -84,17 +100,22 @@ export const BundleAutomation$inboundSchema: z.ZodType<
   ).optional(),
   disableCircuitBreaker: z.nullable(z.boolean()).optional(),
   enabled: z.nullable(z.boolean()).optional(),
+  enforceOnSmallProfiles: z.nullable(z.boolean()).optional(),
   entitlements: z.nullable(BundleAutomationRuleEntitlement$inboundSchema)
     .optional(),
+  removedMembersThresholdPercent: z.nullable(
+    z.string().transform(v => parseInt(v, 10)),
+  ).optional(),
   requestCatalogId: z.nullable(z.string()).optional(),
-  state: z.nullable(BundleAutomationLastRunState$inboundSchema).optional(),
+  state: BundleAutomationLastRunState$inboundSchema.optional(),
   tenantId: z.nullable(z.string()).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
-    "cel": "bundleAutomationRuleCEL",
+    "circuitBreaker": "bundleAutomationCircuitBreaker",
+    "state": "bundleAutomationLastRunState",
   });
 });
 

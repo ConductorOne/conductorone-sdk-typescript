@@ -4,6 +4,11 @@
 
 import * as z from "zod/v3";
 import {
+  EntitlementRef,
+  EntitlementRef$Outbound,
+  EntitlementRef$outboundSchema,
+} from "./entitlementref.js";
+import {
   ProfileFilter,
   ProfileFilter$Outbound,
   ProfileFilter$outboundSchema,
@@ -16,22 +21,27 @@ export type SearchCohortUsersRequest = {
   /**
    * Maximum number of users to return per page.
    */
-  pageSize?: number | undefined;
+  pageSize?: number | null | undefined;
   /**
    * Pagination token from a previous response.
    */
-  pageToken?: string | undefined;
+  pageToken?: string | null | undefined;
   /**
    * Additional profile filters to narrow the cohort user search.
    */
   profileFilters?: Array<ProfileFilter> | null | undefined;
+  /**
+   * Optional list of entitlements to compute per-user coverage for.
+   */
+  selectedEntitlements?: Array<EntitlementRef> | null | undefined;
 };
 
 /** @internal */
 export type SearchCohortUsersRequest$Outbound = {
-  pageSize?: number | undefined;
-  pageToken?: string | undefined;
+  pageSize?: number | null | undefined;
+  pageToken?: string | null | undefined;
   profileFilters?: Array<ProfileFilter$Outbound> | null | undefined;
+  selectedEntitlements?: Array<EntitlementRef$Outbound> | null | undefined;
 };
 
 /** @internal */
@@ -40,9 +50,11 @@ export const SearchCohortUsersRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchCohortUsersRequest
 > = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
+  pageSize: z.nullable(z.number().int()).optional(),
+  pageToken: z.nullable(z.string()).optional(),
   profileFilters: z.nullable(z.array(ProfileFilter$outboundSchema)).optional(),
+  selectedEntitlements: z.nullable(z.array(EntitlementRef$outboundSchema))
+    .optional(),
 });
 
 export function searchCohortUsersRequestToJSON(

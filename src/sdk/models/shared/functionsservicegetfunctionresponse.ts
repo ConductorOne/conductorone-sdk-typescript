@@ -12,7 +12,10 @@ import { FunctionT, FunctionT$inboundSchema } from "./function.js";
  * The FunctionsServiceGetFunctionResponse message.
  */
 export type FunctionsServiceGetFunctionResponse = {
-  function?: FunctionT | null | undefined;
+  /**
+   * Function represents a customer-provided code extension in the API
+   */
+  function?: FunctionT | undefined;
 };
 
 /** @internal */
@@ -21,7 +24,7 @@ export const FunctionsServiceGetFunctionResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  function: z.nullable(FunctionT$inboundSchema).optional(),
+  function: FunctionT$inboundSchema.optional(),
 });
 
 export function functionsServiceGetFunctionResponseFromJSON(

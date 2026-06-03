@@ -28,7 +28,7 @@ export type SelfApprovalInput = {
   /**
    * Configuration to enable fallback for group fallback.
    */
-  isGroupFallbackEnabled?: boolean | undefined;
+  isGroupFallbackEnabled?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export type SelfApprovalInput$Outbound = {
   fallback?: boolean | null | undefined;
   fallbackGroupIds?: Array<AppEntitlementReference$Outbound> | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
-  isGroupFallbackEnabled?: boolean | undefined;
+  isGroupFallbackEnabled?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -49,7 +49,7 @@ export const SelfApprovalInput$outboundSchema: z.ZodType<
   fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$outboundSchema))
     .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-  isGroupFallbackEnabled: z.boolean().optional(),
+  isGroupFallbackEnabled: z.nullable(z.boolean()).optional(),
 });
 
 export function selfApprovalInputToJSON(

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   AppEntitlementProxyExpandMask,
   AppEntitlementProxyExpandMask$Outbound,
@@ -13,12 +14,15 @@ import {
  * The request message for creating an entitlement proxy binding.
  */
 export type CreateAppEntitlementProxyRequest = {
-  expandMask?: AppEntitlementProxyExpandMask | null | undefined;
+  /**
+   * The AppEntitlementProxyExpandMask message.
+   */
+  appEntitlementProxyExpandMask?: AppEntitlementProxyExpandMask | undefined;
 };
 
 /** @internal */
 export type CreateAppEntitlementProxyRequest$Outbound = {
-  expandMask?: AppEntitlementProxyExpandMask$Outbound | null | undefined;
+  expandMask?: AppEntitlementProxyExpandMask$Outbound | undefined;
 };
 
 /** @internal */
@@ -27,8 +31,12 @@ export const CreateAppEntitlementProxyRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAppEntitlementProxyRequest
 > = z.object({
-  expandMask: z.nullable(AppEntitlementProxyExpandMask$outboundSchema)
+  appEntitlementProxyExpandMask: AppEntitlementProxyExpandMask$outboundSchema
     .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    appEntitlementProxyExpandMask: "expandMask",
+  });
 });
 
 export function createAppEntitlementProxyRequestToJSON(

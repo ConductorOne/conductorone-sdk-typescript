@@ -30,7 +30,10 @@ export type UpdateManuallyManagedResourceTypeResponseExpanded = {
  * The response message for updating a manually managed resource type.
  */
 export type UpdateManuallyManagedResourceTypeResponse = {
-  appResourceType?: AppResourceType | null | undefined;
+  /**
+   * The AppResourceType is referenced by an app entitlement defining its resource types. Commonly things like Group or Role.
+   */
+  appResourceType?: AppResourceType | undefined;
   /**
    * List of serialized related objects.
    */
@@ -80,7 +83,7 @@ export const UpdateManuallyManagedResourceTypeResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appResourceType: z.nullable(AppResourceType$inboundSchema).optional(),
+  appResourceType: AppResourceType$inboundSchema.optional(),
   expanded: z.nullable(
     z.array(z.lazy(() =>
       UpdateManuallyManagedResourceTypeResponseExpanded$inboundSchema

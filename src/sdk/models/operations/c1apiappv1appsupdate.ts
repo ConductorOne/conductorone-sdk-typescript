@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppsUpdateRequest = {
-  id: string | null;
+  id: string;
   updateAppRequest?: shared.UpdateAppRequest | undefined;
 };
 
@@ -35,7 +35,7 @@ export type C1ApiAppV1AppsUpdateResponse = {
 
 /** @internal */
 export type C1ApiAppV1AppsUpdateRequest$Outbound = {
-  id: string | null;
+  id: string;
   UpdateAppRequest?: shared.UpdateAppRequest$Outbound | undefined;
 };
 
@@ -45,7 +45,7 @@ export const C1ApiAppV1AppsUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiAppV1AppsUpdateRequest
 > = z.object({
-  id: z.nullable(z.string()),
+  id: z.string(),
   updateAppRequest: shared.UpdateAppRequest$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

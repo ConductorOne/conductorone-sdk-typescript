@@ -11,7 +11,7 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceSetBundleAutomationRequest =
   {
-    requestCatalogId: string | null;
+    requestCatalogId: string;
     setBundleAutomationRequest?: shared.SetBundleAutomationRequest | undefined;
   };
 
@@ -38,7 +38,7 @@ export type C1ApiRequestcatalogV1RequestCatalogManagementServiceSetBundleAutomat
 /** @internal */
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceSetBundleAutomationRequest$Outbound =
   {
-    request_catalog_id: string | null;
+    request_catalog_id: string;
     SetBundleAutomationRequest?:
       | shared.SetBundleAutomationRequest$Outbound
       | undefined;
@@ -51,7 +51,7 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceSetBundleAutoma
     z.ZodTypeDef,
     C1ApiRequestcatalogV1RequestCatalogManagementServiceSetBundleAutomationRequest
   > = z.object({
-    requestCatalogId: z.nullable(z.string()),
+    requestCatalogId: z.string(),
     setBundleAutomationRequest: shared.SetBundleAutomationRequest$outboundSchema
       .optional(),
   }).transform((v) => {

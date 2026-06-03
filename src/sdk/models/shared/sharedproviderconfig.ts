@@ -14,15 +14,15 @@ export type SharedProviderConfig = {
   /**
    * The defaultValueCel field.
    */
-  defaultValueCel?: string | undefined;
+  defaultValueCel?: string | null | undefined;
   /**
    * The inputTransformationCel field.
    */
-  inputTransformationCel?: string | undefined;
+  inputTransformationCel?: string | null | undefined;
   /**
    * The lockDefaultValues field.
    */
-  lockDefaultValues?: boolean | undefined;
+  lockDefaultValues?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -31,15 +31,15 @@ export const SharedProviderConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  defaultValueCel: z.string().optional(),
-  inputTransformationCel: z.string().optional(),
-  lockDefaultValues: z.boolean().optional(),
+  defaultValueCel: z.nullable(z.string()).optional(),
+  inputTransformationCel: z.nullable(z.string()).optional(),
+  lockDefaultValues: z.nullable(z.boolean()).optional(),
 });
 /** @internal */
 export type SharedProviderConfig$Outbound = {
-  defaultValueCel?: string | undefined;
-  inputTransformationCel?: string | undefined;
-  lockDefaultValues?: boolean | undefined;
+  defaultValueCel?: string | null | undefined;
+  inputTransformationCel?: string | null | undefined;
+  lockDefaultValues?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -48,9 +48,9 @@ export const SharedProviderConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SharedProviderConfig
 > = z.object({
-  defaultValueCel: z.string().optional(),
-  inputTransformationCel: z.string().optional(),
-  lockDefaultValues: z.boolean().optional(),
+  defaultValueCel: z.nullable(z.string()).optional(),
+  inputTransformationCel: z.nullable(z.string()).optional(),
+  lockDefaultValues: z.nullable(z.boolean()).optional(),
 });
 
 export function sharedProviderConfigToJSON(

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,8 +17,14 @@ import {
  * The FunctionsServiceCreateFunctionResponse message.
  */
 export type FunctionsServiceCreateFunctionResponse = {
-  commit?: FunctionCommit | null | undefined;
-  function?: FunctionT | null | undefined;
+  /**
+   * FunctionCommit represents a single commit in a function's history
+   */
+  functionCommit?: FunctionCommit | undefined;
+  /**
+   * Function represents a customer-provided code extension in the API
+   */
+  function?: FunctionT | undefined;
 };
 
 /** @internal */
@@ -26,8 +33,12 @@ export const FunctionsServiceCreateFunctionResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  commit: z.nullable(FunctionCommit$inboundSchema).optional(),
-  function: z.nullable(FunctionT$inboundSchema).optional(),
+  commit: FunctionCommit$inboundSchema.optional(),
+  function: FunctionT$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "commit": "functionCommit",
+  });
 });
 
 export function functionsServiceCreateFunctionResponseFromJSON(

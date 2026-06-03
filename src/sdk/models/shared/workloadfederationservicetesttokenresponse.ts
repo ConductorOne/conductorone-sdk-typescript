@@ -34,7 +34,7 @@ export type WorkloadFederationServiceTestTokenResponse = {
    * @remarks
    *  Returned as JSON string for display.
    */
-  decodedClaimsJson?: string | undefined;
+  decodedClaimsJson?: string | null | undefined;
   /**
    * TestTokenStepResult represents the result of a single validation step.
    */
@@ -46,7 +46,7 @@ export type WorkloadFederationServiceTestTokenResponse = {
   /**
    * Overall result: true only if ALL steps passed.
    */
-  overallResult?: boolean | undefined;
+  overallResult?: boolean | null | undefined;
   /**
    * TestTokenStepResult represents the result of a single validation step.
    */
@@ -55,6 +55,10 @@ export type WorkloadFederationServiceTestTokenResponse = {
    * TestTokenStepResult represents the result of a single validation step.
    */
   testTokenStepResult6?: TestTokenStepResult | undefined;
+  /**
+   * TestTokenStepResult represents the result of a single validation step.
+   */
+  testTokenStepResult7?: TestTokenStepResult | undefined;
 };
 
 /** @internal */
@@ -64,11 +68,12 @@ export const WorkloadFederationServiceTestTokenResponse$inboundSchema:
       audienceValidation: TestTokenStepResult$inboundSchema.optional(),
       celEvaluation: TestTokenStepResult$inboundSchema.optional(),
       cidrCheck: TestTokenStepResult$inboundSchema.optional(),
-      decodedClaimsJson: z.string().optional(),
+      decodedClaimsJson: z.nullable(z.string()).optional(),
       issuerMatch: TestTokenStepResult$inboundSchema.optional(),
       jwtDecode: TestTokenStepResult$inboundSchema.optional(),
-      overallResult: z.boolean().optional(),
+      overallResult: z.nullable(z.boolean()).optional(),
       signatureValidation: TestTokenStepResult$inboundSchema.optional(),
+      subjectValidation: TestTokenStepResult$inboundSchema.optional(),
       tokenFreshness: TestTokenStepResult$inboundSchema.optional(),
     }).transform((v) => {
       return remap$(v, {
@@ -78,7 +83,8 @@ export const WorkloadFederationServiceTestTokenResponse$inboundSchema:
         "issuerMatch": "testTokenStepResult3",
         "jwtDecode": "testTokenStepResult4",
         "signatureValidation": "testTokenStepResult5",
-        "tokenFreshness": "testTokenStepResult6",
+        "subjectValidation": "testTokenStepResult6",
+        "tokenFreshness": "testTokenStepResult7",
       });
     });
 

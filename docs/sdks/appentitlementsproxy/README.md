@@ -27,7 +27,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 
 async function run() {
   const result = await conductoroneSDKTypescript.appEntitlementsProxy.delete({
-    srcAppId: null,
+    srcAppId: "<id>",
     srcAppEntitlementId: "<id>",
     dstAppId: "<id>",
     dstAppEntitlementId: "<id>",
@@ -58,7 +58,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 
 async function run() {
   const res = await appEntitlementsProxyDelete(conductoroneSDKTypescript, {
-    srcAppId: null,
+    srcAppId: "<id>",
     srcAppEntitlementId: "<id>",
     dstAppId: "<id>",
     dstAppEntitlementId: "<id>",
@@ -113,7 +113,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 async function run() {
   const result = await conductoroneSDKTypescript.appEntitlementsProxy.get({
     srcAppId: "<id>",
-    srcAppEntitlementId: null,
+    srcAppEntitlementId: "<id>",
     dstAppId: "<id>",
     dstAppEntitlementId: "<id>",
   });
@@ -144,7 +144,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 async function run() {
   const res = await appEntitlementsProxyGet(conductoroneSDKTypescript, {
     srcAppId: "<id>",
-    srcAppEntitlementId: null,
+    srcAppEntitlementId: "<id>",
     dstAppId: "<id>",
     dstAppEntitlementId: "<id>",
   });
@@ -200,7 +200,7 @@ async function run() {
     srcAppId: "<id>",
     srcAppEntitlementId: "<id>",
     dstAppId: "<id>",
-    dstAppEntitlementId: null,
+    dstAppEntitlementId: "<id>",
   });
 
   console.log(result);
@@ -231,7 +231,7 @@ async function run() {
     srcAppId: "<id>",
     srcAppEntitlementId: "<id>",
     dstAppId: "<id>",
-    dstAppEntitlementId: null,
+    dstAppEntitlementId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;

@@ -10,8 +10,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1ConnectorServicePauseSyncRequest = {
-  appId: string | null;
-  connectorId: string | null;
+  appId: string;
+  connectorId: string;
   pauseSyncRequest?: shared.PauseSyncRequest | undefined;
 };
 
@@ -36,8 +36,8 @@ export type C1ApiAppV1ConnectorServicePauseSyncResponse = {
 
 /** @internal */
 export type C1ApiAppV1ConnectorServicePauseSyncRequest$Outbound = {
-  app_id: string | null;
-  connector_id: string | null;
+  app_id: string;
+  connector_id: string;
   PauseSyncRequest?: shared.PauseSyncRequest$Outbound | undefined;
 };
 
@@ -48,8 +48,8 @@ export const C1ApiAppV1ConnectorServicePauseSyncRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiAppV1ConnectorServicePauseSyncRequest
   > = z.object({
-    appId: z.nullable(z.string()),
-    connectorId: z.nullable(z.string()),
+    appId: z.string(),
+    connectorId: z.string(),
     pauseSyncRequest: shared.PauseSyncRequest$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {

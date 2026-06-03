@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   TaskTypeActionInput,
   TaskTypeActionInput$Outbound,
@@ -49,20 +48,9 @@ import {
  *   - finding
  */
 export type TaskTypeInput = {
-  /**
-   * The TaskTypeAction message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named target_object. Only a single field of the following list may be set at a time:
-   *   - scopeRole
-   */
-  taskTypeAction?: TaskTypeActionInput | null | undefined;
+  action?: TaskTypeActionInput | null | undefined;
   certify?: TaskTypeCertifyInput | null | undefined;
-  /**
-   * The TaskTypeFinding message.
-   */
-  taskTypeFinding?: TaskTypeFindingInput | null | undefined;
+  finding?: TaskTypeFindingInput | null | undefined;
   grant?: TaskTypeGrantInput | null | undefined;
   offboarding?: TaskTypeOffboardingInput | null | undefined;
   revoke?: TaskTypeRevokeInput | null | undefined;
@@ -84,17 +72,12 @@ export const TaskTypeInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskTypeInput
 > = z.object({
-  taskTypeAction: z.nullable(TaskTypeActionInput$outboundSchema).optional(),
+  action: z.nullable(TaskTypeActionInput$outboundSchema).optional(),
   certify: z.nullable(TaskTypeCertifyInput$outboundSchema).optional(),
-  taskTypeFinding: z.nullable(TaskTypeFindingInput$outboundSchema).optional(),
+  finding: z.nullable(TaskTypeFindingInput$outboundSchema).optional(),
   grant: z.nullable(TaskTypeGrantInput$outboundSchema).optional(),
   offboarding: z.nullable(TaskTypeOffboardingInput$outboundSchema).optional(),
   revoke: z.nullable(TaskTypeRevokeInput$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    taskTypeAction: "action",
-    taskTypeFinding: "finding",
-  });
 });
 
 export function taskTypeInputToJSON(taskTypeInput: TaskTypeInput): string {

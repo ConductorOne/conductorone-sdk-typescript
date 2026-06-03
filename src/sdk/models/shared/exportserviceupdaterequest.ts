@@ -13,13 +13,21 @@ import {
  * The ExportServiceUpdateRequest message.
  */
 export type ExportServiceUpdateRequest = {
-  exporter?: ExporterInput | null | undefined;
+  /**
+   * The Exporter message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named export_to. Only a single field of the following list may be set at a time:
+   *   - datasource
+   */
+  exporter?: ExporterInput | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type ExportServiceUpdateRequest$Outbound = {
-  exporter?: ExporterInput$Outbound | null | undefined;
+  exporter?: ExporterInput$Outbound | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -29,7 +37,7 @@ export const ExportServiceUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ExportServiceUpdateRequest
 > = z.object({
-  exporter: z.nullable(ExporterInput$outboundSchema).optional(),
+  exporter: ExporterInput$outboundSchema.optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 

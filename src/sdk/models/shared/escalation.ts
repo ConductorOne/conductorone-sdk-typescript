@@ -43,9 +43,6 @@ import {
  *   - skipStep
  */
 export type Escalation = {
-  /**
-   * The CancelTicket message.
-   */
   cancelTicket?: CancelTicket | null | undefined;
   /**
    * The escalationComment field.
@@ -57,9 +54,6 @@ export type Escalation = {
   expiration?: number | null | undefined;
   reassignToApprovers?: ReassignToApprovers | null | undefined;
   replacePolicy?: ReplacePolicy | null | undefined;
-  /**
-   * The SkipStep message.
-   */
   skipStep?: SkipStep | null | undefined;
 };
 

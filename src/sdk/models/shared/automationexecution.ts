@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -29,6 +30,8 @@ export const AutomationExecutionState = {
   AutomationExecutionStateError: "AUTOMATION_EXECUTION_STATE_ERROR",
   AutomationExecutionStateTerminate: "AUTOMATION_EXECUTION_STATE_TERMINATE",
   AutomationExecutionStateWaiting: "AUTOMATION_EXECUTION_STATE_WAITING",
+  AutomationExecutionStatePausedByCircuitBreaker:
+    "AUTOMATION_EXECUTION_STATE_PAUSED_BY_CIRCUIT_BREAKER",
 } as const;
 /**
  * The state field.
@@ -46,7 +49,10 @@ export type AutomationExecution = {
    */
   automationTemplateId?: string | null | undefined;
   completedAt?: Date | null | undefined;
-  context?: AutomationContext | null | undefined;
+  /**
+   * The AutomationContext message.
+   */
+  automationContext?: AutomationContext | undefined;
   createdAt?: Date | null | undefined;
   /**
    * The currentVersion field.
@@ -86,7 +92,7 @@ export const AutomationExecution$inboundSchema: z.ZodType<
   completedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  context: z.nullable(AutomationContext$inboundSchema).optional(),
+  context: AutomationContext$inboundSchema.optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -101,6 +107,10 @@ export const AutomationExecution$inboundSchema: z.ZodType<
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "context": "automationContext",
+  });
 });
 
 export function automationExecutionFromJSON(

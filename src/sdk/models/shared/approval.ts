@@ -110,7 +110,18 @@ export type Approval = {
    */
   assigned?: boolean | null | undefined;
   entitlementOwners?: EntitlementOwnerApproval | null | undefined;
-  escalation?: Escalation | null | undefined;
+  /**
+   * The Escalation message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named escalation_policy. Only a single field of the following list may be set at a time:
+   *   - replacePolicy
+   *   - reassignToApprovers
+   *   - cancelTicket
+   *   - skipStep
+   */
+  escalation?: Escalation | undefined;
   /**
    * Whether escalation is enabled for this step.
    */
@@ -157,7 +168,7 @@ export const Approval$inboundSchema: z.ZodType<
   assigned: z.nullable(z.boolean()).optional(),
   entitlementOwners: z.nullable(EntitlementOwnerApproval$inboundSchema)
     .optional(),
-  escalation: z.nullable(Escalation$inboundSchema).optional(),
+  escalation: Escalation$inboundSchema.optional(),
   escalationEnabled: z.nullable(z.boolean()).optional(),
   expression: z.nullable(ExpressionApproval$inboundSchema).optional(),
   group: z.nullable(AppGroupApproval$inboundSchema).optional(),
@@ -180,7 +191,7 @@ export type Approval$Outbound = {
   appOwners?: AppOwnerApproval$Outbound | null | undefined;
   assigned?: boolean | null | undefined;
   entitlementOwners?: EntitlementOwnerApproval$Outbound | null | undefined;
-  escalation?: Escalation$Outbound | null | undefined;
+  escalation?: Escalation$Outbound | undefined;
   escalationEnabled?: boolean | null | undefined;
   expression?: ExpressionApproval$Outbound | null | undefined;
   group?: AppGroupApproval$Outbound | null | undefined;
@@ -209,7 +220,7 @@ export const Approval$outboundSchema: z.ZodType<
   assigned: z.nullable(z.boolean()).optional(),
   entitlementOwners: z.nullable(EntitlementOwnerApproval$outboundSchema)
     .optional(),
-  escalation: z.nullable(Escalation$outboundSchema).optional(),
+  escalation: Escalation$outboundSchema.optional(),
   escalationEnabled: z.nullable(z.boolean()).optional(),
   expression: z.nullable(ExpressionApproval$outboundSchema).optional(),
   group: z.nullable(AppGroupApproval$outboundSchema).optional(),

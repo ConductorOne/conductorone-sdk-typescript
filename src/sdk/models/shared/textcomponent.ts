@@ -16,7 +16,7 @@ export type TextComponent = {
   /**
    * The markdown field.
    */
-  markdown?: boolean | undefined;
+  markdown?: boolean | null | undefined;
   /**
    * DynamicString can be a literal value, a JSON pointer path, or a function call.
    *
@@ -36,7 +36,7 @@ export const TextComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  markdown: z.boolean().optional(),
+  markdown: z.nullable(z.boolean()).optional(),
   text: DynamicString$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

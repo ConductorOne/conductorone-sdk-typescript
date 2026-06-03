@@ -20,7 +20,10 @@ export type ConnectorView = {
    * JSONPATH expression indicating the location of the ConnectorCapabilities object in the expanded array.
    */
   capabilitiesPath?: string | null | undefined;
-  connector?: Connector | null | undefined;
+  /**
+   * A Connector is used to sync objects into Apps
+   */
+  connector?: Connector | undefined;
   /**
    * JSONPATH expression indicating the location of the User object in the expanded array. This is the user that is a direct target of the ticket without a specific relationship to a potentially non-existent app user.
    */
@@ -35,7 +38,7 @@ export const ConnectorView$inboundSchema: z.ZodType<
 > = z.object({
   appPath: z.nullable(z.string()).optional(),
   capabilitiesPath: z.nullable(z.string()).optional(),
-  connector: z.nullable(Connector$inboundSchema).optional(),
+  connector: Connector$inboundSchema.optional(),
   usersPath: z.nullable(z.string()).optional(),
 });
 

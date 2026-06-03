@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,7 +16,10 @@ import {
  * The TaskAuditActionSubmitted message.
  */
 export type TaskAuditActionSubmitted = {
-  action?: SubmittedTaskAction | null | undefined;
+  /**
+   * Represents a single action that was performed on a task.
+   */
+  submittedTaskAction?: SubmittedTaskAction | undefined;
 };
 
 /** @internal */
@@ -24,7 +28,11 @@ export const TaskAuditActionSubmitted$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  action: z.nullable(SubmittedTaskAction$inboundSchema).optional(),
+  action: SubmittedTaskAction$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "action": "submittedTaskAction",
+  });
 });
 
 export function taskAuditActionSubmittedFromJSON(

@@ -10,9 +10,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppResourceOwnersListOwnerIDsRequest = {
-  appId: string | null;
-  resourceTypeId: string | null;
-  resourceId: string | null;
+  appId: string;
+  resourceTypeId: string;
+  resourceId: string;
 };
 
 export type C1ApiAppV1AppResourceOwnersListOwnerIDsResponse = {
@@ -38,9 +38,9 @@ export type C1ApiAppV1AppResourceOwnersListOwnerIDsResponse = {
 
 /** @internal */
 export type C1ApiAppV1AppResourceOwnersListOwnerIDsRequest$Outbound = {
-  app_id: string | null;
-  resource_type_id: string | null;
-  resource_id: string | null;
+  app_id: string;
+  resource_type_id: string;
+  resource_id: string;
 };
 
 /** @internal */
@@ -50,9 +50,9 @@ export const C1ApiAppV1AppResourceOwnersListOwnerIDsRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiAppV1AppResourceOwnersListOwnerIDsRequest
   > = z.object({
-    appId: z.nullable(z.string()),
-    resourceTypeId: z.nullable(z.string()),
-    resourceId: z.nullable(z.string()),
+    appId: z.string(),
+    resourceTypeId: z.string(),
+    resourceId: z.string(),
   }).transform((v) => {
     return remap$(v, {
       appId: "app_id",

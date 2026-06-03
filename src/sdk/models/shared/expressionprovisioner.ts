@@ -14,7 +14,7 @@ export type ExpressionProvisioner = {
   /**
    * Whether the provisioner can reassign the task.
    */
-  allowReassignment?: boolean | undefined;
+  allowReassignment?: boolean | null | undefined;
   /**
    * The CEL expressions to evaluate.
    */
@@ -31,13 +31,13 @@ export const ExpressionProvisioner$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  allowReassignment: z.boolean().optional(),
+  allowReassignment: z.nullable(z.boolean()).optional(),
   expressions: z.nullable(z.array(z.string())).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
 export type ExpressionProvisioner$Outbound = {
-  allowReassignment?: boolean | undefined;
+  allowReassignment?: boolean | null | undefined;
   expressions?: Array<string> | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
 };
@@ -48,7 +48,7 @@ export const ExpressionProvisioner$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ExpressionProvisioner
 > = z.object({
-  allowReassignment: z.boolean().optional(),
+  allowReassignment: z.nullable(z.boolean()).optional(),
   expressions: z.nullable(z.array(z.string())).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
 });

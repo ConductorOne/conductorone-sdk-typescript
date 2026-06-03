@@ -22,7 +22,7 @@ export type BulkCreateFindingTasksRequest = {
   /**
    * Optional policy ID to use for the created tasks. Defaults to the app's grant policy.
    */
-  policyId?: string | undefined;
+  policyId?: string | null | undefined;
   /**
    * Individual finding references to create tasks for (by-ID mode).
    */
@@ -35,7 +35,7 @@ export type BulkCreateFindingTasksRequest = {
 
 /** @internal */
 export type BulkCreateFindingTasksRequest$Outbound = {
-  policyId?: string | undefined;
+  policyId?: string | null | undefined;
   refs?: Array<FindingRef$Outbound> | null | undefined;
   searchRequest?: FindingSearchRequest$Outbound | undefined;
 };
@@ -46,7 +46,7 @@ export const BulkCreateFindingTasksRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BulkCreateFindingTasksRequest
 > = z.object({
-  policyId: z.string().optional(),
+  policyId: z.nullable(z.string()).optional(),
   refs: z.nullable(z.array(FindingRef$outboundSchema)).optional(),
   findingSearchRequest: FindingSearchRequest$outboundSchema.optional(),
 }).transform((v) => {

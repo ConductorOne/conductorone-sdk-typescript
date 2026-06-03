@@ -12,7 +12,10 @@ import { App, App$inboundSchema } from "./app.js";
  * Returns the updated app's new values.
  */
 export type UpdateAppResponse = {
-  app?: App | null | undefined;
+  /**
+   * The App object provides all of the details for an app, as well as some configuration.
+   */
+  app?: App | undefined;
 };
 
 /** @internal */
@@ -21,7 +24,7 @@ export const UpdateAppResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  app: z.nullable(App$inboundSchema).optional(),
+  app: App$inboundSchema.optional(),
 });
 
 export function updateAppResponseFromJSON(

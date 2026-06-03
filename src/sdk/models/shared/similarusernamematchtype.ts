@@ -14,7 +14,7 @@ export type SimilarUsernameMatchType = {
   /**
    * The proposedIdentityUserId field.
    */
-  proposedIdentityUserId?: string | undefined;
+  proposedIdentityUserId?: string | null | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const SimilarUsernameMatchType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  proposedIdentityUserId: z.string().optional(),
+  proposedIdentityUserId: z.nullable(z.string()).optional(),
 });
 
 export function similarUsernameMatchTypeFromJSON(

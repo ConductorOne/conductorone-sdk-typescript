@@ -3,30 +3,59 @@
  */
 
 import * as z from "zod/v3";
+import {
+  OIDCSettings,
+  OIDCSettings$Outbound,
+  OIDCSettings$outboundSchema,
+} from "./oidcsettings.js";
+import {
+  SPIFFESettings,
+  SPIFFESettings$Outbound,
+  SPIFFESettings$outboundSchema,
+} from "./spiffesettings.js";
 
 /**
- * WorkloadFederationProvider represents a tenant-level OIDC issuer registration.
+ * WorkloadFederationProvider represents a tenant-level workload identity
+ *
+ * @remarks
+ *  issuer registration. Two issuer schemes are supported:
+ *
+ *    - https://...   classic OIDC issuer; `settings.oidc` MUST be set.
+ *    - spiffe://...  SPIFFE trust-domain URI; `settings.spiffe` MUST be set.
+ *
+ *  The (well_known_provider, issuer_url scheme, settings oneof) tuple is a
+ *  tri-invariant: SPIFFE wkp ⟺ spiffe:// issuer ⟺ settings.spiffe set; any
+ *  other wkp ⟺ https:// issuer ⟺ settings.oidc set. Issuer URLs are unique
+ *  within tenant.
+ *
+ * This message contains a oneof named settings. Only a single field of the following list may be set at a time:
+ *   - oidc
+ *   - spiffe
  */
 export type WorkloadFederationProviderInput = {
   /**
    * A description of what this provider is for.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * Whether the provider is disabled. Disabled providers reject all token exchanges.
    */
-  disabled?: boolean | undefined;
+  disabled?: boolean | null | undefined;
   /**
    * The display name of the provider.
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
+  oidc?: OIDCSettings | null | undefined;
+  spiffe?: SPIFFESettings | null | undefined;
 };
 
 /** @internal */
 export type WorkloadFederationProviderInput$Outbound = {
-  description?: string | undefined;
-  disabled?: boolean | undefined;
-  displayName?: string | undefined;
+  description?: string | null | undefined;
+  disabled?: boolean | null | undefined;
+  displayName?: string | null | undefined;
+  oidc?: OIDCSettings$Outbound | null | undefined;
+  spiffe?: SPIFFESettings$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -35,9 +64,11 @@ export const WorkloadFederationProviderInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WorkloadFederationProviderInput
 > = z.object({
-  description: z.string().optional(),
-  disabled: z.boolean().optional(),
-  displayName: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
+  disabled: z.nullable(z.boolean()).optional(),
+  displayName: z.nullable(z.string()).optional(),
+  oidc: z.nullable(OIDCSettings$outboundSchema).optional(),
+  spiffe: z.nullable(SPIFFESettings$outboundSchema).optional(),
 });
 
 export function workloadFederationProviderInputToJSON(

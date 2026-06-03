@@ -27,7 +27,10 @@ export type AppUserServiceUpdateResponseExpanded = {
  * The AppUserServiceUpdateResponse message.
  */
 export type AppUserServiceUpdateResponse = {
-  appUserView?: AppUserView | null | undefined;
+  /**
+   * The AppUserView contains an app user as well as paths for apps, identity users, and last usage in expanded arrays.
+   */
+  appUserView?: AppUserView | undefined;
   /**
    * The expanded field.
    */
@@ -68,7 +71,7 @@ export const AppUserServiceUpdateResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appUserView: z.nullable(AppUserView$inboundSchema).optional(),
+  appUserView: AppUserView$inboundSchema.optional(),
   expanded: z.nullable(
     z.array(z.lazy(() => AppUserServiceUpdateResponseExpanded$inboundSchema)),
   ).optional(),

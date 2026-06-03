@@ -12,6 +12,6 @@ let value: FunctionsServiceGetFunctionResponse = {};
 
 ## Fields
 
-| Field                                                       | Type                                                        | Required                                                    | Description                                                 |
-| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `function`                                                  | [shared.FunctionT](../../../sdk/models/shared/functiont.md) | :heavy_minus_sign:                                          | N/A                                                         |
+| Field                                                             | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `function`                                                        | [shared.FunctionT](../../../sdk/models/shared/functiont.md)       | :heavy_minus_sign:                                                | Function represents a customer-provided code extension in the API |

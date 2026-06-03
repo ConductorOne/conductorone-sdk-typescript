@@ -12,7 +12,15 @@ import { Policy, Policy$inboundSchema } from "./policy.js";
  * The UpdatePolicyResponse message contains the updated policy object.
  */
 export type UpdatePolicyResponse = {
-  policy?: Policy | null | undefined;
+  /**
+   * A policy defines a workflow (sequence of steps) that runs when processing
+   *
+   * @remarks
+   *  access requests, reviews, or revocations. Policies support conditional
+   *  routing: different conditions can trigger different step sequences, with a
+   *  baseline fallback.
+   */
+  policy?: Policy | undefined;
 };
 
 /** @internal */
@@ -21,7 +29,7 @@ export const UpdatePolicyResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  policy: z.nullable(Policy$inboundSchema).optional(),
+  policy: Policy$inboundSchema.optional(),
 });
 
 export function updatePolicyResponseFromJSON(

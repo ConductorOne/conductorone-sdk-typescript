@@ -84,71 +84,71 @@ export type PaperSecret = {
   /**
    * The contentDeleted field.
    */
-  contentDeleted?: boolean | undefined;
-  contentExpiresAt?: Date | undefined;
+  contentDeleted?: boolean | null | undefined;
+  contentExpiresAt?: Date | null | undefined;
   /**
    * Whether content has been set (text uploaded or file uploaded)
    */
-  contentReady?: boolean | undefined;
+  contentReady?: boolean | null | undefined;
   /**
    * The contentType field.
    */
-  contentType?: string | undefined;
-  createdAt?: Date | undefined;
+  contentType?: string | null | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * Creator
    */
-  creatorUserId?: string | undefined;
+  creatorUserId?: string | null | undefined;
   /**
    * The currentViews field.
    */
-  currentViews?: number | undefined;
-  deletedAt?: Date | undefined;
+  currentViews?: number | null | undefined;
+  deletedAt?: Date | null | undefined;
   /**
    * From Vault
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
   /**
    * File metadata
    */
-  fileSize?: number | undefined;
+  fileSize?: number | null | undefined;
   /**
    * For FILE secrets: original filename (sanitized)
    */
-  filename?: string | undefined;
+  filename?: string | null | undefined;
   /**
    * The inputFormat field.
    */
-  inputFormat?: InputFormat | undefined;
+  inputFormat?: InputFormat | null | undefined;
   /**
    * View tracking
    */
-  maxViews?: number | undefined;
+  maxViews?: number | null | undefined;
   /**
    * The secretType field.
    */
-  secretType?: PaperSecretSecretType | undefined;
+  secretType?: PaperSecretSecretType | null | undefined;
   /**
    * Human-friendly share code (XXXX-XXXX-XXXX) for shareable URLs
    */
-  shareCode?: string | undefined;
+  shareCode?: string | null | undefined;
   /**
    * URL to share with recipients (populated when content_ready is true)
    */
-  shareUrl?: string | undefined;
+  shareUrl?: string | null | undefined;
   /**
    * From PaperVault
    */
-  sharingMode?: PaperSecretSharingMode | undefined;
+  sharingMode?: PaperSecretSharingMode | null | undefined;
   /**
    * Computed status
    */
-  status?: PaperSecretStatus | undefined;
-  updatedAt?: Date | undefined;
+  status?: PaperSecretStatus | null | undefined;
+  updatedAt?: Date | null | undefined;
   /**
    * Vault.id - primary identifier for the secret
    */
-  vaultId?: string | undefined;
+  vaultId?: string | null | undefined;
 };
 
 /** @internal */
@@ -187,31 +187,34 @@ export const PaperSecret$inboundSchema: z.ZodType<
 > = z.object({
   allowedEmails: z.nullable(z.array(z.string())).optional(),
   allowedUserIds: z.nullable(z.array(z.string())).optional(),
-  contentDeleted: z.boolean().optional(),
-  contentExpiresAt: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
+  contentDeleted: z.nullable(z.boolean()).optional(),
+  contentExpiresAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  contentReady: z.boolean().optional(),
-  contentType: z.string().optional(),
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  creatorUserId: z.string().optional(),
-  currentViews: z.number().int().optional(),
-  deletedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  displayName: z.string().optional(),
-  fileSize: z.string().transform(v => parseInt(v, 10)).optional(),
-  filename: z.string().optional(),
-  inputFormat: InputFormat$inboundSchema.optional(),
-  maxViews: z.number().int().optional(),
-  secretType: PaperSecretSecretType$inboundSchema.optional(),
-  shareCode: z.string().optional(),
-  shareUrl: z.string().optional(),
-  sharingMode: PaperSecretSharingMode$inboundSchema.optional(),
-  status: PaperSecretStatus$inboundSchema.optional(),
-  updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  vaultId: z.string().optional(),
+  contentReady: z.nullable(z.boolean()).optional(),
+  contentType: z.nullable(z.string()).optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  creatorUserId: z.nullable(z.string()).optional(),
+  currentViews: z.nullable(z.number().int()).optional(),
+  deletedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  displayName: z.nullable(z.string()).optional(),
+  fileSize: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
+  filename: z.nullable(z.string()).optional(),
+  inputFormat: z.nullable(InputFormat$inboundSchema).optional(),
+  maxViews: z.nullable(z.number().int()).optional(),
+  secretType: z.nullable(PaperSecretSecretType$inboundSchema).optional(),
+  shareCode: z.nullable(z.string()).optional(),
+  shareUrl: z.nullable(z.string()).optional(),
+  sharingMode: z.nullable(PaperSecretSharingMode$inboundSchema).optional(),
+  status: z.nullable(PaperSecretStatus$inboundSchema).optional(),
+  updatedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  vaultId: z.nullable(z.string()).optional(),
 });
 
 export function paperSecretFromJSON(

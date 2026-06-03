@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -45,8 +46,23 @@ export type WebhookInstance = {
    */
   id?: string | null | undefined;
   lastAttemptedAt?: Date | null | undefined;
-  source?: WebhookSource | null | undefined;
-  spec?: WebhookSpec | null | undefined;
+  /**
+   * The WebhookSource message.
+   *
+   * @remarks
+   *
+   * This message contains a oneof named source. Only a single field of the following list may be set at a time:
+   *   - test
+   *   - policyPostAction
+   *   - approvalStep
+   *   - provisionStep
+   *   - workflowStep
+   */
+  webhookSource?: WebhookSource | undefined;
+  /**
+   * The WebhookSpec message.
+   */
+  webhookSpec?: WebhookSpec | undefined;
   /**
    * The state field.
    */
@@ -85,13 +101,18 @@ export const WebhookInstance$inboundSchema: z.ZodType<
   lastAttemptedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  source: z.nullable(WebhookSource$inboundSchema).optional(),
-  spec: z.nullable(WebhookSpec$inboundSchema).optional(),
+  source: WebhookSource$inboundSchema.optional(),
+  spec: WebhookSpec$inboundSchema.optional(),
   state: z.nullable(WebhookInstanceState$inboundSchema).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   webhookId: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "source": "webhookSource",
+    "spec": "webhookSpec",
+  });
 });
 
 export function webhookInstanceFromJSON(

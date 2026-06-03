@@ -29,7 +29,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 
 async function run() {
   const result = await conductoroneSDKTypescript.appResource.list({
-    appId: null,
+    appId: "<id>",
     appResourceTypeId: "<id>",
   });
 
@@ -58,7 +58,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 
 async function run() {
   const res = await appResourceList(conductoroneSDKTypescript, {
-    appId: null,
+    appId: "<id>",
     appResourceTypeId: "<id>",
   });
   if (res.ok) {

@@ -19,7 +19,10 @@ export type AppResourceTypeView = {
    * JSONPATH expression indicating the location of the App object in the  array
    */
   appPath?: string | null | undefined;
-  appResourceType?: AppResourceType | null | undefined;
+  /**
+   * The AppResourceType is referenced by an app entitlement defining its resource types. Commonly things like Group or Role.
+   */
+  appResourceType?: AppResourceType | undefined;
 };
 
 /** @internal */
@@ -29,7 +32,7 @@ export const AppResourceTypeView$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   appPath: z.nullable(z.string()).optional(),
-  appResourceType: z.nullable(AppResourceType$inboundSchema).optional(),
+  appResourceType: AppResourceType$inboundSchema.optional(),
 });
 
 export function appResourceTypeViewFromJSON(

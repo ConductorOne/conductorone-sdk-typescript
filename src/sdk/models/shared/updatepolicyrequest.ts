@@ -13,13 +13,21 @@ import {
  * The UpdatePolicyRequest message contains the policy object to update and a field mask to indicate which fields to update. It uses URL value for input.
  */
 export type UpdatePolicyRequest = {
-  policy?: PolicyInput | null | undefined;
+  /**
+   * A policy defines a workflow (sequence of steps) that runs when processing
+   *
+   * @remarks
+   *  access requests, reviews, or revocations. Policies support conditional
+   *  routing: different conditions can trigger different step sequences, with a
+   *  baseline fallback.
+   */
+  policy?: PolicyInput | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type UpdatePolicyRequest$Outbound = {
-  policy?: PolicyInput$Outbound | null | undefined;
+  policy?: PolicyInput$Outbound | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -29,7 +37,7 @@ export const UpdatePolicyRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdatePolicyRequest
 > = z.object({
-  policy: z.nullable(PolicyInput$outboundSchema).optional(),
+  policy: PolicyInput$outboundSchema.optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 
