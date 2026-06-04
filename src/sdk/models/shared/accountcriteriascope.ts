@@ -45,7 +45,7 @@ export type AccountCriteriaScope = {
   /**
    * The accountDomain field.
    */
-  accountDomain?: AccountDomain | undefined;
+  accountDomain?: AccountDomain | null | undefined;
   /**
    * The accountTypes field.
    */
@@ -57,7 +57,7 @@ export type AccountCriteriaScope = {
   /**
    * The noAccountOwner field.
    */
-  noAccountOwner?: boolean | undefined;
+  noAccountOwner?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -105,18 +105,18 @@ export const AccountCriteriaScope$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accountDomain: AccountDomain$inboundSchema.optional(),
+  accountDomain: z.nullable(AccountDomain$inboundSchema).optional(),
   accountTypes: z.nullable(z.array(AccountTypes$inboundSchema)).optional(),
   appUserStatuses: z.nullable(z.array(AppUserStatuses$inboundSchema))
     .optional(),
-  noAccountOwner: z.boolean().optional(),
+  noAccountOwner: z.nullable(z.boolean()).optional(),
 });
 /** @internal */
 export type AccountCriteriaScope$Outbound = {
-  accountDomain?: string | undefined;
+  accountDomain?: string | null | undefined;
   accountTypes?: Array<string> | null | undefined;
   appUserStatuses?: Array<string> | null | undefined;
-  noAccountOwner?: boolean | undefined;
+  noAccountOwner?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -125,11 +125,11 @@ export const AccountCriteriaScope$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AccountCriteriaScope
 > = z.object({
-  accountDomain: AccountDomain$outboundSchema.optional(),
+  accountDomain: z.nullable(AccountDomain$outboundSchema).optional(),
   accountTypes: z.nullable(z.array(AccountTypes$outboundSchema)).optional(),
   appUserStatuses: z.nullable(z.array(AppUserStatuses$outboundSchema))
     .optional(),
-  noAccountOwner: z.boolean().optional(),
+  noAccountOwner: z.nullable(z.boolean()).optional(),
 });
 
 export function accountCriteriaScopeToJSON(

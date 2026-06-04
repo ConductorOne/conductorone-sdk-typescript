@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   FindingRoutingRule,
   FindingRoutingRule$Outbound,
@@ -14,15 +13,12 @@ import {
  * The UpdateFindingRoutingRuleRequest message.
  */
 export type UpdateFindingRoutingRuleRequest = {
-  /**
-   * The FindingRoutingRule message.
-   */
-  findingRoutingRule?: FindingRoutingRule | undefined;
+  routingRule?: FindingRoutingRule | null | undefined;
 };
 
 /** @internal */
 export type UpdateFindingRoutingRuleRequest$Outbound = {
-  routingRule?: FindingRoutingRule$Outbound | undefined;
+  routingRule?: FindingRoutingRule$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -31,11 +27,7 @@ export const UpdateFindingRoutingRuleRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateFindingRoutingRuleRequest
 > = z.object({
-  findingRoutingRule: FindingRoutingRule$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    findingRoutingRule: "routingRule",
-  });
+  routingRule: z.nullable(FindingRoutingRule$outboundSchema).optional(),
 });
 
 export function updateFindingRoutingRuleRequestToJSON(

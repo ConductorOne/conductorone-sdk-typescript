@@ -32,6 +32,19 @@ export type CreateAppRequestIdentityMatching = OpenEnum<
  */
 export type CreateAppRequest = {
   /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  matching URL-safe ASCII; total serialized ≤4096 bytes. Keys starting
+   *  with `c1/` are reserved for server-managed use and rejected on write.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * Sets entitlement owners on the app.
    */
   appEntitlementOwnerRefs?: Array<AppEntitlementRef> | null | undefined;
@@ -46,7 +59,7 @@ export type CreateAppRequest = {
   /**
    * Creates the app with this display name.
    */
-  displayName: string;
+  displayName: string | null;
   /**
    * Creates the app with this grant policy.
    */
@@ -58,7 +71,7 @@ export type CreateAppRequest = {
   /**
    * Instructions shown to users in the access request form when requesting access for this app.
    */
-  instructions?: string | undefined;
+  instructions?: string | null | undefined;
   /**
    * Creates the app with this monthly cost per seat.
    */
@@ -86,16 +99,17 @@ export const CreateAppRequestIdentityMatching$outboundSchema: z.ZodType<
 
 /** @internal */
 export type CreateAppRequest$Outbound = {
+  annotations?: { [k: string]: string } | undefined;
   appEntitlementOwnerRefs?:
     | Array<AppEntitlementRef$Outbound>
     | null
     | undefined;
   certifyPolicyId?: string | null | undefined;
   description?: string | null | undefined;
-  displayName: string;
+  displayName: string | null;
   grantPolicyId?: string | null | undefined;
   identityMatching?: string | null | undefined;
-  instructions?: string | undefined;
+  instructions?: string | null | undefined;
   monthlyCostUsd?: number | null | undefined;
   owners?: Array<string> | null | undefined;
   revokePolicyId?: string | null | undefined;
@@ -108,15 +122,16 @@ export const CreateAppRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAppRequest
 > = z.object({
+  annotations: z.record(z.string()).optional(),
   appEntitlementOwnerRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
     .optional(),
   certifyPolicyId: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
-  displayName: z.string(),
+  displayName: z.nullable(z.string()),
   grantPolicyId: z.nullable(z.string()).optional(),
   identityMatching: z.nullable(CreateAppRequestIdentityMatching$outboundSchema)
     .optional(),
-  instructions: z.string().optional(),
+  instructions: z.nullable(z.string()).optional(),
   monthlyCostUsd: z.nullable(z.number().int()).optional(),
   owners: z.nullable(z.array(z.string())).optional(),
   revokePolicyId: z.nullable(z.string()).optional(),

@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   FindingRef,
   FindingRef$Outbound,
@@ -22,22 +21,19 @@ export type BulkCreateFindingTasksRequest = {
   /**
    * Optional policy ID to use for the created tasks. Defaults to the app's grant policy.
    */
-  policyId?: string | undefined;
+  policyId?: string | null | undefined;
   /**
    * Individual finding references to create tasks for (by-ID mode).
    */
   refs?: Array<FindingRef> | null | undefined;
-  /**
-   * The FindingSearchRequest message.
-   */
-  findingSearchRequest?: FindingSearchRequest | undefined;
+  searchRequest?: FindingSearchRequest | null | undefined;
 };
 
 /** @internal */
 export type BulkCreateFindingTasksRequest$Outbound = {
-  policyId?: string | undefined;
+  policyId?: string | null | undefined;
   refs?: Array<FindingRef$Outbound> | null | undefined;
-  searchRequest?: FindingSearchRequest$Outbound | undefined;
+  searchRequest?: FindingSearchRequest$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -46,13 +42,9 @@ export const BulkCreateFindingTasksRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BulkCreateFindingTasksRequest
 > = z.object({
-  policyId: z.string().optional(),
+  policyId: z.nullable(z.string()).optional(),
   refs: z.nullable(z.array(FindingRef$outboundSchema)).optional(),
-  findingSearchRequest: FindingSearchRequest$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    findingSearchRequest: "searchRequest",
-  });
+  searchRequest: z.nullable(FindingSearchRequest$outboundSchema).optional(),
 });
 
 export function bulkCreateFindingTasksRequestToJSON(

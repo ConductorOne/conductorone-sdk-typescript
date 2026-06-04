@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,18 +22,8 @@ export type GeneratePassword = {
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  passwordPolicyId?: string | undefined;
-  /**
-   * GeneratePasswordPolicy defines inline password generation rules.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named character_rules. Only a single field of the following list may be set at a time:
-   *   - noRestrictions
-   *   - customCharacters
-   *   - excludedCharacters
-   */
-  generatePasswordPolicy?: GeneratePasswordPolicy | undefined;
+  passwordPolicyId?: string | null | undefined;
+  policy?: GeneratePasswordPolicy | null | undefined;
 };
 
 /** @internal */
@@ -43,17 +32,13 @@ export const GeneratePassword$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  passwordPolicyId: z.string().optional(),
-  policy: GeneratePasswordPolicy$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "policy": "generatePasswordPolicy",
-  });
+  passwordPolicyId: z.nullable(z.string()).optional(),
+  policy: z.nullable(GeneratePasswordPolicy$inboundSchema).optional(),
 });
 /** @internal */
 export type GeneratePassword$Outbound = {
-  passwordPolicyId?: string | undefined;
-  policy?: GeneratePasswordPolicy$Outbound | undefined;
+  passwordPolicyId?: string | null | undefined;
+  policy?: GeneratePasswordPolicy$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -62,12 +47,8 @@ export const GeneratePassword$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GeneratePassword
 > = z.object({
-  passwordPolicyId: z.string().optional(),
-  generatePasswordPolicy: GeneratePasswordPolicy$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    generatePasswordPolicy: "policy",
-  });
+  passwordPolicyId: z.nullable(z.string()).optional(),
+  policy: z.nullable(GeneratePasswordPolicy$outboundSchema).optional(),
 });
 
 export function generatePasswordToJSON(

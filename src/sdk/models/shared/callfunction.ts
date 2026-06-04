@@ -12,9 +12,14 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type CallFunction = {
   /**
-   * The args field.
+   * Arg name → CEL expression. Each value is evaluated against the
+   *
+   * @remarks
+   *  workflow execution context (subject + completed step outputs) and the
+   *  resolved values are passed to the function as JSON. Plain literals
+   *  must be quoted as CEL strings (e.g. "'static-value'").
    */
-  args?: { [k: string]: string } | null | undefined;
+  args?: { [k: string]: string } | undefined;
   /**
    * The functionId field.
    */
@@ -27,12 +32,12 @@ export const CallFunction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  args: z.nullable(z.record(z.string())).optional(),
+  args: z.record(z.string()).optional(),
   functionId: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type CallFunction$Outbound = {
-  args?: { [k: string]: string } | null | undefined;
+  args?: { [k: string]: string } | undefined;
   functionId?: string | null | undefined;
 };
 
@@ -42,7 +47,7 @@ export const CallFunction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CallFunction
 > = z.object({
-  args: z.nullable(z.record(z.string())).optional(),
+  args: z.record(z.string()).optional(),
   functionId: z.nullable(z.string()).optional(),
 });
 

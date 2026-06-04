@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiDirectoryV1DirectoryServiceDeleteRequest = {
-  appId: string | null;
+  appId: string;
   directoryServiceDeleteRequest?:
     | shared.DirectoryServiceDeleteRequest
     | undefined;
@@ -39,7 +39,7 @@ export type C1ApiDirectoryV1DirectoryServiceDeleteResponse = {
 
 /** @internal */
 export type C1ApiDirectoryV1DirectoryServiceDeleteRequest$Outbound = {
-  app_id: string | null;
+  app_id: string;
   DirectoryServiceDeleteRequest?:
     | shared.DirectoryServiceDeleteRequest$Outbound
     | undefined;
@@ -52,7 +52,7 @@ export const C1ApiDirectoryV1DirectoryServiceDeleteRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiDirectoryV1DirectoryServiceDeleteRequest
   > = z.object({
-    appId: z.nullable(z.string()),
+    appId: z.string(),
     directoryServiceDeleteRequest: shared
       .DirectoryServiceDeleteRequest$outboundSchema.optional(),
   }).transform((v) => {

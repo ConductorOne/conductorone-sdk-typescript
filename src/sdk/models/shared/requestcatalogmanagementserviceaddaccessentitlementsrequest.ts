@@ -19,13 +19,13 @@ export type RequestCatalogManagementServiceAddAccessEntitlementsRequest = {
   /**
    * List of entitlements to add to the request catalog as access entitlements.
    */
-  accessEntitlements: Array<AppEntitlementRef>;
+  accessEntitlements: Array<AppEntitlementRef> | null;
 };
 
 /** @internal */
 export type RequestCatalogManagementServiceAddAccessEntitlementsRequest$Outbound =
   {
-    accessEntitlements: Array<AppEntitlementRef$Outbound>;
+    accessEntitlements: Array<AppEntitlementRef$Outbound> | null;
   };
 
 /** @internal */
@@ -35,7 +35,7 @@ export const RequestCatalogManagementServiceAddAccessEntitlementsRequest$outboun
     z.ZodTypeDef,
     RequestCatalogManagementServiceAddAccessEntitlementsRequest
   > = z.object({
-    accessEntitlements: z.array(AppEntitlementRef$outboundSchema),
+    accessEntitlements: z.nullable(z.array(AppEntitlementRef$outboundSchema)),
   });
 
 export function requestCatalogManagementServiceAddAccessEntitlementsRequestToJSON(

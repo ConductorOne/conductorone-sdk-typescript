@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,10 +15,7 @@ import {
  * The ServicePrincipalServiceGetCredentialResponse message.
  */
 export type ServicePrincipalServiceGetCredentialResponse = {
-  /**
-   * ServicePrincipalCredential represents a client credential for a service principal.
-   */
-  servicePrincipalCredential?: ServicePrincipalCredential | undefined;
+  credential?: ServicePrincipalCredential | null | undefined;
 };
 
 /** @internal */
@@ -29,11 +25,7 @@ export const ServicePrincipalServiceGetCredentialResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    credential: ServicePrincipalCredential$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "credential": "servicePrincipalCredential",
-    });
+    credential: z.nullable(ServicePrincipalCredential$inboundSchema).optional(),
   });
 
 export function servicePrincipalServiceGetCredentialResponseFromJSON(

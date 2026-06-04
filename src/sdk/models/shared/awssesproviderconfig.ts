@@ -14,18 +14,18 @@ export type AWSSESProviderConfig = {
   /**
    * Optional SES configuration set name for tracking/metrics.
    */
-  configurationSetName?: string | undefined;
+  configurationSetName?: string | null | undefined;
   /**
    * AWS region where SES identities are verified (e.g., "us-east-1").
    */
-  region?: string | undefined;
+  region?: string | null | undefined;
   /**
    * IAM role ARN for sts:AssumeRole. The trust policy should require the
    *
    * @remarks
    *  tenant's AWS External ID (GET /api/v1/settings/aws-external-id).
    */
-  roleArn?: string | undefined;
+  roleArn?: string | null | undefined;
 };
 
 /** @internal */
@@ -34,15 +34,15 @@ export const AWSSESProviderConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  configurationSetName: z.string().optional(),
-  region: z.string().optional(),
-  roleArn: z.string().optional(),
+  configurationSetName: z.nullable(z.string()).optional(),
+  region: z.nullable(z.string()).optional(),
+  roleArn: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type AWSSESProviderConfig$Outbound = {
-  configurationSetName?: string | undefined;
-  region?: string | undefined;
-  roleArn?: string | undefined;
+  configurationSetName?: string | null | undefined;
+  region?: string | null | undefined;
+  roleArn?: string | null | undefined;
 };
 
 /** @internal */
@@ -51,9 +51,9 @@ export const AWSSESProviderConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AWSSESProviderConfig
 > = z.object({
-  configurationSetName: z.string().optional(),
-  region: z.string().optional(),
-  roleArn: z.string().optional(),
+  configurationSetName: z.nullable(z.string()).optional(),
+  region: z.nullable(z.string()).optional(),
+  roleArn: z.nullable(z.string()).optional(),
 });
 
 export function awssesProviderConfigToJSON(

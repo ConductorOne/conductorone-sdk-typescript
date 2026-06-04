@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiIamV1PersonalClientServiceGetRequest = {
-  id: string | null;
+  id: string;
 };
 
 export type C1ApiIamV1PersonalClientServiceGetResponse = {
@@ -36,7 +36,7 @@ export type C1ApiIamV1PersonalClientServiceGetResponse = {
 
 /** @internal */
 export type C1ApiIamV1PersonalClientServiceGetRequest$Outbound = {
-  id: string | null;
+  id: string;
 };
 
 /** @internal */
@@ -46,7 +46,7 @@ export const C1ApiIamV1PersonalClientServiceGetRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiIamV1PersonalClientServiceGetRequest
   > = z.object({
-    id: z.nullable(z.string()),
+    id: z.string(),
   });
 
 export function c1ApiIamV1PersonalClientServiceGetRequestToJSON(

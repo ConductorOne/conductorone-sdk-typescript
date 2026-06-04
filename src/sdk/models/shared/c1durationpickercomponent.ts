@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -17,39 +16,9 @@ import { DynamicString, DynamicString$inboundSchema } from "./dynamicstring.js";
  *  Value is duration in seconds bound to the given path.
  */
 export type C1DurationPickerComponent = {
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString?: DynamicString | undefined;
-  /**
-   * DynamicNumber can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicNumber?: DynamicNumber | undefined;
-  /**
-   * DynamicNumber can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicNumber1?: DynamicNumber | undefined;
+  label?: DynamicString | null | undefined;
+  maxDurationSeconds?: DynamicNumber | null | undefined;
+  value?: DynamicNumber | null | undefined;
 };
 
 /** @internal */
@@ -58,15 +27,9 @@ export const C1DurationPickerComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  label: DynamicString$inboundSchema.optional(),
-  maxDurationSeconds: DynamicNumber$inboundSchema.optional(),
-  value: DynamicNumber$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "label": "dynamicString",
-    "maxDurationSeconds": "dynamicNumber",
-    "value": "dynamicNumber1",
-  });
+  label: z.nullable(DynamicString$inboundSchema).optional(),
+  maxDurationSeconds: z.nullable(DynamicNumber$inboundSchema).optional(),
+  value: z.nullable(DynamicNumber$inboundSchema).optional(),
 });
 
 export function c1DurationPickerComponentFromJSON(

@@ -65,7 +65,7 @@ export type FormInstanceState = OpenEnum<typeof FormInstanceState>;
  */
 export type FormInstance = {
   completed?: FormCompletedAction | null | undefined;
-  data?: { [k: string]: any } | null | undefined;
+  data?: { [k: string]: any } | undefined;
   form?: RequestSchemaForm | null | undefined;
   reassigned?: ReassignedAction | null | undefined;
   restarted?: RestartAction | null | undefined;
@@ -96,7 +96,7 @@ export const FormInstance$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   completed: z.nullable(FormCompletedAction$inboundSchema).optional(),
-  data: z.nullable(z.record(z.any())).optional(),
+  data: z.record(z.any()).optional(),
   form: z.nullable(RequestSchemaForm$inboundSchema).optional(),
   reassigned: z.nullable(ReassignedAction$inboundSchema).optional(),
   restarted: z.nullable(RestartAction$inboundSchema).optional(),
@@ -106,7 +106,7 @@ export const FormInstance$inboundSchema: z.ZodType<
 /** @internal */
 export type FormInstance$Outbound = {
   completed?: FormCompletedAction$Outbound | null | undefined;
-  data?: { [k: string]: any } | null | undefined;
+  data?: { [k: string]: any } | undefined;
   form?: RequestSchemaForm$Outbound | null | undefined;
   reassigned?: ReassignedAction$Outbound | null | undefined;
   restarted?: RestartAction$Outbound | null | undefined;
@@ -121,7 +121,7 @@ export const FormInstance$outboundSchema: z.ZodType<
   FormInstance
 > = z.object({
   completed: z.nullable(FormCompletedAction$outboundSchema).optional(),
-  data: z.nullable(z.record(z.any())).optional(),
+  data: z.record(z.any()).optional(),
   form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
   reassigned: z.nullable(ReassignedAction$outboundSchema).optional(),
   restarted: z.nullable(RestartAction$outboundSchema).optional(),

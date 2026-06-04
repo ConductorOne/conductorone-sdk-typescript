@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -54,10 +53,7 @@ export type TaskAuditConnectorActionResult = {
    */
   connectorId?: string | null | undefined;
   error?: TaskAuditErrorResult | null | undefined;
-  /**
-   * The TaskAuditPendingResult message.
-   */
-  taskAuditPendingResult?: TaskAuditPendingResult | null | undefined;
+  pending?: TaskAuditPendingResult | null | undefined;
   success?: TaskAuditSuccessResult | null | undefined;
 };
 
@@ -75,10 +71,6 @@ export const TaskAuditConnectorActionResult$inboundSchema: z.ZodType<
   error: z.nullable(TaskAuditErrorResult$inboundSchema).optional(),
   pending: z.nullable(TaskAuditPendingResult$inboundSchema).optional(),
   success: z.nullable(TaskAuditSuccessResult$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "pending": "taskAuditPendingResult",
-  });
 });
 
 export function taskAuditConnectorActionResultFromJSON(

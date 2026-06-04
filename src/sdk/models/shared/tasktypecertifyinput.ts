@@ -7,23 +7,17 @@ import * as z from "zod/v3";
 /**
  * The TaskTypeCertify message indicates that a task is a certify task and all related details.
  */
-export type TaskTypeCertifyInput = {
-  outcomeTime?: Date | null | undefined;
-};
+export type TaskTypeCertifyInput = {};
 
 /** @internal */
-export type TaskTypeCertifyInput$Outbound = {
-  outcomeTime?: string | null | undefined;
-};
+export type TaskTypeCertifyInput$Outbound = {};
 
 /** @internal */
 export const TaskTypeCertifyInput$outboundSchema: z.ZodType<
   TaskTypeCertifyInput$Outbound,
   z.ZodTypeDef,
   TaskTypeCertifyInput
-> = z.object({
-  outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = z.object({});
 
 export function taskTypeCertifyInputToJSON(
   taskTypeCertifyInput: TaskTypeCertifyInput,

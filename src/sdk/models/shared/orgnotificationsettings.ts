@@ -15,10 +15,7 @@ import {
  * OrgNotificationSettings contains organization-wide notification channel configurations and default preferences.
  */
 export type OrgNotificationSettings = {
-  /**
-   * ChannelSettings groups notification preferences for all supported channels.
-   */
-  channelSettings?: ChannelSettings | undefined;
+  channelSettings?: ChannelSettings | null | undefined;
 };
 
 /** @internal */
@@ -27,7 +24,7 @@ export const OrgNotificationSettings$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  channelSettings: ChannelSettings$inboundSchema.optional(),
+  channelSettings: z.nullable(ChannelSettings$inboundSchema).optional(),
 });
 
 export function orgNotificationSettingsFromJSON(

@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiTaskV1TaskActionsServiceHardResetRequest = {
-  taskId: string | null;
+  taskId: string;
   taskActionsServiceHardResetRequest?:
     | shared.TaskActionsServiceHardResetRequest
     | undefined;
@@ -39,7 +39,7 @@ export type C1ApiTaskV1TaskActionsServiceHardResetResponse = {
 
 /** @internal */
 export type C1ApiTaskV1TaskActionsServiceHardResetRequest$Outbound = {
-  task_id: string | null;
+  task_id: string;
   TaskActionsServiceHardResetRequest?:
     | shared.TaskActionsServiceHardResetRequest$Outbound
     | undefined;
@@ -52,7 +52,7 @@ export const C1ApiTaskV1TaskActionsServiceHardResetRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiTaskV1TaskActionsServiceHardResetRequest
   > = z.object({
-    taskId: z.nullable(z.string()),
+    taskId: z.string(),
     taskActionsServiceHardResetRequest: shared
       .TaskActionsServiceHardResetRequest$outboundSchema.optional(),
   }).transform((v) => {

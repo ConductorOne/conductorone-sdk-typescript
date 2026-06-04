@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,22 +15,7 @@ import {
  * The TenantAuthConfigServiceGetResponse message.
  */
 export type TenantAuthConfigServiceGetResponse = {
-  /**
-   * The TenantAuthConfig message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named provider_config. Only a single field of the following list may be set at a time:
-   *   - google
-   *   - microsoft
-   *   - okta
-   *   - onelogin
-   *   - jumpcloud
-   *   - pingone
-   *   - oidc
-   *   - c1Local
-   */
-  tenantAuthConfig?: TenantAuthConfig | undefined;
+  authConfig?: TenantAuthConfig | null | undefined;
 };
 
 /** @internal */
@@ -40,11 +24,7 @@ export const TenantAuthConfigServiceGetResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  authConfig: TenantAuthConfig$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "authConfig": "tenantAuthConfig",
-  });
+  authConfig: z.nullable(TenantAuthConfig$inboundSchema).optional(),
 });
 
 export function tenantAuthConfigServiceGetResponseFromJSON(

@@ -15,10 +15,7 @@ import {
  * Response containing the created requestable entry
  */
 export type RequestCatalogManagementServiceCreateRequestableEntryResponse = {
-  /**
-   * A requestable entry in a catalog
-   */
-  requestableEntry?: RequestableEntry | undefined;
+  requestableEntry?: RequestableEntry | null | undefined;
 };
 
 /** @internal */
@@ -28,7 +25,7 @@ export const RequestCatalogManagementServiceCreateRequestableEntryResponse$inbou
     z.ZodTypeDef,
     unknown
   > = z.object({
-    requestableEntry: RequestableEntry$inboundSchema.optional(),
+    requestableEntry: z.nullable(RequestableEntry$inboundSchema).optional(),
   });
 
 export function requestCatalogManagementServiceCreateRequestableEntryResponseFromJSON(

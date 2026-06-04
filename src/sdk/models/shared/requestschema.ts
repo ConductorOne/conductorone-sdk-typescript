@@ -44,7 +44,10 @@ export type RequestSchema = {
   /**
    * Controls whether the justification field is shown or hidden on the request form.
    */
-  justificationVisibility?: RequestSchemaJustificationVisibility | undefined;
+  justificationVisibility?:
+    | RequestSchemaJustificationVisibility
+    | null
+    | undefined;
   modifiedAt?: Date | null | undefined;
 };
 
@@ -75,8 +78,9 @@ export const RequestSchema$inboundSchema: z.ZodType<
   ).optional(),
   form: z.nullable(RequestSchemaForm$inboundSchema).optional(),
   id: z.nullable(z.string()).optional(),
-  justificationVisibility: RequestSchemaJustificationVisibility$inboundSchema
-    .optional(),
+  justificationVisibility: z.nullable(
+    RequestSchemaJustificationVisibility$inboundSchema,
+  ).optional(),
   modifiedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -87,7 +91,7 @@ export type RequestSchema$Outbound = {
   deletedAt?: string | null | undefined;
   form?: RequestSchemaForm$Outbound | null | undefined;
   id?: string | null | undefined;
-  justificationVisibility?: string | undefined;
+  justificationVisibility?: string | null | undefined;
   modifiedAt?: string | null | undefined;
 };
 
@@ -101,8 +105,9 @@ export const RequestSchema$outboundSchema: z.ZodType<
   deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
   id: z.nullable(z.string()).optional(),
-  justificationVisibility: RequestSchemaJustificationVisibility$outboundSchema
-    .optional(),
+  justificationVisibility: z.nullable(
+    RequestSchemaJustificationVisibility$outboundSchema,
+  ).optional(),
   modifiedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 

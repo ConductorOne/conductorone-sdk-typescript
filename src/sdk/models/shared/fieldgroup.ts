@@ -14,7 +14,7 @@ export type FieldGroup = {
   /**
    * The default field.
    */
-  default?: boolean | undefined;
+  default?: boolean | null | undefined;
   /**
    * Nice name this group (e.g. renders as a Tab label)
    */
@@ -39,7 +39,7 @@ export const FieldGroup$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  default: z.boolean().optional(),
+  default: z.nullable(z.boolean()).optional(),
   displayName: z.nullable(z.string()).optional(),
   fieldNames: z.nullable(z.array(z.string())).optional(),
   helpText: z.nullable(z.string()).optional(),

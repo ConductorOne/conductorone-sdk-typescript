@@ -10,9 +10,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1ConnectorServiceGetCredentialsRequest = {
-  appId: string | null;
-  connectorId: string | null;
-  id: string | null;
+  appId: string;
+  connectorId: string;
+  id: string;
 };
 
 export type C1ApiAppV1ConnectorServiceGetCredentialsResponse = {
@@ -38,9 +38,9 @@ export type C1ApiAppV1ConnectorServiceGetCredentialsResponse = {
 
 /** @internal */
 export type C1ApiAppV1ConnectorServiceGetCredentialsRequest$Outbound = {
-  app_id: string | null;
-  connector_id: string | null;
-  id: string | null;
+  app_id: string;
+  connector_id: string;
+  id: string;
 };
 
 /** @internal */
@@ -50,9 +50,9 @@ export const C1ApiAppV1ConnectorServiceGetCredentialsRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiAppV1ConnectorServiceGetCredentialsRequest
   > = z.object({
-    appId: z.nullable(z.string()),
-    connectorId: z.nullable(z.string()),
-    id: z.nullable(z.string()),
+    appId: z.string(),
+    connectorId: z.string(),
+    id: z.string(),
   }).transform((v) => {
     return remap$(v, {
       appId: "app_id",

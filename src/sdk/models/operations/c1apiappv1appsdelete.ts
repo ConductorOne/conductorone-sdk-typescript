@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppsDeleteRequest = {
-  id: string | null;
+  id: string;
   deleteAppRequest?: shared.DeleteAppRequest | undefined;
 };
 
@@ -35,7 +35,7 @@ export type C1ApiAppV1AppsDeleteResponse = {
 
 /** @internal */
 export type C1ApiAppV1AppsDeleteRequest$Outbound = {
-  id: string | null;
+  id: string;
   DeleteAppRequest?: shared.DeleteAppRequest$Outbound | undefined;
 };
 
@@ -45,7 +45,7 @@ export const C1ApiAppV1AppsDeleteRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiAppV1AppsDeleteRequest
 > = z.object({
-  id: z.nullable(z.string()),
+  id: z.string(),
   deleteAppRequest: shared.DeleteAppRequest$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

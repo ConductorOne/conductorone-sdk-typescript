@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -13,45 +12,20 @@ import { DynamicString, DynamicString$inboundSchema } from "./dynamicstring.js";
  * Choice represents a single option in a choice picker.
  */
 export type Choice = {
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString?: DynamicString | undefined;
+  description?: DynamicString | null | undefined;
   /**
    * The id field.
    */
-  id?: string | undefined;
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString1?: DynamicString | undefined;
+  id?: string | null | undefined;
+  label?: DynamicString | null | undefined;
 };
 
 /** @internal */
 export const Choice$inboundSchema: z.ZodType<Choice, z.ZodTypeDef, unknown> = z
   .object({
-    description: DynamicString$inboundSchema.optional(),
-    id: z.string().optional(),
-    label: DynamicString$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "description": "dynamicString",
-      "label": "dynamicString1",
-    });
+    description: z.nullable(DynamicString$inboundSchema).optional(),
+    id: z.nullable(z.string()).optional(),
+    label: z.nullable(DynamicString$inboundSchema).optional(),
   });
 
 export function choiceFromJSON(

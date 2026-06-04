@@ -18,24 +18,24 @@ export type ScopeRole = {
   /**
    * The IaaS/sparse-ACL app the (scope, role) pair lives on.
    */
-  appId?: string | undefined;
-  grantDuration?: string | undefined;
+  appId?: string | null | undefined;
+  grantDuration?: string | null | undefined;
   /**
    * The roleResourceId field.
    */
-  roleResourceId?: string | undefined;
+  roleResourceId?: string | null | undefined;
   /**
    * The roleResourceTypeId field.
    */
-  roleResourceTypeId?: string | undefined;
+  roleResourceTypeId?: string | null | undefined;
   /**
    * The scopeResourceId field.
    */
-  scopeResourceId?: string | undefined;
+  scopeResourceId?: string | null | undefined;
   /**
    * The scopeResourceTypeId field.
    */
-  scopeResourceTypeId?: string | undefined;
+  scopeResourceTypeId?: string | null | undefined;
 };
 
 /** @internal */
@@ -44,21 +44,21 @@ export const ScopeRole$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.string().optional(),
-  grantDuration: z.string().optional(),
-  roleResourceId: z.string().optional(),
-  roleResourceTypeId: z.string().optional(),
-  scopeResourceId: z.string().optional(),
-  scopeResourceTypeId: z.string().optional(),
+  appId: z.nullable(z.string()).optional(),
+  grantDuration: z.nullable(z.string()).optional(),
+  roleResourceId: z.nullable(z.string()).optional(),
+  roleResourceTypeId: z.nullable(z.string()).optional(),
+  scopeResourceId: z.nullable(z.string()).optional(),
+  scopeResourceTypeId: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type ScopeRole$Outbound = {
-  appId?: string | undefined;
-  grantDuration?: string | undefined;
-  roleResourceId?: string | undefined;
-  roleResourceTypeId?: string | undefined;
-  scopeResourceId?: string | undefined;
-  scopeResourceTypeId?: string | undefined;
+  appId?: string | null | undefined;
+  grantDuration?: string | null | undefined;
+  roleResourceId?: string | null | undefined;
+  roleResourceTypeId?: string | null | undefined;
+  scopeResourceId?: string | null | undefined;
+  scopeResourceTypeId?: string | null | undefined;
 };
 
 /** @internal */
@@ -67,12 +67,12 @@ export const ScopeRole$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ScopeRole
 > = z.object({
-  appId: z.string().optional(),
-  grantDuration: z.string().optional(),
-  roleResourceId: z.string().optional(),
-  roleResourceTypeId: z.string().optional(),
-  scopeResourceId: z.string().optional(),
-  scopeResourceTypeId: z.string().optional(),
+  appId: z.nullable(z.string()).optional(),
+  grantDuration: z.nullable(z.string()).optional(),
+  roleResourceId: z.nullable(z.string()).optional(),
+  roleResourceTypeId: z.nullable(z.string()).optional(),
+  scopeResourceId: z.nullable(z.string()).optional(),
+  scopeResourceTypeId: z.nullable(z.string()).optional(),
 });
 
 export function scopeRoleToJSON(scopeRole: ScopeRole): string {

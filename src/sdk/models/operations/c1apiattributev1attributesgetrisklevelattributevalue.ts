@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest = {
-  id: string | null;
+  id: string;
 };
 
 export type C1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponse = {
@@ -37,7 +37,7 @@ export type C1ApiAttributeV1AttributesGetRiskLevelAttributeValueResponse = {
 /** @internal */
 export type C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest$Outbound =
   {
-    id: string | null;
+    id: string;
   };
 
 /** @internal */
@@ -47,7 +47,7 @@ export const C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest$outboun
     z.ZodTypeDef,
     C1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequest
   > = z.object({
-    id: z.nullable(z.string()),
+    id: z.string(),
   });
 
 export function c1ApiAttributeV1AttributesGetRiskLevelAttributeValueRequestToJSON(

@@ -6,7 +6,7 @@
 import { C1ApiTaskV1TaskActionsServiceRestartRequest } from "conductorone-sdk-typescript/sdk/models/operations";
 
 let value: C1ApiTaskV1TaskActionsServiceRestartRequest = {
-  taskId: null,
+  taskId: "<id>",
 };
 ```
 

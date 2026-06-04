@@ -1,0 +1,22 @@
+# ListHistoryEntryMetadata
+
+ListHistoryEntryMetadata is the per-transaction metadata envelope.
+
+## Example Usage
+
+```typescript
+import { ListHistoryEntryMetadata } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: ListHistoryEntryMetadata = {};
+```
+
+## Fields
+
+| Field                                                                                                                     | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               |
+| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `actor`                                                                                                                   | [shared.HistoryActor](../../../sdk/models/shared/historyactor.md)                                                         | :heavy_minus_sign:                                                                                                        | N/A                                                                                                                       |
+| `annotations`                                                                                                             | [shared.HistoryAnnotation](../../../sdk/models/shared/historyannotation.md)[]                                             | :heavy_minus_sign:                                                                                                        | Server-rendered annotations (mirrors object_history).                                                                     |
+| `createdAt`                                                                                                               | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                             | :heavy_minus_sign:                                                                                                        | N/A                                                                                                                       |
+| `id`                                                                                                                      | *string*                                                                                                                  | :heavy_minus_sign:                                                                                                        | KSUID. Same value as c1.models.history.v1.ListHistory.id.                                                                 |
+| `syslogEventId`                                                                                                           | *string*                                                                                                                  | :heavy_minus_sign:                                                                                                        | System Log event id — KSUID of the OCSF event recorded for this<br/> transaction. Empty for non-RPC writes (workflows, cron). |
+| `traceId`                                                                                                                 | *string*                                                                                                                  | :heavy_minus_sign:                                                                                                        | 32-hex-char otel trace id or empty.                                                                                       |

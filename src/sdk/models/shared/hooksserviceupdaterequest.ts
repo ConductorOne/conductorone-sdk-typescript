@@ -13,22 +13,13 @@ import {
  * The HooksServiceUpdateRequest message.
  */
 export type HooksServiceUpdateRequest = {
-  /**
-   * Hook represents a customer-configured interception point for tool calls.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named hook_type. Only a single field of the following list may be set at a time:
-   *   - function
-   *   - builtinPattern
-   */
-  hook?: HookInput | undefined;
+  hook?: HookInput | null | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type HooksServiceUpdateRequest$Outbound = {
-  hook?: HookInput$Outbound | undefined;
+  hook?: HookInput$Outbound | null | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -38,7 +29,7 @@ export const HooksServiceUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   HooksServiceUpdateRequest
 > = z.object({
-  hook: HookInput$outboundSchema.optional(),
+  hook: z.nullable(HookInput$outboundSchema).optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 

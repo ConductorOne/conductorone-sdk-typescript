@@ -11,7 +11,7 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceGetBundleAutomationRequest =
   {
-    requestCatalogId: string | null;
+    requestCatalogId: string;
   };
 
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceGetBundleAutomationResponse =
@@ -37,7 +37,7 @@ export type C1ApiRequestcatalogV1RequestCatalogManagementServiceGetBundleAutomat
 /** @internal */
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceGetBundleAutomationRequest$Outbound =
   {
-    request_catalog_id: string | null;
+    request_catalog_id: string;
   };
 
 /** @internal */
@@ -47,7 +47,7 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceGetBundleAutoma
     z.ZodTypeDef,
     C1ApiRequestcatalogV1RequestCatalogManagementServiceGetBundleAutomationRequest
   > = z.object({
-    requestCatalogId: z.nullable(z.string()),
+    requestCatalogId: z.string(),
   }).transform((v) => {
     return remap$(v, {
       requestCatalogId: "request_catalog_id",

@@ -11,11 +11,11 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * Campaign health snapshot. Read-only; updated by backend maintenance processors.
  */
 export type CampaignHealthSnapshot = {
-  checkedAt?: Date | undefined;
+  checkedAt?: Date | null | undefined;
   /**
    * Number of pending actions locked by terminal (dead) submissions.
    */
-  phantomLockedCount?: number | undefined;
+  phantomLockedCount?: number | null | undefined;
 };
 
 /** @internal */
@@ -24,14 +24,15 @@ export const CampaignHealthSnapshot$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  checkedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  phantomLockedCount: z.number().int().optional(),
+  checkedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  phantomLockedCount: z.nullable(z.number().int()).optional(),
 });
 /** @internal */
 export type CampaignHealthSnapshot$Outbound = {
-  checkedAt?: string | undefined;
-  phantomLockedCount?: number | undefined;
+  checkedAt?: string | null | undefined;
+  phantomLockedCount?: number | null | undefined;
 };
 
 /** @internal */
@@ -40,8 +41,8 @@ export const CampaignHealthSnapshot$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CampaignHealthSnapshot
 > = z.object({
-  checkedAt: z.date().transform(v => v.toISOString()).optional(),
-  phantomLockedCount: z.number().int().optional(),
+  checkedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  phantomLockedCount: z.nullable(z.number().int()).optional(),
 });
 
 export function campaignHealthSnapshotToJSON(

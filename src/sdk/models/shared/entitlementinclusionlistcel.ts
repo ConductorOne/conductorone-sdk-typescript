@@ -14,7 +14,7 @@ export type EntitlementInclusionListCel = {
   /**
    * The appEntitlementRefsCel field.
    */
-  appEntitlementRefsCel?: string | undefined;
+  appEntitlementRefsCel?: string | null | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const EntitlementInclusionListCel$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appEntitlementRefsCel: z.string().optional(),
+  appEntitlementRefsCel: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type EntitlementInclusionListCel$Outbound = {
-  appEntitlementRefsCel?: string | undefined;
+  appEntitlementRefsCel?: string | null | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const EntitlementInclusionListCel$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EntitlementInclusionListCel
 > = z.object({
-  appEntitlementRefsCel: z.string().optional(),
+  appEntitlementRefsCel: z.nullable(z.string()).optional(),
 });
 
 export function entitlementInclusionListCelToJSON(

@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -19,11 +18,8 @@ export type ServicePrincipalServiceCreateCredentialResponse = {
   /**
    * The client secret. Shown exactly once at creation -- cannot be retrieved again.
    */
-  clientSecret?: string | undefined;
-  /**
-   * ServicePrincipalCredential represents a client credential for a service principal.
-   */
-  servicePrincipalCredential?: ServicePrincipalCredential | undefined;
+  clientSecret?: string | null | undefined;
+  credential?: ServicePrincipalCredential | null | undefined;
 };
 
 /** @internal */
@@ -33,12 +29,8 @@ export const ServicePrincipalServiceCreateCredentialResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    clientSecret: z.string().optional(),
-    credential: ServicePrincipalCredential$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "credential": "servicePrincipalCredential",
-    });
+    clientSecret: z.nullable(z.string()).optional(),
+    credential: z.nullable(ServicePrincipalCredential$inboundSchema).optional(),
   });
 
 export function servicePrincipalServiceCreateCredentialResponseFromJSON(

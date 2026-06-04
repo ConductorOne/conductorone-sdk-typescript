@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,19 +15,7 @@ import {
  * The UpdateTenantEmailProviderResponse message.
  */
 export type UpdateTenantEmailProviderResponse = {
-  /**
-   * TenantEmailProvider is the API representation of the tenant's email provider.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named provider. Only a single field of the following list may be set at a time:
-   *   - c1Builtin
-   *   - awsSes
-   *   - sendgrid
-   *   - microsoftGraph
-   *   - googleWorkspace
-   */
-  tenantEmailProvider?: TenantEmailProvider | undefined;
+  emailProvider?: TenantEmailProvider | null | undefined;
 };
 
 /** @internal */
@@ -37,11 +24,7 @@ export const UpdateTenantEmailProviderResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  emailProvider: TenantEmailProvider$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "emailProvider": "tenantEmailProvider",
-  });
+  emailProvider: z.nullable(TenantEmailProvider$inboundSchema).optional(),
 });
 
 export function updateTenantEmailProviderResponseFromJSON(

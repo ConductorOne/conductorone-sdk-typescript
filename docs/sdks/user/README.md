@@ -8,6 +8,7 @@
 * [get](#get) - Get
 * [getUserProfileTypes](#getuserprofiletypes) - Get User Profile Types
 * [setExpiringUserDelegationBindingByAdmin](#setexpiringuserdelegationbindingbyadmin) - Set Expiring User Delegation Binding By Admin
+* [introspect](#introspect) - Introspect
 
 ## list
 
@@ -314,6 +315,82 @@ run();
 ### Response
 
 **Promise\<[operations.C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponse](../../sdk/models/operations/c1apiuserv1userservicesetexpiringuserdelegationbindingbyadminresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## introspect
+
+Introspect returns the calling user's full UserView (profile, manager, attributes)
+ resolved from the passport on the request.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.user.v1.UserService.Introspect" method="post" path="/api/v1/users/introspect" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.user.introspect();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { userIntrospect } from "conductorone-sdk-typescript/funcs/userIntrospect.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await userIntrospect(conductoroneSDKTypescript);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("userIntrospect failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [shared.UserIntrospectRequest](../../sdk/models/shared/userintrospectrequest.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.C1ApiUserV1UserServiceIntrospectResponse](../../sdk/models/operations/c1apiuserv1userserviceintrospectresponse.md)\>**
 
 ### Errors
 

@@ -10,8 +10,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest = {
-  appId: string | null;
-  appEntitlementId: string | null;
+  appId: string;
+  appEntitlementId: string;
   removeEntitlementMembershipRequest?:
     | shared.RemoveEntitlementMembershipRequest
     | undefined;
@@ -41,8 +41,8 @@ export type C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse = {
 /** @internal */
 export type C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest$Outbound =
   {
-    app_id: string | null;
-    app_entitlement_id: string | null;
+    app_id: string;
+    app_entitlement_id: string;
     RemoveEntitlementMembershipRequest?:
       | shared.RemoveEntitlementMembershipRequest$Outbound
       | undefined;
@@ -55,8 +55,8 @@ export const C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest$outboun
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest
   > = z.object({
-    appId: z.nullable(z.string()),
-    appEntitlementId: z.nullable(z.string()),
+    appId: z.string(),
+    appEntitlementId: z.string(),
     removeEntitlementMembershipRequest: shared
       .RemoveEntitlementMembershipRequest$outboundSchema.optional(),
   }).transform((v) => {

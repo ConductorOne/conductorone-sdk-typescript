@@ -12,28 +12,11 @@ import { Finding, Finding$inboundSchema } from "./finding.js";
  * The CreateFindingTaskResponse message.
  */
 export type CreateFindingTaskResponse = {
-  /**
-   * The Finding message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named finding_type. Only a single field of the following list may be set at a time:
-   *   - similarUsernameMatch
-   *   - serviceAccountMisclassification
-   *
-   * This message contains a oneof named target. Only a single field of the following list may be set at a time:
-   *   - identityUserTarget
-   *   - appUserTarget
-   *
-   * This message contains a oneof named evidence. Only a single field of the following list may be set at a time:
-   *   - similarUsernameMatchEvidence
-   *   - serviceAccountMisclassificationEvidence
-   */
-  finding?: Finding | undefined;
+  finding?: Finding | null | undefined;
   /**
    * The ID of the created task.
    */
-  taskId?: string | undefined;
+  taskId?: string | null | undefined;
 };
 
 /** @internal */
@@ -42,8 +25,8 @@ export const CreateFindingTaskResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  finding: Finding$inboundSchema.optional(),
-  taskId: z.string().optional(),
+  finding: z.nullable(Finding$inboundSchema).optional(),
+  taskId: z.nullable(z.string()).optional(),
 });
 
 export function createFindingTaskResponseFromJSON(

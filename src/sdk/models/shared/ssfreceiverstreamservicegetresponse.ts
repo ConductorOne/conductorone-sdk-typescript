@@ -15,17 +15,7 @@ import {
  * SSFReceiverStreamServiceGetResponse contains the requested SSF receiver stream.
  */
 export type SSFReceiverStreamServiceGetResponse = {
-  /**
-   * SSFReceiverStream is the public API representation.
-   *
-   * @remarks
-   *  Secrets (push_auth_token, outbound credentials) are write-only.
-   *
-   * This message contains a oneof named outbound_auth. Only a single field of the following list may be set at a time:
-   *   - outboundAuthBearer
-   *   - outboundAuthOauth2
-   */
-  ssfReceiverStream?: SSFReceiverStream | undefined;
+  ssfReceiverStream?: SSFReceiverStream | null | undefined;
 };
 
 /** @internal */
@@ -34,7 +24,7 @@ export const SSFReceiverStreamServiceGetResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ssfReceiverStream: SSFReceiverStream$inboundSchema.optional(),
+  ssfReceiverStream: z.nullable(SSFReceiverStream$inboundSchema).optional(),
 });
 
 export function ssfReceiverStreamServiceGetResponseFromJSON(

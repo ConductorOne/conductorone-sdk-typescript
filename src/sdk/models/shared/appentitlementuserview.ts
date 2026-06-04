@@ -26,7 +26,7 @@ export type AppEntitlementUserView = {
   /**
    * The originating ticket ID for the grant (e.g. from a request ticket).
    */
-  originatingTicketId?: string | undefined;
+  originatingTicketId?: string | null | undefined;
 };
 
 /** @internal */
@@ -43,7 +43,7 @@ export const AppEntitlementUserView$inboundSchema: z.ZodType<
   ).optional(),
   appUser: z.nullable(AppUserView$inboundSchema).optional(),
   grantSources: z.nullable(z.array(AppEntitlementRef$inboundSchema)).optional(),
-  originatingTicketId: z.string().optional(),
+  originatingTicketId: z.nullable(z.string()).optional(),
 });
 
 export function appEntitlementUserViewFromJSON(

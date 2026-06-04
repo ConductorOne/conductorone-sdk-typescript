@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -18,51 +17,41 @@ import {
  * The FindingRoutingRule message.
  */
 export type FindingRoutingRule = {
-  /**
-   * The FindingRoutingRuleAction message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named action. Only a single field of the following list may be set at a time:
-   *   - createTask
-   *   - suppress
-   *   - notify
-   */
-  findingRoutingRuleAction?: FindingRoutingRuleAction | undefined;
+  action?: FindingRoutingRuleAction | null | undefined;
   /**
    * The appId field.
    */
-  appId?: string | undefined;
+  appId?: string | null | undefined;
   /**
    * The condition field.
    */
-  condition?: string | undefined;
-  createdAt?: Date | undefined;
+  condition?: string | null | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * The description field.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
   /**
    * The enabled field.
    */
-  enabled?: boolean | undefined;
+  enabled?: boolean | null | undefined;
   /**
    * The id field.
    */
-  id?: string | undefined;
+  id?: string | null | undefined;
   /**
    * The priority field.
    */
-  priority?: number | undefined;
+  priority?: number | null | undefined;
   /**
    * The templateId field.
    */
-  templateId?: string | undefined;
-  updatedAt?: Date | undefined;
+  templateId?: string | null | undefined;
+  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
@@ -71,37 +60,35 @@ export const FindingRoutingRule$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  action: FindingRoutingRuleAction$inboundSchema.optional(),
-  appId: z.string().optional(),
-  condition: z.string().optional(),
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  id: z.string().optional(),
-  priority: z.number().int().optional(),
-  templateId: z.string().optional(),
-  updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "action": "findingRoutingRuleAction",
-  });
+  action: z.nullable(FindingRoutingRuleAction$inboundSchema).optional(),
+  appId: z.nullable(z.string()).optional(),
+  condition: z.nullable(z.string()).optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  description: z.nullable(z.string()).optional(),
+  displayName: z.nullable(z.string()).optional(),
+  enabled: z.nullable(z.boolean()).optional(),
+  id: z.nullable(z.string()).optional(),
+  priority: z.nullable(z.number().int()).optional(),
+  templateId: z.nullable(z.string()).optional(),
+  updatedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 });
 /** @internal */
 export type FindingRoutingRule$Outbound = {
-  action?: FindingRoutingRuleAction$Outbound | undefined;
-  appId?: string | undefined;
-  condition?: string | undefined;
-  createdAt?: string | undefined;
-  description?: string | undefined;
-  displayName?: string | undefined;
-  enabled?: boolean | undefined;
-  id?: string | undefined;
-  priority?: number | undefined;
-  templateId?: string | undefined;
-  updatedAt?: string | undefined;
+  action?: FindingRoutingRuleAction$Outbound | null | undefined;
+  appId?: string | null | undefined;
+  condition?: string | null | undefined;
+  createdAt?: string | null | undefined;
+  description?: string | null | undefined;
+  displayName?: string | null | undefined;
+  enabled?: boolean | null | undefined;
+  id?: string | null | undefined;
+  priority?: number | null | undefined;
+  templateId?: string | null | undefined;
+  updatedAt?: string | null | undefined;
 };
 
 /** @internal */
@@ -110,21 +97,17 @@ export const FindingRoutingRule$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FindingRoutingRule
 > = z.object({
-  findingRoutingRuleAction: FindingRoutingRuleAction$outboundSchema.optional(),
-  appId: z.string().optional(),
-  condition: z.string().optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  id: z.string().optional(),
-  priority: z.number().int().optional(),
-  templateId: z.string().optional(),
-  updatedAt: z.date().transform(v => v.toISOString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    findingRoutingRuleAction: "action",
-  });
+  action: z.nullable(FindingRoutingRuleAction$outboundSchema).optional(),
+  appId: z.nullable(z.string()).optional(),
+  condition: z.nullable(z.string()).optional(),
+  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  description: z.nullable(z.string()).optional(),
+  displayName: z.nullable(z.string()).optional(),
+  enabled: z.nullable(z.boolean()).optional(),
+  id: z.nullable(z.string()).optional(),
+  priority: z.nullable(z.number().int()).optional(),
+  templateId: z.nullable(z.string()).optional(),
+  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function findingRoutingRuleToJSON(

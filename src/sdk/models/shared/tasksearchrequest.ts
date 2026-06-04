@@ -266,7 +266,7 @@ export type TaskSearchRequest = {
    * @remarks
    *  Requires the REVIEWS_PENDING_ACTIONS feature flag to be enabled.
    */
-  pendingActionFilter?: PendingActionFilter | undefined;
+  pendingActionFilter?: PendingActionFilter | null | undefined;
   /**
    * Search tasks that were acted on by any of these users.
    */
@@ -282,11 +282,11 @@ export type TaskSearchRequest = {
   /**
    * Filter tasks where the current approval step requires an approval reason.
    */
-  requireApprovalReason?: boolean | undefined;
+  requireApprovalReason?: boolean | null | undefined;
   /**
    * Filter tasks where the current approval step requires a denial reason.
    */
-  requireDenialReason?: boolean | undefined;
+  requireDenialReason?: boolean | null | undefined;
   /**
    * Search tasks by revoke outcome
    */
@@ -421,12 +421,12 @@ export type TaskSearchRequest$Outbound = {
   outcomeBefore?: string | null | undefined;
   pageSize?: number | null | undefined;
   pageToken?: string | null | undefined;
-  pendingActionFilter?: string | undefined;
+  pendingActionFilter?: string | null | undefined;
   previouslyActedOnIds?: Array<string> | null | undefined;
   query?: string | null | undefined;
   refs?: Array<TaskRef$Outbound> | null | undefined;
-  requireApprovalReason?: boolean | undefined;
-  requireDenialReason?: boolean | undefined;
+  requireApprovalReason?: boolean | null | undefined;
+  requireDenialReason?: boolean | null | undefined;
   revokeOutcomes?: Array<string> | null | undefined;
   sortBy?: string | null | undefined;
   stepApprovalTypes?: Array<string> | null | undefined;
@@ -480,12 +480,13 @@ export const TaskSearchRequest$outboundSchema: z.ZodType<
     .optional(),
   pageSize: z.nullable(z.number().int()).optional(),
   pageToken: z.nullable(z.string()).optional(),
-  pendingActionFilter: PendingActionFilter$outboundSchema.optional(),
+  pendingActionFilter: z.nullable(PendingActionFilter$outboundSchema)
+    .optional(),
   previouslyActedOnIds: z.nullable(z.array(z.string())).optional(),
   query: z.nullable(z.string()).optional(),
   refs: z.nullable(z.array(TaskRef$outboundSchema)).optional(),
-  requireApprovalReason: z.boolean().optional(),
-  requireDenialReason: z.boolean().optional(),
+  requireApprovalReason: z.nullable(z.boolean()).optional(),
+  requireDenialReason: z.nullable(z.boolean()).optional(),
   revokeOutcomes: z.nullable(z.array(RevokeOutcomes$outboundSchema)).optional(),
   sortBy: z.nullable(TaskSearchRequestSortBy$outboundSchema).optional(),
   stepApprovalTypes: z.nullable(z.array(StepApprovalTypes$outboundSchema))

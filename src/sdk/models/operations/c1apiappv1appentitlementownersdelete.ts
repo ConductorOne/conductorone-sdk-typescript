@@ -10,8 +10,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppEntitlementOwnersDeleteRequest = {
-  appId: string | null;
-  entitlementId: string | null;
+  appId: string;
+  entitlementId: string;
   deleteAppEntitlementOwnersRequest?:
     | shared.DeleteAppEntitlementOwnersRequest
     | undefined;
@@ -40,8 +40,8 @@ export type C1ApiAppV1AppEntitlementOwnersDeleteResponse = {
 
 /** @internal */
 export type C1ApiAppV1AppEntitlementOwnersDeleteRequest$Outbound = {
-  app_id: string | null;
-  entitlement_id: string | null;
+  app_id: string;
+  entitlement_id: string;
   DeleteAppEntitlementOwnersRequest?:
     | shared.DeleteAppEntitlementOwnersRequest$Outbound
     | undefined;
@@ -54,8 +54,8 @@ export const C1ApiAppV1AppEntitlementOwnersDeleteRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementOwnersDeleteRequest
   > = z.object({
-    appId: z.nullable(z.string()),
-    entitlementId: z.nullable(z.string()),
+    appId: z.string(),
+    entitlementId: z.string(),
     deleteAppEntitlementOwnersRequest: shared
       .DeleteAppEntitlementOwnersRequest$outboundSchema.optional(),
   }).transform((v) => {

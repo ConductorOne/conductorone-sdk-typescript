@@ -10,8 +10,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppEntitlementsUpdateAutomationRequest = {
-  appId: string | null;
-  appEntitlementId: string | null;
+  appId: string;
+  appEntitlementId: string;
   appEntitlementServiceUpdateAutomationRequest?:
     | shared.AppEntitlementServiceUpdateAutomationRequest
     | undefined;
@@ -40,8 +40,8 @@ export type C1ApiAppV1AppEntitlementsUpdateAutomationResponse = {
 
 /** @internal */
 export type C1ApiAppV1AppEntitlementsUpdateAutomationRequest$Outbound = {
-  app_id: string | null;
-  app_entitlement_id: string | null;
+  app_id: string;
+  app_entitlement_id: string;
   AppEntitlementServiceUpdateAutomationRequest?:
     | shared.AppEntitlementServiceUpdateAutomationRequest$Outbound
     | undefined;
@@ -54,8 +54,8 @@ export const C1ApiAppV1AppEntitlementsUpdateAutomationRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementsUpdateAutomationRequest
   > = z.object({
-    appId: z.nullable(z.string()),
-    appEntitlementId: z.nullable(z.string()),
+    appId: z.string(),
+    appEntitlementId: z.string(),
     appEntitlementServiceUpdateAutomationRequest: shared
       .AppEntitlementServiceUpdateAutomationRequest$outboundSchema.optional(),
   }).transform((v) => {

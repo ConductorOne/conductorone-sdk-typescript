@@ -33,27 +33,27 @@ export type FunctionInvocation = {
   /**
    * The commitId field.
    */
-  commitId?: string | undefined;
-  createdAt?: Date | undefined;
+  commitId?: string | null | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * The error field.
    */
-  error?: string | undefined;
+  error?: string | null | undefined;
   /**
    * The functionId field.
    */
-  functionId?: string | undefined;
+  functionId?: string | null | undefined;
   /**
    * The id field.
    */
-  id?: string | undefined;
+  id?: string | null | undefined;
   input?: { [k: string]: any } | undefined;
   output?: { [k: string]: any } | undefined;
   /**
    * The status field.
    */
-  status?: FunctionInvocationStatus | undefined;
-  updatedAt?: Date | undefined;
+  status?: FunctionInvocationStatus | null | undefined;
+  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
@@ -69,17 +69,19 @@ export const FunctionInvocation$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  commitId: z.string().optional(),
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  error: z.string().optional(),
-  functionId: z.string().optional(),
-  id: z.string().optional(),
+  commitId: z.nullable(z.string()).optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  error: z.nullable(z.string()).optional(),
+  functionId: z.nullable(z.string()).optional(),
+  id: z.nullable(z.string()).optional(),
   input: z.record(z.any()).optional(),
   output: z.record(z.any()).optional(),
-  status: FunctionInvocationStatus$inboundSchema.optional(),
-  updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  status: z.nullable(FunctionInvocationStatus$inboundSchema).optional(),
+  updatedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 });
 
 export function functionInvocationFromJSON(

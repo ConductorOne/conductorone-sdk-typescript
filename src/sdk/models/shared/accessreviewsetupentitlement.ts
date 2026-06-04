@@ -14,38 +14,38 @@ export type AccessReviewSetupEntitlement = {
   /**
    * The ID of the access review campaign this entitlement belongs to.
    */
-  accessReviewId?: string | undefined;
+  accessReviewId?: string | null | undefined;
   /**
    * The ID of the entitlement being reviewed.
    */
-  appEntitlementId?: string | undefined;
+  appEntitlementId?: string | null | undefined;
   /**
    * The ID of the application that owns the entitlement.
    */
-  appId?: string | undefined;
+  appId?: string | null | undefined;
   /**
    * The ID of the specific resource associated with this entitlement, if applicable.
    */
-  appResourceId?: string | undefined;
+  appResourceId?: string | null | undefined;
   /**
    * The ID of the resource type associated with this entitlement, if applicable.
    */
-  appResourceTypeId?: string | undefined;
-  createdAt?: Date | undefined;
+  appResourceTypeId?: string | null | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * An override policy ID for this specific entitlement. Populated when use_policy_override is enabled on the campaign.
    */
-  customPolicyId?: string | undefined;
-  deletedAt?: Date | undefined;
+  customPolicyId?: string | null | undefined;
+  deletedAt?: Date | null | undefined;
   /**
    * The ID of the review policy applied to this entitlement. Defaults to the campaign policy.
    */
-  policyId?: string | undefined;
+  policyId?: string | null | undefined;
   /**
    * The tenant that owns this setup entitlement.
    */
-  tenantId?: string | undefined;
-  updatedAt?: Date | undefined;
+  tenantId?: string | null | undefined;
+  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
@@ -54,20 +54,23 @@ export const AccessReviewSetupEntitlement$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accessReviewId: z.string().optional(),
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  appResourceId: z.string().optional(),
-  appResourceTypeId: z.string().optional(),
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  customPolicyId: z.string().optional(),
-  deletedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  policyId: z.string().optional(),
-  tenantId: z.string().optional(),
-  updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  accessReviewId: z.nullable(z.string()).optional(),
+  appEntitlementId: z.nullable(z.string()).optional(),
+  appId: z.nullable(z.string()).optional(),
+  appResourceId: z.nullable(z.string()).optional(),
+  appResourceTypeId: z.nullable(z.string()).optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  customPolicyId: z.nullable(z.string()).optional(),
+  deletedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  policyId: z.nullable(z.string()).optional(),
+  tenantId: z.nullable(z.string()).optional(),
+  updatedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 });
 
 export function accessReviewSetupEntitlementFromJSON(

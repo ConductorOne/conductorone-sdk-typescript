@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiTaskV1TaskActionsServiceDenyRequest = {
-  taskId: string | null;
+  taskId: string;
   taskActionsServiceDenyRequest?:
     | shared.TaskActionsServiceDenyRequest
     | undefined;
@@ -39,7 +39,7 @@ export type C1ApiTaskV1TaskActionsServiceDenyResponse = {
 
 /** @internal */
 export type C1ApiTaskV1TaskActionsServiceDenyRequest$Outbound = {
-  task_id: string | null;
+  task_id: string;
   TaskActionsServiceDenyRequest?:
     | shared.TaskActionsServiceDenyRequest$Outbound
     | undefined;
@@ -51,7 +51,7 @@ export const C1ApiTaskV1TaskActionsServiceDenyRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiTaskV1TaskActionsServiceDenyRequest
 > = z.object({
-  taskId: z.nullable(z.string()),
+  taskId: z.string(),
   taskActionsServiceDenyRequest: shared
     .TaskActionsServiceDenyRequest$outboundSchema.optional(),
 }).transform((v) => {

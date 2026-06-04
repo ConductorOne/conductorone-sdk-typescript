@@ -21,15 +21,15 @@ export type WorkloadFederationServiceCreateTrustRequest = {
    * @remarks
    *  Compiled and validated before storage.
    */
-  conditionExpression?: string | undefined;
+  conditionExpression?: string | null | undefined;
   /**
    * A description of what this trust policy matches.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * The display name for the trust.
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
   /**
    * JWT claim names from the subject token to copy into the issued C1 token.
    */
@@ -37,7 +37,7 @@ export type WorkloadFederationServiceCreateTrustRequest = {
   /**
    * The provider this trust references.
    */
-  providerId?: string | undefined;
+  providerId?: string | null | undefined;
   /**
    * Scoped role IDs. Effective permissions = min(SP roles, trust.scoped_role_ids).
    */
@@ -47,11 +47,11 @@ export type WorkloadFederationServiceCreateTrustRequest = {
 /** @internal */
 export type WorkloadFederationServiceCreateTrustRequest$Outbound = {
   allowSourceCidrs?: Array<string> | null | undefined;
-  conditionExpression?: string | undefined;
-  description?: string | undefined;
-  displayName?: string | undefined;
+  conditionExpression?: string | null | undefined;
+  description?: string | null | undefined;
+  displayName?: string | null | undefined;
   passthroughClaims?: Array<string> | null | undefined;
-  providerId?: string | undefined;
+  providerId?: string | null | undefined;
   scopedRoleIds?: Array<string> | null | undefined;
 };
 
@@ -63,11 +63,11 @@ export const WorkloadFederationServiceCreateTrustRequest$outboundSchema:
     WorkloadFederationServiceCreateTrustRequest
   > = z.object({
     allowSourceCidrs: z.nullable(z.array(z.string())).optional(),
-    conditionExpression: z.string().optional(),
-    description: z.string().optional(),
-    displayName: z.string().optional(),
+    conditionExpression: z.nullable(z.string()).optional(),
+    description: z.nullable(z.string()).optional(),
+    displayName: z.nullable(z.string()).optional(),
     passthroughClaims: z.nullable(z.array(z.string())).optional(),
-    providerId: z.string().optional(),
+    providerId: z.nullable(z.string()).optional(),
     scopedRoleIds: z.nullable(z.array(z.string())).optional(),
   });
 

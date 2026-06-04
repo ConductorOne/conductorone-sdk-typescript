@@ -65,16 +65,16 @@ export type Connector = {
    * The catalogId describes which catalog entry this connector is an instance of. For example, every Okta connector will have the same catalogId indicating it is an Okta connector.
    */
   catalogId?: string | null | undefined;
-  config?: Config | null | undefined;
-  configUpdatedAt?: Date | undefined;
+  /**
+   * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+   */
+  config?: Config | undefined;
+  configUpdatedAt?: Date | null | undefined;
   /**
    * The connectorApiVersion field.
    */
-  connectorApiVersion?: number | undefined;
-  /**
-   * The ConnectorSyncCronSchedule message.
-   */
-  connectorSyncCronSchedule?: ConnectorSyncCronSchedule | undefined;
+  connectorApiVersion?: number | null | undefined;
+  connectorSyncCronSchedule?: ConnectorSyncCronSchedule | null | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
@@ -111,10 +111,7 @@ export type Connector = {
    */
   profileIgnoreList?: Array<string> | null | undefined;
   status?: ConnectorStatus | null | undefined;
-  /**
-   * The SyncConfig message.
-   */
-  syncConfig?: SyncConfig | undefined;
+  syncConfig?: SyncConfig | null | undefined;
   syncDisabledAt?: Date | null | undefined;
   /**
    * The category of the connector sync that was disabled.
@@ -147,13 +144,11 @@ export type ConnectorInput = {
    * The catalogId describes which catalog entry this connector is an instance of. For example, every Okta connector will have the same catalogId indicating it is an Okta connector.
    */
   catalogId?: string | null | undefined;
-  config?: Config | null | undefined;
   /**
-   * The ConnectorSyncCronSchedule message.
+   * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
    */
-  connectorSyncCronSchedule?: ConnectorSyncCronSchedule | undefined;
-  createdAt?: Date | null | undefined;
-  deletedAt?: Date | null | undefined;
+  config?: Config | undefined;
+  connectorSyncCronSchedule?: ConnectorSyncCronSchedule | null | undefined;
   /**
    * The description of the connector.
    */
@@ -184,11 +179,7 @@ export type ConnectorInput = {
    */
   profileIgnoreList?: Array<string> | null | undefined;
   status?: ConnectorStatus | null | undefined;
-  /**
-   * The SyncConfig message.
-   */
-  syncConfig?: SyncConfig | undefined;
-  syncDisabledAt?: Date | null | undefined;
+  syncConfig?: SyncConfig | null | undefined;
   /**
    * The category of the connector sync that was disabled.
    */
@@ -197,7 +188,6 @@ export type ConnectorInput = {
    * The reason the connector sync was disabled.
    */
   syncDisabledReason?: string | null | undefined;
-  updatedAt?: Date | null | undefined;
   /**
    * The userIds field is used to define the integration owners of the connector.
    */
@@ -263,12 +253,13 @@ export const Connector$inboundSchema: z.ZodType<
   appId: z.nullable(z.string()).optional(),
   canResumeSync: z.nullable(z.boolean()).optional(),
   catalogId: z.nullable(z.string()).optional(),
-  config: z.nullable(z.lazy(() => Config$inboundSchema)).optional(),
-  configUpdatedAt: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
+  config: z.lazy(() => Config$inboundSchema).optional(),
+  configUpdatedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  connectorApiVersion: z.number().int().optional(),
-  connectorSyncCronSchedule: ConnectorSyncCronSchedule$inboundSchema.optional(),
+  connectorApiVersion: z.nullable(z.number().int()).optional(),
+  connectorSyncCronSchedule: z.nullable(ConnectorSyncCronSchedule$inboundSchema)
+    .optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -285,7 +276,7 @@ export const Connector$inboundSchema: z.ZodType<
   profileAllowList: z.nullable(z.array(z.string())).optional(),
   profileIgnoreList: z.nullable(z.array(z.string())).optional(),
   status: z.nullable(ConnectorStatus$inboundSchema).optional(),
-  syncConfig: SyncConfig$inboundSchema.optional(),
+  syncConfig: z.nullable(SyncConfig$inboundSchema).optional(),
   syncDisabledAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -312,10 +303,11 @@ export type ConnectorInput$Outbound = {
   appId?: string | null | undefined;
   canResumeSync?: boolean | null | undefined;
   catalogId?: string | null | undefined;
-  config?: Config$Outbound | null | undefined;
-  connectorSyncCronSchedule?: ConnectorSyncCronSchedule$Outbound | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
+  config?: Config$Outbound | undefined;
+  connectorSyncCronSchedule?:
+    | ConnectorSyncCronSchedule$Outbound
+    | null
+    | undefined;
   description?: string | null | undefined;
   disableCheckBadSync?: boolean | null | undefined;
   displayName?: string | null | undefined;
@@ -325,11 +317,9 @@ export type ConnectorInput$Outbound = {
   profileAllowList?: Array<string> | null | undefined;
   profileIgnoreList?: Array<string> | null | undefined;
   status?: ConnectorStatus$Outbound | null | undefined;
-  syncConfig?: SyncConfig$Outbound | undefined;
-  syncDisabledAt?: string | null | undefined;
+  syncConfig?: SyncConfig$Outbound | null | undefined;
   syncDisabledCategory?: string | null | undefined;
   syncDisabledReason?: string | null | undefined;
-  updatedAt?: string | null | undefined;
   userIds?: Array<string> | null | undefined;
 };
 
@@ -342,11 +332,10 @@ export const ConnectorInput$outboundSchema: z.ZodType<
   appId: z.nullable(z.string()).optional(),
   canResumeSync: z.nullable(z.boolean()).optional(),
   catalogId: z.nullable(z.string()).optional(),
-  config: z.nullable(z.lazy(() => Config$outboundSchema)).optional(),
-  connectorSyncCronSchedule: ConnectorSyncCronSchedule$outboundSchema
-    .optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  config: z.lazy(() => Config$outboundSchema).optional(),
+  connectorSyncCronSchedule: z.nullable(
+    ConnectorSyncCronSchedule$outboundSchema,
+  ).optional(),
   description: z.nullable(z.string()).optional(),
   disableCheckBadSync: z.nullable(z.boolean()).optional(),
   displayName: z.nullable(z.string()).optional(),
@@ -357,12 +346,9 @@ export const ConnectorInput$outboundSchema: z.ZodType<
   profileAllowList: z.nullable(z.array(z.string())).optional(),
   profileIgnoreList: z.nullable(z.array(z.string())).optional(),
   status: z.nullable(ConnectorStatus$outboundSchema).optional(),
-  syncConfig: SyncConfig$outboundSchema.optional(),
-  syncDisabledAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
+  syncConfig: z.nullable(SyncConfig$outboundSchema).optional(),
   syncDisabledCategory: z.nullable(z.string()).optional(),
   syncDisabledReason: z.nullable(z.string()).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 

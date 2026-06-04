@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppOwnersSetRequest = {
-  appId: string | null;
+  appId: string;
   setAppOwnersRequest?: shared.SetAppOwnersRequest | undefined;
 };
 
@@ -35,7 +35,7 @@ export type C1ApiAppV1AppOwnersSetResponse = {
 
 /** @internal */
 export type C1ApiAppV1AppOwnersSetRequest$Outbound = {
-  app_id: string | null;
+  app_id: string;
   SetAppOwnersRequest?: shared.SetAppOwnersRequest$Outbound | undefined;
 };
 
@@ -45,7 +45,7 @@ export const C1ApiAppV1AppOwnersSetRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiAppV1AppOwnersSetRequest
 > = z.object({
-  appId: z.nullable(z.string()),
+  appId: z.string(),
   setAppOwnersRequest: shared.SetAppOwnersRequest$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

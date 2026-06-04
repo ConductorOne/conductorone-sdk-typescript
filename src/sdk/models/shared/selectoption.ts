@@ -14,7 +14,7 @@ export type SelectOption = {
   /**
    * Used for type BUTTONS
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * The displayName field.
    */
@@ -31,13 +31,13 @@ export const SelectOption$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
   value: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type SelectOption$Outbound = {
-  description?: string | undefined;
+  description?: string | null | undefined;
   displayName?: string | null | undefined;
   value?: string | null | undefined;
 };
@@ -48,7 +48,7 @@ export const SelectOption$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SelectOption
 > = z.object({
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
   value: z.nullable(z.string()).optional(),
 });

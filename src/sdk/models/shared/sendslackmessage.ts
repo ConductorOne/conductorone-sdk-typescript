@@ -49,11 +49,11 @@ export type SendSlackMessage = {
   /**
    * The useSubjectUser field.
    */
-  useSubjectUser?: boolean | undefined;
+  useSubjectUser?: boolean | null | undefined;
   /**
    * The userIdsCel field.
    */
-  userIdsCel?: string | undefined;
+  userIdsCel?: string | null | undefined;
   /**
    * The userRefs field.
    */
@@ -69,8 +69,8 @@ export const SendSlackMessage$inboundSchema: z.ZodType<
   body: z.nullable(z.string()).optional(),
   channelName: z.nullable(z.string()).optional(),
   channelNameCel: z.nullable(z.string()).optional(),
-  useSubjectUser: z.boolean().optional(),
-  userIdsCel: z.string().optional(),
+  useSubjectUser: z.nullable(z.boolean()).optional(),
+  userIdsCel: z.nullable(z.string()).optional(),
   userRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
 });
 /** @internal */
@@ -78,8 +78,8 @@ export type SendSlackMessage$Outbound = {
   body?: string | null | undefined;
   channelName?: string | null | undefined;
   channelNameCel?: string | null | undefined;
-  useSubjectUser?: boolean | undefined;
-  userIdsCel?: string | undefined;
+  useSubjectUser?: boolean | null | undefined;
+  userIdsCel?: string | null | undefined;
   userRefs?: Array<UserRef$Outbound> | null | undefined;
 };
 
@@ -92,8 +92,8 @@ export const SendSlackMessage$outboundSchema: z.ZodType<
   body: z.nullable(z.string()).optional(),
   channelName: z.nullable(z.string()).optional(),
   channelNameCel: z.nullable(z.string()).optional(),
-  useSubjectUser: z.boolean().optional(),
-  userIdsCel: z.string().optional(),
+  useSubjectUser: z.nullable(z.boolean()).optional(),
+  userIdsCel: z.nullable(z.string()).optional(),
   userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
 });
 

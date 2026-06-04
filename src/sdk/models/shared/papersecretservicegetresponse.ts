@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -13,13 +12,7 @@ import { PaperSecret, PaperSecret$inboundSchema } from "./papersecret.js";
  * The PaperSecretServiceGetResponse message.
  */
 export type PaperSecretServiceGetResponse = {
-  /**
-   * PaperSecret is the API view of a secret (combines Vault + PaperVault fields).
-   *
-   * @remarks
-   *  The vault_id is the primary identifier (Vault.id).
-   */
-  paperSecret?: PaperSecret | undefined;
+  secret?: PaperSecret | null | undefined;
 };
 
 /** @internal */
@@ -28,11 +21,7 @@ export const PaperSecretServiceGetResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  secret: PaperSecret$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "secret": "paperSecret",
-  });
+  secret: z.nullable(PaperSecret$inboundSchema).optional(),
 });
 
 export function paperSecretServiceGetResponseFromJSON(

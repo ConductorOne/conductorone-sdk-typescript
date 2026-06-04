@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -20,13 +19,7 @@ import { ServerEvent, ServerEvent$inboundSchema } from "./serverevent.js";
  *   - functionCall
  */
 export type A2UIAction = {
-  /**
-   * ServerEvent triggers a server-side action.
-   */
-  serverEvent?: ServerEvent | null | undefined;
-  /**
-   * FunctionCall represents a client-side function invocation.
-   */
+  event?: ServerEvent | null | undefined;
   functionCall?: FunctionCall | null | undefined;
 };
 
@@ -38,10 +31,6 @@ export const A2UIAction$inboundSchema: z.ZodType<
 > = z.object({
   event: z.nullable(ServerEvent$inboundSchema).optional(),
   functionCall: z.nullable(FunctionCall$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "event": "serverEvent",
-  });
 });
 
 export function a2UIActionFromJSON(

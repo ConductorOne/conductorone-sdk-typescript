@@ -16,13 +16,13 @@ export type RequestCatalogManagementServiceUpdateAppEntitlementsRequest = {
   /**
    * The entitlement to get from the request catalog.
    */
-  appEntitlements: Array<AppEntitlementRef>;
+  appEntitlements: Array<AppEntitlementRef> | null;
 };
 
 /** @internal */
 export type RequestCatalogManagementServiceUpdateAppEntitlementsRequest$Outbound =
   {
-    appEntitlements: Array<AppEntitlementRef$Outbound>;
+    appEntitlements: Array<AppEntitlementRef$Outbound> | null;
   };
 
 /** @internal */
@@ -32,7 +32,7 @@ export const RequestCatalogManagementServiceUpdateAppEntitlementsRequest$outboun
     z.ZodTypeDef,
     RequestCatalogManagementServiceUpdateAppEntitlementsRequest
   > = z.object({
-    appEntitlements: z.array(AppEntitlementRef$outboundSchema),
+    appEntitlements: z.nullable(z.array(AppEntitlementRef$outboundSchema)),
   });
 
 export function requestCatalogManagementServiceUpdateAppEntitlementsRequestToJSON(

@@ -14,19 +14,19 @@ export type ReviewSignatureConfig = {
   /**
    * The meaningOfSignature field.
    */
-  meaningOfSignature?: string | undefined;
+  meaningOfSignature?: string | null | undefined;
   /**
    * The requireSignature field.
    */
-  requireSignature?: boolean | undefined;
+  requireSignature?: boolean | null | undefined;
   /**
    * The stepUpProviderId field.
    */
-  stepUpProviderId?: string | undefined;
+  stepUpProviderId?: string | null | undefined;
   /**
    * The tspUrl field.
    */
-  tspUrl?: string | undefined;
+  tspUrl?: string | null | undefined;
 };
 
 /** @internal */
@@ -35,17 +35,17 @@ export const ReviewSignatureConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  meaningOfSignature: z.string().optional(),
-  requireSignature: z.boolean().optional(),
-  stepUpProviderId: z.string().optional(),
-  tspUrl: z.string().optional(),
+  meaningOfSignature: z.nullable(z.string()).optional(),
+  requireSignature: z.nullable(z.boolean()).optional(),
+  stepUpProviderId: z.nullable(z.string()).optional(),
+  tspUrl: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type ReviewSignatureConfig$Outbound = {
-  meaningOfSignature?: string | undefined;
-  requireSignature?: boolean | undefined;
-  stepUpProviderId?: string | undefined;
-  tspUrl?: string | undefined;
+  meaningOfSignature?: string | null | undefined;
+  requireSignature?: boolean | null | undefined;
+  stepUpProviderId?: string | null | undefined;
+  tspUrl?: string | null | undefined;
 };
 
 /** @internal */
@@ -54,10 +54,10 @@ export const ReviewSignatureConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ReviewSignatureConfig
 > = z.object({
-  meaningOfSignature: z.string().optional(),
-  requireSignature: z.boolean().optional(),
-  stepUpProviderId: z.string().optional(),
-  tspUrl: z.string().optional(),
+  meaningOfSignature: z.nullable(z.string()).optional(),
+  requireSignature: z.nullable(z.boolean()).optional(),
+  stepUpProviderId: z.nullable(z.string()).optional(),
+  tspUrl: z.nullable(z.string()).optional(),
 });
 
 export function reviewSignatureConfigToJSON(

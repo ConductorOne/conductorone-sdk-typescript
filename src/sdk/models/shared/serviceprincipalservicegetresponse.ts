@@ -15,10 +15,7 @@ import {
  * The ServicePrincipalServiceGetResponse message.
  */
 export type ServicePrincipalServiceGetResponse = {
-  /**
-   * ServicePrincipal represents a tenant-managed non-human identity.
-   */
-  servicePrincipal?: ServicePrincipal | undefined;
+  servicePrincipal?: ServicePrincipal | null | undefined;
 };
 
 /** @internal */
@@ -27,7 +24,7 @@ export const ServicePrincipalServiceGetResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  servicePrincipal: ServicePrincipal$inboundSchema.optional(),
+  servicePrincipal: z.nullable(ServicePrincipal$inboundSchema).optional(),
 });
 
 export function servicePrincipalServiceGetResponseFromJSON(

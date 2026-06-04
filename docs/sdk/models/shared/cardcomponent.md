@@ -14,4 +14,4 @@ let value: CardComponent = {};
 
 | Field                                                       | Type                                                        | Required                                                    | Description                                                 |
 | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `childList`                                                 | [shared.ChildList](../../../sdk/models/shared/childlist.md) | :heavy_minus_sign:                                          | ChildList contains references to child component IDs.       |
+| `children`                                                  | [shared.ChildList](../../../sdk/models/shared/childlist.md) | :heavy_minus_sign:                                          | N/A                                                         |

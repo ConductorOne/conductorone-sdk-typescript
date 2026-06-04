@@ -76,6 +76,19 @@ export type RequestCatalog = {
    * An array of app entitlements that, if the user has, can view the contents of this catalog.
    */
   accessEntitlements?: Array<AppEntitlement> | null | undefined;
+  /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  URL-safe ASCII; total serialized ≤ 4096 bytes. Keys matching ^c1/
+   *  are reserved.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
   createdAt?: Date | null | undefined;
   /**
    * The id of the user this request catalog was created by.
@@ -94,13 +107,6 @@ export type RequestCatalog = {
    * Defines how to handle the request policies of the entitlements in the catalog during enrollment.
    */
   enrollmentBehavior?: EnrollmentBehavior | null | undefined;
-  /**
-   * The ID of the policy to use for access requests in this catalog.
-   *
-   * @remarks
-   *  This is different from the catalog AppEntitlement's grant_policy_id, which is used for catalog membership grants.
-   */
-  grantPolicyId?: string | undefined;
   /**
    * The id of the request catalog.
    */
@@ -139,12 +145,23 @@ export type RequestCatalogInput = {
    * An array of app entitlements that, if the user has, can view the contents of this catalog.
    */
   accessEntitlements?: Array<AppEntitlementInput> | null | undefined;
-  createdAt?: Date | null | undefined;
+  /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  URL-safe ASCII; total serialized ≤ 4096 bytes. Keys matching ^c1/
+   *  are reserved.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
   /**
    * The id of the user this request catalog was created by.
    */
   createdByUserId?: string | null | undefined;
-  deletedAt?: Date | null | undefined;
   /**
    * The description of the request catalog.
    */
@@ -157,13 +174,6 @@ export type RequestCatalogInput = {
    * Defines how to handle the request policies of the entitlements in the catalog during enrollment.
    */
   enrollmentBehavior?: EnrollmentBehavior | null | undefined;
-  /**
-   * The ID of the policy to use for access requests in this catalog.
-   *
-   * @remarks
-   *  This is different from the catalog AppEntitlement's grant_policy_id, which is used for catalog membership grants.
-   */
-  grantPolicyId?: string | undefined;
   /**
    * The id of the request catalog.
    */
@@ -187,7 +197,6 @@ export type RequestCatalogInput = {
     | UnenrollmentEntitlementBehavior
     | null
     | undefined;
-  updatedAt?: Date | null | undefined;
   /**
    * If this is true, the access entitlement requirement is ignored.
    */
@@ -241,6 +250,7 @@ export const RequestCatalog$inboundSchema: z.ZodType<
 > = z.object({
   accessEntitlements: z.nullable(z.array(AppEntitlement$inboundSchema))
     .optional(),
+  annotations: z.record(z.string()).optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -251,7 +261,6 @@ export const RequestCatalog$inboundSchema: z.ZodType<
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
   enrollmentBehavior: z.nullable(EnrollmentBehavior$inboundSchema).optional(),
-  grantPolicyId: z.string().optional(),
   id: z.nullable(z.string()).optional(),
   published: z.nullable(z.boolean()).optional(),
   requestBundle: z.nullable(z.boolean()).optional(),
@@ -279,19 +288,16 @@ export function requestCatalogFromJSON(
 /** @internal */
 export type RequestCatalogInput$Outbound = {
   accessEntitlements?: Array<AppEntitlementInput$Outbound> | null | undefined;
-  createdAt?: string | null | undefined;
+  annotations?: { [k: string]: string } | undefined;
   createdByUserId?: string | null | undefined;
-  deletedAt?: string | null | undefined;
   description?: string | null | undefined;
   displayName?: string | null | undefined;
   enrollmentBehavior?: string | null | undefined;
-  grantPolicyId?: string | undefined;
   id?: string | null | undefined;
   published?: boolean | null | undefined;
   requestBundle?: boolean | null | undefined;
   unenrollmentBehavior?: string | null | undefined;
   unenrollmentEntitlementBehavior?: string | null | undefined;
-  updatedAt?: string | null | undefined;
   visibleToEveryone?: boolean | null | undefined;
 };
 
@@ -303,13 +309,11 @@ export const RequestCatalogInput$outboundSchema: z.ZodType<
 > = z.object({
   accessEntitlements: z.nullable(z.array(AppEntitlementInput$outboundSchema))
     .optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  annotations: z.record(z.string()).optional(),
   createdByUserId: z.nullable(z.string()).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
   enrollmentBehavior: z.nullable(EnrollmentBehavior$outboundSchema).optional(),
-  grantPolicyId: z.string().optional(),
   id: z.nullable(z.string()).optional(),
   published: z.nullable(z.boolean()).optional(),
   requestBundle: z.nullable(z.boolean()).optional(),
@@ -318,7 +322,6 @@ export const RequestCatalogInput$outboundSchema: z.ZodType<
   unenrollmentEntitlementBehavior: z.nullable(
     UnenrollmentEntitlementBehavior$outboundSchema,
   ).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   visibleToEveryone: z.nullable(z.boolean()).optional(),
 });
 

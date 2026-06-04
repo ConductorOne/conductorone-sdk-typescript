@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -18,10 +17,7 @@ import {
  * An ancestor entitlement that will be revoked as part of an inheritance revocation.
  */
 export type TaskRevocationTarget = {
-  /**
-   * The AppEntitlementRef message.
-   */
-  appEntitlementRef?: AppEntitlementRef | undefined;
+  entitlementRef?: AppEntitlementRef | null | undefined;
 };
 
 /** @internal */
@@ -30,15 +26,11 @@ export const TaskRevocationTarget$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  entitlementRef: AppEntitlementRef$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "entitlementRef": "appEntitlementRef",
-  });
+  entitlementRef: z.nullable(AppEntitlementRef$inboundSchema).optional(),
 });
 /** @internal */
 export type TaskRevocationTarget$Outbound = {
-  entitlementRef?: AppEntitlementRef$Outbound | undefined;
+  entitlementRef?: AppEntitlementRef$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -47,11 +39,7 @@ export const TaskRevocationTarget$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskRevocationTarget
 > = z.object({
-  appEntitlementRef: AppEntitlementRef$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    appEntitlementRef: "entitlementRef",
-  });
+  entitlementRef: z.nullable(AppEntitlementRef$outboundSchema).optional(),
 });
 
 export function taskRevocationTargetToJSON(

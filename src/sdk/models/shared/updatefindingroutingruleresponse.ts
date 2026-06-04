@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,10 +15,7 @@ import {
  * The UpdateFindingRoutingRuleResponse message.
  */
 export type UpdateFindingRoutingRuleResponse = {
-  /**
-   * The FindingRoutingRule message.
-   */
-  findingRoutingRule?: FindingRoutingRule | undefined;
+  routingRule?: FindingRoutingRule | null | undefined;
 };
 
 /** @internal */
@@ -28,11 +24,7 @@ export const UpdateFindingRoutingRuleResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  routingRule: FindingRoutingRule$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "routingRule": "findingRoutingRule",
-  });
+  routingRule: z.nullable(FindingRoutingRule$inboundSchema).optional(),
 });
 
 export function updateFindingRoutingRuleResponseFromJSON(

@@ -11,7 +11,7 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest =
   {
-    userId: string | null;
+    userId: string;
     setExpiringUserDelegationBindingByAdminRequest?:
       | shared.SetExpiringUserDelegationBindingByAdminRequest
       | undefined;
@@ -42,7 +42,7 @@ export type C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRespons
 /** @internal */
 export type C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest$Outbound =
   {
-    user_id: string | null;
+    user_id: string;
     SetExpiringUserDelegationBindingByAdminRequest?:
       | shared.SetExpiringUserDelegationBindingByAdminRequest$Outbound
       | undefined;
@@ -55,7 +55,7 @@ export const C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminReques
     z.ZodTypeDef,
     C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest
   > = z.object({
-    userId: z.nullable(z.string()),
+    userId: z.string(),
     setExpiringUserDelegationBindingByAdminRequest: shared
       .SetExpiringUserDelegationBindingByAdminRequest$outboundSchema.optional(),
   }).transform((v) => {

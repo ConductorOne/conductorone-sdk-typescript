@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -18,20 +17,7 @@ import {
  * Manual provisioning indicates that a human must intervene for the provisioning of this step.
  */
 export type ManualProvision = {
-  /**
-   * ProvisionerAssignment defines how a provisioner is dynamically assigned.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named typ. Only a single field of the following list may be set at a time:
-   *   - users
-   *   - appOwners
-   *   - group
-   *   - manager
-   *   - expression
-   *   - entitlementOwners
-   */
-  provisionerAssignment?: ProvisionerAssignment | undefined;
+  assignee?: ProvisionerAssignment | null | undefined;
   /**
    * This field indicates a text body of instructions for the provisioner to indicate.
    */
@@ -51,17 +37,13 @@ export const ManualProvision$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  assignee: ProvisionerAssignment$inboundSchema.optional(),
+  assignee: z.nullable(ProvisionerAssignment$inboundSchema).optional(),
   instructions: z.nullable(z.string()).optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "assignee": "provisionerAssignment",
-  });
 });
 /** @internal */
 export type ManualProvision$Outbound = {
-  assignee?: ProvisionerAssignment$Outbound | undefined;
+  assignee?: ProvisionerAssignment$Outbound | null | undefined;
   instructions?: string | null | undefined;
   userIds?: Array<string> | null | undefined;
 };
@@ -72,13 +54,9 @@ export const ManualProvision$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ManualProvision
 > = z.object({
-  provisionerAssignment: ProvisionerAssignment$outboundSchema.optional(),
+  assignee: z.nullable(ProvisionerAssignment$outboundSchema).optional(),
   instructions: z.nullable(z.string()).optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    provisionerAssignment: "assignee",
-  });
 });
 
 export function manualProvisionToJSON(

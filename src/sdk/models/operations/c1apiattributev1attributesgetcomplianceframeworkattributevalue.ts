@@ -11,7 +11,7 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiAttributeV1AttributesGetComplianceFrameworkAttributeValueRequest =
   {
-    id: string | null;
+    id: string;
   };
 
 export type C1ApiAttributeV1AttributesGetComplianceFrameworkAttributeValueResponse =
@@ -39,7 +39,7 @@ export type C1ApiAttributeV1AttributesGetComplianceFrameworkAttributeValueRespon
 /** @internal */
 export type C1ApiAttributeV1AttributesGetComplianceFrameworkAttributeValueRequest$Outbound =
   {
-    id: string | null;
+    id: string;
   };
 
 /** @internal */
@@ -49,7 +49,7 @@ export const C1ApiAttributeV1AttributesGetComplianceFrameworkAttributeValueReque
     z.ZodTypeDef,
     C1ApiAttributeV1AttributesGetComplianceFrameworkAttributeValueRequest
   > = z.object({
-    id: z.nullable(z.string()),
+    id: z.string(),
   });
 
 export function c1ApiAttributeV1AttributesGetComplianceFrameworkAttributeValueRequestToJSON(

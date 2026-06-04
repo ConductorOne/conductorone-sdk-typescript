@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,10 +15,7 @@ import {
  * The FunctionsInvocationServiceGetResponse message.
  */
 export type FunctionsInvocationServiceGetResponse = {
-  /**
-   * The FunctionInvocation message.
-   */
-  functionInvocation?: FunctionInvocation | undefined;
+  invocation?: FunctionInvocation | null | undefined;
 };
 
 /** @internal */
@@ -28,11 +24,7 @@ export const FunctionsInvocationServiceGetResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  invocation: FunctionInvocation$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "invocation": "functionInvocation",
-  });
+  invocation: z.nullable(FunctionInvocation$inboundSchema).optional(),
 });
 
 export function functionsInvocationServiceGetResponseFromJSON(

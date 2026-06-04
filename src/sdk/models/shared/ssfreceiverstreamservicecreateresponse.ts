@@ -18,18 +18,8 @@ export type SSFReceiverStreamServiceCreateResponse = {
   /**
    * Push auth token returned in plaintext ONLY on create.
    */
-  pushAuthTokenPlaintext?: string | undefined;
-  /**
-   * SSFReceiverStream is the public API representation.
-   *
-   * @remarks
-   *  Secrets (push_auth_token, outbound credentials) are write-only.
-   *
-   * This message contains a oneof named outbound_auth. Only a single field of the following list may be set at a time:
-   *   - outboundAuthBearer
-   *   - outboundAuthOauth2
-   */
-  ssfReceiverStream?: SSFReceiverStream | undefined;
+  pushAuthTokenPlaintext?: string | null | undefined;
+  ssfReceiverStream?: SSFReceiverStream | null | undefined;
 };
 
 /** @internal */
@@ -38,8 +28,8 @@ export const SSFReceiverStreamServiceCreateResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  pushAuthTokenPlaintext: z.string().optional(),
-  ssfReceiverStream: SSFReceiverStream$inboundSchema.optional(),
+  pushAuthTokenPlaintext: z.nullable(z.string()).optional(),
+  ssfReceiverStream: z.nullable(SSFReceiverStream$inboundSchema).optional(),
 });
 
 export function ssfReceiverStreamServiceCreateResponseFromJSON(

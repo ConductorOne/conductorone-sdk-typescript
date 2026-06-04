@@ -178,7 +178,7 @@ async function $do(
     M.json(
       200,
       operations.C1ApiAppV2AppOwnersGetUserOwnerResponse$inboundSchema,
-      { key: "GetUserOwnerResponse" },
+      { key: "GetAppUserOwnerResponse" },
     ),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

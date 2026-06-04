@@ -18,7 +18,7 @@ export type AppOwnerApproval = {
   /**
    * Configuration to require distinct approvers across approval steps of a rule.
    */
-  requireDistinctApprovers?: boolean | undefined;
+  requireDistinctApprovers?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -28,12 +28,12 @@ export const AppOwnerApproval$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   allowSelfApproval: z.nullable(z.boolean()).optional(),
-  requireDistinctApprovers: z.boolean().optional(),
+  requireDistinctApprovers: z.nullable(z.boolean()).optional(),
 });
 /** @internal */
 export type AppOwnerApproval$Outbound = {
   allowSelfApproval?: boolean | null | undefined;
-  requireDistinctApprovers?: boolean | undefined;
+  requireDistinctApprovers?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -43,7 +43,7 @@ export const AppOwnerApproval$outboundSchema: z.ZodType<
   AppOwnerApproval
 > = z.object({
   allowSelfApproval: z.nullable(z.boolean()).optional(),
-  requireDistinctApprovers: z.boolean().optional(),
+  requireDistinctApprovers: z.nullable(z.boolean()).optional(),
 });
 
 export function appOwnerApprovalToJSON(

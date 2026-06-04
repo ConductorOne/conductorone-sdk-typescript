@@ -11,7 +11,7 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequest =
   {
-    requestCatalogId: string | null;
+    requestCatalogId: string;
     forceRunBundleAutomationRequest?:
       | shared.ForceRunBundleAutomationRequest
       | undefined;
@@ -42,7 +42,7 @@ export type C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAu
 /** @internal */
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequest$Outbound =
   {
-    request_catalog_id: string | null;
+    request_catalog_id: string;
     ForceRunBundleAutomationRequest?:
       | shared.ForceRunBundleAutomationRequest$Outbound
       | undefined;
@@ -55,7 +55,7 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleA
     z.ZodTypeDef,
     C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationRequest
   > = z.object({
-    requestCatalogId: z.nullable(z.string()),
+    requestCatalogId: z.string(),
     forceRunBundleAutomationRequest: shared
       .ForceRunBundleAutomationRequest$outboundSchema.optional(),
   }).transform((v) => {

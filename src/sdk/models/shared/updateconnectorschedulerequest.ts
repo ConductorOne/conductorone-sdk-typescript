@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   ConnectorScheduleCron,
   ConnectorScheduleCron$Outbound,
@@ -19,10 +18,7 @@ import {
  *   - cron
  */
 export type UpdateConnectorScheduleRequest = {
-  /**
-   * A cron-based schedule definition for connector syncs.
-   */
-  connectorScheduleCron?: ConnectorScheduleCron | null | undefined;
+  cron?: ConnectorScheduleCron | null | undefined;
 };
 
 /** @internal */
@@ -36,12 +32,7 @@ export const UpdateConnectorScheduleRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateConnectorScheduleRequest
 > = z.object({
-  connectorScheduleCron: z.nullable(ConnectorScheduleCron$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    connectorScheduleCron: "cron",
-  });
+  cron: z.nullable(ConnectorScheduleCron$outboundSchema).optional(),
 });
 
 export function updateConnectorScheduleRequestToJSON(

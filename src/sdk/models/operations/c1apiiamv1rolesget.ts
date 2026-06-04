@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiIamV1RolesGetRequest = {
-  roleId: string | null;
+  roleId: string;
 };
 
 export type C1ApiIamV1RolesGetResponse = {
@@ -34,7 +34,7 @@ export type C1ApiIamV1RolesGetResponse = {
 
 /** @internal */
 export type C1ApiIamV1RolesGetRequest$Outbound = {
-  role_id: string | null;
+  role_id: string;
 };
 
 /** @internal */
@@ -43,7 +43,7 @@ export const C1ApiIamV1RolesGetRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiIamV1RolesGetRequest
 > = z.object({
-  roleId: z.nullable(z.string()),
+  roleId: z.string(),
 }).transform((v) => {
   return remap$(v, {
     roleId: "role_id",

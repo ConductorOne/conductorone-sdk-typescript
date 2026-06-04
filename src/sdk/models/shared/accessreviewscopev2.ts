@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -132,80 +131,22 @@ import {
  *   - resourceSelection
  */
 export type AccessReviewScopeV2 = {
-  /**
-   * The CelExpressionScope message.
-   */
-  celExpressionScope?: CelExpressionScope | null | undefined;
-  /**
-   * The AccountCriteriaScope message.
-   */
-  accountCriteriaScope?: AccountCriteriaScope | null | undefined;
-  /**
-   * The AllAccessConflictsScope message.
-   */
-  allAccessConflictsScope?: AllAccessConflictsScope | null | undefined;
-  /**
-   * The AllAccountsScope message.
-   */
-  allAccountsScope?: AllAccountsScope | null | undefined;
-  /**
-   * The AllGrantsScope message.
-   */
-  allGrantsScope?: AllGrantsScope | null | undefined;
-  /**
-   * The AllUsersScope message.
-   */
-  allUsersScope?: AllUsersScope | null | undefined;
-  /**
-   * The ApplicationAccessScope message.
-   */
-  applicationAccessScope?: ApplicationAccessScope | null | undefined;
-  /**
-   * The AppSelectionCriteriaScope message.
-   */
-  appSelectionCriteriaScope?: AppSelectionCriteriaScope | null | undefined;
-  /**
-   * The CelExpressionScope message.
-   */
-  celExpressionScope1?: CelExpressionScope | null | undefined;
-  /**
-   * The GrantsByCriteriaScope message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named criteria_filter. Only a single field of the following list may be set at a time:
-   *   - daysSinceAdded
-   *   - daysSinceReviewed
-   *   - grantsAddedBetween
-   */
-  grantsByCriteriaScope?: GrantsByCriteriaScope | null | undefined;
-  /**
-   * The ResourceSelectionScope message.
-   */
-  resourceSelectionScope?: ResourceSelectionScope | null | undefined;
-  /**
-   * The ResourceTypeSelectionScope message.
-   */
-  resourceTypeSelectionScope?: ResourceTypeSelectionScope | null | undefined;
-  /**
-   * The SelectedUsersScope message.
-   */
-  selectedUsersScope?: SelectedUsersScope | null | undefined;
-  /**
-   * The SpecificAccessConflictsScope message.
-   */
-  specificAccessConflictsScope?:
-    | SpecificAccessConflictsScope
-    | null
-    | undefined;
-  /**
-   * The SpecificResourcesScope message.
-   */
-  specificResourcesScope?: SpecificResourcesScope | null | undefined;
-  /**
-   * The UserCriteriaScope message.
-   */
-  userCriteriaScope?: UserCriteriaScope | null | undefined;
+  accountCelExpression?: CelExpressionScope | null | undefined;
+  accountCriteria?: AccountCriteriaScope | null | undefined;
+  allAccessConflicts?: AllAccessConflictsScope | null | undefined;
+  allAccounts?: AllAccountsScope | null | undefined;
+  allGrants?: AllGrantsScope | null | undefined;
+  allUsers?: AllUsersScope | null | undefined;
+  appAccess?: ApplicationAccessScope | null | undefined;
+  appSelectionCriteria?: AppSelectionCriteriaScope | null | undefined;
+  celExpression?: CelExpressionScope | null | undefined;
+  grantsByCriteria?: GrantsByCriteriaScope | null | undefined;
+  resourceSelection?: ResourceSelectionScope | null | undefined;
+  resourceTypeSelections?: ResourceTypeSelectionScope | null | undefined;
+  selectedUsers?: SelectedUsersScope | null | undefined;
+  specificAccessConflicts?: SpecificAccessConflictsScope | null | undefined;
+  specificResources?: SpecificResourcesScope | null | undefined;
+  userCriteria?: UserCriteriaScope | null | undefined;
 };
 
 /** @internal */
@@ -237,25 +178,6 @@ export const AccessReviewScopeV2$inboundSchema: z.ZodType<
   specificResources: z.nullable(SpecificResourcesScope$inboundSchema)
     .optional(),
   userCriteria: z.nullable(UserCriteriaScope$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "accountCelExpression": "celExpressionScope",
-    "accountCriteria": "accountCriteriaScope",
-    "allAccessConflicts": "allAccessConflictsScope",
-    "allAccounts": "allAccountsScope",
-    "allGrants": "allGrantsScope",
-    "allUsers": "allUsersScope",
-    "appAccess": "applicationAccessScope",
-    "appSelectionCriteria": "appSelectionCriteriaScope",
-    "celExpression": "celExpressionScope1",
-    "grantsByCriteria": "grantsByCriteriaScope",
-    "resourceSelection": "resourceSelectionScope",
-    "resourceTypeSelections": "resourceTypeSelectionScope",
-    "selectedUsers": "selectedUsersScope",
-    "specificAccessConflicts": "specificAccessConflictsScope",
-    "specificResources": "specificResourcesScope",
-    "userCriteria": "userCriteriaScope",
-  });
 });
 /** @internal */
 export type AccessReviewScopeV2$Outbound = {
@@ -289,53 +211,30 @@ export const AccessReviewScopeV2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AccessReviewScopeV2
 > = z.object({
-  celExpressionScope: z.nullable(CelExpressionScope$outboundSchema).optional(),
-  accountCriteriaScope: z.nullable(AccountCriteriaScope$outboundSchema)
+  accountCelExpression: z.nullable(CelExpressionScope$outboundSchema)
     .optional(),
-  allAccessConflictsScope: z.nullable(AllAccessConflictsScope$outboundSchema)
+  accountCriteria: z.nullable(AccountCriteriaScope$outboundSchema).optional(),
+  allAccessConflicts: z.nullable(AllAccessConflictsScope$outboundSchema)
     .optional(),
-  allAccountsScope: z.nullable(AllAccountsScope$outboundSchema).optional(),
-  allGrantsScope: z.nullable(AllGrantsScope$outboundSchema).optional(),
-  allUsersScope: z.nullable(AllUsersScope$outboundSchema).optional(),
-  applicationAccessScope: z.nullable(ApplicationAccessScope$outboundSchema)
+  allAccounts: z.nullable(AllAccountsScope$outboundSchema).optional(),
+  allGrants: z.nullable(AllGrantsScope$outboundSchema).optional(),
+  allUsers: z.nullable(AllUsersScope$outboundSchema).optional(),
+  appAccess: z.nullable(ApplicationAccessScope$outboundSchema).optional(),
+  appSelectionCriteria: z.nullable(AppSelectionCriteriaScope$outboundSchema)
     .optional(),
-  appSelectionCriteriaScope: z.nullable(
-    AppSelectionCriteriaScope$outboundSchema,
-  ).optional(),
-  celExpressionScope1: z.nullable(CelExpressionScope$outboundSchema).optional(),
-  grantsByCriteriaScope: z.nullable(GrantsByCriteriaScope$outboundSchema)
+  celExpression: z.nullable(CelExpressionScope$outboundSchema).optional(),
+  grantsByCriteria: z.nullable(GrantsByCriteriaScope$outboundSchema).optional(),
+  resourceSelection: z.nullable(ResourceSelectionScope$outboundSchema)
     .optional(),
-  resourceSelectionScope: z.nullable(ResourceSelectionScope$outboundSchema)
+  resourceTypeSelections: z.nullable(ResourceTypeSelectionScope$outboundSchema)
     .optional(),
-  resourceTypeSelectionScope: z.nullable(
-    ResourceTypeSelectionScope$outboundSchema,
-  ).optional(),
-  selectedUsersScope: z.nullable(SelectedUsersScope$outboundSchema).optional(),
-  specificAccessConflictsScope: z.nullable(
+  selectedUsers: z.nullable(SelectedUsersScope$outboundSchema).optional(),
+  specificAccessConflicts: z.nullable(
     SpecificAccessConflictsScope$outboundSchema,
   ).optional(),
-  specificResourcesScope: z.nullable(SpecificResourcesScope$outboundSchema)
+  specificResources: z.nullable(SpecificResourcesScope$outboundSchema)
     .optional(),
-  userCriteriaScope: z.nullable(UserCriteriaScope$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    celExpressionScope: "accountCelExpression",
-    accountCriteriaScope: "accountCriteria",
-    allAccessConflictsScope: "allAccessConflicts",
-    allAccountsScope: "allAccounts",
-    allGrantsScope: "allGrants",
-    allUsersScope: "allUsers",
-    applicationAccessScope: "appAccess",
-    appSelectionCriteriaScope: "appSelectionCriteria",
-    celExpressionScope1: "celExpression",
-    grantsByCriteriaScope: "grantsByCriteria",
-    resourceSelectionScope: "resourceSelection",
-    resourceTypeSelectionScope: "resourceTypeSelections",
-    selectedUsersScope: "selectedUsers",
-    specificAccessConflictsScope: "specificAccessConflicts",
-    specificResourcesScope: "specificResources",
-    userCriteriaScope: "userCriteria",
-  });
+  userCriteria: z.nullable(UserCriteriaScope$outboundSchema).optional(),
 });
 
 export function accessReviewScopeV2ToJSON(

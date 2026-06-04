@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -18,17 +17,7 @@ export type C1TodoListComponent = {
    * The items field.
    */
   items?: Array<C1TodoItem> | null | undefined;
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString?: DynamicString | undefined;
+  title?: DynamicString | null | undefined;
 };
 
 /** @internal */
@@ -38,11 +27,7 @@ export const C1TodoListComponent$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   items: z.nullable(z.array(C1TodoItem$inboundSchema)).optional(),
-  title: DynamicString$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "title": "dynamicString",
-  });
+  title: z.nullable(DynamicString$inboundSchema).optional(),
 });
 
 export function c1TodoListComponentFromJSON(

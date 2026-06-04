@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   WorkloadFederationProviderInput,
   WorkloadFederationProviderInput$Outbound,
@@ -14,16 +13,13 @@ import {
  * The WorkloadFederationServiceUpdateProviderRequest message.
  */
 export type WorkloadFederationServiceUpdateProviderRequest = {
-  /**
-   * WorkloadFederationProvider represents a tenant-level OIDC issuer registration.
-   */
-  workloadFederationProvider?: WorkloadFederationProviderInput | undefined;
+  provider?: WorkloadFederationProviderInput | null | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type WorkloadFederationServiceUpdateProviderRequest$Outbound = {
-  provider?: WorkloadFederationProviderInput$Outbound | undefined;
+  provider?: WorkloadFederationProviderInput$Outbound | null | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -34,13 +30,9 @@ export const WorkloadFederationServiceUpdateProviderRequest$outboundSchema:
     z.ZodTypeDef,
     WorkloadFederationServiceUpdateProviderRequest
   > = z.object({
-    workloadFederationProvider: WorkloadFederationProviderInput$outboundSchema
+    provider: z.nullable(WorkloadFederationProviderInput$outboundSchema)
       .optional(),
     updateMask: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      workloadFederationProvider: "provider",
-    });
   });
 
 export function workloadFederationServiceUpdateProviderRequestToJSON(

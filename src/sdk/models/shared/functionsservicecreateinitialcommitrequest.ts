@@ -11,7 +11,7 @@ export type FunctionsServiceCreateInitialCommitRequest = {
   /**
    * The commitMessage field.
    */
-  commitMessage?: string | undefined;
+  commitMessage?: string | null | undefined;
   /**
    * The filenames field.
    */
@@ -20,7 +20,7 @@ export type FunctionsServiceCreateInitialCommitRequest = {
 
 /** @internal */
 export type FunctionsServiceCreateInitialCommitRequest$Outbound = {
-  commitMessage?: string | undefined;
+  commitMessage?: string | null | undefined;
   filenames?: Array<string> | null | undefined;
 };
 
@@ -31,7 +31,7 @@ export const FunctionsServiceCreateInitialCommitRequest$outboundSchema:
     z.ZodTypeDef,
     FunctionsServiceCreateInitialCommitRequest
   > = z.object({
-    commitMessage: z.string().optional(),
+    commitMessage: z.nullable(z.string()).optional(),
     filenames: z.nullable(z.array(z.string())).optional(),
   });
 

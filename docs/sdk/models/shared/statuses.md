@@ -5,7 +5,7 @@
 ```typescript
 import { Statuses } from "conductorone-sdk-typescript/sdk/models/shared";
 
-let value: Statuses = "AUTOMATION_STATUS_FILTER_OFF";
+let value: Statuses = "DECOY_STATUS_FILTER_DISABLED";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: Statuses = "AUTOMATION_STATUS_FILTER_OFF";
 ## Values
 
 ```typescript
-"AUTOMATION_STATUS_FILTER_UNSPECIFIED" | "AUTOMATION_STATUS_FILTER_ON" | "AUTOMATION_STATUS_FILTER_OFF" | Unrecognized<string>
+"DECOY_STATUS_FILTER_UNSPECIFIED" | "DECOY_STATUS_FILTER_ACTIVE" | "DECOY_STATUS_FILTER_DISABLED" | Unrecognized<string>
 ```

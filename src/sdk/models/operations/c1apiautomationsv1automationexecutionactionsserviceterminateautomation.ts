@@ -11,7 +11,7 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest =
   {
-    id: number | null;
+    id: number;
     terminateAutomationRequest?: shared.TerminateAutomationRequest | undefined;
   };
 
@@ -40,7 +40,7 @@ export type C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomati
 /** @internal */
 export type C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest$Outbound =
   {
-    id: string | null;
+    id: string;
     TerminateAutomationRequest?:
       | shared.TerminateAutomationRequest$Outbound
       | undefined;
@@ -53,7 +53,7 @@ export const C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomat
     z.ZodTypeDef,
     C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest
   > = z.object({
-    id: z.nullable(z.number().int().transform(v => `${v}`)),
+    id: z.number().int().transform(v => `${v}`),
     terminateAutomationRequest: shared.TerminateAutomationRequest$outboundSchema
       .optional(),
   }).transform((v) => {

@@ -6,7 +6,7 @@
 import { C1ApiAppV1AppEntitlementsDeleteAutomationRequest } from "conductorone-sdk-typescript/sdk/models/operations";
 
 let value: C1ApiAppV1AppEntitlementsDeleteAutomationRequest = {
-  appId: null,
+  appId: "<id>",
   appEntitlementId: "<id>",
 };
 ```

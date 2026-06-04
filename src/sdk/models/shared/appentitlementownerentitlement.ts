@@ -15,21 +15,20 @@ import {
  * AppEntitlementOwnerEntitlement represents an entitlement ownership source for an app entitlement.
  */
 export type AppEntitlementOwnerEntitlement = {
+  appEntitlement?: AppEntitlement | null | undefined;
   /**
-   * The app entitlement represents one permission in a downstream App (SAAS) that can be granted. For example, GitHub Read vs GitHub Write.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named max_grant_duration. Only a single field of the following list may be set at a time:
-   *   - durationUnset
-   *   - durationGrant
+   * The appId field.
    */
-  appEntitlement?: AppEntitlement | undefined;
-  createdAt?: Date | undefined;
+  appId?: string | null | undefined;
+  createdAt?: Date | null | undefined;
+  /**
+   * The entitlementId field.
+   */
+  entitlementId?: string | null | undefined;
   /**
    * The roleSlug field.
    */
-  roleSlug?: string | undefined;
+  roleSlug?: string | null | undefined;
 };
 
 /** @internal */
@@ -38,10 +37,13 @@ export const AppEntitlementOwnerEntitlement$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appEntitlement: AppEntitlement$inboundSchema.optional(),
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  roleSlug: z.string().optional(),
+  appEntitlement: z.nullable(AppEntitlement$inboundSchema).optional(),
+  appId: z.nullable(z.string()).optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  entitlementId: z.nullable(z.string()).optional(),
+  roleSlug: z.nullable(z.string()).optional(),
 });
 
 export function appEntitlementOwnerEntitlementFromJSON(

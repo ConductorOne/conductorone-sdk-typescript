@@ -11,7 +11,7 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest =
   {
-    id: string | null;
+    id: string;
     deleteComplianceFrameworkAttributeValueRequest?:
       | shared.DeleteComplianceFrameworkAttributeValueRequest
       | undefined;
@@ -42,7 +42,7 @@ export type C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRes
 /** @internal */
 export type C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest$Outbound =
   {
-    id: string | null;
+    id: string;
     DeleteComplianceFrameworkAttributeValueRequest?:
       | shared.DeleteComplianceFrameworkAttributeValueRequest$Outbound
       | undefined;
@@ -55,7 +55,7 @@ export const C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRe
     z.ZodTypeDef,
     C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest
   > = z.object({
-    id: z.nullable(z.string()),
+    id: z.string(),
     deleteComplianceFrameworkAttributeValueRequest: shared
       .DeleteComplianceFrameworkAttributeValueRequest$outboundSchema.optional(),
   }).transform((v) => {

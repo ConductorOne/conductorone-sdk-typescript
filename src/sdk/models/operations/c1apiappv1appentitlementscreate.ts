@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppEntitlementsCreateRequest = {
-  appId: string | null;
+  appId: string;
   createAppEntitlementRequest?: shared.CreateAppEntitlementRequest | undefined;
 };
 
@@ -37,7 +37,7 @@ export type C1ApiAppV1AppEntitlementsCreateResponse = {
 
 /** @internal */
 export type C1ApiAppV1AppEntitlementsCreateRequest$Outbound = {
-  app_id: string | null;
+  app_id: string;
   CreateAppEntitlementRequest?:
     | shared.CreateAppEntitlementRequest$Outbound
     | undefined;
@@ -49,7 +49,7 @@ export const C1ApiAppV1AppEntitlementsCreateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiAppV1AppEntitlementsCreateRequest
 > = z.object({
-  appId: z.nullable(z.string()),
+  appId: z.string(),
   createAppEntitlementRequest: shared.CreateAppEntitlementRequest$outboundSchema
     .optional(),
 }).transform((v) => {

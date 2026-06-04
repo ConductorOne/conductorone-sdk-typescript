@@ -71,7 +71,7 @@ export type AppUser = {
    * The isExternal field.
    */
   isExternal?: boolean | null | undefined;
-  profile?: { [k: string]: any } | null | undefined;
+  profile?: { [k: string]: any } | undefined;
   status?: AppUserStatus | null | undefined;
   updatedAt?: Date | null | undefined;
   /**
@@ -92,11 +92,7 @@ export type AppUserInput = {
    * The appplication user type. Type can be user, system or service.
    */
   appUserType?: AppUserType | null | undefined;
-  createdAt?: Date | null | undefined;
-  deletedAt?: Date | null | undefined;
-  profile?: { [k: string]: any } | null | undefined;
   status?: AppUserStatusInput | null | undefined;
-  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
@@ -130,7 +126,7 @@ export const AppUser$inboundSchema: z.ZodType<AppUser, z.ZodTypeDef, unknown> =
     id: z.nullable(z.string()).optional(),
     identityUserId: z.nullable(z.string()).optional(),
     isExternal: z.nullable(z.boolean()).optional(),
-    profile: z.nullable(z.record(z.any())).optional(),
+    profile: z.record(z.any()).optional(),
     status: z.nullable(AppUserStatus$inboundSchema).optional(),
     updatedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -152,11 +148,7 @@ export function appUserFromJSON(
 /** @internal */
 export type AppUserInput$Outbound = {
   appUserType?: string | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  profile?: { [k: string]: any } | null | undefined;
   status?: AppUserStatusInput$Outbound | null | undefined;
-  updatedAt?: string | null | undefined;
 };
 
 /** @internal */
@@ -166,11 +158,7 @@ export const AppUserInput$outboundSchema: z.ZodType<
   AppUserInput
 > = z.object({
   appUserType: z.nullable(AppUserType$outboundSchema).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  profile: z.nullable(z.record(z.any())).optional(),
   status: z.nullable(AppUserStatusInput$outboundSchema).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function appUserInputToJSON(appUserInput: AppUserInput): string {

@@ -8,8 +8,8 @@ SSFReceiverStreamServiceCreateRequest contains the configuration for a new SSF r
 import { SSFReceiverStreamServiceCreateRequest } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: SSFReceiverStreamServiceCreateRequest = {
-  displayName: "Blair43",
-  issuerUrl: "https://robust-custody.net/",
+  displayName: "Krista.Kuvalis96",
+  issuerUrl: "https://strange-nougat.biz/",
 };
 ```
 

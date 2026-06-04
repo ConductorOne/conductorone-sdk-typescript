@@ -4,10 +4,12 @@
 
 import { userGet } from "../funcs/userGet.js";
 import { userGetUserProfileTypes } from "../funcs/userGetUserProfileTypes.js";
+import { userIntrospect } from "../funcs/userIntrospect.js";
 import { userList } from "../funcs/userList.js";
 import { userSetExpiringUserDelegationBindingByAdmin } from "../funcs/userSetExpiringUserDelegationBindingByAdmin.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "./models/operations/index.js";
+import * as shared from "./models/shared/index.js";
 import { unwrapAsync } from "./types/fp.js";
 
 export class User extends ClientSDK {
@@ -76,6 +78,24 @@ export class User extends ClientSDK {
     operations.C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponse
   > {
     return unwrapAsync(userSetExpiringUserDelegationBindingByAdmin(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Introspect
+   *
+   * @remarks
+   * Introspect returns the calling user's full UserView (profile, manager, attributes)
+   *  resolved from the passport on the request.
+   */
+  async introspect(
+    request?: shared.UserIntrospectRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.C1ApiUserV1UserServiceIntrospectResponse> {
+    return unwrapAsync(userIntrospect(
       this,
       request,
       options,

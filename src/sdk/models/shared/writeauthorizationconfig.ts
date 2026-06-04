@@ -39,10 +39,7 @@ export type WriteAuthorizationConfig = {
    *  with no blocked classifications would be a silent misconfiguration.
    */
   blockedClassifications?: Array<BlockedClassifications> | null | undefined;
-  /**
-   * BusinessHours defines a weekly time window in a specific timezone.
-   */
-  businessHours?: BusinessHours | undefined;
+  businessHours?: BusinessHours | null | undefined;
 };
 
 /** @internal */
@@ -67,12 +64,12 @@ export const WriteAuthorizationConfig$inboundSchema: z.ZodType<
   blockedClassifications: z.nullable(
     z.array(BlockedClassifications$inboundSchema),
   ).optional(),
-  businessHours: BusinessHours$inboundSchema.optional(),
+  businessHours: z.nullable(BusinessHours$inboundSchema).optional(),
 });
 /** @internal */
 export type WriteAuthorizationConfig$Outbound = {
   blockedClassifications?: Array<string> | null | undefined;
-  businessHours?: BusinessHours$Outbound | undefined;
+  businessHours?: BusinessHours$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -84,7 +81,7 @@ export const WriteAuthorizationConfig$outboundSchema: z.ZodType<
   blockedClassifications: z.nullable(
     z.array(BlockedClassifications$outboundSchema),
   ).optional(),
-  businessHours: BusinessHours$outboundSchema.optional(),
+  businessHours: z.nullable(BusinessHours$outboundSchema).optional(),
 });
 
 export function writeAuthorizationConfigToJSON(

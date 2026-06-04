@@ -11,11 +11,11 @@ export type CohortHintInput = {
   /**
    * The user attribute name to use for cohort grouping (e.g., "department", "job_title").
    */
-  attribute?: string | undefined;
+  attribute?: string | null | undefined;
   /**
    * Relative priority of this hint. Higher values cause the analysis to weight this attribute more heavily.
    */
-  priority?: number | undefined;
+  priority?: number | null | undefined;
   /**
    * Specific attribute values to focus on. If empty, all values for the attribute are considered.
    */
@@ -24,8 +24,8 @@ export type CohortHintInput = {
 
 /** @internal */
 export type CohortHintInput$Outbound = {
-  attribute?: string | undefined;
-  priority?: number | undefined;
+  attribute?: string | null | undefined;
+  priority?: number | null | undefined;
   values?: Array<string> | null | undefined;
 };
 
@@ -35,8 +35,8 @@ export const CohortHintInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CohortHintInput
 > = z.object({
-  attribute: z.string().optional(),
-  priority: z.number().int().optional(),
+  attribute: z.nullable(z.string()).optional(),
+  priority: z.nullable(z.number().int()).optional(),
   values: z.nullable(z.array(z.string())).optional(),
 });
 

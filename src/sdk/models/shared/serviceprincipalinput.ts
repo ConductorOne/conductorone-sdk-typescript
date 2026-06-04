@@ -16,17 +16,14 @@ export type ServicePrincipalInput = {
   /**
    * The display name of the service principal.
    */
-  displayName?: string | undefined;
-  /**
-   * The User object provides all of the details for an user, as well as some configuration.
-   */
-  user?: UserInput | undefined;
+  displayName?: string | null | undefined;
+  user?: UserInput | null | undefined;
 };
 
 /** @internal */
 export type ServicePrincipalInput$Outbound = {
-  displayName?: string | undefined;
-  user?: UserInput$Outbound | undefined;
+  displayName?: string | null | undefined;
+  user?: UserInput$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -35,8 +32,8 @@ export const ServicePrincipalInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ServicePrincipalInput
 > = z.object({
-  displayName: z.string().optional(),
-  user: UserInput$outboundSchema.optional(),
+  displayName: z.nullable(z.string()).optional(),
+  user: z.nullable(UserInput$outboundSchema).optional(),
 });
 
 export function servicePrincipalInputToJSON(

@@ -25,7 +25,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 
 async function run() {
   const result = await conductoroneSDKTypescript.appReportAction.generateReport({
-    appId: null,
+    appId: "<id>",
   });
 
   console.log(result);
@@ -53,7 +53,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 
 async function run() {
   const res = await appReportActionGenerateReport(conductoroneSDKTypescript, {
-    appId: null,
+    appId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;

@@ -10,9 +10,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppResourceServiceGetRequest = {
-  appId: string | null;
-  appResourceTypeId: string | null;
-  id: string | null;
+  appId: string;
+  appResourceTypeId: string;
+  id: string;
 };
 
 export type C1ApiAppV1AppResourceServiceGetResponse = {
@@ -38,9 +38,9 @@ export type C1ApiAppV1AppResourceServiceGetResponse = {
 
 /** @internal */
 export type C1ApiAppV1AppResourceServiceGetRequest$Outbound = {
-  app_id: string | null;
-  app_resource_type_id: string | null;
-  id: string | null;
+  app_id: string;
+  app_resource_type_id: string;
+  id: string;
 };
 
 /** @internal */
@@ -49,9 +49,9 @@ export const C1ApiAppV1AppResourceServiceGetRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiAppV1AppResourceServiceGetRequest
 > = z.object({
-  appId: z.nullable(z.string()),
-  appResourceTypeId: z.nullable(z.string()),
-  id: z.nullable(z.string()),
+  appId: z.string(),
+  appResourceTypeId: z.string(),
+  id: z.string(),
 }).transform((v) => {
   return remap$(v, {
     appId: "app_id",

@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiPolicyV1PoliciesDeleteRequest = {
-  id: string | null;
+  id: string;
   deletePolicyRequest?: shared.DeletePolicyRequest | undefined;
 };
 
@@ -35,7 +35,7 @@ export type C1ApiPolicyV1PoliciesDeleteResponse = {
 
 /** @internal */
 export type C1ApiPolicyV1PoliciesDeleteRequest$Outbound = {
-  id: string | null;
+  id: string;
   DeletePolicyRequest?: shared.DeletePolicyRequest$Outbound | undefined;
 };
 
@@ -45,7 +45,7 @@ export const C1ApiPolicyV1PoliciesDeleteRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiPolicyV1PoliciesDeleteRequest
 > = z.object({
-  id: z.nullable(z.string()),
+  id: z.string(),
   deletePolicyRequest: shared.DeletePolicyRequest$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

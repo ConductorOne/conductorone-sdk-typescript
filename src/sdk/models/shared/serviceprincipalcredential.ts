@@ -18,22 +18,22 @@ export type ServicePrincipalCredential = {
   /**
    * The full client ID in format: ${cutename}@${tenant}.${installation}/spc
    */
-  clientId?: string | undefined;
-  createdAt?: Date | undefined;
+  clientId?: string | null | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * The display name of the credential.
    */
-  displayName?: string | undefined;
-  expiresAt?: Date | undefined;
+  displayName?: string | null | undefined;
+  expiresAt?: Date | null | undefined;
   /**
    * The unique ID of the credential (cutename format).
    */
-  id?: string | undefined;
-  lastUsedAt?: Date | undefined;
+  id?: string | null | undefined;
+  lastUsedAt?: Date | null | undefined;
   /**
    * Whether DPoP proof-of-possession is required for this credential.
    */
-  requireDpop?: boolean | undefined;
+  requireDpop?: boolean | null | undefined;
   /**
    * Scoped role IDs for this credential (intersection with SP roles at token issuance).
    */
@@ -41,7 +41,7 @@ export type ServicePrincipalCredential = {
   /**
    * The service principal user ID this credential belongs to.
    */
-  servicePrincipalId?: string | undefined;
+  servicePrincipalId?: string | null | undefined;
 };
 
 /** @internal */
@@ -51,18 +51,21 @@ export const ServicePrincipalCredential$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   allowSourceCidrs: z.nullable(z.array(z.string())).optional(),
-  clientId: z.string().optional(),
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  displayName: z.string().optional(),
-  expiresAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  id: z.string().optional(),
-  lastUsedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  requireDpop: z.boolean().optional(),
+  clientId: z.nullable(z.string()).optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  displayName: z.nullable(z.string()).optional(),
+  expiresAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  id: z.nullable(z.string()).optional(),
+  lastUsedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  requireDpop: z.nullable(z.boolean()).optional(),
   scopedRoleIds: z.nullable(z.array(z.string())).optional(),
-  servicePrincipalId: z.string().optional(),
+  servicePrincipalId: z.nullable(z.string()).optional(),
 });
 
 export function servicePrincipalCredentialFromJSON(

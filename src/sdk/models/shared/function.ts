@@ -86,15 +86,13 @@ export type FunctionT = {
    *  tenant has completed the FunctionsToSPN migration) and by the migration
    *  itself, never by UpdateFunction. Retired once all functions are on SPN.
    */
-  useSpn?: boolean | undefined;
+  useSpn?: boolean | null | undefined;
 };
 
 /**
  * Function represents a customer-provided code extension in the API
  */
 export type FunctionInput = {
-  createdAt?: Date | null | undefined;
-  deletedAt?: Date | null | undefined;
   /**
    * The description field.
    */
@@ -142,7 +140,6 @@ export type FunctionInput = {
    * The secret field.
    */
   secret?: { [k: string]: string } | undefined;
-  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
@@ -183,7 +180,7 @@ export const FunctionT$inboundSchema: z.ZodType<
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  useSpn: z.boolean().optional(),
+  useSpn: z.nullable(z.boolean()).optional(),
 });
 
 export function functionFromJSON(
@@ -198,8 +195,6 @@ export function functionFromJSON(
 
 /** @internal */
 export type FunctionInput$Outbound = {
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
   description?: string | null | undefined;
   displayName?: string | null | undefined;
   functionType?: string | null | undefined;
@@ -210,7 +205,6 @@ export type FunctionInput$Outbound = {
   publishedCommitId?: string | null | undefined;
   scopedRoleIds?: Array<string> | null | undefined;
   secret?: { [k: string]: string } | undefined;
-  updatedAt?: string | null | undefined;
 };
 
 /** @internal */
@@ -219,8 +213,6 @@ export const FunctionInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FunctionInput
 > = z.object({
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
   functionType: z.nullable(FunctionType$outboundSchema).optional(),
@@ -231,7 +223,6 @@ export const FunctionInput$outboundSchema: z.ZodType<
   publishedCommitId: z.nullable(z.string()).optional(),
   scopedRoleIds: z.nullable(z.array(z.string())).optional(),
   secret: z.record(z.string()).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function functionInputToJSON(functionInput: FunctionInput): string {

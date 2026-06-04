@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiStepupV1StepUpProviderServiceUpdateRequest = {
-  id: string | null;
+  id: string;
   updateStepUpProviderRequest?: shared.UpdateStepUpProviderRequest | undefined;
 };
 
@@ -37,7 +37,7 @@ export type C1ApiStepupV1StepUpProviderServiceUpdateResponse = {
 
 /** @internal */
 export type C1ApiStepupV1StepUpProviderServiceUpdateRequest$Outbound = {
-  id: string | null;
+  id: string;
   UpdateStepUpProviderRequest?:
     | shared.UpdateStepUpProviderRequest$Outbound
     | undefined;
@@ -50,7 +50,7 @@ export const C1ApiStepupV1StepUpProviderServiceUpdateRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiStepupV1StepUpProviderServiceUpdateRequest
   > = z.object({
-    id: z.nullable(z.string()),
+    id: z.string(),
     updateStepUpProviderRequest: shared
       .UpdateStepUpProviderRequest$outboundSchema.optional(),
   }).transform((v) => {

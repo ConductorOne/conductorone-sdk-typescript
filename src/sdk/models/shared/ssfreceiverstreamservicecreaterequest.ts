@@ -94,54 +94,58 @@ export type SSFReceiverStreamServiceCreateRequest = {
    */
   accountDisabledAction?:
     | SSFReceiverStreamServiceCreateRequestAccountDisabledAction
+    | null
     | undefined;
   /**
    * Action to take when a credential-change event is received.
    */
   credentialChangeAction?:
     | SSFReceiverStreamServiceCreateRequestCredentialChangeAction
+    | null
     | undefined;
   /**
    * Action to take when a credential-compromise event is received.
    */
   credentialCompromiseAction?:
     | SSFReceiverStreamServiceCreateRequestCredentialCompromiseAction
+    | null
     | undefined;
   /**
    * Controls whether events are received via push or poll delivery.
    */
   deliveryMethod?:
     | SSFReceiverStreamServiceCreateRequestDeliveryMethod
+    | null
     | undefined;
   /**
    * Optional description of the stream's purpose or source.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * Human-readable name for the stream.
    */
-  displayName: string;
+  displayName: string | null;
   /**
    * Controls whether the stream starts processing events immediately after creation.
    */
-  enabled?: boolean | undefined;
+  enabled?: boolean | null | undefined;
   /**
    * Expected audience claim in incoming SETs. If set, SETs with a different audience are rejected.
    */
-  expectedAudience?: string | undefined;
+  expectedAudience?: string | null | undefined;
   /**
    * The issuer URL of the upstream SSF transmitter, used for token validation.
    */
-  issuerUrl: string;
+  issuerUrl: string | null;
   /**
    * URL to fetch the transmitter's JSON Web Key Set for SET signature verification.
    */
-  jwksUrl?: string | undefined;
+  jwksUrl?: string | null | undefined;
   /**
    * URL of the transmitter's poll endpoint. Required when delivery_method is POLL.
    */
-  pollEndpointUrl?: string | undefined;
-  pollInterval?: string | undefined;
+  pollEndpointUrl?: string | null | undefined;
+  pollInterval?: string | null | undefined;
   /**
    * Per-event-type action configuration.
    *
@@ -150,6 +154,7 @@ export type SSFReceiverStreamServiceCreateRequest = {
    */
   sessionRevokedAction?:
     | SSFReceiverStreamServiceCreateRequestSessionRevokedAction
+    | null
     | undefined;
 };
 
@@ -205,19 +210,19 @@ export const SSFReceiverStreamServiceCreateRequestSessionRevokedAction$outboundS
 
 /** @internal */
 export type SSFReceiverStreamServiceCreateRequest$Outbound = {
-  accountDisabledAction?: string | undefined;
-  credentialChangeAction?: string | undefined;
-  credentialCompromiseAction?: string | undefined;
-  deliveryMethod?: string | undefined;
-  description?: string | undefined;
-  displayName: string;
-  enabled?: boolean | undefined;
-  expectedAudience?: string | undefined;
-  issuerUrl: string;
-  jwksUrl?: string | undefined;
-  pollEndpointUrl?: string | undefined;
-  pollInterval?: string | undefined;
-  sessionRevokedAction?: string | undefined;
+  accountDisabledAction?: string | null | undefined;
+  credentialChangeAction?: string | null | undefined;
+  credentialCompromiseAction?: string | null | undefined;
+  deliveryMethod?: string | null | undefined;
+  description?: string | null | undefined;
+  displayName: string | null;
+  enabled?: boolean | null | undefined;
+  expectedAudience?: string | null | undefined;
+  issuerUrl: string | null;
+  jwksUrl?: string | null | undefined;
+  pollEndpointUrl?: string | null | undefined;
+  pollInterval?: string | null | undefined;
+  sessionRevokedAction?: string | null | undefined;
 };
 
 /** @internal */
@@ -226,29 +231,29 @@ export const SSFReceiverStreamServiceCreateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SSFReceiverStreamServiceCreateRequest
 > = z.object({
-  accountDisabledAction:
-    SSFReceiverStreamServiceCreateRequestAccountDisabledAction$outboundSchema
-      .optional(),
-  credentialChangeAction:
-    SSFReceiverStreamServiceCreateRequestCredentialChangeAction$outboundSchema
-      .optional(),
-  credentialCompromiseAction:
-    SSFReceiverStreamServiceCreateRequestCredentialCompromiseAction$outboundSchema
-      .optional(),
-  deliveryMethod:
-    SSFReceiverStreamServiceCreateRequestDeliveryMethod$outboundSchema
-      .optional(),
-  description: z.string().optional(),
-  displayName: z.string(),
-  enabled: z.boolean().optional(),
-  expectedAudience: z.string().optional(),
-  issuerUrl: z.string(),
-  jwksUrl: z.string().optional(),
-  pollEndpointUrl: z.string().optional(),
-  pollInterval: z.string().optional(),
-  sessionRevokedAction:
-    SSFReceiverStreamServiceCreateRequestSessionRevokedAction$outboundSchema
-      .optional(),
+  accountDisabledAction: z.nullable(
+    SSFReceiverStreamServiceCreateRequestAccountDisabledAction$outboundSchema,
+  ).optional(),
+  credentialChangeAction: z.nullable(
+    SSFReceiverStreamServiceCreateRequestCredentialChangeAction$outboundSchema,
+  ).optional(),
+  credentialCompromiseAction: z.nullable(
+    SSFReceiverStreamServiceCreateRequestCredentialCompromiseAction$outboundSchema,
+  ).optional(),
+  deliveryMethod: z.nullable(
+    SSFReceiverStreamServiceCreateRequestDeliveryMethod$outboundSchema,
+  ).optional(),
+  description: z.nullable(z.string()).optional(),
+  displayName: z.nullable(z.string()),
+  enabled: z.nullable(z.boolean()).optional(),
+  expectedAudience: z.nullable(z.string()).optional(),
+  issuerUrl: z.nullable(z.string()),
+  jwksUrl: z.nullable(z.string()).optional(),
+  pollEndpointUrl: z.nullable(z.string()).optional(),
+  pollInterval: z.nullable(z.string()).optional(),
+  sessionRevokedAction: z.nullable(
+    SSFReceiverStreamServiceCreateRequestSessionRevokedAction$outboundSchema,
+  ).optional(),
 });
 
 export function ssfReceiverStreamServiceCreateRequestToJSON(

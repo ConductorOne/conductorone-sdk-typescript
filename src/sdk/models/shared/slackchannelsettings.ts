@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -72,54 +71,24 @@ import {
  * The SlackChannelSettings message.
  */
 export type SlackChannelSettings = {
-  /**
-   * The AccessProvisionedPreference message.
-   */
-  accessProvisionedPreference?: AccessProvisionedPreference | undefined;
-  /**
-   * The ApprovalNeededPreference message.
-   */
-  approvalNeededPreference?: ApprovalNeededPreference | undefined;
-  /**
-   * The CommentOnRequestPreference message.
-   */
-  commentOnRequestPreference?: CommentOnRequestPreference | undefined;
-  /**
-   * The CompletionPreference message.
-   */
-  completionPreference?: CompletionPreference | undefined;
-  /**
-   * The ConnectorIssuesPreference message.
-   */
-  connectorIssuesPreference?: ConnectorIssuesPreference | undefined;
-  /**
-   * DigestPreference controls whether summary digest notifications are sent and how often.
-   */
-  digestPreference?: DigestPreference | undefined;
+  accessProvisioned?: AccessProvisionedPreference | null | undefined;
+  approvalNeeded?: ApprovalNeededPreference | null | undefined;
+  commentOnRequest?: CommentOnRequestPreference | null | undefined;
+  completion?: CompletionPreference | null | undefined;
+  connectorIssues?: ConnectorIssuesPreference | null | undefined;
+  digest?: DigestPreference | null | undefined;
   /**
    * The enabled field.
    */
-  enabled?: boolean | undefined;
-  /**
-   * The ExpiringAccessPreference message.
-   */
-  expiringAccessPreference?: ExpiringAccessPreference | undefined;
+  enabled?: boolean | null | undefined;
+  expiringAccess?: ExpiringAccessPreference | null | undefined;
   /**
    * The isConfigured field.
    */
-  isConfigured?: boolean | undefined;
-  /**
-   * The ProvisioningRequestPreference message.
-   */
-  provisioningRequestPreference?: ProvisioningRequestPreference | undefined;
-  /**
-   * The ReviewsPreference message.
-   */
-  reviewsPreference?: ReviewsPreference | undefined;
-  /**
-   * The TaskRemindersPreference message.
-   */
-  taskRemindersPreference?: TaskRemindersPreference | undefined;
+  isConfigured?: boolean | null | undefined;
+  provisioningRequest?: ProvisioningRequestPreference | null | undefined;
+  reviews?: ReviewsPreference | null | undefined;
+  taskReminders?: TaskRemindersPreference | null | undefined;
 };
 
 /** @internal */
@@ -128,46 +97,40 @@ export const SlackChannelSettings$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accessProvisioned: AccessProvisionedPreference$inboundSchema.optional(),
-  approvalNeeded: ApprovalNeededPreference$inboundSchema.optional(),
-  commentOnRequest: CommentOnRequestPreference$inboundSchema.optional(),
-  completion: CompletionPreference$inboundSchema.optional(),
-  connectorIssues: ConnectorIssuesPreference$inboundSchema.optional(),
-  digest: DigestPreference$inboundSchema.optional(),
-  enabled: z.boolean().optional(),
-  expiringAccess: ExpiringAccessPreference$inboundSchema.optional(),
-  isConfigured: z.boolean().optional(),
-  provisioningRequest: ProvisioningRequestPreference$inboundSchema.optional(),
-  reviews: ReviewsPreference$inboundSchema.optional(),
-  taskReminders: TaskRemindersPreference$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "accessProvisioned": "accessProvisionedPreference",
-    "approvalNeeded": "approvalNeededPreference",
-    "commentOnRequest": "commentOnRequestPreference",
-    "completion": "completionPreference",
-    "connectorIssues": "connectorIssuesPreference",
-    "digest": "digestPreference",
-    "expiringAccess": "expiringAccessPreference",
-    "provisioningRequest": "provisioningRequestPreference",
-    "reviews": "reviewsPreference",
-    "taskReminders": "taskRemindersPreference",
-  });
+  accessProvisioned: z.nullable(AccessProvisionedPreference$inboundSchema)
+    .optional(),
+  approvalNeeded: z.nullable(ApprovalNeededPreference$inboundSchema).optional(),
+  commentOnRequest: z.nullable(CommentOnRequestPreference$inboundSchema)
+    .optional(),
+  completion: z.nullable(CompletionPreference$inboundSchema).optional(),
+  connectorIssues: z.nullable(ConnectorIssuesPreference$inboundSchema)
+    .optional(),
+  digest: z.nullable(DigestPreference$inboundSchema).optional(),
+  enabled: z.nullable(z.boolean()).optional(),
+  expiringAccess: z.nullable(ExpiringAccessPreference$inboundSchema).optional(),
+  isConfigured: z.nullable(z.boolean()).optional(),
+  provisioningRequest: z.nullable(ProvisioningRequestPreference$inboundSchema)
+    .optional(),
+  reviews: z.nullable(ReviewsPreference$inboundSchema).optional(),
+  taskReminders: z.nullable(TaskRemindersPreference$inboundSchema).optional(),
 });
 /** @internal */
 export type SlackChannelSettings$Outbound = {
-  accessProvisioned?: AccessProvisionedPreference$Outbound | undefined;
-  approvalNeeded?: ApprovalNeededPreference$Outbound | undefined;
-  commentOnRequest?: CommentOnRequestPreference$Outbound | undefined;
-  completion?: CompletionPreference$Outbound | undefined;
-  connectorIssues?: ConnectorIssuesPreference$Outbound | undefined;
-  digest?: DigestPreference$Outbound | undefined;
-  enabled?: boolean | undefined;
-  expiringAccess?: ExpiringAccessPreference$Outbound | undefined;
-  isConfigured?: boolean | undefined;
-  provisioningRequest?: ProvisioningRequestPreference$Outbound | undefined;
-  reviews?: ReviewsPreference$Outbound | undefined;
-  taskReminders?: TaskRemindersPreference$Outbound | undefined;
+  accessProvisioned?: AccessProvisionedPreference$Outbound | null | undefined;
+  approvalNeeded?: ApprovalNeededPreference$Outbound | null | undefined;
+  commentOnRequest?: CommentOnRequestPreference$Outbound | null | undefined;
+  completion?: CompletionPreference$Outbound | null | undefined;
+  connectorIssues?: ConnectorIssuesPreference$Outbound | null | undefined;
+  digest?: DigestPreference$Outbound | null | undefined;
+  enabled?: boolean | null | undefined;
+  expiringAccess?: ExpiringAccessPreference$Outbound | null | undefined;
+  isConfigured?: boolean | null | undefined;
+  provisioningRequest?:
+    | ProvisioningRequestPreference$Outbound
+    | null
+    | undefined;
+  reviews?: ReviewsPreference$Outbound | null | undefined;
+  taskReminders?: TaskRemindersPreference$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -176,35 +139,24 @@ export const SlackChannelSettings$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SlackChannelSettings
 > = z.object({
-  accessProvisionedPreference: AccessProvisionedPreference$outboundSchema
+  accessProvisioned: z.nullable(AccessProvisionedPreference$outboundSchema)
     .optional(),
-  approvalNeededPreference: ApprovalNeededPreference$outboundSchema.optional(),
-  commentOnRequestPreference: CommentOnRequestPreference$outboundSchema
+  approvalNeeded: z.nullable(ApprovalNeededPreference$outboundSchema)
     .optional(),
-  completionPreference: CompletionPreference$outboundSchema.optional(),
-  connectorIssuesPreference: ConnectorIssuesPreference$outboundSchema
+  commentOnRequest: z.nullable(CommentOnRequestPreference$outboundSchema)
     .optional(),
-  digestPreference: DigestPreference$outboundSchema.optional(),
-  enabled: z.boolean().optional(),
-  expiringAccessPreference: ExpiringAccessPreference$outboundSchema.optional(),
-  isConfigured: z.boolean().optional(),
-  provisioningRequestPreference: ProvisioningRequestPreference$outboundSchema
+  completion: z.nullable(CompletionPreference$outboundSchema).optional(),
+  connectorIssues: z.nullable(ConnectorIssuesPreference$outboundSchema)
     .optional(),
-  reviewsPreference: ReviewsPreference$outboundSchema.optional(),
-  taskRemindersPreference: TaskRemindersPreference$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    accessProvisionedPreference: "accessProvisioned",
-    approvalNeededPreference: "approvalNeeded",
-    commentOnRequestPreference: "commentOnRequest",
-    completionPreference: "completion",
-    connectorIssuesPreference: "connectorIssues",
-    digestPreference: "digest",
-    expiringAccessPreference: "expiringAccess",
-    provisioningRequestPreference: "provisioningRequest",
-    reviewsPreference: "reviews",
-    taskRemindersPreference: "taskReminders",
-  });
+  digest: z.nullable(DigestPreference$outboundSchema).optional(),
+  enabled: z.nullable(z.boolean()).optional(),
+  expiringAccess: z.nullable(ExpiringAccessPreference$outboundSchema)
+    .optional(),
+  isConfigured: z.nullable(z.boolean()).optional(),
+  provisioningRequest: z.nullable(ProvisioningRequestPreference$outboundSchema)
+    .optional(),
+  reviews: z.nullable(ReviewsPreference$outboundSchema).optional(),
+  taskReminders: z.nullable(TaskRemindersPreference$outboundSchema).optional(),
 });
 
 export function slackChannelSettingsToJSON(

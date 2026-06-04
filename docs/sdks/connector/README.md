@@ -200,7 +200,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 async function run() {
   const result = await conductoroneSDKTypescript.connector.confirmSyncValid({
     appId: "<id>",
-    connectorId: null,
+    connectorId: "<id>",
     syncLifecycleId: "<id>",
   });
 
@@ -230,7 +230,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 async function run() {
   const res = await connectorConfirmSyncValid(conductoroneSDKTypescript, {
     appId: "<id>",
-    connectorId: null,
+    connectorId: "<id>",
     syncLifecycleId: "<id>",
   });
   if (res.ok) {
@@ -1098,7 +1098,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 
 async function run() {
   const result = await conductoroneSDKTypescript.connector.create({
-    appId: null,
+    appId: "<id>",
   });
 
   console.log(result);
@@ -1126,7 +1126,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 
 async function run() {
   const res = await connectorCreate(conductoroneSDKTypescript, {
-    appId: null,
+    appId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;

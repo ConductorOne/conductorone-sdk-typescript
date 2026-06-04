@@ -12,16 +12,7 @@ import { Vault, Vault$inboundSchema } from "./vault.js";
  * VaultServiceGetResponse is the response message containing the requested vault.
  */
 export type VaultServiceGetResponse = {
-  /**
-   * Vault represents an external secret storage integration used to store connector credentials securely.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named vault. Only a single field of the following list may be set at a time:
-   *   - groupAuthzVault
-   *   - magicVault
-   */
-  vault?: Vault | undefined;
+  vault?: Vault | null | undefined;
 };
 
 /** @internal */
@@ -30,7 +21,7 @@ export const VaultServiceGetResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  vault: Vault$inboundSchema.optional(),
+  vault: z.nullable(Vault$inboundSchema).optional(),
 });
 
 export function vaultServiceGetResponseFromJSON(

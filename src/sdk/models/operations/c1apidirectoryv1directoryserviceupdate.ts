@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiDirectoryV1DirectoryServiceUpdateRequest = {
-  appId: string | null;
+  appId: string;
   directoryServiceUpdateRequest?:
     | shared.DirectoryServiceUpdateRequest
     | undefined;
@@ -39,7 +39,7 @@ export type C1ApiDirectoryV1DirectoryServiceUpdateResponse = {
 
 /** @internal */
 export type C1ApiDirectoryV1DirectoryServiceUpdateRequest$Outbound = {
-  app_id: string | null;
+  app_id: string;
   DirectoryServiceUpdateRequest?:
     | shared.DirectoryServiceUpdateRequest$Outbound
     | undefined;
@@ -52,7 +52,7 @@ export const C1ApiDirectoryV1DirectoryServiceUpdateRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiDirectoryV1DirectoryServiceUpdateRequest
   > = z.object({
-    appId: z.nullable(z.string()),
+    appId: z.string(),
     directoryServiceUpdateRequest: shared
       .DirectoryServiceUpdateRequest$outboundSchema.optional(),
   }).transform((v) => {

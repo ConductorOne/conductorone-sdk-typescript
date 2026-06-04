@@ -6,7 +6,7 @@
 import { C1ApiAppV1AppEntitlementOwnersListRequest } from "conductorone-sdk-typescript/sdk/models/operations";
 
 let value: C1ApiAppV1AppEntitlementOwnersListRequest = {
-  appId: null,
+  appId: "<id>",
   entitlementId: "<id>",
 };
 ```

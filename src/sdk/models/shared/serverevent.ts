@@ -18,7 +18,7 @@ export type ServerEvent = {
   /**
    * The name field.
    */
-  name?: string | undefined;
+  name?: string | null | undefined;
 };
 
 /** @internal */
@@ -28,7 +28,7 @@ export const ServerEvent$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   context: z.record(z.string()).optional(),
-  name: z.string().optional(),
+  name: z.nullable(z.string()).optional(),
 });
 
 export function serverEventFromJSON(

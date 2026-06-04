@@ -10,10 +10,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppResourceServiceListRequest = {
-  appId: string | null;
-  appResourceTypeId: string | null;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  appId: string;
+  appResourceTypeId: string;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
 };
 
 export type C1ApiAppV1AppResourceServiceListResponse = {
@@ -39,10 +39,10 @@ export type C1ApiAppV1AppResourceServiceListResponse = {
 
 /** @internal */
 export type C1ApiAppV1AppResourceServiceListRequest$Outbound = {
-  app_id: string | null;
-  app_resource_type_id: string | null;
-  page_size?: number | null | undefined;
-  page_token?: string | null | undefined;
+  app_id: string;
+  app_resource_type_id: string;
+  page_size?: number | undefined;
+  page_token?: string | undefined;
 };
 
 /** @internal */
@@ -51,10 +51,10 @@ export const C1ApiAppV1AppResourceServiceListRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiAppV1AppResourceServiceListRequest
 > = z.object({
-  appId: z.nullable(z.string()),
-  appResourceTypeId: z.nullable(z.string()),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
+  appId: z.string(),
+  appResourceTypeId: z.string(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     appId: "app_id",

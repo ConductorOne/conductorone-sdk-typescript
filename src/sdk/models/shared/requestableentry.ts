@@ -14,15 +14,15 @@ export type RequestableEntry = {
   /**
    * The ID of the app that contains the entitlement
    */
-  appId?: string | undefined;
+  appId?: string | null | undefined;
   /**
    * The ID of the access profile (catalog)
    */
-  catalogId?: string | undefined;
+  catalogId?: string | null | undefined;
   /**
    * The ID of the entitlement
    */
-  entitlementId?: string | undefined;
+  entitlementId?: string | null | undefined;
 };
 
 /** @internal */
@@ -31,9 +31,9 @@ export const RequestableEntry$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.string().optional(),
-  catalogId: z.string().optional(),
-  entitlementId: z.string().optional(),
+  appId: z.nullable(z.string()).optional(),
+  catalogId: z.nullable(z.string()).optional(),
+  entitlementId: z.nullable(z.string()).optional(),
 });
 
 export function requestableEntryFromJSON(

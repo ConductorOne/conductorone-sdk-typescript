@@ -7,7 +7,7 @@ import { C1ApiFunctionsV1FunctionsServiceGetCommitContentRequest } from "conduct
 
 let value: C1ApiFunctionsV1FunctionsServiceGetCommitContentRequest = {
   functionId: "<id>",
-  id: null,
+  id: "<id>",
 };
 ```
 

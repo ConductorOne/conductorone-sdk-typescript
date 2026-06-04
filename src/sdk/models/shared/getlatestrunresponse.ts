@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,10 +15,7 @@ import {
  * The GetLatestRunResponse message.
  */
 export type GetLatestRunResponse = {
-  /**
-   * The RoleMiningManagementRun message.
-   */
-  roleMiningManagementRun?: RoleMiningManagementRun | undefined;
+  run?: RoleMiningManagementRun | null | undefined;
 };
 
 /** @internal */
@@ -28,11 +24,7 @@ export const GetLatestRunResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  run: RoleMiningManagementRun$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "run": "roleMiningManagementRun",
-  });
+  run: z.nullable(RoleMiningManagementRun$inboundSchema).optional(),
 });
 
 export function getLatestRunResponseFromJSON(

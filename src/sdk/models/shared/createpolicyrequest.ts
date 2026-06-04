@@ -40,13 +40,26 @@ export type CreatePolicyRequestPolicyType = OpenEnum<
  */
 export type CreatePolicyRequest = {
   /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  matching URL-safe ASCII; total serialized ≤4096 bytes. Keys starting
+   *  with `c1/` are reserved for server-managed use and rejected on write.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * The description of the new policy.
    */
   description?: string | null | undefined;
   /**
    * The display name of the new policy.
    */
-  displayName: string;
+  displayName: string | null;
   /**
    * Step sequences for this policy. The map must include a baseline entry keyed
    *
@@ -54,7 +67,7 @@ export type CreatePolicyRequest = {
    *  by the lowercased policy type (e.g., "grant"). Additional entries with
    *  opaque keys can be added for conditional routing via the rules array.
    */
-  policySteps?: { [k: string]: PolicyStepsInput } | null | undefined;
+  policySteps?: { [k: string]: PolicyStepsInput } | undefined;
   /**
    * The type of policy to create (grant, revoke, or certify).
    */
@@ -84,9 +97,10 @@ export const CreatePolicyRequestPolicyType$outboundSchema: z.ZodType<
 
 /** @internal */
 export type CreatePolicyRequest$Outbound = {
+  annotations?: { [k: string]: string } | undefined;
   description?: string | null | undefined;
-  displayName: string;
-  policySteps?: { [k: string]: PolicyStepsInput$Outbound } | null | undefined;
+  displayName: string | null;
+  policySteps?: { [k: string]: PolicyStepsInput$Outbound } | undefined;
   policyType?: string | null | undefined;
   postActions?: Array<PolicyPostActions$Outbound> | null | undefined;
   reassignTasksToDelegates?: boolean | null | undefined;
@@ -99,9 +113,10 @@ export const CreatePolicyRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreatePolicyRequest
 > = z.object({
+  annotations: z.record(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
-  displayName: z.string(),
-  policySteps: z.nullable(z.record(PolicyStepsInput$outboundSchema)).optional(),
+  displayName: z.nullable(z.string()),
+  policySteps: z.record(PolicyStepsInput$outboundSchema).optional(),
   policyType: z.nullable(CreatePolicyRequestPolicyType$outboundSchema)
     .optional(),
   postActions: z.nullable(z.array(PolicyPostActions$outboundSchema)).optional(),

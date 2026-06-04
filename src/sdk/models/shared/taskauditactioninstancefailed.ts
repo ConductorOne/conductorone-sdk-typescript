@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,23 +15,7 @@ import {
  * The TaskAuditActionInstanceFailed message.
  */
 export type TaskAuditActionInstanceFailed = {
-  /**
-   * The ActionInstance message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named target_instance. Only a single field of the following list may be set at a time:
-   *   - automation
-   *   - batonResourceActionInstance
-   *   - clientIdApprovalInstance
-   *
-   * This message contains a oneof named outcome. Only a single field of the following list may be set at a time:
-   *   - success
-   *   - denied
-   *   - error
-   *   - cancelled
-   */
-  actionInstance?: ActionInstance | null | undefined;
+  instance?: ActionInstance | null | undefined;
 };
 
 /** @internal */
@@ -42,10 +25,6 @@ export const TaskAuditActionInstanceFailed$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   instance: z.nullable(ActionInstance$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "instance": "actionInstance",
-  });
 });
 
 export function taskAuditActionInstanceFailedFromJSON(

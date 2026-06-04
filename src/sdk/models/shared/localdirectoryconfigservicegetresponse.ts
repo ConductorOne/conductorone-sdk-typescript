@@ -15,14 +15,7 @@ import {
  * The LocalDirectoryConfigServiceGetResponse message.
  */
 export type LocalDirectoryConfigServiceGetResponse = {
-  /**
-   * LocalDirectoryConfig is the public representation of a C1-managed local
-   *
-   * @remarks
-   *  directory configuration. The underlying directory infrastructure is provided
-   *  by the linked App (identified by app_id).
-   */
-  localDirectoryConfig?: LocalDirectoryConfig | undefined;
+  localDirectoryConfig?: LocalDirectoryConfig | null | undefined;
 };
 
 /** @internal */
@@ -31,7 +24,8 @@ export const LocalDirectoryConfigServiceGetResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  localDirectoryConfig: LocalDirectoryConfig$inboundSchema.optional(),
+  localDirectoryConfig: z.nullable(LocalDirectoryConfig$inboundSchema)
+    .optional(),
 });
 
 export function localDirectoryConfigServiceGetResponseFromJSON(

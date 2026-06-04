@@ -16,7 +16,7 @@ export type RequestCatalogManagementServiceAddAppEntitlementsRequest = {
   /**
    * List of entitlements to add to the request catalog.
    */
-  appEntitlements: Array<AppEntitlementRef>;
+  appEntitlements: Array<AppEntitlementRef> | null;
   /**
    * Whether or not to create requests for newly added entitlements for users in the catalog.
    *
@@ -29,7 +29,7 @@ export type RequestCatalogManagementServiceAddAppEntitlementsRequest = {
 /** @internal */
 export type RequestCatalogManagementServiceAddAppEntitlementsRequest$Outbound =
   {
-    appEntitlements: Array<AppEntitlementRef$Outbound>;
+    appEntitlements: Array<AppEntitlementRef$Outbound> | null;
     createRequests?: boolean | null | undefined;
   };
 
@@ -40,7 +40,7 @@ export const RequestCatalogManagementServiceAddAppEntitlementsRequest$outboundSc
     z.ZodTypeDef,
     RequestCatalogManagementServiceAddAppEntitlementsRequest
   > = z.object({
-    appEntitlements: z.array(AppEntitlementRef$outboundSchema),
+    appEntitlements: z.nullable(z.array(AppEntitlementRef$outboundSchema)),
     createRequests: z.nullable(z.boolean()).optional(),
   });
 

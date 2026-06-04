@@ -30,10 +30,7 @@ export type AccessReviewServiceGetResponseExpanded = {
  * The AccessReviewServiceGetResponse message.
  */
 export type AccessReviewServiceGetResponse = {
-  /**
-   * The AccessReviewView message.
-   */
-  accessReviewView?: AccessReviewView | undefined;
+  accessReview?: AccessReviewView | null | undefined;
   /**
    * Related objects requested via the expand mask.
    */
@@ -74,14 +71,10 @@ export const AccessReviewServiceGetResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accessReview: AccessReviewView$inboundSchema.optional(),
+  accessReview: z.nullable(AccessReviewView$inboundSchema).optional(),
   expanded: z.nullable(
     z.array(z.lazy(() => AccessReviewServiceGetResponseExpanded$inboundSchema)),
   ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "accessReview": "accessReviewView",
-  });
 });
 
 export function accessReviewServiceGetResponseFromJSON(

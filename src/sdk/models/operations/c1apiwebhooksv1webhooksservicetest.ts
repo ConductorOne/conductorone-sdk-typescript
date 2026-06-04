@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiWebhooksV1WebhooksServiceTestRequest = {
-  id: string | null;
+  id: string;
   webhooksServiceTestRequest?: shared.WebhooksServiceTestRequest | undefined;
 };
 
@@ -35,7 +35,7 @@ export type C1ApiWebhooksV1WebhooksServiceTestResponse = {
 
 /** @internal */
 export type C1ApiWebhooksV1WebhooksServiceTestRequest$Outbound = {
-  id: string | null;
+  id: string;
   WebhooksServiceTestRequest?:
     | shared.WebhooksServiceTestRequest$Outbound
     | undefined;
@@ -48,7 +48,7 @@ export const C1ApiWebhooksV1WebhooksServiceTestRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiWebhooksV1WebhooksServiceTestRequest
   > = z.object({
-    id: z.nullable(z.string()),
+    id: z.string(),
     webhooksServiceTestRequest: shared.WebhooksServiceTestRequest$outboundSchema
       .optional(),
   }).transform((v) => {

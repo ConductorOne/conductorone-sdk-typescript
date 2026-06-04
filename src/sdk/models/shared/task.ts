@@ -185,7 +185,7 @@ export type Task = {
    * The ID of the user that is the creator of this task. This may not always match the userId field.
    */
   createdByUserId?: string | null | undefined;
-  data?: { [k: string]: any } | null | undefined;
+  data?: { [k: string]: any } | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * The description of the task. This is also known as justification.
@@ -381,7 +381,7 @@ export const Task$inboundSchema: z.ZodType<Task, z.ZodTypeDef, unknown> = z
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
     createdByUserId: z.nullable(z.string()).optional(),
-    data: z.nullable(z.record(z.any())).optional(),
+    data: z.record(z.any()).optional(),
     deletedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
@@ -418,7 +418,7 @@ export type Task$Outbound = {
   commentCount?: number | null | undefined;
   createdAt?: string | null | undefined;
   createdByUserId?: string | null | undefined;
-  data?: { [k: string]: any } | null | undefined;
+  data?: { [k: string]: any } | undefined;
   deletedAt?: string | null | undefined;
   description?: string | null | undefined;
   displayName?: string | null | undefined;
@@ -452,7 +452,7 @@ export const Task$outboundSchema: z.ZodType<Task$Outbound, z.ZodTypeDef, Task> =
     commentCount: z.nullable(z.number().int()).optional(),
     createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
     createdByUserId: z.nullable(z.string()).optional(),
-    data: z.nullable(z.record(z.any())).optional(),
+    data: z.record(z.any()).optional(),
     deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
     description: z.nullable(z.string()).optional(),
     displayName: z.nullable(z.string()).optional(),

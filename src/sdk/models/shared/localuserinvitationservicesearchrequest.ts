@@ -28,19 +28,19 @@ export type LocalUserInvitationServiceSearchRequest = {
   /**
    * The directoryAppId field.
    */
-  directoryAppId?: string | undefined;
+  directoryAppId?: string | null | undefined;
   /**
    * The pageSize field.
    */
-  pageSize?: number | undefined;
+  pageSize?: number | null | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | undefined;
+  pageToken?: string | null | undefined;
   /**
    * Optional filter by invitation status.
    */
-  statusFilter?: StatusFilter | undefined;
+  statusFilter?: StatusFilter | null | undefined;
 };
 
 /** @internal */
@@ -52,10 +52,10 @@ export const StatusFilter$outboundSchema: z.ZodType<
 
 /** @internal */
 export type LocalUserInvitationServiceSearchRequest$Outbound = {
-  directoryAppId?: string | undefined;
-  pageSize?: number | undefined;
-  pageToken?: string | undefined;
-  statusFilter?: string | undefined;
+  directoryAppId?: string | null | undefined;
+  pageSize?: number | null | undefined;
+  pageToken?: string | null | undefined;
+  statusFilter?: string | null | undefined;
 };
 
 /** @internal */
@@ -64,10 +64,10 @@ export const LocalUserInvitationServiceSearchRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   LocalUserInvitationServiceSearchRequest
 > = z.object({
-  directoryAppId: z.string().optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  statusFilter: StatusFilter$outboundSchema.optional(),
+  directoryAppId: z.nullable(z.string()).optional(),
+  pageSize: z.nullable(z.number().int()).optional(),
+  pageToken: z.nullable(z.string()).optional(),
+  statusFilter: z.nullable(StatusFilter$outboundSchema).optional(),
 });
 
 export function localUserInvitationServiceSearchRequestToJSON(

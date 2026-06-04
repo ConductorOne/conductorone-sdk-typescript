@@ -27,18 +27,12 @@ export type VaultServiceCreateRequest = {
   /**
    * A free-text description of the vault's purpose or configuration.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * The human-readable name for the new vault.
    */
-  displayName: string;
-  /**
-   * GroupAuthzVault configures a vault that uses group-based authorization to control access to stored credentials.
-   */
+  displayName: string | null;
   groupAuthzVault?: GroupAuthzVault | null | undefined;
-  /**
-   * MagicVault configures a vault that grants time-limited credential access via magic links.
-   */
   magicVault?: MagicVault | null | undefined;
   /**
    * The IDs of users to assign as owners of this vault.
@@ -48,8 +42,8 @@ export type VaultServiceCreateRequest = {
 
 /** @internal */
 export type VaultServiceCreateRequest$Outbound = {
-  description?: string | undefined;
-  displayName: string;
+  description?: string | null | undefined;
+  displayName: string | null;
   groupAuthzVault?: GroupAuthzVault$Outbound | null | undefined;
   magicVault?: MagicVault$Outbound | null | undefined;
   ownerIds?: Array<string> | null | undefined;
@@ -61,8 +55,8 @@ export const VaultServiceCreateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   VaultServiceCreateRequest
 > = z.object({
-  description: z.string().optional(),
-  displayName: z.string(),
+  description: z.nullable(z.string()).optional(),
+  displayName: z.nullable(z.string()),
   groupAuthzVault: z.nullable(GroupAuthzVault$outboundSchema).optional(),
   magicVault: z.nullable(MagicVault$outboundSchema).optional(),
   ownerIds: z.nullable(z.array(z.string())).optional(),

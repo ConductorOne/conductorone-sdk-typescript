@@ -11,7 +11,7 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiAutomationsV1AutomationExecutionServiceGetAutomationExecutionRequest =
   {
-    id: number | null;
+    id: number;
   };
 
 export type C1ApiAutomationsV1AutomationExecutionServiceGetAutomationExecutionResponse =
@@ -39,7 +39,7 @@ export type C1ApiAutomationsV1AutomationExecutionServiceGetAutomationExecutionRe
 /** @internal */
 export type C1ApiAutomationsV1AutomationExecutionServiceGetAutomationExecutionRequest$Outbound =
   {
-    id: string | null;
+    id: string;
   };
 
 /** @internal */
@@ -49,7 +49,7 @@ export const C1ApiAutomationsV1AutomationExecutionServiceGetAutomationExecutionR
     z.ZodTypeDef,
     C1ApiAutomationsV1AutomationExecutionServiceGetAutomationExecutionRequest
   > = z.object({
-    id: z.nullable(z.number().int().transform(v => `${v}`)),
+    id: z.number().int().transform(v => `${v}`),
   });
 
 export function c1ApiAutomationsV1AutomationExecutionServiceGetAutomationExecutionRequestToJSON(

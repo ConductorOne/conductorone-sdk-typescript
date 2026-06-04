@@ -18,12 +18,12 @@ export type ServicePrincipalServiceCreateCredentialRequest = {
   /**
    * The display name for the new credential.
    */
-  displayName?: string | undefined;
-  expires?: string | undefined;
+  displayName?: string | null | undefined;
+  expires?: string | null | undefined;
   /**
    * If true, requires DPoP proof-of-possession for token exchange using this credential.
    */
-  requireDpop?: boolean | undefined;
+  requireDpop?: boolean | null | undefined;
   /**
    * The list of roles to restrict the credential to.
    */
@@ -33,9 +33,9 @@ export type ServicePrincipalServiceCreateCredentialRequest = {
 /** @internal */
 export type ServicePrincipalServiceCreateCredentialRequest$Outbound = {
   allowSourceCidrs?: Array<string> | null | undefined;
-  displayName?: string | undefined;
-  expires?: string | undefined;
-  requireDpop?: boolean | undefined;
+  displayName?: string | null | undefined;
+  expires?: string | null | undefined;
+  requireDpop?: boolean | null | undefined;
   scopedRoles?: Array<string> | null | undefined;
 };
 
@@ -47,9 +47,9 @@ export const ServicePrincipalServiceCreateCredentialRequest$outboundSchema:
     ServicePrincipalServiceCreateCredentialRequest
   > = z.object({
     allowSourceCidrs: z.nullable(z.array(z.string())).optional(),
-    displayName: z.string().optional(),
-    expires: z.string().optional(),
-    requireDpop: z.boolean().optional(),
+    displayName: z.nullable(z.string()).optional(),
+    expires: z.nullable(z.string()).optional(),
+    requireDpop: z.nullable(z.boolean()).optional(),
     scopedRoles: z.nullable(z.array(z.string())).optional(),
   });
 

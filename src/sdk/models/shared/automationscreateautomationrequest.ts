@@ -43,6 +43,19 @@ export type AutomationsCreateAutomationRequestCircuitBreakerPeriod = OpenEnum<
  */
 export type AutomationsCreateAutomationRequest = {
   /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  matching URL-safe ASCII; total serialized ≤4096 bytes. Keys starting
+   *  with `c1/` are reserved for server-managed use and rejected on write.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * the app id this workflow_template belongs to
    */
   appId?: string | null | undefined;
@@ -53,12 +66,13 @@ export type AutomationsCreateAutomationRequest = {
   /**
    * Circuit breaker rate cap. See Automation.circuit_breaker_max for semantics.
    */
-  circuitBreakerMax?: number | undefined;
+  circuitBreakerMax?: number | null | undefined;
   /**
    * The circuitBreakerPeriod field.
    */
   circuitBreakerPeriod?:
     | AutomationsCreateAutomationRequestCircuitBreakerPeriod
+    | null
     | undefined;
   context?: AutomationContext | null | undefined;
   /**
@@ -103,10 +117,11 @@ export const AutomationsCreateAutomationRequestCircuitBreakerPeriod$outboundSche
 
 /** @internal */
 export type AutomationsCreateAutomationRequest$Outbound = {
+  annotations?: { [k: string]: string } | undefined;
   appId?: string | null | undefined;
   automationSteps?: Array<AutomationStep$Outbound> | null | undefined;
-  circuitBreakerMax?: number | undefined;
-  circuitBreakerPeriod?: string | undefined;
+  circuitBreakerMax?: number | null | undefined;
+  circuitBreakerPeriod?: string | null | undefined;
   context?: AutomationContext$Outbound | null | undefined;
   description?: string | null | undefined;
   displayName?: string | null | undefined;
@@ -123,13 +138,14 @@ export const AutomationsCreateAutomationRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AutomationsCreateAutomationRequest
 > = z.object({
+  annotations: z.record(z.string()).optional(),
   appId: z.nullable(z.string()).optional(),
   automationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
     .optional(),
-  circuitBreakerMax: z.number().int().optional(),
-  circuitBreakerPeriod:
-    AutomationsCreateAutomationRequestCircuitBreakerPeriod$outboundSchema
-      .optional(),
+  circuitBreakerMax: z.nullable(z.number().int()).optional(),
+  circuitBreakerPeriod: z.nullable(
+    AutomationsCreateAutomationRequestCircuitBreakerPeriod$outboundSchema,
+  ).optional(),
   context: z.nullable(AutomationContext$outboundSchema).optional(),
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),

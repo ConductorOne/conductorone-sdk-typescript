@@ -24,27 +24,27 @@ export type WorkloadFederationTrust = {
    * @remarks
    *  Used as the client_id parameter in RFC 8693 token exchange requests.
    */
-  clientId?: string | undefined;
+  clientId?: string | null | undefined;
   /**
    * CEL expression evaluated against JWT claims. Must return bool.
    *
    * @remarks
    *  Example: claims.sub.startsWith("repo:acme/infra:") && claims.environment == "production"
    */
-  conditionExpression?: string | undefined;
-  createdAt?: Date | undefined;
+  conditionExpression?: string | null | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * A description of what this trust policy matches.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * Whether the trust is disabled.
    */
-  disabled?: boolean | undefined;
+  disabled?: boolean | null | undefined;
   /**
    * The display name of the trust.
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
   /**
    * JWT claim names from the subject token to copy into the issued C1 token.
    *
@@ -57,7 +57,7 @@ export type WorkloadFederationTrust = {
   /**
    * The provider ID this trust references. Immutable after creation.
    */
-  providerId?: string | undefined;
+  providerId?: string | null | undefined;
   /**
    * Scoped role IDs. Effective permissions = min(SP roles, trust.scoped_role_ids).
    */
@@ -65,8 +65,8 @@ export type WorkloadFederationTrust = {
   /**
    * The service principal user ID this trust belongs to.
    */
-  servicePrincipalId?: string | undefined;
-  updatedAt?: Date | undefined;
+  servicePrincipalId?: string | null | undefined;
+  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
@@ -76,19 +76,21 @@ export const WorkloadFederationTrust$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   allowSourceCidrs: z.nullable(z.array(z.string())).optional(),
-  clientId: z.string().optional(),
-  conditionExpression: z.string().optional(),
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  description: z.string().optional(),
-  disabled: z.boolean().optional(),
-  displayName: z.string().optional(),
+  clientId: z.nullable(z.string()).optional(),
+  conditionExpression: z.nullable(z.string()).optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  description: z.nullable(z.string()).optional(),
+  disabled: z.nullable(z.boolean()).optional(),
+  displayName: z.nullable(z.string()).optional(),
   passthroughClaims: z.nullable(z.array(z.string())).optional(),
-  providerId: z.string().optional(),
+  providerId: z.nullable(z.string()).optional(),
   scopedRoleIds: z.nullable(z.array(z.string())).optional(),
-  servicePrincipalId: z.string().optional(),
-  updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  servicePrincipalId: z.nullable(z.string()).optional(),
+  updatedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 });
 
 export function workloadFederationTrustFromJSON(

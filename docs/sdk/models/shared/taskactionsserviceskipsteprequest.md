@@ -8,7 +8,7 @@ The TaskActionsServiceSkipStepRequest object lets you skip a policy step in a ta
 import { TaskActionsServiceSkipStepRequest } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: TaskActionsServiceSkipStepRequest = {
-  policyStepId: "<id>",
+  policyStepId: null,
 };
 ```
 

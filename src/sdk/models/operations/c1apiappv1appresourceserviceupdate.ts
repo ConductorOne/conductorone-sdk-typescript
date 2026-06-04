@@ -10,9 +10,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppResourceServiceUpdateRequest = {
-  appId: string | null;
-  appResourceTypeId: string | null;
-  id: string | null;
+  appId: string;
+  appResourceTypeId: string;
+  id: string;
   appResourceServiceUpdateRequest?:
     | shared.AppResourceServiceUpdateRequest
     | undefined;
@@ -41,9 +41,9 @@ export type C1ApiAppV1AppResourceServiceUpdateResponse = {
 
 /** @internal */
 export type C1ApiAppV1AppResourceServiceUpdateRequest$Outbound = {
-  app_id: string | null;
-  app_resource_type_id: string | null;
-  id: string | null;
+  app_id: string;
+  app_resource_type_id: string;
+  id: string;
   AppResourceServiceUpdateRequest?:
     | shared.AppResourceServiceUpdateRequest$Outbound
     | undefined;
@@ -56,9 +56,9 @@ export const C1ApiAppV1AppResourceServiceUpdateRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiAppV1AppResourceServiceUpdateRequest
   > = z.object({
-    appId: z.nullable(z.string()),
-    appResourceTypeId: z.nullable(z.string()),
-    id: z.nullable(z.string()),
+    appId: z.string(),
+    appResourceTypeId: z.string(),
+    id: z.string(),
     appResourceServiceUpdateRequest: shared
       .AppResourceServiceUpdateRequest$outboundSchema.optional(),
   }).transform((v) => {

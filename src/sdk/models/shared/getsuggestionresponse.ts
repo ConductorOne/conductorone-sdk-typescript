@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,10 +15,7 @@ import {
  * The GetSuggestionResponse message.
  */
 export type GetSuggestionResponse = {
-  /**
-   * The RoleMiningManagementSuggestion message.
-   */
-  roleMiningManagementSuggestion?: RoleMiningManagementSuggestion | undefined;
+  suggestion?: RoleMiningManagementSuggestion | null | undefined;
 };
 
 /** @internal */
@@ -28,11 +24,8 @@ export const GetSuggestionResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  suggestion: RoleMiningManagementSuggestion$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "suggestion": "roleMiningManagementSuggestion",
-  });
+  suggestion: z.nullable(RoleMiningManagementSuggestion$inboundSchema)
+    .optional(),
 });
 
 export function getSuggestionResponseFromJSON(

@@ -7,14 +7,10 @@ import * as z from "zod/v3";
 /**
  * The AppEntitlementAutomationLastRunStatus message.
  */
-export type AppEntitlementAutomationLastRunStatusInput = {
-  lastCompletedAt?: Date | null | undefined;
-};
+export type AppEntitlementAutomationLastRunStatusInput = {};
 
 /** @internal */
-export type AppEntitlementAutomationLastRunStatusInput$Outbound = {
-  lastCompletedAt?: string | null | undefined;
-};
+export type AppEntitlementAutomationLastRunStatusInput$Outbound = {};
 
 /** @internal */
 export const AppEntitlementAutomationLastRunStatusInput$outboundSchema:
@@ -22,10 +18,7 @@ export const AppEntitlementAutomationLastRunStatusInput$outboundSchema:
     AppEntitlementAutomationLastRunStatusInput$Outbound,
     z.ZodTypeDef,
     AppEntitlementAutomationLastRunStatusInput
-  > = z.object({
-    lastCompletedAt: z.nullable(z.date().transform(v => v.toISOString()))
-      .optional(),
-  });
+  > = z.object({});
 
 export function appEntitlementAutomationLastRunStatusInputToJSON(
   appEntitlementAutomationLastRunStatusInput:

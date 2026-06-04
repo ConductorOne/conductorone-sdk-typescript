@@ -15,10 +15,7 @@ import {
  * UserNotificationSettings contains the calling user's personal notification preferences.
  */
 export type UserNotificationSettings = {
-  /**
-   * ChannelSettings groups notification preferences for all supported channels.
-   */
-  channelSettings?: ChannelSettings | undefined;
+  channelSettings?: ChannelSettings | null | undefined;
 };
 
 /** @internal */
@@ -27,7 +24,7 @@ export const UserNotificationSettings$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  channelSettings: ChannelSettings$inboundSchema.optional(),
+  channelSettings: z.nullable(ChannelSettings$inboundSchema).optional(),
 });
 
 export function userNotificationSettingsFromJSON(

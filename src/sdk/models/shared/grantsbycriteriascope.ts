@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -59,25 +58,19 @@ export type TypeFilter = OpenEnum<typeof TypeFilter>;
  *   - grantsAddedBetween
  */
 export type GrantsByCriteriaScope = {
-  /**
-   * The GrantAccessProfileFilter message.
-   */
-  grantAccessProfileFilter?: GrantAccessProfileFilter | undefined;
-  daysSinceAdded?: string | undefined;
-  daysSinceLastUsed?: string | undefined;
-  daysSinceReviewed?: string | undefined;
-  /**
-   * The GrantsAddedBetween message.
-   */
+  accessProfileFilter?: GrantAccessProfileFilter | null | undefined;
+  daysSinceAdded?: string | null | undefined;
+  daysSinceLastUsed?: string | null | undefined;
+  daysSinceReviewed?: string | null | undefined;
   grantsAddedBetween?: GrantsAddedBetween | null | undefined;
   /**
    * The sourceFilter field.
    */
-  sourceFilter?: SourceFilter | undefined;
+  sourceFilter?: SourceFilter | null | undefined;
   /**
    * The typeFilter field.
    */
-  typeFilter?: TypeFilter | undefined;
+  typeFilter?: TypeFilter | null | undefined;
 };
 
 /** @internal */
@@ -112,27 +105,24 @@ export const GrantsByCriteriaScope$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accessProfileFilter: GrantAccessProfileFilter$inboundSchema.optional(),
-  daysSinceAdded: z.string().optional(),
-  daysSinceLastUsed: z.string().optional(),
-  daysSinceReviewed: z.string().optional(),
+  accessProfileFilter: z.nullable(GrantAccessProfileFilter$inboundSchema)
+    .optional(),
+  daysSinceAdded: z.nullable(z.string()).optional(),
+  daysSinceLastUsed: z.nullable(z.string()).optional(),
+  daysSinceReviewed: z.nullable(z.string()).optional(),
   grantsAddedBetween: z.nullable(GrantsAddedBetween$inboundSchema).optional(),
-  sourceFilter: SourceFilter$inboundSchema.optional(),
-  typeFilter: TypeFilter$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "accessProfileFilter": "grantAccessProfileFilter",
-  });
+  sourceFilter: z.nullable(SourceFilter$inboundSchema).optional(),
+  typeFilter: z.nullable(TypeFilter$inboundSchema).optional(),
 });
 /** @internal */
 export type GrantsByCriteriaScope$Outbound = {
-  accessProfileFilter?: GrantAccessProfileFilter$Outbound | undefined;
-  daysSinceAdded?: string | undefined;
-  daysSinceLastUsed?: string | undefined;
-  daysSinceReviewed?: string | undefined;
+  accessProfileFilter?: GrantAccessProfileFilter$Outbound | null | undefined;
+  daysSinceAdded?: string | null | undefined;
+  daysSinceLastUsed?: string | null | undefined;
+  daysSinceReviewed?: string | null | undefined;
   grantsAddedBetween?: GrantsAddedBetween$Outbound | null | undefined;
-  sourceFilter?: string | undefined;
-  typeFilter?: string | undefined;
+  sourceFilter?: string | null | undefined;
+  typeFilter?: string | null | undefined;
 };
 
 /** @internal */
@@ -141,17 +131,14 @@ export const GrantsByCriteriaScope$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GrantsByCriteriaScope
 > = z.object({
-  grantAccessProfileFilter: GrantAccessProfileFilter$outboundSchema.optional(),
-  daysSinceAdded: z.string().optional(),
-  daysSinceLastUsed: z.string().optional(),
-  daysSinceReviewed: z.string().optional(),
+  accessProfileFilter: z.nullable(GrantAccessProfileFilter$outboundSchema)
+    .optional(),
+  daysSinceAdded: z.nullable(z.string()).optional(),
+  daysSinceLastUsed: z.nullable(z.string()).optional(),
+  daysSinceReviewed: z.nullable(z.string()).optional(),
   grantsAddedBetween: z.nullable(GrantsAddedBetween$outboundSchema).optional(),
-  sourceFilter: SourceFilter$outboundSchema.optional(),
-  typeFilter: TypeFilter$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    grantAccessProfileFilter: "accessProfileFilter",
-  });
+  sourceFilter: z.nullable(SourceFilter$outboundSchema).optional(),
+  typeFilter: z.nullable(TypeFilter$outboundSchema).optional(),
 });
 
 export function grantsByCriteriaScopeToJSON(

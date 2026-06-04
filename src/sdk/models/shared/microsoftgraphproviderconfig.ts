@@ -17,18 +17,18 @@ export type MicrosoftGraphProviderConfig = {
   /**
    * Customer's Azure AD tenant ID (directory ID).
    */
-  azureTenantId?: string | undefined;
+  azureTenantId?: string | null | undefined;
   /**
    * App registration client ID with Mail.Send application permission.
    */
-  clientId?: string | undefined;
+  clientId?: string | null | undefined;
   /**
    * Client secret. Write-only: accepted on create/update, never returned in Get.
    *
    * @remarks
    *  Empty on update means "keep existing secret".
    */
-  clientSecret?: string | undefined;
+  clientSecret?: string | null | undefined;
 };
 
 /** @internal */
@@ -37,15 +37,15 @@ export const MicrosoftGraphProviderConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  azureTenantId: z.string().optional(),
-  clientId: z.string().optional(),
-  clientSecret: z.string().optional(),
+  azureTenantId: z.nullable(z.string()).optional(),
+  clientId: z.nullable(z.string()).optional(),
+  clientSecret: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type MicrosoftGraphProviderConfig$Outbound = {
-  azureTenantId?: string | undefined;
-  clientId?: string | undefined;
-  clientSecret?: string | undefined;
+  azureTenantId?: string | null | undefined;
+  clientId?: string | null | undefined;
+  clientSecret?: string | null | undefined;
 };
 
 /** @internal */
@@ -54,9 +54,9 @@ export const MicrosoftGraphProviderConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MicrosoftGraphProviderConfig
 > = z.object({
-  azureTenantId: z.string().optional(),
-  clientId: z.string().optional(),
-  clientSecret: z.string().optional(),
+  azureTenantId: z.nullable(z.string()).optional(),
+  clientId: z.nullable(z.string()).optional(),
+  clientSecret: z.nullable(z.string()).optional(),
 });
 
 export function microsoftGraphProviderConfigToJSON(

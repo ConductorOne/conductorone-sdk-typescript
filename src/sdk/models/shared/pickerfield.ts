@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -37,21 +36,9 @@ import {
  *   - c1UserPicker
  */
 export type PickerField = {
-  /**
-   * The AppUserFilter message.
-   */
-  appUserFilter?: AppUserFilter | null | undefined;
-  /**
-   * C1UserFilter is used to configure a picker for selecting ConductorOne users.
-   *
-   * @remarks
-   *  This is distinct from AppUserFilter which selects accounts within a connected app.
-   */
-  c1UserFilter?: C1UserFilter | null | undefined;
-  /**
-   * The AppResourceFilter message.
-   */
-  appResourceFilter?: AppResourceFilter | null | undefined;
+  appUserPicker?: AppUserFilter | null | undefined;
+  c1UserPicker?: C1UserFilter | null | undefined;
+  resourcePicker?: AppResourceFilter | null | undefined;
 };
 
 /** @internal */
@@ -63,12 +50,6 @@ export const PickerField$inboundSchema: z.ZodType<
   appUserPicker: z.nullable(AppUserFilter$inboundSchema).optional(),
   c1UserPicker: z.nullable(C1UserFilter$inboundSchema).optional(),
   resourcePicker: z.nullable(AppResourceFilter$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "appUserPicker": "appUserFilter",
-    "c1UserPicker": "c1UserFilter",
-    "resourcePicker": "appResourceFilter",
-  });
 });
 /** @internal */
 export type PickerField$Outbound = {
@@ -83,15 +64,9 @@ export const PickerField$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PickerField
 > = z.object({
-  appUserFilter: z.nullable(AppUserFilter$outboundSchema).optional(),
-  c1UserFilter: z.nullable(C1UserFilter$outboundSchema).optional(),
-  appResourceFilter: z.nullable(AppResourceFilter$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    appUserFilter: "appUserPicker",
-    c1UserFilter: "c1UserPicker",
-    appResourceFilter: "resourcePicker",
-  });
+  appUserPicker: z.nullable(AppUserFilter$outboundSchema).optional(),
+  c1UserPicker: z.nullable(C1UserFilter$outboundSchema).optional(),
+  resourcePicker: z.nullable(AppResourceFilter$outboundSchema).optional(),
 });
 
 export function pickerFieldToJSON(pickerField: PickerField): string {

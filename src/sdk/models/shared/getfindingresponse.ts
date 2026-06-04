@@ -31,24 +31,7 @@ export type GetFindingResponse = {
    * The expanded field.
    */
   expanded?: Array<GetFindingResponseExpanded> | null | undefined;
-  /**
-   * The Finding message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named finding_type. Only a single field of the following list may be set at a time:
-   *   - similarUsernameMatch
-   *   - serviceAccountMisclassification
-   *
-   * This message contains a oneof named target. Only a single field of the following list may be set at a time:
-   *   - identityUserTarget
-   *   - appUserTarget
-   *
-   * This message contains a oneof named evidence. Only a single field of the following list may be set at a time:
-   *   - similarUsernameMatchEvidence
-   *   - serviceAccountMisclassificationEvidence
-   */
-  finding?: Finding | undefined;
+  finding?: Finding | null | undefined;
 };
 
 /** @internal */
@@ -87,7 +70,7 @@ export const GetFindingResponse$inboundSchema: z.ZodType<
   expanded: z.nullable(
     z.array(z.lazy(() => GetFindingResponseExpanded$inboundSchema)),
   ).optional(),
-  finding: Finding$inboundSchema.optional(),
+  finding: z.nullable(Finding$inboundSchema).optional(),
 });
 
 export function getFindingResponseFromJSON(

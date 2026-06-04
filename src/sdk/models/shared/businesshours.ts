@@ -18,15 +18,15 @@ export type BusinessHours = {
   /**
    * "HH:MM" in 24-hour format.
    */
-  end?: string | undefined;
+  end?: string | null | undefined;
   /**
    * "HH:MM" in 24-hour format.
    */
-  start?: string | undefined;
+  start?: string | null | undefined;
   /**
    * The timezone field.
    */
-  timezone?: string | undefined;
+  timezone?: string | null | undefined;
 };
 
 /** @internal */
@@ -36,16 +36,16 @@ export const BusinessHours$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   days: z.nullable(z.array(z.number().int())).optional(),
-  end: z.string().optional(),
-  start: z.string().optional(),
-  timezone: z.string().optional(),
+  end: z.nullable(z.string()).optional(),
+  start: z.nullable(z.string()).optional(),
+  timezone: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type BusinessHours$Outbound = {
   days?: Array<number> | null | undefined;
-  end?: string | undefined;
-  start?: string | undefined;
-  timezone?: string | undefined;
+  end?: string | null | undefined;
+  start?: string | null | undefined;
+  timezone?: string | null | undefined;
 };
 
 /** @internal */
@@ -55,9 +55,9 @@ export const BusinessHours$outboundSchema: z.ZodType<
   BusinessHours
 > = z.object({
   days: z.nullable(z.array(z.number().int())).optional(),
-  end: z.string().optional(),
-  start: z.string().optional(),
-  timezone: z.string().optional(),
+  end: z.nullable(z.string()).optional(),
+  start: z.nullable(z.string()).optional(),
+  timezone: z.nullable(z.string()).optional(),
 });
 
 export function businessHoursToJSON(businessHours: BusinessHours): string {

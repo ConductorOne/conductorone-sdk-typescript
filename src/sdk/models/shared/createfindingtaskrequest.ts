@@ -14,12 +14,12 @@ export type CreateFindingTaskRequest = {
    * @remarks
    *  "Finding Review" policy.
    */
-  policyId?: string | undefined;
+  policyId?: string | null | undefined;
 };
 
 /** @internal */
 export type CreateFindingTaskRequest$Outbound = {
-  policyId?: string | undefined;
+  policyId?: string | null | undefined;
 };
 
 /** @internal */
@@ -28,7 +28,7 @@ export const CreateFindingTaskRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateFindingTaskRequest
 > = z.object({
-  policyId: z.string().optional(),
+  policyId: z.nullable(z.string()).optional(),
 });
 
 export function createFindingTaskRequestToJSON(

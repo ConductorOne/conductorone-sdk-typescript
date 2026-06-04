@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiSystemlogV1ExportServiceDeleteRequest = {
-  exportId: string | null;
+  exportId: string;
   exportServiceDeleteRequest?: shared.ExportServiceDeleteRequest | undefined;
 };
 
@@ -35,7 +35,7 @@ export type C1ApiSystemlogV1ExportServiceDeleteResponse = {
 
 /** @internal */
 export type C1ApiSystemlogV1ExportServiceDeleteRequest$Outbound = {
-  export_id: string | null;
+  export_id: string;
   ExportServiceDeleteRequest?:
     | shared.ExportServiceDeleteRequest$Outbound
     | undefined;
@@ -48,7 +48,7 @@ export const C1ApiSystemlogV1ExportServiceDeleteRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiSystemlogV1ExportServiceDeleteRequest
   > = z.object({
-    exportId: z.nullable(z.string()),
+    exportId: z.string(),
     exportServiceDeleteRequest: shared.ExportServiceDeleteRequest$outboundSchema
       .optional(),
   }).transform((v) => {

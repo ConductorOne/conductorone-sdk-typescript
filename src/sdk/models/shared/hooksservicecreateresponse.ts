@@ -12,16 +12,7 @@ import { Hook, Hook$inboundSchema } from "./hook.js";
  * The HooksServiceCreateResponse message.
  */
 export type HooksServiceCreateResponse = {
-  /**
-   * Hook represents a customer-configured interception point for tool calls.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named hook_type. Only a single field of the following list may be set at a time:
-   *   - function
-   *   - builtinPattern
-   */
-  hook?: Hook | undefined;
+  hook?: Hook | null | undefined;
 };
 
 /** @internal */
@@ -30,7 +21,7 @@ export const HooksServiceCreateResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  hook: Hook$inboundSchema.optional(),
+  hook: z.nullable(Hook$inboundSchema).optional(),
 });
 
 export function hooksServiceCreateResponseFromJSON(

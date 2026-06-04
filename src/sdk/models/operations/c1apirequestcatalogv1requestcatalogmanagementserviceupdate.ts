@@ -11,7 +11,7 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateRequest =
   {
-    id: string | null;
+    id: string;
     requestCatalogManagementServiceUpdateRequest?:
       | shared.RequestCatalogManagementServiceUpdateRequest
       | undefined;
@@ -42,7 +42,7 @@ export type C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateResponse =
 /** @internal */
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateRequest$Outbound =
   {
-    id: string | null;
+    id: string;
     RequestCatalogManagementServiceUpdateRequest?:
       | shared.RequestCatalogManagementServiceUpdateRequest$Outbound
       | undefined;
@@ -55,7 +55,7 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateRequest$o
     z.ZodTypeDef,
     C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateRequest
   > = z.object({
-    id: z.nullable(z.string()),
+    id: z.string(),
     requestCatalogManagementServiceUpdateRequest: shared
       .RequestCatalogManagementServiceUpdateRequest$outboundSchema.optional(),
   }).transform((v) => {

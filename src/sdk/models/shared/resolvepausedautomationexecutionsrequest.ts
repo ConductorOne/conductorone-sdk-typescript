@@ -9,7 +9,7 @@ import { OpenEnum } from "../../types/enums.js";
 /**
  * Whether to run or cancel the paused executions.
  */
-export const Decision = {
+export const ResolvePausedAutomationExecutionsRequestDecision = {
   PausedExecutionDecisionUnspecified: "PAUSED_EXECUTION_DECISION_UNSPECIFIED",
   PausedExecutionDecisionRun: "PAUSED_EXECUTION_DECISION_RUN",
   PausedExecutionDecisionCancel: "PAUSED_EXECUTION_DECISION_CANCEL",
@@ -17,7 +17,9 @@ export const Decision = {
 /**
  * Whether to run or cancel the paused executions.
  */
-export type Decision = OpenEnum<typeof Decision>;
+export type ResolvePausedAutomationExecutionsRequestDecision = OpenEnum<
+  typeof ResolvePausedAutomationExecutionsRequestDecision
+>;
 
 /**
  * The ResolvePausedAutomationExecutionsRequest message.
@@ -26,7 +28,10 @@ export type ResolvePausedAutomationExecutionsRequest = {
   /**
    * Whether to run or cancel the paused executions.
    */
-  decision?: Decision | undefined;
+  decision?:
+    | ResolvePausedAutomationExecutionsRequestDecision
+    | null
+    | undefined;
   /**
    * Optional human-readable reason for the resolution decision. Stored on
    *
@@ -35,20 +40,23 @@ export type ResolvePausedAutomationExecutionsRequest = {
    *  and compliance use. Surfaced in the FE as a required field on CANCEL
    *  so admins capture why bulk-cancellation happened. Up to 1024 bytes.
    */
-  reason?: string | undefined;
+  reason?: string | null | undefined;
 };
 
 /** @internal */
-export const Decision$outboundSchema: z.ZodType<
-  string,
-  z.ZodTypeDef,
-  Decision
-> = openEnums.outboundSchema(Decision);
+export const ResolvePausedAutomationExecutionsRequestDecision$outboundSchema:
+  z.ZodType<
+    string,
+    z.ZodTypeDef,
+    ResolvePausedAutomationExecutionsRequestDecision
+  > = openEnums.outboundSchema(
+    ResolvePausedAutomationExecutionsRequestDecision,
+  );
 
 /** @internal */
 export type ResolvePausedAutomationExecutionsRequest$Outbound = {
-  decision?: string | undefined;
-  reason?: string | undefined;
+  decision?: string | null | undefined;
+  reason?: string | null | undefined;
 };
 
 /** @internal */
@@ -57,8 +65,10 @@ export const ResolvePausedAutomationExecutionsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResolvePausedAutomationExecutionsRequest
 > = z.object({
-  decision: Decision$outboundSchema.optional(),
-  reason: z.string().optional(),
+  decision: z.nullable(
+    ResolvePausedAutomationExecutionsRequestDecision$outboundSchema,
+  ).optional(),
+  reason: z.nullable(z.string()).optional(),
 });
 
 export function resolvePausedAutomationExecutionsRequestToJSON(

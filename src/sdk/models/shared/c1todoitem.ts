@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -14,55 +13,22 @@ import { ServerEvent, ServerEvent$inboundSchema } from "./serverevent.js";
  * The C1TodoItem message.
  */
 export type C1TodoItem = {
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString?: DynamicString | undefined;
+  description?: DynamicString | null | undefined;
   /**
    * The id field.
    */
-  id?: string | undefined;
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString1?: DynamicString | undefined;
+  id?: string | null | undefined;
+  label?: DynamicString | null | undefined;
   /**
    * The section field.
    */
-  section?: string | undefined;
+  section?: string | null | undefined;
   /**
    * The status field.
    */
-  status?: string | undefined;
-  /**
-   * ServerEvent triggers a server-side action.
-   */
-  serverEvent?: ServerEvent | null | undefined;
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString2?: DynamicString | undefined;
+  status?: string | null | undefined;
+  trailingAction?: ServerEvent | null | undefined;
+  trailingActionLabel?: DynamicString | null | undefined;
 };
 
 /** @internal */
@@ -71,20 +37,13 @@ export const C1TodoItem$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  description: DynamicString$inboundSchema.optional(),
-  id: z.string().optional(),
-  label: DynamicString$inboundSchema.optional(),
-  section: z.string().optional(),
-  status: z.string().optional(),
+  description: z.nullable(DynamicString$inboundSchema).optional(),
+  id: z.nullable(z.string()).optional(),
+  label: z.nullable(DynamicString$inboundSchema).optional(),
+  section: z.nullable(z.string()).optional(),
+  status: z.nullable(z.string()).optional(),
   trailingAction: z.nullable(ServerEvent$inboundSchema).optional(),
-  trailingActionLabel: DynamicString$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "description": "dynamicString",
-    "label": "dynamicString1",
-    "trailingAction": "serverEvent",
-    "trailingActionLabel": "dynamicString2",
-  });
+  trailingActionLabel: z.nullable(DynamicString$inboundSchema).optional(),
 });
 
 export function c1TodoItemFromJSON(

@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1ConnectorServiceCreateDelegatedRequest = {
-  appId: string | null;
+  appId: string;
   connectorServiceCreateDelegatedRequest?:
     | shared.ConnectorServiceCreateDelegatedRequest
     | undefined;
@@ -39,7 +39,7 @@ export type C1ApiAppV1ConnectorServiceCreateDelegatedResponse = {
 
 /** @internal */
 export type C1ApiAppV1ConnectorServiceCreateDelegatedRequest$Outbound = {
-  app_id: string | null;
+  app_id: string;
   ConnectorServiceCreateDelegatedRequest?:
     | shared.ConnectorServiceCreateDelegatedRequest$Outbound
     | undefined;
@@ -52,7 +52,7 @@ export const C1ApiAppV1ConnectorServiceCreateDelegatedRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiAppV1ConnectorServiceCreateDelegatedRequest
   > = z.object({
-    appId: z.nullable(z.string()),
+    appId: z.string(),
     connectorServiceCreateDelegatedRequest: shared
       .ConnectorServiceCreateDelegatedRequest$outboundSchema.optional(),
   }).transform((v) => {

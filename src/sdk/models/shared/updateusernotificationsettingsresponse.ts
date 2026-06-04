@@ -15,10 +15,7 @@ import {
  * The UpdateUserNotificationSettingsResponse message.
  */
 export type UpdateUserNotificationSettingsResponse = {
-  /**
-   * UserNotificationSettings contains the calling user's personal notification preferences.
-   */
-  userNotificationSettings?: UserNotificationSettings | undefined;
+  userNotificationSettings?: UserNotificationSettings | null | undefined;
 };
 
 /** @internal */
@@ -27,7 +24,8 @@ export const UpdateUserNotificationSettingsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  userNotificationSettings: UserNotificationSettings$inboundSchema.optional(),
+  userNotificationSettings: z.nullable(UserNotificationSettings$inboundSchema)
+    .optional(),
 });
 
 export function updateUserNotificationSettingsResponseFromJSON(

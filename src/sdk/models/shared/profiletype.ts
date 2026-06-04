@@ -18,7 +18,7 @@ export type ProfileType = {
   /**
    * Whether to display this profile type to users in profile page. Defaults to false if not set
    */
-  displayToUser?: boolean | undefined;
+  displayToUser?: boolean | null | undefined;
   /**
    * The iconUrl field.
    */
@@ -42,7 +42,7 @@ export type ProfileType = {
   /**
    * Add this field to allow users to reference profile type in cel expressions
    */
-  slug?: string | undefined;
+  slug?: string | null | undefined;
 };
 
 /** @internal */
@@ -52,13 +52,13 @@ export const ProfileType$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   description: z.nullable(z.string()).optional(),
-  displayToUser: z.boolean().optional(),
+  displayToUser: z.nullable(z.boolean()).optional(),
   iconUrl: z.nullable(z.string()).optional(),
   id: z.nullable(z.string()).optional(),
   name: z.nullable(z.string()).optional(),
   priority: z.nullable(z.number().int()).optional(),
   sizes: z.nullable(z.array(z.number().int())).optional(),
-  slug: z.string().optional(),
+  slug: z.nullable(z.string()).optional(),
 });
 
 export function profileTypeFromJSON(

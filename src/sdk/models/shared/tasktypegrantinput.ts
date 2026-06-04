@@ -13,15 +13,11 @@ import {
  * The TaskTypeGrant message indicates that a task is a grant task and all related details.
  */
 export type TaskTypeGrantInput = {
-  grantDuration?: string | null | undefined;
-  outcomeTime?: Date | null | undefined;
   source?: TaskGrantSource | null | undefined;
 };
 
 /** @internal */
 export type TaskTypeGrantInput$Outbound = {
-  grantDuration?: string | null | undefined;
-  outcomeTime?: string | null | undefined;
   source?: TaskGrantSource$Outbound | null | undefined;
 };
 
@@ -31,8 +27,6 @@ export const TaskTypeGrantInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskTypeGrantInput
 > = z.object({
-  grantDuration: z.nullable(z.string()).optional(),
-  outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   source: z.nullable(TaskGrantSource$outboundSchema).optional(),
 });
 

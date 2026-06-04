@@ -9,7 +9,7 @@ import { LocalDirectoryConfigServiceCreateRequest } from "conductorone-sdk-types
 
 let value: LocalDirectoryConfigServiceCreateRequest = {
   appId: "<id>",
-  displayName: "Maureen97",
+  displayName: "Glenda_Wolff52",
 };
 ```
 

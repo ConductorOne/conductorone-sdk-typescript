@@ -51,11 +51,11 @@ export type PaperSecretServiceGetContentResponseSecretType = OpenEnum<
  *   - downloadUrl
  */
 export type PaperSecretServiceGetContentResponse = {
-  createdAt?: Date | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * The creatorUserId field.
    */
-  creatorUserId?: string | undefined;
+  creatorUserId?: string | null | undefined;
   /**
    * For file secrets: presigned S3 download URL (5 minute expiry)
    *
@@ -76,19 +76,25 @@ export type PaperSecretServiceGetContentResponse = {
   /**
    * Original filename (file secrets only)
    */
-  filename?: string | undefined;
+  filename?: string | null | undefined;
   /**
    * Input format hint for rendering (text secrets only)
    */
-  inputFormat?: PaperSecretServiceGetContentResponseInputFormat | undefined;
+  inputFormat?:
+    | PaperSecretServiceGetContentResponseInputFormat
+    | null
+    | undefined;
   /**
    * Secret metadata
    */
-  secretType?: PaperSecretServiceGetContentResponseSecretType | undefined;
+  secretType?:
+    | PaperSecretServiceGetContentResponseSecretType
+    | null
+    | undefined;
   /**
    * Views remaining after this view (-1 = unlimited)
    */
-  viewsRemaining?: number | undefined;
+  viewsRemaining?: number | null | undefined;
 };
 
 /** @internal */
@@ -113,17 +119,20 @@ export const PaperSecretServiceGetContentResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  creatorUserId: z.string().optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  creatorUserId: z.nullable(z.string()).optional(),
   downloadUrl: z.nullable(z.string()).optional(),
   encryptedContent: z.nullable(z.string()).optional(),
-  filename: z.string().optional(),
-  inputFormat: PaperSecretServiceGetContentResponseInputFormat$inboundSchema
-    .optional(),
-  secretType: PaperSecretServiceGetContentResponseSecretType$inboundSchema
-    .optional(),
-  viewsRemaining: z.number().int().optional(),
+  filename: z.nullable(z.string()).optional(),
+  inputFormat: z.nullable(
+    PaperSecretServiceGetContentResponseInputFormat$inboundSchema,
+  ).optional(),
+  secretType: z.nullable(
+    PaperSecretServiceGetContentResponseSecretType$inboundSchema,
+  ).optional(),
+  viewsRemaining: z.nullable(z.number().int()).optional(),
 });
 
 export function paperSecretServiceGetContentResponseFromJSON(

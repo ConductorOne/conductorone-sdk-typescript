@@ -14,7 +14,7 @@ export type IdentityUserTarget = {
   /**
    * The identityUserId field.
    */
-  identityUserId?: string | undefined;
+  identityUserId?: string | null | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const IdentityUserTarget$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  identityUserId: z.string().optional(),
+  identityUserId: z.nullable(z.string()).optional(),
 });
 
 export function identityUserTargetFromJSON(

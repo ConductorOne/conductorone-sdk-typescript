@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   ServicePrincipalCredentialInput,
   ServicePrincipalCredentialInput$Outbound,
@@ -14,16 +13,13 @@ import {
  * The ServicePrincipalServiceUpdateCredentialRequest message.
  */
 export type ServicePrincipalServiceUpdateCredentialRequest = {
-  /**
-   * ServicePrincipalCredential represents a client credential for a service principal.
-   */
-  servicePrincipalCredential?: ServicePrincipalCredentialInput | undefined;
+  credential?: ServicePrincipalCredentialInput | null | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type ServicePrincipalServiceUpdateCredentialRequest$Outbound = {
-  credential?: ServicePrincipalCredentialInput$Outbound | undefined;
+  credential?: ServicePrincipalCredentialInput$Outbound | null | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -34,13 +30,9 @@ export const ServicePrincipalServiceUpdateCredentialRequest$outboundSchema:
     z.ZodTypeDef,
     ServicePrincipalServiceUpdateCredentialRequest
   > = z.object({
-    servicePrincipalCredential: ServicePrincipalCredentialInput$outboundSchema
+    credential: z.nullable(ServicePrincipalCredentialInput$outboundSchema)
       .optional(),
     updateMask: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      servicePrincipalCredential: "credential",
-    });
   });
 
 export function servicePrincipalServiceUpdateCredentialRequestToJSON(

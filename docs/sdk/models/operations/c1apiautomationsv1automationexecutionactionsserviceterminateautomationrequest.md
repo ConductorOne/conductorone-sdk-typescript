@@ -8,7 +8,7 @@ import { C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationR
 let value:
   C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest =
     {
-      id: null,
+      id: 4692,
     };
 ```
 

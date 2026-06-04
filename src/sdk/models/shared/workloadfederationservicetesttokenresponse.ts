@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,70 +15,44 @@ import {
  * The WorkloadFederationServiceTestTokenResponse message.
  */
 export type WorkloadFederationServiceTestTokenResponse = {
-  /**
-   * TestTokenStepResult represents the result of a single validation step.
-   */
-  testTokenStepResult?: TestTokenStepResult | undefined;
-  /**
-   * TestTokenStepResult represents the result of a single validation step.
-   */
-  testTokenStepResult1?: TestTokenStepResult | undefined;
-  /**
-   * TestTokenStepResult represents the result of a single validation step.
-   */
-  testTokenStepResult2?: TestTokenStepResult | undefined;
+  audienceValidation?: TestTokenStepResult | null | undefined;
+  celEvaluation?: TestTokenStepResult | null | undefined;
+  cidrCheck?: TestTokenStepResult | null | undefined;
   /**
    * The decoded JWT claims (best-effort, even if signature fails).
    *
    * @remarks
    *  Returned as JSON string for display.
    */
-  decodedClaimsJson?: string | undefined;
-  /**
-   * TestTokenStepResult represents the result of a single validation step.
-   */
-  testTokenStepResult3?: TestTokenStepResult | undefined;
-  /**
-   * TestTokenStepResult represents the result of a single validation step.
-   */
-  testTokenStepResult4?: TestTokenStepResult | undefined;
+  decodedClaimsJson?: string | null | undefined;
+  issuerMatch?: TestTokenStepResult | null | undefined;
+  jwtDecode?: TestTokenStepResult | null | undefined;
   /**
    * Overall result: true only if ALL steps passed.
    */
-  overallResult?: boolean | undefined;
-  /**
-   * TestTokenStepResult represents the result of a single validation step.
-   */
-  testTokenStepResult5?: TestTokenStepResult | undefined;
-  /**
-   * TestTokenStepResult represents the result of a single validation step.
-   */
-  testTokenStepResult6?: TestTokenStepResult | undefined;
+  overallResult?: boolean | null | undefined;
+  signatureValidation?: TestTokenStepResult | null | undefined;
+  subjectValidation?: TestTokenStepResult | null | undefined;
+  tokenFreshness?: TestTokenStepResult | null | undefined;
 };
 
 /** @internal */
 export const WorkloadFederationServiceTestTokenResponse$inboundSchema:
   z.ZodType<WorkloadFederationServiceTestTokenResponse, z.ZodTypeDef, unknown> =
     z.object({
-      audienceValidation: TestTokenStepResult$inboundSchema.optional(),
-      celEvaluation: TestTokenStepResult$inboundSchema.optional(),
-      cidrCheck: TestTokenStepResult$inboundSchema.optional(),
-      decodedClaimsJson: z.string().optional(),
-      issuerMatch: TestTokenStepResult$inboundSchema.optional(),
-      jwtDecode: TestTokenStepResult$inboundSchema.optional(),
-      overallResult: z.boolean().optional(),
-      signatureValidation: TestTokenStepResult$inboundSchema.optional(),
-      tokenFreshness: TestTokenStepResult$inboundSchema.optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "audienceValidation": "testTokenStepResult",
-        "celEvaluation": "testTokenStepResult1",
-        "cidrCheck": "testTokenStepResult2",
-        "issuerMatch": "testTokenStepResult3",
-        "jwtDecode": "testTokenStepResult4",
-        "signatureValidation": "testTokenStepResult5",
-        "tokenFreshness": "testTokenStepResult6",
-      });
+      audienceValidation: z.nullable(TestTokenStepResult$inboundSchema)
+        .optional(),
+      celEvaluation: z.nullable(TestTokenStepResult$inboundSchema).optional(),
+      cidrCheck: z.nullable(TestTokenStepResult$inboundSchema).optional(),
+      decodedClaimsJson: z.nullable(z.string()).optional(),
+      issuerMatch: z.nullable(TestTokenStepResult$inboundSchema).optional(),
+      jwtDecode: z.nullable(TestTokenStepResult$inboundSchema).optional(),
+      overallResult: z.nullable(z.boolean()).optional(),
+      signatureValidation: z.nullable(TestTokenStepResult$inboundSchema)
+        .optional(),
+      subjectValidation: z.nullable(TestTokenStepResult$inboundSchema)
+        .optional(),
+      tokenFreshness: z.nullable(TestTokenStepResult$inboundSchema).optional(),
     });
 
 export function workloadFederationServiceTestTokenResponseFromJSON(

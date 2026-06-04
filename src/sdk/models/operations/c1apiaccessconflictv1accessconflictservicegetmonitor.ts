@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAccessconflictV1AccessConflictServiceGetMonitorRequest = {
-  id: string | null;
+  id: string;
 };
 
 export type C1ApiAccessconflictV1AccessConflictServiceGetMonitorResponse = {
@@ -38,7 +38,7 @@ export type C1ApiAccessconflictV1AccessConflictServiceGetMonitorResponse = {
 /** @internal */
 export type C1ApiAccessconflictV1AccessConflictServiceGetMonitorRequest$Outbound =
   {
-    id: string | null;
+    id: string;
   };
 
 /** @internal */
@@ -48,7 +48,7 @@ export const C1ApiAccessconflictV1AccessConflictServiceGetMonitorRequest$outboun
     z.ZodTypeDef,
     C1ApiAccessconflictV1AccessConflictServiceGetMonitorRequest
   > = z.object({
-    id: z.nullable(z.string()),
+    id: z.string(),
   });
 
 export function c1ApiAccessconflictV1AccessConflictServiceGetMonitorRequestToJSON(

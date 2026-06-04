@@ -8,8 +8,8 @@ The LocalUserInvitationServiceCreateRequest message.
 import { LocalUserInvitationServiceCreateRequest } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: LocalUserInvitationServiceCreateRequest = {
-  displayName: "Diana.Jerde14",
-  email: "Elinor14@gmail.com",
+  displayName: "Dwight.Erdman27",
+  email: "Astrid18@yahoo.com",
 };
 ```
 

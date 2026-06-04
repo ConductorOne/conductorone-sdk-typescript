@@ -11,7 +11,7 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceListAllEntitlementIdsPerAppRequest =
   {
-    catalogId: string | null;
+    catalogId: string;
   };
 
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceListAllEntitlementIdsPerAppResponse =
@@ -39,7 +39,7 @@ export type C1ApiRequestcatalogV1RequestCatalogManagementServiceListAllEntitleme
 /** @internal */
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceListAllEntitlementIdsPerAppRequest$Outbound =
   {
-    catalog_id: string | null;
+    catalog_id: string;
   };
 
 /** @internal */
@@ -49,7 +49,7 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceListAllEntitlem
     z.ZodTypeDef,
     C1ApiRequestcatalogV1RequestCatalogManagementServiceListAllEntitlementIdsPerAppRequest
   > = z.object({
-    catalogId: z.nullable(z.string()),
+    catalogId: z.string(),
   }).transform((v) => {
     return remap$(v, {
       catalogId: "catalog_id",

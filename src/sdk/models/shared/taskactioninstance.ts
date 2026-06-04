@@ -23,13 +23,6 @@ import {
  *   - connectorActionRef
  */
 export type TaskActionInstance = {
-  /**
-   * ConnectorActionRef describes dispatch through a connector's built-in
-   *
-   * @remarks
-   *  GrantManagerService Grant / Revoke RPC — i.e. the default connector
-   *  operation, used for synthesized tickets like scope-role requests.
-   */
   connectorActionRef?: ConnectorActionRef | null | undefined;
   /**
    * Display label at ticket-creation time. Same value as
@@ -38,7 +31,7 @@ export type TaskActionInstance = {
    *  TaskTypeAction.display_name; repeated here so clients that walk the
    *  instance see a self-contained view.
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
 };
 
 /** @internal */
@@ -48,12 +41,12 @@ export const TaskActionInstance$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   connectorActionRef: z.nullable(ConnectorActionRef$inboundSchema).optional(),
-  displayName: z.string().optional(),
+  displayName: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type TaskActionInstance$Outbound = {
   connectorActionRef?: ConnectorActionRef$Outbound | null | undefined;
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
 };
 
 /** @internal */
@@ -63,7 +56,7 @@ export const TaskActionInstance$outboundSchema: z.ZodType<
   TaskActionInstance
 > = z.object({
   connectorActionRef: z.nullable(ConnectorActionRef$outboundSchema).optional(),
-  displayName: z.string().optional(),
+  displayName: z.nullable(z.string()).optional(),
 });
 
 export function taskActionInstanceToJSON(

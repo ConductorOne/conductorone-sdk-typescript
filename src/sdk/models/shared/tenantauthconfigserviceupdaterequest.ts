@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   TenantAuthConfigInput,
   TenantAuthConfigInput$Outbound,
@@ -14,28 +13,13 @@ import {
  * The TenantAuthConfigServiceUpdateRequest message.
  */
 export type TenantAuthConfigServiceUpdateRequest = {
-  /**
-   * The TenantAuthConfig message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named provider_config. Only a single field of the following list may be set at a time:
-   *   - google
-   *   - microsoft
-   *   - okta
-   *   - onelogin
-   *   - jumpcloud
-   *   - pingone
-   *   - oidc
-   *   - c1Local
-   */
-  tenantAuthConfig?: TenantAuthConfigInput | undefined;
+  authConfig?: TenantAuthConfigInput | null | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type TenantAuthConfigServiceUpdateRequest$Outbound = {
-  authConfig?: TenantAuthConfigInput$Outbound | undefined;
+  authConfig?: TenantAuthConfigInput$Outbound | null | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -45,12 +29,8 @@ export const TenantAuthConfigServiceUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TenantAuthConfigServiceUpdateRequest
 > = z.object({
-  tenantAuthConfig: TenantAuthConfigInput$outboundSchema.optional(),
+  authConfig: z.nullable(TenantAuthConfigInput$outboundSchema).optional(),
   updateMask: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    tenantAuthConfig: "authConfig",
-  });
 });
 
 export function tenantAuthConfigServiceUpdateRequestToJSON(

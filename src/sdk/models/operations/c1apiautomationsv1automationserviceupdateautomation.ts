@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAutomationsV1AutomationServiceUpdateAutomationRequest = {
-  id: string | null;
+  id: string;
   updateAutomationRequest?: shared.UpdateAutomationRequest | undefined;
 };
 
@@ -36,7 +36,7 @@ export type C1ApiAutomationsV1AutomationServiceUpdateAutomationResponse = {
 /** @internal */
 export type C1ApiAutomationsV1AutomationServiceUpdateAutomationRequest$Outbound =
   {
-    id: string | null;
+    id: string;
     UpdateAutomationRequest?:
       | shared.UpdateAutomationRequest$Outbound
       | undefined;
@@ -49,7 +49,7 @@ export const C1ApiAutomationsV1AutomationServiceUpdateAutomationRequest$outbound
     z.ZodTypeDef,
     C1ApiAutomationsV1AutomationServiceUpdateAutomationRequest
   > = z.object({
-    id: z.nullable(z.string()),
+    id: z.string(),
     updateAutomationRequest: shared.UpdateAutomationRequest$outboundSchema
       .optional(),
   }).transform((v) => {

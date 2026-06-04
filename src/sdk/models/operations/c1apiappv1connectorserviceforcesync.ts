@@ -10,8 +10,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1ConnectorServiceForceSyncRequest = {
-  appId: string | null;
-  connectorId: string | null;
+  appId: string;
+  connectorId: string;
   forceSyncRequest?: shared.ForceSyncRequest | undefined;
 };
 
@@ -36,8 +36,8 @@ export type C1ApiAppV1ConnectorServiceForceSyncResponse = {
 
 /** @internal */
 export type C1ApiAppV1ConnectorServiceForceSyncRequest$Outbound = {
-  app_id: string | null;
-  connector_id: string | null;
+  app_id: string;
+  connector_id: string;
   ForceSyncRequest?: shared.ForceSyncRequest$Outbound | undefined;
 };
 
@@ -48,8 +48,8 @@ export const C1ApiAppV1ConnectorServiceForceSyncRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiAppV1ConnectorServiceForceSyncRequest
   > = z.object({
-    appId: z.nullable(z.string()),
-    connectorId: z.nullable(z.string()),
+    appId: z.string(),
+    connectorId: z.string(),
     forceSyncRequest: shared.ForceSyncRequest$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {

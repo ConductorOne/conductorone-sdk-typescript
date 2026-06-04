@@ -20,18 +20,18 @@ export type UpdateRoleMiningConfigRequest = {
   /**
    * Maximum number of suggestions the analysis should produce per run.
    */
-  maxSuggestions?: number | undefined;
+  maxSuggestions?: number | null | undefined;
   /**
    * Minimum number of users a cohort must contain to generate a suggestion.
    */
-  minCohortSize?: number | undefined;
+  minCohortSize?: number | null | undefined;
 };
 
 /** @internal */
 export type UpdateRoleMiningConfigRequest$Outbound = {
   cohortHints?: Array<CohortHintInput$Outbound> | null | undefined;
-  maxSuggestions?: number | undefined;
-  minCohortSize?: number | undefined;
+  maxSuggestions?: number | null | undefined;
+  minCohortSize?: number | null | undefined;
 };
 
 /** @internal */
@@ -41,8 +41,8 @@ export const UpdateRoleMiningConfigRequest$outboundSchema: z.ZodType<
   UpdateRoleMiningConfigRequest
 > = z.object({
   cohortHints: z.nullable(z.array(CohortHintInput$outboundSchema)).optional(),
-  maxSuggestions: z.number().int().optional(),
-  minCohortSize: z.number().int().optional(),
+  maxSuggestions: z.nullable(z.number().int()).optional(),
+  minCohortSize: z.nullable(z.number().int()).optional(),
 });
 
 export function updateRoleMiningConfigRequestToJSON(

@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiSystemlogV1ExportServiceGetRequest = {
-  exportId: string | null;
+  exportId: string;
 };
 
 export type C1ApiSystemlogV1ExportServiceGetResponse = {
@@ -34,7 +34,7 @@ export type C1ApiSystemlogV1ExportServiceGetResponse = {
 
 /** @internal */
 export type C1ApiSystemlogV1ExportServiceGetRequest$Outbound = {
-  export_id: string | null;
+  export_id: string;
 };
 
 /** @internal */
@@ -43,7 +43,7 @@ export const C1ApiSystemlogV1ExportServiceGetRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiSystemlogV1ExportServiceGetRequest
 > = z.object({
-  exportId: z.nullable(z.string()),
+  exportId: z.string(),
 }).transform((v) => {
   return remap$(v, {
     exportId: "export_id",

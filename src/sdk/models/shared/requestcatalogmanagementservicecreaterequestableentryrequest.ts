@@ -14,13 +14,13 @@ export type RequestCatalogManagementServiceCreateRequestableEntryRequest = {
    * @remarks
    *  By default, this is false and no requests are created.
    */
-  createRequests?: boolean | undefined;
+  createRequests?: boolean | null | undefined;
 };
 
 /** @internal */
 export type RequestCatalogManagementServiceCreateRequestableEntryRequest$Outbound =
   {
-    createRequests?: boolean | undefined;
+    createRequests?: boolean | null | undefined;
   };
 
 /** @internal */
@@ -30,7 +30,7 @@ export const RequestCatalogManagementServiceCreateRequestableEntryRequest$outbou
     z.ZodTypeDef,
     RequestCatalogManagementServiceCreateRequestableEntryRequest
   > = z.object({
-    createRequests: z.boolean().optional(),
+    createRequests: z.nullable(z.boolean()).optional(),
   });
 
 export function requestCatalogManagementServiceCreateRequestableEntryRequestToJSON(

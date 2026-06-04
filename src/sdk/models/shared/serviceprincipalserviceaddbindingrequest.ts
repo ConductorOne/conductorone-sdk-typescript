@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   ServicePrincipalBindingSubject,
   ServicePrincipalBindingSubject$Outbound,
@@ -17,24 +16,14 @@ export type ServicePrincipalServiceAddBindingRequest = {
   /**
    * The servicePrincipalId field.
    */
-  servicePrincipalId?: string | undefined;
-  /**
-   * ServicePrincipalBindingSubject identifies the entity that is bound to a
-   *
-   * @remarks
-   *  service principal. Open-ended oneof so future subject kinds (workflows,
-   *  connectors, etc.) can be added without changing the RPC shape.
-   *
-   * This message contains a oneof named kind. Only a single field of the following list may be set at a time:
-   *   - functionId
-   */
-  servicePrincipalBindingSubject?: ServicePrincipalBindingSubject | undefined;
+  servicePrincipalId?: string | null | undefined;
+  subject?: ServicePrincipalBindingSubject | null | undefined;
 };
 
 /** @internal */
 export type ServicePrincipalServiceAddBindingRequest$Outbound = {
-  servicePrincipalId?: string | undefined;
-  subject?: ServicePrincipalBindingSubject$Outbound | undefined;
+  servicePrincipalId?: string | null | undefined;
+  subject?: ServicePrincipalBindingSubject$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -43,13 +32,8 @@ export const ServicePrincipalServiceAddBindingRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ServicePrincipalServiceAddBindingRequest
 > = z.object({
-  servicePrincipalId: z.string().optional(),
-  servicePrincipalBindingSubject: ServicePrincipalBindingSubject$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    servicePrincipalBindingSubject: "subject",
-  });
+  servicePrincipalId: z.nullable(z.string()).optional(),
+  subject: z.nullable(ServicePrincipalBindingSubject$outboundSchema).optional(),
 });
 
 export function servicePrincipalServiceAddBindingRequestToJSON(

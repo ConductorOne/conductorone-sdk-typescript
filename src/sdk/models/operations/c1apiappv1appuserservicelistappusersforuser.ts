@@ -10,10 +10,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppUserServiceListAppUsersForUserRequest = {
-  appId: string | null;
-  userId: string | null;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  appId: string;
+  userId: string;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
 };
 
 export type C1ApiAppV1AppUserServiceListAppUsersForUserResponse = {
@@ -39,10 +39,10 @@ export type C1ApiAppV1AppUserServiceListAppUsersForUserResponse = {
 
 /** @internal */
 export type C1ApiAppV1AppUserServiceListAppUsersForUserRequest$Outbound = {
-  app_id: string | null;
-  user_id: string | null;
-  page_size?: number | null | undefined;
-  page_token?: string | null | undefined;
+  app_id: string;
+  user_id: string;
+  page_size?: number | undefined;
+  page_token?: string | undefined;
 };
 
 /** @internal */
@@ -52,10 +52,10 @@ export const C1ApiAppV1AppUserServiceListAppUsersForUserRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiAppV1AppUserServiceListAppUsersForUserRequest
   > = z.object({
-    appId: z.nullable(z.string()),
-    userId: z.nullable(z.string()),
-    pageSize: z.nullable(z.number().int()).optional(),
-    pageToken: z.nullable(z.string()).optional(),
+    appId: z.string(),
+    userId: z.string(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       appId: "app_id",

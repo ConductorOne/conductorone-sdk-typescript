@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   BundleAutomationRuleCEL,
   BundleAutomationRuleCEL$Outbound,
@@ -25,10 +24,7 @@ import {
  *   - cel
  */
 export type SetBundleAutomationRequest = {
-  /**
-   * The BundleAutomationRuleCEL message.
-   */
-  bundleAutomationRuleCEL?: BundleAutomationRuleCEL | null | undefined;
+  cel?: BundleAutomationRuleCEL | null | undefined;
   /**
    * Whether to create access request tasks for matched users instead of granting directly.
    */
@@ -41,7 +37,21 @@ export type SetBundleAutomationRequest = {
    * Whether the automation should actively run on its schedule.
    */
   enabled?: boolean | null | undefined;
+  /**
+   * When true, the circuit breaker is evaluated even on profiles below the
+   *
+   * @remarks
+   *  tenant min-members floor. Defaults to false.
+   */
+  enforceOnSmallProfiles?: boolean | null | undefined;
   entitlements?: BundleAutomationRuleEntitlement | null | undefined;
+  /**
+   * Per-automation override for the removed-members percent that trips the
+   *
+   * @remarks
+   *  circuit breaker (1-100). 0 / unset means inherit the tenant default.
+   */
+  removedMembersThresholdPercent?: number | null | undefined;
 };
 
 /** @internal */
@@ -50,7 +60,9 @@ export type SetBundleAutomationRequest$Outbound = {
   createTasks?: boolean | null | undefined;
   disableCircuitBreaker?: boolean | null | undefined;
   enabled?: boolean | null | undefined;
+  enforceOnSmallProfiles?: boolean | null | undefined;
   entitlements?: BundleAutomationRuleEntitlement$Outbound | null | undefined;
+  removedMembersThresholdPercent?: string | null | undefined;
 };
 
 /** @internal */
@@ -59,17 +71,16 @@ export const SetBundleAutomationRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SetBundleAutomationRequest
 > = z.object({
-  bundleAutomationRuleCEL: z.nullable(BundleAutomationRuleCEL$outboundSchema)
-    .optional(),
+  cel: z.nullable(BundleAutomationRuleCEL$outboundSchema).optional(),
   createTasks: z.nullable(z.boolean()).optional(),
   disableCircuitBreaker: z.nullable(z.boolean()).optional(),
   enabled: z.nullable(z.boolean()).optional(),
+  enforceOnSmallProfiles: z.nullable(z.boolean()).optional(),
   entitlements: z.nullable(BundleAutomationRuleEntitlement$outboundSchema)
     .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    bundleAutomationRuleCEL: "cel",
-  });
+  removedMembersThresholdPercent: z.nullable(
+    z.number().int().transform(v => `${v}`),
+  ).optional(),
 });
 
 export function setBundleAutomationRequestToJSON(

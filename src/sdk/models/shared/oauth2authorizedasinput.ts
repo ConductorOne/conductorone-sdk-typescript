@@ -7,23 +7,17 @@ import * as z from "zod/v3";
 /**
  * OAuth2AuthorizedAs tracks the user that OAuthed with the connector.
  */
-export type OAuth2AuthorizedAsInput = {
-  authorizedAt?: Date | null | undefined;
-};
+export type OAuth2AuthorizedAsInput = {};
 
 /** @internal */
-export type OAuth2AuthorizedAsInput$Outbound = {
-  authorizedAt?: string | null | undefined;
-};
+export type OAuth2AuthorizedAsInput$Outbound = {};
 
 /** @internal */
 export const OAuth2AuthorizedAsInput$outboundSchema: z.ZodType<
   OAuth2AuthorizedAsInput$Outbound,
   z.ZodTypeDef,
   OAuth2AuthorizedAsInput
-> = z.object({
-  authorizedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = z.object({});
 
 export function oAuth2AuthorizedAsInputToJSON(
   oAuth2AuthorizedAsInput: OAuth2AuthorizedAsInput,

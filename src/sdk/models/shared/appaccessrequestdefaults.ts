@@ -76,7 +76,7 @@ export type AppAccessRequestDefaults = {
   /**
    * The ID of the request schema to apply to entitlements matching this rule.
    */
-  requestSchemaId?: string | undefined;
+  requestSchemaId?: string | null | undefined;
   /**
    * The app resource type ids for which the app access request defaults are applied.
    */
@@ -122,7 +122,7 @@ export type AppAccessRequestDefaults1 = {
   /**
    * The ID of the request schema to apply to entitlements matching this rule.
    */
-  requestSchemaId?: string | undefined;
+  requestSchemaId?: string | null | undefined;
   /**
    * The app resource type ids for which the app access request defaults are applied.
    */
@@ -190,7 +190,7 @@ export const AppAccessRequestDefaults$inboundSchema: z.ZodType<
   emergencyGrantEnabled: z.nullable(z.boolean()).optional(),
   emergencyGrantPolicyId: z.nullable(z.string()).optional(),
   requestPolicyId: z.nullable(z.string()).optional(),
-  requestSchemaId: z.string().optional(),
+  requestSchemaId: z.nullable(z.string()).optional(),
   resourceTypeIds: z.nullable(z.array(z.string())).optional(),
   state: z.nullable(AppAccessRequestDefaultsState$inboundSchema).optional(),
 });
@@ -214,7 +214,7 @@ export type AppAccessRequestDefaults1$Outbound = {
   emergencyGrantEnabled?: boolean | null | undefined;
   emergencyGrantPolicyId?: string | null | undefined;
   requestPolicyId?: string | null | undefined;
-  requestSchemaId?: string | undefined;
+  requestSchemaId?: string | null | undefined;
   resourceTypeIds?: Array<string> | null | undefined;
   state?: string | null | undefined;
 };
@@ -233,7 +233,7 @@ export const AppAccessRequestDefaults1$outboundSchema: z.ZodType<
   emergencyGrantEnabled: z.nullable(z.boolean()).optional(),
   emergencyGrantPolicyId: z.nullable(z.string()).optional(),
   requestPolicyId: z.nullable(z.string()).optional(),
-  requestSchemaId: z.string().optional(),
+  requestSchemaId: z.nullable(z.string()).optional(),
   resourceTypeIds: z.nullable(z.array(z.string())).optional(),
   state: z.nullable(AppAccessRequestDefaultsState$outboundSchema).optional(),
 });

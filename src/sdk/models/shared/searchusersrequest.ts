@@ -71,7 +71,7 @@ export type SearchUsersRequest = {
   /**
    * Filter for users based on their delegate status.
    */
-  delegateStatus?: DelegateStatus | undefined;
+  delegateStatus?: DelegateStatus | null | undefined;
   /**
    * Filter for users that have any of the delegated user IDs on this list.
    */
@@ -104,7 +104,7 @@ export type SearchUsersRequest = {
   /**
    * Filter for users who are delegates of at least one other user.
    */
-  isDelegate?: boolean | undefined;
+  isDelegate?: boolean | null | undefined;
   /**
    * Search for users that have any of the job titles on this list.
    */
@@ -177,7 +177,7 @@ export const SearchUsersRequestUserStatuses$outboundSchema: z.ZodType<
 
 /** @internal */
 export type SearchUsersRequest$Outbound = {
-  delegateStatus?: string | undefined;
+  delegateStatus?: string | null | undefined;
   delegatedUserIds?: Array<string> | null | undefined;
   departments?: Array<string> | null | undefined;
   email?: string | null | undefined;
@@ -186,7 +186,7 @@ export type SearchUsersRequest$Outbound = {
   excludeTypes?: Array<string> | null | undefined;
   expandMask?: UserExpandMask$Outbound | null | undefined;
   ids?: Array<string> | null | undefined;
-  isDelegate?: boolean | undefined;
+  isDelegate?: boolean | null | undefined;
   jobTitles?: Array<string> | null | undefined;
   managerIds?: Array<string> | null | undefined;
   origins?: Array<string> | null | undefined;
@@ -204,7 +204,7 @@ export const SearchUsersRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchUsersRequest
 > = z.object({
-  delegateStatus: DelegateStatus$outboundSchema.optional(),
+  delegateStatus: z.nullable(DelegateStatus$outboundSchema).optional(),
   delegatedUserIds: z.nullable(z.array(z.string())).optional(),
   departments: z.nullable(z.array(z.string())).optional(),
   email: z.nullable(z.string()).optional(),
@@ -213,7 +213,7 @@ export const SearchUsersRequest$outboundSchema: z.ZodType<
   excludeTypes: z.nullable(z.array(ExcludeTypes$outboundSchema)).optional(),
   expandMask: z.nullable(UserExpandMask$outboundSchema).optional(),
   ids: z.nullable(z.array(z.string())).optional(),
-  isDelegate: z.boolean().optional(),
+  isDelegate: z.nullable(z.boolean()).optional(),
   jobTitles: z.nullable(z.array(z.string())).optional(),
   managerIds: z.nullable(z.array(z.string())).optional(),
   origins: z.nullable(z.array(Origins$outboundSchema)).optional(),

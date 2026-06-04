@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -58,20 +57,9 @@ import {
  *   - finding
  */
 export type TaskType = {
-  /**
-   * The TaskTypeAction message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named target_object. Only a single field of the following list may be set at a time:
-   *   - scopeRole
-   */
-  taskTypeAction?: TaskTypeAction | null | undefined;
+  action?: TaskTypeAction | null | undefined;
   certify?: TaskTypeCertify | null | undefined;
-  /**
-   * The TaskTypeFinding message.
-   */
-  taskTypeFinding?: TaskTypeFinding | null | undefined;
+  finding?: TaskTypeFinding | null | undefined;
   grant?: TaskTypeGrant | null | undefined;
   offboarding?: TaskTypeOffboarding | null | undefined;
   revoke?: TaskTypeRevoke | null | undefined;
@@ -89,11 +77,6 @@ export const TaskType$inboundSchema: z.ZodType<
   grant: z.nullable(TaskTypeGrant$inboundSchema).optional(),
   offboarding: z.nullable(TaskTypeOffboarding$inboundSchema).optional(),
   revoke: z.nullable(TaskTypeRevoke$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "action": "taskTypeAction",
-    "finding": "taskTypeFinding",
-  });
 });
 /** @internal */
 export type TaskType$Outbound = {
@@ -111,17 +94,12 @@ export const TaskType$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskType
 > = z.object({
-  taskTypeAction: z.nullable(TaskTypeAction$outboundSchema).optional(),
+  action: z.nullable(TaskTypeAction$outboundSchema).optional(),
   certify: z.nullable(TaskTypeCertify$outboundSchema).optional(),
-  taskTypeFinding: z.nullable(TaskTypeFinding$outboundSchema).optional(),
+  finding: z.nullable(TaskTypeFinding$outboundSchema).optional(),
   grant: z.nullable(TaskTypeGrant$outboundSchema).optional(),
   offboarding: z.nullable(TaskTypeOffboarding$outboundSchema).optional(),
   revoke: z.nullable(TaskTypeRevoke$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    taskTypeAction: "action",
-    taskTypeFinding: "finding",
-  });
 });
 
 export function taskTypeToJSON(taskType: TaskType): string {

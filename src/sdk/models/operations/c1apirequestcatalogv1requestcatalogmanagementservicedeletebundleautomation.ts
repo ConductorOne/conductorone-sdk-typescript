@@ -11,7 +11,7 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest =
   {
-    requestCatalogId: string | null;
+    requestCatalogId: string;
     deleteBundleAutomationRequest?:
       | shared.DeleteBundleAutomationRequest
       | undefined;
@@ -42,7 +42,7 @@ export type C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAuto
 /** @internal */
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest$Outbound =
   {
-    request_catalog_id: string | null;
+    request_catalog_id: string;
     DeleteBundleAutomationRequest?:
       | shared.DeleteBundleAutomationRequest$Outbound
       | undefined;
@@ -55,7 +55,7 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAut
     z.ZodTypeDef,
     C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest
   > = z.object({
-    requestCatalogId: z.nullable(z.string()),
+    requestCatalogId: z.string(),
     deleteBundleAutomationRequest: shared
       .DeleteBundleAutomationRequest$outboundSchema.optional(),
   }).transform((v) => {

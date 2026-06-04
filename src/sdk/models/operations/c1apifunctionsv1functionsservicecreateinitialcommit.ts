@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiFunctionsV1FunctionsServiceCreateInitialCommitRequest = {
-  functionId: string | null;
+  functionId: string;
   functionsServiceCreateInitialCommitRequest?:
     | shared.FunctionsServiceCreateInitialCommitRequest
     | undefined;
@@ -40,7 +40,7 @@ export type C1ApiFunctionsV1FunctionsServiceCreateInitialCommitResponse = {
 /** @internal */
 export type C1ApiFunctionsV1FunctionsServiceCreateInitialCommitRequest$Outbound =
   {
-    function_id: string | null;
+    function_id: string;
     FunctionsServiceCreateInitialCommitRequest?:
       | shared.FunctionsServiceCreateInitialCommitRequest$Outbound
       | undefined;
@@ -53,7 +53,7 @@ export const C1ApiFunctionsV1FunctionsServiceCreateInitialCommitRequest$outbound
     z.ZodTypeDef,
     C1ApiFunctionsV1FunctionsServiceCreateInitialCommitRequest
   > = z.object({
-    functionId: z.nullable(z.string()),
+    functionId: z.string(),
     functionsServiceCreateInitialCommitRequest: shared
       .FunctionsServiceCreateInitialCommitRequest$outboundSchema.optional(),
   }).transform((v) => {

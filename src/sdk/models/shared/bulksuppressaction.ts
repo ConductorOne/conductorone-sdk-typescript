@@ -11,12 +11,12 @@ export type BulkSuppressAction = {
   /**
    * The reason field.
    */
-  reason?: string | undefined;
+  reason?: string | null | undefined;
 };
 
 /** @internal */
 export type BulkSuppressAction$Outbound = {
-  reason?: string | undefined;
+  reason?: string | null | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const BulkSuppressAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BulkSuppressAction
 > = z.object({
-  reason: z.string().optional(),
+  reason: z.nullable(z.string()).optional(),
 });
 
 export function bulkSuppressActionToJSON(

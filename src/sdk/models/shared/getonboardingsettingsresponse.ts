@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -38,19 +37,16 @@ export type GetOnboardingSettingsResponse = {
   /**
    * The identifier of the onboarding conversation thread, if one is in progress.
    */
-  conversationId?: string | undefined;
+  conversationId?: string | null | undefined;
   /**
    * The intents field.
    */
   intents?: Array<string> | null | undefined;
-  /**
-   * The OnboardingOrgContext message.
-   */
-  onboardingOrgContext?: OnboardingOrgContext | undefined;
+  orgContext?: OnboardingOrgContext | null | undefined;
   /**
    * The current status of the tenant onboarding process.
    */
-  status?: GetOnboardingSettingsResponseStatus | undefined;
+  status?: GetOnboardingSettingsResponseStatus | null | undefined;
 };
 
 /** @internal */
@@ -66,14 +62,11 @@ export const GetOnboardingSettingsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  conversationId: z.string().optional(),
+  conversationId: z.nullable(z.string()).optional(),
   intents: z.nullable(z.array(z.string())).optional(),
-  orgContext: OnboardingOrgContext$inboundSchema.optional(),
-  status: GetOnboardingSettingsResponseStatus$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "orgContext": "onboardingOrgContext",
-  });
+  orgContext: z.nullable(OnboardingOrgContext$inboundSchema).optional(),
+  status: z.nullable(GetOnboardingSettingsResponseStatus$inboundSchema)
+    .optional(),
 });
 
 export function getOnboardingSettingsResponseFromJSON(

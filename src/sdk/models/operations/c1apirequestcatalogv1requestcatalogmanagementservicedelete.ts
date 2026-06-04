@@ -11,7 +11,7 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest =
   {
-    id: string | null;
+    id: string;
     requestCatalogManagementServiceDeleteRequest?:
       | shared.RequestCatalogManagementServiceDeleteRequest
       | undefined;
@@ -42,7 +42,7 @@ export type C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteResponse =
 /** @internal */
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest$Outbound =
   {
-    id: string | null;
+    id: string;
     RequestCatalogManagementServiceDeleteRequest?:
       | shared.RequestCatalogManagementServiceDeleteRequest$Outbound
       | undefined;
@@ -55,7 +55,7 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest$o
     z.ZodTypeDef,
     C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteRequest
   > = z.object({
-    id: z.nullable(z.string()),
+    id: z.string(),
     requestCatalogManagementServiceDeleteRequest: shared
       .RequestCatalogManagementServiceDeleteRequest$outboundSchema.optional(),
   }).transform((v) => {

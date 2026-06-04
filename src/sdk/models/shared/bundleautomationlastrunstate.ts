@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -38,12 +37,7 @@ export type BundleAutomationLastRunStateStatus = OpenEnum<
  * The BundleAutomationLastRunState message.
  */
 export type BundleAutomationLastRunState = {
-  /**
-   * The BundleAutomationCelEvaluationState message.
-   */
-  bundleAutomationCelEvaluationState?:
-    | BundleAutomationCelEvaluationState
-    | undefined;
+  celEvaluation?: BundleAutomationCelEvaluationState | null | undefined;
   /**
    * The errorMessage field.
    */
@@ -68,17 +62,14 @@ export const BundleAutomationLastRunState$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  celEvaluation: BundleAutomationCelEvaluationState$inboundSchema.optional(),
+  celEvaluation: z.nullable(BundleAutomationCelEvaluationState$inboundSchema)
+    .optional(),
   errorMessage: z.nullable(z.string()).optional(),
   lastRunAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   status: z.nullable(BundleAutomationLastRunStateStatus$inboundSchema)
     .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "celEvaluation": "bundleAutomationCelEvaluationState",
-  });
 });
 
 export function bundleAutomationLastRunStateFromJSON(

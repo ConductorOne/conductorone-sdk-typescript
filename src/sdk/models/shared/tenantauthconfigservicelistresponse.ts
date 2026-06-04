@@ -22,7 +22,7 @@ export type TenantAuthConfigServiceListResponse = {
   /**
    * A token to retrieve the next page of results, or empty if there are no more results.
    */
-  nextPageToken?: string | undefined;
+  nextPageToken?: string | null | undefined;
 };
 
 /** @internal */
@@ -32,7 +32,7 @@ export const TenantAuthConfigServiceListResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   list: z.nullable(z.array(TenantAuthConfig$inboundSchema)).optional(),
-  nextPageToken: z.string().optional(),
+  nextPageToken: z.nullable(z.string()).optional(),
 });
 
 export function tenantAuthConfigServiceListResponseFromJSON(

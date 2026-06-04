@@ -6,7 +6,7 @@
 import { C1ApiAppV1AppUsageControlsServiceGetRequest } from "conductorone-sdk-typescript/sdk/models/operations";
 
 let value: C1ApiAppV1AppUsageControlsServiceGetRequest = {
-  appId: null,
+  appId: "<id>",
 };
 ```
 

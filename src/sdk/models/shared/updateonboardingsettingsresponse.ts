@@ -33,7 +33,7 @@ export type UpdateOnboardingSettingsResponse = {
   /**
    * The updated onboarding status.
    */
-  status?: UpdateOnboardingSettingsResponseStatus | undefined;
+  status?: UpdateOnboardingSettingsResponseStatus | null | undefined;
 };
 
 /** @internal */
@@ -49,7 +49,8 @@ export const UpdateOnboardingSettingsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  status: UpdateOnboardingSettingsResponseStatus$inboundSchema.optional(),
+  status: z.nullable(UpdateOnboardingSettingsResponseStatus$inboundSchema)
+    .optional(),
 });
 
 export function updateOnboardingSettingsResponseFromJSON(

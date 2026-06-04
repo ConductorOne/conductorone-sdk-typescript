@@ -18,7 +18,7 @@ export type FunctionsServiceListTagsResponse = {
   /**
    * The tags field.
    */
-  tags?: { [k: string]: FunctionCommit } | null | undefined;
+  tags?: { [k: string]: FunctionCommit } | undefined;
 };
 
 /** @internal */
@@ -27,7 +27,7 @@ export const FunctionsServiceListTagsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  tags: z.nullable(z.record(FunctionCommit$inboundSchema)).optional(),
+  tags: z.record(FunctionCommit$inboundSchema).optional(),
 });
 
 export function functionsServiceListTagsResponseFromJSON(

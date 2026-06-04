@@ -10,8 +10,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1ConnectorServiceDeleteRequest = {
-  appId: string | null;
-  id: string | null;
+  appId: string;
+  id: string;
   connectorServiceDeleteRequest?:
     | shared.ConnectorServiceDeleteRequest
     | undefined;
@@ -40,8 +40,8 @@ export type C1ApiAppV1ConnectorServiceDeleteResponse = {
 
 /** @internal */
 export type C1ApiAppV1ConnectorServiceDeleteRequest$Outbound = {
-  app_id: string | null;
-  id: string | null;
+  app_id: string;
+  id: string;
   ConnectorServiceDeleteRequest?:
     | shared.ConnectorServiceDeleteRequest$Outbound
     | undefined;
@@ -53,8 +53,8 @@ export const C1ApiAppV1ConnectorServiceDeleteRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiAppV1ConnectorServiceDeleteRequest
 > = z.object({
-  appId: z.nullable(z.string()),
-  id: z.nullable(z.string()),
+  appId: z.string(),
+  id: z.string(),
   connectorServiceDeleteRequest: shared
     .ConnectorServiceDeleteRequest$outboundSchema.optional(),
 }).transform((v) => {

@@ -12,24 +12,7 @@ import { Finding, Finding$inboundSchema } from "./finding.js";
  * The UpdateFindingStateResponse message.
  */
 export type UpdateFindingStateResponse = {
-  /**
-   * The Finding message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named finding_type. Only a single field of the following list may be set at a time:
-   *   - similarUsernameMatch
-   *   - serviceAccountMisclassification
-   *
-   * This message contains a oneof named target. Only a single field of the following list may be set at a time:
-   *   - identityUserTarget
-   *   - appUserTarget
-   *
-   * This message contains a oneof named evidence. Only a single field of the following list may be set at a time:
-   *   - similarUsernameMatchEvidence
-   *   - serviceAccountMisclassificationEvidence
-   */
-  finding?: Finding | undefined;
+  finding?: Finding | null | undefined;
 };
 
 /** @internal */
@@ -38,7 +21,7 @@ export const UpdateFindingStateResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  finding: Finding$inboundSchema.optional(),
+  finding: z.nullable(Finding$inboundSchema).optional(),
 });
 
 export function updateFindingStateResponseFromJSON(

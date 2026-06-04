@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -13,36 +12,16 @@ import { DynamicString, DynamicString$inboundSchema } from "./dynamicstring.js";
  * C1ResourcePickerComponent allows selecting C1 resources.
  */
 export type C1ResourcePickerComponent = {
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString?: DynamicString | undefined;
+  label?: DynamicString | null | undefined;
   /**
    * The multiSelect field.
    */
-  multiSelect?: boolean | undefined;
+  multiSelect?: boolean | null | undefined;
   /**
    * The resourceType field.
    */
-  resourceType?: string | undefined;
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString1?: DynamicString | undefined;
+  resourceType?: string | null | undefined;
+  value?: DynamicString | null | undefined;
 };
 
 /** @internal */
@@ -51,15 +30,10 @@ export const C1ResourcePickerComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  label: DynamicString$inboundSchema.optional(),
-  multiSelect: z.boolean().optional(),
-  resourceType: z.string().optional(),
-  value: DynamicString$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "label": "dynamicString",
-    "value": "dynamicString1",
-  });
+  label: z.nullable(DynamicString$inboundSchema).optional(),
+  multiSelect: z.nullable(z.boolean()).optional(),
+  resourceType: z.nullable(z.string()).optional(),
+  value: z.nullable(DynamicString$inboundSchema).optional(),
 });
 
 export function c1ResourcePickerComponentFromJSON(

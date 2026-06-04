@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -13,10 +12,7 @@ import { ChildList, ChildList$inboundSchema } from "./childlist.js";
  * CardComponent is a container with styling.
  */
 export type CardComponent = {
-  /**
-   * ChildList contains references to child component IDs.
-   */
-  childList?: ChildList | undefined;
+  children?: ChildList | null | undefined;
 };
 
 /** @internal */
@@ -25,11 +21,7 @@ export const CardComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  children: ChildList$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "children": "childList",
-  });
+  children: z.nullable(ChildList$inboundSchema).optional(),
 });
 
 export function cardComponentFromJSON(

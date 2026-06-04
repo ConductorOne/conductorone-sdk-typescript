@@ -35,16 +35,16 @@ export type DisabledReasonCircuitBreaker = {
   /**
    * Observed execution count in the period at trip time.
    */
-  observedCount?: number | undefined;
+  observedCount?: number | null | undefined;
   /**
    * Snapshot of the period at trip time.
    */
-  period?: Period | undefined;
+  period?: Period | null | undefined;
   /**
    * Snapshot of the threshold at trip time.
    */
-  threshold?: number | undefined;
-  trippedAt?: Date | undefined;
+  threshold?: number | null | undefined;
+  trippedAt?: Date | null | undefined;
 };
 
 /** @internal */
@@ -60,18 +60,19 @@ export const DisabledReasonCircuitBreaker$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  observedCount: z.number().int().optional(),
-  period: Period$inboundSchema.optional(),
-  threshold: z.number().int().optional(),
-  trippedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  observedCount: z.nullable(z.number().int()).optional(),
+  period: z.nullable(Period$inboundSchema).optional(),
+  threshold: z.nullable(z.number().int()).optional(),
+  trippedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 });
 /** @internal */
 export type DisabledReasonCircuitBreaker$Outbound = {
-  observedCount?: number | undefined;
-  period?: string | undefined;
-  threshold?: number | undefined;
-  trippedAt?: string | undefined;
+  observedCount?: number | null | undefined;
+  period?: string | null | undefined;
+  threshold?: number | null | undefined;
+  trippedAt?: string | null | undefined;
 };
 
 /** @internal */
@@ -80,10 +81,10 @@ export const DisabledReasonCircuitBreaker$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DisabledReasonCircuitBreaker
 > = z.object({
-  observedCount: z.number().int().optional(),
-  period: Period$outboundSchema.optional(),
-  threshold: z.number().int().optional(),
-  trippedAt: z.date().transform(v => v.toISOString()).optional(),
+  observedCount: z.nullable(z.number().int()).optional(),
+  period: z.nullable(Period$outboundSchema).optional(),
+  threshold: z.nullable(z.number().int()).optional(),
+  trippedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function disabledReasonCircuitBreakerToJSON(

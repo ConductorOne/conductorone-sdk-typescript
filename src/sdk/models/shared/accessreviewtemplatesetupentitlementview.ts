@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,24 +15,22 @@ import {
  * The AccessReviewTemplateSetupEntitlementView message.
  */
 export type AccessReviewTemplateSetupEntitlementView = {
-  /**
-   * An entitlement that has been selected for inclusion in an access review template's scope.
-   */
-  accessReviewTemplateSetupEntitlement?:
+  accessReviewTemplateEntitlement?:
     | AccessReviewTemplateSetupEntitlement
+    | null
     | undefined;
   /**
    * The appPath field.
    */
-  appPath?: string | undefined;
+  appPath?: string | null | undefined;
   /**
    * The entitlementPath field.
    */
-  entitlementPath?: string | undefined;
+  entitlementPath?: string | null | undefined;
   /**
    * The policyPath field.
    */
-  policyPath?: string | undefined;
+  policyPath?: string | null | undefined;
 };
 
 /** @internal */
@@ -42,15 +39,12 @@ export const AccessReviewTemplateSetupEntitlementView$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accessReviewTemplateEntitlement:
-    AccessReviewTemplateSetupEntitlement$inboundSchema.optional(),
-  appPath: z.string().optional(),
-  entitlementPath: z.string().optional(),
-  policyPath: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "accessReviewTemplateEntitlement": "accessReviewTemplateSetupEntitlement",
-  });
+  accessReviewTemplateEntitlement: z.nullable(
+    AccessReviewTemplateSetupEntitlement$inboundSchema,
+  ).optional(),
+  appPath: z.nullable(z.string()).optional(),
+  entitlementPath: z.nullable(z.string()).optional(),
+  policyPath: z.nullable(z.string()).optional(),
 });
 
 export function accessReviewTemplateSetupEntitlementViewFromJSON(

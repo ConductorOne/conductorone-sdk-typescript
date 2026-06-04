@@ -21,14 +21,14 @@ export type TaskActionsServiceSkipStepRequest = {
   /**
    * The ID of the policy step to skip.
    */
-  policyStepId: string;
+  policyStepId: string | null;
 };
 
 /** @internal */
 export type TaskActionsServiceSkipStepRequest$Outbound = {
   comment?: string | null | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
-  policyStepId: string;
+  policyStepId: string | null;
 };
 
 /** @internal */
@@ -39,7 +39,7 @@ export const TaskActionsServiceSkipStepRequest$outboundSchema: z.ZodType<
 > = z.object({
   comment: z.nullable(z.string()).optional(),
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-  policyStepId: z.string(),
+  policyStepId: z.nullable(z.string()),
 });
 
 export function taskActionsServiceSkipStepRequestToJSON(

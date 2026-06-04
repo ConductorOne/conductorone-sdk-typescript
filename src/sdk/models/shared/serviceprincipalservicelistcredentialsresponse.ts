@@ -22,7 +22,7 @@ export type ServicePrincipalServiceListCredentialsResponse = {
   /**
    * The nextPageToken field.
    */
-  nextPageToken?: string | undefined;
+  nextPageToken?: string | null | undefined;
 };
 
 /** @internal */
@@ -34,7 +34,7 @@ export const ServicePrincipalServiceListCredentialsResponse$inboundSchema:
   > = z.object({
     list: z.nullable(z.array(ServicePrincipalCredential$inboundSchema))
       .optional(),
-    nextPageToken: z.string().optional(),
+    nextPageToken: z.nullable(z.string()).optional(),
   });
 
 export function servicePrincipalServiceListCredentialsResponseFromJSON(

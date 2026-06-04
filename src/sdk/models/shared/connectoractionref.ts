@@ -32,15 +32,15 @@ export type ConnectorActionRef = {
   /**
    * The app whose connector handles the operation.
    */
-  appId?: string | undefined;
+  appId?: string | null | undefined;
   /**
    * The connector that will execute the Grant / Revoke.
    */
-  connectorId?: string | undefined;
+  connectorId?: string | null | undefined;
   /**
    * Which connector RPC this dispatches to.
    */
-  operation?: Operation | undefined;
+  operation?: Operation | null | undefined;
 };
 
 /** @internal */
@@ -62,15 +62,15 @@ export const ConnectorActionRef$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.string().optional(),
-  connectorId: z.string().optional(),
-  operation: Operation$inboundSchema.optional(),
+  appId: z.nullable(z.string()).optional(),
+  connectorId: z.nullable(z.string()).optional(),
+  operation: z.nullable(Operation$inboundSchema).optional(),
 });
 /** @internal */
 export type ConnectorActionRef$Outbound = {
-  appId?: string | undefined;
-  connectorId?: string | undefined;
-  operation?: string | undefined;
+  appId?: string | null | undefined;
+  connectorId?: string | null | undefined;
+  operation?: string | null | undefined;
 };
 
 /** @internal */
@@ -79,9 +79,9 @@ export const ConnectorActionRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ConnectorActionRef
 > = z.object({
-  appId: z.string().optional(),
-  connectorId: z.string().optional(),
-  operation: Operation$outboundSchema.optional(),
+  appId: z.nullable(z.string()).optional(),
+  connectorId: z.nullable(z.string()).optional(),
+  operation: z.nullable(Operation$outboundSchema).optional(),
 });
 
 export function connectorActionRefToJSON(

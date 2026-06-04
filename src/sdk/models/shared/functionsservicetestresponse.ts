@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,10 +15,7 @@ import {
  * FunctionsServiceTestResponse contains test execution results.
  */
 export type FunctionsServiceTestResponse = {
-  /**
-   * FunctionTestResult contains the result of a single test case execution.
-   */
-  functionTestResult?: FunctionTestResult | undefined;
+  result?: FunctionTestResult | null | undefined;
   /**
    * All test results.
    */
@@ -32,12 +28,8 @@ export const FunctionsServiceTestResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  result: FunctionTestResult$inboundSchema.optional(),
+  result: z.nullable(FunctionTestResult$inboundSchema).optional(),
   results: z.nullable(z.array(FunctionTestResult$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "result": "functionTestResult",
-  });
 });
 
 export function functionsServiceTestResponseFromJSON(

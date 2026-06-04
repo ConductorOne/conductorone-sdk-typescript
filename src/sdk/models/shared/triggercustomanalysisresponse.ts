@@ -14,7 +14,7 @@ export type TriggerCustomAnalysisResponse = {
   /**
    * The id field.
    */
-  id?: string | undefined;
+  id?: string | null | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const TriggerCustomAnalysisResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().optional(),
+  id: z.nullable(z.string()).optional(),
 });
 
 export function triggerCustomAnalysisResponseFromJSON(
