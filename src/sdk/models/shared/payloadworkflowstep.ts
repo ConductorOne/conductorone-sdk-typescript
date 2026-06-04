@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * The PayloadWorkflowStep message.
  */
 export type PayloadWorkflowStep = {
-  context?: { [k: string]: any } | undefined;
+  context?: { [k: string]: any } | null | undefined;
   /**
    * The workflow execution ID
    */
@@ -32,7 +32,7 @@ export const PayloadWorkflowStep$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  context: z.record(z.any()).optional(),
+  context: z.nullable(z.record(z.any())).optional(),
   workflowExecutionId: z.nullable(z.string().transform(v => parseInt(v, 10)))
     .optional(),
   workflowExecutionStepId: z.nullable(z.string()).optional(),
@@ -40,7 +40,7 @@ export const PayloadWorkflowStep$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type PayloadWorkflowStep$Outbound = {
-  context?: { [k: string]: any } | undefined;
+  context?: { [k: string]: any } | null | undefined;
   workflowExecutionId?: string | null | undefined;
   workflowExecutionStepId?: string | null | undefined;
   workflowId?: string | null | undefined;
@@ -52,7 +52,7 @@ export const PayloadWorkflowStep$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PayloadWorkflowStep
 > = z.object({
-  context: z.record(z.any()).optional(),
+  context: z.nullable(z.record(z.any())).optional(),
   workflowExecutionId: z.nullable(z.number().int().transform(v => `${v}`))
     .optional(),
   workflowExecutionStepId: z.nullable(z.string()).optional(),

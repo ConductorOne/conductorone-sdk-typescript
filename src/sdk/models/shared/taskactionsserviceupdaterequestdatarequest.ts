@@ -13,13 +13,13 @@ import {
  * The TaskActionsServiceUpdateRequestDataRequest object lets you submit form data for a task that is in a form policy step.
  */
 export type TaskActionsServiceUpdateRequestDataRequest = {
-  data?: { [k: string]: any } | undefined;
+  data?: { [k: string]: any } | null | undefined;
   expandMask?: TaskExpandMask | null | undefined;
 };
 
 /** @internal */
 export type TaskActionsServiceUpdateRequestDataRequest$Outbound = {
-  data?: { [k: string]: any } | undefined;
+  data?: { [k: string]: any } | null | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
 };
 
@@ -30,7 +30,7 @@ export const TaskActionsServiceUpdateRequestDataRequest$outboundSchema:
     z.ZodTypeDef,
     TaskActionsServiceUpdateRequestDataRequest
   > = z.object({
-    data: z.record(z.any()).optional(),
+    data: z.nullable(z.record(z.any())).optional(),
     expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
   });
 

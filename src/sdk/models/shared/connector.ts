@@ -68,7 +68,7 @@ export type Connector = {
   /**
    * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
    */
-  config?: Config | undefined;
+  config?: Config | null | undefined;
   configUpdatedAt?: Date | null | undefined;
   /**
    * The connectorApiVersion field.
@@ -147,7 +147,7 @@ export type ConnectorInput = {
   /**
    * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
    */
-  config?: Config | undefined;
+  config?: Config | null | undefined;
   connectorSyncCronSchedule?: ConnectorSyncCronSchedule | null | undefined;
   /**
    * The description of the connector.
@@ -253,7 +253,7 @@ export const Connector$inboundSchema: z.ZodType<
   appId: z.nullable(z.string()).optional(),
   canResumeSync: z.nullable(z.boolean()).optional(),
   catalogId: z.nullable(z.string()).optional(),
-  config: z.lazy(() => Config$inboundSchema).optional(),
+  config: z.nullable(z.lazy(() => Config$inboundSchema)).optional(),
   configUpdatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -303,7 +303,7 @@ export type ConnectorInput$Outbound = {
   appId?: string | null | undefined;
   canResumeSync?: boolean | null | undefined;
   catalogId?: string | null | undefined;
-  config?: Config$Outbound | undefined;
+  config?: Config$Outbound | null | undefined;
   connectorSyncCronSchedule?:
     | ConnectorSyncCronSchedule$Outbound
     | null
@@ -332,7 +332,7 @@ export const ConnectorInput$outboundSchema: z.ZodType<
   appId: z.nullable(z.string()).optional(),
   canResumeSync: z.nullable(z.boolean()).optional(),
   catalogId: z.nullable(z.string()).optional(),
-  config: z.lazy(() => Config$outboundSchema).optional(),
+  config: z.nullable(z.lazy(() => Config$outboundSchema)).optional(),
   connectorSyncCronSchedule: z.nullable(
     ConnectorSyncCronSchedule$outboundSchema,
   ).optional(),

@@ -47,8 +47,8 @@ export type FunctionInvocation = {
    * The id field.
    */
   id?: string | null | undefined;
-  input?: { [k: string]: any } | undefined;
-  output?: { [k: string]: any } | undefined;
+  input?: { [k: string]: any } | null | undefined;
+  output?: { [k: string]: any } | null | undefined;
   /**
    * The status field.
    */
@@ -76,8 +76,8 @@ export const FunctionInvocation$inboundSchema: z.ZodType<
   error: z.nullable(z.string()).optional(),
   functionId: z.nullable(z.string()).optional(),
   id: z.nullable(z.string()).optional(),
-  input: z.record(z.any()).optional(),
-  output: z.record(z.any()).optional(),
+  input: z.nullable(z.record(z.any())).optional(),
+  output: z.nullable(z.record(z.any())).optional(),
   status: z.nullable(FunctionInvocationStatus$inboundSchema).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),

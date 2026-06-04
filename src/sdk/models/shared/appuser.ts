@@ -71,7 +71,7 @@ export type AppUser = {
    * The isExternal field.
    */
   isExternal?: boolean | null | undefined;
-  profile?: { [k: string]: any } | undefined;
+  profile?: { [k: string]: any } | null | undefined;
   status?: AppUserStatus | null | undefined;
   updatedAt?: Date | null | undefined;
   /**
@@ -126,7 +126,7 @@ export const AppUser$inboundSchema: z.ZodType<AppUser, z.ZodTypeDef, unknown> =
     id: z.nullable(z.string()).optional(),
     identityUserId: z.nullable(z.string()).optional(),
     isExternal: z.nullable(z.boolean()).optional(),
-    profile: z.record(z.any()).optional(),
+    profile: z.nullable(z.record(z.any())).optional(),
     status: z.nullable(AppUserStatus$inboundSchema).optional(),
     updatedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),

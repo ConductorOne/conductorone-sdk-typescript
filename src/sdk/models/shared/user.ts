@@ -167,7 +167,7 @@ export type User = {
    * The origin of the user, describing who owns the user's lifecycle.
    */
   origin?: Origin | null | undefined;
-  profile?: { [k: string]: any } | undefined;
+  profile?: { [k: string]: any } | null | undefined;
   /**
    * A list of unique identifiers that maps to ConductorOne's user roles let you assign users permissions tailored to the work they do in the software.
    */
@@ -287,7 +287,7 @@ export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> = z
       z.array(UserAttributeMappingSource$inboundSchema),
     ).optional(),
     origin: z.nullable(Origin$inboundSchema).optional(),
-    profile: z.record(z.any()).optional(),
+    profile: z.nullable(z.record(z.any())).optional(),
     roleIds: z.nullable(z.array(z.string())).optional(),
     status: z.nullable(UserSchemasStatus$inboundSchema).optional(),
     type: z.nullable(Type$inboundSchema).optional(),
