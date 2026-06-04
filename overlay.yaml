@@ -28,10 +28,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.a2ui.v1.A2UIServiceSubmitActionRequestInput"]["properties"]["clientTimestamp"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.a2ui.v1.A2UIServiceSubmitActionRequestInput"]["properties"]["conversationId"]["type"]
   update:
   - string
@@ -60,15 +56,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.a2ui.v1.A2UISurface"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.a2ui.v1.A2UISurface"]["properties"]["dataModelJson"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.a2ui.v1.A2UISurface"]["properties"]["deletedAt"]["type"]
   update:
   - string
   - 'null'
@@ -92,10 +80,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.a2ui.v1.A2UISurface"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.a2ui.v1.A2UISurfaceFeedback"]["properties"]["actionName"]["type"]
   update:
   - string
@@ -105,10 +89,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.a2ui.v1.A2UISurfaceFeedback"]["properties"]["conversationId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.a2ui.v1.A2UISurfaceFeedback"]["properties"]["createdAt"]["type"]
   update:
   - string
   - 'null'
@@ -304,31 +284,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.accessconflict.v1.AppEntitlementMonitorBinding"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessconflict.v1.AppEntitlementMonitorBinding"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.accessconflict.v1.AppEntitlementMonitorBinding"]["properties"]["entitlementGroup"]["type"]
   update:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.accessconflict.v1.AppEntitlementMonitorBinding"]["properties"]["monitorId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessconflict.v1.AppEntitlementMonitorBinding"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessconflict.v1.ConflictMonitor"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessconflict.v1.ConflictMonitor"]["properties"]["deletedAt"]["type"]
   update:
   - string
   - 'null'
@@ -353,10 +313,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.accessconflict.v1.ConflictMonitor"]["properties"]["id"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessconflict.v1.ConflictMonitor"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -472,22 +428,6 @@ actions:
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReview"]["properties"]["closedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReview"]["properties"]["completionDate"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReview"]["properties"]["connectorSourcesFrozenAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReview"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReview"]["properties"]["createdById"]["type"]
   update:
   - string
@@ -532,10 +472,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReview"]["properties"]["scheduledStartDate"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReview"]["properties"]["scopeType"]["type"]
   update:
   - string
@@ -544,15 +480,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReview"]["properties"]["startedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReview"]["properties"]["state"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReview"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -563,10 +491,6 @@ actions:
 - target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewInclusionScope"]["properties"]["noAccountOwners"]["type"]
   update:
   - boolean
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewServiceCreateRequest"]["properties"]["completionDate"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewServiceCreateRequest"]["properties"]["description"]["type"]
   update:
@@ -612,15 +536,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewSetupEntitlement"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewSetupEntitlement"]["properties"]["customPolicyId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewSetupEntitlement"]["properties"]["deletedAt"]["type"]
   update:
   - string
   - 'null'
@@ -629,10 +545,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewSetupEntitlement"]["properties"]["tenantId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewSetupEntitlement"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -656,10 +568,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewTemplate"]["properties"]["accessReviewDuration"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewTemplate"]["properties"]["accuracyIssueAction"]["type"]
   update:
   - string
@@ -680,15 +588,7 @@ actions:
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewTemplate"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewTemplate"]["properties"]["defaultView"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewTemplate"]["properties"]["deletedAt"]["type"]
   update:
   - string
   - 'null'
@@ -712,10 +612,6 @@ actions:
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewTemplate"]["properties"]["nextScheduledCampaignAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewTemplate"]["properties"]["occurrences"]["type"]
   update:
   - integer
@@ -732,17 +628,9 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewTemplate"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewTemplate"]["properties"]["usePolicyOverride"]["type"]
   update:
   - boolean
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewTemplateServiceCreateRequest"]["properties"]["accessReviewDuration"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewTemplateServiceCreateRequest"]["properties"]["accuracyIssueAction"]["type"]
   update:
@@ -820,15 +708,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewTemplateSetupEntitlement"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewTemplateSetupEntitlement"]["properties"]["customPolicyId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewTemplateSetupEntitlement"]["properties"]["deletedAt"]["type"]
   update:
   - string
   - 'null'
@@ -837,10 +717,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewTemplateSetupEntitlement"]["properties"]["tenantId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.AccessReviewTemplateSetupEntitlement"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -892,10 +768,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.CampaignHealthSnapshot"]["properties"]["checkedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.accessreview.v1.CampaignHealthSnapshot"]["properties"]["phantomLockedCount"]["type"]
   update:
   - integer
@@ -909,26 +781,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.accessreview.v1.GrantAccessProfileFilter"]["properties"]["filterType"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.GrantsAddedBetween"]["properties"]["endDate"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.GrantsAddedBetween"]["properties"]["startDate"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.GrantsByCriteriaScope"]["properties"]["daysSinceAdded"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.GrantsByCriteriaScope"]["properties"]["daysSinceLastUsed"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.GrantsByCriteriaScope"]["properties"]["daysSinceReviewed"]["type"]
   update:
   - string
   - 'null'
@@ -960,10 +812,6 @@ actions:
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.RecurrenceRule"]["properties"]["endDate"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.accessreview.v1.RecurrenceRule"]["properties"]["frequency"]["type"]
   update:
   - string
@@ -971,10 +819,6 @@ actions:
 - target: $["components"]["schemas"]["c1.api.accessreview.v1.RecurrenceRule"]["properties"]["interval"]["type"]
   update:
   - integer
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.accessreview.v1.RecurrenceRule"]["properties"]["startDate"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.accessreview.v1.ResourceTypeIdRef"]["properties"]["appId"]["type"]
   update:
@@ -1028,15 +872,7 @@ actions:
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.ai_governance.v1.AIGovernanceSettings"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.ai_governance.v1.AIGovernanceSettings"]["properties"]["defaultToolClassification"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.ai_governance.v1.AIGovernanceSettings"]["properties"]["discoveryInterval"]["type"]
   update:
   - string
   - 'null'
@@ -1055,10 +891,6 @@ actions:
 - target: $["components"]["schemas"]["c1.api.ai_governance.v1.AIGovernanceSettings"]["properties"]["surfaceRequestableTools"]["type"]
   update:
   - boolean
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.ai_governance.v1.AIGovernanceSettings"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.ai_governance.v1.AccessProfilesForTool"]["properties"]["mcpToolId"]["type"]
   update:
@@ -1084,14 +916,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPAccessProfile"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPAccessProfile"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPAccessProfile"]["properties"]["description"]["type"]
   update:
   - string
@@ -1107,10 +931,6 @@ actions:
 - target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPAccessProfile"]["properties"]["toolCount"]["type"]
   update:
   - integer
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPAccessProfile"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPAccessProfileServiceCreateRequestInput"]["properties"]["description"]["type"]
   update:
@@ -1136,19 +956,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPAccessProfileToolBinding"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPAccessProfileToolBinding"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPAccessProfileToolBinding"]["properties"]["mcpToolId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPAccessProfileToolBinding"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -1172,18 +980,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPClientLifecycleConfig"]["properties"]["inactivityCloseAfter"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPClientLifecycleConfig"]["properties"]["inactivityHideAfter"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPClientLifecycleConfig"]["properties"]["retentionDeleteAfter"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPTool"]["properties"]["appEntitlementId"]["type"]
   update:
   - string
@@ -1200,10 +996,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPTool"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPTool"]["properties"]["defaultClassification"]["type"]
   update:
   - string
@@ -1213,10 +1005,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPTool"]["properties"]["defaultVisibility"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPTool"]["properties"]["deletedAt"]["type"]
   update:
   - string
   - 'null'
@@ -1240,19 +1028,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPTool"]["properties"]["lastCalledAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPTool"]["properties"]["state"]["type"]
   update:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPTool"]["properties"]["toolName"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.ai_governance.v1.MCPTool"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -1344,15 +1124,7 @@ actions:
   update:
   - integer
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.App"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.App"]["properties"]["defaultRequestCatalogId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.App"]["properties"]["deletedAt"]["type"]
   update:
   - string
   - 'null'
@@ -1416,10 +1188,6 @@ actions:
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.App"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.App"]["properties"]["userCount"]["type"]
   update:
   - string
@@ -1431,10 +1199,6 @@ actions:
 - target: $["components"]["schemas"]["c1.api.app.v1.AppAccessRequestDefaults"]["properties"]["defaultsEnabled"]["type"]
   update:
   - boolean
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppAccessRequestDefaults"]["properties"]["durationGrant"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppAccessRequestDefaults"]["properties"]["emergencyGrantEnabled"]["type"]
   update:
@@ -1459,10 +1223,6 @@ actions:
 - target: $["components"]["schemas"]["c1.api.app.v1.AppAccessRequestDefaultsInput"]["properties"]["defaultsEnabled"]["type"]
   update:
   - boolean
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppAccessRequestDefaultsInput"]["properties"]["durationGrant"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppAccessRequestDefaultsInput"]["properties"]["emergencyGrantEnabled"]["type"]
   update:
@@ -1504,27 +1264,15 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlement"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlement"]["properties"]["defaultValuesApplied"]["type"]
   update:
   - boolean
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlement"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlement"]["properties"]["description"]["type"]
   update:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlement"]["properties"]["displayName"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlement"]["properties"]["durationGrant"]["type"]
   update:
   - string
   - 'null'
@@ -1592,23 +1340,11 @@ actions:
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlement"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementAutomation"]["properties"]["appEntitlementId"]["type"]
   update:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementAutomation"]["properties"]["appId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementAutomation"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementAutomation"]["properties"]["deletedAt"]["type"]
   update:
   - string
   - 'null'
@@ -1624,15 +1360,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementAutomation"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementAutomationLastRunStatus"]["properties"]["errorMessage"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementAutomationLastRunStatus"]["properties"]["lastCompletedAt"]["type"]
   update:
   - string
   - 'null'
@@ -1645,18 +1373,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementAutomationRuleCEL"]["properties"]["expression"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementProxy"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementProxy"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementProxy"]["properties"]["disabledAt"]["type"]
   update:
   - string
   - 'null'
@@ -1679,10 +1395,6 @@ actions:
 - target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementProxy"]["properties"]["systemBuiltin"]["type"]
   update:
   - boolean
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementProxy"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementProxyView"]["properties"]["dstAppEntitlementPath"]["type"]
   update:
@@ -1840,18 +1552,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementUserBinding"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementUserBinding"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementUserBinding"]["properties"]["deprovisionAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementUserBindingFeed"]["properties"]["appEntitlementId"]["type"]
   update:
   - string
@@ -1861,10 +1561,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementUserBindingFeed"]["properties"]["appUserId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementUserBindingFeed"]["properties"]["date"]["type"]
   update:
   - string
   - 'null'
@@ -1904,14 +1600,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementUserBindingHistory"]["properties"]["grantedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementUserBindingHistory"]["properties"]["revokedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementUserBindingHistoryView"]["properties"]["appPath"]["type"]
   update:
   - string
@@ -1921,14 +1609,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementUserBindingHistoryView"]["properties"]["entitlementPath"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementUserView"]["properties"]["appEntitlementUserBindingCreatedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementUserView"]["properties"]["appEntitlementUserBindingDeprovisionAt"]["type"]
   update:
   - string
   - 'null'
@@ -1960,14 +1640,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementWithExpired"]["properties"]["discovered"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppEntitlementWithExpired"]["properties"]["expired"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppManagedStateBindingRef"]["properties"]["appId"]["type"]
   update:
   - string
@@ -1981,10 +1653,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppPopulationReport"]["properties"]["appId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppPopulationReport"]["properties"]["createdAt"]["type"]
   update:
   - string
   - 'null'
@@ -2020,15 +1688,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppResource"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppResource"]["properties"]["customDescription"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppResource"]["properties"]["deletedAt"]["type"]
   update:
   - string
   - 'null'
@@ -2064,10 +1724,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppResource"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppResourceRef"]["properties"]["appId"]["type"]
   update:
   - string
@@ -2088,23 +1744,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppResourceType"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppResourceType"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppResourceType"]["properties"]["displayName"]["type"]
   update:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppResourceType"]["properties"]["id"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppResourceType"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -2160,14 +1804,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppUser"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppUser"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppUser"]["properties"]["displayName"]["type"]
   update:
   - string
@@ -2188,10 +1824,6 @@ actions:
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppUser"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppUser"]["properties"]["username"]["type"]
   update:
   - string
@@ -2204,23 +1836,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppUserCredential"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppUserCredential"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppUserCredential"]["properties"]["expiresAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.AppUserCredential"]["properties"]["id"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.AppUserCredential"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -2304,21 +1920,9 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.Connector"]["properties"]["configUpdatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.Connector"]["properties"]["connectorApiVersion"]["type"]
   update:
   - integer
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.Connector"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.Connector"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.Connector"]["properties"]["description"]["type"]
   update:
@@ -2340,19 +1944,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.Connector"]["properties"]["syncDisabledAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.Connector"]["properties"]["syncDisabledCategory"]["type"]
   update:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.Connector"]["properties"]["syncDisabledReason"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.Connector"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -2420,31 +2016,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.ConnectorCredential"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.ConnectorCredential"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.ConnectorCredential"]["properties"]["displayName"]["type"]
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.ConnectorCredential"]["properties"]["expiresTime"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.ConnectorCredential"]["properties"]["id"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.ConnectorCredential"]["properties"]["lastUsedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.ConnectorCredential"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -2496,15 +2072,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.ConnectorStatus"]["properties"]["completedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.ConnectorStatus"]["properties"]["lastError"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.ConnectorStatus"]["properties"]["startedAt"]["type"]
   update:
   - string
   - 'null'
@@ -2512,15 +2080,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.ConnectorStatus"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.ConnectorSyncCronSchedule"]["properties"]["cronSpec"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.ConnectorSyncCronSchedule"]["properties"]["start"]["type"]
   update:
   - string
   - 'null'
@@ -2561,10 +2121,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.CreateAppEntitlementRequestInput"]["properties"]["displayName"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.CreateAppEntitlementRequestInput"]["properties"]["durationGrant"]["type"]
   update:
   - string
   - 'null'
@@ -2708,14 +2264,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.GrantReason"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.GrantReason"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.GrantReason"]["properties"]["derivedIdData"]["type"]
   update:
   - string
@@ -2724,15 +2272,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.GrantReason"]["properties"]["reasonExpiresAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.GrantReason"]["properties"]["referenceStrength"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.GrantReason"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -2809,10 +2349,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.OAuth2AuthorizedAs"]["properties"]["authEmail"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.OAuth2AuthorizedAs"]["properties"]["authorizedAt"]["type"]
   update:
   - string
   - 'null'
@@ -2900,14 +2436,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.SearchGrantFeedRequest"]["properties"]["after"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.SearchGrantFeedRequest"]["properties"]["before"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.SearchGrantFeedRequest"]["properties"]["pageSize"]["type"]
   update:
   - integer
@@ -2952,18 +2480,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.SecretTrait"]["properties"]["lastUsedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.SecretTrait"]["properties"]["secretCreatedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.SecretTrait"]["properties"]["secretExpiresAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.TaskAuditCancelledResult"]["properties"]["cancelReason"]["type"]
   update:
   - string
@@ -2987,10 +2503,6 @@ actions:
 - target: $["components"]["schemas"]["c1.api.app.v1.UpdateAppEntitlementRequestInput"]["properties"]["overrideAccessRequestsDefaults"]["type"]
   update:
   - boolean
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.UpdateGrantDurationRequestInput"]["properties"]["newDeprovisionAt"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.UserOwnershipEntry"]["properties"]["appDisplayName"]["type"]
   update:
@@ -3040,10 +2552,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v2.AppEntitlementOwnerEntitlement"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v2.AppEntitlementOwnerEntitlement"]["properties"]["entitlementId"]["type"]
   update:
   - string
@@ -3053,10 +2561,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v2.AppEntitlementOwnerUser"]["properties"]["appId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v2.AppEntitlementOwnerUser"]["properties"]["createdAt"]["type"]
   update:
   - string
   - 'null'
@@ -3072,10 +2576,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v2.AppOwnerEntitlement"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v2.AppOwnerEntitlement"]["properties"]["roleSlug"]["type"]
   update:
   - string
@@ -3084,19 +2584,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v2.AppOwnerUser"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v2.AppOwnerUser"]["properties"]["roleSlug"]["type"]
   update:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v2.AppResourceOwnerEntitlement"]["properties"]["appId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v2.AppResourceOwnerEntitlement"]["properties"]["createdAt"]["type"]
   update:
   - string
   - 'null'
@@ -3113,10 +2605,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v2.AppResourceOwnerUser"]["properties"]["appId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v2.AppResourceOwnerUser"]["properties"]["createdAt"]["type"]
   update:
   - string
   - 'null'
@@ -3140,10 +2628,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v2.ConnectorOwnerEntitlement"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v2.ConnectorOwnerEntitlement"]["properties"]["roleSlug"]["type"]
   update:
   - string
@@ -3153,10 +2637,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v2.ConnectorOwnerUser"]["properties"]["connectorId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v2.ConnectorOwnerUser"]["properties"]["createdAt"]["type"]
   update:
   - string
   - 'null'
@@ -3224,19 +2704,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.attribute.v1.AttributeValue"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.attribute.v1.AttributeValue"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.attribute.v1.AttributeValue"]["properties"]["id"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.attribute.v1.AttributeValue"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -3360,14 +2828,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.auth_config.v1.TenantAuthConfig"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.auth_config.v1.TenantAuthConfig"]["properties"]["deprecationDeadline"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.auth_config.v1.TenantAuthConfig"]["properties"]["deprecationMessage"]["type"]
   update:
   - string
@@ -3389,14 +2849,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.auth_config.v1.TenantAuthConfig"]["properties"]["status"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.auth_config.v1.TenantAuthConfig"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.auth_config.v1.TenantAuthConfigServiceCreateRequest"]["properties"]["deprecationDeadline"]["type"]
   update:
   - string
   - 'null'
@@ -3448,10 +2900,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.automations.v1.Automation"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.automations.v1.Automation"]["properties"]["currentVersion"]["type"]
   update:
   - string
@@ -3476,10 +2924,6 @@ actions:
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.automations.v1.Automation"]["properties"]["lastExecutedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.automations.v1.Automation"]["properties"]["primaryTriggerType"]["type"]
   update:
   - string
@@ -3488,25 +2932,9 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.automations.v1.AutomationExecution"]["properties"]["completedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.automations.v1.AutomationExecution"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.automations.v1.AutomationExecution"]["properties"]["currentVersion"]["type"]
   update:
   - integer
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.automations.v1.AutomationExecution"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.automations.v1.AutomationExecution"]["properties"]["duration"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.automations.v1.AutomationExecution"]["properties"]["id"]["type"]
   update:
@@ -3517,10 +2945,6 @@ actions:
   - boolean
   - 'null'
 - target: $["components"]["schemas"]["c1.api.automations.v1.AutomationExecution"]["properties"]["state"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.automations.v1.AutomationExecution"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -3553,18 +2977,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.automations.v1.AutomationTemplateVersion"]["properties"]["automationTemplateId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.automations.v1.AutomationTemplateVersion"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.automations.v1.AutomationTemplateVersion"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.automations.v1.AutomationTemplateVersion"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -3691,10 +3103,6 @@ actions:
 - target: $["components"]["schemas"]["c1.api.automations.v1.DisabledReasonCircuitBreaker"]["properties"]["threshold"]["type"]
   update:
   - integer
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.automations.v1.DisabledReasonCircuitBreaker"]["properties"]["trippedAt"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.automations.v1.EntitlementExclusionListCel"]["properties"]["excludedAppEntitlementRefsCel"]["type"]
   update:
@@ -3840,10 +3248,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTrigger"]["properties"]["start"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTrigger"]["properties"]["timezone"]["type"]
   update:
   - string
@@ -3860,10 +3264,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTriggerAppUser"]["properties"]["start"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTriggerAppUser"]["properties"]["timezone"]["type"]
   update:
   - string
@@ -3873,10 +3273,6 @@ actions:
   - boolean
   - 'null'
 - target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTriggerNoUser"]["properties"]["cronSpec"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.automations.v1.ScheduleTriggerNoUser"]["properties"]["start"]["type"]
   update:
   - string
   - 'null'
@@ -4024,10 +3420,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.automations.v1.StoreCredential"]["properties"]["expiry"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.automations.v1.StoreCredential"]["properties"]["labelCel"]["type"]
   update:
   - string
@@ -4041,10 +3433,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.automations.v1.StoreCredential"]["properties"]["recipientEmailCel"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.automations.v1.StoreCredential"]["properties"]["ttl"]["type"]
   update:
   - string
   - 'null'
@@ -4084,10 +3472,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.automations.v1.UsageBasedRevocationTrigger"]["properties"]["enabledAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.automations.v1.UsageBasedRevocationTrigger"]["properties"]["includeUsersWithNoActivity"]["type"]
   update:
   - boolean
@@ -4120,19 +3504,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.automations.v1.WaitForDuration"]["properties"]["duration"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.automations.v1.WebhookAutomationTrigger"]["properties"]["listenerId"]["type"]
   update:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.automations.v1.WebhookListenerAuthJWT"]["properties"]["jwksUrl"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.decoy.v1.Decoy"]["properties"]["createdAt"]["type"]
   update:
   - string
   - 'null'
@@ -4156,19 +3532,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.decoy.v1.Decoy"]["properties"]["lastUsedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.decoy.v1.Decoy"]["properties"]["materialFingerprintSha256"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.decoy.v1.Decoy"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.decoy.v1.DecoyAccessTokenInput"]["properties"]["expiresIn"]["type"]
   update:
   - string
   - 'null'
@@ -4244,18 +3608,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.directory.v1.Directory"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.directory.v1.Directory"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.directory.v1.Directory"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.directory.v1.DirectoryAccountFilterCel"]["properties"]["expression"]["type"]
   update:
   - string
@@ -4304,10 +3656,6 @@ actions:
   update:
   - integer
   - 'null'
-- target: $["components"]["schemas"]["c1.api.finding.v1.AcceptRiskAction"]["properties"]["expiresAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.finding.v1.AcceptRiskAction"]["properties"]["justification"]["type"]
   update:
   - string
@@ -4317,10 +3665,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.finding.v1.AppUserTarget"]["properties"]["appUserId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.finding.v1.BulkAcceptRiskAction"]["properties"]["expiresAt"]["type"]
   update:
   - string
   - 'null'
@@ -4337,10 +3681,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.finding.v1.BulkSnoozeAction"]["properties"]["reason"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.finding.v1.BulkSnoozeAction"]["properties"]["snoozeUntil"]["type"]
   update:
   - string
   - 'null'
@@ -4380,23 +3720,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.finding.v1.Finding"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.finding.v1.Finding"]["properties"]["fingerprint"]["type"]
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.finding.v1.Finding"]["properties"]["firstObservedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.finding.v1.Finding"]["properties"]["id"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.finding.v1.Finding"]["properties"]["lastObservedAt"]["type"]
   update:
   - string
   - 'null'
@@ -4405,14 +3733,6 @@ actions:
   - integer
   - 'null'
 - target: $["components"]["schemas"]["c1.api.finding.v1.Finding"]["properties"]["remediationDescription"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.finding.v1.Finding"]["properties"]["resolvedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.finding.v1.Finding"]["properties"]["riskAcceptanceExpiresAt"]["type"]
   update:
   - string
   - 'null'
@@ -4425,10 +3745,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.finding.v1.Finding"]["properties"]["snoozeReason"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.finding.v1.Finding"]["properties"]["snoozeUntil"]["type"]
   update:
   - string
   - 'null'
@@ -4452,10 +3768,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.finding.v1.Finding"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.finding.v1.FindingAuditEvent"]["properties"]["actorPrincipalId"]["type"]
   update:
   - string
@@ -4469,10 +3781,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.finding.v1.FindingAuditEvent"]["properties"]["bulkOperationId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.finding.v1.FindingAuditEvent"]["properties"]["createdAt"]["type"]
   update:
   - string
   - 'null'
@@ -4521,14 +3829,6 @@ actions:
   - integer
   - 'null'
 - target: $["components"]["schemas"]["c1.api.finding.v1.FindingAuditServiceSearchRequest"]["properties"]["pageToken"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.finding.v1.FindingAuditServiceSearchRequest"]["properties"]["since"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.finding.v1.FindingAuditServiceSearchRequest"]["properties"]["until"]["type"]
   update:
   - string
   - 'null'
@@ -4584,10 +3884,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.finding.v1.FindingRoutingRule"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.finding.v1.FindingRoutingRule"]["properties"]["description"]["type"]
   update:
   - string
@@ -4609,10 +3905,6 @@ actions:
   - integer
   - 'null'
 - target: $["components"]["schemas"]["c1.api.finding.v1.FindingRoutingRule"]["properties"]["templateId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.finding.v1.FindingRoutingRule"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -4673,10 +3965,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.finding.v1.SnoozeAction"]["properties"]["reason"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.finding.v1.SnoozeAction"]["properties"]["snoozeUntil"]["type"]
   update:
   - string
   - 'null'
@@ -4832,14 +4120,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.functions.v1.Function"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.functions.v1.Function"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.functions.v1.Function"]["properties"]["description"]["type"]
   update:
   - string
@@ -4868,19 +4148,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.functions.v1.Function"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.functions.v1.Function"]["properties"]["useSpn"]["type"]
   update:
   - boolean
   - 'null'
 - target: $["components"]["schemas"]["c1.api.functions.v1.FunctionCommit"]["properties"]["author"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.functions.v1.FunctionCommit"]["properties"]["createdAt"]["type"]
   update:
   - string
   - 'null'
@@ -4900,10 +4172,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.functions.v1.FunctionInvocation"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.functions.v1.FunctionInvocation"]["properties"]["error"]["type"]
   update:
   - string
@@ -4917,10 +4185,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.functions.v1.FunctionInvocation"]["properties"]["status"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.functions.v1.FunctionInvocation"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -5104,10 +4368,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.history.v1.HistoryEntryMetadata"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.history.v1.HistoryEntryMetadata"]["properties"]["id"]["type"]
   update:
   - string
@@ -5117,10 +4377,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.history.v1.HistoryEntryMetadata"]["properties"]["traceId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.history.v1.ListHistoryEntryMetadata"]["properties"]["createdAt"]["type"]
   update:
   - string
   - 'null'
@@ -5148,10 +4404,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.hooks.v1.Hook"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.hooks.v1.Hook"]["properties"]["description"]["type"]
   update:
   - string
@@ -5175,10 +4427,6 @@ actions:
 - target: $["components"]["schemas"]["c1.api.hooks.v1.Hook"]["properties"]["priority"]["type"]
   update:
   - integer
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.hooks.v1.Hook"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.hooks.v1.HookFilter"]["properties"]["celExpression"]["type"]
   update:
@@ -5292,15 +4540,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.ExternalClientInfo"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.iam.v1.ExternalClientInfo"]["properties"]["displayName"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.ExternalClientInfo"]["properties"]["lastUsedAt"]["type"]
   update:
   - string
   - 'null'
@@ -5344,31 +4584,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.PersonalClient"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.PersonalClient"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.iam.v1.PersonalClient"]["properties"]["displayName"]["type"]
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.PersonalClient"]["properties"]["expiresTime"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.iam.v1.PersonalClient"]["properties"]["id"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.PersonalClient"]["properties"]["lastUsedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.PersonalClient"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -5396,23 +4616,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.PersonalClientServiceCreateRequest"]["properties"]["expires"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.iam.v1.PersonalClientServiceCreateResponse"]["properties"]["clientSecret"]["type"]
   update:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.iam.v1.PersonalClientServiceListResponse"]["properties"]["nextPageToken"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.Role"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.Role"]["properties"]["deletedAt"]["type"]
   update:
   - string
   - 'null'
@@ -5436,27 +4644,11 @@ actions:
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.Role"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.iam.v1.TunnelAppliance"]["properties"]["announcedServiceCount"]["type"]
   update:
   - integer
   - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.TunnelAppliance"]["properties"]["lastSeenAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.iam.v1.TunnelAppliance"]["properties"]["status"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.TunnelApplianceLink"]["properties"]["avgRtt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.TunnelApplianceLink"]["properties"]["leaseExpiresAt"]["type"]
   update:
   - string
   - 'null'
@@ -5465,14 +4657,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.iam.v1.TunnelApplianceLink"]["properties"]["relayId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.TunnelBridge"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.TunnelBridge"]["properties"]["deletedAt"]["type"]
   update:
   - string
   - 'null'
@@ -5488,10 +4672,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.TunnelBridge"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.iam.v1.TunnelCredential"]["properties"]["bridgeId"]["type"]
   update:
   - string
@@ -5504,35 +4684,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.TunnelCredential"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.iam.v1.TunnelCredential"]["properties"]["credentialStatus"]["type"]
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.TunnelCredential"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.TunnelCredential"]["properties"]["expiresTime"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.iam.v1.TunnelCredential"]["properties"]["id"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.TunnelCredential"]["properties"]["lastUsedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.TunnelCredential"]["properties"]["revokedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.iam.v1.TunnelCredential"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -5684,19 +4840,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalDirectoryConfig"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalDirectoryConfig"]["properties"]["defaultProfileTypeId"]["type"]
   update:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalDirectoryConfig"]["properties"]["displayName"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalDirectoryConfig"]["properties"]["invitationTtl"]["type"]
   update:
   - string
   - 'null'
@@ -5709,10 +4857,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalDirectoryConfig"]["properties"]["organizationId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalDirectoryConfig"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -5732,10 +4876,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalDirectoryConfigServiceCreateRequest"]["properties"]["invitationTtl"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalDirectoryConfigServiceCreateRequest"]["properties"]["isDefault"]["type"]
   update:
   - boolean
@@ -5752,14 +4892,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalUserInvitation"]["properties"]["acceptedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalUserInvitation"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalUserInvitation"]["properties"]["createdUserId"]["type"]
   update:
   - string
@@ -5773,10 +4905,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalUserInvitation"]["properties"]["email"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalUserInvitation"]["properties"]["expiresAt"]["type"]
   update:
   - string
   - 'null'
@@ -5805,10 +4933,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalUserInvitation"]["properties"]["status"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalUserInvitation"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -5868,27 +4992,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.ActionOutcomeCancelled"]["properties"]["outcomeTime"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.ActionOutcomeDenied"]["properties"]["outcomeTime"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.policy.v1.ActionOutcomeError"]["properties"]["errorCode"]["type"]
   update:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.policy.v1.ActionOutcomeError"]["properties"]["errorMessage"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.ActionOutcomeError"]["properties"]["outcomeTime"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.ActionOutcomeSuccess"]["properties"]["outcomeTime"]["type"]
   update:
   - string
   - 'null'
@@ -6020,15 +5128,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.ApprovalInstance"]["properties"]["assignedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.policy.v1.ApprovalInstance"]["properties"]["state"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.ApprovedAction"]["properties"]["approvedAt"]["type"]
   update:
   - string
   - 'null'
@@ -6040,15 +5140,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.CancelledAction"]["properties"]["cancelledAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.policy.v1.CancelledAction"]["properties"]["cancelledByUserId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.CompletedAction"]["properties"]["completedAt"]["type"]
   update:
   - string
   - 'null'
@@ -6100,10 +5192,6 @@ actions:
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.DeniedAction"]["properties"]["deniedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.policy.v1.DeniedAction"]["properties"]["userId"]["type"]
   update:
   - string
@@ -6140,10 +5228,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.ErroredAction"]["properties"]["erroredAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.policy.v1.Escalation"]["properties"]["escalationComment"]["type"]
   update:
   - string
@@ -6161,10 +5245,6 @@ actions:
   - boolean
   - 'null'
 - target: $["components"]["schemas"]["c1.api.policy.v1.EscalationInstance"]["properties"]["escalationComment"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.EscalationInstance"]["properties"]["expiresAt"]["type"]
   update:
   - string
   - 'null'
@@ -6205,10 +5285,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.policy.v1.ExternalTicketProvision"]["properties"]["instructions"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.FormCompletedAction"]["properties"]["completedAt"]["type"]
   update:
   - string
   - 'null'
@@ -6260,14 +5336,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.Policy"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.Policy"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.policy.v1.Policy"]["properties"]["description"]["type"]
   update:
   - string
@@ -6291,10 +5359,6 @@ actions:
 - target: $["components"]["schemas"]["c1.api.policy.v1.Policy"]["properties"]["systemBuiltin"]["type"]
   update:
   - boolean
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.Policy"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.policy.v1.PolicyRef"]["properties"]["id"]["type"]
   update:
@@ -6356,15 +5420,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.ProvisionTarget"]["properties"]["grantDuration"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.policy.v1.ReassignedAction"]["properties"]["newPolicyStepId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.ReassignedAction"]["properties"]["reassignedAt"]["type"]
   update:
   - string
   - 'null'
@@ -6384,15 +5440,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.ReassignedByErrorAction"]["properties"]["erroredAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.policy.v1.ReassignedByErrorAction"]["properties"]["newPolicyStepId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.ReassignedByErrorAction"]["properties"]["reassignedAt"]["type"]
   update:
   - string
   - 'null'
@@ -6421,10 +5469,6 @@ actions:
   - boolean
   - 'null'
 - target: $["components"]["schemas"]["c1.api.policy.v1.RestartAction"]["properties"]["oldPolicyStepId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.RestartAction"]["properties"]["restartedAt"]["type"]
   update:
   - string
   - 'null'
@@ -6476,10 +5520,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.SkippedAction"]["properties"]["skippedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.policy.v1.SkippedAction"]["properties"]["userId"]["type"]
   update:
   - string
@@ -6520,19 +5560,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.Wait"]["properties"]["timeoutDuration"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.policy.v1.WaitCondition"]["properties"]["condition"]["type"]
   update:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.policy.v1.WaitConditionInstance"]["properties"]["condition"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.WaitDuration"]["properties"]["duration"]["type"]
   update:
   - string
   - 'null'
@@ -6548,27 +5580,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.WaitInstance"]["properties"]["startedWaitingAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.policy.v1.WaitInstance"]["properties"]["state"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.WaitInstance"]["properties"]["timeout"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.WaitInstance"]["properties"]["timeoutDuration"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.WaitInstance.ConditionSucceeded"]["properties"]["succeededAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.WaitInstance.ConditionTimedOut"]["properties"]["timedOutAt"]["type"]
   update:
   - string
   - 'null'
@@ -6581,14 +5593,6 @@ actions:
   - integer
   - 'null'
 - target: $["components"]["schemas"]["c1.api.policy.v1.WaitUntilTime"]["properties"]["timezone"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.WaitUntilTimeInstance"]["properties"]["durationIfExists"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.WaitUntilTimeInstance"]["properties"]["untilTime"]["type"]
   update:
   - string
   - 'null'
@@ -6628,23 +5632,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["id"]["type"]
   update:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["justificationVisibility"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.request_schema.v1.RequestSchema"]["properties"]["modifiedAt"]["type"]
   update:
   - string
   - 'null'
@@ -6680,14 +5672,6 @@ actions:
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.requestcatalog.v1.BundleAutomation"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.requestcatalog.v1.BundleAutomation"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.requestcatalog.v1.BundleAutomation"]["properties"]["disableCircuitBreaker"]["type"]
   update:
   - boolean
@@ -6712,15 +5696,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.requestcatalog.v1.BundleAutomation"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.requestcatalog.v1.BundleAutomationCelEvaluationState"]["properties"]["errorMessage"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.requestcatalog.v1.BundleAutomationCelEvaluationState"]["properties"]["lastEvaluatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -6740,15 +5716,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.requestcatalog.v1.BundleAutomationCircuitBreaker"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.requestcatalog.v1.BundleAutomationLastRunState"]["properties"]["errorMessage"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.requestcatalog.v1.BundleAutomationLastRunState"]["properties"]["lastRunAt"]["type"]
   update:
   - string
   - 'null'
@@ -6780,15 +5748,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.requestcatalog.v1.RequestCatalog"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.requestcatalog.v1.RequestCatalog"]["properties"]["createdByUserId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.requestcatalog.v1.RequestCatalog"]["properties"]["deletedAt"]["type"]
   update:
   - string
   - 'null'
@@ -6821,10 +5781,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.requestcatalog.v1.RequestCatalog"]["properties"]["unenrollmentEntitlementBehavior"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.requestcatalog.v1.RequestCatalog"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -7016,14 +5972,6 @@ actions:
   update:
   - integer
   - 'null'
-- target: $["components"]["schemas"]["c1.api.role_mining_management.v1.CustomAnalysisResultView"]["properties"]["completedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.role_mining_management.v1.CustomAnalysisResultView"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.role_mining_management.v1.CustomAnalysisResultView"]["properties"]["errorMessage"]["type"]
   update:
   - string
@@ -7096,14 +6044,6 @@ actions:
   update:
   - integer
   - 'null'
-- target: $["components"]["schemas"]["c1.api.role_mining_management.v1.RoleMiningManagementRun"]["properties"]["completedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.role_mining_management.v1.RoleMiningManagementRun"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.role_mining_management.v1.RoleMiningManagementRun"]["properties"]["errorMessage"]["type"]
   update:
   - string
@@ -7132,10 +6072,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.role_mining_management.v1.RoleMiningManagementRun"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.role_mining_management.v1.RoleMiningManagementSuggestion"]["properties"]["avgCoverage"]["type"]
   update:
   - number
@@ -7147,10 +6083,6 @@ actions:
 - target: $["components"]["schemas"]["c1.api.role_mining_management.v1.RoleMiningManagementSuggestion"]["properties"]["confidence"]["type"]
   update:
   - number
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.role_mining_management.v1.RoleMiningManagementSuggestion"]["properties"]["createdAt"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.role_mining_management.v1.RoleMiningManagementSuggestion"]["properties"]["createdCatalogId"]["type"]
   update:
@@ -7168,10 +6100,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.role_mining_management.v1.RoleMiningManagementSuggestion"]["properties"]["lastGeneratedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.role_mining_management.v1.RoleMiningManagementSuggestion"]["properties"]["runId"]["type"]
   update:
   - string
@@ -7181,10 +6109,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.role_mining_management.v1.RoleMiningManagementSuggestion"]["properties"]["suggestionState"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.role_mining_management.v1.RoleMiningManagementSuggestion"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -7300,19 +6224,11 @@ actions:
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.secrets.v1.PaperSecret"]["properties"]["contentExpiresAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.secrets.v1.PaperSecret"]["properties"]["contentReady"]["type"]
   update:
   - boolean
   - 'null'
 - target: $["components"]["schemas"]["c1.api.secrets.v1.PaperSecret"]["properties"]["contentType"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.secrets.v1.PaperSecret"]["properties"]["createdAt"]["type"]
   update:
   - string
   - 'null'
@@ -7323,10 +6239,6 @@ actions:
 - target: $["components"]["schemas"]["c1.api.secrets.v1.PaperSecret"]["properties"]["currentViews"]["type"]
   update:
   - integer
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.secrets.v1.PaperSecret"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.secrets.v1.PaperSecret"]["properties"]["displayName"]["type"]
   update:
@@ -7368,10 +6280,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.secrets.v1.PaperSecret"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.secrets.v1.PaperSecret"]["properties"]["vaultId"]["type"]
   update:
   - string
@@ -7401,14 +6309,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.secrets.v1.PaperSecretAdminServiceSearchAuditEventsResponse"]["properties"]["nextPageToken"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.secrets.v1.PaperSecretAdminServiceSearchRequest"]["properties"]["createdAfter"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.secrets.v1.PaperSecretAdminServiceSearchRequest"]["properties"]["createdBefore"]["type"]
   update:
   - string
   - 'null'
@@ -7452,10 +6352,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.secrets.v1.PaperSecretServiceCreateExternalRequest"]["properties"]["expiresIn"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.secrets.v1.PaperSecretServiceCreateExternalRequest"]["properties"]["fileSize"]["type"]
   update:
   - string
@@ -7481,10 +6377,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.secrets.v1.PaperSecretServiceCreateInternalRequest"]["properties"]["displayName"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.secrets.v1.PaperSecretServiceCreateInternalRequest"]["properties"]["expiresIn"]["type"]
   update:
   - string
   - 'null'
@@ -7521,10 +6413,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.secrets.v1.PaperSecretServiceGetContentRequestInput"]["properties"]["readerRecipient"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.secrets.v1.PaperSecretServiceGetContentResponse"]["properties"]["createdAt"]["type"]
   update:
   - string
   - 'null'
@@ -7600,10 +6488,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.service_principal.v1.ServicePrincipal"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.service_principal.v1.ServicePrincipal"]["properties"]["displayName"]["type"]
   update:
   - string
@@ -7612,19 +6496,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.service_principal.v1.ServicePrincipal"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.service_principal.v1.ServicePrincipalBinding"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.service_principal.v1.ServicePrincipalBinding"]["properties"]["servicePrincipalId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.service_principal.v1.ServicePrincipalBinding"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -7632,23 +6504,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.service_principal.v1.ServicePrincipalCredential"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.service_principal.v1.ServicePrincipalCredential"]["properties"]["displayName"]["type"]
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.service_principal.v1.ServicePrincipalCredential"]["properties"]["expiresAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.service_principal.v1.ServicePrincipalCredential"]["properties"]["id"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.service_principal.v1.ServicePrincipalCredential"]["properties"]["lastUsedAt"]["type"]
   update:
   - string
   - 'null'
@@ -7665,10 +6525,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.service_principal.v1.ServicePrincipalServiceCreateCredentialRequestInput"]["properties"]["displayName"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.service_principal.v1.ServicePrincipalServiceCreateCredentialRequestInput"]["properties"]["expires"]["type"]
   update:
   - string
   - 'null'
@@ -7768,14 +6624,6 @@ actions:
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.settings.v1.Contacts"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.settings.v1.Contacts"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.settings.v1.DigestPreference"]["properties"]["dayOfWeek"]["type"]
   update:
   - string
@@ -7856,23 +6704,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.settings.v1.OrgDomain"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.settings.v1.OrgDomain"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.settings.v1.OrgDomain"]["properties"]["domain"]["type"]
   update:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.settings.v1.OrgDomain"]["properties"]["id"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.settings.v1.OrgDomain"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -7924,10 +6760,6 @@ actions:
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.settings.v1.SessionSettings"]["properties"]["maxSessionLength"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.settings.v1.SlackChannelSettings"]["properties"]["enabled"]["type"]
   update:
   - boolean
@@ -7944,10 +6776,6 @@ actions:
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.settings.v1.TenantEmailProvider"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.settings.v1.TenantEmailProvider"]["properties"]["fromAddress"]["type"]
   update:
   - string
@@ -7957,10 +6785,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.settings.v1.TenantEmailProvider"]["properties"]["replyToAddress"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.settings.v1.TenantEmailProvider"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -8044,10 +6868,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverEvent"]["properties"]["receivedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverEvent"]["properties"]["sessionsRevoked"]["type"]
   update:
   - integer
@@ -8124,19 +6944,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStream"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStream"]["properties"]["credentialChangeAction"]["type"]
   update:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStream"]["properties"]["credentialCompromiseAction"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStream"]["properties"]["deletedAt"]["type"]
   update:
   - string
   - 'null'
@@ -8172,23 +6984,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStream"]["properties"]["lastErrorAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStream"]["properties"]["lastErrorMessage"]["type"]
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStream"]["properties"]["lastVerifiedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStream"]["properties"]["pollEndpointUrl"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStream"]["properties"]["pollInterval"]["type"]
   update:
   - string
   - 'null'
@@ -8201,10 +7001,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStream"]["properties"]["sessionRevokedAction"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStream"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -8249,10 +7045,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStreamServiceCreateRequest"]["properties"]["pollEndpointUrl"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStreamServiceCreateRequest"]["properties"]["pollInterval"]["type"]
   update:
   - string
   - 'null'
@@ -8324,19 +7116,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStreamStats"]["properties"]["lastErrorAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStreamStats"]["properties"]["lastErrorMessage"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStreamStats"]["properties"]["lastEventReceivedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStreamStats"]["properties"]["lastVerifiedAt"]["type"]
   update:
   - string
   - 'null'
@@ -8392,14 +7172,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.stepup.v1.SearchStepUpTransactionsRequest"]["properties"]["createdAfter"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.stepup.v1.SearchStepUpTransactionsRequest"]["properties"]["createdBefore"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.stepup.v1.SearchStepUpTransactionsRequest"]["properties"]["pageSize"]["type"]
   update:
   - integer
@@ -8444,10 +7216,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.stepup.v1.StepUpProvider"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.stepup.v1.StepUpProvider"]["properties"]["displayName"]["type"]
   update:
   - string
@@ -8464,27 +7232,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.stepup.v1.StepUpProvider"]["properties"]["lastTestedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.stepup.v1.StepUpProvider"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.stepup.v1.StepUpProviderRef"]["properties"]["id"]["type"]
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.stepup.v1.StepUpTransaction"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.stepup.v1.StepUpTransaction"]["properties"]["errorMessage"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.stepup.v1.StepUpTransaction"]["properties"]["expiresAt"]["type"]
   update:
   - string
   - 'null'
@@ -8497,10 +7249,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.stepup.v1.StepUpTransaction"]["properties"]["state"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.stepup.v1.StepUpTransaction"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -8556,14 +7304,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.systemlog.v1.Exporter"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.systemlog.v1.Exporter"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.systemlog.v1.Exporter"]["properties"]["displayName"]["type"]
   update:
   - string
@@ -8573,10 +7313,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.systemlog.v1.Exporter"]["properties"]["state"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.systemlog.v1.Exporter"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -8616,19 +7352,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.systemlog.v1.SystemLogServiceListEventsRequest"]["properties"]["since"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.systemlog.v1.SystemLogServiceListEventsRequest"]["properties"]["sinceEventUid"]["type"]
   update:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.systemlog.v1.SystemLogServiceListEventsRequest"]["properties"]["sortDirection"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.systemlog.v1.SystemLogServiceListEventsRequest"]["properties"]["until"]["type"]
   update:
   - string
   - 'null'
@@ -8672,10 +7400,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.ScopeRole"]["properties"]["grantDuration"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.ScopeRole"]["properties"]["roleResourceId"]["type"]
   update:
   - string
@@ -8700,15 +7424,7 @@ actions:
   update:
   - integer
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.Task"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.Task"]["properties"]["createdByUserId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.Task"]["properties"]["deletedAt"]["type"]
   update:
   - string
   - 'null'
@@ -8752,10 +7468,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.Task"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.Task"]["properties"]["userId"]["type"]
   update:
   - string
@@ -8768,23 +7480,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskAction"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskAction"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskAction"]["properties"]["id"]["type"]
   update:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskAction"]["properties"]["policyStepId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskAction"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -8896,10 +7596,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskActionsServiceUpdateGrantDurationRequestInput"]["properties"]["duration"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditAccessRequestOutcome"]["properties"]["outcome"]["type"]
   update:
   - string
@@ -8957,10 +7653,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditComment"]["properties"]["comment"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditComment"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -9100,10 +7792,6 @@ actions:
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditGrantDurationUpdated"]["properties"]["duration"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditGrantOutcome"]["properties"]["outcome"]["type"]
   update:
   - string
@@ -9216,10 +7904,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditView"]["properties"]["created"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditView"]["properties"]["currentState"]["type"]
   update:
   - string
@@ -9256,15 +7940,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditWaitForAnalysisStepSuccess"]["properties"]["succeededAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditWaitForAnalysisStepTimedOut"]["properties"]["stepId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditWaitForAnalysisStepTimedOut"]["properties"]["timedOutAt"]["type"]
   update:
   - string
   - 'null'
@@ -9280,10 +7956,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditWaitStepSuccess"]["properties"]["succeededAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditWaitStepTimedOut"]["properties"]["condition"]["type"]
   update:
   - string
@@ -9292,15 +7964,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditWaitStepTimedOut"]["properties"]["timedOutAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditWaitStepUntilTime"]["properties"]["stepId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskAuditWaitStepUntilTime"]["properties"]["untilTime"]["type"]
   update:
   - string
   - 'null'
@@ -9472,18 +8136,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskRevokeSourceExpired"]["properties"]["expiredAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskRevokeSourceNonUsage"]["properties"]["expiresAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskRevokeSourceNonUsage"]["properties"]["lastLogin"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskRevokeSourceRequest"]["properties"]["requestUserId"]["type"]
   update:
   - string
@@ -9504,14 +8156,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["createdAfter"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["createdBefore"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["currentStep"]["type"]
   update:
   - string
@@ -9520,27 +8164,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["includeActedAfter"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["includeDeleted"]["type"]
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["olderThanDuration"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["openerOrSubjectUserId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["outcomeAfter"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskSearchRequest"]["properties"]["outcomeBefore"]["type"]
   update:
   - string
   - 'null'
@@ -9600,10 +8228,6 @@ actions:
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskServiceCreateGrantRequest"]["properties"]["grantDuration"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskServiceCreateGrantRequest"]["properties"]["identityUserId"]["type"]
   update:
   - string
@@ -9648,10 +8272,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskTypeAction"]["properties"]["outcomeTime"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskTypeAction"]["properties"]["type"]["type"]
   update:
   - string
@@ -9684,10 +8304,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskTypeCertify"]["properties"]["outcomeTime"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskTypeFinding"]["properties"]["findingId"]["type"]
   update:
   - string
@@ -9697,10 +8313,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskTypeFinding"]["properties"]["outcome"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskTypeFinding"]["properties"]["outcomeTime"]["type"]
   update:
   - string
   - 'null'
@@ -9716,10 +8328,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskTypeGrant"]["properties"]["grantDuration"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskTypeGrant"]["properties"]["identityUserId"]["type"]
   update:
   - string
@@ -9728,15 +8336,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskTypeGrant"]["properties"]["outcomeTime"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskTypeOffboarding"]["properties"]["outcome"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskTypeOffboarding"]["properties"]["outcomeTime"]["type"]
   update:
   - string
   - 'null'
@@ -9761,10 +8361,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskTypeRevoke"]["properties"]["outcome"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskTypeRevoke"]["properties"]["outcomeTime"]["type"]
   update:
   - string
   - 'null'
@@ -9900,27 +8496,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["delegatedUserId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["expirationAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["startAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.user.v1.ExpiringUserDelegationBinding"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -9960,23 +8536,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.user.v1.SetExpiringUserDelegationBindingByAdminRequestInput"]["properties"]["delegationExpireAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.user.v1.SetExpiringUserDelegationBindingByAdminRequestInput"]["properties"]["delegationStartAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.user.v1.User"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.user.v1.User"]["properties"]["delegatedUserId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.user.v1.User"]["properties"]["deletedAt"]["type"]
   update:
   - string
   - 'null'
@@ -10021,10 +8581,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.user.v1.User"]["properties"]["type"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.user.v1.User"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -10084,18 +8640,6 @@ actions:
   update:
   - integer
   - 'null'
-- target: $["components"]["schemas"]["c1.api.vault.v1.Vault"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.vault.v1.Vault"]["properties"]["credentialExpirationDuration"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.vault.v1.Vault"]["properties"]["deletedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.vault.v1.Vault"]["properties"]["description"]["type"]
   update:
   - string
@@ -10108,27 +8652,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.vault.v1.Vault"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.vault.v1.VaultServiceCreateRequest"]["properties"]["description"]["type"]
   update:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.vault.v1.VaultServiceCreateRequest"]["properties"]["displayName"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.webhooks.v1.Webhook"]["properties"]["callbackTimeout"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.webhooks.v1.Webhook"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.webhooks.v1.Webhook"]["properties"]["deletedAt"]["type"]
   update:
   - string
   - 'null'
@@ -10144,10 +8672,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.webhooks.v1.Webhook"]["properties"]["updatedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.webhooks.v1.Webhook"]["properties"]["url"]["type"]
   update:
   - string
@@ -10156,31 +8680,11 @@ actions:
   update:
   - integer
   - 'null'
-- target: $["components"]["schemas"]["c1.api.webhooks.v1.WebhookInstance"]["properties"]["completedAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.webhooks.v1.WebhookInstance"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.webhooks.v1.WebhookInstance"]["properties"]["expiresAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.webhooks.v1.WebhookInstance"]["properties"]["id"]["type"]
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.webhooks.v1.WebhookInstance"]["properties"]["lastAttemptedAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.webhooks.v1.WebhookInstance"]["properties"]["state"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.webhooks.v1.WebhookInstance"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -10232,10 +8736,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.webhooks.v1.WebhooksServiceCreateRequest"]["properties"]["callbackTimeout"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.webhooks.v1.WebhooksServiceCreateRequest"]["properties"]["description"]["type"]
   update:
   - string
@@ -10280,10 +8780,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.workload_federation.v1.WorkloadFederationProvider"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.workload_federation.v1.WorkloadFederationProvider"]["properties"]["description"]["type"]
   update:
   - string
@@ -10301,10 +8797,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.workload_federation.v1.WorkloadFederationProvider"]["properties"]["issuerUrl"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.workload_federation.v1.WorkloadFederationProvider"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -10420,10 +8912,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.workload_federation.v1.WorkloadFederationTrust"]["properties"]["createdAt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.workload_federation.v1.WorkloadFederationTrust"]["properties"]["description"]["type"]
   update:
   - string
@@ -10441,10 +8929,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.workload_federation.v1.WorkloadFederationTrust"]["properties"]["servicePrincipalId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.workload_federation.v1.WorkloadFederationTrust"]["properties"]["updatedAt"]["type"]
   update:
   - string
   - 'null'
@@ -10683,26 +9167,6 @@ actions:
 - target: $["components"]["schemas"]["validate.DoubleRules"]["properties"]["lte"]["type"]
   update:
   - number
-  - 'null'
-- target: $["components"]["schemas"]["validate.DurationRules"]["properties"]["const"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["validate.DurationRules"]["properties"]["gt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["validate.DurationRules"]["properties"]["gte"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["validate.DurationRules"]["properties"]["lt"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["validate.DurationRules"]["properties"]["lte"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["validate.DurationRules"]["properties"]["required"]["type"]
   update:
@@ -11028,41 +9492,17 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["validate.TimestampRules"]["properties"]["const"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["validate.TimestampRules"]["properties"]["gt"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["validate.TimestampRules"]["properties"]["gtNow"]["type"]
   update:
   - boolean
-  - 'null'
-- target: $["components"]["schemas"]["validate.TimestampRules"]["properties"]["gte"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["validate.TimestampRules"]["properties"]["lt"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["validate.TimestampRules"]["properties"]["ltNow"]["type"]
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["validate.TimestampRules"]["properties"]["lte"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["validate.TimestampRules"]["properties"]["required"]["type"]
   update:
   - boolean
-  - 'null'
-- target: $["components"]["schemas"]["validate.TimestampRules"]["properties"]["within"]["type"]
-  update:
-  - string
   - 'null'
 - target: $["components"]["schemas"]["validate.UInt32Rules"]["properties"]["const"]["type"]
   update:
