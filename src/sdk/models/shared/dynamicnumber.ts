@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -20,10 +19,7 @@ import { FunctionCall, FunctionCall$inboundSchema } from "./functioncall.js";
  *   - call
  */
 export type DynamicNumber = {
-  /**
-   * FunctionCall represents a client-side function invocation.
-   */
-  functionCall?: FunctionCall | null | undefined;
+  call?: FunctionCall | null | undefined;
   /**
    * The literal field.
    *
@@ -51,10 +47,6 @@ export const DynamicNumber$inboundSchema: z.ZodType<
   call: z.nullable(FunctionCall$inboundSchema).optional(),
   literal: z.nullable(z.number()).optional(),
   path: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "call": "functionCall",
-  });
 });
 
 export function dynamicNumberFromJSON(

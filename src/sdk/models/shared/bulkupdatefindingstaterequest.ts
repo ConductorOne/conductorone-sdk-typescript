@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   BulkAcceptRiskAction,
   BulkAcceptRiskAction$Outbound,
@@ -59,40 +58,17 @@ import {
  *   - reopen
  */
 export type BulkUpdateFindingStateRequest = {
-  /**
-   * The BulkAcceptRiskAction message.
-   */
-  bulkAcceptRiskAction?: BulkAcceptRiskAction | null | undefined;
-  /**
-   * The BulkAssignOwnerAction message.
-   */
-  bulkAssignOwnerAction?: BulkAssignOwnerAction | null | undefined;
+  acceptRisk?: BulkAcceptRiskAction | null | undefined;
+  assignOwner?: BulkAssignOwnerAction | null | undefined;
   /**
    * By-ID mode: specify individual finding refs.
    */
   refs?: Array<FindingRef> | null | undefined;
-  /**
-   * The BulkReopenAction message.
-   */
-  bulkReopenAction?: BulkReopenAction | null | undefined;
-  /**
-   * The FindingSearchRequest message.
-   */
-  findingSearchRequest?: FindingSearchRequest | undefined;
-  /**
-   * The BulkSnoozeAction message.
-   */
-  bulkSnoozeAction?: BulkSnoozeAction | null | undefined;
-  /**
-   * The BulkSuppressAction message.
-   */
-  bulkSuppressAction?: BulkSuppressAction | null | undefined;
-  /**
-   * The BulkUnsuppressAction message.
-   *
-   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
-   */
-  bulkUnsuppressAction?: BulkUnsuppressAction | null | undefined;
+  reopen?: BulkReopenAction | null | undefined;
+  searchRequest?: FindingSearchRequest | null | undefined;
+  snooze?: BulkSnoozeAction | null | undefined;
+  suppress?: BulkSuppressAction | null | undefined;
+  unsuppress?: BulkUnsuppressAction | null | undefined;
 };
 
 /** @internal */
@@ -101,7 +77,7 @@ export type BulkUpdateFindingStateRequest$Outbound = {
   assignOwner?: BulkAssignOwnerAction$Outbound | null | undefined;
   refs?: Array<FindingRef$Outbound> | null | undefined;
   reopen?: BulkReopenAction$Outbound | null | undefined;
-  searchRequest?: FindingSearchRequest$Outbound | undefined;
+  searchRequest?: FindingSearchRequest$Outbound | null | undefined;
   snooze?: BulkSnoozeAction$Outbound | null | undefined;
   suppress?: BulkSuppressAction$Outbound | null | undefined;
   unsuppress?: BulkUnsuppressAction$Outbound | null | undefined;
@@ -113,27 +89,14 @@ export const BulkUpdateFindingStateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BulkUpdateFindingStateRequest
 > = z.object({
-  bulkAcceptRiskAction: z.nullable(BulkAcceptRiskAction$outboundSchema)
-    .optional(),
-  bulkAssignOwnerAction: z.nullable(BulkAssignOwnerAction$outboundSchema)
-    .optional(),
+  acceptRisk: z.nullable(BulkAcceptRiskAction$outboundSchema).optional(),
+  assignOwner: z.nullable(BulkAssignOwnerAction$outboundSchema).optional(),
   refs: z.nullable(z.array(FindingRef$outboundSchema)).optional(),
-  bulkReopenAction: z.nullable(BulkReopenAction$outboundSchema).optional(),
-  findingSearchRequest: FindingSearchRequest$outboundSchema.optional(),
-  bulkSnoozeAction: z.nullable(BulkSnoozeAction$outboundSchema).optional(),
-  bulkSuppressAction: z.nullable(BulkSuppressAction$outboundSchema).optional(),
-  bulkUnsuppressAction: z.nullable(BulkUnsuppressAction$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    bulkAcceptRiskAction: "acceptRisk",
-    bulkAssignOwnerAction: "assignOwner",
-    bulkReopenAction: "reopen",
-    findingSearchRequest: "searchRequest",
-    bulkSnoozeAction: "snooze",
-    bulkSuppressAction: "suppress",
-    bulkUnsuppressAction: "unsuppress",
-  });
+  reopen: z.nullable(BulkReopenAction$outboundSchema).optional(),
+  searchRequest: z.nullable(FindingSearchRequest$outboundSchema).optional(),
+  snooze: z.nullable(BulkSnoozeAction$outboundSchema).optional(),
+  suppress: z.nullable(BulkSuppressAction$outboundSchema).optional(),
+  unsuppress: z.nullable(BulkUnsuppressAction$outboundSchema).optional(),
 });
 
 export function bulkUpdateFindingStateRequestToJSON(

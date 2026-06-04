@@ -35,15 +35,15 @@ export type Frequency = OpenEnum<typeof Frequency>;
  *   - occurrences
  */
 export type RecurrenceRule = {
-  endDate?: Date | undefined;
+  endDate?: Date | null | undefined;
   /**
    * The frequency field.
    */
-  frequency?: Frequency | undefined;
+  frequency?: Frequency | null | undefined;
   /**
    * The interval field.
    */
-  interval?: number | undefined;
+  interval?: number | null | undefined;
   /**
    * The occurrences field.
    *
@@ -52,7 +52,7 @@ export type RecurrenceRule = {
    * See the documentation for `c1.api.accessreview.v1.RecurrenceRule` for more details.
    */
   occurrences?: number | null | undefined;
-  startDate?: Date | undefined;
+  startDate?: Date | null | undefined;
 };
 
 /** @internal */
@@ -74,21 +74,23 @@ export const RecurrenceRule$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  endDate: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  frequency: Frequency$inboundSchema.optional(),
-  interval: z.number().int().optional(),
+  endDate: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  frequency: z.nullable(Frequency$inboundSchema).optional(),
+  interval: z.nullable(z.number().int()).optional(),
   occurrences: z.nullable(z.number().int()).optional(),
-  startDate: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  startDate: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 });
 /** @internal */
 export type RecurrenceRule$Outbound = {
-  endDate?: string | undefined;
-  frequency?: string | undefined;
-  interval?: number | undefined;
+  endDate?: string | null | undefined;
+  frequency?: string | null | undefined;
+  interval?: number | null | undefined;
   occurrences?: number | null | undefined;
-  startDate?: string | undefined;
+  startDate?: string | null | undefined;
 };
 
 /** @internal */
@@ -97,11 +99,11 @@ export const RecurrenceRule$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RecurrenceRule
 > = z.object({
-  endDate: z.date().transform(v => v.toISOString()).optional(),
-  frequency: Frequency$outboundSchema.optional(),
-  interval: z.number().int().optional(),
+  endDate: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  frequency: z.nullable(Frequency$outboundSchema).optional(),
+  interval: z.nullable(z.number().int()).optional(),
   occurrences: z.nullable(z.number().int()).optional(),
-  startDate: z.date().transform(v => v.toISOString()).optional(),
+  startDate: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function recurrenceRuleToJSON(recurrenceRule: RecurrenceRule): string {

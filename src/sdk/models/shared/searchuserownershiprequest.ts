@@ -29,15 +29,15 @@ export type SearchUserOwnershipRequest = {
   /**
    * Maximum number of results to return per page.
    */
-  pageSize?: number | undefined;
+  pageSize?: number | null | undefined;
   /**
    * Pagination token from a previous response.
    */
-  pageToken?: string | undefined;
+  pageToken?: string | null | undefined;
   /**
    * The ID of the ConductorOne user whose ownership to search.
    */
-  userId?: string | undefined;
+  userId?: string | null | undefined;
 };
 
 /** @internal */
@@ -50,9 +50,9 @@ export const OwnershipTypes$outboundSchema: z.ZodType<
 /** @internal */
 export type SearchUserOwnershipRequest$Outbound = {
   ownershipTypes?: Array<string> | null | undefined;
-  pageSize?: number | undefined;
-  pageToken?: string | undefined;
-  userId?: string | undefined;
+  pageSize?: number | null | undefined;
+  pageToken?: string | null | undefined;
+  userId?: string | null | undefined;
 };
 
 /** @internal */
@@ -62,9 +62,9 @@ export const SearchUserOwnershipRequest$outboundSchema: z.ZodType<
   SearchUserOwnershipRequest
 > = z.object({
   ownershipTypes: z.nullable(z.array(OwnershipTypes$outboundSchema)).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  userId: z.string().optional(),
+  pageSize: z.nullable(z.number().int()).optional(),
+  pageToken: z.nullable(z.string()).optional(),
+  userId: z.nullable(z.string()).optional(),
 });
 
 export function searchUserOwnershipRequestToJSON(

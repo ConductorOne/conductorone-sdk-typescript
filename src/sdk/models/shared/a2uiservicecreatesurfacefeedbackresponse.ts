@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,10 +15,7 @@ import {
  * A2UIServiceCreateSurfaceFeedbackResponse returns the created feedback.
  */
 export type A2UIServiceCreateSurfaceFeedbackResponse = {
-  /**
-   * A2UISurfaceFeedback represents user feedback for a surface.
-   */
-  a2UISurfaceFeedback?: A2UISurfaceFeedback | undefined;
+  feedback?: A2UISurfaceFeedback | null | undefined;
 };
 
 /** @internal */
@@ -28,11 +24,7 @@ export const A2UIServiceCreateSurfaceFeedbackResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  feedback: A2UISurfaceFeedback$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "feedback": "a2UISurfaceFeedback",
-  });
+  feedback: z.nullable(A2UISurfaceFeedback$inboundSchema).optional(),
 });
 
 export function a2UIServiceCreateSurfaceFeedbackResponseFromJSON(

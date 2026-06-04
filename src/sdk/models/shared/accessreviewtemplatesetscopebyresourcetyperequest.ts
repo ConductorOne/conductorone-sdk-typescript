@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   AccessReviewScopeV2,
   AccessReviewScopeV2$Outbound,
@@ -23,46 +22,13 @@ export type AccessReviewTemplateSetScopeByResourceTypeRequest = {
    * The resource types to include in the template scope. Replaces all previously selected resource types.
    */
   resourceTypeSelections?: Array<ResourceTypeIdRef> | null | undefined;
-  /**
-   * The AccessReviewScopeV2 message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named apps_and_resources_scope. Only a single field of the following list may be set at a time:
-   *   - appAccess
-   *   - specificResources
-   *   - appSelectionCriteria
-   *   - resourceTypeSelections
-   *
-   * This message contains a oneof named users_scope. Only a single field of the following list may be set at a time:
-   *   - allUsers
-   *   - selectedUsers
-   *   - userCriteria
-   *   - celExpression
-   *
-   * This message contains a oneof named accounts_scope. Only a single field of the following list may be set at a time:
-   *   - allAccounts
-   *   - accountCriteria
-   *   - accountCelExpression
-   *
-   * This message contains a oneof named grants_scope. Only a single field of the following list may be set at a time:
-   *   - allGrants
-   *   - grantsByCriteria
-   *
-   * This message contains a oneof named access_conflicts_scope. Only a single field of the following list may be set at a time:
-   *   - allAccessConflicts
-   *   - specificAccessConflicts
-   *
-   * This message contains a oneof named resource_scope. Only a single field of the following list may be set at a time:
-   *   - resourceSelection
-   */
-  accessReviewScopeV2?: AccessReviewScopeV2 | undefined;
+  scope?: AccessReviewScopeV2 | null | undefined;
 };
 
 /** @internal */
 export type AccessReviewTemplateSetScopeByResourceTypeRequest$Outbound = {
   resourceTypeSelections?: Array<ResourceTypeIdRef$Outbound> | null | undefined;
-  scope?: AccessReviewScopeV2$Outbound | undefined;
+  scope?: AccessReviewScopeV2$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -75,11 +41,7 @@ export const AccessReviewTemplateSetScopeByResourceTypeRequest$outboundSchema:
     resourceTypeSelections: z.nullable(
       z.array(ResourceTypeIdRef$outboundSchema),
     ).optional(),
-    accessReviewScopeV2: AccessReviewScopeV2$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      accessReviewScopeV2: "scope",
-    });
+    scope: z.nullable(AccessReviewScopeV2$outboundSchema).optional(),
   });
 
 export function accessReviewTemplateSetScopeByResourceTypeRequestToJSON(

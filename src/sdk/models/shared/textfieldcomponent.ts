@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -36,44 +35,14 @@ export type TextFieldComponent = {
   /**
    * The checks field.
    */
-  checks?: Array<FunctionCall | null> | null | undefined;
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString?: DynamicString | undefined;
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString1?: DynamicString | undefined;
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString2?: DynamicString | undefined;
+  checks?: Array<FunctionCall> | null | undefined;
+  label?: DynamicString | null | undefined;
+  placeholder?: DynamicString | null | undefined;
+  value?: DynamicString | null | undefined;
   /**
    * The variant field.
    */
-  variant?: TextFieldComponentVariant | undefined;
+  variant?: TextFieldComponentVariant | null | undefined;
 };
 
 /** @internal */
@@ -89,18 +58,11 @@ export const TextFieldComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  checks: z.nullable(z.array(z.nullable(FunctionCall$inboundSchema)))
-    .optional(),
-  label: DynamicString$inboundSchema.optional(),
-  placeholder: DynamicString$inboundSchema.optional(),
-  value: DynamicString$inboundSchema.optional(),
-  variant: TextFieldComponentVariant$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "label": "dynamicString",
-    "placeholder": "dynamicString1",
-    "value": "dynamicString2",
-  });
+  checks: z.nullable(z.array(FunctionCall$inboundSchema)).optional(),
+  label: z.nullable(DynamicString$inboundSchema).optional(),
+  placeholder: z.nullable(DynamicString$inboundSchema).optional(),
+  value: z.nullable(DynamicString$inboundSchema).optional(),
+  variant: z.nullable(TextFieldComponentVariant$inboundSchema).optional(),
 });
 
 export function textFieldComponentFromJSON(

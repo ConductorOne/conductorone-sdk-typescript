@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -38,10 +37,7 @@ export type Directory = {
   celExpression?: DirectoryAccountFilterCel | null | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
-  /**
-   * DirectoryMergeConfig configures how AppUsers from this directory are matched to C1 Users.
-   */
-  directoryMergeConfig?: DirectoryMergeConfig | undefined;
+  mergeConfig?: DirectoryMergeConfig | null | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -60,14 +56,10 @@ export const Directory$inboundSchema: z.ZodType<
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  mergeConfig: DirectoryMergeConfig$inboundSchema.optional(),
+  mergeConfig: z.nullable(DirectoryMergeConfig$inboundSchema).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "mergeConfig": "directoryMergeConfig",
-  });
 });
 
 export function directoryFromJSON(

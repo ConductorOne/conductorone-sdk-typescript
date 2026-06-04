@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,13 +15,7 @@ import {
  * The WorkloadFederationServiceUpdateTrustResponse message.
  */
 export type WorkloadFederationServiceUpdateTrustResponse = {
-  /**
-   * WorkloadFederationTrust represents a per-SP trust policy that references
-   *
-   * @remarks
-   *  a tenant-level provider and defines a CEL condition for claim matching.
-   */
-  workloadFederationTrust?: WorkloadFederationTrust | undefined;
+  trust?: WorkloadFederationTrust | null | undefined;
 };
 
 /** @internal */
@@ -32,11 +25,7 @@ export const WorkloadFederationServiceUpdateTrustResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    trust: WorkloadFederationTrust$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "trust": "workloadFederationTrust",
-    });
+    trust: z.nullable(WorkloadFederationTrust$inboundSchema).optional(),
   });
 
 export function workloadFederationServiceUpdateTrustResponseFromJSON(

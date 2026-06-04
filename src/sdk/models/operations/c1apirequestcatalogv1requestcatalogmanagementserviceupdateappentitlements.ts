@@ -11,7 +11,7 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequest =
   {
-    catalogId: string | null;
+    catalogId: string;
     requestCatalogManagementServiceUpdateAppEntitlementsRequest?:
       | shared.RequestCatalogManagementServiceUpdateAppEntitlementsRequest
       | undefined;
@@ -42,7 +42,7 @@ export type C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitle
 /** @internal */
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequest$Outbound =
   {
-    catalog_id: string | null;
+    catalog_id: string;
     RequestCatalogManagementServiceUpdateAppEntitlementsRequest?:
       | shared.RequestCatalogManagementServiceUpdateAppEntitlementsRequest$Outbound
       | undefined;
@@ -55,7 +55,7 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitl
     z.ZodTypeDef,
     C1ApiRequestcatalogV1RequestCatalogManagementServiceUpdateAppEntitlementsRequest
   > = z.object({
-    catalogId: z.nullable(z.string()),
+    catalogId: z.string(),
     requestCatalogManagementServiceUpdateAppEntitlementsRequest: shared
       .RequestCatalogManagementServiceUpdateAppEntitlementsRequest$outboundSchema
       .optional(),

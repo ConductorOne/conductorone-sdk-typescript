@@ -14,11 +14,11 @@ export type FunctionsServiceGetLockFileResponse = {
   /**
    * The raw content of the deno lock file (empty if not found).
    */
-  content?: string | undefined;
+  content?: string | null | undefined;
   /**
    * Whether the lock file exists for this commit.
    */
-  exists?: boolean | undefined;
+  exists?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -27,8 +27,8 @@ export const FunctionsServiceGetLockFileResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  content: z.string().optional(),
-  exists: z.boolean().optional(),
+  content: z.nullable(z.string()).optional(),
+  exists: z.nullable(z.boolean()).optional(),
 });
 
 export function functionsServiceGetLockFileResponseFromJSON(

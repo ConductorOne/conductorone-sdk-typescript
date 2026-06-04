@@ -4,23 +4,23 @@
 
 import * as z from "zod/v3";
 import {
-  WebhookEndpoint,
-  WebhookEndpoint$Outbound,
-  WebhookEndpoint$outboundSchema,
-} from "./webhookendpoint.js";
+  WebhookEndpointInput,
+  WebhookEndpointInput$Outbound,
+  WebhookEndpointInput$outboundSchema,
+} from "./webhookendpointinput.js";
 
 /**
  * The WebhooksServiceUpdateRequest message contains the webhook object to update and a field mask to indicate which fields to update. It uses URL value for input.
  */
 export type WebhooksServiceUpdateRequest = {
   updateMask?: string | null | undefined;
-  webhook?: WebhookEndpoint | null | undefined;
+  webhook?: WebhookEndpointInput | null | undefined;
 };
 
 /** @internal */
 export type WebhooksServiceUpdateRequest$Outbound = {
   updateMask?: string | null | undefined;
-  webhook?: WebhookEndpoint$Outbound | null | undefined;
+  webhook?: WebhookEndpointInput$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -30,7 +30,7 @@ export const WebhooksServiceUpdateRequest$outboundSchema: z.ZodType<
   WebhooksServiceUpdateRequest
 > = z.object({
   updateMask: z.nullable(z.string()).optional(),
-  webhook: z.nullable(WebhookEndpoint$outboundSchema).optional(),
+  webhook: z.nullable(WebhookEndpointInput$outboundSchema).optional(),
 });
 
 export function webhooksServiceUpdateRequestToJSON(

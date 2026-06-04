@@ -22,7 +22,7 @@ export type ExternalClientSearchServiceSearchResponse = {
   /**
    * The nextPageToken field.
    */
-  nextPageToken?: string | undefined;
+  nextPageToken?: string | null | undefined;
 };
 
 /** @internal */
@@ -32,7 +32,7 @@ export const ExternalClientSearchServiceSearchResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   list: z.nullable(z.array(ExternalClientInfo$inboundSchema)).optional(),
-  nextPageToken: z.string().optional(),
+  nextPageToken: z.nullable(z.string()).optional(),
 });
 
 export function externalClientSearchServiceSearchResponseFromJSON(

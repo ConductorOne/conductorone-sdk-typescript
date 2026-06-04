@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiIamV1RolesUpdateRequest = {
-  roleId: string | null;
+  roleId: string;
   updateRoleRequest?: shared.UpdateRoleRequest | undefined;
 };
 
@@ -35,7 +35,7 @@ export type C1ApiIamV1RolesUpdateResponse = {
 
 /** @internal */
 export type C1ApiIamV1RolesUpdateRequest$Outbound = {
-  role_id: string | null;
+  role_id: string;
   UpdateRoleRequest?: shared.UpdateRoleRequest$Outbound | undefined;
 };
 
@@ -45,7 +45,7 @@ export const C1ApiIamV1RolesUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiIamV1RolesUpdateRequest
 > = z.object({
-  roleId: z.nullable(z.string()),
+  roleId: z.string(),
   updateRoleRequest: shared.UpdateRoleRequest$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

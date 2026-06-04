@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   AWSSESProviderConfig,
   AWSSESProviderConfig$Outbound,
@@ -43,26 +42,15 @@ import {
  *   - googleWorkspace
  */
 export type TenantEmailProviderInput = {
-  /**
-   * AWSSESProviderConfig configures sending via a customer's AWS SES account.
-   */
-  awssesProviderConfig?: AWSSESProviderConfig | null | undefined;
-  /**
-   * C1BuiltInProviderConfig selects the ConductorOne built-in email provider.
-   *
-   * @remarks
-   *  Emails are sent from no-reply@conductorone.com via the platform SendGrid account.
-   *  Only supports sending to C1 users — external email addresses are not supported.
-   *  No configuration fields required.
-   */
-  c1BuiltInProviderConfig?: C1BuiltInProviderConfig | null | undefined;
+  awsSes?: AWSSESProviderConfig | null | undefined;
+  c1Builtin?: C1BuiltInProviderConfig | null | undefined;
   /**
    * Sender email address. Must be verified with the provider.
    *
    * @remarks
    *  Ignored when using the C1 built-in provider (uses no-reply@conductorone.com).
    */
-  fromAddress?: string | undefined;
+  fromAddress?: string | null | undefined;
   /**
    * Sender display name shown in the recipient's inbox (e.g., "Acme Corp IT").
    *
@@ -70,48 +58,25 @@ export type TenantEmailProviderInput = {
    *  Used as the RFC 5322 display-name: "Acme Corp IT" <no-reply@acme.com>.
    *  Ignored when using the C1 built-in provider.
    */
-  fromName?: string | undefined;
-  /**
-   * GoogleWorkspaceProviderConfig configures sending via Google Workspace Gmail API
-   *
-   * @remarks
-   *  using domain-wide delegation with a service account.
-   *  Requires: customer Workspace super admin grants DWD to the service account's
-   *  OAuth client ID for the gmail.send scope.
-   */
-  googleWorkspaceProviderConfig?:
-    | GoogleWorkspaceProviderConfig
-    | null
-    | undefined;
-  /**
-   * MicrosoftGraphProviderConfig configures sending via Microsoft Graph sendMail API.
-   *
-   * @remarks
-   *  Requires an Azure AD app registration with Mail.Send application permission (admin-consented).
-   */
-  microsoftGraphProviderConfig?:
-    | MicrosoftGraphProviderConfig
-    | null
-    | undefined;
+  fromName?: string | null | undefined;
+  googleWorkspace?: GoogleWorkspaceProviderConfig | null | undefined;
+  microsoftGraph?: MicrosoftGraphProviderConfig | null | undefined;
   /**
    * Optional reply-to address.
    */
-  replyToAddress?: string | undefined;
-  /**
-   * SendGridProviderConfig configures sending via a customer's SendGrid account.
-   */
-  sendGridProviderConfig?: SendGridProviderConfig | null | undefined;
+  replyToAddress?: string | null | undefined;
+  sendgrid?: SendGridProviderConfig | null | undefined;
 };
 
 /** @internal */
 export type TenantEmailProviderInput$Outbound = {
   awsSes?: AWSSESProviderConfig$Outbound | null | undefined;
   c1Builtin?: C1BuiltInProviderConfig$Outbound | null | undefined;
-  fromAddress?: string | undefined;
-  fromName?: string | undefined;
+  fromAddress?: string | null | undefined;
+  fromName?: string | null | undefined;
   googleWorkspace?: GoogleWorkspaceProviderConfig$Outbound | null | undefined;
   microsoftGraph?: MicrosoftGraphProviderConfig$Outbound | null | undefined;
-  replyToAddress?: string | undefined;
+  replyToAddress?: string | null | undefined;
   sendgrid?: SendGridProviderConfig$Outbound | null | undefined;
 };
 
@@ -121,29 +86,16 @@ export const TenantEmailProviderInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TenantEmailProviderInput
 > = z.object({
-  awssesProviderConfig: z.nullable(AWSSESProviderConfig$outboundSchema)
+  awsSes: z.nullable(AWSSESProviderConfig$outboundSchema).optional(),
+  c1Builtin: z.nullable(C1BuiltInProviderConfig$outboundSchema).optional(),
+  fromAddress: z.nullable(z.string()).optional(),
+  fromName: z.nullable(z.string()).optional(),
+  googleWorkspace: z.nullable(GoogleWorkspaceProviderConfig$outboundSchema)
     .optional(),
-  c1BuiltInProviderConfig: z.nullable(C1BuiltInProviderConfig$outboundSchema)
+  microsoftGraph: z.nullable(MicrosoftGraphProviderConfig$outboundSchema)
     .optional(),
-  fromAddress: z.string().optional(),
-  fromName: z.string().optional(),
-  googleWorkspaceProviderConfig: z.nullable(
-    GoogleWorkspaceProviderConfig$outboundSchema,
-  ).optional(),
-  microsoftGraphProviderConfig: z.nullable(
-    MicrosoftGraphProviderConfig$outboundSchema,
-  ).optional(),
-  replyToAddress: z.string().optional(),
-  sendGridProviderConfig: z.nullable(SendGridProviderConfig$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    awssesProviderConfig: "awsSes",
-    c1BuiltInProviderConfig: "c1Builtin",
-    googleWorkspaceProviderConfig: "googleWorkspace",
-    microsoftGraphProviderConfig: "microsoftGraph",
-    sendGridProviderConfig: "sendgrid",
-  });
+  replyToAddress: z.nullable(z.string()).optional(),
+  sendgrid: z.nullable(SendGridProviderConfig$outboundSchema).optional(),
 });
 
 export function tenantEmailProviderInputToJSON(

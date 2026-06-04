@@ -10,10 +10,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppEntitlementsProxyDeleteRequest = {
-  srcAppId: string | null;
-  srcAppEntitlementId: string | null;
-  dstAppId: string | null;
-  dstAppEntitlementId: string | null;
+  srcAppId: string;
+  srcAppEntitlementId: string;
+  dstAppId: string;
+  dstAppEntitlementId: string;
   deleteAppEntitlementProxyRequest?:
     | shared.DeleteAppEntitlementProxyRequest
     | undefined;
@@ -42,10 +42,10 @@ export type C1ApiAppV1AppEntitlementsProxyDeleteResponse = {
 
 /** @internal */
 export type C1ApiAppV1AppEntitlementsProxyDeleteRequest$Outbound = {
-  src_app_id: string | null;
-  src_app_entitlement_id: string | null;
-  dst_app_id: string | null;
-  dst_app_entitlement_id: string | null;
+  src_app_id: string;
+  src_app_entitlement_id: string;
+  dst_app_id: string;
+  dst_app_entitlement_id: string;
   DeleteAppEntitlementProxyRequest?:
     | shared.DeleteAppEntitlementProxyRequest$Outbound
     | undefined;
@@ -58,10 +58,10 @@ export const C1ApiAppV1AppEntitlementsProxyDeleteRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementsProxyDeleteRequest
   > = z.object({
-    srcAppId: z.nullable(z.string()),
-    srcAppEntitlementId: z.nullable(z.string()),
-    dstAppId: z.nullable(z.string()),
-    dstAppEntitlementId: z.nullable(z.string()),
+    srcAppId: z.string(),
+    srcAppEntitlementId: z.string(),
+    dstAppId: z.string(),
+    dstAppEntitlementId: z.string(),
     deleteAppEntitlementProxyRequest: shared
       .DeleteAppEntitlementProxyRequest$outboundSchema.optional(),
   }).transform((v) => {

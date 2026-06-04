@@ -60,7 +60,12 @@ export class TaskActions extends ClientSDK {
    * Close
    *
    * @remarks
-   * Close a task, ending its workflow.
+   * Close a task, ending its workflow. Async — returns a ticketActionId on
+   *  accept and queues the close; the task's state field is not updated
+   *  synchronously. Poll task_service_get to observe the transition to
+   *  TASK_STATE_CLOSED. When the task has an active provision step, close
+   *  may no-op — finish or cancel the provision step first
+   *  (mark_provision_complete / _errored / _cancelled) before closing.
    */
   async close(
     request: operations.C1ApiTaskV1TaskActionsServiceCloseRequest,

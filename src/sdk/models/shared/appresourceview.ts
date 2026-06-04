@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,10 +21,7 @@ export type AppResourceView = {
    */
   appPath?: string | null | undefined;
   appResource?: AppResource | null | undefined;
-  /**
-   * The ActorObjectPermissions message.
-   */
-  actorObjectPermissions?: ActorObjectPermissions | undefined;
+  objectPermissions?: ActorObjectPermissions | null | undefined;
   /**
    * JSONPATH expression indicating the location of the Parent Resource object in the array
    */
@@ -48,14 +44,11 @@ export const AppResourceView$inboundSchema: z.ZodType<
 > = z.object({
   appPath: z.nullable(z.string()).optional(),
   appResource: z.nullable(AppResource$inboundSchema).optional(),
-  objectPermissions: ActorObjectPermissions$inboundSchema.optional(),
+  objectPermissions: z.nullable(ActorObjectPermissions$inboundSchema)
+    .optional(),
   parentResourcePath: z.nullable(z.string()).optional(),
   parentResourceTypePath: z.nullable(z.string()).optional(),
   resourceTypePath: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "objectPermissions": "actorObjectPermissions",
-  });
 });
 
 export function appResourceViewFromJSON(

@@ -14,15 +14,15 @@ export type AuthConfigOneLogin = {
   /**
    * The domain field.
    */
-  domain?: string | undefined;
+  domain?: string | null | undefined;
   /**
    * The oidcClientId field.
    */
-  oidcClientId?: string | undefined;
+  oidcClientId?: string | null | undefined;
   /**
    * The oidcClientSecret field.
    */
-  oidcClientSecret?: string | undefined;
+  oidcClientSecret?: string | null | undefined;
 };
 
 /** @internal */
@@ -31,15 +31,15 @@ export const AuthConfigOneLogin$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  domain: z.string().optional(),
-  oidcClientId: z.string().optional(),
-  oidcClientSecret: z.string().optional(),
+  domain: z.nullable(z.string()).optional(),
+  oidcClientId: z.nullable(z.string()).optional(),
+  oidcClientSecret: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type AuthConfigOneLogin$Outbound = {
-  domain?: string | undefined;
-  oidcClientId?: string | undefined;
-  oidcClientSecret?: string | undefined;
+  domain?: string | null | undefined;
+  oidcClientId?: string | null | undefined;
+  oidcClientSecret?: string | null | undefined;
 };
 
 /** @internal */
@@ -48,9 +48,9 @@ export const AuthConfigOneLogin$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AuthConfigOneLogin
 > = z.object({
-  domain: z.string().optional(),
-  oidcClientId: z.string().optional(),
-  oidcClientSecret: z.string().optional(),
+  domain: z.nullable(z.string()).optional(),
+  oidcClientId: z.nullable(z.string()).optional(),
+  oidcClientSecret: z.nullable(z.string()).optional(),
 });
 
 export function authConfigOneLoginToJSON(

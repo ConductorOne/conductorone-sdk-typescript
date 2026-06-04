@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -51,54 +50,35 @@ export type Event = OpenEnum<typeof Event>;
  *   - builtinPattern
  */
 export type Hook = {
-  /**
-   * BuiltInPattern references a ConductorOne-maintained DLP pattern.
-   *
-   * @remarks
-   *  The specific pattern and its configuration are encoded as a oneof.
-   *
-   * This message contains a oneof named config. Only a single field of the following list may be set at a time:
-   *   - piiRedaction
-   *   - creditCardBlocking
-   *   - queryScopeLimit
-   *   - writeAuthorization
-   *   - sensitiveFileGuard
-   */
-  builtInPattern?: BuiltInPattern | null | undefined;
-  createdAt?: Date | undefined;
+  builtinPattern?: BuiltInPattern | null | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * The description field.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
   /**
    * The enabled field.
    */
-  enabled?: boolean | undefined;
+  enabled?: boolean | null | undefined;
   /**
    * The event field.
    */
-  event?: Event | undefined;
-  /**
-   * HookFilter determines which tool calls a hook applies to.
-   */
-  hookFilter?: HookFilter | undefined;
-  /**
-   * HookFunctionRef identifies a customer-authored function to invoke.
-   */
-  hookFunctionRef?: HookFunctionRef | null | undefined;
+  event?: Event | null | undefined;
+  filter?: HookFilter | null | undefined;
+  function?: HookFunctionRef | null | undefined;
   /**
    * The id field.
    */
-  id?: string | undefined;
+  id?: string | null | undefined;
   /**
    * The priority field.
    */
-  priority?: number | undefined;
-  updatedAt?: Date | undefined;
+  priority?: number | null | undefined;
+  updatedAt?: Date | null | undefined;
 };
 
 /**
@@ -111,52 +91,33 @@ export type Hook = {
  *   - builtinPattern
  */
 export type HookInput = {
-  /**
-   * BuiltInPattern references a ConductorOne-maintained DLP pattern.
-   *
-   * @remarks
-   *  The specific pattern and its configuration are encoded as a oneof.
-   *
-   * This message contains a oneof named config. Only a single field of the following list may be set at a time:
-   *   - piiRedaction
-   *   - creditCardBlocking
-   *   - queryScopeLimit
-   *   - writeAuthorization
-   *   - sensitiveFileGuard
-   */
-  builtInPattern?: BuiltInPattern | null | undefined;
+  builtinPattern?: BuiltInPattern | null | undefined;
   /**
    * The description field.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
   /**
    * The enabled field.
    */
-  enabled?: boolean | undefined;
+  enabled?: boolean | null | undefined;
   /**
    * The event field.
    */
-  event?: Event | undefined;
-  /**
-   * HookFilter determines which tool calls a hook applies to.
-   */
-  hookFilter?: HookFilter | undefined;
-  /**
-   * HookFunctionRef identifies a customer-authored function to invoke.
-   */
-  hookFunctionRef?: HookFunctionRef | null | undefined;
+  event?: Event | null | undefined;
+  filter?: HookFilter | null | undefined;
+  function?: HookFunctionRef | null | undefined;
   /**
    * The id field.
    */
-  id?: string | undefined;
+  id?: string | null | undefined;
   /**
    * The priority field.
    */
-  priority?: number | undefined;
+  priority?: number | null | undefined;
 };
 
 /** @internal */
@@ -170,24 +131,20 @@ export const Event$outboundSchema: z.ZodType<string, z.ZodTypeDef, Event> =
 export const Hook$inboundSchema: z.ZodType<Hook, z.ZodTypeDef, unknown> = z
   .object({
     builtinPattern: z.nullable(BuiltInPattern$inboundSchema).optional(),
-    createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-      .optional(),
-    description: z.string().optional(),
-    displayName: z.string().optional(),
-    enabled: z.boolean().optional(),
-    event: Event$inboundSchema.optional(),
-    filter: HookFilter$inboundSchema.optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.nullable(z.string()).optional(),
+    displayName: z.nullable(z.string()).optional(),
+    enabled: z.nullable(z.boolean()).optional(),
+    event: z.nullable(Event$inboundSchema).optional(),
+    filter: z.nullable(HookFilter$inboundSchema).optional(),
     function: z.nullable(HookFunctionRef$inboundSchema).optional(),
-    id: z.string().optional(),
-    priority: z.number().int().optional(),
-    updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "builtinPattern": "builtInPattern",
-      "filter": "hookFilter",
-      "function": "hookFunctionRef",
-    });
+    id: z.nullable(z.string()).optional(),
+    priority: z.nullable(z.number().int()).optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
   });
 
 export function hookFromJSON(
@@ -203,14 +160,14 @@ export function hookFromJSON(
 /** @internal */
 export type HookInput$Outbound = {
   builtinPattern?: BuiltInPattern$Outbound | null | undefined;
-  description?: string | undefined;
-  displayName?: string | undefined;
-  enabled?: boolean | undefined;
-  event?: string | undefined;
-  filter?: HookFilter$Outbound | undefined;
+  description?: string | null | undefined;
+  displayName?: string | null | undefined;
+  enabled?: boolean | null | undefined;
+  event?: string | null | undefined;
+  filter?: HookFilter$Outbound | null | undefined;
   function?: HookFunctionRef$Outbound | null | undefined;
-  id?: string | undefined;
-  priority?: number | undefined;
+  id?: string | null | undefined;
+  priority?: number | null | undefined;
 };
 
 /** @internal */
@@ -219,21 +176,15 @@ export const HookInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   HookInput
 > = z.object({
-  builtInPattern: z.nullable(BuiltInPattern$outboundSchema).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  event: Event$outboundSchema.optional(),
-  hookFilter: HookFilter$outboundSchema.optional(),
-  hookFunctionRef: z.nullable(HookFunctionRef$outboundSchema).optional(),
-  id: z.string().optional(),
-  priority: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    builtInPattern: "builtinPattern",
-    hookFilter: "filter",
-    hookFunctionRef: "function",
-  });
+  builtinPattern: z.nullable(BuiltInPattern$outboundSchema).optional(),
+  description: z.nullable(z.string()).optional(),
+  displayName: z.nullable(z.string()).optional(),
+  enabled: z.nullable(z.boolean()).optional(),
+  event: z.nullable(Event$outboundSchema).optional(),
+  filter: z.nullable(HookFilter$outboundSchema).optional(),
+  function: z.nullable(HookFunctionRef$outboundSchema).optional(),
+  id: z.nullable(z.string()).optional(),
+  priority: z.nullable(z.number().int()).optional(),
 });
 
 export function hookInputToJSON(hookInput: HookInput): string {

@@ -14,7 +14,7 @@ export type UserProviderConfig = {
   /**
    * The inputTransformationCel field.
    */
-  inputTransformationCel?: string | undefined;
+  inputTransformationCel?: string | null | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const UserProviderConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  inputTransformationCel: z.string().optional(),
+  inputTransformationCel: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type UserProviderConfig$Outbound = {
-  inputTransformationCel?: string | undefined;
+  inputTransformationCel?: string | null | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const UserProviderConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UserProviderConfig
 > = z.object({
-  inputTransformationCel: z.string().optional(),
+  inputTransformationCel: z.nullable(z.string()).optional(),
 });
 
 export function userProviderConfigToJSON(

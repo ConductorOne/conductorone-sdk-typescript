@@ -60,7 +60,20 @@ export type App = {
    * @remarks
    *  Sparse ACL feature.
    */
-  accessModel?: AccessModel | undefined;
+  accessModel?: AccessModel | null | undefined;
+  /**
+   * Key/value metadata. Up to 16 entries; keys 1-128 chars; values 0-256
+   *
+   * @remarks
+   *  chars; URL-safe ASCII. Keys starting with `c1/` are reserved.
+   *
+   *  Updates have PATCH semantics: keys absent from the request are
+   *  preserved; an empty value deletes the key.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
   /**
    * The ID of the Account named by AccountName.
    */
@@ -73,10 +86,7 @@ export type App = {
    * The owners of the app.
    */
   appOwners?: Array<User> | null | undefined;
-  /**
-   * AppUserMapper configures custom account mapping for uplift.
-   */
-  appUserMapper?: AppUserMapper | undefined;
+  appUserMapper?: AppUserMapper | null | undefined;
   /**
    * The ID of the Certify Policy associated with this App.
    */
@@ -102,7 +112,7 @@ export type App = {
   /**
    * When enabled, resource ownership is sourced from the connector.
    */
-  enableConnectorSourcedOwnership?: boolean | undefined;
+  enableConnectorSourcedOwnership?: boolean | null | undefined;
   fieldMask?: string | null | undefined;
   /**
    * The ID of the Grant Policy associated with this App.
@@ -169,11 +179,21 @@ export type AppInput = {
    * @remarks
    *  Sparse ACL feature.
    */
-  accessModel?: AccessModel | undefined;
+  accessModel?: AccessModel | null | undefined;
   /**
-   * AppUserMapper configures custom account mapping for uplift.
+   * Key/value metadata. Up to 16 entries; keys 1-128 chars; values 0-256
+   *
+   * @remarks
+   *  chars; URL-safe ASCII. Keys starting with `c1/` are reserved.
+   *
+   *  Updates have PATCH semantics: keys absent from the request are
+   *  preserved; an empty value deletes the key.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
    */
-  appUserMapper?: AppUserMapper | undefined;
+  annotations?: { [k: string]: string } | undefined;
+  appUserMapper?: AppUserMapper | null | undefined;
   /**
    * The ID of the Certify Policy associated with this App.
    */
@@ -182,12 +202,10 @@ export type AppInput = {
    * The connectorVersion field.
    */
   connectorVersion?: number | null | undefined;
-  createdAt?: Date | null | undefined;
   /**
    * The ID for the default request catalog for this app.
    */
   defaultRequestCatalogId?: string | null | undefined;
-  deletedAt?: Date | null | undefined;
   /**
    * The app's description.
    */
@@ -199,8 +217,7 @@ export type AppInput = {
   /**
    * When enabled, resource ownership is sourced from the connector.
    */
-  enableConnectorSourcedOwnership?: boolean | undefined;
-  fieldMask?: string | null | undefined;
+  enableConnectorSourcedOwnership?: boolean | null | undefined;
   /**
    * The ID of the Grant Policy associated with this App.
    */
@@ -233,7 +250,6 @@ export type AppInput = {
    * The strictAccessEntitlementProvisioning field.
    */
   strictAccessEntitlementProvisioning?: boolean | null | undefined;
-  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
@@ -265,11 +281,12 @@ export const IdentityMatching$outboundSchema: z.ZodType<
 /** @internal */
 export const App$inboundSchema: z.ZodType<App, z.ZodTypeDef, unknown> = z
   .object({
-    accessModel: AccessModel$inboundSchema.optional(),
+    accessModel: z.nullable(AccessModel$inboundSchema).optional(),
+    annotations: z.record(z.string()).optional(),
     appAccountId: z.nullable(z.string()).optional(),
     appAccountName: z.nullable(z.string()).optional(),
     appOwners: z.nullable(z.array(User$inboundSchema)).optional(),
-    appUserMapper: AppUserMapper$inboundSchema.optional(),
+    appUserMapper: z.nullable(AppUserMapper$inboundSchema).optional(),
     certifyPolicyId: z.nullable(z.string()).optional(),
     connectorVersion: z.nullable(z.number().int()).optional(),
     createdAt: z.nullable(
@@ -281,7 +298,7 @@ export const App$inboundSchema: z.ZodType<App, z.ZodTypeDef, unknown> = z
     ).optional(),
     description: z.nullable(z.string()).optional(),
     displayName: z.nullable(z.string()).optional(),
-    enableConnectorSourcedOwnership: z.boolean().optional(),
+    enableConnectorSourcedOwnership: z.nullable(z.boolean()).optional(),
     fieldMask: z.nullable(z.string()).optional(),
     grantPolicyId: z.nullable(z.string()).optional(),
     iconUrl: z.nullable(z.string()).optional(),
@@ -314,17 +331,15 @@ export function appFromJSON(
 
 /** @internal */
 export type AppInput$Outbound = {
-  accessModel?: string | undefined;
-  appUserMapper?: AppUserMapper$Outbound | undefined;
+  accessModel?: string | null | undefined;
+  annotations?: { [k: string]: string } | undefined;
+  appUserMapper?: AppUserMapper$Outbound | null | undefined;
   certifyPolicyId?: string | null | undefined;
   connectorVersion?: number | null | undefined;
-  createdAt?: string | null | undefined;
   defaultRequestCatalogId?: string | null | undefined;
-  deletedAt?: string | null | undefined;
   description?: string | null | undefined;
   displayName?: string | null | undefined;
-  enableConnectorSourcedOwnership?: boolean | undefined;
-  fieldMask?: string | null | undefined;
+  enableConnectorSourcedOwnership?: boolean | null | undefined;
   grantPolicyId?: string | null | undefined;
   iconUrl?: string | null | undefined;
   identityMatching?: string | null | undefined;
@@ -333,7 +348,6 @@ export type AppInput$Outbound = {
   monthlyCostUsd?: number | null | undefined;
   revokePolicyId?: string | null | undefined;
   strictAccessEntitlementProvisioning?: boolean | null | undefined;
-  updatedAt?: string | null | undefined;
 };
 
 /** @internal */
@@ -342,17 +356,15 @@ export const AppInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppInput
 > = z.object({
-  accessModel: AccessModel$outboundSchema.optional(),
-  appUserMapper: AppUserMapper$outboundSchema.optional(),
+  accessModel: z.nullable(AccessModel$outboundSchema).optional(),
+  annotations: z.record(z.string()).optional(),
+  appUserMapper: z.nullable(AppUserMapper$outboundSchema).optional(),
   certifyPolicyId: z.nullable(z.string()).optional(),
   connectorVersion: z.nullable(z.number().int()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   defaultRequestCatalogId: z.nullable(z.string()).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
-  enableConnectorSourcedOwnership: z.boolean().optional(),
-  fieldMask: z.nullable(z.string()).optional(),
+  enableConnectorSourcedOwnership: z.nullable(z.boolean()).optional(),
   grantPolicyId: z.nullable(z.string()).optional(),
   iconUrl: z.nullable(z.string()).optional(),
   identityMatching: z.nullable(IdentityMatching$outboundSchema).optional(),
@@ -361,7 +373,6 @@ export const AppInput$outboundSchema: z.ZodType<
   monthlyCostUsd: z.nullable(z.number().int()).optional(),
   revokePolicyId: z.nullable(z.string()).optional(),
   strictAccessEntitlementProvisioning: z.nullable(z.boolean()).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function appInputToJSON(appInput: AppInput): string {

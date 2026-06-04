@@ -32,7 +32,7 @@ export type C1ApiAppV2AppOwnersSearchUserOwnersResponse = {
   /**
    * SearchUserOwnersResponse is the response for searching user ownership sources.
    */
-  searchUserOwnersResponse?: shared.SearchUserOwnersResponse | undefined;
+  searchAppUserOwnersResponse?: shared.SearchAppUserOwnersResponse | undefined;
 };
 
 /** @internal */
@@ -84,14 +84,14 @@ export const C1ApiAppV2AppOwnersSearchUserOwnersResponse$inboundSchema:
     ContentType: z.string(),
     StatusCode: z.number().int(),
     RawResponse: z.instanceof(Response),
-    SearchUserOwnersResponse: shared.SearchUserOwnersResponse$inboundSchema
-      .optional(),
+    SearchAppUserOwnersResponse: shared
+      .SearchAppUserOwnersResponse$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "ContentType": "contentType",
       "StatusCode": "statusCode",
       "RawResponse": "rawResponse",
-      "SearchUserOwnersResponse": "searchUserOwnersResponse",
+      "SearchAppUserOwnersResponse": "searchAppUserOwnersResponse",
     });
   });
 

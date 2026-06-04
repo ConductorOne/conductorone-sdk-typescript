@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * The AutomationContext message.
  */
 export type AutomationContext = {
-  context?: { [k: string]: any } | null | undefined;
+  context?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -20,11 +20,11 @@ export const AutomationContext$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  context: z.nullable(z.record(z.any())).optional(),
+  context: z.record(z.any()).optional(),
 });
 /** @internal */
 export type AutomationContext$Outbound = {
-  context?: { [k: string]: any } | null | undefined;
+  context?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -33,7 +33,7 @@ export const AutomationContext$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AutomationContext
 > = z.object({
-  context: z.nullable(z.record(z.any())).optional(),
+  context: z.record(z.any()).optional(),
 });
 
 export function automationContextToJSON(

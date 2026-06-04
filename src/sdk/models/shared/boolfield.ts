@@ -41,9 +41,6 @@ export type BoolField = {
    */
   defaultValue?: boolean | null | undefined;
   rules?: BoolRules | null | undefined;
-  /**
-   * The ToggleField message.
-   */
   toggleField?: ToggleField | null | undefined;
 };
 

@@ -14,22 +14,13 @@ import {
  */
 export type VaultServiceUpdateRequest = {
   updateMask?: string | null | undefined;
-  /**
-   * Vault represents an external secret storage integration used to store connector credentials securely.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named vault. Only a single field of the following list may be set at a time:
-   *   - groupAuthzVault
-   *   - magicVault
-   */
-  vault?: VaultInput | undefined;
+  vault?: VaultInput | null | undefined;
 };
 
 /** @internal */
 export type VaultServiceUpdateRequest$Outbound = {
   updateMask?: string | null | undefined;
-  vault?: VaultInput$Outbound | undefined;
+  vault?: VaultInput$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -39,7 +30,7 @@ export const VaultServiceUpdateRequest$outboundSchema: z.ZodType<
   VaultServiceUpdateRequest
 > = z.object({
   updateMask: z.nullable(z.string()).optional(),
-  vault: VaultInput$outboundSchema.optional(),
+  vault: z.nullable(VaultInput$outboundSchema).optional(),
 });
 
 export function vaultServiceUpdateRequestToJSON(

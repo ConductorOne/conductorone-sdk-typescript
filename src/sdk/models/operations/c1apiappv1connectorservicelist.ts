@@ -10,9 +10,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1ConnectorServiceListRequest = {
-  appId: string | null;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  appId: string;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
 };
 
 export type C1ApiAppV1ConnectorServiceListResponse = {
@@ -38,9 +38,9 @@ export type C1ApiAppV1ConnectorServiceListResponse = {
 
 /** @internal */
 export type C1ApiAppV1ConnectorServiceListRequest$Outbound = {
-  app_id: string | null;
-  page_size?: number | null | undefined;
-  page_token?: string | null | undefined;
+  app_id: string;
+  page_size?: number | undefined;
+  page_token?: string | undefined;
 };
 
 /** @internal */
@@ -49,9 +49,9 @@ export const C1ApiAppV1ConnectorServiceListRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiAppV1ConnectorServiceListRequest
 > = z.object({
-  appId: z.nullable(z.string()),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
+  appId: z.string(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     appId: "app_id",

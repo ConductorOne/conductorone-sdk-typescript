@@ -45,12 +45,6 @@ import {
  */
 export type FieldRelationship = {
   atLeastOne?: AtLeastOne | null | undefined;
-  /**
-   * DependentOn means the fields in field_names are only valid if all fields
-   *
-   * @remarks
-   *  in dependency_field_names are also present
-   */
   dependentOn?: DependentOn | null | undefined;
   /**
    * The names of the fields that share this relationship

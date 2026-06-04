@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiWebhooksV1WebhooksServiceGetRequest = {
-  id: string | null;
+  id: string;
 };
 
 export type C1ApiWebhooksV1WebhooksServiceGetResponse = {
@@ -34,7 +34,7 @@ export type C1ApiWebhooksV1WebhooksServiceGetResponse = {
 
 /** @internal */
 export type C1ApiWebhooksV1WebhooksServiceGetRequest$Outbound = {
-  id: string | null;
+  id: string;
 };
 
 /** @internal */
@@ -43,7 +43,7 @@ export const C1ApiWebhooksV1WebhooksServiceGetRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiWebhooksV1WebhooksServiceGetRequest
 > = z.object({
-  id: z.nullable(z.string()),
+  id: z.string(),
 });
 
 export function c1ApiWebhooksV1WebhooksServiceGetRequestToJSON(

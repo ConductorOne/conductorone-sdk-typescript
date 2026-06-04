@@ -11,12 +11,12 @@ export type FunctionsServiceTestRequest = {
   /**
    * The commit ID to test. If empty, the published commit is used.
    */
-  commitId?: string | undefined;
+  commitId?: string | null | undefined;
 };
 
 /** @internal */
 export type FunctionsServiceTestRequest$Outbound = {
-  commitId?: string | undefined;
+  commitId?: string | null | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const FunctionsServiceTestRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FunctionsServiceTestRequest
 > = z.object({
-  commitId: z.string().optional(),
+  commitId: z.nullable(z.string()).optional(),
 });
 
 export function functionsServiceTestRequestToJSON(

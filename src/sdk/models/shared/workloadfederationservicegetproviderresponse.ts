@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,10 +15,7 @@ import {
  * The WorkloadFederationServiceGetProviderResponse message.
  */
 export type WorkloadFederationServiceGetProviderResponse = {
-  /**
-   * WorkloadFederationProvider represents a tenant-level OIDC issuer registration.
-   */
-  workloadFederationProvider?: WorkloadFederationProvider | undefined;
+  provider?: WorkloadFederationProvider | null | undefined;
 };
 
 /** @internal */
@@ -29,11 +25,7 @@ export const WorkloadFederationServiceGetProviderResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    provider: WorkloadFederationProvider$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "provider": "workloadFederationProvider",
-    });
+    provider: z.nullable(WorkloadFederationProvider$inboundSchema).optional(),
   });
 
 export function workloadFederationServiceGetProviderResponseFromJSON(

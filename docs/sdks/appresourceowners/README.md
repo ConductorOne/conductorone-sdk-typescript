@@ -196,7 +196,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 
 async function run() {
   const result = await conductoroneSDKTypescript.appResourceOwners.remove({
-    appId: null,
+    appId: "<id>",
     resourceTypeId: "<id>",
     resourceId: "<id>",
   });
@@ -226,7 +226,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 
 async function run() {
   const res = await appResourceOwnersRemove(conductoroneSDKTypescript, {
-    appId: null,
+    appId: "<id>",
     resourceTypeId: "<id>",
     resourceId: "<id>",
   });
@@ -445,7 +445,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 
 async function run() {
   const result = await conductoroneSDKTypescript.appResourceOwners.set({
-    appId: null,
+    appId: "<id>",
     resourceTypeId: "<id>",
     resourceId: "<id>",
   });
@@ -475,7 +475,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 
 async function run() {
   const res = await appResourceOwnersSet(conductoroneSDKTypescript, {
-    appId: null,
+    appId: "<id>",
     resourceTypeId: "<id>",
     resourceId: "<id>",
   });

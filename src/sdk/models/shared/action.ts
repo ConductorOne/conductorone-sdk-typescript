@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -37,27 +36,9 @@ import {
  *   - clientIdApproval
  */
 export type Action = {
-  /**
-   * ActionTargetAutomation targets automation templates for policy actions.
-   */
-  actionTargetAutomation?: ActionTargetAutomation | null | undefined;
-  /**
-   * ActionTargetResource targets resource actions for policy actions.
-   */
-  actionTargetBatonResourceAction?:
-    | ActionTargetBatonResourceAction
-    | null
-    | undefined;
-  /**
-   * ActionTargetClientIdApproval targets administrator review of an external
-   *
-   * @remarks
-   *  OAuth client registration (CIMD or DCR) for policy actions.
-   */
-  actionTargetClientIdApproval?:
-    | ActionTargetClientIdApproval
-    | null
-    | undefined;
+  automation?: ActionTargetAutomation | null | undefined;
+  batonResourceAction?: ActionTargetBatonResourceAction | null | undefined;
+  clientIdApproval?: ActionTargetClientIdApproval | null | undefined;
 };
 
 /** @internal */
@@ -69,12 +50,6 @@ export const Action$inboundSchema: z.ZodType<Action, z.ZodTypeDef, unknown> = z
     ).optional(),
     clientIdApproval: z.nullable(ActionTargetClientIdApproval$inboundSchema)
       .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "automation": "actionTargetAutomation",
-      "batonResourceAction": "actionTargetBatonResourceAction",
-      "clientIdApproval": "actionTargetClientIdApproval",
-    });
   });
 /** @internal */
 export type Action$Outbound = {
@@ -92,20 +67,12 @@ export const Action$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Action
 > = z.object({
-  actionTargetAutomation: z.nullable(ActionTargetAutomation$outboundSchema)
-    .optional(),
-  actionTargetBatonResourceAction: z.nullable(
+  automation: z.nullable(ActionTargetAutomation$outboundSchema).optional(),
+  batonResourceAction: z.nullable(
     ActionTargetBatonResourceAction$outboundSchema,
   ).optional(),
-  actionTargetClientIdApproval: z.nullable(
-    ActionTargetClientIdApproval$outboundSchema,
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    actionTargetAutomation: "automation",
-    actionTargetBatonResourceAction: "batonResourceAction",
-    actionTargetClientIdApproval: "clientIdApproval",
-  });
+  clientIdApproval: z.nullable(ActionTargetClientIdApproval$outboundSchema)
+    .optional(),
 });
 
 export function actionToJSON(action: Action): string {

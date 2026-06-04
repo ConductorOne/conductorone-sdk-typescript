@@ -25,7 +25,7 @@ export type SetAppOwnersRequestV2 = {
   /**
    * The roleSlug field.
    */
-  roleSlug?: string | undefined;
+  roleSlug?: string | null | undefined;
   /**
    * The userRefs field.
    */
@@ -35,7 +35,7 @@ export type SetAppOwnersRequestV2 = {
 /** @internal */
 export type SetAppOwnersRequestV2$Outbound = {
   appEntitlementRefs?: Array<AppEntitlementRef$Outbound> | null | undefined;
-  roleSlug?: string | undefined;
+  roleSlug?: string | null | undefined;
   userRefs?: Array<UserRef$Outbound> | null | undefined;
 };
 
@@ -47,7 +47,7 @@ export const SetAppOwnersRequestV2$outboundSchema: z.ZodType<
 > = z.object({
   appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
     .optional(),
-  roleSlug: z.string().optional(),
+  roleSlug: z.nullable(z.string()).optional(),
   userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
 });
 

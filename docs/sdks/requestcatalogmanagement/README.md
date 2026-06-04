@@ -512,7 +512,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 
 async function run() {
   const result = await conductoroneSDKTypescript.requestCatalogManagement.addAppEntitlements({
-    catalogId: null,
+    catalogId: "<id>",
   });
 
   console.log(result);
@@ -540,7 +540,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 
 async function run() {
   const res = await requestCatalogManagementAddAppEntitlements(conductoroneSDKTypescript, {
-    catalogId: null,
+    catalogId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1235,7 +1235,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 
 async function run() {
   const result = await conductoroneSDKTypescript.requestCatalogManagement.update({
-    id: null,
+    id: "<id>",
   });
 
   console.log(result);
@@ -1263,7 +1263,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 
 async function run() {
   const res = await requestCatalogManagementUpdate(conductoroneSDKTypescript, {
-    id: null,
+    id: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;

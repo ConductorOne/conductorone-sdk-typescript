@@ -8,9 +8,7 @@ The RequestCatalogManagementServiceUpdateAppEntitlementsRequest object is used t
 import { RequestCatalogManagementServiceUpdateAppEntitlementsRequest } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: RequestCatalogManagementServiceUpdateAppEntitlementsRequest = {
-  appEntitlements: [
-    {},
-  ],
+  appEntitlements: [],
 };
 ```
 

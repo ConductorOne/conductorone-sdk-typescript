@@ -29,7 +29,7 @@ export type SendEmail = {
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  email?: string | undefined;
+  email?: string | null | undefined;
   /**
    * CEL expression resolving to one or more email addresses (string or list<string>).
    *
@@ -39,7 +39,7 @@ export type SendEmail = {
    *  Supports list<string> for multiple recipients: '["a@x.com", "b@x.com"]'.
    *  Requires the tenant to have a TenantEmailProvider configured.
    */
-  emailCel?: string | undefined;
+  emailCel?: string | null | undefined;
   /**
    * The subject field.
    */
@@ -69,8 +69,8 @@ export const SendEmail$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   body: z.nullable(z.string()).optional(),
-  email: z.string().optional(),
-  emailCel: z.string().optional(),
+  email: z.nullable(z.string()).optional(),
+  emailCel: z.nullable(z.string()).optional(),
   subject: z.nullable(z.string()).optional(),
   title: z.nullable(z.string()).optional(),
   useSubjectUser: z.nullable(z.boolean()).optional(),
@@ -80,8 +80,8 @@ export const SendEmail$inboundSchema: z.ZodType<
 /** @internal */
 export type SendEmail$Outbound = {
   body?: string | null | undefined;
-  email?: string | undefined;
-  emailCel?: string | undefined;
+  email?: string | null | undefined;
+  emailCel?: string | null | undefined;
   subject?: string | null | undefined;
   title?: string | null | undefined;
   useSubjectUser?: boolean | null | undefined;
@@ -96,8 +96,8 @@ export const SendEmail$outboundSchema: z.ZodType<
   SendEmail
 > = z.object({
   body: z.nullable(z.string()).optional(),
-  email: z.string().optional(),
-  emailCel: z.string().optional(),
+  email: z.nullable(z.string()).optional(),
+  emailCel: z.nullable(z.string()).optional(),
   subject: z.nullable(z.string()).optional(),
   title: z.nullable(z.string()).optional(),
   useSubjectUser: z.nullable(z.boolean()).optional(),

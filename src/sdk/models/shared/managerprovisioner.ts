@@ -14,7 +14,7 @@ export type ManagerProvisioner = {
   /**
    * Whether the provisioner can reassign the task.
    */
-  allowReassignment?: boolean | undefined;
+  allowReassignment?: boolean | null | undefined;
   /**
    * Fallback user IDs if no manager is found.
    */
@@ -27,12 +27,12 @@ export const ManagerProvisioner$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  allowReassignment: z.boolean().optional(),
+  allowReassignment: z.nullable(z.boolean()).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
 export type ManagerProvisioner$Outbound = {
-  allowReassignment?: boolean | undefined;
+  allowReassignment?: boolean | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
 };
 
@@ -42,7 +42,7 @@ export const ManagerProvisioner$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ManagerProvisioner
 > = z.object({
-  allowReassignment: z.boolean().optional(),
+  allowReassignment: z.nullable(z.boolean()).optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
 });
 

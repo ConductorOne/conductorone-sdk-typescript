@@ -21,7 +21,7 @@ export type TaskActionsServiceApproveWithStepUpRequest = {
   /**
    * The ID of the policy step on the given task to approve.
    */
-  policyStepId: string;
+  policyStepId: string | null;
   /**
    * The step-up transaction ID that was verified.
    *
@@ -29,15 +29,15 @@ export type TaskActionsServiceApproveWithStepUpRequest = {
    *  If unset, the response will include a redirect URL to
    *  complete the step-up authentication.
    */
-  stepUpTransactionId: string;
+  stepUpTransactionId: string | null;
 };
 
 /** @internal */
 export type TaskActionsServiceApproveWithStepUpRequest$Outbound = {
   comment?: string | null | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
-  policyStepId: string;
-  stepUpTransactionId: string;
+  policyStepId: string | null;
+  stepUpTransactionId: string | null;
 };
 
 /** @internal */
@@ -49,8 +49,8 @@ export const TaskActionsServiceApproveWithStepUpRequest$outboundSchema:
   > = z.object({
     comment: z.nullable(z.string()).optional(),
     expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-    policyStepId: z.string(),
-    stepUpTransactionId: z.string(),
+    policyStepId: z.nullable(z.string()),
+    stepUpTransactionId: z.nullable(z.string()),
   });
 
 export function taskActionsServiceApproveWithStepUpRequestToJSON(

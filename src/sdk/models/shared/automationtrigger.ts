@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -107,13 +106,7 @@ export type AutomationTrigger = {
   grantFound?: GrantFoundTrigger | null | undefined;
   schedule?: ScheduleTrigger | null | undefined;
   scheduleAppUser?: ScheduleTriggerAppUser | null | undefined;
-  /**
-   * ScheduleTriggerNoUser fires on a cron schedule with no subject user (e.g. reports, syncs, orchestration).
-   *
-   * @remarks
-   *  Minimum cron interval is enforced at 1 hour in validation.
-   */
-  scheduleTriggerNoUser?: ScheduleTriggerNoUser | null | undefined;
+  scheduleNoUser?: ScheduleTriggerNoUser | null | undefined;
   usageBasedRevocation?: UsageBasedRevocationTrigger | null | undefined;
   userCreated?: UserCreatedTrigger | null | undefined;
   userProfileChange?: UserProfileChangeTrigger | null | undefined;
@@ -140,10 +133,6 @@ export const AutomationTrigger$inboundSchema: z.ZodType<
   userProfileChange: z.nullable(UserProfileChangeTrigger$inboundSchema)
     .optional(),
   webhook: z.nullable(WebhookAutomationTrigger$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "scheduleNoUser": "scheduleTriggerNoUser",
-  });
 });
 /** @internal */
 export type AutomationTrigger$Outbound = {
@@ -177,18 +166,13 @@ export const AutomationTrigger$outboundSchema: z.ZodType<
   grantFound: z.nullable(GrantFoundTrigger$outboundSchema).optional(),
   schedule: z.nullable(ScheduleTrigger$outboundSchema).optional(),
   scheduleAppUser: z.nullable(ScheduleTriggerAppUser$outboundSchema).optional(),
-  scheduleTriggerNoUser: z.nullable(ScheduleTriggerNoUser$outboundSchema)
-    .optional(),
+  scheduleNoUser: z.nullable(ScheduleTriggerNoUser$outboundSchema).optional(),
   usageBasedRevocation: z.nullable(UsageBasedRevocationTrigger$outboundSchema)
     .optional(),
   userCreated: z.nullable(UserCreatedTrigger$outboundSchema).optional(),
   userProfileChange: z.nullable(UserProfileChangeTrigger$outboundSchema)
     .optional(),
   webhook: z.nullable(WebhookAutomationTrigger$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    scheduleTriggerNoUser: "scheduleNoUser",
-  });
 });
 
 export function automationTriggerToJSON(

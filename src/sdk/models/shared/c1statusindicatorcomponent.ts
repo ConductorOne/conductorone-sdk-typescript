@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -14,50 +13,10 @@ import { DynamicString, DynamicString$inboundSchema } from "./dynamicstring.js";
  * C1StatusIndicatorComponent shows agent progress status.
  */
 export type C1StatusIndicatorComponent = {
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString?: DynamicString | undefined;
-  /**
-   * DynamicBool can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicBool?: DynamicBool | undefined;
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString1?: DynamicString | undefined;
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString2?: DynamicString | undefined;
+  message?: DynamicString | null | undefined;
+  showSpinner?: DynamicBool | null | undefined;
+  status?: DynamicString | null | undefined;
+  toolName?: DynamicString | null | undefined;
 };
 
 /** @internal */
@@ -66,17 +25,10 @@ export const C1StatusIndicatorComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  message: DynamicString$inboundSchema.optional(),
-  showSpinner: DynamicBool$inboundSchema.optional(),
-  status: DynamicString$inboundSchema.optional(),
-  toolName: DynamicString$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "message": "dynamicString",
-    "showSpinner": "dynamicBool",
-    "status": "dynamicString1",
-    "toolName": "dynamicString2",
-  });
+  message: z.nullable(DynamicString$inboundSchema).optional(),
+  showSpinner: z.nullable(DynamicBool$inboundSchema).optional(),
+  status: z.nullable(DynamicString$inboundSchema).optional(),
+  toolName: z.nullable(DynamicString$inboundSchema).optional(),
 });
 
 export function c1StatusIndicatorComponentFromJSON(

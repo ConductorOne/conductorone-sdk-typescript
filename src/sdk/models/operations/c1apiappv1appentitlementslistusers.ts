@@ -10,10 +10,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppEntitlementsListUsersRequest = {
-  appId: string | null;
-  appEntitlementId: string | null;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  appId: string;
+  appEntitlementId: string;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
 };
 
 export type C1ApiAppV1AppEntitlementsListUsersResponse = {
@@ -39,10 +39,10 @@ export type C1ApiAppV1AppEntitlementsListUsersResponse = {
 
 /** @internal */
 export type C1ApiAppV1AppEntitlementsListUsersRequest$Outbound = {
-  app_id: string | null;
-  app_entitlement_id: string | null;
-  page_size?: number | null | undefined;
-  page_token?: string | null | undefined;
+  app_id: string;
+  app_entitlement_id: string;
+  page_size?: number | undefined;
+  page_token?: string | undefined;
 };
 
 /** @internal */
@@ -52,10 +52,10 @@ export const C1ApiAppV1AppEntitlementsListUsersRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementsListUsersRequest
   > = z.object({
-    appId: z.nullable(z.string()),
-    appEntitlementId: z.nullable(z.string()),
-    pageSize: z.nullable(z.number().int()).optional(),
-    pageToken: z.nullable(z.string()).optional(),
+    appId: z.string(),
+    appEntitlementId: z.string(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       appId: "app_id",

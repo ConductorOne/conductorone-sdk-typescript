@@ -18,7 +18,7 @@ export type C1OnboardingPlanCategory = {
   /**
    * The id field.
    */
-  id?: string | undefined;
+  id?: string | null | undefined;
   /**
    * The steps field.
    */
@@ -26,7 +26,7 @@ export type C1OnboardingPlanCategory = {
   /**
    * The title field.
    */
-  title?: string | undefined;
+  title?: string | null | undefined;
 };
 
 /** @internal */
@@ -35,9 +35,9 @@ export const C1OnboardingPlanCategory$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().optional(),
+  id: z.nullable(z.string()).optional(),
   steps: z.nullable(z.array(C1OnboardingPlanStep$inboundSchema)).optional(),
-  title: z.string().optional(),
+  title: z.nullable(z.string()).optional(),
 });
 
 export function c1OnboardingPlanCategoryFromJSON(

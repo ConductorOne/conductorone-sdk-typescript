@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -58,30 +57,12 @@ import {
  *   - entitlementOwners
  */
 export type ProvisionerAssignment = {
-  /**
-   * AppOwnerProvisioner resolves to app owners.
-   */
-  appOwnerProvisioner?: AppOwnerProvisioner | null | undefined;
-  /**
-   * EntitlementOwnerProvisioner resolves to entitlement owners.
-   */
-  entitlementOwnerProvisioner?: EntitlementOwnerProvisioner | null | undefined;
-  /**
-   * ExpressionProvisioner evaluates CEL expressions to determine provisioners.
-   */
-  expressionProvisioner?: ExpressionProvisioner | null | undefined;
-  /**
-   * GroupProvisioner resolves to members of a specific group.
-   */
-  groupProvisioner?: GroupProvisioner | null | undefined;
-  /**
-   * ManagerProvisioner resolves to the user's manager.
-   */
-  managerProvisioner?: ManagerProvisioner | null | undefined;
-  /**
-   * UserProvisioner assigns specific users as provisioners.
-   */
-  userProvisioner?: UserProvisioner | null | undefined;
+  appOwners?: AppOwnerProvisioner | null | undefined;
+  entitlementOwners?: EntitlementOwnerProvisioner | null | undefined;
+  expression?: ExpressionProvisioner | null | undefined;
+  group?: GroupProvisioner | null | undefined;
+  manager?: ManagerProvisioner | null | undefined;
+  users?: UserProvisioner | null | undefined;
 };
 
 /** @internal */
@@ -97,15 +78,6 @@ export const ProvisionerAssignment$inboundSchema: z.ZodType<
   group: z.nullable(GroupProvisioner$inboundSchema).optional(),
   manager: z.nullable(ManagerProvisioner$inboundSchema).optional(),
   users: z.nullable(UserProvisioner$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "appOwners": "appOwnerProvisioner",
-    "entitlementOwners": "entitlementOwnerProvisioner",
-    "expression": "expressionProvisioner",
-    "group": "groupProvisioner",
-    "manager": "managerProvisioner",
-    "users": "userProvisioner",
-  });
 });
 /** @internal */
 export type ProvisionerAssignment$Outbound = {
@@ -123,25 +95,13 @@ export const ProvisionerAssignment$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ProvisionerAssignment
 > = z.object({
-  appOwnerProvisioner: z.nullable(AppOwnerProvisioner$outboundSchema)
+  appOwners: z.nullable(AppOwnerProvisioner$outboundSchema).optional(),
+  entitlementOwners: z.nullable(EntitlementOwnerProvisioner$outboundSchema)
     .optional(),
-  entitlementOwnerProvisioner: z.nullable(
-    EntitlementOwnerProvisioner$outboundSchema,
-  ).optional(),
-  expressionProvisioner: z.nullable(ExpressionProvisioner$outboundSchema)
-    .optional(),
-  groupProvisioner: z.nullable(GroupProvisioner$outboundSchema).optional(),
-  managerProvisioner: z.nullable(ManagerProvisioner$outboundSchema).optional(),
-  userProvisioner: z.nullable(UserProvisioner$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    appOwnerProvisioner: "appOwners",
-    entitlementOwnerProvisioner: "entitlementOwners",
-    expressionProvisioner: "expression",
-    groupProvisioner: "group",
-    managerProvisioner: "manager",
-    userProvisioner: "users",
-  });
+  expression: z.nullable(ExpressionProvisioner$outboundSchema).optional(),
+  group: z.nullable(GroupProvisioner$outboundSchema).optional(),
+  manager: z.nullable(ManagerProvisioner$outboundSchema).optional(),
+  users: z.nullable(UserProvisioner$outboundSchema).optional(),
 });
 
 export function provisionerAssignmentToJSON(

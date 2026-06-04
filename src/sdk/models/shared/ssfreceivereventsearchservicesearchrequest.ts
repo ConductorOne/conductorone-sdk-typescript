@@ -31,31 +31,31 @@ export type SSFReceiverEventSearchServiceSearchRequest = {
   /**
    * Restricts results to events matching this wire event type URI. Optional.
    */
-  eventType?: string | undefined;
+  eventType?: string | null | undefined;
   /**
    * Restricts results to events matched to this ConductorOne user ID. Optional.
    */
-  matchedUserId?: string | undefined;
+  matchedUserId?: string | null | undefined;
   /**
    * Restricts results to events with this processing outcome. Optional.
    */
-  outcome?: Outcome | undefined;
+  outcome?: Outcome | null | undefined;
   /**
    * Maximum number of events to return per page.
    */
-  pageSize?: number | undefined;
+  pageSize?: number | null | undefined;
   /**
    * Token from a previous SearchResponse to fetch the next page of results.
    */
-  pageToken?: string | undefined;
+  pageToken?: string | null | undefined;
   /**
    * Full-text search query matched against event fields.
    */
-  query?: string | undefined;
+  query?: string | null | undefined;
   /**
    * Restricts results to events from this SSF receiver stream. Optional.
    */
-  streamId?: string | undefined;
+  streamId?: string | null | undefined;
 };
 
 /** @internal */
@@ -64,13 +64,13 @@ export const Outcome$outboundSchema: z.ZodType<string, z.ZodTypeDef, Outcome> =
 
 /** @internal */
 export type SSFReceiverEventSearchServiceSearchRequest$Outbound = {
-  eventType?: string | undefined;
-  matchedUserId?: string | undefined;
-  outcome?: string | undefined;
-  pageSize?: number | undefined;
-  pageToken?: string | undefined;
-  query?: string | undefined;
-  streamId?: string | undefined;
+  eventType?: string | null | undefined;
+  matchedUserId?: string | null | undefined;
+  outcome?: string | null | undefined;
+  pageSize?: number | null | undefined;
+  pageToken?: string | null | undefined;
+  query?: string | null | undefined;
+  streamId?: string | null | undefined;
 };
 
 /** @internal */
@@ -80,13 +80,13 @@ export const SSFReceiverEventSearchServiceSearchRequest$outboundSchema:
     z.ZodTypeDef,
     SSFReceiverEventSearchServiceSearchRequest
   > = z.object({
-    eventType: z.string().optional(),
-    matchedUserId: z.string().optional(),
-    outcome: Outcome$outboundSchema.optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    query: z.string().optional(),
-    streamId: z.string().optional(),
+    eventType: z.nullable(z.string()).optional(),
+    matchedUserId: z.nullable(z.string()).optional(),
+    outcome: z.nullable(Outcome$outboundSchema).optional(),
+    pageSize: z.nullable(z.number().int()).optional(),
+    pageToken: z.nullable(z.string()).optional(),
+    query: z.nullable(z.string()).optional(),
+    streamId: z.nullable(z.string()).optional(),
   });
 
 export function ssfReceiverEventSearchServiceSearchRequestToJSON(

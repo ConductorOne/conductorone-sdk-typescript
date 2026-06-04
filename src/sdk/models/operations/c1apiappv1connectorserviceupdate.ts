@@ -10,8 +10,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1ConnectorServiceUpdateRequest = {
-  appId: string | null;
-  id: string | null;
+  appId: string;
+  id: string;
   connectorServiceUpdateRequest?:
     | shared.ConnectorServiceUpdateRequest
     | undefined;
@@ -40,8 +40,8 @@ export type C1ApiAppV1ConnectorServiceUpdateResponse = {
 
 /** @internal */
 export type C1ApiAppV1ConnectorServiceUpdateRequest$Outbound = {
-  app_id: string | null;
-  id: string | null;
+  app_id: string;
+  id: string;
   ConnectorServiceUpdateRequest?:
     | shared.ConnectorServiceUpdateRequest$Outbound
     | undefined;
@@ -53,8 +53,8 @@ export const C1ApiAppV1ConnectorServiceUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiAppV1ConnectorServiceUpdateRequest
 > = z.object({
-  appId: z.nullable(z.string()),
-  id: z.nullable(z.string()),
+  appId: z.string(),
+  id: z.string(),
   connectorServiceUpdateRequest: shared
     .ConnectorServiceUpdateRequest$outboundSchema.optional(),
 }).transform((v) => {

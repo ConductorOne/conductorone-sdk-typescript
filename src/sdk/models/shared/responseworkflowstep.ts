@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * The ResponseWorkflowStep message.
  */
 export type ResponseWorkflowStep = {
-  context?: { [k: string]: any } | null | undefined;
+  context?: { [k: string]: any } | undefined;
   /**
    * version contains the constant value "v1". Future versions of the Webhook Response
    *
@@ -27,12 +27,12 @@ export const ResponseWorkflowStep$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  context: z.nullable(z.record(z.any())).optional(),
+  context: z.record(z.any()).optional(),
   version: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type ResponseWorkflowStep$Outbound = {
-  context?: { [k: string]: any } | null | undefined;
+  context?: { [k: string]: any } | undefined;
   version?: string | null | undefined;
 };
 
@@ -42,7 +42,7 @@ export const ResponseWorkflowStep$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseWorkflowStep
 > = z.object({
-  context: z.nullable(z.record(z.any())).optional(),
+  context: z.record(z.any()).optional(),
   version: z.nullable(z.string()).optional(),
 });
 

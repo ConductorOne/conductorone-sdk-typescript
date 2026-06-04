@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,10 +15,7 @@ import {
  * The LocalUserInvitationServiceGetResponse message.
  */
 export type LocalUserInvitationServiceGetResponse = {
-  /**
-   * LocalUserInvitation is the public representation of a per-directory user invitation.
-   */
-  localUserInvitation?: LocalUserInvitation | undefined;
+  invitation?: LocalUserInvitation | null | undefined;
 };
 
 /** @internal */
@@ -28,11 +24,7 @@ export const LocalUserInvitationServiceGetResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  invitation: LocalUserInvitation$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "invitation": "localUserInvitation",
-  });
+  invitation: z.nullable(LocalUserInvitation$inboundSchema).optional(),
 });
 
 export function localUserInvitationServiceGetResponseFromJSON(

@@ -39,10 +39,7 @@ export type GetAutomationExecutionResponse = {
    * Related objects requested via the expand mask.
    */
   expanded?: Array<GetAutomationExecutionResponseExpanded> | null | undefined;
-  /**
-   * The AutomationExecutionView message.
-   */
-  automationExecutionView?: AutomationExecutionView | undefined;
+  view?: AutomationExecutionView | null | undefined;
 };
 
 /** @internal */
@@ -83,11 +80,7 @@ export const GetAutomationExecutionResponse$inboundSchema: z.ZodType<
   expanded: z.nullable(
     z.array(z.lazy(() => GetAutomationExecutionResponseExpanded$inboundSchema)),
   ).optional(),
-  view: AutomationExecutionView$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "view": "automationExecutionView",
-  });
+  view: z.nullable(AutomationExecutionView$inboundSchema).optional(),
 });
 
 export function getAutomationExecutionResponseFromJSON(

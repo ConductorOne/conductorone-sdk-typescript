@@ -14,12 +14,12 @@ export type PaperSecretServiceGetContentRequest = {
    * @remarks
    *  Server re-encrypts the content to this recipient
    */
-  readerRecipient?: string | undefined;
+  readerRecipient?: string | null | undefined;
 };
 
 /** @internal */
 export type PaperSecretServiceGetContentRequest$Outbound = {
-  readerRecipient?: string | undefined;
+  readerRecipient?: string | null | undefined;
 };
 
 /** @internal */
@@ -28,7 +28,7 @@ export const PaperSecretServiceGetContentRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PaperSecretServiceGetContentRequest
 > = z.object({
-  readerRecipient: z.string().optional(),
+  readerRecipient: z.nullable(z.string()).optional(),
 });
 
 export function paperSecretServiceGetContentRequestToJSON(

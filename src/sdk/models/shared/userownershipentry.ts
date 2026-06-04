@@ -35,35 +35,35 @@ export type UserOwnershipEntry = {
   /**
    * The app display name.
    */
-  appDisplayName?: string | undefined;
+  appDisplayName?: string | null | undefined;
   /**
    * The app ID.
    */
-  appId?: string | undefined;
+  appId?: string | null | undefined;
   /**
    * The entitlement display name, if applicable.
    */
-  entitlementDisplayName?: string | undefined;
+  entitlementDisplayName?: string | null | undefined;
   /**
    * The entitlement ID, if applicable.
    */
-  entitlementId?: string | undefined;
+  entitlementId?: string | null | undefined;
   /**
    * The type of ownership.
    */
-  ownershipType?: OwnershipType | undefined;
+  ownershipType?: OwnershipType | null | undefined;
   /**
    * The resource display name, if applicable.
    */
-  resourceDisplayName?: string | undefined;
+  resourceDisplayName?: string | null | undefined;
   /**
    * The resource ID, if applicable.
    */
-  resourceId?: string | undefined;
+  resourceId?: string | null | undefined;
   /**
    * The resource type ID, if applicable.
    */
-  resourceTypeId?: string | undefined;
+  resourceTypeId?: string | null | undefined;
 };
 
 /** @internal */
@@ -79,14 +79,14 @@ export const UserOwnershipEntry$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appDisplayName: z.string().optional(),
-  appId: z.string().optional(),
-  entitlementDisplayName: z.string().optional(),
-  entitlementId: z.string().optional(),
-  ownershipType: OwnershipType$inboundSchema.optional(),
-  resourceDisplayName: z.string().optional(),
-  resourceId: z.string().optional(),
-  resourceTypeId: z.string().optional(),
+  appDisplayName: z.nullable(z.string()).optional(),
+  appId: z.nullable(z.string()).optional(),
+  entitlementDisplayName: z.nullable(z.string()).optional(),
+  entitlementId: z.nullable(z.string()).optional(),
+  ownershipType: z.nullable(OwnershipType$inboundSchema).optional(),
+  resourceDisplayName: z.nullable(z.string()).optional(),
+  resourceId: z.nullable(z.string()).optional(),
+  resourceTypeId: z.nullable(z.string()).optional(),
 });
 
 export function userOwnershipEntryFromJSON(

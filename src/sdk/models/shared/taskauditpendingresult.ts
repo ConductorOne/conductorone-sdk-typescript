@@ -20,7 +20,7 @@ export type TaskAuditPendingResult = {
    *  membership can be granted."). Naming mirrors TaskAuditErrorResult.error_reason
    *  and TaskAuditCancelledResult.cancel_reason for consistency.
    */
-  pendingReason?: string | undefined;
+  pendingReason?: string | null | undefined;
 };
 
 /** @internal */
@@ -29,7 +29,7 @@ export const TaskAuditPendingResult$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  pendingReason: z.string().optional(),
+  pendingReason: z.nullable(z.string()).optional(),
 });
 
 export function taskAuditPendingResultFromJSON(

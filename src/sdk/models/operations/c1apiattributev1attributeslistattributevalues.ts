@@ -10,9 +10,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAttributeV1AttributesListAttributeValuesRequest = {
-  attributeTypeId: string | null;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  attributeTypeId: string;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
 };
 
 export type C1ApiAttributeV1AttributesListAttributeValuesResponse = {
@@ -36,9 +36,9 @@ export type C1ApiAttributeV1AttributesListAttributeValuesResponse = {
 
 /** @internal */
 export type C1ApiAttributeV1AttributesListAttributeValuesRequest$Outbound = {
-  attribute_type_id: string | null;
-  page_size?: number | null | undefined;
-  page_token?: string | null | undefined;
+  attribute_type_id: string;
+  page_size?: number | undefined;
+  page_token?: string | undefined;
 };
 
 /** @internal */
@@ -48,9 +48,9 @@ export const C1ApiAttributeV1AttributesListAttributeValuesRequest$outboundSchema
     z.ZodTypeDef,
     C1ApiAttributeV1AttributesListAttributeValuesRequest
   > = z.object({
-    attributeTypeId: z.nullable(z.string()),
-    pageSize: z.nullable(z.number().int()).optional(),
-    pageToken: z.nullable(z.string()).optional(),
+    attributeTypeId: z.string(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       attributeTypeId: "attribute_type_id",

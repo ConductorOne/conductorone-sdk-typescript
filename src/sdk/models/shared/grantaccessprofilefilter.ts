@@ -41,7 +41,7 @@ export type GrantAccessProfileFilter = {
   /**
    * The filterType field.
    */
-  filterType?: FilterType | undefined;
+  filterType?: FilterType | null | undefined;
   /**
    * Access profile IDs to INCLUDE in the campaign
    *
@@ -72,13 +72,13 @@ export const GrantAccessProfileFilter$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   excludedAccessProfileIds: z.nullable(z.array(z.string())).optional(),
-  filterType: FilterType$inboundSchema.optional(),
+  filterType: z.nullable(FilterType$inboundSchema).optional(),
   includedAccessProfileIds: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
 export type GrantAccessProfileFilter$Outbound = {
   excludedAccessProfileIds?: Array<string> | null | undefined;
-  filterType?: string | undefined;
+  filterType?: string | null | undefined;
   includedAccessProfileIds?: Array<string> | null | undefined;
 };
 
@@ -89,7 +89,7 @@ export const GrantAccessProfileFilter$outboundSchema: z.ZodType<
   GrantAccessProfileFilter
 > = z.object({
   excludedAccessProfileIds: z.nullable(z.array(z.string())).optional(),
-  filterType: FilterType$outboundSchema.optional(),
+  filterType: z.nullable(FilterType$outboundSchema).optional(),
   includedAccessProfileIds: z.nullable(z.array(z.string())).optional(),
 });
 

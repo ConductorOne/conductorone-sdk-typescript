@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiTaskV1TaskServiceGetRequest = {
-  id: string | null;
+  id: string;
 };
 
 export type C1ApiTaskV1TaskServiceGetResponse = {
@@ -34,7 +34,7 @@ export type C1ApiTaskV1TaskServiceGetResponse = {
 
 /** @internal */
 export type C1ApiTaskV1TaskServiceGetRequest$Outbound = {
-  id: string | null;
+  id: string;
 };
 
 /** @internal */
@@ -43,7 +43,7 @@ export const C1ApiTaskV1TaskServiceGetRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiTaskV1TaskServiceGetRequest
 > = z.object({
-  id: z.nullable(z.string()),
+  id: z.string(),
 });
 
 export function c1ApiTaskV1TaskServiceGetRequestToJSON(

@@ -14,17 +14,17 @@ export type WorkloadFederationServiceTestCELRequest = {
    * @remarks
    *  Parsed into map[string]any for CEL evaluation.
    */
-  claimsJson?: string | undefined;
+  claimsJson?: string | null | undefined;
   /**
    * The CEL expression to evaluate. Must return bool.
    */
-  expression?: string | undefined;
+  expression?: string | null | undefined;
 };
 
 /** @internal */
 export type WorkloadFederationServiceTestCELRequest$Outbound = {
-  claimsJson?: string | undefined;
-  expression?: string | undefined;
+  claimsJson?: string | null | undefined;
+  expression?: string | null | undefined;
 };
 
 /** @internal */
@@ -33,8 +33,8 @@ export const WorkloadFederationServiceTestCELRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WorkloadFederationServiceTestCELRequest
 > = z.object({
-  claimsJson: z.string().optional(),
-  expression: z.string().optional(),
+  claimsJson: z.nullable(z.string()).optional(),
+  expression: z.nullable(z.string()).optional(),
 });
 
 export function workloadFederationServiceTestCELRequestToJSON(

@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -90,61 +89,24 @@ export type ActionInstanceState = OpenEnum<typeof ActionInstanceState>;
  *   - cancelled
  */
 export type ActionInstance = {
-  /**
-   * The Action message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named target. Only a single field of the following list may be set at a time:
-   *   - automation
-   *   - batonResourceAction
-   *   - clientIdApproval
-   */
   action?: Action | null | undefined;
-  /**
-   * The ActionTargetAutomationInstance message.
-   */
-  actionTargetAutomationInstance?:
-    | ActionTargetAutomationInstance
-    | null
-    | undefined;
-  /**
-   * The ActionTargetBatonResourceActionInstance message.
-   */
-  actionTargetBatonResourceActionInstance?:
+  automation?: ActionTargetAutomationInstance | null | undefined;
+  batonResourceActionInstance?:
     | ActionTargetBatonResourceActionInstance
     | null
     | undefined;
-  /**
-   * The ActionOutcomeCancelled message.
-   */
-  actionOutcomeCancelled?: ActionOutcomeCancelled | null | undefined;
-  /**
-   * ActionTargetClientIdApprovalInstance carries the registration key of the
-   *
-   * @remarks
-   *  external OAuth client that is being reviewed.
-   */
-  actionTargetClientIdApprovalInstance?:
+  cancelled?: ActionOutcomeCancelled | null | undefined;
+  clientIdApprovalInstance?:
     | ActionTargetClientIdApprovalInstance
     | null
     | undefined;
-  /**
-   * The ActionOutcomeDenied message.
-   */
-  actionOutcomeDenied?: ActionOutcomeDenied | null | undefined;
-  /**
-   * The ActionOutcomeError message.
-   */
-  actionOutcomeError?: ActionOutcomeError | null | undefined;
+  denied?: ActionOutcomeDenied | null | undefined;
+  error?: ActionOutcomeError | null | undefined;
   /**
    * The current state of the action execution.
    */
-  state?: ActionInstanceState | undefined;
-  /**
-   * The ActionOutcomeSuccess message.
-   */
-  actionOutcomeSuccess?: ActionOutcomeSuccess | null | undefined;
+  state?: ActionInstanceState | null | undefined;
+  success?: ActionOutcomeSuccess | null | undefined;
 };
 
 /** @internal */
@@ -178,18 +140,8 @@ export const ActionInstance$inboundSchema: z.ZodType<
   ).optional(),
   denied: z.nullable(ActionOutcomeDenied$inboundSchema).optional(),
   error: z.nullable(ActionOutcomeError$inboundSchema).optional(),
-  state: ActionInstanceState$inboundSchema.optional(),
+  state: z.nullable(ActionInstanceState$inboundSchema).optional(),
   success: z.nullable(ActionOutcomeSuccess$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "automation": "actionTargetAutomationInstance",
-    "batonResourceActionInstance": "actionTargetBatonResourceActionInstance",
-    "cancelled": "actionOutcomeCancelled",
-    "clientIdApprovalInstance": "actionTargetClientIdApprovalInstance",
-    "denied": "actionOutcomeDenied",
-    "error": "actionOutcomeError",
-    "success": "actionOutcomeSuccess",
-  });
 });
 /** @internal */
 export type ActionInstance$Outbound = {
@@ -206,7 +158,7 @@ export type ActionInstance$Outbound = {
     | undefined;
   denied?: ActionOutcomeDenied$Outbound | null | undefined;
   error?: ActionOutcomeError$Outbound | null | undefined;
-  state?: string | undefined;
+  state?: string | null | undefined;
   success?: ActionOutcomeSuccess$Outbound | null | undefined;
 };
 
@@ -217,33 +169,19 @@ export const ActionInstance$outboundSchema: z.ZodType<
   ActionInstance
 > = z.object({
   action: z.nullable(Action$outboundSchema).optional(),
-  actionTargetAutomationInstance: z.nullable(
-    ActionTargetAutomationInstance$outboundSchema,
-  ).optional(),
-  actionTargetBatonResourceActionInstance: z.nullable(
+  automation: z.nullable(ActionTargetAutomationInstance$outboundSchema)
+    .optional(),
+  batonResourceActionInstance: z.nullable(
     ActionTargetBatonResourceActionInstance$outboundSchema,
   ).optional(),
-  actionOutcomeCancelled: z.nullable(ActionOutcomeCancelled$outboundSchema)
-    .optional(),
-  actionTargetClientIdApprovalInstance: z.nullable(
+  cancelled: z.nullable(ActionOutcomeCancelled$outboundSchema).optional(),
+  clientIdApprovalInstance: z.nullable(
     ActionTargetClientIdApprovalInstance$outboundSchema,
   ).optional(),
-  actionOutcomeDenied: z.nullable(ActionOutcomeDenied$outboundSchema)
-    .optional(),
-  actionOutcomeError: z.nullable(ActionOutcomeError$outboundSchema).optional(),
-  state: ActionInstanceState$outboundSchema.optional(),
-  actionOutcomeSuccess: z.nullable(ActionOutcomeSuccess$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    actionTargetAutomationInstance: "automation",
-    actionTargetBatonResourceActionInstance: "batonResourceActionInstance",
-    actionOutcomeCancelled: "cancelled",
-    actionTargetClientIdApprovalInstance: "clientIdApprovalInstance",
-    actionOutcomeDenied: "denied",
-    actionOutcomeError: "error",
-    actionOutcomeSuccess: "success",
-  });
+  denied: z.nullable(ActionOutcomeDenied$outboundSchema).optional(),
+  error: z.nullable(ActionOutcomeError$outboundSchema).optional(),
+  state: z.nullable(ActionInstanceState$outboundSchema).optional(),
+  success: z.nullable(ActionOutcomeSuccess$outboundSchema).optional(),
 });
 
 export function actionInstanceToJSON(actionInstance: ActionInstance): string {

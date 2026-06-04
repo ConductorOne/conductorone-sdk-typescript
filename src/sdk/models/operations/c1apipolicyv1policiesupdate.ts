@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiPolicyV1PoliciesUpdateRequest = {
-  id: string | null;
+  id: string;
   updatePolicyRequest?: shared.UpdatePolicyRequest | undefined;
 };
 
@@ -35,7 +35,7 @@ export type C1ApiPolicyV1PoliciesUpdateResponse = {
 
 /** @internal */
 export type C1ApiPolicyV1PoliciesUpdateRequest$Outbound = {
-  id: string | null;
+  id: string;
   UpdatePolicyRequest?: shared.UpdatePolicyRequest$Outbound | undefined;
 };
 
@@ -45,7 +45,7 @@ export const C1ApiPolicyV1PoliciesUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiPolicyV1PoliciesUpdateRequest
 > = z.object({
-  id: z.nullable(z.string()),
+  id: z.string(),
   updatePolicyRequest: shared.UpdatePolicyRequest$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

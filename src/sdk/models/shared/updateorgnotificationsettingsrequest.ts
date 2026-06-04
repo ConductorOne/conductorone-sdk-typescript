@@ -13,15 +13,12 @@ import {
  * The UpdateOrgNotificationSettingsRequest message.
  */
 export type UpdateOrgNotificationSettingsRequest = {
-  /**
-   * ChannelSettings groups notification preferences for all supported channels.
-   */
-  channelSettings?: ChannelSettings | undefined;
+  channelSettings?: ChannelSettings | null | undefined;
 };
 
 /** @internal */
 export type UpdateOrgNotificationSettingsRequest$Outbound = {
-  channelSettings?: ChannelSettings$Outbound | undefined;
+  channelSettings?: ChannelSettings$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -30,7 +27,7 @@ export const UpdateOrgNotificationSettingsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateOrgNotificationSettingsRequest
 > = z.object({
-  channelSettings: ChannelSettings$outboundSchema.optional(),
+  channelSettings: z.nullable(ChannelSettings$outboundSchema).optional(),
 });
 
 export function updateOrgNotificationSettingsRequestToJSON(

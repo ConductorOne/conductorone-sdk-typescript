@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,18 +15,8 @@ export type TextComponent = {
   /**
    * The markdown field.
    */
-  markdown?: boolean | undefined;
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString?: DynamicString | undefined;
+  markdown?: boolean | null | undefined;
+  text?: DynamicString | null | undefined;
 };
 
 /** @internal */
@@ -36,12 +25,8 @@ export const TextComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  markdown: z.boolean().optional(),
-  text: DynamicString$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "text": "dynamicString",
-  });
+  markdown: z.nullable(z.boolean()).optional(),
+  text: z.nullable(DynamicString$inboundSchema).optional(),
 });
 
 export function textComponentFromJSON(

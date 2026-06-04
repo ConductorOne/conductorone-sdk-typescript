@@ -15,16 +15,13 @@ export type AppOwnerUser = {
   /**
    * The appId field.
    */
-  appId?: string | undefined;
-  createdAt?: Date | undefined;
+  appId?: string | null | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * The roleSlug field.
    */
-  roleSlug?: string | undefined;
-  /**
-   * The User object provides all of the details for an user, as well as some configuration.
-   */
-  user?: User | undefined;
+  roleSlug?: string | null | undefined;
+  user?: User | null | undefined;
 };
 
 /** @internal */
@@ -33,11 +30,12 @@ export const AppOwnerUser$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.string().optional(),
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  roleSlug: z.string().optional(),
-  user: User$inboundSchema.optional(),
+  appId: z.nullable(z.string()).optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  roleSlug: z.nullable(z.string()).optional(),
+  user: z.nullable(User$inboundSchema).optional(),
 });
 
 export function appOwnerUserFromJSON(

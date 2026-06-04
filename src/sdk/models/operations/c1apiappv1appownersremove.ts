@@ -10,8 +10,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppOwnersRemoveRequest = {
-  appId: string | null;
-  userId: string | null;
+  appId: string;
+  userId: string;
   removeAppOwnerRequest?: shared.RemoveAppOwnerRequest | undefined;
 };
 
@@ -36,8 +36,8 @@ export type C1ApiAppV1AppOwnersRemoveResponse = {
 
 /** @internal */
 export type C1ApiAppV1AppOwnersRemoveRequest$Outbound = {
-  app_id: string | null;
-  user_id: string | null;
+  app_id: string;
+  user_id: string;
   RemoveAppOwnerRequest?: shared.RemoveAppOwnerRequest$Outbound | undefined;
 };
 
@@ -47,8 +47,8 @@ export const C1ApiAppV1AppOwnersRemoveRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiAppV1AppOwnersRemoveRequest
 > = z.object({
-  appId: z.nullable(z.string()),
-  userId: z.nullable(z.string()),
+  appId: z.string(),
+  userId: z.string(),
   removeAppOwnerRequest: shared.RemoveAppOwnerRequest$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

@@ -22,14 +22,14 @@ export type GoogleWorkspaceProviderConfig = {
    * @remarks
    *  Typically a dedicated sender like noreply@customer.com.
    */
-  delegatedUser?: string | undefined;
+  delegatedUser?: string | null | undefined;
   /**
    * Service account JSON credentials. Write-only: accepted on create/update, never returned in Get.
    *
    * @remarks
    *  Empty on update means "keep existing credentials".
    */
-  serviceAccountJson?: string | undefined;
+  serviceAccountJson?: string | null | undefined;
 };
 
 /** @internal */
@@ -38,13 +38,13 @@ export const GoogleWorkspaceProviderConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  delegatedUser: z.string().optional(),
-  serviceAccountJson: z.string().optional(),
+  delegatedUser: z.nullable(z.string()).optional(),
+  serviceAccountJson: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type GoogleWorkspaceProviderConfig$Outbound = {
-  delegatedUser?: string | undefined;
-  serviceAccountJson?: string | undefined;
+  delegatedUser?: string | null | undefined;
+  serviceAccountJson?: string | null | undefined;
 };
 
 /** @internal */
@@ -53,8 +53,8 @@ export const GoogleWorkspaceProviderConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GoogleWorkspaceProviderConfig
 > = z.object({
-  delegatedUser: z.string().optional(),
-  serviceAccountJson: z.string().optional(),
+  delegatedUser: z.nullable(z.string()).optional(),
+  serviceAccountJson: z.nullable(z.string()).optional(),
 });
 
 export function googleWorkspaceProviderConfigToJSON(

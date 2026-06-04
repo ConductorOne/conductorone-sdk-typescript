@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -17,26 +16,13 @@ export type ColumnComponent = {
   /**
    * The alignment field.
    */
-  alignment?: string | undefined;
-  /**
-   * ChildList contains references to child component IDs.
-   */
-  childList?: ChildList | undefined;
+  alignment?: string | null | undefined;
+  children?: ChildList | null | undefined;
   /**
    * The distribution field.
    */
-  distribution?: string | undefined;
-  /**
-   * DynamicNumber can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicNumber?: DynamicNumber | undefined;
+  distribution?: string | null | undefined;
+  gap?: DynamicNumber | null | undefined;
 };
 
 /** @internal */
@@ -45,15 +31,10 @@ export const ColumnComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  alignment: z.string().optional(),
-  children: ChildList$inboundSchema.optional(),
-  distribution: z.string().optional(),
-  gap: DynamicNumber$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "children": "childList",
-    "gap": "dynamicNumber",
-  });
+  alignment: z.nullable(z.string()).optional(),
+  children: z.nullable(ChildList$inboundSchema).optional(),
+  distribution: z.nullable(z.string()).optional(),
+  gap: z.nullable(DynamicNumber$inboundSchema).optional(),
 });
 
 export function columnComponentFromJSON(

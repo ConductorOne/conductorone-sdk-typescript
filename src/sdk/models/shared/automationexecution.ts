@@ -29,6 +29,8 @@ export const AutomationExecutionState = {
   AutomationExecutionStateError: "AUTOMATION_EXECUTION_STATE_ERROR",
   AutomationExecutionStateTerminate: "AUTOMATION_EXECUTION_STATE_TERMINATE",
   AutomationExecutionStateWaiting: "AUTOMATION_EXECUTION_STATE_WAITING",
+  AutomationExecutionStatePausedByCircuitBreaker:
+    "AUTOMATION_EXECUTION_STATE_PAUSED_BY_CIRCUIT_BREAKER",
 } as const;
 /**
  * The state field.

@@ -53,6 +53,19 @@ export type AppEntitlement = {
    */
   alias?: string | null | undefined;
   /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  URL-safe ASCII; total serialized ≤ 4096 bytes. Keys matching ^c1/
+   *  are reserved.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * The ID of the app that is associated with the app entitlement.
    */
   appId?: string | null | undefined;
@@ -103,7 +116,7 @@ export type AppEntitlement = {
    * @remarks
    *  Populated from the connector's external ID during sync.
    */
-  externalId?: string | undefined;
+  externalId?: string | null | undefined;
   /**
    * The amount of grants open for this entitlement
    */
@@ -156,7 +169,7 @@ export type AppEntitlement = {
   /**
    * Map to tell us which connector the entitlement came from.
    */
-  sourceConnectorIds?: { [k: string]: string } | null | undefined;
+  sourceConnectorIds?: { [k: string]: string } | undefined;
   /**
    * This field indicates if this is a system builtin entitlement.
    */
@@ -180,6 +193,19 @@ export type AppEntitlementInput = {
    */
   alias?: string | null | undefined;
   /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  URL-safe ASCII; total serialized ≤ 4096 bytes. Keys matching ^c1/
+   *  are reserved.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * The ID of the app that is associated with the app entitlement.
    */
   appId?: string | null | undefined;
@@ -199,12 +225,10 @@ export type AppEntitlementInput = {
    * The IDs of different compliance frameworks associated with this app entitlement ex (SOX, HIPAA, PCI, etc.)
    */
   complianceFrameworkValueIds?: Array<string> | null | undefined;
-  createdAt?: Date | null | undefined;
   /**
    * Flag to indicate if app-level access request defaults have been applied to the entitlement
    */
   defaultValuesApplied?: boolean | null | undefined;
-  deletedAt?: Date | null | undefined;
   deprovisionerPolicy?: ProvisionPolicyInput | null | undefined;
   /**
    * The description of the app entitlement.
@@ -264,8 +288,7 @@ export type AppEntitlementInput = {
   /**
    * Map to tell us which connector the entitlement came from.
    */
-  sourceConnectorIds?: { [k: string]: string } | null | undefined;
-  updatedAt?: Date | null | undefined;
+  sourceConnectorIds?: { [k: string]: string } | undefined;
   userEditedMask?: string | null | undefined;
 };
 
@@ -318,6 +341,7 @@ export const AppEntitlement$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   alias: z.nullable(z.string()).optional(),
+  annotations: z.record(z.string()).optional(),
   appId: z.nullable(z.string()).optional(),
   appResourceId: z.nullable(z.string()).optional(),
   appResourceTypeId: z.nullable(z.string()).optional(),
@@ -339,7 +363,7 @@ export const AppEntitlement$inboundSchema: z.ZodType<
   ).optional(),
   emergencyGrantEnabled: z.nullable(z.boolean()).optional(),
   emergencyGrantPolicyId: z.nullable(z.string()).optional(),
-  externalId: z.string().optional(),
+  externalId: z.nullable(z.string()).optional(),
   grantCount: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
   grantPolicyId: z.nullable(z.string()).optional(),
   id: z.nullable(z.string()).optional(),
@@ -353,7 +377,7 @@ export const AppEntitlement$inboundSchema: z.ZodType<
   revokePolicyId: z.nullable(z.string()).optional(),
   riskLevelValueId: z.nullable(z.string()).optional(),
   slug: z.nullable(z.string()).optional(),
-  sourceConnectorIds: z.nullable(z.record(z.string())).optional(),
+  sourceConnectorIds: z.record(z.string()).optional(),
   systemBuiltin: z.nullable(z.boolean()).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -374,14 +398,13 @@ export function appEntitlementFromJSON(
 /** @internal */
 export type AppEntitlementInput$Outbound = {
   alias?: string | null | undefined;
+  annotations?: { [k: string]: string } | undefined;
   appId?: string | null | undefined;
   appResourceId?: string | null | undefined;
   appResourceTypeId?: string | null | undefined;
   certifyPolicyId?: string | null | undefined;
   complianceFrameworkValueIds?: Array<string> | null | undefined;
-  createdAt?: string | null | undefined;
   defaultValuesApplied?: boolean | null | undefined;
-  deletedAt?: string | null | undefined;
   deprovisionerPolicy?: ProvisionPolicyInput$Outbound | null | undefined;
   description?: string | null | undefined;
   displayName?: string | null | undefined;
@@ -399,8 +422,7 @@ export type AppEntitlementInput$Outbound = {
   revokePolicyId?: string | null | undefined;
   riskLevelValueId?: string | null | undefined;
   slug?: string | null | undefined;
-  sourceConnectorIds?: { [k: string]: string } | null | undefined;
-  updatedAt?: string | null | undefined;
+  sourceConnectorIds?: { [k: string]: string } | undefined;
   userEditedMask?: string | null | undefined;
 };
 
@@ -411,14 +433,13 @@ export const AppEntitlementInput$outboundSchema: z.ZodType<
   AppEntitlementInput
 > = z.object({
   alias: z.nullable(z.string()).optional(),
+  annotations: z.record(z.string()).optional(),
   appId: z.nullable(z.string()).optional(),
   appResourceId: z.nullable(z.string()).optional(),
   appResourceTypeId: z.nullable(z.string()).optional(),
   certifyPolicyId: z.nullable(z.string()).optional(),
   complianceFrameworkValueIds: z.nullable(z.array(z.string())).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   defaultValuesApplied: z.nullable(z.boolean()).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   deprovisionerPolicy: z.nullable(ProvisionPolicyInput$outboundSchema)
     .optional(),
   description: z.nullable(z.string()).optional(),
@@ -439,8 +460,7 @@ export const AppEntitlementInput$outboundSchema: z.ZodType<
   revokePolicyId: z.nullable(z.string()).optional(),
   riskLevelValueId: z.nullable(z.string()).optional(),
   slug: z.nullable(z.string()).optional(),
-  sourceConnectorIds: z.nullable(z.record(z.string())).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  sourceConnectorIds: z.record(z.string()).optional(),
   userEditedMask: z.nullable(z.string()).optional(),
 });
 

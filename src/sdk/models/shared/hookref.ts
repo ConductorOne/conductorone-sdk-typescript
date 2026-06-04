@@ -11,12 +11,12 @@ export type HookRef = {
   /**
    * The id field.
    */
-  id?: string | undefined;
+  id?: string | null | undefined;
 };
 
 /** @internal */
 export type HookRef$Outbound = {
-  id?: string | undefined;
+  id?: string | null | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const HookRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   HookRef
 > = z.object({
-  id: z.string().optional(),
+  id: z.nullable(z.string()).optional(),
 });
 
 export function hookRefToJSON(hookRef: HookRef): string {

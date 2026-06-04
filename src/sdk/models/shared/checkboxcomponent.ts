@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -14,28 +13,8 @@ import { DynamicString, DynamicString$inboundSchema } from "./dynamicstring.js";
  * CheckBoxComponent is a boolean checkbox.
  */
 export type CheckBoxComponent = {
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString?: DynamicString | undefined;
-  /**
-   * DynamicBool can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicBool?: DynamicBool | undefined;
+  label?: DynamicString | null | undefined;
+  value?: DynamicBool | null | undefined;
 };
 
 /** @internal */
@@ -44,13 +23,8 @@ export const CheckBoxComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  label: DynamicString$inboundSchema.optional(),
-  value: DynamicBool$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "label": "dynamicString",
-    "value": "dynamicBool",
-  });
+  label: z.nullable(DynamicString$inboundSchema).optional(),
+  value: z.nullable(DynamicBool$inboundSchema).optional(),
 });
 
 export function checkBoxComponentFromJSON(

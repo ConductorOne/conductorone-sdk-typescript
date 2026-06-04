@@ -13,16 +13,13 @@ import {
  * The ServicePrincipalServiceUpdateRequest message.
  */
 export type ServicePrincipalServiceUpdateRequest = {
-  /**
-   * ServicePrincipal represents a tenant-managed non-human identity.
-   */
-  servicePrincipal?: ServicePrincipalInput | undefined;
+  servicePrincipal?: ServicePrincipalInput | null | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type ServicePrincipalServiceUpdateRequest$Outbound = {
-  servicePrincipal?: ServicePrincipalInput$Outbound | undefined;
+  servicePrincipal?: ServicePrincipalInput$Outbound | null | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -32,7 +29,7 @@ export const ServicePrincipalServiceUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ServicePrincipalServiceUpdateRequest
 > = z.object({
-  servicePrincipal: ServicePrincipalInput$outboundSchema.optional(),
+  servicePrincipal: z.nullable(ServicePrincipalInput$outboundSchema).optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 

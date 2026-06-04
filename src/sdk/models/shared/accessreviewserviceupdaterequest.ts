@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   AccessReviewInput,
   AccessReviewInput$Outbound,
@@ -19,28 +18,15 @@ import {
  * The AccessReviewServiceUpdateRequest message.
  */
 export type AccessReviewServiceUpdateRequest = {
-  /**
-   * An access review campaign (also called a certification campaign) that verifies whether users still need their access entitlements.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named setup_metadata. Only a single field of the following list may be set at a time:
-   *   - singleApp
-   *   - multiApp
-   *   - bindings
-   */
-  accessReview?: AccessReviewInput | undefined;
-  /**
-   * The AccessReviewExpandMask message.
-   */
-  accessReviewExpandMask?: AccessReviewExpandMask | undefined;
+  accessReview?: AccessReviewInput | null | undefined;
+  expandMask?: AccessReviewExpandMask | null | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type AccessReviewServiceUpdateRequest$Outbound = {
-  accessReview?: AccessReviewInput$Outbound | undefined;
-  expandMask?: AccessReviewExpandMask$Outbound | undefined;
+  accessReview?: AccessReviewInput$Outbound | null | undefined;
+  expandMask?: AccessReviewExpandMask$Outbound | null | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -50,13 +36,9 @@ export const AccessReviewServiceUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AccessReviewServiceUpdateRequest
 > = z.object({
-  accessReview: AccessReviewInput$outboundSchema.optional(),
-  accessReviewExpandMask: AccessReviewExpandMask$outboundSchema.optional(),
+  accessReview: z.nullable(AccessReviewInput$outboundSchema).optional(),
+  expandMask: z.nullable(AccessReviewExpandMask$outboundSchema).optional(),
   updateMask: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    accessReviewExpandMask: "expandMask",
-  });
 });
 
 export function accessReviewServiceUpdateRequestToJSON(

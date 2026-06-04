@@ -13,7 +13,7 @@ export type C1ApiAppV2AppOwnersDeleteUserOwnerRequest = {
   appId: string;
   roleSlug: string;
   userRefId: string;
-  deleteUserOwnerRequest?: shared.DeleteUserOwnerRequest | undefined;
+  deleteAppUserOwnerRequest?: shared.DeleteAppUserOwnerRequest | undefined;
 };
 
 export type C1ApiAppV2AppOwnersDeleteUserOwnerResponse = {
@@ -32,7 +32,7 @@ export type C1ApiAppV2AppOwnersDeleteUserOwnerResponse = {
   /**
    * DeleteUserOwnerResponse is the empty response for deleting a user ownership source.
    */
-  deleteUserOwnerResponse?: shared.DeleteUserOwnerResponse | undefined;
+  deleteAppUserOwnerResponse?: shared.DeleteAppUserOwnerResponse | undefined;
 };
 
 /** @internal */
@@ -40,7 +40,9 @@ export type C1ApiAppV2AppOwnersDeleteUserOwnerRequest$Outbound = {
   app_id: string;
   role_slug: string;
   user_ref_id: string;
-  DeleteUserOwnerRequest?: shared.DeleteUserOwnerRequest$Outbound | undefined;
+  DeleteAppUserOwnerRequest?:
+    | shared.DeleteAppUserOwnerRequest$Outbound
+    | undefined;
 };
 
 /** @internal */
@@ -53,14 +55,14 @@ export const C1ApiAppV2AppOwnersDeleteUserOwnerRequest$outboundSchema:
     appId: z.string(),
     roleSlug: z.string(),
     userRefId: z.string(),
-    deleteUserOwnerRequest: shared.DeleteUserOwnerRequest$outboundSchema
+    deleteAppUserOwnerRequest: shared.DeleteAppUserOwnerRequest$outboundSchema
       .optional(),
   }).transform((v) => {
     return remap$(v, {
       appId: "app_id",
       roleSlug: "role_slug",
       userRefId: "user_ref_id",
-      deleteUserOwnerRequest: "DeleteUserOwnerRequest",
+      deleteAppUserOwnerRequest: "DeleteAppUserOwnerRequest",
     });
   });
 
@@ -82,14 +84,14 @@ export const C1ApiAppV2AppOwnersDeleteUserOwnerResponse$inboundSchema:
       ContentType: z.string(),
       StatusCode: z.number().int(),
       RawResponse: z.instanceof(Response),
-      DeleteUserOwnerResponse: shared.DeleteUserOwnerResponse$inboundSchema
-        .optional(),
+      DeleteAppUserOwnerResponse: shared
+        .DeleteAppUserOwnerResponse$inboundSchema.optional(),
     }).transform((v) => {
       return remap$(v, {
         "ContentType": "contentType",
         "StatusCode": "statusCode",
         "RawResponse": "rawResponse",
-        "DeleteUserOwnerResponse": "deleteUserOwnerResponse",
+        "DeleteAppUserOwnerResponse": "deleteAppUserOwnerResponse",
       });
     });
 

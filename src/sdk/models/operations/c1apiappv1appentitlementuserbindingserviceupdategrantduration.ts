@@ -11,9 +11,9 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppEntitlementUserBindingServiceUpdateGrantDurationRequest =
   {
-    appId: string | null;
-    appEntitlementId: string | null;
-    appUserId: string | null;
+    appId: string;
+    appEntitlementId: string;
+    appUserId: string;
     updateGrantDurationRequest?: shared.UpdateGrantDurationRequest | undefined;
   };
 
@@ -42,9 +42,9 @@ export type C1ApiAppV1AppEntitlementUserBindingServiceUpdateGrantDurationRespons
 /** @internal */
 export type C1ApiAppV1AppEntitlementUserBindingServiceUpdateGrantDurationRequest$Outbound =
   {
-    app_id: string | null;
-    app_entitlement_id: string | null;
-    app_user_id: string | null;
+    app_id: string;
+    app_entitlement_id: string;
+    app_user_id: string;
     UpdateGrantDurationRequest?:
       | shared.UpdateGrantDurationRequest$Outbound
       | undefined;
@@ -57,9 +57,9 @@ export const C1ApiAppV1AppEntitlementUserBindingServiceUpdateGrantDurationReques
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementUserBindingServiceUpdateGrantDurationRequest
   > = z.object({
-    appId: z.nullable(z.string()),
-    appEntitlementId: z.nullable(z.string()),
-    appUserId: z.nullable(z.string()),
+    appId: z.string(),
+    appEntitlementId: z.string(),
+    appUserId: z.string(),
     updateGrantDurationRequest: shared.UpdateGrantDurationRequest$outboundSchema
       .optional(),
   }).transform((v) => {

@@ -7,23 +7,17 @@ import * as z from "zod/v3";
 /**
  * The TaskTypeOffboarding message.
  */
-export type TaskTypeOffboardingInput = {
-  outcomeTime?: Date | null | undefined;
-};
+export type TaskTypeOffboardingInput = {};
 
 /** @internal */
-export type TaskTypeOffboardingInput$Outbound = {
-  outcomeTime?: string | null | undefined;
-};
+export type TaskTypeOffboardingInput$Outbound = {};
 
 /** @internal */
 export const TaskTypeOffboardingInput$outboundSchema: z.ZodType<
   TaskTypeOffboardingInput$Outbound,
   z.ZodTypeDef,
   TaskTypeOffboardingInput
-> = z.object({
-  outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = z.object({});
 
 export function taskTypeOffboardingInputToJSON(
   taskTypeOffboardingInput: TaskTypeOffboardingInput,

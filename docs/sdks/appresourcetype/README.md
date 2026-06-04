@@ -187,7 +187,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 
 async function run() {
   const result = await conductoroneSDKTypescript.appResourceType.deleteManuallyManagedResourceType({
-    appId: null,
+    appId: "<id>",
     id: "<id>",
   });
 
@@ -216,7 +216,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 
 async function run() {
   const res = await appResourceTypeDeleteManuallyManagedResourceType(conductoroneSDKTypescript, {
-    appId: null,
+    appId: "<id>",
     id: "<id>",
   });
   if (res.ok) {

@@ -49,19 +49,19 @@ export type DigestPreference = {
   /**
    * The day of the week to send weekly digests.
    */
-  dayOfWeek?: DayOfWeek | undefined;
+  dayOfWeek?: DayOfWeek | null | undefined;
   /**
    * Whether digest notifications are enabled.
    */
-  enabled?: boolean | undefined;
+  enabled?: boolean | null | undefined;
   /**
    * How often digest notifications are sent.
    */
-  frequency?: DigestPreferenceFrequency | undefined;
+  frequency?: DigestPreferenceFrequency | null | undefined;
   /**
    * Whether this preference is locked by org-level settings, preventing users from overriding it.
    */
-  locked?: boolean | undefined;
+  locked?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -96,17 +96,17 @@ export const DigestPreference$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  dayOfWeek: DayOfWeek$inboundSchema.optional(),
-  enabled: z.boolean().optional(),
-  frequency: DigestPreferenceFrequency$inboundSchema.optional(),
-  locked: z.boolean().optional(),
+  dayOfWeek: z.nullable(DayOfWeek$inboundSchema).optional(),
+  enabled: z.nullable(z.boolean()).optional(),
+  frequency: z.nullable(DigestPreferenceFrequency$inboundSchema).optional(),
+  locked: z.nullable(z.boolean()).optional(),
 });
 /** @internal */
 export type DigestPreference$Outbound = {
-  dayOfWeek?: string | undefined;
-  enabled?: boolean | undefined;
-  frequency?: string | undefined;
-  locked?: boolean | undefined;
+  dayOfWeek?: string | null | undefined;
+  enabled?: boolean | null | undefined;
+  frequency?: string | null | undefined;
+  locked?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -115,10 +115,10 @@ export const DigestPreference$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DigestPreference
 > = z.object({
-  dayOfWeek: DayOfWeek$outboundSchema.optional(),
-  enabled: z.boolean().optional(),
-  frequency: DigestPreferenceFrequency$outboundSchema.optional(),
-  locked: z.boolean().optional(),
+  dayOfWeek: z.nullable(DayOfWeek$outboundSchema).optional(),
+  enabled: z.nullable(z.boolean()).optional(),
+  frequency: z.nullable(DigestPreferenceFrequency$outboundSchema).optional(),
+  locked: z.nullable(z.boolean()).optional(),
 });
 
 export function digestPreferenceToJSON(

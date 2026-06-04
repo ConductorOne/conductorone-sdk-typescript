@@ -14,7 +14,7 @@ export type AppUserFilter = {
   /**
    * The appId field.
    */
-  appId?: string | undefined;
+  appId?: string | null | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const AppUserFilter$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.string().optional(),
+  appId: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type AppUserFilter$Outbound = {
-  appId?: string | undefined;
+  appId?: string | null | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const AppUserFilter$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppUserFilter
 > = z.object({
-  appId: z.string().optional(),
+  appId: z.nullable(z.string()).optional(),
 });
 
 export function appUserFilterToJSON(appUserFilter: AppUserFilter): string {

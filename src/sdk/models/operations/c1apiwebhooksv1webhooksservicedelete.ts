@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiWebhooksV1WebhooksServiceDeleteRequest = {
-  id: string | null;
+  id: string;
   webhooksServiceDeleteRequest?:
     | shared.WebhooksServiceDeleteRequest
     | undefined;
@@ -39,7 +39,7 @@ export type C1ApiWebhooksV1WebhooksServiceDeleteResponse = {
 
 /** @internal */
 export type C1ApiWebhooksV1WebhooksServiceDeleteRequest$Outbound = {
-  id: string | null;
+  id: string;
   WebhooksServiceDeleteRequest?:
     | shared.WebhooksServiceDeleteRequest$Outbound
     | undefined;
@@ -52,7 +52,7 @@ export const C1ApiWebhooksV1WebhooksServiceDeleteRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiWebhooksV1WebhooksServiceDeleteRequest
   > = z.object({
-    id: z.nullable(z.string()),
+    id: z.string(),
     webhooksServiceDeleteRequest: shared
       .WebhooksServiceDeleteRequest$outboundSchema.optional(),
   }).transform((v) => {

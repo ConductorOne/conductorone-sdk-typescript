@@ -11,17 +11,17 @@ export type ResourceTypeIdRef = {
   /**
    * The ID of the application that owns the resource type.
    */
-  appId?: string | undefined;
+  appId?: string | null | undefined;
   /**
    * The ID of the resource type.
    */
-  resourceTypeId?: string | undefined;
+  resourceTypeId?: string | null | undefined;
 };
 
 /** @internal */
 export type ResourceTypeIdRef$Outbound = {
-  appId?: string | undefined;
-  resourceTypeId?: string | undefined;
+  appId?: string | null | undefined;
+  resourceTypeId?: string | null | undefined;
 };
 
 /** @internal */
@@ -30,8 +30,8 @@ export const ResourceTypeIdRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResourceTypeIdRef
 > = z.object({
-  appId: z.string().optional(),
-  resourceTypeId: z.string().optional(),
+  appId: z.nullable(z.string()).optional(),
+  resourceTypeId: z.nullable(z.string()).optional(),
 });
 
 export function resourceTypeIdRefToJSON(

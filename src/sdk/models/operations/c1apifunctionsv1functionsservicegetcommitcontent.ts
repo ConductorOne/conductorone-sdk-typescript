@@ -10,8 +10,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiFunctionsV1FunctionsServiceGetCommitContentRequest = {
-  functionId: string | null;
-  id: string | null;
+  functionId: string;
+  id: string;
 };
 
 export type C1ApiFunctionsV1FunctionsServiceGetCommitContentResponse = {
@@ -37,8 +37,8 @@ export type C1ApiFunctionsV1FunctionsServiceGetCommitContentResponse = {
 
 /** @internal */
 export type C1ApiFunctionsV1FunctionsServiceGetCommitContentRequest$Outbound = {
-  function_id: string | null;
-  id: string | null;
+  function_id: string;
+  id: string;
 };
 
 /** @internal */
@@ -48,8 +48,8 @@ export const C1ApiFunctionsV1FunctionsServiceGetCommitContentRequest$outboundSch
     z.ZodTypeDef,
     C1ApiFunctionsV1FunctionsServiceGetCommitContentRequest
   > = z.object({
-    functionId: z.nullable(z.string()),
-    id: z.nullable(z.string()),
+    functionId: z.string(),
+    id: z.string(),
   }).transform((v) => {
     return remap$(v, {
       functionId: "function_id",

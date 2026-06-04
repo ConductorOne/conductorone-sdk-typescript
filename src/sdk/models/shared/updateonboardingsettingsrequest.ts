@@ -30,11 +30,11 @@ export type UpdateOnboardingSettingsRequest = {
   /**
    * The identifier of the onboarding conversation thread to associate.
    */
-  conversationId?: string | undefined;
+  conversationId?: string | null | undefined;
   /**
    * The new onboarding status to set.
    */
-  status?: UpdateOnboardingSettingsRequestStatus | undefined;
+  status?: UpdateOnboardingSettingsRequestStatus | null | undefined;
 };
 
 /** @internal */
@@ -46,8 +46,8 @@ export const UpdateOnboardingSettingsRequestStatus$outboundSchema: z.ZodType<
 
 /** @internal */
 export type UpdateOnboardingSettingsRequest$Outbound = {
-  conversationId?: string | undefined;
-  status?: string | undefined;
+  conversationId?: string | null | undefined;
+  status?: string | null | undefined;
 };
 
 /** @internal */
@@ -56,8 +56,9 @@ export const UpdateOnboardingSettingsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateOnboardingSettingsRequest
 > = z.object({
-  conversationId: z.string().optional(),
-  status: UpdateOnboardingSettingsRequestStatus$outboundSchema.optional(),
+  conversationId: z.nullable(z.string()).optional(),
+  status: z.nullable(UpdateOnboardingSettingsRequestStatus$outboundSchema)
+    .optional(),
 });
 
 export function updateOnboardingSettingsRequestToJSON(

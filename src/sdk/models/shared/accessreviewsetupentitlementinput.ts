@@ -11,17 +11,17 @@ export type AccessReviewSetupEntitlementInput = {
   /**
    * The ID of the entitlement.
    */
-  appEntitlementId?: string | undefined;
+  appEntitlementId?: string | null | undefined;
   /**
    * The ID of the application that owns the entitlement.
    */
-  appId?: string | undefined;
+  appId?: string | null | undefined;
 };
 
 /** @internal */
 export type AccessReviewSetupEntitlementInput$Outbound = {
-  appEntitlementId?: string | undefined;
-  appId?: string | undefined;
+  appEntitlementId?: string | null | undefined;
+  appId?: string | null | undefined;
 };
 
 /** @internal */
@@ -30,8 +30,8 @@ export const AccessReviewSetupEntitlementInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AccessReviewSetupEntitlementInput
 > = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
+  appEntitlementId: z.nullable(z.string()).optional(),
+  appId: z.nullable(z.string()).optional(),
 });
 
 export function accessReviewSetupEntitlementInputToJSON(

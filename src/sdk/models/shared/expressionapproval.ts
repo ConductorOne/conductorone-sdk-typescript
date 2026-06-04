@@ -44,11 +44,11 @@ export type ExpressionApproval = {
   /**
    * Configuration to enable fallback for group fallback.
    */
-  isGroupFallbackEnabled?: boolean | undefined;
+  isGroupFallbackEnabled?: boolean | null | undefined;
   /**
    * Configuration to require distinct approvers across approval steps of a rule.
    */
-  requireDistinctApprovers?: boolean | undefined;
+  requireDistinctApprovers?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -64,8 +64,8 @@ export const ExpressionApproval$inboundSchema: z.ZodType<
   fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$inboundSchema))
     .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-  isGroupFallbackEnabled: z.boolean().optional(),
-  requireDistinctApprovers: z.boolean().optional(),
+  isGroupFallbackEnabled: z.nullable(z.boolean()).optional(),
+  requireDistinctApprovers: z.nullable(z.boolean()).optional(),
 });
 /** @internal */
 export type ExpressionApproval$Outbound = {
@@ -75,8 +75,8 @@ export type ExpressionApproval$Outbound = {
   fallback?: boolean | null | undefined;
   fallbackGroupIds?: Array<AppEntitlementReference$Outbound> | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
-  isGroupFallbackEnabled?: boolean | undefined;
-  requireDistinctApprovers?: boolean | undefined;
+  isGroupFallbackEnabled?: boolean | null | undefined;
+  requireDistinctApprovers?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -92,8 +92,8 @@ export const ExpressionApproval$outboundSchema: z.ZodType<
   fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$outboundSchema))
     .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-  isGroupFallbackEnabled: z.boolean().optional(),
-  requireDistinctApprovers: z.boolean().optional(),
+  isGroupFallbackEnabled: z.nullable(z.boolean()).optional(),
+  requireDistinctApprovers: z.nullable(z.boolean()).optional(),
 });
 
 export function expressionApprovalToJSON(

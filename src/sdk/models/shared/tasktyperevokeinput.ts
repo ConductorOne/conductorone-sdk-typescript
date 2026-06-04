@@ -13,13 +13,11 @@ import {
  * The TaskTypeRevoke message indicates that a task is a revoke task and all related details.
  */
 export type TaskTypeRevokeInput = {
-  outcomeTime?: Date | null | undefined;
   source?: TaskRevokeSource | null | undefined;
 };
 
 /** @internal */
 export type TaskTypeRevokeInput$Outbound = {
-  outcomeTime?: string | null | undefined;
   source?: TaskRevokeSource$Outbound | null | undefined;
 };
 
@@ -29,7 +27,6 @@ export const TaskTypeRevokeInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskTypeRevokeInput
 > = z.object({
-  outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   source: z.nullable(TaskRevokeSource$outboundSchema).optional(),
 });
 

@@ -14,15 +14,15 @@ export type CampaignEntitlementDetails = {
   /**
    * The appId field.
    */
-  appId?: string | undefined;
+  appId?: string | null | undefined;
   /**
    * The entitlementId field.
    */
-  entitlementId?: string | undefined;
+  entitlementId?: string | null | undefined;
   /**
    * The policyId field.
    */
-  policyId?: string | undefined;
+  policyId?: string | null | undefined;
 };
 
 /** @internal */
@@ -31,15 +31,15 @@ export const CampaignEntitlementDetails$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.string().optional(),
-  entitlementId: z.string().optional(),
-  policyId: z.string().optional(),
+  appId: z.nullable(z.string()).optional(),
+  entitlementId: z.nullable(z.string()).optional(),
+  policyId: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type CampaignEntitlementDetails$Outbound = {
-  appId?: string | undefined;
-  entitlementId?: string | undefined;
-  policyId?: string | undefined;
+  appId?: string | null | undefined;
+  entitlementId?: string | null | undefined;
+  policyId?: string | null | undefined;
 };
 
 /** @internal */
@@ -48,9 +48,9 @@ export const CampaignEntitlementDetails$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CampaignEntitlementDetails
 > = z.object({
-  appId: z.string().optional(),
-  entitlementId: z.string().optional(),
-  policyId: z.string().optional(),
+  appId: z.nullable(z.string()).optional(),
+  entitlementId: z.nullable(z.string()).optional(),
+  policyId: z.nullable(z.string()).optional(),
 });
 
 export function campaignEntitlementDetailsToJSON(

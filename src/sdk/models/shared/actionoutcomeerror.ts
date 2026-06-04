@@ -14,12 +14,12 @@ export type ActionOutcomeError = {
   /**
    * The errorCode field.
    */
-  errorCode?: string | undefined;
+  errorCode?: string | null | undefined;
   /**
    * The errorMessage field.
    */
-  errorMessage?: string | undefined;
-  outcomeTime?: Date | undefined;
+  errorMessage?: string | null | undefined;
+  outcomeTime?: Date | null | undefined;
 };
 
 /** @internal */
@@ -28,16 +28,17 @@ export const ActionOutcomeError$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  errorCode: z.string().optional(),
-  errorMessage: z.string().optional(),
-  outcomeTime: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  errorCode: z.nullable(z.string()).optional(),
+  errorMessage: z.nullable(z.string()).optional(),
+  outcomeTime: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 });
 /** @internal */
 export type ActionOutcomeError$Outbound = {
-  errorCode?: string | undefined;
-  errorMessage?: string | undefined;
-  outcomeTime?: string | undefined;
+  errorCode?: string | null | undefined;
+  errorMessage?: string | null | undefined;
+  outcomeTime?: string | null | undefined;
 };
 
 /** @internal */
@@ -46,9 +47,9 @@ export const ActionOutcomeError$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ActionOutcomeError
 > = z.object({
-  errorCode: z.string().optional(),
-  errorMessage: z.string().optional(),
-  outcomeTime: z.date().transform(v => v.toISOString()).optional(),
+  errorCode: z.nullable(z.string()).optional(),
+  errorMessage: z.nullable(z.string()).optional(),
+  outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function actionOutcomeErrorToJSON(

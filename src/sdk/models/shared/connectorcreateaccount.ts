@@ -36,7 +36,7 @@ export type ConnectorCreateAccount = {
    * @remarks
    *  When set, the resolved password is encrypted for the connector and sent as CredentialOptions.EncryptedPassword.
    */
-  passwordCel?: string | undefined;
+  passwordCel?: string | null | undefined;
   /**
    * The userIdCel field.
    *
@@ -55,14 +55,14 @@ export const ConnectorCreateAccount$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   connectorRef: z.nullable(ConnectorRef$inboundSchema).optional(),
-  passwordCel: z.string().optional(),
+  passwordCel: z.nullable(z.string()).optional(),
   userIdCel: z.nullable(z.string()).optional(),
   userProperties: z.nullable(UserProperties$inboundSchema).optional(),
 });
 /** @internal */
 export type ConnectorCreateAccount$Outbound = {
   connectorRef?: ConnectorRef$Outbound | null | undefined;
-  passwordCel?: string | undefined;
+  passwordCel?: string | null | undefined;
   userIdCel?: string | null | undefined;
   userProperties?: UserProperties$Outbound | null | undefined;
 };
@@ -74,7 +74,7 @@ export const ConnectorCreateAccount$outboundSchema: z.ZodType<
   ConnectorCreateAccount
 > = z.object({
   connectorRef: z.nullable(ConnectorRef$outboundSchema).optional(),
-  passwordCel: z.string().optional(),
+  passwordCel: z.nullable(z.string()).optional(),
   userIdCel: z.nullable(z.string()).optional(),
   userProperties: z.nullable(UserProperties$outboundSchema).optional(),
 });

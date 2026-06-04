@@ -10,8 +10,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest = {
-  appId: string | null;
-  appEntitlementId: string | null;
+  appId: string;
+  appEntitlementId: string;
   addManuallyManagedUsersRequest?:
     | shared.AddManuallyManagedUsersRequest
     | undefined;
@@ -41,8 +41,8 @@ export type C1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse = {
 /** @internal */
 export type C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest$Outbound =
   {
-    app_id: string | null;
-    app_entitlement_id: string | null;
+    app_id: string;
+    app_entitlement_id: string;
     AddManuallyManagedUsersRequest?:
       | shared.AddManuallyManagedUsersRequest$Outbound
       | undefined;
@@ -55,8 +55,8 @@ export const C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest$outboundS
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest
   > = z.object({
-    appId: z.nullable(z.string()),
-    appEntitlementId: z.nullable(z.string()),
+    appId: z.string(),
+    appEntitlementId: z.string(),
     addManuallyManagedUsersRequest: shared
       .AddManuallyManagedUsersRequest$outboundSchema.optional(),
   }).transform((v) => {

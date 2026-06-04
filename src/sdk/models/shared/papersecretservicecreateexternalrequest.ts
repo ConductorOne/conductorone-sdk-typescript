@@ -66,34 +66,37 @@ export type PaperSecretServiceCreateExternalRequest = {
   /**
    * For FILE secrets: MIME content type of the original file. Ignored for TEXT secrets.
    */
-  contentType?: string | undefined;
+  contentType?: string | null | undefined;
   /**
    * Optional cleartext label visible to the creator in "My Secrets" view.
    *
    * @remarks
    *  Not encrypted — do not put sensitive data here.
    */
-  displayName?: string | undefined;
-  expiresIn?: string | undefined;
+  displayName?: string | null | undefined;
+  expiresIn?: string | null | undefined;
   /**
    * For FILE secrets: expected file size in bytes (max 1GB). Ignored for TEXT secrets.
    */
-  fileSize?: number | undefined;
+  fileSize?: number | null | undefined;
   /**
    * For FILE secrets: original filename (sanitized server-side). Ignored for TEXT secrets.
    */
-  filename?: string | undefined;
+  filename?: string | null | undefined;
   /**
    * For TEXT secrets: hint about the plaintext format (e.g., JSON, YAML, key-value).
    *
    * @remarks
    *  Used by the viewer UI for syntax highlighting. Does not affect encryption.
    */
-  inputFormat?: PaperSecretServiceCreateExternalRequestInputFormat | undefined;
+  inputFormat?:
+    | PaperSecretServiceCreateExternalRequestInputFormat
+    | null
+    | undefined;
   /**
    * Maximum number of views before the secret is burned (0 = unlimited).
    */
-  maxViews?: number | undefined;
+  maxViews?: number | null | undefined;
   /**
    * Secret type: TEXT or FILE.
    *
@@ -101,7 +104,10 @@ export type PaperSecretServiceCreateExternalRequest = {
    *  TEXT secrets use SetTextContent to upload encrypted content (max 64KB).
    *  FILE secrets use the upload_url from CreateResponse to upload encrypted content (max 1GB).
    */
-  secretType?: PaperSecretServiceCreateExternalRequestSecretType | undefined;
+  secretType?:
+    | PaperSecretServiceCreateExternalRequestSecretType
+    | null
+    | undefined;
 };
 
 /** @internal */
@@ -127,14 +133,14 @@ export const PaperSecretServiceCreateExternalRequestSecretType$outboundSchema:
 /** @internal */
 export type PaperSecretServiceCreateExternalRequest$Outbound = {
   allowedEmails?: Array<string> | null | undefined;
-  contentType?: string | undefined;
-  displayName?: string | undefined;
-  expiresIn?: string | undefined;
-  fileSize?: string | undefined;
-  filename?: string | undefined;
-  inputFormat?: string | undefined;
-  maxViews?: number | undefined;
-  secretType?: string | undefined;
+  contentType?: string | null | undefined;
+  displayName?: string | null | undefined;
+  expiresIn?: string | null | undefined;
+  fileSize?: string | null | undefined;
+  filename?: string | null | undefined;
+  inputFormat?: string | null | undefined;
+  maxViews?: number | null | undefined;
+  secretType?: string | null | undefined;
 };
 
 /** @internal */
@@ -144,16 +150,18 @@ export const PaperSecretServiceCreateExternalRequest$outboundSchema: z.ZodType<
   PaperSecretServiceCreateExternalRequest
 > = z.object({
   allowedEmails: z.nullable(z.array(z.string())).optional(),
-  contentType: z.string().optional(),
-  displayName: z.string().optional(),
-  expiresIn: z.string().optional(),
-  fileSize: z.number().int().transform(v => `${v}`).optional(),
-  filename: z.string().optional(),
-  inputFormat: PaperSecretServiceCreateExternalRequestInputFormat$outboundSchema
-    .optional(),
-  maxViews: z.number().int().optional(),
-  secretType: PaperSecretServiceCreateExternalRequestSecretType$outboundSchema
-    .optional(),
+  contentType: z.nullable(z.string()).optional(),
+  displayName: z.nullable(z.string()).optional(),
+  expiresIn: z.nullable(z.string()).optional(),
+  fileSize: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
+  filename: z.nullable(z.string()).optional(),
+  inputFormat: z.nullable(
+    PaperSecretServiceCreateExternalRequestInputFormat$outboundSchema,
+  ).optional(),
+  maxViews: z.nullable(z.number().int()).optional(),
+  secretType: z.nullable(
+    PaperSecretServiceCreateExternalRequestSecretType$outboundSchema,
+  ).optional(),
 });
 
 export function paperSecretServiceCreateExternalRequestToJSON(

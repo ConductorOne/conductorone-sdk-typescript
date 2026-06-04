@@ -118,6 +118,10 @@ export type AppEntitlementSearchServiceSearchRequest = {
    */
   refs?: Array<AppEntitlementRef> | null | undefined;
   /**
+   * Search for app entitlements that are bound to any of these request schemas.
+   */
+  requestSchemaIds?: Array<string> | null | undefined;
+  /**
    * Search for app entitlements that belongs to these resources.
    */
   resourceIds?: Array<string> | null | undefined;
@@ -172,6 +176,7 @@ export type AppEntitlementSearchServiceSearchRequest$Outbound = {
   policyRefs?: Array<PolicyRef$Outbound> | null | undefined;
   query?: string | null | undefined;
   refs?: Array<AppEntitlementRef$Outbound> | null | undefined;
+  requestSchemaIds?: Array<string> | null | undefined;
   resourceIds?: Array<string> | null | undefined;
   resourceTraitIds?: Array<string> | null | undefined;
   resourceTypeIds?: Array<string> | null | undefined;
@@ -207,6 +212,7 @@ export const AppEntitlementSearchServiceSearchRequest$outboundSchema: z.ZodType<
   policyRefs: z.nullable(z.array(PolicyRef$outboundSchema)).optional(),
   query: z.nullable(z.string()).optional(),
   refs: z.nullable(z.array(AppEntitlementRef$outboundSchema)).optional(),
+  requestSchemaIds: z.nullable(z.array(z.string())).optional(),
   resourceIds: z.nullable(z.array(z.string())).optional(),
   resourceTraitIds: z.nullable(z.array(z.string())).optional(),
   resourceTypeIds: z.nullable(z.array(z.string())).optional(),

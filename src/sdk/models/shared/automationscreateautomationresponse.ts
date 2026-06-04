@@ -20,7 +20,7 @@ export type AutomationsCreateAutomationResponse = {
    *  Contains the full URL including the embedded token (e.g. https://tenant.conductorone.com/api/v1/webhooks/incoming/{id}/t/{token}).
    *  Populated only when the webhook trigger uses capability URL authentication.
    */
-  webhookCapabilityUrl?: string | undefined;
+  webhookCapabilityUrl?: string | null | undefined;
   /**
    * One-time HMAC shared secret, shown once at creation time.
    *
@@ -37,7 +37,7 @@ export const AutomationsCreateAutomationResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   automation: z.nullable(Automation$inboundSchema).optional(),
-  webhookCapabilityUrl: z.string().optional(),
+  webhookCapabilityUrl: z.nullable(z.string()).optional(),
   webhookHmacSecret: z.nullable(z.string()).optional(),
 });
 

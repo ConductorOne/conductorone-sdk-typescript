@@ -2,6 +2,8 @@
 
 Well-known provider type. Required -- UNSPECIFIED is rejected.
  When set to a named source, the backend validates issuer_url consistency.
+ SPIFFE wkp requires `settings.spiffe`; all other wkp values require
+ `settings.oidc`.
 
 ## Example Usage
 
@@ -17,5 +19,5 @@ let value: WorkloadFederationServiceCreateProviderRequestWellKnownProvider =
 ## Values
 
 ```typescript
-"WELL_KNOWN_WORKLOAD_PROVIDER_UNSPECIFIED" | "WELL_KNOWN_WORKLOAD_PROVIDER_CUSTOM" | "WELL_KNOWN_WORKLOAD_PROVIDER_GITHUB_ACTIONS" | "WELL_KNOWN_WORKLOAD_PROVIDER_GITLAB_CI" | "WELL_KNOWN_WORKLOAD_PROVIDER_HCP_TERRAFORM" | "WELL_KNOWN_WORKLOAD_PROVIDER_AWS_IAM_OUTBOUND" | Unrecognized<string>
+"WELL_KNOWN_WORKLOAD_PROVIDER_UNSPECIFIED" | "WELL_KNOWN_WORKLOAD_PROVIDER_CUSTOM" | "WELL_KNOWN_WORKLOAD_PROVIDER_GITHUB_ACTIONS" | "WELL_KNOWN_WORKLOAD_PROVIDER_GITLAB_CI" | "WELL_KNOWN_WORKLOAD_PROVIDER_HCP_TERRAFORM" | "WELL_KNOWN_WORKLOAD_PROVIDER_AWS_IAM_OUTBOUND" | "WELL_KNOWN_WORKLOAD_PROVIDER_SPIFFE" | Unrecognized<string>
 ```

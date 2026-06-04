@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,10 +32,7 @@ export type AppEntitlementView = {
    * JSONPATH expression indicating the location of the App Resource object in the  array.
    */
   appResourceTypePath?: string | null | undefined;
-  /**
-   * The ActorObjectPermissions message.
-   */
-  actorObjectPermissions?: ActorObjectPermissions | undefined;
+  objectPermissions?: ActorObjectPermissions | null | undefined;
 };
 
 /** @internal */
@@ -49,11 +45,8 @@ export const AppEntitlementView$inboundSchema: z.ZodType<
   appPath: z.nullable(z.string()).optional(),
   appResourcePath: z.nullable(z.string()).optional(),
   appResourceTypePath: z.nullable(z.string()).optional(),
-  objectPermissions: ActorObjectPermissions$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "objectPermissions": "actorObjectPermissions",
-  });
+  objectPermissions: z.nullable(ActorObjectPermissions$inboundSchema)
+    .optional(),
 });
 
 export function appEntitlementViewFromJSON(

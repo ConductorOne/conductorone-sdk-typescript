@@ -14,7 +14,7 @@ export type CelExpressionScope = {
   /**
    * The expression field.
    */
-  expression?: string | undefined;
+  expression?: string | null | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const CelExpressionScope$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  expression: z.string().optional(),
+  expression: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type CelExpressionScope$Outbound = {
-  expression?: string | undefined;
+  expression?: string | null | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const CelExpressionScope$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CelExpressionScope
 > = z.object({
-  expression: z.string().optional(),
+  expression: z.nullable(z.string()).optional(),
 });
 
 export function celExpressionScopeToJSON(

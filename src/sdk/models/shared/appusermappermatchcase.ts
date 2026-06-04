@@ -14,11 +14,11 @@ export type AppUserMapperMatchCase = {
   /**
    * CEL expression evaluated against an AppUser to produce match key(s).
    */
-  appUserKeyCel?: string | undefined;
+  appUserKeyCel?: string | null | undefined;
   /**
    * CEL expression evaluated against a User to produce match key(s).
    */
-  userKeyCel?: string | undefined;
+  userKeyCel?: string | null | undefined;
 };
 
 /** @internal */
@@ -27,13 +27,13 @@ export const AppUserMapperMatchCase$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appUserKeyCel: z.string().optional(),
-  userKeyCel: z.string().optional(),
+  appUserKeyCel: z.nullable(z.string()).optional(),
+  userKeyCel: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type AppUserMapperMatchCase$Outbound = {
-  appUserKeyCel?: string | undefined;
-  userKeyCel?: string | undefined;
+  appUserKeyCel?: string | null | undefined;
+  userKeyCel?: string | null | undefined;
 };
 
 /** @internal */
@@ -42,8 +42,8 @@ export const AppUserMapperMatchCase$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppUserMapperMatchCase
 > = z.object({
-  appUserKeyCel: z.string().optional(),
-  userKeyCel: z.string().optional(),
+  appUserKeyCel: z.nullable(z.string()).optional(),
+  userKeyCel: z.nullable(z.string()).optional(),
 });
 
 export function appUserMapperMatchCaseToJSON(

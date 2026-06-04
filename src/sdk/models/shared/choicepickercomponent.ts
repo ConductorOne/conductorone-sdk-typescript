@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -19,35 +18,24 @@ export type ChoicePickerComponent = {
    */
   choices?: Array<Choice> | null | undefined;
   /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
+   * When true, the label slot is omitted entirely (no label text, no
    *
    * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
+   *  "(optional)" suffix, no reserved space). Use when the picker sits under
+   *  or beside another control that already names the field — e.g. stacked
+   *  under a check_box in a per-attribute mapping row.
    */
-  dynamicString?: DynamicString | undefined;
+  hideLabel?: boolean | null | undefined;
+  label?: DynamicString | null | undefined;
   /**
    * The multiSelect field.
    */
-  multiSelect?: boolean | undefined;
+  multiSelect?: boolean | null | undefined;
   /**
    * The required field.
    */
-  required?: boolean | undefined;
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString1?: DynamicString | undefined;
+  required?: boolean | null | undefined;
+  value?: DynamicString | null | undefined;
 };
 
 /** @internal */
@@ -57,15 +45,11 @@ export const ChoicePickerComponent$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   choices: z.nullable(z.array(Choice$inboundSchema)).optional(),
-  label: DynamicString$inboundSchema.optional(),
-  multiSelect: z.boolean().optional(),
-  required: z.boolean().optional(),
-  value: DynamicString$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "label": "dynamicString",
-    "value": "dynamicString1",
-  });
+  hideLabel: z.nullable(z.boolean()).optional(),
+  label: z.nullable(DynamicString$inboundSchema).optional(),
+  multiSelect: z.nullable(z.boolean()).optional(),
+  required: z.nullable(z.boolean()).optional(),
+  value: z.nullable(DynamicString$inboundSchema).optional(),
 });
 
 export function choicePickerComponentFromJSON(

@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   WorkloadFederationTrustInput,
   WorkloadFederationTrustInput$Outbound,
@@ -14,19 +13,13 @@ import {
  * The WorkloadFederationServiceUpdateTrustRequest message.
  */
 export type WorkloadFederationServiceUpdateTrustRequest = {
-  /**
-   * WorkloadFederationTrust represents a per-SP trust policy that references
-   *
-   * @remarks
-   *  a tenant-level provider and defines a CEL condition for claim matching.
-   */
-  workloadFederationTrust?: WorkloadFederationTrustInput | undefined;
+  trust?: WorkloadFederationTrustInput | null | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type WorkloadFederationServiceUpdateTrustRequest$Outbound = {
-  trust?: WorkloadFederationTrustInput$Outbound | undefined;
+  trust?: WorkloadFederationTrustInput$Outbound | null | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -37,13 +30,8 @@ export const WorkloadFederationServiceUpdateTrustRequest$outboundSchema:
     z.ZodTypeDef,
     WorkloadFederationServiceUpdateTrustRequest
   > = z.object({
-    workloadFederationTrust: WorkloadFederationTrustInput$outboundSchema
-      .optional(),
+    trust: z.nullable(WorkloadFederationTrustInput$outboundSchema).optional(),
     updateMask: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      workloadFederationTrust: "trust",
-    });
   });
 
 export function workloadFederationServiceUpdateTrustRequestToJSON(

@@ -67,7 +67,7 @@ export type AppEntitlementAutomation = {
    * @remarks
    *  Read-only. Not settable via this API.
    */
-  managedByRequestCatalogId?: string | undefined;
+  managedByRequestCatalogId?: string | null | undefined;
   none?: AppEntitlementAutomationRuleNone | null | undefined;
   updatedAt?: Date | null | undefined;
 };
@@ -95,7 +95,7 @@ export const AppEntitlementAutomation$inboundSchema: z.ZodType<
   ).optional(),
   lastRunStatus: z.nullable(AppEntitlementAutomationLastRunStatus$inboundSchema)
     .optional(),
-  managedByRequestCatalogId: z.string().optional(),
+  managedByRequestCatalogId: z.nullable(z.string()).optional(),
   none: z.nullable(AppEntitlementAutomationRuleNone$inboundSchema).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),

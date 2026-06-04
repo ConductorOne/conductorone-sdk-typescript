@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * The Webhook message.
  */
 export type WebhookEndpoint = {
-  callbackTimeout?: string | undefined;
+  callbackTimeout?: string | null | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
@@ -39,7 +39,7 @@ export const WebhookEndpoint$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  callbackTimeout: z.string().optional(),
+  callbackTimeout: z.nullable(z.string()).optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -54,39 +54,7 @@ export const WebhookEndpoint$inboundSchema: z.ZodType<
   ).optional(),
   url: z.nullable(z.string()).optional(),
 });
-/** @internal */
-export type WebhookEndpoint$Outbound = {
-  callbackTimeout?: string | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  id?: string | null | undefined;
-  updatedAt?: string | null | undefined;
-  url?: string | null | undefined;
-};
 
-/** @internal */
-export const WebhookEndpoint$outboundSchema: z.ZodType<
-  WebhookEndpoint$Outbound,
-  z.ZodTypeDef,
-  WebhookEndpoint
-> = z.object({
-  callbackTimeout: z.string().optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  url: z.nullable(z.string()).optional(),
-});
-
-export function webhookEndpointToJSON(
-  webhookEndpoint: WebhookEndpoint,
-): string {
-  return JSON.stringify(WebhookEndpoint$outboundSchema.parse(webhookEndpoint));
-}
 export function webhookEndpointFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookEndpoint, SDKValidationError> {

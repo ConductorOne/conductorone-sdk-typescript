@@ -19,19 +19,19 @@ export type C1ConnectorConfigFormComponent = {
   /**
    * The appId field.
    */
-  appId?: string | undefined;
+  appId?: string | null | undefined;
   /**
    * The connectorId field.
    */
-  connectorId?: string | undefined;
+  connectorId?: string | null | undefined;
   /**
    * The skipActionName field.
    */
-  skipActionName?: string | undefined;
+  skipActionName?: string | null | undefined;
   /**
    * The submitActionName field.
    */
-  submitActionName?: string | undefined;
+  submitActionName?: string | null | undefined;
 };
 
 /** @internal */
@@ -40,10 +40,10 @@ export const C1ConnectorConfigFormComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.string().optional(),
-  connectorId: z.string().optional(),
-  skipActionName: z.string().optional(),
-  submitActionName: z.string().optional(),
+  appId: z.nullable(z.string()).optional(),
+  connectorId: z.nullable(z.string()).optional(),
+  skipActionName: z.nullable(z.string()).optional(),
+  submitActionName: z.nullable(z.string()).optional(),
 });
 
 export function c1ConnectorConfigFormComponentFromJSON(

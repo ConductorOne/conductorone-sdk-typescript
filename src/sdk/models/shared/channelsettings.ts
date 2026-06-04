@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -30,18 +29,9 @@ import {
  * ChannelSettings groups notification preferences for all supported channels.
  */
 export type ChannelSettings = {
-  /**
-   * The EmailChannelSettings message.
-   */
-  emailChannelSettings?: EmailChannelSettings | undefined;
-  /**
-   * The SlackChannelSettings message.
-   */
-  slackChannelSettings?: SlackChannelSettings | undefined;
-  /**
-   * The MSTeamsChannelSettings message.
-   */
-  msTeamsChannelSettings?: MSTeamsChannelSettings | undefined;
+  email?: EmailChannelSettings | null | undefined;
+  slack?: SlackChannelSettings | null | undefined;
+  teams?: MSTeamsChannelSettings | null | undefined;
 };
 
 /** @internal */
@@ -50,21 +40,15 @@ export const ChannelSettings$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  email: EmailChannelSettings$inboundSchema.optional(),
-  slack: SlackChannelSettings$inboundSchema.optional(),
-  teams: MSTeamsChannelSettings$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "email": "emailChannelSettings",
-    "slack": "slackChannelSettings",
-    "teams": "msTeamsChannelSettings",
-  });
+  email: z.nullable(EmailChannelSettings$inboundSchema).optional(),
+  slack: z.nullable(SlackChannelSettings$inboundSchema).optional(),
+  teams: z.nullable(MSTeamsChannelSettings$inboundSchema).optional(),
 });
 /** @internal */
 export type ChannelSettings$Outbound = {
-  email?: EmailChannelSettings$Outbound | undefined;
-  slack?: SlackChannelSettings$Outbound | undefined;
-  teams?: MSTeamsChannelSettings$Outbound | undefined;
+  email?: EmailChannelSettings$Outbound | null | undefined;
+  slack?: SlackChannelSettings$Outbound | null | undefined;
+  teams?: MSTeamsChannelSettings$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -73,15 +57,9 @@ export const ChannelSettings$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ChannelSettings
 > = z.object({
-  emailChannelSettings: EmailChannelSettings$outboundSchema.optional(),
-  slackChannelSettings: SlackChannelSettings$outboundSchema.optional(),
-  msTeamsChannelSettings: MSTeamsChannelSettings$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    emailChannelSettings: "email",
-    slackChannelSettings: "slack",
-    msTeamsChannelSettings: "teams",
-  });
+  email: z.nullable(EmailChannelSettings$outboundSchema).optional(),
+  slack: z.nullable(SlackChannelSettings$outboundSchema).optional(),
+  teams: z.nullable(MSTeamsChannelSettings$outboundSchema).optional(),
 });
 
 export function channelSettingsToJSON(

@@ -12,10 +12,7 @@ import { Contacts, Contacts$inboundSchema } from "./contacts.js";
  * The UpdateContactsResponse message.
  */
 export type UpdateContactsResponse = {
-  /**
-   * Contacts represents the contact configuration for an organization.
-   */
-  contacts?: Contacts | undefined;
+  contacts?: Contacts | null | undefined;
 };
 
 /** @internal */
@@ -24,7 +21,7 @@ export const UpdateContactsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  contacts: Contacts$inboundSchema.optional(),
+  contacts: z.nullable(Contacts$inboundSchema).optional(),
 });
 
 export function updateContactsResponseFromJSON(

@@ -18,7 +18,7 @@ export type PIIRedactionConfig = {
   /**
    * The replacement field.
    */
-  replacement?: string | undefined;
+  replacement?: string | null | undefined;
 };
 
 /** @internal */
@@ -28,12 +28,12 @@ export const PIIRedactionConfig$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   redactFields: z.nullable(z.array(z.string())).optional(),
-  replacement: z.string().optional(),
+  replacement: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type PIIRedactionConfig$Outbound = {
   redactFields?: Array<string> | null | undefined;
-  replacement?: string | undefined;
+  replacement?: string | null | undefined;
 };
 
 /** @internal */
@@ -43,7 +43,7 @@ export const PIIRedactionConfig$outboundSchema: z.ZodType<
   PIIRedactionConfig
 > = z.object({
   redactFields: z.nullable(z.array(z.string())).optional(),
-  replacement: z.string().optional(),
+  replacement: z.nullable(z.string()).optional(),
 });
 
 export function piiRedactionConfigToJSON(

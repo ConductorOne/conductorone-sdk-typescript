@@ -15,7 +15,7 @@ export type Contacts = {
    * Email addresses of billing contacts for this organization.
    */
   billingEmails?: Array<string> | null | undefined;
-  createdAt?: Date | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * Email addresses of operations contacts for this organization.
    */
@@ -24,7 +24,7 @@ export type Contacts = {
    * Email addresses of security contacts for this organization.
    */
   securityEmails?: Array<string> | null | undefined;
-  updatedAt?: Date | undefined;
+  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
@@ -34,12 +34,14 @@ export const Contacts$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   billingEmails: z.nullable(z.array(z.string())).optional(),
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
   operationsEmails: z.nullable(z.array(z.string())).optional(),
   securityEmails: z.nullable(z.array(z.string())).optional(),
-  updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  updatedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 });
 
 export function contactsFromJSON(

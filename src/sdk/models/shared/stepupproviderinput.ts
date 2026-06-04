@@ -28,7 +28,6 @@ export type StepUpProviderInput = {
    * The OAuth2 client ID used to authenticate with the step-up provider.
    */
   clientId?: string | null | undefined;
-  createdAt?: Date | null | undefined;
   /**
    * The human-readable name of the step-up provider.
    */
@@ -41,23 +40,18 @@ export type StepUpProviderInput = {
    * The OIDC issuer URL for the step-up provider.
    */
   issuerUrl?: string | null | undefined;
-  lastTestedAt?: Date | null | undefined;
   microsoft?: StepUpMicrosoftSettings | null | undefined;
   oauth2?: StepUpOAuth2Settings | null | undefined;
-  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
 export type StepUpProviderInput$Outbound = {
   clientId?: string | null | undefined;
-  createdAt?: string | null | undefined;
   displayName?: string | null | undefined;
   enabled?: boolean | null | undefined;
   issuerUrl?: string | null | undefined;
-  lastTestedAt?: string | null | undefined;
   microsoft?: StepUpMicrosoftSettings$Outbound | null | undefined;
   oauth2?: StepUpOAuth2Settings$Outbound | null | undefined;
-  updatedAt?: string | null | undefined;
 };
 
 /** @internal */
@@ -67,14 +61,11 @@ export const StepUpProviderInput$outboundSchema: z.ZodType<
   StepUpProviderInput
 > = z.object({
   clientId: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   displayName: z.nullable(z.string()).optional(),
   enabled: z.nullable(z.boolean()).optional(),
   issuerUrl: z.nullable(z.string()).optional(),
-  lastTestedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   microsoft: z.nullable(StepUpMicrosoftSettings$outboundSchema).optional(),
   oauth2: z.nullable(StepUpOAuth2Settings$outboundSchema).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function stepUpProviderInputToJSON(

@@ -8,7 +8,7 @@ import { C1ApiAppV1AppEntitlementsProxyGetRequest } from "conductorone-sdk-types
 let value: C1ApiAppV1AppEntitlementsProxyGetRequest = {
   srcAppId: "<id>",
   srcAppEntitlementId: "<id>",
-  dstAppId: null,
+  dstAppId: "<id>",
   dstAppEntitlementId: "<id>",
 };
 ```

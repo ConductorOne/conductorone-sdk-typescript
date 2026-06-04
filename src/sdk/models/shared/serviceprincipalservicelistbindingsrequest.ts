@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   ServicePrincipalBindingSubject,
   ServicePrincipalBindingSubject$Outbound,
@@ -17,29 +16,19 @@ export type ServicePrincipalServiceListBindingsRequest = {
   /**
    * The pageSize field.
    */
-  pageSize?: number | undefined;
+  pageSize?: number | null | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | undefined;
-  /**
-   * ServicePrincipalBindingSubject identifies the entity that is bound to a
-   *
-   * @remarks
-   *  service principal. Open-ended oneof so future subject kinds (workflows,
-   *  connectors, etc.) can be added without changing the RPC shape.
-   *
-   * This message contains a oneof named kind. Only a single field of the following list may be set at a time:
-   *   - functionId
-   */
-  servicePrincipalBindingSubject?: ServicePrincipalBindingSubject | undefined;
+  pageToken?: string | null | undefined;
+  subject?: ServicePrincipalBindingSubject | null | undefined;
 };
 
 /** @internal */
 export type ServicePrincipalServiceListBindingsRequest$Outbound = {
-  pageSize?: number | undefined;
-  pageToken?: string | undefined;
-  subject?: ServicePrincipalBindingSubject$Outbound | undefined;
+  pageSize?: number | null | undefined;
+  pageToken?: string | null | undefined;
+  subject?: ServicePrincipalBindingSubject$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -49,14 +38,10 @@ export const ServicePrincipalServiceListBindingsRequest$outboundSchema:
     z.ZodTypeDef,
     ServicePrincipalServiceListBindingsRequest
   > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    servicePrincipalBindingSubject:
-      ServicePrincipalBindingSubject$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      servicePrincipalBindingSubject: "subject",
-    });
+    pageSize: z.nullable(z.number().int()).optional(),
+    pageToken: z.nullable(z.string()).optional(),
+    subject: z.nullable(ServicePrincipalBindingSubject$outboundSchema)
+      .optional(),
   });
 
 export function servicePrincipalServiceListBindingsRequestToJSON(

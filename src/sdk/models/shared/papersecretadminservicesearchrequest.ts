@@ -63,8 +63,8 @@ export type PaperSecretAdminServiceSearchRequestStatuses = OpenEnum<
  * Admin search request - can filter by any user's secrets.
  */
 export type PaperSecretAdminServiceSearchRequest = {
-  createdAfter?: Date | undefined;
-  createdBefore?: Date | undefined;
+  createdAfter?: Date | null | undefined;
+  createdBefore?: Date | null | undefined;
   /**
    * Filter by creator user ID (admin can see all users' secrets)
    */
@@ -72,31 +72,31 @@ export type PaperSecretAdminServiceSearchRequest = {
   /**
    * Include deleted secrets
    */
-  includeDeleted?: boolean | undefined;
+  includeDeleted?: boolean | null | undefined;
   /**
    * The pageSize field.
    */
-  pageSize?: number | undefined;
+  pageSize?: number | null | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | undefined;
+  pageToken?: string | null | undefined;
   /**
    * Fuzzy search by display name
    */
-  query?: string | undefined;
+  query?: string | null | undefined;
   /**
    * Filter by secret type (optional)
    */
-  secretType?: SecretType | undefined;
+  secretType?: SecretType | null | undefined;
   /**
    * Filter by sharing mode (optional)
    */
-  sharingMode?: SharingMode | undefined;
+  sharingMode?: SharingMode | null | undefined;
   /**
    * Sort order
    */
-  sortBy?: SortBy | undefined;
+  sortBy?: SortBy | null | undefined;
   /**
    * Filter by status (optional)
    */
@@ -134,16 +134,16 @@ export const PaperSecretAdminServiceSearchRequestStatuses$outboundSchema:
 
 /** @internal */
 export type PaperSecretAdminServiceSearchRequest$Outbound = {
-  createdAfter?: string | undefined;
-  createdBefore?: string | undefined;
+  createdAfter?: string | null | undefined;
+  createdBefore?: string | null | undefined;
   creatorUserIds?: Array<string> | null | undefined;
-  includeDeleted?: boolean | undefined;
-  pageSize?: number | undefined;
-  pageToken?: string | undefined;
-  query?: string | undefined;
-  secretType?: string | undefined;
-  sharingMode?: string | undefined;
-  sortBy?: string | undefined;
+  includeDeleted?: boolean | null | undefined;
+  pageSize?: number | null | undefined;
+  pageToken?: string | null | undefined;
+  query?: string | null | undefined;
+  secretType?: string | null | undefined;
+  sharingMode?: string | null | undefined;
+  sortBy?: string | null | undefined;
   statuses?: Array<string> | null | undefined;
 };
 
@@ -153,16 +153,17 @@ export const PaperSecretAdminServiceSearchRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PaperSecretAdminServiceSearchRequest
 > = z.object({
-  createdAfter: z.date().transform(v => v.toISOString()).optional(),
-  createdBefore: z.date().transform(v => v.toISOString()).optional(),
+  createdAfter: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  createdBefore: z.nullable(z.date().transform(v => v.toISOString()))
+    .optional(),
   creatorUserIds: z.nullable(z.array(z.string())).optional(),
-  includeDeleted: z.boolean().optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  secretType: SecretType$outboundSchema.optional(),
-  sharingMode: SharingMode$outboundSchema.optional(),
-  sortBy: SortBy$outboundSchema.optional(),
+  includeDeleted: z.nullable(z.boolean()).optional(),
+  pageSize: z.nullable(z.number().int()).optional(),
+  pageToken: z.nullable(z.string()).optional(),
+  query: z.nullable(z.string()).optional(),
+  secretType: z.nullable(SecretType$outboundSchema).optional(),
+  sharingMode: z.nullable(SharingMode$outboundSchema).optional(),
+  sortBy: z.nullable(SortBy$outboundSchema).optional(),
   statuses: z.nullable(
     z.array(PaperSecretAdminServiceSearchRequestStatuses$outboundSchema),
   ).optional(),

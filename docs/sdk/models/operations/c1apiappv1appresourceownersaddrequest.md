@@ -7,7 +7,7 @@ import { C1ApiAppV1AppResourceOwnersAddRequest } from "conductorone-sdk-typescri
 
 let value: C1ApiAppV1AppResourceOwnersAddRequest = {
   appId: "<id>",
-  resourceTypeId: null,
+  resourceTypeId: "<id>",
   resourceId: "<id>",
 };
 ```

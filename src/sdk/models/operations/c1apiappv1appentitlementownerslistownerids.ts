@@ -10,8 +10,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppEntitlementOwnersListOwnerIDsRequest = {
-  appId: string | null;
-  entitlementId: string | null;
+  appId: string;
+  entitlementId: string;
 };
 
 export type C1ApiAppV1AppEntitlementOwnersListOwnerIDsResponse = {
@@ -37,8 +37,8 @@ export type C1ApiAppV1AppEntitlementOwnersListOwnerIDsResponse = {
 
 /** @internal */
 export type C1ApiAppV1AppEntitlementOwnersListOwnerIDsRequest$Outbound = {
-  app_id: string | null;
-  entitlement_id: string | null;
+  app_id: string;
+  entitlement_id: string;
 };
 
 /** @internal */
@@ -48,8 +48,8 @@ export const C1ApiAppV1AppEntitlementOwnersListOwnerIDsRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementOwnersListOwnerIDsRequest
   > = z.object({
-    appId: z.nullable(z.string()),
-    entitlementId: z.nullable(z.string()),
+    appId: z.string(),
+    entitlementId: z.string(),
   }).transform((v) => {
     return remap$(v, {
       appId: "app_id",

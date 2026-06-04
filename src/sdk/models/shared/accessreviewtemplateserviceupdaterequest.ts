@@ -13,22 +13,13 @@ import {
  * The AccessReviewTemplateServiceUpdateRequest message.
  */
 export type AccessReviewTemplateServiceUpdateRequest = {
-  /**
-   * A reusable template that defines the configuration for creating access review campaigns.
-   *
-   * @remarks
-   *  Templates can optionally be scheduled to automatically create campaigns on a recurring basis.
-   *
-   * This message contains a oneof named slack_channel_details. Only a single field of the following list may be set at a time:
-   *   - slackChannel
-   */
-  accessReviewTemplate?: AccessReviewTemplateInput | undefined;
+  accessReviewTemplate?: AccessReviewTemplateInput | null | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type AccessReviewTemplateServiceUpdateRequest$Outbound = {
-  accessReviewTemplate?: AccessReviewTemplateInput$Outbound | undefined;
+  accessReviewTemplate?: AccessReviewTemplateInput$Outbound | null | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -38,7 +29,8 @@ export const AccessReviewTemplateServiceUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AccessReviewTemplateServiceUpdateRequest
 > = z.object({
-  accessReviewTemplate: AccessReviewTemplateInput$outboundSchema.optional(),
+  accessReviewTemplate: z.nullable(AccessReviewTemplateInput$outboundSchema)
+    .optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 

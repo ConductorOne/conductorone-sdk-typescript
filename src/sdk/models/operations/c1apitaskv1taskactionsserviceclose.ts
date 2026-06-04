@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiTaskV1TaskActionsServiceCloseRequest = {
-  taskId: string | null;
+  taskId: string;
   taskActionsServiceCloseRequest?:
     | shared.TaskActionsServiceCloseRequest
     | undefined;
@@ -39,7 +39,7 @@ export type C1ApiTaskV1TaskActionsServiceCloseResponse = {
 
 /** @internal */
 export type C1ApiTaskV1TaskActionsServiceCloseRequest$Outbound = {
-  task_id: string | null;
+  task_id: string;
   TaskActionsServiceCloseRequest?:
     | shared.TaskActionsServiceCloseRequest$Outbound
     | undefined;
@@ -52,7 +52,7 @@ export const C1ApiTaskV1TaskActionsServiceCloseRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiTaskV1TaskActionsServiceCloseRequest
   > = z.object({
-    taskId: z.nullable(z.string()),
+    taskId: z.string(),
     taskActionsServiceCloseRequest: shared
       .TaskActionsServiceCloseRequest$outboundSchema.optional(),
   }).transform((v) => {

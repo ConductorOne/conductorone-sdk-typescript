@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -21,14 +20,8 @@ export type PaperSecretServiceCreateResponse = {
    *  before calling SetTextContent or uploading to upload_url.
    *  See: https://age-encryption.org
    */
-  ageRecipient?: string | undefined;
-  /**
-   * PaperSecret is the API view of a secret (combines Vault + PaperVault fields).
-   *
-   * @remarks
-   *  The vault_id is the primary identifier (Vault.id).
-   */
-  paperSecret?: PaperSecret | undefined;
+  ageRecipient?: string | null | undefined;
+  secret?: PaperSecret | null | undefined;
   /**
    * For FILE secrets: capability URL for uploading the Age-encrypted file.
    *
@@ -38,11 +31,11 @@ export type PaperSecretServiceCreateResponse = {
    *  the Age header "age-encryption.org/v1\n". Maximum file size: 1GB.
    *  Empty for TEXT secrets.
    */
-  uploadUrl?: string | undefined;
+  uploadUrl?: string | null | undefined;
   /**
    * Vault ID - primary identifier for this secret.
    */
-  vaultId?: string | undefined;
+  vaultId?: string | null | undefined;
 };
 
 /** @internal */
@@ -51,14 +44,10 @@ export const PaperSecretServiceCreateResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ageRecipient: z.string().optional(),
-  secret: PaperSecret$inboundSchema.optional(),
-  uploadUrl: z.string().optional(),
-  vaultId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "secret": "paperSecret",
-  });
+  ageRecipient: z.nullable(z.string()).optional(),
+  secret: z.nullable(PaperSecret$inboundSchema).optional(),
+  uploadUrl: z.nullable(z.string()).optional(),
+  vaultId: z.nullable(z.string()).optional(),
 });
 
 export function paperSecretServiceCreateResponseFromJSON(

@@ -14,15 +14,15 @@ export type SimilarUsernameMatchEvidence = {
   /**
    * The appUsername field.
    */
-  appUsername?: string | undefined;
+  appUsername?: string | null | undefined;
   /**
    * The identityUsername field.
    */
-  identityUsername?: string | undefined;
+  identityUsername?: string | null | undefined;
   /**
    * The similarityScore field.
    */
-  similarityScore?: number | undefined;
+  similarityScore?: number | null | undefined;
 };
 
 /** @internal */
@@ -31,9 +31,9 @@ export const SimilarUsernameMatchEvidence$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appUsername: z.string().optional(),
-  identityUsername: z.string().optional(),
-  similarityScore: z.number().optional(),
+  appUsername: z.nullable(z.string()).optional(),
+  identityUsername: z.nullable(z.string()).optional(),
+  similarityScore: z.nullable(z.number()).optional(),
 });
 
 export function similarUsernameMatchEvidenceFromJSON(

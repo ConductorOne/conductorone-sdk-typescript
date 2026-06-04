@@ -113,8 +113,8 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 async function run() {
   const result = await conductoroneSDKTypescript.appEntitlementUserBinding.updateGrantDuration({
     appId: "<id>",
-    appEntitlementId: null,
-    appUserId: null,
+    appEntitlementId: "<id>",
+    appUserId: "<id>",
   });
 
   console.log(result);
@@ -143,8 +143,8 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 async function run() {
   const res = await appEntitlementUserBindingUpdateGrantDuration(conductoroneSDKTypescript, {
     appId: "<id>",
-    appEntitlementId: null,
-    appUserId: null,
+    appEntitlementId: "<id>",
+    appUserId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -195,7 +195,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 
 async function run() {
   const result = await conductoroneSDKTypescript.appEntitlementUserBinding.listAppUsersForIdentityWithGrant({
-    appId: null,
+    appId: "<id>",
     appEntitlementId: "<id>",
     identityUserId: "<id>",
   });
@@ -225,7 +225,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 
 async function run() {
   const res = await appEntitlementUserBindingListAppUsersForIdentityWithGrant(conductoroneSDKTypescript, {
-    appId: null,
+    appId: "<id>",
     appEntitlementId: "<id>",
     identityUserId: "<id>",
   });

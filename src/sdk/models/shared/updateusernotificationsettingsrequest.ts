@@ -13,15 +13,12 @@ import {
  * The UpdateUserNotificationSettingsRequest message.
  */
 export type UpdateUserNotificationSettingsRequest = {
-  /**
-   * ChannelSettings groups notification preferences for all supported channels.
-   */
-  channelSettings?: ChannelSettings | undefined;
+  channelSettings?: ChannelSettings | null | undefined;
 };
 
 /** @internal */
 export type UpdateUserNotificationSettingsRequest$Outbound = {
-  channelSettings?: ChannelSettings$Outbound | undefined;
+  channelSettings?: ChannelSettings$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -30,7 +27,7 @@ export const UpdateUserNotificationSettingsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateUserNotificationSettingsRequest
 > = z.object({
-  channelSettings: ChannelSettings$outboundSchema.optional(),
+  channelSettings: z.nullable(ChannelSettings$outboundSchema).optional(),
 });
 
 export function updateUserNotificationSettingsRequestToJSON(

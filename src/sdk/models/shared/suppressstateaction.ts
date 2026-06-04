@@ -11,12 +11,12 @@ export type SuppressStateAction = {
   /**
    * The reason field.
    */
-  reason?: string | undefined;
+  reason?: string | null | undefined;
 };
 
 /** @internal */
 export type SuppressStateAction$Outbound = {
-  reason?: string | undefined;
+  reason?: string | null | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const SuppressStateAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SuppressStateAction
 > = z.object({
-  reason: z.string().optional(),
+  reason: z.nullable(z.string()).optional(),
 });
 
 export function suppressStateActionToJSON(

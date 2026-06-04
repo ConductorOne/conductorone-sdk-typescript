@@ -11,9 +11,9 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest =
   {
-    catalogId: string | null;
-    pageSize?: number | null | undefined;
-    pageToken?: string | null | undefined;
+    catalogId: string;
+    pageSize?: number | undefined;
+    pageToken?: string | undefined;
   };
 
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessResponse =
@@ -41,9 +41,9 @@ export type C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlements
 /** @internal */
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest$Outbound =
   {
-    catalog_id: string | null;
-    page_size?: number | null | undefined;
-    page_token?: string | null | undefined;
+    catalog_id: string;
+    page_size?: number | undefined;
+    page_token?: string | undefined;
   };
 
 /** @internal */
@@ -53,9 +53,9 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlement
     z.ZodTypeDef,
     C1ApiRequestcatalogV1RequestCatalogManagementServiceListEntitlementsForAccessRequest
   > = z.object({
-    catalogId: z.nullable(z.string()),
-    pageSize: z.nullable(z.number().int()).optional(),
-    pageToken: z.nullable(z.string()).optional(),
+    catalogId: z.string(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       catalogId: "catalog_id",

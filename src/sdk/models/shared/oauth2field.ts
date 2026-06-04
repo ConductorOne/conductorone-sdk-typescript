@@ -22,9 +22,6 @@ import {
  *   - oauth2FieldView
  */
 export type Oauth2Field = {
-  /**
-   * The Oauth2FieldView message.
-   */
   oauth2FieldView?: Oauth2FieldView | null | undefined;
 };
 

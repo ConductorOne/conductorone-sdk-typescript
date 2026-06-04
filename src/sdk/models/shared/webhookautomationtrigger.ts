@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -37,18 +36,7 @@ import {
  *   - capabilityUrl
  */
 export type WebhookAutomationTrigger = {
-  /**
-   * Capability URL authentication: the URL itself contains an unguessable token that acts
-   *
-   * @remarks
-   *  as the credential. This is simpler to integrate but less secure than JWT or HMAC because
-   *  the token can leak via server logs, referrer headers, and URL sharing.
-   *  See https://www.w3.org/TR/capability-urls/ for background.
-   */
-  webhookListenerAuthCapabilityURL?:
-    | WebhookListenerAuthCapabilityURL
-    | null
-    | undefined;
+  capabilityUrl?: WebhookListenerAuthCapabilityURL | null | undefined;
   hmac?: WebhookListenerAuthHMAC | null | undefined;
   jwt?: WebhookListenerAuthJWT | null | undefined;
   /**
@@ -68,10 +56,6 @@ export const WebhookAutomationTrigger$inboundSchema: z.ZodType<
   hmac: z.nullable(WebhookListenerAuthHMAC$inboundSchema).optional(),
   jwt: z.nullable(WebhookListenerAuthJWT$inboundSchema).optional(),
   listenerId: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "capabilityUrl": "webhookListenerAuthCapabilityURL",
-  });
 });
 /** @internal */
 export type WebhookAutomationTrigger$Outbound = {
@@ -87,16 +71,11 @@ export const WebhookAutomationTrigger$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WebhookAutomationTrigger
 > = z.object({
-  webhookListenerAuthCapabilityURL: z.nullable(
-    WebhookListenerAuthCapabilityURL$outboundSchema,
-  ).optional(),
+  capabilityUrl: z.nullable(WebhookListenerAuthCapabilityURL$outboundSchema)
+    .optional(),
   hmac: z.nullable(WebhookListenerAuthHMAC$outboundSchema).optional(),
   jwt: z.nullable(WebhookListenerAuthJWT$outboundSchema).optional(),
   listenerId: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    webhookListenerAuthCapabilityURL: "capabilityUrl",
-  });
 });
 
 export function webhookAutomationTriggerToJSON(

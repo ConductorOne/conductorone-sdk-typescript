@@ -13,7 +13,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type AppEntitlementProxy = {
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
-  disabledAt?: Date | undefined;
+  disabledAt?: Date | null | undefined;
   /**
    * The ID of the destination (child) entitlement.
    */
@@ -53,8 +53,9 @@ export const AppEntitlementProxy$inboundSchema: z.ZodType<
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  disabledAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  disabledAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
   dstAppEntitlementId: z.nullable(z.string()).optional(),
   dstAppId: z.nullable(z.string()).optional(),
   implicit: z.nullable(z.boolean()).optional(),

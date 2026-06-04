@@ -13,16 +13,13 @@ import {
  * The UpdateContactsRequest message.
  */
 export type UpdateContactsRequest = {
-  /**
-   * Contacts represents the contact configuration for an organization.
-   */
-  contacts?: ContactsInput | undefined;
+  contacts?: ContactsInput | null | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type UpdateContactsRequest$Outbound = {
-  contacts?: ContactsInput$Outbound | undefined;
+  contacts?: ContactsInput$Outbound | null | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -32,7 +29,7 @@ export const UpdateContactsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateContactsRequest
 > = z.object({
-  contacts: ContactsInput$outboundSchema.optional(),
+  contacts: z.nullable(ContactsInput$outboundSchema).optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 

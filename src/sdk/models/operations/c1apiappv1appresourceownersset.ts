@@ -10,9 +10,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppResourceOwnersSetRequest = {
-  appId: string | null;
-  resourceTypeId: string | null;
-  resourceId: string | null;
+  appId: string;
+  resourceTypeId: string;
+  resourceId: string;
   setAppResourceOwnersRequest?: shared.SetAppResourceOwnersRequest | undefined;
 };
 
@@ -39,9 +39,9 @@ export type C1ApiAppV1AppResourceOwnersSetResponse = {
 
 /** @internal */
 export type C1ApiAppV1AppResourceOwnersSetRequest$Outbound = {
-  app_id: string | null;
-  resource_type_id: string | null;
-  resource_id: string | null;
+  app_id: string;
+  resource_type_id: string;
+  resource_id: string;
   SetAppResourceOwnersRequest?:
     | shared.SetAppResourceOwnersRequest$Outbound
     | undefined;
@@ -53,9 +53,9 @@ export const C1ApiAppV1AppResourceOwnersSetRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   C1ApiAppV1AppResourceOwnersSetRequest
 > = z.object({
-  appId: z.nullable(z.string()),
-  resourceTypeId: z.nullable(z.string()),
-  resourceId: z.nullable(z.string()),
+  appId: z.string(),
+  resourceTypeId: z.string(),
+  resourceId: z.string(),
   setAppResourceOwnersRequest: shared.SetAppResourceOwnersRequest$outboundSchema
     .optional(),
 }).transform((v) => {

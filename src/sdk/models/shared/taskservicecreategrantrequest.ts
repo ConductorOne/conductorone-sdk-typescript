@@ -21,11 +21,11 @@ export type TaskServiceCreateGrantRequest = {
   /**
    * The ID of the app entitlement to grant access to.
    */
-  appEntitlementId: string;
+  appEntitlementId: string | null;
   /**
    * The ID of the app that is associated with the entitlement.
    */
-  appId: string;
+  appId: string | null;
   /**
    * The ID of the app user to grant access for. This field and identityUserId cannot both be set for a given request.
    */
@@ -44,21 +44,21 @@ export type TaskServiceCreateGrantRequest = {
    * The ID of the user associated with the app user we are granting access for. This field cannot be set if appUserID is also set.
    */
   identityUserId?: string | null | undefined;
-  requestData?: { [k: string]: any } | null | undefined;
+  requestData?: { [k: string]: any } | undefined;
   source?: TaskGrantSource | null | undefined;
 };
 
 /** @internal */
 export type TaskServiceCreateGrantRequest$Outbound = {
-  appEntitlementId: string;
-  appId: string;
+  appEntitlementId: string | null;
+  appId: string | null;
   appUserId?: string | null | undefined;
   description?: string | null | undefined;
   emergencyAccess?: boolean | null | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
   grantDuration?: string | null | undefined;
   identityUserId?: string | null | undefined;
-  requestData?: { [k: string]: any } | null | undefined;
+  requestData?: { [k: string]: any } | undefined;
   source?: TaskGrantSource$Outbound | null | undefined;
 };
 
@@ -68,15 +68,15 @@ export const TaskServiceCreateGrantRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskServiceCreateGrantRequest
 > = z.object({
-  appEntitlementId: z.string(),
-  appId: z.string(),
+  appEntitlementId: z.nullable(z.string()),
+  appId: z.nullable(z.string()),
   appUserId: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   emergencyAccess: z.nullable(z.boolean()).optional(),
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
   grantDuration: z.nullable(z.string()).optional(),
   identityUserId: z.nullable(z.string()).optional(),
-  requestData: z.nullable(z.record(z.any())).optional(),
+  requestData: z.record(z.any()).optional(),
   source: z.nullable(TaskGrantSource$outboundSchema).optional(),
 });
 

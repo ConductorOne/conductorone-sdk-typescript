@@ -6,7 +6,7 @@
 import { C1ApiAppV1AppResourceServiceUpdateRequest } from "conductorone-sdk-typescript/sdk/models/operations";
 
 let value: C1ApiAppV1AppResourceServiceUpdateRequest = {
-  appId: null,
+  appId: "<id>",
   appResourceTypeId: "<id>",
   id: "<id>",
 };

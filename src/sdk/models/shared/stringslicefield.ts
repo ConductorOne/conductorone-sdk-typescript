@@ -40,16 +40,6 @@ export type StringSliceField = {
    * The defaultValues field.
    */
   defaultValues?: Array<string> | null | undefined;
-  /**
-   * The PickerField message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named type. Only a single field of the following list may be set at a time:
-   *   - appUserPicker
-   *   - resourcePicker
-   *   - c1UserPicker
-   */
   pickerField?: PickerField | null | undefined;
   /**
    * The placeholder field.

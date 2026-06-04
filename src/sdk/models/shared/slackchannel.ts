@@ -14,11 +14,11 @@ export type SlackChannel = {
   /**
    * The description field.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * The name field.
    */
-  name?: string | undefined;
+  name?: string | null | undefined;
 };
 
 /** @internal */
@@ -27,13 +27,13 @@ export const SlackChannel$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  description: z.string().optional(),
-  name: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
+  name: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type SlackChannel$Outbound = {
-  description?: string | undefined;
-  name?: string | undefined;
+  description?: string | null | undefined;
+  name?: string | null | undefined;
 };
 
 /** @internal */
@@ -42,8 +42,8 @@ export const SlackChannel$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SlackChannel
 > = z.object({
-  description: z.string().optional(),
-  name: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
+  name: z.nullable(z.string()).optional(),
 });
 
 export function slackChannelToJSON(slackChannel: SlackChannel): string {

@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiTaskV1TaskActionsServiceCommentRequest = {
-  taskId: string | null;
+  taskId: string;
   taskActionsServiceCommentRequest?:
     | shared.TaskActionsServiceCommentRequest
     | undefined;
@@ -39,7 +39,7 @@ export type C1ApiTaskV1TaskActionsServiceCommentResponse = {
 
 /** @internal */
 export type C1ApiTaskV1TaskActionsServiceCommentRequest$Outbound = {
-  task_id: string | null;
+  task_id: string;
   TaskActionsServiceCommentRequest?:
     | shared.TaskActionsServiceCommentRequest$Outbound
     | undefined;
@@ -52,7 +52,7 @@ export const C1ApiTaskV1TaskActionsServiceCommentRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiTaskV1TaskActionsServiceCommentRequest
   > = z.object({
-    taskId: z.nullable(z.string()),
+    taskId: z.string(),
     taskActionsServiceCommentRequest: shared
       .TaskActionsServiceCommentRequest$outboundSchema.optional(),
   }).transform((v) => {

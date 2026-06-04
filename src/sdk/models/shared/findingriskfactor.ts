@@ -34,19 +34,19 @@ export type FindingRiskFactor = {
   /**
    * The description field.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * The name field.
    */
-  name?: string | undefined;
+  name?: string | null | undefined;
   /**
    * The severity field.
    */
-  severity?: FindingRiskFactorSeverity | undefined;
+  severity?: FindingRiskFactorSeverity | null | undefined;
   /**
    * The weight field.
    */
-  weight?: number | undefined;
+  weight?: number | null | undefined;
 };
 
 /** @internal */
@@ -62,10 +62,10 @@ export const FindingRiskFactor$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  description: z.string().optional(),
-  name: z.string().optional(),
-  severity: FindingRiskFactorSeverity$inboundSchema.optional(),
-  weight: z.number().int().optional(),
+  description: z.nullable(z.string()).optional(),
+  name: z.nullable(z.string()).optional(),
+  severity: z.nullable(FindingRiskFactorSeverity$inboundSchema).optional(),
+  weight: z.nullable(z.number().int()).optional(),
 });
 
 export function findingRiskFactorFromJSON(

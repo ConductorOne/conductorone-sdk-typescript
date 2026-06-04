@@ -14,15 +14,15 @@ export type NotificationConfig = {
   /**
    * Whether to send a notification when the campaign is closed.
    */
-  sendClose?: boolean | undefined;
+  sendClose?: boolean | null | undefined;
   /**
    * Whether to send a notification when the campaign is started.
    */
-  sendKickoff?: boolean | undefined;
+  sendKickoff?: boolean | null | undefined;
   /**
    * Whether to send periodic reminder emails to reviewers with outstanding tasks.
    */
-  sendReminders?: boolean | undefined;
+  sendReminders?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -31,15 +31,15 @@ export const NotificationConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  sendClose: z.boolean().optional(),
-  sendKickoff: z.boolean().optional(),
-  sendReminders: z.boolean().optional(),
+  sendClose: z.nullable(z.boolean()).optional(),
+  sendKickoff: z.nullable(z.boolean()).optional(),
+  sendReminders: z.nullable(z.boolean()).optional(),
 });
 /** @internal */
 export type NotificationConfig$Outbound = {
-  sendClose?: boolean | undefined;
-  sendKickoff?: boolean | undefined;
-  sendReminders?: boolean | undefined;
+  sendClose?: boolean | null | undefined;
+  sendKickoff?: boolean | null | undefined;
+  sendReminders?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -48,9 +48,9 @@ export const NotificationConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   NotificationConfig
 > = z.object({
-  sendClose: z.boolean().optional(),
-  sendKickoff: z.boolean().optional(),
-  sendReminders: z.boolean().optional(),
+  sendClose: z.nullable(z.boolean()).optional(),
+  sendKickoff: z.nullable(z.boolean()).optional(),
+  sendReminders: z.nullable(z.boolean()).optional(),
 });
 
 export function notificationConfigToJSON(

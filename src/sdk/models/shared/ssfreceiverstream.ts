@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -111,33 +110,33 @@ export type SSFReceiverStream = {
   /**
    * Action to take when an account-disabled event is received.
    */
-  accountDisabledAction?: AccountDisabledAction | undefined;
-  createdAt?: Date | undefined;
+  accountDisabledAction?: AccountDisabledAction | null | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * Action to take when a credential-change event is received.
    */
-  credentialChangeAction?: CredentialChangeAction | undefined;
+  credentialChangeAction?: CredentialChangeAction | null | undefined;
   /**
    * Action to take when a credential-compromise event is received.
    */
-  credentialCompromiseAction?: CredentialCompromiseAction | undefined;
-  deletedAt?: Date | undefined;
+  credentialCompromiseAction?: CredentialCompromiseAction | null | undefined;
+  deletedAt?: Date | null | undefined;
   /**
    * Controls whether events are received via push (transmitter POSTs to C1) or poll (C1 fetches from transmitter).
    */
-  deliveryMethod?: DeliveryMethod | undefined;
+  deliveryMethod?: DeliveryMethod | null | undefined;
   /**
    * Optional description of the stream's purpose or source.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * Human-readable name for the stream shown in the UI.
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
   /**
    * Controls whether this stream actively processes incoming events. When false, events are ignored.
    */
-  enabled?: boolean | undefined;
+  enabled?: boolean | null | undefined;
   /**
    * SSF/CAEP/RISC event type URIs that this stream is configured to accept.
    */
@@ -145,52 +144,40 @@ export type SSFReceiverStream = {
   /**
    * Expected audience (aud) claim in incoming SETs. Optional.
    */
-  expectedAudience?: string | undefined;
+  expectedAudience?: string | null | undefined;
   /**
    * The unique identifier of this SSF receiver stream.
    */
-  id?: string | undefined;
+  id?: string | null | undefined;
   /**
    * Upstream IdP identification.
    */
-  issuerUrl?: string | undefined;
+  issuerUrl?: string | null | undefined;
   /**
    * The jwksUrl field.
    */
-  jwksUrl?: string | undefined;
-  lastErrorAt?: Date | undefined;
+  jwksUrl?: string | null | undefined;
+  lastErrorAt?: Date | null | undefined;
   /**
    * The lastErrorMessage field.
    */
-  lastErrorMessage?: string | undefined;
-  lastVerifiedAt?: Date | undefined;
-  /**
-   * SSFOutboundAuthBearer is a static bearer token for outbound auth.
-   *
-   * @remarks
-   *  Token is write-only: accepted on create/update, never returned.
-   */
-  ssfOutboundAuthBearer?: SSFOutboundAuthBearer | null | undefined;
-  /**
-   * SSFOutboundAuthOAuth2 uses OAuth2 client credentials for outbound auth.
-   *
-   * @remarks
-   *  client_secret is write-only: accepted on create/update, never returned.
-   */
-  ssfOutboundAuthOAuth2?: SSFOutboundAuthOAuth2 | null | undefined;
+  lastErrorMessage?: string | null | undefined;
+  lastVerifiedAt?: Date | null | undefined;
+  outboundAuthBearer?: SSFOutboundAuthBearer | null | undefined;
+  outboundAuthOauth2?: SSFOutboundAuthOAuth2 | null | undefined;
   /**
    * URL of the transmitter's poll endpoint where C1 fetches events from.
    */
-  pollEndpointUrl?: string | undefined;
-  pollInterval?: string | undefined;
+  pollEndpointUrl?: string | null | undefined;
+  pollInterval?: string | null | undefined;
   /**
    * Push auth token: write-only. Accepted on create, never returned in get/list.
    */
-  pushAuthToken?: string | undefined;
+  pushAuthToken?: string | null | undefined;
   /**
    * Push delivery: C1 generates a unique endpoint URL.
    */
-  pushEndpointUrl?: string | undefined;
+  pushEndpointUrl?: string | null | undefined;
   /**
    * Per-canonical-type action configuration.
    *
@@ -198,8 +185,8 @@ export type SSFReceiverStream = {
    *  Event types without a config here default to LOG_ONLY.
    *  Action to take when a session-revoked event is received.
    */
-  sessionRevokedAction?: SessionRevokedAction | undefined;
-  updatedAt?: Date | undefined;
+  sessionRevokedAction?: SessionRevokedAction | null | undefined;
+  updatedAt?: Date | null | undefined;
 };
 
 /**
@@ -216,31 +203,31 @@ export type SSFReceiverStreamInput = {
   /**
    * Action to take when an account-disabled event is received.
    */
-  accountDisabledAction?: AccountDisabledAction | undefined;
+  accountDisabledAction?: AccountDisabledAction | null | undefined;
   /**
    * Action to take when a credential-change event is received.
    */
-  credentialChangeAction?: CredentialChangeAction | undefined;
+  credentialChangeAction?: CredentialChangeAction | null | undefined;
   /**
    * Action to take when a credential-compromise event is received.
    */
-  credentialCompromiseAction?: CredentialCompromiseAction | undefined;
+  credentialCompromiseAction?: CredentialCompromiseAction | null | undefined;
   /**
    * Controls whether events are received via push (transmitter POSTs to C1) or poll (C1 fetches from transmitter).
    */
-  deliveryMethod?: DeliveryMethod | undefined;
+  deliveryMethod?: DeliveryMethod | null | undefined;
   /**
    * Optional description of the stream's purpose or source.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * Human-readable name for the stream shown in the UI.
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
   /**
    * Controls whether this stream actively processes incoming events. When false, events are ignored.
    */
-  enabled?: boolean | undefined;
+  enabled?: boolean | null | undefined;
   /**
    * SSF/CAEP/RISC event type URIs that this stream is configured to accept.
    */
@@ -248,48 +235,36 @@ export type SSFReceiverStreamInput = {
   /**
    * Expected audience (aud) claim in incoming SETs. Optional.
    */
-  expectedAudience?: string | undefined;
+  expectedAudience?: string | null | undefined;
   /**
    * The unique identifier of this SSF receiver stream.
    */
-  id?: string | undefined;
+  id?: string | null | undefined;
   /**
    * Upstream IdP identification.
    */
-  issuerUrl?: string | undefined;
+  issuerUrl?: string | null | undefined;
   /**
    * The jwksUrl field.
    */
-  jwksUrl?: string | undefined;
-  lastErrorAt?: Date | undefined;
+  jwksUrl?: string | null | undefined;
+  lastErrorAt?: Date | null | undefined;
   /**
    * The lastErrorMessage field.
    */
-  lastErrorMessage?: string | undefined;
-  lastVerifiedAt?: Date | undefined;
-  /**
-   * SSFOutboundAuthBearer is a static bearer token for outbound auth.
-   *
-   * @remarks
-   *  Token is write-only: accepted on create/update, never returned.
-   */
-  ssfOutboundAuthBearer?: SSFOutboundAuthBearer | null | undefined;
-  /**
-   * SSFOutboundAuthOAuth2 uses OAuth2 client credentials for outbound auth.
-   *
-   * @remarks
-   *  client_secret is write-only: accepted on create/update, never returned.
-   */
-  ssfOutboundAuthOAuth2?: SSFOutboundAuthOAuth2 | null | undefined;
+  lastErrorMessage?: string | null | undefined;
+  lastVerifiedAt?: Date | null | undefined;
+  outboundAuthBearer?: SSFOutboundAuthBearer | null | undefined;
+  outboundAuthOauth2?: SSFOutboundAuthOAuth2 | null | undefined;
   /**
    * URL of the transmitter's poll endpoint where C1 fetches events from.
    */
-  pollEndpointUrl?: string | undefined;
-  pollInterval?: string | undefined;
+  pollEndpointUrl?: string | null | undefined;
+  pollInterval?: string | null | undefined;
   /**
    * Push auth token: write-only. Accepted on create, never returned in get/list.
    */
-  pushAuthToken?: string | undefined;
+  pushAuthToken?: string | null | undefined;
   /**
    * Per-canonical-type action configuration.
    *
@@ -297,7 +272,7 @@ export type SSFReceiverStreamInput = {
    *  Event types without a config here default to LOG_ONLY.
    *  Action to take when a session-revoked event is received.
    */
-  sessionRevokedAction?: SessionRevokedAction | undefined;
+  sessionRevokedAction?: SessionRevokedAction | null | undefined;
 };
 
 /** @internal */
@@ -371,45 +346,48 @@ export const SSFReceiverStream$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accountDisabledAction: AccountDisabledAction$inboundSchema.optional(),
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
+  accountDisabledAction: z.nullable(AccountDisabledAction$inboundSchema)
     .optional(),
-  credentialChangeAction: CredentialChangeAction$inboundSchema.optional(),
-  credentialCompromiseAction: CredentialCompromiseAction$inboundSchema
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  credentialChangeAction: z.nullable(CredentialChangeAction$inboundSchema)
     .optional(),
-  deletedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  deliveryMethod: DeliveryMethod$inboundSchema.optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
+  credentialCompromiseAction: z.nullable(
+    CredentialCompromiseAction$inboundSchema,
+  ).optional(),
+  deletedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  deliveryMethod: z.nullable(DeliveryMethod$inboundSchema).optional(),
+  description: z.nullable(z.string()).optional(),
+  displayName: z.nullable(z.string()).optional(),
+  enabled: z.nullable(z.boolean()).optional(),
   eventTypesEnabled: z.nullable(z.array(z.string())).optional(),
-  expectedAudience: z.string().optional(),
-  id: z.string().optional(),
-  issuerUrl: z.string().optional(),
-  jwksUrl: z.string().optional(),
-  lastErrorAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  lastErrorMessage: z.string().optional(),
-  lastVerifiedAt: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
+  expectedAudience: z.nullable(z.string()).optional(),
+  id: z.nullable(z.string()).optional(),
+  issuerUrl: z.nullable(z.string()).optional(),
+  jwksUrl: z.nullable(z.string()).optional(),
+  lastErrorAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  lastErrorMessage: z.nullable(z.string()).optional(),
+  lastVerifiedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   outboundAuthBearer: z.nullable(SSFOutboundAuthBearer$inboundSchema)
     .optional(),
   outboundAuthOauth2: z.nullable(SSFOutboundAuthOAuth2$inboundSchema)
     .optional(),
-  pollEndpointUrl: z.string().optional(),
-  pollInterval: z.string().optional(),
-  pushAuthToken: z.string().optional(),
-  pushEndpointUrl: z.string().optional(),
-  sessionRevokedAction: SessionRevokedAction$inboundSchema.optional(),
-  updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
+  pollEndpointUrl: z.nullable(z.string()).optional(),
+  pollInterval: z.nullable(z.string()).optional(),
+  pushAuthToken: z.nullable(z.string()).optional(),
+  pushEndpointUrl: z.nullable(z.string()).optional(),
+  sessionRevokedAction: z.nullable(SessionRevokedAction$inboundSchema)
     .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "outboundAuthBearer": "ssfOutboundAuthBearer",
-    "outboundAuthOauth2": "ssfOutboundAuthOAuth2",
-  });
+  updatedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 });
 
 export function ssfReceiverStreamFromJSON(
@@ -424,27 +402,27 @@ export function ssfReceiverStreamFromJSON(
 
 /** @internal */
 export type SSFReceiverStreamInput$Outbound = {
-  accountDisabledAction?: string | undefined;
-  credentialChangeAction?: string | undefined;
-  credentialCompromiseAction?: string | undefined;
-  deliveryMethod?: string | undefined;
-  description?: string | undefined;
-  displayName?: string | undefined;
-  enabled?: boolean | undefined;
+  accountDisabledAction?: string | null | undefined;
+  credentialChangeAction?: string | null | undefined;
+  credentialCompromiseAction?: string | null | undefined;
+  deliveryMethod?: string | null | undefined;
+  description?: string | null | undefined;
+  displayName?: string | null | undefined;
+  enabled?: boolean | null | undefined;
   eventTypesEnabled?: Array<string> | null | undefined;
-  expectedAudience?: string | undefined;
-  id?: string | undefined;
-  issuerUrl?: string | undefined;
-  jwksUrl?: string | undefined;
-  lastErrorAt?: string | undefined;
-  lastErrorMessage?: string | undefined;
-  lastVerifiedAt?: string | undefined;
+  expectedAudience?: string | null | undefined;
+  id?: string | null | undefined;
+  issuerUrl?: string | null | undefined;
+  jwksUrl?: string | null | undefined;
+  lastErrorAt?: string | null | undefined;
+  lastErrorMessage?: string | null | undefined;
+  lastVerifiedAt?: string | null | undefined;
   outboundAuthBearer?: SSFOutboundAuthBearer$Outbound | null | undefined;
   outboundAuthOauth2?: SSFOutboundAuthOAuth2$Outbound | null | undefined;
-  pollEndpointUrl?: string | undefined;
-  pollInterval?: string | undefined;
-  pushAuthToken?: string | undefined;
-  sessionRevokedAction?: string | undefined;
+  pollEndpointUrl?: string | null | undefined;
+  pollInterval?: string | null | undefined;
+  pushAuthToken?: string | null | undefined;
+  sessionRevokedAction?: string | null | undefined;
 };
 
 /** @internal */
@@ -453,35 +431,35 @@ export const SSFReceiverStreamInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SSFReceiverStreamInput
 > = z.object({
-  accountDisabledAction: AccountDisabledAction$outboundSchema.optional(),
-  credentialChangeAction: CredentialChangeAction$outboundSchema.optional(),
-  credentialCompromiseAction: CredentialCompromiseAction$outboundSchema
+  accountDisabledAction: z.nullable(AccountDisabledAction$outboundSchema)
     .optional(),
-  deliveryMethod: DeliveryMethod$outboundSchema.optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
+  credentialChangeAction: z.nullable(CredentialChangeAction$outboundSchema)
+    .optional(),
+  credentialCompromiseAction: z.nullable(
+    CredentialCompromiseAction$outboundSchema,
+  ).optional(),
+  deliveryMethod: z.nullable(DeliveryMethod$outboundSchema).optional(),
+  description: z.nullable(z.string()).optional(),
+  displayName: z.nullable(z.string()).optional(),
+  enabled: z.nullable(z.boolean()).optional(),
   eventTypesEnabled: z.nullable(z.array(z.string())).optional(),
-  expectedAudience: z.string().optional(),
-  id: z.string().optional(),
-  issuerUrl: z.string().optional(),
-  jwksUrl: z.string().optional(),
-  lastErrorAt: z.date().transform(v => v.toISOString()).optional(),
-  lastErrorMessage: z.string().optional(),
-  lastVerifiedAt: z.date().transform(v => v.toISOString()).optional(),
-  ssfOutboundAuthBearer: z.nullable(SSFOutboundAuthBearer$outboundSchema)
+  expectedAudience: z.nullable(z.string()).optional(),
+  id: z.nullable(z.string()).optional(),
+  issuerUrl: z.nullable(z.string()).optional(),
+  jwksUrl: z.nullable(z.string()).optional(),
+  lastErrorAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  lastErrorMessage: z.nullable(z.string()).optional(),
+  lastVerifiedAt: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
-  ssfOutboundAuthOAuth2: z.nullable(SSFOutboundAuthOAuth2$outboundSchema)
+  outboundAuthBearer: z.nullable(SSFOutboundAuthBearer$outboundSchema)
     .optional(),
-  pollEndpointUrl: z.string().optional(),
-  pollInterval: z.string().optional(),
-  pushAuthToken: z.string().optional(),
-  sessionRevokedAction: SessionRevokedAction$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    ssfOutboundAuthBearer: "outboundAuthBearer",
-    ssfOutboundAuthOAuth2: "outboundAuthOauth2",
-  });
+  outboundAuthOauth2: z.nullable(SSFOutboundAuthOAuth2$outboundSchema)
+    .optional(),
+  pollEndpointUrl: z.nullable(z.string()).optional(),
+  pollInterval: z.nullable(z.string()).optional(),
+  pushAuthToken: z.nullable(z.string()).optional(),
+  sessionRevokedAction: z.nullable(SessionRevokedAction$outboundSchema)
+    .optional(),
 });
 
 export function ssfReceiverStreamInputToJSON(

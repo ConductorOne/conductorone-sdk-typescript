@@ -6,7 +6,7 @@
 import { C1ApiAppV1AppEntitlementsGetRequest } from "conductorone-sdk-typescript/sdk/models/operations";
 
 let value: C1ApiAppV1AppEntitlementsGetRequest = {
-  appId: null,
+  appId: "<id>",
   id: "<id>",
 };
 ```

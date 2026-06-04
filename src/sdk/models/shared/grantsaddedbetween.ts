@@ -11,8 +11,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * The GrantsAddedBetween message.
  */
 export type GrantsAddedBetween = {
-  endDate?: Date | undefined;
-  startDate?: Date | undefined;
+  endDate?: Date | null | undefined;
+  startDate?: Date | null | undefined;
 };
 
 /** @internal */
@@ -21,15 +21,17 @@ export const GrantsAddedBetween$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  endDate: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  startDate: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  endDate: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  startDate: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 });
 /** @internal */
 export type GrantsAddedBetween$Outbound = {
-  endDate?: string | undefined;
-  startDate?: string | undefined;
+  endDate?: string | null | undefined;
+  startDate?: string | null | undefined;
 };
 
 /** @internal */
@@ -38,8 +40,8 @@ export const GrantsAddedBetween$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GrantsAddedBetween
 > = z.object({
-  endDate: z.date().transform(v => v.toISOString()).optional(),
-  startDate: z.date().transform(v => v.toISOString()).optional(),
+  endDate: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  startDate: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function grantsAddedBetweenToJSON(

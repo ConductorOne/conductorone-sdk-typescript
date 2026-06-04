@@ -12,6 +12,6 @@ let value: UpdateOrgNotificationSettingsRequest = {};
 
 ## Fields
 
-| Field                                                                       | Type                                                                        | Required                                                                    | Description                                                                 |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `channelSettings`                                                           | [shared.ChannelSettings](../../../sdk/models/shared/channelsettings.md)     | :heavy_minus_sign:                                                          | ChannelSettings groups notification preferences for all supported channels. |
+| Field                                                                   | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `channelSettings`                                                       | [shared.ChannelSettings](../../../sdk/models/shared/channelsettings.md) | :heavy_minus_sign:                                                      | N/A                                                                     |

@@ -14,7 +14,7 @@ export type ActionTargetBatonResourceAction = {
   /**
    * The batonResourceActionId field.
    */
-  batonResourceActionId?: string | undefined;
+  batonResourceActionId?: string | null | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const ActionTargetBatonResourceAction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  batonResourceActionId: z.string().optional(),
+  batonResourceActionId: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type ActionTargetBatonResourceAction$Outbound = {
-  batonResourceActionId?: string | undefined;
+  batonResourceActionId?: string | null | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const ActionTargetBatonResourceAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ActionTargetBatonResourceAction
 > = z.object({
-  batonResourceActionId: z.string().optional(),
+  batonResourceActionId: z.nullable(z.string()).optional(),
 });
 
 export function actionTargetBatonResourceActionToJSON(

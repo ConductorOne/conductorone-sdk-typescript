@@ -8,17 +8,17 @@ import * as z from "zod/v3";
  * The BulkAcceptRiskAction message.
  */
 export type BulkAcceptRiskAction = {
-  expiresAt?: Date | undefined;
+  expiresAt?: Date | null | undefined;
   /**
    * The justification field.
    */
-  justification?: string | undefined;
+  justification?: string | null | undefined;
 };
 
 /** @internal */
 export type BulkAcceptRiskAction$Outbound = {
-  expiresAt?: string | undefined;
-  justification?: string | undefined;
+  expiresAt?: string | null | undefined;
+  justification?: string | null | undefined;
 };
 
 /** @internal */
@@ -27,8 +27,8 @@ export const BulkAcceptRiskAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BulkAcceptRiskAction
 > = z.object({
-  expiresAt: z.date().transform(v => v.toISOString()).optional(),
-  justification: z.string().optional(),
+  expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  justification: z.nullable(z.string()).optional(),
 });
 
 export function bulkAcceptRiskActionToJSON(

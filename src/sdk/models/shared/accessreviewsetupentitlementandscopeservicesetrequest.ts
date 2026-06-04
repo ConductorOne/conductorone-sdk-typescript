@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   AccessReviewScopeV2,
   AccessReviewScopeV2$Outbound,
@@ -28,46 +27,8 @@ export type AccessReviewSetupEntitlementAndScopeServiceSetRequest = {
    * The entitlements to include in the campaign. Replaces all previously selected entitlements.
    */
   entitlements?: Array<AccessReviewSetupEntitlementInput> | null | undefined;
-  /**
-   * The AccessReviewSetupEntitlementExpandMask message.
-   */
-  accessReviewSetupEntitlementExpandMask?:
-    | AccessReviewSetupEntitlementExpandMask
-    | undefined;
-  /**
-   * The AccessReviewScopeV2 message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named apps_and_resources_scope. Only a single field of the following list may be set at a time:
-   *   - appAccess
-   *   - specificResources
-   *   - appSelectionCriteria
-   *   - resourceTypeSelections
-   *
-   * This message contains a oneof named users_scope. Only a single field of the following list may be set at a time:
-   *   - allUsers
-   *   - selectedUsers
-   *   - userCriteria
-   *   - celExpression
-   *
-   * This message contains a oneof named accounts_scope. Only a single field of the following list may be set at a time:
-   *   - allAccounts
-   *   - accountCriteria
-   *   - accountCelExpression
-   *
-   * This message contains a oneof named grants_scope. Only a single field of the following list may be set at a time:
-   *   - allGrants
-   *   - grantsByCriteria
-   *
-   * This message contains a oneof named access_conflicts_scope. Only a single field of the following list may be set at a time:
-   *   - allAccessConflicts
-   *   - specificAccessConflicts
-   *
-   * This message contains a oneof named resource_scope. Only a single field of the following list may be set at a time:
-   *   - resourceSelection
-   */
-  accessReviewScopeV2?: AccessReviewScopeV2 | undefined;
+  expandMask?: AccessReviewSetupEntitlementExpandMask | null | undefined;
+  scopeV2?: AccessReviewScopeV2 | null | undefined;
 };
 
 /** @internal */
@@ -76,8 +37,11 @@ export type AccessReviewSetupEntitlementAndScopeServiceSetRequest$Outbound = {
     | Array<AccessReviewSetupEntitlementInput$Outbound>
     | null
     | undefined;
-  expandMask?: AccessReviewSetupEntitlementExpandMask$Outbound | undefined;
-  scopeV2?: AccessReviewScopeV2$Outbound | undefined;
+  expandMask?:
+    | AccessReviewSetupEntitlementExpandMask$Outbound
+    | null
+    | undefined;
+  scopeV2?: AccessReviewScopeV2$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -90,14 +54,10 @@ export const AccessReviewSetupEntitlementAndScopeServiceSetRequest$outboundSchem
     entitlements: z.nullable(
       z.array(AccessReviewSetupEntitlementInput$outboundSchema),
     ).optional(),
-    accessReviewSetupEntitlementExpandMask:
-      AccessReviewSetupEntitlementExpandMask$outboundSchema.optional(),
-    accessReviewScopeV2: AccessReviewScopeV2$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      accessReviewSetupEntitlementExpandMask: "expandMask",
-      accessReviewScopeV2: "scopeV2",
-    });
+    expandMask: z.nullable(
+      AccessReviewSetupEntitlementExpandMask$outboundSchema,
+    ).optional(),
+    scopeV2: z.nullable(AccessReviewScopeV2$outboundSchema).optional(),
   });
 
 export function accessReviewSetupEntitlementAndScopeServiceSetRequestToJSON(

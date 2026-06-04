@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,10 +15,7 @@ import {
  * FunctionsServiceGetCommitContentResponse contains a commit and all its file contents.
  */
 export type FunctionsServiceGetCommitContentResponse = {
-  /**
-   * FunctionCommit represents a single commit in a function's history
-   */
-  functionCommit?: FunctionCommit | undefined;
+  commit?: FunctionCommit | null | undefined;
   /**
    * Map of filename to file content bytes.
    */
@@ -32,12 +28,8 @@ export const FunctionsServiceGetCommitContentResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  commit: FunctionCommit$inboundSchema.optional(),
+  commit: z.nullable(FunctionCommit$inboundSchema).optional(),
   files: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "commit": "functionCommit",
-  });
 });
 
 export function functionsServiceGetCommitContentResponseFromJSON(

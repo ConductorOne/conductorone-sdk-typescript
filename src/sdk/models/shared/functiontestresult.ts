@@ -45,7 +45,7 @@ export type FunctionTestResult = {
   /**
    * Error message if the test errored (distinct from assertion failure).
    */
-  error?: string | undefined;
+  error?: string | null | undefined;
   /**
    * The log entries captured during the test.
    */
@@ -53,11 +53,11 @@ export type FunctionTestResult = {
   /**
    * The test name.
    */
-  name?: string | undefined;
+  name?: string | null | undefined;
   /**
    * The test result status.
    */
-  status?: FunctionTestResultStatus | undefined;
+  status?: FunctionTestResultStatus | null | undefined;
 };
 
 /** @internal */
@@ -75,10 +75,10 @@ export const FunctionTestResult$inboundSchema: z.ZodType<
 > = z.object({
   assertions: z.nullable(z.array(FunctionTestResultAssertion$inboundSchema))
     .optional(),
-  error: z.string().optional(),
+  error: z.nullable(z.string()).optional(),
   logs: z.nullable(z.array(FunctionTestResultLog$inboundSchema)).optional(),
-  name: z.string().optional(),
-  status: FunctionTestResultStatus$inboundSchema.optional(),
+  name: z.nullable(z.string()).optional(),
+  status: z.nullable(FunctionTestResultStatus$inboundSchema).optional(),
 });
 
 export function functionTestResultFromJSON(

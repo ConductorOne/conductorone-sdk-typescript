@@ -31,7 +31,7 @@ export type A2UISurface = {
   /**
    * The catalogId field.
    */
-  catalogId?: string | undefined;
+  catalogId?: string | null | undefined;
   /**
    * The components field.
    */
@@ -39,34 +39,34 @@ export type A2UISurface = {
   /**
    * The conversationId field.
    */
-  conversationId?: string | undefined;
-  createdAt?: Date | undefined;
+  conversationId?: string | null | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * The dataModelJson field.
    */
-  dataModelJson?: string | undefined;
-  deletedAt?: Date | undefined;
+  dataModelJson?: string | null | undefined;
+  deletedAt?: Date | null | undefined;
   /**
    * The schemaVersion field.
    */
-  schemaVersion?: number | undefined;
+  schemaVersion?: number | null | undefined;
   /**
    * The sendDataModel field.
    */
-  sendDataModel?: boolean | undefined;
+  sendDataModel?: boolean | null | undefined;
   /**
    * The state field.
    */
-  state?: State | undefined;
+  state?: State | null | undefined;
   /**
    * The surfaceId field.
    */
-  surfaceId?: string | undefined;
+  surfaceId?: string | null | undefined;
   /**
    * The tenantId field.
    */
-  tenantId?: string | undefined;
-  updatedAt?: Date | undefined;
+  tenantId?: string | null | undefined;
+  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
@@ -79,21 +79,25 @@ export const A2UISurface$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  catalogId: z.string().optional(),
+  catalogId: z.nullable(z.string()).optional(),
   components: z.nullable(z.array(A2UIComponent$inboundSchema)).optional(),
-  conversationId: z.string().optional(),
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
+  conversationId: z.nullable(z.string()).optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  dataModelJson: z.nullable(z.string()).optional(),
+  deletedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  schemaVersion: z.nullable(z.string().transform(v => parseInt(v, 10)))
     .optional(),
-  dataModelJson: z.string().optional(),
-  deletedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  schemaVersion: z.string().transform(v => parseInt(v, 10)).optional(),
-  sendDataModel: z.boolean().optional(),
-  state: State$inboundSchema.optional(),
-  surfaceId: z.string().optional(),
-  tenantId: z.string().optional(),
-  updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  sendDataModel: z.nullable(z.boolean()).optional(),
+  state: z.nullable(State$inboundSchema).optional(),
+  surfaceId: z.nullable(z.string()).optional(),
+  tenantId: z.nullable(z.string()).optional(),
+  updatedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 });
 
 export function a2UISurfaceFromJSON(

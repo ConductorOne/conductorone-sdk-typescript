@@ -14,12 +14,12 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  *  subject's link to a single service principal.
  */
 export type ServicePrincipalBinding = {
-  createdAt?: Date | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * The servicePrincipalId field.
    */
-  servicePrincipalId?: string | undefined;
-  updatedAt?: Date | undefined;
+  servicePrincipalId?: string | null | undefined;
+  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
@@ -28,11 +28,13 @@ export const ServicePrincipalBinding$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  servicePrincipalId: z.string().optional(),
-  updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  servicePrincipalId: z.nullable(z.string()).optional(),
+  updatedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 });
 
 export function servicePrincipalBindingFromJSON(

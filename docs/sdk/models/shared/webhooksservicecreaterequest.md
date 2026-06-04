@@ -8,8 +8,8 @@ The WebhooksServiceCreateRequest message.
 import { WebhooksServiceCreateRequest } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: WebhooksServiceCreateRequest = {
-  displayName: "Kiera.Parisian62",
-  url: "https://pretty-parsnip.info/",
+  displayName: "Trenton_Brekke",
+  url: "https://lavish-governance.name",
 };
 ```
 

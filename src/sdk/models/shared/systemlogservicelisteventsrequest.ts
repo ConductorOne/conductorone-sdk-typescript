@@ -44,7 +44,7 @@ export type SystemLogServiceListEventsRequest = {
   /**
    * The untilEventUid field.
    */
-  untilEventUid?: string | undefined;
+  untilEventUid?: string | null | undefined;
 };
 
 /** @internal */
@@ -62,7 +62,7 @@ export type SystemLogServiceListEventsRequest$Outbound = {
   sinceEventUid?: string | null | undefined;
   sortDirection?: string | null | undefined;
   until?: string | null | undefined;
-  untilEventUid?: string | undefined;
+  untilEventUid?: string | null | undefined;
 };
 
 /** @internal */
@@ -77,7 +77,7 @@ export const SystemLogServiceListEventsRequest$outboundSchema: z.ZodType<
   sinceEventUid: z.nullable(z.string()).optional(),
   sortDirection: z.nullable(SortDirection$outboundSchema).optional(),
   until: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  untilEventUid: z.string().optional(),
+  untilEventUid: z.nullable(z.string()).optional(),
 });
 
 export function systemLogServiceListEventsRequestToJSON(

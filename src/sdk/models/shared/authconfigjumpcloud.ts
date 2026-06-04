@@ -14,11 +14,11 @@ export type AuthConfigJumpCloud = {
   /**
    * The oidcClientId field.
    */
-  oidcClientId?: string | undefined;
+  oidcClientId?: string | null | undefined;
   /**
    * Write-only. Never returned in get/list.
    */
-  oidcClientSecret?: string | undefined;
+  oidcClientSecret?: string | null | undefined;
 };
 
 /** @internal */
@@ -27,13 +27,13 @@ export const AuthConfigJumpCloud$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  oidcClientId: z.string().optional(),
-  oidcClientSecret: z.string().optional(),
+  oidcClientId: z.nullable(z.string()).optional(),
+  oidcClientSecret: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type AuthConfigJumpCloud$Outbound = {
-  oidcClientId?: string | undefined;
-  oidcClientSecret?: string | undefined;
+  oidcClientId?: string | null | undefined;
+  oidcClientSecret?: string | null | undefined;
 };
 
 /** @internal */
@@ -42,8 +42,8 @@ export const AuthConfigJumpCloud$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AuthConfigJumpCloud
 > = z.object({
-  oidcClientId: z.string().optional(),
-  oidcClientSecret: z.string().optional(),
+  oidcClientId: z.nullable(z.string()).optional(),
+  oidcClientSecret: z.nullable(z.string()).optional(),
 });
 
 export function authConfigJumpCloudToJSON(

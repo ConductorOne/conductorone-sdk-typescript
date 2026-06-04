@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -17,29 +16,16 @@ import {
  * The AccessReviewView message.
  */
 export type AccessReviewView = {
-  /**
-   * An access review campaign (also called a certification campaign) that verifies whether users still need their access entitlements.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named setup_metadata. Only a single field of the following list may be set at a time:
-   *   - singleApp
-   *   - multiApp
-   *   - bindings
-   */
-  accessReview?: AccessReview | undefined;
+  accessReview?: AccessReview | null | undefined;
   /**
    * The createdByUserPath field.
    */
-  createdByUserPath?: string | undefined;
-  /**
-   * The ActorObjectPermissions message.
-   */
-  actorObjectPermissions?: ActorObjectPermissions | undefined;
+  createdByUserPath?: string | null | undefined;
+  objectPermissions?: ActorObjectPermissions | null | undefined;
   /**
    * The policyPath field.
    */
-  policyPath?: string | undefined;
+  policyPath?: string | null | undefined;
 };
 
 /** @internal */
@@ -48,14 +34,11 @@ export const AccessReviewView$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accessReview: AccessReview$inboundSchema.optional(),
-  createdByUserPath: z.string().optional(),
-  objectPermissions: ActorObjectPermissions$inboundSchema.optional(),
-  policyPath: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "objectPermissions": "actorObjectPermissions",
-  });
+  accessReview: z.nullable(AccessReview$inboundSchema).optional(),
+  createdByUserPath: z.nullable(z.string()).optional(),
+  objectPermissions: z.nullable(ActorObjectPermissions$inboundSchema)
+    .optional(),
+  policyPath: z.nullable(z.string()).optional(),
 });
 
 export function accessReviewViewFromJSON(

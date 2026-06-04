@@ -20,14 +20,14 @@ export type ConflictMonitorCreateRequest = {
   /**
    * The human-readable name for the conflict monitor.
    */
-  displayName: string;
+  displayName: string | null;
   notificationConfig?: AccessConflictNotificationConfig | null | undefined;
 };
 
 /** @internal */
 export type ConflictMonitorCreateRequest$Outbound = {
   description?: string | null | undefined;
-  displayName: string;
+  displayName: string | null;
   notificationConfig?:
     | AccessConflictNotificationConfig$Outbound
     | null
@@ -41,7 +41,7 @@ export const ConflictMonitorCreateRequest$outboundSchema: z.ZodType<
   ConflictMonitorCreateRequest
 > = z.object({
   description: z.nullable(z.string()).optional(),
-  displayName: z.string(),
+  displayName: z.nullable(z.string()),
   notificationConfig: z.nullable(
     AccessConflictNotificationConfig$outboundSchema,
   ).optional(),

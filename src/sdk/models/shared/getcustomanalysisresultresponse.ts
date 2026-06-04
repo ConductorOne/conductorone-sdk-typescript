@@ -44,7 +44,7 @@ export type GetCustomAnalysisResultResponse = {
   /**
    * The appsAnalyzed field.
    */
-  appsAnalyzed?: number | undefined;
+  appsAnalyzed?: number | null | undefined;
   /**
    * Cluster results.
    */
@@ -52,7 +52,7 @@ export type GetCustomAnalysisResultResponse = {
   /**
    * The cohortSize field.
    */
-  cohortSize?: number | undefined;
+  cohortSize?: number | null | undefined;
   /**
    * Entitlement coverage results.
    */
@@ -60,11 +60,11 @@ export type GetCustomAnalysisResultResponse = {
   /**
    * The errorMessage field.
    */
-  errorMessage?: string | undefined;
+  errorMessage?: string | null | undefined;
   /**
    * The facetUserCount field.
    */
-  facetUserCount?: number | undefined;
+  facetUserCount?: number | null | undefined;
   /**
    * Facet results.
    */
@@ -72,11 +72,11 @@ export type GetCustomAnalysisResultResponse = {
   /**
    * The id field.
    */
-  id?: string | undefined;
+  id?: string | null | undefined;
   /**
    * The status field.
    */
-  status?: GetCustomAnalysisResultResponseStatus | undefined;
+  status?: GetCustomAnalysisResultResponseStatus | null | undefined;
 };
 
 /** @internal */
@@ -92,15 +92,16 @@ export const GetCustomAnalysisResultResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appsAnalyzed: z.number().int().optional(),
+  appsAnalyzed: z.nullable(z.number().int()).optional(),
   clusters: z.nullable(z.array(EntitlementCluster$inboundSchema)).optional(),
-  cohortSize: z.number().int().optional(),
+  cohortSize: z.nullable(z.number().int()).optional(),
   entitlements: z.nullable(z.array(CohortEntitlement$inboundSchema)).optional(),
-  errorMessage: z.string().optional(),
-  facetUserCount: z.number().int().optional(),
+  errorMessage: z.nullable(z.string()).optional(),
+  facetUserCount: z.nullable(z.number().int()).optional(),
   facets: z.nullable(z.array(AttributeFacet$inboundSchema)).optional(),
-  id: z.string().optional(),
-  status: GetCustomAnalysisResultResponseStatus$inboundSchema.optional(),
+  id: z.nullable(z.string()).optional(),
+  status: z.nullable(GetCustomAnalysisResultResponseStatus$inboundSchema)
+    .optional(),
 });
 
 export function getCustomAnalysisResultResponseFromJSON(

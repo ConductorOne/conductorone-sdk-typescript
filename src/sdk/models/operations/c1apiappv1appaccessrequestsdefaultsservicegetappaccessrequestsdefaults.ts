@@ -11,7 +11,7 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequest =
   {
-    appId: string | null;
+    appId: string;
   };
 
 export type C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsResponse =
@@ -37,7 +37,7 @@ export type C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaul
 /** @internal */
 export type C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequest$Outbound =
   {
-    app_id: string | null;
+    app_id: string;
   };
 
 /** @internal */
@@ -47,7 +47,7 @@ export const C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefau
     z.ZodTypeDef,
     C1ApiAppV1AppAccessRequestsDefaultsServiceGetAppAccessRequestsDefaultsRequest
   > = z.object({
-    appId: z.nullable(z.string()),
+    appId: z.string(),
   }).transform((v) => {
     return remap$(v, {
       appId: "app_id",

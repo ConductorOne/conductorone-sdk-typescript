@@ -8,7 +8,7 @@ import * as z from "zod/v3";
  * The WebhooksServiceCreateRequest message.
  */
 export type WebhooksServiceCreateRequest = {
-  callbackTimeout?: string | undefined;
+  callbackTimeout?: string | null | undefined;
   /**
    * An optional description of the webhook's purpose.
    */
@@ -16,19 +16,19 @@ export type WebhooksServiceCreateRequest = {
   /**
    * The human-readable name for the new webhook.
    */
-  displayName: string;
+  displayName: string | null;
   /**
    * The destination URL that will receive event notification HTTP callbacks.
    */
-  url: string;
+  url: string | null;
 };
 
 /** @internal */
 export type WebhooksServiceCreateRequest$Outbound = {
-  callbackTimeout?: string | undefined;
+  callbackTimeout?: string | null | undefined;
   description?: string | null | undefined;
-  displayName: string;
-  url: string;
+  displayName: string | null;
+  url: string | null;
 };
 
 /** @internal */
@@ -37,10 +37,10 @@ export const WebhooksServiceCreateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WebhooksServiceCreateRequest
 > = z.object({
-  callbackTimeout: z.string().optional(),
+  callbackTimeout: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
-  displayName: z.string(),
-  url: z.string(),
+  displayName: z.nullable(z.string()),
+  url: z.nullable(z.string()),
 });
 
 export function webhooksServiceCreateRequestToJSON(

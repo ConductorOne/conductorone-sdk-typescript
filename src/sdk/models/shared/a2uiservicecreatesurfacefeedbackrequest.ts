@@ -31,15 +31,18 @@ export type A2UIServiceCreateSurfaceFeedbackRequest = {
   /**
    * The conversationId field.
    */
-  conversationId?: string | undefined;
+  conversationId?: string | null | undefined;
   /**
    * The sentiment field.
    */
-  sentiment?: A2UIServiceCreateSurfaceFeedbackRequestSentiment | undefined;
+  sentiment?:
+    | A2UIServiceCreateSurfaceFeedbackRequestSentiment
+    | null
+    | undefined;
   /**
    * The text field.
    */
-  text?: string | undefined;
+  text?: string | null | undefined;
 };
 
 /** @internal */
@@ -54,9 +57,9 @@ export const A2UIServiceCreateSurfaceFeedbackRequestSentiment$outboundSchema:
 
 /** @internal */
 export type A2UIServiceCreateSurfaceFeedbackRequest$Outbound = {
-  conversationId?: string | undefined;
-  sentiment?: string | undefined;
-  text?: string | undefined;
+  conversationId?: string | null | undefined;
+  sentiment?: string | null | undefined;
+  text?: string | null | undefined;
 };
 
 /** @internal */
@@ -65,10 +68,11 @@ export const A2UIServiceCreateSurfaceFeedbackRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   A2UIServiceCreateSurfaceFeedbackRequest
 > = z.object({
-  conversationId: z.string().optional(),
-  sentiment: A2UIServiceCreateSurfaceFeedbackRequestSentiment$outboundSchema
-    .optional(),
-  text: z.string().optional(),
+  conversationId: z.nullable(z.string()).optional(),
+  sentiment: z.nullable(
+    A2UIServiceCreateSurfaceFeedbackRequestSentiment$outboundSchema,
+  ).optional(),
+  text: z.nullable(z.string()).optional(),
 });
 
 export function a2UIServiceCreateSurfaceFeedbackRequestToJSON(

@@ -14,15 +14,15 @@ export type AuthConfigOkta = {
   /**
    * The domain field.
    */
-  domain?: string | undefined;
+  domain?: string | null | undefined;
   /**
    * The oidcClientId field.
    */
-  oidcClientId?: string | undefined;
+  oidcClientId?: string | null | undefined;
   /**
    * Write-only. Never returned in get/list.
    */
-  oidcClientSecret?: string | undefined;
+  oidcClientSecret?: string | null | undefined;
 };
 
 /** @internal */
@@ -31,15 +31,15 @@ export const AuthConfigOkta$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  domain: z.string().optional(),
-  oidcClientId: z.string().optional(),
-  oidcClientSecret: z.string().optional(),
+  domain: z.nullable(z.string()).optional(),
+  oidcClientId: z.nullable(z.string()).optional(),
+  oidcClientSecret: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type AuthConfigOkta$Outbound = {
-  domain?: string | undefined;
-  oidcClientId?: string | undefined;
-  oidcClientSecret?: string | undefined;
+  domain?: string | null | undefined;
+  oidcClientId?: string | null | undefined;
+  oidcClientSecret?: string | null | undefined;
 };
 
 /** @internal */
@@ -48,9 +48,9 @@ export const AuthConfigOkta$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AuthConfigOkta
 > = z.object({
-  domain: z.string().optional(),
-  oidcClientId: z.string().optional(),
-  oidcClientSecret: z.string().optional(),
+  domain: z.nullable(z.string()).optional(),
+  oidcClientId: z.nullable(z.string()).optional(),
+  oidcClientSecret: z.nullable(z.string()).optional(),
 });
 
 export function authConfigOktaToJSON(authConfigOkta: AuthConfigOkta): string {

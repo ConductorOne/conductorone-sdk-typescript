@@ -7,7 +7,7 @@ import { C1ApiAppV1AppEntitlementOwnersAddRequest } from "conductorone-sdk-types
 
 let value: C1ApiAppV1AppEntitlementOwnersAddRequest = {
   appId: "<id>",
-  entitlementId: null,
+  entitlementId: "<id>",
 };
 ```
 

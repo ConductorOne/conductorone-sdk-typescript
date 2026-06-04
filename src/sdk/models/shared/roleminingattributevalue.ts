@@ -14,15 +14,15 @@ export type RoleMiningAttributeValue = {
   /**
    * The displayName field.
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
   /**
    * The userCount field.
    */
-  userCount?: number | undefined;
+  userCount?: number | null | undefined;
   /**
    * The value field.
    */
-  value?: string | undefined;
+  value?: string | null | undefined;
 };
 
 /** @internal */
@@ -31,9 +31,9 @@ export const RoleMiningAttributeValue$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  displayName: z.string().optional(),
-  userCount: z.number().int().optional(),
-  value: z.string().optional(),
+  displayName: z.nullable(z.string()).optional(),
+  userCount: z.nullable(z.number().int()).optional(),
+  value: z.nullable(z.string()).optional(),
 });
 
 export function roleMiningAttributeValueFromJSON(

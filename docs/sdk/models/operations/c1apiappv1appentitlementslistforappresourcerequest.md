@@ -7,7 +7,7 @@ import { C1ApiAppV1AppEntitlementsListForAppResourceRequest } from "conductorone
 
 let value: C1ApiAppV1AppEntitlementsListForAppResourceRequest = {
   appId: "<id>",
-  appResourceTypeId: null,
+  appResourceTypeId: "<id>",
   appResourceId: "<id>",
 };
 ```

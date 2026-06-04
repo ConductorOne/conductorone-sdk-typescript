@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -35,46 +34,17 @@ export type Variant = OpenEnum<typeof Variant>;
  * ButtonComponent triggers actions.
  */
 export type ButtonComponent = {
-  /**
-   * Action represents what happens when a component is activated (e.g., button click).
-   *
-   * @remarks
-   *
-   * This message contains a oneof named action_type. Only a single field of the following list may be set at a time:
-   *   - event
-   *   - functionCall
-   */
-  a2UIAction?: A2UIAction | undefined;
+  action?: A2UIAction | null | undefined;
   /**
    * The checks field.
    */
   checks?: Array<ValidationCheck> | null | undefined;
-  /**
-   * DynamicBool can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicBool?: DynamicBool | undefined;
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString?: DynamicString | undefined;
+  disabled?: DynamicBool | null | undefined;
+  label?: DynamicString | null | undefined;
   /**
    * The variant field.
    */
-  variant?: Variant | undefined;
+  variant?: Variant | null | undefined;
 };
 
 /** @internal */
@@ -87,17 +57,11 @@ export const ButtonComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  action: A2UIAction$inboundSchema.optional(),
+  action: z.nullable(A2UIAction$inboundSchema).optional(),
   checks: z.nullable(z.array(ValidationCheck$inboundSchema)).optional(),
-  disabled: DynamicBool$inboundSchema.optional(),
-  label: DynamicString$inboundSchema.optional(),
-  variant: Variant$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "action": "a2UIAction",
-    "disabled": "dynamicBool",
-    "label": "dynamicString",
-  });
+  disabled: z.nullable(DynamicBool$inboundSchema).optional(),
+  label: z.nullable(DynamicString$inboundSchema).optional(),
+  variant: z.nullable(Variant$inboundSchema).optional(),
 });
 
 export function buttonComponentFromJSON(

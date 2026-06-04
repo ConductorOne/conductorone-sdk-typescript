@@ -22,47 +22,44 @@ import { MagicVault, MagicVault$inboundSchema } from "./magicvault.js";
  *   - magicVault
  */
 export type Vault = {
-  createdAt?: Date | undefined;
-  credentialExpirationDuration?: string | undefined;
-  deletedAt?: Date | undefined;
+  createdAt?: Date | null | undefined;
+  credentialExpirationDuration?: string | null | undefined;
+  deletedAt?: Date | null | undefined;
   /**
    * A free-text description of the vault's purpose or configuration.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * The human-readable name of the vault.
    */
-  displayName?: string | undefined;
-  /**
-   * GroupAuthzVault configures a vault that uses group-based authorization to control access to stored credentials.
-   */
+  displayName?: string | null | undefined;
   groupAuthzVault?: GroupAuthzVault | null | undefined;
   /**
    * The unique identifier of the vault.
    */
-  id?: string | undefined;
-  /**
-   * MagicVault configures a vault that grants time-limited credential access via magic links.
-   */
+  id?: string | null | undefined;
   magicVault?: MagicVault | null | undefined;
-  updatedAt?: Date | undefined;
+  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
 export const Vault$inboundSchema: z.ZodType<Vault, z.ZodTypeDef, unknown> = z
   .object({
-    createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-      .optional(),
-    credentialExpirationDuration: z.string().optional(),
-    deletedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-      .optional(),
-    description: z.string().optional(),
-    displayName: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    credentialExpirationDuration: z.nullable(z.string()).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.nullable(z.string()).optional(),
+    displayName: z.nullable(z.string()).optional(),
     groupAuthzVault: z.nullable(GroupAuthzVault$inboundSchema).optional(),
-    id: z.string().optional(),
+    id: z.nullable(z.string()).optional(),
     magicVault: z.nullable(MagicVault$inboundSchema).optional(),
-    updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-      .optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
   });
 
 export function vaultFromJSON(

@@ -6,8 +6,8 @@
 import { C1ApiAppV1AppResourceOwnersListRequest } from "conductorone-sdk-typescript/sdk/models/operations";
 
 let value: C1ApiAppV1AppResourceOwnersListRequest = {
-  appId: null,
-  resourceTypeId: null,
+  appId: "<id>",
+  resourceTypeId: "<id>",
   resourceId: "<id>",
 };
 ```

@@ -8,8 +8,6 @@ import * as z from "zod/v3";
  * Role is a role that can be assigned to a user in ConductorOne.
  */
 export type RoleInput = {
-  createdAt?: Date | null | undefined;
-  deletedAt?: Date | null | undefined;
   /**
    * The display name of the role.
    */
@@ -22,17 +20,13 @@ export type RoleInput = {
    * The list of serviceRoles that this role has.
    */
   serviceRoles?: Array<string> | null | undefined;
-  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
 export type RoleInput$Outbound = {
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
   displayName?: string | null | undefined;
   permissions?: Array<string> | null | undefined;
   serviceRoles?: Array<string> | null | undefined;
-  updatedAt?: string | null | undefined;
 };
 
 /** @internal */
@@ -41,12 +35,9 @@ export const RoleInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RoleInput
 > = z.object({
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   displayName: z.nullable(z.string()).optional(),
   permissions: z.nullable(z.array(z.string())).optional(),
   serviceRoles: z.nullable(z.array(z.string())).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function roleInputToJSON(roleInput: RoleInput): string {

@@ -15,14 +15,11 @@ export type PersonalClientInput = {
    *  Accepts IPv4 (e.g. 10.0.0.0/24) or IPv6 (e.g. 2001:db8::/32) CIDRs.
    */
   allowSourceCidr?: Array<string> | null | undefined;
-  createdAt?: Date | null | undefined;
-  deletedAt?: Date | null | undefined;
   /**
    * The display name of the personal client credential.
    */
   displayName?: string | null | undefined;
   expiresTime?: Date | null | undefined;
-  lastUsedAt?: Date | null | undefined;
   /**
    * scoped_roles provides a list of IAM Roles
    *
@@ -32,19 +29,14 @@ export type PersonalClientInput = {
    *  are AND'ed against the owning User's own permissions.
    */
   scopedRoles?: Array<string> | null | undefined;
-  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
 export type PersonalClientInput$Outbound = {
   allowSourceCidr?: Array<string> | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
   displayName?: string | null | undefined;
   expiresTime?: string | null | undefined;
-  lastUsedAt?: string | null | undefined;
   scopedRoles?: Array<string> | null | undefined;
-  updatedAt?: string | null | undefined;
 };
 
 /** @internal */
@@ -54,13 +46,9 @@ export const PersonalClientInput$outboundSchema: z.ZodType<
   PersonalClientInput
 > = z.object({
   allowSourceCidr: z.nullable(z.array(z.string())).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   displayName: z.nullable(z.string()).optional(),
   expiresTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  lastUsedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   scopedRoles: z.nullable(z.array(z.string())).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function personalClientInputToJSON(

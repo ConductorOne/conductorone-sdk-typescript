@@ -11,17 +11,17 @@ export type SearchEmailAuditEventsRequest = {
   /**
    * Maximum results per page (0 = server default, max 100).
    */
-  pageSize?: number | undefined;
+  pageSize?: number | null | undefined;
   /**
    * Pagination token from previous response.
    */
-  pageToken?: string | undefined;
+  pageToken?: string | null | undefined;
 };
 
 /** @internal */
 export type SearchEmailAuditEventsRequest$Outbound = {
-  pageSize?: number | undefined;
-  pageToken?: string | undefined;
+  pageSize?: number | null | undefined;
+  pageToken?: string | null | undefined;
 };
 
 /** @internal */
@@ -30,8 +30,8 @@ export const SearchEmailAuditEventsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchEmailAuditEventsRequest
 > = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
+  pageSize: z.nullable(z.number().int()).optional(),
+  pageToken: z.nullable(z.string()).optional(),
 });
 
 export function searchEmailAuditEventsRequestToJSON(

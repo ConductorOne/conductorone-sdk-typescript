@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -13,43 +12,13 @@ import { DynamicString, DynamicString$inboundSchema } from "./dynamicstring.js";
  * C1CodeBlockComponent displays code with syntax highlighting.
  */
 export type C1CodeBlockComponent = {
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString?: DynamicString | undefined;
+  code?: DynamicString | null | undefined;
   /**
    * The copyable field.
    */
-  copyable?: boolean | undefined;
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString1?: DynamicString | undefined;
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString2?: DynamicString | undefined;
+  copyable?: boolean | null | undefined;
+  language?: DynamicString | null | undefined;
+  title?: DynamicString | null | undefined;
 };
 
 /** @internal */
@@ -58,16 +27,10 @@ export const C1CodeBlockComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  code: DynamicString$inboundSchema.optional(),
-  copyable: z.boolean().optional(),
-  language: DynamicString$inboundSchema.optional(),
-  title: DynamicString$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "code": "dynamicString",
-    "language": "dynamicString1",
-    "title": "dynamicString2",
-  });
+  code: z.nullable(DynamicString$inboundSchema).optional(),
+  copyable: z.nullable(z.boolean()).optional(),
+  language: z.nullable(DynamicString$inboundSchema).optional(),
+  title: z.nullable(DynamicString$inboundSchema).optional(),
 });
 
 export function c1CodeBlockComponentFromJSON(

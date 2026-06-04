@@ -13,20 +13,13 @@ import {
  * The LocalDirectoryConfigServiceUpdateRequest message.
  */
 export type LocalDirectoryConfigServiceUpdateRequest = {
-  /**
-   * LocalDirectoryConfig is the public representation of a C1-managed local
-   *
-   * @remarks
-   *  directory configuration. The underlying directory infrastructure is provided
-   *  by the linked App (identified by app_id).
-   */
-  localDirectoryConfig?: LocalDirectoryConfigInput | undefined;
+  localDirectoryConfig?: LocalDirectoryConfigInput | null | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type LocalDirectoryConfigServiceUpdateRequest$Outbound = {
-  localDirectoryConfig?: LocalDirectoryConfigInput$Outbound | undefined;
+  localDirectoryConfig?: LocalDirectoryConfigInput$Outbound | null | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -36,7 +29,8 @@ export const LocalDirectoryConfigServiceUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   LocalDirectoryConfigServiceUpdateRequest
 > = z.object({
-  localDirectoryConfig: LocalDirectoryConfigInput$outboundSchema.optional(),
+  localDirectoryConfig: z.nullable(LocalDirectoryConfigInput$outboundSchema)
+    .optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 

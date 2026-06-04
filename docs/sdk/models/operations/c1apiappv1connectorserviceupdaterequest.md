@@ -6,8 +6,8 @@
 import { C1ApiAppV1ConnectorServiceUpdateRequest } from "conductorone-sdk-typescript/sdk/models/operations";
 
 let value: C1ApiAppV1ConnectorServiceUpdateRequest = {
-  appId: null,
-  id: null,
+  appId: "<id>",
+  id: "<id>",
 };
 ```
 

@@ -8,7 +8,7 @@ The request message for creating a new conflict monitor.
 import { ConflictMonitorCreateRequest } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: ConflictMonitorCreateRequest = {
-  displayName: "Christelle.Blanda73",
+  displayName: "Caterina_Cremin",
 };
 ```
 

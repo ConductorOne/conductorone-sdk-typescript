@@ -13,13 +13,13 @@ import {
  * The TaskActionsServiceUpdateGrantDurationRequest object lets you change the grant duration on a grant task.
  */
 export type TaskActionsServiceUpdateGrantDurationRequest = {
-  duration: string;
+  duration: string | null;
   expandMask?: TaskExpandMask | null | undefined;
 };
 
 /** @internal */
 export type TaskActionsServiceUpdateGrantDurationRequest$Outbound = {
-  duration: string;
+  duration: string | null;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
 };
 
@@ -30,7 +30,7 @@ export const TaskActionsServiceUpdateGrantDurationRequest$outboundSchema:
     z.ZodTypeDef,
     TaskActionsServiceUpdateGrantDurationRequest
   > = z.object({
-    duration: z.string(),
+    duration: z.nullable(z.string()),
     expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
   });
 

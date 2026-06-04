@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -43,27 +42,21 @@ export type ScopeType = OpenEnum<typeof ScopeType>;
  * The AccessReviewServiceCreateRequest message.
  */
 export type AccessReviewServiceCreateRequest = {
-  completionDate?: Date | undefined;
+  completionDate?: Date | null | undefined;
   /**
    * An optional description providing context about the campaign.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * The display name for the new campaign.
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
   /**
    * The ID of an existing campaign to copy scope and entitlement configuration from. Optional.
    */
-  duplicateFrom?: string | undefined;
-  /**
-   * The AccessReviewExpandMask message.
-   */
-  accessReviewExpandMask?: AccessReviewExpandMask | undefined;
-  /**
-   * Controls which email notifications are sent during the access review lifecycle.
-   */
-  notificationConfig?: NotificationConfig | undefined;
+  duplicateFrom?: string | null | undefined;
+  expandMask?: AccessReviewExpandMask | null | undefined;
+  notificationConfig?: NotificationConfig | null | undefined;
   /**
    * The IDs of the users who own and manage this campaign. At least one owner is required.
    */
@@ -71,45 +64,12 @@ export type AccessReviewServiceCreateRequest = {
   /**
    * The ID of the review policy that governs task assignment and resolution.
    */
-  policyId?: string | undefined;
+  policyId?: string | null | undefined;
   /**
    * The type of scoping method for the campaign (e.g., by entitlements, by access conflicts, or by resource).
    */
-  scopeType?: ScopeType | undefined;
-  /**
-   * The AccessReviewScopeV2 message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named apps_and_resources_scope. Only a single field of the following list may be set at a time:
-   *   - appAccess
-   *   - specificResources
-   *   - appSelectionCriteria
-   *   - resourceTypeSelections
-   *
-   * This message contains a oneof named users_scope. Only a single field of the following list may be set at a time:
-   *   - allUsers
-   *   - selectedUsers
-   *   - userCriteria
-   *   - celExpression
-   *
-   * This message contains a oneof named accounts_scope. Only a single field of the following list may be set at a time:
-   *   - allAccounts
-   *   - accountCriteria
-   *   - accountCelExpression
-   *
-   * This message contains a oneof named grants_scope. Only a single field of the following list may be set at a time:
-   *   - allGrants
-   *   - grantsByCriteria
-   *
-   * This message contains a oneof named access_conflicts_scope. Only a single field of the following list may be set at a time:
-   *   - allAccessConflicts
-   *   - specificAccessConflicts
-   *
-   * This message contains a oneof named resource_scope. Only a single field of the following list may be set at a time:
-   *   - resourceSelection
-   */
-  accessReviewScopeV2?: AccessReviewScopeV2 | undefined;
+  scopeType?: ScopeType | null | undefined;
+  scopeV2?: AccessReviewScopeV2 | null | undefined;
 };
 
 /** @internal */
@@ -121,16 +81,16 @@ export const ScopeType$outboundSchema: z.ZodType<
 
 /** @internal */
 export type AccessReviewServiceCreateRequest$Outbound = {
-  completionDate?: string | undefined;
-  description?: string | undefined;
-  displayName?: string | undefined;
-  duplicateFrom?: string | undefined;
-  expandMask?: AccessReviewExpandMask$Outbound | undefined;
-  notificationConfig?: NotificationConfig$Outbound | undefined;
+  completionDate?: string | null | undefined;
+  description?: string | null | undefined;
+  displayName?: string | null | undefined;
+  duplicateFrom?: string | null | undefined;
+  expandMask?: AccessReviewExpandMask$Outbound | null | undefined;
+  notificationConfig?: NotificationConfig$Outbound | null | undefined;
   ownerIds?: Array<string> | null | undefined;
-  policyId?: string | undefined;
-  scopeType?: string | undefined;
-  scopeV2?: AccessReviewScopeV2$Outbound | undefined;
+  policyId?: string | null | undefined;
+  scopeType?: string | null | undefined;
+  scopeV2?: AccessReviewScopeV2$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -139,21 +99,17 @@ export const AccessReviewServiceCreateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AccessReviewServiceCreateRequest
 > = z.object({
-  completionDate: z.date().transform(v => v.toISOString()).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  duplicateFrom: z.string().optional(),
-  accessReviewExpandMask: AccessReviewExpandMask$outboundSchema.optional(),
-  notificationConfig: NotificationConfig$outboundSchema.optional(),
+  completionDate: z.nullable(z.date().transform(v => v.toISOString()))
+    .optional(),
+  description: z.nullable(z.string()).optional(),
+  displayName: z.nullable(z.string()).optional(),
+  duplicateFrom: z.nullable(z.string()).optional(),
+  expandMask: z.nullable(AccessReviewExpandMask$outboundSchema).optional(),
+  notificationConfig: z.nullable(NotificationConfig$outboundSchema).optional(),
   ownerIds: z.nullable(z.array(z.string())).optional(),
-  policyId: z.string().optional(),
-  scopeType: ScopeType$outboundSchema.optional(),
-  accessReviewScopeV2: AccessReviewScopeV2$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    accessReviewExpandMask: "expandMask",
-    accessReviewScopeV2: "scopeV2",
-  });
+  policyId: z.nullable(z.string()).optional(),
+  scopeType: z.nullable(ScopeType$outboundSchema).optional(),
+  scopeV2: z.nullable(AccessReviewScopeV2$outboundSchema).optional(),
 });
 
 export function accessReviewServiceCreateRequestToJSON(

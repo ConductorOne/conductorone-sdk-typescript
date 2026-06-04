@@ -11,7 +11,7 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest =
   {
-    requestCatalogId: string | null;
+    requestCatalogId: string;
     resumePausedBundleAutomationRequest?:
       | shared.ResumePausedBundleAutomationRequest
       | undefined;
@@ -42,7 +42,7 @@ export type C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBund
 /** @internal */
 export type C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest$Outbound =
   {
-    request_catalog_id: string | null;
+    request_catalog_id: string;
     ResumePausedBundleAutomationRequest?:
       | shared.ResumePausedBundleAutomationRequest$Outbound
       | undefined;
@@ -55,7 +55,7 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBun
     z.ZodTypeDef,
     C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest
   > = z.object({
-    requestCatalogId: z.nullable(z.string()),
+    requestCatalogId: z.string(),
     resumePausedBundleAutomationRequest: shared
       .ResumePausedBundleAutomationRequest$outboundSchema.optional(),
   }).transform((v) => {

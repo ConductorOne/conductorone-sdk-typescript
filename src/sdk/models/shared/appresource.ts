@@ -23,7 +23,25 @@ export type AppResource = {
    * @remarks
    *  Must be one of the builtin access config IDs or empty.
    */
-  accessConfigId?: string | undefined;
+  accessConfigId?: string | null | undefined;
+  /**
+   * Bounded key/value metadata bag for IaC marking and customer tags.
+   *
+   * @remarks
+   *  See .rfcs/object-annotations.md §2. Limits: ≤16 entries; keys 1–128
+   *  chars matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0–256 chars
+   *  URL-safe ASCII; total serialized ≤ 4096 bytes. Keys matching ^c1/
+   *  are reserved.
+   *
+   *  Well-known keys: `managed_by`, `iac_workspace`,
+   *  `iac_resource_address`, `iac_tool_version`.
+   *
+   *  Most AppResources are connector-synced; user-supplied annotations on
+   *  a synced resource will be overwritten by the next sync. The
+   *  annotations bag is most useful on user-created groups (the
+   *  `conductorone_app_resource` TF resource).
+   */
+  annotations?: { [k: string]: string } | undefined;
   /**
    * The app that this resource belongs to.
    */
@@ -52,7 +70,7 @@ export type AppResource = {
    * @remarks
    *  Populated from the connector's external ID during sync.
    */
-  externalId?: string | undefined;
+  externalId?: string | null | undefined;
   /**
    * The number of grants to this resource.
    */
@@ -84,7 +102,8 @@ export const AppResource$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accessConfigId: z.string().optional(),
+  accessConfigId: z.nullable(z.string()).optional(),
+  annotations: z.record(z.string()).optional(),
   appId: z.nullable(z.string()).optional(),
   appResourceTypeId: z.nullable(z.string()).optional(),
   createdAt: z.nullable(
@@ -96,7 +115,7 @@ export const AppResource$inboundSchema: z.ZodType<
   ).optional(),
   description: z.nullable(z.string()).optional(),
   displayName: z.nullable(z.string()).optional(),
-  externalId: z.string().optional(),
+  externalId: z.nullable(z.string()).optional(),
   grantCount: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
   id: z.nullable(z.string()).optional(),
   matchBatonId: z.nullable(z.string()).optional(),

@@ -39,7 +39,7 @@ export type RoleMiningManagementSuggestion = {
   /**
    * Average fraction of suggested entitlements held by each user in the cohort.
    */
-  avgCoverage?: number | undefined;
+  avgCoverage?: number | null | undefined;
   /**
    * The profile filters that define which users belong to this cohort.
    */
@@ -47,24 +47,24 @@ export type RoleMiningManagementSuggestion = {
   /**
    * Total number of users in the cohort matching the profile filters.
    */
-  cohortSize?: number | undefined;
+  cohortSize?: number | null | undefined;
   /**
    * Overall confidence score for this suggestion, from 0.0 to 1.0.
    */
-  confidence?: number | undefined;
-  createdAt?: Date | undefined;
+  confidence?: number | null | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * The ID of the access profile created when this suggestion was accepted, empty if not yet accepted.
    */
-  createdCatalogId?: string | undefined;
+  createdCatalogId?: string | null | undefined;
   /**
    * A human-readable description of the proposed role and the cohort it serves.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * Number of distinct attribute dimensions used to define the cohort.
    */
-  dimensionCount?: number | undefined;
+  dimensionCount?: number | null | undefined;
   /**
    * The entitlements that are commonly held by users in this cohort.
    */
@@ -76,29 +76,29 @@ export type RoleMiningManagementSuggestion = {
   /**
    * Unique identifier for this suggestion.
    */
-  id?: string | undefined;
+  id?: string | null | undefined;
   /**
    * Human-readable insights explaining why this role was suggested.
    */
   insights?: Array<string> | null | undefined;
-  lastGeneratedAt?: Date | undefined;
+  lastGeneratedAt?: Date | null | undefined;
   /**
    * The ID of the analysis run that produced this suggestion.
    */
-  runId?: string | undefined;
+  runId?: string | null | undefined;
   /**
    * The suggested display name for the proposed role.
    */
-  suggestedName?: string | undefined;
+  suggestedName?: string | null | undefined;
   /**
    * Current workflow state of this suggestion (e.g., pending, accepted, dismissed).
    */
-  suggestionState?: SuggestionState | undefined;
-  updatedAt?: Date | undefined;
+  suggestionState?: SuggestionState | null | undefined;
+  updatedAt?: Date | null | undefined;
   /**
    * Number of users in the cohort that hold all of the suggested entitlements.
    */
-  usersWithAll?: number | undefined;
+  usersWithAll?: number | null | undefined;
 };
 
 /** @internal */
@@ -114,29 +114,31 @@ export const RoleMiningManagementSuggestion$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  avgCoverage: z.number().optional(),
+  avgCoverage: z.nullable(z.number()).optional(),
   cohortFilters: z.nullable(z.array(ProfileFilter$inboundSchema)).optional(),
-  cohortSize: z.number().int().optional(),
-  confidence: z.number().optional(),
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  createdCatalogId: z.string().optional(),
-  description: z.string().optional(),
-  dimensionCount: z.number().int().optional(),
+  cohortSize: z.nullable(z.number().int()).optional(),
+  confidence: z.nullable(z.number()).optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  createdCatalogId: z.nullable(z.string()).optional(),
+  description: z.nullable(z.string()).optional(),
+  dimensionCount: z.nullable(z.number().int()).optional(),
   entitlements: z.nullable(z.array(CohortEntitlement$inboundSchema)).optional(),
   existingProfileMatches: z.nullable(z.array(AccessProfileMatch$inboundSchema))
     .optional(),
-  id: z.string().optional(),
+  id: z.nullable(z.string()).optional(),
   insights: z.nullable(z.array(z.string())).optional(),
-  lastGeneratedAt: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
+  lastGeneratedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  runId: z.string().optional(),
-  suggestedName: z.string().optional(),
-  suggestionState: SuggestionState$inboundSchema.optional(),
-  updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  usersWithAll: z.number().int().optional(),
+  runId: z.nullable(z.string()).optional(),
+  suggestedName: z.nullable(z.string()).optional(),
+  suggestionState: z.nullable(SuggestionState$inboundSchema).optional(),
+  updatedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  usersWithAll: z.nullable(z.number().int()).optional(),
 });
 
 export function roleMiningManagementSuggestionFromJSON(

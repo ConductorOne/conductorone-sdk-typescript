@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   AcceptRiskAction,
   AcceptRiskAction$Outbound,
@@ -49,32 +48,12 @@ import {
  *   - reopen
  */
 export type UpdateFindingStateRequest = {
-  /**
-   * AcceptRiskAction parameters for UpdateFindingState.
-   */
-  acceptRiskAction?: AcceptRiskAction | null | undefined;
-  /**
-   * ReopenAction parameters for UpdateFindingState.
-   */
-  reopenAction?: ReopenAction | null | undefined;
-  /**
-   * ResolveAction parameters for UpdateFindingState (manual resolve).
-   */
-  resolveAction?: ResolveAction | null | undefined;
-  /**
-   * SnoozeAction parameters for UpdateFindingState.
-   */
-  snoozeAction?: SnoozeAction | null | undefined;
-  /**
-   * SuppressStateAction parameters for UpdateFindingState.
-   */
-  suppressStateAction?: SuppressStateAction | null | undefined;
-  /**
-   * UnsuppressAction parameters for UpdateFindingState.
-   *
-   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
-   */
-  unsuppressAction?: UnsuppressAction | null | undefined;
+  acceptRisk?: AcceptRiskAction | null | undefined;
+  reopen?: ReopenAction | null | undefined;
+  resolve?: ResolveAction | null | undefined;
+  snooze?: SnoozeAction | null | undefined;
+  suppress?: SuppressStateAction | null | undefined;
+  unsuppress?: UnsuppressAction | null | undefined;
 };
 
 /** @internal */
@@ -93,22 +72,12 @@ export const UpdateFindingStateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateFindingStateRequest
 > = z.object({
-  acceptRiskAction: z.nullable(AcceptRiskAction$outboundSchema).optional(),
-  reopenAction: z.nullable(ReopenAction$outboundSchema).optional(),
-  resolveAction: z.nullable(ResolveAction$outboundSchema).optional(),
-  snoozeAction: z.nullable(SnoozeAction$outboundSchema).optional(),
-  suppressStateAction: z.nullable(SuppressStateAction$outboundSchema)
-    .optional(),
-  unsuppressAction: z.nullable(UnsuppressAction$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    acceptRiskAction: "acceptRisk",
-    reopenAction: "reopen",
-    resolveAction: "resolve",
-    snoozeAction: "snooze",
-    suppressStateAction: "suppress",
-    unsuppressAction: "unsuppress",
-  });
+  acceptRisk: z.nullable(AcceptRiskAction$outboundSchema).optional(),
+  reopen: z.nullable(ReopenAction$outboundSchema).optional(),
+  resolve: z.nullable(ResolveAction$outboundSchema).optional(),
+  snooze: z.nullable(SnoozeAction$outboundSchema).optional(),
+  suppress: z.nullable(SuppressStateAction$outboundSchema).optional(),
+  unsuppress: z.nullable(UnsuppressAction$outboundSchema).optional(),
 });
 
 export function updateFindingStateRequestToJSON(

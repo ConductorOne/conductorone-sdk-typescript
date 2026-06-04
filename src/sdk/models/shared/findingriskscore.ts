@@ -18,15 +18,15 @@ export type FindingRiskScore = {
   /**
    * The originalScore field.
    */
-  originalScore?: number | undefined;
+  originalScore?: number | null | undefined;
   /**
    * The overrideByUserId field.
    */
-  overrideByUserId?: string | undefined;
+  overrideByUserId?: string | null | undefined;
   /**
    * The overrideScore field.
    */
-  overrideScore?: number | undefined;
+  overrideScore?: number | null | undefined;
   /**
    * The riskFactors field.
    */
@@ -34,11 +34,11 @@ export type FindingRiskScore = {
   /**
    * The score field.
    */
-  score?: number | undefined;
+  score?: number | null | undefined;
   /**
    * The systemScore field.
    */
-  systemScore?: number | undefined;
+  systemScore?: number | null | undefined;
 };
 
 /** @internal */
@@ -47,12 +47,12 @@ export const FindingRiskScore$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  originalScore: z.number().int().optional(),
-  overrideByUserId: z.string().optional(),
-  overrideScore: z.number().int().optional(),
+  originalScore: z.nullable(z.number().int()).optional(),
+  overrideByUserId: z.nullable(z.string()).optional(),
+  overrideScore: z.nullable(z.number().int()).optional(),
   riskFactors: z.nullable(z.array(FindingRiskFactor$inboundSchema)).optional(),
-  score: z.number().int().optional(),
-  systemScore: z.number().int().optional(),
+  score: z.nullable(z.number().int()).optional(),
+  systemScore: z.nullable(z.number().int()).optional(),
 });
 
 export function findingRiskScoreFromJSON(

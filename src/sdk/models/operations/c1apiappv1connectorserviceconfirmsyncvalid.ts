@@ -10,9 +10,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1ConnectorServiceConfirmSyncValidRequest = {
-  appId: string | null;
-  connectorId: string | null;
-  syncLifecycleId: string | null;
+  appId: string;
+  connectorId: string;
+  syncLifecycleId: string;
   confirmSyncValidRequest?: shared.ConfirmSyncValidRequest | undefined;
 };
 
@@ -37,9 +37,9 @@ export type C1ApiAppV1ConnectorServiceConfirmSyncValidResponse = {
 
 /** @internal */
 export type C1ApiAppV1ConnectorServiceConfirmSyncValidRequest$Outbound = {
-  app_id: string | null;
-  connector_id: string | null;
-  sync_lifecycle_id: string | null;
+  app_id: string;
+  connector_id: string;
+  sync_lifecycle_id: string;
   ConfirmSyncValidRequest?: shared.ConfirmSyncValidRequest$Outbound | undefined;
 };
 
@@ -50,9 +50,9 @@ export const C1ApiAppV1ConnectorServiceConfirmSyncValidRequest$outboundSchema:
     z.ZodTypeDef,
     C1ApiAppV1ConnectorServiceConfirmSyncValidRequest
   > = z.object({
-    appId: z.nullable(z.string()),
-    connectorId: z.nullable(z.string()),
-    syncLifecycleId: z.nullable(z.string()),
+    appId: z.string(),
+    connectorId: z.string(),
+    syncLifecycleId: z.string(),
     confirmSyncValidRequest: shared.ConfirmSyncValidRequest$outboundSchema
       .optional(),
   }).transform((v) => {

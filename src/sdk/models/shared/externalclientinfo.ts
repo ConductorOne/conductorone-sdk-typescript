@@ -55,32 +55,32 @@ export type ExternalClientInfo = {
   /**
    * OAuth2 client ID - canonical identifier for this connection (globally unique per DCR)
    */
-  clientId?: string | undefined;
+  clientId?: string | null | undefined;
   /**
    * How the client_id was established.
    */
-  clientIdType?: ClientIdType | undefined;
+  clientIdType?: ClientIdType | null | undefined;
   /**
    * Original CIMD metadata URL (e.g., "https://cursor.com/.well-known/oauth-client").
    *
    * @remarks
    *  Empty for DCR clients.
    */
-  clientIdUrl?: string | undefined;
+  clientIdUrl?: string | null | undefined;
   /**
    * Original client name from DCR registration
    */
-  clientName?: string | undefined;
-  createdAt?: Date | undefined;
+  clientName?: string | null | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * User-provided custom name (defaults to client_name if not set)
    */
-  displayName?: string | undefined;
-  lastUsedAt?: Date | undefined;
+  displayName?: string | null | undefined;
+  lastUsedAt?: Date | null | undefined;
   /**
    * MCP client record ID for AI governance tracking. May be empty for legacy grants.
    */
-  mcpClientId?: string | undefined;
+  mcpClientId?: string | null | undefined;
   /**
    * Role IDs granted to this client - frontend can fetch display names via SearchRoles
    */
@@ -88,18 +88,18 @@ export type ExternalClientInfo = {
   /**
    * The user who approved this external client (always populated)
    */
-  userId?: string | undefined;
+  userId?: string | null | undefined;
   /**
    * Verified domain from the client_id URL (e.g., "cursor.com").
    *
    * @remarks
    *  Empty for DCR clients.
    */
-  verifiedDomain?: string | undefined;
+  verifiedDomain?: string | null | undefined;
   /**
    * The wellKnownClient field.
    */
-  wellKnownClient?: WellKnownClient | undefined;
+  wellKnownClient?: WellKnownClient | null | undefined;
 };
 
 /** @internal */
@@ -122,20 +122,22 @@ export const ExternalClientInfo$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  clientId: z.string().optional(),
-  clientIdType: ClientIdType$inboundSchema.optional(),
-  clientIdUrl: z.string().optional(),
-  clientName: z.string().optional(),
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  displayName: z.string().optional(),
-  lastUsedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  mcpClientId: z.string().optional(),
+  clientId: z.nullable(z.string()).optional(),
+  clientIdType: z.nullable(ClientIdType$inboundSchema).optional(),
+  clientIdUrl: z.nullable(z.string()).optional(),
+  clientName: z.nullable(z.string()).optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  displayName: z.nullable(z.string()).optional(),
+  lastUsedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  mcpClientId: z.nullable(z.string()).optional(),
   roleIds: z.nullable(z.array(z.string())).optional(),
-  userId: z.string().optional(),
-  verifiedDomain: z.string().optional(),
-  wellKnownClient: WellKnownClient$inboundSchema.optional(),
+  userId: z.nullable(z.string()).optional(),
+  verifiedDomain: z.nullable(z.string()).optional(),
+  wellKnownClient: z.nullable(WellKnownClient$inboundSchema).optional(),
 });
 
 export function externalClientInfoFromJSON(

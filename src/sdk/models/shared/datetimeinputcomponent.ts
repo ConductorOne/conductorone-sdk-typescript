@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -32,51 +31,11 @@ export type DateTimeInputComponent = {
   /**
    * The inputType field.
    */
-  inputType?: InputType | undefined;
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString?: DynamicString | undefined;
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString1?: DynamicString | undefined;
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString2?: DynamicString | undefined;
-  /**
-   * DynamicString can be a literal value, a JSON pointer path, or a function call.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named value. Only a single field of the following list may be set at a time:
-   *   - literal
-   *   - path
-   *   - call
-   */
-  dynamicString3?: DynamicString | undefined;
+  inputType?: InputType | null | undefined;
+  label?: DynamicString | null | undefined;
+  max?: DynamicString | null | undefined;
+  min?: DynamicString | null | undefined;
+  value?: DynamicString | null | undefined;
 };
 
 /** @internal */
@@ -92,18 +51,11 @@ export const DateTimeInputComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  inputType: InputType$inboundSchema.optional(),
-  label: DynamicString$inboundSchema.optional(),
-  max: DynamicString$inboundSchema.optional(),
-  min: DynamicString$inboundSchema.optional(),
-  value: DynamicString$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "label": "dynamicString",
-    "max": "dynamicString1",
-    "min": "dynamicString2",
-    "value": "dynamicString3",
-  });
+  inputType: z.nullable(InputType$inboundSchema).optional(),
+  label: z.nullable(DynamicString$inboundSchema).optional(),
+  max: z.nullable(DynamicString$inboundSchema).optional(),
+  min: z.nullable(DynamicString$inboundSchema).optional(),
+  value: z.nullable(DynamicString$inboundSchema).optional(),
 });
 
 export function dateTimeInputComponentFromJSON(

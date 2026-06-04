@@ -47,38 +47,38 @@ export type RoleMiningManagementRun = {
   /**
    * Number of user cohorts evaluated during the analysis.
    */
-  cohortsAnalyzed?: number | undefined;
-  completedAt?: Date | undefined;
-  createdAt?: Date | undefined;
+  cohortsAnalyzed?: number | null | undefined;
+  completedAt?: Date | null | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * Error message if the run failed, empty on success.
    */
-  errorMessage?: string | undefined;
+  errorMessage?: string | null | undefined;
   /**
    * Unique identifier for this analysis run.
    */
-  id?: string | undefined;
+  id?: string | null | undefined;
   /**
    * Current execution status of this run (e.g., running, completed, failed).
    */
-  status?: RoleMiningManagementRunStatus | undefined;
+  status?: RoleMiningManagementRunStatus | null | undefined;
   /**
    * Number of role suggestions produced by this run.
    */
-  suggestionsGenerated?: number | undefined;
+  suggestionsGenerated?: number | null | undefined;
   /**
    * Total number of users evaluated during the analysis.
    */
-  totalUsers?: number | undefined;
+  totalUsers?: number | null | undefined;
   /**
    * Additional detail about the trigger, such as the user or schedule that initiated the run.
    */
-  triggerDetail?: string | undefined;
+  triggerDetail?: string | null | undefined;
   /**
    * How this run was initiated (e.g., manual, scheduled).
    */
-  triggerType?: TriggerType | undefined;
-  updatedAt?: Date | undefined;
+  triggerType?: TriggerType | null | undefined;
+  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
@@ -101,20 +101,23 @@ export const RoleMiningManagementRun$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  cohortsAnalyzed: z.number().int().optional(),
-  completedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  errorMessage: z.string().optional(),
-  id: z.string().optional(),
-  status: RoleMiningManagementRunStatus$inboundSchema.optional(),
-  suggestionsGenerated: z.number().int().optional(),
-  totalUsers: z.number().int().optional(),
-  triggerDetail: z.string().optional(),
-  triggerType: TriggerType$inboundSchema.optional(),
-  updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  cohortsAnalyzed: z.nullable(z.number().int()).optional(),
+  completedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  errorMessage: z.nullable(z.string()).optional(),
+  id: z.nullable(z.string()).optional(),
+  status: z.nullable(RoleMiningManagementRunStatus$inboundSchema).optional(),
+  suggestionsGenerated: z.nullable(z.number().int()).optional(),
+  totalUsers: z.nullable(z.number().int()).optional(),
+  triggerDetail: z.nullable(z.string()).optional(),
+  triggerType: z.nullable(TriggerType$inboundSchema).optional(),
+  updatedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 });
 
 export function roleMiningManagementRunFromJSON(

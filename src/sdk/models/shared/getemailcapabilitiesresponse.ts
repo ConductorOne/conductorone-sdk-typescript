@@ -18,7 +18,7 @@ export type GetEmailCapabilitiesResponse = {
    *  recipients in automation email steps. False when only the C1 built-in
    *  provider is configured (C1 users only).
    */
-  externalEmailSupported?: boolean | undefined;
+  externalEmailSupported?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -27,7 +27,7 @@ export const GetEmailCapabilitiesResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  externalEmailSupported: z.boolean().optional(),
+  externalEmailSupported: z.nullable(z.boolean()).optional(),
 });
 
 export function getEmailCapabilitiesResponseFromJSON(

@@ -28,14 +28,14 @@ export type FunctionsServiceInvokeRequest = {
   /**
    * Optional VFS volume ID to attach to this invocation. If empty, VFS operations will error.
    */
-  vfsId?: string | undefined;
+  vfsId?: string | null | undefined;
 };
 
 /** @internal */
 export type FunctionsServiceInvokeRequest$Outbound = {
   commitId?: string | null | undefined;
   json?: string | null | undefined;
-  vfsId?: string | undefined;
+  vfsId?: string | null | undefined;
 };
 
 /** @internal */
@@ -46,7 +46,7 @@ export const FunctionsServiceInvokeRequest$outboundSchema: z.ZodType<
 > = z.object({
   commitId: z.nullable(z.string()).optional(),
   json: z.nullable(z.string()).optional(),
-  vfsId: z.string().optional(),
+  vfsId: z.nullable(z.string()).optional(),
 });
 
 export function functionsServiceInvokeRequestToJSON(

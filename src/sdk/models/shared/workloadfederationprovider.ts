@@ -8,6 +8,11 @@ import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { OIDCSettings, OIDCSettings$inboundSchema } from "./oidcsettings.js";
+import {
+  SPIFFESettings,
+  SPIFFESettings$inboundSchema,
+} from "./spiffesettings.js";
 
 /**
  * Well-known provider type. Drives UX (wizard presets, docs, icons).
@@ -26,6 +31,7 @@ export const WellKnownProvider = {
     "WELL_KNOWN_WORKLOAD_PROVIDER_HCP_TERRAFORM",
   WellKnownWorkloadProviderAwsIamOutbound:
     "WELL_KNOWN_WORKLOAD_PROVIDER_AWS_IAM_OUTBOUND",
+  WellKnownWorkloadProviderSpiffe: "WELL_KNOWN_WORKLOAD_PROVIDER_SPIFFE",
 } as const;
 /**
  * Well-known provider type. Drives UX (wizard presets, docs, icons).
@@ -36,38 +42,58 @@ export const WellKnownProvider = {
 export type WellKnownProvider = OpenEnum<typeof WellKnownProvider>;
 
 /**
- * WorkloadFederationProvider represents a tenant-level OIDC issuer registration.
+ * WorkloadFederationProvider represents a tenant-level workload identity
+ *
+ * @remarks
+ *  issuer registration. Two issuer schemes are supported:
+ *
+ *    - https://...   classic OIDC issuer; `settings.oidc` MUST be set.
+ *    - spiffe://...  SPIFFE trust-domain URI; `settings.spiffe` MUST be set.
+ *
+ *  The (well_known_provider, issuer_url scheme, settings oneof) tuple is a
+ *  tri-invariant: SPIFFE wkp ⟺ spiffe:// issuer ⟺ settings.spiffe set; any
+ *  other wkp ⟺ https:// issuer ⟺ settings.oidc set. Issuer URLs are unique
+ *  within tenant.
+ *
+ * This message contains a oneof named settings. Only a single field of the following list may be set at a time:
+ *   - oidc
+ *   - spiffe
  */
 export type WorkloadFederationProvider = {
-  createdAt?: Date | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * A description of what this provider is for.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * Whether the provider is disabled. Disabled providers reject all token exchanges.
    */
-  disabled?: boolean | undefined;
+  disabled?: boolean | null | undefined;
   /**
    * The display name of the provider.
    */
-  displayName?: string | undefined;
+  displayName?: string | null | undefined;
   /**
    * The unique ID of the provider.
    */
-  id?: string | undefined;
+  id?: string | null | undefined;
   /**
-   * The OIDC issuer URL. Immutable after creation.
+   * Canonical issuer URL. https:// for OIDC providers, spiffe:// for SPIFFE
+   *
+   * @remarks
+   *  trust domains. Unique within tenant. Immutable after creation.
    */
-  issuerUrl?: string | undefined;
-  updatedAt?: Date | undefined;
+  issuerUrl?: string | null | undefined;
+  oidc?: OIDCSettings | null | undefined;
+  spiffe?: SPIFFESettings | null | undefined;
+  updatedAt?: Date | null | undefined;
   /**
    * Well-known provider type. Drives UX (wizard presets, docs, icons).
    *
    * @remarks
    *  Set at creation time, immutable.
    */
-  wellKnownProvider?: WellKnownProvider | undefined;
+  wellKnownProvider?: WellKnownProvider | null | undefined;
 };
 
 /** @internal */
@@ -83,16 +109,20 @@ export const WorkloadFederationProvider$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  description: z.string().optional(),
-  disabled: z.boolean().optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  issuerUrl: z.string().optional(),
-  updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  wellKnownProvider: WellKnownProvider$inboundSchema.optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  description: z.nullable(z.string()).optional(),
+  disabled: z.nullable(z.boolean()).optional(),
+  displayName: z.nullable(z.string()).optional(),
+  id: z.nullable(z.string()).optional(),
+  issuerUrl: z.nullable(z.string()).optional(),
+  oidc: z.nullable(OIDCSettings$inboundSchema).optional(),
+  spiffe: z.nullable(SPIFFESettings$inboundSchema).optional(),
+  updatedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  wellKnownProvider: z.nullable(WellKnownProvider$inboundSchema).optional(),
 });
 
 export function workloadFederationProviderFromJSON(

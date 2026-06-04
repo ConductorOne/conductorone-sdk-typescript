@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   FindingOwnerRef,
   FindingOwnerRef$Outbound,
@@ -14,23 +13,12 @@ import {
  * The BulkAssignOwnerAction message.
  */
 export type BulkAssignOwnerAction = {
-  /**
-   * The FindingOwnerRef message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named owner. Only a single field of the following list may be set at a time:
-   *   - identityUserId
-   *   - appOwnerAppId
-   *   - managerOfUserId
-   *   - userSetId
-   */
-  findingOwnerRef?: FindingOwnerRef | undefined;
+  owner?: FindingOwnerRef | null | undefined;
 };
 
 /** @internal */
 export type BulkAssignOwnerAction$Outbound = {
-  owner?: FindingOwnerRef$Outbound | undefined;
+  owner?: FindingOwnerRef$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -39,11 +27,7 @@ export const BulkAssignOwnerAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BulkAssignOwnerAction
 > = z.object({
-  findingOwnerRef: FindingOwnerRef$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    findingOwnerRef: "owner",
-  });
+  owner: z.nullable(FindingOwnerRef$outboundSchema).optional(),
 });
 
 export function bulkAssignOwnerActionToJSON(

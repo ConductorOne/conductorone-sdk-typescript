@@ -30,16 +30,16 @@ export type TaskTypeFinding = {
   /**
    * Reference to the source finding.
    */
-  findingId?: string | undefined;
+  findingId?: string | null | undefined;
   /**
    * The finding type discriminator.
    */
-  findingType?: string | undefined;
+  findingType?: string | null | undefined;
   /**
    * The outcome field.
    */
-  outcome?: TaskTypeFindingOutcome | undefined;
-  outcomeTime?: Date | undefined;
+  outcome?: TaskTypeFindingOutcome | null | undefined;
+  outcomeTime?: Date | null | undefined;
 };
 
 /** @internal */
@@ -61,18 +61,19 @@ export const TaskTypeFinding$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  findingId: z.string().optional(),
-  findingType: z.string().optional(),
-  outcome: TaskTypeFindingOutcome$inboundSchema.optional(),
-  outcomeTime: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  findingId: z.nullable(z.string()).optional(),
+  findingType: z.nullable(z.string()).optional(),
+  outcome: z.nullable(TaskTypeFindingOutcome$inboundSchema).optional(),
+  outcomeTime: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 });
 /** @internal */
 export type TaskTypeFinding$Outbound = {
-  findingId?: string | undefined;
-  findingType?: string | undefined;
-  outcome?: string | undefined;
-  outcomeTime?: string | undefined;
+  findingId?: string | null | undefined;
+  findingType?: string | null | undefined;
+  outcome?: string | null | undefined;
+  outcomeTime?: string | null | undefined;
 };
 
 /** @internal */
@@ -81,10 +82,10 @@ export const TaskTypeFinding$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskTypeFinding
 > = z.object({
-  findingId: z.string().optional(),
-  findingType: z.string().optional(),
-  outcome: TaskTypeFindingOutcome$outboundSchema.optional(),
-  outcomeTime: z.date().transform(v => v.toISOString()).optional(),
+  findingId: z.nullable(z.string()).optional(),
+  findingType: z.nullable(z.string()).optional(),
+  outcome: z.nullable(TaskTypeFindingOutcome$outboundSchema).optional(),
+  outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
 export function taskTypeFindingToJSON(

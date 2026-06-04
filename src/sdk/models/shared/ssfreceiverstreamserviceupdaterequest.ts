@@ -13,23 +13,13 @@ import {
  * SSFReceiverStreamServiceUpdateRequest carries the stream to update and the mask of fields to modify.
  */
 export type SSFReceiverStreamServiceUpdateRequest = {
-  /**
-   * SSFReceiverStream is the public API representation.
-   *
-   * @remarks
-   *  Secrets (push_auth_token, outbound credentials) are write-only.
-   *
-   * This message contains a oneof named outbound_auth. Only a single field of the following list may be set at a time:
-   *   - outboundAuthBearer
-   *   - outboundAuthOauth2
-   */
-  ssfReceiverStream?: SSFReceiverStreamInput | undefined;
+  ssfReceiverStream?: SSFReceiverStreamInput | null | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type SSFReceiverStreamServiceUpdateRequest$Outbound = {
-  ssfReceiverStream?: SSFReceiverStreamInput$Outbound | undefined;
+  ssfReceiverStream?: SSFReceiverStreamInput$Outbound | null | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -39,7 +29,8 @@ export const SSFReceiverStreamServiceUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SSFReceiverStreamServiceUpdateRequest
 > = z.object({
-  ssfReceiverStream: SSFReceiverStreamInput$outboundSchema.optional(),
+  ssfReceiverStream: z.nullable(SSFReceiverStreamInput$outboundSchema)
+    .optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 

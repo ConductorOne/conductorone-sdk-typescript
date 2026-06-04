@@ -21,14 +21,14 @@ export type TaskActionsServiceApproveRequest = {
   /**
    * The ID of the policy step on the given task to approve.
    */
-  policyStepId: string;
+  policyStepId: string | null;
 };
 
 /** @internal */
 export type TaskActionsServiceApproveRequest$Outbound = {
   comment?: string | null | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
-  policyStepId: string;
+  policyStepId: string | null;
 };
 
 /** @internal */
@@ -39,7 +39,7 @@ export const TaskActionsServiceApproveRequest$outboundSchema: z.ZodType<
 > = z.object({
   comment: z.nullable(z.string()).optional(),
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-  policyStepId: z.string(),
+  policyStepId: z.nullable(z.string()),
 });
 
 export function taskActionsServiceApproveRequestToJSON(

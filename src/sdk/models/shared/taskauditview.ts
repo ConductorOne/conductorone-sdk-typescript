@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -377,27 +376,9 @@ export type TaskAuditView = {
     | TaskAuditAccountLifecycleActionFailed
     | null
     | undefined;
-  /**
-   * The TaskAuditActionInstanceCreated message.
-   */
-  taskAuditActionInstanceCreated?:
-    | TaskAuditActionInstanceCreated
-    | null
-    | undefined;
-  /**
-   * The TaskAuditActionInstanceFailed message.
-   */
-  taskAuditActionInstanceFailed?:
-    | TaskAuditActionInstanceFailed
-    | null
-    | undefined;
-  /**
-   * The TaskAuditActionInstanceSucceeded message.
-   */
-  taskAuditActionInstanceSucceeded?:
-    | TaskAuditActionInstanceSucceeded
-    | null
-    | undefined;
+  actionInstanceCreated?: TaskAuditActionInstanceCreated | null | undefined;
+  actionInstanceFailed?: TaskAuditActionInstanceFailed | null | undefined;
+  actionInstanceSucceeded?: TaskAuditActionInstanceSucceeded | null | undefined;
   actionResult?: TaskAuditConnectorActionResult | null | undefined;
   actionSubmitted?: TaskAuditActionSubmitted | null | undefined;
   approvalAutoAcceptedByPolicy?:
@@ -424,13 +405,7 @@ export type TaskAuditView = {
   connectorActionsEnd?: TaskAuditFinishedConnectorActions | null | undefined;
   connectorActionsStart?: TaskAuditStartedConnectorActions | null | undefined;
   created?: Date | null | undefined;
-  /**
-   * TaskAuditCreatedReplacementExtensionGrantTask is used when a replacement extension grant task is created
-   *
-   * @remarks
-   *  (e.g. when an extension grant task is cancelled due to app user deletion).
-   */
-  taskAuditCreatedReplacementExtensionGrantTask?:
+  createdReplacementExtensionGrantTask?:
     | TaskAuditCreatedReplacementExtensionGrantTask
     | null
     | undefined;
@@ -468,14 +443,7 @@ export type TaskAuditView = {
   provisionError?: TaskAuditPolicyProvisionError | null | undefined;
   provisionReassigned?: TaskAuditPolicyProvisionReassigned | null | undefined;
   reassignedToDelegate?: TaskAuditReassignedToDelegate | null | undefined;
-  /**
-   * TaskAuditReassignmentFallbackToAdmin is used when no eligible reviewers are found
-   *
-   * @remarks
-   *  from the policy configuration and the task falls back to system administrators
-   *  without creating a new policy step. This prevents reassignment loops.
-   */
-  taskAuditReassignmentFallbackToAdmin?:
+  reassignmentFallbackToAdmin?:
     | TaskAuditReassignmentFallbackToAdmin
     | null
     | undefined;
@@ -490,14 +458,7 @@ export type TaskAuditView = {
   stepSkipped?: TaskAuditStepSkipped | null | undefined;
   stepUpApproval?: TaskAuditStepUpApproval | null | undefined;
   taskCreated?: TaskAuditNewTask | null | undefined;
-  /**
-   * TaskAuditNewTaskCreatedFrom is used when a task is created from another task
-   *
-   * @remarks
-   *  (e.g. when a replacement extension grant task is created after the original is cancelled).
-   *  This is set on the NEW task to indicate its origin.
-   */
-  taskAuditNewTaskCreatedFrom?: TaskAuditNewTaskCreatedFrom | null | undefined;
+  taskCreatedFrom?: TaskAuditNewTaskCreatedFrom | null | undefined;
   taskEscalated?: TaskAuditEscalateToEmergencyAccess | null | undefined;
   taskRestarted?: TaskAuditRestart | null | undefined;
   /**
@@ -719,16 +680,6 @@ export const TaskAuditView$inboundSchema: z.ZodType<
   webhookTriggered: z.nullable(TaskAuditWebhookTriggered$inboundSchema)
     .optional(),
   workflowStep: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "actionInstanceCreated": "taskAuditActionInstanceCreated",
-    "actionInstanceFailed": "taskAuditActionInstanceFailed",
-    "actionInstanceSucceeded": "taskAuditActionInstanceSucceeded",
-    "createdReplacementExtensionGrantTask":
-      "taskAuditCreatedReplacementExtensionGrantTask",
-    "reassignmentFallbackToAdmin": "taskAuditReassignmentFallbackToAdmin",
-    "taskCreatedFrom": "taskAuditNewTaskCreatedFrom",
-  });
 });
 
 export function taskAuditViewFromJSON(

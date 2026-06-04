@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,10 +15,7 @@ import {
  * The UpdateRoleMiningConfigResponse message.
  */
 export type UpdateRoleMiningConfigResponse = {
-  /**
-   * The RoleMiningManagementConfig message.
-   */
-  roleMiningManagementConfig?: RoleMiningManagementConfig | undefined;
+  config?: RoleMiningManagementConfig | null | undefined;
 };
 
 /** @internal */
@@ -28,11 +24,7 @@ export const UpdateRoleMiningConfigResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  config: RoleMiningManagementConfig$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "config": "roleMiningManagementConfig",
-  });
+  config: z.nullable(RoleMiningManagementConfig$inboundSchema).optional(),
 });
 
 export function updateRoleMiningConfigResponseFromJSON(

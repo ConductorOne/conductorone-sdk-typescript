@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest = {
-  taskId: string | null;
+  taskId: string;
   taskActionsServiceEscalateToEmergencyAccessRequest?:
     | shared.TaskActionsServiceEscalateToEmergencyAccessRequest
     | undefined;
@@ -38,7 +38,7 @@ export type C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse = {
 /** @internal */
 export type C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest$Outbound =
   {
-    task_id: string | null;
+    task_id: string;
     TaskActionsServiceEscalateToEmergencyAccessRequest?:
       | shared.TaskActionsServiceEscalateToEmergencyAccessRequest$Outbound
       | undefined;
@@ -51,7 +51,7 @@ export const C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest$outbo
     z.ZodTypeDef,
     C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest
   > = z.object({
-    taskId: z.nullable(z.string()),
+    taskId: z.string(),
     taskActionsServiceEscalateToEmergencyAccessRequest: shared
       .TaskActionsServiceEscalateToEmergencyAccessRequest$outboundSchema
       .optional(),

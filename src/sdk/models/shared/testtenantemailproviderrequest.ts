@@ -11,12 +11,12 @@ export type TestTenantEmailProviderRequest = {
   /**
    * The email address to send the test email to.
    */
-  testRecipientEmail?: string | undefined;
+  testRecipientEmail?: string | null | undefined;
 };
 
 /** @internal */
 export type TestTenantEmailProviderRequest$Outbound = {
-  testRecipientEmail?: string | undefined;
+  testRecipientEmail?: string | null | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const TestTenantEmailProviderRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TestTenantEmailProviderRequest
 > = z.object({
-  testRecipientEmail: z.string().optional(),
+  testRecipientEmail: z.nullable(z.string()).optional(),
 });
 
 export function testTenantEmailProviderRequestToJSON(

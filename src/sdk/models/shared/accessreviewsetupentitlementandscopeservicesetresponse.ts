@@ -45,40 +45,7 @@ export type AccessReviewSetupEntitlementAndScopeServiceSetResponse = {
    * The current list of setup entitlements for the campaign.
    */
   list?: Array<AccessReviewSetupEntitlementView> | null | undefined;
-  /**
-   * The AccessReviewScopeV2 message.
-   *
-   * @remarks
-   *
-   * This message contains a oneof named apps_and_resources_scope. Only a single field of the following list may be set at a time:
-   *   - appAccess
-   *   - specificResources
-   *   - appSelectionCriteria
-   *   - resourceTypeSelections
-   *
-   * This message contains a oneof named users_scope. Only a single field of the following list may be set at a time:
-   *   - allUsers
-   *   - selectedUsers
-   *   - userCriteria
-   *   - celExpression
-   *
-   * This message contains a oneof named accounts_scope. Only a single field of the following list may be set at a time:
-   *   - allAccounts
-   *   - accountCriteria
-   *   - accountCelExpression
-   *
-   * This message contains a oneof named grants_scope. Only a single field of the following list may be set at a time:
-   *   - allGrants
-   *   - grantsByCriteria
-   *
-   * This message contains a oneof named access_conflicts_scope. Only a single field of the following list may be set at a time:
-   *   - allAccessConflicts
-   *   - specificAccessConflicts
-   *
-   * This message contains a oneof named resource_scope. Only a single field of the following list may be set at a time:
-   *   - resourceSelection
-   */
-  accessReviewScopeV2?: AccessReviewScopeV2 | undefined;
+  scopeV2?: AccessReviewScopeV2 | null | undefined;
 };
 
 /** @internal */
@@ -128,11 +95,7 @@ export const AccessReviewSetupEntitlementAndScopeServiceSetResponse$inboundSchem
     ).optional(),
     list: z.nullable(z.array(AccessReviewSetupEntitlementView$inboundSchema))
       .optional(),
-    scopeV2: AccessReviewScopeV2$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "scopeV2": "accessReviewScopeV2",
-    });
+    scopeV2: z.nullable(AccessReviewScopeV2$inboundSchema).optional(),
   });
 
 export function accessReviewSetupEntitlementAndScopeServiceSetResponseFromJSON(
