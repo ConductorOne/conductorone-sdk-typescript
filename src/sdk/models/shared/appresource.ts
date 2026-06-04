@@ -91,7 +91,7 @@ export type AppResource = {
    * The parent resource type id, if this resource is a child of another resource.
    */
   parentAppResourceTypeId?: string | null | undefined;
-  profile?: { [k: string]: any } | undefined;
+  profile?: { [k: string]: any } | null | undefined;
   secretTrait?: SecretTrait | null | undefined;
   updatedAt?: Date | null | undefined;
 };
@@ -121,7 +121,7 @@ export const AppResource$inboundSchema: z.ZodType<
   matchBatonId: z.nullable(z.string()).optional(),
   parentAppResourceId: z.nullable(z.string()).optional(),
   parentAppResourceTypeId: z.nullable(z.string()).optional(),
-  profile: z.record(z.any()).optional(),
+  profile: z.nullable(z.record(z.any())).optional(),
   secretTrait: z.nullable(SecretTrait$inboundSchema).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),

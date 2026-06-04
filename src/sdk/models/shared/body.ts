@@ -54,7 +54,7 @@ export type Body = {
   /**
    * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
    */
-  payload?: Payload | undefined;
+  payload?: Payload | null | undefined;
   /**
    * version contains the constant value "v1". Future versions of the Webhook body will use a different string.
    *
@@ -128,7 +128,7 @@ export const Body$inboundSchema: z.ZodType<Body, z.ZodTypeDef, unknown> = z
   .object({
     callbackUrl: z.nullable(z.string()).optional(),
     event: z.nullable(z.string()).optional(),
-    payload: z.lazy(() => Payload$inboundSchema).optional(),
+    payload: z.nullable(z.lazy(() => Payload$inboundSchema)).optional(),
     version: z.nullable(z.string()).optional(),
     webhookId: z.nullable(z.string()).optional(),
   });
@@ -136,7 +136,7 @@ export const Body$inboundSchema: z.ZodType<Body, z.ZodTypeDef, unknown> = z
 export type Body$Outbound = {
   callbackUrl?: string | null | undefined;
   event?: string | null | undefined;
-  payload?: Payload$Outbound | undefined;
+  payload?: Payload$Outbound | null | undefined;
   version?: string | null | undefined;
   webhookId?: string | null | undefined;
 };
@@ -146,7 +146,7 @@ export const Body$outboundSchema: z.ZodType<Body$Outbound, z.ZodTypeDef, Body> =
   z.object({
     callbackUrl: z.nullable(z.string()).optional(),
     event: z.nullable(z.string()).optional(),
-    payload: z.lazy(() => Payload$outboundSchema).optional(),
+    payload: z.nullable(z.lazy(() => Payload$outboundSchema)).optional(),
     version: z.nullable(z.string()).optional(),
     webhookId: z.nullable(z.string()).optional(),
   });

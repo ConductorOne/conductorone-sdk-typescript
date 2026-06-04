@@ -83,7 +83,7 @@ export type TaskTypeAction = {
    *  render the task title without an Action fetch.
    */
   displayName?: string | null | undefined;
-  formValues?: { [k: string]: any } | undefined;
+  formValues?: { [k: string]: any } | null | undefined;
   /**
    * The outcome field.
    */
@@ -134,7 +134,7 @@ export const TaskTypeAction$inboundSchema: z.ZodType<
   actionId: z.nullable(z.string()).optional(),
   actionInstance: z.nullable(TaskActionInstance$inboundSchema).optional(),
   displayName: z.nullable(z.string()).optional(),
-  formValues: z.record(z.any()).optional(),
+  formValues: z.nullable(z.record(z.any())).optional(),
   outcome: z.nullable(TaskTypeActionOutcome$inboundSchema).optional(),
   outcomeTime: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -147,7 +147,7 @@ export type TaskTypeAction$Outbound = {
   actionId?: string | null | undefined;
   actionInstance?: TaskActionInstance$Outbound | null | undefined;
   displayName?: string | null | undefined;
-  formValues?: { [k: string]: any } | undefined;
+  formValues?: { [k: string]: any } | null | undefined;
   outcome?: string | null | undefined;
   outcomeTime?: string | null | undefined;
   scopeRole?: ScopeRole$Outbound | null | undefined;
@@ -163,7 +163,7 @@ export const TaskTypeAction$outboundSchema: z.ZodType<
   actionId: z.nullable(z.string()).optional(),
   actionInstance: z.nullable(TaskActionInstance$outboundSchema).optional(),
   displayName: z.nullable(z.string()).optional(),
-  formValues: z.record(z.any()).optional(),
+  formValues: z.nullable(z.record(z.any())).optional(),
   outcome: z.nullable(TaskTypeActionOutcome$outboundSchema).optional(),
   outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   scopeRole: z.nullable(ScopeRole$outboundSchema).optional(),

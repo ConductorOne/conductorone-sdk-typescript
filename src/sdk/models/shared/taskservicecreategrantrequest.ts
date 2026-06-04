@@ -44,7 +44,7 @@ export type TaskServiceCreateGrantRequest = {
    * The ID of the user associated with the app user we are granting access for. This field cannot be set if appUserID is also set.
    */
   identityUserId?: string | null | undefined;
-  requestData?: { [k: string]: any } | undefined;
+  requestData?: { [k: string]: any } | null | undefined;
   source?: TaskGrantSource | null | undefined;
 };
 
@@ -58,7 +58,7 @@ export type TaskServiceCreateGrantRequest$Outbound = {
   expandMask?: TaskExpandMask$Outbound | null | undefined;
   grantDuration?: string | null | undefined;
   identityUserId?: string | null | undefined;
-  requestData?: { [k: string]: any } | undefined;
+  requestData?: { [k: string]: any } | null | undefined;
   source?: TaskGrantSource$Outbound | null | undefined;
 };
 
@@ -76,7 +76,7 @@ export const TaskServiceCreateGrantRequest$outboundSchema: z.ZodType<
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
   grantDuration: z.nullable(z.string()).optional(),
   identityUserId: z.nullable(z.string()).optional(),
-  requestData: z.record(z.any()).optional(),
+  requestData: z.nullable(z.record(z.any())).optional(),
   source: z.nullable(TaskGrantSource$outboundSchema).optional(),
 });
 

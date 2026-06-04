@@ -120,7 +120,7 @@ export type FindingAuditEvent = {
    * The findingId field.
    */
   findingId?: string | null | undefined;
-  ocsf?: { [k: string]: any } | undefined;
+  ocsf?: { [k: string]: any } | null | undefined;
   /**
    * The severityAtEvent field.
    */
@@ -172,7 +172,7 @@ export const FindingAuditEvent$inboundSchema: z.ZodType<
   eventId: z.nullable(z.string()).optional(),
   eventType: z.nullable(FindingAuditEventEventType$inboundSchema).optional(),
   findingId: z.nullable(z.string()).optional(),
-  ocsf: z.record(z.any()).optional(),
+  ocsf: z.nullable(z.record(z.any())).optional(),
   severityAtEvent: z.nullable(SeverityAtEvent$inboundSchema).optional(),
   stateAtEvent: z.nullable(StateAtEvent$inboundSchema).optional(),
   ticketId: z.nullable(z.string()).optional(),
