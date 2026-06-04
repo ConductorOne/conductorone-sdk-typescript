@@ -320,10 +320,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.accessconflict.v1.ConflictMonitorCreateRequest"]["properties"]["displayName"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.accessconflict.v1.ConflictMonitorRef"]["properties"]["id"]["type"]
   update:
   - string
@@ -2120,10 +2116,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.CreateAppEntitlementRequestInput"]["properties"]["displayName"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.CreateAppEntitlementRequestInput"]["properties"]["emergencyGrantEnabled"]["type"]
   update:
   - boolean
@@ -2168,10 +2160,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.CreateAppRequest"]["properties"]["displayName"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.CreateAppRequest"]["properties"]["grantPolicyId"]["type"]
   update:
   - string
@@ -2200,19 +2188,7 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.CreateManuallyManagedAppResourceRequestInput"]["properties"]["displayName"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.app.v1.CreateManuallyManagedAppResourceRequestInput"]["properties"]["matchBatonId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.CreateManuallyManagedResourceTypeRequestInput"]["properties"]["displayName"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.app.v1.CreateManuallyManagedResourceTypeRequestInput"]["properties"]["resourceType"]["type"]
   update:
   - string
   - 'null'
@@ -2856,10 +2832,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.auth_config.v1.TenantAuthConfigServiceCreateRequest"]["properties"]["displayName"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.auth_config.v1.TenantAuthConfigServiceCreateRequest"]["properties"]["isDefaultBootstrap"]["type"]
   update:
   - boolean
@@ -3225,10 +3197,6 @@ actions:
   - integer
   - 'null'
 - target: $["components"]["schemas"]["c1.api.automations.v1.ResolvePausedAutomationExecutionsResponse"]["properties"]["pausedCount"]["type"]
-  update:
-  - integer
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.automations.v1.RunDelayed"]["properties"]["coldStartDelayDays"]["type"]
   update:
   - integer
   - 'null'
@@ -4464,10 +4432,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.hooks.v1.HooksServiceCreateRequest"]["properties"]["displayName"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.hooks.v1.HooksServiceCreateRequest"]["properties"]["enabled"]["type"]
   update:
   - boolean
@@ -4864,15 +4828,7 @@ actions:
   update:
   - boolean
   - 'null'
-- target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalDirectoryConfigServiceCreateRequest"]["properties"]["appId"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalDirectoryConfigServiceCreateRequest"]["properties"]["defaultProfileTypeId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalDirectoryConfigServiceCreateRequest"]["properties"]["displayName"]["type"]
   update:
   - string
   - 'null'
@@ -4933,14 +4889,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalUserInvitation"]["properties"]["status"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalUserInvitationServiceCreateRequestInput"]["properties"]["displayName"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.local_directory.v1.LocalUserInvitationServiceCreateRequestInput"]["properties"]["email"]["type"]
   update:
   - string
   - 'null'
@@ -5165,10 +5113,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.policy.v1.CreatePolicyRequest"]["properties"]["description"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.policy.v1.CreatePolicyRequest"]["properties"]["displayName"]["type"]
   update:
   - string
   - 'null'
@@ -5793,10 +5737,6 @@ actions:
   - boolean
   - 'null'
 - target: $["components"]["schemas"]["c1.api.requestcatalog.v1.RequestCatalogManagementServiceCreateRequest"]["properties"]["description"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.requestcatalog.v1.RequestCatalogManagementServiceCreateRequest"]["properties"]["displayName"]["type"]
   update:
   - string
   - 'null'
@@ -7024,19 +6964,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStreamServiceCreateRequest"]["properties"]["displayName"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStreamServiceCreateRequest"]["properties"]["enabled"]["type"]
   update:
   - boolean
   - 'null'
 - target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStreamServiceCreateRequest"]["properties"]["expectedAudience"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.ssf_receiver.v1.SSFReceiverStreamServiceCreateRequest"]["properties"]["issuerUrl"]["type"]
   update:
   - string
   - 'null'
@@ -7496,23 +7428,11 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskActionsServiceApproveRequestInput"]["properties"]["policyStepId"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskActionsServiceApproveResponse"]["properties"]["ticketActionId"]["type"]
   update:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskActionsServiceApproveWithStepUpRequestInput"]["properties"]["comment"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskActionsServiceApproveWithStepUpRequestInput"]["properties"]["policyStepId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskActionsServiceApproveWithStepUpRequestInput"]["properties"]["stepUpTransactionId"]["type"]
   update:
   - string
   - 'null'
@@ -7589,10 +7509,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskActionsServiceSkipStepRequestInput"]["properties"]["comment"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskActionsServiceSkipStepRequestInput"]["properties"]["policyStepId"]["type"]
   update:
   - string
   - 'null'
@@ -8208,14 +8124,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskServiceCreateGrantRequest"]["properties"]["appEntitlementId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskServiceCreateGrantRequest"]["properties"]["appId"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskServiceCreateGrantRequest"]["properties"]["appUserId"]["type"]
   update:
   - string
@@ -8237,14 +8145,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.task.v1.TaskServiceCreateOffboardingRequest"]["properties"]["subjectUserId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskServiceCreateRevokeRequest"]["properties"]["appEntitlementId"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.task.v1.TaskServiceCreateRevokeRequest"]["properties"]["appId"]["type"]
   update:
   - string
   - 'null'
@@ -8656,10 +8556,6 @@ actions:
   update:
   - string
   - 'null'
-- target: $["components"]["schemas"]["c1.api.vault.v1.VaultServiceCreateRequest"]["properties"]["displayName"]["type"]
-  update:
-  - string
-  - 'null'
 - target: $["components"]["schemas"]["c1.api.webhooks.v1.Webhook"]["properties"]["description"]["type"]
   update:
   - string
@@ -8737,14 +8633,6 @@ actions:
   - string
   - 'null'
 - target: $["components"]["schemas"]["c1.api.webhooks.v1.WebhooksServiceCreateRequest"]["properties"]["description"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.webhooks.v1.WebhooksServiceCreateRequest"]["properties"]["displayName"]["type"]
-  update:
-  - string
-  - 'null'
-- target: $["components"]["schemas"]["c1.api.webhooks.v1.WebhooksServiceCreateRequest"]["properties"]["url"]["type"]
   update:
   - string
   - 'null'
