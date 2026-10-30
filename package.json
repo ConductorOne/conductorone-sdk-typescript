@@ -29,9 +29,6 @@
     "build": "tshy",
     "prepublishOnly": "npm run build"
   },
-  "peerDependencies": {
-    "react": "^16.0.0"
-  },
   "devDependencies": {
     "@eslint/js": "^9.26.0",
     "@types/jest": "^29.0.0",
