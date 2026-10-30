@@ -17,12 +17,12 @@ export type SSFReceiverStreamServiceTestRequest = {
    *  Optional: upstream identifier (email) to test identity resolution.
    *  If empty, only JWKS reachability is tested.
    */
-  testSubject?: string | null | undefined;
+  testSubject?: string | undefined;
 };
 
 /** @internal */
 export type SSFReceiverStreamServiceTestRequest$Outbound = {
-  testSubject?: string | null | undefined;
+  testSubject?: string | undefined;
 };
 
 /** @internal */
@@ -31,7 +31,7 @@ export const SSFReceiverStreamServiceTestRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SSFReceiverStreamServiceTestRequest
 > = z.object({
-  testSubject: z.nullable(z.string()).optional(),
+  testSubject: z.string().optional(),
 });
 
 export function ssfReceiverStreamServiceTestRequestToJSON(

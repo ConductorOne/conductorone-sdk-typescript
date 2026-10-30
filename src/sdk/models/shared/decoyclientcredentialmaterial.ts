@@ -17,11 +17,11 @@ export type DecoyClientCredentialMaterial = {
   /**
    * The clientId field.
    */
-  clientId?: string | null | undefined;
+  clientId?: string | undefined;
   /**
    * The clientSecret field.
    */
-  clientSecret?: string | null | undefined;
+  clientSecret?: string | undefined;
 };
 
 /** @internal */
@@ -30,8 +30,8 @@ export const DecoyClientCredentialMaterial$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  clientId: z.nullable(z.string()).optional(),
-  clientSecret: z.nullable(z.string()).optional(),
+  clientId: z.string().optional(),
+  clientSecret: z.string().optional(),
 });
 
 export function decoyClientCredentialMaterialFromJSON(

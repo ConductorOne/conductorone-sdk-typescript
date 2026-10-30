@@ -25,11 +25,11 @@ export type ApprovedAction = {
   /**
    * The ID of the step-up transaction that was used for this approval, if step-up was required.
    */
-  stepUpTransactionId?: string | null | undefined;
+  stepUpTransactionId?: string | undefined;
   /**
    * The UserID that approved this step.
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -43,15 +43,15 @@ export const ApprovedAction$inboundSchema: z.ZodType<
   ).optional(),
   entitlements: z.nullable(z.array(AppEntitlementReference$inboundSchema))
     .optional(),
-  stepUpTransactionId: z.nullable(z.string()).optional(),
-  userId: z.nullable(z.string()).optional(),
+  stepUpTransactionId: z.string().optional(),
+  userId: z.string().optional(),
 });
 /** @internal */
 export type ApprovedAction$Outbound = {
   approvedAt?: string | null | undefined;
   entitlements?: Array<AppEntitlementReference$Outbound> | null | undefined;
-  stepUpTransactionId?: string | null | undefined;
-  userId?: string | null | undefined;
+  stepUpTransactionId?: string | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -63,8 +63,8 @@ export const ApprovedAction$outboundSchema: z.ZodType<
   approvedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   entitlements: z.nullable(z.array(AppEntitlementReference$outboundSchema))
     .optional(),
-  stepUpTransactionId: z.nullable(z.string()).optional(),
-  userId: z.nullable(z.string()).optional(),
+  stepUpTransactionId: z.string().optional(),
+  userId: z.string().optional(),
 });
 
 export function approvedActionToJSON(approvedAction: ApprovedAction): string {

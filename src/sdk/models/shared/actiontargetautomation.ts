@@ -14,7 +14,7 @@ export type ActionTargetAutomation = {
   /**
    * The automationTemplateId field.
    */
-  automationTemplateId?: string | null | undefined;
+  automationTemplateId?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const ActionTargetAutomation$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  automationTemplateId: z.nullable(z.string()).optional(),
+  automationTemplateId: z.string().optional(),
 });
 /** @internal */
 export type ActionTargetAutomation$Outbound = {
-  automationTemplateId?: string | null | undefined;
+  automationTemplateId?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const ActionTargetAutomation$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ActionTargetAutomation
 > = z.object({
-  automationTemplateId: z.nullable(z.string()).optional(),
+  automationTemplateId: z.string().optional(),
 });
 
 export function actionTargetAutomationToJSON(

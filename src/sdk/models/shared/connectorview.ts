@@ -15,16 +15,16 @@ export type ConnectorView = {
   /**
    * JSONPATH expression indicating the location of the App object in the expanded array.
    */
-  appPath?: string | null | undefined;
+  appPath?: string | undefined;
   /**
    * JSONPATH expression indicating the location of the ConnectorCapabilities object in the expanded array.
    */
-  capabilitiesPath?: string | null | undefined;
+  capabilitiesPath?: string | undefined;
   connector?: Connector | null | undefined;
   /**
    * JSONPATH expression indicating the location of the User object in the expanded array. This is the user that is a direct target of the ticket without a specific relationship to a potentially non-existent app user.
    */
-  usersPath?: string | null | undefined;
+  usersPath?: string | undefined;
 };
 
 /** @internal */
@@ -33,10 +33,10 @@ export const ConnectorView$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appPath: z.nullable(z.string()).optional(),
-  capabilitiesPath: z.nullable(z.string()).optional(),
+  appPath: z.string().optional(),
+  capabilitiesPath: z.string().optional(),
   connector: z.nullable(Connector$inboundSchema).optional(),
-  usersPath: z.nullable(z.string()).optional(),
+  usersPath: z.string().optional(),
 });
 
 export function connectorViewFromJSON(

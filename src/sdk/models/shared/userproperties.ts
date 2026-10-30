@@ -14,19 +14,19 @@ export type UserProperties = {
   /**
    * The displayNameCel field.
    */
-  displayNameCel?: string | null | undefined;
+  displayNameCel?: string | undefined;
   /**
    * The emailCel field.
    */
-  emailCel?: string | null | undefined;
+  emailCel?: string | undefined;
   /**
    * The profileAttributeCel field.
    */
-  profileAttributeCel?: string | null | undefined;
+  profileAttributeCel?: string | undefined;
   /**
    * The usernameCel field.
    */
-  usernameCel?: string | null | undefined;
+  usernameCel?: string | undefined;
 };
 
 /** @internal */
@@ -35,17 +35,17 @@ export const UserProperties$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  displayNameCel: z.nullable(z.string()).optional(),
-  emailCel: z.nullable(z.string()).optional(),
-  profileAttributeCel: z.nullable(z.string()).optional(),
-  usernameCel: z.nullable(z.string()).optional(),
+  displayNameCel: z.string().optional(),
+  emailCel: z.string().optional(),
+  profileAttributeCel: z.string().optional(),
+  usernameCel: z.string().optional(),
 });
 /** @internal */
 export type UserProperties$Outbound = {
-  displayNameCel?: string | null | undefined;
-  emailCel?: string | null | undefined;
-  profileAttributeCel?: string | null | undefined;
-  usernameCel?: string | null | undefined;
+  displayNameCel?: string | undefined;
+  emailCel?: string | undefined;
+  profileAttributeCel?: string | undefined;
+  usernameCel?: string | undefined;
 };
 
 /** @internal */
@@ -54,10 +54,10 @@ export const UserProperties$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UserProperties
 > = z.object({
-  displayNameCel: z.nullable(z.string()).optional(),
-  emailCel: z.nullable(z.string()).optional(),
-  profileAttributeCel: z.nullable(z.string()).optional(),
-  usernameCel: z.nullable(z.string()).optional(),
+  displayNameCel: z.string().optional(),
+  emailCel: z.string().optional(),
+  profileAttributeCel: z.string().optional(),
+  usernameCel: z.string().optional(),
 });
 
 export function userPropertiesToJSON(userProperties: UserProperties): string {

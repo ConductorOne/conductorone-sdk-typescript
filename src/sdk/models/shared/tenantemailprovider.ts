@@ -49,7 +49,7 @@ export type TenantEmailProvider = {
    * @remarks
    *  Ignored when using the C1 built-in provider (uses no-reply@conductorone.com).
    */
-  fromAddress?: string | null | undefined;
+  fromAddress?: string | undefined;
   /**
    * Sender display name shown in the recipient's inbox (e.g., "Acme Corp IT").
    *
@@ -57,13 +57,13 @@ export type TenantEmailProvider = {
    *  Used as the RFC 5322 display-name: "Acme Corp IT" <no-reply@acme.com>.
    *  Ignored when using the C1 built-in provider.
    */
-  fromName?: string | null | undefined;
+  fromName?: string | undefined;
   googleWorkspace?: GoogleWorkspaceProviderConfig | null | undefined;
   microsoftGraph?: MicrosoftGraphProviderConfig | null | undefined;
   /**
    * Optional reply-to address.
    */
-  replyToAddress?: string | null | undefined;
+  replyToAddress?: string | undefined;
   sendgrid?: SendGridProviderConfig | null | undefined;
   updatedAt?: Date | null | undefined;
 };
@@ -79,13 +79,13 @@ export const TenantEmailProvider$inboundSchema: z.ZodType<
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  fromAddress: z.nullable(z.string()).optional(),
-  fromName: z.nullable(z.string()).optional(),
+  fromAddress: z.string().optional(),
+  fromName: z.string().optional(),
   googleWorkspace: z.nullable(GoogleWorkspaceProviderConfig$inboundSchema)
     .optional(),
   microsoftGraph: z.nullable(MicrosoftGraphProviderConfig$inboundSchema)
     .optional(),
-  replyToAddress: z.nullable(z.string()).optional(),
+  replyToAddress: z.string().optional(),
   sendgrid: z.nullable(SendGridProviderConfig$inboundSchema).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),

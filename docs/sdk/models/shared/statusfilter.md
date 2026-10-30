@@ -1,13 +1,13 @@
 # StatusFilter
 
-Optional filter by invitation status.
+Which device statuses to return. Defaults to active devices only.
 
 ## Example Usage
 
 ```typescript
 import { StatusFilter } from "conductorone-sdk-typescript/sdk/models/shared";
 
-let value: StatusFilter = "LOCAL_INVITATION_STATUS_UNSPECIFIED";
+let value: StatusFilter = "PERSONAL_DEVICE_STATUS_FILTER_UNSPECIFIED";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -15,5 +15,5 @@ let value: StatusFilter = "LOCAL_INVITATION_STATUS_UNSPECIFIED";
 ## Values
 
 ```typescript
-"LOCAL_INVITATION_STATUS_UNSPECIFIED" | "LOCAL_INVITATION_STATUS_PENDING" | "LOCAL_INVITATION_STATUS_ACCEPTED" | "LOCAL_INVITATION_STATUS_REVOKED" | "LOCAL_INVITATION_STATUS_EXPIRED" | Unrecognized<string>
+"PERSONAL_DEVICE_STATUS_FILTER_UNSPECIFIED" | "PERSONAL_DEVICE_STATUS_FILTER_ACTIVE" | "PERSONAL_DEVICE_STATUS_FILTER_REVOKED" | "PERSONAL_DEVICE_STATUS_FILTER_ALL" | Unrecognized<string>
 ```

@@ -6,6 +6,11 @@ import * as z from "zod/v3";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
+  AnnotationMatch,
+  AnnotationMatch$Outbound,
+  AnnotationMatch$outboundSchema,
+} from "./annotationmatch.js";
+import {
   AppEntitlementExpandMask,
   AppEntitlementExpandMask$Outbound,
   AppEntitlementExpandMask$outboundSchema,
@@ -20,6 +25,16 @@ import {
   PolicyRef$Outbound,
   PolicyRef$outboundSchema,
 } from "./policyref.js";
+import {
+  ResourceProfileMatch,
+  ResourceProfileMatch$Outbound,
+  ResourceProfileMatch$outboundSchema,
+} from "./resourceprofilematch.js";
+import {
+  ResourceTypeRef,
+  ResourceTypeRef$Outbound,
+  ResourceTypeRef$outboundSchema,
+} from "./resourcetyperef.js";
 
 export const MembershipType = {
   AppEntitlementMembershipTypeUnspecified:
@@ -39,15 +54,39 @@ export type AppEntitlementSearchServiceSearchRequest = {
   /**
    * Search for app entitlements that are being reviewed as part of this access review campaign.
    */
-  accessReviewId?: string | null | undefined;
+  accessReviewId?: string | undefined;
   /**
    * Search for app entitlements that have this alias (exact match).
    */
-  alias?: string | null | undefined;
+  alias?: string | undefined;
+  /**
+   * With exclude_automation_enabled, keep ConductorOne group membership entitlements, which are always
+   *
+   * @remarks
+   *  automation-enabled. Group exclusion entitlements stay excluded.
+   */
+  allowAutomationEnabledC1Groups?: boolean | undefined;
+  /**
+   * Return entitlements whose annotations match at least one entry (exact key and value).
+   *
+   * @remarks
+   *  Honored by Search and SearchCount; ignored by GetSearchTerms and data export.
+   */
+  annotationMatches?: Array<AnnotationMatch> | null | undefined;
   /**
    * Search for app entitlements contained in any of these apps.
    */
   appIds?: Array<string> | null | undefined;
+  /**
+   * Search for app entitlements whose resource type matches any of these real
+   *
+   * @remarks
+   *  (app_id, id) AppResourceType pairs — unlike resource_type_ids, which
+   *  matches by name and can't distinguish two apps' same-named or
+   *  system-wide-shared-id resource types (e.g. Credential). Takes precedence
+   *  over resource_type_ids when set.
+   */
+  appResourceTypeRefs?: Array<ResourceTypeRef> | null | undefined;
   /**
    * Search for app entitlements that are granted to any of these app user ids.
    */
@@ -59,7 +98,11 @@ export type AppEntitlementSearchServiceSearchRequest = {
   /**
    * Filter results to entitlements with this exact display name.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
+  /**
+   * Filter for entitlements whose slug is in this list (e.g. "read_only")
+   */
+  entitlementSlugs?: Array<string> | null | undefined;
   /**
    * Exclude app entitlements from the results that are in these app IDs.
    */
@@ -69,9 +112,20 @@ export type AppEntitlementSearchServiceSearchRequest = {
    */
   excludeAppUserIds?: Array<string> | null | undefined;
   /**
+   * Exclude app entitlements that have automation enabled.
+   */
+  excludeAutomationEnabled?: boolean | undefined;
+  /**
    * If true, exclude immutable entitlements (e.g., system-managed entitlements that cannot be modified).
    */
-  excludeImmutable?: boolean | null | undefined;
+  excludeImmutable?: boolean | undefined;
+  /**
+   * Exclude access profile membership entitlements that cannot be added to a Catalog access profile
+   *
+   * @remarks
+   *  (Catalog and Hybrid profile memberships). Role profile memberships and all other entitlements are kept.
+   */
+  excludeNonRoleProfileMemberships?: boolean | undefined;
   /**
    * Exclude entitlements with any of these resource type IDs from results.
    */
@@ -84,11 +138,11 @@ export type AppEntitlementSearchServiceSearchRequest = {
   /**
    * Include deleted app entitlements, this includes app entitlements that have a deleted parent object (app, app resource, app resource type)
    */
-  includeDeleted?: boolean | null | undefined;
+  includeDeleted?: boolean | undefined;
   /**
    * If true, restrict results to entitlements that have an automation rule configured.
    */
-  isAutomated?: boolean | null | undefined;
+  isAutomated?: boolean | undefined;
   /**
    * Filter results to entitlements where the user has any of these membership types (e.g., member, owner, admin).
    */
@@ -96,15 +150,22 @@ export type AppEntitlementSearchServiceSearchRequest = {
   /**
    * If true, restrict results to entitlements that have at least one expiring grant.
    */
-  onlyGetExpiring?: boolean | null | undefined;
+  onlyGetExpiring?: boolean | undefined;
+  /**
+   * Filter by users that have an explicit ownership binding to the entitlement.
+   *
+   * @remarks
+   *  This filter applies to every caller, including administrators.
+   */
+  ownerUserIds?: Array<string> | null | undefined;
   /**
    * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Search for app entitlements that use any of these policies.
    */
@@ -112,7 +173,7 @@ export type AppEntitlementSearchServiceSearchRequest = {
   /**
    * Query the app entitlements with a fuzzy search on display name and description.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * Filter results to only these specific entitlements.
    */
@@ -125,6 +186,13 @@ export type AppEntitlementSearchServiceSearchRequest = {
    * Search for app entitlements that belongs to these resources.
    */
   resourceIds?: Array<string> | null | undefined;
+  /**
+   * Return entitlements whose resource profile matches at least one entry using ResourceProfileMatch semantics.
+   *
+   * @remarks
+   *  Honored by Search and SearchCount; ignored by GetSearchTerms and data export.
+   */
+  resourceProfileMatches?: Array<ResourceProfileMatch> | null | undefined;
   /**
    * Filter results to entitlements whose resource types have any of these trait IDs.
    */
@@ -140,7 +208,7 @@ export type AppEntitlementSearchServiceSearchRequest = {
   /**
    * Filter results to entitlements synced from this connector.
    */
-  sourceConnectorId?: string | null | undefined;
+  sourceConnectorId?: string | undefined;
 };
 
 /** @internal */
@@ -152,36 +220,47 @@ export const MembershipType$outboundSchema: z.ZodType<
 
 /** @internal */
 export type AppEntitlementSearchServiceSearchRequest$Outbound = {
-  accessReviewId?: string | null | undefined;
-  alias?: string | null | undefined;
+  accessReviewId?: string | undefined;
+  alias?: string | undefined;
+  allowAutomationEnabledC1Groups?: boolean | undefined;
+  annotationMatches?: Array<AnnotationMatch$Outbound> | null | undefined;
   appIds?: Array<string> | null | undefined;
+  appResourceTypeRefs?: Array<ResourceTypeRef$Outbound> | null | undefined;
   appUserIds?: Array<string> | null | undefined;
   complianceFrameworkIds?: Array<string> | null | undefined;
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
+  entitlementSlugs?: Array<string> | null | undefined;
   excludeAppIds?: Array<string> | null | undefined;
   excludeAppUserIds?: Array<string> | null | undefined;
-  excludeImmutable?: boolean | null | undefined;
+  excludeAutomationEnabled?: boolean | undefined;
+  excludeImmutable?: boolean | undefined;
+  excludeNonRoleProfileMemberships?: boolean | undefined;
   excludeResourceTypeIds?: Array<string> | null | undefined;
   excludedEntitlementRefs?:
     | Array<AppEntitlementRef$Outbound>
     | null
     | undefined;
   expandMask?: AppEntitlementExpandMask$Outbound | null | undefined;
-  includeDeleted?: boolean | null | undefined;
-  isAutomated?: boolean | null | undefined;
+  includeDeleted?: boolean | undefined;
+  isAutomated?: boolean | undefined;
   membershipType?: Array<string> | null | undefined;
-  onlyGetExpiring?: boolean | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  onlyGetExpiring?: boolean | undefined;
+  ownerUserIds?: Array<string> | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
   policyRefs?: Array<PolicyRef$Outbound> | null | undefined;
-  query?: string | null | undefined;
+  query?: string | undefined;
   refs?: Array<AppEntitlementRef$Outbound> | null | undefined;
   requestSchemaIds?: Array<string> | null | undefined;
   resourceIds?: Array<string> | null | undefined;
+  resourceProfileMatches?:
+    | Array<ResourceProfileMatch$Outbound>
+    | null
+    | undefined;
   resourceTraitIds?: Array<string> | null | undefined;
   resourceTypeIds?: Array<string> | null | undefined;
   riskLevelIds?: Array<string> | null | undefined;
-  sourceConnectorId?: string | null | undefined;
+  sourceConnectorId?: string | undefined;
 };
 
 /** @internal */
@@ -190,34 +269,46 @@ export const AppEntitlementSearchServiceSearchRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppEntitlementSearchServiceSearchRequest
 > = z.object({
-  accessReviewId: z.nullable(z.string()).optional(),
-  alias: z.nullable(z.string()).optional(),
+  accessReviewId: z.string().optional(),
+  alias: z.string().optional(),
+  allowAutomationEnabledC1Groups: z.boolean().optional(),
+  annotationMatches: z.nullable(z.array(AnnotationMatch$outboundSchema))
+    .optional(),
   appIds: z.nullable(z.array(z.string())).optional(),
+  appResourceTypeRefs: z.nullable(z.array(ResourceTypeRef$outboundSchema))
+    .optional(),
   appUserIds: z.nullable(z.array(z.string())).optional(),
   complianceFrameworkIds: z.nullable(z.array(z.string())).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
+  entitlementSlugs: z.nullable(z.array(z.string())).optional(),
   excludeAppIds: z.nullable(z.array(z.string())).optional(),
   excludeAppUserIds: z.nullable(z.array(z.string())).optional(),
-  excludeImmutable: z.nullable(z.boolean()).optional(),
+  excludeAutomationEnabled: z.boolean().optional(),
+  excludeImmutable: z.boolean().optional(),
+  excludeNonRoleProfileMemberships: z.boolean().optional(),
   excludeResourceTypeIds: z.nullable(z.array(z.string())).optional(),
   excludedEntitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
     .optional(),
   expandMask: z.nullable(AppEntitlementExpandMask$outboundSchema).optional(),
-  includeDeleted: z.nullable(z.boolean()).optional(),
-  isAutomated: z.nullable(z.boolean()).optional(),
+  includeDeleted: z.boolean().optional(),
+  isAutomated: z.boolean().optional(),
   membershipType: z.nullable(z.array(MembershipType$outboundSchema)).optional(),
-  onlyGetExpiring: z.nullable(z.boolean()).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
+  onlyGetExpiring: z.boolean().optional(),
+  ownerUserIds: z.nullable(z.array(z.string())).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
   policyRefs: z.nullable(z.array(PolicyRef$outboundSchema)).optional(),
-  query: z.nullable(z.string()).optional(),
+  query: z.string().optional(),
   refs: z.nullable(z.array(AppEntitlementRef$outboundSchema)).optional(),
   requestSchemaIds: z.nullable(z.array(z.string())).optional(),
   resourceIds: z.nullable(z.array(z.string())).optional(),
+  resourceProfileMatches: z.nullable(
+    z.array(ResourceProfileMatch$outboundSchema),
+  ).optional(),
   resourceTraitIds: z.nullable(z.array(z.string())).optional(),
   resourceTypeIds: z.nullable(z.array(z.string())).optional(),
   riskLevelIds: z.nullable(z.array(z.string())).optional(),
-  sourceConnectorId: z.nullable(z.string()).optional(),
+  sourceConnectorId: z.string().optional(),
 });
 
 export function appEntitlementSearchServiceSearchRequestToJSON(

@@ -9,7 +9,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { App, App$inboundSchema } from "./app.js";
 
 /**
- * Returns the new app's values.
+ * CreateAppResponse contains the newly created application.
  */
 export type CreateAppResponse = {
   app?: App | null | undefined;

@@ -9,6 +9,32 @@ import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * How the apply pass treats catalog (access profile) bindings on matched
+ *
+ * @remarks
+ *  entitlements. UNSPECIFIED reads as legacy list management; UNMANAGED means
+ *  the rule does not manage the list and only the app's default request
+ *  catalog follows the self-service switch.
+ */
+export const CatalogMode = {
+  AppAccessRequestDefaultsCatalogModeUnspecified:
+    "APP_ACCESS_REQUEST_DEFAULTS_CATALOG_MODE_UNSPECIFIED",
+  AppAccessRequestDefaultsCatalogModeManaged:
+    "APP_ACCESS_REQUEST_DEFAULTS_CATALOG_MODE_MANAGED",
+  AppAccessRequestDefaultsCatalogModeUnmanaged:
+    "APP_ACCESS_REQUEST_DEFAULTS_CATALOG_MODE_UNMANAGED",
+} as const;
+/**
+ * How the apply pass treats catalog (access profile) bindings on matched
+ *
+ * @remarks
+ *  entitlements. UNSPECIFIED reads as legacy list management; UNMANAGED means
+ *  the rule does not manage the list and only the app's default request
+ *  catalog follows the self-service switch.
+ */
+export type CatalogMode = OpenEnum<typeof CatalogMode>;
+
 export type DurationUnset = {};
 
 /**
@@ -50,33 +76,42 @@ export type AppAccessRequestDefaults = {
   /**
    * The app id for the app access request rule
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The request catalog ids for the app access request rule.
    */
   catalogIds?: Array<string> | null | undefined;
   /**
+   * How the apply pass treats catalog (access profile) bindings on matched
+   *
+   * @remarks
+   *  entitlements. UNSPECIFIED reads as legacy list management; UNMANAGED means
+   *  the rule does not manage the list and only the app's default request
+   *  catalog follows the self-service switch.
+   */
+  catalogMode?: CatalogMode | undefined;
+  /**
    * If true the app level request configuration will be applied to specified resource types.
    */
-  defaultsEnabled?: boolean | null | undefined;
+  defaultsEnabled?: boolean | undefined;
   durationGrant?: string | null | undefined;
   durationUnset?: DurationUnset | null | undefined;
   /**
    * If emergency grants are enabled for this app access request rule.
    */
-  emergencyGrantEnabled?: boolean | null | undefined;
+  emergencyGrantEnabled?: boolean | undefined;
   /**
    * The policy id for the emergency grant policy.
    */
-  emergencyGrantPolicyId?: string | null | undefined;
+  emergencyGrantPolicyId?: string | undefined;
   /**
    * The ID of the request policy to apply to entitlements matching this rule.
    */
-  requestPolicyId?: string | null | undefined;
+  requestPolicyId?: string | undefined;
   /**
    * The ID of the request schema to apply to entitlements matching this rule.
    */
-  requestSchemaId?: string | null | undefined;
+  requestSchemaId?: string | undefined;
   /**
    * The app resource type ids for which the app access request defaults are applied.
    */
@@ -84,7 +119,7 @@ export type AppAccessRequestDefaults = {
   /**
    * The last applied state of the app access request defaults.
    */
-  state?: AppAccessRequestDefaultsState | null | undefined;
+  state?: AppAccessRequestDefaultsState | undefined;
 };
 
 /**
@@ -102,27 +137,36 @@ export type AppAccessRequestDefaults1 = {
    */
   catalogIds?: Array<string> | null | undefined;
   /**
+   * How the apply pass treats catalog (access profile) bindings on matched
+   *
+   * @remarks
+   *  entitlements. UNSPECIFIED reads as legacy list management; UNMANAGED means
+   *  the rule does not manage the list and only the app's default request
+   *  catalog follows the self-service switch.
+   */
+  catalogMode?: CatalogMode | undefined;
+  /**
    * If true the app level request configuration will be applied to specified resource types.
    */
-  defaultsEnabled?: boolean | null | undefined;
+  defaultsEnabled?: boolean | undefined;
   durationGrant?: string | null | undefined;
   durationUnset?: DurationUnset | null | undefined;
   /**
    * If emergency grants are enabled for this app access request rule.
    */
-  emergencyGrantEnabled?: boolean | null | undefined;
+  emergencyGrantEnabled?: boolean | undefined;
   /**
    * The policy id for the emergency grant policy.
    */
-  emergencyGrantPolicyId?: string | null | undefined;
+  emergencyGrantPolicyId?: string | undefined;
   /**
    * The ID of the request policy to apply to entitlements matching this rule.
    */
-  requestPolicyId?: string | null | undefined;
+  requestPolicyId?: string | undefined;
   /**
    * The ID of the request schema to apply to entitlements matching this rule.
    */
-  requestSchemaId?: string | null | undefined;
+  requestSchemaId?: string | undefined;
   /**
    * The app resource type ids for which the app access request defaults are applied.
    */
@@ -130,8 +174,21 @@ export type AppAccessRequestDefaults1 = {
   /**
    * The last applied state of the app access request defaults.
    */
-  state?: AppAccessRequestDefaultsState | null | undefined;
+  state?: AppAccessRequestDefaultsState | undefined;
 };
+
+/** @internal */
+export const CatalogMode$inboundSchema: z.ZodType<
+  CatalogMode,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(CatalogMode);
+/** @internal */
+export const CatalogMode$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  CatalogMode
+> = openEnums.outboundSchema(CatalogMode);
 
 /** @internal */
 export const DurationUnset$inboundSchema: z.ZodType<
@@ -181,18 +238,19 @@ export const AppAccessRequestDefaults$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
   catalogIds: z.nullable(z.array(z.string())).optional(),
-  defaultsEnabled: z.nullable(z.boolean()).optional(),
+  catalogMode: CatalogMode$inboundSchema.optional(),
+  defaultsEnabled: z.boolean().optional(),
   durationGrant: z.nullable(z.string()).optional(),
   durationUnset: z.nullable(z.lazy(() => DurationUnset$inboundSchema))
     .optional(),
-  emergencyGrantEnabled: z.nullable(z.boolean()).optional(),
-  emergencyGrantPolicyId: z.nullable(z.string()).optional(),
-  requestPolicyId: z.nullable(z.string()).optional(),
-  requestSchemaId: z.nullable(z.string()).optional(),
+  emergencyGrantEnabled: z.boolean().optional(),
+  emergencyGrantPolicyId: z.string().optional(),
+  requestPolicyId: z.string().optional(),
+  requestSchemaId: z.string().optional(),
   resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  state: z.nullable(AppAccessRequestDefaultsState$inboundSchema).optional(),
+  state: AppAccessRequestDefaultsState$inboundSchema.optional(),
 });
 
 export function appAccessRequestDefaultsFromJSON(
@@ -208,15 +266,16 @@ export function appAccessRequestDefaultsFromJSON(
 /** @internal */
 export type AppAccessRequestDefaults1$Outbound = {
   catalogIds?: Array<string> | null | undefined;
-  defaultsEnabled?: boolean | null | undefined;
+  catalogMode?: string | undefined;
+  defaultsEnabled?: boolean | undefined;
   durationGrant?: string | null | undefined;
   durationUnset?: DurationUnset$Outbound | null | undefined;
-  emergencyGrantEnabled?: boolean | null | undefined;
-  emergencyGrantPolicyId?: string | null | undefined;
-  requestPolicyId?: string | null | undefined;
-  requestSchemaId?: string | null | undefined;
+  emergencyGrantEnabled?: boolean | undefined;
+  emergencyGrantPolicyId?: string | undefined;
+  requestPolicyId?: string | undefined;
+  requestSchemaId?: string | undefined;
   resourceTypeIds?: Array<string> | null | undefined;
-  state?: string | null | undefined;
+  state?: string | undefined;
 };
 
 /** @internal */
@@ -226,16 +285,17 @@ export const AppAccessRequestDefaults1$outboundSchema: z.ZodType<
   AppAccessRequestDefaults1
 > = z.object({
   catalogIds: z.nullable(z.array(z.string())).optional(),
-  defaultsEnabled: z.nullable(z.boolean()).optional(),
+  catalogMode: CatalogMode$outboundSchema.optional(),
+  defaultsEnabled: z.boolean().optional(),
   durationGrant: z.nullable(z.string()).optional(),
   durationUnset: z.nullable(z.lazy(() => DurationUnset$outboundSchema))
     .optional(),
-  emergencyGrantEnabled: z.nullable(z.boolean()).optional(),
-  emergencyGrantPolicyId: z.nullable(z.string()).optional(),
-  requestPolicyId: z.nullable(z.string()).optional(),
-  requestSchemaId: z.nullable(z.string()).optional(),
+  emergencyGrantEnabled: z.boolean().optional(),
+  emergencyGrantPolicyId: z.string().optional(),
+  requestPolicyId: z.string().optional(),
+  requestSchemaId: z.string().optional(),
   resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  state: z.nullable(AppAccessRequestDefaultsState$outboundSchema).optional(),
+  state: AppAccessRequestDefaultsState$outboundSchema.optional(),
 });
 
 export function appAccessRequestDefaults1ToJSON(

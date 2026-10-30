@@ -11,13 +11,13 @@ export type SnoozeAction = {
   /**
    * The reason field.
    */
-  reason?: string | null | undefined;
+  reason?: string | undefined;
   snoozeUntil?: Date | null | undefined;
 };
 
 /** @internal */
 export type SnoozeAction$Outbound = {
-  reason?: string | null | undefined;
+  reason?: string | undefined;
   snoozeUntil?: string | null | undefined;
 };
 
@@ -27,7 +27,7 @@ export const SnoozeAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SnoozeAction
 > = z.object({
-  reason: z.nullable(z.string()).optional(),
+  reason: z.string().optional(),
   snoozeUntil: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 

@@ -14,15 +14,15 @@ export type SlackNotifications = {
   /**
    * The channelId field.
    */
-  channelId?: string | null | undefined;
+  channelId?: string | undefined;
   /**
    * The channelName field.
    */
-  channelName?: string | null | undefined;
+  channelName?: string | undefined;
   /**
    * The enabled field.
    */
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
 };
 
 /** @internal */
@@ -31,15 +31,15 @@ export const SlackNotifications$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  channelId: z.nullable(z.string()).optional(),
-  channelName: z.nullable(z.string()).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
+  channelId: z.string().optional(),
+  channelName: z.string().optional(),
+  enabled: z.boolean().optional(),
 });
 /** @internal */
 export type SlackNotifications$Outbound = {
-  channelId?: string | null | undefined;
-  channelName?: string | null | undefined;
-  enabled?: boolean | null | undefined;
+  channelId?: string | undefined;
+  channelName?: string | undefined;
+  enabled?: boolean | undefined;
 };
 
 /** @internal */
@@ -48,9 +48,9 @@ export const SlackNotifications$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SlackNotifications
 > = z.object({
-  channelId: z.nullable(z.string()).optional(),
-  channelName: z.nullable(z.string()).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
+  channelId: z.string().optional(),
+  channelName: z.string().optional(),
+  enabled: z.boolean().optional(),
 });
 
 export function slackNotificationsToJSON(

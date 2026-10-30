@@ -15,7 +15,7 @@ export type ConnectorTextField = {
   /**
    * The secret field.
    */
-  secret?: boolean | null | undefined;
+  secret?: boolean | undefined;
   valueValidator?: StringRules | null | undefined;
 };
 
@@ -25,7 +25,7 @@ export const ConnectorTextField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  secret: z.nullable(z.boolean()).optional(),
+  secret: z.boolean().optional(),
   valueValidator: z.nullable(StringRules$inboundSchema).optional(),
 });
 

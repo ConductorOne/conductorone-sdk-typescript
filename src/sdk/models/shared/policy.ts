@@ -15,6 +15,12 @@ import {
   PolicyPostActions$outboundSchema,
 } from "./policypostactions.js";
 import {
+  PolicyScope,
+  PolicyScope$inboundSchema,
+  PolicyScope$Outbound,
+  PolicyScope$outboundSchema,
+} from "./policyscope.js";
+import {
   PolicySteps,
   PolicySteps$inboundSchema,
   PolicySteps$Outbound,
@@ -76,20 +82,32 @@ export type Policy = {
    *  `iac_resource_address`, `iac_tool_version`.
    */
   annotations?: { [k: string]: string } | undefined;
+  /**
+   * When set, the baseline defers to another policy of the same type when no
+   *
+   * @remarks
+   *  rule matches, instead of the baseline entry in policy_steps (keyed by the
+   *  lowercased policy_type). Mutually exclusive with that baseline entry: set
+   *  one or the other, not both. The referenced policy must share this
+   *  policy's policy_type, must not introduce a cycle or self-reference, and
+   *  must not push any reachable chain over depth 5. Gated by the
+   *  POLICY_REFERENCES_POLICY feature flag.
+   */
+  baselinePolicyId?: string | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * The description of the Policy.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The display name of the Policy.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The ID of the Policy.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * A map from string keys to step sequences. One entry is always the baseline,
    *
@@ -106,7 +124,7 @@ export type Policy = {
    * @remarks
    *  name (e.g., "grant") is also the key for the baseline entry in policy_steps.
    */
-  policyType?: PolicyType | null | undefined;
+  policyType?: PolicyType | undefined;
   /**
    * Ordered actions to execute after the policy completes processing.
    */
@@ -116,19 +134,24 @@ export type Policy = {
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  reassignTasksToDelegates?: boolean | null | undefined;
+  reassignTasksToDelegates?: boolean | undefined;
   /**
    * Ordered conditional routing rules. Evaluated top-to-bottom; the first
    *
    * @remarks
    *  matching rule selects a step sequence from policy_steps. If no rule matches
    *  (or if this array is empty), the baseline entry in policy_steps is used.
+   *  The public Create and Update APIs enforce the tenant's conditional-rules-per-policy quota
+   *  (default 16), excluding the baseline. Through the public Update API, an existing
+   *  above-quota policy may keep or reduce its rule count, but cannot increase it.
+   *  Contact support to adjust this tenant quota. The rule-count quota is not a policy-size limit.
    */
   rules?: Array<Rule> | null | undefined;
+  scope?: PolicyScope | null | undefined;
   /**
    * Whether this policy is a builtin system policy. Builtin system policies cannot be edited.
    */
-  systemBuiltin?: boolean | null | undefined;
+  systemBuiltin?: boolean | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -155,13 +178,25 @@ export type PolicyInput = {
    */
   annotations?: { [k: string]: string } | undefined;
   /**
+   * When set, the baseline defers to another policy of the same type when no
+   *
+   * @remarks
+   *  rule matches, instead of the baseline entry in policy_steps (keyed by the
+   *  lowercased policy_type). Mutually exclusive with that baseline entry: set
+   *  one or the other, not both. The referenced policy must share this
+   *  policy's policy_type, must not introduce a cycle or self-reference, and
+   *  must not push any reachable chain over depth 5. Gated by the
+   *  POLICY_REFERENCES_POLICY feature flag.
+   */
+  baselinePolicyId?: string | undefined;
+  /**
    * The description of the Policy.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The display name of the Policy.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * A map from string keys to step sequences. One entry is always the baseline,
    *
@@ -178,7 +213,7 @@ export type PolicyInput = {
    * @remarks
    *  name (e.g., "grant") is also the key for the baseline entry in policy_steps.
    */
-  policyType?: PolicyType | null | undefined;
+  policyType?: PolicyType | undefined;
   /**
    * Ordered actions to execute after the policy completes processing.
    */
@@ -188,15 +223,20 @@ export type PolicyInput = {
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  reassignTasksToDelegates?: boolean | null | undefined;
+  reassignTasksToDelegates?: boolean | undefined;
   /**
    * Ordered conditional routing rules. Evaluated top-to-bottom; the first
    *
    * @remarks
    *  matching rule selects a step sequence from policy_steps. If no rule matches
    *  (or if this array is empty), the baseline entry in policy_steps is used.
+   *  The public Create and Update APIs enforce the tenant's conditional-rules-per-policy quota
+   *  (default 16), excluding the baseline. Through the public Update API, an existing
+   *  above-quota policy may keep or reduce its rule count, but cannot increase it.
+   *  Contact support to adjust this tenant quota. The rule-count quota is not a policy-size limit.
    */
   rules?: Array<Rule> | null | undefined;
+  scope?: PolicyScope | null | undefined;
 };
 
 /** @internal */
@@ -216,22 +256,24 @@ export const PolicyType$outboundSchema: z.ZodType<
 export const Policy$inboundSchema: z.ZodType<Policy, z.ZodTypeDef, unknown> = z
   .object({
     annotations: z.record(z.string()).optional(),
+    baselinePolicyId: z.string().optional(),
     createdAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
     deletedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    description: z.nullable(z.string()).optional(),
-    displayName: z.nullable(z.string()).optional(),
-    id: z.nullable(z.string()).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
     policySteps: z.record(PolicySteps$inboundSchema).optional(),
-    policyType: z.nullable(PolicyType$inboundSchema).optional(),
+    policyType: PolicyType$inboundSchema.optional(),
     postActions: z.nullable(z.array(PolicyPostActions$inboundSchema))
       .optional(),
-    reassignTasksToDelegates: z.nullable(z.boolean()).optional(),
+    reassignTasksToDelegates: z.boolean().optional(),
     rules: z.nullable(z.array(Rule$inboundSchema)).optional(),
-    systemBuiltin: z.nullable(z.boolean()).optional(),
+    scope: z.nullable(PolicyScope$inboundSchema).optional(),
+    systemBuiltin: z.boolean().optional(),
     updatedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
@@ -239,17 +281,19 @@ export const Policy$inboundSchema: z.ZodType<Policy, z.ZodTypeDef, unknown> = z
 /** @internal */
 export type Policy$Outbound = {
   annotations?: { [k: string]: string } | undefined;
+  baselinePolicyId?: string | undefined;
   createdAt?: string | null | undefined;
   deletedAt?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  id?: string | null | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
+  id?: string | undefined;
   policySteps?: { [k: string]: PolicySteps$Outbound } | undefined;
-  policyType?: string | null | undefined;
+  policyType?: string | undefined;
   postActions?: Array<PolicyPostActions$Outbound> | null | undefined;
-  reassignTasksToDelegates?: boolean | null | undefined;
+  reassignTasksToDelegates?: boolean | undefined;
   rules?: Array<Rule$Outbound> | null | undefined;
-  systemBuiltin?: boolean | null | undefined;
+  scope?: PolicyScope$Outbound | null | undefined;
+  systemBuiltin?: boolean | undefined;
   updatedAt?: string | null | undefined;
 };
 
@@ -260,17 +304,19 @@ export const Policy$outboundSchema: z.ZodType<
   Policy
 > = z.object({
   annotations: z.record(z.string()).optional(),
+  baselinePolicyId: z.string().optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  id: z.string().optional(),
   policySteps: z.record(PolicySteps$outboundSchema).optional(),
-  policyType: z.nullable(PolicyType$outboundSchema).optional(),
+  policyType: PolicyType$outboundSchema.optional(),
   postActions: z.nullable(z.array(PolicyPostActions$outboundSchema)).optional(),
-  reassignTasksToDelegates: z.nullable(z.boolean()).optional(),
+  reassignTasksToDelegates: z.boolean().optional(),
   rules: z.nullable(z.array(Rule$outboundSchema)).optional(),
-  systemBuiltin: z.nullable(z.boolean()).optional(),
+  scope: z.nullable(PolicyScope$outboundSchema).optional(),
+  systemBuiltin: z.boolean().optional(),
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 
@@ -290,13 +336,15 @@ export function policyFromJSON(
 /** @internal */
 export type PolicyInput$Outbound = {
   annotations?: { [k: string]: string } | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
+  baselinePolicyId?: string | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
   policySteps?: { [k: string]: PolicyStepsInput$Outbound } | undefined;
-  policyType?: string | null | undefined;
+  policyType?: string | undefined;
   postActions?: Array<PolicyPostActions$Outbound> | null | undefined;
-  reassignTasksToDelegates?: boolean | null | undefined;
+  reassignTasksToDelegates?: boolean | undefined;
   rules?: Array<Rule$Outbound> | null | undefined;
+  scope?: PolicyScope$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -306,13 +354,15 @@ export const PolicyInput$outboundSchema: z.ZodType<
   PolicyInput
 > = z.object({
   annotations: z.record(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  baselinePolicyId: z.string().optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
   policySteps: z.record(PolicyStepsInput$outboundSchema).optional(),
-  policyType: z.nullable(PolicyType$outboundSchema).optional(),
+  policyType: PolicyType$outboundSchema.optional(),
   postActions: z.nullable(z.array(PolicyPostActions$outboundSchema)).optional(),
-  reassignTasksToDelegates: z.nullable(z.boolean()).optional(),
+  reassignTasksToDelegates: z.boolean().optional(),
   rules: z.nullable(z.array(Rule$outboundSchema)).optional(),
+  scope: z.nullable(PolicyScope$outboundSchema).optional(),
 });
 
 export function policyInputToJSON(policyInput: PolicyInput): string {

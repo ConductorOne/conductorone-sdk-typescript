@@ -27,9 +27,7 @@ import { Result } from "../sdk/types/fp.js";
  * Get Tenant Defaults
  *
  * @remarks
- * Get the tenant-default subset of AI governance settings. Currently returns
- *  only require_tool_approval — the default applied to newly registered MCP
- *  servers/tools. Use Get for the full settings object.
+ * Get the legacy tenant-default subset of AI governance settings.
  */
 export function aiGovernanceSettingsGetTenantDefaults(
   client: ConductoroneSDKTypescriptCore,

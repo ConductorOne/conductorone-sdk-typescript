@@ -14,11 +14,11 @@ export type AppEntitlementReference = {
   /**
    * The ID of the Entitlement.
    */
-  appEntitlementId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
   /**
    * The ID of the App this entitlement belongs to.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
 };
 
 /** @internal */
@@ -27,13 +27,13 @@ export const AppEntitlementReference$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
+  appEntitlementId: z.string().optional(),
+  appId: z.string().optional(),
 });
 /** @internal */
 export type AppEntitlementReference$Outbound = {
-  appEntitlementId?: string | null | undefined;
-  appId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
+  appId?: string | undefined;
 };
 
 /** @internal */
@@ -42,8 +42,8 @@ export const AppEntitlementReference$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppEntitlementReference
 > = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
+  appEntitlementId: z.string().optional(),
+  appId: z.string().optional(),
 });
 
 export function appEntitlementReferenceToJSON(

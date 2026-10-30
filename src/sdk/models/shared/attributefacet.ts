@@ -18,15 +18,29 @@ export type AttributeFacet = {
   /**
    * The attribute field.
    */
-  attribute?: string | null | undefined;
+  attribute?: string | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The values field.
    */
   values?: Array<RoleMiningAttributeValue> | null | undefined;
+  /**
+   * True when values is a legacy bounded preview rather than the complete
+   *
+   * @remarks
+   *  value set. Clients must not treat a truncated preview as exhaustive.
+   */
+  valuesTruncated?: boolean | undefined;
+  /**
+   * True when the legacy preview could not be loaded. The attribute remains
+   *
+   * @remarks
+   *  valid and value discovery may be retried independently.
+   */
+  valuesUnavailable?: boolean | undefined;
 };
 
 /** @internal */
@@ -35,10 +49,12 @@ export const AttributeFacet$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  attribute: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  attribute: z.string().optional(),
+  displayName: z.string().optional(),
   values: z.nullable(z.array(RoleMiningAttributeValue$inboundSchema))
     .optional(),
+  valuesTruncated: z.boolean().optional(),
+  valuesUnavailable: z.boolean().optional(),
 });
 
 export function attributeFacetFromJSON(

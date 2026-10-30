@@ -36,7 +36,7 @@ export type Int64Field = {
   /**
    * The placeholder field.
    */
-  placeholder?: string | null | undefined;
+  placeholder?: string | undefined;
   rules?: Int64Rules | null | undefined;
 };
 
@@ -49,14 +49,14 @@ export const Int64Field$inboundSchema: z.ZodType<
   defaultValue: z.nullable(z.string().transform(v => parseInt(v, 10)))
     .optional(),
   numberField: z.nullable(NumberField$inboundSchema).optional(),
-  placeholder: z.nullable(z.string()).optional(),
+  placeholder: z.string().optional(),
   rules: z.nullable(Int64Rules$inboundSchema).optional(),
 });
 /** @internal */
 export type Int64Field$Outbound = {
   defaultValue?: string | null | undefined;
   numberField?: NumberField$Outbound | null | undefined;
-  placeholder?: string | null | undefined;
+  placeholder?: string | undefined;
   rules?: Int64Rules$Outbound | null | undefined;
 };
 
@@ -68,7 +68,7 @@ export const Int64Field$outboundSchema: z.ZodType<
 > = z.object({
   defaultValue: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
   numberField: z.nullable(NumberField$outboundSchema).optional(),
-  placeholder: z.nullable(z.string()).optional(),
+  placeholder: z.string().optional(),
   rules: z.nullable(Int64Rules$outboundSchema).optional(),
 });
 

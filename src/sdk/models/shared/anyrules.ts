@@ -31,7 +31,7 @@ export type AnyRules = {
   /**
    * Required specifies that this field must be set
    */
-  required?: boolean | null | undefined;
+  required?: boolean | undefined;
 };
 
 /** @internal */
@@ -42,13 +42,13 @@ export const AnyRules$inboundSchema: z.ZodType<
 > = z.object({
   in: z.nullable(z.array(z.string())).optional(),
   notIn: z.nullable(z.array(z.string())).optional(),
-  required: z.nullable(z.boolean()).optional(),
+  required: z.boolean().optional(),
 });
 /** @internal */
 export type AnyRules$Outbound = {
   in?: Array<string> | null | undefined;
   notIn?: Array<string> | null | undefined;
-  required?: boolean | null | undefined;
+  required?: boolean | undefined;
 };
 
 /** @internal */
@@ -59,7 +59,7 @@ export const AnyRules$outboundSchema: z.ZodType<
 > = z.object({
   in: z.nullable(z.array(z.string())).optional(),
   notIn: z.nullable(z.array(z.string())).optional(),
-  required: z.nullable(z.boolean()).optional(),
+  required: z.boolean().optional(),
 });
 
 export function anyRulesToJSON(anyRules: AnyRules): string {

@@ -15,5 +15,5 @@ let value: ResourceType = "LICENSE";
 ## Values
 
 ```typescript
-"ROLE" | "GROUP" | "LICENSE" | "PROJECT" | "CATALOG" | "CUSTOM" | "VAULT" | "PROFILE_TYPE" | Unrecognized<string>
+"ROLE" | "GROUP" | "LICENSE" | "PROJECT" | "CATALOG" | "CUSTOM" | "VAULT" | "PROFILE_TYPE" | "SESSION_POLICY" | "CLAW_AGENT" | Unrecognized<string>
 ```

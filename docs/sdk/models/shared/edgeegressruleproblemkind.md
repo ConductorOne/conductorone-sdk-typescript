@@ -1,0 +1,20 @@
+# EdgeEgressRuleProblemKind
+
+The kind field.
+
+## Example Usage
+
+```typescript
+import { EdgeEgressRuleProblemKind } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: EdgeEgressRuleProblemKind =
+  "EDGE_EGRESS_RULE_PROBLEM_KIND_INACTIVE_AUTHZEN_SERVER";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
+```
+
+## Values
+
+```typescript
+"EDGE_EGRESS_RULE_PROBLEM_KIND_UNSPECIFIED" | "EDGE_EGRESS_RULE_PROBLEM_KIND_TOO_MANY_RULES" | "EDGE_EGRESS_RULE_PROBLEM_KIND_INVALID_PATTERN" | "EDGE_EGRESS_RULE_PROBLEM_KIND_UNKNOWN_ENTITLEMENT" | "EDGE_EGRESS_RULE_PROBLEM_KIND_INVALID_BODY_LIMIT" | "EDGE_EGRESS_RULE_PROBLEM_KIND_AUTHZEN_SERVER_REQUIRED" | "EDGE_EGRESS_RULE_PROBLEM_KIND_UNEXPECTED_AUTHZEN_SERVER" | "EDGE_EGRESS_RULE_PROBLEM_KIND_UNKNOWN_AUTHZEN_SERVER" | "EDGE_EGRESS_RULE_PROBLEM_KIND_INACTIVE_AUTHZEN_SERVER" | Unrecognized<string>
+```

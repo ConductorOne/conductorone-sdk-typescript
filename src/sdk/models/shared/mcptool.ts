@@ -107,67 +107,83 @@ export type MCPTool = {
   /**
    * Bound AppEntitlement created during sync.
    */
-  appEntitlementId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
   /**
    * App identifier (app that owns the connector).
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * Tool risk classification for policy decisions.
    */
-  classification?: Classification | null | undefined;
+  classification?: Classification | undefined;
   /**
    * Connector identifier.
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
   createdAt?: Date | null | undefined;
   /**
    * Default tool classification from MCP config (system-managed during discovery).
    */
-  defaultClassification?: DefaultClassification | null | undefined;
+  defaultClassification?: DefaultClassification | undefined;
   /**
    * Default display name from MCP tool spec (title field).
    */
-  defaultDisplayName?: string | null | undefined;
+  defaultDisplayName?: string | undefined;
   /**
    * System-managed default visibility from MCP config (set during discovery).
    */
-  defaultVisibility?: DefaultVisibility | null | undefined;
+  defaultVisibility?: DefaultVisibility | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * Admin-editable description.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * Hash of tool definition for change detection.
    */
-  discoveryHash?: string | null | undefined;
+  discoveryHash?: string | undefined;
   /**
    * Admin-editable display name (overrides default_display_name when set).
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * Unique identifier for this MCP tool record.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * JSON-encoded input schema from MCP discovery.
    */
-  inputSchemaJson?: string | null | undefined;
+  inputSchemaJson?: string | undefined;
   lastCalledAt?: Date | null | undefined;
+  /**
+   * Whether this tool's backing entitlement is exposed in at least one request
+   *
+   * @remarks
+   *  catalog directly (i.e. can be requested on its own). Computed read-only;
+   *  populated on Search.
+   */
+  requestable?: boolean | undefined;
+  /**
+   * Whether this tool is requestable indirectly — it belongs to at least one
+   *
+   * @remarks
+   *  toolset (access profile) whose backing entitlement is exposed in a request
+   *  catalog. Independent of `requestable`. Computed read-only; populated on Search.
+   */
+  requestableViaToolset?: boolean | undefined;
   /**
    * Tool approval/lifecycle state.
    */
-  state?: MCPToolState | null | undefined;
+  state?: MCPToolState | undefined;
   /**
    * Native MCP tool name (unique within an MCP server).
    */
-  toolName?: string | null | undefined;
+  toolName?: string | undefined;
   updatedAt?: Date | null | undefined;
   /**
    * Admin-settable visibility override (how this tool is surfaced to users).
    */
-  visibility?: Visibility | null | undefined;
+  visibility?: Visibility | undefined;
 };
 
 /**
@@ -184,66 +200,66 @@ export type MCPToolInput = {
   /**
    * Bound AppEntitlement created during sync.
    */
-  appEntitlementId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
   /**
    * App identifier (app that owns the connector).
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * Tool risk classification for policy decisions.
    */
-  classification?: Classification | null | undefined;
+  classification?: Classification | undefined;
   /**
    * Connector identifier.
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
   createdAt?: Date | null | undefined;
   /**
    * Default tool classification from MCP config (system-managed during discovery).
    */
-  defaultClassification?: DefaultClassification | null | undefined;
+  defaultClassification?: DefaultClassification | undefined;
   /**
    * Default display name from MCP tool spec (title field).
    */
-  defaultDisplayName?: string | null | undefined;
+  defaultDisplayName?: string | undefined;
   /**
    * System-managed default visibility from MCP config (set during discovery).
    */
-  defaultVisibility?: DefaultVisibility | null | undefined;
+  defaultVisibility?: DefaultVisibility | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * Admin-editable description.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * Hash of tool definition for change detection.
    */
-  discoveryHash?: string | null | undefined;
+  discoveryHash?: string | undefined;
   /**
    * Admin-editable display name (overrides default_display_name when set).
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * Unique identifier for this MCP tool record.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * JSON-encoded input schema from MCP discovery.
    */
-  inputSchemaJson?: string | null | undefined;
+  inputSchemaJson?: string | undefined;
   /**
    * Tool approval/lifecycle state.
    */
-  state?: MCPToolState | null | undefined;
+  state?: MCPToolState | undefined;
   /**
    * Native MCP tool name (unique within an MCP server).
    */
-  toolName?: string | null | undefined;
+  toolName?: string | undefined;
   updatedAt?: Date | null | undefined;
   /**
    * Admin-settable visibility override (how this tool is surfaced to users).
    */
-  visibility?: Visibility | null | undefined;
+  visibility?: Visibility | undefined;
 };
 
 /** @internal */
@@ -329,34 +345,35 @@ export const MCPTool$inboundSchema: z.ZodType<MCPTool, z.ZodTypeDef, unknown> =
   z.object({
     allowedClientTypes: z.nullable(z.array(AllowedClientTypes$inboundSchema))
       .optional(),
-    appEntitlementId: z.nullable(z.string()).optional(),
-    appId: z.nullable(z.string()).optional(),
-    classification: z.nullable(Classification$inboundSchema).optional(),
-    connectorId: z.nullable(z.string()).optional(),
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    classification: Classification$inboundSchema.optional(),
+    connectorId: z.string().optional(),
     createdAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    defaultClassification: z.nullable(DefaultClassification$inboundSchema)
-      .optional(),
-    defaultDisplayName: z.nullable(z.string()).optional(),
-    defaultVisibility: z.nullable(DefaultVisibility$inboundSchema).optional(),
+    defaultClassification: DefaultClassification$inboundSchema.optional(),
+    defaultDisplayName: z.string().optional(),
+    defaultVisibility: DefaultVisibility$inboundSchema.optional(),
     deletedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    description: z.nullable(z.string()).optional(),
-    discoveryHash: z.nullable(z.string()).optional(),
-    displayName: z.nullable(z.string()).optional(),
-    id: z.nullable(z.string()).optional(),
-    inputSchemaJson: z.nullable(z.string()).optional(),
+    description: z.string().optional(),
+    discoveryHash: z.string().optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    inputSchemaJson: z.string().optional(),
     lastCalledAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    state: z.nullable(MCPToolState$inboundSchema).optional(),
-    toolName: z.nullable(z.string()).optional(),
+    requestable: z.boolean().optional(),
+    requestableViaToolset: z.boolean().optional(),
+    state: MCPToolState$inboundSchema.optional(),
+    toolName: z.string().optional(),
     updatedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    visibility: z.nullable(Visibility$inboundSchema).optional(),
+    visibility: Visibility$inboundSchema.optional(),
   });
 
 export function mcpToolFromJSON(
@@ -372,24 +389,24 @@ export function mcpToolFromJSON(
 /** @internal */
 export type MCPToolInput$Outbound = {
   allowedClientTypes?: Array<string> | null | undefined;
-  appEntitlementId?: string | null | undefined;
-  appId?: string | null | undefined;
-  classification?: string | null | undefined;
-  connectorId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
+  appId?: string | undefined;
+  classification?: string | undefined;
+  connectorId?: string | undefined;
   createdAt?: string | null | undefined;
-  defaultClassification?: string | null | undefined;
-  defaultDisplayName?: string | null | undefined;
-  defaultVisibility?: string | null | undefined;
+  defaultClassification?: string | undefined;
+  defaultDisplayName?: string | undefined;
+  defaultVisibility?: string | undefined;
   deletedAt?: string | null | undefined;
-  description?: string | null | undefined;
-  discoveryHash?: string | null | undefined;
-  displayName?: string | null | undefined;
-  id?: string | null | undefined;
-  inputSchemaJson?: string | null | undefined;
-  state?: string | null | undefined;
-  toolName?: string | null | undefined;
+  description?: string | undefined;
+  discoveryHash?: string | undefined;
+  displayName?: string | undefined;
+  id?: string | undefined;
+  inputSchemaJson?: string | undefined;
+  state?: string | undefined;
+  toolName?: string | undefined;
   updatedAt?: string | null | undefined;
-  visibility?: string | null | undefined;
+  visibility?: string | undefined;
 };
 
 /** @internal */
@@ -400,25 +417,24 @@ export const MCPToolInput$outboundSchema: z.ZodType<
 > = z.object({
   allowedClientTypes: z.nullable(z.array(AllowedClientTypes$outboundSchema))
     .optional(),
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  classification: z.nullable(Classification$outboundSchema).optional(),
-  connectorId: z.nullable(z.string()).optional(),
+  appEntitlementId: z.string().optional(),
+  appId: z.string().optional(),
+  classification: Classification$outboundSchema.optional(),
+  connectorId: z.string().optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  defaultClassification: z.nullable(DefaultClassification$outboundSchema)
-    .optional(),
-  defaultDisplayName: z.nullable(z.string()).optional(),
-  defaultVisibility: z.nullable(DefaultVisibility$outboundSchema).optional(),
+  defaultClassification: DefaultClassification$outboundSchema.optional(),
+  defaultDisplayName: z.string().optional(),
+  defaultVisibility: DefaultVisibility$outboundSchema.optional(),
   deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.nullable(z.string()).optional(),
-  discoveryHash: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  inputSchemaJson: z.nullable(z.string()).optional(),
-  state: z.nullable(MCPToolState$outboundSchema).optional(),
-  toolName: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  discoveryHash: z.string().optional(),
+  displayName: z.string().optional(),
+  id: z.string().optional(),
+  inputSchemaJson: z.string().optional(),
+  state: MCPToolState$outboundSchema.optional(),
+  toolName: z.string().optional(),
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  visibility: z.nullable(Visibility$outboundSchema).optional(),
+  visibility: Visibility$outboundSchema.optional(),
 });
 
 export function mcpToolInputToJSON(mcpToolInput: MCPToolInput): string {

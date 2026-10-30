@@ -14,23 +14,23 @@ export type TaskAuditAccountLifecycleActionCreated = {
   /**
    * The batonActionDisplayName field.
    */
-  batonActionDisplayName?: string | null | undefined;
+  batonActionDisplayName?: string | undefined;
   /**
    * The batonActionInvocationId field.
    */
-  batonActionInvocationId?: string | null | undefined;
+  batonActionInvocationId?: string | undefined;
   /**
    * The batonActionName field.
    */
-  batonActionName?: string | null | undefined;
+  batonActionName?: string | undefined;
   /**
    * The batonAppId field.
    */
-  batonAppId?: string | null | undefined;
+  batonAppId?: string | undefined;
   /**
    * The batonConnectorId field.
    */
-  batonConnectorId?: string | null | undefined;
+  batonConnectorId?: string | undefined;
 };
 
 /** @internal */
@@ -39,11 +39,11 @@ export const TaskAuditAccountLifecycleActionCreated$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  batonActionDisplayName: z.nullable(z.string()).optional(),
-  batonActionInvocationId: z.nullable(z.string()).optional(),
-  batonActionName: z.nullable(z.string()).optional(),
-  batonAppId: z.nullable(z.string()).optional(),
-  batonConnectorId: z.nullable(z.string()).optional(),
+  batonActionDisplayName: z.string().optional(),
+  batonActionInvocationId: z.string().optional(),
+  batonActionName: z.string().optional(),
+  batonAppId: z.string().optional(),
+  batonConnectorId: z.string().optional(),
 });
 
 export function taskAuditAccountLifecycleActionCreatedFromJSON(

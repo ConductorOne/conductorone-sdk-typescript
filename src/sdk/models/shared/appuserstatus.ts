@@ -30,11 +30,11 @@ export type AppUserStatus = {
   /**
    * The details of applicaiton user status.
    */
-  details?: string | null | undefined;
+  details?: string | undefined;
   /**
    * The application user status field.
    */
-  status?: AppUserStatusStatus | null | undefined;
+  status?: AppUserStatusStatus | undefined;
 };
 
 /** @internal */
@@ -50,8 +50,8 @@ export const AppUserStatus$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  details: z.nullable(z.string()).optional(),
-  status: z.nullable(AppUserStatusStatus$inboundSchema).optional(),
+  details: z.string().optional(),
+  status: AppUserStatusStatus$inboundSchema.optional(),
 });
 
 export function appUserStatusFromJSON(

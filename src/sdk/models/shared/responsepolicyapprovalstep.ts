@@ -53,7 +53,7 @@ export type ResponsePolicyApprovalStep = {
    * @remarks
    *  will use a different string.
    */
-  version?: string | null | undefined;
+  version?: string | undefined;
 };
 
 /** @internal */
@@ -69,7 +69,7 @@ export const ResponsePolicyApprovalStep$inboundSchema: z.ZodType<
     .optional(),
   replacePolicy: z.nullable(ResponsePolicyApprovalReplacePolicy$inboundSchema)
     .optional(),
-  version: z.nullable(z.string()).optional(),
+  version: z.string().optional(),
 });
 /** @internal */
 export type ResponsePolicyApprovalStep$Outbound = {
@@ -80,7 +80,7 @@ export type ResponsePolicyApprovalStep$Outbound = {
     | ResponsePolicyApprovalReplacePolicy$Outbound
     | null
     | undefined;
-  version?: string | null | undefined;
+  version?: string | undefined;
 };
 
 /** @internal */
@@ -96,7 +96,7 @@ export const ResponsePolicyApprovalStep$outboundSchema: z.ZodType<
     .optional(),
   replacePolicy: z.nullable(ResponsePolicyApprovalReplacePolicy$outboundSchema)
     .optional(),
-  version: z.nullable(z.string()).optional(),
+  version: z.string().optional(),
 });
 
 export function responsePolicyApprovalStepToJSON(

@@ -48,19 +48,24 @@ export type AgentApproval = {
   /**
    * The action to take if the agent fails to approve, deny, or reassign the task.
    */
-  agentFailureAction?: AgentFailureAction | null | undefined;
+  agentFailureAction?: AgentFailureAction | undefined;
   /**
    * The mode of the agent, full control, change policy only, or comment only.
    */
-  agentMode?: AgentMode | null | undefined;
+  agentMode?: AgentMode | undefined;
   /**
-   * The agent user ID to assign the task to.
+   * Deprecated: agent steps are evaluated by the system; no agent user is
+   *
+   * @remarks
+   *  selected. Retained so pre-migration policies still validate.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  agentUserId?: string | null | undefined;
+  agentUserId?: string | undefined;
   /**
    * Instructions for the agent.
    */
-  instructions?: string | null | undefined;
+  instructions?: string | undefined;
   /**
    * The allow list of policy IDs to re-route the task to.
    */
@@ -103,19 +108,19 @@ export const AgentApproval$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  agentFailureAction: z.nullable(AgentFailureAction$inboundSchema).optional(),
-  agentMode: z.nullable(AgentMode$inboundSchema).optional(),
-  agentUserId: z.nullable(z.string()).optional(),
-  instructions: z.nullable(z.string()).optional(),
+  agentFailureAction: AgentFailureAction$inboundSchema.optional(),
+  agentMode: AgentMode$inboundSchema.optional(),
+  agentUserId: z.string().optional(),
+  instructions: z.string().optional(),
   policyIds: z.nullable(z.array(z.string())).optional(),
   reassignToUserIds: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
 export type AgentApproval$Outbound = {
-  agentFailureAction?: string | null | undefined;
-  agentMode?: string | null | undefined;
-  agentUserId?: string | null | undefined;
-  instructions?: string | null | undefined;
+  agentFailureAction?: string | undefined;
+  agentMode?: string | undefined;
+  agentUserId?: string | undefined;
+  instructions?: string | undefined;
   policyIds?: Array<string> | null | undefined;
   reassignToUserIds?: Array<string> | null | undefined;
 };
@@ -126,10 +131,10 @@ export const AgentApproval$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentApproval
 > = z.object({
-  agentFailureAction: z.nullable(AgentFailureAction$outboundSchema).optional(),
-  agentMode: z.nullable(AgentMode$outboundSchema).optional(),
-  agentUserId: z.nullable(z.string()).optional(),
-  instructions: z.nullable(z.string()).optional(),
+  agentFailureAction: AgentFailureAction$outboundSchema.optional(),
+  agentMode: AgentMode$outboundSchema.optional(),
+  agentUserId: z.string().optional(),
+  instructions: z.string().optional(),
   policyIds: z.nullable(z.array(z.string())).optional(),
   reassignToUserIds: z.nullable(z.array(z.string())).optional(),
 });

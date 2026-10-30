@@ -13,7 +13,7 @@ This message contains a oneof named vault. Only a single field of the following 
 import { VaultServiceCreateRequest } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: VaultServiceCreateRequest = {
-  displayName: "Carolanne.Thompson",
+  displayName: "Daniela_Kautzer",
 };
 ```
 

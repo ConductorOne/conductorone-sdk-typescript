@@ -12,25 +12,44 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type TaskAuditConditionalPolicyExecutionResult = {
   /**
+   * The depth of this policy in the chain (0 = root, 1 = first hop, etc.).
+   */
+  chainDepth?: number | undefined;
+  /**
    * The condition field.
    */
-  condition?: string | null | undefined;
+  condition?: string | undefined;
   /**
    * The conditionMatched field.
    */
-  conditionMatched?: boolean | null | undefined;
+  conditionMatched?: boolean | undefined;
   /**
    * The defaultCondition field.
    */
-  defaultCondition?: boolean | null | undefined;
+  defaultCondition?: boolean | undefined;
   /**
    * The error field.
    */
-  error?: string | null | undefined;
+  error?: string | undefined;
+  /**
+   * When this rule's outcome is a reference to another Policy, the ID of
+   *
+   * @remarks
+   *  that referenced policy. Empty when the outcome is an inline policy_key.
+   */
+  outcomePolicyId?: string | undefined;
+  /**
+   * The policy in which this rule was evaluated. Empty for results recorded
+   *
+   * @remarks
+   *  before chained policy references existed; populated for every result
+   *  emitted by recursive evaluation.
+   */
+  policyId?: string | undefined;
   /**
    * The policyKey field.
    */
-  policyKey?: string | null | undefined;
+  policyKey?: string | undefined;
 };
 
 /** @internal */
@@ -39,11 +58,14 @@ export const TaskAuditConditionalPolicyExecutionResult$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  condition: z.nullable(z.string()).optional(),
-  conditionMatched: z.nullable(z.boolean()).optional(),
-  defaultCondition: z.nullable(z.boolean()).optional(),
-  error: z.nullable(z.string()).optional(),
-  policyKey: z.nullable(z.string()).optional(),
+  chainDepth: z.number().int().optional(),
+  condition: z.string().optional(),
+  conditionMatched: z.boolean().optional(),
+  defaultCondition: z.boolean().optional(),
+  error: z.string().optional(),
+  outcomePolicyId: z.string().optional(),
+  policyId: z.string().optional(),
+  policyKey: z.string().optional(),
 });
 
 export function taskAuditConditionalPolicyExecutionResultFromJSON(

@@ -26,7 +26,7 @@ export type Provision = {
   /**
    * A field indicating whether this step is assigned.
    */
-  assigned?: boolean | null | undefined;
+  assigned?: boolean | undefined;
   provisionPolicy?: ProvisionPolicyInput | null | undefined;
   provisionTarget?: ProvisionTarget | null | undefined;
 };
@@ -37,13 +37,13 @@ export const Provision$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  assigned: z.nullable(z.boolean()).optional(),
+  assigned: z.boolean().optional(),
   provisionPolicy: z.nullable(ProvisionPolicyInput$inboundSchema).optional(),
   provisionTarget: z.nullable(ProvisionTarget$inboundSchema).optional(),
 });
 /** @internal */
 export type Provision$Outbound = {
-  assigned?: boolean | null | undefined;
+  assigned?: boolean | undefined;
   provisionPolicy?: ProvisionPolicyInput$Outbound | null | undefined;
   provisionTarget?: ProvisionTarget$Outbound | null | undefined;
 };
@@ -54,7 +54,7 @@ export const Provision$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Provision
 > = z.object({
-  assigned: z.nullable(z.boolean()).optional(),
+  assigned: z.boolean().optional(),
   provisionPolicy: z.nullable(ProvisionPolicyInput$outboundSchema).optional(),
   provisionTarget: z.nullable(ProvisionTarget$outboundSchema).optional(),
 });

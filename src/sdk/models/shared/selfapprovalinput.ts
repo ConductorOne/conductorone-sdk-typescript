@@ -16,7 +16,7 @@ export type SelfApprovalInput = {
   /**
    * Configuration to allow a fallback if the identity user of the target app user cannot be determined.
    */
-  fallback?: boolean | null | undefined;
+  fallback?: boolean | undefined;
   /**
    * Configuration to specify which groups to fallback to if fallback is enabled and the identity user of the target app user cannot be determined.
    */
@@ -28,15 +28,15 @@ export type SelfApprovalInput = {
   /**
    * Configuration to enable fallback for group fallback.
    */
-  isGroupFallbackEnabled?: boolean | null | undefined;
+  isGroupFallbackEnabled?: boolean | undefined;
 };
 
 /** @internal */
 export type SelfApprovalInput$Outbound = {
-  fallback?: boolean | null | undefined;
+  fallback?: boolean | undefined;
   fallbackGroupIds?: Array<AppEntitlementReference$Outbound> | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
-  isGroupFallbackEnabled?: boolean | null | undefined;
+  isGroupFallbackEnabled?: boolean | undefined;
 };
 
 /** @internal */
@@ -45,11 +45,11 @@ export const SelfApprovalInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SelfApprovalInput
 > = z.object({
-  fallback: z.nullable(z.boolean()).optional(),
+  fallback: z.boolean().optional(),
   fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$outboundSchema))
     .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-  isGroupFallbackEnabled: z.nullable(z.boolean()).optional(),
+  isGroupFallbackEnabled: z.boolean().optional(),
 });
 
 export function selfApprovalInputToJSON(

@@ -14,7 +14,7 @@ export type AutomationTemplateRef = {
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const AutomationTemplateRef$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
 });
 /** @internal */
 export type AutomationTemplateRef$Outbound = {
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const AutomationTemplateRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AutomationTemplateRef
 > = z.object({
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
 });
 
 export function automationTemplateRefToJSON(

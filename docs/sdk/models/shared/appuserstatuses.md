@@ -5,7 +5,7 @@
 ```typescript
 import { AppUserStatuses } from "conductorone-sdk-typescript/sdk/models/shared";
 
-let value: AppUserStatuses = "APP_USER_STATUS_DISABLED";
+let value: AppUserStatuses = "APP_USER_STATUS_DELETED";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: AppUserStatuses = "APP_USER_STATUS_DISABLED";
 ## Values
 
 ```typescript
-"APP_USER_STATUS_UNSPECIFIED" | "APP_USER_STATUS_ENABLED" | "APP_USER_STATUS_DISABLED" | "APP_USER_STATUS_DELETED" | Unrecognized<string>
+"APP_USER_STATUS_UNSPECIFIED" | "APP_USER_STATUS_ENABLED" | "APP_USER_STATUS_DISABLED" | "APP_USER_STATUS_DELETED" | "APP_USER_STATUS_PENDING" | Unrecognized<string>
 ```

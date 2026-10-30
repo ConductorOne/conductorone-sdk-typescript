@@ -17,20 +17,20 @@ export type WebhookEndpoint = {
   /**
    * An optional description of the webhook's purpose.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The human-readable name of the webhook.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The unique identifier of the webhook.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   updatedAt?: Date | null | undefined;
   /**
    * The destination URL that receives event notification HTTP callbacks.
    */
-  url?: string | null | undefined;
+  url?: string | undefined;
 };
 
 /** @internal */
@@ -46,13 +46,13 @@ export const WebhookEndpoint$inboundSchema: z.ZodType<
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  id: z.string().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  url: z.nullable(z.string()).optional(),
+  url: z.string().optional(),
 });
 
 export function webhookEndpointFromJSON(

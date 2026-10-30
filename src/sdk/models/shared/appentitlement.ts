@@ -51,7 +51,7 @@ export type AppEntitlement = {
   /**
    * The alias of the app entitlement used by Cone. Also exact-match queryable.
    */
-  alias?: string | null | undefined;
+  alias?: string | undefined;
   /**
    * Bounded key/value metadata bag for IaC marking and customer tags.
    *
@@ -68,19 +68,19 @@ export type AppEntitlement = {
   /**
    * The ID of the app that is associated with the app entitlement.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The ID of the app resource that is associated with the app entitlement
    */
-  appResourceId?: string | null | undefined;
+  appResourceId?: string | undefined;
   /**
    * The ID of the app resource type that is associated with the app entitlement
    */
-  appResourceTypeId?: string | null | undefined;
+  appResourceTypeId?: string | undefined;
   /**
    * The ID of the policy that will be used for certify tickets related to the app entitlement.
    */
-  certifyPolicyId?: string | null | undefined;
+  certifyPolicyId?: string | undefined;
   /**
    * The IDs of different compliance frameworks associated with this app entitlement ex (SOX, HIPAA, PCI, etc.)
    */
@@ -89,83 +89,83 @@ export type AppEntitlement = {
   /**
    * Flag to indicate if app-level access request defaults have been applied to the entitlement
    */
-  defaultValuesApplied?: boolean | null | undefined;
+  defaultValuesApplied?: boolean | undefined;
   deletedAt?: Date | null | undefined;
   deprovisionerPolicy?: ProvisionPolicy | null | undefined;
   /**
    * The description of the app entitlement.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The display name of the app entitlement.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   durationGrant?: string | null | undefined;
   durationUnset?: AppEntitlementDurationUnset | null | undefined;
   /**
    * This enables tasks to be created in an emergency and use a selected emergency access policy.
    */
-  emergencyGrantEnabled?: boolean | null | undefined;
+  emergencyGrantEnabled?: boolean | undefined;
   /**
    * The ID of the policy that will be used for emergency access grant tasks.
    */
-  emergencyGrantPolicyId?: string | null | undefined;
+  emergencyGrantPolicyId?: string | undefined;
   /**
    * The upstream product's native external ID for this entitlement (e.g. an Okta group ID).
    *
    * @remarks
    *  Populated from the connector's external ID during sync.
    */
-  externalId?: string | null | undefined;
+  externalId?: string | undefined;
   /**
    * The amount of grants open for this entitlement
    */
-  grantCount?: number | null | undefined;
+  grantCount?: number | undefined;
   /**
    * The ID of the policy that will be used for grant tickets related to the app entitlement.
    */
-  grantPolicyId?: string | null | undefined;
+  grantPolicyId?: string | undefined;
   /**
    * The unique ID for the App Entitlement.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * Flag to indicate whether automation (for adding users to entitlement based on rules) has been enabled.
    */
-  isAutomationEnabled?: boolean | null | undefined;
+  isAutomationEnabled?: boolean | undefined;
   /**
    * Flag to indicate if the app entitlement is manually managed.
    */
-  isManuallyManaged?: boolean | null | undefined;
+  isManuallyManaged?: boolean | undefined;
   /**
    * An identifier used to match this entitlement to a connector-synced entitlement during sync.
    */
-  matchBatonId?: string | null | undefined;
+  matchBatonId?: string | undefined;
   /**
    * Flag to indicate if the app-level access request settings have been overridden for the entitlement
    */
-  overrideAccessRequestsDefaults?: boolean | null | undefined;
+  overrideAccessRequestsDefaults?: boolean | undefined;
   provisionerPolicy?: ProvisionPolicy | null | undefined;
   /**
    * The purpose of this entitlement (e.g., assignment, permission, ownership).
    */
-  purpose?: Purpose | null | undefined;
+  purpose?: Purpose | undefined;
   /**
    * The ID of the request schema associated with this app entitlement.
    */
-  requestSchemaId?: string | null | undefined;
+  requestSchemaId?: string | undefined;
   /**
    * The ID of the policy that will be used for revoke tickets related to the app entitlement
    */
-  revokePolicyId?: string | null | undefined;
+  revokePolicyId?: string | undefined;
   /**
    * The ID of the risk level assigned to this entitlement.
    */
-  riskLevelValueId?: string | null | undefined;
+  riskLevelValueId?: string | undefined;
   /**
    * The slug is displayed as an oval next to the name in the frontend of C1, it tells you what permission the entitlement grants. See https://www.conductorone.com/docs/product/admin/entitlements/
    */
-  slug?: string | null | undefined;
+  slug?: string | undefined;
   /**
    * Map to tell us which connector the entitlement came from.
    */
@@ -173,7 +173,7 @@ export type AppEntitlement = {
   /**
    * This field indicates if this is a system builtin entitlement.
    */
-  systemBuiltin?: boolean | null | undefined;
+  systemBuiltin?: boolean | undefined;
   updatedAt?: Date | null | undefined;
   userEditedMask?: string | null | undefined;
 };
@@ -191,7 +191,7 @@ export type AppEntitlementInput = {
   /**
    * The alias of the app entitlement used by Cone. Also exact-match queryable.
    */
-  alias?: string | null | undefined;
+  alias?: string | undefined;
   /**
    * Bounded key/value metadata bag for IaC marking and customer tags.
    *
@@ -208,19 +208,19 @@ export type AppEntitlementInput = {
   /**
    * The ID of the app that is associated with the app entitlement.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The ID of the app resource that is associated with the app entitlement
    */
-  appResourceId?: string | null | undefined;
+  appResourceId?: string | undefined;
   /**
    * The ID of the app resource type that is associated with the app entitlement
    */
-  appResourceTypeId?: string | null | undefined;
+  appResourceTypeId?: string | undefined;
   /**
    * The ID of the policy that will be used for certify tickets related to the app entitlement.
    */
-  certifyPolicyId?: string | null | undefined;
+  certifyPolicyId?: string | undefined;
   /**
    * The IDs of different compliance frameworks associated with this app entitlement ex (SOX, HIPAA, PCI, etc.)
    */
@@ -228,63 +228,63 @@ export type AppEntitlementInput = {
   /**
    * Flag to indicate if app-level access request defaults have been applied to the entitlement
    */
-  defaultValuesApplied?: boolean | null | undefined;
+  defaultValuesApplied?: boolean | undefined;
   deprovisionerPolicy?: ProvisionPolicyInput | null | undefined;
   /**
    * The description of the app entitlement.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The display name of the app entitlement.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   durationGrant?: string | null | undefined;
   durationUnset?: AppEntitlementDurationUnset | null | undefined;
   /**
    * This enables tasks to be created in an emergency and use a selected emergency access policy.
    */
-  emergencyGrantEnabled?: boolean | null | undefined;
+  emergencyGrantEnabled?: boolean | undefined;
   /**
    * The ID of the policy that will be used for emergency access grant tasks.
    */
-  emergencyGrantPolicyId?: string | null | undefined;
+  emergencyGrantPolicyId?: string | undefined;
   /**
    * The ID of the policy that will be used for grant tickets related to the app entitlement.
    */
-  grantPolicyId?: string | null | undefined;
+  grantPolicyId?: string | undefined;
   /**
    * Flag to indicate if the app entitlement is manually managed.
    */
-  isManuallyManaged?: boolean | null | undefined;
+  isManuallyManaged?: boolean | undefined;
   /**
    * An identifier used to match this entitlement to a connector-synced entitlement during sync.
    */
-  matchBatonId?: string | null | undefined;
+  matchBatonId?: string | undefined;
   /**
    * Flag to indicate if the app-level access request settings have been overridden for the entitlement
    */
-  overrideAccessRequestsDefaults?: boolean | null | undefined;
+  overrideAccessRequestsDefaults?: boolean | undefined;
   provisionerPolicy?: ProvisionPolicyInput | null | undefined;
   /**
    * The purpose of this entitlement (e.g., assignment, permission, ownership).
    */
-  purpose?: Purpose | null | undefined;
+  purpose?: Purpose | undefined;
   /**
    * The ID of the request schema associated with this app entitlement.
    */
-  requestSchemaId?: string | null | undefined;
+  requestSchemaId?: string | undefined;
   /**
    * The ID of the policy that will be used for revoke tickets related to the app entitlement
    */
-  revokePolicyId?: string | null | undefined;
+  revokePolicyId?: string | undefined;
   /**
    * The ID of the risk level assigned to this entitlement.
    */
-  riskLevelValueId?: string | null | undefined;
+  riskLevelValueId?: string | undefined;
   /**
    * The slug is displayed as an oval next to the name in the frontend of C1, it tells you what permission the entitlement grants. See https://www.conductorone.com/docs/product/admin/entitlements/
    */
-  slug?: string | null | undefined;
+  slug?: string | undefined;
   /**
    * Map to tell us which connector the entitlement came from.
    */
@@ -340,45 +340,45 @@ export const AppEntitlement$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  alias: z.nullable(z.string()).optional(),
+  alias: z.string().optional(),
   annotations: z.record(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appResourceId: z.nullable(z.string()).optional(),
-  appResourceTypeId: z.nullable(z.string()).optional(),
-  certifyPolicyId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  appResourceId: z.string().optional(),
+  appResourceTypeId: z.string().optional(),
+  certifyPolicyId: z.string().optional(),
   complianceFrameworkValueIds: z.nullable(z.array(z.string())).optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  defaultValuesApplied: z.nullable(z.boolean()).optional(),
+  defaultValuesApplied: z.boolean().optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   deprovisionerPolicy: z.nullable(ProvisionPolicy$inboundSchema).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
   durationGrant: z.nullable(z.string()).optional(),
   durationUnset: z.nullable(
     z.lazy(() => AppEntitlementDurationUnset$inboundSchema),
   ).optional(),
-  emergencyGrantEnabled: z.nullable(z.boolean()).optional(),
-  emergencyGrantPolicyId: z.nullable(z.string()).optional(),
-  externalId: z.nullable(z.string()).optional(),
-  grantCount: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
-  grantPolicyId: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  isAutomationEnabled: z.nullable(z.boolean()).optional(),
-  isManuallyManaged: z.nullable(z.boolean()).optional(),
-  matchBatonId: z.nullable(z.string()).optional(),
-  overrideAccessRequestsDefaults: z.nullable(z.boolean()).optional(),
+  emergencyGrantEnabled: z.boolean().optional(),
+  emergencyGrantPolicyId: z.string().optional(),
+  externalId: z.string().optional(),
+  grantCount: z.string().transform(v => parseInt(v, 10)).optional(),
+  grantPolicyId: z.string().optional(),
+  id: z.string().optional(),
+  isAutomationEnabled: z.boolean().optional(),
+  isManuallyManaged: z.boolean().optional(),
+  matchBatonId: z.string().optional(),
+  overrideAccessRequestsDefaults: z.boolean().optional(),
   provisionerPolicy: z.nullable(ProvisionPolicy$inboundSchema).optional(),
-  purpose: z.nullable(Purpose$inboundSchema).optional(),
-  requestSchemaId: z.nullable(z.string()).optional(),
-  revokePolicyId: z.nullable(z.string()).optional(),
-  riskLevelValueId: z.nullable(z.string()).optional(),
-  slug: z.nullable(z.string()).optional(),
+  purpose: Purpose$inboundSchema.optional(),
+  requestSchemaId: z.string().optional(),
+  revokePolicyId: z.string().optional(),
+  riskLevelValueId: z.string().optional(),
+  slug: z.string().optional(),
   sourceConnectorIds: z.record(z.string()).optional(),
-  systemBuiltin: z.nullable(z.boolean()).optional(),
+  systemBuiltin: z.boolean().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -397,31 +397,31 @@ export function appEntitlementFromJSON(
 
 /** @internal */
 export type AppEntitlementInput$Outbound = {
-  alias?: string | null | undefined;
+  alias?: string | undefined;
   annotations?: { [k: string]: string } | undefined;
-  appId?: string | null | undefined;
-  appResourceId?: string | null | undefined;
-  appResourceTypeId?: string | null | undefined;
-  certifyPolicyId?: string | null | undefined;
+  appId?: string | undefined;
+  appResourceId?: string | undefined;
+  appResourceTypeId?: string | undefined;
+  certifyPolicyId?: string | undefined;
   complianceFrameworkValueIds?: Array<string> | null | undefined;
-  defaultValuesApplied?: boolean | null | undefined;
+  defaultValuesApplied?: boolean | undefined;
   deprovisionerPolicy?: ProvisionPolicyInput$Outbound | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
   durationGrant?: string | null | undefined;
   durationUnset?: AppEntitlementDurationUnset$Outbound | null | undefined;
-  emergencyGrantEnabled?: boolean | null | undefined;
-  emergencyGrantPolicyId?: string | null | undefined;
-  grantPolicyId?: string | null | undefined;
-  isManuallyManaged?: boolean | null | undefined;
-  matchBatonId?: string | null | undefined;
-  overrideAccessRequestsDefaults?: boolean | null | undefined;
+  emergencyGrantEnabled?: boolean | undefined;
+  emergencyGrantPolicyId?: string | undefined;
+  grantPolicyId?: string | undefined;
+  isManuallyManaged?: boolean | undefined;
+  matchBatonId?: string | undefined;
+  overrideAccessRequestsDefaults?: boolean | undefined;
   provisionerPolicy?: ProvisionPolicyInput$Outbound | null | undefined;
-  purpose?: string | null | undefined;
-  requestSchemaId?: string | null | undefined;
-  revokePolicyId?: string | null | undefined;
-  riskLevelValueId?: string | null | undefined;
-  slug?: string | null | undefined;
+  purpose?: string | undefined;
+  requestSchemaId?: string | undefined;
+  revokePolicyId?: string | undefined;
+  riskLevelValueId?: string | undefined;
+  slug?: string | undefined;
   sourceConnectorIds?: { [k: string]: string } | undefined;
   userEditedMask?: string | null | undefined;
 };
@@ -432,34 +432,34 @@ export const AppEntitlementInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppEntitlementInput
 > = z.object({
-  alias: z.nullable(z.string()).optional(),
+  alias: z.string().optional(),
   annotations: z.record(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appResourceId: z.nullable(z.string()).optional(),
-  appResourceTypeId: z.nullable(z.string()).optional(),
-  certifyPolicyId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  appResourceId: z.string().optional(),
+  appResourceTypeId: z.string().optional(),
+  certifyPolicyId: z.string().optional(),
   complianceFrameworkValueIds: z.nullable(z.array(z.string())).optional(),
-  defaultValuesApplied: z.nullable(z.boolean()).optional(),
+  defaultValuesApplied: z.boolean().optional(),
   deprovisionerPolicy: z.nullable(ProvisionPolicyInput$outboundSchema)
     .optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
   durationGrant: z.nullable(z.string()).optional(),
   durationUnset: z.nullable(
     z.lazy(() => AppEntitlementDurationUnset$outboundSchema),
   ).optional(),
-  emergencyGrantEnabled: z.nullable(z.boolean()).optional(),
-  emergencyGrantPolicyId: z.nullable(z.string()).optional(),
-  grantPolicyId: z.nullable(z.string()).optional(),
-  isManuallyManaged: z.nullable(z.boolean()).optional(),
-  matchBatonId: z.nullable(z.string()).optional(),
-  overrideAccessRequestsDefaults: z.nullable(z.boolean()).optional(),
+  emergencyGrantEnabled: z.boolean().optional(),
+  emergencyGrantPolicyId: z.string().optional(),
+  grantPolicyId: z.string().optional(),
+  isManuallyManaged: z.boolean().optional(),
+  matchBatonId: z.string().optional(),
+  overrideAccessRequestsDefaults: z.boolean().optional(),
   provisionerPolicy: z.nullable(ProvisionPolicyInput$outboundSchema).optional(),
-  purpose: z.nullable(Purpose$outboundSchema).optional(),
-  requestSchemaId: z.nullable(z.string()).optional(),
-  revokePolicyId: z.nullable(z.string()).optional(),
-  riskLevelValueId: z.nullable(z.string()).optional(),
-  slug: z.nullable(z.string()).optional(),
+  purpose: Purpose$outboundSchema.optional(),
+  requestSchemaId: z.string().optional(),
+  revokePolicyId: z.string().optional(),
+  riskLevelValueId: z.string().optional(),
+  slug: z.string().optional(),
   sourceConnectorIds: z.record(z.string()).optional(),
   userEditedMask: z.nullable(z.string()).optional(),
 });

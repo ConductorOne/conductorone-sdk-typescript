@@ -15,13 +15,13 @@ export type DecoyAccessTokenInput = {
   /**
    * Existing User the access token's subject claim references.
    */
-  subjectUserId?: string | null | undefined;
+  subjectUserId?: string | undefined;
 };
 
 /** @internal */
 export type DecoyAccessTokenInput$Outbound = {
   expiresIn?: string | null | undefined;
-  subjectUserId?: string | null | undefined;
+  subjectUserId?: string | undefined;
 };
 
 /** @internal */
@@ -31,7 +31,7 @@ export const DecoyAccessTokenInput$outboundSchema: z.ZodType<
   DecoyAccessTokenInput
 > = z.object({
   expiresIn: z.nullable(z.string()).optional(),
-  subjectUserId: z.nullable(z.string()).optional(),
+  subjectUserId: z.string().optional(),
 });
 
 export function decoyAccessTokenInputToJSON(

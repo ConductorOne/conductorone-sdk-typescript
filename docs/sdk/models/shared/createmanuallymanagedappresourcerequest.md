@@ -8,7 +8,7 @@ The request message for creating a manually managed app resource.
 import { CreateManuallyManagedAppResourceRequest } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: CreateManuallyManagedAppResourceRequest = {
-  displayName: "Adaline_Russel41",
+  displayName: "Jaron_Christiansen",
 };
 ```
 

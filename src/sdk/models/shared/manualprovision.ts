@@ -21,7 +21,7 @@ export type ManualProvision = {
   /**
    * This field indicates a text body of instructions for the provisioner to indicate.
    */
-  instructions?: string | null | undefined;
+  instructions?: string | undefined;
   /**
    * An array of users that are required to provision during this step.
    *
@@ -38,13 +38,13 @@ export const ManualProvision$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   assignee: z.nullable(ProvisionerAssignment$inboundSchema).optional(),
-  instructions: z.nullable(z.string()).optional(),
+  instructions: z.string().optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
 export type ManualProvision$Outbound = {
   assignee?: ProvisionerAssignment$Outbound | null | undefined;
-  instructions?: string | null | undefined;
+  instructions?: string | undefined;
   userIds?: Array<string> | null | undefined;
 };
 
@@ -55,7 +55,7 @@ export const ManualProvision$outboundSchema: z.ZodType<
   ManualProvision
 > = z.object({
   assignee: z.nullable(ProvisionerAssignment$outboundSchema).optional(),
-  instructions: z.nullable(z.string()).optional(),
+  instructions: z.string().optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 

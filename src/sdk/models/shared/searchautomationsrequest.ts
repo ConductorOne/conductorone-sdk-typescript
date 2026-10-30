@@ -18,7 +18,7 @@ import {
  *  when sort_field is also unspecified, the server default order (created_at
  *  DESC) applies.
  */
-export const Direction = {
+export const SearchAutomationsRequestDirection = {
   SortDirectionUnspecified: "SORT_DIRECTION_UNSPECIFIED",
   SortDirectionAsc: "SORT_DIRECTION_ASC",
   SortDirectionDesc: "SORT_DIRECTION_DESC",
@@ -30,12 +30,14 @@ export const Direction = {
  *  when sort_field is also unspecified, the server default order (created_at
  *  DESC) applies.
  */
-export type Direction = OpenEnum<typeof Direction>;
+export type SearchAutomationsRequestDirection = OpenEnum<
+  typeof SearchAutomationsRequestDirection
+>;
 
 /**
  * Column to sort by. Unspecified (0) means sort by created_at desc (server default).
  */
-export const SortField = {
+export const SearchAutomationsRequestSortField = {
   AutomationSortFieldUnspecified: "AUTOMATION_SORT_FIELD_UNSPECIFIED",
   AutomationSortFieldDisplayName: "AUTOMATION_SORT_FIELD_DISPLAY_NAME",
   AutomationSortFieldCreatedAt: "AUTOMATION_SORT_FIELD_CREATED_AT",
@@ -47,7 +49,9 @@ export const SortField = {
 /**
  * Column to sort by. Unspecified (0) means sort by created_at desc (server default).
  */
-export type SortField = OpenEnum<typeof SortField>;
+export type SearchAutomationsRequestSortField = OpenEnum<
+  typeof SearchAutomationsRequestSortField
+>;
 
 export const SearchAutomationsRequestStatuses = {
   AutomationStatusFilterUnspecified: "AUTOMATION_STATUS_FILTER_UNSPECIFIED",
@@ -83,7 +87,7 @@ export type SearchAutomationsRequest = {
   /**
    * Filter results to automations belonging to this application.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * Filter results to automations belonging to any of the specified apps.
    *
@@ -99,7 +103,7 @@ export type SearchAutomationsRequest = {
    *  when sort_field is also unspecified, the server default order (created_at
    *  DESC) applies.
    */
-  direction?: Direction | null | undefined;
+  direction?: SearchAutomationsRequestDirection | undefined;
   /**
    * Tri-state draft filter. Unset = include both drafts and published;
    *
@@ -110,15 +114,15 @@ export type SearchAutomationsRequest = {
   /**
    * Maximum number of results to return per page.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * Pagination token from a previous SearchAutomationsResponse.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Free-text search query to filter automations by name or description.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * Restrict results to automations matching these template references.
    */
@@ -126,7 +130,7 @@ export type SearchAutomationsRequest = {
   /**
    * Column to sort by. Unspecified (0) means sort by created_at desc (server default).
    */
-  sortField?: SortField | null | undefined;
+  sortField?: SearchAutomationsRequestSortField | undefined;
   /**
    * Filter results by automation status. Empty or containing both ON and OFF
    *
@@ -141,18 +145,18 @@ export type SearchAutomationsRequest = {
 };
 
 /** @internal */
-export const Direction$outboundSchema: z.ZodType<
+export const SearchAutomationsRequestDirection$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
-  Direction
-> = openEnums.outboundSchema(Direction);
+  SearchAutomationsRequestDirection
+> = openEnums.outboundSchema(SearchAutomationsRequestDirection);
 
 /** @internal */
-export const SortField$outboundSchema: z.ZodType<
+export const SearchAutomationsRequestSortField$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
-  SortField
-> = openEnums.outboundSchema(SortField);
+  SearchAutomationsRequestSortField
+> = openEnums.outboundSchema(SearchAutomationsRequestSortField);
 
 /** @internal */
 export const SearchAutomationsRequestStatuses$outboundSchema: z.ZodType<
@@ -170,15 +174,15 @@ export const TriggerTypes$outboundSchema: z.ZodType<
 
 /** @internal */
 export type SearchAutomationsRequest$Outbound = {
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   appIds?: Array<string> | null | undefined;
-  direction?: string | null | undefined;
+  direction?: string | undefined;
   isDraft?: boolean | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  query?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  query?: string | undefined;
   refs?: Array<AutomationTemplateRef$Outbound> | null | undefined;
-  sortField?: string | null | undefined;
+  sortField?: string | undefined;
   statuses?: Array<string> | null | undefined;
   triggerTypes?: Array<string> | null | undefined;
 };
@@ -189,15 +193,15 @@ export const SearchAutomationsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchAutomationsRequest
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
   appIds: z.nullable(z.array(z.string())).optional(),
-  direction: z.nullable(Direction$outboundSchema).optional(),
+  direction: SearchAutomationsRequestDirection$outboundSchema.optional(),
   isDraft: z.nullable(z.boolean()).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  query: z.string().optional(),
   refs: z.nullable(z.array(AutomationTemplateRef$outboundSchema)).optional(),
-  sortField: z.nullable(SortField$outboundSchema).optional(),
+  sortField: SearchAutomationsRequestSortField$outboundSchema.optional(),
   statuses: z.nullable(z.array(SearchAutomationsRequestStatuses$outboundSchema))
     .optional(),
   triggerTypes: z.nullable(z.array(TriggerTypes$outboundSchema)).optional(),

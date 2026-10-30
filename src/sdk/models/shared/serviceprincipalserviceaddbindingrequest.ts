@@ -16,13 +16,13 @@ export type ServicePrincipalServiceAddBindingRequest = {
   /**
    * The servicePrincipalId field.
    */
-  servicePrincipalId?: string | null | undefined;
+  servicePrincipalId?: string | undefined;
   subject?: ServicePrincipalBindingSubject | null | undefined;
 };
 
 /** @internal */
 export type ServicePrincipalServiceAddBindingRequest$Outbound = {
-  servicePrincipalId?: string | null | undefined;
+  servicePrincipalId?: string | undefined;
   subject?: ServicePrincipalBindingSubject$Outbound | null | undefined;
 };
 
@@ -32,7 +32,7 @@ export const ServicePrincipalServiceAddBindingRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ServicePrincipalServiceAddBindingRequest
 > = z.object({
-  servicePrincipalId: z.nullable(z.string()).optional(),
+  servicePrincipalId: z.string().optional(),
   subject: z.nullable(ServicePrincipalBindingSubject$outboundSchema).optional(),
 });
 

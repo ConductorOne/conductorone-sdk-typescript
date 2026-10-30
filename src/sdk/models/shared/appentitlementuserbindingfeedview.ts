@@ -18,20 +18,20 @@ export type AppEntitlementUserBindingFeedView = {
   /**
    * The appPath field.
    */
-  appPath?: string | null | undefined;
+  appPath?: string | undefined;
   /**
    * The appUserPath field.
    */
-  appUserPath?: string | null | undefined;
+  appUserPath?: string | undefined;
   /**
    * The entitlementPath field.
    */
-  entitlementPath?: string | null | undefined;
+  entitlementPath?: string | undefined;
   feed?: AppEntitlementUserBindingFeed | null | undefined;
   /**
    * The ticketPath field.
    */
-  ticketPath?: string | null | undefined;
+  ticketPath?: string | undefined;
 };
 
 /** @internal */
@@ -40,11 +40,11 @@ export const AppEntitlementUserBindingFeedView$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appPath: z.nullable(z.string()).optional(),
-  appUserPath: z.nullable(z.string()).optional(),
-  entitlementPath: z.nullable(z.string()).optional(),
+  appPath: z.string().optional(),
+  appUserPath: z.string().optional(),
+  entitlementPath: z.string().optional(),
   feed: z.nullable(AppEntitlementUserBindingFeed$inboundSchema).optional(),
-  ticketPath: z.nullable(z.string()).optional(),
+  ticketPath: z.string().optional(),
 });
 
 export function appEntitlementUserBindingFeedViewFromJSON(

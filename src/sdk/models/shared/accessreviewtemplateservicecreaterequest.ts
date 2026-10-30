@@ -74,6 +74,8 @@ export const AccessReviewTemplateServiceCreateRequestDefaultView = {
   AccessReviewViewTypeByUser: "ACCESS_REVIEW_VIEW_TYPE_BY_USER",
   AccessReviewViewTypeUnstructured: "ACCESS_REVIEW_VIEW_TYPE_UNSTRUCTURED",
   AccessReviewViewTypeByResource: "ACCESS_REVIEW_VIEW_TYPE_BY_RESOURCE",
+  AccessReviewViewTypeByAccessProfile:
+    "ACCESS_REVIEW_VIEW_TYPE_BY_ACCESS_PROFILE",
 } as const;
 /**
  * The defaultView field.
@@ -83,7 +85,11 @@ export type AccessReviewTemplateServiceCreateRequestDefaultView = OpenEnum<
 >;
 
 /**
- * The scopeType field.
+ * How the template's scope is defined, such as by entitlements or by users. Campaigns created
+ *
+ * @remarks
+ *  from the template use this scope type. Treated as ACCESS_REVIEW_SCOPE_TYPE_BY_ENTITLEMENTS
+ *  when unset. See AccessReviewScopeType for the available values.
  */
 export const AccessReviewTemplateServiceCreateRequestScopeType = {
   AccessReviewScopeTypeUnspecified: "ACCESS_REVIEW_SCOPE_TYPE_UNSPECIFIED",
@@ -93,9 +99,16 @@ export const AccessReviewTemplateServiceCreateRequestScopeType = {
     "ACCESS_REVIEW_SCOPE_TYPE_BY_ACCESS_CONFLICTS",
   AccessReviewScopeTypeByResource: "ACCESS_REVIEW_SCOPE_TYPE_BY_RESOURCE",
   AccessReviewScopeTypeByInheritance: "ACCESS_REVIEW_SCOPE_TYPE_BY_INHERITANCE",
+  AccessReviewScopeTypeByUsers: "ACCESS_REVIEW_SCOPE_TYPE_BY_USERS",
+  AccessReviewScopeTypeByAccessProfiles:
+    "ACCESS_REVIEW_SCOPE_TYPE_BY_ACCESS_PROFILES",
 } as const;
 /**
- * The scopeType field.
+ * How the template's scope is defined, such as by entitlements or by users. Campaigns created
+ *
+ * @remarks
+ *  from the template use this scope type. Treated as ACCESS_REVIEW_SCOPE_TYPE_BY_ENTITLEMENTS
+ *  when unset. See AccessReviewScopeType for the available values.
  */
 export type AccessReviewTemplateServiceCreateRequestScopeType = OpenEnum<
   typeof AccessReviewTemplateServiceCreateRequestScopeType
@@ -111,7 +124,6 @@ export type AccessReviewTemplateServiceCreateRequest = {
    */
   accuracyIssueAction?:
     | AccessReviewTemplateServiceCreateRequestAccuracyIssueAction
-    | null
     | undefined;
   /**
    * Bounded key/value metadata bag for IaC marking and customer tags.
@@ -129,46 +141,42 @@ export type AccessReviewTemplateServiceCreateRequest = {
   /**
    * The autoCloseCampaign field.
    */
-  autoCloseCampaign?: boolean | null | undefined;
+  autoCloseCampaign?: boolean | undefined;
   /**
    * The autoCloseDecision field.
    */
   autoCloseDecision?:
     | AccessReviewTemplateServiceCreateRequestAutoCloseDecision
-    | null
     | undefined;
   /**
    * auto generate report when campaign is closed
    */
-  autoGenerateReport?: boolean | null | undefined;
+  autoGenerateReport?: boolean | undefined;
   /**
    * The autoStartCampaign field.
    */
-  autoStartCampaign?: boolean | null | undefined;
+  autoStartCampaign?: boolean | undefined;
   columnConfig?: AccessReviewColumnConfig | null | undefined;
   /**
    * The defaultView field.
    */
-  defaultView?:
-    | AccessReviewTemplateServiceCreateRequestDefaultView
-    | null
-    | undefined;
+  defaultView?: AccessReviewTemplateServiceCreateRequestDefaultView | undefined;
   /**
    * An optional description providing context about the template.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The display name for the new template.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The exemptCertifiedAccessConflicts field.
    */
-  exemptCertifiedAccessConflicts?: boolean | null | undefined;
+  exemptCertifiedAccessConflicts?: boolean | undefined;
   /**
    * The isCampaignScheduleEnabled field.
    */
-  isCampaignScheduleEnabled?: boolean | null | undefined;
+  isCampaignScheduleEnabled?: boolean | undefined;
   notificationConfig?: NotificationConfig | null | undefined;
   /**
    * The IDs of the users who own this template. At least one owner is required.
@@ -177,26 +185,27 @@ export type AccessReviewTemplateServiceCreateRequest = {
   /**
    * The ID of the default review policy for campaigns created from this template.
    */
-  policyId?: string | null | undefined;
+  policyId?: string | undefined;
   recurrenceRule?: RecurrenceRule | null | undefined;
   /**
    * The reviewInstructions field.
    */
-  reviewInstructions?: string | null | undefined;
+  reviewInstructions?: string | undefined;
   reviewerAttributeConfig?: ReviewerAttributeConfig | null | undefined;
   scope?: AccessReviewScopeV2 | null | undefined;
   /**
-   * The scopeType field.
+   * How the template's scope is defined, such as by entitlements or by users. Campaigns created
+   *
+   * @remarks
+   *  from the template use this scope type. Treated as ACCESS_REVIEW_SCOPE_TYPE_BY_ENTITLEMENTS
+   *  when unset. See AccessReviewScopeType for the available values.
    */
-  scopeType?:
-    | AccessReviewTemplateServiceCreateRequestScopeType
-    | null
-    | undefined;
+  scopeType?: AccessReviewTemplateServiceCreateRequestScopeType | undefined;
   signatureConfig?: ReviewSignatureConfig | null | undefined;
   /**
    * The usePolicyOverride field.
    */
-  usePolicyOverride?: boolean | null | undefined;
+  usePolicyOverride?: boolean | undefined;
 };
 
 /** @internal */
@@ -242,28 +251,28 @@ export const AccessReviewTemplateServiceCreateRequestScopeType$outboundSchema:
 /** @internal */
 export type AccessReviewTemplateServiceCreateRequest$Outbound = {
   accessReviewDuration?: string | null | undefined;
-  accuracyIssueAction?: string | null | undefined;
+  accuracyIssueAction?: string | undefined;
   annotations?: { [k: string]: string } | undefined;
-  autoCloseCampaign?: boolean | null | undefined;
-  autoCloseDecision?: string | null | undefined;
-  autoGenerateReport?: boolean | null | undefined;
-  autoStartCampaign?: boolean | null | undefined;
+  autoCloseCampaign?: boolean | undefined;
+  autoCloseDecision?: string | undefined;
+  autoGenerateReport?: boolean | undefined;
+  autoStartCampaign?: boolean | undefined;
   columnConfig?: AccessReviewColumnConfig$Outbound | null | undefined;
-  defaultView?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  exemptCertifiedAccessConflicts?: boolean | null | undefined;
-  isCampaignScheduleEnabled?: boolean | null | undefined;
+  defaultView?: string | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
+  exemptCertifiedAccessConflicts?: boolean | undefined;
+  isCampaignScheduleEnabled?: boolean | undefined;
   notificationConfig?: NotificationConfig$Outbound | null | undefined;
   ownerIds?: Array<string> | null | undefined;
-  policyId?: string | null | undefined;
+  policyId?: string | undefined;
   recurrenceRule?: RecurrenceRule$Outbound | null | undefined;
-  reviewInstructions?: string | null | undefined;
+  reviewInstructions?: string | undefined;
   reviewerAttributeConfig?: ReviewerAttributeConfig$Outbound | null | undefined;
   scope?: AccessReviewScopeV2$Outbound | null | undefined;
-  scopeType?: string | null | undefined;
+  scopeType?: string | undefined;
   signatureConfig?: ReviewSignatureConfig$Outbound | null | undefined;
-  usePolicyOverride?: boolean | null | undefined;
+  usePolicyOverride?: boolean | undefined;
 };
 
 /** @internal */
@@ -273,37 +282,36 @@ export const AccessReviewTemplateServiceCreateRequest$outboundSchema: z.ZodType<
   AccessReviewTemplateServiceCreateRequest
 > = z.object({
   accessReviewDuration: z.nullable(z.string()).optional(),
-  accuracyIssueAction: z.nullable(
-    AccessReviewTemplateServiceCreateRequestAccuracyIssueAction$outboundSchema,
-  ).optional(),
+  accuracyIssueAction:
+    AccessReviewTemplateServiceCreateRequestAccuracyIssueAction$outboundSchema
+      .optional(),
   annotations: z.record(z.string()).optional(),
-  autoCloseCampaign: z.nullable(z.boolean()).optional(),
-  autoCloseDecision: z.nullable(
-    AccessReviewTemplateServiceCreateRequestAutoCloseDecision$outboundSchema,
-  ).optional(),
-  autoGenerateReport: z.nullable(z.boolean()).optional(),
-  autoStartCampaign: z.nullable(z.boolean()).optional(),
+  autoCloseCampaign: z.boolean().optional(),
+  autoCloseDecision:
+    AccessReviewTemplateServiceCreateRequestAutoCloseDecision$outboundSchema
+      .optional(),
+  autoGenerateReport: z.boolean().optional(),
+  autoStartCampaign: z.boolean().optional(),
   columnConfig: z.nullable(AccessReviewColumnConfig$outboundSchema).optional(),
-  defaultView: z.nullable(
-    AccessReviewTemplateServiceCreateRequestDefaultView$outboundSchema,
-  ).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  exemptCertifiedAccessConflicts: z.nullable(z.boolean()).optional(),
-  isCampaignScheduleEnabled: z.nullable(z.boolean()).optional(),
+  defaultView:
+    AccessReviewTemplateServiceCreateRequestDefaultView$outboundSchema
+      .optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  exemptCertifiedAccessConflicts: z.boolean().optional(),
+  isCampaignScheduleEnabled: z.boolean().optional(),
   notificationConfig: z.nullable(NotificationConfig$outboundSchema).optional(),
   ownerIds: z.nullable(z.array(z.string())).optional(),
-  policyId: z.nullable(z.string()).optional(),
+  policyId: z.string().optional(),
   recurrenceRule: z.nullable(RecurrenceRule$outboundSchema).optional(),
-  reviewInstructions: z.nullable(z.string()).optional(),
+  reviewInstructions: z.string().optional(),
   reviewerAttributeConfig: z.nullable(ReviewerAttributeConfig$outboundSchema)
     .optional(),
   scope: z.nullable(AccessReviewScopeV2$outboundSchema).optional(),
-  scopeType: z.nullable(
-    AccessReviewTemplateServiceCreateRequestScopeType$outboundSchema,
-  ).optional(),
+  scopeType: AccessReviewTemplateServiceCreateRequestScopeType$outboundSchema
+    .optional(),
   signatureConfig: z.nullable(ReviewSignatureConfig$outboundSchema).optional(),
-  usePolicyOverride: z.nullable(z.boolean()).optional(),
+  usePolicyOverride: z.boolean().optional(),
 });
 
 export function accessReviewTemplateServiceCreateRequestToJSON(

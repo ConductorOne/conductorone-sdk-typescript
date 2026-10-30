@@ -15,7 +15,7 @@ export type CancelledAction = {
   /**
    * The userID, usually the system, that cancells a provision instance.
    */
-  cancelledByUserId?: string | null | undefined;
+  cancelledByUserId?: string | undefined;
 };
 
 /** @internal */
@@ -27,12 +27,12 @@ export const CancelledAction$inboundSchema: z.ZodType<
   cancelledAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  cancelledByUserId: z.nullable(z.string()).optional(),
+  cancelledByUserId: z.string().optional(),
 });
 /** @internal */
 export type CancelledAction$Outbound = {
   cancelledAt?: string | null | undefined;
-  cancelledByUserId?: string | null | undefined;
+  cancelledByUserId?: string | undefined;
 };
 
 /** @internal */
@@ -42,7 +42,7 @@ export const CancelledAction$outboundSchema: z.ZodType<
   CancelledAction
 > = z.object({
   cancelledAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  cancelledByUserId: z.nullable(z.string()).optional(),
+  cancelledByUserId: z.string().optional(),
 });
 
 export function cancelledActionToJSON(

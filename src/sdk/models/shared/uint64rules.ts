@@ -14,7 +14,7 @@ export type UInt64Rules = {
   /**
    * Const specifies that this field must be exactly the specified value
    */
-  const?: string | null | undefined;
+  const?: string | undefined;
   /**
    * Gt specifies that this field must be greater than the specified value,
    *
@@ -22,7 +22,7 @@ export type UInt64Rules = {
    *  exclusive. If the value of Gt is larger than a specified Lt or Lte, the
    *  range is reversed.
    */
-  gt?: string | null | undefined;
+  gt?: string | undefined;
   /**
    * Gte specifies that this field must be greater than or equal to the
    *
@@ -30,14 +30,14 @@ export type UInt64Rules = {
    *  specified value, inclusive. If the value of Gte is larger than a
    *  specified Lt or Lte, the range is reversed.
    */
-  gte?: string | null | undefined;
+  gte?: string | undefined;
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    *
    * @remarks
    *  evaluated only if the field is not empty
    */
-  ignoreEmpty?: boolean | null | undefined;
+  ignoreEmpty?: boolean | undefined;
   /**
    * In specifies that this field must be equal to one of the specified
    *
@@ -51,14 +51,14 @@ export type UInt64Rules = {
    * @remarks
    *  exclusive
    */
-  lt?: string | null | undefined;
+  lt?: string | undefined;
   /**
    * Lte specifies that this field must be less than or equal to the
    *
    * @remarks
    *  specified value, inclusive
    */
-  lte?: string | null | undefined;
+  lte?: string | undefined;
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    *
@@ -74,24 +74,24 @@ export const UInt64Rules$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  const: z.nullable(z.string()).optional(),
-  gt: z.nullable(z.string()).optional(),
-  gte: z.nullable(z.string()).optional(),
-  ignoreEmpty: z.nullable(z.boolean()).optional(),
+  const: z.string().optional(),
+  gt: z.string().optional(),
+  gte: z.string().optional(),
+  ignoreEmpty: z.boolean().optional(),
   in: z.nullable(z.array(z.string())).optional(),
-  lt: z.nullable(z.string()).optional(),
-  lte: z.nullable(z.string()).optional(),
+  lt: z.string().optional(),
+  lte: z.string().optional(),
   notIn: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
 export type UInt64Rules$Outbound = {
-  const?: string | null | undefined;
-  gt?: string | null | undefined;
-  gte?: string | null | undefined;
-  ignoreEmpty?: boolean | null | undefined;
+  const?: string | undefined;
+  gt?: string | undefined;
+  gte?: string | undefined;
+  ignoreEmpty?: boolean | undefined;
   in?: Array<string> | null | undefined;
-  lt?: string | null | undefined;
-  lte?: string | null | undefined;
+  lt?: string | undefined;
+  lte?: string | undefined;
   notIn?: Array<string> | null | undefined;
 };
 
@@ -101,13 +101,13 @@ export const UInt64Rules$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UInt64Rules
 > = z.object({
-  const: z.nullable(z.string()).optional(),
-  gt: z.nullable(z.string()).optional(),
-  gte: z.nullable(z.string()).optional(),
-  ignoreEmpty: z.nullable(z.boolean()).optional(),
+  const: z.string().optional(),
+  gt: z.string().optional(),
+  gte: z.string().optional(),
+  ignoreEmpty: z.boolean().optional(),
   in: z.nullable(z.array(z.string())).optional(),
-  lt: z.nullable(z.string()).optional(),
-  lte: z.nullable(z.string()).optional(),
+  lt: z.string().optional(),
+  lte: z.string().optional(),
   notIn: z.nullable(z.array(z.string())).optional(),
 });
 

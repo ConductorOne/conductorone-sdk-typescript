@@ -15,11 +15,11 @@ export type TestSourceIPResponse = {
   /**
    * Whether the tested IP address is allowed by the CIDR rules.
    */
-  allowed?: boolean | null | undefined;
+  allowed?: boolean | undefined;
   /**
    * The IP address that was checked, either from the request or inferred from the caller.
    */
-  checkedIp?: string | null | undefined;
+  checkedIp?: string | undefined;
   details?: Status | null | undefined;
 };
 
@@ -29,8 +29,8 @@ export const TestSourceIPResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  allowed: z.nullable(z.boolean()).optional(),
-  checkedIp: z.nullable(z.string()).optional(),
+  allowed: z.boolean().optional(),
+  checkedIp: z.string().optional(),
   details: z.nullable(Status$inboundSchema).optional(),
 });
 

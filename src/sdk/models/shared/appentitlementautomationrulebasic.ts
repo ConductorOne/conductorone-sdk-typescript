@@ -14,7 +14,7 @@ export type AppEntitlementAutomationRuleBasic = {
   /**
    * The expression field.
    */
-  expression?: string | null | undefined;
+  expression?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const AppEntitlementAutomationRuleBasic$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  expression: z.nullable(z.string()).optional(),
+  expression: z.string().optional(),
 });
 /** @internal */
 export type AppEntitlementAutomationRuleBasic$Outbound = {
-  expression?: string | null | undefined;
+  expression?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const AppEntitlementAutomationRuleBasic$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppEntitlementAutomationRuleBasic
 > = z.object({
-  expression: z.nullable(z.string()).optional(),
+  expression: z.string().optional(),
 });
 
 export function appEntitlementAutomationRuleBasicToJSON(

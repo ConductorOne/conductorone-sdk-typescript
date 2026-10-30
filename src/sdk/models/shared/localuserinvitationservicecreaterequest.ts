@@ -11,11 +11,11 @@ export type LocalUserInvitationServiceCreateRequest = {
   /**
    * The displayName field.
    */
-  displayName: string | null;
+  displayName: string;
   /**
    * The email field.
    */
-  email: string | null;
+  email: string;
   /**
    * Optional initial role IDs to assign upon acceptance.
    */
@@ -23,30 +23,30 @@ export type LocalUserInvitationServiceCreateRequest = {
   /**
    * Optional FK to a ThirdPartyJob.
    */
-  jobId?: string | null | undefined;
+  jobId?: string | undefined;
   /**
    * Optional onboarding flow override.
    */
-  onboardingFlowId?: string | null | undefined;
+  onboardingFlowId?: string | undefined;
   /**
    * Human-readable reason for the invitation.
    */
-  purpose?: string | null | undefined;
+  purpose?: string | undefined;
   /**
    * Optional sponsor User override.
    */
-  sponsorUserId?: string | null | undefined;
+  sponsorUserId?: string | undefined;
 };
 
 /** @internal */
 export type LocalUserInvitationServiceCreateRequest$Outbound = {
-  displayName: string | null;
-  email: string | null;
+  displayName: string;
+  email: string;
   initialRoleIds?: Array<string> | null | undefined;
-  jobId?: string | null | undefined;
-  onboardingFlowId?: string | null | undefined;
-  purpose?: string | null | undefined;
-  sponsorUserId?: string | null | undefined;
+  jobId?: string | undefined;
+  onboardingFlowId?: string | undefined;
+  purpose?: string | undefined;
+  sponsorUserId?: string | undefined;
 };
 
 /** @internal */
@@ -55,13 +55,13 @@ export const LocalUserInvitationServiceCreateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   LocalUserInvitationServiceCreateRequest
 > = z.object({
-  displayName: z.nullable(z.string()),
-  email: z.nullable(z.string()),
+  displayName: z.string(),
+  email: z.string(),
   initialRoleIds: z.nullable(z.array(z.string())).optional(),
-  jobId: z.nullable(z.string()).optional(),
-  onboardingFlowId: z.nullable(z.string()).optional(),
-  purpose: z.nullable(z.string()).optional(),
-  sponsorUserId: z.nullable(z.string()).optional(),
+  jobId: z.string().optional(),
+  onboardingFlowId: z.string().optional(),
+  purpose: z.string().optional(),
+  sponsorUserId: z.string().optional(),
 });
 
 export function localUserInvitationServiceCreateRequestToJSON(

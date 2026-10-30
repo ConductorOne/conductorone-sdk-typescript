@@ -56,15 +56,15 @@ export type Connector = {
   /**
    * The id of the app the connector is associated with.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The canResumeSync field.
    */
-  canResumeSync?: boolean | null | undefined;
+  canResumeSync?: boolean | undefined;
   /**
    * The catalogId describes which catalog entry this connector is an instance of. For example, every Okta connector will have the same catalogId indicating it is an Okta connector.
    */
-  catalogId?: string | null | undefined;
+  catalogId?: string | undefined;
   /**
    * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
    */
@@ -73,30 +73,30 @@ export type Connector = {
   /**
    * The connectorApiVersion field.
    */
-  connectorApiVersion?: number | null | undefined;
+  connectorApiVersion?: number | undefined;
   connectorSyncCronSchedule?: ConnectorSyncCronSchedule | null | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * The description of the connector.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The disableCheckBadSync field.
    */
-  disableCheckBadSync?: boolean | null | undefined;
+  disableCheckBadSync?: boolean | undefined;
   /**
    * The display name of the connector.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The downloadUrl for a spreadsheet if the connector was created from uploading a file.
    */
-  downloadUrl?: string | null | undefined;
+  downloadUrl?: string | undefined;
   /**
    * The id of the connector.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   oauthAuthorizedAs?: OAuth2AuthorizedAs | null | undefined;
   /**
    * Number of sync workers to use for parallel sync, when the PARALLEL_SYNC feature is enabled. Zero disables parallel sync. Optional on write: omit the field in UpdateAdvancedConfig to leave the stored value unchanged. The public API allows setting up to 4.
@@ -116,11 +116,11 @@ export type Connector = {
   /**
    * The category of the connector sync that was disabled.
    */
-  syncDisabledCategory?: string | null | undefined;
+  syncDisabledCategory?: string | undefined;
   /**
    * The reason the connector sync was disabled.
    */
-  syncDisabledReason?: string | null | undefined;
+  syncDisabledReason?: string | undefined;
   updatedAt?: Date | null | undefined;
   /**
    * The userIds field is used to define the integration owners of the connector.
@@ -135,15 +135,15 @@ export type ConnectorInput = {
   /**
    * The id of the app the connector is associated with.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The canResumeSync field.
    */
-  canResumeSync?: boolean | null | undefined;
+  canResumeSync?: boolean | undefined;
   /**
    * The catalogId describes which catalog entry this connector is an instance of. For example, every Okta connector will have the same catalogId indicating it is an Okta connector.
    */
-  catalogId?: string | null | undefined;
+  catalogId?: string | undefined;
   /**
    * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
    */
@@ -152,19 +152,19 @@ export type ConnectorInput = {
   /**
    * The description of the connector.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The disableCheckBadSync field.
    */
-  disableCheckBadSync?: boolean | null | undefined;
+  disableCheckBadSync?: boolean | undefined;
   /**
    * The display name of the connector.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The id of the connector.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   oauthAuthorizedAs?: OAuth2AuthorizedAsInput | null | undefined;
   /**
    * Number of sync workers to use for parallel sync, when the PARALLEL_SYNC feature is enabled. Zero disables parallel sync. Optional on write: omit the field in UpdateAdvancedConfig to leave the stored value unchanged. The public API allows setting up to 4.
@@ -183,11 +183,11 @@ export type ConnectorInput = {
   /**
    * The category of the connector sync that was disabled.
    */
-  syncDisabledCategory?: string | null | undefined;
+  syncDisabledCategory?: string | undefined;
   /**
    * The reason the connector sync was disabled.
    */
-  syncDisabledReason?: string | null | undefined;
+  syncDisabledReason?: string | undefined;
   /**
    * The userIds field is used to define the integration owners of the connector.
    */
@@ -250,14 +250,14 @@ export const Connector$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  canResumeSync: z.nullable(z.boolean()).optional(),
-  catalogId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  canResumeSync: z.boolean().optional(),
+  catalogId: z.string().optional(),
   config: z.nullable(z.lazy(() => Config$inboundSchema)).optional(),
   configUpdatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  connectorApiVersion: z.nullable(z.number().int()).optional(),
+  connectorApiVersion: z.number().int().optional(),
   connectorSyncCronSchedule: z.nullable(ConnectorSyncCronSchedule$inboundSchema)
     .optional(),
   createdAt: z.nullable(
@@ -266,11 +266,11 @@ export const Connector$inboundSchema: z.ZodType<
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  description: z.nullable(z.string()).optional(),
-  disableCheckBadSync: z.nullable(z.boolean()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  downloadUrl: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  disableCheckBadSync: z.boolean().optional(),
+  displayName: z.string().optional(),
+  downloadUrl: z.string().optional(),
+  id: z.string().optional(),
   oauthAuthorizedAs: z.nullable(OAuth2AuthorizedAs$inboundSchema).optional(),
   parallelSyncWorkerCount: z.nullable(z.number().int()).optional(),
   profileAllowList: z.nullable(z.array(z.string())).optional(),
@@ -280,8 +280,8 @@ export const Connector$inboundSchema: z.ZodType<
   syncDisabledAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  syncDisabledCategory: z.nullable(z.string()).optional(),
-  syncDisabledReason: z.nullable(z.string()).optional(),
+  syncDisabledCategory: z.string().optional(),
+  syncDisabledReason: z.string().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -300,26 +300,26 @@ export function connectorFromJSON(
 
 /** @internal */
 export type ConnectorInput$Outbound = {
-  appId?: string | null | undefined;
-  canResumeSync?: boolean | null | undefined;
-  catalogId?: string | null | undefined;
+  appId?: string | undefined;
+  canResumeSync?: boolean | undefined;
+  catalogId?: string | undefined;
   config?: Config$Outbound | null | undefined;
   connectorSyncCronSchedule?:
     | ConnectorSyncCronSchedule$Outbound
     | null
     | undefined;
-  description?: string | null | undefined;
-  disableCheckBadSync?: boolean | null | undefined;
-  displayName?: string | null | undefined;
-  id?: string | null | undefined;
+  description?: string | undefined;
+  disableCheckBadSync?: boolean | undefined;
+  displayName?: string | undefined;
+  id?: string | undefined;
   oauthAuthorizedAs?: OAuth2AuthorizedAsInput$Outbound | null | undefined;
   parallelSyncWorkerCount?: number | null | undefined;
   profileAllowList?: Array<string> | null | undefined;
   profileIgnoreList?: Array<string> | null | undefined;
   status?: ConnectorStatus$Outbound | null | undefined;
   syncConfig?: SyncConfig$Outbound | null | undefined;
-  syncDisabledCategory?: string | null | undefined;
-  syncDisabledReason?: string | null | undefined;
+  syncDisabledCategory?: string | undefined;
+  syncDisabledReason?: string | undefined;
   userIds?: Array<string> | null | undefined;
 };
 
@@ -329,17 +329,17 @@ export const ConnectorInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ConnectorInput
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  canResumeSync: z.nullable(z.boolean()).optional(),
-  catalogId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  canResumeSync: z.boolean().optional(),
+  catalogId: z.string().optional(),
   config: z.nullable(z.lazy(() => Config$outboundSchema)).optional(),
   connectorSyncCronSchedule: z.nullable(
     ConnectorSyncCronSchedule$outboundSchema,
   ).optional(),
-  description: z.nullable(z.string()).optional(),
-  disableCheckBadSync: z.nullable(z.boolean()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  disableCheckBadSync: z.boolean().optional(),
+  displayName: z.string().optional(),
+  id: z.string().optional(),
   oauthAuthorizedAs: z.nullable(OAuth2AuthorizedAsInput$outboundSchema)
     .optional(),
   parallelSyncWorkerCount: z.nullable(z.number().int()).optional(),
@@ -347,8 +347,8 @@ export const ConnectorInput$outboundSchema: z.ZodType<
   profileIgnoreList: z.nullable(z.array(z.string())).optional(),
   status: z.nullable(ConnectorStatus$outboundSchema).optional(),
   syncConfig: z.nullable(SyncConfig$outboundSchema).optional(),
-  syncDisabledCategory: z.nullable(z.string()).optional(),
-  syncDisabledReason: z.nullable(z.string()).optional(),
+  syncDisabledCategory: z.string().optional(),
+  syncDisabledReason: z.string().optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 

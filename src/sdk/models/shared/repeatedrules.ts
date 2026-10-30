@@ -23,7 +23,7 @@ export type RepeatedRules = {
    * @remarks
    *  evaluated only if the field is not empty
    */
-  ignoreEmpty?: boolean | null | undefined;
+  ignoreEmpty?: boolean | undefined;
   items?: FieldRules | null | undefined;
   /**
    * MaxItems specifies that this field must have the specified number of
@@ -31,14 +31,14 @@ export type RepeatedRules = {
    * @remarks
    *  items at a maximum
    */
-  maxItems?: string | null | undefined;
+  maxItems?: string | undefined;
   /**
    * MinItems specifies that this field must have the specified number of
    *
    * @remarks
    *  items at a minimum
    */
-  minItems?: string | null | undefined;
+  minItems?: string | undefined;
   /**
    * Unique specifies that all elements in this field must be unique. This
    *
@@ -46,7 +46,7 @@ export type RepeatedRules = {
    *  contraint is only applicable to scalar and enum types (messages are not
    *  supported).
    */
-  unique?: boolean | null | undefined;
+  unique?: boolean | undefined;
 };
 
 /** @internal */
@@ -55,19 +55,19 @@ export const RepeatedRules$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ignoreEmpty: z.nullable(z.boolean()).optional(),
+  ignoreEmpty: z.boolean().optional(),
   items: z.nullable(z.lazy(() => FieldRules$inboundSchema)).optional(),
-  maxItems: z.nullable(z.string()).optional(),
-  minItems: z.nullable(z.string()).optional(),
-  unique: z.nullable(z.boolean()).optional(),
+  maxItems: z.string().optional(),
+  minItems: z.string().optional(),
+  unique: z.boolean().optional(),
 });
 /** @internal */
 export type RepeatedRules$Outbound = {
-  ignoreEmpty?: boolean | null | undefined;
+  ignoreEmpty?: boolean | undefined;
   items?: FieldRules$Outbound | null | undefined;
-  maxItems?: string | null | undefined;
-  minItems?: string | null | undefined;
-  unique?: boolean | null | undefined;
+  maxItems?: string | undefined;
+  minItems?: string | undefined;
+  unique?: boolean | undefined;
 };
 
 /** @internal */
@@ -76,11 +76,11 @@ export const RepeatedRules$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RepeatedRules
 > = z.object({
-  ignoreEmpty: z.nullable(z.boolean()).optional(),
+  ignoreEmpty: z.boolean().optional(),
   items: z.nullable(z.lazy(() => FieldRules$outboundSchema)).optional(),
-  maxItems: z.nullable(z.string()).optional(),
-  minItems: z.nullable(z.string()).optional(),
-  unique: z.nullable(z.boolean()).optional(),
+  maxItems: z.string().optional(),
+  minItems: z.string().optional(),
+  unique: z.boolean().optional(),
 });
 
 export function repeatedRulesToJSON(repeatedRules: RepeatedRules): string {

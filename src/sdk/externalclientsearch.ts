@@ -14,6 +14,7 @@ export class ExternalClientSearch extends ClientSDK {
    *
    * @remarks
    * Search returns external client grants for all users in the tenant.
+   *  Request a modest page_size (≤25) to keep responses small.
    */
   async search(
     request?: shared.ExternalClientSearchServiceSearchRequest | undefined,

@@ -14,7 +14,7 @@ export type BulkUpdateFindingStateResponse = {
   /**
    * The ID of the asynchronous bulk action, which can be used to track progress.
    */
-  bulkActionId?: string | null | undefined;
+  bulkActionId?: string | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const BulkUpdateFindingStateResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  bulkActionId: z.nullable(z.string()).optional(),
+  bulkActionId: z.string().optional(),
 });
 
 export function bulkUpdateFindingStateResponseFromJSON(

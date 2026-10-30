@@ -26,12 +26,12 @@ export type SetCredential = {
   /**
    * The accountIdCel field.
    */
-  accountIdCel?: string | null | undefined;
+  accountIdCel?: string | undefined;
   connectorRef?: ConnectorRef | null | undefined;
   /**
    * The passwordCel field.
    */
-  passwordCel?: string | null | undefined;
+  passwordCel?: string | undefined;
 };
 
 /** @internal */
@@ -40,15 +40,15 @@ export const SetCredential$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accountIdCel: z.nullable(z.string()).optional(),
+  accountIdCel: z.string().optional(),
   connectorRef: z.nullable(ConnectorRef$inboundSchema).optional(),
-  passwordCel: z.nullable(z.string()).optional(),
+  passwordCel: z.string().optional(),
 });
 /** @internal */
 export type SetCredential$Outbound = {
-  accountIdCel?: string | null | undefined;
+  accountIdCel?: string | undefined;
   connectorRef?: ConnectorRef$Outbound | null | undefined;
-  passwordCel?: string | null | undefined;
+  passwordCel?: string | undefined;
 };
 
 /** @internal */
@@ -57,9 +57,9 @@ export const SetCredential$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SetCredential
 > = z.object({
-  accountIdCel: z.nullable(z.string()).optional(),
+  accountIdCel: z.string().optional(),
   connectorRef: z.nullable(ConnectorRef$outboundSchema).optional(),
-  passwordCel: z.nullable(z.string()).optional(),
+  passwordCel: z.string().optional(),
 });
 
 export function setCredentialToJSON(setCredential: SetCredential): string {

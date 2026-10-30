@@ -46,37 +46,43 @@ export type StoreCredential = {
   /**
    * CEL expression that resolves to app ID (App Vault only)
    */
-  appIdCel?: string | null | undefined;
+  appIdCel?: string | undefined;
   /**
    * Authentication type for the paper vault recipient (Paper Vault only)
    */
-  authType?: AuthType | null | undefined;
+  authType?: AuthType | undefined;
   /**
    * CEL expression that resolves to the encrypted credential from GeneratePassword
    */
-  credentialCel?: string | null | undefined;
+  credentialCel?: string | undefined;
   expiry?: string | null | undefined;
   /**
    * Optional display label for the vault
    */
-  labelCel?: string | null | undefined;
+  labelCel?: string | undefined;
   /**
    * Maximum number of views (0 = unlimited, default 1) (Paper Vault only)
    */
-  maxViews?: number | null | undefined;
+  maxViews?: number | undefined;
   /**
-   * CEL expression resolving to the C1 user ID of the recipient (SSO_INTERNAL / App Vault)
+   * CEL expression resolving to one or more recipient C1 user IDs — a string or list<string>,
+   *
+   * @remarks
+   *  e.g. '["u1","u2"]' (SSO_INTERNAL / App Vault). App Vault accepts a single user only.
    */
-  recipientCel?: string | null | undefined;
+  recipientCel?: string | undefined;
   /**
-   * CEL expression resolving to a recipient email address (Paper Vault + VERIFY_EMAIL only)
+   * CEL expression resolving to one or more recipient email addresses — a string or list<string>,
+   *
+   * @remarks
+   *  e.g. '["a@x.com","b@x.com"]' (Paper Vault + VERIFY_EMAIL only).
    */
-  recipientEmailCel?: string | null | undefined;
+  recipientEmailCel?: string | undefined;
   ttl?: string | null | undefined;
   /**
    * Vault type selector (default: PAPER_VAULT for backward compatibility)
    */
-  vaultType?: VaultType | null | undefined;
+  vaultType?: VaultType | undefined;
 };
 
 /** @internal */
@@ -111,29 +117,29 @@ export const StoreCredential$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appIdCel: z.nullable(z.string()).optional(),
-  authType: z.nullable(AuthType$inboundSchema).optional(),
-  credentialCel: z.nullable(z.string()).optional(),
+  appIdCel: z.string().optional(),
+  authType: AuthType$inboundSchema.optional(),
+  credentialCel: z.string().optional(),
   expiry: z.nullable(z.string()).optional(),
-  labelCel: z.nullable(z.string()).optional(),
-  maxViews: z.nullable(z.number().int()).optional(),
-  recipientCel: z.nullable(z.string()).optional(),
-  recipientEmailCel: z.nullable(z.string()).optional(),
+  labelCel: z.string().optional(),
+  maxViews: z.number().int().optional(),
+  recipientCel: z.string().optional(),
+  recipientEmailCel: z.string().optional(),
   ttl: z.nullable(z.string()).optional(),
-  vaultType: z.nullable(VaultType$inboundSchema).optional(),
+  vaultType: VaultType$inboundSchema.optional(),
 });
 /** @internal */
 export type StoreCredential$Outbound = {
-  appIdCel?: string | null | undefined;
-  authType?: string | null | undefined;
-  credentialCel?: string | null | undefined;
+  appIdCel?: string | undefined;
+  authType?: string | undefined;
+  credentialCel?: string | undefined;
   expiry?: string | null | undefined;
-  labelCel?: string | null | undefined;
-  maxViews?: number | null | undefined;
-  recipientCel?: string | null | undefined;
-  recipientEmailCel?: string | null | undefined;
+  labelCel?: string | undefined;
+  maxViews?: number | undefined;
+  recipientCel?: string | undefined;
+  recipientEmailCel?: string | undefined;
   ttl?: string | null | undefined;
-  vaultType?: string | null | undefined;
+  vaultType?: string | undefined;
 };
 
 /** @internal */
@@ -142,16 +148,16 @@ export const StoreCredential$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   StoreCredential
 > = z.object({
-  appIdCel: z.nullable(z.string()).optional(),
-  authType: z.nullable(AuthType$outboundSchema).optional(),
-  credentialCel: z.nullable(z.string()).optional(),
+  appIdCel: z.string().optional(),
+  authType: AuthType$outboundSchema.optional(),
+  credentialCel: z.string().optional(),
   expiry: z.nullable(z.string()).optional(),
-  labelCel: z.nullable(z.string()).optional(),
-  maxViews: z.nullable(z.number().int()).optional(),
-  recipientCel: z.nullable(z.string()).optional(),
-  recipientEmailCel: z.nullable(z.string()).optional(),
+  labelCel: z.string().optional(),
+  maxViews: z.number().int().optional(),
+  recipientCel: z.string().optional(),
+  recipientEmailCel: z.string().optional(),
   ttl: z.nullable(z.string()).optional(),
-  vaultType: z.nullable(VaultType$outboundSchema).optional(),
+  vaultType: VaultType$outboundSchema.optional(),
 });
 
 export function storeCredentialToJSON(

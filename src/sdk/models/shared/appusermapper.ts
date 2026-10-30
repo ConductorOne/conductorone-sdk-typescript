@@ -9,14 +9,16 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AppUserMapperMatchCase,
   AppUserMapperMatchCase$inboundSchema,
-  AppUserMapperMatchCase$Outbound,
-  AppUserMapperMatchCase$outboundSchema,
 } from "./appusermappermatchcase.js";
 
 /**
  * AppUserMapper configures custom account mapping for uplift.
  */
 export type AppUserMapper = {
+  /**
+   * The app this mapper belongs to.
+   */
+  appId?: string | undefined;
   /**
    * Ordered list of match cases. Each case defines a pair of CEL key extractors.
    */
@@ -29,27 +31,11 @@ export const AppUserMapper$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  appId: z.string().optional(),
   mappingCases: z.nullable(z.array(AppUserMapperMatchCase$inboundSchema))
     .optional(),
 });
-/** @internal */
-export type AppUserMapper$Outbound = {
-  mappingCases?: Array<AppUserMapperMatchCase$Outbound> | null | undefined;
-};
 
-/** @internal */
-export const AppUserMapper$outboundSchema: z.ZodType<
-  AppUserMapper$Outbound,
-  z.ZodTypeDef,
-  AppUserMapper
-> = z.object({
-  mappingCases: z.nullable(z.array(AppUserMapperMatchCase$outboundSchema))
-    .optional(),
-});
-
-export function appUserMapperToJSON(appUserMapper: AppUserMapper): string {
-  return JSON.stringify(AppUserMapper$outboundSchema.parse(appUserMapper));
-}
 export function appUserMapperFromJSON(
   jsonString: string,
 ): SafeParseResult<AppUserMapper, SDKValidationError> {

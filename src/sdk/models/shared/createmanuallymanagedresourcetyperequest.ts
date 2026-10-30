@@ -18,6 +18,8 @@ export const ResourceType = {
   Custom: "CUSTOM",
   Vault: "VAULT",
   ProfileType: "PROFILE_TYPE",
+  SessionPolicy: "SESSION_POLICY",
+  ClawAgent: "CLAW_AGENT",
 } as const;
 /**
  * The category of the resource type (e.g., ROLE, GROUP, LICENSE).
@@ -31,11 +33,11 @@ export type CreateManuallyManagedResourceTypeRequest = {
   /**
    * The display name for the new resource type.
    */
-  displayName: string | null;
+  displayName: string;
   /**
    * The category of the resource type (e.g., ROLE, GROUP, LICENSE).
    */
-  resourceType: ResourceType | null;
+  resourceType: ResourceType;
 };
 
 /** @internal */
@@ -47,8 +49,8 @@ export const ResourceType$outboundSchema: z.ZodType<
 
 /** @internal */
 export type CreateManuallyManagedResourceTypeRequest$Outbound = {
-  displayName: string | null;
-  resourceType: string | null;
+  displayName: string;
+  resourceType: string;
 };
 
 /** @internal */
@@ -57,8 +59,8 @@ export const CreateManuallyManagedResourceTypeRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateManuallyManagedResourceTypeRequest
 > = z.object({
-  displayName: z.nullable(z.string()),
-  resourceType: z.nullable(ResourceType$outboundSchema),
+  displayName: z.string(),
+  resourceType: ResourceType$outboundSchema,
 });
 
 export function createManuallyManagedResourceTypeRequestToJSON(

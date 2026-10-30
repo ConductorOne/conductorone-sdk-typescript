@@ -15,7 +15,7 @@ export type MCPToolServiceListResponse = {
   /**
    * Token for next page.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
   /**
    * List of MCP tools.
    */
@@ -28,7 +28,7 @@ export const MCPToolServiceListResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
   tools: z.nullable(z.array(MCPTool$inboundSchema)).optional(),
 });
 

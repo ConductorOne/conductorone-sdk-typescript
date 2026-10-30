@@ -18,14 +18,14 @@ export type EnumValue = {
    *  conductorone provider accepts this verbatim as a quoted-string HCL
    *  literal.
    */
-  name?: string | null | undefined;
+  name?: string | undefined;
   /**
    * Proto enum number — the value on the wire (e.g. 1 for
    *
    * @remarks
    *  POLICY_TYPE_GRANT).
    */
-  number?: number | null | undefined;
+  number?: number | undefined;
 };
 
 /** @internal */
@@ -34,8 +34,8 @@ export const EnumValue$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.nullable(z.string()).optional(),
-  number: z.nullable(z.number().int()).optional(),
+  name: z.string().optional(),
+  number: z.number().int().optional(),
 });
 
 export function enumValueFromJSON(

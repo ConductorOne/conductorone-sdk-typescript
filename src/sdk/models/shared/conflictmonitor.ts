@@ -23,27 +23,34 @@ export type ConflictMonitor = {
   /**
    * A description explaining the purpose of this Separation of Duty rule.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The human-readable name of the conflict monitor.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * Whether the conflict monitor is actively scanning for violations.
    */
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   /**
    * The identifier of entitlement set A in the conflict rule.
    */
-  entitlementSetAId?: string | null | undefined;
+  entitlementSetAId?: string | undefined;
   /**
    * The identifier of entitlement set B in the conflict rule.
    */
-  entitlementSetBId?: string | null | undefined;
+  entitlementSetBId?: string | undefined;
   /**
    * The unique identifier of this conflict monitor.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
+  /**
+   * When true, the rule flags users who are in set A but NOT in set B ("is not
+   *
+   * @remarks
+   *  in"), instead of the default A-and-B intersection.
+   */
+  negateGroupB?: boolean | undefined;
   notificationConfig?: AccessConflictNotificationConfig | null | undefined;
   updatedAt?: Date | null | undefined;
 };
@@ -60,12 +67,13 @@ export const ConflictMonitor$inboundSchema: z.ZodType<
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  entitlementSetAId: z.nullable(z.string()).optional(),
-  entitlementSetBId: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  enabled: z.boolean().optional(),
+  entitlementSetAId: z.string().optional(),
+  entitlementSetBId: z.string().optional(),
+  id: z.string().optional(),
+  negateGroupB: z.boolean().optional(),
   notificationConfig: z.nullable(AccessConflictNotificationConfig$inboundSchema)
     .optional(),
   updatedAt: z.nullable(

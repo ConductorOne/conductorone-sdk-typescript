@@ -14,11 +14,11 @@ export type ErroredAction = {
   /**
    * The description of a provision instance that has errored.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The error code of a provision instance that has errored. This is only PEC-1 for now, but more will be added in the future.
    */
-  errorCode?: string | null | undefined;
+  errorCode?: string | undefined;
   erroredAt?: Date | null | undefined;
 };
 
@@ -28,16 +28,16 @@ export const ErroredAction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  description: z.nullable(z.string()).optional(),
-  errorCode: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  errorCode: z.string().optional(),
   erroredAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
 /** @internal */
 export type ErroredAction$Outbound = {
-  description?: string | null | undefined;
-  errorCode?: string | null | undefined;
+  description?: string | undefined;
+  errorCode?: string | undefined;
   erroredAt?: string | null | undefined;
 };
 
@@ -47,8 +47,8 @@ export const ErroredAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ErroredAction
 > = z.object({
-  description: z.nullable(z.string()).optional(),
-  errorCode: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  errorCode: z.string().optional(),
   erroredAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 

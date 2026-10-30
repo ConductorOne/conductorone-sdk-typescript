@@ -37,11 +37,11 @@ export type GeneratePasswordPolicy = {
   /**
    * The maxCharacterCount field.
    */
-  maxCharacterCount?: number | null | undefined;
+  maxCharacterCount?: number | undefined;
   /**
    * The minCharacterCount field.
    */
-  minCharacterCount?: number | null | undefined;
+  minCharacterCount?: number | undefined;
   /**
    * The noRestrictions field.
    *
@@ -53,19 +53,19 @@ export type GeneratePasswordPolicy = {
   /**
    * The requireLowercase field.
    */
-  requireLowercase?: boolean | null | undefined;
+  requireLowercase?: boolean | undefined;
   /**
    * The requireNumbers field.
    */
-  requireNumbers?: boolean | null | undefined;
+  requireNumbers?: boolean | undefined;
   /**
    * The requireSpecialCharacters field.
    */
-  requireSpecialCharacters?: boolean | null | undefined;
+  requireSpecialCharacters?: boolean | undefined;
   /**
    * The requireUppercase field.
    */
-  requireUppercase?: boolean | null | undefined;
+  requireUppercase?: boolean | undefined;
 };
 
 /** @internal */
@@ -76,25 +76,25 @@ export const GeneratePasswordPolicy$inboundSchema: z.ZodType<
 > = z.object({
   customCharacters: z.nullable(z.string()).optional(),
   excludedCharacters: z.nullable(z.string()).optional(),
-  maxCharacterCount: z.nullable(z.number().int()).optional(),
-  minCharacterCount: z.nullable(z.number().int()).optional(),
+  maxCharacterCount: z.number().int().optional(),
+  minCharacterCount: z.number().int().optional(),
   noRestrictions: z.nullable(z.boolean()).optional(),
-  requireLowercase: z.nullable(z.boolean()).optional(),
-  requireNumbers: z.nullable(z.boolean()).optional(),
-  requireSpecialCharacters: z.nullable(z.boolean()).optional(),
-  requireUppercase: z.nullable(z.boolean()).optional(),
+  requireLowercase: z.boolean().optional(),
+  requireNumbers: z.boolean().optional(),
+  requireSpecialCharacters: z.boolean().optional(),
+  requireUppercase: z.boolean().optional(),
 });
 /** @internal */
 export type GeneratePasswordPolicy$Outbound = {
   customCharacters?: string | null | undefined;
   excludedCharacters?: string | null | undefined;
-  maxCharacterCount?: number | null | undefined;
-  minCharacterCount?: number | null | undefined;
+  maxCharacterCount?: number | undefined;
+  minCharacterCount?: number | undefined;
   noRestrictions?: boolean | null | undefined;
-  requireLowercase?: boolean | null | undefined;
-  requireNumbers?: boolean | null | undefined;
-  requireSpecialCharacters?: boolean | null | undefined;
-  requireUppercase?: boolean | null | undefined;
+  requireLowercase?: boolean | undefined;
+  requireNumbers?: boolean | undefined;
+  requireSpecialCharacters?: boolean | undefined;
+  requireUppercase?: boolean | undefined;
 };
 
 /** @internal */
@@ -105,13 +105,13 @@ export const GeneratePasswordPolicy$outboundSchema: z.ZodType<
 > = z.object({
   customCharacters: z.nullable(z.string()).optional(),
   excludedCharacters: z.nullable(z.string()).optional(),
-  maxCharacterCount: z.nullable(z.number().int()).optional(),
-  minCharacterCount: z.nullable(z.number().int()).optional(),
+  maxCharacterCount: z.number().int().optional(),
+  minCharacterCount: z.number().int().optional(),
   noRestrictions: z.nullable(z.boolean()).optional(),
-  requireLowercase: z.nullable(z.boolean()).optional(),
-  requireNumbers: z.nullable(z.boolean()).optional(),
-  requireSpecialCharacters: z.nullable(z.boolean()).optional(),
-  requireUppercase: z.nullable(z.boolean()).optional(),
+  requireLowercase: z.boolean().optional(),
+  requireNumbers: z.boolean().optional(),
+  requireSpecialCharacters: z.boolean().optional(),
+  requireUppercase: z.boolean().optional(),
 });
 
 export function generatePasswordPolicyToJSON(

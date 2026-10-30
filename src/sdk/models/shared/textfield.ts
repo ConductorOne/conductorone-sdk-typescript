@@ -14,7 +14,7 @@ export type TextField = {
   /**
    * The multiline field.
    */
-  multiline?: boolean | null | undefined;
+  multiline?: boolean | undefined;
   /**
    * Static text displayed as an end adornment (e.g. ".example.com" for domain fields).
    */
@@ -27,12 +27,12 @@ export const TextField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  multiline: z.nullable(z.boolean()).optional(),
+  multiline: z.boolean().optional(),
   suffix: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type TextField$Outbound = {
-  multiline?: boolean | null | undefined;
+  multiline?: boolean | undefined;
   suffix?: string | null | undefined;
 };
 
@@ -42,7 +42,7 @@ export const TextField$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TextField
 > = z.object({
-  multiline: z.nullable(z.boolean()).optional(),
+  multiline: z.boolean().optional(),
   suffix: z.nullable(z.string()).optional(),
 });
 

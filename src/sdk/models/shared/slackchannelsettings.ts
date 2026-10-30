@@ -49,17 +49,35 @@ import {
   ExpiringAccessPreference$outboundSchema,
 } from "./expiringaccesspreference.js";
 import {
+  FindingsPreference,
+  FindingsPreference$inboundSchema,
+  FindingsPreference$Outbound,
+  FindingsPreference$outboundSchema,
+} from "./findingspreference.js";
+import {
   ProvisioningRequestPreference,
   ProvisioningRequestPreference$inboundSchema,
   ProvisioningRequestPreference$Outbound,
   ProvisioningRequestPreference$outboundSchema,
 } from "./provisioningrequestpreference.js";
 import {
+  RequestCreatedPreference,
+  RequestCreatedPreference$inboundSchema,
+  RequestCreatedPreference$Outbound,
+  RequestCreatedPreference$outboundSchema,
+} from "./requestcreatedpreference.js";
+import {
   ReviewsPreference,
   ReviewsPreference$inboundSchema,
   ReviewsPreference$Outbound,
   ReviewsPreference$outboundSchema,
 } from "./reviewspreference.js";
+import {
+  SystemPreference,
+  SystemPreference$inboundSchema,
+  SystemPreference$Outbound,
+  SystemPreference$outboundSchema,
+} from "./systempreference.js";
 import {
   TaskRemindersPreference,
   TaskRemindersPreference$inboundSchema,
@@ -80,14 +98,17 @@ export type SlackChannelSettings = {
   /**
    * The enabled field.
    */
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   expiringAccess?: ExpiringAccessPreference | null | undefined;
+  findings?: FindingsPreference | null | undefined;
   /**
    * The isConfigured field.
    */
-  isConfigured?: boolean | null | undefined;
+  isConfigured?: boolean | undefined;
   provisioningRequest?: ProvisioningRequestPreference | null | undefined;
+  requestCreated?: RequestCreatedPreference | null | undefined;
   reviews?: ReviewsPreference | null | undefined;
+  system?: SystemPreference | null | undefined;
   taskReminders?: TaskRemindersPreference | null | undefined;
 };
 
@@ -106,12 +127,15 @@ export const SlackChannelSettings$inboundSchema: z.ZodType<
   connectorIssues: z.nullable(ConnectorIssuesPreference$inboundSchema)
     .optional(),
   digest: z.nullable(DigestPreference$inboundSchema).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
+  enabled: z.boolean().optional(),
   expiringAccess: z.nullable(ExpiringAccessPreference$inboundSchema).optional(),
-  isConfigured: z.nullable(z.boolean()).optional(),
+  findings: z.nullable(FindingsPreference$inboundSchema).optional(),
+  isConfigured: z.boolean().optional(),
   provisioningRequest: z.nullable(ProvisioningRequestPreference$inboundSchema)
     .optional(),
+  requestCreated: z.nullable(RequestCreatedPreference$inboundSchema).optional(),
   reviews: z.nullable(ReviewsPreference$inboundSchema).optional(),
+  system: z.nullable(SystemPreference$inboundSchema).optional(),
   taskReminders: z.nullable(TaskRemindersPreference$inboundSchema).optional(),
 });
 /** @internal */
@@ -122,14 +146,17 @@ export type SlackChannelSettings$Outbound = {
   completion?: CompletionPreference$Outbound | null | undefined;
   connectorIssues?: ConnectorIssuesPreference$Outbound | null | undefined;
   digest?: DigestPreference$Outbound | null | undefined;
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   expiringAccess?: ExpiringAccessPreference$Outbound | null | undefined;
-  isConfigured?: boolean | null | undefined;
+  findings?: FindingsPreference$Outbound | null | undefined;
+  isConfigured?: boolean | undefined;
   provisioningRequest?:
     | ProvisioningRequestPreference$Outbound
     | null
     | undefined;
+  requestCreated?: RequestCreatedPreference$Outbound | null | undefined;
   reviews?: ReviewsPreference$Outbound | null | undefined;
+  system?: SystemPreference$Outbound | null | undefined;
   taskReminders?: TaskRemindersPreference$Outbound | null | undefined;
 };
 
@@ -149,13 +176,17 @@ export const SlackChannelSettings$outboundSchema: z.ZodType<
   connectorIssues: z.nullable(ConnectorIssuesPreference$outboundSchema)
     .optional(),
   digest: z.nullable(DigestPreference$outboundSchema).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
+  enabled: z.boolean().optional(),
   expiringAccess: z.nullable(ExpiringAccessPreference$outboundSchema)
     .optional(),
-  isConfigured: z.nullable(z.boolean()).optional(),
+  findings: z.nullable(FindingsPreference$outboundSchema).optional(),
+  isConfigured: z.boolean().optional(),
   provisioningRequest: z.nullable(ProvisioningRequestPreference$outboundSchema)
     .optional(),
+  requestCreated: z.nullable(RequestCreatedPreference$outboundSchema)
+    .optional(),
   reviews: z.nullable(ReviewsPreference$outboundSchema).optional(),
+  system: z.nullable(SystemPreference$outboundSchema).optional(),
   taskReminders: z.nullable(TaskRemindersPreference$outboundSchema).optional(),
 });
 

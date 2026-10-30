@@ -18,11 +18,11 @@ export type EntitlementCluster = {
   /**
    * The avgCoverage field.
    */
-  avgCoverage?: number | null | undefined;
+  avgCoverage?: number | undefined;
   /**
    * The avgSimilarity field.
    */
-  avgSimilarity?: number | null | undefined;
+  avgSimilarity?: number | undefined;
   /**
    * The entitlements field.
    */
@@ -30,7 +30,7 @@ export type EntitlementCluster = {
   /**
    * The userCount field.
    */
-  userCount?: number | null | undefined;
+  userCount?: number | undefined;
 };
 
 /** @internal */
@@ -39,10 +39,10 @@ export const EntitlementCluster$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  avgCoverage: z.nullable(z.number()).optional(),
-  avgSimilarity: z.nullable(z.number()).optional(),
+  avgCoverage: z.number().optional(),
+  avgSimilarity: z.number().optional(),
   entitlements: z.nullable(z.array(CohortEntitlement$inboundSchema)).optional(),
-  userCount: z.nullable(z.number().int()).optional(),
+  userCount: z.number().int().optional(),
 });
 
 export function entitlementClusterFromJSON(

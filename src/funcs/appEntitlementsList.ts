@@ -29,7 +29,10 @@ import { Result } from "../sdk/types/fp.js";
  * List
  *
  * @remarks
- * List app entitlements associated with an app.
+ * List app entitlements associated with an app. Query parameters are
+ *  accepted in snake_case (page_size, page_token, app_user_id) and, as a
+ *  compatibility shim, their camelCase equivalents (pageSize, pageToken,
+ *  appUserId).
  */
 export function appEntitlementsList(
   client: ConductoroneSDKTypescriptCore,
@@ -98,8 +101,10 @@ async function $do(
   const path = pathToFunc("/api/v1/apps/{app_id}/entitlements")(pathParams);
 
   const query = encodeFormQuery({
+    "app_user_id": payload.app_user_id,
     "page_size": payload.page_size,
     "page_token": payload.page_token,
+    "q": payload.q,
   });
 
   const headers = new Headers(compactMap({

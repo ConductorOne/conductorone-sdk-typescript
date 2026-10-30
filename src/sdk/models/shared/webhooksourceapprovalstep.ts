@@ -14,7 +14,7 @@ export type WebhookSourceApprovalStep = {
   /**
    * The ticketId field.
    */
-  ticketId?: string | null | undefined;
+  ticketId?: string | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const WebhookSourceApprovalStep$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ticketId: z.nullable(z.string()).optional(),
+  ticketId: z.string().optional(),
 });
 
 export function webhookSourceApprovalStepFromJSON(

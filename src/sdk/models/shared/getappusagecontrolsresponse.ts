@@ -19,7 +19,7 @@ export type GetAppUsageControlsResponse = {
   /**
    * HasUsageData is false if the access entitlement for this app has no usage data.
    */
-  hasUsageData?: boolean | null | undefined;
+  hasUsageData?: boolean | undefined;
 };
 
 /** @internal */
@@ -29,7 +29,7 @@ export const GetAppUsageControlsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   appUsageControls: z.nullable(AppUsageControls$inboundSchema).optional(),
-  hasUsageData: z.nullable(z.boolean()).optional(),
+  hasUsageData: z.boolean().optional(),
 });
 
 export function getAppUsageControlsResponseFromJSON(

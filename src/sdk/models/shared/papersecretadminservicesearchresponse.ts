@@ -19,7 +19,7 @@ export type PaperSecretAdminServiceSearchResponse = {
   /**
    * The nextPageToken field.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -29,7 +29,7 @@ export const PaperSecretAdminServiceSearchResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   list: z.nullable(z.array(PaperSecret$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function paperSecretAdminServiceSearchResponseFromJSON(

@@ -14,7 +14,7 @@ export type WebhookListenerAuthJWT = {
   /**
    * The jwksUrl field.
    */
-  jwksUrl?: string | null | undefined;
+  jwksUrl?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const WebhookListenerAuthJWT$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  jwksUrl: z.nullable(z.string()).optional(),
+  jwksUrl: z.string().optional(),
 });
 /** @internal */
 export type WebhookListenerAuthJWT$Outbound = {
-  jwksUrl?: string | null | undefined;
+  jwksUrl?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const WebhookListenerAuthJWT$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WebhookListenerAuthJWT
 > = z.object({
-  jwksUrl: z.nullable(z.string()).optional(),
+  jwksUrl: z.string().optional(),
 });
 
 export function webhookListenerAuthJWTToJSON(

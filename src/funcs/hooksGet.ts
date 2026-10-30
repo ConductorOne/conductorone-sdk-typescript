@@ -29,7 +29,7 @@ import { Result } from "../sdk/types/fp.js";
  * Get
  *
  * @remarks
- * Invokes the c1.api.hooks.v1.HooksService.Get method.
+ * Get returns a hook by ID.
  */
 export function hooksGet(
   client: ConductoroneSDKTypescriptCore,

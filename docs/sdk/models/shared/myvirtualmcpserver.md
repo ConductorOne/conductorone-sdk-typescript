@@ -1,0 +1,24 @@
+# MyVirtualMCPServer
+
+MyVirtualMCPServer is a non-administrative view of a live Virtual MCP
+ Server the caller's own principal is authorized to connect to.
+
+## Example Usage
+
+```typescript
+import { MyVirtualMCPServer } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: MyVirtualMCPServer = {};
+```
+
+## Fields
+
+| Field                                                                                                                      | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `displayName`                                                                                                              | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | Human-readable server name.                                                                                                |
+| `id`                                                                                                                       | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | Immutable unique identifier for this Virtual MCP Server.                                                                   |
+| `presentation`                                                                                                             | [shared.VirtualMCPPresentation](../../../sdk/models/shared/virtualmcppresentation.md)                                      | :heavy_minus_sign:                                                                                                         | N/A                                                                                                                        |
+| `requireDeviceTrust`                                                                                                       | *boolean*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Whether every request also requires an active ConductorOne-managed device.                                                 |
+| `requireDpop`                                                                                                              | *boolean*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Whether every request requires a proof-bound DPoP access token.                                                            |
+| `slug`                                                                                                                     | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | Current canonical lowercase route segment. Renaming preserves the previous<br/> slug as a deprecated alias until it is reused. |
+| `url`                                                                                                                      | *string*                                                                                                                   | :heavy_minus_sign:                                                                                                         | Exact MCP-host URL an agent connects to.                                                                                   |

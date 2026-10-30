@@ -14,23 +14,23 @@ export type FacetRange = {
   /**
    * The count of items in the range.
    */
-  count?: number | null | undefined;
+  count?: number | undefined;
   /**
    * The display name of the range.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The starting value of the range.
    */
-  from?: number | null | undefined;
+  from?: number | undefined;
   /**
    * The icon of the range.
    */
-  iconUrl?: string | null | undefined;
+  iconUrl?: string | undefined;
   /**
    * The ending value of the range.
    */
-  to?: number | null | undefined;
+  to?: number | undefined;
 };
 
 /** @internal */
@@ -39,11 +39,11 @@ export const FacetRange$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  count: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  from: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
-  iconUrl: z.nullable(z.string()).optional(),
-  to: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
+  count: z.string().transform(v => parseInt(v, 10)).optional(),
+  displayName: z.string().optional(),
+  from: z.string().transform(v => parseInt(v, 10)).optional(),
+  iconUrl: z.string().optional(),
+  to: z.string().transform(v => parseInt(v, 10)).optional(),
 });
 
 export function facetRangeFromJSON(

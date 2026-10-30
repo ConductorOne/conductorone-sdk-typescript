@@ -22,7 +22,7 @@ export type MCPAccessProfileToolBindingServiceListResponse = {
   /**
    * Token for next page.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -34,7 +34,7 @@ export const MCPAccessProfileToolBindingServiceListResponse$inboundSchema:
   > = z.object({
     bindings: z.nullable(z.array(MCPAccessProfileToolBinding$inboundSchema))
       .optional(),
-    nextPageToken: z.nullable(z.string()).optional(),
+    nextPageToken: z.string().optional(),
   });
 
 export function mcpAccessProfileToolBindingServiceListResponseFromJSON(

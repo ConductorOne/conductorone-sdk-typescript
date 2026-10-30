@@ -17,15 +17,15 @@ export type C1ConnectorSyncProgressComponent = {
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The connectorId field.
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
   /**
    * The title field.
    */
-  title?: string | null | undefined;
+  title?: string | undefined;
 };
 
 /** @internal */
@@ -34,9 +34,9 @@ export const C1ConnectorSyncProgressComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
-  title: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  connectorId: z.string().optional(),
+  title: z.string().optional(),
 });
 
 export function c1ConnectorSyncProgressComponentFromJSON(

@@ -4,24 +4,38 @@
 
 import * as z from "zod/v3";
 import {
+  AccessScope,
+  AccessScope$Outbound,
+  AccessScope$outboundSchema,
+} from "./accessscope.js";
+import {
   ProfileFilter,
   ProfileFilter$Outbound,
   ProfileFilter$outboundSchema,
 } from "./profilefilter.js";
+import {
+  ResourceScope,
+  ResourceScope$Outbound,
+  ResourceScope$outboundSchema,
+} from "./resourcescope.js";
 
 /**
  * The TriggerCustomAnalysisRequest message.
  */
 export type TriggerCustomAnalysisRequest = {
+  accessScope?: AccessScope | null | undefined;
   /**
    * The profileFilters field.
    */
   profileFilters?: Array<ProfileFilter> | null | undefined;
+  resourceScope?: ResourceScope | null | undefined;
 };
 
 /** @internal */
 export type TriggerCustomAnalysisRequest$Outbound = {
+  accessScope?: AccessScope$Outbound | null | undefined;
   profileFilters?: Array<ProfileFilter$Outbound> | null | undefined;
+  resourceScope?: ResourceScope$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -30,7 +44,9 @@ export const TriggerCustomAnalysisRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TriggerCustomAnalysisRequest
 > = z.object({
+  accessScope: z.nullable(AccessScope$outboundSchema).optional(),
   profileFilters: z.nullable(z.array(ProfileFilter$outboundSchema)).optional(),
+  resourceScope: z.nullable(ResourceScope$outboundSchema).optional(),
 });
 
 export function triggerCustomAnalysisRequestToJSON(

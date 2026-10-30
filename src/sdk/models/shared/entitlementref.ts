@@ -5,23 +5,23 @@
 import * as z from "zod/v3";
 
 /**
- * EntitlementRef identifies an entitlement by app and entitlement ID.
+ * EntitlementRef identifies an entitlement by application and entitlement ID.
  */
 export type EntitlementRef = {
   /**
-   * The appId field.
+   * Application that owns the entitlement.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
-   * The entitlementId field.
+   * Entitlement within the application.
    */
-  entitlementId?: string | null | undefined;
+  entitlementId?: string | undefined;
 };
 
 /** @internal */
 export type EntitlementRef$Outbound = {
-  appId?: string | null | undefined;
-  entitlementId?: string | null | undefined;
+  appId?: string | undefined;
+  entitlementId?: string | undefined;
 };
 
 /** @internal */
@@ -30,8 +30,8 @@ export const EntitlementRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EntitlementRef
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  entitlementId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  entitlementId: z.string().optional(),
 });
 
 export function entitlementRefToJSON(entitlementRef: EntitlementRef): string {

@@ -22,15 +22,15 @@ export type AccessReviewTemplateSetupEntitlementView = {
   /**
    * The appPath field.
    */
-  appPath?: string | null | undefined;
+  appPath?: string | undefined;
   /**
    * The entitlementPath field.
    */
-  entitlementPath?: string | null | undefined;
+  entitlementPath?: string | undefined;
   /**
    * The policyPath field.
    */
-  policyPath?: string | null | undefined;
+  policyPath?: string | undefined;
 };
 
 /** @internal */
@@ -42,9 +42,9 @@ export const AccessReviewTemplateSetupEntitlementView$inboundSchema: z.ZodType<
   accessReviewTemplateEntitlement: z.nullable(
     AccessReviewTemplateSetupEntitlement$inboundSchema,
   ).optional(),
-  appPath: z.nullable(z.string()).optional(),
-  entitlementPath: z.nullable(z.string()).optional(),
-  policyPath: z.nullable(z.string()).optional(),
+  appPath: z.string().optional(),
+  entitlementPath: z.string().optional(),
+  policyPath: z.string().optional(),
 });
 
 export function accessReviewTemplateSetupEntitlementViewFromJSON(

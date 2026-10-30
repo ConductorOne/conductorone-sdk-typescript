@@ -3,6 +3,7 @@
  */
 
 import { a2UICreateSurfaceFeedback } from "../funcs/a2UICreateSurfaceFeedback.js";
+import { a2UIGetSurfaceProvenance } from "../funcs/a2UIGetSurfaceProvenance.js";
 import { a2UIListSurfaceFeedback } from "../funcs/a2UIListSurfaceFeedback.js";
 import { a2UIListSurfaces } from "../funcs/a2UIListSurfaces.js";
 import { a2UISubmitAction } from "../funcs/a2UISubmitAction.js";
@@ -22,6 +23,25 @@ export class A2Ui extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.C1ApiA2uiV1A2UIServiceListSurfacesResponse> {
     return unwrapAsync(a2UIListSurfaces(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get Surface Provenance
+   *
+   * @remarks
+   * GetSurfaceProvenance returns, in plain terms, what the surface's report
+   *  was built from: every record its program touched, in the order it touched
+   *  them.
+   */
+  async getSurfaceProvenance(
+    request: operations.C1ApiA2uiV1A2UIServiceGetSurfaceProvenanceRequest,
+    options?: RequestOptions,
+  ): Promise<operations.C1ApiA2uiV1A2UIServiceGetSurfaceProvenanceResponse> {
+    return unwrapAsync(a2UIGetSurfaceProvenance(
       this,
       request,
       options,

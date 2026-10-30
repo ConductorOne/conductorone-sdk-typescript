@@ -14,11 +14,11 @@ export type ActionOutcomeError = {
   /**
    * The errorCode field.
    */
-  errorCode?: string | null | undefined;
+  errorCode?: string | undefined;
   /**
    * The errorMessage field.
    */
-  errorMessage?: string | null | undefined;
+  errorMessage?: string | undefined;
   outcomeTime?: Date | null | undefined;
 };
 
@@ -28,16 +28,16 @@ export const ActionOutcomeError$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  errorCode: z.nullable(z.string()).optional(),
-  errorMessage: z.nullable(z.string()).optional(),
+  errorCode: z.string().optional(),
+  errorMessage: z.string().optional(),
   outcomeTime: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
 /** @internal */
 export type ActionOutcomeError$Outbound = {
-  errorCode?: string | null | undefined;
-  errorMessage?: string | null | undefined;
+  errorCode?: string | undefined;
+  errorMessage?: string | undefined;
   outcomeTime?: string | null | undefined;
 };
 
@@ -47,8 +47,8 @@ export const ActionOutcomeError$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ActionOutcomeError
 > = z.object({
-  errorCode: z.nullable(z.string()).optional(),
-  errorMessage: z.nullable(z.string()).optional(),
+  errorCode: z.string().optional(),
+  errorMessage: z.string().optional(),
   outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 

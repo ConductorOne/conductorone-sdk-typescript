@@ -1,8 +1,7 @@
 # MCPAccessProfileToolBindingHistoryEntry
 
-MCPAccessProfileToolBindingHistoryEntry is one Tx.Commit's worth of
- adds/removes against the binding list. No snapshot field: the lists
- declare snapshot = false.
+MCPAccessProfileToolBindingHistoryEntry is a single change-history record
+ capturing the tool bindings added or removed in one transaction.
 
 ## Example Usage
 
@@ -16,5 +15,5 @@ let value: MCPAccessProfileToolBindingHistoryEntry = {};
 
 | Field                                                                                                                   | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
 | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `items`                                                                                                                 | [shared.MCPAccessProfileToolBindingHistoryItem](../../../sdk/models/shared/mcpaccessprofiletoolbindinghistoryitem.md)[] | :heavy_minus_sign:                                                                                                      | The items field.                                                                                                        |
+| `items`                                                                                                                 | [shared.MCPAccessProfileToolBindingHistoryItem](../../../sdk/models/shared/mcpaccessprofiletoolbindinghistoryitem.md)[] | :heavy_minus_sign:                                                                                                      | The bindings added or removed in this change.                                                                           |
 | `metadata`                                                                                                              | [shared.ListHistoryEntryMetadata](../../../sdk/models/shared/listhistoryentrymetadata.md)                               | :heavy_minus_sign:                                                                                                      | N/A                                                                                                                     |

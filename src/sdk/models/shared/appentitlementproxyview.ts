@@ -19,19 +19,19 @@ export type AppEntitlementProxyView = {
   /**
    * The dstAppEntitlementPath field.
    */
-  dstAppEntitlementPath?: string | null | undefined;
+  dstAppEntitlementPath?: string | undefined;
   /**
    * The dstAppPath field.
    */
-  dstAppPath?: string | null | undefined;
+  dstAppPath?: string | undefined;
   /**
    * The srcAppEntitlementPath field.
    */
-  srcAppEntitlementPath?: string | null | undefined;
+  srcAppEntitlementPath?: string | undefined;
   /**
    * The srcAppPath field.
    */
-  srcAppPath?: string | null | undefined;
+  srcAppPath?: string | undefined;
 };
 
 /** @internal */
@@ -41,10 +41,10 @@ export const AppEntitlementProxyView$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   appProxyEntitlement: z.nullable(AppEntitlementProxy$inboundSchema).optional(),
-  dstAppEntitlementPath: z.nullable(z.string()).optional(),
-  dstAppPath: z.nullable(z.string()).optional(),
-  srcAppEntitlementPath: z.nullable(z.string()).optional(),
-  srcAppPath: z.nullable(z.string()).optional(),
+  dstAppEntitlementPath: z.string().optional(),
+  dstAppPath: z.string().optional(),
+  srcAppEntitlementPath: z.string().optional(),
+  srcAppPath: z.string().optional(),
 });
 
 export function appEntitlementProxyViewFromJSON(

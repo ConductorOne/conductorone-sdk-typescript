@@ -29,9 +29,10 @@ import { Result } from "../sdk/types/fp.js";
  * @remarks
  * Get the tenant's AI governance settings — the controls behind the admin
  *  /admin/settings/ai-governance page. Returns the full AIGovernanceSettings:
- *  allowed MCP client types, default client lifecycle, require_tool_approval,
- *  default tool classification, audit verbosity, auto-discovery toggle +
- *  interval, prefer_code_mode_over_direct_tools, and surface_requestable_tools.
+ *  allowed MCP client types, default client lifecycle, default tool
+ *  classification, audit verbosity, auto-discovery toggle +
+ *  interval, prefer_code_mode_over_direct_tools, surface_requestable_tools,
+ *  and untrusted_judge_disable.
  */
 export function aiGovernanceSettingsGet(
   client: ConductoroneSDKTypescriptCore,

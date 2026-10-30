@@ -4,14 +4,53 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  FindingDispatcher,
+  FindingDispatcher$inboundSchema,
+  FindingDispatcher$Outbound,
+  FindingDispatcher$outboundSchema,
+} from "./findingdispatcher.js";
 import {
   FindingRoutingRuleAction,
   FindingRoutingRuleAction$inboundSchema,
   FindingRoutingRuleAction$Outbound,
   FindingRoutingRuleAction$outboundSchema,
 } from "./findingroutingruleaction.js";
+
+/**
+ * The findingType field.
+ */
+export const FindingType = {
+  FindingTypeUnspecified: "FINDING_TYPE_UNSPECIFIED",
+  FindingTypeSimilarUsernameMatch: "FINDING_TYPE_SIMILAR_USERNAME_MATCH",
+  FindingTypeServiceAccountMisclassification:
+    "FINDING_TYPE_SERVICE_ACCOUNT_MISCLASSIFICATION",
+  FindingTypeNhiUnowned: "FINDING_TYPE_NHI_UNOWNED",
+  FindingTypeServiceAccountUnowned: "FINDING_TYPE_SERVICE_ACCOUNT_UNOWNED",
+  FindingTypeDecoyCredentialUsed: "FINDING_TYPE_DECOY_CREDENTIAL_USED",
+  FindingTypeCustom: "FINDING_TYPE_CUSTOM",
+  FindingTypeConnectorAnomalyDetectionDisabled:
+    "FINDING_TYPE_CONNECTOR_ANOMALY_DETECTION_DISABLED",
+  FindingTypeDeactivatedOwner: "FINDING_TYPE_DEACTIVATED_OWNER",
+  FindingTypeUnusedSecret: "FINDING_TYPE_UNUSED_SECRET",
+  FindingTypeCredentialPubliclyExposed:
+    "FINDING_TYPE_CREDENTIAL_PUBLICLY_EXPOSED",
+  FindingTypeDecoyPubliclyExposed: "FINDING_TYPE_DECOY_PUBLICLY_EXPOSED",
+  FindingTypeCredentialExpiring: "FINDING_TYPE_CREDENTIAL_EXPIRING",
+  FindingTypeConnectorSyncFailing: "FINDING_TYPE_CONNECTOR_SYNC_FAILING",
+  FindingTypeShadowMcp: "FINDING_TYPE_SHADOW_MCP",
+  FindingTypeShadowApp: "FINDING_TYPE_SHADOW_APP",
+  FindingTypeMcpGatewayToolCallRisk: "FINDING_TYPE_MCP_GATEWAY_TOOL_CALL_RISK",
+  FindingTypeEdge: "FINDING_TYPE_EDGE",
+} as const;
+/**
+ * The findingType field.
+ */
+export type FindingType = OpenEnum<typeof FindingType>;
 
 /**
  * The FindingRoutingRule message.
@@ -21,38 +60,59 @@ export type FindingRoutingRule = {
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The condition field.
    */
-  condition?: string | null | undefined;
+  condition?: string | undefined;
   createdAt?: Date | null | undefined;
   /**
    * The description field.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
+  /**
+   * Dispatchers that fire when the rule matches ("Then dispatch"). Max 10.
+   */
+  dispatchers?: Array<FindingDispatcher> | null | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The enabled field.
    */
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
+  /**
+   * The findingType field.
+   */
+  findingType?: FindingType | undefined;
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The priority field.
    */
-  priority?: number | null | undefined;
+  priority?: number | undefined;
   /**
    * The templateId field.
    */
-  templateId?: string | null | undefined;
+  templateId?: string | undefined;
   updatedAt?: Date | null | undefined;
 };
+
+/** @internal */
+export const FindingType$inboundSchema: z.ZodType<
+  FindingType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(FindingType);
+/** @internal */
+export const FindingType$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  FindingType
+> = openEnums.outboundSchema(FindingType);
 
 /** @internal */
 export const FindingRoutingRule$inboundSchema: z.ZodType<
@@ -61,17 +121,19 @@ export const FindingRoutingRule$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   action: z.nullable(FindingRoutingRuleAction$inboundSchema).optional(),
-  appId: z.nullable(z.string()).optional(),
-  condition: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  condition: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  id: z.nullable(z.string()).optional(),
-  priority: z.nullable(z.number().int()).optional(),
-  templateId: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  dispatchers: z.nullable(z.array(FindingDispatcher$inboundSchema)).optional(),
+  displayName: z.string().optional(),
+  enabled: z.boolean().optional(),
+  findingType: FindingType$inboundSchema.optional(),
+  id: z.string().optional(),
+  priority: z.number().int().optional(),
+  templateId: z.string().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -79,15 +141,17 @@ export const FindingRoutingRule$inboundSchema: z.ZodType<
 /** @internal */
 export type FindingRoutingRule$Outbound = {
   action?: FindingRoutingRuleAction$Outbound | null | undefined;
-  appId?: string | null | undefined;
-  condition?: string | null | undefined;
+  appId?: string | undefined;
+  condition?: string | undefined;
   createdAt?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  enabled?: boolean | null | undefined;
-  id?: string | null | undefined;
-  priority?: number | null | undefined;
-  templateId?: string | null | undefined;
+  description?: string | undefined;
+  dispatchers?: Array<FindingDispatcher$Outbound> | null | undefined;
+  displayName?: string | undefined;
+  enabled?: boolean | undefined;
+  findingType?: string | undefined;
+  id?: string | undefined;
+  priority?: number | undefined;
+  templateId?: string | undefined;
   updatedAt?: string | null | undefined;
 };
 
@@ -98,15 +162,17 @@ export const FindingRoutingRule$outboundSchema: z.ZodType<
   FindingRoutingRule
 > = z.object({
   action: z.nullable(FindingRoutingRuleAction$outboundSchema).optional(),
-  appId: z.nullable(z.string()).optional(),
-  condition: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  condition: z.string().optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  id: z.nullable(z.string()).optional(),
-  priority: z.nullable(z.number().int()).optional(),
-  templateId: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  dispatchers: z.nullable(z.array(FindingDispatcher$outboundSchema)).optional(),
+  displayName: z.string().optional(),
+  enabled: z.boolean().optional(),
+  findingType: FindingType$outboundSchema.optional(),
+  id: z.string().optional(),
+  priority: z.number().int().optional(),
+  templateId: z.string().optional(),
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 

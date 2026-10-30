@@ -20,7 +20,7 @@ export type ManagerApproval = {
   /**
    * Configuration to allow self approval if the target user is their own manager. This may occur if a service account has an identity user and manager specified as the same person.
    */
-  allowSelfApproval?: boolean | null | undefined;
+  allowSelfApproval?: boolean | undefined;
   /**
    * The array of users determined to be the manager during processing time.
    */
@@ -28,7 +28,7 @@ export type ManagerApproval = {
   /**
    * Configuration to allow a fallback if no manager is found.
    */
-  fallback?: boolean | null | undefined;
+  fallback?: boolean | undefined;
   /**
    * Configuration to specify which groups to fallback to if fallback is enabled and no manager is found.
    */
@@ -40,11 +40,11 @@ export type ManagerApproval = {
   /**
    * Configuration to enable fallback for group fallback.
    */
-  isGroupFallbackEnabled?: boolean | null | undefined;
+  isGroupFallbackEnabled?: boolean | undefined;
   /**
    * Configuration to require distinct approvers across approval steps of a rule.
    */
-  requireDistinctApprovers?: boolean | null | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -53,24 +53,24 @@ export const ManagerApproval$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  allowSelfApproval: z.nullable(z.boolean()).optional(),
+  allowSelfApproval: z.boolean().optional(),
   assignedUserIds: z.nullable(z.array(z.string())).optional(),
-  fallback: z.nullable(z.boolean()).optional(),
+  fallback: z.boolean().optional(),
   fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$inboundSchema))
     .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-  isGroupFallbackEnabled: z.nullable(z.boolean()).optional(),
-  requireDistinctApprovers: z.nullable(z.boolean()).optional(),
+  isGroupFallbackEnabled: z.boolean().optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
 /** @internal */
 export type ManagerApproval$Outbound = {
-  allowSelfApproval?: boolean | null | undefined;
+  allowSelfApproval?: boolean | undefined;
   assignedUserIds?: Array<string> | null | undefined;
-  fallback?: boolean | null | undefined;
+  fallback?: boolean | undefined;
   fallbackGroupIds?: Array<AppEntitlementReference$Outbound> | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
-  isGroupFallbackEnabled?: boolean | null | undefined;
-  requireDistinctApprovers?: boolean | null | undefined;
+  isGroupFallbackEnabled?: boolean | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -79,14 +79,14 @@ export const ManagerApproval$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ManagerApproval
 > = z.object({
-  allowSelfApproval: z.nullable(z.boolean()).optional(),
+  allowSelfApproval: z.boolean().optional(),
   assignedUserIds: z.nullable(z.array(z.string())).optional(),
-  fallback: z.nullable(z.boolean()).optional(),
+  fallback: z.boolean().optional(),
   fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$outboundSchema))
     .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-  isGroupFallbackEnabled: z.nullable(z.boolean()).optional(),
-  requireDistinctApprovers: z.nullable(z.boolean()).optional(),
+  isGroupFallbackEnabled: z.boolean().optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
 
 export function managerApprovalToJSON(

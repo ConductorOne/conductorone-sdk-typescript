@@ -11,12 +11,12 @@ export type ExporterRef = {
   /**
    * The exportId field.
    */
-  exportId?: string | null | undefined;
+  exportId?: string | undefined;
 };
 
 /** @internal */
 export type ExporterRef$Outbound = {
-  exportId?: string | null | undefined;
+  exportId?: string | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const ExporterRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ExporterRef
 > = z.object({
-  exportId: z.nullable(z.string()).optional(),
+  exportId: z.string().optional(),
 });
 
 export function exporterRefToJSON(exporterRef: ExporterRef): string {

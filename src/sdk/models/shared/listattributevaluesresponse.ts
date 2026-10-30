@@ -26,7 +26,7 @@ export type ListAttributeValuesResponse = {
    *  The server returns one page of results and the nextPageToken until all results are retreived.
    *  To retrieve the next page, use the same request and append a pageToken field with the value of nextPageToken shown on the previous page.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const ListAttributeValuesResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   list: z.nullable(z.array(AttributeValue$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function listAttributeValuesResponseFromJSON(

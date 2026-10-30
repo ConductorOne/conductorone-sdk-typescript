@@ -30,7 +30,7 @@ import { Result } from "../sdk/types/fp.js";
  * Create Internal
  *
  * @remarks
- * CreateInternal creates a secret vault for internal C1 users.
+ * CreateInternal creates a secret using the requested Age suite.
  */
 export function paperSecretCreateInternal(
   client: ConductoroneSDKTypescriptCore,

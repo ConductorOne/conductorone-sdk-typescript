@@ -14,23 +14,23 @@ export type TaskAuditWebhookApprovalBadResponse = {
   /**
    * The error field.
    */
-  error?: string | null | undefined;
+  error?: string | undefined;
   /**
    * The webhookId field.
    */
-  webhookId?: string | null | undefined;
+  webhookId?: string | undefined;
   /**
    * The webhookInstanceId field.
    */
-  webhookInstanceId?: string | null | undefined;
+  webhookInstanceId?: string | undefined;
   /**
    * The webhookName field.
    */
-  webhookName?: string | null | undefined;
+  webhookName?: string | undefined;
   /**
    * The webhookUrl field.
    */
-  webhookUrl?: string | null | undefined;
+  webhookUrl?: string | undefined;
 };
 
 /** @internal */
@@ -39,11 +39,11 @@ export const TaskAuditWebhookApprovalBadResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  error: z.nullable(z.string()).optional(),
-  webhookId: z.nullable(z.string()).optional(),
-  webhookInstanceId: z.nullable(z.string()).optional(),
-  webhookName: z.nullable(z.string()).optional(),
-  webhookUrl: z.nullable(z.string()).optional(),
+  error: z.string().optional(),
+  webhookId: z.string().optional(),
+  webhookInstanceId: z.string().optional(),
+  webhookName: z.string().optional(),
+  webhookUrl: z.string().optional(),
 });
 
 export function taskAuditWebhookApprovalBadResponseFromJSON(

@@ -3,6 +3,7 @@
  */
 
 import { functionsInvocationGet } from "../funcs/functionsInvocationGet.js";
+import { functionsInvocationGetResultDownloadURL } from "../funcs/functionsInvocationGetResultDownloadURL.js";
 import { functionsInvocationList } from "../funcs/functionsInvocationList.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "./models/operations/index.js";
@@ -39,6 +40,29 @@ export class FunctionsInvocation extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.C1ApiFunctionsV1FunctionsInvocationServiceGetResponse> {
     return unwrapAsync(functionsInvocationGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get Result Download Url
+   *
+   * @remarks
+   * GetResultDownloadURL mints a short-lived download URL for an invocation
+   *  result held outside the invocation row. The URL is generated at request
+   *  time and never persisted; the invocation object itself exposes only the
+   *  result's VFS path, size, checksum, media type, and expiry.
+   */
+  async getResultDownloadURL(
+    request:
+      operations.C1ApiFunctionsV1FunctionsInvocationServiceGetResultDownloadURLRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiFunctionsV1FunctionsInvocationServiceGetResultDownloadURLResponse
+  > {
+    return unwrapAsync(functionsInvocationGetResultDownloadURL(
       this,
       request,
       options,

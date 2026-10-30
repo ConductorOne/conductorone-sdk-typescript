@@ -4,6 +4,11 @@
 
 import * as z from "zod/v3";
 import {
+  C1EdgeSettings,
+  C1EdgeSettings$Outbound,
+  C1EdgeSettings$outboundSchema,
+} from "./c1edgesettings.js";
+import {
   OIDCSettings,
   OIDCSettings$Outbound,
   OIDCSettings$outboundSchema,
@@ -31,29 +36,32 @@ import {
  * This message contains a oneof named settings. Only a single field of the following list may be set at a time:
  *   - oidc
  *   - spiffe
+ *   - c1Edge
  */
 export type WorkloadFederationProviderInput = {
+  c1Edge?: C1EdgeSettings | null | undefined;
   /**
    * A description of what this provider is for.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * Whether the provider is disabled. Disabled providers reject all token exchanges.
    */
-  disabled?: boolean | null | undefined;
+  disabled?: boolean | undefined;
   /**
    * The display name of the provider.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   oidc?: OIDCSettings | null | undefined;
   spiffe?: SPIFFESettings | null | undefined;
 };
 
 /** @internal */
 export type WorkloadFederationProviderInput$Outbound = {
-  description?: string | null | undefined;
-  disabled?: boolean | null | undefined;
-  displayName?: string | null | undefined;
+  c1Edge?: C1EdgeSettings$Outbound | null | undefined;
+  description?: string | undefined;
+  disabled?: boolean | undefined;
+  displayName?: string | undefined;
   oidc?: OIDCSettings$Outbound | null | undefined;
   spiffe?: SPIFFESettings$Outbound | null | undefined;
 };
@@ -64,9 +72,10 @@ export const WorkloadFederationProviderInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WorkloadFederationProviderInput
 > = z.object({
-  description: z.nullable(z.string()).optional(),
-  disabled: z.nullable(z.boolean()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  c1Edge: z.nullable(C1EdgeSettings$outboundSchema).optional(),
+  description: z.string().optional(),
+  disabled: z.boolean().optional(),
+  displayName: z.string().optional(),
   oidc: z.nullable(OIDCSettings$outboundSchema).optional(),
   spiffe: z.nullable(SPIFFESettings$outboundSchema).optional(),
 });

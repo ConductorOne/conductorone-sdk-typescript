@@ -9,6 +9,30 @@ import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  AccessProfileComponentTarget,
+  AccessProfileComponentTarget$inboundSchema,
+  AccessProfileComponentTarget$Outbound,
+  AccessProfileComponentTarget$outboundSchema,
+} from "./accessprofilecomponenttarget.js";
+import {
+  CredentialIssueTarget,
+  CredentialIssueTarget$inboundSchema,
+  CredentialIssueTarget$Outbound,
+  CredentialIssueTarget$outboundSchema,
+} from "./credentialissuetarget.js";
+import {
+  FindingTarget,
+  FindingTarget$inboundSchema,
+  FindingTarget$Outbound,
+  FindingTarget$outboundSchema,
+} from "./findingtarget.js";
+import {
+  GatedToolCallTarget,
+  GatedToolCallTarget$inboundSchema,
+  GatedToolCallTarget$Outbound,
+  GatedToolCallTarget$outboundSchema,
+} from "./gatedtoolcalltarget.js";
+import {
   ScopeRole,
   ScopeRole$inboundSchema,
   ScopeRole$Outbound,
@@ -20,6 +44,12 @@ import {
   TaskActionInstance$Outbound,
   TaskActionInstance$outboundSchema,
 } from "./taskactioninstance.js";
+import {
+  TaskActionSource,
+  TaskActionSource$inboundSchema,
+  TaskActionSource$Outbound,
+  TaskActionSource$outboundSchema,
+} from "./taskactionsource.js";
 
 /**
  * The outcome field.
@@ -47,6 +77,10 @@ export const TaskTypeActionType = {
   TypeGrant: "TYPE_GRANT",
   TypeWorkflow: "TYPE_WORKFLOW",
   TypeResourceAction: "TYPE_RESOURCE_ACTION",
+  TypeToolCall: "TYPE_TOOL_CALL",
+  TypeManual: "TYPE_MANUAL",
+  TypeCredentialIssue: "TYPE_CREDENTIAL_ISSUE",
+  TypeSpendRemedy: "TYPE_SPEND_REMEDY",
 } as const;
 /**
  * Flavor of action the ticket represents — mirrors the snapshot's
@@ -63,8 +97,13 @@ export type TaskTypeActionType = OpenEnum<typeof TaskTypeActionType>;
  *
  * This message contains a oneof named target_object. Only a single field of the following list may be set at a time:
  *   - scopeRole
+ *   - toolCall
+ *   - finding
+ *   - credentialIssue
+ *   - accessProfileComponent
  */
 export type TaskTypeAction = {
+  accessProfileComponent?: AccessProfileComponentTarget | null | undefined;
   /**
    * The ID of the admin-authored action to execute. Empty for synthesized
    *
@@ -72,8 +111,31 @@ export type TaskTypeAction = {
    *  action tickets (e.g. scope-role grants) — those carry dispatch
    *  configuration on action_instance and target_object instead.
    */
-  actionId?: string | null | undefined;
+  actionId?: string | undefined;
   actionInstance?: TaskActionInstance | null | undefined;
+  /**
+   * The C1 IDs of the AppEntitlements materialized from the connector response
+   *
+   * @remarks
+   *  (for a group, typically its members and owners entitlements). Use these to
+   *  request access, attach a virtual entitlement, or otherwise manage the new
+   *  resource. Empty until outcome is SUCCESS; may be empty on SUCCESS if
+   *  materialization was skipped or failed, in which case the entitlements
+   *  appear after the next connector sync.
+   */
+  createdAppEntitlementIds?: Array<string> | null | undefined;
+  /**
+   * Populated when a resource-create action completes: the C1 ID of the
+   *
+   * @remarks
+   *  AppResource materialized from the connector response.
+   */
+  createdAppResourceId?: string | undefined;
+  /**
+   * The resource type ID of the materialized AppResource.
+   */
+  createdAppResourceTypeId?: string | undefined;
+  credentialIssue?: CredentialIssueTarget | null | undefined;
   /**
    * Display label captured on the action snapshot at ticket-creation time.
    *
@@ -82,21 +144,32 @@ export type TaskTypeAction = {
    *  synthesized tickets that have no Action row at all. UI reads this to
    *  render the task title without an Action fetch.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
+  finding?: FindingTarget | null | undefined;
   formValues?: { [k: string]: any } | null | undefined;
   /**
    * The outcome field.
    */
-  outcome?: TaskTypeActionOutcome | null | undefined;
+  outcome?: TaskTypeActionOutcome | undefined;
   outcomeTime?: Date | null | undefined;
+  /**
+   * The resource was created, but some requested effects remain unconfirmed.
+   */
+  partialResult?: boolean | undefined;
   scopeRole?: ScopeRole | null | undefined;
+  source?: TaskActionSource | null | undefined;
+  toolCall?: GatedToolCallTarget | null | undefined;
   /**
    * Flavor of action the ticket represents — mirrors the snapshot's
    *
    * @remarks
    *  target_ref variant.
    */
-  type?: TaskTypeActionType | null | undefined;
+  type?: TaskTypeActionType | undefined;
+  /**
+   * Selected members whose addition the connector could not confirm.
+   */
+  unaddedMemberCount?: number | undefined;
 };
 
 /** @internal */
@@ -131,27 +204,51 @@ export const TaskTypeAction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  actionId: z.nullable(z.string()).optional(),
+  accessProfileComponent: z.nullable(AccessProfileComponentTarget$inboundSchema)
+    .optional(),
+  actionId: z.string().optional(),
   actionInstance: z.nullable(TaskActionInstance$inboundSchema).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  createdAppEntitlementIds: z.nullable(z.array(z.string())).optional(),
+  createdAppResourceId: z.string().optional(),
+  createdAppResourceTypeId: z.string().optional(),
+  credentialIssue: z.nullable(CredentialIssueTarget$inboundSchema).optional(),
+  displayName: z.string().optional(),
+  finding: z.nullable(FindingTarget$inboundSchema).optional(),
   formValues: z.nullable(z.record(z.any())).optional(),
-  outcome: z.nullable(TaskTypeActionOutcome$inboundSchema).optional(),
+  outcome: TaskTypeActionOutcome$inboundSchema.optional(),
   outcomeTime: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
+  partialResult: z.boolean().optional(),
   scopeRole: z.nullable(ScopeRole$inboundSchema).optional(),
-  type: z.nullable(TaskTypeActionType$inboundSchema).optional(),
+  source: z.nullable(TaskActionSource$inboundSchema).optional(),
+  toolCall: z.nullable(GatedToolCallTarget$inboundSchema).optional(),
+  type: TaskTypeActionType$inboundSchema.optional(),
+  unaddedMemberCount: z.number().int().optional(),
 });
 /** @internal */
 export type TaskTypeAction$Outbound = {
-  actionId?: string | null | undefined;
+  accessProfileComponent?:
+    | AccessProfileComponentTarget$Outbound
+    | null
+    | undefined;
+  actionId?: string | undefined;
   actionInstance?: TaskActionInstance$Outbound | null | undefined;
-  displayName?: string | null | undefined;
+  createdAppEntitlementIds?: Array<string> | null | undefined;
+  createdAppResourceId?: string | undefined;
+  createdAppResourceTypeId?: string | undefined;
+  credentialIssue?: CredentialIssueTarget$Outbound | null | undefined;
+  displayName?: string | undefined;
+  finding?: FindingTarget$Outbound | null | undefined;
   formValues?: { [k: string]: any } | null | undefined;
-  outcome?: string | null | undefined;
+  outcome?: string | undefined;
   outcomeTime?: string | null | undefined;
+  partialResult?: boolean | undefined;
   scopeRole?: ScopeRole$Outbound | null | undefined;
-  type?: string | null | undefined;
+  source?: TaskActionSource$Outbound | null | undefined;
+  toolCall?: GatedToolCallTarget$Outbound | null | undefined;
+  type?: string | undefined;
+  unaddedMemberCount?: number | undefined;
 };
 
 /** @internal */
@@ -160,14 +257,26 @@ export const TaskTypeAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskTypeAction
 > = z.object({
-  actionId: z.nullable(z.string()).optional(),
+  accessProfileComponent: z.nullable(
+    AccessProfileComponentTarget$outboundSchema,
+  ).optional(),
+  actionId: z.string().optional(),
   actionInstance: z.nullable(TaskActionInstance$outboundSchema).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  createdAppEntitlementIds: z.nullable(z.array(z.string())).optional(),
+  createdAppResourceId: z.string().optional(),
+  createdAppResourceTypeId: z.string().optional(),
+  credentialIssue: z.nullable(CredentialIssueTarget$outboundSchema).optional(),
+  displayName: z.string().optional(),
+  finding: z.nullable(FindingTarget$outboundSchema).optional(),
   formValues: z.nullable(z.record(z.any())).optional(),
-  outcome: z.nullable(TaskTypeActionOutcome$outboundSchema).optional(),
+  outcome: TaskTypeActionOutcome$outboundSchema.optional(),
   outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  partialResult: z.boolean().optional(),
   scopeRole: z.nullable(ScopeRole$outboundSchema).optional(),
-  type: z.nullable(TaskTypeActionType$outboundSchema).optional(),
+  source: z.nullable(TaskActionSource$outboundSchema).optional(),
+  toolCall: z.nullable(GatedToolCallTarget$outboundSchema).optional(),
+  type: TaskTypeActionType$outboundSchema.optional(),
+  unaddedMemberCount: z.number().int().optional(),
 });
 
 export function taskTypeActionToJSON(taskTypeAction: TaskTypeAction): string {

@@ -38,7 +38,7 @@ export type TaskActionsServiceApproveResponse = {
   /**
    * The ID of the task approve action created by this request.
    */
-  ticketActionId?: string | null | undefined;
+  ticketActionId?: string | undefined;
 };
 
 /** @internal */
@@ -86,7 +86,7 @@ export const TaskActionsServiceApproveResponse$inboundSchema: z.ZodType<
     ),
   ).optional(),
   taskView: z.nullable(TaskView$inboundSchema).optional(),
-  ticketActionId: z.nullable(z.string()).optional(),
+  ticketActionId: z.string().optional(),
 });
 
 export function taskActionsServiceApproveResponseFromJSON(

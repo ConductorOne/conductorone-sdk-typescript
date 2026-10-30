@@ -42,7 +42,7 @@ export type TextFieldComponent = {
   /**
    * The variant field.
    */
-  variant?: TextFieldComponentVariant | null | undefined;
+  variant?: TextFieldComponentVariant | undefined;
 };
 
 /** @internal */
@@ -62,7 +62,7 @@ export const TextFieldComponent$inboundSchema: z.ZodType<
   label: z.nullable(DynamicString$inboundSchema).optional(),
   placeholder: z.nullable(DynamicString$inboundSchema).optional(),
   value: z.nullable(DynamicString$inboundSchema).optional(),
-  variant: z.nullable(TextFieldComponentVariant$inboundSchema).optional(),
+  variant: TextFieldComponentVariant$inboundSchema.optional(),
 });
 
 export function textFieldComponentFromJSON(

@@ -29,6 +29,13 @@ export const EventTypes = {
     "FINDING_AUDIT_EVENT_TYPE_EVIDENCE_UPDATED",
   FindingAuditEventTypeRoutingEvaluated:
     "FINDING_AUDIT_EVENT_TYPE_ROUTING_EVALUATED",
+  FindingAuditEventTypeTransformed: "FINDING_AUDIT_EVENT_TYPE_TRANSFORMED",
+  FindingAuditEventTypeReprocessRequested:
+    "FINDING_AUDIT_EVENT_TYPE_REPROCESS_REQUESTED",
+  FindingAuditEventTypeReprocessCompleted:
+    "FINDING_AUDIT_EVENT_TYPE_REPROCESS_COMPLETED",
+  FindingAuditEventTypeAssigneeChanged:
+    "FINDING_AUDIT_EVENT_TYPE_ASSIGNEE_CHANGED",
 } as const;
 export type EventTypes = OpenEnum<typeof EventTypes>;
 
@@ -39,18 +46,18 @@ export type FindingAuditServiceSearchRequest = {
   /**
    * The actorPrincipalId field.
    */
-  actorPrincipalId?: string | null | undefined;
+  actorPrincipalId?: string | undefined;
   /**
    * Partial match via full-text search over the denormalized actor email
    *
    * @remarks
    *  / display name column.
    */
-  actorSubject?: string | null | undefined;
+  actorSubject?: string | undefined;
   /**
    * Empty skips the filter; non-empty must be a 27-char alphanumeric id.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * Filter by one or more event types. Empty means any.
    */
@@ -61,15 +68,15 @@ export type FindingAuditServiceSearchRequest = {
    * @remarks
    *  Empty skips the filter; non-empty must be a 27-char alphanumeric id.
    */
-  findingId?: string | null | undefined;
+  findingId?: string | undefined;
   /**
    * The pageSize field.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   since?: Date | null | undefined;
   until?: Date | null | undefined;
 };
@@ -83,13 +90,13 @@ export const EventTypes$outboundSchema: z.ZodType<
 
 /** @internal */
 export type FindingAuditServiceSearchRequest$Outbound = {
-  actorPrincipalId?: string | null | undefined;
-  actorSubject?: string | null | undefined;
-  appId?: string | null | undefined;
+  actorPrincipalId?: string | undefined;
+  actorSubject?: string | undefined;
+  appId?: string | undefined;
   eventTypes?: Array<string> | null | undefined;
-  findingId?: string | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  findingId?: string | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
   since?: string | null | undefined;
   until?: string | null | undefined;
 };
@@ -100,13 +107,13 @@ export const FindingAuditServiceSearchRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FindingAuditServiceSearchRequest
 > = z.object({
-  actorPrincipalId: z.nullable(z.string()).optional(),
-  actorSubject: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
+  actorPrincipalId: z.string().optional(),
+  actorSubject: z.string().optional(),
+  appId: z.string().optional(),
   eventTypes: z.nullable(z.array(EventTypes$outboundSchema)).optional(),
-  findingId: z.nullable(z.string()).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
+  findingId: z.string().optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
   since: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   until: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });

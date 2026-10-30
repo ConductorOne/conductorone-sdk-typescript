@@ -1,6 +1,6 @@
 # GetAIGovernanceSettingsResponse
 
-The GetAIGovernanceSettingsResponse message.
+GetAIGovernanceSettingsResponse contains the tenant's AI governance settings.
 
 ## Example Usage
 

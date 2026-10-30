@@ -1,0 +1,27 @@
+# EdgePublicTrustMetadata
+
+EdgePublicTrustMetadata binds fresh public trust to the authenticated person's selected Edge.
+
+## Example Usage
+
+```typescript
+import { EdgePublicTrustMetadata } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: EdgePublicTrustMetadata = {};
+```
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `appId`                                                                                           | *string*                                                                                          | :heavy_minus_sign:                                                                                | Application authorized by the current egress grant.                                               |
+| `bootstrapUri`                                                                                    | *string*                                                                                          | :heavy_minus_sign:                                                                                | Canonical public bootstrap URL, including the selected application and Edge.                      |
+| `canonicalOrigin`                                                                                 | *string*                                                                                          | :heavy_minus_sign:                                                                                | Trusted HTTPS origin of the bootstrap service.                                                    |
+| `edgeId`                                                                                          | *string*                                                                                          | :heavy_minus_sign:                                                                                | Edge authorized by the current egress grant.                                                      |
+| `expiresAt`                                                                                       | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)     | :heavy_minus_sign:                                                                                | N/A                                                                                               |
+| `installationId`                                                                                  | *string*                                                                                          | :heavy_minus_sign:                                                                                | Installation-owned identifier, distinct from tenant-root content identity.                        |
+| `observedAt`                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)     | :heavy_minus_sign:                                                                                | N/A                                                                                               |
+| `refreshAfter`                                                                                    | *string*                                                                                          | :heavy_minus_sign:                                                                                | N/A                                                                                               |
+| `state`                                                                                           | [shared.EdgePublicTrustMetadataState](../../../sdk/models/shared/edgepublictrustmetadatastate.md) | :heavy_minus_sign:                                                                                | Available authority or explicit withdrawal.                                                       |
+| `tenantGeneration`                                                                                | *string*                                                                                          | :heavy_minus_sign:                                                                                | Content identity of the exact tenant root set.                                                    |
+| `tenantId`                                                                                        | *string*                                                                                          | :heavy_minus_sign:                                                                                | Canonical tenant derived from the authenticated session.                                          |

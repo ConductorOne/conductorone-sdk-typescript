@@ -17,11 +17,11 @@ export type TaskAuditCreatedReplacementExtensionGrantTask = {
   /**
    * The ID of the newly created replacement task
    */
-  newTaskId?: string | null | undefined;
+  newTaskId?: string | undefined;
   /**
    * The numeric ID of the newly created replacement task (for display)
    */
-  newTaskNumericId?: number | null | undefined;
+  newTaskNumericId?: number | undefined;
 };
 
 /** @internal */
@@ -31,9 +31,8 @@ export const TaskAuditCreatedReplacementExtensionGrantTask$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    newTaskId: z.nullable(z.string()).optional(),
-    newTaskNumericId: z.nullable(z.string().transform(v => parseInt(v, 10)))
-      .optional(),
+    newTaskId: z.string().optional(),
+    newTaskNumericId: z.string().transform(v => parseInt(v, 10)).optional(),
   });
 
 export function taskAuditCreatedReplacementExtensionGrantTaskFromJSON(

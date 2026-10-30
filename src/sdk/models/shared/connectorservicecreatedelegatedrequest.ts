@@ -31,15 +31,15 @@ export type ConnectorServiceCreateDelegatedRequest = {
   /**
    * The catalogId describes which catalog entry this connector is an instance of. For example, every Okta connector will have the same catalogId indicating it is an Okta connector.
    */
-  catalogId?: string | null | undefined;
+  catalogId?: string | undefined;
   /**
    * The description of the connector.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The displayName of the connector.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   expandMask?: ConnectorExpandMask | null | undefined;
   /**
    * The userIds field is used to define the integration owners of the connector.
@@ -57,9 +57,9 @@ export type ConnectorServiceCreateDelegatedRequest$Outbound = {
     | AppManagedStateBindingRef$Outbound
     | null
     | undefined;
-  catalogId?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
+  catalogId?: string | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
   expandMask?: ConnectorExpandMask$Outbound | null | undefined;
   userIds?: Array<string> | null | undefined;
 };
@@ -75,9 +75,9 @@ export const ConnectorServiceCreateDelegatedRequest$outboundSchema: z.ZodType<
   appManagedStateBindingRef: z.nullable(
     AppManagedStateBindingRef$outboundSchema,
   ).optional(),
-  catalogId: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  catalogId: z.string().optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
   expandMask: z.nullable(ConnectorExpandMask$outboundSchema).optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
 });

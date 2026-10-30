@@ -38,24 +38,24 @@ export type TaskTypeGrant = {
   /**
    * The ID of the app entitlement.
    */
-  appEntitlementId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
   /**
    * The ID of the app.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The ID of the app user.
    */
-  appUserId?: string | null | undefined;
+  appUserId?: string | undefined;
   grantDuration?: string | null | undefined;
   /**
    * The ID of the user.
    */
-  identityUserId?: string | null | undefined;
+  identityUserId?: string | undefined;
   /**
    * The outcome of the grant.
    */
-  outcome?: TaskTypeGrantOutcome | null | undefined;
+  outcome?: TaskTypeGrantOutcome | undefined;
   outcomeTime?: Date | null | undefined;
   source?: TaskGrantSource | null | undefined;
 };
@@ -79,12 +79,12 @@ export const TaskTypeGrant$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appUserId: z.nullable(z.string()).optional(),
+  appEntitlementId: z.string().optional(),
+  appId: z.string().optional(),
+  appUserId: z.string().optional(),
   grantDuration: z.nullable(z.string()).optional(),
-  identityUserId: z.nullable(z.string()).optional(),
-  outcome: z.nullable(TaskTypeGrantOutcome$inboundSchema).optional(),
+  identityUserId: z.string().optional(),
+  outcome: TaskTypeGrantOutcome$inboundSchema.optional(),
   outcomeTime: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -92,12 +92,12 @@ export const TaskTypeGrant$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type TaskTypeGrant$Outbound = {
-  appEntitlementId?: string | null | undefined;
-  appId?: string | null | undefined;
-  appUserId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
+  appId?: string | undefined;
+  appUserId?: string | undefined;
   grantDuration?: string | null | undefined;
-  identityUserId?: string | null | undefined;
-  outcome?: string | null | undefined;
+  identityUserId?: string | undefined;
+  outcome?: string | undefined;
   outcomeTime?: string | null | undefined;
   source?: TaskGrantSource$Outbound | null | undefined;
 };
@@ -108,12 +108,12 @@ export const TaskTypeGrant$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskTypeGrant
 > = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appUserId: z.nullable(z.string()).optional(),
+  appEntitlementId: z.string().optional(),
+  appId: z.string().optional(),
+  appUserId: z.string().optional(),
   grantDuration: z.nullable(z.string()).optional(),
-  identityUserId: z.nullable(z.string()).optional(),
-  outcome: z.nullable(TaskTypeGrantOutcome$outboundSchema).optional(),
+  identityUserId: z.string().optional(),
+  outcome: TaskTypeGrantOutcome$outboundSchema.optional(),
   outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   source: z.nullable(TaskGrantSource$outboundSchema).optional(),
 });

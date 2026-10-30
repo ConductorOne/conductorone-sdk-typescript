@@ -68,7 +68,7 @@ export type Field = {
    * @remarks
    *  In cases where a single placeholder is not enough to describe the field
    */
-  additionalPlaceholder?: string | null | undefined;
+  additionalPlaceholder?: string | undefined;
   checkbox?: ConnectorCheckboxField | null | undefined;
   /**
    * The dependsOnFields field.
@@ -77,27 +77,27 @@ export type Field = {
   /**
    * Human-readable label for this Field
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * empty or https URL
    */
-  helpUrl?: string | null | undefined;
+  helpUrl?: string | undefined;
   import?: ImportField | null | undefined;
   keyValue?: KeyValueField | null | undefined;
   /**
    * Must not start with `C1_` and match [a-zA-Z0-9_]{2,64}.  Must be unique within a connector.
    */
-  name?: string | null | undefined;
+  name?: string | undefined;
   oauth2?: OAuth2Field1 | null | undefined;
   options?: OptionsField | null | undefined;
   /**
    * The placeholder field.
    */
-  placeholder?: string | null | undefined;
+  placeholder?: string | undefined;
   /**
    * The postCreate field.
    */
-  postCreate?: boolean | null | undefined;
+  postCreate?: boolean | undefined;
   random?: RandomStringField | null | undefined;
   readOnly?: ReadOnlyField | null | undefined;
   secret?: RotatableSecretField | null | undefined;
@@ -111,18 +111,18 @@ export type Field = {
 /** @internal */
 export const Field$inboundSchema: z.ZodType<Field, z.ZodTypeDef, unknown> = z
   .object({
-    additionalPlaceholder: z.nullable(z.string()).optional(),
+    additionalPlaceholder: z.string().optional(),
     checkbox: z.nullable(ConnectorCheckboxField$inboundSchema).optional(),
     dependsOnFields: z.nullable(z.array(z.string())).optional(),
-    displayName: z.nullable(z.string()).optional(),
-    helpUrl: z.nullable(z.string()).optional(),
+    displayName: z.string().optional(),
+    helpUrl: z.string().optional(),
     import: z.nullable(ImportField$inboundSchema).optional(),
     keyValue: z.nullable(KeyValueField$inboundSchema).optional(),
-    name: z.nullable(z.string()).optional(),
+    name: z.string().optional(),
     oauth2: z.nullable(OAuth2Field1$inboundSchema).optional(),
     options: z.nullable(OptionsField$inboundSchema).optional(),
-    placeholder: z.nullable(z.string()).optional(),
-    postCreate: z.nullable(z.boolean()).optional(),
+    placeholder: z.string().optional(),
+    postCreate: z.boolean().optional(),
     random: z.nullable(RandomStringField$inboundSchema).optional(),
     readOnly: z.nullable(ReadOnlyField$inboundSchema).optional(),
     secret: z.nullable(RotatableSecretField$inboundSchema).optional(),

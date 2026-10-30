@@ -14,11 +14,11 @@ export type TaskAuditErrorResult = {
   /**
    * TODO(pquerna): expand
    */
-  errorCount?: number | null | undefined;
+  errorCount?: number | undefined;
   /**
    * The errorReason field.
    */
-  errorReason?: string | null | undefined;
+  errorReason?: string | undefined;
 };
 
 /** @internal */
@@ -27,8 +27,8 @@ export const TaskAuditErrorResult$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  errorCount: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
-  errorReason: z.nullable(z.string()).optional(),
+  errorCount: z.string().transform(v => parseInt(v, 10)).optional(),
+  errorReason: z.string().optional(),
 });
 
 export function taskAuditErrorResultFromJSON(

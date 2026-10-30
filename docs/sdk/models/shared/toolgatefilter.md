@@ -1,0 +1,18 @@
+# ToolGateFilter
+
+The ToolGateFilter message.
+
+## Example Usage
+
+```typescript
+import { ToolGateFilter } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: ToolGateFilter = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                            | Type                                                                                                                                                                                                             | Required                                                                                                                                                                                                         | Description                                                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `builtInPattern`                                                                                                                                                                                                 | [shared.ToolGateFilterBuiltInPattern](../../../sdk/models/shared/toolgatefilterbuiltinpattern.md)                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                               | Built-in pattern selector: a named canned CEL filter maintained by<br/> ConductorOne. When set, cel_expression must be empty and is resolved from<br/> the registry at create time; the kind is retained for provenance. |
+| `celExpression`                                                                                                                                                                                                  | *string*                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                               | The celExpression field.                                                                                                                                                                                         |

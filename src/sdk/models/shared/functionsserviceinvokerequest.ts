@@ -16,7 +16,7 @@ export type FunctionsServiceInvokeRequest = {
   /**
    * The commit ID specifying which version of the function code to run.
    */
-  commitId?: string | null | undefined;
+  commitId?: string | undefined;
   /**
    * The JSON-encoded input data passed to the function.
    *
@@ -28,14 +28,14 @@ export type FunctionsServiceInvokeRequest = {
   /**
    * Optional VFS volume ID to attach to this invocation. If empty, VFS operations will error.
    */
-  vfsId?: string | null | undefined;
+  vfsId?: string | undefined;
 };
 
 /** @internal */
 export type FunctionsServiceInvokeRequest$Outbound = {
-  commitId?: string | null | undefined;
+  commitId?: string | undefined;
   json?: string | null | undefined;
-  vfsId?: string | null | undefined;
+  vfsId?: string | undefined;
 };
 
 /** @internal */
@@ -44,9 +44,9 @@ export const FunctionsServiceInvokeRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FunctionsServiceInvokeRequest
 > = z.object({
-  commitId: z.nullable(z.string()).optional(),
+  commitId: z.string().optional(),
   json: z.nullable(z.string()).optional(),
-  vfsId: z.nullable(z.string()).optional(),
+  vfsId: z.string().optional(),
 });
 
 export function functionsServiceInvokeRequestToJSON(

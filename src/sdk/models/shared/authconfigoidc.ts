@@ -18,15 +18,15 @@ export type AuthConfigOIDC = {
   /**
    * The issuerId field.
    */
-  issuerId?: string | null | undefined;
+  issuerId?: string | undefined;
   /**
    * The oidcClientId field.
    */
-  oidcClientId?: string | null | undefined;
+  oidcClientId?: string | undefined;
   /**
    * The oidcClientSecret field.
    */
-  oidcClientSecret?: string | null | undefined;
+  oidcClientSecret?: string | undefined;
   /**
    * The scopes field.
    */
@@ -40,17 +40,17 @@ export const AuthConfigOIDC$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   exactMatchClaims: z.record(z.string()).optional(),
-  issuerId: z.nullable(z.string()).optional(),
-  oidcClientId: z.nullable(z.string()).optional(),
-  oidcClientSecret: z.nullable(z.string()).optional(),
+  issuerId: z.string().optional(),
+  oidcClientId: z.string().optional(),
+  oidcClientSecret: z.string().optional(),
   scopes: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
 export type AuthConfigOIDC$Outbound = {
   exactMatchClaims?: { [k: string]: string } | undefined;
-  issuerId?: string | null | undefined;
-  oidcClientId?: string | null | undefined;
-  oidcClientSecret?: string | null | undefined;
+  issuerId?: string | undefined;
+  oidcClientId?: string | undefined;
+  oidcClientSecret?: string | undefined;
   scopes?: Array<string> | null | undefined;
 };
 
@@ -61,9 +61,9 @@ export const AuthConfigOIDC$outboundSchema: z.ZodType<
   AuthConfigOIDC
 > = z.object({
   exactMatchClaims: z.record(z.string()).optional(),
-  issuerId: z.nullable(z.string()).optional(),
-  oidcClientId: z.nullable(z.string()).optional(),
-  oidcClientSecret: z.nullable(z.string()).optional(),
+  issuerId: z.string().optional(),
+  oidcClientId: z.string().optional(),
+  oidcClientSecret: z.string().optional(),
   scopes: z.nullable(z.array(z.string())).optional(),
 });
 

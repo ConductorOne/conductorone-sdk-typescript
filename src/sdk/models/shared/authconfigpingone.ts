@@ -14,15 +14,15 @@ export type AuthConfigPingOne = {
   /**
    * The environmentId field.
    */
-  environmentId?: string | null | undefined;
+  environmentId?: string | undefined;
   /**
    * The oidcClientId field.
    */
-  oidcClientId?: string | null | undefined;
+  oidcClientId?: string | undefined;
   /**
    * The oidcClientSecret field.
    */
-  oidcClientSecret?: string | null | undefined;
+  oidcClientSecret?: string | undefined;
 };
 
 /** @internal */
@@ -31,15 +31,15 @@ export const AuthConfigPingOne$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  environmentId: z.nullable(z.string()).optional(),
-  oidcClientId: z.nullable(z.string()).optional(),
-  oidcClientSecret: z.nullable(z.string()).optional(),
+  environmentId: z.string().optional(),
+  oidcClientId: z.string().optional(),
+  oidcClientSecret: z.string().optional(),
 });
 /** @internal */
 export type AuthConfigPingOne$Outbound = {
-  environmentId?: string | null | undefined;
-  oidcClientId?: string | null | undefined;
-  oidcClientSecret?: string | null | undefined;
+  environmentId?: string | undefined;
+  oidcClientId?: string | undefined;
+  oidcClientSecret?: string | undefined;
 };
 
 /** @internal */
@@ -48,9 +48,9 @@ export const AuthConfigPingOne$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AuthConfigPingOne
 > = z.object({
-  environmentId: z.nullable(z.string()).optional(),
-  oidcClientId: z.nullable(z.string()).optional(),
-  oidcClientSecret: z.nullable(z.string()).optional(),
+  environmentId: z.string().optional(),
+  oidcClientId: z.string().optional(),
+  oidcClientSecret: z.string().optional(),
 });
 
 export function authConfigPingOneToJSON(

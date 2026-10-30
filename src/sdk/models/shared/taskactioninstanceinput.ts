@@ -4,6 +4,11 @@
 
 import * as z from "zod/v3";
 import {
+  BatonResourceActionRefInput,
+  BatonResourceActionRefInput$Outbound,
+  BatonResourceActionRefInput$outboundSchema,
+} from "./batonresourceactionrefinput.js";
+import {
   ConnectorActionRefInput,
   ConnectorActionRefInput$Outbound,
   ConnectorActionRefInput$outboundSchema,
@@ -16,14 +21,20 @@ import {
  *  Action captured on a TaskTypeAction at ticket-creation time.
  *
  * This message contains a oneof named target_ref. Only a single field of the following list may be set at a time:
+ *   - batonResourceActionRef
  *   - connectorActionRef
  */
 export type TaskActionInstanceInput = {
+  batonResourceActionRef?: BatonResourceActionRefInput | null | undefined;
   connectorActionRef?: ConnectorActionRefInput | null | undefined;
 };
 
 /** @internal */
 export type TaskActionInstanceInput$Outbound = {
+  batonResourceActionRef?:
+    | BatonResourceActionRefInput$Outbound
+    | null
+    | undefined;
   connectorActionRef?: ConnectorActionRefInput$Outbound | null | undefined;
 };
 
@@ -33,6 +44,8 @@ export const TaskActionInstanceInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskActionInstanceInput
 > = z.object({
+  batonResourceActionRef: z.nullable(BatonResourceActionRefInput$outboundSchema)
+    .optional(),
   connectorActionRef: z.nullable(ConnectorActionRefInput$outboundSchema)
     .optional(),
 });

@@ -8,40 +8,240 @@ import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import { AppUserTarget, AppUserTarget$inboundSchema } from "./appusertarget.js";
+import {
+  AppResourceTarget,
+  AppResourceTarget$inboundSchema,
+  AppResourceTarget$Outbound,
+  AppResourceTarget$outboundSchema,
+} from "./appresourcetarget.js";
+import {
+  AppUserTarget,
+  AppUserTarget$inboundSchema,
+  AppUserTarget$Outbound,
+  AppUserTarget$outboundSchema,
+} from "./appusertarget.js";
+import {
+  ConnectorAnomalyDetectionDisabledType,
+  ConnectorAnomalyDetectionDisabledType$inboundSchema,
+  ConnectorAnomalyDetectionDisabledType$Outbound,
+  ConnectorAnomalyDetectionDisabledType$outboundSchema,
+} from "./connectoranomalydetectiondisabledtype.js";
+import {
+  ConnectorSyncFailingEvidence,
+  ConnectorSyncFailingEvidence$inboundSchema,
+  ConnectorSyncFailingEvidence$Outbound,
+  ConnectorSyncFailingEvidence$outboundSchema,
+} from "./connectorsyncfailingevidence.js";
+import {
+  ConnectorSyncFailingType,
+  ConnectorSyncFailingType$inboundSchema,
+  ConnectorSyncFailingType$Outbound,
+  ConnectorSyncFailingType$outboundSchema,
+} from "./connectorsyncfailingtype.js";
+import {
+  ConnectorTarget,
+  ConnectorTarget$inboundSchema,
+  ConnectorTarget$Outbound,
+  ConnectorTarget$outboundSchema,
+} from "./connectortarget.js";
+import {
+  CredentialExpiringEvidence,
+  CredentialExpiringEvidence$inboundSchema,
+  CredentialExpiringEvidence$Outbound,
+  CredentialExpiringEvidence$outboundSchema,
+} from "./credentialexpiringevidence.js";
+import {
+  CredentialExpiringType,
+  CredentialExpiringType$inboundSchema,
+  CredentialExpiringType$Outbound,
+  CredentialExpiringType$outboundSchema,
+} from "./credentialexpiringtype.js";
+import {
+  CredentialPubliclyExposedEvidence,
+  CredentialPubliclyExposedEvidence$inboundSchema,
+  CredentialPubliclyExposedEvidence$Outbound,
+  CredentialPubliclyExposedEvidence$outboundSchema,
+} from "./credentialpubliclyexposedevidence.js";
+import {
+  CredentialPubliclyExposedType,
+  CredentialPubliclyExposedType$inboundSchema,
+  CredentialPubliclyExposedType$Outbound,
+  CredentialPubliclyExposedType$outboundSchema,
+} from "./credentialpubliclyexposedtype.js";
+import {
+  CustomFindingType,
+  CustomFindingType$inboundSchema,
+  CustomFindingType$Outbound,
+  CustomFindingType$outboundSchema,
+} from "./customfindingtype.js";
+import {
+  DeactivatedOwnerEvidence,
+  DeactivatedOwnerEvidence$inboundSchema,
+  DeactivatedOwnerEvidence$Outbound,
+  DeactivatedOwnerEvidence$outboundSchema,
+} from "./deactivatedownerevidence.js";
+import {
+  DeactivatedOwnerType,
+  DeactivatedOwnerType$inboundSchema,
+  DeactivatedOwnerType$Outbound,
+  DeactivatedOwnerType$outboundSchema,
+} from "./deactivatedownertype.js";
 import {
   DecoyCredentialUsedType,
   DecoyCredentialUsedType$inboundSchema,
+  DecoyCredentialUsedType$Outbound,
+  DecoyCredentialUsedType$outboundSchema,
 } from "./decoycredentialusedtype.js";
-import { DecoyTarget, DecoyTarget$inboundSchema } from "./decoytarget.js";
+import {
+  DecoyPubliclyExposedEvidence,
+  DecoyPubliclyExposedEvidence$inboundSchema,
+  DecoyPubliclyExposedEvidence$Outbound,
+  DecoyPubliclyExposedEvidence$outboundSchema,
+} from "./decoypubliclyexposedevidence.js";
+import {
+  DecoyPubliclyExposedType,
+  DecoyPubliclyExposedType$inboundSchema,
+  DecoyPubliclyExposedType$Outbound,
+  DecoyPubliclyExposedType$outboundSchema,
+} from "./decoypubliclyexposedtype.js";
+import {
+  DecoyTarget,
+  DecoyTarget$inboundSchema,
+  DecoyTarget$Outbound,
+  DecoyTarget$outboundSchema,
+} from "./decoytarget.js";
+import {
+  EdgeFindingEvidence,
+  EdgeFindingEvidence$inboundSchema,
+  EdgeFindingEvidence$Outbound,
+  EdgeFindingEvidence$outboundSchema,
+} from "./edgefindingevidence.js";
+import {
+  EdgeFindingType,
+  EdgeFindingType$inboundSchema,
+  EdgeFindingType$Outbound,
+  EdgeFindingType$outboundSchema,
+} from "./edgefindingtype.js";
 import {
   FindingOwnerRef,
   FindingOwnerRef$inboundSchema,
+  FindingOwnerRef$Outbound,
+  FindingOwnerRef$outboundSchema,
 } from "./findingownerref.js";
 import {
   FindingRiskScore,
   FindingRiskScore$inboundSchema,
+  FindingRiskScore$Outbound,
+  FindingRiskScore$outboundSchema,
 } from "./findingriskscore.js";
 import {
   IdentityUserTarget,
   IdentityUserTarget$inboundSchema,
+  IdentityUserTarget$Outbound,
+  IdentityUserTarget$outboundSchema,
 } from "./identityusertarget.js";
+import {
+  McpGatewayToolCallRiskEvidence,
+  McpGatewayToolCallRiskEvidence$inboundSchema,
+  McpGatewayToolCallRiskEvidence$Outbound,
+  McpGatewayToolCallRiskEvidence$outboundSchema,
+} from "./mcpgatewaytoolcallriskevidence.js";
+import {
+  McpGatewayToolCallRiskType,
+  McpGatewayToolCallRiskType$inboundSchema,
+  McpGatewayToolCallRiskType$Outbound,
+  McpGatewayToolCallRiskType$outboundSchema,
+} from "./mcpgatewaytoolcallrisktype.js";
+import {
+  NhiUnownedEvidence,
+  NhiUnownedEvidence$inboundSchema,
+  NhiUnownedEvidence$Outbound,
+  NhiUnownedEvidence$outboundSchema,
+} from "./nhiunownedevidence.js";
+import {
+  NhiUnownedType,
+  NhiUnownedType$inboundSchema,
+  NhiUnownedType$Outbound,
+  NhiUnownedType$outboundSchema,
+} from "./nhiunownedtype.js";
 import {
   ServiceAccountMisclassificationEvidence,
   ServiceAccountMisclassificationEvidence$inboundSchema,
+  ServiceAccountMisclassificationEvidence$Outbound,
+  ServiceAccountMisclassificationEvidence$outboundSchema,
 } from "./serviceaccountmisclassificationevidence.js";
 import {
   ServiceAccountMisclassificationType,
   ServiceAccountMisclassificationType$inboundSchema,
+  ServiceAccountMisclassificationType$Outbound,
+  ServiceAccountMisclassificationType$outboundSchema,
 } from "./serviceaccountmisclassificationtype.js";
+import {
+  ServiceAccountUnownedType,
+  ServiceAccountUnownedType$inboundSchema,
+  ServiceAccountUnownedType$Outbound,
+  ServiceAccountUnownedType$outboundSchema,
+} from "./serviceaccountunownedtype.js";
+import {
+  ShadowAppType,
+  ShadowAppType$inboundSchema,
+  ShadowAppType$Outbound,
+  ShadowAppType$outboundSchema,
+} from "./shadowapptype.js";
+import {
+  ShadowMcpEvidence,
+  ShadowMcpEvidence$inboundSchema,
+  ShadowMcpEvidence$Outbound,
+  ShadowMcpEvidence$outboundSchema,
+} from "./shadowmcpevidence.js";
+import {
+  ShadowMcpType,
+  ShadowMcpType$inboundSchema,
+  ShadowMcpType$Outbound,
+  ShadowMcpType$outboundSchema,
+} from "./shadowmcptype.js";
 import {
   SimilarUsernameMatchEvidence,
   SimilarUsernameMatchEvidence$inboundSchema,
+  SimilarUsernameMatchEvidence$Outbound,
+  SimilarUsernameMatchEvidence$outboundSchema,
 } from "./similarusernamematchevidence.js";
 import {
   SimilarUsernameMatchType,
   SimilarUsernameMatchType$inboundSchema,
+  SimilarUsernameMatchType$Outbound,
+  SimilarUsernameMatchType$outboundSchema,
 } from "./similarusernamematchtype.js";
+import {
+  TenantTarget,
+  TenantTarget$inboundSchema,
+  TenantTarget$Outbound,
+  TenantTarget$outboundSchema,
+} from "./tenanttarget.js";
+import {
+  UnusedSecretEvidence,
+  UnusedSecretEvidence$inboundSchema,
+  UnusedSecretEvidence$Outbound,
+  UnusedSecretEvidence$outboundSchema,
+} from "./unusedsecretevidence.js";
+import {
+  UnusedSecretType,
+  UnusedSecretType$inboundSchema,
+  UnusedSecretType$Outbound,
+  UnusedSecretType$outboundSchema,
+} from "./unusedsecrettype.js";
+import {
+  UsageResourceRef,
+  UsageResourceRef$inboundSchema,
+  UsageResourceRef$Outbound,
+  UsageResourceRef$outboundSchema,
+} from "./usageresourceref.js";
+import {
+  UserActorObjectPermissions,
+  UserActorObjectPermissions$inboundSchema,
+  UserActorObjectPermissions$Outbound,
+  UserActorObjectPermissions$outboundSchema,
+} from "./useractorobjectpermissions.js";
 
 /**
  * The severity field.
@@ -58,6 +258,19 @@ export const FindingSeverity = {
  * The severity field.
  */
 export type FindingSeverity = OpenEnum<typeof FindingSeverity>;
+
+/**
+ * Who authored the finding (detector, user, external).
+ */
+export const SourceKind = {
+  FindingSourceKindUnspecified: "FINDING_SOURCE_KIND_UNSPECIFIED",
+  FindingSourceKindDetector: "FINDING_SOURCE_KIND_DETECTOR",
+  FindingSourceKindExternal: "FINDING_SOURCE_KIND_EXTERNAL",
+} as const;
+/**
+ * Who authored the finding (detector, user, external).
+ */
+export type SourceKind = OpenEnum<typeof SourceKind>;
 
 /**
  * The state field.
@@ -84,57 +297,155 @@ export type FindingState = OpenEnum<typeof FindingState>;
  * This message contains a oneof named finding_type. Only a single field of the following list may be set at a time:
  *   - similarUsernameMatch
  *   - serviceAccountMisclassification
+ *   - nhiUnowned
+ *   - serviceAccountUnowned
  *   - decoyCredentialUsed
+ *   - custom
+ *   - connectorAnomalyDetectionDisabled
+ *   - deactivatedOwner
+ *   - unusedSecret
+ *   - credentialPubliclyExposed
+ *   - decoyPubliclyExposed
+ *   - credentialExpiring
+ *   - connectorSyncFailing
+ *   - shadowMcp
+ *   - shadowApp
+ *   - mcpGatewayToolCallRisk
+ *   - edgeFinding
  *
  * This message contains a oneof named target. Only a single field of the following list may be set at a time:
  *   - identityUserTarget
  *   - appUserTarget
  *   - decoyTarget
+ *   - appResourceTarget
+ *   - tenantTarget
+ *   - connectorTarget
+ *   - usageResourceTarget
  *
  * This message contains a oneof named evidence. Only a single field of the following list may be set at a time:
  *   - similarUsernameMatchEvidence
  *   - serviceAccountMisclassificationEvidence
+ *   - nhiUnownedEvidence
+ *   - deactivatedOwnerEvidence
+ *   - unusedSecretEvidence
+ *   - credentialPubliclyExposedEvidence
+ *   - decoyPubliclyExposedEvidence
+ *   - credentialExpiringEvidence
+ *   - connectorSyncFailingEvidence
+ *   - shadowMcpEvidence
+ *   - mcpGatewayToolCallRiskEvidence
+ *   - edgeFindingEvidence
  */
 export type Finding = {
   /**
+   * Bounded key/value metadata bag. Limits: ≤16 entries; keys 1-128 chars
+   *
+   * @remarks
+   *  matching ^[A-Za-z][A-Za-z0-9._/-]{0,127}$; values 0-256 chars; total
+   *  serialized ≤4096 bytes. Keys matching ^c1/ are reserved. Also readable
+   *  (and settable) via CEL as both finding.annotations and finding.custom_tags.
+   */
+  annotations?: { [k: string]: string } | undefined;
+  /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
+  appResourceTarget?: AppResourceTarget | null | undefined;
   appUserTarget?: AppUserTarget | null | undefined;
   assignedOwner?: FindingOwnerRef | null | undefined;
-  computedOwner?: FindingOwnerRef | null | undefined;
-  createdAt?: Date | null | undefined;
   /**
-   * The customTags field.
+   * Identity user this finding is assigned to. Empty when unassigned.
+   */
+  assigneeIdentityUserId?: string | undefined;
+  computedOwner?: FindingOwnerRef | null | undefined;
+  connectorAnomalyDetectionDisabled?:
+    | ConnectorAnomalyDetectionDisabledType
+    | null
+    | undefined;
+  connectorSyncFailing?: ConnectorSyncFailingType | null | undefined;
+  connectorSyncFailingEvidence?:
+    | ConnectorSyncFailingEvidence
+    | null
+    | undefined;
+  connectorTarget?: ConnectorTarget | null | undefined;
+  createdAt?: Date | null | undefined;
+  credentialExpiring?: CredentialExpiringType | null | undefined;
+  credentialExpiringEvidence?: CredentialExpiringEvidence | null | undefined;
+  credentialPubliclyExposed?: CredentialPubliclyExposedType | null | undefined;
+  credentialPubliclyExposedEvidence?:
+    | CredentialPubliclyExposedEvidence
+    | null
+    | undefined;
+  custom?: CustomFindingType | null | undefined;
+  /**
+   * User-supplied sub-classification for custom findings (e.g. "shadow_it").
+   */
+  customSubType?: string | undefined;
+  /**
+   * Deprecated: use annotations instead. Read-only mirror of annotations;
+   *
+   * @remarks
+   *  writes to this field are ignored.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   customTags?: { [k: string]: string } | undefined;
+  deactivatedOwner?: DeactivatedOwnerType | null | undefined;
+  deactivatedOwnerEvidence?: DeactivatedOwnerEvidence | null | undefined;
   decoyCredentialUsed?: DecoyCredentialUsedType | null | undefined;
+  decoyPubliclyExposed?: DecoyPubliclyExposedType | null | undefined;
+  decoyPubliclyExposedEvidence?:
+    | DecoyPubliclyExposedEvidence
+    | null
+    | undefined;
   decoyTarget?: DecoyTarget | null | undefined;
+  /**
+   * Caller-supplied dedup identity for custom findings; echoed back so IaC
+   *
+   * @remarks
+   *  clients can roundtrip it. Empty for detector findings.
+   */
+  dedupKeyParts?: Array<string> | null | undefined;
+  /**
+   * User-authored finding body (markdown by convention). Set for custom findings.
+   */
+  description?: string | undefined;
+  edgeFinding?: EdgeFindingType | null | undefined;
+  edgeFindingEvidence?: EdgeFindingEvidence | null | undefined;
   /**
    * The fingerprint field.
    */
-  fingerprint?: string | null | undefined;
+  fingerprint?: string | undefined;
   firstObservedAt?: Date | null | undefined;
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   identityUserTarget?: IdentityUserTarget | null | undefined;
+  lastAppearedAt?: Date | null | undefined;
   lastObservedAt?: Date | null | undefined;
+  mcpGatewayToolCallRisk?: McpGatewayToolCallRiskType | null | undefined;
+  mcpGatewayToolCallRiskEvidence?:
+    | McpGatewayToolCallRiskEvidence
+    | null
+    | undefined;
+  nhiUnowned?: NhiUnownedType | null | undefined;
+  nhiUnownedEvidence?: NhiUnownedEvidence | null | undefined;
+  objectPermissions?: UserActorObjectPermissions | null | undefined;
   /**
    * The recurrenceCount field.
    */
-  recurrenceCount?: number | null | undefined;
+  recurrenceCount?: number | undefined;
   /**
    * The remediationDescription field.
    */
-  remediationDescription?: string | null | undefined;
+  remediationDescription?: string | undefined;
   resolvedAt?: Date | null | undefined;
   riskAcceptanceExpiresAt?: Date | null | undefined;
   /**
    * The riskAcceptanceJustification field.
    */
-  riskAcceptanceJustification?: string | null | undefined;
+  riskAcceptanceJustification?: string | undefined;
   riskScore?: FindingRiskScore | null | undefined;
   serviceAccountMisclassification?:
     | ServiceAccountMisclassificationType
@@ -144,10 +455,14 @@ export type Finding = {
     | ServiceAccountMisclassificationEvidence
     | null
     | undefined;
+  serviceAccountUnowned?: ServiceAccountUnownedType | null | undefined;
   /**
    * The severity field.
    */
-  severity?: FindingSeverity | null | undefined;
+  severity?: FindingSeverity | undefined;
+  shadowApp?: ShadowAppType | null | undefined;
+  shadowMcp?: ShadowMcpType | null | undefined;
+  shadowMcpEvidence?: ShadowMcpEvidence | null | undefined;
   similarUsernameMatch?: SimilarUsernameMatchType | null | undefined;
   similarUsernameMatchEvidence?:
     | SimilarUsernameMatchEvidence
@@ -156,29 +471,41 @@ export type Finding = {
   /**
    * The snoozeReason field.
    */
-  snoozeReason?: string | null | undefined;
+  snoozeReason?: string | undefined;
   snoozeUntil?: Date | null | undefined;
   /**
    * The sourceDetectorId field.
    */
-  sourceDetectorId?: string | null | undefined;
+  sourceDetectorId?: string | undefined;
+  /**
+   * Who authored the finding (detector, user, external).
+   */
+  sourceKind?: SourceKind | undefined;
   /**
    * The state field.
    */
-  state?: FindingState | null | undefined;
+  state?: FindingState | undefined;
   /**
-   * The stateUpdatedById field.
+   * The human who authored the CURRENT state. Empty when a routing rule or the
+   *
+   * @remarks
+   *  system authored it, so do not read a populated value as "this finding has a
+   *  human owner" -- read it as "a human set the state it is in right now".
    */
-  stateUpdatedById?: string | null | undefined;
+  stateUpdatedById?: string | undefined;
   /**
    * The suppressReason field.
    */
-  suppressReason?: string | null | undefined;
+  suppressReason?: string | undefined;
   /**
    * The taskId field.
    */
-  taskId?: string | null | undefined;
+  taskId?: string | undefined;
+  tenantTarget?: TenantTarget | null | undefined;
+  unusedSecret?: UnusedSecretType | null | undefined;
+  unusedSecretEvidence?: UnusedSecretEvidence | null | undefined;
   updatedAt?: Date | null | undefined;
+  usageResourceTarget?: UsageResourceRef | null | undefined;
 };
 
 /** @internal */
@@ -187,6 +514,25 @@ export const FindingSeverity$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = openEnums.inboundSchema(FindingSeverity);
+/** @internal */
+export const FindingSeverity$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  FindingSeverity
+> = openEnums.outboundSchema(FindingSeverity);
+
+/** @internal */
+export const SourceKind$inboundSchema: z.ZodType<
+  SourceKind,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(SourceKind);
+/** @internal */
+export const SourceKind$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  SourceKind
+> = openEnums.outboundSchema(SourceKind);
 
 /** @internal */
 export const FindingState$inboundSchema: z.ZodType<
@@ -194,39 +540,95 @@ export const FindingState$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = openEnums.inboundSchema(FindingState);
+/** @internal */
+export const FindingState$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  FindingState
+> = openEnums.outboundSchema(FindingState);
 
 /** @internal */
 export const Finding$inboundSchema: z.ZodType<Finding, z.ZodTypeDef, unknown> =
   z.object({
-    appId: z.nullable(z.string()).optional(),
+    annotations: z.record(z.string()).optional(),
+    appId: z.string().optional(),
+    appResourceTarget: z.nullable(AppResourceTarget$inboundSchema).optional(),
     appUserTarget: z.nullable(AppUserTarget$inboundSchema).optional(),
     assignedOwner: z.nullable(FindingOwnerRef$inboundSchema).optional(),
+    assigneeIdentityUserId: z.string().optional(),
     computedOwner: z.nullable(FindingOwnerRef$inboundSchema).optional(),
+    connectorAnomalyDetectionDisabled: z.nullable(
+      ConnectorAnomalyDetectionDisabledType$inboundSchema,
+    ).optional(),
+    connectorSyncFailing: z.nullable(ConnectorSyncFailingType$inboundSchema)
+      .optional(),
+    connectorSyncFailingEvidence: z.nullable(
+      ConnectorSyncFailingEvidence$inboundSchema,
+    ).optional(),
+    connectorTarget: z.nullable(ConnectorTarget$inboundSchema).optional(),
     createdAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
+    credentialExpiring: z.nullable(CredentialExpiringType$inboundSchema)
+      .optional(),
+    credentialExpiringEvidence: z.nullable(
+      CredentialExpiringEvidence$inboundSchema,
+    ).optional(),
+    credentialPubliclyExposed: z.nullable(
+      CredentialPubliclyExposedType$inboundSchema,
+    ).optional(),
+    credentialPubliclyExposedEvidence: z.nullable(
+      CredentialPubliclyExposedEvidence$inboundSchema,
+    ).optional(),
+    custom: z.nullable(CustomFindingType$inboundSchema).optional(),
+    customSubType: z.string().optional(),
     customTags: z.record(z.string()).optional(),
+    deactivatedOwner: z.nullable(DeactivatedOwnerType$inboundSchema).optional(),
+    deactivatedOwnerEvidence: z.nullable(DeactivatedOwnerEvidence$inboundSchema)
+      .optional(),
     decoyCredentialUsed: z.nullable(DecoyCredentialUsedType$inboundSchema)
       .optional(),
+    decoyPubliclyExposed: z.nullable(DecoyPubliclyExposedType$inboundSchema)
+      .optional(),
+    decoyPubliclyExposedEvidence: z.nullable(
+      DecoyPubliclyExposedEvidence$inboundSchema,
+    ).optional(),
     decoyTarget: z.nullable(DecoyTarget$inboundSchema).optional(),
-    fingerprint: z.nullable(z.string()).optional(),
+    dedupKeyParts: z.nullable(z.array(z.string())).optional(),
+    description: z.string().optional(),
+    edgeFinding: z.nullable(EdgeFindingType$inboundSchema).optional(),
+    edgeFindingEvidence: z.nullable(EdgeFindingEvidence$inboundSchema)
+      .optional(),
+    fingerprint: z.string().optional(),
     firstObservedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    id: z.nullable(z.string()).optional(),
+    id: z.string().optional(),
     identityUserTarget: z.nullable(IdentityUserTarget$inboundSchema).optional(),
+    lastAppearedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
     lastObservedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    recurrenceCount: z.nullable(z.number().int()).optional(),
-    remediationDescription: z.nullable(z.string()).optional(),
+    mcpGatewayToolCallRisk: z.nullable(McpGatewayToolCallRiskType$inboundSchema)
+      .optional(),
+    mcpGatewayToolCallRiskEvidence: z.nullable(
+      McpGatewayToolCallRiskEvidence$inboundSchema,
+    ).optional(),
+    nhiUnowned: z.nullable(NhiUnownedType$inboundSchema).optional(),
+    nhiUnownedEvidence: z.nullable(NhiUnownedEvidence$inboundSchema).optional(),
+    objectPermissions: z.nullable(UserActorObjectPermissions$inboundSchema)
+      .optional(),
+    recurrenceCount: z.number().int().optional(),
+    remediationDescription: z.string().optional(),
     resolvedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
     riskAcceptanceExpiresAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    riskAcceptanceJustification: z.nullable(z.string()).optional(),
+    riskAcceptanceJustification: z.string().optional(),
     riskScore: z.nullable(FindingRiskScore$inboundSchema).optional(),
     serviceAccountMisclassification: z.nullable(
       ServiceAccountMisclassificationType$inboundSchema,
@@ -234,26 +636,258 @@ export const Finding$inboundSchema: z.ZodType<Finding, z.ZodTypeDef, unknown> =
     serviceAccountMisclassificationEvidence: z.nullable(
       ServiceAccountMisclassificationEvidence$inboundSchema,
     ).optional(),
-    severity: z.nullable(FindingSeverity$inboundSchema).optional(),
+    serviceAccountUnowned: z.nullable(ServiceAccountUnownedType$inboundSchema)
+      .optional(),
+    severity: FindingSeverity$inboundSchema.optional(),
+    shadowApp: z.nullable(ShadowAppType$inboundSchema).optional(),
+    shadowMcp: z.nullable(ShadowMcpType$inboundSchema).optional(),
+    shadowMcpEvidence: z.nullable(ShadowMcpEvidence$inboundSchema).optional(),
     similarUsernameMatch: z.nullable(SimilarUsernameMatchType$inboundSchema)
       .optional(),
     similarUsernameMatchEvidence: z.nullable(
       SimilarUsernameMatchEvidence$inboundSchema,
     ).optional(),
-    snoozeReason: z.nullable(z.string()).optional(),
+    snoozeReason: z.string().optional(),
     snoozeUntil: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    sourceDetectorId: z.nullable(z.string()).optional(),
-    state: z.nullable(FindingState$inboundSchema).optional(),
-    stateUpdatedById: z.nullable(z.string()).optional(),
-    suppressReason: z.nullable(z.string()).optional(),
-    taskId: z.nullable(z.string()).optional(),
+    sourceDetectorId: z.string().optional(),
+    sourceKind: SourceKind$inboundSchema.optional(),
+    state: FindingState$inboundSchema.optional(),
+    stateUpdatedById: z.string().optional(),
+    suppressReason: z.string().optional(),
+    taskId: z.string().optional(),
+    tenantTarget: z.nullable(TenantTarget$inboundSchema).optional(),
+    unusedSecret: z.nullable(UnusedSecretType$inboundSchema).optional(),
+    unusedSecretEvidence: z.nullable(UnusedSecretEvidence$inboundSchema)
+      .optional(),
     updatedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
+    usageResourceTarget: z.nullable(UsageResourceRef$inboundSchema).optional(),
   });
+/** @internal */
+export type Finding$Outbound = {
+  annotations?: { [k: string]: string } | undefined;
+  appId?: string | undefined;
+  appResourceTarget?: AppResourceTarget$Outbound | null | undefined;
+  appUserTarget?: AppUserTarget$Outbound | null | undefined;
+  assignedOwner?: FindingOwnerRef$Outbound | null | undefined;
+  assigneeIdentityUserId?: string | undefined;
+  computedOwner?: FindingOwnerRef$Outbound | null | undefined;
+  connectorAnomalyDetectionDisabled?:
+    | ConnectorAnomalyDetectionDisabledType$Outbound
+    | null
+    | undefined;
+  connectorSyncFailing?: ConnectorSyncFailingType$Outbound | null | undefined;
+  connectorSyncFailingEvidence?:
+    | ConnectorSyncFailingEvidence$Outbound
+    | null
+    | undefined;
+  connectorTarget?: ConnectorTarget$Outbound | null | undefined;
+  createdAt?: string | null | undefined;
+  credentialExpiring?: CredentialExpiringType$Outbound | null | undefined;
+  credentialExpiringEvidence?:
+    | CredentialExpiringEvidence$Outbound
+    | null
+    | undefined;
+  credentialPubliclyExposed?:
+    | CredentialPubliclyExposedType$Outbound
+    | null
+    | undefined;
+  credentialPubliclyExposedEvidence?:
+    | CredentialPubliclyExposedEvidence$Outbound
+    | null
+    | undefined;
+  custom?: CustomFindingType$Outbound | null | undefined;
+  customSubType?: string | undefined;
+  customTags?: { [k: string]: string } | undefined;
+  deactivatedOwner?: DeactivatedOwnerType$Outbound | null | undefined;
+  deactivatedOwnerEvidence?:
+    | DeactivatedOwnerEvidence$Outbound
+    | null
+    | undefined;
+  decoyCredentialUsed?: DecoyCredentialUsedType$Outbound | null | undefined;
+  decoyPubliclyExposed?: DecoyPubliclyExposedType$Outbound | null | undefined;
+  decoyPubliclyExposedEvidence?:
+    | DecoyPubliclyExposedEvidence$Outbound
+    | null
+    | undefined;
+  decoyTarget?: DecoyTarget$Outbound | null | undefined;
+  dedupKeyParts?: Array<string> | null | undefined;
+  description?: string | undefined;
+  edgeFinding?: EdgeFindingType$Outbound | null | undefined;
+  edgeFindingEvidence?: EdgeFindingEvidence$Outbound | null | undefined;
+  fingerprint?: string | undefined;
+  firstObservedAt?: string | null | undefined;
+  id?: string | undefined;
+  identityUserTarget?: IdentityUserTarget$Outbound | null | undefined;
+  lastAppearedAt?: string | null | undefined;
+  lastObservedAt?: string | null | undefined;
+  mcpGatewayToolCallRisk?:
+    | McpGatewayToolCallRiskType$Outbound
+    | null
+    | undefined;
+  mcpGatewayToolCallRiskEvidence?:
+    | McpGatewayToolCallRiskEvidence$Outbound
+    | null
+    | undefined;
+  nhiUnowned?: NhiUnownedType$Outbound | null | undefined;
+  nhiUnownedEvidence?: NhiUnownedEvidence$Outbound | null | undefined;
+  objectPermissions?: UserActorObjectPermissions$Outbound | null | undefined;
+  recurrenceCount?: number | undefined;
+  remediationDescription?: string | undefined;
+  resolvedAt?: string | null | undefined;
+  riskAcceptanceExpiresAt?: string | null | undefined;
+  riskAcceptanceJustification?: string | undefined;
+  riskScore?: FindingRiskScore$Outbound | null | undefined;
+  serviceAccountMisclassification?:
+    | ServiceAccountMisclassificationType$Outbound
+    | null
+    | undefined;
+  serviceAccountMisclassificationEvidence?:
+    | ServiceAccountMisclassificationEvidence$Outbound
+    | null
+    | undefined;
+  serviceAccountUnowned?: ServiceAccountUnownedType$Outbound | null | undefined;
+  severity?: string | undefined;
+  shadowApp?: ShadowAppType$Outbound | null | undefined;
+  shadowMcp?: ShadowMcpType$Outbound | null | undefined;
+  shadowMcpEvidence?: ShadowMcpEvidence$Outbound | null | undefined;
+  similarUsernameMatch?: SimilarUsernameMatchType$Outbound | null | undefined;
+  similarUsernameMatchEvidence?:
+    | SimilarUsernameMatchEvidence$Outbound
+    | null
+    | undefined;
+  snoozeReason?: string | undefined;
+  snoozeUntil?: string | null | undefined;
+  sourceDetectorId?: string | undefined;
+  sourceKind?: string | undefined;
+  state?: string | undefined;
+  stateUpdatedById?: string | undefined;
+  suppressReason?: string | undefined;
+  taskId?: string | undefined;
+  tenantTarget?: TenantTarget$Outbound | null | undefined;
+  unusedSecret?: UnusedSecretType$Outbound | null | undefined;
+  unusedSecretEvidence?: UnusedSecretEvidence$Outbound | null | undefined;
+  updatedAt?: string | null | undefined;
+  usageResourceTarget?: UsageResourceRef$Outbound | null | undefined;
+};
 
+/** @internal */
+export const Finding$outboundSchema: z.ZodType<
+  Finding$Outbound,
+  z.ZodTypeDef,
+  Finding
+> = z.object({
+  annotations: z.record(z.string()).optional(),
+  appId: z.string().optional(),
+  appResourceTarget: z.nullable(AppResourceTarget$outboundSchema).optional(),
+  appUserTarget: z.nullable(AppUserTarget$outboundSchema).optional(),
+  assignedOwner: z.nullable(FindingOwnerRef$outboundSchema).optional(),
+  assigneeIdentityUserId: z.string().optional(),
+  computedOwner: z.nullable(FindingOwnerRef$outboundSchema).optional(),
+  connectorAnomalyDetectionDisabled: z.nullable(
+    ConnectorAnomalyDetectionDisabledType$outboundSchema,
+  ).optional(),
+  connectorSyncFailing: z.nullable(ConnectorSyncFailingType$outboundSchema)
+    .optional(),
+  connectorSyncFailingEvidence: z.nullable(
+    ConnectorSyncFailingEvidence$outboundSchema,
+  ).optional(),
+  connectorTarget: z.nullable(ConnectorTarget$outboundSchema).optional(),
+  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  credentialExpiring: z.nullable(CredentialExpiringType$outboundSchema)
+    .optional(),
+  credentialExpiringEvidence: z.nullable(
+    CredentialExpiringEvidence$outboundSchema,
+  ).optional(),
+  credentialPubliclyExposed: z.nullable(
+    CredentialPubliclyExposedType$outboundSchema,
+  ).optional(),
+  credentialPubliclyExposedEvidence: z.nullable(
+    CredentialPubliclyExposedEvidence$outboundSchema,
+  ).optional(),
+  custom: z.nullable(CustomFindingType$outboundSchema).optional(),
+  customSubType: z.string().optional(),
+  customTags: z.record(z.string()).optional(),
+  deactivatedOwner: z.nullable(DeactivatedOwnerType$outboundSchema).optional(),
+  deactivatedOwnerEvidence: z.nullable(DeactivatedOwnerEvidence$outboundSchema)
+    .optional(),
+  decoyCredentialUsed: z.nullable(DecoyCredentialUsedType$outboundSchema)
+    .optional(),
+  decoyPubliclyExposed: z.nullable(DecoyPubliclyExposedType$outboundSchema)
+    .optional(),
+  decoyPubliclyExposedEvidence: z.nullable(
+    DecoyPubliclyExposedEvidence$outboundSchema,
+  ).optional(),
+  decoyTarget: z.nullable(DecoyTarget$outboundSchema).optional(),
+  dedupKeyParts: z.nullable(z.array(z.string())).optional(),
+  description: z.string().optional(),
+  edgeFinding: z.nullable(EdgeFindingType$outboundSchema).optional(),
+  edgeFindingEvidence: z.nullable(EdgeFindingEvidence$outboundSchema)
+    .optional(),
+  fingerprint: z.string().optional(),
+  firstObservedAt: z.nullable(z.date().transform(v => v.toISOString()))
+    .optional(),
+  id: z.string().optional(),
+  identityUserTarget: z.nullable(IdentityUserTarget$outboundSchema).optional(),
+  lastAppearedAt: z.nullable(z.date().transform(v => v.toISOString()))
+    .optional(),
+  lastObservedAt: z.nullable(z.date().transform(v => v.toISOString()))
+    .optional(),
+  mcpGatewayToolCallRisk: z.nullable(McpGatewayToolCallRiskType$outboundSchema)
+    .optional(),
+  mcpGatewayToolCallRiskEvidence: z.nullable(
+    McpGatewayToolCallRiskEvidence$outboundSchema,
+  ).optional(),
+  nhiUnowned: z.nullable(NhiUnownedType$outboundSchema).optional(),
+  nhiUnownedEvidence: z.nullable(NhiUnownedEvidence$outboundSchema).optional(),
+  objectPermissions: z.nullable(UserActorObjectPermissions$outboundSchema)
+    .optional(),
+  recurrenceCount: z.number().int().optional(),
+  remediationDescription: z.string().optional(),
+  resolvedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  riskAcceptanceExpiresAt: z.nullable(z.date().transform(v => v.toISOString()))
+    .optional(),
+  riskAcceptanceJustification: z.string().optional(),
+  riskScore: z.nullable(FindingRiskScore$outboundSchema).optional(),
+  serviceAccountMisclassification: z.nullable(
+    ServiceAccountMisclassificationType$outboundSchema,
+  ).optional(),
+  serviceAccountMisclassificationEvidence: z.nullable(
+    ServiceAccountMisclassificationEvidence$outboundSchema,
+  ).optional(),
+  serviceAccountUnowned: z.nullable(ServiceAccountUnownedType$outboundSchema)
+    .optional(),
+  severity: FindingSeverity$outboundSchema.optional(),
+  shadowApp: z.nullable(ShadowAppType$outboundSchema).optional(),
+  shadowMcp: z.nullable(ShadowMcpType$outboundSchema).optional(),
+  shadowMcpEvidence: z.nullable(ShadowMcpEvidence$outboundSchema).optional(),
+  similarUsernameMatch: z.nullable(SimilarUsernameMatchType$outboundSchema)
+    .optional(),
+  similarUsernameMatchEvidence: z.nullable(
+    SimilarUsernameMatchEvidence$outboundSchema,
+  ).optional(),
+  snoozeReason: z.string().optional(),
+  snoozeUntil: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  sourceDetectorId: z.string().optional(),
+  sourceKind: SourceKind$outboundSchema.optional(),
+  state: FindingState$outboundSchema.optional(),
+  stateUpdatedById: z.string().optional(),
+  suppressReason: z.string().optional(),
+  taskId: z.string().optional(),
+  tenantTarget: z.nullable(TenantTarget$outboundSchema).optional(),
+  unusedSecret: z.nullable(UnusedSecretType$outboundSchema).optional(),
+  unusedSecretEvidence: z.nullable(UnusedSecretEvidence$outboundSchema)
+    .optional(),
+  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  usageResourceTarget: z.nullable(UsageResourceRef$outboundSchema).optional(),
+});
+
+export function findingToJSON(finding: Finding): string {
+  return JSON.stringify(Finding$outboundSchema.parse(finding));
+}
 export function findingFromJSON(
   jsonString: string,
 ): SafeParseResult<Finding, SDKValidationError> {

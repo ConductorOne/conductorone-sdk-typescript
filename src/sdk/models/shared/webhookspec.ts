@@ -14,7 +14,7 @@ export type WebhookSpec = {
   /**
    * The destination field.
    */
-  destination?: string | null | undefined;
+  destination?: string | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const WebhookSpec$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  destination: z.nullable(z.string()).optional(),
+  destination: z.string().optional(),
 });
 
 export function webhookSpecFromJSON(

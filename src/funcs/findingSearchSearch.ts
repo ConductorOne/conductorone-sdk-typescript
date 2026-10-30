@@ -31,6 +31,7 @@ import { Result } from "../sdk/types/fp.js";
  *
  * @remarks
  * Search findings using full-text query and filters for severity, state, type, and app.
+ *  Each Finding row is large (risk factors, evidence, target, tags) — request a small page_size (≤10) to keep responses small.
  */
 export function findingSearchSearch(
   client: ConductoroneSDKTypescriptCore,

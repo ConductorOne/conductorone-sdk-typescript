@@ -31,6 +31,7 @@ import { Result } from "../sdk/types/fp.js";
  *
  * @remarks
  * Search for versioned snapshots of an automation template's steps and triggers.
+ *  Each version carries a full steps-and-triggers snapshot — request a small page_size (≤10) to keep responses small.
  */
 export function automationSearchSearchAutomationTemplateVersions(
   client: ConductoroneSDKTypescriptCore,

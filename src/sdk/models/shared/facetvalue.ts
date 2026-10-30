@@ -14,19 +14,19 @@ export type FacetValue = {
   /**
    * The count of the values in this facet.
    */
-  count?: number | null | undefined;
+  count?: number | undefined;
   /**
    * The name of this facet.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The icon for this facet.
    */
-  iconUrl?: string | null | undefined;
+  iconUrl?: string | undefined;
   /**
    * The value of this facet.
    */
-  value?: string | null | undefined;
+  value?: string | undefined;
 };
 
 /** @internal */
@@ -35,10 +35,10 @@ export const FacetValue$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  count: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  iconUrl: z.nullable(z.string()).optional(),
-  value: z.nullable(z.string()).optional(),
+  count: z.string().transform(v => parseInt(v, 10)).optional(),
+  displayName: z.string().optional(),
+  iconUrl: z.string().optional(),
+  value: z.string().optional(),
 });
 
 export function facetValueFromJSON(

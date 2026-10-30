@@ -16,13 +16,13 @@ import {
  */
 export type MCPToolServiceListHistoryResponse = {
   /**
-   * The list field.
+   * The page of history entries, newest first.
    */
   list?: Array<MCPToolHistoryEntry> | null | undefined;
   /**
-   * The nextPageToken field.
+   * Pagination token for the next page, or empty if there are no more results.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -32,7 +32,7 @@ export const MCPToolServiceListHistoryResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   list: z.nullable(z.array(MCPToolHistoryEntry$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function mcpToolServiceListHistoryResponseFromJSON(

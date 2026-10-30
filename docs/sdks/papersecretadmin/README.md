@@ -6,7 +6,7 @@
 
 * [search](#search) - Search
 * [searchAuditEvents](#searchauditevents) - Search Audit Events
-* [revoke](#revoke) - Revoke
+* [delete](#delete) - Delete
 * [get](#get) - Get
 
 ## search
@@ -161,13 +161,13 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4XX, 5XX        | \*/\*           |
 
-## revoke
+## delete
 
-Revoke allows admin to revoke any secret (not just their own).
+Delete allows an admin to delete any Paper Vault.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="c1.api.secrets.v1.PaperSecretAdminService.Revoke" method="delete" path="/api/v1/secrets-admin/{vault_id}" -->
+<!-- UsageSnippet language="typescript" operationID="c1.api.secrets.v1.PaperSecretAdminService.Delete" method="delete" path="/api/v1/secrets-admin/{vault_id}" -->
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 
@@ -179,7 +179,7 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 });
 
 async function run() {
-  const result = await conductoroneSDKTypescript.paperSecretAdmin.revoke({
+  const result = await conductoroneSDKTypescript.paperSecretAdmin.delete({
     vaultId: "<id>",
   });
 
@@ -195,7 +195,7 @@ The standalone function version of this method:
 
 ```typescript
 import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
-import { paperSecretAdminRevoke } from "conductorone-sdk-typescript/funcs/paperSecretAdminRevoke.js";
+import { paperSecretAdminDelete } from "conductorone-sdk-typescript/funcs/paperSecretAdminDelete.js";
 
 // Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -207,14 +207,14 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 });
 
 async function run() {
-  const res = await paperSecretAdminRevoke(conductoroneSDKTypescript, {
+  const res = await paperSecretAdminDelete(conductoroneSDKTypescript, {
     vaultId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("paperSecretAdminRevoke failed:", res.error);
+    console.log("paperSecretAdminDelete failed:", res.error);
   }
 }
 
@@ -225,14 +225,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.C1ApiSecretsV1PaperSecretAdminServiceRevokeRequest](../../sdk/models/operations/c1apisecretsv1papersecretadminservicerevokerequest.md)                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.C1ApiSecretsV1PaperSecretAdminServiceDeleteRequest](../../sdk/models/operations/c1apisecretsv1papersecretadminservicedeleterequest.md)                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.C1ApiSecretsV1PaperSecretAdminServiceRevokeResponse](../../sdk/models/operations/c1apisecretsv1papersecretadminservicerevokeresponse.md)\>**
+**Promise\<[operations.C1ApiSecretsV1PaperSecretAdminServiceDeleteResponse](../../sdk/models/operations/c1apisecretsv1papersecretadminservicedeleteresponse.md)\>**
 
 ### Errors
 

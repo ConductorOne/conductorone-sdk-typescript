@@ -36,7 +36,7 @@ export type AppUserCreatedTrigger = {
   /**
    * The condition field.
    */
-  condition?: string | null | undefined;
+  condition?: string | undefined;
 };
 
 /** @internal */
@@ -47,13 +47,13 @@ export const AppUserCreatedTrigger$inboundSchema: z.ZodType<
 > = z.object({
   appId: z.nullable(z.string()).optional(),
   appIdCel: z.nullable(z.string()).optional(),
-  condition: z.nullable(z.string()).optional(),
+  condition: z.string().optional(),
 });
 /** @internal */
 export type AppUserCreatedTrigger$Outbound = {
   appId?: string | null | undefined;
   appIdCel?: string | null | undefined;
-  condition?: string | null | undefined;
+  condition?: string | undefined;
 };
 
 /** @internal */
@@ -64,7 +64,7 @@ export const AppUserCreatedTrigger$outboundSchema: z.ZodType<
 > = z.object({
   appId: z.nullable(z.string()).optional(),
   appIdCel: z.nullable(z.string()).optional(),
-  condition: z.nullable(z.string()).optional(),
+  condition: z.string().optional(),
 });
 
 export function appUserCreatedTriggerToJSON(

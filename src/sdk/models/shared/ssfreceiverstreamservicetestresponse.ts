@@ -37,58 +37,55 @@ export type SSFReceiverStreamServiceTestResponse = {
   /**
    * Number of active refresh tokens for the matched user that would be affected.
    */
-  activeRefreshTokenCount?: number | null | undefined;
+  activeRefreshTokenCount?: number | undefined;
   /**
    * Number of active sessions for the matched user that would be affected.
    */
-  activeSessionCount?: number | null | undefined;
+  activeSessionCount?: number | undefined;
   /**
    * Step 3: Action preview.
    *
    * @remarks
    *  The action configured for session-revoked events on this stream.
    */
-  configuredSessionRevokedAction?:
-    | ConfiguredSessionRevokedAction
-    | null
-    | undefined;
+  configuredSessionRevokedAction?: ConfiguredSessionRevokedAction | undefined;
   /**
    * Step 2: Identity mapping.
    *
    * @remarks
    *  Whether the test subject was resolved to a ConductorOne user.
    */
-  identityLinkFound?: boolean | null | undefined;
+  identityLinkFound?: boolean | undefined;
   /**
    * Error message if the JWKS endpoint could not be reached or returned invalid data.
    */
-  jwksError?: string | null | undefined;
+  jwksError?: string | undefined;
   /**
    * Number of signing keys found at the JWKS endpoint.
    */
-  jwksKeyCount?: number | null | undefined;
+  jwksKeyCount?: number | undefined;
   /**
    * Step 1: JWKS reachability.
    *
    * @remarks
    *  Whether the JWKS endpoint was reachable and returned valid keys.
    */
-  jwksReachable?: boolean | null | undefined;
+  jwksReachable?: boolean | undefined;
   /**
    * The ConductorOne user ID the test subject maps to, if an identity link was found.
    */
-  matchedUserId?: string | null | undefined;
+  matchedUserId?: string | undefined;
   /**
    * Overall readiness.
    *
    * @remarks
    *  Whether the stream passed all test checks and is ready to process events.
    */
-  ready?: boolean | null | undefined;
+  ready?: boolean | undefined;
   /**
    * The upstream IdP subject identifier (e.g., Okta user ID "00u1234") resolved from the test subject.
    */
-  upstreamSubject?: string | null | undefined;
+  upstreamSubject?: string | undefined;
 };
 
 /** @internal */
@@ -104,18 +101,17 @@ export const SSFReceiverStreamServiceTestResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  activeRefreshTokenCount: z.nullable(z.number().int()).optional(),
-  activeSessionCount: z.nullable(z.number().int()).optional(),
-  configuredSessionRevokedAction: z.nullable(
-    ConfiguredSessionRevokedAction$inboundSchema,
-  ).optional(),
-  identityLinkFound: z.nullable(z.boolean()).optional(),
-  jwksError: z.nullable(z.string()).optional(),
-  jwksKeyCount: z.nullable(z.number().int()).optional(),
-  jwksReachable: z.nullable(z.boolean()).optional(),
-  matchedUserId: z.nullable(z.string()).optional(),
-  ready: z.nullable(z.boolean()).optional(),
-  upstreamSubject: z.nullable(z.string()).optional(),
+  activeRefreshTokenCount: z.number().int().optional(),
+  activeSessionCount: z.number().int().optional(),
+  configuredSessionRevokedAction: ConfiguredSessionRevokedAction$inboundSchema
+    .optional(),
+  identityLinkFound: z.boolean().optional(),
+  jwksError: z.string().optional(),
+  jwksKeyCount: z.number().int().optional(),
+  jwksReachable: z.boolean().optional(),
+  matchedUserId: z.string().optional(),
+  ready: z.boolean().optional(),
+  upstreamSubject: z.string().optional(),
 });
 
 export function ssfReceiverStreamServiceTestResponseFromJSON(

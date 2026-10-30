@@ -8,7 +8,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Empty response body. Status code indicates success.
+ * Empty response body. Status code indicates success. Poll the connector sync status
+ *
+ * @remarks
+ *  for progress after ForceSync accepts the request.
  */
 export type ForceSyncResponse = {};
 

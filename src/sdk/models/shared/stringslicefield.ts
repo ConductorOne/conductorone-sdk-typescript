@@ -44,7 +44,7 @@ export type StringSliceField = {
   /**
    * The placeholder field.
    */
-  placeholder?: string | null | undefined;
+  placeholder?: string | undefined;
   rules?: RepeatedRules | null | undefined;
 };
 
@@ -57,7 +57,7 @@ export const StringSliceField$inboundSchema: z.ZodType<
   chipsField: z.nullable(ChipsField$inboundSchema).optional(),
   defaultValues: z.nullable(z.array(z.string())).optional(),
   pickerField: z.nullable(PickerField$inboundSchema).optional(),
-  placeholder: z.nullable(z.string()).optional(),
+  placeholder: z.string().optional(),
   rules: z.nullable(RepeatedRules$inboundSchema).optional(),
 });
 /** @internal */
@@ -65,7 +65,7 @@ export type StringSliceField$Outbound = {
   chipsField?: ChipsField$Outbound | null | undefined;
   defaultValues?: Array<string> | null | undefined;
   pickerField?: PickerField$Outbound | null | undefined;
-  placeholder?: string | null | undefined;
+  placeholder?: string | undefined;
   rules?: RepeatedRules$Outbound | null | undefined;
 };
 
@@ -78,7 +78,7 @@ export const StringSliceField$outboundSchema: z.ZodType<
   chipsField: z.nullable(ChipsField$outboundSchema).optional(),
   defaultValues: z.nullable(z.array(z.string())).optional(),
   pickerField: z.nullable(PickerField$outboundSchema).optional(),
-  placeholder: z.nullable(z.string()).optional(),
+  placeholder: z.string().optional(),
   rules: z.nullable(RepeatedRules$outboundSchema).optional(),
 });
 

@@ -19,11 +19,11 @@ export type AutomationExecutionView = {
   /**
    * The automationExecutionTriggerPath field.
    */
-  automationExecutionTriggerPath?: string | null | undefined;
+  automationExecutionTriggerPath?: string | undefined;
   /**
    * The automationPath field.
    */
-  automationPath?: string | null | undefined;
+  automationPath?: string | undefined;
 };
 
 /** @internal */
@@ -33,8 +33,8 @@ export const AutomationExecutionView$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   automationExecution: z.nullable(AutomationExecution$inboundSchema).optional(),
-  automationExecutionTriggerPath: z.nullable(z.string()).optional(),
-  automationPath: z.nullable(z.string()).optional(),
+  automationExecutionTriggerPath: z.string().optional(),
+  automationPath: z.string().optional(),
 });
 
 export function automationExecutionViewFromJSON(

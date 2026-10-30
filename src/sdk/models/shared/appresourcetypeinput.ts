@@ -11,7 +11,7 @@ export type AppResourceTypeInput = {
   /**
    * The display name of the app resource type.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * Associated trait ids
    */
@@ -20,7 +20,7 @@ export type AppResourceTypeInput = {
 
 /** @internal */
 export type AppResourceTypeInput$Outbound = {
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   traitIds?: Array<string> | null | undefined;
 };
 
@@ -30,7 +30,7 @@ export const AppResourceTypeInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppResourceTypeInput
 > = z.object({
-  displayName: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
   traitIds: z.nullable(z.array(z.string())).optional(),
 });
 

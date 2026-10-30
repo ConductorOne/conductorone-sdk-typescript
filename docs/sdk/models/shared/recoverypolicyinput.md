@@ -1,0 +1,22 @@
+# RecoveryPolicyInput
+
+RecoveryPolicy defines how users recover access when they lose their
+ credentials.
+
+## Example Usage
+
+```typescript
+import { RecoveryPolicyInput } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: RecoveryPolicyInput = {};
+```
+
+## Fields
+
+| Field                                                                                                                                              | Type                                                                                                                                               | Required                                                                                                                                           | Description                                                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `allowedRecoveryTypes`                                                                                                                             | [shared.AllowedRecoveryTypes](../../../sdk/models/shared/allowedrecoverytypes.md)[]                                                                | :heavy_minus_sign:                                                                                                                                 | The credential types a user may use to recover access under this policy.                                                                           |
+| `displayName`                                                                                                                                      | *string*                                                                                                                                           | :heavy_minus_sign:                                                                                                                                 | A human-readable name for the policy.                                                                                                              |
+| `minRecoveryAuthLevel`                                                                                                                             | [shared.MinRecoveryAuthLevel](../../../sdk/models/shared/minrecoveryauthlevel.md)                                                                  | :heavy_minus_sign:                                                                                                                                 | The minimum assurance level a recovery ceremony must reach for this policy.                                                                        |
+| `priority`                                                                                                                                         | *number*                                                                                                                                           | :heavy_minus_sign:                                                                                                                                 | When a user matches more than one policy, the policy with the highest<br/> priority applies.                                                       |
+| `revokeOnRecovery`                                                                                                                                 | *boolean*                                                                                                                                          | :heavy_minus_sign:                                                                                                                                 | When true, a successful recovery revokes the user's existing credentials<br/> and forces re-enrollment. When false, recovery adds to the existing set. |

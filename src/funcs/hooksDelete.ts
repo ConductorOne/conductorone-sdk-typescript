@@ -29,7 +29,8 @@ import { Result } from "../sdk/types/fp.js";
  * Delete
  *
  * @remarks
- * Invokes the c1.api.hooks.v1.HooksService.Delete method.
+ * Delete removes a hook by ID. A hook referenced by a guardrail rule cannot
+ *  be deleted until the reference is removed.
  */
 export function hooksDelete(
   client: ConductoroneSDKTypescriptCore,

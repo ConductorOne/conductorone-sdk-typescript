@@ -11,32 +11,32 @@ export type WorkloadFederationServiceSearchTrustsRequest = {
   /**
    * The pageSize field.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Optional: filter trusts by provider ID.
    */
-  providerId?: string | null | undefined;
+  providerId?: string | undefined;
   /**
    * Optional: full-text search on trust display name and description.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * Optional: filter trusts by service principal ID.
    */
-  servicePrincipalId?: string | null | undefined;
+  servicePrincipalId?: string | undefined;
 };
 
 /** @internal */
 export type WorkloadFederationServiceSearchTrustsRequest$Outbound = {
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  providerId?: string | null | undefined;
-  query?: string | null | undefined;
-  servicePrincipalId?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  providerId?: string | undefined;
+  query?: string | undefined;
+  servicePrincipalId?: string | undefined;
 };
 
 /** @internal */
@@ -46,11 +46,11 @@ export const WorkloadFederationServiceSearchTrustsRequest$outboundSchema:
     z.ZodTypeDef,
     WorkloadFederationServiceSearchTrustsRequest
   > = z.object({
-    pageSize: z.nullable(z.number().int()).optional(),
-    pageToken: z.nullable(z.string()).optional(),
-    providerId: z.nullable(z.string()).optional(),
-    query: z.nullable(z.string()).optional(),
-    servicePrincipalId: z.nullable(z.string()).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    providerId: z.string().optional(),
+    query: z.string().optional(),
+    servicePrincipalId: z.string().optional(),
   });
 
 export function workloadFederationServiceSearchTrustsRequestToJSON(

@@ -1,0 +1,23 @@
+# C1ApiAppV1AppEntitlementSearchServiceSearchReachableResourcesForUserResponse
+
+## Example Usage
+
+```typescript
+import { C1ApiAppV1AppEntitlementSearchServiceSearchReachableResourcesForUserResponse } from "conductorone-sdk-typescript/sdk/models/operations";
+
+let value:
+  C1ApiAppV1AppEntitlementSearchServiceSearchReachableResourcesForUserResponse =
+    {
+      contentType: "<value>",
+      statusCode: 560633,
+    };
+```
+
+## Fields
+
+| Field                                                                                                                                                                         | Type                                                                                                                                                                          | Required                                                                                                                                                                      | Description                                                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `contentType`                                                                                                                                                                 | *string*                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                            | HTTP response content type for this operation                                                                                                                                 |
+| `statusCode`                                                                                                                                                                  | *number*                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                            | HTTP response status code for this operation                                                                                                                                  |
+| `rawResponse`                                                                                                                                                                 | [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response)                                                                                                         | :heavy_check_mark:                                                                                                                                                            | Raw HTTP response; suitable for custom response parsing                                                                                                                       |
+| `appEntitlementSearchServiceSearchReachableResourcesForUserResponse`                                                                                                          | [shared.AppEntitlementSearchServiceSearchReachableResourcesForUserResponse](../../../sdk/models/shared/appentitlementsearchservicesearchreachableresourcesforuserresponse.md) | :heavy_minus_sign:                                                                                                                                                            | SearchReachableResourcesForUser response. Resources are deduplicated: a<br/> resource reachable through more than one grant or entitlement appears once.                      |

@@ -22,29 +22,98 @@ export const PolicyTypes = {
 export type PolicyTypes = OpenEnum<typeof PolicyTypes>;
 
 /**
+ * When scope_view is POLICY_SCOPE_VIEW_SCOPED, narrow local policies to a
+ *
+ * @remarks
+ *  coarse object type (app-local vs entitlement-local).
+ */
+export const ScopeObjectType = {
+  PolicyScopeObjectTypeUnspecified: "POLICY_SCOPE_OBJECT_TYPE_UNSPECIFIED",
+  PolicyScopeObjectTypeApp: "POLICY_SCOPE_OBJECT_TYPE_APP",
+  PolicyScopeObjectTypeEntitlement: "POLICY_SCOPE_OBJECT_TYPE_ENTITLEMENT",
+} as const;
+/**
+ * When scope_view is POLICY_SCOPE_VIEW_SCOPED, narrow local policies to a
+ *
+ * @remarks
+ *  coarse object type (app-local vs entitlement-local).
+ */
+export type ScopeObjectType = OpenEnum<typeof ScopeObjectType>;
+
+/**
+ * When scope_view narrows to one object, only return that object's local
+ *
+ * @remarks
+ *  policies in this slot. Ignored when no object is identified by
+ *  scope_app_id, which lists every local policy regardless of slot.
+ */
+export const ScopeSlot = {
+  PolicyScopeSlotUnspecified: "POLICY_SCOPE_SLOT_UNSPECIFIED",
+  PolicyScopeSlotEmergency: "POLICY_SCOPE_SLOT_EMERGENCY",
+} as const;
+/**
+ * When scope_view narrows to one object, only return that object's local
+ *
+ * @remarks
+ *  policies in this slot. Ignored when no object is identified by
+ *  scope_app_id, which lists every local policy regardless of slot.
+ */
+export type ScopeSlot = OpenEnum<typeof ScopeSlot>;
+
+/**
+ * Which policies to return based on scope. Defaults to global-only, so
+ *
+ * @remarks
+ *  app/entitlement-scoped policies never appear unless explicitly requested.
+ *  Ignored when refs are provided (explicit ID lookups always resolve).
+ */
+export const ScopeView = {
+  PolicyScopeViewUnspecified: "POLICY_SCOPE_VIEW_UNSPECIFIED",
+  PolicyScopeViewGlobal: "POLICY_SCOPE_VIEW_GLOBAL",
+  PolicyScopeViewScoped: "POLICY_SCOPE_VIEW_SCOPED",
+  PolicyScopeViewAll: "POLICY_SCOPE_VIEW_ALL",
+  PolicyScopeViewGlobalAndObject: "POLICY_SCOPE_VIEW_GLOBAL_AND_OBJECT",
+} as const;
+/**
+ * Which policies to return based on scope. Defaults to global-only, so
+ *
+ * @remarks
+ *  app/entitlement-scoped policies never appear unless explicitly requested.
+ *  Ignored when refs are provided (explicit ID lookups always resolve).
+ */
+export type ScopeView = OpenEnum<typeof ScopeView>;
+
+/**
  * Search Policies by a few properties.
  */
 export type SearchPoliciesRequest = {
   /**
    * Search for policies with a case insensitive match on the display name.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The policy IDs to exclude from the search.
    */
   excludePolicyIds?: Array<string> | null | undefined;
   /**
+   * Include the builtin access profile owner certify policy, which is otherwise
+   *
+   * @remarks
+   *  hidden because it can only be used by access profile campaigns.
+   */
+  includeAccessProfileOwnerPolicy?: boolean | undefined;
+  /**
    * The includeDeleted field.
    */
-  includeDeleted?: boolean | null | undefined;
+  includeDeleted?: boolean | undefined;
   /**
    * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * The policy type to search on. This can be POLICY_TYPE_GRANT, POLICY_TYPE_REVOKE, POLICY_TYPE_CERTIFY, POLICY_TYPE_ACCESS_REQUEST, or POLICY_TYPE_PROVISION.
    */
@@ -52,11 +121,48 @@ export type SearchPoliciesRequest = {
   /**
    * Query the policies with a fuzzy search on display name and description.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * The refs field.
    */
   refs?: Array<PolicyRef> | null | undefined;
+  /**
+   * When scope_view is POLICY_SCOPE_VIEW_SCOPED, only return policies scoped
+   *
+   * @remarks
+   *  to this entitlement.
+   */
+  scopeAppEntitlementId?: string | undefined;
+  /**
+   * When scope_view is POLICY_SCOPE_VIEW_SCOPED, only return policies scoped
+   *
+   * @remarks
+   *  to this app.
+   */
+  scopeAppId?: string | undefined;
+  /**
+   * When scope_view is POLICY_SCOPE_VIEW_SCOPED, narrow local policies to a
+   *
+   * @remarks
+   *  coarse object type (app-local vs entitlement-local).
+   */
+  scopeObjectType?: ScopeObjectType | undefined;
+  /**
+   * When scope_view narrows to one object, only return that object's local
+   *
+   * @remarks
+   *  policies in this slot. Ignored when no object is identified by
+   *  scope_app_id, which lists every local policy regardless of slot.
+   */
+  scopeSlot?: ScopeSlot | undefined;
+  /**
+   * Which policies to return based on scope. Defaults to global-only, so
+   *
+   * @remarks
+   *  app/entitlement-scoped policies never appear unless explicitly requested.
+   *  Ignored when refs are provided (explicit ID lookups always resolve).
+   */
+  scopeView?: ScopeView | undefined;
 };
 
 /** @internal */
@@ -67,15 +173,42 @@ export const PolicyTypes$outboundSchema: z.ZodType<
 > = openEnums.outboundSchema(PolicyTypes);
 
 /** @internal */
+export const ScopeObjectType$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  ScopeObjectType
+> = openEnums.outboundSchema(ScopeObjectType);
+
+/** @internal */
+export const ScopeSlot$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  ScopeSlot
+> = openEnums.outboundSchema(ScopeSlot);
+
+/** @internal */
+export const ScopeView$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  ScopeView
+> = openEnums.outboundSchema(ScopeView);
+
+/** @internal */
 export type SearchPoliciesRequest$Outbound = {
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   excludePolicyIds?: Array<string> | null | undefined;
-  includeDeleted?: boolean | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  includeAccessProfileOwnerPolicy?: boolean | undefined;
+  includeDeleted?: boolean | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
   policyTypes?: Array<string> | null | undefined;
-  query?: string | null | undefined;
+  query?: string | undefined;
   refs?: Array<PolicyRef$Outbound> | null | undefined;
+  scopeAppEntitlementId?: string | undefined;
+  scopeAppId?: string | undefined;
+  scopeObjectType?: string | undefined;
+  scopeSlot?: string | undefined;
+  scopeView?: string | undefined;
 };
 
 /** @internal */
@@ -84,14 +217,20 @@ export const SearchPoliciesRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchPoliciesRequest
 > = z.object({
-  displayName: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
   excludePolicyIds: z.nullable(z.array(z.string())).optional(),
-  includeDeleted: z.nullable(z.boolean()).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
+  includeAccessProfileOwnerPolicy: z.boolean().optional(),
+  includeDeleted: z.boolean().optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
   policyTypes: z.nullable(z.array(PolicyTypes$outboundSchema)).optional(),
-  query: z.nullable(z.string()).optional(),
+  query: z.string().optional(),
   refs: z.nullable(z.array(PolicyRef$outboundSchema)).optional(),
+  scopeAppEntitlementId: z.string().optional(),
+  scopeAppId: z.string().optional(),
+  scopeObjectType: ScopeObjectType$outboundSchema.optional(),
+  scopeSlot: ScopeSlot$outboundSchema.optional(),
+  scopeView: ScopeView$outboundSchema.optional(),
 });
 
 export function searchPoliciesRequestToJSON(

@@ -18,7 +18,7 @@ export type MCPAccessProfileServiceListResponse = {
   /**
    * Token for next page.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
   /**
    * List of MCP access profiles.
    */
@@ -31,7 +31,7 @@ export const MCPAccessProfileServiceListResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
   profiles: z.nullable(z.array(MCPAccessProfile$inboundSchema)).optional(),
 });
 

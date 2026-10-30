@@ -11,12 +11,12 @@ export type ServicePrincipalCredentialInput = {
   /**
    * The display name of the credential.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
 };
 
 /** @internal */
 export type ServicePrincipalCredentialInput$Outbound = {
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const ServicePrincipalCredentialInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ServicePrincipalCredentialInput
 > = z.object({
-  displayName: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
 });
 
 export function servicePrincipalCredentialInputToJSON(

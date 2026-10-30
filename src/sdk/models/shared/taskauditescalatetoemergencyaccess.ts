@@ -14,11 +14,11 @@ export type TaskAuditEscalateToEmergencyAccess = {
   /**
    * The oldPolicyId field.
    */
-  oldPolicyId?: string | null | undefined;
+  oldPolicyId?: string | undefined;
   /**
    * The oldPolicyStepId field.
    */
-  oldPolicyStepId?: string | null | undefined;
+  oldPolicyStepId?: string | undefined;
 };
 
 /** @internal */
@@ -27,8 +27,8 @@ export const TaskAuditEscalateToEmergencyAccess$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  oldPolicyId: z.nullable(z.string()).optional(),
-  oldPolicyStepId: z.nullable(z.string()).optional(),
+  oldPolicyId: z.string().optional(),
+  oldPolicyStepId: z.string().optional(),
 });
 
 export function taskAuditEscalateToEmergencyAccessFromJSON(

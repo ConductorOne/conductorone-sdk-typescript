@@ -4,13 +4,39 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+export const DisabledModules = {
+  ModuleIdUnspecified: "MODULE_ID_UNSPECIFIED",
+  ModuleIdSecretSharing: "MODULE_ID_SECRET_SHARING",
+} as const;
+export type DisabledModules = OpenEnum<typeof DisabledModules>;
 
 /**
  * IntrospectResponse contains information about the current user who is authenticated.
  */
 export type IntrospectResponse = {
+  /**
+   * The OAuth client_id of the device client registered for this token. Present
+   *
+   * @remarks
+   *  only on tokens issued by the device registration grant; the client reads it
+   *  once and presents it on the subsequent token exchange. Empty for all other
+   *  tokens.
+   */
+  deviceClientId?: string | undefined;
+  /**
+   * The modules turned off for the tenant the logged in user belongs to. Absent
+   *
+   * @remarks
+   *  from this list means enabled: every module is on by default. Clients MUST
+   *  treat an unrecognized value as "a module this client does not know about is
+   *  disabled".
+   */
+  disabledModules?: Array<DisabledModules> | null | undefined;
   /**
    * The list of feature flags enabled for the tenant the logged in user belongs to.
    */
@@ -22,16 +48,27 @@ export type IntrospectResponse = {
   /**
    * The principleID of the current logged in user.
    */
-  principleId?: string | null | undefined;
+  principleId?: string | undefined;
   /**
    * The list of roles that the current logged in user has.
    */
   roles?: Array<string> | null | undefined;
   /**
+   * The tenantID from the authenticated caller's passport.
+   */
+  tenantId?: string | undefined;
+  /**
    * The userID of the current logged in user.
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
+
+/** @internal */
+export const DisabledModules$inboundSchema: z.ZodType<
+  DisabledModules,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(DisabledModules);
 
 /** @internal */
 export const IntrospectResponse$inboundSchema: z.ZodType<
@@ -39,11 +76,15 @@ export const IntrospectResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  deviceClientId: z.string().optional(),
+  disabledModules: z.nullable(z.array(DisabledModules$inboundSchema))
+    .optional(),
   features: z.nullable(z.array(z.string())).optional(),
   permissions: z.nullable(z.array(z.string())).optional(),
-  principleId: z.nullable(z.string()).optional(),
+  principleId: z.string().optional(),
   roles: z.nullable(z.array(z.string())).optional(),
-  userId: z.nullable(z.string()).optional(),
+  tenantId: z.string().optional(),
+  userId: z.string().optional(),
 });
 
 export function introspectResponseFromJSON(

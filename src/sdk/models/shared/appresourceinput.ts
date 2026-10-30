@@ -4,6 +4,11 @@
 
 import * as z from "zod/v3";
 import {
+  AgentTrait,
+  AgentTrait$Outbound,
+  AgentTrait$outboundSchema,
+} from "./agenttrait.js";
+import {
   SecretTrait,
   SecretTrait$Outbound,
   SecretTrait$outboundSchema,
@@ -24,7 +29,8 @@ export type AppResourceInput = {
    * @remarks
    *  Must be one of the builtin access config IDs or empty.
    */
-  accessConfigId?: string | null | undefined;
+  accessConfigId?: string | undefined;
+  agentTrait?: AgentTrait | null | undefined;
   /**
    * Bounded key/value metadata bag for IaC marking and customer tags.
    *
@@ -46,60 +52,61 @@ export type AppResourceInput = {
   /**
    * The app that this resource belongs to.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The resource type that this resource is.
    */
-  appResourceTypeId?: string | null | undefined;
+  appResourceTypeId?: string | undefined;
   /**
    * A custom description that can be set for a resource.
    */
-  customDescription?: string | null | undefined;
+  customDescription?: string | undefined;
   /**
    * The description set for the resource.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The display name for this resource.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The number of grants to this resource.
    */
-  grantCount?: number | null | undefined;
+  grantCount?: number | undefined;
   /**
    * The id of the resource.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The matchBatonId field.
    */
-  matchBatonId?: string | null | undefined;
+  matchBatonId?: string | undefined;
   /**
    * The parent resource id, if this resource is a child of another resource.
    */
-  parentAppResourceId?: string | null | undefined;
+  parentAppResourceId?: string | undefined;
   /**
    * The parent resource type id, if this resource is a child of another resource.
    */
-  parentAppResourceTypeId?: string | null | undefined;
+  parentAppResourceTypeId?: string | undefined;
   secretTrait?: SecretTrait | null | undefined;
 };
 
 /** @internal */
 export type AppResourceInput$Outbound = {
-  accessConfigId?: string | null | undefined;
+  accessConfigId?: string | undefined;
+  agentTrait?: AgentTrait$Outbound | null | undefined;
   annotations?: { [k: string]: string } | undefined;
-  appId?: string | null | undefined;
-  appResourceTypeId?: string | null | undefined;
-  customDescription?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  grantCount?: string | null | undefined;
-  id?: string | null | undefined;
-  matchBatonId?: string | null | undefined;
-  parentAppResourceId?: string | null | undefined;
-  parentAppResourceTypeId?: string | null | undefined;
+  appId?: string | undefined;
+  appResourceTypeId?: string | undefined;
+  customDescription?: string | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
+  grantCount?: string | undefined;
+  id?: string | undefined;
+  matchBatonId?: string | undefined;
+  parentAppResourceId?: string | undefined;
+  parentAppResourceTypeId?: string | undefined;
   secretTrait?: SecretTrait$Outbound | null | undefined;
 };
 
@@ -109,18 +116,19 @@ export const AppResourceInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppResourceInput
 > = z.object({
-  accessConfigId: z.nullable(z.string()).optional(),
+  accessConfigId: z.string().optional(),
+  agentTrait: z.nullable(AgentTrait$outboundSchema).optional(),
   annotations: z.record(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appResourceTypeId: z.nullable(z.string()).optional(),
-  customDescription: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  grantCount: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
-  id: z.nullable(z.string()).optional(),
-  matchBatonId: z.nullable(z.string()).optional(),
-  parentAppResourceId: z.nullable(z.string()).optional(),
-  parentAppResourceTypeId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  appResourceTypeId: z.string().optional(),
+  customDescription: z.string().optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  grantCount: z.number().int().transform(v => `${v}`).optional(),
+  id: z.string().optional(),
+  matchBatonId: z.string().optional(),
+  parentAppResourceId: z.string().optional(),
+  parentAppResourceTypeId: z.string().optional(),
   secretTrait: z.nullable(SecretTrait$outboundSchema).optional(),
 });
 

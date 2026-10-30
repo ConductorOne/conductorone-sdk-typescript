@@ -38,11 +38,11 @@ export type ClearAutomationCircuitBreakerRequest = {
    *  only (backward-compatible default). RUN or CANCEL creates a bulk action
    *  to resolve them asynchronously.
    */
-  decision?: Decision | null | undefined;
+  decision?: Decision | undefined;
   /**
    * Admin-supplied reason when decision is CANCEL. Up to 1024 bytes.
    */
-  reason?: string | null | undefined;
+  reason?: string | undefined;
 };
 
 /** @internal */
@@ -54,8 +54,8 @@ export const Decision$outboundSchema: z.ZodType<
 
 /** @internal */
 export type ClearAutomationCircuitBreakerRequest$Outbound = {
-  decision?: string | null | undefined;
-  reason?: string | null | undefined;
+  decision?: string | undefined;
+  reason?: string | undefined;
 };
 
 /** @internal */
@@ -64,8 +64,8 @@ export const ClearAutomationCircuitBreakerRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ClearAutomationCircuitBreakerRequest
 > = z.object({
-  decision: z.nullable(Decision$outboundSchema).optional(),
-  reason: z.nullable(z.string()).optional(),
+  decision: Decision$outboundSchema.optional(),
+  reason: z.string().optional(),
 });
 
 export function clearAutomationCircuitBreakerRequestToJSON(

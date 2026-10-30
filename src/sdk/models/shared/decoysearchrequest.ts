@@ -42,7 +42,7 @@ export type DecoySearchRequest = {
    *  means no filter (show all). The "never used" case is not covered
    *  in this filter; add an explicit field if needed.
    */
-  hasBeenUsed?: boolean | null | undefined;
+  hasBeenUsed?: boolean | undefined;
   /**
    * Filter by kind (OR within the list). Empty means any kind.
    */
@@ -50,18 +50,18 @@ export type DecoySearchRequest = {
   /**
    * The pageSize field.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Free-text query against display_name and description. Empty means
    *
    * @remarks
    *  no text filter.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * Filter by status (OR within the list). Empty means any status.
    */
@@ -82,11 +82,11 @@ export const Statuses$outboundSchema: z.ZodType<
 /** @internal */
 export type DecoySearchRequest$Outbound = {
   annotationKeys?: Array<string> | null | undefined;
-  hasBeenUsed?: boolean | null | undefined;
+  hasBeenUsed?: boolean | undefined;
   kinds?: Array<string> | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  query?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  query?: string | undefined;
   statuses?: Array<string> | null | undefined;
 };
 
@@ -97,11 +97,11 @@ export const DecoySearchRequest$outboundSchema: z.ZodType<
   DecoySearchRequest
 > = z.object({
   annotationKeys: z.nullable(z.array(z.string())).optional(),
-  hasBeenUsed: z.nullable(z.boolean()).optional(),
+  hasBeenUsed: z.boolean().optional(),
   kinds: z.nullable(z.array(Kinds$outboundSchema)).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  query: z.string().optional(),
   statuses: z.nullable(z.array(Statuses$outboundSchema)).optional(),
 });
 

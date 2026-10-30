@@ -38,11 +38,11 @@ export type DecoyCredentialUsedType = {
   /**
    * The decoyId field.
    */
-  decoyId?: string | null | undefined;
+  decoyId?: string | undefined;
   /**
    * The kind field.
    */
-  kind?: DecoyCredentialUsedTypeKind | null | undefined;
+  kind?: DecoyCredentialUsedTypeKind | undefined;
 };
 
 /** @internal */
@@ -51,6 +51,12 @@ export const DecoyCredentialUsedTypeKind$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = openEnums.inboundSchema(DecoyCredentialUsedTypeKind);
+/** @internal */
+export const DecoyCredentialUsedTypeKind$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  DecoyCredentialUsedTypeKind
+> = openEnums.outboundSchema(DecoyCredentialUsedTypeKind);
 
 /** @internal */
 export const DecoyCredentialUsedType$inboundSchema: z.ZodType<
@@ -58,10 +64,32 @@ export const DecoyCredentialUsedType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  decoyId: z.nullable(z.string()).optional(),
-  kind: z.nullable(DecoyCredentialUsedTypeKind$inboundSchema).optional(),
+  decoyId: z.string().optional(),
+  kind: DecoyCredentialUsedTypeKind$inboundSchema.optional(),
+});
+/** @internal */
+export type DecoyCredentialUsedType$Outbound = {
+  decoyId?: string | undefined;
+  kind?: string | undefined;
+};
+
+/** @internal */
+export const DecoyCredentialUsedType$outboundSchema: z.ZodType<
+  DecoyCredentialUsedType$Outbound,
+  z.ZodTypeDef,
+  DecoyCredentialUsedType
+> = z.object({
+  decoyId: z.string().optional(),
+  kind: DecoyCredentialUsedTypeKind$outboundSchema.optional(),
 });
 
+export function decoyCredentialUsedTypeToJSON(
+  decoyCredentialUsedType: DecoyCredentialUsedType,
+): string {
+  return JSON.stringify(
+    DecoyCredentialUsedType$outboundSchema.parse(decoyCredentialUsedType),
+  );
+}
 export function decoyCredentialUsedTypeFromJSON(
   jsonString: string,
 ): SafeParseResult<DecoyCredentialUsedType, SDKValidationError> {

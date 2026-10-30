@@ -22,13 +22,13 @@ export type ExportServiceCreateRequest = {
   /**
    * The display name of the new system log exporter.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
 };
 
 /** @internal */
 export type ExportServiceCreateRequest$Outbound = {
   datasource?: ExportToDatasource$Outbound | null | undefined;
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
 };
 
 /** @internal */
@@ -38,7 +38,7 @@ export const ExportServiceCreateRequest$outboundSchema: z.ZodType<
   ExportServiceCreateRequest
 > = z.object({
   datasource: z.nullable(ExportToDatasource$outboundSchema).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
 });
 
 export function exportServiceCreateRequestToJSON(

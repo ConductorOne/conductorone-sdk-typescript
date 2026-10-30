@@ -12,7 +12,7 @@ import {
 } from "./aigovernancesettings.js";
 
 /**
- * The UpdateAIGovernanceSettingsResponse message.
+ * UpdateAIGovernanceSettingsResponse contains the updated AI governance settings.
  */
 export type UpdateAIGovernanceSettingsResponse = {
   aiGovernanceSettings?: AIGovernanceSettings | null | undefined;

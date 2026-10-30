@@ -38,33 +38,33 @@ export type HistoryAnnotation = {
   /**
    * Server-rendered label, e.g. "Ticket".
    */
-  displayLabel?: string | null | undefined;
+  displayLabel?: string | undefined;
   /**
    * Resolved from tenant config; "" if none. Frontend applies its own
    *
    * @remarks
    *  scheme allowlist.
    */
-  displayUrl?: string | null | undefined;
+  displayUrl?: string | undefined;
   /**
    * UI-friendly rendering (truncated / reshaped from raw_value).
    */
-  displayValue?: string | null | undefined;
+  displayValue?: string | undefined;
   /**
    * Storage-side key. Bounds: ^[a-z][a-z0-9_.-]{0,63}$.
    */
-  key?: string | null | undefined;
+  key?: string | undefined;
   /**
    * The kind field.
    */
-  kind?: HistoryAnnotationKind | null | undefined;
+  kind?: HistoryAnnotationKind | undefined;
   /**
    * Raw value as stored in ObjectHistory.annotations; storage-side values
    *
    * @remarks
    *  are capped at 512 bytes.
    */
-  rawValue?: string | null | undefined;
+  rawValue?: string | undefined;
 };
 
 /** @internal */
@@ -80,12 +80,12 @@ export const HistoryAnnotation$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  displayLabel: z.nullable(z.string()).optional(),
-  displayUrl: z.nullable(z.string()).optional(),
-  displayValue: z.nullable(z.string()).optional(),
-  key: z.nullable(z.string()).optional(),
-  kind: z.nullable(HistoryAnnotationKind$inboundSchema).optional(),
-  rawValue: z.nullable(z.string()).optional(),
+  displayLabel: z.string().optional(),
+  displayUrl: z.string().optional(),
+  displayValue: z.string().optional(),
+  key: z.string().optional(),
+  kind: HistoryAnnotationKind$inboundSchema.optional(),
+  rawValue: z.string().optional(),
 });
 
 export function historyAnnotationFromJSON(

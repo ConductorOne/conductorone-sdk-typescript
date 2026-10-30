@@ -48,7 +48,7 @@ export type ReassignAction = {
   /**
    * If true, the step will use the subject user of the automation as the subject.
    */
-  useSubjectUser?: boolean | null | undefined;
+  useSubjectUser?: boolean | undefined;
 };
 
 /** @internal */
@@ -61,7 +61,7 @@ export const ReassignAction$inboundSchema: z.ZodType<
   assigneeUserRef: z.nullable(UserRef$inboundSchema).optional(),
   subjectUserIdCel: z.nullable(z.string()).optional(),
   subjectUserRef: z.nullable(UserRef$inboundSchema).optional(),
-  useSubjectUser: z.nullable(z.boolean()).optional(),
+  useSubjectUser: z.boolean().optional(),
 });
 /** @internal */
 export type ReassignAction$Outbound = {
@@ -69,7 +69,7 @@ export type ReassignAction$Outbound = {
   assigneeUserRef?: UserRef$Outbound | null | undefined;
   subjectUserIdCel?: string | null | undefined;
   subjectUserRef?: UserRef$Outbound | null | undefined;
-  useSubjectUser?: boolean | null | undefined;
+  useSubjectUser?: boolean | undefined;
 };
 
 /** @internal */
@@ -82,7 +82,7 @@ export const ReassignAction$outboundSchema: z.ZodType<
   assigneeUserRef: z.nullable(UserRef$outboundSchema).optional(),
   subjectUserIdCel: z.nullable(z.string()).optional(),
   subjectUserRef: z.nullable(UserRef$outboundSchema).optional(),
-  useSubjectUser: z.nullable(z.boolean()).optional(),
+  useSubjectUser: z.boolean().optional(),
 });
 
 export function reassignActionToJSON(reassignAction: ReassignAction): string {

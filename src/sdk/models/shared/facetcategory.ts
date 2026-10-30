@@ -28,15 +28,15 @@ export type FacetCategory = {
   /**
    * The display name of the category.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * An icon for the category.
    */
-  iconUrl?: string | null | undefined;
+  iconUrl?: string | undefined;
   /**
    * The param that is being set when checking a facet in this category.
    */
-  param?: string | null | undefined;
+  param?: string | undefined;
   range?: FacetRangeItem | null | undefined;
   value?: FacetValueItem | null | undefined;
 };
@@ -47,9 +47,9 @@ export const FacetCategory$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  displayName: z.nullable(z.string()).optional(),
-  iconUrl: z.nullable(z.string()).optional(),
-  param: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
+  iconUrl: z.string().optional(),
+  param: z.string().optional(),
   range: z.nullable(FacetRangeItem$inboundSchema).optional(),
   value: z.nullable(FacetValueItem$inboundSchema).optional(),
 });

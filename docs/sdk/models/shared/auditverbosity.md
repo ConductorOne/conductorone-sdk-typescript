@@ -1,6 +1,6 @@
 # AuditVerbosity
 
-The auditVerbosity field.
+How much detail is captured in the audit log for MCP tool calls.
 
 ## Example Usage
 

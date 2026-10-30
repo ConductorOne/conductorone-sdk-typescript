@@ -16,13 +16,13 @@ export type TaskActionsServiceCloseRequest = {
   /**
    * An optional comment attached to the close action.
    */
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   expandMask?: TaskExpandMask | null | undefined;
 };
 
 /** @internal */
 export type TaskActionsServiceCloseRequest$Outbound = {
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
 };
 
@@ -32,7 +32,7 @@ export const TaskActionsServiceCloseRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskActionsServiceCloseRequest
 > = z.object({
-  comment: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
 });
 

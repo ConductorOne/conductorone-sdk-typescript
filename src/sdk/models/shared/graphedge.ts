@@ -32,23 +32,23 @@ export type GraphEdge = {
   /**
    * The hiddenChildren field.
    */
-  hiddenChildren?: number | null | undefined;
+  hiddenChildren?: number | undefined;
   /**
    * The isTruncated field.
    */
-  isTruncated?: boolean | null | undefined;
+  isTruncated?: boolean | undefined;
   /**
    * The sourceId field.
    */
-  sourceId?: string | null | undefined;
+  sourceId?: string | undefined;
   /**
    * The targetId field.
    */
-  targetId?: string | null | undefined;
+  targetId?: string | undefined;
   /**
    * The type field.
    */
-  type?: GraphEdgeType | null | undefined;
+  type?: GraphEdgeType | undefined;
 };
 
 /** @internal */
@@ -64,11 +64,11 @@ export const GraphEdge$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  hiddenChildren: z.nullable(z.number().int()).optional(),
-  isTruncated: z.nullable(z.boolean()).optional(),
-  sourceId: z.nullable(z.string()).optional(),
-  targetId: z.nullable(z.string()).optional(),
-  type: z.nullable(GraphEdgeType$inboundSchema).optional(),
+  hiddenChildren: z.number().int().optional(),
+  isTruncated: z.boolean().optional(),
+  sourceId: z.string().optional(),
+  targetId: z.string().optional(),
+  type: GraphEdgeType$inboundSchema.optional(),
 });
 
 export function graphEdgeFromJSON(

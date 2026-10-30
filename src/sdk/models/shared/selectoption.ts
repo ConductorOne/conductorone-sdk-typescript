@@ -14,15 +14,15 @@ export type SelectOption = {
   /**
    * Used for type BUTTONS
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The value field.
    */
-  value?: string | null | undefined;
+  value?: string | undefined;
 };
 
 /** @internal */
@@ -31,15 +31,15 @@ export const SelectOption$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  value: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  value: z.string().optional(),
 });
 /** @internal */
 export type SelectOption$Outbound = {
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  value?: string | null | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
+  value?: string | undefined;
 };
 
 /** @internal */
@@ -48,9 +48,9 @@ export const SelectOption$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SelectOption
 > = z.object({
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  value: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  value: z.string().optional(),
 });
 
 export function selectOptionToJSON(selectOption: SelectOption): string {

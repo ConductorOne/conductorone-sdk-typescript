@@ -22,7 +22,7 @@ export type WorkloadFederationServiceSearchTrustsResponse = {
   /**
    * The nextPageToken field.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -33,7 +33,7 @@ export const WorkloadFederationServiceSearchTrustsResponse$inboundSchema:
     unknown
   > = z.object({
     list: z.nullable(z.array(WorkloadFederationTrust$inboundSchema)).optional(),
-    nextPageToken: z.nullable(z.string()).optional(),
+    nextPageToken: z.string().optional(),
   });
 
 export function workloadFederationServiceSearchTrustsResponseFromJSON(

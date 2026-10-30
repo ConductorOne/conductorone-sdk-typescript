@@ -16,34 +16,34 @@ export type TaskServiceCreateRevokeRequest = {
   /**
    * The ID of the app entitlement to revoke access to.
    */
-  appEntitlementId: string | null;
+  appEntitlementId: string;
   /**
    * The ID of the app associated with the entitlement.
    */
-  appId: string | null;
+  appId: string;
   /**
-   * The ID of the app user to revoke access from. This field and identityUserId cannot both be set for a given request.
+   * The application account ID whose access is being revoked. Required unless identityUserId is set. If both are supplied, the account must belong to that user.
    */
-  appUserId?: string | null | undefined;
+  appUserId?: string | undefined;
   /**
    * The description of the request.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   expandMask?: TaskExpandMask | null | undefined;
   /**
-   * The ID of the user associated with the app user we are revoking access from. This field cannot be set if appUserID is also set.
+   * The C1 user ID whose access is being revoked. Required unless appUserId is set. If both are supplied, the account must belong to this user.
    */
-  identityUserId?: string | null | undefined;
+  identityUserId?: string | undefined;
 };
 
 /** @internal */
 export type TaskServiceCreateRevokeRequest$Outbound = {
-  appEntitlementId: string | null;
-  appId: string | null;
-  appUserId?: string | null | undefined;
-  description?: string | null | undefined;
+  appEntitlementId: string;
+  appId: string;
+  appUserId?: string | undefined;
+  description?: string | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
-  identityUserId?: string | null | undefined;
+  identityUserId?: string | undefined;
 };
 
 /** @internal */
@@ -52,12 +52,12 @@ export const TaskServiceCreateRevokeRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskServiceCreateRevokeRequest
 > = z.object({
-  appEntitlementId: z.nullable(z.string()),
-  appId: z.nullable(z.string()),
-  appUserId: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
+  appEntitlementId: z.string(),
+  appId: z.string(),
+  appUserId: z.string().optional(),
+  description: z.string().optional(),
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-  identityUserId: z.nullable(z.string()).optional(),
+  identityUserId: z.string().optional(),
 });
 
 export function taskServiceCreateRevokeRequestToJSON(

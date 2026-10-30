@@ -11,37 +11,37 @@ export type PaperSecretAdminServiceSearchAuditEventsRequest = {
   /**
    * Filter by external email (partial match via full-text search)
    */
-  actorEmail?: string | null | undefined;
+  actorEmail?: string | undefined;
   /**
    * Filter by C1 user ID (internal users)
    */
-  actorUserId?: string | null | undefined;
+  actorUserId?: string | undefined;
   /**
    * Filter by client IP (exact match)
    */
-  clientIp?: string | null | undefined;
+  clientIp?: string | undefined;
   /**
    * The pageSize field.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Filter by specific vault
    */
-  vaultId?: string | null | undefined;
+  vaultId?: string | undefined;
 };
 
 /** @internal */
 export type PaperSecretAdminServiceSearchAuditEventsRequest$Outbound = {
-  actorEmail?: string | null | undefined;
-  actorUserId?: string | null | undefined;
-  clientIp?: string | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  vaultId?: string | null | undefined;
+  actorEmail?: string | undefined;
+  actorUserId?: string | undefined;
+  clientIp?: string | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  vaultId?: string | undefined;
 };
 
 /** @internal */
@@ -51,12 +51,12 @@ export const PaperSecretAdminServiceSearchAuditEventsRequest$outboundSchema:
     z.ZodTypeDef,
     PaperSecretAdminServiceSearchAuditEventsRequest
   > = z.object({
-    actorEmail: z.nullable(z.string()).optional(),
-    actorUserId: z.nullable(z.string()).optional(),
-    clientIp: z.nullable(z.string()).optional(),
-    pageSize: z.nullable(z.number().int()).optional(),
-    pageToken: z.nullable(z.string()).optional(),
-    vaultId: z.nullable(z.string()).optional(),
+    actorEmail: z.string().optional(),
+    actorUserId: z.string().optional(),
+    clientIp: z.string().optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    vaultId: z.string().optional(),
   });
 
 export function paperSecretAdminServiceSearchAuditEventsRequestToJSON(

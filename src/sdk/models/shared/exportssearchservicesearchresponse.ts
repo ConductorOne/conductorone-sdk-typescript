@@ -19,7 +19,7 @@ export type ExportsSearchServiceSearchResponse = {
   /**
    * The token to retrieve the next page of results, or empty if there are no more results.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -29,7 +29,7 @@ export const ExportsSearchServiceSearchResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   list: z.nullable(z.array(Exporter$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function exportsSearchServiceSearchResponseFromJSON(

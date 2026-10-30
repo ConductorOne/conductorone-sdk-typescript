@@ -17,13 +17,13 @@ export type RequestSchemaServiceCreateEntitlementBindingRequest = {
   /**
    * The unique identifier of the request schema to bind the entitlement to.
    */
-  requestSchemaId?: string | null | undefined;
+  requestSchemaId?: string | undefined;
 };
 
 /** @internal */
 export type RequestSchemaServiceCreateEntitlementBindingRequest$Outbound = {
   entitlementRef?: AppEntitlementRef$Outbound | null | undefined;
-  requestSchemaId?: string | null | undefined;
+  requestSchemaId?: string | undefined;
 };
 
 /** @internal */
@@ -34,7 +34,7 @@ export const RequestSchemaServiceCreateEntitlementBindingRequest$outboundSchema:
     RequestSchemaServiceCreateEntitlementBindingRequest
   > = z.object({
     entitlementRef: z.nullable(AppEntitlementRef$outboundSchema).optional(),
-    requestSchemaId: z.nullable(z.string()).optional(),
+    requestSchemaId: z.string().optional(),
   });
 
 export function requestSchemaServiceCreateEntitlementBindingRequestToJSON(

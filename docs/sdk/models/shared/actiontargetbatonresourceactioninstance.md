@@ -12,6 +12,8 @@ let value: ActionTargetBatonResourceActionInstance = {};
 
 ## Fields
 
-| Field                              | Type                               | Required                           | Description                        |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| `batonActionInvocationId`          | *string*                           | :heavy_minus_sign:                 | The batonActionInvocationId field. |
+| Field                                                   | Type                                                    | Required                                                | Description                                             |
+| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| `batonActionInvocationId`                               | *string*                                                | :heavy_minus_sign:                                      | The batonActionInvocationId field.                      |
+| `partialResult`                                         | *boolean*                                               | :heavy_minus_sign:                                      | The created resource has unconfirmed requested effects. |
+| `unaddedMemberCount`                                    | *number*                                                | :heavy_minus_sign:                                      | The unaddedMemberCount field.                           |

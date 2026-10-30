@@ -4,8 +4,10 @@
 
 import { findingBulkCreateFindingTasks } from "../funcs/findingBulkCreateFindingTasks.js";
 import { findingBulkUpdateFindingState } from "../funcs/findingBulkUpdateFindingState.js";
+import { findingCreateFinding } from "../funcs/findingCreateFinding.js";
 import { findingCreateFindingTask } from "../funcs/findingCreateFindingTask.js";
 import { findingGetFinding } from "../funcs/findingGetFinding.js";
+import { findingUpdateFindingAssignee } from "../funcs/findingUpdateFindingAssignee.js";
 import { findingUpdateFindingState } from "../funcs/findingUpdateFindingState.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "./models/operations/index.js";
@@ -13,6 +15,43 @@ import * as shared from "./models/shared/index.js";
 import { unwrapAsync } from "./types/fp.js";
 
 export class Finding extends ClientSDK {
+  /**
+   * Create Finding
+   *
+   * @remarks
+   * Create a user-authored custom finding.
+   */
+  async createFinding(
+    request?: shared.CreateFindingRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.C1ApiFindingV1FindingServiceCreateFindingResponse> {
+    return unwrapAsync(findingCreateFinding(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update Finding Assignee
+   *
+   * @remarks
+   * Assign or clear a finding's assignee.
+   */
+  async updateFindingAssignee(
+    request:
+      operations.C1ApiFindingV1FindingServiceUpdateFindingAssigneeRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiFindingV1FindingServiceUpdateFindingAssigneeResponse
+  > {
+    return unwrapAsync(findingUpdateFindingAssignee(
+      this,
+      request,
+      options,
+    ));
+  }
+
   /**
    * Update Finding State
    *

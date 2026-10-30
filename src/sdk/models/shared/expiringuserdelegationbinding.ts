@@ -15,7 +15,7 @@ export type ExpiringUserDelegationBinding = {
   /**
    * The delegatedUserId field.
    */
-  delegatedUserId?: string | null | undefined;
+  delegatedUserId?: string | undefined;
   deletedAt?: Date | null | undefined;
   expirationAt?: Date | null | undefined;
   startAt?: Date | null | undefined;
@@ -23,7 +23,7 @@ export type ExpiringUserDelegationBinding = {
   /**
    * The userId field.
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -35,7 +35,7 @@ export const ExpiringUserDelegationBinding$inboundSchema: z.ZodType<
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  delegatedUserId: z.nullable(z.string()).optional(),
+  delegatedUserId: z.string().optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -48,7 +48,7 @@ export const ExpiringUserDelegationBinding$inboundSchema: z.ZodType<
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 
 export function expiringUserDelegationBindingFromJSON(

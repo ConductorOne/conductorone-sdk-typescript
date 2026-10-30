@@ -9,6 +9,7 @@ This message contains a oneof named action. Only a single field of the following
   - unsuppress
   - assignOwner
   - reopen
+  - reprocess
 
 
 ## Example Usage
@@ -27,6 +28,7 @@ let value: BulkUpdateFindingStateRequest = {};
 | `assignOwner`                                                                       | [shared.BulkAssignOwnerAction](../../../sdk/models/shared/bulkassignowneraction.md) | :heavy_minus_sign:                                                                  | N/A                                                                                 |
 | `refs`                                                                              | [shared.FindingRef](../../../sdk/models/shared/findingref.md)[]                     | :heavy_minus_sign:                                                                  | By-ID mode: specify individual finding refs.                                        |
 | `reopen`                                                                            | [shared.BulkReopenAction](../../../sdk/models/shared/bulkreopenaction.md)           | :heavy_minus_sign:                                                                  | N/A                                                                                 |
+| `reprocess`                                                                         | [shared.BulkReprocessAction](../../../sdk/models/shared/bulkreprocessaction.md)     | :heavy_minus_sign:                                                                  | N/A                                                                                 |
 | `searchRequest`                                                                     | [shared.FindingSearchRequest](../../../sdk/models/shared/findingsearchrequest.md)   | :heavy_minus_sign:                                                                  | N/A                                                                                 |
 | `snooze`                                                                            | [shared.BulkSnoozeAction](../../../sdk/models/shared/bulksnoozeaction.md)           | :heavy_minus_sign:                                                                  | N/A                                                                                 |
 | `suppress`                                                                          | [shared.BulkSuppressAction](../../../sdk/models/shared/bulksuppressaction.md)       | :heavy_minus_sign:                                                                  | N/A                                                                                 |

@@ -22,7 +22,7 @@ export type FunctionsInvocationSearchResponse = {
   /**
    * The pagination token for fetching the next page.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -32,7 +32,7 @@ export const FunctionsInvocationSearchResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   list: z.nullable(z.array(FunctionInvocation$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function functionsInvocationSearchResponseFromJSON(

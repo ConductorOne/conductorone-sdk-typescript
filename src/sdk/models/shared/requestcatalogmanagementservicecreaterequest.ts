@@ -31,6 +31,31 @@ export type RequestCatalogManagementServiceCreateRequestEnrollmentBehavior =
   >;
 
 /**
+ * The type of access profile to create: CATALOG (shown as Catalog in the
+ *
+ * @remarks
+ *  UI), BUNDLE (Role), or CATALOG_AND_BUNDLE (Hybrid). Omit it or send
+ *  UNSPECIFIED to create a Hybrid profile.
+ */
+export const RequestCatalogManagementServiceCreateRequestType = {
+  RequestCatalogTypeUnspecified: "REQUEST_CATALOG_TYPE_UNSPECIFIED",
+  RequestCatalogTypeCatalog: "REQUEST_CATALOG_TYPE_CATALOG",
+  RequestCatalogTypeProfile: "REQUEST_CATALOG_TYPE_PROFILE",
+  RequestCatalogTypeCatalogAndBundle: "REQUEST_CATALOG_TYPE_CATALOG_AND_BUNDLE",
+  RequestCatalogTypeBundle: "REQUEST_CATALOG_TYPE_BUNDLE",
+} as const;
+/**
+ * The type of access profile to create: CATALOG (shown as Catalog in the
+ *
+ * @remarks
+ *  UI), BUNDLE (Role), or CATALOG_AND_BUNDLE (Hybrid). Omit it or send
+ *  UNSPECIFIED to create a Hybrid profile.
+ */
+export type RequestCatalogManagementServiceCreateRequestType = OpenEnum<
+  typeof RequestCatalogManagementServiceCreateRequestType
+>;
+
+/**
  * Defines how to handle the revocation of the entitlements in the catalog during unenrollment.
  */
 export const RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior =
@@ -92,45 +117,50 @@ export type RequestCatalogManagementServiceCreateRequest = {
   /**
    * The description of the new request catalog.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The display name of the new request catalog.
    */
-  displayName: string | null;
+  displayName: string;
   /**
    * Defines how to handle the request policies of the entitlements in the catalog during enrollment.
    */
   enrollmentBehavior?:
     | RequestCatalogManagementServiceCreateRequestEnrollmentBehavior
-    | null
     | undefined;
   expandMask?: RequestCatalogExpandMask | null | undefined;
   /**
    * Whether or not the new catalog should be created as published.
    */
-  published?: boolean | null | undefined;
+  published?: boolean | undefined;
   /**
    * Whether all the entitlements in the catalog can be requests at once. Your tenant must have the bundles feature to use this.
    */
-  requestBundle?: boolean | null | undefined;
+  requestBundle?: boolean | undefined;
+  /**
+   * The type of access profile to create: CATALOG (shown as Catalog in the
+   *
+   * @remarks
+   *  UI), BUNDLE (Role), or CATALOG_AND_BUNDLE (Hybrid). Omit it or send
+   *  UNSPECIFIED to create a Hybrid profile.
+   */
+  type?: RequestCatalogManagementServiceCreateRequestType | undefined;
   /**
    * Defines how to handle the revocation of the entitlements in the catalog during unenrollment.
    */
   unenrollmentBehavior?:
     | RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior
-    | null
     | undefined;
   /**
    * Defines how to handle the revoke policies of the entitlements in the catalog during unenrollment.
    */
   unenrollmentEntitlementBehavior?:
     | RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior
-    | null
     | undefined;
   /**
    * Whether or not the new catalog is visible to everyone by default.
    */
-  visibleToEveryone?: boolean | null | undefined;
+  visibleToEveryone?: boolean | undefined;
 };
 
 /** @internal */
@@ -141,6 +171,16 @@ export const RequestCatalogManagementServiceCreateRequestEnrollmentBehavior$outb
     RequestCatalogManagementServiceCreateRequestEnrollmentBehavior
   > = openEnums.outboundSchema(
     RequestCatalogManagementServiceCreateRequestEnrollmentBehavior,
+  );
+
+/** @internal */
+export const RequestCatalogManagementServiceCreateRequestType$outboundSchema:
+  z.ZodType<
+    string,
+    z.ZodTypeDef,
+    RequestCatalogManagementServiceCreateRequestType
+  > = openEnums.outboundSchema(
+    RequestCatalogManagementServiceCreateRequestType,
   );
 
 /** @internal */
@@ -166,15 +206,16 @@ export const RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlement
 /** @internal */
 export type RequestCatalogManagementServiceCreateRequest$Outbound = {
   annotations?: { [k: string]: string } | undefined;
-  description?: string | null | undefined;
-  displayName: string | null;
-  enrollmentBehavior?: string | null | undefined;
+  description?: string | undefined;
+  displayName: string;
+  enrollmentBehavior?: string | undefined;
   expandMask?: RequestCatalogExpandMask$Outbound | null | undefined;
-  published?: boolean | null | undefined;
-  requestBundle?: boolean | null | undefined;
-  unenrollmentBehavior?: string | null | undefined;
-  unenrollmentEntitlementBehavior?: string | null | undefined;
-  visibleToEveryone?: boolean | null | undefined;
+  published?: boolean | undefined;
+  requestBundle?: boolean | undefined;
+  type?: string | undefined;
+  unenrollmentBehavior?: string | undefined;
+  unenrollmentEntitlementBehavior?: string | undefined;
+  visibleToEveryone?: boolean | undefined;
 };
 
 /** @internal */
@@ -185,21 +226,23 @@ export const RequestCatalogManagementServiceCreateRequest$outboundSchema:
     RequestCatalogManagementServiceCreateRequest
   > = z.object({
     annotations: z.record(z.string()).optional(),
-    description: z.nullable(z.string()).optional(),
-    displayName: z.nullable(z.string()),
-    enrollmentBehavior: z.nullable(
-      RequestCatalogManagementServiceCreateRequestEnrollmentBehavior$outboundSchema,
-    ).optional(),
+    description: z.string().optional(),
+    displayName: z.string(),
+    enrollmentBehavior:
+      RequestCatalogManagementServiceCreateRequestEnrollmentBehavior$outboundSchema
+        .optional(),
     expandMask: z.nullable(RequestCatalogExpandMask$outboundSchema).optional(),
-    published: z.nullable(z.boolean()).optional(),
-    requestBundle: z.nullable(z.boolean()).optional(),
-    unenrollmentBehavior: z.nullable(
-      RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior$outboundSchema,
-    ).optional(),
-    unenrollmentEntitlementBehavior: z.nullable(
-      RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior$outboundSchema,
-    ).optional(),
-    visibleToEveryone: z.nullable(z.boolean()).optional(),
+    published: z.boolean().optional(),
+    requestBundle: z.boolean().optional(),
+    type: RequestCatalogManagementServiceCreateRequestType$outboundSchema
+      .optional(),
+    unenrollmentBehavior:
+      RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior$outboundSchema
+        .optional(),
+    unenrollmentEntitlementBehavior:
+      RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior$outboundSchema
+        .optional(),
+    visibleToEveryone: z.boolean().optional(),
   });
 
 export function requestCatalogManagementServiceCreateRequestToJSON(

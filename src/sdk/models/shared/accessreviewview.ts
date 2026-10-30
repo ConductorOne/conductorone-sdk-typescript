@@ -20,12 +20,12 @@ export type AccessReviewView = {
   /**
    * The createdByUserPath field.
    */
-  createdByUserPath?: string | null | undefined;
+  createdByUserPath?: string | undefined;
   objectPermissions?: ActorObjectPermissions | null | undefined;
   /**
    * The policyPath field.
    */
-  policyPath?: string | null | undefined;
+  policyPath?: string | undefined;
 };
 
 /** @internal */
@@ -35,10 +35,10 @@ export const AccessReviewView$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   accessReview: z.nullable(AccessReview$inboundSchema).optional(),
-  createdByUserPath: z.nullable(z.string()).optional(),
+  createdByUserPath: z.string().optional(),
   objectPermissions: z.nullable(ActorObjectPermissions$inboundSchema)
     .optional(),
-  policyPath: z.nullable(z.string()).optional(),
+  policyPath: z.string().optional(),
 });
 
 export function accessReviewViewFromJSON(

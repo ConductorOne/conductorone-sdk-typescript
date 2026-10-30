@@ -14,7 +14,7 @@ export type AccountRef = {
   /**
    * The accountIdCel field.
    */
-  accountIdCel?: string | null | undefined;
+  accountIdCel?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const AccountRef$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accountIdCel: z.nullable(z.string()).optional(),
+  accountIdCel: z.string().optional(),
 });
 /** @internal */
 export type AccountRef$Outbound = {
-  accountIdCel?: string | null | undefined;
+  accountIdCel?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const AccountRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AccountRef
 > = z.object({
-  accountIdCel: z.nullable(z.string()).optional(),
+  accountIdCel: z.string().optional(),
 });
 
 export function accountRefToJSON(accountRef: AccountRef): string {

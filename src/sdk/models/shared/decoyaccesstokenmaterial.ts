@@ -14,7 +14,7 @@ export type DecoyAccessTokenMaterial = {
   /**
    * The accessToken field.
    */
-  accessToken?: string | null | undefined;
+  accessToken?: string | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const DecoyAccessTokenMaterial$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accessToken: z.nullable(z.string()).optional(),
+  accessToken: z.string().optional(),
 });
 
 export function decoyAccessTokenMaterialFromJSON(

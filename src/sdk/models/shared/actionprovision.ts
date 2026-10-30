@@ -14,19 +14,19 @@ export type ActionProvision = {
   /**
    * The actionName field.
    */
-  actionName?: string | null | undefined;
+  actionName?: string | undefined;
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The connectorId field.
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
 };
 
 /** @internal */
@@ -35,17 +35,17 @@ export const ActionProvision$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  actionName: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  actionName: z.string().optional(),
+  appId: z.string().optional(),
+  connectorId: z.string().optional(),
+  displayName: z.string().optional(),
 });
 /** @internal */
 export type ActionProvision$Outbound = {
-  actionName?: string | null | undefined;
-  appId?: string | null | undefined;
-  connectorId?: string | null | undefined;
-  displayName?: string | null | undefined;
+  actionName?: string | undefined;
+  appId?: string | undefined;
+  connectorId?: string | undefined;
+  displayName?: string | undefined;
 };
 
 /** @internal */
@@ -54,10 +54,10 @@ export const ActionProvision$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ActionProvision
 > = z.object({
-  actionName: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  actionName: z.string().optional(),
+  appId: z.string().optional(),
+  connectorId: z.string().optional(),
+  displayName: z.string().optional(),
 });
 
 export function actionProvisionToJSON(

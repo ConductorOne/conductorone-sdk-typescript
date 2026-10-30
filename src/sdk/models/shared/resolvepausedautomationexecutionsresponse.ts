@@ -17,13 +17,13 @@ export type ResolvePausedAutomationExecutionsResponse = {
    * @remarks
    *  progress via the BulkAction API.
    */
-  bulkActionId?: string | null | undefined;
+  bulkActionId?: string | undefined;
   /**
    * Deprecated: see paused_count.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  erroredCount?: number | null | undefined;
+  erroredCount?: number | undefined;
   /**
    * Deprecated: previously returned inline resolution counts. Now returns
    *
@@ -32,7 +32,7 @@ export type ResolvePausedAutomationExecutionsResponse = {
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  pausedCount?: number | null | undefined;
+  pausedCount?: number | undefined;
 };
 
 /** @internal */
@@ -41,9 +41,9 @@ export const ResolvePausedAutomationExecutionsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  bulkActionId: z.nullable(z.string()).optional(),
-  erroredCount: z.nullable(z.number().int()).optional(),
-  pausedCount: z.nullable(z.number().int()).optional(),
+  bulkActionId: z.string().optional(),
+  erroredCount: z.number().int().optional(),
+  pausedCount: z.number().int().optional(),
 });
 
 export function resolvePausedAutomationExecutionsResponseFromJSON(

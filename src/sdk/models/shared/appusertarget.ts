@@ -14,11 +14,11 @@ export type AppUserTarget = {
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The appUserId field.
    */
-  appUserId?: string | null | undefined;
+  appUserId?: string | undefined;
 };
 
 /** @internal */
@@ -27,10 +27,28 @@ export const AppUserTarget$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  appUserId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  appUserId: z.string().optional(),
+});
+/** @internal */
+export type AppUserTarget$Outbound = {
+  appId?: string | undefined;
+  appUserId?: string | undefined;
+};
+
+/** @internal */
+export const AppUserTarget$outboundSchema: z.ZodType<
+  AppUserTarget$Outbound,
+  z.ZodTypeDef,
+  AppUserTarget
+> = z.object({
+  appId: z.string().optional(),
+  appUserId: z.string().optional(),
 });
 
+export function appUserTargetToJSON(appUserTarget: AppUserTarget): string {
+  return JSON.stringify(AppUserTarget$outboundSchema.parse(appUserTarget));
+}
 export function appUserTargetFromJSON(
   jsonString: string,
 ): SafeParseResult<AppUserTarget, SDKValidationError> {

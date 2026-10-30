@@ -7,6 +7,12 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  DateField,
+  DateField$inboundSchema,
+  DateField$Outbound,
+  DateField$outboundSchema,
+} from "./datefield.js";
+import {
   PasswordField,
   PasswordField$inboundSchema,
   PasswordField$Outbound,
@@ -47,18 +53,20 @@ import {
  *   - passwordField
  *   - selectField
  *   - pickerField
+ *   - dateField
  */
 export type FormStringField = {
+  dateField?: DateField | null | undefined;
   /**
    * The defaultValue field.
    */
-  defaultValue?: string | null | undefined;
+  defaultValue?: string | undefined;
   passwordField?: PasswordField | null | undefined;
   pickerField?: PickerField | null | undefined;
   /**
    * The placeholder field.
    */
-  placeholder?: string | null | undefined;
+  placeholder?: string | undefined;
   rules?: StringRules | null | undefined;
   selectField?: SelectField | null | undefined;
   textField?: TextField | null | undefined;
@@ -70,20 +78,22 @@ export const FormStringField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  defaultValue: z.nullable(z.string()).optional(),
+  dateField: z.nullable(DateField$inboundSchema).optional(),
+  defaultValue: z.string().optional(),
   passwordField: z.nullable(PasswordField$inboundSchema).optional(),
   pickerField: z.nullable(PickerField$inboundSchema).optional(),
-  placeholder: z.nullable(z.string()).optional(),
+  placeholder: z.string().optional(),
   rules: z.nullable(StringRules$inboundSchema).optional(),
   selectField: z.nullable(SelectField$inboundSchema).optional(),
   textField: z.nullable(TextField$inboundSchema).optional(),
 });
 /** @internal */
 export type FormStringField$Outbound = {
-  defaultValue?: string | null | undefined;
+  dateField?: DateField$Outbound | null | undefined;
+  defaultValue?: string | undefined;
   passwordField?: PasswordField$Outbound | null | undefined;
   pickerField?: PickerField$Outbound | null | undefined;
-  placeholder?: string | null | undefined;
+  placeholder?: string | undefined;
   rules?: StringRules$Outbound | null | undefined;
   selectField?: SelectField$Outbound | null | undefined;
   textField?: TextField$Outbound | null | undefined;
@@ -95,10 +105,11 @@ export const FormStringField$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FormStringField
 > = z.object({
-  defaultValue: z.nullable(z.string()).optional(),
+  dateField: z.nullable(DateField$outboundSchema).optional(),
+  defaultValue: z.string().optional(),
   passwordField: z.nullable(PasswordField$outboundSchema).optional(),
   pickerField: z.nullable(PickerField$outboundSchema).optional(),
-  placeholder: z.nullable(z.string()).optional(),
+  placeholder: z.string().optional(),
   rules: z.nullable(StringRules$outboundSchema).optional(),
   selectField: z.nullable(SelectField$outboundSchema).optional(),
   textField: z.nullable(TextField$outboundSchema).optional(),

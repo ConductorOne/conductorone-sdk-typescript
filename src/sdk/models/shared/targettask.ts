@@ -14,11 +14,11 @@ export type TargetTask = {
   /**
    * ID of the policy step requiring step-up authentication
    */
-  policyStepId?: string | null | undefined;
+  policyStepId?: string | undefined;
   /**
    * ID of the task being approved
    */
-  taskId?: string | null | undefined;
+  taskId?: string | undefined;
 };
 
 /** @internal */
@@ -27,8 +27,8 @@ export const TargetTask$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  policyStepId: z.nullable(z.string()).optional(),
-  taskId: z.nullable(z.string()).optional(),
+  policyStepId: z.string().optional(),
+  taskId: z.string().optional(),
 });
 
 export function targetTaskFromJSON(

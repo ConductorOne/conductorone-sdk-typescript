@@ -47,11 +47,11 @@ export type SearchGrantFeedRequest = {
   /**
    * The pageSize where 10 <= pageSize <= 100, default 25.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The page_token field for pagination.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * The list of C1 users to limit the search to.
    */
@@ -69,8 +69,8 @@ export type SearchGrantFeedRequest$Outbound = {
     | AppEntitlementUserBindingExpandHistoryMask$Outbound
     | null
     | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
   userRefs?: Array<UserRef$Outbound> | null | undefined;
 };
 
@@ -89,8 +89,8 @@ export const SearchGrantFeedRequest$outboundSchema: z.ZodType<
   expandMask: z.nullable(
     AppEntitlementUserBindingExpandHistoryMask$outboundSchema,
   ).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
   userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
 });
 

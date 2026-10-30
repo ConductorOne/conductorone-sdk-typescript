@@ -38,7 +38,7 @@ export type DirectoryServiceCreateRequest = {
   /**
    * The AppID to make into a directory, providing identities and more for the C1 app.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   celExpression?: DirectoryAccountFilterCel | null | undefined;
   expandMask?: DirectoryExpandMask | null | undefined;
   mergeConfig?: DirectoryMergeConfig | null | undefined;
@@ -47,7 +47,7 @@ export type DirectoryServiceCreateRequest = {
 /** @internal */
 export type DirectoryServiceCreateRequest$Outbound = {
   all?: DirectoryAccountFilterAll$Outbound | null | undefined;
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   celExpression?: DirectoryAccountFilterCel$Outbound | null | undefined;
   expandMask?: DirectoryExpandMask$Outbound | null | undefined;
   mergeConfig?: DirectoryMergeConfig$Outbound | null | undefined;
@@ -60,7 +60,7 @@ export const DirectoryServiceCreateRequest$outboundSchema: z.ZodType<
   DirectoryServiceCreateRequest
 > = z.object({
   all: z.nullable(DirectoryAccountFilterAll$outboundSchema).optional(),
-  appId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
   celExpression: z.nullable(DirectoryAccountFilterCel$outboundSchema)
     .optional(),
   expandMask: z.nullable(DirectoryExpandMask$outboundSchema).optional(),

@@ -36,12 +36,12 @@ export type AppEntitlementAutomationLastRunStatus = {
   /**
    * The errorMessage field.
    */
-  errorMessage?: string | null | undefined;
+  errorMessage?: string | undefined;
   lastCompletedAt?: Date | null | undefined;
   /**
    * The status field.
    */
-  status?: AppEntitlementAutomationLastRunStatusStatus | null | undefined;
+  status?: AppEntitlementAutomationLastRunStatusStatus | undefined;
 };
 
 /** @internal */
@@ -58,12 +58,11 @@ export const AppEntitlementAutomationLastRunStatus$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  errorMessage: z.nullable(z.string()).optional(),
+  errorMessage: z.string().optional(),
   lastCompletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  status: z.nullable(AppEntitlementAutomationLastRunStatusStatus$inboundSchema)
-    .optional(),
+  status: AppEntitlementAutomationLastRunStatusStatus$inboundSchema.optional(),
 });
 
 export function appEntitlementAutomationLastRunStatusFromJSON(

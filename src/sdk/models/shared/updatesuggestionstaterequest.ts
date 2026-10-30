@@ -29,11 +29,11 @@ export type UpdateSuggestionStateRequest = {
   /**
    * The ID of the access profile created from this suggestion, set when accepting.
    */
-  createdCatalogId?: string | null | undefined;
+  createdCatalogId?: string | undefined;
   /**
    * The new state to transition the suggestion to.
    */
-  state?: UpdateSuggestionStateRequestState | null | undefined;
+  state?: UpdateSuggestionStateRequestState | undefined;
 };
 
 /** @internal */
@@ -45,8 +45,8 @@ export const UpdateSuggestionStateRequestState$outboundSchema: z.ZodType<
 
 /** @internal */
 export type UpdateSuggestionStateRequest$Outbound = {
-  createdCatalogId?: string | null | undefined;
-  state?: string | null | undefined;
+  createdCatalogId?: string | undefined;
+  state?: string | undefined;
 };
 
 /** @internal */
@@ -55,9 +55,8 @@ export const UpdateSuggestionStateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateSuggestionStateRequest
 > = z.object({
-  createdCatalogId: z.nullable(z.string()).optional(),
-  state: z.nullable(UpdateSuggestionStateRequestState$outboundSchema)
-    .optional(),
+  createdCatalogId: z.string().optional(),
+  state: UpdateSuggestionStateRequestState$outboundSchema.optional(),
 });
 
 export function updateSuggestionStateRequestToJSON(

@@ -18,15 +18,15 @@ export type RequestCatalogView = {
   /**
    * JSONPATH expression indicating the location of the access entitlement objects, that the request catalog allows users to request, in the array.
    */
-  accessEntitlementsPath?: string | null | undefined;
+  accessEntitlementsPath?: string | undefined;
   /**
    * JSONPATH expression indicating the location of the User object, that created the request catalog, in the array.
    */
-  createdByUserPath?: string | null | undefined;
+  createdByUserPath?: string | undefined;
   /**
    * Total number of the members of the catalog
    */
-  memberCount?: number | null | undefined;
+  memberCount?: number | undefined;
   requestCatalog?: RequestCatalog | null | undefined;
 };
 
@@ -36,10 +36,9 @@ export const RequestCatalogView$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accessEntitlementsPath: z.nullable(z.string()).optional(),
-  createdByUserPath: z.nullable(z.string()).optional(),
-  memberCount: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
+  accessEntitlementsPath: z.string().optional(),
+  createdByUserPath: z.string().optional(),
+  memberCount: z.string().transform(v => parseInt(v, 10)).optional(),
   requestCatalog: z.nullable(RequestCatalog$inboundSchema).optional(),
 });
 

@@ -15,5 +15,7 @@ let value: C1ApiAppV1AppEntitlementsListRequest = {
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `appId`            | *string*           | :heavy_check_mark: | N/A                |
+| `appUserId`        | *string*           | :heavy_minus_sign: | N/A                |
 | `pageSize`         | *number*           | :heavy_minus_sign: | N/A                |
 | `pageToken`        | *string*           | :heavy_minus_sign: | N/A                |
+| `q`                | *string*           | :heavy_minus_sign: | N/A                |

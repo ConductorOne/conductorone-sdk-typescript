@@ -17,16 +17,16 @@ export type C1TodoItem = {
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   label?: DynamicString | null | undefined;
   /**
    * The section field.
    */
-  section?: string | null | undefined;
+  section?: string | undefined;
   /**
    * The status field.
    */
-  status?: string | null | undefined;
+  status?: string | undefined;
   trailingAction?: ServerEvent | null | undefined;
   trailingActionLabel?: DynamicString | null | undefined;
 };
@@ -38,10 +38,10 @@ export const C1TodoItem$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   description: z.nullable(DynamicString$inboundSchema).optional(),
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
   label: z.nullable(DynamicString$inboundSchema).optional(),
-  section: z.nullable(z.string()).optional(),
-  status: z.nullable(z.string()).optional(),
+  section: z.string().optional(),
+  status: z.string().optional(),
   trailingAction: z.nullable(ServerEvent$inboundSchema).optional(),
   trailingActionLabel: z.nullable(DynamicString$inboundSchema).optional(),
 });

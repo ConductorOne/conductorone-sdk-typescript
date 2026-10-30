@@ -34,7 +34,7 @@ export type TaskAuditCertifyOutcome = {
   /**
    * The outcome field.
    */
-  outcome?: TaskAuditCertifyOutcomeOutcome | null | undefined;
+  outcome?: TaskAuditCertifyOutcomeOutcome | undefined;
 };
 
 /** @internal */
@@ -50,7 +50,7 @@ export const TaskAuditCertifyOutcome$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  outcome: z.nullable(TaskAuditCertifyOutcomeOutcome$inboundSchema).optional(),
+  outcome: TaskAuditCertifyOutcomeOutcome$inboundSchema.optional(),
 });
 
 export function taskAuditCertifyOutcomeFromJSON(

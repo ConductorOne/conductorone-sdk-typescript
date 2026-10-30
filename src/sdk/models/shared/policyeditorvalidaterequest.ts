@@ -11,12 +11,12 @@ export type PolicyEditorValidateRequest = {
   /**
    * The text field.
    */
-  text?: string | null | undefined;
+  text?: string | undefined;
 };
 
 /** @internal */
 export type PolicyEditorValidateRequest$Outbound = {
-  text?: string | null | undefined;
+  text?: string | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const PolicyEditorValidateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PolicyEditorValidateRequest
 > = z.object({
-  text: z.nullable(z.string()).optional(),
+  text: z.string().optional(),
 });
 
 export function policyEditorValidateRequestToJSON(

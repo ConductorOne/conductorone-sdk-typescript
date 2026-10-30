@@ -15,15 +15,15 @@ export type PayloadWorkflowStep = {
   /**
    * The workflow execution ID
    */
-  workflowExecutionId?: number | null | undefined;
+  workflowExecutionId?: number | undefined;
   /**
    * The workflow execution step ID
    */
-  workflowExecutionStepId?: string | null | undefined;
+  workflowExecutionStepId?: string | undefined;
   /**
    * The workflow template ID
    */
-  workflowId?: string | null | undefined;
+  workflowId?: string | undefined;
 };
 
 /** @internal */
@@ -33,17 +33,16 @@ export const PayloadWorkflowStep$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   context: z.nullable(z.record(z.any())).optional(),
-  workflowExecutionId: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
-  workflowExecutionStepId: z.nullable(z.string()).optional(),
-  workflowId: z.nullable(z.string()).optional(),
+  workflowExecutionId: z.string().transform(v => parseInt(v, 10)).optional(),
+  workflowExecutionStepId: z.string().optional(),
+  workflowId: z.string().optional(),
 });
 /** @internal */
 export type PayloadWorkflowStep$Outbound = {
   context?: { [k: string]: any } | null | undefined;
-  workflowExecutionId?: string | null | undefined;
-  workflowExecutionStepId?: string | null | undefined;
-  workflowId?: string | null | undefined;
+  workflowExecutionId?: string | undefined;
+  workflowExecutionStepId?: string | undefined;
+  workflowId?: string | undefined;
 };
 
 /** @internal */
@@ -53,10 +52,9 @@ export const PayloadWorkflowStep$outboundSchema: z.ZodType<
   PayloadWorkflowStep
 > = z.object({
   context: z.nullable(z.record(z.any())).optional(),
-  workflowExecutionId: z.nullable(z.number().int().transform(v => `${v}`))
-    .optional(),
-  workflowExecutionStepId: z.nullable(z.string()).optional(),
-  workflowId: z.nullable(z.string()).optional(),
+  workflowExecutionId: z.number().int().transform(v => `${v}`).optional(),
+  workflowExecutionStepId: z.string().optional(),
+  workflowId: z.string().optional(),
 });
 
 export function payloadWorkflowStepToJSON(

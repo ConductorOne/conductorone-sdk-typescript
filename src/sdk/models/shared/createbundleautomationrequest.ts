@@ -28,22 +28,22 @@ export type CreateBundleAutomationRequest = {
   /**
    * Whether to create access request tasks for matched users instead of granting directly.
    */
-  createTasks?: boolean | null | undefined;
+  createTasks?: boolean | undefined;
   /**
    * Whether to disable the circuit breaker that pauses the automation when excessive membership changes are detected.
    */
-  disableCircuitBreaker?: boolean | null | undefined;
+  disableCircuitBreaker?: boolean | undefined;
   /**
    * Whether the automation should actively run on its schedule.
    */
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   /**
    * When true, the circuit breaker is evaluated even on profiles below the
    *
    * @remarks
    *  tenant min-members floor. Defaults to false.
    */
-  enforceOnSmallProfiles?: boolean | null | undefined;
+  enforceOnSmallProfiles?: boolean | undefined;
   entitlements?: BundleAutomationRuleEntitlement | null | undefined;
   /**
    * Per-automation override for the removed-members percent that trips the
@@ -51,18 +51,18 @@ export type CreateBundleAutomationRequest = {
    * @remarks
    *  circuit breaker (1-100). 0 / unset means inherit the tenant default.
    */
-  removedMembersThresholdPercent?: number | null | undefined;
+  removedMembersThresholdPercent?: number | undefined;
 };
 
 /** @internal */
 export type CreateBundleAutomationRequest$Outbound = {
   cel?: BundleAutomationRuleCEL$Outbound | null | undefined;
-  createTasks?: boolean | null | undefined;
-  disableCircuitBreaker?: boolean | null | undefined;
-  enabled?: boolean | null | undefined;
-  enforceOnSmallProfiles?: boolean | null | undefined;
+  createTasks?: boolean | undefined;
+  disableCircuitBreaker?: boolean | undefined;
+  enabled?: boolean | undefined;
+  enforceOnSmallProfiles?: boolean | undefined;
   entitlements?: BundleAutomationRuleEntitlement$Outbound | null | undefined;
-  removedMembersThresholdPercent?: string | null | undefined;
+  removedMembersThresholdPercent?: string | undefined;
 };
 
 /** @internal */
@@ -72,15 +72,14 @@ export const CreateBundleAutomationRequest$outboundSchema: z.ZodType<
   CreateBundleAutomationRequest
 > = z.object({
   cel: z.nullable(BundleAutomationRuleCEL$outboundSchema).optional(),
-  createTasks: z.nullable(z.boolean()).optional(),
-  disableCircuitBreaker: z.nullable(z.boolean()).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  enforceOnSmallProfiles: z.nullable(z.boolean()).optional(),
+  createTasks: z.boolean().optional(),
+  disableCircuitBreaker: z.boolean().optional(),
+  enabled: z.boolean().optional(),
+  enforceOnSmallProfiles: z.boolean().optional(),
   entitlements: z.nullable(BundleAutomationRuleEntitlement$outboundSchema)
     .optional(),
-  removedMembersThresholdPercent: z.nullable(
-    z.number().int().transform(v => `${v}`),
-  ).optional(),
+  removedMembersThresholdPercent: z.number().int().transform(v => `${v}`)
+    .optional(),
 });
 
 export function createBundleAutomationRequestToJSON(

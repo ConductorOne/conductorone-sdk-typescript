@@ -25,7 +25,7 @@ export type SearchStepUpTransactionsRequestState = OpenEnum<
 /**
  * The targetType field.
  */
-export const TargetType = {
+export const SearchStepUpTransactionsRequestTargetType = {
   TargetTypeUnspecified: "TARGET_TYPE_UNSPECIFIED",
   TargetTypeTicket: "TARGET_TYPE_TICKET",
   TargetTypeTest: "TARGET_TYPE_TEST",
@@ -33,7 +33,9 @@ export const TargetType = {
 /**
  * The targetType field.
  */
-export type TargetType = OpenEnum<typeof TargetType>;
+export type SearchStepUpTransactionsRequestTargetType = OpenEnum<
+  typeof SearchStepUpTransactionsRequestTargetType
+>;
 
 /**
  * Request message for searching step-up transactions
@@ -44,31 +46,31 @@ export type SearchStepUpTransactionsRequest = {
   /**
    * Maximum number of results to return
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * Token for pagination
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Filter by provider ID
    */
-  providerId?: string | null | undefined;
+  providerId?: string | undefined;
   /**
    * Filter by transaction state
    */
-  state?: SearchStepUpTransactionsRequestState | null | undefined;
+  state?: SearchStepUpTransactionsRequestState | undefined;
   /**
    * The targetType field.
    */
-  targetType?: TargetType | null | undefined;
+  targetType?: SearchStepUpTransactionsRequestTargetType | undefined;
   /**
    * Filter by task ID (only applicable if target_type is TICKET)
    */
-  taskId?: string | null | undefined;
+  taskId?: string | undefined;
   /**
    * Filter by user ID
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -79,23 +81,21 @@ export const SearchStepUpTransactionsRequestState$outboundSchema: z.ZodType<
 > = openEnums.outboundSchema(SearchStepUpTransactionsRequestState);
 
 /** @internal */
-export const TargetType$outboundSchema: z.ZodType<
-  string,
-  z.ZodTypeDef,
-  TargetType
-> = openEnums.outboundSchema(TargetType);
+export const SearchStepUpTransactionsRequestTargetType$outboundSchema:
+  z.ZodType<string, z.ZodTypeDef, SearchStepUpTransactionsRequestTargetType> =
+    openEnums.outboundSchema(SearchStepUpTransactionsRequestTargetType);
 
 /** @internal */
 export type SearchStepUpTransactionsRequest$Outbound = {
   createdAfter?: string | null | undefined;
   createdBefore?: string | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  providerId?: string | null | undefined;
-  state?: string | null | undefined;
-  targetType?: string | null | undefined;
-  taskId?: string | null | undefined;
-  userId?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  providerId?: string | undefined;
+  state?: string | undefined;
+  targetType?: string | undefined;
+  taskId?: string | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -107,14 +107,14 @@ export const SearchStepUpTransactionsRequest$outboundSchema: z.ZodType<
   createdAfter: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   createdBefore: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  providerId: z.nullable(z.string()).optional(),
-  state: z.nullable(SearchStepUpTransactionsRequestState$outboundSchema)
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  providerId: z.string().optional(),
+  state: SearchStepUpTransactionsRequestState$outboundSchema.optional(),
+  targetType: SearchStepUpTransactionsRequestTargetType$outboundSchema
     .optional(),
-  targetType: z.nullable(TargetType$outboundSchema).optional(),
-  taskId: z.nullable(z.string()).optional(),
-  userId: z.nullable(z.string()).optional(),
+  taskId: z.string().optional(),
+  userId: z.string().optional(),
 });
 
 export function searchStepUpTransactionsRequestToJSON(

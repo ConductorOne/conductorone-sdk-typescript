@@ -6,7 +6,8 @@
 
 * [searchAuditEvents](#searchauditevents) - Search Audit Events
 * [searchMySecrets](#searchmysecrets) - Search My Secrets
-* [revoke](#revoke) - Revoke
+* [searchSecretsSharedWithMe](#searchsecretssharedwithme) - Search Secrets Shared With Me
+* [delete](#delete) - Delete
 * [get](#get) - Get
 * [setTextContent](#settextcontent) - Set Text Content
 * [getContent](#getcontent) - Get Content
@@ -166,13 +167,17 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4XX, 5XX        | \*/\*           |
 
-## revoke
+## searchSecretsSharedWithMe
 
-Revoke soft-deletes a secret (sets Vault.deleted_at, deletes content).
+SearchSecretsSharedWithMe returns secrets shared with the current user.
+ Automatically scoped to current user - no user_id filter parameter.
+ INTERNAL secrets only: EXTERNAL secrets are addressed by email and are never
+ viewable through an authenticated C1 session, so returning them here would
+ surface rows that GetContent then denies.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="c1.api.secrets.v1.PaperSecretService.Revoke" method="delete" path="/api/v1/secrets/{vault_id}" -->
+<!-- UsageSnippet language="typescript" operationID="c1.api.secrets.v1.PaperSecretService.SearchSecretsSharedWithMe" method="post" path="/api/v1/search/secrets/shared_with_me" -->
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 
@@ -184,7 +189,83 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
 });
 
 async function run() {
-  const result = await conductoroneSDKTypescript.paperSecret.revoke({
+  const result = await conductoroneSDKTypescript.paperSecret.searchSecretsSharedWithMe();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { paperSecretSearchSecretsSharedWithMe } from "conductorone-sdk-typescript/funcs/paperSecretSearchSecretsSharedWithMe.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await paperSecretSearchSecretsSharedWithMe(conductoroneSDKTypescript);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("paperSecretSearchSecretsSharedWithMe failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [shared.PaperSecretServiceSearchSecretsSharedWithMeRequest](../../sdk/models/shared/papersecretservicesearchsecretssharedwithmerequest.md)                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.C1ApiSecretsV1PaperSecretServiceSearchSecretsSharedWithMeResponse](../../sdk/models/operations/c1apisecretsv1papersecretservicesearchsecretssharedwithmeresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## delete
+
+Delete soft-deletes a Paper Vault and deletes its content. It never
+ revokes the credential that may have been stored in the vault.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.secrets.v1.PaperSecretService.Delete" method="delete" path="/api/v1/secrets/{vault_id}" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.paperSecret.delete({
     vaultId: "<id>",
   });
 
@@ -200,7 +281,7 @@ The standalone function version of this method:
 
 ```typescript
 import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
-import { paperSecretRevoke } from "conductorone-sdk-typescript/funcs/paperSecretRevoke.js";
+import { paperSecretDelete } from "conductorone-sdk-typescript/funcs/paperSecretDelete.js";
 
 // Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -212,14 +293,14 @@ const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
 });
 
 async function run() {
-  const res = await paperSecretRevoke(conductoroneSDKTypescript, {
+  const res = await paperSecretDelete(conductoroneSDKTypescript, {
     vaultId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("paperSecretRevoke failed:", res.error);
+    console.log("paperSecretDelete failed:", res.error);
   }
 }
 
@@ -230,14 +311,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.C1ApiSecretsV1PaperSecretServiceRevokeRequest](../../sdk/models/operations/c1apisecretsv1papersecretservicerevokerequest.md)                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.C1ApiSecretsV1PaperSecretServiceDeleteRequest](../../sdk/models/operations/c1apisecretsv1papersecretservicedeleterequest.md)                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.C1ApiSecretsV1PaperSecretServiceRevokeResponse](../../sdk/models/operations/c1apisecretsv1papersecretservicerevokeresponse.md)\>**
+**Promise\<[operations.C1ApiSecretsV1PaperSecretServiceDeleteResponse](../../sdk/models/operations/c1apisecretsv1papersecretservicedeleteresponse.md)\>**
 
 ### Errors
 
@@ -568,7 +649,7 @@ run();
 
 ## createExternal
 
-CreateExternal creates a secret vault for external email recipients.
+CreateExternal creates a secret using the requested Age suite.
 
 ### Example Usage
 
@@ -643,7 +724,7 @@ run();
 
 ## createInternal
 
-CreateInternal creates a secret vault for internal C1 users.
+CreateInternal creates a secret using the requested Age suite.
 
 ### Example Usage
 

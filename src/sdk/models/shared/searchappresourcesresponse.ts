@@ -41,7 +41,7 @@ export type SearchAppResourcesResponse = {
   /**
    * The token for fetching the next page of results.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -82,7 +82,7 @@ export const SearchAppResourcesResponse$inboundSchema: z.ZodType<
     z.array(z.lazy(() => SearchAppResourcesResponseExpanded$inboundSchema)),
   ).optional(),
   list: z.nullable(z.array(AppResourceView$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function searchAppResourcesResponseFromJSON(

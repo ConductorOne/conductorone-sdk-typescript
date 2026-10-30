@@ -38,7 +38,7 @@ export type TunnelAppliance = {
   /**
    * Number of services the appliance is currently announcing.
    */
-  announcedServiceCount?: number | null | undefined;
+  announcedServiceCount?: number | undefined;
   lastSeenAt?: Date | null | undefined;
   /**
    * Wormhole relays currently holding a Link for this bridge. Typically of
@@ -50,7 +50,7 @@ export type TunnelAppliance = {
   /**
    * The status field.
    */
-  status?: TunnelApplianceStatus | null | undefined;
+  status?: TunnelApplianceStatus | undefined;
 };
 
 /** @internal */
@@ -66,12 +66,12 @@ export const TunnelAppliance$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  announcedServiceCount: z.nullable(z.number().int()).optional(),
+  announcedServiceCount: z.number().int().optional(),
   lastSeenAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   links: z.nullable(z.array(TunnelApplianceLink$inboundSchema)).optional(),
-  status: z.nullable(TunnelApplianceStatus$inboundSchema).optional(),
+  status: TunnelApplianceStatus$inboundSchema.optional(),
 });
 
 export function tunnelApplianceFromJSON(

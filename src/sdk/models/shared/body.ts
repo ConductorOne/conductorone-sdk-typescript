@@ -36,7 +36,7 @@ export type Body = {
    *
    *  This value will match the "Webhook-Callback-Url" header.
    */
-  callbackUrl?: string | null | undefined;
+  callbackUrl?: string | undefined;
   /**
    * The type of event that triggered this Webhook.
    *
@@ -50,7 +50,7 @@ export type Body = {
    *  - "c1.webhooks.v1.PayloadPolicyPostAction"
    *  - "c1.webhooks.v1.PayloadProvisionStep"
    */
-  event?: string | null | undefined;
+  event?: string | undefined;
   /**
    * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
    */
@@ -62,7 +62,7 @@ export type Body = {
    *
    *  This value will match the "Webhook-Version" header.
    */
-  version?: string | null | undefined;
+  version?: string | undefined;
   /**
    * Unique ID for this Webhook. Your receiver should only process this ID once.
    *
@@ -70,7 +70,7 @@ export type Body = {
    *
    *  This value will match the "Webhook-Id" header.
    */
-  webhookId?: string | null | undefined;
+  webhookId?: string | undefined;
 };
 
 /** @internal */
@@ -126,29 +126,29 @@ export function payloadFromJSON(
 /** @internal */
 export const Body$inboundSchema: z.ZodType<Body, z.ZodTypeDef, unknown> = z
   .object({
-    callbackUrl: z.nullable(z.string()).optional(),
-    event: z.nullable(z.string()).optional(),
+    callbackUrl: z.string().optional(),
+    event: z.string().optional(),
     payload: z.nullable(z.lazy(() => Payload$inboundSchema)).optional(),
-    version: z.nullable(z.string()).optional(),
-    webhookId: z.nullable(z.string()).optional(),
+    version: z.string().optional(),
+    webhookId: z.string().optional(),
   });
 /** @internal */
 export type Body$Outbound = {
-  callbackUrl?: string | null | undefined;
-  event?: string | null | undefined;
+  callbackUrl?: string | undefined;
+  event?: string | undefined;
   payload?: Payload$Outbound | null | undefined;
-  version?: string | null | undefined;
-  webhookId?: string | null | undefined;
+  version?: string | undefined;
+  webhookId?: string | undefined;
 };
 
 /** @internal */
 export const Body$outboundSchema: z.ZodType<Body$Outbound, z.ZodTypeDef, Body> =
   z.object({
-    callbackUrl: z.nullable(z.string()).optional(),
-    event: z.nullable(z.string()).optional(),
+    callbackUrl: z.string().optional(),
+    event: z.string().optional(),
     payload: z.nullable(z.lazy(() => Payload$outboundSchema)).optional(),
-    version: z.nullable(z.string()).optional(),
-    webhookId: z.nullable(z.string()).optional(),
+    version: z.string().optional(),
+    webhookId: z.string().optional(),
   });
 
 export function bodyToJSON(body: Body): string {

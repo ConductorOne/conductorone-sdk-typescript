@@ -12,8 +12,8 @@ let value: MCPToolRef = {};
 
 ## Fields
 
-| Field                  | Type                   | Required               | Description            |
-| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
-| `appId`                | *string*               | :heavy_minus_sign:     | The appId field.       |
-| `connectorId`          | *string*               | :heavy_minus_sign:     | The connectorId field. |
-| `id`                   | *string*               | :heavy_minus_sign:     | The id field.          |
+| Field                                          | Type                                           | Required                                       | Description                                    |
+| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
+| `appId`                                        | *string*                                       | :heavy_minus_sign:                             | The application the tool belongs to.           |
+| `connectorId`                                  | *string*                                       | :heavy_minus_sign:                             | The connector the tool was discovered through. |
+| `id`                                           | *string*                                       | :heavy_minus_sign:                             | Unique identifier for the MCP tool.            |

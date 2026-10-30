@@ -9,6 +9,24 @@ import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { A2UIComponent, A2UIComponent$inboundSchema } from "./a2uicomponent.js";
+import {
+  A2UIReportEditTarget,
+  A2UIReportEditTarget$inboundSchema,
+} from "./a2uireportedittarget.js";
+
+/**
+ * The role field.
+ */
+export const A2UISurfaceRole = {
+  SurfaceRoleUnspecified: "SURFACE_ROLE_UNSPECIFIED",
+  SurfaceRolePrimary: "SURFACE_ROLE_PRIMARY",
+  SurfaceRoleStatus: "SURFACE_ROLE_STATUS",
+  SurfaceRolePrompt: "SURFACE_ROLE_PROMPT",
+} as const;
+/**
+ * The role field.
+ */
+export type A2UISurfaceRole = OpenEnum<typeof A2UISurfaceRole>;
 
 /**
  * The state field.
@@ -31,7 +49,7 @@ export type A2UISurface = {
   /**
    * The catalogId field.
    */
-  catalogId?: string | null | undefined;
+  catalogId?: string | undefined;
   /**
    * The components field.
    */
@@ -39,35 +57,58 @@ export type A2UISurface = {
   /**
    * The conversationId field.
    */
-  conversationId?: string | null | undefined;
+  conversationId?: string | undefined;
   createdAt?: Date | null | undefined;
   /**
    * The dataModelJson field.
    */
-  dataModelJson?: string | null | undefined;
+  dataModelJson?: string | undefined;
   deletedAt?: Date | null | undefined;
+  /**
+   * True when this surface has executable report source behind it. The client
+   *
+   * @remarks
+   *  needs only saveability; scratch Function and commit identities stay private.
+   */
+  hasReportProgram?: boolean | undefined;
+  reportEditTarget?: A2UIReportEditTarget | null | undefined;
+  /**
+   * The role field.
+   */
+  role?: A2UISurfaceRole | undefined;
+  /**
+   * Present after this surface has been promoted to a saved report.
+   */
+  savedReportId?: string | undefined;
   /**
    * The schemaVersion field.
    */
-  schemaVersion?: number | null | undefined;
+  schemaVersion?: number | undefined;
   /**
    * The sendDataModel field.
    */
-  sendDataModel?: boolean | null | undefined;
+  sendDataModel?: boolean | undefined;
   /**
    * The state field.
    */
-  state?: State | null | undefined;
+  state?: State | undefined;
   /**
    * The surfaceId field.
    */
-  surfaceId?: string | null | undefined;
+  surfaceId?: string | undefined;
   /**
    * The tenantId field.
    */
-  tenantId?: string | null | undefined;
+  tenantId?: string | undefined;
   updatedAt?: Date | null | undefined;
 };
+
+/** @internal */
+export const A2UISurfaceRole$inboundSchema: z.ZodType<
+  A2UISurfaceRole,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(A2UISurfaceRole);
 
 /** @internal */
 export const State$inboundSchema: z.ZodType<State, z.ZodTypeDef, unknown> =
@@ -79,22 +120,25 @@ export const A2UISurface$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  catalogId: z.nullable(z.string()).optional(),
+  catalogId: z.string().optional(),
   components: z.nullable(z.array(A2UIComponent$inboundSchema)).optional(),
-  conversationId: z.nullable(z.string()).optional(),
+  conversationId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  dataModelJson: z.nullable(z.string()).optional(),
+  dataModelJson: z.string().optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  schemaVersion: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
-  sendDataModel: z.nullable(z.boolean()).optional(),
-  state: z.nullable(State$inboundSchema).optional(),
-  surfaceId: z.nullable(z.string()).optional(),
-  tenantId: z.nullable(z.string()).optional(),
+  hasReportProgram: z.boolean().optional(),
+  reportEditTarget: z.nullable(A2UIReportEditTarget$inboundSchema).optional(),
+  role: A2UISurfaceRole$inboundSchema.optional(),
+  savedReportId: z.string().optional(),
+  schemaVersion: z.string().transform(v => parseInt(v, 10)).optional(),
+  sendDataModel: z.boolean().optional(),
+  state: State$inboundSchema.optional(),
+  surfaceId: z.string().optional(),
+  tenantId: z.string().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

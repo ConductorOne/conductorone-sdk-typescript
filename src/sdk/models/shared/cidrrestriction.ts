@@ -14,7 +14,7 @@ export type CIDRRestriction = {
   /**
    * Whether this CIDR restriction is enforced.
    */
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   /**
    * The list of CIDR ranges that are allowed when the restriction is enabled.
    *
@@ -30,12 +30,12 @@ export const CIDRRestriction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  enabled: z.nullable(z.boolean()).optional(),
+  enabled: z.boolean().optional(),
   sourceCidr: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
 export type CIDRRestriction$Outbound = {
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   sourceCidr?: Array<string> | null | undefined;
 };
 
@@ -45,7 +45,7 @@ export const CIDRRestriction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CIDRRestriction
 > = z.object({
-  enabled: z.nullable(z.boolean()).optional(),
+  enabled: z.boolean().optional(),
   sourceCidr: z.nullable(z.array(z.string())).optional(),
 });
 

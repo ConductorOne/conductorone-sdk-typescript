@@ -4,8 +4,16 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AccessProfileReviewDimensions,
+  AccessProfileReviewDimensions$inboundSchema,
+  AccessProfileReviewDimensions$Outbound,
+  AccessProfileReviewDimensions$outboundSchema,
+} from "./accessprofilereviewdimensions.js";
 import {
   AccountCriteriaScope,
   AccountCriteriaScope$inboundSchema,
@@ -73,6 +81,12 @@ import {
   ResourceTypeSelectionScope$outboundSchema,
 } from "./resourcetypeselectionscope.js";
 import {
+  ScopeRoleSelectionScope,
+  ScopeRoleSelectionScope$inboundSchema,
+  ScopeRoleSelectionScope$Outbound,
+  ScopeRoleSelectionScope$outboundSchema,
+} from "./scoperoleselectionscope.js";
+import {
   SelectedUsersScope,
   SelectedUsersScope$inboundSchema,
   SelectedUsersScope$Outbound,
@@ -85,6 +99,12 @@ import {
   SpecificAccessConflictsScope$outboundSchema,
 } from "./specificaccessconflictsscope.js";
 import {
+  SpecificAccessProfilesScope,
+  SpecificAccessProfilesScope$inboundSchema,
+  SpecificAccessProfilesScope$Outbound,
+  SpecificAccessProfilesScope$outboundSchema,
+} from "./specificaccessprofilesscope.js";
+import {
   SpecificResourcesScope,
   SpecificResourcesScope$inboundSchema,
   SpecificResourcesScope$Outbound,
@@ -96,6 +116,21 @@ import {
   UserCriteriaScope$Outbound,
   UserCriteriaScope$outboundSchema,
 } from "./usercriteriascope.js";
+
+/**
+ * Filters principals included in the scope. Unspecified is treated as users.
+ */
+export const PrincipalTypeFilter = {
+  PrincipalTypeFilterUnspecified: "PRINCIPAL_TYPE_FILTER_UNSPECIFIED",
+  PrincipalTypeFilterUsers: "PRINCIPAL_TYPE_FILTER_USERS",
+  PrincipalTypeFilterResources: "PRINCIPAL_TYPE_FILTER_RESOURCES",
+  PrincipalTypeFilterUsersAndResources:
+    "PRINCIPAL_TYPE_FILTER_USERS_AND_RESOURCES",
+} as const;
+/**
+ * Filters principals included in the scope. Unspecified is treated as users.
+ */
+export type PrincipalTypeFilter = OpenEnum<typeof PrincipalTypeFilter>;
 
 /**
  * The AccessReviewScopeV2 message.
@@ -129,8 +164,20 @@ import {
  *
  * This message contains a oneof named resource_scope. Only a single field of the following list may be set at a time:
  *   - resourceSelection
+ *
+ * This message contains a oneof named excluded_apps_and_resources_scope. Only a single field of the following list may be set at a time:
+ *   - excludedSpecificResources
+ *   - excludedResourceTypeSelections
+ *   - excludedAppSelectionCriteria
+ *
+ * This message contains a oneof named access_profiles_scope. Only a single field of the following list may be set at a time:
+ *   - specificAccessProfiles
  */
 export type AccessReviewScopeV2 = {
+  accessProfileReviewDimensions?:
+    | AccessProfileReviewDimensions
+    | null
+    | undefined;
   accountCelExpression?: CelExpressionScope | null | undefined;
   accountCriteria?: AccountCriteriaScope | null | undefined;
   allAccessConflicts?: AllAccessConflictsScope | null | undefined;
@@ -140,14 +187,39 @@ export type AccessReviewScopeV2 = {
   appAccess?: ApplicationAccessScope | null | undefined;
   appSelectionCriteria?: AppSelectionCriteriaScope | null | undefined;
   celExpression?: CelExpressionScope | null | undefined;
+  excludedAppSelectionCriteria?: AppSelectionCriteriaScope | null | undefined;
+  excludedResourceTypeSelections?:
+    | ResourceTypeSelectionScope
+    | null
+    | undefined;
+  excludedSpecificResources?: SpecificResourcesScope | null | undefined;
   grantsByCriteria?: GrantsByCriteriaScope | null | undefined;
+  /**
+   * Filters principals included in the scope. Unspecified is treated as users.
+   */
+  principalTypeFilter?: PrincipalTypeFilter | undefined;
   resourceSelection?: ResourceSelectionScope | null | undefined;
   resourceTypeSelections?: ResourceTypeSelectionScope | null | undefined;
+  scopeRoleSelection?: ScopeRoleSelectionScope | null | undefined;
   selectedUsers?: SelectedUsersScope | null | undefined;
   specificAccessConflicts?: SpecificAccessConflictsScope | null | undefined;
+  specificAccessProfiles?: SpecificAccessProfilesScope | null | undefined;
   specificResources?: SpecificResourcesScope | null | undefined;
   userCriteria?: UserCriteriaScope | null | undefined;
 };
+
+/** @internal */
+export const PrincipalTypeFilter$inboundSchema: z.ZodType<
+  PrincipalTypeFilter,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PrincipalTypeFilter);
+/** @internal */
+export const PrincipalTypeFilter$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  PrincipalTypeFilter
+> = openEnums.outboundSchema(PrincipalTypeFilter);
 
 /** @internal */
 export const AccessReviewScopeV2$inboundSchema: z.ZodType<
@@ -155,6 +227,9 @@ export const AccessReviewScopeV2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  accessProfileReviewDimensions: z.nullable(
+    AccessProfileReviewDimensions$inboundSchema,
+  ).optional(),
   accountCelExpression: z.nullable(CelExpressionScope$inboundSchema).optional(),
   accountCriteria: z.nullable(AccountCriteriaScope$inboundSchema).optional(),
   allAccessConflicts: z.nullable(AllAccessConflictsScope$inboundSchema)
@@ -166,21 +241,38 @@ export const AccessReviewScopeV2$inboundSchema: z.ZodType<
   appSelectionCriteria: z.nullable(AppSelectionCriteriaScope$inboundSchema)
     .optional(),
   celExpression: z.nullable(CelExpressionScope$inboundSchema).optional(),
+  excludedAppSelectionCriteria: z.nullable(
+    AppSelectionCriteriaScope$inboundSchema,
+  ).optional(),
+  excludedResourceTypeSelections: z.nullable(
+    ResourceTypeSelectionScope$inboundSchema,
+  ).optional(),
+  excludedSpecificResources: z.nullable(SpecificResourcesScope$inboundSchema)
+    .optional(),
   grantsByCriteria: z.nullable(GrantsByCriteriaScope$inboundSchema).optional(),
+  principalTypeFilter: PrincipalTypeFilter$inboundSchema.optional(),
   resourceSelection: z.nullable(ResourceSelectionScope$inboundSchema)
     .optional(),
   resourceTypeSelections: z.nullable(ResourceTypeSelectionScope$inboundSchema)
+    .optional(),
+  scopeRoleSelection: z.nullable(ScopeRoleSelectionScope$inboundSchema)
     .optional(),
   selectedUsers: z.nullable(SelectedUsersScope$inboundSchema).optional(),
   specificAccessConflicts: z.nullable(
     SpecificAccessConflictsScope$inboundSchema,
   ).optional(),
+  specificAccessProfiles: z.nullable(SpecificAccessProfilesScope$inboundSchema)
+    .optional(),
   specificResources: z.nullable(SpecificResourcesScope$inboundSchema)
     .optional(),
   userCriteria: z.nullable(UserCriteriaScope$inboundSchema).optional(),
 });
 /** @internal */
 export type AccessReviewScopeV2$Outbound = {
+  accessProfileReviewDimensions?:
+    | AccessProfileReviewDimensions$Outbound
+    | null
+    | undefined;
   accountCelExpression?: CelExpressionScope$Outbound | null | undefined;
   accountCriteria?: AccountCriteriaScope$Outbound | null | undefined;
   allAccessConflicts?: AllAccessConflictsScope$Outbound | null | undefined;
@@ -190,15 +282,33 @@ export type AccessReviewScopeV2$Outbound = {
   appAccess?: ApplicationAccessScope$Outbound | null | undefined;
   appSelectionCriteria?: AppSelectionCriteriaScope$Outbound | null | undefined;
   celExpression?: CelExpressionScope$Outbound | null | undefined;
+  excludedAppSelectionCriteria?:
+    | AppSelectionCriteriaScope$Outbound
+    | null
+    | undefined;
+  excludedResourceTypeSelections?:
+    | ResourceTypeSelectionScope$Outbound
+    | null
+    | undefined;
+  excludedSpecificResources?:
+    | SpecificResourcesScope$Outbound
+    | null
+    | undefined;
   grantsByCriteria?: GrantsByCriteriaScope$Outbound | null | undefined;
+  principalTypeFilter?: string | undefined;
   resourceSelection?: ResourceSelectionScope$Outbound | null | undefined;
   resourceTypeSelections?:
     | ResourceTypeSelectionScope$Outbound
     | null
     | undefined;
+  scopeRoleSelection?: ScopeRoleSelectionScope$Outbound | null | undefined;
   selectedUsers?: SelectedUsersScope$Outbound | null | undefined;
   specificAccessConflicts?:
     | SpecificAccessConflictsScope$Outbound
+    | null
+    | undefined;
+  specificAccessProfiles?:
+    | SpecificAccessProfilesScope$Outbound
     | null
     | undefined;
   specificResources?: SpecificResourcesScope$Outbound | null | undefined;
@@ -211,6 +321,9 @@ export const AccessReviewScopeV2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AccessReviewScopeV2
 > = z.object({
+  accessProfileReviewDimensions: z.nullable(
+    AccessProfileReviewDimensions$outboundSchema,
+  ).optional(),
   accountCelExpression: z.nullable(CelExpressionScope$outboundSchema)
     .optional(),
   accountCriteria: z.nullable(AccountCriteriaScope$outboundSchema).optional(),
@@ -223,15 +336,28 @@ export const AccessReviewScopeV2$outboundSchema: z.ZodType<
   appSelectionCriteria: z.nullable(AppSelectionCriteriaScope$outboundSchema)
     .optional(),
   celExpression: z.nullable(CelExpressionScope$outboundSchema).optional(),
+  excludedAppSelectionCriteria: z.nullable(
+    AppSelectionCriteriaScope$outboundSchema,
+  ).optional(),
+  excludedResourceTypeSelections: z.nullable(
+    ResourceTypeSelectionScope$outboundSchema,
+  ).optional(),
+  excludedSpecificResources: z.nullable(SpecificResourcesScope$outboundSchema)
+    .optional(),
   grantsByCriteria: z.nullable(GrantsByCriteriaScope$outboundSchema).optional(),
+  principalTypeFilter: PrincipalTypeFilter$outboundSchema.optional(),
   resourceSelection: z.nullable(ResourceSelectionScope$outboundSchema)
     .optional(),
   resourceTypeSelections: z.nullable(ResourceTypeSelectionScope$outboundSchema)
+    .optional(),
+  scopeRoleSelection: z.nullable(ScopeRoleSelectionScope$outboundSchema)
     .optional(),
   selectedUsers: z.nullable(SelectedUsersScope$outboundSchema).optional(),
   specificAccessConflicts: z.nullable(
     SpecificAccessConflictsScope$outboundSchema,
   ).optional(),
+  specificAccessProfiles: z.nullable(SpecificAccessProfilesScope$outboundSchema)
+    .optional(),
   specificResources: z.nullable(SpecificResourcesScope$outboundSchema)
     .optional(),
   userCriteria: z.nullable(UserCriteriaScope$outboundSchema).optional(),

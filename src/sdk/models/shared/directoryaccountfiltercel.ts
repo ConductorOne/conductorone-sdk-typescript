@@ -14,7 +14,7 @@ export type DirectoryAccountFilterCel = {
   /**
    * The expression field.
    */
-  expression?: string | null | undefined;
+  expression?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const DirectoryAccountFilterCel$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  expression: z.nullable(z.string()).optional(),
+  expression: z.string().optional(),
 });
 /** @internal */
 export type DirectoryAccountFilterCel$Outbound = {
-  expression?: string | null | undefined;
+  expression?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const DirectoryAccountFilterCel$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DirectoryAccountFilterCel
 > = z.object({
-  expression: z.nullable(z.string()).optional(),
+  expression: z.string().optional(),
 });
 
 export function directoryAccountFilterCelToJSON(

@@ -11,12 +11,12 @@ export type ResolveAction = {
   /**
    * The reason field.
    */
-  reason?: string | null | undefined;
+  reason?: string | undefined;
 };
 
 /** @internal */
 export type ResolveAction$Outbound = {
-  reason?: string | null | undefined;
+  reason?: string | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const ResolveAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResolveAction
 > = z.object({
-  reason: z.nullable(z.string()).optional(),
+  reason: z.string().optional(),
 });
 
 export function resolveActionToJSON(resolveAction: ResolveAction): string {

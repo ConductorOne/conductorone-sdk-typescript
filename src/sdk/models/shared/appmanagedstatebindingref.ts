@@ -5,28 +5,28 @@
 import * as z from "zod/v3";
 
 /**
- * The AppManagedStateBindingRef message.
+ * AppManagedStateBindingRef identifies an application discovered by a connector.
  */
 export type AppManagedStateBindingRef = {
   /**
-   * The appId field.
+   * ID of the application that owns the connector.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
-   * The resourceId field.
+   * Resource ID of the discovered application.
    */
-  resourceId?: string | null | undefined;
+  resourceId?: string | undefined;
   /**
-   * The resourceTypeId field.
+   * ID of the resource type used for discovered applications.
    */
-  resourceTypeId?: string | null | undefined;
+  resourceTypeId?: string | undefined;
 };
 
 /** @internal */
 export type AppManagedStateBindingRef$Outbound = {
-  appId?: string | null | undefined;
-  resourceId?: string | null | undefined;
-  resourceTypeId?: string | null | undefined;
+  appId?: string | undefined;
+  resourceId?: string | undefined;
+  resourceTypeId?: string | undefined;
 };
 
 /** @internal */
@@ -35,9 +35,9 @@ export const AppManagedStateBindingRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppManagedStateBindingRef
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  resourceId: z.nullable(z.string()).optional(),
-  resourceTypeId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  resourceId: z.string().optional(),
+  resourceTypeId: z.string().optional(),
 });
 
 export function appManagedStateBindingRefToJSON(

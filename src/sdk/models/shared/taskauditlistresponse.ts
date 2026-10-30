@@ -19,7 +19,20 @@ export type TaskAuditListResponse = {
   /**
    * A pagination token to retrieve the next page of results.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
+  /**
+   * The total number of audit events the list returns for this request:
+   *
+   * @remarks
+   *  comment events when comments_only is true, non-comment events when
+   *  exclude_comments is true, all events otherwise. This is an upper bound:
+   *  a small number of internal-only events (e.g. connector-action results
+   *  with no pending reason) are omitted from list, so the count can exceed
+   *  the rows reachable by paging. Only returned for the first page (a request
+   *  with no page_token). Unset when the request filters by refs (the count is
+   *  undefined for ref lookups) or when the count could not be computed.
+   */
+  totalCount?: number | null | undefined;
 };
 
 /** @internal */
@@ -29,7 +42,8 @@ export const TaskAuditListResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   list: z.nullable(z.array(TaskAuditView$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
+  totalCount: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
 });
 
 export function taskAuditListResponseFromJSON(

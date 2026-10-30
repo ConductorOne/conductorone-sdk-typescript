@@ -25,18 +25,18 @@ export type ListHistoryEntryMetadata = {
   /**
    * KSUID. Same value as c1.models.history.v1.ListHistory.id.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * System Log event id — KSUID of the OCSF event recorded for this
    *
    * @remarks
    *  transaction. Empty for non-RPC writes (workflows, cron).
    */
-  syslogEventId?: string | null | undefined;
+  syslogEventId?: string | undefined;
   /**
    * 32-hex-char otel trace id or empty.
    */
-  traceId?: string | null | undefined;
+  traceId?: string | undefined;
 };
 
 /** @internal */
@@ -50,9 +50,9 @@ export const ListHistoryEntryMetadata$inboundSchema: z.ZodType<
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  id: z.nullable(z.string()).optional(),
-  syslogEventId: z.nullable(z.string()).optional(),
-  traceId: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
+  syslogEventId: z.string().optional(),
+  traceId: z.string().optional(),
 });
 
 export function listHistoryEntryMetadataFromJSON(

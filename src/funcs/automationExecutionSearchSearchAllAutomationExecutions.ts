@@ -31,6 +31,7 @@ import { Result } from "../sdk/types/fp.js";
  *
  * @remarks
  * Search across all automation executions in the tenant, with filters for state, template, app, and subject user.
+ *  Each AutomationExecutionView row is large — request a small page_size (≤10) and set expand_mask to only the paths you need; broad expansion inlines whole related objects and bloats the response.
  */
 export function automationExecutionSearchSearchAllAutomationExecutions(
   client: ConductoroneSDKTypescriptCore,

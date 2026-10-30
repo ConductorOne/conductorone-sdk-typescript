@@ -22,7 +22,7 @@ export type WorkloadFederationServiceListProvidersResponse = {
   /**
    * The nextPageToken field.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -34,7 +34,7 @@ export const WorkloadFederationServiceListProvidersResponse$inboundSchema:
   > = z.object({
     list: z.nullable(z.array(WorkloadFederationProvider$inboundSchema))
       .optional(),
-    nextPageToken: z.nullable(z.string()).optional(),
+    nextPageToken: z.string().optional(),
   });
 
 export function workloadFederationServiceListProvidersResponseFromJSON(

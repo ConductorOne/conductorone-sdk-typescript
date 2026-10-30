@@ -3,21 +3,45 @@
  */
 
 import * as z from "zod/v3";
+import {
+  AppResourceRef,
+  AppResourceRef$Outbound,
+  AppResourceRef$outboundSchema,
+} from "./appresourceref.js";
+import {
+  ReviewSubjectInput,
+  ReviewSubjectInput$Outbound,
+  ReviewSubjectInput$outboundSchema,
+} from "./reviewsubjectinput.js";
 
 /**
  * The TaskTypeCertify message indicates that a task is a certify task and all related details.
+ *
+ * @remarks
+ *
+ * This message contains a oneof named principal. Only a single field of the following list may be set at a time:
+ *   - resource
  */
-export type TaskTypeCertifyInput = {};
+export type TaskTypeCertifyInput = {
+  resource?: AppResourceRef | null | undefined;
+  reviewSubject?: ReviewSubjectInput | null | undefined;
+};
 
 /** @internal */
-export type TaskTypeCertifyInput$Outbound = {};
+export type TaskTypeCertifyInput$Outbound = {
+  resource?: AppResourceRef$Outbound | null | undefined;
+  reviewSubject?: ReviewSubjectInput$Outbound | null | undefined;
+};
 
 /** @internal */
 export const TaskTypeCertifyInput$outboundSchema: z.ZodType<
   TaskTypeCertifyInput$Outbound,
   z.ZodTypeDef,
   TaskTypeCertifyInput
-> = z.object({});
+> = z.object({
+  resource: z.nullable(AppResourceRef$outboundSchema).optional(),
+  reviewSubject: z.nullable(ReviewSubjectInput$outboundSchema).optional(),
+});
 
 export function taskTypeCertifyInputToJSON(
   taskTypeCertifyInput: TaskTypeCertifyInput,

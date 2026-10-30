@@ -8,47 +8,84 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * A conditional routing rule that maps a CEL expression to a step sequence.
+ * A conditional routing rule that maps a CEL expression to an outcome.
  *
  * @remarks
- *  Rules are evaluated top-to-bottom; the first matching rule's policy_key
- *  selects the step sequence from the policy's policy_steps map. If no rule
- *  matches, the baseline entry is used.
+ *  Rules are evaluated top-to-bottom; the first matching rule's outcome
+ *  determines which steps run. If the outcome is policy_key, the step sequence
+ *  of that key in this policy's policy_steps map is used. If the outcome is
+ *  policy_id, the referenced policy is evaluated recursively (depth-bounded,
+ *  cycle-free, same policy_type). If no rule matches, the baseline entry of
+ *  policy_steps is used.
+ *
+ * This message contains a oneof named outcome. Only a single field of the following list may be set at a time:
+ *   - stepKey
+ *   - policyId
  */
 export type Rule = {
   /**
    * A CEL expression that is evaluated against the request context. If it
    *
    * @remarks
-   *  returns true, the step sequence identified by policy_key is used.
+   *  returns true, the step sequence identified by the outcome is used.
    */
-  condition?: string | null | undefined;
+  condition?: string | undefined;
   /**
-   * A key into the policy's policy_steps map identifying which step sequence
+   * The ID of another Policy that is evaluated recursively when this
    *
    * @remarks
-   *  to execute when this rule's condition matches.
+   *  rule matches. The referenced policy must share this policy's
+   *  policy_type, must not introduce a cycle, and must not push any
+   *  reachable chain over depth 5. Gated by the
+   *  POLICY_REFERENCES_POLICY feature flag.
+   * This field is part of the `outcome` oneof.
+   * See the documentation for `c1.api.policy.v1.Rule` for more details.
    */
-  policyKey?: string | null | undefined;
+  policyId?: string | null | undefined;
+  /**
+   * Deprecated: prefer outcome.step_key. Still read by the request path
+   *
+   * @remarks
+   *  for backward compatibility with rules persisted before the outcome
+   *  oneof existed.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  policyKey?: string | undefined;
+  /**
+   * A key into the policy's policy_steps map identifying which step
+   *
+   * @remarks
+   *  sequence to execute when this rule's condition matches.
+   * This field is part of the `outcome` oneof.
+   * See the documentation for `c1.api.policy.v1.Rule` for more details.
+   */
+  stepKey?: string | null | undefined;
 };
 
 /** @internal */
 export const Rule$inboundSchema: z.ZodType<Rule, z.ZodTypeDef, unknown> = z
   .object({
-    condition: z.nullable(z.string()).optional(),
-    policyKey: z.nullable(z.string()).optional(),
+    condition: z.string().optional(),
+    policyId: z.nullable(z.string()).optional(),
+    policyKey: z.string().optional(),
+    stepKey: z.nullable(z.string()).optional(),
   });
 /** @internal */
 export type Rule$Outbound = {
-  condition?: string | null | undefined;
-  policyKey?: string | null | undefined;
+  condition?: string | undefined;
+  policyId?: string | null | undefined;
+  policyKey?: string | undefined;
+  stepKey?: string | null | undefined;
 };
 
 /** @internal */
 export const Rule$outboundSchema: z.ZodType<Rule$Outbound, z.ZodTypeDef, Rule> =
   z.object({
-    condition: z.nullable(z.string()).optional(),
-    policyKey: z.nullable(z.string()).optional(),
+    condition: z.string().optional(),
+    policyId: z.nullable(z.string()).optional(),
+    policyKey: z.string().optional(),
+    stepKey: z.nullable(z.string()).optional(),
   });
 
 export function ruleToJSON(rule: Rule): string {

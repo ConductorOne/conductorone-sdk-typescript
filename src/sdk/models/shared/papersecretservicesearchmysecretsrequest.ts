@@ -6,8 +6,18 @@ import * as z from "zod/v3";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
+export const AccessRelationships = {
+  PaperSecretAccessRelationshipUnspecified:
+    "PAPER_SECRET_ACCESS_RELATIONSHIP_UNSPECIFIED",
+  PaperSecretAccessRelationshipCreator:
+    "PAPER_SECRET_ACCESS_RELATIONSHIP_CREATOR",
+  PaperSecretAccessRelationshipRecipient:
+    "PAPER_SECRET_ACCESS_RELATIONSHIP_RECIPIENT",
+} as const;
+export type AccessRelationships = OpenEnum<typeof AccessRelationships>;
+
 /**
- * Filter by secret type (optional)
+ * Filter by secret type. Unspecified returns all secret types.
  */
 export const PaperSecretServiceSearchMySecretsRequestSecretType = {
   SecretTypeUnspecified: "SECRET_TYPE_UNSPECIFIED",
@@ -15,14 +25,14 @@ export const PaperSecretServiceSearchMySecretsRequestSecretType = {
   SecretTypeFile: "SECRET_TYPE_FILE",
 } as const;
 /**
- * Filter by secret type (optional)
+ * Filter by secret type. Unspecified returns all secret types.
  */
 export type PaperSecretServiceSearchMySecretsRequestSecretType = OpenEnum<
   typeof PaperSecretServiceSearchMySecretsRequestSecretType
 >;
 
 /**
- * Filter by sharing mode (optional)
+ * Filter by sharing mode. Unspecified returns all sharing modes.
  */
 export const PaperSecretServiceSearchMySecretsRequestSharingMode = {
   PaperVaultSharingModeUnspecified: "PAPER_VAULT_SHARING_MODE_UNSPECIFIED",
@@ -30,7 +40,7 @@ export const PaperSecretServiceSearchMySecretsRequestSharingMode = {
   PaperVaultSharingModeExternal: "PAPER_VAULT_SHARING_MODE_EXTERNAL",
 } as const;
 /**
- * Filter by sharing mode (optional)
+ * Filter by sharing mode. Unspecified returns all sharing modes.
  */
 export type PaperSecretServiceSearchMySecretsRequestSharingMode = OpenEnum<
   typeof PaperSecretServiceSearchMySecretsRequestSharingMode
@@ -73,43 +83,52 @@ export type PaperSecretServiceSearchMySecretsRequestStatuses = OpenEnum<
  */
 export type PaperSecretServiceSearchMySecretsRequest = {
   /**
+   * Restrict results by the authenticated user's relationship to the secret.
+   *
+   * @remarks
+   *  Empty preserves the historical creator-only behavior. When both values are
+   *  supplied, creator takes precedence for secrets shared with their creator.
+   */
+  accessRelationships?: Array<AccessRelationships> | null | undefined;
+  /**
    * The pageSize field.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Fuzzy search by display name
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
-   * Filter by secret type (optional)
+   * Filter by secret type. Unspecified returns all secret types.
    */
-  secretType?:
-    | PaperSecretServiceSearchMySecretsRequestSecretType
-    | null
-    | undefined;
+  secretType?: PaperSecretServiceSearchMySecretsRequestSecretType | undefined;
   /**
-   * Filter by sharing mode (optional)
+   * Filter by sharing mode. Unspecified returns all sharing modes.
    */
-  sharingMode?:
-    | PaperSecretServiceSearchMySecretsRequestSharingMode
-    | null
-    | undefined;
+  sharingMode?: PaperSecretServiceSearchMySecretsRequestSharingMode | undefined;
   /**
    * Sort order
    */
-  sortBy?: PaperSecretServiceSearchMySecretsRequestSortBy | null | undefined;
+  sortBy?: PaperSecretServiceSearchMySecretsRequestSortBy | undefined;
   /**
-   * Filter by status (optional)
+   * Filter by status. Empty returns all statuses.
    */
   statuses?:
     | Array<PaperSecretServiceSearchMySecretsRequestStatuses>
     | null
     | undefined;
 };
+
+/** @internal */
+export const AccessRelationships$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  AccessRelationships
+> = openEnums.outboundSchema(AccessRelationships);
 
 /** @internal */
 export const PaperSecretServiceSearchMySecretsRequestSecretType$outboundSchema:
@@ -151,12 +170,13 @@ export const PaperSecretServiceSearchMySecretsRequestStatuses$outboundSchema:
 
 /** @internal */
 export type PaperSecretServiceSearchMySecretsRequest$Outbound = {
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  query?: string | null | undefined;
-  secretType?: string | null | undefined;
-  sharingMode?: string | null | undefined;
-  sortBy?: string | null | undefined;
+  accessRelationships?: Array<string> | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  query?: string | undefined;
+  secretType?: string | undefined;
+  sharingMode?: string | undefined;
+  sortBy?: string | undefined;
   statuses?: Array<string> | null | undefined;
 };
 
@@ -166,18 +186,18 @@ export const PaperSecretServiceSearchMySecretsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PaperSecretServiceSearchMySecretsRequest
 > = z.object({
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
-  secretType: z.nullable(
-    PaperSecretServiceSearchMySecretsRequestSecretType$outboundSchema,
-  ).optional(),
-  sharingMode: z.nullable(
-    PaperSecretServiceSearchMySecretsRequestSharingMode$outboundSchema,
-  ).optional(),
-  sortBy: z.nullable(
-    PaperSecretServiceSearchMySecretsRequestSortBy$outboundSchema,
-  ).optional(),
+  accessRelationships: z.nullable(z.array(AccessRelationships$outboundSchema))
+    .optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  query: z.string().optional(),
+  secretType: PaperSecretServiceSearchMySecretsRequestSecretType$outboundSchema
+    .optional(),
+  sharingMode:
+    PaperSecretServiceSearchMySecretsRequestSharingMode$outboundSchema
+      .optional(),
+  sortBy: PaperSecretServiceSearchMySecretsRequestSortBy$outboundSchema
+    .optional(),
   statuses: z.nullable(
     z.array(PaperSecretServiceSearchMySecretsRequestStatuses$outboundSchema),
   ).optional(),

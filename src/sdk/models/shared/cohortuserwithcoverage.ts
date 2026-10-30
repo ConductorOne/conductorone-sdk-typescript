@@ -15,7 +15,7 @@ export type CohortUserWithCoverage = {
   /**
    * Number of selected_entitlements that this user currently holds.
    */
-  coveredCount?: number | null | undefined;
+  coveredCount?: number | undefined;
   user?: User | null | undefined;
 };
 
@@ -25,7 +25,7 @@ export const CohortUserWithCoverage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  coveredCount: z.nullable(z.number().int()).optional(),
+  coveredCount: z.number().int().optional(),
   user: z.nullable(User$inboundSchema).optional(),
 });
 

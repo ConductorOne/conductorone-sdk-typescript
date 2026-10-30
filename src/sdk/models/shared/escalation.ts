@@ -47,11 +47,11 @@ export type Escalation = {
   /**
    * The escalationComment field.
    */
-  escalationComment?: string | null | undefined;
+  escalationComment?: string | undefined;
   /**
    * The expiration field.
    */
-  expiration?: number | null | undefined;
+  expiration?: number | undefined;
   reassignToApprovers?: ReassignToApprovers | null | undefined;
   replacePolicy?: ReplacePolicy | null | undefined;
   skipStep?: SkipStep | null | undefined;
@@ -64,8 +64,8 @@ export const Escalation$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   cancelTicket: z.nullable(CancelTicket$inboundSchema).optional(),
-  escalationComment: z.nullable(z.string()).optional(),
-  expiration: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
+  escalationComment: z.string().optional(),
+  expiration: z.string().transform(v => parseInt(v, 10)).optional(),
   reassignToApprovers: z.nullable(ReassignToApprovers$inboundSchema).optional(),
   replacePolicy: z.nullable(ReplacePolicy$inboundSchema).optional(),
   skipStep: z.nullable(SkipStep$inboundSchema).optional(),
@@ -73,8 +73,8 @@ export const Escalation$inboundSchema: z.ZodType<
 /** @internal */
 export type Escalation$Outbound = {
   cancelTicket?: CancelTicket$Outbound | null | undefined;
-  escalationComment?: string | null | undefined;
-  expiration?: string | null | undefined;
+  escalationComment?: string | undefined;
+  expiration?: string | undefined;
   reassignToApprovers?: ReassignToApprovers$Outbound | null | undefined;
   replacePolicy?: ReplacePolicy$Outbound | null | undefined;
   skipStep?: SkipStep$Outbound | null | undefined;
@@ -87,8 +87,8 @@ export const Escalation$outboundSchema: z.ZodType<
   Escalation
 > = z.object({
   cancelTicket: z.nullable(CancelTicket$outboundSchema).optional(),
-  escalationComment: z.nullable(z.string()).optional(),
-  expiration: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
+  escalationComment: z.string().optional(),
+  expiration: z.number().int().transform(v => `${v}`).optional(),
   reassignToApprovers: z.nullable(ReassignToApprovers$outboundSchema)
     .optional(),
   replacePolicy: z.nullable(ReplacePolicy$outboundSchema).optional(),

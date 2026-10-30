@@ -14,30 +14,30 @@ export type ConnectorCredential = {
   /**
    * The appId of the app the connector is attached to.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The client id of the ConnectorCredential.
    */
-  clientId?: string | null | undefined;
+  clientId?: string | undefined;
   /**
    * The client secret of the ConnectorCredential. It's only returned on creation.
    */
-  clientSecret?: string | null | undefined;
+  clientSecret?: string | undefined;
   /**
    * The connectorId of the connector the credential is associated with.
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * The display name of the ConnectorCredential.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   expiresTime?: Date | null | undefined;
   /**
    * The id of the ConnectorCredential.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   lastUsedAt?: Date | null | undefined;
   updatedAt?: Date | null | undefined;
 };
@@ -48,21 +48,21 @@ export const ConnectorCredential$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  clientId: z.nullable(z.string()).optional(),
-  clientSecret: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  clientId: z.string().optional(),
+  clientSecret: z.string().optional(),
+  connectorId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
   expiresTime: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
   lastUsedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

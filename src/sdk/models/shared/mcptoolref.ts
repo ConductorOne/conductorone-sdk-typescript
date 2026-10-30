@@ -3,30 +3,43 @@
  */
 
 import * as z from "zod/v3";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * MCPToolRef is a reference to a specific MCP tool.
  */
 export type MCPToolRef = {
   /**
-   * The appId field.
+   * The application the tool belongs to.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
-   * The connectorId field.
+   * The connector the tool was discovered through.
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
   /**
-   * The id field.
+   * Unique identifier for the MCP tool.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
+export const MCPToolRef$inboundSchema: z.ZodType<
+  MCPToolRef,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  appId: z.string().optional(),
+  connectorId: z.string().optional(),
+  id: z.string().optional(),
+});
+/** @internal */
 export type MCPToolRef$Outbound = {
-  appId?: string | null | undefined;
-  connectorId?: string | null | undefined;
-  id?: string | null | undefined;
+  appId?: string | undefined;
+  connectorId?: string | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -35,11 +48,20 @@ export const MCPToolRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MCPToolRef
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  connectorId: z.string().optional(),
+  id: z.string().optional(),
 });
 
 export function mcpToolRefToJSON(mcpToolRef: MCPToolRef): string {
   return JSON.stringify(MCPToolRef$outboundSchema.parse(mcpToolRef));
+}
+export function mcpToolRefFromJSON(
+  jsonString: string,
+): SafeParseResult<MCPToolRef, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MCPToolRef$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MCPToolRef' from JSON`,
+  );
 }

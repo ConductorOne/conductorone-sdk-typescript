@@ -21,14 +21,49 @@ export const ClassificationFilter = {
 } as const;
 export type ClassificationFilter = OpenEnum<typeof ClassificationFilter>;
 
-export const StateFilter = {
+/**
+ * Sort order for results. UNSPECIFIED sorts by tool name ascending.
+ */
+export const MCPToolServiceSearchRequestSortBy = {
+  McpToolSortByUnspecified: "MCP_TOOL_SORT_BY_UNSPECIFIED",
+  McpToolSortByToolName: "MCP_TOOL_SORT_BY_TOOL_NAME",
+  McpToolSortByVisibility: "MCP_TOOL_SORT_BY_VISIBILITY",
+  McpToolSortByClassification: "MCP_TOOL_SORT_BY_CLASSIFICATION",
+  McpToolSortByState: "MCP_TOOL_SORT_BY_STATE",
+  McpToolSortByUpdatedAt: "MCP_TOOL_SORT_BY_UPDATED_AT",
+} as const;
+/**
+ * Sort order for results. UNSPECIFIED sorts by tool name ascending.
+ */
+export type MCPToolServiceSearchRequestSortBy = OpenEnum<
+  typeof MCPToolServiceSearchRequestSortBy
+>;
+
+/**
+ * Direction for sort_by. UNSPECIFIED means ascending.
+ */
+export const MCPToolServiceSearchRequestSortDirection = {
+  SortDirectionUnspecified: "SORT_DIRECTION_UNSPECIFIED",
+  SortDirectionAsc: "SORT_DIRECTION_ASC",
+  SortDirectionDesc: "SORT_DIRECTION_DESC",
+} as const;
+/**
+ * Direction for sort_by. UNSPECIFIED means ascending.
+ */
+export type MCPToolServiceSearchRequestSortDirection = OpenEnum<
+  typeof MCPToolServiceSearchRequestSortDirection
+>;
+
+export const MCPToolServiceSearchRequestStateFilter = {
   McpToolStateUnspecified: "MCP_TOOL_STATE_UNSPECIFIED",
   McpToolStatePendingReview: "MCP_TOOL_STATE_PENDING_REVIEW",
   McpToolStateApproved: "MCP_TOOL_STATE_APPROVED",
   McpToolStateDisabled: "MCP_TOOL_STATE_DISABLED",
   McpToolStateRemoved: "MCP_TOOL_STATE_REMOVED",
 } as const;
-export type StateFilter = OpenEnum<typeof StateFilter>;
+export type MCPToolServiceSearchRequestStateFilter = OpenEnum<
+  typeof MCPToolServiceSearchRequestStateFilter
+>;
 
 export const VisibilityFilter = {
   ToolVisibilityUnspecified: "TOOL_VISIBILITY_UNSPECIFIED",
@@ -47,13 +82,16 @@ export type MCPToolServiceSearchRequest = {
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  accessProfileId?: string | null | undefined;
+  accessProfileId?: string | undefined;
   /**
    * Optional: only return tools that are bound to at least one of these access profiles.
    */
   accessProfileIds?: Array<string> | null | undefined;
   /**
-   * Optional filter by classification. 0 (UNSPECIFIED) means no filter.
+   * Optional filter by classification. An empty list means no filter.
+   *
+   * @remarks
+   *  Including TOOL_CLASSIFICATION_UNSPECIFIED matches unclassified tools.
    */
   classificationFilter?: Array<ClassificationFilter> | null | undefined;
   /**
@@ -61,7 +99,7 @@ export type MCPToolServiceSearchRequest = {
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  excludeAccessProfileId?: string | null | undefined;
+  excludeAccessProfileId?: string | undefined;
   /**
    * Optional: exclude tools that are bound to any of these access profiles.
    */
@@ -74,27 +112,47 @@ export type MCPToolServiceSearchRequest = {
    *  raw emit time per tool. Costs one Dynamo Limit(1) read per row;
    *  callers that don't render the "Last used" column should leave false.
    */
-  includeLastCalledAt?: boolean | null | undefined;
+  includeLastCalledAt?: boolean | undefined;
+  /**
+   * When true, populate the computed `requestable` / `requestable_via_toolset`
+   *
+   * @remarks
+   *  fields on each tool (an extra catalog-membership lookup). Off by default so
+   *  callers that don't render requestability — e.g. tool-picker and
+   *  tools-by-toolset views — don't pay for it.
+   */
+  includeRequestable?: boolean | undefined;
   /**
    * Page size (max 100).
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * Page token for pagination.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Optional text query matched against tool_name and display_name
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * Optional: filter by specific tool refs (used by websocket notify to re-fetch individual tools).
    */
   refs?: Array<MCPToolRef> | null | undefined;
   /**
+   * Sort order for results. UNSPECIFIED sorts by tool name ascending.
+   */
+  sortBy?: MCPToolServiceSearchRequestSortBy | undefined;
+  /**
+   * Direction for sort_by. UNSPECIFIED means ascending.
+   */
+  sortDirection?: MCPToolServiceSearchRequestSortDirection | undefined;
+  /**
    * Optional filter by tool state. 0 (UNSPECIFIED) means no filter.
    */
-  stateFilter?: Array<StateFilter> | null | undefined;
+  stateFilter?:
+    | Array<MCPToolServiceSearchRequestStateFilter>
+    | null
+    | undefined;
   /**
    * Optional filter by visibility. 0 (UNSPECIFIED) means no filter.
    */
@@ -109,11 +167,25 @@ export const ClassificationFilter$outboundSchema: z.ZodType<
 > = openEnums.outboundSchema(ClassificationFilter);
 
 /** @internal */
-export const StateFilter$outboundSchema: z.ZodType<
+export const MCPToolServiceSearchRequestSortBy$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
-  StateFilter
-> = openEnums.outboundSchema(StateFilter);
+  MCPToolServiceSearchRequestSortBy
+> = openEnums.outboundSchema(MCPToolServiceSearchRequestSortBy);
+
+/** @internal */
+export const MCPToolServiceSearchRequestSortDirection$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  MCPToolServiceSearchRequestSortDirection
+> = openEnums.outboundSchema(MCPToolServiceSearchRequestSortDirection);
+
+/** @internal */
+export const MCPToolServiceSearchRequestStateFilter$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  MCPToolServiceSearchRequestStateFilter
+> = openEnums.outboundSchema(MCPToolServiceSearchRequestStateFilter);
 
 /** @internal */
 export const VisibilityFilter$outboundSchema: z.ZodType<
@@ -124,16 +196,19 @@ export const VisibilityFilter$outboundSchema: z.ZodType<
 
 /** @internal */
 export type MCPToolServiceSearchRequest$Outbound = {
-  accessProfileId?: string | null | undefined;
+  accessProfileId?: string | undefined;
   accessProfileIds?: Array<string> | null | undefined;
   classificationFilter?: Array<string> | null | undefined;
-  excludeAccessProfileId?: string | null | undefined;
+  excludeAccessProfileId?: string | undefined;
   excludeAccessProfileIds?: Array<string> | null | undefined;
-  includeLastCalledAt?: boolean | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  query?: string | null | undefined;
+  includeLastCalledAt?: boolean | undefined;
+  includeRequestable?: boolean | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  query?: string | undefined;
   refs?: Array<MCPToolRef$Outbound> | null | undefined;
+  sortBy?: string | undefined;
+  sortDirection?: string | undefined;
   stateFilter?: Array<string> | null | undefined;
   visibilityFilter?: Array<string> | null | undefined;
 };
@@ -144,18 +219,24 @@ export const MCPToolServiceSearchRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MCPToolServiceSearchRequest
 > = z.object({
-  accessProfileId: z.nullable(z.string()).optional(),
+  accessProfileId: z.string().optional(),
   accessProfileIds: z.nullable(z.array(z.string())).optional(),
   classificationFilter: z.nullable(z.array(ClassificationFilter$outboundSchema))
     .optional(),
-  excludeAccessProfileId: z.nullable(z.string()).optional(),
+  excludeAccessProfileId: z.string().optional(),
   excludeAccessProfileIds: z.nullable(z.array(z.string())).optional(),
-  includeLastCalledAt: z.nullable(z.boolean()).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
+  includeLastCalledAt: z.boolean().optional(),
+  includeRequestable: z.boolean().optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  query: z.string().optional(),
   refs: z.nullable(z.array(MCPToolRef$outboundSchema)).optional(),
-  stateFilter: z.nullable(z.array(StateFilter$outboundSchema)).optional(),
+  sortBy: MCPToolServiceSearchRequestSortBy$outboundSchema.optional(),
+  sortDirection: MCPToolServiceSearchRequestSortDirection$outboundSchema
+    .optional(),
+  stateFilter: z.nullable(
+    z.array(MCPToolServiceSearchRequestStateFilter$outboundSchema),
+  ).optional(),
   visibilityFilter: z.nullable(z.array(VisibilityFilter$outboundSchema))
     .optional(),
 });

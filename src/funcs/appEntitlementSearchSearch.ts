@@ -3,7 +3,6 @@
  */
 
 import { ConductoroneSDKTypescriptCore } from "../core.js";
-import { dlv } from "../lib/dlv.js";
 import { encodeJSON } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
@@ -38,6 +37,7 @@ import {
  *
  * @remarks
  * Search app entitlements based on filters specified in the request body.
+ *  Each AppEntitlementView row is large — request a small page_size (≤10) and set expand_mask to only the paths you need; broad expansion inlines whole related objects and bloats the response.
  */
 export function appEntitlementSearchSearch(
   client: ConductoroneSDKTypescriptCore,
@@ -208,7 +208,8 @@ async function $do(
     >;
     "~next"?: { cursor: string };
   } => {
-    const nextCursor = dlv(responseData, "nextPageToken");
+    const nextCursor =
+      (responseData as { nextPageToken?: unknown }).nextPageToken;
     if (typeof nextCursor !== "string") {
       return { next: () => null };
     }

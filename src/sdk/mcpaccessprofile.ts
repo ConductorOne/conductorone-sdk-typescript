@@ -8,6 +8,8 @@ import { mcpAccessProfileGet } from "../funcs/mcpAccessProfileGet.js";
 import { mcpAccessProfileGetByAppEntitlementId } from "../funcs/mcpAccessProfileGetByAppEntitlementId.js";
 import { mcpAccessProfileList } from "../funcs/mcpAccessProfileList.js";
 import { mcpAccessProfileListRequestableConnectors } from "../funcs/mcpAccessProfileListRequestableConnectors.js";
+import { mcpAccessProfileSearchAccessProfiles } from "../funcs/mcpAccessProfileSearchAccessProfiles.js";
+import { mcpAccessProfileSearchRequestableConnectors } from "../funcs/mcpAccessProfileSearchRequestableConnectors.js";
 import { mcpAccessProfileUpdate } from "../funcs/mcpAccessProfileUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "./models/operations/index.js";
@@ -137,6 +139,30 @@ export class MCPAccessProfile extends ClientSDK {
   }
 
   /**
+   * Search Access Profiles
+   *
+   * @remarks
+   * SearchAccessProfiles returns the tenant's MCP toolsets (access profiles)
+   *  across every (app_id, connector_id), filtered by a case-insensitive search
+   *  over display_name and paginated. Backs the agent-config multi-select that
+   *  binds toolsets to a ClawAgent.
+   */
+  async searchAccessProfiles(
+    request?:
+      | operations.C1ApiAiGovernanceV1MCPAccessProfileServiceSearchAccessProfilesRequest
+      | undefined,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiAiGovernanceV1MCPAccessProfileServiceSearchAccessProfilesResponse
+  > {
+    return unwrapAsync(mcpAccessProfileSearchAccessProfiles(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * List Requestable Connectors
    *
    * @remarks
@@ -151,6 +177,32 @@ export class MCPAccessProfile extends ClientSDK {
     operations.C1ApiAiGovernanceV1MCPAccessProfileServiceListRequestableConnectorsResponse
   > {
     return unwrapAsync(mcpAccessProfileListRequestableConnectors(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Search Requestable Connectors
+   *
+   * @remarks
+   * SearchRequestableConnectors returns card-ready entries — one per MCP
+   *  connector the user can browse and request tools for — with server-side
+   *  visibility + policy filtering, grant-enrollment-status filtering, text
+   *  search over the connector display name, and pagination. Backs the
+   *  Requests -> AI tools connector cards. Held connectors are surfaced even
+   *  when no longer requestable so "My tools" reflects what the user actually
+   *  holds.
+   */
+  async searchRequestableConnectors(
+    request:
+      operations.C1ApiAiGovernanceV1MCPAccessProfileServiceSearchRequestableConnectorsRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiAiGovernanceV1MCPAccessProfileServiceSearchRequestableConnectorsResponse
+  > {
+    return unwrapAsync(mcpAccessProfileSearchRequestableConnectors(
       this,
       request,
       options,

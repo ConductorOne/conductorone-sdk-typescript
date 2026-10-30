@@ -25,7 +25,7 @@ export type ServicePrincipalServiceListBindingsResponse = {
   /**
    * The nextPageToken field.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -37,7 +37,7 @@ export const ServicePrincipalServiceListBindingsResponse$inboundSchema:
   > = z.object({
     bindings: z.nullable(z.array(ServicePrincipalBinding$inboundSchema))
       .optional(),
-    nextPageToken: z.nullable(z.string()).optional(),
+    nextPageToken: z.string().optional(),
   });
 
 export function servicePrincipalServiceListBindingsResponseFromJSON(

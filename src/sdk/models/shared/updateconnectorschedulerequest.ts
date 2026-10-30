@@ -4,6 +4,11 @@
 
 import * as z from "zod/v3";
 import {
+  ChangeJustification,
+  ChangeJustification$Outbound,
+  ChangeJustification$outboundSchema,
+} from "./changejustification.js";
+import {
   ConnectorScheduleCron,
   ConnectorScheduleCron$Outbound,
   ConnectorScheduleCron$outboundSchema,
@@ -19,11 +24,13 @@ import {
  */
 export type UpdateConnectorScheduleRequest = {
   cron?: ConnectorScheduleCron | null | undefined;
+  justification?: ChangeJustification | null | undefined;
 };
 
 /** @internal */
 export type UpdateConnectorScheduleRequest$Outbound = {
   cron?: ConnectorScheduleCron$Outbound | null | undefined;
+  justification?: ChangeJustification$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -33,6 +40,7 @@ export const UpdateConnectorScheduleRequest$outboundSchema: z.ZodType<
   UpdateConnectorScheduleRequest
 > = z.object({
   cron: z.nullable(ConnectorScheduleCron$outboundSchema).optional(),
+  justification: z.nullable(ChangeJustification$outboundSchema).optional(),
 });
 
 export function updateConnectorScheduleRequestToJSON(

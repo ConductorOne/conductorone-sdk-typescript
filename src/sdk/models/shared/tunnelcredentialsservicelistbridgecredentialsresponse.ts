@@ -22,7 +22,7 @@ export type TunnelCredentialsServiceListBridgeCredentialsResponse = {
   /**
    * The nextPageToken field.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -33,7 +33,7 @@ export const TunnelCredentialsServiceListBridgeCredentialsResponse$inboundSchema
     unknown
   > = z.object({
     list: z.nullable(z.array(TunnelCredential$inboundSchema)).optional(),
-    nextPageToken: z.nullable(z.string()).optional(),
+    nextPageToken: z.string().optional(),
   });
 
 export function tunnelCredentialsServiceListBridgeCredentialsResponseFromJSON(

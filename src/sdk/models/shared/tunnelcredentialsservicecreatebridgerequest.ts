@@ -11,17 +11,17 @@ export type TunnelCredentialsServiceCreateBridgeRequest = {
   /**
    * The description field.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
 };
 
 /** @internal */
 export type TunnelCredentialsServiceCreateBridgeRequest$Outbound = {
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
 };
 
 /** @internal */
@@ -31,8 +31,8 @@ export const TunnelCredentialsServiceCreateBridgeRequest$outboundSchema:
     z.ZodTypeDef,
     TunnelCredentialsServiceCreateBridgeRequest
   > = z.object({
-    description: z.nullable(z.string()).optional(),
-    displayName: z.nullable(z.string()).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
   });
 
 export function tunnelCredentialsServiceCreateBridgeRequestToJSON(

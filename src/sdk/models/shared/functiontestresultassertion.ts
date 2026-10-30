@@ -14,27 +14,27 @@ export type FunctionTestResultAssertion = {
   /**
    * The actual value.
    */
-  actual?: string | null | undefined;
+  actual?: string | undefined;
   /**
    * Source location of the assertion.
    */
-  at?: string | null | undefined;
+  at?: string | undefined;
   /**
    * Description of the assertion.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The expected value.
    */
-  expected?: string | null | undefined;
+  expected?: string | undefined;
   /**
    * The comparison operator (e.g., "==", "!=").
    */
-  operator?: string | null | undefined;
+  operator?: string | undefined;
   /**
    * Whether the assertion passed.
    */
-  pass?: boolean | null | undefined;
+  pass?: boolean | undefined;
 };
 
 /** @internal */
@@ -43,12 +43,12 @@ export const FunctionTestResultAssertion$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  actual: z.nullable(z.string()).optional(),
-  at: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  expected: z.nullable(z.string()).optional(),
-  operator: z.nullable(z.string()).optional(),
-  pass: z.nullable(z.boolean()).optional(),
+  actual: z.string().optional(),
+  at: z.string().optional(),
+  description: z.string().optional(),
+  expected: z.string().optional(),
+  operator: z.string().optional(),
+  pass: z.boolean().optional(),
 });
 
 export function functionTestResultAssertionFromJSON(

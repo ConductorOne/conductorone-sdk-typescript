@@ -1,0 +1,19 @@
+# ExportToDatasourceFormat
+
+The format field.
+
+## Example Usage
+
+```typescript
+import { ExportToDatasourceFormat } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: ExportToDatasourceFormat = "EXPORT_FORMAT_UNSPECIFIED";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
+```
+
+## Values
+
+```typescript
+"EXPORT_FORMAT_UNSPECIFIED" | "EXPORT_FORMAT_OCSF_JSON_ZSTD" | "EXPORT_FORMAT_OCSF_JSON_GZIP" | Unrecognized<string>
+```

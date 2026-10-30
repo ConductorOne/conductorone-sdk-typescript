@@ -39,7 +39,7 @@ export type GrantJustificationType = OpenEnum<typeof GrantJustificationType>;
 /**
  * The grantSourceFilter field.
  */
-export const GrantSourceFilter = {
+export const GrantFilterGrantSourceFilter = {
   GrantSourceFilterUnspecified: "GRANT_SOURCE_FILTER_UNSPECIFIED",
   GrantSourceFilterDirect: "GRANT_SOURCE_FILTER_DIRECT",
   GrantSourceFilterInherited: "GRANT_SOURCE_FILTER_INHERITED",
@@ -47,7 +47,9 @@ export const GrantSourceFilter = {
 /**
  * The grantSourceFilter field.
  */
-export type GrantSourceFilter = OpenEnum<typeof GrantSourceFilter>;
+export type GrantFilterGrantSourceFilter = OpenEnum<
+  typeof GrantFilterGrantSourceFilter
+>;
 
 /**
  * The GrantFilter message.
@@ -56,15 +58,15 @@ export type GrantFilter = {
   /**
    * The grantFilterType field.
    */
-  grantFilterType?: GrantFilterType | null | undefined;
+  grantFilterType?: GrantFilterType | undefined;
   /**
    * The grantJustificationType field.
    */
-  grantJustificationType?: GrantJustificationType | null | undefined;
+  grantJustificationType?: GrantJustificationType | undefined;
   /**
    * The grantSourceFilter field.
    */
-  grantSourceFilter?: GrantSourceFilter | null | undefined;
+  grantSourceFilter?: GrantFilterGrantSourceFilter | undefined;
 };
 
 /** @internal */
@@ -94,17 +96,17 @@ export const GrantJustificationType$outboundSchema: z.ZodType<
 > = openEnums.outboundSchema(GrantJustificationType);
 
 /** @internal */
-export const GrantSourceFilter$inboundSchema: z.ZodType<
-  GrantSourceFilter,
+export const GrantFilterGrantSourceFilter$inboundSchema: z.ZodType<
+  GrantFilterGrantSourceFilter,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(GrantSourceFilter);
+> = openEnums.inboundSchema(GrantFilterGrantSourceFilter);
 /** @internal */
-export const GrantSourceFilter$outboundSchema: z.ZodType<
+export const GrantFilterGrantSourceFilter$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
-  GrantSourceFilter
-> = openEnums.outboundSchema(GrantSourceFilter);
+  GrantFilterGrantSourceFilter
+> = openEnums.outboundSchema(GrantFilterGrantSourceFilter);
 
 /** @internal */
 export const GrantFilter$inboundSchema: z.ZodType<
@@ -112,16 +114,15 @@ export const GrantFilter$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  grantFilterType: z.nullable(GrantFilterType$inboundSchema).optional(),
-  grantJustificationType: z.nullable(GrantJustificationType$inboundSchema)
-    .optional(),
-  grantSourceFilter: z.nullable(GrantSourceFilter$inboundSchema).optional(),
+  grantFilterType: GrantFilterType$inboundSchema.optional(),
+  grantJustificationType: GrantJustificationType$inboundSchema.optional(),
+  grantSourceFilter: GrantFilterGrantSourceFilter$inboundSchema.optional(),
 });
 /** @internal */
 export type GrantFilter$Outbound = {
-  grantFilterType?: string | null | undefined;
-  grantJustificationType?: string | null | undefined;
-  grantSourceFilter?: string | null | undefined;
+  grantFilterType?: string | undefined;
+  grantJustificationType?: string | undefined;
+  grantSourceFilter?: string | undefined;
 };
 
 /** @internal */
@@ -130,10 +131,9 @@ export const GrantFilter$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GrantFilter
 > = z.object({
-  grantFilterType: z.nullable(GrantFilterType$outboundSchema).optional(),
-  grantJustificationType: z.nullable(GrantJustificationType$outboundSchema)
-    .optional(),
-  grantSourceFilter: z.nullable(GrantSourceFilter$outboundSchema).optional(),
+  grantFilterType: GrantFilterType$outboundSchema.optional(),
+  grantJustificationType: GrantJustificationType$outboundSchema.optional(),
+  grantSourceFilter: GrantFilterGrantSourceFilter$outboundSchema.optional(),
 });
 
 export function grantFilterToJSON(grantFilter: GrantFilter): string {

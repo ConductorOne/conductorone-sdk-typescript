@@ -10,6 +10,11 @@ import {
   AppEntitlementRef$Outbound,
   AppEntitlementRef$outboundSchema,
 } from "./appentitlementref.js";
+import {
+  AppMatchBatonRef,
+  AppMatchBatonRef$Outbound,
+  AppMatchBatonRef$outboundSchema,
+} from "./appmatchbatonref.js";
 
 /**
  * Define the app user identity matching strategy for this app.
@@ -45,49 +50,50 @@ export type CreateAppRequest = {
    */
   annotations?: { [k: string]: string } | undefined;
   /**
-   * Sets entitlement owners on the app.
+   * Initial entitlement owners for ordinary API creation. Requests with `match_baton_ref` must leave this empty; Terraform manages owners with `conductorone_app_owner_entitlement`.
    */
   appEntitlementOwnerRefs?: Array<AppEntitlementRef> | null | undefined;
   /**
    * Creates the app with this certify policy.
    */
-  certifyPolicyId?: string | null | undefined;
+  certifyPolicyId?: string | undefined;
   /**
    * Creates the app with this description.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * Creates the app with this display name.
    */
-  displayName: string | null;
+  displayName: string;
   /**
    * Creates the app with this grant policy.
    */
-  grantPolicyId?: string | null | undefined;
+  grantPolicyId?: string | undefined;
   /**
    * Define the app user identity matching strategy for this app.
    */
-  identityMatching?: CreateAppRequestIdentityMatching | null | undefined;
+  identityMatching?: CreateAppRequestIdentityMatching | undefined;
   /**
    * Instructions shown to users in the access request form when requesting access for this app.
    */
-  instructions?: string | null | undefined;
+  instructions?: string | undefined;
+  matchBatonRef?: AppMatchBatonRef | null | undefined;
   /**
-   * Creates the app with this monthly cost per seat.
+   * Creates the app with this monthly cost per seat. Must be between 0 and 1,000,000 (USD).
    */
-  monthlyCostUsd?: number | null | undefined;
+  monthlyCostUsd?: number | undefined;
   /**
-   * Creates the app with this array of user owners.
+   * Initial user owners for ordinary API creation. Requests with `match_baton_ref` must leave this empty; Terraform manages owners with `conductorone_app_owner_user`.
    */
   owners?: Array<string> | null | undefined;
   /**
    * Creates the app with this revoke policy.
    */
-  revokePolicyId?: string | null | undefined;
+  revokePolicyId?: string | undefined;
   /**
    * This flag enforces a provisioning mode where the access entitlement is always included in the provisioning flow, if the app user doesn't exist
    */
-  strictAccessEntitlementProvisioning?: boolean | null | undefined;
+  strictAccessEntitlementProvisioning?: boolean | undefined;
 };
 
 /** @internal */
@@ -104,16 +110,17 @@ export type CreateAppRequest$Outbound = {
     | Array<AppEntitlementRef$Outbound>
     | null
     | undefined;
-  certifyPolicyId?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName: string | null;
-  grantPolicyId?: string | null | undefined;
-  identityMatching?: string | null | undefined;
-  instructions?: string | null | undefined;
-  monthlyCostUsd?: number | null | undefined;
+  certifyPolicyId?: string | undefined;
+  description?: string | undefined;
+  displayName: string;
+  grantPolicyId?: string | undefined;
+  identityMatching?: string | undefined;
+  instructions?: string | undefined;
+  matchBatonRef?: AppMatchBatonRef$Outbound | null | undefined;
+  monthlyCostUsd?: number | undefined;
   owners?: Array<string> | null | undefined;
-  revokePolicyId?: string | null | undefined;
-  strictAccessEntitlementProvisioning?: boolean | null | undefined;
+  revokePolicyId?: string | undefined;
+  strictAccessEntitlementProvisioning?: boolean | undefined;
 };
 
 /** @internal */
@@ -125,17 +132,17 @@ export const CreateAppRequest$outboundSchema: z.ZodType<
   annotations: z.record(z.string()).optional(),
   appEntitlementOwnerRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
     .optional(),
-  certifyPolicyId: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()),
-  grantPolicyId: z.nullable(z.string()).optional(),
-  identityMatching: z.nullable(CreateAppRequestIdentityMatching$outboundSchema)
-    .optional(),
-  instructions: z.nullable(z.string()).optional(),
-  monthlyCostUsd: z.nullable(z.number().int()).optional(),
+  certifyPolicyId: z.string().optional(),
+  description: z.string().optional(),
+  displayName: z.string(),
+  grantPolicyId: z.string().optional(),
+  identityMatching: CreateAppRequestIdentityMatching$outboundSchema.optional(),
+  instructions: z.string().optional(),
+  matchBatonRef: z.nullable(AppMatchBatonRef$outboundSchema).optional(),
+  monthlyCostUsd: z.number().int().optional(),
   owners: z.nullable(z.array(z.string())).optional(),
-  revokePolicyId: z.nullable(z.string()).optional(),
-  strictAccessEntitlementProvisioning: z.nullable(z.boolean()).optional(),
+  revokePolicyId: z.string().optional(),
+  strictAccessEntitlementProvisioning: z.boolean().optional(),
 });
 
 export function createAppRequestToJSON(

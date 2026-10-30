@@ -1,6 +1,7 @@
 # MCPAccessProfileToolBindingServiceListToolsByProfileHistoryResponse
 
-The MCPAccessProfileToolBindingServiceListToolsByProfileHistoryResponse message.
+Contains a page of change-history entries for the tools bound to one toolset
+ sorted newest first.
 
 ## Example Usage
 
@@ -15,5 +16,5 @@ let value: MCPAccessProfileToolBindingServiceListToolsByProfileHistoryResponse =
 
 | Field                                                                                                                     | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               |
 | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `list`                                                                                                                    | [shared.MCPAccessProfileToolBindingHistoryEntry](../../../sdk/models/shared/mcpaccessprofiletoolbindinghistoryentry.md)[] | :heavy_minus_sign:                                                                                                        | The list field.                                                                                                           |
-| `nextPageToken`                                                                                                           | *string*                                                                                                                  | :heavy_minus_sign:                                                                                                        | The nextPageToken field.                                                                                                  |
+| `list`                                                                                                                    | [shared.MCPAccessProfileToolBindingHistoryEntry](../../../sdk/models/shared/mcpaccessprofiletoolbindinghistoryentry.md)[] | :heavy_minus_sign:                                                                                                        | The page of history entries, newest first.                                                                                |
+| `nextPageToken`                                                                                                           | *string*                                                                                                                  | :heavy_minus_sign:                                                                                                        | Pagination token for the next page, or empty if there are no more results.                                                |

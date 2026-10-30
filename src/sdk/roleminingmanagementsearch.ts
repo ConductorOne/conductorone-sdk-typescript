@@ -14,6 +14,7 @@ export class RoleMiningManagementSearch extends ClientSDK {
    *
    * @remarks
    * Search role mining suggestions by name, description, or cohort filter values with optional state and type filters.
+   *  Each suggestion row is large (cohort filters, entitlements, insights, profile matches) — request a small page_size (≤10) to keep responses small.
    */
   async search(
     request?: shared.RoleMiningSearchSuggestionsRequest | undefined,

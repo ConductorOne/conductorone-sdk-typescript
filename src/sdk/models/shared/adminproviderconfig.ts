@@ -14,11 +14,11 @@ export type AdminProviderConfig = {
   /**
    * The defaultValueCel field.
    */
-  defaultValueCel?: string | null | undefined;
+  defaultValueCel?: string | undefined;
   /**
    * The showToUser field.
    */
-  showToUser?: boolean | null | undefined;
+  showToUser?: boolean | undefined;
 };
 
 /** @internal */
@@ -27,13 +27,13 @@ export const AdminProviderConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  defaultValueCel: z.nullable(z.string()).optional(),
-  showToUser: z.nullable(z.boolean()).optional(),
+  defaultValueCel: z.string().optional(),
+  showToUser: z.boolean().optional(),
 });
 /** @internal */
 export type AdminProviderConfig$Outbound = {
-  defaultValueCel?: string | null | undefined;
-  showToUser?: boolean | null | undefined;
+  defaultValueCel?: string | undefined;
+  showToUser?: boolean | undefined;
 };
 
 /** @internal */
@@ -42,8 +42,8 @@ export const AdminProviderConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AdminProviderConfig
 > = z.object({
-  defaultValueCel: z.nullable(z.string()).optional(),
-  showToUser: z.nullable(z.boolean()).optional(),
+  defaultValueCel: z.string().optional(),
+  showToUser: z.boolean().optional(),
 });
 
 export function adminProviderConfigToJSON(

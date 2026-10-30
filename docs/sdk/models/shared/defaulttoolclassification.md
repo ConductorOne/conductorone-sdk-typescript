@@ -1,6 +1,7 @@
 # DefaultToolClassification
 
-The defaultToolClassification field.
+Classification assigned to newly discovered tools that do not declare their
+ own classification (for example, read, write, or destructive).
 
 ## Example Usage
 

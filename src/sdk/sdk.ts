@@ -6,19 +6,26 @@ import { ClientSDK } from "../lib/sdks.js";
 import { A2Ui } from "./a2ui.js";
 import { AccessConflict } from "./accessconflict.js";
 import { AccessReview } from "./accessreview.js";
+import { AccessReviewActions } from "./accessreviewactions.js";
+import { AccessReviewReport } from "./accessreviewreport.js";
 import { AccessReviewSetupEntitlement } from "./accessreviewsetupentitlement.js";
 import { AccessReviewTemplate } from "./accessreviewtemplate.js";
 import { AccessReviewTemplateSetupEntitlement } from "./accessreviewtemplatesetupentitlement.js";
 import { AccountProvisionPolicyTest } from "./accountprovisionpolicytest.js";
+import { AgentClassifier } from "./agentclassifier.js";
 import { AIGovernanceSettings } from "./aigovernancesettings.js";
+import { APIKeySearch } from "./apikeysearch.js";
 import { AppAccessRequestsDefaults } from "./appaccessrequestsdefaults.js";
+import { AppCap } from "./appcap.js";
 import { AppEntitlementMonitorBinding } from "./appentitlementmonitorbinding.js";
 import { AppEntitlementOwners } from "./appentitlementowners.js";
 import { AppEntitlementOwnersV2 } from "./appentitlementownersv2.js";
+import { AppEntitlementRoutingRule } from "./appentitlementroutingrule.js";
 import { AppEntitlements } from "./appentitlements.js";
 import { AppEntitlementSearch } from "./appentitlementsearch.js";
 import { AppEntitlementsProxy } from "./appentitlementsproxy.js";
 import { AppEntitlementUserBinding } from "./appentitlementuserbinding.js";
+import { AppManagedState } from "./appmanagedstate.js";
 import { AppOwners } from "./appowners.js";
 import { AppOwnersV2 } from "./appownersv2.js";
 import { AppReport } from "./appreport.js";
@@ -30,42 +37,68 @@ import { AppResourceSearch } from "./appresourcesearch.js";
 import { AppResourceType } from "./appresourcetype.js";
 import { Apps } from "./apps.js";
 import { AppSearch } from "./appsearch.js";
+import { AppSecretAdmin } from "./appsecretadmin.js";
+import { AppSecretSearch } from "./appsecretsearch.js";
 import { AppUsageControls } from "./appusagecontrols.js";
 import { AppUser } from "./appuser.js";
+import { AppUserOwnersV2 } from "./appuserownersv2.js";
+import { Artifact } from "./artifact.js";
 import { Attributes } from "./attributes.js";
 import { AttributeSearch } from "./attributesearch.js";
 import { Auth } from "./auth.js";
+import { AuthzenServer } from "./authzenserver.js";
 import { Automation } from "./automation.js";
 import { AutomationExecution } from "./automationexecution.js";
 import { AutomationExecutionActions } from "./automationexecutionactions.js";
 import { AutomationExecutionSearch } from "./automationexecutionsearch.js";
 import { AutomationSearch } from "./automationsearch.js";
 import { AWSExternalIDSettings } from "./awsexternalidsettings.js";
+import { Classifier } from "./classifier.js";
+import { ClassifierTemplate } from "./classifiertemplate.js";
 import { Connector } from "./connector.js";
+import { ConnectorAuthoringActivation } from "./connectorauthoringactivation.js";
 import { ConnectorCatalog } from "./connectorcatalog.js";
 import { ConnectorOwnersV2 } from "./connectorownersv2.js";
 import { Contacts } from "./contacts.js";
+import { CredentialInventoryPolicy } from "./credentialinventorypolicy.js";
 import { Decoy } from "./decoy.js";
 import { DecoySearch } from "./decoysearch.js";
 import { Directory } from "./directory.js";
+import { Edge } from "./edge.js";
+import { EmailCapabilities } from "./emailcapabilities.js";
 import { Export } from "./export.js";
 import { ExportsSearch } from "./exportssearch.js";
 import { ExternalClientSearch } from "./externalclientsearch.js";
+import { ExternalOAuthClient } from "./externaloauthclient.js";
+import { Feedback } from "./feedback.js";
 import { Finding } from "./finding.js";
 import { FindingAudit } from "./findingaudit.js";
 import { FindingRoutingRule } from "./findingroutingrule.js";
 import { FindingSearch } from "./findingsearch.js";
+import { FindingSettings } from "./findingsettings.js";
+import { FindingTransformationRule } from "./findingtransformationrule.js";
 import { Functions } from "./functions.js";
 import { FunctionsInvocation } from "./functionsinvocation.js";
 import { FunctionsInvocationSearch } from "./functionsinvocationsearch.js";
 import { FunctionsSearch } from "./functionssearch.js";
+import { FundAssignment } from "./fundassignment.js";
+import { FundPolicy } from "./fundpolicy.js";
+import { FundRule } from "./fundrule.js";
+import { GatewayKey } from "./gatewaykey.js";
+import { GoLink } from "./golink.js";
+import { GoLinkSearch } from "./golinksearch.js";
 import { Hooks } from "./hooks.js";
 import { HooksSearch } from "./hookssearch.js";
+import { IdentityPolicyTenantDefaults } from "./identitypolicytenantdefaults.js";
 import { LocalDirectoryConfig } from "./localdirectoryconfig.js";
 import { LocalUserInvitation } from "./localuserinvitation.js";
 import { MCPAccessProfile } from "./mcpaccessprofile.js";
 import { MCPAccessProfileToolBinding } from "./mcpaccessprofiletoolbinding.js";
+import { MCPResource } from "./mcpresource.js";
+import { MCPServer } from "./mcpserver.js";
 import { MCPTool } from "./mcptool.js";
+import { ModelAPIKey } from "./modelapikey.js";
+import { MyFundLimits } from "./myfundlimits.js";
 import { OnboardingSettings } from "./onboardingsettings.js";
 import { OrgDomain } from "./orgdomain.js";
 import { OrgNotificationSettings } from "./orgnotificationsettings.js";
@@ -73,10 +106,14 @@ import { PaperSecret } from "./papersecret.js";
 import { PaperSecretAdmin } from "./papersecretadmin.js";
 import { PersonalClient } from "./personalclient.js";
 import { PersonalClientSearch } from "./personalclientsearch.js";
+import { PersonalDevice } from "./personaldevice.js";
 import { Policies } from "./policies.js";
 import { PolicySearch } from "./policysearch.js";
 import { PolicyValidate } from "./policyvalidate.js";
 import { Principal } from "./principal.js";
+import { ProviderCredential } from "./providercredential.js";
+import { RecoveryPolicy } from "./recoverypolicy.js";
+import { Reporting } from "./reporting.js";
 import { RequestCatalogManagement } from "./requestcatalogmanagement.js";
 import { RequestCatalogSearch } from "./requestcatalogsearch.js";
 import { RequestSchema } from "./requestschema.js";
@@ -84,12 +121,19 @@ import { RequestSettings } from "./requestsettings.js";
 import { RoleMiningManagement } from "./roleminingmanagement.js";
 import { RoleMiningManagementSearch } from "./roleminingmanagementsearch.js";
 import { Roles } from "./roles.js";
+import { SessionPolicy } from "./sessionpolicy.js";
 import { SessionSettings } from "./sessionsettings.js";
+import { ShadowMcpOccurrence } from "./shadowmcpoccurrence.js";
+import { SignInPolicy } from "./signinpolicy.js";
+import { SpendInsights } from "./spendinsights.js";
 import { SSFReceiverEvent } from "./ssfreceiverevent.js";
 import { SSFReceiverEventSearch } from "./ssfreceivereventsearch.js";
 import { SSFReceiverStream } from "./ssfreceiverstream.js";
+import { SSOApplication } from "./ssoapplication.js";
+import { SSOSettings } from "./ssosettings.js";
 import { StepUpProvider } from "./stepupprovider.js";
 import { StepUpTransaction } from "./stepuptransaction.js";
+import { SubjectAppLimit } from "./subjectapplimit.js";
 import { SystemLog } from "./systemlog.js";
 import { Task } from "./task.js";
 import { TaskActions } from "./taskactions.js";
@@ -98,15 +142,30 @@ import { TaskSearch } from "./tasksearch.js";
 import { TenantAuthConfig } from "./tenantauthconfig.js";
 import { TenantEmailProvider } from "./tenantemailprovider.js";
 import { TerraformExport } from "./terraformexport.js";
+import { ToolGates } from "./toolgates.js";
+import { ToolGatesSearch } from "./toolgatessearch.js";
 import { TunnelCredentials } from "./tunnelcredentials.js";
+import { UIConversations } from "./uiconversations.js";
 import { User } from "./user.js";
+import { UserAttributeManagement } from "./userattributemanagement.js";
 import { UserDeveloperPreferences } from "./userdeveloperpreferences.js";
 import { UserNotificationSettings } from "./usernotificationsettings.js";
+import { UserOwnersV2 } from "./userownersv2.js";
 import { UserSearch } from "./usersearch.js";
 import { Vault } from "./vault.js";
+import { VirtualMCPServer } from "./virtualmcpserver.js";
+import { VirtualMCPServerMySearch } from "./virtualmcpservermysearch.js";
+import { VirtualMCPToolBinding } from "./virtualmcptoolbinding.js";
+import { VirtualMCPToolsetBinding } from "./virtualmcptoolsetbinding.js";
 import { Webhooks } from "./webhooks.js";
 import { WebhooksSearch } from "./webhookssearch.js";
 import { WorkloadFederation } from "./workloadfederation.js";
+import { XAAAccessProfile } from "./xaaaccessprofile.js";
+import { XAAAccessProfileScopeBinding } from "./xaaaccessprofilescopebinding.js";
+import { XAAClientAudienceMapping } from "./xaaclientaudiencemapping.js";
+import { XAAResourceServer } from "./xaaresourceserver.js";
+import { XAAScope } from "./xaascope.js";
+import { XAASettings } from "./xaasettings.js";
 
 export class ConductoroneSDKTypescript extends ClientSDK {
   private _a2Ui?: A2Ui;
@@ -123,6 +182,18 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   get accessReviewSetupEntitlement(): AccessReviewSetupEntitlement {
     return (this._accessReviewSetupEntitlement ??=
       new AccessReviewSetupEntitlement(this._options));
+  }
+
+  private _accessReviewReport?: AccessReviewReport;
+  get accessReviewReport(): AccessReviewReport {
+    return (this._accessReviewReport ??= new AccessReviewReport(this._options));
+  }
+
+  private _accessReviewActions?: AccessReviewActions;
+  get accessReviewActions(): AccessReviewActions {
+    return (this._accessReviewActions ??= new AccessReviewActions(
+      this._options,
+    ));
   }
 
   private _accessReviewTemplate?: AccessReviewTemplate;
@@ -144,6 +215,16 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._accessConflict ??= new AccessConflict(this._options));
   }
 
+  private _appSecretAdmin?: AppSecretAdmin;
+  get appSecretAdmin(): AppSecretAdmin {
+    return (this._appSecretAdmin ??= new AppSecretAdmin(this._options));
+  }
+
+  private _appUser?: AppUser;
+  get appUser(): AppUser {
+    return (this._appUser ??= new AppUser(this._options));
+  }
+
   private _appEntitlementMonitorBinding?: AppEntitlementMonitorBinding;
   get appEntitlementMonitorBinding(): AppEntitlementMonitorBinding {
     return (this._appEntitlementMonitorBinding ??=
@@ -162,14 +243,19 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     ));
   }
 
-  private _appUser?: AppUser;
-  get appUser(): AppUser {
-    return (this._appUser ??= new AppUser(this._options));
+  private _authzenServer?: AuthzenServer;
+  get authzenServer(): AuthzenServer {
+    return (this._authzenServer ??= new AuthzenServer(this._options));
   }
 
   private _connector?: Connector;
   get connector(): Connector {
     return (this._connector ??= new Connector(this._options));
+  }
+
+  private _mcpResource?: MCPResource;
+  get mcpResource(): MCPResource {
+    return (this._mcpResource ??= new MCPResource(this._options));
   }
 
   private _mcpTool?: MCPTool;
@@ -188,6 +274,18 @@ export class ConductoroneSDKTypescript extends ClientSDK {
       new MCPAccessProfileToolBinding(this._options));
   }
 
+  private _edge?: Edge;
+  get edge(): Edge {
+    return (this._edge ??= new Edge(this._options));
+  }
+
+  private _appEntitlementRoutingRule?: AppEntitlementRoutingRule;
+  get appEntitlementRoutingRule(): AppEntitlementRoutingRule {
+    return (this._appEntitlementRoutingRule ??= new AppEntitlementRoutingRule(
+      this._options,
+    ));
+  }
+
   private _appEntitlements?: AppEntitlements;
   get appEntitlements(): AppEntitlements {
     return (this._appEntitlements ??= new AppEntitlements(this._options));
@@ -198,6 +296,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._appEntitlementSearch ??= new AppEntitlementSearch(
       this._options,
     ));
+  }
+
+  private _sessionPolicy?: SessionPolicy;
+  get sessionPolicy(): SessionPolicy {
+    return (this._sessionPolicy ??= new SessionPolicy(this._options));
   }
 
   private _appEntitlementUserBinding?: AppEntitlementUserBinding;
@@ -212,6 +315,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._appEntitlementOwners ??= new AppEntitlementOwners(
       this._options,
     ));
+  }
+
+  private _mcpServer?: MCPServer;
+  get mcpServer(): MCPServer {
+    return (this._mcpServer ??= new MCPServer(this._options));
   }
 
   private _appOwners?: AppOwners;
@@ -239,9 +347,19 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._appResource ??= new AppResource(this._options));
   }
 
+  private _appManagedState?: AppManagedState;
+  get appManagedState(): AppManagedState {
+    return (this._appManagedState ??= new AppManagedState(this._options));
+  }
+
   private _appResourceOwners?: AppResourceOwners;
   get appResourceOwners(): AppResourceOwners {
     return (this._appResourceOwners ??= new AppResourceOwners(this._options));
+  }
+
+  private _ssoApplication?: SSOApplication;
+  get ssoApplication(): SSOApplication {
+    return (this._ssoApplication ??= new SSOApplication(this._options));
   }
 
   private _appUsageControls?: AppUsageControls;
@@ -249,11 +367,37 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._appUsageControls ??= new AppUsageControls(this._options));
   }
 
+  private _xaaAccessProfile?: XAAAccessProfile;
+  get xaaAccessProfile(): XAAAccessProfile {
+    return (this._xaaAccessProfile ??= new XAAAccessProfile(this._options));
+  }
+
+  private _xaaAccessProfileScopeBinding?: XAAAccessProfileScopeBinding;
+  get xaaAccessProfileScopeBinding(): XAAAccessProfileScopeBinding {
+    return (this._xaaAccessProfileScopeBinding ??=
+      new XAAAccessProfileScopeBinding(this._options));
+  }
+
+  private _xaaResourceServer?: XAAResourceServer;
+  get xaaResourceServer(): XAAResourceServer {
+    return (this._xaaResourceServer ??= new XAAResourceServer(this._options));
+  }
+
+  private _xaaScope?: XAAScope;
+  get xaaScope(): XAAScope {
+    return (this._xaaScope ??= new XAAScope(this._options));
+  }
+
   private _appEntitlementsProxy?: AppEntitlementsProxy;
   get appEntitlementsProxy(): AppEntitlementsProxy {
     return (this._appEntitlementsProxy ??= new AppEntitlementsProxy(
       this._options,
     ));
+  }
+
+  private _artifact?: Artifact;
+  get artifact(): Artifact {
+    return (this._artifact ??= new Artifact(this._options));
   }
 
   private _attributes?: Attributes;
@@ -297,9 +441,37 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     ));
   }
 
+  private _classifier?: Classifier;
+  get classifier(): Classifier {
+    return (this._classifier ??= new Classifier(this._options));
+  }
+
+  private _classifierTemplate?: ClassifierTemplate;
+  get classifierTemplate(): ClassifierTemplate {
+    return (this._classifierTemplate ??= new ClassifierTemplate(this._options));
+  }
+
+  private _connectorAuthoringActivation?: ConnectorAuthoringActivation;
+  get connectorAuthoringActivation(): ConnectorAuthoringActivation {
+    return (this._connectorAuthoringActivation ??=
+      new ConnectorAuthoringActivation(this._options));
+  }
+
   private _connectorCatalog?: ConnectorCatalog;
   get connectorCatalog(): ConnectorCatalog {
     return (this._connectorCatalog ??= new ConnectorCatalog(this._options));
+  }
+
+  private _uiConversations?: UIConversations;
+  get uiConversations(): UIConversations {
+    return (this._uiConversations ??= new UIConversations(this._options));
+  }
+
+  private _credentialInventoryPolicy?: CredentialInventoryPolicy;
+  get credentialInventoryPolicy(): CredentialInventoryPolicy {
+    return (this._credentialInventoryPolicy ??= new CredentialInventoryPolicy(
+      this._options,
+    ));
   }
 
   private _decoy?: Decoy;
@@ -317,6 +489,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._directory ??= new Directory(this._options));
   }
 
+  private _feedback?: Feedback;
+  get feedback(): Feedback {
+    return (this._feedback ??= new Feedback(this._options));
+  }
+
   private _finding?: Finding;
   get finding(): Finding {
     return (this._finding ??= new Finding(this._options));
@@ -330,6 +507,18 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _findingSearch?: FindingSearch;
   get findingSearch(): FindingSearch {
     return (this._findingSearch ??= new FindingSearch(this._options));
+  }
+
+  private _findingSettings?: FindingSettings;
+  get findingSettings(): FindingSettings {
+    return (this._findingSettings ??= new FindingSettings(this._options));
+  }
+
+  private _findingTransformationRule?: FindingTransformationRule;
+  get findingTransformationRule(): FindingTransformationRule {
+    return (this._findingTransformationRule ??= new FindingTransformationRule(
+      this._options,
+    ));
   }
 
   private _functions?: Functions;
@@ -351,14 +540,71 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     ));
   }
 
+  private _appCap?: AppCap;
+  get appCap(): AppCap {
+    return (this._appCap ??= new AppCap(this._options));
+  }
+
+  private _fundAssignment?: FundAssignment;
+  get fundAssignment(): FundAssignment {
+    return (this._fundAssignment ??= new FundAssignment(this._options));
+  }
+
+  private _myFundLimits?: MyFundLimits;
+  get myFundLimits(): MyFundLimits {
+    return (this._myFundLimits ??= new MyFundLimits(this._options));
+  }
+
+  private _fundPolicy?: FundPolicy;
+  get fundPolicy(): FundPolicy {
+    return (this._fundPolicy ??= new FundPolicy(this._options));
+  }
+
+  private _fundRule?: FundRule;
+  get fundRule(): FundRule {
+    return (this._fundRule ??= new FundRule(this._options));
+  }
+
+  private _subjectAppLimit?: SubjectAppLimit;
+  get subjectAppLimit(): SubjectAppLimit {
+    return (this._subjectAppLimit ??= new SubjectAppLimit(this._options));
+  }
+
+  private _goLink?: GoLink;
+  get goLink(): GoLink {
+    return (this._goLink ??= new GoLink(this._options));
+  }
+
+  private _goLinkSearch?: GoLinkSearch;
+  get goLinkSearch(): GoLinkSearch {
+    return (this._goLinkSearch ??= new GoLinkSearch(this._options));
+  }
+
   private _hooks?: Hooks;
   get hooks(): Hooks {
     return (this._hooks ??= new Hooks(this._options));
   }
 
+  private _externalOAuthClient?: ExternalOAuthClient;
+  get externalOAuthClient(): ExternalOAuthClient {
+    return (this._externalOAuthClient ??= new ExternalOAuthClient(
+      this._options,
+    ));
+  }
+
+  private _modelAPIKey?: ModelAPIKey;
+  get modelAPIKey(): ModelAPIKey {
+    return (this._modelAPIKey ??= new ModelAPIKey(this._options));
+  }
+
   private _personalClient?: PersonalClient;
   get personalClient(): PersonalClient {
     return (this._personalClient ??= new PersonalClient(this._options));
+  }
+
+  private _personalDevice?: PersonalDevice;
+  get personalDevice(): PersonalDevice {
+    return (this._personalDevice ??= new PersonalDevice(this._options));
   }
 
   private _roles?: Roles;
@@ -369,6 +615,16 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _tunnelCredentials?: TunnelCredentials;
   get tunnelCredentials(): TunnelCredentials {
     return (this._tunnelCredentials ??= new TunnelCredentials(this._options));
+  }
+
+  private _gatewayKey?: GatewayKey;
+  get gatewayKey(): GatewayKey {
+    return (this._gatewayKey ??= new GatewayKey(this._options));
+  }
+
+  private _providerCredential?: ProviderCredential;
+  get providerCredential(): ProviderCredential {
+    return (this._providerCredential ??= new ProviderCredential(this._options));
   }
 
   private _localDirectoryConfig?: LocalDirectoryConfig;
@@ -402,6 +658,16 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._policyValidate ??= new PolicyValidate(this._options));
   }
 
+  private _recoveryPolicy?: RecoveryPolicy;
+  get recoveryPolicy(): RecoveryPolicy {
+    return (this._recoveryPolicy ??= new RecoveryPolicy(this._options));
+  }
+
+  private _reporting?: Reporting;
+  get reporting(): Reporting {
+    return (this._reporting ??= new Reporting(this._options));
+  }
+
   private _requestSchema?: RequestSchema;
   get requestSchema(): RequestSchema {
     return (this._requestSchema ??= new RequestSchema(this._options));
@@ -419,6 +685,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._automationExecutionSearch ??= new AutomationExecutionSearch(
       this._options,
     ));
+  }
+
+  private _appSecretSearch?: AppSecretSearch;
+  get appSecretSearch(): AppSecretSearch {
+    return (this._appSecretSearch ??= new AppSecretSearch(this._options));
   }
 
   private _appResourceSearch?: AppResourceSearch;
@@ -456,6 +727,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._hooksSearch ??= new HooksSearch(this._options));
   }
 
+  private _apiKeySearch?: APIKeySearch;
+  get apiKeySearch(): APIKeySearch {
+    return (this._apiKeySearch ??= new APIKeySearch(this._options));
+  }
+
   private _externalClientSearch?: ExternalClientSearch;
   get externalClientSearch(): ExternalClientSearch {
     return (this._externalClientSearch ??= new ExternalClientSearch(
@@ -466,6 +742,13 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _personalClientSearch?: PersonalClientSearch;
   get personalClientSearch(): PersonalClientSearch {
     return (this._personalClientSearch ??= new PersonalClientSearch(
+      this._options,
+    ));
+  }
+
+  private _virtualMCPServerMySearch?: VirtualMCPServerMySearch;
+  get virtualMCPServerMySearch(): VirtualMCPServerMySearch {
+    return (this._virtualMCPServerMySearch ??= new VirtualMCPServerMySearch(
       this._options,
     ));
   }
@@ -499,6 +782,18 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._paperSecret ??= new PaperSecret(this._options));
   }
 
+  private _shadowMcpOccurrence?: ShadowMcpOccurrence;
+  get shadowMcpOccurrence(): ShadowMcpOccurrence {
+    return (this._shadowMcpOccurrence ??= new ShadowMcpOccurrence(
+      this._options,
+    ));
+  }
+
+  private _signInPolicy?: SignInPolicy;
+  get signInPolicy(): SignInPolicy {
+    return (this._signInPolicy ??= new SignInPolicy(this._options));
+  }
+
   private _ssfReceiverEventSearch?: SSFReceiverEventSearch;
   get ssfReceiverEventSearch(): SSFReceiverEventSearch {
     return (this._ssfReceiverEventSearch ??= new SSFReceiverEventSearch(
@@ -526,6 +821,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._taskSearch ??= new TaskSearch(this._options));
   }
 
+  private _toolGatesSearch?: ToolGatesSearch;
+  get toolGatesSearch(): ToolGatesSearch {
+    return (this._toolGatesSearch ??= new ToolGatesSearch(this._options));
+  }
+
   private _userSearch?: UserSearch;
   get userSearch(): UserSearch {
     return (this._userSearch ??= new UserSearch(this._options));
@@ -541,6 +841,13 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._workloadFederation ??= new WorkloadFederation(this._options));
   }
 
+  private _xaaClientAudienceMapping?: XAAClientAudienceMapping;
+  get xaaClientAudienceMapping(): XAAClientAudienceMapping {
+    return (this._xaaClientAudienceMapping ??= new XAAClientAudienceMapping(
+      this._options,
+    ));
+  }
+
   private _principal?: Principal;
   get principal(): Principal {
     return (this._principal ??= new Principal(this._options));
@@ -551,6 +858,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._aiGovernanceSettings ??= new AIGovernanceSettings(
       this._options,
     ));
+  }
+
+  private _agentClassifier?: AgentClassifier;
+  get agentClassifier(): AgentClassifier {
+    return (this._agentClassifier ??= new AgentClassifier(this._options));
   }
 
   private _awsExternalIDSettings?: AWSExternalIDSettings;
@@ -565,6 +877,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._contacts ??= new Contacts(this._options));
   }
 
+  private _xaaSettings?: XAASettings;
+  get xaaSettings(): XAASettings {
+    return (this._xaaSettings ??= new XAASettings(this._options));
+  }
+
   private _userDeveloperPreferences?: UserDeveloperPreferences;
   get userDeveloperPreferences(): UserDeveloperPreferences {
     return (this._userDeveloperPreferences ??= new UserDeveloperPreferences(
@@ -577,11 +894,22 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._orgDomain ??= new OrgDomain(this._options));
   }
 
+  private _emailCapabilities?: EmailCapabilities;
+  get emailCapabilities(): EmailCapabilities {
+    return (this._emailCapabilities ??= new EmailCapabilities(this._options));
+  }
+
   private _tenantEmailProvider?: TenantEmailProvider;
   get tenantEmailProvider(): TenantEmailProvider {
     return (this._tenantEmailProvider ??= new TenantEmailProvider(
       this._options,
     ));
+  }
+
+  private _identityPolicyTenantDefaults?: IdentityPolicyTenantDefaults;
+  get identityPolicyTenantDefaults(): IdentityPolicyTenantDefaults {
+    return (this._identityPolicyTenantDefaults ??=
+      new IdentityPolicyTenantDefaults(this._options));
   }
 
   private _orgNotificationSettings?: OrgNotificationSettings;
@@ -613,6 +941,16 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._sessionSettings ??= new SessionSettings(this._options));
   }
 
+  private _ssoSettings?: SSOSettings;
+  get ssoSettings(): SSOSettings {
+    return (this._ssoSettings ??= new SSOSettings(this._options));
+  }
+
+  private _spendInsights?: SpendInsights;
+  get spendInsights(): SpendInsights {
+    return (this._spendInsights ??= new SpendInsights(this._options));
+  }
+
   private _ssfReceiverStream?: SSFReceiverStream;
   get ssfReceiverStream(): SSFReceiverStream {
     return (this._ssfReceiverStream ??= new SSFReceiverStream(this._options));
@@ -633,14 +971,14 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._export ??= new Export(this._options));
   }
 
-  private _taskAudit?: TaskAudit;
-  get taskAudit(): TaskAudit {
-    return (this._taskAudit ??= new TaskAudit(this._options));
-  }
-
   private _task?: Task;
   get task(): Task {
     return (this._task ??= new Task(this._options));
+  }
+
+  private _taskAudit?: TaskAudit;
+  get taskAudit(): TaskAudit {
+    return (this._taskAudit ??= new TaskAudit(this._options));
   }
 
   private _taskActions?: TaskActions;
@@ -653,6 +991,18 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._terraformExport ??= new TerraformExport(this._options));
   }
 
+  private _toolGates?: ToolGates;
+  get toolGates(): ToolGates {
+    return (this._toolGates ??= new ToolGates(this._options));
+  }
+
+  private _userAttributeManagement?: UserAttributeManagement;
+  get userAttributeManagement(): UserAttributeManagement {
+    return (this._userAttributeManagement ??= new UserAttributeManagement(
+      this._options,
+    ));
+  }
+
   private _user?: User;
   get user(): User {
     return (this._user ??= new User(this._options));
@@ -661,6 +1011,25 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _vault?: Vault;
   get vault(): Vault {
     return (this._vault ??= new Vault(this._options));
+  }
+
+  private _virtualMCPServer?: VirtualMCPServer;
+  get virtualMCPServer(): VirtualMCPServer {
+    return (this._virtualMCPServer ??= new VirtualMCPServer(this._options));
+  }
+
+  private _virtualMCPToolBinding?: VirtualMCPToolBinding;
+  get virtualMCPToolBinding(): VirtualMCPToolBinding {
+    return (this._virtualMCPToolBinding ??= new VirtualMCPToolBinding(
+      this._options,
+    ));
+  }
+
+  private _virtualMCPToolsetBinding?: VirtualMCPToolsetBinding;
+  get virtualMCPToolsetBinding(): VirtualMCPToolsetBinding {
+    return (this._virtualMCPToolsetBinding ??= new VirtualMCPToolsetBinding(
+      this._options,
+    ));
   }
 
   private _webhooks?: Webhooks;
@@ -690,5 +1059,15 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._appResourceOwnersV2 ??= new AppResourceOwnersV2(
       this._options,
     ));
+  }
+
+  private _appUserOwnersV2?: AppUserOwnersV2;
+  get appUserOwnersV2(): AppUserOwnersV2 {
+    return (this._appUserOwnersV2 ??= new AppUserOwnersV2(this._options));
+  }
+
+  private _userOwnersV2?: UserOwnersV2;
+  get userOwnersV2(): UserOwnersV2 {
+    return (this._userOwnersV2 ??= new UserOwnersV2(this._options));
   }
 }

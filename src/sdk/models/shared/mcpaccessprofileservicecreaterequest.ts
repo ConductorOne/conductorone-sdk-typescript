@@ -11,17 +11,17 @@ export type MCPAccessProfileServiceCreateRequest = {
   /**
    * Description of what access this profile grants.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * Display name for the profile.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
 };
 
 /** @internal */
 export type MCPAccessProfileServiceCreateRequest$Outbound = {
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
 };
 
 /** @internal */
@@ -30,8 +30,8 @@ export const MCPAccessProfileServiceCreateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MCPAccessProfileServiceCreateRequest
 > = z.object({
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
 });
 
 export function mcpAccessProfileServiceCreateRequestToJSON(

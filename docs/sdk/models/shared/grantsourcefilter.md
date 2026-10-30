@@ -1,6 +1,8 @@
 # GrantSourceFilter
 
-The grantSourceFilter field.
+Restricts the step to grants of either DIRECT (grants the user holds directly,
+ including grants that are also inherited) or UNSPECIFIED (all grants).
+ Composes with every inclusion mode, including inclusion_list_cel.
 
 ## Example Usage
 
@@ -15,5 +17,5 @@ let value: GrantSourceFilter = "GRANT_SOURCE_FILTER_UNSPECIFIED";
 ## Values
 
 ```typescript
-"GRANT_SOURCE_FILTER_UNSPECIFIED" | "GRANT_SOURCE_FILTER_DIRECT" | "GRANT_SOURCE_FILTER_INHERITED" | Unrecognized<string>
+"GRANT_SOURCE_FILTER_UNSPECIFIED" | "GRANT_SOURCE_FILTER_DIRECT" | Unrecognized<string>
 ```

@@ -18,7 +18,7 @@ export type ResponseWorkflowStep = {
    * @remarks
    *  will use a different string.
    */
-  version?: string | null | undefined;
+  version?: string | undefined;
 };
 
 /** @internal */
@@ -28,12 +28,12 @@ export const ResponseWorkflowStep$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   context: z.nullable(z.record(z.any())).optional(),
-  version: z.nullable(z.string()).optional(),
+  version: z.string().optional(),
 });
 /** @internal */
 export type ResponseWorkflowStep$Outbound = {
   context?: { [k: string]: any } | null | undefined;
-  version?: string | null | undefined;
+  version?: string | undefined;
 };
 
 /** @internal */
@@ -43,7 +43,7 @@ export const ResponseWorkflowStep$outboundSchema: z.ZodType<
   ResponseWorkflowStep
 > = z.object({
   context: z.nullable(z.record(z.any())).optional(),
-  version: z.nullable(z.string()).optional(),
+  version: z.string().optional(),
 });
 
 export function responseWorkflowStepToJSON(

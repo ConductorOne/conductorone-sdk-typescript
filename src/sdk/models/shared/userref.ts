@@ -14,17 +14,17 @@ export type UserRef = {
   /**
    * The id of the user.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
 export const UserRef$inboundSchema: z.ZodType<UserRef, z.ZodTypeDef, unknown> =
   z.object({
-    id: z.nullable(z.string()).optional(),
+    id: z.string().optional(),
   });
 /** @internal */
 export type UserRef$Outbound = {
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -33,7 +33,7 @@ export const UserRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UserRef
 > = z.object({
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
 });
 
 export function userRefToJSON(userRef: UserRef): string {

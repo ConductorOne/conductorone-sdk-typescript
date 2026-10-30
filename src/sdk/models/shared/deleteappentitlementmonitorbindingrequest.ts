@@ -26,19 +26,19 @@ export type DeleteAppEntitlementMonitorBindingRequest = {
   /**
    * The unique identifier of the app entitlement to unbind.
    */
-  appEntitlementId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
   /**
    * The unique identifier of the application containing the entitlement.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * Which side of the conflict monitor (A or B) the binding belongs to.
    */
-  entitlementGroup?: EntitlementGroup | null | undefined;
+  entitlementGroup?: EntitlementGroup | undefined;
   /**
    * The unique identifier of the conflict monitor.
    */
-  monitorId?: string | null | undefined;
+  monitorId?: string | undefined;
 };
 
 /** @internal */
@@ -50,10 +50,10 @@ export const EntitlementGroup$outboundSchema: z.ZodType<
 
 /** @internal */
 export type DeleteAppEntitlementMonitorBindingRequest$Outbound = {
-  appEntitlementId?: string | null | undefined;
-  appId?: string | null | undefined;
-  entitlementGroup?: string | null | undefined;
-  monitorId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
+  appId?: string | undefined;
+  entitlementGroup?: string | undefined;
+  monitorId?: string | undefined;
 };
 
 /** @internal */
@@ -63,10 +63,10 @@ export const DeleteAppEntitlementMonitorBindingRequest$outboundSchema:
     z.ZodTypeDef,
     DeleteAppEntitlementMonitorBindingRequest
   > = z.object({
-    appEntitlementId: z.nullable(z.string()).optional(),
-    appId: z.nullable(z.string()).optional(),
-    entitlementGroup: z.nullable(EntitlementGroup$outboundSchema).optional(),
-    monitorId: z.nullable(z.string()).optional(),
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    entitlementGroup: EntitlementGroup$outboundSchema.optional(),
+    monitorId: z.string().optional(),
   });
 
 export function deleteAppEntitlementMonitorBindingRequestToJSON(

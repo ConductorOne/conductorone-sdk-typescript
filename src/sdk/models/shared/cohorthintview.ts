@@ -14,11 +14,11 @@ export type CohortHintView = {
   /**
    * The user attribute name used for cohort grouping.
    */
-  attribute?: string | null | undefined;
+  attribute?: string | undefined;
   /**
    * Relative priority of this hint.
    */
-  priority?: number | null | undefined;
+  priority?: number | undefined;
   /**
    * The specific attribute values targeted by this hint.
    */
@@ -31,8 +31,8 @@ export const CohortHintView$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  attribute: z.nullable(z.string()).optional(),
-  priority: z.nullable(z.number().int()).optional(),
+  attribute: z.string().optional(),
+  priority: z.number().int().optional(),
   values: z.nullable(z.array(z.string())).optional(),
 });
 

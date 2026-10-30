@@ -14,7 +14,7 @@ export type TriggerAnalysisResponse = {
   /**
    * The ID of the newly created analysis run.
    */
-  runId?: string | null | undefined;
+  runId?: string | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const TriggerAnalysisResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  runId: z.nullable(z.string()).optional(),
+  runId: z.string().optional(),
 });
 
 export function triggerAnalysisResponseFromJSON(

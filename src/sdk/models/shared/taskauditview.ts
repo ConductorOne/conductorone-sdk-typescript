@@ -13,6 +13,10 @@ import {
   TaskAuditAccessRequestOutcome$inboundSchema,
 } from "./taskauditaccessrequestoutcome.js";
 import {
+  TaskAuditAccountDeleted,
+  TaskAuditAccountDeleted$inboundSchema,
+} from "./taskauditaccountdeleted.js";
+import {
   TaskAuditAccountLifecycleActionCreated,
   TaskAuditAccountLifecycleActionCreated$inboundSchema,
 } from "./taskauditaccountlifecycleactioncreated.js";
@@ -33,6 +37,10 @@ import {
   TaskAuditActionInstanceSucceeded$inboundSchema,
 } from "./taskauditactioninstancesucceeded.js";
 import {
+  TaskAuditActionOutcome,
+  TaskAuditActionOutcome$inboundSchema,
+} from "./taskauditactionoutcome.js";
+import {
   TaskAuditActionSubmitted,
   TaskAuditActionSubmitted$inboundSchema,
 } from "./taskauditactionsubmitted.js";
@@ -52,6 +60,10 @@ import {
   TaskAuditApprovalInstanceChange,
   TaskAuditApprovalInstanceChange$inboundSchema,
 } from "./taskauditapprovalinstancechange.js";
+import {
+  TaskAuditAutomationTriggered,
+  TaskAuditAutomationTriggered$inboundSchema,
+} from "./taskauditautomationtriggered.js";
 import {
   TaskAuditBulkActionError,
   TaskAuditBulkActionError$inboundSchema,
@@ -157,6 +169,18 @@ import {
   TaskAuditPolicyProvisionReassigned$inboundSchema,
 } from "./taskauditpolicyprovisionreassigned.js";
 import {
+  TaskAuditProvisionEntitlementMergeCompleted,
+  TaskAuditProvisionEntitlementMergeCompleted$inboundSchema,
+} from "./taskauditprovisionentitlementmergecompleted.js";
+import {
+  TaskAuditProvisionEntitlementMergeTimedOut,
+  TaskAuditProvisionEntitlementMergeTimedOut$inboundSchema,
+} from "./taskauditprovisionentitlementmergetimedout.js";
+import {
+  TaskAuditProvisionWaitingForEntitlementMerge,
+  TaskAuditProvisionWaitingForEntitlementMerge$inboundSchema,
+} from "./taskauditprovisionwaitingforentitlementmerge.js";
+import {
   TaskAuditReassignedToDelegate,
   TaskAuditReassignedToDelegate$inboundSchema,
 } from "./taskauditreassignedtodelegate.js";
@@ -168,6 +192,10 @@ import {
   TaskAuditReassignmentListError,
   TaskAuditReassignmentListError$inboundSchema,
 } from "./taskauditreassignmentlisterror.js";
+import {
+  TaskAuditRequestDefaultsApplied,
+  TaskAuditRequestDefaultsApplied$inboundSchema,
+} from "./taskauditrequestdefaultsapplied.js";
 import {
   TaskAuditRestart,
   TaskAuditRestart$inboundSchema,
@@ -286,7 +314,7 @@ export type TaskAuditViewEventType = OpenEnum<typeof TaskAuditViewEventType>;
 /**
  * The source field.
  */
-export const Source = {
+export const TaskAuditViewSource = {
   SourceUnspecified: "SOURCE_UNSPECIFIED",
   SourceC1: "SOURCE_C1",
   SourceJira: "SOURCE_JIRA",
@@ -296,7 +324,7 @@ export const Source = {
 /**
  * The source field.
  */
-export type Source = OpenEnum<typeof Source>;
+export type TaskAuditViewSource = OpenEnum<typeof TaskAuditViewSource>;
 
 /**
  * The TaskAuditView message.
@@ -365,9 +393,17 @@ export type Source = OpenEnum<typeof Source>;
  *   - createdReplacementExtensionGrantTask
  *   - taskCreatedFrom
  *   - reassignmentFallbackToAdmin
+ *   - requestDefaultsApplied
+ *   - provisionWaitingForEntitlementMerge
+ *   - provisionEntitlementMergeCompleted
+ *   - provisionEntitlementMergeTimedOut
+ *   - accountDeleted
+ *   - automationTriggered
+ *   - actionOutcome
  */
 export type TaskAuditView = {
   accessRequestOutcome?: TaskAuditAccessRequestOutcome | null | undefined;
+  accountDeleted?: TaskAuditAccountDeleted | null | undefined;
   accountLifecycleActionCreated?:
     | TaskAuditAccountLifecycleActionCreated
     | null
@@ -379,6 +415,7 @@ export type TaskAuditView = {
   actionInstanceCreated?: TaskAuditActionInstanceCreated | null | undefined;
   actionInstanceFailed?: TaskAuditActionInstanceFailed | null | undefined;
   actionInstanceSucceeded?: TaskAuditActionInstanceSucceeded | null | undefined;
+  actionOutcome?: TaskAuditActionOutcome | null | undefined;
   actionResult?: TaskAuditConnectorActionResult | null | undefined;
   actionSubmitted?: TaskAuditActionSubmitted | null | undefined;
   approvalAutoAcceptedByPolicy?:
@@ -395,6 +432,7 @@ export type TaskAuditView = {
     | TaskAuditApprovalHappenedAutomatically
     | null
     | undefined;
+  automationTriggered?: TaskAuditAutomationTriggered | null | undefined;
   bulkActionError?: TaskAuditBulkActionError | null | undefined;
   certifyOutcome?: TaskAuditCertifyOutcome | null | undefined;
   comment?: TaskAuditComment | null | undefined;
@@ -412,11 +450,11 @@ export type TaskAuditView = {
   /**
    * The currentState field.
    */
-  currentState?: CurrentState | null | undefined;
+  currentState?: CurrentState | undefined;
   /**
    * The eventType field.
    */
-  eventType?: TaskAuditViewEventType | null | undefined;
+  eventType?: TaskAuditViewEventType | undefined;
   expressionPolicyStepError?:
     | TaskAuditExpressionPolicyStepError
     | null
@@ -435,25 +473,38 @@ export type TaskAuditView = {
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   metadata?: TaskAuditMetaData | null | undefined;
   policyChanged?: TaskAuditPolicyChanged | null | undefined;
   policyEvaluationStep?: TaskAuditPolicyEvaluationStep | null | undefined;
   provisionCancelled?: TaskAuditPolicyProvisionCancelled | null | undefined;
+  provisionEntitlementMergeCompleted?:
+    | TaskAuditProvisionEntitlementMergeCompleted
+    | null
+    | undefined;
+  provisionEntitlementMergeTimedOut?:
+    | TaskAuditProvisionEntitlementMergeTimedOut
+    | null
+    | undefined;
   provisionError?: TaskAuditPolicyProvisionError | null | undefined;
   provisionReassigned?: TaskAuditPolicyProvisionReassigned | null | undefined;
+  provisionWaitingForEntitlementMerge?:
+    | TaskAuditProvisionWaitingForEntitlementMerge
+    | null
+    | undefined;
   reassignedToDelegate?: TaskAuditReassignedToDelegate | null | undefined;
   reassignmentFallbackToAdmin?:
     | TaskAuditReassignmentFallbackToAdmin
     | null
     | undefined;
   reassignmentListError?: TaskAuditReassignmentListError | null | undefined;
+  requestDefaultsApplied?: TaskAuditRequestDefaultsApplied | null | undefined;
   revokeOutcome?: TaskAuditRevokeOutcome | null | undefined;
   slaEscalation?: TaskAuditSLAEscalation | null | undefined;
   /**
    * The source field.
    */
-  source?: Source | null | undefined;
+  source?: TaskAuditViewSource | undefined;
   stateChange?: TaskAuditStateChange | null | undefined;
   stepSkipped?: TaskAuditStepSkipped | null | undefined;
   stepUpApproval?: TaskAuditStepUpApproval | null | undefined;
@@ -464,11 +515,11 @@ export type TaskAuditView = {
   /**
    * The ticketId field.
    */
-  ticketId?: string | null | undefined;
+  ticketId?: string | undefined;
   /**
    * The userId field.
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
   waitStepAnalysisSuccess?:
     | TaskAuditWaitForAnalysisStepSuccess
     | null
@@ -505,7 +556,7 @@ export type TaskAuditView = {
   /**
    * The workflowStep field.
    */
-  workflowStep?: number | null | undefined;
+  workflowStep?: number | undefined;
 };
 
 /** @internal */
@@ -523,8 +574,11 @@ export const TaskAuditViewEventType$inboundSchema: z.ZodType<
 > = openEnums.inboundSchema(TaskAuditViewEventType);
 
 /** @internal */
-export const Source$inboundSchema: z.ZodType<Source, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Source);
+export const TaskAuditViewSource$inboundSchema: z.ZodType<
+  TaskAuditViewSource,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(TaskAuditViewSource);
 
 /** @internal */
 export const TaskAuditView$inboundSchema: z.ZodType<
@@ -534,6 +588,7 @@ export const TaskAuditView$inboundSchema: z.ZodType<
 > = z.object({
   accessRequestOutcome: z.nullable(TaskAuditAccessRequestOutcome$inboundSchema)
     .optional(),
+  accountDeleted: z.nullable(TaskAuditAccountDeleted$inboundSchema).optional(),
   accountLifecycleActionCreated: z.nullable(
     TaskAuditAccountLifecycleActionCreated$inboundSchema,
   ).optional(),
@@ -548,6 +603,7 @@ export const TaskAuditView$inboundSchema: z.ZodType<
   actionInstanceSucceeded: z.nullable(
     TaskAuditActionInstanceSucceeded$inboundSchema,
   ).optional(),
+  actionOutcome: z.nullable(TaskAuditActionOutcome$inboundSchema).optional(),
   actionResult: z.nullable(TaskAuditConnectorActionResult$inboundSchema)
     .optional(),
   actionSubmitted: z.nullable(TaskAuditActionSubmitted$inboundSchema)
@@ -567,6 +623,8 @@ export const TaskAuditView$inboundSchema: z.ZodType<
   approvedAutomatically: z.nullable(
     TaskAuditApprovalHappenedAutomatically$inboundSchema,
   ).optional(),
+  automationTriggered: z.nullable(TaskAuditAutomationTriggered$inboundSchema)
+    .optional(),
   bulkActionError: z.nullable(TaskAuditBulkActionError$inboundSchema)
     .optional(),
   certifyOutcome: z.nullable(TaskAuditCertifyOutcome$inboundSchema).optional(),
@@ -586,8 +644,8 @@ export const TaskAuditView$inboundSchema: z.ZodType<
   createdReplacementExtensionGrantTask: z.nullable(
     TaskAuditCreatedReplacementExtensionGrantTask$inboundSchema,
   ).optional(),
-  currentState: z.nullable(CurrentState$inboundSchema).optional(),
-  eventType: z.nullable(TaskAuditViewEventType$inboundSchema).optional(),
+  currentState: CurrentState$inboundSchema.optional(),
+  eventType: TaskAuditViewEventType$inboundSchema.optional(),
   expressionPolicyStepError: z.nullable(
     TaskAuditExpressionPolicyStepError$inboundSchema,
   ).optional(),
@@ -608,7 +666,7 @@ export const TaskAuditView$inboundSchema: z.ZodType<
     .optional(),
   grantOutcome: z.nullable(TaskAuditGrantOutcome$inboundSchema).optional(),
   hardReset: z.nullable(TaskAuditHardReset$inboundSchema).optional(),
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
   metadata: z.nullable(TaskAuditMetaData$inboundSchema).optional(),
   policyChanged: z.nullable(TaskAuditPolicyChanged$inboundSchema).optional(),
   policyEvaluationStep: z.nullable(TaskAuditPolicyEvaluationStep$inboundSchema)
@@ -616,10 +674,19 @@ export const TaskAuditView$inboundSchema: z.ZodType<
   provisionCancelled: z.nullable(
     TaskAuditPolicyProvisionCancelled$inboundSchema,
   ).optional(),
+  provisionEntitlementMergeCompleted: z.nullable(
+    TaskAuditProvisionEntitlementMergeCompleted$inboundSchema,
+  ).optional(),
+  provisionEntitlementMergeTimedOut: z.nullable(
+    TaskAuditProvisionEntitlementMergeTimedOut$inboundSchema,
+  ).optional(),
   provisionError: z.nullable(TaskAuditPolicyProvisionError$inboundSchema)
     .optional(),
   provisionReassigned: z.nullable(
     TaskAuditPolicyProvisionReassigned$inboundSchema,
+  ).optional(),
+  provisionWaitingForEntitlementMerge: z.nullable(
+    TaskAuditProvisionWaitingForEntitlementMerge$inboundSchema,
   ).optional(),
   reassignedToDelegate: z.nullable(TaskAuditReassignedToDelegate$inboundSchema)
     .optional(),
@@ -629,9 +696,12 @@ export const TaskAuditView$inboundSchema: z.ZodType<
   reassignmentListError: z.nullable(
     TaskAuditReassignmentListError$inboundSchema,
   ).optional(),
+  requestDefaultsApplied: z.nullable(
+    TaskAuditRequestDefaultsApplied$inboundSchema,
+  ).optional(),
   revokeOutcome: z.nullable(TaskAuditRevokeOutcome$inboundSchema).optional(),
   slaEscalation: z.nullable(TaskAuditSLAEscalation$inboundSchema).optional(),
-  source: z.nullable(Source$inboundSchema).optional(),
+  source: TaskAuditViewSource$inboundSchema.optional(),
   stateChange: z.nullable(TaskAuditStateChange$inboundSchema).optional(),
   stepSkipped: z.nullable(TaskAuditStepSkipped$inboundSchema).optional(),
   stepUpApproval: z.nullable(TaskAuditStepUpApproval$inboundSchema).optional(),
@@ -641,8 +711,8 @@ export const TaskAuditView$inboundSchema: z.ZodType<
   taskEscalated: z.nullable(TaskAuditEscalateToEmergencyAccess$inboundSchema)
     .optional(),
   taskRestarted: z.nullable(TaskAuditRestart$inboundSchema).optional(),
-  ticketId: z.nullable(z.string()).optional(),
-  userId: z.nullable(z.string()).optional(),
+  ticketId: z.string().optional(),
+  userId: z.string().optional(),
   waitStepAnalysisSuccess: z.nullable(
     TaskAuditWaitForAnalysisStepSuccess$inboundSchema,
   ).optional(),
@@ -679,7 +749,7 @@ export const TaskAuditView$inboundSchema: z.ZodType<
   webhookSuccess: z.nullable(TaskAuditWebhookSuccess$inboundSchema).optional(),
   webhookTriggered: z.nullable(TaskAuditWebhookTriggered$inboundSchema)
     .optional(),
-  workflowStep: z.nullable(z.number().int()).optional(),
+  workflowStep: z.number().int().optional(),
 });
 
 export function taskAuditViewFromJSON(

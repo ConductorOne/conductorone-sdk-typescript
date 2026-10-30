@@ -14,12 +14,12 @@ export type DecoyUserClientCredentialInput = {
   /**
    * Existing User to plant the decoy credential under.
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
 export type DecoyUserClientCredentialInput$Outbound = {
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -28,7 +28,7 @@ export const DecoyUserClientCredentialInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DecoyUserClientCredentialInput
 > = z.object({
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 
 export function decoyUserClientCredentialInputToJSON(

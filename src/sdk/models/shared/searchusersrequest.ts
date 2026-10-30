@@ -71,7 +71,7 @@ export type SearchUsersRequest = {
   /**
    * Filter for users based on their delegate status.
    */
-  delegateStatus?: DelegateStatus | null | undefined;
+  delegateStatus?: DelegateStatus | undefined;
   /**
    * Filter for users that have any of the delegated user IDs on this list.
    */
@@ -83,7 +83,7 @@ export type SearchUsersRequest = {
   /**
    * Search for users based on their email (exact match).
    */
-  email?: string | null | undefined;
+  email?: string | undefined;
   /**
    * An array of users IDs to exclude from the results.
    */
@@ -104,7 +104,7 @@ export type SearchUsersRequest = {
   /**
    * Filter for users who are delegates of at least one other user.
    */
-  isDelegate?: boolean | null | undefined;
+  isDelegate?: boolean | undefined;
   /**
    * Search for users that have any of the job titles on this list.
    */
@@ -120,15 +120,15 @@ export type SearchUsersRequest = {
   /**
    * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Query the apps with a fuzzy search on display name and emails.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * An array of user refs to restrict the return values to by ID.
    */
@@ -137,6 +137,14 @@ export type SearchUsersRequest = {
    * Search for users that have any of the role IDs on this list.
    */
   roleIds?: Array<string> | null | undefined;
+  /**
+   * Filter to include only users sourced from any of these apps (directories).
+   *
+   * @remarks
+   *  Each value is an app ID; a user matches when its source_app_ids map
+   *  contains any of the listed app IDs. Combined with `origins` using OR.
+   */
+  sourceAppIds?: Array<string> | null | undefined;
   /**
    * Search for users that have any of the statuses on this list. This can only be ENABLED, DISABLED, and DELETED
    */
@@ -177,24 +185,25 @@ export const SearchUsersRequestUserStatuses$outboundSchema: z.ZodType<
 
 /** @internal */
 export type SearchUsersRequest$Outbound = {
-  delegateStatus?: string | null | undefined;
+  delegateStatus?: string | undefined;
   delegatedUserIds?: Array<string> | null | undefined;
   departments?: Array<string> | null | undefined;
-  email?: string | null | undefined;
+  email?: string | undefined;
   excludeIds?: Array<string> | null | undefined;
   excludeOrigins?: Array<string> | null | undefined;
   excludeTypes?: Array<string> | null | undefined;
   expandMask?: UserExpandMask$Outbound | null | undefined;
   ids?: Array<string> | null | undefined;
-  isDelegate?: boolean | null | undefined;
+  isDelegate?: boolean | undefined;
   jobTitles?: Array<string> | null | undefined;
   managerIds?: Array<string> | null | undefined;
   origins?: Array<string> | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  query?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  query?: string | undefined;
   refs?: Array<UserRef$Outbound> | null | undefined;
   roleIds?: Array<string> | null | undefined;
+  sourceAppIds?: Array<string> | null | undefined;
   userStatuses?: Array<string> | null | undefined;
 };
 
@@ -204,24 +213,25 @@ export const SearchUsersRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchUsersRequest
 > = z.object({
-  delegateStatus: z.nullable(DelegateStatus$outboundSchema).optional(),
+  delegateStatus: DelegateStatus$outboundSchema.optional(),
   delegatedUserIds: z.nullable(z.array(z.string())).optional(),
   departments: z.nullable(z.array(z.string())).optional(),
-  email: z.nullable(z.string()).optional(),
+  email: z.string().optional(),
   excludeIds: z.nullable(z.array(z.string())).optional(),
   excludeOrigins: z.nullable(z.array(ExcludeOrigins$outboundSchema)).optional(),
   excludeTypes: z.nullable(z.array(ExcludeTypes$outboundSchema)).optional(),
   expandMask: z.nullable(UserExpandMask$outboundSchema).optional(),
   ids: z.nullable(z.array(z.string())).optional(),
-  isDelegate: z.nullable(z.boolean()).optional(),
+  isDelegate: z.boolean().optional(),
   jobTitles: z.nullable(z.array(z.string())).optional(),
   managerIds: z.nullable(z.array(z.string())).optional(),
   origins: z.nullable(z.array(Origins$outboundSchema)).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  query: z.string().optional(),
   refs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
   roleIds: z.nullable(z.array(z.string())).optional(),
+  sourceAppIds: z.nullable(z.array(z.string())).optional(),
   userStatuses: z.nullable(
     z.array(SearchUsersRequestUserStatuses$outboundSchema),
   ).optional(),

@@ -35,7 +35,7 @@ export type TaskActionsServiceDenyResponse = {
   /**
    * The ID of the task deny action created by this request.
    */
-  ticketActionId?: string | null | undefined;
+  ticketActionId?: string | undefined;
 };
 
 /** @internal */
@@ -76,7 +76,7 @@ export const TaskActionsServiceDenyResponse$inboundSchema: z.ZodType<
     z.array(z.lazy(() => TaskActionsServiceDenyResponseExpanded$inboundSchema)),
   ).optional(),
   taskView: z.nullable(TaskView$inboundSchema).optional(),
-  ticketActionId: z.nullable(z.string()).optional(),
+  ticketActionId: z.string().optional(),
 });
 
 export function taskActionsServiceDenyResponseFromJSON(

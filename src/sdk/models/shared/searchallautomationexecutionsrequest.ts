@@ -49,11 +49,11 @@ export type SearchAllAutomationExecutionsRequest = {
   /**
    * Maximum number of results to return per page.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * Pagination token from a previous SearchAllAutomationExecutionsResponse.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Filter to executions where one or more C1 users are subjects.
    */
@@ -73,8 +73,8 @@ export type SearchAllAutomationExecutionsRequest$Outbound = {
   automationTemplateIds?: Array<string> | null | undefined;
   executionStates?: Array<string> | null | undefined;
   expandMask?: AutomationExecutionExpandMask$Outbound | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
   subjectUserIds?: Array<string> | null | undefined;
 };
 
@@ -90,8 +90,8 @@ export const SearchAllAutomationExecutionsRequest$outboundSchema: z.ZodType<
     .optional(),
   expandMask: z.nullable(AutomationExecutionExpandMask$outboundSchema)
     .optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
   subjectUserIds: z.nullable(z.array(z.string())).optional(),
 });
 

@@ -14,11 +14,11 @@ export type KeyValueField = {
   /**
    * The secret field.
    */
-  secret?: boolean | null | undefined;
+  secret?: boolean | undefined;
   /**
    * When true, UI allows file uploads per key-value entry.
    */
-  supportsFileUpload?: boolean | null | undefined;
+  supportsFileUpload?: boolean | undefined;
 };
 
 /** @internal */
@@ -27,8 +27,8 @@ export const KeyValueField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  secret: z.nullable(z.boolean()).optional(),
-  supportsFileUpload: z.nullable(z.boolean()).optional(),
+  secret: z.boolean().optional(),
+  supportsFileUpload: z.boolean().optional(),
 });
 
 export function keyValueFieldFromJSON(

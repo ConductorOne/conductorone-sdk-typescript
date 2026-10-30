@@ -14,11 +14,11 @@ export type CompletionPreference = {
   /**
    * The enabled field.
    */
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   /**
    * The locked field.
    */
-  locked?: boolean | null | undefined;
+  locked?: boolean | undefined;
 };
 
 /** @internal */
@@ -27,13 +27,13 @@ export const CompletionPreference$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  enabled: z.nullable(z.boolean()).optional(),
-  locked: z.nullable(z.boolean()).optional(),
+  enabled: z.boolean().optional(),
+  locked: z.boolean().optional(),
 });
 /** @internal */
 export type CompletionPreference$Outbound = {
-  enabled?: boolean | null | undefined;
-  locked?: boolean | null | undefined;
+  enabled?: boolean | undefined;
+  locked?: boolean | undefined;
 };
 
 /** @internal */
@@ -42,8 +42,8 @@ export const CompletionPreference$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CompletionPreference
 > = z.object({
-  enabled: z.nullable(z.boolean()).optional(),
-  locked: z.nullable(z.boolean()).optional(),
+  enabled: z.boolean().optional(),
+  locked: z.boolean().optional(),
 });
 
 export function completionPreferenceToJSON(

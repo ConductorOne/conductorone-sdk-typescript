@@ -1,0 +1,30 @@
+# RunRateForecast
+
+RunRateForecast describes expected spend through the end of the current
+ budget period. Complete-day averages include zero-spend days.
+
+## Example Usage
+
+```typescript
+import { RunRateForecast } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: RunRateForecast = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `completeDays`                                                                                | *number*                                                                                      | :heavy_minus_sign:                                                                            | Number of complete UTC days used for the run-rate calculation.                                |
+| `daysUntilForecast`                                                                           | *number*                                                                                      | :heavy_minus_sign:                                                                            | Number of additional history days required before a forecast is available.                    |
+| `expectedForecastEligibleAt`                                                                  | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `historyDays`                                                                                 | *number*                                                                                      | :heavy_minus_sign:                                                                            | Number of usable daily history points loaded for the forecast.                                |
+| `kind`                                                                                        | [shared.RunRateForecastKind](../../../sdk/models/shared/runrateforecastkind.md)               | :heavy_minus_sign:                                                                            | Method used to calculate this projection.                                                     |
+| `modelName`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | Forecasting model name. Present only when kind is FORECAST.                                   |
+| `periodToDateNano`                                                                            | *number*                                                                                      | :heavy_minus_sign:                                                                            | Exact spend settled in the current budget period through the current time.                    |
+| `points`                                                                                      | [shared.ForecastPoint](../../../sdk/models/shared/forecastpoint.md)[]                         | :heavy_minus_sign:                                                                            | Daily forecast points for the remainder of the current budget period.                         |
+| `projectedP20Nano`                                                                            | *number*                                                                                      | :heavy_minus_sign:                                                                            | Low projected spend for the full current budget period.                                       |
+| `projectedP50Nano`                                                                            | *number*                                                                                      | :heavy_minus_sign:                                                                            | Median projected spend for the full current budget period.                                    |
+| `projectedP80Nano`                                                                            | *number*                                                                                      | :heavy_minus_sign:                                                                            | High projected spend for the full current budget period.                                      |
+| `remainingDays`                                                                               | *number*                                                                                      | :heavy_minus_sign:                                                                            | Number of complete future UTC days remaining in the budget period.                            |
+| `runRateNano`                                                                                 | *number*                                                                                      | :heavy_minus_sign:                                                                            | Mean settled spend per complete UTC day. Valid when complete_days is nonzero.                 |

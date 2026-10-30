@@ -17,7 +17,7 @@ export type DecoyWorkloadFederationMaterial = {
   /**
    * The workloadFederationTrustId field.
    */
-  workloadFederationTrustId?: string | null | undefined;
+  workloadFederationTrustId?: string | undefined;
 };
 
 /** @internal */
@@ -26,7 +26,7 @@ export const DecoyWorkloadFederationMaterial$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  workloadFederationTrustId: z.nullable(z.string()).optional(),
+  workloadFederationTrustId: z.string().optional(),
 });
 
 export function decoyWorkloadFederationMaterialFromJSON(

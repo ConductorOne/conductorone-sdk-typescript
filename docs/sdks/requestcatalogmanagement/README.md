@@ -14,6 +14,7 @@
 * [deleteRequestableEntry](#deleterequestableentry) - Delete Requestable Entry
 * [getRequestableEntry](#getrequestableentry) - Get Requestable Entry
 * [createRequestableEntry](#createrequestableentry) - Create Requestable Entry
+* [searchScopeRoleBindingsPerCatalog](#searchscoperolebindingspercatalog) - Search Scope Role Bindings Per Catalog
 * [removeAccessEntitlements](#removeaccessentitlements) - Remove Access Entitlements
 * [addAccessEntitlements](#addaccessentitlements) - Add Access Entitlements
 * [listEntitlementsForAccess](#listentitlementsforaccess) - List Entitlements For Access
@@ -26,6 +27,7 @@
 * [createBundleAutomation](#createbundleautomation) - Create Bundle Automation
 * [resumePausedBundleAutomation](#resumepausedbundleautomation) - Resume Paused Bundle Automation
 * [forceRunBundleAutomation](#forcerunbundleautomation) - Force Run Bundle Automation
+* [planTypeChange](#plantypechange) - Plan Type Change
 
 ## list
 
@@ -814,6 +816,88 @@ run();
 ### Response
 
 **Promise\<[operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceCreateRequestableEntryResponse](../../sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicecreaterequestableentryresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## searchScopeRoleBindingsPerCatalog
+
+Search scope-role bindings in a catalog, grouped by (app, scope) (one entry per scope with
+ all role IDs aggregated). When app_id is provided the result is scoped to that app; when
+ omitted the result spans every app in the catalog, ordered by (app_id, scope_id) so a client
+ groupBy(app_id) produces contiguous app sections across page boundaries.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.requestcatalog.v1.RequestCatalogManagementService.SearchScopeRoleBindingsPerCatalog" method="get" path="/api/v1/catalogs/{catalog_id}/scope_role_bindings" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.requestCatalogManagement.searchScopeRoleBindingsPerCatalog({
+    catalogId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { requestCatalogManagementSearchScopeRoleBindingsPerCatalog } from "conductorone-sdk-typescript/funcs/requestCatalogManagementSearchScopeRoleBindingsPerCatalog.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await requestCatalogManagementSearchScopeRoleBindingsPerCatalog(conductoroneSDKTypescript, {
+    catalogId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("requestCatalogManagementSearchScopeRoleBindingsPerCatalog failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                            |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                                                                                                              | [operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceSearchScopeRoleBindingsPerCatalogRequest](../../sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicesearchscoperolebindingspercatalogrequest.md) | :heavy_check_mark:                                                                                                                                                                                                                     | The request object to use for the request.                                                                                                                                                                                             |
+| `options`                                                                                                                                                                                                                              | RequestOptions                                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                     | Used to set various options for making HTTP requests.                                                                                                                                                                                  |
+| `options.fetchOptions`                                                                                                                                                                                                                 | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                     | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                                                         |
+| `options.retries`                                                                                                                                                                                                                      | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                     | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                                                       |
+
+### Response
+
+**Promise\<[operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceSearchScopeRoleBindingsPerCatalogResponse](../../sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementservicesearchscoperolebindingspercatalogresponse.md)\>**
 
 ### Errors
 
@@ -1762,6 +1846,87 @@ run();
 ### Response
 
 **Promise\<[operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationResponse](../../sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceforcerunbundleautomationresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## planTypeChange
+
+PlanTypeChange reports settings that must be turned off before Update can
+ change an access profile to the requested type. It does not modify the
+ profile or any associated state.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.requestcatalog.v1.RequestCatalogManagementService.PlanTypeChange" method="post" path="/api/v1/catalogs/{request_catalog_id}/type-change/plan" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.requestCatalogManagement.planTypeChange({
+    requestCatalogId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { requestCatalogManagementPlanTypeChange } from "conductorone-sdk-typescript/funcs/requestCatalogManagementPlanTypeChange.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await requestCatalogManagementPlanTypeChange(conductoroneSDKTypescript, {
+    requestCatalogId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("requestCatalogManagementPlanTypeChange failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                        | Type                                                                                                                                                                                             | Required                                                                                                                                                                                         | Description                                                                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                                        | [operations.C1ApiRequestcatalogV1RequestCatalogManagementServicePlanTypeChangeRequest](../../sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceplantypechangerequest.md) | :heavy_check_mark:                                                                                                                                                                               | The request object to use for the request.                                                                                                                                                       |
+| `options`                                                                                                                                                                                        | RequestOptions                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                               | Used to set various options for making HTTP requests.                                                                                                                                            |
+| `options.fetchOptions`                                                                                                                                                                           | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                          | :heavy_minus_sign:                                                                                                                                                                               | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                   |
+| `options.retries`                                                                                                                                                                                | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                               | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                 |
+
+### Response
+
+**Promise\<[operations.C1ApiRequestcatalogV1RequestCatalogManagementServicePlanTypeChangeResponse](../../sdk/models/operations/c1apirequestcatalogv1requestcatalogmanagementserviceplantypechangeresponse.md)\>**
 
 ### Errors
 

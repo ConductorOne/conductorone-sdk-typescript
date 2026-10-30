@@ -14,11 +14,11 @@ export type OnboardingOrgContext = {
   /**
    * The industry field.
    */
-  industry?: string | null | undefined;
+  industry?: string | undefined;
   /**
    * The organizationSize field.
    */
-  organizationSize?: string | null | undefined;
+  organizationSize?: string | undefined;
 };
 
 /** @internal */
@@ -27,8 +27,8 @@ export const OnboardingOrgContext$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  industry: z.nullable(z.string()).optional(),
-  organizationSize: z.nullable(z.string()).optional(),
+  industry: z.string().optional(),
+  organizationSize: z.string().optional(),
 });
 
 export function onboardingOrgContextFromJSON(

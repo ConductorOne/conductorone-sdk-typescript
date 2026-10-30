@@ -1,13 +1,13 @@
 # TargetType
 
-The targetType field.
+The type to preview: CATALOG, BUNDLE, or CATALOG_AND_BUNDLE.
 
 ## Example Usage
 
 ```typescript
 import { TargetType } from "conductorone-sdk-typescript/sdk/models/shared";
 
-let value: TargetType = "TARGET_TYPE_TICKET";
+let value: TargetType = "REQUEST_CATALOG_TYPE_PROFILE";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -15,5 +15,5 @@ let value: TargetType = "TARGET_TYPE_TICKET";
 ## Values
 
 ```typescript
-"TARGET_TYPE_UNSPECIFIED" | "TARGET_TYPE_TICKET" | "TARGET_TYPE_TEST" | Unrecognized<string>
+"REQUEST_CATALOG_TYPE_UNSPECIFIED" | "REQUEST_CATALOG_TYPE_CATALOG" | "REQUEST_CATALOG_TYPE_PROFILE" | "REQUEST_CATALOG_TYPE_CATALOG_AND_BUNDLE" | "REQUEST_CATALOG_TYPE_BUNDLE" | Unrecognized<string>
 ```

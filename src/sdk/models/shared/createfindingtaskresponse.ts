@@ -16,7 +16,7 @@ export type CreateFindingTaskResponse = {
   /**
    * The ID of the created task.
    */
-  taskId?: string | null | undefined;
+  taskId?: string | undefined;
 };
 
 /** @internal */
@@ -26,7 +26,7 @@ export const CreateFindingTaskResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   finding: z.nullable(Finding$inboundSchema).optional(),
-  taskId: z.nullable(z.string()).optional(),
+  taskId: z.string().optional(),
 });
 
 export function createFindingTaskResponseFromJSON(

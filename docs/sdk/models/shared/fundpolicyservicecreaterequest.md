@@ -1,0 +1,20 @@
+# FundPolicyServiceCreateRequest
+
+The FundPolicyServiceCreateRequest message.
+
+## Example Usage
+
+```typescript
+import { FundPolicyServiceCreateRequest } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: FundPolicyServiceCreateRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                                             | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `currencyCode`                                                                                                                                    | *string*                                                                                                                                          | :heavy_minus_sign:                                                                                                                                | Empty defaults to USD. Any other value is refused: spend governance is<br/> USD-only today; multi-currency requires an FX source. Immutable once set. |
+| `defaultLimit`                                                                                                                                    | [shared.FundsSpendLimit](../../../sdk/models/shared/fundsspendlimit.md)                                                                           | :heavy_minus_sign:                                                                                                                                | N/A                                                                                                                                               |
+| `period`                                                                                                                                          | [shared.FundPolicyServiceCreateRequestPeriod](../../../sdk/models/shared/fundpolicyservicecreaterequestperiod.md)                                 | :heavy_minus_sign:                                                                                                                                | The period field.                                                                                                                                 |
+| `spendRemedyRequestPolicyId`                                                                                                                      | *string*                                                                                                                                          | :heavy_minus_sign:                                                                                                                                | Optional grant policy for scoped spending changes. Empty disables requests.                                                                       |

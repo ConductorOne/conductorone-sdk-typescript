@@ -24,7 +24,10 @@ export type C1ApiAIGovernanceV1AIGovernanceSettingsServiceGetTenantDefaultsRespo
      */
     rawResponse: Response;
     /**
-     * Successful response
+     * GetTenantDefaultsResponse contains tenant defaults used by
+     *
+     * @remarks
+     *  legacy MCP servers.
      */
     getTenantDefaultsResponse?: shared.GetTenantDefaultsResponse | undefined;
   };

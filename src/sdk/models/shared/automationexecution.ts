@@ -46,28 +46,28 @@ export type AutomationExecution = {
   /**
    * The automationTemplateId field.
    */
-  automationTemplateId?: string | null | undefined;
+  automationTemplateId?: string | undefined;
   completedAt?: Date | null | undefined;
   context?: AutomationContext | null | undefined;
   createdAt?: Date | null | undefined;
   /**
    * The currentVersion field.
    */
-  currentVersion?: number | null | undefined;
+  currentVersion?: number | undefined;
   deletedAt?: Date | null | undefined;
   duration?: string | null | undefined;
   /**
    * The id field.
    */
-  id?: number | null | undefined;
+  id?: number | undefined;
   /**
    * The isDraft field.
    */
-  isDraft?: boolean | null | undefined;
+  isDraft?: boolean | undefined;
   /**
    * The state field.
    */
-  state?: AutomationExecutionState | null | undefined;
+  state?: AutomationExecutionState | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -84,7 +84,7 @@ export const AutomationExecution$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  automationTemplateId: z.nullable(z.string()).optional(),
+  automationTemplateId: z.string().optional(),
   completedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -92,14 +92,14 @@ export const AutomationExecution$inboundSchema: z.ZodType<
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  currentVersion: z.nullable(z.number().int()).optional(),
+  currentVersion: z.number().int().optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   duration: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
-  isDraft: z.nullable(z.boolean()).optional(),
-  state: z.nullable(AutomationExecutionState$inboundSchema).optional(),
+  id: z.string().transform(v => parseInt(v, 10)).optional(),
+  isDraft: z.boolean().optional(),
+  state: AutomationExecutionState$inboundSchema.optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

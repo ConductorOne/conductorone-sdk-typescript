@@ -33,12 +33,12 @@ export type TaskTypeOffboarding = {
   /**
    * The outcome field.
    */
-  outcome?: TaskTypeOffboardingOutcome | null | undefined;
+  outcome?: TaskTypeOffboardingOutcome | undefined;
   outcomeTime?: Date | null | undefined;
   /**
    * The subjectUserId field.
    */
-  subjectUserId?: string | null | undefined;
+  subjectUserId?: string | undefined;
 };
 
 /** @internal */
@@ -60,17 +60,17 @@ export const TaskTypeOffboarding$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  outcome: z.nullable(TaskTypeOffboardingOutcome$inboundSchema).optional(),
+  outcome: TaskTypeOffboardingOutcome$inboundSchema.optional(),
   outcomeTime: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  subjectUserId: z.nullable(z.string()).optional(),
+  subjectUserId: z.string().optional(),
 });
 /** @internal */
 export type TaskTypeOffboarding$Outbound = {
-  outcome?: string | null | undefined;
+  outcome?: string | undefined;
   outcomeTime?: string | null | undefined;
-  subjectUserId?: string | null | undefined;
+  subjectUserId?: string | undefined;
 };
 
 /** @internal */
@@ -79,9 +79,9 @@ export const TaskTypeOffboarding$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskTypeOffboarding
 > = z.object({
-  outcome: z.nullable(TaskTypeOffboardingOutcome$outboundSchema).optional(),
+  outcome: TaskTypeOffboardingOutcome$outboundSchema.optional(),
   outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  subjectUserId: z.nullable(z.string()).optional(),
+  subjectUserId: z.string().optional(),
 });
 
 export function taskTypeOffboardingToJSON(

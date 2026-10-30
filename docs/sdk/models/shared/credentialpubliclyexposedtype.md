@@ -1,0 +1,29 @@
+# CredentialPubliclyExposedType
+
+CredentialPubliclyExposedType: a live credential was reported as publicly exposed.
+ Dedup is (credential arm, credential_id).
+
+This message contains a oneof named credential. Only a single field of the following list may be set at a time:
+  - userClientId
+  - connectorClientId
+  - connectorManagedCredentialId
+  - functionClientId
+
+
+## Example Usage
+
+```typescript
+import { CredentialPubliclyExposedType } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: CredentialPubliclyExposedType = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                               | Type                                                                                                                                                                                | Required                                                                                                                                                                            | Description                                                                                                                                                                         |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `connectorClientId`                                                                                                                                                                 | *string*                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                  | The connectorClientId field.<br/>This field is part of the `credential` oneof.<br/>See the documentation for `c1.api.finding.v1.CredentialPubliclyExposedType` for more details.    |
+| `connectorManagedCredentialId`                                                                                                                                                      | *string*                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                  | The connectorManagedCredentialId field.<br/>This field is part of the `credential` oneof.<br/>See the documentation for `c1.api.finding.v1.CredentialPubliclyExposedType` for more details. |
+| `credentialDisplayName`                                                                                                                                                             | *string*                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                  | The credentialDisplayName field.                                                                                                                                                    |
+| `functionClientId`                                                                                                                                                                  | *string*                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                  | The functionClientId field.<br/>This field is part of the `credential` oneof.<br/>See the documentation for `c1.api.finding.v1.CredentialPubliclyExposedType` for more details.     |
+| `userClientId`                                                                                                                                                                      | *string*                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                  | The userClientId field.<br/>This field is part of the `credential` oneof.<br/>See the documentation for `c1.api.finding.v1.CredentialPubliclyExposedType` for more details.         |

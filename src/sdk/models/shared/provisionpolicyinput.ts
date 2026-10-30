@@ -25,6 +25,12 @@ import {
   DelegatedProvision$outboundSchema,
 } from "./delegatedprovision.js";
 import {
+  DevicePlacementProvision,
+  DevicePlacementProvision$inboundSchema,
+  DevicePlacementProvision$Outbound,
+  DevicePlacementProvision$outboundSchema,
+} from "./deviceplacementprovision.js";
+import {
   ExternalTicketProvision,
   ExternalTicketProvision$inboundSchema,
   ExternalTicketProvision$Outbound,
@@ -69,11 +75,13 @@ import {
  *   - externalTicket
  *   - unconfigured
  *   - action
+ *   - devicePlacement
  */
 export type ProvisionPolicyInput = {
   action?: ActionProvision | null | undefined;
   connector?: ConnectorProvision | null | undefined;
   delegated?: DelegatedProvision | null | undefined;
+  devicePlacement?: DevicePlacementProvision | null | undefined;
   externalTicket?: ExternalTicketProvision | null | undefined;
   manual?: ManualProvision | null | undefined;
   multiStep?: MultiStep | null | undefined;
@@ -90,6 +98,8 @@ export const ProvisionPolicyInput$inboundSchema: z.ZodType<
   action: z.nullable(ActionProvision$inboundSchema).optional(),
   connector: z.nullable(ConnectorProvision$inboundSchema).optional(),
   delegated: z.nullable(DelegatedProvision$inboundSchema).optional(),
+  devicePlacement: z.nullable(DevicePlacementProvision$inboundSchema)
+    .optional(),
   externalTicket: z.nullable(ExternalTicketProvision$inboundSchema).optional(),
   manual: z.nullable(ManualProvision$inboundSchema).optional(),
   multiStep: z.nullable(MultiStep$inboundSchema).optional(),
@@ -101,6 +111,7 @@ export type ProvisionPolicyInput$Outbound = {
   action?: ActionProvision$Outbound | null | undefined;
   connector?: ConnectorProvision$Outbound | null | undefined;
   delegated?: DelegatedProvision$Outbound | null | undefined;
+  devicePlacement?: DevicePlacementProvision$Outbound | null | undefined;
   externalTicket?: ExternalTicketProvision$Outbound | null | undefined;
   manual?: ManualProvision$Outbound | null | undefined;
   multiStep?: MultiStep$Outbound | null | undefined;
@@ -117,6 +128,8 @@ export const ProvisionPolicyInput$outboundSchema: z.ZodType<
   action: z.nullable(ActionProvision$outboundSchema).optional(),
   connector: z.nullable(ConnectorProvision$outboundSchema).optional(),
   delegated: z.nullable(DelegatedProvision$outboundSchema).optional(),
+  devicePlacement: z.nullable(DevicePlacementProvision$outboundSchema)
+    .optional(),
   externalTicket: z.nullable(ExternalTicketProvision$outboundSchema).optional(),
   manual: z.nullable(ManualProvision$outboundSchema).optional(),
   multiStep: z.nullable(MultiStep$outboundSchema).optional(),

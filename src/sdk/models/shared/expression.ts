@@ -9,20 +9,22 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The Expression message.
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type Expression = {
   /**
    * The expressionCel field.
    */
-  expressionCel?: string | null | undefined;
+  expressionCel?: string | undefined;
   /**
    * The isSecret field.
    */
-  isSecret?: boolean | null | undefined;
+  isSecret?: boolean | undefined;
   /**
    * The key field.
    */
-  key?: string | null | undefined;
+  key?: string | undefined;
 };
 
 /** @internal */
@@ -31,15 +33,15 @@ export const Expression$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  expressionCel: z.nullable(z.string()).optional(),
-  isSecret: z.nullable(z.boolean()).optional(),
-  key: z.nullable(z.string()).optional(),
+  expressionCel: z.string().optional(),
+  isSecret: z.boolean().optional(),
+  key: z.string().optional(),
 });
 /** @internal */
 export type Expression$Outbound = {
-  expressionCel?: string | null | undefined;
-  isSecret?: boolean | null | undefined;
-  key?: string | null | undefined;
+  expressionCel?: string | undefined;
+  isSecret?: boolean | undefined;
+  key?: string | undefined;
 };
 
 /** @internal */
@@ -48,9 +50,9 @@ export const Expression$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Expression
 > = z.object({
-  expressionCel: z.nullable(z.string()).optional(),
-  isSecret: z.nullable(z.boolean()).optional(),
-  key: z.nullable(z.string()).optional(),
+  expressionCel: z.string().optional(),
+  isSecret: z.boolean().optional(),
+  key: z.string().optional(),
 });
 
 export function expressionToJSON(expression: Expression): string {

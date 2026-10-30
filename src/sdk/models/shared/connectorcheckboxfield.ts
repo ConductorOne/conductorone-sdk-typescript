@@ -14,7 +14,7 @@ export type ConnectorCheckboxField = {
   /**
    * The checked field.
    */
-  checked?: boolean | null | undefined;
+  checked?: boolean | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const ConnectorCheckboxField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  checked: z.nullable(z.boolean()).optional(),
+  checked: z.boolean().optional(),
 });
 
 export function connectorCheckboxFieldFromJSON(

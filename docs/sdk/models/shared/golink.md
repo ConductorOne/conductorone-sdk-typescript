@@ -1,0 +1,27 @@
+# GoLink
+
+GoLink is the API representation of a short link.
+
+## Example Usage
+
+```typescript
+import { GoLink } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: GoLink = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `currentVersion`                                                                              | *number*                                                                                      | :heavy_minus_sign:                                                                            | The currentVersion field.                                                                     |
+| `deletedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `description`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | The description field.                                                                        |
+| `displayName`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | The displayName field.                                                                        |
+| `id`                                                                                          | *string*                                                                                      | :heavy_minus_sign:                                                                            | The id field.                                                                                 |
+| `prerequisite`                                                                                | [shared.GoLinkPrerequisite](../../../sdk/models/shared/golinkprerequisite.md)                 | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `routes`                                                                                      | [shared.GoLinkRouteConfig](../../../sdk/models/shared/golinkrouteconfig.md)[]                 | :heavy_minus_sign:                                                                            | The routes field.                                                                             |
+| `status`                                                                                      | [shared.GoLinkStatus](../../../sdk/models/shared/golinkstatus.md)                             | :heavy_minus_sign:                                                                            | The status field.                                                                             |
+| `target`                                                                                      | [shared.GoLinkTarget](../../../sdk/models/shared/golinktarget.md)                             | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `updatedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
