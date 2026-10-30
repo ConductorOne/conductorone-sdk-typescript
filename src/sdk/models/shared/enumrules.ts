@@ -14,14 +14,14 @@ export type EnumRules = {
   /**
    * Const specifies that this field must be exactly the specified value
    */
-  const?: number | null | undefined;
+  const?: number | undefined;
   /**
    * DefinedOnly specifies that this field must be only one of the defined
    *
    * @remarks
    *  values for this enum, failing on any undefined value.
    */
-  definedOnly?: boolean | null | undefined;
+  definedOnly?: boolean | undefined;
   /**
    * In specifies that this field must be equal to one of the specified
    *
@@ -44,15 +44,15 @@ export const EnumRules$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  const: z.nullable(z.number().int()).optional(),
-  definedOnly: z.nullable(z.boolean()).optional(),
+  const: z.number().int().optional(),
+  definedOnly: z.boolean().optional(),
   in: z.nullable(z.array(z.number().int())).optional(),
   notIn: z.nullable(z.array(z.number().int())).optional(),
 });
 /** @internal */
 export type EnumRules$Outbound = {
-  const?: number | null | undefined;
-  definedOnly?: boolean | null | undefined;
+  const?: number | undefined;
+  definedOnly?: boolean | undefined;
   in?: Array<number> | null | undefined;
   notIn?: Array<number> | null | undefined;
 };
@@ -63,8 +63,8 @@ export const EnumRules$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EnumRules
 > = z.object({
-  const: z.nullable(z.number().int()).optional(),
-  definedOnly: z.nullable(z.boolean()).optional(),
+  const: z.number().int().optional(),
+  definedOnly: z.boolean().optional(),
   in: z.nullable(z.array(z.number().int())).optional(),
   notIn: z.nullable(z.array(z.number().int())).optional(),
 });

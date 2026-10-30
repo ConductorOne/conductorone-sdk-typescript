@@ -16,7 +16,7 @@ export type ConfigSchema = {
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * Optional. Metadata for displaying fields in the UI.
    */
@@ -28,25 +28,25 @@ export type ConfigSchema = {
   /**
    * The helpUrl field.
    */
-  helpUrl?: string | null | undefined;
+  helpUrl?: string | undefined;
   /**
    * The iconUrl field.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  iconUrl?: string | null | undefined;
+  iconUrl?: string | undefined;
   /**
    * The isOauth2 field.
    */
-  isOauth2?: boolean | null | undefined;
+  isOauth2?: boolean | undefined;
   /**
    * The requiresExternalConnector field.
    */
-  requiresExternalConnector?: boolean | null | undefined;
+  requiresExternalConnector?: boolean | undefined;
   /**
    * The supportsExternalResources field.
    */
-  supportsExternalResources?: boolean | null | undefined;
+  supportsExternalResources?: boolean | undefined;
 };
 
 /** @internal */
@@ -55,14 +55,14 @@ export const ConfigSchema$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  displayName: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
   fieldGroups: z.nullable(z.array(FieldGroup$inboundSchema)).optional(),
   fields: z.nullable(z.array(Field$inboundSchema)).optional(),
-  helpUrl: z.nullable(z.string()).optional(),
-  iconUrl: z.nullable(z.string()).optional(),
-  isOauth2: z.nullable(z.boolean()).optional(),
-  requiresExternalConnector: z.nullable(z.boolean()).optional(),
-  supportsExternalResources: z.nullable(z.boolean()).optional(),
+  helpUrl: z.string().optional(),
+  iconUrl: z.string().optional(),
+  isOauth2: z.boolean().optional(),
+  requiresExternalConnector: z.boolean().optional(),
+  supportsExternalResources: z.boolean().optional(),
 });
 
 export function configSchemaFromJSON(

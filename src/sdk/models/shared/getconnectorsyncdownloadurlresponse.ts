@@ -14,7 +14,7 @@ export type GetConnectorSyncDownloadURLResponse = {
   /**
    * Short-lived download URL for the connector sync artifact
    */
-  downloadUrl?: string | null | undefined;
+  downloadUrl?: string | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const GetConnectorSyncDownloadURLResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  downloadUrl: z.nullable(z.string()).optional(),
+  downloadUrl: z.string().optional(),
 });
 
 export function getConnectorSyncDownloadURLResponseFromJSON(

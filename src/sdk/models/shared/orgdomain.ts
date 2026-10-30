@@ -16,11 +16,11 @@ export type OrgDomain = {
   /**
    * The verified domain name (e.g., "example.com").
    */
-  domain?: string | null | undefined;
+  domain?: string | undefined;
   /**
    * The unique identifier of the domain record.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -36,8 +36,8 @@ export const OrgDomain$inboundSchema: z.ZodType<
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  domain: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
+  domain: z.string().optional(),
+  id: z.string().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

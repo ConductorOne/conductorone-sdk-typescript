@@ -11,22 +11,22 @@ export type SearchAutomationTemplateVersionsRequest = {
   /**
    * The automation template whose version history to search.
    */
-  automationTemplateId?: string | null | undefined;
+  automationTemplateId?: string | undefined;
   /**
    * Maximum number of results to return per page.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * Pagination token from a previous SearchAutomationTemplateVersionsResponse.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
 };
 
 /** @internal */
 export type SearchAutomationTemplateVersionsRequest$Outbound = {
-  automationTemplateId?: string | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  automationTemplateId?: string | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
 };
 
 /** @internal */
@@ -35,9 +35,9 @@ export const SearchAutomationTemplateVersionsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchAutomationTemplateVersionsRequest
 > = z.object({
-  automationTemplateId: z.nullable(z.string()).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
+  automationTemplateId: z.string().optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
 });
 
 export function searchAutomationTemplateVersionsRequestToJSON(

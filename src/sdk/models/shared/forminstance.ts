@@ -73,7 +73,7 @@ export type FormInstance = {
   /**
    * The state field.
    */
-  state?: FormInstanceState | null | undefined;
+  state?: FormInstanceState | undefined;
 };
 
 /** @internal */
@@ -101,7 +101,7 @@ export const FormInstance$inboundSchema: z.ZodType<
   reassigned: z.nullable(ReassignedAction$inboundSchema).optional(),
   restarted: z.nullable(RestartAction$inboundSchema).optional(),
   skipped: z.nullable(SkippedAction$inboundSchema).optional(),
-  state: z.nullable(FormInstanceState$inboundSchema).optional(),
+  state: FormInstanceState$inboundSchema.optional(),
 });
 /** @internal */
 export type FormInstance$Outbound = {
@@ -111,7 +111,7 @@ export type FormInstance$Outbound = {
   reassigned?: ReassignedAction$Outbound | null | undefined;
   restarted?: RestartAction$Outbound | null | undefined;
   skipped?: SkippedAction$Outbound | null | undefined;
-  state?: string | null | undefined;
+  state?: string | undefined;
 };
 
 /** @internal */
@@ -126,7 +126,7 @@ export const FormInstance$outboundSchema: z.ZodType<
   reassigned: z.nullable(ReassignedAction$outboundSchema).optional(),
   restarted: z.nullable(RestartAction$outboundSchema).optional(),
   skipped: z.nullable(SkippedAction$outboundSchema).optional(),
-  state: z.nullable(FormInstanceState$outboundSchema).optional(),
+  state: FormInstanceState$outboundSchema.optional(),
 });
 
 export function formInstanceToJSON(formInstance: FormInstance): string {

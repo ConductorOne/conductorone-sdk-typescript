@@ -14,7 +14,7 @@ export type TaskAuditStartedConnectorActions = {
   /**
    * The policyStepId field.
    */
-  policyStepId?: string | null | undefined;
+  policyStepId?: string | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const TaskAuditStartedConnectorActions$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  policyStepId: z.nullable(z.string()).optional(),
+  policyStepId: z.string().optional(),
 });
 
 export function taskAuditStartedConnectorActionsFromJSON(

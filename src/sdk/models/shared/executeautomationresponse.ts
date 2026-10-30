@@ -14,7 +14,7 @@ export type ExecuteAutomationResponse = {
   /**
    * The unique identifier of the newly created execution.
    */
-  executionId?: number | null | undefined;
+  executionId?: number | undefined;
 };
 
 /** @internal */
@@ -23,8 +23,7 @@ export const ExecuteAutomationResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  executionId: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
+  executionId: z.string().transform(v => parseInt(v, 10)).optional(),
 });
 
 export function executeAutomationResponseFromJSON(

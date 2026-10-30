@@ -7,6 +7,10 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { User, User$inboundSchema } from "./user.js";
+import {
+  UserActorObjectPermissions,
+  UserActorObjectPermissions$inboundSchema,
+} from "./useractorobjectpermissions.js";
 
 /**
  * ServicePrincipal represents a tenant-managed non-human identity.
@@ -16,11 +20,12 @@ export type ServicePrincipal = {
   /**
    * The display name of the service principal.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The unique user ID of the service principal.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
+  objectPermissions?: UserActorObjectPermissions | null | undefined;
   updatedAt?: Date | null | undefined;
   user?: User | null | undefined;
 };
@@ -34,8 +39,10 @@ export const ServicePrincipal$inboundSchema: z.ZodType<
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
+  id: z.string().optional(),
+  objectPermissions: z.nullable(UserActorObjectPermissions$inboundSchema)
+    .optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

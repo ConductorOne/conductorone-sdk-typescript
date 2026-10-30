@@ -14,23 +14,23 @@ export type AppUsageControls = {
   /**
    * The app that this object belongs to.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * Whether or not to notify some if they have access to the app, but has not used it within a configurable amount of time.
    */
-  notify?: boolean | null | undefined;
+  notify?: boolean | undefined;
   /**
    * The duration in days after which we notify users of nonusage.
    */
-  notifyAfterDays?: number | null | undefined;
+  notifyAfterDays?: number | undefined;
   /**
    * Whether or not to revoke a grant if they have access to the app, but has not used it within a configurable amount of time.
    */
-  revoke?: boolean | null | undefined;
+  revoke?: boolean | undefined;
   /**
    * The duration in days after which we revoke users that have not used that grant.
    */
-  revokeAfterDays?: number | null | undefined;
+  revokeAfterDays?: number | undefined;
 };
 
 /** @internal */
@@ -39,19 +39,19 @@ export const AppUsageControls$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  notify: z.nullable(z.boolean()).optional(),
-  notifyAfterDays: z.nullable(z.number().int()).optional(),
-  revoke: z.nullable(z.boolean()).optional(),
-  revokeAfterDays: z.nullable(z.number().int()).optional(),
+  appId: z.string().optional(),
+  notify: z.boolean().optional(),
+  notifyAfterDays: z.number().int().optional(),
+  revoke: z.boolean().optional(),
+  revokeAfterDays: z.number().int().optional(),
 });
 /** @internal */
 export type AppUsageControls$Outbound = {
-  appId?: string | null | undefined;
-  notify?: boolean | null | undefined;
-  notifyAfterDays?: number | null | undefined;
-  revoke?: boolean | null | undefined;
-  revokeAfterDays?: number | null | undefined;
+  appId?: string | undefined;
+  notify?: boolean | undefined;
+  notifyAfterDays?: number | undefined;
+  revoke?: boolean | undefined;
+  revokeAfterDays?: number | undefined;
 };
 
 /** @internal */
@@ -60,11 +60,11 @@ export const AppUsageControls$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppUsageControls
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  notify: z.nullable(z.boolean()).optional(),
-  notifyAfterDays: z.nullable(z.number().int()).optional(),
-  revoke: z.nullable(z.boolean()).optional(),
-  revokeAfterDays: z.nullable(z.number().int()).optional(),
+  appId: z.string().optional(),
+  notify: z.boolean().optional(),
+  notifyAfterDays: z.number().int().optional(),
+  revoke: z.boolean().optional(),
+  revokeAfterDays: z.number().int().optional(),
 });
 
 export function appUsageControlsToJSON(

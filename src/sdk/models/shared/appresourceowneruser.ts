@@ -15,20 +15,20 @@ export type AppResourceOwnerUser = {
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   createdAt?: Date | null | undefined;
   /**
    * The resourceId field.
    */
-  resourceId?: string | null | undefined;
+  resourceId?: string | undefined;
   /**
    * The resourceTypeId field.
    */
-  resourceTypeId?: string | null | undefined;
+  resourceTypeId?: string | undefined;
   /**
    * The roleSlug field.
    */
-  roleSlug?: string | null | undefined;
+  roleSlug?: string | undefined;
   user?: User | null | undefined;
 };
 
@@ -38,13 +38,13 @@ export const AppResourceOwnerUser$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  resourceId: z.nullable(z.string()).optional(),
-  resourceTypeId: z.nullable(z.string()).optional(),
-  roleSlug: z.nullable(z.string()).optional(),
+  resourceId: z.string().optional(),
+  resourceTypeId: z.string().optional(),
+  roleSlug: z.string().optional(),
   user: z.nullable(User$inboundSchema).optional(),
 });
 

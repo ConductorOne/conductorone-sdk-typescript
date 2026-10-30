@@ -14,7 +14,7 @@ export type TaskAuditPolicyEvaluationStep = {
   /**
    * The stepComment field.
    */
-  stepComment?: string | null | undefined;
+  stepComment?: string | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const TaskAuditPolicyEvaluationStep$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  stepComment: z.nullable(z.string()).optional(),
+  stepComment: z.string().optional(),
 });
 
 export function taskAuditPolicyEvaluationStepFromJSON(

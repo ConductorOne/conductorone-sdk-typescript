@@ -14,15 +14,15 @@ export type NumberField = {
   /**
    * The maxValue field.
    */
-  maxValue?: number | null | undefined;
+  maxValue?: number | undefined;
   /**
    * The minValue field.
    */
-  minValue?: number | null | undefined;
+  minValue?: number | undefined;
   /**
    * The step field.
    */
-  step?: number | null | undefined;
+  step?: number | undefined;
 };
 
 /** @internal */
@@ -31,15 +31,15 @@ export const NumberField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  maxValue: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
-  minValue: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
-  step: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
+  maxValue: z.string().transform(v => parseInt(v, 10)).optional(),
+  minValue: z.string().transform(v => parseInt(v, 10)).optional(),
+  step: z.string().transform(v => parseInt(v, 10)).optional(),
 });
 /** @internal */
 export type NumberField$Outbound = {
-  maxValue?: string | null | undefined;
-  minValue?: string | null | undefined;
-  step?: string | null | undefined;
+  maxValue?: string | undefined;
+  minValue?: string | undefined;
+  step?: string | undefined;
 };
 
 /** @internal */
@@ -48,9 +48,9 @@ export const NumberField$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   NumberField
 > = z.object({
-  maxValue: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
-  minValue: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
-  step: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
+  maxValue: z.number().int().transform(v => `${v}`).optional(),
+  minValue: z.number().int().transform(v => `${v}`).optional(),
+  step: z.number().int().transform(v => `${v}`).optional(),
 });
 
 export function numberFieldToJSON(numberField: NumberField): string {

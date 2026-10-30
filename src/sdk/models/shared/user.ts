@@ -78,12 +78,12 @@ export type User = {
   /**
    * The id of the user to whom tasks will be automatically reassigned to.
    */
-  delegatedUserId?: string | null | undefined;
+  delegatedUserId?: string | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * The department which the user belongs to in the organization.
    */
-  department?: string | null | undefined;
+  department?: string | undefined;
   /**
    * A list of objects mapped based on department attribute mappings configured in the system.
    */
@@ -95,7 +95,7 @@ export type User = {
   /**
    * The status of the user in the directory.
    */
-  directoryStatus?: DirectoryStatus | null | undefined;
+  directoryStatus?: DirectoryStatus | undefined;
   /**
    * A list of objects mapped based on directoryStatus attribute mappings configured in the system.
    */
@@ -103,11 +103,11 @@ export type User = {
   /**
    * The display name of the user.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * This is the user's email.
    */
-  email?: string | null | undefined;
+  email?: string | undefined;
   /**
    * A list of source data for the email attribute.
    */
@@ -127,7 +127,7 @@ export type User = {
   /**
    * The users employment status.
    */
-  employmentStatus?: string | null | undefined;
+  employmentStatus?: string | undefined;
   /**
    * A list of objects mapped based on employmentStatus attribute mappings configured in the system.
    */
@@ -138,7 +138,7 @@ export type User = {
   /**
    * The employment type of the user.
    */
-  employmentType?: string | null | undefined;
+  employmentType?: string | undefined;
   /**
    * A list of objects mapped based on employmentType attribute mappings configured in the system.
    */
@@ -146,11 +146,11 @@ export type User = {
   /**
    * A unique identifier of the user.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The job title of the user.
    */
-  jobTitle?: string | null | undefined;
+  jobTitle?: string | undefined;
   /**
    * A list of objects mapped based on jobTitle attribute mappings configured in the system.
    */
@@ -166,7 +166,7 @@ export type User = {
   /**
    * The origin of the user, describing who owns the user's lifecycle.
    */
-  origin?: Origin | null | undefined;
+  origin?: Origin | undefined;
   profile?: { [k: string]: any } | null | undefined;
   /**
    * A list of unique identifiers that maps to ConductorOne's user roles let you assign users permissions tailored to the work they do in the software.
@@ -175,16 +175,16 @@ export type User = {
   /**
    * The status of the user in the system.
    */
-  status?: UserSchemasStatus | null | undefined;
+  status?: UserSchemasStatus | undefined;
   /**
    * The type of the user.
    */
-  type?: Type | null | undefined;
+  type?: Type | undefined;
   updatedAt?: Date | null | undefined;
   /**
    * This is the user's primary username. Typically sourced from the primary directory.
    */
-  username?: string | null | undefined;
+  username?: string | undefined;
   /**
    * A list of source data for the usernames attribute.
    */
@@ -202,7 +202,7 @@ export type UserInput = {
   /**
    * The id of the user to whom tasks will be automatically reassigned to.
    */
-  delegatedUserId?: string | null | undefined;
+  delegatedUserId?: string | undefined;
   /**
    * A list of unique identifiers that maps to ConductorOne's user roles let you assign users permissions tailored to the work they do in the software.
    */
@@ -210,7 +210,7 @@ export type UserInput = {
   /**
    * The status of the user in the system.
    */
-  status?: UserSchemasStatus | null | undefined;
+  status?: UserSchemasStatus | undefined;
 };
 
 /** @internal */
@@ -247,21 +247,21 @@ export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> = z
     createdAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    delegatedUserId: z.nullable(z.string()).optional(),
+    delegatedUserId: z.string().optional(),
     deletedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    department: z.nullable(z.string()).optional(),
+    department: z.string().optional(),
     departmentSources: z.nullable(
       z.array(UserAttributeMappingSource$inboundSchema),
     ).optional(),
     directoryIds: z.nullable(z.array(z.string())).optional(),
-    directoryStatus: z.nullable(DirectoryStatus$inboundSchema).optional(),
+    directoryStatus: DirectoryStatus$inboundSchema.optional(),
     directoryStatusSources: z.nullable(
       z.array(UserAttributeMappingSource$inboundSchema),
     ).optional(),
-    displayName: z.nullable(z.string()).optional(),
-    email: z.nullable(z.string()).optional(),
+    displayName: z.string().optional(),
+    email: z.string().optional(),
     emailSources: z.nullable(z.array(UserAttributeMappingSource$inboundSchema))
       .optional(),
     emails: z.nullable(z.array(z.string())).optional(),
@@ -269,16 +269,16 @@ export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> = z
       z.array(UserAttributeMappingSource$inboundSchema),
     ).optional(),
     employeeIds: z.nullable(z.array(z.string())).optional(),
-    employmentStatus: z.nullable(z.string()).optional(),
+    employmentStatus: z.string().optional(),
     employmentStatusSources: z.nullable(
       z.array(UserAttributeMappingSource$inboundSchema),
     ).optional(),
-    employmentType: z.nullable(z.string()).optional(),
+    employmentType: z.string().optional(),
     employmentTypeSources: z.nullable(
       z.array(UserAttributeMappingSource$inboundSchema),
     ).optional(),
-    id: z.nullable(z.string()).optional(),
-    jobTitle: z.nullable(z.string()).optional(),
+    id: z.string().optional(),
+    jobTitle: z.string().optional(),
     jobTitleSources: z.nullable(
       z.array(UserAttributeMappingSource$inboundSchema),
     ).optional(),
@@ -286,15 +286,15 @@ export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> = z
     managerSources: z.nullable(
       z.array(UserAttributeMappingSource$inboundSchema),
     ).optional(),
-    origin: z.nullable(Origin$inboundSchema).optional(),
+    origin: Origin$inboundSchema.optional(),
     profile: z.nullable(z.record(z.any())).optional(),
     roleIds: z.nullable(z.array(z.string())).optional(),
-    status: z.nullable(UserSchemasStatus$inboundSchema).optional(),
-    type: z.nullable(Type$inboundSchema).optional(),
+    status: UserSchemasStatus$inboundSchema.optional(),
+    type: Type$inboundSchema.optional(),
     updatedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    username: z.nullable(z.string()).optional(),
+    username: z.string().optional(),
     usernameSources: z.nullable(
       z.array(UserAttributeMappingSource$inboundSchema),
     ).optional(),
@@ -313,9 +313,9 @@ export function userFromJSON(
 
 /** @internal */
 export type UserInput$Outbound = {
-  delegatedUserId?: string | null | undefined;
+  delegatedUserId?: string | undefined;
   roleIds?: Array<string> | null | undefined;
-  status?: string | null | undefined;
+  status?: string | undefined;
 };
 
 /** @internal */
@@ -324,9 +324,9 @@ export const UserInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UserInput
 > = z.object({
-  delegatedUserId: z.nullable(z.string()).optional(),
+  delegatedUserId: z.string().optional(),
   roleIds: z.nullable(z.array(z.string())).optional(),
-  status: z.nullable(UserSchemasStatus$outboundSchema).optional(),
+  status: UserSchemasStatus$outboundSchema.optional(),
 });
 
 export function userInputToJSON(userInput: UserInput): string {

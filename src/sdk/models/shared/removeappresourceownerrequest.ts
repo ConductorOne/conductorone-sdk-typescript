@@ -11,12 +11,12 @@ export type RemoveAppResourceOwnerRequest = {
   /**
    * The C1 user ID to remove as an owner.
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
 export type RemoveAppResourceOwnerRequest$Outbound = {
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const RemoveAppResourceOwnerRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RemoveAppResourceOwnerRequest
 > = z.object({
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 
 export function removeAppResourceOwnerRequestToJSON(

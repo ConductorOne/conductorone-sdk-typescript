@@ -22,7 +22,7 @@ export type SearchAppEntitlementEntitlementOwnersResponse = {
   /**
    * The nextPageToken field.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -34,7 +34,7 @@ export const SearchAppEntitlementEntitlementOwnersResponse$inboundSchema:
   > = z.object({
     list: z.nullable(z.array(AppEntitlementOwnerEntitlement$inboundSchema))
       .optional(),
-    nextPageToken: z.nullable(z.string()).optional(),
+    nextPageToken: z.string().optional(),
   });
 
 export function searchAppEntitlementEntitlementOwnersResponseFromJSON(

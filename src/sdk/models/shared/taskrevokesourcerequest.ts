@@ -14,7 +14,7 @@ export type TaskRevokeSourceRequest = {
   /**
    * The ID of the user who initiated the revoke request.
    */
-  requestUserId?: string | null | undefined;
+  requestUserId?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const TaskRevokeSourceRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  requestUserId: z.nullable(z.string()).optional(),
+  requestUserId: z.string().optional(),
 });
 /** @internal */
 export type TaskRevokeSourceRequest$Outbound = {
-  requestUserId?: string | null | undefined;
+  requestUserId?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const TaskRevokeSourceRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskRevokeSourceRequest
 > = z.object({
-  requestUserId: z.nullable(z.string()).optional(),
+  requestUserId: z.string().optional(),
 });
 
 export function taskRevokeSourceRequestToJSON(

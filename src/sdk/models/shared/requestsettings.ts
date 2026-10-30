@@ -12,12 +12,21 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type RequestSettings = {
   /**
+   * MaxBulkEntitlementSelection caps the number of entitlements a requester
+   *
+   * @remarks
+   *  may select in a single bulk access request. Reads always return the
+   *  effective value — an unset (0) value is presented as the system default of
+   *  10. Writing 0 resets the field to unset in storage. Maximum 50.
+   */
+  maxBulkEntitlementSelection?: number | undefined;
+  /**
    * When true, request surfaces (webapp, Slack, MS Teams) skip prompting the
    *
    * @remarks
    *  requester for a justification.
    */
-  skipJustification?: boolean | null | undefined;
+  skipJustification?: boolean | undefined;
 };
 
 /** @internal */
@@ -26,11 +35,13 @@ export const RequestSettings$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  skipJustification: z.nullable(z.boolean()).optional(),
+  maxBulkEntitlementSelection: z.number().int().optional(),
+  skipJustification: z.boolean().optional(),
 });
 /** @internal */
 export type RequestSettings$Outbound = {
-  skipJustification?: boolean | null | undefined;
+  maxBulkEntitlementSelection?: number | undefined;
+  skipJustification?: boolean | undefined;
 };
 
 /** @internal */
@@ -39,7 +50,8 @@ export const RequestSettings$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RequestSettings
 > = z.object({
-  skipJustification: z.nullable(z.boolean()).optional(),
+  maxBulkEntitlementSelection: z.number().int().optional(),
+  skipJustification: z.boolean().optional(),
 });
 
 export function requestSettingsToJSON(

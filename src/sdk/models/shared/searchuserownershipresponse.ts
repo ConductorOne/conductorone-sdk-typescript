@@ -22,7 +22,7 @@ export type SearchUserOwnershipResponse = {
   /**
    * Pagination token for the next page of results. Empty when there are no more results.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -32,7 +32,7 @@ export const SearchUserOwnershipResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   list: z.nullable(z.array(UserOwnershipEntry$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function searchUserOwnershipResponseFromJSON(

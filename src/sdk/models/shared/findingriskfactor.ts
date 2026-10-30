@@ -34,19 +34,19 @@ export type FindingRiskFactor = {
   /**
    * The description field.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The name field.
    */
-  name?: string | null | undefined;
+  name?: string | undefined;
   /**
    * The severity field.
    */
-  severity?: FindingRiskFactorSeverity | null | undefined;
+  severity?: FindingRiskFactorSeverity | undefined;
   /**
    * The weight field.
    */
-  weight?: number | null | undefined;
+  weight?: number | undefined;
 };
 
 /** @internal */
@@ -55,6 +55,12 @@ export const FindingRiskFactorSeverity$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = openEnums.inboundSchema(FindingRiskFactorSeverity);
+/** @internal */
+export const FindingRiskFactorSeverity$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  FindingRiskFactorSeverity
+> = openEnums.outboundSchema(FindingRiskFactorSeverity);
 
 /** @internal */
 export const FindingRiskFactor$inboundSchema: z.ZodType<
@@ -62,12 +68,38 @@ export const FindingRiskFactor$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  description: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
-  severity: z.nullable(FindingRiskFactorSeverity$inboundSchema).optional(),
-  weight: z.nullable(z.number().int()).optional(),
+  description: z.string().optional(),
+  name: z.string().optional(),
+  severity: FindingRiskFactorSeverity$inboundSchema.optional(),
+  weight: z.number().int().optional(),
+});
+/** @internal */
+export type FindingRiskFactor$Outbound = {
+  description?: string | undefined;
+  name?: string | undefined;
+  severity?: string | undefined;
+  weight?: number | undefined;
+};
+
+/** @internal */
+export const FindingRiskFactor$outboundSchema: z.ZodType<
+  FindingRiskFactor$Outbound,
+  z.ZodTypeDef,
+  FindingRiskFactor
+> = z.object({
+  description: z.string().optional(),
+  name: z.string().optional(),
+  severity: FindingRiskFactorSeverity$outboundSchema.optional(),
+  weight: z.number().int().optional(),
 });
 
+export function findingRiskFactorToJSON(
+  findingRiskFactor: FindingRiskFactor,
+): string {
+  return JSON.stringify(
+    FindingRiskFactor$outboundSchema.parse(findingRiskFactor),
+  );
+}
 export function findingRiskFactorFromJSON(
   jsonString: string,
 ): SafeParseResult<FindingRiskFactor, SDKValidationError> {

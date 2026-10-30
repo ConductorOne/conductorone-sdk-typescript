@@ -20,6 +20,7 @@ export const AccessReviewInclusionScopeAppUserStatuses = {
   AppUserStatusEnabled: "APP_USER_STATUS_ENABLED",
   AppUserStatusDisabled: "APP_USER_STATUS_DISABLED",
   AppUserStatusDeleted: "APP_USER_STATUS_DELETED",
+  AppUserStatusPending: "APP_USER_STATUS_PENDING",
 } as const;
 export type AccessReviewInclusionScopeAppUserStatuses = OpenEnum<
   typeof AccessReviewInclusionScopeAppUserStatuses
@@ -74,7 +75,7 @@ export type AccessReviewInclusionScope = {
   /**
    * The noAccountOwners field.
    */
-  noAccountOwners?: boolean | null | undefined;
+  noAccountOwners?: boolean | undefined;
   /**
    * The userIds field.
    */
@@ -138,7 +139,7 @@ export const AccessReviewInclusionScope$inboundSchema: z.ZodType<
   multiUserProfileAttributes: z.record(
     IncludedUserAttributeValues$inboundSchema,
   ).optional(),
-  noAccountOwners: z.nullable(z.boolean()).optional(),
+  noAccountOwners: z.boolean().optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
   userStatuses: z.nullable(z.array(UserStatuses$inboundSchema)).optional(),
 });
@@ -150,7 +151,7 @@ export type AccessReviewInclusionScope$Outbound = {
   multiUserProfileAttributes?: {
     [k: string]: IncludedUserAttributeValues$Outbound;
   } | undefined;
-  noAccountOwners?: boolean | null | undefined;
+  noAccountOwners?: boolean | undefined;
   userIds?: Array<string> | null | undefined;
   userStatuses?: Array<string> | null | undefined;
 };
@@ -171,7 +172,7 @@ export const AccessReviewInclusionScope$outboundSchema: z.ZodType<
   multiUserProfileAttributes: z.record(
     IncludedUserAttributeValues$outboundSchema,
   ).optional(),
-  noAccountOwners: z.nullable(z.boolean()).optional(),
+  noAccountOwners: z.boolean().optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
   userStatuses: z.nullable(z.array(UserStatuses$outboundSchema)).optional(),
 });

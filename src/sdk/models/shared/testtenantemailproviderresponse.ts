@@ -14,11 +14,11 @@ export type TestTenantEmailProviderResponse = {
   /**
    * Human-readable detail about the result.
    */
-  message?: string | null | undefined;
+  message?: string | undefined;
   /**
    * Whether the test email was sent successfully.
    */
-  success?: boolean | null | undefined;
+  success?: boolean | undefined;
 };
 
 /** @internal */
@@ -27,8 +27,8 @@ export const TestTenantEmailProviderResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  message: z.nullable(z.string()).optional(),
-  success: z.nullable(z.boolean()).optional(),
+  message: z.string().optional(),
+  success: z.boolean().optional(),
 });
 
 export function testTenantEmailProviderResponseFromJSON(

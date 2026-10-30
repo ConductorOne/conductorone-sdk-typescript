@@ -15,7 +15,7 @@ export type CampaignHealthSnapshot = {
   /**
    * Number of pending actions locked by terminal (dead) submissions.
    */
-  phantomLockedCount?: number | null | undefined;
+  phantomLockedCount?: number | undefined;
 };
 
 /** @internal */
@@ -27,12 +27,12 @@ export const CampaignHealthSnapshot$inboundSchema: z.ZodType<
   checkedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  phantomLockedCount: z.nullable(z.number().int()).optional(),
+  phantomLockedCount: z.number().int().optional(),
 });
 /** @internal */
 export type CampaignHealthSnapshot$Outbound = {
   checkedAt?: string | null | undefined;
-  phantomLockedCount?: number | null | undefined;
+  phantomLockedCount?: number | undefined;
 };
 
 /** @internal */
@@ -42,7 +42,7 @@ export const CampaignHealthSnapshot$outboundSchema: z.ZodType<
   CampaignHealthSnapshot
 > = z.object({
   checkedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  phantomLockedCount: z.nullable(z.number().int()).optional(),
+  phantomLockedCount: z.number().int().optional(),
 });
 
 export function campaignHealthSnapshotToJSON(

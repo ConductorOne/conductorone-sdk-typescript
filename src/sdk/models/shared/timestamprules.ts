@@ -22,7 +22,7 @@ export type TimestampRules = {
    * @remarks
    *  can only be used with the Within rule.
    */
-  gtNow?: boolean | null | undefined;
+  gtNow?: boolean | undefined;
   gte?: Date | null | undefined;
   lt?: Date | null | undefined;
   /**
@@ -31,12 +31,12 @@ export type TimestampRules = {
    * @remarks
    *  can only be used with the Within rule.
    */
-  ltNow?: boolean | null | undefined;
+  ltNow?: boolean | undefined;
   lte?: Date | null | undefined;
   /**
    * Required specifies that this field must be set
    */
-  required?: boolean | null | undefined;
+  required?: boolean | undefined;
   within?: string | null | undefined;
 };
 
@@ -52,30 +52,30 @@ export const TimestampRules$inboundSchema: z.ZodType<
   gt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  gtNow: z.nullable(z.boolean()).optional(),
+  gtNow: z.boolean().optional(),
   gte: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   lt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  ltNow: z.nullable(z.boolean()).optional(),
+  ltNow: z.boolean().optional(),
   lte: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  required: z.nullable(z.boolean()).optional(),
+  required: z.boolean().optional(),
   within: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type TimestampRules$Outbound = {
   const?: string | null | undefined;
   gt?: string | null | undefined;
-  gtNow?: boolean | null | undefined;
+  gtNow?: boolean | undefined;
   gte?: string | null | undefined;
   lt?: string | null | undefined;
-  ltNow?: boolean | null | undefined;
+  ltNow?: boolean | undefined;
   lte?: string | null | undefined;
-  required?: boolean | null | undefined;
+  required?: boolean | undefined;
   within?: string | null | undefined;
 };
 
@@ -87,12 +87,12 @@ export const TimestampRules$outboundSchema: z.ZodType<
 > = z.object({
   const: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   gt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  gtNow: z.nullable(z.boolean()).optional(),
+  gtNow: z.boolean().optional(),
   gte: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   lt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  ltNow: z.nullable(z.boolean()).optional(),
+  ltNow: z.boolean().optional(),
   lte: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  required: z.nullable(z.boolean()).optional(),
+  required: z.boolean().optional(),
   within: z.nullable(z.string()).optional(),
 });
 

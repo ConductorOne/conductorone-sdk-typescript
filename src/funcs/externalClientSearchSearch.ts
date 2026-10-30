@@ -31,6 +31,7 @@ import { Result } from "../sdk/types/fp.js";
  *
  * @remarks
  * Search returns external client grants for all users in the tenant.
+ *  Request a modest page_size (≤25) to keep responses small.
  */
 export function externalClientSearchSearch(
   client: ConductoroneSDKTypescriptCore,

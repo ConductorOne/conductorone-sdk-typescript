@@ -14,7 +14,7 @@ export type ManuallyManagedUsersResponse = {
   /**
    * The ID of the bulk action created to process the membership additions.
    */
-  bulkActionId?: string | null | undefined;
+  bulkActionId?: string | undefined;
   /**
    * A map of user IDs to error messages for users that could not be added.
    */
@@ -27,7 +27,7 @@ export const ManuallyManagedUsersResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  bulkActionId: z.nullable(z.string()).optional(),
+  bulkActionId: z.string().optional(),
   failedUsersErrorMap: z.record(z.string()).optional(),
 });
 

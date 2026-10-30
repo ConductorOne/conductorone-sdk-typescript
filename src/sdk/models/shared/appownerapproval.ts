@@ -14,11 +14,11 @@ export type AppOwnerApproval = {
   /**
    * Configuration that allows a user to self approve if they are an app owner during this approval step.
    */
-  allowSelfApproval?: boolean | null | undefined;
+  allowSelfApproval?: boolean | undefined;
   /**
    * Configuration to require distinct approvers across approval steps of a rule.
    */
-  requireDistinctApprovers?: boolean | null | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -27,13 +27,13 @@ export const AppOwnerApproval$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  allowSelfApproval: z.nullable(z.boolean()).optional(),
-  requireDistinctApprovers: z.nullable(z.boolean()).optional(),
+  allowSelfApproval: z.boolean().optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
 /** @internal */
 export type AppOwnerApproval$Outbound = {
-  allowSelfApproval?: boolean | null | undefined;
-  requireDistinctApprovers?: boolean | null | undefined;
+  allowSelfApproval?: boolean | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -42,8 +42,8 @@ export const AppOwnerApproval$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppOwnerApproval
 > = z.object({
-  allowSelfApproval: z.nullable(z.boolean()).optional(),
-  requireDistinctApprovers: z.nullable(z.boolean()).optional(),
+  allowSelfApproval: z.boolean().optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
 
 export function appOwnerApprovalToJSON(

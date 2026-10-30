@@ -8,13 +8,19 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The GetTenantDefaultsResponse message.
+ * GetTenantDefaultsResponse contains tenant defaults used by
+ *
+ * @remarks
+ *  legacy MCP servers.
  */
 export type GetTenantDefaultsResponse = {
   /**
-   * The requireToolApproval field.
+   * Whether newly discovered tools require approval on MCP servers without a
+   *
+   * @remarks
+   *  saved registration access level, unless overridden by the per-server setting.
    */
-  requireToolApproval?: boolean | null | undefined;
+  requireToolApproval?: boolean | undefined;
 };
 
 /** @internal */
@@ -23,7 +29,7 @@ export const GetTenantDefaultsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  requireToolApproval: z.nullable(z.boolean()).optional(),
+  requireToolApproval: z.boolean().optional(),
 });
 
 export function getTenantDefaultsResponseFromJSON(

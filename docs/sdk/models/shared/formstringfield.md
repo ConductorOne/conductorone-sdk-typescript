@@ -7,6 +7,7 @@ This message contains a oneof named view. Only a single field of the following l
   - passwordField
   - selectField
   - pickerField
+  - dateField
 
 
 ## Example Usage
@@ -21,6 +22,7 @@ let value: FormStringField = {};
 
 | Field                                                               | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `dateField`                                                         | [shared.DateField](../../../sdk/models/shared/datefield.md)         | :heavy_minus_sign:                                                  | N/A                                                                 |
 | `defaultValue`                                                      | *string*                                                            | :heavy_minus_sign:                                                  | The defaultValue field.                                             |
 | `passwordField`                                                     | [shared.PasswordField](../../../sdk/models/shared/passwordfield.md) | :heavy_minus_sign:                                                  | N/A                                                                 |
 | `pickerField`                                                       | [shared.PickerField](../../../sdk/models/shared/pickerfield.md)     | :heavy_minus_sign:                                                  | N/A                                                                 |

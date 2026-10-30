@@ -14,7 +14,7 @@ export type IncludedUserAttributeValue = {
   /**
    * The value field.
    */
-  value?: string | null | undefined;
+  value?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const IncludedUserAttributeValue$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  value: z.nullable(z.string()).optional(),
+  value: z.string().optional(),
 });
 /** @internal */
 export type IncludedUserAttributeValue$Outbound = {
-  value?: string | null | undefined;
+  value?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const IncludedUserAttributeValue$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   IncludedUserAttributeValue
 > = z.object({
-  value: z.nullable(z.string()).optional(),
+  value: z.string().optional(),
 });
 
 export function includedUserAttributeValueToJSON(

@@ -41,26 +41,26 @@ export type StepUpTransaction = {
   /**
    * Error message if the transaction failed
    */
-  errorMessage?: string | null | undefined;
+  errorMessage?: string | undefined;
   expiresAt?: Date | null | undefined;
   /**
    * Unique identifier for the transaction
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * ID of the provider used for this step-up authentication
    */
-  providerId?: string | null | undefined;
+  providerId?: string | undefined;
   /**
    * Current state of the transaction
    */
-  state?: StepUpTransactionState | null | undefined;
+  state?: StepUpTransactionState | undefined;
   test?: TargetTest | null | undefined;
   updatedAt?: Date | null | undefined;
   /**
    * ID of the user who performed the step-up authentication
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -81,18 +81,18 @@ export const StepUpTransaction$inboundSchema: z.ZodType<
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  errorMessage: z.nullable(z.string()).optional(),
+  errorMessage: z.string().optional(),
   expiresAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  id: z.nullable(z.string()).optional(),
-  providerId: z.nullable(z.string()).optional(),
-  state: z.nullable(StepUpTransactionState$inboundSchema).optional(),
+  id: z.string().optional(),
+  providerId: z.string().optional(),
+  state: StepUpTransactionState$inboundSchema.optional(),
   test: z.nullable(TargetTest$inboundSchema).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 
 export function stepUpTransactionFromJSON(

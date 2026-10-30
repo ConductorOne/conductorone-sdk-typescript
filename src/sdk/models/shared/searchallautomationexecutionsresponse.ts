@@ -44,7 +44,7 @@ export type SearchAllAutomationExecutionsResponse = {
   /**
    * Token to retrieve the next page of results, empty when no more results exist.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -93,7 +93,7 @@ export const SearchAllAutomationExecutionsResponse$inboundSchema: z.ZodType<
     )),
   ).optional(),
   list: z.nullable(z.array(AutomationExecutionView$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function searchAllAutomationExecutionsResponseFromJSON(

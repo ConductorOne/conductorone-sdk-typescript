@@ -13,23 +13,51 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * @remarks
  *  This is distinct from AppUserFilter which selects accounts within a connected app.
  */
-export type C1UserFilter = {};
+export type C1UserFilter = {
+  /**
+   * Remove these users from the selectable set, after user_ids is applied.
+   */
+  excludeUserIds?: Array<string> | null | undefined;
+  /**
+   * Make deactivated and deleted users selectable. Defaults to enabled-only.
+   */
+  includeDeactivated?: boolean | undefined;
+  /**
+   * Restrict the selectable set to these users. Empty means every user is selectable.
+   *
+   * @remarks
+   *  Capped at the number of refs SearchUsers accepts in one request.
+   */
+  userIds?: Array<string> | null | undefined;
+};
 
 /** @internal */
 export const C1UserFilter$inboundSchema: z.ZodType<
   C1UserFilter,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = z.object({
+  excludeUserIds: z.nullable(z.array(z.string())).optional(),
+  includeDeactivated: z.boolean().optional(),
+  userIds: z.nullable(z.array(z.string())).optional(),
+});
 /** @internal */
-export type C1UserFilter$Outbound = {};
+export type C1UserFilter$Outbound = {
+  excludeUserIds?: Array<string> | null | undefined;
+  includeDeactivated?: boolean | undefined;
+  userIds?: Array<string> | null | undefined;
+};
 
 /** @internal */
 export const C1UserFilter$outboundSchema: z.ZodType<
   C1UserFilter$Outbound,
   z.ZodTypeDef,
   C1UserFilter
-> = z.object({});
+> = z.object({
+  excludeUserIds: z.nullable(z.array(z.string())).optional(),
+  includeDeactivated: z.boolean().optional(),
+  userIds: z.nullable(z.array(z.string())).optional(),
+});
 
 export function c1UserFilterToJSON(c1UserFilter: C1UserFilter): string {
   return JSON.stringify(C1UserFilter$outboundSchema.parse(c1UserFilter));

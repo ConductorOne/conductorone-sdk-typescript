@@ -14,7 +14,7 @@ export type AWSExternalID = {
   /**
    * The external ID value to include in the AWS IAM role trust policy condition.
    */
-  externalId?: string | null | undefined;
+  externalId?: string | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const AWSExternalID$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  externalId: z.nullable(z.string()).optional(),
+  externalId: z.string().optional(),
 });
 
 export function awsExternalIDFromJSON(

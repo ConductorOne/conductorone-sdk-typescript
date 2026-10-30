@@ -39,11 +39,11 @@ export type SearchPastGrantsRequest = {
   /**
    * The maximum number of results to return per page.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The token for fetching the next page of results.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
 };
 
 /** @internal */
@@ -55,8 +55,8 @@ export type SearchPastGrantsRequest$Outbound = {
     | AppEntitlementUserBindingExpandHistoryMask$Outbound
     | null
     | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
 };
 
 /** @internal */
@@ -72,8 +72,8 @@ export const SearchPastGrantsRequest$outboundSchema: z.ZodType<
   expandMask: z.nullable(
     AppEntitlementUserBindingExpandHistoryMask$outboundSchema,
   ).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
 });
 
 export function searchPastGrantsRequestToJSON(

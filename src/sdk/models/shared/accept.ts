@@ -14,17 +14,17 @@ export type Accept = {
   /**
    * An optional message to include in the comments when a task is automatically accepted.
    */
-  acceptMessage?: string | null | undefined;
+  acceptMessage?: string | undefined;
 };
 
 /** @internal */
 export const Accept$inboundSchema: z.ZodType<Accept, z.ZodTypeDef, unknown> = z
   .object({
-    acceptMessage: z.nullable(z.string()).optional(),
+    acceptMessage: z.string().optional(),
   });
 /** @internal */
 export type Accept$Outbound = {
-  acceptMessage?: string | null | undefined;
+  acceptMessage?: string | undefined;
 };
 
 /** @internal */
@@ -33,7 +33,7 @@ export const Accept$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Accept
 > = z.object({
-  acceptMessage: z.nullable(z.string()).optional(),
+  acceptMessage: z.string().optional(),
 });
 
 export function acceptToJSON(accept: Accept): string {

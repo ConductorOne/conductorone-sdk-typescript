@@ -17,9 +17,12 @@ import {
 import {
   AuthConfigGoogle,
   AuthConfigGoogle$inboundSchema,
-  AuthConfigGoogle$Outbound,
-  AuthConfigGoogle$outboundSchema,
 } from "./authconfiggoogle.js";
+import {
+  AuthConfigGoogleInput,
+  AuthConfigGoogleInput$Outbound,
+  AuthConfigGoogleInput$outboundSchema,
+} from "./authconfiggoogleinput.js";
 import {
   AuthConfigJumpCloud,
   AuthConfigJumpCloud$inboundSchema,
@@ -116,20 +119,20 @@ export type TenantAuthConfig = {
   /**
    * User-visible message shown when status=DEPRECATED.
    */
-  deprecationMessage?: string | null | undefined;
+  deprecationMessage?: string | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   google?: AuthConfigGoogle | null | undefined;
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The isDefaultBootstrap field.
    */
-  isDefaultBootstrap?: boolean | null | undefined;
+  isDefaultBootstrap?: boolean | undefined;
   jumpcloud?: AuthConfigJumpCloud | null | undefined;
   microsoft?: AuthConfigMicrosoft | null | undefined;
   oidc?: AuthConfigOIDC | null | undefined;
@@ -139,11 +142,11 @@ export type TenantAuthConfig = {
   /**
    * Provider type (read-only after creation — provider config determines type).
    */
-  providerType?: ProviderType | null | undefined;
+  providerType?: ProviderType | undefined;
   /**
    * The status field.
    */
-  status?: TenantAuthConfigStatus | null | undefined;
+  status?: TenantAuthConfigStatus | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -172,20 +175,20 @@ export type TenantAuthConfigInput = {
   /**
    * User-visible message shown when status=DEPRECATED.
    */
-  deprecationMessage?: string | null | undefined;
+  deprecationMessage?: string | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
-  google?: AuthConfigGoogle | null | undefined;
+  displayName?: string | undefined;
+  google?: AuthConfigGoogleInput | null | undefined;
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The isDefaultBootstrap field.
    */
-  isDefaultBootstrap?: boolean | null | undefined;
+  isDefaultBootstrap?: boolean | undefined;
   jumpcloud?: AuthConfigJumpCloud | null | undefined;
   microsoft?: AuthConfigMicrosoft | null | undefined;
   oidc?: AuthConfigOIDC | null | undefined;
@@ -195,7 +198,7 @@ export type TenantAuthConfigInput = {
   /**
    * The status field.
    */
-  status?: TenantAuthConfigStatus | null | undefined;
+  status?: TenantAuthConfigStatus | undefined;
 };
 
 /** @internal */
@@ -232,19 +235,19 @@ export const TenantAuthConfig$inboundSchema: z.ZodType<
   deprecationDeadline: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  deprecationMessage: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  deprecationMessage: z.string().optional(),
+  displayName: z.string().optional(),
   google: z.nullable(AuthConfigGoogle$inboundSchema).optional(),
-  id: z.nullable(z.string()).optional(),
-  isDefaultBootstrap: z.nullable(z.boolean()).optional(),
+  id: z.string().optional(),
+  isDefaultBootstrap: z.boolean().optional(),
   jumpcloud: z.nullable(AuthConfigJumpCloud$inboundSchema).optional(),
   microsoft: z.nullable(AuthConfigMicrosoft$inboundSchema).optional(),
   oidc: z.nullable(AuthConfigOIDC$inboundSchema).optional(),
   okta: z.nullable(AuthConfigOkta$inboundSchema).optional(),
   onelogin: z.nullable(AuthConfigOneLogin$inboundSchema).optional(),
   pingone: z.nullable(AuthConfigPingOne$inboundSchema).optional(),
-  providerType: z.nullable(ProviderType$inboundSchema).optional(),
-  status: z.nullable(TenantAuthConfigStatus$inboundSchema).optional(),
+  providerType: ProviderType$inboundSchema.optional(),
+  status: TenantAuthConfigStatus$inboundSchema.optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -265,18 +268,18 @@ export type TenantAuthConfigInput$Outbound = {
   bootstrapDomains?: Array<string> | null | undefined;
   c1Local?: AuthConfigC1Local$Outbound | null | undefined;
   deprecationDeadline?: string | null | undefined;
-  deprecationMessage?: string | null | undefined;
-  displayName?: string | null | undefined;
-  google?: AuthConfigGoogle$Outbound | null | undefined;
-  id?: string | null | undefined;
-  isDefaultBootstrap?: boolean | null | undefined;
+  deprecationMessage?: string | undefined;
+  displayName?: string | undefined;
+  google?: AuthConfigGoogleInput$Outbound | null | undefined;
+  id?: string | undefined;
+  isDefaultBootstrap?: boolean | undefined;
   jumpcloud?: AuthConfigJumpCloud$Outbound | null | undefined;
   microsoft?: AuthConfigMicrosoft$Outbound | null | undefined;
   oidc?: AuthConfigOIDC$Outbound | null | undefined;
   okta?: AuthConfigOkta$Outbound | null | undefined;
   onelogin?: AuthConfigOneLogin$Outbound | null | undefined;
   pingone?: AuthConfigPingOne$Outbound | null | undefined;
-  status?: string | null | undefined;
+  status?: string | undefined;
 };
 
 /** @internal */
@@ -289,18 +292,18 @@ export const TenantAuthConfigInput$outboundSchema: z.ZodType<
   c1Local: z.nullable(AuthConfigC1Local$outboundSchema).optional(),
   deprecationDeadline: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
-  deprecationMessage: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  google: z.nullable(AuthConfigGoogle$outboundSchema).optional(),
-  id: z.nullable(z.string()).optional(),
-  isDefaultBootstrap: z.nullable(z.boolean()).optional(),
+  deprecationMessage: z.string().optional(),
+  displayName: z.string().optional(),
+  google: z.nullable(AuthConfigGoogleInput$outboundSchema).optional(),
+  id: z.string().optional(),
+  isDefaultBootstrap: z.boolean().optional(),
   jumpcloud: z.nullable(AuthConfigJumpCloud$outboundSchema).optional(),
   microsoft: z.nullable(AuthConfigMicrosoft$outboundSchema).optional(),
   oidc: z.nullable(AuthConfigOIDC$outboundSchema).optional(),
   okta: z.nullable(AuthConfigOkta$outboundSchema).optional(),
   onelogin: z.nullable(AuthConfigOneLogin$outboundSchema).optional(),
   pingone: z.nullable(AuthConfigPingOne$outboundSchema).optional(),
-  status: z.nullable(TenantAuthConfigStatus$outboundSchema).optional(),
+  status: TenantAuthConfigStatus$outboundSchema.optional(),
 });
 
 export function tenantAuthConfigInputToJSON(

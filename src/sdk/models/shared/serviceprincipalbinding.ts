@@ -18,7 +18,7 @@ export type ServicePrincipalBinding = {
   /**
    * The servicePrincipalId field.
    */
-  servicePrincipalId?: string | null | undefined;
+  servicePrincipalId?: string | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -31,7 +31,7 @@ export const ServicePrincipalBinding$inboundSchema: z.ZodType<
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  servicePrincipalId: z.nullable(z.string()).optional(),
+  servicePrincipalId: z.string().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

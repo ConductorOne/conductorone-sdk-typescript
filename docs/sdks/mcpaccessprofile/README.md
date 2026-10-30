@@ -10,7 +10,9 @@
 * [get](#get) - Get
 * [update](#update) - Update
 * [getByAppEntitlementId](#getbyappentitlementid) - Get By App Entitlement Id
+* [searchAccessProfiles](#searchaccessprofiles) - Search Access Profiles
 * [listRequestableConnectors](#listrequestableconnectors) - List Requestable Connectors
+* [searchRequestableConnectors](#searchrequestableconnectors) - Search Requestable Connectors
 
 ## list
 
@@ -513,6 +515,84 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4XX, 5XX        | \*/\*           |
 
+## searchAccessProfiles
+
+SearchAccessProfiles returns the tenant's MCP toolsets (access profiles)
+ across every (app_id, connector_id), filtered by a case-insensitive search
+ over display_name and paginated. Backs the agent-config multi-select that
+ binds toolsets to a ClawAgent.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.ai_governance.v1.MCPAccessProfileService.SearchAccessProfiles" method="get" path="/api/v1/mcp_toolsets/search" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.mcpAccessProfile.searchAccessProfiles();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { mcpAccessProfileSearchAccessProfiles } from "conductorone-sdk-typescript/funcs/mcpAccessProfileSearchAccessProfiles.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await mcpAccessProfileSearchAccessProfiles(conductoroneSDKTypescript);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("mcpAccessProfileSearchAccessProfiles failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                | Type                                                                                                                                                                                     | Required                                                                                                                                                                                 | Description                                                                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                                                                | [operations.C1ApiAiGovernanceV1MCPAccessProfileServiceSearchAccessProfilesRequest](../../sdk/models/operations/c1apiaigovernancev1mcpaccessprofileservicesearchaccessprofilesrequest.md) | :heavy_check_mark:                                                                                                                                                                       | The request object to use for the request.                                                                                                                                               |
+| `options`                                                                                                                                                                                | RequestOptions                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                       | Used to set various options for making HTTP requests.                                                                                                                                    |
+| `options.fetchOptions`                                                                                                                                                                   | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                  | :heavy_minus_sign:                                                                                                                                                                       | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.           |
+| `options.retries`                                                                                                                                                                        | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                       | Enables retrying HTTP requests under certain failure conditions.                                                                                                                         |
+
+### Response
+
+**Promise\<[operations.C1ApiAiGovernanceV1MCPAccessProfileServiceSearchAccessProfilesResponse](../../sdk/models/operations/c1apiaigovernancev1mcpaccessprofileservicesearchaccessprofilesresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
 ## listRequestableConnectors
 
 ListRequestableConnectors returns the (app_id, connector_id) pairs that
@@ -586,6 +666,91 @@ run();
 ### Response
 
 **Promise\<[operations.C1ApiAiGovernanceV1MCPAccessProfileServiceListRequestableConnectorsResponse](../../sdk/models/operations/c1apiaigovernancev1mcpaccessprofileservicelistrequestableconnectorsresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## searchRequestableConnectors
+
+SearchRequestableConnectors returns card-ready entries — one per MCP
+ connector the user can browse and request tools for — with server-side
+ visibility + policy filtering, grant-enrollment-status filtering, text
+ search over the connector display name, and pagination. Backs the
+ Requests -> AI tools connector cards. Held connectors are surfaced even
+ when no longer requestable so "My tools" reflects what the user actually
+ holds.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.ai_governance.v1.MCPAccessProfileService.SearchRequestableConnectors" method="get" path="/api/v1/users/{user_id}/mcp_toolsets/requestable_connectors/search" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.mcpAccessProfile.searchRequestableConnectors({
+    userId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { mcpAccessProfileSearchRequestableConnectors } from "conductorone-sdk-typescript/funcs/mcpAccessProfileSearchRequestableConnectors.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await mcpAccessProfileSearchRequestableConnectors(conductoroneSDKTypescript, {
+    userId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("mcpAccessProfileSearchRequestableConnectors failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                              | Type                                                                                                                                                                                                   | Required                                                                                                                                                                                               | Description                                                                                                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                                              | [operations.C1ApiAiGovernanceV1MCPAccessProfileServiceSearchRequestableConnectorsRequest](../../sdk/models/operations/c1apiaigovernancev1mcpaccessprofileservicesearchrequestableconnectorsrequest.md) | :heavy_check_mark:                                                                                                                                                                                     | The request object to use for the request.                                                                                                                                                             |
+| `options`                                                                                                                                                                                              | RequestOptions                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                     | Used to set various options for making HTTP requests.                                                                                                                                                  |
+| `options.fetchOptions`                                                                                                                                                                                 | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                     | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                         |
+| `options.retries`                                                                                                                                                                                      | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                     | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                       |
+
+### Response
+
+**Promise\<[operations.C1ApiAiGovernanceV1MCPAccessProfileServiceSearchRequestableConnectorsResponse](../../sdk/models/operations/c1apiaigovernancev1mcpaccessprofileservicesearchrequestableconnectorsresponse.md)\>**
 
 ### Errors
 

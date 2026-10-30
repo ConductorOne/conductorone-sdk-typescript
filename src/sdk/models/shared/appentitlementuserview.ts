@@ -16,9 +16,21 @@ import { AppUserView, AppUserView$inboundSchema } from "./appuserview.js";
  * The AppEntitlementUserView (aka grant view) describes the relationship between an app user and an entitlement. They have more recently been referred to as grants.
  */
 export type AppEntitlementUserView = {
+  /**
+   * The ID of the app entitlement that the app user has access to.
+   */
+  appEntitlementId?: string | undefined;
   appEntitlementUserBindingCreatedAt?: Date | null | undefined;
   appEntitlementUserBindingDeprovisionAt?: Date | null | undefined;
+  /**
+   * The ID of the app associated with the grant.
+   */
+  appId?: string | undefined;
   appUser?: AppUserView | null | undefined;
+  /**
+   * The ID of the app user that has access to the app entitlement.
+   */
+  appUserId?: string | undefined;
   /**
    * List of sources for the grant, ie. groups, roles, etc.
    */
@@ -26,7 +38,7 @@ export type AppEntitlementUserView = {
   /**
    * The originating ticket ID for the grant (e.g. from a request ticket).
    */
-  originatingTicketId?: string | null | undefined;
+  originatingTicketId?: string | undefined;
 };
 
 /** @internal */
@@ -35,15 +47,18 @@ export const AppEntitlementUserView$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  appEntitlementId: z.string().optional(),
   appEntitlementUserBindingCreatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   appEntitlementUserBindingDeprovisionAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
+  appId: z.string().optional(),
   appUser: z.nullable(AppUserView$inboundSchema).optional(),
+  appUserId: z.string().optional(),
   grantSources: z.nullable(z.array(AppEntitlementRef$inboundSchema)).optional(),
-  originatingTicketId: z.nullable(z.string()).optional(),
+  originatingTicketId: z.string().optional(),
 });
 
 export function appEntitlementUserViewFromJSON(

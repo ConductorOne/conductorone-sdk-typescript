@@ -54,7 +54,7 @@ export type UsageBasedRevocationTrigger = {
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   enabledAt?: Date | null | undefined;
   /**
    * The excludedGroupRefs field.
@@ -67,7 +67,7 @@ export type UsageBasedRevocationTrigger = {
   /**
    * The includeUsersWithNoActivity field.
    */
-  includeUsersWithNoActivity?: boolean | null | undefined;
+  includeUsersWithNoActivity?: boolean | undefined;
   runDelayed?: RunDelayed | null | undefined;
   runImmediately?: RunImmediately | null | undefined;
   /**
@@ -81,7 +81,7 @@ export type UsageBasedRevocationTrigger = {
   /**
    * The unusedForDays field.
    */
-  unusedForDays?: number | null | undefined;
+  unusedForDays?: number | undefined;
 };
 
 /** @internal */
@@ -103,29 +103,29 @@ export const UsageBasedRevocationTrigger$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
   enabledAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   excludedGroupRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
     .optional(),
   excludedUserRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
-  includeUsersWithNoActivity: z.nullable(z.boolean()).optional(),
+  includeUsersWithNoActivity: z.boolean().optional(),
   runDelayed: z.nullable(RunDelayed$inboundSchema).optional(),
   runImmediately: z.nullable(RunImmediately$inboundSchema).optional(),
   targetedAppUserTypes: z.nullable(z.array(TargetedAppUserTypes$inboundSchema))
     .optional(),
   targetedEntitlementRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
     .optional(),
-  unusedForDays: z.nullable(z.number().int()).optional(),
+  unusedForDays: z.number().int().optional(),
 });
 /** @internal */
 export type UsageBasedRevocationTrigger$Outbound = {
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   enabledAt?: string | null | undefined;
   excludedGroupRefs?: Array<AppEntitlementRef$Outbound> | null | undefined;
   excludedUserRefs?: Array<UserRef$Outbound> | null | undefined;
-  includeUsersWithNoActivity?: boolean | null | undefined;
+  includeUsersWithNoActivity?: boolean | undefined;
   runDelayed?: RunDelayed$Outbound | null | undefined;
   runImmediately?: RunImmediately$Outbound | null | undefined;
   targetedAppUserTypes?: Array<string> | null | undefined;
@@ -133,7 +133,7 @@ export type UsageBasedRevocationTrigger$Outbound = {
     | Array<AppEntitlementRef$Outbound>
     | null
     | undefined;
-  unusedForDays?: number | null | undefined;
+  unusedForDays?: number | undefined;
 };
 
 /** @internal */
@@ -142,19 +142,19 @@ export const UsageBasedRevocationTrigger$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UsageBasedRevocationTrigger
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
   enabledAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   excludedGroupRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
     .optional(),
   excludedUserRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
-  includeUsersWithNoActivity: z.nullable(z.boolean()).optional(),
+  includeUsersWithNoActivity: z.boolean().optional(),
   runDelayed: z.nullable(RunDelayed$outboundSchema).optional(),
   runImmediately: z.nullable(RunImmediately$outboundSchema).optional(),
   targetedAppUserTypes: z.nullable(z.array(TargetedAppUserTypes$outboundSchema))
     .optional(),
   targetedEntitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
     .optional(),
-  unusedForDays: z.nullable(z.number().int()).optional(),
+  unusedForDays: z.number().int().optional(),
 });
 
 export function usageBasedRevocationTriggerToJSON(

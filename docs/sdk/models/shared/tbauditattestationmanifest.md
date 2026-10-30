@@ -1,0 +1,33 @@
+# TBAuditAttestationManifest
+
+TBAuditAttestationManifest is one signed batch manifest of the tenant's
+ tamper-evident audit log (Time Bandit warehouse attestation). It carries only
+ the manifest's signed fields, so an auditor can rebuild the signed bytes and
+ verify the Ed25519 signature offline with the key listed under key_id.
+
+## Example Usage
+
+```typescript
+import { TBAuditAttestationManifest } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: TBAuditAttestationManifest = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `batchId`                                                                                     | *string*                                                                                      | :heavy_minus_sign:                                                                            | The batchId field.                                                                            |
+| `canon`                                                                                       | *string*                                                                                      | :heavy_minus_sign:                                                                            | Canonicalization of the row bytes the leaves hash, for example<br/> tb-audit-canon-ch-v1.     |
+| `chainSeq`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | Zero-based, contiguous position of this batch in its chain.                                   |
+| `firstEventTime`                                                                              | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `instanceId`                                                                                  | *string*                                                                                      | :heavy_minus_sign:                                                                            | The instanceId field.                                                                         |
+| `keyId`                                                                                       | *string*                                                                                      | :heavy_minus_sign:                                                                            | The keyId field.                                                                              |
+| `lastEventTime`                                                                               | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `originId`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | The chain is (tenant_id, origin_id, instance_id).                                             |
+| `prevRoot`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | The previous batch's root in this chain, or 64 zeros for the first.                           |
+| `root`                                                                                        | *string*                                                                                      | :heavy_minus_sign:                                                                            | RFC 6962 Merkle root of the batch, hex.                                                       |
+| `rowCount`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | The rowCount field.                                                                           |
+| `signature`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | Ed25519 signature over the domain-separated manifest encoding, hex.                           |
+| `tenantId`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | The tenantId field.                                                                           |
+| `version`                                                                                     | *number*                                                                                      | :heavy_minus_sign:                                                                            | The version field.                                                                            |

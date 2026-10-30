@@ -11,12 +11,12 @@ export type CreateComplianceFrameworkAttributeValueRequest = {
   /**
    * The value field.
    */
-  value?: string | null | undefined;
+  value?: string | undefined;
 };
 
 /** @internal */
 export type CreateComplianceFrameworkAttributeValueRequest$Outbound = {
-  value?: string | null | undefined;
+  value?: string | undefined;
 };
 
 /** @internal */
@@ -26,7 +26,7 @@ export const CreateComplianceFrameworkAttributeValueRequest$outboundSchema:
     z.ZodTypeDef,
     CreateComplianceFrameworkAttributeValueRequest
   > = z.object({
-    value: z.nullable(z.string()).optional(),
+    value: z.string().optional(),
   });
 
 export function createComplianceFrameworkAttributeValueRequestToJSON(

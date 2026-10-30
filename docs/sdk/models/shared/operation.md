@@ -1,13 +1,13 @@
 # Operation
 
-Which connector RPC this dispatches to.
+The operation field.
 
 ## Example Usage
 
 ```typescript
 import { Operation } from "conductorone-sdk-typescript/sdk/models/shared";
 
-let value: Operation = "OPERATION_GRANT";
+let value: Operation = "A2UI_PROVENANCE_OPERATION_CREATED";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -15,5 +15,5 @@ let value: Operation = "OPERATION_GRANT";
 ## Values
 
 ```typescript
-"OPERATION_UNSPECIFIED" | "OPERATION_GRANT" | Unrecognized<string>
+"A2UI_PROVENANCE_OPERATION_UNSPECIFIED" | "A2UI_PROVENANCE_OPERATION_LOOKED_UP" | "A2UI_PROVENANCE_OPERATION_COUNTED" | "A2UI_PROVENANCE_OPERATION_FETCHED_RECORD" | "A2UI_PROVENANCE_OPERATION_SEARCHED" | "A2UI_PROVENANCE_OPERATION_READ_TREND" | "A2UI_PROVENANCE_OPERATION_CREATED" | "A2UI_PROVENANCE_OPERATION_UPDATED" | "A2UI_PROVENANCE_OPERATION_DELETED" | "A2UI_PROVENANCE_OPERATION_RAN_PROGRAM" | "A2UI_PROVENANCE_OPERATION_BUILT_REPORT" | Unrecognized<string>
 ```

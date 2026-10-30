@@ -1,0 +1,23 @@
+# XAAResourceServerServiceSearchRequest
+
+XAAResourceServerServiceSearchRequest searches resource servers with filters.
+
+## Example Usage
+
+```typescript
+import { XAAResourceServerServiceSearchRequest } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: XAAResourceServerServiceSearchRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `appIds`                                                                                                           | *string*[]                                                                                                         | :heavy_minus_sign:                                                                                                 | Optional filter by applications. Empty matches any application.                                                    |
+| `disabled`                                                                                                         | *boolean*                                                                                                          | :heavy_minus_sign:                                                                                                 | Optional filter by disabled state.                                                                                 |
+| `pageSize`                                                                                                         | *number*                                                                                                           | :heavy_minus_sign:                                                                                                 | Page size (max 100).                                                                                               |
+| `pageToken`                                                                                                        | *string*                                                                                                           | :heavy_minus_sign:                                                                                                 | Page token for pagination.                                                                                         |
+| `query`                                                                                                            | *string*                                                                                                           | :heavy_minus_sign:                                                                                                 | Optional text query matched against display_name and normalized_audience.                                          |
+| `refs`                                                                                                             | [shared.XAAResourceServerRef](../../../sdk/models/shared/xaaresourceserverref.md)[]                                | :heavy_minus_sign:                                                                                                 | Optional: fetch a specific set of resource servers by ref (used by<br/> websocket notify to re-fetch individual rows). |
+| `signingAlgorithmFilter`                                                                                           | [shared.SigningAlgorithmFilter](../../../sdk/models/shared/signingalgorithmfilter.md)[]                            | :heavy_minus_sign:                                                                                                 | Optional filter by signing algorithm. UNSPECIFIED means no filter.                                                 |

@@ -37,12 +37,12 @@ export type TaskActionsServiceApproveWithStepUpResponse = {
   /**
    * The redirect URL the client must visit to complete the step-up authentication.
    */
-  redirectUrl?: string | null | undefined;
+  redirectUrl?: string | undefined;
   taskView?: TaskView | null | undefined;
   /**
    * The ID of the task approve action created by this request.
    */
-  ticketActionId?: string | null | undefined;
+  ticketActionId?: string | undefined;
 };
 
 /** @internal */
@@ -91,9 +91,9 @@ export const TaskActionsServiceApproveWithStepUpResponse$inboundSchema:
         TaskActionsServiceApproveWithStepUpResponseExpanded$inboundSchema
       )),
     ).optional(),
-    redirectUrl: z.nullable(z.string()).optional(),
+    redirectUrl: z.string().optional(),
     taskView: z.nullable(TaskView$inboundSchema).optional(),
-    ticketActionId: z.nullable(z.string()).optional(),
+    ticketActionId: z.string().optional(),
   });
 
 export function taskActionsServiceApproveWithStepUpResponseFromJSON(

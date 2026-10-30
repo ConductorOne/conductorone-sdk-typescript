@@ -18,15 +18,15 @@ export type AppEntitlementUserBindingHistoryView = {
   /**
    * The appPath field.
    */
-  appPath?: string | null | undefined;
+  appPath?: string | undefined;
   /**
    * The appUserPath field.
    */
-  appUserPath?: string | null | undefined;
+  appUserPath?: string | undefined;
   /**
    * The entitlementPath field.
    */
-  entitlementPath?: string | null | undefined;
+  entitlementPath?: string | undefined;
   history?: AppEntitlementUserBindingHistory | null | undefined;
 };
 
@@ -36,9 +36,9 @@ export const AppEntitlementUserBindingHistoryView$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appPath: z.nullable(z.string()).optional(),
-  appUserPath: z.nullable(z.string()).optional(),
-  entitlementPath: z.nullable(z.string()).optional(),
+  appPath: z.string().optional(),
+  appUserPath: z.string().optional(),
+  entitlementPath: z.string().optional(),
   history: z.nullable(AppEntitlementUserBindingHistory$inboundSchema)
     .optional(),
 });

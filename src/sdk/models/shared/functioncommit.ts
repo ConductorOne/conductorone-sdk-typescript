@@ -14,20 +14,20 @@ export type FunctionCommit = {
   /**
    * The author field.
    */
-  author?: string | null | undefined;
+  author?: string | undefined;
   createdAt?: Date | null | undefined;
   /**
    * The functionId field.
    */
-  functionId?: string | null | undefined;
+  functionId?: string | undefined;
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The message field.
    */
-  message?: string | null | undefined;
+  message?: string | undefined;
 };
 
 /** @internal */
@@ -36,13 +36,13 @@ export const FunctionCommit$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  author: z.nullable(z.string()).optional(),
+  author: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  functionId: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  message: z.nullable(z.string()).optional(),
+  functionId: z.string().optional(),
+  id: z.string().optional(),
+  message: z.string().optional(),
 });
 
 export function functionCommitFromJSON(

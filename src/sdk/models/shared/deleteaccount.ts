@@ -14,7 +14,7 @@ export type DeleteAccount = {
   /**
    * The connectorId field.
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const DeleteAccount$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  connectorId: z.nullable(z.string()).optional(),
+  connectorId: z.string().optional(),
 });
 /** @internal */
 export type DeleteAccount$Outbound = {
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const DeleteAccount$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeleteAccount
 > = z.object({
-  connectorId: z.nullable(z.string()).optional(),
+  connectorId: z.string().optional(),
 });
 
 export function deleteAccountToJSON(deleteAccount: DeleteAccount): string {

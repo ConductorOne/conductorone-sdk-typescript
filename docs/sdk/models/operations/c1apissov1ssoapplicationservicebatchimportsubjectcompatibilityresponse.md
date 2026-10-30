@@ -1,0 +1,22 @@
+# C1ApiSsov1SSOApplicationServiceBatchImportSubjectCompatibilityResponse
+
+## Example Usage
+
+```typescript
+import { C1ApiSsov1SSOApplicationServiceBatchImportSubjectCompatibilityResponse } from "conductorone-sdk-typescript/sdk/models/operations";
+
+let value:
+  C1ApiSsov1SSOApplicationServiceBatchImportSubjectCompatibilityResponse = {
+    contentType: "<value>",
+    statusCode: 39118,
+  };
+```
+
+## Fields
+
+| Field                                                                                                                                                             | Type                                                                                                                                                              | Required                                                                                                                                                          | Description                                                                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `contentType`                                                                                                                                                     | *string*                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                | HTTP response content type for this operation                                                                                                                     |
+| `statusCode`                                                                                                                                                      | *number*                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                | HTTP response status code for this operation                                                                                                                      |
+| `rawResponse`                                                                                                                                                     | [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response)                                                                                             | :heavy_check_mark:                                                                                                                                                | Raw HTTP response; suitable for custom response parsing                                                                                                           |
+| `ssoApplicationServiceBatchImportSubjectCompatibilityResponse`                                                                                                    | [shared.SSOApplicationServiceBatchImportSubjectCompatibilityResponse](../../../sdk/models/shared/ssoapplicationservicebatchimportsubjectcompatibilityresponse.md) | :heavy_minus_sign:                                                                                                                                                | SSOApplicationServiceBatchImportSubjectCompatibilityResponse summarizes one<br/> bounded validation or apply batch.                                               |

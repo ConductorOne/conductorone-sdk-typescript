@@ -11,12 +11,12 @@ export type AddAppEntitlementOwnerRequest = {
   /**
    * The user_id field for the user to add as an owner of the app entitlement.
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
 export type AddAppEntitlementOwnerRequest$Outbound = {
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const AddAppEntitlementOwnerRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AddAppEntitlementOwnerRequest
 > = z.object({
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 
 export function addAppEntitlementOwnerRequestToJSON(

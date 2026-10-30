@@ -92,26 +92,26 @@ export type FormField = {
   /**
    * The description field.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   fileField?: FileField | null | undefined;
   int64Field?: Int64Field | null | undefined;
   /**
    * The name field.
    */
-  name?: string | null | undefined;
+  name?: string | undefined;
   oauth2Field?: Oauth2Field | null | undefined;
   /**
    * When true, this field is displayed to the user but cannot be edited.
    */
-  readOnly?: boolean | null | undefined;
+  readOnly?: boolean | undefined;
   /**
    * The required field.
    */
-  required?: boolean | null | undefined;
+  required?: boolean | undefined;
   sharedConfig?: SharedProviderConfig | null | undefined;
   stringField?: FormStringField | null | undefined;
   stringMapField?: FormStringMapField | null | undefined;
@@ -127,14 +127,14 @@ export const FormField$inboundSchema: z.ZodType<
 > = z.object({
   adminConfig: z.nullable(AdminProviderConfig$inboundSchema).optional(),
   boolField: z.nullable(BoolField$inboundSchema).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
   fileField: z.nullable(FileField$inboundSchema).optional(),
   int64Field: z.nullable(Int64Field$inboundSchema).optional(),
-  name: z.nullable(z.string()).optional(),
+  name: z.string().optional(),
   oauth2Field: z.nullable(Oauth2Field$inboundSchema).optional(),
-  readOnly: z.nullable(z.boolean()).optional(),
-  required: z.nullable(z.boolean()).optional(),
+  readOnly: z.boolean().optional(),
+  required: z.boolean().optional(),
   sharedConfig: z.nullable(SharedProviderConfig$inboundSchema).optional(),
   stringField: z.nullable(FormStringField$inboundSchema).optional(),
   stringMapField: z.nullable(FormStringMapField$inboundSchema).optional(),
@@ -145,14 +145,14 @@ export const FormField$inboundSchema: z.ZodType<
 export type FormField$Outbound = {
   adminConfig?: AdminProviderConfig$Outbound | null | undefined;
   boolField?: BoolField$Outbound | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
   fileField?: FileField$Outbound | null | undefined;
   int64Field?: Int64Field$Outbound | null | undefined;
-  name?: string | null | undefined;
+  name?: string | undefined;
   oauth2Field?: Oauth2Field$Outbound | null | undefined;
-  readOnly?: boolean | null | undefined;
-  required?: boolean | null | undefined;
+  readOnly?: boolean | undefined;
+  required?: boolean | undefined;
   sharedConfig?: SharedProviderConfig$Outbound | null | undefined;
   stringField?: FormStringField$Outbound | null | undefined;
   stringMapField?: FormStringMapField$Outbound | null | undefined;
@@ -168,14 +168,14 @@ export const FormField$outboundSchema: z.ZodType<
 > = z.object({
   adminConfig: z.nullable(AdminProviderConfig$outboundSchema).optional(),
   boolField: z.nullable(BoolField$outboundSchema).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
   fileField: z.nullable(FileField$outboundSchema).optional(),
   int64Field: z.nullable(Int64Field$outboundSchema).optional(),
-  name: z.nullable(z.string()).optional(),
+  name: z.string().optional(),
   oauth2Field: z.nullable(Oauth2Field$outboundSchema).optional(),
-  readOnly: z.nullable(z.boolean()).optional(),
-  required: z.nullable(z.boolean()).optional(),
+  readOnly: z.boolean().optional(),
+  required: z.boolean().optional(),
   sharedConfig: z.nullable(SharedProviderConfig$outboundSchema).optional(),
   stringField: z.nullable(FormStringField$outboundSchema).optional(),
   stringMapField: z.nullable(FormStringMapField$outboundSchema).optional(),

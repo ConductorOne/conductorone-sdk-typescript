@@ -14,11 +14,11 @@ export type ReviewerAttributeBinding = {
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The attributeKey field.
    */
-  attributeKey?: string | null | undefined;
+  attributeKey?: string | undefined;
 };
 
 /** @internal */
@@ -27,13 +27,13 @@ export const ReviewerAttributeBinding$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  attributeKey: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  attributeKey: z.string().optional(),
 });
 /** @internal */
 export type ReviewerAttributeBinding$Outbound = {
-  appId?: string | null | undefined;
-  attributeKey?: string | null | undefined;
+  appId?: string | undefined;
+  attributeKey?: string | undefined;
 };
 
 /** @internal */
@@ -42,8 +42,8 @@ export const ReviewerAttributeBinding$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ReviewerAttributeBinding
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  attributeKey: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  attributeKey: z.string().optional(),
 });
 
 export function reviewerAttributeBindingToJSON(

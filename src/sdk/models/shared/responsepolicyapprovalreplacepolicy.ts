@@ -20,7 +20,7 @@ export type ResponsePolicyApprovalReplacePolicy = {
   /**
    * The comment field.
    */
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   /**
    * The policySteps field.
    */
@@ -33,12 +33,12 @@ export const ResponsePolicyApprovalReplacePolicy$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  comment: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
   policySteps: z.nullable(z.array(PolicyStep$inboundSchema)).optional(),
 });
 /** @internal */
 export type ResponsePolicyApprovalReplacePolicy$Outbound = {
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   policySteps?: Array<PolicyStep$Outbound> | null | undefined;
 };
 
@@ -48,7 +48,7 @@ export const ResponsePolicyApprovalReplacePolicy$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponsePolicyApprovalReplacePolicy
 > = z.object({
-  comment: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
   policySteps: z.nullable(z.array(PolicyStep$outboundSchema)).optional(),
 });
 

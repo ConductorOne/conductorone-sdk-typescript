@@ -17,7 +17,7 @@ export type DefaultBehavior = {
    * @remarks
    *  this can happen automatically and doesn't need any extra info
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
 };
 
 /** @internal */
@@ -26,11 +26,11 @@ export const DefaultBehavior$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  connectorId: z.nullable(z.string()).optional(),
+  connectorId: z.string().optional(),
 });
 /** @internal */
 export type DefaultBehavior$Outbound = {
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
 };
 
 /** @internal */
@@ -39,7 +39,7 @@ export const DefaultBehavior$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DefaultBehavior
 > = z.object({
-  connectorId: z.nullable(z.string()).optional(),
+  connectorId: z.string().optional(),
 });
 
 export function defaultBehaviorToJSON(

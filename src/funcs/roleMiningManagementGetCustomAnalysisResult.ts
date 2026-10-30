@@ -29,7 +29,10 @@ import { Result } from "../sdk/types/fp.js";
  * Get Custom Analysis Result
  *
  * @remarks
- * Invokes the c1.api.role_mining_management.v1.RoleMiningManagementService.GetCustomAnalysisResult method.
+ * GetCustomAnalysisResult returns the status and results of a custom cohort
+ *  analysis started with TriggerCustomAnalysis, including entitlement
+ *  coverage, entitlement clusters, attribute facets, and cutoff impact
+ *  points. Requires the agentic role mining feature.
  */
 export function roleMiningManagementGetCustomAnalysisResult(
   client: ConductoroneSDKTypescriptCore,

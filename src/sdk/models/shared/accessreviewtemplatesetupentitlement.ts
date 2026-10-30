@@ -14,37 +14,37 @@ export type AccessReviewTemplateSetupEntitlement = {
   /**
    * The ID of the access review template this entitlement belongs to.
    */
-  accessReviewTemplateId?: string | null | undefined;
+  accessReviewTemplateId?: string | undefined;
   /**
    * The ID of the entitlement to be reviewed.
    */
-  appEntitlementId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
   /**
    * The ID of the application that owns the entitlement.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The ID of the specific resource associated with this entitlement, if applicable.
    */
-  appResourceId?: string | null | undefined;
+  appResourceId?: string | undefined;
   /**
    * The ID of the resource type associated with this entitlement, if applicable.
    */
-  appResourceTypeId?: string | null | undefined;
+  appResourceTypeId?: string | undefined;
   createdAt?: Date | null | undefined;
   /**
    * An override policy ID for this specific entitlement. Populated when use_policy_override is enabled on the template.
    */
-  customPolicyId?: string | null | undefined;
+  customPolicyId?: string | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * The ID of the review policy applied to this entitlement. Defaults to the template policy.
    */
-  policyId?: string | null | undefined;
+  policyId?: string | undefined;
   /**
    * The tenant that owns this setup entitlement.
    */
-  tenantId?: string | null | undefined;
+  tenantId?: string | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -54,20 +54,20 @@ export const AccessReviewTemplateSetupEntitlement$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accessReviewTemplateId: z.nullable(z.string()).optional(),
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appResourceId: z.nullable(z.string()).optional(),
-  appResourceTypeId: z.nullable(z.string()).optional(),
+  accessReviewTemplateId: z.string().optional(),
+  appEntitlementId: z.string().optional(),
+  appId: z.string().optional(),
+  appResourceId: z.string().optional(),
+  appResourceTypeId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  customPolicyId: z.nullable(z.string()).optional(),
+  customPolicyId: z.string().optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  policyId: z.nullable(z.string()).optional(),
-  tenantId: z.nullable(z.string()).optional(),
+  policyId: z.string().optional(),
+  tenantId: z.string().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

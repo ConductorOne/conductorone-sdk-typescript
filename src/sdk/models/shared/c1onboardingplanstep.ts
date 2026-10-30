@@ -14,19 +14,19 @@ export type C1OnboardingPlanStep = {
   /**
    * The agentAssisted field.
    */
-  agentAssisted?: boolean | null | undefined;
+  agentAssisted?: boolean | undefined;
   /**
    * The description field.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The title field.
    */
-  title?: string | null | undefined;
+  title?: string | undefined;
 };
 
 /** @internal */
@@ -35,10 +35,10 @@ export const C1OnboardingPlanStep$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  agentAssisted: z.nullable(z.boolean()).optional(),
-  description: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  title: z.nullable(z.string()).optional(),
+  agentAssisted: z.boolean().optional(),
+  description: z.string().optional(),
+  id: z.string().optional(),
+  title: z.string().optional(),
 });
 
 export function c1OnboardingPlanStepFromJSON(

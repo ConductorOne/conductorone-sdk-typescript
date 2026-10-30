@@ -14,12 +14,12 @@ export type SkippedAction = {
   /**
    * The ID of the policy step that was created as a result of this skipping.
    */
-  newPolicyStepId?: string | null | undefined;
+  newPolicyStepId?: string | undefined;
   skippedAt?: Date | null | undefined;
   /**
    * The UserID of the user who skipped this step.
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -28,17 +28,17 @@ export const SkippedAction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  newPolicyStepId: z.nullable(z.string()).optional(),
+  newPolicyStepId: z.string().optional(),
   skippedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 /** @internal */
 export type SkippedAction$Outbound = {
-  newPolicyStepId?: string | null | undefined;
+  newPolicyStepId?: string | undefined;
   skippedAt?: string | null | undefined;
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -47,9 +47,9 @@ export const SkippedAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SkippedAction
 > = z.object({
-  newPolicyStepId: z.nullable(z.string()).optional(),
+  newPolicyStepId: z.string().optional(),
   skippedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 
 export function skippedActionToJSON(skippedAction: SkippedAction): string {

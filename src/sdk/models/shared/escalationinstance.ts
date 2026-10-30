@@ -46,12 +46,12 @@ export type EscalationInstance = {
   /**
    * The alreadyEscalated field.
    */
-  alreadyEscalated?: boolean | null | undefined;
+  alreadyEscalated?: boolean | undefined;
   cancelTicket?: EscalationInstanceCancelTicket | null | undefined;
   /**
    * The escalationComment field.
    */
-  escalationComment?: string | null | undefined;
+  escalationComment?: string | undefined;
   expiresAt?: Date | null | undefined;
   reassignToApprovers?:
     | EscalationInstanceReassignToApprovers
@@ -67,10 +67,10 @@ export const EscalationInstance$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  alreadyEscalated: z.nullable(z.boolean()).optional(),
+  alreadyEscalated: z.boolean().optional(),
   cancelTicket: z.nullable(EscalationInstanceCancelTicket$inboundSchema)
     .optional(),
-  escalationComment: z.nullable(z.string()).optional(),
+  escalationComment: z.string().optional(),
   expiresAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -83,9 +83,9 @@ export const EscalationInstance$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type EscalationInstance$Outbound = {
-  alreadyEscalated?: boolean | null | undefined;
+  alreadyEscalated?: boolean | undefined;
   cancelTicket?: EscalationInstanceCancelTicket$Outbound | null | undefined;
-  escalationComment?: string | null | undefined;
+  escalationComment?: string | undefined;
   expiresAt?: string | null | undefined;
   reassignToApprovers?:
     | EscalationInstanceReassignToApprovers$Outbound
@@ -101,10 +101,10 @@ export const EscalationInstance$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EscalationInstance
 > = z.object({
-  alreadyEscalated: z.nullable(z.boolean()).optional(),
+  alreadyEscalated: z.boolean().optional(),
   cancelTicket: z.nullable(EscalationInstanceCancelTicket$outboundSchema)
     .optional(),
-  escalationComment: z.nullable(z.string()).optional(),
+  escalationComment: z.string().optional(),
   expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   reassignToApprovers: z.nullable(
     EscalationInstanceReassignToApprovers$outboundSchema,

@@ -23,15 +23,15 @@ export type AppEntitlementView = {
   /**
    * JSONPATH expression indicating the location of the App object in the  array.
    */
-  appPath?: string | null | undefined;
+  appPath?: string | undefined;
   /**
    * JSONPATH expression indicating the location of the App Resource Type object in the expanded array.
    */
-  appResourcePath?: string | null | undefined;
+  appResourcePath?: string | undefined;
   /**
    * JSONPATH expression indicating the location of the App Resource object in the  array.
    */
-  appResourceTypePath?: string | null | undefined;
+  appResourceTypePath?: string | undefined;
   objectPermissions?: ActorObjectPermissions | null | undefined;
 };
 
@@ -42,9 +42,9 @@ export const AppEntitlementView$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   appEntitlement: z.nullable(AppEntitlement$inboundSchema).optional(),
-  appPath: z.nullable(z.string()).optional(),
-  appResourcePath: z.nullable(z.string()).optional(),
-  appResourceTypePath: z.nullable(z.string()).optional(),
+  appPath: z.string().optional(),
+  appResourcePath: z.string().optional(),
+  appResourceTypePath: z.string().optional(),
   objectPermissions: z.nullable(ActorObjectPermissions$inboundSchema)
     .optional(),
 });

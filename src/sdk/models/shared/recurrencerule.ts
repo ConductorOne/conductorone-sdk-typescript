@@ -10,7 +10,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The frequency field.
+ * Frequency of the recurrence: FREQUENCY_DAILY, FREQUENCY_WEEKLY, FREQUENCY_MONTHLY, or FREQUENCY_YEARLY.
+ *
+ * @remarks
+ *  Use FREQUENCY_NONE for a non-recurring schedule.
  */
 export const Frequency = {
   FrequencyUnspecified: "FREQUENCY_UNSPECIFIED",
@@ -21,7 +24,10 @@ export const Frequency = {
   FrequencyYearly: "FREQUENCY_YEARLY",
 } as const;
 /**
- * The frequency field.
+ * Frequency of the recurrence: FREQUENCY_DAILY, FREQUENCY_WEEKLY, FREQUENCY_MONTHLY, or FREQUENCY_YEARLY.
+ *
+ * @remarks
+ *  Use FREQUENCY_NONE for a non-recurring schedule.
  */
 export type Frequency = OpenEnum<typeof Frequency>;
 
@@ -37,13 +43,16 @@ export type Frequency = OpenEnum<typeof Frequency>;
 export type RecurrenceRule = {
   endDate?: Date | null | undefined;
   /**
-   * The frequency field.
+   * Frequency of the recurrence: FREQUENCY_DAILY, FREQUENCY_WEEKLY, FREQUENCY_MONTHLY, or FREQUENCY_YEARLY.
+   *
+   * @remarks
+   *  Use FREQUENCY_NONE for a non-recurring schedule.
    */
-  frequency?: Frequency | null | undefined;
+  frequency: Frequency;
   /**
    * The interval field.
    */
-  interval?: number | null | undefined;
+  interval?: number | undefined;
   /**
    * The occurrences field.
    *
@@ -77,8 +86,8 @@ export const RecurrenceRule$inboundSchema: z.ZodType<
   endDate: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  frequency: z.nullable(Frequency$inboundSchema).optional(),
-  interval: z.nullable(z.number().int()).optional(),
+  frequency: Frequency$inboundSchema,
+  interval: z.number().int().optional(),
   occurrences: z.nullable(z.number().int()).optional(),
   startDate: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -87,8 +96,8 @@ export const RecurrenceRule$inboundSchema: z.ZodType<
 /** @internal */
 export type RecurrenceRule$Outbound = {
   endDate?: string | null | undefined;
-  frequency?: string | null | undefined;
-  interval?: number | null | undefined;
+  frequency: string;
+  interval?: number | undefined;
   occurrences?: number | null | undefined;
   startDate?: string | null | undefined;
 };
@@ -100,8 +109,8 @@ export const RecurrenceRule$outboundSchema: z.ZodType<
   RecurrenceRule
 > = z.object({
   endDate: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  frequency: z.nullable(Frequency$outboundSchema).optional(),
-  interval: z.nullable(z.number().int()).optional(),
+  frequency: Frequency$outboundSchema,
+  interval: z.number().int().optional(),
   occurrences: z.nullable(z.number().int()).optional(),
   startDate: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });

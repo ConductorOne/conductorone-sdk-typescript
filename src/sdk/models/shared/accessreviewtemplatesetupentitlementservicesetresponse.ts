@@ -15,6 +15,14 @@ import {
   AccessReviewScopeV2$inboundSchema,
 } from "./accessreviewscopev2.js";
 import {
+  AccessReviewTemplateExcludedEntitlement,
+  AccessReviewTemplateExcludedEntitlement$inboundSchema,
+} from "./accessreviewtemplateexcludedentitlement.js";
+import {
+  AccessReviewTemplateExcludedResourceType,
+  AccessReviewTemplateExcludedResourceType$inboundSchema,
+} from "./accessreviewtemplateexcludedresourcetype.js";
+import {
   AccessReviewTemplateSetupEntitlementView,
   AccessReviewTemplateSetupEntitlementView$inboundSchema,
 } from "./accessreviewtemplatesetupentitlementview.js";
@@ -34,6 +42,26 @@ export type AccessReviewTemplateSetupEntitlementServiceSetResponseExpanded = {
  * The AccessReviewTemplateSetupEntitlementServiceSetResponse message.
  */
 export type AccessReviewTemplateSetupEntitlementServiceSetResponse = {
+  /**
+   * The entitlements excluded from the template's scope. Only returned by
+   *
+   * @remarks
+   *  GetScopeAndEntitlements, and only when scope sets excluded_specific_resources.
+   */
+  excludedEntitlements?:
+    | Array<AccessReviewTemplateExcludedEntitlement>
+    | null
+    | undefined;
+  /**
+   * The resource types excluded from a user-first template's scope. Only returned by
+   *
+   * @remarks
+   *  GetScopeAndEntitlements, and only when scope sets excluded_resource_type_selections.
+   */
+  excludedResourceTypes?:
+    | Array<AccessReviewTemplateExcludedResourceType>
+    | null
+    | undefined;
   /**
    * Related objects requested via the expand mask.
    */
@@ -88,6 +116,12 @@ export const AccessReviewTemplateSetupEntitlementServiceSetResponse$inboundSchem
     z.ZodTypeDef,
     unknown
   > = z.object({
+    excludedEntitlements: z.nullable(
+      z.array(AccessReviewTemplateExcludedEntitlement$inboundSchema),
+    ).optional(),
+    excludedResourceTypes: z.nullable(
+      z.array(AccessReviewTemplateExcludedResourceType$inboundSchema),
+    ).optional(),
     expanded: z.nullable(
       z.array(z.lazy(() =>
         AccessReviewTemplateSetupEntitlementServiceSetResponseExpanded$inboundSchema

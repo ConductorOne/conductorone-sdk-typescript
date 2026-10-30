@@ -14,26 +14,26 @@ export type ScheduleTrigger = {
   /**
    * The advanced field.
    */
-  advanced?: boolean | null | undefined;
+  advanced?: boolean | undefined;
   /**
    * The condition field.
    */
-  condition?: string | null | undefined;
+  condition?: string | undefined;
   /**
    * The cronSpec field.
    */
-  cronSpec?: string | null | undefined;
+  cronSpec?: string | undefined;
   /**
    * The skipIfTrueCel field.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  skipIfTrueCel?: string | null | undefined;
+  skipIfTrueCel?: string | undefined;
   start?: Date | null | undefined;
   /**
    * The timezone field.
    */
-  timezone?: string | null | undefined;
+  timezone?: string | undefined;
 };
 
 /** @internal */
@@ -42,23 +42,23 @@ export const ScheduleTrigger$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  advanced: z.nullable(z.boolean()).optional(),
-  condition: z.nullable(z.string()).optional(),
-  cronSpec: z.nullable(z.string()).optional(),
-  skipIfTrueCel: z.nullable(z.string()).optional(),
+  advanced: z.boolean().optional(),
+  condition: z.string().optional(),
+  cronSpec: z.string().optional(),
+  skipIfTrueCel: z.string().optional(),
   start: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  timezone: z.nullable(z.string()).optional(),
+  timezone: z.string().optional(),
 });
 /** @internal */
 export type ScheduleTrigger$Outbound = {
-  advanced?: boolean | null | undefined;
-  condition?: string | null | undefined;
-  cronSpec?: string | null | undefined;
-  skipIfTrueCel?: string | null | undefined;
+  advanced?: boolean | undefined;
+  condition?: string | undefined;
+  cronSpec?: string | undefined;
+  skipIfTrueCel?: string | undefined;
   start?: string | null | undefined;
-  timezone?: string | null | undefined;
+  timezone?: string | undefined;
 };
 
 /** @internal */
@@ -67,12 +67,12 @@ export const ScheduleTrigger$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ScheduleTrigger
 > = z.object({
-  advanced: z.nullable(z.boolean()).optional(),
-  condition: z.nullable(z.string()).optional(),
-  cronSpec: z.nullable(z.string()).optional(),
-  skipIfTrueCel: z.nullable(z.string()).optional(),
+  advanced: z.boolean().optional(),
+  condition: z.string().optional(),
+  cronSpec: z.string().optional(),
+  skipIfTrueCel: z.string().optional(),
   start: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  timezone: z.nullable(z.string()).optional(),
+  timezone: z.string().optional(),
 });
 
 export function scheduleTriggerToJSON(

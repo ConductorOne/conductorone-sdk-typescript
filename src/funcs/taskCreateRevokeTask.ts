@@ -30,7 +30,7 @@ import { Result } from "../sdk/types/fp.js";
  * Create Revoke Task
  *
  * @remarks
- * Create a revoke task
+ * Create a task to revoke access. Specify the target using identityUserId (a C1 user ID) or appUserId (an application account ID); the target is not inferred from the caller.
  */
 export function taskCreateRevokeTask(
   client: ConductoroneSDKTypescriptCore,

@@ -8,6 +8,10 @@ import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  C1EdgeSettings,
+  C1EdgeSettings$inboundSchema,
+} from "./c1edgesettings.js";
 import { OIDCSettings, OIDCSettings$inboundSchema } from "./oidcsettings.js";
 import {
   SPIFFESettings,
@@ -32,6 +36,7 @@ export const WellKnownProvider = {
   WellKnownWorkloadProviderAwsIamOutbound:
     "WELL_KNOWN_WORKLOAD_PROVIDER_AWS_IAM_OUTBOUND",
   WellKnownWorkloadProviderSpiffe: "WELL_KNOWN_WORKLOAD_PROVIDER_SPIFFE",
+  WellKnownWorkloadProviderC1Edge: "WELL_KNOWN_WORKLOAD_PROVIDER_C1_EDGE",
 } as const;
 /**
  * Well-known provider type. Drives UX (wizard presets, docs, icons).
@@ -58,32 +63,34 @@ export type WellKnownProvider = OpenEnum<typeof WellKnownProvider>;
  * This message contains a oneof named settings. Only a single field of the following list may be set at a time:
  *   - oidc
  *   - spiffe
+ *   - c1Edge
  */
 export type WorkloadFederationProvider = {
+  c1Edge?: C1EdgeSettings | null | undefined;
   createdAt?: Date | null | undefined;
   /**
    * A description of what this provider is for.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * Whether the provider is disabled. Disabled providers reject all token exchanges.
    */
-  disabled?: boolean | null | undefined;
+  disabled?: boolean | undefined;
   /**
    * The display name of the provider.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The unique ID of the provider.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * Canonical issuer URL. https:// for OIDC providers, spiffe:// for SPIFFE
    *
    * @remarks
    *  trust domains. Unique within tenant. Immutable after creation.
    */
-  issuerUrl?: string | null | undefined;
+  issuerUrl?: string | undefined;
   oidc?: OIDCSettings | null | undefined;
   spiffe?: SPIFFESettings | null | undefined;
   updatedAt?: Date | null | undefined;
@@ -93,7 +100,7 @@ export type WorkloadFederationProvider = {
    * @remarks
    *  Set at creation time, immutable.
    */
-  wellKnownProvider?: WellKnownProvider | null | undefined;
+  wellKnownProvider?: WellKnownProvider | undefined;
 };
 
 /** @internal */
@@ -109,20 +116,21 @@ export const WorkloadFederationProvider$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  c1Edge: z.nullable(C1EdgeSettings$inboundSchema).optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  description: z.nullable(z.string()).optional(),
-  disabled: z.nullable(z.boolean()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  issuerUrl: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  disabled: z.boolean().optional(),
+  displayName: z.string().optional(),
+  id: z.string().optional(),
+  issuerUrl: z.string().optional(),
   oidc: z.nullable(OIDCSettings$inboundSchema).optional(),
   spiffe: z.nullable(SPIFFESettings$inboundSchema).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  wellKnownProvider: z.nullable(WellKnownProvider$inboundSchema).optional(),
+  wellKnownProvider: WellKnownProvider$inboundSchema.optional(),
 });
 
 export function workloadFederationProviderFromJSON(

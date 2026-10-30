@@ -1,6 +1,7 @@
 # ListAIGovernanceSettingsHistoryResponse
 
-The ListAIGovernanceSettingsHistoryResponse message.
+ListAIGovernanceSettingsHistoryResponse contains a page of AI governance
+ settings change-history entries, newest first.
 
 ## Example Usage
 
@@ -14,5 +15,5 @@ let value: ListAIGovernanceSettingsHistoryResponse = {};
 
 | Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
 | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `list`                                                                                                      | [shared.AIGovernanceSettingsHistoryEntry](../../../sdk/models/shared/aigovernancesettingshistoryentry.md)[] | :heavy_minus_sign:                                                                                          | The list field.                                                                                             |
-| `nextPageToken`                                                                                             | *string*                                                                                                    | :heavy_minus_sign:                                                                                          | The nextPageToken field.                                                                                    |
+| `list`                                                                                                      | [shared.AIGovernanceSettingsHistoryEntry](../../../sdk/models/shared/aigovernancesettingshistoryentry.md)[] | :heavy_minus_sign:                                                                                          | The page of history entries, newest first.                                                                  |
+| `nextPageToken`                                                                                             | *string*                                                                                                    | :heavy_minus_sign:                                                                                          | Pagination token for the next page, or empty if there are no more results.                                  |

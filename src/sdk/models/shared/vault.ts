@@ -28,16 +28,16 @@ export type Vault = {
   /**
    * A free-text description of the vault's purpose or configuration.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The human-readable name of the vault.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   groupAuthzVault?: GroupAuthzVault | null | undefined;
   /**
    * The unique identifier of the vault.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   magicVault?: MagicVault | null | undefined;
   updatedAt?: Date | null | undefined;
 };
@@ -52,10 +52,10 @@ export const Vault$inboundSchema: z.ZodType<Vault, z.ZodTypeDef, unknown> = z
     deletedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    description: z.nullable(z.string()).optional(),
-    displayName: z.nullable(z.string()).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
     groupAuthzVault: z.nullable(GroupAuthzVault$inboundSchema).optional(),
-    id: z.nullable(z.string()).optional(),
+    id: z.string().optional(),
     magicVault: z.nullable(MagicVault$inboundSchema).optional(),
     updatedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),

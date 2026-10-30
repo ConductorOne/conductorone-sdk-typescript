@@ -11,6 +11,11 @@ import {
   PolicyPostActions$outboundSchema,
 } from "./policypostactions.js";
 import {
+  PolicyScope,
+  PolicyScope$Outbound,
+  PolicyScope$outboundSchema,
+} from "./policyscope.js";
+import {
   PolicyStepsInput,
   PolicyStepsInput$Outbound,
   PolicyStepsInput$outboundSchema,
@@ -53,13 +58,23 @@ export type CreatePolicyRequest = {
    */
   annotations?: { [k: string]: string } | undefined;
   /**
+   * When set, the new policy's baseline defers to another policy of the same
+   *
+   * @remarks
+   *  type when no rule matches, instead of an inline baseline step list.
+   *  Mutually exclusive with the baseline entry in policy_steps. Requires the
+   *  POLICY_REFERENCES_POLICY feature; obeys the same depth/cycle/self rules as
+   *  Rule.policy_id.
+   */
+  baselinePolicyId?: string | undefined;
+  /**
    * The description of the new policy.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The display name of the new policy.
    */
-  displayName: string | null;
+  displayName: string;
   /**
    * Step sequences for this policy. The map must include a baseline entry keyed
    *
@@ -71,7 +86,7 @@ export type CreatePolicyRequest = {
   /**
    * The type of policy to create (grant, revoke, or certify).
    */
-  policyType?: CreatePolicyRequestPolicyType | null | undefined;
+  policyType?: CreatePolicyRequestPolicyType | undefined;
   /**
    * Ordered actions to execute after the policy completes processing.
    */
@@ -81,11 +96,16 @@ export type CreatePolicyRequest = {
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  reassignTasksToDelegates?: boolean | null | undefined;
+  reassignTasksToDelegates?: boolean | undefined;
   /**
    * Conditional routing rules. See the Policy message for details on evaluation order.
+   *
+   * @remarks
+   *  The public Create API enforces the tenant's conditional-rules-per-policy quota
+   *  (default 16), excluding the baseline. Contact support to adjust this tenant quota.
    */
   rules?: Array<Rule> | null | undefined;
+  scope?: PolicyScope | null | undefined;
 };
 
 /** @internal */
@@ -98,13 +118,15 @@ export const CreatePolicyRequestPolicyType$outboundSchema: z.ZodType<
 /** @internal */
 export type CreatePolicyRequest$Outbound = {
   annotations?: { [k: string]: string } | undefined;
-  description?: string | null | undefined;
-  displayName: string | null;
+  baselinePolicyId?: string | undefined;
+  description?: string | undefined;
+  displayName: string;
   policySteps?: { [k: string]: PolicyStepsInput$Outbound } | undefined;
-  policyType?: string | null | undefined;
+  policyType?: string | undefined;
   postActions?: Array<PolicyPostActions$Outbound> | null | undefined;
-  reassignTasksToDelegates?: boolean | null | undefined;
+  reassignTasksToDelegates?: boolean | undefined;
   rules?: Array<Rule$Outbound> | null | undefined;
+  scope?: PolicyScope$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -114,14 +136,15 @@ export const CreatePolicyRequest$outboundSchema: z.ZodType<
   CreatePolicyRequest
 > = z.object({
   annotations: z.record(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()),
+  baselinePolicyId: z.string().optional(),
+  description: z.string().optional(),
+  displayName: z.string(),
   policySteps: z.record(PolicyStepsInput$outboundSchema).optional(),
-  policyType: z.nullable(CreatePolicyRequestPolicyType$outboundSchema)
-    .optional(),
+  policyType: CreatePolicyRequestPolicyType$outboundSchema.optional(),
   postActions: z.nullable(z.array(PolicyPostActions$outboundSchema)).optional(),
-  reassignTasksToDelegates: z.nullable(z.boolean()).optional(),
+  reassignTasksToDelegates: z.boolean().optional(),
   rules: z.nullable(z.array(Rule$outboundSchema)).optional(),
+  scope: z.nullable(PolicyScope$outboundSchema).optional(),
 });
 
 export function createPolicyRequestToJSON(

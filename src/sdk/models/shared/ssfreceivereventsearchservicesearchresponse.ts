@@ -22,7 +22,7 @@ export type SSFReceiverEventSearchServiceSearchResponse = {
   /**
    * Token to retrieve the next page. Empty when there are no more results.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -33,7 +33,7 @@ export const SSFReceiverEventSearchServiceSearchResponse$inboundSchema:
     unknown
   > = z.object({
     list: z.nullable(z.array(SSFReceiverEvent$inboundSchema)).optional(),
-    nextPageToken: z.nullable(z.string()).optional(),
+    nextPageToken: z.string().optional(),
   });
 
 export function ssfReceiverEventSearchServiceSearchResponseFromJSON(

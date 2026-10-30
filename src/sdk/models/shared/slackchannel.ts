@@ -12,13 +12,28 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type SlackChannel = {
   /**
+   * Existing Slack channel ID (e.g. "C0123ABCD"). Set with is_channel_id=true to
+   *
+   * @remarks
+   *  target an existing channel instead of creating one by name.
+   */
+  channelId?: string | undefined;
+  /**
    * The description field.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
-   * The name field.
+   * When true, channel_id identifies an existing channel to use as-is: the
+   *
+   * @remarks
+   *  backend resolves it by ID (conversations.info) and fails if it is missing or
+   *  the bot cannot access it. It never creates or searches by name.
    */
-  name?: string | null | undefined;
+  isChannelId?: boolean | undefined;
+  /**
+   * Channel name to create/resolve. Required unless is_channel_id is true.
+   */
+  name?: string | undefined;
 };
 
 /** @internal */
@@ -27,13 +42,17 @@ export const SlackChannel$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  description: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
+  channelId: z.string().optional(),
+  description: z.string().optional(),
+  isChannelId: z.boolean().optional(),
+  name: z.string().optional(),
 });
 /** @internal */
 export type SlackChannel$Outbound = {
-  description?: string | null | undefined;
-  name?: string | null | undefined;
+  channelId?: string | undefined;
+  description?: string | undefined;
+  isChannelId?: boolean | undefined;
+  name?: string | undefined;
 };
 
 /** @internal */
@@ -42,8 +61,10 @@ export const SlackChannel$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SlackChannel
 > = z.object({
-  description: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
+  channelId: z.string().optional(),
+  description: z.string().optional(),
+  isChannelId: z.boolean().optional(),
+  name: z.string().optional(),
 });
 
 export function slackChannelToJSON(slackChannel: SlackChannel): string {

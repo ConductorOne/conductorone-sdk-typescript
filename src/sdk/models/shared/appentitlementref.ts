@@ -14,11 +14,11 @@ export type AppEntitlementRef = {
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -27,13 +27,13 @@ export const AppEntitlementRef$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  id: z.string().optional(),
 });
 /** @internal */
 export type AppEntitlementRef$Outbound = {
-  appId?: string | null | undefined;
-  id?: string | null | undefined;
+  appId?: string | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -42,8 +42,8 @@ export const AppEntitlementRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppEntitlementRef
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  id: z.string().optional(),
 });
 
 export function appEntitlementRefToJSON(

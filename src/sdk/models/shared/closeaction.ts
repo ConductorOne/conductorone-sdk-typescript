@@ -26,7 +26,7 @@ export type CloseAction = {
   /**
    * If true, the step will use the subject user of the automation as the subject.
    */
-  useSubjectUser?: boolean | null | undefined;
+  useSubjectUser?: boolean | undefined;
   /**
    * The userIdCel field.
    *
@@ -44,13 +44,13 @@ export const CloseAction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  useSubjectUser: z.nullable(z.boolean()).optional(),
+  useSubjectUser: z.boolean().optional(),
   userIdCel: z.nullable(z.string()).optional(),
   userRef: z.nullable(UserRef$inboundSchema).optional(),
 });
 /** @internal */
 export type CloseAction$Outbound = {
-  useSubjectUser?: boolean | null | undefined;
+  useSubjectUser?: boolean | undefined;
   userIdCel?: string | null | undefined;
   userRef?: UserRef$Outbound | null | undefined;
 };
@@ -61,7 +61,7 @@ export const CloseAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CloseAction
 > = z.object({
-  useSubjectUser: z.nullable(z.boolean()).optional(),
+  useSubjectUser: z.boolean().optional(),
   userIdCel: z.nullable(z.string()).optional(),
   userRef: z.nullable(UserRef$outboundSchema).optional(),
 });

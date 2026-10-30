@@ -27,29 +27,29 @@ export type CreateStepUpProviderRequest = {
   /**
    * The OAuth2 client ID used to authenticate with the step-up provider.
    */
-  clientId?: string | null | undefined;
+  clientId?: string | undefined;
   /**
    * The OAuth2 client secret. Write-only; never returned in responses.
    */
-  clientSecret?: string | null | undefined;
+  clientSecret?: string | undefined;
   /**
    * The human-readable name for the new step-up provider.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The OIDC issuer URL for the step-up provider.
    */
-  issuerUrl?: string | null | undefined;
+  issuerUrl?: string | undefined;
   microsoft?: StepUpMicrosoftSettings | null | undefined;
   oauth2?: StepUpOAuth2Settings | null | undefined;
 };
 
 /** @internal */
 export type CreateStepUpProviderRequest$Outbound = {
-  clientId?: string | null | undefined;
-  clientSecret?: string | null | undefined;
-  displayName?: string | null | undefined;
-  issuerUrl?: string | null | undefined;
+  clientId?: string | undefined;
+  clientSecret?: string | undefined;
+  displayName?: string | undefined;
+  issuerUrl?: string | undefined;
   microsoft?: StepUpMicrosoftSettings$Outbound | null | undefined;
   oauth2?: StepUpOAuth2Settings$Outbound | null | undefined;
 };
@@ -60,10 +60,10 @@ export const CreateStepUpProviderRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateStepUpProviderRequest
 > = z.object({
-  clientId: z.nullable(z.string()).optional(),
-  clientSecret: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  issuerUrl: z.nullable(z.string()).optional(),
+  clientId: z.string().optional(),
+  clientSecret: z.string().optional(),
+  displayName: z.string().optional(),
+  issuerUrl: z.string().optional(),
   microsoft: z.nullable(StepUpMicrosoftSettings$outboundSchema).optional(),
   oauth2: z.nullable(StepUpOAuth2Settings$outboundSchema).optional(),
 });

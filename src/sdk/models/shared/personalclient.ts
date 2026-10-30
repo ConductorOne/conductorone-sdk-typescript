@@ -21,18 +21,18 @@ export type PersonalClient = {
   /**
    * The clientID of the credential.
    */
-  clientId?: string | null | undefined;
+  clientId?: string | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * The display name of the personal client credential.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   expiresTime?: Date | null | undefined;
   /**
    * The unique ID of the personal client credential.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   lastUsedAt?: Date | null | undefined;
   /**
    * scoped_roles provides a list of IAM Roles
@@ -47,7 +47,7 @@ export type PersonalClient = {
   /**
    * The ID of the user that this credential is created for.
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -57,18 +57,18 @@ export const PersonalClient$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   allowSourceCidr: z.nullable(z.array(z.string())).optional(),
-  clientId: z.nullable(z.string()).optional(),
+  clientId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
   expiresTime: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
   lastUsedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -76,7 +76,7 @@ export const PersonalClient$inboundSchema: z.ZodType<
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 
 export function personalClientFromJSON(

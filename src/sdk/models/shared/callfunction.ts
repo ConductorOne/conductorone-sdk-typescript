@@ -23,7 +23,7 @@ export type CallFunction = {
   /**
    * The functionId field.
    */
-  functionId?: string | null | undefined;
+  functionId?: string | undefined;
 };
 
 /** @internal */
@@ -33,12 +33,12 @@ export const CallFunction$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   args: z.record(z.string()).optional(),
-  functionId: z.nullable(z.string()).optional(),
+  functionId: z.string().optional(),
 });
 /** @internal */
 export type CallFunction$Outbound = {
   args?: { [k: string]: string } | undefined;
-  functionId?: string | null | undefined;
+  functionId?: string | undefined;
 };
 
 /** @internal */
@@ -48,7 +48,7 @@ export const CallFunction$outboundSchema: z.ZodType<
   CallFunction
 > = z.object({
   args: z.record(z.string()).optional(),
-  functionId: z.nullable(z.string()).optional(),
+  functionId: z.string().optional(),
 });
 
 export function callFunctionToJSON(callFunction: CallFunction): string {

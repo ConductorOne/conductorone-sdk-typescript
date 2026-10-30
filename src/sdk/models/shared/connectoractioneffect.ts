@@ -50,51 +50,51 @@ export type ConnectorActionEffect = {
   /**
    * The appEntitlementId field.
    */
-  appEntitlementId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The appUserId field.
    */
-  appUserId?: string | null | undefined;
+  appUserId?: string | undefined;
   /**
    * The connectorActionId field.
    */
-  connectorActionId?: string | null | undefined;
+  connectorActionId?: string | undefined;
   /**
    * The connectorEntitlementId field.
    */
-  connectorEntitlementId?: string | null | undefined;
+  connectorEntitlementId?: string | undefined;
   /**
    * The connectorGrantId field.
    */
-  connectorGrantId?: string | null | undefined;
+  connectorGrantId?: string | undefined;
   /**
    * The connectorId field.
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
   /**
    * The effectSource field.
    */
-  effectSource?: EffectSource | null | undefined;
+  effectSource?: EffectSource | undefined;
   /**
    * The effectType field.
    */
-  effectType?: EffectType | null | undefined;
+  effectType?: EffectType | undefined;
   /**
    * The exclusionGroupId field.
    */
-  exclusionGroupId?: string | null | undefined;
+  exclusionGroupId?: string | undefined;
   /**
    * The replacedConnectorGrantId field.
    */
-  replacedConnectorGrantId?: string | null | undefined;
+  replacedConnectorGrantId?: string | undefined;
   /**
    * The unresolvedReason field.
    */
-  unresolvedReason?: string | null | undefined;
+  unresolvedReason?: string | undefined;
 };
 
 /** @internal */
@@ -117,18 +117,18 @@ export const ConnectorActionEffect$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appUserId: z.nullable(z.string()).optional(),
-  connectorActionId: z.nullable(z.string()).optional(),
-  connectorEntitlementId: z.nullable(z.string()).optional(),
-  connectorGrantId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
-  effectSource: z.nullable(EffectSource$inboundSchema).optional(),
-  effectType: z.nullable(EffectType$inboundSchema).optional(),
-  exclusionGroupId: z.nullable(z.string()).optional(),
-  replacedConnectorGrantId: z.nullable(z.string()).optional(),
-  unresolvedReason: z.nullable(z.string()).optional(),
+  appEntitlementId: z.string().optional(),
+  appId: z.string().optional(),
+  appUserId: z.string().optional(),
+  connectorActionId: z.string().optional(),
+  connectorEntitlementId: z.string().optional(),
+  connectorGrantId: z.string().optional(),
+  connectorId: z.string().optional(),
+  effectSource: EffectSource$inboundSchema.optional(),
+  effectType: EffectType$inboundSchema.optional(),
+  exclusionGroupId: z.string().optional(),
+  replacedConnectorGrantId: z.string().optional(),
+  unresolvedReason: z.string().optional(),
 });
 
 export function connectorActionEffectFromJSON(

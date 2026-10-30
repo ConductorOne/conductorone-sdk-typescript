@@ -14,21 +14,21 @@ export type TunnelCredentialsServiceUpdateBridgeRequest = {
    * @remarks
    *  Empty clears the description.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * New display name. Applied only when "display_name" is in update_mask.
    *
    * @remarks
    *  Must be non-empty when applied.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type TunnelCredentialsServiceUpdateBridgeRequest$Outbound = {
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -39,8 +39,8 @@ export const TunnelCredentialsServiceUpdateBridgeRequest$outboundSchema:
     z.ZodTypeDef,
     TunnelCredentialsServiceUpdateBridgeRequest
   > = z.object({
-    description: z.nullable(z.string()).optional(),
-    displayName: z.nullable(z.string()).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
     updateMask: z.nullable(z.string()).optional(),
   });
 

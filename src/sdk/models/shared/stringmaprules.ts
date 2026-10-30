@@ -14,11 +14,11 @@ export type StringMapRules = {
   /**
    * The isRequired field.
    */
-  isRequired?: boolean | null | undefined;
+  isRequired?: boolean | undefined;
   /**
    * The validateEmpty field.
    */
-  validateEmpty?: boolean | null | undefined;
+  validateEmpty?: boolean | undefined;
 };
 
 /** @internal */
@@ -27,13 +27,13 @@ export const StringMapRules$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  isRequired: z.nullable(z.boolean()).optional(),
-  validateEmpty: z.nullable(z.boolean()).optional(),
+  isRequired: z.boolean().optional(),
+  validateEmpty: z.boolean().optional(),
 });
 /** @internal */
 export type StringMapRules$Outbound = {
-  isRequired?: boolean | null | undefined;
-  validateEmpty?: boolean | null | undefined;
+  isRequired?: boolean | undefined;
+  validateEmpty?: boolean | undefined;
 };
 
 /** @internal */
@@ -42,8 +42,8 @@ export const StringMapRules$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   StringMapRules
 > = z.object({
-  isRequired: z.nullable(z.boolean()).optional(),
-  validateEmpty: z.nullable(z.boolean()).optional(),
+  isRequired: z.boolean().optional(),
+  validateEmpty: z.boolean().optional(),
 });
 
 export function stringMapRulesToJSON(stringMapRules: StringMapRules): string {

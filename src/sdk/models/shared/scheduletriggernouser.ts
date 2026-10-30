@@ -17,16 +17,16 @@ export type ScheduleTriggerNoUser = {
   /**
    * The advanced field.
    */
-  advanced?: boolean | null | undefined;
+  advanced?: boolean | undefined;
   /**
    * The cronSpec field.
    */
-  cronSpec?: string | null | undefined;
+  cronSpec?: string | undefined;
   start?: Date | null | undefined;
   /**
    * The timezone field.
    */
-  timezone?: string | null | undefined;
+  timezone?: string | undefined;
 };
 
 /** @internal */
@@ -35,19 +35,19 @@ export const ScheduleTriggerNoUser$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  advanced: z.nullable(z.boolean()).optional(),
-  cronSpec: z.nullable(z.string()).optional(),
+  advanced: z.boolean().optional(),
+  cronSpec: z.string().optional(),
   start: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  timezone: z.nullable(z.string()).optional(),
+  timezone: z.string().optional(),
 });
 /** @internal */
 export type ScheduleTriggerNoUser$Outbound = {
-  advanced?: boolean | null | undefined;
-  cronSpec?: string | null | undefined;
+  advanced?: boolean | undefined;
+  cronSpec?: string | undefined;
   start?: string | null | undefined;
-  timezone?: string | null | undefined;
+  timezone?: string | undefined;
 };
 
 /** @internal */
@@ -56,10 +56,10 @@ export const ScheduleTriggerNoUser$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ScheduleTriggerNoUser
 > = z.object({
-  advanced: z.nullable(z.boolean()).optional(),
-  cronSpec: z.nullable(z.string()).optional(),
+  advanced: z.boolean().optional(),
+  cronSpec: z.string().optional(),
   start: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  timezone: z.nullable(z.string()).optional(),
+  timezone: z.string().optional(),
 });
 
 export function scheduleTriggerNoUserToJSON(

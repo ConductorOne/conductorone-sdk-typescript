@@ -31,7 +31,7 @@ export type DateTimeInputComponent = {
   /**
    * The inputType field.
    */
-  inputType?: InputType | null | undefined;
+  inputType?: InputType | undefined;
   label?: DynamicString | null | undefined;
   max?: DynamicString | null | undefined;
   min?: DynamicString | null | undefined;
@@ -51,7 +51,7 @@ export const DateTimeInputComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  inputType: z.nullable(InputType$inboundSchema).optional(),
+  inputType: InputType$inboundSchema.optional(),
   label: z.nullable(DynamicString$inboundSchema).optional(),
   max: z.nullable(DynamicString$inboundSchema).optional(),
   min: z.nullable(DynamicString$inboundSchema).optional(),

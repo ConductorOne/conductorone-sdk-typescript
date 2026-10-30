@@ -33,7 +33,10 @@ export type C1ApiAiGovernanceV1MCPAccessProfileToolBindingServiceListToolsByProf
      */
     rawResponse: Response;
     /**
-     * Successful response
+     * Contains a page of change-history entries for the tools bound to one toolset
+     *
+     * @remarks
+     *  sorted newest first.
      */
     mcpAccessProfileToolBindingServiceListToolsByProfileHistoryResponse?:
       | shared.MCPAccessProfileToolBindingServiceListToolsByProfileHistoryResponse

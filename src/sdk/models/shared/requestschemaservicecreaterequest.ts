@@ -41,7 +41,7 @@ export type RequestSchemaServiceCreateRequest = {
   /**
    * An optional description of the request schema's purpose.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * Logical groupings of fields for display purposes.
    */
@@ -57,11 +57,11 @@ export type RequestSchemaServiceCreateRequest = {
   /**
    * Controls whether the justification field is shown or hidden on the request form.
    */
-  justificationVisibility?: JustificationVisibility | null | undefined;
+  justificationVisibility?: JustificationVisibility | undefined;
   /**
    * The human-readable name for the request schema.
    */
-  name?: string | null | undefined;
+  name?: string | undefined;
 };
 
 /** @internal */
@@ -73,12 +73,12 @@ export const JustificationVisibility$outboundSchema: z.ZodType<
 
 /** @internal */
 export type RequestSchemaServiceCreateRequest$Outbound = {
-  description?: string | null | undefined;
+  description?: string | undefined;
   fieldGroups?: Array<FormFieldGroup$Outbound> | null | undefined;
   fieldRelationships?: Array<FieldRelationship$Outbound> | null | undefined;
   fields?: Array<FormField$Outbound> | null | undefined;
-  justificationVisibility?: string | null | undefined;
-  name?: string | null | undefined;
+  justificationVisibility?: string | undefined;
+  name?: string | undefined;
 };
 
 /** @internal */
@@ -87,14 +87,13 @@ export const RequestSchemaServiceCreateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RequestSchemaServiceCreateRequest
 > = z.object({
-  description: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
   fieldGroups: z.nullable(z.array(FormFieldGroup$outboundSchema)).optional(),
   fieldRelationships: z.nullable(z.array(FieldRelationship$outboundSchema))
     .optional(),
   fields: z.nullable(z.array(FormField$outboundSchema)).optional(),
-  justificationVisibility: z.nullable(JustificationVisibility$outboundSchema)
-    .optional(),
-  name: z.nullable(z.string()).optional(),
+  justificationVisibility: JustificationVisibility$outboundSchema.optional(),
+  name: z.string().optional(),
 });
 
 export function requestSchemaServiceCreateRequestToJSON(

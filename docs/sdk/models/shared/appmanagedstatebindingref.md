@@ -1,6 +1,6 @@
 # AppManagedStateBindingRef
 
-The AppManagedStateBindingRef message.
+AppManagedStateBindingRef identifies an application discovered by a connector.
 
 ## Example Usage
 
@@ -12,8 +12,8 @@ let value: AppManagedStateBindingRef = {};
 
 ## Fields
 
-| Field                     | Type                      | Required                  | Description               |
-| ------------------------- | ------------------------- | ------------------------- | ------------------------- |
-| `appId`                   | *string*                  | :heavy_minus_sign:        | The appId field.          |
-| `resourceId`              | *string*                  | :heavy_minus_sign:        | The resourceId field.     |
-| `resourceTypeId`          | *string*                  | :heavy_minus_sign:        | The resourceTypeId field. |
+| Field                                                     | Type                                                      | Required                                                  | Description                                               |
+| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| `appId`                                                   | *string*                                                  | :heavy_minus_sign:                                        | ID of the application that owns the connector.            |
+| `resourceId`                                              | *string*                                                  | :heavy_minus_sign:                                        | Resource ID of the discovered application.                |
+| `resourceTypeId`                                          | *string*                                                  | :heavy_minus_sign:                                        | ID of the resource type used for discovered applications. |

@@ -38,7 +38,7 @@ export type AppUserServiceListResponse = {
   /**
    * The token for fetching the next page of results.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -79,7 +79,7 @@ export const AppUserServiceListResponse$inboundSchema: z.ZodType<
     z.array(z.lazy(() => AppUserServiceListResponseExpanded$inboundSchema)),
   ).optional(),
   list: z.nullable(z.array(AppUserView$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function appUserServiceListResponseFromJSON(

@@ -30,7 +30,7 @@ import { Result } from "../sdk/types/fp.js";
  * Create Grant Task
  *
  * @remarks
- * Create a grant task
+ * Create a task to grant access. Specify the recipient using identityUserId (a C1 user ID) or appUserId (an application account ID); the recipient is not inferred from the caller.
  */
 export function taskCreateGrantTask(
   client: ConductoroneSDKTypescriptCore,

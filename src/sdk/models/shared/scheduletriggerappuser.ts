@@ -14,20 +14,20 @@ export type ScheduleTriggerAppUser = {
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The condition field.
    */
-  condition?: string | null | undefined;
+  condition?: string | undefined;
   /**
    * The cronSpec field.
    */
-  cronSpec?: string | null | undefined;
+  cronSpec?: string | undefined;
   start?: Date | null | undefined;
   /**
    * The timezone field.
    */
-  timezone?: string | null | undefined;
+  timezone?: string | undefined;
 };
 
 /** @internal */
@@ -36,21 +36,21 @@ export const ScheduleTriggerAppUser$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  condition: z.nullable(z.string()).optional(),
-  cronSpec: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  condition: z.string().optional(),
+  cronSpec: z.string().optional(),
   start: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  timezone: z.nullable(z.string()).optional(),
+  timezone: z.string().optional(),
 });
 /** @internal */
 export type ScheduleTriggerAppUser$Outbound = {
-  appId?: string | null | undefined;
-  condition?: string | null | undefined;
-  cronSpec?: string | null | undefined;
+  appId?: string | undefined;
+  condition?: string | undefined;
+  cronSpec?: string | undefined;
   start?: string | null | undefined;
-  timezone?: string | null | undefined;
+  timezone?: string | undefined;
 };
 
 /** @internal */
@@ -59,11 +59,11 @@ export const ScheduleTriggerAppUser$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ScheduleTriggerAppUser
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  condition: z.nullable(z.string()).optional(),
-  cronSpec: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  condition: z.string().optional(),
+  cronSpec: z.string().optional(),
   start: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  timezone: z.nullable(z.string()).optional(),
+  timezone: z.string().optional(),
 });
 
 export function scheduleTriggerAppUserToJSON(

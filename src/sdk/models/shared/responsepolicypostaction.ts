@@ -17,7 +17,7 @@ export type ResponsePolicyPostAction = {
    * @remarks
    *  will use a different string.
    */
-  version?: string | null | undefined;
+  version?: string | undefined;
 };
 
 /** @internal */
@@ -26,11 +26,11 @@ export const ResponsePolicyPostAction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  version: z.nullable(z.string()).optional(),
+  version: z.string().optional(),
 });
 /** @internal */
 export type ResponsePolicyPostAction$Outbound = {
-  version?: string | null | undefined;
+  version?: string | undefined;
 };
 
 /** @internal */
@@ -39,7 +39,7 @@ export const ResponsePolicyPostAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponsePolicyPostAction
 > = z.object({
-  version: z.nullable(z.string()).optional(),
+  version: z.string().optional(),
 });
 
 export function responsePolicyPostActionToJSON(

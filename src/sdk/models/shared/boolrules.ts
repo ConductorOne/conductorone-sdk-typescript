@@ -14,7 +14,7 @@ export type BoolRules = {
   /**
    * Const specifies that this field must be exactly the specified value
    */
-  const?: boolean | null | undefined;
+  const?: boolean | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const BoolRules$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  const: z.nullable(z.boolean()).optional(),
+  const: z.boolean().optional(),
 });
 /** @internal */
 export type BoolRules$Outbound = {
-  const?: boolean | null | undefined;
+  const?: boolean | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const BoolRules$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BoolRules
 > = z.object({
-  const: z.nullable(z.boolean()).optional(),
+  const: z.boolean().optional(),
 });
 
 export function boolRulesToJSON(boolRules: BoolRules): string {

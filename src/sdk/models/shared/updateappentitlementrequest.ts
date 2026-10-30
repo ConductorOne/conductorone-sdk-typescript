@@ -23,7 +23,7 @@ export type UpdateAppEntitlementRequest = {
   /**
    * Flag to indicate that access request defaults, if any are applied to these entitlements, should be overridden.
    */
-  overrideAccessRequestsDefaults?: boolean | null | undefined;
+  overrideAccessRequestsDefaults?: boolean | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -31,7 +31,7 @@ export type UpdateAppEntitlementRequest = {
 export type UpdateAppEntitlementRequest$Outbound = {
   entitlement?: AppEntitlementInput$Outbound | null | undefined;
   expandMask?: AppEntitlementExpandMask$Outbound | null | undefined;
-  overrideAccessRequestsDefaults?: boolean | null | undefined;
+  overrideAccessRequestsDefaults?: boolean | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -43,7 +43,7 @@ export const UpdateAppEntitlementRequest$outboundSchema: z.ZodType<
 > = z.object({
   entitlement: z.nullable(AppEntitlementInput$outboundSchema).optional(),
   expandMask: z.nullable(AppEntitlementExpandMask$outboundSchema).optional(),
-  overrideAccessRequestsDefaults: z.nullable(z.boolean()).optional(),
+  overrideAccessRequestsDefaults: z.boolean().optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 

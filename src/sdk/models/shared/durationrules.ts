@@ -36,7 +36,7 @@ export type DurationRules = {
   /**
    * Required specifies that this field must be set
    */
-  required?: boolean | null | undefined;
+  required?: boolean | undefined;
 };
 
 /** @internal */
@@ -52,7 +52,7 @@ export const DurationRules$inboundSchema: z.ZodType<
   lt: z.nullable(z.string()).optional(),
   lte: z.nullable(z.string()).optional(),
   notIn: z.nullable(z.array(z.string())).optional(),
-  required: z.nullable(z.boolean()).optional(),
+  required: z.boolean().optional(),
 });
 /** @internal */
 export type DurationRules$Outbound = {
@@ -63,7 +63,7 @@ export type DurationRules$Outbound = {
   lt?: string | null | undefined;
   lte?: string | null | undefined;
   notIn?: Array<string> | null | undefined;
-  required?: boolean | null | undefined;
+  required?: boolean | undefined;
 };
 
 /** @internal */
@@ -79,7 +79,7 @@ export const DurationRules$outboundSchema: z.ZodType<
   lt: z.nullable(z.string()).optional(),
   lte: z.nullable(z.string()).optional(),
   notIn: z.nullable(z.array(z.string())).optional(),
-  required: z.nullable(z.boolean()).optional(),
+  required: z.boolean().optional(),
 });
 
 export function durationRulesToJSON(durationRules: DurationRules): string {

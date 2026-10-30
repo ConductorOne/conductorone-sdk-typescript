@@ -1,0 +1,21 @@
+# ConnectorSyncFailingEvidence
+
+ConnectorSyncFailingEvidence describes the failure streak behind a
+ CONNECTOR_SYNC_FAILING finding, refreshed on every re-observation.
+
+## Example Usage
+
+```typescript
+import { ConnectorSyncFailingEvidence } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: ConnectorSyncFailingEvidence = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                   | Type                                                                                                                                                    | Required                                                                                                                                                | Description                                                                                                                                             |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `consecutiveFailureCount`                                                                                                                               | *number*                                                                                                                                                | :heavy_minus_sign:                                                                                                                                      | The consecutiveFailureCount field.                                                                                                                      |
+| `lastFailedAt`                                                                                                                                          | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                           | :heavy_minus_sign:                                                                                                                                      | N/A                                                                                                                                                     |
+| `lastSyncLifecycleId`                                                                                                                                   | *string*                                                                                                                                                | :heavy_minus_sign:                                                                                                                                      | Id of the newest failing sync run, not a copy of its error text -- see the<br/> c1models message for why the error itself is deliberately not carried here. |
+| `streakStartedAt`                                                                                                                                       | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                           | :heavy_minus_sign:                                                                                                                                      | N/A                                                                                                                                                     |

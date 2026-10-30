@@ -9,9 +9,34 @@ import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  McpOnboardingTarget,
+  McpOnboardingTarget$inboundSchema,
+} from "./mcponboardingtarget.js";
+import {
   OnboardingOrgContext,
   OnboardingOrgContext$inboundSchema,
 } from "./onboardingorgcontext.js";
+
+/**
+ * The current status of the AIAM MCP onboarding briefing, tracked
+ *
+ * @remarks
+ *  independently of `status`.
+ */
+export const McpOnboardingStatus = {
+  McpOnboardingStatusUnspecified: "MCP_ONBOARDING_STATUS_UNSPECIFIED",
+  McpOnboardingStatusNotStarted: "MCP_ONBOARDING_STATUS_NOT_STARTED",
+  McpOnboardingStatusInProgress: "MCP_ONBOARDING_STATUS_IN_PROGRESS",
+  McpOnboardingStatusComplete: "MCP_ONBOARDING_STATUS_COMPLETE",
+  McpOnboardingStatusDismissed: "MCP_ONBOARDING_STATUS_DISMISSED",
+} as const;
+/**
+ * The current status of the AIAM MCP onboarding briefing, tracked
+ *
+ * @remarks
+ *  independently of `status`.
+ */
+export type McpOnboardingStatus = OpenEnum<typeof McpOnboardingStatus>;
 
 /**
  * The current status of the tenant onboarding process.
@@ -37,17 +62,42 @@ export type GetOnboardingSettingsResponse = {
   /**
    * The identifier of the onboarding conversation thread, if one is in progress.
    */
-  conversationId?: string | null | undefined;
+  conversationId?: string | undefined;
   /**
    * The intents field.
    */
   intents?: Array<string> | null | undefined;
+  /**
+   * The admin's free-form AIAM onboarding goal, captured at the Goals step.
+   */
+  mcpOnboardingGoal?: string | undefined;
+  /**
+   * The current status of the AIAM MCP onboarding briefing, tracked
+   *
+   * @remarks
+   *  independently of `status`.
+   */
+  mcpOnboardingStatus?: McpOnboardingStatus | undefined;
+  /**
+   * Per-target progress of the AIAM briefing: the servers/apps the admin chose
+   *
+   * @remarks
+   *  to govern and how far each got.
+   */
+  mcpOnboardingTargets?: Array<McpOnboardingTarget> | null | undefined;
   orgContext?: OnboardingOrgContext | null | undefined;
   /**
    * The current status of the tenant onboarding process.
    */
-  status?: GetOnboardingSettingsResponseStatus | null | undefined;
+  status?: GetOnboardingSettingsResponseStatus | undefined;
 };
+
+/** @internal */
+export const McpOnboardingStatus$inboundSchema: z.ZodType<
+  McpOnboardingStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(McpOnboardingStatus);
 
 /** @internal */
 export const GetOnboardingSettingsResponseStatus$inboundSchema: z.ZodType<
@@ -62,11 +112,14 @@ export const GetOnboardingSettingsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  conversationId: z.nullable(z.string()).optional(),
+  conversationId: z.string().optional(),
   intents: z.nullable(z.array(z.string())).optional(),
-  orgContext: z.nullable(OnboardingOrgContext$inboundSchema).optional(),
-  status: z.nullable(GetOnboardingSettingsResponseStatus$inboundSchema)
+  mcpOnboardingGoal: z.string().optional(),
+  mcpOnboardingStatus: McpOnboardingStatus$inboundSchema.optional(),
+  mcpOnboardingTargets: z.nullable(z.array(McpOnboardingTarget$inboundSchema))
     .optional(),
+  orgContext: z.nullable(OnboardingOrgContext$inboundSchema).optional(),
+  status: GetOnboardingSettingsResponseStatus$inboundSchema.optional(),
 });
 
 export function getOnboardingSettingsResponseFromJSON(

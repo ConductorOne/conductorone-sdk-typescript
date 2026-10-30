@@ -36,16 +36,16 @@ export type BundleAutomationCelEvaluationState = {
   /**
    * The errorMessage field.
    */
-  errorMessage?: string | null | undefined;
+  errorMessage?: string | undefined;
   lastEvaluatedAt?: Date | null | undefined;
   /**
    * The matchedUsers field.
    */
-  matchedUsers?: number | null | undefined;
+  matchedUsers?: number | undefined;
   /**
    * The status field.
    */
-  status?: BundleAutomationCelEvaluationStateStatus | null | undefined;
+  status?: BundleAutomationCelEvaluationStateStatus | undefined;
 };
 
 /** @internal */
@@ -61,14 +61,12 @@ export const BundleAutomationCelEvaluationState$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  errorMessage: z.nullable(z.string()).optional(),
+  errorMessage: z.string().optional(),
   lastEvaluatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  matchedUsers: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
-  status: z.nullable(BundleAutomationCelEvaluationStateStatus$inboundSchema)
-    .optional(),
+  matchedUsers: z.string().transform(v => parseInt(v, 10)).optional(),
+  status: BundleAutomationCelEvaluationStateStatus$inboundSchema.optional(),
 });
 
 export function bundleAutomationCelEvaluationStateFromJSON(

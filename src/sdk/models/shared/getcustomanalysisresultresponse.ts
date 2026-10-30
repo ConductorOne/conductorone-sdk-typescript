@@ -8,6 +8,7 @@ import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { AccessScope, AccessScope$inboundSchema } from "./accessscope.js";
 import {
   AttributeFacet,
   AttributeFacet$inboundSchema,
@@ -20,6 +21,12 @@ import {
   EntitlementCluster,
   EntitlementCluster$inboundSchema,
 } from "./entitlementcluster.js";
+import {
+  EntitlementCutoffImpactPoint,
+  EntitlementCutoffImpactPoint$inboundSchema,
+} from "./entitlementcutoffimpactpoint.js";
+import { ProfileFilter, ProfileFilter$inboundSchema } from "./profilefilter.js";
+import { ResourceScope, ResourceScope$inboundSchema } from "./resourcescope.js";
 
 /**
  * The status field.
@@ -38,13 +45,31 @@ export type GetCustomAnalysisResultResponseStatus = OpenEnum<
 >;
 
 /**
+ * Structured terminal reason, unspecified for legacy results.
+ */
+export const GetCustomAnalysisResultResponseTerminalReason = {
+  CustomAnalysisTerminalReasonUnspecified:
+    "CUSTOM_ANALYSIS_TERMINAL_REASON_UNSPECIFIED",
+  CustomAnalysisTerminalReasonError: "CUSTOM_ANALYSIS_TERMINAL_REASON_ERROR",
+  CustomAnalysisTerminalReasonSuperseded:
+    "CUSTOM_ANALYSIS_TERMINAL_REASON_SUPERSEDED",
+} as const;
+/**
+ * Structured terminal reason, unspecified for legacy results.
+ */
+export type GetCustomAnalysisResultResponseTerminalReason = OpenEnum<
+  typeof GetCustomAnalysisResultResponseTerminalReason
+>;
+
+/**
  * The GetCustomAnalysisResultResponse message.
  */
 export type GetCustomAnalysisResultResponse = {
+  accessScope?: AccessScope | null | undefined;
   /**
    * The appsAnalyzed field.
    */
-  appsAnalyzed?: number | null | undefined;
+  appsAnalyzed?: number | undefined;
   /**
    * Cluster results.
    */
@@ -52,7 +77,17 @@ export type GetCustomAnalysisResultResponse = {
   /**
    * The cohortSize field.
    */
-  cohortSize?: number | null | undefined;
+  cohortSize?: number | undefined;
+  completedAt?: Date | null | undefined;
+  createdAt?: Date | null | undefined;
+  /**
+   * User who created this analysis, empty for legacy results.
+   */
+  createdByUserId?: string | undefined;
+  /**
+   * Exact holder counts at each distinct inclusive entitlement coverage cutoff.
+   */
+  cutoffImpactPoints?: Array<EntitlementCutoffImpactPoint> | null | undefined;
   /**
    * Entitlement coverage results.
    */
@@ -60,11 +95,11 @@ export type GetCustomAnalysisResultResponse = {
   /**
    * The errorMessage field.
    */
-  errorMessage?: string | null | undefined;
+  errorMessage?: string | undefined;
   /**
    * The facetUserCount field.
    */
-  facetUserCount?: number | null | undefined;
+  facetUserCount?: number | undefined;
   /**
    * Facet results.
    */
@@ -72,11 +107,28 @@ export type GetCustomAnalysisResultResponse = {
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
+  /**
+   * Cohort filters this analysis ran with, echoed back so an exact-ID restore
+   *
+   * @remarks
+   *  is self-contained.
+   */
+  profileFilters?: Array<ProfileFilter> | null | undefined;
+  resourceScope?: ResourceScope | null | undefined;
   /**
    * The status field.
    */
-  status?: GetCustomAnalysisResultResponseStatus | null | undefined;
+  status?: GetCustomAnalysisResultResponseStatus | undefined;
+  /**
+   * Newer result that superseded this analysis, when applicable.
+   */
+  supersededByResultId?: string | undefined;
+  /**
+   * Structured terminal reason, unspecified for legacy results.
+   */
+  terminalReason?: GetCustomAnalysisResultResponseTerminalReason | undefined;
+  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
@@ -87,21 +139,47 @@ export const GetCustomAnalysisResultResponseStatus$inboundSchema: z.ZodType<
 > = openEnums.inboundSchema(GetCustomAnalysisResultResponseStatus);
 
 /** @internal */
+export const GetCustomAnalysisResultResponseTerminalReason$inboundSchema:
+  z.ZodType<
+    GetCustomAnalysisResultResponseTerminalReason,
+    z.ZodTypeDef,
+    unknown
+  > = openEnums.inboundSchema(GetCustomAnalysisResultResponseTerminalReason);
+
+/** @internal */
 export const GetCustomAnalysisResultResponse$inboundSchema: z.ZodType<
   GetCustomAnalysisResultResponse,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appsAnalyzed: z.nullable(z.number().int()).optional(),
+  accessScope: z.nullable(AccessScope$inboundSchema).optional(),
+  appsAnalyzed: z.number().int().optional(),
   clusters: z.nullable(z.array(EntitlementCluster$inboundSchema)).optional(),
-  cohortSize: z.nullable(z.number().int()).optional(),
+  cohortSize: z.number().int().optional(),
+  completedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  createdAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  createdByUserId: z.string().optional(),
+  cutoffImpactPoints: z.nullable(
+    z.array(EntitlementCutoffImpactPoint$inboundSchema),
+  ).optional(),
   entitlements: z.nullable(z.array(CohortEntitlement$inboundSchema)).optional(),
-  errorMessage: z.nullable(z.string()).optional(),
-  facetUserCount: z.nullable(z.number().int()).optional(),
+  errorMessage: z.string().optional(),
+  facetUserCount: z.number().int().optional(),
   facets: z.nullable(z.array(AttributeFacet$inboundSchema)).optional(),
-  id: z.nullable(z.string()).optional(),
-  status: z.nullable(GetCustomAnalysisResultResponseStatus$inboundSchema)
+  id: z.string().optional(),
+  profileFilters: z.nullable(z.array(ProfileFilter$inboundSchema)).optional(),
+  resourceScope: z.nullable(ResourceScope$inboundSchema).optional(),
+  status: GetCustomAnalysisResultResponseStatus$inboundSchema.optional(),
+  supersededByResultId: z.string().optional(),
+  terminalReason: GetCustomAnalysisResultResponseTerminalReason$inboundSchema
     .optional(),
+  updatedAt: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 });
 
 export function getCustomAnalysisResultResponseFromJSON(

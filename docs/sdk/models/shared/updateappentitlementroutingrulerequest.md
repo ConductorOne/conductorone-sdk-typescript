@@ -1,0 +1,21 @@
+# UpdateAppEntitlementRoutingRuleRequest
+
+The UpdateAppEntitlementRoutingRuleRequest message.
+
+## Example Usage
+
+```typescript
+import { UpdateAppEntitlementRoutingRuleRequest } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: UpdateAppEntitlementRoutingRuleRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                                       | Type                                                                                                                                        | Required                                                                                                                                    | Description                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `condition`                                                                                                                                 | *string*                                                                                                                                    | :heavy_minus_sign:                                                                                                                          | CEL expression evaluated against the entitlement routing rule context.<br/> Empty string is valid and matches every target not matched earlier. |
+| `description`                                                                                                                               | *string*                                                                                                                                    | :heavy_minus_sign:                                                                                                                          | The description field.                                                                                                                      |
+| `displayName`                                                                                                                               | *string*                                                                                                                                    | :heavy_minus_sign:                                                                                                                          | The displayName field.                                                                                                                      |
+| `enabled`                                                                                                                                   | *boolean*                                                                                                                                   | :heavy_minus_sign:                                                                                                                          | The enabled field.                                                                                                                          |
+| `settings`                                                                                                                                  | [shared.AppEntitlementRoutingRuleSettings](../../../sdk/models/shared/appentitlementroutingrulesettings.md)                                 | :heavy_minus_sign:                                                                                                                          | N/A                                                                                                                                         |

@@ -24,15 +24,15 @@ export type CreateManuallyManagedAppResourceRequest = {
   /**
    * An optional description for the new resource.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The display name for the new resource.
    */
-  displayName: string | null;
+  displayName: string;
   /**
    * If supplied, it's implied that the resource is created before sync and needs to be merged with connector resource.
    */
-  matchBatonId?: string | null | undefined;
+  matchBatonId?: string | undefined;
   /**
    * C1 user IDs to assign as owners of this resource.
    */
@@ -42,9 +42,9 @@ export type CreateManuallyManagedAppResourceRequest = {
 /** @internal */
 export type CreateManuallyManagedAppResourceRequest$Outbound = {
   annotations?: { [k: string]: string } | undefined;
-  description?: string | null | undefined;
-  displayName: string | null;
-  matchBatonId?: string | null | undefined;
+  description?: string | undefined;
+  displayName: string;
+  matchBatonId?: string | undefined;
   resourceOwnerUserIds?: Array<string> | null | undefined;
 };
 
@@ -55,9 +55,9 @@ export const CreateManuallyManagedAppResourceRequest$outboundSchema: z.ZodType<
   CreateManuallyManagedAppResourceRequest
 > = z.object({
   annotations: z.record(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()),
-  matchBatonId: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string(),
+  matchBatonId: z.string().optional(),
   resourceOwnerUserIds: z.nullable(z.array(z.string())).optional(),
 });
 

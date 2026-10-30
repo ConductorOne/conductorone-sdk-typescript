@@ -14,7 +14,7 @@ export type RunDelayed = {
   /**
    * The coldStartDelayDays field.
    */
-  coldStartDelayDays: number | null;
+  coldStartDelayDays: number;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const RunDelayed$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  coldStartDelayDays: z.nullable(z.number().int()),
+  coldStartDelayDays: z.number().int(),
 });
 /** @internal */
 export type RunDelayed$Outbound = {
-  coldStartDelayDays: number | null;
+  coldStartDelayDays: number;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const RunDelayed$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunDelayed
 > = z.object({
-  coldStartDelayDays: z.nullable(z.number().int()),
+  coldStartDelayDays: z.number().int(),
 });
 
 export function runDelayedToJSON(runDelayed: RunDelayed): string {

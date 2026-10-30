@@ -1,0 +1,19 @@
+# DataSensitivity
+
+Data sensitivity classification.
+
+## Example Usage
+
+```typescript
+import { DataSensitivity } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: DataSensitivity = "MCP_SERVER_DATA_SENSITIVITY_PUBLIC";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
+```
+
+## Values
+
+```typescript
+"MCP_SERVER_DATA_SENSITIVITY_UNSPECIFIED" | "MCP_SERVER_DATA_SENSITIVITY_PUBLIC" | "MCP_SERVER_DATA_SENSITIVITY_INTERNAL" | "MCP_SERVER_DATA_SENSITIVITY_CONFIDENTIAL" | "MCP_SERVER_DATA_SENSITIVITY_RESTRICTED" | Unrecognized<string>
+```

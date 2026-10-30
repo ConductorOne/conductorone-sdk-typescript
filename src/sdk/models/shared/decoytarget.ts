@@ -19,7 +19,7 @@ export type DecoyTarget = {
   /**
    * The decoyId field.
    */
-  decoyId?: string | null | undefined;
+  decoyId?: string | undefined;
 };
 
 /** @internal */
@@ -28,9 +28,25 @@ export const DecoyTarget$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  decoyId: z.nullable(z.string()).optional(),
+  decoyId: z.string().optional(),
+});
+/** @internal */
+export type DecoyTarget$Outbound = {
+  decoyId?: string | undefined;
+};
+
+/** @internal */
+export const DecoyTarget$outboundSchema: z.ZodType<
+  DecoyTarget$Outbound,
+  z.ZodTypeDef,
+  DecoyTarget
+> = z.object({
+  decoyId: z.string().optional(),
 });
 
+export function decoyTargetToJSON(decoyTarget: DecoyTarget): string {
+  return JSON.stringify(DecoyTarget$outboundSchema.parse(decoyTarget));
+}
 export function decoyTargetFromJSON(
   jsonString: string,
 ): SafeParseResult<DecoyTarget, SDKValidationError> {

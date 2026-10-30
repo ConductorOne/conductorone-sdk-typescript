@@ -12,13 +12,21 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type AppUserMapperMatchCase = {
   /**
+   * The app this match case belongs to.
+   */
+  appId?: string | undefined;
+  /**
    * CEL expression evaluated against an AppUser to produce match key(s).
    */
-  appUserKeyCel?: string | null | undefined;
+  appUserKeyCel?: string | undefined;
+  /**
+   * The ordered index of this match case within the mapper.
+   */
+  caseIndex?: number | undefined;
   /**
    * CEL expression evaluated against a User to produce match key(s).
    */
-  userKeyCel?: string | null | undefined;
+  userKeyCel?: string | undefined;
 };
 
 /** @internal */
@@ -27,32 +35,12 @@ export const AppUserMapperMatchCase$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appUserKeyCel: z.nullable(z.string()).optional(),
-  userKeyCel: z.nullable(z.string()).optional(),
-});
-/** @internal */
-export type AppUserMapperMatchCase$Outbound = {
-  appUserKeyCel?: string | null | undefined;
-  userKeyCel?: string | null | undefined;
-};
-
-/** @internal */
-export const AppUserMapperMatchCase$outboundSchema: z.ZodType<
-  AppUserMapperMatchCase$Outbound,
-  z.ZodTypeDef,
-  AppUserMapperMatchCase
-> = z.object({
-  appUserKeyCel: z.nullable(z.string()).optional(),
-  userKeyCel: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  appUserKeyCel: z.string().optional(),
+  caseIndex: z.number().int().optional(),
+  userKeyCel: z.string().optional(),
 });
 
-export function appUserMapperMatchCaseToJSON(
-  appUserMapperMatchCase: AppUserMapperMatchCase,
-): string {
-  return JSON.stringify(
-    AppUserMapperMatchCase$outboundSchema.parse(appUserMapperMatchCase),
-  );
-}
 export function appUserMapperMatchCaseFromJSON(
   jsonString: string,
 ): SafeParseResult<AppUserMapperMatchCase, SDKValidationError> {

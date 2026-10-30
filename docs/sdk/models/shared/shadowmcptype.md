@@ -1,0 +1,21 @@
+# ShadowMcpType
+
+ShadowMcpType: a device is running an MCP server that isn't reached through
+ the tenant's governed MCP gateway. Dedup is mcp_identifier -- one finding
+ per tenant per distinct MCP product, regardless of how many
+ users/devices/harnesses run it. Target: TenantTarget.
+
+## Example Usage
+
+```typescript
+import { ShadowMcpType } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: ShadowMcpType = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                            | Type                                                                                                                                                                                                             | Required                                                                                                                                                                                                         | Description                                                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `mcpIdentifier`                                                                                                                                                                                                  | *string*                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                               | Stable identity of the MCP product, shared across every user/device/harness<br/> that runs it. Maps to DeviceInventoryMcpObservation.logical_product_key;<br/> display name is resolved from there, not duplicated here. |
+| `transport`                                                                                                                                                                                                      | [shared.Transport](../../../sdk/models/shared/transport.md)                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                               | Denormalized from DeviceInventoryMcpObservation.transport at detection<br/> time. Distinguishes a locally-launched (STDIO) product, which has no<br/> address to connect to, from a remote one, which does.      |

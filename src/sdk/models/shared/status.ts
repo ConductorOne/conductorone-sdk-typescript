@@ -37,7 +37,7 @@ export type Status = {
   /**
    * The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
    */
-  code?: number | null | undefined;
+  code?: number | undefined;
   /**
    * A list of messages that carry the error details.  There is a common set of
    *
@@ -52,7 +52,7 @@ export type Status = {
    *  user-facing error message should be localized and sent in the
    *  [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
    */
-  message?: string | null | undefined;
+  message?: string | undefined;
 };
 
 /** @internal */
@@ -82,10 +82,10 @@ export function detailsFromJSON(
 /** @internal */
 export const Status$inboundSchema: z.ZodType<Status, z.ZodTypeDef, unknown> = z
   .object({
-    code: z.nullable(z.number().int()).optional(),
+    code: z.number().int().optional(),
     details: z.nullable(z.array(z.lazy(() => Details$inboundSchema)))
       .optional(),
-    message: z.nullable(z.string()).optional(),
+    message: z.string().optional(),
   });
 
 export function statusFromJSON(

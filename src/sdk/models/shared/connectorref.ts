@@ -14,11 +14,11 @@ export type ConnectorRef = {
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -27,13 +27,13 @@ export const ConnectorRef$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  id: z.string().optional(),
 });
 /** @internal */
 export type ConnectorRef$Outbound = {
-  appId?: string | null | undefined;
-  id?: string | null | undefined;
+  appId?: string | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -42,8 +42,8 @@ export const ConnectorRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ConnectorRef
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  id: z.string().optional(),
 });
 
 export function connectorRefToJSON(connectorRef: ConnectorRef): string {

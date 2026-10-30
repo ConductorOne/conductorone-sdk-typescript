@@ -1,6 +1,7 @@
 # UpdateAIGovernanceSettingsRequest
 
-The UpdateAIGovernanceSettingsRequest message.
+UpdateAIGovernanceSettingsRequest is the request to update the tenant's AI
+ governance settings.
 
 ## Example Usage
 

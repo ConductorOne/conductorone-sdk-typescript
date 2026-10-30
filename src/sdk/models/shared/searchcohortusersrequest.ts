@@ -4,6 +4,11 @@
 
 import * as z from "zod/v3";
 import {
+  AccessScope,
+  AccessScope$Outbound,
+  AccessScope$outboundSchema,
+} from "./accessscope.js";
+import {
   EntitlementRef,
   EntitlementRef$Outbound,
   EntitlementRef$outboundSchema,
@@ -18,28 +23,35 @@ import {
  * The SearchCohortUsersRequest message.
  */
 export type SearchCohortUsersRequest = {
+  accessScope?: AccessScope | null | undefined;
   /**
    * Maximum number of users to return per page.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * Pagination token from a previous response.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Additional profile filters to narrow the cohort user search.
    */
   profileFilters?: Array<ProfileFilter> | null | undefined;
   /**
-   * Optional list of entitlements to compute per-user coverage for.
+   * Deprecated. This endpoint no longer computes per-user coverage and
+   *
+   * @remarks
+   *  ignores this field.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   selectedEntitlements?: Array<EntitlementRef> | null | undefined;
 };
 
 /** @internal */
 export type SearchCohortUsersRequest$Outbound = {
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  accessScope?: AccessScope$Outbound | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
   profileFilters?: Array<ProfileFilter$Outbound> | null | undefined;
   selectedEntitlements?: Array<EntitlementRef$Outbound> | null | undefined;
 };
@@ -50,8 +62,9 @@ export const SearchCohortUsersRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchCohortUsersRequest
 > = z.object({
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
+  accessScope: z.nullable(AccessScope$outboundSchema).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
   profileFilters: z.nullable(z.array(ProfileFilter$outboundSchema)).optional(),
   selectedEntitlements: z.nullable(z.array(EntitlementRef$outboundSchema))
     .optional(),

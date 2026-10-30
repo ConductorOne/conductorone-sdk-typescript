@@ -30,7 +30,7 @@ import { Result } from "../sdk/types/fp.js";
  * Create External
  *
  * @remarks
- * CreateExternal creates a secret vault for external email recipients.
+ * CreateExternal creates a secret using the requested Age suite.
  */
 export function paperSecretCreateExternal(
   client: ConductoroneSDKTypescriptCore,

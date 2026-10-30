@@ -33,13 +33,13 @@ export type AccountProvision = {
   /**
    * The connectorId field.
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
   doNotSave?: DoNotSave | null | undefined;
   saveToVault?: SaveToVault | null | undefined;
   /**
    * The schemaId field.
    */
-  schemaId?: string | null | undefined;
+  schemaId?: string | undefined;
 };
 
 /** @internal */
@@ -49,18 +49,18 @@ export const AccountProvision$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   config: z.nullable(z.record(z.any())).optional(),
-  connectorId: z.nullable(z.string()).optional(),
+  connectorId: z.string().optional(),
   doNotSave: z.nullable(DoNotSave$inboundSchema).optional(),
   saveToVault: z.nullable(SaveToVault$inboundSchema).optional(),
-  schemaId: z.nullable(z.string()).optional(),
+  schemaId: z.string().optional(),
 });
 /** @internal */
 export type AccountProvision$Outbound = {
   config?: { [k: string]: any } | null | undefined;
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
   doNotSave?: DoNotSave$Outbound | null | undefined;
   saveToVault?: SaveToVault$Outbound | null | undefined;
-  schemaId?: string | null | undefined;
+  schemaId?: string | undefined;
 };
 
 /** @internal */
@@ -70,10 +70,10 @@ export const AccountProvision$outboundSchema: z.ZodType<
   AccountProvision
 > = z.object({
   config: z.nullable(z.record(z.any())).optional(),
-  connectorId: z.nullable(z.string()).optional(),
+  connectorId: z.string().optional(),
   doNotSave: z.nullable(DoNotSave$outboundSchema).optional(),
   saveToVault: z.nullable(SaveToVault$outboundSchema).optional(),
-  schemaId: z.nullable(z.string()).optional(),
+  schemaId: z.string().optional(),
 });
 
 export function accountProvisionToJSON(

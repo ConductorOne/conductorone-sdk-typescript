@@ -32,40 +32,40 @@ export type A2UISurfaceFeedback = {
   /**
    * The actionName field.
    */
-  actionName?: string | null | undefined;
+  actionName?: string | undefined;
   /**
    * The componentsSnapshot field.
    */
-  componentsSnapshot?: string | null | undefined;
+  componentsSnapshot?: string | undefined;
   /**
    * The conversationId field.
    */
-  conversationId?: string | null | undefined;
+  conversationId?: string | undefined;
   createdAt?: Date | null | undefined;
   /**
    * The dataModelSnapshot field.
    */
-  dataModelSnapshot?: string | null | undefined;
+  dataModelSnapshot?: string | undefined;
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The schemaVersion field.
    */
-  schemaVersion?: number | null | undefined;
+  schemaVersion?: number | undefined;
   /**
    * The sentiment field.
    */
-  sentiment?: Sentiment | null | undefined;
+  sentiment?: Sentiment | undefined;
   /**
    * The surfaceId field.
    */
-  surfaceId?: string | null | undefined;
+  surfaceId?: string | undefined;
   /**
    * The text field.
    */
-  text?: string | null | undefined;
+  text?: string | undefined;
 };
 
 /** @internal */
@@ -81,19 +81,18 @@ export const A2UISurfaceFeedback$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  actionName: z.nullable(z.string()).optional(),
-  componentsSnapshot: z.nullable(z.string()).optional(),
-  conversationId: z.nullable(z.string()).optional(),
+  actionName: z.string().optional(),
+  componentsSnapshot: z.string().optional(),
+  conversationId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  dataModelSnapshot: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  schemaVersion: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
-  sentiment: z.nullable(Sentiment$inboundSchema).optional(),
-  surfaceId: z.nullable(z.string()).optional(),
-  text: z.nullable(z.string()).optional(),
+  dataModelSnapshot: z.string().optional(),
+  id: z.string().optional(),
+  schemaVersion: z.string().transform(v => parseInt(v, 10)).optional(),
+  sentiment: Sentiment$inboundSchema.optional(),
+  surfaceId: z.string().optional(),
+  text: z.string().optional(),
 });
 
 export function a2UISurfaceFeedbackFromJSON(

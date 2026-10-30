@@ -14,7 +14,7 @@ export type WebhookApproval = {
   /**
    * The ID of the webhook to call for approval.
    */
-  webhookId?: string | null | undefined;
+  webhookId?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const WebhookApproval$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  webhookId: z.nullable(z.string()).optional(),
+  webhookId: z.string().optional(),
 });
 /** @internal */
 export type WebhookApproval$Outbound = {
-  webhookId?: string | null | undefined;
+  webhookId?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const WebhookApproval$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WebhookApproval
 > = z.object({
-  webhookId: z.nullable(z.string()).optional(),
+  webhookId: z.string().optional(),
 });
 
 export function webhookApprovalToJSON(

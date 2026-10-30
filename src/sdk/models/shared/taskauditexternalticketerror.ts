@@ -14,7 +14,7 @@ export type TaskAuditExternalTicketError = {
   /**
    * The errorMessage field.
    */
-  errorMessage?: string | null | undefined;
+  errorMessage?: string | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const TaskAuditExternalTicketError$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  errorMessage: z.nullable(z.string()).optional(),
+  errorMessage: z.string().optional(),
 });
 
 export function taskAuditExternalTicketErrorFromJSON(

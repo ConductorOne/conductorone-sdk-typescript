@@ -14,15 +14,15 @@ export type FunctionTestResultLog = {
   /**
    * The log level (e.g., "info", "error").
    */
-  level?: string | null | undefined;
+  level?: string | undefined;
   /**
    * The log message content.
    */
-  log?: string | null | undefined;
+  log?: string | undefined;
   /**
    * The log source (e.g., "stdout", "stderr").
    */
-  source?: string | null | undefined;
+  source?: string | undefined;
 };
 
 /** @internal */
@@ -31,9 +31,9 @@ export const FunctionTestResultLog$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  level: z.nullable(z.string()).optional(),
-  log: z.nullable(z.string()).optional(),
-  source: z.nullable(z.string()).optional(),
+  level: z.string().optional(),
+  log: z.string().optional(),
+  source: z.string().optional(),
 });
 
 export function functionTestResultLogFromJSON(

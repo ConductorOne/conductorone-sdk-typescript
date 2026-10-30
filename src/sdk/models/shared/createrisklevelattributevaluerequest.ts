@@ -11,12 +11,12 @@ export type CreateRiskLevelAttributeValueRequest = {
   /**
    * The value field.
    */
-  value?: string | null | undefined;
+  value?: string | undefined;
 };
 
 /** @internal */
 export type CreateRiskLevelAttributeValueRequest$Outbound = {
-  value?: string | null | undefined;
+  value?: string | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const CreateRiskLevelAttributeValueRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateRiskLevelAttributeValueRequest
 > = z.object({
-  value: z.nullable(z.string()).optional(),
+  value: z.string().optional(),
 });
 
 export function createRiskLevelAttributeValueRequestToJSON(

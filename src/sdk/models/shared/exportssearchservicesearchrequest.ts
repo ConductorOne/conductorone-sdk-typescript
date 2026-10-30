@@ -16,19 +16,19 @@ export type ExportsSearchServiceSearchRequest = {
   /**
    * Search for system log exporters with a case insensitive match on the display name.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The pageSize field.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * The query field.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * The refs field.
    */
@@ -37,10 +37,10 @@ export type ExportsSearchServiceSearchRequest = {
 
 /** @internal */
 export type ExportsSearchServiceSearchRequest$Outbound = {
-  displayName?: string | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  query?: string | null | undefined;
+  displayName?: string | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  query?: string | undefined;
   refs?: Array<ExporterRef$Outbound> | null | undefined;
 };
 
@@ -50,10 +50,10 @@ export const ExportsSearchServiceSearchRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ExportsSearchServiceSearchRequest
 > = z.object({
-  displayName: z.nullable(z.string()).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  query: z.string().optional(),
   refs: z.nullable(z.array(ExporterRef$outboundSchema)).optional(),
 });
 

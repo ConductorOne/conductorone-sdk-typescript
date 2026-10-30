@@ -12,9 +12,25 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type SecretTrait = {
   /**
+   * The AppUser id that created this credential. Read-only; resolved from
+   *
+   * @remarks
+   *  the model during uplift. Distinct from identity_app_user_id (the
+   *  holder) and from the resource's Owner (a separate assignment, not
+   *  part of this message).
+   */
+  createdByAppUserId?: string | undefined;
+  /**
+   * Platform-specific credential subtype detail, finer than credential_type
+   *
+   * @remarks
+   *  (e.g. "GCP service-account key"). Read-only; translated from the model.
+   */
+  credentialDetail?: string | undefined;
+  /**
    * The identityAppUserId field.
    */
-  identityAppUserId?: string | null | undefined;
+  identityAppUserId?: string | undefined;
   lastUsedAt?: Date | null | undefined;
   secretCreatedAt?: Date | null | undefined;
   secretExpiresAt?: Date | null | undefined;
@@ -26,7 +42,9 @@ export const SecretTrait$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  identityAppUserId: z.nullable(z.string()).optional(),
+  createdByAppUserId: z.string().optional(),
+  credentialDetail: z.string().optional(),
+  identityAppUserId: z.string().optional(),
   lastUsedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -39,7 +57,9 @@ export const SecretTrait$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type SecretTrait$Outbound = {
-  identityAppUserId?: string | null | undefined;
+  createdByAppUserId?: string | undefined;
+  credentialDetail?: string | undefined;
+  identityAppUserId?: string | undefined;
   lastUsedAt?: string | null | undefined;
   secretCreatedAt?: string | null | undefined;
   secretExpiresAt?: string | null | undefined;
@@ -51,7 +71,9 @@ export const SecretTrait$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SecretTrait
 > = z.object({
-  identityAppUserId: z.nullable(z.string()).optional(),
+  createdByAppUserId: z.string().optional(),
+  credentialDetail: z.string().optional(),
+  identityAppUserId: z.string().optional(),
   lastUsedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   secretCreatedAt: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),

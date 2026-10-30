@@ -8,6 +8,12 @@ import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AccessReviewTaskColumnRef,
+  AccessReviewTaskColumnRef$inboundSchema,
+  AccessReviewTaskColumnRef$Outbound,
+  AccessReviewTaskColumnRef$outboundSchema,
+} from "./accessreviewtaskcolumnref.js";
 
 export const Columns = {
   AccessReviewTaskColumnUnspecified: "ACCESS_REVIEW_TASK_COLUMN_UNSPECIFIED",
@@ -45,6 +51,13 @@ export const Columns = {
     "ACCESS_REVIEW_TASK_COLUMN_RESOURCE_CHILDREN",
   AccessReviewTaskColumnAppUserUsername:
     "ACCESS_REVIEW_TASK_COLUMN_APP_USER_USERNAME",
+  AccessReviewTaskColumnAccessHolderType:
+    "ACCESS_REVIEW_TASK_COLUMN_ACCESS_HOLDER_TYPE",
+  AccessReviewTaskColumnRiskLevel: "ACCESS_REVIEW_TASK_COLUMN_RISK_LEVEL",
+  AccessReviewTaskColumnComplianceFramework:
+    "ACCESS_REVIEW_TASK_COLUMN_COMPLIANCE_FRAMEWORK",
+  AccessReviewTaskColumnResourceDescription:
+    "ACCESS_REVIEW_TASK_COLUMN_RESOURCE_DESCRIPTION",
 } as const;
 export type Columns = OpenEnum<typeof Columns>;
 
@@ -53,12 +66,22 @@ export type Columns = OpenEnum<typeof Columns>;
  */
 export type AccessReviewColumnConfig = {
   /**
-   * Ordered list of columns visible to reviewers.
+   * Deprecated: use `ordered_columns`, which can also include app user
    *
    * @remarks
-   *  If empty, the default column set for the campaign's default_view is used.
+   *  attribute columns.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   columns?: Array<Columns> | null | undefined;
+  /**
+   * Ordered columns visible to reviewers, built-ins and attributes
+   *
+   * @remarks
+   *  interleaved. Falls back to `columns`, then to the default set for the
+   *  campaign's default_view.
+   */
+  orderedColumns?: Array<AccessReviewTaskColumnRef> | null | undefined;
 };
 
 /** @internal */
@@ -75,10 +98,13 @@ export const AccessReviewColumnConfig$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   columns: z.nullable(z.array(Columns$inboundSchema)).optional(),
+  orderedColumns: z.nullable(z.array(AccessReviewTaskColumnRef$inboundSchema))
+    .optional(),
 });
 /** @internal */
 export type AccessReviewColumnConfig$Outbound = {
   columns?: Array<string> | null | undefined;
+  orderedColumns?: Array<AccessReviewTaskColumnRef$Outbound> | null | undefined;
 };
 
 /** @internal */
@@ -88,6 +114,8 @@ export const AccessReviewColumnConfig$outboundSchema: z.ZodType<
   AccessReviewColumnConfig
 > = z.object({
   columns: z.nullable(z.array(Columns$outboundSchema)).optional(),
+  orderedColumns: z.nullable(z.array(AccessReviewTaskColumnRef$outboundSchema))
+    .optional(),
 });
 
 export function accessReviewColumnConfigToJSON(

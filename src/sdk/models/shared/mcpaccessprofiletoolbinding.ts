@@ -14,21 +14,21 @@ export type MCPAccessProfileToolBinding = {
   /**
    * Access profile identifier.
    */
-  accessProfileId?: string | null | undefined;
+  accessProfileId?: string | undefined;
   /**
    * App identifier.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * Connector identifier.
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * MCP tool identifier.
    */
-  mcpToolId?: string | null | undefined;
+  mcpToolId?: string | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -38,16 +38,16 @@ export const MCPAccessProfileToolBinding$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accessProfileId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
+  accessProfileId: z.string().optional(),
+  appId: z.string().optional(),
+  connectorId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  mcpToolId: z.nullable(z.string()).optional(),
+  mcpToolId: z.string().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

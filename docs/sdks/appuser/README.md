@@ -4,11 +4,88 @@
 
 ### Available Operations
 
+* [listOwnedServiceAccounts](#listownedserviceaccounts) - List Owned Service Accounts
 * [list](#list) - List
 * [listAppUserCredentials](#listappusercredentials) - List App User Credentials
 * [listAppUsersForUser](#listappusersforuser) - List App Users For User
 * [update](#update) - Update
 * [search](#search) - Search
+
+## listOwnedServiceAccounts
+
+ListOwnedServiceAccounts returns the service accounts owned by the calling
+ user. The owner is the authenticated caller; it is not accepted as an input.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.app.v1.AppUserService.ListOwnedServiceAccounts" method="post" path="/api/v1/app_users/owned_service_accounts" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.appUser.listOwnedServiceAccounts();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { appUserListOwnedServiceAccounts } from "conductorone-sdk-typescript/funcs/appUserListOwnedServiceAccounts.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await appUserListOwnedServiceAccounts(conductoroneSDKTypescript);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("appUserListOwnedServiceAccounts failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [shared.ListOwnedServiceAccountsRequest](../../sdk/models/shared/listownedserviceaccountsrequest.md)                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.C1ApiAppV1AppUserServiceListOwnedServiceAccountsResponse](../../sdk/models/operations/c1apiappv1appuserservicelistownedserviceaccountsresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
 
 ## list
 

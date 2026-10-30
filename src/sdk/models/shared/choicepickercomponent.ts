@@ -25,16 +25,16 @@ export type ChoicePickerComponent = {
    *  or beside another control that already names the field — e.g. stacked
    *  under a check_box in a per-attribute mapping row.
    */
-  hideLabel?: boolean | null | undefined;
+  hideLabel?: boolean | undefined;
   label?: DynamicString | null | undefined;
   /**
    * The multiSelect field.
    */
-  multiSelect?: boolean | null | undefined;
+  multiSelect?: boolean | undefined;
   /**
    * The required field.
    */
-  required?: boolean | null | undefined;
+  required?: boolean | undefined;
   value?: DynamicString | null | undefined;
 };
 
@@ -45,10 +45,10 @@ export const ChoicePickerComponent$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   choices: z.nullable(z.array(Choice$inboundSchema)).optional(),
-  hideLabel: z.nullable(z.boolean()).optional(),
+  hideLabel: z.boolean().optional(),
   label: z.nullable(DynamicString$inboundSchema).optional(),
-  multiSelect: z.nullable(z.boolean()).optional(),
-  required: z.nullable(z.boolean()).optional(),
+  multiSelect: z.boolean().optional(),
+  required: z.boolean().optional(),
   value: z.nullable(DynamicString$inboundSchema).optional(),
 });
 

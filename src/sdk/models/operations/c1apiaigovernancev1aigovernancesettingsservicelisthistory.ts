@@ -24,7 +24,10 @@ export type C1ApiAIGovernanceV1AIGovernanceSettingsServiceListHistoryResponse =
      */
     rawResponse: Response;
     /**
-     * Successful response
+     * ListAIGovernanceSettingsHistoryResponse contains a page of AI governance
+     *
+     * @remarks
+     *  settings change-history entries, newest first.
      */
     listAIGovernanceSettingsHistoryResponse?:
       | shared.ListAIGovernanceSettingsHistoryResponse

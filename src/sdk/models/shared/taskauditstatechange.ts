@@ -29,7 +29,7 @@ export type TaskAuditStateChange = {
   /**
    * The previousState field.
    */
-  previousState?: PreviousState | null | undefined;
+  previousState?: PreviousState | undefined;
 };
 
 /** @internal */
@@ -45,7 +45,7 @@ export const TaskAuditStateChange$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  previousState: z.nullable(PreviousState$inboundSchema).optional(),
+  previousState: PreviousState$inboundSchema.optional(),
 });
 
 export function taskAuditStateChangeFromJSON(

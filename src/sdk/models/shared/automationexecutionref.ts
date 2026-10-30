@@ -11,12 +11,12 @@ export type AutomationExecutionRef = {
   /**
    * The id field.
    */
-  id?: number | null | undefined;
+  id?: number | undefined;
 };
 
 /** @internal */
 export type AutomationExecutionRef$Outbound = {
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const AutomationExecutionRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AutomationExecutionRef
 > = z.object({
-  id: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
+  id: z.number().int().transform(v => `${v}`).optional(),
 });
 
 export function automationExecutionRefToJSON(

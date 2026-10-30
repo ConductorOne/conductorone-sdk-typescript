@@ -22,7 +22,7 @@ export type LocalUserInvitationServiceSearchResponse = {
   /**
    * The nextPageToken field.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -32,7 +32,7 @@ export const LocalUserInvitationServiceSearchResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   list: z.nullable(z.array(LocalUserInvitation$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function localUserInvitationServiceSearchResponseFromJSON(

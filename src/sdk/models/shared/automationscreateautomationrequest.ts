@@ -58,7 +58,7 @@ export type AutomationsCreateAutomationRequest = {
   /**
    * the app id this workflow_template belongs to
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * Ordered list of steps that the automation executes.
    */
@@ -66,23 +66,22 @@ export type AutomationsCreateAutomationRequest = {
   /**
    * Circuit breaker rate cap. See Automation.circuit_breaker_max for semantics.
    */
-  circuitBreakerMax?: number | null | undefined;
+  circuitBreakerMax?: number | undefined;
   /**
    * The circuitBreakerPeriod field.
    */
   circuitBreakerPeriod?:
     | AutomationsCreateAutomationRequestCircuitBreakerPeriod
-    | null
     | undefined;
   context?: AutomationContext | null | undefined;
   /**
    * Optional description explaining the automation's purpose.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * Human-readable name for the automation.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * Steps saved as a draft that have not yet been published.
    */
@@ -94,11 +93,11 @@ export type AutomationsCreateAutomationRequest = {
   /**
    * Whether the automation is active and eligible for execution.
    */
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   /**
    * Whether this automation is in draft mode. Draft automations are not eligible for trigger-based execution.
    */
-  isDraft?: boolean | null | undefined;
+  isDraft?: boolean | undefined;
   /**
    * Triggers that determine when the automation runs.
    */
@@ -118,17 +117,17 @@ export const AutomationsCreateAutomationRequestCircuitBreakerPeriod$outboundSche
 /** @internal */
 export type AutomationsCreateAutomationRequest$Outbound = {
   annotations?: { [k: string]: string } | undefined;
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   automationSteps?: Array<AutomationStep$Outbound> | null | undefined;
-  circuitBreakerMax?: number | null | undefined;
-  circuitBreakerPeriod?: string | null | undefined;
+  circuitBreakerMax?: number | undefined;
+  circuitBreakerPeriod?: string | undefined;
   context?: AutomationContext$Outbound | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
   draftAutomationSteps?: Array<AutomationStep$Outbound> | null | undefined;
   draftTriggers?: Array<AutomationTrigger$Outbound> | null | undefined;
-  enabled?: boolean | null | undefined;
-  isDraft?: boolean | null | undefined;
+  enabled?: boolean | undefined;
+  isDraft?: boolean | undefined;
   triggers?: Array<AutomationTrigger$Outbound> | null | undefined;
 };
 
@@ -139,22 +138,22 @@ export const AutomationsCreateAutomationRequest$outboundSchema: z.ZodType<
   AutomationsCreateAutomationRequest
 > = z.object({
   annotations: z.record(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
   automationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
     .optional(),
-  circuitBreakerMax: z.nullable(z.number().int()).optional(),
-  circuitBreakerPeriod: z.nullable(
-    AutomationsCreateAutomationRequestCircuitBreakerPeriod$outboundSchema,
-  ).optional(),
+  circuitBreakerMax: z.number().int().optional(),
+  circuitBreakerPeriod:
+    AutomationsCreateAutomationRequestCircuitBreakerPeriod$outboundSchema
+      .optional(),
   context: z.nullable(AutomationContext$outboundSchema).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
   draftAutomationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
     .optional(),
   draftTriggers: z.nullable(z.array(AutomationTrigger$outboundSchema))
     .optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  isDraft: z.nullable(z.boolean()).optional(),
+  enabled: z.boolean().optional(),
+  isDraft: z.boolean().optional(),
   triggers: z.nullable(z.array(AutomationTrigger$outboundSchema)).optional(),
 });
 

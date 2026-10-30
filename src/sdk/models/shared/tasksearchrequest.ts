@@ -21,6 +21,29 @@ import {
   TaskTypeInput$outboundSchema,
 } from "./tasktypeinput.js";
 
+export const AccessProfileReviewKinds = {
+  AccessProfileReviewKindUnspecified: "ACCESS_PROFILE_REVIEW_KIND_UNSPECIFIED",
+  AccessProfileReviewKindMembershipCel:
+    "ACCESS_PROFILE_REVIEW_KIND_MEMBERSHIP_CEL",
+  AccessProfileReviewKindMembershipEntitlement:
+    "ACCESS_PROFILE_REVIEW_KIND_MEMBERSHIP_ENTITLEMENT",
+  AccessProfileReviewKindManualEnrollment:
+    "ACCESS_PROFILE_REVIEW_KIND_MANUAL_ENROLLMENT",
+  AccessProfileReviewKindExclusion: "ACCESS_PROFILE_REVIEW_KIND_EXCLUSION",
+  AccessProfileReviewKindComposition: "ACCESS_PROFILE_REVIEW_KIND_COMPOSITION",
+} as const;
+export type AccessProfileReviewKinds = OpenEnum<
+  typeof AccessProfileReviewKinds
+>;
+
+export const AccountStatuses = {
+  StatusUnspecified: "STATUS_UNSPECIFIED",
+  StatusEnabled: "STATUS_ENABLED",
+  StatusDisabled: "STATUS_DISABLED",
+  StatusDeleted: "STATUS_DELETED",
+} as const;
+export type AccountStatuses = OpenEnum<typeof AccountStatuses>;
+
 export const TaskSearchRequestAccountTypes = {
   AppUserTypeUnspecified: "APP_USER_TYPE_UNSPECIFIED",
   AppUserTypeUser: "APP_USER_TYPE_USER",
@@ -80,9 +103,6 @@ export type GrantOutcomes = OpenEnum<typeof GrantOutcomes>;
 
 /**
  * Filter tasks by pending action status. Only applies when exactly one access_review_id is specified.
- *
- * @remarks
- *  Requires the REVIEWS_PENDING_ACTIONS feature flag to be enabled.
  */
 export const PendingActionFilter = {
   PendingActionFilterUnspecified: "PENDING_ACTION_FILTER_UNSPECIFIED",
@@ -91,9 +111,6 @@ export const PendingActionFilter = {
 } as const;
 /**
  * Filter tasks by pending action status. Only applies when exactly one access_review_id is specified.
- *
- * @remarks
- *  Requires the REVIEWS_PENDING_ACTIONS feature flag to be enabled.
  */
 export type PendingActionFilter = OpenEnum<typeof PendingActionFilter>;
 
@@ -139,6 +156,8 @@ export const StepApprovalTypes = {
   StepApprovalTypeWebhook: "STEP_APPROVAL_TYPE_WEBHOOK",
   StepApprovalTypeResourceOwners: "STEP_APPROVAL_TYPE_RESOURCE_OWNERS",
   StepApprovalTypeAgent: "STEP_APPROVAL_TYPE_AGENT",
+  StepApprovalTypeAccessProfileOwners:
+    "STEP_APPROVAL_TYPE_ACCESS_PROFILE_OWNERS",
 } as const;
 export type StepApprovalTypes = OpenEnum<typeof StepApprovalTypes>;
 
@@ -154,6 +173,14 @@ export type TaskStates = OpenEnum<typeof TaskStates>;
  */
 export type TaskSearchRequest = {
   /**
+   * Only certify tasks reviewing these access profiles. Combined with other filters using AND.
+   */
+  accessProfileIds?: Array<string> | null | undefined;
+  /**
+   * Only these access-profile review kinds. Multiple kinds are alternatives; empty means all kinds.
+   */
+  accessProfileReviewKinds?: Array<AccessProfileReviewKinds> | null | undefined;
+  /**
    * Search tasks that belong to any of the access reviews included in this list.
    */
   accessReviewIds?: Array<string> | null | undefined;
@@ -162,13 +189,17 @@ export type TaskSearchRequest = {
    */
   accountOwnerIds?: Array<string> | null | undefined;
   /**
+   * Search tasks by the account status of the app user subject.
+   */
+  accountStatuses?: Array<AccountStatuses> | null | undefined;
+  /**
    * The accountTypes field.
    */
   accountTypes?: Array<TaskSearchRequestAccountTypes> | null | undefined;
   /**
    * Search tasks that have this actor ID.
    */
-  actorId?: string | null | undefined;
+  actorId?: string | undefined;
   /**
    * Search tasks that have any of these app entitlement IDs.
    */
@@ -192,7 +223,7 @@ export type TaskSearchRequest = {
   /**
    * Search tasks that are currently assigned to this user, or that are closed and were previously approved by this user.
    */
-  assignedOrStepApproverUserId?: string | null | undefined;
+  assignedOrStepApproverUserId?: string | undefined;
   /**
    * Search tasks by  List of UserIDs which are currently assigned these Tasks
    */
@@ -206,11 +237,11 @@ export type TaskSearchRequest = {
   /**
    * Search tasks that have this type of step as the current step.
    */
-  currentStep?: CurrentStep | null | undefined;
+  currentStep?: CurrentStep | undefined;
   /**
    * Search tasks that are or are not emergency access.
    */
-  emergencyStatus?: EmergencyStatus | null | undefined;
+  emergencyStatus?: EmergencyStatus | undefined;
   /**
    * Search tasks that do not have any of these app entitlement IDs.
    */
@@ -236,7 +267,7 @@ export type TaskSearchRequest = {
   /**
    * Whether or not to include deleted tasks.
    */
-  includeDeleted?: boolean | null | undefined;
+  includeDeleted?: boolean | undefined;
   /**
    * Search tasks where the user would see this task in the My Work section
    */
@@ -249,24 +280,21 @@ export type TaskSearchRequest = {
   /**
    * Search tasks that were opened by this user, or that the user is the subject of.
    */
-  openerOrSubjectUserId?: string | null | undefined;
+  openerOrSubjectUserId?: string | undefined;
   outcomeAfter?: Date | null | undefined;
   outcomeBefore?: Date | null | undefined;
   /**
    * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Filter tasks by pending action status. Only applies when exactly one access_review_id is specified.
-   *
-   * @remarks
-   *  Requires the REVIEWS_PENDING_ACTIONS feature flag to be enabled.
    */
-  pendingActionFilter?: PendingActionFilter | null | undefined;
+  pendingActionFilter?: PendingActionFilter | undefined;
   /**
    * Search tasks that were acted on by any of these users.
    */
@@ -274,7 +302,7 @@ export type TaskSearchRequest = {
   /**
    * Fuzzy search tasks by display name, description, or ID.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * Query tasks by display name, description, or numeric ID.
    */
@@ -282,11 +310,11 @@ export type TaskSearchRequest = {
   /**
    * Filter tasks where the current approval step requires an approval reason.
    */
-  requireApprovalReason?: boolean | null | undefined;
+  requireApprovalReason?: boolean | undefined;
   /**
    * Filter tasks where the current approval step requires a denial reason.
    */
-  requireDenialReason?: boolean | null | undefined;
+  requireDenialReason?: boolean | undefined;
   /**
    * Search tasks by revoke outcome
    */
@@ -294,7 +322,7 @@ export type TaskSearchRequest = {
   /**
    * Sort tasks in a specific order.
    */
-  sortBy?: TaskSearchRequestSortBy | null | undefined;
+  sortBy?: TaskSearchRequestSortBy | undefined;
   /**
    * Search tasks that have a current policy step of this type
    */
@@ -316,6 +344,20 @@ export type TaskSearchRequest = {
    */
   userEmploymentStatuses?: Array<string> | null | undefined;
 };
+
+/** @internal */
+export const AccessProfileReviewKinds$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  AccessProfileReviewKinds
+> = openEnums.outboundSchema(AccessProfileReviewKinds);
+
+/** @internal */
+export const AccountStatuses$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  AccountStatuses
+> = openEnums.outboundSchema(AccountStatuses);
 
 /** @internal */
 export const TaskSearchRequestAccountTypes$outboundSchema: z.ZodType<
@@ -389,22 +431,25 @@ export const TaskStates$outboundSchema: z.ZodType<
 
 /** @internal */
 export type TaskSearchRequest$Outbound = {
+  accessProfileIds?: Array<string> | null | undefined;
+  accessProfileReviewKinds?: Array<string> | null | undefined;
   accessReviewIds?: Array<string> | null | undefined;
   accountOwnerIds?: Array<string> | null | undefined;
+  accountStatuses?: Array<string> | null | undefined;
   accountTypes?: Array<string> | null | undefined;
-  actorId?: string | null | undefined;
+  actorId?: string | undefined;
   appEntitlementIds?: Array<string> | null | undefined;
   appResourceIds?: Array<string> | null | undefined;
   appResourceTypeIds?: Array<string> | null | undefined;
   appUserSubjectIds?: Array<string> | null | undefined;
   applicationIds?: Array<string> | null | undefined;
-  assignedOrStepApproverUserId?: string | null | undefined;
+  assignedOrStepApproverUserId?: string | undefined;
   assigneesInIds?: Array<string> | null | undefined;
   certifyOutcomes?: Array<string> | null | undefined;
   createdAfter?: string | null | undefined;
   createdBefore?: string | null | undefined;
-  currentStep?: string | null | undefined;
-  emergencyStatus?: string | null | undefined;
+  currentStep?: string | undefined;
+  emergencyStatus?: string | undefined;
   excludeAppEntitlementIds?: Array<string> | null | undefined;
   excludeAppResourceTypeIds?: Array<string> | null | undefined;
   excludeApplicationIds?: Array<string> | null | undefined;
@@ -412,23 +457,23 @@ export type TaskSearchRequest$Outbound = {
   expandMask?: TaskExpandMask$Outbound | null | undefined;
   grantOutcomes?: Array<string> | null | undefined;
   includeActedAfter?: string | null | undefined;
-  includeDeleted?: boolean | null | undefined;
+  includeDeleted?: boolean | undefined;
   myWorkUserIds?: Array<string> | null | undefined;
   olderThanDuration?: string | null | undefined;
   openerIds?: Array<string> | null | undefined;
-  openerOrSubjectUserId?: string | null | undefined;
+  openerOrSubjectUserId?: string | undefined;
   outcomeAfter?: string | null | undefined;
   outcomeBefore?: string | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  pendingActionFilter?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  pendingActionFilter?: string | undefined;
   previouslyActedOnIds?: Array<string> | null | undefined;
-  query?: string | null | undefined;
+  query?: string | undefined;
   refs?: Array<TaskRef$Outbound> | null | undefined;
-  requireApprovalReason?: boolean | null | undefined;
-  requireDenialReason?: boolean | null | undefined;
+  requireApprovalReason?: boolean | undefined;
+  requireDenialReason?: boolean | undefined;
   revokeOutcomes?: Array<string> | null | undefined;
-  sortBy?: string | null | undefined;
+  sortBy?: string | undefined;
   stepApprovalTypes?: Array<string> | null | undefined;
   subjectIds?: Array<string> | null | undefined;
   taskStates?: Array<string> | null | undefined;
@@ -442,26 +487,32 @@ export const TaskSearchRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskSearchRequest
 > = z.object({
+  accessProfileIds: z.nullable(z.array(z.string())).optional(),
+  accessProfileReviewKinds: z.nullable(
+    z.array(AccessProfileReviewKinds$outboundSchema),
+  ).optional(),
   accessReviewIds: z.nullable(z.array(z.string())).optional(),
   accountOwnerIds: z.nullable(z.array(z.string())).optional(),
+  accountStatuses: z.nullable(z.array(AccountStatuses$outboundSchema))
+    .optional(),
   accountTypes: z.nullable(
     z.array(TaskSearchRequestAccountTypes$outboundSchema),
   ).optional(),
-  actorId: z.nullable(z.string()).optional(),
+  actorId: z.string().optional(),
   appEntitlementIds: z.nullable(z.array(z.string())).optional(),
   appResourceIds: z.nullable(z.array(z.string())).optional(),
   appResourceTypeIds: z.nullable(z.array(z.string())).optional(),
   appUserSubjectIds: z.nullable(z.array(z.string())).optional(),
   applicationIds: z.nullable(z.array(z.string())).optional(),
-  assignedOrStepApproverUserId: z.nullable(z.string()).optional(),
+  assignedOrStepApproverUserId: z.string().optional(),
   assigneesInIds: z.nullable(z.array(z.string())).optional(),
   certifyOutcomes: z.nullable(z.array(CertifyOutcomes$outboundSchema))
     .optional(),
   createdAfter: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   createdBefore: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
-  currentStep: z.nullable(CurrentStep$outboundSchema).optional(),
-  emergencyStatus: z.nullable(EmergencyStatus$outboundSchema).optional(),
+  currentStep: CurrentStep$outboundSchema.optional(),
+  emergencyStatus: EmergencyStatus$outboundSchema.optional(),
   excludeAppEntitlementIds: z.nullable(z.array(z.string())).optional(),
   excludeAppResourceTypeIds: z.nullable(z.array(z.string())).optional(),
   excludeApplicationIds: z.nullable(z.array(z.string())).optional(),
@@ -470,25 +521,24 @@ export const TaskSearchRequest$outboundSchema: z.ZodType<
   grantOutcomes: z.nullable(z.array(GrantOutcomes$outboundSchema)).optional(),
   includeActedAfter: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
-  includeDeleted: z.nullable(z.boolean()).optional(),
+  includeDeleted: z.boolean().optional(),
   myWorkUserIds: z.nullable(z.array(z.string())).optional(),
   olderThanDuration: z.nullable(z.string()).optional(),
   openerIds: z.nullable(z.array(z.string())).optional(),
-  openerOrSubjectUserId: z.nullable(z.string()).optional(),
+  openerOrSubjectUserId: z.string().optional(),
   outcomeAfter: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   outcomeBefore: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  pendingActionFilter: z.nullable(PendingActionFilter$outboundSchema)
-    .optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  pendingActionFilter: PendingActionFilter$outboundSchema.optional(),
   previouslyActedOnIds: z.nullable(z.array(z.string())).optional(),
-  query: z.nullable(z.string()).optional(),
+  query: z.string().optional(),
   refs: z.nullable(z.array(TaskRef$outboundSchema)).optional(),
-  requireApprovalReason: z.nullable(z.boolean()).optional(),
-  requireDenialReason: z.nullable(z.boolean()).optional(),
+  requireApprovalReason: z.boolean().optional(),
+  requireDenialReason: z.boolean().optional(),
   revokeOutcomes: z.nullable(z.array(RevokeOutcomes$outboundSchema)).optional(),
-  sortBy: z.nullable(TaskSearchRequestSortBy$outboundSchema).optional(),
+  sortBy: TaskSearchRequestSortBy$outboundSchema.optional(),
   stepApprovalTypes: z.nullable(z.array(StepApprovalTypes$outboundSchema))
     .optional(),
   subjectIds: z.nullable(z.array(z.string())).optional(),

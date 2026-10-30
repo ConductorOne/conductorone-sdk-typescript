@@ -17,5 +17,5 @@ let value: FunctionsServiceCreateFunctionRequestFunctionType =
 ## Values
 
 ```typescript
-"FUNCTION_TYPE_UNSPECIFIED" | "FUNCTION_TYPE_ANY" | "FUNCTION_TYPE_CODE_MODE" | Unrecognized<string>
+"FUNCTION_TYPE_UNSPECIFIED" | "FUNCTION_TYPE_ANY" | "FUNCTION_TYPE_CODE_MODE" | "FUNCTION_TYPE_CONNECTOR" | Unrecognized<string>
 ```

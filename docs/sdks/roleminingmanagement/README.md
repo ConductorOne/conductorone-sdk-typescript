@@ -8,8 +8,13 @@
 * [getRoleMiningConfig](#getroleminingconfig) - Get Role Mining Config
 * [updateRoleMiningConfig](#updateroleminingconfig) - Update Role Mining Config
 * [listCustomAnalysisResults](#listcustomanalysisresults) - List Custom Analysis Results
+* [evaluateEntitlementSelection](#evaluateentitlementselection) - Evaluate Entitlement Selection
 * [getCustomAnalysisResult](#getcustomanalysisresult) - Get Custom Analysis Result
+* [countEntitlementSelectionFilterAttributeValues](#countentitlementselectionfilterattributevalues) - Count Entitlement Selection Filter Attribute Values
+* [getLatestCustomAnalysisResult](#getlatestcustomanalysisresult) - Get Latest Custom Analysis Result
 * [triggerCustomAnalysis](#triggercustomanalysis) - Trigger Custom Analysis
+* [listCohortFilterAttributes](#listcohortfilterattributes) - List Cohort Filter Attributes
+* [listCohortFilterAttributeValues](#listcohortfilterattributevalues) - List Cohort Filter Attribute Values
 * [listRuns](#listruns) - List Runs
 * [getLatestRun](#getlatestrun) - Get Latest Run
 * [listSuggestions](#listsuggestions) - List Suggestions
@@ -318,9 +323,92 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4XX, 5XX        | \*/\*           |
 
+## evaluateEntitlementSelection
+
+Evaluate the exact cohort impact of an entitlement cutoff and manual overrides.
+ The analysis determines the eligible entitlements and cohort definition.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.role_mining_management.v1.RoleMiningManagementService.EvaluateEntitlementSelection" method="post" path="/api/v1/role-mining/custom-analysis/{analysis_id}/evaluate-entitlement-selection" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.roleMiningManagement.evaluateEntitlementSelection({
+    analysisId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { roleMiningManagementEvaluateEntitlementSelection } from "conductorone-sdk-typescript/funcs/roleMiningManagementEvaluateEntitlementSelection.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await roleMiningManagementEvaluateEntitlementSelection(conductoroneSDKTypescript, {
+    analysisId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("roleMiningManagementEvaluateEntitlementSelection failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                             | Required                                                                                                                                                                                                                         | Description                                                                                                                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                                                                                                        | [operations.C1ApiRoleMiningManagementV1RoleMiningManagementServiceEvaluateEntitlementSelectionRequest](../../sdk/models/operations/c1apiroleminingmanagementv1roleminingmanagementserviceevaluateentitlementselectionrequest.md) | :heavy_check_mark:                                                                                                                                                                                                               | The request object to use for the request.                                                                                                                                                                                       |
+| `options`                                                                                                                                                                                                                        | RequestOptions                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                               | Used to set various options for making HTTP requests.                                                                                                                                                                            |
+| `options.fetchOptions`                                                                                                                                                                                                           | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                               | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                                                   |
+| `options.retries`                                                                                                                                                                                                                | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                               | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                                                 |
+
+### Response
+
+**Promise\<[operations.C1ApiRoleMiningManagementV1RoleMiningManagementServiceEvaluateEntitlementSelectionResponse](../../sdk/models/operations/c1apiroleminingmanagementv1roleminingmanagementserviceevaluateentitlementselectionresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
 ## getCustomAnalysisResult
 
-Invokes the c1.api.role_mining_management.v1.RoleMiningManagementService.GetCustomAnalysisResult method.
+GetCustomAnalysisResult returns the status and results of a custom cohort
+ analysis started with TriggerCustomAnalysis, including entitlement
+ coverage, entitlement clusters, attribute facets, and cutoff impact
+ points. Requires the agentic role mining feature.
 
 ### Example Usage
 
@@ -397,9 +485,169 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4XX, 5XX        | \*/\*           |
 
+## countEntitlementSelectionFilterAttributeValues
+
+CountEntitlementSelectionFilterAttributeValues returns exact cohort and
+ selected-holder counts for one bounded page of custom attribute values.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.role_mining_management.v1.RoleMiningManagementService.CountEntitlementSelectionFilterAttributeValues" method="post" path="/api/v1/role-mining/custom-analysis/{selection_analysis_id}/filter-attributes/{attribute}/value-counts" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.roleMiningManagement.countEntitlementSelectionFilterAttributeValues({
+    selectionAnalysisId: "<id>",
+    attribute: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { roleMiningManagementCountEntitlementSelectionFilterAttributeValues } from "conductorone-sdk-typescript/funcs/roleMiningManagementCountEntitlementSelectionFilterAttributeValues.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await roleMiningManagementCountEntitlementSelectionFilterAttributeValues(conductoroneSDKTypescript, {
+    selectionAnalysisId: "<id>",
+    attribute: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("roleMiningManagementCountEntitlementSelectionFilterAttributeValues failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                                                            | Type                                                                                                                                                                                                                                                                 | Required                                                                                                                                                                                                                                                             | Description                                                                                                                                                                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                                                                                                                                            | [operations.C1ApiRoleMiningManagementV1RoleMiningManagementServiceCountEntitlementSelectionFilterAttributeValuesRequest](../../sdk/models/operations/c1apiroleminingmanagementv1roleminingmanagementservicecountentitlementselectionfilterattributevaluesrequest.md) | :heavy_check_mark:                                                                                                                                                                                                                                                   | The request object to use for the request.                                                                                                                                                                                                                           |
+| `options`                                                                                                                                                                                                                                                            | RequestOptions                                                                                                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                                                                   | Used to set various options for making HTTP requests.                                                                                                                                                                                                                |
+| `options.fetchOptions`                                                                                                                                                                                                                                               | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                                                   | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                                                                                       |
+| `options.retries`                                                                                                                                                                                                                                                    | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                                   | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                                                                                     |
+
+### Response
+
+**Promise\<[operations.C1ApiRoleMiningManagementV1RoleMiningManagementServiceCountEntitlementSelectionFilterAttributeValuesResponse](../../sdk/models/operations/c1apiroleminingmanagementv1roleminingmanagementservicecountentitlementselectionfilterattributevaluesresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## getLatestCustomAnalysisResult
+
+GetLatestCustomAnalysisResult returns the authenticated user's latest
+ accepted custom analysis result, if one exists.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.role_mining_management.v1.RoleMiningManagementService.GetLatestCustomAnalysisResult" method="get" path="/api/v1/role-mining/custom-analysis/latest" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.roleMiningManagement.getLatestCustomAnalysisResult();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { roleMiningManagementGetLatestCustomAnalysisResult } from "conductorone-sdk-typescript/funcs/roleMiningManagementGetLatestCustomAnalysisResult.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await roleMiningManagementGetLatestCustomAnalysisResult(conductoroneSDKTypescript);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("roleMiningManagementGetLatestCustomAnalysisResult failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.C1ApiRoleMiningManagementV1RoleMiningManagementServiceGetLatestCustomAnalysisResultResponse](../../sdk/models/operations/c1apiroleminingmanagementv1roleminingmanagementservicegetlatestcustomanalysisresultresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
 ## triggerCustomAnalysis
 
-Invokes the c1.api.role_mining_management.v1.RoleMiningManagementService.TriggerCustomAnalysis method.
+TriggerCustomAnalysis starts an asynchronous custom cohort analysis defined
+ by the given profile filters and returns the ID of the analysis result.
+ Requires the agentic role mining feature. Poll GetCustomAnalysisResult
+ until the analysis completes.
 
 ### Example Usage
 
@@ -465,6 +713,162 @@ run();
 ### Response
 
 **Promise\<[operations.C1ApiRoleMiningManagementV1RoleMiningManagementServiceTriggerCustomAnalysisResponse](../../sdk/models/operations/c1apiroleminingmanagementv1roleminingmanagementservicetriggercustomanalysisresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## listCohortFilterAttributes
+
+ListCohortFilterAttributes is the catalog used by the custom-analysis
+ editor. It is intentionally independent from value enumeration.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.role_mining_management.v1.RoleMiningManagementService.ListCohortFilterAttributes" method="get" path="/api/v1/role-mining/filter-attributes" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.roleMiningManagement.listCohortFilterAttributes();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { roleMiningManagementListCohortFilterAttributes } from "conductorone-sdk-typescript/funcs/roleMiningManagementListCohortFilterAttributes.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await roleMiningManagementListCohortFilterAttributes(conductoroneSDKTypescript);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("roleMiningManagementListCohortFilterAttributes failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                                                                                                    | [operations.C1ApiRoleMiningManagementV1RoleMiningManagementServiceListCohortFilterAttributesRequest](../../sdk/models/operations/c1apiroleminingmanagementv1roleminingmanagementservicelistcohortfilterattributesrequest.md) | :heavy_check_mark:                                                                                                                                                                                                           | The request object to use for the request.                                                                                                                                                                                   |
+| `options`                                                                                                                                                                                                                    | RequestOptions                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                           | Used to set various options for making HTTP requests.                                                                                                                                                                        |
+| `options.fetchOptions`                                                                                                                                                                                                       | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                           | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                                               |
+| `options.retries`                                                                                                                                                                                                            | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                           | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                                             |
+
+### Response
+
+**Promise\<[operations.C1ApiRoleMiningManagementV1RoleMiningManagementServiceListCohortFilterAttributesResponse](../../sdk/models/operations/c1apiroleminingmanagementv1roleminingmanagementservicelistcohortfilterattributesresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## listCohortFilterAttributeValues
+
+ListCohortFilterAttributeValues pages one attribute's values for the
+ custom-analysis editor.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.role_mining_management.v1.RoleMiningManagementService.ListCohortFilterAttributeValues" method="get" path="/api/v1/role-mining/filter-attributes/{attribute}/values" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.roleMiningManagement.listCohortFilterAttributeValues({
+    attribute: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { roleMiningManagementListCohortFilterAttributeValues } from "conductorone-sdk-typescript/funcs/roleMiningManagementListCohortFilterAttributeValues.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await roleMiningManagementListCohortFilterAttributeValues(conductoroneSDKTypescript, {
+    attribute: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("roleMiningManagementListCohortFilterAttributeValues failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                            |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                                                                                                              | [operations.C1ApiRoleMiningManagementV1RoleMiningManagementServiceListCohortFilterAttributeValuesRequest](../../sdk/models/operations/c1apiroleminingmanagementv1roleminingmanagementservicelistcohortfilterattributevaluesrequest.md) | :heavy_check_mark:                                                                                                                                                                                                                     | The request object to use for the request.                                                                                                                                                                                             |
+| `options`                                                                                                                                                                                                                              | RequestOptions                                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                     | Used to set various options for making HTTP requests.                                                                                                                                                                                  |
+| `options.fetchOptions`                                                                                                                                                                                                                 | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                     | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                                                         |
+| `options.retries`                                                                                                                                                                                                                      | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                     | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                                                       |
+
+### Response
+
+**Promise\<[operations.C1ApiRoleMiningManagementV1RoleMiningManagementServiceListCohortFilterAttributeValuesResponse](../../sdk/models/operations/c1apiroleminingmanagementv1roleminingmanagementservicelistcohortfilterattributevaluesresponse.md)\>**
 
 ### Errors
 

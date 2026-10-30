@@ -8,6 +8,33 @@ import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  FunctionNetworkConfig,
+  FunctionNetworkConfig$inboundSchema,
+  FunctionNetworkConfig$Outbound,
+  FunctionNetworkConfig$outboundSchema,
+} from "./functionnetworkconfig.js";
+
+/**
+ * Compile state of the published commit for the function's current
+ *
+ * @remarks
+ *  configuration. Populated by GetFunction only; unset in list responses.
+ */
+export const CompileStatus = {
+  FunctionCompileStatusUnspecified: "FUNCTION_COMPILE_STATUS_UNSPECIFIED",
+  FunctionCompileStatusNotCompiled: "FUNCTION_COMPILE_STATUS_NOT_COMPILED",
+  FunctionCompileStatusCompiling: "FUNCTION_COMPILE_STATUS_COMPILING",
+  FunctionCompileStatusReady: "FUNCTION_COMPILE_STATUS_READY",
+  FunctionCompileStatusFailed: "FUNCTION_COMPILE_STATUS_FAILED",
+} as const;
+/**
+ * Compile state of the published commit for the function's current
+ *
+ * @remarks
+ *  configuration. Populated by GetFunction only; unset in list responses.
+ */
+export type CompileStatus = OpenEnum<typeof CompileStatus>;
 
 /**
  * The functionType field.
@@ -16,6 +43,7 @@ export const FunctionType = {
   FunctionTypeUnspecified: "FUNCTION_TYPE_UNSPECIFIED",
   FunctionTypeAny: "FUNCTION_TYPE_ANY",
   FunctionTypeCodeMode: "FUNCTION_TYPE_CODE_MODE",
+  FunctionTypeConnector: "FUNCTION_TYPE_CONNECTOR",
 } as const;
 /**
  * The functionType field.
@@ -26,40 +54,71 @@ export type FunctionType = OpenEnum<typeof FunctionType>;
  * Function represents a customer-provided code extension in the API
  */
 export type FunctionT = {
+  /**
+   * Compiler output when compile_status is FUNCTION_COMPILE_STATUS_FAILED.
+   */
+  compileError?: string | undefined;
+  /**
+   * Compile state of the published commit for the function's current
+   *
+   * @remarks
+   *  configuration. Populated by GetFunction only; unset in list responses.
+   */
+  compileStatus?: CompileStatus | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * The description field.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The functionType field.
    */
-  functionType?: FunctionType | null | undefined;
+  functionType?: FunctionType | undefined;
   /**
    * The head field.
    */
-  head?: string | null | undefined;
+  head?: string | undefined;
+  /**
+   * IDs of every non-deleted hook that still references this function.
+   *
+   * @remarks
+   *  Read-only: maintained by the Hook API, not by CreateFunction/UpdateFunction.
+   *  Non-empty means DeleteFunction will refuse to delete until these are
+   *  removed or retargeted.
+   */
+  hookRefs?: Array<string> | null | undefined;
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The isDraft field.
    */
-  isDraft?: boolean | null | undefined;
+  isDraft?: boolean | undefined;
+  networkConfig?: FunctionNetworkConfig | null | undefined;
   /**
    * The outboundNetworkAllowlist field.
    */
   outboundNetworkAllowlist?: Array<string> | null | undefined;
   /**
+   * Number of pre-warmed Lambda instances. 0 (default) leaves the function
+   *
+   * @remarks
+   *  cold-started on first invoke. > 0 reserves and provisions that many
+   *  execution environments via AWS Lambda provisioned concurrency.
+   *  Ignored for FUNCTION_TYPE_CODE_MODE functions — that value is driven
+   *  by AIGovernanceSettings.code_mode_concurrency.
+   */
+  provisionedConcurrency?: number | undefined;
+  /**
    * The publishedCommitId field.
    */
-  publishedCommitId?: string | null | undefined;
+  publishedCommitId?: string | undefined;
   /**
    * Scoped role IDs define the permissions granted to this function when calling
    *
@@ -86,7 +145,14 @@ export type FunctionT = {
    *  tenant has completed the FunctionsToSPN migration) and by the migration
    *  itself, never by UpdateFunction. Retired once all functions are on SPN.
    */
-  useSpn?: boolean | null | undefined;
+  useSpn?: boolean | undefined;
+  /**
+   * IDs of every non-deleted workflow template whose CallFunction step still
+   *
+   * @remarks
+   *  references this function. Read-only, same semantics as hook_refs.
+   */
+  workflowTemplateRefs?: Array<string> | null | undefined;
 };
 
 /**
@@ -96,35 +162,46 @@ export type FunctionInput = {
   /**
    * The description field.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The functionType field.
    */
-  functionType?: FunctionType | null | undefined;
+  functionType?: FunctionType | undefined;
   /**
    * The head field.
    */
-  head?: string | null | undefined;
+  head?: string | undefined;
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The isDraft field.
    */
-  isDraft?: boolean | null | undefined;
+  isDraft?: boolean | undefined;
+  networkConfig?: FunctionNetworkConfig | null | undefined;
   /**
    * The outboundNetworkAllowlist field.
    */
   outboundNetworkAllowlist?: Array<string> | null | undefined;
   /**
+   * Number of pre-warmed Lambda instances. 0 (default) leaves the function
+   *
+   * @remarks
+   *  cold-started on first invoke. > 0 reserves and provisions that many
+   *  execution environments via AWS Lambda provisioned concurrency.
+   *  Ignored for FUNCTION_TYPE_CODE_MODE functions — that value is driven
+   *  by AIGovernanceSettings.code_mode_concurrency.
+   */
+  provisionedConcurrency?: number | undefined;
+  /**
    * The publishedCommitId field.
    */
-  publishedCommitId?: string | null | undefined;
+  publishedCommitId?: string | undefined;
   /**
    * Scoped role IDs define the permissions granted to this function when calling
    *
@@ -141,6 +218,13 @@ export type FunctionInput = {
    */
   secret?: { [k: string]: string } | undefined;
 };
+
+/** @internal */
+export const CompileStatus$inboundSchema: z.ZodType<
+  CompileStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(CompileStatus);
 
 /** @internal */
 export const FunctionType$inboundSchema: z.ZodType<
@@ -161,26 +245,32 @@ export const FunctionT$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  compileError: z.string().optional(),
+  compileStatus: CompileStatus$inboundSchema.optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  functionType: z.nullable(FunctionType$inboundSchema).optional(),
-  head: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  isDraft: z.nullable(z.boolean()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  functionType: FunctionType$inboundSchema.optional(),
+  head: z.string().optional(),
+  hookRefs: z.nullable(z.array(z.string())).optional(),
+  id: z.string().optional(),
+  isDraft: z.boolean().optional(),
+  networkConfig: z.nullable(FunctionNetworkConfig$inboundSchema).optional(),
   outboundNetworkAllowlist: z.nullable(z.array(z.string())).optional(),
-  publishedCommitId: z.nullable(z.string()).optional(),
+  provisionedConcurrency: z.number().int().optional(),
+  publishedCommitId: z.string().optional(),
   scopedRoleIds: z.nullable(z.array(z.string())).optional(),
   secret: z.record(z.string()).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  useSpn: z.nullable(z.boolean()).optional(),
+  useSpn: z.boolean().optional(),
+  workflowTemplateRefs: z.nullable(z.array(z.string())).optional(),
 });
 
 export function functionFromJSON(
@@ -195,14 +285,16 @@ export function functionFromJSON(
 
 /** @internal */
 export type FunctionInput$Outbound = {
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  functionType?: string | null | undefined;
-  head?: string | null | undefined;
-  id?: string | null | undefined;
-  isDraft?: boolean | null | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
+  functionType?: string | undefined;
+  head?: string | undefined;
+  id?: string | undefined;
+  isDraft?: boolean | undefined;
+  networkConfig?: FunctionNetworkConfig$Outbound | null | undefined;
   outboundNetworkAllowlist?: Array<string> | null | undefined;
-  publishedCommitId?: string | null | undefined;
+  provisionedConcurrency?: number | undefined;
+  publishedCommitId?: string | undefined;
   scopedRoleIds?: Array<string> | null | undefined;
   secret?: { [k: string]: string } | undefined;
 };
@@ -213,14 +305,16 @@ export const FunctionInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FunctionInput
 > = z.object({
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  functionType: z.nullable(FunctionType$outboundSchema).optional(),
-  head: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  isDraft: z.nullable(z.boolean()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  functionType: FunctionType$outboundSchema.optional(),
+  head: z.string().optional(),
+  id: z.string().optional(),
+  isDraft: z.boolean().optional(),
+  networkConfig: z.nullable(FunctionNetworkConfig$outboundSchema).optional(),
   outboundNetworkAllowlist: z.nullable(z.array(z.string())).optional(),
-  publishedCommitId: z.nullable(z.string()).optional(),
+  provisionedConcurrency: z.number().int().optional(),
+  publishedCommitId: z.string().optional(),
   scopedRoleIds: z.nullable(z.array(z.string())).optional(),
   secret: z.record(z.string()).optional(),
 });

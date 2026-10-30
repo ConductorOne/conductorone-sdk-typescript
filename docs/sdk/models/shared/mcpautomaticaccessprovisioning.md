@@ -1,0 +1,19 @@
+# MCPAutomaticAccessProvisioning
+
+MCPAutomaticAccessProvisioning enables system-managed birthright access.
+
+## Example Usage
+
+```typescript
+import { MCPAutomaticAccessProvisioning } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: MCPAutomaticAccessProvisioning = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                        | Type                                                                                                                                                                         | Required                                                                                                                                                                     | Description                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `accessLevel`                                                                                                                                                                | [shared.MCPAutomaticAccessProvisioningAccessLevel](../../../sdk/models/shared/mcpautomaticaccessprovisioningaccesslevel.md)                                                  | :heavy_minus_sign:                                                                                                                                                           | The system toolset granted through automatic access, independently of requestable access.<br/> Unspecified inherits the legacy shared access_level, then defaults to Read tools. |
+| `enabled`                                                                                                                                                                    | *boolean*                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                           | Requires JML for membership automation.                                                                                                                                      |
+| `toolsetIds`                                                                                                                                                                 | *string*[]                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                           | For config updates in Custom mode, replaces the attached toolsets. Empty removes all toolset access.<br/> Read and All approved modes select their system toolset instead.   |

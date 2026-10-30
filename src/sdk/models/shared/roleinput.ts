@@ -11,7 +11,7 @@ export type RoleInput = {
   /**
    * The display name of the role.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The list of permissions this role has.
    */
@@ -24,7 +24,7 @@ export type RoleInput = {
 
 /** @internal */
 export type RoleInput$Outbound = {
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   permissions?: Array<string> | null | undefined;
   serviceRoles?: Array<string> | null | undefined;
 };
@@ -35,7 +35,7 @@ export const RoleInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RoleInput
 > = z.object({
-  displayName: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
   permissions: z.nullable(z.array(z.string())).optional(),
   serviceRoles: z.nullable(z.array(z.string())).optional(),
 });

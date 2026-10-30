@@ -20,7 +20,7 @@ export type SearchAppsRequest = {
   /**
    * Search for apps with a case insensitive match on the display name.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * A list of app IDs to remove from the results.
    */
@@ -28,15 +28,15 @@ export type SearchAppsRequest = {
   /**
    * Only return apps which are directories
    */
-  onlyDirectories?: boolean | null | undefined;
+  onlyDirectories?: boolean | undefined;
   /**
    * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Search for apps that use any of these policies.
    */
@@ -44,19 +44,19 @@ export type SearchAppsRequest = {
   /**
    * Query the apps with a fuzzy search on display name and description.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
 };
 
 /** @internal */
 export type SearchAppsRequest$Outbound = {
   appIds?: Array<string> | null | undefined;
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   excludeAppIds?: Array<string> | null | undefined;
-  onlyDirectories?: boolean | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  onlyDirectories?: boolean | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
   policyRefs?: Array<PolicyRef$Outbound> | null | undefined;
-  query?: string | null | undefined;
+  query?: string | undefined;
 };
 
 /** @internal */
@@ -66,13 +66,13 @@ export const SearchAppsRequest$outboundSchema: z.ZodType<
   SearchAppsRequest
 > = z.object({
   appIds: z.nullable(z.array(z.string())).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
   excludeAppIds: z.nullable(z.array(z.string())).optional(),
-  onlyDirectories: z.nullable(z.boolean()).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
+  onlyDirectories: z.boolean().optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
   policyRefs: z.nullable(z.array(PolicyRef$outboundSchema)).optional(),
-  query: z.nullable(z.string()).optional(),
+  query: z.string().optional(),
 });
 
 export function searchAppsRequestToJSON(

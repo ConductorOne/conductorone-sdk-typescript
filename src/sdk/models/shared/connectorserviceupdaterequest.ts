@@ -4,6 +4,11 @@
 
 import * as z from "zod/v3";
 import {
+  ChangeJustification,
+  ChangeJustification$Outbound,
+  ChangeJustification$outboundSchema,
+} from "./changejustification.js";
+import {
   ConnectorInput,
   ConnectorInput$Outbound,
   ConnectorInput$outboundSchema,
@@ -20,6 +25,7 @@ import {
 export type ConnectorServiceUpdateRequest = {
   connector?: ConnectorInput | null | undefined;
   expandMask?: ConnectorExpandMask | null | undefined;
+  justification?: ChangeJustification | null | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -27,6 +33,7 @@ export type ConnectorServiceUpdateRequest = {
 export type ConnectorServiceUpdateRequest$Outbound = {
   connector?: ConnectorInput$Outbound | null | undefined;
   expandMask?: ConnectorExpandMask$Outbound | null | undefined;
+  justification?: ChangeJustification$Outbound | null | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -38,6 +45,7 @@ export const ConnectorServiceUpdateRequest$outboundSchema: z.ZodType<
 > = z.object({
   connector: z.nullable(ConnectorInput$outboundSchema).optional(),
   expandMask: z.nullable(ConnectorExpandMask$outboundSchema).optional(),
+  justification: z.nullable(ChangeJustification$outboundSchema).optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 

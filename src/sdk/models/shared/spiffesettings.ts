@@ -24,7 +24,7 @@ export type SPIFFESettings = {
    *  Mutable: updates re-validate the new URL by fetching its JWKS before
    *  persisting; the issuer (trust domain) itself remains immutable.
    */
-  bundleEndpointUrl?: string | null | undefined;
+  bundleEndpointUrl?: string | undefined;
 };
 
 /** @internal */
@@ -33,11 +33,11 @@ export const SPIFFESettings$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  bundleEndpointUrl: z.nullable(z.string()).optional(),
+  bundleEndpointUrl: z.string().optional(),
 });
 /** @internal */
 export type SPIFFESettings$Outbound = {
-  bundleEndpointUrl?: string | null | undefined;
+  bundleEndpointUrl?: string | undefined;
 };
 
 /** @internal */
@@ -46,7 +46,7 @@ export const SPIFFESettings$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SPIFFESettings
 > = z.object({
-  bundleEndpointUrl: z.nullable(z.string()).optional(),
+  bundleEndpointUrl: z.string().optional(),
 });
 
 export function spiffeSettingsToJSON(spiffeSettings: SPIFFESettings): string {

@@ -40,14 +40,11 @@ export type RequestSchema = {
   /**
    * The unique identifier of this request schema.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * Controls whether the justification field is shown or hidden on the request form.
    */
-  justificationVisibility?:
-    | RequestSchemaJustificationVisibility
-    | null
-    | undefined;
+  justificationVisibility?: RequestSchemaJustificationVisibility | undefined;
   modifiedAt?: Date | null | undefined;
 };
 
@@ -77,10 +74,9 @@ export const RequestSchema$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   form: z.nullable(RequestSchemaForm$inboundSchema).optional(),
-  id: z.nullable(z.string()).optional(),
-  justificationVisibility: z.nullable(
-    RequestSchemaJustificationVisibility$inboundSchema,
-  ).optional(),
+  id: z.string().optional(),
+  justificationVisibility: RequestSchemaJustificationVisibility$inboundSchema
+    .optional(),
   modifiedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -90,8 +86,8 @@ export type RequestSchema$Outbound = {
   createdAt?: string | null | undefined;
   deletedAt?: string | null | undefined;
   form?: RequestSchemaForm$Outbound | null | undefined;
-  id?: string | null | undefined;
-  justificationVisibility?: string | null | undefined;
+  id?: string | undefined;
+  justificationVisibility?: string | undefined;
   modifiedAt?: string | null | undefined;
 };
 
@@ -104,10 +100,9 @@ export const RequestSchema$outboundSchema: z.ZodType<
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
-  id: z.nullable(z.string()).optional(),
-  justificationVisibility: z.nullable(
-    RequestSchemaJustificationVisibility$outboundSchema,
-  ).optional(),
+  id: z.string().optional(),
+  justificationVisibility: RequestSchemaJustificationVisibility$outboundSchema
+    .optional(),
   modifiedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 

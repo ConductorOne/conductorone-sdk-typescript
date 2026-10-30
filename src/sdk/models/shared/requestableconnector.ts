@@ -14,11 +14,11 @@ export type RequestableConnector = {
   /**
    * App identifier.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * Connector identifier.
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
 };
 
 /** @internal */
@@ -27,8 +27,8 @@ export const RequestableConnector$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  connectorId: z.string().optional(),
 });
 
 export function requestableConnectorFromJSON(

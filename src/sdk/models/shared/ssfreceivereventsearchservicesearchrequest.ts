@@ -9,7 +9,7 @@ import { OpenEnum } from "../../types/enums.js";
 /**
  * Restricts results to events with this processing outcome. Optional.
  */
-export const Outcome = {
+export const SSFReceiverEventSearchServiceSearchRequestOutcome = {
   SsfEventOutcomeUnspecified: "SSF_EVENT_OUTCOME_UNSPECIFIED",
   SsfEventOutcomeSessionsRevoked: "SSF_EVENT_OUTCOME_SESSIONS_REVOKED",
   SsfEventOutcomeLogged: "SSF_EVENT_OUTCOME_LOGGED",
@@ -22,7 +22,9 @@ export const Outcome = {
 /**
  * Restricts results to events with this processing outcome. Optional.
  */
-export type Outcome = OpenEnum<typeof Outcome>;
+export type SSFReceiverEventSearchServiceSearchRequestOutcome = OpenEnum<
+  typeof SSFReceiverEventSearchServiceSearchRequestOutcome
+>;
 
 /**
  * SSFReceiverEventSearchServiceSearchRequest carries the search query and optional filters for narrowing results.
@@ -31,46 +33,52 @@ export type SSFReceiverEventSearchServiceSearchRequest = {
   /**
    * Restricts results to events matching this wire event type URI. Optional.
    */
-  eventType?: string | null | undefined;
+  eventType?: string | undefined;
   /**
    * Restricts results to events matched to this ConductorOne user ID. Optional.
    */
-  matchedUserId?: string | null | undefined;
+  matchedUserId?: string | undefined;
   /**
    * Restricts results to events with this processing outcome. Optional.
    */
-  outcome?: Outcome | null | undefined;
+  outcome?: SSFReceiverEventSearchServiceSearchRequestOutcome | undefined;
   /**
    * Maximum number of events to return per page.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * Token from a previous SearchResponse to fetch the next page of results.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Full-text search query matched against event fields.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * Restricts results to events from this SSF receiver stream. Optional.
    */
-  streamId?: string | null | undefined;
+  streamId?: string | undefined;
 };
 
 /** @internal */
-export const Outcome$outboundSchema: z.ZodType<string, z.ZodTypeDef, Outcome> =
-  openEnums.outboundSchema(Outcome);
+export const SSFReceiverEventSearchServiceSearchRequestOutcome$outboundSchema:
+  z.ZodType<
+    string,
+    z.ZodTypeDef,
+    SSFReceiverEventSearchServiceSearchRequestOutcome
+  > = openEnums.outboundSchema(
+    SSFReceiverEventSearchServiceSearchRequestOutcome,
+  );
 
 /** @internal */
 export type SSFReceiverEventSearchServiceSearchRequest$Outbound = {
-  eventType?: string | null | undefined;
-  matchedUserId?: string | null | undefined;
-  outcome?: string | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  query?: string | null | undefined;
-  streamId?: string | null | undefined;
+  eventType?: string | undefined;
+  matchedUserId?: string | undefined;
+  outcome?: string | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  query?: string | undefined;
+  streamId?: string | undefined;
 };
 
 /** @internal */
@@ -80,13 +88,14 @@ export const SSFReceiverEventSearchServiceSearchRequest$outboundSchema:
     z.ZodTypeDef,
     SSFReceiverEventSearchServiceSearchRequest
   > = z.object({
-    eventType: z.nullable(z.string()).optional(),
-    matchedUserId: z.nullable(z.string()).optional(),
-    outcome: z.nullable(Outcome$outboundSchema).optional(),
-    pageSize: z.nullable(z.number().int()).optional(),
-    pageToken: z.nullable(z.string()).optional(),
-    query: z.nullable(z.string()).optional(),
-    streamId: z.nullable(z.string()).optional(),
+    eventType: z.string().optional(),
+    matchedUserId: z.string().optional(),
+    outcome: SSFReceiverEventSearchServiceSearchRequestOutcome$outboundSchema
+      .optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    streamId: z.string().optional(),
   });
 
 export function ssfReceiverEventSearchServiceSearchRequestToJSON(

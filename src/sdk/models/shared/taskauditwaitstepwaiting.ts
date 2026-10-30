@@ -14,11 +14,11 @@ export type TaskAuditWaitStepWaiting = {
   /**
    * The condition field.
    */
-  condition?: string | null | undefined;
+  condition?: string | undefined;
   /**
    * The stepId field.
    */
-  stepId?: string | null | undefined;
+  stepId?: string | undefined;
 };
 
 /** @internal */
@@ -27,8 +27,8 @@ export const TaskAuditWaitStepWaiting$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  condition: z.nullable(z.string()).optional(),
-  stepId: z.nullable(z.string()).optional(),
+  condition: z.string().optional(),
+  stepId: z.string().optional(),
 });
 
 export function taskAuditWaitStepWaitingFromJSON(

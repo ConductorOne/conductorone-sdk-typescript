@@ -33,6 +33,12 @@ import {
   Provision$outboundSchema,
 } from "./provision.js";
 import {
+  ProvisionWaitingOn,
+  ProvisionWaitingOn$inboundSchema,
+  ProvisionWaitingOn$Outbound,
+  ProvisionWaitingOn$outboundSchema,
+} from "./provisionwaitingon.js";
+import {
   ReassignedByErrorAction,
   ReassignedByErrorAction$inboundSchema,
   ReassignedByErrorAction$Outbound,
@@ -67,6 +73,8 @@ export const ProvisionInstanceState = {
     "PROVISION_INSTANCE_STATE_ACCOUNT_LIFECYCLE_ACTIONS",
   ProvisionInstanceStateAccountLifecycleActionsWaiting:
     "PROVISION_INSTANCE_STATE_ACCOUNT_LIFECYCLE_ACTIONS_WAITING",
+  ProvisionInstanceStateDevicePlacement:
+    "PROVISION_INSTANCE_STATE_DEVICE_PLACEMENT",
   ProvisionInstanceStateDone: "PROVISION_INSTANCE_STATE_DONE",
 } as const;
 /**
@@ -90,37 +98,38 @@ export type ProvisionInstance = {
   /**
    * This indicates the account lifecycle action id for this step.
    */
-  batonActionInvocationId?: string | null | undefined;
+  batonActionInvocationId?: string | undefined;
   cancelled?: CancelledAction | null | undefined;
   completed?: CompletedAction | null | undefined;
   errored?: ErroredAction | null | undefined;
   /**
    * This indicates the external ticket id for this step.
    */
-  externalTicketId?: string | null | undefined;
+  externalTicketId?: string | undefined;
   /**
    * This indicates the external ticket provisioner config id for this step.
    */
-  externalTicketProvisionerConfigId?: string | null | undefined;
+  externalTicketProvisionerConfigId?: string | undefined;
   /**
    * This indicates the notification id for this step.
    */
-  notificationId?: string | null | undefined;
+  notificationId?: string | undefined;
   provision?: Provision | null | undefined;
   reassignedByError?: ReassignedByErrorAction | null | undefined;
   skipped?: SkippedAction | null | undefined;
   /**
    * This property indicates the current state of this step.
    */
-  state?: ProvisionInstanceState | null | undefined;
+  state?: ProvisionInstanceState | undefined;
+  waitingOn?: ProvisionWaitingOn | null | undefined;
   /**
    * This indicates the webhook id for this step.
    */
-  webhookId?: string | null | undefined;
+  webhookId?: string | undefined;
   /**
    * This indicates the webhook instance id for this step.
    */
-  webhookInstanceId?: string | null | undefined;
+  webhookInstanceId?: string | undefined;
 };
 
 /** @internal */
@@ -142,36 +151,38 @@ export const ProvisionInstance$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  batonActionInvocationId: z.nullable(z.string()).optional(),
+  batonActionInvocationId: z.string().optional(),
   cancelled: z.nullable(CancelledAction$inboundSchema).optional(),
   completed: z.nullable(CompletedAction$inboundSchema).optional(),
   errored: z.nullable(ErroredAction$inboundSchema).optional(),
-  externalTicketId: z.nullable(z.string()).optional(),
-  externalTicketProvisionerConfigId: z.nullable(z.string()).optional(),
-  notificationId: z.nullable(z.string()).optional(),
+  externalTicketId: z.string().optional(),
+  externalTicketProvisionerConfigId: z.string().optional(),
+  notificationId: z.string().optional(),
   provision: z.nullable(Provision$inboundSchema).optional(),
   reassignedByError: z.nullable(ReassignedByErrorAction$inboundSchema)
     .optional(),
   skipped: z.nullable(SkippedAction$inboundSchema).optional(),
-  state: z.nullable(ProvisionInstanceState$inboundSchema).optional(),
-  webhookId: z.nullable(z.string()).optional(),
-  webhookInstanceId: z.nullable(z.string()).optional(),
+  state: ProvisionInstanceState$inboundSchema.optional(),
+  waitingOn: z.nullable(ProvisionWaitingOn$inboundSchema).optional(),
+  webhookId: z.string().optional(),
+  webhookInstanceId: z.string().optional(),
 });
 /** @internal */
 export type ProvisionInstance$Outbound = {
-  batonActionInvocationId?: string | null | undefined;
+  batonActionInvocationId?: string | undefined;
   cancelled?: CancelledAction$Outbound | null | undefined;
   completed?: CompletedAction$Outbound | null | undefined;
   errored?: ErroredAction$Outbound | null | undefined;
-  externalTicketId?: string | null | undefined;
-  externalTicketProvisionerConfigId?: string | null | undefined;
-  notificationId?: string | null | undefined;
+  externalTicketId?: string | undefined;
+  externalTicketProvisionerConfigId?: string | undefined;
+  notificationId?: string | undefined;
   provision?: Provision$Outbound | null | undefined;
   reassignedByError?: ReassignedByErrorAction$Outbound | null | undefined;
   skipped?: SkippedAction$Outbound | null | undefined;
-  state?: string | null | undefined;
-  webhookId?: string | null | undefined;
-  webhookInstanceId?: string | null | undefined;
+  state?: string | undefined;
+  waitingOn?: ProvisionWaitingOn$Outbound | null | undefined;
+  webhookId?: string | undefined;
+  webhookInstanceId?: string | undefined;
 };
 
 /** @internal */
@@ -180,20 +191,21 @@ export const ProvisionInstance$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ProvisionInstance
 > = z.object({
-  batonActionInvocationId: z.nullable(z.string()).optional(),
+  batonActionInvocationId: z.string().optional(),
   cancelled: z.nullable(CancelledAction$outboundSchema).optional(),
   completed: z.nullable(CompletedAction$outboundSchema).optional(),
   errored: z.nullable(ErroredAction$outboundSchema).optional(),
-  externalTicketId: z.nullable(z.string()).optional(),
-  externalTicketProvisionerConfigId: z.nullable(z.string()).optional(),
-  notificationId: z.nullable(z.string()).optional(),
+  externalTicketId: z.string().optional(),
+  externalTicketProvisionerConfigId: z.string().optional(),
+  notificationId: z.string().optional(),
   provision: z.nullable(Provision$outboundSchema).optional(),
   reassignedByError: z.nullable(ReassignedByErrorAction$outboundSchema)
     .optional(),
   skipped: z.nullable(SkippedAction$outboundSchema).optional(),
-  state: z.nullable(ProvisionInstanceState$outboundSchema).optional(),
-  webhookId: z.nullable(z.string()).optional(),
-  webhookInstanceId: z.nullable(z.string()).optional(),
+  state: ProvisionInstanceState$outboundSchema.optional(),
+  waitingOn: z.nullable(ProvisionWaitingOn$outboundSchema).optional(),
+  webhookId: z.string().optional(),
+  webhookInstanceId: z.string().optional(),
 });
 
 export function provisionInstanceToJSON(

@@ -39,17 +39,17 @@ export type Wait = {
   /**
    * The comment to post on first failed check.
    */
-  commentOnFirstWait?: string | null | undefined;
+  commentOnFirstWait?: string | undefined;
   /**
    * The comment to post if we timeout.
    */
-  commentOnTimeout?: string | null | undefined;
+  commentOnTimeout?: string | undefined;
   condition?: WaitCondition | null | undefined;
   duration?: WaitDuration | null | undefined;
   /**
    * The name of our condition to show on the task details page
    */
-  name?: string | null | undefined;
+  name?: string | undefined;
   timeoutDuration?: string | null | undefined;
   untilTime?: WaitUntilTime | null | undefined;
 };
@@ -57,21 +57,21 @@ export type Wait = {
 /** @internal */
 export const Wait$inboundSchema: z.ZodType<Wait, z.ZodTypeDef, unknown> = z
   .object({
-    commentOnFirstWait: z.nullable(z.string()).optional(),
-    commentOnTimeout: z.nullable(z.string()).optional(),
+    commentOnFirstWait: z.string().optional(),
+    commentOnTimeout: z.string().optional(),
     condition: z.nullable(WaitCondition$inboundSchema).optional(),
     duration: z.nullable(WaitDuration$inboundSchema).optional(),
-    name: z.nullable(z.string()).optional(),
+    name: z.string().optional(),
     timeoutDuration: z.nullable(z.string()).optional(),
     untilTime: z.nullable(WaitUntilTime$inboundSchema).optional(),
   });
 /** @internal */
 export type Wait$Outbound = {
-  commentOnFirstWait?: string | null | undefined;
-  commentOnTimeout?: string | null | undefined;
+  commentOnFirstWait?: string | undefined;
+  commentOnTimeout?: string | undefined;
   condition?: WaitCondition$Outbound | null | undefined;
   duration?: WaitDuration$Outbound | null | undefined;
-  name?: string | null | undefined;
+  name?: string | undefined;
   timeoutDuration?: string | null | undefined;
   untilTime?: WaitUntilTime$Outbound | null | undefined;
 };
@@ -79,11 +79,11 @@ export type Wait$Outbound = {
 /** @internal */
 export const Wait$outboundSchema: z.ZodType<Wait$Outbound, z.ZodTypeDef, Wait> =
   z.object({
-    commentOnFirstWait: z.nullable(z.string()).optional(),
-    commentOnTimeout: z.nullable(z.string()).optional(),
+    commentOnFirstWait: z.string().optional(),
+    commentOnTimeout: z.string().optional(),
     condition: z.nullable(WaitCondition$outboundSchema).optional(),
     duration: z.nullable(WaitDuration$outboundSchema).optional(),
-    name: z.nullable(z.string()).optional(),
+    name: z.string().optional(),
     timeoutDuration: z.nullable(z.string()).optional(),
     untilTime: z.nullable(WaitUntilTime$outboundSchema).optional(),
   });

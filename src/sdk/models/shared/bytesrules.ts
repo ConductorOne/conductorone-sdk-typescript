@@ -21,21 +21,21 @@ export type BytesRules = {
   /**
    * Const specifies that this field must be exactly the specified value
    */
-  const?: string | null | undefined;
+  const?: string | undefined;
   /**
    * Contains specifies that this field must have the specified bytes
    *
    * @remarks
    *  anywhere in the string.
    */
-  contains?: string | null | undefined;
+  contains?: string | undefined;
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    *
    * @remarks
    *  evaluated only if the field is not empty
    */
-  ignoreEmpty?: boolean | null | undefined;
+  ignoreEmpty?: boolean | undefined;
   /**
    * In specifies that this field must be equal to one of the specified
    *
@@ -73,21 +73,21 @@ export type BytesRules = {
   /**
    * Len specifies that this field must be the specified number of bytes
    */
-  len?: string | null | undefined;
+  len?: string | undefined;
   /**
    * MaxLen specifies that this field must be the specified number of bytes
    *
    * @remarks
    *  at a maximum
    */
-  maxLen?: string | null | undefined;
+  maxLen?: string | undefined;
   /**
    * MinLen specifies that this field must be the specified number of bytes
    *
    * @remarks
    *  at a minimum
    */
-  minLen?: string | null | undefined;
+  minLen?: string | undefined;
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    *
@@ -102,21 +102,21 @@ export type BytesRules = {
    *  regular expression (RE2 syntax). The included expression should elide
    *  any delimiters.
    */
-  pattern?: string | null | undefined;
+  pattern?: string | undefined;
   /**
    * Prefix specifies that this field must have the specified bytes at the
    *
    * @remarks
    *  beginning of the string.
    */
-  prefix?: string | null | undefined;
+  prefix?: string | undefined;
   /**
    * Suffix specifies that this field must have the specified bytes at the
    *
    * @remarks
    *  end of the string.
    */
-  suffix?: string | null | undefined;
+  suffix?: string | undefined;
 };
 
 /** @internal */
@@ -125,37 +125,37 @@ export const BytesRules$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  const: z.nullable(z.string()).optional(),
-  contains: z.nullable(z.string()).optional(),
-  ignoreEmpty: z.nullable(z.boolean()).optional(),
+  const: z.string().optional(),
+  contains: z.string().optional(),
+  ignoreEmpty: z.boolean().optional(),
   in: z.nullable(z.array(z.string())).optional(),
   ip: z.nullable(z.boolean()).optional(),
   ipv4: z.nullable(z.boolean()).optional(),
   ipv6: z.nullable(z.boolean()).optional(),
-  len: z.nullable(z.string()).optional(),
-  maxLen: z.nullable(z.string()).optional(),
-  minLen: z.nullable(z.string()).optional(),
+  len: z.string().optional(),
+  maxLen: z.string().optional(),
+  minLen: z.string().optional(),
   notIn: z.nullable(z.array(z.string())).optional(),
-  pattern: z.nullable(z.string()).optional(),
-  prefix: z.nullable(z.string()).optional(),
-  suffix: z.nullable(z.string()).optional(),
+  pattern: z.string().optional(),
+  prefix: z.string().optional(),
+  suffix: z.string().optional(),
 });
 /** @internal */
 export type BytesRules$Outbound = {
-  const?: string | null | undefined;
-  contains?: string | null | undefined;
-  ignoreEmpty?: boolean | null | undefined;
+  const?: string | undefined;
+  contains?: string | undefined;
+  ignoreEmpty?: boolean | undefined;
   in?: Array<string> | null | undefined;
   ip?: boolean | null | undefined;
   ipv4?: boolean | null | undefined;
   ipv6?: boolean | null | undefined;
-  len?: string | null | undefined;
-  maxLen?: string | null | undefined;
-  minLen?: string | null | undefined;
+  len?: string | undefined;
+  maxLen?: string | undefined;
+  minLen?: string | undefined;
   notIn?: Array<string> | null | undefined;
-  pattern?: string | null | undefined;
-  prefix?: string | null | undefined;
-  suffix?: string | null | undefined;
+  pattern?: string | undefined;
+  prefix?: string | undefined;
+  suffix?: string | undefined;
 };
 
 /** @internal */
@@ -164,20 +164,20 @@ export const BytesRules$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BytesRules
 > = z.object({
-  const: z.nullable(z.string()).optional(),
-  contains: z.nullable(z.string()).optional(),
-  ignoreEmpty: z.nullable(z.boolean()).optional(),
+  const: z.string().optional(),
+  contains: z.string().optional(),
+  ignoreEmpty: z.boolean().optional(),
   in: z.nullable(z.array(z.string())).optional(),
   ip: z.nullable(z.boolean()).optional(),
   ipv4: z.nullable(z.boolean()).optional(),
   ipv6: z.nullable(z.boolean()).optional(),
-  len: z.nullable(z.string()).optional(),
-  maxLen: z.nullable(z.string()).optional(),
-  minLen: z.nullable(z.string()).optional(),
+  len: z.string().optional(),
+  maxLen: z.string().optional(),
+  minLen: z.string().optional(),
   notIn: z.nullable(z.array(z.string())).optional(),
-  pattern: z.nullable(z.string()).optional(),
-  prefix: z.nullable(z.string()).optional(),
-  suffix: z.nullable(z.string()).optional(),
+  pattern: z.string().optional(),
+  prefix: z.string().optional(),
+  suffix: z.string().optional(),
 });
 
 export function bytesRulesToJSON(bytesRules: BytesRules): string {

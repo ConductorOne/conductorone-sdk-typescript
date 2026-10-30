@@ -16,6 +16,16 @@ import {
   AppUserRef$outboundSchema,
 } from "./appuserref.js";
 
+export const AppUserServiceSearchRequestAgentStatuses = {
+  AppUserAgentStatusUnspecified: "APP_USER_AGENT_STATUS_UNSPECIFIED",
+  AppUserAgentStatusReady: "APP_USER_AGENT_STATUS_READY",
+  AppUserAgentStatusDisabled: "APP_USER_AGENT_STATUS_DISABLED",
+  AppUserAgentStatusDeleted: "APP_USER_AGENT_STATUS_DELETED",
+} as const;
+export type AppUserServiceSearchRequestAgentStatuses = OpenEnum<
+  typeof AppUserServiceSearchRequestAgentStatuses
+>;
+
 export const AppUserDomains = {
   AppUserDomainUnspecified: "APP_USER_DOMAIN_UNSPECIFIED",
   AppUserDomainExternal: "APP_USER_DOMAIN_EXTERNAL",
@@ -43,14 +53,52 @@ export type AppUserServiceSearchRequestAppUserTypes = OpenEnum<
   typeof AppUserServiceSearchRequestAppUserTypes
 >;
 
+export const AppUserServiceSearchRequestNhiTypes = {
+  AppUserNhiTypeUnspecified: "APP_USER_NHI_TYPE_UNSPECIFIED",
+  AppUserNhiTypeAppRegistration: "APP_USER_NHI_TYPE_APP_REGISTRATION",
+  AppUserNhiTypeAssumableRole: "APP_USER_NHI_TYPE_ASSUMABLE_ROLE",
+  AppUserNhiTypeManagedIdentity: "APP_USER_NHI_TYPE_MANAGED_IDENTITY",
+} as const;
+export type AppUserServiceSearchRequestNhiTypes = OpenEnum<
+  typeof AppUserServiceSearchRequestNhiTypes
+>;
+
+/**
+ * Ordering of the results. Defaults to display-name ordering.
+ */
+export const AppUserServiceSearchRequestSortBy = {
+  AppUserSearchSortByUnspecified: "APP_USER_SEARCH_SORT_BY_UNSPECIFIED",
+  AppUserSearchSortByApp: "APP_USER_SEARCH_SORT_BY_APP",
+} as const;
+/**
+ * Ordering of the results. Defaults to display-name ordering.
+ */
+export type AppUserServiceSearchRequestSortBy = OpenEnum<
+  typeof AppUserServiceSearchRequestSortBy
+>;
+
 /**
  * Search App users based on filters specified in the request body
  */
 export type AppUserServiceSearchRequest = {
   /**
+   * Restrict to app users whose agent trait lifecycle status (agent_status)
+   *
+   * @remarks
+   *  matches one of these values. When empty, agent_status is not used as a filter.
+   */
+  agentStatuses?:
+    | Array<AppUserServiceSearchRequestAgentStatuses>
+    | null
+    | undefined;
+  /**
    * The app ID to restrict the search to.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
+  /**
+   * A list of app IDs to restrict the search to.
+   */
+  appIds?: Array<string> | null | undefined;
   /**
    * A list of account domains to restrict the search to.
    */
@@ -81,28 +129,64 @@ export type AppUserServiceSearchRequest = {
    * A list of app user IDs to remove from the results.
    */
   excludeAppUserIds?: Array<string> | null | undefined;
+  /**
+   * When true, excludes app users belonging to soft-deleted apps.
+   */
+  excludeDeletedApps?: boolean | undefined;
   expandMask?: AppUserExpandMask | null | undefined;
+  /**
+   * Restrict to app users whose NHI trait classification (nhi_type) matches one of
+   *
+   * @remarks
+   *  these values. When empty, nhi_type is not used as a filter.
+   */
+  nhiTypes?: Array<AppUserServiceSearchRequestNhiTypes> | null | undefined;
   /**
    * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Query the apps with a fuzzy search on display name and description.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * A list of app users to limit the search to.
    */
   refs?: Array<AppUserRef> | null | undefined;
   /**
+   * Ordering of the results. Defaults to display-name ordering.
+   */
+  sortBy?: AppUserServiceSearchRequestSortBy | undefined;
+  /**
    * A list of user IDs to restrict the search by.
    */
   userIds?: Array<string> | null | undefined;
+  /**
+   * When true, restrict results to app users that have at least one open finding
+   *
+   * @remarks
+   *  (index-backed EXISTS semi-join). When false/unset, results are unfiltered.
+   */
+  withOpenFindings?: boolean | undefined;
+  /**
+   * When true, restrict results to app users with no responsible party
+   *
+   * @remarks
+   *  (identity_user_id empty) — i.e. unowned, for any app-user type.
+   */
+  withoutResponsibleParty?: boolean | undefined;
 };
+
+/** @internal */
+export const AppUserServiceSearchRequestAgentStatuses$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  AppUserServiceSearchRequestAgentStatuses
+> = openEnums.outboundSchema(AppUserServiceSearchRequestAgentStatuses);
 
 /** @internal */
 export const AppUserDomains$outboundSchema: z.ZodType<
@@ -124,20 +208,41 @@ export const AppUserServiceSearchRequestAppUserTypes$outboundSchema: z.ZodType<
 > = openEnums.outboundSchema(AppUserServiceSearchRequestAppUserTypes);
 
 /** @internal */
+export const AppUserServiceSearchRequestNhiTypes$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  AppUserServiceSearchRequestNhiTypes
+> = openEnums.outboundSchema(AppUserServiceSearchRequestNhiTypes);
+
+/** @internal */
+export const AppUserServiceSearchRequestSortBy$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  AppUserServiceSearchRequestSortBy
+> = openEnums.outboundSchema(AppUserServiceSearchRequestSortBy);
+
+/** @internal */
 export type AppUserServiceSearchRequest$Outbound = {
-  appId?: string | null | undefined;
+  agentStatuses?: Array<string> | null | undefined;
+  appId?: string | undefined;
+  appIds?: Array<string> | null | undefined;
   appUserDomains?: Array<string> | null | undefined;
   appUserIds?: Array<string> | null | undefined;
   appUserStatusDetails?: Array<string> | null | undefined;
   appUserStatuses?: Array<string> | null | undefined;
   appUserTypes?: Array<string> | null | undefined;
   excludeAppUserIds?: Array<string> | null | undefined;
+  excludeDeletedApps?: boolean | undefined;
   expandMask?: AppUserExpandMask$Outbound | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  query?: string | null | undefined;
+  nhiTypes?: Array<string> | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  query?: string | undefined;
   refs?: Array<AppUserRef$Outbound> | null | undefined;
+  sortBy?: string | undefined;
   userIds?: Array<string> | null | undefined;
+  withOpenFindings?: boolean | undefined;
+  withoutResponsibleParty?: boolean | undefined;
 };
 
 /** @internal */
@@ -146,7 +251,11 @@ export const AppUserServiceSearchRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppUserServiceSearchRequest
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
+  agentStatuses: z.nullable(
+    z.array(AppUserServiceSearchRequestAgentStatuses$outboundSchema),
+  ).optional(),
+  appId: z.string().optional(),
+  appIds: z.nullable(z.array(z.string())).optional(),
   appUserDomains: z.nullable(z.array(AppUserDomains$outboundSchema)).optional(),
   appUserIds: z.nullable(z.array(z.string())).optional(),
   appUserStatusDetails: z.nullable(z.array(z.string())).optional(),
@@ -157,12 +266,19 @@ export const AppUserServiceSearchRequest$outboundSchema: z.ZodType<
     z.array(AppUserServiceSearchRequestAppUserTypes$outboundSchema),
   ).optional(),
   excludeAppUserIds: z.nullable(z.array(z.string())).optional(),
+  excludeDeletedApps: z.boolean().optional(),
   expandMask: z.nullable(AppUserExpandMask$outboundSchema).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
+  nhiTypes: z.nullable(
+    z.array(AppUserServiceSearchRequestNhiTypes$outboundSchema),
+  ).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  query: z.string().optional(),
   refs: z.nullable(z.array(AppUserRef$outboundSchema)).optional(),
+  sortBy: AppUserServiceSearchRequestSortBy$outboundSchema.optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
+  withOpenFindings: z.boolean().optional(),
+  withoutResponsibleParty: z.boolean().optional(),
 });
 
 export function appUserServiceSearchRequestToJSON(

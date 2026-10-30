@@ -16,7 +16,7 @@ export type C1CodeBlockComponent = {
   /**
    * The copyable field.
    */
-  copyable?: boolean | null | undefined;
+  copyable?: boolean | undefined;
   language?: DynamicString | null | undefined;
   title?: DynamicString | null | undefined;
 };
@@ -28,7 +28,7 @@ export const C1CodeBlockComponent$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   code: z.nullable(DynamicString$inboundSchema).optional(),
-  copyable: z.nullable(z.boolean()).optional(),
+  copyable: z.boolean().optional(),
   language: z.nullable(DynamicString$inboundSchema).optional(),
   title: z.nullable(DynamicString$inboundSchema).optional(),
 });

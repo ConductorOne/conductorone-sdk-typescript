@@ -10,6 +10,7 @@
 ## searchAutomationTemplateVersions
 
 Search for versioned snapshots of an automation template's steps and triggers.
+ Each version carries a full steps-and-triggers snapshot — request a small page_size (≤10) to keep responses small.
 
 ### Example Usage
 
@@ -85,6 +86,7 @@ run();
 ## searchAutomations
 
 Search for automations matching the provided filters, including query text, template refs, app, and trigger types.
+ Each Automation row is heavy (carries its full triggers and steps) — request a small page_size (≤10) to keep responses small.
 
 ### Example Usage
 

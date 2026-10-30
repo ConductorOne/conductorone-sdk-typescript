@@ -35,24 +35,24 @@ export type LocalUserInvitation = {
   /**
    * Set when status = ACCEPTED. FK to the created User. Read-only.
    */
-  createdUserId?: string | null | undefined;
+  createdUserId?: string | undefined;
   /**
    * FK to the LocalDirectoryConfig (app_id) this invitation belongs to. Read-only after creation.
    */
-  directoryAppId?: string | null | undefined;
+  directoryAppId?: string | undefined;
   /**
    * Display name to pre-populate on the new user account.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * Email address the invitation was sent to.
    */
-  email?: string | null | undefined;
+  email?: string | undefined;
   expiresAt?: Date | null | undefined;
   /**
    * Unique KSUID identifier. Read-only.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * Optional initial role IDs to assign to the user upon acceptance.
    */
@@ -60,27 +60,27 @@ export type LocalUserInvitation = {
   /**
    * FK to the User who created the invitation. Read-only.
    */
-  invitedByUserId?: string | null | undefined;
+  invitedByUserId?: string | undefined;
   /**
    * Optional FK to a ThirdPartyJob.
    */
-  jobId?: string | null | undefined;
+  jobId?: string | undefined;
   /**
    * Optional onboarding flow override for this invitation.
    */
-  onboardingFlowId?: string | null | undefined;
+  onboardingFlowId?: string | undefined;
   /**
    * Human-readable reason this user was invited.
    */
-  purpose?: string | null | undefined;
+  purpose?: string | undefined;
   /**
    * Optional sponsor User override for this invitation.
    */
-  sponsorUserId?: string | null | undefined;
+  sponsorUserId?: string | undefined;
   /**
    * Current lifecycle status. Read-only.
    */
-  status?: LocalUserInvitationStatus | null | undefined;
+  status?: LocalUserInvitationStatus | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -103,21 +103,21 @@ export const LocalUserInvitation$inboundSchema: z.ZodType<
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  createdUserId: z.nullable(z.string()).optional(),
-  directoryAppId: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  email: z.nullable(z.string()).optional(),
+  createdUserId: z.string().optional(),
+  directoryAppId: z.string().optional(),
+  displayName: z.string().optional(),
+  email: z.string().optional(),
   expiresAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
   initialRoleIds: z.nullable(z.array(z.string())).optional(),
-  invitedByUserId: z.nullable(z.string()).optional(),
-  jobId: z.nullable(z.string()).optional(),
-  onboardingFlowId: z.nullable(z.string()).optional(),
-  purpose: z.nullable(z.string()).optional(),
-  sponsorUserId: z.nullable(z.string()).optional(),
-  status: z.nullable(LocalUserInvitationStatus$inboundSchema).optional(),
+  invitedByUserId: z.string().optional(),
+  jobId: z.string().optional(),
+  onboardingFlowId: z.string().optional(),
+  purpose: z.string().optional(),
+  sponsorUserId: z.string().optional(),
+  status: LocalUserInvitationStatus$inboundSchema.optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

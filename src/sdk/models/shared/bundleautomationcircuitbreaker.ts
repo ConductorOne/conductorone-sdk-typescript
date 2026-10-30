@@ -33,11 +33,11 @@ export type BundleAutomationCircuitBreaker = {
   /**
    * The removedMembersThresholdPercentage field.
    */
-  removedMembersThresholdPercentage?: number | null | undefined;
+  removedMembersThresholdPercentage?: number | undefined;
   /**
    * The state field.
    */
-  state?: BundleAutomationCircuitBreakerState | null | undefined;
+  state?: BundleAutomationCircuitBreakerState | undefined;
   updatedAt?: Date | null | undefined;
   userRef?: UserRef | null | undefined;
 };
@@ -55,11 +55,9 @@ export const BundleAutomationCircuitBreaker$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  removedMembersThresholdPercentage: z.nullable(
-    z.string().transform(v => parseInt(v, 10)),
-  ).optional(),
-  state: z.nullable(BundleAutomationCircuitBreakerState$inboundSchema)
+  removedMembersThresholdPercentage: z.string().transform(v => parseInt(v, 10))
     .optional(),
+  state: BundleAutomationCircuitBreakerState$inboundSchema.optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

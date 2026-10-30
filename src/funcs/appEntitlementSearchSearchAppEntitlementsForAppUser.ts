@@ -30,6 +30,7 @@ import { Result } from "../sdk/types/fp.js";
  *
  * @remarks
  * Search for app entitlements associated with a specific app user, with optional resource type trait filtering.
+ *  Each AppEntitlementView row is large — request a small page_size (≤10) and set expand_mask to only the paths you need; broad expansion inlines whole related objects and bloats the response.
  */
 export function appEntitlementSearchSearchAppEntitlementsForAppUser(
   client: ConductoroneSDKTypescriptCore,

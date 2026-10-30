@@ -14,7 +14,7 @@ export type IdentityUserTarget = {
   /**
    * The identityUserId field.
    */
-  identityUserId?: string | null | undefined;
+  identityUserId?: string | undefined;
 };
 
 /** @internal */
@@ -23,9 +23,29 @@ export const IdentityUserTarget$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  identityUserId: z.nullable(z.string()).optional(),
+  identityUserId: z.string().optional(),
+});
+/** @internal */
+export type IdentityUserTarget$Outbound = {
+  identityUserId?: string | undefined;
+};
+
+/** @internal */
+export const IdentityUserTarget$outboundSchema: z.ZodType<
+  IdentityUserTarget$Outbound,
+  z.ZodTypeDef,
+  IdentityUserTarget
+> = z.object({
+  identityUserId: z.string().optional(),
 });
 
+export function identityUserTargetToJSON(
+  identityUserTarget: IdentityUserTarget,
+): string {
+  return JSON.stringify(
+    IdentityUserTarget$outboundSchema.parse(identityUserTarget),
+  );
+}
 export function identityUserTargetFromJSON(
   jsonString: string,
 ): SafeParseResult<IdentityUserTarget, SDKValidationError> {

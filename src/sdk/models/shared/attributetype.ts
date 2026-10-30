@@ -14,11 +14,11 @@ export type AttributeType = {
   /**
    * The ID of the AttributeType.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The name of the AttributeType.
    */
-  name?: string | null | undefined;
+  name?: string | undefined;
 };
 
 /** @internal */
@@ -27,8 +27,8 @@ export const AttributeType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
+  name: z.string().optional(),
 });
 
 export function attributeTypeFromJSON(

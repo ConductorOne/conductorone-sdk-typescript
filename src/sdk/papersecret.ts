@@ -4,12 +4,13 @@
 
 import { paperSecretCreateExternal } from "../funcs/paperSecretCreateExternal.js";
 import { paperSecretCreateInternal } from "../funcs/paperSecretCreateInternal.js";
+import { paperSecretDelete } from "../funcs/paperSecretDelete.js";
 import { paperSecretGet } from "../funcs/paperSecretGet.js";
 import { paperSecretGetByShareCode } from "../funcs/paperSecretGetByShareCode.js";
 import { paperSecretGetContent } from "../funcs/paperSecretGetContent.js";
-import { paperSecretRevoke } from "../funcs/paperSecretRevoke.js";
 import { paperSecretSearchAuditEvents } from "../funcs/paperSecretSearchAuditEvents.js";
 import { paperSecretSearchMySecrets } from "../funcs/paperSecretSearchMySecrets.js";
+import { paperSecretSearchSecretsSharedWithMe } from "../funcs/paperSecretSearchSecretsSharedWithMe.js";
 import { paperSecretSetTextContent } from "../funcs/paperSecretSetTextContent.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "./models/operations/index.js";
@@ -58,16 +59,42 @@ export class PaperSecret extends ClientSDK {
   }
 
   /**
-   * Revoke
+   * Search Secrets Shared With Me
    *
    * @remarks
-   * Revoke soft-deletes a secret (sets Vault.deleted_at, deletes content).
+   * SearchSecretsSharedWithMe returns secrets shared with the current user.
+   *  Automatically scoped to current user - no user_id filter parameter.
+   *  INTERNAL secrets only: EXTERNAL secrets are addressed by email and are never
+   *  viewable through an authenticated C1 session, so returning them here would
+   *  surface rows that GetContent then denies.
    */
-  async revoke(
-    request: operations.C1ApiSecretsV1PaperSecretServiceRevokeRequest,
+  async searchSecretsSharedWithMe(
+    request?:
+      | shared.PaperSecretServiceSearchSecretsSharedWithMeRequest
+      | undefined,
     options?: RequestOptions,
-  ): Promise<operations.C1ApiSecretsV1PaperSecretServiceRevokeResponse> {
-    return unwrapAsync(paperSecretRevoke(
+  ): Promise<
+    operations.C1ApiSecretsV1PaperSecretServiceSearchSecretsSharedWithMeResponse
+  > {
+    return unwrapAsync(paperSecretSearchSecretsSharedWithMe(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete
+   *
+   * @remarks
+   * Delete soft-deletes a Paper Vault and deletes its content. It never
+   *  revokes the credential that may have been stored in the vault.
+   */
+  async delete(
+    request: operations.C1ApiSecretsV1PaperSecretServiceDeleteRequest,
+    options?: RequestOptions,
+  ): Promise<operations.C1ApiSecretsV1PaperSecretServiceDeleteResponse> {
+    return unwrapAsync(paperSecretDelete(
       this,
       request,
       options,
@@ -155,7 +182,7 @@ export class PaperSecret extends ClientSDK {
    * Create External
    *
    * @remarks
-   * CreateExternal creates a secret vault for external email recipients.
+   * CreateExternal creates a secret using the requested Age suite.
    */
   async createExternal(
     request?: shared.PaperSecretServiceCreateExternalRequest | undefined,
@@ -174,7 +201,7 @@ export class PaperSecret extends ClientSDK {
    * Create Internal
    *
    * @remarks
-   * CreateInternal creates a secret vault for internal C1 users.
+   * CreateInternal creates a secret using the requested Age suite.
    */
   async createInternal(
     request?: shared.PaperSecretServiceCreateInternalRequest | undefined,

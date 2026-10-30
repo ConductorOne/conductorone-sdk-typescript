@@ -61,7 +61,7 @@ export type TaskAction = {
   /**
    * The taskUserRelation field.
    */
-  taskUserRelation?: TaskUserRelation | null | undefined;
+  taskUserRelation?: TaskUserRelation | undefined;
 };
 
 /** @internal */
@@ -99,14 +99,14 @@ export const TaskAction$inboundSchema: z.ZodType<
   close: z.nullable(CloseAction$inboundSchema).optional(),
   reassign: z.nullable(ReassignAction$inboundSchema).optional(),
   taskTypes: z.nullable(z.array(TaskTypes$inboundSchema)).optional(),
-  taskUserRelation: z.nullable(TaskUserRelation$inboundSchema).optional(),
+  taskUserRelation: TaskUserRelation$inboundSchema.optional(),
 });
 /** @internal */
 export type TaskAction$Outbound = {
   close?: CloseAction$Outbound | null | undefined;
   reassign?: ReassignAction$Outbound | null | undefined;
   taskTypes?: Array<string> | null | undefined;
-  taskUserRelation?: string | null | undefined;
+  taskUserRelation?: string | undefined;
 };
 
 /** @internal */
@@ -118,7 +118,7 @@ export const TaskAction$outboundSchema: z.ZodType<
   close: z.nullable(CloseAction$outboundSchema).optional(),
   reassign: z.nullable(ReassignAction$outboundSchema).optional(),
   taskTypes: z.nullable(z.array(TaskTypes$outboundSchema)).optional(),
-  taskUserRelation: z.nullable(TaskUserRelation$outboundSchema).optional(),
+  taskUserRelation: TaskUserRelation$outboundSchema.optional(),
 });
 
 export function taskActionToJSON(taskAction: TaskAction): string {

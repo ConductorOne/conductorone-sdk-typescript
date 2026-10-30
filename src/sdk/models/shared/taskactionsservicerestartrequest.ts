@@ -16,19 +16,19 @@ export type TaskActionsServiceRestartRequest = {
   /**
    * The comment attached to the request.
    */
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   expandMask?: TaskExpandMask | null | undefined;
   /**
    * Deprecated. This field is accepted but does not affect behavior.
    */
-  policyStepId?: string | null | undefined;
+  policyStepId?: string | undefined;
 };
 
 /** @internal */
 export type TaskActionsServiceRestartRequest$Outbound = {
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
-  policyStepId?: string | null | undefined;
+  policyStepId?: string | undefined;
 };
 
 /** @internal */
@@ -37,9 +37,9 @@ export const TaskActionsServiceRestartRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskActionsServiceRestartRequest
 > = z.object({
-  comment: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-  policyStepId: z.nullable(z.string()).optional(),
+  policyStepId: z.string().optional(),
 });
 
 export function taskActionsServiceRestartRequestToJSON(

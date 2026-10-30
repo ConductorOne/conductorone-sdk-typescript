@@ -14,11 +14,11 @@ export type WebhookSourceWorkflowStep = {
   /**
    * The workflowExecutionId field.
    */
-  workflowExecutionId?: number | null | undefined;
+  workflowExecutionId?: number | undefined;
   /**
    * The workflowStepId field.
    */
-  workflowStepId?: string | null | undefined;
+  workflowStepId?: string | undefined;
 };
 
 /** @internal */
@@ -27,9 +27,8 @@ export const WebhookSourceWorkflowStep$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  workflowExecutionId: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
-  workflowStepId: z.nullable(z.string()).optional(),
+  workflowExecutionId: z.string().transform(v => parseInt(v, 10)).optional(),
+  workflowStepId: z.string().optional(),
 });
 
 export function webhookSourceWorkflowStepFromJSON(

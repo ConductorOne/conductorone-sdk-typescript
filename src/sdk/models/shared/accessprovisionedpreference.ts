@@ -14,11 +14,11 @@ export type AccessProvisionedPreference = {
   /**
    * The enabled field.
    */
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   /**
    * The locked field.
    */
-  locked?: boolean | null | undefined;
+  locked?: boolean | undefined;
 };
 
 /** @internal */
@@ -27,13 +27,13 @@ export const AccessProvisionedPreference$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  enabled: z.nullable(z.boolean()).optional(),
-  locked: z.nullable(z.boolean()).optional(),
+  enabled: z.boolean().optional(),
+  locked: z.boolean().optional(),
 });
 /** @internal */
 export type AccessProvisionedPreference$Outbound = {
-  enabled?: boolean | null | undefined;
-  locked?: boolean | null | undefined;
+  enabled?: boolean | undefined;
+  locked?: boolean | undefined;
 };
 
 /** @internal */
@@ -42,8 +42,8 @@ export const AccessProvisionedPreference$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AccessProvisionedPreference
 > = z.object({
-  enabled: z.nullable(z.boolean()).optional(),
-  locked: z.nullable(z.boolean()).optional(),
+  enabled: z.boolean().optional(),
+  locked: z.boolean().optional(),
 });
 
 export function accessProvisionedPreferenceToJSON(

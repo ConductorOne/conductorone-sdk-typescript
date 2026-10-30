@@ -30,6 +30,7 @@ import { Result } from "../sdk/types/fp.js";
  *
  * @remarks
  * Add users as manually managed members of an app entitlement. These memberships are tracked directly by ConductorOne rather than synced from the app.
+ *  Adding members to an access profile's enrollment entitlement requires the JML feature; without it the request fails with a failed-precondition error.
  */
 export function appEntitlementsAddManuallyManagedMembers(
   client: ConductoroneSDKTypescriptCore,

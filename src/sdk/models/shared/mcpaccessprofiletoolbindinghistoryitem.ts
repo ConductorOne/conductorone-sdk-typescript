@@ -10,7 +10,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The changeKind field.
+ * Whether this binding was added or removed.
  */
 export const MCPAccessProfileToolBindingHistoryItemChangeKind = {
   ListChangeKindUnspecified: "LIST_CHANGE_KIND_UNSPECIFIED",
@@ -18,30 +18,30 @@ export const MCPAccessProfileToolBindingHistoryItemChangeKind = {
   ListChangeKindRemoved: "LIST_CHANGE_KIND_REMOVED",
 } as const;
 /**
- * The changeKind field.
+ * Whether this binding was added or removed.
  */
 export type MCPAccessProfileToolBindingHistoryItemChangeKind = OpenEnum<
   typeof MCPAccessProfileToolBindingHistoryItemChangeKind
 >;
 
 /**
- * list_index is the mcp_tool_id on the per-profile surface, or the
+ * MCPAccessProfileToolBindingHistoryItem is a single binding added or removed in
  *
  * @remarks
- *  access_profile_id on the per-tool surface.
+ *  a transaction.
  */
 export type MCPAccessProfileToolBindingHistoryItem = {
   /**
-   * The changeKind field.
+   * Whether this binding was added or removed.
    */
-  changeKind?:
-    | MCPAccessProfileToolBindingHistoryItemChangeKind
-    | null
-    | undefined;
+  changeKind?: MCPAccessProfileToolBindingHistoryItemChangeKind | undefined;
   /**
-   * The listIndex field.
+   * The identifier of the other side of the binding: the tool ID when viewing a
+   *
+   * @remarks
+   *  toolset's history, or the toolset ID when viewing a tool's history.
    */
-  listIndex?: string | null | undefined;
+  listIndex?: string | undefined;
 };
 
 /** @internal */
@@ -58,10 +58,9 @@ export const MCPAccessProfileToolBindingHistoryItem$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  changeKind: z.nullable(
-    MCPAccessProfileToolBindingHistoryItemChangeKind$inboundSchema,
-  ).optional(),
-  listIndex: z.nullable(z.string()).optional(),
+  changeKind: MCPAccessProfileToolBindingHistoryItemChangeKind$inboundSchema
+    .optional(),
+  listIndex: z.string().optional(),
 });
 
 export function mcpAccessProfileToolBindingHistoryItemFromJSON(

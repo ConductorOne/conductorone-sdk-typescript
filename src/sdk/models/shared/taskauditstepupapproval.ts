@@ -14,7 +14,7 @@ export type TaskAuditStepUpApproval = {
   /**
    * The stepUpTransactionId field.
    */
-  stepUpTransactionId?: string | null | undefined;
+  stepUpTransactionId?: string | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const TaskAuditStepUpApproval$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  stepUpTransactionId: z.nullable(z.string()).optional(),
+  stepUpTransactionId: z.string().optional(),
 });
 
 export function taskAuditStepUpApprovalFromJSON(

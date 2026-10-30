@@ -2,6 +2,10 @@
 
 The TaskTypeRevoke message indicates that a task is a revoke task and all related details.
 
+This message contains a oneof named principal. Only a single field of the following list may be set at a time:
+  - resource
+
+
 ## Example Usage
 
 ```typescript
@@ -20,4 +24,5 @@ let value: TaskTypeRevoke = {};
 | `identityUserId`                                                                              | *string*                                                                                      | :heavy_minus_sign:                                                                            | The ID of the user.                                                                           |
 | `outcome`                                                                                     | [shared.TaskTypeRevokeOutcome](../../../sdk/models/shared/tasktyperevokeoutcome.md)           | :heavy_minus_sign:                                                                            | The outcome of the revoke.                                                                    |
 | `outcomeTime`                                                                                 | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `resource`                                                                                    | [shared.AppResourceRef](../../../sdk/models/shared/appresourceref.md)                         | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `source`                                                                                      | [shared.TaskRevokeSource](../../../sdk/models/shared/taskrevokesource.md)                     | :heavy_minus_sign:                                                                            | N/A                                                                                           |

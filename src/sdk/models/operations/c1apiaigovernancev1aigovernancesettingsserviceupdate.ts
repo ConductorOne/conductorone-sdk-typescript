@@ -23,7 +23,7 @@ export type C1ApiAIGovernanceV1AIGovernanceSettingsServiceUpdateResponse = {
    */
   rawResponse: Response;
   /**
-   * Successful response
+   * UpdateAIGovernanceSettingsResponse contains the updated AI governance settings.
    */
   updateAIGovernanceSettingsResponse?:
     | shared.UpdateAIGovernanceSettingsResponse

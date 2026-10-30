@@ -15,16 +15,16 @@ export type AppUserView = {
   /**
    * JSONPATH expression indicating where the app is expanded in expanded arrays indicated in the request.
    */
-  appPath?: string | null | undefined;
+  appPath?: string | undefined;
   appUser?: AppUser | null | undefined;
   /**
    * JSONPATH expression indicating where the identity user is expanded in expanded arrays indicated in the request.
    */
-  identityUserPath?: string | null | undefined;
+  identityUserPath?: string | undefined;
   /**
    * JSONPATH expression indicating where the last usage information is expanded in expanded arrays indicated in the request.
    */
-  lastUsagePath?: string | null | undefined;
+  lastUsagePath?: string | undefined;
 };
 
 /** @internal */
@@ -33,10 +33,10 @@ export const AppUserView$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appPath: z.nullable(z.string()).optional(),
+  appPath: z.string().optional(),
   appUser: z.nullable(AppUser$inboundSchema).optional(),
-  identityUserPath: z.nullable(z.string()).optional(),
-  lastUsagePath: z.nullable(z.string()).optional(),
+  identityUserPath: z.string().optional(),
+  lastUsagePath: z.string().optional(),
 });
 
 export function appUserViewFromJSON(

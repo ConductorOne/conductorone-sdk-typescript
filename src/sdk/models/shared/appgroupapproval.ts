@@ -20,19 +20,19 @@ export type AppGroupApproval = {
   /**
    * Configuration to allow self approval if the target user is a member of the group during this step.
    */
-  allowSelfApproval?: boolean | null | undefined;
+  allowSelfApproval?: boolean | undefined;
   /**
    * The ID of the group specified for approval.
    */
-  appGroupId?: string | null | undefined;
+  appGroupId?: string | undefined;
   /**
    * The ID of the app that contains the group specified for approval.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * Configuration to allow a fallback if the group is empty.
    */
-  fallback?: boolean | null | undefined;
+  fallback?: boolean | undefined;
   /**
    * Configuration to specify which groups to fallback to if fallback is enabled and the group is empty.
    */
@@ -44,11 +44,11 @@ export type AppGroupApproval = {
   /**
    * Configuration to enable fallback for group fallback.
    */
-  isGroupFallbackEnabled?: boolean | null | undefined;
+  isGroupFallbackEnabled?: boolean | undefined;
   /**
    * Configuration to require distinct approvers across approval steps of a rule.
    */
-  requireDistinctApprovers?: boolean | null | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -57,26 +57,26 @@ export const AppGroupApproval$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  allowSelfApproval: z.nullable(z.boolean()).optional(),
-  appGroupId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  fallback: z.nullable(z.boolean()).optional(),
+  allowSelfApproval: z.boolean().optional(),
+  appGroupId: z.string().optional(),
+  appId: z.string().optional(),
+  fallback: z.boolean().optional(),
   fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$inboundSchema))
     .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-  isGroupFallbackEnabled: z.nullable(z.boolean()).optional(),
-  requireDistinctApprovers: z.nullable(z.boolean()).optional(),
+  isGroupFallbackEnabled: z.boolean().optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
 /** @internal */
 export type AppGroupApproval$Outbound = {
-  allowSelfApproval?: boolean | null | undefined;
-  appGroupId?: string | null | undefined;
-  appId?: string | null | undefined;
-  fallback?: boolean | null | undefined;
+  allowSelfApproval?: boolean | undefined;
+  appGroupId?: string | undefined;
+  appId?: string | undefined;
+  fallback?: boolean | undefined;
   fallbackGroupIds?: Array<AppEntitlementReference$Outbound> | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
-  isGroupFallbackEnabled?: boolean | null | undefined;
-  requireDistinctApprovers?: boolean | null | undefined;
+  isGroupFallbackEnabled?: boolean | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -85,15 +85,15 @@ export const AppGroupApproval$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppGroupApproval
 > = z.object({
-  allowSelfApproval: z.nullable(z.boolean()).optional(),
-  appGroupId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  fallback: z.nullable(z.boolean()).optional(),
+  allowSelfApproval: z.boolean().optional(),
+  appGroupId: z.string().optional(),
+  appId: z.string().optional(),
+  fallback: z.boolean().optional(),
   fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$outboundSchema))
     .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-  isGroupFallbackEnabled: z.nullable(z.boolean()).optional(),
-  requireDistinctApprovers: z.nullable(z.boolean()).optional(),
+  isGroupFallbackEnabled: z.boolean().optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
 
 export function appGroupApprovalToJSON(

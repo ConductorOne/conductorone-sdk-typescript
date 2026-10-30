@@ -18,9 +18,11 @@ import { requestCatalogManagementList } from "../funcs/requestCatalogManagementL
 import { requestCatalogManagementListAllEntitlementIdsPerApp } from "../funcs/requestCatalogManagementListAllEntitlementIdsPerApp.js";
 import { requestCatalogManagementListEntitlementsForAccess } from "../funcs/requestCatalogManagementListEntitlementsForAccess.js";
 import { requestCatalogManagementListEntitlementsPerCatalog } from "../funcs/requestCatalogManagementListEntitlementsPerCatalog.js";
+import { requestCatalogManagementPlanTypeChange } from "../funcs/requestCatalogManagementPlanTypeChange.js";
 import { requestCatalogManagementRemoveAccessEntitlements } from "../funcs/requestCatalogManagementRemoveAccessEntitlements.js";
 import { requestCatalogManagementRemoveAppEntitlements } from "../funcs/requestCatalogManagementRemoveAppEntitlements.js";
 import { requestCatalogManagementResumePausedBundleAutomation } from "../funcs/requestCatalogManagementResumePausedBundleAutomation.js";
+import { requestCatalogManagementSearchScopeRoleBindingsPerCatalog } from "../funcs/requestCatalogManagementSearchScopeRoleBindingsPerCatalog.js";
 import { requestCatalogManagementSetBundleAutomation } from "../funcs/requestCatalogManagementSetBundleAutomation.js";
 import { requestCatalogManagementUpdate } from "../funcs/requestCatalogManagementUpdate.js";
 import { requestCatalogManagementUpdateAppEntitlements } from "../funcs/requestCatalogManagementUpdateAppEntitlements.js";
@@ -228,6 +230,31 @@ export class RequestCatalogManagement extends ClientSDK {
       request,
       options,
     ));
+  }
+
+  /**
+   * Search Scope Role Bindings Per Catalog
+   *
+   * @remarks
+   * Search scope-role bindings in a catalog, grouped by (app, scope) (one entry per scope with
+   *  all role IDs aggregated). When app_id is provided the result is scoped to that app; when
+   *  omitted the result spans every app in the catalog, ordered by (app_id, scope_id) so a client
+   *  groupBy(app_id) produces contiguous app sections across page boundaries.
+   */
+  async searchScopeRoleBindingsPerCatalog(
+    request:
+      operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceSearchScopeRoleBindingsPerCatalogRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceSearchScopeRoleBindingsPerCatalogResponse
+  > {
+    return unwrapAsync(
+      requestCatalogManagementSearchScopeRoleBindingsPerCatalog(
+        this,
+        request,
+        options,
+      ),
+    );
   }
 
   /**
@@ -464,6 +491,28 @@ export class RequestCatalogManagement extends ClientSDK {
     operations.C1ApiRequestcatalogV1RequestCatalogManagementServiceForceRunBundleAutomationResponse
   > {
     return unwrapAsync(requestCatalogManagementForceRunBundleAutomation(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Plan Type Change
+   *
+   * @remarks
+   * PlanTypeChange reports settings that must be turned off before Update can
+   *  change an access profile to the requested type. It does not modify the
+   *  profile or any associated state.
+   */
+  async planTypeChange(
+    request:
+      operations.C1ApiRequestcatalogV1RequestCatalogManagementServicePlanTypeChangeRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiRequestcatalogV1RequestCatalogManagementServicePlanTypeChangeResponse
+  > {
+    return unwrapAsync(requestCatalogManagementPlanTypeChange(
       this,
       request,
       options,

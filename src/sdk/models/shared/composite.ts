@@ -52,7 +52,7 @@ export type Composite = {
    * @remarks
    *  FORMAT_JSON_OBJECT.
    */
-  format?: CompositeFormat | null | undefined;
+  format?: CompositeFormat | undefined;
 };
 
 /** @internal */
@@ -69,7 +69,7 @@ export const Composite$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   fields: z.nullable(z.array(CompositeField$inboundSchema)).optional(),
-  format: z.nullable(CompositeFormat$inboundSchema).optional(),
+  format: CompositeFormat$inboundSchema.optional(),
 });
 
 export function compositeFromJSON(

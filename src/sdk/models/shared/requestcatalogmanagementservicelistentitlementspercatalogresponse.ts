@@ -52,7 +52,7 @@ export type RequestCatalogManagementServiceListEntitlementsPerCatalogResponse =
      *  The server returns one page of results and the nextPageToken until all results are retreived.
      *  To retrieve the next page, use the same request and append a pageToken field with the value of nextPageToken shown on the previous page.
      */
-    nextPageToken?: string | null | undefined;
+    nextPageToken?: string | undefined;
   };
 
 /** @internal */
@@ -101,7 +101,7 @@ export const RequestCatalogManagementServiceListEntitlementsPerCatalogResponse$i
       )),
     ).optional(),
     list: z.nullable(z.array(AppEntitlementView$inboundSchema)).optional(),
-    nextPageToken: z.nullable(z.string()).optional(),
+    nextPageToken: z.string().optional(),
   });
 
 export function requestCatalogManagementServiceListEntitlementsPerCatalogResponseFromJSON(

@@ -15,7 +15,7 @@ export type TextComponent = {
   /**
    * The markdown field.
    */
-  markdown?: boolean | null | undefined;
+  markdown?: boolean | undefined;
   text?: DynamicString | null | undefined;
 };
 
@@ -25,7 +25,7 @@ export const TextComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  markdown: z.nullable(z.boolean()).optional(),
+  markdown: z.boolean().optional(),
   text: z.nullable(DynamicString$inboundSchema).optional(),
 });
 

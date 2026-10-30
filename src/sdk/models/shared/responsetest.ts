@@ -17,7 +17,7 @@ export type ResponseTest = {
    * @remarks
    *  will use a different string.
    */
-  version?: string | null | undefined;
+  version?: string | undefined;
 };
 
 /** @internal */
@@ -26,11 +26,11 @@ export const ResponseTest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  version: z.nullable(z.string()).optional(),
+  version: z.string().optional(),
 });
 /** @internal */
 export type ResponseTest$Outbound = {
-  version?: string | null | undefined;
+  version?: string | undefined;
 };
 
 /** @internal */
@@ -39,7 +39,7 @@ export const ResponseTest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseTest
 > = z.object({
-  version: z.nullable(z.string()).optional(),
+  version: z.string().optional(),
 });
 
 export function responseTestToJSON(responseTest: ResponseTest): string {

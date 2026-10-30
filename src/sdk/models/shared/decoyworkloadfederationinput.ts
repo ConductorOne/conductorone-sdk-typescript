@@ -19,22 +19,22 @@ export type DecoyWorkloadFederationInput = {
    *  shape as the regular WorkloadFederationTrust condition expression.
    *  Example: `claims.sub.startsWith("repo:acme/fake-infra:")`.
    */
-  conditionExpression?: string | null | undefined;
+  conditionExpression?: string | undefined;
   /**
    * Existing WorkloadFederationProvider to bind the decoy Trust under.
    */
-  providerId?: string | null | undefined;
+  providerId?: string | undefined;
   /**
    * Existing SERVICE-typed User the Trust would act-as on match.
    */
-  servicePrincipalUserId?: string | null | undefined;
+  servicePrincipalUserId?: string | undefined;
 };
 
 /** @internal */
 export type DecoyWorkloadFederationInput$Outbound = {
-  conditionExpression?: string | null | undefined;
-  providerId?: string | null | undefined;
-  servicePrincipalUserId?: string | null | undefined;
+  conditionExpression?: string | undefined;
+  providerId?: string | undefined;
+  servicePrincipalUserId?: string | undefined;
 };
 
 /** @internal */
@@ -43,9 +43,9 @@ export const DecoyWorkloadFederationInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DecoyWorkloadFederationInput
 > = z.object({
-  conditionExpression: z.nullable(z.string()).optional(),
-  providerId: z.nullable(z.string()).optional(),
-  servicePrincipalUserId: z.nullable(z.string()).optional(),
+  conditionExpression: z.string().optional(),
+  providerId: z.string().optional(),
+  servicePrincipalUserId: z.string().optional(),
 });
 
 export function decoyWorkloadFederationInputToJSON(

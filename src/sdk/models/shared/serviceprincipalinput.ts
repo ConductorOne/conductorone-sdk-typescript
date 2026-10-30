@@ -8,6 +8,11 @@ import {
   UserInput$Outbound,
   UserInput$outboundSchema,
 } from "./user.js";
+import {
+  UserActorObjectPermissions,
+  UserActorObjectPermissions$Outbound,
+  UserActorObjectPermissions$outboundSchema,
+} from "./useractorobjectpermissions.js";
 
 /**
  * ServicePrincipal represents a tenant-managed non-human identity.
@@ -16,13 +21,15 @@ export type ServicePrincipalInput = {
   /**
    * The display name of the service principal.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
+  objectPermissions?: UserActorObjectPermissions | null | undefined;
   user?: UserInput | null | undefined;
 };
 
 /** @internal */
 export type ServicePrincipalInput$Outbound = {
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
+  objectPermissions?: UserActorObjectPermissions$Outbound | null | undefined;
   user?: UserInput$Outbound | null | undefined;
 };
 
@@ -32,7 +39,9 @@ export const ServicePrincipalInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ServicePrincipalInput
 > = z.object({
-  displayName: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
+  objectPermissions: z.nullable(UserActorObjectPermissions$outboundSchema)
+    .optional(),
   user: z.nullable(UserInput$outboundSchema).optional(),
 });
 

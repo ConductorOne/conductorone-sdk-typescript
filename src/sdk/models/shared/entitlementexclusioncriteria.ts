@@ -6,6 +6,12 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  ResourceTypeRef,
+  ResourceTypeRef$inboundSchema,
+  ResourceTypeRef$Outbound,
+  ResourceTypeRef$outboundSchema,
+} from "./resourcetyperef.js";
 
 /**
  * The EntitlementExclusionCriteria message.
@@ -20,9 +26,25 @@ export type EntitlementExclusionCriteria = {
    */
   excludedComplianceFrameworkIds?: Array<string> | null | undefined;
   /**
-   * The excludedResourceTypeIds field.
+   * Deprecated: matched by resource type display name, which collides across
+   *
+   * @remarks
+   *  apps/connectors. Not read by execution — replaced by
+   *  excluded_resource_type_refs. Kept only for wire compatibility with
+   *  existing stored rows; a criteria still carrying this without a ref
+   *  degrades to excluding the entire named app(s) rather than failing closed,
+   *  since the exclusion side warns instead of aborting the run.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   excludedResourceTypeIds?: Array<string> | null | undefined;
+  /**
+   * The only field that scopes resource types; excluded_resource_type_ids is
+   *
+   * @remarks
+   *  deprecated and ignored.
+   */
+  excludedResourceTypeRefs?: Array<ResourceTypeRef> | null | undefined;
   /**
    * The excludedRiskLevelIds field.
    */
@@ -38,6 +60,8 @@ export const EntitlementExclusionCriteria$inboundSchema: z.ZodType<
   excludedAppIds: z.nullable(z.array(z.string())).optional(),
   excludedComplianceFrameworkIds: z.nullable(z.array(z.string())).optional(),
   excludedResourceTypeIds: z.nullable(z.array(z.string())).optional(),
+  excludedResourceTypeRefs: z.nullable(z.array(ResourceTypeRef$inboundSchema))
+    .optional(),
   excludedRiskLevelIds: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
@@ -45,6 +69,7 @@ export type EntitlementExclusionCriteria$Outbound = {
   excludedAppIds?: Array<string> | null | undefined;
   excludedComplianceFrameworkIds?: Array<string> | null | undefined;
   excludedResourceTypeIds?: Array<string> | null | undefined;
+  excludedResourceTypeRefs?: Array<ResourceTypeRef$Outbound> | null | undefined;
   excludedRiskLevelIds?: Array<string> | null | undefined;
 };
 
@@ -57,6 +82,8 @@ export const EntitlementExclusionCriteria$outboundSchema: z.ZodType<
   excludedAppIds: z.nullable(z.array(z.string())).optional(),
   excludedComplianceFrameworkIds: z.nullable(z.array(z.string())).optional(),
   excludedResourceTypeIds: z.nullable(z.array(z.string())).optional(),
+  excludedResourceTypeRefs: z.nullable(z.array(ResourceTypeRef$outboundSchema))
+    .optional(),
   excludedRiskLevelIds: z.nullable(z.array(z.string())).optional(),
 });
 

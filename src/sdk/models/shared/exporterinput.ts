@@ -22,13 +22,13 @@ export type ExporterInput = {
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
 };
 
 /** @internal */
 export type ExporterInput$Outbound = {
   datasource?: ExportToDatasource$Outbound | null | undefined;
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
 };
 
 /** @internal */
@@ -38,7 +38,7 @@ export const ExporterInput$outboundSchema: z.ZodType<
   ExporterInput
 > = z.object({
   datasource: z.nullable(ExportToDatasource$outboundSchema).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
 });
 
 export function exporterInputToJSON(exporterInput: ExporterInput): string {

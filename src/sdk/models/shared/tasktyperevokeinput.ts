@@ -4,6 +4,11 @@
 
 import * as z from "zod/v3";
 import {
+  AppResourceRef,
+  AppResourceRef$Outbound,
+  AppResourceRef$outboundSchema,
+} from "./appresourceref.js";
+import {
   TaskRevokeSource,
   TaskRevokeSource$Outbound,
   TaskRevokeSource$outboundSchema,
@@ -11,13 +16,20 @@ import {
 
 /**
  * The TaskTypeRevoke message indicates that a task is a revoke task and all related details.
+ *
+ * @remarks
+ *
+ * This message contains a oneof named principal. Only a single field of the following list may be set at a time:
+ *   - resource
  */
 export type TaskTypeRevokeInput = {
+  resource?: AppResourceRef | null | undefined;
   source?: TaskRevokeSource | null | undefined;
 };
 
 /** @internal */
 export type TaskTypeRevokeInput$Outbound = {
+  resource?: AppResourceRef$Outbound | null | undefined;
   source?: TaskRevokeSource$Outbound | null | undefined;
 };
 
@@ -27,6 +39,7 @@ export const TaskTypeRevokeInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskTypeRevokeInput
 > = z.object({
+  resource: z.nullable(AppResourceRef$outboundSchema).optional(),
   source: z.nullable(TaskRevokeSource$outboundSchema).optional(),
 });
 

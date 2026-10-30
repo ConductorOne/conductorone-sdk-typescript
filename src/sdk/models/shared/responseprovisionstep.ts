@@ -37,7 +37,7 @@ export type ResponseProvisionStep = {
    * @remarks
    *  will use a different string.
    */
-  version?: string | null | undefined;
+  version?: string | undefined;
 };
 
 /** @internal */
@@ -48,13 +48,13 @@ export const ResponseProvisionStep$inboundSchema: z.ZodType<
 > = z.object({
   complete: z.nullable(ResponseProvisionStepComplete$inboundSchema).optional(),
   errored: z.nullable(ResponseProvisionStepErrored$inboundSchema).optional(),
-  version: z.nullable(z.string()).optional(),
+  version: z.string().optional(),
 });
 /** @internal */
 export type ResponseProvisionStep$Outbound = {
   complete?: ResponseProvisionStepComplete$Outbound | null | undefined;
   errored?: ResponseProvisionStepErrored$Outbound | null | undefined;
-  version?: string | null | undefined;
+  version?: string | undefined;
 };
 
 /** @internal */
@@ -65,7 +65,7 @@ export const ResponseProvisionStep$outboundSchema: z.ZodType<
 > = z.object({
   complete: z.nullable(ResponseProvisionStepComplete$outboundSchema).optional(),
   errored: z.nullable(ResponseProvisionStepErrored$outboundSchema).optional(),
-  version: z.nullable(z.string()).optional(),
+  version: z.string().optional(),
 });
 
 export function responseProvisionStepToJSON(

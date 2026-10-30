@@ -44,7 +44,7 @@ export type ButtonComponent = {
   /**
    * The variant field.
    */
-  variant?: Variant | null | undefined;
+  variant?: Variant | undefined;
 };
 
 /** @internal */
@@ -61,7 +61,7 @@ export const ButtonComponent$inboundSchema: z.ZodType<
   checks: z.nullable(z.array(ValidationCheck$inboundSchema)).optional(),
   disabled: z.nullable(DynamicBool$inboundSchema).optional(),
   label: z.nullable(DynamicString$inboundSchema).optional(),
-  variant: z.nullable(Variant$inboundSchema).optional(),
+  variant: Variant$inboundSchema.optional(),
 });
 
 export function buttonComponentFromJSON(

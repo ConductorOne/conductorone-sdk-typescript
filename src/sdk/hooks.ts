@@ -17,7 +17,7 @@ export class Hooks extends ClientSDK {
    * List
    *
    * @remarks
-   * Invokes the c1.api.hooks.v1.HooksService.List method.
+   * List returns all hooks for the tenant, paginated.
    */
   async list(
     request?: operations.C1ApiHooksV1HooksServiceListRequest | undefined,
@@ -34,7 +34,9 @@ export class Hooks extends ClientSDK {
    * Create
    *
    * @remarks
-   * Invokes the c1.api.hooks.v1.HooksService.Create method.
+   * Create creates a hook. The hook fires on the configured event, optionally
+   *  filtered by a CEL expression. Creating a Patch tool input hook requires the
+   *  preview feature to be enabled for the tenant.
    */
   async create(
     request?: shared.HooksServiceCreateRequest | undefined,
@@ -51,7 +53,8 @@ export class Hooks extends ClientSDK {
    * Delete
    *
    * @remarks
-   * Invokes the c1.api.hooks.v1.HooksService.Delete method.
+   * Delete removes a hook by ID. A hook referenced by a guardrail rule cannot
+   *  be deleted until the reference is removed.
    */
   async delete(
     request: operations.C1ApiHooksV1HooksServiceDeleteRequest,
@@ -68,7 +71,7 @@ export class Hooks extends ClientSDK {
    * Get
    *
    * @remarks
-   * Invokes the c1.api.hooks.v1.HooksService.Get method.
+   * Get returns a hook by ID.
    */
   async get(
     request: operations.C1ApiHooksV1HooksServiceGetRequest,
@@ -85,7 +88,9 @@ export class Hooks extends ClientSDK {
    * Update
    *
    * @remarks
-   * Invokes the c1.api.hooks.v1.HooksService.Update method.
+   * Update modifies a hook's display name, description, event, filter, priority,
+   *  or configuration. A hook referenced by a guardrail rule cannot stop being
+   *  managed by guardrails until the reference is removed.
    */
   async update(
     request: operations.C1ApiHooksV1HooksServiceUpdateRequest,

@@ -24,15 +24,15 @@ export type UnenrollFromAllAccessProfiles = {
   /**
    * CEL expression to dynamically select catalog IDs. If provided, overrides catalog_ids.
    */
-  catalogIdsCel?: string | null | undefined;
+  catalogIdsCel?: string | undefined;
   /**
    * If true, the step will use the subject user of the automation as the subject.
    */
-  useSubjectUser?: boolean | null | undefined;
+  useSubjectUser?: boolean | undefined;
   /**
    * The userIdsCel field.
    */
-  userIdsCel?: string | null | undefined;
+  userIdsCel?: string | undefined;
   /**
    * The userRefs field.
    */
@@ -46,17 +46,17 @@ export const UnenrollFromAllAccessProfiles$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   catalogIds: z.nullable(z.array(z.string())).optional(),
-  catalogIdsCel: z.nullable(z.string()).optional(),
-  useSubjectUser: z.nullable(z.boolean()).optional(),
-  userIdsCel: z.nullable(z.string()).optional(),
+  catalogIdsCel: z.string().optional(),
+  useSubjectUser: z.boolean().optional(),
+  userIdsCel: z.string().optional(),
   userRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
 });
 /** @internal */
 export type UnenrollFromAllAccessProfiles$Outbound = {
   catalogIds?: Array<string> | null | undefined;
-  catalogIdsCel?: string | null | undefined;
-  useSubjectUser?: boolean | null | undefined;
-  userIdsCel?: string | null | undefined;
+  catalogIdsCel?: string | undefined;
+  useSubjectUser?: boolean | undefined;
+  userIdsCel?: string | undefined;
   userRefs?: Array<UserRef$Outbound> | null | undefined;
 };
 
@@ -67,9 +67,9 @@ export const UnenrollFromAllAccessProfiles$outboundSchema: z.ZodType<
   UnenrollFromAllAccessProfiles
 > = z.object({
   catalogIds: z.nullable(z.array(z.string())).optional(),
-  catalogIdsCel: z.nullable(z.string()).optional(),
-  useSubjectUser: z.nullable(z.boolean()).optional(),
-  userIdsCel: z.nullable(z.string()).optional(),
+  catalogIdsCel: z.string().optional(),
+  useSubjectUser: z.boolean().optional(),
+  userIdsCel: z.string().optional(),
   userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
 });
 

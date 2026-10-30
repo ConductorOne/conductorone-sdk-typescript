@@ -99,67 +99,67 @@ export type SSFReceiverEvent = {
    * @remarks
    *  The normalized event type after mapping from the wire event type.
    */
-  canonicalType?: CanonicalType | null | undefined;
+  canonicalType?: CanonicalType | undefined;
   /**
    * The unique identifier of this event.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * How the upstream subject was resolved to a ConductorOne user.
    */
-  matchMethod?: MatchMethod | null | undefined;
+  matchMethod?: MatchMethod | undefined;
   /**
    * The ConductorOne user ID that the event subject was resolved to, if any.
    */
-  matchedUserId?: string | null | undefined;
+  matchedUserId?: string | undefined;
   /**
    * The action ConductorOne took in response to this event.
    */
-  outcome?: SSFReceiverEventOutcome | null | undefined;
+  outcome?: SSFReceiverEventOutcome | undefined;
   /**
    * Human-readable details about the outcome (e.g., error message or revocation summary).
    */
-  outcomeDetail?: string | null | undefined;
+  outcomeDetail?: string | undefined;
   receivedAt?: Date | null | undefined;
   /**
    * Number of sessions that were revoked as a result of this event.
    */
-  sessionsRevoked?: number | null | undefined;
+  sessionsRevoked?: number | undefined;
   /**
    * Wire-level data (what the transmitter sent).
    *
    * @remarks
    *  The SET (Security Event Token) JWT ID claim, uniquely identifying the token.
    */
-  setJti?: string | null | undefined;
+  setJti?: string | undefined;
   /**
    * The SSF receiver stream that received this event.
    */
-  streamId?: string | null | undefined;
+  streamId?: string | undefined;
   /**
    * The event profile URI from the SET, if present.
    */
-  wireEventProfile?: string | null | undefined;
+  wireEventProfile?: string | undefined;
   /**
    * The raw event type URI from the SET (e.g., "https://schemas.openid.net/secevent/caep/event-type/session-revoked").
    */
-  wireEventType?: string | null | undefined;
+  wireEventType?: string | undefined;
   /**
    * The entity that initiated the event, as reported by the transmitter.
    */
-  wireInitiatingEntity?: string | null | undefined;
+  wireInitiatingEntity?: string | undefined;
   /**
    * The admin-facing reason string from the SET, if provided by the transmitter.
    */
-  wireReasonAdmin?: string | null | undefined;
+  wireReasonAdmin?: string | undefined;
   /**
    * The subject identifier format from the SET (e.g., "email", "iss_sub").
    */
-  wireSubjectFormat?: string | null | undefined;
+  wireSubjectFormat?: string | undefined;
   /**
    * The raw subject identifier value from the SET.
    */
-  wireSubjectIdentifier?: string | null | undefined;
+  wireSubjectIdentifier?: string | undefined;
 };
 
 /** @internal */
@@ -189,24 +189,24 @@ export const SSFReceiverEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  canonicalType: z.nullable(CanonicalType$inboundSchema).optional(),
-  id: z.nullable(z.string()).optional(),
-  matchMethod: z.nullable(MatchMethod$inboundSchema).optional(),
-  matchedUserId: z.nullable(z.string()).optional(),
-  outcome: z.nullable(SSFReceiverEventOutcome$inboundSchema).optional(),
-  outcomeDetail: z.nullable(z.string()).optional(),
+  canonicalType: CanonicalType$inboundSchema.optional(),
+  id: z.string().optional(),
+  matchMethod: MatchMethod$inboundSchema.optional(),
+  matchedUserId: z.string().optional(),
+  outcome: SSFReceiverEventOutcome$inboundSchema.optional(),
+  outcomeDetail: z.string().optional(),
   receivedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  sessionsRevoked: z.nullable(z.number().int()).optional(),
-  setJti: z.nullable(z.string()).optional(),
-  streamId: z.nullable(z.string()).optional(),
-  wireEventProfile: z.nullable(z.string()).optional(),
-  wireEventType: z.nullable(z.string()).optional(),
-  wireInitiatingEntity: z.nullable(z.string()).optional(),
-  wireReasonAdmin: z.nullable(z.string()).optional(),
-  wireSubjectFormat: z.nullable(z.string()).optional(),
-  wireSubjectIdentifier: z.nullable(z.string()).optional(),
+  sessionsRevoked: z.number().int().optional(),
+  setJti: z.string().optional(),
+  streamId: z.string().optional(),
+  wireEventProfile: z.string().optional(),
+  wireEventType: z.string().optional(),
+  wireInitiatingEntity: z.string().optional(),
+  wireReasonAdmin: z.string().optional(),
+  wireSubjectFormat: z.string().optional(),
+  wireSubjectIdentifier: z.string().optional(),
 });
 
 export function ssfReceiverEventFromJSON(

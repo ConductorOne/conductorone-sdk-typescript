@@ -33,19 +33,19 @@ export type SearchStepUpProvidersRequest = {
   /**
    * Maximum number of results to return
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * Token for pagination
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * The providerType field.
    */
-  providerType?: SearchStepUpProvidersRequestProviderType | null | undefined;
+  providerType?: SearchStepUpProvidersRequestProviderType | undefined;
   /**
    * Filter by name (partial match)
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * Filter to specific providers by their references.
    */
@@ -61,10 +61,10 @@ export const SearchStepUpProvidersRequestProviderType$outboundSchema: z.ZodType<
 
 /** @internal */
 export type SearchStepUpProvidersRequest$Outbound = {
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  providerType?: string | null | undefined;
-  query?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  providerType?: string | undefined;
+  query?: string | undefined;
   refs?: Array<StepUpProviderRef$Outbound> | null | undefined;
 };
 
@@ -74,12 +74,11 @@ export const SearchStepUpProvidersRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchStepUpProvidersRequest
 > = z.object({
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  providerType: z.nullable(
-    SearchStepUpProvidersRequestProviderType$outboundSchema,
-  ).optional(),
-  query: z.nullable(z.string()).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  providerType: SearchStepUpProvidersRequestProviderType$outboundSchema
+    .optional(),
+  query: z.string().optional(),
   refs: z.nullable(z.array(StepUpProviderRef$outboundSchema)).optional(),
 });
 

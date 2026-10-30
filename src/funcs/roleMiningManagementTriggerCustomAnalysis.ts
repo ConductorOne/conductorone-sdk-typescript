@@ -30,7 +30,10 @@ import { Result } from "../sdk/types/fp.js";
  * Trigger Custom Analysis
  *
  * @remarks
- * Invokes the c1.api.role_mining_management.v1.RoleMiningManagementService.TriggerCustomAnalysis method.
+ * TriggerCustomAnalysis starts an asynchronous custom cohort analysis defined
+ *  by the given profile filters and returns the ID of the analysis result.
+ *  Requires the agentic role mining feature. Poll GetCustomAnalysisResult
+ *  until the analysis completes.
  */
 export function roleMiningManagementTriggerCustomAnalysis(
   client: ConductoroneSDKTypescriptCore,

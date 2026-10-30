@@ -14,34 +14,34 @@ export type SSFReceiverStreamStats = {
   /**
    * Number of events that triggered an action (e.g., session revocation).
    */
-  eventsActedOnCount?: number | null | undefined;
+  eventsActedOnCount?: number | undefined;
   /**
    * Number of events that failed processing.
    */
-  eventsFailedCount?: number | null | undefined;
+  eventsFailedCount?: number | undefined;
   /**
    * Total number of events received on this stream.
    */
-  eventsReceivedCount?: number | null | undefined;
+  eventsReceivedCount?: number | undefined;
   lastErrorAt?: Date | null | undefined;
   /**
    * Human-readable description of the most recent processing error.
    */
-  lastErrorMessage?: string | null | undefined;
+  lastErrorMessage?: string | undefined;
   lastEventReceivedAt?: Date | null | undefined;
   lastVerifiedAt?: Date | null | undefined;
   /**
    * The SSF receiver stream these stats belong to.
    */
-  streamId?: string | null | undefined;
+  streamId?: string | undefined;
   /**
    * Current status reported by the transmitter (e.g., "enabled", "paused").
    */
-  transmitterStatus?: string | null | undefined;
+  transmitterStatus?: string | undefined;
   /**
    * Reason provided by the transmitter for its current status.
    */
-  transmitterStatusReason?: string | null | undefined;
+  transmitterStatusReason?: string | undefined;
 };
 
 /** @internal */
@@ -50,25 +50,22 @@ export const SSFReceiverStreamStats$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  eventsActedOnCount: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
-  eventsFailedCount: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
-  eventsReceivedCount: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
+  eventsActedOnCount: z.string().transform(v => parseInt(v, 10)).optional(),
+  eventsFailedCount: z.string().transform(v => parseInt(v, 10)).optional(),
+  eventsReceivedCount: z.string().transform(v => parseInt(v, 10)).optional(),
   lastErrorAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  lastErrorMessage: z.nullable(z.string()).optional(),
+  lastErrorMessage: z.string().optional(),
   lastEventReceivedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   lastVerifiedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  streamId: z.nullable(z.string()).optional(),
-  transmitterStatus: z.nullable(z.string()).optional(),
-  transmitterStatusReason: z.nullable(z.string()).optional(),
+  streamId: z.string().optional(),
+  transmitterStatus: z.string().optional(),
+  transmitterStatusReason: z.string().optional(),
 });
 
 export function ssfReceiverStreamStatsFromJSON(

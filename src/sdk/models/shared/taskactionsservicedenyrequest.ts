@@ -16,19 +16,19 @@ export type TaskActionsServiceDenyRequest = {
   /**
    * The comment attached to the request.
    */
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   expandMask?: TaskExpandMask | null | undefined;
   /**
    * The ID of the current policy step. This is the step you want to deny.
    */
-  policyStepId?: string | null | undefined;
+  policyStepId?: string | undefined;
 };
 
 /** @internal */
 export type TaskActionsServiceDenyRequest$Outbound = {
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
-  policyStepId?: string | null | undefined;
+  policyStepId?: string | undefined;
 };
 
 /** @internal */
@@ -37,9 +37,9 @@ export const TaskActionsServiceDenyRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskActionsServiceDenyRequest
 > = z.object({
-  comment: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-  policyStepId: z.nullable(z.string()).optional(),
+  policyStepId: z.string().optional(),
 });
 
 export function taskActionsServiceDenyRequestToJSON(

@@ -14,11 +14,11 @@ export type MagicVault = {
   /**
    * Controls whether unauthenticated users can view credentials via a magic link.
    */
-  allowUnauthedViews?: boolean | null | undefined;
+  allowUnauthedViews?: boolean | undefined;
   /**
    * The maximum number of times a credential in this vault may be viewed.
    */
-  allowedViews?: number | null | undefined;
+  allowedViews?: number | undefined;
 };
 
 /** @internal */
@@ -27,13 +27,13 @@ export const MagicVault$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  allowUnauthedViews: z.nullable(z.boolean()).optional(),
-  allowedViews: z.nullable(z.number().int()).optional(),
+  allowUnauthedViews: z.boolean().optional(),
+  allowedViews: z.number().int().optional(),
 });
 /** @internal */
 export type MagicVault$Outbound = {
-  allowUnauthedViews?: boolean | null | undefined;
-  allowedViews?: number | null | undefined;
+  allowUnauthedViews?: boolean | undefined;
+  allowedViews?: number | undefined;
 };
 
 /** @internal */
@@ -42,8 +42,8 @@ export const MagicVault$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MagicVault
 > = z.object({
-  allowUnauthedViews: z.nullable(z.boolean()).optional(),
-  allowedViews: z.nullable(z.number().int()).optional(),
+  allowUnauthedViews: z.boolean().optional(),
+  allowedViews: z.number().int().optional(),
 });
 
 export function magicVaultToJSON(magicVault: MagicVault): string {

@@ -22,7 +22,7 @@ export type SearchAutomationTemplateVersionsResponse = {
   /**
    * Token to retrieve the next page of results, empty when no more results exist.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -32,7 +32,7 @@ export const SearchAutomationTemplateVersionsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   list: z.nullable(z.array(AutomationTemplateVersion$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function searchAutomationTemplateVersionsResponseFromJSON(

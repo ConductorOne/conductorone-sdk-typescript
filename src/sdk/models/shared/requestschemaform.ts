@@ -32,11 +32,11 @@ export type RequestSchemaForm = {
   /**
    * The description field.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The fieldGroups field.
    */
@@ -52,7 +52,7 @@ export type RequestSchemaForm = {
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -61,22 +61,22 @@ export const RequestSchemaForm$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
   fieldGroups: z.nullable(z.array(FormFieldGroup$inboundSchema)).optional(),
   fieldRelationships: z.nullable(z.array(FieldRelationship$inboundSchema))
     .optional(),
   fields: z.nullable(z.array(FormField$inboundSchema)).optional(),
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
 });
 /** @internal */
 export type RequestSchemaForm$Outbound = {
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
   fieldGroups?: Array<FormFieldGroup$Outbound> | null | undefined;
   fieldRelationships?: Array<FieldRelationship$Outbound> | null | undefined;
   fields?: Array<FormField$Outbound> | null | undefined;
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -85,13 +85,13 @@ export const RequestSchemaForm$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RequestSchemaForm
 > = z.object({
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
   fieldGroups: z.nullable(z.array(FormFieldGroup$outboundSchema)).optional(),
   fieldRelationships: z.nullable(z.array(FieldRelationship$outboundSchema))
     .optional(),
   fields: z.nullable(z.array(FormField$outboundSchema)).optional(),
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
 });
 
 export function requestSchemaFormToJSON(

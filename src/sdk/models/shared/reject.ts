@@ -14,17 +14,17 @@ export type Reject = {
   /**
    * An optional message to include in the comments when a task is automatically rejected.
    */
-  rejectMessage?: string | null | undefined;
+  rejectMessage?: string | undefined;
 };
 
 /** @internal */
 export const Reject$inboundSchema: z.ZodType<Reject, z.ZodTypeDef, unknown> = z
   .object({
-    rejectMessage: z.nullable(z.string()).optional(),
+    rejectMessage: z.string().optional(),
   });
 /** @internal */
 export type Reject$Outbound = {
-  rejectMessage?: string | null | undefined;
+  rejectMessage?: string | undefined;
 };
 
 /** @internal */
@@ -33,7 +33,7 @@ export const Reject$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Reject
 > = z.object({
-  rejectMessage: z.nullable(z.string()).optional(),
+  rejectMessage: z.string().optional(),
 });
 
 export function rejectToJSON(reject: Reject): string {

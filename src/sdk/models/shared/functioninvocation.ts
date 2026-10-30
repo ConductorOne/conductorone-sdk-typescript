@@ -8,6 +8,14 @@ import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  FunctionInvocationResultRef,
+  FunctionInvocationResultRef$inboundSchema,
+} from "./functioninvocationresultref.js";
+import {
+  FunctionNetworkConfig,
+  FunctionNetworkConfig$inboundSchema,
+} from "./functionnetworkconfig.js";
 
 /**
  * The status field.
@@ -18,6 +26,10 @@ export const FunctionInvocationStatus = {
   FunctionInvocationStatusRunning: "FUNCTION_INVOCATION_STATUS_RUNNING",
   FunctionInvocationStatusSuccess: "FUNCTION_INVOCATION_STATUS_SUCCESS",
   FunctionInvocationStatusError: "FUNCTION_INVOCATION_STATUS_ERROR",
+  FunctionInvocationStatusCancellationRequested:
+    "FUNCTION_INVOCATION_STATUS_CANCELLATION_REQUESTED",
+  FunctionInvocationStatusCancelled: "FUNCTION_INVOCATION_STATUS_CANCELLED",
+  FunctionInvocationStatusUnknown: "FUNCTION_INVOCATION_STATUS_UNKNOWN",
 } as const;
 /**
  * The status field.
@@ -33,26 +45,40 @@ export type FunctionInvocation = {
   /**
    * The commitId field.
    */
-  commitId?: string | null | undefined;
+  commitId?: string | undefined;
+  /**
+   * The conversationId field.
+   */
+  conversationId?: string | undefined;
   createdAt?: Date | null | undefined;
   /**
    * The error field.
    */
-  error?: string | null | undefined;
+  error?: string | undefined;
   /**
    * The functionId field.
    */
-  functionId?: string | null | undefined;
+  functionId?: string | undefined;
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   input?: { [k: string]: any } | null | undefined;
+  /**
+   * The networkCallerUserId field.
+   */
+  networkCallerUserId?: string | undefined;
+  networkConfig?: FunctionNetworkConfig | null | undefined;
+  /**
+   * The networkPolicyRevision field.
+   */
+  networkPolicyRevision?: string | undefined;
   output?: { [k: string]: any } | null | undefined;
+  resultRef?: FunctionInvocationResultRef | null | undefined;
   /**
    * The status field.
    */
-  status?: FunctionInvocationStatus | null | undefined;
+  status?: FunctionInvocationStatus | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -69,16 +95,21 @@ export const FunctionInvocation$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  commitId: z.nullable(z.string()).optional(),
+  commitId: z.string().optional(),
+  conversationId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  error: z.nullable(z.string()).optional(),
-  functionId: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
+  error: z.string().optional(),
+  functionId: z.string().optional(),
+  id: z.string().optional(),
   input: z.nullable(z.record(z.any())).optional(),
+  networkCallerUserId: z.string().optional(),
+  networkConfig: z.nullable(FunctionNetworkConfig$inboundSchema).optional(),
+  networkPolicyRevision: z.string().optional(),
   output: z.nullable(z.record(z.any())).optional(),
-  status: z.nullable(FunctionInvocationStatus$inboundSchema).optional(),
+  resultRef: z.nullable(FunctionInvocationResultRef$inboundSchema).optional(),
+  status: FunctionInvocationStatus$inboundSchema.optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

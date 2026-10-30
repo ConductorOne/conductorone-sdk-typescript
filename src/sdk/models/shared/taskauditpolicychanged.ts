@@ -14,11 +14,11 @@ export type TaskAuditPolicyChanged = {
   /**
    * The newPolicyId field.
    */
-  newPolicyId?: string | null | undefined;
+  newPolicyId?: string | undefined;
   /**
    * The oldPolicyId field.
    */
-  oldPolicyId?: string | null | undefined;
+  oldPolicyId?: string | undefined;
 };
 
 /** @internal */
@@ -27,8 +27,8 @@ export const TaskAuditPolicyChanged$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  newPolicyId: z.nullable(z.string()).optional(),
-  oldPolicyId: z.nullable(z.string()).optional(),
+  newPolicyId: z.string().optional(),
+  oldPolicyId: z.string().optional(),
 });
 
 export function taskAuditPolicyChangedFromJSON(

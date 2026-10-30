@@ -16,12 +16,12 @@ export type TaskAuditReassignedToDelegate = {
   /**
    * The delegatedAssigneeUserId field.
    */
-  delegatedAssigneeUserId?: string | null | undefined;
+  delegatedAssigneeUserId?: string | undefined;
   originalAssigneeUser?: User | null | undefined;
   /**
    * The originalAssigneeUserId field.
    */
-  originalAssigneeUserId?: string | null | undefined;
+  originalAssigneeUserId?: string | undefined;
 };
 
 /** @internal */
@@ -31,9 +31,9 @@ export const TaskAuditReassignedToDelegate$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   delegatedAssigneeUser: z.nullable(User$inboundSchema).optional(),
-  delegatedAssigneeUserId: z.nullable(z.string()).optional(),
+  delegatedAssigneeUserId: z.string().optional(),
   originalAssigneeUser: z.nullable(User$inboundSchema).optional(),
-  originalAssigneeUserId: z.nullable(z.string()).optional(),
+  originalAssigneeUserId: z.string().optional(),
 });
 
 export function taskAuditReassignedToDelegateFromJSON(

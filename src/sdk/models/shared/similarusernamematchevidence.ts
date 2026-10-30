@@ -14,15 +14,15 @@ export type SimilarUsernameMatchEvidence = {
   /**
    * The appUsername field.
    */
-  appUsername?: string | null | undefined;
+  appUsername?: string | undefined;
   /**
    * The identityUsername field.
    */
-  identityUsername?: string | null | undefined;
+  identityUsername?: string | undefined;
   /**
    * The similarityScore field.
    */
-  similarityScore?: number | null | undefined;
+  similarityScore?: number | undefined;
 };
 
 /** @internal */
@@ -31,11 +31,37 @@ export const SimilarUsernameMatchEvidence$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appUsername: z.nullable(z.string()).optional(),
-  identityUsername: z.nullable(z.string()).optional(),
-  similarityScore: z.nullable(z.number()).optional(),
+  appUsername: z.string().optional(),
+  identityUsername: z.string().optional(),
+  similarityScore: z.number().optional(),
+});
+/** @internal */
+export type SimilarUsernameMatchEvidence$Outbound = {
+  appUsername?: string | undefined;
+  identityUsername?: string | undefined;
+  similarityScore?: number | undefined;
+};
+
+/** @internal */
+export const SimilarUsernameMatchEvidence$outboundSchema: z.ZodType<
+  SimilarUsernameMatchEvidence$Outbound,
+  z.ZodTypeDef,
+  SimilarUsernameMatchEvidence
+> = z.object({
+  appUsername: z.string().optional(),
+  identityUsername: z.string().optional(),
+  similarityScore: z.number().optional(),
 });
 
+export function similarUsernameMatchEvidenceToJSON(
+  similarUsernameMatchEvidence: SimilarUsernameMatchEvidence,
+): string {
+  return JSON.stringify(
+    SimilarUsernameMatchEvidence$outboundSchema.parse(
+      similarUsernameMatchEvidence,
+    ),
+  );
+}
 export function similarUsernameMatchEvidenceFromJSON(
   jsonString: string,
 ): SafeParseResult<SimilarUsernameMatchEvidence, SDKValidationError> {

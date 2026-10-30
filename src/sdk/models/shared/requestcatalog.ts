@@ -33,6 +33,39 @@ export const EnrollmentBehavior = {
 export type EnrollmentBehavior = OpenEnum<typeof EnrollmentBehavior>;
 
 /**
+ * The type of this access profile: CATALOG (shown as Catalog in the UI),
+ *
+ * @remarks
+ *  BUNDLE (Role), or CATALOG_AND_BUNDLE (Hybrid). UNSPECIFIED means the
+ *  profile has not been assigned a type yet; it behaves as Hybrid.
+ *
+ *  To change the type, call Update with "type" in the update mask and send
+ *  CATALOG, BUNDLE, or CATALOG_AND_BUNDLE. Settings the new type doesn't
+ *  support must be turned off first; PlanTypeChange lists them. Changing the
+ *  type requires access profile types to be enabled for your tenant.
+ */
+export const RequestCatalogType = {
+  RequestCatalogTypeUnspecified: "REQUEST_CATALOG_TYPE_UNSPECIFIED",
+  RequestCatalogTypeCatalog: "REQUEST_CATALOG_TYPE_CATALOG",
+  RequestCatalogTypeProfile: "REQUEST_CATALOG_TYPE_PROFILE",
+  RequestCatalogTypeCatalogAndBundle: "REQUEST_CATALOG_TYPE_CATALOG_AND_BUNDLE",
+  RequestCatalogTypeBundle: "REQUEST_CATALOG_TYPE_BUNDLE",
+} as const;
+/**
+ * The type of this access profile: CATALOG (shown as Catalog in the UI),
+ *
+ * @remarks
+ *  BUNDLE (Role), or CATALOG_AND_BUNDLE (Hybrid). UNSPECIFIED means the
+ *  profile has not been assigned a type yet; it behaves as Hybrid.
+ *
+ *  To change the type, call Update with "type" in the update mask and send
+ *  CATALOG, BUNDLE, or CATALOG_AND_BUNDLE. Settings the new type doesn't
+ *  support must be turned off first; PlanTypeChange lists them. Changing the
+ *  type requires access profile types to be enabled for your tenant.
+ */
+export type RequestCatalogType = OpenEnum<typeof RequestCatalogType>;
+
+/**
  * Defines how to handle the revocation of the entitlements in the catalog during unenrollment.
  */
 export const UnenrollmentBehavior = {
@@ -93,48 +126,58 @@ export type RequestCatalog = {
   /**
    * The id of the user this request catalog was created by.
    */
-  createdByUserId?: string | null | undefined;
+  createdByUserId?: string | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * The description of the request catalog.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The display name of the request catalog.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * Defines how to handle the request policies of the entitlements in the catalog during enrollment.
    */
-  enrollmentBehavior?: EnrollmentBehavior | null | undefined;
+  enrollmentBehavior?: EnrollmentBehavior | undefined;
   /**
    * The id of the request catalog.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * Whether or not this catalog is published.
    */
-  published?: boolean | null | undefined;
+  published?: boolean | undefined;
   /**
    * Whether all the entitlements in the catalog can be requests at once. Your tenant must have the bundles feature to use this.
    */
-  requestBundle?: boolean | null | undefined;
+  requestBundle?: boolean | undefined;
+  /**
+   * The type of this access profile: CATALOG (shown as Catalog in the UI),
+   *
+   * @remarks
+   *  BUNDLE (Role), or CATALOG_AND_BUNDLE (Hybrid). UNSPECIFIED means the
+   *  profile has not been assigned a type yet; it behaves as Hybrid.
+   *
+   *  To change the type, call Update with "type" in the update mask and send
+   *  CATALOG, BUNDLE, or CATALOG_AND_BUNDLE. Settings the new type doesn't
+   *  support must be turned off first; PlanTypeChange lists them. Changing the
+   *  type requires access profile types to be enabled for your tenant.
+   */
+  type?: RequestCatalogType | undefined;
   /**
    * Defines how to handle the revocation of the entitlements in the catalog during unenrollment.
    */
-  unenrollmentBehavior?: UnenrollmentBehavior | null | undefined;
+  unenrollmentBehavior?: UnenrollmentBehavior | undefined;
   /**
    * Defines how to handle the revoke policies of the entitlements in the catalog during unenrollment.
    */
-  unenrollmentEntitlementBehavior?:
-    | UnenrollmentEntitlementBehavior
-    | null
-    | undefined;
+  unenrollmentEntitlementBehavior?: UnenrollmentEntitlementBehavior | undefined;
   updatedAt?: Date | null | undefined;
   /**
    * If this is true, the access entitlement requirement is ignored.
    */
-  visibleToEveryone?: boolean | null | undefined;
+  visibleToEveryone?: boolean | undefined;
 };
 
 /**
@@ -161,46 +204,56 @@ export type RequestCatalogInput = {
   /**
    * The id of the user this request catalog was created by.
    */
-  createdByUserId?: string | null | undefined;
+  createdByUserId?: string | undefined;
   /**
    * The description of the request catalog.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The display name of the request catalog.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * Defines how to handle the request policies of the entitlements in the catalog during enrollment.
    */
-  enrollmentBehavior?: EnrollmentBehavior | null | undefined;
+  enrollmentBehavior?: EnrollmentBehavior | undefined;
   /**
    * The id of the request catalog.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * Whether or not this catalog is published.
    */
-  published?: boolean | null | undefined;
+  published?: boolean | undefined;
   /**
    * Whether all the entitlements in the catalog can be requests at once. Your tenant must have the bundles feature to use this.
    */
-  requestBundle?: boolean | null | undefined;
+  requestBundle?: boolean | undefined;
+  /**
+   * The type of this access profile: CATALOG (shown as Catalog in the UI),
+   *
+   * @remarks
+   *  BUNDLE (Role), or CATALOG_AND_BUNDLE (Hybrid). UNSPECIFIED means the
+   *  profile has not been assigned a type yet; it behaves as Hybrid.
+   *
+   *  To change the type, call Update with "type" in the update mask and send
+   *  CATALOG, BUNDLE, or CATALOG_AND_BUNDLE. Settings the new type doesn't
+   *  support must be turned off first; PlanTypeChange lists them. Changing the
+   *  type requires access profile types to be enabled for your tenant.
+   */
+  type?: RequestCatalogType | undefined;
   /**
    * Defines how to handle the revocation of the entitlements in the catalog during unenrollment.
    */
-  unenrollmentBehavior?: UnenrollmentBehavior | null | undefined;
+  unenrollmentBehavior?: UnenrollmentBehavior | undefined;
   /**
    * Defines how to handle the revoke policies of the entitlements in the catalog during unenrollment.
    */
-  unenrollmentEntitlementBehavior?:
-    | UnenrollmentEntitlementBehavior
-    | null
-    | undefined;
+  unenrollmentEntitlementBehavior?: UnenrollmentEntitlementBehavior | undefined;
   /**
    * If this is true, the access entitlement requirement is ignored.
    */
-  visibleToEveryone?: boolean | null | undefined;
+  visibleToEveryone?: boolean | undefined;
 };
 
 /** @internal */
@@ -215,6 +268,19 @@ export const EnrollmentBehavior$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EnrollmentBehavior
 > = openEnums.outboundSchema(EnrollmentBehavior);
+
+/** @internal */
+export const RequestCatalogType$inboundSchema: z.ZodType<
+  RequestCatalogType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(RequestCatalogType);
+/** @internal */
+export const RequestCatalogType$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  RequestCatalogType
+> = openEnums.outboundSchema(RequestCatalogType);
 
 /** @internal */
 export const UnenrollmentBehavior$inboundSchema: z.ZodType<
@@ -254,25 +320,24 @@ export const RequestCatalog$inboundSchema: z.ZodType<
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  createdByUserId: z.nullable(z.string()).optional(),
+  createdByUserId: z.string().optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  enrollmentBehavior: z.nullable(EnrollmentBehavior$inboundSchema).optional(),
-  id: z.nullable(z.string()).optional(),
-  published: z.nullable(z.boolean()).optional(),
-  requestBundle: z.nullable(z.boolean()).optional(),
-  unenrollmentBehavior: z.nullable(UnenrollmentBehavior$inboundSchema)
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  enrollmentBehavior: EnrollmentBehavior$inboundSchema.optional(),
+  id: z.string().optional(),
+  published: z.boolean().optional(),
+  requestBundle: z.boolean().optional(),
+  type: RequestCatalogType$inboundSchema.optional(),
+  unenrollmentBehavior: UnenrollmentBehavior$inboundSchema.optional(),
+  unenrollmentEntitlementBehavior: UnenrollmentEntitlementBehavior$inboundSchema
     .optional(),
-  unenrollmentEntitlementBehavior: z.nullable(
-    UnenrollmentEntitlementBehavior$inboundSchema,
-  ).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  visibleToEveryone: z.nullable(z.boolean()).optional(),
+  visibleToEveryone: z.boolean().optional(),
 });
 
 export function requestCatalogFromJSON(
@@ -289,16 +354,17 @@ export function requestCatalogFromJSON(
 export type RequestCatalogInput$Outbound = {
   accessEntitlements?: Array<AppEntitlementInput$Outbound> | null | undefined;
   annotations?: { [k: string]: string } | undefined;
-  createdByUserId?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  enrollmentBehavior?: string | null | undefined;
-  id?: string | null | undefined;
-  published?: boolean | null | undefined;
-  requestBundle?: boolean | null | undefined;
-  unenrollmentBehavior?: string | null | undefined;
-  unenrollmentEntitlementBehavior?: string | null | undefined;
-  visibleToEveryone?: boolean | null | undefined;
+  createdByUserId?: string | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
+  enrollmentBehavior?: string | undefined;
+  id?: string | undefined;
+  published?: boolean | undefined;
+  requestBundle?: boolean | undefined;
+  type?: string | undefined;
+  unenrollmentBehavior?: string | undefined;
+  unenrollmentEntitlementBehavior?: string | undefined;
+  visibleToEveryone?: boolean | undefined;
 };
 
 /** @internal */
@@ -310,19 +376,18 @@ export const RequestCatalogInput$outboundSchema: z.ZodType<
   accessEntitlements: z.nullable(z.array(AppEntitlementInput$outboundSchema))
     .optional(),
   annotations: z.record(z.string()).optional(),
-  createdByUserId: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  enrollmentBehavior: z.nullable(EnrollmentBehavior$outboundSchema).optional(),
-  id: z.nullable(z.string()).optional(),
-  published: z.nullable(z.boolean()).optional(),
-  requestBundle: z.nullable(z.boolean()).optional(),
-  unenrollmentBehavior: z.nullable(UnenrollmentBehavior$outboundSchema)
-    .optional(),
-  unenrollmentEntitlementBehavior: z.nullable(
-    UnenrollmentEntitlementBehavior$outboundSchema,
-  ).optional(),
-  visibleToEveryone: z.nullable(z.boolean()).optional(),
+  createdByUserId: z.string().optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  enrollmentBehavior: EnrollmentBehavior$outboundSchema.optional(),
+  id: z.string().optional(),
+  published: z.boolean().optional(),
+  requestBundle: z.boolean().optional(),
+  type: RequestCatalogType$outboundSchema.optional(),
+  unenrollmentBehavior: UnenrollmentBehavior$outboundSchema.optional(),
+  unenrollmentEntitlementBehavior:
+    UnenrollmentEntitlementBehavior$outboundSchema.optional(),
+  visibleToEveryone: z.boolean().optional(),
 });
 
 export function requestCatalogInputToJSON(

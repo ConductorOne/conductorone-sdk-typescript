@@ -22,7 +22,7 @@ export type AccessProfilesForTool = {
   /**
    * The MCP tool identifier.
    */
-  mcpToolId?: string | null | undefined;
+  mcpToolId?: string | undefined;
 };
 
 /** @internal */
@@ -33,7 +33,7 @@ export const AccessProfilesForTool$inboundSchema: z.ZodType<
 > = z.object({
   accessProfiles: z.nullable(z.array(MCPAccessProfile$inboundSchema))
     .optional(),
-  mcpToolId: z.nullable(z.string()).optional(),
+  mcpToolId: z.string().optional(),
 });
 
 export function accessProfilesForToolFromJSON(

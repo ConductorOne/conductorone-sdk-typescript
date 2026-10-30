@@ -29,6 +29,10 @@ export type RoleMiningSearchSuggestionsRequestStates = OpenEnum<
  */
 export type RoleMiningSearchSuggestionsRequest = {
   /**
+   * Filter to suggestions that overlap this access profile, at any position in existing_profile_matches.
+   */
+  catalogId?: string | undefined;
+  /**
    * Filter by cohort type (e.g. "department", "job_title", "manager").
    */
   cohortTypes?: Array<string> | null | undefined;
@@ -39,15 +43,15 @@ export type RoleMiningSearchSuggestionsRequest = {
   /**
    * Maximum number of suggestions to return per page.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * Pagination token from a previous response.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Text search — matches against suggested_name, description, and cohort filter values.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * Filter by suggestion state.
    */
@@ -70,11 +74,12 @@ export const RoleMiningSearchSuggestionsRequestStates$outboundSchema: z.ZodType<
 
 /** @internal */
 export type RoleMiningSearchSuggestionsRequest$Outbound = {
+  catalogId?: string | undefined;
   cohortTypes?: Array<string> | null | undefined;
   matchTypes?: Array<string> | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  query?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  query?: string | undefined;
   states?: Array<string> | null | undefined;
 };
 
@@ -84,11 +89,12 @@ export const RoleMiningSearchSuggestionsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RoleMiningSearchSuggestionsRequest
 > = z.object({
+  catalogId: z.string().optional(),
   cohortTypes: z.nullable(z.array(z.string())).optional(),
   matchTypes: z.nullable(z.array(MatchTypes$outboundSchema)).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  query: z.string().optional(),
   states: z.nullable(
     z.array(RoleMiningSearchSuggestionsRequestStates$outboundSchema),
   ).optional(),

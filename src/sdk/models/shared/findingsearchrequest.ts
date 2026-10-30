@@ -5,15 +5,54 @@
 import * as z from "zod/v3";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
+import {
+  FindingRef,
+  FindingRef$Outbound,
+  FindingRef$outboundSchema,
+} from "./findingref.js";
+
+export const FindingSearchRequestAppUserTypes = {
+  AppUserTypeUnspecified: "APP_USER_TYPE_UNSPECIFIED",
+  AppUserTypeUser: "APP_USER_TYPE_USER",
+  AppUserTypeServiceAccount: "APP_USER_TYPE_SERVICE_ACCOUNT",
+  AppUserTypeSystemAccount: "APP_USER_TYPE_SYSTEM_ACCOUNT",
+} as const;
+export type FindingSearchRequestAppUserTypes = OpenEnum<
+  typeof FindingSearchRequestAppUserTypes
+>;
 
 export const FindingTypes = {
   FindingTypeUnspecified: "FINDING_TYPE_UNSPECIFIED",
   FindingTypeSimilarUsernameMatch: "FINDING_TYPE_SIMILAR_USERNAME_MATCH",
   FindingTypeServiceAccountMisclassification:
     "FINDING_TYPE_SERVICE_ACCOUNT_MISCLASSIFICATION",
+  FindingTypeNhiUnowned: "FINDING_TYPE_NHI_UNOWNED",
+  FindingTypeServiceAccountUnowned: "FINDING_TYPE_SERVICE_ACCOUNT_UNOWNED",
   FindingTypeDecoyCredentialUsed: "FINDING_TYPE_DECOY_CREDENTIAL_USED",
+  FindingTypeCustom: "FINDING_TYPE_CUSTOM",
+  FindingTypeConnectorAnomalyDetectionDisabled:
+    "FINDING_TYPE_CONNECTOR_ANOMALY_DETECTION_DISABLED",
+  FindingTypeDeactivatedOwner: "FINDING_TYPE_DEACTIVATED_OWNER",
+  FindingTypeUnusedSecret: "FINDING_TYPE_UNUSED_SECRET",
+  FindingTypeCredentialPubliclyExposed:
+    "FINDING_TYPE_CREDENTIAL_PUBLICLY_EXPOSED",
+  FindingTypeDecoyPubliclyExposed: "FINDING_TYPE_DECOY_PUBLICLY_EXPOSED",
+  FindingTypeCredentialExpiring: "FINDING_TYPE_CREDENTIAL_EXPIRING",
+  FindingTypeConnectorSyncFailing: "FINDING_TYPE_CONNECTOR_SYNC_FAILING",
+  FindingTypeShadowMcp: "FINDING_TYPE_SHADOW_MCP",
+  FindingTypeShadowApp: "FINDING_TYPE_SHADOW_APP",
+  FindingTypeMcpGatewayToolCallRisk: "FINDING_TYPE_MCP_GATEWAY_TOOL_CALL_RISK",
+  FindingTypeEdge: "FINDING_TYPE_EDGE",
 } as const;
 export type FindingTypes = OpenEnum<typeof FindingTypes>;
+
+export const NhiTypes = {
+  NhiTypeUnspecified: "NHI_TYPE_UNSPECIFIED",
+  NhiTypeAppRegistration: "NHI_TYPE_APP_REGISTRATION",
+  NhiTypeAssumableRole: "NHI_TYPE_ASSUMABLE_ROLE",
+  NhiTypeManagedIdentity: "NHI_TYPE_MANAGED_IDENTITY",
+} as const;
+export type NhiTypes = OpenEnum<typeof NhiTypes>;
 
 export const Severities = {
   FindingSeverityUnspecified: "FINDING_SEVERITY_UNSPECIFIED",
@@ -24,6 +63,13 @@ export const Severities = {
   FindingSeverityCritical: "FINDING_SEVERITY_CRITICAL",
 } as const;
 export type Severities = OpenEnum<typeof Severities>;
+
+export const SourceKinds = {
+  FindingSourceKindUnspecified: "FINDING_SOURCE_KIND_UNSPECIFIED",
+  FindingSourceKindDetector: "FINDING_SOURCE_KIND_DETECTOR",
+  FindingSourceKindExternal: "FINDING_SOURCE_KIND_EXTERNAL",
+} as const;
+export type SourceKinds = OpenEnum<typeof SourceKinds>;
 
 export const States = {
   FindingStateUnspecified: "FINDING_STATE_UNSPECIFIED",
@@ -45,12 +91,66 @@ export type FindingSearchRequest = {
    */
   appIds?: Array<string> | null | undefined;
   /**
+   * Filter by app resource IDs (OR within field). Matches findings whose
+   *
+   * @remarks
+   *  target.app_resource_target.app_resource_id is in this list. An app resource
+   *  is app-scoped, so pair with app_ids (and app_resource_type_ids) to hit the
+   *  composite (tenant_id, app_id, app_resource_type_id, app_resource_id) index.
+   */
+  appResourceIds?: Array<string> | null | undefined;
+  /**
+   * Filter to findings whose target resource's type carries any of these traits
+   *
+   * @remarks
+   *  (e.g. the builtin agent / secret trait ids). OR within field; empty = not
+   *  applied.
+   */
+  appResourceTraitIds?: Array<string> | null | undefined;
+  /**
+   * Filter by app resource type IDs (OR within field). Matches findings whose
+   *
+   * @remarks
+   *  target.app_resource_target.app_resource_type_id is in this list.
+   */
+  appResourceTypeIds?: Array<string> | null | undefined;
+  /**
    * Filter by app user IDs (OR within field). Matches findings whose
    *
    * @remarks
    *  target.app_user_target.app_user_id is in this list.
    */
   appUserIds?: Array<string> | null | undefined;
+  /**
+   * Filter to findings whose target is an app user of these types (OR within
+   *
+   * @remarks
+   *  field). Empty = not applied.
+   */
+  appUserTypes?: Array<FindingSearchRequestAppUserTypes> | null | undefined;
+  /**
+   * Filter by assignee identity-user IDs (OR within field). Matches findings
+   *
+   * @remarks
+   *  whose assignee_identity_user_id is in this list. The reserved
+   *  "unassigned" sentinel token selects findings with no assignee; real
+   *  identity-user IDs are exactly 27 alphanumerics so the token cannot collide.
+   */
+  assigneeIdentityUserIds?: Array<string> | null | undefined;
+  /**
+   * Filter by connector IDs (OR within field). Matches findings whose
+   *
+   * @remarks
+   *  target.connector_target.connector_id is in this list.
+   */
+  connectorIds?: Array<string> | null | undefined;
+  /**
+   * Filter by custom sub-type (OR within field). Matches custom findings whose
+   *
+   * @remarks
+   *  custom_sub_type equals any listed value.
+   */
+  customSubTypes?: Array<string> | null | undefined;
   /**
    * Filter by decoy IDs (OR within field). Matches findings whose
    *
@@ -59,30 +159,88 @@ export type FindingSearchRequest = {
    */
   decoyIds?: Array<string> | null | undefined;
   /**
+   * Filter by Edge IDs (OR within field): Edge findings (FINDING_TYPE_EDGE)
+   *
+   * @remarks
+   *  raised on any listed Edge. Edge findings carry no app_id, so do not pair
+   *  this with app_ids. Empty = not applied.
+   */
+  edgeIds?: Array<string> | null | undefined;
+  /**
    * Filter by finding type (OR within field).
    */
   findingTypes?: Array<FindingTypes> | null | undefined;
   /**
+   * When true, includes findings with no assignee. An explicit predicate for
+   *
+   * @remarks
+   *  direct API callers who prefer a bool over the "unassigned" sentinel in
+   *  assignee_identity_user_ids; both signals are accepted.
+   */
+  includeUnassigned?: boolean | undefined;
+  /**
+   * Filter to findings whose target resource's nhi_type is one of these (OR
+   *
+   * @remarks
+   *  within field). Empty = not applied; pass all NhiType values to match any
+   *  nhi resource.
+   */
+  nhiTypes?: Array<NhiTypes> | null | undefined;
+  /**
+   * Deprecated: use assignee_identity_user_ids instead.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  ownerIdentityUserIds?: Array<string> | null | undefined;
+  /**
    * Maximum number of findings to return per page.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * Pagination token from a previous response.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Free text search query.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
+  /**
+   * Restrict results to these finding refs by ID (OR within field). Backs the
+   *
+   * @remarks
+   *  websocket-notify re-query, which refetches just the changed finding(s) to
+   *  patch a row in place or detect it dropping out of the filter; empty = not
+   *  applied. Hits the (tenant_id, id) primary key.
+   */
+  refs?: Array<FindingRef> | null | undefined;
+  /**
+   * When true, restricts results to findings for apps you own. The caller is
+   *
+   * @remarks
+   *  resolved from request credentials (no user id is read from the request),
+   *  so results are always limited to your own apps.
+   */
+  scopeToAppOwner?: boolean | undefined;
   /**
    * Filter by severities (OR within field).
    */
   severities?: Array<Severities> | null | undefined;
   /**
+   * Filter by source kind (OR within field).
+   */
+  sourceKinds?: Array<SourceKinds> | null | undefined;
+  /**
    * Filter by states (OR within field).
    */
   states?: Array<States> | null | undefined;
 };
+
+/** @internal */
+export const FindingSearchRequestAppUserTypes$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  FindingSearchRequestAppUserTypes
+> = openEnums.outboundSchema(FindingSearchRequestAppUserTypes);
 
 /** @internal */
 export const FindingTypes$outboundSchema: z.ZodType<
@@ -92,11 +250,25 @@ export const FindingTypes$outboundSchema: z.ZodType<
 > = openEnums.outboundSchema(FindingTypes);
 
 /** @internal */
+export const NhiTypes$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  NhiTypes
+> = openEnums.outboundSchema(NhiTypes);
+
+/** @internal */
 export const Severities$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Severities
 > = openEnums.outboundSchema(Severities);
+
+/** @internal */
+export const SourceKinds$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  SourceKinds
+> = openEnums.outboundSchema(SourceKinds);
 
 /** @internal */
 export const States$outboundSchema: z.ZodType<string, z.ZodTypeDef, States> =
@@ -105,13 +277,27 @@ export const States$outboundSchema: z.ZodType<string, z.ZodTypeDef, States> =
 /** @internal */
 export type FindingSearchRequest$Outbound = {
   appIds?: Array<string> | null | undefined;
+  appResourceIds?: Array<string> | null | undefined;
+  appResourceTraitIds?: Array<string> | null | undefined;
+  appResourceTypeIds?: Array<string> | null | undefined;
   appUserIds?: Array<string> | null | undefined;
+  appUserTypes?: Array<string> | null | undefined;
+  assigneeIdentityUserIds?: Array<string> | null | undefined;
+  connectorIds?: Array<string> | null | undefined;
+  customSubTypes?: Array<string> | null | undefined;
   decoyIds?: Array<string> | null | undefined;
+  edgeIds?: Array<string> | null | undefined;
   findingTypes?: Array<string> | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  query?: string | null | undefined;
+  includeUnassigned?: boolean | undefined;
+  nhiTypes?: Array<string> | null | undefined;
+  ownerIdentityUserIds?: Array<string> | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  query?: string | undefined;
+  refs?: Array<FindingRef$Outbound> | null | undefined;
+  scopeToAppOwner?: boolean | undefined;
   severities?: Array<string> | null | undefined;
+  sourceKinds?: Array<string> | null | undefined;
   states?: Array<string> | null | undefined;
 };
 
@@ -122,13 +308,29 @@ export const FindingSearchRequest$outboundSchema: z.ZodType<
   FindingSearchRequest
 > = z.object({
   appIds: z.nullable(z.array(z.string())).optional(),
+  appResourceIds: z.nullable(z.array(z.string())).optional(),
+  appResourceTraitIds: z.nullable(z.array(z.string())).optional(),
+  appResourceTypeIds: z.nullable(z.array(z.string())).optional(),
   appUserIds: z.nullable(z.array(z.string())).optional(),
+  appUserTypes: z.nullable(
+    z.array(FindingSearchRequestAppUserTypes$outboundSchema),
+  ).optional(),
+  assigneeIdentityUserIds: z.nullable(z.array(z.string())).optional(),
+  connectorIds: z.nullable(z.array(z.string())).optional(),
+  customSubTypes: z.nullable(z.array(z.string())).optional(),
   decoyIds: z.nullable(z.array(z.string())).optional(),
+  edgeIds: z.nullable(z.array(z.string())).optional(),
   findingTypes: z.nullable(z.array(FindingTypes$outboundSchema)).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
+  includeUnassigned: z.boolean().optional(),
+  nhiTypes: z.nullable(z.array(NhiTypes$outboundSchema)).optional(),
+  ownerIdentityUserIds: z.nullable(z.array(z.string())).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  query: z.string().optional(),
+  refs: z.nullable(z.array(FindingRef$outboundSchema)).optional(),
+  scopeToAppOwner: z.boolean().optional(),
   severities: z.nullable(z.array(Severities$outboundSchema)).optional(),
+  sourceKinds: z.nullable(z.array(SourceKinds$outboundSchema)).optional(),
   states: z.nullable(z.array(States$outboundSchema)).optional(),
 });
 

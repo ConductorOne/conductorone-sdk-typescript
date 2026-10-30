@@ -1,0 +1,19 @@
+# ArtifactServiceListVersionsResponse
+
+ArtifactServiceListVersionsResponse contains currently authorized history.
+ Discovery is eventual; use GetVersion for canonical publication status.
+
+## Example Usage
+
+```typescript
+import { ArtifactServiceListVersionsResponse } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: ArtifactServiceListVersionsResponse = {};
+```
+
+## Fields
+
+| Field                                                                                                                                            | Type                                                                                                                                             | Required                                                                                                                                         | Description                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `list`                                                                                                                                           | [shared.ArtifactVersion](../../../sdk/models/shared/artifactversion.md)[]                                                                        | :heavy_minus_sign:                                                                                                                               | Authorized versions in descending numeric order, without duplicates.                                                                             |
+| `nextPageToken`                                                                                                                                  | *string*                                                                                                                                         | :heavy_minus_sign:                                                                                                                               | Sealed continuation token, empty when scanning is complete. A short or empty<br/> page may continue; no raw candidate or denied counts are returned. |

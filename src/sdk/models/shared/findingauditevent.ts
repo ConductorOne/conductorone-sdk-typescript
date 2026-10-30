@@ -35,6 +35,13 @@ export const FindingAuditEventEventType = {
     "FINDING_AUDIT_EVENT_TYPE_EVIDENCE_UPDATED",
   FindingAuditEventTypeRoutingEvaluated:
     "FINDING_AUDIT_EVENT_TYPE_ROUTING_EVALUATED",
+  FindingAuditEventTypeTransformed: "FINDING_AUDIT_EVENT_TYPE_TRANSFORMED",
+  FindingAuditEventTypeReprocessRequested:
+    "FINDING_AUDIT_EVENT_TYPE_REPROCESS_REQUESTED",
+  FindingAuditEventTypeReprocessCompleted:
+    "FINDING_AUDIT_EVENT_TYPE_REPROCESS_COMPLETED",
+  FindingAuditEventTypeAssigneeChanged:
+    "FINDING_AUDIT_EVENT_TYPE_ASSIGNEE_CHANGED",
 } as const;
 /**
  * The eventType field.
@@ -91,48 +98,48 @@ export type FindingAuditEvent = {
    * @remarks
    *  system-driven events (snooze expiry, risk-acceptance expiry).
    */
-  actorPrincipalId?: string | null | undefined;
+  actorPrincipalId?: string | undefined;
   /**
    * Display string for the actor (email for human users, "system" for
    *
    * @remarks
    *  cron sweeps).
    */
-  actorSubject?: string | null | undefined;
+  actorSubject?: string | undefined;
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * Stable id grouping events from the same bulk operation.
    */
-  bulkOperationId?: string | null | undefined;
+  bulkOperationId?: string | undefined;
   createdAt?: Date | null | undefined;
   /**
    * The eventId field.
    */
-  eventId?: string | null | undefined;
+  eventId?: string | undefined;
   /**
    * The eventType field.
    */
-  eventType?: FindingAuditEventEventType | null | undefined;
+  eventType?: FindingAuditEventEventType | undefined;
   /**
    * The findingId field.
    */
-  findingId?: string | null | undefined;
+  findingId?: string | undefined;
   ocsf?: { [k: string]: any } | null | undefined;
   /**
    * The severityAtEvent field.
    */
-  severityAtEvent?: SeverityAtEvent | null | undefined;
+  severityAtEvent?: SeverityAtEvent | undefined;
   /**
    * The stateAtEvent field.
    */
-  stateAtEvent?: StateAtEvent | null | undefined;
+  stateAtEvent?: StateAtEvent | undefined;
   /**
    * Ticket id when the event involved one; empty otherwise.
    */
-  ticketId?: string | null | undefined;
+  ticketId?: string | undefined;
 };
 
 /** @internal */
@@ -162,20 +169,20 @@ export const FindingAuditEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  actorPrincipalId: z.nullable(z.string()).optional(),
-  actorSubject: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  bulkOperationId: z.nullable(z.string()).optional(),
+  actorPrincipalId: z.string().optional(),
+  actorSubject: z.string().optional(),
+  appId: z.string().optional(),
+  bulkOperationId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  eventId: z.nullable(z.string()).optional(),
-  eventType: z.nullable(FindingAuditEventEventType$inboundSchema).optional(),
-  findingId: z.nullable(z.string()).optional(),
+  eventId: z.string().optional(),
+  eventType: FindingAuditEventEventType$inboundSchema.optional(),
+  findingId: z.string().optional(),
   ocsf: z.nullable(z.record(z.any())).optional(),
-  severityAtEvent: z.nullable(SeverityAtEvent$inboundSchema).optional(),
-  stateAtEvent: z.nullable(StateAtEvent$inboundSchema).optional(),
-  ticketId: z.nullable(z.string()).optional(),
+  severityAtEvent: SeverityAtEvent$inboundSchema.optional(),
+  stateAtEvent: StateAtEvent$inboundSchema.optional(),
+  ticketId: z.string().optional(),
 });
 
 export function findingAuditEventFromJSON(

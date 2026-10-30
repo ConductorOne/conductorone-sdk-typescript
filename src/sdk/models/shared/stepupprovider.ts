@@ -28,24 +28,24 @@ export type StepUpProvider = {
   /**
    * The OAuth2 client ID used to authenticate with the step-up provider.
    */
-  clientId?: string | null | undefined;
+  clientId?: string | undefined;
   createdAt?: Date | null | undefined;
   /**
    * The human-readable name of the step-up provider.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * Whether the step-up provider is active and available for use.
    */
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   /**
    * The unique identifier of the step-up provider.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The OIDC issuer URL for the step-up provider.
    */
-  issuerUrl?: string | null | undefined;
+  issuerUrl?: string | undefined;
   lastTestedAt?: Date | null | undefined;
   microsoft?: StepUpMicrosoftSettings | null | undefined;
   oauth2?: StepUpOAuth2Settings | null | undefined;
@@ -58,14 +58,14 @@ export const StepUpProvider$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  clientId: z.nullable(z.string()).optional(),
+  clientId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  id: z.nullable(z.string()).optional(),
-  issuerUrl: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
+  enabled: z.boolean().optional(),
+  id: z.string().optional(),
+  issuerUrl: z.string().optional(),
   lastTestedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

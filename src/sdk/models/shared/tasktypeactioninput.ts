@@ -4,6 +4,26 @@
 
 import * as z from "zod/v3";
 import {
+  AccessProfileComponentTargetInput,
+  AccessProfileComponentTargetInput$Outbound,
+  AccessProfileComponentTargetInput$outboundSchema,
+} from "./accessprofilecomponenttargetinput.js";
+import {
+  CredentialIssueTargetInput,
+  CredentialIssueTargetInput$Outbound,
+  CredentialIssueTargetInput$outboundSchema,
+} from "./credentialissuetargetinput.js";
+import {
+  FindingTargetInput,
+  FindingTargetInput$Outbound,
+  FindingTargetInput$outboundSchema,
+} from "./findingtargetinput.js";
+import {
+  GatedToolCallTargetInput,
+  GatedToolCallTargetInput$Outbound,
+  GatedToolCallTargetInput$outboundSchema,
+} from "./gatedtoolcalltargetinput.js";
+import {
   ScopeRoleInput,
   ScopeRoleInput$Outbound,
   ScopeRoleInput$outboundSchema,
@@ -13,6 +33,11 @@ import {
   TaskActionInstanceInput$Outbound,
   TaskActionInstanceInput$outboundSchema,
 } from "./taskactioninstanceinput.js";
+import {
+  TaskActionSourceInput,
+  TaskActionSourceInput$Outbound,
+  TaskActionSourceInput$outboundSchema,
+} from "./taskactionsourceinput.js";
 
 /**
  * The TaskTypeAction message.
@@ -21,16 +46,33 @@ import {
  *
  * This message contains a oneof named target_object. Only a single field of the following list may be set at a time:
  *   - scopeRole
+ *   - toolCall
+ *   - finding
+ *   - credentialIssue
+ *   - accessProfileComponent
  */
 export type TaskTypeActionInput = {
+  accessProfileComponent?: AccessProfileComponentTargetInput | null | undefined;
   actionInstance?: TaskActionInstanceInput | null | undefined;
+  credentialIssue?: CredentialIssueTargetInput | null | undefined;
+  finding?: FindingTargetInput | null | undefined;
   scopeRole?: ScopeRoleInput | null | undefined;
+  source?: TaskActionSourceInput | null | undefined;
+  toolCall?: GatedToolCallTargetInput | null | undefined;
 };
 
 /** @internal */
 export type TaskTypeActionInput$Outbound = {
+  accessProfileComponent?:
+    | AccessProfileComponentTargetInput$Outbound
+    | null
+    | undefined;
   actionInstance?: TaskActionInstanceInput$Outbound | null | undefined;
+  credentialIssue?: CredentialIssueTargetInput$Outbound | null | undefined;
+  finding?: FindingTargetInput$Outbound | null | undefined;
   scopeRole?: ScopeRoleInput$Outbound | null | undefined;
+  source?: TaskActionSourceInput$Outbound | null | undefined;
+  toolCall?: GatedToolCallTargetInput$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -39,8 +81,16 @@ export const TaskTypeActionInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskTypeActionInput
 > = z.object({
+  accessProfileComponent: z.nullable(
+    AccessProfileComponentTargetInput$outboundSchema,
+  ).optional(),
   actionInstance: z.nullable(TaskActionInstanceInput$outboundSchema).optional(),
+  credentialIssue: z.nullable(CredentialIssueTargetInput$outboundSchema)
+    .optional(),
+  finding: z.nullable(FindingTargetInput$outboundSchema).optional(),
   scopeRole: z.nullable(ScopeRoleInput$outboundSchema).optional(),
+  source: z.nullable(TaskActionSourceInput$outboundSchema).optional(),
+  toolCall: z.nullable(GatedToolCallTargetInput$outboundSchema).optional(),
 });
 
 export function taskTypeActionInputToJSON(

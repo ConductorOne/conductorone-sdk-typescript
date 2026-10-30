@@ -14,7 +14,15 @@ export type ActionTargetBatonResourceActionInstance = {
   /**
    * The batonActionInvocationId field.
    */
-  batonActionInvocationId?: string | null | undefined;
+  batonActionInvocationId?: string | undefined;
+  /**
+   * The created resource has unconfirmed requested effects.
+   */
+  partialResult?: boolean | undefined;
+  /**
+   * The unaddedMemberCount field.
+   */
+  unaddedMemberCount?: number | undefined;
 };
 
 /** @internal */
@@ -23,11 +31,15 @@ export const ActionTargetBatonResourceActionInstance$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  batonActionInvocationId: z.nullable(z.string()).optional(),
+  batonActionInvocationId: z.string().optional(),
+  partialResult: z.boolean().optional(),
+  unaddedMemberCount: z.number().int().optional(),
 });
 /** @internal */
 export type ActionTargetBatonResourceActionInstance$Outbound = {
-  batonActionInvocationId?: string | null | undefined;
+  batonActionInvocationId?: string | undefined;
+  partialResult?: boolean | undefined;
+  unaddedMemberCount?: number | undefined;
 };
 
 /** @internal */
@@ -36,7 +48,9 @@ export const ActionTargetBatonResourceActionInstance$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ActionTargetBatonResourceActionInstance
 > = z.object({
-  batonActionInvocationId: z.nullable(z.string()).optional(),
+  batonActionInvocationId: z.string().optional(),
+  partialResult: z.boolean().optional(),
+  unaddedMemberCount: z.number().int().optional(),
 });
 
 export function actionTargetBatonResourceActionInstanceToJSON(

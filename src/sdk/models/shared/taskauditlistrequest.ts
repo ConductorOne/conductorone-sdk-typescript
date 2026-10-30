@@ -14,13 +14,35 @@ import {
  */
 export type TaskAuditListRequest = {
   /**
+   * When true, only comment events are returned, so a page of page_size holds
+   *
+   * @remarks
+   *  page_size comments rather than a mix of comments and state-change events.
+   */
+  commentsOnly?: boolean | undefined;
+  /**
+   * When true, comment events are excluded from the response and the count, so
+   *
+   * @remarks
+   *  a page of page_size holds page_size non-comment events. Mutually exclusive
+   *  with comments_only.
+   */
+  excludeComments?: boolean | undefined;
+  /**
+   * When true, events are returned newest-first (descending created_at) instead
+   *
+   * @remarks
+   *  of the default chronological (ascending) order.
+   */
+  newestFirst?: boolean | undefined;
+  /**
    * The maximum number of audit events to return per page.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * A pagination token from a previous response to retrieve the next page.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * References to specific audit events to retrieve. If provided, only these events are returned.
    */
@@ -28,15 +50,18 @@ export type TaskAuditListRequest = {
   /**
    * The ID of the task to list audit events for.
    */
-  taskId?: string | null | undefined;
+  taskId?: string | undefined;
 };
 
 /** @internal */
 export type TaskAuditListRequest$Outbound = {
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  commentsOnly?: boolean | undefined;
+  excludeComments?: boolean | undefined;
+  newestFirst?: boolean | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
   refs?: Array<TaskAuditViewRef$Outbound> | null | undefined;
-  taskId?: string | null | undefined;
+  taskId?: string | undefined;
 };
 
 /** @internal */
@@ -45,10 +70,13 @@ export const TaskAuditListRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskAuditListRequest
 > = z.object({
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
+  commentsOnly: z.boolean().optional(),
+  excludeComments: z.boolean().optional(),
+  newestFirst: z.boolean().optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
   refs: z.nullable(z.array(TaskAuditViewRef$outboundSchema)).optional(),
-  taskId: z.nullable(z.string()).optional(),
+  taskId: z.string().optional(),
 });
 
 export function taskAuditListRequestToJSON(

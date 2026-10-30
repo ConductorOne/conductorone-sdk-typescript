@@ -19,21 +19,21 @@ export type AppResourceView = {
   /**
    * JSONPATH expression indicating the location of the App object in the array
    */
-  appPath?: string | null | undefined;
+  appPath?: string | undefined;
   appResource?: AppResource | null | undefined;
   objectPermissions?: ActorObjectPermissions | null | undefined;
   /**
    * JSONPATH expression indicating the location of the Parent Resource object in the array
    */
-  parentResourcePath?: string | null | undefined;
+  parentResourcePath?: string | undefined;
   /**
    * JSONPATH expression indicating the location of the Parent Resource Type object in the array
    */
-  parentResourceTypePath?: string | null | undefined;
+  parentResourceTypePath?: string | undefined;
   /**
    * JSONPATH expression indicating the location of the Resource Type object in the array
    */
-  resourceTypePath?: string | null | undefined;
+  resourceTypePath?: string | undefined;
 };
 
 /** @internal */
@@ -42,13 +42,13 @@ export const AppResourceView$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appPath: z.nullable(z.string()).optional(),
+  appPath: z.string().optional(),
   appResource: z.nullable(AppResource$inboundSchema).optional(),
   objectPermissions: z.nullable(ActorObjectPermissions$inboundSchema)
     .optional(),
-  parentResourcePath: z.nullable(z.string()).optional(),
-  parentResourceTypePath: z.nullable(z.string()).optional(),
-  resourceTypePath: z.nullable(z.string()).optional(),
+  parentResourcePath: z.string().optional(),
+  parentResourceTypePath: z.string().optional(),
+  resourceTypePath: z.string().optional(),
 });
 
 export function appResourceViewFromJSON(

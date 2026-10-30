@@ -31,6 +31,7 @@ import { Result } from "../sdk/types/fp.js";
  *
  * @remarks
  * Search performs a full-text search across received SSF events with optional filters for stream, event type, outcome, and matched user.
+ *  Request a modest page_size (≤25) to keep responses small.
  */
 export function ssfReceiverEventSearchSearch(
   client: ConductoroneSDKTypescriptCore,

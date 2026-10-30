@@ -35,15 +35,15 @@ export type DisabledReasonCircuitBreaker = {
   /**
    * Observed execution count in the period at trip time.
    */
-  observedCount?: number | null | undefined;
+  observedCount?: number | undefined;
   /**
    * Snapshot of the period at trip time.
    */
-  period?: Period | null | undefined;
+  period?: Period | undefined;
   /**
    * Snapshot of the threshold at trip time.
    */
-  threshold?: number | null | undefined;
+  threshold?: number | undefined;
   trippedAt?: Date | null | undefined;
 };
 
@@ -60,18 +60,18 @@ export const DisabledReasonCircuitBreaker$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  observedCount: z.nullable(z.number().int()).optional(),
-  period: z.nullable(Period$inboundSchema).optional(),
-  threshold: z.nullable(z.number().int()).optional(),
+  observedCount: z.number().int().optional(),
+  period: Period$inboundSchema.optional(),
+  threshold: z.number().int().optional(),
   trippedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
 /** @internal */
 export type DisabledReasonCircuitBreaker$Outbound = {
-  observedCount?: number | null | undefined;
-  period?: string | null | undefined;
-  threshold?: number | null | undefined;
+  observedCount?: number | undefined;
+  period?: string | undefined;
+  threshold?: number | undefined;
   trippedAt?: string | null | undefined;
 };
 
@@ -81,9 +81,9 @@ export const DisabledReasonCircuitBreaker$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DisabledReasonCircuitBreaker
 > = z.object({
-  observedCount: z.nullable(z.number().int()).optional(),
-  period: z.nullable(Period$outboundSchema).optional(),
-  threshold: z.nullable(z.number().int()).optional(),
+  observedCount: z.number().int().optional(),
+  period: Period$outboundSchema.optional(),
+  threshold: z.number().int().optional(),
   trippedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 

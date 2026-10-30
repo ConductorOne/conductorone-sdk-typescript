@@ -3,28 +3,126 @@
  */
 
 import * as z from "zod/v3";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import {
   AppResourceRef,
   AppResourceRef$Outbound,
   AppResourceRef$outboundSchema,
 } from "./appresourceref.js";
+import {
+  SecretAgingFilter,
+  SecretAgingFilter$Outbound,
+  SecretAgingFilter$outboundSchema,
+} from "./secretagingfilter.js";
+
+export const AgentStatuses = {
+  AgentStatusUnspecified: "AGENT_STATUS_UNSPECIFIED",
+  AgentStatusReady: "AGENT_STATUS_READY",
+  AgentStatusDisabled: "AGENT_STATUS_DISABLED",
+  AgentStatusDeleted: "AGENT_STATUS_DELETED",
+} as const;
+export type AgentStatuses = OpenEnum<typeof AgentStatuses>;
+
+export const SearchAppResourcesRequestCredentialTypes = {
+  CredentialTypeUnspecified: "CREDENTIAL_TYPE_UNSPECIFIED",
+  CredentialTypeStaticSecret: "CREDENTIAL_TYPE_STATIC_SECRET",
+  CredentialTypeAsymmetricKey: "CREDENTIAL_TYPE_ASYMMETRIC_KEY",
+  CredentialTypeCertificate: "CREDENTIAL_TYPE_CERTIFICATE",
+} as const;
+export type SearchAppResourcesRequestCredentialTypes = OpenEnum<
+  typeof SearchAppResourcesRequestCredentialTypes
+>;
+
+/**
+ * Direction to sort in. Unspecified falls back to ASC when sort_field is set.
+ */
+export const Direction = {
+  SortDirectionUnspecified: "SORT_DIRECTION_UNSPECIFIED",
+  SortDirectionAsc: "SORT_DIRECTION_ASC",
+  SortDirectionDesc: "SORT_DIRECTION_DESC",
+} as const;
+/**
+ * Direction to sort in. Unspecified falls back to ASC when sort_field is set.
+ */
+export type Direction = OpenEnum<typeof Direction>;
+
+export const SearchAppResourcesRequestNhiTypes = {
+  NhiTypeUnspecified: "NHI_TYPE_UNSPECIFIED",
+  NhiTypeAppRegistration: "NHI_TYPE_APP_REGISTRATION",
+  NhiTypeAssumableRole: "NHI_TYPE_ASSUMABLE_ROLE",
+  NhiTypeManagedIdentity: "NHI_TYPE_MANAGED_IDENTITY",
+} as const;
+export type SearchAppResourcesRequestNhiTypes = OpenEnum<
+  typeof SearchAppResourcesRequestNhiTypes
+>;
+
+/**
+ * Column to sort by. Unspecified (0) keeps the server's default order (app, then display name).
+ */
+export const SortField = {
+  AppResourceSortFieldUnspecified: "APP_RESOURCE_SORT_FIELD_UNSPECIFIED",
+  AppResourceSortFieldSecretCreatedAt:
+    "APP_RESOURCE_SORT_FIELD_SECRET_CREATED_AT",
+  AppResourceSortFieldSecretExpiresAt:
+    "APP_RESOURCE_SORT_FIELD_SECRET_EXPIRES_AT",
+  AppResourceSortFieldLastUsedAt: "APP_RESOURCE_SORT_FIELD_LAST_USED_AT",
+} as const;
+/**
+ * Column to sort by. Unspecified (0) keeps the server's default order (app, then display name).
+ */
+export type SortField = OpenEnum<typeof SortField>;
 
 /**
  * Search app resources based on filters specified in the request body.
  */
 export type SearchAppResourcesRequest = {
   /**
+   * Restrict the search to AI-agent resources with one of the given agent
+   *
+   * @remarks
+   *  lifecycle statuses (READY, DISABLED, DELETED). When empty, agent status is
+   *  not used as a filter.
+   */
+  agentStatuses?: Array<AgentStatuses> | null | undefined;
+  /**
    * The app ID to restrict the search to.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
+  /**
+   * A list of app IDs to restrict the search to. Mirrors the singular app_id;
+   *
+   * @remarks
+   *  both fold into the same filter, so callers may set either or both.
+   */
+  appIds?: Array<string> | null | undefined;
   /**
    * A list of app user IDs to restrict the search by.
    */
   appUserIds?: Array<string> | null | undefined;
   /**
+   * Restrict the search to resources whose credential material spine (K1) matches
+   *
+   * @remarks
+   *  one of the given CredentialType values. Applies to resources with a
+   *  secret_trait. When empty, credential_type is not used as a filter.
+   */
+  credentialTypes?:
+    | Array<SearchAppResourcesRequestCredentialTypes>
+    | null
+    | undefined;
+  /**
+   * Direction to sort in. Unspecified falls back to ASC when sort_field is set.
+   */
+  direction?: Direction | undefined;
+  /**
+   * When true, excludes resources belonging to soft-deleted apps.
+   */
+  excludeDeletedApps?: boolean | undefined;
+  /**
    * If true, exclude resources whose bindings have been deleted.
    */
-  excludeDeletedResourceBindings?: boolean | null | undefined;
+  excludeDeletedResourceBindings?: boolean | undefined;
   /**
    * A list of resource IDs to exclude from the search results.
    */
@@ -34,21 +132,33 @@ export type SearchAppResourcesRequest = {
    */
   excludeResourceTypeTraitIds?: Array<string> | null | undefined;
   /**
-   * A list of C1 user IDs to filter resources by ownership.
+   * Restrict the search to resources whose NHI classification spine (K3) is one
+   *
+   * @remarks
+   *  of the given NhiType values. When empty, nhi_type is not used as a filter.
+   */
+  nhiTypes?: Array<SearchAppResourcesRequestNhiTypes> | null | undefined;
+  /**
+   * A list of C1 user IDs to filter resources by ownership. The sentinel
+   *
+   * @remarks
+   *  value "none" matches resources with no owner. Mutually exclusive with
+   *  unowned_only — combine "none" with real owner IDs instead of setting
+   *  unowned_only alongside them.
    */
   ownerUserIds?: Array<string> | null | undefined;
   /**
    * The maximum number of results to return per page.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The token for fetching the next page of results.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Fuzzy search the display name of resources.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * A list of specific app resource references to restrict the search to.
    */
@@ -65,23 +175,88 @@ export type SearchAppResourcesRequest = {
    * A list of resource type trait IDs to restrict the search by.
    */
   resourceTypeTraitIds?: Array<string> | null | undefined;
+  secretAging?: SecretAgingFilter | null | undefined;
+  /**
+   * Column to sort by. Unspecified (0) keeps the server's default order (app, then display name).
+   */
+  sortField?: SortField | undefined;
+  /**
+   * When true, restrict results to resources with no ownership-v2 primary-role
+   *
+   * @remarks
+   *  owner. Mutually exclusive with owner_user_ids — use owner_user_ids:
+   *  ["none"] instead if you also need to combine it with real owner IDs.
+   */
+  unownedOnly?: boolean | undefined;
+  /**
+   * When true, restrict results to resources that have at least one open finding
+   *
+   * @remarks
+   *  (index-backed EXISTS semi-join). When false/unset, results are unfiltered.
+   */
+  withOpenFindings?: boolean | undefined;
 };
 
 /** @internal */
+export const AgentStatuses$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  AgentStatuses
+> = openEnums.outboundSchema(AgentStatuses);
+
+/** @internal */
+export const SearchAppResourcesRequestCredentialTypes$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  SearchAppResourcesRequestCredentialTypes
+> = openEnums.outboundSchema(SearchAppResourcesRequestCredentialTypes);
+
+/** @internal */
+export const Direction$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  Direction
+> = openEnums.outboundSchema(Direction);
+
+/** @internal */
+export const SearchAppResourcesRequestNhiTypes$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  SearchAppResourcesRequestNhiTypes
+> = openEnums.outboundSchema(SearchAppResourcesRequestNhiTypes);
+
+/** @internal */
+export const SortField$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  SortField
+> = openEnums.outboundSchema(SortField);
+
+/** @internal */
 export type SearchAppResourcesRequest$Outbound = {
-  appId?: string | null | undefined;
+  agentStatuses?: Array<string> | null | undefined;
+  appId?: string | undefined;
+  appIds?: Array<string> | null | undefined;
   appUserIds?: Array<string> | null | undefined;
-  excludeDeletedResourceBindings?: boolean | null | undefined;
+  credentialTypes?: Array<string> | null | undefined;
+  direction?: string | undefined;
+  excludeDeletedApps?: boolean | undefined;
+  excludeDeletedResourceBindings?: boolean | undefined;
   excludeResourceIds?: Array<string> | null | undefined;
   excludeResourceTypeTraitIds?: Array<string> | null | undefined;
+  nhiTypes?: Array<string> | null | undefined;
   ownerUserIds?: Array<string> | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  query?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  query?: string | undefined;
   refs?: Array<AppResourceRef$Outbound> | null | undefined;
   resourceIds?: Array<string> | null | undefined;
   resourceTypeIds?: Array<string> | null | undefined;
   resourceTypeTraitIds?: Array<string> | null | undefined;
+  secretAging?: SecretAgingFilter$Outbound | null | undefined;
+  sortField?: string | undefined;
+  unownedOnly?: boolean | undefined;
+  withOpenFindings?: boolean | undefined;
 };
 
 /** @internal */
@@ -90,19 +265,33 @@ export const SearchAppResourcesRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchAppResourcesRequest
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
+  agentStatuses: z.nullable(z.array(AgentStatuses$outboundSchema)).optional(),
+  appId: z.string().optional(),
+  appIds: z.nullable(z.array(z.string())).optional(),
   appUserIds: z.nullable(z.array(z.string())).optional(),
-  excludeDeletedResourceBindings: z.nullable(z.boolean()).optional(),
+  credentialTypes: z.nullable(
+    z.array(SearchAppResourcesRequestCredentialTypes$outboundSchema),
+  ).optional(),
+  direction: Direction$outboundSchema.optional(),
+  excludeDeletedApps: z.boolean().optional(),
+  excludeDeletedResourceBindings: z.boolean().optional(),
   excludeResourceIds: z.nullable(z.array(z.string())).optional(),
   excludeResourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
+  nhiTypes: z.nullable(
+    z.array(SearchAppResourcesRequestNhiTypes$outboundSchema),
+  ).optional(),
   ownerUserIds: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  query: z.string().optional(),
   refs: z.nullable(z.array(AppResourceRef$outboundSchema)).optional(),
   resourceIds: z.nullable(z.array(z.string())).optional(),
   resourceTypeIds: z.nullable(z.array(z.string())).optional(),
   resourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
+  secretAging: z.nullable(SecretAgingFilter$outboundSchema).optional(),
+  sortField: SortField$outboundSchema.optional(),
+  unownedOnly: z.boolean().optional(),
+  withOpenFindings: z.boolean().optional(),
 });
 
 export function searchAppResourcesRequestToJSON(

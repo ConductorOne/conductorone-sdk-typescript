@@ -14,15 +14,15 @@ export type ProvisionTarget = {
   /**
    * The app entitlement that should be provisioned.
    */
-  appEntitlementId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
   /**
    * The app in which the entitlement should be provisioned
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The app user that should be provisioned. May be unset if the app user is unknown
    */
-  appUserId?: string | null | undefined;
+  appUserId?: string | undefined;
   grantDuration?: string | null | undefined;
 };
 
@@ -32,16 +32,16 @@ export const ProvisionTarget$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appUserId: z.nullable(z.string()).optional(),
+  appEntitlementId: z.string().optional(),
+  appId: z.string().optional(),
+  appUserId: z.string().optional(),
   grantDuration: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type ProvisionTarget$Outbound = {
-  appEntitlementId?: string | null | undefined;
-  appId?: string | null | undefined;
-  appUserId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
+  appId?: string | undefined;
+  appUserId?: string | undefined;
   grantDuration?: string | null | undefined;
 };
 
@@ -51,9 +51,9 @@ export const ProvisionTarget$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ProvisionTarget
 > = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appUserId: z.nullable(z.string()).optional(),
+  appEntitlementId: z.string().optional(),
+  appId: z.string().optional(),
+  appUserId: z.string().optional(),
   grantDuration: z.nullable(z.string()).optional(),
 });
 

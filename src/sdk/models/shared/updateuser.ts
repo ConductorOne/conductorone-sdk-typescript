@@ -54,7 +54,7 @@ export type UpdateUser = {
   /**
    * If true, the step will use the subject user of the automation as the subject.
    */
-  useSubjectUser?: boolean | null | undefined;
+  useSubjectUser?: boolean | undefined;
   /**
    * The userIdCel field.
    *
@@ -101,7 +101,7 @@ export const UpdateUser$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  useSubjectUser: z.nullable(z.boolean()).optional(),
+  useSubjectUser: z.boolean().optional(),
   userIdCel: z.nullable(z.string()).optional(),
   userRef: z.nullable(UserRef$inboundSchema).optional(),
   userStatusCel: z.nullable(z.string()).optional(),
@@ -109,7 +109,7 @@ export const UpdateUser$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type UpdateUser$Outbound = {
-  useSubjectUser?: boolean | null | undefined;
+  useSubjectUser?: boolean | undefined;
   userIdCel?: string | null | undefined;
   userRef?: UserRef$Outbound | null | undefined;
   userStatusCel?: string | null | undefined;
@@ -122,7 +122,7 @@ export const UpdateUser$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateUser
 > = z.object({
-  useSubjectUser: z.nullable(z.boolean()).optional(),
+  useSubjectUser: z.boolean().optional(),
   userIdCel: z.nullable(z.string()).optional(),
   userRef: z.nullable(UserRef$outboundSchema).optional(),
   userStatusCel: z.nullable(z.string()).optional(),

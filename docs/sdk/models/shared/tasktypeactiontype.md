@@ -8,7 +8,7 @@ Flavor of action the ticket represents — mirrors the snapshot's
 ```typescript
 import { TaskTypeActionType } from "conductorone-sdk-typescript/sdk/models/shared";
 
-let value: TaskTypeActionType = "TYPE_GRANT";
+let value: TaskTypeActionType = "TYPE_WORKFLOW";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -16,5 +16,5 @@ let value: TaskTypeActionType = "TYPE_GRANT";
 ## Values
 
 ```typescript
-"TYPE_UNSPECIFIED" | "TYPE_GRANT" | "TYPE_WORKFLOW" | "TYPE_RESOURCE_ACTION" | Unrecognized<string>
+"TYPE_UNSPECIFIED" | "TYPE_GRANT" | "TYPE_WORKFLOW" | "TYPE_RESOURCE_ACTION" | "TYPE_TOOL_CALL" | "TYPE_MANUAL" | "TYPE_CREDENTIAL_ISSUE" | "TYPE_SPEND_REMEDY" | Unrecognized<string>
 ```

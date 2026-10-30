@@ -14,19 +14,19 @@ export type ExternalTicketProvision = {
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The connectorId field.
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
   /**
    * The externalTicketProvisionerConfigId field.
    */
-  externalTicketProvisionerConfigId?: string | null | undefined;
+  externalTicketProvisionerConfigId?: string | undefined;
   /**
    * This field indicates a text body of instructions for the provisioner to indicate.
    */
-  instructions?: string | null | undefined;
+  instructions?: string | undefined;
 };
 
 /** @internal */
@@ -35,17 +35,17 @@ export const ExternalTicketProvision$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
-  externalTicketProvisionerConfigId: z.nullable(z.string()).optional(),
-  instructions: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  connectorId: z.string().optional(),
+  externalTicketProvisionerConfigId: z.string().optional(),
+  instructions: z.string().optional(),
 });
 /** @internal */
 export type ExternalTicketProvision$Outbound = {
-  appId?: string | null | undefined;
-  connectorId?: string | null | undefined;
-  externalTicketProvisionerConfigId?: string | null | undefined;
-  instructions?: string | null | undefined;
+  appId?: string | undefined;
+  connectorId?: string | undefined;
+  externalTicketProvisionerConfigId?: string | undefined;
+  instructions?: string | undefined;
 };
 
 /** @internal */
@@ -54,10 +54,10 @@ export const ExternalTicketProvision$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ExternalTicketProvision
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
-  externalTicketProvisionerConfigId: z.nullable(z.string()).optional(),
-  instructions: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  connectorId: z.string().optional(),
+  externalTicketProvisionerConfigId: z.string().optional(),
+  instructions: z.string().optional(),
 });
 
 export function externalTicketProvisionToJSON(

@@ -44,23 +44,23 @@ export type Decoy = {
   /**
    * The description field.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * Admin-disabled.
    */
-  disabled?: boolean | null | undefined;
+  disabled?: boolean | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The kind field.
    */
-  kind?: DecoyKind | null | undefined;
+  kind?: DecoyKind | undefined;
   lastUsedAt?: Date | null | undefined;
   /**
    * Hex-encoded SHA256 of the secret string vended at Create / Rotate.
@@ -69,7 +69,7 @@ export type Decoy = {
    *  Stable for the decoy's current material; changes only on Rotate.
    *  Empty for WorkloadFederation decoys (no server-vended secret).
    */
-  materialFingerprintSha256?: string | null | undefined;
+  materialFingerprintSha256?: string | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -87,15 +87,15 @@ export const Decoy$inboundSchema: z.ZodType<Decoy, z.ZodTypeDef, unknown> = z
     createdAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    description: z.nullable(z.string()).optional(),
-    disabled: z.nullable(z.boolean()).optional(),
-    displayName: z.nullable(z.string()).optional(),
-    id: z.nullable(z.string()).optional(),
-    kind: z.nullable(DecoyKind$inboundSchema).optional(),
+    description: z.string().optional(),
+    disabled: z.boolean().optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    kind: DecoyKind$inboundSchema.optional(),
     lastUsedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    materialFingerprintSha256: z.nullable(z.string()).optional(),
+    materialFingerprintSha256: z.string().optional(),
     updatedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),

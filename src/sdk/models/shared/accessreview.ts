@@ -57,6 +57,12 @@ import {
   CampaignInsights$outboundSchema,
 } from "./campaigninsights.js";
 import {
+  CampaignSchedule,
+  CampaignSchedule$inboundSchema,
+  CampaignSchedule$Outbound,
+  CampaignSchedule$outboundSchema,
+} from "./campaignschedule.js";
+import {
   MultiAppSetup,
   MultiAppSetup$inboundSchema,
   MultiAppSetup$Outbound,
@@ -123,6 +129,8 @@ export const DefaultView = {
   AccessReviewViewTypeByUser: "ACCESS_REVIEW_VIEW_TYPE_BY_USER",
   AccessReviewViewTypeUnstructured: "ACCESS_REVIEW_VIEW_TYPE_UNSTRUCTURED",
   AccessReviewViewTypeByResource: "ACCESS_REVIEW_VIEW_TYPE_BY_RESOURCE",
+  AccessReviewViewTypeByAccessProfile:
+    "ACCESS_REVIEW_VIEW_TYPE_BY_ACCESS_PROFILE",
 } as const;
 /**
  * the default view that reviewers will see when they complete their access reviews
@@ -149,7 +157,10 @@ export const ErrorState = {
 export type ErrorState = OpenEnum<typeof ErrorState>;
 
 /**
- * this sets the scope type for the access review
+ * How the campaign's scope is defined, such as by entitlements or by users.
+ *
+ * @remarks
+ *  See AccessReviewScopeType for the available values.
  */
 export const AccessReviewScopeType = {
   AccessReviewScopeTypeUnspecified: "ACCESS_REVIEW_SCOPE_TYPE_UNSPECIFIED",
@@ -159,9 +170,15 @@ export const AccessReviewScopeType = {
     "ACCESS_REVIEW_SCOPE_TYPE_BY_ACCESS_CONFLICTS",
   AccessReviewScopeTypeByResource: "ACCESS_REVIEW_SCOPE_TYPE_BY_RESOURCE",
   AccessReviewScopeTypeByInheritance: "ACCESS_REVIEW_SCOPE_TYPE_BY_INHERITANCE",
+  AccessReviewScopeTypeByUsers: "ACCESS_REVIEW_SCOPE_TYPE_BY_USERS",
+  AccessReviewScopeTypeByAccessProfiles:
+    "ACCESS_REVIEW_SCOPE_TYPE_BY_ACCESS_PROFILES",
 } as const;
 /**
- * this sets the scope type for the access review
+ * How the campaign's scope is defined, such as by entitlements or by users.
+ *
+ * @remarks
+ *  See AccessReviewScopeType for the available values.
  */
 export type AccessReviewScopeType = OpenEnum<typeof AccessReviewScopeType>;
 
@@ -204,37 +221,38 @@ export type AccessReview = {
   /**
    * The ID of the template if the campaign was created from one
    */
-  accessReviewTemplateId?: string | null | undefined;
+  accessReviewTemplateId?: string | undefined;
   /**
    * The accuracyIssueAction field.
    */
-  accuracyIssueAction?: AccuracyIssueAction | null | undefined;
+  accuracyIssueAction?: AccuracyIssueAction | undefined;
   /**
    * Auto-close configuration
    *
    * @remarks
    *  completion_date is used as the scheduled close date
    */
-  autoCloseCampaign?: boolean | null | undefined;
+  autoCloseCampaign?: boolean | undefined;
   /**
    * The autoCloseDecision field.
    */
-  autoCloseDecision?: AutoCloseDecision | null | undefined;
+  autoCloseDecision?: AutoCloseDecision | undefined;
   /**
    * The autoGenerateReport field.
    */
-  autoGenerateReport?: boolean | null | undefined;
+  autoGenerateReport?: boolean | undefined;
   /**
    * When true, selections are automatically resolved if the entitlement grant no longer exists.
    */
-  autoResolve?: boolean | null | undefined;
+  autoResolve?: boolean | undefined;
   /**
    * Auto-start configuration
    */
-  autoStartCampaign?: boolean | null | undefined;
+  autoStartCampaign?: boolean | undefined;
   bindings?: BindingObjectSetup | null | undefined;
   campaignHealth?: CampaignHealthSnapshot | null | undefined;
   campaignInsights?: CampaignInsights | null | undefined;
+  campaignSchedule?: CampaignSchedule | null | undefined;
   closedAt?: Date | null | undefined;
   columnConfig?: AccessReviewColumnConfig | null | undefined;
   completionDate?: Date | null | undefined;
@@ -243,73 +261,76 @@ export type AccessReview = {
   /**
    * The ID of the user who created this campaign.
    */
-  createdById?: string | null | undefined;
+  createdById?: string | undefined;
   /**
    * the default view that reviewers will see when they complete their access reviews
    */
-  defaultView?: DefaultView | null | undefined;
+  defaultView?: DefaultView | undefined;
   /**
    * An optional description providing context about this campaign.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The human-readable name of this campaign.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * Error state set when a prepare action fails with a recoverable condition.
    *
    * @remarks
    *  Cleared when the campaign scope is changed.
    */
-  errorState?: ErrorState | null | undefined;
+  errorState?: ErrorState | undefined;
   exclusionScope?: AccessReviewExclusionScope | null | undefined;
   /**
    * this setting is used for access conflict type scope
    */
-  exemptCertifiedAccessConflicts?: boolean | null | undefined;
+  exemptCertifiedAccessConflicts?: boolean | undefined;
   /**
    * The estimated number of review tasks that will be generated when the campaign starts.
    */
-  expectedTicketCount?: number | null | undefined;
+  expectedTicketCount?: number | undefined;
   /**
    * Whether the connectors in this campaign support accuracy checking.
    */
-  hasAccuracySupport?: boolean | null | undefined;
+  hasAccuracySupport?: boolean | undefined;
   /**
    * The unique identifier of this access review campaign.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   inclusionScope?: AccessReviewInclusionScope | null | undefined;
   multiApp?: MultiAppSetup | null | undefined;
   notificationConfig?: NotificationConfig | null | undefined;
   /**
    * The ID of the review policy that governs how review tasks are assigned and resolved.
    */
-  policyId?: string | null | undefined;
+  policyId?: string | undefined;
   /**
    * Optional instructions displayed to reviewers when completing their review tasks.
    */
-  reviewInstructions?: string | null | undefined;
+  reviewInstructions?: string | undefined;
   reviewerAttributeConfig?: ReviewerAttributeConfig | null | undefined;
   scheduledStartDate?: Date | null | undefined;
   scope?: AccessReviewScope | null | undefined;
   /**
-   * this sets the scope type for the access review
+   * How the campaign's scope is defined, such as by entitlements or by users.
+   *
+   * @remarks
+   *  See AccessReviewScopeType for the available values.
    */
-  scopeType?: AccessReviewScopeType | null | undefined;
+  scopeType?: AccessReviewScopeType | undefined;
   scopeV2?: AccessReviewScopeV2 | null | undefined;
   /**
    * Internal version counter incremented when the campaign scope changes.
    */
-  scopingVersion?: number | null | undefined;
+  scopingVersion?: number | undefined;
   signatureConfig?: ReviewSignatureConfig | null | undefined;
   singleApp?: SingleAppSetup | null | undefined;
   startedAt?: Date | null | undefined;
   /**
    * The current lifecycle state of the campaign (e.g., draft, open, closed).
    */
-  state?: AccessReviewState | null | undefined;
+  state?: AccessReviewState | undefined;
   updatedAt?: Date | null | undefined;
   /**
    * Determines the policy applied to the campaign. Default is false, using the campaign policy.
@@ -317,7 +338,7 @@ export type AccessReview = {
    * @remarks
    *  If true, the order of precedence is entitlement → app → campaign policy.
    */
-  usePolicyOverride?: boolean | null | undefined;
+  usePolicyOverride?: boolean | undefined;
 };
 
 /**
@@ -334,37 +355,38 @@ export type AccessReviewInput = {
   /**
    * The ID of the template if the campaign was created from one
    */
-  accessReviewTemplateId?: string | null | undefined;
+  accessReviewTemplateId?: string | undefined;
   /**
    * The accuracyIssueAction field.
    */
-  accuracyIssueAction?: AccuracyIssueAction | null | undefined;
+  accuracyIssueAction?: AccuracyIssueAction | undefined;
   /**
    * Auto-close configuration
    *
    * @remarks
    *  completion_date is used as the scheduled close date
    */
-  autoCloseCampaign?: boolean | null | undefined;
+  autoCloseCampaign?: boolean | undefined;
   /**
    * The autoCloseDecision field.
    */
-  autoCloseDecision?: AutoCloseDecision | null | undefined;
+  autoCloseDecision?: AutoCloseDecision | undefined;
   /**
    * The autoGenerateReport field.
    */
-  autoGenerateReport?: boolean | null | undefined;
+  autoGenerateReport?: boolean | undefined;
   /**
    * When true, selections are automatically resolved if the entitlement grant no longer exists.
    */
-  autoResolve?: boolean | null | undefined;
+  autoResolve?: boolean | undefined;
   /**
    * Auto-start configuration
    */
-  autoStartCampaign?: boolean | null | undefined;
+  autoStartCampaign?: boolean | undefined;
   bindings?: BindingObjectSetup | null | undefined;
   campaignHealth?: CampaignHealthSnapshot | null | undefined;
   campaignInsights?: CampaignInsights | null | undefined;
+  campaignSchedule?: CampaignSchedule | null | undefined;
   closedAt?: Date | null | undefined;
   columnConfig?: AccessReviewColumnConfig | null | undefined;
   completionDate?: Date | null | undefined;
@@ -372,73 +394,76 @@ export type AccessReviewInput = {
   /**
    * The ID of the user who created this campaign.
    */
-  createdById?: string | null | undefined;
+  createdById?: string | undefined;
   /**
    * the default view that reviewers will see when they complete their access reviews
    */
-  defaultView?: DefaultView | null | undefined;
+  defaultView?: DefaultView | undefined;
   /**
    * An optional description providing context about this campaign.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The human-readable name of this campaign.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   exclusionScope?: AccessReviewExclusionScope | null | undefined;
   /**
    * this setting is used for access conflict type scope
    */
-  exemptCertifiedAccessConflicts?: boolean | null | undefined;
+  exemptCertifiedAccessConflicts?: boolean | undefined;
   /**
    * The estimated number of review tasks that will be generated when the campaign starts.
    */
-  expectedTicketCount?: number | null | undefined;
+  expectedTicketCount?: number | undefined;
   /**
    * Whether the connectors in this campaign support accuracy checking.
    */
-  hasAccuracySupport?: boolean | null | undefined;
+  hasAccuracySupport?: boolean | undefined;
   /**
    * The unique identifier of this access review campaign.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   inclusionScope?: AccessReviewInclusionScope | null | undefined;
   multiApp?: MultiAppSetup | null | undefined;
   notificationConfig?: NotificationConfig | null | undefined;
   /**
    * The ID of the review policy that governs how review tasks are assigned and resolved.
    */
-  policyId?: string | null | undefined;
+  policyId?: string | undefined;
   /**
    * Optional instructions displayed to reviewers when completing their review tasks.
    */
-  reviewInstructions?: string | null | undefined;
+  reviewInstructions?: string | undefined;
   reviewerAttributeConfig?: ReviewerAttributeConfig | null | undefined;
   scheduledStartDate?: Date | null | undefined;
   scope?: AccessReviewScope | null | undefined;
   /**
-   * this sets the scope type for the access review
+   * How the campaign's scope is defined, such as by entitlements or by users.
+   *
+   * @remarks
+   *  See AccessReviewScopeType for the available values.
    */
-  scopeType?: AccessReviewScopeType | null | undefined;
+  scopeType?: AccessReviewScopeType | undefined;
   scopeV2?: AccessReviewScopeV2 | null | undefined;
   /**
    * Internal version counter incremented when the campaign scope changes.
    */
-  scopingVersion?: number | null | undefined;
+  scopingVersion?: number | undefined;
   signatureConfig?: ReviewSignatureConfig | null | undefined;
   singleApp?: SingleAppSetup | null | undefined;
   startedAt?: Date | null | undefined;
   /**
    * The current lifecycle state of the campaign (e.g., draft, open, closed).
    */
-  state?: AccessReviewState | null | undefined;
+  state?: AccessReviewState | undefined;
   /**
    * Determines the policy applied to the campaign. Default is false, using the campaign policy.
    *
    * @remarks
    *  If true, the order of precedence is entitlement → app → campaign policy.
    */
-  usePolicyOverride?: boolean | null | undefined;
+  usePolicyOverride?: boolean | undefined;
 };
 
 /** @internal */
@@ -519,16 +544,17 @@ export const AccessReview$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accessReviewTemplateId: z.nullable(z.string()).optional(),
-  accuracyIssueAction: z.nullable(AccuracyIssueAction$inboundSchema).optional(),
-  autoCloseCampaign: z.nullable(z.boolean()).optional(),
-  autoCloseDecision: z.nullable(AutoCloseDecision$inboundSchema).optional(),
-  autoGenerateReport: z.nullable(z.boolean()).optional(),
-  autoResolve: z.nullable(z.boolean()).optional(),
-  autoStartCampaign: z.nullable(z.boolean()).optional(),
+  accessReviewTemplateId: z.string().optional(),
+  accuracyIssueAction: AccuracyIssueAction$inboundSchema.optional(),
+  autoCloseCampaign: z.boolean().optional(),
+  autoCloseDecision: AutoCloseDecision$inboundSchema.optional(),
+  autoGenerateReport: z.boolean().optional(),
+  autoResolve: z.boolean().optional(),
+  autoStartCampaign: z.boolean().optional(),
   bindings: z.nullable(BindingObjectSetup$inboundSchema).optional(),
   campaignHealth: z.nullable(CampaignHealthSnapshot$inboundSchema).optional(),
   campaignInsights: z.nullable(CampaignInsights$inboundSchema).optional(),
+  campaignSchedule: z.nullable(CampaignSchedule$inboundSchema).optional(),
   closedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -542,43 +568,42 @@ export const AccessReview$inboundSchema: z.ZodType<
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  createdById: z.nullable(z.string()).optional(),
-  defaultView: z.nullable(DefaultView$inboundSchema).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  errorState: z.nullable(ErrorState$inboundSchema).optional(),
+  createdById: z.string().optional(),
+  defaultView: DefaultView$inboundSchema.optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  errorState: ErrorState$inboundSchema.optional(),
   exclusionScope: z.nullable(AccessReviewExclusionScope$inboundSchema)
     .optional(),
-  exemptCertifiedAccessConflicts: z.nullable(z.boolean()).optional(),
-  expectedTicketCount: z.nullable(z.number().int()).optional(),
-  hasAccuracySupport: z.nullable(z.boolean()).optional(),
-  id: z.nullable(z.string()).optional(),
+  exemptCertifiedAccessConflicts: z.boolean().optional(),
+  expectedTicketCount: z.number().int().optional(),
+  hasAccuracySupport: z.boolean().optional(),
+  id: z.string().optional(),
   inclusionScope: z.nullable(AccessReviewInclusionScope$inboundSchema)
     .optional(),
   multiApp: z.nullable(MultiAppSetup$inboundSchema).optional(),
   notificationConfig: z.nullable(NotificationConfig$inboundSchema).optional(),
-  policyId: z.nullable(z.string()).optional(),
-  reviewInstructions: z.nullable(z.string()).optional(),
+  policyId: z.string().optional(),
+  reviewInstructions: z.string().optional(),
   reviewerAttributeConfig: z.nullable(ReviewerAttributeConfig$inboundSchema)
     .optional(),
   scheduledStartDate: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   scope: z.nullable(AccessReviewScope$inboundSchema).optional(),
-  scopeType: z.nullable(AccessReviewScopeType$inboundSchema).optional(),
+  scopeType: AccessReviewScopeType$inboundSchema.optional(),
   scopeV2: z.nullable(AccessReviewScopeV2$inboundSchema).optional(),
-  scopingVersion: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
+  scopingVersion: z.string().transform(v => parseInt(v, 10)).optional(),
   signatureConfig: z.nullable(ReviewSignatureConfig$inboundSchema).optional(),
   singleApp: z.nullable(SingleAppSetup$inboundSchema).optional(),
   startedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  state: z.nullable(AccessReviewState$inboundSchema).optional(),
+  state: AccessReviewState$inboundSchema.optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  usePolicyOverride: z.nullable(z.boolean()).optional(),
+  usePolicyOverride: z.boolean().optional(),
 });
 
 export function accessReviewFromJSON(
@@ -593,45 +618,46 @@ export function accessReviewFromJSON(
 
 /** @internal */
 export type AccessReviewInput$Outbound = {
-  accessReviewTemplateId?: string | null | undefined;
-  accuracyIssueAction?: string | null | undefined;
-  autoCloseCampaign?: boolean | null | undefined;
-  autoCloseDecision?: string | null | undefined;
-  autoGenerateReport?: boolean | null | undefined;
-  autoResolve?: boolean | null | undefined;
-  autoStartCampaign?: boolean | null | undefined;
+  accessReviewTemplateId?: string | undefined;
+  accuracyIssueAction?: string | undefined;
+  autoCloseCampaign?: boolean | undefined;
+  autoCloseDecision?: string | undefined;
+  autoGenerateReport?: boolean | undefined;
+  autoResolve?: boolean | undefined;
+  autoStartCampaign?: boolean | undefined;
   bindings?: BindingObjectSetup$Outbound | null | undefined;
   campaignHealth?: CampaignHealthSnapshot$Outbound | null | undefined;
   campaignInsights?: CampaignInsights$Outbound | null | undefined;
+  campaignSchedule?: CampaignSchedule$Outbound | null | undefined;
   closedAt?: string | null | undefined;
   columnConfig?: AccessReviewColumnConfig$Outbound | null | undefined;
   completionDate?: string | null | undefined;
   connectorSourcesFrozenAt?: string | null | undefined;
-  createdById?: string | null | undefined;
-  defaultView?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
+  createdById?: string | undefined;
+  defaultView?: string | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
   exclusionScope?: AccessReviewExclusionScope$Outbound | null | undefined;
-  exemptCertifiedAccessConflicts?: boolean | null | undefined;
-  expectedTicketCount?: number | null | undefined;
-  hasAccuracySupport?: boolean | null | undefined;
-  id?: string | null | undefined;
+  exemptCertifiedAccessConflicts?: boolean | undefined;
+  expectedTicketCount?: number | undefined;
+  hasAccuracySupport?: boolean | undefined;
+  id?: string | undefined;
   inclusionScope?: AccessReviewInclusionScope$Outbound | null | undefined;
   multiApp?: MultiAppSetup$Outbound | null | undefined;
   notificationConfig?: NotificationConfig$Outbound | null | undefined;
-  policyId?: string | null | undefined;
-  reviewInstructions?: string | null | undefined;
+  policyId?: string | undefined;
+  reviewInstructions?: string | undefined;
   reviewerAttributeConfig?: ReviewerAttributeConfig$Outbound | null | undefined;
   scheduledStartDate?: string | null | undefined;
   scope?: AccessReviewScope$Outbound | null | undefined;
-  scopeType?: string | null | undefined;
+  scopeType?: string | undefined;
   scopeV2?: AccessReviewScopeV2$Outbound | null | undefined;
-  scopingVersion?: string | null | undefined;
+  scopingVersion?: string | undefined;
   signatureConfig?: ReviewSignatureConfig$Outbound | null | undefined;
   singleApp?: SingleAppSetup$Outbound | null | undefined;
   startedAt?: string | null | undefined;
-  state?: string | null | undefined;
-  usePolicyOverride?: boolean | null | undefined;
+  state?: string | undefined;
+  usePolicyOverride?: boolean | undefined;
 };
 
 /** @internal */
@@ -640,53 +666,52 @@ export const AccessReviewInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AccessReviewInput
 > = z.object({
-  accessReviewTemplateId: z.nullable(z.string()).optional(),
-  accuracyIssueAction: z.nullable(AccuracyIssueAction$outboundSchema)
-    .optional(),
-  autoCloseCampaign: z.nullable(z.boolean()).optional(),
-  autoCloseDecision: z.nullable(AutoCloseDecision$outboundSchema).optional(),
-  autoGenerateReport: z.nullable(z.boolean()).optional(),
-  autoResolve: z.nullable(z.boolean()).optional(),
-  autoStartCampaign: z.nullable(z.boolean()).optional(),
+  accessReviewTemplateId: z.string().optional(),
+  accuracyIssueAction: AccuracyIssueAction$outboundSchema.optional(),
+  autoCloseCampaign: z.boolean().optional(),
+  autoCloseDecision: AutoCloseDecision$outboundSchema.optional(),
+  autoGenerateReport: z.boolean().optional(),
+  autoResolve: z.boolean().optional(),
+  autoStartCampaign: z.boolean().optional(),
   bindings: z.nullable(BindingObjectSetup$outboundSchema).optional(),
   campaignHealth: z.nullable(CampaignHealthSnapshot$outboundSchema).optional(),
   campaignInsights: z.nullable(CampaignInsights$outboundSchema).optional(),
+  campaignSchedule: z.nullable(CampaignSchedule$outboundSchema).optional(),
   closedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   columnConfig: z.nullable(AccessReviewColumnConfig$outboundSchema).optional(),
   completionDate: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
   connectorSourcesFrozenAt: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
-  createdById: z.nullable(z.string()).optional(),
-  defaultView: z.nullable(DefaultView$outboundSchema).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  createdById: z.string().optional(),
+  defaultView: DefaultView$outboundSchema.optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
   exclusionScope: z.nullable(AccessReviewExclusionScope$outboundSchema)
     .optional(),
-  exemptCertifiedAccessConflicts: z.nullable(z.boolean()).optional(),
-  expectedTicketCount: z.nullable(z.number().int()).optional(),
-  hasAccuracySupport: z.nullable(z.boolean()).optional(),
-  id: z.nullable(z.string()).optional(),
+  exemptCertifiedAccessConflicts: z.boolean().optional(),
+  expectedTicketCount: z.number().int().optional(),
+  hasAccuracySupport: z.boolean().optional(),
+  id: z.string().optional(),
   inclusionScope: z.nullable(AccessReviewInclusionScope$outboundSchema)
     .optional(),
   multiApp: z.nullable(MultiAppSetup$outboundSchema).optional(),
   notificationConfig: z.nullable(NotificationConfig$outboundSchema).optional(),
-  policyId: z.nullable(z.string()).optional(),
-  reviewInstructions: z.nullable(z.string()).optional(),
+  policyId: z.string().optional(),
+  reviewInstructions: z.string().optional(),
   reviewerAttributeConfig: z.nullable(ReviewerAttributeConfig$outboundSchema)
     .optional(),
   scheduledStartDate: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
   scope: z.nullable(AccessReviewScope$outboundSchema).optional(),
-  scopeType: z.nullable(AccessReviewScopeType$outboundSchema).optional(),
+  scopeType: AccessReviewScopeType$outboundSchema.optional(),
   scopeV2: z.nullable(AccessReviewScopeV2$outboundSchema).optional(),
-  scopingVersion: z.nullable(z.number().int().transform(v => `${v}`))
-    .optional(),
+  scopingVersion: z.number().int().transform(v => `${v}`).optional(),
   signatureConfig: z.nullable(ReviewSignatureConfig$outboundSchema).optional(),
   singleApp: z.nullable(SingleAppSetup$outboundSchema).optional(),
   startedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  state: z.nullable(AccessReviewState$outboundSchema).optional(),
-  usePolicyOverride: z.nullable(z.boolean()).optional(),
+  state: AccessReviewState$outboundSchema.optional(),
+  usePolicyOverride: z.boolean().optional(),
 });
 
 export function accessReviewInputToJSON(

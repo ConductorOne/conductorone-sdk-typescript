@@ -15,7 +15,7 @@ export type FormCompletedAction = {
   /**
    * The userId field.
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -27,12 +27,12 @@ export const FormCompletedAction$inboundSchema: z.ZodType<
   completedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 /** @internal */
 export type FormCompletedAction$Outbound = {
   completedAt?: string | null | undefined;
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -42,7 +42,7 @@ export const FormCompletedAction$outboundSchema: z.ZodType<
   FormCompletedAction
 > = z.object({
   completedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 
 export function formCompletedActionToJSON(

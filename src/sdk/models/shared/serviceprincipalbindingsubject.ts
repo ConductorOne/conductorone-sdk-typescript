@@ -3,6 +3,21 @@
  */
 
 import * as z from "zod/v3";
+import {
+  AuthzenServerRef,
+  AuthzenServerRef$Outbound,
+  AuthzenServerRef$outboundSchema,
+} from "./authzenserverref.js";
+import {
+  EdgeRef,
+  EdgeRef$Outbound,
+  EdgeRef$outboundSchema,
+} from "./edgeref.js";
+import {
+  SSOApplicationRef,
+  SSOApplicationRef$Outbound,
+  SSOApplicationRef$outboundSchema,
+} from "./ssoapplicationref.js";
 
 /**
  * ServicePrincipalBindingSubject identifies the entity that is bound to a
@@ -13,8 +28,13 @@ import * as z from "zod/v3";
  *
  * This message contains a oneof named kind. Only a single field of the following list may be set at a time:
  *   - functionId
+ *   - ssoApplication
+ *   - authzenServer
+ *   - edge
  */
 export type ServicePrincipalBindingSubject = {
+  authzenServer?: AuthzenServerRef | null | undefined;
+  edge?: EdgeRef | null | undefined;
   /**
    * Function ID. The function authenticates outbound c1-api calls as
    *
@@ -24,11 +44,15 @@ export type ServicePrincipalBindingSubject = {
    * See the documentation for `c1.api.service_principal.v1.ServicePrincipalBindingSubject` for more details.
    */
   functionId?: string | null | undefined;
+  ssoApplication?: SSOApplicationRef | null | undefined;
 };
 
 /** @internal */
 export type ServicePrincipalBindingSubject$Outbound = {
+  authzenServer?: AuthzenServerRef$Outbound | null | undefined;
+  edge?: EdgeRef$Outbound | null | undefined;
   functionId?: string | null | undefined;
+  ssoApplication?: SSOApplicationRef$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -37,7 +61,10 @@ export const ServicePrincipalBindingSubject$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ServicePrincipalBindingSubject
 > = z.object({
+  authzenServer: z.nullable(AuthzenServerRef$outboundSchema).optional(),
+  edge: z.nullable(EdgeRef$outboundSchema).optional(),
   functionId: z.nullable(z.string()).optional(),
+  ssoApplication: z.nullable(SSOApplicationRef$outboundSchema).optional(),
 });
 
 export function servicePrincipalBindingSubjectToJSON(

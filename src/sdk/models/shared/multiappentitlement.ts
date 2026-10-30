@@ -14,7 +14,7 @@ export type MultiAppEntitlement = {
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The entitlementIds field.
    */
@@ -27,12 +27,12 @@ export const MultiAppEntitlement$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
   entitlementIds: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
 export type MultiAppEntitlement$Outbound = {
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   entitlementIds?: Array<string> | null | undefined;
 };
 
@@ -42,7 +42,7 @@ export const MultiAppEntitlement$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MultiAppEntitlement
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
   entitlementIds: z.nullable(z.array(z.string())).optional(),
 });
 

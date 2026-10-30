@@ -17,14 +17,14 @@ export type MessageRules = {
   /**
    * Required specifies that this field must be set
    */
-  required?: boolean | null | undefined;
+  required?: boolean | undefined;
   /**
    * Skip specifies that the validation rules of this field should not be
    *
    * @remarks
    *  evaluated
    */
-  skip?: boolean | null | undefined;
+  skip?: boolean | undefined;
 };
 
 /** @internal */
@@ -33,13 +33,13 @@ export const MessageRules$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  required: z.nullable(z.boolean()).optional(),
-  skip: z.nullable(z.boolean()).optional(),
+  required: z.boolean().optional(),
+  skip: z.boolean().optional(),
 });
 /** @internal */
 export type MessageRules$Outbound = {
-  required?: boolean | null | undefined;
-  skip?: boolean | null | undefined;
+  required?: boolean | undefined;
+  skip?: boolean | undefined;
 };
 
 /** @internal */
@@ -48,8 +48,8 @@ export const MessageRules$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MessageRules
 > = z.object({
-  required: z.nullable(z.boolean()).optional(),
-  skip: z.nullable(z.boolean()).optional(),
+  required: z.boolean().optional(),
+  skip: z.boolean().optional(),
 });
 
 export function messageRulesToJSON(messageRules: MessageRules): string {

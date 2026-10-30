@@ -29,7 +29,7 @@ import { Result } from "../sdk/types/fp.js";
  * List
  *
  * @remarks
- * Invokes the c1.api.hooks.v1.HooksService.List method.
+ * List returns all hooks for the tenant, paginated.
  */
 export function hooksList(
   client: ConductoroneSDKTypescriptCore,

@@ -27,7 +27,7 @@ export type AIGovernanceSettingsAllowedClientTypes = OpenEnum<
 >;
 
 /**
- * The auditVerbosity field.
+ * How much detail is captured in the audit log for MCP tool calls.
  */
 export const AuditVerbosity = {
   AuditVerbosityUnspecified: "AUDIT_VERBOSITY_UNSPECIFIED",
@@ -36,12 +36,15 @@ export const AuditVerbosity = {
   AuditVerbosityFull: "AUDIT_VERBOSITY_FULL",
 } as const;
 /**
- * The auditVerbosity field.
+ * How much detail is captured in the audit log for MCP tool calls.
  */
 export type AuditVerbosity = OpenEnum<typeof AuditVerbosity>;
 
 /**
- * The defaultToolClassification field.
+ * Classification assigned to newly discovered tools that do not declare their
+ *
+ * @remarks
+ *  own classification (for example, read, write, or destructive).
  */
 export const DefaultToolClassification = {
   ToolClassificationUnspecified: "TOOL_CLASSIFICATION_UNSPECIFIED",
@@ -52,44 +55,84 @@ export const DefaultToolClassification = {
   ToolClassificationDangerous: "TOOL_CLASSIFICATION_DANGEROUS",
 } as const;
 /**
- * The defaultToolClassification field.
+ * Classification assigned to newly discovered tools that do not declare their
+ *
+ * @remarks
+ *  own classification (for example, read, write, or destructive).
  */
 export type DefaultToolClassification = OpenEnum<
   typeof DefaultToolClassification
 >;
 
 /**
- * The AIGovernanceSettings message.
+ * AIGovernanceSettings holds the tenant-wide AI governance policy that controls
+ *
+ * @remarks
+ *  MCP client access, tool approval, classification defaults, audit detail, and
+ *  automatic tool discovery. There is one settings object per tenant.
  */
 export type AIGovernanceSettings = {
   /**
-   * Empty list means all types are allowed.
+   * MCP client types permitted to connect. An empty list allows all types.
    */
   allowedClientTypes?:
     | Array<AIGovernanceSettingsAllowedClientTypes>
     | null
     | undefined;
   /**
-   * The auditVerbosity field.
+   * How much detail is captured in the audit log for MCP tool calls.
    */
-  auditVerbosity?: AuditVerbosity | null | undefined;
+  auditVerbosity?: AuditVerbosity | undefined;
   /**
-   * The autoDiscoveryEnabled field.
+   * When true, C1 periodically re-discovers tools from registered MCP servers
+   *
+   * @remarks
+   *  on the discovery_interval schedule.
    */
-  autoDiscoveryEnabled?: boolean | null | undefined;
-  createdAt?: Date | null | undefined;
-  defaultClientLifecycle?: MCPClientLifecycleConfig | null | undefined;
+  autoDiscoveryEnabled?: boolean | undefined;
   /**
-   * The defaultToolClassification field.
-   */
-  defaultToolClassification?: DefaultToolClassification | null | undefined;
-  discoveryInterval?: string | null | undefined;
-  /**
-   * Deprecated: use SystemManagementConfig.mcp_traffic_shutoff instead.
+   * Deprecated. Set QUOTA_REF_TENANT_C1AW_AUTOSPILL_THRESHOLD_KB to 0 to
+   *
+   * @remarks
+   *  disable C1AW autospill.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  enabled?: boolean | null | undefined;
+  c1awAutospillDisabled?: boolean | undefined;
+  /**
+   * Deprecated. C1AW autospill is configured with
+   *
+   * @remarks
+   *  QUOTA_REF_TENANT_C1AW_AUTOSPILL_THRESHOLD_KB.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  c1awAutospillThresholdBytes?: number | undefined;
+  /**
+   * Number of pre-warmed Lambda instances for the per-tenant code-mode
+   *
+   * @remarks
+   *  function. 0 (default) leaves the Lambda cold-started on first call;
+   *  > 0 keeps that many execution environments warm via AWS Lambda
+   *  provisioned concurrency, redeploying the function on change.
+   */
+  codeModeConcurrency?: number | undefined;
+  createdAt?: Date | null | undefined;
+  defaultClientLifecycle?: MCPClientLifecycleConfig | null | undefined;
+  /**
+   * Classification assigned to newly discovered tools that do not declare their
+   *
+   * @remarks
+   *  own classification (for example, read, write, or destructive).
+   */
+  defaultToolClassification?: DefaultToolClassification | undefined;
+  discoveryInterval?: string | null | undefined;
+  /**
+   * Legacy master switch.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  enabled?: boolean | undefined;
   /**
    * When true, the MCP server hides direct tool listings from capable clients
    *
@@ -100,11 +143,14 @@ export type AIGovernanceSettings = {
    *  remains exposed. Incapable clients (e.g. SERVICE, EPHEMERAL) see the
    *  normal tool set regardless. Defaults to false.
    */
-  preferCodeModeOverDirectTools?: boolean | null | undefined;
+  preferCodeModeOverDirectTools?: boolean | undefined;
   /**
-   * The requireToolApproval field.
+   * Require approval for newly discovered tools on MCP servers without a saved
+   *
+   * @remarks
+   *  registration access level, unless overridden by the per-server setting.
    */
-  requireToolApproval?: boolean | null | undefined;
+  requireToolApproval?: boolean | undefined;
   /**
    * When true, MCP discovery surfaces tools the caller could request (no
    *
@@ -113,10 +159,36 @@ export type AIGovernanceSettings = {
    *  tools — both on the classic tools/list path and inside the code-mode
    *  describe entrypoint. Invoking such a tool opens (or reuses) an
    *  access-request ticket and returns a request_created envelope instead of
-   *  executing. Defaults to false.
+   *  executing. Defaults to true.
    */
-  surfaceRequestableTools?: boolean | null | undefined;
+  surfaceRequestableTools?: boolean | undefined;
+  /**
+   * When true, the A2 (untrusted-content) judge is skipped and the untrusted
+   *
+   * @remarks
+   *  dimension always scores LOW. When false (the default), the judge scores
+   *  agent turn input and tool output for prompt-injection risk on every turn.
+   *
+   *  Defaults to false, so the judge runs by default.
+   */
+  untrustedJudgeDisable?: boolean | undefined;
   updatedAt?: Date | null | undefined;
+  /**
+   * User attribute that names a cost center on the C1 Gateway attribution
+   *
+   * @remarks
+   *  dashboards, using the same values as usage_attribution_team_attribute.
+   *  Empty leaves usage without a cost center.
+   */
+  usageAttributionCostCenterAttribute?: string | undefined;
+  /**
+   * User attribute that names a team on the C1 Gateway attribution dashboards:
+   *
+   * @remarks
+   *  department, job_title, employment_type, employment_status, or
+   *  profile.<key> for a directory profile attribute. Empty uses department.
+   */
+  usageAttributionTeamAttribute?: string | undefined;
 };
 
 /** @internal */
@@ -167,38 +239,49 @@ export const AIGovernanceSettings$inboundSchema: z.ZodType<
   allowedClientTypes: z.nullable(
     z.array(AIGovernanceSettingsAllowedClientTypes$inboundSchema),
   ).optional(),
-  auditVerbosity: z.nullable(AuditVerbosity$inboundSchema).optional(),
-  autoDiscoveryEnabled: z.nullable(z.boolean()).optional(),
+  auditVerbosity: AuditVerbosity$inboundSchema.optional(),
+  autoDiscoveryEnabled: z.boolean().optional(),
+  c1awAutospillDisabled: z.boolean().optional(),
+  c1awAutospillThresholdBytes: z.number().int().optional(),
+  codeModeConcurrency: z.number().int().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   defaultClientLifecycle: z.nullable(MCPClientLifecycleConfig$inboundSchema)
     .optional(),
-  defaultToolClassification: z.nullable(DefaultToolClassification$inboundSchema)
-    .optional(),
+  defaultToolClassification: DefaultToolClassification$inboundSchema.optional(),
   discoveryInterval: z.nullable(z.string()).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  preferCodeModeOverDirectTools: z.nullable(z.boolean()).optional(),
-  requireToolApproval: z.nullable(z.boolean()).optional(),
-  surfaceRequestableTools: z.nullable(z.boolean()).optional(),
+  enabled: z.boolean().optional(),
+  preferCodeModeOverDirectTools: z.boolean().optional(),
+  requireToolApproval: z.boolean().optional(),
+  surfaceRequestableTools: z.boolean().optional(),
+  untrustedJudgeDisable: z.boolean().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
+  usageAttributionCostCenterAttribute: z.string().optional(),
+  usageAttributionTeamAttribute: z.string().optional(),
 });
 /** @internal */
 export type AIGovernanceSettings$Outbound = {
   allowedClientTypes?: Array<string> | null | undefined;
-  auditVerbosity?: string | null | undefined;
-  autoDiscoveryEnabled?: boolean | null | undefined;
+  auditVerbosity?: string | undefined;
+  autoDiscoveryEnabled?: boolean | undefined;
+  c1awAutospillDisabled?: boolean | undefined;
+  c1awAutospillThresholdBytes?: number | undefined;
+  codeModeConcurrency?: number | undefined;
   createdAt?: string | null | undefined;
   defaultClientLifecycle?: MCPClientLifecycleConfig$Outbound | null | undefined;
-  defaultToolClassification?: string | null | undefined;
+  defaultToolClassification?: string | undefined;
   discoveryInterval?: string | null | undefined;
-  enabled?: boolean | null | undefined;
-  preferCodeModeOverDirectTools?: boolean | null | undefined;
-  requireToolApproval?: boolean | null | undefined;
-  surfaceRequestableTools?: boolean | null | undefined;
+  enabled?: boolean | undefined;
+  preferCodeModeOverDirectTools?: boolean | undefined;
+  requireToolApproval?: boolean | undefined;
+  surfaceRequestableTools?: boolean | undefined;
+  untrustedJudgeDisable?: boolean | undefined;
   updatedAt?: string | null | undefined;
+  usageAttributionCostCenterAttribute?: string | undefined;
+  usageAttributionTeamAttribute?: string | undefined;
 };
 
 /** @internal */
@@ -210,20 +293,25 @@ export const AIGovernanceSettings$outboundSchema: z.ZodType<
   allowedClientTypes: z.nullable(
     z.array(AIGovernanceSettingsAllowedClientTypes$outboundSchema),
   ).optional(),
-  auditVerbosity: z.nullable(AuditVerbosity$outboundSchema).optional(),
-  autoDiscoveryEnabled: z.nullable(z.boolean()).optional(),
+  auditVerbosity: AuditVerbosity$outboundSchema.optional(),
+  autoDiscoveryEnabled: z.boolean().optional(),
+  c1awAutospillDisabled: z.boolean().optional(),
+  c1awAutospillThresholdBytes: z.number().int().optional(),
+  codeModeConcurrency: z.number().int().optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   defaultClientLifecycle: z.nullable(MCPClientLifecycleConfig$outboundSchema)
     .optional(),
-  defaultToolClassification: z.nullable(
-    DefaultToolClassification$outboundSchema,
-  ).optional(),
+  defaultToolClassification: DefaultToolClassification$outboundSchema
+    .optional(),
   discoveryInterval: z.nullable(z.string()).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  preferCodeModeOverDirectTools: z.nullable(z.boolean()).optional(),
-  requireToolApproval: z.nullable(z.boolean()).optional(),
-  surfaceRequestableTools: z.nullable(z.boolean()).optional(),
+  enabled: z.boolean().optional(),
+  preferCodeModeOverDirectTools: z.boolean().optional(),
+  requireToolApproval: z.boolean().optional(),
+  surfaceRequestableTools: z.boolean().optional(),
+  untrustedJudgeDisable: z.boolean().optional(),
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  usageAttributionCostCenterAttribute: z.string().optional(),
+  usageAttributionTeamAttribute: z.string().optional(),
 });
 
 export function aiGovernanceSettingsToJSON(

@@ -8,17 +8,22 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The ActorObjectPermissions message.
+ * Legacy: do not use for new objects. Retained only for the existing
+ *
+ * @remarks
+ *  AppResource / AppEntitlement / access-review consumers, which will migrate to
+ *  c1.api.authorization.v1.ActorObjectPermissions in IGA-2331. New object views
+ *  should reference c1.api.authorization.v1.ActorObjectPermissions instead.
  */
 export type ActorObjectPermissions = {
   /**
    * The delete field.
    */
-  delete?: boolean | null | undefined;
+  delete?: boolean | undefined;
   /**
    * The edit field.
    */
-  edit?: boolean | null | undefined;
+  edit?: boolean | undefined;
   /**
    * The extra field.
    */
@@ -26,7 +31,7 @@ export type ActorObjectPermissions = {
   /**
    * The read field.
    */
-  read?: boolean | null | undefined;
+  read?: boolean | undefined;
 };
 
 /** @internal */
@@ -35,10 +40,10 @@ export const ActorObjectPermissions$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  delete: z.nullable(z.boolean()).optional(),
-  edit: z.nullable(z.boolean()).optional(),
+  delete: z.boolean().optional(),
+  edit: z.boolean().optional(),
   extra: z.record(z.boolean()).optional(),
-  read: z.nullable(z.boolean()).optional(),
+  read: z.boolean().optional(),
 });
 
 export function actorObjectPermissionsFromJSON(

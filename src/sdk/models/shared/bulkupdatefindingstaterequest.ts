@@ -19,6 +19,11 @@ import {
   BulkReopenAction$outboundSchema,
 } from "./bulkreopenaction.js";
 import {
+  BulkReprocessAction,
+  BulkReprocessAction$Outbound,
+  BulkReprocessAction$outboundSchema,
+} from "./bulkreprocessaction.js";
+import {
   BulkSnoozeAction,
   BulkSnoozeAction$Outbound,
   BulkSnoozeAction$outboundSchema,
@@ -56,6 +61,7 @@ import {
  *   - unsuppress
  *   - assignOwner
  *   - reopen
+ *   - reprocess
  */
 export type BulkUpdateFindingStateRequest = {
   acceptRisk?: BulkAcceptRiskAction | null | undefined;
@@ -65,6 +71,7 @@ export type BulkUpdateFindingStateRequest = {
    */
   refs?: Array<FindingRef> | null | undefined;
   reopen?: BulkReopenAction | null | undefined;
+  reprocess?: BulkReprocessAction | null | undefined;
   searchRequest?: FindingSearchRequest | null | undefined;
   snooze?: BulkSnoozeAction | null | undefined;
   suppress?: BulkSuppressAction | null | undefined;
@@ -77,6 +84,7 @@ export type BulkUpdateFindingStateRequest$Outbound = {
   assignOwner?: BulkAssignOwnerAction$Outbound | null | undefined;
   refs?: Array<FindingRef$Outbound> | null | undefined;
   reopen?: BulkReopenAction$Outbound | null | undefined;
+  reprocess?: BulkReprocessAction$Outbound | null | undefined;
   searchRequest?: FindingSearchRequest$Outbound | null | undefined;
   snooze?: BulkSnoozeAction$Outbound | null | undefined;
   suppress?: BulkSuppressAction$Outbound | null | undefined;
@@ -93,6 +101,7 @@ export const BulkUpdateFindingStateRequest$outboundSchema: z.ZodType<
   assignOwner: z.nullable(BulkAssignOwnerAction$outboundSchema).optional(),
   refs: z.nullable(z.array(FindingRef$outboundSchema)).optional(),
   reopen: z.nullable(BulkReopenAction$outboundSchema).optional(),
+  reprocess: z.nullable(BulkReprocessAction$outboundSchema).optional(),
   searchRequest: z.nullable(FindingSearchRequest$outboundSchema).optional(),
   snooze: z.nullable(BulkSnoozeAction$outboundSchema).optional(),
   suppress: z.nullable(BulkSuppressAction$outboundSchema).optional(),

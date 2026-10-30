@@ -35,11 +35,11 @@ export type RemoveFromDelegation = {
   /**
    * If true, the step will use the subject user of the automation as the subject.
    */
-  useSubjectUser?: boolean | null | undefined;
+  useSubjectUser?: boolean | undefined;
   /**
    * The userIdCel field.
    */
-  userIdCel?: string | null | undefined;
+  userIdCel?: string | undefined;
   userRef?: UserRef | null | undefined;
 };
 
@@ -51,16 +51,16 @@ export const RemoveFromDelegation$inboundSchema: z.ZodType<
 > = z.object({
   replacementUserIdCel: z.nullable(z.string()).optional(),
   replacementUserRef: z.nullable(UserRef$inboundSchema).optional(),
-  useSubjectUser: z.nullable(z.boolean()).optional(),
-  userIdCel: z.nullable(z.string()).optional(),
+  useSubjectUser: z.boolean().optional(),
+  userIdCel: z.string().optional(),
   userRef: z.nullable(UserRef$inboundSchema).optional(),
 });
 /** @internal */
 export type RemoveFromDelegation$Outbound = {
   replacementUserIdCel?: string | null | undefined;
   replacementUserRef?: UserRef$Outbound | null | undefined;
-  useSubjectUser?: boolean | null | undefined;
-  userIdCel?: string | null | undefined;
+  useSubjectUser?: boolean | undefined;
+  userIdCel?: string | undefined;
   userRef?: UserRef$Outbound | null | undefined;
 };
 
@@ -72,8 +72,8 @@ export const RemoveFromDelegation$outboundSchema: z.ZodType<
 > = z.object({
   replacementUserIdCel: z.nullable(z.string()).optional(),
   replacementUserRef: z.nullable(UserRef$outboundSchema).optional(),
-  useSubjectUser: z.nullable(z.boolean()).optional(),
-  userIdCel: z.nullable(z.string()).optional(),
+  useSubjectUser: z.boolean().optional(),
+  userIdCel: z.string().optional(),
   userRef: z.nullable(UserRef$outboundSchema).optional(),
 });
 

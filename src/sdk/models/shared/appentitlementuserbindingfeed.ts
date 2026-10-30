@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The eventType field.
  */
-export const EventType = {
+export const AppEntitlementUserBindingFeedEventType = {
   GrantEventTypeUnspecified: "GRANT_EVENT_TYPE_UNSPECIFIED",
   GrantEventTypeAdded: "GRANT_EVENT_TYPE_ADDED",
   GrantEventTypeRemoved: "GRANT_EVENT_TYPE_REMOVED",
@@ -20,7 +20,9 @@ export const EventType = {
 /**
  * The eventType field.
  */
-export type EventType = OpenEnum<typeof EventType>;
+export type AppEntitlementUserBindingFeedEventType = OpenEnum<
+  typeof AppEntitlementUserBindingFeedEventType
+>;
 
 /**
  * The AppEntitlementUserBindingFeed message.
@@ -29,32 +31,32 @@ export type AppEntitlementUserBindingFeed = {
   /**
    * The ID of the app entitlement that the app user has access to
    */
-  appEntitlementId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
   /**
    * The ID of the app associated with the app entitlement
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The ID of the app user that has access to the app entitlement
    */
-  appUserId?: string | null | undefined;
+  appUserId?: string | undefined;
   date?: Date | null | undefined;
   /**
    * The eventType field.
    */
-  eventType?: EventType | null | undefined;
+  eventType?: AppEntitlementUserBindingFeedEventType | undefined;
   /**
    * The ticketId field.
    */
-  ticketId?: string | null | undefined;
+  ticketId?: string | undefined;
 };
 
 /** @internal */
-export const EventType$inboundSchema: z.ZodType<
-  EventType,
+export const AppEntitlementUserBindingFeedEventType$inboundSchema: z.ZodType<
+  AppEntitlementUserBindingFeedEventType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EventType);
+> = openEnums.inboundSchema(AppEntitlementUserBindingFeedEventType);
 
 /** @internal */
 export const AppEntitlementUserBindingFeed$inboundSchema: z.ZodType<
@@ -62,14 +64,14 @@ export const AppEntitlementUserBindingFeed$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appUserId: z.nullable(z.string()).optional(),
+  appEntitlementId: z.string().optional(),
+  appId: z.string().optional(),
+  appUserId: z.string().optional(),
   date: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  eventType: z.nullable(EventType$inboundSchema).optional(),
-  ticketId: z.nullable(z.string()).optional(),
+  eventType: AppEntitlementUserBindingFeedEventType$inboundSchema.optional(),
+  ticketId: z.string().optional(),
 });
 
 export function appEntitlementUserBindingFeedFromJSON(

@@ -14,7 +14,7 @@ export type TaskAuditSLAEscalation = {
   /**
    * The message field.
    */
-  message?: string | null | undefined;
+  message?: string | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const TaskAuditSLAEscalation$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  message: z.nullable(z.string()).optional(),
+  message: z.string().optional(),
 });
 
 export function taskAuditSLAEscalationFromJSON(

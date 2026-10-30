@@ -12,18 +12,21 @@ import {
 } from "./mcpaccessprofiletoolbindinghistoryentry.js";
 
 /**
- * The MCPAccessProfileToolBindingServiceListToolsByProfileHistoryResponse message.
+ * Contains a page of change-history entries for the tools bound to one toolset
+ *
+ * @remarks
+ *  sorted newest first.
  */
 export type MCPAccessProfileToolBindingServiceListToolsByProfileHistoryResponse =
   {
     /**
-     * The list field.
+     * The page of history entries, newest first.
      */
     list?: Array<MCPAccessProfileToolBindingHistoryEntry> | null | undefined;
     /**
-     * The nextPageToken field.
+     * Pagination token for the next page, or empty if there are no more results.
      */
-    nextPageToken?: string | null | undefined;
+    nextPageToken?: string | undefined;
   };
 
 /** @internal */
@@ -36,7 +39,7 @@ export const MCPAccessProfileToolBindingServiceListToolsByProfileHistoryResponse
     list: z.nullable(
       z.array(MCPAccessProfileToolBindingHistoryEntry$inboundSchema),
     ).optional(),
-    nextPageToken: z.nullable(z.string()).optional(),
+    nextPageToken: z.string().optional(),
   });
 
 export function mcpAccessProfileToolBindingServiceListToolsByProfileHistoryResponseFromJSON(

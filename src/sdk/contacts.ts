@@ -14,7 +14,8 @@ export class Contacts extends ClientSDK {
    * Get Contacts
    *
    * @remarks
-   * Invokes the c1.api.settings.v1.ContactsService.GetContacts method.
+   * GetContacts returns the organization's security, billing, and operations
+   *  contact email addresses.
    */
   async getContacts(
     options?: RequestOptions,
@@ -29,7 +30,10 @@ export class Contacts extends ClientSDK {
    * Update Contacts
    *
    * @remarks
-   * Invokes the c1.api.settings.v1.ContactsService.UpdateContacts method.
+   * UpdateContacts updates the organization's security, billing, and
+   *  operations contact email addresses. If update_mask is set, only the
+   *  selected fields are changed; otherwise all contact fields are replaced
+   *  with the values in the request.
    */
   async updateContacts(
     request?: shared.UpdateContactsRequest | undefined,

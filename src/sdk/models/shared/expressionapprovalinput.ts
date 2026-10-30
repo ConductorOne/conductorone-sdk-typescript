@@ -16,7 +16,7 @@ export type ExpressionApprovalInput = {
   /**
    * Configuration to allow self approval of if the user is specified and also the target of the ticket.
    */
-  allowSelfApproval?: boolean | null | undefined;
+  allowSelfApproval?: boolean | undefined;
   /**
    * Array of dynamic expressions to determine the approvers.  The first expression to return a non-empty list of users will be used.
    */
@@ -24,7 +24,7 @@ export type ExpressionApprovalInput = {
   /**
    * Configuration to allow a fallback if the expression does not return a valid list of users.
    */
-  fallback?: boolean | null | undefined;
+  fallback?: boolean | undefined;
   /**
    * Configuration to specify which groups to fallback to if fallback is enabled and the expression does not return a valid list of users.
    */
@@ -36,22 +36,22 @@ export type ExpressionApprovalInput = {
   /**
    * Configuration to enable fallback for group fallback.
    */
-  isGroupFallbackEnabled?: boolean | null | undefined;
+  isGroupFallbackEnabled?: boolean | undefined;
   /**
    * Configuration to require distinct approvers across approval steps of a rule.
    */
-  requireDistinctApprovers?: boolean | null | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
 export type ExpressionApprovalInput$Outbound = {
-  allowSelfApproval?: boolean | null | undefined;
+  allowSelfApproval?: boolean | undefined;
   expressions?: Array<string> | null | undefined;
-  fallback?: boolean | null | undefined;
+  fallback?: boolean | undefined;
   fallbackGroupIds?: Array<AppEntitlementReference$Outbound> | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
-  isGroupFallbackEnabled?: boolean | null | undefined;
-  requireDistinctApprovers?: boolean | null | undefined;
+  isGroupFallbackEnabled?: boolean | undefined;
+  requireDistinctApprovers?: boolean | undefined;
 };
 
 /** @internal */
@@ -60,14 +60,14 @@ export const ExpressionApprovalInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ExpressionApprovalInput
 > = z.object({
-  allowSelfApproval: z.nullable(z.boolean()).optional(),
+  allowSelfApproval: z.boolean().optional(),
   expressions: z.nullable(z.array(z.string())).optional(),
-  fallback: z.nullable(z.boolean()).optional(),
+  fallback: z.boolean().optional(),
   fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$outboundSchema))
     .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-  isGroupFallbackEnabled: z.nullable(z.boolean()).optional(),
-  requireDistinctApprovers: z.nullable(z.boolean()).optional(),
+  isGroupFallbackEnabled: z.boolean().optional(),
+  requireDistinctApprovers: z.boolean().optional(),
 });
 
 export function expressionApprovalInputToJSON(

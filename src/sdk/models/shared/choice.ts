@@ -16,7 +16,7 @@ export type Choice = {
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   label?: DynamicString | null | undefined;
 };
 
@@ -24,7 +24,7 @@ export type Choice = {
 export const Choice$inboundSchema: z.ZodType<Choice, z.ZodTypeDef, unknown> = z
   .object({
     description: z.nullable(DynamicString$inboundSchema).optional(),
-    id: z.nullable(z.string()).optional(),
+    id: z.string().optional(),
     label: z.nullable(DynamicString$inboundSchema).optional(),
   });
 

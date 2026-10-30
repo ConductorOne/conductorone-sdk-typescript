@@ -17,7 +17,7 @@ export type RemoveEntitlementMembershipResponse = {
    * @remarks
    *  It's aka. the JML task.
    */
-  revokeTaskId?: string | null | undefined;
+  revokeTaskId?: string | undefined;
 };
 
 /** @internal */
@@ -26,7 +26,7 @@ export const RemoveEntitlementMembershipResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  revokeTaskId: z.nullable(z.string()).optional(),
+  revokeTaskId: z.string().optional(),
 });
 
 export function removeEntitlementMembershipResponseFromJSON(

@@ -7,11 +7,35 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  BlockOutputConfig,
+  BlockOutputConfig$inboundSchema,
+  BlockOutputConfig$Outbound,
+  BlockOutputConfig$outboundSchema,
+} from "./blockoutputconfig.js";
+import {
+  BlockToolCallConfig,
+  BlockToolCallConfig$inboundSchema,
+  BlockToolCallConfig$Outbound,
+  BlockToolCallConfig$outboundSchema,
+} from "./blocktoolcallconfig.js";
+import {
   CreditCardBlockingConfig,
   CreditCardBlockingConfig$inboundSchema,
   CreditCardBlockingConfig$Outbound,
   CreditCardBlockingConfig$outboundSchema,
 } from "./creditcardblockingconfig.js";
+import {
+  EncodedContentGuardConfig,
+  EncodedContentGuardConfig$inboundSchema,
+  EncodedContentGuardConfig$Outbound,
+  EncodedContentGuardConfig$outboundSchema,
+} from "./encodedcontentguardconfig.js";
+import {
+  LinkFilterConfig,
+  LinkFilterConfig$inboundSchema,
+  LinkFilterConfig$Outbound,
+  LinkFilterConfig$outboundSchema,
+} from "./linkfilterconfig.js";
 import {
   PIIRedactionConfig,
   PIIRedactionConfig$inboundSchema,
@@ -19,17 +43,41 @@ import {
   PIIRedactionConfig$outboundSchema,
 } from "./piiredactionconfig.js";
 import {
+  PreToolBlockConfig,
+  PreToolBlockConfig$inboundSchema,
+  PreToolBlockConfig$Outbound,
+  PreToolBlockConfig$outboundSchema,
+} from "./pretoolblockconfig.js";
+import {
+  PromptInjectionScanConfig,
+  PromptInjectionScanConfig$inboundSchema,
+  PromptInjectionScanConfig$Outbound,
+  PromptInjectionScanConfig$outboundSchema,
+} from "./promptinjectionscanconfig.js";
+import {
   QueryScopeLimitConfig,
   QueryScopeLimitConfig$inboundSchema,
   QueryScopeLimitConfig$Outbound,
   QueryScopeLimitConfig$outboundSchema,
 } from "./queryscopelimitconfig.js";
 import {
+  SecretsMaskingConfig,
+  SecretsMaskingConfig$inboundSchema,
+  SecretsMaskingConfig$Outbound,
+  SecretsMaskingConfig$outboundSchema,
+} from "./secretsmaskingconfig.js";
+import {
   SensitiveFileGuardConfig,
   SensitiveFileGuardConfig$inboundSchema,
   SensitiveFileGuardConfig$Outbound,
   SensitiveFileGuardConfig$outboundSchema,
 } from "./sensitivefileguardconfig.js";
+import {
+  ToolOutputSizeGuardConfig,
+  ToolOutputSizeGuardConfig$inboundSchema,
+  ToolOutputSizeGuardConfig$Outbound,
+  ToolOutputSizeGuardConfig$outboundSchema,
+} from "./tooloutputsizeguardconfig.js";
 import {
   WriteAuthorizationConfig,
   WriteAuthorizationConfig$inboundSchema,
@@ -49,12 +97,28 @@ import {
  *   - queryScopeLimit
  *   - writeAuthorization
  *   - sensitiveFileGuard
+ *   - toolOutputSizeGuard
+ *   - secretsMasking
+ *   - linkFilter
+ *   - encodedContentGuard
+ *   - promptInjectionScan
+ *   - blockOutput
+ *   - blockToolCall
+ *   - preToolBlock
  */
 export type BuiltInPattern = {
+  blockOutput?: BlockOutputConfig | null | undefined;
+  blockToolCall?: BlockToolCallConfig | null | undefined;
   creditCardBlocking?: CreditCardBlockingConfig | null | undefined;
+  encodedContentGuard?: EncodedContentGuardConfig | null | undefined;
+  linkFilter?: LinkFilterConfig | null | undefined;
   piiRedaction?: PIIRedactionConfig | null | undefined;
+  preToolBlock?: PreToolBlockConfig | null | undefined;
+  promptInjectionScan?: PromptInjectionScanConfig | null | undefined;
   queryScopeLimit?: QueryScopeLimitConfig | null | undefined;
+  secretsMasking?: SecretsMaskingConfig | null | undefined;
   sensitiveFileGuard?: SensitiveFileGuardConfig | null | undefined;
+  toolOutputSizeGuard?: ToolOutputSizeGuardConfig | null | undefined;
   writeAuthorization?: WriteAuthorizationConfig | null | undefined;
 };
 
@@ -64,21 +128,40 @@ export const BuiltInPattern$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  blockOutput: z.nullable(BlockOutputConfig$inboundSchema).optional(),
+  blockToolCall: z.nullable(BlockToolCallConfig$inboundSchema).optional(),
   creditCardBlocking: z.nullable(CreditCardBlockingConfig$inboundSchema)
     .optional(),
+  encodedContentGuard: z.nullable(EncodedContentGuardConfig$inboundSchema)
+    .optional(),
+  linkFilter: z.nullable(LinkFilterConfig$inboundSchema).optional(),
   piiRedaction: z.nullable(PIIRedactionConfig$inboundSchema).optional(),
+  preToolBlock: z.nullable(PreToolBlockConfig$inboundSchema).optional(),
+  promptInjectionScan: z.nullable(PromptInjectionScanConfig$inboundSchema)
+    .optional(),
   queryScopeLimit: z.nullable(QueryScopeLimitConfig$inboundSchema).optional(),
+  secretsMasking: z.nullable(SecretsMaskingConfig$inboundSchema).optional(),
   sensitiveFileGuard: z.nullable(SensitiveFileGuardConfig$inboundSchema)
+    .optional(),
+  toolOutputSizeGuard: z.nullable(ToolOutputSizeGuardConfig$inboundSchema)
     .optional(),
   writeAuthorization: z.nullable(WriteAuthorizationConfig$inboundSchema)
     .optional(),
 });
 /** @internal */
 export type BuiltInPattern$Outbound = {
+  blockOutput?: BlockOutputConfig$Outbound | null | undefined;
+  blockToolCall?: BlockToolCallConfig$Outbound | null | undefined;
   creditCardBlocking?: CreditCardBlockingConfig$Outbound | null | undefined;
+  encodedContentGuard?: EncodedContentGuardConfig$Outbound | null | undefined;
+  linkFilter?: LinkFilterConfig$Outbound | null | undefined;
   piiRedaction?: PIIRedactionConfig$Outbound | null | undefined;
+  preToolBlock?: PreToolBlockConfig$Outbound | null | undefined;
+  promptInjectionScan?: PromptInjectionScanConfig$Outbound | null | undefined;
   queryScopeLimit?: QueryScopeLimitConfig$Outbound | null | undefined;
+  secretsMasking?: SecretsMaskingConfig$Outbound | null | undefined;
   sensitiveFileGuard?: SensitiveFileGuardConfig$Outbound | null | undefined;
+  toolOutputSizeGuard?: ToolOutputSizeGuardConfig$Outbound | null | undefined;
   writeAuthorization?: WriteAuthorizationConfig$Outbound | null | undefined;
 };
 
@@ -88,11 +171,22 @@ export const BuiltInPattern$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BuiltInPattern
 > = z.object({
+  blockOutput: z.nullable(BlockOutputConfig$outboundSchema).optional(),
+  blockToolCall: z.nullable(BlockToolCallConfig$outboundSchema).optional(),
   creditCardBlocking: z.nullable(CreditCardBlockingConfig$outboundSchema)
     .optional(),
+  encodedContentGuard: z.nullable(EncodedContentGuardConfig$outboundSchema)
+    .optional(),
+  linkFilter: z.nullable(LinkFilterConfig$outboundSchema).optional(),
   piiRedaction: z.nullable(PIIRedactionConfig$outboundSchema).optional(),
+  preToolBlock: z.nullable(PreToolBlockConfig$outboundSchema).optional(),
+  promptInjectionScan: z.nullable(PromptInjectionScanConfig$outboundSchema)
+    .optional(),
   queryScopeLimit: z.nullable(QueryScopeLimitConfig$outboundSchema).optional(),
+  secretsMasking: z.nullable(SecretsMaskingConfig$outboundSchema).optional(),
   sensitiveFileGuard: z.nullable(SensitiveFileGuardConfig$outboundSchema)
+    .optional(),
+  toolOutputSizeGuard: z.nullable(ToolOutputSizeGuardConfig$outboundSchema)
     .optional(),
   writeAuthorization: z.nullable(WriteAuthorizationConfig$outboundSchema)
     .optional(),

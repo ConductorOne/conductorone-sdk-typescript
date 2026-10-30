@@ -30,7 +30,10 @@ import { Result } from "../sdk/types/fp.js";
  * Update Contacts
  *
  * @remarks
- * Invokes the c1.api.settings.v1.ContactsService.UpdateContacts method.
+ * UpdateContacts updates the organization's security, billing, and
+ *  operations contact email addresses. If update_mask is set, only the
+ *  selected fields are changed; otherwise all contact fields are replaced
+ *  with the values in the request.
  */
 export function contactsUpdateContacts(
   client: ConductoroneSDKTypescriptCore,

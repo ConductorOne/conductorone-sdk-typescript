@@ -8,7 +8,9 @@ import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { AccessScope, AccessScope$inboundSchema } from "./accessscope.js";
 import { ProfileFilter, ProfileFilter$inboundSchema } from "./profilefilter.js";
+import { ResourceScope, ResourceScope$inboundSchema } from "./resourcescope.js";
 
 /**
  * Execution status of this analysis (e.g., running, completed, failed).
@@ -27,35 +29,64 @@ export type CustomAnalysisResultViewStatus = OpenEnum<
 >;
 
 /**
+ * Structured terminal reason, unspecified for legacy results.
+ */
+export const TerminalReason = {
+  CustomAnalysisTerminalReasonUnspecified:
+    "CUSTOM_ANALYSIS_TERMINAL_REASON_UNSPECIFIED",
+  CustomAnalysisTerminalReasonError: "CUSTOM_ANALYSIS_TERMINAL_REASON_ERROR",
+  CustomAnalysisTerminalReasonSuperseded:
+    "CUSTOM_ANALYSIS_TERMINAL_REASON_SUPERSEDED",
+} as const;
+/**
+ * Structured terminal reason, unspecified for legacy results.
+ */
+export type TerminalReason = OpenEnum<typeof TerminalReason>;
+
+/**
  * CustomAnalysisResultView is a lightweight summary of a past custom analysis run.
  */
 export type CustomAnalysisResultView = {
+  accessScope?: AccessScope | null | undefined;
   /**
    * Number of users in the cohort.
    */
-  cohortSize?: number | null | undefined;
+  cohortSize?: number | undefined;
   completedAt?: Date | null | undefined;
   createdAt?: Date | null | undefined;
   /**
+   * User who created this analysis, empty for legacy results.
+   */
+  createdByUserId?: string | undefined;
+  /**
    * Error message if the analysis failed, empty on success.
    */
-  errorMessage?: string | null | undefined;
+  errorMessage?: string | undefined;
   /**
    * Unique identifier for this custom analysis result.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * Profile filters that defined the cohort for this analysis.
    */
   profileFilters?: Array<ProfileFilter> | null | undefined;
+  resourceScope?: ResourceScope | null | undefined;
   /**
    * Execution status of this analysis (e.g., running, completed, failed).
    */
-  status?: CustomAnalysisResultViewStatus | null | undefined;
+  status?: CustomAnalysisResultViewStatus | undefined;
   /**
    * Number of role suggestions generated.
    */
-  suggestionsGenerated?: number | null | undefined;
+  suggestionsGenerated?: number | undefined;
+  /**
+   * Newer result that superseded this analysis, when applicable.
+   */
+  supersededByResultId?: string | undefined;
+  /**
+   * Structured terminal reason, unspecified for legacy results.
+   */
+  terminalReason?: TerminalReason | undefined;
 };
 
 /** @internal */
@@ -66,23 +97,35 @@ export const CustomAnalysisResultViewStatus$inboundSchema: z.ZodType<
 > = openEnums.inboundSchema(CustomAnalysisResultViewStatus);
 
 /** @internal */
+export const TerminalReason$inboundSchema: z.ZodType<
+  TerminalReason,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(TerminalReason);
+
+/** @internal */
 export const CustomAnalysisResultView$inboundSchema: z.ZodType<
   CustomAnalysisResultView,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  cohortSize: z.nullable(z.number().int()).optional(),
+  accessScope: z.nullable(AccessScope$inboundSchema).optional(),
+  cohortSize: z.number().int().optional(),
   completedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  errorMessage: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
+  createdByUserId: z.string().optional(),
+  errorMessage: z.string().optional(),
+  id: z.string().optional(),
   profileFilters: z.nullable(z.array(ProfileFilter$inboundSchema)).optional(),
-  status: z.nullable(CustomAnalysisResultViewStatus$inboundSchema).optional(),
-  suggestionsGenerated: z.nullable(z.number().int()).optional(),
+  resourceScope: z.nullable(ResourceScope$inboundSchema).optional(),
+  status: CustomAnalysisResultViewStatus$inboundSchema.optional(),
+  suggestionsGenerated: z.number().int().optional(),
+  supersededByResultId: z.string().optional(),
+  terminalReason: TerminalReason$inboundSchema.optional(),
 });
 
 export function customAnalysisResultViewFromJSON(

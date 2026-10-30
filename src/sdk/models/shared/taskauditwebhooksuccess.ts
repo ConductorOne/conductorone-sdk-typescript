@@ -12,21 +12,25 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type TaskAuditWebhookSuccess = {
   /**
+   * Optional comment supplied by the provisioning callback.
+   */
+  comment?: string | undefined;
+  /**
    * The webhookId field.
    */
-  webhookId?: string | null | undefined;
+  webhookId?: string | undefined;
   /**
    * The webhookInstanceId field.
    */
-  webhookInstanceId?: string | null | undefined;
+  webhookInstanceId?: string | undefined;
   /**
    * The webhookName field.
    */
-  webhookName?: string | null | undefined;
+  webhookName?: string | undefined;
   /**
    * The webhookUrl field.
    */
-  webhookUrl?: string | null | undefined;
+  webhookUrl?: string | undefined;
 };
 
 /** @internal */
@@ -35,10 +39,11 @@ export const TaskAuditWebhookSuccess$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  webhookId: z.nullable(z.string()).optional(),
-  webhookInstanceId: z.nullable(z.string()).optional(),
-  webhookName: z.nullable(z.string()).optional(),
-  webhookUrl: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
+  webhookId: z.string().optional(),
+  webhookInstanceId: z.string().optional(),
+  webhookName: z.string().optional(),
+  webhookUrl: z.string().optional(),
 });
 
 export function taskAuditWebhookSuccessFromJSON(

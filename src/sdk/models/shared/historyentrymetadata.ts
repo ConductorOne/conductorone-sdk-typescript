@@ -15,10 +15,7 @@ import {
 } from "./historyannotation.js";
 
 /**
- * Storage-model enum re-exported here for wire compatibility with the
- *
- * @remarks
- *  storage row. UNSPECIFIED should never appear on the wire.
+ * UNSPECIFIED should never appear on the wire.
  */
 export const ChangeKind = {
   ChangeKindUnspecified: "CHANGE_KIND_UNSPECIFIED",
@@ -27,10 +24,7 @@ export const ChangeKind = {
   ChangeKindHardDelete: "CHANGE_KIND_HARD_DELETE",
 } as const;
 /**
- * Storage-model enum re-exported here for wire compatibility with the
- *
- * @remarks
- *  storage row. UNSPECIFIED should never appear on the wire.
+ * UNSPECIFIED should never appear on the wire.
  */
 export type ChangeKind = OpenEnum<typeof ChangeKind>;
 
@@ -52,17 +46,14 @@ export type HistoryEntryMetadata = {
    */
   annotations?: Array<HistoryAnnotation> | null | undefined;
   /**
-   * Storage-model enum re-exported here for wire compatibility with the
-   *
-   * @remarks
-   *  storage row. UNSPECIFIED should never appear on the wire.
+   * UNSPECIFIED should never appear on the wire.
    */
-  changeKind?: ChangeKind | null | undefined;
+  changeKind?: ChangeKind | undefined;
   createdAt?: Date | null | undefined;
   /**
    * KSUID. Same value as c1.models.history.v1.ObjectHistory.id.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * System Log event id — KSUID of the OCSF event recorded for this
    *
@@ -70,14 +61,14 @@ export type HistoryEntryMetadata = {
    *  write. Empty for non-RPC writes (workflows, cron). Customer-facing
    *  copy says "System Log event"; the underlying format is OCSF.
    */
-  syslogEventId?: string | null | undefined;
+  syslogEventId?: string | undefined;
   /**
    * OTel trace correlation. Empty when no valid span at write time.
    *
    * @remarks
    *  32-hex-char otel trace id or empty.
    */
-  traceId?: string | null | undefined;
+  traceId?: string | undefined;
 };
 
 /** @internal */
@@ -95,13 +86,13 @@ export const HistoryEntryMetadata$inboundSchema: z.ZodType<
 > = z.object({
   actor: z.nullable(HistoryActor$inboundSchema).optional(),
   annotations: z.nullable(z.array(HistoryAnnotation$inboundSchema)).optional(),
-  changeKind: z.nullable(ChangeKind$inboundSchema).optional(),
+  changeKind: ChangeKind$inboundSchema.optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  id: z.nullable(z.string()).optional(),
-  syslogEventId: z.nullable(z.string()).optional(),
-  traceId: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
+  syslogEventId: z.string().optional(),
+  traceId: z.string().optional(),
 });
 
 export function historyEntryMetadataFromJSON(

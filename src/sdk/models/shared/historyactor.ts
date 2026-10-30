@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The kind field.
  */
-export const Kind = {
+export const HistoryActorKind = {
   ActorKindUnspecified: "ACTOR_KIND_UNSPECIFIED",
   ActorKindApi: "ACTOR_KIND_API",
   ActorKindSlack: "ACTOR_KIND_SLACK",
@@ -25,13 +25,13 @@ export const Kind = {
 /**
  * The kind field.
  */
-export type Kind = OpenEnum<typeof Kind>;
+export type HistoryActorKind = OpenEnum<typeof HistoryActorKind>;
 
 /**
  * HistoryActor is a typed reference to whoever performed the change.
  *
  * @remarks
- *  kind mirrors the storage-model ActorKind enum; user_id is set when
+ *  kind identifies the actor's service; user_id is set when
  *  kind corresponds to a user principal (API / SUPPORT) so the frontend
  *  can resolve the user via its own avatar / lookup hooks. Protos
  *  reference objects by id; the frontend renders / caches itself.
@@ -46,7 +46,7 @@ export type HistoryActor = {
   /**
    * The kind field.
    */
-  kind?: Kind | null | undefined;
+  kind?: HistoryActorKind | undefined;
   /**
    * Bare KSUID. Set when kind = ACTOR_KIND_API or ACTOR_KIND_SUPPORT.
    *
@@ -54,12 +54,15 @@ export type HistoryActor = {
    *  Empty otherwise. The frontend resolves user_id → display name via
    *  the same lookup paths it uses elsewhere (avatars, mentions, ...).
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
-export const Kind$inboundSchema: z.ZodType<Kind, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Kind);
+export const HistoryActorKind$inboundSchema: z.ZodType<
+  HistoryActorKind,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(HistoryActorKind);
 
 /** @internal */
 export const HistoryActor$inboundSchema: z.ZodType<
@@ -67,8 +70,8 @@ export const HistoryActor$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  kind: z.nullable(Kind$inboundSchema).optional(),
-  userId: z.nullable(z.string()).optional(),
+  kind: HistoryActorKind$inboundSchema.optional(),
+  userId: z.string().optional(),
 });
 
 export function historyActorFromJSON(

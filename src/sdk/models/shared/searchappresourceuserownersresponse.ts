@@ -22,7 +22,7 @@ export type SearchAppResourceUserOwnersResponse = {
   /**
    * The nextPageToken field.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -32,7 +32,7 @@ export const SearchAppResourceUserOwnersResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   list: z.nullable(z.array(AppResourceOwnerUser$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function searchAppResourceUserOwnersResponseFromJSON(

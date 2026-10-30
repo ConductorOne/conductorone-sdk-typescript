@@ -1,0 +1,22 @@
+# ReportingServiceUpdateRequest
+
+Both editable fields are optional; an empty one leaves the stored value alone.
+ At least one must be set.
+
+## Example Usage
+
+```typescript
+import { ReportingServiceUpdateRequest } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: ReportingServiceUpdateRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                                              | Type                                                                                                                                               | Required                                                                                                                                           | Description                                                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `description`                                                                                                                                      | *string*                                                                                                                                           | :heavy_minus_sign:                                                                                                                                 | The description field.                                                                                                                             |
+| `displayName`                                                                                                                                      | *string*                                                                                                                                           | :heavy_minus_sign:                                                                                                                                 | The displayName field.                                                                                                                             |
+| `expectedProgramId`                                                                                                                                | *string*                                                                                                                                           | :heavy_minus_sign:                                                                                                                                 | Required with parameter_values. Prevents values prepared for one source<br/> version from being installed after an assistant edit advances the report. |
+| `parameterValues`                                                                                                                                  | Record<string, *any*>                                                                                                                              | :heavy_minus_sign:                                                                                                                                 | N/A                                                                                                                                                |
+| `prompt`                                                                                                                                           | *string*                                                                                                                                           | :heavy_minus_sign:                                                                                                                                 | Editing this does not re-plan, so it may drift from<br/> program.planned_from_prompt — that drift is how a stale report is detected.               |

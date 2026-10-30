@@ -14,6 +14,7 @@ export const AccessReviewScopeAppUserStatuses = {
   AppUserStatusEnabled: "APP_USER_STATUS_ENABLED",
   AppUserStatusDisabled: "APP_USER_STATUS_DISABLED",
   AppUserStatusDeleted: "APP_USER_STATUS_DELETED",
+  AppUserStatusPending: "APP_USER_STATUS_PENDING",
 } as const;
 export type AccessReviewScopeAppUserStatuses = OpenEnum<
   typeof AccessReviewScopeAppUserStatuses

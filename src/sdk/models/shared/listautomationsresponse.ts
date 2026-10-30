@@ -19,7 +19,7 @@ export type ListAutomationsResponse = {
   /**
    * Token to retrieve the next page of results, empty when no more results exist.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -29,7 +29,7 @@ export const ListAutomationsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   list: z.nullable(z.array(Automation$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function listAutomationsResponseFromJSON(

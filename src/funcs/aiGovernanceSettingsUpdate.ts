@@ -31,10 +31,11 @@ import { Result } from "../sdk/types/fp.js";
  *
  * @remarks
  * Update the tenant's AI governance settings. Requires update_mask listing
- *  which fields to apply (e.g. require_tool_approval,
- *  default_tool_classification, audit_verbosity, auto_discovery_enabled,
+ *  which fields to apply (e.g. default_tool_classification,
+ *  audit_verbosity, auto_discovery_enabled,
  *  discovery_interval, prefer_code_mode_over_direct_tools,
- *  surface_requestable_tools, allowed_client_types, default_client_lifecycle).
+ *  surface_requestable_tools, untrusted_judge_disable, allowed_client_types,
+ *  default_client_lifecycle).
  *  Only masked fields change. Returns the updated settings.
  */
 export function aiGovernanceSettingsUpdate(

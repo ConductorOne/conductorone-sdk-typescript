@@ -8,6 +8,18 @@ import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AppResourceRef,
+  AppResourceRef$inboundSchema,
+  AppResourceRef$Outbound,
+  AppResourceRef$outboundSchema,
+} from "./appresourceref.js";
+import {
+  ReviewSubject,
+  ReviewSubject$inboundSchema,
+  ReviewSubject$Outbound,
+  ReviewSubject$outboundSchema,
+} from "./reviewsubject.js";
 
 /**
  * The outcome of the certification.
@@ -27,37 +39,44 @@ export type TaskTypeCertifyOutcome = OpenEnum<typeof TaskTypeCertifyOutcome>;
 
 /**
  * The TaskTypeCertify message indicates that a task is a certify task and all related details.
+ *
+ * @remarks
+ *
+ * This message contains a oneof named principal. Only a single field of the following list may be set at a time:
+ *   - resource
  */
 export type TaskTypeCertify = {
   /**
    * The ID of the access review.
    */
-  accessReviewId?: string | null | undefined;
+  accessReviewId?: string | undefined;
   /**
    * The ID of the specific access review object that owns this certify task. This is also set on a revoke task if the revoke task is created from the denied outcome of a certify task.
    */
-  accessReviewSelection?: string | null | undefined;
+  accessReviewSelection?: string | undefined;
   /**
    * The ID of the app entitlement.
    */
-  appEntitlementId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
   /**
    * The ID of the app.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The ID of the app user.
    */
-  appUserId?: string | null | undefined;
+  appUserId?: string | undefined;
   /**
    * The ID of the user.
    */
-  identityUserId?: string | null | undefined;
+  identityUserId?: string | undefined;
   /**
    * The outcome of the certification.
    */
-  outcome?: TaskTypeCertifyOutcome | null | undefined;
+  outcome?: TaskTypeCertifyOutcome | undefined;
   outcomeTime?: Date | null | undefined;
+  resource?: AppResourceRef | null | undefined;
+  reviewSubject?: ReviewSubject | null | undefined;
 };
 
 /** @internal */
@@ -79,27 +98,31 @@ export const TaskTypeCertify$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accessReviewId: z.nullable(z.string()).optional(),
-  accessReviewSelection: z.nullable(z.string()).optional(),
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appUserId: z.nullable(z.string()).optional(),
-  identityUserId: z.nullable(z.string()).optional(),
-  outcome: z.nullable(TaskTypeCertifyOutcome$inboundSchema).optional(),
+  accessReviewId: z.string().optional(),
+  accessReviewSelection: z.string().optional(),
+  appEntitlementId: z.string().optional(),
+  appId: z.string().optional(),
+  appUserId: z.string().optional(),
+  identityUserId: z.string().optional(),
+  outcome: TaskTypeCertifyOutcome$inboundSchema.optional(),
   outcomeTime: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
+  resource: z.nullable(AppResourceRef$inboundSchema).optional(),
+  reviewSubject: z.nullable(ReviewSubject$inboundSchema).optional(),
 });
 /** @internal */
 export type TaskTypeCertify$Outbound = {
-  accessReviewId?: string | null | undefined;
-  accessReviewSelection?: string | null | undefined;
-  appEntitlementId?: string | null | undefined;
-  appId?: string | null | undefined;
-  appUserId?: string | null | undefined;
-  identityUserId?: string | null | undefined;
-  outcome?: string | null | undefined;
+  accessReviewId?: string | undefined;
+  accessReviewSelection?: string | undefined;
+  appEntitlementId?: string | undefined;
+  appId?: string | undefined;
+  appUserId?: string | undefined;
+  identityUserId?: string | undefined;
+  outcome?: string | undefined;
   outcomeTime?: string | null | undefined;
+  resource?: AppResourceRef$Outbound | null | undefined;
+  reviewSubject?: ReviewSubject$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -108,14 +131,16 @@ export const TaskTypeCertify$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskTypeCertify
 > = z.object({
-  accessReviewId: z.nullable(z.string()).optional(),
-  accessReviewSelection: z.nullable(z.string()).optional(),
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appUserId: z.nullable(z.string()).optional(),
-  identityUserId: z.nullable(z.string()).optional(),
-  outcome: z.nullable(TaskTypeCertifyOutcome$outboundSchema).optional(),
+  accessReviewId: z.string().optional(),
+  accessReviewSelection: z.string().optional(),
+  appEntitlementId: z.string().optional(),
+  appId: z.string().optional(),
+  appUserId: z.string().optional(),
+  identityUserId: z.string().optional(),
+  outcome: TaskTypeCertifyOutcome$outboundSchema.optional(),
   outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  resource: z.nullable(AppResourceRef$outboundSchema).optional(),
+  reviewSubject: z.nullable(ReviewSubject$outboundSchema).optional(),
 });
 
 export function taskTypeCertifyToJSON(

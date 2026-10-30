@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod/v3";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * A reference to a specific app resource by its composite key.
@@ -11,22 +14,32 @@ export type AppResourceRef = {
   /**
    * The ID of the app that owns the resource.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The ID of the resource type that classifies this resource.
    */
-  appResourceTypeId?: string | null | undefined;
+  appResourceTypeId?: string | undefined;
   /**
    * The unique ID of the app resource.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
+export const AppResourceRef$inboundSchema: z.ZodType<
+  AppResourceRef,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  appId: z.string().optional(),
+  appResourceTypeId: z.string().optional(),
+  id: z.string().optional(),
+});
+/** @internal */
 export type AppResourceRef$Outbound = {
-  appId?: string | null | undefined;
-  appResourceTypeId?: string | null | undefined;
-  id?: string | null | undefined;
+  appId?: string | undefined;
+  appResourceTypeId?: string | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -35,11 +48,20 @@ export const AppResourceRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppResourceRef
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  appResourceTypeId: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  appResourceTypeId: z.string().optional(),
+  id: z.string().optional(),
 });
 
 export function appResourceRefToJSON(appResourceRef: AppResourceRef): string {
   return JSON.stringify(AppResourceRef$outboundSchema.parse(appResourceRef));
+}
+export function appResourceRefFromJSON(
+  jsonString: string,
+): SafeParseResult<AppResourceRef, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AppResourceRef$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AppResourceRef' from JSON`,
+  );
 }

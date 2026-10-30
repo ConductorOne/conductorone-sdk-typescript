@@ -14,7 +14,7 @@ export type ReplacePolicy = {
   /**
    * The policyId field.
    */
-  policyId?: string | null | undefined;
+  policyId?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const ReplacePolicy$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  policyId: z.nullable(z.string()).optional(),
+  policyId: z.string().optional(),
 });
 /** @internal */
 export type ReplacePolicy$Outbound = {
-  policyId?: string | null | undefined;
+  policyId?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const ReplacePolicy$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ReplacePolicy
 > = z.object({
-  policyId: z.nullable(z.string()).optional(),
+  policyId: z.string().optional(),
 });
 
 export function replacePolicyToJSON(replacePolicy: ReplacePolicy): string {

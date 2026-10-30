@@ -25,13 +25,13 @@ export type ConnectorAction = {
   /**
    * The actionName field.
    */
-  actionName?: string | null | undefined;
+  actionName?: string | undefined;
   argsTemplate?: { [k: string]: any } | null | undefined;
   connectorRef?: ConnectorRef | null | undefined;
   /**
    * The resourceTypeId field.
    */
-  resourceTypeId?: string | null | undefined;
+  resourceTypeId?: string | undefined;
 };
 
 /** @internal */
@@ -40,17 +40,17 @@ export const ConnectorAction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  actionName: z.nullable(z.string()).optional(),
+  actionName: z.string().optional(),
   argsTemplate: z.nullable(z.record(z.any())).optional(),
   connectorRef: z.nullable(ConnectorRef$inboundSchema).optional(),
-  resourceTypeId: z.nullable(z.string()).optional(),
+  resourceTypeId: z.string().optional(),
 });
 /** @internal */
 export type ConnectorAction$Outbound = {
-  actionName?: string | null | undefined;
+  actionName?: string | undefined;
   argsTemplate?: { [k: string]: any } | null | undefined;
   connectorRef?: ConnectorRef$Outbound | null | undefined;
-  resourceTypeId?: string | null | undefined;
+  resourceTypeId?: string | undefined;
 };
 
 /** @internal */
@@ -59,10 +59,10 @@ export const ConnectorAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ConnectorAction
 > = z.object({
-  actionName: z.nullable(z.string()).optional(),
+  actionName: z.string().optional(),
   argsTemplate: z.nullable(z.record(z.any())).optional(),
   connectorRef: z.nullable(ConnectorRef$outboundSchema).optional(),
-  resourceTypeId: z.nullable(z.string()).optional(),
+  resourceTypeId: z.string().optional(),
 });
 
 export function connectorActionToJSON(

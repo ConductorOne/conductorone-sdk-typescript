@@ -16,6 +16,28 @@ import {
 } from "./appuserstatusinput.js";
 
 /**
+ * AI-agent lifecycle status when this app user carries the agent trait.
+ *
+ * @remarks
+ *  UNSPECIFIED marks a non-agent account. Read-only; translated from the
+ *  model's agent_trait at the API boundary.
+ */
+export const AgentStatus = {
+  AppUserAgentStatusUnspecified: "APP_USER_AGENT_STATUS_UNSPECIFIED",
+  AppUserAgentStatusReady: "APP_USER_AGENT_STATUS_READY",
+  AppUserAgentStatusDisabled: "APP_USER_AGENT_STATUS_DISABLED",
+  AppUserAgentStatusDeleted: "APP_USER_AGENT_STATUS_DELETED",
+} as const;
+/**
+ * AI-agent lifecycle status when this app user carries the agent trait.
+ *
+ * @remarks
+ *  UNSPECIFIED marks a non-agent account. Read-only; translated from the
+ *  model's agent_trait at the API boundary.
+ */
+export type AgentStatus = OpenEnum<typeof AgentStatus>;
+
+/**
  * The appplication user type. Type can be user, system or service.
  */
 export const AppUserType = {
@@ -30,27 +52,55 @@ export const AppUserType = {
 export type AppUserType = OpenEnum<typeof AppUserType>;
 
 /**
+ * NHI classification when this app user carries the non-human-identity trait.
+ *
+ * @remarks
+ *  Read-only; translated from the model's nhi_trait at the API boundary.
+ */
+export const NhiType = {
+  AppUserNhiTypeUnspecified: "APP_USER_NHI_TYPE_UNSPECIFIED",
+  AppUserNhiTypeAppRegistration: "APP_USER_NHI_TYPE_APP_REGISTRATION",
+  AppUserNhiTypeAssumableRole: "APP_USER_NHI_TYPE_ASSUMABLE_ROLE",
+  AppUserNhiTypeManagedIdentity: "APP_USER_NHI_TYPE_MANAGED_IDENTITY",
+} as const;
+/**
+ * NHI classification when this app user carries the non-human-identity trait.
+ *
+ * @remarks
+ *  Read-only; translated from the model's nhi_trait at the API boundary.
+ */
+export type NhiType = OpenEnum<typeof NhiType>;
+
+/**
  * Application User that represents an account in the application.
  */
 export type AppUser = {
   /**
+   * AI-agent lifecycle status when this app user carries the agent trait.
+   *
+   * @remarks
+   *  UNSPECIFIED marks a non-agent account. Read-only; translated from the
+   *  model's agent_trait at the API boundary.
+   */
+  agentStatus?: AgentStatus | undefined;
+  /**
    * The ID of the application.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The appplication user type. Type can be user, system or service.
    */
-  appUserType?: AppUserType | null | undefined;
+  appUserType?: AppUserType | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * The display name of the application user.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The email field of the application user.
    */
-  email?: string | null | undefined;
+  email?: string | undefined;
   /**
    * The emails field of the application user.
    */
@@ -62,22 +112,33 @@ export type AppUser = {
   /**
    * A unique idenditfier of the application user.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The conductor one user ID of the account owner.
    */
-  identityUserId?: string | null | undefined;
+  identityUserId?: string | undefined;
   /**
    * The isExternal field.
    */
-  isExternal?: boolean | null | undefined;
+  isExternal?: boolean | undefined;
+  /**
+   * Axis-2 detail refining nhi_type (e.g. "aws.role.lambda"). Read-only.
+   */
+  nhiDetail?: string | undefined;
+  /**
+   * NHI classification when this app user carries the non-human-identity trait.
+   *
+   * @remarks
+   *  Read-only; translated from the model's nhi_trait at the API boundary.
+   */
+  nhiType?: NhiType | undefined;
   profile?: { [k: string]: any } | null | undefined;
   status?: AppUserStatus | null | undefined;
   updatedAt?: Date | null | undefined;
   /**
    * The username field of the application user.
    */
-  username?: string | null | undefined;
+  username?: string | undefined;
   /**
    * The usernames field of the application user.
    */
@@ -91,9 +152,16 @@ export type AppUserInput = {
   /**
    * The appplication user type. Type can be user, system or service.
    */
-  appUserType?: AppUserType | null | undefined;
+  appUserType?: AppUserType | undefined;
   status?: AppUserStatusInput | null | undefined;
 };
+
+/** @internal */
+export const AgentStatus$inboundSchema: z.ZodType<
+  AgentStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(AgentStatus);
 
 /** @internal */
 export const AppUserType$inboundSchema: z.ZodType<
@@ -109,29 +177,36 @@ export const AppUserType$outboundSchema: z.ZodType<
 > = openEnums.outboundSchema(AppUserType);
 
 /** @internal */
+export const NhiType$inboundSchema: z.ZodType<NhiType, z.ZodTypeDef, unknown> =
+  openEnums.inboundSchema(NhiType);
+
+/** @internal */
 export const AppUser$inboundSchema: z.ZodType<AppUser, z.ZodTypeDef, unknown> =
   z.object({
-    appId: z.nullable(z.string()).optional(),
-    appUserType: z.nullable(AppUserType$inboundSchema).optional(),
+    agentStatus: AgentStatus$inboundSchema.optional(),
+    appId: z.string().optional(),
+    appUserType: AppUserType$inboundSchema.optional(),
     createdAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
     deletedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    displayName: z.nullable(z.string()).optional(),
-    email: z.nullable(z.string()).optional(),
+    displayName: z.string().optional(),
+    email: z.string().optional(),
     emails: z.nullable(z.array(z.string())).optional(),
     employeeIds: z.nullable(z.array(z.string())).optional(),
-    id: z.nullable(z.string()).optional(),
-    identityUserId: z.nullable(z.string()).optional(),
-    isExternal: z.nullable(z.boolean()).optional(),
+    id: z.string().optional(),
+    identityUserId: z.string().optional(),
+    isExternal: z.boolean().optional(),
+    nhiDetail: z.string().optional(),
+    nhiType: NhiType$inboundSchema.optional(),
     profile: z.nullable(z.record(z.any())).optional(),
     status: z.nullable(AppUserStatus$inboundSchema).optional(),
     updatedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    username: z.nullable(z.string()).optional(),
+    username: z.string().optional(),
     usernames: z.nullable(z.array(z.string())).optional(),
   });
 
@@ -147,7 +222,7 @@ export function appUserFromJSON(
 
 /** @internal */
 export type AppUserInput$Outbound = {
-  appUserType?: string | null | undefined;
+  appUserType?: string | undefined;
   status?: AppUserStatusInput$Outbound | null | undefined;
 };
 
@@ -157,7 +232,7 @@ export const AppUserInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppUserInput
 > = z.object({
-  appUserType: z.nullable(AppUserType$outboundSchema).optional(),
+  appUserType: AppUserType$outboundSchema.optional(),
   status: z.nullable(AppUserStatusInput$outboundSchema).optional(),
 });
 

@@ -18,7 +18,7 @@ export type PersonalClientInput = {
   /**
    * The display name of the personal client credential.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   expiresTime?: Date | null | undefined;
   /**
    * scoped_roles provides a list of IAM Roles
@@ -34,7 +34,7 @@ export type PersonalClientInput = {
 /** @internal */
 export type PersonalClientInput$Outbound = {
   allowSourceCidr?: Array<string> | null | undefined;
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   expiresTime?: string | null | undefined;
   scopedRoles?: Array<string> | null | undefined;
 };
@@ -46,7 +46,7 @@ export const PersonalClientInput$outboundSchema: z.ZodType<
   PersonalClientInput
 > = z.object({
   allowSourceCidr: z.nullable(z.array(z.string())).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
   expiresTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   scopedRoles: z.nullable(z.array(z.string())).optional(),
 });

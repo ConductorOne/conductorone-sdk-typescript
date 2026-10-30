@@ -19,7 +19,7 @@ export type PersonalClientServiceCreateResponse = {
   /**
    * The client secret that corresponds to the personal client. Make sure to save this, because it cannot be returned or queried again.
    */
-  clientSecret?: string | null | undefined;
+  clientSecret?: string | undefined;
 };
 
 /** @internal */
@@ -29,7 +29,7 @@ export const PersonalClientServiceCreateResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   client: z.nullable(PersonalClient$inboundSchema).optional(),
-  clientSecret: z.nullable(z.string()).optional(),
+  clientSecret: z.string().optional(),
 });
 
 export function personalClientServiceCreateResponseFromJSON(

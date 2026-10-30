@@ -27,11 +27,11 @@ export type VaultServiceCreateRequest = {
   /**
    * A free-text description of the vault's purpose or configuration.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The human-readable name for the new vault.
    */
-  displayName: string | null;
+  displayName: string;
   groupAuthzVault?: GroupAuthzVault | null | undefined;
   magicVault?: MagicVault | null | undefined;
   /**
@@ -42,8 +42,8 @@ export type VaultServiceCreateRequest = {
 
 /** @internal */
 export type VaultServiceCreateRequest$Outbound = {
-  description?: string | null | undefined;
-  displayName: string | null;
+  description?: string | undefined;
+  displayName: string;
   groupAuthzVault?: GroupAuthzVault$Outbound | null | undefined;
   magicVault?: MagicVault$Outbound | null | undefined;
   ownerIds?: Array<string> | null | undefined;
@@ -55,8 +55,8 @@ export const VaultServiceCreateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   VaultServiceCreateRequest
 > = z.object({
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()),
+  description: z.string().optional(),
+  displayName: z.string(),
   groupAuthzVault: z.nullable(GroupAuthzVault$outboundSchema).optional(),
   magicVault: z.nullable(MagicVault$outboundSchema).optional(),
   ownerIds: z.nullable(z.array(z.string())).optional(),

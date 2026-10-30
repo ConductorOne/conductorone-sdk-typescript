@@ -14,7 +14,7 @@ export type TaskAuditHardReset = {
   /**
    * The oldPolicyStepId field.
    */
-  oldPolicyStepId?: string | null | undefined;
+  oldPolicyStepId?: string | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const TaskAuditHardReset$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  oldPolicyStepId: z.nullable(z.string()).optional(),
+  oldPolicyStepId: z.string().optional(),
 });
 
 export function taskAuditHardResetFromJSON(

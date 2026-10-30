@@ -19,7 +19,7 @@ export type FunctionsServiceInvokeResponse = {
   /**
    * The ID of the created invocation, used to track execution status and retrieve results.
    */
-  invocationId?: string | null | undefined;
+  invocationId?: string | undefined;
   /**
    * Deprecated. The JSON-encoded output returned by the function.
    *
@@ -38,7 +38,7 @@ export const FunctionsServiceInvokeResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  invocationId: z.nullable(z.string()).optional(),
+  invocationId: z.string().optional(),
   json: z.nullable(z.string()).optional(),
 });
 

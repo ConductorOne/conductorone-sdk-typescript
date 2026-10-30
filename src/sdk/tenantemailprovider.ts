@@ -3,7 +3,6 @@
  */
 
 import { tenantEmailProviderGet } from "../funcs/tenantEmailProviderGet.js";
-import { tenantEmailProviderGetEmailCapabilities } from "../funcs/tenantEmailProviderGetEmailCapabilities.js";
 import { tenantEmailProviderSearchAuditEvents } from "../funcs/tenantEmailProviderSearchAuditEvents.js";
 import { tenantEmailProviderTest } from "../funcs/tenantEmailProviderTest.js";
 import { tenantEmailProviderUpdate } from "../funcs/tenantEmailProviderUpdate.js";
@@ -13,26 +12,6 @@ import * as shared from "./models/shared/index.js";
 import { unwrapAsync } from "./types/fp.js";
 
 export class TenantEmailProvider extends ClientSDK {
-  /**
-   * Get Email Capabilities
-   *
-   * @remarks
-   * GetEmailCapabilities returns a lightweight summary of email capabilities
-   *  for the current tenant. Intended for non-admin users (automation builders,
-   *  secret sharers) to check if external email is available without exposing
-   *  provider configuration details.
-   */
-  async getEmailCapabilities(
-    options?: RequestOptions,
-  ): Promise<
-    operations.C1ApiSettingsV1TenantEmailProviderServiceGetEmailCapabilitiesResponse
-  > {
-    return unwrapAsync(tenantEmailProviderGetEmailCapabilities(
-      this,
-      options,
-    ));
-  }
-
   /**
    * Get
    *

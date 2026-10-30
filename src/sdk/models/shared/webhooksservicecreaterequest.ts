@@ -12,23 +12,23 @@ export type WebhooksServiceCreateRequest = {
   /**
    * An optional description of the webhook's purpose.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The human-readable name for the new webhook.
    */
-  displayName: string | null;
+  displayName: string;
   /**
    * The destination URL that will receive event notification HTTP callbacks.
    */
-  url: string | null;
+  url: string;
 };
 
 /** @internal */
 export type WebhooksServiceCreateRequest$Outbound = {
   callbackTimeout?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName: string | null;
-  url: string | null;
+  description?: string | undefined;
+  displayName: string;
+  url: string;
 };
 
 /** @internal */
@@ -38,9 +38,9 @@ export const WebhooksServiceCreateRequest$outboundSchema: z.ZodType<
   WebhooksServiceCreateRequest
 > = z.object({
   callbackTimeout: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()),
-  url: z.nullable(z.string()),
+  description: z.string().optional(),
+  displayName: z.string(),
+  url: z.string(),
 });
 
 export function webhooksServiceCreateRequestToJSON(

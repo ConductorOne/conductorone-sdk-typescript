@@ -14,7 +14,7 @@ export type ServiceAccountMisclassificationEvidence = {
   /**
    * The detectionReason field.
    */
-  detectionReason?: string | null | undefined;
+  detectionReason?: string | undefined;
 };
 
 /** @internal */
@@ -23,9 +23,32 @@ export const ServiceAccountMisclassificationEvidence$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  detectionReason: z.nullable(z.string()).optional(),
+  detectionReason: z.string().optional(),
+});
+/** @internal */
+export type ServiceAccountMisclassificationEvidence$Outbound = {
+  detectionReason?: string | undefined;
+};
+
+/** @internal */
+export const ServiceAccountMisclassificationEvidence$outboundSchema: z.ZodType<
+  ServiceAccountMisclassificationEvidence$Outbound,
+  z.ZodTypeDef,
+  ServiceAccountMisclassificationEvidence
+> = z.object({
+  detectionReason: z.string().optional(),
 });
 
+export function serviceAccountMisclassificationEvidenceToJSON(
+  serviceAccountMisclassificationEvidence:
+    ServiceAccountMisclassificationEvidence,
+): string {
+  return JSON.stringify(
+    ServiceAccountMisclassificationEvidence$outboundSchema.parse(
+      serviceAccountMisclassificationEvidence,
+    ),
+  );
+}
 export function serviceAccountMisclassificationEvidenceFromJSON(
   jsonString: string,
 ): SafeParseResult<

@@ -15,7 +15,7 @@ export type TaskAuditPolicyProvisionReassigned = {
   /**
    * The newPolicyStepId field.
    */
-  newPolicyStepId?: string | null | undefined;
+  newPolicyStepId?: string | undefined;
   /**
    * The newUsers field.
    */
@@ -23,7 +23,7 @@ export type TaskAuditPolicyProvisionReassigned = {
   /**
    * The oldPolicyStepId field.
    */
-  oldPolicyStepId?: string | null | undefined;
+  oldPolicyStepId?: string | undefined;
   /**
    * The users field.
    */
@@ -36,9 +36,9 @@ export const TaskAuditPolicyProvisionReassigned$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  newPolicyStepId: z.nullable(z.string()).optional(),
+  newPolicyStepId: z.string().optional(),
   newUsers: z.nullable(z.array(z.string())).optional(),
-  oldPolicyStepId: z.nullable(z.string()).optional(),
+  oldPolicyStepId: z.string().optional(),
   users: z.nullable(z.array(User$inboundSchema)).optional(),
 });
 

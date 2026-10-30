@@ -14,27 +14,27 @@ export type EncryptedData = {
   /**
    * The human-readable description of the encrypted data.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The encrypted bytes.
    */
-  encryptedBytes?: string | null | undefined;
+  encryptedBytes?: string | undefined;
   /**
    * The key ID used to encrypt the data.
    */
-  keyId?: string | null | undefined;
+  keyId?: string | undefined;
   /**
    * The human-readable name of the encrypted data.
    */
-  name?: string | null | undefined;
+  name?: string | undefined;
   /**
    * The encryption provider used to encrypt the data.
    */
-  provider?: string | null | undefined;
+  provider?: string | undefined;
   /**
    * The (optional) JSON schema of the encrypted data.
    */
-  schema?: string | null | undefined;
+  schema?: string | undefined;
 };
 
 /** @internal */
@@ -43,12 +43,12 @@ export const EncryptedData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  description: z.nullable(z.string()).optional(),
-  encryptedBytes: z.nullable(z.string()).optional(),
-  keyId: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
-  provider: z.nullable(z.string()).optional(),
-  schema: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  encryptedBytes: z.string().optional(),
+  keyId: z.string().optional(),
+  name: z.string().optional(),
+  provider: z.string().optional(),
+  schema: z.string().optional(),
 });
 
 export function encryptedDataFromJSON(

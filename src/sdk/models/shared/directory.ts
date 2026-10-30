@@ -33,7 +33,7 @@ export type Directory = {
   /**
    * The ID of the app associated with the directory.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   celExpression?: DirectoryAccountFilterCel | null | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
@@ -48,7 +48,7 @@ export const Directory$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   all: z.nullable(DirectoryAccountFilterAll$inboundSchema).optional(),
-  appId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
   celExpression: z.nullable(DirectoryAccountFilterCel$inboundSchema).optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),

@@ -14,7 +14,7 @@ export type TaskAuditWaitStepUntilTime = {
   /**
    * The stepId field.
    */
-  stepId?: string | null | undefined;
+  stepId?: string | undefined;
   untilTime?: Date | null | undefined;
 };
 
@@ -24,7 +24,7 @@ export const TaskAuditWaitStepUntilTime$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  stepId: z.nullable(z.string()).optional(),
+  stepId: z.string().optional(),
   untilTime: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

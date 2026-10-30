@@ -55,7 +55,7 @@ export type PaperSecretServiceGetContentResponse = {
   /**
    * The creatorUserId field.
    */
-  creatorUserId?: string | null | undefined;
+  creatorUserId?: string | undefined;
   /**
    * For file secrets: presigned S3 download URL (5 minute expiry)
    *
@@ -76,25 +76,19 @@ export type PaperSecretServiceGetContentResponse = {
   /**
    * Original filename (file secrets only)
    */
-  filename?: string | null | undefined;
+  filename?: string | undefined;
   /**
    * Input format hint for rendering (text secrets only)
    */
-  inputFormat?:
-    | PaperSecretServiceGetContentResponseInputFormat
-    | null
-    | undefined;
+  inputFormat?: PaperSecretServiceGetContentResponseInputFormat | undefined;
   /**
    * Secret metadata
    */
-  secretType?:
-    | PaperSecretServiceGetContentResponseSecretType
-    | null
-    | undefined;
+  secretType?: PaperSecretServiceGetContentResponseSecretType | undefined;
   /**
    * Views remaining after this view (-1 = unlimited)
    */
-  viewsRemaining?: number | null | undefined;
+  viewsRemaining?: number | undefined;
 };
 
 /** @internal */
@@ -122,17 +116,15 @@ export const PaperSecretServiceGetContentResponse$inboundSchema: z.ZodType<
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  creatorUserId: z.nullable(z.string()).optional(),
+  creatorUserId: z.string().optional(),
   downloadUrl: z.nullable(z.string()).optional(),
   encryptedContent: z.nullable(z.string()).optional(),
-  filename: z.nullable(z.string()).optional(),
-  inputFormat: z.nullable(
-    PaperSecretServiceGetContentResponseInputFormat$inboundSchema,
-  ).optional(),
-  secretType: z.nullable(
-    PaperSecretServiceGetContentResponseSecretType$inboundSchema,
-  ).optional(),
-  viewsRemaining: z.nullable(z.number().int()).optional(),
+  filename: z.string().optional(),
+  inputFormat: PaperSecretServiceGetContentResponseInputFormat$inboundSchema
+    .optional(),
+  secretType: PaperSecretServiceGetContentResponseSecretType$inboundSchema
+    .optional(),
+  viewsRemaining: z.number().int().optional(),
 });
 
 export function paperSecretServiceGetContentResponseFromJSON(

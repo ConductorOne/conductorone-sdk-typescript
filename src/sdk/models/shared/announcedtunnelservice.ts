@@ -17,23 +17,23 @@ export type AnnouncedTunnelService = {
   /**
    * Logical name of the service as declared by the appliance.
    */
-  name?: string | null | undefined;
+  name?: string | undefined;
   /**
    * TCP port the service listens on inside the appliance network.
    */
-  port?: number | null | undefined;
+  port?: number | undefined;
   /**
    * Optional URL path prefix for the service.
    */
-  servicePath?: string | null | undefined;
+  servicePath?: string | undefined;
   /**
    * Application-level protocol type (e.g. "http", "grpc").
    */
-  serviceType?: string | null | undefined;
+  serviceType?: string | undefined;
   /**
    * Transport protocol used by the wormhole tunnel (e.g. "tcp").
    */
-  transportType?: string | null | undefined;
+  transportType?: string | undefined;
 };
 
 /** @internal */
@@ -42,11 +42,11 @@ export const AnnouncedTunnelService$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.nullable(z.string()).optional(),
-  port: z.nullable(z.number().int()).optional(),
-  servicePath: z.nullable(z.string()).optional(),
-  serviceType: z.nullable(z.string()).optional(),
-  transportType: z.nullable(z.string()).optional(),
+  name: z.string().optional(),
+  port: z.number().int().optional(),
+  servicePath: z.string().optional(),
+  serviceType: z.string().optional(),
+  transportType: z.string().optional(),
 });
 
 export function announcedTunnelServiceFromJSON(

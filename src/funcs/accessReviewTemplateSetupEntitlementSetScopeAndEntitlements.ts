@@ -30,6 +30,7 @@ import { Result } from "../sdk/types/fp.js";
  *
  * @remarks
  * SetScopeAndEntitlements replaces the scope configuration and selected entitlements for an access review template.
+ *  Each call replaces the whole selection. To build a large selection, use AddTemplateEntitlements in chunks instead.
  */
 export function accessReviewTemplateSetupEntitlementSetScopeAndEntitlements(
   client: ConductoroneSDKTypescriptCore,

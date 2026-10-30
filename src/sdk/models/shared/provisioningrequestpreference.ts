@@ -14,11 +14,11 @@ export type ProvisioningRequestPreference = {
   /**
    * The enabled field.
    */
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   /**
    * The locked field.
    */
-  locked?: boolean | null | undefined;
+  locked?: boolean | undefined;
 };
 
 /** @internal */
@@ -27,13 +27,13 @@ export const ProvisioningRequestPreference$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  enabled: z.nullable(z.boolean()).optional(),
-  locked: z.nullable(z.boolean()).optional(),
+  enabled: z.boolean().optional(),
+  locked: z.boolean().optional(),
 });
 /** @internal */
 export type ProvisioningRequestPreference$Outbound = {
-  enabled?: boolean | null | undefined;
-  locked?: boolean | null | undefined;
+  enabled?: boolean | undefined;
+  locked?: boolean | undefined;
 };
 
 /** @internal */
@@ -42,8 +42,8 @@ export const ProvisioningRequestPreference$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ProvisioningRequestPreference
 > = z.object({
-  enabled: z.nullable(z.boolean()).optional(),
-  locked: z.nullable(z.boolean()).optional(),
+  enabled: z.boolean().optional(),
+  locked: z.boolean().optional(),
 });
 
 export function provisioningRequestPreferenceToJSON(

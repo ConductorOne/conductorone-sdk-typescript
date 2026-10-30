@@ -44,11 +44,11 @@ export type ServiceAccountMisclassificationType = {
   /**
    * The currentAccountType field.
    */
-  currentAccountType?: CurrentAccountType | null | undefined;
+  currentAccountType?: CurrentAccountType | undefined;
   /**
    * The detectedAccountType field.
    */
-  detectedAccountType?: DetectedAccountType | null | undefined;
+  detectedAccountType?: DetectedAccountType | undefined;
 };
 
 /** @internal */
@@ -57,6 +57,12 @@ export const CurrentAccountType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = openEnums.inboundSchema(CurrentAccountType);
+/** @internal */
+export const CurrentAccountType$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  CurrentAccountType
+> = openEnums.outboundSchema(CurrentAccountType);
 
 /** @internal */
 export const DetectedAccountType$inboundSchema: z.ZodType<
@@ -64,6 +70,12 @@ export const DetectedAccountType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = openEnums.inboundSchema(DetectedAccountType);
+/** @internal */
+export const DetectedAccountType$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  DetectedAccountType
+> = openEnums.outboundSchema(DetectedAccountType);
 
 /** @internal */
 export const ServiceAccountMisclassificationType$inboundSchema: z.ZodType<
@@ -71,10 +83,34 @@ export const ServiceAccountMisclassificationType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  currentAccountType: z.nullable(CurrentAccountType$inboundSchema).optional(),
-  detectedAccountType: z.nullable(DetectedAccountType$inboundSchema).optional(),
+  currentAccountType: CurrentAccountType$inboundSchema.optional(),
+  detectedAccountType: DetectedAccountType$inboundSchema.optional(),
+});
+/** @internal */
+export type ServiceAccountMisclassificationType$Outbound = {
+  currentAccountType?: string | undefined;
+  detectedAccountType?: string | undefined;
+};
+
+/** @internal */
+export const ServiceAccountMisclassificationType$outboundSchema: z.ZodType<
+  ServiceAccountMisclassificationType$Outbound,
+  z.ZodTypeDef,
+  ServiceAccountMisclassificationType
+> = z.object({
+  currentAccountType: CurrentAccountType$outboundSchema.optional(),
+  detectedAccountType: DetectedAccountType$outboundSchema.optional(),
 });
 
+export function serviceAccountMisclassificationTypeToJSON(
+  serviceAccountMisclassificationType: ServiceAccountMisclassificationType,
+): string {
+  return JSON.stringify(
+    ServiceAccountMisclassificationType$outboundSchema.parse(
+      serviceAccountMisclassificationType,
+    ),
+  );
+}
 export function serviceAccountMisclassificationTypeFromJSON(
   jsonString: string,
 ): SafeParseResult<ServiceAccountMisclassificationType, SDKValidationError> {

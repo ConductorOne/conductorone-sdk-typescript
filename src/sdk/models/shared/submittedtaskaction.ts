@@ -45,6 +45,7 @@ export const ActionType = {
   TaskActionTypeRollbackCancelled: "TASK_ACTION_TYPE_ROLLBACK_CANCELLED",
   TaskActionTypeUpdateRequestData: "TASK_ACTION_TYPE_UPDATE_REQUEST_DATA",
   TaskActionTypeUpdateGrantDuration: "TASK_ACTION_TYPE_UPDATE_GRANT_DURATION",
+  TaskActionTypeRetryProvisioning: "TASK_ACTION_TYPE_RETRY_PROVISIONING",
 } as const;
 /**
  * The type of action that was performed.
@@ -58,26 +59,26 @@ export type SubmittedTaskAction = {
   /**
    * The type of action that was performed.
    */
-  actionType?: ActionType | null | undefined;
+  actionType?: ActionType | undefined;
   /**
    * The ID of the bulk action this action belongs to, if it was part of a bulk operation.
    */
-  bulkActionId?: string | null | undefined;
+  bulkActionId?: string | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * The unique ID of this action.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The ID of the policy step this action was performed on.
    */
-  policyStepId?: string | null | undefined;
+  policyStepId?: string | undefined;
   updatedAt?: Date | null | undefined;
   /**
    * The ID of the user who performed the action.
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -93,20 +94,20 @@ export const SubmittedTaskAction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  actionType: z.nullable(ActionType$inboundSchema).optional(),
-  bulkActionId: z.nullable(z.string()).optional(),
+  actionType: ActionType$inboundSchema.optional(),
+  bulkActionId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  id: z.nullable(z.string()).optional(),
-  policyStepId: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
+  policyStepId: z.string().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 
 export function submittedTaskActionFromJSON(
