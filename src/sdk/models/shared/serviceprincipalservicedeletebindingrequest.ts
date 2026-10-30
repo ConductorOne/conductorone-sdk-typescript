@@ -16,13 +16,13 @@ export type ServicePrincipalServiceDeleteBindingRequest = {
   /**
    * The servicePrincipalId field.
    */
-  servicePrincipalId?: string | null | undefined;
+  servicePrincipalId?: string | undefined;
   subject?: ServicePrincipalBindingSubject | null | undefined;
 };
 
 /** @internal */
 export type ServicePrincipalServiceDeleteBindingRequest$Outbound = {
-  servicePrincipalId?: string | null | undefined;
+  servicePrincipalId?: string | undefined;
   subject?: ServicePrincipalBindingSubject$Outbound | null | undefined;
 };
 
@@ -33,7 +33,7 @@ export const ServicePrincipalServiceDeleteBindingRequest$outboundSchema:
     z.ZodTypeDef,
     ServicePrincipalServiceDeleteBindingRequest
   > = z.object({
-    servicePrincipalId: z.nullable(z.string()).optional(),
+    servicePrincipalId: z.string().optional(),
     subject: z.nullable(ServicePrincipalBindingSubject$outboundSchema)
       .optional(),
   });

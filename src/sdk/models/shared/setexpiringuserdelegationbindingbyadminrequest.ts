@@ -11,14 +11,14 @@ export type SetExpiringUserDelegationBindingByAdminRequest = {
   /**
    * The ID of the user who will act as delegate. Empty string removes the delegation.
    */
-  delegatedUserId?: string | null | undefined;
+  delegatedUserId?: string | undefined;
   delegationExpireAt?: Date | null | undefined;
   delegationStartAt?: Date | null | undefined;
 };
 
 /** @internal */
 export type SetExpiringUserDelegationBindingByAdminRequest$Outbound = {
-  delegatedUserId?: string | null | undefined;
+  delegatedUserId?: string | undefined;
   delegationExpireAt?: string | null | undefined;
   delegationStartAt?: string | null | undefined;
 };
@@ -30,7 +30,7 @@ export const SetExpiringUserDelegationBindingByAdminRequest$outboundSchema:
     z.ZodTypeDef,
     SetExpiringUserDelegationBindingByAdminRequest
   > = z.object({
-    delegatedUserId: z.nullable(z.string()).optional(),
+    delegatedUserId: z.string().optional(),
     delegationExpireAt: z.nullable(z.date().transform(v => v.toISOString()))
       .optional(),
     delegationStartAt: z.nullable(z.date().transform(v => v.toISOString()))

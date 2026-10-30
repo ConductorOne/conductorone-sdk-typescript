@@ -14,7 +14,7 @@ export type TestStepUpProviderResponse = {
   /**
    * The URL to redirect the user to for testing the Step Up flow
    */
-  redirectUrl?: string | null | undefined;
+  redirectUrl?: string | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const TestStepUpProviderResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  redirectUrl: z.nullable(z.string()).optional(),
+  redirectUrl: z.string().optional(),
 });
 
 export function testStepUpProviderResponseFromJSON(

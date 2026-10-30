@@ -34,29 +34,29 @@ export type TunnelCredential = {
   /**
    * The bridge this credential belongs to.
    */
-  bridgeId?: string | null | undefined;
+  bridgeId?: string | undefined;
   /**
    * The client_id (full ${id}@${tenant_domain}/tcc form).
    */
-  clientId?: string | null | undefined;
+  clientId?: string | undefined;
   /**
    * The plaintext client_secret. ONLY populated on the
    *
    * @remarks
    *  CreateBridgeCredential response; empty on Get / List.
    */
-  clientSecret?: string | null | undefined;
+  clientSecret?: string | undefined;
   createdAt?: Date | null | undefined;
   /**
    * Lifecycle status of this credential record.
    */
-  credentialStatus?: CredentialStatus | null | undefined;
+  credentialStatus?: CredentialStatus | undefined;
   deletedAt?: Date | null | undefined;
   expiresTime?: Date | null | undefined;
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   lastUsedAt?: Date | null | undefined;
   revokedAt?: Date | null | undefined;
   updatedAt?: Date | null | undefined;
@@ -75,20 +75,20 @@ export const TunnelCredential$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  bridgeId: z.nullable(z.string()).optional(),
-  clientId: z.nullable(z.string()).optional(),
-  clientSecret: z.nullable(z.string()).optional(),
+  bridgeId: z.string().optional(),
+  clientId: z.string().optional(),
+  clientSecret: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  credentialStatus: z.nullable(CredentialStatus$inboundSchema).optional(),
+  credentialStatus: CredentialStatus$inboundSchema.optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   expiresTime: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
   lastUsedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

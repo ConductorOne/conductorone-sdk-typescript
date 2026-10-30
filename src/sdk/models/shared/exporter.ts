@@ -42,20 +42,20 @@ export type Exporter = {
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The exportId field.
    */
-  exportId?: string | null | undefined;
+  exportId?: string | undefined;
   /**
    * The state field.
    */
-  state?: ExporterState | null | undefined;
+  state?: ExporterState | undefined;
   updatedAt?: Date | null | undefined;
   /**
    * we've synchorized this far
    */
-  watermarkEventId?: string | null | undefined;
+  watermarkEventId?: string | undefined;
 };
 
 /** @internal */
@@ -78,13 +78,13 @@ export const Exporter$inboundSchema: z.ZodType<
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  exportId: z.nullable(z.string()).optional(),
-  state: z.nullable(ExporterState$inboundSchema).optional(),
+  displayName: z.string().optional(),
+  exportId: z.string().optional(),
+  state: ExporterState$inboundSchema.optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  watermarkEventId: z.nullable(z.string()).optional(),
+  watermarkEventId: z.string().optional(),
 });
 
 export function exporterFromJSON(

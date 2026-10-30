@@ -11,12 +11,12 @@ export type TestAccountProvisionPolicyRequest = {
   /**
    * The CEL expression to evaluate for the account provision policy.
    */
-  cel?: string | null | undefined;
+  cel?: string | undefined;
 };
 
 /** @internal */
 export type TestAccountProvisionPolicyRequest$Outbound = {
-  cel?: string | null | undefined;
+  cel?: string | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const TestAccountProvisionPolicyRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TestAccountProvisionPolicyRequest
 > = z.object({
-  cel: z.nullable(z.string()).optional(),
+  cel: z.string().optional(),
 });
 
 export function testAccountProvisionPolicyRequestToJSON(

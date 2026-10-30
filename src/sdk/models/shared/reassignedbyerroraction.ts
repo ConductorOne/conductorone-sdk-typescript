@@ -14,20 +14,20 @@ export type ReassignedByErrorAction = {
   /**
    * The description of the error with more details on why this was reassigned.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * Additional information about the error, like http status codes or error messages from SDKs.
    */
-  errorCode?: string | null | undefined;
+  errorCode?: string | undefined;
   /**
    * The UserID of the user who reassigned this due to an error. This will exclusively be the System's UserID.
    */
-  errorUserId?: string | null | undefined;
+  errorUserId?: string | undefined;
   erroredAt?: Date | null | undefined;
   /**
    * The ID of the policy step that was created by this reassignment.
    */
-  newPolicyStepId?: string | null | undefined;
+  newPolicyStepId?: string | undefined;
   reassignedAt?: Date | null | undefined;
 };
 
@@ -37,24 +37,24 @@ export const ReassignedByErrorAction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  description: z.nullable(z.string()).optional(),
-  errorCode: z.nullable(z.string()).optional(),
-  errorUserId: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  errorCode: z.string().optional(),
+  errorUserId: z.string().optional(),
   erroredAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  newPolicyStepId: z.nullable(z.string()).optional(),
+  newPolicyStepId: z.string().optional(),
   reassignedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
 /** @internal */
 export type ReassignedByErrorAction$Outbound = {
-  description?: string | null | undefined;
-  errorCode?: string | null | undefined;
-  errorUserId?: string | null | undefined;
+  description?: string | undefined;
+  errorCode?: string | undefined;
+  errorUserId?: string | undefined;
   erroredAt?: string | null | undefined;
-  newPolicyStepId?: string | null | undefined;
+  newPolicyStepId?: string | undefined;
   reassignedAt?: string | null | undefined;
 };
 
@@ -64,11 +64,11 @@ export const ReassignedByErrorAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ReassignedByErrorAction
 > = z.object({
-  description: z.nullable(z.string()).optional(),
-  errorCode: z.nullable(z.string()).optional(),
-  errorUserId: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  errorCode: z.string().optional(),
+  errorUserId: z.string().optional(),
   erroredAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  newPolicyStepId: z.nullable(z.string()).optional(),
+  newPolicyStepId: z.string().optional(),
   reassignedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 

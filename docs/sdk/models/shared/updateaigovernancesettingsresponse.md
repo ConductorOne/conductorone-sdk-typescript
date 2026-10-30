@@ -1,6 +1,6 @@
 # UpdateAIGovernanceSettingsResponse
 
-The UpdateAIGovernanceSettingsResponse message.
+UpdateAIGovernanceSettingsResponse contains the updated AI governance settings.
 
 ## Example Usage
 

@@ -12,13 +12,13 @@ export type AcceptRiskAction = {
   /**
    * The justification field.
    */
-  justification?: string | null | undefined;
+  justification?: string | undefined;
 };
 
 /** @internal */
 export type AcceptRiskAction$Outbound = {
   expiresAt?: string | null | undefined;
-  justification?: string | null | undefined;
+  justification?: string | undefined;
 };
 
 /** @internal */
@@ -28,7 +28,7 @@ export const AcceptRiskAction$outboundSchema: z.ZodType<
   AcceptRiskAction
 > = z.object({
   expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  justification: z.nullable(z.string()).optional(),
+  justification: z.string().optional(),
 });
 
 export function acceptRiskActionToJSON(

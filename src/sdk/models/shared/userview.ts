@@ -7,6 +7,10 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { User, User$inboundSchema } from "./user.js";
+import {
+  UserActorObjectPermissions,
+  UserActorObjectPermissions$inboundSchema,
+} from "./useractorobjectpermissions.js";
 
 /**
  * The UserView object provides a user response object, as well as JSONPATHs to related objects provided by expanders.
@@ -15,20 +19,25 @@ export type UserView = {
   /**
    * JSONPATH expression indicating the location of the user objects of delegates of the current user in the expanded array.
    */
-  delegatedUserPath?: string | null | undefined;
+  delegatedUserPath?: string | undefined;
   /**
    * JSONPATH expression indicating the location of directory objects in the expanded array.
    */
-  directoriesPath?: string | null | undefined;
+  directoriesPath?: string | undefined;
   /**
    * JSONPATH expression indicating the location of the user objects that managed the current user in the expanded array.
    */
-  managersPath?: string | null | undefined;
+  managersPath?: string | undefined;
+  objectPermissions?: UserActorObjectPermissions | null | undefined;
   /**
    * JSONPATH expression indicating the location of the roles of the current user in the expanded array.
    */
-  rolesPath?: string | null | undefined;
+  rolesPath?: string | undefined;
   user?: User | null | undefined;
+  /**
+   * The id of the user.
+   */
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -37,11 +46,14 @@ export const UserView$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  delegatedUserPath: z.nullable(z.string()).optional(),
-  directoriesPath: z.nullable(z.string()).optional(),
-  managersPath: z.nullable(z.string()).optional(),
-  rolesPath: z.nullable(z.string()).optional(),
+  delegatedUserPath: z.string().optional(),
+  directoriesPath: z.string().optional(),
+  managersPath: z.string().optional(),
+  objectPermissions: z.nullable(UserActorObjectPermissions$inboundSchema)
+    .optional(),
+  rolesPath: z.string().optional(),
   user: z.nullable(User$inboundSchema).optional(),
+  userId: z.string().optional(),
 });
 
 export function userViewFromJSON(

@@ -54,11 +54,11 @@ export type AppEntitlementSearchServiceSearchGrantsRequest = {
   /**
    * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Filter for entitlements with these purposes (e.g., ASSIGNMENT for membership entitlements)
    */
@@ -77,7 +77,7 @@ export type AppEntitlementSearchServiceSearchGrantsRequest = {
   /**
    * Search for grants of a user
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -97,12 +97,12 @@ export type AppEntitlementSearchServiceSearchGrantsRequest$Outbound = {
   entitlementRefs?: Array<AppEntitlementRef$Outbound> | null | undefined;
   entitlementSlugs?: Array<string> | null | undefined;
   expandMask?: AppEntitlementExpandMask$Outbound | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
   purpose?: Array<string> | null | undefined;
   resourceIds?: Array<string> | null | undefined;
   resourceTypeIds?: Array<string> | null | undefined;
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -118,8 +118,8 @@ export const AppEntitlementSearchServiceSearchGrantsRequest$outboundSchema:
       .optional(),
     entitlementSlugs: z.nullable(z.array(z.string())).optional(),
     expandMask: z.nullable(AppEntitlementExpandMask$outboundSchema).optional(),
-    pageSize: z.nullable(z.number().int()).optional(),
-    pageToken: z.nullable(z.string()).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
     purpose: z.nullable(
       z.array(
         AppEntitlementSearchServiceSearchGrantsRequestPurpose$outboundSchema,
@@ -127,7 +127,7 @@ export const AppEntitlementSearchServiceSearchGrantsRequest$outboundSchema:
     ).optional(),
     resourceIds: z.nullable(z.array(z.string())).optional(),
     resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-    userId: z.nullable(z.string()).optional(),
+    userId: z.string().optional(),
   });
 
 export function appEntitlementSearchServiceSearchGrantsRequestToJSON(

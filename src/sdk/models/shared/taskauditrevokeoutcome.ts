@@ -34,7 +34,7 @@ export type TaskAuditRevokeOutcome = {
   /**
    * The outcome field.
    */
-  outcome?: TaskAuditRevokeOutcomeOutcome | null | undefined;
+  outcome?: TaskAuditRevokeOutcomeOutcome | undefined;
 };
 
 /** @internal */
@@ -50,7 +50,7 @@ export const TaskAuditRevokeOutcome$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  outcome: z.nullable(TaskAuditRevokeOutcomeOutcome$inboundSchema).optional(),
+  outcome: TaskAuditRevokeOutcomeOutcome$inboundSchema.optional(),
 });
 
 export function taskAuditRevokeOutcomeFromJSON(

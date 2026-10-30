@@ -9,7 +9,7 @@ import { OpenEnum } from "../../types/enums.js";
 /**
  * Optional filter by invitation status.
  */
-export const StatusFilter = {
+export const LocalUserInvitationServiceSearchRequestStatusFilter = {
   LocalInvitationStatusUnspecified: "LOCAL_INVITATION_STATUS_UNSPECIFIED",
   LocalInvitationStatusPending: "LOCAL_INVITATION_STATUS_PENDING",
   LocalInvitationStatusAccepted: "LOCAL_INVITATION_STATUS_ACCEPTED",
@@ -19,7 +19,9 @@ export const StatusFilter = {
 /**
  * Optional filter by invitation status.
  */
-export type StatusFilter = OpenEnum<typeof StatusFilter>;
+export type LocalUserInvitationServiceSearchRequestStatusFilter = OpenEnum<
+  typeof LocalUserInvitationServiceSearchRequestStatusFilter
+>;
 
 /**
  * The LocalUserInvitationServiceSearchRequest message.
@@ -28,34 +30,39 @@ export type LocalUserInvitationServiceSearchRequest = {
   /**
    * The directoryAppId field.
    */
-  directoryAppId?: string | null | undefined;
+  directoryAppId?: string | undefined;
   /**
    * The pageSize field.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Optional filter by invitation status.
    */
-  statusFilter?: StatusFilter | null | undefined;
+  statusFilter?:
+    | LocalUserInvitationServiceSearchRequestStatusFilter
+    | undefined;
 };
 
 /** @internal */
-export const StatusFilter$outboundSchema: z.ZodType<
-  string,
-  z.ZodTypeDef,
-  StatusFilter
-> = openEnums.outboundSchema(StatusFilter);
+export const LocalUserInvitationServiceSearchRequestStatusFilter$outboundSchema:
+  z.ZodType<
+    string,
+    z.ZodTypeDef,
+    LocalUserInvitationServiceSearchRequestStatusFilter
+  > = openEnums.outboundSchema(
+    LocalUserInvitationServiceSearchRequestStatusFilter,
+  );
 
 /** @internal */
 export type LocalUserInvitationServiceSearchRequest$Outbound = {
-  directoryAppId?: string | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  statusFilter?: string | null | undefined;
+  directoryAppId?: string | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  statusFilter?: string | undefined;
 };
 
 /** @internal */
@@ -64,10 +71,12 @@ export const LocalUserInvitationServiceSearchRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   LocalUserInvitationServiceSearchRequest
 > = z.object({
-  directoryAppId: z.nullable(z.string()).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  statusFilter: z.nullable(StatusFilter$outboundSchema).optional(),
+  directoryAppId: z.string().optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  statusFilter:
+    LocalUserInvitationServiceSearchRequestStatusFilter$outboundSchema
+      .optional(),
 });
 
 export function localUserInvitationServiceSearchRequestToJSON(

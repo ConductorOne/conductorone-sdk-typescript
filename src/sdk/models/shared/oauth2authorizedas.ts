@@ -14,7 +14,7 @@ export type OAuth2AuthorizedAs = {
   /**
    * authEmail is the email of the user that authorized the connector using OAuth.
    */
-  authEmail?: string | null | undefined;
+  authEmail?: string | undefined;
   authorizedAt?: Date | null | undefined;
 };
 
@@ -24,7 +24,7 @@ export const OAuth2AuthorizedAs$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  authEmail: z.nullable(z.string()).optional(),
+  authEmail: z.string().optional(),
   authorizedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

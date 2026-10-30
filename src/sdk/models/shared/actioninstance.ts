@@ -105,7 +105,7 @@ export type ActionInstance = {
   /**
    * The current state of the action execution.
    */
-  state?: ActionInstanceState | null | undefined;
+  state?: ActionInstanceState | undefined;
   success?: ActionOutcomeSuccess | null | undefined;
 };
 
@@ -140,7 +140,7 @@ export const ActionInstance$inboundSchema: z.ZodType<
   ).optional(),
   denied: z.nullable(ActionOutcomeDenied$inboundSchema).optional(),
   error: z.nullable(ActionOutcomeError$inboundSchema).optional(),
-  state: z.nullable(ActionInstanceState$inboundSchema).optional(),
+  state: ActionInstanceState$inboundSchema.optional(),
   success: z.nullable(ActionOutcomeSuccess$inboundSchema).optional(),
 });
 /** @internal */
@@ -158,7 +158,7 @@ export type ActionInstance$Outbound = {
     | undefined;
   denied?: ActionOutcomeDenied$Outbound | null | undefined;
   error?: ActionOutcomeError$Outbound | null | undefined;
-  state?: string | null | undefined;
+  state?: string | undefined;
   success?: ActionOutcomeSuccess$Outbound | null | undefined;
 };
 
@@ -180,7 +180,7 @@ export const ActionInstance$outboundSchema: z.ZodType<
   ).optional(),
   denied: z.nullable(ActionOutcomeDenied$outboundSchema).optional(),
   error: z.nullable(ActionOutcomeError$outboundSchema).optional(),
-  state: z.nullable(ActionInstanceState$outboundSchema).optional(),
+  state: ActionInstanceState$outboundSchema.optional(),
   success: z.nullable(ActionOutcomeSuccess$outboundSchema).optional(),
 });
 

@@ -16,15 +16,15 @@ export type Role = {
   /**
    * The display name of the role.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The id of the role.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The internal name of the role.
    */
-  name?: string | null | undefined;
+  name?: string | undefined;
   /**
    * The list of permissions this role has.
    */
@@ -36,11 +36,11 @@ export type Role = {
   /**
    * This Role is intended for API keys usage only, and the user interface may not function as expected.
    */
-  systemApiOnly?: boolean | null | undefined;
+  systemApiOnly?: boolean | undefined;
   /**
    * The system builtin field. If this field is set, the role is not editable.
    */
-  systemBuiltin?: boolean | null | undefined;
+  systemBuiltin?: boolean | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -53,13 +53,13 @@ export const Role$inboundSchema: z.ZodType<Role, z.ZodTypeDef, unknown> = z
     deletedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    displayName: z.nullable(z.string()).optional(),
-    id: z.nullable(z.string()).optional(),
-    name: z.nullable(z.string()).optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    name: z.string().optional(),
     permissions: z.nullable(z.array(z.string())).optional(),
     serviceRoles: z.nullable(z.array(z.string())).optional(),
-    systemApiOnly: z.nullable(z.boolean()).optional(),
-    systemBuiltin: z.nullable(z.boolean()).optional(),
+    systemApiOnly: z.boolean().optional(),
+    systemBuiltin: z.boolean().optional(),
     updatedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),

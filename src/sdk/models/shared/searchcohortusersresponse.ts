@@ -23,9 +23,22 @@ export type SearchCohortUsersResponse = {
   /**
    * Token to retrieve the next page of results, empty if no more results.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
   /**
-   * Per-user coverage counts, populated when selected_entitlements is non-empty.
+   * Best-effort current number of enabled users matching the cohort filters.
+   *
+   * @remarks
+   *  Directory updates may race the paged search. Present on the first page
+   *  only so subsequent pages do not repeat the count query.
+   */
+  totalCount?: number | null | undefined;
+  /**
+   * Deprecated. This endpoint no longer computes per-user coverage; this
+   *
+   * @remarks
+   *  list is always empty.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   usersWithCoverage?: Array<CohortUserWithCoverage> | null | undefined;
 };
@@ -37,7 +50,8 @@ export const SearchCohortUsersResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   list: z.nullable(z.array(User$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
+  totalCount: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
   usersWithCoverage: z.nullable(z.array(CohortUserWithCoverage$inboundSchema))
     .optional(),
 });

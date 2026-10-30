@@ -12,7 +12,7 @@ import {
 } from "./aigovernancesettings.js";
 
 /**
- * The GetAIGovernanceSettingsResponse message.
+ * GetAIGovernanceSettingsResponse contains the tenant's AI governance settings.
  */
 export type GetAIGovernanceSettingsResponse = {
   aiGovernanceSettings?: AIGovernanceSettings | null | undefined;

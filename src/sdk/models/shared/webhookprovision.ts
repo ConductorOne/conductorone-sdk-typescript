@@ -14,7 +14,7 @@ export type WebhookProvision = {
   /**
    * The ID of the webhook to call for provisioning.
    */
-  webhookId?: string | null | undefined;
+  webhookId?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const WebhookProvision$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  webhookId: z.nullable(z.string()).optional(),
+  webhookId: z.string().optional(),
 });
 /** @internal */
 export type WebhookProvision$Outbound = {
-  webhookId?: string | null | undefined;
+  webhookId?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const WebhookProvision$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WebhookProvision
 > = z.object({
-  webhookId: z.nullable(z.string()).optional(),
+  webhookId: z.string().optional(),
 });
 
 export function webhookProvisionToJSON(

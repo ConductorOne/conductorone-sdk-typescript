@@ -14,23 +14,23 @@ export type TaskAuditExternalTicketTriggered = {
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The connectorId field.
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
   /**
    * The externalTicketId field.
    */
-  externalTicketId?: string | null | undefined;
+  externalTicketId?: string | undefined;
   /**
    * The externalTicketProvisionerConfigId field.
    */
-  externalTicketProvisionerConfigId?: string | null | undefined;
+  externalTicketProvisionerConfigId?: string | undefined;
   /**
    * The externalTicketProvisionerConfigName field.
    */
-  externalTicketProvisionerConfigName?: string | null | undefined;
+  externalTicketProvisionerConfigName?: string | undefined;
 };
 
 /** @internal */
@@ -39,11 +39,11 @@ export const TaskAuditExternalTicketTriggered$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
-  externalTicketId: z.nullable(z.string()).optional(),
-  externalTicketProvisionerConfigId: z.nullable(z.string()).optional(),
-  externalTicketProvisionerConfigName: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  connectorId: z.string().optional(),
+  externalTicketId: z.string().optional(),
+  externalTicketProvisionerConfigId: z.string().optional(),
+  externalTicketProvisionerConfigName: z.string().optional(),
 });
 
 export function taskAuditExternalTicketTriggeredFromJSON(

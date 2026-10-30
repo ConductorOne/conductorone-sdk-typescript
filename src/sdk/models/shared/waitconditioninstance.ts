@@ -14,7 +14,7 @@ export type WaitConditionInstance = {
   /**
    * The condition that has to be true for this wait condition instance to continue.
    */
-  condition?: string | null | undefined;
+  condition?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const WaitConditionInstance$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  condition: z.nullable(z.string()).optional(),
+  condition: z.string().optional(),
 });
 /** @internal */
 export type WaitConditionInstance$Outbound = {
-  condition?: string | null | undefined;
+  condition?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const WaitConditionInstance$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WaitConditionInstance
 > = z.object({
-  condition: z.nullable(z.string()).optional(),
+  condition: z.string().optional(),
 });
 
 export function waitConditionInstanceToJSON(

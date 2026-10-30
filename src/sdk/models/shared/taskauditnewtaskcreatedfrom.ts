@@ -18,15 +18,15 @@ export type TaskAuditNewTaskCreatedFrom = {
   /**
    * The originalTaskId field.
    */
-  originalTaskId?: string | null | undefined;
+  originalTaskId?: string | undefined;
   /**
    * The originalTaskNumericId field.
    */
-  originalTaskNumericId?: number | null | undefined;
+  originalTaskNumericId?: number | undefined;
   /**
    * The task type of the original task (e.g. "grant", "revoke", "certify").
    */
-  originalTaskType?: string | null | undefined;
+  originalTaskType?: string | undefined;
 };
 
 /** @internal */
@@ -35,10 +35,9 @@ export const TaskAuditNewTaskCreatedFrom$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  originalTaskId: z.nullable(z.string()).optional(),
-  originalTaskNumericId: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
-  originalTaskType: z.nullable(z.string()).optional(),
+  originalTaskId: z.string().optional(),
+  originalTaskNumericId: z.string().transform(v => parseInt(v, 10)).optional(),
+  originalTaskType: z.string().optional(),
 });
 
 export function taskAuditNewTaskCreatedFromFromJSON(

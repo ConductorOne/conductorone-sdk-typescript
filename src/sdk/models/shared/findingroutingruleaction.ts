@@ -7,17 +7,23 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  AcceptRiskRoutingAction,
+  AcceptRiskRoutingAction$inboundSchema,
+  AcceptRiskRoutingAction$Outbound,
+  AcceptRiskRoutingAction$outboundSchema,
+} from "./acceptriskroutingaction.js";
+import {
   CreateTaskAction,
   CreateTaskAction$inboundSchema,
   CreateTaskAction$Outbound,
   CreateTaskAction$outboundSchema,
 } from "./createtaskaction.js";
 import {
-  NotifyAction,
-  NotifyAction$inboundSchema,
-  NotifyAction$Outbound,
-  NotifyAction$outboundSchema,
-} from "./notifyaction.js";
+  SnoozeRoutingAction,
+  SnoozeRoutingAction$inboundSchema,
+  SnoozeRoutingAction$Outbound,
+  SnoozeRoutingAction$outboundSchema,
+} from "./snoozeroutingaction.js";
 import {
   SuppressRoutingAction,
   SuppressRoutingAction$inboundSchema,
@@ -33,11 +39,13 @@ import {
  * This message contains a oneof named action. Only a single field of the following list may be set at a time:
  *   - createTask
  *   - suppress
- *   - notify
+ *   - snooze
+ *   - acceptRisk
  */
 export type FindingRoutingRuleAction = {
+  acceptRisk?: AcceptRiskRoutingAction | null | undefined;
   createTask?: CreateTaskAction | null | undefined;
-  notify?: NotifyAction | null | undefined;
+  snooze?: SnoozeRoutingAction | null | undefined;
   suppress?: SuppressRoutingAction | null | undefined;
 };
 
@@ -47,14 +55,16 @@ export const FindingRoutingRuleAction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  acceptRisk: z.nullable(AcceptRiskRoutingAction$inboundSchema).optional(),
   createTask: z.nullable(CreateTaskAction$inboundSchema).optional(),
-  notify: z.nullable(NotifyAction$inboundSchema).optional(),
+  snooze: z.nullable(SnoozeRoutingAction$inboundSchema).optional(),
   suppress: z.nullable(SuppressRoutingAction$inboundSchema).optional(),
 });
 /** @internal */
 export type FindingRoutingRuleAction$Outbound = {
+  acceptRisk?: AcceptRiskRoutingAction$Outbound | null | undefined;
   createTask?: CreateTaskAction$Outbound | null | undefined;
-  notify?: NotifyAction$Outbound | null | undefined;
+  snooze?: SnoozeRoutingAction$Outbound | null | undefined;
   suppress?: SuppressRoutingAction$Outbound | null | undefined;
 };
 
@@ -64,8 +74,9 @@ export const FindingRoutingRuleAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FindingRoutingRuleAction
 > = z.object({
+  acceptRisk: z.nullable(AcceptRiskRoutingAction$outboundSchema).optional(),
   createTask: z.nullable(CreateTaskAction$outboundSchema).optional(),
-  notify: z.nullable(NotifyAction$outboundSchema).optional(),
+  snooze: z.nullable(SnoozeRoutingAction$outboundSchema).optional(),
   suppress: z.nullable(SuppressRoutingAction$outboundSchema).optional(),
 });
 

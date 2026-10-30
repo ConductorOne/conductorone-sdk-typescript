@@ -14,12 +14,12 @@ export type ReassignedAction = {
   /**
    * The ID of the policy step that was created as a result of this reassignment.
    */
-  newPolicyStepId?: string | null | undefined;
+  newPolicyStepId?: string | undefined;
   reassignedAt?: Date | null | undefined;
   /**
    * The UserID of the person who reassigned this step.
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -28,17 +28,17 @@ export const ReassignedAction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  newPolicyStepId: z.nullable(z.string()).optional(),
+  newPolicyStepId: z.string().optional(),
   reassignedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 /** @internal */
 export type ReassignedAction$Outbound = {
-  newPolicyStepId?: string | null | undefined;
+  newPolicyStepId?: string | undefined;
   reassignedAt?: string | null | undefined;
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -47,9 +47,9 @@ export const ReassignedAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ReassignedAction
 > = z.object({
-  newPolicyStepId: z.nullable(z.string()).optional(),
+  newPolicyStepId: z.string().optional(),
   reassignedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 
 export function reassignedActionToJSON(

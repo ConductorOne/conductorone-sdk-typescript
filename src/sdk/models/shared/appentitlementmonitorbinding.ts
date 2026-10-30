@@ -31,24 +31,21 @@ export type AppEntitlementMonitorBinding = {
   /**
    * The unique identifier of the bound app entitlement.
    */
-  appEntitlementId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
   /**
    * The unique identifier of the application containing the entitlement.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * Which side of the conflict monitor (A or B) this entitlement is assigned to.
    */
-  entitlementGroup?:
-    | AppEntitlementMonitorBindingEntitlementGroup
-    | null
-    | undefined;
+  entitlementGroup?: AppEntitlementMonitorBindingEntitlementGroup | undefined;
   /**
    * The unique identifier of the conflict monitor this binding belongs to.
    */
-  monitorId?: string | null | undefined;
+  monitorId?: string | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -66,18 +63,17 @@ export const AppEntitlementMonitorBinding$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
+  appEntitlementId: z.string().optional(),
+  appId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  entitlementGroup: z.nullable(
-    AppEntitlementMonitorBindingEntitlementGroup$inboundSchema,
-  ).optional(),
-  monitorId: z.nullable(z.string()).optional(),
+  entitlementGroup: AppEntitlementMonitorBindingEntitlementGroup$inboundSchema
+    .optional(),
+  monitorId: z.string().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

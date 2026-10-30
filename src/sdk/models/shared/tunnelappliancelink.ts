@@ -19,11 +19,11 @@ export type TunnelApplianceLink = {
    * @remarks
    *  client-side connection strings.
    */
-  relayAddress?: string | null | undefined;
+  relayAddress?: string | undefined;
   /**
    * Identifier of the wormhole relay server holding this Link.
    */
-  relayId?: string | null | undefined;
+  relayId?: string | undefined;
 };
 
 /** @internal */
@@ -36,8 +36,8 @@ export const TunnelApplianceLink$inboundSchema: z.ZodType<
   leaseExpiresAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  relayAddress: z.nullable(z.string()).optional(),
-  relayId: z.nullable(z.string()).optional(),
+  relayAddress: z.string().optional(),
+  relayId: z.string().optional(),
 });
 
 export function tunnelApplianceLinkFromJSON(

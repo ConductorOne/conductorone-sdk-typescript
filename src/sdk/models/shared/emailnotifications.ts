@@ -14,7 +14,7 @@ export type EmailNotifications = {
   /**
    * The enabled field.
    */
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   /**
    * The identityUserIds field.
    */
@@ -27,12 +27,12 @@ export const EmailNotifications$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  enabled: z.nullable(z.boolean()).optional(),
+  enabled: z.boolean().optional(),
   identityUserIds: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
 export type EmailNotifications$Outbound = {
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   identityUserIds?: Array<string> | null | undefined;
 };
 
@@ -42,7 +42,7 @@ export const EmailNotifications$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EmailNotifications
 > = z.object({
-  enabled: z.nullable(z.boolean()).optional(),
+  enabled: z.boolean().optional(),
   identityUserIds: z.nullable(z.array(z.string())).optional(),
 });
 

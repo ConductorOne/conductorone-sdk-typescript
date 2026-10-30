@@ -11,12 +11,12 @@ export type TaskAuditViewRef = {
   /**
    * The ID of the audit event.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
 export type TaskAuditViewRef$Outbound = {
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const TaskAuditViewRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskAuditViewRef
 > = z.object({
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
 });
 
 export function taskAuditViewRefToJSON(

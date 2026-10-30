@@ -12,9 +12,13 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type TaskAuditPolicyProvisionError = {
   /**
+   * Optional comment supplied by the provisioning callback.
+   */
+  comment?: string | undefined;
+  /**
    * The error field.
    */
-  error?: string | null | undefined;
+  error?: string | undefined;
 };
 
 /** @internal */
@@ -23,7 +27,8 @@ export const TaskAuditPolicyProvisionError$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  error: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
+  error: z.string().optional(),
 });
 
 export function taskAuditPolicyProvisionErrorFromJSON(

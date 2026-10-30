@@ -11,12 +11,12 @@ export type FindingRef = {
   /**
    * The ID of the finding.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
 export type FindingRef$Outbound = {
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const FindingRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FindingRef
 > = z.object({
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
 });
 
 export function findingRefToJSON(findingRef: FindingRef): string {

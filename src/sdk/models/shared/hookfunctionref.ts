@@ -14,11 +14,11 @@ export type HookFunctionRef = {
   /**
    * If empty, the function's published commit is used at invocation time.
    */
-  commitId?: string | null | undefined;
+  commitId?: string | undefined;
   /**
    * The functionId field.
    */
-  functionId?: string | null | undefined;
+  functionId?: string | undefined;
 };
 
 /** @internal */
@@ -27,13 +27,13 @@ export const HookFunctionRef$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  commitId: z.nullable(z.string()).optional(),
-  functionId: z.nullable(z.string()).optional(),
+  commitId: z.string().optional(),
+  functionId: z.string().optional(),
 });
 /** @internal */
 export type HookFunctionRef$Outbound = {
-  commitId?: string | null | undefined;
-  functionId?: string | null | undefined;
+  commitId?: string | undefined;
+  functionId?: string | undefined;
 };
 
 /** @internal */
@@ -42,8 +42,8 @@ export const HookFunctionRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   HookFunctionRef
 > = z.object({
-  commitId: z.nullable(z.string()).optional(),
-  functionId: z.nullable(z.string()).optional(),
+  commitId: z.string().optional(),
+  functionId: z.string().optional(),
 });
 
 export function hookFunctionRefToJSON(

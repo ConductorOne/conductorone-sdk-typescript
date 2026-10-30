@@ -42,15 +42,16 @@ export type SessionSettings = {
   /**
    * Policy ID for REQUESTABLE mode approval routing.
    */
-  clientIdApprovalRequestPolicyId?: string | null | undefined;
+  clientIdApprovalRequestPolicyId?: string | undefined;
   /**
    * Policy for metadata document client_id URLs.
    */
-  clientIdMetadataDocumentPolicy?:
-    | ClientIdMetadataDocumentPolicy
-    | null
-    | undefined;
+  clientIdMetadataDocumentPolicy?: ClientIdMetadataDocumentPolicy | undefined;
   connectorSource?: CIDRRestriction | null | undefined;
+  /**
+   * Whether a browser session ends after idle_timeout without user activity.
+   */
+  enableIdleTimeout?: boolean | undefined;
   externalClientSource?: CIDRRestriction | null | undefined;
   /**
    * Enable external client registration (OAuth 2.0 DCR) for MCP clients
@@ -58,7 +59,8 @@ export type SessionSettings = {
    * @remarks
    *  like Claude Desktop, Cursor, and other AI assistants.
    */
-  externalClientsEnabled?: boolean | null | undefined;
+  externalClientsEnabled?: boolean | undefined;
+  idleTimeout?: string | null | undefined;
   maxSessionLength?: string | null | undefined;
   pccAdminSource?: CIDRRestriction | null | undefined;
   pccUserSource?: CIDRRestriction | null | undefined;
@@ -85,13 +87,14 @@ export const SessionSettings$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  clientIdApprovalRequestPolicyId: z.nullable(z.string()).optional(),
-  clientIdMetadataDocumentPolicy: z.nullable(
-    ClientIdMetadataDocumentPolicy$inboundSchema,
-  ).optional(),
+  clientIdApprovalRequestPolicyId: z.string().optional(),
+  clientIdMetadataDocumentPolicy: ClientIdMetadataDocumentPolicy$inboundSchema
+    .optional(),
   connectorSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
+  enableIdleTimeout: z.boolean().optional(),
   externalClientSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
-  externalClientsEnabled: z.nullable(z.boolean()).optional(),
+  externalClientsEnabled: z.boolean().optional(),
+  idleTimeout: z.nullable(z.string()).optional(),
   maxSessionLength: z.nullable(z.string()).optional(),
   pccAdminSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
   pccUserSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
@@ -100,11 +103,13 @@ export const SessionSettings$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type SessionSettings$Outbound = {
-  clientIdApprovalRequestPolicyId?: string | null | undefined;
-  clientIdMetadataDocumentPolicy?: string | null | undefined;
+  clientIdApprovalRequestPolicyId?: string | undefined;
+  clientIdMetadataDocumentPolicy?: string | undefined;
   connectorSource?: CIDRRestriction$Outbound | null | undefined;
+  enableIdleTimeout?: boolean | undefined;
   externalClientSource?: CIDRRestriction$Outbound | null | undefined;
-  externalClientsEnabled?: boolean | null | undefined;
+  externalClientsEnabled?: boolean | undefined;
+  idleTimeout?: string | null | undefined;
   maxSessionLength?: string | null | undefined;
   pccAdminSource?: CIDRRestriction$Outbound | null | undefined;
   pccUserSource?: CIDRRestriction$Outbound | null | undefined;
@@ -118,13 +123,14 @@ export const SessionSettings$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SessionSettings
 > = z.object({
-  clientIdApprovalRequestPolicyId: z.nullable(z.string()).optional(),
-  clientIdMetadataDocumentPolicy: z.nullable(
-    ClientIdMetadataDocumentPolicy$outboundSchema,
-  ).optional(),
+  clientIdApprovalRequestPolicyId: z.string().optional(),
+  clientIdMetadataDocumentPolicy: ClientIdMetadataDocumentPolicy$outboundSchema
+    .optional(),
   connectorSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
+  enableIdleTimeout: z.boolean().optional(),
   externalClientSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
-  externalClientsEnabled: z.nullable(z.boolean()).optional(),
+  externalClientsEnabled: z.boolean().optional(),
+  idleTimeout: z.nullable(z.string()).optional(),
   maxSessionLength: z.nullable(z.string()).optional(),
   pccAdminSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
   pccUserSource: z.nullable(CIDRRestriction$outboundSchema).optional(),

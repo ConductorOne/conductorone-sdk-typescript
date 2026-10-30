@@ -41,11 +41,11 @@ export type SearchAutomationExecutionsRequest = {
   /**
    * Filter results to executions of this automation template.
    */
-  automationTemplateId?: string | null | undefined;
+  automationTemplateId?: string | undefined;
   /**
    * Filter results to a specific execution by its numeric identifier.
    */
-  executionId?: number | null | undefined;
+  executionId?: number | undefined;
   /**
    * Filter results to executions in any of the specified states.
    */
@@ -54,15 +54,15 @@ export type SearchAutomationExecutionsRequest = {
   /**
    * Maximum number of results to return per page.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * Pagination token from a previous SearchAutomationExecutionsResponse.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Free-text search query to filter executions.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * Restrict results to specific execution references.
    */
@@ -78,13 +78,13 @@ export const ExecutionStepStates$outboundSchema: z.ZodType<
 
 /** @internal */
 export type SearchAutomationExecutionsRequest$Outbound = {
-  automationTemplateId?: string | null | undefined;
-  executionId?: string | null | undefined;
+  automationTemplateId?: string | undefined;
+  executionId?: string | undefined;
   executionStepStates?: Array<string> | null | undefined;
   expandMask?: AutomationExecutionExpandMask$Outbound | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  query?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  query?: string | undefined;
   refs?: Array<AutomationExecutionRef$Outbound> | null | undefined;
 };
 
@@ -94,15 +94,15 @@ export const SearchAutomationExecutionsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchAutomationExecutionsRequest
 > = z.object({
-  automationTemplateId: z.nullable(z.string()).optional(),
-  executionId: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
+  automationTemplateId: z.string().optional(),
+  executionId: z.number().int().transform(v => `${v}`).optional(),
   executionStepStates: z.nullable(z.array(ExecutionStepStates$outboundSchema))
     .optional(),
   expandMask: z.nullable(AutomationExecutionExpandMask$outboundSchema)
     .optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  query: z.string().optional(),
   refs: z.nullable(z.array(AutomationExecutionRef$outboundSchema)).optional(),
 });
 

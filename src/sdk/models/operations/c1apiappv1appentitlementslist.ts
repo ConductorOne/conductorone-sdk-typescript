@@ -11,8 +11,10 @@ import * as shared from "../shared/index.js";
 
 export type C1ApiAppV1AppEntitlementsListRequest = {
   appId: string;
+  appUserId?: string | undefined;
   pageSize?: number | undefined;
   pageToken?: string | undefined;
+  q?: string | undefined;
 };
 
 export type C1ApiAppV1AppEntitlementsListResponse = {
@@ -37,8 +39,10 @@ export type C1ApiAppV1AppEntitlementsListResponse = {
 /** @internal */
 export type C1ApiAppV1AppEntitlementsListRequest$Outbound = {
   app_id: string;
+  app_user_id?: string | undefined;
   page_size?: number | undefined;
   page_token?: string | undefined;
+  q?: string | undefined;
 };
 
 /** @internal */
@@ -48,11 +52,14 @@ export const C1ApiAppV1AppEntitlementsListRequest$outboundSchema: z.ZodType<
   C1ApiAppV1AppEntitlementsListRequest
 > = z.object({
   appId: z.string(),
+  appUserId: z.string().optional(),
   pageSize: z.number().int().optional(),
   pageToken: z.string().optional(),
+  q: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     appId: "app_id",
+    appUserId: "app_user_id",
     pageSize: "page_size",
     pageToken: "page_token",
   });

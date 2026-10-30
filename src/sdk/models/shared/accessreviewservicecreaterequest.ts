@@ -22,7 +22,11 @@ import {
 } from "./notificationconfig.js";
 
 /**
- * The type of scoping method for the campaign (e.g., by entitlements, by access conflicts, or by resource).
+ * How the campaign's scope is defined, such as by entitlements or by users. Treated as
+ *
+ * @remarks
+ *  ACCESS_REVIEW_SCOPE_TYPE_BY_ENTITLEMENTS when unset. Some scope types require a feature to be
+ *  enabled for your tenant. See AccessReviewScopeType for the available values.
  */
 export const ScopeType = {
   AccessReviewScopeTypeUnspecified: "ACCESS_REVIEW_SCOPE_TYPE_UNSPECIFIED",
@@ -32,9 +36,16 @@ export const ScopeType = {
     "ACCESS_REVIEW_SCOPE_TYPE_BY_ACCESS_CONFLICTS",
   AccessReviewScopeTypeByResource: "ACCESS_REVIEW_SCOPE_TYPE_BY_RESOURCE",
   AccessReviewScopeTypeByInheritance: "ACCESS_REVIEW_SCOPE_TYPE_BY_INHERITANCE",
+  AccessReviewScopeTypeByUsers: "ACCESS_REVIEW_SCOPE_TYPE_BY_USERS",
+  AccessReviewScopeTypeByAccessProfiles:
+    "ACCESS_REVIEW_SCOPE_TYPE_BY_ACCESS_PROFILES",
 } as const;
 /**
- * The type of scoping method for the campaign (e.g., by entitlements, by access conflicts, or by resource).
+ * How the campaign's scope is defined, such as by entitlements or by users. Treated as
+ *
+ * @remarks
+ *  ACCESS_REVIEW_SCOPE_TYPE_BY_ENTITLEMENTS when unset. Some scope types require a feature to be
+ *  enabled for your tenant. See AccessReviewScopeType for the available values.
  */
 export type ScopeType = OpenEnum<typeof ScopeType>;
 
@@ -46,15 +57,15 @@ export type AccessReviewServiceCreateRequest = {
   /**
    * An optional description providing context about the campaign.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The display name for the new campaign.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The ID of an existing campaign to copy scope and entitlement configuration from. Optional.
    */
-  duplicateFrom?: string | null | undefined;
+  duplicateFrom?: string | undefined;
   expandMask?: AccessReviewExpandMask | null | undefined;
   notificationConfig?: NotificationConfig | null | undefined;
   /**
@@ -64,11 +75,15 @@ export type AccessReviewServiceCreateRequest = {
   /**
    * The ID of the review policy that governs task assignment and resolution.
    */
-  policyId?: string | null | undefined;
+  policyId?: string | undefined;
   /**
-   * The type of scoping method for the campaign (e.g., by entitlements, by access conflicts, or by resource).
+   * How the campaign's scope is defined, such as by entitlements or by users. Treated as
+   *
+   * @remarks
+   *  ACCESS_REVIEW_SCOPE_TYPE_BY_ENTITLEMENTS when unset. Some scope types require a feature to be
+   *  enabled for your tenant. See AccessReviewScopeType for the available values.
    */
-  scopeType?: ScopeType | null | undefined;
+  scopeType?: ScopeType | undefined;
   scopeV2?: AccessReviewScopeV2 | null | undefined;
 };
 
@@ -82,14 +97,14 @@ export const ScopeType$outboundSchema: z.ZodType<
 /** @internal */
 export type AccessReviewServiceCreateRequest$Outbound = {
   completionDate?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  duplicateFrom?: string | null | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
+  duplicateFrom?: string | undefined;
   expandMask?: AccessReviewExpandMask$Outbound | null | undefined;
   notificationConfig?: NotificationConfig$Outbound | null | undefined;
   ownerIds?: Array<string> | null | undefined;
-  policyId?: string | null | undefined;
-  scopeType?: string | null | undefined;
+  policyId?: string | undefined;
+  scopeType?: string | undefined;
   scopeV2?: AccessReviewScopeV2$Outbound | null | undefined;
 };
 
@@ -101,14 +116,14 @@ export const AccessReviewServiceCreateRequest$outboundSchema: z.ZodType<
 > = z.object({
   completionDate: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  duplicateFrom: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  duplicateFrom: z.string().optional(),
   expandMask: z.nullable(AccessReviewExpandMask$outboundSchema).optional(),
   notificationConfig: z.nullable(NotificationConfig$outboundSchema).optional(),
   ownerIds: z.nullable(z.array(z.string())).optional(),
-  policyId: z.nullable(z.string()).optional(),
-  scopeType: z.nullable(ScopeType$outboundSchema).optional(),
+  policyId: z.string().optional(),
+  scopeType: ScopeType$outboundSchema.optional(),
   scopeV2: z.nullable(AccessReviewScopeV2$outboundSchema).optional(),
 });
 

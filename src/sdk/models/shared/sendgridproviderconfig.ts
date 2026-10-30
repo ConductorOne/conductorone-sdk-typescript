@@ -17,7 +17,7 @@ export type SendGridProviderConfig = {
    * @remarks
    *  Empty on update means "keep existing key".
    */
-  apiKey?: string | null | undefined;
+  apiKey?: string | undefined;
 };
 
 /** @internal */
@@ -26,11 +26,11 @@ export const SendGridProviderConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  apiKey: z.nullable(z.string()).optional(),
+  apiKey: z.string().optional(),
 });
 /** @internal */
 export type SendGridProviderConfig$Outbound = {
-  apiKey?: string | null | undefined;
+  apiKey?: string | undefined;
 };
 
 /** @internal */
@@ -39,7 +39,7 @@ export const SendGridProviderConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SendGridProviderConfig
 > = z.object({
-  apiKey: z.nullable(z.string()).optional(),
+  apiKey: z.string().optional(),
 });
 
 export function sendGridProviderConfigToJSON(

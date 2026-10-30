@@ -16,6 +16,7 @@ export const FunctionsServiceCreateFunctionRequestFunctionType = {
   FunctionTypeUnspecified: "FUNCTION_TYPE_UNSPECIFIED",
   FunctionTypeAny: "FUNCTION_TYPE_ANY",
   FunctionTypeCodeMode: "FUNCTION_TYPE_CODE_MODE",
+  FunctionTypeConnector: "FUNCTION_TYPE_CONNECTOR",
 } as const;
 /**
  * The type of function to create. Use FUNCTION_TYPE_ANY for user functions —
@@ -34,25 +35,22 @@ export type FunctionsServiceCreateFunctionRequest = {
   /**
    * The commit message describing the initial code submission.
    */
-  commitMessage?: string | null | undefined;
+  commitMessage?: string | undefined;
   /**
    * A description of what the function does.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The human-readable name for the function.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The type of function to create. Use FUNCTION_TYPE_ANY for user functions —
    *
    * @remarks
    *  that is the type the Functions UI lists. Do not use any other value.
    */
-  functionType?:
-    | FunctionsServiceCreateFunctionRequestFunctionType
-    | null
-    | undefined;
+  functionType?: FunctionsServiceCreateFunctionRequestFunctionType | undefined;
   /**
    * File map for the initial code commit. Keys are file paths in the
    *
@@ -85,10 +83,10 @@ export const FunctionsServiceCreateFunctionRequestFunctionType$outboundSchema:
 
 /** @internal */
 export type FunctionsServiceCreateFunctionRequest$Outbound = {
-  commitMessage?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  functionType?: string | null | undefined;
+  commitMessage?: string | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
+  functionType?: string | undefined;
   initialContent?: { [k: string]: string } | undefined;
 };
 
@@ -98,12 +96,11 @@ export const FunctionsServiceCreateFunctionRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FunctionsServiceCreateFunctionRequest
 > = z.object({
-  commitMessage: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  functionType: z.nullable(
-    FunctionsServiceCreateFunctionRequestFunctionType$outboundSchema,
-  ).optional(),
+  commitMessage: z.string().optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  functionType: FunctionsServiceCreateFunctionRequestFunctionType$outboundSchema
+    .optional(),
   initialContent: z.record(z.string()).optional(),
 });
 

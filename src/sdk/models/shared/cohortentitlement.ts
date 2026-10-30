@@ -14,39 +14,39 @@ export type CohortEntitlement = {
   /**
    * The appDisplayName field.
    */
-  appDisplayName?: string | null | undefined;
+  appDisplayName?: string | undefined;
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The appResourceDisplayName field.
    */
-  appResourceDisplayName?: string | null | undefined;
+  appResourceDisplayName?: string | undefined;
   /**
    * The appResourceTypeDisplayName field.
    */
-  appResourceTypeDisplayName?: string | null | undefined;
+  appResourceTypeDisplayName?: string | undefined;
   /**
    * The coverage field.
    */
-  coverage?: number | null | undefined;
+  coverage?: number | undefined;
   /**
    * The entitlementDisplayName field.
    */
-  entitlementDisplayName?: string | null | undefined;
+  entitlementDisplayName?: string | undefined;
   /**
    * The entitlementId field.
    */
-  entitlementId?: string | null | undefined;
+  entitlementId?: string | undefined;
   /**
    * The grantedCount field.
    */
-  grantedCount?: number | null | undefined;
+  grantedCount?: number | undefined;
   /**
    * The riskLevelValueId field.
    */
-  riskLevelValueId?: string | null | undefined;
+  riskLevelValueId?: string | undefined;
 };
 
 /** @internal */
@@ -55,27 +55,27 @@ export const CohortEntitlement$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appDisplayName: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appResourceDisplayName: z.nullable(z.string()).optional(),
-  appResourceTypeDisplayName: z.nullable(z.string()).optional(),
-  coverage: z.nullable(z.number()).optional(),
-  entitlementDisplayName: z.nullable(z.string()).optional(),
-  entitlementId: z.nullable(z.string()).optional(),
-  grantedCount: z.nullable(z.number().int()).optional(),
-  riskLevelValueId: z.nullable(z.string()).optional(),
+  appDisplayName: z.string().optional(),
+  appId: z.string().optional(),
+  appResourceDisplayName: z.string().optional(),
+  appResourceTypeDisplayName: z.string().optional(),
+  coverage: z.number().optional(),
+  entitlementDisplayName: z.string().optional(),
+  entitlementId: z.string().optional(),
+  grantedCount: z.number().int().optional(),
+  riskLevelValueId: z.string().optional(),
 });
 /** @internal */
 export type CohortEntitlement$Outbound = {
-  appDisplayName?: string | null | undefined;
-  appId?: string | null | undefined;
-  appResourceDisplayName?: string | null | undefined;
-  appResourceTypeDisplayName?: string | null | undefined;
-  coverage?: number | null | undefined;
-  entitlementDisplayName?: string | null | undefined;
-  entitlementId?: string | null | undefined;
-  grantedCount?: number | null | undefined;
-  riskLevelValueId?: string | null | undefined;
+  appDisplayName?: string | undefined;
+  appId?: string | undefined;
+  appResourceDisplayName?: string | undefined;
+  appResourceTypeDisplayName?: string | undefined;
+  coverage?: number | undefined;
+  entitlementDisplayName?: string | undefined;
+  entitlementId?: string | undefined;
+  grantedCount?: number | undefined;
+  riskLevelValueId?: string | undefined;
 };
 
 /** @internal */
@@ -84,15 +84,15 @@ export const CohortEntitlement$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CohortEntitlement
 > = z.object({
-  appDisplayName: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appResourceDisplayName: z.nullable(z.string()).optional(),
-  appResourceTypeDisplayName: z.nullable(z.string()).optional(),
-  coverage: z.nullable(z.number()).optional(),
-  entitlementDisplayName: z.nullable(z.string()).optional(),
-  entitlementId: z.nullable(z.string()).optional(),
-  grantedCount: z.nullable(z.number().int()).optional(),
-  riskLevelValueId: z.nullable(z.string()).optional(),
+  appDisplayName: z.string().optional(),
+  appId: z.string().optional(),
+  appResourceDisplayName: z.string().optional(),
+  appResourceTypeDisplayName: z.string().optional(),
+  coverage: z.number().optional(),
+  entitlementDisplayName: z.string().optional(),
+  entitlementId: z.string().optional(),
+  grantedCount: z.number().int().optional(),
+  riskLevelValueId: z.string().optional(),
 });
 
 export function cohortEntitlementToJSON(

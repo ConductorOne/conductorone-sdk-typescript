@@ -16,15 +16,15 @@ export type PersonalClientSearchServiceSearchRequest = {
   /**
    * The maximum number of results to return per page.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * A pagination token returned from a previous Search call.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * A text query to filter personal clients by display name.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * Filter results to personal clients owned by the specified users.
    */
@@ -33,9 +33,9 @@ export type PersonalClientSearchServiceSearchRequest = {
 
 /** @internal */
 export type PersonalClientSearchServiceSearchRequest$Outbound = {
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  query?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  query?: string | undefined;
   users?: Array<UserRef$Outbound> | null | undefined;
 };
 
@@ -45,9 +45,9 @@ export const PersonalClientSearchServiceSearchRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PersonalClientSearchServiceSearchRequest
 > = z.object({
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  query: z.string().optional(),
   users: z.nullable(z.array(UserRef$outboundSchema)).optional(),
 });
 

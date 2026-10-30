@@ -32,32 +32,32 @@ export type RequestCatalogSearchServiceSearchEntitlementsRequest = {
   /**
    * Search entitlements that belong to this app name (exact match).
    */
-  appDisplayName?: string | null | undefined;
+  appDisplayName?: string | undefined;
   /**
    * Search for entitlements with this alias (exact match).
    */
-  entitlementAlias?: string | null | undefined;
+  entitlementAlias?: string | undefined;
   expandMask?: AppEntitlementExpandMask | null | undefined;
   /**
    * Search entitlements with this granted status for your signed in user.
    */
-  grantedStatus?: GrantedStatus | null | undefined;
+  grantedStatus?: GrantedStatus | undefined;
   /**
    * Include deleted entitlements
    */
-  includeDeleted?: boolean | null | undefined;
+  includeDeleted?: boolean | undefined;
   /**
    * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Fuzzy search the display name of resource types.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
 };
 
 /** @internal */
@@ -69,14 +69,14 @@ export const GrantedStatus$outboundSchema: z.ZodType<
 
 /** @internal */
 export type RequestCatalogSearchServiceSearchEntitlementsRequest$Outbound = {
-  appDisplayName?: string | null | undefined;
-  entitlementAlias?: string | null | undefined;
+  appDisplayName?: string | undefined;
+  entitlementAlias?: string | undefined;
   expandMask?: AppEntitlementExpandMask$Outbound | null | undefined;
-  grantedStatus?: string | null | undefined;
-  includeDeleted?: boolean | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  query?: string | null | undefined;
+  grantedStatus?: string | undefined;
+  includeDeleted?: boolean | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  query?: string | undefined;
 };
 
 /** @internal */
@@ -86,14 +86,14 @@ export const RequestCatalogSearchServiceSearchEntitlementsRequest$outboundSchema
     z.ZodTypeDef,
     RequestCatalogSearchServiceSearchEntitlementsRequest
   > = z.object({
-    appDisplayName: z.nullable(z.string()).optional(),
-    entitlementAlias: z.nullable(z.string()).optional(),
+    appDisplayName: z.string().optional(),
+    entitlementAlias: z.string().optional(),
     expandMask: z.nullable(AppEntitlementExpandMask$outboundSchema).optional(),
-    grantedStatus: z.nullable(GrantedStatus$outboundSchema).optional(),
-    includeDeleted: z.nullable(z.boolean()).optional(),
-    pageSize: z.nullable(z.number().int()).optional(),
-    pageToken: z.nullable(z.string()).optional(),
-    query: z.nullable(z.string()).optional(),
+    grantedStatus: GrantedStatus$outboundSchema.optional(),
+    includeDeleted: z.boolean().optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
   });
 
 export function requestCatalogSearchServiceSearchEntitlementsRequestToJSON(

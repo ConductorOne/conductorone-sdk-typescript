@@ -41,12 +41,12 @@ export type BundleAutomationLastRunState = {
   /**
    * The errorMessage field.
    */
-  errorMessage?: string | null | undefined;
+  errorMessage?: string | undefined;
   lastRunAt?: Date | null | undefined;
   /**
    * The status field.
    */
-  status?: BundleAutomationLastRunStateStatus | null | undefined;
+  status?: BundleAutomationLastRunStateStatus | undefined;
 };
 
 /** @internal */
@@ -64,12 +64,11 @@ export const BundleAutomationLastRunState$inboundSchema: z.ZodType<
 > = z.object({
   celEvaluation: z.nullable(BundleAutomationCelEvaluationState$inboundSchema)
     .optional(),
-  errorMessage: z.nullable(z.string()).optional(),
+  errorMessage: z.string().optional(),
   lastRunAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  status: z.nullable(BundleAutomationLastRunStateStatus$inboundSchema)
-    .optional(),
+  status: BundleAutomationLastRunStateStatus$inboundSchema.optional(),
 });
 
 export function bundleAutomationLastRunStateFromJSON(

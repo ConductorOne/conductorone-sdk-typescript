@@ -4,22 +4,22 @@
 
 import * as z from "zod/v3";
 import {
-  MCPAccessProfile,
-  MCPAccessProfile$Outbound,
-  MCPAccessProfile$outboundSchema,
-} from "./mcpaccessprofile.js";
+  MCPAccessProfileInput,
+  MCPAccessProfileInput$Outbound,
+  MCPAccessProfileInput$outboundSchema,
+} from "./mcpaccessprofileinput.js";
 
 /**
  * MCPAccessProfileServiceUpdateRequest updates an existing MCP access profile.
  */
 export type MCPAccessProfileServiceUpdateRequest = {
-  profile?: MCPAccessProfile | null | undefined;
+  profile?: MCPAccessProfileInput | null | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type MCPAccessProfileServiceUpdateRequest$Outbound = {
-  profile?: MCPAccessProfile$Outbound | null | undefined;
+  profile?: MCPAccessProfileInput$Outbound | null | undefined;
   updateMask?: string | null | undefined;
 };
 
@@ -29,7 +29,7 @@ export const MCPAccessProfileServiceUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MCPAccessProfileServiceUpdateRequest
 > = z.object({
-  profile: z.nullable(MCPAccessProfile$outboundSchema).optional(),
+  profile: z.nullable(MCPAccessProfileInput$outboundSchema).optional(),
   updateMask: z.nullable(z.string()).optional(),
 });
 

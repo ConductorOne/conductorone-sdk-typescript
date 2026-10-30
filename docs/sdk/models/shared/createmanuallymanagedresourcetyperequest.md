@@ -8,7 +8,7 @@ The request message for creating a manually managed resource type.
 import { CreateManuallyManagedResourceTypeRequest } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: CreateManuallyManagedResourceTypeRequest = {
-  displayName: "Polly_Bartell50",
+  displayName: "Sam.Emmerich",
   resourceType: "GROUP",
 };
 ```

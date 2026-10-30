@@ -38,24 +38,24 @@ export type BundleAutomation = {
   /**
    * The createTasks field.
    */
-  createTasks?: boolean | null | undefined;
+  createTasks?: boolean | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * The disableCircuitBreaker field.
    */
-  disableCircuitBreaker?: boolean | null | undefined;
+  disableCircuitBreaker?: boolean | undefined;
   /**
    * The enabled field.
    */
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   /**
    * When true, the circuit breaker is evaluated even on profiles below the
    *
    * @remarks
    *  tenant min-members floor.
    */
-  enforceOnSmallProfiles?: boolean | null | undefined;
+  enforceOnSmallProfiles?: boolean | undefined;
   entitlements?: BundleAutomationRuleEntitlement | null | undefined;
   /**
    * Per-automation override for the removed-members percent that trips the
@@ -63,16 +63,16 @@ export type BundleAutomation = {
    * @remarks
    *  circuit breaker (1-100). 0 / unset means the tenant default applies.
    */
-  removedMembersThresholdPercent?: number | null | undefined;
+  removedMembersThresholdPercent?: number | undefined;
   /**
    * The requestCatalogId field.
    */
-  requestCatalogId?: string | null | undefined;
+  requestCatalogId?: string | undefined;
   state?: BundleAutomationLastRunState | null | undefined;
   /**
    * The tenantId field.
    */
-  tenantId?: string | null | undefined;
+  tenantId?: string | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -85,24 +85,23 @@ export const BundleAutomation$inboundSchema: z.ZodType<
   cel: z.nullable(BundleAutomationRuleCEL$inboundSchema).optional(),
   circuitBreaker: z.nullable(BundleAutomationCircuitBreaker$inboundSchema)
     .optional(),
-  createTasks: z.nullable(z.boolean()).optional(),
+  createTasks: z.boolean().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  disableCircuitBreaker: z.nullable(z.boolean()).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  enforceOnSmallProfiles: z.nullable(z.boolean()).optional(),
+  disableCircuitBreaker: z.boolean().optional(),
+  enabled: z.boolean().optional(),
+  enforceOnSmallProfiles: z.boolean().optional(),
   entitlements: z.nullable(BundleAutomationRuleEntitlement$inboundSchema)
     .optional(),
-  removedMembersThresholdPercent: z.nullable(
-    z.string().transform(v => parseInt(v, 10)),
-  ).optional(),
-  requestCatalogId: z.nullable(z.string()).optional(),
+  removedMembersThresholdPercent: z.string().transform(v => parseInt(v, 10))
+    .optional(),
+  requestCatalogId: z.string().optional(),
   state: z.nullable(BundleAutomationLastRunState$inboundSchema).optional(),
-  tenantId: z.nullable(z.string()).optional(),
+  tenantId: z.string().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

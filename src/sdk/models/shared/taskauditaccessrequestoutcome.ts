@@ -33,7 +33,7 @@ export type TaskAuditAccessRequestOutcome = {
   /**
    * The outcome field.
    */
-  outcome?: TaskAuditAccessRequestOutcomeOutcome | null | undefined;
+  outcome?: TaskAuditAccessRequestOutcomeOutcome | undefined;
 };
 
 /** @internal */
@@ -49,8 +49,7 @@ export const TaskAuditAccessRequestOutcome$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  outcome: z.nullable(TaskAuditAccessRequestOutcomeOutcome$inboundSchema)
-    .optional(),
+  outcome: TaskAuditAccessRequestOutcomeOutcome$inboundSchema.optional(),
 });
 
 export function taskAuditAccessRequestOutcomeFromJSON(

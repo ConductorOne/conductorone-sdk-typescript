@@ -14,7 +14,7 @@ export type UserProvisioner = {
   /**
    * Whether the provisioner can reassign the task.
    */
-  allowReassignment?: boolean | null | undefined;
+  allowReassignment?: boolean | undefined;
   /**
    * The user IDs to assign as provisioners.
    */
@@ -27,12 +27,12 @@ export const UserProvisioner$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  allowReassignment: z.nullable(z.boolean()).optional(),
+  allowReassignment: z.boolean().optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
 export type UserProvisioner$Outbound = {
-  allowReassignment?: boolean | null | undefined;
+  allowReassignment?: boolean | undefined;
   userIds?: Array<string> | null | undefined;
 };
 
@@ -42,7 +42,7 @@ export const UserProvisioner$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UserProvisioner
 > = z.object({
-  allowReassignment: z.nullable(z.boolean()).optional(),
+  allowReassignment: z.boolean().optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
 });
 

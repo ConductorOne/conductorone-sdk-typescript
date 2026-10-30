@@ -14,6 +14,7 @@ export class PersonalClientSearch extends ClientSDK {
    *
    * @remarks
    * Search finds personal client credentials across all users, with optional filtering by query text or user.
+   *  Request a modest page_size (≤25) to keep responses small.
    */
   async search(
     request?: shared.PersonalClientSearchServiceSearchRequest | undefined,

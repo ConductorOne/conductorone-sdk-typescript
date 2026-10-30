@@ -32,12 +32,12 @@ export type AppPopulationReport = {
   /**
    * The appId is the Id of the app which the report is generated for.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   createdAt?: Date | null | undefined;
   /**
    * The downloadUrl is the url used for downloading the AppPopulationReport.
    */
-  downloadUrl?: string | null | undefined;
+  downloadUrl?: string | undefined;
   /**
    * The hashes field contains the file hashes of the report.
    */
@@ -45,11 +45,11 @@ export type AppPopulationReport = {
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The state field tracks the state of the AppPopulationReport. This state field can be one of REPORT_STATE_PENDING, REPORT_STATE_UNSPECIFIED, REPORT_STATE_OK, REPORT_STATE_ERROR.
    */
-  state?: AppPopulationReportState | null | undefined;
+  state?: AppPopulationReportState | undefined;
 };
 
 /** @internal */
@@ -65,14 +65,14 @@ export const AppPopulationReport$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  downloadUrl: z.nullable(z.string()).optional(),
+  downloadUrl: z.string().optional(),
   hashes: z.record(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  state: z.nullable(AppPopulationReportState$inboundSchema).optional(),
+  id: z.string().optional(),
+  state: AppPopulationReportState$inboundSchema.optional(),
 });
 
 export function appPopulationReportFromJSON(

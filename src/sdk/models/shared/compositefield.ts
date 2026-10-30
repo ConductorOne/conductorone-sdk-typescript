@@ -35,11 +35,11 @@ export type CompositeField = {
   /**
    * The C1 API field whose value supplies this component.
    */
-  c1Field?: string | null | undefined;
+  c1Field?: string | undefined;
   /**
    * The TF attribute type of the component value.
    */
-  tfType?: CompositeFieldTfType | null | undefined;
+  tfType?: CompositeFieldTfType | undefined;
 };
 
 /** @internal */
@@ -55,8 +55,8 @@ export const CompositeField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  c1Field: z.nullable(z.string()).optional(),
-  tfType: z.nullable(CompositeFieldTfType$inboundSchema).optional(),
+  c1Field: z.string().optional(),
+  tfType: CompositeFieldTfType$inboundSchema.optional(),
 });
 
 export function compositeFieldFromJSON(

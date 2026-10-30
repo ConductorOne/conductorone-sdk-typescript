@@ -29,7 +29,10 @@ export type C1ApiAppV1ConnectorServiceForceSyncResponse = {
    */
   rawResponse: Response;
   /**
-   * Empty response body. Status code indicates success.
+   * Empty response body. Status code indicates success. Poll the connector sync status
+   *
+   * @remarks
+   *  for progress after ForceSync accepts the request.
    */
   forceSyncResponse?: shared.ForceSyncResponse | undefined;
 };

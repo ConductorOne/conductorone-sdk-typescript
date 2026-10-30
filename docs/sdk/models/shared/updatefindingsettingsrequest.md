@@ -1,0 +1,17 @@
+# UpdateFindingSettingsRequest
+
+The UpdateFindingSettingsRequest message.
+
+## Example Usage
+
+```typescript
+import { UpdateFindingSettingsRequest } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: UpdateFindingSettingsRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                                | Type                                                                                                                                                                                                                                                 | Required                                                                                                                                                                                                                                             | Description                                                                                                                                                                                                                                          |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `settings`                                                                                                                                                                                                                                           | [shared.FindingSettingsEntry](../../../sdk/models/shared/findingsettingsentry.md)[]                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                                                   | Applied as one atomic write, so an admin changing several types either<br/> lands all of them or none. Empty is valid: a never-configured tenant's<br/> "accept the defaults" save has nothing to diff, and the empty write still<br/> creates the settings row. |

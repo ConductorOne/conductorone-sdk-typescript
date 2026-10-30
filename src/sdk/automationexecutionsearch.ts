@@ -15,6 +15,7 @@ export class AutomationExecutionSearch extends ClientSDK {
    *
    * @remarks
    * Search across all automation executions in the tenant, with filters for state, template, app, and subject user.
+   *  Each AutomationExecutionView row is large — request a small page_size (≤10) and set expand_mask to only the paths you need; broad expansion inlines whole related objects and bloats the response.
    */
   async searchAllAutomationExecutions(
     request?: shared.SearchAllAutomationExecutionsRequest | undefined,
@@ -34,6 +35,7 @@ export class AutomationExecutionSearch extends ClientSDK {
    *
    * @remarks
    * Search for automation executions with optional filters for automation_template_id, state, and query.
+   *  Each AutomationExecutionView row is large — request a small page_size (≤10) and set expand_mask to only the paths you need; broad expansion inlines whole related objects and bloats the response.
    */
   async searchAutomationExecutions(
     request?: shared.SearchAutomationExecutionsRequest | undefined,

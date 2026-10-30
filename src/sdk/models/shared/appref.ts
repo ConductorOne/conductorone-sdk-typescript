@@ -11,12 +11,12 @@ export type AppRef = {
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
 export type AppRef$Outbound = {
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const AppRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppRef
 > = z.object({
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
 });
 
 export function appRefToJSON(appRef: AppRef): string {

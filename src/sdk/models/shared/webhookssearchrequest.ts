@@ -16,15 +16,15 @@ export type WebhooksSearchRequest = {
   /**
    * The maximum number of webhooks to return per page.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pagination token from a previous search response to fetch the next page.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * A text query to match against webhook names and descriptions.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * Optional set of webhook references to restrict the search to specific webhooks.
    */
@@ -33,9 +33,9 @@ export type WebhooksSearchRequest = {
 
 /** @internal */
 export type WebhooksSearchRequest$Outbound = {
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  query?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  query?: string | undefined;
   refs?: Array<WebhookRef$Outbound> | null | undefined;
 };
 
@@ -45,9 +45,9 @@ export const WebhooksSearchRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WebhooksSearchRequest
 > = z.object({
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  query: z.string().optional(),
   refs: z.nullable(z.array(WebhookRef$outboundSchema)).optional(),
 });
 

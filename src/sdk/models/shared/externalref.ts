@@ -28,15 +28,15 @@ export type ExternalRef = {
   /**
    * The source of the external reference.
    */
-  externalRefSource?: ExternalRefSource | null | undefined;
+  externalRefSource?: ExternalRefSource | undefined;
   /**
    * The name of the external reference.
    */
-  name?: string | null | undefined;
+  name?: string | undefined;
   /**
    * The URL to the external reference.
    */
-  url?: string | null | undefined;
+  url?: string | undefined;
 };
 
 /** @internal */
@@ -58,15 +58,15 @@ export const ExternalRef$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  externalRefSource: z.nullable(ExternalRefSource$inboundSchema).optional(),
-  name: z.nullable(z.string()).optional(),
-  url: z.nullable(z.string()).optional(),
+  externalRefSource: ExternalRefSource$inboundSchema.optional(),
+  name: z.string().optional(),
+  url: z.string().optional(),
 });
 /** @internal */
 export type ExternalRef$Outbound = {
-  externalRefSource?: string | null | undefined;
-  name?: string | null | undefined;
-  url?: string | null | undefined;
+  externalRefSource?: string | undefined;
+  name?: string | undefined;
+  url?: string | undefined;
 };
 
 /** @internal */
@@ -75,9 +75,9 @@ export const ExternalRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ExternalRef
 > = z.object({
-  externalRefSource: z.nullable(ExternalRefSource$outboundSchema).optional(),
-  name: z.nullable(z.string()).optional(),
-  url: z.nullable(z.string()).optional(),
+  externalRefSource: ExternalRefSource$outboundSchema.optional(),
+  name: z.string().optional(),
+  url: z.string().optional(),
 });
 
 export function externalRefToJSON(externalRef: ExternalRef): string {

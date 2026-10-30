@@ -22,7 +22,7 @@ export type ListAutomationExecutionsResponse = {
   /**
    * Token to retrieve the next page of results, empty when no more results exist.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -33,7 +33,7 @@ export const ListAutomationExecutionsResponse$inboundSchema: z.ZodType<
 > = z.object({
   automationExecutions: z.nullable(z.array(AutomationExecution$inboundSchema))
     .optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function listAutomationExecutionsResponseFromJSON(

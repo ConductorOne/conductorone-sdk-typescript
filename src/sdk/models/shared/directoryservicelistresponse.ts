@@ -42,7 +42,7 @@ export type DirectoryServiceListResponse = {
   /**
    * List of serialized related objects.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -83,7 +83,7 @@ export const DirectoryServiceListResponse$inboundSchema: z.ZodType<
     z.array(z.lazy(() => DirectoryServiceListResponseExpanded$inboundSchema)),
   ).optional(),
   list: z.nullable(z.array(DirectoryView$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function directoryServiceListResponseFromJSON(

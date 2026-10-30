@@ -21,13 +21,13 @@ export type TestSourceIPRequest = {
    * @remarks
    *  Accepts IPv4 (e.g. 10.0.0.5) or IPv6 (e.g. 2001:db8::1) addresses, optionally with a CIDR prefix.
    */
-  sourceIp?: string | null | undefined;
+  sourceIp?: string | undefined;
 };
 
 /** @internal */
 export type TestSourceIPRequest$Outbound = {
   allowCidr?: Array<string> | null | undefined;
-  sourceIp?: string | null | undefined;
+  sourceIp?: string | undefined;
 };
 
 /** @internal */
@@ -37,7 +37,7 @@ export const TestSourceIPRequest$outboundSchema: z.ZodType<
   TestSourceIPRequest
 > = z.object({
   allowCidr: z.nullable(z.array(z.string())).optional(),
-  sourceIp: z.nullable(z.string()).optional(),
+  sourceIp: z.string().optional(),
 });
 
 export function testSourceIPRequestToJSON(

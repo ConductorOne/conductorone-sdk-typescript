@@ -17,13 +17,13 @@ export type RequestSchemaServiceRemoveEntitlementBindingRequest = {
   /**
    * The unique identifier of the request schema to remove the binding from.
    */
-  requestSchemaId?: string | null | undefined;
+  requestSchemaId?: string | undefined;
 };
 
 /** @internal */
 export type RequestSchemaServiceRemoveEntitlementBindingRequest$Outbound = {
   entitlementRef?: AppEntitlementRef$Outbound | null | undefined;
-  requestSchemaId?: string | null | undefined;
+  requestSchemaId?: string | undefined;
 };
 
 /** @internal */
@@ -34,7 +34,7 @@ export const RequestSchemaServiceRemoveEntitlementBindingRequest$outboundSchema:
     RequestSchemaServiceRemoveEntitlementBindingRequest
   > = z.object({
     entitlementRef: z.nullable(AppEntitlementRef$outboundSchema).optional(),
-    requestSchemaId: z.nullable(z.string()).optional(),
+    requestSchemaId: z.string().optional(),
   });
 
 export function requestSchemaServiceRemoveEntitlementBindingRequestToJSON(

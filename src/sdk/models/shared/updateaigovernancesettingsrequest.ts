@@ -10,7 +10,10 @@ import {
 } from "./aigovernancesettings.js";
 
 /**
- * The UpdateAIGovernanceSettingsRequest message.
+ * UpdateAIGovernanceSettingsRequest is the request to update the tenant's AI
+ *
+ * @remarks
+ *  governance settings.
  */
 export type UpdateAIGovernanceSettingsRequest = {
   aiGovernanceSettings?: AIGovernanceSettings | null | undefined;

@@ -1,0 +1,20 @@
+# GetMySpendStatusResponse
+
+GetMySpendStatusResponse contains the caller's effective limits and optional denial.
+
+## Example Usage
+
+```typescript
+import { GetMySpendStatusResponse } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: GetMySpendStatusResponse = {};
+```
+
+## Fields
+
+| Field                                                                                                                                           | Type                                                                                                                                            | Required                                                                                                                                        | Description                                                                                                                                     |
+| ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `block`                                                                                                                                         | [shared.MySpendBlock](../../../sdk/models/shared/myspendblock.md)                                                                               | :heavy_minus_sign:                                                                                                                              | N/A                                                                                                                                             |
+| `currencyCode`                                                                                                                                  | *string*                                                                                                                                        | :heavy_minus_sign:                                                                                                                              | Currency used for monetary values.                                                                                                              |
+| `scopes`                                                                                                                                        | [shared.MyEffectiveScope](../../../sdk/models/shared/myeffectivescope.md)[]                                                                     | :heavy_minus_sign:                                                                                                                              | Ordered organization, user, application, and user-application scopes.<br/> Shared organization and application scopes contain no financial details. |
+| `state`                                                                                                                                         | [shared.GetMySpendStatusResponseState](../../../sdk/models/shared/getmyspendstatusresponsestate.md)                                             | :heavy_minus_sign:                                                                                                                              | Result of resolving the caller's effective limits.                                                                                              |

@@ -11,12 +11,12 @@ export type EditorValidateRequest = {
   /**
    * The configuration text to validate.
    */
-  text?: string | null | undefined;
+  text?: string | undefined;
 };
 
 /** @internal */
 export type EditorValidateRequest$Outbound = {
-  text?: string | null | undefined;
+  text?: string | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const EditorValidateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EditorValidateRequest
 > = z.object({
-  text: z.nullable(z.string()).optional(),
+  text: z.string().optional(),
 });
 
 export function editorValidateRequestToJSON(

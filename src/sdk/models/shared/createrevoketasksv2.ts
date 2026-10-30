@@ -4,6 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -68,6 +70,26 @@ import {
 } from "./userref.js";
 
 /**
+ * Restricts the step to grants of either DIRECT (grants the user holds directly,
+ *
+ * @remarks
+ *  including grants that are also inherited) or UNSPECIFIED (all grants).
+ *  Composes with every inclusion mode, including inclusion_list_cel.
+ */
+export const GrantSourceFilter = {
+  GrantSourceFilterUnspecified: "GRANT_SOURCE_FILTER_UNSPECIFIED",
+  GrantSourceFilterDirect: "GRANT_SOURCE_FILTER_DIRECT",
+} as const;
+/**
+ * Restricts the step to grants of either DIRECT (grants the user holds directly,
+ *
+ * @remarks
+ *  including grants that are also inherited) or UNSPECIFIED (all grants).
+ *  Composes with every inclusion mode, including inclusion_list_cel.
+ */
+export type GrantSourceFilter = OpenEnum<typeof GrantSourceFilter>;
+
+/**
  * The CreateRevokeTasksV2 message.
  *
  * @remarks
@@ -95,6 +117,14 @@ export type CreateRevokeTasksV2 = {
   exclusionList?: EntitlementExclusionList | null | undefined;
   exclusionListCel?: EntitlementExclusionListCel | null | undefined;
   exclusionNone?: EntitlementExclusionNone | null | undefined;
+  /**
+   * Restricts the step to grants of either DIRECT (grants the user holds directly,
+   *
+   * @remarks
+   *  including grants that are also inherited) or UNSPECIFIED (all grants).
+   *  Composes with every inclusion mode, including inclusion_list_cel.
+   */
+  grantSourceFilter?: GrantSourceFilter | undefined;
   inclusionAccessOnly?: EntitlementInclusionAccessOnly | null | undefined;
   inclusionAll?: EntitlementInclusionAll | null | undefined;
   inclusionCriteria?: EntitlementInclusionCriteria | null | undefined;
@@ -120,6 +150,19 @@ export type CreateRevokeTasksV2 = {
 };
 
 /** @internal */
+export const GrantSourceFilter$inboundSchema: z.ZodType<
+  GrantSourceFilter,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(GrantSourceFilter);
+/** @internal */
+export const GrantSourceFilter$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  GrantSourceFilter
+> = openEnums.outboundSchema(GrantSourceFilter);
+
+/** @internal */
 export const CreateRevokeTasksV2$inboundSchema: z.ZodType<
   CreateRevokeTasksV2,
   z.ZodTypeDef,
@@ -131,6 +174,7 @@ export const CreateRevokeTasksV2$inboundSchema: z.ZodType<
   exclusionListCel: z.nullable(EntitlementExclusionListCel$inboundSchema)
     .optional(),
   exclusionNone: z.nullable(EntitlementExclusionNone$inboundSchema).optional(),
+  grantSourceFilter: GrantSourceFilter$inboundSchema.optional(),
   inclusionAccessOnly: z.nullable(EntitlementInclusionAccessOnly$inboundSchema)
     .optional(),
   inclusionAll: z.nullable(EntitlementInclusionAll$inboundSchema).optional(),
@@ -149,6 +193,7 @@ export type CreateRevokeTasksV2$Outbound = {
   exclusionList?: EntitlementExclusionList$Outbound | null | undefined;
   exclusionListCel?: EntitlementExclusionListCel$Outbound | null | undefined;
   exclusionNone?: EntitlementExclusionNone$Outbound | null | undefined;
+  grantSourceFilter?: string | undefined;
   inclusionAccessOnly?:
     | EntitlementInclusionAccessOnly$Outbound
     | null
@@ -174,6 +219,7 @@ export const CreateRevokeTasksV2$outboundSchema: z.ZodType<
   exclusionListCel: z.nullable(EntitlementExclusionListCel$outboundSchema)
     .optional(),
   exclusionNone: z.nullable(EntitlementExclusionNone$outboundSchema).optional(),
+  grantSourceFilter: GrantSourceFilter$outboundSchema.optional(),
   inclusionAccessOnly: z.nullable(EntitlementInclusionAccessOnly$outboundSchema)
     .optional(),
   inclusionAll: z.nullable(EntitlementInclusionAll$outboundSchema).optional(),

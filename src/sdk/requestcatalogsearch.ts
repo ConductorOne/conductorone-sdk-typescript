@@ -3,6 +3,7 @@
  */
 
 import { requestCatalogSearchSearchEntitlements } from "../funcs/requestCatalogSearchSearchEntitlements.js";
+import { requestCatalogSearchSearchRequestableCredentialOfferings } from "../funcs/requestCatalogSearchSearchRequestableCredentialOfferings.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "./models/operations/index.js";
 import * as shared from "./models/shared/index.js";
@@ -10,10 +11,31 @@ import { unwrapAsync } from "./types/fp.js";
 
 export class RequestCatalogSearch extends ClientSDK {
   /**
+   * Search Requestable Credential Offerings
+   *
+   * @remarks
+   * SearchRequestableCredentialOfferings returns the credential offerings the target user can
+   *  request, optionally limited to one app, ordered by display name then ids.
+   */
+  async searchRequestableCredentialOfferings(
+    request?: shared.SearchRequestableCredentialOfferingsRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiRequestcatalogV1RequestCatalogSearchServiceSearchRequestableCredentialOfferingsResponse
+  > {
+    return unwrapAsync(requestCatalogSearchSearchRequestableCredentialOfferings(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Search Entitlements
    *
    * @remarks
    * Search request catalogs based on filters specified in the request body.
+   *  Rows are heavy (each entitlement carries its user bindings) — request a small page_size (≤10) and set expand_mask to only the paths you need; broad expansion inlines whole related objects and bloats the response.
    */
   async searchEntitlements(
     request?:

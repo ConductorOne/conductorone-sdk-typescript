@@ -14,7 +14,7 @@ export type EntitlementOwnerProvisioner = {
   /**
    * Whether the provisioner can reassign the task.
    */
-  allowReassignment?: boolean | null | undefined;
+  allowReassignment?: boolean | undefined;
   /**
    * Fallback user IDs if no entitlement owners are found.
    */
@@ -27,12 +27,12 @@ export const EntitlementOwnerProvisioner$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  allowReassignment: z.nullable(z.boolean()).optional(),
+  allowReassignment: z.boolean().optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
 export type EntitlementOwnerProvisioner$Outbound = {
-  allowReassignment?: boolean | null | undefined;
+  allowReassignment?: boolean | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
 };
 
@@ -42,7 +42,7 @@ export const EntitlementOwnerProvisioner$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EntitlementOwnerProvisioner
 > = z.object({
-  allowReassignment: z.nullable(z.boolean()).optional(),
+  allowReassignment: z.boolean().optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
 });
 

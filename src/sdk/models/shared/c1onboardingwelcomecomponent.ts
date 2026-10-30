@@ -18,11 +18,11 @@ export type C1OnboardingWelcomeComponent = {
   /**
    * The recommendedCatalogId field.
    */
-  recommendedCatalogId?: string | null | undefined;
+  recommendedCatalogId?: string | undefined;
   /**
    * The recommendedDisplayName field.
    */
-  recommendedDisplayName?: string | null | undefined;
+  recommendedDisplayName?: string | undefined;
 };
 
 /** @internal */
@@ -31,8 +31,8 @@ export const C1OnboardingWelcomeComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  recommendedCatalogId: z.nullable(z.string()).optional(),
-  recommendedDisplayName: z.nullable(z.string()).optional(),
+  recommendedCatalogId: z.string().optional(),
+  recommendedDisplayName: z.string().optional(),
 });
 
 export function c1OnboardingWelcomeComponentFromJSON(

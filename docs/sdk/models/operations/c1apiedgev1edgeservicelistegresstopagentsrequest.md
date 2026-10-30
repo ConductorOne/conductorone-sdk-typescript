@@ -1,0 +1,25 @@
+# C1ApiEdgeV1EdgeServiceListEgressTopAgentsRequest
+
+## Example Usage
+
+```typescript
+import { C1ApiEdgeV1EdgeServiceListEgressTopAgentsRequest } from "conductorone-sdk-typescript/sdk/models/operations";
+
+let value: C1ApiEdgeV1EdgeServiceListEgressTopAgentsRequest = {
+  appId: "<id>",
+  id: "<id>",
+};
+```
+
+## Fields
+
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `appId`                                                             | *string*                                                            | :heavy_check_mark:                                                  | N/A                                                                 |
+| `id`                                                                | *string*                                                            | :heavy_check_mark:                                                  | N/A                                                                 |
+| `bucket`                                                            | [operations.Bucket](../../../sdk/models/operations/bucket.md)       | :heavy_minus_sign:                                                  | The bucket field.                                                   |
+| `dimension`                                                         | [operations.Dimension](../../../sdk/models/operations/dimension.md) | :heavy_minus_sign:                                                  | The dimension field.                                                |
+| `pageSize`                                                          | *number*                                                            | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `pageToken`                                                         | *string*                                                            | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `since`                                                             | *number*                                                            | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `until`                                                             | *number*                                                            | :heavy_minus_sign:                                                  | N/A                                                                 |

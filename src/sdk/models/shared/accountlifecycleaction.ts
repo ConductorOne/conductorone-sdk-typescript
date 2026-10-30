@@ -40,7 +40,7 @@ export type AccountLifecycleAction = {
   /**
    * The actionName field.
    */
-  actionName?: string | null | undefined;
+  actionName?: string | undefined;
   connectorRef?: ConnectorRef | null | undefined;
 };
 
@@ -52,14 +52,14 @@ export const AccountLifecycleAction$inboundSchema: z.ZodType<
 > = z.object({
   accountInContext: z.nullable(AccountInContext$inboundSchema).optional(),
   accountRef: z.nullable(AccountRef$inboundSchema).optional(),
-  actionName: z.nullable(z.string()).optional(),
+  actionName: z.string().optional(),
   connectorRef: z.nullable(ConnectorRef$inboundSchema).optional(),
 });
 /** @internal */
 export type AccountLifecycleAction$Outbound = {
   accountInContext?: AccountInContext$Outbound | null | undefined;
   accountRef?: AccountRef$Outbound | null | undefined;
-  actionName?: string | null | undefined;
+  actionName?: string | undefined;
   connectorRef?: ConnectorRef$Outbound | null | undefined;
 };
 
@@ -71,7 +71,7 @@ export const AccountLifecycleAction$outboundSchema: z.ZodType<
 > = z.object({
   accountInContext: z.nullable(AccountInContext$outboundSchema).optional(),
   accountRef: z.nullable(AccountRef$outboundSchema).optional(),
-  actionName: z.nullable(z.string()).optional(),
+  actionName: z.string().optional(),
   connectorRef: z.nullable(ConnectorRef$outboundSchema).optional(),
 });
 

@@ -10,23 +10,37 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The PasswordField message.
  */
-export type PasswordField = {};
+export type PasswordField = {
+  /**
+   * Render the masked input as a multiline textarea, for secrets that span
+   *
+   * @remarks
+   *  lines such as a PEM-encoded key.
+   */
+  multiline?: boolean | null | undefined;
+};
 
 /** @internal */
 export const PasswordField$inboundSchema: z.ZodType<
   PasswordField,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = z.object({
+  multiline: z.nullable(z.boolean()).optional(),
+});
 /** @internal */
-export type PasswordField$Outbound = {};
+export type PasswordField$Outbound = {
+  multiline?: boolean | null | undefined;
+};
 
 /** @internal */
 export const PasswordField$outboundSchema: z.ZodType<
   PasswordField$Outbound,
   z.ZodTypeDef,
   PasswordField
-> = z.object({});
+> = z.object({
+  multiline: z.nullable(z.boolean()).optional(),
+});
 
 export function passwordFieldToJSON(passwordField: PasswordField): string {
   return JSON.stringify(PasswordField$outboundSchema.parse(passwordField));

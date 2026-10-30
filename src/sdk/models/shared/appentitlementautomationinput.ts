@@ -46,11 +46,11 @@ export type AppEntitlementAutomationInput = {
   /**
    * The description of the app entitlement.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The display name of the app entitlement.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   entitlements?: AppEntitlementAutomationRuleEntitlement | null | undefined;
   lastRunStatus?: AppEntitlementAutomationLastRunStatusInput | null | undefined;
   none?: AppEntitlementAutomationRuleNone | null | undefined;
@@ -60,8 +60,8 @@ export type AppEntitlementAutomationInput = {
 export type AppEntitlementAutomationInput$Outbound = {
   basic?: AppEntitlementAutomationRuleBasic$Outbound | null | undefined;
   cel?: AppEntitlementAutomationRuleCEL$Outbound | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
   entitlements?:
     | AppEntitlementAutomationRuleEntitlement$Outbound
     | null
@@ -82,8 +82,8 @@ export const AppEntitlementAutomationInput$outboundSchema: z.ZodType<
   basic: z.nullable(AppEntitlementAutomationRuleBasic$outboundSchema)
     .optional(),
   cel: z.nullable(AppEntitlementAutomationRuleCEL$outboundSchema).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
   entitlements: z.nullable(
     AppEntitlementAutomationRuleEntitlement$outboundSchema,
   ).optional(),

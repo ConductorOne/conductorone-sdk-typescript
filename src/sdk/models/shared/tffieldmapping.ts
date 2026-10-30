@@ -77,7 +77,7 @@ export type TFFieldMapping = {
   /**
    * The C1 API field name (proto field name, snake_case).
    */
-  c1Field?: string | null | undefined;
+  c1Field?: string | undefined;
   /**
    * Whether the server populates this field. A field that is
    *
@@ -85,7 +85,7 @@ export type TFFieldMapping = {
    *  `computed` and neither `optional` nor `required` is server-only —
    *  do not emit it in user-authored HCL.
    */
-  computed?: boolean | null | undefined;
+  computed?: boolean | undefined;
   /**
    * For collection fields (list/set/tuple/map) whose elements are
    *
@@ -94,7 +94,7 @@ export type TFFieldMapping = {
    *  TF_TYPE_UNSPECIFIED for non-collection fields and for collections
    *  of objects (where `nested_fields` describes the element shape).
    */
-  elementTfType?: ElementTfType | null | undefined;
+  elementTfType?: ElementTfType | undefined;
   /**
    * Declared variants for fields whose C1-side proto type is an enum.
    *
@@ -127,23 +127,23 @@ export type TFFieldMapping = {
    *    oneof_field   = "target"
    *    oneof_variant = "automation"
    */
-  oneofField?: string | null | undefined;
+  oneofField?: string | undefined;
   /**
    * The oneofVariant field.
    */
-  oneofVariant?: string | null | undefined;
+  oneofVariant?: string | undefined;
   /**
    * Whether the user may supply this field. May co-occur with
    *
    * @remarks
    *  `computed` (i.e. either the user or the server can set the value).
    */
-  optional?: boolean | null | undefined;
+  optional?: boolean | undefined;
   references?: TFReference | null | undefined;
   /**
    * Whether the user must supply this field in HCL.
    */
-  required?: boolean | null | undefined;
+  required?: boolean | undefined;
   /**
    * Whether the value is a secret. Sensitive values must not be
    *
@@ -151,14 +151,14 @@ export type TFFieldMapping = {
    *  rendered verbatim; emit a placeholder so callers wire the value
    *  through a Terraform variable or vault data source.
    */
-  sensitive?: boolean | null | undefined;
+  sensitive?: boolean | undefined;
   /**
    * The Terraform attribute name. Usually matches c1_field but may
    *
    * @remarks
    *  differ in casing or pluralization.
    */
-  tfField?: string | null | undefined;
+  tfField?: string | undefined;
   /**
    * The Terraform attribute type. For collections of structured
    *
@@ -166,7 +166,7 @@ export type TFFieldMapping = {
    *  objects, the element shape is in `nested_fields`. For collections
    *  of primitives, the element type is in `element_tf_type`.
    */
-  tfType?: TfType | null | undefined;
+  tfType?: TfType | undefined;
 };
 
 /** @internal */
@@ -186,20 +186,20 @@ export const TFFieldMapping$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  c1Field: z.nullable(z.string()).optional(),
-  computed: z.nullable(z.boolean()).optional(),
-  elementTfType: z.nullable(ElementTfType$inboundSchema).optional(),
+  c1Field: z.string().optional(),
+  computed: z.boolean().optional(),
+  elementTfType: ElementTfType$inboundSchema.optional(),
   enumValues: z.nullable(z.array(EnumValue$inboundSchema)).optional(),
   nestedFields: z.nullable(z.array(z.lazy(() => TFFieldMapping$inboundSchema)))
     .optional(),
-  oneofField: z.nullable(z.string()).optional(),
-  oneofVariant: z.nullable(z.string()).optional(),
-  optional: z.nullable(z.boolean()).optional(),
+  oneofField: z.string().optional(),
+  oneofVariant: z.string().optional(),
+  optional: z.boolean().optional(),
   references: z.nullable(TFReference$inboundSchema).optional(),
-  required: z.nullable(z.boolean()).optional(),
-  sensitive: z.nullable(z.boolean()).optional(),
-  tfField: z.nullable(z.string()).optional(),
-  tfType: z.nullable(TfType$inboundSchema).optional(),
+  required: z.boolean().optional(),
+  sensitive: z.boolean().optional(),
+  tfField: z.string().optional(),
+  tfType: TfType$inboundSchema.optional(),
 });
 
 export function tfFieldMappingFromJSON(

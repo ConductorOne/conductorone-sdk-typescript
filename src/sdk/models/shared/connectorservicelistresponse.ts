@@ -38,7 +38,7 @@ export type ConnectorServiceListResponse = {
   /**
    * The nextPageToken is shown for the next page if the number of results is larger than the max page size. The server returns one page of results and the nextPageToken until all results are retreived. To retrieve the next page, use the same request and append a pageToken field with the value of nextPageToken shown on the previous page.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -79,7 +79,7 @@ export const ConnectorServiceListResponse$inboundSchema: z.ZodType<
     z.array(z.lazy(() => ConnectorServiceListResponseExpanded$inboundSchema)),
   ).optional(),
   list: z.nullable(z.array(ConnectorView$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function connectorServiceListResponseFromJSON(

@@ -28,7 +28,7 @@ export type ConnectorServiceCreateRequest = {
   /**
    * The catalogId field.
    */
-  catalogId?: string | null | undefined;
+  catalogId?: string | undefined;
   /**
    * Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
    */
@@ -36,7 +36,7 @@ export type ConnectorServiceCreateRequest = {
   /**
    * The description field.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   expandMask?: ConnectorExpandMask | null | undefined;
   /**
    * The userIds field.
@@ -80,9 +80,9 @@ export function connectorServiceCreateRequestConfigToJSON(
 
 /** @internal */
 export type ConnectorServiceCreateRequest$Outbound = {
-  catalogId?: string | null | undefined;
+  catalogId?: string | undefined;
   config?: ConnectorServiceCreateRequestConfig$Outbound | null | undefined;
-  description?: string | null | undefined;
+  description?: string | undefined;
   expandMask?: ConnectorExpandMask$Outbound | null | undefined;
   userIds?: Array<string> | null | undefined;
 };
@@ -93,11 +93,11 @@ export const ConnectorServiceCreateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ConnectorServiceCreateRequest
 > = z.object({
-  catalogId: z.nullable(z.string()).optional(),
+  catalogId: z.string().optional(),
   config: z.nullable(
     z.lazy(() => ConnectorServiceCreateRequestConfig$outboundSchema),
   ).optional(),
-  description: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
   expandMask: z.nullable(ConnectorExpandMask$outboundSchema).optional(),
   userIds: z.nullable(z.array(z.string())).optional(),
 });

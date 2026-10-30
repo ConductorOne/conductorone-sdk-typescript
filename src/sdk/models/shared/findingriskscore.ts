@@ -9,6 +9,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FindingRiskFactor,
   FindingRiskFactor$inboundSchema,
+  FindingRiskFactor$Outbound,
+  FindingRiskFactor$outboundSchema,
 } from "./findingriskfactor.js";
 
 /**
@@ -18,15 +20,15 @@ export type FindingRiskScore = {
   /**
    * The originalScore field.
    */
-  originalScore?: number | null | undefined;
+  originalScore?: number | undefined;
   /**
    * The overrideByUserId field.
    */
-  overrideByUserId?: string | null | undefined;
+  overrideByUserId?: string | undefined;
   /**
    * The overrideScore field.
    */
-  overrideScore?: number | null | undefined;
+  overrideScore?: number | undefined;
   /**
    * The riskFactors field.
    */
@@ -34,11 +36,11 @@ export type FindingRiskScore = {
   /**
    * The score field.
    */
-  score?: number | null | undefined;
+  score?: number | undefined;
   /**
    * The systemScore field.
    */
-  systemScore?: number | null | undefined;
+  systemScore?: number | undefined;
 };
 
 /** @internal */
@@ -47,14 +49,44 @@ export const FindingRiskScore$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  originalScore: z.nullable(z.number().int()).optional(),
-  overrideByUserId: z.nullable(z.string()).optional(),
-  overrideScore: z.nullable(z.number().int()).optional(),
+  originalScore: z.number().int().optional(),
+  overrideByUserId: z.string().optional(),
+  overrideScore: z.number().int().optional(),
   riskFactors: z.nullable(z.array(FindingRiskFactor$inboundSchema)).optional(),
-  score: z.nullable(z.number().int()).optional(),
-  systemScore: z.nullable(z.number().int()).optional(),
+  score: z.number().int().optional(),
+  systemScore: z.number().int().optional(),
+});
+/** @internal */
+export type FindingRiskScore$Outbound = {
+  originalScore?: number | undefined;
+  overrideByUserId?: string | undefined;
+  overrideScore?: number | undefined;
+  riskFactors?: Array<FindingRiskFactor$Outbound> | null | undefined;
+  score?: number | undefined;
+  systemScore?: number | undefined;
+};
+
+/** @internal */
+export const FindingRiskScore$outboundSchema: z.ZodType<
+  FindingRiskScore$Outbound,
+  z.ZodTypeDef,
+  FindingRiskScore
+> = z.object({
+  originalScore: z.number().int().optional(),
+  overrideByUserId: z.string().optional(),
+  overrideScore: z.number().int().optional(),
+  riskFactors: z.nullable(z.array(FindingRiskFactor$outboundSchema)).optional(),
+  score: z.number().int().optional(),
+  systemScore: z.number().int().optional(),
 });
 
+export function findingRiskScoreToJSON(
+  findingRiskScore: FindingRiskScore,
+): string {
+  return JSON.stringify(
+    FindingRiskScore$outboundSchema.parse(findingRiskScore),
+  );
+}
 export function findingRiskScoreFromJSON(
   jsonString: string,
 ): SafeParseResult<FindingRiskScore, SDKValidationError> {

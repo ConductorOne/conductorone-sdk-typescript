@@ -11,12 +11,12 @@ export type RemoveEntitlementMembershipRequest = {
   /**
    * The ID of the app user whose membership to remove.
    */
-  appUserId?: string | null | undefined;
+  appUserId?: string | undefined;
 };
 
 /** @internal */
 export type RemoveEntitlementMembershipRequest$Outbound = {
-  appUserId?: string | null | undefined;
+  appUserId?: string | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const RemoveEntitlementMembershipRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RemoveEntitlementMembershipRequest
 > = z.object({
-  appUserId: z.nullable(z.string()).optional(),
+  appUserId: z.string().optional(),
 });
 
 export function removeEntitlementMembershipRequestToJSON(

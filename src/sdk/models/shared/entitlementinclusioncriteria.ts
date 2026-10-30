@@ -6,6 +6,12 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  ResourceTypeRef,
+  ResourceTypeRef$inboundSchema,
+  ResourceTypeRef$Outbound,
+  ResourceTypeRef$outboundSchema,
+} from "./resourcetyperef.js";
 
 /**
  * The EntitlementInclusionCriteria message.
@@ -20,9 +26,23 @@ export type EntitlementInclusionCriteria = {
    */
   complianceFrameworkIds?: Array<string> | null | undefined;
   /**
-   * The resourceTypeIds field.
+   * Deprecated: matched by resource type display name, which collides across
+   *
+   * @remarks
+   *  apps/connectors. Not read by execution — replaced by resource_type_refs.
+   *  Kept only for wire compatibility with existing stored rows; a criteria
+   *  still carrying this without a ref fails closed at execution time.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   resourceTypeIds?: Array<string> | null | undefined;
+  /**
+   * The only field that scopes resource types; resource_type_ids is deprecated
+   *
+   * @remarks
+   *  and ignored.
+   */
+  resourceTypeRefs?: Array<ResourceTypeRef> | null | undefined;
   /**
    * The riskLevelIds field.
    */
@@ -38,6 +58,8 @@ export const EntitlementInclusionCriteria$inboundSchema: z.ZodType<
   appIds: z.nullable(z.array(z.string())).optional(),
   complianceFrameworkIds: z.nullable(z.array(z.string())).optional(),
   resourceTypeIds: z.nullable(z.array(z.string())).optional(),
+  resourceTypeRefs: z.nullable(z.array(ResourceTypeRef$inboundSchema))
+    .optional(),
   riskLevelIds: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
@@ -45,6 +67,7 @@ export type EntitlementInclusionCriteria$Outbound = {
   appIds?: Array<string> | null | undefined;
   complianceFrameworkIds?: Array<string> | null | undefined;
   resourceTypeIds?: Array<string> | null | undefined;
+  resourceTypeRefs?: Array<ResourceTypeRef$Outbound> | null | undefined;
   riskLevelIds?: Array<string> | null | undefined;
 };
 
@@ -57,6 +80,8 @@ export const EntitlementInclusionCriteria$outboundSchema: z.ZodType<
   appIds: z.nullable(z.array(z.string())).optional(),
   complianceFrameworkIds: z.nullable(z.array(z.string())).optional(),
   resourceTypeIds: z.nullable(z.array(z.string())).optional(),
+  resourceTypeRefs: z.nullable(z.array(ResourceTypeRef$outboundSchema))
+    .optional(),
   riskLevelIds: z.nullable(z.array(z.string())).optional(),
 });
 

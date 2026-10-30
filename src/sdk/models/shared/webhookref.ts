@@ -11,12 +11,12 @@ export type WebhookRef = {
   /**
    * The ID of the referenced webhook.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
 export type WebhookRef$Outbound = {
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const WebhookRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WebhookRef
 > = z.object({
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
 });
 
 export function webhookRefToJSON(webhookRef: WebhookRef): string {

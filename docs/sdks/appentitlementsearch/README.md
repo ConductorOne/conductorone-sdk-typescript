@@ -9,10 +9,13 @@
 * [search](#search) - Search
 * [searchGrants](#searchgrants) - Search Grants
 * [searchGraph](#searchgraph) - Search Graph
+* [countGrantsForUserByApp](#countgrantsforuserbyapp) - Count Grants For User By App
+* [searchReachableResourcesForUser](#searchreachableresourcesforuser) - Search Reachable Resources For User
 
 ## searchAppEntitlementsWithExpired
 
 Search app entitlements, include app users, users, expires, discovered.
+ Response rows are large — request a small page_size (≤10) to keep responses small.
 
 ### Example Usage
 
@@ -94,6 +97,7 @@ run();
 ## searchAppEntitlementsForAppUser
 
 Search for app entitlements associated with a specific app user, with optional resource type trait filtering.
+ Each AppEntitlementView row is large — request a small page_size (≤10) and set expand_mask to only the paths you need; broad expansion inlines whole related objects and bloats the response.
 
 ### Example Usage
 
@@ -175,6 +179,7 @@ run();
 ## search
 
 Search app entitlements based on filters specified in the request body.
+ Each AppEntitlementView row is large — request a small page_size (≤10) and set expand_mask to only the paths you need; broad expansion inlines whole related objects and bloats the response.
 
 ### Example Usage
 
@@ -254,6 +259,7 @@ run();
 ## searchGrants
 
 Search grants (user-to-entitlement bindings) across apps, with filters for app, user, resource type, and entitlement.
+ Rows are heavy (each binding carries a full entitlement + user view) — request a small page_size (≤10) and set expand_mask to only the paths you need; broad expansion inlines whole related objects and bloats the response.
 
 ### Example Usage
 
@@ -395,6 +401,164 @@ run();
 ### Response
 
 **Promise\<[operations.C1ApiAppV1AppEntitlementSearchServiceSearchGraphResponse](../../sdk/models/operations/c1apiappv1appentitlementsearchservicesearchgraphresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## countGrantsForUserByApp
+
+CountGrantsForUserByApp returns, for a user, the number of grants held per
+ application. Use it to size or filter an access graph before calling
+ SearchGraph: counts are computed directly from grant bindings and are an
+ upper bound on what SearchGraph will render for the same user and app
+ filter (SearchGraph applies additional filters that this count does not).
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.app.v1.AppEntitlementSearchService.CountGrantsForUserByApp" method="post" path="/api/v1/search/graph/counts" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.appEntitlementSearch.countGrantsForUserByApp();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { appEntitlementSearchCountGrantsForUserByApp } from "conductorone-sdk-typescript/funcs/appEntitlementSearchCountGrantsForUserByApp.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await appEntitlementSearchCountGrantsForUserByApp(conductoroneSDKTypescript);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("appEntitlementSearchCountGrantsForUserByApp failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [shared.AppEntitlementSearchServiceCountGrantsForUserByAppRequest](../../sdk/models/shared/appentitlementsearchservicecountgrantsforuserbyapprequest.md)                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.C1ApiAppV1AppEntitlementSearchServiceCountGrantsForUserByAppResponse](../../sdk/models/operations/c1apiappv1appentitlementsearchservicecountgrantsforuserbyappresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## searchReachableResourcesForUser
+
+SearchReachableResourcesForUser returns the distinct app resources a user
+ can reach through any of their grants, deduplicated across entitlements
+ (a resource reachable via more than one grant appears once). Powers the
+ Resources lane of the access graph's list view: supports free-text search
+ over resource display name and narrowing to specific applications.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.app.v1.AppEntitlementSearchService.SearchReachableResourcesForUser" method="post" path="/api/v1/search/graph/resources" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.appEntitlementSearch.searchReachableResourcesForUser();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { appEntitlementSearchSearchReachableResourcesForUser } from "conductorone-sdk-typescript/funcs/appEntitlementSearchSearchReachableResourcesForUser.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await appEntitlementSearchSearchReachableResourcesForUser(conductoroneSDKTypescript);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("appEntitlementSearchSearchReachableResourcesForUser failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [shared.AppEntitlementSearchServiceSearchReachableResourcesForUserRequest](../../sdk/models/shared/appentitlementsearchservicesearchreachableresourcesforuserrequest.md)       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.C1ApiAppV1AppEntitlementSearchServiceSearchReachableResourcesForUserResponse](../../sdk/models/operations/c1apiappv1appentitlementsearchservicesearchreachableresourcesforuserresponse.md)\>**
 
 ### Errors
 

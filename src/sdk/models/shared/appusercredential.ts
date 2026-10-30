@@ -20,11 +20,11 @@ export type AppUserCredential = {
   /**
    * The ID of the application.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * A unique identifier of the application user.
    */
-  appUserId?: string | null | undefined;
+  appUserId?: string | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   encryptedData?: EncryptedData | null | undefined;
@@ -32,7 +32,7 @@ export type AppUserCredential = {
   /**
    * A unique identifier of the credential.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -42,8 +42,8 @@ export const AppUserCredential$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  appUserId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  appUserId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -54,7 +54,7 @@ export const AppUserCredential$inboundSchema: z.ZodType<
   expiresAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

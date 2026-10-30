@@ -23,23 +23,23 @@ export type DecoyInput = {
   /**
    * The description field.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * Admin-disabled.
    */
-  disabled?: boolean | null | undefined;
+  disabled?: boolean | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
 };
 
 /** @internal */
 export type DecoyInput$Outbound = {
   annotations?: { [k: string]: string } | undefined;
-  description?: string | null | undefined;
-  disabled?: boolean | null | undefined;
-  displayName?: string | null | undefined;
+  description?: string | undefined;
+  disabled?: boolean | undefined;
+  displayName?: string | undefined;
 };
 
 /** @internal */
@@ -49,9 +49,9 @@ export const DecoyInput$outboundSchema: z.ZodType<
   DecoyInput
 > = z.object({
   annotations: z.record(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  disabled: z.nullable(z.boolean()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  disabled: z.boolean().optional(),
+  displayName: z.string().optional(),
 });
 
 export function decoyInputToJSON(decoyInput: DecoyInput): string {

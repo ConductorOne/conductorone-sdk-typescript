@@ -17,7 +17,7 @@ export type ActionTargetClientIdApprovalInstance = {
   /**
    * The clientIdUrl field.
    */
-  clientIdUrl?: string | null | undefined;
+  clientIdUrl?: string | undefined;
 };
 
 /** @internal */
@@ -26,11 +26,11 @@ export const ActionTargetClientIdApprovalInstance$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  clientIdUrl: z.nullable(z.string()).optional(),
+  clientIdUrl: z.string().optional(),
 });
 /** @internal */
 export type ActionTargetClientIdApprovalInstance$Outbound = {
-  clientIdUrl?: string | null | undefined;
+  clientIdUrl?: string | undefined;
 };
 
 /** @internal */
@@ -39,7 +39,7 @@ export const ActionTargetClientIdApprovalInstance$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ActionTargetClientIdApprovalInstance
 > = z.object({
-  clientIdUrl: z.nullable(z.string()).optional(),
+  clientIdUrl: z.string().optional(),
 });
 
 export function actionTargetClientIdApprovalInstanceToJSON(

@@ -14,7 +14,7 @@ export type TaskAuditPolicyProvisionCancelled = {
   /**
    * The cancelReason field.
    */
-  cancelReason?: string | null | undefined;
+  cancelReason?: string | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const TaskAuditPolicyProvisionCancelled$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  cancelReason: z.nullable(z.string()).optional(),
+  cancelReason: z.string().optional(),
 });
 
 export function taskAuditPolicyProvisionCancelledFromJSON(

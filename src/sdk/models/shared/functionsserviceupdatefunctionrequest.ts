@@ -13,12 +13,30 @@ import {
  * The FunctionsServiceUpdateFunctionRequest message.
  */
 export type FunctionsServiceUpdateFunctionRequest = {
+  /**
+   * The commit message describing this code update. Defaults to a generic
+   *
+   * @remarks
+   *  message if content is set and this is empty. Ignored if content is empty.
+   */
+  commitMessage?: string | undefined;
+  /**
+   * File map for a new code commit, applied as the function's new head
+   *
+   * @remarks
+   *  commit. Keys are file paths in the function root; values are file
+   *  contents as bytes. See CreateFunctionRequest.initial_content for the
+   *  required entry-file signature. Independent of update_mask.
+   */
+  content?: { [k: string]: string } | undefined;
   function?: FunctionInput | null | undefined;
   updateMask?: string | null | undefined;
 };
 
 /** @internal */
 export type FunctionsServiceUpdateFunctionRequest$Outbound = {
+  commitMessage?: string | undefined;
+  content?: { [k: string]: string } | undefined;
   function?: FunctionInput$Outbound | null | undefined;
   updateMask?: string | null | undefined;
 };
@@ -29,6 +47,8 @@ export const FunctionsServiceUpdateFunctionRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FunctionsServiceUpdateFunctionRequest
 > = z.object({
+  commitMessage: z.string().optional(),
+  content: z.record(z.string()).optional(),
   function: z.nullable(FunctionInput$outboundSchema).optional(),
   updateMask: z.nullable(z.string()).optional(),
 });

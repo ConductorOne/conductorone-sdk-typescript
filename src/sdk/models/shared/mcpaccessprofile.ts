@@ -14,33 +14,49 @@ export type MCPAccessProfile = {
   /**
    * The ID of the AppEntitlement created for this profile.
    */
-  appEntitlementId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
   /**
    * App identifier (app that owns the connector).
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
+  /**
+   * Display name of the connector this toolset belongs to. Computed read-only;
+   *
+   * @remarks
+   *  populated on every read. The
+   *  auto-maintained default toolsets share a display name across connectors, so
+   *  this is what tells two of them apart.
+   */
+  connectorDisplayName?: string | undefined;
   /**
    * Connector identifier.
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * Description of what access this profile grants.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * Display name for the profile.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * Unique identifier for this access profile.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
+  /**
+   * Whether this toolset's backing entitlement is exposed in at least one
+   *
+   * @remarks
+   *  request catalog (i.e. can be requested). Computed read-only; populated on List.
+   */
+  requestable?: boolean | undefined;
   /**
    * The number of tools currently bound to this profile.
    */
-  toolCount?: number | null | undefined;
+  toolCount?: number | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -50,62 +66,26 @@ export const MCPAccessProfile$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
+  appEntitlementId: z.string().optional(),
+  appId: z.string().optional(),
+  connectorDisplayName: z.string().optional(),
+  connectorId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  toolCount: z.nullable(z.number().int()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  id: z.string().optional(),
+  requestable: z.boolean().optional(),
+  toolCount: z.number().int().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
-/** @internal */
-export type MCPAccessProfile$Outbound = {
-  appEntitlementId?: string | null | undefined;
-  appId?: string | null | undefined;
-  connectorId?: string | null | undefined;
-  createdAt?: string | null | undefined;
-  deletedAt?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  id?: string | null | undefined;
-  toolCount?: number | null | undefined;
-  updatedAt?: string | null | undefined;
-};
 
-/** @internal */
-export const MCPAccessProfile$outboundSchema: z.ZodType<
-  MCPAccessProfile$Outbound,
-  z.ZodTypeDef,
-  MCPAccessProfile
-> = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  toolCount: z.nullable(z.number().int()).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
-
-export function mcpAccessProfileToJSON(
-  mcpAccessProfile: MCPAccessProfile,
-): string {
-  return JSON.stringify(
-    MCPAccessProfile$outboundSchema.parse(mcpAccessProfile),
-  );
-}
 export function mcpAccessProfileFromJSON(
   jsonString: string,
 ): SafeParseResult<MCPAccessProfile, SDKValidationError> {

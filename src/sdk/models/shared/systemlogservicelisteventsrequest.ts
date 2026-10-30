@@ -9,7 +9,7 @@ import { OpenEnum } from "../../types/enums.js";
 /**
  * The sortDirection field.
  */
-export const SortDirection = {
+export const SystemLogServiceListEventsRequestSortDirection = {
   SortDirectionUnspecified: "SORT_DIRECTION_UNSPECIFIED",
   SortDirectionAsc: "SORT_DIRECTION_ASC",
   SortDirectionDesc: "SORT_DIRECTION_DESC",
@@ -17,7 +17,9 @@ export const SortDirection = {
 /**
  * The sortDirection field.
  */
-export type SortDirection = OpenEnum<typeof SortDirection>;
+export type SystemLogServiceListEventsRequestSortDirection = OpenEnum<
+  typeof SystemLogServiceListEventsRequestSortDirection
+>;
 
 /**
  * The SystemLogServiceListEventsRequest message.
@@ -26,43 +28,44 @@ export type SystemLogServiceListEventsRequest = {
   /**
    * The pageSize field.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   since?: Date | null | undefined;
   /**
    * The sinceEventUid field.
    */
-  sinceEventUid?: string | null | undefined;
+  sinceEventUid?: string | undefined;
   /**
    * The sortDirection field.
    */
-  sortDirection?: SortDirection | null | undefined;
+  sortDirection?: SystemLogServiceListEventsRequestSortDirection | undefined;
   until?: Date | null | undefined;
   /**
    * The untilEventUid field.
    */
-  untilEventUid?: string | null | undefined;
+  untilEventUid?: string | undefined;
 };
 
 /** @internal */
-export const SortDirection$outboundSchema: z.ZodType<
-  string,
-  z.ZodTypeDef,
-  SortDirection
-> = openEnums.outboundSchema(SortDirection);
+export const SystemLogServiceListEventsRequestSortDirection$outboundSchema:
+  z.ZodType<
+    string,
+    z.ZodTypeDef,
+    SystemLogServiceListEventsRequestSortDirection
+  > = openEnums.outboundSchema(SystemLogServiceListEventsRequestSortDirection);
 
 /** @internal */
 export type SystemLogServiceListEventsRequest$Outbound = {
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
   since?: string | null | undefined;
-  sinceEventUid?: string | null | undefined;
-  sortDirection?: string | null | undefined;
+  sinceEventUid?: string | undefined;
+  sortDirection?: string | undefined;
   until?: string | null | undefined;
-  untilEventUid?: string | null | undefined;
+  untilEventUid?: string | undefined;
 };
 
 /** @internal */
@@ -71,13 +74,14 @@ export const SystemLogServiceListEventsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SystemLogServiceListEventsRequest
 > = z.object({
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
   since: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  sinceEventUid: z.nullable(z.string()).optional(),
-  sortDirection: z.nullable(SortDirection$outboundSchema).optional(),
+  sinceEventUid: z.string().optional(),
+  sortDirection: SystemLogServiceListEventsRequestSortDirection$outboundSchema
+    .optional(),
   until: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  untilEventUid: z.nullable(z.string()).optional(),
+  untilEventUid: z.string().optional(),
 });
 
 export function systemLogServiceListEventsRequestToJSON(

@@ -16,18 +16,18 @@ export type ConflictMonitorCreateRequest = {
   /**
    * An optional description explaining the purpose of this Separation of Duty rule.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The human-readable name for the conflict monitor.
    */
-  displayName: string | null;
+  displayName: string;
   notificationConfig?: AccessConflictNotificationConfig | null | undefined;
 };
 
 /** @internal */
 export type ConflictMonitorCreateRequest$Outbound = {
-  description?: string | null | undefined;
-  displayName: string | null;
+  description?: string | undefined;
+  displayName: string;
   notificationConfig?:
     | AccessConflictNotificationConfig$Outbound
     | null
@@ -40,8 +40,8 @@ export const ConflictMonitorCreateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ConflictMonitorCreateRequest
 > = z.object({
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()),
+  description: z.string().optional(),
+  displayName: z.string(),
   notificationConfig: z.nullable(
     AccessConflictNotificationConfig$outboundSchema,
   ).optional(),

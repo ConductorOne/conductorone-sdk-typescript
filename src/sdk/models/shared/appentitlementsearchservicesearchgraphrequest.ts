@@ -15,7 +15,7 @@ export type AppEntitlementSearchServiceSearchGraphRequest = {
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * Filters — all optional, applied at every traversal hop
    */
@@ -27,27 +27,40 @@ export type AppEntitlementSearchServiceSearchGraphRequest = {
   /**
    * The entitlementNameQuery field.
    */
-  entitlementNameQuery?: string | null | undefined;
+  entitlementNameQuery?: string | undefined;
   /**
    * Traversal controls
    */
-  maxDepth?: number | null | undefined;
+  maxDepth?: number | undefined;
   /**
-   * The maxFanOut field.
+   * Legacy per-parent fan-out limit. Superseded by max_nodes and server-computed
+   *
+   * @remarks
+   *  per-parent budgets, but still honored for callers that set it.
    */
-  maxFanOut?: number | null | undefined;
+  maxFanOut?: number | undefined;
   /**
-   * The pageSize field.
+   * Overall node budget for the returned subgraph. 0 uses the server default.
    */
-  pageSize?: number | null | undefined;
+  maxNodes?: number | undefined;
   /**
-   * The pageToken field.
+   * Legacy traversal page size. Superseded by max_nodes, but still honored for
+   *
+   * @remarks
+   *  callers that set it.
    */
-  pageToken?: string | null | undefined;
+  pageSize?: number | undefined;
+  /**
+   * Legacy pagination token. Superseded by max_nodes-based traversal, but still
+   *
+   * @remarks
+   *  honored for callers that set it.
+   */
+  pageToken?: string | undefined;
   /**
    * The resourceId field.
    */
-  resourceId?: string | null | undefined;
+  resourceId?: string | undefined;
   /**
    * The resourceIds field.
    */
@@ -55,7 +68,7 @@ export type AppEntitlementSearchServiceSearchGraphRequest = {
   /**
    * The resourceNameQuery field.
    */
-  resourceNameQuery?: string | null | undefined;
+  resourceNameQuery?: string | undefined;
   /**
    * The resourceTypeIds field.
    */
@@ -63,24 +76,25 @@ export type AppEntitlementSearchServiceSearchGraphRequest = {
   /**
    * Root entity — exactly one must be set
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
 export type AppEntitlementSearchServiceSearchGraphRequest$Outbound = {
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   appIds?: Array<string> | null | undefined;
   entitlementIds?: Array<string> | null | undefined;
-  entitlementNameQuery?: string | null | undefined;
-  maxDepth?: number | null | undefined;
-  maxFanOut?: number | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  resourceId?: string | null | undefined;
+  entitlementNameQuery?: string | undefined;
+  maxDepth?: number | undefined;
+  maxFanOut?: number | undefined;
+  maxNodes?: number | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  resourceId?: string | undefined;
   resourceIds?: Array<string> | null | undefined;
-  resourceNameQuery?: string | null | undefined;
+  resourceNameQuery?: string | undefined;
   resourceTypeIds?: Array<string> | null | undefined;
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -90,19 +104,20 @@ export const AppEntitlementSearchServiceSearchGraphRequest$outboundSchema:
     z.ZodTypeDef,
     AppEntitlementSearchServiceSearchGraphRequest
   > = z.object({
-    appId: z.nullable(z.string()).optional(),
+    appId: z.string().optional(),
     appIds: z.nullable(z.array(z.string())).optional(),
     entitlementIds: z.nullable(z.array(z.string())).optional(),
-    entitlementNameQuery: z.nullable(z.string()).optional(),
-    maxDepth: z.nullable(z.number().int()).optional(),
-    maxFanOut: z.nullable(z.number().int()).optional(),
-    pageSize: z.nullable(z.number().int()).optional(),
-    pageToken: z.nullable(z.string()).optional(),
-    resourceId: z.nullable(z.string()).optional(),
+    entitlementNameQuery: z.string().optional(),
+    maxDepth: z.number().int().optional(),
+    maxFanOut: z.number().int().optional(),
+    maxNodes: z.number().int().optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    resourceId: z.string().optional(),
     resourceIds: z.nullable(z.array(z.string())).optional(),
-    resourceNameQuery: z.nullable(z.string()).optional(),
+    resourceNameQuery: z.string().optional(),
     resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-    userId: z.nullable(z.string()).optional(),
+    userId: z.string().optional(),
   });
 
 export function appEntitlementSearchServiceSearchGraphRequestToJSON(

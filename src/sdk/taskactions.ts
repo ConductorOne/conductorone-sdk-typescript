@@ -12,6 +12,7 @@ import { taskActionsHardReset } from "../funcs/taskActionsHardReset.js";
 import { taskActionsProcessNow } from "../funcs/taskActionsProcessNow.js";
 import { taskActionsReassign } from "../funcs/taskActionsReassign.js";
 import { taskActionsRestart } from "../funcs/taskActionsRestart.js";
+import { taskActionsRetryProvisioning } from "../funcs/taskActionsRetryProvisioning.js";
 import { taskActionsSkipStep } from "../funcs/taskActionsSkipStep.js";
 import { taskActionsUpdateGrantDuration } from "../funcs/taskActionsUpdateGrantDuration.js";
 import { taskActionsUpdateRequestData } from "../funcs/taskActionsUpdateRequestData.js";
@@ -194,6 +195,27 @@ export class TaskActions extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.C1ApiTaskV1TaskActionsServiceRestartResponse> {
     return unwrapAsync(taskActionsRestart(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retry Provisioning
+   *
+   * @remarks
+   * Retry the provisioning of a task whose connector provisioning failed. Resets the
+   *  failed connector actions and re-drives the connector, preserving the already-collected
+   *  approvals. Only valid when the task's current provision step ended in an error.
+   */
+  async retryProvisioning(
+    request: operations.C1ApiTaskV1TaskActionsServiceRetryProvisioningRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiTaskV1TaskActionsServiceRetryProvisioningResponse
+  > {
+    return unwrapAsync(taskActionsRetryProvisioning(
       this,
       request,
       options,

@@ -14,7 +14,7 @@ export type BundleAutomationRuleCEL = {
   /**
    * The expression field.
    */
-  expression?: string | null | undefined;
+  expression?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const BundleAutomationRuleCEL$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  expression: z.nullable(z.string()).optional(),
+  expression: z.string().optional(),
 });
 /** @internal */
 export type BundleAutomationRuleCEL$Outbound = {
-  expression?: string | null | undefined;
+  expression?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const BundleAutomationRuleCEL$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BundleAutomationRuleCEL
 > = z.object({
-  expression: z.nullable(z.string()).optional(),
+  expression: z.string().optional(),
 });
 
 export function bundleAutomationRuleCELToJSON(

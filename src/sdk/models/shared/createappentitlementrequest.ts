@@ -51,7 +51,7 @@ export type CreateAppEntitlementRequest = {
   /**
    * A unique alias for the entitlement, used for programmatic lookups and Cone.
    */
-  alias?: string | null | undefined;
+  alias?: string | undefined;
   /**
    * Bounded key/value metadata bag for IaC marking and customer tags.
    *
@@ -72,67 +72,68 @@ export type CreateAppEntitlementRequest = {
   /**
    * The ID of the resource that this entitlement belongs to.
    */
-  appResourceId?: string | null | undefined;
+  appResourceId?: string | undefined;
   /**
    * The ID of the resource type that this entitlement belongs to.
    */
-  appResourceTypeId?: string | null | undefined;
+  appResourceTypeId?: string | undefined;
   /**
    * The ID of the policy to use for certification tasks.
    */
-  certifyPolicyId?: string | null | undefined;
+  certifyPolicyId?: string | undefined;
   /**
    * The IDs of compliance frameworks to associate with this entitlement (e.g., SOX, HIPAA).
    */
   complianceFrameworkValueIds?: Array<string> | null | undefined;
+  deprovisionerPolicy?: ProvisionPolicyInput | null | undefined;
   /**
    * The description of the new entitlement.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The display name of the new entitlement.
    */
-  displayName: string | null;
+  displayName: string;
   durationGrant?: string | null | undefined;
   durationUnset?: CreateAppEntitlementRequestDurationUnset | null | undefined;
   /**
    * Whether emergency grant requests are enabled for this entitlement.
    */
-  emergencyGrantEnabled?: boolean | null | undefined;
+  emergencyGrantEnabled?: boolean | undefined;
   /**
    * The ID of the policy to use for emergency grant tasks. Required if emergency_grant_enabled is true.
    */
-  emergencyGrantPolicyId?: string | null | undefined;
+  emergencyGrantPolicyId?: string | undefined;
   expandMask?: AppEntitlementExpandMask | null | undefined;
   /**
    * The ID of the policy to use for grant request tasks.
    */
-  grantPolicyId?: string | null | undefined;
+  grantPolicyId?: string | undefined;
   /**
    * If supplied, it's implied that the entitlement is created before sync and needs to be merged with connector entitlement.
    */
-  matchBatonId?: string | null | undefined;
+  matchBatonId?: string | undefined;
   /**
    * Whether to override the app-level access request defaults for this entitlement.
    */
-  overrideAccessRequestsDefaults?: boolean | null | undefined;
+  overrideAccessRequestsDefaults?: boolean | undefined;
   provisionPolicy?: ProvisionPolicyInput | null | undefined;
   /**
    * The purpose of the entitlement (e.g., assignment, permission, ownership).
    */
-  purpose?: CreateAppEntitlementRequestPurpose | null | undefined;
+  purpose?: CreateAppEntitlementRequestPurpose | undefined;
   /**
    * The ID of the policy to use for revoke request tasks.
    */
-  revokePolicyId?: string | null | undefined;
+  revokePolicyId?: string | undefined;
   /**
    * The ID of the risk level to assign to this entitlement.
    */
-  riskLevelValueId?: string | null | undefined;
+  riskLevelValueId?: string | undefined;
   /**
    * A short label describing the permission the entitlement grants (e.g., "Admin", "Read").
    */
-  slug?: string | null | undefined;
+  slug?: string | undefined;
 };
 
 /** @internal */
@@ -165,31 +166,32 @@ export const CreateAppEntitlementRequestPurpose$outboundSchema: z.ZodType<
 
 /** @internal */
 export type CreateAppEntitlementRequest$Outbound = {
-  alias?: string | null | undefined;
+  alias?: string | undefined;
   annotations?: { [k: string]: string } | undefined;
   appEntitlementOwnerIds?: Array<string> | null | undefined;
-  appResourceId?: string | null | undefined;
-  appResourceTypeId?: string | null | undefined;
-  certifyPolicyId?: string | null | undefined;
+  appResourceId?: string | undefined;
+  appResourceTypeId?: string | undefined;
+  certifyPolicyId?: string | undefined;
   complianceFrameworkValueIds?: Array<string> | null | undefined;
-  description?: string | null | undefined;
-  displayName: string | null;
+  deprovisionerPolicy?: ProvisionPolicyInput$Outbound | null | undefined;
+  description?: string | undefined;
+  displayName: string;
   durationGrant?: string | null | undefined;
   durationUnset?:
     | CreateAppEntitlementRequestDurationUnset$Outbound
     | null
     | undefined;
-  emergencyGrantEnabled?: boolean | null | undefined;
-  emergencyGrantPolicyId?: string | null | undefined;
+  emergencyGrantEnabled?: boolean | undefined;
+  emergencyGrantPolicyId?: string | undefined;
   expandMask?: AppEntitlementExpandMask$Outbound | null | undefined;
-  grantPolicyId?: string | null | undefined;
-  matchBatonId?: string | null | undefined;
-  overrideAccessRequestsDefaults?: boolean | null | undefined;
+  grantPolicyId?: string | undefined;
+  matchBatonId?: string | undefined;
+  overrideAccessRequestsDefaults?: boolean | undefined;
   provisionPolicy?: ProvisionPolicyInput$Outbound | null | undefined;
-  purpose?: string | null | undefined;
-  revokePolicyId?: string | null | undefined;
-  riskLevelValueId?: string | null | undefined;
-  slug?: string | null | undefined;
+  purpose?: string | undefined;
+  revokePolicyId?: string | undefined;
+  riskLevelValueId?: string | undefined;
+  slug?: string | undefined;
 };
 
 /** @internal */
@@ -198,31 +200,32 @@ export const CreateAppEntitlementRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAppEntitlementRequest
 > = z.object({
-  alias: z.nullable(z.string()).optional(),
+  alias: z.string().optional(),
   annotations: z.record(z.string()).optional(),
   appEntitlementOwnerIds: z.nullable(z.array(z.string())).optional(),
-  appResourceId: z.nullable(z.string()).optional(),
-  appResourceTypeId: z.nullable(z.string()).optional(),
-  certifyPolicyId: z.nullable(z.string()).optional(),
+  appResourceId: z.string().optional(),
+  appResourceTypeId: z.string().optional(),
+  certifyPolicyId: z.string().optional(),
   complianceFrameworkValueIds: z.nullable(z.array(z.string())).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()),
+  deprovisionerPolicy: z.nullable(ProvisionPolicyInput$outboundSchema)
+    .optional(),
+  description: z.string().optional(),
+  displayName: z.string(),
   durationGrant: z.nullable(z.string()).optional(),
   durationUnset: z.nullable(
     z.lazy(() => CreateAppEntitlementRequestDurationUnset$outboundSchema),
   ).optional(),
-  emergencyGrantEnabled: z.nullable(z.boolean()).optional(),
-  emergencyGrantPolicyId: z.nullable(z.string()).optional(),
+  emergencyGrantEnabled: z.boolean().optional(),
+  emergencyGrantPolicyId: z.string().optional(),
   expandMask: z.nullable(AppEntitlementExpandMask$outboundSchema).optional(),
-  grantPolicyId: z.nullable(z.string()).optional(),
-  matchBatonId: z.nullable(z.string()).optional(),
-  overrideAccessRequestsDefaults: z.nullable(z.boolean()).optional(),
+  grantPolicyId: z.string().optional(),
+  matchBatonId: z.string().optional(),
+  overrideAccessRequestsDefaults: z.boolean().optional(),
   provisionPolicy: z.nullable(ProvisionPolicyInput$outboundSchema).optional(),
-  purpose: z.nullable(CreateAppEntitlementRequestPurpose$outboundSchema)
-    .optional(),
-  revokePolicyId: z.nullable(z.string()).optional(),
-  riskLevelValueId: z.nullable(z.string()).optional(),
-  slug: z.nullable(z.string()).optional(),
+  purpose: CreateAppEntitlementRequestPurpose$outboundSchema.optional(),
+  revokePolicyId: z.string().optional(),
+  riskLevelValueId: z.string().optional(),
+  slug: z.string().optional(),
 });
 
 export function createAppEntitlementRequestToJSON(

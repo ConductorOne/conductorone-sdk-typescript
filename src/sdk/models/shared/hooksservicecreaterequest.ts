@@ -20,6 +20,11 @@ import {
   HookFunctionRef$Outbound,
   HookFunctionRef$outboundSchema,
 } from "./hookfunctionref.js";
+import {
+  JSONPatchConfig,
+  JSONPatchConfig$Outbound,
+  JSONPatchConfig$outboundSchema,
+} from "./jsonpatchconfig.js";
 
 /**
  * The event field.
@@ -28,6 +33,7 @@ export const HooksServiceCreateRequestEvent = {
   HookEventTypeUnspecified: "HOOK_EVENT_TYPE_UNSPECIFIED",
   HookEventTypePreToolUse: "HOOK_EVENT_TYPE_PRE_TOOL_USE",
   HookEventTypePostToolUse: "HOOK_EVENT_TYPE_POST_TOOL_USE",
+  HookEventTypePreOutput: "HOOK_EVENT_TYPE_PRE_OUTPUT",
 } as const;
 /**
  * The event field.
@@ -44,31 +50,37 @@ export type HooksServiceCreateRequestEvent = OpenEnum<
  * This message contains a oneof named hook_type. Only a single field of the following list may be set at a time:
  *   - function
  *   - builtinPattern
+ *   - jsonPatch
  */
 export type HooksServiceCreateRequest = {
   builtinPattern?: BuiltInPattern | null | undefined;
   /**
    * The description field.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The displayName field.
    */
-  displayName: string | null;
+  displayName: string;
   /**
    * The enabled field.
    */
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   /**
    * The event field.
    */
-  event?: HooksServiceCreateRequestEvent | null | undefined;
+  event?: HooksServiceCreateRequestEvent | undefined;
   filter?: HookFilter | null | undefined;
   function?: HookFunctionRef | null | undefined;
+  jsonPatch?: JSONPatchConfig | null | undefined;
+  /**
+   * The managedByGuardrails field.
+   */
+  managedByGuardrails?: boolean | undefined;
   /**
    * The priority field.
    */
-  priority?: number | null | undefined;
+  priority?: number | undefined;
 };
 
 /** @internal */
@@ -81,13 +93,15 @@ export const HooksServiceCreateRequestEvent$outboundSchema: z.ZodType<
 /** @internal */
 export type HooksServiceCreateRequest$Outbound = {
   builtinPattern?: BuiltInPattern$Outbound | null | undefined;
-  description?: string | null | undefined;
-  displayName: string | null;
-  enabled?: boolean | null | undefined;
-  event?: string | null | undefined;
+  description?: string | undefined;
+  displayName: string;
+  enabled?: boolean | undefined;
+  event?: string | undefined;
   filter?: HookFilter$Outbound | null | undefined;
   function?: HookFunctionRef$Outbound | null | undefined;
-  priority?: number | null | undefined;
+  jsonPatch?: JSONPatchConfig$Outbound | null | undefined;
+  managedByGuardrails?: boolean | undefined;
+  priority?: number | undefined;
 };
 
 /** @internal */
@@ -97,13 +111,15 @@ export const HooksServiceCreateRequest$outboundSchema: z.ZodType<
   HooksServiceCreateRequest
 > = z.object({
   builtinPattern: z.nullable(BuiltInPattern$outboundSchema).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()),
-  enabled: z.nullable(z.boolean()).optional(),
-  event: z.nullable(HooksServiceCreateRequestEvent$outboundSchema).optional(),
+  description: z.string().optional(),
+  displayName: z.string(),
+  enabled: z.boolean().optional(),
+  event: HooksServiceCreateRequestEvent$outboundSchema.optional(),
   filter: z.nullable(HookFilter$outboundSchema).optional(),
   function: z.nullable(HookFunctionRef$outboundSchema).optional(),
-  priority: z.nullable(z.number().int()).optional(),
+  jsonPatch: z.nullable(JSONPatchConfig$outboundSchema).optional(),
+  managedByGuardrails: z.boolean().optional(),
+  priority: z.number().int().optional(),
 });
 
 export function hooksServiceCreateRequestToJSON(

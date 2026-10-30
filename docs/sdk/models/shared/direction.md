@@ -1,8 +1,6 @@
 # Direction
 
-Direction to sort in. Unspecified falls back to ASC when sort_field is set;
- when sort_field is also unspecified, the server default order (created_at
- DESC) applies.
+Direction to sort in. Unspecified falls back to ASC when sort_field is set.
 
 ## Example Usage
 

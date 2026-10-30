@@ -30,6 +30,21 @@ export type PaperSecretServiceCreateInternalRequestInputFormat = OpenEnum<
 >;
 
 /**
+ * Exact Age suite required for this submission. UNSPECIFIED preserves legacy X25519 behavior.
+ */
+export const PaperSecretServiceCreateInternalRequestRequiredAgeSuite = {
+  AgeSuiteUnspecified: "AGE_SUITE_UNSPECIFIED",
+  AgeSuiteX25519: "AGE_SUITE_X25519",
+  AgeSuiteMlkem768X25519: "AGE_SUITE_MLKEM768X25519",
+} as const;
+/**
+ * Exact Age suite required for this submission. UNSPECIFIED preserves legacy X25519 behavior.
+ */
+export type PaperSecretServiceCreateInternalRequestRequiredAgeSuite = OpenEnum<
+  typeof PaperSecretServiceCreateInternalRequestRequiredAgeSuite
+>;
+
+/**
  * Secret type: TEXT or FILE.
  *
  * @remarks
@@ -63,37 +78,40 @@ export type PaperSecretServiceCreateInternalRequest = {
   /**
    * For FILE secrets: MIME content type of the original file. Ignored for TEXT secrets.
    */
-  contentType?: string | null | undefined;
+  contentType?: string | undefined;
   /**
    * Optional cleartext label visible to the creator in "My Secrets" view.
    *
    * @remarks
    *  Not encrypted — do not put sensitive data here.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   expiresIn?: string | null | undefined;
   /**
    * For FILE secrets: expected file size in bytes (max 1GB). Ignored for TEXT secrets.
    */
-  fileSize?: number | null | undefined;
+  fileSize?: number | undefined;
   /**
    * For FILE secrets: original filename (sanitized server-side). Ignored for TEXT secrets.
    */
-  filename?: string | null | undefined;
+  filename?: string | undefined;
   /**
    * For TEXT secrets: hint about the plaintext format (e.g., JSON, YAML, key-value).
    *
    * @remarks
    *  Used by the viewer UI for syntax highlighting. Does not affect encryption.
    */
-  inputFormat?:
-    | PaperSecretServiceCreateInternalRequestInputFormat
-    | null
-    | undefined;
+  inputFormat?: PaperSecretServiceCreateInternalRequestInputFormat | undefined;
   /**
    * Maximum number of views before the secret is burned (0 = unlimited).
    */
-  maxViews?: number | null | undefined;
+  maxViews?: number | undefined;
+  /**
+   * Exact Age suite required for this submission. UNSPECIFIED preserves legacy X25519 behavior.
+   */
+  requiredAgeSuite?:
+    | PaperSecretServiceCreateInternalRequestRequiredAgeSuite
+    | undefined;
   /**
    * Secret type: TEXT or FILE.
    *
@@ -101,10 +119,7 @@ export type PaperSecretServiceCreateInternalRequest = {
    *  TEXT secrets use SetTextContent to upload encrypted content (max 64KB).
    *  FILE secrets use the upload_url from CreateResponse to upload encrypted content (max 1GB).
    */
-  secretType?:
-    | PaperSecretServiceCreateInternalRequestSecretType
-    | null
-    | undefined;
+  secretType?: PaperSecretServiceCreateInternalRequestSecretType | undefined;
 };
 
 /** @internal */
@@ -115,6 +130,16 @@ export const PaperSecretServiceCreateInternalRequestInputFormat$outboundSchema:
     PaperSecretServiceCreateInternalRequestInputFormat
   > = openEnums.outboundSchema(
     PaperSecretServiceCreateInternalRequestInputFormat,
+  );
+
+/** @internal */
+export const PaperSecretServiceCreateInternalRequestRequiredAgeSuite$outboundSchema:
+  z.ZodType<
+    string,
+    z.ZodTypeDef,
+    PaperSecretServiceCreateInternalRequestRequiredAgeSuite
+  > = openEnums.outboundSchema(
+    PaperSecretServiceCreateInternalRequestRequiredAgeSuite,
   );
 
 /** @internal */
@@ -130,14 +155,15 @@ export const PaperSecretServiceCreateInternalRequestSecretType$outboundSchema:
 /** @internal */
 export type PaperSecretServiceCreateInternalRequest$Outbound = {
   allowedUserIds?: Array<string> | null | undefined;
-  contentType?: string | null | undefined;
-  displayName?: string | null | undefined;
+  contentType?: string | undefined;
+  displayName?: string | undefined;
   expiresIn?: string | null | undefined;
-  fileSize?: string | null | undefined;
-  filename?: string | null | undefined;
-  inputFormat?: string | null | undefined;
-  maxViews?: number | null | undefined;
-  secretType?: string | null | undefined;
+  fileSize?: string | undefined;
+  filename?: string | undefined;
+  inputFormat?: string | undefined;
+  maxViews?: number | undefined;
+  requiredAgeSuite?: string | undefined;
+  secretType?: string | undefined;
 };
 
 /** @internal */
@@ -147,18 +173,19 @@ export const PaperSecretServiceCreateInternalRequest$outboundSchema: z.ZodType<
   PaperSecretServiceCreateInternalRequest
 > = z.object({
   allowedUserIds: z.nullable(z.array(z.string())).optional(),
-  contentType: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  contentType: z.string().optional(),
+  displayName: z.string().optional(),
   expiresIn: z.nullable(z.string()).optional(),
-  fileSize: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
-  filename: z.nullable(z.string()).optional(),
-  inputFormat: z.nullable(
-    PaperSecretServiceCreateInternalRequestInputFormat$outboundSchema,
-  ).optional(),
-  maxViews: z.nullable(z.number().int()).optional(),
-  secretType: z.nullable(
-    PaperSecretServiceCreateInternalRequestSecretType$outboundSchema,
-  ).optional(),
+  fileSize: z.number().int().transform(v => `${v}`).optional(),
+  filename: z.string().optional(),
+  inputFormat: PaperSecretServiceCreateInternalRequestInputFormat$outboundSchema
+    .optional(),
+  maxViews: z.number().int().optional(),
+  requiredAgeSuite:
+    PaperSecretServiceCreateInternalRequestRequiredAgeSuite$outboundSchema
+      .optional(),
+  secretType: PaperSecretServiceCreateInternalRequestSecretType$outboundSchema
+    .optional(),
 });
 
 export function paperSecretServiceCreateInternalRequestToJSON(

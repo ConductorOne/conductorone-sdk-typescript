@@ -28,26 +28,26 @@ export type VaultInput = {
   /**
    * A free-text description of the vault's purpose or configuration.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The human-readable name of the vault.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   groupAuthzVault?: GroupAuthzVault | null | undefined;
   /**
    * The unique identifier of the vault.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   magicVault?: MagicVault | null | undefined;
 };
 
 /** @internal */
 export type VaultInput$Outbound = {
   credentialExpirationDuration?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
   groupAuthzVault?: GroupAuthzVault$Outbound | null | undefined;
-  id?: string | null | undefined;
+  id?: string | undefined;
   magicVault?: MagicVault$Outbound | null | undefined;
 };
 
@@ -58,10 +58,10 @@ export const VaultInput$outboundSchema: z.ZodType<
   VaultInput
 > = z.object({
   credentialExpirationDuration: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
   groupAuthzVault: z.nullable(GroupAuthzVault$outboundSchema).optional(),
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
   magicVault: z.nullable(MagicVault$outboundSchema).optional(),
 });
 

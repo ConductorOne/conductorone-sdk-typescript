@@ -66,11 +66,12 @@ export type GrantsByCriteriaScope = {
   /**
    * The sourceFilter field.
    */
-  sourceFilter?: SourceFilter | null | undefined;
+  sourceFilter?: SourceFilter | undefined;
   /**
    * The typeFilter field.
    */
-  typeFilter?: TypeFilter | null | undefined;
+  typeFilter?: TypeFilter | undefined;
+  usedWithinLast?: string | null | undefined;
 };
 
 /** @internal */
@@ -111,8 +112,9 @@ export const GrantsByCriteriaScope$inboundSchema: z.ZodType<
   daysSinceLastUsed: z.nullable(z.string()).optional(),
   daysSinceReviewed: z.nullable(z.string()).optional(),
   grantsAddedBetween: z.nullable(GrantsAddedBetween$inboundSchema).optional(),
-  sourceFilter: z.nullable(SourceFilter$inboundSchema).optional(),
-  typeFilter: z.nullable(TypeFilter$inboundSchema).optional(),
+  sourceFilter: SourceFilter$inboundSchema.optional(),
+  typeFilter: TypeFilter$inboundSchema.optional(),
+  usedWithinLast: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type GrantsByCriteriaScope$Outbound = {
@@ -121,8 +123,9 @@ export type GrantsByCriteriaScope$Outbound = {
   daysSinceLastUsed?: string | null | undefined;
   daysSinceReviewed?: string | null | undefined;
   grantsAddedBetween?: GrantsAddedBetween$Outbound | null | undefined;
-  sourceFilter?: string | null | undefined;
-  typeFilter?: string | null | undefined;
+  sourceFilter?: string | undefined;
+  typeFilter?: string | undefined;
+  usedWithinLast?: string | null | undefined;
 };
 
 /** @internal */
@@ -137,8 +140,9 @@ export const GrantsByCriteriaScope$outboundSchema: z.ZodType<
   daysSinceLastUsed: z.nullable(z.string()).optional(),
   daysSinceReviewed: z.nullable(z.string()).optional(),
   grantsAddedBetween: z.nullable(GrantsAddedBetween$outboundSchema).optional(),
-  sourceFilter: z.nullable(SourceFilter$outboundSchema).optional(),
-  typeFilter: z.nullable(TypeFilter$outboundSchema).optional(),
+  sourceFilter: SourceFilter$outboundSchema.optional(),
+  typeFilter: TypeFilter$outboundSchema.optional(),
+  usedWithinLast: z.nullable(z.string()).optional(),
 });
 
 export function grantsByCriteriaScopeToJSON(

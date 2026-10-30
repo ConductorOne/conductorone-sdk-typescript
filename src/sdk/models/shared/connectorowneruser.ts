@@ -15,16 +15,16 @@ export type ConnectorOwnerUser = {
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The connectorId field.
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
   createdAt?: Date | null | undefined;
   /**
    * The roleSlug field.
    */
-  roleSlug?: string | null | undefined;
+  roleSlug?: string | undefined;
   user?: User | null | undefined;
 };
 
@@ -34,12 +34,12 @@ export const ConnectorOwnerUser$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  connectorId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  roleSlug: z.nullable(z.string()).optional(),
+  roleSlug: z.string().optional(),
   user: z.nullable(User$inboundSchema).optional(),
 });
 

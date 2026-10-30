@@ -34,15 +34,15 @@ export type AccessProfileMatch = {
   /**
    * The catalogDisplayName field.
    */
-  catalogDisplayName?: string | null | undefined;
+  catalogDisplayName?: string | undefined;
   /**
    * The catalogId field.
    */
-  catalogId?: string | null | undefined;
+  catalogId?: string | undefined;
   /**
    * The matchType field.
    */
-  matchType?: MatchType | null | undefined;
+  matchType?: MatchType | undefined;
   /**
    * The missingEntitlements field.
    */
@@ -50,7 +50,7 @@ export type AccessProfileMatch = {
   /**
    * The overlapRatio field.
    */
-  overlapRatio?: number | null | undefined;
+  overlapRatio?: number | undefined;
 };
 
 /** @internal */
@@ -66,12 +66,12 @@ export const AccessProfileMatch$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  catalogDisplayName: z.nullable(z.string()).optional(),
-  catalogId: z.nullable(z.string()).optional(),
-  matchType: z.nullable(MatchType$inboundSchema).optional(),
+  catalogDisplayName: z.string().optional(),
+  catalogId: z.string().optional(),
+  matchType: MatchType$inboundSchema.optional(),
   missingEntitlements: z.nullable(z.array(CohortEntitlement$inboundSchema))
     .optional(),
-  overlapRatio: z.nullable(z.number()).optional(),
+  overlapRatio: z.number().optional(),
 });
 
 export function accessProfileMatchFromJSON(

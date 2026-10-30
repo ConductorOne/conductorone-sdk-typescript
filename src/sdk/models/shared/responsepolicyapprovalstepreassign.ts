@@ -14,7 +14,7 @@ export type ResponsePolicyApprovalStepReassign = {
   /**
    * optional comment
    */
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   /**
    * The newStepUserIds field.
    */
@@ -27,12 +27,12 @@ export const ResponsePolicyApprovalStepReassign$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  comment: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
   newStepUserIds: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
 export type ResponsePolicyApprovalStepReassign$Outbound = {
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   newStepUserIds?: Array<string> | null | undefined;
 };
 
@@ -42,7 +42,7 @@ export const ResponsePolicyApprovalStepReassign$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponsePolicyApprovalStepReassign
 > = z.object({
-  comment: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
   newStepUserIds: z.nullable(z.array(z.string())).optional(),
 });
 

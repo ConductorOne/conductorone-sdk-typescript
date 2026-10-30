@@ -20,7 +20,15 @@ export type AppEntitlementSearchServiceSearchGraphResponse = {
   /**
    * The hasMore field.
    */
-  hasMore?: boolean | null | undefined;
+  hasMore?: boolean | undefined;
+  /**
+   * True if the server-side node budget stopped the traversal before it
+   *
+   * @remarks
+   *  finished walking the graph. Distinct from has_more, which can also be set
+   *  by a request timeout or scan limit.
+   */
+  nodeCeilingHit?: boolean | undefined;
   /**
    * The nodes field.
    */
@@ -28,11 +36,11 @@ export type AppEntitlementSearchServiceSearchGraphResponse = {
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * The pathsReturned field.
    */
-  pathsReturned?: number | null | undefined;
+  pathsReturned?: number | undefined;
   /**
    * The truncatedNodeIds field.
    */
@@ -47,10 +55,11 @@ export const AppEntitlementSearchServiceSearchGraphResponse$inboundSchema:
     unknown
   > = z.object({
     edges: z.nullable(z.array(GraphEdge$inboundSchema)).optional(),
-    hasMore: z.nullable(z.boolean()).optional(),
+    hasMore: z.boolean().optional(),
+    nodeCeilingHit: z.boolean().optional(),
     nodes: z.nullable(z.array(GraphNode$inboundSchema)).optional(),
-    pageToken: z.nullable(z.string()).optional(),
-    pathsReturned: z.nullable(z.number().int()).optional(),
+    pageToken: z.string().optional(),
+    pathsReturned: z.number().int().optional(),
     truncatedNodeIds: z.nullable(z.array(z.string())).optional(),
   });
 

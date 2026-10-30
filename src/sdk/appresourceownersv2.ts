@@ -6,6 +6,8 @@ import { appResourceOwnersV2CreateEntitlementOwner } from "../funcs/appResourceO
 import { appResourceOwnersV2CreateUserOwner } from "../funcs/appResourceOwnersV2CreateUserOwner.js";
 import { appResourceOwnersV2DeleteEntitlementOwner } from "../funcs/appResourceOwnersV2DeleteEntitlementOwner.js";
 import { appResourceOwnersV2DeleteUserOwner } from "../funcs/appResourceOwnersV2DeleteUserOwner.js";
+import { appResourceOwnersV2GetEntitlementOwner } from "../funcs/appResourceOwnersV2GetEntitlementOwner.js";
+import { appResourceOwnersV2GetUserOwner } from "../funcs/appResourceOwnersV2GetUserOwner.js";
 import { appResourceOwnersV2SearchEntitlementOwners } from "../funcs/appResourceOwnersV2SearchEntitlementOwners.js";
 import { appResourceOwnersV2SearchUserOwners } from "../funcs/appResourceOwnersV2SearchUserOwners.js";
 import { appResourceOwnersV2Set } from "../funcs/appResourceOwnersV2Set.js";
@@ -72,6 +74,25 @@ export class AppResourceOwnersV2 extends ClientSDK {
   }
 
   /**
+   * Get Entitlement Owner
+   *
+   * @remarks
+   * GetEntitlementOwner gets an entitlement ownership source for an app resource.
+   */
+  async getEntitlementOwner(
+    request: operations.C1ApiAppV2AppResourceOwnersV2GetEntitlementOwnerRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiAppV2AppResourceOwnersV2GetEntitlementOwnerResponse
+  > {
+    return unwrapAsync(appResourceOwnersV2GetEntitlementOwner(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Create Entitlement Owner
    *
    * @remarks
@@ -119,6 +140,23 @@ export class AppResourceOwnersV2 extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.C1ApiAppV2AppResourceOwnersV2DeleteUserOwnerResponse> {
     return unwrapAsync(appResourceOwnersV2DeleteUserOwner(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get User Owner
+   *
+   * @remarks
+   * GetUserOwner gets a user ownership source for an app resource.
+   */
+  async getUserOwner(
+    request: operations.C1ApiAppV2AppResourceOwnersV2GetUserOwnerRequest,
+    options?: RequestOptions,
+  ): Promise<operations.C1ApiAppV2AppResourceOwnersV2GetUserOwnerResponse> {
+    return unwrapAsync(appResourceOwnersV2GetUserOwner(
       this,
       request,
       options,

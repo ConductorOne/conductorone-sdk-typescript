@@ -27,7 +27,8 @@ import { Result } from "../sdk/types/fp.js";
  * Get Contacts
  *
  * @remarks
- * Invokes the c1.api.settings.v1.ContactsService.GetContacts method.
+ * GetContacts returns the organization's security, billing, and operations
+ *  contact email addresses.
  */
 export function contactsGetContacts(
   client: ConductoroneSDKTypescriptCore,

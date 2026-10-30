@@ -4,6 +4,11 @@
 
 import * as z from "zod/v3";
 import {
+  AccessProfileOwnerApproval,
+  AccessProfileOwnerApproval$Outbound,
+  AccessProfileOwnerApproval$outboundSchema,
+} from "./accessprofileownerapproval.js";
+import {
   AgentApproval,
   AgentApproval$Outbound,
   AgentApproval$outboundSchema,
@@ -75,17 +80,19 @@ import {
  *   - webhook
  *   - resourceOwners
  *   - agent
+ *   - accessProfileOwners
  */
 export type ApprovalInput = {
+  accessProfileOwners?: AccessProfileOwnerApproval | null | undefined;
   agent?: AgentApproval | null | undefined;
   /**
    * Whether ticket delegation is allowed for this step.
    */
-  allowDelegation?: boolean | null | undefined;
+  allowDelegation?: boolean | undefined;
   /**
    * Configuration to allow reassignment by reviewers during this step.
    */
-  allowReassignment?: boolean | null | undefined;
+  allowReassignment?: boolean | undefined;
   /**
    * List of users for whom this step can be reassigned.
    */
@@ -96,29 +103,29 @@ export type ApprovalInput = {
   /**
    * Whether escalation is enabled for this step.
    */
-  escalationEnabled?: boolean | null | undefined;
+  escalationEnabled?: boolean | undefined;
   expression?: ExpressionApprovalInput | null | undefined;
   group?: AppGroupApproval | null | undefined;
   manager?: ManagerApprovalInput | null | undefined;
   /**
    * Configuration to require a reason when approving this step.
    */
-  requireApprovalReason?: boolean | null | undefined;
+  requireApprovalReason?: boolean | undefined;
   /**
    * Configuration to require a reason when denying this step.
    */
-  requireDenialReason?: boolean | null | undefined;
+  requireDenialReason?: boolean | undefined;
   /**
    * Configuration to require a reason when reassigning this step.
    */
-  requireReassignmentReason?: boolean | null | undefined;
+  requireReassignmentReason?: boolean | undefined;
   /**
    * The ID of a step-up authentication provider that will be required for approvals on this step.
    *
    * @remarks
    *  If set, approvers must complete the step-up authentication flow before they can approve.
    */
-  requiresStepUpProviderId?: string | null | undefined;
+  requiresStepUpProviderId?: string | undefined;
   resourceOwners?: ResourceOwnerApproval | null | undefined;
   self?: SelfApprovalInput | null | undefined;
   users?: UserApproval | null | undefined;
@@ -127,21 +134,22 @@ export type ApprovalInput = {
 
 /** @internal */
 export type ApprovalInput$Outbound = {
+  accessProfileOwners?: AccessProfileOwnerApproval$Outbound | null | undefined;
   agent?: AgentApproval$Outbound | null | undefined;
-  allowDelegation?: boolean | null | undefined;
-  allowReassignment?: boolean | null | undefined;
+  allowDelegation?: boolean | undefined;
+  allowReassignment?: boolean | undefined;
   allowedReassignees?: Array<string> | null | undefined;
   appOwners?: AppOwnerApproval$Outbound | null | undefined;
   entitlementOwners?: EntitlementOwnerApproval$Outbound | null | undefined;
   escalation?: Escalation$Outbound | null | undefined;
-  escalationEnabled?: boolean | null | undefined;
+  escalationEnabled?: boolean | undefined;
   expression?: ExpressionApprovalInput$Outbound | null | undefined;
   group?: AppGroupApproval$Outbound | null | undefined;
   manager?: ManagerApprovalInput$Outbound | null | undefined;
-  requireApprovalReason?: boolean | null | undefined;
-  requireDenialReason?: boolean | null | undefined;
-  requireReassignmentReason?: boolean | null | undefined;
-  requiresStepUpProviderId?: string | null | undefined;
+  requireApprovalReason?: boolean | undefined;
+  requireDenialReason?: boolean | undefined;
+  requireReassignmentReason?: boolean | undefined;
+  requiresStepUpProviderId?: string | undefined;
   resourceOwners?: ResourceOwnerApproval$Outbound | null | undefined;
   self?: SelfApprovalInput$Outbound | null | undefined;
   users?: UserApproval$Outbound | null | undefined;
@@ -154,22 +162,24 @@ export const ApprovalInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ApprovalInput
 > = z.object({
+  accessProfileOwners: z.nullable(AccessProfileOwnerApproval$outboundSchema)
+    .optional(),
   agent: z.nullable(AgentApproval$outboundSchema).optional(),
-  allowDelegation: z.nullable(z.boolean()).optional(),
-  allowReassignment: z.nullable(z.boolean()).optional(),
+  allowDelegation: z.boolean().optional(),
+  allowReassignment: z.boolean().optional(),
   allowedReassignees: z.nullable(z.array(z.string())).optional(),
   appOwners: z.nullable(AppOwnerApproval$outboundSchema).optional(),
   entitlementOwners: z.nullable(EntitlementOwnerApproval$outboundSchema)
     .optional(),
   escalation: z.nullable(Escalation$outboundSchema).optional(),
-  escalationEnabled: z.nullable(z.boolean()).optional(),
+  escalationEnabled: z.boolean().optional(),
   expression: z.nullable(ExpressionApprovalInput$outboundSchema).optional(),
   group: z.nullable(AppGroupApproval$outboundSchema).optional(),
   manager: z.nullable(ManagerApprovalInput$outboundSchema).optional(),
-  requireApprovalReason: z.nullable(z.boolean()).optional(),
-  requireDenialReason: z.nullable(z.boolean()).optional(),
-  requireReassignmentReason: z.nullable(z.boolean()).optional(),
-  requiresStepUpProviderId: z.nullable(z.string()).optional(),
+  requireApprovalReason: z.boolean().optional(),
+  requireDenialReason: z.boolean().optional(),
+  requireReassignmentReason: z.boolean().optional(),
+  requiresStepUpProviderId: z.string().optional(),
   resourceOwners: z.nullable(ResourceOwnerApproval$outboundSchema).optional(),
   self: z.nullable(SelfApprovalInput$outboundSchema).optional(),
   users: z.nullable(UserApproval$outboundSchema).optional(),

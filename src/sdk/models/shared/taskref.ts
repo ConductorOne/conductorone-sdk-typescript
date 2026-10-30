@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod/v3";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * This object references a task by ID.
@@ -11,12 +14,17 @@ export type TaskRef = {
   /**
    * The ID of the referenced Task
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
+export const TaskRef$inboundSchema: z.ZodType<TaskRef, z.ZodTypeDef, unknown> =
+  z.object({
+    id: z.string().optional(),
+  });
+/** @internal */
 export type TaskRef$Outbound = {
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -25,9 +33,18 @@ export const TaskRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskRef
 > = z.object({
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
 });
 
 export function taskRefToJSON(taskRef: TaskRef): string {
   return JSON.stringify(TaskRef$outboundSchema.parse(taskRef));
+}
+export function taskRefFromJSON(
+  jsonString: string,
+): SafeParseResult<TaskRef, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TaskRef$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TaskRef' from JSON`,
+  );
 }

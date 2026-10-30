@@ -12,13 +12,13 @@ export type BulkAcceptRiskAction = {
   /**
    * The justification field.
    */
-  justification?: string | null | undefined;
+  justification?: string | undefined;
 };
 
 /** @internal */
 export type BulkAcceptRiskAction$Outbound = {
   expiresAt?: string | null | undefined;
-  justification?: string | null | undefined;
+  justification?: string | undefined;
 };
 
 /** @internal */
@@ -28,7 +28,7 @@ export const BulkAcceptRiskAction$outboundSchema: z.ZodType<
   BulkAcceptRiskAction
 > = z.object({
   expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  justification: z.nullable(z.string()).optional(),
+  justification: z.string().optional(),
 });
 
 export function bulkAcceptRiskActionToJSON(

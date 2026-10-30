@@ -14,23 +14,27 @@ export type UserAttributeMappingSource = {
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The appUserId field.
    */
-  appUserId?: string | null | undefined;
+  appUserId?: string | undefined;
   /**
    * The appUserProfileAttributeKey field.
    */
-  appUserProfileAttributeKey?: string | null | undefined;
+  appUserProfileAttributeKey?: string | undefined;
+  /**
+   * Lower number = higher precedence; sources[0] is the winning source.
+   */
+  priority?: number | undefined;
   /**
    * The userAttributeMappingId field.
    */
-  userAttributeMappingId?: string | null | undefined;
+  userAttributeMappingId?: string | undefined;
   /**
    * The value field.
    */
-  value?: string | null | undefined;
+  value?: string | undefined;
 };
 
 /** @internal */
@@ -39,11 +43,12 @@ export const UserAttributeMappingSource$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  appUserId: z.nullable(z.string()).optional(),
-  appUserProfileAttributeKey: z.nullable(z.string()).optional(),
-  userAttributeMappingId: z.nullable(z.string()).optional(),
-  value: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  appUserId: z.string().optional(),
+  appUserProfileAttributeKey: z.string().optional(),
+  priority: z.number().int().optional(),
+  userAttributeMappingId: z.string().optional(),
+  value: z.string().optional(),
 });
 
 export function userAttributeMappingSourceFromJSON(

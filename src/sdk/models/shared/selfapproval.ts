@@ -24,7 +24,7 @@ export type SelfApproval = {
   /**
    * Configuration to allow a fallback if the identity user of the target app user cannot be determined.
    */
-  fallback?: boolean | null | undefined;
+  fallback?: boolean | undefined;
   /**
    * Configuration to specify which groups to fallback to if fallback is enabled and the identity user of the target app user cannot be determined.
    */
@@ -36,7 +36,7 @@ export type SelfApproval = {
   /**
    * Configuration to enable fallback for group fallback.
    */
-  isGroupFallbackEnabled?: boolean | null | undefined;
+  isGroupFallbackEnabled?: boolean | undefined;
 };
 
 /** @internal */
@@ -46,19 +46,19 @@ export const SelfApproval$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   assignedUserIds: z.nullable(z.array(z.string())).optional(),
-  fallback: z.nullable(z.boolean()).optional(),
+  fallback: z.boolean().optional(),
   fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$inboundSchema))
     .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-  isGroupFallbackEnabled: z.nullable(z.boolean()).optional(),
+  isGroupFallbackEnabled: z.boolean().optional(),
 });
 /** @internal */
 export type SelfApproval$Outbound = {
   assignedUserIds?: Array<string> | null | undefined;
-  fallback?: boolean | null | undefined;
+  fallback?: boolean | undefined;
   fallbackGroupIds?: Array<AppEntitlementReference$Outbound> | null | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
-  isGroupFallbackEnabled?: boolean | null | undefined;
+  isGroupFallbackEnabled?: boolean | undefined;
 };
 
 /** @internal */
@@ -68,11 +68,11 @@ export const SelfApproval$outboundSchema: z.ZodType<
   SelfApproval
 > = z.object({
   assignedUserIds: z.nullable(z.array(z.string())).optional(),
-  fallback: z.nullable(z.boolean()).optional(),
+  fallback: z.boolean().optional(),
   fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$outboundSchema))
     .optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-  isGroupFallbackEnabled: z.nullable(z.boolean()).optional(),
+  isGroupFallbackEnabled: z.boolean().optional(),
 });
 
 export function selfApprovalToJSON(selfApproval: SelfApproval): string {

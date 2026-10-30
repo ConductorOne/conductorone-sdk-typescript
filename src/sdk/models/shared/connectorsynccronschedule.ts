@@ -14,12 +14,12 @@ export type ConnectorSyncCronSchedule = {
   /**
    * The cronSpec field.
    */
-  cronSpec?: string | null | undefined;
+  cronSpec?: string | undefined;
   start?: Date | null | undefined;
   /**
    * The timezone field.
    */
-  timezone?: string | null | undefined;
+  timezone?: string | undefined;
 };
 
 /** @internal */
@@ -28,17 +28,17 @@ export const ConnectorSyncCronSchedule$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  cronSpec: z.nullable(z.string()).optional(),
+  cronSpec: z.string().optional(),
   start: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  timezone: z.nullable(z.string()).optional(),
+  timezone: z.string().optional(),
 });
 /** @internal */
 export type ConnectorSyncCronSchedule$Outbound = {
-  cronSpec?: string | null | undefined;
+  cronSpec?: string | undefined;
   start?: string | null | undefined;
-  timezone?: string | null | undefined;
+  timezone?: string | undefined;
 };
 
 /** @internal */
@@ -47,9 +47,9 @@ export const ConnectorSyncCronSchedule$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ConnectorSyncCronSchedule
 > = z.object({
-  cronSpec: z.nullable(z.string()).optional(),
+  cronSpec: z.string().optional(),
   start: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  timezone: z.nullable(z.string()).optional(),
+  timezone: z.string().optional(),
 });
 
 export function connectorSyncCronScheduleToJSON(

@@ -18,11 +18,11 @@ export type FunctionCall = {
   /**
    * The call field.
    */
-  call?: string | null | undefined;
+  call?: string | undefined;
   /**
    * The message field.
    */
-  message?: string | null | undefined;
+  message?: string | undefined;
 };
 
 /** @internal */
@@ -32,8 +32,8 @@ export const FunctionCall$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   args: z.record(z.string()).optional(),
-  call: z.nullable(z.string()).optional(),
-  message: z.nullable(z.string()).optional(),
+  call: z.string().optional(),
+  message: z.string().optional(),
 });
 
 export function functionCallFromJSON(

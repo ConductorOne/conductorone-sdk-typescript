@@ -16,7 +16,7 @@ export type TaskActionsServiceReassignRequest = {
   /**
    * An optional comment attached to the reassignment.
    */
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   expandMask?: TaskExpandMask | null | undefined;
   /**
    * The IDs of the users to reassign the current policy step to. Must be from the allowed reassignees list.
@@ -25,15 +25,15 @@ export type TaskActionsServiceReassignRequest = {
   /**
    * The ID of the current policy step to reassign. Must match the task's active step.
    */
-  policyStepId?: string | null | undefined;
+  policyStepId?: string | undefined;
 };
 
 /** @internal */
 export type TaskActionsServiceReassignRequest$Outbound = {
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
   newStepUserIds?: Array<string> | null | undefined;
-  policyStepId?: string | null | undefined;
+  policyStepId?: string | undefined;
 };
 
 /** @internal */
@@ -42,10 +42,10 @@ export const TaskActionsServiceReassignRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskActionsServiceReassignRequest
 > = z.object({
-  comment: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
   newStepUserIds: z.nullable(z.array(z.string())).optional(),
-  policyStepId: z.nullable(z.string()).optional(),
+  policyStepId: z.string().optional(),
 });
 
 export function taskActionsServiceReassignRequestToJSON(

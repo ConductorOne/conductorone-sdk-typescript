@@ -14,7 +14,7 @@ export type UserProfileChangeTrigger = {
   /**
    * The condition field.
    */
-  condition?: string | null | undefined;
+  condition?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const UserProfileChangeTrigger$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  condition: z.nullable(z.string()).optional(),
+  condition: z.string().optional(),
 });
 /** @internal */
 export type UserProfileChangeTrigger$Outbound = {
-  condition?: string | null | undefined;
+  condition?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const UserProfileChangeTrigger$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UserProfileChangeTrigger
 > = z.object({
-  condition: z.nullable(z.string()).optional(),
+  condition: z.string().optional(),
 });
 
 export function userProfileChangeTriggerToJSON(

@@ -14,11 +14,11 @@ export type CreateAccessProfileFromCohortResponse = {
   /**
    * The ID of the created access profile.
    */
-  accessProfileId?: string | null | undefined;
+  accessProfileId?: string | undefined;
   /**
    * The CEL expression generated for dynamic membership.
    */
-  celExpression?: string | null | undefined;
+  celExpression?: string | undefined;
 };
 
 /** @internal */
@@ -27,8 +27,8 @@ export const CreateAccessProfileFromCohortResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accessProfileId: z.nullable(z.string()).optional(),
-  celExpression: z.nullable(z.string()).optional(),
+  accessProfileId: z.string().optional(),
+  celExpression: z.string().optional(),
 });
 
 export function createAccessProfileFromCohortResponseFromJSON(

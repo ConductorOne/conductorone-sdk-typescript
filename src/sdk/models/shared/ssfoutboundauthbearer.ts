@@ -17,7 +17,7 @@ export type SSFOutboundAuthBearer = {
   /**
    * The token field.
    */
-  token?: string | null | undefined;
+  token?: string | undefined;
 };
 
 /** @internal */
@@ -26,11 +26,11 @@ export const SSFOutboundAuthBearer$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  token: z.nullable(z.string()).optional(),
+  token: z.string().optional(),
 });
 /** @internal */
 export type SSFOutboundAuthBearer$Outbound = {
-  token?: string | null | undefined;
+  token?: string | undefined;
 };
 
 /** @internal */
@@ -39,7 +39,7 @@ export const SSFOutboundAuthBearer$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SSFOutboundAuthBearer
 > = z.object({
-  token: z.nullable(z.string()).optional(),
+  token: z.string().optional(),
 });
 
 export function ssfOutboundAuthBearerToJSON(

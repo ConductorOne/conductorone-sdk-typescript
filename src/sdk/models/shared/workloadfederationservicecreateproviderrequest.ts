@@ -36,6 +36,7 @@ export const WorkloadFederationServiceCreateProviderRequestWellKnownProvider = {
   WellKnownWorkloadProviderAwsIamOutbound:
     "WELL_KNOWN_WORKLOAD_PROVIDER_AWS_IAM_OUTBOUND",
   WellKnownWorkloadProviderSpiffe: "WELL_KNOWN_WORKLOAD_PROVIDER_SPIFFE",
+  WellKnownWorkloadProviderC1Edge: "WELL_KNOWN_WORKLOAD_PROVIDER_C1_EDGE",
 } as const;
 /**
  * Well-known provider type. Required -- UNSPECIFIED is rejected.
@@ -63,11 +64,11 @@ export type WorkloadFederationServiceCreateProviderRequest = {
   /**
    * A description of what this provider is for.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The display name for the new provider.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The issuer URL. For OIDC providers, this is an HTTPS URL validated via
    *
@@ -76,7 +77,7 @@ export type WorkloadFederationServiceCreateProviderRequest = {
    *  (e.g., spiffe://prod.example.com). Normalized on write: lowercase
    *  scheme/host, no trailing slash. Unique within tenant.
    */
-  issuerUrl?: string | null | undefined;
+  issuerUrl?: string | undefined;
   oidc?: OIDCSettings | null | undefined;
   spiffe?: SPIFFESettings | null | undefined;
   /**
@@ -89,7 +90,6 @@ export type WorkloadFederationServiceCreateProviderRequest = {
    */
   wellKnownProvider?:
     | WorkloadFederationServiceCreateProviderRequestWellKnownProvider
-    | null
     | undefined;
 };
 
@@ -105,12 +105,12 @@ export const WorkloadFederationServiceCreateProviderRequestWellKnownProvider$out
 
 /** @internal */
 export type WorkloadFederationServiceCreateProviderRequest$Outbound = {
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  issuerUrl?: string | null | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
+  issuerUrl?: string | undefined;
   oidc?: OIDCSettings$Outbound | null | undefined;
   spiffe?: SPIFFESettings$Outbound | null | undefined;
-  wellKnownProvider?: string | null | undefined;
+  wellKnownProvider?: string | undefined;
 };
 
 /** @internal */
@@ -120,14 +120,14 @@ export const WorkloadFederationServiceCreateProviderRequest$outboundSchema:
     z.ZodTypeDef,
     WorkloadFederationServiceCreateProviderRequest
   > = z.object({
-    description: z.nullable(z.string()).optional(),
-    displayName: z.nullable(z.string()).optional(),
-    issuerUrl: z.nullable(z.string()).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    issuerUrl: z.string().optional(),
     oidc: z.nullable(OIDCSettings$outboundSchema).optional(),
     spiffe: z.nullable(SPIFFESettings$outboundSchema).optional(),
-    wellKnownProvider: z.nullable(
-      WorkloadFederationServiceCreateProviderRequestWellKnownProvider$outboundSchema,
-    ).optional(),
+    wellKnownProvider:
+      WorkloadFederationServiceCreateProviderRequestWellKnownProvider$outboundSchema
+        .optional(),
   });
 
 export function workloadFederationServiceCreateProviderRequestToJSON(

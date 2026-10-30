@@ -14,17 +14,17 @@ export type AppResourceType = {
   /**
    * The ID of the app that is associated with the app resource type
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * The display name of the app resource type.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The unique ID for the app resource type.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * Associated trait ids
    */
@@ -38,15 +38,15 @@ export const AppResourceType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
+  id: z.string().optional(),
   traitIds: z.nullable(z.array(z.string())).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),

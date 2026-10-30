@@ -14,7 +14,7 @@ export type TaskAuditStepSkipped = {
   /**
    * The skippedBy field.
    */
-  skippedBy?: string | null | undefined;
+  skippedBy?: string | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const TaskAuditStepSkipped$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  skippedBy: z.nullable(z.string()).optional(),
+  skippedBy: z.string().optional(),
 });
 
 export function taskAuditStepSkippedFromJSON(

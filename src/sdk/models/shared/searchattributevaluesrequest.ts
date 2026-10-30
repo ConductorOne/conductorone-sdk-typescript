@@ -23,19 +23,19 @@ export type SearchAttributeValuesRequest = {
   /**
    * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Query the attributes with a fuzzy search on display name and description.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * Search for attributes with a case insensitive match on the attribute value which is the attribute name.
    */
-  value?: string | null | undefined;
+  value?: string | undefined;
 };
 
 /** @internal */
@@ -43,10 +43,10 @@ export type SearchAttributeValuesRequest$Outbound = {
   attributeTypeIds?: Array<string> | null | undefined;
   excludeIds?: Array<string> | null | undefined;
   ids?: Array<string> | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  query?: string | null | undefined;
-  value?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  query?: string | undefined;
+  value?: string | undefined;
 };
 
 /** @internal */
@@ -58,10 +58,10 @@ export const SearchAttributeValuesRequest$outboundSchema: z.ZodType<
   attributeTypeIds: z.nullable(z.array(z.string())).optional(),
   excludeIds: z.nullable(z.array(z.string())).optional(),
   ids: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
-  value: z.nullable(z.string()).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  query: z.string().optional(),
+  value: z.string().optional(),
 });
 
 export function searchAttributeValuesRequestToJSON(

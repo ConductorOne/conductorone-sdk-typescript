@@ -1,0 +1,22 @@
+# SignInPolicyInput
+
+SignInPolicy defines how users sign in.
+
+## Example Usage
+
+```typescript
+import { SignInPolicyInput } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: SignInPolicyInput = {};
+```
+
+## Fields
+
+| Field                                                                                                                          | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `allowedMfaTypes`                                                                                                              | [shared.AllowedMfaTypes](../../../sdk/models/shared/allowedmfatypes.md)[]                                                      | :heavy_minus_sign:                                                                                                             | The credential types accepted as a second factor. Must be a subset of the<br/> credential types their inventory policy permits. |
+| `allowedPrimaryTypes`                                                                                                          | [shared.AllowedPrimaryTypes](../../../sdk/models/shared/allowedprimarytypes.md)[]                                              | :heavy_minus_sign:                                                                                                             | The primary credential types users may sign in with. Must be a subset of<br/> the credential types their inventory policy permits. |
+| `defaultOutcome`                                                                                                               | [shared.PolicyOutcome](../../../sdk/models/shared/policyoutcome.md)                                                            | :heavy_minus_sign:                                                                                                             | N/A                                                                                                                            |
+| `displayName`                                                                                                                  | *string*                                                                                                                       | :heavy_minus_sign:                                                                                                             | A human-readable name for the policy.                                                                                          |
+| `priority`                                                                                                                     | *number*                                                                                                                       | :heavy_minus_sign:                                                                                                             | When a user matches more than one policy, the policy with the highest<br/> priority applies.                                   |
+| `rules`                                                                                                                        | [shared.PolicyRule](../../../sdk/models/shared/policyrule.md)[]                                                                | :heavy_minus_sign:                                                                                                             | The ordered rule cascade, evaluated top to bottom.                                                                             |

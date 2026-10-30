@@ -21,43 +21,43 @@ export type TaskServiceCreateGrantRequest = {
   /**
    * The ID of the app entitlement to grant access to.
    */
-  appEntitlementId: string | null;
+  appEntitlementId: string;
   /**
    * The ID of the app that is associated with the entitlement.
    */
-  appId: string | null;
+  appId: string;
   /**
-   * The ID of the app user to grant access for. This field and identityUserId cannot both be set for a given request.
+   * The application account ID receiving access. Required unless identityUserId is set. If both are supplied, the account must belong to that user.
    */
-  appUserId?: string | null | undefined;
+  appUserId?: string | undefined;
   /**
    * The description of the request.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * Boolean stating whether or not the task is marked as emergency access.
    */
-  emergencyAccess?: boolean | null | undefined;
+  emergencyAccess?: boolean | undefined;
   expandMask?: TaskExpandMask | null | undefined;
   grantDuration?: string | null | undefined;
   /**
-   * The ID of the user associated with the app user we are granting access for. This field cannot be set if appUserID is also set.
+   * The C1 user ID receiving access. Required unless appUserId is set. If both are supplied, the account must belong to this user.
    */
-  identityUserId?: string | null | undefined;
+  identityUserId?: string | undefined;
   requestData?: { [k: string]: any } | null | undefined;
   source?: TaskGrantSource | null | undefined;
 };
 
 /** @internal */
 export type TaskServiceCreateGrantRequest$Outbound = {
-  appEntitlementId: string | null;
-  appId: string | null;
-  appUserId?: string | null | undefined;
-  description?: string | null | undefined;
-  emergencyAccess?: boolean | null | undefined;
+  appEntitlementId: string;
+  appId: string;
+  appUserId?: string | undefined;
+  description?: string | undefined;
+  emergencyAccess?: boolean | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
   grantDuration?: string | null | undefined;
-  identityUserId?: string | null | undefined;
+  identityUserId?: string | undefined;
   requestData?: { [k: string]: any } | null | undefined;
   source?: TaskGrantSource$Outbound | null | undefined;
 };
@@ -68,14 +68,14 @@ export const TaskServiceCreateGrantRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskServiceCreateGrantRequest
 > = z.object({
-  appEntitlementId: z.nullable(z.string()),
-  appId: z.nullable(z.string()),
-  appUserId: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  emergencyAccess: z.nullable(z.boolean()).optional(),
+  appEntitlementId: z.string(),
+  appId: z.string(),
+  appUserId: z.string().optional(),
+  description: z.string().optional(),
+  emergencyAccess: z.boolean().optional(),
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
   grantDuration: z.nullable(z.string()).optional(),
-  identityUserId: z.nullable(z.string()).optional(),
+  identityUserId: z.string().optional(),
   requestData: z.nullable(z.record(z.any())).optional(),
   source: z.nullable(TaskGrantSource$outboundSchema).optional(),
 });

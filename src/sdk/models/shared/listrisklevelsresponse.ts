@@ -22,7 +22,7 @@ export type ListRiskLevelsResponse = {
   /**
    * The token to retrieve the next page of results, or empty if there are no more results.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -32,7 +32,7 @@ export const ListRiskLevelsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   list: z.nullable(z.array(AttributeValue$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function listRiskLevelsResponseFromJSON(

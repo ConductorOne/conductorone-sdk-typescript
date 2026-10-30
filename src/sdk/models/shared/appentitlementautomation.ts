@@ -42,11 +42,11 @@ export type AppEntitlementAutomation = {
   /**
    * The unique ID for the App Entitlement.
    */
-  appEntitlementId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
   /**
    * The ID of the app that is associated with the app entitlement.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   basic?: AppEntitlementAutomationRuleBasic | null | undefined;
   cel?: AppEntitlementAutomationRuleCEL | null | undefined;
   createdAt?: Date | null | undefined;
@@ -54,11 +54,11 @@ export type AppEntitlementAutomation = {
   /**
    * The description of the app entitlement.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The display name of the app entitlement.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   entitlements?: AppEntitlementAutomationRuleEntitlement | null | undefined;
   lastRunStatus?: AppEntitlementAutomationLastRunStatus | null | undefined;
   /**
@@ -67,7 +67,7 @@ export type AppEntitlementAutomation = {
    * @remarks
    *  Read-only. Not settable via this API.
    */
-  managedByRequestCatalogId?: string | null | undefined;
+  managedByRequestCatalogId?: string | undefined;
   none?: AppEntitlementAutomationRuleNone | null | undefined;
   updatedAt?: Date | null | undefined;
 };
@@ -78,8 +78,8 @@ export const AppEntitlementAutomation$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
+  appEntitlementId: z.string().optional(),
+  appId: z.string().optional(),
   basic: z.nullable(AppEntitlementAutomationRuleBasic$inboundSchema).optional(),
   cel: z.nullable(AppEntitlementAutomationRuleCEL$inboundSchema).optional(),
   createdAt: z.nullable(
@@ -88,14 +88,14 @@ export const AppEntitlementAutomation$inboundSchema: z.ZodType<
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
   entitlements: z.nullable(
     AppEntitlementAutomationRuleEntitlement$inboundSchema,
   ).optional(),
   lastRunStatus: z.nullable(AppEntitlementAutomationLastRunStatus$inboundSchema)
     .optional(),
-  managedByRequestCatalogId: z.nullable(z.string()).optional(),
+  managedByRequestCatalogId: z.string().optional(),
   none: z.nullable(AppEntitlementAutomationRuleNone$inboundSchema).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),

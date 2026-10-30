@@ -11,6 +11,14 @@ import {
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  AccessReviewExcludedEntitlement,
+  AccessReviewExcludedEntitlement$inboundSchema,
+} from "./accessreviewexcludedentitlement.js";
+import {
+  AccessReviewExcludedResourceType,
+  AccessReviewExcludedResourceType$inboundSchema,
+} from "./accessreviewexcludedresourcetype.js";
+import {
   AccessReviewScopeV2,
   AccessReviewScopeV2$inboundSchema,
 } from "./accessreviewscopev2.js";
@@ -34,6 +42,26 @@ export type AccessReviewSetupEntitlementAndScopeServiceSetResponseExpanded = {
  * The AccessReviewSetupEntitlementAndScopeServiceSetResponse message.
  */
 export type AccessReviewSetupEntitlementAndScopeServiceSetResponse = {
+  /**
+   * The entitlements excluded from the campaign's scope. Only returned by
+   *
+   * @remarks
+   *  GetCampaignScopeAndEntitlements, and only when scope_v2 sets excluded_specific_resources.
+   */
+  excludedEntitlements?:
+    | Array<AccessReviewExcludedEntitlement>
+    | null
+    | undefined;
+  /**
+   * The resource types excluded from a user-first campaign's scope. Only returned by
+   *
+   * @remarks
+   *  GetCampaignScopeAndEntitlements, and only when scope_v2 sets excluded_resource_type_selections.
+   */
+  excludedResourceTypes?:
+    | Array<AccessReviewExcludedResourceType>
+    | null
+    | undefined;
   /**
    * Related objects requested via the expand mask.
    */
@@ -88,6 +116,12 @@ export const AccessReviewSetupEntitlementAndScopeServiceSetResponse$inboundSchem
     z.ZodTypeDef,
     unknown
   > = z.object({
+    excludedEntitlements: z.nullable(
+      z.array(AccessReviewExcludedEntitlement$inboundSchema),
+    ).optional(),
+    excludedResourceTypes: z.nullable(
+      z.array(AccessReviewExcludedResourceType$inboundSchema),
+    ).optional(),
     expanded: z.nullable(
       z.array(z.lazy(() =>
         AccessReviewSetupEntitlementAndScopeServiceSetResponseExpanded$inboundSchema

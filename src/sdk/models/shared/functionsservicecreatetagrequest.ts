@@ -11,17 +11,17 @@ export type FunctionsServiceCreateTagRequest = {
   /**
    * The commitId field.
    */
-  commitId?: string | null | undefined;
+  commitId?: string | undefined;
   /**
    * The name field.
    */
-  name?: string | null | undefined;
+  name?: string | undefined;
 };
 
 /** @internal */
 export type FunctionsServiceCreateTagRequest$Outbound = {
-  commitId?: string | null | undefined;
-  name?: string | null | undefined;
+  commitId?: string | undefined;
+  name?: string | undefined;
 };
 
 /** @internal */
@@ -30,8 +30,8 @@ export const FunctionsServiceCreateTagRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FunctionsServiceCreateTagRequest
 > = z.object({
-  commitId: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
+  commitId: z.string().optional(),
+  name: z.string().optional(),
 });
 
 export function functionsServiceCreateTagRequestToJSON(

@@ -97,7 +97,7 @@ export type Automation = {
   /**
    * the app id this workflow_template belongs to
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The automationSteps field.
    */
@@ -110,25 +110,25 @@ export type Automation = {
    *  than circuit_breaker_max times in the trailing circuit_breaker_period.
    *  0 = circuit breaker off (default).
    */
-  circuitBreakerMax?: number | null | undefined;
+  circuitBreakerMax?: number | undefined;
   /**
    * The circuitBreakerPeriod field.
    */
-  circuitBreakerPeriod?: CircuitBreakerPeriod | null | undefined;
+  circuitBreakerPeriod?: CircuitBreakerPeriod | undefined;
   context?: AutomationContext | null | undefined;
   createdAt?: Date | null | undefined;
   /**
    * The currentVersion field.
    */
-  currentVersion?: number | null | undefined;
+  currentVersion?: number | undefined;
   /**
    * The description field.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The draftAutomationSteps field.
    */
@@ -140,20 +140,20 @@ export type Automation = {
   /**
    * The enabled field.
    */
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The isDraft field.
    */
-  isDraft?: boolean | null | undefined;
+  isDraft?: boolean | undefined;
   lastExecutedAt?: Date | null | undefined;
   /**
    * The primaryTriggerType field.
    */
-  primaryTriggerType?: PrimaryTriggerType | null | undefined;
+  primaryTriggerType?: PrimaryTriggerType | undefined;
   /**
    * The triggers field.
    */
@@ -185,7 +185,7 @@ export type AutomationInput = {
   /**
    * the app id this workflow_template belongs to
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The automationSteps field.
    */
@@ -198,25 +198,25 @@ export type AutomationInput = {
    *  than circuit_breaker_max times in the trailing circuit_breaker_period.
    *  0 = circuit breaker off (default).
    */
-  circuitBreakerMax?: number | null | undefined;
+  circuitBreakerMax?: number | undefined;
   /**
    * The circuitBreakerPeriod field.
    */
-  circuitBreakerPeriod?: CircuitBreakerPeriod | null | undefined;
+  circuitBreakerPeriod?: CircuitBreakerPeriod | undefined;
   context?: AutomationContext | null | undefined;
   createdAt?: Date | null | undefined;
   /**
    * The currentVersion field.
    */
-  currentVersion?: number | null | undefined;
+  currentVersion?: number | undefined;
   /**
    * The description field.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The draftAutomationSteps field.
    */
@@ -228,16 +228,16 @@ export type AutomationInput = {
   /**
    * The enabled field.
    */
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   /**
    * The isDraft field.
    */
-  isDraft?: boolean | null | undefined;
+  isDraft?: boolean | undefined;
   lastExecutedAt?: Date | null | undefined;
   /**
    * The primaryTriggerType field.
    */
-  primaryTriggerType?: PrimaryTriggerType | null | undefined;
+  primaryTriggerType?: PrimaryTriggerType | undefined;
   /**
    * The triggers field.
    */
@@ -277,32 +277,30 @@ export const Automation$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   annotations: z.record(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
   automationSteps: z.nullable(z.array(AutomationStep$inboundSchema)).optional(),
   circuitBreaker: z.nullable(DisabledReasonCircuitBreaker$inboundSchema)
     .optional(),
-  circuitBreakerMax: z.nullable(z.number().int()).optional(),
-  circuitBreakerPeriod: z.nullable(CircuitBreakerPeriod$inboundSchema)
-    .optional(),
+  circuitBreakerMax: z.number().int().optional(),
+  circuitBreakerPeriod: CircuitBreakerPeriod$inboundSchema.optional(),
   context: z.nullable(AutomationContext$inboundSchema).optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  currentVersion: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  currentVersion: z.string().transform(v => parseInt(v, 10)).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
   draftAutomationSteps: z.nullable(z.array(AutomationStep$inboundSchema))
     .optional(),
   draftTriggers: z.nullable(z.array(AutomationTrigger$inboundSchema))
     .optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  id: z.nullable(z.string()).optional(),
-  isDraft: z.nullable(z.boolean()).optional(),
+  enabled: z.boolean().optional(),
+  id: z.string().optional(),
+  isDraft: z.boolean().optional(),
   lastExecutedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  primaryTriggerType: z.nullable(PrimaryTriggerType$inboundSchema).optional(),
+  primaryTriggerType: PrimaryTriggerType$inboundSchema.optional(),
   triggers: z.nullable(z.array(AutomationTrigger$inboundSchema)).optional(),
 });
 
@@ -319,22 +317,22 @@ export function automationFromJSON(
 /** @internal */
 export type AutomationInput$Outbound = {
   annotations?: { [k: string]: string } | undefined;
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   automationSteps?: Array<AutomationStep$Outbound> | null | undefined;
   circuitBreaker?: DisabledReasonCircuitBreaker$Outbound | null | undefined;
-  circuitBreakerMax?: number | null | undefined;
-  circuitBreakerPeriod?: string | null | undefined;
+  circuitBreakerMax?: number | undefined;
+  circuitBreakerPeriod?: string | undefined;
   context?: AutomationContext$Outbound | null | undefined;
   createdAt?: string | null | undefined;
-  currentVersion?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
+  currentVersion?: string | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
   draftAutomationSteps?: Array<AutomationStep$Outbound> | null | undefined;
   draftTriggers?: Array<AutomationTrigger$Outbound> | null | undefined;
-  enabled?: boolean | null | undefined;
-  isDraft?: boolean | null | undefined;
+  enabled?: boolean | undefined;
+  isDraft?: boolean | undefined;
   lastExecutedAt?: string | null | undefined;
-  primaryTriggerType?: string | null | undefined;
+  primaryTriggerType?: string | undefined;
   triggers?: Array<AutomationTrigger$Outbound> | null | undefined;
 };
 
@@ -345,29 +343,27 @@ export const AutomationInput$outboundSchema: z.ZodType<
   AutomationInput
 > = z.object({
   annotations: z.record(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
   automationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
     .optional(),
   circuitBreaker: z.nullable(DisabledReasonCircuitBreaker$outboundSchema)
     .optional(),
-  circuitBreakerMax: z.nullable(z.number().int()).optional(),
-  circuitBreakerPeriod: z.nullable(CircuitBreakerPeriod$outboundSchema)
-    .optional(),
+  circuitBreakerMax: z.number().int().optional(),
+  circuitBreakerPeriod: CircuitBreakerPeriod$outboundSchema.optional(),
   context: z.nullable(AutomationContext$outboundSchema).optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  currentVersion: z.nullable(z.number().int().transform(v => `${v}`))
-    .optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  currentVersion: z.number().int().transform(v => `${v}`).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
   draftAutomationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
     .optional(),
   draftTriggers: z.nullable(z.array(AutomationTrigger$outboundSchema))
     .optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  isDraft: z.nullable(z.boolean()).optional(),
+  enabled: z.boolean().optional(),
+  isDraft: z.boolean().optional(),
   lastExecutedAt: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
-  primaryTriggerType: z.nullable(PrimaryTriggerType$outboundSchema).optional(),
+  primaryTriggerType: PrimaryTriggerType$outboundSchema.optional(),
   triggers: z.nullable(z.array(AutomationTrigger$outboundSchema)).optional(),
 });
 

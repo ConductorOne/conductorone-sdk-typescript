@@ -20,7 +20,7 @@ export type CompositeKeyField = {
    * @remarks
    *  field). The collector reads the runtime value at this path.
    */
-  c1Field?: string | null | undefined;
+  c1Field?: string | undefined;
   /**
    * Attribute name in the Terraform data source's `refs[]` struct.
    *
@@ -29,7 +29,7 @@ export type CompositeKeyField = {
    *  matches them 1:1 today). Distinct fields anyway so a future
    *  provider rename is wire-safe — no migration needed.
    */
-  tfField?: string | null | undefined;
+  tfField?: string | undefined;
 };
 
 /** @internal */
@@ -38,8 +38,8 @@ export const CompositeKeyField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  c1Field: z.nullable(z.string()).optional(),
-  tfField: z.nullable(z.string()).optional(),
+  c1Field: z.string().optional(),
+  tfField: z.string().optional(),
 });
 
 export function compositeKeyFieldFromJSON(

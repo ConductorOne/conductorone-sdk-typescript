@@ -22,7 +22,7 @@ export type SearchStepUpTransactionsResponse = {
   /**
    * Token for retrieving the next page of results
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -32,7 +32,7 @@ export const SearchStepUpTransactionsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   list: z.nullable(z.array(StepUpTransaction$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function searchStepUpTransactionsResponseFromJSON(

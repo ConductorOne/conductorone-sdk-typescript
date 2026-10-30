@@ -14,6 +14,7 @@ export class FindingSearch extends ClientSDK {
    *
    * @remarks
    * Search findings using full-text query and filters for severity, state, type, and app.
+   *  Each Finding row is large (risk factors, evidence, target, tags) — request a small page_size (≤10) to keep responses small.
    */
   async search(
     request?: shared.FindingSearchRequest | undefined,

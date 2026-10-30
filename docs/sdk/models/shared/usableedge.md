@@ -1,0 +1,24 @@
+# UsableEdge
+
+UsableEdge is the secret-free connection target authorized for the calling person.
+ It excludes policy, routes, credential configuration, and administrative identities.
+
+## Example Usage
+
+```typescript
+import { UsableEdge } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: UsableEdge = {};
+```
+
+## Fields
+
+| Field                                                                                                                   | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
+| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `allowInferenceBearerTokens`                                                                                            | *boolean*                                                                                                               | :heavy_minus_sign:                                                                                                      | Whether short-lived inference Bearer credentials are enabled. False when<br/> no authorized inference resource is returned. |
+| `appId`                                                                                                                 | *string*                                                                                                                | :heavy_minus_sign:                                                                                                      | Identifier of the application that owns this Edge.                                                                      |
+| `displayName`                                                                                                           | *string*                                                                                                                | :heavy_minus_sign:                                                                                                      | Human-readable name of this Edge.                                                                                       |
+| `grantedScopes`                                                                                                         | *string*[]                                                                                                              | :heavy_minus_sign:                                                                                                      | Scopes the caller currently holds on the returned resources.                                                            |
+| `id`                                                                                                                    | *string*                                                                                                                | :heavy_minus_sign:                                                                                                      | Identifier of this Edge.                                                                                                |
+| `tokenAudience`                                                                                                         | *string*                                                                                                                | :heavy_minus_sign:                                                                                                      | Audience to use when exchanging a token for this Edge.                                                                  |
+| `tokenResources`                                                                                                        | [shared.EdgeTokenResources](../../../sdk/models/shared/edgetokenresources.md)                                           | :heavy_minus_sign:                                                                                                      | N/A                                                                                                                     |

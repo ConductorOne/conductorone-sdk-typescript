@@ -14,7 +14,7 @@ export type SimilarUsernameMatchType = {
   /**
    * The proposedIdentityUserId field.
    */
-  proposedIdentityUserId?: string | null | undefined;
+  proposedIdentityUserId?: string | undefined;
 };
 
 /** @internal */
@@ -23,9 +23,29 @@ export const SimilarUsernameMatchType$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  proposedIdentityUserId: z.nullable(z.string()).optional(),
+  proposedIdentityUserId: z.string().optional(),
+});
+/** @internal */
+export type SimilarUsernameMatchType$Outbound = {
+  proposedIdentityUserId?: string | undefined;
+};
+
+/** @internal */
+export const SimilarUsernameMatchType$outboundSchema: z.ZodType<
+  SimilarUsernameMatchType$Outbound,
+  z.ZodTypeDef,
+  SimilarUsernameMatchType
+> = z.object({
+  proposedIdentityUserId: z.string().optional(),
 });
 
+export function similarUsernameMatchTypeToJSON(
+  similarUsernameMatchType: SimilarUsernameMatchType,
+): string {
+  return JSON.stringify(
+    SimilarUsernameMatchType$outboundSchema.parse(similarUsernameMatchType),
+  );
+}
 export function similarUsernameMatchTypeFromJSON(
   jsonString: string,
 ): SafeParseResult<SimilarUsernameMatchType, SDKValidationError> {

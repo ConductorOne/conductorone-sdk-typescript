@@ -11,17 +11,17 @@ export type ConnectorServiceRotateCredentialRequest = {
   /**
    * The appId of the app the connector is attached to.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The connectorId of the connector that we are rotating the credentials for.
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
 };
 
 /** @internal */
 export type ConnectorServiceRotateCredentialRequest$Outbound = {
-  appId?: string | null | undefined;
-  connectorId?: string | null | undefined;
+  appId?: string | undefined;
+  connectorId?: string | undefined;
 };
 
 /** @internal */
@@ -30,8 +30,8 @@ export const ConnectorServiceRotateCredentialRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ConnectorServiceRotateCredentialRequest
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  connectorId: z.string().optional(),
 });
 
 export function connectorServiceRotateCredentialRequestToJSON(

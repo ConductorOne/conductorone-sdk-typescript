@@ -15,7 +15,7 @@ export type Facets = {
   /**
    * The count of items in this facet.
    */
-  count?: number | null | undefined;
+  count?: number | undefined;
   /**
    * The facet being referenced.
    */
@@ -25,7 +25,7 @@ export type Facets = {
 /** @internal */
 export const Facets$inboundSchema: z.ZodType<Facets, z.ZodTypeDef, unknown> = z
   .object({
-    count: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
+    count: z.string().transform(v => parseInt(v, 10)).optional(),
     facets: z.nullable(z.array(FacetCategory$inboundSchema)).optional(),
   });
 

@@ -86,17 +86,17 @@ export type PolicyStepInstance = {
   /**
    * The ID of the PolicyStepInstance. This is required by many action submission endpoints to indicate what step you're approving.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The policy generation id refers to the version of the policy that this step was created from.
    */
-  policyGenerationId?: string | null | undefined;
+  policyGenerationId?: string | undefined;
   provision?: ProvisionInstance | null | undefined;
   reject?: RejectInstance | null | undefined;
   /**
    * The state of the step, which is either active or done.
    */
-  state?: PolicyStepInstanceState | null | undefined;
+  state?: PolicyStepInstanceState | undefined;
   wait?: WaitInstance | null | undefined;
 };
 
@@ -123,11 +123,11 @@ export const PolicyStepInstance$inboundSchema: z.ZodType<
   action: z.nullable(ActionInstance$inboundSchema).optional(),
   approval: z.nullable(ApprovalInstance$inboundSchema).optional(),
   form: z.nullable(FormInstance$inboundSchema).optional(),
-  id: z.nullable(z.string()).optional(),
-  policyGenerationId: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
+  policyGenerationId: z.string().optional(),
   provision: z.nullable(ProvisionInstance$inboundSchema).optional(),
   reject: z.nullable(RejectInstance$inboundSchema).optional(),
-  state: z.nullable(PolicyStepInstanceState$inboundSchema).optional(),
+  state: PolicyStepInstanceState$inboundSchema.optional(),
   wait: z.nullable(WaitInstance$inboundSchema).optional(),
 });
 /** @internal */
@@ -136,11 +136,11 @@ export type PolicyStepInstance$Outbound = {
   action?: ActionInstance$Outbound | null | undefined;
   approval?: ApprovalInstance$Outbound | null | undefined;
   form?: FormInstance$Outbound | null | undefined;
-  id?: string | null | undefined;
-  policyGenerationId?: string | null | undefined;
+  id?: string | undefined;
+  policyGenerationId?: string | undefined;
   provision?: ProvisionInstance$Outbound | null | undefined;
   reject?: RejectInstance$Outbound | null | undefined;
-  state?: string | null | undefined;
+  state?: string | undefined;
   wait?: WaitInstance$Outbound | null | undefined;
 };
 
@@ -154,11 +154,11 @@ export const PolicyStepInstance$outboundSchema: z.ZodType<
   action: z.nullable(ActionInstance$outboundSchema).optional(),
   approval: z.nullable(ApprovalInstance$outboundSchema).optional(),
   form: z.nullable(FormInstance$outboundSchema).optional(),
-  id: z.nullable(z.string()).optional(),
-  policyGenerationId: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
+  policyGenerationId: z.string().optional(),
   provision: z.nullable(ProvisionInstance$outboundSchema).optional(),
   reject: z.nullable(RejectInstance$outboundSchema).optional(),
-  state: z.nullable(PolicyStepInstanceState$outboundSchema).optional(),
+  state: PolicyStepInstanceState$outboundSchema.optional(),
   wait: z.nullable(WaitInstance$outboundSchema).optional(),
 });
 

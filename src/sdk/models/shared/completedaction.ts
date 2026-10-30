@@ -25,7 +25,7 @@ export type CompletedAction = {
   /**
    * The UserID of who completed provisioning. For connector provisioning this is the system user id, for manual provisioning this is who clicked "provision complete"
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -39,13 +39,13 @@ export const CompletedAction$inboundSchema: z.ZodType<
   ).optional(),
   entitlements: z.nullable(z.array(AppEntitlementReference$inboundSchema))
     .optional(),
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 /** @internal */
 export type CompletedAction$Outbound = {
   completedAt?: string | null | undefined;
   entitlements?: Array<AppEntitlementReference$Outbound> | null | undefined;
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -57,7 +57,7 @@ export const CompletedAction$outboundSchema: z.ZodType<
   completedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   entitlements: z.nullable(z.array(AppEntitlementReference$outboundSchema))
     .optional(),
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 
 export function completedActionToJSON(

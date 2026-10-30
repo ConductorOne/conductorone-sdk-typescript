@@ -30,6 +30,7 @@ import { Result } from "../sdk/types/fp.js";
  *
  * @remarks
  * SetCampaignScopeAndEntitlements replaces the scope configuration and selected entitlements for an access review campaign.
+ *  Each call replaces the whole selection. To build a large selection, use AddCampaignEntitlements in chunks instead.
  */
 export function accessReviewSetupEntitlementSetCampaignScopeAndEntitlements(
   client: ConductoroneSDKTypescriptCore,

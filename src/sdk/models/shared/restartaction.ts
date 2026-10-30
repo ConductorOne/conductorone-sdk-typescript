@@ -14,12 +14,12 @@ export type RestartAction = {
   /**
    * The step ID that was restarted. Potentially multiple "history" steps will reference this ID to indicate by what step they were restarted.
    */
-  oldPolicyStepId?: string | null | undefined;
+  oldPolicyStepId?: string | undefined;
   restartedAt?: Date | null | undefined;
   /**
    * The user that submitted the restart action.
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -28,17 +28,17 @@ export const RestartAction$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  oldPolicyStepId: z.nullable(z.string()).optional(),
+  oldPolicyStepId: z.string().optional(),
   restartedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 /** @internal */
 export type RestartAction$Outbound = {
-  oldPolicyStepId?: string | null | undefined;
+  oldPolicyStepId?: string | undefined;
   restartedAt?: string | null | undefined;
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -47,9 +47,9 @@ export const RestartAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RestartAction
 > = z.object({
-  oldPolicyStepId: z.nullable(z.string()).optional(),
+  oldPolicyStepId: z.string().optional(),
   restartedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 
 export function restartActionToJSON(restartAction: RestartAction): string {

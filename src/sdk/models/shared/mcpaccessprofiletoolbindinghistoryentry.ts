@@ -16,15 +16,14 @@ import {
 } from "./mcpaccessprofiletoolbindinghistoryitem.js";
 
 /**
- * MCPAccessProfileToolBindingHistoryEntry is one Tx.Commit's worth of
+ * MCPAccessProfileToolBindingHistoryEntry is a single change-history record
  *
  * @remarks
- *  adds/removes against the binding list. No snapshot field: the lists
- *  declare snapshot = false.
+ *  capturing the tool bindings added or removed in one transaction.
  */
 export type MCPAccessProfileToolBindingHistoryEntry = {
   /**
-   * The items field.
+   * The bindings added or removed in this change.
    */
   items?: Array<MCPAccessProfileToolBindingHistoryItem> | null | undefined;
   metadata?: ListHistoryEntryMetadata | null | undefined;

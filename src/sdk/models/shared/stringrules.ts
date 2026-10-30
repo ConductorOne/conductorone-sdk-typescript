@@ -61,14 +61,14 @@ export type StringRules = {
   /**
    * Const specifies that this field must be exactly the specified value
    */
-  const?: string | null | undefined;
+  const?: string | undefined;
   /**
    * Contains specifies that this field must have the specified substring
    *
    * @remarks
    *  anywhere in the string.
    */
-  contains?: string | null | undefined;
+  contains?: string | undefined;
   /**
    * Email specifies that the field must be a valid email address as
    *
@@ -94,7 +94,7 @@ export type StringRules = {
    * @remarks
    *  evaluated only if the field is not empty
    */
-  ignoreEmpty?: boolean | null | undefined;
+  ignoreEmpty?: boolean | undefined;
   /**
    * In specifies that this field must be equal to one of the specified
    *
@@ -135,21 +135,21 @@ export type StringRules = {
    *  characters (Unicode code points). Note that the number of
    *  characters may differ from the number of bytes in the string.
    */
-  len?: string | null | undefined;
+  len?: string | undefined;
   /**
    * LenBytes specifies that this field must be the specified number of bytes
    *
    * @remarks
    *  at a minimum
    */
-  lenBytes?: string | null | undefined;
+  lenBytes?: string | undefined;
   /**
    * MaxBytes specifies that this field must be the specified number of bytes
    *
    * @remarks
    *  at a maximum
    */
-  maxBytes?: string | null | undefined;
+  maxBytes?: string | undefined;
   /**
    * MaxLen specifies that this field must be the specified number of
    *
@@ -157,14 +157,14 @@ export type StringRules = {
    *  characters (Unicode code points) at a maximum. Note that the number of
    *  characters may differ from the number of bytes in the string.
    */
-  maxLen?: string | null | undefined;
+  maxLen?: string | undefined;
   /**
    * MinBytes specifies that this field must be the specified number of bytes
    *
    * @remarks
    *  at a minimum
    */
-  minBytes?: string | null | undefined;
+  minBytes?: string | undefined;
   /**
    * MinLen specifies that this field must be the specified number of
    *
@@ -172,14 +172,14 @@ export type StringRules = {
    *  characters (Unicode code points) at a minimum. Note that the number of
    *  characters may differ from the number of bytes in the string.
    */
-  minLen?: string | null | undefined;
+  minLen?: string | undefined;
   /**
    * NotContains specifies that this field cannot have the specified substring
    *
    * @remarks
    *  anywhere in the string.
    */
-  notContains?: string | null | undefined;
+  notContains?: string | undefined;
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    *
@@ -194,14 +194,14 @@ export type StringRules = {
    *  regular expression (RE2 syntax). The included expression should elide
    *  any delimiters.
    */
-  pattern?: string | null | undefined;
+  pattern?: string | undefined;
   /**
    * Prefix specifies that this field must have the specified substring at
    *
    * @remarks
    *  the beginning of the string.
    */
-  prefix?: string | null | undefined;
+  prefix?: string | undefined;
   /**
    * This applies to regexes HTTP_HEADER_NAME and HTTP_HEADER_VALUE to enable
    *
@@ -211,14 +211,14 @@ export type StringRules = {
    *  Setting to false will enable a looser validations that only disallows
    *  \r\n\0 characters, which can be used to bypass header matching rules.
    */
-  strict?: boolean | null | undefined;
+  strict?: boolean | undefined;
   /**
    * Suffix specifies that this field must have the specified substring at
    *
    * @remarks
    *  the end of the string.
    */
-  suffix?: string | null | undefined;
+  suffix?: string | undefined;
   /**
    * Uri specifies that the field must be a valid, absolute URI as defined
    *
@@ -276,27 +276,27 @@ export const StringRules$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   address: z.nullable(z.boolean()).optional(),
-  const: z.nullable(z.string()).optional(),
-  contains: z.nullable(z.string()).optional(),
+  const: z.string().optional(),
+  contains: z.string().optional(),
   email: z.nullable(z.boolean()).optional(),
   hostname: z.nullable(z.boolean()).optional(),
-  ignoreEmpty: z.nullable(z.boolean()).optional(),
+  ignoreEmpty: z.boolean().optional(),
   in: z.nullable(z.array(z.string())).optional(),
   ip: z.nullable(z.boolean()).optional(),
   ipv4: z.nullable(z.boolean()).optional(),
   ipv6: z.nullable(z.boolean()).optional(),
-  len: z.nullable(z.string()).optional(),
-  lenBytes: z.nullable(z.string()).optional(),
-  maxBytes: z.nullable(z.string()).optional(),
-  maxLen: z.nullable(z.string()).optional(),
-  minBytes: z.nullable(z.string()).optional(),
-  minLen: z.nullable(z.string()).optional(),
-  notContains: z.nullable(z.string()).optional(),
+  len: z.string().optional(),
+  lenBytes: z.string().optional(),
+  maxBytes: z.string().optional(),
+  maxLen: z.string().optional(),
+  minBytes: z.string().optional(),
+  minLen: z.string().optional(),
+  notContains: z.string().optional(),
   notIn: z.nullable(z.array(z.string())).optional(),
-  pattern: z.nullable(z.string()).optional(),
-  prefix: z.nullable(z.string()).optional(),
-  strict: z.nullable(z.boolean()).optional(),
-  suffix: z.nullable(z.string()).optional(),
+  pattern: z.string().optional(),
+  prefix: z.string().optional(),
+  strict: z.boolean().optional(),
+  suffix: z.string().optional(),
   uri: z.nullable(z.boolean()).optional(),
   uriRef: z.nullable(z.boolean()).optional(),
   uuid: z.nullable(z.boolean()).optional(),
@@ -305,27 +305,27 @@ export const StringRules$inboundSchema: z.ZodType<
 /** @internal */
 export type StringRules$Outbound = {
   address?: boolean | null | undefined;
-  const?: string | null | undefined;
-  contains?: string | null | undefined;
+  const?: string | undefined;
+  contains?: string | undefined;
   email?: boolean | null | undefined;
   hostname?: boolean | null | undefined;
-  ignoreEmpty?: boolean | null | undefined;
+  ignoreEmpty?: boolean | undefined;
   in?: Array<string> | null | undefined;
   ip?: boolean | null | undefined;
   ipv4?: boolean | null | undefined;
   ipv6?: boolean | null | undefined;
-  len?: string | null | undefined;
-  lenBytes?: string | null | undefined;
-  maxBytes?: string | null | undefined;
-  maxLen?: string | null | undefined;
-  minBytes?: string | null | undefined;
-  minLen?: string | null | undefined;
-  notContains?: string | null | undefined;
+  len?: string | undefined;
+  lenBytes?: string | undefined;
+  maxBytes?: string | undefined;
+  maxLen?: string | undefined;
+  minBytes?: string | undefined;
+  minLen?: string | undefined;
+  notContains?: string | undefined;
   notIn?: Array<string> | null | undefined;
-  pattern?: string | null | undefined;
-  prefix?: string | null | undefined;
-  strict?: boolean | null | undefined;
-  suffix?: string | null | undefined;
+  pattern?: string | undefined;
+  prefix?: string | undefined;
+  strict?: boolean | undefined;
+  suffix?: string | undefined;
   uri?: boolean | null | undefined;
   uriRef?: boolean | null | undefined;
   uuid?: boolean | null | undefined;
@@ -339,27 +339,27 @@ export const StringRules$outboundSchema: z.ZodType<
   StringRules
 > = z.object({
   address: z.nullable(z.boolean()).optional(),
-  const: z.nullable(z.string()).optional(),
-  contains: z.nullable(z.string()).optional(),
+  const: z.string().optional(),
+  contains: z.string().optional(),
   email: z.nullable(z.boolean()).optional(),
   hostname: z.nullable(z.boolean()).optional(),
-  ignoreEmpty: z.nullable(z.boolean()).optional(),
+  ignoreEmpty: z.boolean().optional(),
   in: z.nullable(z.array(z.string())).optional(),
   ip: z.nullable(z.boolean()).optional(),
   ipv4: z.nullable(z.boolean()).optional(),
   ipv6: z.nullable(z.boolean()).optional(),
-  len: z.nullable(z.string()).optional(),
-  lenBytes: z.nullable(z.string()).optional(),
-  maxBytes: z.nullable(z.string()).optional(),
-  maxLen: z.nullable(z.string()).optional(),
-  minBytes: z.nullable(z.string()).optional(),
-  minLen: z.nullable(z.string()).optional(),
-  notContains: z.nullable(z.string()).optional(),
+  len: z.string().optional(),
+  lenBytes: z.string().optional(),
+  maxBytes: z.string().optional(),
+  maxLen: z.string().optional(),
+  minBytes: z.string().optional(),
+  minLen: z.string().optional(),
+  notContains: z.string().optional(),
   notIn: z.nullable(z.array(z.string())).optional(),
-  pattern: z.nullable(z.string()).optional(),
-  prefix: z.nullable(z.string()).optional(),
-  strict: z.nullable(z.boolean()).optional(),
-  suffix: z.nullable(z.string()).optional(),
+  pattern: z.string().optional(),
+  prefix: z.string().optional(),
+  strict: z.boolean().optional(),
+  suffix: z.string().optional(),
   uri: z.nullable(z.boolean()).optional(),
   uriRef: z.nullable(z.boolean()).optional(),
   uuid: z.nullable(z.boolean()).optional(),

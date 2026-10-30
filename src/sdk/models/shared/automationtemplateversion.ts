@@ -26,7 +26,7 @@ export type AutomationTemplateVersion = {
   /**
    * The automationTemplateId field.
    */
-  automationTemplateId?: string | null | undefined;
+  automationTemplateId?: string | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
@@ -37,7 +37,7 @@ export type AutomationTemplateVersion = {
   /**
    * The version field.
    */
-  version?: number | null | undefined;
+  version?: number | undefined;
 };
 
 /** @internal */
@@ -47,7 +47,7 @@ export const AutomationTemplateVersion$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   automationSteps: z.nullable(z.array(AutomationStep$inboundSchema)).optional(),
-  automationTemplateId: z.nullable(z.string()).optional(),
+  automationTemplateId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -58,7 +58,7 @@ export const AutomationTemplateVersion$inboundSchema: z.ZodType<
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  version: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
+  version: z.string().transform(v => parseInt(v, 10)).optional(),
 });
 
 export function automationTemplateVersionFromJSON(

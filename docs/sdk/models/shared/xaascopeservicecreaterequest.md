@@ -1,0 +1,22 @@
+# XAAScopeServiceCreateRequest
+
+XAAScopeServiceCreateRequest declares a new scope.
+
+## Example Usage
+
+```typescript
+import { XAAScopeServiceCreateRequest } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: XAAScopeServiceCreateRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                         | Type                                                                                                                          | Required                                                                                                                      | Description                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `classification`                                                                                                              | [shared.XAAScopeServiceCreateRequestClassification](../../../sdk/models/shared/xaascopeservicecreaterequestclassification.md) | :heavy_minus_sign:                                                                                                            | Risk classification.                                                                                                          |
+| `description`                                                                                                                 | *string*                                                                                                                      | :heavy_minus_sign:                                                                                                            | Description of what the scope grants.                                                                                         |
+| `displayName`                                                                                                                 | *string*                                                                                                                      | :heavy_minus_sign:                                                                                                            | Display name for the scope.                                                                                                   |
+| `scopeValue`                                                                                                                  | *string*                                                                                                                      | :heavy_minus_sign:                                                                                                            | The literal OAuth scope string. Immutable after creation.                                                                     |
+| `state`                                                                                                                       | [shared.XAAScopeServiceCreateRequestState](../../../sdk/models/shared/xaascopeservicecreaterequeststate.md)                   | :heavy_minus_sign:                                                                                                            | Initial state: PENDING_REVIEW, ENABLED or DISABLED. UNSPECIFIED defaults to PENDING_REVIEW.                                   |
+| `xaaResourceServerId`                                                                                                         | *string*                                                                                                                      | :heavy_minus_sign:                                                                                                            | The resource server this scope belongs to.                                                                                    |

@@ -11,12 +11,12 @@ export type PolicyRef = {
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
 export type PolicyRef$Outbound = {
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const PolicyRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PolicyRef
 > = z.object({
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
 });
 
 export function policyRefToJSON(policyRef: PolicyRef): string {

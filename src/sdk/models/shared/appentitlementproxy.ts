@@ -17,11 +17,11 @@ export type AppEntitlementProxy = {
   /**
    * The ID of the destination (child) entitlement.
    */
-  dstAppEntitlementId?: string | null | undefined;
+  dstAppEntitlementId?: string | undefined;
   /**
    * The ID of the app that owns the destination entitlement.
    */
-  dstAppId?: string | null | undefined;
+  dstAppId?: string | undefined;
   /**
    * If true, the binding does not exist yet and is inferred from the entitlements of the parent app.
    */
@@ -29,15 +29,15 @@ export type AppEntitlementProxy = {
   /**
    * The ID of the source (parent) entitlement.
    */
-  srcAppEntitlementId?: string | null | undefined;
+  srcAppEntitlementId?: string | undefined;
   /**
    * The ID of the app that owns the source entitlement.
    */
-  srcAppId?: string | null | undefined;
+  srcAppId?: string | undefined;
   /**
    * If true, this binding was created by the system and cannot be removed by the user.
    */
-  systemBuiltin?: boolean | null | undefined;
+  systemBuiltin?: boolean | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -56,12 +56,12 @@ export const AppEntitlementProxy$inboundSchema: z.ZodType<
   disabledAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  dstAppEntitlementId: z.nullable(z.string()).optional(),
-  dstAppId: z.nullable(z.string()).optional(),
+  dstAppEntitlementId: z.string().optional(),
+  dstAppId: z.string().optional(),
   implicit: z.nullable(z.boolean()).optional(),
-  srcAppEntitlementId: z.nullable(z.string()).optional(),
-  srcAppId: z.nullable(z.string()).optional(),
-  systemBuiltin: z.nullable(z.boolean()).optional(),
+  srcAppEntitlementId: z.string().optional(),
+  srcAppId: z.string().optional(),
+  systemBuiltin: z.boolean().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

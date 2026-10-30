@@ -14,15 +14,15 @@ export type GroupProvisioner = {
   /**
    * Whether the provisioner can reassign the task.
    */
-  allowReassignment?: boolean | null | undefined;
+  allowReassignment?: boolean | undefined;
   /**
    * The app group ID (entitlement ID).
    */
-  appGroupId?: string | null | undefined;
+  appGroupId?: string | undefined;
   /**
    * The app ID containing the group.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * Fallback user IDs if no group members are found.
    */
@@ -35,16 +35,16 @@ export const GroupProvisioner$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  allowReassignment: z.nullable(z.boolean()).optional(),
-  appGroupId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
+  allowReassignment: z.boolean().optional(),
+  appGroupId: z.string().optional(),
+  appId: z.string().optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
 export type GroupProvisioner$Outbound = {
-  allowReassignment?: boolean | null | undefined;
-  appGroupId?: string | null | undefined;
-  appId?: string | null | undefined;
+  allowReassignment?: boolean | undefined;
+  appGroupId?: string | undefined;
+  appId?: string | undefined;
   fallbackUserIds?: Array<string> | null | undefined;
 };
 
@@ -54,9 +54,9 @@ export const GroupProvisioner$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GroupProvisioner
 > = z.object({
-  allowReassignment: z.nullable(z.boolean()).optional(),
-  appGroupId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
+  allowReassignment: z.boolean().optional(),
+  appGroupId: z.string().optional(),
+  appId: z.string().optional(),
   fallbackUserIds: z.nullable(z.array(z.string())).optional(),
 });
 

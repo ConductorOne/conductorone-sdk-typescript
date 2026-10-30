@@ -38,7 +38,7 @@ export type TaskActionsServiceHardResetResponse = {
   /**
    * The ID of the task reset action created by this request.
    */
-  ticketActionId?: string | null | undefined;
+  ticketActionId?: string | undefined;
 };
 
 /** @internal */
@@ -87,7 +87,7 @@ export const TaskActionsServiceHardResetResponse$inboundSchema: z.ZodType<
     )),
   ).optional(),
   taskView: z.nullable(TaskView$inboundSchema).optional(),
-  ticketActionId: z.nullable(z.string()).optional(),
+  ticketActionId: z.string().optional(),
 });
 
 export function taskActionsServiceHardResetResponseFromJSON(

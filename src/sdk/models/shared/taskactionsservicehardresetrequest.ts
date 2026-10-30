@@ -16,13 +16,13 @@ export type TaskActionsServiceHardResetRequest = {
   /**
    * The comment attached to the request.
    */
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   expandMask?: TaskExpandMask | null | undefined;
 };
 
 /** @internal */
 export type TaskActionsServiceHardResetRequest$Outbound = {
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
 };
 
@@ -32,7 +32,7 @@ export const TaskActionsServiceHardResetRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskActionsServiceHardResetRequest
 > = z.object({
-  comment: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
 });
 

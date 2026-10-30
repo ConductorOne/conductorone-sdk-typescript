@@ -14,6 +14,7 @@ export class TaskSearch extends ClientSDK {
    *
    * @remarks
    * Search tasks based on filters specified in the request body.
+   *  Each TaskView row is large — request a small page_size (≤10) and set expand_mask to only the paths you need; broad expansion inlines whole related objects (app, entitlement, user, policy) and bloats the response.
    */
   async search(
     request?: shared.TaskSearchRequest | undefined,

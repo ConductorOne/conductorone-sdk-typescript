@@ -15,7 +15,7 @@ export type StringField = {
   /**
    * If secret, value is write-only in UI and a password-type form is used.
    */
-  secret?: boolean | null | undefined;
+  secret?: boolean | undefined;
   valueValidator?: StringRules | null | undefined;
 };
 
@@ -25,7 +25,7 @@ export const StringField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  secret: z.nullable(z.boolean()).optional(),
+  secret: z.boolean().optional(),
   valueValidator: z.nullable(StringRules$inboundSchema).optional(),
 });
 

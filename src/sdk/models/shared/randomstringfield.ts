@@ -14,7 +14,7 @@ export type RandomStringField = {
   /**
    * The length field.
    */
-  length?: number | null | undefined;
+  length?: number | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const RandomStringField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  length: z.nullable(z.number().int()).optional(),
+  length: z.number().int().optional(),
 });
 
 export function randomStringFieldFromJSON(

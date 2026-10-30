@@ -15,7 +15,7 @@ export type DirectoryView = {
   /**
    * JSONPATH expression indicating the location of the App object in the array.
    */
-  appPath?: string | null | undefined;
+  appPath?: string | undefined;
   directory?: Directory | null | undefined;
 };
 
@@ -25,7 +25,7 @@ export const DirectoryView$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appPath: z.nullable(z.string()).optional(),
+  appPath: z.string().optional(),
   directory: z.nullable(Directory$inboundSchema).optional(),
 });
 

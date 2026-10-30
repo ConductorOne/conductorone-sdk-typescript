@@ -11,17 +11,17 @@ export type CreateAttributeValueRequest = {
   /**
    * The attributeTypeId field.
    */
-  attributeTypeId?: string | null | undefined;
+  attributeTypeId?: string | undefined;
   /**
    * The value field.
    */
-  value?: string | null | undefined;
+  value?: string | undefined;
 };
 
 /** @internal */
 export type CreateAttributeValueRequest$Outbound = {
-  attributeTypeId?: string | null | undefined;
-  value?: string | null | undefined;
+  attributeTypeId?: string | undefined;
+  value?: string | undefined;
 };
 
 /** @internal */
@@ -30,8 +30,8 @@ export const CreateAttributeValueRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAttributeValueRequest
 > = z.object({
-  attributeTypeId: z.nullable(z.string()).optional(),
-  value: z.nullable(z.string()).optional(),
+  attributeTypeId: z.string().optional(),
+  value: z.string().optional(),
 });
 
 export function createAttributeValueRequestToJSON(

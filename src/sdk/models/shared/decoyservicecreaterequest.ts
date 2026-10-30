@@ -45,11 +45,11 @@ export type DecoyServiceCreateRequest = {
   /**
    * The description field.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   userClientCredential?: DecoyUserClientCredentialInput | null | undefined;
   workloadFed?: DecoyWorkloadFederationInput | null | undefined;
 };
@@ -59,8 +59,8 @@ export type DecoyServiceCreateRequest$Outbound = {
   accessToken?: DecoyAccessTokenInput$Outbound | null | undefined;
   annotations?: { [k: string]: string } | undefined;
   connectorClient?: DecoyConnectorClientInput$Outbound | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
   userClientCredential?:
     | DecoyUserClientCredentialInput$Outbound
     | null
@@ -78,8 +78,8 @@ export const DecoyServiceCreateRequest$outboundSchema: z.ZodType<
   annotations: z.record(z.string()).optional(),
   connectorClient: z.nullable(DecoyConnectorClientInput$outboundSchema)
     .optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
   userClientCredential: z.nullable(
     DecoyUserClientCredentialInput$outboundSchema,
   ).optional(),

@@ -10,6 +10,19 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
+ * Classification of last_error. Unspecified when no classified error is present.
+ */
+export const ErrorKind = {
+  ErrorKindUnspecified: "ERROR_KIND_UNSPECIFIED",
+  ErrorKindAuthoredRuntimeServeRefused:
+    "ERROR_KIND_AUTHORED_RUNTIME_SERVE_REFUSED",
+} as const;
+/**
+ * Classification of last_error. Unspecified when no classified error is present.
+ */
+export type ErrorKind = OpenEnum<typeof ErrorKind>;
+
+/**
  * The status of the connector sync.
  */
 export const ConnectorStatusStatus = {
@@ -30,16 +43,33 @@ export type ConnectorStatusStatus = OpenEnum<typeof ConnectorStatusStatus>;
 export type ConnectorStatus = {
   completedAt?: Date | null | undefined;
   /**
+   * Classification of last_error. Unspecified when no classified error is present.
+   */
+  errorKind?: ErrorKind | undefined;
+  /**
    * The last error encountered by the connector.
    */
-  lastError?: string | null | undefined;
+  lastError?: string | undefined;
   startedAt?: Date | null | undefined;
   /**
    * The status of the connector sync.
    */
-  status?: ConnectorStatusStatus | null | undefined;
+  status?: ConnectorStatusStatus | undefined;
   updatedAt?: Date | null | undefined;
 };
+
+/** @internal */
+export const ErrorKind$inboundSchema: z.ZodType<
+  ErrorKind,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ErrorKind);
+/** @internal */
+export const ErrorKind$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  ErrorKind
+> = openEnums.outboundSchema(ErrorKind);
 
 /** @internal */
 export const ConnectorStatusStatus$inboundSchema: z.ZodType<
@@ -63,11 +93,12 @@ export const ConnectorStatus$inboundSchema: z.ZodType<
   completedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  lastError: z.nullable(z.string()).optional(),
+  errorKind: ErrorKind$inboundSchema.optional(),
+  lastError: z.string().optional(),
   startedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  status: z.nullable(ConnectorStatusStatus$inboundSchema).optional(),
+  status: ConnectorStatusStatus$inboundSchema.optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -75,9 +106,10 @@ export const ConnectorStatus$inboundSchema: z.ZodType<
 /** @internal */
 export type ConnectorStatus$Outbound = {
   completedAt?: string | null | undefined;
-  lastError?: string | null | undefined;
+  errorKind?: string | undefined;
+  lastError?: string | undefined;
   startedAt?: string | null | undefined;
-  status?: string | null | undefined;
+  status?: string | undefined;
   updatedAt?: string | null | undefined;
 };
 
@@ -88,9 +120,10 @@ export const ConnectorStatus$outboundSchema: z.ZodType<
   ConnectorStatus
 > = z.object({
   completedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  lastError: z.nullable(z.string()).optional(),
+  errorKind: ErrorKind$outboundSchema.optional(),
+  lastError: z.string().optional(),
   startedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  status: z.nullable(ConnectorStatusStatus$outboundSchema).optional(),
+  status: ConnectorStatusStatus$outboundSchema.optional(),
   updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 

@@ -1,6 +1,7 @@
 # AccessReviewScopeType
 
-this sets the scope type for the access review
+How the campaign's scope is defined, such as by entitlements or by users.
+ See AccessReviewScopeType for the available values.
 
 ## Example Usage
 
@@ -15,5 +16,5 @@ let value: AccessReviewScopeType = "ACCESS_REVIEW_SCOPE_TYPE_UNSPECIFIED";
 ## Values
 
 ```typescript
-"ACCESS_REVIEW_SCOPE_TYPE_UNSPECIFIED" | "ACCESS_REVIEW_SCOPE_TYPE_BY_ENTITLEMENTS" | "ACCESS_REVIEW_SCOPE_TYPE_BY_ACCESS_CONFLICTS" | "ACCESS_REVIEW_SCOPE_TYPE_BY_RESOURCE" | "ACCESS_REVIEW_SCOPE_TYPE_BY_INHERITANCE" | Unrecognized<string>
+"ACCESS_REVIEW_SCOPE_TYPE_UNSPECIFIED" | "ACCESS_REVIEW_SCOPE_TYPE_BY_ENTITLEMENTS" | "ACCESS_REVIEW_SCOPE_TYPE_BY_ACCESS_CONFLICTS" | "ACCESS_REVIEW_SCOPE_TYPE_BY_RESOURCE" | "ACCESS_REVIEW_SCOPE_TYPE_BY_INHERITANCE" | "ACCESS_REVIEW_SCOPE_TYPE_BY_USERS" | "ACCESS_REVIEW_SCOPE_TYPE_BY_ACCESS_PROFILES" | Unrecognized<string>
 ```

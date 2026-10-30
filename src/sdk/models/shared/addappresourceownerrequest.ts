@@ -11,12 +11,12 @@ export type AddAppResourceOwnerRequest = {
   /**
    * The C1 user ID to add as an owner.
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
 export type AddAppResourceOwnerRequest$Outbound = {
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const AddAppResourceOwnerRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AddAppResourceOwnerRequest
 > = z.object({
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 
 export function addAppResourceOwnerRequestToJSON(

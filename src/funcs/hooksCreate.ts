@@ -30,7 +30,9 @@ import { Result } from "../sdk/types/fp.js";
  * Create
  *
  * @remarks
- * Invokes the c1.api.hooks.v1.HooksService.Create method.
+ * Create creates a hook. The hook fires on the configured event, optionally
+ *  filtered by a CEL expression. Creating a Patch tool input hook requires the
+ *  preview feature to be enabled for the tenant.
  */
 export function hooksCreate(
   client: ConductoroneSDKTypescriptCore,

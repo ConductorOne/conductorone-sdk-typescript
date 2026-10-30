@@ -7,9 +7,11 @@
 * [set](#set) - Set
 * [searchEntitlementOwners](#searchentitlementowners) - Search Entitlement Owners
 * [deleteEntitlementOwner](#deleteentitlementowner) - Delete Entitlement Owner
+* [getEntitlementOwner](#getentitlementowner) - Get Entitlement Owner
 * [createEntitlementOwner](#createentitlementowner) - Create Entitlement Owner
 * [searchUserOwners](#searchuserowners) - Search User Owners
 * [deleteUserOwner](#deleteuserowner) - Delete User Owner
+* [getUserOwner](#getuserowner) - Get User Owner
 * [createUserOwner](#createuserowner) - Create User Owner
 
 ## set
@@ -260,6 +262,95 @@ run();
 ### Response
 
 **Promise\<[operations.C1ApiAppV2AppResourceOwnersV2DeleteEntitlementOwnerResponse](../../sdk/models/operations/c1apiappv2appresourceownersv2deleteentitlementownerresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## getEntitlementOwner
+
+GetEntitlementOwner gets an entitlement ownership source for an app resource.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.app.v2.AppResourceOwnersV2.GetEntitlementOwner" method="get" path="/api/v2/apps/{app_id}/resource_types/{resource_type_id}/resources/{resource_id}/owners/entitlements/{role_slug}/{app_entitlement_ref_app_id}/{app_entitlement_ref_id}" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.appResourceOwnersV2.getEntitlementOwner({
+    appId: "<id>",
+    resourceTypeId: "<id>",
+    resourceId: "<id>",
+    roleSlug: "<value>",
+    appEntitlementRefAppId: "<id>",
+    appEntitlementRefId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { appResourceOwnersV2GetEntitlementOwner } from "conductorone-sdk-typescript/funcs/appResourceOwnersV2GetEntitlementOwner.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await appResourceOwnersV2GetEntitlementOwner(conductoroneSDKTypescript, {
+    appId: "<id>",
+    resourceTypeId: "<id>",
+    resourceId: "<id>",
+    roleSlug: "<value>",
+    appEntitlementRefAppId: "<id>",
+    appEntitlementRefId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("appResourceOwnersV2GetEntitlementOwner failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.C1ApiAppV2AppResourceOwnersV2GetEntitlementOwnerRequest](../../sdk/models/operations/c1apiappv2appresourceownersv2getentitlementownerrequest.md)                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.C1ApiAppV2AppResourceOwnersV2GetEntitlementOwnerResponse](../../sdk/models/operations/c1apiappv2appresourceownersv2getentitlementownerresponse.md)\>**
 
 ### Errors
 
@@ -519,6 +610,93 @@ run();
 ### Response
 
 **Promise\<[operations.C1ApiAppV2AppResourceOwnersV2DeleteUserOwnerResponse](../../sdk/models/operations/c1apiappv2appresourceownersv2deleteuserownerresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## getUserOwner
+
+GetUserOwner gets a user ownership source for an app resource.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="c1.api.app.v2.AppResourceOwnersV2.GetUserOwner" method="get" path="/api/v2/apps/{app_id}/resource_types/{resource_type_id}/resources/{resource_id}/owners/users/{role_slug}/{user_ref_id}" -->
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
+
+const conductoroneSDKTypescript = new ConductoroneSDKTypescript({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const result = await conductoroneSDKTypescript.appResourceOwnersV2.getUserOwner({
+    appId: "<id>",
+    resourceTypeId: "<id>",
+    resourceId: "<id>",
+    roleSlug: "<value>",
+    userRefId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { ConductoroneSDKTypescriptCore } from "conductorone-sdk-typescript/core.js";
+import { appResourceOwnersV2GetUserOwner } from "conductorone-sdk-typescript/funcs/appResourceOwnersV2GetUserOwner.js";
+
+// Use `ConductoroneSDKTypescriptCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const conductoroneSDKTypescript = new ConductoroneSDKTypescriptCore({
+  security: {
+    bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+    oauth: "<YOUR_OAUTH_HERE>",
+  },
+});
+
+async function run() {
+  const res = await appResourceOwnersV2GetUserOwner(conductoroneSDKTypescript, {
+    appId: "<id>",
+    resourceTypeId: "<id>",
+    resourceId: "<id>",
+    roleSlug: "<value>",
+    userRefId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("appResourceOwnersV2GetUserOwner failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.C1ApiAppV2AppResourceOwnersV2GetUserOwnerRequest](../../sdk/models/operations/c1apiappv2appresourceownersv2getuserownerrequest.md)                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.C1ApiAppV2AppResourceOwnersV2GetUserOwnerResponse](../../sdk/models/operations/c1apiappv2appresourceownersv2getuserownerresponse.md)\>**
 
 ### Errors
 

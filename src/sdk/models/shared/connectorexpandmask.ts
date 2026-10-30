@@ -9,7 +9,10 @@ import * as z from "zod/v3";
  */
 export type ConnectorExpandMask = {
   /**
-   * Paths that you want expanded in the response. Possible values are "app_id" and "*".
+   * Paths that you want expanded in the response. Possible values are "app_id",
+   *
+   * @remarks
+   *  "user_ids", "capabilities" and "*".
    */
   paths?: Array<string> | null | undefined;
 };

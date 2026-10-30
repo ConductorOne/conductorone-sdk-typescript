@@ -18,7 +18,7 @@ export type PersonalClientServiceCreateRequest = {
   /**
    * The display name for the new personal client.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   expires?: string | null | undefined;
   /**
    * The list of roles to restrict the credential to.
@@ -29,7 +29,7 @@ export type PersonalClientServiceCreateRequest = {
 /** @internal */
 export type PersonalClientServiceCreateRequest$Outbound = {
   allowSourceCidr?: Array<string> | null | undefined;
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   expires?: string | null | undefined;
   scopedRoles?: Array<string> | null | undefined;
 };
@@ -41,7 +41,7 @@ export const PersonalClientServiceCreateRequest$outboundSchema: z.ZodType<
   PersonalClientServiceCreateRequest
 > = z.object({
   allowSourceCidr: z.nullable(z.array(z.string())).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
   expires: z.nullable(z.string()).optional(),
   scopedRoles: z.nullable(z.array(z.string())).optional(),
 });

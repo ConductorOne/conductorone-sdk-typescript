@@ -12,20 +12,24 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * How the client_id was established.
  */
-export const ClientIdType = {
+export const ExternalClientInfoClientIdType = {
   ClientIdTypeUnspecified: "CLIENT_ID_TYPE_UNSPECIFIED",
   ClientIdTypeDcr: "CLIENT_ID_TYPE_DCR",
   ClientIdTypeMetadataUrl: "CLIENT_ID_TYPE_METADATA_URL",
+  ClientIdTypeApp: "CLIENT_ID_TYPE_APP",
+  ClientIdTypeStatic: "CLIENT_ID_TYPE_STATIC",
 } as const;
 /**
  * How the client_id was established.
  */
-export type ClientIdType = OpenEnum<typeof ClientIdType>;
+export type ExternalClientInfoClientIdType = OpenEnum<
+  typeof ExternalClientInfoClientIdType
+>;
 
 /**
  * The wellKnownClient field.
  */
-export const WellKnownClient = {
+export const ExternalClientInfoWellKnownClient = {
   WellKnownClientUnspecified: "WELL_KNOWN_CLIENT_UNSPECIFIED",
   WellKnownClientUnknown: "WELL_KNOWN_CLIENT_UNKNOWN",
   WellKnownClientClaudeAi: "WELL_KNOWN_CLIENT_CLAUDE_AI",
@@ -43,7 +47,9 @@ export const WellKnownClient = {
 /**
  * The wellKnownClient field.
  */
-export type WellKnownClient = OpenEnum<typeof WellKnownClient>;
+export type ExternalClientInfoWellKnownClient = OpenEnum<
+  typeof ExternalClientInfoWellKnownClient
+>;
 
 /**
  * ExternalClientInfo provides information about an approved external client.
@@ -55,32 +61,32 @@ export type ExternalClientInfo = {
   /**
    * OAuth2 client ID - canonical identifier for this connection (globally unique per DCR)
    */
-  clientId?: string | null | undefined;
+  clientId?: string | undefined;
   /**
    * How the client_id was established.
    */
-  clientIdType?: ClientIdType | null | undefined;
+  clientIdType?: ExternalClientInfoClientIdType | undefined;
   /**
    * Original CIMD metadata URL (e.g., "https://cursor.com/.well-known/oauth-client").
    *
    * @remarks
    *  Empty for DCR clients.
    */
-  clientIdUrl?: string | null | undefined;
+  clientIdUrl?: string | undefined;
   /**
    * Original client name from DCR registration
    */
-  clientName?: string | null | undefined;
+  clientName?: string | undefined;
   createdAt?: Date | null | undefined;
   /**
    * User-provided custom name (defaults to client_name if not set)
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   lastUsedAt?: Date | null | undefined;
   /**
    * MCP client record ID for AI governance tracking. May be empty for legacy grants.
    */
-  mcpClientId?: string | null | undefined;
+  mcpClientId?: string | undefined;
   /**
    * Role IDs granted to this client - frontend can fetch display names via SearchRoles
    */
@@ -88,33 +94,33 @@ export type ExternalClientInfo = {
   /**
    * The user who approved this external client (always populated)
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
   /**
    * Verified domain from the client_id URL (e.g., "cursor.com").
    *
    * @remarks
    *  Empty for DCR clients.
    */
-  verifiedDomain?: string | null | undefined;
+  verifiedDomain?: string | undefined;
   /**
    * The wellKnownClient field.
    */
-  wellKnownClient?: WellKnownClient | null | undefined;
+  wellKnownClient?: ExternalClientInfoWellKnownClient | undefined;
 };
 
 /** @internal */
-export const ClientIdType$inboundSchema: z.ZodType<
-  ClientIdType,
+export const ExternalClientInfoClientIdType$inboundSchema: z.ZodType<
+  ExternalClientInfoClientIdType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ClientIdType);
+> = openEnums.inboundSchema(ExternalClientInfoClientIdType);
 
 /** @internal */
-export const WellKnownClient$inboundSchema: z.ZodType<
-  WellKnownClient,
+export const ExternalClientInfoWellKnownClient$inboundSchema: z.ZodType<
+  ExternalClientInfoWellKnownClient,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(WellKnownClient);
+> = openEnums.inboundSchema(ExternalClientInfoWellKnownClient);
 
 /** @internal */
 export const ExternalClientInfo$inboundSchema: z.ZodType<
@@ -122,22 +128,22 @@ export const ExternalClientInfo$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  clientId: z.nullable(z.string()).optional(),
-  clientIdType: z.nullable(ClientIdType$inboundSchema).optional(),
-  clientIdUrl: z.nullable(z.string()).optional(),
-  clientName: z.nullable(z.string()).optional(),
+  clientId: z.string().optional(),
+  clientIdType: ExternalClientInfoClientIdType$inboundSchema.optional(),
+  clientIdUrl: z.string().optional(),
+  clientName: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
   lastUsedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  mcpClientId: z.nullable(z.string()).optional(),
+  mcpClientId: z.string().optional(),
   roleIds: z.nullable(z.array(z.string())).optional(),
-  userId: z.nullable(z.string()).optional(),
-  verifiedDomain: z.nullable(z.string()).optional(),
-  wellKnownClient: z.nullable(WellKnownClient$inboundSchema).optional(),
+  userId: z.string().optional(),
+  verifiedDomain: z.string().optional(),
+  wellKnownClient: ExternalClientInfoWellKnownClient$inboundSchema.optional(),
 });
 
 export function externalClientInfoFromJSON(

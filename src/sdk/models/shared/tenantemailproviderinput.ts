@@ -50,7 +50,7 @@ export type TenantEmailProviderInput = {
    * @remarks
    *  Ignored when using the C1 built-in provider (uses no-reply@conductorone.com).
    */
-  fromAddress?: string | null | undefined;
+  fromAddress?: string | undefined;
   /**
    * Sender display name shown in the recipient's inbox (e.g., "Acme Corp IT").
    *
@@ -58,13 +58,13 @@ export type TenantEmailProviderInput = {
    *  Used as the RFC 5322 display-name: "Acme Corp IT" <no-reply@acme.com>.
    *  Ignored when using the C1 built-in provider.
    */
-  fromName?: string | null | undefined;
+  fromName?: string | undefined;
   googleWorkspace?: GoogleWorkspaceProviderConfig | null | undefined;
   microsoftGraph?: MicrosoftGraphProviderConfig | null | undefined;
   /**
    * Optional reply-to address.
    */
-  replyToAddress?: string | null | undefined;
+  replyToAddress?: string | undefined;
   sendgrid?: SendGridProviderConfig | null | undefined;
 };
 
@@ -72,11 +72,11 @@ export type TenantEmailProviderInput = {
 export type TenantEmailProviderInput$Outbound = {
   awsSes?: AWSSESProviderConfig$Outbound | null | undefined;
   c1Builtin?: C1BuiltInProviderConfig$Outbound | null | undefined;
-  fromAddress?: string | null | undefined;
-  fromName?: string | null | undefined;
+  fromAddress?: string | undefined;
+  fromName?: string | undefined;
   googleWorkspace?: GoogleWorkspaceProviderConfig$Outbound | null | undefined;
   microsoftGraph?: MicrosoftGraphProviderConfig$Outbound | null | undefined;
-  replyToAddress?: string | null | undefined;
+  replyToAddress?: string | undefined;
   sendgrid?: SendGridProviderConfig$Outbound | null | undefined;
 };
 
@@ -88,13 +88,13 @@ export const TenantEmailProviderInput$outboundSchema: z.ZodType<
 > = z.object({
   awsSes: z.nullable(AWSSESProviderConfig$outboundSchema).optional(),
   c1Builtin: z.nullable(C1BuiltInProviderConfig$outboundSchema).optional(),
-  fromAddress: z.nullable(z.string()).optional(),
-  fromName: z.nullable(z.string()).optional(),
+  fromAddress: z.string().optional(),
+  fromName: z.string().optional(),
   googleWorkspace: z.nullable(GoogleWorkspaceProviderConfig$outboundSchema)
     .optional(),
   microsoftGraph: z.nullable(MicrosoftGraphProviderConfig$outboundSchema)
     .optional(),
-  replyToAddress: z.nullable(z.string()).optional(),
+  replyToAddress: z.string().optional(),
   sendgrid: z.nullable(SendGridProviderConfig$outboundSchema).optional(),
 });
 

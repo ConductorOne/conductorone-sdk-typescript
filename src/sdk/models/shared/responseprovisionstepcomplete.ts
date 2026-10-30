@@ -14,7 +14,7 @@ export type ResponseProvisionStepComplete = {
   /**
    * optional comment
    */
-  comment?: string | null | undefined;
+  comment?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const ResponseProvisionStepComplete$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  comment: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
 });
 /** @internal */
 export type ResponseProvisionStepComplete$Outbound = {
-  comment?: string | null | undefined;
+  comment?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const ResponseProvisionStepComplete$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseProvisionStepComplete
 > = z.object({
-  comment: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
 });
 
 export function responseProvisionStepCompleteToJSON(

@@ -28,22 +28,21 @@ export type GetAppEntitlementMonitorBindingRequest = {
   /**
    * The unique identifier of the app entitlement bound to the monitor.
    */
-  appEntitlementId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
   /**
    * The unique identifier of the application containing the entitlement.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * Which side of the conflict monitor (A or B) this binding belongs to.
    */
   entitlementGroup?:
     | GetAppEntitlementMonitorBindingRequestEntitlementGroup
-    | null
     | undefined;
   /**
    * The unique identifier of the conflict monitor.
    */
-  monitorId?: string | null | undefined;
+  monitorId?: string | undefined;
 };
 
 /** @internal */
@@ -58,10 +57,10 @@ export const GetAppEntitlementMonitorBindingRequestEntitlementGroup$outboundSche
 
 /** @internal */
 export type GetAppEntitlementMonitorBindingRequest$Outbound = {
-  appEntitlementId?: string | null | undefined;
-  appId?: string | null | undefined;
-  entitlementGroup?: string | null | undefined;
-  monitorId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
+  appId?: string | undefined;
+  entitlementGroup?: string | undefined;
+  monitorId?: string | undefined;
 };
 
 /** @internal */
@@ -70,12 +69,12 @@ export const GetAppEntitlementMonitorBindingRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAppEntitlementMonitorBindingRequest
 > = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  entitlementGroup: z.nullable(
-    GetAppEntitlementMonitorBindingRequestEntitlementGroup$outboundSchema,
-  ).optional(),
-  monitorId: z.nullable(z.string()).optional(),
+  appEntitlementId: z.string().optional(),
+  appId: z.string().optional(),
+  entitlementGroup:
+    GetAppEntitlementMonitorBindingRequestEntitlementGroup$outboundSchema
+      .optional(),
+  monitorId: z.string().optional(),
 });
 
 export function getAppEntitlementMonitorBindingRequestToJSON(

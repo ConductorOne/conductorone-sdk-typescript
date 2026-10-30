@@ -18,7 +18,7 @@ export type TaskAuditCancelledResult = {
    *  model-side CanceledResult (e.g., "action is invalid - ticket is closed");
    *  this surfaces it to the UI.
    */
-  cancelReason?: string | null | undefined;
+  cancelReason?: string | undefined;
 };
 
 /** @internal */
@@ -27,7 +27,7 @@ export const TaskAuditCancelledResult$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  cancelReason: z.nullable(z.string()).optional(),
+  cancelReason: z.string().optional(),
 });
 
 export function taskAuditCancelledResultFromJSON(

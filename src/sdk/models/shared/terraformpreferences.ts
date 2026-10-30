@@ -26,7 +26,7 @@ export type TerraformPreferences = {
    *  without one of these roles will not see the trigger even when this
    *  flag is true.
    */
-  showCode?: boolean | null | undefined;
+  showCode?: boolean | undefined;
 };
 
 /** @internal */
@@ -35,11 +35,11 @@ export const TerraformPreferences$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  showCode: z.nullable(z.boolean()).optional(),
+  showCode: z.boolean().optional(),
 });
 /** @internal */
 export type TerraformPreferences$Outbound = {
-  showCode?: boolean | null | undefined;
+  showCode?: boolean | undefined;
 };
 
 /** @internal */
@@ -48,7 +48,7 @@ export const TerraformPreferences$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TerraformPreferences
 > = z.object({
-  showCode: z.nullable(z.boolean()).optional(),
+  showCode: z.boolean().optional(),
 });
 
 export function terraformPreferencesToJSON(

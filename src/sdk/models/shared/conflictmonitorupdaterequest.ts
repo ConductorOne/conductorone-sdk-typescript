@@ -16,18 +16,26 @@ export type ConflictMonitorUpdateRequest = {
   /**
    * The updated description for the conflict monitor.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The updated human-readable name for the conflict monitor.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
+  /**
+   * When true, the rule flags users who are in set A but NOT in set B ("is not
+   *
+   * @remarks
+   *  in"), instead of the default A-and-B intersection.
+   */
+  negateGroupB?: boolean | undefined;
   notificationConfig?: AccessConflictNotificationConfig | null | undefined;
 };
 
 /** @internal */
 export type ConflictMonitorUpdateRequest$Outbound = {
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
+  negateGroupB?: boolean | undefined;
   notificationConfig?:
     | AccessConflictNotificationConfig$Outbound
     | null
@@ -40,8 +48,9 @@ export const ConflictMonitorUpdateRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ConflictMonitorUpdateRequest
 > = z.object({
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  negateGroupB: z.boolean().optional(),
   notificationConfig: z.nullable(
     AccessConflictNotificationConfig$outboundSchema,
   ).optional(),

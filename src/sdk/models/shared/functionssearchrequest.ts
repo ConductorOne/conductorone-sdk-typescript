@@ -5,11 +5,17 @@
 import * as z from "zod/v3";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
+import {
+  SortOptions,
+  SortOptions$Outbound,
+  SortOptions$outboundSchema,
+} from "./sortoptions.js";
 
 export const FunctionTypes = {
   FunctionTypeUnspecified: "FUNCTION_TYPE_UNSPECIFIED",
   FunctionTypeAny: "FUNCTION_TYPE_ANY",
   FunctionTypeCodeMode: "FUNCTION_TYPE_CODE_MODE",
+  FunctionTypeConnector: "FUNCTION_TYPE_CONNECTOR",
 } as const;
 export type FunctionTypes = OpenEnum<typeof FunctionTypes>;
 
@@ -24,15 +30,16 @@ export type FunctionsSearchRequest = {
   /**
    * The pageSize field.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * The query field.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
+  sortOptions?: SortOptions | null | undefined;
 };
 
 /** @internal */
@@ -45,9 +52,10 @@ export const FunctionTypes$outboundSchema: z.ZodType<
 /** @internal */
 export type FunctionsSearchRequest$Outbound = {
   functionTypes?: Array<string> | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  query?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  query?: string | undefined;
+  sortOptions?: SortOptions$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -57,9 +65,10 @@ export const FunctionsSearchRequest$outboundSchema: z.ZodType<
   FunctionsSearchRequest
 > = z.object({
   functionTypes: z.nullable(z.array(FunctionTypes$outboundSchema)).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  query: z.string().optional(),
+  sortOptions: z.nullable(SortOptions$outboundSchema).optional(),
 });
 
 export function functionsSearchRequestToJSON(

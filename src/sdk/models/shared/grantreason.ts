@@ -36,25 +36,25 @@ export type GrantReason = {
   /**
    * The ID of the app entitlement that is associated with the grant reason.
    */
-  appEntitlementId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
   /**
    * The ID of the app that is associated with the grant reason.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The ID of the app user that is associated with the grant reason.
    */
-  appUserId?: string | null | undefined;
+  appUserId?: string | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * This is the other part of the derived ID which include the details like ticket_id, group_id, etc. This provides the uniqueness.
    */
-  derivedIdData?: string | null | undefined;
+  derivedIdData?: string | undefined;
   /**
    * This is one part of the derived ID, indicating the type, like "ticket" or "group"
    */
-  derivedIdType?: string | null | undefined;
+  derivedIdType?: string | undefined;
   reasonExpiresAt?: Date | null | undefined;
   /**
    * GrantReasonReferenceStrength is used to indicate the strength of the reference to the reason.
@@ -62,7 +62,7 @@ export type GrantReason = {
    * @remarks
    *  This is used to determine if a grant should be removed when all strong reasons are removed.
    */
-  referenceStrength?: ReferenceStrength | null | undefined;
+  referenceStrength?: ReferenceStrength | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -79,21 +79,21 @@ export const GrantReason$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appUserId: z.nullable(z.string()).optional(),
+  appEntitlementId: z.string().optional(),
+  appId: z.string().optional(),
+  appUserId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  derivedIdData: z.nullable(z.string()).optional(),
-  derivedIdType: z.nullable(z.string()).optional(),
+  derivedIdData: z.string().optional(),
+  derivedIdType: z.string().optional(),
   reasonExpiresAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  referenceStrength: z.nullable(ReferenceStrength$inboundSchema).optional(),
+  referenceStrength: ReferenceStrength$inboundSchema.optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

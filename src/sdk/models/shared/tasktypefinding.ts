@@ -30,15 +30,15 @@ export type TaskTypeFinding = {
   /**
    * Reference to the source finding.
    */
-  findingId?: string | null | undefined;
+  findingId?: string | undefined;
   /**
    * The finding type discriminator.
    */
-  findingType?: string | null | undefined;
+  findingType?: string | undefined;
   /**
    * The outcome field.
    */
-  outcome?: TaskTypeFindingOutcome | null | undefined;
+  outcome?: TaskTypeFindingOutcome | undefined;
   outcomeTime?: Date | null | undefined;
 };
 
@@ -61,18 +61,18 @@ export const TaskTypeFinding$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  findingId: z.nullable(z.string()).optional(),
-  findingType: z.nullable(z.string()).optional(),
-  outcome: z.nullable(TaskTypeFindingOutcome$inboundSchema).optional(),
+  findingId: z.string().optional(),
+  findingType: z.string().optional(),
+  outcome: TaskTypeFindingOutcome$inboundSchema.optional(),
   outcomeTime: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
 });
 /** @internal */
 export type TaskTypeFinding$Outbound = {
-  findingId?: string | null | undefined;
-  findingType?: string | null | undefined;
-  outcome?: string | null | undefined;
+  findingId?: string | undefined;
+  findingType?: string | undefined;
+  outcome?: string | undefined;
   outcomeTime?: string | null | undefined;
 };
 
@@ -82,9 +82,9 @@ export const TaskTypeFinding$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskTypeFinding
 > = z.object({
-  findingId: z.nullable(z.string()).optional(),
-  findingType: z.nullable(z.string()).optional(),
-  outcome: z.nullable(TaskTypeFindingOutcome$outboundSchema).optional(),
+  findingId: z.string().optional(),
+  findingType: z.string().optional(),
+  outcome: TaskTypeFindingOutcome$outboundSchema.optional(),
   outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 });
 

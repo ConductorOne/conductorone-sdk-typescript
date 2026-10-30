@@ -23,6 +23,7 @@ export const WebhookInstanceState = {
   WebhookStateProcessResponse: "WEBHOOK_STATE_PROCESS_RESPONSE",
   WebhookStateSuccess: "WEBHOOK_STATE_SUCCESS",
   WebhookStateFatalError: "WEBHOOK_STATE_FATAL_ERROR",
+  WebhookStateCanceled: "WEBHOOK_STATE_CANCELED",
 } as const;
 /**
  * The state field.
@@ -36,26 +37,34 @@ export type WebhookInstance = {
   /**
    * The attempts field.
    */
-  attempts?: number | null | undefined;
+  attempts?: number | undefined;
   completedAt?: Date | null | undefined;
   createdAt?: Date | null | undefined;
   expiresAt?: Date | null | undefined;
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   lastAttemptedAt?: Date | null | undefined;
   source?: WebhookSource | null | undefined;
   spec?: WebhookSpec | null | undefined;
   /**
    * The state field.
    */
-  state?: WebhookInstanceState | null | undefined;
+  state?: WebhookInstanceState | undefined;
+  /**
+   * Why the task step that triggered this webhook stopped owning it, if it did.
+   *
+   * @remarks
+   *  Set on any instance that was abandoned rather than run to its own
+   *  conclusion; empty otherwise.
+   */
+  supersededReason?: string | undefined;
   updatedAt?: Date | null | undefined;
   /**
    * The webhookId field.
    */
-  webhookId?: string | null | undefined;
+  webhookId?: string | undefined;
 };
 
 /** @internal */
@@ -71,7 +80,7 @@ export const WebhookInstance$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  attempts: z.nullable(z.number().int()).optional(),
+  attempts: z.number().int().optional(),
   completedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
@@ -81,17 +90,18 @@ export const WebhookInstance$inboundSchema: z.ZodType<
   expiresAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
   lastAttemptedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   source: z.nullable(WebhookSource$inboundSchema).optional(),
   spec: z.nullable(WebhookSpec$inboundSchema).optional(),
-  state: z.nullable(WebhookInstanceState$inboundSchema).optional(),
+  state: WebhookInstanceState$inboundSchema.optional(),
+  supersededReason: z.string().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  webhookId: z.nullable(z.string()).optional(),
+  webhookId: z.string().optional(),
 });
 
 export function webhookInstanceFromJSON(

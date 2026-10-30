@@ -1,0 +1,23 @@
+# EdgeInferenceRetry
+
+Bounds the delay between provider attempts on one route. Only transient
+ provider failures (rate limit, provider timeout, overload, a pre-response
+ transport failure, a generic upstream error) ever wait; credential, policy,
+ configuration and other 4xx rejections stay terminal.
+
+## Example Usage
+
+```typescript
+import { EdgeInferenceRetry } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: EdgeInferenceRetry = {};
+```
+
+## Fields
+
+| Field                                                                                                                                              | Type                                                                                                                                               | Required                                                                                                                                           | Description                                                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `baseMs`                                                                                                                                           | *number*                                                                                                                                           | :heavy_minus_sign:                                                                                                                                 | First backoff ceiling in milliseconds; doubles per consecutive transient<br/> failure in one provider traversal, up to the cap. Zero disables backoff. |
+| `capMs`                                                                                                                                            | *number*                                                                                                                                           | :heavy_minus_sign:                                                                                                                                 | Largest delay in milliseconds, including a clamped provider Retry-After.                                                                           |
+| `jitter`                                                                                                                                           | *boolean*                                                                                                                                          | :heavy_minus_sign:                                                                                                                                 | Draw each delay uniformly from zero to the ceiling instead of waiting the<br/> ceiling exactly.                                                    |
+| `maxSameTargetRetries`                                                                                                                             | *number*                                                                                                                                           | :heavy_minus_sign:                                                                                                                                 | Extra attempts against the same target after a transient failure, before<br/> failing over. Each one spends one of the route's attempts.           |

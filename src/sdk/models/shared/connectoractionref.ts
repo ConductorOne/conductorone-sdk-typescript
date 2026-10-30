@@ -12,14 +12,17 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Which connector RPC this dispatches to.
  */
-export const Operation = {
+export const ConnectorActionRefOperation = {
   OperationUnspecified: "OPERATION_UNSPECIFIED",
   OperationGrant: "OPERATION_GRANT",
+  OperationIssueCredential: "OPERATION_ISSUE_CREDENTIAL",
 } as const;
 /**
  * Which connector RPC this dispatches to.
  */
-export type Operation = OpenEnum<typeof Operation>;
+export type ConnectorActionRefOperation = OpenEnum<
+  typeof ConnectorActionRefOperation
+>;
 
 /**
  * ConnectorActionRef describes dispatch through a connector's built-in
@@ -32,29 +35,29 @@ export type ConnectorActionRef = {
   /**
    * The app whose connector handles the operation.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The connector that will execute the Grant / Revoke.
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
   /**
    * Which connector RPC this dispatches to.
    */
-  operation?: Operation | null | undefined;
+  operation?: ConnectorActionRefOperation | undefined;
 };
 
 /** @internal */
-export const Operation$inboundSchema: z.ZodType<
-  Operation,
+export const ConnectorActionRefOperation$inboundSchema: z.ZodType<
+  ConnectorActionRefOperation,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Operation);
+> = openEnums.inboundSchema(ConnectorActionRefOperation);
 /** @internal */
-export const Operation$outboundSchema: z.ZodType<
+export const ConnectorActionRefOperation$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
-  Operation
-> = openEnums.outboundSchema(Operation);
+  ConnectorActionRefOperation
+> = openEnums.outboundSchema(ConnectorActionRefOperation);
 
 /** @internal */
 export const ConnectorActionRef$inboundSchema: z.ZodType<
@@ -62,15 +65,15 @@ export const ConnectorActionRef$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
-  operation: z.nullable(Operation$inboundSchema).optional(),
+  appId: z.string().optional(),
+  connectorId: z.string().optional(),
+  operation: ConnectorActionRefOperation$inboundSchema.optional(),
 });
 /** @internal */
 export type ConnectorActionRef$Outbound = {
-  appId?: string | null | undefined;
-  connectorId?: string | null | undefined;
-  operation?: string | null | undefined;
+  appId?: string | undefined;
+  connectorId?: string | undefined;
+  operation?: string | undefined;
 };
 
 /** @internal */
@@ -79,9 +82,9 @@ export const ConnectorActionRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ConnectorActionRef
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
-  operation: z.nullable(Operation$outboundSchema).optional(),
+  appId: z.string().optional(),
+  connectorId: z.string().optional(),
+  operation: ConnectorActionRefOperation$outboundSchema.optional(),
 });
 
 export function connectorActionRefToJSON(

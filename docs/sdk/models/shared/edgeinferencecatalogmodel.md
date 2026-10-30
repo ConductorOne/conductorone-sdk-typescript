@@ -1,0 +1,20 @@
+# EdgeInferenceCatalogModel
+
+EdgeInferenceCatalogModel is a suggested upstream model. Suggestions are not exhaustive: any model id the
+ variant's grammar accepts can be used.
+
+## Example Usage
+
+```typescript
+import { EdgeInferenceCatalogModel } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: EdgeInferenceCatalogModel = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                             | Type                                                                                                                                                              | Required                                                                                                                                                          | Description                                                                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `displayName`                                                                                                                                                     | *string*                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                | Human-readable model name.                                                                                                                                        |
+| `id`                                                                                                                                                              | *string*                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                | Upstream model id to send.                                                                                                                                        |
+| `supportedReasoningEfforts`                                                                                                                                       | *string*[]                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                | Reasoning effort levels the model accepts (`none`, `minimal`, `low`, `medium`, `high`), lowest first.<br/> Empty means C1 does not know, so any level may be offered. |

@@ -14,7 +14,7 @@ export type ResponseProvisionStepErrored = {
   /**
    * optional comment
    */
-  comment?: string | null | undefined;
+  comment?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const ResponseProvisionStepErrored$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  comment: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
 });
 /** @internal */
 export type ResponseProvisionStepErrored$Outbound = {
-  comment?: string | null | undefined;
+  comment?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const ResponseProvisionStepErrored$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseProvisionStepErrored
 > = z.object({
-  comment: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
 });
 
 export function responseProvisionStepErroredToJSON(

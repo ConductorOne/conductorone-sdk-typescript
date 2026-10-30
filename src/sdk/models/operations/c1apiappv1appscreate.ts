@@ -23,7 +23,7 @@ export type C1ApiAppV1AppsCreateResponse = {
    */
   rawResponse: Response;
   /**
-   * Returns the new app's values.
+   * CreateAppResponse contains the newly created application.
    */
   createAppResponse?: shared.CreateAppResponse | undefined;
 };

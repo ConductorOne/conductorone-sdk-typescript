@@ -4,9 +4,34 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { AgentTrait, AgentTrait$inboundSchema } from "./agenttrait.js";
 import { SecretTrait, SecretTrait$inboundSchema } from "./secrettrait.js";
+
+/**
+ * The NHI classification (K3 spine) for this resource. Populated for
+ *
+ * @remarks
+ *  non-human-identity resources; UNSPECIFIED for everything else. Mirrors
+ *  agent_trait: read-only and translated from the model enum at the API boundary.
+ */
+export const AppResourceNhiType = {
+  NhiTypeUnspecified: "NHI_TYPE_UNSPECIFIED",
+  NhiTypeAppRegistration: "NHI_TYPE_APP_REGISTRATION",
+  NhiTypeAssumableRole: "NHI_TYPE_ASSUMABLE_ROLE",
+  NhiTypeManagedIdentity: "NHI_TYPE_MANAGED_IDENTITY",
+} as const;
+/**
+ * The NHI classification (K3 spine) for this resource. Populated for
+ *
+ * @remarks
+ *  non-human-identity resources; UNSPECIFIED for everything else. Mirrors
+ *  agent_trait: read-only and translated from the model enum at the API boundary.
+ */
+export type AppResourceNhiType = OpenEnum<typeof AppResourceNhiType>;
 
 /**
  * The app resource message is a single resource that can have entitlements.
@@ -23,7 +48,8 @@ export type AppResource = {
    * @remarks
    *  Must be one of the builtin access config IDs or empty.
    */
-  accessConfigId?: string | null | undefined;
+  accessConfigId?: string | undefined;
+  agentTrait?: AgentTrait | null | undefined;
   /**
    * Bounded key/value metadata bag for IaC marking and customer tags.
    *
@@ -45,56 +71,85 @@ export type AppResource = {
   /**
    * The app that this resource belongs to.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The resource type that this resource is.
    */
-  appResourceTypeId?: string | null | undefined;
+  appResourceTypeId?: string | undefined;
   createdAt?: Date | null | undefined;
   /**
    * A custom description that can be set for a resource.
    */
-  customDescription?: string | null | undefined;
+  customDescription?: string | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * The description set for the resource.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The display name for this resource.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The upstream product's native external ID for this resource (e.g. an Okta group ID).
    *
    * @remarks
    *  Populated from the connector's external ID during sync.
    */
-  externalId?: string | null | undefined;
+  externalId?: string | undefined;
   /**
    * The number of grants to this resource.
    */
-  grantCount?: number | null | undefined;
+  grantCount?: number | undefined;
   /**
    * The id of the resource.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
+  /**
+   * Whether the resource was created manually in ConductorOne rather than synced from a connector.
+   *
+   * @remarks
+   *  Only manually created resources can be deleted in ConductorOne.
+   */
+  isManuallyManaged?: boolean | undefined;
   /**
    * The matchBatonId field.
    */
-  matchBatonId?: string | null | undefined;
+  matchBatonId?: string | undefined;
+  /**
+   * Axis-2 detail refining nhi_type (e.g. "aws.role.lambda"). Read-only;
+   *
+   * @remarks
+   *  translated from the model.
+   */
+  nhiDetail?: string | undefined;
+  /**
+   * The NHI classification (K3 spine) for this resource. Populated for
+   *
+   * @remarks
+   *  non-human-identity resources; UNSPECIFIED for everything else. Mirrors
+   *  agent_trait: read-only and translated from the model enum at the API boundary.
+   */
+  nhiType?: AppResourceNhiType | undefined;
   /**
    * The parent resource id, if this resource is a child of another resource.
    */
-  parentAppResourceId?: string | null | undefined;
+  parentAppResourceId?: string | undefined;
   /**
    * The parent resource type id, if this resource is a child of another resource.
    */
-  parentAppResourceTypeId?: string | null | undefined;
+  parentAppResourceTypeId?: string | undefined;
   profile?: { [k: string]: any } | null | undefined;
   secretTrait?: SecretTrait | null | undefined;
   updatedAt?: Date | null | undefined;
 };
+
+/** @internal */
+export const AppResourceNhiType$inboundSchema: z.ZodType<
+  AppResourceNhiType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(AppResourceNhiType);
 
 /** @internal */
 export const AppResource$inboundSchema: z.ZodType<
@@ -102,25 +157,29 @@ export const AppResource$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accessConfigId: z.nullable(z.string()).optional(),
+  accessConfigId: z.string().optional(),
+  agentTrait: z.nullable(AgentTrait$inboundSchema).optional(),
   annotations: z.record(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
-  appResourceTypeId: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  appResourceTypeId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  customDescription: z.nullable(z.string()).optional(),
+  customDescription: z.string().optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  externalId: z.nullable(z.string()).optional(),
-  grantCount: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
-  id: z.nullable(z.string()).optional(),
-  matchBatonId: z.nullable(z.string()).optional(),
-  parentAppResourceId: z.nullable(z.string()).optional(),
-  parentAppResourceTypeId: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  externalId: z.string().optional(),
+  grantCount: z.string().transform(v => parseInt(v, 10)).optional(),
+  id: z.string().optional(),
+  isManuallyManaged: z.boolean().optional(),
+  matchBatonId: z.string().optional(),
+  nhiDetail: z.string().optional(),
+  nhiType: AppResourceNhiType$inboundSchema.optional(),
+  parentAppResourceId: z.string().optional(),
+  parentAppResourceTypeId: z.string().optional(),
   profile: z.nullable(z.record(z.any())).optional(),
   secretTrait: z.nullable(SecretTrait$inboundSchema).optional(),
   updatedAt: z.nullable(

@@ -28,10 +28,7 @@ export type ResolvePausedAutomationExecutionsRequest = {
   /**
    * Whether to run or cancel the paused executions.
    */
-  decision?:
-    | ResolvePausedAutomationExecutionsRequestDecision
-    | null
-    | undefined;
+  decision?: ResolvePausedAutomationExecutionsRequestDecision | undefined;
   /**
    * Optional human-readable reason for the resolution decision. Stored on
    *
@@ -40,7 +37,7 @@ export type ResolvePausedAutomationExecutionsRequest = {
    *  and compliance use. Surfaced in the FE as a required field on CANCEL
    *  so admins capture why bulk-cancellation happened. Up to 1024 bytes.
    */
-  reason?: string | null | undefined;
+  reason?: string | undefined;
 };
 
 /** @internal */
@@ -55,8 +52,8 @@ export const ResolvePausedAutomationExecutionsRequestDecision$outboundSchema:
 
 /** @internal */
 export type ResolvePausedAutomationExecutionsRequest$Outbound = {
-  decision?: string | null | undefined;
-  reason?: string | null | undefined;
+  decision?: string | undefined;
+  reason?: string | undefined;
 };
 
 /** @internal */
@@ -65,10 +62,9 @@ export const ResolvePausedAutomationExecutionsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResolvePausedAutomationExecutionsRequest
 > = z.object({
-  decision: z.nullable(
-    ResolvePausedAutomationExecutionsRequestDecision$outboundSchema,
-  ).optional(),
-  reason: z.nullable(z.string()).optional(),
+  decision: ResolvePausedAutomationExecutionsRequestDecision$outboundSchema
+    .optional(),
+  reason: z.string().optional(),
 });
 
 export function resolvePausedAutomationExecutionsRequestToJSON(

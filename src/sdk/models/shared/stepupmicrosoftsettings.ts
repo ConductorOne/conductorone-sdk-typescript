@@ -31,13 +31,20 @@ export type StepUpMicrosoftSettings = {
    */
   conditionalAccessIds?: Array<string> | null | undefined;
   /**
+   * Reject step-up unless the ID token's auth_time claim shows the user signed in after the
+   *
+   * @remarks
+   *  step-up started. Requires the auth_time optional claim on the Entra app registration's ID token.
+   */
+  requireFreshAuthentication?: boolean | undefined;
+  /**
    * Microsoft Entra tenant ID (GUID or domain). Used for response validation.
    */
-  tenant?: string | null | undefined;
+  tenant?: string | undefined;
   /**
    * Validation approach. See MicrosoftValidationMode for details on each mode.
    */
-  validationMode?: ValidationMode | null | undefined;
+  validationMode?: ValidationMode | undefined;
 };
 
 /** @internal */
@@ -60,14 +67,16 @@ export const StepUpMicrosoftSettings$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   conditionalAccessIds: z.nullable(z.array(z.string())).optional(),
-  tenant: z.nullable(z.string()).optional(),
-  validationMode: z.nullable(ValidationMode$inboundSchema).optional(),
+  requireFreshAuthentication: z.boolean().optional(),
+  tenant: z.string().optional(),
+  validationMode: ValidationMode$inboundSchema.optional(),
 });
 /** @internal */
 export type StepUpMicrosoftSettings$Outbound = {
   conditionalAccessIds?: Array<string> | null | undefined;
-  tenant?: string | null | undefined;
-  validationMode?: string | null | undefined;
+  requireFreshAuthentication?: boolean | undefined;
+  tenant?: string | undefined;
+  validationMode?: string | undefined;
 };
 
 /** @internal */
@@ -77,8 +86,9 @@ export const StepUpMicrosoftSettings$outboundSchema: z.ZodType<
   StepUpMicrosoftSettings
 > = z.object({
   conditionalAccessIds: z.nullable(z.array(z.string())).optional(),
-  tenant: z.nullable(z.string()).optional(),
-  validationMode: z.nullable(ValidationMode$outboundSchema).optional(),
+  requireFreshAuthentication: z.boolean().optional(),
+  tenant: z.string().optional(),
+  validationMode: ValidationMode$outboundSchema.optional(),
 });
 
 export function stepUpMicrosoftSettingsToJSON(

@@ -43,7 +43,7 @@ export type TFSchemaMapping = {
    * @remarks
    *  (e.g. "1.0.40").
    */
-  providerVersion?: string | null | undefined;
+  providerVersion?: string | undefined;
   /**
    * The set of distinct composite-key-field shapes that consumers
    *
@@ -73,7 +73,7 @@ export type TFSchemaMapping = {
    * @remarks
    *  `resource` or `data` keyword in HCL (e.g. "conductorone_app").
    */
-  tfTypeName?: string | null | undefined;
+  tfTypeName?: string | undefined;
 };
 
 /** @internal */
@@ -84,11 +84,11 @@ export const TFSchemaMapping$inboundSchema: z.ZodType<
 > = z.object({
   dataSource: z.nullable(DataSource$inboundSchema).optional(),
   fields: z.nullable(z.array(TFFieldMapping$inboundSchema)).optional(),
-  providerVersion: z.nullable(z.string()).optional(),
+  providerVersion: z.string().optional(),
   refererShapes: z.nullable(z.array(CompositeKeyFieldSet$inboundSchema))
     .optional(),
   resource: z.nullable(Resource$inboundSchema).optional(),
-  tfTypeName: z.nullable(z.string()).optional(),
+  tfTypeName: z.string().optional(),
 });
 
 export function tfSchemaMappingFromJSON(

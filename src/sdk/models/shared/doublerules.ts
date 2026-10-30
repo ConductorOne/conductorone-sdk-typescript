@@ -14,7 +14,7 @@ export type DoubleRules = {
   /**
    * Const specifies that this field must be exactly the specified value
    */
-  const?: number | null | undefined;
+  const?: number | undefined;
   /**
    * Gt specifies that this field must be greater than the specified value,
    *
@@ -22,7 +22,7 @@ export type DoubleRules = {
    *  exclusive. If the value of Gt is larger than a specified Lt or Lte, the
    *  range is reversed.
    */
-  gt?: number | null | undefined;
+  gt?: number | undefined;
   /**
    * Gte specifies that this field must be greater than or equal to the
    *
@@ -30,14 +30,14 @@ export type DoubleRules = {
    *  specified value, inclusive. If the value of Gte is larger than a
    *  specified Lt or Lte, the range is reversed.
    */
-  gte?: number | null | undefined;
+  gte?: number | undefined;
   /**
    * IgnoreEmpty specifies that the validation rules of this field should be
    *
    * @remarks
    *  evaluated only if the field is not empty
    */
-  ignoreEmpty?: boolean | null | undefined;
+  ignoreEmpty?: boolean | undefined;
   /**
    * In specifies that this field must be equal to one of the specified
    *
@@ -51,14 +51,14 @@ export type DoubleRules = {
    * @remarks
    *  exclusive
    */
-  lt?: number | null | undefined;
+  lt?: number | undefined;
   /**
    * Lte specifies that this field must be less than or equal to the
    *
    * @remarks
    *  specified value, inclusive
    */
-  lte?: number | null | undefined;
+  lte?: number | undefined;
   /**
    * NotIn specifies that this field cannot be equal to one of the specified
    *
@@ -74,24 +74,24 @@ export const DoubleRules$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  const: z.nullable(z.number()).optional(),
-  gt: z.nullable(z.number()).optional(),
-  gte: z.nullable(z.number()).optional(),
-  ignoreEmpty: z.nullable(z.boolean()).optional(),
+  const: z.number().optional(),
+  gt: z.number().optional(),
+  gte: z.number().optional(),
+  ignoreEmpty: z.boolean().optional(),
   in: z.nullable(z.array(z.number())).optional(),
-  lt: z.nullable(z.number()).optional(),
-  lte: z.nullable(z.number()).optional(),
+  lt: z.number().optional(),
+  lte: z.number().optional(),
   notIn: z.nullable(z.array(z.number())).optional(),
 });
 /** @internal */
 export type DoubleRules$Outbound = {
-  const?: number | null | undefined;
-  gt?: number | null | undefined;
-  gte?: number | null | undefined;
-  ignoreEmpty?: boolean | null | undefined;
+  const?: number | undefined;
+  gt?: number | undefined;
+  gte?: number | undefined;
+  ignoreEmpty?: boolean | undefined;
   in?: Array<number> | null | undefined;
-  lt?: number | null | undefined;
-  lte?: number | null | undefined;
+  lt?: number | undefined;
+  lte?: number | undefined;
   notIn?: Array<number> | null | undefined;
 };
 
@@ -101,13 +101,13 @@ export const DoubleRules$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DoubleRules
 > = z.object({
-  const: z.nullable(z.number()).optional(),
-  gt: z.nullable(z.number()).optional(),
-  gte: z.nullable(z.number()).optional(),
-  ignoreEmpty: z.nullable(z.boolean()).optional(),
+  const: z.number().optional(),
+  gt: z.number().optional(),
+  gte: z.number().optional(),
+  ignoreEmpty: z.boolean().optional(),
   in: z.nullable(z.array(z.number())).optional(),
-  lt: z.nullable(z.number()).optional(),
-  lte: z.nullable(z.number()).optional(),
+  lt: z.number().optional(),
+  lte: z.number().optional(),
   notIn: z.nullable(z.array(z.number())).optional(),
 });
 

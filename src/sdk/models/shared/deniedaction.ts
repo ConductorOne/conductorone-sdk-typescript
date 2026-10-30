@@ -15,7 +15,7 @@ export type DeniedAction = {
   /**
    * The UserID that denied this step.
    */
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -27,12 +27,12 @@ export const DeniedAction$inboundSchema: z.ZodType<
   deniedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 /** @internal */
 export type DeniedAction$Outbound = {
   deniedAt?: string | null | undefined;
-  userId?: string | null | undefined;
+  userId?: string | undefined;
 };
 
 /** @internal */
@@ -42,7 +42,7 @@ export const DeniedAction$outboundSchema: z.ZodType<
   DeniedAction
 > = z.object({
   deniedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  userId: z.nullable(z.string()).optional(),
+  userId: z.string().optional(),
 });
 
 export function deniedActionToJSON(deniedAction: DeniedAction): string {

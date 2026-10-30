@@ -18,7 +18,7 @@ export type ClearAutomationCircuitBreakerResponse = {
    *  executions. Empty when decision is UNSPECIFIED or there were no
    *  paused executions.
    */
-  bulkActionId?: string | null | undefined;
+  bulkActionId?: string | undefined;
 };
 
 /** @internal */
@@ -27,7 +27,7 @@ export const ClearAutomationCircuitBreakerResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  bulkActionId: z.nullable(z.string()).optional(),
+  bulkActionId: z.string().optional(),
 });
 
 export function clearAutomationCircuitBreakerResponseFromJSON(

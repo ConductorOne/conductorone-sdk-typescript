@@ -35,7 +35,7 @@ export type TaskServiceActionResponse = {
   /**
    * The ID of the task action created by this request.
    */
-  ticketActionId?: string | null | undefined;
+  ticketActionId?: string | undefined;
 };
 
 /** @internal */
@@ -75,7 +75,7 @@ export const TaskServiceActionResponse$inboundSchema: z.ZodType<
     z.array(z.lazy(() => TaskServiceActionResponseExpanded$inboundSchema)),
   ).optional(),
   taskView: z.nullable(TaskView$inboundSchema).optional(),
-  ticketActionId: z.nullable(z.string()).optional(),
+  ticketActionId: z.string().optional(),
 });
 
 export function taskServiceActionResponseFromJSON(

@@ -14,11 +14,11 @@ export type FormFieldGroup = {
   /**
    * The default field.
    */
-  default?: boolean | null | undefined;
+  default?: boolean | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The fields field.
    */
@@ -26,11 +26,11 @@ export type FormFieldGroup = {
   /**
    * The helpText field.
    */
-  helpText?: string | null | undefined;
+  helpText?: string | undefined;
   /**
    * The name field.
    */
-  name?: string | null | undefined;
+  name?: string | undefined;
 };
 
 /** @internal */
@@ -39,19 +39,19 @@ export const FormFieldGroup$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  default: z.nullable(z.boolean()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  default: z.boolean().optional(),
+  displayName: z.string().optional(),
   fields: z.nullable(z.array(z.string())).optional(),
-  helpText: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
+  helpText: z.string().optional(),
+  name: z.string().optional(),
 });
 /** @internal */
 export type FormFieldGroup$Outbound = {
-  default?: boolean | null | undefined;
-  displayName?: string | null | undefined;
+  default?: boolean | undefined;
+  displayName?: string | undefined;
   fields?: Array<string> | null | undefined;
-  helpText?: string | null | undefined;
-  name?: string | null | undefined;
+  helpText?: string | undefined;
+  name?: string | undefined;
 };
 
 /** @internal */
@@ -60,11 +60,11 @@ export const FormFieldGroup$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FormFieldGroup
 > = z.object({
-  default: z.nullable(z.boolean()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  default: z.boolean().optional(),
+  displayName: z.string().optional(),
   fields: z.nullable(z.array(z.string())).optional(),
-  helpText: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
+  helpText: z.string().optional(),
+  name: z.string().optional(),
 });
 
 export function formFieldGroupToJSON(formFieldGroup: FormFieldGroup): string {

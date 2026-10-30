@@ -19,7 +19,7 @@ export type SearchAppResourceTypesRequest = {
   /**
    * Exact match on display name
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * A list of resource type IDs to exclude from the search.
    */
@@ -31,15 +31,15 @@ export type SearchAppResourceTypesRequest = {
   /**
    * The pageSize where 10 <= pageSize <= 100, default 25.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Fuzzy search the display name of resource types.
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * A list of resource type IDs to restrict the search by.
    */
@@ -54,12 +54,12 @@ export type SearchAppResourceTypesRequest = {
 export type SearchAppResourceTypesRequest$Outbound = {
   appIds?: Array<string> | null | undefined;
   appUserIds?: Array<string> | null | undefined;
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   excludeResourceTypeIds?: Array<string> | null | undefined;
   excludeResourceTypeTraitIds?: Array<string> | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  query?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  query?: string | undefined;
   resourceTypeIds?: Array<string> | null | undefined;
   resourceTypeTraitIds?: Array<string> | null | undefined;
 };
@@ -72,12 +72,12 @@ export const SearchAppResourceTypesRequest$outboundSchema: z.ZodType<
 > = z.object({
   appIds: z.nullable(z.array(z.string())).optional(),
   appUserIds: z.nullable(z.array(z.string())).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
   excludeResourceTypeIds: z.nullable(z.array(z.string())).optional(),
   excludeResourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  query: z.string().optional(),
   resourceTypeIds: z.nullable(z.array(z.string())).optional(),
   resourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
 });

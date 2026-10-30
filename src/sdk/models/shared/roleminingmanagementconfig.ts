@@ -22,11 +22,11 @@ export type RoleMiningManagementConfig = {
   /**
    * Maximum number of suggestions the analysis will produce per run.
    */
-  maxSuggestions?: number | null | undefined;
+  maxSuggestions?: number | undefined;
   /**
    * Minimum number of users a cohort must contain to generate a suggestion.
    */
-  minCohortSize?: number | null | undefined;
+  minCohortSize?: number | undefined;
 };
 
 /** @internal */
@@ -36,8 +36,8 @@ export const RoleMiningManagementConfig$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   cohortHints: z.nullable(z.array(CohortHintView$inboundSchema)).optional(),
-  maxSuggestions: z.nullable(z.number().int()).optional(),
-  minCohortSize: z.nullable(z.number().int()).optional(),
+  maxSuggestions: z.number().int().optional(),
+  minCohortSize: z.number().int().optional(),
 });
 
 export function roleMiningManagementConfigFromJSON(

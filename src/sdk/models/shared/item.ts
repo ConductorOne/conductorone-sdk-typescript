@@ -14,18 +14,18 @@ export type Item = {
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The value field.
    */
-  value?: string | null | undefined;
+  value?: string | undefined;
 };
 
 /** @internal */
 export const Item$inboundSchema: z.ZodType<Item, z.ZodTypeDef, unknown> = z
   .object({
-    displayName: z.nullable(z.string()).optional(),
-    value: z.nullable(z.string()).optional(),
+    displayName: z.string().optional(),
+    value: z.string().optional(),
   });
 
 export function itemFromJSON(

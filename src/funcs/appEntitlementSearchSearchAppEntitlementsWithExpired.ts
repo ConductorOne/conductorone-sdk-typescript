@@ -30,6 +30,7 @@ import { Result } from "../sdk/types/fp.js";
  *
  * @remarks
  * Search app entitlements, include app users, users, expires, discovered.
+ *  Response rows are large — request a small page_size (≤10) to keep responses small.
  */
 export function appEntitlementSearchSearchAppEntitlementsWithExpired(
   client: ConductoroneSDKTypescriptCore,

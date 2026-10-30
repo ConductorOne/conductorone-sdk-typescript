@@ -29,7 +29,13 @@ import { Result } from "../sdk/types/fp.js";
  * Remove Entitlement Membership
  *
  * @remarks
- * Remove a user from a ConductorOne-managed entitlement (catalog, group, or profile type). For access profiles, this creates a revoke task to deprovision access.
+ * Remove a user from a manually managed entitlement. For ConductorOne
+ *  catalogs, groups, and profile types, the existing resource-specific
+ *  removal behavior applies. When the SSO provider feature is enabled, an SSO
+ *  application's sign-in entitlement removes only direct manual access and
+ *  preserves independent requested, connector, and group-derived access.
+ *  Removing a member from an access profile requires the JML feature; without
+ *  it the request fails with a failed-precondition error.
  */
 export function appEntitlementsRemoveEntitlementMembership(
   client: ConductoroneSDKTypescriptCore,

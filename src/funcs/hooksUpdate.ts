@@ -29,7 +29,9 @@ import { Result } from "../sdk/types/fp.js";
  * Update
  *
  * @remarks
- * Invokes the c1.api.hooks.v1.HooksService.Update method.
+ * Update modifies a hook's display name, description, event, filter, priority,
+ *  or configuration. A hook referenced by a guardrail rule cannot stop being
+ *  managed by guardrails until the reference is removed.
  */
 export function hooksUpdate(
   client: ConductoroneSDKTypescriptCore,

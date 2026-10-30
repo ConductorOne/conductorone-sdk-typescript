@@ -42,7 +42,7 @@ export type WebhookAutomationTrigger = {
   /**
    * Optional existing listener ID (hidden field from frontend)
    */
-  listenerId?: string | null | undefined;
+  listenerId?: string | undefined;
 };
 
 /** @internal */
@@ -55,14 +55,14 @@ export const WebhookAutomationTrigger$inboundSchema: z.ZodType<
     .optional(),
   hmac: z.nullable(WebhookListenerAuthHMAC$inboundSchema).optional(),
   jwt: z.nullable(WebhookListenerAuthJWT$inboundSchema).optional(),
-  listenerId: z.nullable(z.string()).optional(),
+  listenerId: z.string().optional(),
 });
 /** @internal */
 export type WebhookAutomationTrigger$Outbound = {
   capabilityUrl?: WebhookListenerAuthCapabilityURL$Outbound | null | undefined;
   hmac?: WebhookListenerAuthHMAC$Outbound | null | undefined;
   jwt?: WebhookListenerAuthJWT$Outbound | null | undefined;
-  listenerId?: string | null | undefined;
+  listenerId?: string | undefined;
 };
 
 /** @internal */
@@ -75,7 +75,7 @@ export const WebhookAutomationTrigger$outboundSchema: z.ZodType<
     .optional(),
   hmac: z.nullable(WebhookListenerAuthHMAC$outboundSchema).optional(),
   jwt: z.nullable(WebhookListenerAuthJWT$outboundSchema).optional(),
-  listenerId: z.nullable(z.string()).optional(),
+  listenerId: z.string().optional(),
 });
 
 export function webhookAutomationTriggerToJSON(

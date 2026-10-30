@@ -9,7 +9,7 @@ import * as z from "zod/v3";
  */
 export type TaskExpandMask = {
   /**
-   * A list of paths to expand in the response. May be any combination of "*", "access_review_id", "user_id", "created_by_user_id", "app_id", "app_user_id", "app_entitlement_ids", "step_approver_ids", "approver_ids", "identity_user_id", "insight_ids", "app_user_last_usage", "entitlement_scope_bindings", and "scope_role_resources".
+   * A list of paths to expand in the response. May be any combination of "*", "access_review_id", "user_id", "created_by_user_id", "app_id", "app_user_id", "app_entitlement_ids", "step_approver_ids", "approver_ids", "identity_user_id", "insight_ids", "app_user_last_usage", "entitlement_scope_bindings", "scope_role_resources", and "resource".
    */
   paths?: Array<string> | null | undefined;
 };

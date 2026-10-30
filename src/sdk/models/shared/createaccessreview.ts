@@ -20,23 +20,23 @@ export type CreateAccessReview = {
   /**
    * The accessReviewTemplateCel field.
    */
-  accessReviewTemplateCel?: string | null | undefined;
+  accessReviewTemplateCel?: string | undefined;
   /**
    * The accessReviewTemplateId field.
    */
-  accessReviewTemplateId?: string | null | undefined;
+  accessReviewTemplateId?: string | undefined;
   /**
    * Optional campaign name. If not provided, the campaign name will be the access review template name.
    */
-  campaignName?: string | null | undefined;
+  campaignName?: string | undefined;
   /**
    * If true, the step will use the subject user of the automation as the subject.
    */
-  useSubjectUser?: boolean | null | undefined;
+  useSubjectUser?: boolean | undefined;
   /**
    * The userIdsCel field.
    */
-  userIdsCel?: string | null | undefined;
+  userIdsCel?: string | undefined;
   /**
    * The userRefs field.
    */
@@ -49,20 +49,20 @@ export const CreateAccessReview$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accessReviewTemplateCel: z.nullable(z.string()).optional(),
-  accessReviewTemplateId: z.nullable(z.string()).optional(),
-  campaignName: z.nullable(z.string()).optional(),
-  useSubjectUser: z.nullable(z.boolean()).optional(),
-  userIdsCel: z.nullable(z.string()).optional(),
+  accessReviewTemplateCel: z.string().optional(),
+  accessReviewTemplateId: z.string().optional(),
+  campaignName: z.string().optional(),
+  useSubjectUser: z.boolean().optional(),
+  userIdsCel: z.string().optional(),
   userRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
 });
 /** @internal */
 export type CreateAccessReview$Outbound = {
-  accessReviewTemplateCel?: string | null | undefined;
-  accessReviewTemplateId?: string | null | undefined;
-  campaignName?: string | null | undefined;
-  useSubjectUser?: boolean | null | undefined;
-  userIdsCel?: string | null | undefined;
+  accessReviewTemplateCel?: string | undefined;
+  accessReviewTemplateId?: string | undefined;
+  campaignName?: string | undefined;
+  useSubjectUser?: boolean | undefined;
+  userIdsCel?: string | undefined;
   userRefs?: Array<UserRef$Outbound> | null | undefined;
 };
 
@@ -72,11 +72,11 @@ export const CreateAccessReview$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAccessReview
 > = z.object({
-  accessReviewTemplateCel: z.nullable(z.string()).optional(),
-  accessReviewTemplateId: z.nullable(z.string()).optional(),
-  campaignName: z.nullable(z.string()).optional(),
-  useSubjectUser: z.nullable(z.boolean()).optional(),
-  userIdsCel: z.nullable(z.string()).optional(),
+  accessReviewTemplateCel: z.string().optional(),
+  accessReviewTemplateId: z.string().optional(),
+  campaignName: z.string().optional(),
+  useSubjectUser: z.boolean().optional(),
+  userIdsCel: z.string().optional(),
   userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
 });
 

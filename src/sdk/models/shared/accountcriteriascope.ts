@@ -35,6 +35,7 @@ export const AppUserStatuses = {
   AppUserStatusEnabled: "APP_USER_STATUS_ENABLED",
   AppUserStatusDisabled: "APP_USER_STATUS_DISABLED",
   AppUserStatusDeleted: "APP_USER_STATUS_DELETED",
+  AppUserStatusPending: "APP_USER_STATUS_PENDING",
 } as const;
 export type AppUserStatuses = OpenEnum<typeof AppUserStatuses>;
 
@@ -45,7 +46,7 @@ export type AccountCriteriaScope = {
   /**
    * The accountDomain field.
    */
-  accountDomain?: AccountDomain | null | undefined;
+  accountDomain?: AccountDomain | undefined;
   /**
    * The accountTypes field.
    */
@@ -57,7 +58,7 @@ export type AccountCriteriaScope = {
   /**
    * The noAccountOwner field.
    */
-  noAccountOwner?: boolean | null | undefined;
+  noAccountOwner?: boolean | undefined;
 };
 
 /** @internal */
@@ -105,18 +106,18 @@ export const AccountCriteriaScope$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accountDomain: z.nullable(AccountDomain$inboundSchema).optional(),
+  accountDomain: AccountDomain$inboundSchema.optional(),
   accountTypes: z.nullable(z.array(AccountTypes$inboundSchema)).optional(),
   appUserStatuses: z.nullable(z.array(AppUserStatuses$inboundSchema))
     .optional(),
-  noAccountOwner: z.nullable(z.boolean()).optional(),
+  noAccountOwner: z.boolean().optional(),
 });
 /** @internal */
 export type AccountCriteriaScope$Outbound = {
-  accountDomain?: string | null | undefined;
+  accountDomain?: string | undefined;
   accountTypes?: Array<string> | null | undefined;
   appUserStatuses?: Array<string> | null | undefined;
-  noAccountOwner?: boolean | null | undefined;
+  noAccountOwner?: boolean | undefined;
 };
 
 /** @internal */
@@ -125,11 +126,11 @@ export const AccountCriteriaScope$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AccountCriteriaScope
 > = z.object({
-  accountDomain: z.nullable(AccountDomain$outboundSchema).optional(),
+  accountDomain: AccountDomain$outboundSchema.optional(),
   accountTypes: z.nullable(z.array(AccountTypes$outboundSchema)).optional(),
   appUserStatuses: z.nullable(z.array(AppUserStatuses$outboundSchema))
     .optional(),
-  noAccountOwner: z.nullable(z.boolean()).optional(),
+  noAccountOwner: z.boolean().optional(),
 });
 
 export function accountCriteriaScopeToJSON(

@@ -34,23 +34,30 @@ export type GraphNode = {
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The resourceTypeId field.
    */
-  resourceTypeId?: string | null | undefined;
+  resourceTypeId?: string | undefined;
+  /**
+   * Optional secondary line shown under the display name (e.g. an account's
+   *
+   * @remarks
+   *  email/username, or an identity's email).
+   */
+  secondaryText?: string | undefined;
   /**
    * The type field.
    */
-  type?: GraphNodeType | null | undefined;
+  type?: GraphNodeType | undefined;
 };
 
 /** @internal */
@@ -66,11 +73,12 @@ export const GraphNode$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  resourceTypeId: z.nullable(z.string()).optional(),
-  type: z.nullable(GraphNodeType$inboundSchema).optional(),
+  appId: z.string().optional(),
+  displayName: z.string().optional(),
+  id: z.string().optional(),
+  resourceTypeId: z.string().optional(),
+  secondaryText: z.string().optional(),
+  type: GraphNodeType$inboundSchema.optional(),
 });
 
 export function graphNodeFromJSON(

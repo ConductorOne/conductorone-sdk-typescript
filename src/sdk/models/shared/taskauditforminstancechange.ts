@@ -14,7 +14,7 @@ export type TaskAuditFormInstanceChange = {
   /**
    * The isValid field.
    */
-  isValid?: boolean | null | undefined;
+  isValid?: boolean | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const TaskAuditFormInstanceChange$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  isValid: z.nullable(z.boolean()).optional(),
+  isValid: z.boolean().optional(),
 });
 
 export function taskAuditFormInstanceChangeFromJSON(

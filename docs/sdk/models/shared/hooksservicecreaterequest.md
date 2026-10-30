@@ -5,6 +5,7 @@ The HooksServiceCreateRequest message.
 This message contains a oneof named hook_type. Only a single field of the following list may be set at a time:
   - function
   - builtinPattern
+  - jsonPatch
 
 
 ## Example Usage
@@ -13,7 +14,7 @@ This message contains a oneof named hook_type. Only a single field of the follow
 import { HooksServiceCreateRequest } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: HooksServiceCreateRequest = {
-  displayName: "Dameon98",
+  displayName: "Cameron29",
 };
 ```
 
@@ -28,4 +29,6 @@ let value: HooksServiceCreateRequest = {
 | `event`                                                                                               | [shared.HooksServiceCreateRequestEvent](../../../sdk/models/shared/hooksservicecreaterequestevent.md) | :heavy_minus_sign:                                                                                    | The event field.                                                                                      |
 | `filter`                                                                                              | [shared.HookFilter](../../../sdk/models/shared/hookfilter.md)                                         | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |
 | `function`                                                                                            | [shared.HookFunctionRef](../../../sdk/models/shared/hookfunctionref.md)                               | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |
+| `jsonPatch`                                                                                           | [shared.JSONPatchConfig](../../../sdk/models/shared/jsonpatchconfig.md)                               | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |
+| `managedByGuardrails`                                                                                 | *boolean*                                                                                             | :heavy_minus_sign:                                                                                    | The managedByGuardrails field.                                                                        |
 | `priority`                                                                                            | *number*                                                                                              | :heavy_minus_sign:                                                                                    | The priority field.                                                                                   |

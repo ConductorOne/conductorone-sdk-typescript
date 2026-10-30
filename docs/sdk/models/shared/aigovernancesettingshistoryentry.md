@@ -1,6 +1,7 @@
 # AIGovernanceSettingsHistoryEntry
 
-The AIGovernanceSettingsHistoryEntry message.
+AIGovernanceSettingsHistoryEntry is a single change-history record capturing a
+ snapshot of the settings and who changed them.
 
 ## Example Usage
 

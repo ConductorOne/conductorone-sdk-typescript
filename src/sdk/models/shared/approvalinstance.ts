@@ -99,7 +99,7 @@ export type ApprovalInstance = {
   /**
    * The state of the approval instance
    */
-  state?: ApprovalInstanceState | null | undefined;
+  state?: ApprovalInstanceState | undefined;
 };
 
 /** @internal */
@@ -133,7 +133,7 @@ export const ApprovalInstance$inboundSchema: z.ZodType<
     .optional(),
   restarted: z.nullable(RestartAction$inboundSchema).optional(),
   skipped: z.nullable(SkippedAction$inboundSchema).optional(),
-  state: z.nullable(ApprovalInstanceState$inboundSchema).optional(),
+  state: ApprovalInstanceState$inboundSchema.optional(),
 });
 /** @internal */
 export type ApprovalInstance$Outbound = {
@@ -146,7 +146,7 @@ export type ApprovalInstance$Outbound = {
   reassignedByError?: ReassignedByErrorAction$Outbound | null | undefined;
   restarted?: RestartAction$Outbound | null | undefined;
   skipped?: SkippedAction$Outbound | null | undefined;
-  state?: string | null | undefined;
+  state?: string | undefined;
 };
 
 /** @internal */
@@ -165,7 +165,7 @@ export const ApprovalInstance$outboundSchema: z.ZodType<
     .optional(),
   restarted: z.nullable(RestartAction$outboundSchema).optional(),
   skipped: z.nullable(SkippedAction$outboundSchema).optional(),
-  state: z.nullable(ApprovalInstanceState$outboundSchema).optional(),
+  state: ApprovalInstanceState$outboundSchema.optional(),
 });
 
 export function approvalInstanceToJSON(

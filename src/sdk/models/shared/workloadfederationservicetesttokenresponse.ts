@@ -24,13 +24,13 @@ export type WorkloadFederationServiceTestTokenResponse = {
    * @remarks
    *  Returned as JSON string for display.
    */
-  decodedClaimsJson?: string | null | undefined;
+  decodedClaimsJson?: string | undefined;
   issuerMatch?: TestTokenStepResult | null | undefined;
   jwtDecode?: TestTokenStepResult | null | undefined;
   /**
    * Overall result: true only if ALL steps passed.
    */
-  overallResult?: boolean | null | undefined;
+  overallResult?: boolean | undefined;
   signatureValidation?: TestTokenStepResult | null | undefined;
   subjectValidation?: TestTokenStepResult | null | undefined;
   tokenFreshness?: TestTokenStepResult | null | undefined;
@@ -44,10 +44,10 @@ export const WorkloadFederationServiceTestTokenResponse$inboundSchema:
         .optional(),
       celEvaluation: z.nullable(TestTokenStepResult$inboundSchema).optional(),
       cidrCheck: z.nullable(TestTokenStepResult$inboundSchema).optional(),
-      decodedClaimsJson: z.nullable(z.string()).optional(),
+      decodedClaimsJson: z.string().optional(),
       issuerMatch: z.nullable(TestTokenStepResult$inboundSchema).optional(),
       jwtDecode: z.nullable(TestTokenStepResult$inboundSchema).optional(),
-      overallResult: z.nullable(z.boolean()).optional(),
+      overallResult: z.boolean().optional(),
       signatureValidation: z.nullable(TestTokenStepResult$inboundSchema)
         .optional(),
       subjectValidation: z.nullable(TestTokenStepResult$inboundSchema)

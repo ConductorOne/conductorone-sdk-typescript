@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { C1EdgeService, C1EdgeService$inboundSchema } from "./c1edgeservice.js";
 
 /**
  * WorkloadFederationTrust represents a per-SP trust policy that references
@@ -18,33 +19,34 @@ export type WorkloadFederationTrust = {
    * IP allowlist for token exchange requests matching this trust.
    */
   allowSourceCidrs?: Array<string> | null | undefined;
+  c1EdgeService?: C1EdgeService | null | undefined;
   /**
    * The full client ID of the trust (e.g., "clever-fox-42195@acme.conductorone.com/wfe").
    *
    * @remarks
    *  Used as the client_id parameter in RFC 8693 token exchange requests.
    */
-  clientId?: string | null | undefined;
+  clientId?: string | undefined;
   /**
    * CEL expression evaluated against JWT claims. Must return bool.
    *
    * @remarks
    *  Example: claims.sub.startsWith("repo:acme/infra:") && claims.environment == "production"
    */
-  conditionExpression?: string | null | undefined;
+  conditionExpression?: string | undefined;
   createdAt?: Date | null | undefined;
   /**
    * A description of what this trust policy matches.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * Whether the trust is disabled.
    */
-  disabled?: boolean | null | undefined;
+  disabled?: boolean | undefined;
   /**
    * The display name of the trust.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * JWT claim names from the subject token to copy into the issued C1 token.
    *
@@ -57,7 +59,7 @@ export type WorkloadFederationTrust = {
   /**
    * The provider ID this trust references. Immutable after creation.
    */
-  providerId?: string | null | undefined;
+  providerId?: string | undefined;
   /**
    * Scoped role IDs. Effective permissions = min(SP roles, trust.scoped_role_ids).
    */
@@ -65,7 +67,7 @@ export type WorkloadFederationTrust = {
   /**
    * The service principal user ID this trust belongs to.
    */
-  servicePrincipalId?: string | null | undefined;
+  servicePrincipalId?: string | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -76,18 +78,19 @@ export const WorkloadFederationTrust$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   allowSourceCidrs: z.nullable(z.array(z.string())).optional(),
-  clientId: z.nullable(z.string()).optional(),
-  conditionExpression: z.nullable(z.string()).optional(),
+  c1EdgeService: z.nullable(C1EdgeService$inboundSchema).optional(),
+  clientId: z.string().optional(),
+  conditionExpression: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  description: z.nullable(z.string()).optional(),
-  disabled: z.nullable(z.boolean()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  disabled: z.boolean().optional(),
+  displayName: z.string().optional(),
   passthroughClaims: z.nullable(z.array(z.string())).optional(),
-  providerId: z.nullable(z.string()).optional(),
+  providerId: z.string().optional(),
   scopedRoleIds: z.nullable(z.array(z.string())).optional(),
-  servicePrincipalId: z.nullable(z.string()).optional(),
+  servicePrincipalId: z.string().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

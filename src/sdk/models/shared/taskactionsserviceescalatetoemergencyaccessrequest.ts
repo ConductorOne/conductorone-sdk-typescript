@@ -16,19 +16,19 @@ export type TaskActionsServiceEscalateToEmergencyAccessRequest = {
   /**
    * An optional comment attached to the escalation.
    */
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   expandMask?: TaskExpandMask | null | undefined;
   /**
    * The ID of the current policy step being escalated from.
    */
-  policyStepId?: string | null | undefined;
+  policyStepId?: string | undefined;
 };
 
 /** @internal */
 export type TaskActionsServiceEscalateToEmergencyAccessRequest$Outbound = {
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
-  policyStepId?: string | null | undefined;
+  policyStepId?: string | undefined;
 };
 
 /** @internal */
@@ -38,9 +38,9 @@ export const TaskActionsServiceEscalateToEmergencyAccessRequest$outboundSchema:
     z.ZodTypeDef,
     TaskActionsServiceEscalateToEmergencyAccessRequest
   > = z.object({
-    comment: z.nullable(z.string()).optional(),
+    comment: z.string().optional(),
     expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-    policyStepId: z.nullable(z.string()).optional(),
+    policyStepId: z.string().optional(),
   });
 
 export function taskActionsServiceEscalateToEmergencyAccessRequestToJSON(

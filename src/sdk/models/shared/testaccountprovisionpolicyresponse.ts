@@ -14,11 +14,11 @@ export type TestAccountProvisionPolicyResponse = {
   /**
    * The data type of the computed result value.
    */
-  type?: string | null | undefined;
+  type?: string | undefined;
   /**
    * The computed result value of the CEL expression evaluation.
    */
-  value?: string | null | undefined;
+  value?: string | undefined;
 };
 
 /** @internal */
@@ -27,8 +27,8 @@ export const TestAccountProvisionPolicyResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.nullable(z.string()).optional(),
-  value: z.nullable(z.string()).optional(),
+  type: z.string().optional(),
+  value: z.string().optional(),
 });
 
 export function testAccountProvisionPolicyResponseFromJSON(

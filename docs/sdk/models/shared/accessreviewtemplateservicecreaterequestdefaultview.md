@@ -8,7 +8,7 @@ The defaultView field.
 import { AccessReviewTemplateServiceCreateRequestDefaultView } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: AccessReviewTemplateServiceCreateRequestDefaultView =
-  "ACCESS_REVIEW_VIEW_TYPE_BY_RESOURCE";
+  "ACCESS_REVIEW_VIEW_TYPE_BY_ACCESS_PROFILE";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -16,5 +16,5 @@ let value: AccessReviewTemplateServiceCreateRequestDefaultView =
 ## Values
 
 ```typescript
-"ACCESS_REVIEW_VIEW_TYPE_UNSPECIFIED" | "ACCESS_REVIEW_VIEW_TYPE_BY_APP" | "ACCESS_REVIEW_VIEW_TYPE_BY_USER" | "ACCESS_REVIEW_VIEW_TYPE_UNSTRUCTURED" | "ACCESS_REVIEW_VIEW_TYPE_BY_RESOURCE" | Unrecognized<string>
+"ACCESS_REVIEW_VIEW_TYPE_UNSPECIFIED" | "ACCESS_REVIEW_VIEW_TYPE_BY_APP" | "ACCESS_REVIEW_VIEW_TYPE_BY_USER" | "ACCESS_REVIEW_VIEW_TYPE_UNSTRUCTURED" | "ACCESS_REVIEW_VIEW_TYPE_BY_RESOURCE" | "ACCESS_REVIEW_VIEW_TYPE_BY_ACCESS_PROFILE" | Unrecognized<string>
 ```

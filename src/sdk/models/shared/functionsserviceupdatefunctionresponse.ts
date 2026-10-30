@@ -7,11 +7,16 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { FunctionT, FunctionT$inboundSchema } from "./function.js";
+import {
+  FunctionCommit,
+  FunctionCommit$inboundSchema,
+} from "./functioncommit.js";
 
 /**
  * The FunctionsServiceUpdateFunctionResponse message.
  */
 export type FunctionsServiceUpdateFunctionResponse = {
+  commit?: FunctionCommit | null | undefined;
   function?: FunctionT | null | undefined;
 };
 
@@ -21,6 +26,7 @@ export const FunctionsServiceUpdateFunctionResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  commit: z.nullable(FunctionCommit$inboundSchema).optional(),
   function: z.nullable(FunctionT$inboundSchema).optional(),
 });
 

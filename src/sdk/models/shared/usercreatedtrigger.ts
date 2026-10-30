@@ -14,7 +14,7 @@ export type UserCreatedTrigger = {
   /**
    * The condition field.
    */
-  condition?: string | null | undefined;
+  condition?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const UserCreatedTrigger$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  condition: z.nullable(z.string()).optional(),
+  condition: z.string().optional(),
 });
 /** @internal */
 export type UserCreatedTrigger$Outbound = {
-  condition?: string | null | undefined;
+  condition?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const UserCreatedTrigger$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UserCreatedTrigger
 > = z.object({
-  condition: z.nullable(z.string()).optional(),
+  condition: z.string().optional(),
 });
 
 export function userCreatedTriggerToJSON(

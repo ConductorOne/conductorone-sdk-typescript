@@ -16,19 +16,19 @@ export type TaskActionsServiceApproveRequest = {
   /**
    * The comment attached to the request.
    */
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   expandMask?: TaskExpandMask | null | undefined;
   /**
    * The ID of the policy step on the given task to approve.
    */
-  policyStepId: string | null;
+  policyStepId: string;
 };
 
 /** @internal */
 export type TaskActionsServiceApproveRequest$Outbound = {
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
-  policyStepId: string | null;
+  policyStepId: string;
 };
 
 /** @internal */
@@ -37,9 +37,9 @@ export const TaskActionsServiceApproveRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskActionsServiceApproveRequest
 > = z.object({
-  comment: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-  policyStepId: z.nullable(z.string()),
+  policyStepId: z.string(),
 });
 
 export function taskActionsServiceApproveRequestToJSON(

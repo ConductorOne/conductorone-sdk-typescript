@@ -71,22 +71,22 @@ export type WaitInstance = {
   /**
    * The comment to post on first failed check.
    */
-  commentOnFirstWait?: string | null | undefined;
+  commentOnFirstWait?: string | undefined;
   /**
    * The comment to post if we timeout.
    */
-  commentOnTimeout?: string | null | undefined;
+  commentOnTimeout?: string | undefined;
   condition?: WaitConditionInstance | null | undefined;
   /**
    * The name field.
    */
-  name?: string | null | undefined;
+  name?: string | undefined;
   skipped?: SkippedAction | null | undefined;
   startedWaitingAt?: Date | null | undefined;
   /**
    * The state field.
    */
-  state?: WaitInstanceState | null | undefined;
+  state?: WaitInstanceState | undefined;
   succeeded?: ConditionSucceeded | null | undefined;
   timedOut?: ConditionTimedOut | null | undefined;
   timeout?: Date | null | undefined;
@@ -113,15 +113,15 @@ export const WaitInstance$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  commentOnFirstWait: z.nullable(z.string()).optional(),
-  commentOnTimeout: z.nullable(z.string()).optional(),
+  commentOnFirstWait: z.string().optional(),
+  commentOnTimeout: z.string().optional(),
   condition: z.nullable(WaitConditionInstance$inboundSchema).optional(),
-  name: z.nullable(z.string()).optional(),
+  name: z.string().optional(),
   skipped: z.nullable(SkippedAction$inboundSchema).optional(),
   startedWaitingAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  state: z.nullable(WaitInstanceState$inboundSchema).optional(),
+  state: WaitInstanceState$inboundSchema.optional(),
   succeeded: z.nullable(ConditionSucceeded$inboundSchema).optional(),
   timedOut: z.nullable(ConditionTimedOut$inboundSchema).optional(),
   timeout: z.nullable(
@@ -132,13 +132,13 @@ export const WaitInstance$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type WaitInstance$Outbound = {
-  commentOnFirstWait?: string | null | undefined;
-  commentOnTimeout?: string | null | undefined;
+  commentOnFirstWait?: string | undefined;
+  commentOnTimeout?: string | undefined;
   condition?: WaitConditionInstance$Outbound | null | undefined;
-  name?: string | null | undefined;
+  name?: string | undefined;
   skipped?: SkippedAction$Outbound | null | undefined;
   startedWaitingAt?: string | null | undefined;
-  state?: string | null | undefined;
+  state?: string | undefined;
   succeeded?: ConditionSucceeded$Outbound | null | undefined;
   timedOut?: ConditionTimedOut$Outbound | null | undefined;
   timeout?: string | null | undefined;
@@ -152,14 +152,14 @@ export const WaitInstance$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WaitInstance
 > = z.object({
-  commentOnFirstWait: z.nullable(z.string()).optional(),
-  commentOnTimeout: z.nullable(z.string()).optional(),
+  commentOnFirstWait: z.string().optional(),
+  commentOnTimeout: z.string().optional(),
   condition: z.nullable(WaitConditionInstance$outboundSchema).optional(),
-  name: z.nullable(z.string()).optional(),
+  name: z.string().optional(),
   skipped: z.nullable(SkippedAction$outboundSchema).optional(),
   startedWaitingAt: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
-  state: z.nullable(WaitInstanceState$outboundSchema).optional(),
+  state: WaitInstanceState$outboundSchema.optional(),
   succeeded: z.nullable(ConditionSucceeded$outboundSchema).optional(),
   timedOut: z.nullable(ConditionTimedOut$outboundSchema).optional(),
   timeout: z.nullable(z.date().transform(v => v.toISOString())).optional(),

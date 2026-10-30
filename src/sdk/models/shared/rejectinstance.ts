@@ -17,7 +17,7 @@ export type RejectInstance = {
   /**
    * An optional message to include in the comments when a task is automatically rejected.
    */
-  rejectMessage?: string | null | undefined;
+  rejectMessage?: string | undefined;
 };
 
 /** @internal */
@@ -26,11 +26,11 @@ export const RejectInstance$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  rejectMessage: z.nullable(z.string()).optional(),
+  rejectMessage: z.string().optional(),
 });
 /** @internal */
 export type RejectInstance$Outbound = {
-  rejectMessage?: string | null | undefined;
+  rejectMessage?: string | undefined;
 };
 
 /** @internal */
@@ -39,7 +39,7 @@ export const RejectInstance$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RejectInstance
 > = z.object({
-  rejectMessage: z.nullable(z.string()).optional(),
+  rejectMessage: z.string().optional(),
 });
 
 export function rejectInstanceToJSON(rejectInstance: RejectInstance): string {

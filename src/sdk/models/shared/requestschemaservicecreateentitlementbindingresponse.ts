@@ -19,7 +19,7 @@ export type RequestSchemaServiceCreateEntitlementBindingResponse = {
   /**
    * The unique identifier of the request schema the entitlement was bound to.
    */
-  requestSchemaId?: string | null | undefined;
+  requestSchemaId?: string | undefined;
 };
 
 /** @internal */
@@ -30,7 +30,7 @@ export const RequestSchemaServiceCreateEntitlementBindingResponse$inboundSchema:
     unknown
   > = z.object({
     entitlementRef: z.nullable(AppEntitlementRef$inboundSchema).optional(),
-    requestSchemaId: z.nullable(z.string()).optional(),
+    requestSchemaId: z.string().optional(),
   });
 
 export function requestSchemaServiceCreateEntitlementBindingResponseFromJSON(

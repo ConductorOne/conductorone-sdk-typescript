@@ -14,18 +14,18 @@ export type AttributeValue = {
   /**
    * The ID of the AttributeType that this AttributeValue belongs to.
    */
-  attributeTypeId?: string | null | undefined;
+  attributeTypeId?: string | undefined;
   createdAt?: Date | null | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * The ID of the AttributeValue.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   updatedAt?: Date | null | undefined;
   /**
    * The value of the AttributeValue. This is the string that will be displayed to the user.
    */
-  value?: string | null | undefined;
+  value?: string | undefined;
 };
 
 /** @internal */
@@ -34,18 +34,18 @@ export const AttributeValue$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  attributeTypeId: z.nullable(z.string()).optional(),
+  attributeTypeId: z.string().optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  value: z.nullable(z.string()).optional(),
+  value: z.string().optional(),
 });
 
 export function attributeValueFromJSON(

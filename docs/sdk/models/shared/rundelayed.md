@@ -8,7 +8,7 @@ The RunDelayed message.
 import { RunDelayed } from "conductorone-sdk-typescript/sdk/models/shared";
 
 let value: RunDelayed = {
-  coldStartDelayDays: 12990,
+  coldStartDelayDays: 287706,
 };
 ```
 

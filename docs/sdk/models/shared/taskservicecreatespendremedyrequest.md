@@ -1,0 +1,30 @@
+# TaskServiceCreateSpendRemedyRequest
+
+TaskServiceCreateSpendRemedyRequest requests a scoped change through the configured policy.
+ Beneficiary, operation and authority are derived from the caller's verified refusal.
+
+This message contains a oneof named requested_change. Only a single field of the following list may be set at a time:
+  - personalExtension
+  - sharedIncrease
+  - resume
+
+
+## Example Usage
+
+```typescript
+import { TaskServiceCreateSpendRemedyRequest } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: TaskServiceCreateSpendRemedyRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                                               | Type                                                                                                                                                | Required                                                                                                                                            | Description                                                                                                                                         |
+| --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `appId`                                                                                                                                             | *string*                                                                                                                                            | :heavy_minus_sign:                                                                                                                                  | Narrows delivered audience proof. An APP-scoped refusal may supply this<br/> context; other scopes require it. The verified receipt determines the app. |
+| `blockId`                                                                                                                                           | *string*                                                                                                                                            | :heavy_minus_sign:                                                                                                                                  | The blockId field.                                                                                                                                  |
+| `personalExtension`                                                                                                                                 | [shared.SpendRemedyPersonalExtensionRequest](../../../sdk/models/shared/spendremedypersonalextensionrequest.md)                                     | :heavy_minus_sign:                                                                                                                                  | N/A                                                                                                                                                 |
+| `predecessorTaskId`                                                                                                                                 | *string*                                                                                                                                            | :heavy_minus_sign:                                                                                                                                  | Explicit reconsideration names the current closed request.                                                                                          |
+| `reason`                                                                                                                                            | *string*                                                                                                                                            | :heavy_minus_sign:                                                                                                                                  | The reason field.                                                                                                                                   |
+| `resume`                                                                                                                                            | [shared.SpendRemedyResumeRequest](../../../sdk/models/shared/spendremedyresumerequest.md)                                                           | :heavy_minus_sign:                                                                                                                                  | N/A                                                                                                                                                 |
+| `sharedIncrease`                                                                                                                                    | [shared.SpendRemedySharedIncreaseRequest](../../../sdk/models/shared/spendremedysharedincreaserequest.md)                                           | :heavy_minus_sign:                                                                                                                                  | N/A                                                                                                                                                 |

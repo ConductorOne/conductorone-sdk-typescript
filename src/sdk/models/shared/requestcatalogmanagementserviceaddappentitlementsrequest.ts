@@ -23,14 +23,14 @@ export type RequestCatalogManagementServiceAddAppEntitlementsRequest = {
    * @remarks
    *  By default, this is false and no requests are created.
    */
-  createRequests?: boolean | null | undefined;
+  createRequests?: boolean | undefined;
 };
 
 /** @internal */
 export type RequestCatalogManagementServiceAddAppEntitlementsRequest$Outbound =
   {
     appEntitlements: Array<AppEntitlementRef$Outbound> | null;
-    createRequests?: boolean | null | undefined;
+    createRequests?: boolean | undefined;
   };
 
 /** @internal */
@@ -41,7 +41,7 @@ export const RequestCatalogManagementServiceAddAppEntitlementsRequest$outboundSc
     RequestCatalogManagementServiceAddAppEntitlementsRequest
   > = z.object({
     appEntitlements: z.nullable(z.array(AppEntitlementRef$outboundSchema)),
-    createRequests: z.nullable(z.boolean()).optional(),
+    createRequests: z.boolean().optional(),
   });
 
 export function requestCatalogManagementServiceAddAppEntitlementsRequestToJSON(

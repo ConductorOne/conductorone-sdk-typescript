@@ -30,7 +30,7 @@ export type CreateRevokeTasks = {
   /**
    * The appEntitlementRefsCel field.
    */
-  appEntitlementRefsCel?: string | null | undefined;
+  appEntitlementRefsCel?: string | undefined;
   /**
    * The excludedAppEntitlementRefs field.
    */
@@ -38,19 +38,19 @@ export type CreateRevokeTasks = {
   /**
    * The excludedAppEntitlementRefsCel field.
    */
-  excludedAppEntitlementRefsCel?: string | null | undefined;
+  excludedAppEntitlementRefsCel?: string | undefined;
   /**
    * The revokeAll field.
    */
-  revokeAll?: boolean | null | undefined;
+  revokeAll?: boolean | undefined;
   /**
    * If true, the step will use the subject user of the automation as the subject.
    */
-  useSubjectUser?: boolean | null | undefined;
+  useSubjectUser?: boolean | undefined;
   /**
    * The userIdCel field.
    */
-  userIdCel?: string | null | undefined;
+  userIdCel?: string | undefined;
   userRef?: UserRef | null | undefined;
 };
 
@@ -62,28 +62,28 @@ export const CreateRevokeTasks$inboundSchema: z.ZodType<
 > = z.object({
   appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
     .optional(),
-  appEntitlementRefsCel: z.nullable(z.string()).optional(),
+  appEntitlementRefsCel: z.string().optional(),
   excludedAppEntitlementRefs: z.nullable(
     z.array(AppEntitlementRef$inboundSchema),
   ).optional(),
-  excludedAppEntitlementRefsCel: z.nullable(z.string()).optional(),
-  revokeAll: z.nullable(z.boolean()).optional(),
-  useSubjectUser: z.nullable(z.boolean()).optional(),
-  userIdCel: z.nullable(z.string()).optional(),
+  excludedAppEntitlementRefsCel: z.string().optional(),
+  revokeAll: z.boolean().optional(),
+  useSubjectUser: z.boolean().optional(),
+  userIdCel: z.string().optional(),
   userRef: z.nullable(UserRef$inboundSchema).optional(),
 });
 /** @internal */
 export type CreateRevokeTasks$Outbound = {
   appEntitlementRefs?: Array<AppEntitlementRef$Outbound> | null | undefined;
-  appEntitlementRefsCel?: string | null | undefined;
+  appEntitlementRefsCel?: string | undefined;
   excludedAppEntitlementRefs?:
     | Array<AppEntitlementRef$Outbound>
     | null
     | undefined;
-  excludedAppEntitlementRefsCel?: string | null | undefined;
-  revokeAll?: boolean | null | undefined;
-  useSubjectUser?: boolean | null | undefined;
-  userIdCel?: string | null | undefined;
+  excludedAppEntitlementRefsCel?: string | undefined;
+  revokeAll?: boolean | undefined;
+  useSubjectUser?: boolean | undefined;
+  userIdCel?: string | undefined;
   userRef?: UserRef$Outbound | null | undefined;
 };
 
@@ -95,14 +95,14 @@ export const CreateRevokeTasks$outboundSchema: z.ZodType<
 > = z.object({
   appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
     .optional(),
-  appEntitlementRefsCel: z.nullable(z.string()).optional(),
+  appEntitlementRefsCel: z.string().optional(),
   excludedAppEntitlementRefs: z.nullable(
     z.array(AppEntitlementRef$outboundSchema),
   ).optional(),
-  excludedAppEntitlementRefsCel: z.nullable(z.string()).optional(),
-  revokeAll: z.nullable(z.boolean()).optional(),
-  useSubjectUser: z.nullable(z.boolean()).optional(),
-  userIdCel: z.nullable(z.string()).optional(),
+  excludedAppEntitlementRefsCel: z.string().optional(),
+  revokeAll: z.boolean().optional(),
+  useSubjectUser: z.boolean().optional(),
+  userIdCel: z.string().optional(),
   userRef: z.nullable(UserRef$outboundSchema).optional(),
 });
 

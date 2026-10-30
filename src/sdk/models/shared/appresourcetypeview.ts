@@ -18,7 +18,7 @@ export type AppResourceTypeView = {
   /**
    * JSONPATH expression indicating the location of the App object in the  array
    */
-  appPath?: string | null | undefined;
+  appPath?: string | undefined;
   appResourceType?: AppResourceType | null | undefined;
 };
 
@@ -28,7 +28,7 @@ export const AppResourceTypeView$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appPath: z.nullable(z.string()).optional(),
+  appPath: z.string().optional(),
   appResourceType: z.nullable(AppResourceType$inboundSchema).optional(),
 });
 

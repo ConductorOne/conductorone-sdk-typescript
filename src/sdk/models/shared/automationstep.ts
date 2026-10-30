@@ -180,15 +180,15 @@ export type AutomationStep = {
   /**
    * The skipIfTrueCel field.
    */
-  skipIfTrueCel?: string | null | undefined;
+  skipIfTrueCel?: string | undefined;
   /**
    * The stepDisplayName field.
    */
-  stepDisplayName?: string | null | undefined;
+  stepDisplayName?: string | undefined;
   /**
    * The stepName field.
    */
-  stepName?: string | null | undefined;
+  stepName?: string | undefined;
   storeCredential?: StoreCredential | null | undefined;
   taskAction?: TaskAction | null | undefined;
   unenrollFromAllAccessProfiles?:
@@ -224,9 +224,9 @@ export const AutomationStep$inboundSchema: z.ZodType<
   sendEmail: z.nullable(SendEmail$inboundSchema).optional(),
   sendSlackMessage: z.nullable(SendSlackMessage$inboundSchema).optional(),
   setCredential: z.nullable(SetCredential$inboundSchema).optional(),
-  skipIfTrueCel: z.nullable(z.string()).optional(),
-  stepDisplayName: z.nullable(z.string()).optional(),
-  stepName: z.nullable(z.string()).optional(),
+  skipIfTrueCel: z.string().optional(),
+  stepDisplayName: z.string().optional(),
+  stepName: z.string().optional(),
   storeCredential: z.nullable(StoreCredential$inboundSchema).optional(),
   taskAction: z.nullable(TaskAction$inboundSchema).optional(),
   unenrollFromAllAccessProfiles: z.nullable(
@@ -253,9 +253,9 @@ export type AutomationStep$Outbound = {
   sendEmail?: SendEmail$Outbound | null | undefined;
   sendSlackMessage?: SendSlackMessage$Outbound | null | undefined;
   setCredential?: SetCredential$Outbound | null | undefined;
-  skipIfTrueCel?: string | null | undefined;
-  stepDisplayName?: string | null | undefined;
-  stepName?: string | null | undefined;
+  skipIfTrueCel?: string | undefined;
+  stepDisplayName?: string | undefined;
+  stepName?: string | undefined;
   storeCredential?: StoreCredential$Outbound | null | undefined;
   taskAction?: TaskAction$Outbound | null | undefined;
   unenrollFromAllAccessProfiles?:
@@ -293,9 +293,9 @@ export const AutomationStep$outboundSchema: z.ZodType<
   sendEmail: z.nullable(SendEmail$outboundSchema).optional(),
   sendSlackMessage: z.nullable(SendSlackMessage$outboundSchema).optional(),
   setCredential: z.nullable(SetCredential$outboundSchema).optional(),
-  skipIfTrueCel: z.nullable(z.string()).optional(),
-  stepDisplayName: z.nullable(z.string()).optional(),
-  stepName: z.nullable(z.string()).optional(),
+  skipIfTrueCel: z.string().optional(),
+  stepDisplayName: z.string().optional(),
+  stepName: z.string().optional(),
   storeCredential: z.nullable(StoreCredential$outboundSchema).optional(),
   taskAction: z.nullable(TaskAction$outboundSchema).optional(),
   unenrollFromAllAccessProfiles: z.nullable(

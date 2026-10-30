@@ -16,19 +16,19 @@ export type TaskActionsServiceSkipStepRequest = {
   /**
    * The comment attached to the request.
    */
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   expandMask?: TaskExpandMask | null | undefined;
   /**
    * The ID of the policy step to skip.
    */
-  policyStepId: string | null;
+  policyStepId: string;
 };
 
 /** @internal */
 export type TaskActionsServiceSkipStepRequest$Outbound = {
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
-  policyStepId: string | null;
+  policyStepId: string;
 };
 
 /** @internal */
@@ -37,9 +37,9 @@ export const TaskActionsServiceSkipStepRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskActionsServiceSkipStepRequest
 > = z.object({
-  comment: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-  policyStepId: z.nullable(z.string()),
+  policyStepId: z.string(),
 });
 
 export function taskActionsServiceSkipStepRequestToJSON(

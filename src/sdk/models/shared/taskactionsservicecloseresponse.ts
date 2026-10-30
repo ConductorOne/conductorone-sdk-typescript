@@ -34,7 +34,7 @@ export type TaskActionsServiceCloseResponse = {
   /**
    * The ID of the task close action created by this request.
    */
-  taskActionId?: string | null | undefined;
+  taskActionId?: string | undefined;
   taskView?: TaskView | null | undefined;
 };
 
@@ -82,7 +82,7 @@ export const TaskActionsServiceCloseResponse$inboundSchema: z.ZodType<
       z.lazy(() => TaskActionsServiceCloseResponseExpanded$inboundSchema),
     ),
   ).optional(),
-  taskActionId: z.nullable(z.string()).optional(),
+  taskActionId: z.string().optional(),
   taskView: z.nullable(TaskView$inboundSchema).optional(),
 });
 

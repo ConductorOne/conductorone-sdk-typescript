@@ -1,6 +1,6 @@
 # MCPAccessProfileToolBindingHistoryItemChangeKind
 
-The changeKind field.
+Whether this binding was added or removed.
 
 ## Example Usage
 

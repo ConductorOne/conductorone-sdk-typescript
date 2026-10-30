@@ -23,7 +23,7 @@ export type C1ApiAIGovernanceV1AIGovernanceSettingsServiceGetResponse = {
    */
   rawResponse: Response;
   /**
-   * Successful response
+   * GetAIGovernanceSettingsResponse contains the tenant's AI governance settings.
    */
   getAIGovernanceSettingsResponse?:
     | shared.GetAIGovernanceSettingsResponse

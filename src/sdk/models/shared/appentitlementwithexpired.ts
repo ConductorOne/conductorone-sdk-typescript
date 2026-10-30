@@ -21,16 +21,16 @@ export type AppEntitlementWithExpired = {
   /**
    * The ID of the app entitlement.
    */
-  appEntitlementId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
   /**
    * The ID of the app that contains the entitlement.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   appUser?: AppUser | null | undefined;
   /**
    * The ID of the app user who holds the grant.
    */
-  appUserId?: string | null | undefined;
+  appUserId?: string | undefined;
   discovered?: Date | null | undefined;
   expired?: Date | null | undefined;
   /**
@@ -50,10 +50,10 @@ export const AppEntitlementWithExpired$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
+  appEntitlementId: z.string().optional(),
+  appId: z.string().optional(),
   appUser: z.nullable(AppUser$inboundSchema).optional(),
-  appUserId: z.nullable(z.string()).optional(),
+  appUserId: z.string().optional(),
   discovered: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),

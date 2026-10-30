@@ -41,7 +41,7 @@ export type AccessReviewServiceListResponse = {
   /**
    * Token to retrieve the next page, or empty if there are no more results.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -89,7 +89,7 @@ export const AccessReviewServiceListResponse$inboundSchema: z.ZodType<
     ),
   ).optional(),
   list: z.nullable(z.array(AccessReviewView$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function accessReviewServiceListResponseFromJSON(

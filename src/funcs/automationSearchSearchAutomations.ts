@@ -31,6 +31,7 @@ import { Result } from "../sdk/types/fp.js";
  *
  * @remarks
  * Search for automations matching the provided filters, including query text, template refs, app, and trigger types.
+ *  Each Automation row is heavy (carries its full triggers and steps) — request a small page_size (≤10) to keep responses small.
  */
 export function automationSearchSearchAutomations(
   client: ConductoroneSDKTypescriptCore,

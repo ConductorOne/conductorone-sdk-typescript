@@ -6,15 +6,49 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AnnotationMatch,
+  AnnotationMatch$inboundSchema,
+  AnnotationMatch$Outbound,
+  AnnotationMatch$outboundSchema,
+} from "./annotationmatch.js";
+import {
+  ResourceProfileMatch,
+  ResourceProfileMatch$inboundSchema,
+  ResourceProfileMatch$Outbound,
+  ResourceProfileMatch$outboundSchema,
+} from "./resourceprofilematch.js";
+import {
+  ResourceTypeRef,
+  ResourceTypeRef$inboundSchema,
+  ResourceTypeRef$Outbound,
+  ResourceTypeRef$outboundSchema,
+} from "./resourcetyperef.js";
 
 /**
- * The AppSelectionCriteriaScope message.
+ * Selects entitlements matching every set field; values within a field are alternatives.
  */
 export type AppSelectionCriteriaScope = {
+  /**
+   * Entitlements whose annotations match at least one entry (exact key and value). Requires app_ids; applies across every selected app.
+   */
+  annotationMatches?: Array<AnnotationMatch> | null | undefined;
+  /**
+   * The appIds field.
+   */
+  appIds?: Array<string> | null | undefined;
   /**
    * The complianceFrameworkAttributeValueIds field.
    */
   complianceFrameworkAttributeValueIds?: Array<string> | null | undefined;
+  /**
+   * Entitlements whose resource profile matches at least one entry. Requires app_ids; applies across every selected app.
+   */
+  resourceProfileMatches?: Array<ResourceProfileMatch> | null | undefined;
+  /**
+   * The resourceTypeRefs field.
+   */
+  resourceTypeRefs?: Array<ResourceTypeRef> | null | undefined;
   /**
    * The riskLevelAttributeValueIds field.
    */
@@ -27,13 +61,28 @@ export const AppSelectionCriteriaScope$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  annotationMatches: z.nullable(z.array(AnnotationMatch$inboundSchema))
+    .optional(),
+  appIds: z.nullable(z.array(z.string())).optional(),
   complianceFrameworkAttributeValueIds: z.nullable(z.array(z.string()))
+    .optional(),
+  resourceProfileMatches: z.nullable(
+    z.array(ResourceProfileMatch$inboundSchema),
+  ).optional(),
+  resourceTypeRefs: z.nullable(z.array(ResourceTypeRef$inboundSchema))
     .optional(),
   riskLevelAttributeValueIds: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
 export type AppSelectionCriteriaScope$Outbound = {
+  annotationMatches?: Array<AnnotationMatch$Outbound> | null | undefined;
+  appIds?: Array<string> | null | undefined;
   complianceFrameworkAttributeValueIds?: Array<string> | null | undefined;
+  resourceProfileMatches?:
+    | Array<ResourceProfileMatch$Outbound>
+    | null
+    | undefined;
+  resourceTypeRefs?: Array<ResourceTypeRef$Outbound> | null | undefined;
   riskLevelAttributeValueIds?: Array<string> | null | undefined;
 };
 
@@ -43,7 +92,15 @@ export const AppSelectionCriteriaScope$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppSelectionCriteriaScope
 > = z.object({
+  annotationMatches: z.nullable(z.array(AnnotationMatch$outboundSchema))
+    .optional(),
+  appIds: z.nullable(z.array(z.string())).optional(),
   complianceFrameworkAttributeValueIds: z.nullable(z.array(z.string()))
+    .optional(),
+  resourceProfileMatches: z.nullable(
+    z.array(ResourceProfileMatch$outboundSchema),
+  ).optional(),
+  resourceTypeRefs: z.nullable(z.array(ResourceTypeRef$outboundSchema))
     .optional(),
   riskLevelAttributeValueIds: z.nullable(z.array(z.string())).optional(),
 });

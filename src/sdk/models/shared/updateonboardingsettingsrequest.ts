@@ -5,9 +5,45 @@
 import * as z from "zod/v3";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
+import {
+  McpOnboardingTargetList,
+  McpOnboardingTargetList$Outbound,
+  McpOnboardingTargetList$outboundSchema,
+} from "./mcponboardingtargetlist.js";
 
 /**
- * The new onboarding status to set.
+ * The new MCP onboarding status to set. Omit (or UNSPECIFIED) to leave it
+ *
+ * @remarks
+ *  unchanged. Setting NOT_STARTED restarts the briefing and clears the stored
+ *  mcp_onboarding_goal and mcp_onboarding_targets, unless this same request also
+ *  sets them (those win).
+ */
+export const UpdateOnboardingSettingsRequestMcpOnboardingStatus = {
+  McpOnboardingStatusUnspecified: "MCP_ONBOARDING_STATUS_UNSPECIFIED",
+  McpOnboardingStatusNotStarted: "MCP_ONBOARDING_STATUS_NOT_STARTED",
+  McpOnboardingStatusInProgress: "MCP_ONBOARDING_STATUS_IN_PROGRESS",
+  McpOnboardingStatusComplete: "MCP_ONBOARDING_STATUS_COMPLETE",
+  McpOnboardingStatusDismissed: "MCP_ONBOARDING_STATUS_DISMISSED",
+} as const;
+/**
+ * The new MCP onboarding status to set. Omit (or UNSPECIFIED) to leave it
+ *
+ * @remarks
+ *  unchanged. Setting NOT_STARTED restarts the briefing and clears the stored
+ *  mcp_onboarding_goal and mcp_onboarding_targets, unless this same request also
+ *  sets them (those win).
+ */
+export type UpdateOnboardingSettingsRequestMcpOnboardingStatus = OpenEnum<
+  typeof UpdateOnboardingSettingsRequestMcpOnboardingStatus
+>;
+
+/**
+ * The new onboarding status to set. UNSPECIFIED leaves the core onboarding
+ *
+ * @remarks
+ *  status unchanged (set mcp_onboarding_status alone to retire the AIAM
+ *  briefing without touching the core wizard).
  */
 export const UpdateOnboardingSettingsRequestStatus = {
   OnboardingStatusUnspecified: "ONBOARDING_STATUS_UNSPECIFIED",
@@ -17,7 +53,11 @@ export const UpdateOnboardingSettingsRequestStatus = {
   OnboardingStatusDismissed: "ONBOARDING_STATUS_DISMISSED",
 } as const;
 /**
- * The new onboarding status to set.
+ * The new onboarding status to set. UNSPECIFIED leaves the core onboarding
+ *
+ * @remarks
+ *  status unchanged (set mcp_onboarding_status alone to retire the AIAM
+ *  briefing without touching the core wizard).
  */
 export type UpdateOnboardingSettingsRequestStatus = OpenEnum<
   typeof UpdateOnboardingSettingsRequestStatus
@@ -30,12 +70,43 @@ export type UpdateOnboardingSettingsRequest = {
   /**
    * The identifier of the onboarding conversation thread to associate.
    */
-  conversationId?: string | null | undefined;
+  conversationId?: string | undefined;
   /**
-   * The new onboarding status to set.
+   * The admin's AIAM onboarding goal. Omit to leave unchanged; set to "" to clear.
    */
-  status?: UpdateOnboardingSettingsRequestStatus | null | undefined;
+  mcpOnboardingGoal?: string | null | undefined;
+  /**
+   * The new MCP onboarding status to set. Omit (or UNSPECIFIED) to leave it
+   *
+   * @remarks
+   *  unchanged. Setting NOT_STARTED restarts the briefing and clears the stored
+   *  mcp_onboarding_goal and mcp_onboarding_targets, unless this same request also
+   *  sets them (those win).
+   */
+  mcpOnboardingStatus?:
+    | UpdateOnboardingSettingsRequestMcpOnboardingStatus
+    | null
+    | undefined;
+  mcpOnboardingTargets?: McpOnboardingTargetList | null | undefined;
+  /**
+   * The new onboarding status to set. UNSPECIFIED leaves the core onboarding
+   *
+   * @remarks
+   *  status unchanged (set mcp_onboarding_status alone to retire the AIAM
+   *  briefing without touching the core wizard).
+   */
+  status?: UpdateOnboardingSettingsRequestStatus | undefined;
 };
+
+/** @internal */
+export const UpdateOnboardingSettingsRequestMcpOnboardingStatus$outboundSchema:
+  z.ZodType<
+    string,
+    z.ZodTypeDef,
+    UpdateOnboardingSettingsRequestMcpOnboardingStatus
+  > = openEnums.outboundSchema(
+    UpdateOnboardingSettingsRequestMcpOnboardingStatus,
+  );
 
 /** @internal */
 export const UpdateOnboardingSettingsRequestStatus$outboundSchema: z.ZodType<
@@ -46,8 +117,11 @@ export const UpdateOnboardingSettingsRequestStatus$outboundSchema: z.ZodType<
 
 /** @internal */
 export type UpdateOnboardingSettingsRequest$Outbound = {
-  conversationId?: string | null | undefined;
-  status?: string | null | undefined;
+  conversationId?: string | undefined;
+  mcpOnboardingGoal?: string | null | undefined;
+  mcpOnboardingStatus?: string | null | undefined;
+  mcpOnboardingTargets?: McpOnboardingTargetList$Outbound | null | undefined;
+  status?: string | undefined;
 };
 
 /** @internal */
@@ -56,9 +130,14 @@ export const UpdateOnboardingSettingsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateOnboardingSettingsRequest
 > = z.object({
-  conversationId: z.nullable(z.string()).optional(),
-  status: z.nullable(UpdateOnboardingSettingsRequestStatus$outboundSchema)
+  conversationId: z.string().optional(),
+  mcpOnboardingGoal: z.nullable(z.string()).optional(),
+  mcpOnboardingStatus: z.nullable(
+    UpdateOnboardingSettingsRequestMcpOnboardingStatus$outboundSchema,
+  ).optional(),
+  mcpOnboardingTargets: z.nullable(McpOnboardingTargetList$outboundSchema)
     .optional(),
+  status: UpdateOnboardingSettingsRequestStatus$outboundSchema.optional(),
 });
 
 export function updateOnboardingSettingsRequestToJSON(

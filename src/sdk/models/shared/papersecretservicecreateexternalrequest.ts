@@ -30,6 +30,19 @@ export type PaperSecretServiceCreateExternalRequestInputFormat = OpenEnum<
 >;
 
 /**
+ * Exact Age suite required for this submission. UNSPECIFIED preserves legacy X25519 behavior.
+ */
+export const RequiredAgeSuite = {
+  AgeSuiteUnspecified: "AGE_SUITE_UNSPECIFIED",
+  AgeSuiteX25519: "AGE_SUITE_X25519",
+  AgeSuiteMlkem768X25519: "AGE_SUITE_MLKEM768X25519",
+} as const;
+/**
+ * Exact Age suite required for this submission. UNSPECIFIED preserves legacy X25519 behavior.
+ */
+export type RequiredAgeSuite = OpenEnum<typeof RequiredAgeSuite>;
+
+/**
  * Secret type: TEXT or FILE.
  *
  * @remarks
@@ -66,37 +79,38 @@ export type PaperSecretServiceCreateExternalRequest = {
   /**
    * For FILE secrets: MIME content type of the original file. Ignored for TEXT secrets.
    */
-  contentType?: string | null | undefined;
+  contentType?: string | undefined;
   /**
    * Optional cleartext label visible to the creator in "My Secrets" view.
    *
    * @remarks
    *  Not encrypted — do not put sensitive data here.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   expiresIn?: string | null | undefined;
   /**
    * For FILE secrets: expected file size in bytes (max 1GB). Ignored for TEXT secrets.
    */
-  fileSize?: number | null | undefined;
+  fileSize?: number | undefined;
   /**
    * For FILE secrets: original filename (sanitized server-side). Ignored for TEXT secrets.
    */
-  filename?: string | null | undefined;
+  filename?: string | undefined;
   /**
    * For TEXT secrets: hint about the plaintext format (e.g., JSON, YAML, key-value).
    *
    * @remarks
    *  Used by the viewer UI for syntax highlighting. Does not affect encryption.
    */
-  inputFormat?:
-    | PaperSecretServiceCreateExternalRequestInputFormat
-    | null
-    | undefined;
+  inputFormat?: PaperSecretServiceCreateExternalRequestInputFormat | undefined;
   /**
    * Maximum number of views before the secret is burned (0 = unlimited).
    */
-  maxViews?: number | null | undefined;
+  maxViews?: number | undefined;
+  /**
+   * Exact Age suite required for this submission. UNSPECIFIED preserves legacy X25519 behavior.
+   */
+  requiredAgeSuite?: RequiredAgeSuite | undefined;
   /**
    * Secret type: TEXT or FILE.
    *
@@ -104,10 +118,7 @@ export type PaperSecretServiceCreateExternalRequest = {
    *  TEXT secrets use SetTextContent to upload encrypted content (max 64KB).
    *  FILE secrets use the upload_url from CreateResponse to upload encrypted content (max 1GB).
    */
-  secretType?:
-    | PaperSecretServiceCreateExternalRequestSecretType
-    | null
-    | undefined;
+  secretType?: PaperSecretServiceCreateExternalRequestSecretType | undefined;
 };
 
 /** @internal */
@@ -119,6 +130,13 @@ export const PaperSecretServiceCreateExternalRequestInputFormat$outboundSchema:
   > = openEnums.outboundSchema(
     PaperSecretServiceCreateExternalRequestInputFormat,
   );
+
+/** @internal */
+export const RequiredAgeSuite$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  RequiredAgeSuite
+> = openEnums.outboundSchema(RequiredAgeSuite);
 
 /** @internal */
 export const PaperSecretServiceCreateExternalRequestSecretType$outboundSchema:
@@ -133,14 +151,15 @@ export const PaperSecretServiceCreateExternalRequestSecretType$outboundSchema:
 /** @internal */
 export type PaperSecretServiceCreateExternalRequest$Outbound = {
   allowedEmails?: Array<string> | null | undefined;
-  contentType?: string | null | undefined;
-  displayName?: string | null | undefined;
+  contentType?: string | undefined;
+  displayName?: string | undefined;
   expiresIn?: string | null | undefined;
-  fileSize?: string | null | undefined;
-  filename?: string | null | undefined;
-  inputFormat?: string | null | undefined;
-  maxViews?: number | null | undefined;
-  secretType?: string | null | undefined;
+  fileSize?: string | undefined;
+  filename?: string | undefined;
+  inputFormat?: string | undefined;
+  maxViews?: number | undefined;
+  requiredAgeSuite?: string | undefined;
+  secretType?: string | undefined;
 };
 
 /** @internal */
@@ -150,18 +169,17 @@ export const PaperSecretServiceCreateExternalRequest$outboundSchema: z.ZodType<
   PaperSecretServiceCreateExternalRequest
 > = z.object({
   allowedEmails: z.nullable(z.array(z.string())).optional(),
-  contentType: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  contentType: z.string().optional(),
+  displayName: z.string().optional(),
   expiresIn: z.nullable(z.string()).optional(),
-  fileSize: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
-  filename: z.nullable(z.string()).optional(),
-  inputFormat: z.nullable(
-    PaperSecretServiceCreateExternalRequestInputFormat$outboundSchema,
-  ).optional(),
-  maxViews: z.nullable(z.number().int()).optional(),
-  secretType: z.nullable(
-    PaperSecretServiceCreateExternalRequestSecretType$outboundSchema,
-  ).optional(),
+  fileSize: z.number().int().transform(v => `${v}`).optional(),
+  filename: z.string().optional(),
+  inputFormat: PaperSecretServiceCreateExternalRequestInputFormat$outboundSchema
+    .optional(),
+  maxViews: z.number().int().optional(),
+  requiredAgeSuite: RequiredAgeSuite$outboundSchema.optional(),
+  secretType: PaperSecretServiceCreateExternalRequestSecretType$outboundSchema
+    .optional(),
 });
 
 export function paperSecretServiceCreateExternalRequestToJSON(

@@ -14,15 +14,15 @@ export type DelegatedProvision = {
   /**
    * The AppID of the entitlement to delegate provisioning to.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The ID of the entitlement we are delegating provisioning to.
    */
-  entitlementId?: string | null | undefined;
+  entitlementId?: string | undefined;
   /**
    * If true, a binding will be automatically created from the entitlement of the parent app.
    */
-  implicit?: boolean | null | undefined;
+  implicit?: boolean | undefined;
 };
 
 /** @internal */
@@ -31,15 +31,15 @@ export const DelegatedProvision$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  entitlementId: z.nullable(z.string()).optional(),
-  implicit: z.nullable(z.boolean()).optional(),
+  appId: z.string().optional(),
+  entitlementId: z.string().optional(),
+  implicit: z.boolean().optional(),
 });
 /** @internal */
 export type DelegatedProvision$Outbound = {
-  appId?: string | null | undefined;
-  entitlementId?: string | null | undefined;
-  implicit?: boolean | null | undefined;
+  appId?: string | undefined;
+  entitlementId?: string | undefined;
+  implicit?: boolean | undefined;
 };
 
 /** @internal */
@@ -48,9 +48,9 @@ export const DelegatedProvision$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DelegatedProvision
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  entitlementId: z.nullable(z.string()).optional(),
-  implicit: z.nullable(z.boolean()).optional(),
+  appId: z.string().optional(),
+  entitlementId: z.string().optional(),
+  implicit: z.boolean().optional(),
 });
 
 export function delegatedProvisionToJSON(

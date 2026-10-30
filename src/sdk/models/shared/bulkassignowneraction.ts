@@ -13,11 +13,19 @@ import {
  * The BulkAssignOwnerAction message.
  */
 export type BulkAssignOwnerAction = {
+  /**
+   * Empty is allowed: rpc.go falls back to the deprecated owner field's
+   *
+   * @remarks
+   *  identity_user_id arm when this is unset.
+   */
+  assigneeIdentityUserId?: string | undefined;
   owner?: FindingOwnerRef | null | undefined;
 };
 
 /** @internal */
 export type BulkAssignOwnerAction$Outbound = {
+  assigneeIdentityUserId?: string | undefined;
   owner?: FindingOwnerRef$Outbound | null | undefined;
 };
 
@@ -27,6 +35,7 @@ export const BulkAssignOwnerAction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BulkAssignOwnerAction
 > = z.object({
+  assigneeIdentityUserId: z.string().optional(),
   owner: z.nullable(FindingOwnerRef$outboundSchema).optional(),
 });
 

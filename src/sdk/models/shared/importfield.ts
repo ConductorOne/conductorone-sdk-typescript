@@ -19,7 +19,7 @@ export type ImportField = {
   /**
    * The secret field.
    */
-  secret?: boolean | null | undefined;
+  secret?: boolean | undefined;
   valueValidator?: StringRules | null | undefined;
 };
 
@@ -30,7 +30,7 @@ export const ImportField$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   allowedExtensions: z.nullable(z.array(z.string())).optional(),
-  secret: z.nullable(z.boolean()).optional(),
+  secret: z.boolean().optional(),
   valueValidator: z.nullable(StringRules$inboundSchema).optional(),
 });
 

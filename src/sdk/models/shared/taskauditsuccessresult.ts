@@ -47,7 +47,7 @@ export type TaskAuditSuccessResult = {
    *  TaskAuditErrorResult.error_reason and TaskAuditCancelledResult.cancel_reason
    *  for consistency.
    */
-  successReason?: string | null | undefined;
+  successReason?: string | undefined;
 };
 
 /** @internal */
@@ -87,7 +87,7 @@ export const TaskAuditSuccessResult$inboundSchema: z.ZodType<
     z.array(z.lazy(() => TaskAuditSuccessResultAnnotations$inboundSchema)),
   ).optional(),
   effects: z.nullable(z.array(ConnectorActionEffect$inboundSchema)).optional(),
-  successReason: z.nullable(z.string()).optional(),
+  successReason: z.string().optional(),
 });
 
 export function taskAuditSuccessResultFromJSON(

@@ -17,11 +17,11 @@ export type SSFOutboundAuthOAuth2 = {
   /**
    * The clientId field.
    */
-  clientId?: string | null | undefined;
+  clientId?: string | undefined;
   /**
    * The clientSecret field.
    */
-  clientSecret?: string | null | undefined;
+  clientSecret?: string | undefined;
   /**
    * The scopes field.
    */
@@ -29,7 +29,7 @@ export type SSFOutboundAuthOAuth2 = {
   /**
    * The tokenUrl field.
    */
-  tokenUrl?: string | null | undefined;
+  tokenUrl?: string | undefined;
 };
 
 /** @internal */
@@ -38,17 +38,17 @@ export const SSFOutboundAuthOAuth2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  clientId: z.nullable(z.string()).optional(),
-  clientSecret: z.nullable(z.string()).optional(),
+  clientId: z.string().optional(),
+  clientSecret: z.string().optional(),
   scopes: z.nullable(z.array(z.string())).optional(),
-  tokenUrl: z.nullable(z.string()).optional(),
+  tokenUrl: z.string().optional(),
 });
 /** @internal */
 export type SSFOutboundAuthOAuth2$Outbound = {
-  clientId?: string | null | undefined;
-  clientSecret?: string | null | undefined;
+  clientId?: string | undefined;
+  clientSecret?: string | undefined;
   scopes?: Array<string> | null | undefined;
-  tokenUrl?: string | null | undefined;
+  tokenUrl?: string | undefined;
 };
 
 /** @internal */
@@ -57,10 +57,10 @@ export const SSFOutboundAuthOAuth2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SSFOutboundAuthOAuth2
 > = z.object({
-  clientId: z.nullable(z.string()).optional(),
-  clientSecret: z.nullable(z.string()).optional(),
+  clientId: z.string().optional(),
+  clientSecret: z.string().optional(),
   scopes: z.nullable(z.array(z.string())).optional(),
-  tokenUrl: z.nullable(z.string()).optional(),
+  tokenUrl: z.string().optional(),
 });
 
 export function ssfOutboundAuthOAuth2ToJSON(

@@ -30,7 +30,7 @@ export type AccountFilter = {
   /**
    * The accountType field.
    */
-  accountType?: AccountType | null | undefined;
+  accountType?: AccountType | undefined;
 };
 
 /** @internal */
@@ -52,11 +52,11 @@ export const AccountFilter$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accountType: z.nullable(AccountType$inboundSchema).optional(),
+  accountType: AccountType$inboundSchema.optional(),
 });
 /** @internal */
 export type AccountFilter$Outbound = {
-  accountType?: string | null | undefined;
+  accountType?: string | undefined;
 };
 
 /** @internal */
@@ -65,7 +65,7 @@ export const AccountFilter$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AccountFilter
 > = z.object({
-  accountType: z.nullable(AccountType$outboundSchema).optional(),
+  accountType: AccountType$outboundSchema.optional(),
 });
 
 export function accountFilterToJSON(accountFilter: AccountFilter): string {

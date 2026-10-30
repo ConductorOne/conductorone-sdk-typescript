@@ -14,7 +14,7 @@ export type TaskAuditExpressionPolicyStepError = {
   /**
    * The error field.
    */
-  error?: string | null | undefined;
+  error?: string | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const TaskAuditExpressionPolicyStepError$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  error: z.nullable(z.string()).optional(),
+  error: z.string().optional(),
 });
 
 export function taskAuditExpressionPolicyStepErrorFromJSON(

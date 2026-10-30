@@ -1,0 +1,28 @@
+# ToolGate
+
+The ToolGate message.
+
+## Example Usage
+
+```typescript
+import { ToolGate } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: ToolGate = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `deletedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `description`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | The description field.                                                                        |
+| `displayName`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | The displayName field.                                                                        |
+| `enabled`                                                                                     | *boolean*                                                                                     | :heavy_minus_sign:                                                                            | The enabled field.                                                                            |
+| `filter`                                                                                      | [shared.ToolGateFilter](../../../sdk/models/shared/toolgatefilter.md)                         | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `grantPolicyId`                                                                               | *string*                                                                                      | :heavy_minus_sign:                                                                            | The grantPolicyId field.                                                                      |
+| `id`                                                                                          | *string*                                                                                      | :heavy_minus_sign:                                                                            | The id field.                                                                                 |
+| `managedByGuardrails`                                                                         | *boolean*                                                                                     | :heavy_minus_sign:                                                                            | The managedByGuardrails field.                                                                |
+| `priority`                                                                                    | *number*                                                                                      | :heavy_minus_sign:                                                                            | The priority field.                                                                           |
+| `tenantId`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | The tenantId field.                                                                           |
+| `updatedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |

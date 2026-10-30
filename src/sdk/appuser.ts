@@ -5,6 +5,7 @@
 import { appUserList } from "../funcs/appUserList.js";
 import { appUserListAppUserCredentials } from "../funcs/appUserListAppUserCredentials.js";
 import { appUserListAppUsersForUser } from "../funcs/appUserListAppUsersForUser.js";
+import { appUserListOwnedServiceAccounts } from "../funcs/appUserListOwnedServiceAccounts.js";
 import { appUserSearch } from "../funcs/appUserSearch.js";
 import { appUserUpdate } from "../funcs/appUserUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -13,6 +14,26 @@ import * as shared from "./models/shared/index.js";
 import { unwrapAsync } from "./types/fp.js";
 
 export class AppUser extends ClientSDK {
+  /**
+   * List Owned Service Accounts
+   *
+   * @remarks
+   * ListOwnedServiceAccounts returns the service accounts owned by the calling
+   *  user. The owner is the authenticated caller; it is not accepted as an input.
+   */
+  async listOwnedServiceAccounts(
+    request?: shared.ListOwnedServiceAccountsRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiAppV1AppUserServiceListOwnedServiceAccountsResponse
+  > {
+    return unwrapAsync(appUserListOwnedServiceAccounts(
+      this,
+      request,
+      options,
+    ));
+  }
+
   /**
    * List
    *

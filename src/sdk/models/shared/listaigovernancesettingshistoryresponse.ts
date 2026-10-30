@@ -12,17 +12,20 @@ import {
 } from "./aigovernancesettingshistoryentry.js";
 
 /**
- * The ListAIGovernanceSettingsHistoryResponse message.
+ * ListAIGovernanceSettingsHistoryResponse contains a page of AI governance
+ *
+ * @remarks
+ *  settings change-history entries, newest first.
  */
 export type ListAIGovernanceSettingsHistoryResponse = {
   /**
-   * The list field.
+   * The page of history entries, newest first.
    */
   list?: Array<AIGovernanceSettingsHistoryEntry> | null | undefined;
   /**
-   * The nextPageToken field.
+   * Pagination token for the next page, or empty if there are no more results.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -33,7 +36,7 @@ export const ListAIGovernanceSettingsHistoryResponse$inboundSchema: z.ZodType<
 > = z.object({
   list: z.nullable(z.array(AIGovernanceSettingsHistoryEntry$inboundSchema))
     .optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function listAIGovernanceSettingsHistoryResponseFromJSON(

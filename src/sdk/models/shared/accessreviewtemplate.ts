@@ -27,6 +27,18 @@ import {
   AccessReviewScopeV2$outboundSchema,
 } from "./accessreviewscopev2.js";
 import {
+  CampaignSchedule,
+  CampaignSchedule$inboundSchema,
+  CampaignSchedule$Outbound,
+  CampaignSchedule$outboundSchema,
+} from "./campaignschedule.js";
+import {
+  MSTeamsChannel,
+  MSTeamsChannel$inboundSchema,
+  MSTeamsChannel$Outbound,
+  MSTeamsChannel$outboundSchema,
+} from "./msteamschannel.js";
+import {
   NotificationConfig,
   NotificationConfig$inboundSchema,
   NotificationConfig$Outbound,
@@ -97,6 +109,8 @@ export const AccessReviewTemplateDefaultView = {
   AccessReviewViewTypeByUser: "ACCESS_REVIEW_VIEW_TYPE_BY_USER",
   AccessReviewViewTypeUnstructured: "ACCESS_REVIEW_VIEW_TYPE_UNSTRUCTURED",
   AccessReviewViewTypeByResource: "ACCESS_REVIEW_VIEW_TYPE_BY_RESOURCE",
+  AccessReviewViewTypeByAccessProfile:
+    "ACCESS_REVIEW_VIEW_TYPE_BY_ACCESS_PROFILE",
 } as const;
 /**
  * The defaultView field.
@@ -116,6 +130,9 @@ export const AccessReviewTemplateScopeType = {
     "ACCESS_REVIEW_SCOPE_TYPE_BY_ACCESS_CONFLICTS",
   AccessReviewScopeTypeByResource: "ACCESS_REVIEW_SCOPE_TYPE_BY_RESOURCE",
   AccessReviewScopeTypeByInheritance: "ACCESS_REVIEW_SCOPE_TYPE_BY_INHERITANCE",
+  AccessReviewScopeTypeByUsers: "ACCESS_REVIEW_SCOPE_TYPE_BY_USERS",
+  AccessReviewScopeTypeByAccessProfiles:
+    "ACCESS_REVIEW_SCOPE_TYPE_BY_ACCESS_PROFILES",
 } as const;
 /**
  * The scopeType field.
@@ -132,16 +149,14 @@ export type AccessReviewTemplateScopeType = OpenEnum<
  *
  * This message contains a oneof named slack_channel_details. Only a single field of the following list may be set at a time:
  *   - slackChannel
+ *   - msTeamsChannel
  */
 export type AccessReviewTemplate = {
   accessReviewDuration?: string | null | undefined;
   /**
    * The accuracyIssueAction field.
    */
-  accuracyIssueAction?:
-    | AccessReviewTemplateAccuracyIssueAction
-    | null
-    | undefined;
+  accuracyIssueAction?: AccessReviewTemplateAccuracyIssueAction | undefined;
   /**
    * Key/value metadata. Up to 16 entries; keys 1-128 chars; values 0-256
    *
@@ -161,78 +176,80 @@ export type AccessReviewTemplate = {
    * @remarks
    *  start date and access_review_duration will be used to calculate the scheduled close date
    */
-  autoCloseCampaign?: boolean | null | undefined;
+  autoCloseCampaign?: boolean | undefined;
   /**
    * The autoCloseDecision field.
    */
-  autoCloseDecision?: AccessReviewTemplateAutoCloseDecision | null | undefined;
+  autoCloseDecision?: AccessReviewTemplateAutoCloseDecision | undefined;
   /**
    * auto generate report when campaign is closed
    */
-  autoGenerateReport?: boolean | null | undefined;
+  autoGenerateReport?: boolean | undefined;
   /**
    * Auto-start configuration
    *
    * @remarks
    *  next_scheduled_campaign_at will be used as the scheduled start date
    */
-  autoStartCampaign?: boolean | null | undefined;
+  autoStartCampaign?: boolean | undefined;
+  campaignSchedule?: CampaignSchedule | null | undefined;
   columnConfig?: AccessReviewColumnConfig | null | undefined;
   createdAt?: Date | null | undefined;
   /**
    * The defaultView field.
    */
-  defaultView?: AccessReviewTemplateDefaultView | null | undefined;
+  defaultView?: AccessReviewTemplateDefaultView | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * An optional description providing context about this template.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The human-readable name of this template.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The exemptCertifiedAccessConflicts field.
    */
-  exemptCertifiedAccessConflicts?: boolean | null | undefined;
+  exemptCertifiedAccessConflicts?: boolean | undefined;
   /**
    * The unique identifier of this template.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   inclusionScope?: AccessReviewInclusionScope | null | undefined;
   /**
    * Whether automatic campaign creation on the recurrence schedule is enabled.
    */
-  isCampaignScheduleEnabled?: boolean | null | undefined;
+  isCampaignScheduleEnabled?: boolean | undefined;
+  msTeamsChannel?: MSTeamsChannel | null | undefined;
   nextScheduledCampaignAt?: Date | null | undefined;
   notificationConfig?: NotificationConfig | null | undefined;
   /**
    * The number of campaigns that have been created from this template.
    */
-  occurrences?: number | null | undefined;
+  occurrences?: number | undefined;
   /**
    * The ID of the default review policy applied to campaigns created from this template.
    */
-  policyId?: string | null | undefined;
+  policyId?: string | undefined;
   recurrenceRule?: RecurrenceRule | null | undefined;
   /**
    * The reviewInstructions field.
    */
-  reviewInstructions?: string | null | undefined;
+  reviewInstructions?: string | undefined;
   reviewerAttributeConfig?: ReviewerAttributeConfig | null | undefined;
   scope?: AccessReviewScopeV2 | null | undefined;
   /**
    * The scopeType field.
    */
-  scopeType?: AccessReviewTemplateScopeType | null | undefined;
+  scopeType?: AccessReviewTemplateScopeType | undefined;
   signatureConfig?: ReviewSignatureConfig | null | undefined;
   slackChannel?: SlackChannel | null | undefined;
   updatedAt?: Date | null | undefined;
   /**
    * The usePolicyOverride field.
    */
-  usePolicyOverride?: boolean | null | undefined;
+  usePolicyOverride?: boolean | undefined;
 };
 
 /**
@@ -243,16 +260,14 @@ export type AccessReviewTemplate = {
  *
  * This message contains a oneof named slack_channel_details. Only a single field of the following list may be set at a time:
  *   - slackChannel
+ *   - msTeamsChannel
  */
 export type AccessReviewTemplateInput = {
   accessReviewDuration?: string | null | undefined;
   /**
    * The accuracyIssueAction field.
    */
-  accuracyIssueAction?:
-    | AccessReviewTemplateAccuracyIssueAction
-    | null
-    | undefined;
+  accuracyIssueAction?: AccessReviewTemplateAccuracyIssueAction | undefined;
   /**
    * Key/value metadata. Up to 16 entries; keys 1-128 chars; values 0-256
    *
@@ -272,75 +287,77 @@ export type AccessReviewTemplateInput = {
    * @remarks
    *  start date and access_review_duration will be used to calculate the scheduled close date
    */
-  autoCloseCampaign?: boolean | null | undefined;
+  autoCloseCampaign?: boolean | undefined;
   /**
    * The autoCloseDecision field.
    */
-  autoCloseDecision?: AccessReviewTemplateAutoCloseDecision | null | undefined;
+  autoCloseDecision?: AccessReviewTemplateAutoCloseDecision | undefined;
   /**
    * auto generate report when campaign is closed
    */
-  autoGenerateReport?: boolean | null | undefined;
+  autoGenerateReport?: boolean | undefined;
   /**
    * Auto-start configuration
    *
    * @remarks
    *  next_scheduled_campaign_at will be used as the scheduled start date
    */
-  autoStartCampaign?: boolean | null | undefined;
+  autoStartCampaign?: boolean | undefined;
+  campaignSchedule?: CampaignSchedule | null | undefined;
   columnConfig?: AccessReviewColumnConfig | null | undefined;
   /**
    * The defaultView field.
    */
-  defaultView?: AccessReviewTemplateDefaultView | null | undefined;
+  defaultView?: AccessReviewTemplateDefaultView | undefined;
   /**
    * An optional description providing context about this template.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The human-readable name of this template.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The exemptCertifiedAccessConflicts field.
    */
-  exemptCertifiedAccessConflicts?: boolean | null | undefined;
+  exemptCertifiedAccessConflicts?: boolean | undefined;
   /**
    * The unique identifier of this template.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   inclusionScope?: AccessReviewInclusionScope | null | undefined;
   /**
    * Whether automatic campaign creation on the recurrence schedule is enabled.
    */
-  isCampaignScheduleEnabled?: boolean | null | undefined;
+  isCampaignScheduleEnabled?: boolean | undefined;
+  msTeamsChannel?: MSTeamsChannel | null | undefined;
   nextScheduledCampaignAt?: Date | null | undefined;
   notificationConfig?: NotificationConfig | null | undefined;
   /**
    * The number of campaigns that have been created from this template.
    */
-  occurrences?: number | null | undefined;
+  occurrences?: number | undefined;
   /**
    * The ID of the default review policy applied to campaigns created from this template.
    */
-  policyId?: string | null | undefined;
+  policyId?: string | undefined;
   recurrenceRule?: RecurrenceRule | null | undefined;
   /**
    * The reviewInstructions field.
    */
-  reviewInstructions?: string | null | undefined;
+  reviewInstructions?: string | undefined;
   reviewerAttributeConfig?: ReviewerAttributeConfig | null | undefined;
   scope?: AccessReviewScopeV2 | null | undefined;
   /**
    * The scopeType field.
    */
-  scopeType?: AccessReviewTemplateScopeType | null | undefined;
+  scopeType?: AccessReviewTemplateScopeType | undefined;
   signatureConfig?: ReviewSignatureConfig | null | undefined;
   slackChannel?: SlackChannel | null | undefined;
   /**
    * The usePolicyOverride field.
    */
-  usePolicyOverride?: boolean | null | undefined;
+  usePolicyOverride?: boolean | undefined;
 };
 
 /** @internal */
@@ -402,50 +419,49 @@ export const AccessReviewTemplate$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   accessReviewDuration: z.nullable(z.string()).optional(),
-  accuracyIssueAction: z.nullable(
-    AccessReviewTemplateAccuracyIssueAction$inboundSchema,
-  ).optional(),
+  accuracyIssueAction: AccessReviewTemplateAccuracyIssueAction$inboundSchema
+    .optional(),
   annotations: z.record(z.string()).optional(),
-  autoCloseCampaign: z.nullable(z.boolean()).optional(),
-  autoCloseDecision: z.nullable(
-    AccessReviewTemplateAutoCloseDecision$inboundSchema,
-  ).optional(),
-  autoGenerateReport: z.nullable(z.boolean()).optional(),
-  autoStartCampaign: z.nullable(z.boolean()).optional(),
+  autoCloseCampaign: z.boolean().optional(),
+  autoCloseDecision: AccessReviewTemplateAutoCloseDecision$inboundSchema
+    .optional(),
+  autoGenerateReport: z.boolean().optional(),
+  autoStartCampaign: z.boolean().optional(),
+  campaignSchedule: z.nullable(CampaignSchedule$inboundSchema).optional(),
   columnConfig: z.nullable(AccessReviewColumnConfig$inboundSchema).optional(),
   createdAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  defaultView: z.nullable(AccessReviewTemplateDefaultView$inboundSchema)
-    .optional(),
+  defaultView: AccessReviewTemplateDefaultView$inboundSchema.optional(),
   deletedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  exemptCertifiedAccessConflicts: z.nullable(z.boolean()).optional(),
-  id: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  exemptCertifiedAccessConflicts: z.boolean().optional(),
+  id: z.string().optional(),
   inclusionScope: z.nullable(AccessReviewInclusionScope$inboundSchema)
     .optional(),
-  isCampaignScheduleEnabled: z.nullable(z.boolean()).optional(),
+  isCampaignScheduleEnabled: z.boolean().optional(),
+  msTeamsChannel: z.nullable(MSTeamsChannel$inboundSchema).optional(),
   nextScheduledCampaignAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   notificationConfig: z.nullable(NotificationConfig$inboundSchema).optional(),
-  occurrences: z.nullable(z.number().int()).optional(),
-  policyId: z.nullable(z.string()).optional(),
+  occurrences: z.number().int().optional(),
+  policyId: z.string().optional(),
   recurrenceRule: z.nullable(RecurrenceRule$inboundSchema).optional(),
-  reviewInstructions: z.nullable(z.string()).optional(),
+  reviewInstructions: z.string().optional(),
   reviewerAttributeConfig: z.nullable(ReviewerAttributeConfig$inboundSchema)
     .optional(),
   scope: z.nullable(AccessReviewScopeV2$inboundSchema).optional(),
-  scopeType: z.nullable(AccessReviewTemplateScopeType$inboundSchema).optional(),
+  scopeType: AccessReviewTemplateScopeType$inboundSchema.optional(),
   signatureConfig: z.nullable(ReviewSignatureConfig$inboundSchema).optional(),
   slackChannel: z.nullable(SlackChannel$inboundSchema).optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  usePolicyOverride: z.nullable(z.boolean()).optional(),
+  usePolicyOverride: z.boolean().optional(),
 });
 
 export function accessReviewTemplateFromJSON(
@@ -461,32 +477,34 @@ export function accessReviewTemplateFromJSON(
 /** @internal */
 export type AccessReviewTemplateInput$Outbound = {
   accessReviewDuration?: string | null | undefined;
-  accuracyIssueAction?: string | null | undefined;
+  accuracyIssueAction?: string | undefined;
   annotations?: { [k: string]: string } | undefined;
-  autoCloseCampaign?: boolean | null | undefined;
-  autoCloseDecision?: string | null | undefined;
-  autoGenerateReport?: boolean | null | undefined;
-  autoStartCampaign?: boolean | null | undefined;
+  autoCloseCampaign?: boolean | undefined;
+  autoCloseDecision?: string | undefined;
+  autoGenerateReport?: boolean | undefined;
+  autoStartCampaign?: boolean | undefined;
+  campaignSchedule?: CampaignSchedule$Outbound | null | undefined;
   columnConfig?: AccessReviewColumnConfig$Outbound | null | undefined;
-  defaultView?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  exemptCertifiedAccessConflicts?: boolean | null | undefined;
-  id?: string | null | undefined;
+  defaultView?: string | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
+  exemptCertifiedAccessConflicts?: boolean | undefined;
+  id?: string | undefined;
   inclusionScope?: AccessReviewInclusionScope$Outbound | null | undefined;
-  isCampaignScheduleEnabled?: boolean | null | undefined;
+  isCampaignScheduleEnabled?: boolean | undefined;
+  msTeamsChannel?: MSTeamsChannel$Outbound | null | undefined;
   nextScheduledCampaignAt?: string | null | undefined;
   notificationConfig?: NotificationConfig$Outbound | null | undefined;
-  occurrences?: number | null | undefined;
-  policyId?: string | null | undefined;
+  occurrences?: number | undefined;
+  policyId?: string | undefined;
   recurrenceRule?: RecurrenceRule$Outbound | null | undefined;
-  reviewInstructions?: string | null | undefined;
+  reviewInstructions?: string | undefined;
   reviewerAttributeConfig?: ReviewerAttributeConfig$Outbound | null | undefined;
   scope?: AccessReviewScopeV2$Outbound | null | undefined;
-  scopeType?: string | null | undefined;
+  scopeType?: string | undefined;
   signatureConfig?: ReviewSignatureConfig$Outbound | null | undefined;
   slackChannel?: SlackChannel$Outbound | null | undefined;
-  usePolicyOverride?: boolean | null | undefined;
+  usePolicyOverride?: boolean | undefined;
 };
 
 /** @internal */
@@ -496,41 +514,39 @@ export const AccessReviewTemplateInput$outboundSchema: z.ZodType<
   AccessReviewTemplateInput
 > = z.object({
   accessReviewDuration: z.nullable(z.string()).optional(),
-  accuracyIssueAction: z.nullable(
-    AccessReviewTemplateAccuracyIssueAction$outboundSchema,
-  ).optional(),
-  annotations: z.record(z.string()).optional(),
-  autoCloseCampaign: z.nullable(z.boolean()).optional(),
-  autoCloseDecision: z.nullable(
-    AccessReviewTemplateAutoCloseDecision$outboundSchema,
-  ).optional(),
-  autoGenerateReport: z.nullable(z.boolean()).optional(),
-  autoStartCampaign: z.nullable(z.boolean()).optional(),
-  columnConfig: z.nullable(AccessReviewColumnConfig$outboundSchema).optional(),
-  defaultView: z.nullable(AccessReviewTemplateDefaultView$outboundSchema)
+  accuracyIssueAction: AccessReviewTemplateAccuracyIssueAction$outboundSchema
     .optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  exemptCertifiedAccessConflicts: z.nullable(z.boolean()).optional(),
-  id: z.nullable(z.string()).optional(),
+  annotations: z.record(z.string()).optional(),
+  autoCloseCampaign: z.boolean().optional(),
+  autoCloseDecision: AccessReviewTemplateAutoCloseDecision$outboundSchema
+    .optional(),
+  autoGenerateReport: z.boolean().optional(),
+  autoStartCampaign: z.boolean().optional(),
+  campaignSchedule: z.nullable(CampaignSchedule$outboundSchema).optional(),
+  columnConfig: z.nullable(AccessReviewColumnConfig$outboundSchema).optional(),
+  defaultView: AccessReviewTemplateDefaultView$outboundSchema.optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  exemptCertifiedAccessConflicts: z.boolean().optional(),
+  id: z.string().optional(),
   inclusionScope: z.nullable(AccessReviewInclusionScope$outboundSchema)
     .optional(),
-  isCampaignScheduleEnabled: z.nullable(z.boolean()).optional(),
+  isCampaignScheduleEnabled: z.boolean().optional(),
+  msTeamsChannel: z.nullable(MSTeamsChannel$outboundSchema).optional(),
   nextScheduledCampaignAt: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
   notificationConfig: z.nullable(NotificationConfig$outboundSchema).optional(),
-  occurrences: z.nullable(z.number().int()).optional(),
-  policyId: z.nullable(z.string()).optional(),
+  occurrences: z.number().int().optional(),
+  policyId: z.string().optional(),
   recurrenceRule: z.nullable(RecurrenceRule$outboundSchema).optional(),
-  reviewInstructions: z.nullable(z.string()).optional(),
+  reviewInstructions: z.string().optional(),
   reviewerAttributeConfig: z.nullable(ReviewerAttributeConfig$outboundSchema)
     .optional(),
   scope: z.nullable(AccessReviewScopeV2$outboundSchema).optional(),
-  scopeType: z.nullable(AccessReviewTemplateScopeType$outboundSchema)
-    .optional(),
+  scopeType: AccessReviewTemplateScopeType$outboundSchema.optional(),
   signatureConfig: z.nullable(ReviewSignatureConfig$outboundSchema).optional(),
   slackChannel: z.nullable(SlackChannel$outboundSchema).optional(),
-  usePolicyOverride: z.nullable(z.boolean()).optional(),
+  usePolicyOverride: z.boolean().optional(),
 });
 
 export function accessReviewTemplateInputToJSON(

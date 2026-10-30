@@ -11,6 +11,14 @@ import {
   ButtonComponent$inboundSchema,
 } from "./buttoncomponent.js";
 import {
+  C1AppUserPickerComponent,
+  C1AppUserPickerComponent$inboundSchema,
+} from "./c1appuserpickercomponent.js";
+import {
+  C1ChartComponent,
+  C1ChartComponent$inboundSchema,
+} from "./c1chartcomponent.js";
+import {
   C1CodeBlockComponent,
   C1CodeBlockComponent$inboundSchema,
 } from "./c1codeblockcomponent.js";
@@ -27,9 +35,17 @@ import {
   C1ConnectorSyncProgressComponent$inboundSchema,
 } from "./c1connectorsyncprogresscomponent.js";
 import {
+  C1CredentialOfferingPickerComponent,
+  C1CredentialOfferingPickerComponent$inboundSchema,
+} from "./c1credentialofferingpickercomponent.js";
+import {
   C1DurationPickerComponent,
   C1DurationPickerComponent$inboundSchema,
 } from "./c1durationpickercomponent.js";
+import {
+  C1MetricCardsComponent,
+  C1MetricCardsComponent$inboundSchema,
+} from "./c1metriccardscomponent.js";
 import {
   C1MSTeamsNotificationsComponent,
   C1MSTeamsNotificationsComponent$inboundSchema,
@@ -54,6 +70,10 @@ import {
   C1StatusIndicatorComponent,
   C1StatusIndicatorComponent$inboundSchema,
 } from "./c1statusindicatorcomponent.js";
+import {
+  C1TableComponent,
+  C1TableComponent$inboundSchema,
+} from "./c1tablecomponent.js";
 import {
   C1TodoListComponent,
   C1TodoListComponent$inboundSchema,
@@ -125,20 +145,33 @@ import {
  *   - c1OnboardingWelcome
  *   - c1OnboardingPlan
  *   - c1ConnectorSyncDetail
+ *   - c1Chart
+ *   - c1MetricCards
+ *   - c1Table
+ *   - c1AppUserPicker
+ *   - c1CredentialOfferingPicker
  */
 export type A2UIComponent = {
   button?: ButtonComponent | null | undefined;
+  c1AppUserPicker?: C1AppUserPickerComponent | null | undefined;
+  c1Chart?: C1ChartComponent | null | undefined;
   c1CodeBlock?: C1CodeBlockComponent | null | undefined;
   c1ConnectorConfigForm?: C1ConnectorConfigFormComponent | null | undefined;
   c1ConnectorSyncDetail?: C1ConnectorSyncDetailComponent | null | undefined;
   c1ConnectorSyncProgress?: C1ConnectorSyncProgressComponent | null | undefined;
+  c1CredentialOfferingPicker?:
+    | C1CredentialOfferingPickerComponent
+    | null
+    | undefined;
   c1DurationPicker?: C1DurationPickerComponent | null | undefined;
+  c1MetricCards?: C1MetricCardsComponent | null | undefined;
   c1MsTeamsNotifications?: C1MSTeamsNotificationsComponent | null | undefined;
   c1OnboardingPlan?: C1OnboardingPlanComponent | null | undefined;
   c1OnboardingWelcome?: C1OnboardingWelcomeComponent | null | undefined;
   c1ResourcePicker?: C1ResourcePickerComponent | null | undefined;
   c1SlackNotifications?: C1SlackNotificationsComponent | null | undefined;
   c1StatusIndicator?: C1StatusIndicatorComponent | null | undefined;
+  c1Table?: C1TableComponent | null | undefined;
   c1TodoList?: C1TodoListComponent | null | undefined;
   card?: CardComponent | null | undefined;
   checkBox?: CheckBoxComponent | null | undefined;
@@ -149,7 +182,7 @@ export type A2UIComponent = {
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   progressBar?: ProgressBarComponent | null | undefined;
   row?: RowComponent | null | undefined;
   slider?: SliderComponent | null | undefined;
@@ -158,7 +191,7 @@ export type A2UIComponent = {
   /**
    * The weight field.
    */
-  weight?: number | null | undefined;
+  weight?: number | undefined;
 };
 
 /** @internal */
@@ -168,6 +201,9 @@ export const A2UIComponent$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   button: z.nullable(ButtonComponent$inboundSchema).optional(),
+  c1AppUserPicker: z.nullable(C1AppUserPickerComponent$inboundSchema)
+    .optional(),
+  c1Chart: z.nullable(C1ChartComponent$inboundSchema).optional(),
   c1CodeBlock: z.nullable(C1CodeBlockComponent$inboundSchema).optional(),
   c1ConnectorConfigForm: z.nullable(
     C1ConnectorConfigFormComponent$inboundSchema,
@@ -178,8 +214,12 @@ export const A2UIComponent$inboundSchema: z.ZodType<
   c1ConnectorSyncProgress: z.nullable(
     C1ConnectorSyncProgressComponent$inboundSchema,
   ).optional(),
+  c1CredentialOfferingPicker: z.nullable(
+    C1CredentialOfferingPickerComponent$inboundSchema,
+  ).optional(),
   c1DurationPicker: z.nullable(C1DurationPickerComponent$inboundSchema)
     .optional(),
+  c1MetricCards: z.nullable(C1MetricCardsComponent$inboundSchema).optional(),
   c1MsTeamsNotifications: z.nullable(
     C1MSTeamsNotificationsComponent$inboundSchema,
   ).optional(),
@@ -193,6 +233,7 @@ export const A2UIComponent$inboundSchema: z.ZodType<
     .optional(),
   c1StatusIndicator: z.nullable(C1StatusIndicatorComponent$inboundSchema)
     .optional(),
+  c1Table: z.nullable(C1TableComponent$inboundSchema).optional(),
   c1TodoList: z.nullable(C1TodoListComponent$inboundSchema).optional(),
   card: z.nullable(CardComponent$inboundSchema).optional(),
   checkBox: z.nullable(CheckBoxComponent$inboundSchema).optional(),
@@ -200,13 +241,13 @@ export const A2UIComponent$inboundSchema: z.ZodType<
   column: z.nullable(ColumnComponent$inboundSchema).optional(),
   dateTimeInput: z.nullable(DateTimeInputComponent$inboundSchema).optional(),
   divider: z.nullable(DividerComponent$inboundSchema).optional(),
-  id: z.nullable(z.string()).optional(),
+  id: z.string().optional(),
   progressBar: z.nullable(ProgressBarComponent$inboundSchema).optional(),
   row: z.nullable(RowComponent$inboundSchema).optional(),
   slider: z.nullable(SliderComponent$inboundSchema).optional(),
   text: z.nullable(TextComponent$inboundSchema).optional(),
   textField: z.nullable(TextFieldComponent$inboundSchema).optional(),
-  weight: z.nullable(z.number().int()).optional(),
+  weight: z.number().int().optional(),
 });
 
 export function a2UIComponentFromJSON(

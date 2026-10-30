@@ -23,7 +23,7 @@ export type MapRules = {
    * @remarks
    *  evaluated only if the field is not empty
    */
-  ignoreEmpty?: boolean | null | undefined;
+  ignoreEmpty?: boolean | undefined;
   keys?: FieldRules | null | undefined;
   /**
    * MaxPairs specifies that this field must have the specified number of
@@ -31,21 +31,21 @@ export type MapRules = {
    * @remarks
    *  KVs at a maximum
    */
-  maxPairs?: string | null | undefined;
+  maxPairs?: string | undefined;
   /**
    * MinPairs specifies that this field must have the specified number of
    *
    * @remarks
    *  KVs at a minimum
    */
-  minPairs?: string | null | undefined;
+  minPairs?: string | undefined;
   /**
    * NoSparse specifies values in this field cannot be unset. This only
    *
    * @remarks
    *  applies to map's with message value types.
    */
-  noSparse?: boolean | null | undefined;
+  noSparse?: boolean | undefined;
   values?: FieldRules | null | undefined;
 };
 
@@ -55,20 +55,20 @@ export const MapRules$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ignoreEmpty: z.nullable(z.boolean()).optional(),
+  ignoreEmpty: z.boolean().optional(),
   keys: z.nullable(z.lazy(() => FieldRules$inboundSchema)).optional(),
-  maxPairs: z.nullable(z.string()).optional(),
-  minPairs: z.nullable(z.string()).optional(),
-  noSparse: z.nullable(z.boolean()).optional(),
+  maxPairs: z.string().optional(),
+  minPairs: z.string().optional(),
+  noSparse: z.boolean().optional(),
   values: z.nullable(z.lazy(() => FieldRules$inboundSchema)).optional(),
 });
 /** @internal */
 export type MapRules$Outbound = {
-  ignoreEmpty?: boolean | null | undefined;
+  ignoreEmpty?: boolean | undefined;
   keys?: FieldRules$Outbound | null | undefined;
-  maxPairs?: string | null | undefined;
-  minPairs?: string | null | undefined;
-  noSparse?: boolean | null | undefined;
+  maxPairs?: string | undefined;
+  minPairs?: string | undefined;
+  noSparse?: boolean | undefined;
   values?: FieldRules$Outbound | null | undefined;
 };
 
@@ -78,11 +78,11 @@ export const MapRules$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MapRules
 > = z.object({
-  ignoreEmpty: z.nullable(z.boolean()).optional(),
+  ignoreEmpty: z.boolean().optional(),
   keys: z.nullable(z.lazy(() => FieldRules$outboundSchema)).optional(),
-  maxPairs: z.nullable(z.string()).optional(),
-  minPairs: z.nullable(z.string()).optional(),
-  noSparse: z.nullable(z.boolean()).optional(),
+  maxPairs: z.string().optional(),
+  minPairs: z.string().optional(),
+  noSparse: z.boolean().optional(),
   values: z.nullable(z.lazy(() => FieldRules$outboundSchema)).optional(),
 });
 

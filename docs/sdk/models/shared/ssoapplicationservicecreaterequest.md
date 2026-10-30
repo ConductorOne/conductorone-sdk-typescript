@@ -1,0 +1,32 @@
+# SSOApplicationServiceCreateRequest
+
+SSOApplicationServiceCreateRequest creates an SSO application.
+
+This message contains a oneof named protocol. Only a single field of the following list may be set at a time:
+  - oidc
+  - saml
+
+
+## Example Usage
+
+```typescript
+import { SSOApplicationServiceCreateRequest } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: SSOApplicationServiceCreateRequest = {
+  displayName: "Kieran.Stanton",
+};
+```
+
+## Fields
+
+| Field                                                                                                                               | Type                                                                                                                                | Required                                                                                                                            | Description                                                                                                                         |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `assertionLifetime`                                                                                                                 | *string*                                                                                                                            | :heavy_minus_sign:                                                                                                                  | N/A                                                                                                                                 |
+| `description`                                                                                                                       | *string*                                                                                                                            | :heavy_minus_sign:                                                                                                                  | Description of the SSO application.                                                                                                 |
+| `displayName`                                                                                                                       | *string*                                                                                                                            | :heavy_check_mark:                                                                                                                  | Display name for the SSO application.                                                                                               |
+| `initialClient`                                                                                                                     | [shared.SSOApplicationOIDCClientConfig](../../../sdk/models/shared/ssoapplicationoidcclientconfig.md)                               | :heavy_minus_sign:                                                                                                                  | N/A                                                                                                                                 |
+| `oidc`                                                                                                                              | [shared.SSOApplicationOIDCConfig](../../../sdk/models/shared/ssoapplicationoidcconfig.md)                                           | :heavy_minus_sign:                                                                                                                  | N/A                                                                                                                                 |
+| `saml`                                                                                                                              | [shared.SSOApplicationSAMLConfig](../../../sdk/models/shared/ssoapplicationsamlconfig.md)                                           | :heavy_minus_sign:                                                                                                                  | N/A                                                                                                                                 |
+| `sectorId`                                                                                                                          | *string*                                                                                                                            | :heavy_minus_sign:                                                                                                                  | The pairwise sector this application belongs to. Empty means the<br/> application is its own sector. Immutable after creation.      |
+| `subjectCompatibility`                                                                                                              | [shared.SSOSubjectCompatibility](../../../sdk/models/shared/ssosubjectcompatibility.md)                                             | :heavy_minus_sign:                                                                                                                  | N/A                                                                                                                                 |
+| `subjectType`                                                                                                                       | [shared.SSOApplicationServiceCreateRequestSubjectType](../../../sdk/models/shared/ssoapplicationservicecreaterequestsubjecttype.md) | :heavy_minus_sign:                                                                                                                  | How the user's identifier reaches this application. Leave unset to use the<br/> tenant default.                                     |

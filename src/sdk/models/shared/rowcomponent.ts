@@ -16,12 +16,12 @@ export type RowComponent = {
   /**
    * The alignment field.
    */
-  alignment?: string | null | undefined;
+  alignment?: string | undefined;
   children?: ChildList | null | undefined;
   /**
    * The distribution field.
    */
-  distribution?: string | null | undefined;
+  distribution?: string | undefined;
   gap?: DynamicNumber | null | undefined;
 };
 
@@ -31,9 +31,9 @@ export const RowComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  alignment: z.nullable(z.string()).optional(),
+  alignment: z.string().optional(),
   children: z.nullable(ChildList$inboundSchema).optional(),
-  distribution: z.nullable(z.string()).optional(),
+  distribution: z.string().optional(),
   gap: z.nullable(DynamicNumber$inboundSchema).optional(),
 });
 

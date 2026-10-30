@@ -13,7 +13,8 @@ export class HooksSearch extends ClientSDK {
    * Search
    *
    * @remarks
-   * Invokes the c1.api.hooks.v1.HooksSearch.Search method.
+   * Search returns hooks for the tenant, paginated. Setting query or refs
+   *  returns UNIMPLEMENTED; filtering is not yet supported.
    */
   async search(
     request?: shared.HooksSearchRequest | undefined,

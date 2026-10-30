@@ -11,22 +11,22 @@ export type ConnectorCatalogServiceConfigurationSchemaRequest = {
   /**
    * The ID of the app associated with the connector. Optional.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The catalog entry ID identifying the connector type.
    */
-  catalogId?: string | null | undefined;
+  catalogId?: string | undefined;
   /**
    * The ID of an existing connector to retrieve its current configuration schema. Optional.
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
 };
 
 /** @internal */
 export type ConnectorCatalogServiceConfigurationSchemaRequest$Outbound = {
-  appId?: string | null | undefined;
-  catalogId?: string | null | undefined;
-  connectorId?: string | null | undefined;
+  appId?: string | undefined;
+  catalogId?: string | undefined;
+  connectorId?: string | undefined;
 };
 
 /** @internal */
@@ -36,9 +36,9 @@ export const ConnectorCatalogServiceConfigurationSchemaRequest$outboundSchema:
     z.ZodTypeDef,
     ConnectorCatalogServiceConfigurationSchemaRequest
   > = z.object({
-    appId: z.nullable(z.string()).optional(),
-    catalogId: z.nullable(z.string()).optional(),
-    connectorId: z.nullable(z.string()).optional(),
+    appId: z.string().optional(),
+    catalogId: z.string().optional(),
+    connectorId: z.string().optional(),
   });
 
 export function connectorCatalogServiceConfigurationSchemaRequestToJSON(

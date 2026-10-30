@@ -19,7 +19,7 @@ export type MCPToolServiceSearchResponse = {
   /**
    * Token for next page.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -29,7 +29,7 @@ export const MCPToolServiceSearchResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   list: z.nullable(z.array(MCPTool$inboundSchema)).optional(),
-  nextPageToken: z.nullable(z.string()).optional(),
+  nextPageToken: z.string().optional(),
 });
 
 export function mcpToolServiceSearchResponseFromJSON(

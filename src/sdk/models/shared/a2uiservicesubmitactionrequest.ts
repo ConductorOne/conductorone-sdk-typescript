@@ -11,7 +11,7 @@ export type A2UIServiceSubmitActionRequest = {
   /**
    * The actionName field.
    */
-  actionName?: string | null | undefined;
+  actionName?: string | undefined;
   clientTimestamp?: Date | null | undefined;
   /**
    * The context field.
@@ -20,25 +20,25 @@ export type A2UIServiceSubmitActionRequest = {
   /**
    * The conversationId field.
    */
-  conversationId?: string | null | undefined;
+  conversationId?: string | undefined;
   /**
    * The dataModelJson field.
    */
-  dataModelJson?: string | null | undefined;
+  dataModelJson?: string | undefined;
   /**
    * The sourceComponentId field.
    */
-  sourceComponentId?: string | null | undefined;
+  sourceComponentId?: string | undefined;
 };
 
 /** @internal */
 export type A2UIServiceSubmitActionRequest$Outbound = {
-  actionName?: string | null | undefined;
+  actionName?: string | undefined;
   clientTimestamp?: string | null | undefined;
   context?: { [k: string]: string } | undefined;
-  conversationId?: string | null | undefined;
-  dataModelJson?: string | null | undefined;
-  sourceComponentId?: string | null | undefined;
+  conversationId?: string | undefined;
+  dataModelJson?: string | undefined;
+  sourceComponentId?: string | undefined;
 };
 
 /** @internal */
@@ -47,13 +47,13 @@ export const A2UIServiceSubmitActionRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   A2UIServiceSubmitActionRequest
 > = z.object({
-  actionName: z.nullable(z.string()).optional(),
+  actionName: z.string().optional(),
   clientTimestamp: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
   context: z.record(z.string()).optional(),
-  conversationId: z.nullable(z.string()).optional(),
-  dataModelJson: z.nullable(z.string()).optional(),
-  sourceComponentId: z.nullable(z.string()).optional(),
+  conversationId: z.string().optional(),
+  dataModelJson: z.string().optional(),
+  sourceComponentId: z.string().optional(),
 });
 
 export function a2UIServiceSubmitActionRequestToJSON(

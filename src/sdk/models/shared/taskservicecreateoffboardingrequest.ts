@@ -16,19 +16,19 @@ export type TaskServiceCreateOffboardingRequest = {
   /**
    * The description of the offboarding request.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   expandMask?: TaskExpandMask | null | undefined;
   /**
    * The ID of the user to offboard.
    */
-  subjectUserId?: string | null | undefined;
+  subjectUserId?: string | undefined;
 };
 
 /** @internal */
 export type TaskServiceCreateOffboardingRequest$Outbound = {
-  description?: string | null | undefined;
+  description?: string | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
-  subjectUserId?: string | null | undefined;
+  subjectUserId?: string | undefined;
 };
 
 /** @internal */
@@ -37,9 +37,9 @@ export const TaskServiceCreateOffboardingRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskServiceCreateOffboardingRequest
 > = z.object({
-  description: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-  subjectUserId: z.nullable(z.string()).optional(),
+  subjectUserId: z.string().optional(),
 });
 
 export function taskServiceCreateOffboardingRequestToJSON(

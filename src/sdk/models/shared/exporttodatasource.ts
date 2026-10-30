@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The format field.
  */
-export const Format = {
+export const ExportToDatasourceFormat = {
   ExportFormatUnspecified: "EXPORT_FORMAT_UNSPECIFIED",
   ExportFormatOcsfJsonZstd: "EXPORT_FORMAT_OCSF_JSON_ZSTD",
   ExportFormatOcsfJsonGzip: "EXPORT_FORMAT_OCSF_JSON_GZIP",
@@ -20,7 +20,9 @@ export const Format = {
 /**
  * The format field.
  */
-export type Format = OpenEnum<typeof Format>;
+export type ExportToDatasourceFormat = OpenEnum<
+  typeof ExportToDatasourceFormat
+>;
 
 /**
  * The ExportToDatasource message.
@@ -29,23 +31,29 @@ export type ExportToDatasource = {
   /**
    * The datasourceId field.
    */
-  datasourceId?: string | null | undefined;
+  datasourceId?: string | undefined;
   /**
    * The format field.
    */
-  format?: Format | null | undefined;
+  format?: ExportToDatasourceFormat | undefined;
   /**
    * The prefix field.
    */
-  prefix?: string | null | undefined;
+  prefix?: string | undefined;
 };
 
 /** @internal */
-export const Format$inboundSchema: z.ZodType<Format, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Format);
+export const ExportToDatasourceFormat$inboundSchema: z.ZodType<
+  ExportToDatasourceFormat,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ExportToDatasourceFormat);
 /** @internal */
-export const Format$outboundSchema: z.ZodType<string, z.ZodTypeDef, Format> =
-  openEnums.outboundSchema(Format);
+export const ExportToDatasourceFormat$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  ExportToDatasourceFormat
+> = openEnums.outboundSchema(ExportToDatasourceFormat);
 
 /** @internal */
 export const ExportToDatasource$inboundSchema: z.ZodType<
@@ -53,15 +61,15 @@ export const ExportToDatasource$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  datasourceId: z.nullable(z.string()).optional(),
-  format: z.nullable(Format$inboundSchema).optional(),
-  prefix: z.nullable(z.string()).optional(),
+  datasourceId: z.string().optional(),
+  format: ExportToDatasourceFormat$inboundSchema.optional(),
+  prefix: z.string().optional(),
 });
 /** @internal */
 export type ExportToDatasource$Outbound = {
-  datasourceId?: string | null | undefined;
-  format?: string | null | undefined;
-  prefix?: string | null | undefined;
+  datasourceId?: string | undefined;
+  format?: string | undefined;
+  prefix?: string | undefined;
 };
 
 /** @internal */
@@ -70,9 +78,9 @@ export const ExportToDatasource$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ExportToDatasource
 > = z.object({
-  datasourceId: z.nullable(z.string()).optional(),
-  format: z.nullable(Format$outboundSchema).optional(),
-  prefix: z.nullable(z.string()).optional(),
+  datasourceId: z.string().optional(),
+  format: ExportToDatasourceFormat$outboundSchema.optional(),
+  prefix: z.string().optional(),
 });
 
 export function exportToDatasourceToJSON(

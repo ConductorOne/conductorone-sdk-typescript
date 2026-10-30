@@ -26,6 +26,12 @@ import {
   HookFunctionRef$Outbound,
   HookFunctionRef$outboundSchema,
 } from "./hookfunctionref.js";
+import {
+  JSONPatchConfig,
+  JSONPatchConfig$inboundSchema,
+  JSONPatchConfig$Outbound,
+  JSONPatchConfig$outboundSchema,
+} from "./jsonpatchconfig.js";
 
 /**
  * The event field.
@@ -34,6 +40,7 @@ export const Event = {
   HookEventTypeUnspecified: "HOOK_EVENT_TYPE_UNSPECIFIED",
   HookEventTypePreToolUse: "HOOK_EVENT_TYPE_PRE_TOOL_USE",
   HookEventTypePostToolUse: "HOOK_EVENT_TYPE_POST_TOOL_USE",
+  HookEventTypePreOutput: "HOOK_EVENT_TYPE_PRE_OUTPUT",
 } as const;
 /**
  * The event field.
@@ -48,6 +55,7 @@ export type Event = OpenEnum<typeof Event>;
  * This message contains a oneof named hook_type. Only a single field of the following list may be set at a time:
  *   - function
  *   - builtinPattern
+ *   - jsonPatch
  */
 export type Hook = {
   builtinPattern?: BuiltInPattern | null | undefined;
@@ -55,29 +63,39 @@ export type Hook = {
   /**
    * The description field.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The enabled field.
    */
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   /**
    * The event field.
    */
-  event?: Event | null | undefined;
+  event?: Event | undefined;
   filter?: HookFilter | null | undefined;
   function?: HookFunctionRef | null | undefined;
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
+  jsonPatch?: JSONPatchConfig | null | undefined;
+  /**
+   * managed_by_guardrails marks a hook as selectable in a guardrail rule's
+   *
+   * @remarks
+   *  curated pre_hook_ids/post_hook_ids. A hook left false (the default,
+   *  including every pre-existing hook) always runs regardless of guardrail
+   *  state; a hook set true only runs when a matched rule selects it.
+   */
+  managedByGuardrails?: boolean | undefined;
   /**
    * The priority field.
    */
-  priority?: number | null | undefined;
+  priority?: number | undefined;
   updatedAt?: Date | null | undefined;
 };
 
@@ -89,35 +107,46 @@ export type Hook = {
  * This message contains a oneof named hook_type. Only a single field of the following list may be set at a time:
  *   - function
  *   - builtinPattern
+ *   - jsonPatch
  */
 export type HookInput = {
   builtinPattern?: BuiltInPattern | null | undefined;
   /**
    * The description field.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The displayName field.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The enabled field.
    */
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   /**
    * The event field.
    */
-  event?: Event | null | undefined;
+  event?: Event | undefined;
   filter?: HookFilter | null | undefined;
   function?: HookFunctionRef | null | undefined;
   /**
    * The id field.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
+  jsonPatch?: JSONPatchConfig | null | undefined;
+  /**
+   * managed_by_guardrails marks a hook as selectable in a guardrail rule's
+   *
+   * @remarks
+   *  curated pre_hook_ids/post_hook_ids. A hook left false (the default,
+   *  including every pre-existing hook) always runs regardless of guardrail
+   *  state; a hook set true only runs when a matched rule selects it.
+   */
+  managedByGuardrails?: boolean | undefined;
   /**
    * The priority field.
    */
-  priority?: number | null | undefined;
+  priority?: number | undefined;
 };
 
 /** @internal */
@@ -134,14 +163,16 @@ export const Hook$inboundSchema: z.ZodType<Hook, z.ZodTypeDef, unknown> = z
     createdAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    description: z.nullable(z.string()).optional(),
-    displayName: z.nullable(z.string()).optional(),
-    enabled: z.nullable(z.boolean()).optional(),
-    event: z.nullable(Event$inboundSchema).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    enabled: z.boolean().optional(),
+    event: Event$inboundSchema.optional(),
     filter: z.nullable(HookFilter$inboundSchema).optional(),
     function: z.nullable(HookFunctionRef$inboundSchema).optional(),
-    id: z.nullable(z.string()).optional(),
-    priority: z.nullable(z.number().int()).optional(),
+    id: z.string().optional(),
+    jsonPatch: z.nullable(JSONPatchConfig$inboundSchema).optional(),
+    managedByGuardrails: z.boolean().optional(),
+    priority: z.number().int().optional(),
     updatedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
@@ -160,14 +191,16 @@ export function hookFromJSON(
 /** @internal */
 export type HookInput$Outbound = {
   builtinPattern?: BuiltInPattern$Outbound | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  enabled?: boolean | null | undefined;
-  event?: string | null | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
+  enabled?: boolean | undefined;
+  event?: string | undefined;
   filter?: HookFilter$Outbound | null | undefined;
   function?: HookFunctionRef$Outbound | null | undefined;
-  id?: string | null | undefined;
-  priority?: number | null | undefined;
+  id?: string | undefined;
+  jsonPatch?: JSONPatchConfig$Outbound | null | undefined;
+  managedByGuardrails?: boolean | undefined;
+  priority?: number | undefined;
 };
 
 /** @internal */
@@ -177,14 +210,16 @@ export const HookInput$outboundSchema: z.ZodType<
   HookInput
 > = z.object({
   builtinPattern: z.nullable(BuiltInPattern$outboundSchema).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  event: z.nullable(Event$outboundSchema).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  enabled: z.boolean().optional(),
+  event: Event$outboundSchema.optional(),
   filter: z.nullable(HookFilter$outboundSchema).optional(),
   function: z.nullable(HookFunctionRef$outboundSchema).optional(),
-  id: z.nullable(z.string()).optional(),
-  priority: z.nullable(z.number().int()).optional(),
+  id: z.string().optional(),
+  jsonPatch: z.nullable(JSONPatchConfig$outboundSchema).optional(),
+  managedByGuardrails: z.boolean().optional(),
+  priority: z.number().int().optional(),
 });
 
 export function hookInputToJSON(hookInput: HookInput): string {

@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod/v3";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The AppUserRef message.
@@ -11,17 +14,26 @@ export type AppUserRef = {
   /**
    * The ID of the application.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   /**
    * The ID of the app user.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
+export const AppUserRef$inboundSchema: z.ZodType<
+  AppUserRef,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  appId: z.string().optional(),
+  id: z.string().optional(),
+});
+/** @internal */
 export type AppUserRef$Outbound = {
-  appId?: string | null | undefined;
-  id?: string | null | undefined;
+  appId?: string | undefined;
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -30,10 +42,19 @@ export const AppUserRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppUserRef
 > = z.object({
-  appId: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
+  appId: z.string().optional(),
+  id: z.string().optional(),
 });
 
 export function appUserRefToJSON(appUserRef: AppUserRef): string {
   return JSON.stringify(AppUserRef$outboundSchema.parse(appUserRef));
+}
+export function appUserRefFromJSON(
+  jsonString: string,
+): SafeParseResult<AppUserRef, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AppUserRef$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AppUserRef' from JSON`,
+  );
 }

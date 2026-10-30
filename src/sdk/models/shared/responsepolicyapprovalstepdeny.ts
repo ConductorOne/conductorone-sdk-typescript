@@ -14,7 +14,7 @@ export type ResponsePolicyApprovalStepDeny = {
   /**
    * optional comment
    */
-  comment?: string | null | undefined;
+  comment?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const ResponsePolicyApprovalStepDeny$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  comment: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
 });
 /** @internal */
 export type ResponsePolicyApprovalStepDeny$Outbound = {
-  comment?: string | null | undefined;
+  comment?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const ResponsePolicyApprovalStepDeny$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponsePolicyApprovalStepDeny
 > = z.object({
-  comment: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
 });
 
 export function responsePolicyApprovalStepDenyToJSON(

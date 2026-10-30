@@ -12,28 +12,28 @@ export type WebhookEndpointInput = {
   /**
    * An optional description of the webhook's purpose.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The human-readable name of the webhook.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * The unique identifier of the webhook.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The destination URL that receives event notification HTTP callbacks.
    */
-  url?: string | null | undefined;
+  url?: string | undefined;
 };
 
 /** @internal */
 export type WebhookEndpointInput$Outbound = {
   callbackTimeout?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  id?: string | null | undefined;
-  url?: string | null | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
+  id?: string | undefined;
+  url?: string | undefined;
 };
 
 /** @internal */
@@ -43,10 +43,10 @@ export const WebhookEndpointInput$outboundSchema: z.ZodType<
   WebhookEndpointInput
 > = z.object({
   callbackTimeout: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  id: z.nullable(z.string()).optional(),
-  url: z.nullable(z.string()).optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  id: z.string().optional(),
+  url: z.string().optional(),
 });
 
 export function webhookEndpointInputToJSON(

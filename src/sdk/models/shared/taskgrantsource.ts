@@ -14,23 +14,23 @@ export type TaskGrantSource = {
   /**
    * The ID of the conversation that created this ticket
    */
-  conversationId?: string | null | undefined;
+  conversationId?: string | undefined;
   /**
    * The external url source of the grant ticket.
    */
-  externalUrl?: string | null | undefined;
+  externalUrl?: string | undefined;
   /**
    * The integration id for the source of tickets.
    */
-  integrationId?: string | null | undefined;
+  integrationId?: string | undefined;
   /**
    * Whether the grant task is an extension task.
    */
-  isExtension?: boolean | null | undefined;
+  isExtension?: boolean | undefined;
   /**
    * the request id for the grant ticket if the source is external
    */
-  requestId?: string | null | undefined;
+  requestId?: string | undefined;
 };
 
 /** @internal */
@@ -39,19 +39,19 @@ export const TaskGrantSource$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  conversationId: z.nullable(z.string()).optional(),
-  externalUrl: z.nullable(z.string()).optional(),
-  integrationId: z.nullable(z.string()).optional(),
-  isExtension: z.nullable(z.boolean()).optional(),
-  requestId: z.nullable(z.string()).optional(),
+  conversationId: z.string().optional(),
+  externalUrl: z.string().optional(),
+  integrationId: z.string().optional(),
+  isExtension: z.boolean().optional(),
+  requestId: z.string().optional(),
 });
 /** @internal */
 export type TaskGrantSource$Outbound = {
-  conversationId?: string | null | undefined;
-  externalUrl?: string | null | undefined;
-  integrationId?: string | null | undefined;
-  isExtension?: boolean | null | undefined;
-  requestId?: string | null | undefined;
+  conversationId?: string | undefined;
+  externalUrl?: string | undefined;
+  integrationId?: string | undefined;
+  isExtension?: boolean | undefined;
+  requestId?: string | undefined;
 };
 
 /** @internal */
@@ -60,11 +60,11 @@ export const TaskGrantSource$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskGrantSource
 > = z.object({
-  conversationId: z.nullable(z.string()).optional(),
-  externalUrl: z.nullable(z.string()).optional(),
-  integrationId: z.nullable(z.string()).optional(),
-  isExtension: z.nullable(z.boolean()).optional(),
-  requestId: z.nullable(z.string()).optional(),
+  conversationId: z.string().optional(),
+  externalUrl: z.string().optional(),
+  integrationId: z.string().optional(),
+  isExtension: z.boolean().optional(),
+  requestId: z.string().optional(),
 });
 
 export function taskGrantSourceToJSON(

@@ -14,12 +14,12 @@ export type TaskAuditComment = {
   /**
    * The comment field.
    */
-  comment?: string | null | undefined;
+  comment?: string | undefined;
   updatedAt?: Date | null | undefined;
   /**
    * The updatedBy field.
    */
-  updatedBy?: string | null | undefined;
+  updatedBy?: string | undefined;
 };
 
 /** @internal */
@@ -28,11 +28,11 @@ export const TaskAuditComment$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  comment: z.nullable(z.string()).optional(),
+  comment: z.string().optional(),
   updatedAt: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  updatedBy: z.nullable(z.string()).optional(),
+  updatedBy: z.string().optional(),
 });
 
 export function taskAuditCommentFromJSON(

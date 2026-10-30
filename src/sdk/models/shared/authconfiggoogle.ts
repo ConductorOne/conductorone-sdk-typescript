@@ -12,6 +12,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type AuthConfigGoogle = {
   /**
+   * Additional hosted domains accepted at login beyond hosted_domains.
+   */
+  additionalHostedDomains?: Array<string> | null | undefined;
+  /**
    * The hostedDomains field.
    */
   hostedDomains?: Array<string> | null | undefined;
@@ -23,29 +27,10 @@ export const AuthConfigGoogle$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  hostedDomains: z.nullable(z.array(z.string())).optional(),
-});
-/** @internal */
-export type AuthConfigGoogle$Outbound = {
-  hostedDomains?: Array<string> | null | undefined;
-};
-
-/** @internal */
-export const AuthConfigGoogle$outboundSchema: z.ZodType<
-  AuthConfigGoogle$Outbound,
-  z.ZodTypeDef,
-  AuthConfigGoogle
-> = z.object({
+  additionalHostedDomains: z.nullable(z.array(z.string())).optional(),
   hostedDomains: z.nullable(z.array(z.string())).optional(),
 });
 
-export function authConfigGoogleToJSON(
-  authConfigGoogle: AuthConfigGoogle,
-): string {
-  return JSON.stringify(
-    AuthConfigGoogle$outboundSchema.parse(authConfigGoogle),
-  );
-}
 export function authConfigGoogleFromJSON(
   jsonString: string,
 ): SafeParseResult<AuthConfigGoogle, SDKValidationError> {

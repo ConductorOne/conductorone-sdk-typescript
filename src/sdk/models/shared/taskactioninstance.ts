@@ -7,6 +7,12 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  BatonResourceActionRef,
+  BatonResourceActionRef$inboundSchema,
+  BatonResourceActionRef$Outbound,
+  BatonResourceActionRef$outboundSchema,
+} from "./batonresourceactionref.js";
+import {
   ConnectorActionRef,
   ConnectorActionRef$inboundSchema,
   ConnectorActionRef$Outbound,
@@ -20,9 +26,11 @@ import {
  *  Action captured on a TaskTypeAction at ticket-creation time.
  *
  * This message contains a oneof named target_ref. Only a single field of the following list may be set at a time:
+ *   - batonResourceActionRef
  *   - connectorActionRef
  */
 export type TaskActionInstance = {
+  batonResourceActionRef?: BatonResourceActionRef | null | undefined;
   connectorActionRef?: ConnectorActionRef | null | undefined;
   /**
    * Display label at ticket-creation time. Same value as
@@ -31,7 +39,14 @@ export type TaskActionInstance = {
    *  TaskTypeAction.display_name; repeated here so clients that walk the
    *  instance see a self-contained view.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
+  /**
+   * Instructions for completing the action manually, captured at
+   *
+   * @remarks
+   *  ticket-creation time.
+   */
+  requestInstructions?: string | undefined;
 };
 
 /** @internal */
@@ -40,13 +55,18 @@ export const TaskActionInstance$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  batonResourceActionRef: z.nullable(BatonResourceActionRef$inboundSchema)
+    .optional(),
   connectorActionRef: z.nullable(ConnectorActionRef$inboundSchema).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
+  requestInstructions: z.string().optional(),
 });
 /** @internal */
 export type TaskActionInstance$Outbound = {
+  batonResourceActionRef?: BatonResourceActionRef$Outbound | null | undefined;
   connectorActionRef?: ConnectorActionRef$Outbound | null | undefined;
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
+  requestInstructions?: string | undefined;
 };
 
 /** @internal */
@@ -55,8 +75,11 @@ export const TaskActionInstance$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskActionInstance
 > = z.object({
+  batonResourceActionRef: z.nullable(BatonResourceActionRef$outboundSchema)
+    .optional(),
   connectorActionRef: z.nullable(ConnectorActionRef$outboundSchema).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  displayName: z.string().optional(),
+  requestInstructions: z.string().optional(),
 });
 
 export function taskActionInstanceToJSON(

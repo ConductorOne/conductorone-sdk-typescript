@@ -14,7 +14,7 @@ export type StringMapField = {
   /**
    * The optional field.
    */
-  optional?: boolean | null | undefined;
+  optional?: boolean | undefined;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const StringMapField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  optional: z.nullable(z.boolean()).optional(),
+  optional: z.boolean().optional(),
 });
 
 export function stringMapFieldFromJSON(

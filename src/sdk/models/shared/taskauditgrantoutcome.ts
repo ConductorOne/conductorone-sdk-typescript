@@ -34,7 +34,7 @@ export type TaskAuditGrantOutcome = {
   /**
    * The outcome field.
    */
-  outcome?: TaskAuditGrantOutcomeOutcome | null | undefined;
+  outcome?: TaskAuditGrantOutcomeOutcome | undefined;
 };
 
 /** @internal */
@@ -50,7 +50,7 @@ export const TaskAuditGrantOutcome$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  outcome: z.nullable(TaskAuditGrantOutcomeOutcome$inboundSchema).optional(),
+  outcome: TaskAuditGrantOutcomeOutcome$inboundSchema.optional(),
 });
 
 export function taskAuditGrantOutcomeFromJSON(

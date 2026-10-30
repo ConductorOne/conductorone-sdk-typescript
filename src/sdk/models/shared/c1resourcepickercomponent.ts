@@ -12,15 +12,32 @@ import { DynamicString, DynamicString$inboundSchema } from "./dynamicstring.js";
  * C1ResourcePickerComponent allows selecting C1 resources.
  */
 export type C1ResourcePickerComponent = {
+  /**
+   * Scoping for resource_type "mcp_tool": the app and connector whose tools the
+   *
+   * @remarks
+   *  paginated picker searches, and an optional tool-state filter (the
+   *  MCPToolState enum name, e.g. "MCP_TOOL_STATE_PENDING_REVIEW"; empty = no
+   *  filter). Ignored by other resource types.
+   */
+  appId?: string | undefined;
+  /**
+   * The connectorId field.
+   */
+  connectorId?: string | undefined;
   label?: DynamicString | null | undefined;
+  /**
+   * The mcpToolState field.
+   */
+  mcpToolState?: string | undefined;
   /**
    * The multiSelect field.
    */
-  multiSelect?: boolean | null | undefined;
+  multiSelect?: boolean | undefined;
   /**
    * The resourceType field.
    */
-  resourceType?: string | null | undefined;
+  resourceType?: string | undefined;
   value?: DynamicString | null | undefined;
 };
 
@@ -30,9 +47,12 @@ export const C1ResourcePickerComponent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  appId: z.string().optional(),
+  connectorId: z.string().optional(),
   label: z.nullable(DynamicString$inboundSchema).optional(),
-  multiSelect: z.nullable(z.boolean()).optional(),
-  resourceType: z.nullable(z.string()).optional(),
+  mcpToolState: z.string().optional(),
+  multiSelect: z.boolean().optional(),
+  resourceType: z.string().optional(),
   value: z.nullable(DynamicString$inboundSchema).optional(),
 });
 

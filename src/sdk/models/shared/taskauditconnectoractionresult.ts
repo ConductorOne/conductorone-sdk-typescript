@@ -38,20 +38,20 @@ export type TaskAuditConnectorActionResult = {
   /**
    * The appEntitlementId field.
    */
-  appEntitlementId?: string | null | undefined;
+  appEntitlementId?: string | undefined;
   /**
    * The appId field.
    */
-  appId?: string | null | undefined;
+  appId?: string | undefined;
   cancelled?: TaskAuditCancelledResult | null | undefined;
   /**
    * The connectorActionId field.
    */
-  connectorActionId?: string | null | undefined;
+  connectorActionId?: string | undefined;
   /**
    * The connectorId field.
    */
-  connectorId?: string | null | undefined;
+  connectorId?: string | undefined;
   error?: TaskAuditErrorResult | null | undefined;
   pending?: TaskAuditPendingResult | null | undefined;
   success?: TaskAuditSuccessResult | null | undefined;
@@ -63,11 +63,11 @@ export const TaskAuditConnectorActionResult$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  appEntitlementId: z.nullable(z.string()).optional(),
-  appId: z.nullable(z.string()).optional(),
+  appEntitlementId: z.string().optional(),
+  appId: z.string().optional(),
   cancelled: z.nullable(TaskAuditCancelledResult$inboundSchema).optional(),
-  connectorActionId: z.nullable(z.string()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
+  connectorActionId: z.string().optional(),
+  connectorId: z.string().optional(),
   error: z.nullable(TaskAuditErrorResult$inboundSchema).optional(),
   pending: z.nullable(TaskAuditPendingResult$inboundSchema).optional(),
   success: z.nullable(TaskAuditSuccessResult$inboundSchema).optional(),

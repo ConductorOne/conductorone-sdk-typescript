@@ -8,6 +8,27 @@ import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  McpOnboardingTarget,
+  McpOnboardingTarget$inboundSchema,
+} from "./mcponboardingtarget.js";
+
+/**
+ * The updated AIAM MCP onboarding status.
+ */
+export const UpdateOnboardingSettingsResponseMcpOnboardingStatus = {
+  McpOnboardingStatusUnspecified: "MCP_ONBOARDING_STATUS_UNSPECIFIED",
+  McpOnboardingStatusNotStarted: "MCP_ONBOARDING_STATUS_NOT_STARTED",
+  McpOnboardingStatusInProgress: "MCP_ONBOARDING_STATUS_IN_PROGRESS",
+  McpOnboardingStatusComplete: "MCP_ONBOARDING_STATUS_COMPLETE",
+  McpOnboardingStatusDismissed: "MCP_ONBOARDING_STATUS_DISMISSED",
+} as const;
+/**
+ * The updated AIAM MCP onboarding status.
+ */
+export type UpdateOnboardingSettingsResponseMcpOnboardingStatus = OpenEnum<
+  typeof UpdateOnboardingSettingsResponseMcpOnboardingStatus
+>;
 
 /**
  * The updated onboarding status.
@@ -31,10 +52,34 @@ export type UpdateOnboardingSettingsResponseStatus = OpenEnum<
  */
 export type UpdateOnboardingSettingsResponse = {
   /**
+   * The updated AIAM onboarding goal.
+   */
+  mcpOnboardingGoal?: string | undefined;
+  /**
+   * The updated AIAM MCP onboarding status.
+   */
+  mcpOnboardingStatus?:
+    | UpdateOnboardingSettingsResponseMcpOnboardingStatus
+    | undefined;
+  /**
+   * The updated AIAM onboarding targets.
+   */
+  mcpOnboardingTargets?: Array<McpOnboardingTarget> | null | undefined;
+  /**
    * The updated onboarding status.
    */
-  status?: UpdateOnboardingSettingsResponseStatus | null | undefined;
+  status?: UpdateOnboardingSettingsResponseStatus | undefined;
 };
+
+/** @internal */
+export const UpdateOnboardingSettingsResponseMcpOnboardingStatus$inboundSchema:
+  z.ZodType<
+    UpdateOnboardingSettingsResponseMcpOnboardingStatus,
+    z.ZodTypeDef,
+    unknown
+  > = openEnums.inboundSchema(
+    UpdateOnboardingSettingsResponseMcpOnboardingStatus,
+  );
 
 /** @internal */
 export const UpdateOnboardingSettingsResponseStatus$inboundSchema: z.ZodType<
@@ -49,8 +94,13 @@ export const UpdateOnboardingSettingsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  status: z.nullable(UpdateOnboardingSettingsResponseStatus$inboundSchema)
+  mcpOnboardingGoal: z.string().optional(),
+  mcpOnboardingStatus:
+    UpdateOnboardingSettingsResponseMcpOnboardingStatus$inboundSchema
+      .optional(),
+  mcpOnboardingTargets: z.nullable(z.array(McpOnboardingTarget$inboundSchema))
     .optional(),
+  status: UpdateOnboardingSettingsResponseStatus$inboundSchema.optional(),
 });
 
 export function updateOnboardingSettingsResponseFromJSON(

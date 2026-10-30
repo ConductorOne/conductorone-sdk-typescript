@@ -4,23 +4,44 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { PaperSecret, PaperSecret$inboundSchema } from "./papersecret.js";
+
+/**
+ * Exact Age suite required for this submission.
+ */
+export const PaperSecretServiceCreateResponseAgeSuite = {
+  AgeSuiteUnspecified: "AGE_SUITE_UNSPECIFIED",
+  AgeSuiteX25519: "AGE_SUITE_X25519",
+  AgeSuiteMlkem768X25519: "AGE_SUITE_MLKEM768X25519",
+} as const;
+/**
+ * Exact Age suite required for this submission.
+ */
+export type PaperSecretServiceCreateResponseAgeSuite = OpenEnum<
+  typeof PaperSecretServiceCreateResponseAgeSuite
+>;
 
 /**
  * The PaperSecretServiceCreateResponse message.
  */
 export type PaperSecretServiceCreateResponse = {
   /**
-   * Age X25519 recipient public key (format: "age1...") for client-side encryption.
+   * Canonical recipient public key for the exact age_suite returned below.
    *
    * @remarks
    *  All content MUST be encrypted to this recipient using the Age encryption format
    *  before calling SetTextContent or uploading to upload_url.
    *  See: https://age-encryption.org
    */
-  ageRecipient?: string | null | undefined;
+  ageRecipient?: string | undefined;
+  /**
+   * Exact Age suite required for this submission.
+   */
+  ageSuite?: PaperSecretServiceCreateResponseAgeSuite | undefined;
   secret?: PaperSecret | null | undefined;
   /**
    * For FILE secrets: capability URL for uploading the Age-encrypted file.
@@ -31,12 +52,19 @@ export type PaperSecretServiceCreateResponse = {
    *  the Age header "age-encryption.org/v1\n". Maximum file size: 1GB.
    *  Empty for TEXT secrets.
    */
-  uploadUrl?: string | null | undefined;
+  uploadUrl?: string | undefined;
   /**
    * Vault ID - primary identifier for this secret.
    */
-  vaultId?: string | null | undefined;
+  vaultId?: string | undefined;
 };
+
+/** @internal */
+export const PaperSecretServiceCreateResponseAgeSuite$inboundSchema: z.ZodType<
+  PaperSecretServiceCreateResponseAgeSuite,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PaperSecretServiceCreateResponseAgeSuite);
 
 /** @internal */
 export const PaperSecretServiceCreateResponse$inboundSchema: z.ZodType<
@@ -44,10 +72,11 @@ export const PaperSecretServiceCreateResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ageRecipient: z.nullable(z.string()).optional(),
+  ageRecipient: z.string().optional(),
+  ageSuite: PaperSecretServiceCreateResponseAgeSuite$inboundSchema.optional(),
   secret: z.nullable(PaperSecret$inboundSchema).optional(),
-  uploadUrl: z.nullable(z.string()).optional(),
-  vaultId: z.nullable(z.string()).optional(),
+  uploadUrl: z.string().optional(),
+  vaultId: z.string().optional(),
 });
 
 export function paperSecretServiceCreateResponseFromJSON(

@@ -39,7 +39,7 @@ export type BoolField = {
   /**
    * The defaultValue field.
    */
-  defaultValue?: boolean | null | undefined;
+  defaultValue?: boolean | undefined;
   rules?: BoolRules | null | undefined;
   toggleField?: ToggleField | null | undefined;
 };
@@ -51,14 +51,14 @@ export const BoolField$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   checkboxField: z.nullable(CheckboxField$inboundSchema).optional(),
-  defaultValue: z.nullable(z.boolean()).optional(),
+  defaultValue: z.boolean().optional(),
   rules: z.nullable(BoolRules$inboundSchema).optional(),
   toggleField: z.nullable(ToggleField$inboundSchema).optional(),
 });
 /** @internal */
 export type BoolField$Outbound = {
   checkboxField?: CheckboxField$Outbound | null | undefined;
-  defaultValue?: boolean | null | undefined;
+  defaultValue?: boolean | undefined;
   rules?: BoolRules$Outbound | null | undefined;
   toggleField?: ToggleField$Outbound | null | undefined;
 };
@@ -70,7 +70,7 @@ export const BoolField$outboundSchema: z.ZodType<
   BoolField
 > = z.object({
   checkboxField: z.nullable(CheckboxField$outboundSchema).optional(),
-  defaultValue: z.nullable(z.boolean()).optional(),
+  defaultValue: z.boolean().optional(),
   rules: z.nullable(BoolRules$outboundSchema).optional(),
   toggleField: z.nullable(ToggleField$outboundSchema).optional(),
 });

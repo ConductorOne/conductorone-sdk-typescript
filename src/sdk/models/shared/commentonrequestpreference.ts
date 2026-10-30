@@ -14,11 +14,11 @@ export type CommentOnRequestPreference = {
   /**
    * The enabled field.
    */
-  enabled?: boolean | null | undefined;
+  enabled?: boolean | undefined;
   /**
    * The locked field.
    */
-  locked?: boolean | null | undefined;
+  locked?: boolean | undefined;
 };
 
 /** @internal */
@@ -27,13 +27,13 @@ export const CommentOnRequestPreference$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  enabled: z.nullable(z.boolean()).optional(),
-  locked: z.nullable(z.boolean()).optional(),
+  enabled: z.boolean().optional(),
+  locked: z.boolean().optional(),
 });
 /** @internal */
 export type CommentOnRequestPreference$Outbound = {
-  enabled?: boolean | null | undefined;
-  locked?: boolean | null | undefined;
+  enabled?: boolean | undefined;
+  locked?: boolean | undefined;
 };
 
 /** @internal */
@@ -42,8 +42,8 @@ export const CommentOnRequestPreference$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CommentOnRequestPreference
 > = z.object({
-  enabled: z.nullable(z.boolean()).optional(),
-  locked: z.nullable(z.boolean()).optional(),
+  enabled: z.boolean().optional(),
+  locked: z.boolean().optional(),
 });
 
 export function commentOnRequestPreferenceToJSON(

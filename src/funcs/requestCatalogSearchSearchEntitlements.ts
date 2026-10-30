@@ -31,6 +31,7 @@ import { Result } from "../sdk/types/fp.js";
  *
  * @remarks
  * Search request catalogs based on filters specified in the request body.
+ *  Rows are heavy (each entitlement carries its user bindings) — request a small page_size (≤10) and set expand_mask to only the paths you need; broad expansion inlines whole related objects and bloats the response.
  */
 export function requestCatalogSearchSearchEntitlements(
   client: ConductoroneSDKTypescriptCore,

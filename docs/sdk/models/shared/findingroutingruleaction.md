@@ -5,7 +5,8 @@ The FindingRoutingRuleAction message.
 This message contains a oneof named action. Only a single field of the following list may be set at a time:
   - createTask
   - suppress
-  - notify
+  - snooze
+  - acceptRisk
 
 
 ## Example Usage
@@ -18,8 +19,9 @@ let value: FindingRoutingRuleAction = {};
 
 ## Fields
 
-| Field                                                                               | Type                                                                                | Required                                                                            | Description                                                                         |
-| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `createTask`                                                                        | [shared.CreateTaskAction](../../../sdk/models/shared/createtaskaction.md)           | :heavy_minus_sign:                                                                  | N/A                                                                                 |
-| `notify`                                                                            | [shared.NotifyAction](../../../sdk/models/shared/notifyaction.md)                   | :heavy_minus_sign:                                                                  | N/A                                                                                 |
-| `suppress`                                                                          | [shared.SuppressRoutingAction](../../../sdk/models/shared/suppressroutingaction.md) | :heavy_minus_sign:                                                                  | N/A                                                                                 |
+| Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `acceptRisk`                                                                            | [shared.AcceptRiskRoutingAction](../../../sdk/models/shared/acceptriskroutingaction.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `createTask`                                                                            | [shared.CreateTaskAction](../../../sdk/models/shared/createtaskaction.md)               | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `snooze`                                                                                | [shared.SnoozeRoutingAction](../../../sdk/models/shared/snoozeroutingaction.md)         | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `suppress`                                                                              | [shared.SuppressRoutingAction](../../../sdk/models/shared/suppressroutingaction.md)     | :heavy_minus_sign:                                                                      | N/A                                                                                     |

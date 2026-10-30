@@ -9,11 +9,17 @@ import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  AppUserMapper,
-  AppUserMapper$inboundSchema,
-  AppUserMapper$Outbound,
-  AppUserMapper$outboundSchema,
-} from "./appusermapper.js";
+  AppMatchBatonRef,
+  AppMatchBatonRef$inboundSchema,
+  AppMatchBatonRef$Outbound,
+  AppMatchBatonRef$outboundSchema,
+} from "./appmatchbatonref.js";
+import { AppUserMapper, AppUserMapper$inboundSchema } from "./appusermapper.js";
+import {
+  AppUserMapperInput,
+  AppUserMapperInput$Outbound,
+  AppUserMapperInput$outboundSchema,
+} from "./appusermapperinput.js";
 import { User, User$inboundSchema } from "./user.js";
 
 /**
@@ -60,7 +66,7 @@ export type App = {
    * @remarks
    *  Sparse ACL feature.
    */
-  accessModel?: AccessModel | null | undefined;
+  accessModel?: AccessModel | undefined;
   /**
    * Key/value metadata. Up to 16 entries; keys 1-128 chars; values 0-256
    *
@@ -77,11 +83,11 @@ export type App = {
   /**
    * The ID of the Account named by AccountName.
    */
-  appAccountId?: string | null | undefined;
+  appAccountId?: string | undefined;
   /**
    * The AccountName of the app. For example, AWS is AccountID, Github is Org Name, and Okta is Okta Subdomain.
    */
-  appAccountName?: string | null | undefined;
+  appAccountName?: string | undefined;
   /**
    * The owners of the app.
    */
@@ -90,83 +96,98 @@ export type App = {
   /**
    * The ID of the Certify Policy associated with this App.
    */
-  certifyPolicyId?: string | null | undefined;
+  certifyPolicyId?: string | undefined;
   /**
    * The connectorVersion field.
    */
-  connectorVersion?: number | null | undefined;
+  connectorVersion?: number | undefined;
   createdAt?: Date | null | undefined;
   /**
    * The ID for the default request catalog for this app.
    */
-  defaultRequestCatalogId?: string | null | undefined;
+  defaultRequestCatalogId?: string | undefined;
   deletedAt?: Date | null | undefined;
   /**
    * The app's description.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The app's display name.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * When enabled, resource ownership is sourced from the connector.
    */
-  enableConnectorSourcedOwnership?: boolean | null | undefined;
+  enableConnectorSourcedOwnership?: boolean | undefined;
+  /**
+   * When true, entitlements in this app default their description to their resource's description from the
+   *
+   * @remarks
+   *  connector. Entitlements whose description was manually edited keep that text.
+   */
+  entitlementsUseResourceDescription?: boolean | undefined;
   fieldMask?: string | null | undefined;
   /**
    * The ID of the Grant Policy associated with this App.
    */
-  grantPolicyId?: string | null | undefined;
+  grantPolicyId?: string | undefined;
   /**
    * The URL of an icon to display for the app.
    */
-  iconUrl?: string | null | undefined;
+  iconUrl?: string | undefined;
   /**
    * The ID of the app.
    */
-  id?: string | null | undefined;
+  id?: string | undefined;
   /**
    * The identityMatching field.
    */
-  identityMatching?: IdentityMatching | null | undefined;
+  identityMatching?: IdentityMatching | undefined;
   /**
    * If you add instructions here, they will be shown to users in the access request form when requesting access for this app.
    */
-  instructions?: string | null | undefined;
+  instructions?: string | undefined;
   /**
    * Specifies if the app is a directory.
    */
-  isDirectory?: boolean | null | undefined;
+  isDirectory?: boolean | undefined;
   /**
    * The isManuallyManaged field.
    */
-  isManuallyManaged?: boolean | null | undefined;
+  isManuallyManaged?: boolean | undefined;
   /**
    * The URL of a logo to display for the app.
    */
-  logoUri?: string | null | undefined;
+  logoUri?: string | undefined;
+  matchBatonRef?: AppMatchBatonRef | null | undefined;
   /**
    * The cost of an app per-seat, so that total cost can be calculated by the grant count.
+   *
+   * @remarks
+   *  Must be between 0 and 1,000,000 (USD per seat per month). On update, -1 resets the cost to its default.
    */
-  monthlyCostUsd?: number | null | undefined;
+  monthlyCostUsd?: number | undefined;
   /**
    * The ID of the app that created this app, if any.
    */
-  parentAppId?: string | null | undefined;
+  parentAppId?: string | undefined;
+  /**
+   * When enabled, revoking a grant also revokes the grants that source it.
+   */
+  revokeGrantSources?: boolean | undefined;
   /**
    * The ID of the Revoke Policy associated with this App.
    */
-  revokePolicyId?: string | null | undefined;
+  revokePolicyId?: string | undefined;
   /**
    * The strictAccessEntitlementProvisioning field.
    */
-  strictAccessEntitlementProvisioning?: boolean | null | undefined;
+  strictAccessEntitlementProvisioning?: boolean | undefined;
   updatedAt?: Date | null | undefined;
   /**
    * The number of users with grants to this app.
    */
-  userCount?: number | null | undefined;
+  userCount?: number | undefined;
 };
 
 /**
@@ -179,7 +200,7 @@ export type AppInput = {
    * @remarks
    *  Sparse ACL feature.
    */
-  accessModel?: AccessModel | null | undefined;
+  accessModel?: AccessModel | undefined;
   /**
    * Key/value metadata. Up to 16 entries; keys 1-128 chars; values 0-256
    *
@@ -193,63 +214,78 @@ export type AppInput = {
    *  `iac_resource_address`, `iac_tool_version`.
    */
   annotations?: { [k: string]: string } | undefined;
-  appUserMapper?: AppUserMapper | null | undefined;
+  appUserMapper?: AppUserMapperInput | null | undefined;
   /**
    * The ID of the Certify Policy associated with this App.
    */
-  certifyPolicyId?: string | null | undefined;
+  certifyPolicyId?: string | undefined;
   /**
    * The connectorVersion field.
    */
-  connectorVersion?: number | null | undefined;
+  connectorVersion?: number | undefined;
   /**
    * The ID for the default request catalog for this app.
    */
-  defaultRequestCatalogId?: string | null | undefined;
+  defaultRequestCatalogId?: string | undefined;
   /**
    * The app's description.
    */
-  description?: string | null | undefined;
+  description?: string | undefined;
   /**
    * The app's display name.
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * When enabled, resource ownership is sourced from the connector.
    */
-  enableConnectorSourcedOwnership?: boolean | null | undefined;
+  enableConnectorSourcedOwnership?: boolean | undefined;
+  /**
+   * When true, entitlements in this app default their description to their resource's description from the
+   *
+   * @remarks
+   *  connector. Entitlements whose description was manually edited keep that text.
+   */
+  entitlementsUseResourceDescription?: boolean | undefined;
   /**
    * The ID of the Grant Policy associated with this App.
    */
-  grantPolicyId?: string | null | undefined;
+  grantPolicyId?: string | undefined;
   /**
    * The URL of an icon to display for the app.
    */
-  iconUrl?: string | null | undefined;
+  iconUrl?: string | undefined;
   /**
    * The identityMatching field.
    */
-  identityMatching?: IdentityMatching | null | undefined;
+  identityMatching?: IdentityMatching | undefined;
   /**
    * If you add instructions here, they will be shown to users in the access request form when requesting access for this app.
    */
-  instructions?: string | null | undefined;
+  instructions?: string | undefined;
   /**
    * The isManuallyManaged field.
    */
-  isManuallyManaged?: boolean | null | undefined;
+  isManuallyManaged?: boolean | undefined;
+  matchBatonRef?: AppMatchBatonRef | null | undefined;
   /**
    * The cost of an app per-seat, so that total cost can be calculated by the grant count.
+   *
+   * @remarks
+   *  Must be between 0 and 1,000,000 (USD per seat per month). On update, -1 resets the cost to its default.
    */
-  monthlyCostUsd?: number | null | undefined;
+  monthlyCostUsd?: number | undefined;
+  /**
+   * When enabled, revoking a grant also revokes the grants that source it.
+   */
+  revokeGrantSources?: boolean | undefined;
   /**
    * The ID of the Revoke Policy associated with this App.
    */
-  revokePolicyId?: string | null | undefined;
+  revokePolicyId?: string | undefined;
   /**
    * The strictAccessEntitlementProvisioning field.
    */
-  strictAccessEntitlementProvisioning?: boolean | null | undefined;
+  strictAccessEntitlementProvisioning?: boolean | undefined;
 };
 
 /** @internal */
@@ -281,42 +317,44 @@ export const IdentityMatching$outboundSchema: z.ZodType<
 /** @internal */
 export const App$inboundSchema: z.ZodType<App, z.ZodTypeDef, unknown> = z
   .object({
-    accessModel: z.nullable(AccessModel$inboundSchema).optional(),
+    accessModel: AccessModel$inboundSchema.optional(),
     annotations: z.record(z.string()).optional(),
-    appAccountId: z.nullable(z.string()).optional(),
-    appAccountName: z.nullable(z.string()).optional(),
+    appAccountId: z.string().optional(),
+    appAccountName: z.string().optional(),
     appOwners: z.nullable(z.array(User$inboundSchema)).optional(),
     appUserMapper: z.nullable(AppUserMapper$inboundSchema).optional(),
-    certifyPolicyId: z.nullable(z.string()).optional(),
-    connectorVersion: z.nullable(z.number().int()).optional(),
+    certifyPolicyId: z.string().optional(),
+    connectorVersion: z.number().int().optional(),
     createdAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    defaultRequestCatalogId: z.nullable(z.string()).optional(),
+    defaultRequestCatalogId: z.string().optional(),
     deletedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    description: z.nullable(z.string()).optional(),
-    displayName: z.nullable(z.string()).optional(),
-    enableConnectorSourcedOwnership: z.nullable(z.boolean()).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    enableConnectorSourcedOwnership: z.boolean().optional(),
+    entitlementsUseResourceDescription: z.boolean().optional(),
     fieldMask: z.nullable(z.string()).optional(),
-    grantPolicyId: z.nullable(z.string()).optional(),
-    iconUrl: z.nullable(z.string()).optional(),
-    id: z.nullable(z.string()).optional(),
-    identityMatching: z.nullable(IdentityMatching$inboundSchema).optional(),
-    instructions: z.nullable(z.string()).optional(),
-    isDirectory: z.nullable(z.boolean()).optional(),
-    isManuallyManaged: z.nullable(z.boolean()).optional(),
-    logoUri: z.nullable(z.string()).optional(),
-    monthlyCostUsd: z.nullable(z.number().int()).optional(),
-    parentAppId: z.nullable(z.string()).optional(),
-    revokePolicyId: z.nullable(z.string()).optional(),
-    strictAccessEntitlementProvisioning: z.nullable(z.boolean()).optional(),
+    grantPolicyId: z.string().optional(),
+    iconUrl: z.string().optional(),
+    id: z.string().optional(),
+    identityMatching: IdentityMatching$inboundSchema.optional(),
+    instructions: z.string().optional(),
+    isDirectory: z.boolean().optional(),
+    isManuallyManaged: z.boolean().optional(),
+    logoUri: z.string().optional(),
+    matchBatonRef: z.nullable(AppMatchBatonRef$inboundSchema).optional(),
+    monthlyCostUsd: z.number().int().optional(),
+    parentAppId: z.string().optional(),
+    revokeGrantSources: z.boolean().optional(),
+    revokePolicyId: z.string().optional(),
+    strictAccessEntitlementProvisioning: z.boolean().optional(),
     updatedAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    userCount: z.nullable(z.string().transform(v => parseInt(v, 10)))
-      .optional(),
+    userCount: z.string().transform(v => parseInt(v, 10)).optional(),
   });
 
 export function appFromJSON(
@@ -331,23 +369,26 @@ export function appFromJSON(
 
 /** @internal */
 export type AppInput$Outbound = {
-  accessModel?: string | null | undefined;
+  accessModel?: string | undefined;
   annotations?: { [k: string]: string } | undefined;
-  appUserMapper?: AppUserMapper$Outbound | null | undefined;
-  certifyPolicyId?: string | null | undefined;
-  connectorVersion?: number | null | undefined;
-  defaultRequestCatalogId?: string | null | undefined;
-  description?: string | null | undefined;
-  displayName?: string | null | undefined;
-  enableConnectorSourcedOwnership?: boolean | null | undefined;
-  grantPolicyId?: string | null | undefined;
-  iconUrl?: string | null | undefined;
-  identityMatching?: string | null | undefined;
-  instructions?: string | null | undefined;
-  isManuallyManaged?: boolean | null | undefined;
-  monthlyCostUsd?: number | null | undefined;
-  revokePolicyId?: string | null | undefined;
-  strictAccessEntitlementProvisioning?: boolean | null | undefined;
+  appUserMapper?: AppUserMapperInput$Outbound | null | undefined;
+  certifyPolicyId?: string | undefined;
+  connectorVersion?: number | undefined;
+  defaultRequestCatalogId?: string | undefined;
+  description?: string | undefined;
+  displayName?: string | undefined;
+  enableConnectorSourcedOwnership?: boolean | undefined;
+  entitlementsUseResourceDescription?: boolean | undefined;
+  grantPolicyId?: string | undefined;
+  iconUrl?: string | undefined;
+  identityMatching?: string | undefined;
+  instructions?: string | undefined;
+  isManuallyManaged?: boolean | undefined;
+  matchBatonRef?: AppMatchBatonRef$Outbound | null | undefined;
+  monthlyCostUsd?: number | undefined;
+  revokeGrantSources?: boolean | undefined;
+  revokePolicyId?: string | undefined;
+  strictAccessEntitlementProvisioning?: boolean | undefined;
 };
 
 /** @internal */
@@ -356,23 +397,26 @@ export const AppInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AppInput
 > = z.object({
-  accessModel: z.nullable(AccessModel$outboundSchema).optional(),
+  accessModel: AccessModel$outboundSchema.optional(),
   annotations: z.record(z.string()).optional(),
-  appUserMapper: z.nullable(AppUserMapper$outboundSchema).optional(),
-  certifyPolicyId: z.nullable(z.string()).optional(),
-  connectorVersion: z.nullable(z.number().int()).optional(),
-  defaultRequestCatalogId: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  displayName: z.nullable(z.string()).optional(),
-  enableConnectorSourcedOwnership: z.nullable(z.boolean()).optional(),
-  grantPolicyId: z.nullable(z.string()).optional(),
-  iconUrl: z.nullable(z.string()).optional(),
-  identityMatching: z.nullable(IdentityMatching$outboundSchema).optional(),
-  instructions: z.nullable(z.string()).optional(),
-  isManuallyManaged: z.nullable(z.boolean()).optional(),
-  monthlyCostUsd: z.nullable(z.number().int()).optional(),
-  revokePolicyId: z.nullable(z.string()).optional(),
-  strictAccessEntitlementProvisioning: z.nullable(z.boolean()).optional(),
+  appUserMapper: z.nullable(AppUserMapperInput$outboundSchema).optional(),
+  certifyPolicyId: z.string().optional(),
+  connectorVersion: z.number().int().optional(),
+  defaultRequestCatalogId: z.string().optional(),
+  description: z.string().optional(),
+  displayName: z.string().optional(),
+  enableConnectorSourcedOwnership: z.boolean().optional(),
+  entitlementsUseResourceDescription: z.boolean().optional(),
+  grantPolicyId: z.string().optional(),
+  iconUrl: z.string().optional(),
+  identityMatching: IdentityMatching$outboundSchema.optional(),
+  instructions: z.string().optional(),
+  isManuallyManaged: z.boolean().optional(),
+  matchBatonRef: z.nullable(AppMatchBatonRef$outboundSchema).optional(),
+  monthlyCostUsd: z.number().int().optional(),
+  revokeGrantSources: z.boolean().optional(),
+  revokePolicyId: z.string().optional(),
+  strictAccessEntitlementProvisioning: z.boolean().optional(),
 });
 
 export function appInputToJSON(appInput: AppInput): string {

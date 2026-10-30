@@ -29,7 +29,16 @@ export type SendSlackMessage = {
   /**
    * The body field.
    */
-  body?: string | null | undefined;
+  body?: string | undefined;
+  /**
+   * When true, the channel value (channel_name / channel_name_cel) is a Slack
+   *
+   * @remarks
+   *  channel ID rather than a name. The backend looks the channel up by ID and
+   *  fails permanently if it does not exist or the bot cannot access it — it does
+   *  not create or search by name. Only applies to channel delivery.
+   */
+  channelIsId?: boolean | undefined;
   /**
    * The channelName field.
    *
@@ -49,11 +58,11 @@ export type SendSlackMessage = {
   /**
    * The useSubjectUser field.
    */
-  useSubjectUser?: boolean | null | undefined;
+  useSubjectUser?: boolean | undefined;
   /**
    * The userIdsCel field.
    */
-  userIdsCel?: string | null | undefined;
+  userIdsCel?: string | undefined;
   /**
    * The userRefs field.
    */
@@ -66,20 +75,22 @@ export const SendSlackMessage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  body: z.nullable(z.string()).optional(),
+  body: z.string().optional(),
+  channelIsId: z.boolean().optional(),
   channelName: z.nullable(z.string()).optional(),
   channelNameCel: z.nullable(z.string()).optional(),
-  useSubjectUser: z.nullable(z.boolean()).optional(),
-  userIdsCel: z.nullable(z.string()).optional(),
+  useSubjectUser: z.boolean().optional(),
+  userIdsCel: z.string().optional(),
   userRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
 });
 /** @internal */
 export type SendSlackMessage$Outbound = {
-  body?: string | null | undefined;
+  body?: string | undefined;
+  channelIsId?: boolean | undefined;
   channelName?: string | null | undefined;
   channelNameCel?: string | null | undefined;
-  useSubjectUser?: boolean | null | undefined;
-  userIdsCel?: string | null | undefined;
+  useSubjectUser?: boolean | undefined;
+  userIdsCel?: string | undefined;
   userRefs?: Array<UserRef$Outbound> | null | undefined;
 };
 
@@ -89,11 +100,12 @@ export const SendSlackMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SendSlackMessage
 > = z.object({
-  body: z.nullable(z.string()).optional(),
+  body: z.string().optional(),
+  channelIsId: z.boolean().optional(),
   channelName: z.nullable(z.string()).optional(),
   channelNameCel: z.nullable(z.string()).optional(),
-  useSubjectUser: z.nullable(z.boolean()).optional(),
-  userIdsCel: z.nullable(z.string()).optional(),
+  useSubjectUser: z.boolean().optional(),
+  userIdsCel: z.string().optional(),
   userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
 });
 

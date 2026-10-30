@@ -14,7 +14,7 @@ export type EscalationInstanceReplacePolicy = {
   /**
    * The policyId field.
    */
-  policyId?: string | null | undefined;
+  policyId?: string | undefined;
 };
 
 /** @internal */
@@ -23,11 +23,11 @@ export const EscalationInstanceReplacePolicy$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  policyId: z.nullable(z.string()).optional(),
+  policyId: z.string().optional(),
 });
 /** @internal */
 export type EscalationInstanceReplacePolicy$Outbound = {
-  policyId?: string | null | undefined;
+  policyId?: string | undefined;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const EscalationInstanceReplacePolicy$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EscalationInstanceReplacePolicy
 > = z.object({
-  policyId: z.nullable(z.string()).optional(),
+  policyId: z.string().optional(),
 });
 
 export function escalationInstanceReplacePolicyToJSON(

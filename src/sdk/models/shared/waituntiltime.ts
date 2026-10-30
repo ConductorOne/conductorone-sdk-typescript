@@ -14,15 +14,15 @@ export type WaitUntilTime = {
   /**
    * The hours field.
    */
-  hours?: number | null | undefined;
+  hours?: number | undefined;
   /**
    * The minutes field.
    */
-  minutes?: number | null | undefined;
+  minutes?: number | undefined;
   /**
    * The timezone field.
    */
-  timezone?: string | null | undefined;
+  timezone?: string | undefined;
 };
 
 /** @internal */
@@ -31,15 +31,15 @@ export const WaitUntilTime$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  hours: z.nullable(z.number().int()).optional(),
-  minutes: z.nullable(z.number().int()).optional(),
-  timezone: z.nullable(z.string()).optional(),
+  hours: z.number().int().optional(),
+  minutes: z.number().int().optional(),
+  timezone: z.string().optional(),
 });
 /** @internal */
 export type WaitUntilTime$Outbound = {
-  hours?: number | null | undefined;
-  minutes?: number | null | undefined;
-  timezone?: string | null | undefined;
+  hours?: number | undefined;
+  minutes?: number | undefined;
+  timezone?: string | undefined;
 };
 
 /** @internal */
@@ -48,9 +48,9 @@ export const WaitUntilTime$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WaitUntilTime
 > = z.object({
-  hours: z.nullable(z.number().int()).optional(),
-  minutes: z.nullable(z.number().int()).optional(),
-  timezone: z.nullable(z.string()).optional(),
+  hours: z.number().int().optional(),
+  minutes: z.number().int().optional(),
+  timezone: z.string().optional(),
 });
 
 export function waitUntilTimeToJSON(waitUntilTime: WaitUntilTime): string {

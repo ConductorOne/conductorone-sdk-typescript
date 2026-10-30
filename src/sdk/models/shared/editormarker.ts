@@ -31,27 +31,27 @@ export type EditorMarker = {
   /**
    * The endColumn field.
    */
-  endColumn?: number | null | undefined;
+  endColumn?: number | undefined;
   /**
    * The endLineNumber field.
    */
-  endLineNumber?: number | null | undefined;
+  endLineNumber?: number | undefined;
   /**
    * The message field.
    */
-  message?: string | null | undefined;
+  message?: string | undefined;
   /**
    * The severity field.
    */
-  severity?: Severity | null | undefined;
+  severity?: Severity | undefined;
   /**
    * The startColumn field.
    */
-  startColumn?: number | null | undefined;
+  startColumn?: number | undefined;
   /**
    * The startLineNumber field.
    */
-  startLineNumber?: number | null | undefined;
+  startLineNumber?: number | undefined;
 };
 
 /** @internal */
@@ -67,12 +67,12 @@ export const EditorMarker$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  endColumn: z.nullable(z.number().int()).optional(),
-  endLineNumber: z.nullable(z.number().int()).optional(),
-  message: z.nullable(z.string()).optional(),
-  severity: z.nullable(Severity$inboundSchema).optional(),
-  startColumn: z.nullable(z.number().int()).optional(),
-  startLineNumber: z.nullable(z.number().int()).optional(),
+  endColumn: z.number().int().optional(),
+  endLineNumber: z.number().int().optional(),
+  message: z.string().optional(),
+  severity: Severity$inboundSchema.optional(),
+  startColumn: z.number().int().optional(),
+  startLineNumber: z.number().int().optional(),
 });
 
 export function editorMarkerFromJSON(

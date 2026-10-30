@@ -44,7 +44,7 @@ export type AppEntitlementSearchServiceSearchGrantsResponse = {
   /**
    * The nextPageToken field.
    */
-  nextPageToken?: string | null | undefined;
+  nextPageToken?: string | undefined;
 };
 
 /** @internal */
@@ -94,7 +94,7 @@ export const AppEntitlementSearchServiceSearchGrantsResponse$inboundSchema:
     ).optional(),
     list: z.nullable(z.array(AppEntitlementWithUserBinding$inboundSchema))
       .optional(),
-    nextPageToken: z.nullable(z.string()).optional(),
+    nextPageToken: z.string().optional(),
   });
 
 export function appEntitlementSearchServiceSearchGrantsResponseFromJSON(

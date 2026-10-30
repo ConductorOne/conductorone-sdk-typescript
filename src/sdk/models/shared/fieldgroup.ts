@@ -14,11 +14,11 @@ export type FieldGroup = {
   /**
    * The default field.
    */
-  default?: boolean | null | undefined;
+  default?: boolean | undefined;
   /**
    * Nice name this group (e.g. renders as a Tab label)
    */
-  displayName?: string | null | undefined;
+  displayName?: string | undefined;
   /**
    * Field names are "guaranteed" to be unique, but can be repeated in and between lists.
    */
@@ -26,11 +26,11 @@ export type FieldGroup = {
   /**
    * Optional. User-facing help text.
    */
-  helpText?: string | null | undefined;
+  helpText?: string | undefined;
   /**
    * Unique ID.
    */
-  name?: string | null | undefined;
+  name?: string | undefined;
 };
 
 /** @internal */
@@ -39,11 +39,11 @@ export const FieldGroup$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  default: z.nullable(z.boolean()).optional(),
-  displayName: z.nullable(z.string()).optional(),
+  default: z.boolean().optional(),
+  displayName: z.string().optional(),
   fieldNames: z.nullable(z.array(z.string())).optional(),
-  helpText: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
+  helpText: z.string().optional(),
+  name: z.string().optional(),
 });
 
 export function fieldGroupFromJSON(

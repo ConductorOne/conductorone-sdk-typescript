@@ -14,11 +14,11 @@ export type TaskRevokeSourceReview = {
   /**
    * The ID of the access review associated with the revoke task.
    */
-  accessReviewId?: string | null | undefined;
+  accessReviewId?: string | undefined;
   /**
    * The ID of the certify ticket that was denied and created this revoke task.
    */
-  certTicketId?: string | null | undefined;
+  certTicketId?: string | undefined;
 };
 
 /** @internal */
@@ -27,13 +27,13 @@ export const TaskRevokeSourceReview$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  accessReviewId: z.nullable(z.string()).optional(),
-  certTicketId: z.nullable(z.string()).optional(),
+  accessReviewId: z.string().optional(),
+  certTicketId: z.string().optional(),
 });
 /** @internal */
 export type TaskRevokeSourceReview$Outbound = {
-  accessReviewId?: string | null | undefined;
-  certTicketId?: string | null | undefined;
+  accessReviewId?: string | undefined;
+  certTicketId?: string | undefined;
 };
 
 /** @internal */
@@ -42,8 +42,8 @@ export const TaskRevokeSourceReview$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TaskRevokeSourceReview
 > = z.object({
-  accessReviewId: z.nullable(z.string()).optional(),
-  certTicketId: z.nullable(z.string()).optional(),
+  accessReviewId: z.string().optional(),
+  certTicketId: z.string().optional(),
 });
 
 export function taskRevokeSourceReviewToJSON(

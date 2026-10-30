@@ -14,27 +14,27 @@ export type TestTokenStepResult = {
   /**
    * Actual value from the token.
    */
-  actual?: string | null | undefined;
+  actual?: string | undefined;
   /**
    * Human-readable detail message.
    */
-  detail?: string | null | undefined;
+  detail?: string | undefined;
   /**
    * Expected value (for comparison steps).
    */
-  expected?: string | null | undefined;
+  expected?: string | undefined;
   /**
    * Whether this step passed.
    */
-  passed?: boolean | null | undefined;
+  passed?: boolean | undefined;
   /**
    * Whether this step was skipped (e.g., CIDR check when no allowlist configured).
    */
-  skipped?: boolean | null | undefined;
+  skipped?: boolean | undefined;
   /**
    * Step name for display (e.g., "JWT decode", "Issuer match").
    */
-  stepName?: string | null | undefined;
+  stepName?: string | undefined;
 };
 
 /** @internal */
@@ -43,12 +43,12 @@ export const TestTokenStepResult$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  actual: z.nullable(z.string()).optional(),
-  detail: z.nullable(z.string()).optional(),
-  expected: z.nullable(z.string()).optional(),
-  passed: z.nullable(z.boolean()).optional(),
-  skipped: z.nullable(z.boolean()).optional(),
-  stepName: z.nullable(z.string()).optional(),
+  actual: z.string().optional(),
+  detail: z.string().optional(),
+  expected: z.string().optional(),
+  passed: z.boolean().optional(),
+  skipped: z.boolean().optional(),
+  stepName: z.string().optional(),
 });
 
 export function testTokenStepResultFromJSON(

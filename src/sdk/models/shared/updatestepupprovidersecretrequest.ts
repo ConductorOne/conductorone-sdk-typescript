@@ -11,12 +11,12 @@ export type UpdateStepUpProviderSecretRequest = {
   /**
    * The new OAuth2 client secret. Write-only; never returned in responses.
    */
-  clientSecret?: string | null | undefined;
+  clientSecret?: string | undefined;
 };
 
 /** @internal */
 export type UpdateStepUpProviderSecretRequest$Outbound = {
-  clientSecret?: string | null | undefined;
+  clientSecret?: string | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const UpdateStepUpProviderSecretRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateStepUpProviderSecretRequest
 > = z.object({
-  clientSecret: z.nullable(z.string()).optional(),
+  clientSecret: z.string().optional(),
 });
 
 export function updateStepUpProviderSecretRequestToJSON(

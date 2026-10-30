@@ -16,18 +16,18 @@ export type ServicePrincipalServiceListBindingsRequest = {
   /**
    * The pageSize field.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   subject?: ServicePrincipalBindingSubject | null | undefined;
 };
 
 /** @internal */
 export type ServicePrincipalServiceListBindingsRequest$Outbound = {
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
   subject?: ServicePrincipalBindingSubject$Outbound | null | undefined;
 };
 
@@ -38,8 +38,8 @@ export const ServicePrincipalServiceListBindingsRequest$outboundSchema:
     z.ZodTypeDef,
     ServicePrincipalServiceListBindingsRequest
   > = z.object({
-    pageSize: z.nullable(z.number().int()).optional(),
-    pageToken: z.nullable(z.string()).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
     subject: z.nullable(ServicePrincipalBindingSubject$outboundSchema)
       .optional(),
   });

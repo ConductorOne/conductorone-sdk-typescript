@@ -35,7 +35,7 @@ export type SharingMode = OpenEnum<typeof SharingMode>;
 /**
  * Sort order
  */
-export const SortBy = {
+export const PaperSecretAdminServiceSearchRequestSortBy = {
   SearchSortByUnspecified: "SEARCH_SORT_BY_UNSPECIFIED",
   SearchSortByCreatedDesc: "SEARCH_SORT_BY_CREATED_DESC",
   SearchSortByCreatedAsc: "SEARCH_SORT_BY_CREATED_ASC",
@@ -45,7 +45,9 @@ export const SortBy = {
 /**
  * Sort order
  */
-export type SortBy = OpenEnum<typeof SortBy>;
+export type PaperSecretAdminServiceSearchRequestSortBy = OpenEnum<
+  typeof PaperSecretAdminServiceSearchRequestSortBy
+>;
 
 export const PaperSecretAdminServiceSearchRequestStatuses = {
   SecretStatusUnspecified: "SECRET_STATUS_UNSPECIFIED",
@@ -72,31 +74,31 @@ export type PaperSecretAdminServiceSearchRequest = {
   /**
    * Include deleted secrets
    */
-  includeDeleted?: boolean | null | undefined;
+  includeDeleted?: boolean | undefined;
   /**
    * The pageSize field.
    */
-  pageSize?: number | null | undefined;
+  pageSize?: number | undefined;
   /**
    * The pageToken field.
    */
-  pageToken?: string | null | undefined;
+  pageToken?: string | undefined;
   /**
    * Fuzzy search by display name
    */
-  query?: string | null | undefined;
+  query?: string | undefined;
   /**
    * Filter by secret type (optional)
    */
-  secretType?: SecretType | null | undefined;
+  secretType?: SecretType | undefined;
   /**
    * Filter by sharing mode (optional)
    */
-  sharingMode?: SharingMode | null | undefined;
+  sharingMode?: SharingMode | undefined;
   /**
    * Sort order
    */
-  sortBy?: SortBy | null | undefined;
+  sortBy?: PaperSecretAdminServiceSearchRequestSortBy | undefined;
   /**
    * Filter by status (optional)
    */
@@ -121,8 +123,9 @@ export const SharingMode$outboundSchema: z.ZodType<
 > = openEnums.outboundSchema(SharingMode);
 
 /** @internal */
-export const SortBy$outboundSchema: z.ZodType<string, z.ZodTypeDef, SortBy> =
-  openEnums.outboundSchema(SortBy);
+export const PaperSecretAdminServiceSearchRequestSortBy$outboundSchema:
+  z.ZodType<string, z.ZodTypeDef, PaperSecretAdminServiceSearchRequestSortBy> =
+    openEnums.outboundSchema(PaperSecretAdminServiceSearchRequestSortBy);
 
 /** @internal */
 export const PaperSecretAdminServiceSearchRequestStatuses$outboundSchema:
@@ -137,13 +140,13 @@ export type PaperSecretAdminServiceSearchRequest$Outbound = {
   createdAfter?: string | null | undefined;
   createdBefore?: string | null | undefined;
   creatorUserIds?: Array<string> | null | undefined;
-  includeDeleted?: boolean | null | undefined;
-  pageSize?: number | null | undefined;
-  pageToken?: string | null | undefined;
-  query?: string | null | undefined;
-  secretType?: string | null | undefined;
-  sharingMode?: string | null | undefined;
-  sortBy?: string | null | undefined;
+  includeDeleted?: boolean | undefined;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+  query?: string | undefined;
+  secretType?: string | undefined;
+  sharingMode?: string | undefined;
+  sortBy?: string | undefined;
   statuses?: Array<string> | null | undefined;
 };
 
@@ -157,13 +160,13 @@ export const PaperSecretAdminServiceSearchRequest$outboundSchema: z.ZodType<
   createdBefore: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
   creatorUserIds: z.nullable(z.array(z.string())).optional(),
-  includeDeleted: z.nullable(z.boolean()).optional(),
-  pageSize: z.nullable(z.number().int()).optional(),
-  pageToken: z.nullable(z.string()).optional(),
-  query: z.nullable(z.string()).optional(),
-  secretType: z.nullable(SecretType$outboundSchema).optional(),
-  sharingMode: z.nullable(SharingMode$outboundSchema).optional(),
-  sortBy: z.nullable(SortBy$outboundSchema).optional(),
+  includeDeleted: z.boolean().optional(),
+  pageSize: z.number().int().optional(),
+  pageToken: z.string().optional(),
+  query: z.string().optional(),
+  secretType: SecretType$outboundSchema.optional(),
+  sharingMode: SharingMode$outboundSchema.optional(),
+  sortBy: PaperSecretAdminServiceSearchRequestSortBy$outboundSchema.optional(),
   statuses: z.nullable(
     z.array(PaperSecretAdminServiceSearchRequestStatuses$outboundSchema),
   ).optional(),
