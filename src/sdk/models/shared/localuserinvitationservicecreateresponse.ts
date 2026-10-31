@@ -16,6 +16,10 @@ import {
  */
 export type LocalUserInvitationServiceCreateResponse = {
   invitation?: LocalUserInvitation | null | undefined;
+  /**
+   * Link the invitee opens to accept. Returned only here; C1 stores just a hash of its secret.
+   */
+  invitationUrl?: string | undefined;
 };
 
 /** @internal */
@@ -25,6 +29,7 @@ export const LocalUserInvitationServiceCreateResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   invitation: z.nullable(LocalUserInvitation$inboundSchema).optional(),
+  invitationUrl: z.string().optional(),
 });
 
 export function localUserInvitationServiceCreateResponseFromJSON(

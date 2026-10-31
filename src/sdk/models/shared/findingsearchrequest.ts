@@ -21,6 +21,32 @@ export type FindingSearchRequestAppUserTypes = OpenEnum<
   typeof FindingSearchRequestAppUserTypes
 >;
 
+export const ExcludeFindingTypes = {
+  FindingTypeUnspecified: "FINDING_TYPE_UNSPECIFIED",
+  FindingTypeSimilarUsernameMatch: "FINDING_TYPE_SIMILAR_USERNAME_MATCH",
+  FindingTypeServiceAccountMisclassification:
+    "FINDING_TYPE_SERVICE_ACCOUNT_MISCLASSIFICATION",
+  FindingTypeNhiUnowned: "FINDING_TYPE_NHI_UNOWNED",
+  FindingTypeServiceAccountUnowned: "FINDING_TYPE_SERVICE_ACCOUNT_UNOWNED",
+  FindingTypeDecoyCredentialUsed: "FINDING_TYPE_DECOY_CREDENTIAL_USED",
+  FindingTypeCustom: "FINDING_TYPE_CUSTOM",
+  FindingTypeConnectorAnomalyDetectionDisabled:
+    "FINDING_TYPE_CONNECTOR_ANOMALY_DETECTION_DISABLED",
+  FindingTypeDeactivatedOwner: "FINDING_TYPE_DEACTIVATED_OWNER",
+  FindingTypeUnusedSecret: "FINDING_TYPE_UNUSED_SECRET",
+  FindingTypeCredentialPubliclyExposed:
+    "FINDING_TYPE_CREDENTIAL_PUBLICLY_EXPOSED",
+  FindingTypeDecoyPubliclyExposed: "FINDING_TYPE_DECOY_PUBLICLY_EXPOSED",
+  FindingTypeCredentialExpiring: "FINDING_TYPE_CREDENTIAL_EXPIRING",
+  FindingTypeConnectorSyncFailing: "FINDING_TYPE_CONNECTOR_SYNC_FAILING",
+  FindingTypeShadowMcp: "FINDING_TYPE_SHADOW_MCP",
+  FindingTypeShadowApp: "FINDING_TYPE_SHADOW_APP",
+  FindingTypeMcpGatewayToolCallRisk: "FINDING_TYPE_MCP_GATEWAY_TOOL_CALL_RISK",
+  FindingTypeEdge: "FINDING_TYPE_EDGE",
+  FindingTypeAccessConflict: "FINDING_TYPE_ACCESS_CONFLICT",
+} as const;
+export type ExcludeFindingTypes = OpenEnum<typeof ExcludeFindingTypes>;
+
 export const FindingTypes = {
   FindingTypeUnspecified: "FINDING_TYPE_UNSPECIFIED",
   FindingTypeSimilarUsernameMatch: "FINDING_TYPE_SIMILAR_USERNAME_MATCH",
@@ -43,6 +69,7 @@ export const FindingTypes = {
   FindingTypeShadowApp: "FINDING_TYPE_SHADOW_APP",
   FindingTypeMcpGatewayToolCallRisk: "FINDING_TYPE_MCP_GATEWAY_TOOL_CALL_RISK",
   FindingTypeEdge: "FINDING_TYPE_EDGE",
+  FindingTypeAccessConflict: "FINDING_TYPE_ACCESS_CONFLICT",
 } as const;
 export type FindingTypes = OpenEnum<typeof FindingTypes>;
 
@@ -167,6 +194,13 @@ export type FindingSearchRequest = {
    */
   edgeIds?: Array<string> | null | undefined;
   /**
+   * Exclude findings of these types. Applied together with every other filter,
+   *
+   * @remarks
+   *  including finding_types. Empty = not applied.
+   */
+  excludeFindingTypes?: Array<ExcludeFindingTypes> | null | undefined;
+  /**
    * Filter by finding type (OR within field).
    */
   findingTypes?: Array<FindingTypes> | null | undefined;
@@ -243,6 +277,13 @@ export const FindingSearchRequestAppUserTypes$outboundSchema: z.ZodType<
 > = openEnums.outboundSchema(FindingSearchRequestAppUserTypes);
 
 /** @internal */
+export const ExcludeFindingTypes$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  ExcludeFindingTypes
+> = openEnums.outboundSchema(ExcludeFindingTypes);
+
+/** @internal */
 export const FindingTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
@@ -287,6 +328,7 @@ export type FindingSearchRequest$Outbound = {
   customSubTypes?: Array<string> | null | undefined;
   decoyIds?: Array<string> | null | undefined;
   edgeIds?: Array<string> | null | undefined;
+  excludeFindingTypes?: Array<string> | null | undefined;
   findingTypes?: Array<string> | null | undefined;
   includeUnassigned?: boolean | undefined;
   nhiTypes?: Array<string> | null | undefined;
@@ -320,6 +362,8 @@ export const FindingSearchRequest$outboundSchema: z.ZodType<
   customSubTypes: z.nullable(z.array(z.string())).optional(),
   decoyIds: z.nullable(z.array(z.string())).optional(),
   edgeIds: z.nullable(z.array(z.string())).optional(),
+  excludeFindingTypes: z.nullable(z.array(ExcludeFindingTypes$outboundSchema))
+    .optional(),
   findingTypes: z.nullable(z.array(FindingTypes$outboundSchema)).optional(),
   includeUnassigned: z.boolean().optional(),
   nhiTypes: z.nullable(z.array(NhiTypes$outboundSchema)).optional(),
