@@ -9,6 +9,18 @@ import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  AccessConflictEvidence,
+  AccessConflictEvidence$inboundSchema,
+  AccessConflictEvidence$Outbound,
+  AccessConflictEvidence$outboundSchema,
+} from "./accessconflictevidence.js";
+import {
+  AccessConflictType,
+  AccessConflictType$inboundSchema,
+  AccessConflictType$Outbound,
+  AccessConflictType$outboundSchema,
+} from "./accessconflicttype.js";
+import {
   AppResourceTarget,
   AppResourceTarget$inboundSchema,
   AppResourceTarget$Outbound,
@@ -312,6 +324,7 @@ export type FindingState = OpenEnum<typeof FindingState>;
  *   - shadowApp
  *   - mcpGatewayToolCallRisk
  *   - edgeFinding
+ *   - accessConflict
  *
  * This message contains a oneof named target. Only a single field of the following list may be set at a time:
  *   - identityUserTarget
@@ -335,8 +348,11 @@ export type FindingState = OpenEnum<typeof FindingState>;
  *   - shadowMcpEvidence
  *   - mcpGatewayToolCallRiskEvidence
  *   - edgeFindingEvidence
+ *   - accessConflictEvidence
  */
 export type Finding = {
+  accessConflict?: AccessConflictType | null | undefined;
+  accessConflictEvidence?: AccessConflictEvidence | null | undefined;
   /**
    * Bounded key/value metadata bag. Limits: ≤16 entries; keys 1-128 chars
    *
@@ -550,6 +566,9 @@ export const FindingState$outboundSchema: z.ZodType<
 /** @internal */
 export const Finding$inboundSchema: z.ZodType<Finding, z.ZodTypeDef, unknown> =
   z.object({
+    accessConflict: z.nullable(AccessConflictType$inboundSchema).optional(),
+    accessConflictEvidence: z.nullable(AccessConflictEvidence$inboundSchema)
+      .optional(),
     annotations: z.record(z.string()).optional(),
     appId: z.string().optional(),
     appResourceTarget: z.nullable(AppResourceTarget$inboundSchema).optional(),
@@ -668,6 +687,8 @@ export const Finding$inboundSchema: z.ZodType<Finding, z.ZodTypeDef, unknown> =
   });
 /** @internal */
 export type Finding$Outbound = {
+  accessConflict?: AccessConflictType$Outbound | null | undefined;
+  accessConflictEvidence?: AccessConflictEvidence$Outbound | null | undefined;
   annotations?: { [k: string]: string } | undefined;
   appId?: string | undefined;
   appResourceTarget?: AppResourceTarget$Outbound | null | undefined;
@@ -780,6 +801,9 @@ export const Finding$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Finding
 > = z.object({
+  accessConflict: z.nullable(AccessConflictType$outboundSchema).optional(),
+  accessConflictEvidence: z.nullable(AccessConflictEvidence$outboundSchema)
+    .optional(),
   annotations: z.record(z.string()).optional(),
   appId: z.string().optional(),
   appResourceTarget: z.nullable(AppResourceTarget$outboundSchema).optional(),
