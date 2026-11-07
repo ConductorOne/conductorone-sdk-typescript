@@ -90,7 +90,7 @@ async function $do(
     ? null
     : encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/api/v1/golinks")();
+  const path = pathToFunc("/api/v1/shortlinks")();
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",

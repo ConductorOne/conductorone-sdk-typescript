@@ -86,10 +86,13 @@ export const Oauth2Mode = {
 export type Oauth2Mode = OpenEnum<typeof Oauth2Mode>;
 
 /**
- * Per-server override for tool approval on MCP servers without a saved
+ * Deprecated: set tool_enablement on the MCP registration config instead.
  *
  * @remarks
- *  registration access level. UNSPECIFIED inherits the tenant setting.
+ *  Still read as the tool approval fallback for MCP servers without a saved
+ *  tool_enablement mode. UNSPECIFIED inherits the tenant setting.
+ *
+ * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export const RequireToolApproval = {
   OptionalBoolUnspecified: "OPTIONAL_BOOL_UNSPECIFIED",
@@ -97,10 +100,13 @@ export const RequireToolApproval = {
   OptionalBoolFalse: "OPTIONAL_BOOL_FALSE",
 } as const;
 /**
- * Per-server override for tool approval on MCP servers without a saved
+ * Deprecated: set tool_enablement on the MCP registration config instead.
  *
  * @remarks
- *  registration access level. UNSPECIFIED inherits the tenant setting.
+ *  Still read as the tool approval fallback for MCP servers without a saved
+ *  tool_enablement mode. UNSPECIFIED inherits the tenant setting.
+ *
+ * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type RequireToolApproval = OpenEnum<typeof RequireToolApproval>;
 
@@ -413,10 +419,13 @@ export type MCPServerView = {
    */
   oauth2TokenUrl?: string | undefined;
   /**
-   * Per-server override for tool approval on MCP servers without a saved
+   * Deprecated: set tool_enablement on the MCP registration config instead.
    *
    * @remarks
-   *  registration access level. UNSPECIFIED inherits the tenant setting.
+   *  Still read as the tool approval fallback for MCP servers without a saved
+   *  tool_enablement mode. UNSPECIFIED inherits the tenant setting.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   requireToolApproval?: RequireToolApproval | undefined;
   /**
@@ -514,10 +523,13 @@ export type MCPServerViewInput = {
    */
   mcpServerCatalogId?: string | undefined;
   /**
-   * Per-server override for tool approval on MCP servers without a saved
+   * Deprecated: set tool_enablement on the MCP registration config instead.
    *
    * @remarks
-   *  registration access level. UNSPECIFIED inherits the tenant setting.
+   *  Still read as the tool approval fallback for MCP servers without a saved
+   *  tool_enablement mode. UNSPECIFIED inherits the tenant setting.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   requireToolApproval?: RequireToolApproval | undefined;
   /**

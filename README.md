@@ -226,6 +226,10 @@ run();
 
 * [search](docs/sdks/apikeysearch/README.md#search) - NOTE: Searches personal and service principal API keys
 
+### [APIKeyUsage](docs/sdks/apikeyusage/README.md)
+
+* [batchGet](docs/sdks/apikeyusage/README.md#batchget) - Batch Get
+
 ### [AppAccessRequestsDefaults](docs/sdks/appaccessrequestsdefaults/README.md)
 
 * [getAppAccessRequestsDefaults](docs/sdks/appaccessrequestsdefaults/README.md#getappaccessrequestsdefaults) - Get App Access Requests Defaults
@@ -430,6 +434,7 @@ run();
 * [listOwnedServiceAccounts](docs/sdks/appuser/README.md#listownedserviceaccounts) - List Owned Service Accounts
 * [list](docs/sdks/appuser/README.md#list) - List
 * [listAppUserCredentials](docs/sdks/appuser/README.md#listappusercredentials) - List App User Credentials
+* [merge](docs/sdks/appuser/README.md#merge) - Merge
 * [listAppUsersForUser](docs/sdks/appuser/README.md#listappusersforuser) - List App Users For User
 * [update](docs/sdks/appuser/README.md#update) - Update
 * [search](docs/sdks/appuser/README.md#search) - Search
@@ -641,6 +646,7 @@ run();
 * [getInferenceUsageAttribution](docs/sdks/edge/README.md#getinferenceusageattribution) - Get Inference Usage Attribution
 * [checkInferenceVaultAccess](docs/sdks/edge/README.md#checkinferencevaultaccess) - Check Inference Vault Access
 * [getPublicTrust](docs/sdks/edge/README.md#getpublictrust) - Get Public Trust
+* [checkVaultAccess](docs/sdks/edge/README.md#checkvaultaccess) - Check Vault Access
 * [listInferenceRoutes](docs/sdks/edge/README.md#listinferenceroutes) - List Inference Routes
 * [listAuditAttestationKeys](docs/sdks/edge/README.md#listauditattestationkeys) - List Audit Attestation Keys
 * [listAuditAttestationManifests](docs/sdks/edge/README.md#listauditattestationmanifests) - List Audit Attestation Manifests
@@ -654,6 +660,15 @@ run();
 * [listEdgesRollup](docs/sdks/edge/README.md#listedgesrollup) - List Edges Rollup
 * [listUnattributedInferenceTrafficEvents](docs/sdks/edge/README.md#listunattributedinferencetrafficevents) - List Unattributed Inference Traffic Events
 * [listUsableEdges](docs/sdks/edge/README.md#listusableedges) - List Usable Edges
+
+### [EdgeIntegration](docs/sdks/edgeintegration/README.md)
+
+* [delete](docs/sdks/edgeintegration/README.md#delete) - Delete
+* [get](docs/sdks/edgeintegration/README.md#get) - Get
+* [update](docs/sdks/edgeintegration/README.md#update) - Update
+* [listUsages](docs/sdks/edgeintegration/README.md#listusages) - List Usages
+* [list](docs/sdks/edgeintegration/README.md#list) - List
+* [create](docs/sdks/edgeintegration/README.md#create) - Create
 
 ### [EmailCapabilities](docs/sdks/emailcapabilities/README.md)
 
@@ -917,6 +932,10 @@ run();
 * [clearTemporaryLimit](docs/sdks/myfundlimits/README.md#cleartemporarylimit) - Clear Temporary Limit
 * [setTemporaryLimit](docs/sdks/myfundlimits/README.md#settemporarylimit) - Set Temporary Limit
 
+### [MyRateLimit](docs/sdks/myratelimit/README.md)
+
+* [get](docs/sdks/myratelimit/README.md#get) - Get
+
 ### [OnboardingSettings](docs/sdks/onboardingsettings/README.md)
 
 * [get](docs/sdks/onboardingsettings/README.md#get) - Get
@@ -1010,6 +1029,11 @@ run();
 * [clear](docs/sdks/providercredential/README.md#clear) - Clear
 * [get](docs/sdks/providercredential/README.md#get) - Get
 * [set](docs/sdks/providercredential/README.md#set) - Set
+
+### [RateLimit](docs/sdks/ratelimit/README.md)
+
+* [get](docs/sdks/ratelimit/README.md#get) - Get
+* [getUsageReport](docs/sdks/ratelimit/README.md#getusagereport) - Get Usage Report
 
 ### [RecoveryPolicy](docs/sdks/recoverypolicy/README.md)
 
@@ -1529,6 +1553,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`aiGovernanceSettingsListHistory`](docs/sdks/aigovernancesettings/README.md#listhistory) - List History
 - [`aiGovernanceSettingsUpdate`](docs/sdks/aigovernancesettings/README.md#update) - Update
 - [`apiKeySearchSearch`](docs/sdks/apikeysearch/README.md#search) - NOTE: Searches personal and service principal API keys
+- [`apiKeyUsageBatchGet`](docs/sdks/apikeyusage/README.md#batchget) - Batch Get
 - [`appAccessRequestsDefaultsCancelAppAccessRequestsDefaults`](docs/sdks/appaccessrequestsdefaults/README.md#cancelappaccessrequestsdefaults) - Cancel App Access Requests Defaults
 - [`appAccessRequestsDefaultsCreateAppAccessRequestsDefaults`](docs/sdks/appaccessrequestsdefaults/README.md#createappaccessrequestsdefaults) - Create App Access Requests Defaults
 - [`appAccessRequestsDefaultsGetAppAccessRequestsDefaults`](docs/sdks/appaccessrequestsdefaults/README.md#getappaccessrequestsdefaults) - Get App Access Requests Defaults
@@ -1656,6 +1681,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`appUserListAppUserCredentials`](docs/sdks/appuser/README.md#listappusercredentials) - List App User Credentials
 - [`appUserListAppUsersForUser`](docs/sdks/appuser/README.md#listappusersforuser) - List App Users For User
 - [`appUserListOwnedServiceAccounts`](docs/sdks/appuser/README.md#listownedserviceaccounts) - List Owned Service Accounts
+- [`appUserMerge`](docs/sdks/appuser/README.md#merge) - Merge
 - [`appUserOwnersV2CreateEntitlementOwner`](docs/sdks/appuserownersv2/README.md#createentitlementowner) - Create Entitlement Owner
 - [`appUserOwnersV2CreateUserOwner`](docs/sdks/appuserownersv2/README.md#createuserowner) - Create User Owner
 - [`appUserOwnersV2DeleteEntitlementOwner`](docs/sdks/appuserownersv2/README.md#deleteentitlementowner) - Delete Entitlement Owner
@@ -1774,6 +1800,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`directoryList`](docs/sdks/directory/README.md#list) - List
 - [`directoryUpdate`](docs/sdks/directory/README.md#update) - Update
 - [`edgeCheckInferenceVaultAccess`](docs/sdks/edge/README.md#checkinferencevaultaccess) - Check Inference Vault Access
+- [`edgeCheckVaultAccess`](docs/sdks/edge/README.md#checkvaultaccess) - Check Vault Access
 - [`edgeCreate`](docs/sdks/edge/README.md#create) - Create
 - [`edgeDelete`](docs/sdks/edge/README.md#delete) - Delete
 - [`edgeGet`](docs/sdks/edge/README.md#get) - Get
@@ -1786,6 +1813,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`edgeGetInferenceUsageSummary`](docs/sdks/edge/README.md#getinferenceusagesummary) - Get Inference Usage Summary
 - [`edgeGetInferenceUsageSummaryRollup`](docs/sdks/edge/README.md#getinferenceusagesummaryrollup) - Get Inference Usage Summary Rollup
 - [`edgeGetPublicTrust`](docs/sdks/edge/README.md#getpublictrust) - Get Public Trust
+- [`edgeIntegrationCreate`](docs/sdks/edgeintegration/README.md#create) - Create
+- [`edgeIntegrationDelete`](docs/sdks/edgeintegration/README.md#delete) - Delete
+- [`edgeIntegrationGet`](docs/sdks/edgeintegration/README.md#get) - Get
+- [`edgeIntegrationList`](docs/sdks/edgeintegration/README.md#list) - List
+- [`edgeIntegrationListUsages`](docs/sdks/edgeintegration/README.md#listusages) - List Usages
+- [`edgeIntegrationUpdate`](docs/sdks/edgeintegration/README.md#update) - Update
 - [`edgeList`](docs/sdks/edge/README.md#list) - List
 - [`edgeListAuditAttestationKeys`](docs/sdks/edge/README.md#listauditattestationkeys) - List Audit Attestation Keys
 - [`edgeListAuditAttestationManifests`](docs/sdks/edge/README.md#listauditattestationmanifests) - List Audit Attestation Manifests
@@ -1967,6 +2000,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`myFundLimitsResume`](docs/sdks/myfundlimits/README.md#resume) - Resume
 - [`myFundLimitsSetLimit`](docs/sdks/myfundlimits/README.md#setlimit) - Set Limit
 - [`myFundLimitsSetTemporaryLimit`](docs/sdks/myfundlimits/README.md#settemporarylimit) - Set Temporary Limit
+- [`myRateLimitGet`](docs/sdks/myratelimit/README.md#get) - Get
 - [`onboardingSettingsGet`](docs/sdks/onboardingsettings/README.md#get) - Get
 - [`onboardingSettingsUpdate`](docs/sdks/onboardingsettings/README.md#update) - Update
 - [`orgDomainList`](docs/sdks/orgdomain/README.md#list) - List
@@ -2022,6 +2056,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`providerCredentialClear`](docs/sdks/providercredential/README.md#clear) - Clear
 - [`providerCredentialGet`](docs/sdks/providercredential/README.md#get) - Get
 - [`providerCredentialSet`](docs/sdks/providercredential/README.md#set) - Set
+- [`rateLimitGet`](docs/sdks/ratelimit/README.md#get) - Get
+- [`rateLimitGetUsageReport`](docs/sdks/ratelimit/README.md#getusagereport) - Get Usage Report
 - [`recoveryPolicyCreate`](docs/sdks/recoverypolicy/README.md#create) - Create
 - [`recoveryPolicyDelete`](docs/sdks/recoverypolicy/README.md#delete) - Delete
 - [`recoveryPolicyGet`](docs/sdks/recoverypolicy/README.md#get) - Get

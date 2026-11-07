@@ -17,10 +17,12 @@ import {
 } from "./mcprequestaccessprovisioning.js";
 
 /**
- * Legacy shared level used when a nested access level is unspecified.
+ * Deprecated: set the automatic and request access levels and tool_enablement instead.
  *
  * @remarks
- *  Unspecified defaults to read-only access for provisioning.
+ *  Ignored on write; returned for registrations saved before it was deprecated.
+ *
+ * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export const AccessLevel = {
   McpSystemToolsetUnspecified: "MCP_SYSTEM_TOOLSET_UNSPECIFIED",
@@ -29,10 +31,12 @@ export const AccessLevel = {
   McpSystemToolsetCustom: "MCP_SYSTEM_TOOLSET_CUSTOM",
 } as const;
 /**
- * Legacy shared level used when a nested access level is unspecified.
+ * Deprecated: set the automatic and request access levels and tool_enablement instead.
  *
  * @remarks
- *  Unspecified defaults to read-only access for provisioning.
+ *  Ignored on write; returned for registrations saved before it was deprecated.
+ *
+ * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type AccessLevel = OpenEnum<typeof AccessLevel>;
 
@@ -41,10 +45,12 @@ export type AccessLevel = OpenEnum<typeof AccessLevel>;
  */
 export type MCPAccessProvisioningConfig = {
   /**
-   * Legacy shared level used when a nested access level is unspecified.
+   * Deprecated: set the automatic and request access levels and tool_enablement instead.
    *
    * @remarks
-   *  Unspecified defaults to read-only access for provisioning.
+   *  Ignored on write; returned for registrations saved before it was deprecated.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   accessLevel?: AccessLevel | undefined;
   automatic?: MCPAutomaticAccessProvisioning | null | undefined;
