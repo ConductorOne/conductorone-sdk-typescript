@@ -25,6 +25,11 @@ import {
   MCPServerHostedConfig$Outbound,
   MCPServerHostedConfig$outboundSchema,
 } from "./mcpserverhostedconfig.js";
+import {
+  MCPToolEnablementConfig,
+  MCPToolEnablementConfig$Outbound,
+  MCPToolEnablementConfig$outboundSchema,
+} from "./mcptoolenablementconfig.js";
 
 /**
  * Data sensitivity classification.
@@ -109,6 +114,7 @@ export type MCPServerServiceRegisterRequest = {
    * The type of MCP server being registered.
    */
   serverType?: MCPServerServiceRegisterRequestServerType | undefined;
+  toolEnablement?: MCPToolEnablementConfig | null | undefined;
   /**
    * Optional prefix for tool names in the C1 MCP server.
    *
@@ -193,6 +199,7 @@ export type MCPServerServiceRegisterRequest$Outbound = {
   hostedConfig?: MCPServerHostedConfig$Outbound | null | undefined;
   oauthDiagnosticId?: string | undefined;
   serverType?: string | undefined;
+  toolEnablement?: MCPToolEnablementConfig$Outbound | null | undefined;
   toolPrefix?: string | undefined;
   tunnelApplianceId?: string | undefined;
   tunnelPath?: string | undefined;
@@ -223,6 +230,7 @@ export const MCPServerServiceRegisterRequest$outboundSchema: z.ZodType<
   oauthDiagnosticId: z.string().optional(),
   serverType: MCPServerServiceRegisterRequestServerType$outboundSchema
     .optional(),
+  toolEnablement: z.nullable(MCPToolEnablementConfig$outboundSchema).optional(),
   toolPrefix: z.string().optional(),
   tunnelApplianceId: z.string().optional(),
   tunnelPath: z.string().optional(),

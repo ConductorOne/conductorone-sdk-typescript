@@ -34,6 +34,8 @@ export const FindingTypeSettingFindingType = {
   FindingTypeShadowApp: "FINDING_TYPE_SHADOW_APP",
   FindingTypeMcpGatewayToolCallRisk: "FINDING_TYPE_MCP_GATEWAY_TOOL_CALL_RISK",
   FindingTypeEdge: "FINDING_TYPE_EDGE",
+  FindingTypeAccessConflict: "FINDING_TYPE_ACCESS_CONFLICT",
+  FindingTypeConnectorHostOutdated: "FINDING_TYPE_CONNECTOR_HOST_OUTDATED",
 } as const;
 /**
  * The findingType field.

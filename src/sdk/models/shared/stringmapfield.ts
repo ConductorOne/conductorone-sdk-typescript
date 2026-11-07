@@ -15,6 +15,13 @@ export type StringMapField = {
    * The optional field.
    */
   optional?: boolean | undefined;
+  /**
+   * If secret, the map's values are write-only in the UI and a masked form is
+   *
+   * @remarks
+   *  used. Keys stay readable.
+   */
+  secret?: boolean | undefined;
 };
 
 /** @internal */
@@ -24,6 +31,7 @@ export const StringMapField$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   optional: z.boolean().optional(),
+  secret: z.boolean().optional(),
 });
 
 export function stringMapFieldFromJSON(

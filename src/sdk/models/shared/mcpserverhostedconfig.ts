@@ -42,10 +42,9 @@ import {
 } from "./mcpserverauthoauth2.js";
 
 /**
- * Optional per-server override for tool approval when registering without an
+ * Deprecated and ignored: set tool_enablement on the register request instead.
  *
- * @remarks
- *  access level. See MCPServerView.require_tool_approval for semantics.
+ * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export const MCPServerHostedConfigRequireToolApproval = {
   OptionalBoolUnspecified: "OPTIONAL_BOOL_UNSPECIFIED",
@@ -53,10 +52,9 @@ export const MCPServerHostedConfigRequireToolApproval = {
   OptionalBoolFalse: "OPTIONAL_BOOL_FALSE",
 } as const;
 /**
- * Optional per-server override for tool approval when registering without an
+ * Deprecated and ignored: set tool_enablement on the register request instead.
  *
- * @remarks
- *  access level. See MCPServerView.require_tool_approval for semantics.
+ * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type MCPServerHostedConfigRequireToolApproval = OpenEnum<
   typeof MCPServerHostedConfigRequireToolApproval
@@ -128,10 +126,9 @@ export type MCPServerHostedConfig = {
   none?: MCPServerAuthNone | null | undefined;
   oauth2?: MCPServerAuthOAuth2 | null | undefined;
   /**
-   * Optional per-server override for tool approval when registering without an
+   * Deprecated and ignored: set tool_enablement on the register request instead.
    *
-   * @remarks
-   *  access level. See MCPServerView.require_tool_approval for semantics.
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   requireToolApproval?: MCPServerHostedConfigRequireToolApproval | undefined;
   /**

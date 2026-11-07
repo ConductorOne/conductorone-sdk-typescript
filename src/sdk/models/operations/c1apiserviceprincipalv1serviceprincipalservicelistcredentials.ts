@@ -12,6 +12,8 @@ import * as shared from "../shared/index.js";
 export type C1ApiServicePrincipalV1ServicePrincipalServiceListCredentialsRequest =
   {
     servicePrincipalId: string;
+    pageSize?: number | undefined;
+    pageToken?: string | undefined;
   };
 
 export type C1ApiServicePrincipalV1ServicePrincipalServiceListCredentialsResponse =
@@ -40,6 +42,8 @@ export type C1ApiServicePrincipalV1ServicePrincipalServiceListCredentialsRespons
 export type C1ApiServicePrincipalV1ServicePrincipalServiceListCredentialsRequest$Outbound =
   {
     service_principal_id: string;
+    page_size?: number | undefined;
+    page_token?: string | undefined;
   };
 
 /** @internal */
@@ -50,9 +54,13 @@ export const C1ApiServicePrincipalV1ServicePrincipalServiceListCredentialsReques
     C1ApiServicePrincipalV1ServicePrincipalServiceListCredentialsRequest
   > = z.object({
     servicePrincipalId: z.string(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       servicePrincipalId: "service_principal_id",
+      pageSize: "page_size",
+      pageToken: "page_token",
     });
   });
 
