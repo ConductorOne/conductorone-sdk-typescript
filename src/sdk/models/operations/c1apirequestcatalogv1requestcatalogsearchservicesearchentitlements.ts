@@ -24,7 +24,7 @@ export type C1ApiRequestcatalogV1RequestCatalogSearchServiceSearchEntitlementsRe
      */
     rawResponse: Response;
     /**
-     * The RequestCatalogSearchServiceSearchEntitlementsResponse message contains a list of results and a nextPageToken if applicable.
+     * A page of matching entitlements and a continuation token when more candidates remain.
      */
     requestCatalogSearchServiceSearchEntitlementsResponse?:
       | shared.RequestCatalogSearchServiceSearchEntitlementsResponse

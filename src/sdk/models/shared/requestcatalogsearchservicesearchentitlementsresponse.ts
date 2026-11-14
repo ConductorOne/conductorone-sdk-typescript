@@ -27,7 +27,7 @@ export type RequestCatalogSearchServiceSearchEntitlementsResponseExpanded = {
 };
 
 /**
- * The RequestCatalogSearchServiceSearchEntitlementsResponse message contains a list of results and a nextPageToken if applicable.
+ * A page of matching entitlements and a continuation token when more candidates remain.
  */
 export type RequestCatalogSearchServiceSearchEntitlementsResponse = {
   /**
@@ -42,11 +42,7 @@ export type RequestCatalogSearchServiceSearchEntitlementsResponse = {
    */
   list?: Array<AppEntitlementWithUserBindings> | null | undefined;
   /**
-   * The nextPageToken is shown for the next page if the number of results is larger than the max page size.
-   *
-   * @remarks
-   *  The server returns one page of results and the nextPageToken until all results are retreived.
-   *  To retrieve the next page, use the same request and append a pageToken field with the value of nextPageToken shown on the previous page.
+   * Opaque token for the next page. Pass it as page_token with the same search filters, even if list is empty. An empty token means the search is exhausted.
    */
   nextPageToken?: string | undefined;
 };

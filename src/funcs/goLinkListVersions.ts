@@ -94,7 +94,9 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/api/v1/golinks/{golink_id}/versions")(pathParams);
+  const path = pathToFunc("/api/v1/shortlinks/{golink_id}/versions")(
+    pathParams,
+  );
 
   const query = encodeFormQuery({
     "page_size": payload.page_size,

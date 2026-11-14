@@ -36,6 +36,8 @@ export const EventTypes = {
     "FINDING_AUDIT_EVENT_TYPE_REPROCESS_COMPLETED",
   FindingAuditEventTypeAssigneeChanged:
     "FINDING_AUDIT_EVENT_TYPE_ASSIGNEE_CHANGED",
+  FindingAuditEventTypeHistoryImported:
+    "FINDING_AUDIT_EVENT_TYPE_HISTORY_IMPORTED",
 } as const;
 export type EventTypes = OpenEnum<typeof EventTypes>;
 

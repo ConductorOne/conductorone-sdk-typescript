@@ -26,7 +26,7 @@ export const GrantedStatus = {
 export type GrantedStatus = OpenEnum<typeof GrantedStatus>;
 
 /**
- * The RequestCatalogSearchServiceSearchEntitlementsRequest searches entitlements, but only ones that are available to you through the open catalogs.
+ * Search entitlements available to the signed-in user through access profiles.
  */
 export type RequestCatalogSearchServiceSearchEntitlementsRequest = {
   /**
@@ -47,15 +47,15 @@ export type RequestCatalogSearchServiceSearchEntitlementsRequest = {
    */
   includeDeleted?: boolean | undefined;
   /**
-   * The pageSize where 0 <= pageSize <= 100. Values < 10 will be set to 10. A value of 0 returns the default page size (currently 25)
+   * Maximum number of results to return, from 0 to 100. Zero defaults to 25; values from 1 to 9 use 10. Filtering may produce fewer results, including an empty page, with a next_page_token.
    */
   pageSize?: number | undefined;
   /**
-   * The pageToken field.
+   * Opaque continuation token from a previous response. Omit for the first page; reuse with the same signed-in user and search filters. Results reflect current access and data, not a fixed snapshot.
    */
   pageToken?: string | undefined;
   /**
-   * Fuzzy search the display name of resource types.
+   * Case-insensitive substring search of entitlement display names and aliases. When entitlement_alias is also set, either match is accepted.
    */
   query?: string | undefined;
 };

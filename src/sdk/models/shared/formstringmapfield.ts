@@ -22,6 +22,13 @@ export type FormStringMapField = {
    */
   defaultValue?: { [k: string]: string } | undefined;
   rules?: StringMapRules | null | undefined;
+  /**
+   * If secret, the map's values are write-only and rendered masked. Keys stay
+   *
+   * @remarks
+   *  readable.
+   */
+  secret?: boolean | undefined;
 };
 
 /** @internal */
@@ -32,11 +39,13 @@ export const FormStringMapField$inboundSchema: z.ZodType<
 > = z.object({
   defaultValue: z.record(z.string()).optional(),
   rules: z.nullable(StringMapRules$inboundSchema).optional(),
+  secret: z.boolean().optional(),
 });
 /** @internal */
 export type FormStringMapField$Outbound = {
   defaultValue?: { [k: string]: string } | undefined;
   rules?: StringMapRules$Outbound | null | undefined;
+  secret?: boolean | undefined;
 };
 
 /** @internal */
@@ -47,6 +56,7 @@ export const FormStringMapField$outboundSchema: z.ZodType<
 > = z.object({
   defaultValue: z.record(z.string()).optional(),
   rules: z.nullable(StringMapRules$outboundSchema).optional(),
+  secret: z.boolean().optional(),
 });
 
 export function formStringMapFieldToJSON(

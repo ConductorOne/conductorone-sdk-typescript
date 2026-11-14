@@ -6,16 +6,28 @@ import * as z from "zod/v3";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  Dependency,
+  Dependency$inboundSchema,
+  Dependency$Outbound,
+  Dependency$outboundSchema,
+} from "./dependency.js";
 
 /**
- * DependentOn means the fields in field_names are only valid if all fields
+ * DependentOn means the fields in field_names are only valid if every
  *
  * @remarks
- *  in dependency_field_names are also present
+ *  dependency is satisfied
  */
 export type DependentOn = {
   /**
-   * The fields that must be present for the primary field_names to be valid
+   * The fields that must all be satisfied for the primary field_names to be valid
+   */
+  dependencies?: Array<Dependency> | null | undefined;
+  /**
+   * Deprecated: use dependencies. Each name is read as a presence-only dependency.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   dependencyFieldNames?: Array<string> | null | undefined;
 };
@@ -26,10 +38,12 @@ export const DependentOn$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  dependencies: z.nullable(z.array(Dependency$inboundSchema)).optional(),
   dependencyFieldNames: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
 export type DependentOn$Outbound = {
+  dependencies?: Array<Dependency$Outbound> | null | undefined;
   dependencyFieldNames?: Array<string> | null | undefined;
 };
 
@@ -39,6 +53,7 @@ export const DependentOn$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DependentOn
 > = z.object({
+  dependencies: z.nullable(z.array(Dependency$outboundSchema)).optional(),
   dependencyFieldNames: z.nullable(z.array(z.string())).optional(),
 });
 

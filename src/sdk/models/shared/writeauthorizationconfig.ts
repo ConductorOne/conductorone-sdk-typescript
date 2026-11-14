@@ -25,6 +25,18 @@ export const BlockedClassifications = {
 } as const;
 export type BlockedClassifications = OpenEnum<typeof BlockedClassifications>;
 
+export const BlockedMutatingClassifications = {
+  ToolClassificationUnspecified: "TOOL_CLASSIFICATION_UNSPECIFIED",
+  ToolClassificationRead: "TOOL_CLASSIFICATION_READ",
+  ToolClassificationWrite: "TOOL_CLASSIFICATION_WRITE",
+  ToolClassificationDestructive: "TOOL_CLASSIFICATION_DESTRUCTIVE",
+  ToolClassificationSensitive: "TOOL_CLASSIFICATION_SENSITIVE",
+  ToolClassificationDangerous: "TOOL_CLASSIFICATION_DANGEROUS",
+} as const;
+export type BlockedMutatingClassifications = OpenEnum<
+  typeof BlockedMutatingClassifications
+>;
+
 /**
  * WriteAuthorizationConfig blocks tool calls whose ToolClassification is in
  *
@@ -39,6 +51,17 @@ export type WriteAuthorizationConfig = {
    *  with no blocked classifications would be a silent misconfiguration.
    */
   blockedClassifications?: Array<BlockedClassifications> | null | undefined;
+  /**
+   * Tool classifications to block only when the call mutates external state.
+   *
+   * @remarks
+   *  Empty is valid (the pre-existing behavior: only blocked_classifications
+   *  applies), so unlike blocked_classifications this list has no min_items.
+   */
+  blockedMutatingClassifications?:
+    | Array<BlockedMutatingClassifications>
+    | null
+    | undefined;
   businessHours?: BusinessHours | null | undefined;
 };
 
@@ -56,6 +79,19 @@ export const BlockedClassifications$outboundSchema: z.ZodType<
 > = openEnums.outboundSchema(BlockedClassifications);
 
 /** @internal */
+export const BlockedMutatingClassifications$inboundSchema: z.ZodType<
+  BlockedMutatingClassifications,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(BlockedMutatingClassifications);
+/** @internal */
+export const BlockedMutatingClassifications$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  BlockedMutatingClassifications
+> = openEnums.outboundSchema(BlockedMutatingClassifications);
+
+/** @internal */
 export const WriteAuthorizationConfig$inboundSchema: z.ZodType<
   WriteAuthorizationConfig,
   z.ZodTypeDef,
@@ -64,11 +100,15 @@ export const WriteAuthorizationConfig$inboundSchema: z.ZodType<
   blockedClassifications: z.nullable(
     z.array(BlockedClassifications$inboundSchema),
   ).optional(),
+  blockedMutatingClassifications: z.nullable(
+    z.array(BlockedMutatingClassifications$inboundSchema),
+  ).optional(),
   businessHours: z.nullable(BusinessHours$inboundSchema).optional(),
 });
 /** @internal */
 export type WriteAuthorizationConfig$Outbound = {
   blockedClassifications?: Array<string> | null | undefined;
+  blockedMutatingClassifications?: Array<string> | null | undefined;
   businessHours?: BusinessHours$Outbound | null | undefined;
 };
 
@@ -80,6 +120,9 @@ export const WriteAuthorizationConfig$outboundSchema: z.ZodType<
 > = z.object({
   blockedClassifications: z.nullable(
     z.array(BlockedClassifications$outboundSchema),
+  ).optional(),
+  blockedMutatingClassifications: z.nullable(
+    z.array(BlockedMutatingClassifications$outboundSchema),
   ).optional(),
   businessHours: z.nullable(BusinessHours$outboundSchema).optional(),
 });

@@ -17,6 +17,7 @@ export const MCPAutomaticAccessProvisioningAccessLevel = {
   McpSystemToolsetRead: "MCP_SYSTEM_TOOLSET_READ",
   McpSystemToolsetAllApproved: "MCP_SYSTEM_TOOLSET_ALL_APPROVED",
   McpSystemToolsetCustom: "MCP_SYSTEM_TOOLSET_CUSTOM",
+  McpSystemToolsetWrite: "MCP_SYSTEM_TOOLSET_WRITE",
 } as const;
 /**
  * The system toolset granted through automatic access, independently of requestable access.

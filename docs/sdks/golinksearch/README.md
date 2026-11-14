@@ -12,7 +12,7 @@ Search GoLinks by query string.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="c1.api.golink.v1.GoLinkSearchService.Search" method="post" path="/api/v1/golinks/search" -->
+<!-- UsageSnippet language="typescript" operationID="c1.api.golink.v1.GoLinkSearchService.Search" method="post" path="/api/v1/shortlinks/search" -->
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 

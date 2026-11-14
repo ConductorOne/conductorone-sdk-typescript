@@ -18,6 +18,8 @@ export const QueryParamBucket = {
   TbTimeBucketUnspecified: "TB_TIME_BUCKET_UNSPECIFIED",
   TbTimeBucketHour: "TB_TIME_BUCKET_HOUR",
   TbTimeBucketDay: "TB_TIME_BUCKET_DAY",
+  TbTimeBucketFiveMinutes: "TB_TIME_BUCKET_FIVE_MINUTES",
+  TbTimeBucketFifteenMinutes: "TB_TIME_BUCKET_FIFTEEN_MINUTES",
 } as const;
 /**
  * The bucket field.

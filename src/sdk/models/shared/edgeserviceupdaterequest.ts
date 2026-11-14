@@ -9,7 +9,7 @@ import { Edge, Edge$Outbound, Edge$outboundSchema } from "./edge.js";
  * EdgeServiceUpdateRequest updates an existing Edge via update_mask. Editable
  *
  * @remarks
- *  paths: mode, enabled_kinds, egress_rules, credential_injections,
+ *  paths: mode, enabled_kinds, egress_rules, egress_checks, credential_injections,
  *  inference_routes, allow_inference_bearer_tokens, egress_tls. The legacy inference mask
  *  may clear or replace one graph.
  */
