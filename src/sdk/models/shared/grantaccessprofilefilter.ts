@@ -35,7 +35,7 @@ export type GrantAccessProfileFilter = {
    *
    * @remarks
    *  Used when filter_type = EXCLUDE_SPECIFIC
-   *  Max 32 profile IDs
+   *  Max 64 profile IDs
    */
   excludedAccessProfileIds?: Array<string> | null | undefined;
   /**
@@ -47,7 +47,7 @@ export type GrantAccessProfileFilter = {
    *
    * @remarks
    *  Used when filter_type = INCLUDE_SPECIFIC
-   *  Max 32 profile IDs
+   *  Max 64 profile IDs
    */
   includedAccessProfileIds?: Array<string> | null | undefined;
 };

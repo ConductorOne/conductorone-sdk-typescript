@@ -9,6 +9,18 @@ import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  AccessConflictEvidence,
+  AccessConflictEvidence$inboundSchema,
+  AccessConflictEvidence$Outbound,
+  AccessConflictEvidence$outboundSchema,
+} from "./accessconflictevidence.js";
+import {
+  AccessConflictType,
+  AccessConflictType$inboundSchema,
+  AccessConflictType$Outbound,
+  AccessConflictType$outboundSchema,
+} from "./accessconflicttype.js";
+import {
   AppResourceTarget,
   AppResourceTarget$inboundSchema,
   AppResourceTarget$Outbound,
@@ -26,6 +38,18 @@ import {
   ConnectorAnomalyDetectionDisabledType$Outbound,
   ConnectorAnomalyDetectionDisabledType$outboundSchema,
 } from "./connectoranomalydetectiondisabledtype.js";
+import {
+  ConnectorHostOutdatedEvidence,
+  ConnectorHostOutdatedEvidence$inboundSchema,
+  ConnectorHostOutdatedEvidence$Outbound,
+  ConnectorHostOutdatedEvidence$outboundSchema,
+} from "./connectorhostoutdatedevidence.js";
+import {
+  ConnectorHostOutdatedType,
+  ConnectorHostOutdatedType$inboundSchema,
+  ConnectorHostOutdatedType$Outbound,
+  ConnectorHostOutdatedType$outboundSchema,
+} from "./connectorhostoutdatedtype.js";
 import {
   ConnectorSyncFailingEvidence,
   ConnectorSyncFailingEvidence$inboundSchema,
@@ -312,6 +336,8 @@ export type FindingState = OpenEnum<typeof FindingState>;
  *   - shadowApp
  *   - mcpGatewayToolCallRisk
  *   - edgeFinding
+ *   - accessConflict
+ *   - connectorHostOutdated
  *
  * This message contains a oneof named target. Only a single field of the following list may be set at a time:
  *   - identityUserTarget
@@ -335,8 +361,12 @@ export type FindingState = OpenEnum<typeof FindingState>;
  *   - shadowMcpEvidence
  *   - mcpGatewayToolCallRiskEvidence
  *   - edgeFindingEvidence
+ *   - accessConflictEvidence
+ *   - connectorHostOutdatedEvidence
  */
 export type Finding = {
+  accessConflict?: AccessConflictType | null | undefined;
+  accessConflictEvidence?: AccessConflictEvidence | null | undefined;
   /**
    * Bounded key/value metadata bag. Limits: ≤16 entries; keys 1-128 chars
    *
@@ -360,6 +390,11 @@ export type Finding = {
   computedOwner?: FindingOwnerRef | null | undefined;
   connectorAnomalyDetectionDisabled?:
     | ConnectorAnomalyDetectionDisabledType
+    | null
+    | undefined;
+  connectorHostOutdated?: ConnectorHostOutdatedType | null | undefined;
+  connectorHostOutdatedEvidence?:
+    | ConnectorHostOutdatedEvidence
     | null
     | undefined;
   connectorSyncFailing?: ConnectorSyncFailingType | null | undefined;
@@ -550,6 +585,9 @@ export const FindingState$outboundSchema: z.ZodType<
 /** @internal */
 export const Finding$inboundSchema: z.ZodType<Finding, z.ZodTypeDef, unknown> =
   z.object({
+    accessConflict: z.nullable(AccessConflictType$inboundSchema).optional(),
+    accessConflictEvidence: z.nullable(AccessConflictEvidence$inboundSchema)
+      .optional(),
     annotations: z.record(z.string()).optional(),
     appId: z.string().optional(),
     appResourceTarget: z.nullable(AppResourceTarget$inboundSchema).optional(),
@@ -559,6 +597,11 @@ export const Finding$inboundSchema: z.ZodType<Finding, z.ZodTypeDef, unknown> =
     computedOwner: z.nullable(FindingOwnerRef$inboundSchema).optional(),
     connectorAnomalyDetectionDisabled: z.nullable(
       ConnectorAnomalyDetectionDisabledType$inboundSchema,
+    ).optional(),
+    connectorHostOutdated: z.nullable(ConnectorHostOutdatedType$inboundSchema)
+      .optional(),
+    connectorHostOutdatedEvidence: z.nullable(
+      ConnectorHostOutdatedEvidence$inboundSchema,
     ).optional(),
     connectorSyncFailing: z.nullable(ConnectorSyncFailingType$inboundSchema)
       .optional(),
@@ -668,6 +711,8 @@ export const Finding$inboundSchema: z.ZodType<Finding, z.ZodTypeDef, unknown> =
   });
 /** @internal */
 export type Finding$Outbound = {
+  accessConflict?: AccessConflictType$Outbound | null | undefined;
+  accessConflictEvidence?: AccessConflictEvidence$Outbound | null | undefined;
   annotations?: { [k: string]: string } | undefined;
   appId?: string | undefined;
   appResourceTarget?: AppResourceTarget$Outbound | null | undefined;
@@ -677,6 +722,11 @@ export type Finding$Outbound = {
   computedOwner?: FindingOwnerRef$Outbound | null | undefined;
   connectorAnomalyDetectionDisabled?:
     | ConnectorAnomalyDetectionDisabledType$Outbound
+    | null
+    | undefined;
+  connectorHostOutdated?: ConnectorHostOutdatedType$Outbound | null | undefined;
+  connectorHostOutdatedEvidence?:
+    | ConnectorHostOutdatedEvidence$Outbound
     | null
     | undefined;
   connectorSyncFailing?: ConnectorSyncFailingType$Outbound | null | undefined;
@@ -780,6 +830,9 @@ export const Finding$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Finding
 > = z.object({
+  accessConflict: z.nullable(AccessConflictType$outboundSchema).optional(),
+  accessConflictEvidence: z.nullable(AccessConflictEvidence$outboundSchema)
+    .optional(),
   annotations: z.record(z.string()).optional(),
   appId: z.string().optional(),
   appResourceTarget: z.nullable(AppResourceTarget$outboundSchema).optional(),
@@ -789,6 +842,11 @@ export const Finding$outboundSchema: z.ZodType<
   computedOwner: z.nullable(FindingOwnerRef$outboundSchema).optional(),
   connectorAnomalyDetectionDisabled: z.nullable(
     ConnectorAnomalyDetectionDisabledType$outboundSchema,
+  ).optional(),
+  connectorHostOutdated: z.nullable(ConnectorHostOutdatedType$outboundSchema)
+    .optional(),
+  connectorHostOutdatedEvidence: z.nullable(
+    ConnectorHostOutdatedEvidence$outboundSchema,
   ).optional(),
   connectorSyncFailing: z.nullable(ConnectorSyncFailingType$outboundSchema)
     .optional(),

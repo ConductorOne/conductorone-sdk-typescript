@@ -9,7 +9,8 @@ The system toolset selected for requestable access, independently of automatic a
 ```typescript
 import { MCPRequestAccessProvisioningAccessLevel } from "conductorone-sdk-typescript/sdk/models/shared";
 
-let value: MCPRequestAccessProvisioningAccessLevel = "MCP_SYSTEM_TOOLSET_READ";
+let value: MCPRequestAccessProvisioningAccessLevel =
+  "MCP_SYSTEM_TOOLSET_ALL_APPROVED";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -17,5 +18,5 @@ let value: MCPRequestAccessProvisioningAccessLevel = "MCP_SYSTEM_TOOLSET_READ";
 ## Values
 
 ```typescript
-"MCP_SYSTEM_TOOLSET_UNSPECIFIED" | "MCP_SYSTEM_TOOLSET_READ" | "MCP_SYSTEM_TOOLSET_ALL_APPROVED" | "MCP_SYSTEM_TOOLSET_CUSTOM" | Unrecognized<string>
+"MCP_SYSTEM_TOOLSET_UNSPECIFIED" | "MCP_SYSTEM_TOOLSET_READ" | "MCP_SYSTEM_TOOLSET_ALL_APPROVED" | "MCP_SYSTEM_TOOLSET_CUSTOM" | "MCP_SYSTEM_TOOLSET_WRITE" | Unrecognized<string>
 ```

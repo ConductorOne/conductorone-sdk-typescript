@@ -67,6 +67,10 @@ export type FormStringField = {
    * The placeholder field.
    */
   placeholder?: string | undefined;
+  /**
+   * Shown when the value does not match rules.pattern. Empty uses the default message.
+   */
+  regexErrorMessage?: string | undefined;
   rules?: StringRules | null | undefined;
   selectField?: SelectField | null | undefined;
   textField?: TextField | null | undefined;
@@ -83,6 +87,7 @@ export const FormStringField$inboundSchema: z.ZodType<
   passwordField: z.nullable(PasswordField$inboundSchema).optional(),
   pickerField: z.nullable(PickerField$inboundSchema).optional(),
   placeholder: z.string().optional(),
+  regexErrorMessage: z.string().optional(),
   rules: z.nullable(StringRules$inboundSchema).optional(),
   selectField: z.nullable(SelectField$inboundSchema).optional(),
   textField: z.nullable(TextField$inboundSchema).optional(),
@@ -94,6 +99,7 @@ export type FormStringField$Outbound = {
   passwordField?: PasswordField$Outbound | null | undefined;
   pickerField?: PickerField$Outbound | null | undefined;
   placeholder?: string | undefined;
+  regexErrorMessage?: string | undefined;
   rules?: StringRules$Outbound | null | undefined;
   selectField?: SelectField$Outbound | null | undefined;
   textField?: TextField$Outbound | null | undefined;
@@ -110,6 +116,7 @@ export const FormStringField$outboundSchema: z.ZodType<
   passwordField: z.nullable(PasswordField$outboundSchema).optional(),
   pickerField: z.nullable(PickerField$outboundSchema).optional(),
   placeholder: z.string().optional(),
+  regexErrorMessage: z.string().optional(),
   rules: z.nullable(StringRules$outboundSchema).optional(),
   selectField: z.nullable(SelectField$outboundSchema).optional(),
   textField: z.nullable(TextField$outboundSchema).optional(),

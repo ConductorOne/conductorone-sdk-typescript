@@ -9,6 +9,11 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
+export type C1ApiServicePrincipalV1ServicePrincipalServiceListRequest = {
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+};
+
 export type C1ApiServicePrincipalV1ServicePrincipalServiceListResponse = {
   /**
    * HTTP response content type for this operation
@@ -29,6 +34,39 @@ export type C1ApiServicePrincipalV1ServicePrincipalServiceListResponse = {
     | shared.ServicePrincipalServiceListResponse
     | undefined;
 };
+
+/** @internal */
+export type C1ApiServicePrincipalV1ServicePrincipalServiceListRequest$Outbound =
+  {
+    page_size?: number | undefined;
+    page_token?: string | undefined;
+  };
+
+/** @internal */
+export const C1ApiServicePrincipalV1ServicePrincipalServiceListRequest$outboundSchema:
+  z.ZodType<
+    C1ApiServicePrincipalV1ServicePrincipalServiceListRequest$Outbound,
+    z.ZodTypeDef,
+    C1ApiServicePrincipalV1ServicePrincipalServiceListRequest
+  > = z.object({
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      pageSize: "page_size",
+      pageToken: "page_token",
+    });
+  });
+
+export function c1ApiServicePrincipalV1ServicePrincipalServiceListRequestToJSON(
+  c1ApiServicePrincipalV1ServicePrincipalServiceListRequest:
+    C1ApiServicePrincipalV1ServicePrincipalServiceListRequest,
+): string {
+  return JSON.stringify(
+    C1ApiServicePrincipalV1ServicePrincipalServiceListRequest$outboundSchema
+      .parse(c1ApiServicePrincipalV1ServicePrincipalServiceListRequest),
+  );
+}
 
 /** @internal */
 export const C1ApiServicePrincipalV1ServicePrincipalServiceListResponse$inboundSchema:

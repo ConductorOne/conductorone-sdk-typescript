@@ -15,6 +15,7 @@ import { AccountProvisionPolicyTest } from "./accountprovisionpolicytest.js";
 import { AgentClassifier } from "./agentclassifier.js";
 import { AIGovernanceSettings } from "./aigovernancesettings.js";
 import { APIKeySearch } from "./apikeysearch.js";
+import { APIKeyUsage } from "./apikeyusage.js";
 import { AppAccessRequestsDefaults } from "./appaccessrequestsdefaults.js";
 import { AppCap } from "./appcap.js";
 import { AppEntitlementMonitorBinding } from "./appentitlementmonitorbinding.js";
@@ -56,6 +57,7 @@ import { AWSExternalIDSettings } from "./awsexternalidsettings.js";
 import { Classifier } from "./classifier.js";
 import { ClassifierTemplate } from "./classifiertemplate.js";
 import { Connector } from "./connector.js";
+import { ConnectorAuthoring } from "./connectorauthoring.js";
 import { ConnectorAuthoringActivation } from "./connectorauthoringactivation.js";
 import { ConnectorCatalog } from "./connectorcatalog.js";
 import { ConnectorOwnersV2 } from "./connectorownersv2.js";
@@ -65,6 +67,7 @@ import { Decoy } from "./decoy.js";
 import { DecoySearch } from "./decoysearch.js";
 import { Directory } from "./directory.js";
 import { Edge } from "./edge.js";
+import { EdgeIntegration } from "./edgeintegration.js";
 import { EmailCapabilities } from "./emailcapabilities.js";
 import { Export } from "./export.js";
 import { ExportsSearch } from "./exportssearch.js";
@@ -99,6 +102,7 @@ import { MCPServer } from "./mcpserver.js";
 import { MCPTool } from "./mcptool.js";
 import { ModelAPIKey } from "./modelapikey.js";
 import { MyFundLimits } from "./myfundlimits.js";
+import { MyRateLimit } from "./myratelimit.js";
 import { OnboardingSettings } from "./onboardingsettings.js";
 import { OrgDomain } from "./orgdomain.js";
 import { OrgNotificationSettings } from "./orgnotificationsettings.js";
@@ -112,6 +116,7 @@ import { PolicySearch } from "./policysearch.js";
 import { PolicyValidate } from "./policyvalidate.js";
 import { Principal } from "./principal.js";
 import { ProviderCredential } from "./providercredential.js";
+import { RateLimit } from "./ratelimit.js";
 import { RecoveryPolicy } from "./recoverypolicy.js";
 import { Reporting } from "./reporting.js";
 import { RequestCatalogManagement } from "./requestcatalogmanagement.js";
@@ -272,6 +277,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   get mcpAccessProfileToolBinding(): MCPAccessProfileToolBinding {
     return (this._mcpAccessProfileToolBinding ??=
       new MCPAccessProfileToolBinding(this._options));
+  }
+
+  private _edgeIntegration?: EdgeIntegration;
+  get edgeIntegration(): EdgeIntegration {
+    return (this._edgeIntegration ??= new EdgeIntegration(this._options));
   }
 
   private _edge?: Edge;
@@ -457,6 +467,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
       new ConnectorAuthoringActivation(this._options));
   }
 
+  private _connectorAuthoring?: ConnectorAuthoring;
+  get connectorAuthoring(): ConnectorAuthoring {
+    return (this._connectorAuthoring ??= new ConnectorAuthoring(this._options));
+  }
+
   private _connectorCatalog?: ConnectorCatalog;
   get connectorCatalog(): ConnectorCatalog {
     return (this._connectorCatalog ??= new ConnectorCatalog(this._options));
@@ -570,16 +585,6 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._subjectAppLimit ??= new SubjectAppLimit(this._options));
   }
 
-  private _goLink?: GoLink;
-  get goLink(): GoLink {
-    return (this._goLink ??= new GoLink(this._options));
-  }
-
-  private _goLinkSearch?: GoLinkSearch;
-  get goLinkSearch(): GoLinkSearch {
-    return (this._goLinkSearch ??= new GoLinkSearch(this._options));
-  }
-
   private _hooks?: Hooks;
   get hooks(): Hooks {
     return (this._hooks ??= new Hooks(this._options));
@@ -656,6 +661,21 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _policyValidate?: PolicyValidate;
   get policyValidate(): PolicyValidate {
     return (this._policyValidate ??= new PolicyValidate(this._options));
+  }
+
+  private _rateLimit?: RateLimit;
+  get rateLimit(): RateLimit {
+    return (this._rateLimit ??= new RateLimit(this._options));
+  }
+
+  private _apiKeyUsage?: APIKeyUsage;
+  get apiKeyUsage(): APIKeyUsage {
+    return (this._apiKeyUsage ??= new APIKeyUsage(this._options));
+  }
+
+  private _myRateLimit?: MyRateLimit;
+  get myRateLimit(): MyRateLimit {
+    return (this._myRateLimit ??= new MyRateLimit(this._options));
   }
 
   private _recoveryPolicy?: RecoveryPolicy;
@@ -944,6 +964,16 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _ssoSettings?: SSOSettings;
   get ssoSettings(): SSOSettings {
     return (this._ssoSettings ??= new SSOSettings(this._options));
+  }
+
+  private _goLink?: GoLink;
+  get goLink(): GoLink {
+    return (this._goLink ??= new GoLink(this._options));
+  }
+
+  private _goLinkSearch?: GoLinkSearch;
+  get goLinkSearch(): GoLinkSearch {
+    return (this._goLinkSearch ??= new GoLinkSearch(this._options));
   }
 
   private _spendInsights?: SpendInsights;

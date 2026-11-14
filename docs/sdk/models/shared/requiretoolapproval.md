@@ -1,7 +1,9 @@
-# RequireToolApproval
+# ~~RequireToolApproval~~
 
-Per-server override for tool approval on MCP servers without a saved
- registration access level. UNSPECIFIED inherits the tenant setting.
+Deprecated and ignored: set tool_enablement on the MCP registration config instead.
+ Always UNSPECIFIED in responses.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ## Example Usage
 

@@ -23,6 +23,10 @@ export type TaskServiceCreateActionRequest = {
   description?: string | undefined;
   expandMask?: TaskExpandMask | null | undefined;
   formValues?: { [k: string]: any } | null | undefined;
+  /**
+   * If true, rejects the request with FAILED_PRECONDITION unless the action is a current group-creation template. Defaults to false.
+   */
+  groupOnly?: boolean | undefined;
 };
 
 /** @internal */
@@ -31,6 +35,7 @@ export type TaskServiceCreateActionRequest$Outbound = {
   description?: string | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
   formValues?: { [k: string]: any } | null | undefined;
+  groupOnly?: boolean | undefined;
 };
 
 /** @internal */
@@ -43,6 +48,7 @@ export const TaskServiceCreateActionRequest$outboundSchema: z.ZodType<
   description: z.string().optional(),
   expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
   formValues: z.nullable(z.record(z.any())).optional(),
+  groupOnly: z.boolean().optional(),
 });
 
 export function taskServiceCreateActionRequestToJSON(

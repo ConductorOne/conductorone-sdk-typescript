@@ -29,7 +29,7 @@ import { Result } from "../sdk/types/fp.js";
  * Update
  *
  * @remarks
- * Update edits an Edge's mode, credential injections, or inference route via update_mask.
+ * Update an Edge's hosting, egress policy, required checks, credentials, or inference routes via update_mask.
  */
 export function edgeUpdate(
   client: ConductoroneSDKTypescriptCore,

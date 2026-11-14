@@ -18,7 +18,7 @@ List GoLinks with pagination.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="c1.api.golink.v1.GoLinkService.List" method="get" path="/api/v1/golinks" -->
+<!-- UsageSnippet language="typescript" operationID="c1.api.golink.v1.GoLinkService.List" method="get" path="/api/v1/shortlinks" -->
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 
@@ -93,7 +93,7 @@ Create a new GoLink.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="c1.api.golink.v1.GoLinkService.Create" method="post" path="/api/v1/golinks" -->
+<!-- UsageSnippet language="typescript" operationID="c1.api.golink.v1.GoLinkService.Create" method="post" path="/api/v1/shortlinks" -->
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 
@@ -168,7 +168,7 @@ List version history for a GoLink.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="c1.api.golink.v1.GoLinkService.ListVersions" method="get" path="/api/v1/golinks/{golink_id}/versions" -->
+<!-- UsageSnippet language="typescript" operationID="c1.api.golink.v1.GoLinkService.ListVersions" method="get" path="/api/v1/shortlinks/{golink_id}/versions" -->
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 
@@ -247,7 +247,7 @@ Delete a GoLink. Caller must be the owner.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="c1.api.golink.v1.GoLinkService.Delete" method="delete" path="/api/v1/golinks/{id}" -->
+<!-- UsageSnippet language="typescript" operationID="c1.api.golink.v1.GoLinkService.Delete" method="delete" path="/api/v1/shortlinks/{id}" -->
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 
@@ -326,7 +326,7 @@ Get a GoLink by ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="c1.api.golink.v1.GoLinkService.Get" method="get" path="/api/v1/golinks/{id}" -->
+<!-- UsageSnippet language="typescript" operationID="c1.api.golink.v1.GoLinkService.Get" method="get" path="/api/v1/shortlinks/{id}" -->
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 
@@ -405,7 +405,7 @@ Update a GoLink. Caller must be the owner.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="c1.api.golink.v1.GoLinkService.Update" method="patch" path="/api/v1/golinks/{id}" -->
+<!-- UsageSnippet language="typescript" operationID="c1.api.golink.v1.GoLinkService.Update" method="patch" path="/api/v1/shortlinks/{id}" -->
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 
@@ -485,7 +485,7 @@ Resolve a path to a GoLink target.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="c1.api.golink.v1.GoLinkService.Resolve" method="post" path="/api/v1/golinks/resolve" -->
+<!-- UsageSnippet language="typescript" operationID="c1.api.golink.v1.GoLinkService.Resolve" method="post" path="/api/v1/shortlinks/resolve" -->
 ```typescript
 import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript";
 

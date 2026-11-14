@@ -95,7 +95,7 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/api/v1/golinks/{id}")(pathParams);
+  const path = pathToFunc("/api/v1/shortlinks/{id}")(pathParams);
 
   const headers = new Headers(compactMap({
     Accept: "application/json",

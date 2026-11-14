@@ -15,6 +15,12 @@ import {
   EdgeCredentialInjection$outboundSchema,
 } from "./edgecredentialinjection.js";
 import {
+  EdgeEgressCheck,
+  EdgeEgressCheck$inboundSchema,
+  EdgeEgressCheck$Outbound,
+  EdgeEgressCheck$outboundSchema,
+} from "./edgeegresscheck.js";
+import {
   EdgeEgressRule,
   EdgeEgressRule$inboundSchema,
   EdgeEgressRule$Outbound,
@@ -101,6 +107,13 @@ export type Edge = {
    * The displayName field.
    */
   displayName?: string | undefined;
+  /**
+   * Required artifact authorizers, independent of ordinary egress access rules.
+   *
+   * @remarks
+   *  Disabled checks retain their integration references.
+   */
+  egressChecks?: Array<EdgeEgressCheck> | null | undefined;
   /**
    * The minted egress.connect entitlement (derived from the Edge id) -- grant
    *
@@ -232,6 +245,7 @@ export const Edge$inboundSchema: z.ZodType<Edge, z.ZodTypeDef, unknown> = z
       z.array(EdgeCredentialInjection$inboundSchema),
     ).optional(),
     displayName: z.string().optional(),
+    egressChecks: z.nullable(z.array(EdgeEgressCheck$inboundSchema)).optional(),
     egressConnectEntitlementId: z.string().optional(),
     egressRules: z.nullable(z.array(EdgeEgressRule$inboundSchema)).optional(),
     egressRulesConfigured: z.boolean().optional(),
@@ -261,6 +275,7 @@ export type Edge$Outbound = {
     | null
     | undefined;
   displayName?: string | undefined;
+  egressChecks?: Array<EdgeEgressCheck$Outbound> | null | undefined;
   egressConnectEntitlementId?: string | undefined;
   egressRules?: Array<EdgeEgressRule$Outbound> | null | undefined;
   egressRulesConfigured?: boolean | undefined;
@@ -288,6 +303,8 @@ export const Edge$outboundSchema: z.ZodType<Edge$Outbound, z.ZodTypeDef, Edge> =
       z.array(EdgeCredentialInjection$outboundSchema),
     ).optional(),
     displayName: z.string().optional(),
+    egressChecks: z.nullable(z.array(EdgeEgressCheck$outboundSchema))
+      .optional(),
     egressConnectEntitlementId: z.string().optional(),
     egressRules: z.nullable(z.array(EdgeEgressRule$outboundSchema)).optional(),
     egressRulesConfigured: z.boolean().optional(),

@@ -51,7 +51,7 @@ export type RequestSchemaServiceCreateRequest = {
    */
   fieldRelationships?: Array<FieldRelationship> | null | undefined;
   /**
-   * The form fields that users must fill out when requesting access.
+   * The form fields that users must fill out when requesting access. Fields are optional; a form with no fields can still control whether the justification field is shown.
    */
   fields?: Array<FormField> | null | undefined;
   /**
