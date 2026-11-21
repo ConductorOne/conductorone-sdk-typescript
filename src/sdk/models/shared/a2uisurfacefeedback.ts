@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -73,27 +73,29 @@ export const Sentiment$inboundSchema: z.ZodType<
   Sentiment,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Sentiment);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Sentiment));
 
 /** @internal */
 export const A2UISurfaceFeedback$inboundSchema: z.ZodType<
   A2UISurfaceFeedback,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  actionName: z.string().optional(),
-  componentsSnapshot: z.string().optional(),
-  conversationId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  dataModelSnapshot: z.string().optional(),
-  id: z.string().optional(),
-  schemaVersion: z.string().transform(v => parseInt(v, 10)).optional(),
-  sentiment: Sentiment$inboundSchema.optional(),
-  surfaceId: z.string().optional(),
-  text: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    actionName: z.string().optional(),
+    componentsSnapshot: z.string().optional(),
+    conversationId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    dataModelSnapshot: z.string().optional(),
+    id: z.string().optional(),
+    schemaVersion: z.string().transform(v => parseInt(v, 10)).optional(),
+    sentiment: Sentiment$inboundSchema.optional(),
+    surfaceId: z.string().optional(),
+    text: z.string().optional(),
+  })
+);
 
 export function a2UISurfaceFeedbackFromJSON(
   jsonString: string,

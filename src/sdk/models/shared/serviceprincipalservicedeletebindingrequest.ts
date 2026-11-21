@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   ServicePrincipalBindingSubject,
   ServicePrincipalBindingSubject$Outbound,
@@ -32,11 +33,13 @@ export const ServicePrincipalServiceDeleteBindingRequest$outboundSchema:
     ServicePrincipalServiceDeleteBindingRequest$Outbound,
     z.ZodTypeDef,
     ServicePrincipalServiceDeleteBindingRequest
-  > = z.object({
-    servicePrincipalId: z.string().optional(),
-    subject: z.nullable(ServicePrincipalBindingSubject$outboundSchema)
-      .optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      servicePrincipalId: z.string().optional(),
+      subject: z.nullable(ServicePrincipalBindingSubject$outboundSchema)
+        .optional(),
+    })
+  );
 
 export function servicePrincipalServiceDeleteBindingRequestToJSON(
   servicePrincipalServiceDeleteBindingRequest:

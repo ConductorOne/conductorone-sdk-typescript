@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -40,22 +40,28 @@ export const SetSeveritySeverity$inboundSchema: z.ZodType<
   SetSeveritySeverity,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(SetSeveritySeverity);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(SetSeveritySeverity)
+);
 /** @internal */
 export const SetSeveritySeverity$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SetSeveritySeverity
-> = openEnums.outboundSchema(SetSeveritySeverity);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(SetSeveritySeverity)
+);
 
 /** @internal */
 export const SetSeverity$inboundSchema: z.ZodType<
   SetSeverity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  severity: SetSeveritySeverity$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    severity: SetSeveritySeverity$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type SetSeverity$Outbound = {
   severity?: string | undefined;
@@ -66,9 +72,11 @@ export const SetSeverity$outboundSchema: z.ZodType<
   SetSeverity$Outbound,
   z.ZodTypeDef,
   SetSeverity
-> = z.object({
-  severity: SetSeveritySeverity$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    severity: SetSeveritySeverity$outboundSchema.optional(),
+  })
+);
 
 export function setSeverityToJSON(setSeverity: SetSeverity): string {
   return JSON.stringify(SetSeverity$outboundSchema.parse(setSeverity));

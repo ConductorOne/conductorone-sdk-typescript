@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -64,20 +64,24 @@ export const PaperSecretServiceCreateResponseAgeSuite$inboundSchema: z.ZodType<
   PaperSecretServiceCreateResponseAgeSuite,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(PaperSecretServiceCreateResponseAgeSuite);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(PaperSecretServiceCreateResponseAgeSuite)
+);
 
 /** @internal */
 export const PaperSecretServiceCreateResponse$inboundSchema: z.ZodType<
   PaperSecretServiceCreateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ageRecipient: z.string().optional(),
-  ageSuite: PaperSecretServiceCreateResponseAgeSuite$inboundSchema.optional(),
-  secret: z.nullable(PaperSecret$inboundSchema).optional(),
-  uploadUrl: z.string().optional(),
-  vaultId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ageRecipient: z.string().optional(),
+    ageSuite: PaperSecretServiceCreateResponseAgeSuite$inboundSchema.optional(),
+    secret: z.nullable(PaperSecret$inboundSchema).optional(),
+    uploadUrl: z.string().optional(),
+    vaultId: z.string().optional(),
+  })
+);
 
 export function paperSecretServiceCreateResponseFromJSON(
   jsonString: string,

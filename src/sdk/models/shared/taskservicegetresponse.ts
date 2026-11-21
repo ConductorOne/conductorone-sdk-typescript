@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -39,17 +40,19 @@ export const TaskServiceGetResponseExpanded$inboundSchema: z.ZodType<
   TaskServiceGetResponseExpanded,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    "@type": z.string().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "@type": "atType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      "@type": z.string().optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "@type": "atType",
+    });
+  })
+);
 
 export function taskServiceGetResponseExpandedFromJSON(
   jsonString: string,
@@ -66,12 +69,14 @@ export const TaskServiceGetResponse$inboundSchema: z.ZodType<
   TaskServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() => TaskServiceGetResponseExpanded$inboundSchema)),
-  ).optional(),
-  taskView: z.nullable(TaskView$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expanded: z.nullable(
+      z.array(z.lazy(() => TaskServiceGetResponseExpanded$inboundSchema)),
+    ).optional(),
+    taskView: z.nullable(TaskView$inboundSchema).optional(),
+  })
+);
 
 export function taskServiceGetResponseFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   TaskExpandMask,
   TaskExpandMask$Outbound,
@@ -37,11 +38,13 @@ export const TaskActionsServiceRetryProvisioningRequest$outboundSchema:
     TaskActionsServiceRetryProvisioningRequest$Outbound,
     z.ZodTypeDef,
     TaskActionsServiceRetryProvisioningRequest
-  > = z.object({
-    comment: z.string().optional(),
-    expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-    policyStepId: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      comment: z.string().optional(),
+      expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
+      policyStepId: z.string().optional(),
+    })
+  );
 
 export function taskActionsServiceRetryProvisioningRequestToJSON(
   taskActionsServiceRetryProvisioningRequest:

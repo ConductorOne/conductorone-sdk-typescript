@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -52,17 +52,19 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequestableE
     C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequestableEntryRequest$Outbound,
     z.ZodTypeDef,
     C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequestableEntryRequest
-  > = z.object({
-    catalogId: z.string(),
-    appId: z.string(),
-    entitlementId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      catalogId: "catalog_id",
-      appId: "app_id",
-      entitlementId: "entitlement_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      catalogId: z.string(),
+      appId: z.string(),
+      entitlementId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        catalogId: "catalog_id",
+        appId: "app_id",
+        entitlementId: "entitlement_id",
+      });
+    })
+  );
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequestableEntryRequestToJSON(
   c1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequestableEntryRequest:
@@ -82,22 +84,24 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequestableE
     C1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequestableEntryResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    RequestCatalogManagementServiceGetRequestableEntryResponse: shared
-      .RequestCatalogManagementServiceGetRequestableEntryResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "RequestCatalogManagementServiceGetRequestableEntryResponse":
-        "requestCatalogManagementServiceGetRequestableEntryResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      RequestCatalogManagementServiceGetRequestableEntryResponse: shared
+        .RequestCatalogManagementServiceGetRequestableEntryResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "RequestCatalogManagementServiceGetRequestableEntryResponse":
+          "requestCatalogManagementServiceGetRequestableEntryResponse",
+      });
+    })
+  );
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceGetRequestableEntryResponseFromJSON(
   jsonString: string,

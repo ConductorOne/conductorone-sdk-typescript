@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -44,20 +44,22 @@ export const DecoyPubliclyExposedEvidence$inboundSchema: z.ZodType<
   DecoyPubliclyExposedEvidence,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  credentialRevoked: z.boolean().optional(),
-  fingerprintPrefix: z.string().optional(),
-  firstObservedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  firstScannerId: z.string().optional(),
-  reportingScanners: z.nullable(z.array(z.string())).optional(),
-  revokedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  sourceKind: z.string().optional(),
-  sourceUrl: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    credentialRevoked: z.boolean().optional(),
+    fingerprintPrefix: z.string().optional(),
+    firstObservedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    firstScannerId: z.string().optional(),
+    reportingScanners: z.nullable(z.array(z.string())).optional(),
+    revokedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    sourceKind: z.string().optional(),
+    sourceUrl: z.string().optional(),
+  })
+);
 /** @internal */
 export type DecoyPubliclyExposedEvidence$Outbound = {
   credentialRevoked?: boolean | undefined;
@@ -75,17 +77,19 @@ export const DecoyPubliclyExposedEvidence$outboundSchema: z.ZodType<
   DecoyPubliclyExposedEvidence$Outbound,
   z.ZodTypeDef,
   DecoyPubliclyExposedEvidence
-> = z.object({
-  credentialRevoked: z.boolean().optional(),
-  fingerprintPrefix: z.string().optional(),
-  firstObservedAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  firstScannerId: z.string().optional(),
-  reportingScanners: z.nullable(z.array(z.string())).optional(),
-  revokedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  sourceKind: z.string().optional(),
-  sourceUrl: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    credentialRevoked: z.boolean().optional(),
+    fingerprintPrefix: z.string().optional(),
+    firstObservedAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    firstScannerId: z.string().optional(),
+    reportingScanners: z.nullable(z.array(z.string())).optional(),
+    revokedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    sourceKind: z.string().optional(),
+    sourceUrl: z.string().optional(),
+  })
+);
 
 export function decoyPubliclyExposedEvidenceToJSON(
   decoyPubliclyExposedEvidence: DecoyPubliclyExposedEvidence,

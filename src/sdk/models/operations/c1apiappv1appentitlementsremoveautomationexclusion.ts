@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,18 +54,20 @@ export const C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest$outboundS
     C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest
-  > = z.object({
-    appId: z.string(),
-    appEntitlementId: z.string(),
-    removeAutomationExclusionRequest: shared
-      .RemoveAutomationExclusionRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      appEntitlementId: "app_entitlement_id",
-      removeAutomationExclusionRequest: "RemoveAutomationExclusionRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      appEntitlementId: z.string(),
+      removeAutomationExclusionRequest: shared
+        .RemoveAutomationExclusionRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        appEntitlementId: "app_entitlement_id",
+        removeAutomationExclusionRequest: "RemoveAutomationExclusionRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequestToJSON(
   c1ApiAppV1AppEntitlementsRemoveAutomationExclusionRequest:
@@ -83,20 +85,23 @@ export const C1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse$inboundS
     C1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    RemoveAutomationExclusionResponse: shared
-      .RemoveAutomationExclusionResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "RemoveAutomationExclusionResponse": "removeAutomationExclusionResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      RemoveAutomationExclusionResponse: shared
+        .RemoveAutomationExclusionResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "RemoveAutomationExclusionResponse":
+          "removeAutomationExclusionResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementsRemoveAutomationExclusionResponseFromJSON(
   jsonString: string,

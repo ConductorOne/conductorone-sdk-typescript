@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -50,17 +51,19 @@ export type SearchAutomationExecutionsResponse = {
 /** @internal */
 export const SearchAutomationExecutionsResponseExpanded$inboundSchema:
   z.ZodType<SearchAutomationExecutionsResponseExpanded, z.ZodTypeDef, unknown> =
-    collectExtraKeys$(
-      z.object({
-        "@type": z.string().optional(),
-      }).catchall(z.any()),
-      "additionalProperties",
-      true,
-    ).transform((v) => {
-      return remap$(v, {
-        "@type": "atType",
-      });
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      collectExtraKeys$(
+        z.object({
+          "@type": z.string().optional(),
+        }).catchall(z.any()),
+        "additionalProperties",
+        true,
+      ).transform((v) => {
+        return remap$(v, {
+          "@type": "atType",
+        });
+      })
+    );
 
 export function searchAutomationExecutionsResponseExpandedFromJSON(
   jsonString: string,
@@ -83,15 +86,15 @@ export const SearchAutomationExecutionsResponse$inboundSchema: z.ZodType<
   SearchAutomationExecutionsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() =>
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expanded: z.nullable(z.array(z.lazy(() =>
       SearchAutomationExecutionsResponseExpanded$inboundSchema
-    )),
-  ).optional(),
-  list: z.nullable(z.array(AutomationExecutionView$inboundSchema)).optional(),
-  nextPageToken: z.string().optional(),
-});
+    ))).optional(),
+    list: z.nullable(z.array(AutomationExecutionView$inboundSchema)).optional(),
+    nextPageToken: z.string().optional(),
+  })
+);
 
 export function searchAutomationExecutionsResponseFromJSON(
   jsonString: string,

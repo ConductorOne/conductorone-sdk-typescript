@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -75,17 +76,19 @@ export type Body = {
 
 /** @internal */
 export const Payload$inboundSchema: z.ZodType<Payload, z.ZodTypeDef, unknown> =
-  collectExtraKeys$(
-    z.object({
-      "@type": z.string().optional(),
-    }).catchall(z.any()),
-    "additionalProperties",
-    true,
-  ).transform((v) => {
-    return remap$(v, {
-      "@type": "atType",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    collectExtraKeys$(
+      z.object({
+        "@type": z.string().optional(),
+      }).catchall(z.any()),
+      "additionalProperties",
+      true,
+    ).transform((v) => {
+      return remap$(v, {
+        "@type": "atType",
+      });
+    })
+  );
 /** @internal */
 export type Payload$Outbound = {
   "@type"?: string | undefined;
@@ -97,18 +100,20 @@ export const Payload$outboundSchema: z.ZodType<
   Payload$Outbound,
   z.ZodTypeDef,
   Payload
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    atType: z.string().optional(),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        atType: "@type",
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function payloadToJSON(payload: Payload): string {
   return JSON.stringify(Payload$outboundSchema.parse(payload));
@@ -124,14 +129,16 @@ export function payloadFromJSON(
 }
 
 /** @internal */
-export const Body$inboundSchema: z.ZodType<Body, z.ZodTypeDef, unknown> = z
-  .object({
-    callbackUrl: z.string().optional(),
-    event: z.string().optional(),
-    payload: z.nullable(z.lazy(() => Payload$inboundSchema)).optional(),
-    version: z.string().optional(),
-    webhookId: z.string().optional(),
-  });
+export const Body$inboundSchema: z.ZodType<Body, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      callbackUrl: z.string().optional(),
+      event: z.string().optional(),
+      payload: z.nullable(z.lazy(() => Payload$inboundSchema)).optional(),
+      version: z.string().optional(),
+      webhookId: z.string().optional(),
+    })
+  );
 /** @internal */
 export type Body$Outbound = {
   callbackUrl?: string | undefined;
@@ -143,13 +150,15 @@ export type Body$Outbound = {
 
 /** @internal */
 export const Body$outboundSchema: z.ZodType<Body$Outbound, z.ZodTypeDef, Body> =
-  z.object({
-    callbackUrl: z.string().optional(),
-    event: z.string().optional(),
-    payload: z.nullable(z.lazy(() => Payload$outboundSchema)).optional(),
-    version: z.string().optional(),
-    webhookId: z.string().optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      callbackUrl: z.string().optional(),
+      event: z.string().optional(),
+      payload: z.nullable(z.lazy(() => Payload$outboundSchema)).optional(),
+      version: z.string().optional(),
+      webhookId: z.string().optional(),
+    })
+  );
 
 export function bodyToJSON(body: Body): string {
   return JSON.stringify(Body$outboundSchema.parse(body));

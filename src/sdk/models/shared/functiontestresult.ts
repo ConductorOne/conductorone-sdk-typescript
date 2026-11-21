@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -65,21 +65,25 @@ export const FunctionTestResultStatus$inboundSchema: z.ZodType<
   FunctionTestResultStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(FunctionTestResultStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(FunctionTestResultStatus)
+);
 
 /** @internal */
 export const FunctionTestResult$inboundSchema: z.ZodType<
   FunctionTestResult,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  assertions: z.nullable(z.array(FunctionTestResultAssertion$inboundSchema))
-    .optional(),
-  error: z.string().optional(),
-  logs: z.nullable(z.array(FunctionTestResultLog$inboundSchema)).optional(),
-  name: z.string().optional(),
-  status: FunctionTestResultStatus$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assertions: z.nullable(z.array(FunctionTestResultAssertion$inboundSchema))
+      .optional(),
+    error: z.string().optional(),
+    logs: z.nullable(z.array(FunctionTestResultLog$inboundSchema)).optional(),
+    name: z.string().optional(),
+    status: FunctionTestResultStatus$inboundSchema.optional(),
+  })
+);
 
 export function functionTestResultFromJSON(
   jsonString: string,

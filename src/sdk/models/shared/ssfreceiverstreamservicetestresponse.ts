@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -93,26 +93,30 @@ export const ConfiguredSessionRevokedAction$inboundSchema: z.ZodType<
   ConfiguredSessionRevokedAction,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ConfiguredSessionRevokedAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ConfiguredSessionRevokedAction)
+);
 
 /** @internal */
 export const SSFReceiverStreamServiceTestResponse$inboundSchema: z.ZodType<
   SSFReceiverStreamServiceTestResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  activeRefreshTokenCount: z.number().int().optional(),
-  activeSessionCount: z.number().int().optional(),
-  configuredSessionRevokedAction: ConfiguredSessionRevokedAction$inboundSchema
-    .optional(),
-  identityLinkFound: z.boolean().optional(),
-  jwksError: z.string().optional(),
-  jwksKeyCount: z.number().int().optional(),
-  jwksReachable: z.boolean().optional(),
-  matchedUserId: z.string().optional(),
-  ready: z.boolean().optional(),
-  upstreamSubject: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    activeRefreshTokenCount: z.number().int().optional(),
+    activeSessionCount: z.number().int().optional(),
+    configuredSessionRevokedAction: ConfiguredSessionRevokedAction$inboundSchema
+      .optional(),
+    identityLinkFound: z.boolean().optional(),
+    jwksError: z.string().optional(),
+    jwksKeyCount: z.number().int().optional(),
+    jwksReachable: z.boolean().optional(),
+    matchedUserId: z.string().optional(),
+    ready: z.boolean().optional(),
+    upstreamSubject: z.string().optional(),
+  })
+);
 
 export function ssfReceiverStreamServiceTestResponseFromJSON(
   jsonString: string,

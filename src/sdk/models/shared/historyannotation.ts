@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -72,21 +72,25 @@ export const HistoryAnnotationKind$inboundSchema: z.ZodType<
   HistoryAnnotationKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(HistoryAnnotationKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(HistoryAnnotationKind)
+);
 
 /** @internal */
 export const HistoryAnnotation$inboundSchema: z.ZodType<
   HistoryAnnotation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  displayLabel: z.string().optional(),
-  displayUrl: z.string().optional(),
-  displayValue: z.string().optional(),
-  key: z.string().optional(),
-  kind: HistoryAnnotationKind$inboundSchema.optional(),
-  rawValue: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayLabel: z.string().optional(),
+    displayUrl: z.string().optional(),
+    displayValue: z.string().optional(),
+    key: z.string().optional(),
+    kind: HistoryAnnotationKind$inboundSchema.optional(),
+    rawValue: z.string().optional(),
+  })
+);
 
 export function historyAnnotationFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -88,7 +89,9 @@ export const HooksServiceCreateRequestEvent$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   HooksServiceCreateRequestEvent
-> = openEnums.outboundSchema(HooksServiceCreateRequestEvent);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(HooksServiceCreateRequestEvent)
+);
 
 /** @internal */
 export type HooksServiceCreateRequest$Outbound = {
@@ -109,18 +112,20 @@ export const HooksServiceCreateRequest$outboundSchema: z.ZodType<
   HooksServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   HooksServiceCreateRequest
-> = z.object({
-  builtinPattern: z.nullable(BuiltInPattern$outboundSchema).optional(),
-  description: z.string().optional(),
-  displayName: z.string(),
-  enabled: z.boolean().optional(),
-  event: HooksServiceCreateRequestEvent$outboundSchema.optional(),
-  filter: z.nullable(HookFilter$outboundSchema).optional(),
-  function: z.nullable(HookFunctionRef$outboundSchema).optional(),
-  jsonPatch: z.nullable(JSONPatchConfig$outboundSchema).optional(),
-  managedByGuardrails: z.boolean().optional(),
-  priority: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    builtinPattern: z.nullable(BuiltInPattern$outboundSchema).optional(),
+    description: z.string().optional(),
+    displayName: z.string(),
+    enabled: z.boolean().optional(),
+    event: HooksServiceCreateRequestEvent$outboundSchema.optional(),
+    filter: z.nullable(HookFilter$outboundSchema).optional(),
+    function: z.nullable(HookFunctionRef$outboundSchema).optional(),
+    jsonPatch: z.nullable(JSONPatchConfig$outboundSchema).optional(),
+    managedByGuardrails: z.boolean().optional(),
+    priority: z.number().int().optional(),
+  })
+);
 
 export function hooksServiceCreateRequestToJSON(
   hooksServiceCreateRequest: HooksServiceCreateRequest,

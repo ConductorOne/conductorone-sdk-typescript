@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -49,17 +49,19 @@ export const C1ApiFundsV1FundAssignmentServiceListHistoryRequest$outboundSchema:
     C1ApiFundsV1FundAssignmentServiceListHistoryRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFundsV1FundAssignmentServiceListHistoryRequest
-  > = z.object({
-    userId: z.string(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      userId: "user_id",
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      userId: z.string(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        userId: "user_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiFundsV1FundAssignmentServiceListHistoryRequestToJSON(
   c1ApiFundsV1FundAssignmentServiceListHistoryRequest:
@@ -78,21 +80,23 @@ export const C1ApiFundsV1FundAssignmentServiceListHistoryResponse$inboundSchema:
     C1ApiFundsV1FundAssignmentServiceListHistoryResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    FundAssignmentServiceListHistoryResponse: shared
-      .FundAssignmentServiceListHistoryResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "FundAssignmentServiceListHistoryResponse":
-        "fundAssignmentServiceListHistoryResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      FundAssignmentServiceListHistoryResponse: shared
+        .FundAssignmentServiceListHistoryResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "FundAssignmentServiceListHistoryResponse":
+          "fundAssignmentServiceListHistoryResponse",
+      });
+    })
+  );
 
 export function c1ApiFundsV1FundAssignmentServiceListHistoryResponseFromJSON(
   jsonString: string,

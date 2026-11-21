@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -49,15 +49,17 @@ export const C1ApiStepupV1StepUpProviderServiceUpdateRequest$outboundSchema:
     C1ApiStepupV1StepUpProviderServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiStepupV1StepUpProviderServiceUpdateRequest
-  > = z.object({
-    id: z.string(),
-    updateStepUpProviderRequest: shared
-      .UpdateStepUpProviderRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      updateStepUpProviderRequest: "UpdateStepUpProviderRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      updateStepUpProviderRequest: shared
+        .UpdateStepUpProviderRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        updateStepUpProviderRequest: "UpdateStepUpProviderRequest",
+      });
+    })
+  );
 
 export function c1ApiStepupV1StepUpProviderServiceUpdateRequestToJSON(
   c1ApiStepupV1StepUpProviderServiceUpdateRequest:
@@ -76,20 +78,22 @@ export const C1ApiStepupV1StepUpProviderServiceUpdateResponse$inboundSchema:
     C1ApiStepupV1StepUpProviderServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    UpdateStepUpProviderResponse: shared
-      .UpdateStepUpProviderResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "UpdateStepUpProviderResponse": "updateStepUpProviderResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      UpdateStepUpProviderResponse: shared
+        .UpdateStepUpProviderResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "UpdateStepUpProviderResponse": "updateStepUpProviderResponse",
+      });
+    })
+  );
 
 export function c1ApiStepupV1StepUpProviderServiceUpdateResponseFromJSON(
   jsonString: string,

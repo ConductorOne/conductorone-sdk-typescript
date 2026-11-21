@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The WorkloadFederationServiceCreateTrustRequest message.
@@ -61,15 +62,17 @@ export const WorkloadFederationServiceCreateTrustRequest$outboundSchema:
     WorkloadFederationServiceCreateTrustRequest$Outbound,
     z.ZodTypeDef,
     WorkloadFederationServiceCreateTrustRequest
-  > = z.object({
-    allowSourceCidrs: z.nullable(z.array(z.string())).optional(),
-    conditionExpression: z.string().optional(),
-    description: z.string().optional(),
-    displayName: z.string().optional(),
-    passthroughClaims: z.nullable(z.array(z.string())).optional(),
-    providerId: z.string().optional(),
-    scopedRoleIds: z.nullable(z.array(z.string())).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      allowSourceCidrs: z.nullable(z.array(z.string())).optional(),
+      conditionExpression: z.string().optional(),
+      description: z.string().optional(),
+      displayName: z.string().optional(),
+      passthroughClaims: z.nullable(z.array(z.string())).optional(),
+      providerId: z.string().optional(),
+      scopedRoleIds: z.nullable(z.array(z.string())).optional(),
+    })
+  );
 
 export function workloadFederationServiceCreateTrustRequestToJSON(
   workloadFederationServiceCreateTrustRequest:

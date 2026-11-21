@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { C1ChartSource, C1ChartSource$inboundSchema } from "./c1chartsource.js";
@@ -46,15 +46,17 @@ export const C1TableComponent$inboundSchema: z.ZodType<
   C1TableComponent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  artifactUrl: z.nullable(DynamicString$inboundSchema).optional(),
-  columns: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.number().int().optional(),
-  rows: z.nullable(z.array(C1TableRow$inboundSchema)).optional(),
-  sources: z.nullable(z.array(C1ChartSource$inboundSchema)).optional(),
-  title: z.nullable(DynamicString$inboundSchema).optional(),
-  totalRows: z.string().transform(v => parseInt(v, 10)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    artifactUrl: z.nullable(DynamicString$inboundSchema).optional(),
+    columns: z.nullable(z.array(z.string())).optional(),
+    pageSize: z.number().int().optional(),
+    rows: z.nullable(z.array(C1TableRow$inboundSchema)).optional(),
+    sources: z.nullable(z.array(C1ChartSource$inboundSchema)).optional(),
+    title: z.nullable(DynamicString$inboundSchema).optional(),
+    totalRows: z.string().transform(v => parseInt(v, 10)).optional(),
+  })
+);
 
 export function c1TableComponentFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,7 +17,7 @@ export const PayloadTest$inboundSchema: z.ZodType<
   PayloadTest,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type PayloadTest$Outbound = {};
 
@@ -26,7 +26,7 @@ export const PayloadTest$outboundSchema: z.ZodType<
   PayloadTest$Outbound,
   z.ZodTypeDef,
   PayloadTest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function payloadTestToJSON(payloadTest: PayloadTest): string {
   return JSON.stringify(PayloadTest$outboundSchema.parse(payloadTest));

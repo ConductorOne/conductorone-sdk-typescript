@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -53,21 +53,25 @@ export const BundleAutomationCelEvaluationStateStatus$inboundSchema: z.ZodType<
   BundleAutomationCelEvaluationStateStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(BundleAutomationCelEvaluationStateStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(BundleAutomationCelEvaluationStateStatus)
+);
 
 /** @internal */
 export const BundleAutomationCelEvaluationState$inboundSchema: z.ZodType<
   BundleAutomationCelEvaluationState,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  errorMessage: z.string().optional(),
-  lastEvaluatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  matchedUsers: z.string().transform(v => parseInt(v, 10)).optional(),
-  status: BundleAutomationCelEvaluationStateStatus$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    errorMessage: z.string().optional(),
+    lastEvaluatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    matchedUsers: z.string().transform(v => parseInt(v, 10)).optional(),
+    status: BundleAutomationCelEvaluationStateStatus$inboundSchema.optional(),
+  })
+);
 
 export function bundleAutomationCelEvaluationStateFromJSON(
   jsonString: string,

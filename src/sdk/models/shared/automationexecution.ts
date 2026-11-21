@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -64,6 +64,7 @@ export type AutomationExecution = {
    * The isDraft field.
    */
   isDraft?: boolean | undefined;
+  lastRetriedAt?: Date | null | undefined;
   /**
    * The state field.
    */
@@ -76,34 +77,41 @@ export const AutomationExecutionState$inboundSchema: z.ZodType<
   AutomationExecutionState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AutomationExecutionState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AutomationExecutionState)
+);
 
 /** @internal */
 export const AutomationExecution$inboundSchema: z.ZodType<
   AutomationExecution,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  automationTemplateId: z.string().optional(),
-  completedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  context: z.nullable(AutomationContext$inboundSchema).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  currentVersion: z.number().int().optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  duration: z.nullable(z.string()).optional(),
-  id: z.string().transform(v => parseInt(v, 10)).optional(),
-  isDraft: z.boolean().optional(),
-  state: AutomationExecutionState$inboundSchema.optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    automationTemplateId: z.string().optional(),
+    completedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    context: z.nullable(AutomationContext$inboundSchema).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    currentVersion: z.number().int().optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    duration: z.nullable(z.string()).optional(),
+    id: z.string().transform(v => parseInt(v, 10)).optional(),
+    isDraft: z.boolean().optional(),
+    lastRetriedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    state: AutomationExecutionState$inboundSchema.optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function automationExecutionFromJSON(
   jsonString: string,

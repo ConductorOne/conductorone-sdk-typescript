@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -46,13 +46,15 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceGetBundleAutoma
     C1ApiRequestcatalogV1RequestCatalogManagementServiceGetBundleAutomationRequest$Outbound,
     z.ZodTypeDef,
     C1ApiRequestcatalogV1RequestCatalogManagementServiceGetBundleAutomationRequest
-  > = z.object({
-    requestCatalogId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      requestCatalogId: "request_catalog_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      requestCatalogId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        requestCatalogId: "request_catalog_id",
+      });
+    })
+  );
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceGetBundleAutomationRequestToJSON(
   c1ApiRequestcatalogV1RequestCatalogManagementServiceGetBundleAutomationRequest:
@@ -72,19 +74,21 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceGetBundleAutoma
     C1ApiRequestcatalogV1RequestCatalogManagementServiceGetBundleAutomationResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    BundleAutomation: shared.BundleAutomation$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "BundleAutomation": "bundleAutomation",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      BundleAutomation: shared.BundleAutomation$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "BundleAutomation": "bundleAutomation",
+      });
+    })
+  );
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceGetBundleAutomationResponseFromJSON(
   jsonString: string,

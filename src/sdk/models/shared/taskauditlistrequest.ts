@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   TaskAuditViewRef,
   TaskAuditViewRef$Outbound,
@@ -69,15 +70,17 @@ export const TaskAuditListRequest$outboundSchema: z.ZodType<
   TaskAuditListRequest$Outbound,
   z.ZodTypeDef,
   TaskAuditListRequest
-> = z.object({
-  commentsOnly: z.boolean().optional(),
-  excludeComments: z.boolean().optional(),
-  newestFirst: z.boolean().optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  refs: z.nullable(z.array(TaskAuditViewRef$outboundSchema)).optional(),
-  taskId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    commentsOnly: z.boolean().optional(),
+    excludeComments: z.boolean().optional(),
+    newestFirst: z.boolean().optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    refs: z.nullable(z.array(TaskAuditViewRef$outboundSchema)).optional(),
+    taskId: z.string().optional(),
+  })
+);
 
 export function taskAuditListRequestToJSON(
   taskAuditListRequest: TaskAuditListRequest,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * SubjectAppLimitStateFilter is the structured state filter. The three states
@@ -54,11 +55,13 @@ export const SubjectAppLimitStateFilter$outboundSchema: z.ZodType<
   SubjectAppLimitStateFilter$Outbound,
   z.ZodTypeDef,
   SubjectAppLimitStateFilter
-> = z.object({
-  explicitLimit: z.boolean().optional(),
-  inheriting: z.boolean().optional(),
-  suspended: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    explicitLimit: z.boolean().optional(),
+    inheriting: z.boolean().optional(),
+    suspended: z.boolean().optional(),
+  })
+);
 
 export function subjectAppLimitStateFilterToJSON(
   subjectAppLimitStateFilter: SubjectAppLimitStateFilter,

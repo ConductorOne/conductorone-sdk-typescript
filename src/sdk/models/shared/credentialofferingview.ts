@@ -3,9 +3,13 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  CredentialRequesterArgumentView,
+  CredentialRequesterArgumentView$inboundSchema,
+} from "./credentialrequesterargumentview.js";
 
 /**
  * CredentialOfferingView is one connector credential kind published through an Access Profile.
@@ -23,10 +27,19 @@ export type CredentialOfferingView = {
    * The displayName field.
    */
   displayName?: string | undefined;
+  fixedArgs?: { [k: string]: any } | null | undefined;
+  /**
+   * Connector display labels for fixed arguments, keyed by argument name.
+   */
+  fixedArgumentDisplayNames?: { [k: string]: string } | undefined;
   /**
    * The id field.
    */
   id?: string | undefined;
+  /**
+   * The inputConfigurationHash field.
+   */
+  inputConfigurationHash?: string | undefined;
   maxDuration?: string | null | undefined;
   /**
    * The Access Profile that publishes this offering. An offering can be
@@ -50,6 +63,13 @@ export type CredentialOfferingView = {
    *  another user's app account.
    */
   requesterAppUserIds?: Array<string> | null | undefined;
+  /**
+   * The requesterArguments field.
+   */
+  requesterArguments?:
+    | Array<CredentialRequesterArgumentView>
+    | null
+    | undefined;
   retrievalWindow?: string | null | undefined;
 };
 
@@ -58,17 +78,25 @@ export const CredentialOfferingView$inboundSchema: z.ZodType<
   CredentialOfferingView,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowedViews: z.number().int().optional(),
-  appId: z.string().optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  maxDuration: z.nullable(z.string()).optional(),
-  requestCatalogId: z.string().optional(),
-  requesterAccountSubject: z.boolean().optional(),
-  requesterAppUserIds: z.nullable(z.array(z.string())).optional(),
-  retrievalWindow: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowedViews: z.number().int().optional(),
+    appId: z.string().optional(),
+    displayName: z.string().optional(),
+    fixedArgs: z.nullable(z.record(z.any())).optional(),
+    fixedArgumentDisplayNames: z.record(z.string()).optional(),
+    id: z.string().optional(),
+    inputConfigurationHash: z.string().optional(),
+    maxDuration: z.nullable(z.string()).optional(),
+    requestCatalogId: z.string().optional(),
+    requesterAccountSubject: z.boolean().optional(),
+    requesterAppUserIds: z.nullable(z.array(z.string())).optional(),
+    requesterArguments: z.nullable(
+      z.array(CredentialRequesterArgumentView$inboundSchema),
+    ).optional(),
+    retrievalWindow: z.nullable(z.string()).optional(),
+  })
+);
 
 export function credentialOfferingViewFromJSON(
   jsonString: string,

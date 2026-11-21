@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,15 +54,17 @@ export const C1ApiAiGovernanceV1ClassifierServiceDeleteClassifierBindingRequest$
     C1ApiAiGovernanceV1ClassifierServiceDeleteClassifierBindingRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1ClassifierServiceDeleteClassifierBindingRequest
-  > = z.object({
-    id: z.string(),
-    deleteClassifierBindingRequest: shared
-      .DeleteClassifierBindingRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      deleteClassifierBindingRequest: "DeleteClassifierBindingRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      deleteClassifierBindingRequest: shared
+        .DeleteClassifierBindingRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        deleteClassifierBindingRequest: "DeleteClassifierBindingRequest",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1ClassifierServiceDeleteClassifierBindingRequestToJSON(
   c1ApiAiGovernanceV1ClassifierServiceDeleteClassifierBindingRequest:
@@ -82,20 +84,22 @@ export const C1ApiAiGovernanceV1ClassifierServiceDeleteClassifierBindingResponse
     C1ApiAiGovernanceV1ClassifierServiceDeleteClassifierBindingResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    DeleteClassifierBindingResponse: shared
-      .DeleteClassifierBindingResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "DeleteClassifierBindingResponse": "deleteClassifierBindingResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      DeleteClassifierBindingResponse: shared
+        .DeleteClassifierBindingResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "DeleteClassifierBindingResponse": "deleteClassifierBindingResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1ClassifierServiceDeleteClassifierBindingResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -45,23 +45,25 @@ export const Surfaces$inboundSchema: z.ZodType<
   Surfaces,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Surfaces);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Surfaces));
 /** @internal */
 export const Surfaces$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Surfaces
-> = openEnums.outboundSchema(Surfaces);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Surfaces));
 
 /** @internal */
 export const BlockOutputConfig$inboundSchema: z.ZodType<
   BlockOutputConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string().optional(),
-  surfaces: z.nullable(z.array(Surfaces$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string().optional(),
+    surfaces: z.nullable(z.array(Surfaces$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type BlockOutputConfig$Outbound = {
   message?: string | undefined;
@@ -73,10 +75,12 @@ export const BlockOutputConfig$outboundSchema: z.ZodType<
   BlockOutputConfig$Outbound,
   z.ZodTypeDef,
   BlockOutputConfig
-> = z.object({
-  message: z.string().optional(),
-  surfaces: z.nullable(z.array(Surfaces$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string().optional(),
+    surfaces: z.nullable(z.array(Surfaces$outboundSchema)).optional(),
+  })
+);
 
 export function blockOutputConfigToJSON(
   blockOutputConfig: BlockOutputConfig,

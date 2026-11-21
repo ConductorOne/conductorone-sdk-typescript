@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -61,25 +61,29 @@ export const MyEffectiveScopePeriodKind$inboundSchema: z.ZodType<
   MyEffectiveScopePeriodKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(MyEffectiveScopePeriodKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(MyEffectiveScopePeriodKind)
+);
 
 /** @internal */
 export const MyEffectiveScope$inboundSchema: z.ZodType<
   MyEffectiveScope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  financials: z.nullable(MyEffectiveScopeFinancials$inboundSchema).optional(),
-  periodEnd: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  periodKey: z.string().optional(),
-  periodKind: MyEffectiveScopePeriodKind$inboundSchema.optional(),
-  periodStart: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  scope: z.nullable(FundsAccountScope$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    financials: z.nullable(MyEffectiveScopeFinancials$inboundSchema).optional(),
+    periodEnd: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    periodKey: z.string().optional(),
+    periodKind: MyEffectiveScopePeriodKind$inboundSchema.optional(),
+    periodStart: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    scope: z.nullable(FundsAccountScope$inboundSchema).optional(),
+  })
+);
 
 export function myEffectiveScopeFromJSON(
   jsonString: string,

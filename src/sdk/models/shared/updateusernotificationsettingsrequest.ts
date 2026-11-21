@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   ChannelSettings,
   ChannelSettings$Outbound,
@@ -26,9 +27,11 @@ export const UpdateUserNotificationSettingsRequest$outboundSchema: z.ZodType<
   UpdateUserNotificationSettingsRequest$Outbound,
   z.ZodTypeDef,
   UpdateUserNotificationSettingsRequest
-> = z.object({
-  channelSettings: z.nullable(ChannelSettings$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    channelSettings: z.nullable(ChannelSettings$outboundSchema).optional(),
+  })
+);
 
 export function updateUserNotificationSettingsRequestToJSON(
   updateUserNotificationSettingsRequest: UpdateUserNotificationSettingsRequest,

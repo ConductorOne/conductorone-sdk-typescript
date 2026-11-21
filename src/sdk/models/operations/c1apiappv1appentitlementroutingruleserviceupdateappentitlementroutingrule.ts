@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -56,18 +56,20 @@ export const C1ApiAppV1AppEntitlementRoutingRuleServiceUpdateAppEntitlementRouti
     C1ApiAppV1AppEntitlementRoutingRuleServiceUpdateAppEntitlementRoutingRuleRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementRoutingRuleServiceUpdateAppEntitlementRoutingRuleRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    updateAppEntitlementRoutingRuleRequest: shared
-      .UpdateAppEntitlementRoutingRuleRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      updateAppEntitlementRoutingRuleRequest:
-        "UpdateAppEntitlementRoutingRuleRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      updateAppEntitlementRoutingRuleRequest: shared
+        .UpdateAppEntitlementRoutingRuleRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        updateAppEntitlementRoutingRuleRequest:
+          "UpdateAppEntitlementRoutingRuleRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementRoutingRuleServiceUpdateAppEntitlementRoutingRuleRequestToJSON(
   c1ApiAppV1AppEntitlementRoutingRuleServiceUpdateAppEntitlementRoutingRuleRequest:
@@ -87,21 +89,23 @@ export const C1ApiAppV1AppEntitlementRoutingRuleServiceUpdateAppEntitlementRouti
     C1ApiAppV1AppEntitlementRoutingRuleServiceUpdateAppEntitlementRoutingRuleResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    UpdateAppEntitlementRoutingRuleResponse: shared
-      .UpdateAppEntitlementRoutingRuleResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "UpdateAppEntitlementRoutingRuleResponse":
-        "updateAppEntitlementRoutingRuleResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      UpdateAppEntitlementRoutingRuleResponse: shared
+        .UpdateAppEntitlementRoutingRuleResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "UpdateAppEntitlementRoutingRuleResponse":
+          "updateAppEntitlementRoutingRuleResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementRoutingRuleServiceUpdateAppEntitlementRoutingRuleResponseFromJSON(
   jsonString: string,

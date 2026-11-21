@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { AppResource, AppResource$inboundSchema } from "./appresource.js";
@@ -50,15 +50,17 @@ export const ScopeWithRoles$inboundSchema: z.ZodType<
   ScopeWithRoles,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  catalogId: z.string().optional(),
-  isAppAccess: z.boolean().optional(),
-  ref: z.nullable(ScopeRoleBindingRef$inboundSchema).optional(),
-  roles: z.nullable(z.array(AppResource$inboundSchema)).optional(),
-  scopeAppResource: z.nullable(AppResource$inboundSchema).optional(),
-  scopeAppResourceType: z.nullable(AppResourceType$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    catalogId: z.string().optional(),
+    isAppAccess: z.boolean().optional(),
+    ref: z.nullable(ScopeRoleBindingRef$inboundSchema).optional(),
+    roles: z.nullable(z.array(AppResource$inboundSchema)).optional(),
+    scopeAppResource: z.nullable(AppResource$inboundSchema).optional(),
+    scopeAppResourceType: z.nullable(AppResourceType$inboundSchema).optional(),
+  })
+);
 
 export function scopeWithRolesFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const ConflictMonitorRef$inboundSchema: z.ZodType<
   ConflictMonitorRef,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+  })
+);
 /** @internal */
 export type ConflictMonitorRef$Outbound = {
   id?: string | undefined;
@@ -35,9 +37,11 @@ export const ConflictMonitorRef$outboundSchema: z.ZodType<
   ConflictMonitorRef$Outbound,
   z.ZodTypeDef,
   ConflictMonitorRef
-> = z.object({
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+  })
+);
 
 export function conflictMonitorRefToJSON(
   conflictMonitorRef: ConflictMonitorRef,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,18 +54,20 @@ export const C1ApiAppV1ConnectorServiceUpdateConnectorScheduleRequest$outboundSc
     C1ApiAppV1ConnectorServiceUpdateConnectorScheduleRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1ConnectorServiceUpdateConnectorScheduleRequest
-  > = z.object({
-    appId: z.string(),
-    connectorId: z.string(),
-    updateConnectorScheduleRequest: shared
-      .UpdateConnectorScheduleRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      connectorId: "connector_id",
-      updateConnectorScheduleRequest: "UpdateConnectorScheduleRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      connectorId: z.string(),
+      updateConnectorScheduleRequest: shared
+        .UpdateConnectorScheduleRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        connectorId: "connector_id",
+        updateConnectorScheduleRequest: "UpdateConnectorScheduleRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV1ConnectorServiceUpdateConnectorScheduleRequestToJSON(
   c1ApiAppV1ConnectorServiceUpdateConnectorScheduleRequest:
@@ -83,20 +85,22 @@ export const C1ApiAppV1ConnectorServiceUpdateConnectorScheduleResponse$inboundSc
     C1ApiAppV1ConnectorServiceUpdateConnectorScheduleResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    UpdateConnectorScheduleResponse: shared
-      .UpdateConnectorScheduleResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "UpdateConnectorScheduleResponse": "updateConnectorScheduleResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      UpdateConnectorScheduleResponse: shared
+        .UpdateConnectorScheduleResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "UpdateConnectorScheduleResponse": "updateConnectorScheduleResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1ConnectorServiceUpdateConnectorScheduleResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -67,6 +67,10 @@ export type FormStringField = {
    * The placeholder field.
    */
   placeholder?: string | undefined;
+  /**
+   * Shown when the value does not match rules.pattern. Empty uses the default message.
+   */
+  regexErrorMessage?: string | undefined;
   rules?: StringRules | null | undefined;
   selectField?: SelectField | null | undefined;
   textField?: TextField | null | undefined;
@@ -77,16 +81,19 @@ export const FormStringField$inboundSchema: z.ZodType<
   FormStringField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  dateField: z.nullable(DateField$inboundSchema).optional(),
-  defaultValue: z.string().optional(),
-  passwordField: z.nullable(PasswordField$inboundSchema).optional(),
-  pickerField: z.nullable(PickerField$inboundSchema).optional(),
-  placeholder: z.string().optional(),
-  rules: z.nullable(StringRules$inboundSchema).optional(),
-  selectField: z.nullable(SelectField$inboundSchema).optional(),
-  textField: z.nullable(TextField$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    dateField: z.nullable(DateField$inboundSchema).optional(),
+    defaultValue: z.string().optional(),
+    passwordField: z.nullable(PasswordField$inboundSchema).optional(),
+    pickerField: z.nullable(PickerField$inboundSchema).optional(),
+    placeholder: z.string().optional(),
+    regexErrorMessage: z.string().optional(),
+    rules: z.nullable(StringRules$inboundSchema).optional(),
+    selectField: z.nullable(SelectField$inboundSchema).optional(),
+    textField: z.nullable(TextField$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type FormStringField$Outbound = {
   dateField?: DateField$Outbound | null | undefined;
@@ -94,6 +101,7 @@ export type FormStringField$Outbound = {
   passwordField?: PasswordField$Outbound | null | undefined;
   pickerField?: PickerField$Outbound | null | undefined;
   placeholder?: string | undefined;
+  regexErrorMessage?: string | undefined;
   rules?: StringRules$Outbound | null | undefined;
   selectField?: SelectField$Outbound | null | undefined;
   textField?: TextField$Outbound | null | undefined;
@@ -104,16 +112,19 @@ export const FormStringField$outboundSchema: z.ZodType<
   FormStringField$Outbound,
   z.ZodTypeDef,
   FormStringField
-> = z.object({
-  dateField: z.nullable(DateField$outboundSchema).optional(),
-  defaultValue: z.string().optional(),
-  passwordField: z.nullable(PasswordField$outboundSchema).optional(),
-  pickerField: z.nullable(PickerField$outboundSchema).optional(),
-  placeholder: z.string().optional(),
-  rules: z.nullable(StringRules$outboundSchema).optional(),
-  selectField: z.nullable(SelectField$outboundSchema).optional(),
-  textField: z.nullable(TextField$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    dateField: z.nullable(DateField$outboundSchema).optional(),
+    defaultValue: z.string().optional(),
+    passwordField: z.nullable(PasswordField$outboundSchema).optional(),
+    pickerField: z.nullable(PickerField$outboundSchema).optional(),
+    placeholder: z.string().optional(),
+    regexErrorMessage: z.string().optional(),
+    rules: z.nullable(StringRules$outboundSchema).optional(),
+    selectField: z.nullable(SelectField$outboundSchema).optional(),
+    textField: z.nullable(TextField$outboundSchema).optional(),
+  })
+);
 
 export function formStringFieldToJSON(
   formStringField: FormStringField,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const BundleAutomationRuleCEL$inboundSchema: z.ZodType<
   BundleAutomationRuleCEL,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  expression: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expression: z.string().optional(),
+  })
+);
 /** @internal */
 export type BundleAutomationRuleCEL$Outbound = {
   expression?: string | undefined;
@@ -35,9 +37,11 @@ export const BundleAutomationRuleCEL$outboundSchema: z.ZodType<
   BundleAutomationRuleCEL$Outbound,
   z.ZodTypeDef,
   BundleAutomationRuleCEL
-> = z.object({
-  expression: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expression: z.string().optional(),
+  })
+);
 
 export function bundleAutomationRuleCELToJSON(
   bundleAutomationRuleCEL: BundleAutomationRuleCEL,

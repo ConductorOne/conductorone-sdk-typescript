@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,18 +54,21 @@ export const C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest$outboun
     C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest
-  > = z.object({
-    appId: z.string(),
-    appEntitlementId: z.string(),
-    removeEntitlementMembershipRequest: shared
-      .RemoveEntitlementMembershipRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      appEntitlementId: "app_entitlement_id",
-      removeEntitlementMembershipRequest: "RemoveEntitlementMembershipRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      appEntitlementId: z.string(),
+      removeEntitlementMembershipRequest: shared
+        .RemoveEntitlementMembershipRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        appEntitlementId: "app_entitlement_id",
+        removeEntitlementMembershipRequest:
+          "RemoveEntitlementMembershipRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequestToJSON(
   c1ApiAppV1AppEntitlementsRemoveEntitlementMembershipRequest:
@@ -83,21 +86,23 @@ export const C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse$inboun
     C1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    RemoveEntitlementMembershipResponse: shared
-      .RemoveEntitlementMembershipResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "RemoveEntitlementMembershipResponse":
-        "removeEntitlementMembershipResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      RemoveEntitlementMembershipResponse: shared
+        .RemoveEntitlementMembershipResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "RemoveEntitlementMembershipResponse":
+          "removeEntitlementMembershipResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementsRemoveEntitlementMembershipResponseFromJSON(
   jsonString: string,

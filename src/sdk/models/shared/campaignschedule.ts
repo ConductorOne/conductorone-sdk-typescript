@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -38,12 +38,14 @@ export const CampaignSchedule$inboundSchema: z.ZodType<
   CampaignSchedule,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  autoStartTime: z.nullable(CampaignScheduleTime$inboundSchema).optional(),
-  endTime: z.nullable(CampaignScheduleTime$inboundSchema).optional(),
-  startTime: z.nullable(CampaignScheduleTime$inboundSchema).optional(),
-  timezone: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    autoStartTime: z.nullable(CampaignScheduleTime$inboundSchema).optional(),
+    endTime: z.nullable(CampaignScheduleTime$inboundSchema).optional(),
+    startTime: z.nullable(CampaignScheduleTime$inboundSchema).optional(),
+    timezone: z.string().optional(),
+  })
+);
 /** @internal */
 export type CampaignSchedule$Outbound = {
   autoStartTime?: CampaignScheduleTime$Outbound | null | undefined;
@@ -57,12 +59,14 @@ export const CampaignSchedule$outboundSchema: z.ZodType<
   CampaignSchedule$Outbound,
   z.ZodTypeDef,
   CampaignSchedule
-> = z.object({
-  autoStartTime: z.nullable(CampaignScheduleTime$outboundSchema).optional(),
-  endTime: z.nullable(CampaignScheduleTime$outboundSchema).optional(),
-  startTime: z.nullable(CampaignScheduleTime$outboundSchema).optional(),
-  timezone: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    autoStartTime: z.nullable(CampaignScheduleTime$outboundSchema).optional(),
+    endTime: z.nullable(CampaignScheduleTime$outboundSchema).optional(),
+    startTime: z.nullable(CampaignScheduleTime$outboundSchema).optional(),
+    timezone: z.string().optional(),
+  })
+);
 
 export function campaignScheduleToJSON(
   campaignSchedule: CampaignSchedule,

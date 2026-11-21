@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * DirectoryServiceDeleteRequest is the request message for deleting a directory. It uses URL values for input.
@@ -17,7 +18,7 @@ export const DirectoryServiceDeleteRequest$outboundSchema: z.ZodType<
   DirectoryServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   DirectoryServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function directoryServiceDeleteRequestToJSON(
   directoryServiceDeleteRequest: DirectoryServiceDeleteRequest,

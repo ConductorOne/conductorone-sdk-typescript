@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -48,17 +49,19 @@ export const AppResourceTypeServiceGetResponseExpanded$inboundSchema: z.ZodType<
   AppResourceTypeServiceGetResponseExpanded,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    "@type": z.string().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "@type": "atType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      "@type": z.string().optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "@type": "atType",
+    });
+  })
+);
 
 export function appResourceTypeServiceGetResponseExpandedFromJSON(
   jsonString: string,
@@ -81,14 +84,17 @@ export const AppResourceTypeServiceGetResponse$inboundSchema: z.ZodType<
   AppResourceTypeServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appResourceTypeView: z.nullable(AppResourceTypeView$inboundSchema).optional(),
-  expanded: z.nullable(
-    z.array(
-      z.lazy(() => AppResourceTypeServiceGetResponseExpanded$inboundSchema),
-    ),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appResourceTypeView: z.nullable(AppResourceTypeView$inboundSchema)
+      .optional(),
+    expanded: z.nullable(
+      z.array(z.lazy(() =>
+        AppResourceTypeServiceGetResponseExpanded$inboundSchema
+      )),
+    ).optional(),
+  })
+);
 
 export function appResourceTypeServiceGetResponseFromJSON(
   jsonString: string,

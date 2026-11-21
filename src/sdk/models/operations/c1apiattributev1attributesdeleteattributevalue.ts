@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -49,15 +49,17 @@ export const C1ApiAttributeV1AttributesDeleteAttributeValueRequest$outboundSchem
     C1ApiAttributeV1AttributesDeleteAttributeValueRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAttributeV1AttributesDeleteAttributeValueRequest
-  > = z.object({
-    id: z.string(),
-    deleteAttributeValueRequest: shared
-      .DeleteAttributeValueRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      deleteAttributeValueRequest: "DeleteAttributeValueRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      deleteAttributeValueRequest: shared
+        .DeleteAttributeValueRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        deleteAttributeValueRequest: "DeleteAttributeValueRequest",
+      });
+    })
+  );
 
 export function c1ApiAttributeV1AttributesDeleteAttributeValueRequestToJSON(
   c1ApiAttributeV1AttributesDeleteAttributeValueRequest:
@@ -76,20 +78,22 @@ export const C1ApiAttributeV1AttributesDeleteAttributeValueResponse$inboundSchem
     C1ApiAttributeV1AttributesDeleteAttributeValueResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    DeleteAttributeValueResponse: shared
-      .DeleteAttributeValueResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "DeleteAttributeValueResponse": "deleteAttributeValueResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      DeleteAttributeValueResponse: shared
+        .DeleteAttributeValueResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "DeleteAttributeValueResponse": "deleteAttributeValueResponse",
+      });
+    })
+  );
 
 export function c1ApiAttributeV1AttributesDeleteAttributeValueResponseFromJSON(
   jsonString: string,

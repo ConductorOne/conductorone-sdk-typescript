@@ -3,13 +3,18 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type Three = {};
+export type GatedToolCallTarget3 = {};
 
-export type ToolOutput = string | number | Three | Array<any> | boolean;
+export type ToolOutput =
+  | string
+  | number
+  | GatedToolCallTarget3
+  | Array<any>
+  | boolean;
 
 /**
  * The GatedToolCallTarget message.
@@ -59,7 +64,7 @@ export type GatedToolCallTarget = {
   toolOutput?:
     | string
     | number
-    | Three
+    | GatedToolCallTarget3
     | Array<any>
     | boolean
     | null
@@ -67,28 +72,35 @@ export type GatedToolCallTarget = {
 };
 
 /** @internal */
-export const Three$inboundSchema: z.ZodType<Three, z.ZodTypeDef, unknown> = z
-  .object({});
-/** @internal */
-export type Three$Outbound = {};
-
-/** @internal */
-export const Three$outboundSchema: z.ZodType<
-  Three$Outbound,
+export const GatedToolCallTarget3$inboundSchema: z.ZodType<
+  GatedToolCallTarget3,
   z.ZodTypeDef,
-  Three
-> = z.object({});
+  unknown
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
+/** @internal */
+export type GatedToolCallTarget3$Outbound = {};
 
-export function threeToJSON(three: Three): string {
-  return JSON.stringify(Three$outboundSchema.parse(three));
+/** @internal */
+export const GatedToolCallTarget3$outboundSchema: z.ZodType<
+  GatedToolCallTarget3$Outbound,
+  z.ZodTypeDef,
+  GatedToolCallTarget3
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
+
+export function gatedToolCallTarget3ToJSON(
+  gatedToolCallTarget3: GatedToolCallTarget3,
+): string {
+  return JSON.stringify(
+    GatedToolCallTarget3$outboundSchema.parse(gatedToolCallTarget3),
+  );
 }
-export function threeFromJSON(
+export function gatedToolCallTarget3FromJSON(
   jsonString: string,
-): SafeParseResult<Three, SDKValidationError> {
+): SafeParseResult<GatedToolCallTarget3, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Three$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Three' from JSON`,
+    (x) => GatedToolCallTarget3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GatedToolCallTarget3' from JSON`,
   );
 }
 
@@ -97,18 +109,20 @@ export const ToolOutput$inboundSchema: z.ZodType<
   ToolOutput,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.string(),
-  z.number(),
-  z.lazy(() => Three$inboundSchema),
-  z.array(z.any()),
-  z.boolean(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.number(),
+    z.lazy(() => GatedToolCallTarget3$inboundSchema),
+    z.array(z.any()),
+    z.boolean(),
+  ])
+);
 /** @internal */
 export type ToolOutput$Outbound =
   | string
   | number
-  | Three$Outbound
+  | GatedToolCallTarget3$Outbound
   | Array<any>
   | boolean;
 
@@ -117,13 +131,15 @@ export const ToolOutput$outboundSchema: z.ZodType<
   ToolOutput$Outbound,
   z.ZodTypeDef,
   ToolOutput
-> = z.union([
-  z.string(),
-  z.number(),
-  z.lazy(() => Three$outboundSchema),
-  z.array(z.any()),
-  z.boolean(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.number(),
+    z.lazy(() => GatedToolCallTarget3$outboundSchema),
+    z.array(z.any()),
+    z.boolean(),
+  ])
+);
 
 export function toolOutputToJSON(toolOutput: ToolOutput): string {
   return JSON.stringify(ToolOutput$outboundSchema.parse(toolOutput));
@@ -143,28 +159,28 @@ export const GatedToolCallTarget$inboundSchema: z.ZodType<
   GatedToolCallTarget,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  callerKind: z.string().optional(),
-  connectorId: z.string().optional(),
-  gateId: z.string().optional(),
-  inputSizeBytes: z.number().int().optional(),
-  toolError: z.string().optional(),
-  toolId: z.string().optional(),
-  toolInput: z.nullable(z.record(z.any())).optional(),
-  toolKind: z.string().optional(),
-  toolName: z.string().optional(),
-  toolOutput: z.nullable(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    callerKind: z.string().optional(),
+    connectorId: z.string().optional(),
+    gateId: z.string().optional(),
+    inputSizeBytes: z.number().int().optional(),
+    toolError: z.string().optional(),
+    toolId: z.string().optional(),
+    toolInput: z.nullable(z.record(z.any())).optional(),
+    toolKind: z.string().optional(),
+    toolName: z.string().optional(),
+    toolOutput: z.nullable(z.union([
       z.string(),
       z.number(),
-      z.lazy(() => Three$inboundSchema),
+      z.lazy(() => GatedToolCallTarget3$inboundSchema),
       z.array(z.any()),
       z.boolean(),
-    ]),
-  ).optional(),
-});
+    ])).optional(),
+  })
+);
 /** @internal */
 export type GatedToolCallTarget$Outbound = {
   appEntitlementId?: string | undefined;
@@ -181,7 +197,7 @@ export type GatedToolCallTarget$Outbound = {
   toolOutput?:
     | string
     | number
-    | Three$Outbound
+    | GatedToolCallTarget3$Outbound
     | Array<any>
     | boolean
     | null
@@ -193,28 +209,28 @@ export const GatedToolCallTarget$outboundSchema: z.ZodType<
   GatedToolCallTarget$Outbound,
   z.ZodTypeDef,
   GatedToolCallTarget
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  callerKind: z.string().optional(),
-  connectorId: z.string().optional(),
-  gateId: z.string().optional(),
-  inputSizeBytes: z.number().int().optional(),
-  toolError: z.string().optional(),
-  toolId: z.string().optional(),
-  toolInput: z.nullable(z.record(z.any())).optional(),
-  toolKind: z.string().optional(),
-  toolName: z.string().optional(),
-  toolOutput: z.nullable(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    callerKind: z.string().optional(),
+    connectorId: z.string().optional(),
+    gateId: z.string().optional(),
+    inputSizeBytes: z.number().int().optional(),
+    toolError: z.string().optional(),
+    toolId: z.string().optional(),
+    toolInput: z.nullable(z.record(z.any())).optional(),
+    toolKind: z.string().optional(),
+    toolName: z.string().optional(),
+    toolOutput: z.nullable(z.union([
       z.string(),
       z.number(),
-      z.lazy(() => Three$outboundSchema),
+      z.lazy(() => GatedToolCallTarget3$outboundSchema),
       z.array(z.any()),
       z.boolean(),
-    ]),
-  ).optional(),
-});
+    ])).optional(),
+  })
+);
 
 export function gatedToolCallTargetToJSON(
   gatedToolCallTarget: GatedToolCallTarget,

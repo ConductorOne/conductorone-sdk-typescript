@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Status, Status$inboundSchema } from "./status.js";
@@ -28,11 +28,13 @@ export const TestSourceIPResponse$inboundSchema: z.ZodType<
   TestSourceIPResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowed: z.boolean().optional(),
-  checkedIp: z.string().optional(),
-  details: z.nullable(Status$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowed: z.boolean().optional(),
+    checkedIp: z.string().optional(),
+    details: z.nullable(Status$inboundSchema).optional(),
+  })
+);
 
 export function testSourceIPResponseFromJSON(
   jsonString: string,

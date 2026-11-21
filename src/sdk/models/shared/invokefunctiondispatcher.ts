@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -33,11 +33,13 @@ export const InvokeFunctionDispatcher$inboundSchema: z.ZodType<
   InvokeFunctionDispatcher,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  args: z.record(z.string()).optional(),
-  functionCommitId: z.string().optional(),
-  functionId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    args: z.record(z.string()).optional(),
+    functionCommitId: z.string().optional(),
+    functionId: z.string().optional(),
+  })
+);
 /** @internal */
 export type InvokeFunctionDispatcher$Outbound = {
   args?: { [k: string]: string } | undefined;
@@ -50,11 +52,13 @@ export const InvokeFunctionDispatcher$outboundSchema: z.ZodType<
   InvokeFunctionDispatcher$Outbound,
   z.ZodTypeDef,
   InvokeFunctionDispatcher
-> = z.object({
-  args: z.record(z.string()).optional(),
-  functionCommitId: z.string().optional(),
-  functionId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    args: z.record(z.string()).optional(),
+    functionCommitId: z.string().optional(),
+    functionId: z.string().optional(),
+  })
+);
 
 export function invokeFunctionDispatcherToJSON(
   invokeFunctionDispatcher: InvokeFunctionDispatcher,

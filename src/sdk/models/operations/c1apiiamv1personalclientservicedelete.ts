@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,15 +51,18 @@ export const C1ApiIamV1PersonalClientServiceDeleteRequest$outboundSchema:
     C1ApiIamV1PersonalClientServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     C1ApiIamV1PersonalClientServiceDeleteRequest
-  > = z.object({
-    id: z.string(),
-    personalClientServiceDeleteRequest: shared
-      .PersonalClientServiceDeleteRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      personalClientServiceDeleteRequest: "PersonalClientServiceDeleteRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      personalClientServiceDeleteRequest: shared
+        .PersonalClientServiceDeleteRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        personalClientServiceDeleteRequest:
+          "PersonalClientServiceDeleteRequest",
+      });
+    })
+  );
 
 export function c1ApiIamV1PersonalClientServiceDeleteRequestToJSON(
   c1ApiIamV1PersonalClientServiceDeleteRequest:
@@ -78,21 +81,23 @@ export const C1ApiIamV1PersonalClientServiceDeleteResponse$inboundSchema:
     C1ApiIamV1PersonalClientServiceDeleteResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    PersonalClientServiceDeleteResponse: shared
-      .PersonalClientServiceDeleteResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "PersonalClientServiceDeleteResponse":
-        "personalClientServiceDeleteResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      PersonalClientServiceDeleteResponse: shared
+        .PersonalClientServiceDeleteResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "PersonalClientServiceDeleteResponse":
+          "personalClientServiceDeleteResponse",
+      });
+    })
+  );
 
 export function c1ApiIamV1PersonalClientServiceDeleteResponseFromJSON(
   jsonString: string,

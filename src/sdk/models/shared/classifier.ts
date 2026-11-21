@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -135,66 +135,80 @@ export const ClassifierApplicableType$inboundSchema: z.ZodType<
   ClassifierApplicableType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ClassifierApplicableType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ClassifierApplicableType)
+);
 /** @internal */
 export const ClassifierApplicableType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ClassifierApplicableType
-> = openEnums.outboundSchema(ClassifierApplicableType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ClassifierApplicableType)
+);
 
 /** @internal */
 export const ClassifierDefaultOutcome$inboundSchema: z.ZodType<
   ClassifierDefaultOutcome,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ClassifierDefaultOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ClassifierDefaultOutcome)
+);
 /** @internal */
 export const ClassifierDefaultOutcome$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ClassifierDefaultOutcome
-> = openEnums.outboundSchema(ClassifierDefaultOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ClassifierDefaultOutcome)
+);
 
 /** @internal */
 export const ClassifierManagedBy$inboundSchema: z.ZodType<
   ClassifierManagedBy,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ClassifierManagedBy);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ClassifierManagedBy)
+);
 /** @internal */
 export const ClassifierManagedBy$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ClassifierManagedBy
-> = openEnums.outboundSchema(ClassifierManagedBy);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ClassifierManagedBy)
+);
 
 /** @internal */
 export const Classifier$inboundSchema: z.ZodType<
   Classifier,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  applicableType: ClassifierApplicableType$inboundSchema.optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  defaultDenyReason: z.string().optional(),
-  defaultOutcome: ClassifierDefaultOutcome$inboundSchema.optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.string().optional(),
-  displayName: z.string(),
-  id: z.string().optional(),
-  managedBy: ClassifierManagedBy$inboundSchema.optional(),
-  rules: z.nullable(z.array(AgentClassifierRule$inboundSchema)).optional(),
-  templateRef: z.nullable(TemplateRef$inboundSchema).optional(),
-  tenantId: z.string().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    applicableType: ClassifierApplicableType$inboundSchema.optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    defaultDenyReason: z.string().optional(),
+    defaultOutcome: ClassifierDefaultOutcome$inboundSchema.optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.string().optional(),
+    displayName: z.string(),
+    id: z.string().optional(),
+    managedBy: ClassifierManagedBy$inboundSchema.optional(),
+    rules: z.nullable(z.array(AgentClassifierRule$inboundSchema)).optional(),
+    templateRef: z.nullable(TemplateRef$inboundSchema).optional(),
+    tenantId: z.string().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type Classifier$Outbound = {
   applicableType?: string | undefined;
@@ -217,21 +231,23 @@ export const Classifier$outboundSchema: z.ZodType<
   Classifier$Outbound,
   z.ZodTypeDef,
   Classifier
-> = z.object({
-  applicableType: ClassifierApplicableType$outboundSchema.optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  defaultDenyReason: z.string().optional(),
-  defaultOutcome: ClassifierDefaultOutcome$outboundSchema.optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.string().optional(),
-  displayName: z.string(),
-  id: z.string().optional(),
-  managedBy: ClassifierManagedBy$outboundSchema.optional(),
-  rules: z.nullable(z.array(AgentClassifierRule$outboundSchema)).optional(),
-  templateRef: z.nullable(TemplateRef$outboundSchema).optional(),
-  tenantId: z.string().optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    applicableType: ClassifierApplicableType$outboundSchema.optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    defaultDenyReason: z.string().optional(),
+    defaultOutcome: ClassifierDefaultOutcome$outboundSchema.optional(),
+    deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    description: z.string().optional(),
+    displayName: z.string(),
+    id: z.string().optional(),
+    managedBy: ClassifierManagedBy$outboundSchema.optional(),
+    rules: z.nullable(z.array(AgentClassifierRule$outboundSchema)).optional(),
+    templateRef: z.nullable(TemplateRef$outboundSchema).optional(),
+    tenantId: z.string().optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function classifierToJSON(classifier: Classifier): string {
   return JSON.stringify(Classifier$outboundSchema.parse(classifier));

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -66,8 +67,8 @@ export const SSFReceiverEventSearchServiceSearchRequestOutcome$outboundSchema:
     string,
     z.ZodTypeDef,
     SSFReceiverEventSearchServiceSearchRequestOutcome
-  > = openEnums.outboundSchema(
-    SSFReceiverEventSearchServiceSearchRequestOutcome,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(SSFReceiverEventSearchServiceSearchRequestOutcome)
   );
 
 /** @internal */
@@ -87,16 +88,18 @@ export const SSFReceiverEventSearchServiceSearchRequest$outboundSchema:
     SSFReceiverEventSearchServiceSearchRequest$Outbound,
     z.ZodTypeDef,
     SSFReceiverEventSearchServiceSearchRequest
-  > = z.object({
-    eventType: z.string().optional(),
-    matchedUserId: z.string().optional(),
-    outcome: SSFReceiverEventSearchServiceSearchRequestOutcome$outboundSchema
-      .optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    query: z.string().optional(),
-    streamId: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      eventType: z.string().optional(),
+      matchedUserId: z.string().optional(),
+      outcome: SSFReceiverEventSearchServiceSearchRequestOutcome$outboundSchema
+        .optional(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      query: z.string().optional(),
+      streamId: z.string().optional(),
+    })
+  );
 
 export function ssfReceiverEventSearchServiceSearchRequestToJSON(
   ssfReceiverEventSearchServiceSearchRequest:

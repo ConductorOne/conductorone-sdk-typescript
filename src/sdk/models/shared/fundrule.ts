@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -55,20 +55,22 @@ export const FundRule$inboundSchema: z.ZodType<
   FundRule,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  displayName: z.string().optional(),
-  grant: z.nullable(FundsSpendLimit$inboundSchema).optional(),
-  groupRef: z.nullable(AppEntitlementRef$inboundSchema).optional(),
-  reason: z.string().optional(),
-  ruleId: z.string().optional(),
-  tenantId: z.string().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    displayName: z.string().optional(),
+    grant: z.nullable(FundsSpendLimit$inboundSchema).optional(),
+    groupRef: z.nullable(AppEntitlementRef$inboundSchema).optional(),
+    reason: z.string().optional(),
+    ruleId: z.string().optional(),
+    tenantId: z.string().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type FundRule$Outbound = {
   createdAt?: string | null | undefined;
@@ -86,16 +88,18 @@ export const FundRule$outboundSchema: z.ZodType<
   FundRule$Outbound,
   z.ZodTypeDef,
   FundRule
-> = z.object({
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  displayName: z.string().optional(),
-  grant: z.nullable(FundsSpendLimit$outboundSchema).optional(),
-  groupRef: z.nullable(AppEntitlementRef$outboundSchema).optional(),
-  reason: z.string().optional(),
-  ruleId: z.string().optional(),
-  tenantId: z.string().optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    displayName: z.string().optional(),
+    grant: z.nullable(FundsSpendLimit$outboundSchema).optional(),
+    groupRef: z.nullable(AppEntitlementRef$outboundSchema).optional(),
+    reason: z.string().optional(),
+    ruleId: z.string().optional(),
+    tenantId: z.string().optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function fundRuleToJSON(fundRule: FundRule): string {
   return JSON.stringify(FundRule$outboundSchema.parse(fundRule));

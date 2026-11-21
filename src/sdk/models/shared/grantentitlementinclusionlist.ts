@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,10 +28,12 @@ export const GrantEntitlementInclusionList$inboundSchema: z.ZodType<
   GrantEntitlementInclusionList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
+      .optional(),
+  })
+);
 /** @internal */
 export type GrantEntitlementInclusionList$Outbound = {
   appEntitlementRefs?: Array<AppEntitlementRef$Outbound> | null | undefined;
@@ -42,10 +44,12 @@ export const GrantEntitlementInclusionList$outboundSchema: z.ZodType<
   GrantEntitlementInclusionList$Outbound,
   z.ZodTypeDef,
   GrantEntitlementInclusionList
-> = z.object({
-  appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
+      .optional(),
+  })
+);
 
 export function grantEntitlementInclusionListToJSON(
   grantEntitlementInclusionList: GrantEntitlementInclusionList,

@@ -1,13 +1,13 @@
 # Kind
 
-Whether this is a static resource or a URI template.
+Where the record came from.
 
 ## Example Usage
 
 ```typescript
 import { Kind } from "conductorone-sdk-typescript/sdk/models/shared";
 
-let value: Kind = "MCP_RESOURCE_KIND_UNSPECIFIED";
+let value: Kind = "KIND_UNSPECIFIED";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -15,5 +15,5 @@ let value: Kind = "MCP_RESOURCE_KIND_UNSPECIFIED";
 ## Values
 
 ```typescript
-"MCP_RESOURCE_KIND_UNSPECIFIED" | "MCP_RESOURCE_KIND_STATIC" | "MCP_RESOURCE_KIND_TEMPLATE" | Unrecognized<string>
+"KIND_UNSPECIFIED" | "KIND_CONNECTOR" | "KIND_EXTERNAL" | Unrecognized<string>
 ```

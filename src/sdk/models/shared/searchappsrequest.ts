@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   PolicyRef,
   PolicyRef$Outbound,
@@ -64,16 +65,18 @@ export const SearchAppsRequest$outboundSchema: z.ZodType<
   SearchAppsRequest$Outbound,
   z.ZodTypeDef,
   SearchAppsRequest
-> = z.object({
-  appIds: z.nullable(z.array(z.string())).optional(),
-  displayName: z.string().optional(),
-  excludeAppIds: z.nullable(z.array(z.string())).optional(),
-  onlyDirectories: z.boolean().optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  policyRefs: z.nullable(z.array(PolicyRef$outboundSchema)).optional(),
-  query: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appIds: z.nullable(z.array(z.string())).optional(),
+    displayName: z.string().optional(),
+    excludeAppIds: z.nullable(z.array(z.string())).optional(),
+    onlyDirectories: z.boolean().optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    policyRefs: z.nullable(z.array(PolicyRef$outboundSchema)).optional(),
+    query: z.string().optional(),
+  })
+);
 
 export function searchAppsRequestToJSON(
   searchAppsRequest: SearchAppsRequest,

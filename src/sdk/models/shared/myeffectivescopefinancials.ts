@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -57,17 +57,19 @@ export const MyEffectiveScopeFinancials$inboundSchema: z.ZodType<
   MyEffectiveScopeFinancials,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accountInitialized: z.boolean().optional(),
-  hasRemainingNano: z.boolean().optional(),
-  lifetimeConsumedNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  limitNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  remainingNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  reservedNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  tracking: z.boolean().optional(),
-  windowCommittedNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  windowConsumedNano: z.string().transform(v => parseInt(v, 10)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountInitialized: z.boolean().optional(),
+    hasRemainingNano: z.boolean().optional(),
+    lifetimeConsumedNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    limitNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    remainingNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    reservedNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    tracking: z.boolean().optional(),
+    windowCommittedNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    windowConsumedNano: z.string().transform(v => parseInt(v, 10)).optional(),
+  })
+);
 
 export function myEffectiveScopeFinancialsFromJSON(
   jsonString: string,

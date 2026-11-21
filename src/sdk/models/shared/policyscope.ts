@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -53,21 +53,23 @@ export type PolicyScope = {
 
 /** @internal */
 export const Slot$inboundSchema: z.ZodType<Slot, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Slot);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Slot));
 /** @internal */
 export const Slot$outboundSchema: z.ZodType<string, z.ZodTypeDef, Slot> =
-  openEnums.outboundSchema(Slot);
+  /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Slot));
 
 /** @internal */
 export const PolicyScope$inboundSchema: z.ZodType<
   PolicyScope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  slot: Slot$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    slot: Slot$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type PolicyScope$Outbound = {
   appEntitlementId?: string | undefined;
@@ -80,11 +82,13 @@ export const PolicyScope$outboundSchema: z.ZodType<
   PolicyScope$Outbound,
   z.ZodTypeDef,
   PolicyScope
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  slot: Slot$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    slot: Slot$outboundSchema.optional(),
+  })
+);
 
 export function policyScopeToJSON(policyScope: PolicyScope): string {
   return JSON.stringify(PolicyScope$outboundSchema.parse(policyScope));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -88,30 +88,34 @@ export const RunRateForecastKind$inboundSchema: z.ZodType<
   RunRateForecastKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(RunRateForecastKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(RunRateForecastKind)
+);
 
 /** @internal */
 export const RunRateForecast$inboundSchema: z.ZodType<
   RunRateForecast,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  completeDays: z.number().int().optional(),
-  daysUntilForecast: z.number().int().optional(),
-  expectedForecastEligibleAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  historyDays: z.number().int().optional(),
-  kind: RunRateForecastKind$inboundSchema.optional(),
-  modelName: z.string().optional(),
-  periodToDateNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  points: z.nullable(z.array(ForecastPoint$inboundSchema)).optional(),
-  projectedP20Nano: z.string().transform(v => parseInt(v, 10)).optional(),
-  projectedP50Nano: z.string().transform(v => parseInt(v, 10)).optional(),
-  projectedP80Nano: z.string().transform(v => parseInt(v, 10)).optional(),
-  remainingDays: z.number().int().optional(),
-  runRateNano: z.string().transform(v => parseInt(v, 10)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    completeDays: z.number().int().optional(),
+    daysUntilForecast: z.number().int().optional(),
+    expectedForecastEligibleAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    historyDays: z.number().int().optional(),
+    kind: RunRateForecastKind$inboundSchema.optional(),
+    modelName: z.string().optional(),
+    periodToDateNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    points: z.nullable(z.array(ForecastPoint$inboundSchema)).optional(),
+    projectedP20Nano: z.string().transform(v => parseInt(v, 10)).optional(),
+    projectedP50Nano: z.string().transform(v => parseInt(v, 10)).optional(),
+    projectedP80Nano: z.string().transform(v => parseInt(v, 10)).optional(),
+    remainingDays: z.number().int().optional(),
+    runRateNano: z.string().transform(v => parseInt(v, 10)).optional(),
+  })
+);
 
 export function runRateForecastFromJSON(
   jsonString: string,

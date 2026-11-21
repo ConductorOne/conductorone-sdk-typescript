@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -42,14 +42,16 @@ export const PasswordConstraints$inboundSchema: z.ZodType<
   PasswordConstraints,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  checkBreached: z.boolean().optional(),
-  historyDepth: z.number().int().optional(),
-  minLength: z.number().int().optional(),
-  requireMixedCase: z.boolean().optional(),
-  requireNumber: z.boolean().optional(),
-  requireSymbol: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    checkBreached: z.boolean().optional(),
+    historyDepth: z.number().int().optional(),
+    minLength: z.number().int().optional(),
+    requireMixedCase: z.boolean().optional(),
+    requireNumber: z.boolean().optional(),
+    requireSymbol: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type PasswordConstraints$Outbound = {
   checkBreached?: boolean | undefined;
@@ -65,14 +67,16 @@ export const PasswordConstraints$outboundSchema: z.ZodType<
   PasswordConstraints$Outbound,
   z.ZodTypeDef,
   PasswordConstraints
-> = z.object({
-  checkBreached: z.boolean().optional(),
-  historyDepth: z.number().int().optional(),
-  minLength: z.number().int().optional(),
-  requireMixedCase: z.boolean().optional(),
-  requireNumber: z.boolean().optional(),
-  requireSymbol: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    checkBreached: z.boolean().optional(),
+    historyDepth: z.number().int().optional(),
+    minLength: z.number().int().optional(),
+    requireMixedCase: z.boolean().optional(),
+    requireNumber: z.boolean().optional(),
+    requireSymbol: z.boolean().optional(),
+  })
+);
 
 export function passwordConstraintsToJSON(
   passwordConstraints: PasswordConstraints,

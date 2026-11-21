@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -70,15 +70,17 @@ export const ProvisionerAssignment$inboundSchema: z.ZodType<
   ProvisionerAssignment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appOwners: z.nullable(AppOwnerProvisioner$inboundSchema).optional(),
-  entitlementOwners: z.nullable(EntitlementOwnerProvisioner$inboundSchema)
-    .optional(),
-  expression: z.nullable(ExpressionProvisioner$inboundSchema).optional(),
-  group: z.nullable(GroupProvisioner$inboundSchema).optional(),
-  manager: z.nullable(ManagerProvisioner$inboundSchema).optional(),
-  users: z.nullable(UserProvisioner$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appOwners: z.nullable(AppOwnerProvisioner$inboundSchema).optional(),
+    entitlementOwners: z.nullable(EntitlementOwnerProvisioner$inboundSchema)
+      .optional(),
+    expression: z.nullable(ExpressionProvisioner$inboundSchema).optional(),
+    group: z.nullable(GroupProvisioner$inboundSchema).optional(),
+    manager: z.nullable(ManagerProvisioner$inboundSchema).optional(),
+    users: z.nullable(UserProvisioner$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ProvisionerAssignment$Outbound = {
   appOwners?: AppOwnerProvisioner$Outbound | null | undefined;
@@ -94,15 +96,17 @@ export const ProvisionerAssignment$outboundSchema: z.ZodType<
   ProvisionerAssignment$Outbound,
   z.ZodTypeDef,
   ProvisionerAssignment
-> = z.object({
-  appOwners: z.nullable(AppOwnerProvisioner$outboundSchema).optional(),
-  entitlementOwners: z.nullable(EntitlementOwnerProvisioner$outboundSchema)
-    .optional(),
-  expression: z.nullable(ExpressionProvisioner$outboundSchema).optional(),
-  group: z.nullable(GroupProvisioner$outboundSchema).optional(),
-  manager: z.nullable(ManagerProvisioner$outboundSchema).optional(),
-  users: z.nullable(UserProvisioner$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appOwners: z.nullable(AppOwnerProvisioner$outboundSchema).optional(),
+    entitlementOwners: z.nullable(EntitlementOwnerProvisioner$outboundSchema)
+      .optional(),
+    expression: z.nullable(ExpressionProvisioner$outboundSchema).optional(),
+    group: z.nullable(GroupProvisioner$outboundSchema).optional(),
+    manager: z.nullable(ManagerProvisioner$outboundSchema).optional(),
+    users: z.nullable(UserProvisioner$outboundSchema).optional(),
+  })
+);
 
 export function provisionerAssignmentToJSON(
   provisionerAssignment: ProvisionerAssignment,

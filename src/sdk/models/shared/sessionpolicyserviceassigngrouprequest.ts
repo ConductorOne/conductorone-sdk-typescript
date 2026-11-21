@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The SessionPolicyServiceAssignGroupRequest message.
@@ -24,9 +25,11 @@ export const SessionPolicyServiceAssignGroupRequest$outboundSchema: z.ZodType<
   SessionPolicyServiceAssignGroupRequest$Outbound,
   z.ZodTypeDef,
   SessionPolicyServiceAssignGroupRequest
-> = z.object({
-  groupAppEntitlementId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    groupAppEntitlementId: z.string(),
+  })
+);
 
 export function sessionPolicyServiceAssignGroupRequestToJSON(
   sessionPolicyServiceAssignGroupRequest:

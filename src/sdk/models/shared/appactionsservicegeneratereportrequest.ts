@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Empty request body. Just placeholder for the generate app report request which uses URL values for input.
@@ -17,7 +18,7 @@ export const AppActionsServiceGenerateReportRequest$outboundSchema: z.ZodType<
   AppActionsServiceGenerateReportRequest$Outbound,
   z.ZodTypeDef,
   AppActionsServiceGenerateReportRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function appActionsServiceGenerateReportRequestToJSON(
   appActionsServiceGenerateReportRequest:

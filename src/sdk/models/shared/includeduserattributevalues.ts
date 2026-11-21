@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,10 +28,12 @@ export const IncludedUserAttributeValues$inboundSchema: z.ZodType<
   IncludedUserAttributeValues,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  values: z.nullable(z.array(IncludedUserAttributeValue$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    values: z.nullable(z.array(IncludedUserAttributeValue$inboundSchema))
+      .optional(),
+  })
+);
 /** @internal */
 export type IncludedUserAttributeValues$Outbound = {
   values?: Array<IncludedUserAttributeValue$Outbound> | null | undefined;
@@ -42,10 +44,12 @@ export const IncludedUserAttributeValues$outboundSchema: z.ZodType<
   IncludedUserAttributeValues$Outbound,
   z.ZodTypeDef,
   IncludedUserAttributeValues
-> = z.object({
-  values: z.nullable(z.array(IncludedUserAttributeValue$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    values: z.nullable(z.array(IncludedUserAttributeValue$outboundSchema))
+      .optional(),
+  })
+);
 
 export function includedUserAttributeValuesToJSON(
   includedUserAttributeValues: IncludedUserAttributeValues,

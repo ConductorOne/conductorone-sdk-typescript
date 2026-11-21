@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -38,11 +38,13 @@ export type Webhook = {
 
 /** @internal */
 export const Webhook$inboundSchema: z.ZodType<Webhook, z.ZodTypeDef, unknown> =
-  z.object({
-    payload: z.nullable(z.record(z.any())).optional(),
-    webhookId: z.nullable(z.string()).optional(),
-    webhookIdCel: z.nullable(z.string()).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      payload: z.nullable(z.record(z.any())).optional(),
+      webhookId: z.nullable(z.string()).optional(),
+      webhookIdCel: z.nullable(z.string()).optional(),
+    })
+  );
 /** @internal */
 export type Webhook$Outbound = {
   payload?: { [k: string]: any } | null | undefined;
@@ -55,11 +57,13 @@ export const Webhook$outboundSchema: z.ZodType<
   Webhook$Outbound,
   z.ZodTypeDef,
   Webhook
-> = z.object({
-  payload: z.nullable(z.record(z.any())).optional(),
-  webhookId: z.nullable(z.string()).optional(),
-  webhookIdCel: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    payload: z.nullable(z.record(z.any())).optional(),
+    webhookId: z.nullable(z.string()).optional(),
+    webhookIdCel: z.nullable(z.string()).optional(),
+  })
+);
 
 export function webhookToJSON(webhook: Webhook): string {
   return JSON.stringify(Webhook$outboundSchema.parse(webhook));

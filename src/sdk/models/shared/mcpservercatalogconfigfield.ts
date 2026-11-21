@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -46,15 +46,17 @@ export const MCPServerCatalogConfigField$inboundSchema: z.ZodType<
   MCPServerCatalogConfigField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  default: z.string().optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  name: z.string().optional(),
-  placeholder: z.string().optional(),
-  required: z.boolean().optional(),
-  secret: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    default: z.string().optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    name: z.string().optional(),
+    placeholder: z.string().optional(),
+    required: z.boolean().optional(),
+    secret: z.boolean().optional(),
+  })
+);
 
 export function mcpServerCatalogConfigFieldFromJSON(
   jsonString: string,

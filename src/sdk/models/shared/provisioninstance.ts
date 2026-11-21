@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -137,36 +137,42 @@ export const ProvisionInstanceState$inboundSchema: z.ZodType<
   ProvisionInstanceState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ProvisionInstanceState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ProvisionInstanceState)
+);
 /** @internal */
 export const ProvisionInstanceState$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ProvisionInstanceState
-> = openEnums.outboundSchema(ProvisionInstanceState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ProvisionInstanceState)
+);
 
 /** @internal */
 export const ProvisionInstance$inboundSchema: z.ZodType<
   ProvisionInstance,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  batonActionInvocationId: z.string().optional(),
-  cancelled: z.nullable(CancelledAction$inboundSchema).optional(),
-  completed: z.nullable(CompletedAction$inboundSchema).optional(),
-  errored: z.nullable(ErroredAction$inboundSchema).optional(),
-  externalTicketId: z.string().optional(),
-  externalTicketProvisionerConfigId: z.string().optional(),
-  notificationId: z.string().optional(),
-  provision: z.nullable(Provision$inboundSchema).optional(),
-  reassignedByError: z.nullable(ReassignedByErrorAction$inboundSchema)
-    .optional(),
-  skipped: z.nullable(SkippedAction$inboundSchema).optional(),
-  state: ProvisionInstanceState$inboundSchema.optional(),
-  waitingOn: z.nullable(ProvisionWaitingOn$inboundSchema).optional(),
-  webhookId: z.string().optional(),
-  webhookInstanceId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batonActionInvocationId: z.string().optional(),
+    cancelled: z.nullable(CancelledAction$inboundSchema).optional(),
+    completed: z.nullable(CompletedAction$inboundSchema).optional(),
+    errored: z.nullable(ErroredAction$inboundSchema).optional(),
+    externalTicketId: z.string().optional(),
+    externalTicketProvisionerConfigId: z.string().optional(),
+    notificationId: z.string().optional(),
+    provision: z.nullable(Provision$inboundSchema).optional(),
+    reassignedByError: z.nullable(ReassignedByErrorAction$inboundSchema)
+      .optional(),
+    skipped: z.nullable(SkippedAction$inboundSchema).optional(),
+    state: ProvisionInstanceState$inboundSchema.optional(),
+    waitingOn: z.nullable(ProvisionWaitingOn$inboundSchema).optional(),
+    webhookId: z.string().optional(),
+    webhookInstanceId: z.string().optional(),
+  })
+);
 /** @internal */
 export type ProvisionInstance$Outbound = {
   batonActionInvocationId?: string | undefined;
@@ -190,23 +196,25 @@ export const ProvisionInstance$outboundSchema: z.ZodType<
   ProvisionInstance$Outbound,
   z.ZodTypeDef,
   ProvisionInstance
-> = z.object({
-  batonActionInvocationId: z.string().optional(),
-  cancelled: z.nullable(CancelledAction$outboundSchema).optional(),
-  completed: z.nullable(CompletedAction$outboundSchema).optional(),
-  errored: z.nullable(ErroredAction$outboundSchema).optional(),
-  externalTicketId: z.string().optional(),
-  externalTicketProvisionerConfigId: z.string().optional(),
-  notificationId: z.string().optional(),
-  provision: z.nullable(Provision$outboundSchema).optional(),
-  reassignedByError: z.nullable(ReassignedByErrorAction$outboundSchema)
-    .optional(),
-  skipped: z.nullable(SkippedAction$outboundSchema).optional(),
-  state: ProvisionInstanceState$outboundSchema.optional(),
-  waitingOn: z.nullable(ProvisionWaitingOn$outboundSchema).optional(),
-  webhookId: z.string().optional(),
-  webhookInstanceId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batonActionInvocationId: z.string().optional(),
+    cancelled: z.nullable(CancelledAction$outboundSchema).optional(),
+    completed: z.nullable(CompletedAction$outboundSchema).optional(),
+    errored: z.nullable(ErroredAction$outboundSchema).optional(),
+    externalTicketId: z.string().optional(),
+    externalTicketProvisionerConfigId: z.string().optional(),
+    notificationId: z.string().optional(),
+    provision: z.nullable(Provision$outboundSchema).optional(),
+    reassignedByError: z.nullable(ReassignedByErrorAction$outboundSchema)
+      .optional(),
+    skipped: z.nullable(SkippedAction$outboundSchema).optional(),
+    state: ProvisionInstanceState$outboundSchema.optional(),
+    waitingOn: z.nullable(ProvisionWaitingOn$outboundSchema).optional(),
+    webhookId: z.string().optional(),
+    webhookInstanceId: z.string().optional(),
+  })
+);
 
 export function provisionInstanceToJSON(
   provisionInstance: ProvisionInstance,

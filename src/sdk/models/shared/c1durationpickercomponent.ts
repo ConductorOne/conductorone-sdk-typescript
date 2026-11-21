@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { DynamicNumber, DynamicNumber$inboundSchema } from "./dynamicnumber.js";
@@ -26,11 +26,13 @@ export const C1DurationPickerComponent$inboundSchema: z.ZodType<
   C1DurationPickerComponent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  label: z.nullable(DynamicString$inboundSchema).optional(),
-  maxDurationSeconds: z.nullable(DynamicNumber$inboundSchema).optional(),
-  value: z.nullable(DynamicNumber$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    label: z.nullable(DynamicString$inboundSchema).optional(),
+    maxDurationSeconds: z.nullable(DynamicNumber$inboundSchema).optional(),
+    value: z.nullable(DynamicNumber$inboundSchema).optional(),
+  })
+);
 
 export function c1DurationPickerComponentFromJSON(
   jsonString: string,

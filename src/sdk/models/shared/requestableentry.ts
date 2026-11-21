@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const RequestableEntry$inboundSchema: z.ZodType<
   RequestableEntry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  catalogId: z.string().optional(),
-  entitlementId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    catalogId: z.string().optional(),
+    entitlementId: z.string().optional(),
+  })
+);
 
 export function requestableEntryFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -63,25 +63,31 @@ export const FundsSpendControlsPeriod$inboundSchema: z.ZodType<
   FundsSpendControlsPeriod,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(FundsSpendControlsPeriod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(FundsSpendControlsPeriod)
+);
 /** @internal */
 export const FundsSpendControlsPeriod$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   FundsSpendControlsPeriod
-> = openEnums.outboundSchema(FundsSpendControlsPeriod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(FundsSpendControlsPeriod)
+);
 
 /** @internal */
 export const FundsSpendControls$inboundSchema: z.ZodType<
   FundsSpendControls,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  extension: z.nullable(FundsSpendExtension$inboundSchema).optional(),
-  limit: z.nullable(FundsSpendLimit$inboundSchema).optional(),
-  period: FundsSpendControlsPeriod$inboundSchema.optional(),
-  suspension: z.nullable(FundsSpendSuspension$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    extension: z.nullable(FundsSpendExtension$inboundSchema).optional(),
+    limit: z.nullable(FundsSpendLimit$inboundSchema).optional(),
+    period: FundsSpendControlsPeriod$inboundSchema.optional(),
+    suspension: z.nullable(FundsSpendSuspension$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type FundsSpendControls$Outbound = {
   extension?: FundsSpendExtension$Outbound | null | undefined;
@@ -95,12 +101,14 @@ export const FundsSpendControls$outboundSchema: z.ZodType<
   FundsSpendControls$Outbound,
   z.ZodTypeDef,
   FundsSpendControls
-> = z.object({
-  extension: z.nullable(FundsSpendExtension$outboundSchema).optional(),
-  limit: z.nullable(FundsSpendLimit$outboundSchema).optional(),
-  period: FundsSpendControlsPeriod$outboundSchema.optional(),
-  suspension: z.nullable(FundsSpendSuspension$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    extension: z.nullable(FundsSpendExtension$outboundSchema).optional(),
+    limit: z.nullable(FundsSpendLimit$outboundSchema).optional(),
+    period: FundsSpendControlsPeriod$outboundSchema.optional(),
+    suspension: z.nullable(FundsSpendSuspension$outboundSchema).optional(),
+  })
+);
 
 export function fundsSpendControlsToJSON(
   fundsSpendControls: FundsSpendControls,

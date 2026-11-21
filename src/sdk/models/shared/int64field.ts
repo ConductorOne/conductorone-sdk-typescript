@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -45,13 +45,15 @@ export const Int64Field$inboundSchema: z.ZodType<
   Int64Field,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  defaultValue: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
-  numberField: z.nullable(NumberField$inboundSchema).optional(),
-  placeholder: z.string().optional(),
-  rules: z.nullable(Int64Rules$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    defaultValue: z.nullable(z.string().transform(v => parseInt(v, 10)))
+      .optional(),
+    numberField: z.nullable(NumberField$inboundSchema).optional(),
+    placeholder: z.string().optional(),
+    rules: z.nullable(Int64Rules$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type Int64Field$Outbound = {
   defaultValue?: string | null | undefined;
@@ -65,12 +67,15 @@ export const Int64Field$outboundSchema: z.ZodType<
   Int64Field$Outbound,
   z.ZodTypeDef,
   Int64Field
-> = z.object({
-  defaultValue: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
-  numberField: z.nullable(NumberField$outboundSchema).optional(),
-  placeholder: z.string().optional(),
-  rules: z.nullable(Int64Rules$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    defaultValue: z.nullable(z.number().int().transform(v => `${v}`))
+      .optional(),
+    numberField: z.nullable(NumberField$outboundSchema).optional(),
+    placeholder: z.string().optional(),
+    rules: z.nullable(Int64Rules$outboundSchema).optional(),
+  })
+);
 
 export function int64FieldToJSON(int64Field: Int64Field): string {
   return JSON.stringify(Int64Field$outboundSchema.parse(int64Field));

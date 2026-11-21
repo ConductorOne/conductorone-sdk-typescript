@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -57,24 +57,26 @@ export const StepUpProvider$inboundSchema: z.ZodType<
   StepUpProvider,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  clientId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  id: z.string().optional(),
-  issuerUrl: z.string().optional(),
-  lastTestedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  microsoft: z.nullable(StepUpMicrosoftSettings$inboundSchema).optional(),
-  oauth2: z.nullable(StepUpOAuth2Settings$inboundSchema).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    displayName: z.string().optional(),
+    enabled: z.boolean().optional(),
+    id: z.string().optional(),
+    issuerUrl: z.string().optional(),
+    lastTestedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    microsoft: z.nullable(StepUpMicrosoftSettings$inboundSchema).optional(),
+    oauth2: z.nullable(StepUpOAuth2Settings$inboundSchema).optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function stepUpProviderFromJSON(
   jsonString: string,

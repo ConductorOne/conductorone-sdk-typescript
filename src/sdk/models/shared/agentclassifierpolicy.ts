@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -67,32 +67,39 @@ export const AgentClassifierPolicyDefaultOutcome$inboundSchema: z.ZodType<
   AgentClassifierPolicyDefaultOutcome,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AgentClassifierPolicyDefaultOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AgentClassifierPolicyDefaultOutcome)
+);
 /** @internal */
 export const AgentClassifierPolicyDefaultOutcome$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AgentClassifierPolicyDefaultOutcome
-> = openEnums.outboundSchema(AgentClassifierPolicyDefaultOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AgentClassifierPolicyDefaultOutcome)
+);
 
 /** @internal */
 export const AgentClassifierPolicy$inboundSchema: z.ZodType<
   AgentClassifierPolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agentId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  defaultDenyReason: z.string().optional(),
-  defaultOutcome: AgentClassifierPolicyDefaultOutcome$inboundSchema.optional(),
-  rules: z.nullable(z.array(AgentClassifierRule$inboundSchema)).optional(),
-  tenantId: z.string().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    defaultDenyReason: z.string().optional(),
+    defaultOutcome: AgentClassifierPolicyDefaultOutcome$inboundSchema
+      .optional(),
+    rules: z.nullable(z.array(AgentClassifierRule$inboundSchema)).optional(),
+    tenantId: z.string().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type AgentClassifierPolicy$Outbound = {
   agentId?: string | undefined;
@@ -109,15 +116,18 @@ export const AgentClassifierPolicy$outboundSchema: z.ZodType<
   AgentClassifierPolicy$Outbound,
   z.ZodTypeDef,
   AgentClassifierPolicy
-> = z.object({
-  agentId: z.string().optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  defaultDenyReason: z.string().optional(),
-  defaultOutcome: AgentClassifierPolicyDefaultOutcome$outboundSchema.optional(),
-  rules: z.nullable(z.array(AgentClassifierRule$outboundSchema)).optional(),
-  tenantId: z.string().optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentId: z.string().optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    defaultDenyReason: z.string().optional(),
+    defaultOutcome: AgentClassifierPolicyDefaultOutcome$outboundSchema
+      .optional(),
+    rules: z.nullable(z.array(AgentClassifierRule$outboundSchema)).optional(),
+    tenantId: z.string().optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function agentClassifierPolicyToJSON(
   agentClassifierPolicy: AgentClassifierPolicy,

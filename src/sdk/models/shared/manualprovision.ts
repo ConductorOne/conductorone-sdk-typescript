@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -36,11 +36,13 @@ export const ManualProvision$inboundSchema: z.ZodType<
   ManualProvision,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  assignee: z.nullable(ProvisionerAssignment$inboundSchema).optional(),
-  instructions: z.string().optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assignee: z.nullable(ProvisionerAssignment$inboundSchema).optional(),
+    instructions: z.string().optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type ManualProvision$Outbound = {
   assignee?: ProvisionerAssignment$Outbound | null | undefined;
@@ -53,11 +55,13 @@ export const ManualProvision$outboundSchema: z.ZodType<
   ManualProvision$Outbound,
   z.ZodTypeDef,
   ManualProvision
-> = z.object({
-  assignee: z.nullable(ProvisionerAssignment$outboundSchema).optional(),
-  instructions: z.string().optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assignee: z.nullable(ProvisionerAssignment$outboundSchema).optional(),
+    instructions: z.string().optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function manualProvisionToJSON(
   manualProvision: ManualProvision,

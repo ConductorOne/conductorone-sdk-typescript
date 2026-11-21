@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -58,8 +59,8 @@ export const PaperSecretServiceSetTextContentRequestInputFormat$outboundSchema:
     string,
     z.ZodTypeDef,
     PaperSecretServiceSetTextContentRequestInputFormat
-  > = openEnums.outboundSchema(
-    PaperSecretServiceSetTextContentRequestInputFormat,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(PaperSecretServiceSetTextContentRequestInputFormat)
   );
 
 /** @internal */
@@ -73,11 +74,14 @@ export const PaperSecretServiceSetTextContentRequest$outboundSchema: z.ZodType<
   PaperSecretServiceSetTextContentRequest$Outbound,
   z.ZodTypeDef,
   PaperSecretServiceSetTextContentRequest
-> = z.object({
-  encryptedContent: z.string().optional(),
-  inputFormat: PaperSecretServiceSetTextContentRequestInputFormat$outboundSchema
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    encryptedContent: z.string().optional(),
+    inputFormat:
+      PaperSecretServiceSetTextContentRequestInputFormat$outboundSchema
+        .optional(),
+  })
+);
 
 export function paperSecretServiceSetTextContentRequestToJSON(
   paperSecretServiceSetTextContentRequest:

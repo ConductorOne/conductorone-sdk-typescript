@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The EditorValidateRequest message.
@@ -24,9 +25,11 @@ export const PolicyEditorValidateRequest$outboundSchema: z.ZodType<
   PolicyEditorValidateRequest$Outbound,
   z.ZodTypeDef,
   PolicyEditorValidateRequest
-> = z.object({
-  text: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string().optional(),
+  })
+);
 
 export function policyEditorValidateRequestToJSON(
   policyEditorValidateRequest: PolicyEditorValidateRequest,

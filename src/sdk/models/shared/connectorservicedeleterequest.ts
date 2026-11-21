@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * ConnectorServiceDeleteRequest is a request for deleting a connector. It uses URL values for input.
@@ -17,7 +18,7 @@ export const ConnectorServiceDeleteRequest$outboundSchema: z.ZodType<
   ConnectorServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   ConnectorServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function connectorServiceDeleteRequestToJSON(
   connectorServiceDeleteRequest: ConnectorServiceDeleteRequest,

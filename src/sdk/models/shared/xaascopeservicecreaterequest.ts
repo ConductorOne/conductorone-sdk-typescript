@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -74,14 +75,18 @@ export type XAAScopeServiceCreateRequest = {
 /** @internal */
 export const XAAScopeServiceCreateRequestClassification$outboundSchema:
   z.ZodType<string, z.ZodTypeDef, XAAScopeServiceCreateRequestClassification> =
-    openEnums.outboundSchema(XAAScopeServiceCreateRequestClassification);
+    /* @__PURE__ */ lazySchema$(() =>
+      openEnums.outboundSchema(XAAScopeServiceCreateRequestClassification)
+    );
 
 /** @internal */
 export const XAAScopeServiceCreateRequestState$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   XAAScopeServiceCreateRequestState
-> = openEnums.outboundSchema(XAAScopeServiceCreateRequestState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(XAAScopeServiceCreateRequestState)
+);
 
 /** @internal */
 export type XAAScopeServiceCreateRequest$Outbound = {
@@ -98,15 +103,17 @@ export const XAAScopeServiceCreateRequest$outboundSchema: z.ZodType<
   XAAScopeServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   XAAScopeServiceCreateRequest
-> = z.object({
-  classification: XAAScopeServiceCreateRequestClassification$outboundSchema
-    .optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  scopeValue: z.string().optional(),
-  state: XAAScopeServiceCreateRequestState$outboundSchema.optional(),
-  xaaResourceServerId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    classification: XAAScopeServiceCreateRequestClassification$outboundSchema
+      .optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    scopeValue: z.string().optional(),
+    state: XAAScopeServiceCreateRequestState$outboundSchema.optional(),
+    xaaResourceServerId: z.string().optional(),
+  })
+);
 
 export function xaaScopeServiceCreateRequestToJSON(
   xaaScopeServiceCreateRequest: XAAScopeServiceCreateRequest,

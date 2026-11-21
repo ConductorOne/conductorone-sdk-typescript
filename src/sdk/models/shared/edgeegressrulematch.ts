@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -58,19 +58,21 @@ export const PrincipalMatch$inboundSchema: z.ZodType<
   PrincipalMatch,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(PrincipalMatch);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(PrincipalMatch));
 
 /** @internal */
 export const EdgeEgressRuleMatch$inboundSchema: z.ZodType<
   EdgeEgressRuleMatch,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  entitlementOverCap: z.boolean().optional(),
-  principalMatch: PrincipalMatch$inboundSchema.optional(),
-  ruleIndex: z.number().int().optional(),
-  shadowed: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entitlementOverCap: z.boolean().optional(),
+    principalMatch: PrincipalMatch$inboundSchema.optional(),
+    ruleIndex: z.number().int().optional(),
+    shadowed: z.boolean().optional(),
+  })
+);
 
 export function edgeEgressRuleMatchFromJSON(
   jsonString: string,

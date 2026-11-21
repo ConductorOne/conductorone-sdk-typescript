@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -149,28 +150,34 @@ export const SearchAutomationsRequestDirection$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SearchAutomationsRequestDirection
-> = openEnums.outboundSchema(SearchAutomationsRequestDirection);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(SearchAutomationsRequestDirection)
+);
 
 /** @internal */
 export const SearchAutomationsRequestSortField$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SearchAutomationsRequestSortField
-> = openEnums.outboundSchema(SearchAutomationsRequestSortField);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(SearchAutomationsRequestSortField)
+);
 
 /** @internal */
 export const SearchAutomationsRequestStatuses$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SearchAutomationsRequestStatuses
-> = openEnums.outboundSchema(SearchAutomationsRequestStatuses);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(SearchAutomationsRequestStatuses)
+);
 
 /** @internal */
 export const TriggerTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   TriggerTypes
-> = openEnums.outboundSchema(TriggerTypes);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(TriggerTypes));
 
 /** @internal */
 export type SearchAutomationsRequest$Outbound = {
@@ -192,20 +199,23 @@ export const SearchAutomationsRequest$outboundSchema: z.ZodType<
   SearchAutomationsRequest$Outbound,
   z.ZodTypeDef,
   SearchAutomationsRequest
-> = z.object({
-  appId: z.string().optional(),
-  appIds: z.nullable(z.array(z.string())).optional(),
-  direction: SearchAutomationsRequestDirection$outboundSchema.optional(),
-  isDraft: z.nullable(z.boolean()).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  refs: z.nullable(z.array(AutomationTemplateRef$outboundSchema)).optional(),
-  sortField: SearchAutomationsRequestSortField$outboundSchema.optional(),
-  statuses: z.nullable(z.array(SearchAutomationsRequestStatuses$outboundSchema))
-    .optional(),
-  triggerTypes: z.nullable(z.array(TriggerTypes$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    appIds: z.nullable(z.array(z.string())).optional(),
+    direction: SearchAutomationsRequestDirection$outboundSchema.optional(),
+    isDraft: z.nullable(z.boolean()).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    refs: z.nullable(z.array(AutomationTemplateRef$outboundSchema)).optional(),
+    sortField: SearchAutomationsRequestSortField$outboundSchema.optional(),
+    statuses: z.nullable(
+      z.array(SearchAutomationsRequestStatuses$outboundSchema),
+    ).optional(),
+    triggerTypes: z.nullable(z.array(TriggerTypes$outboundSchema)).optional(),
+  })
+);
 
 export function searchAutomationsRequestToJSON(
   searchAutomationsRequest: SearchAutomationsRequest,

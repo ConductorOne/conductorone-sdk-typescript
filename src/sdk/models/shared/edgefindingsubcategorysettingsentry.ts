@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -49,7 +50,9 @@ export const EdgeFindingSubcategorySettingsEntrySubcategory$outboundSchema:
     string,
     z.ZodTypeDef,
     EdgeFindingSubcategorySettingsEntrySubcategory
-  > = openEnums.outboundSchema(EdgeFindingSubcategorySettingsEntrySubcategory);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(EdgeFindingSubcategorySettingsEntrySubcategory)
+  );
 
 /** @internal */
 export type EdgeFindingSubcategorySettingsEntry$Outbound = {
@@ -62,11 +65,13 @@ export const EdgeFindingSubcategorySettingsEntry$outboundSchema: z.ZodType<
   EdgeFindingSubcategorySettingsEntry$Outbound,
   z.ZodTypeDef,
   EdgeFindingSubcategorySettingsEntry
-> = z.object({
-  enabled: z.nullable(z.boolean()).optional(),
-  subcategory: EdgeFindingSubcategorySettingsEntrySubcategory$outboundSchema
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.nullable(z.boolean()).optional(),
+    subcategory: EdgeFindingSubcategorySettingsEntrySubcategory$outboundSchema
+      .optional(),
+  })
+);
 
 export function edgeFindingSubcategorySettingsEntryToJSON(
   edgeFindingSubcategorySettingsEntry: EdgeFindingSubcategorySettingsEntry,

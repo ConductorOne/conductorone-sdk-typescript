@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -56,19 +56,21 @@ export const C1ApiWorkloadFederationV1WorkloadFederationServiceDeleteTrustReques
     C1ApiWorkloadFederationV1WorkloadFederationServiceDeleteTrustRequest$Outbound,
     z.ZodTypeDef,
     C1ApiWorkloadFederationV1WorkloadFederationServiceDeleteTrustRequest
-  > = z.object({
-    servicePrincipalId: z.string(),
-    clientId: z.string(),
-    workloadFederationServiceDeleteTrustRequest: shared
-      .WorkloadFederationServiceDeleteTrustRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      servicePrincipalId: "service_principal_id",
-      clientId: "client_id",
-      workloadFederationServiceDeleteTrustRequest:
-        "WorkloadFederationServiceDeleteTrustRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      servicePrincipalId: z.string(),
+      clientId: z.string(),
+      workloadFederationServiceDeleteTrustRequest: shared
+        .WorkloadFederationServiceDeleteTrustRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        servicePrincipalId: "service_principal_id",
+        clientId: "client_id",
+        workloadFederationServiceDeleteTrustRequest:
+          "WorkloadFederationServiceDeleteTrustRequest",
+      });
+    })
+  );
 
 export function c1ApiWorkloadFederationV1WorkloadFederationServiceDeleteTrustRequestToJSON(
   c1ApiWorkloadFederationV1WorkloadFederationServiceDeleteTrustRequest:
@@ -88,21 +90,23 @@ export const C1ApiWorkloadFederationV1WorkloadFederationServiceDeleteTrustRespon
     C1ApiWorkloadFederationV1WorkloadFederationServiceDeleteTrustResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    WorkloadFederationServiceDeleteTrustResponse: shared
-      .WorkloadFederationServiceDeleteTrustResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "WorkloadFederationServiceDeleteTrustResponse":
-        "workloadFederationServiceDeleteTrustResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      WorkloadFederationServiceDeleteTrustResponse: shared
+        .WorkloadFederationServiceDeleteTrustResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "WorkloadFederationServiceDeleteTrustResponse":
+          "workloadFederationServiceDeleteTrustResponse",
+      });
+    })
+  );
 
 export function c1ApiWorkloadFederationV1WorkloadFederationServiceDeleteTrustResponseFromJSON(
   jsonString: string,

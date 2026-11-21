@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,13 +45,15 @@ export const C1ApiSecretsV1PaperSecretServiceGetByShareCodeRequest$outboundSchem
     C1ApiSecretsV1PaperSecretServiceGetByShareCodeRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSecretsV1PaperSecretServiceGetByShareCodeRequest
-  > = z.object({
-    shareCode: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      shareCode: "share_code",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      shareCode: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        shareCode: "share_code",
+      });
+    })
+  );
 
 export function c1ApiSecretsV1PaperSecretServiceGetByShareCodeRequestToJSON(
   c1ApiSecretsV1PaperSecretServiceGetByShareCodeRequest:
@@ -70,20 +72,22 @@ export const C1ApiSecretsV1PaperSecretServiceGetByShareCodeResponse$inboundSchem
     C1ApiSecretsV1PaperSecretServiceGetByShareCodeResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    PaperSecretServiceGetResponse: shared
-      .PaperSecretServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "PaperSecretServiceGetResponse": "paperSecretServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      PaperSecretServiceGetResponse: shared
+        .PaperSecretServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "PaperSecretServiceGetResponse": "paperSecretServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiSecretsV1PaperSecretServiceGetByShareCodeResponseFromJSON(
   jsonString: string,

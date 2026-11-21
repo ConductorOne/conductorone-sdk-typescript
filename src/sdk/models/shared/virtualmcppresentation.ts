@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -47,12 +47,16 @@ export const VirtualMCPPresentation$inboundSchema: z.ZodType<
   VirtualMCPPresentation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  codeMode: z.nullable(VirtualMCPCodeModePresentation$inboundSchema).optional(),
-  dynamicTools: z.nullable(VirtualMCPDynamicToolsPresentation$inboundSchema)
-    .optional(),
-  rawTools: z.nullable(VirtualMCPRawToolsPresentation$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    codeMode: z.nullable(VirtualMCPCodeModePresentation$inboundSchema)
+      .optional(),
+    dynamicTools: z.nullable(VirtualMCPDynamicToolsPresentation$inboundSchema)
+      .optional(),
+    rawTools: z.nullable(VirtualMCPRawToolsPresentation$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type VirtualMCPPresentation$Outbound = {
   codeMode?: VirtualMCPCodeModePresentation$Outbound | null | undefined;
@@ -65,14 +69,16 @@ export const VirtualMCPPresentation$outboundSchema: z.ZodType<
   VirtualMCPPresentation$Outbound,
   z.ZodTypeDef,
   VirtualMCPPresentation
-> = z.object({
-  codeMode: z.nullable(VirtualMCPCodeModePresentation$outboundSchema)
-    .optional(),
-  dynamicTools: z.nullable(VirtualMCPDynamicToolsPresentation$outboundSchema)
-    .optional(),
-  rawTools: z.nullable(VirtualMCPRawToolsPresentation$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    codeMode: z.nullable(VirtualMCPCodeModePresentation$outboundSchema)
+      .optional(),
+    dynamicTools: z.nullable(VirtualMCPDynamicToolsPresentation$outboundSchema)
+      .optional(),
+    rawTools: z.nullable(VirtualMCPRawToolsPresentation$outboundSchema)
+      .optional(),
+  })
+);
 
 export function virtualMCPPresentationToJSON(
   virtualMCPPresentation: VirtualMCPPresentation,

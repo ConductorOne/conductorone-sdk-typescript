@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -182,62 +182,64 @@ export const FollowedTier$inboundSchema: z.ZodType<
   FollowedTier,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(FollowedTier);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(FollowedTier));
 /** @internal */
 export const FollowedTier$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   FollowedTier
-> = openEnums.outboundSchema(FollowedTier);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(FollowedTier));
 
 /** @internal */
 export const NativeFormat$inboundSchema: z.ZodType<
   NativeFormat,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(NativeFormat);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(NativeFormat));
 /** @internal */
 export const NativeFormat$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   NativeFormat
-> = openEnums.outboundSchema(NativeFormat);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(NativeFormat));
 
 /** @internal */
 export const Publication$inboundSchema: z.ZodType<
   Publication,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Publication);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Publication));
 /** @internal */
 export const Publication$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Publication
-> = openEnums.outboundSchema(Publication);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Publication));
 
 /** @internal */
 export const EdgeInferenceRoute$inboundSchema: z.ZodType<
   EdgeInferenceRoute,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowHumanCallers: z.boolean().optional(),
-  callerServicePrincipalId: z.string().optional(),
-  callerWorkloadFederationTrustId: z.string().optional(),
-  contentType: z.string().optional(),
-  expectedSecretVersion: z.string().optional(),
-  followedTier: FollowedTier$inboundSchema.optional(),
-  nativeFormat: NativeFormat$inboundSchema.optional(),
-  publication: Publication$inboundSchema.optional(),
-  registryModelId: z.string().optional(),
-  routeId: z.string().optional(),
-  secretId: z.string().optional(),
-  selection: z.nullable(EdgeInferenceSelection$inboundSchema).optional(),
-  targets: z.nullable(z.array(EdgeInferenceTarget$inboundSchema)).optional(),
-  upstreamModelId: z.string().optional(),
-  vaultBoundaryId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowHumanCallers: z.boolean().optional(),
+    callerServicePrincipalId: z.string().optional(),
+    callerWorkloadFederationTrustId: z.string().optional(),
+    contentType: z.string().optional(),
+    expectedSecretVersion: z.string().optional(),
+    followedTier: FollowedTier$inboundSchema.optional(),
+    nativeFormat: NativeFormat$inboundSchema.optional(),
+    publication: Publication$inboundSchema.optional(),
+    registryModelId: z.string().optional(),
+    routeId: z.string().optional(),
+    secretId: z.string().optional(),
+    selection: z.nullable(EdgeInferenceSelection$inboundSchema).optional(),
+    targets: z.nullable(z.array(EdgeInferenceTarget$inboundSchema)).optional(),
+    upstreamModelId: z.string().optional(),
+    vaultBoundaryId: z.string().optional(),
+  })
+);
 /** @internal */
 export type EdgeInferenceRoute$Outbound = {
   allowHumanCallers?: boolean | undefined;
@@ -262,23 +264,25 @@ export const EdgeInferenceRoute$outboundSchema: z.ZodType<
   EdgeInferenceRoute$Outbound,
   z.ZodTypeDef,
   EdgeInferenceRoute
-> = z.object({
-  allowHumanCallers: z.boolean().optional(),
-  callerServicePrincipalId: z.string().optional(),
-  callerWorkloadFederationTrustId: z.string().optional(),
-  contentType: z.string().optional(),
-  expectedSecretVersion: z.string().optional(),
-  followedTier: FollowedTier$outboundSchema.optional(),
-  nativeFormat: NativeFormat$outboundSchema.optional(),
-  publication: Publication$outboundSchema.optional(),
-  registryModelId: z.string().optional(),
-  routeId: z.string().optional(),
-  secretId: z.string().optional(),
-  selection: z.nullable(EdgeInferenceSelection$outboundSchema).optional(),
-  targets: z.nullable(z.array(EdgeInferenceTarget$outboundSchema)).optional(),
-  upstreamModelId: z.string().optional(),
-  vaultBoundaryId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowHumanCallers: z.boolean().optional(),
+    callerServicePrincipalId: z.string().optional(),
+    callerWorkloadFederationTrustId: z.string().optional(),
+    contentType: z.string().optional(),
+    expectedSecretVersion: z.string().optional(),
+    followedTier: FollowedTier$outboundSchema.optional(),
+    nativeFormat: NativeFormat$outboundSchema.optional(),
+    publication: Publication$outboundSchema.optional(),
+    registryModelId: z.string().optional(),
+    routeId: z.string().optional(),
+    secretId: z.string().optional(),
+    selection: z.nullable(EdgeInferenceSelection$outboundSchema).optional(),
+    targets: z.nullable(z.array(EdgeInferenceTarget$outboundSchema)).optional(),
+    upstreamModelId: z.string().optional(),
+    vaultBoundaryId: z.string().optional(),
+  })
+);
 
 export function edgeInferenceRouteToJSON(
   edgeInferenceRoute: EdgeInferenceRoute,

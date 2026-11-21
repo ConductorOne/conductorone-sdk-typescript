@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -52,16 +52,18 @@ export const C1ApiFindingV1FindingServiceUpdateFindingAssigneeRequest$outboundSc
     C1ApiFindingV1FindingServiceUpdateFindingAssigneeRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFindingV1FindingServiceUpdateFindingAssigneeRequest
-  > = z.object({
-    findingId: z.string(),
-    updateFindingAssigneeRequest: shared
-      .UpdateFindingAssigneeRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      findingId: "finding_id",
-      updateFindingAssigneeRequest: "UpdateFindingAssigneeRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      findingId: z.string(),
+      updateFindingAssigneeRequest: shared
+        .UpdateFindingAssigneeRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        findingId: "finding_id",
+        updateFindingAssigneeRequest: "UpdateFindingAssigneeRequest",
+      });
+    })
+  );
 
 export function c1ApiFindingV1FindingServiceUpdateFindingAssigneeRequestToJSON(
   c1ApiFindingV1FindingServiceUpdateFindingAssigneeRequest:
@@ -79,20 +81,22 @@ export const C1ApiFindingV1FindingServiceUpdateFindingAssigneeResponse$inboundSc
     C1ApiFindingV1FindingServiceUpdateFindingAssigneeResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    UpdateFindingAssigneeResponse: shared
-      .UpdateFindingAssigneeResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "UpdateFindingAssigneeResponse": "updateFindingAssigneeResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      UpdateFindingAssigneeResponse: shared
+        .UpdateFindingAssigneeResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "UpdateFindingAssigneeResponse": "updateFindingAssigneeResponse",
+      });
+    })
+  );
 
 export function c1ApiFindingV1FindingServiceUpdateFindingAssigneeResponseFromJSON(
   jsonString: string,

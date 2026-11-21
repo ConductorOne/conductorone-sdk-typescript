@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -49,15 +49,17 @@ export const C1ApiEdgeV1EdgeServiceListEgressTopToolsRollupRequest$outboundSchem
     C1ApiEdgeV1EdgeServiceListEgressTopToolsRollupRequest$Outbound,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceListEgressTopToolsRollupRequest
-  > = z.object({
-    pageSize: z.number().int().optional(),
-    since: z.number().int().transform(v => `${v}`).optional(),
-    until: z.number().int().transform(v => `${v}`).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      pageSize: "page_size",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      since: z.number().int().transform(v => `${v}`).optional(),
+      until: z.number().int().transform(v => `${v}`).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListEgressTopToolsRollupRequestToJSON(
   c1ApiEdgeV1EdgeServiceListEgressTopToolsRollupRequest:
@@ -76,21 +78,23 @@ export const C1ApiEdgeV1EdgeServiceListEgressTopToolsRollupResponse$inboundSchem
     C1ApiEdgeV1EdgeServiceListEgressTopToolsRollupResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    EdgeServiceListEgressTopToolsRollupResponse: shared
-      .EdgeServiceListEgressTopToolsRollupResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "EdgeServiceListEgressTopToolsRollupResponse":
-        "edgeServiceListEgressTopToolsRollupResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      EdgeServiceListEgressTopToolsRollupResponse: shared
+        .EdgeServiceListEgressTopToolsRollupResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "EdgeServiceListEgressTopToolsRollupResponse":
+          "edgeServiceListEgressTopToolsRollupResponse",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListEgressTopToolsRollupResponseFromJSON(
   jsonString: string,

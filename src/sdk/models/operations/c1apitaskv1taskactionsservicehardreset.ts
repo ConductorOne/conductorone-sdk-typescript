@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,19 @@ export const C1ApiTaskV1TaskActionsServiceHardResetRequest$outboundSchema:
     C1ApiTaskV1TaskActionsServiceHardResetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiTaskV1TaskActionsServiceHardResetRequest
-  > = z.object({
-    taskId: z.string(),
-    taskActionsServiceHardResetRequest: shared
-      .TaskActionsServiceHardResetRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      taskId: "task_id",
-      taskActionsServiceHardResetRequest: "TaskActionsServiceHardResetRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      taskId: z.string(),
+      taskActionsServiceHardResetRequest: shared
+        .TaskActionsServiceHardResetRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        taskId: "task_id",
+        taskActionsServiceHardResetRequest:
+          "TaskActionsServiceHardResetRequest",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskActionsServiceHardResetRequestToJSON(
   c1ApiTaskV1TaskActionsServiceHardResetRequest:
@@ -79,21 +82,23 @@ export const C1ApiTaskV1TaskActionsServiceHardResetResponse$inboundSchema:
     C1ApiTaskV1TaskActionsServiceHardResetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    TaskActionsServiceHardResetResponse: shared
-      .TaskActionsServiceHardResetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "TaskActionsServiceHardResetResponse":
-        "taskActionsServiceHardResetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      TaskActionsServiceHardResetResponse: shared
+        .TaskActionsServiceHardResetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "TaskActionsServiceHardResetResponse":
+          "taskActionsServiceHardResetResponse",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskActionsServiceHardResetResponseFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -57,17 +57,19 @@ export const C1ApiAuthzenV1AuthzenServerServiceDeleteRequest$outboundSchema:
     C1ApiAuthzenV1AuthzenServerServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAuthzenV1AuthzenServerServiceDeleteRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    authzenServerServiceDeleteRequest: shared
-      .AuthzenServerServiceDeleteRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      authzenServerServiceDeleteRequest: "AuthzenServerServiceDeleteRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      authzenServerServiceDeleteRequest: shared
+        .AuthzenServerServiceDeleteRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        authzenServerServiceDeleteRequest: "AuthzenServerServiceDeleteRequest",
+      });
+    })
+  );
 
 export function c1ApiAuthzenV1AuthzenServerServiceDeleteRequestToJSON(
   c1ApiAuthzenV1AuthzenServerServiceDeleteRequest:
@@ -86,21 +88,23 @@ export const C1ApiAuthzenV1AuthzenServerServiceDeleteResponse$inboundSchema:
     C1ApiAuthzenV1AuthzenServerServiceDeleteResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    AuthzenServerServiceDeleteResponse: shared
-      .AuthzenServerServiceDeleteResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "AuthzenServerServiceDeleteResponse":
-        "authzenServerServiceDeleteResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      AuthzenServerServiceDeleteResponse: shared
+        .AuthzenServerServiceDeleteResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "AuthzenServerServiceDeleteResponse":
+          "authzenServerServiceDeleteResponse",
+      });
+    })
+  );
 
 export function c1ApiAuthzenV1AuthzenServerServiceDeleteResponseFromJSON(
   jsonString: string,

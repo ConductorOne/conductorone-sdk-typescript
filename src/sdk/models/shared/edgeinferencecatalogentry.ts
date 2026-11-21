@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -79,30 +79,32 @@ export type EdgeInferenceCatalogEntry = {
 
 /** @internal */
 export const Channel$inboundSchema: z.ZodType<Channel, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Channel);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Channel));
 
 /** @internal */
 export const CredentialKind$inboundSchema: z.ZodType<
   CredentialKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(CredentialKind);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(CredentialKind));
 
 /** @internal */
 export const EdgeInferenceCatalogEntry$inboundSchema: z.ZodType<
   EdgeInferenceCatalogEntry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  channel: Channel$inboundSchema.optional(),
-  credentialKind: CredentialKind$inboundSchema.optional(),
-  displayName: z.string().optional(),
-  iconKey: z.string().optional(),
-  id: z.string().optional(),
-  secretContentType: z.string().optional(),
-  variants: z.nullable(z.array(EdgeInferenceCatalogVariant$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    channel: Channel$inboundSchema.optional(),
+    credentialKind: CredentialKind$inboundSchema.optional(),
+    displayName: z.string().optional(),
+    iconKey: z.string().optional(),
+    id: z.string().optional(),
+    secretContentType: z.string().optional(),
+    variants: z.nullable(z.array(EdgeInferenceCatalogVariant$inboundSchema))
+      .optional(),
+  })
+);
 
 export function edgeInferenceCatalogEntryFromJSON(
   jsonString: string,

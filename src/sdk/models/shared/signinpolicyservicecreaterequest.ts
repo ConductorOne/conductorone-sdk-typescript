@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -88,7 +89,9 @@ export const SignInPolicyServiceCreateRequestAllowedMfaTypes$outboundSchema:
     string,
     z.ZodTypeDef,
     SignInPolicyServiceCreateRequestAllowedMfaTypes
-  > = openEnums.outboundSchema(SignInPolicyServiceCreateRequestAllowedMfaTypes);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(SignInPolicyServiceCreateRequestAllowedMfaTypes)
+  );
 
 /** @internal */
 export const SignInPolicyServiceCreateRequestAllowedPrimaryTypes$outboundSchema:
@@ -96,8 +99,10 @@ export const SignInPolicyServiceCreateRequestAllowedPrimaryTypes$outboundSchema:
     string,
     z.ZodTypeDef,
     SignInPolicyServiceCreateRequestAllowedPrimaryTypes
-  > = openEnums.outboundSchema(
-    SignInPolicyServiceCreateRequestAllowedPrimaryTypes,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      SignInPolicyServiceCreateRequestAllowedPrimaryTypes,
+    )
   );
 
 /** @internal */
@@ -115,18 +120,22 @@ export const SignInPolicyServiceCreateRequest$outboundSchema: z.ZodType<
   SignInPolicyServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   SignInPolicyServiceCreateRequest
-> = z.object({
-  allowedMfaTypes: z.nullable(
-    z.array(SignInPolicyServiceCreateRequestAllowedMfaTypes$outboundSchema),
-  ).optional(),
-  allowedPrimaryTypes: z.nullable(
-    z.array(SignInPolicyServiceCreateRequestAllowedPrimaryTypes$outboundSchema),
-  ).optional(),
-  defaultOutcome: z.nullable(PolicyOutcome$outboundSchema).optional(),
-  displayName: z.string(),
-  priority: z.number().int().optional(),
-  rules: z.nullable(z.array(PolicyRule$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowedMfaTypes: z.nullable(
+      z.array(SignInPolicyServiceCreateRequestAllowedMfaTypes$outboundSchema),
+    ).optional(),
+    allowedPrimaryTypes: z.nullable(
+      z.array(
+        SignInPolicyServiceCreateRequestAllowedPrimaryTypes$outboundSchema,
+      ),
+    ).optional(),
+    defaultOutcome: z.nullable(PolicyOutcome$outboundSchema).optional(),
+    displayName: z.string(),
+    priority: z.number().int().optional(),
+    rules: z.nullable(z.array(PolicyRule$outboundSchema)).optional(),
+  })
+);
 
 export function signInPolicyServiceCreateRequestToJSON(
   signInPolicyServiceCreateRequest: SignInPolicyServiceCreateRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -55,16 +55,18 @@ export type Wait = {
 };
 
 /** @internal */
-export const Wait$inboundSchema: z.ZodType<Wait, z.ZodTypeDef, unknown> = z
-  .object({
-    commentOnFirstWait: z.string().optional(),
-    commentOnTimeout: z.string().optional(),
-    condition: z.nullable(WaitCondition$inboundSchema).optional(),
-    duration: z.nullable(WaitDuration$inboundSchema).optional(),
-    name: z.string().optional(),
-    timeoutDuration: z.nullable(z.string()).optional(),
-    untilTime: z.nullable(WaitUntilTime$inboundSchema).optional(),
-  });
+export const Wait$inboundSchema: z.ZodType<Wait, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      commentOnFirstWait: z.string().optional(),
+      commentOnTimeout: z.string().optional(),
+      condition: z.nullable(WaitCondition$inboundSchema).optional(),
+      duration: z.nullable(WaitDuration$inboundSchema).optional(),
+      name: z.string().optional(),
+      timeoutDuration: z.nullable(z.string()).optional(),
+      untilTime: z.nullable(WaitUntilTime$inboundSchema).optional(),
+    })
+  );
 /** @internal */
 export type Wait$Outbound = {
   commentOnFirstWait?: string | undefined;
@@ -78,15 +80,17 @@ export type Wait$Outbound = {
 
 /** @internal */
 export const Wait$outboundSchema: z.ZodType<Wait$Outbound, z.ZodTypeDef, Wait> =
-  z.object({
-    commentOnFirstWait: z.string().optional(),
-    commentOnTimeout: z.string().optional(),
-    condition: z.nullable(WaitCondition$outboundSchema).optional(),
-    duration: z.nullable(WaitDuration$outboundSchema).optional(),
-    name: z.string().optional(),
-    timeoutDuration: z.nullable(z.string()).optional(),
-    untilTime: z.nullable(WaitUntilTime$outboundSchema).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      commentOnFirstWait: z.string().optional(),
+      commentOnTimeout: z.string().optional(),
+      condition: z.nullable(WaitCondition$outboundSchema).optional(),
+      duration: z.nullable(WaitDuration$outboundSchema).optional(),
+      name: z.string().optional(),
+      timeoutDuration: z.nullable(z.string()).optional(),
+      untilTime: z.nullable(WaitUntilTime$outboundSchema).optional(),
+    })
+  );
 
 export function waitToJSON(wait: Wait): string {
   return JSON.stringify(Wait$outboundSchema.parse(wait));

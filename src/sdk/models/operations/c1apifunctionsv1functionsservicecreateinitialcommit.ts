@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -52,17 +52,19 @@ export const C1ApiFunctionsV1FunctionsServiceCreateInitialCommitRequest$outbound
     C1ApiFunctionsV1FunctionsServiceCreateInitialCommitRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFunctionsV1FunctionsServiceCreateInitialCommitRequest
-  > = z.object({
-    functionId: z.string(),
-    functionsServiceCreateInitialCommitRequest: shared
-      .FunctionsServiceCreateInitialCommitRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      functionId: "function_id",
-      functionsServiceCreateInitialCommitRequest:
-        "FunctionsServiceCreateInitialCommitRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      functionId: z.string(),
+      functionsServiceCreateInitialCommitRequest: shared
+        .FunctionsServiceCreateInitialCommitRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        functionId: "function_id",
+        functionsServiceCreateInitialCommitRequest:
+          "FunctionsServiceCreateInitialCommitRequest",
+      });
+    })
+  );
 
 export function c1ApiFunctionsV1FunctionsServiceCreateInitialCommitRequestToJSON(
   c1ApiFunctionsV1FunctionsServiceCreateInitialCommitRequest:
@@ -80,21 +82,23 @@ export const C1ApiFunctionsV1FunctionsServiceCreateInitialCommitResponse$inbound
     C1ApiFunctionsV1FunctionsServiceCreateInitialCommitResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    FunctionsServiceCreateInitialCommitResponse: shared
-      .FunctionsServiceCreateInitialCommitResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "FunctionsServiceCreateInitialCommitResponse":
-        "functionsServiceCreateInitialCommitResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      FunctionsServiceCreateInitialCommitResponse: shared
+        .FunctionsServiceCreateInitialCommitResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "FunctionsServiceCreateInitialCommitResponse":
+          "functionsServiceCreateInitialCommitResponse",
+      });
+    })
+  );
 
 export function c1ApiFunctionsV1FunctionsServiceCreateInitialCommitResponseFromJSON(
   jsonString: string,

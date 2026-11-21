@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,12 +34,14 @@ export const UserActorObjectPermissions$inboundSchema: z.ZodType<
   UserActorObjectPermissions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  delete: z.boolean().optional(),
-  edit: z.boolean().optional(),
-  extra: z.record(z.boolean()).optional(),
-  read: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    delete: z.boolean().optional(),
+    edit: z.boolean().optional(),
+    extra: z.record(z.boolean()).optional(),
+    read: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type UserActorObjectPermissions$Outbound = {
   delete?: boolean | undefined;
@@ -53,12 +55,14 @@ export const UserActorObjectPermissions$outboundSchema: z.ZodType<
   UserActorObjectPermissions$Outbound,
   z.ZodTypeDef,
   UserActorObjectPermissions
-> = z.object({
-  delete: z.boolean().optional(),
-  edit: z.boolean().optional(),
-  extra: z.record(z.boolean()).optional(),
-  read: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    delete: z.boolean().optional(),
+    edit: z.boolean().optional(),
+    extra: z.record(z.boolean()).optional(),
+    read: z.boolean().optional(),
+  })
+);
 
 export function userActorObjectPermissionsToJSON(
   userActorObjectPermissions: UserActorObjectPermissions,

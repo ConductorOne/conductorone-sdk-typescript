@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -38,12 +38,14 @@ export const FileField$inboundSchema: z.ZodType<
   FileField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  acceptedFileTypes: z.nullable(z.array(z.string())).optional(),
-  fileInputField: z.nullable(FileInputField$inboundSchema).optional(),
-  maxFileSize: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    acceptedFileTypes: z.nullable(z.array(z.string())).optional(),
+    fileInputField: z.nullable(FileInputField$inboundSchema).optional(),
+    maxFileSize: z.nullable(z.string().transform(v => parseInt(v, 10)))
+      .optional(),
+  })
+);
 /** @internal */
 export type FileField$Outbound = {
   acceptedFileTypes?: Array<string> | null | undefined;
@@ -56,11 +58,13 @@ export const FileField$outboundSchema: z.ZodType<
   FileField$Outbound,
   z.ZodTypeDef,
   FileField
-> = z.object({
-  acceptedFileTypes: z.nullable(z.array(z.string())).optional(),
-  fileInputField: z.nullable(FileInputField$outboundSchema).optional(),
-  maxFileSize: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    acceptedFileTypes: z.nullable(z.array(z.string())).optional(),
+    fileInputField: z.nullable(FileInputField$outboundSchema).optional(),
+    maxFileSize: z.nullable(z.number().int().transform(v => `${v}`)).optional(),
+  })
+);
 
 export function fileFieldToJSON(fileField: FileField): string {
   return JSON.stringify(FileField$outboundSchema.parse(fileField));

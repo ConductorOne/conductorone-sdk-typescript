@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -48,18 +48,20 @@ export const ResourceKind$inboundSchema: z.ZodType<
   ResourceKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ResourceKind);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(ResourceKind));
 
 /** @internal */
 export const C1EdgeService$inboundSchema: z.ZodType<
   C1EdgeService,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  resourceId: z.string().optional(),
-  resourceKind: ResourceKind$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    resourceId: z.string().optional(),
+    resourceKind: ResourceKind$inboundSchema.optional(),
+  })
+);
 
 export function c1EdgeServiceFromJSON(
   jsonString: string,

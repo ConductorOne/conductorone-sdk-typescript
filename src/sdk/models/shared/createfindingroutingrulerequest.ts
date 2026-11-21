@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   FindingRoutingRule,
   FindingRoutingRule$Outbound,
@@ -26,9 +27,11 @@ export const CreateFindingRoutingRuleRequest$outboundSchema: z.ZodType<
   CreateFindingRoutingRuleRequest$Outbound,
   z.ZodTypeDef,
   CreateFindingRoutingRuleRequest
-> = z.object({
-  routingRule: z.nullable(FindingRoutingRule$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    routingRule: z.nullable(FindingRoutingRule$outboundSchema).optional(),
+  })
+);
 
 export function createFindingRoutingRuleRequestToJSON(
   createFindingRoutingRuleRequest: CreateFindingRoutingRuleRequest,

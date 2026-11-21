@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,14 +47,16 @@ export const C1ApiReportingV1ReportingServiceGetProgramRequest$outboundSchema:
     C1ApiReportingV1ReportingServiceGetProgramRequest$Outbound,
     z.ZodTypeDef,
     C1ApiReportingV1ReportingServiceGetProgramRequest
-  > = z.object({
-    id: z.string(),
-    programId: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      programId: "program_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      programId: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        programId: "program_id",
+      });
+    })
+  );
 
 export function c1ApiReportingV1ReportingServiceGetProgramRequestToJSON(
   c1ApiReportingV1ReportingServiceGetProgramRequest:
@@ -73,21 +75,23 @@ export const C1ApiReportingV1ReportingServiceGetProgramResponse$inboundSchema:
     C1ApiReportingV1ReportingServiceGetProgramResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ReportingServiceGetProgramResponse: shared
-      .ReportingServiceGetProgramResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ReportingServiceGetProgramResponse":
-        "reportingServiceGetProgramResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ReportingServiceGetProgramResponse: shared
+        .ReportingServiceGetProgramResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ReportingServiceGetProgramResponse":
+          "reportingServiceGetProgramResponse",
+      });
+    })
+  );
 
 export function c1ApiReportingV1ReportingServiceGetProgramResponseFromJSON(
   jsonString: string,

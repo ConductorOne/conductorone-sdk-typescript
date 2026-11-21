@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The request message for deleting app entitlement owners.
@@ -17,7 +18,7 @@ export const DeleteAppEntitlementOwnersRequest$outboundSchema: z.ZodType<
   DeleteAppEntitlementOwnersRequest$Outbound,
   z.ZodTypeDef,
   DeleteAppEntitlementOwnersRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function deleteAppEntitlementOwnersRequestToJSON(
   deleteAppEntitlementOwnersRequest: DeleteAppEntitlementOwnersRequest,

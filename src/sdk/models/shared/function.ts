@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -224,54 +224,56 @@ export const CompileStatus$inboundSchema: z.ZodType<
   CompileStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(CompileStatus);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(CompileStatus));
 
 /** @internal */
 export const FunctionType$inboundSchema: z.ZodType<
   FunctionType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(FunctionType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(FunctionType));
 /** @internal */
 export const FunctionType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   FunctionType
-> = openEnums.outboundSchema(FunctionType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(FunctionType));
 
 /** @internal */
 export const FunctionT$inboundSchema: z.ZodType<
   FunctionT,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  compileError: z.string().optional(),
-  compileStatus: CompileStatus$inboundSchema.optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  functionType: FunctionType$inboundSchema.optional(),
-  head: z.string().optional(),
-  hookRefs: z.nullable(z.array(z.string())).optional(),
-  id: z.string().optional(),
-  isDraft: z.boolean().optional(),
-  networkConfig: z.nullable(FunctionNetworkConfig$inboundSchema).optional(),
-  outboundNetworkAllowlist: z.nullable(z.array(z.string())).optional(),
-  provisionedConcurrency: z.number().int().optional(),
-  publishedCommitId: z.string().optional(),
-  scopedRoleIds: z.nullable(z.array(z.string())).optional(),
-  secret: z.record(z.string()).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  useSpn: z.boolean().optional(),
-  workflowTemplateRefs: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    compileError: z.string().optional(),
+    compileStatus: CompileStatus$inboundSchema.optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    functionType: FunctionType$inboundSchema.optional(),
+    head: z.string().optional(),
+    hookRefs: z.nullable(z.array(z.string())).optional(),
+    id: z.string().optional(),
+    isDraft: z.boolean().optional(),
+    networkConfig: z.nullable(FunctionNetworkConfig$inboundSchema).optional(),
+    outboundNetworkAllowlist: z.nullable(z.array(z.string())).optional(),
+    provisionedConcurrency: z.number().int().optional(),
+    publishedCommitId: z.string().optional(),
+    scopedRoleIds: z.nullable(z.array(z.string())).optional(),
+    secret: z.record(z.string()).optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    useSpn: z.boolean().optional(),
+    workflowTemplateRefs: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function functionFromJSON(
   jsonString: string,
@@ -304,20 +306,22 @@ export const FunctionInput$outboundSchema: z.ZodType<
   FunctionInput$Outbound,
   z.ZodTypeDef,
   FunctionInput
-> = z.object({
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  functionType: FunctionType$outboundSchema.optional(),
-  head: z.string().optional(),
-  id: z.string().optional(),
-  isDraft: z.boolean().optional(),
-  networkConfig: z.nullable(FunctionNetworkConfig$outboundSchema).optional(),
-  outboundNetworkAllowlist: z.nullable(z.array(z.string())).optional(),
-  provisionedConcurrency: z.number().int().optional(),
-  publishedCommitId: z.string().optional(),
-  scopedRoleIds: z.nullable(z.array(z.string())).optional(),
-  secret: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    functionType: FunctionType$outboundSchema.optional(),
+    head: z.string().optional(),
+    id: z.string().optional(),
+    isDraft: z.boolean().optional(),
+    networkConfig: z.nullable(FunctionNetworkConfig$outboundSchema).optional(),
+    outboundNetworkAllowlist: z.nullable(z.array(z.string())).optional(),
+    provisionedConcurrency: z.number().int().optional(),
+    publishedCommitId: z.string().optional(),
+    scopedRoleIds: z.nullable(z.array(z.string())).optional(),
+    secret: z.record(z.string()).optional(),
+  })
+);
 
 export function functionInputToJSON(functionInput: FunctionInput): string {
   return JSON.stringify(FunctionInput$outboundSchema.parse(functionInput));

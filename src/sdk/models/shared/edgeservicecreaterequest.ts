@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -46,7 +47,9 @@ export const EdgeServiceCreateRequestEnabledKinds$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   EdgeServiceCreateRequestEnabledKinds
-> = openEnums.outboundSchema(EdgeServiceCreateRequestEnabledKinds);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(EdgeServiceCreateRequestEnabledKinds)
+);
 
 /** @internal */
 export type EdgeServiceCreateRequest$Outbound = {
@@ -60,13 +63,15 @@ export const EdgeServiceCreateRequest$outboundSchema: z.ZodType<
   EdgeServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   EdgeServiceCreateRequest
-> = z.object({
-  displayName: z.string().optional(),
-  egressTls: z.nullable(EdgeTlsSelection$outboundSchema).optional(),
-  enabledKinds: z.nullable(
-    z.array(EdgeServiceCreateRequestEnabledKinds$outboundSchema),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    egressTls: z.nullable(EdgeTlsSelection$outboundSchema).optional(),
+    enabledKinds: z.nullable(
+      z.array(EdgeServiceCreateRequestEnabledKinds$outboundSchema),
+    ).optional(),
+  })
+);
 
 export function edgeServiceCreateRequestToJSON(
   edgeServiceCreateRequest: EdgeServiceCreateRequest,

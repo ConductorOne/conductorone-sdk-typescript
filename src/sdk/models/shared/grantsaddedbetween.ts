@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,14 +20,16 @@ export const GrantsAddedBetween$inboundSchema: z.ZodType<
   GrantsAddedBetween,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  endDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  startDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    endDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    startDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type GrantsAddedBetween$Outbound = {
   endDate?: string | null | undefined;
@@ -39,10 +41,12 @@ export const GrantsAddedBetween$outboundSchema: z.ZodType<
   GrantsAddedBetween$Outbound,
   z.ZodTypeDef,
   GrantsAddedBetween
-> = z.object({
-  endDate: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  startDate: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    endDate: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    startDate: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function grantsAddedBetweenToJSON(
   grantsAddedBetween: GrantsAddedBetween,

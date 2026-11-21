@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,14 +47,16 @@ export const C1ApiCrossAppAccessV1XAAResourceServerServiceGetRequest$outboundSch
     C1ApiCrossAppAccessV1XAAResourceServerServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiCrossAppAccessV1XAAResourceServerServiceGetRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAResourceServerServiceGetRequestToJSON(
   c1ApiCrossAppAccessV1XAAResourceServerServiceGetRequest:
@@ -72,21 +74,23 @@ export const C1ApiCrossAppAccessV1XAAResourceServerServiceGetResponse$inboundSch
     C1ApiCrossAppAccessV1XAAResourceServerServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    XAAResourceServerServiceGetResponse: shared
-      .XAAResourceServerServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "XAAResourceServerServiceGetResponse":
-        "xaaResourceServerServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      XAAResourceServerServiceGetResponse: shared
+        .XAAResourceServerServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "XAAResourceServerServiceGetResponse":
+          "xaaResourceServerServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAResourceServerServiceGetResponseFromJSON(
   jsonString: string,

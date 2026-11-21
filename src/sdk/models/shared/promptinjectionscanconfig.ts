@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -54,23 +54,25 @@ export const Threshold$inboundSchema: z.ZodType<
   Threshold,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Threshold);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Threshold));
 /** @internal */
 export const Threshold$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Threshold
-> = openEnums.outboundSchema(Threshold);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Threshold));
 
 /** @internal */
 export const PromptInjectionScanConfig$inboundSchema: z.ZodType<
   PromptInjectionScanConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  flagOnly: z.boolean().optional(),
-  threshold: Threshold$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    flagOnly: z.boolean().optional(),
+    threshold: Threshold$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type PromptInjectionScanConfig$Outbound = {
   flagOnly?: boolean | undefined;
@@ -82,10 +84,12 @@ export const PromptInjectionScanConfig$outboundSchema: z.ZodType<
   PromptInjectionScanConfig$Outbound,
   z.ZodTypeDef,
   PromptInjectionScanConfig
-> = z.object({
-  flagOnly: z.boolean().optional(),
-  threshold: Threshold$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    flagOnly: z.boolean().optional(),
+    threshold: Threshold$outboundSchema.optional(),
+  })
+);
 
 export function promptInjectionScanConfigToJSON(
   promptInjectionScanConfig: PromptInjectionScanConfig,

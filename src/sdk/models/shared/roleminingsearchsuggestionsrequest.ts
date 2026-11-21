@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -63,14 +64,16 @@ export const MatchTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   MatchTypes
-> = openEnums.outboundSchema(MatchTypes);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(MatchTypes));
 
 /** @internal */
 export const RoleMiningSearchSuggestionsRequestStates$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   RoleMiningSearchSuggestionsRequestStates
-> = openEnums.outboundSchema(RoleMiningSearchSuggestionsRequestStates);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(RoleMiningSearchSuggestionsRequestStates)
+);
 
 /** @internal */
 export type RoleMiningSearchSuggestionsRequest$Outbound = {
@@ -88,17 +91,19 @@ export const RoleMiningSearchSuggestionsRequest$outboundSchema: z.ZodType<
   RoleMiningSearchSuggestionsRequest$Outbound,
   z.ZodTypeDef,
   RoleMiningSearchSuggestionsRequest
-> = z.object({
-  catalogId: z.string().optional(),
-  cohortTypes: z.nullable(z.array(z.string())).optional(),
-  matchTypes: z.nullable(z.array(MatchTypes$outboundSchema)).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  states: z.nullable(
-    z.array(RoleMiningSearchSuggestionsRequestStates$outboundSchema),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    catalogId: z.string().optional(),
+    cohortTypes: z.nullable(z.array(z.string())).optional(),
+    matchTypes: z.nullable(z.array(MatchTypes$outboundSchema)).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    states: z.nullable(
+      z.array(RoleMiningSearchSuggestionsRequestStates$outboundSchema),
+    ).optional(),
+  })
+);
 
 export function roleMiningSearchSuggestionsRequestToJSON(
   roleMiningSearchSuggestionsRequest: RoleMiningSearchSuggestionsRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,16 +54,19 @@ export const C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRe
     C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest
-  > = z.object({
-    id: z.string(),
-    deleteComplianceFrameworkAttributeValueRequest: shared
-      .DeleteComplianceFrameworkAttributeValueRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      deleteComplianceFrameworkAttributeValueRequest:
-        "DeleteComplianceFrameworkAttributeValueRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      deleteComplianceFrameworkAttributeValueRequest: shared
+        .DeleteComplianceFrameworkAttributeValueRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        deleteComplianceFrameworkAttributeValueRequest:
+          "DeleteComplianceFrameworkAttributeValueRequest",
+      });
+    })
+  );
 
 export function c1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequestToJSON(
   c1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRequest:
@@ -83,21 +86,24 @@ export const C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueRe
     C1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    DeleteComplianceFrameworkAttributeValueResponse: shared
-      .DeleteComplianceFrameworkAttributeValueResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "DeleteComplianceFrameworkAttributeValueResponse":
-        "deleteComplianceFrameworkAttributeValueResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      DeleteComplianceFrameworkAttributeValueResponse: shared
+        .DeleteComplianceFrameworkAttributeValueResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "DeleteComplianceFrameworkAttributeValueResponse":
+          "deleteComplianceFrameworkAttributeValueResponse",
+      });
+    })
+  );
 
 export function c1ApiAttributeV1AttributesDeleteComplianceFrameworkAttributeValueResponseFromJSON(
   jsonString: string,

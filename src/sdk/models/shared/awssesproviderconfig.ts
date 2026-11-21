@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -33,11 +33,13 @@ export const AWSSESProviderConfig$inboundSchema: z.ZodType<
   AWSSESProviderConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  configurationSetName: z.string().optional(),
-  region: z.string().optional(),
-  roleArn: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    configurationSetName: z.string().optional(),
+    region: z.string().optional(),
+    roleArn: z.string().optional(),
+  })
+);
 /** @internal */
 export type AWSSESProviderConfig$Outbound = {
   configurationSetName?: string | undefined;
@@ -50,11 +52,13 @@ export const AWSSESProviderConfig$outboundSchema: z.ZodType<
   AWSSESProviderConfig$Outbound,
   z.ZodTypeDef,
   AWSSESProviderConfig
-> = z.object({
-  configurationSetName: z.string().optional(),
-  region: z.string().optional(),
-  roleArn: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    configurationSetName: z.string().optional(),
+    region: z.string().optional(),
+    roleArn: z.string().optional(),
+  })
+);
 
 export function awssesProviderConfigToJSON(
   awssesProviderConfig: AWSSESProviderConfig,

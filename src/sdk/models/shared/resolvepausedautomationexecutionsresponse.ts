@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -40,11 +40,13 @@ export const ResolvePausedAutomationExecutionsResponse$inboundSchema: z.ZodType<
   ResolvePausedAutomationExecutionsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bulkActionId: z.string().optional(),
-  erroredCount: z.number().int().optional(),
-  pausedCount: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bulkActionId: z.string().optional(),
+    erroredCount: z.number().int().optional(),
+    pausedCount: z.number().int().optional(),
+  })
+);
 
 export function resolvePausedAutomationExecutionsResponseFromJSON(
   jsonString: string,

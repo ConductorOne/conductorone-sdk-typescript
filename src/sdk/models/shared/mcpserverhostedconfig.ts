@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -42,10 +43,9 @@ import {
 } from "./mcpserverauthoauth2.js";
 
 /**
- * Optional per-server override for tool approval when registering without an
+ * Deprecated and ignored: set tool_enablement on the register request instead.
  *
- * @remarks
- *  access level. See MCPServerView.require_tool_approval for semantics.
+ * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export const MCPServerHostedConfigRequireToolApproval = {
   OptionalBoolUnspecified: "OPTIONAL_BOOL_UNSPECIFIED",
@@ -53,10 +53,9 @@ export const MCPServerHostedConfigRequireToolApproval = {
   OptionalBoolFalse: "OPTIONAL_BOOL_FALSE",
 } as const;
 /**
- * Optional per-server override for tool approval when registering without an
+ * Deprecated and ignored: set tool_enablement on the register request instead.
  *
- * @remarks
- *  access level. See MCPServerView.require_tool_approval for semantics.
+ * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type MCPServerHostedConfigRequireToolApproval = OpenEnum<
   typeof MCPServerHostedConfigRequireToolApproval
@@ -128,10 +127,9 @@ export type MCPServerHostedConfig = {
   none?: MCPServerAuthNone | null | undefined;
   oauth2?: MCPServerAuthOAuth2 | null | undefined;
   /**
-   * Optional per-server override for tool approval when registering without an
+   * Deprecated and ignored: set tool_enablement on the register request instead.
    *
-   * @remarks
-   *  access level. See MCPServerView.require_tool_approval for semantics.
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   requireToolApproval?: MCPServerHostedConfigRequireToolApproval | undefined;
   /**
@@ -156,14 +154,18 @@ export const MCPServerHostedConfigRequireToolApproval$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   MCPServerHostedConfigRequireToolApproval
-> = openEnums.outboundSchema(MCPServerHostedConfigRequireToolApproval);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(MCPServerHostedConfigRequireToolApproval)
+);
 
 /** @internal */
 export const MCPServerHostedConfigTokenSharing$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   MCPServerHostedConfigTokenSharing
-> = openEnums.outboundSchema(MCPServerHostedConfigTokenSharing);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(MCPServerHostedConfigTokenSharing)
+);
 
 /** @internal */
 export type MCPServerHostedConfig$Outbound = {
@@ -189,23 +191,26 @@ export const MCPServerHostedConfig$outboundSchema: z.ZodType<
   MCPServerHostedConfig$Outbound,
   z.ZodTypeDef,
   MCPServerHostedConfig
-> = z.object({
-  awsSigv4: z.nullable(MCPServerAuthAWSSigV4$outboundSchema).optional(),
-  basicAuth: z.nullable(MCPServerAuthBasicAuth$outboundSchema).optional(),
-  bearerToken: z.nullable(MCPServerAuthBearerToken$outboundSchema).optional(),
-  configFields: z.record(z.string()).optional(),
-  customHeader: z.nullable(MCPServerAuthCustomHeader$outboundSchema).optional(),
-  googleServiceAccount: z.nullable(
-    MCPServerAuthGoogleServiceAccount$outboundSchema,
-  ).optional(),
-  mcpServerCatalogId: z.string().optional(),
-  none: z.nullable(MCPServerAuthNone$outboundSchema).optional(),
-  oauth2: z.nullable(MCPServerAuthOAuth2$outboundSchema).optional(),
-  requireToolApproval: MCPServerHostedConfigRequireToolApproval$outboundSchema
-    .optional(),
-  sourceAppId: z.string().optional(),
-  tokenSharing: MCPServerHostedConfigTokenSharing$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    awsSigv4: z.nullable(MCPServerAuthAWSSigV4$outboundSchema).optional(),
+    basicAuth: z.nullable(MCPServerAuthBasicAuth$outboundSchema).optional(),
+    bearerToken: z.nullable(MCPServerAuthBearerToken$outboundSchema).optional(),
+    configFields: z.record(z.string()).optional(),
+    customHeader: z.nullable(MCPServerAuthCustomHeader$outboundSchema)
+      .optional(),
+    googleServiceAccount: z.nullable(
+      MCPServerAuthGoogleServiceAccount$outboundSchema,
+    ).optional(),
+    mcpServerCatalogId: z.string().optional(),
+    none: z.nullable(MCPServerAuthNone$outboundSchema).optional(),
+    oauth2: z.nullable(MCPServerAuthOAuth2$outboundSchema).optional(),
+    requireToolApproval: MCPServerHostedConfigRequireToolApproval$outboundSchema
+      .optional(),
+    sourceAppId: z.string().optional(),
+    tokenSharing: MCPServerHostedConfigTokenSharing$outboundSchema.optional(),
+  })
+);
 
 export function mcpServerHostedConfigToJSON(
   mcpServerHostedConfig: MCPServerHostedConfig,

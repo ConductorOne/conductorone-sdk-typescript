@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,15 +47,17 @@ export const C1ApiSsov1SSOSettingsServiceListHistoryRequest$outboundSchema:
     C1ApiSsov1SSOSettingsServiceListHistoryRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSsov1SSOSettingsServiceListHistoryRequest
-  > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiSSOV1SSOSettingsServiceListHistoryRequestToJSON(
   c1ApiSsov1SSOSettingsServiceListHistoryRequest:
@@ -74,21 +76,23 @@ export const C1ApiSsov1SSOSettingsServiceListHistoryResponse$inboundSchema:
     C1ApiSsov1SSOSettingsServiceListHistoryResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SSOSettingsServiceListHistoryResponse: shared
-      .SSOSettingsServiceListHistoryResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SSOSettingsServiceListHistoryResponse":
-        "ssoSettingsServiceListHistoryResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SSOSettingsServiceListHistoryResponse: shared
+        .SSOSettingsServiceListHistoryResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SSOSettingsServiceListHistoryResponse":
+          "ssoSettingsServiceListHistoryResponse",
+      });
+    })
+  );
 
 export function c1ApiSSOV1SSOSettingsServiceListHistoryResponseFromJSON(
   jsonString: string,

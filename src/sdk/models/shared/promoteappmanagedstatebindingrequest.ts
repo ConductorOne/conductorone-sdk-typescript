@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$Outbound,
@@ -47,13 +48,16 @@ export const PromoteAppManagedStateBindingRequest$outboundSchema: z.ZodType<
   PromoteAppManagedStateBindingRequest$Outbound,
   z.ZodTypeDef,
   PromoteAppManagedStateBindingRequest
-> = z.object({
-  appEntitlementOwnerRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
-    .optional(),
-  expandMask: z.nullable(AppManagedStateBindingExpandMask$outboundSchema)
-    .optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementOwnerRefs: z.nullable(
+      z.array(AppEntitlementRef$outboundSchema),
+    ).optional(),
+    expandMask: z.nullable(AppManagedStateBindingExpandMask$outboundSchema)
+      .optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function promoteAppManagedStateBindingRequestToJSON(
   promoteAppManagedStateBindingRequest: PromoteAppManagedStateBindingRequest,

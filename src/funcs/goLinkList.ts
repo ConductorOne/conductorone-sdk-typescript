@@ -88,7 +88,7 @@ async function $do(
   const payload = parsed.value;
   const body = null;
 
-  const path = pathToFunc("/api/v1/golinks")();
+  const path = pathToFunc("/api/v1/shortlinks")();
 
   const query = encodeFormQuery({
     "page_size": payload?.page_size,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -38,20 +38,22 @@ export const C1ApiAIGovernanceV1AIGovernanceSettingsServiceGetTenantDefaultsResp
     C1ApiAIGovernanceV1AIGovernanceSettingsServiceGetTenantDefaultsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    GetTenantDefaultsResponse: shared.GetTenantDefaultsResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "GetTenantDefaultsResponse": "getTenantDefaultsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      GetTenantDefaultsResponse: shared.GetTenantDefaultsResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "GetTenantDefaultsResponse": "getTenantDefaultsResponse",
+      });
+    })
+  );
 
 export function c1ApiAIGovernanceV1AIGovernanceSettingsServiceGetTenantDefaultsResponseFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,19 +54,21 @@ export const C1ApiAiGovernanceV1MCPServerServiceUpdateCredentialsRequest$outboun
     C1ApiAiGovernanceV1MCPServerServiceUpdateCredentialsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1MCPServerServiceUpdateCredentialsRequest
-  > = z.object({
-    appId: z.string(),
-    connectorId: z.string(),
-    mcpServerServiceUpdateCredentialsRequest: shared
-      .MCPServerServiceUpdateCredentialsRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      connectorId: "connector_id",
-      mcpServerServiceUpdateCredentialsRequest:
-        "MCPServerServiceUpdateCredentialsRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      connectorId: z.string(),
+      mcpServerServiceUpdateCredentialsRequest: shared
+        .MCPServerServiceUpdateCredentialsRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        connectorId: "connector_id",
+        mcpServerServiceUpdateCredentialsRequest:
+          "MCPServerServiceUpdateCredentialsRequest",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPServerServiceUpdateCredentialsRequestToJSON(
   c1ApiAiGovernanceV1MCPServerServiceUpdateCredentialsRequest:
@@ -84,21 +86,23 @@ export const C1ApiAiGovernanceV1MCPServerServiceUpdateCredentialsResponse$inboun
     C1ApiAiGovernanceV1MCPServerServiceUpdateCredentialsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    MCPServerServiceUpdateCredentialsResponse: shared
-      .MCPServerServiceUpdateCredentialsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "MCPServerServiceUpdateCredentialsResponse":
-        "mcpServerServiceUpdateCredentialsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      MCPServerServiceUpdateCredentialsResponse: shared
+        .MCPServerServiceUpdateCredentialsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "MCPServerServiceUpdateCredentialsResponse":
+          "mcpServerServiceUpdateCredentialsResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPServerServiceUpdateCredentialsResponseFromJSON(
   jsonString: string,

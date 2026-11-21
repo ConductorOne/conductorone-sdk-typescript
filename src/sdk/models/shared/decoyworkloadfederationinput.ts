@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * DecoyWorkloadFederationInput plants a workload-federation-trust decoy
@@ -42,11 +43,13 @@ export const DecoyWorkloadFederationInput$outboundSchema: z.ZodType<
   DecoyWorkloadFederationInput$Outbound,
   z.ZodTypeDef,
   DecoyWorkloadFederationInput
-> = z.object({
-  conditionExpression: z.string().optional(),
-  providerId: z.string().optional(),
-  servicePrincipalUserId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conditionExpression: z.string().optional(),
+    providerId: z.string().optional(),
+    servicePrincipalUserId: z.string().optional(),
+  })
+);
 
 export function decoyWorkloadFederationInputToJSON(
   decoyWorkloadFederationInput: DecoyWorkloadFederationInput,

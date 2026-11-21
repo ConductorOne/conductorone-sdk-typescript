@@ -4,13 +4,15 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiFunctionsV1FunctionsServiceListCommitsRequest = {
   functionId: string;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
 };
 
 export type C1ApiFunctionsV1FunctionsServiceListCommitsResponse = {
@@ -37,6 +39,8 @@ export type C1ApiFunctionsV1FunctionsServiceListCommitsResponse = {
 /** @internal */
 export type C1ApiFunctionsV1FunctionsServiceListCommitsRequest$Outbound = {
   function_id: string;
+  page_size?: number | undefined;
+  page_token?: string | undefined;
 };
 
 /** @internal */
@@ -45,13 +49,19 @@ export const C1ApiFunctionsV1FunctionsServiceListCommitsRequest$outboundSchema:
     C1ApiFunctionsV1FunctionsServiceListCommitsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFunctionsV1FunctionsServiceListCommitsRequest
-  > = z.object({
-    functionId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      functionId: "function_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      functionId: z.string(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        functionId: "function_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiFunctionsV1FunctionsServiceListCommitsRequestToJSON(
   c1ApiFunctionsV1FunctionsServiceListCommitsRequest:
@@ -70,21 +80,23 @@ export const C1ApiFunctionsV1FunctionsServiceListCommitsResponse$inboundSchema:
     C1ApiFunctionsV1FunctionsServiceListCommitsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    FunctionsServiceListCommitsResponse: shared
-      .FunctionsServiceListCommitsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "FunctionsServiceListCommitsResponse":
-        "functionsServiceListCommitsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      FunctionsServiceListCommitsResponse: shared
+        .FunctionsServiceListCommitsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "FunctionsServiceListCommitsResponse":
+          "functionsServiceListCommitsResponse",
+      });
+    })
+  );
 
 export function c1ApiFunctionsV1FunctionsServiceListCommitsResponseFromJSON(
   jsonString: string,

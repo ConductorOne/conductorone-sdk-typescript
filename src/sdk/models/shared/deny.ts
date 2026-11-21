@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,11 +22,13 @@ export type Deny = {
 };
 
 /** @internal */
-export const Deny$inboundSchema: z.ZodType<Deny, z.ZodTypeDef, unknown> = z
-  .object({
-    reasonAdmin: z.string().optional(),
-    reasonUser: z.string().optional(),
-  });
+export const Deny$inboundSchema: z.ZodType<Deny, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      reasonAdmin: z.string().optional(),
+      reasonUser: z.string().optional(),
+    })
+  );
 /** @internal */
 export type Deny$Outbound = {
   reasonAdmin?: string | undefined;
@@ -35,10 +37,12 @@ export type Deny$Outbound = {
 
 /** @internal */
 export const Deny$outboundSchema: z.ZodType<Deny$Outbound, z.ZodTypeDef, Deny> =
-  z.object({
-    reasonAdmin: z.string().optional(),
-    reasonUser: z.string().optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      reasonAdmin: z.string().optional(),
+      reasonUser: z.string().optional(),
+    })
+  );
 
 export function denyToJSON(deny: Deny): string {
   return JSON.stringify(Deny$outboundSchema.parse(deny));

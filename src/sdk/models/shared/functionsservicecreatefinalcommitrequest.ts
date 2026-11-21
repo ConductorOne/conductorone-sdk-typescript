@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The FunctionsServiceCreateFinalCommitRequest message.
@@ -17,7 +18,7 @@ export const FunctionsServiceCreateFinalCommitRequest$outboundSchema: z.ZodType<
   FunctionsServiceCreateFinalCommitRequest$Outbound,
   z.ZodTypeDef,
   FunctionsServiceCreateFinalCommitRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function functionsServiceCreateFinalCommitRequestToJSON(
   functionsServiceCreateFinalCommitRequest:

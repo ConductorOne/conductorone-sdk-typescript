@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,7 +17,7 @@ export const AllGrantsScope$inboundSchema: z.ZodType<
   AllGrantsScope,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type AllGrantsScope$Outbound = {};
 
@@ -26,7 +26,7 @@ export const AllGrantsScope$outboundSchema: z.ZodType<
   AllGrantsScope$Outbound,
   z.ZodTypeDef,
   AllGrantsScope
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function allGrantsScopeToJSON(allGrantsScope: AllGrantsScope): string {
   return JSON.stringify(AllGrantsScope$outboundSchema.parse(allGrantsScope));

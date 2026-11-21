@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { MCPTool, MCPTool$inboundSchema } from "./mcptool.js";
@@ -20,9 +20,11 @@ export const MCPToolServiceGetResponse$inboundSchema: z.ZodType<
   MCPToolServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tool: z.nullable(MCPTool$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tool: z.nullable(MCPTool$inboundSchema).optional(),
+  })
+);
 
 export function mcpToolServiceGetResponseFromJSON(
   jsonString: string,

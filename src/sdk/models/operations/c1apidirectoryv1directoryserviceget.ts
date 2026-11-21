@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -46,13 +46,15 @@ export const C1ApiDirectoryV1DirectoryServiceGetRequest$outboundSchema:
     C1ApiDirectoryV1DirectoryServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiDirectoryV1DirectoryServiceGetRequest
-  > = z.object({
-    appId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+      });
+    })
+  );
 
 export function c1ApiDirectoryV1DirectoryServiceGetRequestToJSON(
   c1ApiDirectoryV1DirectoryServiceGetRequest:
@@ -71,20 +73,22 @@ export const C1ApiDirectoryV1DirectoryServiceGetResponse$inboundSchema:
     C1ApiDirectoryV1DirectoryServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    DirectoryServiceGetResponse: shared
-      .DirectoryServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "DirectoryServiceGetResponse": "directoryServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      DirectoryServiceGetResponse: shared
+        .DirectoryServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "DirectoryServiceGetResponse": "directoryServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiDirectoryV1DirectoryServiceGetResponseFromJSON(
   jsonString: string,

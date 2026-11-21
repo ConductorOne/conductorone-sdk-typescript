@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,9 +25,11 @@ export const GrantDeletedTrigger$inboundSchema: z.ZodType<
   GrantDeletedTrigger,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  grantTriggerFilter: z.nullable(GrantTriggerFilter$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    grantTriggerFilter: z.nullable(GrantTriggerFilter$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type GrantDeletedTrigger$Outbound = {
   grantTriggerFilter?: GrantTriggerFilter$Outbound | null | undefined;
@@ -38,9 +40,12 @@ export const GrantDeletedTrigger$outboundSchema: z.ZodType<
   GrantDeletedTrigger$Outbound,
   z.ZodTypeDef,
   GrantDeletedTrigger
-> = z.object({
-  grantTriggerFilter: z.nullable(GrantTriggerFilter$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    grantTriggerFilter: z.nullable(GrantTriggerFilter$outboundSchema)
+      .optional(),
+  })
+);
 
 export function grantDeletedTriggerToJSON(
   grantDeletedTrigger: GrantDeletedTrigger,

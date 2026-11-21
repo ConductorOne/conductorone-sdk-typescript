@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -46,26 +46,28 @@ export const AppEntitlementProxy$inboundSchema: z.ZodType<
   AppEntitlementProxy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  disabledAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  dstAppEntitlementId: z.string().optional(),
-  dstAppId: z.string().optional(),
-  implicit: z.nullable(z.boolean()).optional(),
-  srcAppEntitlementId: z.string().optional(),
-  srcAppId: z.string().optional(),
-  systemBuiltin: z.boolean().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    disabledAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    dstAppEntitlementId: z.string().optional(),
+    dstAppId: z.string().optional(),
+    implicit: z.nullable(z.boolean()).optional(),
+    srcAppEntitlementId: z.string().optional(),
+    srcAppId: z.string().optional(),
+    systemBuiltin: z.boolean().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function appEntitlementProxyFromJSON(
   jsonString: string,

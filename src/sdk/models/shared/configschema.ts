@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Field, Field$inboundSchema } from "./field.js";
@@ -54,16 +54,18 @@ export const ConfigSchema$inboundSchema: z.ZodType<
   ConfigSchema,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  displayName: z.string().optional(),
-  fieldGroups: z.nullable(z.array(FieldGroup$inboundSchema)).optional(),
-  fields: z.nullable(z.array(Field$inboundSchema)).optional(),
-  helpUrl: z.string().optional(),
-  iconUrl: z.string().optional(),
-  isOauth2: z.boolean().optional(),
-  requiresExternalConnector: z.boolean().optional(),
-  supportsExternalResources: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    fieldGroups: z.nullable(z.array(FieldGroup$inboundSchema)).optional(),
+    fields: z.nullable(z.array(Field$inboundSchema)).optional(),
+    helpUrl: z.string().optional(),
+    iconUrl: z.string().optional(),
+    isOauth2: z.boolean().optional(),
+    requiresExternalConnector: z.boolean().optional(),
+    supportsExternalResources: z.boolean().optional(),
+  })
+);
 
 export function configSchemaFromJSON(
   jsonString: string,

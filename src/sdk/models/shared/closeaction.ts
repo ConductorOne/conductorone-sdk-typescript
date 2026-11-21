@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -43,11 +43,13 @@ export const CloseAction$inboundSchema: z.ZodType<
   CloseAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  useSubjectUser: z.boolean().optional(),
-  userIdCel: z.nullable(z.string()).optional(),
-  userRef: z.nullable(UserRef$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    useSubjectUser: z.boolean().optional(),
+    userIdCel: z.nullable(z.string()).optional(),
+    userRef: z.nullable(UserRef$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type CloseAction$Outbound = {
   useSubjectUser?: boolean | undefined;
@@ -60,11 +62,13 @@ export const CloseAction$outboundSchema: z.ZodType<
   CloseAction$Outbound,
   z.ZodTypeDef,
   CloseAction
-> = z.object({
-  useSubjectUser: z.boolean().optional(),
-  userIdCel: z.nullable(z.string()).optional(),
-  userRef: z.nullable(UserRef$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    useSubjectUser: z.boolean().optional(),
+    userIdCel: z.nullable(z.string()).optional(),
+    userRef: z.nullable(UserRef$outboundSchema).optional(),
+  })
+);
 
 export function closeActionToJSON(closeAction: CloseAction): string {
   return JSON.stringify(CloseAction$outboundSchema.parse(closeAction));

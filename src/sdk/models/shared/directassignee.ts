@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,9 +28,11 @@ export const DirectAssignee$inboundSchema: z.ZodType<
   DirectAssignee,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  identityUserId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identityUserId: z.string().optional(),
+  })
+);
 /** @internal */
 export type DirectAssignee$Outbound = {
   identityUserId?: string | undefined;
@@ -41,9 +43,11 @@ export const DirectAssignee$outboundSchema: z.ZodType<
   DirectAssignee$Outbound,
   z.ZodTypeDef,
   DirectAssignee
-> = z.object({
-  identityUserId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identityUserId: z.string().optional(),
+  })
+);
 
 export function directAssigneeToJSON(directAssignee: DirectAssignee): string {
   return JSON.stringify(DirectAssignee$outboundSchema.parse(directAssignee));

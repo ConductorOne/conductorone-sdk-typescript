@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   RequestSchemaForm,
   RequestSchemaForm$Outbound,
@@ -26,9 +27,11 @@ export const FormInput$outboundSchema: z.ZodType<
   FormInput$Outbound,
   z.ZodTypeDef,
   FormInput
-> = z.object({
-  form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
+  })
+);
 
 export function formInputToJSON(formInput: FormInput): string {
   return JSON.stringify(FormInput$outboundSchema.parse(formInput));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -50,17 +50,19 @@ export const C1ApiAppV1ConnectorServiceForceSyncRequest$outboundSchema:
     C1ApiAppV1ConnectorServiceForceSyncRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1ConnectorServiceForceSyncRequest
-  > = z.object({
-    appId: z.string(),
-    connectorId: z.string(),
-    forceSyncRequest: shared.ForceSyncRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      connectorId: "connector_id",
-      forceSyncRequest: "ForceSyncRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      connectorId: z.string(),
+      forceSyncRequest: shared.ForceSyncRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        connectorId: "connector_id",
+        forceSyncRequest: "ForceSyncRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV1ConnectorServiceForceSyncRequestToJSON(
   c1ApiAppV1ConnectorServiceForceSyncRequest:
@@ -79,19 +81,21 @@ export const C1ApiAppV1ConnectorServiceForceSyncResponse$inboundSchema:
     C1ApiAppV1ConnectorServiceForceSyncResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ForceSyncResponse: shared.ForceSyncResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ForceSyncResponse": "forceSyncResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ForceSyncResponse: shared.ForceSyncResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ForceSyncResponse": "forceSyncResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1ConnectorServiceForceSyncResponseFromJSON(
   jsonString: string,

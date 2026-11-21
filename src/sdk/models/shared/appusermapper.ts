@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,11 +30,13 @@ export const AppUserMapper$inboundSchema: z.ZodType<
   AppUserMapper,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  mappingCases: z.nullable(z.array(AppUserMapperMatchCase$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    mappingCases: z.nullable(z.array(AppUserMapperMatchCase$inboundSchema))
+      .optional(),
+  })
+);
 
 export function appUserMapperFromJSON(
   jsonString: string,

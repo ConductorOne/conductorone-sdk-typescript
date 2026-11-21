@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -113,38 +113,44 @@ export const ExternalClientInfoClientIdType$inboundSchema: z.ZodType<
   ExternalClientInfoClientIdType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ExternalClientInfoClientIdType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ExternalClientInfoClientIdType)
+);
 
 /** @internal */
 export const ExternalClientInfoWellKnownClient$inboundSchema: z.ZodType<
   ExternalClientInfoWellKnownClient,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ExternalClientInfoWellKnownClient);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ExternalClientInfoWellKnownClient)
+);
 
 /** @internal */
 export const ExternalClientInfo$inboundSchema: z.ZodType<
   ExternalClientInfo,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  clientId: z.string().optional(),
-  clientIdType: ExternalClientInfoClientIdType$inboundSchema.optional(),
-  clientIdUrl: z.string().optional(),
-  clientName: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  displayName: z.string().optional(),
-  lastUsedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  mcpClientId: z.string().optional(),
-  roleIds: z.nullable(z.array(z.string())).optional(),
-  userId: z.string().optional(),
-  verifiedDomain: z.string().optional(),
-  wellKnownClient: ExternalClientInfoWellKnownClient$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientId: z.string().optional(),
+    clientIdType: ExternalClientInfoClientIdType$inboundSchema.optional(),
+    clientIdUrl: z.string().optional(),
+    clientName: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    displayName: z.string().optional(),
+    lastUsedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    mcpClientId: z.string().optional(),
+    roleIds: z.nullable(z.array(z.string())).optional(),
+    userId: z.string().optional(),
+    verifiedDomain: z.string().optional(),
+    wellKnownClient: ExternalClientInfoWellKnownClient$inboundSchema.optional(),
+  })
+);
 
 export function externalClientInfoFromJSON(
   jsonString: string,

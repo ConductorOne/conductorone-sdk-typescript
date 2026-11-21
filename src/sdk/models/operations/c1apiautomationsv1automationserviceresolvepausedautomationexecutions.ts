@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,16 +54,18 @@ export const C1ApiAutomationsV1AutomationServiceResolvePausedAutomationExecution
     C1ApiAutomationsV1AutomationServiceResolvePausedAutomationExecutionsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAutomationsV1AutomationServiceResolvePausedAutomationExecutionsRequest
-  > = z.object({
-    id: z.string(),
-    resolvePausedAutomationExecutionsRequest: shared
-      .ResolvePausedAutomationExecutionsRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      resolvePausedAutomationExecutionsRequest:
-        "ResolvePausedAutomationExecutionsRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      resolvePausedAutomationExecutionsRequest: shared
+        .ResolvePausedAutomationExecutionsRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        resolvePausedAutomationExecutionsRequest:
+          "ResolvePausedAutomationExecutionsRequest",
+      });
+    })
+  );
 
 export function c1ApiAutomationsV1AutomationServiceResolvePausedAutomationExecutionsRequestToJSON(
   c1ApiAutomationsV1AutomationServiceResolvePausedAutomationExecutionsRequest:
@@ -83,21 +85,23 @@ export const C1ApiAutomationsV1AutomationServiceResolvePausedAutomationExecution
     C1ApiAutomationsV1AutomationServiceResolvePausedAutomationExecutionsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ResolvePausedAutomationExecutionsResponse: shared
-      .ResolvePausedAutomationExecutionsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ResolvePausedAutomationExecutionsResponse":
-        "resolvePausedAutomationExecutionsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ResolvePausedAutomationExecutionsResponse: shared
+        .ResolvePausedAutomationExecutionsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ResolvePausedAutomationExecutionsResponse":
+          "resolvePausedAutomationExecutionsResponse",
+      });
+    })
+  );
 
 export function c1ApiAutomationsV1AutomationServiceResolvePausedAutomationExecutionsResponseFromJSON(
   jsonString: string,

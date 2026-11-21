@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * AppManagedStateBindingExpandMask controls which related objects are included in a response.
@@ -24,9 +25,11 @@ export const AppManagedStateBindingExpandMask$outboundSchema: z.ZodType<
   AppManagedStateBindingExpandMask$Outbound,
   z.ZodTypeDef,
   AppManagedStateBindingExpandMask
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    paths: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function appManagedStateBindingExpandMaskToJSON(
   appManagedStateBindingExpandMask: AppManagedStateBindingExpandMask,

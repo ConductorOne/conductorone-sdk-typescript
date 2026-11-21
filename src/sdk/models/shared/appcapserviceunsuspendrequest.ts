@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The AppCapServiceUnsuspendRequest message.
@@ -17,7 +18,7 @@ export const AppCapServiceUnsuspendRequest$outboundSchema: z.ZodType<
   AppCapServiceUnsuspendRequest$Outbound,
   z.ZodTypeDef,
   AppCapServiceUnsuspendRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function appCapServiceUnsuspendRequestToJSON(
   appCapServiceUnsuspendRequest: AppCapServiceUnsuspendRequest,

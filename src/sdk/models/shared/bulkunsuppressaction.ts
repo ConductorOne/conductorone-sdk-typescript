@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The BulkUnsuppressAction message.
@@ -19,7 +20,7 @@ export const BulkUnsuppressAction$outboundSchema: z.ZodType<
   BulkUnsuppressAction$Outbound,
   z.ZodTypeDef,
   BulkUnsuppressAction
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function bulkUnsuppressActionToJSON(
   bulkUnsuppressAction: BulkUnsuppressAction,

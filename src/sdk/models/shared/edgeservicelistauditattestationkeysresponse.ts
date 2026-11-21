@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -27,9 +27,11 @@ export const EdgeServiceListAuditAttestationKeysResponse$inboundSchema:
     EdgeServiceListAuditAttestationKeysResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    keys: z.nullable(z.array(TBAuditAttestationKey$inboundSchema)).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      keys: z.nullable(z.array(TBAuditAttestationKey$inboundSchema)).optional(),
+    })
+  );
 
 export function edgeServiceListAuditAttestationKeysResponseFromJSON(
   jsonString: string,

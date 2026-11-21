@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -72,23 +72,27 @@ export const GoLinkServiceResolveResponseOutcome$inboundSchema: z.ZodType<
   GoLinkServiceResolveResponseOutcome,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(GoLinkServiceResolveResponseOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(GoLinkServiceResolveResponseOutcome)
+);
 
 /** @internal */
 export const GoLinkServiceResolveResponse$inboundSchema: z.ZodType<
   GoLinkServiceResolveResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  actionId: z.string().optional(),
-  chooserOptions: z.nullable(z.array(GoLinkChooserOptionInput$inboundSchema))
-    .optional(),
-  golink: z.nullable(GoLink$inboundSchema).optional(),
-  outcome: GoLinkServiceResolveResponseOutcome$inboundSchema.optional(),
-  prerequisite: z.nullable(GoLinkPrerequisite$inboundSchema).optional(),
-  redirectUrl: z.string().optional(),
-  suggestions: z.nullable(z.array(GoLinkView$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    actionId: z.string().optional(),
+    chooserOptions: z.nullable(z.array(GoLinkChooserOptionInput$inboundSchema))
+      .optional(),
+    golink: z.nullable(GoLink$inboundSchema).optional(),
+    outcome: GoLinkServiceResolveResponseOutcome$inboundSchema.optional(),
+    prerequisite: z.nullable(GoLinkPrerequisite$inboundSchema).optional(),
+    redirectUrl: z.string().optional(),
+    suggestions: z.nullable(z.array(GoLinkView$inboundSchema)).optional(),
+  })
+);
 
 export function goLinkServiceResolveResponseFromJSON(
   jsonString: string,

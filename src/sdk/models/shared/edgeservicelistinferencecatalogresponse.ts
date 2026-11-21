@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -47,14 +47,18 @@ export const EdgeServiceListInferenceCatalogResponse$inboundSchema: z.ZodType<
   EdgeServiceListInferenceCatalogResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  capabilitySummary: z.nullable(EdgeCapabilitySummary$inboundSchema).optional(),
-  entries: z.nullable(z.array(EdgeInferenceCatalogEntry$inboundSchema))
-    .optional(),
-  families: z.nullable(z.array(EdgeInferenceModelFamily$inboundSchema))
-    .optional(),
-  tiers: z.nullable(z.array(EdgeInferenceTierOption$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    capabilitySummary: z.nullable(EdgeCapabilitySummary$inboundSchema)
+      .optional(),
+    entries: z.nullable(z.array(EdgeInferenceCatalogEntry$inboundSchema))
+      .optional(),
+    families: z.nullable(z.array(EdgeInferenceModelFamily$inboundSchema))
+      .optional(),
+    tiers: z.nullable(z.array(EdgeInferenceTierOption$inboundSchema))
+      .optional(),
+  })
+);
 
 export function edgeServiceListInferenceCatalogResponseFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -52,17 +52,19 @@ export const C1ApiAppV1ConnectorServiceDeleteRequest$outboundSchema: z.ZodType<
   C1ApiAppV1ConnectorServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   C1ApiAppV1ConnectorServiceDeleteRequest
-> = z.object({
-  appId: z.string(),
-  id: z.string(),
-  connectorServiceDeleteRequest: shared
-    .ConnectorServiceDeleteRequest$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    appId: "app_id",
-    connectorServiceDeleteRequest: "ConnectorServiceDeleteRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string(),
+    id: z.string(),
+    connectorServiceDeleteRequest: shared
+      .ConnectorServiceDeleteRequest$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      appId: "app_id",
+      connectorServiceDeleteRequest: "ConnectorServiceDeleteRequest",
+    });
+  })
+);
 
 export function c1ApiAppV1ConnectorServiceDeleteRequestToJSON(
   c1ApiAppV1ConnectorServiceDeleteRequest:
@@ -80,20 +82,22 @@ export const C1ApiAppV1ConnectorServiceDeleteResponse$inboundSchema: z.ZodType<
   C1ApiAppV1ConnectorServiceDeleteResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  ConnectorServiceDeleteResponse: shared
-    .ConnectorServiceDeleteResponse$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "ConnectorServiceDeleteResponse": "connectorServiceDeleteResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    ConnectorServiceDeleteResponse: shared
+      .ConnectorServiceDeleteResponse$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "ConnectorServiceDeleteResponse": "connectorServiceDeleteResponse",
+    });
+  })
+);
 
 export function c1ApiAppV1ConnectorServiceDeleteResponseFromJSON(
   jsonString: string,

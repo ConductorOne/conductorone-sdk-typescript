@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$Outbound,
@@ -31,10 +32,12 @@ export const RequestCatalogManagementServiceRemoveAppEntitlementsRequest$outboun
     RequestCatalogManagementServiceRemoveAppEntitlementsRequest$Outbound,
     z.ZodTypeDef,
     RequestCatalogManagementServiceRemoveAppEntitlementsRequest
-  > = z.object({
-    appEntitlements: z.nullable(z.array(AppEntitlementRef$outboundSchema))
-      .optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appEntitlements: z.nullable(z.array(AppEntitlementRef$outboundSchema))
+        .optional(),
+    })
+  );
 
 export function requestCatalogManagementServiceRemoveAppEntitlementsRequestToJSON(
   requestCatalogManagementServiceRemoveAppEntitlementsRequest:

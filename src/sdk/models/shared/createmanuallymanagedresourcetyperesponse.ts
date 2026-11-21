@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -46,17 +47,19 @@ export const CreateManuallyManagedResourceTypeResponseExpanded$inboundSchema:
     CreateManuallyManagedResourceTypeResponseExpanded,
     z.ZodTypeDef,
     unknown
-  > = collectExtraKeys$(
-    z.object({
-      "@type": z.string().optional(),
-    }).catchall(z.any()),
-    "additionalProperties",
-    true,
-  ).transform((v) => {
-    return remap$(v, {
-      "@type": "atType",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    collectExtraKeys$(
+      z.object({
+        "@type": z.string().optional(),
+      }).catchall(z.any()),
+      "additionalProperties",
+      true,
+    ).transform((v) => {
+      return remap$(v, {
+        "@type": "atType",
+      });
+    })
+  );
 
 export function createManuallyManagedResourceTypeResponseExpandedFromJSON(
   jsonString: string,
@@ -79,14 +82,14 @@ export const CreateManuallyManagedResourceTypeResponse$inboundSchema: z.ZodType<
   CreateManuallyManagedResourceTypeResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appResourceType: z.nullable(AppResourceType$inboundSchema).optional(),
-  expanded: z.nullable(
-    z.array(z.lazy(() =>
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appResourceType: z.nullable(AppResourceType$inboundSchema).optional(),
+    expanded: z.nullable(z.array(z.lazy(() =>
       CreateManuallyManagedResourceTypeResponseExpanded$inboundSchema
-    )),
-  ).optional(),
-});
+    ))).optional(),
+  })
+);
 
 export function createManuallyManagedResourceTypeResponseFromJSON(
   jsonString: string,

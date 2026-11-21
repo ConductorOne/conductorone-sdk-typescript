@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -37,22 +37,24 @@ export const C1ApiRequestSchemaV1RequestSchemaServiceFindBindingForAppEntitlemen
     C1ApiRequestSchemaV1RequestSchemaServiceFindBindingForAppEntitlementResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    RequestSchemaServiceFindBindingForAppEntitlementResponse: shared
-      .RequestSchemaServiceFindBindingForAppEntitlementResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "RequestSchemaServiceFindBindingForAppEntitlementResponse":
-        "requestSchemaServiceFindBindingForAppEntitlementResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      RequestSchemaServiceFindBindingForAppEntitlementResponse: shared
+        .RequestSchemaServiceFindBindingForAppEntitlementResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "RequestSchemaServiceFindBindingForAppEntitlementResponse":
+          "requestSchemaServiceFindBindingForAppEntitlementResponse",
+      });
+    })
+  );
 
 export function c1ApiRequestSchemaV1RequestSchemaServiceFindBindingForAppEntitlementResponseFromJSON(
   jsonString: string,

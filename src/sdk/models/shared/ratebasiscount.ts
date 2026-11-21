@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -31,11 +31,13 @@ export const RateBasisCount$inboundSchema: z.ZodType<
   RateBasisCount,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  calls: z.string().transform(v => parseInt(v, 10)).optional(),
-  settledNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  snapshot: z.nullable(ClawLLMRateSnapshot$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    calls: z.string().transform(v => parseInt(v, 10)).optional(),
+    settledNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    snapshot: z.nullable(ClawLLMRateSnapshot$inboundSchema).optional(),
+  })
+);
 
 export function rateBasisCountFromJSON(
   jsonString: string,

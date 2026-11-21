@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,17 +54,19 @@ export const C1ApiFindingV1FindingTransformationRuleServiceUpdateFindingTransfor
     C1ApiFindingV1FindingTransformationRuleServiceUpdateFindingTransformationRuleRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFindingV1FindingTransformationRuleServiceUpdateFindingTransformationRuleRequest
-  > = z.object({
-    transformationRuleId: z.string(),
-    updateFindingTransformationRuleRequest: shared
-      .UpdateFindingTransformationRuleRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      transformationRuleId: "transformation_rule_id",
-      updateFindingTransformationRuleRequest:
-        "UpdateFindingTransformationRuleRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      transformationRuleId: z.string(),
+      updateFindingTransformationRuleRequest: shared
+        .UpdateFindingTransformationRuleRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        transformationRuleId: "transformation_rule_id",
+        updateFindingTransformationRuleRequest:
+          "UpdateFindingTransformationRuleRequest",
+      });
+    })
+  );
 
 export function c1ApiFindingV1FindingTransformationRuleServiceUpdateFindingTransformationRuleRequestToJSON(
   c1ApiFindingV1FindingTransformationRuleServiceUpdateFindingTransformationRuleRequest:
@@ -84,21 +86,23 @@ export const C1ApiFindingV1FindingTransformationRuleServiceUpdateFindingTransfor
     C1ApiFindingV1FindingTransformationRuleServiceUpdateFindingTransformationRuleResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    UpdateFindingTransformationRuleResponse: shared
-      .UpdateFindingTransformationRuleResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "UpdateFindingTransformationRuleResponse":
-        "updateFindingTransformationRuleResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      UpdateFindingTransformationRuleResponse: shared
+        .UpdateFindingTransformationRuleResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "UpdateFindingTransformationRuleResponse":
+          "updateFindingTransformationRuleResponse",
+      });
+    })
+  );
 
 export function c1ApiFindingV1FindingTransformationRuleServiceUpdateFindingTransformationRuleResponseFromJSON(
   jsonString: string,

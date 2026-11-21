@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -214,8 +215,10 @@ export const AccessReviewTemplateServiceCreateRequestAccuracyIssueAction$outboun
     string,
     z.ZodTypeDef,
     AccessReviewTemplateServiceCreateRequestAccuracyIssueAction
-  > = openEnums.outboundSchema(
-    AccessReviewTemplateServiceCreateRequestAccuracyIssueAction,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      AccessReviewTemplateServiceCreateRequestAccuracyIssueAction,
+    )
   );
 
 /** @internal */
@@ -224,8 +227,10 @@ export const AccessReviewTemplateServiceCreateRequestAutoCloseDecision$outboundS
     string,
     z.ZodTypeDef,
     AccessReviewTemplateServiceCreateRequestAutoCloseDecision
-  > = openEnums.outboundSchema(
-    AccessReviewTemplateServiceCreateRequestAutoCloseDecision,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      AccessReviewTemplateServiceCreateRequestAutoCloseDecision,
+    )
   );
 
 /** @internal */
@@ -234,8 +239,10 @@ export const AccessReviewTemplateServiceCreateRequestDefaultView$outboundSchema:
     string,
     z.ZodTypeDef,
     AccessReviewTemplateServiceCreateRequestDefaultView
-  > = openEnums.outboundSchema(
-    AccessReviewTemplateServiceCreateRequestDefaultView,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      AccessReviewTemplateServiceCreateRequestDefaultView,
+    )
   );
 
 /** @internal */
@@ -244,8 +251,8 @@ export const AccessReviewTemplateServiceCreateRequestScopeType$outboundSchema:
     string,
     z.ZodTypeDef,
     AccessReviewTemplateServiceCreateRequestScopeType
-  > = openEnums.outboundSchema(
-    AccessReviewTemplateServiceCreateRequestScopeType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(AccessReviewTemplateServiceCreateRequestScopeType)
   );
 
 /** @internal */
@@ -280,39 +287,44 @@ export const AccessReviewTemplateServiceCreateRequest$outboundSchema: z.ZodType<
   AccessReviewTemplateServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   AccessReviewTemplateServiceCreateRequest
-> = z.object({
-  accessReviewDuration: z.nullable(z.string()).optional(),
-  accuracyIssueAction:
-    AccessReviewTemplateServiceCreateRequestAccuracyIssueAction$outboundSchema
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReviewDuration: z.nullable(z.string()).optional(),
+    accuracyIssueAction:
+      AccessReviewTemplateServiceCreateRequestAccuracyIssueAction$outboundSchema
+        .optional(),
+    annotations: z.record(z.string()).optional(),
+    autoCloseCampaign: z.boolean().optional(),
+    autoCloseDecision:
+      AccessReviewTemplateServiceCreateRequestAutoCloseDecision$outboundSchema
+        .optional(),
+    autoGenerateReport: z.boolean().optional(),
+    autoStartCampaign: z.boolean().optional(),
+    columnConfig: z.nullable(AccessReviewColumnConfig$outboundSchema)
       .optional(),
-  annotations: z.record(z.string()).optional(),
-  autoCloseCampaign: z.boolean().optional(),
-  autoCloseDecision:
-    AccessReviewTemplateServiceCreateRequestAutoCloseDecision$outboundSchema
+    defaultView:
+      AccessReviewTemplateServiceCreateRequestDefaultView$outboundSchema
+        .optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    exemptCertifiedAccessConflicts: z.boolean().optional(),
+    isCampaignScheduleEnabled: z.boolean().optional(),
+    notificationConfig: z.nullable(NotificationConfig$outboundSchema)
       .optional(),
-  autoGenerateReport: z.boolean().optional(),
-  autoStartCampaign: z.boolean().optional(),
-  columnConfig: z.nullable(AccessReviewColumnConfig$outboundSchema).optional(),
-  defaultView:
-    AccessReviewTemplateServiceCreateRequestDefaultView$outboundSchema
+    ownerIds: z.nullable(z.array(z.string())).optional(),
+    policyId: z.string().optional(),
+    recurrenceRule: z.nullable(RecurrenceRule$outboundSchema).optional(),
+    reviewInstructions: z.string().optional(),
+    reviewerAttributeConfig: z.nullable(ReviewerAttributeConfig$outboundSchema)
       .optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  exemptCertifiedAccessConflicts: z.boolean().optional(),
-  isCampaignScheduleEnabled: z.boolean().optional(),
-  notificationConfig: z.nullable(NotificationConfig$outboundSchema).optional(),
-  ownerIds: z.nullable(z.array(z.string())).optional(),
-  policyId: z.string().optional(),
-  recurrenceRule: z.nullable(RecurrenceRule$outboundSchema).optional(),
-  reviewInstructions: z.string().optional(),
-  reviewerAttributeConfig: z.nullable(ReviewerAttributeConfig$outboundSchema)
-    .optional(),
-  scope: z.nullable(AccessReviewScopeV2$outboundSchema).optional(),
-  scopeType: AccessReviewTemplateServiceCreateRequestScopeType$outboundSchema
-    .optional(),
-  signatureConfig: z.nullable(ReviewSignatureConfig$outboundSchema).optional(),
-  usePolicyOverride: z.boolean().optional(),
-});
+    scope: z.nullable(AccessReviewScopeV2$outboundSchema).optional(),
+    scopeType: AccessReviewTemplateServiceCreateRequestScopeType$outboundSchema
+      .optional(),
+    signatureConfig: z.nullable(ReviewSignatureConfig$outboundSchema)
+      .optional(),
+    usePolicyOverride: z.boolean().optional(),
+  })
+);
 
 export function accessReviewTemplateServiceCreateRequestToJSON(
   accessReviewTemplateServiceCreateRequest:

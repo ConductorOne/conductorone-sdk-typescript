@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Identifies an entitlement to add or remove from a campaign's setup.
@@ -29,10 +30,12 @@ export const AccessReviewSetupEntitlementInput$outboundSchema: z.ZodType<
   AccessReviewSetupEntitlementInput$Outbound,
   z.ZodTypeDef,
   AccessReviewSetupEntitlementInput
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+  })
+);
 
 export function accessReviewSetupEntitlementInputToJSON(
   accessReviewSetupEntitlementInput: AccessReviewSetupEntitlementInput,

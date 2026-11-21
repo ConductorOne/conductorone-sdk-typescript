@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * MCPAccessProfileServiceCreateRequest creates a new MCP access profile.
@@ -29,10 +30,12 @@ export const MCPAccessProfileServiceCreateRequest$outboundSchema: z.ZodType<
   MCPAccessProfileServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   MCPAccessProfileServiceCreateRequest
-> = z.object({
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+  })
+);
 
 export function mcpAccessProfileServiceCreateRequestToJSON(
   mcpAccessProfileServiceCreateRequest: MCPAccessProfileServiceCreateRequest,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The AppUserExpandMask message contains a list of paths to expand in the response.
@@ -24,9 +25,11 @@ export const AppUserExpandMask$outboundSchema: z.ZodType<
   AppUserExpandMask$Outbound,
   z.ZodTypeDef,
   AppUserExpandMask
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    paths: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function appUserExpandMaskToJSON(
   appUserExpandMask: AppUserExpandMask,

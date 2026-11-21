@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -43,12 +43,14 @@ export const EnumRules$inboundSchema: z.ZodType<
   EnumRules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  const: z.number().int().optional(),
-  definedOnly: z.boolean().optional(),
-  in: z.nullable(z.array(z.number().int())).optional(),
-  notIn: z.nullable(z.array(z.number().int())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    const: z.number().int().optional(),
+    definedOnly: z.boolean().optional(),
+    in: z.nullable(z.array(z.number().int())).optional(),
+    notIn: z.nullable(z.array(z.number().int())).optional(),
+  })
+);
 /** @internal */
 export type EnumRules$Outbound = {
   const?: number | undefined;
@@ -62,12 +64,14 @@ export const EnumRules$outboundSchema: z.ZodType<
   EnumRules$Outbound,
   z.ZodTypeDef,
   EnumRules
-> = z.object({
-  const: z.number().int().optional(),
-  definedOnly: z.boolean().optional(),
-  in: z.nullable(z.array(z.number().int())).optional(),
-  notIn: z.nullable(z.array(z.number().int())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    const: z.number().int().optional(),
+    definedOnly: z.boolean().optional(),
+    in: z.nullable(z.array(z.number().int())).optional(),
+    notIn: z.nullable(z.array(z.number().int())).optional(),
+  })
+);
 
 export function enumRulesToJSON(enumRules: EnumRules): string {
   return JSON.stringify(EnumRules$outboundSchema.parse(enumRules));

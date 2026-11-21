@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const TOTPConstraints$inboundSchema: z.ZodType<
   TOTPConstraints,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  codeLength: z.number().int().optional(),
-  periodSeconds: z.number().int().optional(),
-  skewTolerance: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    codeLength: z.number().int().optional(),
+    periodSeconds: z.number().int().optional(),
+    skewTolerance: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type TOTPConstraints$Outbound = {
   codeLength?: number | undefined;
@@ -47,11 +49,13 @@ export const TOTPConstraints$outboundSchema: z.ZodType<
   TOTPConstraints$Outbound,
   z.ZodTypeDef,
   TOTPConstraints
-> = z.object({
-  codeLength: z.number().int().optional(),
-  periodSeconds: z.number().int().optional(),
-  skewTolerance: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    codeLength: z.number().int().optional(),
+    periodSeconds: z.number().int().optional(),
+    skewTolerance: z.number().int().optional(),
+  })
+);
 
 export function totpConstraintsToJSON(
   totpConstraints: TOTPConstraints,

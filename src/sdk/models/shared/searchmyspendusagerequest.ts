@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * SearchMySpendUsageRequest selects a half-open finalization-time interval.
@@ -46,13 +47,15 @@ export const SearchMySpendUsageRequest$outboundSchema: z.ZodType<
   SearchMySpendUsageRequest$Outbound,
   z.ZodTypeDef,
   SearchMySpendUsageRequest
-> = z.object({
-  appId: z.string().optional(),
-  endTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  startTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    endTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    startTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function searchMySpendUsageRequestToJSON(
   searchMySpendUsageRequest: SearchMySpendUsageRequest,

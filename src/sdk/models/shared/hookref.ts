@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The HookRef message.
@@ -24,9 +25,11 @@ export const HookRef$outboundSchema: z.ZodType<
   HookRef$Outbound,
   z.ZodTypeDef,
   HookRef
-> = z.object({
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+  })
+);
 
 export function hookRefToJSON(hookRef: HookRef): string {
   return JSON.stringify(HookRef$outboundSchema.parse(hookRef));

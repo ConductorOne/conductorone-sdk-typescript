@@ -19,10 +19,12 @@ export class ModelAPIKey extends ClientSDK {
    * List returns all model API keys owned by the calling user.
    */
   async list(
+    request?: operations.C1APIIamV1ModelAPIKeyServiceListRequest | undefined,
     options?: RequestOptions,
   ): Promise<operations.C1APIIamV1ModelAPIKeyServiceListResponse> {
     return unwrapAsync(modelAPIKeyList(
       this,
+      request,
       options,
     ));
   }

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -51,18 +51,22 @@ export const CohortFilterAttributeKind$inboundSchema: z.ZodType<
   CohortFilterAttributeKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(CohortFilterAttributeKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(CohortFilterAttributeKind)
+);
 
 /** @internal */
 export const CohortFilterAttribute$inboundSchema: z.ZodType<
   CohortFilterAttribute,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  attribute: z.string().optional(),
-  displayName: z.string().optional(),
-  kind: CohortFilterAttributeKind$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    attribute: z.string().optional(),
+    displayName: z.string().optional(),
+    kind: CohortFilterAttributeKind$inboundSchema.optional(),
+  })
+);
 
 export function cohortFilterAttributeFromJSON(
   jsonString: string,

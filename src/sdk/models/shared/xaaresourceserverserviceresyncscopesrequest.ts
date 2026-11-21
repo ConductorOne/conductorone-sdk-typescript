@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The XAAResourceServerServiceResyncScopesRequest message.
@@ -18,7 +19,7 @@ export const XAAResourceServerServiceResyncScopesRequest$outboundSchema:
     XAAResourceServerServiceResyncScopesRequest$Outbound,
     z.ZodTypeDef,
     XAAResourceServerServiceResyncScopesRequest
-  > = z.object({});
+  > = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function xaaResourceServerServiceResyncScopesRequestToJSON(
   xaaResourceServerServiceResyncScopesRequest:

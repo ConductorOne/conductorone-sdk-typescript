@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -42,13 +42,15 @@ export const C1ApiSystemlogV1ExportServiceGetRequest$outboundSchema: z.ZodType<
   C1ApiSystemlogV1ExportServiceGetRequest$Outbound,
   z.ZodTypeDef,
   C1ApiSystemlogV1ExportServiceGetRequest
-> = z.object({
-  exportId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    exportId: "export_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    exportId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      exportId: "export_id",
+    });
+  })
+);
 
 export function c1ApiSystemlogV1ExportServiceGetRequestToJSON(
   c1ApiSystemlogV1ExportServiceGetRequest:
@@ -66,20 +68,22 @@ export const C1ApiSystemlogV1ExportServiceGetResponse$inboundSchema: z.ZodType<
   C1ApiSystemlogV1ExportServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  ExportServiceGetResponse: shared.ExportServiceGetResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "ExportServiceGetResponse": "exportServiceGetResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    ExportServiceGetResponse: shared.ExportServiceGetResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "ExportServiceGetResponse": "exportServiceGetResponse",
+    });
+  })
+);
 
 export function c1ApiSystemlogV1ExportServiceGetResponseFromJSON(
   jsonString: string,

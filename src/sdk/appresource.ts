@@ -6,12 +6,34 @@ import { appResourceCreateManuallyManagedAppResource } from "../funcs/appResourc
 import { appResourceDeleteManuallyManagedAppResource } from "../funcs/appResourceDeleteManuallyManagedAppResource.js";
 import { appResourceGet } from "../funcs/appResourceGet.js";
 import { appResourceList } from "../funcs/appResourceList.js";
+import { appResourceSearchAppEntitlementResourceBindings } from "../funcs/appResourceSearchAppEntitlementResourceBindings.js";
 import { appResourceUpdate } from "../funcs/appResourceUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "./models/operations/index.js";
 import { unwrapAsync } from "./types/fp.js";
 
 export class AppResource extends ClientSDK {
+  /**
+   * Search App Entitlement Resource Bindings
+   *
+   * @remarks
+   * Search the non-user grantees of an app entitlement, such as groups granted the entitlement,
+   *  or the entitlements an app resource is granted. User grantees are returned by the grants search.
+   */
+  async searchAppEntitlementResourceBindings(
+    request:
+      operations.C1ApiAppV1AppResourceServiceSearchAppEntitlementResourceBindingsRequest,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiAppV1AppResourceServiceSearchAppEntitlementResourceBindingsResponse
+  > {
+    return unwrapAsync(appResourceSearchAppEntitlementResourceBindings(
+      this,
+      request,
+      options,
+    ));
+  }
+
   /**
    * List
    *

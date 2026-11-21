@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   FindingOwnerRef,
   FindingOwnerRef$Outbound,
@@ -34,10 +35,12 @@ export const BulkAssignOwnerAction$outboundSchema: z.ZodType<
   BulkAssignOwnerAction$Outbound,
   z.ZodTypeDef,
   BulkAssignOwnerAction
-> = z.object({
-  assigneeIdentityUserId: z.string().optional(),
-  owner: z.nullable(FindingOwnerRef$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assigneeIdentityUserId: z.string().optional(),
+    owner: z.nullable(FindingOwnerRef$outboundSchema).optional(),
+  })
+);
 
 export function bulkAssignOwnerActionToJSON(
   bulkAssignOwnerAction: BulkAssignOwnerAction,

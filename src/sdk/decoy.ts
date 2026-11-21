@@ -21,10 +21,12 @@ export class Decoy extends ClientSDK {
    * List returns decoys for the tenant, paginated.
    */
   async list(
+    request?: operations.C1ApiDecoyV1DecoyServiceListRequest | undefined,
     options?: RequestOptions,
   ): Promise<operations.C1ApiDecoyV1DecoyServiceListResponse> {
     return unwrapAsync(decoyList(
       this,
+      request,
       options,
     ));
   }

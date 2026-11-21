@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -62,13 +62,15 @@ export const PolicyOutcome$inboundSchema: z.ZodType<
   PolicyOutcome,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allow: z.nullable(Allow$inboundSchema).optional(),
-  challengeRequired: z.nullable(ChallengeRequired$inboundSchema).optional(),
-  deny: z.nullable(Deny$inboundSchema).optional(),
-  enrollmentRequired: z.nullable(EnrollmentRequired$inboundSchema).optional(),
-  stepUpRequired: z.nullable(StepUpRequired$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allow: z.nullable(Allow$inboundSchema).optional(),
+    challengeRequired: z.nullable(ChallengeRequired$inboundSchema).optional(),
+    deny: z.nullable(Deny$inboundSchema).optional(),
+    enrollmentRequired: z.nullable(EnrollmentRequired$inboundSchema).optional(),
+    stepUpRequired: z.nullable(StepUpRequired$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type PolicyOutcome$Outbound = {
   allow?: Allow$Outbound | null | undefined;
@@ -83,13 +85,16 @@ export const PolicyOutcome$outboundSchema: z.ZodType<
   PolicyOutcome$Outbound,
   z.ZodTypeDef,
   PolicyOutcome
-> = z.object({
-  allow: z.nullable(Allow$outboundSchema).optional(),
-  challengeRequired: z.nullable(ChallengeRequired$outboundSchema).optional(),
-  deny: z.nullable(Deny$outboundSchema).optional(),
-  enrollmentRequired: z.nullable(EnrollmentRequired$outboundSchema).optional(),
-  stepUpRequired: z.nullable(StepUpRequired$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allow: z.nullable(Allow$outboundSchema).optional(),
+    challengeRequired: z.nullable(ChallengeRequired$outboundSchema).optional(),
+    deny: z.nullable(Deny$outboundSchema).optional(),
+    enrollmentRequired: z.nullable(EnrollmentRequired$outboundSchema)
+      .optional(),
+    stepUpRequired: z.nullable(StepUpRequired$outboundSchema).optional(),
+  })
+);
 
 export function policyOutcomeToJSON(policyOutcome: PolicyOutcome): string {
   return JSON.stringify(PolicyOutcome$outboundSchema.parse(policyOutcome));

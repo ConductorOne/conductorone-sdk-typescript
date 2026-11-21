@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -81,28 +81,34 @@ export const FormInstanceState$inboundSchema: z.ZodType<
   FormInstanceState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(FormInstanceState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(FormInstanceState)
+);
 /** @internal */
 export const FormInstanceState$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   FormInstanceState
-> = openEnums.outboundSchema(FormInstanceState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(FormInstanceState)
+);
 
 /** @internal */
 export const FormInstance$inboundSchema: z.ZodType<
   FormInstance,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  completed: z.nullable(FormCompletedAction$inboundSchema).optional(),
-  data: z.nullable(z.record(z.any())).optional(),
-  form: z.nullable(RequestSchemaForm$inboundSchema).optional(),
-  reassigned: z.nullable(ReassignedAction$inboundSchema).optional(),
-  restarted: z.nullable(RestartAction$inboundSchema).optional(),
-  skipped: z.nullable(SkippedAction$inboundSchema).optional(),
-  state: FormInstanceState$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    completed: z.nullable(FormCompletedAction$inboundSchema).optional(),
+    data: z.nullable(z.record(z.any())).optional(),
+    form: z.nullable(RequestSchemaForm$inboundSchema).optional(),
+    reassigned: z.nullable(ReassignedAction$inboundSchema).optional(),
+    restarted: z.nullable(RestartAction$inboundSchema).optional(),
+    skipped: z.nullable(SkippedAction$inboundSchema).optional(),
+    state: FormInstanceState$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type FormInstance$Outbound = {
   completed?: FormCompletedAction$Outbound | null | undefined;
@@ -119,15 +125,17 @@ export const FormInstance$outboundSchema: z.ZodType<
   FormInstance$Outbound,
   z.ZodTypeDef,
   FormInstance
-> = z.object({
-  completed: z.nullable(FormCompletedAction$outboundSchema).optional(),
-  data: z.nullable(z.record(z.any())).optional(),
-  form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
-  reassigned: z.nullable(ReassignedAction$outboundSchema).optional(),
-  restarted: z.nullable(RestartAction$outboundSchema).optional(),
-  skipped: z.nullable(SkippedAction$outboundSchema).optional(),
-  state: FormInstanceState$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    completed: z.nullable(FormCompletedAction$outboundSchema).optional(),
+    data: z.nullable(z.record(z.any())).optional(),
+    form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
+    reassigned: z.nullable(ReassignedAction$outboundSchema).optional(),
+    restarted: z.nullable(RestartAction$outboundSchema).optional(),
+    skipped: z.nullable(SkippedAction$outboundSchema).optional(),
+    state: FormInstanceState$outboundSchema.optional(),
+  })
+);
 
 export function formInstanceToJSON(formInstance: FormInstance): string {
   return JSON.stringify(FormInstance$outboundSchema.parse(formInstance));

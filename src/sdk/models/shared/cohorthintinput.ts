@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The CohortHintInput message.
@@ -34,11 +35,13 @@ export const CohortHintInput$outboundSchema: z.ZodType<
   CohortHintInput$Outbound,
   z.ZodTypeDef,
   CohortHintInput
-> = z.object({
-  attribute: z.string().optional(),
-  priority: z.number().int().optional(),
-  values: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    attribute: z.string().optional(),
+    priority: z.number().int().optional(),
+    values: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function cohortHintInputToJSON(
   cohortHintInput: CohortHintInput,

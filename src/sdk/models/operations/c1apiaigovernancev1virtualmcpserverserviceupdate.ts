@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiAiGovernanceV1VirtualMCPServerServiceUpdateRequest$outboundSch
     C1ApiAiGovernanceV1VirtualMCPServerServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1VirtualMCPServerServiceUpdateRequest
-  > = z.object({
-    id: z.string(),
-    virtualMCPServerServiceUpdateRequest: shared
-      .VirtualMCPServerServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      virtualMCPServerServiceUpdateRequest:
-        "VirtualMCPServerServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      virtualMCPServerServiceUpdateRequest: shared
+        .VirtualMCPServerServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        virtualMCPServerServiceUpdateRequest:
+          "VirtualMCPServerServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1VirtualMCPServerServiceUpdateRequestToJSON(
   c1ApiAiGovernanceV1VirtualMCPServerServiceUpdateRequest:
@@ -78,21 +80,23 @@ export const C1ApiAiGovernanceV1VirtualMCPServerServiceUpdateResponse$inboundSch
     C1ApiAiGovernanceV1VirtualMCPServerServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    VirtualMCPServerServiceUpdateResponse: shared
-      .VirtualMCPServerServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "VirtualMCPServerServiceUpdateResponse":
-        "virtualMCPServerServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      VirtualMCPServerServiceUpdateResponse: shared
+        .VirtualMCPServerServiceUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "VirtualMCPServerServiceUpdateResponse":
+          "virtualMCPServerServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1VirtualMCPServerServiceUpdateResponseFromJSON(
   jsonString: string,

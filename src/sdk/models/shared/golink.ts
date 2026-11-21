@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -108,35 +108,37 @@ export const GoLinkStatus$inboundSchema: z.ZodType<
   GoLinkStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(GoLinkStatus);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(GoLinkStatus));
 /** @internal */
 export const GoLinkStatus$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   GoLinkStatus
-> = openEnums.outboundSchema(GoLinkStatus);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(GoLinkStatus));
 
 /** @internal */
-export const GoLink$inboundSchema: z.ZodType<GoLink, z.ZodTypeDef, unknown> = z
-  .object({
-    createdAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    currentVersion: z.number().int().optional(),
-    deletedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    description: z.string().optional(),
-    displayName: z.string().optional(),
-    id: z.string().optional(),
-    prerequisite: z.nullable(GoLinkPrerequisite$inboundSchema).optional(),
-    routes: z.nullable(z.array(GoLinkRouteConfig$inboundSchema)).optional(),
-    status: GoLinkStatus$inboundSchema.optional(),
-    target: z.nullable(GoLinkTarget$inboundSchema).optional(),
-    updatedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-  });
+export const GoLink$inboundSchema: z.ZodType<GoLink, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      createdAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      currentVersion: z.number().int().optional(),
+      deletedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      description: z.string().optional(),
+      displayName: z.string().optional(),
+      id: z.string().optional(),
+      prerequisite: z.nullable(GoLinkPrerequisite$inboundSchema).optional(),
+      routes: z.nullable(z.array(GoLinkRouteConfig$inboundSchema)).optional(),
+      status: GoLinkStatus$inboundSchema.optional(),
+      target: z.nullable(GoLinkTarget$inboundSchema).optional(),
+      updatedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+    })
+  );
 
 export function goLinkFromJSON(
   jsonString: string,
@@ -164,15 +166,17 @@ export const GoLinkInput$outboundSchema: z.ZodType<
   GoLinkInput$Outbound,
   z.ZodTypeDef,
   GoLinkInput
-> = z.object({
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  prerequisite: z.nullable(GoLinkPrerequisite$outboundSchema).optional(),
-  routes: z.nullable(z.array(GoLinkRouteConfig$outboundSchema)).optional(),
-  status: GoLinkStatus$outboundSchema.optional(),
-  target: z.nullable(GoLinkTargetInput$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    prerequisite: z.nullable(GoLinkPrerequisite$outboundSchema).optional(),
+    routes: z.nullable(z.array(GoLinkRouteConfig$outboundSchema)).optional(),
+    status: GoLinkStatus$outboundSchema.optional(),
+    target: z.nullable(GoLinkTargetInput$outboundSchema).optional(),
+  })
+);
 
 export function goLinkInputToJSON(goLinkInput: GoLinkInput): string {
   return JSON.stringify(GoLinkInput$outboundSchema.parse(goLinkInput));

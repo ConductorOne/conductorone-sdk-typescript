@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,7 +20,7 @@ export type DelegatedProvision = {
    */
   entitlementId?: string | undefined;
   /**
-   * If true, a binding will be automatically created from the entitlement of the parent app.
+   * No longer supported; create an app entitlement proxy binding instead. Ignored when creating an app entitlement, and always returned as false.
    */
   implicit?: boolean | undefined;
 };
@@ -30,11 +30,13 @@ export const DelegatedProvision$inboundSchema: z.ZodType<
   DelegatedProvision,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  entitlementId: z.string().optional(),
-  implicit: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    entitlementId: z.string().optional(),
+    implicit: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type DelegatedProvision$Outbound = {
   appId?: string | undefined;
@@ -47,11 +49,13 @@ export const DelegatedProvision$outboundSchema: z.ZodType<
   DelegatedProvision$Outbound,
   z.ZodTypeDef,
   DelegatedProvision
-> = z.object({
-  appId: z.string().optional(),
-  entitlementId: z.string().optional(),
-  implicit: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    entitlementId: z.string().optional(),
+    implicit: z.boolean().optional(),
+  })
+);
 
 export function delegatedProvisionToJSON(
   delegatedProvision: DelegatedProvision,

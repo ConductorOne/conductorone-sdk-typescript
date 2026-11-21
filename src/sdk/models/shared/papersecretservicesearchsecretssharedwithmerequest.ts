@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -100,8 +101,10 @@ export const PaperSecretServiceSearchSecretsSharedWithMeRequestSecretType$outbou
     string,
     z.ZodTypeDef,
     PaperSecretServiceSearchSecretsSharedWithMeRequestSecretType
-  > = openEnums.outboundSchema(
-    PaperSecretServiceSearchSecretsSharedWithMeRequestSecretType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      PaperSecretServiceSearchSecretsSharedWithMeRequestSecretType,
+    )
   );
 
 /** @internal */
@@ -110,8 +113,10 @@ export const PaperSecretServiceSearchSecretsSharedWithMeRequestSharingMode$outbo
     string,
     z.ZodTypeDef,
     PaperSecretServiceSearchSecretsSharedWithMeRequestSharingMode
-  > = openEnums.outboundSchema(
-    PaperSecretServiceSearchSecretsSharedWithMeRequestSharingMode,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      PaperSecretServiceSearchSecretsSharedWithMeRequestSharingMode,
+    )
   );
 
 /** @internal */
@@ -120,8 +125,10 @@ export const PaperSecretServiceSearchSecretsSharedWithMeRequestStatuses$outbound
     string,
     z.ZodTypeDef,
     PaperSecretServiceSearchSecretsSharedWithMeRequestStatuses
-  > = openEnums.outboundSchema(
-    PaperSecretServiceSearchSecretsSharedWithMeRequestStatuses,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      PaperSecretServiceSearchSecretsSharedWithMeRequestStatuses,
+    )
   );
 
 /** @internal */
@@ -141,23 +148,25 @@ export const PaperSecretServiceSearchSecretsSharedWithMeRequest$outboundSchema:
     PaperSecretServiceSearchSecretsSharedWithMeRequest$Outbound,
     z.ZodTypeDef,
     PaperSecretServiceSearchSecretsSharedWithMeRequest
-  > = z.object({
-    includeOwn: z.boolean().optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    query: z.string().optional(),
-    secretType:
-      PaperSecretServiceSearchSecretsSharedWithMeRequestSecretType$outboundSchema
-        .optional(),
-    sharingMode:
-      PaperSecretServiceSearchSecretsSharedWithMeRequestSharingMode$outboundSchema
-        .optional(),
-    statuses: z.nullable(
-      z.array(
-        PaperSecretServiceSearchSecretsSharedWithMeRequestStatuses$outboundSchema,
-      ),
-    ).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      includeOwn: z.boolean().optional(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      query: z.string().optional(),
+      secretType:
+        PaperSecretServiceSearchSecretsSharedWithMeRequestSecretType$outboundSchema
+          .optional(),
+      sharingMode:
+        PaperSecretServiceSearchSecretsSharedWithMeRequestSharingMode$outboundSchema
+          .optional(),
+      statuses: z.nullable(
+        z.array(
+          PaperSecretServiceSearchSecretsSharedWithMeRequestStatuses$outboundSchema,
+        ),
+      ).optional(),
+    })
+  );
 
 export function paperSecretServiceSearchSecretsSharedWithMeRequestToJSON(
   paperSecretServiceSearchSecretsSharedWithMeRequest:

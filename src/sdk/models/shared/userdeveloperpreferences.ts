@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -26,9 +26,11 @@ export const UserDeveloperPreferences$inboundSchema: z.ZodType<
   UserDeveloperPreferences,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  terraform: z.nullable(TerraformPreferences$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    terraform: z.nullable(TerraformPreferences$inboundSchema).optional(),
+  })
+);
 
 export function userDeveloperPreferencesFromJSON(
   jsonString: string,

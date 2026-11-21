@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -106,40 +106,44 @@ export const SuggestionState$inboundSchema: z.ZodType<
   SuggestionState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(SuggestionState);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(SuggestionState));
 
 /** @internal */
 export const RoleMiningManagementSuggestion$inboundSchema: z.ZodType<
   RoleMiningManagementSuggestion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  avgCoverage: z.number().optional(),
-  cohortFilters: z.nullable(z.array(ProfileFilter$inboundSchema)).optional(),
-  cohortSize: z.number().int().optional(),
-  confidence: z.number().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  createdCatalogId: z.string().optional(),
-  description: z.string().optional(),
-  dimensionCount: z.number().int().optional(),
-  entitlements: z.nullable(z.array(CohortEntitlement$inboundSchema)).optional(),
-  existingProfileMatches: z.nullable(z.array(AccessProfileMatch$inboundSchema))
-    .optional(),
-  id: z.string().optional(),
-  insights: z.nullable(z.array(z.string())).optional(),
-  lastGeneratedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  runId: z.string().optional(),
-  suggestedName: z.string().optional(),
-  suggestionState: SuggestionState$inboundSchema.optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  usersWithAll: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    avgCoverage: z.number().optional(),
+    cohortFilters: z.nullable(z.array(ProfileFilter$inboundSchema)).optional(),
+    cohortSize: z.number().int().optional(),
+    confidence: z.number().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    createdCatalogId: z.string().optional(),
+    description: z.string().optional(),
+    dimensionCount: z.number().int().optional(),
+    entitlements: z.nullable(z.array(CohortEntitlement$inboundSchema))
+      .optional(),
+    existingProfileMatches: z.nullable(
+      z.array(AccessProfileMatch$inboundSchema),
+    ).optional(),
+    id: z.string().optional(),
+    insights: z.nullable(z.array(z.string())).optional(),
+    lastGeneratedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    runId: z.string().optional(),
+    suggestedName: z.string().optional(),
+    suggestionState: SuggestionState$inboundSchema.optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    usersWithAll: z.number().int().optional(),
+  })
+);
 
 export function roleMiningManagementSuggestionFromJSON(
   jsonString: string,

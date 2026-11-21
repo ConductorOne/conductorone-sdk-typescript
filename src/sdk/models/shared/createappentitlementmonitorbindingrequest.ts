@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -50,8 +51,10 @@ export const CreateAppEntitlementMonitorBindingRequestEntitlementGroup$outboundS
     string,
     z.ZodTypeDef,
     CreateAppEntitlementMonitorBindingRequestEntitlementGroup
-  > = openEnums.outboundSchema(
-    CreateAppEntitlementMonitorBindingRequestEntitlementGroup,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      CreateAppEntitlementMonitorBindingRequestEntitlementGroup,
+    )
   );
 
 /** @internal */
@@ -68,14 +71,16 @@ export const CreateAppEntitlementMonitorBindingRequest$outboundSchema:
     CreateAppEntitlementMonitorBindingRequest$Outbound,
     z.ZodTypeDef,
     CreateAppEntitlementMonitorBindingRequest
-  > = z.object({
-    appEntitlementId: z.string().optional(),
-    appId: z.string().optional(),
-    entitlementGroup:
-      CreateAppEntitlementMonitorBindingRequestEntitlementGroup$outboundSchema
-        .optional(),
-    monitorId: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appEntitlementId: z.string().optional(),
+      appId: z.string().optional(),
+      entitlementGroup:
+        CreateAppEntitlementMonitorBindingRequestEntitlementGroup$outboundSchema
+          .optional(),
+      monitorId: z.string().optional(),
+    })
+  );
 
 export function createAppEntitlementMonitorBindingRequestToJSON(
   createAppEntitlementMonitorBindingRequest:

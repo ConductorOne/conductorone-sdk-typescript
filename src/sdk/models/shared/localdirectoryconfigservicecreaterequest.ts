@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The LocalDirectoryConfigServiceCreateRequest message.
@@ -61,17 +62,19 @@ export const LocalDirectoryConfigServiceCreateRequest$outboundSchema: z.ZodType<
   LocalDirectoryConfigServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   LocalDirectoryConfigServiceCreateRequest
-> = z.object({
-  allowSelfRegistration: z.boolean().optional(),
-  appId: z.string(),
-  defaultProfileTypeId: z.string().optional(),
-  displayName: z.string(),
-  invitationTtl: z.nullable(z.string()).optional(),
-  isDefault: z.boolean().optional(),
-  onboardingFlowId: z.string().optional(),
-  organizationId: z.string().optional(),
-  selfRegistrationDomains: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowSelfRegistration: z.boolean().optional(),
+    appId: z.string(),
+    defaultProfileTypeId: z.string().optional(),
+    displayName: z.string(),
+    invitationTtl: z.nullable(z.string()).optional(),
+    isDefault: z.boolean().optional(),
+    onboardingFlowId: z.string().optional(),
+    organizationId: z.string().optional(),
+    selfRegistrationDomains: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function localDirectoryConfigServiceCreateRequestToJSON(
   localDirectoryConfigServiceCreateRequest:

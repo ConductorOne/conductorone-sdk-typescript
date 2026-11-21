@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The CreateComplianceFrameworkAttributeValueRequest message.
@@ -25,9 +26,11 @@ export const CreateComplianceFrameworkAttributeValueRequest$outboundSchema:
     CreateComplianceFrameworkAttributeValueRequest$Outbound,
     z.ZodTypeDef,
     CreateComplianceFrameworkAttributeValueRequest
-  > = z.object({
-    value: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      value: z.string().optional(),
+    })
+  );
 
 export function createComplianceFrameworkAttributeValueRequestToJSON(
   createComplianceFrameworkAttributeValueRequest:

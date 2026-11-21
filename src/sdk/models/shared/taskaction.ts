@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -69,38 +69,44 @@ export const TaskTypes$inboundSchema: z.ZodType<
   TaskTypes,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TaskTypes);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(TaskTypes));
 /** @internal */
 export const TaskTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   TaskTypes
-> = openEnums.outboundSchema(TaskTypes);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(TaskTypes));
 
 /** @internal */
 export const TaskUserRelation$inboundSchema: z.ZodType<
   TaskUserRelation,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TaskUserRelation);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(TaskUserRelation)
+);
 /** @internal */
 export const TaskUserRelation$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   TaskUserRelation
-> = openEnums.outboundSchema(TaskUserRelation);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(TaskUserRelation)
+);
 
 /** @internal */
 export const TaskAction$inboundSchema: z.ZodType<
   TaskAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  close: z.nullable(CloseAction$inboundSchema).optional(),
-  reassign: z.nullable(ReassignAction$inboundSchema).optional(),
-  taskTypes: z.nullable(z.array(TaskTypes$inboundSchema)).optional(),
-  taskUserRelation: TaskUserRelation$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    close: z.nullable(CloseAction$inboundSchema).optional(),
+    reassign: z.nullable(ReassignAction$inboundSchema).optional(),
+    taskTypes: z.nullable(z.array(TaskTypes$inboundSchema)).optional(),
+    taskUserRelation: TaskUserRelation$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type TaskAction$Outbound = {
   close?: CloseAction$Outbound | null | undefined;
@@ -114,12 +120,14 @@ export const TaskAction$outboundSchema: z.ZodType<
   TaskAction$Outbound,
   z.ZodTypeDef,
   TaskAction
-> = z.object({
-  close: z.nullable(CloseAction$outboundSchema).optional(),
-  reassign: z.nullable(ReassignAction$outboundSchema).optional(),
-  taskTypes: z.nullable(z.array(TaskTypes$outboundSchema)).optional(),
-  taskUserRelation: TaskUserRelation$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    close: z.nullable(CloseAction$outboundSchema).optional(),
+    reassign: z.nullable(ReassignAction$outboundSchema).optional(),
+    taskTypes: z.nullable(z.array(TaskTypes$outboundSchema)).optional(),
+    taskUserRelation: TaskUserRelation$outboundSchema.optional(),
+  })
+);
 
 export function taskActionToJSON(taskAction: TaskAction): string {
   return JSON.stringify(TaskAction$outboundSchema.parse(taskAction));

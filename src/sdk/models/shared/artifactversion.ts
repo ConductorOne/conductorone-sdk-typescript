@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -78,25 +78,30 @@ export const ArtifactVersionState$inboundSchema: z.ZodType<
   ArtifactVersionState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ArtifactVersionState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ArtifactVersionState)
+);
 
 /** @internal */
 export const ArtifactVersion$inboundSchema: z.ZodType<
   ArtifactVersion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  artifactId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  error: z.string().optional(),
-  expectedPublishedVersionNumericId: z.string().transform(v => parseInt(v, 10))
-    .optional(),
-  numericId: z.string().transform(v => parseInt(v, 10)).optional(),
-  state: ArtifactVersionState$inboundSchema.optional(),
-  viewerUrl: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    artifactId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    error: z.string().optional(),
+    expectedPublishedVersionNumericId: z.string().transform(v =>
+      parseInt(v, 10)
+    ).optional(),
+    numericId: z.string().transform(v => parseInt(v, 10)).optional(),
+    state: ArtifactVersionState$inboundSchema.optional(),
+    viewerUrl: z.string().optional(),
+  })
+);
 
 export function artifactVersionFromJSON(
   jsonString: string,

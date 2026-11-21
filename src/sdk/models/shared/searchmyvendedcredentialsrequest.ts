@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppSecretExpandMask,
   AppSecretExpandMask$Outbound,
@@ -66,15 +67,17 @@ export const SearchMyVendedCredentialsRequest$outboundSchema: z.ZodType<
   SearchMyVendedCredentialsRequest$Outbound,
   z.ZodTypeDef,
   SearchMyVendedCredentialsRequest
-> = z.object({
-  appId: z.string().optional(),
-  expandMask: z.nullable(AppSecretExpandMask$outboundSchema).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  refs: z.nullable(z.array(AppSecretRef$outboundSchema)).optional(),
-  resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    expandMask: z.nullable(AppSecretExpandMask$outboundSchema).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    refs: z.nullable(z.array(AppSecretRef$outboundSchema)).optional(),
+    resourceTypeIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function searchMyVendedCredentialsRequestToJSON(
   searchMyVendedCredentialsRequest: SearchMyVendedCredentialsRequest,

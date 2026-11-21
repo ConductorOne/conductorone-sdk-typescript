@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -110,47 +110,53 @@ export const MySpendBlockReason$inboundSchema: z.ZodType<
   MySpendBlockReason,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(MySpendBlockReason);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(MySpendBlockReason)
+);
 
 /** @internal */
 export const MySpendBlockState$inboundSchema: z.ZodType<
   MySpendBlockState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(MySpendBlockState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(MySpendBlockState)
+);
 
 /** @internal */
 export const MySpendBlock$inboundSchema: z.ZodType<
   MySpendBlock,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  attemptCount: z.string().transform(v => parseInt(v, 10)).optional(),
-  attemptedAppId: z.string().optional(),
-  audienceMessage: z.string().optional(),
-  blockId: z.string().optional(),
-  closedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  firstDeniedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  lastDeniedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  money: z.nullable(DenialMoneySnapshot$inboundSchema).optional(),
-  periodEnd: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  periodKey: z.string().optional(),
-  personalRequestSizing: z.nullable(
-    PersonalSpendRemedyRequestSizing$inboundSchema,
-  ).optional(),
-  reason: MySpendBlockReason$inboundSchema.optional(),
-  requestTaskId: z.string().optional(),
-  scope: z.nullable(FundsAccountScope$inboundSchema).optional(),
-  state: MySpendBlockState$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    attemptCount: z.string().transform(v => parseInt(v, 10)).optional(),
+    attemptedAppId: z.string().optional(),
+    audienceMessage: z.string().optional(),
+    blockId: z.string().optional(),
+    closedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    firstDeniedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    lastDeniedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    money: z.nullable(DenialMoneySnapshot$inboundSchema).optional(),
+    periodEnd: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    periodKey: z.string().optional(),
+    personalRequestSizing: z.nullable(
+      PersonalSpendRemedyRequestSizing$inboundSchema,
+    ).optional(),
+    reason: MySpendBlockReason$inboundSchema.optional(),
+    requestTaskId: z.string().optional(),
+    scope: z.nullable(FundsAccountScope$inboundSchema).optional(),
+    state: MySpendBlockState$inboundSchema.optional(),
+  })
+);
 
 export function mySpendBlockFromJSON(
   jsonString: string,

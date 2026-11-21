@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { FacetValue, FacetValue$inboundSchema } from "./facetvalue.js";
@@ -23,9 +23,11 @@ export const FacetValueItem$inboundSchema: z.ZodType<
   FacetValueItem,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  values: z.nullable(z.array(FacetValue$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    values: z.nullable(z.array(FacetValue$inboundSchema)).optional(),
+  })
+);
 
 export function facetValueItemFromJSON(
   jsonString: string,

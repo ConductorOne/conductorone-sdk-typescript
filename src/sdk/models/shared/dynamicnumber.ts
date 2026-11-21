@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { FunctionCall, FunctionCall$inboundSchema } from "./functioncall.js";
@@ -43,11 +43,13 @@ export const DynamicNumber$inboundSchema: z.ZodType<
   DynamicNumber,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  call: z.nullable(FunctionCall$inboundSchema).optional(),
-  literal: z.nullable(z.number()).optional(),
-  path: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    call: z.nullable(FunctionCall$inboundSchema).optional(),
+    literal: z.nullable(z.number()).optional(),
+    path: z.nullable(z.string()).optional(),
+  })
+);
 
 export function dynamicNumberFromJSON(
   jsonString: string,

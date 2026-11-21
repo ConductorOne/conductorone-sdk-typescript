@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ClientContext message.
@@ -64,17 +65,19 @@ export const ClientContext$outboundSchema: z.ZodType<
   ClientContext$Outbound,
   z.ZodTypeDef,
   ClientContext
-> = z.object({
-  agentConversationId: z.string().optional(),
-  agentSessionId: z.string().optional(),
-  appVersion: z.string().optional(),
-  featureFlags: z.nullable(z.array(z.string())).optional(),
-  locale: z.string().optional(),
-  route: z.string().optional(),
-  url: z.string().optional(),
-  userAgent: z.string().optional(),
-  viewport: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentConversationId: z.string().optional(),
+    agentSessionId: z.string().optional(),
+    appVersion: z.string().optional(),
+    featureFlags: z.nullable(z.array(z.string())).optional(),
+    locale: z.string().optional(),
+    route: z.string().optional(),
+    url: z.string().optional(),
+    userAgent: z.string().optional(),
+    viewport: z.string().optional(),
+  })
+);
 
 export function clientContextToJSON(clientContext: ClientContext): string {
   return JSON.stringify(ClientContext$outboundSchema.parse(clientContext));

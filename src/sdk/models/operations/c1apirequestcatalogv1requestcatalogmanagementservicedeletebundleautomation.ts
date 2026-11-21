@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,16 +54,18 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAut
     C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest$Outbound,
     z.ZodTypeDef,
     C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest
-  > = z.object({
-    requestCatalogId: z.string(),
-    deleteBundleAutomationRequest: shared
-      .DeleteBundleAutomationRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      requestCatalogId: "request_catalog_id",
-      deleteBundleAutomationRequest: "DeleteBundleAutomationRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      requestCatalogId: z.string(),
+      deleteBundleAutomationRequest: shared
+        .DeleteBundleAutomationRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        requestCatalogId: "request_catalog_id",
+        deleteBundleAutomationRequest: "DeleteBundleAutomationRequest",
+      });
+    })
+  );
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequestToJSON(
   c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationRequest:
@@ -83,20 +85,22 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAut
     C1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    DeleteBundleAutomationResponse: shared
-      .DeleteBundleAutomationResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "DeleteBundleAutomationResponse": "deleteBundleAutomationResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      DeleteBundleAutomationResponse: shared
+        .DeleteBundleAutomationResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "DeleteBundleAutomationResponse": "deleteBundleAutomationResponse",
+      });
+    })
+  );
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceDeleteBundleAutomationResponseFromJSON(
   jsonString: string,

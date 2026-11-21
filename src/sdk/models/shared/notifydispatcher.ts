@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -85,25 +85,27 @@ export const DetailLevel$inboundSchema: z.ZodType<
   DetailLevel,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DetailLevel);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(DetailLevel));
 /** @internal */
 export const DetailLevel$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DetailLevel
-> = openEnums.outboundSchema(DetailLevel);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(DetailLevel));
 
 /** @internal */
 export const NotifyDispatcher$inboundSchema: z.ZodType<
   NotifyDispatcher,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  audience: z.nullable(FindingAudience$inboundSchema).optional(),
-  batchWindowSeconds: z.number().int().optional(),
-  detailLevel: DetailLevel$inboundSchema.optional(),
-  slackChannel: z.nullable(SlackChannelTarget$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    audience: z.nullable(FindingAudience$inboundSchema).optional(),
+    batchWindowSeconds: z.number().int().optional(),
+    detailLevel: DetailLevel$inboundSchema.optional(),
+    slackChannel: z.nullable(SlackChannelTarget$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type NotifyDispatcher$Outbound = {
   audience?: FindingAudience$Outbound | null | undefined;
@@ -117,12 +119,14 @@ export const NotifyDispatcher$outboundSchema: z.ZodType<
   NotifyDispatcher$Outbound,
   z.ZodTypeDef,
   NotifyDispatcher
-> = z.object({
-  audience: z.nullable(FindingAudience$outboundSchema).optional(),
-  batchWindowSeconds: z.number().int().optional(),
-  detailLevel: DetailLevel$outboundSchema.optional(),
-  slackChannel: z.nullable(SlackChannelTarget$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    audience: z.nullable(FindingAudience$outboundSchema).optional(),
+    batchWindowSeconds: z.number().int().optional(),
+    detailLevel: DetailLevel$outboundSchema.optional(),
+    slackChannel: z.nullable(SlackChannelTarget$outboundSchema).optional(),
+  })
+);
 
 export function notifyDispatcherToJSON(
   notifyDispatcher: NotifyDispatcher,

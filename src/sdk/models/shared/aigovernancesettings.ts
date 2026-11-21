@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -196,72 +196,83 @@ export const AIGovernanceSettingsAllowedClientTypes$inboundSchema: z.ZodType<
   AIGovernanceSettingsAllowedClientTypes,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AIGovernanceSettingsAllowedClientTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AIGovernanceSettingsAllowedClientTypes)
+);
 /** @internal */
 export const AIGovernanceSettingsAllowedClientTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AIGovernanceSettingsAllowedClientTypes
-> = openEnums.outboundSchema(AIGovernanceSettingsAllowedClientTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AIGovernanceSettingsAllowedClientTypes)
+);
 
 /** @internal */
 export const AuditVerbosity$inboundSchema: z.ZodType<
   AuditVerbosity,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AuditVerbosity);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(AuditVerbosity));
 /** @internal */
 export const AuditVerbosity$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AuditVerbosity
-> = openEnums.outboundSchema(AuditVerbosity);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(AuditVerbosity));
 
 /** @internal */
 export const DefaultToolClassification$inboundSchema: z.ZodType<
   DefaultToolClassification,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DefaultToolClassification);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(DefaultToolClassification)
+);
 /** @internal */
 export const DefaultToolClassification$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DefaultToolClassification
-> = openEnums.outboundSchema(DefaultToolClassification);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(DefaultToolClassification)
+);
 
 /** @internal */
 export const AIGovernanceSettings$inboundSchema: z.ZodType<
   AIGovernanceSettings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowedClientTypes: z.nullable(
-    z.array(AIGovernanceSettingsAllowedClientTypes$inboundSchema),
-  ).optional(),
-  auditVerbosity: AuditVerbosity$inboundSchema.optional(),
-  autoDiscoveryEnabled: z.boolean().optional(),
-  c1awAutospillDisabled: z.boolean().optional(),
-  c1awAutospillThresholdBytes: z.number().int().optional(),
-  codeModeConcurrency: z.number().int().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  defaultClientLifecycle: z.nullable(MCPClientLifecycleConfig$inboundSchema)
-    .optional(),
-  defaultToolClassification: DefaultToolClassification$inboundSchema.optional(),
-  discoveryInterval: z.nullable(z.string()).optional(),
-  enabled: z.boolean().optional(),
-  preferCodeModeOverDirectTools: z.boolean().optional(),
-  requireToolApproval: z.boolean().optional(),
-  surfaceRequestableTools: z.boolean().optional(),
-  untrustedJudgeDisable: z.boolean().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  usageAttributionCostCenterAttribute: z.string().optional(),
-  usageAttributionTeamAttribute: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowedClientTypes: z.nullable(
+      z.array(AIGovernanceSettingsAllowedClientTypes$inboundSchema),
+    ).optional(),
+    auditVerbosity: AuditVerbosity$inboundSchema.optional(),
+    autoDiscoveryEnabled: z.boolean().optional(),
+    c1awAutospillDisabled: z.boolean().optional(),
+    c1awAutospillThresholdBytes: z.number().int().optional(),
+    codeModeConcurrency: z.number().int().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    defaultClientLifecycle: z.nullable(MCPClientLifecycleConfig$inboundSchema)
+      .optional(),
+    defaultToolClassification: DefaultToolClassification$inboundSchema
+      .optional(),
+    discoveryInterval: z.nullable(z.string()).optional(),
+    enabled: z.boolean().optional(),
+    preferCodeModeOverDirectTools: z.boolean().optional(),
+    requireToolApproval: z.boolean().optional(),
+    surfaceRequestableTools: z.boolean().optional(),
+    untrustedJudgeDisable: z.boolean().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    usageAttributionCostCenterAttribute: z.string().optional(),
+    usageAttributionTeamAttribute: z.string().optional(),
+  })
+);
 /** @internal */
 export type AIGovernanceSettings$Outbound = {
   allowedClientTypes?: Array<string> | null | undefined;
@@ -289,30 +300,32 @@ export const AIGovernanceSettings$outboundSchema: z.ZodType<
   AIGovernanceSettings$Outbound,
   z.ZodTypeDef,
   AIGovernanceSettings
-> = z.object({
-  allowedClientTypes: z.nullable(
-    z.array(AIGovernanceSettingsAllowedClientTypes$outboundSchema),
-  ).optional(),
-  auditVerbosity: AuditVerbosity$outboundSchema.optional(),
-  autoDiscoveryEnabled: z.boolean().optional(),
-  c1awAutospillDisabled: z.boolean().optional(),
-  c1awAutospillThresholdBytes: z.number().int().optional(),
-  codeModeConcurrency: z.number().int().optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  defaultClientLifecycle: z.nullable(MCPClientLifecycleConfig$outboundSchema)
-    .optional(),
-  defaultToolClassification: DefaultToolClassification$outboundSchema
-    .optional(),
-  discoveryInterval: z.nullable(z.string()).optional(),
-  enabled: z.boolean().optional(),
-  preferCodeModeOverDirectTools: z.boolean().optional(),
-  requireToolApproval: z.boolean().optional(),
-  surfaceRequestableTools: z.boolean().optional(),
-  untrustedJudgeDisable: z.boolean().optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  usageAttributionCostCenterAttribute: z.string().optional(),
-  usageAttributionTeamAttribute: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowedClientTypes: z.nullable(
+      z.array(AIGovernanceSettingsAllowedClientTypes$outboundSchema),
+    ).optional(),
+    auditVerbosity: AuditVerbosity$outboundSchema.optional(),
+    autoDiscoveryEnabled: z.boolean().optional(),
+    c1awAutospillDisabled: z.boolean().optional(),
+    c1awAutospillThresholdBytes: z.number().int().optional(),
+    codeModeConcurrency: z.number().int().optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    defaultClientLifecycle: z.nullable(MCPClientLifecycleConfig$outboundSchema)
+      .optional(),
+    defaultToolClassification: DefaultToolClassification$outboundSchema
+      .optional(),
+    discoveryInterval: z.nullable(z.string()).optional(),
+    enabled: z.boolean().optional(),
+    preferCodeModeOverDirectTools: z.boolean().optional(),
+    requireToolApproval: z.boolean().optional(),
+    surfaceRequestableTools: z.boolean().optional(),
+    untrustedJudgeDisable: z.boolean().optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    usageAttributionCostCenterAttribute: z.string().optional(),
+    usageAttributionTeamAttribute: z.string().optional(),
+  })
+);
 
 export function aiGovernanceSettingsToJSON(
   aiGovernanceSettings: AIGovernanceSettings,

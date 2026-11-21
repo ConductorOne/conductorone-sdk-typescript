@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,7 +22,7 @@ export const WebhookListenerAuthCapabilityURL$inboundSchema: z.ZodType<
   WebhookListenerAuthCapabilityURL,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type WebhookListenerAuthCapabilityURL$Outbound = {};
 
@@ -31,7 +31,7 @@ export const WebhookListenerAuthCapabilityURL$outboundSchema: z.ZodType<
   WebhookListenerAuthCapabilityURL$Outbound,
   z.ZodTypeDef,
   WebhookListenerAuthCapabilityURL
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function webhookListenerAuthCapabilityURLToJSON(
   webhookListenerAuthCapabilityURL: WebhookListenerAuthCapabilityURL,

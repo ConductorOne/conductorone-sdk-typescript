@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -127,51 +127,62 @@ export const AllowedRecoveryTypes$inboundSchema: z.ZodType<
   AllowedRecoveryTypes,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AllowedRecoveryTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AllowedRecoveryTypes)
+);
 /** @internal */
 export const AllowedRecoveryTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AllowedRecoveryTypes
-> = openEnums.outboundSchema(AllowedRecoveryTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AllowedRecoveryTypes)
+);
 
 /** @internal */
 export const MinRecoveryAuthLevel$inboundSchema: z.ZodType<
   MinRecoveryAuthLevel,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(MinRecoveryAuthLevel);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(MinRecoveryAuthLevel)
+);
 /** @internal */
 export const MinRecoveryAuthLevel$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   MinRecoveryAuthLevel
-> = openEnums.outboundSchema(MinRecoveryAuthLevel);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(MinRecoveryAuthLevel)
+);
 
 /** @internal */
 export const RecoveryPolicy$inboundSchema: z.ZodType<
   RecoveryPolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowedRecoveryTypes: z.nullable(z.array(AllowedRecoveryTypes$inboundSchema))
-    .optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  isBuiltin: z.boolean().optional(),
-  minRecoveryAuthLevel: MinRecoveryAuthLevel$inboundSchema.optional(),
-  priority: z.number().int().optional(),
-  revokeOnRecovery: z.boolean().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowedRecoveryTypes: z.nullable(
+      z.array(AllowedRecoveryTypes$inboundSchema),
+    ).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    isBuiltin: z.boolean().optional(),
+    minRecoveryAuthLevel: MinRecoveryAuthLevel$inboundSchema.optional(),
+    priority: z.number().int().optional(),
+    revokeOnRecovery: z.boolean().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function recoveryPolicyFromJSON(
   jsonString: string,
@@ -197,14 +208,17 @@ export const RecoveryPolicyInput$outboundSchema: z.ZodType<
   RecoveryPolicyInput$Outbound,
   z.ZodTypeDef,
   RecoveryPolicyInput
-> = z.object({
-  allowedRecoveryTypes: z.nullable(z.array(AllowedRecoveryTypes$outboundSchema))
-    .optional(),
-  displayName: z.string().optional(),
-  minRecoveryAuthLevel: MinRecoveryAuthLevel$outboundSchema.optional(),
-  priority: z.number().int().optional(),
-  revokeOnRecovery: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowedRecoveryTypes: z.nullable(
+      z.array(AllowedRecoveryTypes$outboundSchema),
+    ).optional(),
+    displayName: z.string().optional(),
+    minRecoveryAuthLevel: MinRecoveryAuthLevel$outboundSchema.optional(),
+    priority: z.number().int().optional(),
+    revokeOnRecovery: z.boolean().optional(),
+  })
+);
 
 export function recoveryPolicyInputToJSON(
   recoveryPolicyInput: RecoveryPolicyInput,

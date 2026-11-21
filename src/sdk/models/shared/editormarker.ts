@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -59,21 +59,23 @@ export const Severity$inboundSchema: z.ZodType<
   Severity,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Severity);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Severity));
 
 /** @internal */
 export const EditorMarker$inboundSchema: z.ZodType<
   EditorMarker,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  endColumn: z.number().int().optional(),
-  endLineNumber: z.number().int().optional(),
-  message: z.string().optional(),
-  severity: Severity$inboundSchema.optional(),
-  startColumn: z.number().int().optional(),
-  startLineNumber: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    endColumn: z.number().int().optional(),
+    endLineNumber: z.number().int().optional(),
+    message: z.string().optional(),
+    severity: Severity$inboundSchema.optional(),
+    startColumn: z.number().int().optional(),
+    startLineNumber: z.number().int().optional(),
+  })
+);
 
 export function editorMarkerFromJSON(
   jsonString: string,

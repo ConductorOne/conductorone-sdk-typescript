@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { TBTopAgent, TBTopAgent$inboundSchema } from "./tbtopagent.js";
@@ -26,9 +26,11 @@ export const EdgeServiceListEgressTopAgentsResponse$inboundSchema: z.ZodType<
   EdgeServiceListEgressTopAgentsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agents: z.nullable(z.array(TBTopAgent$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agents: z.nullable(z.array(TBTopAgent$inboundSchema)).optional(),
+  })
+);
 
 export function edgeServiceListEgressTopAgentsResponseFromJSON(
   jsonString: string,

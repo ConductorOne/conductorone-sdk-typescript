@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -41,7 +42,9 @@ export const UpdateSuggestionStateRequestState$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   UpdateSuggestionStateRequestState
-> = openEnums.outboundSchema(UpdateSuggestionStateRequestState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(UpdateSuggestionStateRequestState)
+);
 
 /** @internal */
 export type UpdateSuggestionStateRequest$Outbound = {
@@ -54,10 +57,12 @@ export const UpdateSuggestionStateRequest$outboundSchema: z.ZodType<
   UpdateSuggestionStateRequest$Outbound,
   z.ZodTypeDef,
   UpdateSuggestionStateRequest
-> = z.object({
-  createdCatalogId: z.string().optional(),
-  state: UpdateSuggestionStateRequestState$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdCatalogId: z.string().optional(),
+    state: UpdateSuggestionStateRequestState$outboundSchema.optional(),
+  })
+);
 
 export function updateSuggestionStateRequestToJSON(
   updateSuggestionStateRequest: UpdateSuggestionStateRequest,

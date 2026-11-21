@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,12 +23,14 @@ export const FundsSpendSuspension$inboundSchema: z.ZodType<
   FundsSpendSuspension,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  reason: z.string().optional(),
-  suspendedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reason: z.string().optional(),
+    suspendedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type FundsSpendSuspension$Outbound = {
   reason?: string | undefined;
@@ -40,10 +42,13 @@ export const FundsSpendSuspension$outboundSchema: z.ZodType<
   FundsSpendSuspension$Outbound,
   z.ZodTypeDef,
   FundsSpendSuspension
-> = z.object({
-  reason: z.string().optional(),
-  suspendedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reason: z.string().optional(),
+    suspendedAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+  })
+);
 
 export function fundsSpendSuspensionToJSON(
   fundsSpendSuspension: FundsSpendSuspension,

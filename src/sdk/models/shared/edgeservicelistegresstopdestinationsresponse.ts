@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -46,14 +46,16 @@ export const EdgeServiceListEgressTopDestinationsResponse$inboundSchema:
     EdgeServiceListEgressTopDestinationsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    destinations: z.nullable(z.array(TBTopDestination$inboundSchema))
-      .optional(),
-    distinctDestinationCount: z.string().transform(v => parseInt(v, 10))
-      .optional(),
-    matchingDestinationCount: z.string().transform(v => parseInt(v, 10))
-      .optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      destinations: z.nullable(z.array(TBTopDestination$inboundSchema))
+        .optional(),
+      distinctDestinationCount: z.string().transform(v => parseInt(v, 10))
+        .optional(),
+      matchingDestinationCount: z.string().transform(v => parseInt(v, 10))
+        .optional(),
+    })
+  );
 
 export function edgeServiceListEgressTopDestinationsResponseFromJSON(
   jsonString: string,

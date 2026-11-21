@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,10 +30,12 @@ export const TaskAuditCreatedReplacementExtensionGrantTask$inboundSchema:
     TaskAuditCreatedReplacementExtensionGrantTask,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    newTaskId: z.string().optional(),
-    newTaskNumericId: z.string().transform(v => parseInt(v, 10)).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      newTaskId: z.string().optional(),
+      newTaskNumericId: z.string().transform(v => parseInt(v, 10)).optional(),
+    })
+  );
 
 export function taskAuditCreatedReplacementExtensionGrantTaskFromJSON(
   jsonString: string,

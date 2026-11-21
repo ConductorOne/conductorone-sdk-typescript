@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The DecoyServiceRotateRequest message.
@@ -17,7 +18,7 @@ export const DecoyServiceRotateRequest$outboundSchema: z.ZodType<
   DecoyServiceRotateRequest$Outbound,
   z.ZodTypeDef,
   DecoyServiceRotateRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function decoyServiceRotateRequestToJSON(
   decoyServiceRotateRequest: DecoyServiceRotateRequest,

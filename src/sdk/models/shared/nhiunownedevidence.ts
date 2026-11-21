@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -36,11 +36,14 @@ export const NhiUnownedEvidence$inboundSchema: z.ZodType<
   NhiUnownedEvidence,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  checkedRoleSlug: z.string().optional(),
-  ownerCount: z.number().int().optional(),
-  suggestedOwners: z.nullable(z.array(SuggestedOwner$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    checkedRoleSlug: z.string().optional(),
+    ownerCount: z.number().int().optional(),
+    suggestedOwners: z.nullable(z.array(SuggestedOwner$inboundSchema))
+      .optional(),
+  })
+);
 /** @internal */
 export type NhiUnownedEvidence$Outbound = {
   checkedRoleSlug?: string | undefined;
@@ -53,12 +56,14 @@ export const NhiUnownedEvidence$outboundSchema: z.ZodType<
   NhiUnownedEvidence$Outbound,
   z.ZodTypeDef,
   NhiUnownedEvidence
-> = z.object({
-  checkedRoleSlug: z.string().optional(),
-  ownerCount: z.number().int().optional(),
-  suggestedOwners: z.nullable(z.array(SuggestedOwner$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    checkedRoleSlug: z.string().optional(),
+    ownerCount: z.number().int().optional(),
+    suggestedOwners: z.nullable(z.array(SuggestedOwner$outboundSchema))
+      .optional(),
+  })
+);
 
 export function nhiUnownedEvidenceToJSON(
   nhiUnownedEvidence: NhiUnownedEvidence,

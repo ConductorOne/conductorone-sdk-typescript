@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   TenantAuthConfigInput,
   TenantAuthConfigInput$Outbound,
@@ -28,10 +29,12 @@ export const TenantAuthConfigServiceUpdateRequest$outboundSchema: z.ZodType<
   TenantAuthConfigServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   TenantAuthConfigServiceUpdateRequest
-> = z.object({
-  authConfig: z.nullable(TenantAuthConfigInput$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    authConfig: z.nullable(TenantAuthConfigInput$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function tenantAuthConfigServiceUpdateRequestToJSON(
   tenantAuthConfigServiceUpdateRequest: TenantAuthConfigServiceUpdateRequest,

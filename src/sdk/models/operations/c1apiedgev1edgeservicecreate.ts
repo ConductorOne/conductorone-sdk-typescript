@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -49,16 +49,18 @@ export const C1ApiEdgeV1EdgeServiceCreateRequest$outboundSchema: z.ZodType<
   C1ApiEdgeV1EdgeServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   C1ApiEdgeV1EdgeServiceCreateRequest
-> = z.object({
-  appId: z.string(),
-  edgeServiceCreateRequest: shared.EdgeServiceCreateRequest$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    appId: "app_id",
-    edgeServiceCreateRequest: "EdgeServiceCreateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string(),
+    edgeServiceCreateRequest: shared.EdgeServiceCreateRequest$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      appId: "app_id",
+      edgeServiceCreateRequest: "EdgeServiceCreateRequest",
+    });
+  })
+);
 
 export function c1ApiEdgeV1EdgeServiceCreateRequestToJSON(
   c1ApiEdgeV1EdgeServiceCreateRequest: C1ApiEdgeV1EdgeServiceCreateRequest,
@@ -75,20 +77,22 @@ export const C1ApiEdgeV1EdgeServiceCreateResponse$inboundSchema: z.ZodType<
   C1ApiEdgeV1EdgeServiceCreateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  EdgeServiceCreateResponse: shared.EdgeServiceCreateResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "EdgeServiceCreateResponse": "edgeServiceCreateResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    EdgeServiceCreateResponse: shared.EdgeServiceCreateResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "EdgeServiceCreateResponse": "edgeServiceCreateResponse",
+    });
+  })
+);
 
 export function c1ApiEdgeV1EdgeServiceCreateResponseFromJSON(
   jsonString: string,

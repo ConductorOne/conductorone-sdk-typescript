@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The PersonalClientServiceDeleteRequest message.
@@ -17,7 +18,7 @@ export const PersonalClientServiceDeleteRequest$outboundSchema: z.ZodType<
   PersonalClientServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   PersonalClientServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function personalClientServiceDeleteRequestToJSON(
   personalClientServiceDeleteRequest: PersonalClientServiceDeleteRequest,

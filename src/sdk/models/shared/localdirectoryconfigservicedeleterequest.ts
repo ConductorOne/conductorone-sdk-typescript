@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The LocalDirectoryConfigServiceDeleteRequest message.
@@ -17,7 +18,7 @@ export const LocalDirectoryConfigServiceDeleteRequest$outboundSchema: z.ZodType<
   LocalDirectoryConfigServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   LocalDirectoryConfigServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function localDirectoryConfigServiceDeleteRequestToJSON(
   localDirectoryConfigServiceDeleteRequest:

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   GoLinkPrerequisite,
   GoLinkPrerequisite$Outbound,
@@ -53,13 +54,15 @@ export const GoLinkServiceCreateRequest$outboundSchema: z.ZodType<
   GoLinkServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   GoLinkServiceCreateRequest
-> = z.object({
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  prerequisite: z.nullable(GoLinkPrerequisite$outboundSchema).optional(),
-  routes: z.nullable(z.array(GoLinkRouteConfig$outboundSchema)).optional(),
-  target: z.nullable(GoLinkTargetInput$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    prerequisite: z.nullable(GoLinkPrerequisite$outboundSchema).optional(),
+    routes: z.nullable(z.array(GoLinkRouteConfig$outboundSchema)).optional(),
+    target: z.nullable(GoLinkTargetInput$outboundSchema).optional(),
+  })
+);
 
 export function goLinkServiceCreateRequestToJSON(
   goLinkServiceCreateRequest: GoLinkServiceCreateRequest,

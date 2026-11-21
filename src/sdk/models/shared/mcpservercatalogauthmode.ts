@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -173,39 +173,45 @@ export const MCPServerCatalogAuthModeAuthMethod$inboundSchema: z.ZodType<
   MCPServerCatalogAuthModeAuthMethod,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(MCPServerCatalogAuthModeAuthMethod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(MCPServerCatalogAuthModeAuthMethod)
+);
 
 /** @internal */
 export const MCPServerCatalogAuthModeClientIdMode$inboundSchema: z.ZodType<
   MCPServerCatalogAuthModeClientIdMode,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(MCPServerCatalogAuthModeClientIdMode);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(MCPServerCatalogAuthModeClientIdMode)
+);
 
 /** @internal */
 export const MCPServerCatalogAuthMode$inboundSchema: z.ZodType<
   MCPServerCatalogAuthMode,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  authMethod: MCPServerCatalogAuthModeAuthMethod$inboundSchema.optional(),
-  authStyle: z.string().optional(),
-  authorizeUrl: z.string().optional(),
-  clientIdMode: MCPServerCatalogAuthModeClientIdMode$inboundSchema.optional(),
-  credentialUrl: z.string().optional(),
-  description: z.string().optional(),
-  extraAuthorizeParams: z.record(z.string()).optional(),
-  extraTokenParams: z.record(z.string()).optional(),
-  header: z.string().optional(),
-  issuerUrl: z.string().optional(),
-  jwtAudience: z.string().optional(),
-  oauth2Grant: z.string().optional(),
-  optionalScopes: z.nullable(z.array(z.string())).optional(),
-  passthrough: z.boolean().optional(),
-  pkce: z.string().optional(),
-  scopes: z.nullable(z.array(z.string())).optional(),
-  tokenUrl: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    authMethod: MCPServerCatalogAuthModeAuthMethod$inboundSchema.optional(),
+    authStyle: z.string().optional(),
+    authorizeUrl: z.string().optional(),
+    clientIdMode: MCPServerCatalogAuthModeClientIdMode$inboundSchema.optional(),
+    credentialUrl: z.string().optional(),
+    description: z.string().optional(),
+    extraAuthorizeParams: z.record(z.string()).optional(),
+    extraTokenParams: z.record(z.string()).optional(),
+    header: z.string().optional(),
+    issuerUrl: z.string().optional(),
+    jwtAudience: z.string().optional(),
+    oauth2Grant: z.string().optional(),
+    optionalScopes: z.nullable(z.array(z.string())).optional(),
+    passthrough: z.boolean().optional(),
+    pkce: z.string().optional(),
+    scopes: z.nullable(z.array(z.string())).optional(),
+    tokenUrl: z.string().optional(),
+  })
+);
 
 export function mcpServerCatalogAuthModeFromJSON(
   jsonString: string,

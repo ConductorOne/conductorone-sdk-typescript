@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The RemoveEntitlementMembershipRequest message.
@@ -24,9 +25,11 @@ export const RemoveEntitlementMembershipRequest$outboundSchema: z.ZodType<
   RemoveEntitlementMembershipRequest$Outbound,
   z.ZodTypeDef,
   RemoveEntitlementMembershipRequest
-> = z.object({
-  appUserId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appUserId: z.string().optional(),
+  })
+);
 
 export function removeEntitlementMembershipRequestToJSON(
   removeEntitlementMembershipRequest: RemoveEntitlementMembershipRequest,

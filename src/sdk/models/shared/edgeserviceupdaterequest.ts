@@ -3,15 +3,17 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import { Edge, Edge$Outbound, Edge$outboundSchema } from "./edge.js";
 
 /**
  * EdgeServiceUpdateRequest updates an existing Edge via update_mask. Editable
  *
  * @remarks
- *  paths: mode, enabled_kinds, egress_rules, credential_injections,
- *  inference_routes, allow_inference_bearer_tokens, egress_tls. The legacy inference mask
- *  may clear or replace one graph.
+ *  paths: mode, enabled_kinds, egress_rules, egress_unmatched_rule, egress_checks,
+ *  credential_injections, inference_routes, inference_connections, allow_inference_bearer_tokens,
+ *  egress_tls, response_inspection_profile.
+ *  The legacy inference mask may clear or replace one graph.
  */
 export type EdgeServiceUpdateRequest = {
   edge?: Edge | null | undefined;
@@ -29,10 +31,12 @@ export const EdgeServiceUpdateRequest$outboundSchema: z.ZodType<
   EdgeServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   EdgeServiceUpdateRequest
-> = z.object({
-  edge: z.nullable(Edge$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    edge: z.nullable(Edge$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function edgeServiceUpdateRequestToJSON(
   edgeServiceUpdateRequest: EdgeServiceUpdateRequest,

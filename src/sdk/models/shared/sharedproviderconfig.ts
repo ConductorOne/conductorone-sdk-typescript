@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const SharedProviderConfig$inboundSchema: z.ZodType<
   SharedProviderConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  defaultValueCel: z.string().optional(),
-  inputTransformationCel: z.string().optional(),
-  lockDefaultValues: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    defaultValueCel: z.string().optional(),
+    inputTransformationCel: z.string().optional(),
+    lockDefaultValues: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type SharedProviderConfig$Outbound = {
   defaultValueCel?: string | undefined;
@@ -47,11 +49,13 @@ export const SharedProviderConfig$outboundSchema: z.ZodType<
   SharedProviderConfig$Outbound,
   z.ZodTypeDef,
   SharedProviderConfig
-> = z.object({
-  defaultValueCel: z.string().optional(),
-  inputTransformationCel: z.string().optional(),
-  lockDefaultValues: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    defaultValueCel: z.string().optional(),
+    inputTransformationCel: z.string().optional(),
+    lockDefaultValues: z.boolean().optional(),
+  })
+);
 
 export function sharedProviderConfigToJSON(
   sharedProviderConfig: SharedProviderConfig,

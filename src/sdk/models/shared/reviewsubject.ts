@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -38,13 +38,15 @@ export const ReviewSubject$inboundSchema: z.ZodType<
   ReviewSubject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  entitlementAccess: z.nullable(EntitlementAccessReviewSubject$inboundSchema)
-    .optional(),
-  profileComponent: z.nullable(
-    AccessProfileComponentReviewSubject$inboundSchema,
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entitlementAccess: z.nullable(EntitlementAccessReviewSubject$inboundSchema)
+      .optional(),
+    profileComponent: z.nullable(
+      AccessProfileComponentReviewSubject$inboundSchema,
+    ).optional(),
+  })
+);
 /** @internal */
 export type ReviewSubject$Outbound = {
   entitlementAccess?:
@@ -62,13 +64,15 @@ export const ReviewSubject$outboundSchema: z.ZodType<
   ReviewSubject$Outbound,
   z.ZodTypeDef,
   ReviewSubject
-> = z.object({
-  entitlementAccess: z.nullable(EntitlementAccessReviewSubject$outboundSchema)
-    .optional(),
-  profileComponent: z.nullable(
-    AccessProfileComponentReviewSubject$outboundSchema,
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entitlementAccess: z.nullable(EntitlementAccessReviewSubject$outboundSchema)
+      .optional(),
+    profileComponent: z.nullable(
+      AccessProfileComponentReviewSubject$outboundSchema,
+    ).optional(),
+  })
+);
 
 export function reviewSubjectToJSON(reviewSubject: ReviewSubject): string {
   return JSON.stringify(ReviewSubject$outboundSchema.parse(reviewSubject));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -49,12 +49,14 @@ export const AccountLifecycleAction$inboundSchema: z.ZodType<
   AccountLifecycleAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accountInContext: z.nullable(AccountInContext$inboundSchema).optional(),
-  accountRef: z.nullable(AccountRef$inboundSchema).optional(),
-  actionName: z.string().optional(),
-  connectorRef: z.nullable(ConnectorRef$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountInContext: z.nullable(AccountInContext$inboundSchema).optional(),
+    accountRef: z.nullable(AccountRef$inboundSchema).optional(),
+    actionName: z.string().optional(),
+    connectorRef: z.nullable(ConnectorRef$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type AccountLifecycleAction$Outbound = {
   accountInContext?: AccountInContext$Outbound | null | undefined;
@@ -68,12 +70,14 @@ export const AccountLifecycleAction$outboundSchema: z.ZodType<
   AccountLifecycleAction$Outbound,
   z.ZodTypeDef,
   AccountLifecycleAction
-> = z.object({
-  accountInContext: z.nullable(AccountInContext$outboundSchema).optional(),
-  accountRef: z.nullable(AccountRef$outboundSchema).optional(),
-  actionName: z.string().optional(),
-  connectorRef: z.nullable(ConnectorRef$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountInContext: z.nullable(AccountInContext$outboundSchema).optional(),
+    accountRef: z.nullable(AccountRef$outboundSchema).optional(),
+    actionName: z.string().optional(),
+    connectorRef: z.nullable(ConnectorRef$outboundSchema).optional(),
+  })
+);
 
 export function accountLifecycleActionToJSON(
   accountLifecycleAction: AccountLifecycleAction,

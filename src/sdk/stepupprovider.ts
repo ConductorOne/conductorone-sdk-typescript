@@ -40,10 +40,14 @@ export class StepUpProvider extends ClientSDK {
    * List returns all step-up authentication providers configured for the tenant.
    */
   async list(
+    request?:
+      | operations.C1ApiStepupV1StepUpProviderServiceListRequest
+      | undefined,
     options?: RequestOptions,
   ): Promise<operations.C1ApiStepupV1StepUpProviderServiceListResponse> {
     return unwrapAsync(stepUpProviderList(
       this,
+      request,
       options,
     ));
   }

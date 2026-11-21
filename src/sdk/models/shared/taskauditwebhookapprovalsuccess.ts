@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,12 +34,14 @@ export const TaskAuditWebhookApprovalSuccess$inboundSchema: z.ZodType<
   TaskAuditWebhookApprovalSuccess,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  webhookId: z.string().optional(),
-  webhookInstanceId: z.string().optional(),
-  webhookName: z.string().optional(),
-  webhookUrl: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    webhookId: z.string().optional(),
+    webhookInstanceId: z.string().optional(),
+    webhookName: z.string().optional(),
+    webhookUrl: z.string().optional(),
+  })
+);
 
 export function taskAuditWebhookApprovalSuccessFromJSON(
   jsonString: string,

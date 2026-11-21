@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -50,11 +50,13 @@ export const EdgeEgressPrincipal$inboundSchema: z.ZodType<
   EdgeEgressPrincipal,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  all: z.nullable(z.boolean()).optional(),
-  entitlementId: z.nullable(z.string()).optional(),
-  userId: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    all: z.nullable(z.boolean()).optional(),
+    entitlementId: z.nullable(z.string()).optional(),
+    userId: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type EdgeEgressPrincipal$Outbound = {
   all?: boolean | null | undefined;
@@ -67,11 +69,13 @@ export const EdgeEgressPrincipal$outboundSchema: z.ZodType<
   EdgeEgressPrincipal$Outbound,
   z.ZodTypeDef,
   EdgeEgressPrincipal
-> = z.object({
-  all: z.nullable(z.boolean()).optional(),
-  entitlementId: z.nullable(z.string()).optional(),
-  userId: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    all: z.nullable(z.boolean()).optional(),
+    entitlementId: z.nullable(z.string()).optional(),
+    userId: z.nullable(z.string()).optional(),
+  })
+);
 
 export function edgeEgressPrincipalToJSON(
   edgeEgressPrincipal: EdgeEgressPrincipal,

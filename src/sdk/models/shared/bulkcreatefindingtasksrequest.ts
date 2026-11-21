@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   FindingRef,
   FindingRef$Outbound,
@@ -41,11 +42,13 @@ export const BulkCreateFindingTasksRequest$outboundSchema: z.ZodType<
   BulkCreateFindingTasksRequest$Outbound,
   z.ZodTypeDef,
   BulkCreateFindingTasksRequest
-> = z.object({
-  policyId: z.string().optional(),
-  refs: z.nullable(z.array(FindingRef$outboundSchema)).optional(),
-  searchRequest: z.nullable(FindingSearchRequest$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    policyId: z.string().optional(),
+    refs: z.nullable(z.array(FindingRef$outboundSchema)).optional(),
+    searchRequest: z.nullable(FindingSearchRequest$outboundSchema).optional(),
+  })
+);
 
 export function bulkCreateFindingTasksRequestToJSON(
   bulkCreateFindingTasksRequest: BulkCreateFindingTasksRequest,

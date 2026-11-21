@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   SignInPolicyRef,
   SignInPolicyRef$Outbound,
@@ -44,12 +45,14 @@ export const SignInPolicyServiceSearchRequest$outboundSchema: z.ZodType<
   SignInPolicyServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   SignInPolicyServiceSearchRequest
-> = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  refs: z.nullable(z.array(SignInPolicyRef$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    refs: z.nullable(z.array(SignInPolicyRef$outboundSchema)).optional(),
+  })
+);
 
 export function signInPolicyServiceSearchRequestToJSON(
   signInPolicyServiceSearchRequest: SignInPolicyServiceSearchRequest,

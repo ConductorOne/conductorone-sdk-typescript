@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -41,13 +41,15 @@ export const EdgeInferenceStage$inboundSchema: z.ZodType<
   EdgeInferenceStage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  judge: z.nullable(EdgeInferenceJudge$inboundSchema).optional(),
-  judgeTargetId: z.string().optional(),
-  stageId: z.string().optional(),
-  targetIds: z.nullable(z.array(z.string())).optional(),
-  tierPrompt: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    judge: z.nullable(EdgeInferenceJudge$inboundSchema).optional(),
+    judgeTargetId: z.string().optional(),
+    stageId: z.string().optional(),
+    targetIds: z.nullable(z.array(z.string())).optional(),
+    tierPrompt: z.string().optional(),
+  })
+);
 /** @internal */
 export type EdgeInferenceStage$Outbound = {
   judge?: EdgeInferenceJudge$Outbound | null | undefined;
@@ -62,13 +64,15 @@ export const EdgeInferenceStage$outboundSchema: z.ZodType<
   EdgeInferenceStage$Outbound,
   z.ZodTypeDef,
   EdgeInferenceStage
-> = z.object({
-  judge: z.nullable(EdgeInferenceJudge$outboundSchema).optional(),
-  judgeTargetId: z.string().optional(),
-  stageId: z.string().optional(),
-  targetIds: z.nullable(z.array(z.string())).optional(),
-  tierPrompt: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    judge: z.nullable(EdgeInferenceJudge$outboundSchema).optional(),
+    judgeTargetId: z.string().optional(),
+    stageId: z.string().optional(),
+    targetIds: z.nullable(z.array(z.string())).optional(),
+    tierPrompt: z.string().optional(),
+  })
+);
 
 export function edgeInferenceStageToJSON(
   edgeInferenceStage: EdgeInferenceStage,

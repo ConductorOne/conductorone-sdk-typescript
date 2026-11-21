@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ModelAPIKeyServiceRevokeRequest message.
@@ -17,7 +18,7 @@ export const ModelAPIKeyServiceRevokeRequest$outboundSchema: z.ZodType<
   ModelAPIKeyServiceRevokeRequest$Outbound,
   z.ZodTypeDef,
   ModelAPIKeyServiceRevokeRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function modelAPIKeyServiceRevokeRequestToJSON(
   modelAPIKeyServiceRevokeRequest: ModelAPIKeyServiceRevokeRequest,

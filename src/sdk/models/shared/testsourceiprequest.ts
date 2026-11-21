@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The TestSourceIPRequest message.
@@ -35,10 +36,12 @@ export const TestSourceIPRequest$outboundSchema: z.ZodType<
   TestSourceIPRequest$Outbound,
   z.ZodTypeDef,
   TestSourceIPRequest
-> = z.object({
-  allowCidr: z.nullable(z.array(z.string())).optional(),
-  sourceIp: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowCidr: z.nullable(z.array(z.string())).optional(),
+    sourceIp: z.string().optional(),
+  })
+);
 
 export function testSourceIPRequestToJSON(
   testSourceIPRequest: TestSourceIPRequest,

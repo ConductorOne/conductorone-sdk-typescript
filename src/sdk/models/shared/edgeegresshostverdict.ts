@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -35,6 +35,8 @@ export const Outcome = {
     "EDGE_EGRESS_EVALUATION_OUTCOME_DELEGATED_TO_AUTHZEN",
   EdgeEgressEvaluationOutcomeRequestGated:
     "EDGE_EGRESS_EVALUATION_OUTCOME_REQUEST_GATED",
+  EdgeEgressEvaluationOutcomeDefaultAllow:
+    "EDGE_EGRESS_EVALUATION_OUTCOME_DEFAULT_ALLOW",
 } as const;
 /**
  * The outcome field.
@@ -90,28 +92,35 @@ export type EdgeEgressHostVerdict = {
    * Every rule whose pattern matches the host, in rule order.
    */
   ruleMatches?: Array<EdgeEgressRuleMatch> | null | undefined;
+  /**
+   * True when no ordered rule decides and the unmatched default applies.
+   */
+  unmatchedRuleApplied?: boolean | undefined;
 };
 
 /** @internal */
 export const Outcome$inboundSchema: z.ZodType<Outcome, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Outcome);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Outcome));
 
 /** @internal */
 export const EdgeEgressHostVerdict$inboundSchema: z.ZodType<
   EdgeEgressHostVerdict,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowed: z.boolean().optional(),
-  canonicalHost: z.string().optional(),
-  delegatedAuthzenServerId: z.string().optional(),
-  host: z.string().optional(),
-  hostError: z.string().optional(),
-  matchedRuleIndex: z.number().int().optional(),
-  outcome: Outcome$inboundSchema.optional(),
-  ruleMatches: z.nullable(z.array(EdgeEgressRuleMatch$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowed: z.boolean().optional(),
+    canonicalHost: z.string().optional(),
+    delegatedAuthzenServerId: z.string().optional(),
+    host: z.string().optional(),
+    hostError: z.string().optional(),
+    matchedRuleIndex: z.number().int().optional(),
+    outcome: Outcome$inboundSchema.optional(),
+    ruleMatches: z.nullable(z.array(EdgeEgressRuleMatch$inboundSchema))
+      .optional(),
+    unmatchedRuleApplied: z.boolean().optional(),
+  })
+);
 
 export function edgeEgressHostVerdictFromJSON(
   jsonString: string,

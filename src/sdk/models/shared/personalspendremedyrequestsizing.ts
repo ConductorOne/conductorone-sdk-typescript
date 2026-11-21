@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { FundsMoney, FundsMoney$inboundSchema } from "./fundsmoney.js";
@@ -38,13 +38,15 @@ export const PersonalSpendRemedyRequestSizing$inboundSchema: z.ZodType<
   PersonalSpendRemedyRequestSizing,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  estimatedAdditional: z.nullable(FundsMoney$inboundSchema).optional(),
-  minimumTotal: z.nullable(FundsMoney$inboundSchema).optional(),
-  otherControlRequired: z.boolean().optional(),
-  recommendationCapped: z.boolean().optional(),
-  recommendedTotal: z.nullable(FundsMoney$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    estimatedAdditional: z.nullable(FundsMoney$inboundSchema).optional(),
+    minimumTotal: z.nullable(FundsMoney$inboundSchema).optional(),
+    otherControlRequired: z.boolean().optional(),
+    recommendationCapped: z.boolean().optional(),
+    recommendedTotal: z.nullable(FundsMoney$inboundSchema).optional(),
+  })
+);
 
 export function personalSpendRemedyRequestSizingFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { SessionPolicy, SessionPolicy$inboundSchema } from "./sessionpolicy.js";
@@ -20,9 +20,11 @@ export const SessionPolicyServiceCreateResponse$inboundSchema: z.ZodType<
   SessionPolicyServiceCreateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  sessionPolicy: z.nullable(SessionPolicy$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionPolicy: z.nullable(SessionPolicy$inboundSchema).optional(),
+  })
+);
 
 export function sessionPolicyServiceCreateResponseFromJSON(
   jsonString: string,

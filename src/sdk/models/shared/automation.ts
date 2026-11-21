@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -249,60 +249,71 @@ export const CircuitBreakerPeriod$inboundSchema: z.ZodType<
   CircuitBreakerPeriod,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(CircuitBreakerPeriod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(CircuitBreakerPeriod)
+);
 /** @internal */
 export const CircuitBreakerPeriod$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   CircuitBreakerPeriod
-> = openEnums.outboundSchema(CircuitBreakerPeriod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(CircuitBreakerPeriod)
+);
 
 /** @internal */
 export const PrimaryTriggerType$inboundSchema: z.ZodType<
   PrimaryTriggerType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(PrimaryTriggerType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(PrimaryTriggerType)
+);
 /** @internal */
 export const PrimaryTriggerType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   PrimaryTriggerType
-> = openEnums.outboundSchema(PrimaryTriggerType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(PrimaryTriggerType)
+);
 
 /** @internal */
 export const Automation$inboundSchema: z.ZodType<
   Automation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  annotations: z.record(z.string()).optional(),
-  appId: z.string().optional(),
-  automationSteps: z.nullable(z.array(AutomationStep$inboundSchema)).optional(),
-  circuitBreaker: z.nullable(DisabledReasonCircuitBreaker$inboundSchema)
-    .optional(),
-  circuitBreakerMax: z.number().int().optional(),
-  circuitBreakerPeriod: CircuitBreakerPeriod$inboundSchema.optional(),
-  context: z.nullable(AutomationContext$inboundSchema).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  currentVersion: z.string().transform(v => parseInt(v, 10)).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  draftAutomationSteps: z.nullable(z.array(AutomationStep$inboundSchema))
-    .optional(),
-  draftTriggers: z.nullable(z.array(AutomationTrigger$inboundSchema))
-    .optional(),
-  enabled: z.boolean().optional(),
-  id: z.string().optional(),
-  isDraft: z.boolean().optional(),
-  lastExecutedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  primaryTriggerType: PrimaryTriggerType$inboundSchema.optional(),
-  triggers: z.nullable(z.array(AutomationTrigger$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotations: z.record(z.string()).optional(),
+    appId: z.string().optional(),
+    automationSteps: z.nullable(z.array(AutomationStep$inboundSchema))
+      .optional(),
+    circuitBreaker: z.nullable(DisabledReasonCircuitBreaker$inboundSchema)
+      .optional(),
+    circuitBreakerMax: z.number().int().optional(),
+    circuitBreakerPeriod: CircuitBreakerPeriod$inboundSchema.optional(),
+    context: z.nullable(AutomationContext$inboundSchema).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    currentVersion: z.string().transform(v => parseInt(v, 10)).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    draftAutomationSteps: z.nullable(z.array(AutomationStep$inboundSchema))
+      .optional(),
+    draftTriggers: z.nullable(z.array(AutomationTrigger$inboundSchema))
+      .optional(),
+    enabled: z.boolean().optional(),
+    id: z.string().optional(),
+    isDraft: z.boolean().optional(),
+    lastExecutedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    primaryTriggerType: PrimaryTriggerType$inboundSchema.optional(),
+    triggers: z.nullable(z.array(AutomationTrigger$inboundSchema)).optional(),
+  })
+);
 
 export function automationFromJSON(
   jsonString: string,
@@ -341,31 +352,33 @@ export const AutomationInput$outboundSchema: z.ZodType<
   AutomationInput$Outbound,
   z.ZodTypeDef,
   AutomationInput
-> = z.object({
-  annotations: z.record(z.string()).optional(),
-  appId: z.string().optional(),
-  automationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
-    .optional(),
-  circuitBreaker: z.nullable(DisabledReasonCircuitBreaker$outboundSchema)
-    .optional(),
-  circuitBreakerMax: z.number().int().optional(),
-  circuitBreakerPeriod: CircuitBreakerPeriod$outboundSchema.optional(),
-  context: z.nullable(AutomationContext$outboundSchema).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  currentVersion: z.number().int().transform(v => `${v}`).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  draftAutomationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
-    .optional(),
-  draftTriggers: z.nullable(z.array(AutomationTrigger$outboundSchema))
-    .optional(),
-  enabled: z.boolean().optional(),
-  isDraft: z.boolean().optional(),
-  lastExecutedAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  primaryTriggerType: PrimaryTriggerType$outboundSchema.optional(),
-  triggers: z.nullable(z.array(AutomationTrigger$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotations: z.record(z.string()).optional(),
+    appId: z.string().optional(),
+    automationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
+      .optional(),
+    circuitBreaker: z.nullable(DisabledReasonCircuitBreaker$outboundSchema)
+      .optional(),
+    circuitBreakerMax: z.number().int().optional(),
+    circuitBreakerPeriod: CircuitBreakerPeriod$outboundSchema.optional(),
+    context: z.nullable(AutomationContext$outboundSchema).optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    currentVersion: z.number().int().transform(v => `${v}`).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    draftAutomationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
+      .optional(),
+    draftTriggers: z.nullable(z.array(AutomationTrigger$outboundSchema))
+      .optional(),
+    enabled: z.boolean().optional(),
+    isDraft: z.boolean().optional(),
+    lastExecutedAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    primaryTriggerType: PrimaryTriggerType$outboundSchema.optional(),
+    triggers: z.nullable(z.array(AutomationTrigger$outboundSchema)).optional(),
+  })
+);
 
 export function automationInputToJSON(
   automationInput: AutomationInput,

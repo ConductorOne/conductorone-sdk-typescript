@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const ServerEvent$inboundSchema: z.ZodType<
   ServerEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  context: z.record(z.string()).optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    context: z.record(z.string()).optional(),
+    name: z.string().optional(),
+  })
+);
 
 export function serverEventFromJSON(
   jsonString: string,

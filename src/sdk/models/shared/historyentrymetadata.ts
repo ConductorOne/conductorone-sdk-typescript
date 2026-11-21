@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -76,24 +76,27 @@ export const ChangeKind$inboundSchema: z.ZodType<
   ChangeKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ChangeKind);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(ChangeKind));
 
 /** @internal */
 export const HistoryEntryMetadata$inboundSchema: z.ZodType<
   HistoryEntryMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  actor: z.nullable(HistoryActor$inboundSchema).optional(),
-  annotations: z.nullable(z.array(HistoryAnnotation$inboundSchema)).optional(),
-  changeKind: ChangeKind$inboundSchema.optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  id: z.string().optional(),
-  syslogEventId: z.string().optional(),
-  traceId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    actor: z.nullable(HistoryActor$inboundSchema).optional(),
+    annotations: z.nullable(z.array(HistoryAnnotation$inboundSchema))
+      .optional(),
+    changeKind: ChangeKind$inboundSchema.optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    id: z.string().optional(),
+    syslogEventId: z.string().optional(),
+    traceId: z.string().optional(),
+  })
+);
 
 export function historyEntryMetadataFromJSON(
   jsonString: string,

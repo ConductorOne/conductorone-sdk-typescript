@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -48,16 +48,18 @@ export const C1ApiAppV1AppEntitlementsCreateRequest$outboundSchema: z.ZodType<
   C1ApiAppV1AppEntitlementsCreateRequest$Outbound,
   z.ZodTypeDef,
   C1ApiAppV1AppEntitlementsCreateRequest
-> = z.object({
-  appId: z.string(),
-  createAppEntitlementRequest: shared.CreateAppEntitlementRequest$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    appId: "app_id",
-    createAppEntitlementRequest: "CreateAppEntitlementRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string(),
+    createAppEntitlementRequest: shared
+      .CreateAppEntitlementRequest$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      appId: "app_id",
+      createAppEntitlementRequest: "CreateAppEntitlementRequest",
+    });
+  })
+);
 
 export function c1ApiAppV1AppEntitlementsCreateRequestToJSON(
   c1ApiAppV1AppEntitlementsCreateRequest:
@@ -75,20 +77,22 @@ export const C1ApiAppV1AppEntitlementsCreateResponse$inboundSchema: z.ZodType<
   C1ApiAppV1AppEntitlementsCreateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  CreateAppEntitlementResponse: shared
-    .CreateAppEntitlementResponse$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "CreateAppEntitlementResponse": "createAppEntitlementResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    CreateAppEntitlementResponse: shared
+      .CreateAppEntitlementResponse$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "CreateAppEntitlementResponse": "createAppEntitlementResponse",
+    });
+  })
+);
 
 export function c1ApiAppV1AppEntitlementsCreateResponseFromJSON(
   jsonString: string,

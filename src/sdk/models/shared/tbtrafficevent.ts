@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -451,105 +451,113 @@ export const AuthRejectionReason$inboundSchema: z.ZodType<
   AuthRejectionReason,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AuthRejectionReason);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AuthRejectionReason)
+);
 
 /** @internal */
 export const AuthRejectionSourceClass$inboundSchema: z.ZodType<
   AuthRejectionSourceClass,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AuthRejectionSourceClass);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AuthRejectionSourceClass)
+);
 
 /** @internal */
 export const Capability$inboundSchema: z.ZodType<
   Capability,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Capability);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Capability));
 
 /** @internal */
 export const CostLookup$inboundSchema: z.ZodType<
   CostLookup,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(CostLookup);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(CostLookup));
 
 /** @internal */
 export const JudgeOutcome$inboundSchema: z.ZodType<
   JudgeOutcome,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(JudgeOutcome);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(JudgeOutcome));
 
 /** @internal */
 export const TBTrafficEventOutcome$inboundSchema: z.ZodType<
   TBTrafficEventOutcome,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TBTrafficEventOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(TBTrafficEventOutcome)
+);
 
 /** @internal */
 export const TBTrafficEvent$inboundSchema: z.ZodType<
   TBTrafficEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  applicationOperation: z.string().optional(),
-  attemptOrdinal: z.string().optional(),
-  authRejectionReason: AuthRejectionReason$inboundSchema.optional(),
-  authRejectionSourceClass: AuthRejectionSourceClass$inboundSchema.optional(),
-  authRejectionSuppressedCount: z.string().optional(),
-  cacheReadTokens: z.string().optional(),
-  cacheWriteTokens: z.string().optional(),
-  callRole: z.string().optional(),
-  capability: Capability$inboundSchema.optional(),
-  configGeneration: z.string().optional(),
-  contactPhase: z.string().optional(),
-  costLookup: CostLookup$inboundSchema.optional(),
-  costNanoUsd: z.string().transform(v => parseInt(v, 10)).optional(),
-  counterLatencyMs: z.string().optional(),
-  counterRequestBytes: z.string().optional(),
-  counterResponseBytes: z.string().optional(),
-  destHost: z.string().optional(),
-  destPort: z.number().int().optional(),
-  egressEnforcementMode: z.string().optional(),
-  egressPolicyVerdict: z.string().optional(),
-  eventId: z.string().optional(),
-  eventTime: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  federatedSession: z.nullable(TBFederatedSession$inboundSchema).optional(),
-  flowId: z.string().optional(),
-  ingressEnforcementMode: z.string().optional(),
-  ingressScope: z.string().optional(),
-  inputTokens: z.string().optional(),
-  judgeOutcome: JudgeOutcome$inboundSchema.optional(),
-  judgeReason: z.string().optional(),
-  logicalModel: z.string().optional(),
-  modelName: z.string().optional(),
-  modelRoute: z.string().optional(),
-  modelTarget: z.string().optional(),
-  observationStatus: z.string().optional(),
-  outcome: TBTrafficEventOutcome$inboundSchema.optional(),
-  outputTokens: z.string().optional(),
-  parsedVerdictReasons: z.nullable(z.array(TBVerdictReason$inboundSchema))
-    .optional(),
-  policyVersion: z.string().optional(),
-  principalUserId: z.string().optional(),
-  providerStatus: z.number().int().optional(),
-  reasonCode: z.string().optional(),
-  requestAuthority: z.string().optional(),
-  requestedMaxOutputTokens: z.string().optional(),
-  responseStopReason: z.string().optional(),
-  routingFailureClass: z.string().optional(),
-  routingRunId: z.string().optional(),
-  sourceConfidence: z.string().optional(),
-  sourcePrincipal: z.string().optional(),
-  sourcePrincipalKind: z.string().optional(),
-  verdictFromFallback: z.boolean().optional(),
-  verdictReasons: z.nullable(z.array(z.string())).optional(),
-  verdictResolvedRaw: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    applicationOperation: z.string().optional(),
+    attemptOrdinal: z.string().optional(),
+    authRejectionReason: AuthRejectionReason$inboundSchema.optional(),
+    authRejectionSourceClass: AuthRejectionSourceClass$inboundSchema.optional(),
+    authRejectionSuppressedCount: z.string().optional(),
+    cacheReadTokens: z.string().optional(),
+    cacheWriteTokens: z.string().optional(),
+    callRole: z.string().optional(),
+    capability: Capability$inboundSchema.optional(),
+    configGeneration: z.string().optional(),
+    contactPhase: z.string().optional(),
+    costLookup: CostLookup$inboundSchema.optional(),
+    costNanoUsd: z.string().transform(v => parseInt(v, 10)).optional(),
+    counterLatencyMs: z.string().optional(),
+    counterRequestBytes: z.string().optional(),
+    counterResponseBytes: z.string().optional(),
+    destHost: z.string().optional(),
+    destPort: z.number().int().optional(),
+    egressEnforcementMode: z.string().optional(),
+    egressPolicyVerdict: z.string().optional(),
+    eventId: z.string().optional(),
+    eventTime: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    federatedSession: z.nullable(TBFederatedSession$inboundSchema).optional(),
+    flowId: z.string().optional(),
+    ingressEnforcementMode: z.string().optional(),
+    ingressScope: z.string().optional(),
+    inputTokens: z.string().optional(),
+    judgeOutcome: JudgeOutcome$inboundSchema.optional(),
+    judgeReason: z.string().optional(),
+    logicalModel: z.string().optional(),
+    modelName: z.string().optional(),
+    modelRoute: z.string().optional(),
+    modelTarget: z.string().optional(),
+    observationStatus: z.string().optional(),
+    outcome: TBTrafficEventOutcome$inboundSchema.optional(),
+    outputTokens: z.string().optional(),
+    parsedVerdictReasons: z.nullable(z.array(TBVerdictReason$inboundSchema))
+      .optional(),
+    policyVersion: z.string().optional(),
+    principalUserId: z.string().optional(),
+    providerStatus: z.number().int().optional(),
+    reasonCode: z.string().optional(),
+    requestAuthority: z.string().optional(),
+    requestedMaxOutputTokens: z.string().optional(),
+    responseStopReason: z.string().optional(),
+    routingFailureClass: z.string().optional(),
+    routingRunId: z.string().optional(),
+    sourceConfidence: z.string().optional(),
+    sourcePrincipal: z.string().optional(),
+    sourcePrincipalKind: z.string().optional(),
+    verdictFromFallback: z.boolean().optional(),
+    verdictReasons: z.nullable(z.array(z.string())).optional(),
+    verdictResolvedRaw: z.string().optional(),
+  })
+);
 
 export function tbTrafficEventFromJSON(
   jsonString: string,

@@ -74,6 +74,26 @@ yarn add conductorone-sdk-typescript
 ## Requirements
 
 For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
+
+### Lazy operation loading in Node.js
+
+The `/node` entry point and its lazy SDK classes are generated for every SDK. No `gen.yaml` flag is needed; Node.js applications opt in to loading operation functions on first use by changing their import:
+
+```typescript
+import { ConductoroneSDKTypescript } from "conductorone-sdk-typescript/node";
+
+const sdk = new ConductoroneSDKTypescript();
+```
+
+The `/node` entry point keeps the same method signatures, pagination behaviour, and response helpers. Operation modules load through dynamic imports when a method is called. Models and error classes are shared with the standard entry points, rather than bundled into separate copies.
+
+The standard package entry point and SDK subpaths retain their static imports. Keep using those entry points in browser bundles, including IIFE and UMD builds, to avoid dynamic-import chunks. Custom root exports may still load additional modules.
+
+The Node SDK classes live in `src/sdk/*.lazy.ts`. Custom code regions in the standard SDK classes are not copied to these classes; apply any required customisations to their separate regions. Accept-header enums have the same values, but their enum objects are specific to each entry point.
+
+Generated model schemas are constructed synchronously and cached on first use with either entry point. Importing a model does not construct its schema; parsing or inspecting a schema does. This does not require changing the configured Zod version.
+
+`Object.freeze`, `Object.seal`, and `Object.preventExtensions` construct the schema and apply to the cached Zod object. Zod's own restrictions on frozen schemas still apply, including methods that install properties on first access.
 <!-- End Requirements [requirements] -->
 
 <!-- Start SDK Example Usage [usage] -->
@@ -226,6 +246,10 @@ run();
 
 * [search](docs/sdks/apikeysearch/README.md#search) - NOTE: Searches personal and service principal API keys
 
+### [APIKeyUsage](docs/sdks/apikeyusage/README.md)
+
+* [batchGet](docs/sdks/apikeyusage/README.md#batchget) - Batch Get
+
 ### [AppAccessRequestsDefaults](docs/sdks/appaccessrequestsdefaults/README.md)
 
 * [getAppAccessRequestsDefaults](docs/sdks/appaccessrequestsdefaults/README.md#getappaccessrequestsdefaults) - Get App Access Requests Defaults
@@ -359,6 +383,7 @@ run();
 
 ### [AppResource](docs/sdks/appresource/README.md)
 
+* [searchAppEntitlementResourceBindings](docs/sdks/appresource/README.md#searchappentitlementresourcebindings) - Search App Entitlement Resource Bindings
 * [list](docs/sdks/appresource/README.md#list) - List
 * [createManuallyManagedAppResource](docs/sdks/appresource/README.md#createmanuallymanagedappresource) - Create Manually Managed App Resource
 * [deleteManuallyManagedAppResource](docs/sdks/appresource/README.md#deletemanuallymanagedappresource) - Delete Manually Managed App Resource
@@ -430,9 +455,17 @@ run();
 * [listOwnedServiceAccounts](docs/sdks/appuser/README.md#listownedserviceaccounts) - List Owned Service Accounts
 * [list](docs/sdks/appuser/README.md#list) - List
 * [listAppUserCredentials](docs/sdks/appuser/README.md#listappusercredentials) - List App User Credentials
+* [merge](docs/sdks/appuser/README.md#merge) - Merge
 * [listAppUsersForUser](docs/sdks/appuser/README.md#listappusersforuser) - List App Users For User
 * [update](docs/sdks/appuser/README.md#update) - Update
 * [search](docs/sdks/appuser/README.md#search) - Search
+
+### [AppUserMergeRules](docs/sdks/appusermergerules/README.md)
+
+* [get](docs/sdks/appusermergerules/README.md#get) - Get
+* [update](docs/sdks/appusermergerules/README.md#update) - Update
+* [resetToDefaults](docs/sdks/appusermergerules/README.md#resettodefaults) - Reset To Defaults
+* [listSources](docs/sdks/appusermergerules/README.md#listsources) - List Sources
 
 ### [AppUserOwnersV2](docs/sdks/appuserownersv2/README.md)
 
@@ -500,6 +533,7 @@ run();
 * [clearAutomationCircuitBreaker](docs/sdks/automation/README.md#clearautomationcircuitbreaker) - Clear Automation Circuit Breaker
 * [resolvePausedAutomationExecutions](docs/sdks/automation/README.md#resolvepausedautomationexecutions) - Resolve Paused Automation Executions
 * [executeAutomation](docs/sdks/automation/README.md#executeautomation) - Execute Automation
+* [cancelPendingAutomationExecutions](docs/sdks/automation/README.md#cancelpendingautomationexecutions) - Cancel Pending Automation Executions
 
 ### [AutomationExecution](docs/sdks/automationexecution/README.md)
 
@@ -509,6 +543,7 @@ run();
 ### [AutomationExecutionActions](docs/sdks/automationexecutionactions/README.md)
 
 * [terminateAutomation](docs/sdks/automationexecutionactions/README.md#terminateautomation) - Terminate Automation
+* [retryAutomationExecutions](docs/sdks/automationexecutionactions/README.md#retryautomationexecutions) - Retry Automation Executions
 
 ### [AutomationExecutionSearch](docs/sdks/automationexecutionsearch/README.md)
 
@@ -562,6 +597,10 @@ run();
 * [rotateCredential](docs/sdks/connector/README.md#rotatecredential) - Rotate Credential
 * [validateHTTPConnectorConfig](docs/sdks/connector/README.md#validatehttpconnectorconfig) - Validate Http Connector Config
 
+### [ConnectorAuthoring](docs/sdks/connectorauthoring/README.md)
+
+* [deleteCatalogEntry](docs/sdks/connectorauthoring/README.md#deletecatalogentry) - Delete Catalog Entry
+
 ### [ConnectorAuthoringActivation](docs/sdks/connectorauthoringactivation/README.md)
 
 * [activateRevision](docs/sdks/connectorauthoringactivation/README.md#activaterevision) - Activate Revision
@@ -582,6 +621,15 @@ run();
 * [deleteUserOwner](docs/sdks/connectorownersv2/README.md#deleteuserowner) - Delete User Owner
 * [getUserOwner](docs/sdks/connectorownersv2/README.md#getuserowner) - Get User Owner
 * [createUserOwner](docs/sdks/connectorownersv2/README.md#createuserowner) - Create User Owner
+
+### [ConnectorSyncDiagnostics](docs/sdks/connectorsyncdiagnostics/README.md)
+
+* [getSyncChangeTimeline](docs/sdks/connectorsyncdiagnostics/README.md#getsyncchangetimeline) - Get Sync Change Timeline
+* [compareSyncStats](docs/sdks/connectorsyncdiagnostics/README.md#comparesyncstats) - Compare Sync Stats
+* [getSyncErrorDigest](docs/sdks/connectorsyncdiagnostics/README.md#getsyncerrordigest) - Get Sync Error Digest
+* [getSyncHistory](docs/sdks/connectorsyncdiagnostics/README.md#getsynchistory) - Get Sync History
+* [getSyncStatus](docs/sdks/connectorsyncdiagnostics/README.md#getsyncstatus) - Get Sync Status
+* [listDebuggableConnectors](docs/sdks/connectorsyncdiagnostics/README.md#listdebuggableconnectors) - List Debuggable Connectors
 
 ### [Contacts](docs/sdks/contacts/README.md)
 
@@ -618,6 +666,11 @@ run();
 * [get](docs/sdks/directory/README.md#get) - Get
 * [update](docs/sdks/directory/README.md#update) - Update
 
+### [DirectoryMergeRule](docs/sdks/directorymergerule/README.md)
+
+* [listDirectoryMergeRules](docs/sdks/directorymergerule/README.md#listdirectorymergerules) - List Directory Merge Rules
+* [setDirectoryMergeRules](docs/sdks/directorymergerule/README.md#setdirectorymergerules) - Set Directory Merge Rules
+
 ### [Edge](docs/sdks/edge/README.md)
 
 * [list](docs/sdks/edge/README.md#list) - List
@@ -641,6 +694,7 @@ run();
 * [getInferenceUsageAttribution](docs/sdks/edge/README.md#getinferenceusageattribution) - Get Inference Usage Attribution
 * [checkInferenceVaultAccess](docs/sdks/edge/README.md#checkinferencevaultaccess) - Check Inference Vault Access
 * [getPublicTrust](docs/sdks/edge/README.md#getpublictrust) - Get Public Trust
+* [checkVaultAccess](docs/sdks/edge/README.md#checkvaultaccess) - Check Vault Access
 * [listInferenceRoutes](docs/sdks/edge/README.md#listinferenceroutes) - List Inference Routes
 * [listAuditAttestationKeys](docs/sdks/edge/README.md#listauditattestationkeys) - List Audit Attestation Keys
 * [listAuditAttestationManifests](docs/sdks/edge/README.md#listauditattestationmanifests) - List Audit Attestation Manifests
@@ -654,6 +708,15 @@ run();
 * [listEdgesRollup](docs/sdks/edge/README.md#listedgesrollup) - List Edges Rollup
 * [listUnattributedInferenceTrafficEvents](docs/sdks/edge/README.md#listunattributedinferencetrafficevents) - List Unattributed Inference Traffic Events
 * [listUsableEdges](docs/sdks/edge/README.md#listusableedges) - List Usable Edges
+
+### [EdgeIntegration](docs/sdks/edgeintegration/README.md)
+
+* [delete](docs/sdks/edgeintegration/README.md#delete) - Delete
+* [get](docs/sdks/edgeintegration/README.md#get) - Get
+* [update](docs/sdks/edgeintegration/README.md#update) - Update
+* [listUsages](docs/sdks/edgeintegration/README.md#listusages) - List Usages
+* [list](docs/sdks/edgeintegration/README.md#list) - List
+* [create](docs/sdks/edgeintegration/README.md#create) - Create
 
 ### [EmailCapabilities](docs/sdks/emailcapabilities/README.md)
 
@@ -865,6 +928,14 @@ run();
 * [listProfilesByToolHistory](docs/sdks/mcpaccessprofiletoolbinding/README.md#listprofilesbytoolhistory) - List Profiles By Tool History
 * [getAccessProfilesForTools](docs/sdks/mcpaccessprofiletoolbinding/README.md#getaccessprofilesfortools) - Get Access Profiles For Tools
 
+### [MCPPrompt](docs/sdks/mcpprompt/README.md)
+
+* [list](docs/sdks/mcpprompt/README.md#list) - List
+* [get](docs/sdks/mcpprompt/README.md#get) - Get
+* [update](docs/sdks/mcpprompt/README.md#update) - Update
+* [listHistory](docs/sdks/mcpprompt/README.md#listhistory) - List History
+* [search](docs/sdks/mcpprompt/README.md#search) - Search
+
 ### [MCPResource](docs/sdks/mcpresource/README.md)
 
 * [list](docs/sdks/mcpresource/README.md#list) - List
@@ -916,6 +987,29 @@ run();
 * [pause](docs/sdks/myfundlimits/README.md#pause) - Pause
 * [clearTemporaryLimit](docs/sdks/myfundlimits/README.md#cleartemporarylimit) - Clear Temporary Limit
 * [setTemporaryLimit](docs/sdks/myfundlimits/README.md#settemporarylimit) - Set Temporary Limit
+
+### [MyRateLimit](docs/sdks/myratelimit/README.md)
+
+* [get](docs/sdks/myratelimit/README.md#get) - Get
+
+### [OAuthAuthorization](docs/sdks/oauthauthorization/README.md)
+
+* [list](docs/sdks/oauthauthorization/README.md#list) - List
+* [create](docs/sdks/oauthauthorization/README.md#create) - Create
+* [delete](docs/sdks/oauthauthorization/README.md#delete) - Delete
+* [get](docs/sdks/oauthauthorization/README.md#get) - Get
+* [listConsents](docs/sdks/oauthauthorization/README.md#listconsents) - List Consents
+* [revokeConsent](docs/sdks/oauthauthorization/README.md#revokeconsent) - Revoke Consent
+* [rotateSecret](docs/sdks/oauthauthorization/README.md#rotatesecret) - Rotate Secret
+* [updateClient](docs/sdks/oauthauthorization/README.md#updateclient) - Update Client
+* [update](docs/sdks/oauthauthorization/README.md#update) - Update
+* [searchConsents](docs/sdks/oauthauthorization/README.md#searchconsents) - Search Consents
+
+### [OAuthAuthorizationMy](docs/sdks/oauthauthorizationmy/README.md)
+
+* [listConnections](docs/sdks/oauthauthorizationmy/README.md#listconnections) - List Connections
+* [disconnect](docs/sdks/oauthauthorizationmy/README.md#disconnect) - Disconnect
+* [listAvailable](docs/sdks/oauthauthorizationmy/README.md#listavailable) - List Available
 
 ### [OnboardingSettings](docs/sdks/onboardingsettings/README.md)
 
@@ -1010,6 +1104,11 @@ run();
 * [clear](docs/sdks/providercredential/README.md#clear) - Clear
 * [get](docs/sdks/providercredential/README.md#get) - Get
 * [set](docs/sdks/providercredential/README.md#set) - Set
+
+### [RateLimit](docs/sdks/ratelimit/README.md)
+
+* [get](docs/sdks/ratelimit/README.md#get) - Get
+* [getUsageReport](docs/sdks/ratelimit/README.md#getusagereport) - Get Usage Report
 
 ### [RecoveryPolicy](docs/sdks/recoverypolicy/README.md)
 
@@ -1529,6 +1628,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`aiGovernanceSettingsListHistory`](docs/sdks/aigovernancesettings/README.md#listhistory) - List History
 - [`aiGovernanceSettingsUpdate`](docs/sdks/aigovernancesettings/README.md#update) - Update
 - [`apiKeySearchSearch`](docs/sdks/apikeysearch/README.md#search) - NOTE: Searches personal and service principal API keys
+- [`apiKeyUsageBatchGet`](docs/sdks/apikeyusage/README.md#batchget) - Batch Get
 - [`appAccessRequestsDefaultsCancelAppAccessRequestsDefaults`](docs/sdks/appaccessrequestsdefaults/README.md#cancelappaccessrequestsdefaults) - Cancel App Access Requests Defaults
 - [`appAccessRequestsDefaultsCreateAppAccessRequestsDefaults`](docs/sdks/appaccessrequestsdefaults/README.md#createappaccessrequestsdefaults) - Create App Access Requests Defaults
 - [`appAccessRequestsDefaultsGetAppAccessRequestsDefaults`](docs/sdks/appaccessrequestsdefaults/README.md#getappaccessrequestsdefaults) - Get App Access Requests Defaults
@@ -1633,6 +1733,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`appResourceOwnersV2SearchEntitlementOwners`](docs/sdks/appresourceownersv2/README.md#searchentitlementowners) - Search Entitlement Owners
 - [`appResourceOwnersV2SearchUserOwners`](docs/sdks/appresourceownersv2/README.md#searchuserowners) - Search User Owners
 - [`appResourceOwnersV2Set`](docs/sdks/appresourceownersv2/README.md#set) - Set
+- [`appResourceSearchAppEntitlementResourceBindings`](docs/sdks/appresource/README.md#searchappentitlementresourcebindings) - Search App Entitlement Resource Bindings
 - [`appResourceSearchSearchAppResources`](docs/sdks/appresourcesearch/README.md#searchappresources) - Search App Resources
 - [`appResourceSearchSearchAppResourceTypes`](docs/sdks/appresourcesearch/README.md#searchappresourcetypes) - Search App Resource Types
 - [`appResourceTypeCreateManuallyManagedResourceType`](docs/sdks/appresourcetype/README.md#createmanuallymanagedresourcetype) - Create Manually Managed Resource Type
@@ -1656,6 +1757,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`appUserListAppUserCredentials`](docs/sdks/appuser/README.md#listappusercredentials) - List App User Credentials
 - [`appUserListAppUsersForUser`](docs/sdks/appuser/README.md#listappusersforuser) - List App Users For User
 - [`appUserListOwnedServiceAccounts`](docs/sdks/appuser/README.md#listownedserviceaccounts) - List Owned Service Accounts
+- [`appUserMerge`](docs/sdks/appuser/README.md#merge) - Merge
+- [`appUserMergeRulesGet`](docs/sdks/appusermergerules/README.md#get) - Get
+- [`appUserMergeRulesListSources`](docs/sdks/appusermergerules/README.md#listsources) - List Sources
+- [`appUserMergeRulesResetToDefaults`](docs/sdks/appusermergerules/README.md#resettodefaults) - Reset To Defaults
+- [`appUserMergeRulesUpdate`](docs/sdks/appusermergerules/README.md#update) - Update
 - [`appUserOwnersV2CreateEntitlementOwner`](docs/sdks/appuserownersv2/README.md#createentitlementowner) - Create Entitlement Owner
 - [`appUserOwnersV2CreateUserOwner`](docs/sdks/appuserownersv2/README.md#createuserowner) - Create User Owner
 - [`appUserOwnersV2DeleteEntitlementOwner`](docs/sdks/appuserownersv2/README.md#deleteentitlementowner) - Delete Entitlement Owner
@@ -1696,10 +1802,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`authzenServerListAuthzenPolicies`](docs/sdks/authzenserver/README.md#listauthzenpolicies) - List Authzen Policies
 - [`authzenServerTestAuthzenPolicy`](docs/sdks/authzenserver/README.md#testauthzenpolicy) - Test Authzen Policy
 - [`authzenServerUpdate`](docs/sdks/authzenserver/README.md#update) - Update
+- [`automationCancelPendingAutomationExecutions`](docs/sdks/automation/README.md#cancelpendingautomationexecutions) - Cancel Pending Automation Executions
 - [`automationClearAutomationCircuitBreaker`](docs/sdks/automation/README.md#clearautomationcircuitbreaker) - Clear Automation Circuit Breaker
 - [`automationCreateAutomation`](docs/sdks/automation/README.md#createautomation) - Create Automation
 - [`automationDeleteAutomation`](docs/sdks/automation/README.md#deleteautomation) - Delete Automation
 - [`automationExecuteAutomation`](docs/sdks/automation/README.md#executeautomation) - Execute Automation
+- [`automationExecutionActionsRetryAutomationExecutions`](docs/sdks/automationexecutionactions/README.md#retryautomationexecutions) - Retry Automation Executions
 - [`automationExecutionActionsTerminateAutomation`](docs/sdks/automationexecutionactions/README.md#terminateautomation) - Terminate Automation
 - [`automationExecutionGetAutomationExecution`](docs/sdks/automationexecution/README.md#getautomationexecution) - Get Automation Execution
 - [`automationExecutionListAutomationExecutions`](docs/sdks/automationexecution/README.md#listautomationexecutions) - List Automation Executions
@@ -1726,6 +1834,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`classifierUpdateClassifier`](docs/sdks/classifier/README.md#updateclassifier) - Update Classifier
 - [`connectorAuthoringActivationActivateRevision`](docs/sdks/connectorauthoringactivation/README.md#activaterevision) - Activate Revision
 - [`connectorAuthoringActivationRollbackRevision`](docs/sdks/connectorauthoringactivation/README.md#rollbackrevision) - Rollback Revision
+- [`connectorAuthoringDeleteCatalogEntry`](docs/sdks/connectorauthoring/README.md#deletecatalogentry) - Delete Catalog Entry
 - [`connectorCatalogConfigurationSchema`](docs/sdks/connectorcatalog/README.md#configurationschema) - Configuration Schema
 - [`connectorConfirmSyncValid`](docs/sdks/connector/README.md#confirmsyncvalid) - Confirm Sync Valid
 - [`connectorCreate`](docs/sdks/connector/README.md#create) - Create
@@ -1749,6 +1858,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`connectorResumeSync`](docs/sdks/connector/README.md#resumesync) - Resume Sync
 - [`connectorRevokeCredential`](docs/sdks/connector/README.md#revokecredential) - Revoke Credential
 - [`connectorRotateCredential`](docs/sdks/connector/README.md#rotatecredential) - Rotate Credential
+- [`connectorSyncDiagnosticsCompareSyncStats`](docs/sdks/connectorsyncdiagnostics/README.md#comparesyncstats) - Compare Sync Stats
+- [`connectorSyncDiagnosticsGetSyncChangeTimeline`](docs/sdks/connectorsyncdiagnostics/README.md#getsyncchangetimeline) - Get Sync Change Timeline
+- [`connectorSyncDiagnosticsGetSyncErrorDigest`](docs/sdks/connectorsyncdiagnostics/README.md#getsyncerrordigest) - Get Sync Error Digest
+- [`connectorSyncDiagnosticsGetSyncHistory`](docs/sdks/connectorsyncdiagnostics/README.md#getsynchistory) - Get Sync History
+- [`connectorSyncDiagnosticsGetSyncStatus`](docs/sdks/connectorsyncdiagnostics/README.md#getsyncstatus) - Get Sync Status
+- [`connectorSyncDiagnosticsListDebuggableConnectors`](docs/sdks/connectorsyncdiagnostics/README.md#listdebuggableconnectors) - List Debuggable Connectors
 - [`connectorUpdate`](docs/sdks/connector/README.md#update) - Update
 - [`connectorUpdateConnectorSchedule`](docs/sdks/connector/README.md#updateconnectorschedule) - Update Connector Schedule
 - [`connectorUpdateDelegated`](docs/sdks/connector/README.md#updatedelegated) - Update Delegated
@@ -1772,8 +1887,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`directoryDelete`](docs/sdks/directory/README.md#delete) - Delete
 - [`directoryGet`](docs/sdks/directory/README.md#get) - Get
 - [`directoryList`](docs/sdks/directory/README.md#list) - List
+- [`directoryMergeRuleListDirectoryMergeRules`](docs/sdks/directorymergerule/README.md#listdirectorymergerules) - List Directory Merge Rules
+- [`directoryMergeRuleSetDirectoryMergeRules`](docs/sdks/directorymergerule/README.md#setdirectorymergerules) - Set Directory Merge Rules
 - [`directoryUpdate`](docs/sdks/directory/README.md#update) - Update
 - [`edgeCheckInferenceVaultAccess`](docs/sdks/edge/README.md#checkinferencevaultaccess) - Check Inference Vault Access
+- [`edgeCheckVaultAccess`](docs/sdks/edge/README.md#checkvaultaccess) - Check Vault Access
 - [`edgeCreate`](docs/sdks/edge/README.md#create) - Create
 - [`edgeDelete`](docs/sdks/edge/README.md#delete) - Delete
 - [`edgeGet`](docs/sdks/edge/README.md#get) - Get
@@ -1786,6 +1904,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`edgeGetInferenceUsageSummary`](docs/sdks/edge/README.md#getinferenceusagesummary) - Get Inference Usage Summary
 - [`edgeGetInferenceUsageSummaryRollup`](docs/sdks/edge/README.md#getinferenceusagesummaryrollup) - Get Inference Usage Summary Rollup
 - [`edgeGetPublicTrust`](docs/sdks/edge/README.md#getpublictrust) - Get Public Trust
+- [`edgeIntegrationCreate`](docs/sdks/edgeintegration/README.md#create) - Create
+- [`edgeIntegrationDelete`](docs/sdks/edgeintegration/README.md#delete) - Delete
+- [`edgeIntegrationGet`](docs/sdks/edgeintegration/README.md#get) - Get
+- [`edgeIntegrationList`](docs/sdks/edgeintegration/README.md#list) - List
+- [`edgeIntegrationListUsages`](docs/sdks/edgeintegration/README.md#listusages) - List Usages
+- [`edgeIntegrationUpdate`](docs/sdks/edgeintegration/README.md#update) - Update
 - [`edgeList`](docs/sdks/edge/README.md#list) - List
 - [`edgeListAuditAttestationKeys`](docs/sdks/edge/README.md#listauditattestationkeys) - List Audit Attestation Keys
 - [`edgeListAuditAttestationManifests`](docs/sdks/edge/README.md#listauditattestationmanifests) - List Audit Attestation Manifests
@@ -1930,6 +2054,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`mcpAccessProfileToolBindingListProfilesByToolHistory`](docs/sdks/mcpaccessprofiletoolbinding/README.md#listprofilesbytoolhistory) - List Profiles By Tool History
 - [`mcpAccessProfileToolBindingListToolsByProfileHistory`](docs/sdks/mcpaccessprofiletoolbinding/README.md#listtoolsbyprofilehistory) - List Tools By Profile History
 - [`mcpAccessProfileUpdate`](docs/sdks/mcpaccessprofile/README.md#update) - Update
+- [`mcpPromptGet`](docs/sdks/mcpprompt/README.md#get) - Get
+- [`mcpPromptList`](docs/sdks/mcpprompt/README.md#list) - List
+- [`mcpPromptListHistory`](docs/sdks/mcpprompt/README.md#listhistory) - List History
+- [`mcpPromptSearch`](docs/sdks/mcpprompt/README.md#search) - Search
+- [`mcpPromptUpdate`](docs/sdks/mcpprompt/README.md#update) - Update
 - [`mcpResourceGet`](docs/sdks/mcpresource/README.md#get) - Get
 - [`mcpResourceList`](docs/sdks/mcpresource/README.md#list) - List
 - [`mcpResourceListHistory`](docs/sdks/mcpresource/README.md#listhistory) - List History
@@ -1967,6 +2096,20 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`myFundLimitsResume`](docs/sdks/myfundlimits/README.md#resume) - Resume
 - [`myFundLimitsSetLimit`](docs/sdks/myfundlimits/README.md#setlimit) - Set Limit
 - [`myFundLimitsSetTemporaryLimit`](docs/sdks/myfundlimits/README.md#settemporarylimit) - Set Temporary Limit
+- [`myRateLimitGet`](docs/sdks/myratelimit/README.md#get) - Get
+- [`oAuthAuthorizationCreate`](docs/sdks/oauthauthorization/README.md#create) - Create
+- [`oAuthAuthorizationDelete`](docs/sdks/oauthauthorization/README.md#delete) - Delete
+- [`oAuthAuthorizationGet`](docs/sdks/oauthauthorization/README.md#get) - Get
+- [`oAuthAuthorizationList`](docs/sdks/oauthauthorization/README.md#list) - List
+- [`oAuthAuthorizationListConsents`](docs/sdks/oauthauthorization/README.md#listconsents) - List Consents
+- [`oAuthAuthorizationMyDisconnect`](docs/sdks/oauthauthorizationmy/README.md#disconnect) - Disconnect
+- [`oAuthAuthorizationMyListAvailable`](docs/sdks/oauthauthorizationmy/README.md#listavailable) - List Available
+- [`oAuthAuthorizationMyListConnections`](docs/sdks/oauthauthorizationmy/README.md#listconnections) - List Connections
+- [`oAuthAuthorizationRevokeConsent`](docs/sdks/oauthauthorization/README.md#revokeconsent) - Revoke Consent
+- [`oAuthAuthorizationRotateSecret`](docs/sdks/oauthauthorization/README.md#rotatesecret) - Rotate Secret
+- [`oAuthAuthorizationSearchConsents`](docs/sdks/oauthauthorization/README.md#searchconsents) - Search Consents
+- [`oAuthAuthorizationUpdate`](docs/sdks/oauthauthorization/README.md#update) - Update
+- [`oAuthAuthorizationUpdateClient`](docs/sdks/oauthauthorization/README.md#updateclient) - Update Client
 - [`onboardingSettingsGet`](docs/sdks/onboardingsettings/README.md#get) - Get
 - [`onboardingSettingsUpdate`](docs/sdks/onboardingsettings/README.md#update) - Update
 - [`orgDomainList`](docs/sdks/orgdomain/README.md#list) - List
@@ -2022,6 +2165,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`providerCredentialClear`](docs/sdks/providercredential/README.md#clear) - Clear
 - [`providerCredentialGet`](docs/sdks/providercredential/README.md#get) - Get
 - [`providerCredentialSet`](docs/sdks/providercredential/README.md#set) - Set
+- [`rateLimitGet`](docs/sdks/ratelimit/README.md#get) - Get
+- [`rateLimitGetUsageReport`](docs/sdks/ratelimit/README.md#getusagereport) - Get Usage Report
 - [`recoveryPolicyCreate`](docs/sdks/recoverypolicy/README.md#create) - Create
 - [`recoveryPolicyDelete`](docs/sdks/recoverypolicy/README.md#delete) - Delete
 - [`recoveryPolicyGet`](docs/sdks/recoverypolicy/README.md#get) - Get

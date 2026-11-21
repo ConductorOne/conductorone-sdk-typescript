@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -119,47 +119,57 @@ export const EdgeFindingEvidenceCategory$inboundSchema: z.ZodType<
   EdgeFindingEvidenceCategory,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EdgeFindingEvidenceCategory);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(EdgeFindingEvidenceCategory)
+);
 /** @internal */
 export const EdgeFindingEvidenceCategory$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   EdgeFindingEvidenceCategory
-> = openEnums.outboundSchema(EdgeFindingEvidenceCategory);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(EdgeFindingEvidenceCategory)
+);
 
 /** @internal */
 export const EdgeFindingEvidenceSubcategory$inboundSchema: z.ZodType<
   EdgeFindingEvidenceSubcategory,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EdgeFindingEvidenceSubcategory);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(EdgeFindingEvidenceSubcategory)
+);
 /** @internal */
 export const EdgeFindingEvidenceSubcategory$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   EdgeFindingEvidenceSubcategory
-> = openEnums.outboundSchema(EdgeFindingEvidenceSubcategory);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(EdgeFindingEvidenceSubcategory)
+);
 
 /** @internal */
 export const EdgeFindingEvidence$inboundSchema: z.ZodType<
   EdgeFindingEvidence,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  category: EdgeFindingEvidenceCategory$inboundSchema.optional(),
-  edgeId: z.string().optional(),
-  evidence: z.nullable(z.array(EdgeFindingEvidenceKeyValue$inboundSchema))
-    .optional(),
-  kind: z.string().optional(),
-  rank: z.string().optional(),
-  resourceKind: z.string().optional(),
-  ruleId: z.string().optional(),
-  subcategory: EdgeFindingEvidenceSubcategory$inboundSchema.optional(),
-  subject: z.string().optional(),
-  summary: z.string().optional(),
-  windowDays: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    category: EdgeFindingEvidenceCategory$inboundSchema.optional(),
+    edgeId: z.string().optional(),
+    evidence: z.nullable(z.array(EdgeFindingEvidenceKeyValue$inboundSchema))
+      .optional(),
+    kind: z.string().optional(),
+    rank: z.string().optional(),
+    resourceKind: z.string().optional(),
+    ruleId: z.string().optional(),
+    subcategory: EdgeFindingEvidenceSubcategory$inboundSchema.optional(),
+    subject: z.string().optional(),
+    summary: z.string().optional(),
+    windowDays: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type EdgeFindingEvidence$Outbound = {
   appId?: string | undefined;
@@ -181,21 +191,23 @@ export const EdgeFindingEvidence$outboundSchema: z.ZodType<
   EdgeFindingEvidence$Outbound,
   z.ZodTypeDef,
   EdgeFindingEvidence
-> = z.object({
-  appId: z.string().optional(),
-  category: EdgeFindingEvidenceCategory$outboundSchema.optional(),
-  edgeId: z.string().optional(),
-  evidence: z.nullable(z.array(EdgeFindingEvidenceKeyValue$outboundSchema))
-    .optional(),
-  kind: z.string().optional(),
-  rank: z.string().optional(),
-  resourceKind: z.string().optional(),
-  ruleId: z.string().optional(),
-  subcategory: EdgeFindingEvidenceSubcategory$outboundSchema.optional(),
-  subject: z.string().optional(),
-  summary: z.string().optional(),
-  windowDays: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    category: EdgeFindingEvidenceCategory$outboundSchema.optional(),
+    edgeId: z.string().optional(),
+    evidence: z.nullable(z.array(EdgeFindingEvidenceKeyValue$outboundSchema))
+      .optional(),
+    kind: z.string().optional(),
+    rank: z.string().optional(),
+    resourceKind: z.string().optional(),
+    ruleId: z.string().optional(),
+    subcategory: EdgeFindingEvidenceSubcategory$outboundSchema.optional(),
+    subject: z.string().optional(),
+    summary: z.string().optional(),
+    windowDays: z.number().int().optional(),
+  })
+);
 
 export function edgeFindingEvidenceToJSON(
   edgeFindingEvidence: EdgeFindingEvidence,

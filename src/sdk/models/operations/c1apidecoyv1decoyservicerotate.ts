@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -46,15 +46,17 @@ export const C1ApiDecoyV1DecoyServiceRotateRequest$outboundSchema: z.ZodType<
   C1ApiDecoyV1DecoyServiceRotateRequest$Outbound,
   z.ZodTypeDef,
   C1ApiDecoyV1DecoyServiceRotateRequest
-> = z.object({
-  id: z.string(),
-  decoyServiceRotateRequest: shared.DecoyServiceRotateRequest$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    decoyServiceRotateRequest: "DecoyServiceRotateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    decoyServiceRotateRequest: shared.DecoyServiceRotateRequest$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      decoyServiceRotateRequest: "DecoyServiceRotateRequest",
+    });
+  })
+);
 
 export function c1ApiDecoyV1DecoyServiceRotateRequestToJSON(
   c1ApiDecoyV1DecoyServiceRotateRequest: C1ApiDecoyV1DecoyServiceRotateRequest,
@@ -71,20 +73,22 @@ export const C1ApiDecoyV1DecoyServiceRotateResponse$inboundSchema: z.ZodType<
   C1ApiDecoyV1DecoyServiceRotateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  DecoyServiceRotateResponse: shared.DecoyServiceRotateResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "DecoyServiceRotateResponse": "decoyServiceRotateResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    DecoyServiceRotateResponse: shared.DecoyServiceRotateResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "DecoyServiceRotateResponse": "decoyServiceRotateResponse",
+    });
+  })
+);
 
 export function c1ApiDecoyV1DecoyServiceRotateResponseFromJSON(
   jsonString: string,

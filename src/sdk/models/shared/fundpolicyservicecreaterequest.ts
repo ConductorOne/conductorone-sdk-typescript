@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -56,7 +57,9 @@ export const FundPolicyServiceCreateRequestPeriod$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   FundPolicyServiceCreateRequestPeriod
-> = openEnums.outboundSchema(FundPolicyServiceCreateRequestPeriod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(FundPolicyServiceCreateRequestPeriod)
+);
 
 /** @internal */
 export type FundPolicyServiceCreateRequest$Outbound = {
@@ -71,12 +74,14 @@ export const FundPolicyServiceCreateRequest$outboundSchema: z.ZodType<
   FundPolicyServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   FundPolicyServiceCreateRequest
-> = z.object({
-  currencyCode: z.string().optional(),
-  defaultLimit: z.nullable(FundsSpendLimit$outboundSchema).optional(),
-  period: FundPolicyServiceCreateRequestPeriod$outboundSchema.optional(),
-  spendRemedyRequestPolicyId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    currencyCode: z.string().optional(),
+    defaultLimit: z.nullable(FundsSpendLimit$outboundSchema).optional(),
+    period: FundPolicyServiceCreateRequestPeriod$outboundSchema.optional(),
+    spendRemedyRequestPolicyId: z.string().optional(),
+  })
+);
 
 export function fundPolicyServiceCreateRequestToJSON(
   fundPolicyServiceCreateRequest: FundPolicyServiceCreateRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,7 +17,7 @@ export const AccessProfileOwnerApproval$inboundSchema: z.ZodType<
   AccessProfileOwnerApproval,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type AccessProfileOwnerApproval$Outbound = {};
 
@@ -26,7 +26,7 @@ export const AccessProfileOwnerApproval$outboundSchema: z.ZodType<
   AccessProfileOwnerApproval$Outbound,
   z.ZodTypeDef,
   AccessProfileOwnerApproval
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function accessProfileOwnerApprovalToJSON(
   accessProfileOwnerApproval: AccessProfileOwnerApproval,

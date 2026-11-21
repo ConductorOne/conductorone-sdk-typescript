@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -45,7 +46,7 @@ export const ResourceType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ResourceType
-> = openEnums.outboundSchema(ResourceType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(ResourceType));
 
 /** @internal */
 export type CreateManuallyManagedResourceTypeRequest$Outbound = {
@@ -58,10 +59,12 @@ export const CreateManuallyManagedResourceTypeRequest$outboundSchema: z.ZodType<
   CreateManuallyManagedResourceTypeRequest$Outbound,
   z.ZodTypeDef,
   CreateManuallyManagedResourceTypeRequest
-> = z.object({
-  displayName: z.string(),
-  resourceType: ResourceType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string(),
+    resourceType: ResourceType$outboundSchema,
+  })
+);
 
 export function createManuallyManagedResourceTypeRequestToJSON(
   createManuallyManagedResourceTypeRequest:

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AuthzenServer,
   AuthzenServer$Outbound,
@@ -31,10 +32,12 @@ export const AuthzenServerServiceUpdateRequest$outboundSchema: z.ZodType<
   AuthzenServerServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   AuthzenServerServiceUpdateRequest
-> = z.object({
-  authzenServer: z.nullable(AuthzenServer$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    authzenServer: z.nullable(AuthzenServer$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function authzenServerServiceUpdateRequestToJSON(
   authzenServerServiceUpdateRequest: AuthzenServerServiceUpdateRequest,

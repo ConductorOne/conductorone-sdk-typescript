@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,16 +47,18 @@ export const C1ApiSystemlogV1ExportServiceUpdateRequest$outboundSchema:
     C1ApiSystemlogV1ExportServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSystemlogV1ExportServiceUpdateRequest
-  > = z.object({
-    exportId: z.string(),
-    exportServiceUpdateRequest: shared.ExportServiceUpdateRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      exportId: "export_id",
-      exportServiceUpdateRequest: "ExportServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      exportId: z.string(),
+      exportServiceUpdateRequest: shared
+        .ExportServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        exportId: "export_id",
+        exportServiceUpdateRequest: "ExportServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiSystemlogV1ExportServiceUpdateRequestToJSON(
   c1ApiSystemlogV1ExportServiceUpdateRequest:
@@ -75,20 +77,22 @@ export const C1ApiSystemlogV1ExportServiceUpdateResponse$inboundSchema:
     C1ApiSystemlogV1ExportServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ExportServiceUpdateResponse: shared
-      .ExportServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ExportServiceUpdateResponse": "exportServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ExportServiceUpdateResponse: shared
+        .ExportServiceUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ExportServiceUpdateResponse": "exportServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiSystemlogV1ExportServiceUpdateResponseFromJSON(
   jsonString: string,

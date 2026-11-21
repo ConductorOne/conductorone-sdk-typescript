@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -46,9 +46,11 @@ export const C1ApiServicePrincipalV1ServicePrincipalServiceGetRequest$outboundSc
     C1ApiServicePrincipalV1ServicePrincipalServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiServicePrincipalV1ServicePrincipalServiceGetRequest
-  > = z.object({
-    id: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+    })
+  );
 
 export function c1ApiServicePrincipalV1ServicePrincipalServiceGetRequestToJSON(
   c1ApiServicePrincipalV1ServicePrincipalServiceGetRequest:
@@ -66,21 +68,23 @@ export const C1ApiServicePrincipalV1ServicePrincipalServiceGetResponse$inboundSc
     C1ApiServicePrincipalV1ServicePrincipalServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ServicePrincipalServiceGetResponse: shared
-      .ServicePrincipalServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ServicePrincipalServiceGetResponse":
-        "servicePrincipalServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ServicePrincipalServiceGetResponse: shared
+        .ServicePrincipalServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ServicePrincipalServiceGetResponse":
+          "servicePrincipalServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiServicePrincipalV1ServicePrincipalServiceGetResponseFromJSON(
   jsonString: string,

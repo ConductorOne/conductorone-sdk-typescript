@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -62,16 +62,18 @@ export const AppSecretResourceView$inboundSchema: z.ZodType<
   AppSecretResourceView,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  alertCount: z.number().int().optional(),
-  appPath: z.string().optional(),
-  appSecret: z.nullable(AppSecretResource$inboundSchema).optional(),
-  credentialRevocation: z.nullable(CredentialRevocation$inboundSchema)
-    .optional(),
-  fullKnowledgeVaultId: z.nullable(z.string()).optional(),
-  paperVaultId: z.nullable(z.string()).optional(),
-  resourceTypePath: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    alertCount: z.number().int().optional(),
+    appPath: z.string().optional(),
+    appSecret: z.nullable(AppSecretResource$inboundSchema).optional(),
+    credentialRevocation: z.nullable(CredentialRevocation$inboundSchema)
+      .optional(),
+    fullKnowledgeVaultId: z.nullable(z.string()).optional(),
+    paperVaultId: z.nullable(z.string()).optional(),
+    resourceTypePath: z.string().optional(),
+  })
+);
 
 export function appSecretResourceViewFromJSON(
   jsonString: string,

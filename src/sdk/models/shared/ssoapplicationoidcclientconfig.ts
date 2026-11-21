@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -70,7 +71,7 @@ export const PkcePolicy$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   PkcePolicy
-> = openEnums.outboundSchema(PkcePolicy);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(PkcePolicy));
 
 /** @internal */
 export type SSOApplicationOIDCClientConfig$Outbound = {
@@ -85,14 +86,16 @@ export const SSOApplicationOIDCClientConfig$outboundSchema: z.ZodType<
   SSOApplicationOIDCClientConfig$Outbound,
   z.ZodTypeDef,
   SSOApplicationOIDCClientConfig
-> = z.object({
-  authentication: z.nullable(
-    SSOApplicationOIDCClientAuthentication$outboundSchema,
-  ),
-  displayName: z.string(),
-  pkcePolicy: PkcePolicy$outboundSchema.optional(),
-  redirectUris: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    authentication: z.nullable(
+      SSOApplicationOIDCClientAuthentication$outboundSchema,
+    ),
+    displayName: z.string(),
+    pkcePolicy: PkcePolicy$outboundSchema.optional(),
+    redirectUris: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function ssoApplicationOIDCClientConfigToJSON(
   ssoApplicationOIDCClientConfig: SSOApplicationOIDCClientConfig,

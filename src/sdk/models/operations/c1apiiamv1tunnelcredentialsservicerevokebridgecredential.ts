@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -52,17 +52,19 @@ export const C1ApiIamV1TunnelCredentialsServiceRevokeBridgeCredentialRequest$out
     C1ApiIamV1TunnelCredentialsServiceRevokeBridgeCredentialRequest$Outbound,
     z.ZodTypeDef,
     C1ApiIamV1TunnelCredentialsServiceRevokeBridgeCredentialRequest
-  > = z.object({
-    id: z.string(),
-    tunnelCredentialsServiceRevokeBridgeCredentialRequest: shared
-      .TunnelCredentialsServiceRevokeBridgeCredentialRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      tunnelCredentialsServiceRevokeBridgeCredentialRequest:
-        "TunnelCredentialsServiceRevokeBridgeCredentialRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      tunnelCredentialsServiceRevokeBridgeCredentialRequest: shared
+        .TunnelCredentialsServiceRevokeBridgeCredentialRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        tunnelCredentialsServiceRevokeBridgeCredentialRequest:
+          "TunnelCredentialsServiceRevokeBridgeCredentialRequest",
+      });
+    })
+  );
 
 export function c1ApiIamV1TunnelCredentialsServiceRevokeBridgeCredentialRequestToJSON(
   c1ApiIamV1TunnelCredentialsServiceRevokeBridgeCredentialRequest:
@@ -80,22 +82,24 @@ export const C1ApiIamV1TunnelCredentialsServiceRevokeBridgeCredentialResponse$in
     C1ApiIamV1TunnelCredentialsServiceRevokeBridgeCredentialResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    TunnelCredentialsServiceRevokeBridgeCredentialResponse: shared
-      .TunnelCredentialsServiceRevokeBridgeCredentialResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "TunnelCredentialsServiceRevokeBridgeCredentialResponse":
-        "tunnelCredentialsServiceRevokeBridgeCredentialResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      TunnelCredentialsServiceRevokeBridgeCredentialResponse: shared
+        .TunnelCredentialsServiceRevokeBridgeCredentialResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "TunnelCredentialsServiceRevokeBridgeCredentialResponse":
+          "tunnelCredentialsServiceRevokeBridgeCredentialResponse",
+      });
+    })
+  );
 
 export function c1ApiIamV1TunnelCredentialsServiceRevokeBridgeCredentialResponseFromJSON(
   jsonString: string,

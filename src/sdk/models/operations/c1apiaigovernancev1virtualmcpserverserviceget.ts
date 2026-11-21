@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,9 +45,11 @@ export const C1ApiAiGovernanceV1VirtualMCPServerServiceGetRequest$outboundSchema
     C1ApiAiGovernanceV1VirtualMCPServerServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1VirtualMCPServerServiceGetRequest
-  > = z.object({
-    id: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+    })
+  );
 
 export function c1ApiAiGovernanceV1VirtualMCPServerServiceGetRequestToJSON(
   c1ApiAiGovernanceV1VirtualMCPServerServiceGetRequest:
@@ -66,21 +68,23 @@ export const C1ApiAiGovernanceV1VirtualMCPServerServiceGetResponse$inboundSchema
     C1ApiAiGovernanceV1VirtualMCPServerServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    VirtualMCPServerServiceGetResponse: shared
-      .VirtualMCPServerServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "VirtualMCPServerServiceGetResponse":
-        "virtualMCPServerServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      VirtualMCPServerServiceGetResponse: shared
+        .VirtualMCPServerServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "VirtualMCPServerServiceGetResponse":
+          "virtualMCPServerServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1VirtualMCPServerServiceGetResponseFromJSON(
   jsonString: string,

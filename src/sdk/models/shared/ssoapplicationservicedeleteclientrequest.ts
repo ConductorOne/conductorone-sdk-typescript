@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * SSOApplicationServiceDeleteClientRequest deletes one App-owned OAuth client.
@@ -24,9 +25,11 @@ export const SSOApplicationServiceDeleteClientRequest$outboundSchema: z.ZodType<
   SSOApplicationServiceDeleteClientRequest$Outbound,
   z.ZodTypeDef,
   SSOApplicationServiceDeleteClientRequest
-> = z.object({
-  clientId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientId: z.string(),
+  })
+);
 
 export function ssoApplicationServiceDeleteClientRequestToJSON(
   ssoApplicationServiceDeleteClientRequest:

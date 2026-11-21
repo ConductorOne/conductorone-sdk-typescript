@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * MCPServerAuthNone indicates no authentication is required.
@@ -17,7 +18,7 @@ export const MCPServerAuthNone$outboundSchema: z.ZodType<
   MCPServerAuthNone$Outbound,
   z.ZodTypeDef,
   MCPServerAuthNone
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function mcpServerAuthNoneToJSON(
   mcpServerAuthNone: MCPServerAuthNone,

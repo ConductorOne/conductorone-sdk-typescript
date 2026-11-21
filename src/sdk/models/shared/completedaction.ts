@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -33,14 +33,16 @@ export const CompletedAction$inboundSchema: z.ZodType<
   CompletedAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  completedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  entitlements: z.nullable(z.array(AppEntitlementReference$inboundSchema))
-    .optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    completedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    entitlements: z.nullable(z.array(AppEntitlementReference$inboundSchema))
+      .optional(),
+    userId: z.string().optional(),
+  })
+);
 /** @internal */
 export type CompletedAction$Outbound = {
   completedAt?: string | null | undefined;
@@ -53,12 +55,15 @@ export const CompletedAction$outboundSchema: z.ZodType<
   CompletedAction$Outbound,
   z.ZodTypeDef,
   CompletedAction
-> = z.object({
-  completedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  entitlements: z.nullable(z.array(AppEntitlementReference$outboundSchema))
-    .optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    completedAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    entitlements: z.nullable(z.array(AppEntitlementReference$outboundSchema))
+      .optional(),
+    userId: z.string().optional(),
+  })
+);
 
 export function completedActionToJSON(
   completedAction: CompletedAction,

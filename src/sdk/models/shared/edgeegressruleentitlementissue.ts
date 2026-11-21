@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -75,30 +75,32 @@ export type EdgeEgressRuleEntitlementIssue = {
 
 /** @internal */
 export const Cause$inboundSchema: z.ZodType<Cause, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Cause);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Cause));
 
 /** @internal */
 export const Enforcement$inboundSchema: z.ZodType<
   Enforcement,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Enforcement);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Enforcement));
 
 /** @internal */
 export const EdgeEgressRuleEntitlementIssue$inboundSchema: z.ZodType<
   EdgeEgressRuleEntitlementIssue,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cause: Cause$inboundSchema.optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  enforcement: Enforcement$inboundSchema.optional(),
-  entitlementDisplayName: z.string().optional(),
-  entitlementId: z.string().optional(),
-  ruleIndex: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cause: Cause$inboundSchema.optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    enforcement: Enforcement$inboundSchema.optional(),
+    entitlementDisplayName: z.string().optional(),
+    entitlementId: z.string().optional(),
+    ruleIndex: z.number().int().optional(),
+  })
+);
 
 export function edgeEgressRuleEntitlementIssueFromJSON(
   jsonString: string,

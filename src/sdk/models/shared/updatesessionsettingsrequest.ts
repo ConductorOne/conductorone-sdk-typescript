@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   SessionSettings,
   SessionSettings$Outbound,
@@ -28,10 +29,12 @@ export const UpdateSessionSettingsRequest$outboundSchema: z.ZodType<
   UpdateSessionSettingsRequest$Outbound,
   z.ZodTypeDef,
   UpdateSessionSettingsRequest
-> = z.object({
-  sessionSettings: z.nullable(SessionSettings$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionSettings: z.nullable(SessionSettings$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function updateSessionSettingsRequestToJSON(
   updateSessionSettingsRequest: UpdateSessionSettingsRequest,

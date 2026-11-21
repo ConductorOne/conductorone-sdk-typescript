@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -38,13 +38,15 @@ export const AppUsageControls$inboundSchema: z.ZodType<
   AppUsageControls,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  notify: z.boolean().optional(),
-  notifyAfterDays: z.number().int().optional(),
-  revoke: z.boolean().optional(),
-  revokeAfterDays: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    notify: z.boolean().optional(),
+    notifyAfterDays: z.number().int().optional(),
+    revoke: z.boolean().optional(),
+    revokeAfterDays: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type AppUsageControls$Outbound = {
   appId?: string | undefined;
@@ -59,13 +61,15 @@ export const AppUsageControls$outboundSchema: z.ZodType<
   AppUsageControls$Outbound,
   z.ZodTypeDef,
   AppUsageControls
-> = z.object({
-  appId: z.string().optional(),
-  notify: z.boolean().optional(),
-  notifyAfterDays: z.number().int().optional(),
-  revoke: z.boolean().optional(),
-  revokeAfterDays: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    notify: z.boolean().optional(),
+    notifyAfterDays: z.number().int().optional(),
+    revoke: z.boolean().optional(),
+    revokeAfterDays: z.number().int().optional(),
+  })
+);
 
 export function appUsageControlsToJSON(
   appUsageControls: AppUsageControls,

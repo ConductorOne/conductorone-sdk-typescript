@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -77,8 +78,8 @@ export const FunctionsServiceCreateFunctionRequestFunctionType$outboundSchema:
     string,
     z.ZodTypeDef,
     FunctionsServiceCreateFunctionRequestFunctionType
-  > = openEnums.outboundSchema(
-    FunctionsServiceCreateFunctionRequestFunctionType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(FunctionsServiceCreateFunctionRequestFunctionType)
   );
 
 /** @internal */
@@ -95,14 +96,17 @@ export const FunctionsServiceCreateFunctionRequest$outboundSchema: z.ZodType<
   FunctionsServiceCreateFunctionRequest$Outbound,
   z.ZodTypeDef,
   FunctionsServiceCreateFunctionRequest
-> = z.object({
-  commitMessage: z.string().optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  functionType: FunctionsServiceCreateFunctionRequestFunctionType$outboundSchema
-    .optional(),
-  initialContent: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    commitMessage: z.string().optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    functionType:
+      FunctionsServiceCreateFunctionRequestFunctionType$outboundSchema
+        .optional(),
+    initialContent: z.record(z.string()).optional(),
+  })
+);
 
 export function functionsServiceCreateFunctionRequestToJSON(
   functionsServiceCreateFunctionRequest: FunctionsServiceCreateFunctionRequest,

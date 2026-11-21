@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -103,32 +103,35 @@ export const TierOverride$inboundSchema: z.ZodType<
   TierOverride,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TierOverride);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(TierOverride));
 /** @internal */
 export const TierOverride$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   TierOverride
-> = openEnums.outboundSchema(TierOverride);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(TierOverride));
 
 /** @internal */
 export const FindingDispatcher$inboundSchema: z.ZodType<
   FindingDispatcher,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  invokeFunction: z.nullable(InvokeFunctionDispatcher$inboundSchema).optional(),
-  key: z.string().optional(),
-  notify: z.nullable(NotifyDispatcher$inboundSchema).optional(),
-  notifyOnOutcome: z.nullable(FindingDispatchOutcomeNotify$inboundSchema)
-    .optional(),
-  tierOverride: TierOverride$inboundSchema.optional(),
-  triggerAutomation: z.nullable(TriggerAutomationDispatcher$inboundSchema)
-    .optional(),
-  webhook: z.nullable(WebhookDispatcher$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    enabled: z.boolean().optional(),
+    invokeFunction: z.nullable(InvokeFunctionDispatcher$inboundSchema)
+      .optional(),
+    key: z.string().optional(),
+    notify: z.nullable(NotifyDispatcher$inboundSchema).optional(),
+    notifyOnOutcome: z.nullable(FindingDispatchOutcomeNotify$inboundSchema)
+      .optional(),
+    tierOverride: TierOverride$inboundSchema.optional(),
+    triggerAutomation: z.nullable(TriggerAutomationDispatcher$inboundSchema)
+      .optional(),
+    webhook: z.nullable(WebhookDispatcher$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type FindingDispatcher$Outbound = {
   displayName?: string | undefined;
@@ -147,20 +150,22 @@ export const FindingDispatcher$outboundSchema: z.ZodType<
   FindingDispatcher$Outbound,
   z.ZodTypeDef,
   FindingDispatcher
-> = z.object({
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  invokeFunction: z.nullable(InvokeFunctionDispatcher$outboundSchema)
-    .optional(),
-  key: z.string().optional(),
-  notify: z.nullable(NotifyDispatcher$outboundSchema).optional(),
-  notifyOnOutcome: z.nullable(FindingDispatchOutcomeNotify$outboundSchema)
-    .optional(),
-  tierOverride: TierOverride$outboundSchema.optional(),
-  triggerAutomation: z.nullable(TriggerAutomationDispatcher$outboundSchema)
-    .optional(),
-  webhook: z.nullable(WebhookDispatcher$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    enabled: z.boolean().optional(),
+    invokeFunction: z.nullable(InvokeFunctionDispatcher$outboundSchema)
+      .optional(),
+    key: z.string().optional(),
+    notify: z.nullable(NotifyDispatcher$outboundSchema).optional(),
+    notifyOnOutcome: z.nullable(FindingDispatchOutcomeNotify$outboundSchema)
+      .optional(),
+    tierOverride: TierOverride$outboundSchema.optional(),
+    triggerAutomation: z.nullable(TriggerAutomationDispatcher$outboundSchema)
+      .optional(),
+    webhook: z.nullable(WebhookDispatcher$outboundSchema).optional(),
+  })
+);
 
 export function findingDispatcherToJSON(
   findingDispatcher: FindingDispatcher,

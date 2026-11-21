@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppEntitlementProxyExpandMask,
   AppEntitlementProxyExpandMask$Outbound,
@@ -26,10 +27,12 @@ export const CreateAppEntitlementProxyRequest$outboundSchema: z.ZodType<
   CreateAppEntitlementProxyRequest$Outbound,
   z.ZodTypeDef,
   CreateAppEntitlementProxyRequest
-> = z.object({
-  expandMask: z.nullable(AppEntitlementProxyExpandMask$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expandMask: z.nullable(AppEntitlementProxyExpandMask$outboundSchema)
+      .optional(),
+  })
+);
 
 export function createAppEntitlementProxyRequestToJSON(
   createAppEntitlementProxyRequest: CreateAppEntitlementProxyRequest,

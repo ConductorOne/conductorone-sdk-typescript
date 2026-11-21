@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The WorkloadFederationServiceSearchTrustsRequest message.
@@ -45,13 +46,15 @@ export const WorkloadFederationServiceSearchTrustsRequest$outboundSchema:
     WorkloadFederationServiceSearchTrustsRequest$Outbound,
     z.ZodTypeDef,
     WorkloadFederationServiceSearchTrustsRequest
-  > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    providerId: z.string().optional(),
-    query: z.string().optional(),
-    servicePrincipalId: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      providerId: z.string().optional(),
+      query: z.string().optional(),
+      servicePrincipalId: z.string().optional(),
+    })
+  );
 
 export function workloadFederationServiceSearchTrustsRequestToJSON(
   workloadFederationServiceSearchTrustsRequest:

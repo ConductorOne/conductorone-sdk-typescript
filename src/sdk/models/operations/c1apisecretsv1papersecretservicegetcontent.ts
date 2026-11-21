@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,17 +51,19 @@ export const C1ApiSecretsV1PaperSecretServiceGetContentRequest$outboundSchema:
     C1ApiSecretsV1PaperSecretServiceGetContentRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSecretsV1PaperSecretServiceGetContentRequest
-  > = z.object({
-    vaultId: z.string(),
-    paperSecretServiceGetContentRequest: shared
-      .PaperSecretServiceGetContentRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      vaultId: "vault_id",
-      paperSecretServiceGetContentRequest:
-        "PaperSecretServiceGetContentRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      vaultId: z.string(),
+      paperSecretServiceGetContentRequest: shared
+        .PaperSecretServiceGetContentRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        vaultId: "vault_id",
+        paperSecretServiceGetContentRequest:
+          "PaperSecretServiceGetContentRequest",
+      });
+    })
+  );
 
 export function c1ApiSecretsV1PaperSecretServiceGetContentRequestToJSON(
   c1ApiSecretsV1PaperSecretServiceGetContentRequest:
@@ -80,21 +82,23 @@ export const C1ApiSecretsV1PaperSecretServiceGetContentResponse$inboundSchema:
     C1ApiSecretsV1PaperSecretServiceGetContentResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    PaperSecretServiceGetContentResponse: shared
-      .PaperSecretServiceGetContentResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "PaperSecretServiceGetContentResponse":
-        "paperSecretServiceGetContentResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      PaperSecretServiceGetContentResponse: shared
+        .PaperSecretServiceGetContentResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "PaperSecretServiceGetContentResponse":
+          "paperSecretServiceGetContentResponse",
+      });
+    })
+  );
 
 export function c1ApiSecretsV1PaperSecretServiceGetContentResponseFromJSON(
   jsonString: string,

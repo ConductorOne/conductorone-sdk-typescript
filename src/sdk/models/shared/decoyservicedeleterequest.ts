@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The DecoyServiceDeleteRequest message.
@@ -17,7 +18,7 @@ export const DecoyServiceDeleteRequest$outboundSchema: z.ZodType<
   DecoyServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   DecoyServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function decoyServiceDeleteRequestToJSON(
   decoyServiceDeleteRequest: DecoyServiceDeleteRequest,

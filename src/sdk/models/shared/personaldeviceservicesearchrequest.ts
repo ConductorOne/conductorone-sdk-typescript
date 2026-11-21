@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -48,7 +49,7 @@ export const StatusFilter$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   StatusFilter
-> = openEnums.outboundSchema(StatusFilter);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(StatusFilter));
 
 /** @internal */
 export type PersonalDeviceServiceSearchRequest$Outbound = {
@@ -63,12 +64,14 @@ export const PersonalDeviceServiceSearchRequest$outboundSchema: z.ZodType<
   PersonalDeviceServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   PersonalDeviceServiceSearchRequest
-> = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  statusFilter: StatusFilter$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    statusFilter: StatusFilter$outboundSchema.optional(),
+  })
+);
 
 export function personalDeviceServiceSearchRequestToJSON(
   personalDeviceServiceSearchRequest: PersonalDeviceServiceSearchRequest,

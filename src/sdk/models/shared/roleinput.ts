@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Role is a role that can be assigned to a user in ConductorOne.
@@ -34,11 +35,13 @@ export const RoleInput$outboundSchema: z.ZodType<
   RoleInput$Outbound,
   z.ZodTypeDef,
   RoleInput
-> = z.object({
-  displayName: z.string().optional(),
-  permissions: z.nullable(z.array(z.string())).optional(),
-  serviceRoles: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    permissions: z.nullable(z.array(z.string())).optional(),
+    serviceRoles: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function roleInputToJSON(roleInput: RoleInput): string {
   return JSON.stringify(RoleInput$outboundSchema.parse(roleInput));

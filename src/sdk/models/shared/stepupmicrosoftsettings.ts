@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -52,25 +52,27 @@ export const ValidationMode$inboundSchema: z.ZodType<
   ValidationMode,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ValidationMode);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(ValidationMode));
 /** @internal */
 export const ValidationMode$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ValidationMode
-> = openEnums.outboundSchema(ValidationMode);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(ValidationMode));
 
 /** @internal */
 export const StepUpMicrosoftSettings$inboundSchema: z.ZodType<
   StepUpMicrosoftSettings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  conditionalAccessIds: z.nullable(z.array(z.string())).optional(),
-  requireFreshAuthentication: z.boolean().optional(),
-  tenant: z.string().optional(),
-  validationMode: ValidationMode$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conditionalAccessIds: z.nullable(z.array(z.string())).optional(),
+    requireFreshAuthentication: z.boolean().optional(),
+    tenant: z.string().optional(),
+    validationMode: ValidationMode$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type StepUpMicrosoftSettings$Outbound = {
   conditionalAccessIds?: Array<string> | null | undefined;
@@ -84,12 +86,14 @@ export const StepUpMicrosoftSettings$outboundSchema: z.ZodType<
   StepUpMicrosoftSettings$Outbound,
   z.ZodTypeDef,
   StepUpMicrosoftSettings
-> = z.object({
-  conditionalAccessIds: z.nullable(z.array(z.string())).optional(),
-  requireFreshAuthentication: z.boolean().optional(),
-  tenant: z.string().optional(),
-  validationMode: ValidationMode$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conditionalAccessIds: z.nullable(z.array(z.string())).optional(),
+    requireFreshAuthentication: z.boolean().optional(),
+    tenant: z.string().optional(),
+    validationMode: ValidationMode$outboundSchema.optional(),
+  })
+);
 
 export function stepUpMicrosoftSettingsToJSON(
   stepUpMicrosoftSettings: StepUpMicrosoftSettings,

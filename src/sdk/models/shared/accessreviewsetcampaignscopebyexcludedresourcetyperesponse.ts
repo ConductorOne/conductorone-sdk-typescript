@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -35,12 +35,14 @@ export const AccessReviewSetCampaignScopeByExcludedResourceTypeResponse$inboundS
     AccessReviewSetCampaignScopeByExcludedResourceTypeResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    excludedResourceTypes: z.nullable(
-      z.array(AccessReviewExcludedResourceType$inboundSchema),
-    ).optional(),
-    scopeV2: z.nullable(AccessReviewScopeV2$inboundSchema).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      excludedResourceTypes: z.nullable(
+        z.array(AccessReviewExcludedResourceType$inboundSchema),
+      ).optional(),
+      scopeV2: z.nullable(AccessReviewScopeV2$inboundSchema).optional(),
+    })
+  );
 
 export function accessReviewSetCampaignScopeByExcludedResourceTypeResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -73,17 +73,19 @@ export const GeneratePasswordPolicy$inboundSchema: z.ZodType<
   GeneratePasswordPolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  customCharacters: z.nullable(z.string()).optional(),
-  excludedCharacters: z.nullable(z.string()).optional(),
-  maxCharacterCount: z.number().int().optional(),
-  minCharacterCount: z.number().int().optional(),
-  noRestrictions: z.nullable(z.boolean()).optional(),
-  requireLowercase: z.boolean().optional(),
-  requireNumbers: z.boolean().optional(),
-  requireSpecialCharacters: z.boolean().optional(),
-  requireUppercase: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    customCharacters: z.nullable(z.string()).optional(),
+    excludedCharacters: z.nullable(z.string()).optional(),
+    maxCharacterCount: z.number().int().optional(),
+    minCharacterCount: z.number().int().optional(),
+    noRestrictions: z.nullable(z.boolean()).optional(),
+    requireLowercase: z.boolean().optional(),
+    requireNumbers: z.boolean().optional(),
+    requireSpecialCharacters: z.boolean().optional(),
+    requireUppercase: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type GeneratePasswordPolicy$Outbound = {
   customCharacters?: string | null | undefined;
@@ -102,17 +104,19 @@ export const GeneratePasswordPolicy$outboundSchema: z.ZodType<
   GeneratePasswordPolicy$Outbound,
   z.ZodTypeDef,
   GeneratePasswordPolicy
-> = z.object({
-  customCharacters: z.nullable(z.string()).optional(),
-  excludedCharacters: z.nullable(z.string()).optional(),
-  maxCharacterCount: z.number().int().optional(),
-  minCharacterCount: z.number().int().optional(),
-  noRestrictions: z.nullable(z.boolean()).optional(),
-  requireLowercase: z.boolean().optional(),
-  requireNumbers: z.boolean().optional(),
-  requireSpecialCharacters: z.boolean().optional(),
-  requireUppercase: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    customCharacters: z.nullable(z.string()).optional(),
+    excludedCharacters: z.nullable(z.string()).optional(),
+    maxCharacterCount: z.number().int().optional(),
+    minCharacterCount: z.number().int().optional(),
+    noRestrictions: z.nullable(z.boolean()).optional(),
+    requireLowercase: z.boolean().optional(),
+    requireNumbers: z.boolean().optional(),
+    requireSpecialCharacters: z.boolean().optional(),
+    requireUppercase: z.boolean().optional(),
+  })
+);
 
 export function generatePasswordPolicyToJSON(
   generatePasswordPolicy: GeneratePasswordPolicy,

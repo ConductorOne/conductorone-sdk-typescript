@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,9 +27,11 @@ export const ResourceScope$inboundSchema: z.ZodType<
   ResourceScope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type ResourceScope$Outbound = {
   appIds?: Array<string> | null | undefined;
@@ -40,9 +42,11 @@ export const ResourceScope$outboundSchema: z.ZodType<
   ResourceScope$Outbound,
   z.ZodTypeDef,
   ResourceScope
-> = z.object({
-  appIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function resourceScopeToJSON(resourceScope: ResourceScope): string {
   return JSON.stringify(ResourceScope$outboundSchema.parse(resourceScope));

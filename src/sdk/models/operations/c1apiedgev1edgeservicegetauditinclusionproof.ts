@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,13 +45,15 @@ export const C1ApiEdgeV1EdgeServiceGetAuditInclusionProofRequest$outboundSchema:
     C1ApiEdgeV1EdgeServiceGetAuditInclusionProofRequest$Outbound,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceGetAuditInclusionProofRequest
-  > = z.object({
-    eventId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      eventId: "event_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      eventId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        eventId: "event_id",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceGetAuditInclusionProofRequestToJSON(
   c1ApiEdgeV1EdgeServiceGetAuditInclusionProofRequest:
@@ -70,21 +72,23 @@ export const C1ApiEdgeV1EdgeServiceGetAuditInclusionProofResponse$inboundSchema:
     C1ApiEdgeV1EdgeServiceGetAuditInclusionProofResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    EdgeServiceGetAuditInclusionProofResponse: shared
-      .EdgeServiceGetAuditInclusionProofResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "EdgeServiceGetAuditInclusionProofResponse":
-        "edgeServiceGetAuditInclusionProofResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      EdgeServiceGetAuditInclusionProofResponse: shared
+        .EdgeServiceGetAuditInclusionProofResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "EdgeServiceGetAuditInclusionProofResponse":
+          "edgeServiceGetAuditInclusionProofResponse",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceGetAuditInclusionProofResponseFromJSON(
   jsonString: string,

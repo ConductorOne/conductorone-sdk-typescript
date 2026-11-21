@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,7 +22,7 @@ export const ShadowAppType$inboundSchema: z.ZodType<
   ShadowAppType,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type ShadowAppType$Outbound = {};
 
@@ -31,7 +31,7 @@ export const ShadowAppType$outboundSchema: z.ZodType<
   ShadowAppType$Outbound,
   z.ZodTypeDef,
   ShadowAppType
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function shadowAppTypeToJSON(shadowAppType: ShadowAppType): string {
   return JSON.stringify(ShadowAppType$outboundSchema.parse(shadowAppType));

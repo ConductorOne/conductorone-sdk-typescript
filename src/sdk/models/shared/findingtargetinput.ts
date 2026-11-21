@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The finding an inert TYPE_MANUAL action ticket remediates.
@@ -17,7 +18,7 @@ export const FindingTargetInput$outboundSchema: z.ZodType<
   FindingTargetInput$Outbound,
   z.ZodTypeDef,
   FindingTargetInput
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function findingTargetInputToJSON(
   findingTargetInput: FindingTargetInput,

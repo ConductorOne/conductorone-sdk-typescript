@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,9 +25,11 @@ export const TaskRevocationTarget$inboundSchema: z.ZodType<
   TaskRevocationTarget,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  entitlementRef: z.nullable(AppEntitlementRef$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entitlementRef: z.nullable(AppEntitlementRef$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type TaskRevocationTarget$Outbound = {
   entitlementRef?: AppEntitlementRef$Outbound | null | undefined;
@@ -38,9 +40,11 @@ export const TaskRevocationTarget$outboundSchema: z.ZodType<
   TaskRevocationTarget$Outbound,
   z.ZodTypeDef,
   TaskRevocationTarget
-> = z.object({
-  entitlementRef: z.nullable(AppEntitlementRef$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entitlementRef: z.nullable(AppEntitlementRef$outboundSchema).optional(),
+  })
+);
 
 export function taskRevocationTargetToJSON(
   taskRevocationTarget: TaskRevocationTarget,

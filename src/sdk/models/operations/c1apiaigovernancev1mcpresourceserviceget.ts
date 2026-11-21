@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -49,16 +49,18 @@ export const C1ApiAiGovernanceV1MCPResourceServiceGetRequest$outboundSchema:
     C1ApiAiGovernanceV1MCPResourceServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1MCPResourceServiceGetRequest
-  > = z.object({
-    appId: z.string(),
-    connectorId: z.string(),
-    id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      connectorId: "connector_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      connectorId: z.string(),
+      id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        connectorId: "connector_id",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPResourceServiceGetRequestToJSON(
   c1ApiAiGovernanceV1MCPResourceServiceGetRequest:
@@ -77,20 +79,22 @@ export const C1ApiAiGovernanceV1MCPResourceServiceGetResponse$inboundSchema:
     C1ApiAiGovernanceV1MCPResourceServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    MCPResourceServiceGetResponse: shared
-      .MCPResourceServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "MCPResourceServiceGetResponse": "mcpResourceServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      MCPResourceServiceGetResponse: shared
+        .MCPResourceServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "MCPResourceServiceGetResponse": "mcpResourceServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPResourceServiceGetResponseFromJSON(
   jsonString: string,

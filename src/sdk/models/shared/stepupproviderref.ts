@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * StepUpProviderRef is a lightweight reference to a step-up authentication provider.
@@ -24,9 +25,11 @@ export const StepUpProviderRef$outboundSchema: z.ZodType<
   StepUpProviderRef$Outbound,
   z.ZodTypeDef,
   StepUpProviderRef
-> = z.object({
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+  })
+);
 
 export function stepUpProviderRefToJSON(
   stepUpProviderRef: StepUpProviderRef,

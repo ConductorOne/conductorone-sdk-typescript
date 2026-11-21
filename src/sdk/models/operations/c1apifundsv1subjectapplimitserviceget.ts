@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,15 +47,17 @@ export const C1ApiFundsV1SubjectAppLimitServiceGetRequest$outboundSchema:
     C1ApiFundsV1SubjectAppLimitServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFundsV1SubjectAppLimitServiceGetRequest
-  > = z.object({
-    userId: z.string(),
-    appId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      userId: "user_id",
-      appId: "app_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      userId: z.string(),
+      appId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        userId: "user_id",
+        appId: "app_id",
+      });
+    })
+  );
 
 export function c1ApiFundsV1SubjectAppLimitServiceGetRequestToJSON(
   c1ApiFundsV1SubjectAppLimitServiceGetRequest:
@@ -74,20 +76,23 @@ export const C1ApiFundsV1SubjectAppLimitServiceGetResponse$inboundSchema:
     C1ApiFundsV1SubjectAppLimitServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SubjectAppLimitServiceGetResponse: shared
-      .SubjectAppLimitServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SubjectAppLimitServiceGetResponse": "subjectAppLimitServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SubjectAppLimitServiceGetResponse: shared
+        .SubjectAppLimitServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SubjectAppLimitServiceGetResponse":
+          "subjectAppLimitServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiFundsV1SubjectAppLimitServiceGetResponseFromJSON(
   jsonString: string,

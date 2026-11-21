@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,9 +25,11 @@ export const RejectInstance$inboundSchema: z.ZodType<
   RejectInstance,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  rejectMessage: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rejectMessage: z.string().optional(),
+  })
+);
 /** @internal */
 export type RejectInstance$Outbound = {
   rejectMessage?: string | undefined;
@@ -38,9 +40,11 @@ export const RejectInstance$outboundSchema: z.ZodType<
   RejectInstance$Outbound,
   z.ZodTypeDef,
   RejectInstance
-> = z.object({
-  rejectMessage: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rejectMessage: z.string().optional(),
+  })
+);
 
 export function rejectInstanceToJSON(rejectInstance: RejectInstance): string {
   return JSON.stringify(RejectInstance$outboundSchema.parse(rejectInstance));

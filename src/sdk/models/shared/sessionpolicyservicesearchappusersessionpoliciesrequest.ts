@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Search the policies selected for users with accounts holding the application's
@@ -33,10 +34,12 @@ export const SessionPolicyServiceSearchAppUserSessionPoliciesRequest$outboundSch
     SessionPolicyServiceSearchAppUserSessionPoliciesRequest$Outbound,
     z.ZodTypeDef,
     SessionPolicyServiceSearchAppUserSessionPoliciesRequest
-  > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    })
+  );
 
 export function sessionPolicyServiceSearchAppUserSessionPoliciesRequestToJSON(
   sessionPolicyServiceSearchAppUserSessionPoliciesRequest:

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * UnsuppressAction parameters for UpdateFindingState.
@@ -19,7 +20,7 @@ export const UnsuppressAction$outboundSchema: z.ZodType<
   UnsuppressAction$Outbound,
   z.ZodTypeDef,
   UnsuppressAction
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function unsuppressActionToJSON(
   unsuppressAction: UnsuppressAction,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -63,28 +63,34 @@ export const EdgeRollupItemEnabledKinds$inboundSchema: z.ZodType<
   EdgeRollupItemEnabledKinds,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EdgeRollupItemEnabledKinds);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(EdgeRollupItemEnabledKinds)
+);
 
 /** @internal */
 export const EdgeRollupItemMode$inboundSchema: z.ZodType<
   EdgeRollupItemMode,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EdgeRollupItemMode);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(EdgeRollupItemMode)
+);
 
 /** @internal */
 export const EdgeRollupItem$inboundSchema: z.ZodType<
   EdgeRollupItem,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  displayName: z.string().optional(),
-  enabledKinds: z.nullable(z.array(EdgeRollupItemEnabledKinds$inboundSchema))
-    .optional(),
-  id: z.string().optional(),
-  mode: EdgeRollupItemMode$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    displayName: z.string().optional(),
+    enabledKinds: z.nullable(z.array(EdgeRollupItemEnabledKinds$inboundSchema))
+      .optional(),
+    id: z.string().optional(),
+    mode: EdgeRollupItemMode$inboundSchema.optional(),
+  })
+);
 
 export function edgeRollupItemFromJSON(
   jsonString: string,

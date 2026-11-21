@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * ExportServiceListEventsRequest is the request for listing audit events within a specific export.
@@ -29,10 +30,12 @@ export const ExportServiceListEventsRequest$outboundSchema: z.ZodType<
   ExportServiceListEventsRequest$Outbound,
   z.ZodTypeDef,
   ExportServiceListEventsRequest
-> = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+  })
+);
 
 export function exportServiceListEventsRequestToJSON(
   exportServiceListEventsRequest: ExportServiceListEventsRequest,

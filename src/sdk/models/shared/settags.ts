@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,9 +19,11 @@ export type SetTags = {
 
 /** @internal */
 export const SetTags$inboundSchema: z.ZodType<SetTags, z.ZodTypeDef, unknown> =
-  z.object({
-    tags: z.record(z.string()).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      tags: z.record(z.string()).optional(),
+    })
+  );
 /** @internal */
 export type SetTags$Outbound = {
   tags?: { [k: string]: string } | undefined;
@@ -32,9 +34,11 @@ export const SetTags$outboundSchema: z.ZodType<
   SetTags$Outbound,
   z.ZodTypeDef,
   SetTags
-> = z.object({
-  tags: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tags: z.record(z.string()).optional(),
+  })
+);
 
 export function setTagsToJSON(setTags: SetTags): string {
   return JSON.stringify(SetTags$outboundSchema.parse(setTags));

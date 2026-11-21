@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The PersonalClient message contains information about a presonal client credential.
@@ -44,12 +45,15 @@ export const PersonalClientInput$outboundSchema: z.ZodType<
   PersonalClientInput$Outbound,
   z.ZodTypeDef,
   PersonalClientInput
-> = z.object({
-  allowSourceCidr: z.nullable(z.array(z.string())).optional(),
-  displayName: z.string().optional(),
-  expiresTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  scopedRoles: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowSourceCidr: z.nullable(z.array(z.string())).optional(),
+    displayName: z.string().optional(),
+    expiresTime: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    scopedRoles: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function personalClientInputToJSON(
   personalClientInput: PersonalClientInput,

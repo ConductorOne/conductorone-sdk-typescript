@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -44,14 +44,16 @@ export const C1ApiPolicyV1PoliciesDeleteRequest$outboundSchema: z.ZodType<
   C1ApiPolicyV1PoliciesDeleteRequest$Outbound,
   z.ZodTypeDef,
   C1ApiPolicyV1PoliciesDeleteRequest
-> = z.object({
-  id: z.string(),
-  deletePolicyRequest: shared.DeletePolicyRequest$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    deletePolicyRequest: "DeletePolicyRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    deletePolicyRequest: shared.DeletePolicyRequest$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      deletePolicyRequest: "DeletePolicyRequest",
+    });
+  })
+);
 
 export function c1ApiPolicyV1PoliciesDeleteRequestToJSON(
   c1ApiPolicyV1PoliciesDeleteRequest: C1ApiPolicyV1PoliciesDeleteRequest,
@@ -68,19 +70,21 @@ export const C1ApiPolicyV1PoliciesDeleteResponse$inboundSchema: z.ZodType<
   C1ApiPolicyV1PoliciesDeleteResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  DeletePolicyResponse: shared.DeletePolicyResponse$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "DeletePolicyResponse": "deletePolicyResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    DeletePolicyResponse: shared.DeletePolicyResponse$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "DeletePolicyResponse": "deletePolicyResponse",
+    });
+  })
+);
 
 export function c1ApiPolicyV1PoliciesDeleteResponseFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   TaskExpandMask,
   TaskExpandMask$Outbound,
@@ -36,11 +37,13 @@ export const TaskServiceCreateOffboardingRequest$outboundSchema: z.ZodType<
   TaskServiceCreateOffboardingRequest$Outbound,
   z.ZodTypeDef,
   TaskServiceCreateOffboardingRequest
-> = z.object({
-  description: z.string().optional(),
-  expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-  subjectUserId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
+    subjectUserId: z.string().optional(),
+  })
+);
 
 export function taskServiceCreateOffboardingRequestToJSON(
   taskServiceCreateOffboardingRequest: TaskServiceCreateOffboardingRequest,

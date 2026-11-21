@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ConnectorExpandMask is used to expand related objects on a connector.
@@ -27,9 +28,11 @@ export const ConnectorExpandMask$outboundSchema: z.ZodType<
   ConnectorExpandMask$Outbound,
   z.ZodTypeDef,
   ConnectorExpandMask
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    paths: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function connectorExpandMaskToJSON(
   connectorExpandMask: ConnectorExpandMask,

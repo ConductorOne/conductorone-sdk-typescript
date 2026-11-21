@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The FundAssignmentServiceDeleteRequest message.
@@ -17,7 +18,7 @@ export const FundAssignmentServiceDeleteRequest$outboundSchema: z.ZodType<
   FundAssignmentServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   FundAssignmentServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function fundAssignmentServiceDeleteRequestToJSON(
   fundAssignmentServiceDeleteRequest: FundAssignmentServiceDeleteRequest,

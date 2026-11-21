@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * C1EdgeService names the hosted Edge or AuthZEN service a trust under the
@@ -20,7 +21,7 @@ export const C1EdgeServiceInput$outboundSchema: z.ZodType<
   C1EdgeServiceInput$Outbound,
   z.ZodTypeDef,
   C1EdgeServiceInput
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function c1EdgeServiceInputToJSON(
   c1EdgeServiceInput: C1EdgeServiceInput,

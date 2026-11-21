@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -156,32 +157,34 @@ export const DelegateStatus$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DelegateStatus
-> = openEnums.outboundSchema(DelegateStatus);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(DelegateStatus));
 
 /** @internal */
 export const ExcludeOrigins$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ExcludeOrigins
-> = openEnums.outboundSchema(ExcludeOrigins);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(ExcludeOrigins));
 
 /** @internal */
 export const ExcludeTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ExcludeTypes
-> = openEnums.outboundSchema(ExcludeTypes);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(ExcludeTypes));
 
 /** @internal */
 export const Origins$outboundSchema: z.ZodType<string, z.ZodTypeDef, Origins> =
-  openEnums.outboundSchema(Origins);
+  /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Origins));
 
 /** @internal */
 export const SearchUsersRequestUserStatuses$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SearchUsersRequestUserStatuses
-> = openEnums.outboundSchema(SearchUsersRequestUserStatuses);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(SearchUsersRequestUserStatuses)
+);
 
 /** @internal */
 export type SearchUsersRequest$Outbound = {
@@ -212,30 +215,33 @@ export const SearchUsersRequest$outboundSchema: z.ZodType<
   SearchUsersRequest$Outbound,
   z.ZodTypeDef,
   SearchUsersRequest
-> = z.object({
-  delegateStatus: DelegateStatus$outboundSchema.optional(),
-  delegatedUserIds: z.nullable(z.array(z.string())).optional(),
-  departments: z.nullable(z.array(z.string())).optional(),
-  email: z.string().optional(),
-  excludeIds: z.nullable(z.array(z.string())).optional(),
-  excludeOrigins: z.nullable(z.array(ExcludeOrigins$outboundSchema)).optional(),
-  excludeTypes: z.nullable(z.array(ExcludeTypes$outboundSchema)).optional(),
-  expandMask: z.nullable(UserExpandMask$outboundSchema).optional(),
-  ids: z.nullable(z.array(z.string())).optional(),
-  isDelegate: z.boolean().optional(),
-  jobTitles: z.nullable(z.array(z.string())).optional(),
-  managerIds: z.nullable(z.array(z.string())).optional(),
-  origins: z.nullable(z.array(Origins$outboundSchema)).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  refs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
-  roleIds: z.nullable(z.array(z.string())).optional(),
-  sourceAppIds: z.nullable(z.array(z.string())).optional(),
-  userStatuses: z.nullable(
-    z.array(SearchUsersRequestUserStatuses$outboundSchema),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    delegateStatus: DelegateStatus$outboundSchema.optional(),
+    delegatedUserIds: z.nullable(z.array(z.string())).optional(),
+    departments: z.nullable(z.array(z.string())).optional(),
+    email: z.string().optional(),
+    excludeIds: z.nullable(z.array(z.string())).optional(),
+    excludeOrigins: z.nullable(z.array(ExcludeOrigins$outboundSchema))
+      .optional(),
+    excludeTypes: z.nullable(z.array(ExcludeTypes$outboundSchema)).optional(),
+    expandMask: z.nullable(UserExpandMask$outboundSchema).optional(),
+    ids: z.nullable(z.array(z.string())).optional(),
+    isDelegate: z.boolean().optional(),
+    jobTitles: z.nullable(z.array(z.string())).optional(),
+    managerIds: z.nullable(z.array(z.string())).optional(),
+    origins: z.nullable(z.array(Origins$outboundSchema)).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    refs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
+    roleIds: z.nullable(z.array(z.string())).optional(),
+    sourceAppIds: z.nullable(z.array(z.string())).optional(),
+    userStatuses: z.nullable(
+      z.array(SearchUsersRequestUserStatuses$outboundSchema),
+    ).optional(),
+  })
+);
 
 export function searchUsersRequestToJSON(
   searchUsersRequest: SearchUsersRequest,

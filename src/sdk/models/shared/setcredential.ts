@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -39,11 +39,13 @@ export const SetCredential$inboundSchema: z.ZodType<
   SetCredential,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accountIdCel: z.string().optional(),
-  connectorRef: z.nullable(ConnectorRef$inboundSchema).optional(),
-  passwordCel: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountIdCel: z.string().optional(),
+    connectorRef: z.nullable(ConnectorRef$inboundSchema).optional(),
+    passwordCel: z.string().optional(),
+  })
+);
 /** @internal */
 export type SetCredential$Outbound = {
   accountIdCel?: string | undefined;
@@ -56,11 +58,13 @@ export const SetCredential$outboundSchema: z.ZodType<
   SetCredential$Outbound,
   z.ZodTypeDef,
   SetCredential
-> = z.object({
-  accountIdCel: z.string().optional(),
-  connectorRef: z.nullable(ConnectorRef$outboundSchema).optional(),
-  passwordCel: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountIdCel: z.string().optional(),
+    connectorRef: z.nullable(ConnectorRef$outboundSchema).optional(),
+    passwordCel: z.string().optional(),
+  })
+);
 
 export function setCredentialToJSON(setCredential: SetCredential): string {
   return JSON.stringify(SetCredential$outboundSchema.parse(setCredential));

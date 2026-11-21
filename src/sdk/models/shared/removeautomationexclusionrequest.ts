@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The RemoveAutomationExclusionRequest message.
@@ -24,9 +25,11 @@ export const RemoveAutomationExclusionRequest$outboundSchema: z.ZodType<
   RemoveAutomationExclusionRequest$Outbound,
   z.ZodTypeDef,
   RemoveAutomationExclusionRequest
-> = z.object({
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function removeAutomationExclusionRequestToJSON(
   removeAutomationExclusionRequest: RemoveAutomationExclusionRequest,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   UserRef,
   UserRef$Outbound,
@@ -26,9 +27,11 @@ export const CreateConnectorUserOwnerRequest$outboundSchema: z.ZodType<
   CreateConnectorUserOwnerRequest$Outbound,
   z.ZodTypeDef,
   CreateConnectorUserOwnerRequest
-> = z.object({
-  userRef: z.nullable(UserRef$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userRef: z.nullable(UserRef$outboundSchema).optional(),
+  })
+);
 
 export function createConnectorUserOwnerRequestToJSON(
   createConnectorUserOwnerRequest: CreateConnectorUserOwnerRequest,

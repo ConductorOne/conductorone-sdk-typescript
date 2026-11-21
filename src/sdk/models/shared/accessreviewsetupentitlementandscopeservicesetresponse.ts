@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -82,17 +83,19 @@ export const AccessReviewSetupEntitlementAndScopeServiceSetResponseExpanded$inbo
     AccessReviewSetupEntitlementAndScopeServiceSetResponseExpanded,
     z.ZodTypeDef,
     unknown
-  > = collectExtraKeys$(
-    z.object({
-      "@type": z.string().optional(),
-    }).catchall(z.any()),
-    "additionalProperties",
-    true,
-  ).transform((v) => {
-    return remap$(v, {
-      "@type": "atType",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    collectExtraKeys$(
+      z.object({
+        "@type": z.string().optional(),
+      }).catchall(z.any()),
+      "additionalProperties",
+      true,
+    ).transform((v) => {
+      return remap$(v, {
+        "@type": "atType",
+      });
+    })
+  );
 
 export function accessReviewSetupEntitlementAndScopeServiceSetResponseExpandedFromJSON(
   jsonString: string,
@@ -115,22 +118,22 @@ export const AccessReviewSetupEntitlementAndScopeServiceSetResponse$inboundSchem
     AccessReviewSetupEntitlementAndScopeServiceSetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    excludedEntitlements: z.nullable(
-      z.array(AccessReviewExcludedEntitlement$inboundSchema),
-    ).optional(),
-    excludedResourceTypes: z.nullable(
-      z.array(AccessReviewExcludedResourceType$inboundSchema),
-    ).optional(),
-    expanded: z.nullable(
-      z.array(z.lazy(() =>
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      excludedEntitlements: z.nullable(
+        z.array(AccessReviewExcludedEntitlement$inboundSchema),
+      ).optional(),
+      excludedResourceTypes: z.nullable(
+        z.array(AccessReviewExcludedResourceType$inboundSchema),
+      ).optional(),
+      expanded: z.nullable(z.array(z.lazy(() =>
         AccessReviewSetupEntitlementAndScopeServiceSetResponseExpanded$inboundSchema
-      )),
-    ).optional(),
-    list: z.nullable(z.array(AccessReviewSetupEntitlementView$inboundSchema))
-      .optional(),
-    scopeV2: z.nullable(AccessReviewScopeV2$inboundSchema).optional(),
-  });
+      ))).optional(),
+      list: z.nullable(z.array(AccessReviewSetupEntitlementView$inboundSchema))
+        .optional(),
+      scopeV2: z.nullable(AccessReviewScopeV2$inboundSchema).optional(),
+    })
+  );
 
 export function accessReviewSetupEntitlementAndScopeServiceSetResponseFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -53,18 +53,21 @@ export const C1ApiAiGovernanceV1MCPServerServiceResyncToolsRequest$outboundSchem
     C1ApiAiGovernanceV1MCPServerServiceResyncToolsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1MCPServerServiceResyncToolsRequest
-  > = z.object({
-    appId: z.string(),
-    connectorId: z.string(),
-    mcpServerServiceResyncToolsRequest: shared
-      .MCPServerServiceResyncToolsRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      connectorId: "connector_id",
-      mcpServerServiceResyncToolsRequest: "MCPServerServiceResyncToolsRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      connectorId: z.string(),
+      mcpServerServiceResyncToolsRequest: shared
+        .MCPServerServiceResyncToolsRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        connectorId: "connector_id",
+        mcpServerServiceResyncToolsRequest:
+          "MCPServerServiceResyncToolsRequest",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPServerServiceResyncToolsRequestToJSON(
   c1ApiAiGovernanceV1MCPServerServiceResyncToolsRequest:
@@ -83,21 +86,23 @@ export const C1ApiAiGovernanceV1MCPServerServiceResyncToolsResponse$inboundSchem
     C1ApiAiGovernanceV1MCPServerServiceResyncToolsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    MCPServerServiceResyncToolsResponse: shared
-      .MCPServerServiceResyncToolsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "MCPServerServiceResyncToolsResponse":
-        "mcpServerServiceResyncToolsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      MCPServerServiceResyncToolsResponse: shared
+        .MCPServerServiceResyncToolsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "MCPServerServiceResyncToolsResponse":
+          "mcpServerServiceResyncToolsResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPServerServiceResyncToolsResponseFromJSON(
   jsonString: string,

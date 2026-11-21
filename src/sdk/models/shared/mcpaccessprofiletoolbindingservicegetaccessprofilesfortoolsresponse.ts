@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -35,11 +35,13 @@ export const MCPAccessProfileToolBindingServiceGetAccessProfilesForToolsResponse
     MCPAccessProfileToolBindingServiceGetAccessProfilesForToolsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    accessProfilesForTools: z.nullable(
-      z.array(AccessProfilesForTool$inboundSchema),
-    ).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      accessProfilesForTools: z.nullable(
+        z.array(AccessProfilesForTool$inboundSchema),
+      ).optional(),
+    })
+  );
 
 export function mcpAccessProfileToolBindingServiceGetAccessProfilesForToolsResponseFromJSON(
   jsonString: string,

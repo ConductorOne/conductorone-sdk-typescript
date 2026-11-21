@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const AppUserFilter$inboundSchema: z.ZodType<
   AppUserFilter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+  })
+);
 /** @internal */
 export type AppUserFilter$Outbound = {
   appId?: string | undefined;
@@ -35,9 +37,11 @@ export const AppUserFilter$outboundSchema: z.ZodType<
   AppUserFilter$Outbound,
   z.ZodTypeDef,
   AppUserFilter
-> = z.object({
-  appId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+  })
+);
 
 export function appUserFilterToJSON(appUserFilter: AppUserFilter): string {
   return JSON.stringify(AppUserFilter$outboundSchema.parse(appUserFilter));

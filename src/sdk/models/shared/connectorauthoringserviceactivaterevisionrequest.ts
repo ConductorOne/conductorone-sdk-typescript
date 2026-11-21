@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ConnectorAuthoringServiceActivateRevisionRequest message.
@@ -54,14 +55,16 @@ export const ConnectorAuthoringServiceActivateRevisionRequest$outboundSchema:
     ConnectorAuthoringServiceActivateRevisionRequest$Outbound,
     z.ZodTypeDef,
     ConnectorAuthoringServiceActivateRevisionRequest
-  > = z.object({
-    approvalTokenId: z.string().optional(),
-    catalogId: z.string().optional(),
-    idempotencyKey: z.string().optional(),
-    instanceAppId: z.string().optional(),
-    instanceConnectorId: z.string().optional(),
-    revisionId: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      approvalTokenId: z.string().optional(),
+      catalogId: z.string().optional(),
+      idempotencyKey: z.string().optional(),
+      instanceAppId: z.string().optional(),
+      instanceConnectorId: z.string().optional(),
+      revisionId: z.string().optional(),
+    })
+  );
 
 export function connectorAuthoringServiceActivateRevisionRequestToJSON(
   connectorAuthoringServiceActivateRevisionRequest:

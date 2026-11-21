@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * FunctionsServiceTestRequest runs tests for a function at a specific commit.
@@ -24,9 +25,11 @@ export const FunctionsServiceTestRequest$outboundSchema: z.ZodType<
   FunctionsServiceTestRequest$Outbound,
   z.ZodTypeDef,
   FunctionsServiceTestRequest
-> = z.object({
-  commitId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    commitId: z.string().optional(),
+  })
+);
 
 export function functionsServiceTestRequestToJSON(
   functionsServiceTestRequest: FunctionsServiceTestRequest,

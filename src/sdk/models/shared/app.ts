@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -293,69 +293,75 @@ export const AccessModel$inboundSchema: z.ZodType<
   AccessModel,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AccessModel);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(AccessModel));
 /** @internal */
 export const AccessModel$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AccessModel
-> = openEnums.outboundSchema(AccessModel);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(AccessModel));
 
 /** @internal */
 export const IdentityMatching$inboundSchema: z.ZodType<
   IdentityMatching,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(IdentityMatching);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(IdentityMatching)
+);
 /** @internal */
 export const IdentityMatching$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   IdentityMatching
-> = openEnums.outboundSchema(IdentityMatching);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(IdentityMatching)
+);
 
 /** @internal */
-export const App$inboundSchema: z.ZodType<App, z.ZodTypeDef, unknown> = z
-  .object({
-    accessModel: AccessModel$inboundSchema.optional(),
-    annotations: z.record(z.string()).optional(),
-    appAccountId: z.string().optional(),
-    appAccountName: z.string().optional(),
-    appOwners: z.nullable(z.array(User$inboundSchema)).optional(),
-    appUserMapper: z.nullable(AppUserMapper$inboundSchema).optional(),
-    certifyPolicyId: z.string().optional(),
-    connectorVersion: z.number().int().optional(),
-    createdAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    defaultRequestCatalogId: z.string().optional(),
-    deletedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    description: z.string().optional(),
-    displayName: z.string().optional(),
-    enableConnectorSourcedOwnership: z.boolean().optional(),
-    entitlementsUseResourceDescription: z.boolean().optional(),
-    fieldMask: z.nullable(z.string()).optional(),
-    grantPolicyId: z.string().optional(),
-    iconUrl: z.string().optional(),
-    id: z.string().optional(),
-    identityMatching: IdentityMatching$inboundSchema.optional(),
-    instructions: z.string().optional(),
-    isDirectory: z.boolean().optional(),
-    isManuallyManaged: z.boolean().optional(),
-    logoUri: z.string().optional(),
-    matchBatonRef: z.nullable(AppMatchBatonRef$inboundSchema).optional(),
-    monthlyCostUsd: z.number().int().optional(),
-    parentAppId: z.string().optional(),
-    revokeGrantSources: z.boolean().optional(),
-    revokePolicyId: z.string().optional(),
-    strictAccessEntitlementProvisioning: z.boolean().optional(),
-    updatedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    userCount: z.string().transform(v => parseInt(v, 10)).optional(),
-  });
+export const App$inboundSchema: z.ZodType<App, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      accessModel: AccessModel$inboundSchema.optional(),
+      annotations: z.record(z.string()).optional(),
+      appAccountId: z.string().optional(),
+      appAccountName: z.string().optional(),
+      appOwners: z.nullable(z.array(User$inboundSchema)).optional(),
+      appUserMapper: z.nullable(AppUserMapper$inboundSchema).optional(),
+      certifyPolicyId: z.string().optional(),
+      connectorVersion: z.number().int().optional(),
+      createdAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      defaultRequestCatalogId: z.string().optional(),
+      deletedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      description: z.string().optional(),
+      displayName: z.string().optional(),
+      enableConnectorSourcedOwnership: z.boolean().optional(),
+      entitlementsUseResourceDescription: z.boolean().optional(),
+      fieldMask: z.nullable(z.string()).optional(),
+      grantPolicyId: z.string().optional(),
+      iconUrl: z.string().optional(),
+      id: z.string().optional(),
+      identityMatching: IdentityMatching$inboundSchema.optional(),
+      instructions: z.string().optional(),
+      isDirectory: z.boolean().optional(),
+      isManuallyManaged: z.boolean().optional(),
+      logoUri: z.string().optional(),
+      matchBatonRef: z.nullable(AppMatchBatonRef$inboundSchema).optional(),
+      monthlyCostUsd: z.number().int().optional(),
+      parentAppId: z.string().optional(),
+      revokeGrantSources: z.boolean().optional(),
+      revokePolicyId: z.string().optional(),
+      strictAccessEntitlementProvisioning: z.boolean().optional(),
+      updatedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      userCount: z.string().transform(v => parseInt(v, 10)).optional(),
+    })
+  );
 
 export function appFromJSON(
   jsonString: string,
@@ -396,28 +402,30 @@ export const AppInput$outboundSchema: z.ZodType<
   AppInput$Outbound,
   z.ZodTypeDef,
   AppInput
-> = z.object({
-  accessModel: AccessModel$outboundSchema.optional(),
-  annotations: z.record(z.string()).optional(),
-  appUserMapper: z.nullable(AppUserMapperInput$outboundSchema).optional(),
-  certifyPolicyId: z.string().optional(),
-  connectorVersion: z.number().int().optional(),
-  defaultRequestCatalogId: z.string().optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enableConnectorSourcedOwnership: z.boolean().optional(),
-  entitlementsUseResourceDescription: z.boolean().optional(),
-  grantPolicyId: z.string().optional(),
-  iconUrl: z.string().optional(),
-  identityMatching: IdentityMatching$outboundSchema.optional(),
-  instructions: z.string().optional(),
-  isManuallyManaged: z.boolean().optional(),
-  matchBatonRef: z.nullable(AppMatchBatonRef$outboundSchema).optional(),
-  monthlyCostUsd: z.number().int().optional(),
-  revokeGrantSources: z.boolean().optional(),
-  revokePolicyId: z.string().optional(),
-  strictAccessEntitlementProvisioning: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessModel: AccessModel$outboundSchema.optional(),
+    annotations: z.record(z.string()).optional(),
+    appUserMapper: z.nullable(AppUserMapperInput$outboundSchema).optional(),
+    certifyPolicyId: z.string().optional(),
+    connectorVersion: z.number().int().optional(),
+    defaultRequestCatalogId: z.string().optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    enableConnectorSourcedOwnership: z.boolean().optional(),
+    entitlementsUseResourceDescription: z.boolean().optional(),
+    grantPolicyId: z.string().optional(),
+    iconUrl: z.string().optional(),
+    identityMatching: IdentityMatching$outboundSchema.optional(),
+    instructions: z.string().optional(),
+    isManuallyManaged: z.boolean().optional(),
+    matchBatonRef: z.nullable(AppMatchBatonRef$outboundSchema).optional(),
+    monthlyCostUsd: z.number().int().optional(),
+    revokeGrantSources: z.boolean().optional(),
+    revokePolicyId: z.string().optional(),
+    strictAccessEntitlementProvisioning: z.boolean().optional(),
+  })
+);
 
 export function appInputToJSON(appInput: AppInput): string {
   return JSON.stringify(AppInput$outboundSchema.parse(appInput));

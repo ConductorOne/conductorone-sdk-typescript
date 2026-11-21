@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,13 +27,15 @@ export const ActionOutcomeError$inboundSchema: z.ZodType<
   ActionOutcomeError,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  errorCode: z.string().optional(),
-  errorMessage: z.string().optional(),
-  outcomeTime: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    errorCode: z.string().optional(),
+    errorMessage: z.string().optional(),
+    outcomeTime: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type ActionOutcomeError$Outbound = {
   errorCode?: string | undefined;
@@ -46,11 +48,14 @@ export const ActionOutcomeError$outboundSchema: z.ZodType<
   ActionOutcomeError$Outbound,
   z.ZodTypeDef,
   ActionOutcomeError
-> = z.object({
-  errorCode: z.string().optional(),
-  errorMessage: z.string().optional(),
-  outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    errorCode: z.string().optional(),
+    errorMessage: z.string().optional(),
+    outcomeTime: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+  })
+);
 
 export function actionOutcomeErrorToJSON(
   actionOutcomeError: ActionOutcomeError,

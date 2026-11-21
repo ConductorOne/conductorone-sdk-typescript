@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The FindingRef message.
@@ -24,9 +25,11 @@ export const FindingRef$outboundSchema: z.ZodType<
   FindingRef$Outbound,
   z.ZodTypeDef,
   FindingRef
-> = z.object({
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+  })
+);
 
 export function findingRefToJSON(findingRef: FindingRef): string {
   return JSON.stringify(FindingRef$outboundSchema.parse(findingRef));

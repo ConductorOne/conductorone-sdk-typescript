@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   DecoyInput,
   DecoyInput$Outbound,
@@ -28,10 +29,12 @@ export const DecoyServiceUpdateRequest$outboundSchema: z.ZodType<
   DecoyServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   DecoyServiceUpdateRequest
-> = z.object({
-  decoy: z.nullable(DecoyInput$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    decoy: z.nullable(DecoyInput$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function decoyServiceUpdateRequestToJSON(
   decoyServiceUpdateRequest: DecoyServiceUpdateRequest,

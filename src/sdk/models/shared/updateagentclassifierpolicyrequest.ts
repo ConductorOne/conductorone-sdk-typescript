@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AgentClassifierPolicy,
   AgentClassifierPolicy$Outbound,
@@ -28,10 +29,12 @@ export const UpdateAgentClassifierPolicyRequest$outboundSchema: z.ZodType<
   UpdateAgentClassifierPolicyRequest$Outbound,
   z.ZodTypeDef,
   UpdateAgentClassifierPolicyRequest
-> = z.object({
-  policy: z.nullable(AgentClassifierPolicy$outboundSchema),
-  updateMask: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    policy: z.nullable(AgentClassifierPolicy$outboundSchema),
+    updateMask: z.nullable(z.string()),
+  })
+);
 
 export function updateAgentClassifierPolicyRequestToJSON(
   updateAgentClassifierPolicyRequest: UpdateAgentClassifierPolicyRequest,

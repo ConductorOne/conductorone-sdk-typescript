@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ReportingServiceRunRequest message.
@@ -17,7 +18,7 @@ export const ReportingServiceRunRequest$outboundSchema: z.ZodType<
   ReportingServiceRunRequest$Outbound,
   z.ZodTypeDef,
   ReportingServiceRunRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function reportingServiceRunRequestToJSON(
   reportingServiceRunRequest: ReportingServiceRunRequest,

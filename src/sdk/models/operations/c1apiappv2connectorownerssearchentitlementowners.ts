@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -53,21 +53,23 @@ export const C1ApiAppV2ConnectorOwnersSearchEntitlementOwnersRequest$outboundSch
     C1ApiAppV2ConnectorOwnersSearchEntitlementOwnersRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV2ConnectorOwnersSearchEntitlementOwnersRequest
-  > = z.object({
-    appId: z.string(),
-    connectorId: z.string(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    roleSlug: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      connectorId: "connector_id",
-      pageSize: "page_size",
-      pageToken: "page_token",
-      roleSlug: "role_slug",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      connectorId: z.string(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      roleSlug: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        connectorId: "connector_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+        roleSlug: "role_slug",
+      });
+    })
+  );
 
 export function c1ApiAppV2ConnectorOwnersSearchEntitlementOwnersRequestToJSON(
   c1ApiAppV2ConnectorOwnersSearchEntitlementOwnersRequest:
@@ -85,21 +87,23 @@ export const C1ApiAppV2ConnectorOwnersSearchEntitlementOwnersResponse$inboundSch
     C1ApiAppV2ConnectorOwnersSearchEntitlementOwnersResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SearchConnectorEntitlementOwnersResponse: shared
-      .SearchConnectorEntitlementOwnersResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SearchConnectorEntitlementOwnersResponse":
-        "searchConnectorEntitlementOwnersResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SearchConnectorEntitlementOwnersResponse: shared
+        .SearchConnectorEntitlementOwnersResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SearchConnectorEntitlementOwnersResponse":
+          "searchConnectorEntitlementOwnersResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV2ConnectorOwnersSearchEntitlementOwnersResponseFromJSON(
   jsonString: string,

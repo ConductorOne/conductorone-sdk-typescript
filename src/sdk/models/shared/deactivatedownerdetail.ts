@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -49,23 +49,29 @@ export const DeactivatedOwnerDetailReason$inboundSchema: z.ZodType<
   DeactivatedOwnerDetailReason,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DeactivatedOwnerDetailReason);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(DeactivatedOwnerDetailReason)
+);
 /** @internal */
 export const DeactivatedOwnerDetailReason$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DeactivatedOwnerDetailReason
-> = openEnums.outboundSchema(DeactivatedOwnerDetailReason);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(DeactivatedOwnerDetailReason)
+);
 
 /** @internal */
 export const DeactivatedOwnerDetail$inboundSchema: z.ZodType<
   DeactivatedOwnerDetail,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  reason: DeactivatedOwnerDetailReason$inboundSchema.optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reason: DeactivatedOwnerDetailReason$inboundSchema.optional(),
+    userId: z.string().optional(),
+  })
+);
 /** @internal */
 export type DeactivatedOwnerDetail$Outbound = {
   reason?: string | undefined;
@@ -77,10 +83,12 @@ export const DeactivatedOwnerDetail$outboundSchema: z.ZodType<
   DeactivatedOwnerDetail$Outbound,
   z.ZodTypeDef,
   DeactivatedOwnerDetail
-> = z.object({
-  reason: DeactivatedOwnerDetailReason$outboundSchema.optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reason: DeactivatedOwnerDetailReason$outboundSchema.optional(),
+    userId: z.string().optional(),
+  })
+);
 
 export function deactivatedOwnerDetailToJSON(
   deactivatedOwnerDetail: DeactivatedOwnerDetail,

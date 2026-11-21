@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   ChangeJustification,
   ChangeJustification$Outbound,
@@ -38,10 +39,12 @@ export const UpdateConnectorScheduleRequest$outboundSchema: z.ZodType<
   UpdateConnectorScheduleRequest$Outbound,
   z.ZodTypeDef,
   UpdateConnectorScheduleRequest
-> = z.object({
-  cron: z.nullable(ConnectorScheduleCron$outboundSchema).optional(),
-  justification: z.nullable(ChangeJustification$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cron: z.nullable(ConnectorScheduleCron$outboundSchema).optional(),
+    justification: z.nullable(ChangeJustification$outboundSchema).optional(),
+  })
+);
 
 export function updateConnectorScheduleRequestToJSON(
   updateConnectorScheduleRequest: UpdateConnectorScheduleRequest,

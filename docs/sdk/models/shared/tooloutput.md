@@ -15,10 +15,10 @@ const value: string = "<value>";
 const value: number = 1284.03;
 ```
 
-### `shared.Three`
+### `shared.GatedToolCallTarget3`
 
 ```typescript
-const value: shared.Three = {};
+const value: shared.GatedToolCallTarget3 = {};
 ```
 
 ### `any[]`

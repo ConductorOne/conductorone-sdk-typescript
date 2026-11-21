@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,7 +17,7 @@ export const Oauth2FieldView$inboundSchema: z.ZodType<
   Oauth2FieldView,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type Oauth2FieldView$Outbound = {};
 
@@ -26,7 +26,7 @@ export const Oauth2FieldView$outboundSchema: z.ZodType<
   Oauth2FieldView$Outbound,
   z.ZodTypeDef,
   Oauth2FieldView
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function oauth2FieldViewToJSON(
   oauth2FieldView: Oauth2FieldView,

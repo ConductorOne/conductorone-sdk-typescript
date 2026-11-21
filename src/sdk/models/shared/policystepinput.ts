@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import { Accept, Accept$Outbound, Accept$outboundSchema } from "./accept.js";
 import { Action, Action$Outbound, Action$outboundSchema } from "./action.js";
 import {
@@ -63,15 +64,17 @@ export const PolicyStepInput$outboundSchema: z.ZodType<
   PolicyStepInput$Outbound,
   z.ZodTypeDef,
   PolicyStepInput
-> = z.object({
-  accept: z.nullable(Accept$outboundSchema).optional(),
-  action: z.nullable(Action$outboundSchema).optional(),
-  approval: z.nullable(ApprovalInput$outboundSchema).optional(),
-  form: z.nullable(FormInput$outboundSchema).optional(),
-  provision: z.nullable(Provision$outboundSchema).optional(),
-  reject: z.nullable(Reject$outboundSchema).optional(),
-  wait: z.nullable(Wait$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accept: z.nullable(Accept$outboundSchema).optional(),
+    action: z.nullable(Action$outboundSchema).optional(),
+    approval: z.nullable(ApprovalInput$outboundSchema).optional(),
+    form: z.nullable(FormInput$outboundSchema).optional(),
+    provision: z.nullable(Provision$outboundSchema).optional(),
+    reject: z.nullable(Reject$outboundSchema).optional(),
+    wait: z.nullable(Wait$outboundSchema).optional(),
+  })
+);
 
 export function policyStepInputToJSON(
   policyStepInput: PolicyStepInput,

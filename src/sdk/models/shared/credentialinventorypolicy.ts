@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -129,40 +129,42 @@ export const EnabledTypes$inboundSchema: z.ZodType<
   EnabledTypes,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EnabledTypes);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(EnabledTypes));
 /** @internal */
 export const EnabledTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   EnabledTypes
-> = openEnums.outboundSchema(EnabledTypes);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(EnabledTypes));
 
 /** @internal */
 export const CredentialInventoryPolicy$inboundSchema: z.ZodType<
   CredentialInventoryPolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  delegated: z.nullable(DelegatedConstraints$inboundSchema).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  displayName: z.string().optional(),
-  emailOtp: z.nullable(EmailOTPConstraints$inboundSchema).optional(),
-  enabledTypes: z.nullable(z.array(EnabledTypes$inboundSchema)).optional(),
-  id: z.string().optional(),
-  isBuiltin: z.boolean().optional(),
-  passkey: z.nullable(PasskeyConstraints$inboundSchema).optional(),
-  password: z.nullable(PasswordConstraints$inboundSchema).optional(),
-  priority: z.number().int().optional(),
-  totp: z.nullable(TOTPConstraints$inboundSchema).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    delegated: z.nullable(DelegatedConstraints$inboundSchema).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    displayName: z.string().optional(),
+    emailOtp: z.nullable(EmailOTPConstraints$inboundSchema).optional(),
+    enabledTypes: z.nullable(z.array(EnabledTypes$inboundSchema)).optional(),
+    id: z.string().optional(),
+    isBuiltin: z.boolean().optional(),
+    passkey: z.nullable(PasskeyConstraints$inboundSchema).optional(),
+    password: z.nullable(PasswordConstraints$inboundSchema).optional(),
+    priority: z.number().int().optional(),
+    totp: z.nullable(TOTPConstraints$inboundSchema).optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function credentialInventoryPolicyFromJSON(
   jsonString: string,
@@ -191,16 +193,18 @@ export const CredentialInventoryPolicyInput$outboundSchema: z.ZodType<
   CredentialInventoryPolicyInput$Outbound,
   z.ZodTypeDef,
   CredentialInventoryPolicyInput
-> = z.object({
-  delegated: z.nullable(DelegatedConstraints$outboundSchema).optional(),
-  displayName: z.string().optional(),
-  emailOtp: z.nullable(EmailOTPConstraints$outboundSchema).optional(),
-  enabledTypes: z.nullable(z.array(EnabledTypes$outboundSchema)).optional(),
-  passkey: z.nullable(PasskeyConstraints$outboundSchema).optional(),
-  password: z.nullable(PasswordConstraints$outboundSchema).optional(),
-  priority: z.number().int().optional(),
-  totp: z.nullable(TOTPConstraints$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    delegated: z.nullable(DelegatedConstraints$outboundSchema).optional(),
+    displayName: z.string().optional(),
+    emailOtp: z.nullable(EmailOTPConstraints$outboundSchema).optional(),
+    enabledTypes: z.nullable(z.array(EnabledTypes$outboundSchema)).optional(),
+    passkey: z.nullable(PasskeyConstraints$outboundSchema).optional(),
+    password: z.nullable(PasswordConstraints$outboundSchema).optional(),
+    priority: z.number().int().optional(),
+    totp: z.nullable(TOTPConstraints$outboundSchema).optional(),
+  })
+);
 
 export function credentialInventoryPolicyInputToJSON(
   credentialInventoryPolicyInput: CredentialInventoryPolicyInput,

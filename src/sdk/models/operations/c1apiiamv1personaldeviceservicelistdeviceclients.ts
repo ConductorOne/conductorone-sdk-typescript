@@ -4,13 +4,15 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiIamV1PersonalDeviceServiceListDeviceClientsRequest = {
   deviceId: string;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
 };
 
 export type C1ApiIamV1PersonalDeviceServiceListDeviceClientsResponse = {
@@ -37,6 +39,8 @@ export type C1ApiIamV1PersonalDeviceServiceListDeviceClientsResponse = {
 /** @internal */
 export type C1ApiIamV1PersonalDeviceServiceListDeviceClientsRequest$Outbound = {
   device_id: string;
+  page_size?: number | undefined;
+  page_token?: string | undefined;
 };
 
 /** @internal */
@@ -45,13 +49,19 @@ export const C1ApiIamV1PersonalDeviceServiceListDeviceClientsRequest$outboundSch
     C1ApiIamV1PersonalDeviceServiceListDeviceClientsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiIamV1PersonalDeviceServiceListDeviceClientsRequest
-  > = z.object({
-    deviceId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      deviceId: "device_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      deviceId: z.string(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        deviceId: "device_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiIamV1PersonalDeviceServiceListDeviceClientsRequestToJSON(
   c1ApiIamV1PersonalDeviceServiceListDeviceClientsRequest:
@@ -69,21 +79,24 @@ export const C1ApiIamV1PersonalDeviceServiceListDeviceClientsResponse$inboundSch
     C1ApiIamV1PersonalDeviceServiceListDeviceClientsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    PersonalDeviceServiceListDeviceClientsResponse: shared
-      .PersonalDeviceServiceListDeviceClientsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "PersonalDeviceServiceListDeviceClientsResponse":
-        "personalDeviceServiceListDeviceClientsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      PersonalDeviceServiceListDeviceClientsResponse: shared
+        .PersonalDeviceServiceListDeviceClientsResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "PersonalDeviceServiceListDeviceClientsResponse":
+          "personalDeviceServiceListDeviceClientsResponse",
+      });
+    })
+  );
 
 export function c1ApiIamV1PersonalDeviceServiceListDeviceClientsResponseFromJSON(
   jsonString: string,

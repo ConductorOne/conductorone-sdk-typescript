@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The DeleteStepUpProviderRequest message.
@@ -17,7 +18,7 @@ export const DeleteStepUpProviderRequest$outboundSchema: z.ZodType<
   DeleteStepUpProviderRequest$Outbound,
   z.ZodTypeDef,
   DeleteStepUpProviderRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function deleteStepUpProviderRequestToJSON(
   deleteStepUpProviderRequest: DeleteStepUpProviderRequest,

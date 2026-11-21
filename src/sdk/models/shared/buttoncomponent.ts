@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -49,20 +49,22 @@ export type ButtonComponent = {
 
 /** @internal */
 export const Variant$inboundSchema: z.ZodType<Variant, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Variant);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Variant));
 
 /** @internal */
 export const ButtonComponent$inboundSchema: z.ZodType<
   ButtonComponent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  action: z.nullable(A2UIAction$inboundSchema).optional(),
-  checks: z.nullable(z.array(ValidationCheck$inboundSchema)).optional(),
-  disabled: z.nullable(DynamicBool$inboundSchema).optional(),
-  label: z.nullable(DynamicString$inboundSchema).optional(),
-  variant: Variant$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: z.nullable(A2UIAction$inboundSchema).optional(),
+    checks: z.nullable(z.array(ValidationCheck$inboundSchema)).optional(),
+    disabled: z.nullable(DynamicBool$inboundSchema).optional(),
+    label: z.nullable(DynamicString$inboundSchema).optional(),
+    variant: Variant$inboundSchema.optional(),
+  })
+);
 
 export function buttonComponentFromJSON(
   jsonString: string,

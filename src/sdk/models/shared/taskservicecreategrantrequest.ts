@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   TaskExpandMask,
   TaskExpandMask$Outbound,
@@ -67,18 +68,20 @@ export const TaskServiceCreateGrantRequest$outboundSchema: z.ZodType<
   TaskServiceCreateGrantRequest$Outbound,
   z.ZodTypeDef,
   TaskServiceCreateGrantRequest
-> = z.object({
-  appEntitlementId: z.string(),
-  appId: z.string(),
-  appUserId: z.string().optional(),
-  description: z.string().optional(),
-  emergencyAccess: z.boolean().optional(),
-  expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-  grantDuration: z.nullable(z.string()).optional(),
-  identityUserId: z.string().optional(),
-  requestData: z.nullable(z.record(z.any())).optional(),
-  source: z.nullable(TaskGrantSource$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string(),
+    appId: z.string(),
+    appUserId: z.string().optional(),
+    description: z.string().optional(),
+    emergencyAccess: z.boolean().optional(),
+    expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
+    grantDuration: z.nullable(z.string()).optional(),
+    identityUserId: z.string().optional(),
+    requestData: z.nullable(z.record(z.any())).optional(),
+    source: z.nullable(TaskGrantSource$outboundSchema).optional(),
+  })
+);
 
 export function taskServiceCreateGrantRequestToJSON(
   taskServiceCreateGrantRequest: TaskServiceCreateGrantRequest,

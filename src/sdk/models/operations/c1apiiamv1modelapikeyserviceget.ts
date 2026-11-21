@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -44,9 +44,11 @@ export const C1APIIamV1ModelAPIKeyServiceGetRequest$outboundSchema: z.ZodType<
   C1APIIamV1ModelAPIKeyServiceGetRequest$Outbound,
   z.ZodTypeDef,
   C1APIIamV1ModelAPIKeyServiceGetRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function c1APIIamV1ModelAPIKeyServiceGetRequestToJSON(
   c1APIIamV1ModelAPIKeyServiceGetRequest:
@@ -64,20 +66,22 @@ export const C1APIIamV1ModelAPIKeyServiceGetResponse$inboundSchema: z.ZodType<
   C1APIIamV1ModelAPIKeyServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  ModelAPIKeyServiceGetResponse: shared
-    .ModelAPIKeyServiceGetResponse$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "ModelAPIKeyServiceGetResponse": "modelAPIKeyServiceGetResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    ModelAPIKeyServiceGetResponse: shared
+      .ModelAPIKeyServiceGetResponse$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "ModelAPIKeyServiceGetResponse": "modelAPIKeyServiceGetResponse",
+    });
+  })
+);
 
 export function c1APIIamV1ModelAPIKeyServiceGetResponseFromJSON(
   jsonString: string,

@@ -4,10 +4,15 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
+
+export type C1ApiFunctionsV1FunctionsServiceListFunctionsRequest = {
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+};
 
 export type C1ApiFunctionsV1FunctionsServiceListFunctionsResponse = {
   /**
@@ -31,26 +36,63 @@ export type C1ApiFunctionsV1FunctionsServiceListFunctionsResponse = {
 };
 
 /** @internal */
+export type C1ApiFunctionsV1FunctionsServiceListFunctionsRequest$Outbound = {
+  page_size?: number | undefined;
+  page_token?: string | undefined;
+};
+
+/** @internal */
+export const C1ApiFunctionsV1FunctionsServiceListFunctionsRequest$outboundSchema:
+  z.ZodType<
+    C1ApiFunctionsV1FunctionsServiceListFunctionsRequest$Outbound,
+    z.ZodTypeDef,
+    C1ApiFunctionsV1FunctionsServiceListFunctionsRequest
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
+
+export function c1ApiFunctionsV1FunctionsServiceListFunctionsRequestToJSON(
+  c1ApiFunctionsV1FunctionsServiceListFunctionsRequest:
+    C1ApiFunctionsV1FunctionsServiceListFunctionsRequest,
+): string {
+  return JSON.stringify(
+    C1ApiFunctionsV1FunctionsServiceListFunctionsRequest$outboundSchema.parse(
+      c1ApiFunctionsV1FunctionsServiceListFunctionsRequest,
+    ),
+  );
+}
+
+/** @internal */
 export const C1ApiFunctionsV1FunctionsServiceListFunctionsResponse$inboundSchema:
   z.ZodType<
     C1ApiFunctionsV1FunctionsServiceListFunctionsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    FunctionsServiceListFunctionsResponse: shared
-      .FunctionsServiceListFunctionsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "FunctionsServiceListFunctionsResponse":
-        "functionsServiceListFunctionsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      FunctionsServiceListFunctionsResponse: shared
+        .FunctionsServiceListFunctionsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "FunctionsServiceListFunctionsResponse":
+          "functionsServiceListFunctionsResponse",
+      });
+    })
+  );
 
 export function c1ApiFunctionsV1FunctionsServiceListFunctionsResponseFromJSON(
   jsonString: string,

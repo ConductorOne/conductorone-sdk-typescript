@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The AccessReviewExpandMask message.
@@ -24,9 +25,11 @@ export const AccessReviewExpandMask$outboundSchema: z.ZodType<
   AccessReviewExpandMask$Outbound,
   z.ZodTypeDef,
   AccessReviewExpandMask
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    paths: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function accessReviewExpandMaskToJSON(
   accessReviewExpandMask: AccessReviewExpandMask,

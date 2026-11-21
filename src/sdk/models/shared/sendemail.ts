@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -67,16 +67,18 @@ export const SendEmail$inboundSchema: z.ZodType<
   SendEmail,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  body: z.string().optional(),
-  email: z.string().optional(),
-  emailCel: z.string().optional(),
-  subject: z.string().optional(),
-  title: z.string().optional(),
-  useSubjectUser: z.boolean().optional(),
-  userIdsCel: z.string().optional(),
-  userRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    body: z.string().optional(),
+    email: z.string().optional(),
+    emailCel: z.string().optional(),
+    subject: z.string().optional(),
+    title: z.string().optional(),
+    useSubjectUser: z.boolean().optional(),
+    userIdsCel: z.string().optional(),
+    userRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type SendEmail$Outbound = {
   body?: string | undefined;
@@ -94,16 +96,18 @@ export const SendEmail$outboundSchema: z.ZodType<
   SendEmail$Outbound,
   z.ZodTypeDef,
   SendEmail
-> = z.object({
-  body: z.string().optional(),
-  email: z.string().optional(),
-  emailCel: z.string().optional(),
-  subject: z.string().optional(),
-  title: z.string().optional(),
-  useSubjectUser: z.boolean().optional(),
-  userIdsCel: z.string().optional(),
-  userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    body: z.string().optional(),
+    email: z.string().optional(),
+    emailCel: z.string().optional(),
+    subject: z.string().optional(),
+    title: z.string().optional(),
+    useSubjectUser: z.boolean().optional(),
+    userIdsCel: z.string().optional(),
+    userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
+  })
+);
 
 export function sendEmailToJSON(sendEmail: SendEmail): string {
   return JSON.stringify(SendEmail$outboundSchema.parse(sendEmail));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,10 +31,12 @@ export const CallFunction$inboundSchema: z.ZodType<
   CallFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  args: z.record(z.string()).optional(),
-  functionId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    args: z.record(z.string()).optional(),
+    functionId: z.string().optional(),
+  })
+);
 /** @internal */
 export type CallFunction$Outbound = {
   args?: { [k: string]: string } | undefined;
@@ -46,10 +48,12 @@ export const CallFunction$outboundSchema: z.ZodType<
   CallFunction$Outbound,
   z.ZodTypeDef,
   CallFunction
-> = z.object({
-  args: z.record(z.string()).optional(),
-  functionId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    args: z.record(z.string()).optional(),
+    functionId: z.string().optional(),
+  })
+);
 
 export function callFunctionToJSON(callFunction: CallFunction): string {
   return JSON.stringify(CallFunction$outboundSchema.parse(callFunction));

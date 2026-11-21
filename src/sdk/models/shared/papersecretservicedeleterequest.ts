@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The PaperSecretServiceDeleteRequest message.
@@ -17,7 +18,7 @@ export const PaperSecretServiceDeleteRequest$outboundSchema: z.ZodType<
   PaperSecretServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   PaperSecretServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function paperSecretServiceDeleteRequestToJSON(
   paperSecretServiceDeleteRequest: PaperSecretServiceDeleteRequest,

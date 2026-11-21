@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   ChangeJustification,
   ChangeJustification$Outbound,
@@ -42,12 +43,14 @@ export const ConnectorServiceUpdateRequest$outboundSchema: z.ZodType<
   ConnectorServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   ConnectorServiceUpdateRequest
-> = z.object({
-  connector: z.nullable(ConnectorInput$outboundSchema).optional(),
-  expandMask: z.nullable(ConnectorExpandMask$outboundSchema).optional(),
-  justification: z.nullable(ChangeJustification$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connector: z.nullable(ConnectorInput$outboundSchema).optional(),
+    expandMask: z.nullable(ConnectorExpandMask$outboundSchema).optional(),
+    justification: z.nullable(ChangeJustification$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function connectorServiceUpdateRequestToJSON(
   connectorServiceUpdateRequest: ConnectorServiceUpdateRequest,

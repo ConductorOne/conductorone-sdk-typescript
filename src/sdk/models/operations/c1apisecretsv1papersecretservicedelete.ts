@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiSecretsV1PaperSecretServiceDeleteRequest$outboundSchema:
     C1ApiSecretsV1PaperSecretServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSecretsV1PaperSecretServiceDeleteRequest
-  > = z.object({
-    vaultId: z.string(),
-    paperSecretServiceDeleteRequest: shared
-      .PaperSecretServiceDeleteRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      vaultId: "vault_id",
-      paperSecretServiceDeleteRequest: "PaperSecretServiceDeleteRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      vaultId: z.string(),
+      paperSecretServiceDeleteRequest: shared
+        .PaperSecretServiceDeleteRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        vaultId: "vault_id",
+        paperSecretServiceDeleteRequest: "PaperSecretServiceDeleteRequest",
+      });
+    })
+  );
 
 export function c1ApiSecretsV1PaperSecretServiceDeleteRequestToJSON(
   c1ApiSecretsV1PaperSecretServiceDeleteRequest:
@@ -79,20 +81,22 @@ export const C1ApiSecretsV1PaperSecretServiceDeleteResponse$inboundSchema:
     C1ApiSecretsV1PaperSecretServiceDeleteResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    PaperSecretServiceDeleteResponse: shared
-      .PaperSecretServiceDeleteResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "PaperSecretServiceDeleteResponse": "paperSecretServiceDeleteResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      PaperSecretServiceDeleteResponse: shared
+        .PaperSecretServiceDeleteResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "PaperSecretServiceDeleteResponse": "paperSecretServiceDeleteResponse",
+      });
+    })
+  );
 
 export function c1ApiSecretsV1PaperSecretServiceDeleteResponseFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiTaskV1TaskActionsServiceCloseRequest$outboundSchema:
     C1ApiTaskV1TaskActionsServiceCloseRequest$Outbound,
     z.ZodTypeDef,
     C1ApiTaskV1TaskActionsServiceCloseRequest
-  > = z.object({
-    taskId: z.string(),
-    taskActionsServiceCloseRequest: shared
-      .TaskActionsServiceCloseRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      taskId: "task_id",
-      taskActionsServiceCloseRequest: "TaskActionsServiceCloseRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      taskId: z.string(),
+      taskActionsServiceCloseRequest: shared
+        .TaskActionsServiceCloseRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        taskId: "task_id",
+        taskActionsServiceCloseRequest: "TaskActionsServiceCloseRequest",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskActionsServiceCloseRequestToJSON(
   c1ApiTaskV1TaskActionsServiceCloseRequest:
@@ -76,20 +78,22 @@ export function c1ApiTaskV1TaskActionsServiceCloseRequestToJSON(
 /** @internal */
 export const C1ApiTaskV1TaskActionsServiceCloseResponse$inboundSchema:
   z.ZodType<C1ApiTaskV1TaskActionsServiceCloseResponse, z.ZodTypeDef, unknown> =
-    z.object({
-      ContentType: z.string(),
-      StatusCode: z.number().int(),
-      RawResponse: z.instanceof(Response),
-      TaskActionsServiceCloseResponse: shared
-        .TaskActionsServiceCloseResponse$inboundSchema.optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "ContentType": "contentType",
-        "StatusCode": "statusCode",
-        "RawResponse": "rawResponse",
-        "TaskActionsServiceCloseResponse": "taskActionsServiceCloseResponse",
-      });
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        ContentType: z.string(),
+        StatusCode: z.number().int(),
+        RawResponse: z.instanceof(Response),
+        TaskActionsServiceCloseResponse: shared
+          .TaskActionsServiceCloseResponse$inboundSchema.optional(),
+      }).transform((v) => {
+        return remap$(v, {
+          "ContentType": "contentType",
+          "StatusCode": "statusCode",
+          "RawResponse": "rawResponse",
+          "TaskActionsServiceCloseResponse": "taskActionsServiceCloseResponse",
+        });
+      })
+    );
 
 export function c1ApiTaskV1TaskActionsServiceCloseResponseFromJSON(
   jsonString: string,

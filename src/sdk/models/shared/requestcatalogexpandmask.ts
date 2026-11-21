@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The RequestCatalogExpandMask includes the paths in the catalog view to expand in the return value of this call.
@@ -24,9 +25,11 @@ export const RequestCatalogExpandMask$outboundSchema: z.ZodType<
   RequestCatalogExpandMask$Outbound,
   z.ZodTypeDef,
   RequestCatalogExpandMask
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    paths: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function requestCatalogExpandMaskToJSON(
   requestCatalogExpandMask: RequestCatalogExpandMask,

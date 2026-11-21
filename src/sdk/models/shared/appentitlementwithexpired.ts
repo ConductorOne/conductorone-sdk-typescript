@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -49,21 +49,24 @@ export const AppEntitlementWithExpired$inboundSchema: z.ZodType<
   AppEntitlementWithExpired,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  appUser: z.nullable(AppUser$inboundSchema).optional(),
-  appUserId: z.string().optional(),
-  discovered: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  expired: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  grantReasons: z.nullable(z.array(GrantReason$inboundSchema)).optional(),
-  grantSources: z.nullable(z.array(AppEntitlementRef$inboundSchema)).optional(),
-  user: z.nullable(User$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    appUser: z.nullable(AppUser$inboundSchema).optional(),
+    appUserId: z.string().optional(),
+    discovered: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    expired: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    grantReasons: z.nullable(z.array(GrantReason$inboundSchema)).optional(),
+    grantSources: z.nullable(z.array(AppEntitlementRef$inboundSchema))
+      .optional(),
+    user: z.nullable(User$inboundSchema).optional(),
+  })
+);
 
 export function appEntitlementWithExpiredFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -50,16 +50,18 @@ export const C1ApiAppV1AppAccessRequestsDefaultsServiceCreateAppAccessRequestsDe
     C1ApiAppV1AppAccessRequestsDefaultsServiceCreateAppAccessRequestsDefaultsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppAccessRequestsDefaultsServiceCreateAppAccessRequestsDefaultsRequest
-  > = z.object({
-    appId: z.string(),
-    appAccessRequestDefaults: shared.AppAccessRequestDefaults1$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      appAccessRequestDefaults: "AppAccessRequestDefaults",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      appAccessRequestDefaults: shared.AppAccessRequestDefaults1$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        appAccessRequestDefaults: "AppAccessRequestDefaults",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppAccessRequestsDefaultsServiceCreateAppAccessRequestsDefaultsRequestToJSON(
   c1ApiAppV1AppAccessRequestsDefaultsServiceCreateAppAccessRequestsDefaultsRequest:
@@ -79,20 +81,22 @@ export const C1ApiAppV1AppAccessRequestsDefaultsServiceCreateAppAccessRequestsDe
     C1ApiAppV1AppAccessRequestsDefaultsServiceCreateAppAccessRequestsDefaultsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    AppAccessRequestDefaults: shared.AppAccessRequestDefaults$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "AppAccessRequestDefaults": "appAccessRequestDefaults",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      AppAccessRequestDefaults: shared.AppAccessRequestDefaults$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "AppAccessRequestDefaults": "appAccessRequestDefaults",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppAccessRequestsDefaultsServiceCreateAppAccessRequestsDefaultsResponseFromJSON(
   jsonString: string,

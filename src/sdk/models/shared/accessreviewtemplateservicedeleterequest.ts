@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The AccessReviewTemplateServiceDeleteRequest message.
@@ -17,7 +18,7 @@ export const AccessReviewTemplateServiceDeleteRequest$outboundSchema: z.ZodType<
   AccessReviewTemplateServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   AccessReviewTemplateServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function accessReviewTemplateServiceDeleteRequestToJSON(
   accessReviewTemplateServiceDeleteRequest:

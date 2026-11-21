@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
@@ -259,27 +260,29 @@ export type Task = {
 
 /** @internal */
 export const Actions$inboundSchema: z.ZodType<Actions, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Actions);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Actions));
 /** @internal */
 export const Actions$outboundSchema: z.ZodType<string, z.ZodTypeDef, Actions> =
-  openEnums.outboundSchema(Actions);
+  /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Actions));
 
 /** @internal */
 export const Annotations$inboundSchema: z.ZodType<
   Annotations,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    "@type": z.string().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "@type": "atType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      "@type": z.string().optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "@type": "atType",
+    });
+  })
+);
 /** @internal */
 export type Annotations$Outbound = {
   "@type"?: string | undefined;
@@ -291,18 +294,20 @@ export const Annotations$outboundSchema: z.ZodType<
   Annotations$Outbound,
   z.ZodTypeDef,
   Annotations
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    atType: z.string().optional(),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        atType: "@type",
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function annotationsToJSON(annotations: Annotations): string {
   return JSON.stringify(Annotations$outboundSchema.parse(annotations));
@@ -322,93 +327,95 @@ export const TaskOrigin$inboundSchema: z.ZodType<
   TaskOrigin,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TaskOrigin);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(TaskOrigin));
 /** @internal */
 export const TaskOrigin$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   TaskOrigin
-> = openEnums.outboundSchema(TaskOrigin);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(TaskOrigin));
 
 /** @internal */
 export const Processing$inboundSchema: z.ZodType<
   Processing,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Processing);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Processing));
 /** @internal */
 export const Processing$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Processing
-> = openEnums.outboundSchema(Processing);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Processing));
 
 /** @internal */
 export const Recommendation$inboundSchema: z.ZodType<
   Recommendation,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Recommendation);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Recommendation));
 /** @internal */
 export const Recommendation$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Recommendation
-> = openEnums.outboundSchema(Recommendation);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Recommendation));
 
 /** @internal */
 export const TaskState$inboundSchema: z.ZodType<
   TaskState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TaskState);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(TaskState));
 /** @internal */
 export const TaskState$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   TaskState
-> = openEnums.outboundSchema(TaskState);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(TaskState));
 
 /** @internal */
-export const Task$inboundSchema: z.ZodType<Task, z.ZodTypeDef, unknown> = z
-  .object({
-    actions: z.nullable(z.array(Actions$inboundSchema)).optional(),
-    analysisId: z.string().optional(),
-    annotations: z.nullable(z.array(z.lazy(() => Annotations$inboundSchema)))
-      .optional(),
-    approverIds: z.nullable(z.array(z.string())).optional(),
-    commentCount: z.number().int().optional(),
-    createdAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    createdByUserId: z.string().optional(),
-    data: z.nullable(z.record(z.any())).optional(),
-    deletedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    description: z.string().optional(),
-    displayName: z.string().optional(),
-    emergencyAccess: z.boolean().optional(),
-    externalRefs: z.nullable(z.array(ExternalRef$inboundSchema)).optional(),
-    form: z.nullable(RequestSchemaForm$inboundSchema).optional(),
-    id: z.string().optional(),
-    insightIds: z.nullable(z.array(z.string())).optional(),
-    numericId: z.string().transform(v => parseInt(v, 10)).optional(),
-    origin: TaskOrigin$inboundSchema.optional(),
-    policy: z.nullable(PolicyInstance$inboundSchema).optional(),
-    policyGenerationId: z.string().optional(),
-    processing: Processing$inboundSchema.optional(),
-    recommendation: Recommendation$inboundSchema.optional(),
-    revocationTargets: z.nullable(z.array(TaskRevocationTarget$inboundSchema))
-      .optional(),
-    state: TaskState$inboundSchema.optional(),
-    stepApproverIds: z.nullable(z.array(z.string())).optional(),
-    type: z.nullable(TaskType$inboundSchema).optional(),
-    updatedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    userId: z.string().optional(),
-  });
+export const Task$inboundSchema: z.ZodType<Task, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      actions: z.nullable(z.array(Actions$inboundSchema)).optional(),
+      analysisId: z.string().optional(),
+      annotations: z.nullable(z.array(z.lazy(() => Annotations$inboundSchema)))
+        .optional(),
+      approverIds: z.nullable(z.array(z.string())).optional(),
+      commentCount: z.number().int().optional(),
+      createdAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      createdByUserId: z.string().optional(),
+      data: z.nullable(z.record(z.any())).optional(),
+      deletedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      description: z.string().optional(),
+      displayName: z.string().optional(),
+      emergencyAccess: z.boolean().optional(),
+      externalRefs: z.nullable(z.array(ExternalRef$inboundSchema)).optional(),
+      form: z.nullable(RequestSchemaForm$inboundSchema).optional(),
+      id: z.string().optional(),
+      insightIds: z.nullable(z.array(z.string())).optional(),
+      numericId: z.string().transform(v => parseInt(v, 10)).optional(),
+      origin: TaskOrigin$inboundSchema.optional(),
+      policy: z.nullable(PolicyInstance$inboundSchema).optional(),
+      policyGenerationId: z.string().optional(),
+      processing: Processing$inboundSchema.optional(),
+      recommendation: Recommendation$inboundSchema.optional(),
+      revocationTargets: z.nullable(z.array(TaskRevocationTarget$inboundSchema))
+        .optional(),
+      state: TaskState$inboundSchema.optional(),
+      stepApproverIds: z.nullable(z.array(z.string())).optional(),
+      type: z.nullable(TaskType$inboundSchema).optional(),
+      updatedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      userId: z.string().optional(),
+    })
+  );
 /** @internal */
 export type Task$Outbound = {
   actions?: Array<string> | null | undefined;
@@ -443,38 +450,44 @@ export type Task$Outbound = {
 
 /** @internal */
 export const Task$outboundSchema: z.ZodType<Task$Outbound, z.ZodTypeDef, Task> =
-  z.object({
-    actions: z.nullable(z.array(Actions$outboundSchema)).optional(),
-    analysisId: z.string().optional(),
-    annotations: z.nullable(z.array(z.lazy(() => Annotations$outboundSchema)))
-      .optional(),
-    approverIds: z.nullable(z.array(z.string())).optional(),
-    commentCount: z.number().int().optional(),
-    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-    createdByUserId: z.string().optional(),
-    data: z.nullable(z.record(z.any())).optional(),
-    deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-    description: z.string().optional(),
-    displayName: z.string().optional(),
-    emergencyAccess: z.boolean().optional(),
-    externalRefs: z.nullable(z.array(ExternalRef$outboundSchema)).optional(),
-    form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
-    id: z.string().optional(),
-    insightIds: z.nullable(z.array(z.string())).optional(),
-    numericId: z.number().int().transform(v => `${v}`).optional(),
-    origin: TaskOrigin$outboundSchema.optional(),
-    policy: z.nullable(PolicyInstance$outboundSchema).optional(),
-    policyGenerationId: z.string().optional(),
-    processing: Processing$outboundSchema.optional(),
-    recommendation: Recommendation$outboundSchema.optional(),
-    revocationTargets: z.nullable(z.array(TaskRevocationTarget$outboundSchema))
-      .optional(),
-    state: TaskState$outboundSchema.optional(),
-    stepApproverIds: z.nullable(z.array(z.string())).optional(),
-    type: z.nullable(TaskType$outboundSchema).optional(),
-    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-    userId: z.string().optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      actions: z.nullable(z.array(Actions$outboundSchema)).optional(),
+      analysisId: z.string().optional(),
+      annotations: z.nullable(z.array(z.lazy(() => Annotations$outboundSchema)))
+        .optional(),
+      approverIds: z.nullable(z.array(z.string())).optional(),
+      commentCount: z.number().int().optional(),
+      createdAt: z.nullable(z.date().transform(v => v.toISOString()))
+        .optional(),
+      createdByUserId: z.string().optional(),
+      data: z.nullable(z.record(z.any())).optional(),
+      deletedAt: z.nullable(z.date().transform(v => v.toISOString()))
+        .optional(),
+      description: z.string().optional(),
+      displayName: z.string().optional(),
+      emergencyAccess: z.boolean().optional(),
+      externalRefs: z.nullable(z.array(ExternalRef$outboundSchema)).optional(),
+      form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
+      id: z.string().optional(),
+      insightIds: z.nullable(z.array(z.string())).optional(),
+      numericId: z.number().int().transform(v => `${v}`).optional(),
+      origin: TaskOrigin$outboundSchema.optional(),
+      policy: z.nullable(PolicyInstance$outboundSchema).optional(),
+      policyGenerationId: z.string().optional(),
+      processing: Processing$outboundSchema.optional(),
+      recommendation: Recommendation$outboundSchema.optional(),
+      revocationTargets: z.nullable(
+        z.array(TaskRevocationTarget$outboundSchema),
+      ).optional(),
+      state: TaskState$outboundSchema.optional(),
+      stepApproverIds: z.nullable(z.array(z.string())).optional(),
+      type: z.nullable(TaskType$outboundSchema).optional(),
+      updatedAt: z.nullable(z.date().transform(v => v.toISOString()))
+        .optional(),
+      userId: z.string().optional(),
+    })
+  );
 
 export function taskToJSON(task: Task): string {
   return JSON.stringify(Task$outboundSchema.parse(task));

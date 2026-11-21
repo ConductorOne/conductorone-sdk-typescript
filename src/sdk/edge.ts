@@ -3,6 +3,7 @@
  */
 
 import { edgeCheckInferenceVaultAccess } from "../funcs/edgeCheckInferenceVaultAccess.js";
+import { edgeCheckVaultAccess } from "../funcs/edgeCheckVaultAccess.js";
 import { edgeCreate } from "../funcs/edgeCreate.js";
 import { edgeDelete } from "../funcs/edgeDelete.js";
 import { edgeGet } from "../funcs/edgeGet.js";
@@ -115,7 +116,7 @@ export class Edge extends ClientSDK {
    * Update
    *
    * @remarks
-   * Update edits an Edge's mode, credential injections, or inference route via update_mask.
+   * Update an Edge's hosting, egress policy, required checks, credentials, or inference routes via update_mask.
    */
   async update(
     request: operations.C1ApiEdgeV1EdgeServiceUpdateRequest,
@@ -420,6 +421,24 @@ export class Edge extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.C1ApiEdgeV1EdgeServiceGetPublicTrustResponse> {
     return unwrapAsync(edgeGetPublicTrust(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Check Vault Access
+   *
+   * @remarks
+   * CheckVaultAccess reports whether the bound Edge runtime holds a Vault's
+   *  OpenSecret entitlement. It does not grant access or read a secret.
+   */
+  async checkVaultAccess(
+    request: operations.C1ApiEdgeV1EdgeServiceCheckVaultAccessRequest,
+    options?: RequestOptions,
+  ): Promise<operations.C1ApiEdgeV1EdgeServiceCheckVaultAccessResponse> {
+    return unwrapAsync(edgeCheckVaultAccess(
       this,
       request,
       options,

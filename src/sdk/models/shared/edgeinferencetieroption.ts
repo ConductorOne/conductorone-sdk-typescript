@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -51,20 +51,22 @@ export type EdgeInferenceTierOption = {
 
 /** @internal */
 export const Tier$inboundSchema: z.ZodType<Tier, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Tier);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Tier));
 
 /** @internal */
 export const EdgeInferenceTierOption$inboundSchema: z.ZodType<
   EdgeInferenceTierOption,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  aliasRouteId: z.string().optional(),
-  modelDisplayName: z.string().optional(),
-  modelId: z.string().optional(),
-  routeId: z.string().optional(),
-  tier: Tier$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    aliasRouteId: z.string().optional(),
+    modelDisplayName: z.string().optional(),
+    modelId: z.string().optional(),
+    routeId: z.string().optional(),
+    tier: Tier$inboundSchema.optional(),
+  })
+);
 
 export function edgeInferenceTierOptionFromJSON(
   jsonString: string,

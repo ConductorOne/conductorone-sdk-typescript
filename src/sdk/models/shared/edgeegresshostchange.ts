@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -38,12 +38,14 @@ export const EdgeEgressHostChange$inboundSchema: z.ZodType<
   EdgeEgressHostChange,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  after: z.nullable(EdgeEgressHostVerdict$inboundSchema).optional(),
-  before: z.nullable(EdgeEgressHostVerdict$inboundSchema).optional(),
-  deciderChanged: z.boolean().optional(),
-  verdictChanged: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.nullable(EdgeEgressHostVerdict$inboundSchema).optional(),
+    before: z.nullable(EdgeEgressHostVerdict$inboundSchema).optional(),
+    deciderChanged: z.boolean().optional(),
+    verdictChanged: z.boolean().optional(),
+  })
+);
 
 export function edgeEgressHostChangeFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * CredentialIssueTarget describes one approved credential request: who receives
@@ -20,7 +21,7 @@ export const CredentialIssueTargetInput$outboundSchema: z.ZodType<
   CredentialIssueTargetInput$Outbound,
   z.ZodTypeDef,
   CredentialIssueTargetInput
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function credentialIssueTargetInputToJSON(
   credentialIssueTargetInput: CredentialIssueTargetInput,

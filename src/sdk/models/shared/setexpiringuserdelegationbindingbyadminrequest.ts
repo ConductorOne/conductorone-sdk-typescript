@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * SetExpiringUserDelegationBindingByAdminRequest is the request for an admin to set a temporary delegation binding for a user.
@@ -29,13 +30,15 @@ export const SetExpiringUserDelegationBindingByAdminRequest$outboundSchema:
     SetExpiringUserDelegationBindingByAdminRequest$Outbound,
     z.ZodTypeDef,
     SetExpiringUserDelegationBindingByAdminRequest
-  > = z.object({
-    delegatedUserId: z.string().optional(),
-    delegationExpireAt: z.nullable(z.date().transform(v => v.toISOString()))
-      .optional(),
-    delegationStartAt: z.nullable(z.date().transform(v => v.toISOString()))
-      .optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      delegatedUserId: z.string().optional(),
+      delegationExpireAt: z.nullable(z.date().transform(v => v.toISOString()))
+        .optional(),
+      delegationStartAt: z.nullable(z.date().transform(v => v.toISOString()))
+        .optional(),
+    })
+  );
 
 export function setExpiringUserDelegationBindingByAdminRequestToJSON(
   setExpiringUserDelegationBindingByAdminRequest:

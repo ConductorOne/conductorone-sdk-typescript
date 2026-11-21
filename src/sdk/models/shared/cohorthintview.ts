@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const CohortHintView$inboundSchema: z.ZodType<
   CohortHintView,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  attribute: z.string().optional(),
-  priority: z.number().int().optional(),
-  values: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    attribute: z.string().optional(),
+    priority: z.number().int().optional(),
+    values: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function cohortHintViewFromJSON(
   jsonString: string,

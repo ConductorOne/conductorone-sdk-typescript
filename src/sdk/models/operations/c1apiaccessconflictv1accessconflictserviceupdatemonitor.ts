@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -53,15 +53,17 @@ export const C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest$outb
     C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest
-  > = z.object({
-    id: z.string(),
-    conflictMonitorUpdateRequest: shared
-      .ConflictMonitorUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      conflictMonitorUpdateRequest: "ConflictMonitorUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      conflictMonitorUpdateRequest: shared
+        .ConflictMonitorUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        conflictMonitorUpdateRequest: "ConflictMonitorUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequestToJSON(
   c1ApiAccessconflictV1AccessConflictServiceUpdateMonitorRequest:
@@ -79,19 +81,21 @@ export const C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse$inb
     C1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ConflictMonitor: shared.ConflictMonitor$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ConflictMonitor": "conflictMonitor",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ConflictMonitor: shared.ConflictMonitor$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ConflictMonitor": "conflictMonitor",
+      });
+    })
+  );
 
 export function c1ApiAccessconflictV1AccessConflictServiceUpdateMonitorResponseFromJSON(
   jsonString: string,

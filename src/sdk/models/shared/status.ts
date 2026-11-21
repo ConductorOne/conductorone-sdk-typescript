@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -57,17 +58,19 @@ export type Status = {
 
 /** @internal */
 export const Details$inboundSchema: z.ZodType<Details, z.ZodTypeDef, unknown> =
-  collectExtraKeys$(
-    z.object({
-      "@type": z.string().optional(),
-    }).catchall(z.any()),
-    "additionalProperties",
-    true,
-  ).transform((v) => {
-    return remap$(v, {
-      "@type": "atType",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    collectExtraKeys$(
+      z.object({
+        "@type": z.string().optional(),
+      }).catchall(z.any()),
+      "additionalProperties",
+      true,
+    ).transform((v) => {
+      return remap$(v, {
+        "@type": "atType",
+      });
+    })
+  );
 
 export function detailsFromJSON(
   jsonString: string,
@@ -80,13 +83,15 @@ export function detailsFromJSON(
 }
 
 /** @internal */
-export const Status$inboundSchema: z.ZodType<Status, z.ZodTypeDef, unknown> = z
-  .object({
-    code: z.number().int().optional(),
-    details: z.nullable(z.array(z.lazy(() => Details$inboundSchema)))
-      .optional(),
-    message: z.string().optional(),
-  });
+export const Status$inboundSchema: z.ZodType<Status, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      code: z.number().int().optional(),
+      details: z.nullable(z.array(z.lazy(() => Details$inboundSchema)))
+        .optional(),
+      message: z.string().optional(),
+    })
+  );
 
 export function statusFromJSON(
   jsonString: string,

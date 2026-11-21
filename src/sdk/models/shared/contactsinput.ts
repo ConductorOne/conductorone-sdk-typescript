@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Contacts represents the contact configuration for an organization.
@@ -34,11 +35,13 @@ export const ContactsInput$outboundSchema: z.ZodType<
   ContactsInput$Outbound,
   z.ZodTypeDef,
   ContactsInput
-> = z.object({
-  billingEmails: z.nullable(z.array(z.string())).optional(),
-  operationsEmails: z.nullable(z.array(z.string())).optional(),
-  securityEmails: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    billingEmails: z.nullable(z.array(z.string())).optional(),
+    operationsEmails: z.nullable(z.array(z.string())).optional(),
+    securityEmails: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function contactsInputToJSON(contactsInput: ContactsInput): string {
   return JSON.stringify(ContactsInput$outboundSchema.parse(contactsInput));

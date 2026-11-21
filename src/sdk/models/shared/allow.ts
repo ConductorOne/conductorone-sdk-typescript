@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -49,19 +49,23 @@ export const AllowFloorLevel$inboundSchema: z.ZodType<
   AllowFloorLevel,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AllowFloorLevel);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(AllowFloorLevel));
 /** @internal */
 export const AllowFloorLevel$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AllowFloorLevel
-> = openEnums.outboundSchema(AllowFloorLevel);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AllowFloorLevel)
+);
 
 /** @internal */
-export const Allow$inboundSchema: z.ZodType<Allow, z.ZodTypeDef, unknown> = z
-  .object({
-    floorLevel: AllowFloorLevel$inboundSchema.optional(),
-  });
+export const Allow$inboundSchema: z.ZodType<Allow, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      floorLevel: AllowFloorLevel$inboundSchema.optional(),
+    })
+  );
 /** @internal */
 export type Allow$Outbound = {
   floorLevel?: string | undefined;
@@ -72,9 +76,11 @@ export const Allow$outboundSchema: z.ZodType<
   Allow$Outbound,
   z.ZodTypeDef,
   Allow
-> = z.object({
-  floorLevel: AllowFloorLevel$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    floorLevel: AllowFloorLevel$outboundSchema.optional(),
+  })
+);
 
 export function allowToJSON(allow: Allow): string {
   return JSON.stringify(Allow$outboundSchema.parse(allow));

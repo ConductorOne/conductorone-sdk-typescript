@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AccessReviewSetupEntitlementInput,
   AccessReviewSetupEntitlementInput$Outbound,
@@ -33,11 +34,13 @@ export const AccessReviewAddCampaignEntitlementsRequest$outboundSchema:
     AccessReviewAddCampaignEntitlementsRequest$Outbound,
     z.ZodTypeDef,
     AccessReviewAddCampaignEntitlementsRequest
-  > = z.object({
-    entitlements: z.nullable(
-      z.array(AccessReviewSetupEntitlementInput$outboundSchema),
-    ).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      entitlements: z.nullable(
+        z.array(AccessReviewSetupEntitlementInput$outboundSchema),
+      ).optional(),
+    })
+  );
 
 export function accessReviewAddCampaignEntitlementsRequestToJSON(
   accessReviewAddCampaignEntitlementsRequest:

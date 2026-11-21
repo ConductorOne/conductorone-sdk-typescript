@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -49,16 +49,18 @@ export const C1ApiAiGovernanceV1MCPServerServiceListCatalogRequest$outboundSchem
     C1ApiAiGovernanceV1MCPServerServiceListCatalogRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1MCPServerServiceListCatalogRequest
-  > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    query: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      query: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPServerServiceListCatalogRequestToJSON(
   c1ApiAiGovernanceV1MCPServerServiceListCatalogRequest:
@@ -77,21 +79,23 @@ export const C1ApiAiGovernanceV1MCPServerServiceListCatalogResponse$inboundSchem
     C1ApiAiGovernanceV1MCPServerServiceListCatalogResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    MCPServerServiceListCatalogResponse: shared
-      .MCPServerServiceListCatalogResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "MCPServerServiceListCatalogResponse":
-        "mcpServerServiceListCatalogResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      MCPServerServiceListCatalogResponse: shared
+        .MCPServerServiceListCatalogResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "MCPServerServiceListCatalogResponse":
+          "mcpServerServiceListCatalogResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPServerServiceListCatalogResponseFromJSON(
   jsonString: string,

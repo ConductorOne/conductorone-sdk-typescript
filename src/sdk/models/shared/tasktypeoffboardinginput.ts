@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The TaskTypeOffboarding message.
@@ -17,7 +18,7 @@ export const TaskTypeOffboardingInput$outboundSchema: z.ZodType<
   TaskTypeOffboardingInput$Outbound,
   z.ZodTypeDef,
   TaskTypeOffboardingInput
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function taskTypeOffboardingInputToJSON(
   taskTypeOffboardingInput: TaskTypeOffboardingInput,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   FundRule,
   FundRule$Outbound,
@@ -28,10 +29,12 @@ export const FundRuleServiceUpdateRequest$outboundSchema: z.ZodType<
   FundRuleServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   FundRuleServiceUpdateRequest
-> = z.object({
-  rule: z.nullable(FundRule$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rule: z.nullable(FundRule$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function fundRuleServiceUpdateRequestToJSON(
   fundRuleServiceUpdateRequest: FundRuleServiceUpdateRequest,

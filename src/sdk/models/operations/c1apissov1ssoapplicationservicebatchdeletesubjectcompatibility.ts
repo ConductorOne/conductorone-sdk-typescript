@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -59,19 +59,21 @@ export const C1ApiSsov1SSOApplicationServiceBatchDeleteSubjectCompatibilityReque
     C1ApiSsov1SSOApplicationServiceBatchDeleteSubjectCompatibilityRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSsov1SSOApplicationServiceBatchDeleteSubjectCompatibilityRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    ssoApplicationServiceBatchDeleteSubjectCompatibilityRequest: shared
-      .SSOApplicationServiceBatchDeleteSubjectCompatibilityRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      ssoApplicationServiceBatchDeleteSubjectCompatibilityRequest:
-        "SSOApplicationServiceBatchDeleteSubjectCompatibilityRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      ssoApplicationServiceBatchDeleteSubjectCompatibilityRequest: shared
+        .SSOApplicationServiceBatchDeleteSubjectCompatibilityRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        ssoApplicationServiceBatchDeleteSubjectCompatibilityRequest:
+          "SSOApplicationServiceBatchDeleteSubjectCompatibilityRequest",
+      });
+    })
+  );
 
 export function c1ApiSSOV1SSOApplicationServiceBatchDeleteSubjectCompatibilityRequestToJSON(
   c1ApiSsov1SSOApplicationServiceBatchDeleteSubjectCompatibilityRequest:
@@ -91,22 +93,24 @@ export const C1ApiSsov1SSOApplicationServiceBatchDeleteSubjectCompatibilityRespo
     C1ApiSsov1SSOApplicationServiceBatchDeleteSubjectCompatibilityResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SSOApplicationServiceBatchDeleteSubjectCompatibilityResponse: shared
-      .SSOApplicationServiceBatchDeleteSubjectCompatibilityResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SSOApplicationServiceBatchDeleteSubjectCompatibilityResponse":
-        "ssoApplicationServiceBatchDeleteSubjectCompatibilityResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SSOApplicationServiceBatchDeleteSubjectCompatibilityResponse: shared
+        .SSOApplicationServiceBatchDeleteSubjectCompatibilityResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SSOApplicationServiceBatchDeleteSubjectCompatibilityResponse":
+          "ssoApplicationServiceBatchDeleteSubjectCompatibilityResponse",
+      });
+    })
+  );
 
 export function c1ApiSSOV1SSOApplicationServiceBatchDeleteSubjectCompatibilityResponseFromJSON(
   jsonString: string,

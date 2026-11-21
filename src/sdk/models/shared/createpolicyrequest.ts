@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -113,7 +114,9 @@ export const CreatePolicyRequestPolicyType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   CreatePolicyRequestPolicyType
-> = openEnums.outboundSchema(CreatePolicyRequestPolicyType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(CreatePolicyRequestPolicyType)
+);
 
 /** @internal */
 export type CreatePolicyRequest$Outbound = {
@@ -134,18 +137,21 @@ export const CreatePolicyRequest$outboundSchema: z.ZodType<
   CreatePolicyRequest$Outbound,
   z.ZodTypeDef,
   CreatePolicyRequest
-> = z.object({
-  annotations: z.record(z.string()).optional(),
-  baselinePolicyId: z.string().optional(),
-  description: z.string().optional(),
-  displayName: z.string(),
-  policySteps: z.record(PolicyStepsInput$outboundSchema).optional(),
-  policyType: CreatePolicyRequestPolicyType$outboundSchema.optional(),
-  postActions: z.nullable(z.array(PolicyPostActions$outboundSchema)).optional(),
-  reassignTasksToDelegates: z.boolean().optional(),
-  rules: z.nullable(z.array(Rule$outboundSchema)).optional(),
-  scope: z.nullable(PolicyScope$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotations: z.record(z.string()).optional(),
+    baselinePolicyId: z.string().optional(),
+    description: z.string().optional(),
+    displayName: z.string(),
+    policySteps: z.record(PolicyStepsInput$outboundSchema).optional(),
+    policyType: CreatePolicyRequestPolicyType$outboundSchema.optional(),
+    postActions: z.nullable(z.array(PolicyPostActions$outboundSchema))
+      .optional(),
+    reassignTasksToDelegates: z.boolean().optional(),
+    rules: z.nullable(z.array(Rule$outboundSchema)).optional(),
+    scope: z.nullable(PolicyScope$outboundSchema).optional(),
+  })
+);
 
 export function createPolicyRequestToJSON(
   createPolicyRequest: CreatePolicyRequest,

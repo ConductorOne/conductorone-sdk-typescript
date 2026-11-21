@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -35,11 +35,13 @@ export const SSFTransmitterConfig$inboundSchema: z.ZodType<
   SSFTransmitterConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean().optional(),
-  eventTypes: z.nullable(z.array(z.string())).optional(),
-  ssfTransmitterStreamIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().optional(),
+    eventTypes: z.nullable(z.array(z.string())).optional(),
+    ssfTransmitterStreamIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type SSFTransmitterConfig$Outbound = {
   enabled?: boolean | undefined;
@@ -52,11 +54,13 @@ export const SSFTransmitterConfig$outboundSchema: z.ZodType<
   SSFTransmitterConfig$Outbound,
   z.ZodTypeDef,
   SSFTransmitterConfig
-> = z.object({
-  enabled: z.boolean().optional(),
-  eventTypes: z.nullable(z.array(z.string())).optional(),
-  ssfTransmitterStreamIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().optional(),
+    eventTypes: z.nullable(z.array(z.string())).optional(),
+    ssfTransmitterStreamIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function ssfTransmitterConfigToJSON(
   ssfTransmitterConfig: SSFTransmitterConfig,

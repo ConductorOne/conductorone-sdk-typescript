@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -37,15 +37,17 @@ export const ApprovedAction$inboundSchema: z.ZodType<
   ApprovedAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  approvedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  entitlements: z.nullable(z.array(AppEntitlementReference$inboundSchema))
-    .optional(),
-  stepUpTransactionId: z.string().optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    approvedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    entitlements: z.nullable(z.array(AppEntitlementReference$inboundSchema))
+      .optional(),
+    stepUpTransactionId: z.string().optional(),
+    userId: z.string().optional(),
+  })
+);
 /** @internal */
 export type ApprovedAction$Outbound = {
   approvedAt?: string | null | undefined;
@@ -59,13 +61,15 @@ export const ApprovedAction$outboundSchema: z.ZodType<
   ApprovedAction$Outbound,
   z.ZodTypeDef,
   ApprovedAction
-> = z.object({
-  approvedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  entitlements: z.nullable(z.array(AppEntitlementReference$outboundSchema))
-    .optional(),
-  stepUpTransactionId: z.string().optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    approvedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    entitlements: z.nullable(z.array(AppEntitlementReference$outboundSchema))
+      .optional(),
+    stepUpTransactionId: z.string().optional(),
+    userId: z.string().optional(),
+  })
+);
 
 export function approvedActionToJSON(approvedAction: ApprovedAction): string {
   return JSON.stringify(ApprovedAction$outboundSchema.parse(approvedAction));

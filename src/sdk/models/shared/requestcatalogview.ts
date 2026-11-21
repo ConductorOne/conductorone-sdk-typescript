@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -35,12 +35,14 @@ export const RequestCatalogView$inboundSchema: z.ZodType<
   RequestCatalogView,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessEntitlementsPath: z.string().optional(),
-  createdByUserPath: z.string().optional(),
-  memberCount: z.string().transform(v => parseInt(v, 10)).optional(),
-  requestCatalog: z.nullable(RequestCatalog$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessEntitlementsPath: z.string().optional(),
+    createdByUserPath: z.string().optional(),
+    memberCount: z.string().transform(v => parseInt(v, 10)).optional(),
+    requestCatalog: z.nullable(RequestCatalog$inboundSchema).optional(),
+  })
+);
 
 export function requestCatalogViewFromJSON(
   jsonString: string,

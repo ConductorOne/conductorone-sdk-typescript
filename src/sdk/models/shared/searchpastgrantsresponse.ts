@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -53,17 +54,19 @@ export const SearchPastGrantsResponseExpanded$inboundSchema: z.ZodType<
   SearchPastGrantsResponseExpanded,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    "@type": z.string().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "@type": "atType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      "@type": z.string().optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "@type": "atType",
+    });
+  })
+);
 
 export function searchPastGrantsResponseExpandedFromJSON(
   jsonString: string,
@@ -80,14 +83,17 @@ export const SearchPastGrantsResponse$inboundSchema: z.ZodType<
   SearchPastGrantsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() => SearchPastGrantsResponseExpanded$inboundSchema)),
-  ).optional(),
-  list: z.nullable(z.array(AppEntitlementUserBindingHistoryView$inboundSchema))
-    .optional(),
-  nextPageToken: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expanded: z.nullable(
+      z.array(z.lazy(() => SearchPastGrantsResponseExpanded$inboundSchema)),
+    ).optional(),
+    list: z.nullable(
+      z.array(AppEntitlementUserBindingHistoryView$inboundSchema),
+    ).optional(),
+    nextPageToken: z.string().optional(),
+  })
+);
 
 export function searchPastGrantsResponseFromJSON(
   jsonString: string,

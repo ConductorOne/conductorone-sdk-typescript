@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,13 +45,15 @@ export const C1ApiFunctionsV1FunctionsServiceListTagsRequest$outboundSchema:
     C1ApiFunctionsV1FunctionsServiceListTagsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFunctionsV1FunctionsServiceListTagsRequest
-  > = z.object({
-    functionId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      functionId: "function_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      functionId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        functionId: "function_id",
+      });
+    })
+  );
 
 export function c1ApiFunctionsV1FunctionsServiceListTagsRequestToJSON(
   c1ApiFunctionsV1FunctionsServiceListTagsRequest:
@@ -70,20 +72,22 @@ export const C1ApiFunctionsV1FunctionsServiceListTagsResponse$inboundSchema:
     C1ApiFunctionsV1FunctionsServiceListTagsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    FunctionsServiceListTagsResponse: shared
-      .FunctionsServiceListTagsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "FunctionsServiceListTagsResponse": "functionsServiceListTagsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      FunctionsServiceListTagsResponse: shared
+        .FunctionsServiceListTagsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "FunctionsServiceListTagsResponse": "functionsServiceListTagsResponse",
+      });
+    })
+  );
 
 export function c1ApiFunctionsV1FunctionsServiceListTagsResponseFromJSON(
   jsonString: string,

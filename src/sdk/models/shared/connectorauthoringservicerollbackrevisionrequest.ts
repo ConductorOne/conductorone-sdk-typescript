@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ConnectorAuthoringServiceRollbackRevisionRequest message.
@@ -54,14 +55,16 @@ export const ConnectorAuthoringServiceRollbackRevisionRequest$outboundSchema:
     ConnectorAuthoringServiceRollbackRevisionRequest$Outbound,
     z.ZodTypeDef,
     ConnectorAuthoringServiceRollbackRevisionRequest
-  > = z.object({
-    approvalTokenId: z.string().optional(),
-    catalogId: z.string().optional(),
-    instanceAppId: z.string().optional(),
-    instanceConnectorId: z.string().optional(),
-    reason: z.string().optional(),
-    targetRevisionId: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      approvalTokenId: z.string().optional(),
+      catalogId: z.string().optional(),
+      instanceAppId: z.string().optional(),
+      instanceConnectorId: z.string().optional(),
+      reason: z.string().optional(),
+      targetRevisionId: z.string().optional(),
+    })
+  );
 
 export function connectorAuthoringServiceRollbackRevisionRequestToJSON(
   connectorAuthoringServiceRollbackRevisionRequest:

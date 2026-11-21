@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,20 +51,22 @@ export const C1ApiAppV2AppOwnersDeleteUserOwnerRequest$outboundSchema:
     C1ApiAppV2AppOwnersDeleteUserOwnerRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV2AppOwnersDeleteUserOwnerRequest
-  > = z.object({
-    appId: z.string(),
-    roleSlug: z.string(),
-    userRefId: z.string(),
-    deleteAppUserOwnerRequest: shared.DeleteAppUserOwnerRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      roleSlug: "role_slug",
-      userRefId: "user_ref_id",
-      deleteAppUserOwnerRequest: "DeleteAppUserOwnerRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      roleSlug: z.string(),
+      userRefId: z.string(),
+      deleteAppUserOwnerRequest: shared.DeleteAppUserOwnerRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        roleSlug: "role_slug",
+        userRefId: "user_ref_id",
+        deleteAppUserOwnerRequest: "DeleteAppUserOwnerRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV2AppOwnersDeleteUserOwnerRequestToJSON(
   c1ApiAppV2AppOwnersDeleteUserOwnerRequest:
@@ -80,20 +82,22 @@ export function c1ApiAppV2AppOwnersDeleteUserOwnerRequestToJSON(
 /** @internal */
 export const C1ApiAppV2AppOwnersDeleteUserOwnerResponse$inboundSchema:
   z.ZodType<C1ApiAppV2AppOwnersDeleteUserOwnerResponse, z.ZodTypeDef, unknown> =
-    z.object({
-      ContentType: z.string(),
-      StatusCode: z.number().int(),
-      RawResponse: z.instanceof(Response),
-      DeleteAppUserOwnerResponse: shared
-        .DeleteAppUserOwnerResponse$inboundSchema.optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "ContentType": "contentType",
-        "StatusCode": "statusCode",
-        "RawResponse": "rawResponse",
-        "DeleteAppUserOwnerResponse": "deleteAppUserOwnerResponse",
-      });
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        ContentType: z.string(),
+        StatusCode: z.number().int(),
+        RawResponse: z.instanceof(Response),
+        DeleteAppUserOwnerResponse: shared
+          .DeleteAppUserOwnerResponse$inboundSchema.optional(),
+      }).transform((v) => {
+        return remap$(v, {
+          "ContentType": "contentType",
+          "StatusCode": "statusCode",
+          "RawResponse": "rawResponse",
+          "DeleteAppUserOwnerResponse": "deleteAppUserOwnerResponse",
+        });
+      })
+    );
 
 export function c1ApiAppV2AppOwnersDeleteUserOwnerResponseFromJSON(
   jsonString: string,

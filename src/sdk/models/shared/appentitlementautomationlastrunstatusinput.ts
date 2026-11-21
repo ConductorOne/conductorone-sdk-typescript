@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The AppEntitlementAutomationLastRunStatus message.
@@ -18,7 +19,7 @@ export const AppEntitlementAutomationLastRunStatusInput$outboundSchema:
     AppEntitlementAutomationLastRunStatusInput$Outbound,
     z.ZodTypeDef,
     AppEntitlementAutomationLastRunStatusInput
-  > = z.object({});
+  > = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function appEntitlementAutomationLastRunStatusInputToJSON(
   appEntitlementAutomationLastRunStatusInput:

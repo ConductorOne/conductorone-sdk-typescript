@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,10 +28,12 @@ export const DirectoryMergeConfig$inboundSchema: z.ZodType<
   DirectoryMergeConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  matchCases: z.nullable(z.array(DirectoryMergeMatchCase$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    matchCases: z.nullable(z.array(DirectoryMergeMatchCase$inboundSchema))
+      .optional(),
+  })
+);
 /** @internal */
 export type DirectoryMergeConfig$Outbound = {
   matchCases?: Array<DirectoryMergeMatchCase$Outbound> | null | undefined;
@@ -42,10 +44,12 @@ export const DirectoryMergeConfig$outboundSchema: z.ZodType<
   DirectoryMergeConfig$Outbound,
   z.ZodTypeDef,
   DirectoryMergeConfig
-> = z.object({
-  matchCases: z.nullable(z.array(DirectoryMergeMatchCase$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    matchCases: z.nullable(z.array(DirectoryMergeMatchCase$outboundSchema))
+      .optional(),
+  })
+);
 
 export function directoryMergeConfigToJSON(
   directoryMergeConfig: DirectoryMergeConfig,

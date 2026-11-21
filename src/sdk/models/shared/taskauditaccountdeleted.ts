@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -45,14 +45,16 @@ export const TaskAuditAccountDeleted$inboundSchema: z.ZodType<
   TaskAuditAccountDeleted,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  appUserId: z.string().optional(),
-  connectorResourceId: z.string().optional(),
-  displayName: z.string().optional(),
-  email: z.string().optional(),
-  username: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    appUserId: z.string().optional(),
+    connectorResourceId: z.string().optional(),
+    displayName: z.string().optional(),
+    email: z.string().optional(),
+    username: z.string().optional(),
+  })
+);
 
 export function taskAuditAccountDeletedFromJSON(
   jsonString: string,

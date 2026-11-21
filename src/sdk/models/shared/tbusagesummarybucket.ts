@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,13 +27,15 @@ export const TBUsageSummaryBucket$inboundSchema: z.ZodType<
   TBUsageSummaryBucket,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bucketStart: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  inputTokens: z.string().optional(),
-  outputTokens: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bucketStart: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    inputTokens: z.string().optional(),
+    outputTokens: z.string().optional(),
+  })
+);
 
 export function tbUsageSummaryBucketFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -53,17 +53,19 @@ export const C1ApiAuthzenV1AuthzenServerServiceUpdateRequest$outboundSchema:
     C1ApiAuthzenV1AuthzenServerServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAuthzenV1AuthzenServerServiceUpdateRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    authzenServerServiceUpdateRequest: shared
-      .AuthzenServerServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      authzenServerServiceUpdateRequest: "AuthzenServerServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      authzenServerServiceUpdateRequest: shared
+        .AuthzenServerServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        authzenServerServiceUpdateRequest: "AuthzenServerServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiAuthzenV1AuthzenServerServiceUpdateRequestToJSON(
   c1ApiAuthzenV1AuthzenServerServiceUpdateRequest:
@@ -82,21 +84,23 @@ export const C1ApiAuthzenV1AuthzenServerServiceUpdateResponse$inboundSchema:
     C1ApiAuthzenV1AuthzenServerServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    AuthzenServerServiceUpdateResponse: shared
-      .AuthzenServerServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "AuthzenServerServiceUpdateResponse":
-        "authzenServerServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      AuthzenServerServiceUpdateResponse: shared
+        .AuthzenServerServiceUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "AuthzenServerServiceUpdateResponse":
+          "authzenServerServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiAuthzenV1AuthzenServerServiceUpdateResponseFromJSON(
   jsonString: string,

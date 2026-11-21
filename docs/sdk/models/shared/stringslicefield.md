@@ -4,6 +4,7 @@ The StringSliceField message.
 
 This message contains a oneof named view. Only a single field of the following list may be set at a time:
   - chipsField
+  - multiSelectField
   - pickerField
 
 
@@ -17,10 +18,11 @@ let value: StringSliceField = {};
 
 ## Fields
 
-| Field                                                               | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `chipsField`                                                        | [shared.ChipsField](../../../sdk/models/shared/chipsfield.md)       | :heavy_minus_sign:                                                  | N/A                                                                 |
-| `defaultValues`                                                     | *string*[]                                                          | :heavy_minus_sign:                                                  | The defaultValues field.                                            |
-| `pickerField`                                                       | [shared.PickerField](../../../sdk/models/shared/pickerfield.md)     | :heavy_minus_sign:                                                  | N/A                                                                 |
-| `placeholder`                                                       | *string*                                                            | :heavy_minus_sign:                                                  | The placeholder field.                                              |
-| `rules`                                                             | [shared.RepeatedRules](../../../sdk/models/shared/repeatedrules.md) | :heavy_minus_sign:                                                  | N/A                                                                 |
+| Field                                                                     | Type                                                                      | Required                                                                  | Description                                                               |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `chipsField`                                                              | [shared.ChipsField](../../../sdk/models/shared/chipsfield.md)             | :heavy_minus_sign:                                                        | N/A                                                                       |
+| `defaultValues`                                                           | *string*[]                                                                | :heavy_minus_sign:                                                        | The defaultValues field.                                                  |
+| `multiSelectField`                                                        | [shared.MultiSelectField](../../../sdk/models/shared/multiselectfield.md) | :heavy_minus_sign:                                                        | N/A                                                                       |
+| `pickerField`                                                             | [shared.PickerField](../../../sdk/models/shared/pickerfield.md)           | :heavy_minus_sign:                                                        | N/A                                                                       |
+| `placeholder`                                                             | *string*                                                                  | :heavy_minus_sign:                                                        | The placeholder field.                                                    |
+| `rules`                                                                   | [shared.RepeatedRules](../../../sdk/models/shared/repeatedrules.md)       | :heavy_minus_sign:                                                        | N/A                                                                       |

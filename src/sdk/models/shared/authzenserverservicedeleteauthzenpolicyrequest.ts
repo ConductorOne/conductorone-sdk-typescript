@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * AuthzenServerServiceDeleteAuthzenPolicyRequest deletes a CEL policy
@@ -21,7 +22,7 @@ export const AuthzenServerServiceDeleteAuthzenPolicyRequest$outboundSchema:
     AuthzenServerServiceDeleteAuthzenPolicyRequest$Outbound,
     z.ZodTypeDef,
     AuthzenServerServiceDeleteAuthzenPolicyRequest
-  > = z.object({});
+  > = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function authzenServerServiceDeleteAuthzenPolicyRequestToJSON(
   authzenServerServiceDeleteAuthzenPolicyRequest:

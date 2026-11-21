@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$Outbound,
@@ -79,20 +80,22 @@ export const SearchGrantFeedRequest$outboundSchema: z.ZodType<
   SearchGrantFeedRequest$Outbound,
   z.ZodTypeDef,
   SearchGrantFeedRequest
-> = z.object({
-  after: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
-    .optional(),
-  appRefs: z.nullable(z.array(AppRef$outboundSchema)).optional(),
-  appUserRefs: z.nullable(z.array(AppUserRef$outboundSchema)).optional(),
-  before: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  expandMask: z.nullable(
-    AppEntitlementUserBindingExpandHistoryMask$outboundSchema,
-  ).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
+      .optional(),
+    appRefs: z.nullable(z.array(AppRef$outboundSchema)).optional(),
+    appUserRefs: z.nullable(z.array(AppUserRef$outboundSchema)).optional(),
+    before: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    expandMask: z.nullable(
+      AppEntitlementUserBindingExpandHistoryMask$outboundSchema,
+    ).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
+  })
+);
 
 export function searchGrantFeedRequestToJSON(
   searchGrantFeedRequest: SearchGrantFeedRequest,

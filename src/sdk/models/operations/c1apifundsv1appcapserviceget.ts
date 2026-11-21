@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -42,13 +42,15 @@ export const C1ApiFundsV1AppCapServiceGetRequest$outboundSchema: z.ZodType<
   C1ApiFundsV1AppCapServiceGetRequest$Outbound,
   z.ZodTypeDef,
   C1ApiFundsV1AppCapServiceGetRequest
-> = z.object({
-  appId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    appId: "app_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      appId: "app_id",
+    });
+  })
+);
 
 export function c1ApiFundsV1AppCapServiceGetRequestToJSON(
   c1ApiFundsV1AppCapServiceGetRequest: C1ApiFundsV1AppCapServiceGetRequest,
@@ -65,20 +67,22 @@ export const C1ApiFundsV1AppCapServiceGetResponse$inboundSchema: z.ZodType<
   C1ApiFundsV1AppCapServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  AppCapServiceGetResponse: shared.AppCapServiceGetResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "AppCapServiceGetResponse": "appCapServiceGetResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    AppCapServiceGetResponse: shared.AppCapServiceGetResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "AppCapServiceGetResponse": "appCapServiceGetResponse",
+    });
+  })
+);
 
 export function c1ApiFundsV1AppCapServiceGetResponseFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,15 +51,18 @@ export const C1ApiIamV1PersonalClientServiceUpdateRequest$outboundSchema:
     C1ApiIamV1PersonalClientServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiIamV1PersonalClientServiceUpdateRequest
-  > = z.object({
-    id: z.string(),
-    personalClientServiceUpdateRequest: shared
-      .PersonalClientServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      personalClientServiceUpdateRequest: "PersonalClientServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      personalClientServiceUpdateRequest: shared
+        .PersonalClientServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        personalClientServiceUpdateRequest:
+          "PersonalClientServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiIamV1PersonalClientServiceUpdateRequestToJSON(
   c1ApiIamV1PersonalClientServiceUpdateRequest:
@@ -78,21 +81,23 @@ export const C1ApiIamV1PersonalClientServiceUpdateResponse$inboundSchema:
     C1ApiIamV1PersonalClientServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    PersonalClientServiceUpdateResponse: shared
-      .PersonalClientServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "PersonalClientServiceUpdateResponse":
-        "personalClientServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      PersonalClientServiceUpdateResponse: shared
+        .PersonalClientServiceUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "PersonalClientServiceUpdateResponse":
+          "personalClientServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiIamV1PersonalClientServiceUpdateResponseFromJSON(
   jsonString: string,

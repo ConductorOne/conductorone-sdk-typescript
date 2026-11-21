@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -62,17 +62,21 @@ export const HistoryActorKind$inboundSchema: z.ZodType<
   HistoryActorKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(HistoryActorKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(HistoryActorKind)
+);
 
 /** @internal */
 export const HistoryActor$inboundSchema: z.ZodType<
   HistoryActor,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  kind: HistoryActorKind$inboundSchema.optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: HistoryActorKind$inboundSchema.optional(),
+    userId: z.string().optional(),
+  })
+);
 
 export function historyActorFromJSON(
   jsonString: string,

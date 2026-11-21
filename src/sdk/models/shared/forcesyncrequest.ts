@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Signal the connector to start syncing. This puts the sync on the queue. It does not guarantee immediate sync. Long syncs still take minutes to hours.
@@ -17,7 +18,7 @@ export const ForceSyncRequest$outboundSchema: z.ZodType<
   ForceSyncRequest$Outbound,
   z.ZodTypeDef,
   ForceSyncRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function forceSyncRequestToJSON(
   forceSyncRequest: ForceSyncRequest,

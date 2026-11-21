@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -154,39 +154,49 @@ export const GrantSourceFilter$inboundSchema: z.ZodType<
   GrantSourceFilter,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(GrantSourceFilter);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(GrantSourceFilter)
+);
 /** @internal */
 export const GrantSourceFilter$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   GrantSourceFilter
-> = openEnums.outboundSchema(GrantSourceFilter);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(GrantSourceFilter)
+);
 
 /** @internal */
 export const CreateRevokeTasksV2$inboundSchema: z.ZodType<
   CreateRevokeTasksV2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  exclusionCriteria: z.nullable(EntitlementExclusionCriteria$inboundSchema)
-    .optional(),
-  exclusionList: z.nullable(EntitlementExclusionList$inboundSchema).optional(),
-  exclusionListCel: z.nullable(EntitlementExclusionListCel$inboundSchema)
-    .optional(),
-  exclusionNone: z.nullable(EntitlementExclusionNone$inboundSchema).optional(),
-  grantSourceFilter: GrantSourceFilter$inboundSchema.optional(),
-  inclusionAccessOnly: z.nullable(EntitlementInclusionAccessOnly$inboundSchema)
-    .optional(),
-  inclusionAll: z.nullable(EntitlementInclusionAll$inboundSchema).optional(),
-  inclusionCriteria: z.nullable(EntitlementInclusionCriteria$inboundSchema)
-    .optional(),
-  inclusionList: z.nullable(EntitlementInclusionList$inboundSchema).optional(),
-  inclusionListCel: z.nullable(EntitlementInclusionListCel$inboundSchema)
-    .optional(),
-  useSubjectUser: z.nullable(z.boolean()).optional(),
-  userIdCel: z.nullable(z.string()).optional(),
-  userRef: z.nullable(UserRef$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    exclusionCriteria: z.nullable(EntitlementExclusionCriteria$inboundSchema)
+      .optional(),
+    exclusionList: z.nullable(EntitlementExclusionList$inboundSchema)
+      .optional(),
+    exclusionListCel: z.nullable(EntitlementExclusionListCel$inboundSchema)
+      .optional(),
+    exclusionNone: z.nullable(EntitlementExclusionNone$inboundSchema)
+      .optional(),
+    grantSourceFilter: GrantSourceFilter$inboundSchema.optional(),
+    inclusionAccessOnly: z.nullable(
+      EntitlementInclusionAccessOnly$inboundSchema,
+    ).optional(),
+    inclusionAll: z.nullable(EntitlementInclusionAll$inboundSchema).optional(),
+    inclusionCriteria: z.nullable(EntitlementInclusionCriteria$inboundSchema)
+      .optional(),
+    inclusionList: z.nullable(EntitlementInclusionList$inboundSchema)
+      .optional(),
+    inclusionListCel: z.nullable(EntitlementInclusionListCel$inboundSchema)
+      .optional(),
+    useSubjectUser: z.nullable(z.boolean()).optional(),
+    userIdCel: z.nullable(z.string()).optional(),
+    userRef: z.nullable(UserRef$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type CreateRevokeTasksV2$Outbound = {
   exclusionCriteria?: EntitlementExclusionCriteria$Outbound | null | undefined;
@@ -212,26 +222,32 @@ export const CreateRevokeTasksV2$outboundSchema: z.ZodType<
   CreateRevokeTasksV2$Outbound,
   z.ZodTypeDef,
   CreateRevokeTasksV2
-> = z.object({
-  exclusionCriteria: z.nullable(EntitlementExclusionCriteria$outboundSchema)
-    .optional(),
-  exclusionList: z.nullable(EntitlementExclusionList$outboundSchema).optional(),
-  exclusionListCel: z.nullable(EntitlementExclusionListCel$outboundSchema)
-    .optional(),
-  exclusionNone: z.nullable(EntitlementExclusionNone$outboundSchema).optional(),
-  grantSourceFilter: GrantSourceFilter$outboundSchema.optional(),
-  inclusionAccessOnly: z.nullable(EntitlementInclusionAccessOnly$outboundSchema)
-    .optional(),
-  inclusionAll: z.nullable(EntitlementInclusionAll$outboundSchema).optional(),
-  inclusionCriteria: z.nullable(EntitlementInclusionCriteria$outboundSchema)
-    .optional(),
-  inclusionList: z.nullable(EntitlementInclusionList$outboundSchema).optional(),
-  inclusionListCel: z.nullable(EntitlementInclusionListCel$outboundSchema)
-    .optional(),
-  useSubjectUser: z.nullable(z.boolean()).optional(),
-  userIdCel: z.nullable(z.string()).optional(),
-  userRef: z.nullable(UserRef$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    exclusionCriteria: z.nullable(EntitlementExclusionCriteria$outboundSchema)
+      .optional(),
+    exclusionList: z.nullable(EntitlementExclusionList$outboundSchema)
+      .optional(),
+    exclusionListCel: z.nullable(EntitlementExclusionListCel$outboundSchema)
+      .optional(),
+    exclusionNone: z.nullable(EntitlementExclusionNone$outboundSchema)
+      .optional(),
+    grantSourceFilter: GrantSourceFilter$outboundSchema.optional(),
+    inclusionAccessOnly: z.nullable(
+      EntitlementInclusionAccessOnly$outboundSchema,
+    ).optional(),
+    inclusionAll: z.nullable(EntitlementInclusionAll$outboundSchema).optional(),
+    inclusionCriteria: z.nullable(EntitlementInclusionCriteria$outboundSchema)
+      .optional(),
+    inclusionList: z.nullable(EntitlementInclusionList$outboundSchema)
+      .optional(),
+    inclusionListCel: z.nullable(EntitlementInclusionListCel$outboundSchema)
+      .optional(),
+    useSubjectUser: z.nullable(z.boolean()).optional(),
+    userIdCel: z.nullable(z.string()).optional(),
+    userRef: z.nullable(UserRef$outboundSchema).optional(),
+  })
+);
 
 export function createRevokeTasksV2ToJSON(
   createRevokeTasksV2: CreateRevokeTasksV2,

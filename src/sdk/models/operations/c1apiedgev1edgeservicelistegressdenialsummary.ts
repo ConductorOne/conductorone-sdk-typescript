@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -63,27 +63,29 @@ export const C1ApiEdgeV1EdgeServiceListEgressDenialSummaryRequest$outboundSchema
     C1ApiEdgeV1EdgeServiceListEgressDenialSummaryRequest$Outbound,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceListEgressDenialSummaryRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    destHost: z.string().optional(),
-    destHostSuffix: z.string().optional(),
-    egressEnforcementMode: z.string().optional(),
-    egressPolicyVerdict: z.string().optional(),
-    limit: z.number().int().optional(),
-    principalUserId: z.string().optional(),
-    since: z.number().int().transform(v => `${v}`).optional(),
-    until: z.number().int().transform(v => `${v}`).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      destHost: "dest_host",
-      destHostSuffix: "dest_host_suffix",
-      egressEnforcementMode: "egress_enforcement_mode",
-      egressPolicyVerdict: "egress_policy_verdict",
-      principalUserId: "principal_user_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      destHost: z.string().optional(),
+      destHostSuffix: z.string().optional(),
+      egressEnforcementMode: z.string().optional(),
+      egressPolicyVerdict: z.string().optional(),
+      limit: z.number().int().optional(),
+      principalUserId: z.string().optional(),
+      since: z.number().int().transform(v => `${v}`).optional(),
+      until: z.number().int().transform(v => `${v}`).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        destHost: "dest_host",
+        destHostSuffix: "dest_host_suffix",
+        egressEnforcementMode: "egress_enforcement_mode",
+        egressPolicyVerdict: "egress_policy_verdict",
+        principalUserId: "principal_user_id",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListEgressDenialSummaryRequestToJSON(
   c1ApiEdgeV1EdgeServiceListEgressDenialSummaryRequest:
@@ -102,21 +104,23 @@ export const C1ApiEdgeV1EdgeServiceListEgressDenialSummaryResponse$inboundSchema
     C1ApiEdgeV1EdgeServiceListEgressDenialSummaryResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    EdgeServiceListEgressDenialSummaryResponse: shared
-      .EdgeServiceListEgressDenialSummaryResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "EdgeServiceListEgressDenialSummaryResponse":
-        "edgeServiceListEgressDenialSummaryResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      EdgeServiceListEgressDenialSummaryResponse: shared
+        .EdgeServiceListEgressDenialSummaryResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "EdgeServiceListEgressDenialSummaryResponse":
+          "edgeServiceListEgressDenialSummaryResponse",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListEgressDenialSummaryResponseFromJSON(
   jsonString: string,

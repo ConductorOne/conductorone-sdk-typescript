@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -56,15 +56,17 @@ export const TBVerdictReason$inboundSchema: z.ZodType<
   TBVerdictReason,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  blockingKinds: z.nullable(z.array(z.string())).optional(),
-  classes: z.nullable(z.array(z.string())).optional(),
-  clean: z.boolean().optional(),
-  context: z.string().optional(),
-  exemptedKinds: z.nullable(z.array(z.string())).optional(),
-  response: z.boolean().optional(),
-  stage: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    blockingKinds: z.nullable(z.array(z.string())).optional(),
+    classes: z.nullable(z.array(z.string())).optional(),
+    clean: z.boolean().optional(),
+    context: z.string().optional(),
+    exemptedKinds: z.nullable(z.array(z.string())).optional(),
+    response: z.boolean().optional(),
+    stage: z.string().optional(),
+  })
+);
 
 export function tbVerdictReasonFromJSON(
   jsonString: string,

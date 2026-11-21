@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -97,30 +97,36 @@ export const McpOnboardingStatus$inboundSchema: z.ZodType<
   McpOnboardingStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(McpOnboardingStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(McpOnboardingStatus)
+);
 
 /** @internal */
 export const GetOnboardingSettingsResponseStatus$inboundSchema: z.ZodType<
   GetOnboardingSettingsResponseStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(GetOnboardingSettingsResponseStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(GetOnboardingSettingsResponseStatus)
+);
 
 /** @internal */
 export const GetOnboardingSettingsResponse$inboundSchema: z.ZodType<
   GetOnboardingSettingsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  conversationId: z.string().optional(),
-  intents: z.nullable(z.array(z.string())).optional(),
-  mcpOnboardingGoal: z.string().optional(),
-  mcpOnboardingStatus: McpOnboardingStatus$inboundSchema.optional(),
-  mcpOnboardingTargets: z.nullable(z.array(McpOnboardingTarget$inboundSchema))
-    .optional(),
-  orgContext: z.nullable(OnboardingOrgContext$inboundSchema).optional(),
-  status: GetOnboardingSettingsResponseStatus$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conversationId: z.string().optional(),
+    intents: z.nullable(z.array(z.string())).optional(),
+    mcpOnboardingGoal: z.string().optional(),
+    mcpOnboardingStatus: McpOnboardingStatus$inboundSchema.optional(),
+    mcpOnboardingTargets: z.nullable(z.array(McpOnboardingTarget$inboundSchema))
+      .optional(),
+    orgContext: z.nullable(OnboardingOrgContext$inboundSchema).optional(),
+    status: GetOnboardingSettingsResponseStatus$inboundSchema.optional(),
+  })
+);
 
 export function getOnboardingSettingsResponseFromJSON(
   jsonString: string,

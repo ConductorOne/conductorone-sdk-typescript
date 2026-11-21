@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AccessScope,
   AccessScope$Outbound,
@@ -43,11 +44,14 @@ export const TriggerCustomAnalysisRequest$outboundSchema: z.ZodType<
   TriggerCustomAnalysisRequest$Outbound,
   z.ZodTypeDef,
   TriggerCustomAnalysisRequest
-> = z.object({
-  accessScope: z.nullable(AccessScope$outboundSchema).optional(),
-  profileFilters: z.nullable(z.array(ProfileFilter$outboundSchema)).optional(),
-  resourceScope: z.nullable(ResourceScope$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessScope: z.nullable(AccessScope$outboundSchema).optional(),
+    profileFilters: z.nullable(z.array(ProfileFilter$outboundSchema))
+      .optional(),
+    resourceScope: z.nullable(ResourceScope$outboundSchema).optional(),
+  })
+);
 
 export function triggerCustomAnalysisRequestToJSON(
   triggerCustomAnalysisRequest: TriggerCustomAnalysisRequest,

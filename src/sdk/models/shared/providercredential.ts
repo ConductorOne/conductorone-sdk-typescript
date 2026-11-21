@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -59,29 +59,31 @@ export const HeaderStyle$inboundSchema: z.ZodType<
   HeaderStyle,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(HeaderStyle);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(HeaderStyle));
 
 /** @internal */
 export const ProviderCredential$inboundSchema: z.ZodType<
   ProviderCredential,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  displayName: z.string().optional(),
-  headerStyle: HeaderStyle$inboundSchema.optional(),
-  keyPrefix: z.string().optional(),
-  revokedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  slotId: z.string().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    displayName: z.string().optional(),
+    headerStyle: HeaderStyle$inboundSchema.optional(),
+    keyPrefix: z.string().optional(),
+    revokedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    slotId: z.string().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    userId: z.string().optional(),
+  })
+);
 
 export function providerCredentialFromJSON(
   jsonString: string,

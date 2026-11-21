@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -49,17 +49,19 @@ export const C1ApiGolinkV1GoLinkServiceListVersionsRequest$outboundSchema:
     C1ApiGolinkV1GoLinkServiceListVersionsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiGolinkV1GoLinkServiceListVersionsRequest
-  > = z.object({
-    golinkId: z.string(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      golinkId: "golink_id",
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      golinkId: z.string(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        golinkId: "golink_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiGolinkV1GoLinkServiceListVersionsRequestToJSON(
   c1ApiGolinkV1GoLinkServiceListVersionsRequest:
@@ -78,20 +80,23 @@ export const C1ApiGolinkV1GoLinkServiceListVersionsResponse$inboundSchema:
     C1ApiGolinkV1GoLinkServiceListVersionsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    GoLinkServiceListVersionsResponse: shared
-      .GoLinkServiceListVersionsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "GoLinkServiceListVersionsResponse": "goLinkServiceListVersionsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      GoLinkServiceListVersionsResponse: shared
+        .GoLinkServiceListVersionsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "GoLinkServiceListVersionsResponse":
+          "goLinkServiceListVersionsResponse",
+      });
+    })
+  );
 
 export function c1ApiGolinkV1GoLinkServiceListVersionsResponseFromJSON(
   jsonString: string,

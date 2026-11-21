@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -48,19 +48,23 @@ export const TraceAllocationPeriod$inboundSchema: z.ZodType<
   TraceAllocationPeriod,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TraceAllocationPeriod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(TraceAllocationPeriod)
+);
 
 /** @internal */
 export const TraceAllocation$inboundSchema: z.ZodType<
   TraceAllocation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  budgetKey: z.string().optional(),
-  limit: z.nullable(ResolvedLimit$inboundSchema).optional(),
-  period: TraceAllocationPeriod$inboundSchema.optional(),
-  source: z.nullable(AuthorityRef$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    budgetKey: z.string().optional(),
+    limit: z.nullable(ResolvedLimit$inboundSchema).optional(),
+    period: TraceAllocationPeriod$inboundSchema.optional(),
+    source: z.nullable(AuthorityRef$inboundSchema).optional(),
+  })
+);
 
 export function traceAllocationFromJSON(
   jsonString: string,

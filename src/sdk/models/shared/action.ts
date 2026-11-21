@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -42,15 +42,17 @@ export type Action = {
 };
 
 /** @internal */
-export const Action$inboundSchema: z.ZodType<Action, z.ZodTypeDef, unknown> = z
-  .object({
-    automation: z.nullable(ActionTargetAutomation$inboundSchema).optional(),
-    batonResourceAction: z.nullable(
-      ActionTargetBatonResourceAction$inboundSchema,
-    ).optional(),
-    clientIdApproval: z.nullable(ActionTargetClientIdApproval$inboundSchema)
-      .optional(),
-  });
+export const Action$inboundSchema: z.ZodType<Action, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      automation: z.nullable(ActionTargetAutomation$inboundSchema).optional(),
+      batonResourceAction: z.nullable(
+        ActionTargetBatonResourceAction$inboundSchema,
+      ).optional(),
+      clientIdApproval: z.nullable(ActionTargetClientIdApproval$inboundSchema)
+        .optional(),
+    })
+  );
 /** @internal */
 export type Action$Outbound = {
   automation?: ActionTargetAutomation$Outbound | null | undefined;
@@ -66,14 +68,16 @@ export const Action$outboundSchema: z.ZodType<
   Action$Outbound,
   z.ZodTypeDef,
   Action
-> = z.object({
-  automation: z.nullable(ActionTargetAutomation$outboundSchema).optional(),
-  batonResourceAction: z.nullable(
-    ActionTargetBatonResourceAction$outboundSchema,
-  ).optional(),
-  clientIdApproval: z.nullable(ActionTargetClientIdApproval$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    automation: z.nullable(ActionTargetAutomation$outboundSchema).optional(),
+    batonResourceAction: z.nullable(
+      ActionTargetBatonResourceAction$outboundSchema,
+    ).optional(),
+    clientIdApproval: z.nullable(ActionTargetClientIdApproval$outboundSchema)
+      .optional(),
+  })
+);
 
 export function actionToJSON(action: Action): string {
   return JSON.stringify(Action$outboundSchema.parse(action));

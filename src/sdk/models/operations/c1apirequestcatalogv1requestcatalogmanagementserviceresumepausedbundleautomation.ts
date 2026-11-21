@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,17 +54,19 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBun
     C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest$Outbound,
     z.ZodTypeDef,
     C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest
-  > = z.object({
-    requestCatalogId: z.string(),
-    resumePausedBundleAutomationRequest: shared
-      .ResumePausedBundleAutomationRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      requestCatalogId: "request_catalog_id",
-      resumePausedBundleAutomationRequest:
-        "ResumePausedBundleAutomationRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      requestCatalogId: z.string(),
+      resumePausedBundleAutomationRequest: shared
+        .ResumePausedBundleAutomationRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        requestCatalogId: "request_catalog_id",
+        resumePausedBundleAutomationRequest:
+          "ResumePausedBundleAutomationRequest",
+      });
+    })
+  );
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequestToJSON(
   c1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationRequest:
@@ -84,21 +86,23 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBun
     C1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ResumePausedBundleAutomationResponse: shared
-      .ResumePausedBundleAutomationResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ResumePausedBundleAutomationResponse":
-        "resumePausedBundleAutomationResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ResumePausedBundleAutomationResponse: shared
+        .ResumePausedBundleAutomationResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ResumePausedBundleAutomationResponse":
+          "resumePausedBundleAutomationResponse",
+      });
+    })
+  );
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceResumePausedBundleAutomationResponseFromJSON(
   jsonString: string,

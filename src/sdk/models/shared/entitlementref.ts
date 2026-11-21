@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * EntitlementRef identifies an entitlement by application and entitlement ID.
@@ -29,10 +30,12 @@ export const EntitlementRef$outboundSchema: z.ZodType<
   EntitlementRef$Outbound,
   z.ZodTypeDef,
   EntitlementRef
-> = z.object({
-  appId: z.string().optional(),
-  entitlementId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    entitlementId: z.string().optional(),
+  })
+);
 
 export function entitlementRefToJSON(entitlementRef: EntitlementRef): string {
   return JSON.stringify(EntitlementRef$outboundSchema.parse(entitlementRef));

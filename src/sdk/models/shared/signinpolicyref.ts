@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * SignInPolicyRef is a lightweight reference to a sign-in policy by ID.
@@ -24,9 +25,11 @@ export const SignInPolicyRef$outboundSchema: z.ZodType<
   SignInPolicyRef$Outbound,
   z.ZodTypeDef,
   SignInPolicyRef
-> = z.object({
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+  })
+);
 
 export function signInPolicyRefToJSON(
   signInPolicyRef: SignInPolicyRef,

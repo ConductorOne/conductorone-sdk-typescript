@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -48,8 +49,8 @@ export const A2UIServiceCreateSurfaceFeedbackRequestSentiment$outboundSchema:
     string,
     z.ZodTypeDef,
     A2UIServiceCreateSurfaceFeedbackRequestSentiment
-  > = openEnums.outboundSchema(
-    A2UIServiceCreateSurfaceFeedbackRequestSentiment,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(A2UIServiceCreateSurfaceFeedbackRequestSentiment)
   );
 
 /** @internal */
@@ -64,12 +65,14 @@ export const A2UIServiceCreateSurfaceFeedbackRequest$outboundSchema: z.ZodType<
   A2UIServiceCreateSurfaceFeedbackRequest$Outbound,
   z.ZodTypeDef,
   A2UIServiceCreateSurfaceFeedbackRequest
-> = z.object({
-  conversationId: z.string().optional(),
-  sentiment: A2UIServiceCreateSurfaceFeedbackRequestSentiment$outboundSchema
-    .optional(),
-  text: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conversationId: z.string().optional(),
+    sentiment: A2UIServiceCreateSurfaceFeedbackRequestSentiment$outboundSchema
+      .optional(),
+    text: z.string().optional(),
+  })
+);
 
 export function a2UIServiceCreateSurfaceFeedbackRequestToJSON(
   a2UIServiceCreateSurfaceFeedbackRequest:

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -27,11 +27,13 @@ export const AppSecretAdminServiceRevokeResponse$inboundSchema: z.ZodType<
   AppSecretAdminServiceRevokeResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  credentialRevocation: z.nullable(CredentialRevocation$inboundSchema)
-    .optional(),
-  revoked: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    credentialRevocation: z.nullable(CredentialRevocation$inboundSchema)
+      .optional(),
+    revoked: z.boolean().optional(),
+  })
+);
 
 export function appSecretAdminServiceRevokeResponseFromJSON(
   jsonString: string,

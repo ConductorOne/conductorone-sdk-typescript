@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The request message for adding an app entitlement owner.
@@ -24,9 +25,11 @@ export const AddAppEntitlementOwnerRequest$outboundSchema: z.ZodType<
   AddAppEntitlementOwnerRequest$Outbound,
   z.ZodTypeDef,
   AddAppEntitlementOwnerRequest
-> = z.object({
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: z.string().optional(),
+  })
+);
 
 export function addAppEntitlementOwnerRequestToJSON(
   addAppEntitlementOwnerRequest: AddAppEntitlementOwnerRequest,

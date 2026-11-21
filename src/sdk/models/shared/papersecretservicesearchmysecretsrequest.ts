@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -128,7 +129,9 @@ export const AccessRelationships$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AccessRelationships
-> = openEnums.outboundSchema(AccessRelationships);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AccessRelationships)
+);
 
 /** @internal */
 export const PaperSecretServiceSearchMySecretsRequestSecretType$outboundSchema:
@@ -136,8 +139,8 @@ export const PaperSecretServiceSearchMySecretsRequestSecretType$outboundSchema:
     string,
     z.ZodTypeDef,
     PaperSecretServiceSearchMySecretsRequestSecretType
-  > = openEnums.outboundSchema(
-    PaperSecretServiceSearchMySecretsRequestSecretType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(PaperSecretServiceSearchMySecretsRequestSecretType)
   );
 
 /** @internal */
@@ -146,8 +149,10 @@ export const PaperSecretServiceSearchMySecretsRequestSharingMode$outboundSchema:
     string,
     z.ZodTypeDef,
     PaperSecretServiceSearchMySecretsRequestSharingMode
-  > = openEnums.outboundSchema(
-    PaperSecretServiceSearchMySecretsRequestSharingMode,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      PaperSecretServiceSearchMySecretsRequestSharingMode,
+    )
   );
 
 /** @internal */
@@ -156,7 +161,9 @@ export const PaperSecretServiceSearchMySecretsRequestSortBy$outboundSchema:
     string,
     z.ZodTypeDef,
     PaperSecretServiceSearchMySecretsRequestSortBy
-  > = openEnums.outboundSchema(PaperSecretServiceSearchMySecretsRequestSortBy);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(PaperSecretServiceSearchMySecretsRequestSortBy)
+  );
 
 /** @internal */
 export const PaperSecretServiceSearchMySecretsRequestStatuses$outboundSchema:
@@ -164,8 +171,8 @@ export const PaperSecretServiceSearchMySecretsRequestStatuses$outboundSchema:
     string,
     z.ZodTypeDef,
     PaperSecretServiceSearchMySecretsRequestStatuses
-  > = openEnums.outboundSchema(
-    PaperSecretServiceSearchMySecretsRequestStatuses,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(PaperSecretServiceSearchMySecretsRequestStatuses)
   );
 
 /** @internal */
@@ -185,23 +192,26 @@ export const PaperSecretServiceSearchMySecretsRequest$outboundSchema: z.ZodType<
   PaperSecretServiceSearchMySecretsRequest$Outbound,
   z.ZodTypeDef,
   PaperSecretServiceSearchMySecretsRequest
-> = z.object({
-  accessRelationships: z.nullable(z.array(AccessRelationships$outboundSchema))
-    .optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  secretType: PaperSecretServiceSearchMySecretsRequestSecretType$outboundSchema
-    .optional(),
-  sharingMode:
-    PaperSecretServiceSearchMySecretsRequestSharingMode$outboundSchema
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessRelationships: z.nullable(z.array(AccessRelationships$outboundSchema))
       .optional(),
-  sortBy: PaperSecretServiceSearchMySecretsRequestSortBy$outboundSchema
-    .optional(),
-  statuses: z.nullable(
-    z.array(PaperSecretServiceSearchMySecretsRequestStatuses$outboundSchema),
-  ).optional(),
-});
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    secretType:
+      PaperSecretServiceSearchMySecretsRequestSecretType$outboundSchema
+        .optional(),
+    sharingMode:
+      PaperSecretServiceSearchMySecretsRequestSharingMode$outboundSchema
+        .optional(),
+    sortBy: PaperSecretServiceSearchMySecretsRequestSortBy$outboundSchema
+      .optional(),
+    statuses: z.nullable(
+      z.array(PaperSecretServiceSearchMySecretsRequestStatuses$outboundSchema),
+    ).optional(),
+  })
+);
 
 export function paperSecretServiceSearchMySecretsRequestToJSON(
   paperSecretServiceSearchMySecretsRequest:

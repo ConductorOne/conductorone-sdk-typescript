@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { DynamicNumber, DynamicNumber$inboundSchema } from "./dynamicnumber.js";
@@ -25,13 +25,15 @@ export const ProgressBarComponent$inboundSchema: z.ZodType<
   ProgressBarComponent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  label: z.nullable(DynamicString$inboundSchema).optional(),
-  max: z.nullable(DynamicNumber$inboundSchema).optional(),
-  min: z.nullable(DynamicNumber$inboundSchema).optional(),
-  step: z.nullable(DynamicNumber$inboundSchema).optional(),
-  value: z.nullable(DynamicNumber$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    label: z.nullable(DynamicString$inboundSchema).optional(),
+    max: z.nullable(DynamicNumber$inboundSchema).optional(),
+    min: z.nullable(DynamicNumber$inboundSchema).optional(),
+    step: z.nullable(DynamicNumber$inboundSchema).optional(),
+    value: z.nullable(DynamicNumber$inboundSchema).optional(),
+  })
+);
 
 export function progressBarComponentFromJSON(
   jsonString: string,

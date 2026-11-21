@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { GoLink, GoLink$inboundSchema } from "./golink.js";
@@ -20,9 +20,11 @@ export const GoLinkServiceUpdateResponse$inboundSchema: z.ZodType<
   GoLinkServiceUpdateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  golink: z.nullable(GoLink$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    golink: z.nullable(GoLink$inboundSchema).optional(),
+  })
+);
 
 export function goLinkServiceUpdateResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -59,19 +59,21 @@ export const CreateRevokeTasks$inboundSchema: z.ZodType<
   CreateRevokeTasks,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
-    .optional(),
-  appEntitlementRefsCel: z.string().optional(),
-  excludedAppEntitlementRefs: z.nullable(
-    z.array(AppEntitlementRef$inboundSchema),
-  ).optional(),
-  excludedAppEntitlementRefsCel: z.string().optional(),
-  revokeAll: z.boolean().optional(),
-  useSubjectUser: z.boolean().optional(),
-  userIdCel: z.string().optional(),
-  userRef: z.nullable(UserRef$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
+      .optional(),
+    appEntitlementRefsCel: z.string().optional(),
+    excludedAppEntitlementRefs: z.nullable(
+      z.array(AppEntitlementRef$inboundSchema),
+    ).optional(),
+    excludedAppEntitlementRefsCel: z.string().optional(),
+    revokeAll: z.boolean().optional(),
+    useSubjectUser: z.boolean().optional(),
+    userIdCel: z.string().optional(),
+    userRef: z.nullable(UserRef$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type CreateRevokeTasks$Outbound = {
   appEntitlementRefs?: Array<AppEntitlementRef$Outbound> | null | undefined;
@@ -92,19 +94,21 @@ export const CreateRevokeTasks$outboundSchema: z.ZodType<
   CreateRevokeTasks$Outbound,
   z.ZodTypeDef,
   CreateRevokeTasks
-> = z.object({
-  appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
-    .optional(),
-  appEntitlementRefsCel: z.string().optional(),
-  excludedAppEntitlementRefs: z.nullable(
-    z.array(AppEntitlementRef$outboundSchema),
-  ).optional(),
-  excludedAppEntitlementRefsCel: z.string().optional(),
-  revokeAll: z.boolean().optional(),
-  useSubjectUser: z.boolean().optional(),
-  userIdCel: z.string().optional(),
-  userRef: z.nullable(UserRef$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
+      .optional(),
+    appEntitlementRefsCel: z.string().optional(),
+    excludedAppEntitlementRefs: z.nullable(
+      z.array(AppEntitlementRef$outboundSchema),
+    ).optional(),
+    excludedAppEntitlementRefsCel: z.string().optional(),
+    revokeAll: z.boolean().optional(),
+    useSubjectUser: z.boolean().optional(),
+    userIdCel: z.string().optional(),
+    userRef: z.nullable(UserRef$outboundSchema).optional(),
+  })
+);
 
 export function createRevokeTasksToJSON(
   createRevokeTasks: CreateRevokeTasks,

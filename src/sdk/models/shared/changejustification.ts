@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ChangeJustification message.
@@ -27,9 +28,11 @@ export const ChangeJustification$outboundSchema: z.ZodType<
   ChangeJustification$Outbound,
   z.ZodTypeDef,
   ChangeJustification
-> = z.object({
-  reason: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reason: z.string().optional(),
+  })
+);
 
 export function changeJustificationToJSON(
   changeJustification: ChangeJustification,

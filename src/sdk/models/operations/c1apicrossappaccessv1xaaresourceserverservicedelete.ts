@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,18 +54,20 @@ export const C1ApiCrossAppAccessV1XAAResourceServerServiceDeleteRequest$outbound
     C1ApiCrossAppAccessV1XAAResourceServerServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     C1ApiCrossAppAccessV1XAAResourceServerServiceDeleteRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    xaaResourceServerServiceDeleteRequest: shared
-      .XAAResourceServerServiceDeleteRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      xaaResourceServerServiceDeleteRequest:
-        "XAAResourceServerServiceDeleteRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      xaaResourceServerServiceDeleteRequest: shared
+        .XAAResourceServerServiceDeleteRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        xaaResourceServerServiceDeleteRequest:
+          "XAAResourceServerServiceDeleteRequest",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAResourceServerServiceDeleteRequestToJSON(
   c1ApiCrossAppAccessV1XAAResourceServerServiceDeleteRequest:
@@ -83,21 +85,23 @@ export const C1ApiCrossAppAccessV1XAAResourceServerServiceDeleteResponse$inbound
     C1ApiCrossAppAccessV1XAAResourceServerServiceDeleteResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    XAAResourceServerServiceDeleteResponse: shared
-      .XAAResourceServerServiceDeleteResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "XAAResourceServerServiceDeleteResponse":
-        "xaaResourceServerServiceDeleteResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      XAAResourceServerServiceDeleteResponse: shared
+        .XAAResourceServerServiceDeleteResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "XAAResourceServerServiceDeleteResponse":
+          "xaaResourceServerServiceDeleteResponse",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAResourceServerServiceDeleteResponseFromJSON(
   jsonString: string,

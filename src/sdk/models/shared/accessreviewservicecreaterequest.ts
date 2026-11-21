@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -92,7 +93,7 @@ export const ScopeType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ScopeType
-> = openEnums.outboundSchema(ScopeType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(ScopeType));
 
 /** @internal */
 export type AccessReviewServiceCreateRequest$Outbound = {
@@ -113,19 +114,22 @@ export const AccessReviewServiceCreateRequest$outboundSchema: z.ZodType<
   AccessReviewServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   AccessReviewServiceCreateRequest
-> = z.object({
-  completionDate: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  duplicateFrom: z.string().optional(),
-  expandMask: z.nullable(AccessReviewExpandMask$outboundSchema).optional(),
-  notificationConfig: z.nullable(NotificationConfig$outboundSchema).optional(),
-  ownerIds: z.nullable(z.array(z.string())).optional(),
-  policyId: z.string().optional(),
-  scopeType: ScopeType$outboundSchema.optional(),
-  scopeV2: z.nullable(AccessReviewScopeV2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    completionDate: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    duplicateFrom: z.string().optional(),
+    expandMask: z.nullable(AccessReviewExpandMask$outboundSchema).optional(),
+    notificationConfig: z.nullable(NotificationConfig$outboundSchema)
+      .optional(),
+    ownerIds: z.nullable(z.array(z.string())).optional(),
+    policyId: z.string().optional(),
+    scopeType: ScopeType$outboundSchema.optional(),
+    scopeV2: z.nullable(AccessReviewScopeV2$outboundSchema).optional(),
+  })
+);
 
 export function accessReviewServiceCreateRequestToJSON(
   accessReviewServiceCreateRequest: AccessReviewServiceCreateRequest,

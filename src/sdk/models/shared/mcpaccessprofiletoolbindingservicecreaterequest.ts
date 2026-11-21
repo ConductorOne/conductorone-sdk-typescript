@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * MCPAccessProfileToolBindingServiceCreateRequest creates tool bindings.
@@ -25,9 +26,11 @@ export const MCPAccessProfileToolBindingServiceCreateRequest$outboundSchema:
     MCPAccessProfileToolBindingServiceCreateRequest$Outbound,
     z.ZodTypeDef,
     MCPAccessProfileToolBindingServiceCreateRequest
-  > = z.object({
-    mcpToolIds: z.nullable(z.array(z.string())).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      mcpToolIds: z.nullable(z.array(z.string())).optional(),
+    })
+  );
 
 export function mcpAccessProfileToolBindingServiceCreateRequestToJSON(
   mcpAccessProfileToolBindingServiceCreateRequest:

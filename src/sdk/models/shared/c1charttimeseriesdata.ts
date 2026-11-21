@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -50,18 +50,22 @@ export const C1ChartTimeSeriesDataStyle$inboundSchema: z.ZodType<
   C1ChartTimeSeriesDataStyle,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(C1ChartTimeSeriesDataStyle);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(C1ChartTimeSeriesDataStyle)
+);
 
 /** @internal */
 export const C1ChartTimeSeriesData$inboundSchema: z.ZodType<
   C1ChartTimeSeriesData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  range: z.nullable(C1ChartTimeRange$inboundSchema).optional(),
-  series: z.nullable(z.array(C1ChartSeries$inboundSchema)).optional(),
-  style: C1ChartTimeSeriesDataStyle$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    range: z.nullable(C1ChartTimeRange$inboundSchema).optional(),
+    series: z.nullable(z.array(C1ChartSeries$inboundSchema)).optional(),
+    style: C1ChartTimeSeriesDataStyle$inboundSchema.optional(),
+  })
+);
 
 export function c1ChartTimeSeriesDataFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The request message for removing the expiration time from a grant.
@@ -17,7 +18,7 @@ export const RemoveGrantDurationRequest$outboundSchema: z.ZodType<
   RemoveGrantDurationRequest$Outbound,
   z.ZodTypeDef,
   RemoveGrantDurationRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function removeGrantDurationRequestToJSON(
   removeGrantDurationRequest: RemoveGrantDurationRequest,

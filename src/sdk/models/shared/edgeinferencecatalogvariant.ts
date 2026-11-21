@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -138,41 +138,49 @@ export const EdgeInferenceCatalogVariantCredentialSource$inboundSchema:
     EdgeInferenceCatalogVariantCredentialSource,
     z.ZodTypeDef,
     unknown
-  > = openEnums.inboundSchema(EdgeInferenceCatalogVariantCredentialSource);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.inboundSchema(EdgeInferenceCatalogVariantCredentialSource)
+  );
 
 /** @internal */
 export const EdgeInferenceCatalogVariantNativeFormat$inboundSchema: z.ZodType<
   EdgeInferenceCatalogVariantNativeFormat,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EdgeInferenceCatalogVariantNativeFormat);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(EdgeInferenceCatalogVariantNativeFormat)
+);
 
 /** @internal */
 export const EdgeInferenceCatalogVariant$inboundSchema: z.ZodType<
   EdgeInferenceCatalogVariant,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  availabilityWarning: z.string().optional(),
-  credentialRecipe: z.string().optional(),
-  credentialSource: EdgeInferenceCatalogVariantCredentialSource$inboundSchema
-    .optional(),
-  decisionOnly: z.boolean().optional(),
-  defaultSupportedReasoningEfforts: z.nullable(z.array(z.string())).optional(),
-  destination: z.string().optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  modelHint: z.string().optional(),
-  modelIdGrammar: z.string().optional(),
-  nativeFormat: EdgeInferenceCatalogVariantNativeFormat$inboundSchema
-    .optional(),
-  providerProfile: z.string().optional(),
-  suggestedModels: z.nullable(z.array(EdgeInferenceCatalogModel$inboundSchema))
-    .optional(),
-  unavailable: z.boolean().optional(),
-  unavailableReason: z.string().optional(),
-  upstreamPath: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    availabilityWarning: z.string().optional(),
+    credentialRecipe: z.string().optional(),
+    credentialSource: EdgeInferenceCatalogVariantCredentialSource$inboundSchema
+      .optional(),
+    decisionOnly: z.boolean().optional(),
+    defaultSupportedReasoningEfforts: z.nullable(z.array(z.string()))
+      .optional(),
+    destination: z.string().optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    modelHint: z.string().optional(),
+    modelIdGrammar: z.string().optional(),
+    nativeFormat: EdgeInferenceCatalogVariantNativeFormat$inboundSchema
+      .optional(),
+    providerProfile: z.string().optional(),
+    suggestedModels: z.nullable(
+      z.array(EdgeInferenceCatalogModel$inboundSchema),
+    ).optional(),
+    unavailable: z.boolean().optional(),
+    unavailableReason: z.string().optional(),
+    upstreamPath: z.string().optional(),
+  })
+);
 
 export function edgeInferenceCatalogVariantFromJSON(
   jsonString: string,

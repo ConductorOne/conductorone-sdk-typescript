@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { ProgramRef, ProgramRef$inboundSchema } from "./programref.js";
@@ -61,30 +61,32 @@ export type Report = {
 };
 
 /** @internal */
-export const Report$inboundSchema: z.ZodType<Report, z.ZodTypeDef, unknown> = z
-  .object({
-    createdAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    createdByUserId: z.string().optional(),
-    deletedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    description: z.string().optional(),
-    displayName: z.string().optional(),
-    id: z.string().optional(),
-    latestRunId: z.string().optional(),
-    latestRunSummary: z.nullable(ReportRun$inboundSchema).optional(),
-    latestSuccessfulRunId: z.string().optional(),
-    parameterSchema: z.nullable(z.record(z.any())).optional(),
-    parameterValues: z.nullable(z.record(z.any())).optional(),
-    program: z.nullable(ProgramRef$inboundSchema).optional(),
-    prompt: z.string().optional(),
-    tenantId: z.string().optional(),
-    updatedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-  });
+export const Report$inboundSchema: z.ZodType<Report, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      createdAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      createdByUserId: z.string().optional(),
+      deletedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      description: z.string().optional(),
+      displayName: z.string().optional(),
+      id: z.string().optional(),
+      latestRunId: z.string().optional(),
+      latestRunSummary: z.nullable(ReportRun$inboundSchema).optional(),
+      latestSuccessfulRunId: z.string().optional(),
+      parameterSchema: z.nullable(z.record(z.any())).optional(),
+      parameterValues: z.nullable(z.record(z.any())).optional(),
+      program: z.nullable(ProgramRef$inboundSchema).optional(),
+      prompt: z.string().optional(),
+      tenantId: z.string().optional(),
+      updatedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+    })
+  );
 
 export function reportFromJSON(
   jsonString: string,

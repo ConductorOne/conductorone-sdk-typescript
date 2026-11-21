@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -47,15 +47,17 @@ export const ScopeRole$inboundSchema: z.ZodType<
   ScopeRole,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  appUserId: z.string().optional(),
-  grantDuration: z.nullable(z.string()).optional(),
-  roleResourceId: z.string().optional(),
-  roleResourceTypeId: z.string().optional(),
-  scopeResourceId: z.string().optional(),
-  scopeResourceTypeId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    appUserId: z.string().optional(),
+    grantDuration: z.nullable(z.string()).optional(),
+    roleResourceId: z.string().optional(),
+    roleResourceTypeId: z.string().optional(),
+    scopeResourceId: z.string().optional(),
+    scopeResourceTypeId: z.string().optional(),
+  })
+);
 /** @internal */
 export type ScopeRole$Outbound = {
   appId?: string | undefined;
@@ -72,15 +74,17 @@ export const ScopeRole$outboundSchema: z.ZodType<
   ScopeRole$Outbound,
   z.ZodTypeDef,
   ScopeRole
-> = z.object({
-  appId: z.string().optional(),
-  appUserId: z.string().optional(),
-  grantDuration: z.nullable(z.string()).optional(),
-  roleResourceId: z.string().optional(),
-  roleResourceTypeId: z.string().optional(),
-  scopeResourceId: z.string().optional(),
-  scopeResourceTypeId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    appUserId: z.string().optional(),
+    grantDuration: z.nullable(z.string()).optional(),
+    roleResourceId: z.string().optional(),
+    roleResourceTypeId: z.string().optional(),
+    scopeResourceId: z.string().optional(),
+    scopeResourceTypeId: z.string().optional(),
+  })
+);
 
 export function scopeRoleToJSON(scopeRole: ScopeRole): string {
   return JSON.stringify(ScopeRole$outboundSchema.parse(scopeRole));

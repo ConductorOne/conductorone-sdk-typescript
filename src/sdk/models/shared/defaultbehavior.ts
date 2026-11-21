@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,9 +25,11 @@ export const DefaultBehavior$inboundSchema: z.ZodType<
   DefaultBehavior,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  connectorId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connectorId: z.string().optional(),
+  })
+);
 /** @internal */
 export type DefaultBehavior$Outbound = {
   connectorId?: string | undefined;
@@ -38,9 +40,11 @@ export const DefaultBehavior$outboundSchema: z.ZodType<
   DefaultBehavior$Outbound,
   z.ZodTypeDef,
   DefaultBehavior
-> = z.object({
-  connectorId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connectorId: z.string().optional(),
+  })
+);
 
 export function defaultBehaviorToJSON(
   defaultBehavior: DefaultBehavior,

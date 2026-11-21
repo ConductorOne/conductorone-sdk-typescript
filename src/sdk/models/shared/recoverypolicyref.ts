@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * RecoveryPolicyRef is a lightweight reference to a recovery policy by ID.
@@ -24,9 +25,11 @@ export const RecoveryPolicyRef$outboundSchema: z.ZodType<
   RecoveryPolicyRef$Outbound,
   z.ZodTypeDef,
   RecoveryPolicyRef
-> = z.object({
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+  })
+);
 
 export function recoveryPolicyRefToJSON(
   recoveryPolicyRef: RecoveryPolicyRef,

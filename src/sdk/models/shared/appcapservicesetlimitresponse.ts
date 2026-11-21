@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { AppCap, AppCap$inboundSchema } from "./appcap.js";
@@ -20,9 +20,11 @@ export const AppCapServiceSetLimitResponse$inboundSchema: z.ZodType<
   AppCapServiceSetLimitResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cap: z.nullable(AppCap$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cap: z.nullable(AppCap$inboundSchema).optional(),
+  })
+);
 
 export function appCapServiceSetLimitResponseFromJSON(
   jsonString: string,

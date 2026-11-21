@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   IdentityPolicyTenantDefaultsInput,
   IdentityPolicyTenantDefaultsInput$Outbound,
@@ -29,11 +30,13 @@ export const IdentityPolicyTenantDefaultsServiceUpdateRequest$outboundSchema:
     IdentityPolicyTenantDefaultsServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     IdentityPolicyTenantDefaultsServiceUpdateRequest
-  > = z.object({
-    defaults: z.nullable(IdentityPolicyTenantDefaultsInput$outboundSchema)
-      .optional(),
-    updateMask: z.nullable(z.string()).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      defaults: z.nullable(IdentityPolicyTenantDefaultsInput$outboundSchema)
+        .optional(),
+      updateMask: z.nullable(z.string()).optional(),
+    })
+  );
 
 export function identityPolicyTenantDefaultsServiceUpdateRequestToJSON(
   identityPolicyTenantDefaultsServiceUpdateRequest:

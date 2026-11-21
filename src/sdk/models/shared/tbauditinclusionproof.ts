@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -40,12 +40,14 @@ export const TBAuditInclusionProof$inboundSchema: z.ZodType<
   TBAuditInclusionProof,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  leafHash: z.string().optional(),
-  leafIndex: z.string().optional(),
-  manifest: z.nullable(TBAuditAttestationManifest$inboundSchema).optional(),
-  path: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    leafHash: z.string().optional(),
+    leafIndex: z.string().optional(),
+    manifest: z.nullable(TBAuditAttestationManifest$inboundSchema).optional(),
+    path: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function tbAuditInclusionProofFromJSON(
   jsonString: string,

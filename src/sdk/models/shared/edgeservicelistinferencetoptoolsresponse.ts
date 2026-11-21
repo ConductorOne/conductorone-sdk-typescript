@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { TBTopTool, TBTopTool$inboundSchema } from "./tbtoptool.js";
@@ -26,9 +26,11 @@ export const EdgeServiceListInferenceTopToolsResponse$inboundSchema: z.ZodType<
   EdgeServiceListInferenceTopToolsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tools: z.nullable(z.array(TBTopTool$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tools: z.nullable(z.array(TBTopTool$inboundSchema)).optional(),
+  })
+);
 
 export function edgeServiceListInferenceTopToolsResponseFromJSON(
   jsonString: string,

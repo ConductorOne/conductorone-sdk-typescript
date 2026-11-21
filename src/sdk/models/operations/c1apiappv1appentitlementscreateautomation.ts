@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,18 +47,20 @@ export const C1ApiAppV1AppEntitlementsCreateAutomationRequest$outboundSchema:
     C1ApiAppV1AppEntitlementsCreateAutomationRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementsCreateAutomationRequest
-  > = z.object({
-    appId: z.string(),
-    appEntitlementId: z.string(),
-    createAutomationRequest: shared.CreateAutomationRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      appEntitlementId: "app_entitlement_id",
-      createAutomationRequest: "CreateAutomationRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      appEntitlementId: z.string(),
+      createAutomationRequest: shared.CreateAutomationRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        appEntitlementId: "app_entitlement_id",
+        createAutomationRequest: "CreateAutomationRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementsCreateAutomationRequestToJSON(
   c1ApiAppV1AppEntitlementsCreateAutomationRequest:
@@ -77,20 +79,22 @@ export const C1ApiAppV1AppEntitlementsCreateAutomationResponse$inboundSchema:
     C1ApiAppV1AppEntitlementsCreateAutomationResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    CreateAutomationResponse: shared.CreateAutomationResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "CreateAutomationResponse": "createAutomationResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      CreateAutomationResponse: shared.CreateAutomationResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "CreateAutomationResponse": "createAutomationResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementsCreateAutomationResponseFromJSON(
   jsonString: string,

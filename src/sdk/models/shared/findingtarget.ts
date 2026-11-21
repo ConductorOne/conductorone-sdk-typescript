@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const FindingTarget$inboundSchema: z.ZodType<
   FindingTarget,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  findingId: z.string().optional(),
-  findingType: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    findingId: z.string().optional(),
+    findingType: z.string().optional(),
+  })
+);
 /** @internal */
 export type FindingTarget$Outbound = {
   findingId?: string | undefined;
@@ -41,10 +43,12 @@ export const FindingTarget$outboundSchema: z.ZodType<
   FindingTarget$Outbound,
   z.ZodTypeDef,
   FindingTarget
-> = z.object({
-  findingId: z.string().optional(),
-  findingType: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    findingId: z.string().optional(),
+    findingType: z.string().optional(),
+  })
+);
 
 export function findingTargetToJSON(findingTarget: FindingTarget): string {
   return JSON.stringify(FindingTarget$outboundSchema.parse(findingTarget));

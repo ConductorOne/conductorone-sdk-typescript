@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The WebhooksServiceTestRequest message.
@@ -17,7 +18,7 @@ export const WebhooksServiceTestRequest$outboundSchema: z.ZodType<
   WebhooksServiceTestRequest$Outbound,
   z.ZodTypeDef,
   WebhooksServiceTestRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function webhooksServiceTestRequestToJSON(
   webhooksServiceTestRequest: WebhooksServiceTestRequest,

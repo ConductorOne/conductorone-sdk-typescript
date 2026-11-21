@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -56,20 +56,22 @@ export const GraphEdgeType$inboundSchema: z.ZodType<
   GraphEdgeType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(GraphEdgeType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(GraphEdgeType));
 
 /** @internal */
 export const GraphEdge$inboundSchema: z.ZodType<
   GraphEdge,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  hiddenChildren: z.number().int().optional(),
-  isTruncated: z.boolean().optional(),
-  sourceId: z.string().optional(),
-  targetId: z.string().optional(),
-  type: GraphEdgeType$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hiddenChildren: z.number().int().optional(),
+    isTruncated: z.boolean().optional(),
+    sourceId: z.string().optional(),
+    targetId: z.string().optional(),
+    type: GraphEdgeType$inboundSchema.optional(),
+  })
+);
 
 export function graphEdgeFromJSON(
   jsonString: string,

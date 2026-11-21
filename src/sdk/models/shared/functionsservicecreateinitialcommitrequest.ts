@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The FunctionsServiceCreateInitialCommitRequest message.
@@ -30,10 +31,12 @@ export const FunctionsServiceCreateInitialCommitRequest$outboundSchema:
     FunctionsServiceCreateInitialCommitRequest$Outbound,
     z.ZodTypeDef,
     FunctionsServiceCreateInitialCommitRequest
-  > = z.object({
-    commitMessage: z.string().optional(),
-    filenames: z.nullable(z.array(z.string())).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      commitMessage: z.string().optional(),
+      filenames: z.nullable(z.array(z.string())).optional(),
+    })
+  );
 
 export function functionsServiceCreateInitialCommitRequestToJSON(
   functionsServiceCreateInitialCommitRequest:

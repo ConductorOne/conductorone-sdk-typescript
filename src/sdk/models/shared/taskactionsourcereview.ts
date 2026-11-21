@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const TaskActionSourceReview$inboundSchema: z.ZodType<
   TaskActionSourceReview,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessReviewId: z.string().optional(),
-  certTicketId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReviewId: z.string().optional(),
+    certTicketId: z.string().optional(),
+  })
+);
 /** @internal */
 export type TaskActionSourceReview$Outbound = {
   accessReviewId?: string | undefined;
@@ -41,10 +43,12 @@ export const TaskActionSourceReview$outboundSchema: z.ZodType<
   TaskActionSourceReview$Outbound,
   z.ZodTypeDef,
   TaskActionSourceReview
-> = z.object({
-  accessReviewId: z.string().optional(),
-  certTicketId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReviewId: z.string().optional(),
+    certTicketId: z.string().optional(),
+  })
+);
 
 export function taskActionSourceReviewToJSON(
   taskActionSourceReview: TaskActionSourceReview,

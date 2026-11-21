@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -205,37 +205,41 @@ export const AutomationStep$inboundSchema: z.ZodType<
   AutomationStep,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accountLifecycleAction: z.nullable(AccountLifecycleAction$inboundSchema)
-    .optional(),
-  callFunction: z.nullable(CallFunction$inboundSchema).optional(),
-  connectorAction: z.nullable(ConnectorAction$inboundSchema).optional(),
-  connectorCreateAccount: z.nullable(ConnectorCreateAccount$inboundSchema)
-    .optional(),
-  createAccessReview: z.nullable(CreateAccessReview$inboundSchema).optional(),
-  createRevokeTasks: z.nullable(CreateRevokeTasks$inboundSchema).optional(),
-  createRevokeTasksV2: z.nullable(CreateRevokeTasksV2$inboundSchema).optional(),
-  evaluateExpressions: z.nullable(EvaluateExpressions$inboundSchema).optional(),
-  generatePassword: z.nullable(GeneratePassword$inboundSchema).optional(),
-  grantEntitlements: z.nullable(GrantEntitlements$inboundSchema).optional(),
-  removeFromDelegation: z.nullable(RemoveFromDelegation$inboundSchema)
-    .optional(),
-  runAutomation: z.nullable(RunAutomation$inboundSchema).optional(),
-  sendEmail: z.nullable(SendEmail$inboundSchema).optional(),
-  sendSlackMessage: z.nullable(SendSlackMessage$inboundSchema).optional(),
-  setCredential: z.nullable(SetCredential$inboundSchema).optional(),
-  skipIfTrueCel: z.string().optional(),
-  stepDisplayName: z.string().optional(),
-  stepName: z.string().optional(),
-  storeCredential: z.nullable(StoreCredential$inboundSchema).optional(),
-  taskAction: z.nullable(TaskAction$inboundSchema).optional(),
-  unenrollFromAllAccessProfiles: z.nullable(
-    UnenrollFromAllAccessProfiles$inboundSchema,
-  ).optional(),
-  updateUser: z.nullable(UpdateUser$inboundSchema).optional(),
-  waitForDuration: z.nullable(WaitForDuration$inboundSchema).optional(),
-  webhook: z.nullable(Webhook$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountLifecycleAction: z.nullable(AccountLifecycleAction$inboundSchema)
+      .optional(),
+    callFunction: z.nullable(CallFunction$inboundSchema).optional(),
+    connectorAction: z.nullable(ConnectorAction$inboundSchema).optional(),
+    connectorCreateAccount: z.nullable(ConnectorCreateAccount$inboundSchema)
+      .optional(),
+    createAccessReview: z.nullable(CreateAccessReview$inboundSchema).optional(),
+    createRevokeTasks: z.nullable(CreateRevokeTasks$inboundSchema).optional(),
+    createRevokeTasksV2: z.nullable(CreateRevokeTasksV2$inboundSchema)
+      .optional(),
+    evaluateExpressions: z.nullable(EvaluateExpressions$inboundSchema)
+      .optional(),
+    generatePassword: z.nullable(GeneratePassword$inboundSchema).optional(),
+    grantEntitlements: z.nullable(GrantEntitlements$inboundSchema).optional(),
+    removeFromDelegation: z.nullable(RemoveFromDelegation$inboundSchema)
+      .optional(),
+    runAutomation: z.nullable(RunAutomation$inboundSchema).optional(),
+    sendEmail: z.nullable(SendEmail$inboundSchema).optional(),
+    sendSlackMessage: z.nullable(SendSlackMessage$inboundSchema).optional(),
+    setCredential: z.nullable(SetCredential$inboundSchema).optional(),
+    skipIfTrueCel: z.string().optional(),
+    stepDisplayName: z.string().optional(),
+    stepName: z.string().optional(),
+    storeCredential: z.nullable(StoreCredential$inboundSchema).optional(),
+    taskAction: z.nullable(TaskAction$inboundSchema).optional(),
+    unenrollFromAllAccessProfiles: z.nullable(
+      UnenrollFromAllAccessProfiles$inboundSchema,
+    ).optional(),
+    updateUser: z.nullable(UpdateUser$inboundSchema).optional(),
+    waitForDuration: z.nullable(WaitForDuration$inboundSchema).optional(),
+    webhook: z.nullable(Webhook$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type AutomationStep$Outbound = {
   accountLifecycleAction?: AccountLifecycleAction$Outbound | null | undefined;
@@ -272,39 +276,42 @@ export const AutomationStep$outboundSchema: z.ZodType<
   AutomationStep$Outbound,
   z.ZodTypeDef,
   AutomationStep
-> = z.object({
-  accountLifecycleAction: z.nullable(AccountLifecycleAction$outboundSchema)
-    .optional(),
-  callFunction: z.nullable(CallFunction$outboundSchema).optional(),
-  connectorAction: z.nullable(ConnectorAction$outboundSchema).optional(),
-  connectorCreateAccount: z.nullable(ConnectorCreateAccount$outboundSchema)
-    .optional(),
-  createAccessReview: z.nullable(CreateAccessReview$outboundSchema).optional(),
-  createRevokeTasks: z.nullable(CreateRevokeTasks$outboundSchema).optional(),
-  createRevokeTasksV2: z.nullable(CreateRevokeTasksV2$outboundSchema)
-    .optional(),
-  evaluateExpressions: z.nullable(EvaluateExpressions$outboundSchema)
-    .optional(),
-  generatePassword: z.nullable(GeneratePassword$outboundSchema).optional(),
-  grantEntitlements: z.nullable(GrantEntitlements$outboundSchema).optional(),
-  removeFromDelegation: z.nullable(RemoveFromDelegation$outboundSchema)
-    .optional(),
-  runAutomation: z.nullable(RunAutomation$outboundSchema).optional(),
-  sendEmail: z.nullable(SendEmail$outboundSchema).optional(),
-  sendSlackMessage: z.nullable(SendSlackMessage$outboundSchema).optional(),
-  setCredential: z.nullable(SetCredential$outboundSchema).optional(),
-  skipIfTrueCel: z.string().optional(),
-  stepDisplayName: z.string().optional(),
-  stepName: z.string().optional(),
-  storeCredential: z.nullable(StoreCredential$outboundSchema).optional(),
-  taskAction: z.nullable(TaskAction$outboundSchema).optional(),
-  unenrollFromAllAccessProfiles: z.nullable(
-    UnenrollFromAllAccessProfiles$outboundSchema,
-  ).optional(),
-  updateUser: z.nullable(UpdateUser$outboundSchema).optional(),
-  waitForDuration: z.nullable(WaitForDuration$outboundSchema).optional(),
-  webhook: z.nullable(Webhook$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountLifecycleAction: z.nullable(AccountLifecycleAction$outboundSchema)
+      .optional(),
+    callFunction: z.nullable(CallFunction$outboundSchema).optional(),
+    connectorAction: z.nullable(ConnectorAction$outboundSchema).optional(),
+    connectorCreateAccount: z.nullable(ConnectorCreateAccount$outboundSchema)
+      .optional(),
+    createAccessReview: z.nullable(CreateAccessReview$outboundSchema)
+      .optional(),
+    createRevokeTasks: z.nullable(CreateRevokeTasks$outboundSchema).optional(),
+    createRevokeTasksV2: z.nullable(CreateRevokeTasksV2$outboundSchema)
+      .optional(),
+    evaluateExpressions: z.nullable(EvaluateExpressions$outboundSchema)
+      .optional(),
+    generatePassword: z.nullable(GeneratePassword$outboundSchema).optional(),
+    grantEntitlements: z.nullable(GrantEntitlements$outboundSchema).optional(),
+    removeFromDelegation: z.nullable(RemoveFromDelegation$outboundSchema)
+      .optional(),
+    runAutomation: z.nullable(RunAutomation$outboundSchema).optional(),
+    sendEmail: z.nullable(SendEmail$outboundSchema).optional(),
+    sendSlackMessage: z.nullable(SendSlackMessage$outboundSchema).optional(),
+    setCredential: z.nullable(SetCredential$outboundSchema).optional(),
+    skipIfTrueCel: z.string().optional(),
+    stepDisplayName: z.string().optional(),
+    stepName: z.string().optional(),
+    storeCredential: z.nullable(StoreCredential$outboundSchema).optional(),
+    taskAction: z.nullable(TaskAction$outboundSchema).optional(),
+    unenrollFromAllAccessProfiles: z.nullable(
+      UnenrollFromAllAccessProfiles$outboundSchema,
+    ).optional(),
+    updateUser: z.nullable(UpdateUser$outboundSchema).optional(),
+    waitForDuration: z.nullable(WaitForDuration$outboundSchema).optional(),
+    webhook: z.nullable(Webhook$outboundSchema).optional(),
+  })
+);
 
 export function automationStepToJSON(automationStep: AutomationStep): string {
   return JSON.stringify(AutomationStep$outboundSchema.parse(automationStep));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -53,15 +53,17 @@ export const MyVirtualMCPServer$inboundSchema: z.ZodType<
   MyVirtualMCPServer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  presentation: z.nullable(VirtualMCPPresentation$inboundSchema).optional(),
-  requireDeviceTrust: z.boolean().optional(),
-  requireDpop: z.boolean().optional(),
-  slug: z.string().optional(),
-  url: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    presentation: z.nullable(VirtualMCPPresentation$inboundSchema).optional(),
+    requireDeviceTrust: z.boolean().optional(),
+    requireDpop: z.boolean().optional(),
+    slug: z.string().optional(),
+    url: z.string().optional(),
+  })
+);
 
 export function myVirtualMCPServerFromJSON(
   jsonString: string,

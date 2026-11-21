@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { User, User$inboundSchema } from "./user.js";
@@ -31,10 +31,12 @@ export const TaskAuditReassignmentFallbackToAdmin$inboundSchema: z.ZodType<
   TaskAuditReassignmentFallbackToAdmin,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  adminUserIds: z.nullable(z.array(z.string())).optional(),
-  adminUsers: z.nullable(z.array(User$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    adminUserIds: z.nullable(z.array(z.string())).optional(),
+    adminUsers: z.nullable(z.array(User$inboundSchema)).optional(),
+  })
+);
 
 export function taskAuditReassignmentFallbackToAdminFromJSON(
   jsonString: string,

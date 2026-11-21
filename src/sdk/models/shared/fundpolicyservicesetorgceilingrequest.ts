@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -43,7 +44,9 @@ export type FundPolicyServiceSetOrgCeilingRequest = {
 /** @internal */
 export const FundPolicyServiceSetOrgCeilingRequestPeriod$outboundSchema:
   z.ZodType<string, z.ZodTypeDef, FundPolicyServiceSetOrgCeilingRequestPeriod> =
-    openEnums.outboundSchema(FundPolicyServiceSetOrgCeilingRequestPeriod);
+    /* @__PURE__ */ lazySchema$(() =>
+      openEnums.outboundSchema(FundPolicyServiceSetOrgCeilingRequestPeriod)
+    );
 
 /** @internal */
 export type FundPolicyServiceSetOrgCeilingRequest$Outbound = {
@@ -56,10 +59,13 @@ export const FundPolicyServiceSetOrgCeilingRequest$outboundSchema: z.ZodType<
   FundPolicyServiceSetOrgCeilingRequest$Outbound,
   z.ZodTypeDef,
   FundPolicyServiceSetOrgCeilingRequest
-> = z.object({
-  limit: z.nullable(FundsSpendLimit$outboundSchema).optional(),
-  period: FundPolicyServiceSetOrgCeilingRequestPeriod$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.nullable(FundsSpendLimit$outboundSchema).optional(),
+    period: FundPolicyServiceSetOrgCeilingRequestPeriod$outboundSchema
+      .optional(),
+  })
+);
 
 export function fundPolicyServiceSetOrgCeilingRequestToJSON(
   fundPolicyServiceSetOrgCeilingRequest: FundPolicyServiceSetOrgCeilingRequest,

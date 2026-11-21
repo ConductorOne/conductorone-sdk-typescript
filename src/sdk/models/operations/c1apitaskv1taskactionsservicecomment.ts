@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiTaskV1TaskActionsServiceCommentRequest$outboundSchema:
     C1ApiTaskV1TaskActionsServiceCommentRequest$Outbound,
     z.ZodTypeDef,
     C1ApiTaskV1TaskActionsServiceCommentRequest
-  > = z.object({
-    taskId: z.string(),
-    taskActionsServiceCommentRequest: shared
-      .TaskActionsServiceCommentRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      taskId: "task_id",
-      taskActionsServiceCommentRequest: "TaskActionsServiceCommentRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      taskId: z.string(),
+      taskActionsServiceCommentRequest: shared
+        .TaskActionsServiceCommentRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        taskId: "task_id",
+        taskActionsServiceCommentRequest: "TaskActionsServiceCommentRequest",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskActionsServiceCommentRequestToJSON(
   c1ApiTaskV1TaskActionsServiceCommentRequest:
@@ -79,20 +81,23 @@ export const C1ApiTaskV1TaskActionsServiceCommentResponse$inboundSchema:
     C1ApiTaskV1TaskActionsServiceCommentResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    TaskActionsServiceCommentResponse: shared
-      .TaskActionsServiceCommentResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "TaskActionsServiceCommentResponse": "taskActionsServiceCommentResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      TaskActionsServiceCommentResponse: shared
+        .TaskActionsServiceCommentResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "TaskActionsServiceCommentResponse":
+          "taskActionsServiceCommentResponse",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskActionsServiceCommentResponseFromJSON(
   jsonString: string,

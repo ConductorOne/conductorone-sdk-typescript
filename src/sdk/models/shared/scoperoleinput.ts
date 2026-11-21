@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Scope-role variant of TaskTypeAction.target_object. The UI uses the
@@ -21,7 +22,7 @@ export const ScopeRoleInput$outboundSchema: z.ZodType<
   ScopeRoleInput$Outbound,
   z.ZodTypeDef,
   ScopeRoleInput
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function scopeRoleInputToJSON(scopeRoleInput: ScopeRoleInput): string {
   return JSON.stringify(ScopeRoleInput$outboundSchema.parse(scopeRoleInput));

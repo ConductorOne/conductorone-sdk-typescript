@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -56,20 +56,22 @@ export const C1ApiAppV1AppEntitlementUserBindingServiceUpdateGrantDurationReques
     C1ApiAppV1AppEntitlementUserBindingServiceUpdateGrantDurationRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementUserBindingServiceUpdateGrantDurationRequest
-  > = z.object({
-    appId: z.string(),
-    appEntitlementId: z.string(),
-    appUserId: z.string(),
-    updateGrantDurationRequest: shared.UpdateGrantDurationRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      appEntitlementId: "app_entitlement_id",
-      appUserId: "app_user_id",
-      updateGrantDurationRequest: "UpdateGrantDurationRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      appEntitlementId: z.string(),
+      appUserId: z.string(),
+      updateGrantDurationRequest: shared
+        .UpdateGrantDurationRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        appEntitlementId: "app_entitlement_id",
+        appUserId: "app_user_id",
+        updateGrantDurationRequest: "UpdateGrantDurationRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementUserBindingServiceUpdateGrantDurationRequestToJSON(
   c1ApiAppV1AppEntitlementUserBindingServiceUpdateGrantDurationRequest:
@@ -89,20 +91,22 @@ export const C1ApiAppV1AppEntitlementUserBindingServiceUpdateGrantDurationRespon
     C1ApiAppV1AppEntitlementUserBindingServiceUpdateGrantDurationResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    UpdateGrantDurationResponse: shared
-      .UpdateGrantDurationResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "UpdateGrantDurationResponse": "updateGrantDurationResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      UpdateGrantDurationResponse: shared
+        .UpdateGrantDurationResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "UpdateGrantDurationResponse": "updateGrantDurationResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementUserBindingServiceUpdateGrantDurationResponseFromJSON(
   jsonString: string,

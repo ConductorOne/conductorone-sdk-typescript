@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,9 +32,11 @@ export const PolicyPostActions$inboundSchema: z.ZodType<
   PolicyPostActions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  certifyRemediateImmediately: z.nullable(z.boolean()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    certifyRemediateImmediately: z.nullable(z.boolean()).optional(),
+  })
+);
 /** @internal */
 export type PolicyPostActions$Outbound = {
   certifyRemediateImmediately?: boolean | null | undefined;
@@ -45,9 +47,11 @@ export const PolicyPostActions$outboundSchema: z.ZodType<
   PolicyPostActions$Outbound,
   z.ZodTypeDef,
   PolicyPostActions
-> = z.object({
-  certifyRemediateImmediately: z.nullable(z.boolean()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    certifyRemediateImmediately: z.nullable(z.boolean()).optional(),
+  })
+);
 
 export function policyPostActionsToJSON(
   policyPostActions: PolicyPostActions,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * MCPServerAuthAWSSigV4 provides AWS Signature Version 4 authentication.
@@ -55,11 +56,13 @@ export const MCPServerAuthAWSSigV4$outboundSchema: z.ZodType<
   MCPServerAuthAWSSigV4$Outbound,
   z.ZodTypeDef,
   MCPServerAuthAWSSigV4
-> = z.object({
-  accessKeyId: z.string().optional(),
-  secretAccessKey: z.string().optional(),
-  sessionToken: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessKeyId: z.string().optional(),
+    secretAccessKey: z.string().optional(),
+    sessionToken: z.string().optional(),
+  })
+);
 
 export function mcpServerAuthAWSSigV4ToJSON(
   mcpServerAuthAWSSigV4: MCPServerAuthAWSSigV4,

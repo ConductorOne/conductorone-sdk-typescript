@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -77,8 +77,8 @@ export const UpdateOnboardingSettingsResponseMcpOnboardingStatus$inboundSchema:
     UpdateOnboardingSettingsResponseMcpOnboardingStatus,
     z.ZodTypeDef,
     unknown
-  > = openEnums.inboundSchema(
-    UpdateOnboardingSettingsResponseMcpOnboardingStatus,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.inboundSchema(UpdateOnboardingSettingsResponseMcpOnboardingStatus)
   );
 
 /** @internal */
@@ -86,22 +86,26 @@ export const UpdateOnboardingSettingsResponseStatus$inboundSchema: z.ZodType<
   UpdateOnboardingSettingsResponseStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(UpdateOnboardingSettingsResponseStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(UpdateOnboardingSettingsResponseStatus)
+);
 
 /** @internal */
 export const UpdateOnboardingSettingsResponse$inboundSchema: z.ZodType<
   UpdateOnboardingSettingsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mcpOnboardingGoal: z.string().optional(),
-  mcpOnboardingStatus:
-    UpdateOnboardingSettingsResponseMcpOnboardingStatus$inboundSchema
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mcpOnboardingGoal: z.string().optional(),
+    mcpOnboardingStatus:
+      UpdateOnboardingSettingsResponseMcpOnboardingStatus$inboundSchema
+        .optional(),
+    mcpOnboardingTargets: z.nullable(z.array(McpOnboardingTarget$inboundSchema))
       .optional(),
-  mcpOnboardingTargets: z.nullable(z.array(McpOnboardingTarget$inboundSchema))
-    .optional(),
-  status: UpdateOnboardingSettingsResponseStatus$inboundSchema.optional(),
-});
+    status: UpdateOnboardingSettingsResponseStatus$inboundSchema.optional(),
+  })
+);
 
 export function updateOnboardingSettingsResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Edge, Edge$inboundSchema } from "./edge.js";
@@ -20,9 +20,11 @@ export const EdgeServiceGetResponse$inboundSchema: z.ZodType<
   EdgeServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  edge: z.nullable(Edge$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    edge: z.nullable(Edge$inboundSchema).optional(),
+  })
+);
 
 export function edgeServiceGetResponseFromJSON(
   jsonString: string,

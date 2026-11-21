@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,18 +54,20 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceAddAccessEntitl
     C1ApiRequestcatalogV1RequestCatalogManagementServiceAddAccessEntitlementsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiRequestcatalogV1RequestCatalogManagementServiceAddAccessEntitlementsRequest
-  > = z.object({
-    catalogId: z.string(),
-    requestCatalogManagementServiceAddAccessEntitlementsRequest: shared
-      .RequestCatalogManagementServiceAddAccessEntitlementsRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      catalogId: "catalog_id",
-      requestCatalogManagementServiceAddAccessEntitlementsRequest:
-        "RequestCatalogManagementServiceAddAccessEntitlementsRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      catalogId: z.string(),
+      requestCatalogManagementServiceAddAccessEntitlementsRequest: shared
+        .RequestCatalogManagementServiceAddAccessEntitlementsRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        catalogId: "catalog_id",
+        requestCatalogManagementServiceAddAccessEntitlementsRequest:
+          "RequestCatalogManagementServiceAddAccessEntitlementsRequest",
+      });
+    })
+  );
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceAddAccessEntitlementsRequestToJSON(
   c1ApiRequestcatalogV1RequestCatalogManagementServiceAddAccessEntitlementsRequest:
@@ -85,22 +87,24 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceAddAccessEntitl
     C1ApiRequestcatalogV1RequestCatalogManagementServiceAddAccessEntitlementsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    RequestCatalogManagementServiceAddAccessEntitlementsResponse: shared
-      .RequestCatalogManagementServiceAddAccessEntitlementsResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "RequestCatalogManagementServiceAddAccessEntitlementsResponse":
-        "requestCatalogManagementServiceAddAccessEntitlementsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      RequestCatalogManagementServiceAddAccessEntitlementsResponse: shared
+        .RequestCatalogManagementServiceAddAccessEntitlementsResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "RequestCatalogManagementServiceAddAccessEntitlementsResponse":
+          "requestCatalogManagementServiceAddAccessEntitlementsResponse",
+      });
+    })
+  );
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceAddAccessEntitlementsResponseFromJSON(
   jsonString: string,

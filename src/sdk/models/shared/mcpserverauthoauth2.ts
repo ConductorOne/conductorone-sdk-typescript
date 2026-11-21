@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -183,14 +184,16 @@ export const ClientIdMode$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ClientIdMode
-> = openEnums.outboundSchema(ClientIdMode);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(ClientIdMode));
 
 /** @internal */
 export const MCPServerAuthOAuth2Mode$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   MCPServerAuthOAuth2Mode
-> = openEnums.outboundSchema(MCPServerAuthOAuth2Mode);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(MCPServerAuthOAuth2Mode)
+);
 
 /** @internal */
 export type MCPServerAuthOAuth2$Outbound = {
@@ -219,26 +222,28 @@ export const MCPServerAuthOAuth2$outboundSchema: z.ZodType<
   MCPServerAuthOAuth2$Outbound,
   z.ZodTypeDef,
   MCPServerAuthOAuth2
-> = z.object({
-  authorizeUrl: z.string().optional(),
-  clientId: z.string().optional(),
-  clientIdMode: ClientIdMode$outboundSchema.optional(),
-  clientSecret: z.string().optional(),
-  codeChallengeMethodsSupported: z.nullable(z.array(z.string())).optional(),
-  extraAuthorizeParams: z.record(z.string()).optional(),
-  extraTokenParams: z.record(z.string()).optional(),
-  issuerUrl: z.string().optional(),
-  jwtAudience: z.string().optional(),
-  jwtIssuer: z.string().optional(),
-  jwtPrivateKey: z.string().optional(),
-  jwtSubject: z.string().optional(),
-  mode: MCPServerAuthOAuth2Mode$outboundSchema.optional(),
-  pkce: z.string().optional(),
-  scopes: z.nullable(z.array(z.string())).optional(),
-  scopesSupported: z.nullable(z.array(z.string())).optional(),
-  tokenEndpointAuthMethod: z.string().optional(),
-  tokenUrl: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    authorizeUrl: z.string().optional(),
+    clientId: z.string().optional(),
+    clientIdMode: ClientIdMode$outboundSchema.optional(),
+    clientSecret: z.string().optional(),
+    codeChallengeMethodsSupported: z.nullable(z.array(z.string())).optional(),
+    extraAuthorizeParams: z.record(z.string()).optional(),
+    extraTokenParams: z.record(z.string()).optional(),
+    issuerUrl: z.string().optional(),
+    jwtAudience: z.string().optional(),
+    jwtIssuer: z.string().optional(),
+    jwtPrivateKey: z.string().optional(),
+    jwtSubject: z.string().optional(),
+    mode: MCPServerAuthOAuth2Mode$outboundSchema.optional(),
+    pkce: z.string().optional(),
+    scopes: z.nullable(z.array(z.string())).optional(),
+    scopesSupported: z.nullable(z.array(z.string())).optional(),
+    tokenEndpointAuthMethod: z.string().optional(),
+    tokenUrl: z.string().optional(),
+  })
+);
 
 export function mcpServerAuthOAuth2ToJSON(
   mcpServerAuthOAuth2: MCPServerAuthOAuth2,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * XAAClientAudienceMappingRef is a lightweight reference to a mapping, used for
@@ -32,10 +33,12 @@ export const XAAClientAudienceMappingRef$outboundSchema: z.ZodType<
   XAAClientAudienceMappingRef$Outbound,
   z.ZodTypeDef,
   XAAClientAudienceMappingRef
-> = z.object({
-  clientKey: z.string().optional(),
-  xaaResourceServerId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientKey: z.string().optional(),
+    xaaResourceServerId: z.string().optional(),
+  })
+);
 
 export function xaaClientAudienceMappingRefToJSON(
   xaaClientAudienceMappingRef: XAAClientAudienceMappingRef,

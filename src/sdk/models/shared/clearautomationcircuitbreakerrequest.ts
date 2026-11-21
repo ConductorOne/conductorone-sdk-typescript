@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -50,7 +51,7 @@ export const Decision$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Decision
-> = openEnums.outboundSchema(Decision);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Decision));
 
 /** @internal */
 export type ClearAutomationCircuitBreakerRequest$Outbound = {
@@ -63,10 +64,12 @@ export const ClearAutomationCircuitBreakerRequest$outboundSchema: z.ZodType<
   ClearAutomationCircuitBreakerRequest$Outbound,
   z.ZodTypeDef,
   ClearAutomationCircuitBreakerRequest
-> = z.object({
-  decision: Decision$outboundSchema.optional(),
-  reason: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    decision: Decision$outboundSchema.optional(),
+    reason: z.string().optional(),
+  })
+);
 
 export function clearAutomationCircuitBreakerRequestToJSON(
   clearAutomationCircuitBreakerRequest: ClearAutomationCircuitBreakerRequest,
