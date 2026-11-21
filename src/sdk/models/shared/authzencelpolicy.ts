@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -33,10 +33,12 @@ export const AuthzenCelPolicy$inboundSchema: z.ZodType<
   AuthzenCelPolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  environment: z.string().optional(),
-  expression: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    environment: z.string().optional(),
+    expression: z.string().optional(),
+  })
+);
 /** @internal */
 export type AuthzenCelPolicy$Outbound = {
   environment?: string | undefined;
@@ -48,10 +50,12 @@ export const AuthzenCelPolicy$outboundSchema: z.ZodType<
   AuthzenCelPolicy$Outbound,
   z.ZodTypeDef,
   AuthzenCelPolicy
-> = z.object({
-  environment: z.string().optional(),
-  expression: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    environment: z.string().optional(),
+    expression: z.string().optional(),
+  })
+);
 
 export function authzenCelPolicyToJSON(
   authzenCelPolicy: AuthzenCelPolicy,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * GetOverviewRequest specifies a reporting window of at most 90 days.
@@ -23,10 +24,12 @@ export const GetOverviewRequest$outboundSchema: z.ZodType<
   GetOverviewRequest$Outbound,
   z.ZodTypeDef,
   GetOverviewRequest
-> = z.object({
-  endTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  startTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    endTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    startTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function getOverviewRequestToJSON(
   getOverviewRequest: GetOverviewRequest,

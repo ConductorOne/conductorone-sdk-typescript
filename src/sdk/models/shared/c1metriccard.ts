@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -57,20 +57,22 @@ export const DeltaSentiment$inboundSchema: z.ZodType<
   DeltaSentiment,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DeltaSentiment);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(DeltaSentiment));
 
 /** @internal */
 export const C1MetricCard$inboundSchema: z.ZodType<
   C1MetricCard,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  delta: z.string().optional(),
-  deltaSentiment: DeltaSentiment$inboundSchema.optional(),
-  label: z.string().optional(),
-  sparkline: z.nullable(z.array(z.number())).optional(),
-  value: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    delta: z.string().optional(),
+    deltaSentiment: DeltaSentiment$inboundSchema.optional(),
+    label: z.string().optional(),
+    sparkline: z.nullable(z.array(z.number())).optional(),
+    value: z.string().optional(),
+  })
+);
 
 export function c1MetricCardFromJSON(
   jsonString: string,

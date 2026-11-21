@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The WorkloadFederationServiceDeleteProviderRequest message.
@@ -18,7 +19,7 @@ export const WorkloadFederationServiceDeleteProviderRequest$outboundSchema:
     WorkloadFederationServiceDeleteProviderRequest$Outbound,
     z.ZodTypeDef,
     WorkloadFederationServiceDeleteProviderRequest
-  > = z.object({});
+  > = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function workloadFederationServiceDeleteProviderRequestToJSON(
   workloadFederationServiceDeleteProviderRequest:

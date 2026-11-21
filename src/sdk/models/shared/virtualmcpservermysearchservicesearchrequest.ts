@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * VirtualMCPServerMySearchServiceSearchRequest searches Virtual MCP Servers
@@ -34,10 +35,12 @@ export const VirtualMCPServerMySearchServiceSearchRequest$outboundSchema:
     VirtualMCPServerMySearchServiceSearchRequest$Outbound,
     z.ZodTypeDef,
     VirtualMCPServerMySearchServiceSearchRequest
-  > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    })
+  );
 
 export function virtualMCPServerMySearchServiceSearchRequestToJSON(
   virtualMCPServerMySearchServiceSearchRequest:

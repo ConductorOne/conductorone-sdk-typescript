@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppSecretRef,
   AppSecretRef$Outbound,
@@ -26,9 +27,11 @@ export const AppSecretAdminServiceRevokeRequest$outboundSchema: z.ZodType<
   AppSecretAdminServiceRevokeRequest$Outbound,
   z.ZodTypeDef,
   AppSecretAdminServiceRevokeRequest
-> = z.object({
-  ref: z.nullable(AppSecretRef$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ref: z.nullable(AppSecretRef$outboundSchema).optional(),
+  })
+);
 
 export function appSecretAdminServiceRevokeRequestToJSON(
   appSecretAdminServiceRevokeRequest: AppSecretAdminServiceRevokeRequest,

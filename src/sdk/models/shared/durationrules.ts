@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -44,16 +44,18 @@ export const DurationRules$inboundSchema: z.ZodType<
   DurationRules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  const: z.nullable(z.string()).optional(),
-  gt: z.nullable(z.string()).optional(),
-  gte: z.nullable(z.string()).optional(),
-  in: z.nullable(z.array(z.string())).optional(),
-  lt: z.nullable(z.string()).optional(),
-  lte: z.nullable(z.string()).optional(),
-  notIn: z.nullable(z.array(z.string())).optional(),
-  required: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    const: z.nullable(z.string()).optional(),
+    gt: z.nullable(z.string()).optional(),
+    gte: z.nullable(z.string()).optional(),
+    in: z.nullable(z.array(z.string())).optional(),
+    lt: z.nullable(z.string()).optional(),
+    lte: z.nullable(z.string()).optional(),
+    notIn: z.nullable(z.array(z.string())).optional(),
+    required: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type DurationRules$Outbound = {
   const?: string | null | undefined;
@@ -71,16 +73,18 @@ export const DurationRules$outboundSchema: z.ZodType<
   DurationRules$Outbound,
   z.ZodTypeDef,
   DurationRules
-> = z.object({
-  const: z.nullable(z.string()).optional(),
-  gt: z.nullable(z.string()).optional(),
-  gte: z.nullable(z.string()).optional(),
-  in: z.nullable(z.array(z.string())).optional(),
-  lt: z.nullable(z.string()).optional(),
-  lte: z.nullable(z.string()).optional(),
-  notIn: z.nullable(z.array(z.string())).optional(),
-  required: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    const: z.nullable(z.string()).optional(),
+    gt: z.nullable(z.string()).optional(),
+    gte: z.nullable(z.string()).optional(),
+    in: z.nullable(z.array(z.string())).optional(),
+    lt: z.nullable(z.string()).optional(),
+    lte: z.nullable(z.string()).optional(),
+    notIn: z.nullable(z.array(z.string())).optional(),
+    required: z.boolean().optional(),
+  })
+);
 
 export function durationRulesToJSON(durationRules: DurationRules): string {
   return JSON.stringify(DurationRules$outboundSchema.parse(durationRules));

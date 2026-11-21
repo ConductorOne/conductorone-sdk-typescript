@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -46,21 +46,24 @@ export const Directory$inboundSchema: z.ZodType<
   Directory,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  all: z.nullable(DirectoryAccountFilterAll$inboundSchema).optional(),
-  appId: z.string().optional(),
-  celExpression: z.nullable(DirectoryAccountFilterCel$inboundSchema).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  mergeConfig: z.nullable(DirectoryMergeConfig$inboundSchema).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    all: z.nullable(DirectoryAccountFilterAll$inboundSchema).optional(),
+    appId: z.string().optional(),
+    celExpression: z.nullable(DirectoryAccountFilterCel$inboundSchema)
+      .optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    mergeConfig: z.nullable(DirectoryMergeConfig$inboundSchema).optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function directoryFromJSON(
   jsonString: string,

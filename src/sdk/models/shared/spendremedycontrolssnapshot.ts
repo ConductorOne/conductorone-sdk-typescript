@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -51,18 +51,22 @@ export const SpendRemedyControlsSnapshotPeriod$inboundSchema: z.ZodType<
   SpendRemedyControlsSnapshotPeriod,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(SpendRemedyControlsSnapshotPeriod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(SpendRemedyControlsSnapshotPeriod)
+);
 
 /** @internal */
 export const SpendRemedyControlsSnapshot$inboundSchema: z.ZodType<
   SpendRemedyControlsSnapshot,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  controls: z.nullable(FundsSpendControls$inboundSchema).optional(),
-  period: SpendRemedyControlsSnapshotPeriod$inboundSchema.optional(),
-  version: z.string().transform(v => parseInt(v, 10)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    controls: z.nullable(FundsSpendControls$inboundSchema).optional(),
+    period: SpendRemedyControlsSnapshotPeriod$inboundSchema.optional(),
+    version: z.string().transform(v => parseInt(v, 10)).optional(),
+  })
+);
 
 export function spendRemedyControlsSnapshotFromJSON(
   jsonString: string,

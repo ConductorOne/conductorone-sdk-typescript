@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,9 +34,11 @@ export const TerraformPreferences$inboundSchema: z.ZodType<
   TerraformPreferences,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  showCode: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    showCode: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type TerraformPreferences$Outbound = {
   showCode?: boolean | undefined;
@@ -47,9 +49,11 @@ export const TerraformPreferences$outboundSchema: z.ZodType<
   TerraformPreferences$Outbound,
   z.ZodTypeDef,
   TerraformPreferences
-> = z.object({
-  showCode: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    showCode: z.boolean().optional(),
+  })
+);
 
 export function terraformPreferencesToJSON(
   terraformPreferences: TerraformPreferences,

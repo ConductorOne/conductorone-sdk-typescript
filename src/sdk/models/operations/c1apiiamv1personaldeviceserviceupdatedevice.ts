@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,17 +51,19 @@ export const C1ApiIamV1PersonalDeviceServiceUpdateDeviceRequest$outboundSchema:
     C1ApiIamV1PersonalDeviceServiceUpdateDeviceRequest$Outbound,
     z.ZodTypeDef,
     C1ApiIamV1PersonalDeviceServiceUpdateDeviceRequest
-  > = z.object({
-    deviceId: z.string(),
-    personalDeviceServiceUpdateDeviceRequest: shared
-      .PersonalDeviceServiceUpdateDeviceRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      deviceId: "device_id",
-      personalDeviceServiceUpdateDeviceRequest:
-        "PersonalDeviceServiceUpdateDeviceRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      deviceId: z.string(),
+      personalDeviceServiceUpdateDeviceRequest: shared
+        .PersonalDeviceServiceUpdateDeviceRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        deviceId: "device_id",
+        personalDeviceServiceUpdateDeviceRequest:
+          "PersonalDeviceServiceUpdateDeviceRequest",
+      });
+    })
+  );
 
 export function c1ApiIamV1PersonalDeviceServiceUpdateDeviceRequestToJSON(
   c1ApiIamV1PersonalDeviceServiceUpdateDeviceRequest:
@@ -80,21 +82,23 @@ export const C1ApiIamV1PersonalDeviceServiceUpdateDeviceResponse$inboundSchema:
     C1ApiIamV1PersonalDeviceServiceUpdateDeviceResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    PersonalDeviceServiceUpdateDeviceResponse: shared
-      .PersonalDeviceServiceUpdateDeviceResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "PersonalDeviceServiceUpdateDeviceResponse":
-        "personalDeviceServiceUpdateDeviceResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      PersonalDeviceServiceUpdateDeviceResponse: shared
+        .PersonalDeviceServiceUpdateDeviceResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "PersonalDeviceServiceUpdateDeviceResponse":
+          "personalDeviceServiceUpdateDeviceResponse",
+      });
+    })
+  );
 
 export function c1ApiIamV1PersonalDeviceServiceUpdateDeviceResponseFromJSON(
   jsonString: string,

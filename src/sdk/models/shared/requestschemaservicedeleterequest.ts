@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The request message for deleting a request schema.
@@ -17,7 +18,7 @@ export const RequestSchemaServiceDeleteRequest$outboundSchema: z.ZodType<
   RequestSchemaServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   RequestSchemaServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function requestSchemaServiceDeleteRequestToJSON(
   requestSchemaServiceDeleteRequest: RequestSchemaServiceDeleteRequest,

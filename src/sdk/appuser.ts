@@ -6,6 +6,7 @@ import { appUserList } from "../funcs/appUserList.js";
 import { appUserListAppUserCredentials } from "../funcs/appUserListAppUserCredentials.js";
 import { appUserListAppUsersForUser } from "../funcs/appUserListAppUsersForUser.js";
 import { appUserListOwnedServiceAccounts } from "../funcs/appUserListOwnedServiceAccounts.js";
+import { appUserMerge } from "../funcs/appUserMerge.js";
 import { appUserSearch } from "../funcs/appUserSearch.js";
 import { appUserUpdate } from "../funcs/appUserUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -64,6 +65,26 @@ export class AppUser extends ClientSDK {
     operations.C1ApiAppV1AppUserServiceListAppUserCredentialsResponse
   > {
     return unwrapAsync(appUserListAppUserCredentials(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Merge
+   *
+   * @remarks
+   * Merge one app user (the source) into another app user in the same app (the target).
+   *  The source's connector and external source records, and its lookup bindings, move to
+   *  the target in one transaction. Grants, owners, and the target's identity user binding
+   *  stay as they are. The source is removed by the next uplift. A merge cannot be undone.
+   */
+  async merge(
+    request: operations.C1ApiAppV1AppUserServiceMergeRequest,
+    options?: RequestOptions,
+  ): Promise<operations.C1ApiAppV1AppUserServiceMergeResponse> {
+    return unwrapAsync(appUserMerge(
       this,
       request,
       options,

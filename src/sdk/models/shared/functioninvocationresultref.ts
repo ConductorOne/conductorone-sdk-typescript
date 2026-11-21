@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -56,23 +56,25 @@ export type FunctionInvocationResultRef = {
 
 /** @internal */
 export const Storage$inboundSchema: z.ZodType<Storage, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Storage);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Storage));
 
 /** @internal */
 export const FunctionInvocationResultRef$inboundSchema: z.ZodType<
   FunctionInvocationResultRef,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  expiresAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  mediaType: z.string().optional(),
-  path: z.string().optional(),
-  sha256: z.string().optional(),
-  sizeBytes: z.string().transform(v => parseInt(v, 10)).optional(),
-  storage: Storage$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expiresAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    mediaType: z.string().optional(),
+    path: z.string().optional(),
+    sha256: z.string().optional(),
+    sizeBytes: z.string().transform(v => parseInt(v, 10)).optional(),
+    storage: Storage$inboundSchema.optional(),
+  })
+);
 
 export function functionInvocationResultRefFromJSON(
   jsonString: string,

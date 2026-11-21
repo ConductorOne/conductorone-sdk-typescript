@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -55,29 +55,33 @@ export const AppEntitlementMonitorBindingEntitlementGroup$inboundSchema:
     AppEntitlementMonitorBindingEntitlementGroup,
     z.ZodTypeDef,
     unknown
-  > = openEnums.inboundSchema(AppEntitlementMonitorBindingEntitlementGroup);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.inboundSchema(AppEntitlementMonitorBindingEntitlementGroup)
+  );
 
 /** @internal */
 export const AppEntitlementMonitorBinding$inboundSchema: z.ZodType<
   AppEntitlementMonitorBinding,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  entitlementGroup: AppEntitlementMonitorBindingEntitlementGroup$inboundSchema
-    .optional(),
-  monitorId: z.string().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    entitlementGroup: AppEntitlementMonitorBindingEntitlementGroup$inboundSchema
+      .optional(),
+    monitorId: z.string().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function appEntitlementMonitorBindingFromJSON(
   jsonString: string,

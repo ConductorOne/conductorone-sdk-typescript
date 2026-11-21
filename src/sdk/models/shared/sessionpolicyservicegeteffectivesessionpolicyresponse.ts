@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -56,8 +56,10 @@ export const SessionPolicyServiceGetEffectiveSessionPolicyResponseSource$inbound
     SessionPolicyServiceGetEffectiveSessionPolicyResponseSource,
     z.ZodTypeDef,
     unknown
-  > = openEnums.inboundSchema(
-    SessionPolicyServiceGetEffectiveSessionPolicyResponseSource,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.inboundSchema(
+      SessionPolicyServiceGetEffectiveSessionPolicyResponseSource,
+    )
   );
 
 /** @internal */
@@ -66,13 +68,15 @@ export const SessionPolicyServiceGetEffectiveSessionPolicyResponse$inboundSchema
     SessionPolicyServiceGetEffectiveSessionPolicyResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    group: z.nullable(AppEntitlement$inboundSchema).optional(),
-    sessionPolicy: z.nullable(SessionPolicy$inboundSchema).optional(),
-    source:
-      SessionPolicyServiceGetEffectiveSessionPolicyResponseSource$inboundSchema
-        .optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      group: z.nullable(AppEntitlement$inboundSchema).optional(),
+      sessionPolicy: z.nullable(SessionPolicy$inboundSchema).optional(),
+      source:
+        SessionPolicyServiceGetEffectiveSessionPolicyResponseSource$inboundSchema
+          .optional(),
+    })
+  );
 
 export function sessionPolicyServiceGetEffectiveSessionPolicyResponseFromJSON(
   jsonString: string,

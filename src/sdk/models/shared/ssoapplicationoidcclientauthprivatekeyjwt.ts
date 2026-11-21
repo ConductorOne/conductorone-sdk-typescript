@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,9 +26,11 @@ export const SSOApplicationOIDCClientAuthPrivateKeyJWT$inboundSchema: z.ZodType<
   SSOApplicationOIDCClientAuthPrivateKeyJWT,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  publicJwks: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    publicJwks: z.string(),
+  })
+);
 /** @internal */
 export type SSOApplicationOIDCClientAuthPrivateKeyJWT$Outbound = {
   publicJwks: string;
@@ -40,9 +42,11 @@ export const SSOApplicationOIDCClientAuthPrivateKeyJWT$outboundSchema:
     SSOApplicationOIDCClientAuthPrivateKeyJWT$Outbound,
     z.ZodTypeDef,
     SSOApplicationOIDCClientAuthPrivateKeyJWT
-  > = z.object({
-    publicJwks: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      publicJwks: z.string(),
+    })
+  );
 
 export function ssoApplicationOIDCClientAuthPrivateKeyJWTToJSON(
   ssoApplicationOIDCClientAuthPrivateKeyJWT:

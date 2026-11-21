@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -33,11 +33,13 @@ export const EntitlementCutoffImpactPoint$inboundSchema: z.ZodType<
   EntitlementCutoffImpactPoint,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  entitlementCount: z.number().int().optional(),
-  minimumCoverageBasisPoints: z.number().int().optional(),
-  usersWithAllEntitlements: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entitlementCount: z.number().int().optional(),
+    minimumCoverageBasisPoints: z.number().int().optional(),
+    usersWithAllEntitlements: z.number().int().optional(),
+  })
+);
 
 export function entitlementCutoffImpactPointFromJSON(
   jsonString: string,

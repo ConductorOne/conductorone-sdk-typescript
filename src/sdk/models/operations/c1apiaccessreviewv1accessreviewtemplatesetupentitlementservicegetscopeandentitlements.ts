@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -48,13 +48,15 @@ export const C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceGetSc
     C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceGetScopeAndEntitlementsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceGetScopeAndEntitlementsRequest
-  > = z.object({
-    accessReviewTemplateId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      accessReviewTemplateId: "access_review_template_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      accessReviewTemplateId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        accessReviewTemplateId: "access_review_template_id",
+      });
+    })
+  );
 
 export function c1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceGetScopeAndEntitlementsRequestToJSON(
   c1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceGetScopeAndEntitlementsRequest:
@@ -74,22 +76,24 @@ export const C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceGetSc
     C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceGetScopeAndEntitlementsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    AccessReviewTemplateSetupEntitlementServiceSetResponse: shared
-      .AccessReviewTemplateSetupEntitlementServiceSetResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "AccessReviewTemplateSetupEntitlementServiceSetResponse":
-        "accessReviewTemplateSetupEntitlementServiceSetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      AccessReviewTemplateSetupEntitlementServiceSetResponse: shared
+        .AccessReviewTemplateSetupEntitlementServiceSetResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "AccessReviewTemplateSetupEntitlementServiceSetResponse":
+          "accessReviewTemplateSetupEntitlementServiceSetResponse",
+      });
+    })
+  );
 
 export function c1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceGetScopeAndEntitlementsResponseFromJSON(
   jsonString: string,

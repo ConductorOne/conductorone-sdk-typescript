@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * BatonResourceActionRef describes dispatch to a connector resource-create
@@ -21,7 +22,7 @@ export const BatonResourceActionRefInput$outboundSchema: z.ZodType<
   BatonResourceActionRefInput$Outbound,
   z.ZodTypeDef,
   BatonResourceActionRefInput
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function batonResourceActionRefInputToJSON(
   batonResourceActionRefInput: BatonResourceActionRefInput,

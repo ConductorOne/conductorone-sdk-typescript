@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * ArtifactServiceDeleteRequest identifies an Artifact to delete.
@@ -17,7 +18,7 @@ export const ArtifactServiceDeleteRequest$outboundSchema: z.ZodType<
   ArtifactServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   ArtifactServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function artifactServiceDeleteRequestToJSON(
   artifactServiceDeleteRequest: ArtifactServiceDeleteRequest,

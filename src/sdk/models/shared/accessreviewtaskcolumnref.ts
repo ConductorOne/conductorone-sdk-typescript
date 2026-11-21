@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -102,20 +102,22 @@ export type AccessReviewTaskColumnRef = {
 
 /** @internal */
 export const Builtin$inboundSchema: z.ZodType<Builtin, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Builtin);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Builtin));
 /** @internal */
 export const Builtin$outboundSchema: z.ZodType<string, z.ZodTypeDef, Builtin> =
-  openEnums.outboundSchema(Builtin);
+  /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Builtin));
 
 /** @internal */
 export const AccessReviewTaskColumnRef$inboundSchema: z.ZodType<
   AccessReviewTaskColumnRef,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appUserAttributeKey: z.nullable(z.string()).optional(),
-  builtin: z.nullable(Builtin$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appUserAttributeKey: z.nullable(z.string()).optional(),
+    builtin: z.nullable(Builtin$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type AccessReviewTaskColumnRef$Outbound = {
   appUserAttributeKey?: string | null | undefined;
@@ -127,10 +129,12 @@ export const AccessReviewTaskColumnRef$outboundSchema: z.ZodType<
   AccessReviewTaskColumnRef$Outbound,
   z.ZodTypeDef,
   AccessReviewTaskColumnRef
-> = z.object({
-  appUserAttributeKey: z.nullable(z.string()).optional(),
-  builtin: z.nullable(Builtin$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appUserAttributeKey: z.nullable(z.string()).optional(),
+    builtin: z.nullable(Builtin$outboundSchema).optional(),
+  })
+);
 
 export function accessReviewTaskColumnRefToJSON(
   accessReviewTaskColumnRef: AccessReviewTaskColumnRef,

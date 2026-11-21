@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   MCPServerExternalConfig,
   MCPServerExternalConfig$Outbound,
@@ -38,11 +39,14 @@ export const MCPServerServiceUpdateCredentialsRequest$outboundSchema: z.ZodType<
   MCPServerServiceUpdateCredentialsRequest$Outbound,
   z.ZodTypeDef,
   MCPServerServiceUpdateCredentialsRequest
-> = z.object({
-  externalConfig: z.nullable(MCPServerExternalConfig$outboundSchema).optional(),
-  hostedConfig: z.nullable(MCPServerHostedConfig$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    externalConfig: z.nullable(MCPServerExternalConfig$outboundSchema)
+      .optional(),
+    hostedConfig: z.nullable(MCPServerHostedConfig$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function mcpServerServiceUpdateCredentialsRequestToJSON(
   mcpServerServiceUpdateCredentialsRequest:

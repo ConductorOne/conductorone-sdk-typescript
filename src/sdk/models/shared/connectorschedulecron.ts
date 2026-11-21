@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * A cron-based schedule definition for connector syncs.
@@ -29,10 +30,12 @@ export const ConnectorScheduleCron$outboundSchema: z.ZodType<
   ConnectorScheduleCron$Outbound,
   z.ZodTypeDef,
   ConnectorScheduleCron
-> = z.object({
-  cronSpec: z.string().optional(),
-  timezone: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cronSpec: z.string().optional(),
+    timezone: z.string().optional(),
+  })
+);
 
 export function connectorScheduleCronToJSON(
   connectorScheduleCron: ConnectorScheduleCron,

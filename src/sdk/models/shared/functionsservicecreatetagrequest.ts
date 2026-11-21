@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The FunctionsServiceCreateTagRequest message.
@@ -29,10 +30,12 @@ export const FunctionsServiceCreateTagRequest$outboundSchema: z.ZodType<
   FunctionsServiceCreateTagRequest$Outbound,
   z.ZodTypeDef,
   FunctionsServiceCreateTagRequest
-> = z.object({
-  commitId: z.string().optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    commitId: z.string().optional(),
+    name: z.string().optional(),
+  })
+);
 
 export function functionsServiceCreateTagRequestToJSON(
   functionsServiceCreateTagRequest: FunctionsServiceCreateTagRequest,

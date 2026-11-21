@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -75,7 +75,7 @@ export type C1ApiEdgeV1EdgeServiceListEgressTopDestinationsResponse = {
 
 /** @internal */
 export const Verdict$outboundSchema: z.ZodType<string, z.ZodTypeDef, Verdict> =
-  openEnums.outboundSchema(Verdict);
+  /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Verdict));
 
 /** @internal */
 export type C1ApiEdgeV1EdgeServiceListEgressTopDestinationsRequest$Outbound = {
@@ -99,29 +99,31 @@ export const C1ApiEdgeV1EdgeServiceListEgressTopDestinationsRequest$outboundSche
     C1ApiEdgeV1EdgeServiceListEgressTopDestinationsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceListEgressTopDestinationsRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    blockedOnly: z.boolean().optional(),
-    hostContains: z.string().optional(),
-    includeTrend: z.boolean().optional(),
-    limit: z.number().int().optional(),
-    offset: z.number().int().optional(),
-    principalKind: z.string().optional(),
-    since: z.number().int().transform(v => `${v}`).optional(),
-    trendBuckets: z.number().int().optional(),
-    until: z.number().int().transform(v => `${v}`).optional(),
-    verdict: Verdict$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      blockedOnly: "blocked_only",
-      hostContains: "host_contains",
-      includeTrend: "include_trend",
-      principalKind: "principal_kind",
-      trendBuckets: "trend_buckets",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      blockedOnly: z.boolean().optional(),
+      hostContains: z.string().optional(),
+      includeTrend: z.boolean().optional(),
+      limit: z.number().int().optional(),
+      offset: z.number().int().optional(),
+      principalKind: z.string().optional(),
+      since: z.number().int().transform(v => `${v}`).optional(),
+      trendBuckets: z.number().int().optional(),
+      until: z.number().int().transform(v => `${v}`).optional(),
+      verdict: Verdict$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        blockedOnly: "blocked_only",
+        hostContains: "host_contains",
+        includeTrend: "include_trend",
+        principalKind: "principal_kind",
+        trendBuckets: "trend_buckets",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListEgressTopDestinationsRequestToJSON(
   c1ApiEdgeV1EdgeServiceListEgressTopDestinationsRequest:
@@ -140,21 +142,23 @@ export const C1ApiEdgeV1EdgeServiceListEgressTopDestinationsResponse$inboundSche
     C1ApiEdgeV1EdgeServiceListEgressTopDestinationsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    EdgeServiceListEgressTopDestinationsResponse: shared
-      .EdgeServiceListEgressTopDestinationsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "EdgeServiceListEgressTopDestinationsResponse":
-        "edgeServiceListEgressTopDestinationsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      EdgeServiceListEgressTopDestinationsResponse: shared
+        .EdgeServiceListEgressTopDestinationsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "EdgeServiceListEgressTopDestinationsResponse":
+          "edgeServiceListEgressTopDestinationsResponse",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListEgressTopDestinationsResponseFromJSON(
   jsonString: string,

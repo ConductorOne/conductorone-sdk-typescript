@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -54,13 +54,15 @@ export const TaskActionInstance$inboundSchema: z.ZodType<
   TaskActionInstance,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  batonResourceActionRef: z.nullable(BatonResourceActionRef$inboundSchema)
-    .optional(),
-  connectorActionRef: z.nullable(ConnectorActionRef$inboundSchema).optional(),
-  displayName: z.string().optional(),
-  requestInstructions: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batonResourceActionRef: z.nullable(BatonResourceActionRef$inboundSchema)
+      .optional(),
+    connectorActionRef: z.nullable(ConnectorActionRef$inboundSchema).optional(),
+    displayName: z.string().optional(),
+    requestInstructions: z.string().optional(),
+  })
+);
 /** @internal */
 export type TaskActionInstance$Outbound = {
   batonResourceActionRef?: BatonResourceActionRef$Outbound | null | undefined;
@@ -74,13 +76,16 @@ export const TaskActionInstance$outboundSchema: z.ZodType<
   TaskActionInstance$Outbound,
   z.ZodTypeDef,
   TaskActionInstance
-> = z.object({
-  batonResourceActionRef: z.nullable(BatonResourceActionRef$outboundSchema)
-    .optional(),
-  connectorActionRef: z.nullable(ConnectorActionRef$outboundSchema).optional(),
-  displayName: z.string().optional(),
-  requestInstructions: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batonResourceActionRef: z.nullable(BatonResourceActionRef$outboundSchema)
+      .optional(),
+    connectorActionRef: z.nullable(ConnectorActionRef$outboundSchema)
+      .optional(),
+    displayName: z.string().optional(),
+    requestInstructions: z.string().optional(),
+  })
+);
 
 export function taskActionInstanceToJSON(
   taskActionInstance: TaskActionInstance,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiAiGovernanceV1MCPServerServiceRegisterRequest$outboundSchema:
     C1ApiAiGovernanceV1MCPServerServiceRegisterRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1MCPServerServiceRegisterRequest
-  > = z.object({
-    appId: z.string(),
-    mcpServerServiceRegisterRequest: shared
-      .MCPServerServiceRegisterRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      mcpServerServiceRegisterRequest: "MCPServerServiceRegisterRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      mcpServerServiceRegisterRequest: shared
+        .MCPServerServiceRegisterRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        mcpServerServiceRegisterRequest: "MCPServerServiceRegisterRequest",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPServerServiceRegisterRequestToJSON(
   c1ApiAiGovernanceV1MCPServerServiceRegisterRequest:
@@ -79,20 +81,22 @@ export const C1ApiAiGovernanceV1MCPServerServiceRegisterResponse$inboundSchema:
     C1ApiAiGovernanceV1MCPServerServiceRegisterResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    MCPServerServiceRegisterResponse: shared
-      .MCPServerServiceRegisterResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "MCPServerServiceRegisterResponse": "mcpServerServiceRegisterResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      MCPServerServiceRegisterResponse: shared
+        .MCPServerServiceRegisterResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "MCPServerServiceRegisterResponse": "mcpServerServiceRegisterResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPServerServiceRegisterResponseFromJSON(
   jsonString: string,

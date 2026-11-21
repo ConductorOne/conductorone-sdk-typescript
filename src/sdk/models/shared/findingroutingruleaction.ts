@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -54,12 +54,14 @@ export const FindingRoutingRuleAction$inboundSchema: z.ZodType<
   FindingRoutingRuleAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  acceptRisk: z.nullable(AcceptRiskRoutingAction$inboundSchema).optional(),
-  createTask: z.nullable(CreateTaskAction$inboundSchema).optional(),
-  snooze: z.nullable(SnoozeRoutingAction$inboundSchema).optional(),
-  suppress: z.nullable(SuppressRoutingAction$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    acceptRisk: z.nullable(AcceptRiskRoutingAction$inboundSchema).optional(),
+    createTask: z.nullable(CreateTaskAction$inboundSchema).optional(),
+    snooze: z.nullable(SnoozeRoutingAction$inboundSchema).optional(),
+    suppress: z.nullable(SuppressRoutingAction$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type FindingRoutingRuleAction$Outbound = {
   acceptRisk?: AcceptRiskRoutingAction$Outbound | null | undefined;
@@ -73,12 +75,14 @@ export const FindingRoutingRuleAction$outboundSchema: z.ZodType<
   FindingRoutingRuleAction$Outbound,
   z.ZodTypeDef,
   FindingRoutingRuleAction
-> = z.object({
-  acceptRisk: z.nullable(AcceptRiskRoutingAction$outboundSchema).optional(),
-  createTask: z.nullable(CreateTaskAction$outboundSchema).optional(),
-  snooze: z.nullable(SnoozeRoutingAction$outboundSchema).optional(),
-  suppress: z.nullable(SuppressRoutingAction$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    acceptRisk: z.nullable(AcceptRiskRoutingAction$outboundSchema).optional(),
+    createTask: z.nullable(CreateTaskAction$outboundSchema).optional(),
+    snooze: z.nullable(SnoozeRoutingAction$outboundSchema).optional(),
+    suppress: z.nullable(SuppressRoutingAction$outboundSchema).optional(),
+  })
+);
 
 export function findingRoutingRuleActionToJSON(
   findingRoutingRuleAction: FindingRoutingRuleAction,

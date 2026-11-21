@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -39,11 +39,13 @@ export const AnyRules$inboundSchema: z.ZodType<
   AnyRules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  in: z.nullable(z.array(z.string())).optional(),
-  notIn: z.nullable(z.array(z.string())).optional(),
-  required: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    in: z.nullable(z.array(z.string())).optional(),
+    notIn: z.nullable(z.array(z.string())).optional(),
+    required: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type AnyRules$Outbound = {
   in?: Array<string> | null | undefined;
@@ -56,11 +58,13 @@ export const AnyRules$outboundSchema: z.ZodType<
   AnyRules$Outbound,
   z.ZodTypeDef,
   AnyRules
-> = z.object({
-  in: z.nullable(z.array(z.string())).optional(),
-  notIn: z.nullable(z.array(z.string())).optional(),
-  required: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    in: z.nullable(z.array(z.string())).optional(),
+    notIn: z.nullable(z.array(z.string())).optional(),
+    required: z.boolean().optional(),
+  })
+);
 
 export function anyRulesToJSON(anyRules: AnyRules): string {
   return JSON.stringify(AnyRules$outboundSchema.parse(anyRules));

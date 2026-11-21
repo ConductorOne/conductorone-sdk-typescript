@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The InstantiateClassifierTemplateRequest message.
@@ -34,11 +35,13 @@ export const InstantiateClassifierTemplateRequest$outboundSchema: z.ZodType<
   InstantiateClassifierTemplateRequest$Outbound,
   z.ZodTypeDef,
   InstantiateClassifierTemplateRequest
-> = z.object({
-  displayName: z.string().optional(),
-  params: z.record(z.string()).optional(),
-  templateVersion: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    params: z.record(z.string()).optional(),
+    templateVersion: z.string().optional(),
+  })
+);
 
 export function instantiateClassifierTemplateRequestToJSON(
   instantiateClassifierTemplateRequest: InstantiateClassifierTemplateRequest,

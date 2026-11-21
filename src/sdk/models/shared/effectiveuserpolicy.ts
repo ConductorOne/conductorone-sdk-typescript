@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -51,18 +51,22 @@ export const EffectiveUserPolicySource$inboundSchema: z.ZodType<
   EffectiveUserPolicySource,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EffectiveUserPolicySource);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(EffectiveUserPolicySource)
+);
 
 /** @internal */
 export const EffectiveUserPolicy$inboundSchema: z.ZodType<
   EffectiveUserPolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  group: z.nullable(AppEntitlement$inboundSchema).optional(),
-  policy: z.nullable(SessionPolicy$inboundSchema).optional(),
-  source: EffectiveUserPolicySource$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    group: z.nullable(AppEntitlement$inboundSchema).optional(),
+    policy: z.nullable(SessionPolicy$inboundSchema).optional(),
+    source: EffectiveUserPolicySource$inboundSchema.optional(),
+  })
+);
 
 export function effectiveUserPolicyFromJSON(
   jsonString: string,

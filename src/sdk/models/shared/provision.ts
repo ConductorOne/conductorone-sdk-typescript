@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -36,11 +36,13 @@ export const Provision$inboundSchema: z.ZodType<
   Provision,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  assigned: z.boolean().optional(),
-  provisionPolicy: z.nullable(ProvisionPolicyInput$inboundSchema).optional(),
-  provisionTarget: z.nullable(ProvisionTarget$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assigned: z.boolean().optional(),
+    provisionPolicy: z.nullable(ProvisionPolicyInput$inboundSchema).optional(),
+    provisionTarget: z.nullable(ProvisionTarget$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type Provision$Outbound = {
   assigned?: boolean | undefined;
@@ -53,11 +55,13 @@ export const Provision$outboundSchema: z.ZodType<
   Provision$Outbound,
   z.ZodTypeDef,
   Provision
-> = z.object({
-  assigned: z.boolean().optional(),
-  provisionPolicy: z.nullable(ProvisionPolicyInput$outboundSchema).optional(),
-  provisionTarget: z.nullable(ProvisionTarget$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assigned: z.boolean().optional(),
+    provisionPolicy: z.nullable(ProvisionPolicyInput$outboundSchema).optional(),
+    provisionTarget: z.nullable(ProvisionTarget$outboundSchema).optional(),
+  })
+);
 
 export function provisionToJSON(provision: Provision): string {
   return JSON.stringify(Provision$outboundSchema.parse(provision));

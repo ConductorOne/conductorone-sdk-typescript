@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -45,7 +46,9 @@ export const AppCapServiceSetLimitRequestPeriod$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AppCapServiceSetLimitRequestPeriod
-> = openEnums.outboundSchema(AppCapServiceSetLimitRequestPeriod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AppCapServiceSetLimitRequestPeriod)
+);
 
 /** @internal */
 export type AppCapServiceSetLimitRequest$Outbound = {
@@ -58,10 +61,12 @@ export const AppCapServiceSetLimitRequest$outboundSchema: z.ZodType<
   AppCapServiceSetLimitRequest$Outbound,
   z.ZodTypeDef,
   AppCapServiceSetLimitRequest
-> = z.object({
-  limit: z.nullable(FundsSpendLimit$outboundSchema).optional(),
-  period: AppCapServiceSetLimitRequestPeriod$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.nullable(FundsSpendLimit$outboundSchema).optional(),
+    period: AppCapServiceSetLimitRequestPeriod$outboundSchema.optional(),
+  })
+);
 
 export function appCapServiceSetLimitRequestToJSON(
   appCapServiceSetLimitRequest: AppCapServiceSetLimitRequest,

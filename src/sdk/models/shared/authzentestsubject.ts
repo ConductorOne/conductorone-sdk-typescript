@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * AuthzenTestSubject identifies the AuthZEN subject for a test evaluation.
@@ -31,11 +32,13 @@ export const AuthzenTestSubject$outboundSchema: z.ZodType<
   AuthzenTestSubject$Outbound,
   z.ZodTypeDef,
   AuthzenTestSubject
-> = z.object({
-  id: z.string().optional(),
-  properties: z.nullable(z.record(z.any())).optional(),
-  type: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    properties: z.nullable(z.record(z.any())).optional(),
+    type: z.string().optional(),
+  })
+);
 
 export function authzenTestSubjectToJSON(
   authzenTestSubject: AuthzenTestSubject,

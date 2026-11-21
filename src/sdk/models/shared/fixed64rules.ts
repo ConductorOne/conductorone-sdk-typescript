@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -73,16 +73,18 @@ export const Fixed64Rules$inboundSchema: z.ZodType<
   Fixed64Rules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  const: z.string().optional(),
-  gt: z.string().optional(),
-  gte: z.string().optional(),
-  ignoreEmpty: z.boolean().optional(),
-  in: z.nullable(z.array(z.string())).optional(),
-  lt: z.string().optional(),
-  lte: z.string().optional(),
-  notIn: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    const: z.string().optional(),
+    gt: z.string().optional(),
+    gte: z.string().optional(),
+    ignoreEmpty: z.boolean().optional(),
+    in: z.nullable(z.array(z.string())).optional(),
+    lt: z.string().optional(),
+    lte: z.string().optional(),
+    notIn: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type Fixed64Rules$Outbound = {
   const?: string | undefined;
@@ -100,16 +102,18 @@ export const Fixed64Rules$outboundSchema: z.ZodType<
   Fixed64Rules$Outbound,
   z.ZodTypeDef,
   Fixed64Rules
-> = z.object({
-  const: z.string().optional(),
-  gt: z.string().optional(),
-  gte: z.string().optional(),
-  ignoreEmpty: z.boolean().optional(),
-  in: z.nullable(z.array(z.string())).optional(),
-  lt: z.string().optional(),
-  lte: z.string().optional(),
-  notIn: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    const: z.string().optional(),
+    gt: z.string().optional(),
+    gte: z.string().optional(),
+    ignoreEmpty: z.boolean().optional(),
+    in: z.nullable(z.array(z.string())).optional(),
+    lt: z.string().optional(),
+    lte: z.string().optional(),
+    notIn: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function fixed64RulesToJSON(fixed64Rules: Fixed64Rules): string {
   return JSON.stringify(Fixed64Rules$outboundSchema.parse(fixed64Rules));

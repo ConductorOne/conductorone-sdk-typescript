@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -48,15 +48,17 @@ export const C1ApiAutomationsV1AutomationServiceExecuteAutomationRequest$outboun
     C1ApiAutomationsV1AutomationServiceExecuteAutomationRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAutomationsV1AutomationServiceExecuteAutomationRequest
-  > = z.object({
-    id: z.string(),
-    executeAutomationRequest: shared.ExecuteAutomationRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      executeAutomationRequest: "ExecuteAutomationRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      executeAutomationRequest: shared.ExecuteAutomationRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        executeAutomationRequest: "ExecuteAutomationRequest",
+      });
+    })
+  );
 
 export function c1ApiAutomationsV1AutomationServiceExecuteAutomationRequestToJSON(
   c1ApiAutomationsV1AutomationServiceExecuteAutomationRequest:
@@ -74,20 +76,22 @@ export const C1ApiAutomationsV1AutomationServiceExecuteAutomationResponse$inboun
     C1ApiAutomationsV1AutomationServiceExecuteAutomationResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ExecuteAutomationResponse: shared.ExecuteAutomationResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ExecuteAutomationResponse": "executeAutomationResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ExecuteAutomationResponse: shared.ExecuteAutomationResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ExecuteAutomationResponse": "executeAutomationResponse",
+      });
+    })
+  );
 
 export function c1ApiAutomationsV1AutomationServiceExecuteAutomationResponseFromJSON(
   jsonString: string,

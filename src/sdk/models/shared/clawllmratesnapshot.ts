@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -69,27 +69,31 @@ export const ClawLLMRateSnapshotSource$inboundSchema: z.ZodType<
   ClawLLMRateSnapshotSource,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ClawLLMRateSnapshotSource);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ClawLLMRateSnapshotSource)
+);
 
 /** @internal */
 export const ClawLLMRateSnapshot$inboundSchema: z.ZodType<
   ClawLLMRateSnapshot,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  asOf: z.string().optional(),
-  cacheReadNanoPerMillionTokens: z.string().transform(v => parseInt(v, 10))
-    .optional(),
-  cacheWriteNanoPerMillionTokens: z.string().transform(v => parseInt(v, 10))
-    .optional(),
-  citation: z.string().optional(),
-  inputNanoPerMillionTokens: z.string().transform(v => parseInt(v, 10))
-    .optional(),
-  note: z.string().optional(),
-  outputNanoPerMillionTokens: z.string().transform(v => parseInt(v, 10))
-    .optional(),
-  source: ClawLLMRateSnapshotSource$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    asOf: z.string().optional(),
+    cacheReadNanoPerMillionTokens: z.string().transform(v => parseInt(v, 10))
+      .optional(),
+    cacheWriteNanoPerMillionTokens: z.string().transform(v => parseInt(v, 10))
+      .optional(),
+    citation: z.string().optional(),
+    inputNanoPerMillionTokens: z.string().transform(v => parseInt(v, 10))
+      .optional(),
+    note: z.string().optional(),
+    outputNanoPerMillionTokens: z.string().transform(v => parseInt(v, 10))
+      .optional(),
+    source: ClawLLMRateSnapshotSource$inboundSchema.optional(),
+  })
+);
 
 export function clawLLMRateSnapshotFromJSON(
   jsonString: string,

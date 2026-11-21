@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Decoy is the read projection of a planted honey-credential. All
@@ -47,12 +48,14 @@ export const DecoyInput$outboundSchema: z.ZodType<
   DecoyInput$Outbound,
   z.ZodTypeDef,
   DecoyInput
-> = z.object({
-  annotations: z.record(z.string()).optional(),
-  description: z.string().optional(),
-  disabled: z.boolean().optional(),
-  displayName: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotations: z.record(z.string()).optional(),
+    description: z.string().optional(),
+    disabled: z.boolean().optional(),
+    displayName: z.string().optional(),
+  })
+);
 
 export function decoyInputToJSON(decoyInput: DecoyInput): string {
   return JSON.stringify(DecoyInput$outboundSchema.parse(decoyInput));

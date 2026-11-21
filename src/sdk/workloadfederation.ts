@@ -170,12 +170,16 @@ export class WorkloadFederation extends ClientSDK {
    * ListProviders lists all providers for the tenant.
    */
   async listProviders(
+    request?:
+      | operations.C1ApiWorkloadFederationV1WorkloadFederationServiceListProvidersRequest
+      | undefined,
     options?: RequestOptions,
   ): Promise<
     operations.C1ApiWorkloadFederationV1WorkloadFederationServiceListProvidersResponse
   > {
     return unwrapAsync(workloadFederationListProviders(
       this,
+      request,
       options,
     ));
   }

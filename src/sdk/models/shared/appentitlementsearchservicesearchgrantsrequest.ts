@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -86,8 +87,10 @@ export const AppEntitlementSearchServiceSearchGrantsRequestPurpose$outboundSchem
     string,
     z.ZodTypeDef,
     AppEntitlementSearchServiceSearchGrantsRequestPurpose
-  > = openEnums.outboundSchema(
-    AppEntitlementSearchServiceSearchGrantsRequestPurpose,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      AppEntitlementSearchServiceSearchGrantsRequestPurpose,
+    )
   );
 
 /** @internal */
@@ -111,24 +114,27 @@ export const AppEntitlementSearchServiceSearchGrantsRequest$outboundSchema:
     AppEntitlementSearchServiceSearchGrantsRequest$Outbound,
     z.ZodTypeDef,
     AppEntitlementSearchServiceSearchGrantsRequest
-  > = z.object({
-    appIds: z.nullable(z.array(z.string())).optional(),
-    appUserIds: z.nullable(z.array(z.string())).optional(),
-    entitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
-      .optional(),
-    entitlementSlugs: z.nullable(z.array(z.string())).optional(),
-    expandMask: z.nullable(AppEntitlementExpandMask$outboundSchema).optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    purpose: z.nullable(
-      z.array(
-        AppEntitlementSearchServiceSearchGrantsRequestPurpose$outboundSchema,
-      ),
-    ).optional(),
-    resourceIds: z.nullable(z.array(z.string())).optional(),
-    resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-    userId: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appIds: z.nullable(z.array(z.string())).optional(),
+      appUserIds: z.nullable(z.array(z.string())).optional(),
+      entitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
+        .optional(),
+      entitlementSlugs: z.nullable(z.array(z.string())).optional(),
+      expandMask: z.nullable(AppEntitlementExpandMask$outboundSchema)
+        .optional(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      purpose: z.nullable(
+        z.array(
+          AppEntitlementSearchServiceSearchGrantsRequestPurpose$outboundSchema,
+        ),
+      ).optional(),
+      resourceIds: z.nullable(z.array(z.string())).optional(),
+      resourceTypeIds: z.nullable(z.array(z.string())).optional(),
+      userId: z.string().optional(),
+    })
+  );
 
 export function appEntitlementSearchServiceSearchGrantsRequestToJSON(
   appEntitlementSearchServiceSearchGrantsRequest:

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { ToolGate, ToolGate$inboundSchema } from "./toolgate.js";
@@ -20,9 +20,11 @@ export const ToolGatesServiceGetResponse$inboundSchema: z.ZodType<
   ToolGatesServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  toolGate: z.nullable(ToolGate$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    toolGate: z.nullable(ToolGate$inboundSchema).optional(),
+  })
+);
 
 export function toolGatesServiceGetResponseFromJSON(
   jsonString: string,

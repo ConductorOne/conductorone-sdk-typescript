@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The CreateFindingTaskRequest message.
@@ -27,9 +28,11 @@ export const CreateFindingTaskRequest$outboundSchema: z.ZodType<
   CreateFindingTaskRequest$Outbound,
   z.ZodTypeDef,
   CreateFindingTaskRequest
-> = z.object({
-  policyId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    policyId: z.string().optional(),
+  })
+);
 
 export function createFindingTaskRequestToJSON(
   createFindingTaskRequest: CreateFindingTaskRequest,

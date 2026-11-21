@@ -4,10 +4,15 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
+
+export type C1ApiStepupV1StepUpProviderServiceListRequest = {
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+};
 
 export type C1ApiStepupV1StepUpProviderServiceListResponse = {
   /**
@@ -29,25 +34,62 @@ export type C1ApiStepupV1StepUpProviderServiceListResponse = {
 };
 
 /** @internal */
+export type C1ApiStepupV1StepUpProviderServiceListRequest$Outbound = {
+  page_size?: number | undefined;
+  page_token?: string | undefined;
+};
+
+/** @internal */
+export const C1ApiStepupV1StepUpProviderServiceListRequest$outboundSchema:
+  z.ZodType<
+    C1ApiStepupV1StepUpProviderServiceListRequest$Outbound,
+    z.ZodTypeDef,
+    C1ApiStepupV1StepUpProviderServiceListRequest
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
+
+export function c1ApiStepupV1StepUpProviderServiceListRequestToJSON(
+  c1ApiStepupV1StepUpProviderServiceListRequest:
+    C1ApiStepupV1StepUpProviderServiceListRequest,
+): string {
+  return JSON.stringify(
+    C1ApiStepupV1StepUpProviderServiceListRequest$outboundSchema.parse(
+      c1ApiStepupV1StepUpProviderServiceListRequest,
+    ),
+  );
+}
+
+/** @internal */
 export const C1ApiStepupV1StepUpProviderServiceListResponse$inboundSchema:
   z.ZodType<
     C1ApiStepupV1StepUpProviderServiceListResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ListStepUpProvidersResponse: shared
-      .ListStepUpProvidersResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ListStepUpProvidersResponse": "listStepUpProvidersResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ListStepUpProvidersResponse: shared
+        .ListStepUpProvidersResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ListStepUpProvidersResponse": "listStepUpProvidersResponse",
+      });
+    })
+  );
 
 export function c1ApiStepupV1StepUpProviderServiceListResponseFromJSON(
   jsonString: string,

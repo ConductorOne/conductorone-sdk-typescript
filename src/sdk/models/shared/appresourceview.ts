@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -41,15 +41,17 @@ export const AppResourceView$inboundSchema: z.ZodType<
   AppResourceView,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appPath: z.string().optional(),
-  appResource: z.nullable(AppResource$inboundSchema).optional(),
-  objectPermissions: z.nullable(ActorObjectPermissions$inboundSchema)
-    .optional(),
-  parentResourcePath: z.string().optional(),
-  parentResourceTypePath: z.string().optional(),
-  resourceTypePath: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appPath: z.string().optional(),
+    appResource: z.nullable(AppResource$inboundSchema).optional(),
+    objectPermissions: z.nullable(ActorObjectPermissions$inboundSchema)
+      .optional(),
+    parentResourcePath: z.string().optional(),
+    parentResourceTypePath: z.string().optional(),
+    resourceTypePath: z.string().optional(),
+  })
+);
 
 export function appResourceViewFromJSON(
   jsonString: string,

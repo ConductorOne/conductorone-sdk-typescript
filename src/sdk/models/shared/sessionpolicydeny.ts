@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const SessionPolicyDeny$inboundSchema: z.ZodType<
   SessionPolicyDeny,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  reasonAdmin: z.string().optional(),
-  reasonUser: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reasonAdmin: z.string().optional(),
+    reasonUser: z.string().optional(),
+  })
+);
 /** @internal */
 export type SessionPolicyDeny$Outbound = {
   reasonAdmin?: string | undefined;
@@ -41,10 +43,12 @@ export const SessionPolicyDeny$outboundSchema: z.ZodType<
   SessionPolicyDeny$Outbound,
   z.ZodTypeDef,
   SessionPolicyDeny
-> = z.object({
-  reasonAdmin: z.string().optional(),
-  reasonUser: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reasonAdmin: z.string().optional(),
+    reasonUser: z.string().optional(),
+  })
+);
 
 export function sessionPolicyDenyToJSON(
   sessionPolicyDeny: SessionPolicyDeny,

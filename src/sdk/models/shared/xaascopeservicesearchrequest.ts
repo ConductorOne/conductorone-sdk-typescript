@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -103,8 +104,8 @@ export const XAAScopeServiceSearchRequestClassificationFilter$outboundSchema:
     string,
     z.ZodTypeDef,
     XAAScopeServiceSearchRequestClassificationFilter
-  > = openEnums.outboundSchema(
-    XAAScopeServiceSearchRequestClassificationFilter,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(XAAScopeServiceSearchRequestClassificationFilter)
   );
 
 /** @internal */
@@ -112,14 +113,18 @@ export const XAAScopeServiceSearchRequestSourceFilter$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   XAAScopeServiceSearchRequestSourceFilter
-> = openEnums.outboundSchema(XAAScopeServiceSearchRequestSourceFilter);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(XAAScopeServiceSearchRequestSourceFilter)
+);
 
 /** @internal */
 export const XAAScopeServiceSearchRequestStateFilter$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   XAAScopeServiceSearchRequestStateFilter
-> = openEnums.outboundSchema(XAAScopeServiceSearchRequestStateFilter);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(XAAScopeServiceSearchRequestStateFilter)
+);
 
 /** @internal */
 export type XAAScopeServiceSearchRequest$Outbound = {
@@ -139,23 +144,25 @@ export const XAAScopeServiceSearchRequest$outboundSchema: z.ZodType<
   XAAScopeServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   XAAScopeServiceSearchRequest
-> = z.object({
-  appIds: z.nullable(z.array(z.string())).optional(),
-  classificationFilter: z.nullable(
-    z.array(XAAScopeServiceSearchRequestClassificationFilter$outboundSchema),
-  ).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  refs: z.nullable(z.array(XAAScopeRef$outboundSchema)).optional(),
-  sourceFilter: z.nullable(
-    z.array(XAAScopeServiceSearchRequestSourceFilter$outboundSchema),
-  ).optional(),
-  stateFilter: z.nullable(
-    z.array(XAAScopeServiceSearchRequestStateFilter$outboundSchema),
-  ).optional(),
-  xaaResourceServerIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appIds: z.nullable(z.array(z.string())).optional(),
+    classificationFilter: z.nullable(
+      z.array(XAAScopeServiceSearchRequestClassificationFilter$outboundSchema),
+    ).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    refs: z.nullable(z.array(XAAScopeRef$outboundSchema)).optional(),
+    sourceFilter: z.nullable(
+      z.array(XAAScopeServiceSearchRequestSourceFilter$outboundSchema),
+    ).optional(),
+    stateFilter: z.nullable(
+      z.array(XAAScopeServiceSearchRequestStateFilter$outboundSchema),
+    ).optional(),
+    xaaResourceServerIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function xaaScopeServiceSearchRequestToJSON(
   xaaScopeServiceSearchRequest: XAAScopeServiceSearchRequest,

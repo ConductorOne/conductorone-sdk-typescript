@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The UserAttributeManagementServiceDeleteRequest message.
@@ -18,7 +19,7 @@ export const UserAttributeManagementServiceDeleteRequest$outboundSchema:
     UserAttributeManagementServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     UserAttributeManagementServiceDeleteRequest
-  > = z.object({});
+  > = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function userAttributeManagementServiceDeleteRequestToJSON(
   userAttributeManagementServiceDeleteRequest:

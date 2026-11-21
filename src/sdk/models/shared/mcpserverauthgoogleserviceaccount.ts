@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * MCPServerAuthGoogleServiceAccount provides Google service account authentication.
@@ -33,10 +34,12 @@ export const MCPServerAuthGoogleServiceAccount$outboundSchema: z.ZodType<
   MCPServerAuthGoogleServiceAccount$Outbound,
   z.ZodTypeDef,
   MCPServerAuthGoogleServiceAccount
-> = z.object({
-  credentialsJson: z.string().optional(),
-  scopes: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    credentialsJson: z.string().optional(),
+    scopes: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function mcpServerAuthGoogleServiceAccountToJSON(
   mcpServerAuthGoogleServiceAccount: MCPServerAuthGoogleServiceAccount,

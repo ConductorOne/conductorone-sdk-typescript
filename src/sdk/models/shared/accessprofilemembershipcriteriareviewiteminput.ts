@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$Outbound,
@@ -33,10 +34,12 @@ export const AccessProfileMembershipCriteriaReviewItemInput$outboundSchema:
     AccessProfileMembershipCriteriaReviewItemInput$Outbound,
     z.ZodTypeDef,
     AccessProfileMembershipCriteriaReviewItemInput
-  > = z.object({
-    membershipEntitlement: z.nullable(AppEntitlementRef$outboundSchema)
-      .optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      membershipEntitlement: z.nullable(AppEntitlementRef$outboundSchema)
+        .optional(),
+    })
+  );
 
 export function accessProfileMembershipCriteriaReviewItemInputToJSON(
   accessProfileMembershipCriteriaReviewItemInput:

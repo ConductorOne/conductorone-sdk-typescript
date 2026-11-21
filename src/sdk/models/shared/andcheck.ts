@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -26,10 +26,12 @@ export const AndCheck$inboundSchema: z.ZodType<
   AndCheck,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  checks: z.nullable(z.array(z.lazy(() => ValidationCheck$inboundSchema)))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    checks: z.nullable(z.array(z.lazy(() => ValidationCheck$inboundSchema)))
+      .optional(),
+  })
+);
 
 export function andCheckFromJSON(
   jsonString: string,

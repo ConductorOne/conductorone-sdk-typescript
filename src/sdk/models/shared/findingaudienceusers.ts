@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const FindingAudienceUsers$inboundSchema: z.ZodType<
   FindingAudienceUsers,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type FindingAudienceUsers$Outbound = {
   userIds?: Array<string> | null | undefined;
@@ -35,9 +37,11 @@ export const FindingAudienceUsers$outboundSchema: z.ZodType<
   FindingAudienceUsers$Outbound,
   z.ZodTypeDef,
   FindingAudienceUsers
-> = z.object({
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function findingAudienceUsersToJSON(
   findingAudienceUsers: FindingAudienceUsers,

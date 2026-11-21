@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The SessionPolicyServiceDeleteRequest message.
@@ -17,7 +18,7 @@ export const SessionPolicyServiceDeleteRequest$outboundSchema: z.ZodType<
   SessionPolicyServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   SessionPolicyServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function sessionPolicyServiceDeleteRequestToJSON(
   sessionPolicyServiceDeleteRequest: SessionPolicyServiceDeleteRequest,

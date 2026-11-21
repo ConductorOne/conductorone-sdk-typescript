@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$Outbound,
@@ -44,12 +45,14 @@ export const SetUserOwnersV2Request$outboundSchema: z.ZodType<
   SetUserOwnersV2Request$Outbound,
   z.ZodTypeDef,
   SetUserOwnersV2Request
-> = z.object({
-  appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
-    .optional(),
-  roleSlug: z.string().optional(),
-  userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
+      .optional(),
+    roleSlug: z.string().optional(),
+    userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
+  })
+);
 
 export function setUserOwnersV2RequestToJSON(
   setUserOwnersV2Request: SetUserOwnersV2Request,

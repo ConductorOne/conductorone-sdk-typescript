@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   RequestCatalogInput,
   RequestCatalogInput$Outbound,
@@ -36,11 +37,14 @@ export const RequestCatalogManagementServiceUpdateRequest$outboundSchema:
     RequestCatalogManagementServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     RequestCatalogManagementServiceUpdateRequest
-  > = z.object({
-    catalog: z.nullable(RequestCatalogInput$outboundSchema).optional(),
-    expandMask: z.nullable(RequestCatalogExpandMask$outboundSchema).optional(),
-    updateMask: z.nullable(z.string()).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      catalog: z.nullable(RequestCatalogInput$outboundSchema).optional(),
+      expandMask: z.nullable(RequestCatalogExpandMask$outboundSchema)
+        .optional(),
+      updateMask: z.nullable(z.string()).optional(),
+    })
+  );
 
 export function requestCatalogManagementServiceUpdateRequestToJSON(
   requestCatalogManagementServiceUpdateRequest:

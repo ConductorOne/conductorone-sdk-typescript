@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -50,16 +50,18 @@ export const C1ApiFundsV1AppCapServiceSetLimitRequest$outboundSchema: z.ZodType<
   C1ApiFundsV1AppCapServiceSetLimitRequest$Outbound,
   z.ZodTypeDef,
   C1ApiFundsV1AppCapServiceSetLimitRequest
-> = z.object({
-  appId: z.string(),
-  appCapServiceSetLimitRequest: shared
-    .AppCapServiceSetLimitRequest$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    appId: "app_id",
-    appCapServiceSetLimitRequest: "AppCapServiceSetLimitRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string(),
+    appCapServiceSetLimitRequest: shared
+      .AppCapServiceSetLimitRequest$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      appId: "app_id",
+      appCapServiceSetLimitRequest: "AppCapServiceSetLimitRequest",
+    });
+  })
+);
 
 export function c1ApiFundsV1AppCapServiceSetLimitRequestToJSON(
   c1ApiFundsV1AppCapServiceSetLimitRequest:
@@ -77,20 +79,22 @@ export const C1ApiFundsV1AppCapServiceSetLimitResponse$inboundSchema: z.ZodType<
   C1ApiFundsV1AppCapServiceSetLimitResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  AppCapServiceSetLimitResponse: shared
-    .AppCapServiceSetLimitResponse$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "AppCapServiceSetLimitResponse": "appCapServiceSetLimitResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    AppCapServiceSetLimitResponse: shared
+      .AppCapServiceSetLimitResponse$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "AppCapServiceSetLimitResponse": "appCapServiceSetLimitResponse",
+    });
+  })
+);
 
 export function c1ApiFundsV1AppCapServiceSetLimitResponseFromJSON(
   jsonString: string,

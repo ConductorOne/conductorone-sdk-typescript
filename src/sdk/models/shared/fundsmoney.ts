@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const FundsMoney$inboundSchema: z.ZodType<
   FundsMoney,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  currencyCode: z.string().optional(),
-  nanos: z.number().int().optional(),
-  units: z.string().transform(v => parseInt(v, 10)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    currencyCode: z.string().optional(),
+    nanos: z.number().int().optional(),
+    units: z.string().transform(v => parseInt(v, 10)).optional(),
+  })
+);
 /** @internal */
 export type FundsMoney$Outbound = {
   currencyCode?: string | undefined;
@@ -47,11 +49,13 @@ export const FundsMoney$outboundSchema: z.ZodType<
   FundsMoney$Outbound,
   z.ZodTypeDef,
   FundsMoney
-> = z.object({
-  currencyCode: z.string().optional(),
-  nanos: z.number().int().optional(),
-  units: z.number().int().transform(v => `${v}`).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    currencyCode: z.string().optional(),
+    nanos: z.number().int().optional(),
+    units: z.number().int().transform(v => `${v}`).optional(),
+  })
+);
 
 export function fundsMoneyToJSON(fundsMoney: FundsMoney): string {
   return JSON.stringify(FundsMoney$outboundSchema.parse(fundsMoney));

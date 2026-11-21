@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -45,11 +45,14 @@ export const ResponseProvisionStep$inboundSchema: z.ZodType<
   ResponseProvisionStep,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  complete: z.nullable(ResponseProvisionStepComplete$inboundSchema).optional(),
-  errored: z.nullable(ResponseProvisionStepErrored$inboundSchema).optional(),
-  version: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    complete: z.nullable(ResponseProvisionStepComplete$inboundSchema)
+      .optional(),
+    errored: z.nullable(ResponseProvisionStepErrored$inboundSchema).optional(),
+    version: z.string().optional(),
+  })
+);
 /** @internal */
 export type ResponseProvisionStep$Outbound = {
   complete?: ResponseProvisionStepComplete$Outbound | null | undefined;
@@ -62,11 +65,14 @@ export const ResponseProvisionStep$outboundSchema: z.ZodType<
   ResponseProvisionStep$Outbound,
   z.ZodTypeDef,
   ResponseProvisionStep
-> = z.object({
-  complete: z.nullable(ResponseProvisionStepComplete$outboundSchema).optional(),
-  errored: z.nullable(ResponseProvisionStepErrored$outboundSchema).optional(),
-  version: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    complete: z.nullable(ResponseProvisionStepComplete$outboundSchema)
+      .optional(),
+    errored: z.nullable(ResponseProvisionStepErrored$outboundSchema).optional(),
+    version: z.string().optional(),
+  })
+);
 
 export function responseProvisionStepToJSON(
   responseProvisionStep: ResponseProvisionStep,

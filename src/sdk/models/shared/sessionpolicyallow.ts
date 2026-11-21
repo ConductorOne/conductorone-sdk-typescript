@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -40,22 +40,24 @@ export const FloorLevel$inboundSchema: z.ZodType<
   FloorLevel,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(FloorLevel);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(FloorLevel));
 /** @internal */
 export const FloorLevel$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   FloorLevel
-> = openEnums.outboundSchema(FloorLevel);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(FloorLevel));
 
 /** @internal */
 export const SessionPolicyAllow$inboundSchema: z.ZodType<
   SessionPolicyAllow,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  floorLevel: FloorLevel$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    floorLevel: FloorLevel$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type SessionPolicyAllow$Outbound = {
   floorLevel?: string | undefined;
@@ -66,9 +68,11 @@ export const SessionPolicyAllow$outboundSchema: z.ZodType<
   SessionPolicyAllow$Outbound,
   z.ZodTypeDef,
   SessionPolicyAllow
-> = z.object({
-  floorLevel: FloorLevel$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    floorLevel: FloorLevel$outboundSchema.optional(),
+  })
+);
 
 export function sessionPolicyAllowToJSON(
   sessionPolicyAllow: SessionPolicyAllow,

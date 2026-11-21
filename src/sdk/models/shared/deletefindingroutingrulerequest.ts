@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The DeleteFindingRoutingRuleRequest message.
@@ -17,7 +18,7 @@ export const DeleteFindingRoutingRuleRequest$outboundSchema: z.ZodType<
   DeleteFindingRoutingRuleRequest$Outbound,
   z.ZodTypeDef,
   DeleteFindingRoutingRuleRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function deleteFindingRoutingRuleRequestToJSON(
   deleteFindingRoutingRuleRequest: DeleteFindingRoutingRuleRequest,

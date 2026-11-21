@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The FunctionsServiceInvokeRequest message.
@@ -43,11 +44,13 @@ export const FunctionsServiceInvokeRequest$outboundSchema: z.ZodType<
   FunctionsServiceInvokeRequest$Outbound,
   z.ZodTypeDef,
   FunctionsServiceInvokeRequest
-> = z.object({
-  commitId: z.string().optional(),
-  json: z.nullable(z.string()).optional(),
-  vfsId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    commitId: z.string().optional(),
+    json: z.nullable(z.string()).optional(),
+    vfsId: z.string().optional(),
+  })
+);
 
 export function functionsServiceInvokeRequestToJSON(
   functionsServiceInvokeRequest: FunctionsServiceInvokeRequest,

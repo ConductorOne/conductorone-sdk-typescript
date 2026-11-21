@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -44,14 +44,16 @@ export const C1ApiAppV1ConnectorServiceGetRequest$outboundSchema: z.ZodType<
   C1ApiAppV1ConnectorServiceGetRequest$Outbound,
   z.ZodTypeDef,
   C1ApiAppV1ConnectorServiceGetRequest
-> = z.object({
-  appId: z.string(),
-  id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    appId: "app_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string(),
+    id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      appId: "app_id",
+    });
+  })
+);
 
 export function c1ApiAppV1ConnectorServiceGetRequestToJSON(
   c1ApiAppV1ConnectorServiceGetRequest: C1ApiAppV1ConnectorServiceGetRequest,
@@ -68,20 +70,22 @@ export const C1ApiAppV1ConnectorServiceGetResponse$inboundSchema: z.ZodType<
   C1ApiAppV1ConnectorServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  ConnectorServiceGetResponse: shared.ConnectorServiceGetResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "ConnectorServiceGetResponse": "connectorServiceGetResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    ConnectorServiceGetResponse: shared
+      .ConnectorServiceGetResponse$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "ConnectorServiceGetResponse": "connectorServiceGetResponse",
+    });
+  })
+);
 
 export function c1ApiAppV1ConnectorServiceGetResponseFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * PersonalDevice is one physical device with its app clients. The device
@@ -32,9 +33,11 @@ export const PersonalDeviceInput$outboundSchema: z.ZodType<
   PersonalDeviceInput$Outbound,
   z.ZodTypeDef,
   PersonalDeviceInput
-> = z.object({
-  displayName: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+  })
+);
 
 export function personalDeviceInputToJSON(
   personalDeviceInput: PersonalDeviceInput,

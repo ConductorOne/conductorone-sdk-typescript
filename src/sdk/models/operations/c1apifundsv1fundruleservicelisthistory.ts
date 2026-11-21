@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -49,17 +49,19 @@ export const C1ApiFundsV1FundRuleServiceListHistoryRequest$outboundSchema:
     C1ApiFundsV1FundRuleServiceListHistoryRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFundsV1FundRuleServiceListHistoryRequest
-  > = z.object({
-    ruleId: z.string(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      ruleId: "rule_id",
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ruleId: z.string(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        ruleId: "rule_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiFundsV1FundRuleServiceListHistoryRequestToJSON(
   c1ApiFundsV1FundRuleServiceListHistoryRequest:
@@ -78,21 +80,23 @@ export const C1ApiFundsV1FundRuleServiceListHistoryResponse$inboundSchema:
     C1ApiFundsV1FundRuleServiceListHistoryResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    FundRuleServiceListHistoryResponse: shared
-      .FundRuleServiceListHistoryResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "FundRuleServiceListHistoryResponse":
-        "fundRuleServiceListHistoryResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      FundRuleServiceListHistoryResponse: shared
+        .FundRuleServiceListHistoryResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "FundRuleServiceListHistoryResponse":
+          "fundRuleServiceListHistoryResponse",
+      });
+    })
+  );
 
 export function c1ApiFundsV1FundRuleServiceListHistoryResponseFromJSON(
   jsonString: string,

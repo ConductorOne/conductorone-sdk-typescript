@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -49,27 +49,29 @@ export const GetMySpendHistoryResponse$inboundSchema: z.ZodType<
   GetMySpendHistoryResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  currencyCode: z.string().optional(),
-  monthEnd: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  monthStart: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  reportingEnd: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  reportingStart: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  spentInRangeNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  spentThisMonthNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  spentThroughYesterdayNano: z.string().transform(v => parseInt(v, 10))
-    .optional(),
-  trajectory: z.nullable(z.array(MySpendTrajectoryPoint$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    currencyCode: z.string().optional(),
+    monthEnd: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    monthStart: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    reportingEnd: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    reportingStart: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    spentInRangeNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    spentThisMonthNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    spentThroughYesterdayNano: z.string().transform(v => parseInt(v, 10))
+      .optional(),
+    trajectory: z.nullable(z.array(MySpendTrajectoryPoint$inboundSchema))
+      .optional(),
+  })
+);
 
 export function getMySpendHistoryResponseFromJSON(
   jsonString: string,

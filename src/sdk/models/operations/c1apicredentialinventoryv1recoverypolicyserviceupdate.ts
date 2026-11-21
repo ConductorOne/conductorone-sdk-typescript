@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -52,15 +52,18 @@ export const C1ApiCredentialInventoryV1RecoveryPolicyServiceUpdateRequest$outbou
     C1ApiCredentialInventoryV1RecoveryPolicyServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiCredentialInventoryV1RecoveryPolicyServiceUpdateRequest
-  > = z.object({
-    id: z.string(),
-    recoveryPolicyServiceUpdateRequest: shared
-      .RecoveryPolicyServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      recoveryPolicyServiceUpdateRequest: "RecoveryPolicyServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      recoveryPolicyServiceUpdateRequest: shared
+        .RecoveryPolicyServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        recoveryPolicyServiceUpdateRequest:
+          "RecoveryPolicyServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiCredentialInventoryV1RecoveryPolicyServiceUpdateRequestToJSON(
   c1ApiCredentialInventoryV1RecoveryPolicyServiceUpdateRequest:
@@ -78,21 +81,23 @@ export const C1ApiCredentialInventoryV1RecoveryPolicyServiceUpdateResponse$inbou
     C1ApiCredentialInventoryV1RecoveryPolicyServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    RecoveryPolicyServiceUpdateResponse: shared
-      .RecoveryPolicyServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "RecoveryPolicyServiceUpdateResponse":
-        "recoveryPolicyServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      RecoveryPolicyServiceUpdateResponse: shared
+        .RecoveryPolicyServiceUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "RecoveryPolicyServiceUpdateResponse":
+          "recoveryPolicyServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiCredentialInventoryV1RecoveryPolicyServiceUpdateResponseFromJSON(
   jsonString: string,

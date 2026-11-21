@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   BulkAcceptRiskAction,
   BulkAcceptRiskAction$Outbound,
@@ -96,17 +97,19 @@ export const BulkUpdateFindingStateRequest$outboundSchema: z.ZodType<
   BulkUpdateFindingStateRequest$Outbound,
   z.ZodTypeDef,
   BulkUpdateFindingStateRequest
-> = z.object({
-  acceptRisk: z.nullable(BulkAcceptRiskAction$outboundSchema).optional(),
-  assignOwner: z.nullable(BulkAssignOwnerAction$outboundSchema).optional(),
-  refs: z.nullable(z.array(FindingRef$outboundSchema)).optional(),
-  reopen: z.nullable(BulkReopenAction$outboundSchema).optional(),
-  reprocess: z.nullable(BulkReprocessAction$outboundSchema).optional(),
-  searchRequest: z.nullable(FindingSearchRequest$outboundSchema).optional(),
-  snooze: z.nullable(BulkSnoozeAction$outboundSchema).optional(),
-  suppress: z.nullable(BulkSuppressAction$outboundSchema).optional(),
-  unsuppress: z.nullable(BulkUnsuppressAction$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    acceptRisk: z.nullable(BulkAcceptRiskAction$outboundSchema).optional(),
+    assignOwner: z.nullable(BulkAssignOwnerAction$outboundSchema).optional(),
+    refs: z.nullable(z.array(FindingRef$outboundSchema)).optional(),
+    reopen: z.nullable(BulkReopenAction$outboundSchema).optional(),
+    reprocess: z.nullable(BulkReprocessAction$outboundSchema).optional(),
+    searchRequest: z.nullable(FindingSearchRequest$outboundSchema).optional(),
+    snooze: z.nullable(BulkSnoozeAction$outboundSchema).optional(),
+    suppress: z.nullable(BulkSuppressAction$outboundSchema).optional(),
+    unsuppress: z.nullable(BulkUnsuppressAction$outboundSchema).optional(),
+  })
+);
 
 export function bulkUpdateFindingStateRequestToJSON(
   bulkUpdateFindingStateRequest: BulkUpdateFindingStateRequest,

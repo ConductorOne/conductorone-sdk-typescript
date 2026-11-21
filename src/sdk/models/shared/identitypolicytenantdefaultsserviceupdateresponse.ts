@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -24,9 +24,12 @@ export const IdentityPolicyTenantDefaultsServiceUpdateResponse$inboundSchema:
     IdentityPolicyTenantDefaultsServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    defaults: z.nullable(IdentityPolicyTenantDefaults$inboundSchema).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      defaults: z.nullable(IdentityPolicyTenantDefaults$inboundSchema)
+        .optional(),
+    })
+  );
 
 export function identityPolicyTenantDefaultsServiceUpdateResponseFromJSON(
   jsonString: string,

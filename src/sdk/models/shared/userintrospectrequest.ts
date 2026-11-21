@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   UserExpandMask,
   UserExpandMask$Outbound,
@@ -26,9 +27,11 @@ export const UserIntrospectRequest$outboundSchema: z.ZodType<
   UserIntrospectRequest$Outbound,
   z.ZodTypeDef,
   UserIntrospectRequest
-> = z.object({
-  expandMask: z.nullable(UserExpandMask$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expandMask: z.nullable(UserExpandMask$outboundSchema).optional(),
+  })
+);
 
 export function userIntrospectRequestToJSON(
   userIntrospectRequest: UserIntrospectRequest,

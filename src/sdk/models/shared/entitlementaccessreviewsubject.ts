@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -45,11 +45,13 @@ export const EntitlementAccessReviewSubject$inboundSchema: z.ZodType<
   EntitlementAccessReviewSubject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appUser: z.nullable(AppUserRef$inboundSchema).optional(),
-  entitlement: z.nullable(AppEntitlementRef$inboundSchema).optional(),
-  resource: z.nullable(AppResourceRef$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appUser: z.nullable(AppUserRef$inboundSchema).optional(),
+    entitlement: z.nullable(AppEntitlementRef$inboundSchema).optional(),
+    resource: z.nullable(AppResourceRef$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type EntitlementAccessReviewSubject$Outbound = {
   appUser?: AppUserRef$Outbound | null | undefined;
@@ -62,11 +64,13 @@ export const EntitlementAccessReviewSubject$outboundSchema: z.ZodType<
   EntitlementAccessReviewSubject$Outbound,
   z.ZodTypeDef,
   EntitlementAccessReviewSubject
-> = z.object({
-  appUser: z.nullable(AppUserRef$outboundSchema).optional(),
-  entitlement: z.nullable(AppEntitlementRef$outboundSchema).optional(),
-  resource: z.nullable(AppResourceRef$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appUser: z.nullable(AppUserRef$outboundSchema).optional(),
+    entitlement: z.nullable(AppEntitlementRef$outboundSchema).optional(),
+    resource: z.nullable(AppResourceRef$outboundSchema).optional(),
+  })
+);
 
 export function entitlementAccessReviewSubjectToJSON(
   entitlementAccessReviewSubject: EntitlementAccessReviewSubject,

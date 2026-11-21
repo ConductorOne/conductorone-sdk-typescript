@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,10 +28,13 @@ export const GoLinkChooserTarget$inboundSchema: z.ZodType<
   GoLinkChooserTarget,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  options: z.nullable(z.array(z.lazy(() => GoLinkChooserOption$inboundSchema)))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    options: z.nullable(
+      z.array(z.lazy(() => GoLinkChooserOption$inboundSchema)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type GoLinkChooserTarget$Outbound = {
   options?: Array<GoLinkChooserOption$Outbound> | null | undefined;
@@ -42,10 +45,13 @@ export const GoLinkChooserTarget$outboundSchema: z.ZodType<
   GoLinkChooserTarget$Outbound,
   z.ZodTypeDef,
   GoLinkChooserTarget
-> = z.object({
-  options: z.nullable(z.array(z.lazy(() => GoLinkChooserOption$outboundSchema)))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    options: z.nullable(
+      z.array(z.lazy(() => GoLinkChooserOption$outboundSchema)),
+    ).optional(),
+  })
+);
 
 export function goLinkChooserTargetToJSON(
   goLinkChooserTarget: GoLinkChooserTarget,

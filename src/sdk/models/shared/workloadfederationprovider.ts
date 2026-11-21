@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -108,30 +108,34 @@ export const WellKnownProvider$inboundSchema: z.ZodType<
   WellKnownProvider,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(WellKnownProvider);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(WellKnownProvider)
+);
 
 /** @internal */
 export const WorkloadFederationProvider$inboundSchema: z.ZodType<
   WorkloadFederationProvider,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  c1Edge: z.nullable(C1EdgeSettings$inboundSchema).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.string().optional(),
-  disabled: z.boolean().optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  issuerUrl: z.string().optional(),
-  oidc: z.nullable(OIDCSettings$inboundSchema).optional(),
-  spiffe: z.nullable(SPIFFESettings$inboundSchema).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  wellKnownProvider: WellKnownProvider$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    c1Edge: z.nullable(C1EdgeSettings$inboundSchema).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.string().optional(),
+    disabled: z.boolean().optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    issuerUrl: z.string().optional(),
+    oidc: z.nullable(OIDCSettings$inboundSchema).optional(),
+    spiffe: z.nullable(SPIFFESettings$inboundSchema).optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    wellKnownProvider: WellKnownProvider$inboundSchema.optional(),
+  })
+);
 
 export function workloadFederationProviderFromJSON(
   jsonString: string,

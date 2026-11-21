@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,15 +47,17 @@ export const C1ApiWebhooksV1WebhooksServiceTestRequest$outboundSchema:
     C1ApiWebhooksV1WebhooksServiceTestRequest$Outbound,
     z.ZodTypeDef,
     C1ApiWebhooksV1WebhooksServiceTestRequest
-  > = z.object({
-    id: z.string(),
-    webhooksServiceTestRequest: shared.WebhooksServiceTestRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      webhooksServiceTestRequest: "WebhooksServiceTestRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      webhooksServiceTestRequest: shared
+        .WebhooksServiceTestRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        webhooksServiceTestRequest: "WebhooksServiceTestRequest",
+      });
+    })
+  );
 
 export function c1ApiWebhooksV1WebhooksServiceTestRequestToJSON(
   c1ApiWebhooksV1WebhooksServiceTestRequest:
@@ -71,20 +73,22 @@ export function c1ApiWebhooksV1WebhooksServiceTestRequestToJSON(
 /** @internal */
 export const C1ApiWebhooksV1WebhooksServiceTestResponse$inboundSchema:
   z.ZodType<C1ApiWebhooksV1WebhooksServiceTestResponse, z.ZodTypeDef, unknown> =
-    z.object({
-      ContentType: z.string(),
-      StatusCode: z.number().int(),
-      RawResponse: z.instanceof(Response),
-      WebhooksServiceTestResponse: shared
-        .WebhooksServiceTestResponse$inboundSchema.optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "ContentType": "contentType",
-        "StatusCode": "statusCode",
-        "RawResponse": "rawResponse",
-        "WebhooksServiceTestResponse": "webhooksServiceTestResponse",
-      });
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        ContentType: z.string(),
+        StatusCode: z.number().int(),
+        RawResponse: z.instanceof(Response),
+        WebhooksServiceTestResponse: shared
+          .WebhooksServiceTestResponse$inboundSchema.optional(),
+      }).transform((v) => {
+        return remap$(v, {
+          "ContentType": "contentType",
+          "StatusCode": "statusCode",
+          "RawResponse": "rawResponse",
+          "WebhooksServiceTestResponse": "webhooksServiceTestResponse",
+        });
+      })
+    );
 
 export function c1ApiWebhooksV1WebhooksServiceTestResponseFromJSON(
   jsonString: string,

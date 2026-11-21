@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -128,43 +128,49 @@ export const CredentialSource$inboundSchema: z.ZodType<
   CredentialSource,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(CredentialSource);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(CredentialSource)
+);
 /** @internal */
 export const CredentialSource$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   CredentialSource
-> = openEnums.outboundSchema(CredentialSource);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(CredentialSource)
+);
 
 /** @internal */
 export const EdgeInferenceTarget$inboundSchema: z.ZodType<
   EdgeInferenceTarget,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  catalogEntryId: z.string().optional(),
-  catalogVariantId: z.string().optional(),
-  circuitBreaker: z.nullable(EdgeInferenceCircuitBreaker$inboundSchema)
-    .optional(),
-  contentType: z.string().optional(),
-  contextLength: z.number().int().optional(),
-  credentialFailurePolicy: z.nullable(
-    EdgeInferenceCredentialFailurePolicy$inboundSchema,
-  ).optional(),
-  credentialRecipe: z.string().optional(),
-  credentialSource: CredentialSource$inboundSchema.optional(),
-  destination: z.string().optional(),
-  expectedSecretVersion: z.string().optional(),
-  modelIdGrammar: z.string().optional(),
-  providerProfile: z.string().optional(),
-  reasoningEffort: z.string().optional(),
-  region: z.string().optional(),
-  secretId: z.string().optional(),
-  targetId: z.string().optional(),
-  upstreamModelId: z.string().optional(),
-  upstreamPath: z.string().optional(),
-  vaultBoundaryId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    catalogEntryId: z.string().optional(),
+    catalogVariantId: z.string().optional(),
+    circuitBreaker: z.nullable(EdgeInferenceCircuitBreaker$inboundSchema)
+      .optional(),
+    contentType: z.string().optional(),
+    contextLength: z.number().int().optional(),
+    credentialFailurePolicy: z.nullable(
+      EdgeInferenceCredentialFailurePolicy$inboundSchema,
+    ).optional(),
+    credentialRecipe: z.string().optional(),
+    credentialSource: CredentialSource$inboundSchema.optional(),
+    destination: z.string().optional(),
+    expectedSecretVersion: z.string().optional(),
+    modelIdGrammar: z.string().optional(),
+    providerProfile: z.string().optional(),
+    reasoningEffort: z.string().optional(),
+    region: z.string().optional(),
+    secretId: z.string().optional(),
+    targetId: z.string().optional(),
+    upstreamModelId: z.string().optional(),
+    upstreamPath: z.string().optional(),
+    vaultBoundaryId: z.string().optional(),
+  })
+);
 /** @internal */
 export type EdgeInferenceTarget$Outbound = {
   catalogEntryId?: string | undefined;
@@ -196,30 +202,32 @@ export const EdgeInferenceTarget$outboundSchema: z.ZodType<
   EdgeInferenceTarget$Outbound,
   z.ZodTypeDef,
   EdgeInferenceTarget
-> = z.object({
-  catalogEntryId: z.string().optional(),
-  catalogVariantId: z.string().optional(),
-  circuitBreaker: z.nullable(EdgeInferenceCircuitBreaker$outboundSchema)
-    .optional(),
-  contentType: z.string().optional(),
-  contextLength: z.number().int().optional(),
-  credentialFailurePolicy: z.nullable(
-    EdgeInferenceCredentialFailurePolicy$outboundSchema,
-  ).optional(),
-  credentialRecipe: z.string().optional(),
-  credentialSource: CredentialSource$outboundSchema.optional(),
-  destination: z.string().optional(),
-  expectedSecretVersion: z.string().optional(),
-  modelIdGrammar: z.string().optional(),
-  providerProfile: z.string().optional(),
-  reasoningEffort: z.string().optional(),
-  region: z.string().optional(),
-  secretId: z.string().optional(),
-  targetId: z.string().optional(),
-  upstreamModelId: z.string().optional(),
-  upstreamPath: z.string().optional(),
-  vaultBoundaryId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    catalogEntryId: z.string().optional(),
+    catalogVariantId: z.string().optional(),
+    circuitBreaker: z.nullable(EdgeInferenceCircuitBreaker$outboundSchema)
+      .optional(),
+    contentType: z.string().optional(),
+    contextLength: z.number().int().optional(),
+    credentialFailurePolicy: z.nullable(
+      EdgeInferenceCredentialFailurePolicy$outboundSchema,
+    ).optional(),
+    credentialRecipe: z.string().optional(),
+    credentialSource: CredentialSource$outboundSchema.optional(),
+    destination: z.string().optional(),
+    expectedSecretVersion: z.string().optional(),
+    modelIdGrammar: z.string().optional(),
+    providerProfile: z.string().optional(),
+    reasoningEffort: z.string().optional(),
+    region: z.string().optional(),
+    secretId: z.string().optional(),
+    targetId: z.string().optional(),
+    upstreamModelId: z.string().optional(),
+    upstreamPath: z.string().optional(),
+    vaultBoundaryId: z.string().optional(),
+  })
+);
 
 export function edgeInferenceTargetToJSON(
   edgeInferenceTarget: EdgeInferenceTarget,

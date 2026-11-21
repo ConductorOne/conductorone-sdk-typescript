@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -44,17 +45,19 @@ export const PayloadProvisionStepExpanded$inboundSchema: z.ZodType<
   PayloadProvisionStepExpanded,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    "@type": z.string().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "@type": "atType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      "@type": z.string().optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "@type": "atType",
+    });
+  })
+);
 /** @internal */
 export type PayloadProvisionStepExpanded$Outbound = {
   "@type"?: string | undefined;
@@ -66,18 +69,20 @@ export const PayloadProvisionStepExpanded$outboundSchema: z.ZodType<
   PayloadProvisionStepExpanded$Outbound,
   z.ZodTypeDef,
   PayloadProvisionStepExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    atType: z.string().optional(),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        atType: "@type",
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function payloadProvisionStepExpandedToJSON(
   payloadProvisionStepExpanded: PayloadProvisionStepExpanded,
@@ -103,12 +108,14 @@ export const PayloadProvisionStep$inboundSchema: z.ZodType<
   PayloadProvisionStep,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() => PayloadProvisionStepExpanded$inboundSchema)),
-  ).optional(),
-  taskView: z.nullable(TaskView$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expanded: z.nullable(
+      z.array(z.lazy(() => PayloadProvisionStepExpanded$inboundSchema)),
+    ).optional(),
+    taskView: z.nullable(TaskView$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type PayloadProvisionStep$Outbound = {
   expanded?: Array<PayloadProvisionStepExpanded$Outbound> | null | undefined;
@@ -120,12 +127,14 @@ export const PayloadProvisionStep$outboundSchema: z.ZodType<
   PayloadProvisionStep$Outbound,
   z.ZodTypeDef,
   PayloadProvisionStep
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() => PayloadProvisionStepExpanded$outboundSchema)),
-  ).optional(),
-  taskView: z.nullable(TaskView$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expanded: z.nullable(
+      z.array(z.lazy(() => PayloadProvisionStepExpanded$outboundSchema)),
+    ).optional(),
+    taskView: z.nullable(TaskView$outboundSchema).optional(),
+  })
+);
 
 export function payloadProvisionStepToJSON(
   payloadProvisionStep: PayloadProvisionStep,

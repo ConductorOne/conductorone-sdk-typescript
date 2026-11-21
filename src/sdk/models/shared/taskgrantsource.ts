@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -38,13 +38,15 @@ export const TaskGrantSource$inboundSchema: z.ZodType<
   TaskGrantSource,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  conversationId: z.string().optional(),
-  externalUrl: z.string().optional(),
-  integrationId: z.string().optional(),
-  isExtension: z.boolean().optional(),
-  requestId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conversationId: z.string().optional(),
+    externalUrl: z.string().optional(),
+    integrationId: z.string().optional(),
+    isExtension: z.boolean().optional(),
+    requestId: z.string().optional(),
+  })
+);
 /** @internal */
 export type TaskGrantSource$Outbound = {
   conversationId?: string | undefined;
@@ -59,13 +61,15 @@ export const TaskGrantSource$outboundSchema: z.ZodType<
   TaskGrantSource$Outbound,
   z.ZodTypeDef,
   TaskGrantSource
-> = z.object({
-  conversationId: z.string().optional(),
-  externalUrl: z.string().optional(),
-  integrationId: z.string().optional(),
-  isExtension: z.boolean().optional(),
-  requestId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conversationId: z.string().optional(),
+    externalUrl: z.string().optional(),
+    integrationId: z.string().optional(),
+    isExtension: z.boolean().optional(),
+    requestId: z.string().optional(),
+  })
+);
 
 export function taskGrantSourceToJSON(
   taskGrantSource: TaskGrantSource,

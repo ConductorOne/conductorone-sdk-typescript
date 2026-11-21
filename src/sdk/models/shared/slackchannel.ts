@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -11,6 +11,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * The SlackChannel message.
  */
 export type SlackChannel = {
+  /**
+   * Allow a private channel retry if Slack restricts public channel creation. Defaults to false.
+   */
+  allowPrivateChannelFallback?: boolean | undefined;
   /**
    * Existing Slack channel ID (e.g. "C0123ABCD"). Set with is_channel_id=true to
    *
@@ -41,14 +45,18 @@ export const SlackChannel$inboundSchema: z.ZodType<
   SlackChannel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  channelId: z.string().optional(),
-  description: z.string().optional(),
-  isChannelId: z.boolean().optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowPrivateChannelFallback: z.boolean().optional(),
+    channelId: z.string().optional(),
+    description: z.string().optional(),
+    isChannelId: z.boolean().optional(),
+    name: z.string().optional(),
+  })
+);
 /** @internal */
 export type SlackChannel$Outbound = {
+  allowPrivateChannelFallback?: boolean | undefined;
   channelId?: string | undefined;
   description?: string | undefined;
   isChannelId?: boolean | undefined;
@@ -60,12 +68,15 @@ export const SlackChannel$outboundSchema: z.ZodType<
   SlackChannel$Outbound,
   z.ZodTypeDef,
   SlackChannel
-> = z.object({
-  channelId: z.string().optional(),
-  description: z.string().optional(),
-  isChannelId: z.boolean().optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowPrivateChannelFallback: z.boolean().optional(),
+    channelId: z.string().optional(),
+    description: z.string().optional(),
+    isChannelId: z.boolean().optional(),
+    name: z.string().optional(),
+  })
+);
 
 export function slackChannelToJSON(slackChannel: SlackChannel): string {
   return JSON.stringify(SlackChannel$outboundSchema.parse(slackChannel));

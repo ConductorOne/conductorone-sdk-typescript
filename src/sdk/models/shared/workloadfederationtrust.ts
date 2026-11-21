@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { C1EdgeService, C1EdgeService$inboundSchema } from "./c1edgeservice.js";
@@ -76,25 +76,27 @@ export const WorkloadFederationTrust$inboundSchema: z.ZodType<
   WorkloadFederationTrust,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowSourceCidrs: z.nullable(z.array(z.string())).optional(),
-  c1EdgeService: z.nullable(C1EdgeService$inboundSchema).optional(),
-  clientId: z.string().optional(),
-  conditionExpression: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.string().optional(),
-  disabled: z.boolean().optional(),
-  displayName: z.string().optional(),
-  passthroughClaims: z.nullable(z.array(z.string())).optional(),
-  providerId: z.string().optional(),
-  scopedRoleIds: z.nullable(z.array(z.string())).optional(),
-  servicePrincipalId: z.string().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowSourceCidrs: z.nullable(z.array(z.string())).optional(),
+    c1EdgeService: z.nullable(C1EdgeService$inboundSchema).optional(),
+    clientId: z.string().optional(),
+    conditionExpression: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.string().optional(),
+    disabled: z.boolean().optional(),
+    displayName: z.string().optional(),
+    passthroughClaims: z.nullable(z.array(z.string())).optional(),
+    providerId: z.string().optional(),
+    scopedRoleIds: z.nullable(z.array(z.string())).optional(),
+    servicePrincipalId: z.string().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function workloadFederationTrustFromJSON(
   jsonString: string,

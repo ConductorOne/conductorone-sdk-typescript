@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -63,20 +63,24 @@ export const EdgeInferenceServeOptionNativeFormat$inboundSchema: z.ZodType<
   EdgeInferenceServeOptionNativeFormat,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EdgeInferenceServeOptionNativeFormat);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(EdgeInferenceServeOptionNativeFormat)
+);
 
 /** @internal */
 export const EdgeInferenceServeOption$inboundSchema: z.ZodType<
   EdgeInferenceServeOption,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  catalogEntryId: z.string().optional(),
-  catalogVariantId: z.string().optional(),
-  nativeFormat: EdgeInferenceServeOptionNativeFormat$inboundSchema.optional(),
-  region: z.string().optional(),
-  upstreamModelId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    catalogEntryId: z.string().optional(),
+    catalogVariantId: z.string().optional(),
+    nativeFormat: EdgeInferenceServeOptionNativeFormat$inboundSchema.optional(),
+    region: z.string().optional(),
+    upstreamModelId: z.string().optional(),
+  })
+);
 
 export function edgeInferenceServeOptionFromJSON(
   jsonString: string,

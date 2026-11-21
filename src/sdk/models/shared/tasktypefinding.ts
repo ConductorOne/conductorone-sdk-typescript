@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -47,27 +47,33 @@ export const TaskTypeFindingOutcome$inboundSchema: z.ZodType<
   TaskTypeFindingOutcome,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TaskTypeFindingOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(TaskTypeFindingOutcome)
+);
 /** @internal */
 export const TaskTypeFindingOutcome$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   TaskTypeFindingOutcome
-> = openEnums.outboundSchema(TaskTypeFindingOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(TaskTypeFindingOutcome)
+);
 
 /** @internal */
 export const TaskTypeFinding$inboundSchema: z.ZodType<
   TaskTypeFinding,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  findingId: z.string().optional(),
-  findingType: z.string().optional(),
-  outcome: TaskTypeFindingOutcome$inboundSchema.optional(),
-  outcomeTime: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    findingId: z.string().optional(),
+    findingType: z.string().optional(),
+    outcome: TaskTypeFindingOutcome$inboundSchema.optional(),
+    outcomeTime: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type TaskTypeFinding$Outbound = {
   findingId?: string | undefined;
@@ -81,12 +87,15 @@ export const TaskTypeFinding$outboundSchema: z.ZodType<
   TaskTypeFinding$Outbound,
   z.ZodTypeDef,
   TaskTypeFinding
-> = z.object({
-  findingId: z.string().optional(),
-  findingType: z.string().optional(),
-  outcome: TaskTypeFindingOutcome$outboundSchema.optional(),
-  outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    findingId: z.string().optional(),
+    findingType: z.string().optional(),
+    outcome: TaskTypeFindingOutcome$outboundSchema.optional(),
+    outcomeTime: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+  })
+);
 
 export function taskTypeFindingToJSON(
   taskTypeFinding: TaskTypeFinding,

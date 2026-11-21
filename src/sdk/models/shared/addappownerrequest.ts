@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Empty request body. Just placeholder for the add app owner request which uses URL values for input.
@@ -17,7 +18,7 @@ export const AddAppOwnerRequest$outboundSchema: z.ZodType<
   AddAppOwnerRequest$Outbound,
   z.ZodTypeDef,
   AddAppOwnerRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function addAppOwnerRequestToJSON(
   addAppOwnerRequest: AddAppOwnerRequest,

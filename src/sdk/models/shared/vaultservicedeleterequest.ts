@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * VaultServiceDeleteRequest is the request message for deleting a vault.
@@ -17,7 +18,7 @@ export const VaultServiceDeleteRequest$outboundSchema: z.ZodType<
   VaultServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   VaultServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function vaultServiceDeleteRequestToJSON(
   vaultServiceDeleteRequest: VaultServiceDeleteRequest,

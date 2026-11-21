@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,18 +54,20 @@ export const C1ApiLocalDirectoryV1LocalUserInvitationServiceRevokeRequest$outbou
     C1ApiLocalDirectoryV1LocalUserInvitationServiceRevokeRequest$Outbound,
     z.ZodTypeDef,
     C1ApiLocalDirectoryV1LocalUserInvitationServiceRevokeRequest
-  > = z.object({
-    directoryAppId: z.string(),
-    id: z.string(),
-    localUserInvitationServiceRevokeRequest: shared
-      .LocalUserInvitationServiceRevokeRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      directoryAppId: "directory_app_id",
-      localUserInvitationServiceRevokeRequest:
-        "LocalUserInvitationServiceRevokeRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      directoryAppId: z.string(),
+      id: z.string(),
+      localUserInvitationServiceRevokeRequest: shared
+        .LocalUserInvitationServiceRevokeRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        directoryAppId: "directory_app_id",
+        localUserInvitationServiceRevokeRequest:
+          "LocalUserInvitationServiceRevokeRequest",
+      });
+    })
+  );
 
 export function c1ApiLocalDirectoryV1LocalUserInvitationServiceRevokeRequestToJSON(
   c1ApiLocalDirectoryV1LocalUserInvitationServiceRevokeRequest:
@@ -83,21 +85,23 @@ export const C1ApiLocalDirectoryV1LocalUserInvitationServiceRevokeResponse$inbou
     C1ApiLocalDirectoryV1LocalUserInvitationServiceRevokeResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    LocalUserInvitationServiceRevokeResponse: shared
-      .LocalUserInvitationServiceRevokeResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "LocalUserInvitationServiceRevokeResponse":
-        "localUserInvitationServiceRevokeResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      LocalUserInvitationServiceRevokeResponse: shared
+        .LocalUserInvitationServiceRevokeResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "LocalUserInvitationServiceRevokeResponse":
+          "localUserInvitationServiceRevokeResponse",
+      });
+    })
+  );
 
 export function c1ApiLocalDirectoryV1LocalUserInvitationServiceRevokeResponseFromJSON(
   jsonString: string,

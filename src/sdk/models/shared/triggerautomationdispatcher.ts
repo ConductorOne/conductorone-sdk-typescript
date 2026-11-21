@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,10 +29,12 @@ export const TriggerAutomationDispatcher$inboundSchema: z.ZodType<
   TriggerAutomationDispatcher,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  automationId: z.string().optional(),
-  inputMapping: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    automationId: z.string().optional(),
+    inputMapping: z.record(z.string()).optional(),
+  })
+);
 /** @internal */
 export type TriggerAutomationDispatcher$Outbound = {
   automationId?: string | undefined;
@@ -44,10 +46,12 @@ export const TriggerAutomationDispatcher$outboundSchema: z.ZodType<
   TriggerAutomationDispatcher$Outbound,
   z.ZodTypeDef,
   TriggerAutomationDispatcher
-> = z.object({
-  automationId: z.string().optional(),
-  inputMapping: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    automationId: z.string().optional(),
+    inputMapping: z.record(z.string()).optional(),
+  })
+);
 
 export function triggerAutomationDispatcherToJSON(
   triggerAutomationDispatcher: TriggerAutomationDispatcher,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -50,7 +51,9 @@ export const EdgeFindingSettingsEntryCategory$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   EdgeFindingSettingsEntryCategory
-> = openEnums.outboundSchema(EdgeFindingSettingsEntryCategory);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(EdgeFindingSettingsEntryCategory)
+);
 
 /** @internal */
 export type EdgeFindingSettingsEntry$Outbound = {
@@ -63,10 +66,12 @@ export const EdgeFindingSettingsEntry$outboundSchema: z.ZodType<
   EdgeFindingSettingsEntry$Outbound,
   z.ZodTypeDef,
   EdgeFindingSettingsEntry
-> = z.object({
-  category: EdgeFindingSettingsEntryCategory$outboundSchema.optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    category: EdgeFindingSettingsEntryCategory$outboundSchema.optional(),
+    enabled: z.nullable(z.boolean()).optional(),
+  })
+);
 
 export function edgeFindingSettingsEntryToJSON(
   edgeFindingSettingsEntry: EdgeFindingSettingsEntry,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The TaskActionSourceReview message tracks which access review decision created the action task.
@@ -17,7 +18,7 @@ export const TaskActionSourceReviewInput$outboundSchema: z.ZodType<
   TaskActionSourceReviewInput$Outbound,
   z.ZodTypeDef,
   TaskActionSourceReviewInput
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function taskActionSourceReviewInputToJSON(
   taskActionSourceReviewInput: TaskActionSourceReviewInput,

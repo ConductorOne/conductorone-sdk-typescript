@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The AutomationExecutionExpandMask message.
@@ -24,9 +25,11 @@ export const AutomationExecutionExpandMask$outboundSchema: z.ZodType<
   AutomationExecutionExpandMask$Outbound,
   z.ZodTypeDef,
   AutomationExecutionExpandMask
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    paths: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function automationExecutionExpandMaskToJSON(
   automationExecutionExpandMask: AutomationExecutionExpandMask,

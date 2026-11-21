@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Requests the active onboarding conversation for the caller's tenant.
@@ -17,7 +18,7 @@ export const EnsureOnboardingSessionRequest$outboundSchema: z.ZodType<
   EnsureOnboardingSessionRequest$Outbound,
   z.ZodTypeDef,
   EnsureOnboardingSessionRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function ensureOnboardingSessionRequestToJSON(
   ensureOnboardingSessionRequest: EnsureOnboardingSessionRequest,

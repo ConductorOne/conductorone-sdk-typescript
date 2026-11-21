@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Whether this is a static resource or a URI template.
  */
-export const Kind = {
+export const MCPResourceKind = {
   McpResourceKindUnspecified: "MCP_RESOURCE_KIND_UNSPECIFIED",
   McpResourceKindStatic: "MCP_RESOURCE_KIND_STATIC",
   McpResourceKindTemplate: "MCP_RESOURCE_KIND_TEMPLATE",
@@ -20,7 +20,7 @@ export const Kind = {
 /**
  * Whether this is a static resource or a URI template.
  */
-export type Kind = OpenEnum<typeof Kind>;
+export type MCPResourceKind = OpenEnum<typeof MCPResourceKind>;
 
 /**
  * Resource approval/lifecycle state.
@@ -86,7 +86,7 @@ export type MCPResource = {
   /**
    * Whether this is a static resource or a URI template.
    */
-  kind?: Kind | undefined;
+  kind?: MCPResourceKind | undefined;
   lastDiscoveredAt?: Date | null | undefined;
   /**
    * MIME type of the resource content, when known.
@@ -148,7 +148,7 @@ export type MCPResourceInput = {
   /**
    * Whether this is a static resource or a URI template.
    */
-  kind?: Kind | undefined;
+  kind?: MCPResourceKind | undefined;
   lastDiscoveredAt?: Date | null | undefined;
   /**
    * MIME type of the resource content, when known.
@@ -178,59 +178,73 @@ export type MCPResourceInput = {
 };
 
 /** @internal */
-export const Kind$inboundSchema: z.ZodType<Kind, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Kind);
+export const MCPResourceKind$inboundSchema: z.ZodType<
+  MCPResourceKind,
+  z.ZodTypeDef,
+  unknown
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(MCPResourceKind));
 /** @internal */
-export const Kind$outboundSchema: z.ZodType<string, z.ZodTypeDef, Kind> =
-  openEnums.outboundSchema(Kind);
+export const MCPResourceKind$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  MCPResourceKind
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(MCPResourceKind)
+);
 
 /** @internal */
 export const MCPResourceState$inboundSchema: z.ZodType<
   MCPResourceState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(MCPResourceState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(MCPResourceState)
+);
 /** @internal */
 export const MCPResourceState$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   MCPResourceState
-> = openEnums.outboundSchema(MCPResourceState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(MCPResourceState)
+);
 
 /** @internal */
 export const MCPResource$inboundSchema: z.ZodType<
   MCPResource,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  connectorId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.string().optional(),
-  discoveryHash: z.string().optional(),
-  entitlementActive: z.boolean().optional(),
-  grantCount: z.string().transform(v => parseInt(v, 10)).optional(),
-  id: z.string().optional(),
-  kind: Kind$inboundSchema.optional(),
-  lastDiscoveredAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-  state: MCPResourceState$inboundSchema.optional(),
-  title: z.string().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  uri: z.string().optional(),
-  uriTemplate: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    connectorId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.string().optional(),
+    discoveryHash: z.string().optional(),
+    entitlementActive: z.boolean().optional(),
+    grantCount: z.string().transform(v => parseInt(v, 10)).optional(),
+    id: z.string().optional(),
+    kind: MCPResourceKind$inboundSchema.optional(),
+    lastDiscoveredAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    mimeType: z.string().optional(),
+    name: z.string().optional(),
+    state: MCPResourceState$inboundSchema.optional(),
+    title: z.string().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    uri: z.string().optional(),
+    uriTemplate: z.string().optional(),
+  })
+);
 
 export function mcpResourceFromJSON(
   jsonString: string,
@@ -268,26 +282,28 @@ export const MCPResourceInput$outboundSchema: z.ZodType<
   MCPResourceInput$Outbound,
   z.ZodTypeDef,
   MCPResourceInput
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  connectorId: z.string().optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.string().optional(),
-  discoveryHash: z.string().optional(),
-  id: z.string().optional(),
-  kind: Kind$outboundSchema.optional(),
-  lastDiscoveredAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-  state: MCPResourceState$outboundSchema.optional(),
-  title: z.string().optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  uri: z.string().optional(),
-  uriTemplate: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    connectorId: z.string().optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    description: z.string().optional(),
+    discoveryHash: z.string().optional(),
+    id: z.string().optional(),
+    kind: MCPResourceKind$outboundSchema.optional(),
+    lastDiscoveredAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    mimeType: z.string().optional(),
+    name: z.string().optional(),
+    state: MCPResourceState$outboundSchema.optional(),
+    title: z.string().optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    uri: z.string().optional(),
+    uriTemplate: z.string().optional(),
+  })
+);
 
 export function mcpResourceInputToJSON(
   mcpResourceInput: MCPResourceInput,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -68,16 +68,19 @@ export const GrantTriggerFilter$inboundSchema: z.ZodType<
   GrantTriggerFilter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accountFilter: z.nullable(AccountFilter$inboundSchema).optional(),
-  grantFilter: z.nullable(GrantFilter$inboundSchema).optional(),
-  inclusionAll: z.nullable(EntitlementInclusionAll$inboundSchema).optional(),
-  inclusionCriteria: z.nullable(EntitlementInclusionCriteria$inboundSchema)
-    .optional(),
-  inclusionList: z.nullable(EntitlementInclusionList$inboundSchema).optional(),
-  inclusionListCel: z.nullable(EntitlementInclusionListCel$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountFilter: z.nullable(AccountFilter$inboundSchema).optional(),
+    grantFilter: z.nullable(GrantFilter$inboundSchema).optional(),
+    inclusionAll: z.nullable(EntitlementInclusionAll$inboundSchema).optional(),
+    inclusionCriteria: z.nullable(EntitlementInclusionCriteria$inboundSchema)
+      .optional(),
+    inclusionList: z.nullable(EntitlementInclusionList$inboundSchema)
+      .optional(),
+    inclusionListCel: z.nullable(EntitlementInclusionListCel$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type GrantTriggerFilter$Outbound = {
   accountFilter?: AccountFilter$Outbound | null | undefined;
@@ -93,16 +96,19 @@ export const GrantTriggerFilter$outboundSchema: z.ZodType<
   GrantTriggerFilter$Outbound,
   z.ZodTypeDef,
   GrantTriggerFilter
-> = z.object({
-  accountFilter: z.nullable(AccountFilter$outboundSchema).optional(),
-  grantFilter: z.nullable(GrantFilter$outboundSchema).optional(),
-  inclusionAll: z.nullable(EntitlementInclusionAll$outboundSchema).optional(),
-  inclusionCriteria: z.nullable(EntitlementInclusionCriteria$outboundSchema)
-    .optional(),
-  inclusionList: z.nullable(EntitlementInclusionList$outboundSchema).optional(),
-  inclusionListCel: z.nullable(EntitlementInclusionListCel$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountFilter: z.nullable(AccountFilter$outboundSchema).optional(),
+    grantFilter: z.nullable(GrantFilter$outboundSchema).optional(),
+    inclusionAll: z.nullable(EntitlementInclusionAll$outboundSchema).optional(),
+    inclusionCriteria: z.nullable(EntitlementInclusionCriteria$outboundSchema)
+      .optional(),
+    inclusionList: z.nullable(EntitlementInclusionList$outboundSchema)
+      .optional(),
+    inclusionListCel: z.nullable(EntitlementInclusionListCel$outboundSchema)
+      .optional(),
+  })
+);
 
 export function grantTriggerFilterToJSON(
   grantTriggerFilter: GrantTriggerFilter,

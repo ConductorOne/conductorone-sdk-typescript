@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   C1EdgeSettings,
   C1EdgeSettings$Outbound,
@@ -71,14 +72,16 @@ export const WorkloadFederationProviderInput$outboundSchema: z.ZodType<
   WorkloadFederationProviderInput$Outbound,
   z.ZodTypeDef,
   WorkloadFederationProviderInput
-> = z.object({
-  c1Edge: z.nullable(C1EdgeSettings$outboundSchema).optional(),
-  description: z.string().optional(),
-  disabled: z.boolean().optional(),
-  displayName: z.string().optional(),
-  oidc: z.nullable(OIDCSettings$outboundSchema).optional(),
-  spiffe: z.nullable(SPIFFESettings$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    c1Edge: z.nullable(C1EdgeSettings$outboundSchema).optional(),
+    description: z.string().optional(),
+    disabled: z.boolean().optional(),
+    displayName: z.string().optional(),
+    oidc: z.nullable(OIDCSettings$outboundSchema).optional(),
+    spiffe: z.nullable(SPIFFESettings$outboundSchema).optional(),
+  })
+);
 
 export function workloadFederationProviderInputToJSON(
   workloadFederationProviderInput: WorkloadFederationProviderInput,

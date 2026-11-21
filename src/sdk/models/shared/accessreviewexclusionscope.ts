@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -50,36 +50,42 @@ export const AccessReviewExclusionScopeAppUserStatuses$inboundSchema: z.ZodType<
   AccessReviewExclusionScopeAppUserStatuses,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AccessReviewExclusionScopeAppUserStatuses);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AccessReviewExclusionScopeAppUserStatuses)
+);
 /** @internal */
 export const AccessReviewExclusionScopeAppUserStatuses$outboundSchema:
   z.ZodType<string, z.ZodTypeDef, AccessReviewExclusionScopeAppUserStatuses> =
-    openEnums.outboundSchema(AccessReviewExclusionScopeAppUserStatuses);
+    /* @__PURE__ */ lazySchema$(() =>
+      openEnums.outboundSchema(AccessReviewExclusionScopeAppUserStatuses)
+    );
 
 /** @internal */
 export const AppUserTypes$inboundSchema: z.ZodType<
   AppUserTypes,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AppUserTypes);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(AppUserTypes));
 /** @internal */
 export const AppUserTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AppUserTypes
-> = openEnums.outboundSchema(AppUserTypes);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(AppUserTypes));
 
 /** @internal */
 export const AccessReviewExclusionScope$inboundSchema: z.ZodType<
   AccessReviewExclusionScope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appUserStatuses: z.nullable(
-    z.array(AccessReviewExclusionScopeAppUserStatuses$inboundSchema),
-  ).optional(),
-  appUserTypes: z.nullable(z.array(AppUserTypes$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appUserStatuses: z.nullable(
+      z.array(AccessReviewExclusionScopeAppUserStatuses$inboundSchema),
+    ).optional(),
+    appUserTypes: z.nullable(z.array(AppUserTypes$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type AccessReviewExclusionScope$Outbound = {
   appUserStatuses?: Array<string> | null | undefined;
@@ -91,12 +97,14 @@ export const AccessReviewExclusionScope$outboundSchema: z.ZodType<
   AccessReviewExclusionScope$Outbound,
   z.ZodTypeDef,
   AccessReviewExclusionScope
-> = z.object({
-  appUserStatuses: z.nullable(
-    z.array(AccessReviewExclusionScopeAppUserStatuses$outboundSchema),
-  ).optional(),
-  appUserTypes: z.nullable(z.array(AppUserTypes$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appUserStatuses: z.nullable(
+      z.array(AccessReviewExclusionScopeAppUserStatuses$outboundSchema),
+    ).optional(),
+    appUserTypes: z.nullable(z.array(AppUserTypes$outboundSchema)).optional(),
+  })
+);
 
 export function accessReviewExclusionScopeToJSON(
   accessReviewExclusionScope: AccessReviewExclusionScope,

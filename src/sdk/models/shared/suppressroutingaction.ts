@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const SuppressRoutingAction$inboundSchema: z.ZodType<
   SuppressRoutingAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  reason: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reason: z.string().optional(),
+  })
+);
 /** @internal */
 export type SuppressRoutingAction$Outbound = {
   reason?: string | undefined;
@@ -35,9 +37,11 @@ export const SuppressRoutingAction$outboundSchema: z.ZodType<
   SuppressRoutingAction$Outbound,
   z.ZodTypeDef,
   SuppressRoutingAction
-> = z.object({
-  reason: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reason: z.string().optional(),
+  })
+);
 
 export function suppressRoutingActionToJSON(
   suppressRoutingAction: SuppressRoutingAction,

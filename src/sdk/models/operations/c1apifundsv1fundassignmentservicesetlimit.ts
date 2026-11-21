@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,17 +51,19 @@ export const C1ApiFundsV1FundAssignmentServiceSetLimitRequest$outboundSchema:
     C1ApiFundsV1FundAssignmentServiceSetLimitRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFundsV1FundAssignmentServiceSetLimitRequest
-  > = z.object({
-    userId: z.string(),
-    fundAssignmentServiceSetLimitRequest: shared
-      .FundAssignmentServiceSetLimitRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      userId: "user_id",
-      fundAssignmentServiceSetLimitRequest:
-        "FundAssignmentServiceSetLimitRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      userId: z.string(),
+      fundAssignmentServiceSetLimitRequest: shared
+        .FundAssignmentServiceSetLimitRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        userId: "user_id",
+        fundAssignmentServiceSetLimitRequest:
+          "FundAssignmentServiceSetLimitRequest",
+      });
+    })
+  );
 
 export function c1ApiFundsV1FundAssignmentServiceSetLimitRequestToJSON(
   c1ApiFundsV1FundAssignmentServiceSetLimitRequest:
@@ -80,21 +82,23 @@ export const C1ApiFundsV1FundAssignmentServiceSetLimitResponse$inboundSchema:
     C1ApiFundsV1FundAssignmentServiceSetLimitResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    FundAssignmentServiceSetLimitResponse: shared
-      .FundAssignmentServiceSetLimitResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "FundAssignmentServiceSetLimitResponse":
-        "fundAssignmentServiceSetLimitResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      FundAssignmentServiceSetLimitResponse: shared
+        .FundAssignmentServiceSetLimitResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "FundAssignmentServiceSetLimitResponse":
+          "fundAssignmentServiceSetLimitResponse",
+      });
+    })
+  );
 
 export function c1ApiFundsV1FundAssignmentServiceSetLimitResponseFromJSON(
   jsonString: string,

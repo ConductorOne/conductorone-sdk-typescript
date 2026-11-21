@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -65,27 +65,31 @@ export const XAAScopeDiscoveryStatusState$inboundSchema: z.ZodType<
   XAAScopeDiscoveryStatusState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(XAAScopeDiscoveryStatusState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(XAAScopeDiscoveryStatusState)
+);
 
 /** @internal */
 export const XAAScopeDiscoveryStatus$inboundSchema: z.ZodType<
   XAAScopeDiscoveryStatus,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  completedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  findings: z.nullable(z.array(XAAScopeDiscoveryFinding$inboundSchema))
-    .optional(),
-  importedScopeValues: z.nullable(z.array(z.string())).optional(),
-  lastError: z.string().optional(),
-  startedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  state: XAAScopeDiscoveryStatusState$inboundSchema.optional(),
-  usedAsFallback: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    completedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    findings: z.nullable(z.array(XAAScopeDiscoveryFinding$inboundSchema))
+      .optional(),
+    importedScopeValues: z.nullable(z.array(z.string())).optional(),
+    lastError: z.string().optional(),
+    startedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    state: XAAScopeDiscoveryStatusState$inboundSchema.optional(),
+    usedAsFallback: z.boolean().optional(),
+  })
+);
 
 export function xaaScopeDiscoveryStatusFromJSON(
   jsonString: string,

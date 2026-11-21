@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -46,8 +47,8 @@ export const ResolvePausedAutomationExecutionsRequestDecision$outboundSchema:
     string,
     z.ZodTypeDef,
     ResolvePausedAutomationExecutionsRequestDecision
-  > = openEnums.outboundSchema(
-    ResolvePausedAutomationExecutionsRequestDecision,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(ResolvePausedAutomationExecutionsRequestDecision)
   );
 
 /** @internal */
@@ -61,11 +62,13 @@ export const ResolvePausedAutomationExecutionsRequest$outboundSchema: z.ZodType<
   ResolvePausedAutomationExecutionsRequest$Outbound,
   z.ZodTypeDef,
   ResolvePausedAutomationExecutionsRequest
-> = z.object({
-  decision: ResolvePausedAutomationExecutionsRequestDecision$outboundSchema
-    .optional(),
-  reason: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    decision: ResolvePausedAutomationExecutionsRequestDecision$outboundSchema
+      .optional(),
+    reason: z.string().optional(),
+  })
+);
 
 export function resolvePausedAutomationExecutionsRequestToJSON(
   resolvePausedAutomationExecutionsRequest:

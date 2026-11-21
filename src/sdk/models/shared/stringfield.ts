@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { StringRules, StringRules$inboundSchema } from "./stringrules.js";
@@ -24,10 +24,12 @@ export const StringField$inboundSchema: z.ZodType<
   StringField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  secret: z.boolean().optional(),
-  valueValidator: z.nullable(StringRules$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    secret: z.boolean().optional(),
+    valueValidator: z.nullable(StringRules$inboundSchema).optional(),
+  })
+);
 
 export function stringFieldFromJSON(
   jsonString: string,

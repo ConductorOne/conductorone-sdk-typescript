@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,9 +19,11 @@ export const AutomationContext$inboundSchema: z.ZodType<
   AutomationContext,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  context: z.nullable(z.record(z.any())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    context: z.nullable(z.record(z.any())).optional(),
+  })
+);
 /** @internal */
 export type AutomationContext$Outbound = {
   context?: { [k: string]: any } | null | undefined;
@@ -32,9 +34,11 @@ export const AutomationContext$outboundSchema: z.ZodType<
   AutomationContext$Outbound,
   z.ZodTypeDef,
   AutomationContext
-> = z.object({
-  context: z.nullable(z.record(z.any())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    context: z.nullable(z.record(z.any())).optional(),
+  })
+);
 
 export function automationContextToJSON(
   automationContext: AutomationContext,

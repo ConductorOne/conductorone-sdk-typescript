@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -38,11 +38,13 @@ export const MultiAppSetup$inboundSchema: z.ZodType<
   MultiAppSetup,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementDetails: z.record(EntitlementToDetails$inboundSchema)
-    .optional(),
-  appEntitlements: z.record(MultiAppEntitlement$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementDetails: z.record(EntitlementToDetails$inboundSchema)
+      .optional(),
+    appEntitlements: z.record(MultiAppEntitlement$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type MultiAppSetup$Outbound = {
   appEntitlementDetails?:
@@ -56,11 +58,13 @@ export const MultiAppSetup$outboundSchema: z.ZodType<
   MultiAppSetup$Outbound,
   z.ZodTypeDef,
   MultiAppSetup
-> = z.object({
-  appEntitlementDetails: z.record(EntitlementToDetails$outboundSchema)
-    .optional(),
-  appEntitlements: z.record(MultiAppEntitlement$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementDetails: z.record(EntitlementToDetails$outboundSchema)
+      .optional(),
+    appEntitlements: z.record(MultiAppEntitlement$outboundSchema).optional(),
+  })
+);
 
 export function multiAppSetupToJSON(multiAppSetup: MultiAppSetup): string {
   return JSON.stringify(MultiAppSetup$outboundSchema.parse(multiAppSetup));

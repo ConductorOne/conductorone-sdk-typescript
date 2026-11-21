@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The AuthConfigGoogle message.
@@ -24,9 +25,11 @@ export const AuthConfigGoogleInput$outboundSchema: z.ZodType<
   AuthConfigGoogleInput$Outbound,
   z.ZodTypeDef,
   AuthConfigGoogleInput
-> = z.object({
-  hostedDomains: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hostedDomains: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function authConfigGoogleInputToJSON(
   authConfigGoogleInput: AuthConfigGoogleInput,

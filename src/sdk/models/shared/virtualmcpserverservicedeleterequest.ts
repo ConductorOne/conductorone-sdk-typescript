@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * VirtualMCPServerServiceDeleteRequest deletes one Virtual MCP Server by ID.
@@ -17,7 +18,7 @@ export const VirtualMCPServerServiceDeleteRequest$outboundSchema: z.ZodType<
   VirtualMCPServerServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   VirtualMCPServerServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function virtualMCPServerServiceDeleteRequestToJSON(
   virtualMCPServerServiceDeleteRequest: VirtualMCPServerServiceDeleteRequest,

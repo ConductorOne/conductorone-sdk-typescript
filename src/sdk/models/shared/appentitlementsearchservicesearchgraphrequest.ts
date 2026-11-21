@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * SearchGraph request. Builds a filtered access graph starting from a root entity.
@@ -103,22 +104,24 @@ export const AppEntitlementSearchServiceSearchGraphRequest$outboundSchema:
     AppEntitlementSearchServiceSearchGraphRequest$Outbound,
     z.ZodTypeDef,
     AppEntitlementSearchServiceSearchGraphRequest
-  > = z.object({
-    appId: z.string().optional(),
-    appIds: z.nullable(z.array(z.string())).optional(),
-    entitlementIds: z.nullable(z.array(z.string())).optional(),
-    entitlementNameQuery: z.string().optional(),
-    maxDepth: z.number().int().optional(),
-    maxFanOut: z.number().int().optional(),
-    maxNodes: z.number().int().optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    resourceId: z.string().optional(),
-    resourceIds: z.nullable(z.array(z.string())).optional(),
-    resourceNameQuery: z.string().optional(),
-    resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-    userId: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string().optional(),
+      appIds: z.nullable(z.array(z.string())).optional(),
+      entitlementIds: z.nullable(z.array(z.string())).optional(),
+      entitlementNameQuery: z.string().optional(),
+      maxDepth: z.number().int().optional(),
+      maxFanOut: z.number().int().optional(),
+      maxNodes: z.number().int().optional(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      resourceId: z.string().optional(),
+      resourceIds: z.nullable(z.array(z.string())).optional(),
+      resourceNameQuery: z.string().optional(),
+      resourceTypeIds: z.nullable(z.array(z.string())).optional(),
+      userId: z.string().optional(),
+    })
+  );
 
 export function appEntitlementSearchServiceSearchGraphRequestToJSON(
   appEntitlementSearchServiceSearchGraphRequest:

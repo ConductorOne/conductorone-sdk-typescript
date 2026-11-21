@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The DeleteRiskLevelAttributeValueRequest message.
@@ -17,7 +18,7 @@ export const DeleteRiskLevelAttributeValueRequest$outboundSchema: z.ZodType<
   DeleteRiskLevelAttributeValueRequest$Outbound,
   z.ZodTypeDef,
   DeleteRiskLevelAttributeValueRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function deleteRiskLevelAttributeValueRequestToJSON(
   deleteRiskLevelAttributeValueRequest: DeleteRiskLevelAttributeValueRequest,

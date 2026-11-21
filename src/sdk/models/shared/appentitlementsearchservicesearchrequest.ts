@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -216,7 +217,7 @@ export const MembershipType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   MembershipType
-> = openEnums.outboundSchema(MembershipType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(MembershipType));
 
 /** @internal */
 export type AppEntitlementSearchServiceSearchRequest$Outbound = {
@@ -268,48 +269,52 @@ export const AppEntitlementSearchServiceSearchRequest$outboundSchema: z.ZodType<
   AppEntitlementSearchServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   AppEntitlementSearchServiceSearchRequest
-> = z.object({
-  accessReviewId: z.string().optional(),
-  alias: z.string().optional(),
-  allowAutomationEnabledC1Groups: z.boolean().optional(),
-  annotationMatches: z.nullable(z.array(AnnotationMatch$outboundSchema))
-    .optional(),
-  appIds: z.nullable(z.array(z.string())).optional(),
-  appResourceTypeRefs: z.nullable(z.array(ResourceTypeRef$outboundSchema))
-    .optional(),
-  appUserIds: z.nullable(z.array(z.string())).optional(),
-  complianceFrameworkIds: z.nullable(z.array(z.string())).optional(),
-  displayName: z.string().optional(),
-  entitlementSlugs: z.nullable(z.array(z.string())).optional(),
-  excludeAppIds: z.nullable(z.array(z.string())).optional(),
-  excludeAppUserIds: z.nullable(z.array(z.string())).optional(),
-  excludeAutomationEnabled: z.boolean().optional(),
-  excludeImmutable: z.boolean().optional(),
-  excludeNonRoleProfileMemberships: z.boolean().optional(),
-  excludeResourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  excludedEntitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
-    .optional(),
-  expandMask: z.nullable(AppEntitlementExpandMask$outboundSchema).optional(),
-  includeDeleted: z.boolean().optional(),
-  isAutomated: z.boolean().optional(),
-  membershipType: z.nullable(z.array(MembershipType$outboundSchema)).optional(),
-  onlyGetExpiring: z.boolean().optional(),
-  ownerUserIds: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  policyRefs: z.nullable(z.array(PolicyRef$outboundSchema)).optional(),
-  query: z.string().optional(),
-  refs: z.nullable(z.array(AppEntitlementRef$outboundSchema)).optional(),
-  requestSchemaIds: z.nullable(z.array(z.string())).optional(),
-  resourceIds: z.nullable(z.array(z.string())).optional(),
-  resourceProfileMatches: z.nullable(
-    z.array(ResourceProfileMatch$outboundSchema),
-  ).optional(),
-  resourceTraitIds: z.nullable(z.array(z.string())).optional(),
-  resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  riskLevelIds: z.nullable(z.array(z.string())).optional(),
-  sourceConnectorId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReviewId: z.string().optional(),
+    alias: z.string().optional(),
+    allowAutomationEnabledC1Groups: z.boolean().optional(),
+    annotationMatches: z.nullable(z.array(AnnotationMatch$outboundSchema))
+      .optional(),
+    appIds: z.nullable(z.array(z.string())).optional(),
+    appResourceTypeRefs: z.nullable(z.array(ResourceTypeRef$outboundSchema))
+      .optional(),
+    appUserIds: z.nullable(z.array(z.string())).optional(),
+    complianceFrameworkIds: z.nullable(z.array(z.string())).optional(),
+    displayName: z.string().optional(),
+    entitlementSlugs: z.nullable(z.array(z.string())).optional(),
+    excludeAppIds: z.nullable(z.array(z.string())).optional(),
+    excludeAppUserIds: z.nullable(z.array(z.string())).optional(),
+    excludeAutomationEnabled: z.boolean().optional(),
+    excludeImmutable: z.boolean().optional(),
+    excludeNonRoleProfileMemberships: z.boolean().optional(),
+    excludeResourceTypeIds: z.nullable(z.array(z.string())).optional(),
+    excludedEntitlementRefs: z.nullable(
+      z.array(AppEntitlementRef$outboundSchema),
+    ).optional(),
+    expandMask: z.nullable(AppEntitlementExpandMask$outboundSchema).optional(),
+    includeDeleted: z.boolean().optional(),
+    isAutomated: z.boolean().optional(),
+    membershipType: z.nullable(z.array(MembershipType$outboundSchema))
+      .optional(),
+    onlyGetExpiring: z.boolean().optional(),
+    ownerUserIds: z.nullable(z.array(z.string())).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    policyRefs: z.nullable(z.array(PolicyRef$outboundSchema)).optional(),
+    query: z.string().optional(),
+    refs: z.nullable(z.array(AppEntitlementRef$outboundSchema)).optional(),
+    requestSchemaIds: z.nullable(z.array(z.string())).optional(),
+    resourceIds: z.nullable(z.array(z.string())).optional(),
+    resourceProfileMatches: z.nullable(
+      z.array(ResourceProfileMatch$outboundSchema),
+    ).optional(),
+    resourceTraitIds: z.nullable(z.array(z.string())).optional(),
+    resourceTypeIds: z.nullable(z.array(z.string())).optional(),
+    riskLevelIds: z.nullable(z.array(z.string())).optional(),
+    sourceConnectorId: z.string().optional(),
+  })
+);
 
 export function appEntitlementSearchServiceSearchRequestToJSON(
   appEntitlementSearchServiceSearchRequest:

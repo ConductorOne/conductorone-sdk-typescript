@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Finding, Finding$inboundSchema } from "./finding.js";
@@ -20,9 +20,11 @@ export const UpdateFindingStateResponse$inboundSchema: z.ZodType<
   UpdateFindingStateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  finding: z.nullable(Finding$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    finding: z.nullable(Finding$inboundSchema).optional(),
+  })
+);
 
 export function updateFindingStateResponseFromJSON(
   jsonString: string,

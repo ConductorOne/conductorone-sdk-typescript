@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -65,26 +65,32 @@ export const SuggestedOwnerReasonKind$inboundSchema: z.ZodType<
   SuggestedOwnerReasonKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(SuggestedOwnerReasonKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(SuggestedOwnerReasonKind)
+);
 /** @internal */
 export const SuggestedOwnerReasonKind$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SuggestedOwnerReasonKind
-> = openEnums.outboundSchema(SuggestedOwnerReasonKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(SuggestedOwnerReasonKind)
+);
 
 /** @internal */
 export const SuggestedOwnerReason$inboundSchema: z.ZodType<
   SuggestedOwnerReason,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  denominator: z.number().int().optional(),
-  kind: SuggestedOwnerReasonKind$inboundSchema.optional(),
-  numerator: z.number().int().optional(),
-  percent: z.number().int().optional(),
-  relatedId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    denominator: z.number().int().optional(),
+    kind: SuggestedOwnerReasonKind$inboundSchema.optional(),
+    numerator: z.number().int().optional(),
+    percent: z.number().int().optional(),
+    relatedId: z.string().optional(),
+  })
+);
 /** @internal */
 export type SuggestedOwnerReason$Outbound = {
   denominator?: number | undefined;
@@ -99,13 +105,15 @@ export const SuggestedOwnerReason$outboundSchema: z.ZodType<
   SuggestedOwnerReason$Outbound,
   z.ZodTypeDef,
   SuggestedOwnerReason
-> = z.object({
-  denominator: z.number().int().optional(),
-  kind: SuggestedOwnerReasonKind$outboundSchema.optional(),
-  numerator: z.number().int().optional(),
-  percent: z.number().int().optional(),
-  relatedId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    denominator: z.number().int().optional(),
+    kind: SuggestedOwnerReasonKind$outboundSchema.optional(),
+    numerator: z.number().int().optional(),
+    percent: z.number().int().optional(),
+    relatedId: z.string().optional(),
+  })
+);
 
 export function suggestedOwnerReasonToJSON(
   suggestedOwnerReason: SuggestedOwnerReason,

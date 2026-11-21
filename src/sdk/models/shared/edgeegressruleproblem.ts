@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -62,18 +62,22 @@ export const EdgeEgressRuleProblemKind$inboundSchema: z.ZodType<
   EdgeEgressRuleProblemKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EdgeEgressRuleProblemKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(EdgeEgressRuleProblemKind)
+);
 
 /** @internal */
 export const EdgeEgressRuleProblem$inboundSchema: z.ZodType<
   EdgeEgressRuleProblem,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  kind: EdgeEgressRuleProblemKind$inboundSchema.optional(),
-  message: z.string().optional(),
-  ruleIndex: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: EdgeEgressRuleProblemKind$inboundSchema.optional(),
+    message: z.string().optional(),
+    ruleIndex: z.number().int().optional(),
+  })
+);
 
 export function edgeEgressRuleProblemFromJSON(
   jsonString: string,

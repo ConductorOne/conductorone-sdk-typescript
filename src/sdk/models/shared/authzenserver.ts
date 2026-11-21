@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -107,34 +107,36 @@ export type AuthzenServer = {
 
 /** @internal */
 export const Mode$inboundSchema: z.ZodType<Mode, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Mode);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Mode));
 /** @internal */
 export const Mode$outboundSchema: z.ZodType<string, z.ZodTypeDef, Mode> =
-  openEnums.outboundSchema(Mode);
+  /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Mode));
 
 /** @internal */
 export const AuthzenServer$inboundSchema: z.ZodType<
   AuthzenServer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  activePolicyId: z.string().optional(),
-  appId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  displayName: z.string().optional(),
-  evaluateEntitlementId: z.string().optional(),
-  id: z.string().optional(),
-  mode: Mode$inboundSchema.optional(),
-  searchEntitlementId: z.string().optional(),
-  tokenAudience: z.string().optional(),
-  tokenResource: z.string().optional(),
-  tokenScopes: z.nullable(z.array(z.string())).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    activePolicyId: z.string().optional(),
+    appId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    displayName: z.string().optional(),
+    evaluateEntitlementId: z.string().optional(),
+    id: z.string().optional(),
+    mode: Mode$inboundSchema.optional(),
+    searchEntitlementId: z.string().optional(),
+    tokenAudience: z.string().optional(),
+    tokenResource: z.string().optional(),
+    tokenScopes: z.nullable(z.array(z.string())).optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type AuthzenServer$Outbound = {
   activePolicyId?: string | undefined;
@@ -156,20 +158,22 @@ export const AuthzenServer$outboundSchema: z.ZodType<
   AuthzenServer$Outbound,
   z.ZodTypeDef,
   AuthzenServer
-> = z.object({
-  activePolicyId: z.string().optional(),
-  appId: z.string().optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  displayName: z.string().optional(),
-  evaluateEntitlementId: z.string().optional(),
-  id: z.string().optional(),
-  mode: Mode$outboundSchema.optional(),
-  searchEntitlementId: z.string().optional(),
-  tokenAudience: z.string().optional(),
-  tokenResource: z.string().optional(),
-  tokenScopes: z.nullable(z.array(z.string())).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    activePolicyId: z.string().optional(),
+    appId: z.string().optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    displayName: z.string().optional(),
+    evaluateEntitlementId: z.string().optional(),
+    id: z.string().optional(),
+    mode: Mode$outboundSchema.optional(),
+    searchEntitlementId: z.string().optional(),
+    tokenAudience: z.string().optional(),
+    tokenResource: z.string().optional(),
+    tokenScopes: z.nullable(z.array(z.string())).optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function authzenServerToJSON(authzenServer: AuthzenServer): string {
   return JSON.stringify(AuthzenServer$outboundSchema.parse(authzenServer));

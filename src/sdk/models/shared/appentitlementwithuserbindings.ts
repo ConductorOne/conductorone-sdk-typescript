@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -34,12 +34,14 @@ export const AppEntitlementWithUserBindings$inboundSchema: z.ZodType<
   AppEntitlementWithUserBindings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementUserBindings: z.nullable(
-    z.array(AppEntitlementUserBinding$inboundSchema),
-  ).optional(),
-  entitlement: z.nullable(AppEntitlementView$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementUserBindings: z.nullable(
+      z.array(AppEntitlementUserBinding$inboundSchema),
+    ).optional(),
+    entitlement: z.nullable(AppEntitlementView$inboundSchema).optional(),
+  })
+);
 
 export function appEntitlementWithUserBindingsFromJSON(
   jsonString: string,

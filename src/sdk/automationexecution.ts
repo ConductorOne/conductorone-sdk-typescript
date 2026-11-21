@@ -16,12 +16,16 @@ export class AutomationExecution extends ClientSDK {
    * List all automation executions in the tenant with pagination support.
    */
   async listAutomationExecutions(
+    request?:
+      | operations.C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsRequest
+      | undefined,
     options?: RequestOptions,
   ): Promise<
     operations.C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponse
   > {
     return unwrapAsync(automationExecutionListAutomationExecutions(
       this,
+      request,
       options,
     ));
   }

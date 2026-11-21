@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -39,10 +39,13 @@ export const SSOApplicationServiceParseSAMLServiceProviderMetadataResponse$inbou
     SSOApplicationServiceParseSAMLServiceProviderMetadataResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    config: z.nullable(SSOApplicationSAMLConfig$inboundSchema).optional(),
-    findings: z.nullable(z.array(SAMLMetadataFinding$inboundSchema)).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      config: z.nullable(SSOApplicationSAMLConfig$inboundSchema).optional(),
+      findings: z.nullable(z.array(SAMLMetadataFinding$inboundSchema))
+        .optional(),
+    })
+  );
 
 export function ssoApplicationServiceParseSAMLServiceProviderMetadataResponseFromJSON(
   jsonString: string,

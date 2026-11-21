@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -164,35 +165,45 @@ export const ClassificationFilter$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ClassificationFilter
-> = openEnums.outboundSchema(ClassificationFilter);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ClassificationFilter)
+);
 
 /** @internal */
 export const MCPToolServiceSearchRequestSortBy$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   MCPToolServiceSearchRequestSortBy
-> = openEnums.outboundSchema(MCPToolServiceSearchRequestSortBy);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(MCPToolServiceSearchRequestSortBy)
+);
 
 /** @internal */
 export const MCPToolServiceSearchRequestSortDirection$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   MCPToolServiceSearchRequestSortDirection
-> = openEnums.outboundSchema(MCPToolServiceSearchRequestSortDirection);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(MCPToolServiceSearchRequestSortDirection)
+);
 
 /** @internal */
 export const MCPToolServiceSearchRequestStateFilter$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   MCPToolServiceSearchRequestStateFilter
-> = openEnums.outboundSchema(MCPToolServiceSearchRequestStateFilter);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(MCPToolServiceSearchRequestStateFilter)
+);
 
 /** @internal */
 export const VisibilityFilter$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   VisibilityFilter
-> = openEnums.outboundSchema(VisibilityFilter);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(VisibilityFilter)
+);
 
 /** @internal */
 export type MCPToolServiceSearchRequest$Outbound = {
@@ -218,28 +229,31 @@ export const MCPToolServiceSearchRequest$outboundSchema: z.ZodType<
   MCPToolServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   MCPToolServiceSearchRequest
-> = z.object({
-  accessProfileId: z.string().optional(),
-  accessProfileIds: z.nullable(z.array(z.string())).optional(),
-  classificationFilter: z.nullable(z.array(ClassificationFilter$outboundSchema))
-    .optional(),
-  excludeAccessProfileId: z.string().optional(),
-  excludeAccessProfileIds: z.nullable(z.array(z.string())).optional(),
-  includeLastCalledAt: z.boolean().optional(),
-  includeRequestable: z.boolean().optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  refs: z.nullable(z.array(MCPToolRef$outboundSchema)).optional(),
-  sortBy: MCPToolServiceSearchRequestSortBy$outboundSchema.optional(),
-  sortDirection: MCPToolServiceSearchRequestSortDirection$outboundSchema
-    .optional(),
-  stateFilter: z.nullable(
-    z.array(MCPToolServiceSearchRequestStateFilter$outboundSchema),
-  ).optional(),
-  visibilityFilter: z.nullable(z.array(VisibilityFilter$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessProfileId: z.string().optional(),
+    accessProfileIds: z.nullable(z.array(z.string())).optional(),
+    classificationFilter: z.nullable(
+      z.array(ClassificationFilter$outboundSchema),
+    ).optional(),
+    excludeAccessProfileId: z.string().optional(),
+    excludeAccessProfileIds: z.nullable(z.array(z.string())).optional(),
+    includeLastCalledAt: z.boolean().optional(),
+    includeRequestable: z.boolean().optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    refs: z.nullable(z.array(MCPToolRef$outboundSchema)).optional(),
+    sortBy: MCPToolServiceSearchRequestSortBy$outboundSchema.optional(),
+    sortDirection: MCPToolServiceSearchRequestSortDirection$outboundSchema
+      .optional(),
+    stateFilter: z.nullable(
+      z.array(MCPToolServiceSearchRequestStateFilter$outboundSchema),
+    ).optional(),
+    visibilityFilter: z.nullable(z.array(VisibilityFilter$outboundSchema))
+      .optional(),
+  })
+);
 
 export function mcpToolServiceSearchRequestToJSON(
   mcpToolServiceSearchRequest: MCPToolServiceSearchRequest,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Empty request body
@@ -17,7 +18,7 @@ export const DeleteAppRequest$outboundSchema: z.ZodType<
   DeleteAppRequest$Outbound,
   z.ZodTypeDef,
   DeleteAppRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function deleteAppRequestToJSON(
   deleteAppRequest: DeleteAppRequest,

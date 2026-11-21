@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -117,7 +118,9 @@ export const CreateFindingRequestSeverity$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   CreateFindingRequestSeverity
-> = openEnums.outboundSchema(CreateFindingRequestSeverity);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(CreateFindingRequestSeverity)
+);
 
 /** @internal */
 export type CreateFindingRequest$Outbound = {
@@ -140,20 +143,23 @@ export const CreateFindingRequest$outboundSchema: z.ZodType<
   CreateFindingRequest$Outbound,
   z.ZodTypeDef,
   CreateFindingRequest
-> = z.object({
-  annotations: z.record(z.string()).optional(),
-  appResourceTarget: z.nullable(AppResourceTarget$outboundSchema).optional(),
-  appUserTarget: z.nullable(AppUserTarget$outboundSchema).optional(),
-  connectorTarget: z.nullable(ConnectorTarget$outboundSchema).optional(),
-  customSubType: z.string().optional(),
-  decoyTarget: z.nullable(DecoyTarget$outboundSchema).optional(),
-  dedupKeyParts: z.nullable(z.array(z.string())).optional(),
-  description: z.string().optional(),
-  identityUserTarget: z.nullable(IdentityUserTarget$outboundSchema).optional(),
-  remediationDescription: z.string().optional(),
-  severity: CreateFindingRequestSeverity$outboundSchema.optional(),
-  tenantTarget: z.nullable(TenantTarget$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotations: z.record(z.string()).optional(),
+    appResourceTarget: z.nullable(AppResourceTarget$outboundSchema).optional(),
+    appUserTarget: z.nullable(AppUserTarget$outboundSchema).optional(),
+    connectorTarget: z.nullable(ConnectorTarget$outboundSchema).optional(),
+    customSubType: z.string().optional(),
+    decoyTarget: z.nullable(DecoyTarget$outboundSchema).optional(),
+    dedupKeyParts: z.nullable(z.array(z.string())).optional(),
+    description: z.string().optional(),
+    identityUserTarget: z.nullable(IdentityUserTarget$outboundSchema)
+      .optional(),
+    remediationDescription: z.string().optional(),
+    severity: CreateFindingRequestSeverity$outboundSchema.optional(),
+    tenantTarget: z.nullable(TenantTarget$outboundSchema).optional(),
+  })
+);
 
 export function createFindingRequestToJSON(
   createFindingRequest: CreateFindingRequest,

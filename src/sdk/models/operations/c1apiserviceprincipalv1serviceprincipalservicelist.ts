@@ -4,10 +4,15 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
+
+export type C1ApiServicePrincipalV1ServicePrincipalServiceListRequest = {
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+};
 
 export type C1ApiServicePrincipalV1ServicePrincipalServiceListResponse = {
   /**
@@ -31,26 +36,63 @@ export type C1ApiServicePrincipalV1ServicePrincipalServiceListResponse = {
 };
 
 /** @internal */
+export type C1ApiServicePrincipalV1ServicePrincipalServiceListRequest$Outbound =
+  {
+    page_size?: number | undefined;
+    page_token?: string | undefined;
+  };
+
+/** @internal */
+export const C1ApiServicePrincipalV1ServicePrincipalServiceListRequest$outboundSchema:
+  z.ZodType<
+    C1ApiServicePrincipalV1ServicePrincipalServiceListRequest$Outbound,
+    z.ZodTypeDef,
+    C1ApiServicePrincipalV1ServicePrincipalServiceListRequest
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
+
+export function c1ApiServicePrincipalV1ServicePrincipalServiceListRequestToJSON(
+  c1ApiServicePrincipalV1ServicePrincipalServiceListRequest:
+    C1ApiServicePrincipalV1ServicePrincipalServiceListRequest,
+): string {
+  return JSON.stringify(
+    C1ApiServicePrincipalV1ServicePrincipalServiceListRequest$outboundSchema
+      .parse(c1ApiServicePrincipalV1ServicePrincipalServiceListRequest),
+  );
+}
+
+/** @internal */
 export const C1ApiServicePrincipalV1ServicePrincipalServiceListResponse$inboundSchema:
   z.ZodType<
     C1ApiServicePrincipalV1ServicePrincipalServiceListResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ServicePrincipalServiceListResponse: shared
-      .ServicePrincipalServiceListResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ServicePrincipalServiceListResponse":
-        "servicePrincipalServiceListResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ServicePrincipalServiceListResponse: shared
+        .ServicePrincipalServiceListResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ServicePrincipalServiceListResponse":
+          "servicePrincipalServiceListResponse",
+      });
+    })
+  );
 
 export function c1ApiServicePrincipalV1ServicePrincipalServiceListResponseFromJSON(
   jsonString: string,

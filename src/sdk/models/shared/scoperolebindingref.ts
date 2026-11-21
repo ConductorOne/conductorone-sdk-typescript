@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const ScopeRoleBindingRef$inboundSchema: z.ZodType<
   ScopeRoleBindingRef,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  catalogId: z.string().optional(),
-  scopeId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    catalogId: z.string().optional(),
+    scopeId: z.string().optional(),
+  })
+);
 
 export function scopeRoleBindingRefFromJSON(
   jsonString: string,

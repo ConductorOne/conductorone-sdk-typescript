@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -48,15 +48,17 @@ export const C1ApiAttributeV1AttributesListComplianceFrameworksRequest$outboundS
     C1ApiAttributeV1AttributesListComplianceFrameworksRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAttributeV1AttributesListComplianceFrameworksRequest
-  > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiAttributeV1AttributesListComplianceFrameworksRequestToJSON(
   c1ApiAttributeV1AttributesListComplianceFrameworksRequest:
@@ -74,20 +76,22 @@ export const C1ApiAttributeV1AttributesListComplianceFrameworksResponse$inboundS
     C1ApiAttributeV1AttributesListComplianceFrameworksResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ListComplianceFrameworksResponse: shared
-      .ListComplianceFrameworksResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ListComplianceFrameworksResponse": "listComplianceFrameworksResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ListComplianceFrameworksResponse: shared
+        .ListComplianceFrameworksResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ListComplianceFrameworksResponse": "listComplianceFrameworksResponse",
+      });
+    })
+  );
 
 export function c1ApiAttributeV1AttributesListComplianceFrameworksResponseFromJSON(
   jsonString: string,

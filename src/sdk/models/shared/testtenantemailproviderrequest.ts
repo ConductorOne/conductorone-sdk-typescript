@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The TestTenantEmailProviderRequest message.
@@ -24,9 +25,11 @@ export const TestTenantEmailProviderRequest$outboundSchema: z.ZodType<
   TestTenantEmailProviderRequest$Outbound,
   z.ZodTypeDef,
   TestTenantEmailProviderRequest
-> = z.object({
-  testRecipientEmail: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    testRecipientEmail: z.string().optional(),
+  })
+);
 
 export function testTenantEmailProviderRequestToJSON(
   testTenantEmailProviderRequest: TestTenantEmailProviderRequest,

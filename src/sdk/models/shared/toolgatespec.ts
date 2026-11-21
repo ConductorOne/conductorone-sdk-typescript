@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -85,23 +85,27 @@ export const ToolGateSpecBuiltInPattern$inboundSchema: z.ZodType<
   ToolGateSpecBuiltInPattern,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ToolGateSpecBuiltInPattern);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ToolGateSpecBuiltInPattern)
+);
 
 /** @internal */
 export const ToolGateSpec$inboundSchema: z.ZodType<
   ToolGateSpec,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  builtInPattern: ToolGateSpecBuiltInPattern$inboundSchema.optional(),
-  celExpression: z.string().optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  grantPolicyParamKey: z.string().optional(),
-  key: z.string().optional(),
-  priority: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    builtInPattern: ToolGateSpecBuiltInPattern$inboundSchema.optional(),
+    celExpression: z.string().optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    enabled: z.boolean().optional(),
+    grantPolicyParamKey: z.string().optional(),
+    key: z.string().optional(),
+    priority: z.number().int().optional(),
+  })
+);
 
 export function toolGateSpecFromJSON(
   jsonString: string,

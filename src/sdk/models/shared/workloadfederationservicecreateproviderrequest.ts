@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -99,8 +100,10 @@ export const WorkloadFederationServiceCreateProviderRequestWellKnownProvider$out
     string,
     z.ZodTypeDef,
     WorkloadFederationServiceCreateProviderRequestWellKnownProvider
-  > = openEnums.outboundSchema(
-    WorkloadFederationServiceCreateProviderRequestWellKnownProvider,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      WorkloadFederationServiceCreateProviderRequestWellKnownProvider,
+    )
   );
 
 /** @internal */
@@ -119,16 +122,18 @@ export const WorkloadFederationServiceCreateProviderRequest$outboundSchema:
     WorkloadFederationServiceCreateProviderRequest$Outbound,
     z.ZodTypeDef,
     WorkloadFederationServiceCreateProviderRequest
-  > = z.object({
-    description: z.string().optional(),
-    displayName: z.string().optional(),
-    issuerUrl: z.string().optional(),
-    oidc: z.nullable(OIDCSettings$outboundSchema).optional(),
-    spiffe: z.nullable(SPIFFESettings$outboundSchema).optional(),
-    wellKnownProvider:
-      WorkloadFederationServiceCreateProviderRequestWellKnownProvider$outboundSchema
-        .optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      description: z.string().optional(),
+      displayName: z.string().optional(),
+      issuerUrl: z.string().optional(),
+      oidc: z.nullable(OIDCSettings$outboundSchema).optional(),
+      spiffe: z.nullable(SPIFFESettings$outboundSchema).optional(),
+      wellKnownProvider:
+        WorkloadFederationServiceCreateProviderRequestWellKnownProvider$outboundSchema
+          .optional(),
+    })
+  );
 
 export function workloadFederationServiceCreateProviderRequestToJSON(
   workloadFederationServiceCreateProviderRequest:

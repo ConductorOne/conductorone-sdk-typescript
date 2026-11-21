@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AnthropicCredentialFormat,
   AnthropicCredentialFormat$Outbound,
@@ -53,14 +54,17 @@ export const ModelAPIKeyServiceCreateRequest$outboundSchema: z.ZodType<
   ModelAPIKeyServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   ModelAPIKeyServiceCreateRequest
-> = z.object({
-  anthropic: z.nullable(AnthropicCredentialFormat$outboundSchema).optional(),
-  appId: z.string().optional(),
-  displayName: z.string().optional(),
-  edgeId: z.string().optional(),
-  expiresTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  scopeCeiling: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    anthropic: z.nullable(AnthropicCredentialFormat$outboundSchema).optional(),
+    appId: z.string().optional(),
+    displayName: z.string().optional(),
+    edgeId: z.string().optional(),
+    expiresTime: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    scopeCeiling: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function modelAPIKeyServiceCreateRequestToJSON(
   modelAPIKeyServiceCreateRequest: ModelAPIKeyServiceCreateRequest,

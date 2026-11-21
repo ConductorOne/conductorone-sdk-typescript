@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -48,9 +48,11 @@ export const C1ApiWorkloadFederationV1WorkloadFederationServiceGetProviderReques
     C1ApiWorkloadFederationV1WorkloadFederationServiceGetProviderRequest$Outbound,
     z.ZodTypeDef,
     C1ApiWorkloadFederationV1WorkloadFederationServiceGetProviderRequest
-  > = z.object({
-    id: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+    })
+  );
 
 export function c1ApiWorkloadFederationV1WorkloadFederationServiceGetProviderRequestToJSON(
   c1ApiWorkloadFederationV1WorkloadFederationServiceGetProviderRequest:
@@ -70,21 +72,23 @@ export const C1ApiWorkloadFederationV1WorkloadFederationServiceGetProviderRespon
     C1ApiWorkloadFederationV1WorkloadFederationServiceGetProviderResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    WorkloadFederationServiceGetProviderResponse: shared
-      .WorkloadFederationServiceGetProviderResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "WorkloadFederationServiceGetProviderResponse":
-        "workloadFederationServiceGetProviderResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      WorkloadFederationServiceGetProviderResponse: shared
+        .WorkloadFederationServiceGetProviderResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "WorkloadFederationServiceGetProviderResponse":
+          "workloadFederationServiceGetProviderResponse",
+      });
+    })
+  );
 
 export function c1ApiWorkloadFederationV1WorkloadFederationServiceGetProviderResponseFromJSON(
   jsonString: string,

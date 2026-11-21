@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The PauseSyncRequest message contains the fields required to pause syncing for a connector.
@@ -17,7 +18,7 @@ export const PauseSyncRequest$outboundSchema: z.ZodType<
   PauseSyncRequest$Outbound,
   z.ZodTypeDef,
   PauseSyncRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function pauseSyncRequestToJSON(
   pauseSyncRequest: PauseSyncRequest,

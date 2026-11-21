@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -50,21 +50,23 @@ export const XAAClientAudienceMapping$inboundSchema: z.ZodType<
   XAAClientAudienceMapping,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  audienceClientId: z.string().optional(),
-  clientKey: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  disabled: z.boolean().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  xaaResourceServerId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    audienceClientId: z.string().optional(),
+    clientKey: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    disabled: z.boolean().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    xaaResourceServerId: z.string().optional(),
+  })
+);
 /** @internal */
 export type XAAClientAudienceMapping$Outbound = {
   audienceClientId?: string | undefined;
@@ -81,15 +83,17 @@ export const XAAClientAudienceMapping$outboundSchema: z.ZodType<
   XAAClientAudienceMapping$Outbound,
   z.ZodTypeDef,
   XAAClientAudienceMapping
-> = z.object({
-  audienceClientId: z.string().optional(),
-  clientKey: z.string().optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  disabled: z.boolean().optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  xaaResourceServerId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    audienceClientId: z.string().optional(),
+    clientKey: z.string().optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    disabled: z.boolean().optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    xaaResourceServerId: z.string().optional(),
+  })
+);
 
 export function xaaClientAudienceMappingToJSON(
   xaaClientAudienceMapping: XAAClientAudienceMapping,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The TunnelCredentialsServiceDeleteBridgeRequest message.
@@ -18,7 +19,7 @@ export const TunnelCredentialsServiceDeleteBridgeRequest$outboundSchema:
     TunnelCredentialsServiceDeleteBridgeRequest$Outbound,
     z.ZodTypeDef,
     TunnelCredentialsServiceDeleteBridgeRequest
-  > = z.object({});
+  > = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function tunnelCredentialsServiceDeleteBridgeRequestToJSON(
   tunnelCredentialsServiceDeleteBridgeRequest:

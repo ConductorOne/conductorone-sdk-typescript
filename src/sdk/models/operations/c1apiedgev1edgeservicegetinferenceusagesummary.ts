@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -18,6 +18,8 @@ export const C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryQueryParamBucket = {
   TbTimeBucketUnspecified: "TB_TIME_BUCKET_UNSPECIFIED",
   TbTimeBucketHour: "TB_TIME_BUCKET_HOUR",
   TbTimeBucketDay: "TB_TIME_BUCKET_DAY",
+  TbTimeBucketFiveMinutes: "TB_TIME_BUCKET_FIVE_MINUTES",
+  TbTimeBucketFifteenMinutes: "TB_TIME_BUCKET_FIFTEEN_MINUTES",
 } as const;
 /**
  * The bucket field.
@@ -104,8 +106,10 @@ export const C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryQueryParamBucket$outb
     string,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryQueryParamBucket
-  > = openEnums.outboundSchema(
-    C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryQueryParamBucket,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryQueryParamBucket,
+    )
   );
 
 /** @internal */
@@ -114,8 +118,10 @@ export const C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryQueryParamDimension$o
     string,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryQueryParamDimension
-  > = openEnums.outboundSchema(
-    C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryQueryParamDimension,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryQueryParamDimension,
+    )
   );
 
 /** @internal */
@@ -136,26 +142,28 @@ export const C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRequest$outboundSchem
     C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRequest$Outbound,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    bucket:
-      C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryQueryParamBucket$outboundSchema
-        .optional(),
-    dimension:
-      C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryQueryParamDimension$outboundSchema
-        .optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    since: z.number().int().transform(v => `${v}`).optional(),
-    until: z.number().int().transform(v => `${v}`).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      bucket:
+        C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryQueryParamBucket$outboundSchema
+          .optional(),
+      dimension:
+        C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryQueryParamDimension$outboundSchema
+          .optional(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      since: z.number().int().transform(v => `${v}`).optional(),
+      until: z.number().int().transform(v => `${v}`).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRequestToJSON(
   c1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRequest:
@@ -174,21 +182,23 @@ export const C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryResponse$inboundSchem
     C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    EdgeServiceGetInferenceUsageSummaryResponse: shared
-      .EdgeServiceGetInferenceUsageSummaryResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "EdgeServiceGetInferenceUsageSummaryResponse":
-        "edgeServiceGetInferenceUsageSummaryResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      EdgeServiceGetInferenceUsageSummaryResponse: shared
+        .EdgeServiceGetInferenceUsageSummaryResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "EdgeServiceGetInferenceUsageSummaryResponse":
+          "edgeServiceGetInferenceUsageSummaryResponse",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryResponseFromJSON(
   jsonString: string,

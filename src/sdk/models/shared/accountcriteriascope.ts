@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -66,52 +66,56 @@ export const AccountDomain$inboundSchema: z.ZodType<
   AccountDomain,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AccountDomain);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(AccountDomain));
 /** @internal */
 export const AccountDomain$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AccountDomain
-> = openEnums.outboundSchema(AccountDomain);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(AccountDomain));
 
 /** @internal */
 export const AccountTypes$inboundSchema: z.ZodType<
   AccountTypes,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AccountTypes);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(AccountTypes));
 /** @internal */
 export const AccountTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AccountTypes
-> = openEnums.outboundSchema(AccountTypes);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(AccountTypes));
 
 /** @internal */
 export const AppUserStatuses$inboundSchema: z.ZodType<
   AppUserStatuses,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AppUserStatuses);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(AppUserStatuses));
 /** @internal */
 export const AppUserStatuses$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AppUserStatuses
-> = openEnums.outboundSchema(AppUserStatuses);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AppUserStatuses)
+);
 
 /** @internal */
 export const AccountCriteriaScope$inboundSchema: z.ZodType<
   AccountCriteriaScope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accountDomain: AccountDomain$inboundSchema.optional(),
-  accountTypes: z.nullable(z.array(AccountTypes$inboundSchema)).optional(),
-  appUserStatuses: z.nullable(z.array(AppUserStatuses$inboundSchema))
-    .optional(),
-  noAccountOwner: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountDomain: AccountDomain$inboundSchema.optional(),
+    accountTypes: z.nullable(z.array(AccountTypes$inboundSchema)).optional(),
+    appUserStatuses: z.nullable(z.array(AppUserStatuses$inboundSchema))
+      .optional(),
+    noAccountOwner: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type AccountCriteriaScope$Outbound = {
   accountDomain?: string | undefined;
@@ -125,13 +129,15 @@ export const AccountCriteriaScope$outboundSchema: z.ZodType<
   AccountCriteriaScope$Outbound,
   z.ZodTypeDef,
   AccountCriteriaScope
-> = z.object({
-  accountDomain: AccountDomain$outboundSchema.optional(),
-  accountTypes: z.nullable(z.array(AccountTypes$outboundSchema)).optional(),
-  appUserStatuses: z.nullable(z.array(AppUserStatuses$outboundSchema))
-    .optional(),
-  noAccountOwner: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountDomain: AccountDomain$outboundSchema.optional(),
+    accountTypes: z.nullable(z.array(AccountTypes$outboundSchema)).optional(),
+    appUserStatuses: z.nullable(z.array(AppUserStatuses$outboundSchema))
+      .optional(),
+    noAccountOwner: z.boolean().optional(),
+  })
+);
 
 export function accountCriteriaScopeToJSON(
   accountCriteriaScope: AccountCriteriaScope,

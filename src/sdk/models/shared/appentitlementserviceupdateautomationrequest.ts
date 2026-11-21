@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppEntitlementAutomationRuleBasic,
   AppEntitlementAutomationRuleBasic$Outbound,
@@ -71,19 +72,22 @@ export const AppEntitlementServiceUpdateAutomationRequest$outboundSchema:
     AppEntitlementServiceUpdateAutomationRequest$Outbound,
     z.ZodTypeDef,
     AppEntitlementServiceUpdateAutomationRequest
-  > = z.object({
-    basic: z.nullable(AppEntitlementAutomationRuleBasic$outboundSchema)
-      .optional(),
-    cel: z.nullable(AppEntitlementAutomationRuleCEL$outboundSchema).optional(),
-    description: z.string().optional(),
-    displayName: z.string().optional(),
-    entitlements: z.nullable(
-      AppEntitlementAutomationRuleEntitlement$outboundSchema,
-    ).optional(),
-    none: z.nullable(AppEntitlementAutomationRuleNone$outboundSchema)
-      .optional(),
-    updateMask: z.nullable(z.string()).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      basic: z.nullable(AppEntitlementAutomationRuleBasic$outboundSchema)
+        .optional(),
+      cel: z.nullable(AppEntitlementAutomationRuleCEL$outboundSchema)
+        .optional(),
+      description: z.string().optional(),
+      displayName: z.string().optional(),
+      entitlements: z.nullable(
+        AppEntitlementAutomationRuleEntitlement$outboundSchema,
+      ).optional(),
+      none: z.nullable(AppEntitlementAutomationRuleNone$outboundSchema)
+        .optional(),
+      updateMask: z.nullable(z.string()).optional(),
+    })
+  );
 
 export function appEntitlementServiceUpdateAutomationRequestToJSON(
   appEntitlementServiceUpdateAutomationRequest:

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { MCPServerView, MCPServerView$inboundSchema } from "./mcpserverview.js";
@@ -24,10 +24,12 @@ export const MCPServerSearchWithToolCountResult$inboundSchema: z.ZodType<
   MCPServerSearchWithToolCountResult,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mcpServer: z.nullable(MCPServerView$inboundSchema).optional(),
-  toolCount: z.string().transform(v => parseInt(v, 10)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mcpServer: z.nullable(MCPServerView$inboundSchema).optional(),
+    toolCount: z.string().transform(v => parseInt(v, 10)).optional(),
+  })
+);
 
 export function mcpServerSearchWithToolCountResultFromJSON(
   jsonString: string,

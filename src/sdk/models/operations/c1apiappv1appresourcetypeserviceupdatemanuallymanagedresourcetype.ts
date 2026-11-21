@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -56,18 +56,20 @@ export const C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRe
     C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    updateManuallyManagedResourceTypeRequest: shared
-      .UpdateManuallyManagedResourceTypeRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      updateManuallyManagedResourceTypeRequest:
-        "UpdateManuallyManagedResourceTypeRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      updateManuallyManagedResourceTypeRequest: shared
+        .UpdateManuallyManagedResourceTypeRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        updateManuallyManagedResourceTypeRequest:
+          "UpdateManuallyManagedResourceTypeRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequestToJSON(
   c1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRequest:
@@ -87,21 +89,23 @@ export const C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeRe
     C1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    UpdateManuallyManagedResourceTypeResponse: shared
-      .UpdateManuallyManagedResourceTypeResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "UpdateManuallyManagedResourceTypeResponse":
-        "updateManuallyManagedResourceTypeResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      UpdateManuallyManagedResourceTypeResponse: shared
+        .UpdateManuallyManagedResourceTypeResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "UpdateManuallyManagedResourceTypeResponse":
+          "updateManuallyManagedResourceTypeResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppResourceTypeServiceUpdateManuallyManagedResourceTypeResponseFromJSON(
   jsonString: string,

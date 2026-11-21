@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -280,111 +280,129 @@ export const AccountDisabledAction$inboundSchema: z.ZodType<
   AccountDisabledAction,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AccountDisabledAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AccountDisabledAction)
+);
 /** @internal */
 export const AccountDisabledAction$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AccountDisabledAction
-> = openEnums.outboundSchema(AccountDisabledAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AccountDisabledAction)
+);
 
 /** @internal */
 export const CredentialChangeAction$inboundSchema: z.ZodType<
   CredentialChangeAction,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(CredentialChangeAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(CredentialChangeAction)
+);
 /** @internal */
 export const CredentialChangeAction$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   CredentialChangeAction
-> = openEnums.outboundSchema(CredentialChangeAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(CredentialChangeAction)
+);
 
 /** @internal */
 export const CredentialCompromiseAction$inboundSchema: z.ZodType<
   CredentialCompromiseAction,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(CredentialCompromiseAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(CredentialCompromiseAction)
+);
 /** @internal */
 export const CredentialCompromiseAction$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   CredentialCompromiseAction
-> = openEnums.outboundSchema(CredentialCompromiseAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(CredentialCompromiseAction)
+);
 
 /** @internal */
 export const DeliveryMethod$inboundSchema: z.ZodType<
   DeliveryMethod,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DeliveryMethod);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(DeliveryMethod));
 /** @internal */
 export const DeliveryMethod$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DeliveryMethod
-> = openEnums.outboundSchema(DeliveryMethod);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(DeliveryMethod));
 
 /** @internal */
 export const SessionRevokedAction$inboundSchema: z.ZodType<
   SessionRevokedAction,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(SessionRevokedAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(SessionRevokedAction)
+);
 /** @internal */
 export const SessionRevokedAction$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SessionRevokedAction
-> = openEnums.outboundSchema(SessionRevokedAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(SessionRevokedAction)
+);
 
 /** @internal */
 export const SSFReceiverStream$inboundSchema: z.ZodType<
   SSFReceiverStream,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accountDisabledAction: AccountDisabledAction$inboundSchema.optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  credentialChangeAction: CredentialChangeAction$inboundSchema.optional(),
-  credentialCompromiseAction: CredentialCompromiseAction$inboundSchema
-    .optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deliveryMethod: DeliveryMethod$inboundSchema.optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  eventTypesEnabled: z.nullable(z.array(z.string())).optional(),
-  expectedAudience: z.string().optional(),
-  id: z.string().optional(),
-  issuerUrl: z.string().optional(),
-  jwksUrl: z.string().optional(),
-  lastErrorAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  lastErrorMessage: z.string().optional(),
-  lastVerifiedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  outboundAuthBearer: z.nullable(SSFOutboundAuthBearer$inboundSchema)
-    .optional(),
-  outboundAuthOauth2: z.nullable(SSFOutboundAuthOAuth2$inboundSchema)
-    .optional(),
-  pollEndpointUrl: z.string().optional(),
-  pollInterval: z.nullable(z.string()).optional(),
-  pushAuthToken: z.string().optional(),
-  pushEndpointUrl: z.string().optional(),
-  sessionRevokedAction: SessionRevokedAction$inboundSchema.optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountDisabledAction: AccountDisabledAction$inboundSchema.optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    credentialChangeAction: CredentialChangeAction$inboundSchema.optional(),
+    credentialCompromiseAction: CredentialCompromiseAction$inboundSchema
+      .optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deliveryMethod: DeliveryMethod$inboundSchema.optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    enabled: z.boolean().optional(),
+    eventTypesEnabled: z.nullable(z.array(z.string())).optional(),
+    expectedAudience: z.string().optional(),
+    id: z.string().optional(),
+    issuerUrl: z.string().optional(),
+    jwksUrl: z.string().optional(),
+    lastErrorAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    lastErrorMessage: z.string().optional(),
+    lastVerifiedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    outboundAuthBearer: z.nullable(SSFOutboundAuthBearer$inboundSchema)
+      .optional(),
+    outboundAuthOauth2: z.nullable(SSFOutboundAuthOAuth2$inboundSchema)
+      .optional(),
+    pollEndpointUrl: z.string().optional(),
+    pollInterval: z.nullable(z.string()).optional(),
+    pushAuthToken: z.string().optional(),
+    pushEndpointUrl: z.string().optional(),
+    sessionRevokedAction: SessionRevokedAction$inboundSchema.optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function ssfReceiverStreamFromJSON(
   jsonString: string,
@@ -426,33 +444,36 @@ export const SSFReceiverStreamInput$outboundSchema: z.ZodType<
   SSFReceiverStreamInput$Outbound,
   z.ZodTypeDef,
   SSFReceiverStreamInput
-> = z.object({
-  accountDisabledAction: AccountDisabledAction$outboundSchema.optional(),
-  credentialChangeAction: CredentialChangeAction$outboundSchema.optional(),
-  credentialCompromiseAction: CredentialCompromiseAction$outboundSchema
-    .optional(),
-  deliveryMethod: DeliveryMethod$outboundSchema.optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  eventTypesEnabled: z.nullable(z.array(z.string())).optional(),
-  expectedAudience: z.string().optional(),
-  id: z.string().optional(),
-  issuerUrl: z.string().optional(),
-  jwksUrl: z.string().optional(),
-  lastErrorAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  lastErrorMessage: z.string().optional(),
-  lastVerifiedAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  outboundAuthBearer: z.nullable(SSFOutboundAuthBearer$outboundSchema)
-    .optional(),
-  outboundAuthOauth2: z.nullable(SSFOutboundAuthOAuth2$outboundSchema)
-    .optional(),
-  pollEndpointUrl: z.string().optional(),
-  pollInterval: z.nullable(z.string()).optional(),
-  pushAuthToken: z.string().optional(),
-  sessionRevokedAction: SessionRevokedAction$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountDisabledAction: AccountDisabledAction$outboundSchema.optional(),
+    credentialChangeAction: CredentialChangeAction$outboundSchema.optional(),
+    credentialCompromiseAction: CredentialCompromiseAction$outboundSchema
+      .optional(),
+    deliveryMethod: DeliveryMethod$outboundSchema.optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    enabled: z.boolean().optional(),
+    eventTypesEnabled: z.nullable(z.array(z.string())).optional(),
+    expectedAudience: z.string().optional(),
+    id: z.string().optional(),
+    issuerUrl: z.string().optional(),
+    jwksUrl: z.string().optional(),
+    lastErrorAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    lastErrorMessage: z.string().optional(),
+    lastVerifiedAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    outboundAuthBearer: z.nullable(SSFOutboundAuthBearer$outboundSchema)
+      .optional(),
+    outboundAuthOauth2: z.nullable(SSFOutboundAuthOAuth2$outboundSchema)
+      .optional(),
+    pollEndpointUrl: z.string().optional(),
+    pollInterval: z.nullable(z.string()).optional(),
+    pushAuthToken: z.string().optional(),
+    sessionRevokedAction: SessionRevokedAction$outboundSchema.optional(),
+  })
+);
 
 export function ssfReceiverStreamInputToJSON(
   ssfReceiverStreamInput: SSFReceiverStreamInput,

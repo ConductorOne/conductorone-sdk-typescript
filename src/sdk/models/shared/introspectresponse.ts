@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -68,24 +68,26 @@ export const DisabledModules$inboundSchema: z.ZodType<
   DisabledModules,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DisabledModules);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(DisabledModules));
 
 /** @internal */
 export const IntrospectResponse$inboundSchema: z.ZodType<
   IntrospectResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  deviceClientId: z.string().optional(),
-  disabledModules: z.nullable(z.array(DisabledModules$inboundSchema))
-    .optional(),
-  features: z.nullable(z.array(z.string())).optional(),
-  permissions: z.nullable(z.array(z.string())).optional(),
-  principleId: z.string().optional(),
-  roles: z.nullable(z.array(z.string())).optional(),
-  tenantId: z.string().optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    deviceClientId: z.string().optional(),
+    disabledModules: z.nullable(z.array(DisabledModules$inboundSchema))
+      .optional(),
+    features: z.nullable(z.array(z.string())).optional(),
+    permissions: z.nullable(z.array(z.string())).optional(),
+    principleId: z.string().optional(),
+    roles: z.nullable(z.array(z.string())).optional(),
+    tenantId: z.string().optional(),
+    userId: z.string().optional(),
+  })
+);
 
 export function introspectResponseFromJSON(
   jsonString: string,

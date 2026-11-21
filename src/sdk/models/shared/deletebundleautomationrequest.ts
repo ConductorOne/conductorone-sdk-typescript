@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The request message for deleting a bundle automation from a catalog.
@@ -17,7 +18,7 @@ export const DeleteBundleAutomationRequest$outboundSchema: z.ZodType<
   DeleteBundleAutomationRequest$Outbound,
   z.ZodTypeDef,
   DeleteBundleAutomationRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function deleteBundleAutomationRequestToJSON(
   deleteBundleAutomationRequest: DeleteBundleAutomationRequest,

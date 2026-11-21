@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { ModelAPIKey, ModelAPIKey$inboundSchema } from "./modelapikey.js";
@@ -36,12 +36,14 @@ export const ModelAPIKeyServiceCreateResponse$inboundSchema: z.ZodType<
   ModelAPIKeyServiceCreateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bearerToken: z.string().optional(),
-  inferenceBaseUrl: z.string().optional(),
-  key: z.nullable(ModelAPIKey$inboundSchema).optional(),
-  resourceUri: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerToken: z.string().optional(),
+    inferenceBaseUrl: z.string().optional(),
+    key: z.nullable(ModelAPIKey$inboundSchema).optional(),
+    resourceUri: z.string().optional(),
+  })
+);
 
 export function modelAPIKeyServiceCreateResponseFromJSON(
   jsonString: string,

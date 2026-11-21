@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * MCPServerAuthBearerToken provides bearer token authentication.
@@ -24,9 +25,11 @@ export const MCPServerAuthBearerToken$outboundSchema: z.ZodType<
   MCPServerAuthBearerToken$Outbound,
   z.ZodTypeDef,
   MCPServerAuthBearerToken
-> = z.object({
-  token: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string().optional(),
+  })
+);
 
 export function mcpServerAuthBearerTokenToJSON(
   mcpServerAuthBearerToken: MCPServerAuthBearerToken,

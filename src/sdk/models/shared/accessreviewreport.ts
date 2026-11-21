@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -71,31 +71,35 @@ export type AccessReviewReport = {
 
 /** @internal */
 export const Format$inboundSchema: z.ZodType<Format, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Format);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Format));
 
 /** @internal */
 export const AccessReviewReportState$inboundSchema: z.ZodType<
   AccessReviewReportState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AccessReviewReportState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AccessReviewReportState)
+);
 
 /** @internal */
 export const AccessReviewReport$inboundSchema: z.ZodType<
   AccessReviewReport,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessReviewId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  downloadUrl: z.string().optional(),
-  format: Format$inboundSchema.optional(),
-  hashes: z.record(z.string()).optional(),
-  id: z.string().optional(),
-  state: AccessReviewReportState$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReviewId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    downloadUrl: z.string().optional(),
+    format: Format$inboundSchema.optional(),
+    hashes: z.record(z.string()).optional(),
+    id: z.string().optional(),
+    state: AccessReviewReportState$inboundSchema.optional(),
+  })
+);
 
 export function accessReviewReportFromJSON(
   jsonString: string,

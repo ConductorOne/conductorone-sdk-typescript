@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AccessScope,
   AccessScope$Outbound,
@@ -61,14 +62,17 @@ export const SearchCohortUsersRequest$outboundSchema: z.ZodType<
   SearchCohortUsersRequest$Outbound,
   z.ZodTypeDef,
   SearchCohortUsersRequest
-> = z.object({
-  accessScope: z.nullable(AccessScope$outboundSchema).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  profileFilters: z.nullable(z.array(ProfileFilter$outboundSchema)).optional(),
-  selectedEntitlements: z.nullable(z.array(EntitlementRef$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessScope: z.nullable(AccessScope$outboundSchema).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    profileFilters: z.nullable(z.array(ProfileFilter$outboundSchema))
+      .optional(),
+    selectedEntitlements: z.nullable(z.array(EntitlementRef$outboundSchema))
+      .optional(),
+  })
+);
 
 export function searchCohortUsersRequestToJSON(
   searchCohortUsersRequest: SearchCohortUsersRequest,

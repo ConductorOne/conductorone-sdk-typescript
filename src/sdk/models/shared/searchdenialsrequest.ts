@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   DenialFilters,
   DenialFilters$Outbound,
@@ -36,11 +37,13 @@ export const SearchDenialsRequest$outboundSchema: z.ZodType<
   SearchDenialsRequest$Outbound,
   z.ZodTypeDef,
   SearchDenialsRequest
-> = z.object({
-  filters: z.nullable(DenialFilters$outboundSchema).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filters: z.nullable(DenialFilters$outboundSchema).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+  })
+);
 
 export function searchDenialsRequestToJSON(
   searchDenialsRequest: SearchDenialsRequest,

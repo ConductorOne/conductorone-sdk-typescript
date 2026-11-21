@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -76,26 +76,28 @@ export const TBAuditAttestationManifest$inboundSchema: z.ZodType<
   TBAuditAttestationManifest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  batchId: z.string().optional(),
-  canon: z.string().optional(),
-  chainSeq: z.string().optional(),
-  firstEventTime: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  instanceId: z.string().optional(),
-  keyId: z.string().optional(),
-  lastEventTime: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  originId: z.string().optional(),
-  prevRoot: z.string().optional(),
-  root: z.string().optional(),
-  rowCount: z.string().optional(),
-  signature: z.string().optional(),
-  tenantId: z.string().optional(),
-  version: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batchId: z.string().optional(),
+    canon: z.string().optional(),
+    chainSeq: z.string().optional(),
+    firstEventTime: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    instanceId: z.string().optional(),
+    keyId: z.string().optional(),
+    lastEventTime: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    originId: z.string().optional(),
+    prevRoot: z.string().optional(),
+    root: z.string().optional(),
+    rowCount: z.string().optional(),
+    signature: z.string().optional(),
+    tenantId: z.string().optional(),
+    version: z.number().int().optional(),
+  })
+);
 
 export function tbAuditAttestationManifestFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -218,88 +218,95 @@ export const DirectoryStatus$inboundSchema: z.ZodType<
   DirectoryStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DirectoryStatus);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(DirectoryStatus));
 
 /** @internal */
 export const Origin$inboundSchema: z.ZodType<Origin, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Origin);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Origin));
 
 /** @internal */
 export const UserSchemasStatus$inboundSchema: z.ZodType<
   UserSchemasStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(UserSchemasStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(UserSchemasStatus)
+);
 /** @internal */
 export const UserSchemasStatus$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   UserSchemasStatus
-> = openEnums.outboundSchema(UserSchemasStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(UserSchemasStatus)
+);
 
 /** @internal */
 export const Type$inboundSchema: z.ZodType<Type, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Type);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Type));
 
 /** @internal */
-export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> = z
-  .object({
-    createdAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    delegatedUserId: z.string().optional(),
-    deletedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    department: z.string().optional(),
-    departmentSources: z.nullable(
-      z.array(UserAttributeMappingSource$inboundSchema),
-    ).optional(),
-    directoryIds: z.nullable(z.array(z.string())).optional(),
-    directoryStatus: DirectoryStatus$inboundSchema.optional(),
-    directoryStatusSources: z.nullable(
-      z.array(UserAttributeMappingSource$inboundSchema),
-    ).optional(),
-    displayName: z.string().optional(),
-    email: z.string().optional(),
-    emailSources: z.nullable(z.array(UserAttributeMappingSource$inboundSchema))
-      .optional(),
-    emails: z.nullable(z.array(z.string())).optional(),
-    employeeIdSources: z.nullable(
-      z.array(UserAttributeMappingSource$inboundSchema),
-    ).optional(),
-    employeeIds: z.nullable(z.array(z.string())).optional(),
-    employmentStatus: z.string().optional(),
-    employmentStatusSources: z.nullable(
-      z.array(UserAttributeMappingSource$inboundSchema),
-    ).optional(),
-    employmentType: z.string().optional(),
-    employmentTypeSources: z.nullable(
-      z.array(UserAttributeMappingSource$inboundSchema),
-    ).optional(),
-    id: z.string().optional(),
-    jobTitle: z.string().optional(),
-    jobTitleSources: z.nullable(
-      z.array(UserAttributeMappingSource$inboundSchema),
-    ).optional(),
-    managerIds: z.nullable(z.array(z.string())).optional(),
-    managerSources: z.nullable(
-      z.array(UserAttributeMappingSource$inboundSchema),
-    ).optional(),
-    origin: Origin$inboundSchema.optional(),
-    profile: z.nullable(z.record(z.any())).optional(),
-    roleIds: z.nullable(z.array(z.string())).optional(),
-    status: UserSchemasStatus$inboundSchema.optional(),
-    type: Type$inboundSchema.optional(),
-    updatedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    username: z.string().optional(),
-    usernameSources: z.nullable(
-      z.array(UserAttributeMappingSource$inboundSchema),
-    ).optional(),
-    usernames: z.nullable(z.array(z.string())).optional(),
-  });
+export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      createdAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      delegatedUserId: z.string().optional(),
+      deletedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      department: z.string().optional(),
+      departmentSources: z.nullable(
+        z.array(UserAttributeMappingSource$inboundSchema),
+      ).optional(),
+      directoryIds: z.nullable(z.array(z.string())).optional(),
+      directoryStatus: DirectoryStatus$inboundSchema.optional(),
+      directoryStatusSources: z.nullable(
+        z.array(UserAttributeMappingSource$inboundSchema),
+      ).optional(),
+      displayName: z.string().optional(),
+      email: z.string().optional(),
+      emailSources: z.nullable(
+        z.array(UserAttributeMappingSource$inboundSchema),
+      ).optional(),
+      emails: z.nullable(z.array(z.string())).optional(),
+      employeeIdSources: z.nullable(
+        z.array(UserAttributeMappingSource$inboundSchema),
+      ).optional(),
+      employeeIds: z.nullable(z.array(z.string())).optional(),
+      employmentStatus: z.string().optional(),
+      employmentStatusSources: z.nullable(
+        z.array(UserAttributeMappingSource$inboundSchema),
+      ).optional(),
+      employmentType: z.string().optional(),
+      employmentTypeSources: z.nullable(
+        z.array(UserAttributeMappingSource$inboundSchema),
+      ).optional(),
+      id: z.string().optional(),
+      jobTitle: z.string().optional(),
+      jobTitleSources: z.nullable(
+        z.array(UserAttributeMappingSource$inboundSchema),
+      ).optional(),
+      managerIds: z.nullable(z.array(z.string())).optional(),
+      managerSources: z.nullable(
+        z.array(UserAttributeMappingSource$inboundSchema),
+      ).optional(),
+      origin: Origin$inboundSchema.optional(),
+      profile: z.nullable(z.record(z.any())).optional(),
+      roleIds: z.nullable(z.array(z.string())).optional(),
+      status: UserSchemasStatus$inboundSchema.optional(),
+      type: Type$inboundSchema.optional(),
+      updatedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      username: z.string().optional(),
+      usernameSources: z.nullable(
+        z.array(UserAttributeMappingSource$inboundSchema),
+      ).optional(),
+      usernames: z.nullable(z.array(z.string())).optional(),
+    })
+  );
 
 export function userFromJSON(
   jsonString: string,
@@ -323,11 +330,13 @@ export const UserInput$outboundSchema: z.ZodType<
   UserInput$Outbound,
   z.ZodTypeDef,
   UserInput
-> = z.object({
-  delegatedUserId: z.string().optional(),
-  roleIds: z.nullable(z.array(z.string())).optional(),
-  status: UserSchemasStatus$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    delegatedUserId: z.string().optional(),
+    roleIds: z.nullable(z.array(z.string())).optional(),
+    status: UserSchemasStatus$outboundSchema.optional(),
+  })
+);
 
 export function userInputToJSON(userInput: UserInput): string {
   return JSON.stringify(UserInput$outboundSchema.parse(userInput));

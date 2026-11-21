@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -121,25 +121,29 @@ export const Operation$inboundSchema: z.ZodType<
   Operation,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Operation);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Operation));
 
 /** @internal */
 export const A2UIProvenanceStepRecordType$inboundSchema: z.ZodType<
   A2UIProvenanceStepRecordType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(A2UIProvenanceStepRecordType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(A2UIProvenanceStepRecordType)
+);
 
 /** @internal */
 export const A2UIProvenanceStep$inboundSchema: z.ZodType<
   A2UIProvenanceStep,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  objects: z.nullable(z.array(A2UIProvenanceObject$inboundSchema)).optional(),
-  operation: Operation$inboundSchema.optional(),
-  recordType: A2UIProvenanceStepRecordType$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    objects: z.nullable(z.array(A2UIProvenanceObject$inboundSchema)).optional(),
+    operation: Operation$inboundSchema.optional(),
+    recordType: A2UIProvenanceStepRecordType$inboundSchema.optional(),
+  })
+);
 
 export function a2UIProvenanceStepFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -61,26 +61,28 @@ export const PolicyRuleMode$inboundSchema: z.ZodType<
   PolicyRuleMode,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(PolicyRuleMode);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(PolicyRuleMode));
 /** @internal */
 export const PolicyRuleMode$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   PolicyRuleMode
-> = openEnums.outboundSchema(PolicyRuleMode);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(PolicyRuleMode));
 
 /** @internal */
 export const PolicyRule$inboundSchema: z.ZodType<
   PolicyRule,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string().optional(),
-  id: z.string().optional(),
-  matchCel: z.string().optional(),
-  mode: PolicyRuleMode$inboundSchema.optional(),
-  outcome: z.nullable(PolicyOutcome$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    id: z.string().optional(),
+    matchCel: z.string().optional(),
+    mode: PolicyRuleMode$inboundSchema.optional(),
+    outcome: z.nullable(PolicyOutcome$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type PolicyRule$Outbound = {
   description?: string | undefined;
@@ -95,13 +97,15 @@ export const PolicyRule$outboundSchema: z.ZodType<
   PolicyRule$Outbound,
   z.ZodTypeDef,
   PolicyRule
-> = z.object({
-  description: z.string().optional(),
-  id: z.string().optional(),
-  matchCel: z.string().optional(),
-  mode: PolicyRuleMode$outboundSchema.optional(),
-  outcome: z.nullable(PolicyOutcome$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    id: z.string().optional(),
+    matchCel: z.string().optional(),
+    mode: PolicyRuleMode$outboundSchema.optional(),
+    outcome: z.nullable(PolicyOutcome$outboundSchema).optional(),
+  })
+);
 
 export function policyRuleToJSON(policyRule: PolicyRule): string {
   return JSON.stringify(PolicyRule$outboundSchema.parse(policyRule));

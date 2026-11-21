@@ -3,8 +3,14 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
+import {
+  MCPResourceRef,
+  MCPResourceRef$Outbound,
+  MCPResourceRef$outboundSchema,
+} from "./mcpresourceref.js";
 
 export const KindFilter = {
   McpResourceKindUnspecified: "MCP_RESOURCE_KIND_UNSPECIFIED",
@@ -16,7 +22,7 @@ export type KindFilter = OpenEnum<typeof KindFilter>;
 /**
  * Sort order for results. UNSPECIFIED sorts by resource name ascending.
  */
-export const SortBy = {
+export const MCPResourceServiceSearchRequestSortBy = {
   McpResourceSortByUnspecified: "MCP_RESOURCE_SORT_BY_UNSPECIFIED",
   McpResourceSortByName: "MCP_RESOURCE_SORT_BY_NAME",
   McpResourceSortByUri: "MCP_RESOURCE_SORT_BY_URI",
@@ -26,12 +32,14 @@ export const SortBy = {
 /**
  * Sort order for results. UNSPECIFIED sorts by resource name ascending.
  */
-export type SortBy = OpenEnum<typeof SortBy>;
+export type MCPResourceServiceSearchRequestSortBy = OpenEnum<
+  typeof MCPResourceServiceSearchRequestSortBy
+>;
 
 /**
  * Direction for sort_by. UNSPECIFIED means ascending.
  */
-export const SortDirection = {
+export const MCPResourceServiceSearchRequestSortDirection = {
   SortDirectionUnspecified: "SORT_DIRECTION_UNSPECIFIED",
   SortDirectionAsc: "SORT_DIRECTION_ASC",
   SortDirectionDesc: "SORT_DIRECTION_DESC",
@@ -39,16 +47,20 @@ export const SortDirection = {
 /**
  * Direction for sort_by. UNSPECIFIED means ascending.
  */
-export type SortDirection = OpenEnum<typeof SortDirection>;
+export type MCPResourceServiceSearchRequestSortDirection = OpenEnum<
+  typeof MCPResourceServiceSearchRequestSortDirection
+>;
 
-export const StateFilter = {
+export const MCPResourceServiceSearchRequestStateFilter = {
   McpResourceStateUnspecified: "MCP_RESOURCE_STATE_UNSPECIFIED",
   McpResourceStatePendingReview: "MCP_RESOURCE_STATE_PENDING_REVIEW",
   McpResourceStateApproved: "MCP_RESOURCE_STATE_APPROVED",
   McpResourceStateDisabled: "MCP_RESOURCE_STATE_DISABLED",
   McpResourceStateRemoved: "MCP_RESOURCE_STATE_REMOVED",
 } as const;
-export type StateFilter = OpenEnum<typeof StateFilter>;
+export type MCPResourceServiceSearchRequestStateFilter = OpenEnum<
+  typeof MCPResourceServiceSearchRequestStateFilter
+>;
 
 /**
  * MCPResourceServiceSearchRequest searches MCP resources with filters.
@@ -80,13 +92,17 @@ export type MCPResourceServiceSearchRequest = {
    */
   query?: string | undefined;
   /**
+   * Optional filter by specific resource refs. Other filters still apply.
+   */
+  refs?: Array<MCPResourceRef> | null | undefined;
+  /**
    * Sort order for results. UNSPECIFIED sorts by resource name ascending.
    */
-  sortBy?: SortBy | undefined;
+  sortBy?: MCPResourceServiceSearchRequestSortBy | undefined;
   /**
    * Direction for sort_by. UNSPECIFIED means ascending.
    */
-  sortDirection?: SortDirection | undefined;
+  sortDirection?: MCPResourceServiceSearchRequestSortDirection | undefined;
   /**
    * Optional filter by resource state. An empty list defaults to
    *
@@ -94,7 +110,10 @@ export type MCPResourceServiceSearchRequest = {
    *  PENDING_REVIEW, APPROVED, and DISABLED (REMOVED is hidden unless
    *  explicitly requested).
    */
-  stateFilter?: Array<StateFilter> | null | undefined;
+  stateFilter?:
+    | Array<MCPResourceServiceSearchRequestStateFilter>
+    | null
+    | undefined;
 };
 
 /** @internal */
@@ -102,25 +121,33 @@ export const KindFilter$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   KindFilter
-> = openEnums.outboundSchema(KindFilter);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(KindFilter));
 
 /** @internal */
-export const SortBy$outboundSchema: z.ZodType<string, z.ZodTypeDef, SortBy> =
-  openEnums.outboundSchema(SortBy);
-
-/** @internal */
-export const SortDirection$outboundSchema: z.ZodType<
+export const MCPResourceServiceSearchRequestSortBy$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
-  SortDirection
-> = openEnums.outboundSchema(SortDirection);
+  MCPResourceServiceSearchRequestSortBy
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(MCPResourceServiceSearchRequestSortBy)
+);
 
 /** @internal */
-export const StateFilter$outboundSchema: z.ZodType<
-  string,
-  z.ZodTypeDef,
-  StateFilter
-> = openEnums.outboundSchema(StateFilter);
+export const MCPResourceServiceSearchRequestSortDirection$outboundSchema:
+  z.ZodType<
+    string,
+    z.ZodTypeDef,
+    MCPResourceServiceSearchRequestSortDirection
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(MCPResourceServiceSearchRequestSortDirection)
+  );
+
+/** @internal */
+export const MCPResourceServiceSearchRequestStateFilter$outboundSchema:
+  z.ZodType<string, z.ZodTypeDef, MCPResourceServiceSearchRequestStateFilter> =
+    /* @__PURE__ */ lazySchema$(() =>
+      openEnums.outboundSchema(MCPResourceServiceSearchRequestStateFilter)
+    );
 
 /** @internal */
 export type MCPResourceServiceSearchRequest$Outbound = {
@@ -129,6 +156,7 @@ export type MCPResourceServiceSearchRequest$Outbound = {
   pageSize?: number | undefined;
   pageToken?: string | undefined;
   query?: string | undefined;
+  refs?: Array<MCPResourceRef$Outbound> | null | undefined;
   sortBy?: string | undefined;
   sortDirection?: string | undefined;
   stateFilter?: Array<string> | null | undefined;
@@ -139,16 +167,22 @@ export const MCPResourceServiceSearchRequest$outboundSchema: z.ZodType<
   MCPResourceServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   MCPResourceServiceSearchRequest
-> = z.object({
-  includeGrantStatus: z.boolean().optional(),
-  kindFilter: z.nullable(z.array(KindFilter$outboundSchema)).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  sortBy: SortBy$outboundSchema.optional(),
-  sortDirection: SortDirection$outboundSchema.optional(),
-  stateFilter: z.nullable(z.array(StateFilter$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    includeGrantStatus: z.boolean().optional(),
+    kindFilter: z.nullable(z.array(KindFilter$outboundSchema)).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    refs: z.nullable(z.array(MCPResourceRef$outboundSchema)).optional(),
+    sortBy: MCPResourceServiceSearchRequestSortBy$outboundSchema.optional(),
+    sortDirection: MCPResourceServiceSearchRequestSortDirection$outboundSchema
+      .optional(),
+    stateFilter: z.nullable(
+      z.array(MCPResourceServiceSearchRequestStateFilter$outboundSchema),
+    ).optional(),
+  })
+);
 
 export function mcpResourceServiceSearchRequestToJSON(
   mcpResourceServiceSearchRequest: MCPResourceServiceSearchRequest,

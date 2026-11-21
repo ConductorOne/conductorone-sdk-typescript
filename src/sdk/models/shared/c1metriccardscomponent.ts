@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { C1ChartSource, C1ChartSource$inboundSchema } from "./c1chartsource.js";
@@ -30,11 +30,13 @@ export const C1MetricCardsComponent$inboundSchema: z.ZodType<
   C1MetricCardsComponent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cards: z.nullable(z.array(C1MetricCard$inboundSchema)).optional(),
-  sources: z.nullable(z.array(C1ChartSource$inboundSchema)).optional(),
-  title: z.nullable(DynamicString$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cards: z.nullable(z.array(C1MetricCard$inboundSchema)).optional(),
+    sources: z.nullable(z.array(C1ChartSource$inboundSchema)).optional(),
+    title: z.nullable(DynamicString$inboundSchema).optional(),
+  })
+);
 
 export function c1MetricCardsComponentFromJSON(
   jsonString: string,

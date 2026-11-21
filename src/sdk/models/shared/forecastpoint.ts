@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,14 +31,16 @@ export const ForecastPoint$inboundSchema: z.ZodType<
   ForecastPoint,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  day: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  p20Nano: z.string().transform(v => parseInt(v, 10)).optional(),
-  p50Nano: z.string().transform(v => parseInt(v, 10)).optional(),
-  p80Nano: z.string().transform(v => parseInt(v, 10)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    day: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    p20Nano: z.string().transform(v => parseInt(v, 10)).optional(),
+    p50Nano: z.string().transform(v => parseInt(v, 10)).optional(),
+    p80Nano: z.string().transform(v => parseInt(v, 10)).optional(),
+  })
+);
 
 export function forecastPointFromJSON(
   jsonString: string,

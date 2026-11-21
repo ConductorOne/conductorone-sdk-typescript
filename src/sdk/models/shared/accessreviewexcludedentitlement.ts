@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -45,23 +45,25 @@ export const AccessReviewExcludedEntitlement$inboundSchema: z.ZodType<
   AccessReviewExcludedEntitlement,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessReviewId: z.string().optional(),
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  appResourceId: z.string().optional(),
-  appResourceTypeId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  tenantId: z.string().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReviewId: z.string().optional(),
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    appResourceId: z.string().optional(),
+    appResourceTypeId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    tenantId: z.string().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function accessReviewExcludedEntitlementFromJSON(
   jsonString: string,

@@ -20,10 +20,12 @@ export class PersonalClient extends ClientSDK {
    * List returns all personal client credentials owned by the calling user.
    */
   async list(
+    request?: operations.C1ApiIamV1PersonalClientServiceListRequest | undefined,
     options?: RequestOptions,
   ): Promise<operations.C1ApiIamV1PersonalClientServiceListResponse> {
     return unwrapAsync(personalClientList(
       this,
+      request,
       options,
     ));
   }

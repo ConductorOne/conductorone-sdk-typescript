@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -70,30 +70,34 @@ export const EdgePublicTrustMetadataState$inboundSchema: z.ZodType<
   EdgePublicTrustMetadataState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EdgePublicTrustMetadataState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(EdgePublicTrustMetadataState)
+);
 
 /** @internal */
 export const EdgePublicTrustMetadata$inboundSchema: z.ZodType<
   EdgePublicTrustMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  bootstrapUri: z.string().optional(),
-  canonicalOrigin: z.string().optional(),
-  edgeId: z.string().optional(),
-  expiresAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  installationId: z.string().optional(),
-  observedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  refreshAfter: z.nullable(z.string()).optional(),
-  state: EdgePublicTrustMetadataState$inboundSchema.optional(),
-  tenantGeneration: z.string().optional(),
-  tenantId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    bootstrapUri: z.string().optional(),
+    canonicalOrigin: z.string().optional(),
+    edgeId: z.string().optional(),
+    expiresAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    installationId: z.string().optional(),
+    observedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    refreshAfter: z.nullable(z.string()).optional(),
+    state: EdgePublicTrustMetadataState$inboundSchema.optional(),
+    tenantGeneration: z.string().optional(),
+    tenantId: z.string().optional(),
+  })
+);
 
 export function edgePublicTrustMetadataFromJSON(
   jsonString: string,

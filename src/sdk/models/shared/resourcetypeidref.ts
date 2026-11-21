@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * A reference to a resource type within an application.
@@ -29,10 +30,12 @@ export const ResourceTypeIdRef$outboundSchema: z.ZodType<
   ResourceTypeIdRef$Outbound,
   z.ZodTypeDef,
   ResourceTypeIdRef
-> = z.object({
-  appId: z.string().optional(),
-  resourceTypeId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    resourceTypeId: z.string().optional(),
+  })
+);
 
 export function resourceTypeIdRefToJSON(
   resourceTypeIdRef: ResourceTypeIdRef,

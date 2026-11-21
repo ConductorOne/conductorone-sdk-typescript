@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -169,8 +170,10 @@ export const RequestCatalogManagementServiceCreateRequestEnrollmentBehavior$outb
     string,
     z.ZodTypeDef,
     RequestCatalogManagementServiceCreateRequestEnrollmentBehavior
-  > = openEnums.outboundSchema(
-    RequestCatalogManagementServiceCreateRequestEnrollmentBehavior,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      RequestCatalogManagementServiceCreateRequestEnrollmentBehavior,
+    )
   );
 
 /** @internal */
@@ -179,8 +182,8 @@ export const RequestCatalogManagementServiceCreateRequestType$outboundSchema:
     string,
     z.ZodTypeDef,
     RequestCatalogManagementServiceCreateRequestType
-  > = openEnums.outboundSchema(
-    RequestCatalogManagementServiceCreateRequestType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(RequestCatalogManagementServiceCreateRequestType)
   );
 
 /** @internal */
@@ -189,8 +192,10 @@ export const RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior$ou
     string,
     z.ZodTypeDef,
     RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior
-  > = openEnums.outboundSchema(
-    RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior,
+    )
   );
 
 /** @internal */
@@ -199,8 +204,10 @@ export const RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlement
     string,
     z.ZodTypeDef,
     RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior
-  > = openEnums.outboundSchema(
-    RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior,
+    )
   );
 
 /** @internal */
@@ -224,26 +231,29 @@ export const RequestCatalogManagementServiceCreateRequest$outboundSchema:
     RequestCatalogManagementServiceCreateRequest$Outbound,
     z.ZodTypeDef,
     RequestCatalogManagementServiceCreateRequest
-  > = z.object({
-    annotations: z.record(z.string()).optional(),
-    description: z.string().optional(),
-    displayName: z.string(),
-    enrollmentBehavior:
-      RequestCatalogManagementServiceCreateRequestEnrollmentBehavior$outboundSchema
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      annotations: z.record(z.string()).optional(),
+      description: z.string().optional(),
+      displayName: z.string(),
+      enrollmentBehavior:
+        RequestCatalogManagementServiceCreateRequestEnrollmentBehavior$outboundSchema
+          .optional(),
+      expandMask: z.nullable(RequestCatalogExpandMask$outboundSchema)
         .optional(),
-    expandMask: z.nullable(RequestCatalogExpandMask$outboundSchema).optional(),
-    published: z.boolean().optional(),
-    requestBundle: z.boolean().optional(),
-    type: RequestCatalogManagementServiceCreateRequestType$outboundSchema
-      .optional(),
-    unenrollmentBehavior:
-      RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior$outboundSchema
+      published: z.boolean().optional(),
+      requestBundle: z.boolean().optional(),
+      type: RequestCatalogManagementServiceCreateRequestType$outboundSchema
         .optional(),
-    unenrollmentEntitlementBehavior:
-      RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior$outboundSchema
-        .optional(),
-    visibleToEveryone: z.boolean().optional(),
-  });
+      unenrollmentBehavior:
+        RequestCatalogManagementServiceCreateRequestUnenrollmentBehavior$outboundSchema
+          .optional(),
+      unenrollmentEntitlementBehavior:
+        RequestCatalogManagementServiceCreateRequestUnenrollmentEntitlementBehavior$outboundSchema
+          .optional(),
+      visibleToEveryone: z.boolean().optional(),
+    })
+  );
 
 export function requestCatalogManagementServiceCreateRequestToJSON(
   requestCatalogManagementServiceCreateRequest:

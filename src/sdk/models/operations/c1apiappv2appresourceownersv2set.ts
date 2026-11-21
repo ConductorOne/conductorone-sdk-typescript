@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,20 +54,22 @@ export const C1ApiAppV2AppResourceOwnersV2SetRequest$outboundSchema: z.ZodType<
   C1ApiAppV2AppResourceOwnersV2SetRequest$Outbound,
   z.ZodTypeDef,
   C1ApiAppV2AppResourceOwnersV2SetRequest
-> = z.object({
-  appId: z.string(),
-  resourceTypeId: z.string(),
-  resourceId: z.string(),
-  setAppResourceOwnersV2Request: shared
-    .SetAppResourceOwnersV2Request$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    appId: "app_id",
-    resourceTypeId: "resource_type_id",
-    resourceId: "resource_id",
-    setAppResourceOwnersV2Request: "SetAppResourceOwnersV2Request",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string(),
+    resourceTypeId: z.string(),
+    resourceId: z.string(),
+    setAppResourceOwnersV2Request: shared
+      .SetAppResourceOwnersV2Request$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      appId: "app_id",
+      resourceTypeId: "resource_type_id",
+      resourceId: "resource_id",
+      setAppResourceOwnersV2Request: "SetAppResourceOwnersV2Request",
+    });
+  })
+);
 
 export function c1ApiAppV2AppResourceOwnersV2SetRequestToJSON(
   c1ApiAppV2AppResourceOwnersV2SetRequest:
@@ -85,20 +87,22 @@ export const C1ApiAppV2AppResourceOwnersV2SetResponse$inboundSchema: z.ZodType<
   C1ApiAppV2AppResourceOwnersV2SetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  SetAppResourceOwnersV2Response: shared
-    .SetAppResourceOwnersV2Response$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "SetAppResourceOwnersV2Response": "setAppResourceOwnersV2Response",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    SetAppResourceOwnersV2Response: shared
+      .SetAppResourceOwnersV2Response$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "SetAppResourceOwnersV2Response": "setAppResourceOwnersV2Response",
+    });
+  })
+);
 
 export function c1ApiAppV2AppResourceOwnersV2SetResponseFromJSON(
   jsonString: string,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   ConnectorExpandMask,
   ConnectorExpandMask$Outbound,
@@ -55,18 +56,20 @@ export const ConnectorServiceCreateRequestConfig$outboundSchema: z.ZodType<
   ConnectorServiceCreateRequestConfig$Outbound,
   z.ZodTypeDef,
   ConnectorServiceCreateRequestConfig
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    atType: z.string().optional(),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        atType: "@type",
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function connectorServiceCreateRequestConfigToJSON(
   connectorServiceCreateRequestConfig: ConnectorServiceCreateRequestConfig,
@@ -92,15 +95,17 @@ export const ConnectorServiceCreateRequest$outboundSchema: z.ZodType<
   ConnectorServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   ConnectorServiceCreateRequest
-> = z.object({
-  catalogId: z.string().optional(),
-  config: z.nullable(
-    z.lazy(() => ConnectorServiceCreateRequestConfig$outboundSchema),
-  ).optional(),
-  description: z.string().optional(),
-  expandMask: z.nullable(ConnectorExpandMask$outboundSchema).optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    catalogId: z.string().optional(),
+    config: z.nullable(
+      z.lazy(() => ConnectorServiceCreateRequestConfig$outboundSchema),
+    ).optional(),
+    description: z.string().optional(),
+    expandMask: z.nullable(ConnectorExpandMask$outboundSchema).optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function connectorServiceCreateRequestToJSON(
   connectorServiceCreateRequest: ConnectorServiceCreateRequest,

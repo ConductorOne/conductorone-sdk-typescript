@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ConfirmSyncValidRequest message contains the fields required to confirm a sync as valid.
@@ -17,7 +18,7 @@ export const ConfirmSyncValidRequest$outboundSchema: z.ZodType<
   ConfirmSyncValidRequest$Outbound,
   z.ZodTypeDef,
   ConfirmSyncValidRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function confirmSyncValidRequestToJSON(
   confirmSyncValidRequest: ConfirmSyncValidRequest,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   SSOApplicationOIDCClientConfig,
   SSOApplicationOIDCClientConfig$Outbound,
@@ -34,10 +35,12 @@ export const SSOApplicationServiceUpdateClientRequest$outboundSchema: z.ZodType<
   SSOApplicationServiceUpdateClientRequest$Outbound,
   z.ZodTypeDef,
   SSOApplicationServiceUpdateClientRequest
-> = z.object({
-  client: z.nullable(SSOApplicationOIDCClientConfig$outboundSchema),
-  clientId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    client: z.nullable(SSOApplicationOIDCClientConfig$outboundSchema),
+    clientId: z.string(),
+  })
+);
 
 export function ssoApplicationServiceUpdateClientRequestToJSON(
   ssoApplicationServiceUpdateClientRequest:

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -53,18 +53,20 @@ export const C1ApiAppV1AppEntitlementOwnersDeleteRequest$outboundSchema:
     C1ApiAppV1AppEntitlementOwnersDeleteRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementOwnersDeleteRequest
-  > = z.object({
-    appId: z.string(),
-    entitlementId: z.string(),
-    deleteAppEntitlementOwnersRequest: shared
-      .DeleteAppEntitlementOwnersRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      entitlementId: "entitlement_id",
-      deleteAppEntitlementOwnersRequest: "DeleteAppEntitlementOwnersRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      entitlementId: z.string(),
+      deleteAppEntitlementOwnersRequest: shared
+        .DeleteAppEntitlementOwnersRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        entitlementId: "entitlement_id",
+        deleteAppEntitlementOwnersRequest: "DeleteAppEntitlementOwnersRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementOwnersDeleteRequestToJSON(
   c1ApiAppV1AppEntitlementOwnersDeleteRequest:
@@ -83,21 +85,23 @@ export const C1ApiAppV1AppEntitlementOwnersDeleteResponse$inboundSchema:
     C1ApiAppV1AppEntitlementOwnersDeleteResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    DeleteAppEntitlementOwnersResponse: shared
-      .DeleteAppEntitlementOwnersResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "DeleteAppEntitlementOwnersResponse":
-        "deleteAppEntitlementOwnersResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      DeleteAppEntitlementOwnersResponse: shared
+        .DeleteAppEntitlementOwnersResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "DeleteAppEntitlementOwnersResponse":
+          "deleteAppEntitlementOwnersResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementOwnersDeleteResponseFromJSON(
   jsonString: string,

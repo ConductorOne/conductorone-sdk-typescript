@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const ResolvedAmount$inboundSchema: z.ZodType<
   ResolvedAmount,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  amountNano: z.string().transform(v => parseInt(v, 10)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    amountNano: z.string().transform(v => parseInt(v, 10)).optional(),
+  })
+);
 
 export function resolvedAmountFromJSON(
   jsonString: string,

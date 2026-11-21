@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -58,22 +58,24 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceSearchScopeRole
     C1ApiRequestcatalogV1RequestCatalogManagementServiceSearchScopeRoleBindingsPerCatalogRequest$Outbound,
     z.ZodTypeDef,
     C1ApiRequestcatalogV1RequestCatalogManagementServiceSearchScopeRoleBindingsPerCatalogRequest
-  > = z.object({
-    catalogId: z.string(),
-    appId: z.string().optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    query: z.string().optional(),
-    resourceTypeId: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      catalogId: "catalog_id",
-      appId: "app_id",
-      pageSize: "page_size",
-      pageToken: "page_token",
-      resourceTypeId: "resource_type_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      catalogId: z.string(),
+      appId: z.string().optional(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      query: z.string().optional(),
+      resourceTypeId: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        catalogId: "catalog_id",
+        appId: "app_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+        resourceTypeId: "resource_type_id",
+      });
+    })
+  );
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceSearchScopeRoleBindingsPerCatalogRequestToJSON(
   c1ApiRequestcatalogV1RequestCatalogManagementServiceSearchScopeRoleBindingsPerCatalogRequest:
@@ -93,23 +95,25 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceSearchScopeRole
     C1ApiRequestcatalogV1RequestCatalogManagementServiceSearchScopeRoleBindingsPerCatalogResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    RequestCatalogManagementServiceSearchScopeRoleBindingsPerCatalogResponse:
-      shared
-        .RequestCatalogManagementServiceSearchScopeRoleBindingsPerCatalogResponse$inboundSchema
-        .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "RequestCatalogManagementServiceSearchScopeRoleBindingsPerCatalogResponse":
-        "requestCatalogManagementServiceSearchScopeRoleBindingsPerCatalogResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      RequestCatalogManagementServiceSearchScopeRoleBindingsPerCatalogResponse:
+        shared
+          .RequestCatalogManagementServiceSearchScopeRoleBindingsPerCatalogResponse$inboundSchema
+          .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "RequestCatalogManagementServiceSearchScopeRoleBindingsPerCatalogResponse":
+          "requestCatalogManagementServiceSearchScopeRoleBindingsPerCatalogResponse",
+      });
+    })
+  );
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceSearchScopeRoleBindingsPerCatalogResponseFromJSON(
   jsonString: string,

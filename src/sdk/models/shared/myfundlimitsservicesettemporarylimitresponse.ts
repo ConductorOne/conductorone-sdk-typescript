@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { MyFundLimit, MyFundLimit$inboundSchema } from "./myfundlimit.js";
@@ -21,9 +21,11 @@ export const MyFundLimitsServiceSetTemporaryLimitResponse$inboundSchema:
     MyFundLimitsServiceSetTemporaryLimitResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    limit: z.nullable(MyFundLimit$inboundSchema).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      limit: z.nullable(MyFundLimit$inboundSchema).optional(),
+    })
+  );
 
 export function myFundLimitsServiceSetTemporaryLimitResponseFromJSON(
   jsonString: string,

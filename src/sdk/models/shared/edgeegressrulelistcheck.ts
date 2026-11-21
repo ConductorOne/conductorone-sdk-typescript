@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -41,11 +41,15 @@ export const EdgeEgressRuleListCheck$inboundSchema: z.ZodType<
   EdgeEgressRuleListCheck,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  problems: z.nullable(z.array(EdgeEgressRuleProblem$inboundSchema)).optional(),
-  valid: z.boolean().optional(),
-  warnings: z.nullable(z.array(EdgeEgressRuleWarning$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    problems: z.nullable(z.array(EdgeEgressRuleProblem$inboundSchema))
+      .optional(),
+    valid: z.boolean().optional(),
+    warnings: z.nullable(z.array(EdgeEgressRuleWarning$inboundSchema))
+      .optional(),
+  })
+);
 
 export function edgeEgressRuleListCheckFromJSON(
   jsonString: string,

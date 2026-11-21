@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   MCPResourceInput,
   MCPResourceInput$Outbound,
@@ -28,10 +29,12 @@ export const MCPResourceServiceUpdateRequest$outboundSchema: z.ZodType<
   MCPResourceServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   MCPResourceServiceUpdateRequest
-> = z.object({
-  resource: z.nullable(MCPResourceInput$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    resource: z.nullable(MCPResourceInput$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function mcpResourceServiceUpdateRequestToJSON(
   mcpResourceServiceUpdateRequest: MCPResourceServiceUpdateRequest,

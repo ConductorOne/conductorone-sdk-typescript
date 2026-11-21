@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,12 +34,14 @@ export const ExternalTicketProvision$inboundSchema: z.ZodType<
   ExternalTicketProvision,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  connectorId: z.string().optional(),
-  externalTicketProvisionerConfigId: z.string().optional(),
-  instructions: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    connectorId: z.string().optional(),
+    externalTicketProvisionerConfigId: z.string().optional(),
+    instructions: z.string().optional(),
+  })
+);
 /** @internal */
 export type ExternalTicketProvision$Outbound = {
   appId?: string | undefined;
@@ -53,12 +55,14 @@ export const ExternalTicketProvision$outboundSchema: z.ZodType<
   ExternalTicketProvision$Outbound,
   z.ZodTypeDef,
   ExternalTicketProvision
-> = z.object({
-  appId: z.string().optional(),
-  connectorId: z.string().optional(),
-  externalTicketProvisionerConfigId: z.string().optional(),
-  instructions: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    connectorId: z.string().optional(),
+    externalTicketProvisionerConfigId: z.string().optional(),
+    instructions: z.string().optional(),
+  })
+);
 
 export function externalTicketProvisionToJSON(
   externalTicketProvision: ExternalTicketProvision,

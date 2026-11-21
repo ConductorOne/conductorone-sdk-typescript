@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -177,55 +177,66 @@ export const TaskTypeActionOutcome$inboundSchema: z.ZodType<
   TaskTypeActionOutcome,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TaskTypeActionOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(TaskTypeActionOutcome)
+);
 /** @internal */
 export const TaskTypeActionOutcome$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   TaskTypeActionOutcome
-> = openEnums.outboundSchema(TaskTypeActionOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(TaskTypeActionOutcome)
+);
 
 /** @internal */
 export const TaskTypeActionType$inboundSchema: z.ZodType<
   TaskTypeActionType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TaskTypeActionType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(TaskTypeActionType)
+);
 /** @internal */
 export const TaskTypeActionType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   TaskTypeActionType
-> = openEnums.outboundSchema(TaskTypeActionType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(TaskTypeActionType)
+);
 
 /** @internal */
 export const TaskTypeAction$inboundSchema: z.ZodType<
   TaskTypeAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessProfileComponent: z.nullable(AccessProfileComponentTarget$inboundSchema)
-    .optional(),
-  actionId: z.string().optional(),
-  actionInstance: z.nullable(TaskActionInstance$inboundSchema).optional(),
-  createdAppEntitlementIds: z.nullable(z.array(z.string())).optional(),
-  createdAppResourceId: z.string().optional(),
-  createdAppResourceTypeId: z.string().optional(),
-  credentialIssue: z.nullable(CredentialIssueTarget$inboundSchema).optional(),
-  displayName: z.string().optional(),
-  finding: z.nullable(FindingTarget$inboundSchema).optional(),
-  formValues: z.nullable(z.record(z.any())).optional(),
-  outcome: TaskTypeActionOutcome$inboundSchema.optional(),
-  outcomeTime: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  partialResult: z.boolean().optional(),
-  scopeRole: z.nullable(ScopeRole$inboundSchema).optional(),
-  source: z.nullable(TaskActionSource$inboundSchema).optional(),
-  toolCall: z.nullable(GatedToolCallTarget$inboundSchema).optional(),
-  type: TaskTypeActionType$inboundSchema.optional(),
-  unaddedMemberCount: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessProfileComponent: z.nullable(
+      AccessProfileComponentTarget$inboundSchema,
+    ).optional(),
+    actionId: z.string().optional(),
+    actionInstance: z.nullable(TaskActionInstance$inboundSchema).optional(),
+    createdAppEntitlementIds: z.nullable(z.array(z.string())).optional(),
+    createdAppResourceId: z.string().optional(),
+    createdAppResourceTypeId: z.string().optional(),
+    credentialIssue: z.nullable(CredentialIssueTarget$inboundSchema).optional(),
+    displayName: z.string().optional(),
+    finding: z.nullable(FindingTarget$inboundSchema).optional(),
+    formValues: z.nullable(z.record(z.any())).optional(),
+    outcome: TaskTypeActionOutcome$inboundSchema.optional(),
+    outcomeTime: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    partialResult: z.boolean().optional(),
+    scopeRole: z.nullable(ScopeRole$inboundSchema).optional(),
+    source: z.nullable(TaskActionSource$inboundSchema).optional(),
+    toolCall: z.nullable(GatedToolCallTarget$inboundSchema).optional(),
+    type: TaskTypeActionType$inboundSchema.optional(),
+    unaddedMemberCount: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type TaskTypeAction$Outbound = {
   accessProfileComponent?:
@@ -256,28 +267,32 @@ export const TaskTypeAction$outboundSchema: z.ZodType<
   TaskTypeAction$Outbound,
   z.ZodTypeDef,
   TaskTypeAction
-> = z.object({
-  accessProfileComponent: z.nullable(
-    AccessProfileComponentTarget$outboundSchema,
-  ).optional(),
-  actionId: z.string().optional(),
-  actionInstance: z.nullable(TaskActionInstance$outboundSchema).optional(),
-  createdAppEntitlementIds: z.nullable(z.array(z.string())).optional(),
-  createdAppResourceId: z.string().optional(),
-  createdAppResourceTypeId: z.string().optional(),
-  credentialIssue: z.nullable(CredentialIssueTarget$outboundSchema).optional(),
-  displayName: z.string().optional(),
-  finding: z.nullable(FindingTarget$outboundSchema).optional(),
-  formValues: z.nullable(z.record(z.any())).optional(),
-  outcome: TaskTypeActionOutcome$outboundSchema.optional(),
-  outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  partialResult: z.boolean().optional(),
-  scopeRole: z.nullable(ScopeRole$outboundSchema).optional(),
-  source: z.nullable(TaskActionSource$outboundSchema).optional(),
-  toolCall: z.nullable(GatedToolCallTarget$outboundSchema).optional(),
-  type: TaskTypeActionType$outboundSchema.optional(),
-  unaddedMemberCount: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessProfileComponent: z.nullable(
+      AccessProfileComponentTarget$outboundSchema,
+    ).optional(),
+    actionId: z.string().optional(),
+    actionInstance: z.nullable(TaskActionInstance$outboundSchema).optional(),
+    createdAppEntitlementIds: z.nullable(z.array(z.string())).optional(),
+    createdAppResourceId: z.string().optional(),
+    createdAppResourceTypeId: z.string().optional(),
+    credentialIssue: z.nullable(CredentialIssueTarget$outboundSchema)
+      .optional(),
+    displayName: z.string().optional(),
+    finding: z.nullable(FindingTarget$outboundSchema).optional(),
+    formValues: z.nullable(z.record(z.any())).optional(),
+    outcome: TaskTypeActionOutcome$outboundSchema.optional(),
+    outcomeTime: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    partialResult: z.boolean().optional(),
+    scopeRole: z.nullable(ScopeRole$outboundSchema).optional(),
+    source: z.nullable(TaskActionSource$outboundSchema).optional(),
+    toolCall: z.nullable(GatedToolCallTarget$outboundSchema).optional(),
+    type: TaskTypeActionType$outboundSchema.optional(),
+    unaddedMemberCount: z.number().int().optional(),
+  })
+);
 
 export function taskTypeActionToJSON(taskTypeAction: TaskTypeAction): string {
   return JSON.stringify(TaskTypeAction$outboundSchema.parse(taskTypeAction));

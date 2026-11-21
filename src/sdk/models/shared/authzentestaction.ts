@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * AuthzenTestAction identifies the AuthZEN action for a test evaluation.
@@ -24,9 +25,11 @@ export const AuthzenTestAction$outboundSchema: z.ZodType<
   AuthzenTestAction$Outbound,
   z.ZodTypeDef,
   AuthzenTestAction
-> = z.object({
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+  })
+);
 
 export function authzenTestActionToJSON(
   authzenTestAction: AuthzenTestAction,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,12 +34,14 @@ export const UserProperties$inboundSchema: z.ZodType<
   UserProperties,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  displayNameCel: z.string().optional(),
-  emailCel: z.string().optional(),
-  profileAttributeCel: z.string().optional(),
-  usernameCel: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayNameCel: z.string().optional(),
+    emailCel: z.string().optional(),
+    profileAttributeCel: z.string().optional(),
+    usernameCel: z.string().optional(),
+  })
+);
 /** @internal */
 export type UserProperties$Outbound = {
   displayNameCel?: string | undefined;
@@ -53,12 +55,14 @@ export const UserProperties$outboundSchema: z.ZodType<
   UserProperties$Outbound,
   z.ZodTypeDef,
   UserProperties
-> = z.object({
-  displayNameCel: z.string().optional(),
-  emailCel: z.string().optional(),
-  profileAttributeCel: z.string().optional(),
-  usernameCel: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayNameCel: z.string().optional(),
+    emailCel: z.string().optional(),
+    profileAttributeCel: z.string().optional(),
+    usernameCel: z.string().optional(),
+  })
+);
 
 export function userPropertiesToJSON(userProperties: UserProperties): string {
   return JSON.stringify(UserProperties$outboundSchema.parse(userProperties));

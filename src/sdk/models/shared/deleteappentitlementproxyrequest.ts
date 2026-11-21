@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The request message for deleting an entitlement proxy binding.
@@ -17,7 +18,7 @@ export const DeleteAppEntitlementProxyRequest$outboundSchema: z.ZodType<
   DeleteAppEntitlementProxyRequest$Outbound,
   z.ZodTypeDef,
   DeleteAppEntitlementProxyRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function deleteAppEntitlementProxyRequestToJSON(
   deleteAppEntitlementProxyRequest: DeleteAppEntitlementProxyRequest,

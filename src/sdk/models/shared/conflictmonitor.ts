@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -60,26 +60,29 @@ export const ConflictMonitor$inboundSchema: z.ZodType<
   ConflictMonitor,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  entitlementSetAId: z.string().optional(),
-  entitlementSetBId: z.string().optional(),
-  id: z.string().optional(),
-  negateGroupB: z.boolean().optional(),
-  notificationConfig: z.nullable(AccessConflictNotificationConfig$inboundSchema)
-    .optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    enabled: z.boolean().optional(),
+    entitlementSetAId: z.string().optional(),
+    entitlementSetBId: z.string().optional(),
+    id: z.string().optional(),
+    negateGroupB: z.boolean().optional(),
+    notificationConfig: z.nullable(
+      AccessConflictNotificationConfig$inboundSchema,
+    ).optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function conflictMonitorFromJSON(
   jsonString: string,

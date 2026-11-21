@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Artifact is audience-visible catalog metadata, not an authoring package.
@@ -40,11 +41,13 @@ export const ArtifactInput$outboundSchema: z.ZodType<
   ArtifactInput$Outbound,
   z.ZodTypeDef,
   ArtifactInput
-> = z.object({
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  tags: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    tags: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function artifactInputToJSON(artifactInput: ArtifactInput): string {
   return JSON.stringify(ArtifactInput$outboundSchema.parse(artifactInput));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { C1ChartPoint, C1ChartPoint$inboundSchema } from "./c1chartpoint.js";
@@ -31,11 +31,13 @@ export const C1ChartSeries$inboundSchema: z.ZodType<
   C1ChartSeries,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  displayName: z.string().optional(),
-  key: z.string().optional(),
-  points: z.nullable(z.array(C1ChartPoint$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    key: z.string().optional(),
+    points: z.nullable(z.array(C1ChartPoint$inboundSchema)).optional(),
+  })
+);
 
 export function c1ChartSeriesFromJSON(
   jsonString: string,

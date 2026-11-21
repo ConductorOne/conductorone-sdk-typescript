@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -34,11 +34,13 @@ export const RoleMiningManagementConfig$inboundSchema: z.ZodType<
   RoleMiningManagementConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cohortHints: z.nullable(z.array(CohortHintView$inboundSchema)).optional(),
-  maxSuggestions: z.number().int().optional(),
-  minCohortSize: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cohortHints: z.nullable(z.array(CohortHintView$inboundSchema)).optional(),
+    maxSuggestions: z.number().int().optional(),
+    minCohortSize: z.number().int().optional(),
+  })
+);
 
 export function roleMiningManagementConfigFromJSON(
   jsonString: string,

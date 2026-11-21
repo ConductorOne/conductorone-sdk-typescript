@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const AppUserTarget$inboundSchema: z.ZodType<
   AppUserTarget,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  appUserId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    appUserId: z.string().optional(),
+  })
+);
 /** @internal */
 export type AppUserTarget$Outbound = {
   appId?: string | undefined;
@@ -41,10 +43,12 @@ export const AppUserTarget$outboundSchema: z.ZodType<
   AppUserTarget$Outbound,
   z.ZodTypeDef,
   AppUserTarget
-> = z.object({
-  appId: z.string().optional(),
-  appUserId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    appUserId: z.string().optional(),
+  })
+);
 
 export function appUserTargetToJSON(appUserTarget: AppUserTarget): string {
   return JSON.stringify(AppUserTarget$outboundSchema.parse(appUserTarget));

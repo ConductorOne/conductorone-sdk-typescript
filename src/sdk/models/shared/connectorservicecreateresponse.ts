@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -39,17 +40,19 @@ export const ConnectorServiceCreateResponseExpanded$inboundSchema: z.ZodType<
   ConnectorServiceCreateResponseExpanded,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    "@type": z.string().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "@type": "atType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      "@type": z.string().optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "@type": "atType",
+    });
+  })
+);
 
 export function connectorServiceCreateResponseExpandedFromJSON(
   jsonString: string,
@@ -67,12 +70,16 @@ export const ConnectorServiceCreateResponse$inboundSchema: z.ZodType<
   ConnectorServiceCreateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  connectorView: z.nullable(ConnectorView$inboundSchema).optional(),
-  expanded: z.nullable(
-    z.array(z.lazy(() => ConnectorServiceCreateResponseExpanded$inboundSchema)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connectorView: z.nullable(ConnectorView$inboundSchema).optional(),
+    expanded: z.nullable(
+      z.array(
+        z.lazy(() => ConnectorServiceCreateResponseExpanded$inboundSchema),
+      ),
+    ).optional(),
+  })
+);
 
 export function connectorServiceCreateResponseFromJSON(
   jsonString: string,

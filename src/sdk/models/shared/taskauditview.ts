@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -564,193 +564,209 @@ export const CurrentState$inboundSchema: z.ZodType<
   CurrentState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(CurrentState);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(CurrentState));
 
 /** @internal */
 export const TaskAuditViewEventType$inboundSchema: z.ZodType<
   TaskAuditViewEventType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TaskAuditViewEventType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(TaskAuditViewEventType)
+);
 
 /** @internal */
 export const TaskAuditViewSource$inboundSchema: z.ZodType<
   TaskAuditViewSource,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TaskAuditViewSource);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(TaskAuditViewSource)
+);
 
 /** @internal */
 export const TaskAuditView$inboundSchema: z.ZodType<
   TaskAuditView,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessRequestOutcome: z.nullable(TaskAuditAccessRequestOutcome$inboundSchema)
-    .optional(),
-  accountDeleted: z.nullable(TaskAuditAccountDeleted$inboundSchema).optional(),
-  accountLifecycleActionCreated: z.nullable(
-    TaskAuditAccountLifecycleActionCreated$inboundSchema,
-  ).optional(),
-  accountLifecycleActionFailed: z.nullable(
-    TaskAuditAccountLifecycleActionFailed$inboundSchema,
-  ).optional(),
-  actionInstanceCreated: z.nullable(
-    TaskAuditActionInstanceCreated$inboundSchema,
-  ).optional(),
-  actionInstanceFailed: z.nullable(TaskAuditActionInstanceFailed$inboundSchema)
-    .optional(),
-  actionInstanceSucceeded: z.nullable(
-    TaskAuditActionInstanceSucceeded$inboundSchema,
-  ).optional(),
-  actionOutcome: z.nullable(TaskAuditActionOutcome$inboundSchema).optional(),
-  actionResult: z.nullable(TaskAuditConnectorActionResult$inboundSchema)
-    .optional(),
-  actionSubmitted: z.nullable(TaskAuditActionSubmitted$inboundSchema)
-    .optional(),
-  approvalAutoAcceptedByPolicy: z.nullable(
-    TaskAuditApprovalAutoAcceptedByPolicy$inboundSchema,
-  ).optional(),
-  approvalAutoRejectedByPolicy: z.nullable(
-    TaskAuditApprovalAutoRejectedByPolicy$inboundSchema,
-  ).optional(),
-  approvalInstanceChange: z.nullable(
-    TaskAuditApprovalInstanceChange$inboundSchema,
-  ).optional(),
-  approvalReassigned: z.nullable(
-    TaskAuditPolicyApprovalReassigned$inboundSchema,
-  ).optional(),
-  approvedAutomatically: z.nullable(
-    TaskAuditApprovalHappenedAutomatically$inboundSchema,
-  ).optional(),
-  automationTriggered: z.nullable(TaskAuditAutomationTriggered$inboundSchema)
-    .optional(),
-  bulkActionError: z.nullable(TaskAuditBulkActionError$inboundSchema)
-    .optional(),
-  certifyOutcome: z.nullable(TaskAuditCertifyOutcome$inboundSchema).optional(),
-  comment: z.nullable(TaskAuditComment$inboundSchema).optional(),
-  conditionalPolicyExecutionResult: z.nullable(
-    TaskAuditConditionalPolicyExecutionResult$inboundSchema,
-  ).optional(),
-  connectorActionsEnd: z.nullable(
-    TaskAuditFinishedConnectorActions$inboundSchema,
-  ).optional(),
-  connectorActionsStart: z.nullable(
-    TaskAuditStartedConnectorActions$inboundSchema,
-  ).optional(),
-  created: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  createdReplacementExtensionGrantTask: z.nullable(
-    TaskAuditCreatedReplacementExtensionGrantTask$inboundSchema,
-  ).optional(),
-  currentState: CurrentState$inboundSchema.optional(),
-  eventType: TaskAuditViewEventType$inboundSchema.optional(),
-  expressionPolicyStepError: z.nullable(
-    TaskAuditExpressionPolicyStepError$inboundSchema,
-  ).optional(),
-  externalTicketCreated: z.nullable(
-    TaskAuditExternalTicketCreated$inboundSchema,
-  ).optional(),
-  externalTicketError: z.nullable(TaskAuditExternalTicketError$inboundSchema)
-    .optional(),
-  externalTicketProvisionStepResolved: z.nullable(
-    TaskAuditExternalTicketProvisionStepResolved$inboundSchema,
-  ).optional(),
-  externalTicketTriggered: z.nullable(
-    TaskAuditExternalTicketTriggered$inboundSchema,
-  ).optional(),
-  formInstanceChange: z.nullable(TaskAuditFormInstanceChange$inboundSchema)
-    .optional(),
-  grantDurationUpdated: z.nullable(TaskAuditGrantDurationUpdated$inboundSchema)
-    .optional(),
-  grantOutcome: z.nullable(TaskAuditGrantOutcome$inboundSchema).optional(),
-  hardReset: z.nullable(TaskAuditHardReset$inboundSchema).optional(),
-  id: z.string().optional(),
-  metadata: z.nullable(TaskAuditMetaData$inboundSchema).optional(),
-  policyChanged: z.nullable(TaskAuditPolicyChanged$inboundSchema).optional(),
-  policyEvaluationStep: z.nullable(TaskAuditPolicyEvaluationStep$inboundSchema)
-    .optional(),
-  provisionCancelled: z.nullable(
-    TaskAuditPolicyProvisionCancelled$inboundSchema,
-  ).optional(),
-  provisionEntitlementMergeCompleted: z.nullable(
-    TaskAuditProvisionEntitlementMergeCompleted$inboundSchema,
-  ).optional(),
-  provisionEntitlementMergeTimedOut: z.nullable(
-    TaskAuditProvisionEntitlementMergeTimedOut$inboundSchema,
-  ).optional(),
-  provisionError: z.nullable(TaskAuditPolicyProvisionError$inboundSchema)
-    .optional(),
-  provisionReassigned: z.nullable(
-    TaskAuditPolicyProvisionReassigned$inboundSchema,
-  ).optional(),
-  provisionWaitingForEntitlementMerge: z.nullable(
-    TaskAuditProvisionWaitingForEntitlementMerge$inboundSchema,
-  ).optional(),
-  reassignedToDelegate: z.nullable(TaskAuditReassignedToDelegate$inboundSchema)
-    .optional(),
-  reassignmentFallbackToAdmin: z.nullable(
-    TaskAuditReassignmentFallbackToAdmin$inboundSchema,
-  ).optional(),
-  reassignmentListError: z.nullable(
-    TaskAuditReassignmentListError$inboundSchema,
-  ).optional(),
-  requestDefaultsApplied: z.nullable(
-    TaskAuditRequestDefaultsApplied$inboundSchema,
-  ).optional(),
-  revokeOutcome: z.nullable(TaskAuditRevokeOutcome$inboundSchema).optional(),
-  slaEscalation: z.nullable(TaskAuditSLAEscalation$inboundSchema).optional(),
-  source: TaskAuditViewSource$inboundSchema.optional(),
-  stateChange: z.nullable(TaskAuditStateChange$inboundSchema).optional(),
-  stepSkipped: z.nullable(TaskAuditStepSkipped$inboundSchema).optional(),
-  stepUpApproval: z.nullable(TaskAuditStepUpApproval$inboundSchema).optional(),
-  taskCreated: z.nullable(TaskAuditNewTask$inboundSchema).optional(),
-  taskCreatedFrom: z.nullable(TaskAuditNewTaskCreatedFrom$inboundSchema)
-    .optional(),
-  taskEscalated: z.nullable(TaskAuditEscalateToEmergencyAccess$inboundSchema)
-    .optional(),
-  taskRestarted: z.nullable(TaskAuditRestart$inboundSchema).optional(),
-  ticketId: z.string().optional(),
-  userId: z.string().optional(),
-  waitStepAnalysisSuccess: z.nullable(
-    TaskAuditWaitForAnalysisStepSuccess$inboundSchema,
-  ).optional(),
-  waitStepAnalysisTimedOut: z.nullable(
-    TaskAuditWaitForAnalysisStepTimedOut$inboundSchema,
-  ).optional(),
-  waitStepAnalysisWaiting: z.nullable(
-    TaskAuditWaitForAnalysisStepWaiting$inboundSchema,
-  ).optional(),
-  waitStepSuccess: z.nullable(TaskAuditWaitStepSuccess$inboundSchema)
-    .optional(),
-  waitStepTimedOut: z.nullable(TaskAuditWaitStepTimedOut$inboundSchema)
-    .optional(),
-  waitStepUntilTime: z.nullable(TaskAuditWaitStepUntilTime$inboundSchema)
-    .optional(),
-  waitStepWaiting: z.nullable(TaskAuditWaitStepWaiting$inboundSchema)
-    .optional(),
-  webhookApprovalAttempt: z.nullable(
-    TaskAuditWebhookApprovalAttempt$inboundSchema,
-  ).optional(),
-  webhookApprovalBadResponse: z.nullable(
-    TaskAuditWebhookApprovalBadResponse$inboundSchema,
-  ).optional(),
-  webhookApprovalFatalError: z.nullable(
-    TaskAuditWebhookApprovalFatalError$inboundSchema,
-  ).optional(),
-  webhookApprovalSuccess: z.nullable(
-    TaskAuditWebhookApprovalSuccess$inboundSchema,
-  ).optional(),
-  webhookApprovalTriggered: z.nullable(
-    TaskAuditWebhookApprovalTriggered$inboundSchema,
-  ).optional(),
-  webhookAttempt: z.nullable(TaskAuditWebhookAttempt$inboundSchema).optional(),
-  webhookSuccess: z.nullable(TaskAuditWebhookSuccess$inboundSchema).optional(),
-  webhookTriggered: z.nullable(TaskAuditWebhookTriggered$inboundSchema)
-    .optional(),
-  workflowStep: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessRequestOutcome: z.nullable(
+      TaskAuditAccessRequestOutcome$inboundSchema,
+    ).optional(),
+    accountDeleted: z.nullable(TaskAuditAccountDeleted$inboundSchema)
+      .optional(),
+    accountLifecycleActionCreated: z.nullable(
+      TaskAuditAccountLifecycleActionCreated$inboundSchema,
+    ).optional(),
+    accountLifecycleActionFailed: z.nullable(
+      TaskAuditAccountLifecycleActionFailed$inboundSchema,
+    ).optional(),
+    actionInstanceCreated: z.nullable(
+      TaskAuditActionInstanceCreated$inboundSchema,
+    ).optional(),
+    actionInstanceFailed: z.nullable(
+      TaskAuditActionInstanceFailed$inboundSchema,
+    ).optional(),
+    actionInstanceSucceeded: z.nullable(
+      TaskAuditActionInstanceSucceeded$inboundSchema,
+    ).optional(),
+    actionOutcome: z.nullable(TaskAuditActionOutcome$inboundSchema).optional(),
+    actionResult: z.nullable(TaskAuditConnectorActionResult$inboundSchema)
+      .optional(),
+    actionSubmitted: z.nullable(TaskAuditActionSubmitted$inboundSchema)
+      .optional(),
+    approvalAutoAcceptedByPolicy: z.nullable(
+      TaskAuditApprovalAutoAcceptedByPolicy$inboundSchema,
+    ).optional(),
+    approvalAutoRejectedByPolicy: z.nullable(
+      TaskAuditApprovalAutoRejectedByPolicy$inboundSchema,
+    ).optional(),
+    approvalInstanceChange: z.nullable(
+      TaskAuditApprovalInstanceChange$inboundSchema,
+    ).optional(),
+    approvalReassigned: z.nullable(
+      TaskAuditPolicyApprovalReassigned$inboundSchema,
+    ).optional(),
+    approvedAutomatically: z.nullable(
+      TaskAuditApprovalHappenedAutomatically$inboundSchema,
+    ).optional(),
+    automationTriggered: z.nullable(TaskAuditAutomationTriggered$inboundSchema)
+      .optional(),
+    bulkActionError: z.nullable(TaskAuditBulkActionError$inboundSchema)
+      .optional(),
+    certifyOutcome: z.nullable(TaskAuditCertifyOutcome$inboundSchema)
+      .optional(),
+    comment: z.nullable(TaskAuditComment$inboundSchema).optional(),
+    conditionalPolicyExecutionResult: z.nullable(
+      TaskAuditConditionalPolicyExecutionResult$inboundSchema,
+    ).optional(),
+    connectorActionsEnd: z.nullable(
+      TaskAuditFinishedConnectorActions$inboundSchema,
+    ).optional(),
+    connectorActionsStart: z.nullable(
+      TaskAuditStartedConnectorActions$inboundSchema,
+    ).optional(),
+    created: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    createdReplacementExtensionGrantTask: z.nullable(
+      TaskAuditCreatedReplacementExtensionGrantTask$inboundSchema,
+    ).optional(),
+    currentState: CurrentState$inboundSchema.optional(),
+    eventType: TaskAuditViewEventType$inboundSchema.optional(),
+    expressionPolicyStepError: z.nullable(
+      TaskAuditExpressionPolicyStepError$inboundSchema,
+    ).optional(),
+    externalTicketCreated: z.nullable(
+      TaskAuditExternalTicketCreated$inboundSchema,
+    ).optional(),
+    externalTicketError: z.nullable(TaskAuditExternalTicketError$inboundSchema)
+      .optional(),
+    externalTicketProvisionStepResolved: z.nullable(
+      TaskAuditExternalTicketProvisionStepResolved$inboundSchema,
+    ).optional(),
+    externalTicketTriggered: z.nullable(
+      TaskAuditExternalTicketTriggered$inboundSchema,
+    ).optional(),
+    formInstanceChange: z.nullable(TaskAuditFormInstanceChange$inboundSchema)
+      .optional(),
+    grantDurationUpdated: z.nullable(
+      TaskAuditGrantDurationUpdated$inboundSchema,
+    ).optional(),
+    grantOutcome: z.nullable(TaskAuditGrantOutcome$inboundSchema).optional(),
+    hardReset: z.nullable(TaskAuditHardReset$inboundSchema).optional(),
+    id: z.string().optional(),
+    metadata: z.nullable(TaskAuditMetaData$inboundSchema).optional(),
+    policyChanged: z.nullable(TaskAuditPolicyChanged$inboundSchema).optional(),
+    policyEvaluationStep: z.nullable(
+      TaskAuditPolicyEvaluationStep$inboundSchema,
+    ).optional(),
+    provisionCancelled: z.nullable(
+      TaskAuditPolicyProvisionCancelled$inboundSchema,
+    ).optional(),
+    provisionEntitlementMergeCompleted: z.nullable(
+      TaskAuditProvisionEntitlementMergeCompleted$inboundSchema,
+    ).optional(),
+    provisionEntitlementMergeTimedOut: z.nullable(
+      TaskAuditProvisionEntitlementMergeTimedOut$inboundSchema,
+    ).optional(),
+    provisionError: z.nullable(TaskAuditPolicyProvisionError$inboundSchema)
+      .optional(),
+    provisionReassigned: z.nullable(
+      TaskAuditPolicyProvisionReassigned$inboundSchema,
+    ).optional(),
+    provisionWaitingForEntitlementMerge: z.nullable(
+      TaskAuditProvisionWaitingForEntitlementMerge$inboundSchema,
+    ).optional(),
+    reassignedToDelegate: z.nullable(
+      TaskAuditReassignedToDelegate$inboundSchema,
+    ).optional(),
+    reassignmentFallbackToAdmin: z.nullable(
+      TaskAuditReassignmentFallbackToAdmin$inboundSchema,
+    ).optional(),
+    reassignmentListError: z.nullable(
+      TaskAuditReassignmentListError$inboundSchema,
+    ).optional(),
+    requestDefaultsApplied: z.nullable(
+      TaskAuditRequestDefaultsApplied$inboundSchema,
+    ).optional(),
+    revokeOutcome: z.nullable(TaskAuditRevokeOutcome$inboundSchema).optional(),
+    slaEscalation: z.nullable(TaskAuditSLAEscalation$inboundSchema).optional(),
+    source: TaskAuditViewSource$inboundSchema.optional(),
+    stateChange: z.nullable(TaskAuditStateChange$inboundSchema).optional(),
+    stepSkipped: z.nullable(TaskAuditStepSkipped$inboundSchema).optional(),
+    stepUpApproval: z.nullable(TaskAuditStepUpApproval$inboundSchema)
+      .optional(),
+    taskCreated: z.nullable(TaskAuditNewTask$inboundSchema).optional(),
+    taskCreatedFrom: z.nullable(TaskAuditNewTaskCreatedFrom$inboundSchema)
+      .optional(),
+    taskEscalated: z.nullable(TaskAuditEscalateToEmergencyAccess$inboundSchema)
+      .optional(),
+    taskRestarted: z.nullable(TaskAuditRestart$inboundSchema).optional(),
+    ticketId: z.string().optional(),
+    userId: z.string().optional(),
+    waitStepAnalysisSuccess: z.nullable(
+      TaskAuditWaitForAnalysisStepSuccess$inboundSchema,
+    ).optional(),
+    waitStepAnalysisTimedOut: z.nullable(
+      TaskAuditWaitForAnalysisStepTimedOut$inboundSchema,
+    ).optional(),
+    waitStepAnalysisWaiting: z.nullable(
+      TaskAuditWaitForAnalysisStepWaiting$inboundSchema,
+    ).optional(),
+    waitStepSuccess: z.nullable(TaskAuditWaitStepSuccess$inboundSchema)
+      .optional(),
+    waitStepTimedOut: z.nullable(TaskAuditWaitStepTimedOut$inboundSchema)
+      .optional(),
+    waitStepUntilTime: z.nullable(TaskAuditWaitStepUntilTime$inboundSchema)
+      .optional(),
+    waitStepWaiting: z.nullable(TaskAuditWaitStepWaiting$inboundSchema)
+      .optional(),
+    webhookApprovalAttempt: z.nullable(
+      TaskAuditWebhookApprovalAttempt$inboundSchema,
+    ).optional(),
+    webhookApprovalBadResponse: z.nullable(
+      TaskAuditWebhookApprovalBadResponse$inboundSchema,
+    ).optional(),
+    webhookApprovalFatalError: z.nullable(
+      TaskAuditWebhookApprovalFatalError$inboundSchema,
+    ).optional(),
+    webhookApprovalSuccess: z.nullable(
+      TaskAuditWebhookApprovalSuccess$inboundSchema,
+    ).optional(),
+    webhookApprovalTriggered: z.nullable(
+      TaskAuditWebhookApprovalTriggered$inboundSchema,
+    ).optional(),
+    webhookAttempt: z.nullable(TaskAuditWebhookAttempt$inboundSchema)
+      .optional(),
+    webhookSuccess: z.nullable(TaskAuditWebhookSuccess$inboundSchema)
+      .optional(),
+    webhookTriggered: z.nullable(TaskAuditWebhookTriggered$inboundSchema)
+      .optional(),
+    workflowStep: z.number().int().optional(),
+  })
+);
 
 export function taskAuditViewFromJSON(
   jsonString: string,

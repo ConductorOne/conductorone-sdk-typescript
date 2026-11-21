@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,18 +51,20 @@ export const C1ApiAiGovernanceV1MCPToolServiceSearchRequest$outboundSchema:
     C1ApiAiGovernanceV1MCPToolServiceSearchRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1MCPToolServiceSearchRequest
-  > = z.object({
-    appId: z.string(),
-    connectorId: z.string(),
-    mcpToolServiceSearchRequest: shared
-      .MCPToolServiceSearchRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      connectorId: "connector_id",
-      mcpToolServiceSearchRequest: "MCPToolServiceSearchRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      connectorId: z.string(),
+      mcpToolServiceSearchRequest: shared
+        .MCPToolServiceSearchRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        connectorId: "connector_id",
+        mcpToolServiceSearchRequest: "MCPToolServiceSearchRequest",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPToolServiceSearchRequestToJSON(
   c1ApiAiGovernanceV1MCPToolServiceSearchRequest:
@@ -81,20 +83,22 @@ export const C1ApiAiGovernanceV1MCPToolServiceSearchResponse$inboundSchema:
     C1ApiAiGovernanceV1MCPToolServiceSearchResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    MCPToolServiceSearchResponse: shared
-      .MCPToolServiceSearchResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "MCPToolServiceSearchResponse": "mcpToolServiceSearchResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      MCPToolServiceSearchResponse: shared
+        .MCPToolServiceSearchResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "MCPToolServiceSearchResponse": "mcpToolServiceSearchResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPToolServiceSearchResponseFromJSON(
   jsonString: string,

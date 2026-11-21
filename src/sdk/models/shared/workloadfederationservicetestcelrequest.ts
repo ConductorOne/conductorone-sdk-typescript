@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The WorkloadFederationServiceTestCELRequest message.
@@ -32,10 +33,12 @@ export const WorkloadFederationServiceTestCELRequest$outboundSchema: z.ZodType<
   WorkloadFederationServiceTestCELRequest$Outbound,
   z.ZodTypeDef,
   WorkloadFederationServiceTestCELRequest
-> = z.object({
-  claimsJson: z.string().optional(),
-  expression: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    claimsJson: z.string().optional(),
+    expression: z.string().optional(),
+  })
+);
 
 export function workloadFederationServiceTestCELRequestToJSON(
   workloadFederationServiceTestCELRequest:

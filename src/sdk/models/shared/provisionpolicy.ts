@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -94,18 +94,21 @@ export const ProvisionPolicy$inboundSchema: z.ZodType<
   ProvisionPolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  action: z.nullable(ActionProvision$inboundSchema).optional(),
-  connector: z.nullable(ConnectorProvision$inboundSchema).optional(),
-  delegated: z.nullable(DelegatedProvision$inboundSchema).optional(),
-  devicePlacement: z.nullable(DevicePlacementProvision$inboundSchema)
-    .optional(),
-  externalTicket: z.nullable(ExternalTicketProvision$inboundSchema).optional(),
-  manual: z.nullable(ManualProvision$inboundSchema).optional(),
-  multiStep: z.nullable(z.lazy(() => MultiStep$inboundSchema)).optional(),
-  unconfigured: z.nullable(UnconfiguredProvision$inboundSchema).optional(),
-  webhook: z.nullable(WebhookProvision$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: z.nullable(ActionProvision$inboundSchema).optional(),
+    connector: z.nullable(ConnectorProvision$inboundSchema).optional(),
+    delegated: z.nullable(DelegatedProvision$inboundSchema).optional(),
+    devicePlacement: z.nullable(DevicePlacementProvision$inboundSchema)
+      .optional(),
+    externalTicket: z.nullable(ExternalTicketProvision$inboundSchema)
+      .optional(),
+    manual: z.nullable(ManualProvision$inboundSchema).optional(),
+    multiStep: z.nullable(z.lazy(() => MultiStep$inboundSchema)).optional(),
+    unconfigured: z.nullable(UnconfiguredProvision$inboundSchema).optional(),
+    webhook: z.nullable(WebhookProvision$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ProvisionPolicy$Outbound = {
   action?: ActionProvision$Outbound | null | undefined;
@@ -124,18 +127,21 @@ export const ProvisionPolicy$outboundSchema: z.ZodType<
   ProvisionPolicy$Outbound,
   z.ZodTypeDef,
   ProvisionPolicy
-> = z.object({
-  action: z.nullable(ActionProvision$outboundSchema).optional(),
-  connector: z.nullable(ConnectorProvision$outboundSchema).optional(),
-  delegated: z.nullable(DelegatedProvision$outboundSchema).optional(),
-  devicePlacement: z.nullable(DevicePlacementProvision$outboundSchema)
-    .optional(),
-  externalTicket: z.nullable(ExternalTicketProvision$outboundSchema).optional(),
-  manual: z.nullable(ManualProvision$outboundSchema).optional(),
-  multiStep: z.nullable(z.lazy(() => MultiStep$outboundSchema)).optional(),
-  unconfigured: z.nullable(UnconfiguredProvision$outboundSchema).optional(),
-  webhook: z.nullable(WebhookProvision$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: z.nullable(ActionProvision$outboundSchema).optional(),
+    connector: z.nullable(ConnectorProvision$outboundSchema).optional(),
+    delegated: z.nullable(DelegatedProvision$outboundSchema).optional(),
+    devicePlacement: z.nullable(DevicePlacementProvision$outboundSchema)
+      .optional(),
+    externalTicket: z.nullable(ExternalTicketProvision$outboundSchema)
+      .optional(),
+    manual: z.nullable(ManualProvision$outboundSchema).optional(),
+    multiStep: z.nullable(z.lazy(() => MultiStep$outboundSchema)).optional(),
+    unconfigured: z.nullable(UnconfiguredProvision$outboundSchema).optional(),
+    webhook: z.nullable(WebhookProvision$outboundSchema).optional(),
+  })
+);
 
 export function provisionPolicyToJSON(
   provisionPolicy: ProvisionPolicy,

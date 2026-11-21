@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppEntitlementInput,
   AppEntitlementInput$Outbound,
@@ -40,12 +41,14 @@ export const UpdateAppEntitlementRequest$outboundSchema: z.ZodType<
   UpdateAppEntitlementRequest$Outbound,
   z.ZodTypeDef,
   UpdateAppEntitlementRequest
-> = z.object({
-  entitlement: z.nullable(AppEntitlementInput$outboundSchema).optional(),
-  expandMask: z.nullable(AppEntitlementExpandMask$outboundSchema).optional(),
-  overrideAccessRequestsDefaults: z.boolean().optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entitlement: z.nullable(AppEntitlementInput$outboundSchema).optional(),
+    expandMask: z.nullable(AppEntitlementExpandMask$outboundSchema).optional(),
+    overrideAccessRequestsDefaults: z.boolean().optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function updateAppEntitlementRequestToJSON(
   updateAppEntitlementRequest: UpdateAppEntitlementRequest,

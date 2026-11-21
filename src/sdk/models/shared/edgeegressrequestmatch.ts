@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -33,6 +33,13 @@ export type EdgeEgressRequestMatch = {
    */
   methods?: Array<string> | null | undefined;
   /**
+   * Artifact classification selector. Only required checks may set this field;
+   *
+   * @remarks
+   *  ordinary egress rules reject its presence, including an explicit false.
+   */
+  packageArtifact?: boolean | null | undefined;
+  /**
    * Path segment-glob over the canonical path. `*` matches one segment and `**` one or more.
    *
    * @remarks
@@ -54,19 +61,23 @@ export const EdgeEgressRequestMatch$inboundSchema: z.ZodType<
   EdgeEgressRequestMatch,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  headerEquals: z.record(z.string()).optional(),
-  headerPresent: z.nullable(z.array(z.string())).optional(),
-  methods: z.nullable(z.array(z.string())).optional(),
-  path: z.string().optional(),
-  queryEquals: z.record(z.string()).optional(),
-  queryPresent: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    headerEquals: z.record(z.string()).optional(),
+    headerPresent: z.nullable(z.array(z.string())).optional(),
+    methods: z.nullable(z.array(z.string())).optional(),
+    packageArtifact: z.nullable(z.boolean()).optional(),
+    path: z.string().optional(),
+    queryEquals: z.record(z.string()).optional(),
+    queryPresent: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type EdgeEgressRequestMatch$Outbound = {
   headerEquals?: { [k: string]: string } | undefined;
   headerPresent?: Array<string> | null | undefined;
   methods?: Array<string> | null | undefined;
+  packageArtifact?: boolean | null | undefined;
   path?: string | undefined;
   queryEquals?: { [k: string]: string } | undefined;
   queryPresent?: Array<string> | null | undefined;
@@ -77,14 +88,17 @@ export const EdgeEgressRequestMatch$outboundSchema: z.ZodType<
   EdgeEgressRequestMatch$Outbound,
   z.ZodTypeDef,
   EdgeEgressRequestMatch
-> = z.object({
-  headerEquals: z.record(z.string()).optional(),
-  headerPresent: z.nullable(z.array(z.string())).optional(),
-  methods: z.nullable(z.array(z.string())).optional(),
-  path: z.string().optional(),
-  queryEquals: z.record(z.string()).optional(),
-  queryPresent: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    headerEquals: z.record(z.string()).optional(),
+    headerPresent: z.nullable(z.array(z.string())).optional(),
+    methods: z.nullable(z.array(z.string())).optional(),
+    packageArtifact: z.nullable(z.boolean()).optional(),
+    path: z.string().optional(),
+    queryEquals: z.record(z.string()).optional(),
+    queryPresent: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function edgeEgressRequestMatchToJSON(
   edgeEgressRequestMatch: EdgeEgressRequestMatch,

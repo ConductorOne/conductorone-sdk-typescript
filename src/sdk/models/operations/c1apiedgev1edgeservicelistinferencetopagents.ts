@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -18,6 +18,8 @@ export const C1ApiEdgeV1EdgeServiceListInferenceTopAgentsQueryParamBucket = {
   TbTimeBucketUnspecified: "TB_TIME_BUCKET_UNSPECIFIED",
   TbTimeBucketHour: "TB_TIME_BUCKET_HOUR",
   TbTimeBucketDay: "TB_TIME_BUCKET_DAY",
+  TbTimeBucketFiveMinutes: "TB_TIME_BUCKET_FIVE_MINUTES",
+  TbTimeBucketFifteenMinutes: "TB_TIME_BUCKET_FIFTEEN_MINUTES",
 } as const;
 /**
  * The bucket field.
@@ -101,8 +103,10 @@ export const C1ApiEdgeV1EdgeServiceListInferenceTopAgentsQueryParamBucket$outbou
     string,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceListInferenceTopAgentsQueryParamBucket
-  > = openEnums.outboundSchema(
-    C1ApiEdgeV1EdgeServiceListInferenceTopAgentsQueryParamBucket,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      C1ApiEdgeV1EdgeServiceListInferenceTopAgentsQueryParamBucket,
+    )
   );
 
 /** @internal */
@@ -111,8 +115,10 @@ export const C1ApiEdgeV1EdgeServiceListInferenceTopAgentsQueryParamDimension$out
     string,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceListInferenceTopAgentsQueryParamDimension
-  > = openEnums.outboundSchema(
-    C1ApiEdgeV1EdgeServiceListInferenceTopAgentsQueryParamDimension,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      C1ApiEdgeV1EdgeServiceListInferenceTopAgentsQueryParamDimension,
+    )
   );
 
 /** @internal */
@@ -133,26 +139,28 @@ export const C1ApiEdgeV1EdgeServiceListInferenceTopAgentsRequest$outboundSchema:
     C1ApiEdgeV1EdgeServiceListInferenceTopAgentsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceListInferenceTopAgentsRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    bucket:
-      C1ApiEdgeV1EdgeServiceListInferenceTopAgentsQueryParamBucket$outboundSchema
-        .optional(),
-    dimension:
-      C1ApiEdgeV1EdgeServiceListInferenceTopAgentsQueryParamDimension$outboundSchema
-        .optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    since: z.number().int().transform(v => `${v}`).optional(),
-    until: z.number().int().transform(v => `${v}`).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      bucket:
+        C1ApiEdgeV1EdgeServiceListInferenceTopAgentsQueryParamBucket$outboundSchema
+          .optional(),
+      dimension:
+        C1ApiEdgeV1EdgeServiceListInferenceTopAgentsQueryParamDimension$outboundSchema
+          .optional(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      since: z.number().int().transform(v => `${v}`).optional(),
+      until: z.number().int().transform(v => `${v}`).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListInferenceTopAgentsRequestToJSON(
   c1ApiEdgeV1EdgeServiceListInferenceTopAgentsRequest:
@@ -171,21 +179,23 @@ export const C1ApiEdgeV1EdgeServiceListInferenceTopAgentsResponse$inboundSchema:
     C1ApiEdgeV1EdgeServiceListInferenceTopAgentsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    EdgeServiceListInferenceTopAgentsResponse: shared
-      .EdgeServiceListInferenceTopAgentsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "EdgeServiceListInferenceTopAgentsResponse":
-        "edgeServiceListInferenceTopAgentsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      EdgeServiceListInferenceTopAgentsResponse: shared
+        .EdgeServiceListInferenceTopAgentsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "EdgeServiceListInferenceTopAgentsResponse":
+          "edgeServiceListInferenceTopAgentsResponse",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListInferenceTopAgentsResponseFromJSON(
   jsonString: string,

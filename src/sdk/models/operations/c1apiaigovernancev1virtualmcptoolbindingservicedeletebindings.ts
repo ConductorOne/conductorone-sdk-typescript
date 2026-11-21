@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,18 +54,20 @@ export const C1ApiAiGovernanceV1VirtualMCPToolBindingServiceDeleteBindingsReques
     C1ApiAiGovernanceV1VirtualMCPToolBindingServiceDeleteBindingsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1VirtualMCPToolBindingServiceDeleteBindingsRequest
-  > = z.object({
-    virtualMcpServerId: z.string(),
-    virtualMCPToolBindingServiceDeleteBindingsRequest: shared
-      .VirtualMCPToolBindingServiceDeleteBindingsRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      virtualMcpServerId: "virtual_mcp_server_id",
-      virtualMCPToolBindingServiceDeleteBindingsRequest:
-        "VirtualMCPToolBindingServiceDeleteBindingsRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      virtualMcpServerId: z.string(),
+      virtualMCPToolBindingServiceDeleteBindingsRequest: shared
+        .VirtualMCPToolBindingServiceDeleteBindingsRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        virtualMcpServerId: "virtual_mcp_server_id",
+        virtualMCPToolBindingServiceDeleteBindingsRequest:
+          "VirtualMCPToolBindingServiceDeleteBindingsRequest",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1VirtualMCPToolBindingServiceDeleteBindingsRequestToJSON(
   c1ApiAiGovernanceV1VirtualMCPToolBindingServiceDeleteBindingsRequest:
@@ -85,22 +87,24 @@ export const C1ApiAiGovernanceV1VirtualMCPToolBindingServiceDeleteBindingsRespon
     C1ApiAiGovernanceV1VirtualMCPToolBindingServiceDeleteBindingsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    VirtualMCPToolBindingServiceDeleteBindingsResponse: shared
-      .VirtualMCPToolBindingServiceDeleteBindingsResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "VirtualMCPToolBindingServiceDeleteBindingsResponse":
-        "virtualMCPToolBindingServiceDeleteBindingsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      VirtualMCPToolBindingServiceDeleteBindingsResponse: shared
+        .VirtualMCPToolBindingServiceDeleteBindingsResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "VirtualMCPToolBindingServiceDeleteBindingsResponse":
+          "virtualMCPToolBindingServiceDeleteBindingsResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1VirtualMCPToolBindingServiceDeleteBindingsResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,7 +21,7 @@ export const ConnectorAnomalyDetectionDisabledType$inboundSchema: z.ZodType<
   ConnectorAnomalyDetectionDisabledType,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type ConnectorAnomalyDetectionDisabledType$Outbound = {};
 
@@ -30,7 +30,7 @@ export const ConnectorAnomalyDetectionDisabledType$outboundSchema: z.ZodType<
   ConnectorAnomalyDetectionDisabledType$Outbound,
   z.ZodTypeDef,
   ConnectorAnomalyDetectionDisabledType
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function connectorAnomalyDetectionDisabledTypeToJSON(
   connectorAnomalyDetectionDisabledType: ConnectorAnomalyDetectionDisabledType,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Policy, Policy$inboundSchema } from "./policy.js";
@@ -20,9 +20,11 @@ export const GetPolicyResponse$inboundSchema: z.ZodType<
   GetPolicyResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  policy: z.nullable(Policy$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    policy: z.nullable(Policy$inboundSchema).optional(),
+  })
+);
 
 export function getPolicyResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -64,16 +64,19 @@ export const SessionPolicyPolicyOutcome$inboundSchema: z.ZodType<
   SessionPolicyPolicyOutcome,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allow: z.nullable(SessionPolicyAllow$inboundSchema).optional(),
-  challengeRequired: z.nullable(SessionPolicyChallengeRequired$inboundSchema)
-    .optional(),
-  deny: z.nullable(SessionPolicyDeny$inboundSchema).optional(),
-  enrollmentRequired: z.nullable(SessionPolicyEnrollmentRequired$inboundSchema)
-    .optional(),
-  stepUpRequired: z.nullable(SessionPolicyStepUpRequired$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allow: z.nullable(SessionPolicyAllow$inboundSchema).optional(),
+    challengeRequired: z.nullable(SessionPolicyChallengeRequired$inboundSchema)
+      .optional(),
+    deny: z.nullable(SessionPolicyDeny$inboundSchema).optional(),
+    enrollmentRequired: z.nullable(
+      SessionPolicyEnrollmentRequired$inboundSchema,
+    ).optional(),
+    stepUpRequired: z.nullable(SessionPolicyStepUpRequired$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type SessionPolicyPolicyOutcome$Outbound = {
   allow?: SessionPolicyAllow$Outbound | null | undefined;
@@ -94,16 +97,19 @@ export const SessionPolicyPolicyOutcome$outboundSchema: z.ZodType<
   SessionPolicyPolicyOutcome$Outbound,
   z.ZodTypeDef,
   SessionPolicyPolicyOutcome
-> = z.object({
-  allow: z.nullable(SessionPolicyAllow$outboundSchema).optional(),
-  challengeRequired: z.nullable(SessionPolicyChallengeRequired$outboundSchema)
-    .optional(),
-  deny: z.nullable(SessionPolicyDeny$outboundSchema).optional(),
-  enrollmentRequired: z.nullable(SessionPolicyEnrollmentRequired$outboundSchema)
-    .optional(),
-  stepUpRequired: z.nullable(SessionPolicyStepUpRequired$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allow: z.nullable(SessionPolicyAllow$outboundSchema).optional(),
+    challengeRequired: z.nullable(SessionPolicyChallengeRequired$outboundSchema)
+      .optional(),
+    deny: z.nullable(SessionPolicyDeny$outboundSchema).optional(),
+    enrollmentRequired: z.nullable(
+      SessionPolicyEnrollmentRequired$outboundSchema,
+    ).optional(),
+    stepUpRequired: z.nullable(SessionPolicyStepUpRequired$outboundSchema)
+      .optional(),
+  })
+);
 
 export function sessionPolicyPolicyOutcomeToJSON(
   sessionPolicyPolicyOutcome: SessionPolicyPolicyOutcome,

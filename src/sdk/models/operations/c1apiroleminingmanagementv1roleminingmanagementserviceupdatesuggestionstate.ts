@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,15 +54,17 @@ export const C1ApiRoleMiningManagementV1RoleMiningManagementServiceUpdateSuggest
     C1ApiRoleMiningManagementV1RoleMiningManagementServiceUpdateSuggestionStateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiRoleMiningManagementV1RoleMiningManagementServiceUpdateSuggestionStateRequest
-  > = z.object({
-    id: z.string(),
-    updateSuggestionStateRequest: shared
-      .UpdateSuggestionStateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      updateSuggestionStateRequest: "UpdateSuggestionStateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      updateSuggestionStateRequest: shared
+        .UpdateSuggestionStateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        updateSuggestionStateRequest: "UpdateSuggestionStateRequest",
+      });
+    })
+  );
 
 export function c1ApiRoleMiningManagementV1RoleMiningManagementServiceUpdateSuggestionStateRequestToJSON(
   c1ApiRoleMiningManagementV1RoleMiningManagementServiceUpdateSuggestionStateRequest:
@@ -82,20 +84,22 @@ export const C1ApiRoleMiningManagementV1RoleMiningManagementServiceUpdateSuggest
     C1ApiRoleMiningManagementV1RoleMiningManagementServiceUpdateSuggestionStateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    UpdateSuggestionStateResponse: shared
-      .UpdateSuggestionStateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "UpdateSuggestionStateResponse": "updateSuggestionStateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      UpdateSuggestionStateResponse: shared
+        .UpdateSuggestionStateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "UpdateSuggestionStateResponse": "updateSuggestionStateResponse",
+      });
+    })
+  );
 
 export function c1ApiRoleMiningManagementV1RoleMiningManagementServiceUpdateSuggestionStateResponseFromJSON(
   jsonString: string,

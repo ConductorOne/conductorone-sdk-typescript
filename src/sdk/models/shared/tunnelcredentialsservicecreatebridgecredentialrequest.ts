@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The TunnelCredentialsServiceCreateBridgeCredentialRequest message.
@@ -18,7 +19,7 @@ export const TunnelCredentialsServiceCreateBridgeCredentialRequest$outboundSchem
     TunnelCredentialsServiceCreateBridgeCredentialRequest$Outbound,
     z.ZodTypeDef,
     TunnelCredentialsServiceCreateBridgeCredentialRequest
-  > = z.object({});
+  > = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function tunnelCredentialsServiceCreateBridgeCredentialRequestToJSON(
   tunnelCredentialsServiceCreateBridgeCredentialRequest:

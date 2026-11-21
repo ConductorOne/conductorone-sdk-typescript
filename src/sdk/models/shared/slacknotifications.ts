@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -11,6 +11,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * The SlackNotifications message.
  */
 export type SlackNotifications = {
+  /**
+   * Allow a private channel retry if Slack restricts public channel creation. Defaults to false.
+   */
+  allowPrivateChannelFallback?: boolean | undefined;
   /**
    * The channelId field.
    */
@@ -30,13 +34,17 @@ export const SlackNotifications$inboundSchema: z.ZodType<
   SlackNotifications,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  channelId: z.string().optional(),
-  channelName: z.string().optional(),
-  enabled: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowPrivateChannelFallback: z.boolean().optional(),
+    channelId: z.string().optional(),
+    channelName: z.string().optional(),
+    enabled: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type SlackNotifications$Outbound = {
+  allowPrivateChannelFallback?: boolean | undefined;
   channelId?: string | undefined;
   channelName?: string | undefined;
   enabled?: boolean | undefined;
@@ -47,11 +55,14 @@ export const SlackNotifications$outboundSchema: z.ZodType<
   SlackNotifications$Outbound,
   z.ZodTypeDef,
   SlackNotifications
-> = z.object({
-  channelId: z.string().optional(),
-  channelName: z.string().optional(),
-  enabled: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowPrivateChannelFallback: z.boolean().optional(),
+    channelId: z.string().optional(),
+    channelName: z.string().optional(),
+    enabled: z.boolean().optional(),
+  })
+);
 
 export function slackNotificationsToJSON(
   slackNotifications: SlackNotifications,

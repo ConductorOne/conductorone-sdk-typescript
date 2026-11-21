@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const WebhookProvision$inboundSchema: z.ZodType<
   WebhookProvision,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  webhookId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    webhookId: z.string().optional(),
+  })
+);
 /** @internal */
 export type WebhookProvision$Outbound = {
   webhookId?: string | undefined;
@@ -35,9 +37,11 @@ export const WebhookProvision$outboundSchema: z.ZodType<
   WebhookProvision$Outbound,
   z.ZodTypeDef,
   WebhookProvision
-> = z.object({
-  webhookId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    webhookId: z.string().optional(),
+  })
+);
 
 export function webhookProvisionToJSON(
   webhookProvision: WebhookProvision,

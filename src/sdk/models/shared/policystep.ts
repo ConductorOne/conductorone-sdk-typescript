@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -78,15 +78,17 @@ export const PolicyStep$inboundSchema: z.ZodType<
   PolicyStep,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accept: z.nullable(Accept$inboundSchema).optional(),
-  action: z.nullable(Action$inboundSchema).optional(),
-  approval: z.nullable(Approval$inboundSchema).optional(),
-  form: z.nullable(Form$inboundSchema).optional(),
-  provision: z.nullable(Provision$inboundSchema).optional(),
-  reject: z.nullable(Reject$inboundSchema).optional(),
-  wait: z.nullable(Wait$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accept: z.nullable(Accept$inboundSchema).optional(),
+    action: z.nullable(Action$inboundSchema).optional(),
+    approval: z.nullable(Approval$inboundSchema).optional(),
+    form: z.nullable(Form$inboundSchema).optional(),
+    provision: z.nullable(Provision$inboundSchema).optional(),
+    reject: z.nullable(Reject$inboundSchema).optional(),
+    wait: z.nullable(Wait$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type PolicyStep$Outbound = {
   accept?: Accept$Outbound | null | undefined;
@@ -103,15 +105,17 @@ export const PolicyStep$outboundSchema: z.ZodType<
   PolicyStep$Outbound,
   z.ZodTypeDef,
   PolicyStep
-> = z.object({
-  accept: z.nullable(Accept$outboundSchema).optional(),
-  action: z.nullable(Action$outboundSchema).optional(),
-  approval: z.nullable(Approval$outboundSchema).optional(),
-  form: z.nullable(Form$outboundSchema).optional(),
-  provision: z.nullable(Provision$outboundSchema).optional(),
-  reject: z.nullable(Reject$outboundSchema).optional(),
-  wait: z.nullable(Wait$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accept: z.nullable(Accept$outboundSchema).optional(),
+    action: z.nullable(Action$outboundSchema).optional(),
+    approval: z.nullable(Approval$outboundSchema).optional(),
+    form: z.nullable(Form$outboundSchema).optional(),
+    provision: z.nullable(Provision$outboundSchema).optional(),
+    reject: z.nullable(Reject$outboundSchema).optional(),
+    wait: z.nullable(Wait$outboundSchema).optional(),
+  })
+);
 
 export function policyStepToJSON(policyStep: PolicyStep): string {
   return JSON.stringify(PolicyStep$outboundSchema.parse(policyStep));

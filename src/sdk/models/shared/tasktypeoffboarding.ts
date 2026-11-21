@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -46,26 +46,32 @@ export const TaskTypeOffboardingOutcome$inboundSchema: z.ZodType<
   TaskTypeOffboardingOutcome,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TaskTypeOffboardingOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(TaskTypeOffboardingOutcome)
+);
 /** @internal */
 export const TaskTypeOffboardingOutcome$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   TaskTypeOffboardingOutcome
-> = openEnums.outboundSchema(TaskTypeOffboardingOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(TaskTypeOffboardingOutcome)
+);
 
 /** @internal */
 export const TaskTypeOffboarding$inboundSchema: z.ZodType<
   TaskTypeOffboarding,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  outcome: TaskTypeOffboardingOutcome$inboundSchema.optional(),
-  outcomeTime: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  subjectUserId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    outcome: TaskTypeOffboardingOutcome$inboundSchema.optional(),
+    outcomeTime: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    subjectUserId: z.string().optional(),
+  })
+);
 /** @internal */
 export type TaskTypeOffboarding$Outbound = {
   outcome?: string | undefined;
@@ -78,11 +84,14 @@ export const TaskTypeOffboarding$outboundSchema: z.ZodType<
   TaskTypeOffboarding$Outbound,
   z.ZodTypeDef,
   TaskTypeOffboarding
-> = z.object({
-  outcome: TaskTypeOffboardingOutcome$outboundSchema.optional(),
-  outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  subjectUserId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    outcome: TaskTypeOffboardingOutcome$outboundSchema.optional(),
+    outcomeTime: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    subjectUserId: z.string().optional(),
+  })
+);
 
 export function taskTypeOffboardingToJSON(
   taskTypeOffboarding: TaskTypeOffboarding,

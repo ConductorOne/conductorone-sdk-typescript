@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   ToolGateFilter,
   ToolGateFilter$Outbound,
@@ -56,15 +57,17 @@ export const ToolGatesServiceCreateRequest$outboundSchema: z.ZodType<
   ToolGatesServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   ToolGatesServiceCreateRequest
-> = z.object({
-  description: z.string().optional(),
-  displayName: z.string(),
-  enabled: z.boolean().optional(),
-  filter: z.nullable(ToolGateFilter$outboundSchema).optional(),
-  grantPolicyId: z.string(),
-  managedByGuardrails: z.boolean().optional(),
-  priority: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    displayName: z.string(),
+    enabled: z.boolean().optional(),
+    filter: z.nullable(ToolGateFilter$outboundSchema).optional(),
+    grantPolicyId: z.string(),
+    managedByGuardrails: z.boolean().optional(),
+    priority: z.number().int().optional(),
+  })
+);
 
 export function toolGatesServiceCreateRequestToJSON(
   toolGatesServiceCreateRequest: ToolGatesServiceCreateRequest,

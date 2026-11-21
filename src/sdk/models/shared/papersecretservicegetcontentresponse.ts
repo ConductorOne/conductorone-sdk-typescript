@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -97,7 +97,9 @@ export const PaperSecretServiceGetContentResponseInputFormat$inboundSchema:
     PaperSecretServiceGetContentResponseInputFormat,
     z.ZodTypeDef,
     unknown
-  > = openEnums.inboundSchema(PaperSecretServiceGetContentResponseInputFormat);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.inboundSchema(PaperSecretServiceGetContentResponseInputFormat)
+  );
 
 /** @internal */
 export const PaperSecretServiceGetContentResponseSecretType$inboundSchema:
@@ -105,27 +107,31 @@ export const PaperSecretServiceGetContentResponseSecretType$inboundSchema:
     PaperSecretServiceGetContentResponseSecretType,
     z.ZodTypeDef,
     unknown
-  > = openEnums.inboundSchema(PaperSecretServiceGetContentResponseSecretType);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.inboundSchema(PaperSecretServiceGetContentResponseSecretType)
+  );
 
 /** @internal */
 export const PaperSecretServiceGetContentResponse$inboundSchema: z.ZodType<
   PaperSecretServiceGetContentResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  creatorUserId: z.string().optional(),
-  downloadUrl: z.nullable(z.string()).optional(),
-  encryptedContent: z.nullable(z.string()).optional(),
-  filename: z.string().optional(),
-  inputFormat: PaperSecretServiceGetContentResponseInputFormat$inboundSchema
-    .optional(),
-  secretType: PaperSecretServiceGetContentResponseSecretType$inboundSchema
-    .optional(),
-  viewsRemaining: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    creatorUserId: z.string().optional(),
+    downloadUrl: z.nullable(z.string()).optional(),
+    encryptedContent: z.nullable(z.string()).optional(),
+    filename: z.string().optional(),
+    inputFormat: PaperSecretServiceGetContentResponseInputFormat$inboundSchema
+      .optional(),
+    secretType: PaperSecretServiceGetContentResponseSecretType$inboundSchema
+      .optional(),
+    viewsRemaining: z.number().int().optional(),
+  })
+);
 
 export function paperSecretServiceGetContentResponseFromJSON(
   jsonString: string,

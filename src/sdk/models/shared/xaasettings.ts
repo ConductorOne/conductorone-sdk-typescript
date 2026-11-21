@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -74,48 +74,58 @@ export const DefaultSigningAlgorithm$inboundSchema: z.ZodType<
   DefaultSigningAlgorithm,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DefaultSigningAlgorithm);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(DefaultSigningAlgorithm)
+);
 /** @internal */
 export const DefaultSigningAlgorithm$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DefaultSigningAlgorithm
-> = openEnums.outboundSchema(DefaultSigningAlgorithm);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(DefaultSigningAlgorithm)
+);
 
 /** @internal */
 export const EnabledSigningAlgorithms$inboundSchema: z.ZodType<
   EnabledSigningAlgorithms,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EnabledSigningAlgorithms);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(EnabledSigningAlgorithms)
+);
 /** @internal */
 export const EnabledSigningAlgorithms$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   EnabledSigningAlgorithms
-> = openEnums.outboundSchema(EnabledSigningAlgorithms);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(EnabledSigningAlgorithms)
+);
 
 /** @internal */
 export const XAASettings$inboundSchema: z.ZodType<
   XAASettings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowRefreshTokenSubjects: z.boolean().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  defaultGrantLifetime: z.nullable(z.string()).optional(),
-  defaultSigningAlgorithm: DefaultSigningAlgorithm$inboundSchema.optional(),
-  enabled: z.boolean().optional(),
-  enabledSigningAlgorithms: z.nullable(
-    z.array(EnabledSigningAlgorithms$inboundSchema),
-  ).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  xaaIdTokenLifetime: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowRefreshTokenSubjects: z.boolean().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    defaultGrantLifetime: z.nullable(z.string()).optional(),
+    defaultSigningAlgorithm: DefaultSigningAlgorithm$inboundSchema.optional(),
+    enabled: z.boolean().optional(),
+    enabledSigningAlgorithms: z.nullable(
+      z.array(EnabledSigningAlgorithms$inboundSchema),
+    ).optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    xaaIdTokenLifetime: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type XAASettings$Outbound = {
   allowRefreshTokenSubjects?: boolean | undefined;
@@ -133,18 +143,20 @@ export const XAASettings$outboundSchema: z.ZodType<
   XAASettings$Outbound,
   z.ZodTypeDef,
   XAASettings
-> = z.object({
-  allowRefreshTokenSubjects: z.boolean().optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  defaultGrantLifetime: z.nullable(z.string()).optional(),
-  defaultSigningAlgorithm: DefaultSigningAlgorithm$outboundSchema.optional(),
-  enabled: z.boolean().optional(),
-  enabledSigningAlgorithms: z.nullable(
-    z.array(EnabledSigningAlgorithms$outboundSchema),
-  ).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  xaaIdTokenLifetime: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowRefreshTokenSubjects: z.boolean().optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    defaultGrantLifetime: z.nullable(z.string()).optional(),
+    defaultSigningAlgorithm: DefaultSigningAlgorithm$outboundSchema.optional(),
+    enabled: z.boolean().optional(),
+    enabledSigningAlgorithms: z.nullable(
+      z.array(EnabledSigningAlgorithms$outboundSchema),
+    ).optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    xaaIdTokenLifetime: z.nullable(z.string()).optional(),
+  })
+);
 
 export function xaaSettingsToJSON(xaaSettings: XAASettings): string {
   return JSON.stringify(XAASettings$outboundSchema.parse(xaaSettings));

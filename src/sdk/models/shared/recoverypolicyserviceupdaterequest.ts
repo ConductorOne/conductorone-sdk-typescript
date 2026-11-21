@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   RecoveryPolicyInput,
   RecoveryPolicyInput$Outbound,
@@ -28,10 +29,12 @@ export const RecoveryPolicyServiceUpdateRequest$outboundSchema: z.ZodType<
   RecoveryPolicyServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   RecoveryPolicyServiceUpdateRequest
-> = z.object({
-  recoveryPolicy: z.nullable(RecoveryPolicyInput$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    recoveryPolicy: z.nullable(RecoveryPolicyInput$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function recoveryPolicyServiceUpdateRequestToJSON(
   recoveryPolicyServiceUpdateRequest: RecoveryPolicyServiceUpdateRequest,

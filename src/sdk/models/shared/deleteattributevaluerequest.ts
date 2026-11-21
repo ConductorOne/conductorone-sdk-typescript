@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The DeleteAttributeValueRequest message.
@@ -17,7 +18,7 @@ export const DeleteAttributeValueRequest$outboundSchema: z.ZodType<
   DeleteAttributeValueRequest$Outbound,
   z.ZodTypeDef,
   DeleteAttributeValueRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function deleteAttributeValueRequestToJSON(
   deleteAttributeValueRequest: DeleteAttributeValueRequest,

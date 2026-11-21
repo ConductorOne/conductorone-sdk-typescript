@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * SSOApplicationServiceRotateClientSecretRequest rotates one confidential
@@ -28,9 +29,11 @@ export const SSOApplicationServiceRotateClientSecretRequest$outboundSchema:
     SSOApplicationServiceRotateClientSecretRequest$Outbound,
     z.ZodTypeDef,
     SSOApplicationServiceRotateClientSecretRequest
-  > = z.object({
-    clientId: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      clientId: z.string(),
+    })
+  );
 
 export function ssoApplicationServiceRotateClientSecretRequestToJSON(
   ssoApplicationServiceRotateClientSecretRequest:

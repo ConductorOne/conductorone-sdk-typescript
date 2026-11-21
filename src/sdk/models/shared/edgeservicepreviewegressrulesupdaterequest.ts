@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   EdgeEgressRuleList,
   EdgeEgressRuleList$Outbound,
@@ -47,11 +48,13 @@ export const EdgeServicePreviewEgressRulesUpdateRequest$outboundSchema:
     EdgeServicePreviewEgressRulesUpdateRequest$Outbound,
     z.ZodTypeDef,
     EdgeServicePreviewEgressRulesUpdateRequest
-  > = z.object({
-    hosts: z.nullable(z.array(z.string())).optional(),
-    principalUserId: z.string().optional(),
-    proposedRules: z.nullable(EdgeEgressRuleList$outboundSchema).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      hosts: z.nullable(z.array(z.string())).optional(),
+      principalUserId: z.string().optional(),
+      proposedRules: z.nullable(EdgeEgressRuleList$outboundSchema).optional(),
+    })
+  );
 
 export function edgeServicePreviewEgressRulesUpdateRequestToJSON(
   edgeServicePreviewEgressRulesUpdateRequest:

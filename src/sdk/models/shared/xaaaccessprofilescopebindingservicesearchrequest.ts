@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   XAAAccessProfileScopeBindingRef,
   XAAAccessProfileScopeBindingRef$Outbound,
@@ -61,15 +62,17 @@ export const XAAAccessProfileScopeBindingServiceSearchRequest$outboundSchema:
     XAAAccessProfileScopeBindingServiceSearchRequest$Outbound,
     z.ZodTypeDef,
     XAAAccessProfileScopeBindingServiceSearchRequest
-  > = z.object({
-    accessProfileIds: z.nullable(z.array(z.string())).optional(),
-    appId: z.string().optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    refs: z.nullable(z.array(XAAAccessProfileScopeBindingRef$outboundSchema))
-      .optional(),
-    xaaScopeIds: z.nullable(z.array(z.string())).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      accessProfileIds: z.nullable(z.array(z.string())).optional(),
+      appId: z.string().optional(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      refs: z.nullable(z.array(XAAAccessProfileScopeBindingRef$outboundSchema))
+        .optional(),
+      xaaScopeIds: z.nullable(z.array(z.string())).optional(),
+    })
+  );
 
 export function xaaAccessProfileScopeBindingServiceSearchRequestToJSON(
   xaaAccessProfileScopeBindingServiceSearchRequest:

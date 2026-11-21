@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,10 +28,12 @@ export const DeactivatedOwnerEvidence$inboundSchema: z.ZodType<
   DeactivatedOwnerEvidence,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  deactivatedOwners: z.nullable(z.array(DeactivatedOwnerDetail$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    deactivatedOwners: z.nullable(z.array(DeactivatedOwnerDetail$inboundSchema))
+      .optional(),
+  })
+);
 /** @internal */
 export type DeactivatedOwnerEvidence$Outbound = {
   deactivatedOwners?: Array<DeactivatedOwnerDetail$Outbound> | null | undefined;
@@ -42,10 +44,13 @@ export const DeactivatedOwnerEvidence$outboundSchema: z.ZodType<
   DeactivatedOwnerEvidence$Outbound,
   z.ZodTypeDef,
   DeactivatedOwnerEvidence
-> = z.object({
-  deactivatedOwners: z.nullable(z.array(DeactivatedOwnerDetail$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    deactivatedOwners: z.nullable(
+      z.array(DeactivatedOwnerDetail$outboundSchema),
+    ).optional(),
+  })
+);
 
 export function deactivatedOwnerEvidenceToJSON(
   deactivatedOwnerEvidence: DeactivatedOwnerEvidence,

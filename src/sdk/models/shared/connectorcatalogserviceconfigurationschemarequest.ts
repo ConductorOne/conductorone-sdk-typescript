@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * ConnectorCatalogServiceConfigurationSchemaRequest is the request for retrieving a connector's configuration schema.
@@ -35,11 +36,13 @@ export const ConnectorCatalogServiceConfigurationSchemaRequest$outboundSchema:
     ConnectorCatalogServiceConfigurationSchemaRequest$Outbound,
     z.ZodTypeDef,
     ConnectorCatalogServiceConfigurationSchemaRequest
-  > = z.object({
-    appId: z.string().optional(),
-    catalogId: z.string().optional(),
-    connectorId: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string().optional(),
+      catalogId: z.string().optional(),
+      connectorId: z.string().optional(),
+    })
+  );
 
 export function connectorCatalogServiceConfigurationSchemaRequestToJSON(
   connectorCatalogServiceConfigurationSchemaRequest:

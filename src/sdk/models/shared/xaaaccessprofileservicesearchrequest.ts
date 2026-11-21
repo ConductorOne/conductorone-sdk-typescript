@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   XAAAccessProfileRef,
   XAAAccessProfileRef$Outbound,
@@ -57,14 +58,16 @@ export const XAAAccessProfileServiceSearchRequest$outboundSchema: z.ZodType<
   XAAAccessProfileServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   XAAAccessProfileServiceSearchRequest
-> = z.object({
-  appIds: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  refs: z.nullable(z.array(XAAAccessProfileRef$outboundSchema)).optional(),
-  xaaResourceServerIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appIds: z.nullable(z.array(z.string())).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    refs: z.nullable(z.array(XAAAccessProfileRef$outboundSchema)).optional(),
+    xaaResourceServerIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function xaaAccessProfileServiceSearchRequestToJSON(
   xaaAccessProfileServiceSearchRequest: XAAAccessProfileServiceSearchRequest,

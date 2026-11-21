@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -25,6 +26,11 @@ import {
   MCPServerHostedConfig$Outbound,
   MCPServerHostedConfig$outboundSchema,
 } from "./mcpserverhostedconfig.js";
+import {
+  MCPToolEnablementConfig,
+  MCPToolEnablementConfig$Outbound,
+  MCPToolEnablementConfig$outboundSchema,
+} from "./mcptoolenablementconfig.js";
 
 /**
  * Data sensitivity classification.
@@ -109,6 +115,7 @@ export type MCPServerServiceRegisterRequest = {
    * The type of MCP server being registered.
    */
   serverType?: MCPServerServiceRegisterRequestServerType | undefined;
+  toolEnablement?: MCPToolEnablementConfig | null | undefined;
   /**
    * Optional prefix for tool names in the C1 MCP server.
    *
@@ -170,12 +177,16 @@ export const MCPServerServiceRegisterRequestDataSensitivity$outboundSchema:
     string,
     z.ZodTypeDef,
     MCPServerServiceRegisterRequestDataSensitivity
-  > = openEnums.outboundSchema(MCPServerServiceRegisterRequestDataSensitivity);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(MCPServerServiceRegisterRequestDataSensitivity)
+  );
 
 /** @internal */
 export const MCPServerServiceRegisterRequestServerType$outboundSchema:
   z.ZodType<string, z.ZodTypeDef, MCPServerServiceRegisterRequestServerType> =
-    openEnums.outboundSchema(MCPServerServiceRegisterRequestServerType);
+    /* @__PURE__ */ lazySchema$(() =>
+      openEnums.outboundSchema(MCPServerServiceRegisterRequestServerType)
+    );
 
 /** @internal */
 export type MCPServerServiceRegisterRequest$Outbound = {
@@ -193,6 +204,7 @@ export type MCPServerServiceRegisterRequest$Outbound = {
   hostedConfig?: MCPServerHostedConfig$Outbound | null | undefined;
   oauthDiagnosticId?: string | undefined;
   serverType?: string | undefined;
+  toolEnablement?: MCPToolEnablementConfig$Outbound | null | undefined;
   toolPrefix?: string | undefined;
   tunnelApplianceId?: string | undefined;
   tunnelPath?: string | undefined;
@@ -206,30 +218,35 @@ export const MCPServerServiceRegisterRequest$outboundSchema: z.ZodType<
   MCPServerServiceRegisterRequest$Outbound,
   z.ZodTypeDef,
   MCPServerServiceRegisterRequest
-> = z.object({
-  accessProfileIds: z.nullable(z.array(z.string())).optional(),
-  accessProvisioning: z.nullable(MCPAccessProvisioningConfig$outboundSchema)
-    .optional(),
-  acknowledgedFindingIds: z.nullable(z.array(z.string())).optional(),
-  appManagedStateBindingRef: z.nullable(
-    AppManagedStateBindingRef$outboundSchema,
-  ).optional(),
-  dataSensitivity: MCPServerServiceRegisterRequestDataSensitivity$outboundSchema
-    .optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  externalConfig: z.nullable(MCPServerExternalConfig$outboundSchema).optional(),
-  hostedConfig: z.nullable(MCPServerHostedConfig$outboundSchema).optional(),
-  oauthDiagnosticId: z.string().optional(),
-  serverType: MCPServerServiceRegisterRequestServerType$outboundSchema
-    .optional(),
-  toolPrefix: z.string().optional(),
-  tunnelApplianceId: z.string().optional(),
-  tunnelPath: z.string().optional(),
-  tunnelServiceName: z.string().optional(),
-  tunneled: z.boolean().optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessProfileIds: z.nullable(z.array(z.string())).optional(),
+    accessProvisioning: z.nullable(MCPAccessProvisioningConfig$outboundSchema)
+      .optional(),
+    acknowledgedFindingIds: z.nullable(z.array(z.string())).optional(),
+    appManagedStateBindingRef: z.nullable(
+      AppManagedStateBindingRef$outboundSchema,
+    ).optional(),
+    dataSensitivity:
+      MCPServerServiceRegisterRequestDataSensitivity$outboundSchema.optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    externalConfig: z.nullable(MCPServerExternalConfig$outboundSchema)
+      .optional(),
+    hostedConfig: z.nullable(MCPServerHostedConfig$outboundSchema).optional(),
+    oauthDiagnosticId: z.string().optional(),
+    serverType: MCPServerServiceRegisterRequestServerType$outboundSchema
+      .optional(),
+    toolEnablement: z.nullable(MCPToolEnablementConfig$outboundSchema)
+      .optional(),
+    toolPrefix: z.string().optional(),
+    tunnelApplianceId: z.string().optional(),
+    tunnelPath: z.string().optional(),
+    tunnelServiceName: z.string().optional(),
+    tunneled: z.boolean().optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function mcpServerServiceRegisterRequestToJSON(
   mcpServerServiceRegisterRequest: MCPServerServiceRegisterRequest,

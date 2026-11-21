@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   SSOSubjectCompatibilityImportEntry,
   SSOSubjectCompatibilityImportEntry$Outbound,
@@ -50,13 +51,15 @@ export const SSOApplicationServiceBatchImportSubjectCompatibilityRequest$outboun
     SSOApplicationServiceBatchImportSubjectCompatibilityRequest$Outbound,
     z.ZodTypeDef,
     SSOApplicationServiceBatchImportSubjectCompatibilityRequest
-  > = z.object({
-    apply: z.boolean().optional(),
-    entries: z.nullable(
-      z.array(SSOSubjectCompatibilityImportEntry$outboundSchema),
-    ).optional(),
-    importId: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      apply: z.boolean().optional(),
+      entries: z.nullable(
+        z.array(SSOSubjectCompatibilityImportEntry$outboundSchema),
+      ).optional(),
+      importId: z.string().optional(),
+    })
+  );
 
 export function ssoApplicationServiceBatchImportSubjectCompatibilityRequestToJSON(
   ssoApplicationServiceBatchImportSubjectCompatibilityRequest:

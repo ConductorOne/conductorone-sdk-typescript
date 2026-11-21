@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -15,6 +15,13 @@ export type StringMapField = {
    * The optional field.
    */
   optional?: boolean | undefined;
+  /**
+   * If secret, the map's values are write-only in the UI and a masked form is
+   *
+   * @remarks
+   *  used. Keys stay readable.
+   */
+  secret?: boolean | undefined;
 };
 
 /** @internal */
@@ -22,9 +29,12 @@ export const StringMapField$inboundSchema: z.ZodType<
   StringMapField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  optional: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    optional: z.boolean().optional(),
+    secret: z.boolean().optional(),
+  })
+);
 
 export function stringMapFieldFromJSON(
   jsonString: string,

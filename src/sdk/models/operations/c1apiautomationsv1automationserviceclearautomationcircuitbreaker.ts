@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,16 +54,18 @@ export const C1ApiAutomationsV1AutomationServiceClearAutomationCircuitBreakerReq
     C1ApiAutomationsV1AutomationServiceClearAutomationCircuitBreakerRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAutomationsV1AutomationServiceClearAutomationCircuitBreakerRequest
-  > = z.object({
-    id: z.string(),
-    clearAutomationCircuitBreakerRequest: shared
-      .ClearAutomationCircuitBreakerRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      clearAutomationCircuitBreakerRequest:
-        "ClearAutomationCircuitBreakerRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      clearAutomationCircuitBreakerRequest: shared
+        .ClearAutomationCircuitBreakerRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        clearAutomationCircuitBreakerRequest:
+          "ClearAutomationCircuitBreakerRequest",
+      });
+    })
+  );
 
 export function c1ApiAutomationsV1AutomationServiceClearAutomationCircuitBreakerRequestToJSON(
   c1ApiAutomationsV1AutomationServiceClearAutomationCircuitBreakerRequest:
@@ -83,21 +85,23 @@ export const C1ApiAutomationsV1AutomationServiceClearAutomationCircuitBreakerRes
     C1ApiAutomationsV1AutomationServiceClearAutomationCircuitBreakerResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ClearAutomationCircuitBreakerResponse: shared
-      .ClearAutomationCircuitBreakerResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ClearAutomationCircuitBreakerResponse":
-        "clearAutomationCircuitBreakerResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ClearAutomationCircuitBreakerResponse: shared
+        .ClearAutomationCircuitBreakerResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ClearAutomationCircuitBreakerResponse":
+          "clearAutomationCircuitBreakerResponse",
+      });
+    })
+  );
 
 export function c1ApiAutomationsV1AutomationServiceClearAutomationCircuitBreakerResponseFromJSON(
   jsonString: string,

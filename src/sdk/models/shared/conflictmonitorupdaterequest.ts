@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AccessConflictNotificationConfig,
   AccessConflictNotificationConfig$Outbound,
@@ -47,14 +48,16 @@ export const ConflictMonitorUpdateRequest$outboundSchema: z.ZodType<
   ConflictMonitorUpdateRequest$Outbound,
   z.ZodTypeDef,
   ConflictMonitorUpdateRequest
-> = z.object({
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  negateGroupB: z.boolean().optional(),
-  notificationConfig: z.nullable(
-    AccessConflictNotificationConfig$outboundSchema,
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    negateGroupB: z.boolean().optional(),
+    notificationConfig: z.nullable(
+      AccessConflictNotificationConfig$outboundSchema,
+    ).optional(),
+  })
+);
 
 export function conflictMonitorUpdateRequestToJSON(
   conflictMonitorUpdateRequest: ConflictMonitorUpdateRequest,

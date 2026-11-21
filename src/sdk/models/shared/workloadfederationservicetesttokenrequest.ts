@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The WorkloadFederationServiceTestTokenRequest message.
@@ -34,10 +35,12 @@ export const WorkloadFederationServiceTestTokenRequest$outboundSchema:
     WorkloadFederationServiceTestTokenRequest$Outbound,
     z.ZodTypeDef,
     WorkloadFederationServiceTestTokenRequest
-  > = z.object({
-    sourceIp: z.string().optional(),
-    subjectToken: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      sourceIp: z.string().optional(),
+      subjectToken: z.string().optional(),
+    })
+  );
 
 export function workloadFederationServiceTestTokenRequestToJSON(
   workloadFederationServiceTestTokenRequest:

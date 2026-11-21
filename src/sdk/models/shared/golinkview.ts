@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,11 +25,13 @@ export const GoLinkView$inboundSchema: z.ZodType<
   GoLinkView,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  golink: z.nullable(GoLink$inboundSchema).optional(),
-  objectPermissions: z.nullable(ActorObjectPermissions$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    golink: z.nullable(GoLink$inboundSchema).optional(),
+    objectPermissions: z.nullable(ActorObjectPermissions$inboundSchema)
+      .optional(),
+  })
+);
 
 export function goLinkViewFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -77,27 +77,31 @@ export const DenialReason$inboundSchema: z.ZodType<
   DenialReason,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DenialReason);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(DenialReason));
 
 /** @internal */
 export const ResolveEffectiveLimitsResponseState$inboundSchema: z.ZodType<
   ResolveEffectiveLimitsResponseState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ResolveEffectiveLimitsResponseState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ResolveEffectiveLimitsResponseState)
+);
 
 /** @internal */
 export const ResolveEffectiveLimitsResponse$inboundSchema: z.ZodType<
   ResolveEffectiveLimitsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  currencyCode: z.string().optional(),
-  denialReason: DenialReason$inboundSchema.optional(),
-  denialScopeName: z.string().optional(),
-  scopes: z.nullable(z.array(EffectiveScope$inboundSchema)).optional(),
-  state: ResolveEffectiveLimitsResponseState$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    currencyCode: z.string().optional(),
+    denialReason: DenialReason$inboundSchema.optional(),
+    denialScopeName: z.string().optional(),
+    scopes: z.nullable(z.array(EffectiveScope$inboundSchema)).optional(),
+    state: ResolveEffectiveLimitsResponseState$inboundSchema.optional(),
+  })
+);
 
 export function resolveEffectiveLimitsResponseFromJSON(
   jsonString: string,

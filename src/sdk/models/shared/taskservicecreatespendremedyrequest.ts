@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   SpendRemedyPersonalExtensionRequest,
   SpendRemedyPersonalExtensionRequest$Outbound,
@@ -74,18 +75,20 @@ export const TaskServiceCreateSpendRemedyRequest$outboundSchema: z.ZodType<
   TaskServiceCreateSpendRemedyRequest$Outbound,
   z.ZodTypeDef,
   TaskServiceCreateSpendRemedyRequest
-> = z.object({
-  appId: z.string().optional(),
-  blockId: z.string().optional(),
-  personalExtension: z.nullable(
-    SpendRemedyPersonalExtensionRequest$outboundSchema,
-  ).optional(),
-  predecessorTaskId: z.string().optional(),
-  reason: z.string().optional(),
-  resume: z.nullable(SpendRemedyResumeRequest$outboundSchema).optional(),
-  sharedIncrease: z.nullable(SpendRemedySharedIncreaseRequest$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    blockId: z.string().optional(),
+    personalExtension: z.nullable(
+      SpendRemedyPersonalExtensionRequest$outboundSchema,
+    ).optional(),
+    predecessorTaskId: z.string().optional(),
+    reason: z.string().optional(),
+    resume: z.nullable(SpendRemedyResumeRequest$outboundSchema).optional(),
+    sharedIncrease: z.nullable(SpendRemedySharedIncreaseRequest$outboundSchema)
+      .optional(),
+  })
+);
 
 export function taskServiceCreateSpendRemedyRequestToJSON(
   taskServiceCreateSpendRemedyRequest: TaskServiceCreateSpendRemedyRequest,

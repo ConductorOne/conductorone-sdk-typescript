@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -56,12 +56,14 @@ export const FindingTransform$inboundSchema: z.ZodType<
   FindingTransform,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  removeTags: z.nullable(RemoveTags$inboundSchema).optional(),
-  setAssignee: z.nullable(SetAssignee$inboundSchema).optional(),
-  setSeverity: z.nullable(SetSeverity$inboundSchema).optional(),
-  setTags: z.nullable(SetTags$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    removeTags: z.nullable(RemoveTags$inboundSchema).optional(),
+    setAssignee: z.nullable(SetAssignee$inboundSchema).optional(),
+    setSeverity: z.nullable(SetSeverity$inboundSchema).optional(),
+    setTags: z.nullable(SetTags$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type FindingTransform$Outbound = {
   removeTags?: RemoveTags$Outbound | null | undefined;
@@ -75,12 +77,14 @@ export const FindingTransform$outboundSchema: z.ZodType<
   FindingTransform$Outbound,
   z.ZodTypeDef,
   FindingTransform
-> = z.object({
-  removeTags: z.nullable(RemoveTags$outboundSchema).optional(),
-  setAssignee: z.nullable(SetAssignee$outboundSchema).optional(),
-  setSeverity: z.nullable(SetSeverity$outboundSchema).optional(),
-  setTags: z.nullable(SetTags$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    removeTags: z.nullable(RemoveTags$outboundSchema).optional(),
+    setAssignee: z.nullable(SetAssignee$outboundSchema).optional(),
+    setSeverity: z.nullable(SetSeverity$outboundSchema).optional(),
+    setTags: z.nullable(SetTags$outboundSchema).optional(),
+  })
+);
 
 export function findingTransformToJSON(
   findingTransform: FindingTransform,

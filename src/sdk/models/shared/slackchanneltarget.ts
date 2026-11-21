@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -15,6 +15,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  *  fails the dispatch rather than the rule edit.
  */
 export type SlackChannelTarget = {
+  /**
+   * Allow a private channel retry if Slack restricts public channel creation. Defaults to false.
+   */
+  allowPrivateChannelFallback?: boolean | undefined;
   /**
    * The channelId field.
    */
@@ -30,12 +34,16 @@ export const SlackChannelTarget$inboundSchema: z.ZodType<
   SlackChannelTarget,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  channelId: z.string().optional(),
-  channelName: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowPrivateChannelFallback: z.boolean().optional(),
+    channelId: z.string().optional(),
+    channelName: z.string().optional(),
+  })
+);
 /** @internal */
 export type SlackChannelTarget$Outbound = {
+  allowPrivateChannelFallback?: boolean | undefined;
   channelId?: string | undefined;
   channelName?: string | undefined;
 };
@@ -45,10 +53,13 @@ export const SlackChannelTarget$outboundSchema: z.ZodType<
   SlackChannelTarget$Outbound,
   z.ZodTypeDef,
   SlackChannelTarget
-> = z.object({
-  channelId: z.string().optional(),
-  channelName: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowPrivateChannelFallback: z.boolean().optional(),
+    channelId: z.string().optional(),
+    channelName: z.string().optional(),
+  })
+);
 
 export function slackChannelTargetToJSON(
   slackChannelTarget: SlackChannelTarget,

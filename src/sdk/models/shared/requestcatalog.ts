@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -261,84 +261,102 @@ export const EnrollmentBehavior$inboundSchema: z.ZodType<
   EnrollmentBehavior,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EnrollmentBehavior);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(EnrollmentBehavior)
+);
 /** @internal */
 export const EnrollmentBehavior$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   EnrollmentBehavior
-> = openEnums.outboundSchema(EnrollmentBehavior);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(EnrollmentBehavior)
+);
 
 /** @internal */
 export const RequestCatalogType$inboundSchema: z.ZodType<
   RequestCatalogType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(RequestCatalogType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(RequestCatalogType)
+);
 /** @internal */
 export const RequestCatalogType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   RequestCatalogType
-> = openEnums.outboundSchema(RequestCatalogType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(RequestCatalogType)
+);
 
 /** @internal */
 export const UnenrollmentBehavior$inboundSchema: z.ZodType<
   UnenrollmentBehavior,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(UnenrollmentBehavior);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(UnenrollmentBehavior)
+);
 /** @internal */
 export const UnenrollmentBehavior$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   UnenrollmentBehavior
-> = openEnums.outboundSchema(UnenrollmentBehavior);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(UnenrollmentBehavior)
+);
 
 /** @internal */
 export const UnenrollmentEntitlementBehavior$inboundSchema: z.ZodType<
   UnenrollmentEntitlementBehavior,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(UnenrollmentEntitlementBehavior);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(UnenrollmentEntitlementBehavior)
+);
 /** @internal */
 export const UnenrollmentEntitlementBehavior$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   UnenrollmentEntitlementBehavior
-> = openEnums.outboundSchema(UnenrollmentEntitlementBehavior);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(UnenrollmentEntitlementBehavior)
+);
 
 /** @internal */
 export const RequestCatalog$inboundSchema: z.ZodType<
   RequestCatalog,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessEntitlements: z.nullable(z.array(AppEntitlement$inboundSchema))
-    .optional(),
-  annotations: z.record(z.string()).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  createdByUserId: z.string().optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enrollmentBehavior: EnrollmentBehavior$inboundSchema.optional(),
-  id: z.string().optional(),
-  published: z.boolean().optional(),
-  requestBundle: z.boolean().optional(),
-  type: RequestCatalogType$inboundSchema.optional(),
-  unenrollmentBehavior: UnenrollmentBehavior$inboundSchema.optional(),
-  unenrollmentEntitlementBehavior: UnenrollmentEntitlementBehavior$inboundSchema
-    .optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  visibleToEveryone: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessEntitlements: z.nullable(z.array(AppEntitlement$inboundSchema))
+      .optional(),
+    annotations: z.record(z.string()).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    createdByUserId: z.string().optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    enrollmentBehavior: EnrollmentBehavior$inboundSchema.optional(),
+    id: z.string().optional(),
+    published: z.boolean().optional(),
+    requestBundle: z.boolean().optional(),
+    type: RequestCatalogType$inboundSchema.optional(),
+    unenrollmentBehavior: UnenrollmentBehavior$inboundSchema.optional(),
+    unenrollmentEntitlementBehavior:
+      UnenrollmentEntitlementBehavior$inboundSchema.optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    visibleToEveryone: z.boolean().optional(),
+  })
+);
 
 export function requestCatalogFromJSON(
   jsonString: string,
@@ -372,23 +390,25 @@ export const RequestCatalogInput$outboundSchema: z.ZodType<
   RequestCatalogInput$Outbound,
   z.ZodTypeDef,
   RequestCatalogInput
-> = z.object({
-  accessEntitlements: z.nullable(z.array(AppEntitlementInput$outboundSchema))
-    .optional(),
-  annotations: z.record(z.string()).optional(),
-  createdByUserId: z.string().optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enrollmentBehavior: EnrollmentBehavior$outboundSchema.optional(),
-  id: z.string().optional(),
-  published: z.boolean().optional(),
-  requestBundle: z.boolean().optional(),
-  type: RequestCatalogType$outboundSchema.optional(),
-  unenrollmentBehavior: UnenrollmentBehavior$outboundSchema.optional(),
-  unenrollmentEntitlementBehavior:
-    UnenrollmentEntitlementBehavior$outboundSchema.optional(),
-  visibleToEveryone: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessEntitlements: z.nullable(z.array(AppEntitlementInput$outboundSchema))
+      .optional(),
+    annotations: z.record(z.string()).optional(),
+    createdByUserId: z.string().optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    enrollmentBehavior: EnrollmentBehavior$outboundSchema.optional(),
+    id: z.string().optional(),
+    published: z.boolean().optional(),
+    requestBundle: z.boolean().optional(),
+    type: RequestCatalogType$outboundSchema.optional(),
+    unenrollmentBehavior: UnenrollmentBehavior$outboundSchema.optional(),
+    unenrollmentEntitlementBehavior:
+      UnenrollmentEntitlementBehavior$outboundSchema.optional(),
+    visibleToEveryone: z.boolean().optional(),
+  })
+);
 
 export function requestCatalogInputToJSON(
   requestCatalogInput: RequestCatalogInput,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -47,7 +48,7 @@ export const FunctionTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   FunctionTypes
-> = openEnums.outboundSchema(FunctionTypes);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(FunctionTypes));
 
 /** @internal */
 export type FunctionsSearchRequest$Outbound = {
@@ -63,13 +64,15 @@ export const FunctionsSearchRequest$outboundSchema: z.ZodType<
   FunctionsSearchRequest$Outbound,
   z.ZodTypeDef,
   FunctionsSearchRequest
-> = z.object({
-  functionTypes: z.nullable(z.array(FunctionTypes$outboundSchema)).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  sortOptions: z.nullable(SortOptions$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    functionTypes: z.nullable(z.array(FunctionTypes$outboundSchema)).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    sortOptions: z.nullable(SortOptions$outboundSchema).optional(),
+  })
+);
 
 export function functionsSearchRequestToJSON(
   functionsSearchRequest: FunctionsSearchRequest,

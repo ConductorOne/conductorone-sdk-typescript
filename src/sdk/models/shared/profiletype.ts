@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -50,16 +50,18 @@ export const ProfileType$inboundSchema: z.ZodType<
   ProfileType,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string().optional(),
-  displayToUser: z.boolean().optional(),
-  iconUrl: z.string().optional(),
-  id: z.string().optional(),
-  name: z.string().optional(),
-  priority: z.number().int().optional(),
-  sizes: z.nullable(z.array(z.number().int())).optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    displayToUser: z.boolean().optional(),
+    iconUrl: z.string().optional(),
+    id: z.string().optional(),
+    name: z.string().optional(),
+    priority: z.number().int().optional(),
+    sizes: z.nullable(z.array(z.number().int())).optional(),
+    slug: z.string().optional(),
+  })
+);
 
 export function profileTypeFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,15 +51,17 @@ export const C1ApiArtifactV1ArtifactServiceDeleteRequest$outboundSchema:
     C1ApiArtifactV1ArtifactServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     C1ApiArtifactV1ArtifactServiceDeleteRequest
-  > = z.object({
-    id: z.string(),
-    artifactServiceDeleteRequest: shared
-      .ArtifactServiceDeleteRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      artifactServiceDeleteRequest: "ArtifactServiceDeleteRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      artifactServiceDeleteRequest: shared
+        .ArtifactServiceDeleteRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        artifactServiceDeleteRequest: "ArtifactServiceDeleteRequest",
+      });
+    })
+  );
 
 export function c1ApiArtifactV1ArtifactServiceDeleteRequestToJSON(
   c1ApiArtifactV1ArtifactServiceDeleteRequest:
@@ -78,20 +80,22 @@ export const C1ApiArtifactV1ArtifactServiceDeleteResponse$inboundSchema:
     C1ApiArtifactV1ArtifactServiceDeleteResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ArtifactServiceDeleteResponse: shared
-      .ArtifactServiceDeleteResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ArtifactServiceDeleteResponse": "artifactServiceDeleteResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ArtifactServiceDeleteResponse: shared
+        .ArtifactServiceDeleteResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ArtifactServiceDeleteResponse": "artifactServiceDeleteResponse",
+      });
+    })
+  );
 
 export function c1ApiArtifactV1ArtifactServiceDeleteResponseFromJSON(
   jsonString: string,

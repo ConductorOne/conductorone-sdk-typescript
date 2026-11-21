@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -33,11 +33,13 @@ export const MCPAccessProfileRef$inboundSchema: z.ZodType<
   MCPAccessProfileRef,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  connectorId: z.string().optional(),
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    connectorId: z.string().optional(),
+    id: z.string().optional(),
+  })
+);
 /** @internal */
 export type MCPAccessProfileRef$Outbound = {
   appId?: string | undefined;
@@ -50,11 +52,13 @@ export const MCPAccessProfileRef$outboundSchema: z.ZodType<
   MCPAccessProfileRef$Outbound,
   z.ZodTypeDef,
   MCPAccessProfileRef
-> = z.object({
-  appId: z.string().optional(),
-  connectorId: z.string().optional(),
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    connectorId: z.string().optional(),
+    id: z.string().optional(),
+  })
+);
 
 export function mcpAccessProfileRefToJSON(
   mcpAccessProfileRef: MCPAccessProfileRef,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const NotificationConfig$inboundSchema: z.ZodType<
   NotificationConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  sendClose: z.boolean().optional(),
-  sendKickoff: z.boolean().optional(),
-  sendReminders: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sendClose: z.boolean().optional(),
+    sendKickoff: z.boolean().optional(),
+    sendReminders: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type NotificationConfig$Outbound = {
   sendClose?: boolean | undefined;
@@ -47,11 +49,13 @@ export const NotificationConfig$outboundSchema: z.ZodType<
   NotificationConfig$Outbound,
   z.ZodTypeDef,
   NotificationConfig
-> = z.object({
-  sendClose: z.boolean().optional(),
-  sendKickoff: z.boolean().optional(),
-  sendReminders: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sendClose: z.boolean().optional(),
+    sendKickoff: z.boolean().optional(),
+    sendReminders: z.boolean().optional(),
+  })
+);
 
 export function notificationConfigToJSON(
   notificationConfig: NotificationConfig,

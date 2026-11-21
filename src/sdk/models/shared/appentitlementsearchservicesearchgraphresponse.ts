@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { GraphEdge, GraphEdge$inboundSchema } from "./graphedge.js";
@@ -53,15 +53,17 @@ export const AppEntitlementSearchServiceSearchGraphResponse$inboundSchema:
     AppEntitlementSearchServiceSearchGraphResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    edges: z.nullable(z.array(GraphEdge$inboundSchema)).optional(),
-    hasMore: z.boolean().optional(),
-    nodeCeilingHit: z.boolean().optional(),
-    nodes: z.nullable(z.array(GraphNode$inboundSchema)).optional(),
-    pageToken: z.string().optional(),
-    pathsReturned: z.number().int().optional(),
-    truncatedNodeIds: z.nullable(z.array(z.string())).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      edges: z.nullable(z.array(GraphEdge$inboundSchema)).optional(),
+      hasMore: z.boolean().optional(),
+      nodeCeilingHit: z.boolean().optional(),
+      nodes: z.nullable(z.array(GraphNode$inboundSchema)).optional(),
+      pageToken: z.string().optional(),
+      pathsReturned: z.number().int().optional(),
+      truncatedNodeIds: z.nullable(z.array(z.string())).optional(),
+    })
+  );
 
 export function appEntitlementSearchServiceSearchGraphResponseFromJSON(
   jsonString: string,

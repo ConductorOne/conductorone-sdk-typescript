@@ -4,10 +4,16 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
+
+export type C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsRequest =
+  {
+    pageSize?: number | undefined;
+    pageToken?: string | undefined;
+  };
 
 export type C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponse =
   {
@@ -32,25 +38,64 @@ export type C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutions
   };
 
 /** @internal */
+export type C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsRequest$Outbound =
+  {
+    page_size?: number | undefined;
+    page_token?: string | undefined;
+  };
+
+/** @internal */
+export const C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsRequest$outboundSchema:
+  z.ZodType<
+    C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsRequest$Outbound,
+    z.ZodTypeDef,
+    C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsRequest
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
+
+export function c1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsRequestToJSON(
+  c1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsRequest:
+    C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsRequest,
+): string {
+  return JSON.stringify(
+    C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsRequest$outboundSchema
+      .parse(
+        c1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsRequest,
+      ),
+  );
+}
+
+/** @internal */
 export const C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponse$inboundSchema:
   z.ZodType<
     C1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ListAutomationExecutionsResponse: shared
-      .ListAutomationExecutionsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ListAutomationExecutionsResponse": "listAutomationExecutionsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ListAutomationExecutionsResponse: shared
+        .ListAutomationExecutionsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ListAutomationExecutionsResponse": "listAutomationExecutionsResponse",
+      });
+    })
+  );
 
 export function c1ApiAutomationsV1AutomationExecutionServiceListAutomationExecutionsResponseFromJSON(
   jsonString: string,

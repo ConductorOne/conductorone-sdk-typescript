@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppEntitlementRoutingRuleSettings,
   AppEntitlementRoutingRuleSettings$Outbound,
@@ -57,15 +58,17 @@ export const CreateAppEntitlementRoutingRuleRequest$outboundSchema: z.ZodType<
   CreateAppEntitlementRoutingRuleRequest$Outbound,
   z.ZodTypeDef,
   CreateAppEntitlementRoutingRuleRequest
-> = z.object({
-  condition: z.string().optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  priority: z.number().int().optional(),
-  settings: z.nullable(AppEntitlementRoutingRuleSettings$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    condition: z.string().optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    enabled: z.boolean().optional(),
+    priority: z.number().int().optional(),
+    settings: z.nullable(AppEntitlementRoutingRuleSettings$outboundSchema)
+      .optional(),
+  })
+);
 
 export function createAppEntitlementRoutingRuleRequestToJSON(
   createAppEntitlementRoutingRuleRequest:

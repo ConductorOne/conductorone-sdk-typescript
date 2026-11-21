@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -51,8 +52,8 @@ export const EdgeServicePreviewEgressHostDecisionRequestEffect$outboundSchema:
     string,
     z.ZodTypeDef,
     EdgeServicePreviewEgressHostDecisionRequestEffect
-  > = openEnums.outboundSchema(
-    EdgeServicePreviewEgressHostDecisionRequestEffect,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(EdgeServicePreviewEgressHostDecisionRequestEffect)
   );
 
 /** @internal */
@@ -68,12 +69,14 @@ export const EdgeServicePreviewEgressHostDecisionRequest$outboundSchema:
     EdgeServicePreviewEgressHostDecisionRequest$Outbound,
     z.ZodTypeDef,
     EdgeServicePreviewEgressHostDecisionRequest
-  > = z.object({
-    draftRules: z.nullable(EdgeEgressRuleList$outboundSchema).optional(),
-    effect: EdgeServicePreviewEgressHostDecisionRequestEffect$outboundSchema
-      .optional(),
-    host: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      draftRules: z.nullable(EdgeEgressRuleList$outboundSchema).optional(),
+      effect: EdgeServicePreviewEgressHostDecisionRequestEffect$outboundSchema
+        .optional(),
+      host: z.string().optional(),
+    })
+  );
 
 export function edgeServicePreviewEgressHostDecisionRequestToJSON(
   edgeServicePreviewEgressHostDecisionRequest:

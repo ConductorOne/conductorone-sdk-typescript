@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ReorderAppEntitlementRoutingRulesRequest message.
@@ -28,9 +29,11 @@ export const ReorderAppEntitlementRoutingRulesRequest$outboundSchema: z.ZodType<
   ReorderAppEntitlementRoutingRulesRequest$Outbound,
   z.ZodTypeDef,
   ReorderAppEntitlementRoutingRulesRequest
-> = z.object({
-  ruleIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ruleIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function reorderAppEntitlementRoutingRulesRequestToJSON(
   reorderAppEntitlementRoutingRulesRequest:

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -50,16 +50,18 @@ export const C1ApiTaskV1TaskActionsServiceDenyRequest$outboundSchema: z.ZodType<
   C1ApiTaskV1TaskActionsServiceDenyRequest$Outbound,
   z.ZodTypeDef,
   C1ApiTaskV1TaskActionsServiceDenyRequest
-> = z.object({
-  taskId: z.string(),
-  taskActionsServiceDenyRequest: shared
-    .TaskActionsServiceDenyRequest$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    taskId: "task_id",
-    taskActionsServiceDenyRequest: "TaskActionsServiceDenyRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    taskId: z.string(),
+    taskActionsServiceDenyRequest: shared
+      .TaskActionsServiceDenyRequest$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      taskId: "task_id",
+      taskActionsServiceDenyRequest: "TaskActionsServiceDenyRequest",
+    });
+  })
+);
 
 export function c1ApiTaskV1TaskActionsServiceDenyRequestToJSON(
   c1ApiTaskV1TaskActionsServiceDenyRequest:
@@ -77,20 +79,22 @@ export const C1ApiTaskV1TaskActionsServiceDenyResponse$inboundSchema: z.ZodType<
   C1ApiTaskV1TaskActionsServiceDenyResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  TaskActionsServiceDenyResponse: shared
-    .TaskActionsServiceDenyResponse$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "TaskActionsServiceDenyResponse": "taskActionsServiceDenyResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    TaskActionsServiceDenyResponse: shared
+      .TaskActionsServiceDenyResponse$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "TaskActionsServiceDenyResponse": "taskActionsServiceDenyResponse",
+    });
+  })
+);
 
 export function c1ApiTaskV1TaskActionsServiceDenyResponseFromJSON(
   jsonString: string,

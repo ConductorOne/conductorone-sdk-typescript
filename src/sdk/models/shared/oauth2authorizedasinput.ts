@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * OAuth2AuthorizedAs tracks the user that OAuthed with the connector.
@@ -17,7 +18,7 @@ export const OAuth2AuthorizedAsInput$outboundSchema: z.ZodType<
   OAuth2AuthorizedAsInput$Outbound,
   z.ZodTypeDef,
   OAuth2AuthorizedAsInput
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function oAuth2AuthorizedAsInputToJSON(
   oAuth2AuthorizedAsInput: OAuth2AuthorizedAsInput,

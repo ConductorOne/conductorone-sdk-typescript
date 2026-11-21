@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * MCPAccessProfileServiceDeleteRequest deletes an MCP access profile (soft delete).
@@ -17,7 +18,7 @@ export const MCPAccessProfileServiceDeleteRequest$outboundSchema: z.ZodType<
   MCPAccessProfileServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   MCPAccessProfileServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function mcpAccessProfileServiceDeleteRequestToJSON(
   mcpAccessProfileServiceDeleteRequest: MCPAccessProfileServiceDeleteRequest,

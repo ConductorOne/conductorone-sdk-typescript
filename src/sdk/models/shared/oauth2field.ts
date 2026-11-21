@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,9 +30,11 @@ export const Oauth2Field$inboundSchema: z.ZodType<
   Oauth2Field,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  oauth2FieldView: z.nullable(Oauth2FieldView$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    oauth2FieldView: z.nullable(Oauth2FieldView$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type Oauth2Field$Outbound = {
   oauth2FieldView?: Oauth2FieldView$Outbound | null | undefined;
@@ -43,9 +45,11 @@ export const Oauth2Field$outboundSchema: z.ZodType<
   Oauth2Field$Outbound,
   z.ZodTypeDef,
   Oauth2Field
-> = z.object({
-  oauth2FieldView: z.nullable(Oauth2FieldView$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    oauth2FieldView: z.nullable(Oauth2FieldView$outboundSchema).optional(),
+  })
+);
 
 export function oauth2FieldToJSON(oauth2Field: Oauth2Field): string {
   return JSON.stringify(Oauth2Field$outboundSchema.parse(oauth2Field));

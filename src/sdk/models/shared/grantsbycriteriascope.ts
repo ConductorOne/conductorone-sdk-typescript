@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -79,43 +79,45 @@ export const SourceFilter$inboundSchema: z.ZodType<
   SourceFilter,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(SourceFilter);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(SourceFilter));
 /** @internal */
 export const SourceFilter$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SourceFilter
-> = openEnums.outboundSchema(SourceFilter);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(SourceFilter));
 
 /** @internal */
 export const TypeFilter$inboundSchema: z.ZodType<
   TypeFilter,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TypeFilter);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(TypeFilter));
 /** @internal */
 export const TypeFilter$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   TypeFilter
-> = openEnums.outboundSchema(TypeFilter);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(TypeFilter));
 
 /** @internal */
 export const GrantsByCriteriaScope$inboundSchema: z.ZodType<
   GrantsByCriteriaScope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessProfileFilter: z.nullable(GrantAccessProfileFilter$inboundSchema)
-    .optional(),
-  daysSinceAdded: z.nullable(z.string()).optional(),
-  daysSinceLastUsed: z.nullable(z.string()).optional(),
-  daysSinceReviewed: z.nullable(z.string()).optional(),
-  grantsAddedBetween: z.nullable(GrantsAddedBetween$inboundSchema).optional(),
-  sourceFilter: SourceFilter$inboundSchema.optional(),
-  typeFilter: TypeFilter$inboundSchema.optional(),
-  usedWithinLast: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessProfileFilter: z.nullable(GrantAccessProfileFilter$inboundSchema)
+      .optional(),
+    daysSinceAdded: z.nullable(z.string()).optional(),
+    daysSinceLastUsed: z.nullable(z.string()).optional(),
+    daysSinceReviewed: z.nullable(z.string()).optional(),
+    grantsAddedBetween: z.nullable(GrantsAddedBetween$inboundSchema).optional(),
+    sourceFilter: SourceFilter$inboundSchema.optional(),
+    typeFilter: TypeFilter$inboundSchema.optional(),
+    usedWithinLast: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type GrantsByCriteriaScope$Outbound = {
   accessProfileFilter?: GrantAccessProfileFilter$Outbound | null | undefined;
@@ -133,17 +135,20 @@ export const GrantsByCriteriaScope$outboundSchema: z.ZodType<
   GrantsByCriteriaScope$Outbound,
   z.ZodTypeDef,
   GrantsByCriteriaScope
-> = z.object({
-  accessProfileFilter: z.nullable(GrantAccessProfileFilter$outboundSchema)
-    .optional(),
-  daysSinceAdded: z.nullable(z.string()).optional(),
-  daysSinceLastUsed: z.nullable(z.string()).optional(),
-  daysSinceReviewed: z.nullable(z.string()).optional(),
-  grantsAddedBetween: z.nullable(GrantsAddedBetween$outboundSchema).optional(),
-  sourceFilter: SourceFilter$outboundSchema.optional(),
-  typeFilter: TypeFilter$outboundSchema.optional(),
-  usedWithinLast: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessProfileFilter: z.nullable(GrantAccessProfileFilter$outboundSchema)
+      .optional(),
+    daysSinceAdded: z.nullable(z.string()).optional(),
+    daysSinceLastUsed: z.nullable(z.string()).optional(),
+    daysSinceReviewed: z.nullable(z.string()).optional(),
+    grantsAddedBetween: z.nullable(GrantsAddedBetween$outboundSchema)
+      .optional(),
+    sourceFilter: SourceFilter$outboundSchema.optional(),
+    typeFilter: TypeFilter$outboundSchema.optional(),
+    usedWithinLast: z.nullable(z.string()).optional(),
+  })
+);
 
 export function grantsByCriteriaScopeToJSON(
   grantsByCriteriaScope: GrantsByCriteriaScope,

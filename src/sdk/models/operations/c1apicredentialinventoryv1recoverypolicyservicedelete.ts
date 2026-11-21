@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -52,15 +52,18 @@ export const C1ApiCredentialInventoryV1RecoveryPolicyServiceDeleteRequest$outbou
     C1ApiCredentialInventoryV1RecoveryPolicyServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     C1ApiCredentialInventoryV1RecoveryPolicyServiceDeleteRequest
-  > = z.object({
-    id: z.string(),
-    recoveryPolicyServiceDeleteRequest: shared
-      .RecoveryPolicyServiceDeleteRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      recoveryPolicyServiceDeleteRequest: "RecoveryPolicyServiceDeleteRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      recoveryPolicyServiceDeleteRequest: shared
+        .RecoveryPolicyServiceDeleteRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        recoveryPolicyServiceDeleteRequest:
+          "RecoveryPolicyServiceDeleteRequest",
+      });
+    })
+  );
 
 export function c1ApiCredentialInventoryV1RecoveryPolicyServiceDeleteRequestToJSON(
   c1ApiCredentialInventoryV1RecoveryPolicyServiceDeleteRequest:
@@ -78,21 +81,23 @@ export const C1ApiCredentialInventoryV1RecoveryPolicyServiceDeleteResponse$inbou
     C1ApiCredentialInventoryV1RecoveryPolicyServiceDeleteResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    RecoveryPolicyServiceDeleteResponse: shared
-      .RecoveryPolicyServiceDeleteResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "RecoveryPolicyServiceDeleteResponse":
-        "recoveryPolicyServiceDeleteResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      RecoveryPolicyServiceDeleteResponse: shared
+        .RecoveryPolicyServiceDeleteResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "RecoveryPolicyServiceDeleteResponse":
+          "recoveryPolicyServiceDeleteResponse",
+      });
+    })
+  );
 
 export function c1ApiCredentialInventoryV1RecoveryPolicyServiceDeleteResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -68,19 +68,21 @@ export type XAAScopeDiscoveryFinding = {
 
 /** @internal */
 export const Code$inboundSchema: z.ZodType<Code, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Code);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Code));
 
 /** @internal */
 export const XAAScopeDiscoveryFinding$inboundSchema: z.ZodType<
   XAAScopeDiscoveryFinding,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  code: Code$inboundSchema.optional(),
-  message: z.string().optional(),
-  resourceUri: z.string().optional(),
-  scopeValue: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: Code$inboundSchema.optional(),
+    message: z.string().optional(),
+    resourceUri: z.string().optional(),
+    scopeValue: z.string().optional(),
+  })
+);
 
 export function xaaScopeDiscoveryFindingFromJSON(
   jsonString: string,

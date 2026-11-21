@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Identifies an entitlement to exclude from a supported campaign's scope.
@@ -29,10 +30,12 @@ export const AccessReviewExcludedEntitlementInput$outboundSchema: z.ZodType<
   AccessReviewExcludedEntitlementInput$Outbound,
   z.ZodTypeDef,
   AccessReviewExcludedEntitlementInput
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+  })
+);
 
 export function accessReviewExcludedEntitlementInputToJSON(
   accessReviewExcludedEntitlementInput: AccessReviewExcludedEntitlementInput,

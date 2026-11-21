@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -42,6 +42,8 @@ export const FindingAuditEventEventType = {
     "FINDING_AUDIT_EVENT_TYPE_REPROCESS_COMPLETED",
   FindingAuditEventTypeAssigneeChanged:
     "FINDING_AUDIT_EVENT_TYPE_ASSIGNEE_CHANGED",
+  FindingAuditEventTypeHistoryImported:
+    "FINDING_AUDIT_EVENT_TYPE_HISTORY_IMPORTED",
 } as const;
 /**
  * The eventType field.
@@ -147,43 +149,47 @@ export const FindingAuditEventEventType$inboundSchema: z.ZodType<
   FindingAuditEventEventType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(FindingAuditEventEventType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(FindingAuditEventEventType)
+);
 
 /** @internal */
 export const SeverityAtEvent$inboundSchema: z.ZodType<
   SeverityAtEvent,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(SeverityAtEvent);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(SeverityAtEvent));
 
 /** @internal */
 export const StateAtEvent$inboundSchema: z.ZodType<
   StateAtEvent,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(StateAtEvent);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(StateAtEvent));
 
 /** @internal */
 export const FindingAuditEvent$inboundSchema: z.ZodType<
   FindingAuditEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  actorPrincipalId: z.string().optional(),
-  actorSubject: z.string().optional(),
-  appId: z.string().optional(),
-  bulkOperationId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  eventId: z.string().optional(),
-  eventType: FindingAuditEventEventType$inboundSchema.optional(),
-  findingId: z.string().optional(),
-  ocsf: z.nullable(z.record(z.any())).optional(),
-  severityAtEvent: SeverityAtEvent$inboundSchema.optional(),
-  stateAtEvent: StateAtEvent$inboundSchema.optional(),
-  ticketId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    actorPrincipalId: z.string().optional(),
+    actorSubject: z.string().optional(),
+    appId: z.string().optional(),
+    bulkOperationId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    eventId: z.string().optional(),
+    eventType: FindingAuditEventEventType$inboundSchema.optional(),
+    findingId: z.string().optional(),
+    ocsf: z.nullable(z.record(z.any())).optional(),
+    severityAtEvent: SeverityAtEvent$inboundSchema.optional(),
+    stateAtEvent: StateAtEvent$inboundSchema.optional(),
+    ticketId: z.string().optional(),
+  })
+);
 
 export function findingAuditEventFromJSON(
   jsonString: string,

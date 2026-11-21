@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -102,34 +102,36 @@ export const EffectSource$inboundSchema: z.ZodType<
   EffectSource,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EffectSource);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(EffectSource));
 
 /** @internal */
 export const EffectType$inboundSchema: z.ZodType<
   EffectType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EffectType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(EffectType));
 
 /** @internal */
 export const ConnectorActionEffect$inboundSchema: z.ZodType<
   ConnectorActionEffect,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  appUserId: z.string().optional(),
-  connectorActionId: z.string().optional(),
-  connectorEntitlementId: z.string().optional(),
-  connectorGrantId: z.string().optional(),
-  connectorId: z.string().optional(),
-  effectSource: EffectSource$inboundSchema.optional(),
-  effectType: EffectType$inboundSchema.optional(),
-  exclusionGroupId: z.string().optional(),
-  replacedConnectorGrantId: z.string().optional(),
-  unresolvedReason: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    appUserId: z.string().optional(),
+    connectorActionId: z.string().optional(),
+    connectorEntitlementId: z.string().optional(),
+    connectorGrantId: z.string().optional(),
+    connectorId: z.string().optional(),
+    effectSource: EffectSource$inboundSchema.optional(),
+    effectType: EffectType$inboundSchema.optional(),
+    exclusionGroupId: z.string().optional(),
+    replacedConnectorGrantId: z.string().optional(),
+    unresolvedReason: z.string().optional(),
+  })
+);
 
 export function connectorActionEffectFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ShadowMcpOccurrenceServiceSearchRequest message.
@@ -34,11 +35,13 @@ export const ShadowMcpOccurrenceServiceSearchRequest$outboundSchema: z.ZodType<
   ShadowMcpOccurrenceServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   ShadowMcpOccurrenceServiceSearchRequest
-> = z.object({
-  findingId: z.string().optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    findingId: z.string().optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+  })
+);
 
 export function shadowMcpOccurrenceServiceSearchRequestToJSON(
   shadowMcpOccurrenceServiceSearchRequest:

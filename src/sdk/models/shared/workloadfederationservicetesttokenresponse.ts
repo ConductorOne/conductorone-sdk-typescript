@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -39,21 +39,24 @@ export type WorkloadFederationServiceTestTokenResponse = {
 /** @internal */
 export const WorkloadFederationServiceTestTokenResponse$inboundSchema:
   z.ZodType<WorkloadFederationServiceTestTokenResponse, z.ZodTypeDef, unknown> =
-    z.object({
-      audienceValidation: z.nullable(TestTokenStepResult$inboundSchema)
-        .optional(),
-      celEvaluation: z.nullable(TestTokenStepResult$inboundSchema).optional(),
-      cidrCheck: z.nullable(TestTokenStepResult$inboundSchema).optional(),
-      decodedClaimsJson: z.string().optional(),
-      issuerMatch: z.nullable(TestTokenStepResult$inboundSchema).optional(),
-      jwtDecode: z.nullable(TestTokenStepResult$inboundSchema).optional(),
-      overallResult: z.boolean().optional(),
-      signatureValidation: z.nullable(TestTokenStepResult$inboundSchema)
-        .optional(),
-      subjectValidation: z.nullable(TestTokenStepResult$inboundSchema)
-        .optional(),
-      tokenFreshness: z.nullable(TestTokenStepResult$inboundSchema).optional(),
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        audienceValidation: z.nullable(TestTokenStepResult$inboundSchema)
+          .optional(),
+        celEvaluation: z.nullable(TestTokenStepResult$inboundSchema).optional(),
+        cidrCheck: z.nullable(TestTokenStepResult$inboundSchema).optional(),
+        decodedClaimsJson: z.string().optional(),
+        issuerMatch: z.nullable(TestTokenStepResult$inboundSchema).optional(),
+        jwtDecode: z.nullable(TestTokenStepResult$inboundSchema).optional(),
+        overallResult: z.boolean().optional(),
+        signatureValidation: z.nullable(TestTokenStepResult$inboundSchema)
+          .optional(),
+        subjectValidation: z.nullable(TestTokenStepResult$inboundSchema)
+          .optional(),
+        tokenFreshness: z.nullable(TestTokenStepResult$inboundSchema)
+          .optional(),
+      })
+    );
 
 export function workloadFederationServiceTestTokenResponseFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -46,15 +46,17 @@ export const C1ApiHooksV1HooksServiceDeleteRequest$outboundSchema: z.ZodType<
   C1ApiHooksV1HooksServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   C1ApiHooksV1HooksServiceDeleteRequest
-> = z.object({
-  id: z.string(),
-  hooksServiceDeleteRequest: shared.HooksServiceDeleteRequest$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    hooksServiceDeleteRequest: "HooksServiceDeleteRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    hooksServiceDeleteRequest: shared.HooksServiceDeleteRequest$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      hooksServiceDeleteRequest: "HooksServiceDeleteRequest",
+    });
+  })
+);
 
 export function c1ApiHooksV1HooksServiceDeleteRequestToJSON(
   c1ApiHooksV1HooksServiceDeleteRequest: C1ApiHooksV1HooksServiceDeleteRequest,
@@ -71,20 +73,22 @@ export const C1ApiHooksV1HooksServiceDeleteResponse$inboundSchema: z.ZodType<
   C1ApiHooksV1HooksServiceDeleteResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  HooksServiceDeleteResponse: shared.HooksServiceDeleteResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "HooksServiceDeleteResponse": "hooksServiceDeleteResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    HooksServiceDeleteResponse: shared.HooksServiceDeleteResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "HooksServiceDeleteResponse": "hooksServiceDeleteResponse",
+    });
+  })
+);
 
 export function c1ApiHooksV1HooksServiceDeleteResponseFromJSON(
   jsonString: string,

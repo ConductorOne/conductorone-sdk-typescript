@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -64,23 +64,29 @@ export const ToolGateFilterBuiltInPattern$inboundSchema: z.ZodType<
   ToolGateFilterBuiltInPattern,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ToolGateFilterBuiltInPattern);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ToolGateFilterBuiltInPattern)
+);
 /** @internal */
 export const ToolGateFilterBuiltInPattern$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ToolGateFilterBuiltInPattern
-> = openEnums.outboundSchema(ToolGateFilterBuiltInPattern);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ToolGateFilterBuiltInPattern)
+);
 
 /** @internal */
 export const ToolGateFilter$inboundSchema: z.ZodType<
   ToolGateFilter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  builtInPattern: ToolGateFilterBuiltInPattern$inboundSchema.optional(),
-  celExpression: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    builtInPattern: ToolGateFilterBuiltInPattern$inboundSchema.optional(),
+    celExpression: z.string().optional(),
+  })
+);
 /** @internal */
 export type ToolGateFilter$Outbound = {
   builtInPattern?: string | undefined;
@@ -92,10 +98,12 @@ export const ToolGateFilter$outboundSchema: z.ZodType<
   ToolGateFilter$Outbound,
   z.ZodTypeDef,
   ToolGateFilter
-> = z.object({
-  builtInPattern: ToolGateFilterBuiltInPattern$outboundSchema.optional(),
-  celExpression: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    builtInPattern: ToolGateFilterBuiltInPattern$outboundSchema.optional(),
+    celExpression: z.string().optional(),
+  })
+);
 
 export function toolGateFilterToJSON(toolGateFilter: ToolGateFilter): string {
   return JSON.stringify(ToolGateFilter$outboundSchema.parse(toolGateFilter));

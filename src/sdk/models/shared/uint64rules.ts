@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -73,16 +73,18 @@ export const UInt64Rules$inboundSchema: z.ZodType<
   UInt64Rules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  const: z.string().optional(),
-  gt: z.string().optional(),
-  gte: z.string().optional(),
-  ignoreEmpty: z.boolean().optional(),
-  in: z.nullable(z.array(z.string())).optional(),
-  lt: z.string().optional(),
-  lte: z.string().optional(),
-  notIn: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    const: z.string().optional(),
+    gt: z.string().optional(),
+    gte: z.string().optional(),
+    ignoreEmpty: z.boolean().optional(),
+    in: z.nullable(z.array(z.string())).optional(),
+    lt: z.string().optional(),
+    lte: z.string().optional(),
+    notIn: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type UInt64Rules$Outbound = {
   const?: string | undefined;
@@ -100,16 +102,18 @@ export const UInt64Rules$outboundSchema: z.ZodType<
   UInt64Rules$Outbound,
   z.ZodTypeDef,
   UInt64Rules
-> = z.object({
-  const: z.string().optional(),
-  gt: z.string().optional(),
-  gte: z.string().optional(),
-  ignoreEmpty: z.boolean().optional(),
-  in: z.nullable(z.array(z.string())).optional(),
-  lt: z.string().optional(),
-  lte: z.string().optional(),
-  notIn: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    const: z.string().optional(),
+    gt: z.string().optional(),
+    gte: z.string().optional(),
+    ignoreEmpty: z.boolean().optional(),
+    in: z.nullable(z.array(z.string())).optional(),
+    lt: z.string().optional(),
+    lte: z.string().optional(),
+    notIn: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function uInt64RulesToJSON(uInt64Rules: UInt64Rules): string {
   return JSON.stringify(UInt64Rules$outboundSchema.parse(uInt64Rules));

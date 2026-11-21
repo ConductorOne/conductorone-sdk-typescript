@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -56,23 +56,27 @@ export const AppEntitlementUserBindingFeedEventType$inboundSchema: z.ZodType<
   AppEntitlementUserBindingFeedEventType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AppEntitlementUserBindingFeedEventType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AppEntitlementUserBindingFeedEventType)
+);
 
 /** @internal */
 export const AppEntitlementUserBindingFeed$inboundSchema: z.ZodType<
   AppEntitlementUserBindingFeed,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  appUserId: z.string().optional(),
-  date: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  eventType: AppEntitlementUserBindingFeedEventType$inboundSchema.optional(),
-  ticketId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    appUserId: z.string().optional(),
+    date: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    eventType: AppEntitlementUserBindingFeedEventType$inboundSchema.optional(),
+    ticketId: z.string().optional(),
+  })
+);
 
 export function appEntitlementUserBindingFeedFromJSON(
   jsonString: string,

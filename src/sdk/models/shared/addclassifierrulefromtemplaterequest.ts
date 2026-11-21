@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The AddClassifierRuleFromTemplateRequest message.
@@ -50,13 +51,15 @@ export const AddClassifierRuleFromTemplateRequest$outboundSchema: z.ZodType<
   AddClassifierRuleFromTemplateRequest$Outbound,
   z.ZodTypeDef,
   AddClassifierRuleFromTemplateRequest
-> = z.object({
-  insertIndex: z.number().int().optional(),
-  params: z.record(z.string()).optional(),
-  ruleIndex: z.number().int().optional(),
-  templateId: z.string(),
-  templateVersion: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    insertIndex: z.number().int().optional(),
+    params: z.record(z.string()).optional(),
+    ruleIndex: z.number().int().optional(),
+    templateId: z.string(),
+    templateVersion: z.string().optional(),
+  })
+);
 
 export function addClassifierRuleFromTemplateRequestToJSON(
   addClassifierRuleFromTemplateRequest: AddClassifierRuleFromTemplateRequest,

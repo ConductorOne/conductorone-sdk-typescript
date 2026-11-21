@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -61,37 +61,47 @@ export const StepUpRequiredLevel$inboundSchema: z.ZodType<
   StepUpRequiredLevel,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(StepUpRequiredLevel);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(StepUpRequiredLevel)
+);
 /** @internal */
 export const StepUpRequiredLevel$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   StepUpRequiredLevel
-> = openEnums.outboundSchema(StepUpRequiredLevel);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(StepUpRequiredLevel)
+);
 
 /** @internal */
 export const StepUpRequiredTypes$inboundSchema: z.ZodType<
   StepUpRequiredTypes,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(StepUpRequiredTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(StepUpRequiredTypes)
+);
 /** @internal */
 export const StepUpRequiredTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   StepUpRequiredTypes
-> = openEnums.outboundSchema(StepUpRequiredTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(StepUpRequiredTypes)
+);
 
 /** @internal */
 export const StepUpRequired$inboundSchema: z.ZodType<
   StepUpRequired,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  level: StepUpRequiredLevel$inboundSchema.optional(),
-  maxAgeSeconds: z.number().int().optional(),
-  types: z.nullable(z.array(StepUpRequiredTypes$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    level: StepUpRequiredLevel$inboundSchema.optional(),
+    maxAgeSeconds: z.number().int().optional(),
+    types: z.nullable(z.array(StepUpRequiredTypes$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type StepUpRequired$Outbound = {
   level?: string | undefined;
@@ -104,11 +114,13 @@ export const StepUpRequired$outboundSchema: z.ZodType<
   StepUpRequired$Outbound,
   z.ZodTypeDef,
   StepUpRequired
-> = z.object({
-  level: StepUpRequiredLevel$outboundSchema.optional(),
-  maxAgeSeconds: z.number().int().optional(),
-  types: z.nullable(z.array(StepUpRequiredTypes$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    level: StepUpRequiredLevel$outboundSchema.optional(),
+    maxAgeSeconds: z.number().int().optional(),
+    types: z.nullable(z.array(StepUpRequiredTypes$outboundSchema)).optional(),
+  })
+);
 
 export function stepUpRequiredToJSON(stepUpRequired: StepUpRequired): string {
   return JSON.stringify(StepUpRequired$outboundSchema.parse(stepUpRequired));

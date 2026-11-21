@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,18 +54,20 @@ export const C1ApiCrossAppAccessV1XAAResourceServerServiceUpdateRequest$outbound
     C1ApiCrossAppAccessV1XAAResourceServerServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiCrossAppAccessV1XAAResourceServerServiceUpdateRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    xaaResourceServerServiceUpdateRequest: shared
-      .XAAResourceServerServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      xaaResourceServerServiceUpdateRequest:
-        "XAAResourceServerServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      xaaResourceServerServiceUpdateRequest: shared
+        .XAAResourceServerServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        xaaResourceServerServiceUpdateRequest:
+          "XAAResourceServerServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAResourceServerServiceUpdateRequestToJSON(
   c1ApiCrossAppAccessV1XAAResourceServerServiceUpdateRequest:
@@ -83,21 +85,23 @@ export const C1ApiCrossAppAccessV1XAAResourceServerServiceUpdateResponse$inbound
     C1ApiCrossAppAccessV1XAAResourceServerServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    XAAResourceServerServiceUpdateResponse: shared
-      .XAAResourceServerServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "XAAResourceServerServiceUpdateResponse":
-        "xaaResourceServerServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      XAAResourceServerServiceUpdateResponse: shared
+        .XAAResourceServerServiceUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "XAAResourceServerServiceUpdateResponse":
+          "xaaResourceServerServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAResourceServerServiceUpdateResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -49,24 +49,26 @@ export const ServicePrincipalCredential$inboundSchema: z.ZodType<
   ServicePrincipalCredential,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowSourceCidrs: z.nullable(z.array(z.string())).optional(),
-  clientId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  displayName: z.string().optional(),
-  expiresAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  id: z.string().optional(),
-  lastUsedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  requireDpop: z.boolean().optional(),
-  scopedRoleIds: z.nullable(z.array(z.string())).optional(),
-  servicePrincipalId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowSourceCidrs: z.nullable(z.array(z.string())).optional(),
+    clientId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    displayName: z.string().optional(),
+    expiresAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    id: z.string().optional(),
+    lastUsedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    requireDpop: z.boolean().optional(),
+    scopedRoleIds: z.nullable(z.array(z.string())).optional(),
+    servicePrincipalId: z.string().optional(),
+  })
+);
 
 export function servicePrincipalCredentialFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const ConnectorRef$inboundSchema: z.ZodType<
   ConnectorRef,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    id: z.string().optional(),
+  })
+);
 /** @internal */
 export type ConnectorRef$Outbound = {
   appId?: string | undefined;
@@ -41,10 +43,12 @@ export const ConnectorRef$outboundSchema: z.ZodType<
   ConnectorRef$Outbound,
   z.ZodTypeDef,
   ConnectorRef
-> = z.object({
-  appId: z.string().optional(),
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    id: z.string().optional(),
+  })
+);
 
 export function connectorRefToJSON(connectorRef: ConnectorRef): string {
   return JSON.stringify(ConnectorRef$outboundSchema.parse(connectorRef));

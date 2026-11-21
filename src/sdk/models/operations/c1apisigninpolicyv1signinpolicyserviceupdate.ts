@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,15 +51,17 @@ export const C1ApiSignInPolicyV1SignInPolicyServiceUpdateRequest$outboundSchema:
     C1ApiSignInPolicyV1SignInPolicyServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSignInPolicyV1SignInPolicyServiceUpdateRequest
-  > = z.object({
-    id: z.string(),
-    signInPolicyServiceUpdateRequest: shared
-      .SignInPolicyServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      signInPolicyServiceUpdateRequest: "SignInPolicyServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      signInPolicyServiceUpdateRequest: shared
+        .SignInPolicyServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        signInPolicyServiceUpdateRequest: "SignInPolicyServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiSignInPolicyV1SignInPolicyServiceUpdateRequestToJSON(
   c1ApiSignInPolicyV1SignInPolicyServiceUpdateRequest:
@@ -78,20 +80,23 @@ export const C1ApiSignInPolicyV1SignInPolicyServiceUpdateResponse$inboundSchema:
     C1ApiSignInPolicyV1SignInPolicyServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SignInPolicyServiceUpdateResponse: shared
-      .SignInPolicyServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SignInPolicyServiceUpdateResponse": "signInPolicyServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SignInPolicyServiceUpdateResponse: shared
+        .SignInPolicyServiceUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SignInPolicyServiceUpdateResponse":
+          "signInPolicyServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiSignInPolicyV1SignInPolicyServiceUpdateResponseFromJSON(
   jsonString: string,

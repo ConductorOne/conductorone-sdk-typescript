@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The TerminateAutomationRequest message.
@@ -17,7 +18,7 @@ export const TerminateAutomationRequest$outboundSchema: z.ZodType<
   TerminateAutomationRequest$Outbound,
   z.ZodTypeDef,
   TerminateAutomationRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function terminateAutomationRequestToJSON(
   terminateAutomationRequest: TerminateAutomationRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -34,10 +34,12 @@ export const MCPAccessProfileServiceSearchAccessProfilesResponse$inboundSchema:
     MCPAccessProfileServiceSearchAccessProfilesResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    nextPageToken: z.string().optional(),
-    profiles: z.nullable(z.array(MCPAccessProfile$inboundSchema)).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      nextPageToken: z.string().optional(),
+      profiles: z.nullable(z.array(MCPAccessProfile$inboundSchema)).optional(),
+    })
+  );
 
 export function mcpAccessProfileServiceSearchAccessProfilesResponseFromJSON(
   jsonString: string,

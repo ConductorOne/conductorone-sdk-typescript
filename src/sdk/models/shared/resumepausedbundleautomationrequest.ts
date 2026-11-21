@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The request message for resuming a paused bundle automation.
@@ -17,7 +18,7 @@ export const ResumePausedBundleAutomationRequest$outboundSchema: z.ZodType<
   ResumePausedBundleAutomationRequest$Outbound,
   z.ZodTypeDef,
   ResumePausedBundleAutomationRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function resumePausedBundleAutomationRequestToJSON(
   resumePausedBundleAutomationRequest: ResumePausedBundleAutomationRequest,

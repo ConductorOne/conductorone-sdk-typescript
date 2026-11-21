@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { MCPResource, MCPResource$inboundSchema } from "./mcpresource.js";
@@ -27,10 +27,12 @@ export const MCPResourceServiceListResponse$inboundSchema: z.ZodType<
   MCPResourceServiceListResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  nextPageToken: z.string().optional(),
-  resources: z.nullable(z.array(MCPResource$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    nextPageToken: z.string().optional(),
+    resources: z.nullable(z.array(MCPResource$inboundSchema)).optional(),
+  })
+);
 
 export function mcpResourceServiceListResponseFromJSON(
   jsonString: string,

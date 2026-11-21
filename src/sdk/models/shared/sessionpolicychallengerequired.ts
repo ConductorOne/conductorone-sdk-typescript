@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -34,19 +34,21 @@ export type SessionPolicyChallengeRequired = {
 
 /** @internal */
 export const Types$inboundSchema: z.ZodType<Types, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Types);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Types));
 /** @internal */
 export const Types$outboundSchema: z.ZodType<string, z.ZodTypeDef, Types> =
-  openEnums.outboundSchema(Types);
+  /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Types));
 
 /** @internal */
 export const SessionPolicyChallengeRequired$inboundSchema: z.ZodType<
   SessionPolicyChallengeRequired,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  types: z.nullable(z.array(Types$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    types: z.nullable(z.array(Types$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type SessionPolicyChallengeRequired$Outbound = {
   types?: Array<string> | null | undefined;
@@ -57,9 +59,11 @@ export const SessionPolicyChallengeRequired$outboundSchema: z.ZodType<
   SessionPolicyChallengeRequired$Outbound,
   z.ZodTypeDef,
   SessionPolicyChallengeRequired
-> = z.object({
-  types: z.nullable(z.array(Types$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    types: z.nullable(z.array(Types$outboundSchema)).optional(),
+  })
+);
 
 export function sessionPolicyChallengeRequiredToJSON(
   sessionPolicyChallengeRequired: SessionPolicyChallengeRequired,

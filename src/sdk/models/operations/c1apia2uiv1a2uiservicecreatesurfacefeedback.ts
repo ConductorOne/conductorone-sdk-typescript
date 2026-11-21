@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,17 +51,19 @@ export const C1ApiA2uiV1A2UIServiceCreateSurfaceFeedbackRequest$outboundSchema:
     C1ApiA2uiV1A2UIServiceCreateSurfaceFeedbackRequest$Outbound,
     z.ZodTypeDef,
     C1ApiA2uiV1A2UIServiceCreateSurfaceFeedbackRequest
-  > = z.object({
-    surfaceId: z.string(),
-    a2UIServiceCreateSurfaceFeedbackRequest: shared
-      .A2UIServiceCreateSurfaceFeedbackRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      surfaceId: "surface_id",
-      a2UIServiceCreateSurfaceFeedbackRequest:
-        "A2UIServiceCreateSurfaceFeedbackRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      surfaceId: z.string(),
+      a2UIServiceCreateSurfaceFeedbackRequest: shared
+        .A2UIServiceCreateSurfaceFeedbackRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        surfaceId: "surface_id",
+        a2UIServiceCreateSurfaceFeedbackRequest:
+          "A2UIServiceCreateSurfaceFeedbackRequest",
+      });
+    })
+  );
 
 export function c1ApiA2uiV1A2UIServiceCreateSurfaceFeedbackRequestToJSON(
   c1ApiA2uiV1A2UIServiceCreateSurfaceFeedbackRequest:
@@ -80,21 +82,23 @@ export const C1ApiA2uiV1A2UIServiceCreateSurfaceFeedbackResponse$inboundSchema:
     C1ApiA2uiV1A2UIServiceCreateSurfaceFeedbackResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    A2UIServiceCreateSurfaceFeedbackResponse: shared
-      .A2UIServiceCreateSurfaceFeedbackResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "A2UIServiceCreateSurfaceFeedbackResponse":
-        "a2UIServiceCreateSurfaceFeedbackResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      A2UIServiceCreateSurfaceFeedbackResponse: shared
+        .A2UIServiceCreateSurfaceFeedbackResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "A2UIServiceCreateSurfaceFeedbackResponse":
+          "a2UIServiceCreateSurfaceFeedbackResponse",
+      });
+    })
+  );
 
 export function c1ApiA2uiV1A2UIServiceCreateSurfaceFeedbackResponseFromJSON(
   jsonString: string,

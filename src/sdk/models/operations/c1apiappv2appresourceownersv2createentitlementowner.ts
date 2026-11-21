@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -62,27 +62,29 @@ export const C1ApiAppV2AppResourceOwnersV2CreateEntitlementOwnerRequest$outbound
     C1ApiAppV2AppResourceOwnersV2CreateEntitlementOwnerRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV2AppResourceOwnersV2CreateEntitlementOwnerRequest
-  > = z.object({
-    appId: z.string(),
-    resourceTypeId: z.string(),
-    resourceId: z.string(),
-    roleSlug: z.string(),
-    appEntitlementRefAppId: z.string(),
-    appEntitlementRefId: z.string(),
-    createAppResourceEntitlementOwnerRequest: shared
-      .CreateAppResourceEntitlementOwnerRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      resourceTypeId: "resource_type_id",
-      resourceId: "resource_id",
-      roleSlug: "role_slug",
-      appEntitlementRefAppId: "app_entitlement_ref_app_id",
-      appEntitlementRefId: "app_entitlement_ref_id",
-      createAppResourceEntitlementOwnerRequest:
-        "CreateAppResourceEntitlementOwnerRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      resourceTypeId: z.string(),
+      resourceId: z.string(),
+      roleSlug: z.string(),
+      appEntitlementRefAppId: z.string(),
+      appEntitlementRefId: z.string(),
+      createAppResourceEntitlementOwnerRequest: shared
+        .CreateAppResourceEntitlementOwnerRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        resourceTypeId: "resource_type_id",
+        resourceId: "resource_id",
+        roleSlug: "role_slug",
+        appEntitlementRefAppId: "app_entitlement_ref_app_id",
+        appEntitlementRefId: "app_entitlement_ref_id",
+        createAppResourceEntitlementOwnerRequest:
+          "CreateAppResourceEntitlementOwnerRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV2AppResourceOwnersV2CreateEntitlementOwnerRequestToJSON(
   c1ApiAppV2AppResourceOwnersV2CreateEntitlementOwnerRequest:
@@ -100,21 +102,23 @@ export const C1ApiAppV2AppResourceOwnersV2CreateEntitlementOwnerResponse$inbound
     C1ApiAppV2AppResourceOwnersV2CreateEntitlementOwnerResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    CreateAppResourceEntitlementOwnerResponse: shared
-      .CreateAppResourceEntitlementOwnerResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "CreateAppResourceEntitlementOwnerResponse":
-        "createAppResourceEntitlementOwnerResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      CreateAppResourceEntitlementOwnerResponse: shared
+        .CreateAppResourceEntitlementOwnerResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "CreateAppResourceEntitlementOwnerResponse":
+          "createAppResourceEntitlementOwnerResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV2AppResourceOwnersV2CreateEntitlementOwnerResponseFromJSON(
   jsonString: string,

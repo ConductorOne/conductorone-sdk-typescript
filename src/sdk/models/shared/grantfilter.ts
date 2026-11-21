@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -74,50 +74,62 @@ export const GrantFilterType$inboundSchema: z.ZodType<
   GrantFilterType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(GrantFilterType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(GrantFilterType));
 /** @internal */
 export const GrantFilterType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   GrantFilterType
-> = openEnums.outboundSchema(GrantFilterType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(GrantFilterType)
+);
 
 /** @internal */
 export const GrantJustificationType$inboundSchema: z.ZodType<
   GrantJustificationType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(GrantJustificationType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(GrantJustificationType)
+);
 /** @internal */
 export const GrantJustificationType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   GrantJustificationType
-> = openEnums.outboundSchema(GrantJustificationType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(GrantJustificationType)
+);
 
 /** @internal */
 export const GrantFilterGrantSourceFilter$inboundSchema: z.ZodType<
   GrantFilterGrantSourceFilter,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(GrantFilterGrantSourceFilter);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(GrantFilterGrantSourceFilter)
+);
 /** @internal */
 export const GrantFilterGrantSourceFilter$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   GrantFilterGrantSourceFilter
-> = openEnums.outboundSchema(GrantFilterGrantSourceFilter);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(GrantFilterGrantSourceFilter)
+);
 
 /** @internal */
 export const GrantFilter$inboundSchema: z.ZodType<
   GrantFilter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  grantFilterType: GrantFilterType$inboundSchema.optional(),
-  grantJustificationType: GrantJustificationType$inboundSchema.optional(),
-  grantSourceFilter: GrantFilterGrantSourceFilter$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    grantFilterType: GrantFilterType$inboundSchema.optional(),
+    grantJustificationType: GrantJustificationType$inboundSchema.optional(),
+    grantSourceFilter: GrantFilterGrantSourceFilter$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type GrantFilter$Outbound = {
   grantFilterType?: string | undefined;
@@ -130,11 +142,13 @@ export const GrantFilter$outboundSchema: z.ZodType<
   GrantFilter$Outbound,
   z.ZodTypeDef,
   GrantFilter
-> = z.object({
-  grantFilterType: GrantFilterType$outboundSchema.optional(),
-  grantJustificationType: GrantJustificationType$outboundSchema.optional(),
-  grantSourceFilter: GrantFilterGrantSourceFilter$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    grantFilterType: GrantFilterType$outboundSchema.optional(),
+    grantJustificationType: GrantJustificationType$outboundSchema.optional(),
+    grantSourceFilter: GrantFilterGrantSourceFilter$outboundSchema.optional(),
+  })
+);
 
 export function grantFilterToJSON(grantFilter: GrantFilter): string {
   return JSON.stringify(GrantFilter$outboundSchema.parse(grantFilter));

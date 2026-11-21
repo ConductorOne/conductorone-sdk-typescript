@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,9 +30,11 @@ export const SSOSubjectCompatibility$inboundSchema: z.ZodType<
   SSOSubjectCompatibility,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  userAttributeMappingId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userAttributeMappingId: z.string().optional(),
+  })
+);
 /** @internal */
 export type SSOSubjectCompatibility$Outbound = {
   userAttributeMappingId?: string | undefined;
@@ -43,9 +45,11 @@ export const SSOSubjectCompatibility$outboundSchema: z.ZodType<
   SSOSubjectCompatibility$Outbound,
   z.ZodTypeDef,
   SSOSubjectCompatibility
-> = z.object({
-  userAttributeMappingId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userAttributeMappingId: z.string().optional(),
+  })
+);
 
 export function ssoSubjectCompatibilityToJSON(
   ssoSubjectCompatibility: SSOSubjectCompatibility,

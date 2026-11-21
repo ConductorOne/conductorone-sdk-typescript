@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   WorkloadFederationTrustInput,
   WorkloadFederationTrustInput$Outbound,
@@ -29,10 +30,12 @@ export const WorkloadFederationServiceUpdateTrustRequest$outboundSchema:
     WorkloadFederationServiceUpdateTrustRequest$Outbound,
     z.ZodTypeDef,
     WorkloadFederationServiceUpdateTrustRequest
-  > = z.object({
-    trust: z.nullable(WorkloadFederationTrustInput$outboundSchema).optional(),
-    updateMask: z.nullable(z.string()).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      trust: z.nullable(WorkloadFederationTrustInput$outboundSchema).optional(),
+      updateMask: z.nullable(z.string()).optional(),
+    })
+  );
 
 export function workloadFederationServiceUpdateTrustRequestToJSON(
   workloadFederationServiceUpdateTrustRequest:

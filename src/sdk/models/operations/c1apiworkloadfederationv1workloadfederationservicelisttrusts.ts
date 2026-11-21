@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -12,6 +12,8 @@ import * as shared from "../shared/index.js";
 export type C1ApiWorkloadFederationV1WorkloadFederationServiceListTrustsRequest =
   {
     servicePrincipalId: string;
+    pageSize?: number | undefined;
+    pageToken?: string | undefined;
   };
 
 export type C1ApiWorkloadFederationV1WorkloadFederationServiceListTrustsResponse =
@@ -40,6 +42,8 @@ export type C1ApiWorkloadFederationV1WorkloadFederationServiceListTrustsResponse
 export type C1ApiWorkloadFederationV1WorkloadFederationServiceListTrustsRequest$Outbound =
   {
     service_principal_id: string;
+    page_size?: number | undefined;
+    page_token?: string | undefined;
   };
 
 /** @internal */
@@ -48,13 +52,19 @@ export const C1ApiWorkloadFederationV1WorkloadFederationServiceListTrustsRequest
     C1ApiWorkloadFederationV1WorkloadFederationServiceListTrustsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiWorkloadFederationV1WorkloadFederationServiceListTrustsRequest
-  > = z.object({
-    servicePrincipalId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      servicePrincipalId: "service_principal_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      servicePrincipalId: z.string(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        servicePrincipalId: "service_principal_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiWorkloadFederationV1WorkloadFederationServiceListTrustsRequestToJSON(
   c1ApiWorkloadFederationV1WorkloadFederationServiceListTrustsRequest:
@@ -74,21 +84,23 @@ export const C1ApiWorkloadFederationV1WorkloadFederationServiceListTrustsRespons
     C1ApiWorkloadFederationV1WorkloadFederationServiceListTrustsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    WorkloadFederationServiceListTrustsResponse: shared
-      .WorkloadFederationServiceListTrustsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "WorkloadFederationServiceListTrustsResponse":
-        "workloadFederationServiceListTrustsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      WorkloadFederationServiceListTrustsResponse: shared
+        .WorkloadFederationServiceListTrustsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "WorkloadFederationServiceListTrustsResponse":
+          "workloadFederationServiceListTrustsResponse",
+      });
+    })
+  );
 
 export function c1ApiWorkloadFederationV1WorkloadFederationServiceListTrustsResponseFromJSON(
   jsonString: string,

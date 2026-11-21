@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -58,22 +58,24 @@ export const C1ApiAiGovernanceV1MCPAccessProfileToolBindingServiceCreateBindings
     C1ApiAiGovernanceV1MCPAccessProfileToolBindingServiceCreateBindingsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1MCPAccessProfileToolBindingServiceCreateBindingsRequest
-  > = z.object({
-    appId: z.string(),
-    connectorId: z.string(),
-    accessProfileId: z.string(),
-    mcpAccessProfileToolBindingServiceCreateRequest: shared
-      .MCPAccessProfileToolBindingServiceCreateRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      connectorId: "connector_id",
-      accessProfileId: "access_profile_id",
-      mcpAccessProfileToolBindingServiceCreateRequest:
-        "MCPAccessProfileToolBindingServiceCreateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      connectorId: z.string(),
+      accessProfileId: z.string(),
+      mcpAccessProfileToolBindingServiceCreateRequest: shared
+        .MCPAccessProfileToolBindingServiceCreateRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        connectorId: "connector_id",
+        accessProfileId: "access_profile_id",
+        mcpAccessProfileToolBindingServiceCreateRequest:
+          "MCPAccessProfileToolBindingServiceCreateRequest",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPAccessProfileToolBindingServiceCreateBindingsRequestToJSON(
   c1ApiAiGovernanceV1MCPAccessProfileToolBindingServiceCreateBindingsRequest:
@@ -93,22 +95,24 @@ export const C1ApiAiGovernanceV1MCPAccessProfileToolBindingServiceCreateBindings
     C1ApiAiGovernanceV1MCPAccessProfileToolBindingServiceCreateBindingsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    MCPAccessProfileToolBindingServiceCreateResponse: shared
-      .MCPAccessProfileToolBindingServiceCreateResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "MCPAccessProfileToolBindingServiceCreateResponse":
-        "mcpAccessProfileToolBindingServiceCreateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      MCPAccessProfileToolBindingServiceCreateResponse: shared
+        .MCPAccessProfileToolBindingServiceCreateResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "MCPAccessProfileToolBindingServiceCreateResponse":
+          "mcpAccessProfileToolBindingServiceCreateResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPAccessProfileToolBindingServiceCreateBindingsResponseFromJSON(
   jsonString: string,

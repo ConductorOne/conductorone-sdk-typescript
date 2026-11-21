@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   MCPAccessProfileInput,
   MCPAccessProfileInput$Outbound,
@@ -28,10 +29,12 @@ export const MCPAccessProfileServiceUpdateRequest$outboundSchema: z.ZodType<
   MCPAccessProfileServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   MCPAccessProfileServiceUpdateRequest
-> = z.object({
-  profile: z.nullable(MCPAccessProfileInput$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    profile: z.nullable(MCPAccessProfileInput$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function mcpAccessProfileServiceUpdateRequestToJSON(
   mcpAccessProfileServiceUpdateRequest: MCPAccessProfileServiceUpdateRequest,

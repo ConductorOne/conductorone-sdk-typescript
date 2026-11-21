@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,9 +25,11 @@ export const SpendRemedySharedIncreaseRequest$inboundSchema: z.ZodType<
   SpendRemedySharedIncreaseRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  total: z.nullable(FundsMoney$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.nullable(FundsMoney$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type SpendRemedySharedIncreaseRequest$Outbound = {
   total?: FundsMoney$Outbound | null | undefined;
@@ -38,9 +40,11 @@ export const SpendRemedySharedIncreaseRequest$outboundSchema: z.ZodType<
   SpendRemedySharedIncreaseRequest$Outbound,
   z.ZodTypeDef,
   SpendRemedySharedIncreaseRequest
-> = z.object({
-  total: z.nullable(FundsMoney$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.nullable(FundsMoney$outboundSchema).optional(),
+  })
+);
 
 export function spendRemedySharedIncreaseRequestToJSON(
   spendRemedySharedIncreaseRequest: SpendRemedySharedIncreaseRequest,

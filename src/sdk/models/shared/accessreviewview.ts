@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { AccessReview, AccessReview$inboundSchema } from "./accessreview.js";
@@ -33,13 +33,15 @@ export const AccessReviewView$inboundSchema: z.ZodType<
   AccessReviewView,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessReview: z.nullable(AccessReview$inboundSchema).optional(),
-  createdByUserPath: z.string().optional(),
-  objectPermissions: z.nullable(ActorObjectPermissions$inboundSchema)
-    .optional(),
-  policyPath: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReview: z.nullable(AccessReview$inboundSchema).optional(),
+    createdByUserPath: z.string().optional(),
+    objectPermissions: z.nullable(ActorObjectPermissions$inboundSchema)
+      .optional(),
+    policyPath: z.string().optional(),
+  })
+);
 
 export function accessReviewViewFromJSON(
   jsonString: string,

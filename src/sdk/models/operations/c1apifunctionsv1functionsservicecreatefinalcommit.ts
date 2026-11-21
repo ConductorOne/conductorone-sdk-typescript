@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,19 +54,21 @@ export const C1ApiFunctionsV1FunctionsServiceCreateFinalCommitRequest$outboundSc
     C1ApiFunctionsV1FunctionsServiceCreateFinalCommitRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFunctionsV1FunctionsServiceCreateFinalCommitRequest
-  > = z.object({
-    functionId: z.string(),
-    commitId: z.string(),
-    functionsServiceCreateFinalCommitRequest: shared
-      .FunctionsServiceCreateFinalCommitRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      functionId: "function_id",
-      commitId: "commit_id",
-      functionsServiceCreateFinalCommitRequest:
-        "FunctionsServiceCreateFinalCommitRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      functionId: z.string(),
+      commitId: z.string(),
+      functionsServiceCreateFinalCommitRequest: shared
+        .FunctionsServiceCreateFinalCommitRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        functionId: "function_id",
+        commitId: "commit_id",
+        functionsServiceCreateFinalCommitRequest:
+          "FunctionsServiceCreateFinalCommitRequest",
+      });
+    })
+  );
 
 export function c1ApiFunctionsV1FunctionsServiceCreateFinalCommitRequestToJSON(
   c1ApiFunctionsV1FunctionsServiceCreateFinalCommitRequest:
@@ -84,21 +86,23 @@ export const C1ApiFunctionsV1FunctionsServiceCreateFinalCommitResponse$inboundSc
     C1ApiFunctionsV1FunctionsServiceCreateFinalCommitResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    FunctionsServiceCreateFinalCommitResponse: shared
-      .FunctionsServiceCreateFinalCommitResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "FunctionsServiceCreateFinalCommitResponse":
-        "functionsServiceCreateFinalCommitResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      FunctionsServiceCreateFinalCommitResponse: shared
+        .FunctionsServiceCreateFinalCommitResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "FunctionsServiceCreateFinalCommitResponse":
+          "functionsServiceCreateFinalCommitResponse",
+      });
+    })
+  );
 
 export function c1ApiFunctionsV1FunctionsServiceCreateFinalCommitResponseFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,18 +54,20 @@ export const C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceSetSc
     C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceSetScopeByExcludedResourceTypeRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceSetScopeByExcludedResourceTypeRequest
-  > = z.object({
-    accessReviewTemplateId: z.string(),
-    accessReviewSetTemplateScopeByExcludedResourceTypeRequest: shared
-      .AccessReviewSetTemplateScopeByExcludedResourceTypeRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      accessReviewTemplateId: "access_review_template_id",
-      accessReviewSetTemplateScopeByExcludedResourceTypeRequest:
-        "AccessReviewSetTemplateScopeByExcludedResourceTypeRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      accessReviewTemplateId: z.string(),
+      accessReviewSetTemplateScopeByExcludedResourceTypeRequest: shared
+        .AccessReviewSetTemplateScopeByExcludedResourceTypeRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        accessReviewTemplateId: "access_review_template_id",
+        accessReviewSetTemplateScopeByExcludedResourceTypeRequest:
+          "AccessReviewSetTemplateScopeByExcludedResourceTypeRequest",
+      });
+    })
+  );
 
 export function c1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceSetScopeByExcludedResourceTypeRequestToJSON(
   c1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceSetScopeByExcludedResourceTypeRequest:
@@ -85,22 +87,24 @@ export const C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceSetSc
     C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceSetScopeByExcludedResourceTypeResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    AccessReviewSetTemplateScopeByExcludedResourceTypeResponse: shared
-      .AccessReviewSetTemplateScopeByExcludedResourceTypeResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "AccessReviewSetTemplateScopeByExcludedResourceTypeResponse":
-        "accessReviewSetTemplateScopeByExcludedResourceTypeResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      AccessReviewSetTemplateScopeByExcludedResourceTypeResponse: shared
+        .AccessReviewSetTemplateScopeByExcludedResourceTypeResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "AccessReviewSetTemplateScopeByExcludedResourceTypeResponse":
+          "accessReviewSetTemplateScopeByExcludedResourceTypeResponse",
+      });
+    })
+  );
 
 export function c1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceSetScopeByExcludedResourceTypeResponseFromJSON(
   jsonString: string,

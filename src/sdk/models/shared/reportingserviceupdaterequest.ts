@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Both editable fields are optional; an empty one leaves the stored value alone.
@@ -50,13 +51,15 @@ export const ReportingServiceUpdateRequest$outboundSchema: z.ZodType<
   ReportingServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   ReportingServiceUpdateRequest
-> = z.object({
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  expectedProgramId: z.string().optional(),
-  parameterValues: z.nullable(z.record(z.any())).optional(),
-  prompt: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    expectedProgramId: z.string().optional(),
+    parameterValues: z.nullable(z.record(z.any())).optional(),
+    prompt: z.string().optional(),
+  })
+);
 
 export function reportingServiceUpdateRequestToJSON(
   reportingServiceUpdateRequest: ReportingServiceUpdateRequest,

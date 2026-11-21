@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,13 +45,15 @@ export const C1ApiSecretsV1PaperSecretServiceGetRequest$outboundSchema:
     C1ApiSecretsV1PaperSecretServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSecretsV1PaperSecretServiceGetRequest
-  > = z.object({
-    vaultId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      vaultId: "vault_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      vaultId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        vaultId: "vault_id",
+      });
+    })
+  );
 
 export function c1ApiSecretsV1PaperSecretServiceGetRequestToJSON(
   c1ApiSecretsV1PaperSecretServiceGetRequest:
@@ -70,20 +72,22 @@ export const C1ApiSecretsV1PaperSecretServiceGetResponse$inboundSchema:
     C1ApiSecretsV1PaperSecretServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    PaperSecretServiceGetResponse: shared
-      .PaperSecretServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "PaperSecretServiceGetResponse": "paperSecretServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      PaperSecretServiceGetResponse: shared
+        .PaperSecretServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "PaperSecretServiceGetResponse": "paperSecretServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiSecretsV1PaperSecretServiceGetResponseFromJSON(
   jsonString: string,

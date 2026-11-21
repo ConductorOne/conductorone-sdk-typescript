@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The PaperSecretAdminServiceSearchAuditEventsRequest message.
@@ -50,14 +51,16 @@ export const PaperSecretAdminServiceSearchAuditEventsRequest$outboundSchema:
     PaperSecretAdminServiceSearchAuditEventsRequest$Outbound,
     z.ZodTypeDef,
     PaperSecretAdminServiceSearchAuditEventsRequest
-  > = z.object({
-    actorEmail: z.string().optional(),
-    actorUserId: z.string().optional(),
-    clientIp: z.string().optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    vaultId: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      actorEmail: z.string().optional(),
+      actorUserId: z.string().optional(),
+      clientIp: z.string().optional(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      vaultId: z.string().optional(),
+    })
+  );
 
 export function paperSecretAdminServiceSearchAuditEventsRequestToJSON(
   paperSecretAdminServiceSearchAuditEventsRequest:

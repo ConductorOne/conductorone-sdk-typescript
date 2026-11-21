@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The AddManuallyManagedUsersRequest message.
@@ -24,9 +25,11 @@ export const AddManuallyManagedUsersRequest$outboundSchema: z.ZodType<
   AddManuallyManagedUsersRequest$Outbound,
   z.ZodTypeDef,
   AddManuallyManagedUsersRequest
-> = z.object({
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function addManuallyManagedUsersRequestToJSON(
   addManuallyManagedUsersRequest: AddManuallyManagedUsersRequest,

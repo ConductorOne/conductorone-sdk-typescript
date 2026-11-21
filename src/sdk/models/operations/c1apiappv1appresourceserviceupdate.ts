@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -55,19 +55,21 @@ export const C1ApiAppV1AppResourceServiceUpdateRequest$outboundSchema:
     C1ApiAppV1AppResourceServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppResourceServiceUpdateRequest
-  > = z.object({
-    appId: z.string(),
-    appResourceTypeId: z.string(),
-    id: z.string(),
-    appResourceServiceUpdateRequest: shared
-      .AppResourceServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      appResourceTypeId: "app_resource_type_id",
-      appResourceServiceUpdateRequest: "AppResourceServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      appResourceTypeId: z.string(),
+      id: z.string(),
+      appResourceServiceUpdateRequest: shared
+        .AppResourceServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        appResourceTypeId: "app_resource_type_id",
+        appResourceServiceUpdateRequest: "AppResourceServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppResourceServiceUpdateRequestToJSON(
   c1ApiAppV1AppResourceServiceUpdateRequest:
@@ -83,20 +85,23 @@ export function c1ApiAppV1AppResourceServiceUpdateRequestToJSON(
 /** @internal */
 export const C1ApiAppV1AppResourceServiceUpdateResponse$inboundSchema:
   z.ZodType<C1ApiAppV1AppResourceServiceUpdateResponse, z.ZodTypeDef, unknown> =
-    z.object({
-      ContentType: z.string(),
-      StatusCode: z.number().int(),
-      RawResponse: z.instanceof(Response),
-      AppResourceServiceUpdateResponse: shared
-        .AppResourceServiceUpdateResponse$inboundSchema.optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "ContentType": "contentType",
-        "StatusCode": "statusCode",
-        "RawResponse": "rawResponse",
-        "AppResourceServiceUpdateResponse": "appResourceServiceUpdateResponse",
-      });
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        ContentType: z.string(),
+        StatusCode: z.number().int(),
+        RawResponse: z.instanceof(Response),
+        AppResourceServiceUpdateResponse: shared
+          .AppResourceServiceUpdateResponse$inboundSchema.optional(),
+      }).transform((v) => {
+        return remap$(v, {
+          "ContentType": "contentType",
+          "StatusCode": "statusCode",
+          "RawResponse": "rawResponse",
+          "AppResourceServiceUpdateResponse":
+            "appResourceServiceUpdateResponse",
+        });
+      })
+    );
 
 export function c1ApiAppV1AppResourceServiceUpdateResponseFromJSON(
   jsonString: string,

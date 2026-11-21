@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,9 +25,11 @@ export const SSFOutboundAuthBearer$inboundSchema: z.ZodType<
   SSFOutboundAuthBearer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  token: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string().optional(),
+  })
+);
 /** @internal */
 export type SSFOutboundAuthBearer$Outbound = {
   token?: string | undefined;
@@ -38,9 +40,11 @@ export const SSFOutboundAuthBearer$outboundSchema: z.ZodType<
   SSFOutboundAuthBearer$Outbound,
   z.ZodTypeDef,
   SSFOutboundAuthBearer
-> = z.object({
-  token: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string().optional(),
+  })
+);
 
 export function ssfOutboundAuthBearerToJSON(
   ssfOutboundAuthBearer: SSFOutboundAuthBearer,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The AppRef message.
@@ -24,9 +25,11 @@ export const AppRef$outboundSchema: z.ZodType<
   AppRef$Outbound,
   z.ZodTypeDef,
   AppRef
-> = z.object({
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+  })
+);
 
 export function appRefToJSON(appRef: AppRef): string {
   return JSON.stringify(AppRef$outboundSchema.parse(appRef));

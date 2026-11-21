@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -49,24 +49,26 @@ export const SSFReceiverStreamStats$inboundSchema: z.ZodType<
   SSFReceiverStreamStats,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  eventsActedOnCount: z.string().transform(v => parseInt(v, 10)).optional(),
-  eventsFailedCount: z.string().transform(v => parseInt(v, 10)).optional(),
-  eventsReceivedCount: z.string().transform(v => parseInt(v, 10)).optional(),
-  lastErrorAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  lastErrorMessage: z.string().optional(),
-  lastEventReceivedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  lastVerifiedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  streamId: z.string().optional(),
-  transmitterStatus: z.string().optional(),
-  transmitterStatusReason: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    eventsActedOnCount: z.string().transform(v => parseInt(v, 10)).optional(),
+    eventsFailedCount: z.string().transform(v => parseInt(v, 10)).optional(),
+    eventsReceivedCount: z.string().transform(v => parseInt(v, 10)).optional(),
+    lastErrorAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    lastErrorMessage: z.string().optional(),
+    lastEventReceivedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    lastVerifiedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    streamId: z.string().optional(),
+    transmitterStatus: z.string().optional(),
+    transmitterStatusReason: z.string().optional(),
+  })
+);
 
 export function ssfReceiverStreamStatsFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { AndCheck, AndCheck$inboundSchema } from "./andcheck.js";
@@ -31,11 +31,13 @@ export const ValidationCheck$inboundSchema: z.ZodType<
   ValidationCheck,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  and: z.nullable(z.lazy(() => AndCheck$inboundSchema)).optional(),
-  call: z.nullable(FunctionCall$inboundSchema).optional(),
-  or: z.nullable(z.lazy(() => OrCheck$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    and: z.nullable(z.lazy(() => AndCheck$inboundSchema)).optional(),
+    call: z.nullable(FunctionCall$inboundSchema).optional(),
+    or: z.nullable(z.lazy(() => OrCheck$inboundSchema)).optional(),
+  })
+);
 
 export function validationCheckFromJSON(
   jsonString: string,

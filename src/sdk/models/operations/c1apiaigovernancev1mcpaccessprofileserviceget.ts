@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -49,16 +49,18 @@ export const C1ApiAiGovernanceV1MCPAccessProfileServiceGetRequest$outboundSchema
     C1ApiAiGovernanceV1MCPAccessProfileServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1MCPAccessProfileServiceGetRequest
-  > = z.object({
-    appId: z.string(),
-    connectorId: z.string(),
-    id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      connectorId: "connector_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      connectorId: z.string(),
+      id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        connectorId: "connector_id",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPAccessProfileServiceGetRequestToJSON(
   c1ApiAiGovernanceV1MCPAccessProfileServiceGetRequest:
@@ -77,21 +79,23 @@ export const C1ApiAiGovernanceV1MCPAccessProfileServiceGetResponse$inboundSchema
     C1ApiAiGovernanceV1MCPAccessProfileServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    MCPAccessProfileServiceGetResponse: shared
-      .MCPAccessProfileServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "MCPAccessProfileServiceGetResponse":
-        "mcpAccessProfileServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      MCPAccessProfileServiceGetResponse: shared
+        .MCPAccessProfileServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "MCPAccessProfileServiceGetResponse":
+          "mcpAccessProfileServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPAccessProfileServiceGetResponseFromJSON(
   jsonString: string,

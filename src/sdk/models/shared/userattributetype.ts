@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -65,19 +65,22 @@ export const UserAttributeType$inboundSchema: z.ZodType<
   UserAttributeType,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  app: z.nullable(UserAttributeTypeConfigApp$inboundSchema).optional(),
-  appUserProfile: z.nullable(
-    UserAttributeTypeConfigAppUserProfile$inboundSchema,
-  ).optional(),
-  celExpression: z.nullable(UserAttributeTypeConfigCelExpression$inboundSchema)
-    .optional(),
-  customAppUserProfile: z.nullable(
-    UserAttributeTypeConfigCustomAppUserProfile$inboundSchema,
-  ).optional(),
-  displayName: z.string().optional(),
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    app: z.nullable(UserAttributeTypeConfigApp$inboundSchema).optional(),
+    appUserProfile: z.nullable(
+      UserAttributeTypeConfigAppUserProfile$inboundSchema,
+    ).optional(),
+    celExpression: z.nullable(
+      UserAttributeTypeConfigCelExpression$inboundSchema,
+    ).optional(),
+    customAppUserProfile: z.nullable(
+      UserAttributeTypeConfigCustomAppUserProfile$inboundSchema,
+    ).optional(),
+    displayName: z.string().optional(),
+    id: z.string(),
+  })
+);
 /** @internal */
 export type UserAttributeType$Outbound = {
   app?: UserAttributeTypeConfigApp$Outbound | null | undefined;
@@ -102,19 +105,22 @@ export const UserAttributeType$outboundSchema: z.ZodType<
   UserAttributeType$Outbound,
   z.ZodTypeDef,
   UserAttributeType
-> = z.object({
-  app: z.nullable(UserAttributeTypeConfigApp$outboundSchema).optional(),
-  appUserProfile: z.nullable(
-    UserAttributeTypeConfigAppUserProfile$outboundSchema,
-  ).optional(),
-  celExpression: z.nullable(UserAttributeTypeConfigCelExpression$outboundSchema)
-    .optional(),
-  customAppUserProfile: z.nullable(
-    UserAttributeTypeConfigCustomAppUserProfile$outboundSchema,
-  ).optional(),
-  displayName: z.string().optional(),
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    app: z.nullable(UserAttributeTypeConfigApp$outboundSchema).optional(),
+    appUserProfile: z.nullable(
+      UserAttributeTypeConfigAppUserProfile$outboundSchema,
+    ).optional(),
+    celExpression: z.nullable(
+      UserAttributeTypeConfigCelExpression$outboundSchema,
+    ).optional(),
+    customAppUserProfile: z.nullable(
+      UserAttributeTypeConfigCustomAppUserProfile$outboundSchema,
+    ).optional(),
+    displayName: z.string().optional(),
+    id: z.string(),
+  })
+);
 
 export function userAttributeTypeToJSON(
   userAttributeType: UserAttributeType,

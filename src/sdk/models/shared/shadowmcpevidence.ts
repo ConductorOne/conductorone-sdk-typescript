@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,10 +29,12 @@ export const ShadowMcpEvidence$inboundSchema: z.ZodType<
   ShadowMcpEvidence,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  deviceCount: z.number().int().optional(),
-  userCount: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    deviceCount: z.number().int().optional(),
+    userCount: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type ShadowMcpEvidence$Outbound = {
   deviceCount?: number | undefined;
@@ -44,10 +46,12 @@ export const ShadowMcpEvidence$outboundSchema: z.ZodType<
   ShadowMcpEvidence$Outbound,
   z.ZodTypeDef,
   ShadowMcpEvidence
-> = z.object({
-  deviceCount: z.number().int().optional(),
-  userCount: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    deviceCount: z.number().int().optional(),
+    userCount: z.number().int().optional(),
+  })
+);
 
 export function shadowMcpEvidenceToJSON(
   shadowMcpEvidence: ShadowMcpEvidence,

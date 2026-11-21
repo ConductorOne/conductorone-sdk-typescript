@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,17 +47,19 @@ export const C1ApiAttributeV1AttributesListAttributeValuesRequest$outboundSchema
     C1ApiAttributeV1AttributesListAttributeValuesRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAttributeV1AttributesListAttributeValuesRequest
-  > = z.object({
-    attributeTypeId: z.string(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      attributeTypeId: "attribute_type_id",
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      attributeTypeId: z.string(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        attributeTypeId: "attribute_type_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiAttributeV1AttributesListAttributeValuesRequestToJSON(
   c1ApiAttributeV1AttributesListAttributeValuesRequest:
@@ -76,20 +78,22 @@ export const C1ApiAttributeV1AttributesListAttributeValuesResponse$inboundSchema
     C1ApiAttributeV1AttributesListAttributeValuesResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ListAttributeValuesResponse: shared
-      .ListAttributeValuesResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ListAttributeValuesResponse": "listAttributeValuesResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ListAttributeValuesResponse: shared
+        .ListAttributeValuesResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ListAttributeValuesResponse": "listAttributeValuesResponse",
+      });
+    })
+  );
 
 export function c1ApiAttributeV1AttributesListAttributeValuesResponseFromJSON(
   jsonString: string,

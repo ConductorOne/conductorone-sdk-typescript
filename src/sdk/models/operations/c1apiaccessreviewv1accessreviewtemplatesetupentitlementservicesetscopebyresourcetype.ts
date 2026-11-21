@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,18 +54,20 @@ export const C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceSetSc
     C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceSetScopeByResourceTypeRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceSetScopeByResourceTypeRequest
-  > = z.object({
-    accessReviewTemplateId: z.string(),
-    accessReviewTemplateSetScopeByResourceTypeRequest: shared
-      .AccessReviewTemplateSetScopeByResourceTypeRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      accessReviewTemplateId: "access_review_template_id",
-      accessReviewTemplateSetScopeByResourceTypeRequest:
-        "AccessReviewTemplateSetScopeByResourceTypeRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      accessReviewTemplateId: z.string(),
+      accessReviewTemplateSetScopeByResourceTypeRequest: shared
+        .AccessReviewTemplateSetScopeByResourceTypeRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        accessReviewTemplateId: "access_review_template_id",
+        accessReviewTemplateSetScopeByResourceTypeRequest:
+          "AccessReviewTemplateSetScopeByResourceTypeRequest",
+      });
+    })
+  );
 
 export function c1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceSetScopeByResourceTypeRequestToJSON(
   c1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceSetScopeByResourceTypeRequest:
@@ -85,22 +87,24 @@ export const C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceSetSc
     C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceSetScopeByResourceTypeResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    AccessReviewTemplateSetScopeByResourceTypeResponse: shared
-      .AccessReviewTemplateSetScopeByResourceTypeResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "AccessReviewTemplateSetScopeByResourceTypeResponse":
-        "accessReviewTemplateSetScopeByResourceTypeResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      AccessReviewTemplateSetScopeByResourceTypeResponse: shared
+        .AccessReviewTemplateSetScopeByResourceTypeResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "AccessReviewTemplateSetScopeByResourceTypeResponse":
+          "accessReviewTemplateSetScopeByResourceTypeResponse",
+      });
+    })
+  );
 
 export function c1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceSetScopeByResourceTypeResponseFromJSON(
   jsonString: string,

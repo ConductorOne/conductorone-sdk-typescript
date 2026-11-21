@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ExternalOAuthClientServiceUpdateRequest message.
@@ -47,13 +48,15 @@ export const ExternalOAuthClientServiceUpdateRequest$outboundSchema: z.ZodType<
   ExternalOAuthClientServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   ExternalOAuthClientServiceUpdateRequest
-> = z.object({
-  clientId: z.string().optional(),
-  clientName: z.string().optional(),
-  publicJwks: z.string().optional(),
-  redirectUris: z.nullable(z.array(z.string())).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientId: z.string().optional(),
+    clientName: z.string().optional(),
+    publicJwks: z.string().optional(),
+    redirectUris: z.nullable(z.array(z.string())).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function externalOAuthClientServiceUpdateRequestToJSON(
   externalOAuthClientServiceUpdateRequest:

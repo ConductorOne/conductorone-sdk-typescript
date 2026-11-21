@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -57,15 +57,17 @@ export const A2UIProvenanceSource$inboundSchema: z.ZodType<
   A2UIProvenanceSource,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  componentId: z.string().optional(),
-  count: z.string().transform(v => parseInt(v, 10)).optional(),
-  kind: z.string().optional(),
-  label: z.string().optional(),
-  matchedToolCall: z.string().optional(),
-  ref: z.string().optional(),
-  verified: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    componentId: z.string().optional(),
+    count: z.string().transform(v => parseInt(v, 10)).optional(),
+    kind: z.string().optional(),
+    label: z.string().optional(),
+    matchedToolCall: z.string().optional(),
+    ref: z.string().optional(),
+    verified: z.boolean().optional(),
+  })
+);
 
 export function a2UIProvenanceSourceFromJSON(
   jsonString: string,

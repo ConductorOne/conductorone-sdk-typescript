@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -77,7 +77,9 @@ export const GrantEnrollmentStatus$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   GrantEnrollmentStatus
-> = openEnums.outboundSchema(GrantEnrollmentStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(GrantEnrollmentStatus)
+);
 
 /** @internal */
 export type C1ApiAiGovernanceV1MCPAccessProfileServiceSearchRequestableConnectorsRequest$Outbound =
@@ -95,20 +97,22 @@ export const C1ApiAiGovernanceV1MCPAccessProfileServiceSearchRequestableConnecto
     C1ApiAiGovernanceV1MCPAccessProfileServiceSearchRequestableConnectorsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1MCPAccessProfileServiceSearchRequestableConnectorsRequest
-  > = z.object({
-    userId: z.string(),
-    grantEnrollmentStatus: GrantEnrollmentStatus$outboundSchema.optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    query: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      userId: "user_id",
-      grantEnrollmentStatus: "grant_enrollment_status",
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      userId: z.string(),
+      grantEnrollmentStatus: GrantEnrollmentStatus$outboundSchema.optional(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      query: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        userId: "user_id",
+        grantEnrollmentStatus: "grant_enrollment_status",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPAccessProfileServiceSearchRequestableConnectorsRequestToJSON(
   c1ApiAiGovernanceV1MCPAccessProfileServiceSearchRequestableConnectorsRequest:
@@ -128,22 +132,24 @@ export const C1ApiAiGovernanceV1MCPAccessProfileServiceSearchRequestableConnecto
     C1ApiAiGovernanceV1MCPAccessProfileServiceSearchRequestableConnectorsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    MCPAccessProfileServiceSearchRequestableConnectorsResponse: shared
-      .MCPAccessProfileServiceSearchRequestableConnectorsResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "MCPAccessProfileServiceSearchRequestableConnectorsResponse":
-        "mcpAccessProfileServiceSearchRequestableConnectorsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      MCPAccessProfileServiceSearchRequestableConnectorsResponse: shared
+        .MCPAccessProfileServiceSearchRequestableConnectorsResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "MCPAccessProfileServiceSearchRequestableConnectorsResponse":
+          "mcpAccessProfileServiceSearchRequestableConnectorsResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPAccessProfileServiceSearchRequestableConnectorsResponseFromJSON(
   jsonString: string,

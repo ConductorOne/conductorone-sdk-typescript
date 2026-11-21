@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -182,20 +182,20 @@ export const CatalogMode$inboundSchema: z.ZodType<
   CatalogMode,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(CatalogMode);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(CatalogMode));
 /** @internal */
 export const CatalogMode$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   CatalogMode
-> = openEnums.outboundSchema(CatalogMode);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(CatalogMode));
 
 /** @internal */
 export const DurationUnset$inboundSchema: z.ZodType<
   DurationUnset,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type DurationUnset$Outbound = {};
 
@@ -204,7 +204,7 @@ export const DurationUnset$outboundSchema: z.ZodType<
   DurationUnset$Outbound,
   z.ZodTypeDef,
   DurationUnset
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function durationUnsetToJSON(durationUnset: DurationUnset): string {
   return JSON.stringify(DurationUnset$outboundSchema.parse(durationUnset));
@@ -224,34 +224,40 @@ export const AppAccessRequestDefaultsState$inboundSchema: z.ZodType<
   AppAccessRequestDefaultsState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AppAccessRequestDefaultsState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AppAccessRequestDefaultsState)
+);
 /** @internal */
 export const AppAccessRequestDefaultsState$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AppAccessRequestDefaultsState
-> = openEnums.outboundSchema(AppAccessRequestDefaultsState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AppAccessRequestDefaultsState)
+);
 
 /** @internal */
 export const AppAccessRequestDefaults$inboundSchema: z.ZodType<
   AppAccessRequestDefaults,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  catalogIds: z.nullable(z.array(z.string())).optional(),
-  catalogMode: CatalogMode$inboundSchema.optional(),
-  defaultsEnabled: z.boolean().optional(),
-  durationGrant: z.nullable(z.string()).optional(),
-  durationUnset: z.nullable(z.lazy(() => DurationUnset$inboundSchema))
-    .optional(),
-  emergencyGrantEnabled: z.boolean().optional(),
-  emergencyGrantPolicyId: z.string().optional(),
-  requestPolicyId: z.string().optional(),
-  requestSchemaId: z.string().optional(),
-  resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  state: AppAccessRequestDefaultsState$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    catalogIds: z.nullable(z.array(z.string())).optional(),
+    catalogMode: CatalogMode$inboundSchema.optional(),
+    defaultsEnabled: z.boolean().optional(),
+    durationGrant: z.nullable(z.string()).optional(),
+    durationUnset: z.nullable(z.lazy(() => DurationUnset$inboundSchema))
+      .optional(),
+    emergencyGrantEnabled: z.boolean().optional(),
+    emergencyGrantPolicyId: z.string().optional(),
+    requestPolicyId: z.string().optional(),
+    requestSchemaId: z.string().optional(),
+    resourceTypeIds: z.nullable(z.array(z.string())).optional(),
+    state: AppAccessRequestDefaultsState$inboundSchema.optional(),
+  })
+);
 
 export function appAccessRequestDefaultsFromJSON(
   jsonString: string,
@@ -283,20 +289,22 @@ export const AppAccessRequestDefaults1$outboundSchema: z.ZodType<
   AppAccessRequestDefaults1$Outbound,
   z.ZodTypeDef,
   AppAccessRequestDefaults1
-> = z.object({
-  catalogIds: z.nullable(z.array(z.string())).optional(),
-  catalogMode: CatalogMode$outboundSchema.optional(),
-  defaultsEnabled: z.boolean().optional(),
-  durationGrant: z.nullable(z.string()).optional(),
-  durationUnset: z.nullable(z.lazy(() => DurationUnset$outboundSchema))
-    .optional(),
-  emergencyGrantEnabled: z.boolean().optional(),
-  emergencyGrantPolicyId: z.string().optional(),
-  requestPolicyId: z.string().optional(),
-  requestSchemaId: z.string().optional(),
-  resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  state: AppAccessRequestDefaultsState$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    catalogIds: z.nullable(z.array(z.string())).optional(),
+    catalogMode: CatalogMode$outboundSchema.optional(),
+    defaultsEnabled: z.boolean().optional(),
+    durationGrant: z.nullable(z.string()).optional(),
+    durationUnset: z.nullable(z.lazy(() => DurationUnset$outboundSchema))
+      .optional(),
+    emergencyGrantEnabled: z.boolean().optional(),
+    emergencyGrantPolicyId: z.string().optional(),
+    requestPolicyId: z.string().optional(),
+    requestSchemaId: z.string().optional(),
+    resourceTypeIds: z.nullable(z.array(z.string())).optional(),
+    state: AppAccessRequestDefaultsState$outboundSchema.optional(),
+  })
+);
 
 export function appAccessRequestDefaults1ToJSON(
   appAccessRequestDefaults1: AppAccessRequestDefaults1,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,10 +29,12 @@ export const QueryScopeLimitConfig$inboundSchema: z.ZodType<
   QueryScopeLimitConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  fields: z.nullable(z.array(z.string())).optional(),
-  maxLimit: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fields: z.nullable(z.array(z.string())).optional(),
+    maxLimit: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type QueryScopeLimitConfig$Outbound = {
   fields?: Array<string> | null | undefined;
@@ -44,10 +46,12 @@ export const QueryScopeLimitConfig$outboundSchema: z.ZodType<
   QueryScopeLimitConfig$Outbound,
   z.ZodTypeDef,
   QueryScopeLimitConfig
-> = z.object({
-  fields: z.nullable(z.array(z.string())).optional(),
-  maxLimit: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fields: z.nullable(z.array(z.string())).optional(),
+    maxLimit: z.number().int().optional(),
+  })
+);
 
 export function queryScopeLimitConfigToJSON(
   queryScopeLimitConfig: QueryScopeLimitConfig,

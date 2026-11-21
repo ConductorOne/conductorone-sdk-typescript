@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   CredentialInventoryPolicyInput,
   CredentialInventoryPolicyInput$Outbound,
@@ -32,12 +33,14 @@ export const CredentialInventoryPolicyServiceUpdateRequest$outboundSchema:
     CredentialInventoryPolicyServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     CredentialInventoryPolicyServiceUpdateRequest
-  > = z.object({
-    credentialInventoryPolicy: z.nullable(
-      CredentialInventoryPolicyInput$outboundSchema,
-    ).optional(),
-    updateMask: z.nullable(z.string()).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      credentialInventoryPolicy: z.nullable(
+        CredentialInventoryPolicyInput$outboundSchema,
+      ).optional(),
+      updateMask: z.nullable(z.string()).optional(),
+    })
+  );
 
 export function credentialInventoryPolicyServiceUpdateRequestToJSON(
   credentialInventoryPolicyServiceUpdateRequest:

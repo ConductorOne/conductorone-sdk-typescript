@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -136,7 +136,9 @@ export const GetCustomAnalysisResultResponseStatus$inboundSchema: z.ZodType<
   GetCustomAnalysisResultResponseStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(GetCustomAnalysisResultResponseStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(GetCustomAnalysisResultResponseStatus)
+);
 
 /** @internal */
 export const GetCustomAnalysisResultResponseTerminalReason$inboundSchema:
@@ -144,43 +146,48 @@ export const GetCustomAnalysisResultResponseTerminalReason$inboundSchema:
     GetCustomAnalysisResultResponseTerminalReason,
     z.ZodTypeDef,
     unknown
-  > = openEnums.inboundSchema(GetCustomAnalysisResultResponseTerminalReason);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.inboundSchema(GetCustomAnalysisResultResponseTerminalReason)
+  );
 
 /** @internal */
 export const GetCustomAnalysisResultResponse$inboundSchema: z.ZodType<
   GetCustomAnalysisResultResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessScope: z.nullable(AccessScope$inboundSchema).optional(),
-  appsAnalyzed: z.number().int().optional(),
-  clusters: z.nullable(z.array(EntitlementCluster$inboundSchema)).optional(),
-  cohortSize: z.number().int().optional(),
-  completedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  createdByUserId: z.string().optional(),
-  cutoffImpactPoints: z.nullable(
-    z.array(EntitlementCutoffImpactPoint$inboundSchema),
-  ).optional(),
-  entitlements: z.nullable(z.array(CohortEntitlement$inboundSchema)).optional(),
-  errorMessage: z.string().optional(),
-  facetUserCount: z.number().int().optional(),
-  facets: z.nullable(z.array(AttributeFacet$inboundSchema)).optional(),
-  id: z.string().optional(),
-  profileFilters: z.nullable(z.array(ProfileFilter$inboundSchema)).optional(),
-  resourceScope: z.nullable(ResourceScope$inboundSchema).optional(),
-  status: GetCustomAnalysisResultResponseStatus$inboundSchema.optional(),
-  supersededByResultId: z.string().optional(),
-  terminalReason: GetCustomAnalysisResultResponseTerminalReason$inboundSchema
-    .optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessScope: z.nullable(AccessScope$inboundSchema).optional(),
+    appsAnalyzed: z.number().int().optional(),
+    clusters: z.nullable(z.array(EntitlementCluster$inboundSchema)).optional(),
+    cohortSize: z.number().int().optional(),
+    completedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    createdByUserId: z.string().optional(),
+    cutoffImpactPoints: z.nullable(
+      z.array(EntitlementCutoffImpactPoint$inboundSchema),
+    ).optional(),
+    entitlements: z.nullable(z.array(CohortEntitlement$inboundSchema))
+      .optional(),
+    errorMessage: z.string().optional(),
+    facetUserCount: z.number().int().optional(),
+    facets: z.nullable(z.array(AttributeFacet$inboundSchema)).optional(),
+    id: z.string().optional(),
+    profileFilters: z.nullable(z.array(ProfileFilter$inboundSchema)).optional(),
+    resourceScope: z.nullable(ResourceScope$inboundSchema).optional(),
+    status: GetCustomAnalysisResultResponseStatus$inboundSchema.optional(),
+    supersededByResultId: z.string().optional(),
+    terminalReason: GetCustomAnalysisResultResponseTerminalReason$inboundSchema
+      .optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function getCustomAnalysisResultResponseFromJSON(
   jsonString: string,

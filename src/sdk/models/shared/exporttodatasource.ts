@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -47,24 +47,30 @@ export const ExportToDatasourceFormat$inboundSchema: z.ZodType<
   ExportToDatasourceFormat,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ExportToDatasourceFormat);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ExportToDatasourceFormat)
+);
 /** @internal */
 export const ExportToDatasourceFormat$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ExportToDatasourceFormat
-> = openEnums.outboundSchema(ExportToDatasourceFormat);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ExportToDatasourceFormat)
+);
 
 /** @internal */
 export const ExportToDatasource$inboundSchema: z.ZodType<
   ExportToDatasource,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  datasourceId: z.string().optional(),
-  format: ExportToDatasourceFormat$inboundSchema.optional(),
-  prefix: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    datasourceId: z.string().optional(),
+    format: ExportToDatasourceFormat$inboundSchema.optional(),
+    prefix: z.string().optional(),
+  })
+);
 /** @internal */
 export type ExportToDatasource$Outbound = {
   datasourceId?: string | undefined;
@@ -77,11 +83,13 @@ export const ExportToDatasource$outboundSchema: z.ZodType<
   ExportToDatasource$Outbound,
   z.ZodTypeDef,
   ExportToDatasource
-> = z.object({
-  datasourceId: z.string().optional(),
-  format: ExportToDatasourceFormat$outboundSchema.optional(),
-  prefix: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    datasourceId: z.string().optional(),
+    format: ExportToDatasourceFormat$outboundSchema.optional(),
+    prefix: z.string().optional(),
+  })
+);
 
 export function exportToDatasourceToJSON(
   exportToDatasource: ExportToDatasource,

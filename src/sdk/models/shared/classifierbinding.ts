@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -59,32 +59,34 @@ export type ClassifierBinding = {
 
 /** @internal */
 export const Surface$inboundSchema: z.ZodType<Surface, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Surface);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Surface));
 /** @internal */
 export const Surface$outboundSchema: z.ZodType<string, z.ZodTypeDef, Surface> =
-  openEnums.outboundSchema(Surface);
+  /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Surface));
 
 /** @internal */
 export const ClassifierBinding$inboundSchema: z.ZodType<
   ClassifierBinding,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  classifierId: z.string(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  id: z.string().optional(),
-  surface: Surface$inboundSchema,
-  targetId: z.string().optional(),
-  tenantId: z.string().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    classifierId: z.string(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    id: z.string().optional(),
+    surface: Surface$inboundSchema,
+    targetId: z.string().optional(),
+    tenantId: z.string().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type ClassifierBinding$Outbound = {
   classifierId: string;
@@ -102,16 +104,18 @@ export const ClassifierBinding$outboundSchema: z.ZodType<
   ClassifierBinding$Outbound,
   z.ZodTypeDef,
   ClassifierBinding
-> = z.object({
-  classifierId: z.string(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  id: z.string().optional(),
-  surface: Surface$outboundSchema,
-  targetId: z.string().optional(),
-  tenantId: z.string().optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    classifierId: z.string(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    id: z.string().optional(),
+    surface: Surface$outboundSchema,
+    targetId: z.string().optional(),
+    tenantId: z.string().optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function classifierBindingToJSON(
   classifierBinding: ClassifierBinding,

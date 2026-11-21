@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The request message for deleting app owners.
@@ -24,9 +25,11 @@ export const DeleteAppOwnersRequest$outboundSchema: z.ZodType<
   DeleteAppOwnersRequest$Outbound,
   z.ZodTypeDef,
   DeleteAppOwnersRequest
-> = z.object({
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function deleteAppOwnersRequestToJSON(
   deleteAppOwnersRequest: DeleteAppOwnersRequest,

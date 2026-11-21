@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -38,13 +38,15 @@ export const CountEntitlementSelectionFilterAttributeValuesResponse$inboundSchem
     CountEntitlementSelectionFilterAttributeValuesResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    cohortUserCount: z.number().int().optional(),
-    coreUserCount: z.number().int().optional(),
-    values: z.nullable(
-      z.array(EntitlementSelectionFilterAttributeValueCount$inboundSchema),
-    ).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      cohortUserCount: z.number().int().optional(),
+      coreUserCount: z.number().int().optional(),
+      values: z.nullable(
+        z.array(EntitlementSelectionFilterAttributeValueCount$inboundSchema),
+      ).optional(),
+    })
+  );
 
 export function countEntitlementSelectionFilterAttributeValuesResponseFromJSON(
   jsonString: string,

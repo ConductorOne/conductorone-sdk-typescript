@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -50,17 +50,19 @@ export const C1ApiCrossAppAccessV1XAAClientAudienceMappingServiceListRequest$out
     C1ApiCrossAppAccessV1XAAClientAudienceMappingServiceListRequest$Outbound,
     z.ZodTypeDef,
     C1ApiCrossAppAccessV1XAAClientAudienceMappingServiceListRequest
-  > = z.object({
-    xaaResourceServerId: z.string(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      xaaResourceServerId: "xaa_resource_server_id",
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      xaaResourceServerId: z.string(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        xaaResourceServerId: "xaa_resource_server_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAClientAudienceMappingServiceListRequestToJSON(
   c1ApiCrossAppAccessV1XAAClientAudienceMappingServiceListRequest:
@@ -78,21 +80,23 @@ export const C1ApiCrossAppAccessV1XAAClientAudienceMappingServiceListResponse$in
     C1ApiCrossAppAccessV1XAAClientAudienceMappingServiceListResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    XAAClientAudienceMappingServiceListResponse: shared
-      .XAAClientAudienceMappingServiceListResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "XAAClientAudienceMappingServiceListResponse":
-        "xaaClientAudienceMappingServiceListResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      XAAClientAudienceMappingServiceListResponse: shared
+        .XAAClientAudienceMappingServiceListResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "XAAClientAudienceMappingServiceListResponse":
+          "xaaClientAudienceMappingServiceListResponse",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAClientAudienceMappingServiceListResponseFromJSON(
   jsonString: string,

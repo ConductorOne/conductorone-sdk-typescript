@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,20 +51,22 @@ export const C1ApiUserV2UserOwnersV2CreateUserOwnerRequest$outboundSchema:
     C1ApiUserV2UserOwnersV2CreateUserOwnerRequest$Outbound,
     z.ZodTypeDef,
     C1ApiUserV2UserOwnersV2CreateUserOwnerRequest
-  > = z.object({
-    userId: z.string(),
-    roleSlug: z.string(),
-    userRefId: z.string(),
-    createUserUserOwnerRequest: shared.CreateUserUserOwnerRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      userId: "user_id",
-      roleSlug: "role_slug",
-      userRefId: "user_ref_id",
-      createUserUserOwnerRequest: "CreateUserUserOwnerRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      userId: z.string(),
+      roleSlug: z.string(),
+      userRefId: z.string(),
+      createUserUserOwnerRequest: shared
+        .CreateUserUserOwnerRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        userId: "user_id",
+        roleSlug: "role_slug",
+        userRefId: "user_ref_id",
+        createUserUserOwnerRequest: "CreateUserUserOwnerRequest",
+      });
+    })
+  );
 
 export function c1ApiUserV2UserOwnersV2CreateUserOwnerRequestToJSON(
   c1ApiUserV2UserOwnersV2CreateUserOwnerRequest:
@@ -83,20 +85,22 @@ export const C1ApiUserV2UserOwnersV2CreateUserOwnerResponse$inboundSchema:
     C1ApiUserV2UserOwnersV2CreateUserOwnerResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    CreateUserUserOwnerResponse: shared
-      .CreateUserUserOwnerResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "CreateUserUserOwnerResponse": "createUserUserOwnerResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      CreateUserUserOwnerResponse: shared
+        .CreateUserUserOwnerResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "CreateUserUserOwnerResponse": "createUserUserOwnerResponse",
+      });
+    })
+  );
 
 export function c1ApiUserV2UserOwnersV2CreateUserOwnerResponseFromJSON(
   jsonString: string,

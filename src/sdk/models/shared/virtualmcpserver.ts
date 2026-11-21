@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -78,6 +78,14 @@ export type VirtualMCPServer = {
    */
   requireDpop?: boolean | undefined;
   /**
+   * When true, ConductorOne does not automatically grant this server's `use`
+   *
+   * @remarks
+   *  entitlement to the members of the mapped source's birthright access profile.
+   *  Set at create time only.
+   */
+  skipAutomaticAccess?: boolean | undefined;
+  /**
    * Current canonical lowercase route segment, unique for the tenant. Renaming
    *
    * @remarks
@@ -103,38 +111,45 @@ export const VirtualMCPServerState$inboundSchema: z.ZodType<
   VirtualMCPServerState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(VirtualMCPServerState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(VirtualMCPServerState)
+);
 /** @internal */
 export const VirtualMCPServerState$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   VirtualMCPServerState
-> = openEnums.outboundSchema(VirtualMCPServerState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(VirtualMCPServerState)
+);
 
 /** @internal */
 export const VirtualMCPServer$inboundSchema: z.ZodType<
   VirtualMCPServer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowPersonalSources: z.boolean().optional(),
-  assignedTools: z.nullable(VirtualMCPAssignedTools$inboundSchema).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  mappedSource: z.nullable(VirtualMCPMappedSource$inboundSchema).optional(),
-  presentation: z.nullable(VirtualMCPPresentation$inboundSchema).optional(),
-  requireDeviceTrust: z.boolean().optional(),
-  requireDpop: z.boolean().optional(),
-  slug: z.string().optional(),
-  state: VirtualMCPServerState$inboundSchema.optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  useEntitlementId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowPersonalSources: z.boolean().optional(),
+    assignedTools: z.nullable(VirtualMCPAssignedTools$inboundSchema).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    mappedSource: z.nullable(VirtualMCPMappedSource$inboundSchema).optional(),
+    presentation: z.nullable(VirtualMCPPresentation$inboundSchema).optional(),
+    requireDeviceTrust: z.boolean().optional(),
+    requireDpop: z.boolean().optional(),
+    skipAutomaticAccess: z.boolean().optional(),
+    slug: z.string().optional(),
+    state: VirtualMCPServerState$inboundSchema.optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    useEntitlementId: z.string().optional(),
+  })
+);
 /** @internal */
 export type VirtualMCPServer$Outbound = {
   allowPersonalSources?: boolean | undefined;
@@ -146,6 +161,7 @@ export type VirtualMCPServer$Outbound = {
   presentation?: VirtualMCPPresentation$Outbound | null | undefined;
   requireDeviceTrust?: boolean | undefined;
   requireDpop?: boolean | undefined;
+  skipAutomaticAccess?: boolean | undefined;
   slug?: string | undefined;
   state?: string | undefined;
   updatedAt?: string | null | undefined;
@@ -157,21 +173,25 @@ export const VirtualMCPServer$outboundSchema: z.ZodType<
   VirtualMCPServer$Outbound,
   z.ZodTypeDef,
   VirtualMCPServer
-> = z.object({
-  allowPersonalSources: z.boolean().optional(),
-  assignedTools: z.nullable(VirtualMCPAssignedTools$outboundSchema).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  mappedSource: z.nullable(VirtualMCPMappedSource$outboundSchema).optional(),
-  presentation: z.nullable(VirtualMCPPresentation$outboundSchema).optional(),
-  requireDeviceTrust: z.boolean().optional(),
-  requireDpop: z.boolean().optional(),
-  slug: z.string().optional(),
-  state: VirtualMCPServerState$outboundSchema.optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  useEntitlementId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowPersonalSources: z.boolean().optional(),
+    assignedTools: z.nullable(VirtualMCPAssignedTools$outboundSchema)
+      .optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    mappedSource: z.nullable(VirtualMCPMappedSource$outboundSchema).optional(),
+    presentation: z.nullable(VirtualMCPPresentation$outboundSchema).optional(),
+    requireDeviceTrust: z.boolean().optional(),
+    requireDpop: z.boolean().optional(),
+    skipAutomaticAccess: z.boolean().optional(),
+    slug: z.string().optional(),
+    state: VirtualMCPServerState$outboundSchema.optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    useEntitlementId: z.string().optional(),
+  })
+);
 
 export function virtualMCPServerToJSON(
   virtualMCPServer: VirtualMCPServer,

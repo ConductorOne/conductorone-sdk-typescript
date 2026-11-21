@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   PolicyStepInput,
   PolicyStepInput$Outbound,
@@ -32,9 +33,11 @@ export const PolicyStepsInput$outboundSchema: z.ZodType<
   PolicyStepsInput$Outbound,
   z.ZodTypeDef,
   PolicyStepsInput
-> = z.object({
-  steps: z.nullable(z.array(PolicyStepInput$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    steps: z.nullable(z.array(PolicyStepInput$outboundSchema)).optional(),
+  })
+);
 
 export function policyStepsInputToJSON(
   policyStepsInput: PolicyStepsInput,

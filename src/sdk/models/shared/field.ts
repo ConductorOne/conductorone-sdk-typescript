@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -109,29 +109,31 @@ export type Field = {
 };
 
 /** @internal */
-export const Field$inboundSchema: z.ZodType<Field, z.ZodTypeDef, unknown> = z
-  .object({
-    additionalPlaceholder: z.string().optional(),
-    checkbox: z.nullable(ConnectorCheckboxField$inboundSchema).optional(),
-    dependsOnFields: z.nullable(z.array(z.string())).optional(),
-    displayName: z.string().optional(),
-    helpUrl: z.string().optional(),
-    import: z.nullable(ImportField$inboundSchema).optional(),
-    keyValue: z.nullable(KeyValueField$inboundSchema).optional(),
-    name: z.string().optional(),
-    oauth2: z.nullable(OAuth2Field1$inboundSchema).optional(),
-    options: z.nullable(OptionsField$inboundSchema).optional(),
-    placeholder: z.string().optional(),
-    postCreate: z.boolean().optional(),
-    random: z.nullable(RandomStringField$inboundSchema).optional(),
-    readOnly: z.nullable(ReadOnlyField$inboundSchema).optional(),
-    secret: z.nullable(RotatableSecretField$inboundSchema).optional(),
-    select: z.nullable(ConnectorSelectField$inboundSchema).optional(),
-    str: z.nullable(StringField$inboundSchema).optional(),
-    strList: z.nullable(StringListField$inboundSchema).optional(),
-    stringMap: z.nullable(StringMapField$inboundSchema).optional(),
-    text: z.nullable(ConnectorTextField$inboundSchema).optional(),
-  });
+export const Field$inboundSchema: z.ZodType<Field, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      additionalPlaceholder: z.string().optional(),
+      checkbox: z.nullable(ConnectorCheckboxField$inboundSchema).optional(),
+      dependsOnFields: z.nullable(z.array(z.string())).optional(),
+      displayName: z.string().optional(),
+      helpUrl: z.string().optional(),
+      import: z.nullable(ImportField$inboundSchema).optional(),
+      keyValue: z.nullable(KeyValueField$inboundSchema).optional(),
+      name: z.string().optional(),
+      oauth2: z.nullable(OAuth2Field1$inboundSchema).optional(),
+      options: z.nullable(OptionsField$inboundSchema).optional(),
+      placeholder: z.string().optional(),
+      postCreate: z.boolean().optional(),
+      random: z.nullable(RandomStringField$inboundSchema).optional(),
+      readOnly: z.nullable(ReadOnlyField$inboundSchema).optional(),
+      secret: z.nullable(RotatableSecretField$inboundSchema).optional(),
+      select: z.nullable(ConnectorSelectField$inboundSchema).optional(),
+      str: z.nullable(StringField$inboundSchema).optional(),
+      strList: z.nullable(StringListField$inboundSchema).optional(),
+      stringMap: z.nullable(StringMapField$inboundSchema).optional(),
+      text: z.nullable(ConnectorTextField$inboundSchema).optional(),
+    })
+  );
 
 export function fieldFromJSON(
   jsonString: string,

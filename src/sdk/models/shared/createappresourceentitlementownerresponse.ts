@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,11 +23,13 @@ export const CreateAppResourceEntitlementOwnerResponse$inboundSchema: z.ZodType<
   CreateAppResourceEntitlementOwnerResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appResourceOwnerEntitlement: z.nullable(
-    AppResourceOwnerEntitlement$inboundSchema,
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appResourceOwnerEntitlement: z.nullable(
+      AppResourceOwnerEntitlement$inboundSchema,
+    ).optional(),
+  })
+);
 
 export function createAppResourceEntitlementOwnerResponseFromJSON(
   jsonString: string,

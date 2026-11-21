@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Report, Report$inboundSchema } from "./report.js";
@@ -31,12 +31,14 @@ export const ReportingServiceGetResponse$inboundSchema: z.ZodType<
   ReportingServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  latestRun: z.nullable(ReportRun$inboundSchema).optional(),
-  latestSuccessfulRun: z.nullable(ReportRun$inboundSchema).optional(),
-  promptDrifted: z.boolean().optional(),
-  report: z.nullable(Report$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    latestRun: z.nullable(ReportRun$inboundSchema).optional(),
+    latestSuccessfulRun: z.nullable(ReportRun$inboundSchema).optional(),
+    promptDrifted: z.boolean().optional(),
+    report: z.nullable(Report$inboundSchema).optional(),
+  })
+);
 
 export function reportingServiceGetResponseFromJSON(
   jsonString: string,

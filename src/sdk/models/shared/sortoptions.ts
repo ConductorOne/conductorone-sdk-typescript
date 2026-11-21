@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The SortOptions message.
@@ -29,10 +30,12 @@ export const SortOptions$outboundSchema: z.ZodType<
   SortOptions$Outbound,
   z.ZodTypeDef,
   SortOptions
-> = z.object({
-  descending: z.boolean().optional(),
-  orderBy: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    descending: z.boolean().optional(),
+    orderBy: z.string().optional(),
+  })
+);
 
 export function sortOptionsToJSON(sortOptions: SortOptions): string {
   return JSON.stringify(SortOptions$outboundSchema.parse(sortOptions));

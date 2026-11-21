@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -56,21 +56,23 @@ export const C1ApiEdgeV1EdgeServiceListAuditAttestationManifestsRequest$outbound
     C1ApiEdgeV1EdgeServiceListAuditAttestationManifestsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceListAuditAttestationManifestsRequest
-  > = z.object({
-    auditOriginId: z.string().optional(),
-    auditOriginInstanceId: z.string().optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    since: z.number().int().transform(v => `${v}`).optional(),
-    until: z.number().int().transform(v => `${v}`).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      auditOriginId: "audit_origin_id",
-      auditOriginInstanceId: "audit_origin_instance_id",
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      auditOriginId: z.string().optional(),
+      auditOriginInstanceId: z.string().optional(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      since: z.number().int().transform(v => `${v}`).optional(),
+      until: z.number().int().transform(v => `${v}`).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        auditOriginId: "audit_origin_id",
+        auditOriginInstanceId: "audit_origin_instance_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListAuditAttestationManifestsRequestToJSON(
   c1ApiEdgeV1EdgeServiceListAuditAttestationManifestsRequest:
@@ -88,22 +90,24 @@ export const C1ApiEdgeV1EdgeServiceListAuditAttestationManifestsResponse$inbound
     C1ApiEdgeV1EdgeServiceListAuditAttestationManifestsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    EdgeServiceListAuditAttestationManifestsResponse: shared
-      .EdgeServiceListAuditAttestationManifestsResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "EdgeServiceListAuditAttestationManifestsResponse":
-        "edgeServiceListAuditAttestationManifestsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      EdgeServiceListAuditAttestationManifestsResponse: shared
+        .EdgeServiceListAuditAttestationManifestsResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "EdgeServiceListAuditAttestationManifestsResponse":
+          "edgeServiceListAuditAttestationManifestsResponse",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListAuditAttestationManifestsResponseFromJSON(
   jsonString: string,

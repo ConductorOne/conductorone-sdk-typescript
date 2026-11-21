@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,10 +28,12 @@ export const EntitlementToDetails$inboundSchema: z.ZodType<
   EntitlementToDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  entitlementDetails: z.record(CampaignEntitlementDetails$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entitlementDetails: z.record(CampaignEntitlementDetails$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type EntitlementToDetails$Outbound = {
   entitlementDetails?:
@@ -44,10 +46,12 @@ export const EntitlementToDetails$outboundSchema: z.ZodType<
   EntitlementToDetails$Outbound,
   z.ZodTypeDef,
   EntitlementToDetails
-> = z.object({
-  entitlementDetails: z.record(CampaignEntitlementDetails$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entitlementDetails: z.record(CampaignEntitlementDetails$outboundSchema)
+      .optional(),
+  })
+);
 
 export function entitlementToDetailsToJSON(
   entitlementToDetails: EntitlementToDetails,

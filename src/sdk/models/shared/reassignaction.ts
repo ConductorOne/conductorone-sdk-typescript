@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -56,13 +56,15 @@ export const ReassignAction$inboundSchema: z.ZodType<
   ReassignAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  assigneeUserIdCel: z.nullable(z.string()).optional(),
-  assigneeUserRef: z.nullable(UserRef$inboundSchema).optional(),
-  subjectUserIdCel: z.nullable(z.string()).optional(),
-  subjectUserRef: z.nullable(UserRef$inboundSchema).optional(),
-  useSubjectUser: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assigneeUserIdCel: z.nullable(z.string()).optional(),
+    assigneeUserRef: z.nullable(UserRef$inboundSchema).optional(),
+    subjectUserIdCel: z.nullable(z.string()).optional(),
+    subjectUserRef: z.nullable(UserRef$inboundSchema).optional(),
+    useSubjectUser: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type ReassignAction$Outbound = {
   assigneeUserIdCel?: string | null | undefined;
@@ -77,13 +79,15 @@ export const ReassignAction$outboundSchema: z.ZodType<
   ReassignAction$Outbound,
   z.ZodTypeDef,
   ReassignAction
-> = z.object({
-  assigneeUserIdCel: z.nullable(z.string()).optional(),
-  assigneeUserRef: z.nullable(UserRef$outboundSchema).optional(),
-  subjectUserIdCel: z.nullable(z.string()).optional(),
-  subjectUserRef: z.nullable(UserRef$outboundSchema).optional(),
-  useSubjectUser: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assigneeUserIdCel: z.nullable(z.string()).optional(),
+    assigneeUserRef: z.nullable(UserRef$outboundSchema).optional(),
+    subjectUserIdCel: z.nullable(z.string()).optional(),
+    subjectUserRef: z.nullable(UserRef$outboundSchema).optional(),
+    useSubjectUser: z.boolean().optional(),
+  })
+);
 
 export function reassignActionToJSON(reassignAction: ReassignAction): string {
   return JSON.stringify(ReassignAction$outboundSchema.parse(reassignAction));

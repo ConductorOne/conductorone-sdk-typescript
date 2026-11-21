@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -42,13 +42,15 @@ export const C1ApiFundsV1FundRuleServiceGetRequest$outboundSchema: z.ZodType<
   C1ApiFundsV1FundRuleServiceGetRequest$Outbound,
   z.ZodTypeDef,
   C1ApiFundsV1FundRuleServiceGetRequest
-> = z.object({
-  ruleId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    ruleId: "rule_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ruleId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      ruleId: "rule_id",
+    });
+  })
+);
 
 export function c1ApiFundsV1FundRuleServiceGetRequestToJSON(
   c1ApiFundsV1FundRuleServiceGetRequest: C1ApiFundsV1FundRuleServiceGetRequest,
@@ -65,20 +67,22 @@ export const C1ApiFundsV1FundRuleServiceGetResponse$inboundSchema: z.ZodType<
   C1ApiFundsV1FundRuleServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  FundRuleServiceGetResponse: shared.FundRuleServiceGetResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "FundRuleServiceGetResponse": "fundRuleServiceGetResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    FundRuleServiceGetResponse: shared.FundRuleServiceGetResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "FundRuleServiceGetResponse": "fundRuleServiceGetResponse",
+    });
+  })
+);
 
 export function c1ApiFundsV1FundRuleServiceGetResponseFromJSON(
   jsonString: string,

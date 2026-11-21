@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,13 +45,15 @@ export const C1ApiLlmGatewayV1ProviderCredentialServiceGetRequest$outboundSchema
     C1ApiLlmGatewayV1ProviderCredentialServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiLlmGatewayV1ProviderCredentialServiceGetRequest
-  > = z.object({
-    slotId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      slotId: "slot_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      slotId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        slotId: "slot_id",
+      });
+    })
+  );
 
 export function c1ApiLlmGatewayV1ProviderCredentialServiceGetRequestToJSON(
   c1ApiLlmGatewayV1ProviderCredentialServiceGetRequest:
@@ -70,20 +72,22 @@ export const C1ApiLlmGatewayV1ProviderCredentialServiceGetResponse$inboundSchema
     C1ApiLlmGatewayV1ProviderCredentialServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    GetProviderCredentialResponse: shared
-      .GetProviderCredentialResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "GetProviderCredentialResponse": "getProviderCredentialResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      GetProviderCredentialResponse: shared
+        .GetProviderCredentialResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "GetProviderCredentialResponse": "getProviderCredentialResponse",
+      });
+    })
+  );
 
 export function c1ApiLlmGatewayV1ProviderCredentialServiceGetResponseFromJSON(
   jsonString: string,

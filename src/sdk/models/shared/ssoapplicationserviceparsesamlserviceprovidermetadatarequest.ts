@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * SSOApplicationServiceParseSAMLServiceProviderMetadataRequest carries one
@@ -32,9 +33,11 @@ export const SSOApplicationServiceParseSAMLServiceProviderMetadataRequest$outbou
     SSOApplicationServiceParseSAMLServiceProviderMetadataRequest$Outbound,
     z.ZodTypeDef,
     SSOApplicationServiceParseSAMLServiceProviderMetadataRequest
-  > = z.object({
-    metadataXml: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      metadataXml: z.string(),
+    })
+  );
 
 export function ssoApplicationServiceParseSAMLServiceProviderMetadataRequestToJSON(
   ssoApplicationServiceParseSAMLServiceProviderMetadataRequest:

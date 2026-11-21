@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,11 +28,13 @@ export const MultiStep$inboundSchema: z.ZodType<
   MultiStep,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  provisionSteps: z.nullable(
-    z.array(z.lazy(() => ProvisionPolicy$inboundSchema)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    provisionSteps: z.nullable(
+      z.array(z.lazy(() => ProvisionPolicy$inboundSchema)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type MultiStep$Outbound = {
   provisionSteps?: Array<ProvisionPolicy$Outbound> | null | undefined;
@@ -43,11 +45,13 @@ export const MultiStep$outboundSchema: z.ZodType<
   MultiStep$Outbound,
   z.ZodTypeDef,
   MultiStep
-> = z.object({
-  provisionSteps: z.nullable(
-    z.array(z.lazy(() => ProvisionPolicy$outboundSchema)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    provisionSteps: z.nullable(
+      z.array(z.lazy(() => ProvisionPolicy$outboundSchema)),
+    ).optional(),
+  })
+);
 
 export function multiStepToJSON(multiStep: MultiStep): string {
   return JSON.stringify(MultiStep$outboundSchema.parse(multiStep));

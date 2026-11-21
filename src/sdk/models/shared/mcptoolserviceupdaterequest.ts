@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   MCPToolInput,
   MCPToolInput$Outbound,
@@ -28,10 +29,12 @@ export const MCPToolServiceUpdateRequest$outboundSchema: z.ZodType<
   MCPToolServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   MCPToolServiceUpdateRequest
-> = z.object({
-  tool: z.nullable(MCPToolInput$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tool: z.nullable(MCPToolInput$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function mcpToolServiceUpdateRequestToJSON(
   mcpToolServiceUpdateRequest: MCPToolServiceUpdateRequest,

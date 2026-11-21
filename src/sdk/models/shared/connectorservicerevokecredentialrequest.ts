@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * ConnectorServiceRevokeCredentialRequest is a request for revoking connector credentials. It uses URL values for input.
@@ -17,7 +18,7 @@ export const ConnectorServiceRevokeCredentialRequest$outboundSchema: z.ZodType<
   ConnectorServiceRevokeCredentialRequest$Outbound,
   z.ZodTypeDef,
   ConnectorServiceRevokeCredentialRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function connectorServiceRevokeCredentialRequestToJSON(
   connectorServiceRevokeCredentialRequest:

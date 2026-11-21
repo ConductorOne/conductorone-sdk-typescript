@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -22,6 +22,13 @@ export type FormStringMapField = {
    */
   defaultValue?: { [k: string]: string } | undefined;
   rules?: StringMapRules | null | undefined;
+  /**
+   * If secret, the map's values are write-only and rendered masked. Keys stay
+   *
+   * @remarks
+   *  readable.
+   */
+  secret?: boolean | undefined;
 };
 
 /** @internal */
@@ -29,14 +36,18 @@ export const FormStringMapField$inboundSchema: z.ZodType<
   FormStringMapField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  defaultValue: z.record(z.string()).optional(),
-  rules: z.nullable(StringMapRules$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    defaultValue: z.record(z.string()).optional(),
+    rules: z.nullable(StringMapRules$inboundSchema).optional(),
+    secret: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type FormStringMapField$Outbound = {
   defaultValue?: { [k: string]: string } | undefined;
   rules?: StringMapRules$Outbound | null | undefined;
+  secret?: boolean | undefined;
 };
 
 /** @internal */
@@ -44,10 +55,13 @@ export const FormStringMapField$outboundSchema: z.ZodType<
   FormStringMapField$Outbound,
   z.ZodTypeDef,
   FormStringMapField
-> = z.object({
-  defaultValue: z.record(z.string()).optional(),
-  rules: z.nullable(StringMapRules$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    defaultValue: z.record(z.string()).optional(),
+    rules: z.nullable(StringMapRules$outboundSchema).optional(),
+    secret: z.boolean().optional(),
+  })
+);
 
 export function formStringMapFieldToJSON(
   formStringMapField: FormStringMapField,

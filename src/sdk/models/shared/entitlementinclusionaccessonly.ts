@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,7 +22,7 @@ export const EntitlementInclusionAccessOnly$inboundSchema: z.ZodType<
   EntitlementInclusionAccessOnly,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type EntitlementInclusionAccessOnly$Outbound = {};
 
@@ -31,7 +31,7 @@ export const EntitlementInclusionAccessOnly$outboundSchema: z.ZodType<
   EntitlementInclusionAccessOnly$Outbound,
   z.ZodTypeDef,
   EntitlementInclusionAccessOnly
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function entitlementInclusionAccessOnlyToJSON(
   entitlementInclusionAccessOnly: EntitlementInclusionAccessOnly,

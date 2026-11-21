@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { HistoryActor, HistoryActor$inboundSchema } from "./historyactor.js";
@@ -44,16 +44,19 @@ export const ListHistoryEntryMetadata$inboundSchema: z.ZodType<
   ListHistoryEntryMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  actor: z.nullable(HistoryActor$inboundSchema).optional(),
-  annotations: z.nullable(z.array(HistoryAnnotation$inboundSchema)).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  id: z.string().optional(),
-  syslogEventId: z.string().optional(),
-  traceId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    actor: z.nullable(HistoryActor$inboundSchema).optional(),
+    annotations: z.nullable(z.array(HistoryAnnotation$inboundSchema))
+      .optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    id: z.string().optional(),
+    syslogEventId: z.string().optional(),
+    traceId: z.string().optional(),
+  })
+);
 
 export function listHistoryEntryMetadataFromJSON(
   jsonString: string,

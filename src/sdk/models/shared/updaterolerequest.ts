@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   RoleInput,
   RoleInput$Outbound,
@@ -28,10 +29,12 @@ export const UpdateRoleRequest$outboundSchema: z.ZodType<
   UpdateRoleRequest$Outbound,
   z.ZodTypeDef,
   UpdateRoleRequest
-> = z.object({
-  role: z.nullable(RoleInput$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.nullable(RoleInput$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function updateRoleRequestToJSON(
   updateRoleRequest: UpdateRoleRequest,

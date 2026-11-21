@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -35,7 +35,7 @@ export type GrantAccessProfileFilter = {
    *
    * @remarks
    *  Used when filter_type = EXCLUDE_SPECIFIC
-   *  Max 32 profile IDs
+   *  Max 64 profile IDs
    */
   excludedAccessProfileIds?: Array<string> | null | undefined;
   /**
@@ -47,7 +47,7 @@ export type GrantAccessProfileFilter = {
    *
    * @remarks
    *  Used when filter_type = INCLUDE_SPECIFIC
-   *  Max 32 profile IDs
+   *  Max 64 profile IDs
    */
   includedAccessProfileIds?: Array<string> | null | undefined;
 };
@@ -57,24 +57,26 @@ export const FilterType$inboundSchema: z.ZodType<
   FilterType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(FilterType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(FilterType));
 /** @internal */
 export const FilterType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   FilterType
-> = openEnums.outboundSchema(FilterType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(FilterType));
 
 /** @internal */
 export const GrantAccessProfileFilter$inboundSchema: z.ZodType<
   GrantAccessProfileFilter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  excludedAccessProfileIds: z.nullable(z.array(z.string())).optional(),
-  filterType: FilterType$inboundSchema.optional(),
-  includedAccessProfileIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    excludedAccessProfileIds: z.nullable(z.array(z.string())).optional(),
+    filterType: FilterType$inboundSchema.optional(),
+    includedAccessProfileIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type GrantAccessProfileFilter$Outbound = {
   excludedAccessProfileIds?: Array<string> | null | undefined;
@@ -87,11 +89,13 @@ export const GrantAccessProfileFilter$outboundSchema: z.ZodType<
   GrantAccessProfileFilter$Outbound,
   z.ZodTypeDef,
   GrantAccessProfileFilter
-> = z.object({
-  excludedAccessProfileIds: z.nullable(z.array(z.string())).optional(),
-  filterType: FilterType$outboundSchema.optional(),
-  includedAccessProfileIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    excludedAccessProfileIds: z.nullable(z.array(z.string())).optional(),
+    filterType: FilterType$outboundSchema.optional(),
+    includedAccessProfileIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function grantAccessProfileFilterToJSON(
   grantAccessProfileFilter: GrantAccessProfileFilter,

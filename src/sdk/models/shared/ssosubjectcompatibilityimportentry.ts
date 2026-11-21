@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * SSOSubjectCompatibilityImportEntry is one client-parsed source row.
@@ -34,11 +35,13 @@ export const SSOSubjectCompatibilityImportEntry$outboundSchema: z.ZodType<
   SSOSubjectCompatibilityImportEntry$Outbound,
   z.ZodTypeDef,
   SSOSubjectCompatibilityImportEntry
-> = z.object({
-  row: z.number().int().optional(),
-  subject: z.string().optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    row: z.number().int().optional(),
+    subject: z.string().optional(),
+    userId: z.string().optional(),
+  })
+);
 
 export function ssoSubjectCompatibilityImportEntryToJSON(
   ssoSubjectCompatibilityImportEntry: SSOSubjectCompatibilityImportEntry,

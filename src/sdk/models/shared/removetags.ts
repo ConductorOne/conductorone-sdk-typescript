@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const RemoveTags$inboundSchema: z.ZodType<
   RemoveTags,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  keys: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keys: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type RemoveTags$Outbound = {
   keys?: Array<string> | null | undefined;
@@ -35,9 +37,11 @@ export const RemoveTags$outboundSchema: z.ZodType<
   RemoveTags$Outbound,
   z.ZodTypeDef,
   RemoveTags
-> = z.object({
-  keys: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keys: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function removeTagsToJSON(removeTags: RemoveTags): string {
   return JSON.stringify(RemoveTags$outboundSchema.parse(removeTags));

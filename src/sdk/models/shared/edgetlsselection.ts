@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -31,9 +31,11 @@ export const EdgeTlsSelection$inboundSchema: z.ZodType<
   EdgeTlsSelection,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  builtin: z.nullable(EdgeBuiltinTlsConfig$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    builtin: z.nullable(EdgeBuiltinTlsConfig$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type EdgeTlsSelection$Outbound = {
   builtin?: EdgeBuiltinTlsConfig$Outbound | null | undefined;
@@ -44,9 +46,11 @@ export const EdgeTlsSelection$outboundSchema: z.ZodType<
   EdgeTlsSelection$Outbound,
   z.ZodTypeDef,
   EdgeTlsSelection
-> = z.object({
-  builtin: z.nullable(EdgeBuiltinTlsConfig$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    builtin: z.nullable(EdgeBuiltinTlsConfig$outboundSchema).optional(),
+  })
+);
 
 export function edgeTlsSelectionToJSON(
   edgeTlsSelection: EdgeTlsSelection,

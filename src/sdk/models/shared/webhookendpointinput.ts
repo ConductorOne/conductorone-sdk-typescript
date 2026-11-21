@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The Webhook message.
@@ -41,13 +42,15 @@ export const WebhookEndpointInput$outboundSchema: z.ZodType<
   WebhookEndpointInput$Outbound,
   z.ZodTypeDef,
   WebhookEndpointInput
-> = z.object({
-  callbackTimeout: z.nullable(z.string()).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  url: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    callbackTimeout: z.nullable(z.string()).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    url: z.string().optional(),
+  })
+);
 
 export function webhookEndpointInputToJSON(
   webhookEndpointInput: WebhookEndpointInput,

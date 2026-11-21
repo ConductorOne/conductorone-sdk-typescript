@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppUserExpandMask,
   AppUserExpandMask$Outbound,
@@ -36,11 +37,13 @@ export const ListOwnedServiceAccountsRequest$outboundSchema: z.ZodType<
   ListOwnedServiceAccountsRequest$Outbound,
   z.ZodTypeDef,
   ListOwnedServiceAccountsRequest
-> = z.object({
-  expandMask: z.nullable(AppUserExpandMask$outboundSchema).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expandMask: z.nullable(AppUserExpandMask$outboundSchema).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+  })
+);
 
 export function listOwnedServiceAccountsRequestToJSON(
   listOwnedServiceAccountsRequest: ListOwnedServiceAccountsRequest,

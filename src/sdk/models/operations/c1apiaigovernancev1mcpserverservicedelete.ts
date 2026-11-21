@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -53,18 +53,20 @@ export const C1ApiAiGovernanceV1MCPServerServiceDeleteRequest$outboundSchema:
     C1ApiAiGovernanceV1MCPServerServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1MCPServerServiceDeleteRequest
-  > = z.object({
-    appId: z.string(),
-    connectorId: z.string(),
-    mcpServerServiceDeleteRequest: shared
-      .MCPServerServiceDeleteRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      connectorId: "connector_id",
-      mcpServerServiceDeleteRequest: "MCPServerServiceDeleteRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      connectorId: z.string(),
+      mcpServerServiceDeleteRequest: shared
+        .MCPServerServiceDeleteRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        connectorId: "connector_id",
+        mcpServerServiceDeleteRequest: "MCPServerServiceDeleteRequest",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPServerServiceDeleteRequestToJSON(
   c1ApiAiGovernanceV1MCPServerServiceDeleteRequest:
@@ -83,20 +85,22 @@ export const C1ApiAiGovernanceV1MCPServerServiceDeleteResponse$inboundSchema:
     C1ApiAiGovernanceV1MCPServerServiceDeleteResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    MCPServerServiceDeleteResponse: shared
-      .MCPServerServiceDeleteResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "MCPServerServiceDeleteResponse": "mcpServerServiceDeleteResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      MCPServerServiceDeleteResponse: shared
+        .MCPServerServiceDeleteResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "MCPServerServiceDeleteResponse": "mcpServerServiceDeleteResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPServerServiceDeleteResponseFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The PolicyRef message.
@@ -24,9 +25,11 @@ export const PolicyRef$outboundSchema: z.ZodType<
   PolicyRef$Outbound,
   z.ZodTypeDef,
   PolicyRef
-> = z.object({
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+  })
+);
 
 export function policyRefToJSON(policyRef: PolicyRef): string {
   return JSON.stringify(PolicyRef$outboundSchema.parse(policyRef));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Finding, Finding$inboundSchema } from "./finding.js";
@@ -24,10 +24,12 @@ export const CreateFindingTaskResponse$inboundSchema: z.ZodType<
   CreateFindingTaskResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  finding: z.nullable(Finding$inboundSchema).optional(),
-  taskId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    finding: z.nullable(Finding$inboundSchema).optional(),
+    taskId: z.string().optional(),
+  })
+);
 
 export function createFindingTaskResponseFromJSON(
   jsonString: string,

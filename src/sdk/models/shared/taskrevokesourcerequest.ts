@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const TaskRevokeSourceRequest$inboundSchema: z.ZodType<
   TaskRevokeSourceRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  requestUserId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requestUserId: z.string().optional(),
+  })
+);
 /** @internal */
 export type TaskRevokeSourceRequest$Outbound = {
   requestUserId?: string | undefined;
@@ -35,9 +37,11 @@ export const TaskRevokeSourceRequest$outboundSchema: z.ZodType<
   TaskRevokeSourceRequest$Outbound,
   z.ZodTypeDef,
   TaskRevokeSourceRequest
-> = z.object({
-  requestUserId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requestUserId: z.string().optional(),
+  })
+);
 
 export function taskRevokeSourceRequestToJSON(
   taskRevokeSourceRequest: TaskRevokeSourceRequest,

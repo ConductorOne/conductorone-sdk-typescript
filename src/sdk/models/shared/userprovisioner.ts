@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const UserProvisioner$inboundSchema: z.ZodType<
   UserProvisioner,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowReassignment: z.boolean().optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowReassignment: z.boolean().optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type UserProvisioner$Outbound = {
   allowReassignment?: boolean | undefined;
@@ -41,10 +43,12 @@ export const UserProvisioner$outboundSchema: z.ZodType<
   UserProvisioner$Outbound,
   z.ZodTypeDef,
   UserProvisioner
-> = z.object({
-  allowReassignment: z.boolean().optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowReassignment: z.boolean().optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function userProvisionerToJSON(
   userProvisioner: UserProvisioner,

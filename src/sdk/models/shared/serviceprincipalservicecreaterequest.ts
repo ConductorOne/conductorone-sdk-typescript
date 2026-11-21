@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ServicePrincipalServiceCreateRequest message.
@@ -24,9 +25,11 @@ export const ServicePrincipalServiceCreateRequest$outboundSchema: z.ZodType<
   ServicePrincipalServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   ServicePrincipalServiceCreateRequest
-> = z.object({
-  displayName: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+  })
+);
 
 export function servicePrincipalServiceCreateRequestToJSON(
   servicePrincipalServiceCreateRequest: ServicePrincipalServiceCreateRequest,

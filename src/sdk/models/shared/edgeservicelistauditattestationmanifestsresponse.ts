@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -31,11 +31,13 @@ export const EdgeServiceListAuditAttestationManifestsResponse$inboundSchema:
     EdgeServiceListAuditAttestationManifestsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    manifests: z.nullable(z.array(TBAuditAttestationManifest$inboundSchema))
-      .optional(),
-    nextPageToken: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      manifests: z.nullable(z.array(TBAuditAttestationManifest$inboundSchema))
+        .optional(),
+      nextPageToken: z.string().optional(),
+    })
+  );
 
 export function edgeServiceListAuditAttestationManifestsResponseFromJSON(
   jsonString: string,

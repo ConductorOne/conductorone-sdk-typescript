@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppEntitlementReference,
   AppEntitlementReference$Outbound,
@@ -59,16 +60,19 @@ export const ExpressionApprovalInput$outboundSchema: z.ZodType<
   ExpressionApprovalInput$Outbound,
   z.ZodTypeDef,
   ExpressionApprovalInput
-> = z.object({
-  allowSelfApproval: z.boolean().optional(),
-  expressions: z.nullable(z.array(z.string())).optional(),
-  fallback: z.boolean().optional(),
-  fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$outboundSchema))
-    .optional(),
-  fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-  isGroupFallbackEnabled: z.boolean().optional(),
-  requireDistinctApprovers: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowSelfApproval: z.boolean().optional(),
+    expressions: z.nullable(z.array(z.string())).optional(),
+    fallback: z.boolean().optional(),
+    fallbackGroupIds: z.nullable(
+      z.array(AppEntitlementReference$outboundSchema),
+    ).optional(),
+    fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+    isGroupFallbackEnabled: z.boolean().optional(),
+    requireDistinctApprovers: z.boolean().optional(),
+  })
+);
 
 export function expressionApprovalInputToJSON(
   expressionApprovalInput: ExpressionApprovalInput,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -62,7 +62,7 @@ export type EdgeServiceCheckInferenceVaultAccessResponse = {
 
 /** @internal */
 export const Reason$inboundSchema: z.ZodType<Reason, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Reason);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Reason));
 
 /** @internal */
 export const EdgeServiceCheckInferenceVaultAccessResponse$inboundSchema:
@@ -70,12 +70,14 @@ export const EdgeServiceCheckInferenceVaultAccessResponse$inboundSchema:
     EdgeServiceCheckInferenceVaultAccessResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    granted: z.boolean().optional(),
-    openSecretEntitlementId: z.string().optional(),
-    reason: Reason$inboundSchema.optional(),
-    runtimeServicePrincipalId: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      granted: z.boolean().optional(),
+      openSecretEntitlementId: z.string().optional(),
+      reason: Reason$inboundSchema.optional(),
+      runtimeServicePrincipalId: z.string().optional(),
+    })
+  );
 
 export function edgeServiceCheckInferenceVaultAccessResponseFromJSON(
   jsonString: string,

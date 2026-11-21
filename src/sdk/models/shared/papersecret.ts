@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -173,74 +173,82 @@ export const AgeSuite$inboundSchema: z.ZodType<
   AgeSuite,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AgeSuite);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(AgeSuite));
 
 /** @internal */
 export const InputFormat$inboundSchema: z.ZodType<
   InputFormat,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(InputFormat);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(InputFormat));
 
 /** @internal */
 export const PaperSecretSecretType$inboundSchema: z.ZodType<
   PaperSecretSecretType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(PaperSecretSecretType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(PaperSecretSecretType)
+);
 
 /** @internal */
 export const PaperSecretSharingMode$inboundSchema: z.ZodType<
   PaperSecretSharingMode,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(PaperSecretSharingMode);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(PaperSecretSharingMode)
+);
 
 /** @internal */
 export const PaperSecretStatus$inboundSchema: z.ZodType<
   PaperSecretStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(PaperSecretStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(PaperSecretStatus)
+);
 
 /** @internal */
 export const PaperSecret$inboundSchema: z.ZodType<
   PaperSecret,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ageSuite: AgeSuite$inboundSchema.optional(),
-  allowedEmails: z.nullable(z.array(z.string())).optional(),
-  allowedUserIds: z.nullable(z.array(z.string())).optional(),
-  contentDeleted: z.boolean().optional(),
-  contentExpiresAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  contentReady: z.boolean().optional(),
-  contentType: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  creatorUserId: z.string().optional(),
-  currentViews: z.number().int().optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  displayName: z.string().optional(),
-  fileSize: z.string().transform(v => parseInt(v, 10)).optional(),
-  filename: z.string().optional(),
-  inputFormat: InputFormat$inboundSchema.optional(),
-  maxViews: z.number().int().optional(),
-  secretType: PaperSecretSecretType$inboundSchema.optional(),
-  shareCode: z.string().optional(),
-  shareUrl: z.string().optional(),
-  sharingMode: PaperSecretSharingMode$inboundSchema.optional(),
-  status: PaperSecretStatus$inboundSchema.optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  vaultId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ageSuite: AgeSuite$inboundSchema.optional(),
+    allowedEmails: z.nullable(z.array(z.string())).optional(),
+    allowedUserIds: z.nullable(z.array(z.string())).optional(),
+    contentDeleted: z.boolean().optional(),
+    contentExpiresAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    contentReady: z.boolean().optional(),
+    contentType: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    creatorUserId: z.string().optional(),
+    currentViews: z.number().int().optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    displayName: z.string().optional(),
+    fileSize: z.string().transform(v => parseInt(v, 10)).optional(),
+    filename: z.string().optional(),
+    inputFormat: InputFormat$inboundSchema.optional(),
+    maxViews: z.number().int().optional(),
+    secretType: PaperSecretSecretType$inboundSchema.optional(),
+    shareCode: z.string().optional(),
+    shareUrl: z.string().optional(),
+    sharingMode: PaperSecretSharingMode$inboundSchema.optional(),
+    status: PaperSecretStatus$inboundSchema.optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    vaultId: z.string().optional(),
+  })
+);
 
 export function paperSecretFromJSON(
   jsonString: string,

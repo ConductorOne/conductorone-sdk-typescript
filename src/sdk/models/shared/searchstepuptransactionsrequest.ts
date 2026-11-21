@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -78,12 +79,16 @@ export const SearchStepUpTransactionsRequestState$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SearchStepUpTransactionsRequestState
-> = openEnums.outboundSchema(SearchStepUpTransactionsRequestState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(SearchStepUpTransactionsRequestState)
+);
 
 /** @internal */
 export const SearchStepUpTransactionsRequestTargetType$outboundSchema:
   z.ZodType<string, z.ZodTypeDef, SearchStepUpTransactionsRequestTargetType> =
-    openEnums.outboundSchema(SearchStepUpTransactionsRequestTargetType);
+    /* @__PURE__ */ lazySchema$(() =>
+      openEnums.outboundSchema(SearchStepUpTransactionsRequestTargetType)
+    );
 
 /** @internal */
 export type SearchStepUpTransactionsRequest$Outbound = {
@@ -103,19 +108,22 @@ export const SearchStepUpTransactionsRequest$outboundSchema: z.ZodType<
   SearchStepUpTransactionsRequest$Outbound,
   z.ZodTypeDef,
   SearchStepUpTransactionsRequest
-> = z.object({
-  createdAfter: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  createdBefore: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  providerId: z.string().optional(),
-  state: SearchStepUpTransactionsRequestState$outboundSchema.optional(),
-  targetType: SearchStepUpTransactionsRequestTargetType$outboundSchema
-    .optional(),
-  taskId: z.string().optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAfter: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    createdBefore: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    providerId: z.string().optional(),
+    state: SearchStepUpTransactionsRequestState$outboundSchema.optional(),
+    targetType: SearchStepUpTransactionsRequestTargetType$outboundSchema
+      .optional(),
+    taskId: z.string().optional(),
+    userId: z.string().optional(),
+  })
+);
 
 export function searchStepUpTransactionsRequestToJSON(
   searchStepUpTransactionsRequest: SearchStepUpTransactionsRequest,

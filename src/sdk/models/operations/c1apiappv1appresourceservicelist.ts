@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -50,19 +50,21 @@ export const C1ApiAppV1AppResourceServiceListRequest$outboundSchema: z.ZodType<
   C1ApiAppV1AppResourceServiceListRequest$Outbound,
   z.ZodTypeDef,
   C1ApiAppV1AppResourceServiceListRequest
-> = z.object({
-  appId: z.string(),
-  appResourceTypeId: z.string(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    appId: "app_id",
-    appResourceTypeId: "app_resource_type_id",
-    pageSize: "page_size",
-    pageToken: "page_token",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string(),
+    appResourceTypeId: z.string(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      appId: "app_id",
+      appResourceTypeId: "app_resource_type_id",
+      pageSize: "page_size",
+      pageToken: "page_token",
+    });
+  })
+);
 
 export function c1ApiAppV1AppResourceServiceListRequestToJSON(
   c1ApiAppV1AppResourceServiceListRequest:
@@ -80,20 +82,22 @@ export const C1ApiAppV1AppResourceServiceListResponse$inboundSchema: z.ZodType<
   C1ApiAppV1AppResourceServiceListResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  AppResourceServiceListResponse: shared
-    .AppResourceServiceListResponse$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "AppResourceServiceListResponse": "appResourceServiceListResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    AppResourceServiceListResponse: shared
+      .AppResourceServiceListResponse$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "AppResourceServiceListResponse": "appResourceServiceListResponse",
+    });
+  })
+);
 
 export function c1ApiAppV1AppResourceServiceListResponseFromJSON(
   jsonString: string,

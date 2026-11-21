@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,18 +54,20 @@ export const C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest$outboundS
     C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest
-  > = z.object({
-    appId: z.string(),
-    appEntitlementId: z.string(),
-    addManuallyManagedUsersRequest: shared
-      .AddManuallyManagedUsersRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      appEntitlementId: "app_entitlement_id",
-      addManuallyManagedUsersRequest: "AddManuallyManagedUsersRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      appEntitlementId: z.string(),
+      addManuallyManagedUsersRequest: shared
+        .AddManuallyManagedUsersRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        appEntitlementId: "app_entitlement_id",
+        addManuallyManagedUsersRequest: "AddManuallyManagedUsersRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequestToJSON(
   c1ApiAppV1AppEntitlementsAddManuallyManagedMembersRequest:
@@ -83,20 +85,22 @@ export const C1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse$inboundS
     C1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ManuallyManagedUsersResponse: shared
-      .ManuallyManagedUsersResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ManuallyManagedUsersResponse": "manuallyManagedUsersResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ManuallyManagedUsersResponse: shared
+        .ManuallyManagedUsersResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ManuallyManagedUsersResponse": "manuallyManagedUsersResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementsAddManuallyManagedMembersResponseFromJSON(
   jsonString: string,

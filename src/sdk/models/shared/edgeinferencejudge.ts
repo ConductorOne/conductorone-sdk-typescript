@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -52,15 +52,17 @@ export const EdgeInferenceJudge$inboundSchema: z.ZodType<
   EdgeInferenceJudge,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  baseThreshold: z.number().optional(),
-  decision: z.nullable(EdgeInferenceDecisionJudge$inboundSchema).optional(),
-  failOpen: z.nullable(z.boolean()).optional(),
-  maxOutputTokens: z.number().int().optional(),
-  prompt: z.string().optional(),
-  recentTurnWindow: z.number().int().optional(),
-  thresholdStep: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    baseThreshold: z.number().optional(),
+    decision: z.nullable(EdgeInferenceDecisionJudge$inboundSchema).optional(),
+    failOpen: z.nullable(z.boolean()).optional(),
+    maxOutputTokens: z.number().int().optional(),
+    prompt: z.string().optional(),
+    recentTurnWindow: z.number().int().optional(),
+    thresholdStep: z.number().optional(),
+  })
+);
 /** @internal */
 export type EdgeInferenceJudge$Outbound = {
   baseThreshold?: number | undefined;
@@ -77,15 +79,17 @@ export const EdgeInferenceJudge$outboundSchema: z.ZodType<
   EdgeInferenceJudge$Outbound,
   z.ZodTypeDef,
   EdgeInferenceJudge
-> = z.object({
-  baseThreshold: z.number().optional(),
-  decision: z.nullable(EdgeInferenceDecisionJudge$outboundSchema).optional(),
-  failOpen: z.nullable(z.boolean()).optional(),
-  maxOutputTokens: z.number().int().optional(),
-  prompt: z.string().optional(),
-  recentTurnWindow: z.number().int().optional(),
-  thresholdStep: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    baseThreshold: z.number().optional(),
+    decision: z.nullable(EdgeInferenceDecisionJudge$outboundSchema).optional(),
+    failOpen: z.nullable(z.boolean()).optional(),
+    maxOutputTokens: z.number().int().optional(),
+    prompt: z.string().optional(),
+    recentTurnWindow: z.number().int().optional(),
+    thresholdStep: z.number().optional(),
+  })
+);
 
 export function edgeInferenceJudgeToJSON(
   edgeInferenceJudge: EdgeInferenceJudge,

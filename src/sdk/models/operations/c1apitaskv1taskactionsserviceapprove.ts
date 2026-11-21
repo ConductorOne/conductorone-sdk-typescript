@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiTaskV1TaskActionsServiceApproveRequest$outboundSchema:
     C1ApiTaskV1TaskActionsServiceApproveRequest$Outbound,
     z.ZodTypeDef,
     C1ApiTaskV1TaskActionsServiceApproveRequest
-  > = z.object({
-    taskId: z.string(),
-    taskActionsServiceApproveRequest: shared
-      .TaskActionsServiceApproveRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      taskId: "task_id",
-      taskActionsServiceApproveRequest: "TaskActionsServiceApproveRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      taskId: z.string(),
+      taskActionsServiceApproveRequest: shared
+        .TaskActionsServiceApproveRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        taskId: "task_id",
+        taskActionsServiceApproveRequest: "TaskActionsServiceApproveRequest",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskActionsServiceApproveRequestToJSON(
   c1ApiTaskV1TaskActionsServiceApproveRequest:
@@ -79,20 +81,23 @@ export const C1ApiTaskV1TaskActionsServiceApproveResponse$inboundSchema:
     C1ApiTaskV1TaskActionsServiceApproveResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    TaskActionsServiceApproveResponse: shared
-      .TaskActionsServiceApproveResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "TaskActionsServiceApproveResponse": "taskActionsServiceApproveResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      TaskActionsServiceApproveResponse: shared
+        .TaskActionsServiceApproveResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "TaskActionsServiceApproveResponse":
+          "taskActionsServiceApproveResponse",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskActionsServiceApproveResponseFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   TenantEmailProviderInput,
   TenantEmailProviderInput$Outbound,
@@ -28,10 +29,13 @@ export const UpdateTenantEmailProviderRequest$outboundSchema: z.ZodType<
   UpdateTenantEmailProviderRequest$Outbound,
   z.ZodTypeDef,
   UpdateTenantEmailProviderRequest
-> = z.object({
-  emailProvider: z.nullable(TenantEmailProviderInput$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    emailProvider: z.nullable(TenantEmailProviderInput$outboundSchema)
+      .optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function updateTenantEmailProviderRequestToJSON(
   updateTenantEmailProviderRequest: UpdateTenantEmailProviderRequest,

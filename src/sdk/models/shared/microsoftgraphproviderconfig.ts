@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -36,11 +36,13 @@ export const MicrosoftGraphProviderConfig$inboundSchema: z.ZodType<
   MicrosoftGraphProviderConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  azureTenantId: z.string().optional(),
-  clientId: z.string().optional(),
-  clientSecret: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    azureTenantId: z.string().optional(),
+    clientId: z.string().optional(),
+    clientSecret: z.string().optional(),
+  })
+);
 /** @internal */
 export type MicrosoftGraphProviderConfig$Outbound = {
   azureTenantId?: string | undefined;
@@ -53,11 +55,13 @@ export const MicrosoftGraphProviderConfig$outboundSchema: z.ZodType<
   MicrosoftGraphProviderConfig$Outbound,
   z.ZodTypeDef,
   MicrosoftGraphProviderConfig
-> = z.object({
-  azureTenantId: z.string().optional(),
-  clientId: z.string().optional(),
-  clientSecret: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    azureTenantId: z.string().optional(),
+    clientId: z.string().optional(),
+    clientSecret: z.string().optional(),
+  })
+);
 
 export function microsoftGraphProviderConfigToJSON(
   microsoftGraphProviderConfig: MicrosoftGraphProviderConfig,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,9 +25,11 @@ export const ActionTargetClientIdApprovalInstance$inboundSchema: z.ZodType<
   ActionTargetClientIdApprovalInstance,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  clientIdUrl: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientIdUrl: z.string().optional(),
+  })
+);
 /** @internal */
 export type ActionTargetClientIdApprovalInstance$Outbound = {
   clientIdUrl?: string | undefined;
@@ -38,9 +40,11 @@ export const ActionTargetClientIdApprovalInstance$outboundSchema: z.ZodType<
   ActionTargetClientIdApprovalInstance$Outbound,
   z.ZodTypeDef,
   ActionTargetClientIdApprovalInstance
-> = z.object({
-  clientIdUrl: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientIdUrl: z.string().optional(),
+  })
+);
 
 export function actionTargetClientIdApprovalInstanceToJSON(
   actionTargetClientIdApprovalInstance: ActionTargetClientIdApprovalInstance,

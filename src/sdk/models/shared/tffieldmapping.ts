@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -174,33 +174,36 @@ export const ElementTfType$inboundSchema: z.ZodType<
   ElementTfType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ElementTfType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(ElementTfType));
 
 /** @internal */
 export const TfType$inboundSchema: z.ZodType<TfType, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(TfType);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(TfType));
 
 /** @internal */
 export const TFFieldMapping$inboundSchema: z.ZodType<
   TFFieldMapping,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  c1Field: z.string().optional(),
-  computed: z.boolean().optional(),
-  elementTfType: ElementTfType$inboundSchema.optional(),
-  enumValues: z.nullable(z.array(EnumValue$inboundSchema)).optional(),
-  nestedFields: z.nullable(z.array(z.lazy(() => TFFieldMapping$inboundSchema)))
-    .optional(),
-  oneofField: z.string().optional(),
-  oneofVariant: z.string().optional(),
-  optional: z.boolean().optional(),
-  references: z.nullable(TFReference$inboundSchema).optional(),
-  required: z.boolean().optional(),
-  sensitive: z.boolean().optional(),
-  tfField: z.string().optional(),
-  tfType: TfType$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    c1Field: z.string().optional(),
+    computed: z.boolean().optional(),
+    elementTfType: ElementTfType$inboundSchema.optional(),
+    enumValues: z.nullable(z.array(EnumValue$inboundSchema)).optional(),
+    nestedFields: z.nullable(
+      z.array(z.lazy(() => TFFieldMapping$inboundSchema)),
+    ).optional(),
+    oneofField: z.string().optional(),
+    oneofVariant: z.string().optional(),
+    optional: z.boolean().optional(),
+    references: z.nullable(TFReference$inboundSchema).optional(),
+    required: z.boolean().optional(),
+    sensitive: z.boolean().optional(),
+    tfField: z.string().optional(),
+    tfType: TfType$inboundSchema.optional(),
+  })
+);
 
 export function tfFieldMappingFromJSON(
   jsonString: string,

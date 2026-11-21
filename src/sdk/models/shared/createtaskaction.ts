@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const CreateTaskAction$inboundSchema: z.ZodType<
   CreateTaskAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  policyId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    policyId: z.string().optional(),
+  })
+);
 /** @internal */
 export type CreateTaskAction$Outbound = {
   policyId?: string | undefined;
@@ -35,9 +37,11 @@ export const CreateTaskAction$outboundSchema: z.ZodType<
   CreateTaskAction$Outbound,
   z.ZodTypeDef,
   CreateTaskAction
-> = z.object({
-  policyId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    policyId: z.string().optional(),
+  })
+);
 
 export function createTaskActionToJSON(
   createTaskAction: CreateTaskAction,

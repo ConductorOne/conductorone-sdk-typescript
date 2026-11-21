@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -31,10 +31,13 @@ export const PersonalDeviceServiceListDeviceClientsResponse$inboundSchema:
     PersonalDeviceServiceListDeviceClientsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    clients: z.nullable(z.array(PersonalDeviceClient$inboundSchema)).optional(),
-    nextPageToken: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      clients: z.nullable(z.array(PersonalDeviceClient$inboundSchema))
+        .optional(),
+      nextPageToken: z.string().optional(),
+    })
+  );
 
 export function personalDeviceServiceListDeviceClientsResponseFromJSON(
   jsonString: string,

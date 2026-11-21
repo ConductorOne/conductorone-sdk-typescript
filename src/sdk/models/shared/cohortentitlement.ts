@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -54,17 +54,19 @@ export const CohortEntitlement$inboundSchema: z.ZodType<
   CohortEntitlement,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appDisplayName: z.string().optional(),
-  appId: z.string().optional(),
-  appResourceDisplayName: z.string().optional(),
-  appResourceTypeDisplayName: z.string().optional(),
-  coverage: z.number().optional(),
-  entitlementDisplayName: z.string().optional(),
-  entitlementId: z.string().optional(),
-  grantedCount: z.number().int().optional(),
-  riskLevelValueId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appDisplayName: z.string().optional(),
+    appId: z.string().optional(),
+    appResourceDisplayName: z.string().optional(),
+    appResourceTypeDisplayName: z.string().optional(),
+    coverage: z.number().optional(),
+    entitlementDisplayName: z.string().optional(),
+    entitlementId: z.string().optional(),
+    grantedCount: z.number().int().optional(),
+    riskLevelValueId: z.string().optional(),
+  })
+);
 /** @internal */
 export type CohortEntitlement$Outbound = {
   appDisplayName?: string | undefined;
@@ -83,17 +85,19 @@ export const CohortEntitlement$outboundSchema: z.ZodType<
   CohortEntitlement$Outbound,
   z.ZodTypeDef,
   CohortEntitlement
-> = z.object({
-  appDisplayName: z.string().optional(),
-  appId: z.string().optional(),
-  appResourceDisplayName: z.string().optional(),
-  appResourceTypeDisplayName: z.string().optional(),
-  coverage: z.number().optional(),
-  entitlementDisplayName: z.string().optional(),
-  entitlementId: z.string().optional(),
-  grantedCount: z.number().int().optional(),
-  riskLevelValueId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appDisplayName: z.string().optional(),
+    appId: z.string().optional(),
+    appResourceDisplayName: z.string().optional(),
+    appResourceTypeDisplayName: z.string().optional(),
+    coverage: z.number().optional(),
+    entitlementDisplayName: z.string().optional(),
+    entitlementId: z.string().optional(),
+    grantedCount: z.number().int().optional(),
+    riskLevelValueId: z.string().optional(),
+  })
+);
 
 export function cohortEntitlementToJSON(
   cohortEntitlement: CohortEntitlement,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AccessReviewTemplateSetupEntitlementInput,
   AccessReviewTemplateSetupEntitlementInput$Outbound,
@@ -36,11 +37,13 @@ export const AccessReviewRemoveTemplateEntitlementsRequest$outboundSchema:
     AccessReviewRemoveTemplateEntitlementsRequest$Outbound,
     z.ZodTypeDef,
     AccessReviewRemoveTemplateEntitlementsRequest
-  > = z.object({
-    entitlements: z.nullable(
-      z.array(AccessReviewTemplateSetupEntitlementInput$outboundSchema),
-    ).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      entitlements: z.nullable(
+        z.array(AccessReviewTemplateSetupEntitlementInput$outboundSchema),
+      ).optional(),
+    })
+  );
 
 export function accessReviewRemoveTemplateEntitlementsRequestToJSON(
   accessReviewRemoveTemplateEntitlementsRequest:

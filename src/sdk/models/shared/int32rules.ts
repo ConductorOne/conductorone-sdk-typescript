@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -73,16 +73,18 @@ export const Int32Rules$inboundSchema: z.ZodType<
   Int32Rules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  const: z.number().int().optional(),
-  gt: z.number().int().optional(),
-  gte: z.number().int().optional(),
-  ignoreEmpty: z.boolean().optional(),
-  in: z.nullable(z.array(z.number().int())).optional(),
-  lt: z.number().int().optional(),
-  lte: z.number().int().optional(),
-  notIn: z.nullable(z.array(z.number().int())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    const: z.number().int().optional(),
+    gt: z.number().int().optional(),
+    gte: z.number().int().optional(),
+    ignoreEmpty: z.boolean().optional(),
+    in: z.nullable(z.array(z.number().int())).optional(),
+    lt: z.number().int().optional(),
+    lte: z.number().int().optional(),
+    notIn: z.nullable(z.array(z.number().int())).optional(),
+  })
+);
 /** @internal */
 export type Int32Rules$Outbound = {
   const?: number | undefined;
@@ -100,16 +102,18 @@ export const Int32Rules$outboundSchema: z.ZodType<
   Int32Rules$Outbound,
   z.ZodTypeDef,
   Int32Rules
-> = z.object({
-  const: z.number().int().optional(),
-  gt: z.number().int().optional(),
-  gte: z.number().int().optional(),
-  ignoreEmpty: z.boolean().optional(),
-  in: z.nullable(z.array(z.number().int())).optional(),
-  lt: z.number().int().optional(),
-  lte: z.number().int().optional(),
-  notIn: z.nullable(z.array(z.number().int())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    const: z.number().int().optional(),
+    gt: z.number().int().optional(),
+    gte: z.number().int().optional(),
+    ignoreEmpty: z.boolean().optional(),
+    in: z.nullable(z.array(z.number().int())).optional(),
+    lt: z.number().int().optional(),
+    lte: z.number().int().optional(),
+    notIn: z.nullable(z.array(z.number().int())).optional(),
+  })
+);
 
 export function int32RulesToJSON(int32Rules: Int32Rules): string {
   return JSON.stringify(Int32Rules$outboundSchema.parse(int32Rules));

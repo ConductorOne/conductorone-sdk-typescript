@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -99,18 +99,20 @@ export const RecordType$inboundSchema: z.ZodType<
   RecordType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(RecordType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(RecordType));
 
 /** @internal */
 export const A2UIProvenanceObject$inboundSchema: z.ZodType<
   A2UIProvenanceObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  recordType: RecordType$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    recordType: RecordType$inboundSchema.optional(),
+  })
+);
 
 export function a2UIProvenanceObjectFromJSON(
   jsonString: string,

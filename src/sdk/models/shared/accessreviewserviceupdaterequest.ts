@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AccessReviewInput,
   AccessReviewInput$Outbound,
@@ -35,11 +36,13 @@ export const AccessReviewServiceUpdateRequest$outboundSchema: z.ZodType<
   AccessReviewServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   AccessReviewServiceUpdateRequest
-> = z.object({
-  accessReview: z.nullable(AccessReviewInput$outboundSchema).optional(),
-  expandMask: z.nullable(AccessReviewExpandMask$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReview: z.nullable(AccessReviewInput$outboundSchema).optional(),
+    expandMask: z.nullable(AccessReviewExpandMask$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function accessReviewServiceUpdateRequestToJSON(
   accessReviewServiceUpdateRequest: AccessReviewServiceUpdateRequest,

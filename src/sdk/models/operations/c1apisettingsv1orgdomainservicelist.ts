@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,15 +45,17 @@ export const C1ApiSettingsV1OrgDomainServiceListRequest$outboundSchema:
     C1ApiSettingsV1OrgDomainServiceListRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSettingsV1OrgDomainServiceListRequest
-  > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiSettingsV1OrgDomainServiceListRequestToJSON(
   c1ApiSettingsV1OrgDomainServiceListRequest:
@@ -72,20 +74,22 @@ export const C1ApiSettingsV1OrgDomainServiceListResponse$inboundSchema:
     C1ApiSettingsV1OrgDomainServiceListResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ListOrgDomainsResponse: shared.ListOrgDomainsResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ListOrgDomainsResponse": "listOrgDomainsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ListOrgDomainsResponse: shared.ListOrgDomainsResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ListOrgDomainsResponse": "listOrgDomainsResponse",
+      });
+    })
+  );
 
 export function c1ApiSettingsV1OrgDomainServiceListResponseFromJSON(
   jsonString: string,

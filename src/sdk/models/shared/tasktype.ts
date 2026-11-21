@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -70,14 +70,16 @@ export const TaskType$inboundSchema: z.ZodType<
   TaskType,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  action: z.nullable(TaskTypeAction$inboundSchema).optional(),
-  certify: z.nullable(TaskTypeCertify$inboundSchema).optional(),
-  finding: z.nullable(TaskTypeFinding$inboundSchema).optional(),
-  grant: z.nullable(TaskTypeGrant$inboundSchema).optional(),
-  offboarding: z.nullable(TaskTypeOffboarding$inboundSchema).optional(),
-  revoke: z.nullable(TaskTypeRevoke$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: z.nullable(TaskTypeAction$inboundSchema).optional(),
+    certify: z.nullable(TaskTypeCertify$inboundSchema).optional(),
+    finding: z.nullable(TaskTypeFinding$inboundSchema).optional(),
+    grant: z.nullable(TaskTypeGrant$inboundSchema).optional(),
+    offboarding: z.nullable(TaskTypeOffboarding$inboundSchema).optional(),
+    revoke: z.nullable(TaskTypeRevoke$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type TaskType$Outbound = {
   action?: TaskTypeAction$Outbound | null | undefined;
@@ -93,14 +95,16 @@ export const TaskType$outboundSchema: z.ZodType<
   TaskType$Outbound,
   z.ZodTypeDef,
   TaskType
-> = z.object({
-  action: z.nullable(TaskTypeAction$outboundSchema).optional(),
-  certify: z.nullable(TaskTypeCertify$outboundSchema).optional(),
-  finding: z.nullable(TaskTypeFinding$outboundSchema).optional(),
-  grant: z.nullable(TaskTypeGrant$outboundSchema).optional(),
-  offboarding: z.nullable(TaskTypeOffboarding$outboundSchema).optional(),
-  revoke: z.nullable(TaskTypeRevoke$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: z.nullable(TaskTypeAction$outboundSchema).optional(),
+    certify: z.nullable(TaskTypeCertify$outboundSchema).optional(),
+    finding: z.nullable(TaskTypeFinding$outboundSchema).optional(),
+    grant: z.nullable(TaskTypeGrant$outboundSchema).optional(),
+    offboarding: z.nullable(TaskTypeOffboarding$outboundSchema).optional(),
+    revoke: z.nullable(TaskTypeRevoke$outboundSchema).optional(),
+  })
+);
 
 export function taskTypeToJSON(taskType: TaskType): string {
   return JSON.stringify(TaskType$outboundSchema.parse(taskType));

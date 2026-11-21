@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * RemoveAppOwnerRequest is the request body for removing an app owner. It uses URL values for input.
@@ -17,7 +18,7 @@ export const RemoveAppOwnerRequest$outboundSchema: z.ZodType<
   RemoveAppOwnerRequest$Outbound,
   z.ZodTypeDef,
   RemoveAppOwnerRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function removeAppOwnerRequestToJSON(
   removeAppOwnerRequest: RemoveAppOwnerRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -50,15 +50,17 @@ export const C1ApiSpendinsightsV1SpendInsightsServiceResolveEffectiveLimitsReque
     C1ApiSpendinsightsV1SpendInsightsServiceResolveEffectiveLimitsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSpendinsightsV1SpendInsightsServiceResolveEffectiveLimitsRequest
-  > = z.object({
-    userId: z.string(),
-    appId: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      userId: "user_id",
-      appId: "app_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      userId: z.string(),
+      appId: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        userId: "user_id",
+        appId: "app_id",
+      });
+    })
+  );
 
 export function c1ApiSpendinsightsV1SpendInsightsServiceResolveEffectiveLimitsRequestToJSON(
   c1ApiSpendinsightsV1SpendInsightsServiceResolveEffectiveLimitsRequest:
@@ -78,20 +80,22 @@ export const C1ApiSpendinsightsV1SpendInsightsServiceResolveEffectiveLimitsRespo
     C1ApiSpendinsightsV1SpendInsightsServiceResolveEffectiveLimitsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ResolveEffectiveLimitsResponse: shared
-      .ResolveEffectiveLimitsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ResolveEffectiveLimitsResponse": "resolveEffectiveLimitsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ResolveEffectiveLimitsResponse: shared
+        .ResolveEffectiveLimitsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ResolveEffectiveLimitsResponse": "resolveEffectiveLimitsResponse",
+      });
+    })
+  );
 
 export function c1ApiSpendinsightsV1SpendInsightsServiceResolveEffectiveLimitsResponseFromJSON(
   jsonString: string,

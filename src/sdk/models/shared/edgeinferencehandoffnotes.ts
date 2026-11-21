@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const EdgeInferenceHandoffNotes$inboundSchema: z.ZodType<
   EdgeInferenceHandoffNotes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  deescalationNote: z.string().optional(),
-  escalationNote: z.string().optional(),
-  onlyOnWrongSignalEscalation: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    deescalationNote: z.string().optional(),
+    escalationNote: z.string().optional(),
+    onlyOnWrongSignalEscalation: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type EdgeInferenceHandoffNotes$Outbound = {
   deescalationNote?: string | undefined;
@@ -47,11 +49,13 @@ export const EdgeInferenceHandoffNotes$outboundSchema: z.ZodType<
   EdgeInferenceHandoffNotes$Outbound,
   z.ZodTypeDef,
   EdgeInferenceHandoffNotes
-> = z.object({
-  deescalationNote: z.string().optional(),
-  escalationNote: z.string().optional(),
-  onlyOnWrongSignalEscalation: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    deescalationNote: z.string().optional(),
+    escalationNote: z.string().optional(),
+    onlyOnWrongSignalEscalation: z.boolean().optional(),
+  })
+);
 
 export function edgeInferenceHandoffNotesToJSON(
   edgeInferenceHandoffNotes: EdgeInferenceHandoffNotes,

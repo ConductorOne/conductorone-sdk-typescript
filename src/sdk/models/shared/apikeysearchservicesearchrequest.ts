@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -42,7 +43,9 @@ export const APIKeySearchServiceSearchRequestTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   APIKeySearchServiceSearchRequestTypes
-> = openEnums.outboundSchema(APIKeySearchServiceSearchRequestTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(APIKeySearchServiceSearchRequestTypes)
+);
 
 /** @internal */
 export type APIKeySearchServiceSearchRequest$Outbound = {
@@ -57,14 +60,16 @@ export const APIKeySearchServiceSearchRequest$outboundSchema: z.ZodType<
   APIKeySearchServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   APIKeySearchServiceSearchRequest
-> = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  types: z.nullable(
-    z.array(APIKeySearchServiceSearchRequestTypes$outboundSchema),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    types: z.nullable(
+      z.array(APIKeySearchServiceSearchRequestTypes$outboundSchema),
+    ).optional(),
+  })
+);
 
 export function apiKeySearchServiceSearchRequestToJSON(
   apiKeySearchServiceSearchRequest: APIKeySearchServiceSearchRequest,

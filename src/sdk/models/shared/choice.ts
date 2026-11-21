@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { DynamicString, DynamicString$inboundSchema } from "./dynamicstring.js";
@@ -21,12 +21,14 @@ export type Choice = {
 };
 
 /** @internal */
-export const Choice$inboundSchema: z.ZodType<Choice, z.ZodTypeDef, unknown> = z
-  .object({
-    description: z.nullable(DynamicString$inboundSchema).optional(),
-    id: z.string().optional(),
-    label: z.nullable(DynamicString$inboundSchema).optional(),
-  });
+export const Choice$inboundSchema: z.ZodType<Choice, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      description: z.nullable(DynamicString$inboundSchema).optional(),
+      id: z.string().optional(),
+      label: z.nullable(DynamicString$inboundSchema).optional(),
+    })
+  );
 
 export function choiceFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   SSFReceiverStreamInput,
   SSFReceiverStreamInput$Outbound,
@@ -28,11 +29,13 @@ export const SSFReceiverStreamServiceUpdateRequest$outboundSchema: z.ZodType<
   SSFReceiverStreamServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   SSFReceiverStreamServiceUpdateRequest
-> = z.object({
-  ssfReceiverStream: z.nullable(SSFReceiverStreamInput$outboundSchema)
-    .optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ssfReceiverStream: z.nullable(SSFReceiverStreamInput$outboundSchema)
+      .optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function ssfReceiverStreamServiceUpdateRequestToJSON(
   ssfReceiverStreamServiceUpdateRequest: SSFReceiverStreamServiceUpdateRequest,

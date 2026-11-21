@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -31,10 +31,12 @@ export const XAAResourceServerHistoryEntry$inboundSchema: z.ZodType<
   XAAResourceServerHistoryEntry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  metadata: z.nullable(HistoryEntryMetadata$inboundSchema).optional(),
-  snapshot: z.nullable(XAAResourceServer$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metadata: z.nullable(HistoryEntryMetadata$inboundSchema).optional(),
+    snapshot: z.nullable(XAAResourceServer$inboundSchema).optional(),
+  })
+);
 
 export function xaaResourceServerHistoryEntryFromJSON(
   jsonString: string,

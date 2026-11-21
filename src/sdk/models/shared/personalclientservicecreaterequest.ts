@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The PersonalClientServiceCreateRequest message contains the fields for creating a new personal client.
@@ -39,12 +40,14 @@ export const PersonalClientServiceCreateRequest$outboundSchema: z.ZodType<
   PersonalClientServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   PersonalClientServiceCreateRequest
-> = z.object({
-  allowSourceCidr: z.nullable(z.array(z.string())).optional(),
-  displayName: z.string().optional(),
-  expires: z.nullable(z.string()).optional(),
-  scopedRoles: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowSourceCidr: z.nullable(z.array(z.string())).optional(),
+    displayName: z.string().optional(),
+    expires: z.nullable(z.string()).optional(),
+    scopedRoles: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function personalClientServiceCreateRequestToJSON(
   personalClientServiceCreateRequest: PersonalClientServiceCreateRequest,

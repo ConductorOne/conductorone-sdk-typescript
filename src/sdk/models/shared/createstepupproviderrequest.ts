@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   StepUpMicrosoftSettings,
   StepUpMicrosoftSettings$Outbound,
@@ -59,14 +60,16 @@ export const CreateStepUpProviderRequest$outboundSchema: z.ZodType<
   CreateStepUpProviderRequest$Outbound,
   z.ZodTypeDef,
   CreateStepUpProviderRequest
-> = z.object({
-  clientId: z.string().optional(),
-  clientSecret: z.string().optional(),
-  displayName: z.string().optional(),
-  issuerUrl: z.string().optional(),
-  microsoft: z.nullable(StepUpMicrosoftSettings$outboundSchema).optional(),
-  oauth2: z.nullable(StepUpOAuth2Settings$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientId: z.string().optional(),
+    clientSecret: z.string().optional(),
+    displayName: z.string().optional(),
+    issuerUrl: z.string().optional(),
+    microsoft: z.nullable(StepUpMicrosoftSettings$outboundSchema).optional(),
+    oauth2: z.nullable(StepUpOAuth2Settings$outboundSchema).optional(),
+  })
+);
 
 export function createStepUpProviderRequestToJSON(
   createStepUpProviderRequest: CreateStepUpProviderRequest,

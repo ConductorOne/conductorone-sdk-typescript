@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -149,43 +149,47 @@ export const AppResourceNhiType$inboundSchema: z.ZodType<
   AppResourceNhiType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AppResourceNhiType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AppResourceNhiType)
+);
 
 /** @internal */
 export const AppResource$inboundSchema: z.ZodType<
   AppResource,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessConfigId: z.string().optional(),
-  agentTrait: z.nullable(AgentTrait$inboundSchema).optional(),
-  annotations: z.record(z.string()).optional(),
-  appId: z.string().optional(),
-  appResourceTypeId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  customDescription: z.string().optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  externalId: z.string().optional(),
-  grantCount: z.string().transform(v => parseInt(v, 10)).optional(),
-  id: z.string().optional(),
-  isManuallyManaged: z.boolean().optional(),
-  matchBatonId: z.string().optional(),
-  nhiDetail: z.string().optional(),
-  nhiType: AppResourceNhiType$inboundSchema.optional(),
-  parentAppResourceId: z.string().optional(),
-  parentAppResourceTypeId: z.string().optional(),
-  profile: z.nullable(z.record(z.any())).optional(),
-  secretTrait: z.nullable(SecretTrait$inboundSchema).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessConfigId: z.string().optional(),
+    agentTrait: z.nullable(AgentTrait$inboundSchema).optional(),
+    annotations: z.record(z.string()).optional(),
+    appId: z.string().optional(),
+    appResourceTypeId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    customDescription: z.string().optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    externalId: z.string().optional(),
+    grantCount: z.string().transform(v => parseInt(v, 10)).optional(),
+    id: z.string().optional(),
+    isManuallyManaged: z.boolean().optional(),
+    matchBatonId: z.string().optional(),
+    nhiDetail: z.string().optional(),
+    nhiType: AppResourceNhiType$inboundSchema.optional(),
+    parentAppResourceId: z.string().optional(),
+    parentAppResourceTypeId: z.string().optional(),
+    profile: z.nullable(z.record(z.any())).optional(),
+    secretTrait: z.nullable(SecretTrait$inboundSchema).optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function appResourceFromJSON(
   jsonString: string,

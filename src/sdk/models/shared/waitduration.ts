@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,9 +19,11 @@ export const WaitDuration$inboundSchema: z.ZodType<
   WaitDuration,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  duration: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    duration: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type WaitDuration$Outbound = {
   duration?: string | null | undefined;
@@ -32,9 +34,11 @@ export const WaitDuration$outboundSchema: z.ZodType<
   WaitDuration$Outbound,
   z.ZodTypeDef,
   WaitDuration
-> = z.object({
-  duration: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    duration: z.nullable(z.string()).optional(),
+  })
+);
 
 export function waitDurationToJSON(waitDuration: WaitDuration): string {
   return JSON.stringify(WaitDuration$outboundSchema.parse(waitDuration));

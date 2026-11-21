@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The UpdateStepUpProviderSecretRequest message.
@@ -24,9 +25,11 @@ export const UpdateStepUpProviderSecretRequest$outboundSchema: z.ZodType<
   UpdateStepUpProviderSecretRequest$Outbound,
   z.ZodTypeDef,
   UpdateStepUpProviderSecretRequest
-> = z.object({
-  clientSecret: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientSecret: z.string().optional(),
+  })
+);
 
 export function updateStepUpProviderSecretRequestToJSON(
   updateStepUpProviderSecretRequest: UpdateStepUpProviderSecretRequest,

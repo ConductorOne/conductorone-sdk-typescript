@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,15 +45,17 @@ export const C1ApiAiGovernanceV1MCPServerServiceGetRequest$outboundSchema:
     C1ApiAiGovernanceV1MCPServerServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1MCPServerServiceGetRequest
-  > = z.object({
-    appId: z.string(),
-    connectorId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      connectorId: "connector_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      connectorId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        connectorId: "connector_id",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPServerServiceGetRequestToJSON(
   c1ApiAiGovernanceV1MCPServerServiceGetRequest:
@@ -72,20 +74,22 @@ export const C1ApiAiGovernanceV1MCPServerServiceGetResponse$inboundSchema:
     C1ApiAiGovernanceV1MCPServerServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    MCPServerServiceGetResponse: shared
-      .MCPServerServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "MCPServerServiceGetResponse": "mcpServerServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      MCPServerServiceGetResponse: shared
+        .MCPServerServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "MCPServerServiceGetResponse": "mcpServerServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPServerServiceGetResponseFromJSON(
   jsonString: string,

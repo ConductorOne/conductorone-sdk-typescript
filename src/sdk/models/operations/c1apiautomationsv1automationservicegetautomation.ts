@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -43,9 +43,11 @@ export const C1ApiAutomationsV1AutomationServiceGetAutomationRequest$outboundSch
     C1ApiAutomationsV1AutomationServiceGetAutomationRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAutomationsV1AutomationServiceGetAutomationRequest
-  > = z.object({
-    id: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+    })
+  );
 
 export function c1ApiAutomationsV1AutomationServiceGetAutomationRequestToJSON(
   c1ApiAutomationsV1AutomationServiceGetAutomationRequest:
@@ -63,20 +65,22 @@ export const C1ApiAutomationsV1AutomationServiceGetAutomationResponse$inboundSch
     C1ApiAutomationsV1AutomationServiceGetAutomationResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    GetAutomationResponse: shared.GetAutomationResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "GetAutomationResponse": "getAutomationResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      GetAutomationResponse: shared.GetAutomationResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "GetAutomationResponse": "getAutomationResponse",
+      });
+    })
+  );
 
 export function c1ApiAutomationsV1AutomationServiceGetAutomationResponseFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,17 +51,19 @@ export const C1ApiEdgeV1EdgeServiceDeleteRequest$outboundSchema: z.ZodType<
   C1ApiEdgeV1EdgeServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   C1ApiEdgeV1EdgeServiceDeleteRequest
-> = z.object({
-  appId: z.string(),
-  id: z.string(),
-  edgeServiceDeleteRequest: shared.EdgeServiceDeleteRequest$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    appId: "app_id",
-    edgeServiceDeleteRequest: "EdgeServiceDeleteRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string(),
+    id: z.string(),
+    edgeServiceDeleteRequest: shared.EdgeServiceDeleteRequest$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      appId: "app_id",
+      edgeServiceDeleteRequest: "EdgeServiceDeleteRequest",
+    });
+  })
+);
 
 export function c1ApiEdgeV1EdgeServiceDeleteRequestToJSON(
   c1ApiEdgeV1EdgeServiceDeleteRequest: C1ApiEdgeV1EdgeServiceDeleteRequest,
@@ -78,20 +80,22 @@ export const C1ApiEdgeV1EdgeServiceDeleteResponse$inboundSchema: z.ZodType<
   C1ApiEdgeV1EdgeServiceDeleteResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  EdgeServiceDeleteResponse: shared.EdgeServiceDeleteResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "EdgeServiceDeleteResponse": "edgeServiceDeleteResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    EdgeServiceDeleteResponse: shared.EdgeServiceDeleteResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "EdgeServiceDeleteResponse": "edgeServiceDeleteResponse",
+    });
+  })
+);
 
 export function c1ApiEdgeV1EdgeServiceDeleteResponseFromJSON(
   jsonString: string,

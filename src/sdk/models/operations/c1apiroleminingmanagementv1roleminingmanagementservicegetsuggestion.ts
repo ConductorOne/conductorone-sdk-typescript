@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -46,9 +46,11 @@ export const C1ApiRoleMiningManagementV1RoleMiningManagementServiceGetSuggestion
     C1ApiRoleMiningManagementV1RoleMiningManagementServiceGetSuggestionRequest$Outbound,
     z.ZodTypeDef,
     C1ApiRoleMiningManagementV1RoleMiningManagementServiceGetSuggestionRequest
-  > = z.object({
-    id: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+    })
+  );
 
 export function c1ApiRoleMiningManagementV1RoleMiningManagementServiceGetSuggestionRequestToJSON(
   c1ApiRoleMiningManagementV1RoleMiningManagementServiceGetSuggestionRequest:
@@ -68,20 +70,22 @@ export const C1ApiRoleMiningManagementV1RoleMiningManagementServiceGetSuggestion
     C1ApiRoleMiningManagementV1RoleMiningManagementServiceGetSuggestionResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    GetSuggestionResponse: shared.GetSuggestionResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "GetSuggestionResponse": "getSuggestionResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      GetSuggestionResponse: shared.GetSuggestionResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "GetSuggestionResponse": "getSuggestionResponse",
+      });
+    })
+  );
 
 export function c1ApiRoleMiningManagementV1RoleMiningManagementServiceGetSuggestionResponseFromJSON(
   jsonString: string,

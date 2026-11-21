@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The SearchRequestableCredentialOfferingsRequest message.
@@ -45,13 +46,15 @@ export const SearchRequestableCredentialOfferingsRequest$outboundSchema:
     SearchRequestableCredentialOfferingsRequest$Outbound,
     z.ZodTypeDef,
     SearchRequestableCredentialOfferingsRequest
-  > = z.object({
-    appId: z.string().optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    query: z.string().optional(),
-    targetUserId: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string().optional(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      query: z.string().optional(),
+      targetUserId: z.string().optional(),
+    })
+  );
 
 export function searchRequestableCredentialOfferingsRequestToJSON(
   searchRequestableCredentialOfferingsRequest:

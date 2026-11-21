@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * ConnectorActionRef describes dispatch through a connector's built-in
@@ -21,7 +22,7 @@ export const ConnectorActionRefInput$outboundSchema: z.ZodType<
   ConnectorActionRefInput$Outbound,
   z.ZodTypeDef,
   ConnectorActionRefInput
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function connectorActionRefInputToJSON(
   connectorActionRefInput: ConnectorActionRefInput,

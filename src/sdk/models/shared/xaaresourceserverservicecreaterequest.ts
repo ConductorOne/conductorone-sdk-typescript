@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -86,8 +87,10 @@ export const XAAResourceServerServiceCreateRequestSigningAlgorithm$outboundSchem
     string,
     z.ZodTypeDef,
     XAAResourceServerServiceCreateRequestSigningAlgorithm
-  > = openEnums.outboundSchema(
-    XAAResourceServerServiceCreateRequestSigningAlgorithm,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      XAAResourceServerServiceCreateRequestSigningAlgorithm,
+    )
   );
 
 /** @internal */
@@ -108,19 +111,21 @@ export const XAAResourceServerServiceCreateRequest$outboundSchema: z.ZodType<
   XAAResourceServerServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   XAAResourceServerServiceCreateRequest
-> = z.object({
-  description: z.string().optional(),
-  disabled: z.boolean().optional(),
-  displayName: z.string().optional(),
-  maxGrantLifetime: z.nullable(z.string()).optional(),
-  modifyClaimsHook: z.nullable(XAAModifyClaimsHook$outboundSchema).optional(),
-  normalizedAudience: z.string().optional(),
-  requireProofOfPossession: z.boolean().optional(),
-  resourceUris: z.nullable(z.array(z.string())).optional(),
-  signingAlgorithm:
-    XAAResourceServerServiceCreateRequestSigningAlgorithm$outboundSchema
-      .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    disabled: z.boolean().optional(),
+    displayName: z.string().optional(),
+    maxGrantLifetime: z.nullable(z.string()).optional(),
+    modifyClaimsHook: z.nullable(XAAModifyClaimsHook$outboundSchema).optional(),
+    normalizedAudience: z.string().optional(),
+    requireProofOfPossession: z.boolean().optional(),
+    resourceUris: z.nullable(z.array(z.string())).optional(),
+    signingAlgorithm:
+      XAAResourceServerServiceCreateRequestSigningAlgorithm$outboundSchema
+        .optional(),
+  })
+);
 
 export function xaaResourceServerServiceCreateRequestToJSON(
   xaaResourceServerServiceCreateRequest: XAAResourceServerServiceCreateRequest,

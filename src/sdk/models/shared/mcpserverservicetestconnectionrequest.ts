@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   MCPServerExternalConfig,
   MCPServerExternalConfig$Outbound,
@@ -55,13 +56,16 @@ export const MCPServerServiceTestConnectionRequest$outboundSchema: z.ZodType<
   MCPServerServiceTestConnectionRequest$Outbound,
   z.ZodTypeDef,
   MCPServerServiceTestConnectionRequest
-> = z.object({
-  appId: z.string().optional(),
-  connectorId: z.string().optional(),
-  externalConfig: z.nullable(MCPServerExternalConfig$outboundSchema).optional(),
-  hostedConfig: z.nullable(MCPServerHostedConfig$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    connectorId: z.string().optional(),
+    externalConfig: z.nullable(MCPServerExternalConfig$outboundSchema)
+      .optional(),
+    hostedConfig: z.nullable(MCPServerHostedConfig$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function mcpServerServiceTestConnectionRequestToJSON(
   mcpServerServiceTestConnectionRequest: MCPServerServiceTestConnectionRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,11 +26,13 @@ export const MCPClientLifecycleConfig$inboundSchema: z.ZodType<
   MCPClientLifecycleConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  inactivityCloseAfter: z.nullable(z.string()).optional(),
-  inactivityHideAfter: z.nullable(z.string()).optional(),
-  retentionDeleteAfter: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    inactivityCloseAfter: z.nullable(z.string()).optional(),
+    inactivityHideAfter: z.nullable(z.string()).optional(),
+    retentionDeleteAfter: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type MCPClientLifecycleConfig$Outbound = {
   inactivityCloseAfter?: string | null | undefined;
@@ -43,11 +45,13 @@ export const MCPClientLifecycleConfig$outboundSchema: z.ZodType<
   MCPClientLifecycleConfig$Outbound,
   z.ZodTypeDef,
   MCPClientLifecycleConfig
-> = z.object({
-  inactivityCloseAfter: z.nullable(z.string()).optional(),
-  inactivityHideAfter: z.nullable(z.string()).optional(),
-  retentionDeleteAfter: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    inactivityCloseAfter: z.nullable(z.string()).optional(),
+    inactivityHideAfter: z.nullable(z.string()).optional(),
+    retentionDeleteAfter: z.nullable(z.string()).optional(),
+  })
+);
 
 export function mcpClientLifecycleConfigToJSON(
   mcpClientLifecycleConfig: MCPClientLifecycleConfig,

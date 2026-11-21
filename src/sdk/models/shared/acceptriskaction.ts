@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * AcceptRiskAction parameters for UpdateFindingState.
@@ -26,10 +27,12 @@ export const AcceptRiskAction$outboundSchema: z.ZodType<
   AcceptRiskAction$Outbound,
   z.ZodTypeDef,
   AcceptRiskAction
-> = z.object({
-  expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  justification: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    justification: z.string().optional(),
+  })
+);
 
 export function acceptRiskActionToJSON(
   acceptRiskAction: AcceptRiskAction,

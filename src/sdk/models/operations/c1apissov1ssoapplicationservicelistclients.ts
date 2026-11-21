@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,18 +54,20 @@ export const C1ApiSsov1SSOApplicationServiceListClientsRequest$outboundSchema:
     C1ApiSsov1SSOApplicationServiceListClientsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSsov1SSOApplicationServiceListClientsRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiSSOV1SSOApplicationServiceListClientsRequestToJSON(
   c1ApiSsov1SSOApplicationServiceListClientsRequest:
@@ -84,21 +86,23 @@ export const C1ApiSsov1SSOApplicationServiceListClientsResponse$inboundSchema:
     C1ApiSsov1SSOApplicationServiceListClientsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SSOApplicationServiceListClientsResponse: shared
-      .SSOApplicationServiceListClientsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SSOApplicationServiceListClientsResponse":
-        "ssoApplicationServiceListClientsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SSOApplicationServiceListClientsResponse: shared
+        .SSOApplicationServiceListClientsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SSOApplicationServiceListClientsResponse":
+          "ssoApplicationServiceListClientsResponse",
+      });
+    })
+  );
 
 export function c1ApiSSOV1SSOApplicationServiceListClientsResponseFromJSON(
   jsonString: string,

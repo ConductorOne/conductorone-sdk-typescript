@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -36,11 +36,13 @@ export const SuggestedOwner$inboundSchema: z.ZodType<
   SuggestedOwner,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  confidencePercent: z.number().int().optional(),
-  reasons: z.nullable(z.array(SuggestedOwnerReason$inboundSchema)).optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    confidencePercent: z.number().int().optional(),
+    reasons: z.nullable(z.array(SuggestedOwnerReason$inboundSchema)).optional(),
+    userId: z.string().optional(),
+  })
+);
 /** @internal */
 export type SuggestedOwner$Outbound = {
   confidencePercent?: number | undefined;
@@ -53,11 +55,14 @@ export const SuggestedOwner$outboundSchema: z.ZodType<
   SuggestedOwner$Outbound,
   z.ZodTypeDef,
   SuggestedOwner
-> = z.object({
-  confidencePercent: z.number().int().optional(),
-  reasons: z.nullable(z.array(SuggestedOwnerReason$outboundSchema)).optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    confidencePercent: z.number().int().optional(),
+    reasons: z.nullable(z.array(SuggestedOwnerReason$outboundSchema))
+      .optional(),
+    userId: z.string().optional(),
+  })
+);
 
 export function suggestedOwnerToJSON(suggestedOwner: SuggestedOwner): string {
   return JSON.stringify(SuggestedOwner$outboundSchema.parse(suggestedOwner));

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ServicePrincipalServiceDeleteRequest message.
@@ -17,7 +18,7 @@ export const ServicePrincipalServiceDeleteRequest$outboundSchema: z.ZodType<
   ServicePrincipalServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   ServicePrincipalServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function servicePrincipalServiceDeleteRequestToJSON(
   servicePrincipalServiceDeleteRequest: ServicePrincipalServiceDeleteRequest,

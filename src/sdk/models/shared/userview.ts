@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { User, User$inboundSchema } from "./user.js";
@@ -45,16 +45,18 @@ export const UserView$inboundSchema: z.ZodType<
   UserView,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  delegatedUserPath: z.string().optional(),
-  directoriesPath: z.string().optional(),
-  managersPath: z.string().optional(),
-  objectPermissions: z.nullable(UserActorObjectPermissions$inboundSchema)
-    .optional(),
-  rolesPath: z.string().optional(),
-  user: z.nullable(User$inboundSchema).optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    delegatedUserPath: z.string().optional(),
+    directoriesPath: z.string().optional(),
+    managersPath: z.string().optional(),
+    objectPermissions: z.nullable(UserActorObjectPermissions$inboundSchema)
+      .optional(),
+    rolesPath: z.string().optional(),
+    user: z.nullable(User$inboundSchema).optional(),
+    userId: z.string().optional(),
+  })
+);
 
 export function userViewFromJSON(
   jsonString: string,

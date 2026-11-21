@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The request message for creating a manually managed app resource.
@@ -53,13 +54,15 @@ export const CreateManuallyManagedAppResourceRequest$outboundSchema: z.ZodType<
   CreateManuallyManagedAppResourceRequest$Outbound,
   z.ZodTypeDef,
   CreateManuallyManagedAppResourceRequest
-> = z.object({
-  annotations: z.record(z.string()).optional(),
-  description: z.string().optional(),
-  displayName: z.string(),
-  matchBatonId: z.string().optional(),
-  resourceOwnerUserIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotations: z.record(z.string()).optional(),
+    description: z.string().optional(),
+    displayName: z.string(),
+    matchBatonId: z.string().optional(),
+    resourceOwnerUserIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function createManuallyManagedAppResourceRequestToJSON(
   createManuallyManagedAppResourceRequest:

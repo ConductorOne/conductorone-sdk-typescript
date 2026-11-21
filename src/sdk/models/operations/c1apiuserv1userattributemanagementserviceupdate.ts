@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiUserV1UserAttributeManagementServiceUpdateRequest$outboundSche
     C1ApiUserV1UserAttributeManagementServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiUserV1UserAttributeManagementServiceUpdateRequest
-  > = z.object({
-    id: z.string(),
-    userAttributeManagementServiceUpdateRequest: shared
-      .UserAttributeManagementServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      userAttributeManagementServiceUpdateRequest:
-        "UserAttributeManagementServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      userAttributeManagementServiceUpdateRequest: shared
+        .UserAttributeManagementServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        userAttributeManagementServiceUpdateRequest:
+          "UserAttributeManagementServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiUserV1UserAttributeManagementServiceUpdateRequestToJSON(
   c1ApiUserV1UserAttributeManagementServiceUpdateRequest:
@@ -79,21 +81,23 @@ export const C1ApiUserV1UserAttributeManagementServiceUpdateResponse$inboundSche
     C1ApiUserV1UserAttributeManagementServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    UserAttributeManagementServiceUpdateResponse: shared
-      .UserAttributeManagementServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "UserAttributeManagementServiceUpdateResponse":
-        "userAttributeManagementServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      UserAttributeManagementServiceUpdateResponse: shared
+        .UserAttributeManagementServiceUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "UserAttributeManagementServiceUpdateResponse":
+          "userAttributeManagementServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiUserV1UserAttributeManagementServiceUpdateResponseFromJSON(
   jsonString: string,

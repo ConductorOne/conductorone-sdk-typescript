@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Search Attributes by a few properties.
@@ -54,15 +55,17 @@ export const SearchAttributeValuesRequest$outboundSchema: z.ZodType<
   SearchAttributeValuesRequest$Outbound,
   z.ZodTypeDef,
   SearchAttributeValuesRequest
-> = z.object({
-  attributeTypeIds: z.nullable(z.array(z.string())).optional(),
-  excludeIds: z.nullable(z.array(z.string())).optional(),
-  ids: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  value: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    attributeTypeIds: z.nullable(z.array(z.string())).optional(),
+    excludeIds: z.nullable(z.array(z.string())).optional(),
+    ids: z.nullable(z.array(z.string())).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    value: z.string().optional(),
+  })
+);
 
 export function searchAttributeValuesRequestToJSON(
   searchAttributeValuesRequest: SearchAttributeValuesRequest,

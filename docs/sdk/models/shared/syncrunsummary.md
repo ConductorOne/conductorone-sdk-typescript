@@ -1,0 +1,28 @@
+# SyncRunSummary
+
+SyncRunSummary describes a run without configuration or synced records.
+
+## Example Usage
+
+```typescript
+import { SyncRunSummary } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: SyncRunSummary = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `completedAt`                                                                                 | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `confirmedValid`                                                                              | *boolean*                                                                                     | :heavy_minus_sign:                                                                            | Whether a human confirmed this run's detected data drop as valid.                             |
+| `duration`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `errorClass`                                                                                  | [shared.SyncRunSummaryErrorClass](../../../sdk/models/shared/syncrunsummaryerrorclass.md)     | :heavy_minus_sign:                                                                            | Classification of the latest recorded error.                                                  |
+| `errorSummary`                                                                                | *string*                                                                                      | :heavy_minus_sign:                                                                            | Redacted latest error, capped at 256 bytes.                                                   |
+| `lambdaEnabled`                                                                               | *boolean*                                                                                     | :heavy_minus_sign:                                                                            | Whether this run used hosted Lambda execution.                                                |
+| `lifecycleId`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | Lifecycle identifier for this run.                                                            |
+| `releaseVersion`                                                                              | *string*                                                                                      | :heavy_minus_sign:                                                                            | Connector release used by this run.                                                           |
+| `startedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `status`                                                                                      | [shared.SyncRunSummaryStatus](../../../sdk/models/shared/syncrunsummarystatus.md)             | :heavy_minus_sign:                                                                            | Recorded lifecycle state.                                                                     |
+| `syncRunStats`                                                                                | [shared.ConnectorSyncRunStats](../../../sdk/models/shared/connectorsyncrunstats.md)           | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `syncType`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | Full or incremental sync mode.                                                                |

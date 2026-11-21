@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -61,7 +62,7 @@ export const ToolState$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ToolState
-> = openEnums.outboundSchema(ToolState);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(ToolState));
 
 /** @internal */
 export type MCPServerServiceSearchWithToolCountRequest$Outbound = {
@@ -78,13 +79,15 @@ export const MCPServerServiceSearchWithToolCountRequest$outboundSchema:
     MCPServerServiceSearchWithToolCountRequest$Outbound,
     z.ZodTypeDef,
     MCPServerServiceSearchWithToolCountRequest
-  > = z.object({
-    includeLastCalledAt: z.boolean().optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    query: z.string().optional(),
-    toolState: ToolState$outboundSchema.optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      includeLastCalledAt: z.boolean().optional(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      query: z.string().optional(),
+      toolState: ToolState$outboundSchema.optional(),
+    })
+  );
 
 export function mcpServerServiceSearchWithToolCountRequestToJSON(
   mcpServerServiceSearchWithToolCountRequest:

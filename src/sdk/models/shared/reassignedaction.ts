@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,13 +27,15 @@ export const ReassignedAction$inboundSchema: z.ZodType<
   ReassignedAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  newPolicyStepId: z.string().optional(),
-  reassignedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    newPolicyStepId: z.string().optional(),
+    reassignedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    userId: z.string().optional(),
+  })
+);
 /** @internal */
 export type ReassignedAction$Outbound = {
   newPolicyStepId?: string | undefined;
@@ -46,11 +48,14 @@ export const ReassignedAction$outboundSchema: z.ZodType<
   ReassignedAction$Outbound,
   z.ZodTypeDef,
   ReassignedAction
-> = z.object({
-  newPolicyStepId: z.string().optional(),
-  reassignedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    newPolicyStepId: z.string().optional(),
+    reassignedAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    userId: z.string().optional(),
+  })
+);
 
 export function reassignedActionToJSON(
   reassignedAction: ReassignedAction,

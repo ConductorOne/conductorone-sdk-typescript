@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -56,20 +56,22 @@ export const C1ApiCrossAppAccessV1XAAAccessProfileScopeBindingServiceCreateBindi
     C1ApiCrossAppAccessV1XAAAccessProfileScopeBindingServiceCreateBindingsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiCrossAppAccessV1XAAAccessProfileScopeBindingServiceCreateBindingsRequest
-  > = z.object({
-    appId: z.string(),
-    accessProfileId: z.string(),
-    xaaAccessProfileScopeBindingServiceCreateRequest: shared
-      .XAAAccessProfileScopeBindingServiceCreateRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      accessProfileId: "access_profile_id",
-      xaaAccessProfileScopeBindingServiceCreateRequest:
-        "XAAAccessProfileScopeBindingServiceCreateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      accessProfileId: z.string(),
+      xaaAccessProfileScopeBindingServiceCreateRequest: shared
+        .XAAAccessProfileScopeBindingServiceCreateRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        accessProfileId: "access_profile_id",
+        xaaAccessProfileScopeBindingServiceCreateRequest:
+          "XAAAccessProfileScopeBindingServiceCreateRequest",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAAccessProfileScopeBindingServiceCreateBindingsRequestToJSON(
   c1ApiCrossAppAccessV1XAAAccessProfileScopeBindingServiceCreateBindingsRequest:
@@ -89,22 +91,24 @@ export const C1ApiCrossAppAccessV1XAAAccessProfileScopeBindingServiceCreateBindi
     C1ApiCrossAppAccessV1XAAAccessProfileScopeBindingServiceCreateBindingsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    XAAAccessProfileScopeBindingServiceCreateResponse: shared
-      .XAAAccessProfileScopeBindingServiceCreateResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "XAAAccessProfileScopeBindingServiceCreateResponse":
-        "xaaAccessProfileScopeBindingServiceCreateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      XAAAccessProfileScopeBindingServiceCreateResponse: shared
+        .XAAAccessProfileScopeBindingServiceCreateResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "XAAAccessProfileScopeBindingServiceCreateResponse":
+          "xaaAccessProfileScopeBindingServiceCreateResponse",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAAccessProfileScopeBindingServiceCreateBindingsResponseFromJSON(
   jsonString: string,

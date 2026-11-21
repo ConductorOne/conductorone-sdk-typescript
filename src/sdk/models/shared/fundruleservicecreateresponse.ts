@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { FundRule, FundRule$inboundSchema } from "./fundrule.js";
@@ -20,9 +20,11 @@ export const FundRuleServiceCreateResponse$inboundSchema: z.ZodType<
   FundRuleServiceCreateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  rule: z.nullable(FundRule$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rule: z.nullable(FundRule$inboundSchema).optional(),
+  })
+);
 
 export function fundRuleServiceCreateResponseFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The satus of the applicaiton user.
@@ -17,7 +18,7 @@ export const AppUserStatusInput$outboundSchema: z.ZodType<
   AppUserStatusInput$Outbound,
   z.ZodTypeDef,
   AppUserStatusInput
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function appUserStatusInputToJSON(
   appUserStatusInput: AppUserStatusInput,

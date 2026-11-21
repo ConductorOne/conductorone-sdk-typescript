@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const GrantEntitlementInclusionCriteria$inboundSchema: z.ZodType<
   GrantEntitlementInclusionCriteria,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appIds: z.nullable(z.array(z.string())).optional(),
-  complianceFrameworkIds: z.nullable(z.array(z.string())).optional(),
-  riskLevelIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appIds: z.nullable(z.array(z.string())).optional(),
+    complianceFrameworkIds: z.nullable(z.array(z.string())).optional(),
+    riskLevelIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type GrantEntitlementInclusionCriteria$Outbound = {
   appIds?: Array<string> | null | undefined;
@@ -47,11 +49,13 @@ export const GrantEntitlementInclusionCriteria$outboundSchema: z.ZodType<
   GrantEntitlementInclusionCriteria$Outbound,
   z.ZodTypeDef,
   GrantEntitlementInclusionCriteria
-> = z.object({
-  appIds: z.nullable(z.array(z.string())).optional(),
-  complianceFrameworkIds: z.nullable(z.array(z.string())).optional(),
-  riskLevelIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appIds: z.nullable(z.array(z.string())).optional(),
+    complianceFrameworkIds: z.nullable(z.array(z.string())).optional(),
+    riskLevelIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function grantEntitlementInclusionCriteriaToJSON(
   grantEntitlementInclusionCriteria: GrantEntitlementInclusionCriteria,

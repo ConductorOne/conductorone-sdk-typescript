@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const DevicePlacementProvision$inboundSchema: z.ZodType<
   DevicePlacementProvision,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  vaultBoundaryId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vaultBoundaryId: z.string().optional(),
+  })
+);
 /** @internal */
 export type DevicePlacementProvision$Outbound = {
   vaultBoundaryId?: string | undefined;
@@ -35,9 +37,11 @@ export const DevicePlacementProvision$outboundSchema: z.ZodType<
   DevicePlacementProvision$Outbound,
   z.ZodTypeDef,
   DevicePlacementProvision
-> = z.object({
-  vaultBoundaryId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vaultBoundaryId: z.string().optional(),
+  })
+);
 
 export function devicePlacementProvisionToJSON(
   devicePlacementProvision: DevicePlacementProvision,

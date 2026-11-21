@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Classifier, Classifier$inboundSchema } from "./classifier.js";
@@ -20,9 +20,11 @@ export const CreateClassifierResponse$inboundSchema: z.ZodType<
   CreateClassifierResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  classifier: z.nullable(Classifier$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    classifier: z.nullable(Classifier$inboundSchema).optional(),
+  })
+);
 
 export function createClassifierResponseFromJSON(
   jsonString: string,

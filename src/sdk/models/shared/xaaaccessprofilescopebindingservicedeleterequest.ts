@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * XAAAccessProfileScopeBindingServiceDeleteRequest unbinds scopes from a
@@ -28,9 +29,11 @@ export const XAAAccessProfileScopeBindingServiceDeleteRequest$outboundSchema:
     XAAAccessProfileScopeBindingServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     XAAAccessProfileScopeBindingServiceDeleteRequest
-  > = z.object({
-    xaaScopeIds: z.nullable(z.array(z.string())).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      xaaScopeIds: z.nullable(z.array(z.string())).optional(),
+    })
+  );
 
 export function xaaAccessProfileScopeBindingServiceDeleteRequestToJSON(
   xaaAccessProfileScopeBindingServiceDeleteRequest:

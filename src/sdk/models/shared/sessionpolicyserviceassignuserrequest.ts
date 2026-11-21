@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The SessionPolicyServiceAssignUserRequest message.
@@ -24,9 +25,11 @@ export const SessionPolicyServiceAssignUserRequest$outboundSchema: z.ZodType<
   SessionPolicyServiceAssignUserRequest$Outbound,
   z.ZodTypeDef,
   SessionPolicyServiceAssignUserRequest
-> = z.object({
-  userId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: z.string(),
+  })
+);
 
 export function sessionPolicyServiceAssignUserRequestToJSON(
   sessionPolicyServiceAssignUserRequest: SessionPolicyServiceAssignUserRequest,

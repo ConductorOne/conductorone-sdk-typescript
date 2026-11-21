@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   FundsSpendLimit,
   FundsSpendLimit$Outbound,
@@ -34,11 +35,14 @@ export const FundAssignmentServiceGrantExtensionRequest$outboundSchema:
     FundAssignmentServiceGrantExtensionRequest$Outbound,
     z.ZodTypeDef,
     FundAssignmentServiceGrantExtensionRequest
-  > = z.object({
-    expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-    limit: z.nullable(FundsSpendLimit$outboundSchema).optional(),
-    reason: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      expiresAt: z.nullable(z.date().transform(v => v.toISOString()))
+        .optional(),
+      limit: z.nullable(FundsSpendLimit$outboundSchema).optional(),
+      reason: z.string().optional(),
+    })
+  );
 
 export function fundAssignmentServiceGrantExtensionRequestToJSON(
   fundAssignmentServiceGrantExtensionRequest:

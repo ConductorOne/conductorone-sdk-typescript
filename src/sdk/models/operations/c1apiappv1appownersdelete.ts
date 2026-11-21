@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -44,16 +44,18 @@ export const C1ApiAppV1AppOwnersDeleteRequest$outboundSchema: z.ZodType<
   C1ApiAppV1AppOwnersDeleteRequest$Outbound,
   z.ZodTypeDef,
   C1ApiAppV1AppOwnersDeleteRequest
-> = z.object({
-  appId: z.string(),
-  deleteAppOwnersRequest: shared.DeleteAppOwnersRequest$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    appId: "app_id",
-    deleteAppOwnersRequest: "DeleteAppOwnersRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string(),
+    deleteAppOwnersRequest: shared.DeleteAppOwnersRequest$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      appId: "app_id",
+      deleteAppOwnersRequest: "DeleteAppOwnersRequest",
+    });
+  })
+);
 
 export function c1ApiAppV1AppOwnersDeleteRequestToJSON(
   c1ApiAppV1AppOwnersDeleteRequest: C1ApiAppV1AppOwnersDeleteRequest,
@@ -70,20 +72,22 @@ export const C1ApiAppV1AppOwnersDeleteResponse$inboundSchema: z.ZodType<
   C1ApiAppV1AppOwnersDeleteResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  DeleteAppOwnersResponse: shared.DeleteAppOwnersResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "DeleteAppOwnersResponse": "deleteAppOwnersResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    DeleteAppOwnersResponse: shared.DeleteAppOwnersResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "DeleteAppOwnersResponse": "deleteAppOwnersResponse",
+    });
+  })
+);
 
 export function c1ApiAppV1AppOwnersDeleteResponseFromJSON(
   jsonString: string,

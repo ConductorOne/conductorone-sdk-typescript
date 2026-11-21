@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -54,24 +54,26 @@ export const Destination$inboundSchema: z.ZodType<
   Destination,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Destination);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Destination));
 /** @internal */
 export const Destination$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Destination
-> = openEnums.outboundSchema(Destination);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Destination));
 
 /** @internal */
 export const OIDCClaimMapping$inboundSchema: z.ZodType<
   OIDCClaimMapping,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  claimName: z.string(),
-  destination: Destination$inboundSchema.optional(),
-  userAttributeMappingId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    claimName: z.string(),
+    destination: Destination$inboundSchema.optional(),
+    userAttributeMappingId: z.string(),
+  })
+);
 /** @internal */
 export type OIDCClaimMapping$Outbound = {
   claimName: string;
@@ -84,11 +86,13 @@ export const OIDCClaimMapping$outboundSchema: z.ZodType<
   OIDCClaimMapping$Outbound,
   z.ZodTypeDef,
   OIDCClaimMapping
-> = z.object({
-  claimName: z.string(),
-  destination: Destination$outboundSchema.optional(),
-  userAttributeMappingId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    claimName: z.string(),
+    destination: Destination$outboundSchema.optional(),
+    userAttributeMappingId: z.string(),
+  })
+);
 
 export function oidcClaimMappingToJSON(
   oidcClaimMapping: OIDCClaimMapping,

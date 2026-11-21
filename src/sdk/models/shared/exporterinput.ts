@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   ExportToDatasource,
   ExportToDatasource$Outbound,
@@ -36,10 +37,12 @@ export const ExporterInput$outboundSchema: z.ZodType<
   ExporterInput$Outbound,
   z.ZodTypeDef,
   ExporterInput
-> = z.object({
-  datasource: z.nullable(ExportToDatasource$outboundSchema).optional(),
-  displayName: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    datasource: z.nullable(ExportToDatasource$outboundSchema).optional(),
+    displayName: z.string().optional(),
+  })
+);
 
 export function exporterInputToJSON(exporterInput: ExporterInput): string {
   return JSON.stringify(ExporterInput$outboundSchema.parse(exporterInput));

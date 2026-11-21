@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The EdgeRef message.
@@ -29,10 +30,12 @@ export const EdgeRef$outboundSchema: z.ZodType<
   EdgeRef$Outbound,
   z.ZodTypeDef,
   EdgeRef
-> = z.object({
-  appId: z.string().optional(),
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    id: z.string().optional(),
+  })
+);
 
 export function edgeRefToJSON(edgeRef: EdgeRef): string {
   return JSON.stringify(EdgeRef$outboundSchema.parse(edgeRef));

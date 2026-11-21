@@ -4,10 +4,15 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
+
+export type C1APIIamV1ModelAPIKeyServiceListRequest = {
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+};
 
 export type C1APIIamV1ModelAPIKeyServiceListResponse = {
   /**
@@ -31,24 +36,60 @@ export type C1APIIamV1ModelAPIKeyServiceListResponse = {
 };
 
 /** @internal */
+export type C1APIIamV1ModelAPIKeyServiceListRequest$Outbound = {
+  page_size?: number | undefined;
+  page_token?: string | undefined;
+};
+
+/** @internal */
+export const C1APIIamV1ModelAPIKeyServiceListRequest$outboundSchema: z.ZodType<
+  C1APIIamV1ModelAPIKeyServiceListRequest$Outbound,
+  z.ZodTypeDef,
+  C1APIIamV1ModelAPIKeyServiceListRequest
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      pageSize: "page_size",
+      pageToken: "page_token",
+    });
+  })
+);
+
+export function c1APIIamV1ModelAPIKeyServiceListRequestToJSON(
+  c1APIIamV1ModelAPIKeyServiceListRequest:
+    C1APIIamV1ModelAPIKeyServiceListRequest,
+): string {
+  return JSON.stringify(
+    C1APIIamV1ModelAPIKeyServiceListRequest$outboundSchema.parse(
+      c1APIIamV1ModelAPIKeyServiceListRequest,
+    ),
+  );
+}
+
+/** @internal */
 export const C1APIIamV1ModelAPIKeyServiceListResponse$inboundSchema: z.ZodType<
   C1APIIamV1ModelAPIKeyServiceListResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  ModelAPIKeyServiceListResponse: shared
-    .ModelAPIKeyServiceListResponse$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "ModelAPIKeyServiceListResponse": "modelAPIKeyServiceListResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    ModelAPIKeyServiceListResponse: shared
+      .ModelAPIKeyServiceListResponse$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "ModelAPIKeyServiceListResponse": "modelAPIKeyServiceListResponse",
+    });
+  })
+);
 
 export function c1APIIamV1ModelAPIKeyServiceListResponseFromJSON(
   jsonString: string,

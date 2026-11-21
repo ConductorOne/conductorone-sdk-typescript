@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * MCPServerAuthCustomHeader provides custom header authentication.
@@ -29,10 +30,12 @@ export const MCPServerAuthCustomHeader$outboundSchema: z.ZodType<
   MCPServerAuthCustomHeader$Outbound,
   z.ZodTypeDef,
   MCPServerAuthCustomHeader
-> = z.object({
-  headerName: z.string().optional(),
-  headerValue: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    headerName: z.string().optional(),
+    headerValue: z.string().optional(),
+  })
+);
 
 export function mcpServerAuthCustomHeaderToJSON(
   mcpServerAuthCustomHeader: MCPServerAuthCustomHeader,
